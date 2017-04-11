@@ -18,6 +18,13 @@
 \setlength\theorempreskipamount{2ex}
 \setlength\theorempostskipamount{3ex}
 
+% hyperref Package Settings
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks = true,
+	linkcolor = magenta
+}
+
 % ntheorem Declarations
 \theoremstyle{break}
 \newtheorem{thm}{Theorem}[section]
@@ -26,8 +33,42 @@
 \newtheorem{lemma}[thm]{Lemma}
 \newtheorem{propo}{Proposition}[section]
 \newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
 \newtheorem{defn}{Definition}[section]
 \newtheorem{eg}{Example}[section]
+
+% ntheorem listtheorem style
+\makeatletter
+\def\thm@@thmline@name#1#2#3#4{%
+        \@dottedtocline{-2}{0em}{2.3em}%
+                   {\makebox[\widesttheorem][l]{\protect\numberline{#2}}#3}%
+                   {#4}}
+\@ifpackageloaded{hyperref}{
+\def\thm@@thmline@name#1#2#3#4#5{%
+    \ifx\\#5\\%
+        \@dottedtocline{-2}{0em}{2.3em}%
+            {\makebox[\widesttheorem][l]{\protect\numberline{#2}}#3}%
+            {#4}
+    \else
+        \ifHy@linktocpage\relax\relax
+            \@dottedtocline{-2}{0em}{2.3em}%
+                {\makebox[\widesttheorem][l]{\protect\numberline{#2}}#3}%
+                {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
+        \else
+            \@dottedtocline{-2}{0em}{2.3em}%
+                {\hyper@linkstart{link}{#5}%
+                  {\makebox[\widesttheorem][l]{\protect\numberline{#2}}#3}\hyper@linkend}%
+                    {#4}%
+        \fi
+    \fi}
+}
+\makeatother
+\newlength\widesttheorem
+\AtBeginDocument{
+  \settowidth{\widesttheorem}{Proposition 10\quad}
+}
+
+\theoremlisttype{allname}
 
 % Shortcuts
 \newcommand{\bb}[1]{\mathbb{#1}}		% using bb instead of mathbb
@@ -36,25 +77,23 @@
 \title{UW W17 PMATH333: Definitions and Theorems}
 \author{Johnson Ng}
 
-\usepackage{hyperref}
-
 \begin{document}
 \maketitle
 \tableofcontents
 
 \chapter*{List of Definitions}
-\theoremlisttype{all}
+\theoremlisttype{allname}
 \listtheorems{defn}
 
 \chapter*{List of Theorems}
-\theoremlisttype{all}
+\theoremlisttype{allname}
 \listtheorems{lemma, thm, crly, propo}
 
 \appendix
 
 \chapter{Zermelo-Fraenkel Set Theory and the Axiom of Choice}
 \section{Introduction}
-\begin{eg}[Russel's Paradox]
+\begin{eg}[Russel's Paradox]\label{russel_paradox}
 	Let X be the set of all sets, and let $S = \{ A \in X | A \notin A\}$.\\
 	Note for example that $Z \notin Z \implies Z \in S$, and $X \in X \implies X \notin S$.\\
 	Thus we have $S \in S \iff S \notin S$.
@@ -121,6 +160,114 @@ In the remainder of this appendix, we shall look more into the first 2 questions
 
 \begin{defn}[Is Bound By and Binds]
 	When a quantifier symbol occurs in a given formula F, and is followed by the variable symbol x and then by the formula G, any free occurence of x in G will become bound in the given formula F (by the 3rd definition above). We shall say that the occurrence of x is bound by (that occurrence of) the quantifier symbol, or that (the occurrence of) the quantifier symbol binds the occurence of x.
+\end{defn}
+
+\begin{defn}[Free Variable, Statement, Statement About]
+	A $\textbf{free variable}$ in a formula F is any variable symbol that has at least one free occurence in F. A formula F with no free variables is called a $\textbf{statement}$. When the free variables in F all lie in the set $\{x_1, x_2, ..., x_n\}$, we shall write F as $F(x_1, x_2, ..., x_n)$ and we shall say that F is a $\textbf{statement about}$ the variables $x_1, x_2, ..., x_n$.
+\end{defn}
+
+\begin{defn}[Unique Existence]
+	When F(x) is a statement about x, we sometimes write F(y) as a short form for the formula $\forall x(x=y\implies F(x))$, and we sometimes write
+	\[
+		\exists!y \quad F(y)
+	\]
+	which we read as "there exists a unique y such that F(y)", as a short form for the formula
+	\[
+		(\exists y \quad F(y) \land \forall z \quad F(z)) \implies z = y))
+	\] which is, in turn, for the formula
+	\[
+		\exists y \bigg( \forall x \Big(x = y \implies F(x) \Big) \land \forall z \Big(\forall x (x = z \implies F(x)) \implies z = y \Big) \bigg)
+	\]
+\end{defn}
+
+\begin{remark}[The ZFC Axioms of Set Theory (informal)]
+	Every mathematical set can be constructed using specific rules, which we shall use the ZFC Axioms of Set Theory. Below is a list of the ZFC Axioms, stated informally.
+	\begin{itemize}
+		\item Empty Set Axiom: There exists an empty set $\emptyset$ with no elements.
+		\item Extension Axiom: 2 sets are equal if and only if they have the same elements.
+		\item Separation Axiom: If u is a set and F(x) is a statement about x, $\{x \in u : F(x)\}$ is a set.
+		\item Pair Axiom: If u and v are sets then {u, v} is a set.
+		\item Union Axiom: If u is a set then $\cup u = \bigcup\limits_{v \in u} v$ is a set.
+		\item Power Set Axiom: If u is a set then $\mathcal{P}(u) = \{v : v \in u\}$ is a set.
+		\item Axiom of Infinity: If we define the natural numbers to be the sets $0 = \emptyset, 1 = \{0\}, 2 = \{0, 1\}, 3 = \{0, 1, 2\}$ and so on, then $\bb{N} = \{0, 1, 2, 3, ...\}$ is a set.
+		\item Replacement Axiom: If u is a ste and F(x, y) is a statement about x and y with the property that $\forall x \> \exists! y \> F(x,y)$ then $\{y : \exists x \in u \> F(x,y)\}$ is a set.
+		\item Axiom of Choice: Given a set u of non-empty pairwise disjoint sets, there exists a set which contains exactly one element from each of the sets in u, i.e.
+	\end{itemize}
+
+	We may write the Axiom of Choice symbolically as:
+	\begin{gather*}
+		\forall i \in \bb{N} \quad u_i \neq \emptyset \quad \forall j \neq i \in \bb{N} \quad u_i \cap u_j = \emptyset\\
+		\exists v = \{x_1, x_2, x_3, ... : \forall k \in \bb{N}, x_k \in u_k \}
+	\end{gather*}
+\end{remark}
+
+\begin{defn}[Empty Set Axiom]
+	The Empty Set Axiom is the formula
+	\[
+		\exists u \> \forall x \quad \neg x \in u
+	\]
+\end{defn}
+
+\begin{defn}[Extension Axiom]
+	The Extension Axiom is the formula
+	\[
+		\forall u \> \forall v \> \Big(u = v \iff \forall x \> (x \in u \iff x \in v) \Big)
+	\]
+\end{defn}
+
+\begin{thm}
+	The empty set is unique.
+\end{thm}
+
+\begin{defn}[$\emptyset$]
+	We denote the unique empty set by $\emptyset$.
+\end{defn}
+
+\begin{defn}[Subset]
+	Given sets u and v, we say that u is a $\textbf{subset}$ of v, and write $u \subseteq v$, when $\forall x (x \in u \implies x \in v)$
+\end{defn}
+
+\begin{defn}[Separation Axiom]
+	For any statement F(x) about x, the following formula is an axiom.
+	\[
+		\forall u \> \exists v \> \forall x \Big(x \in v \iff (x \in u \land F(x)) \Big)
+	\]
+	More generally, for any statement $F(x, u_1, u_2, ..., u_n)$ about $x, u_1, u_2, ..., u_n$ where $n \geq 0$, the following formula is an axiom.
+	\[
+		\forall u \> \forall u_1 \hdots \forall u_n \> \exists v \> \forall x \Big( x \in v \iff (x \in i \land F(x, u_1, ..., u_n)) \Big)
+	\]
+	Any axiom of this form is called the Separation Axiom.
+\end{defn}
+
+\begin{note}
+	It is important to realize that a Separation Axiom only allows us to construct a subset of a given set u. So, e.g., we cannot use the Separation Axiom to show that the collection $S = \{x : \neg x \in x\}$, which is used to formulate \hyperref[russel_paradox]{Russel's Paradox}, is a set.
+\end{note}
+
+\begin{defn}[Pair Axiom]
+	The Pair Axiom is the formula
+	\[
+		\forall u \> \forall v \> \exists w \> \forall x \Big( x \in w \iff (x = u \lor x = v) \Big)
+	\]
+\end{defn}
+
+\begin{defn}[Union Axiom]\label{union_axiom}
+	The Union Axiom is the formula
+	\[
+		\forall u \> \exists w \> \forall x \Big( x \in w \iff \exists v (v \in u \land x \in v) \Big)
+	\]
+\end{defn}
+
+\begin{defn}[Union]
+	Given a set u, by the Union Axiom there exists a set w with the property that $\forall x \Big( x \in w \iff \exists v (v \in u \land x \in v) \Big)$, and by the Extension Axiom, this set w is unique. We call the set w the $\textbf{union}$ of the elements in u, and denote it by
+	\[
+		\cup u = \bigcup_{v \in u} v.
+	\]Given two sets u and v, we define the union of u and v to be the set
+	\[
+		u \cup v := \bigcup \{u, v\}.
+	\]Given three sets u, v, and w, note that \{z\} = \{z, z\} is a set and so $\{x, y, z\} = \{x, y\} \cup \{z\}$ is also a set. More generally, if $u_1, u_2, ..., u_n$ are sets then $\{u_1, u_2, ..., u_n\}$ is a set and we define the union of the sets $u_1, u_2, ..., u_n$ to be
+	\[
+		u_1 \cup u_2 \cup \hdots \cup u_n = \bigcup_{k = 1}^{n} u_k = \bigcup \{u_1, u_2, ..., u_n\}
+	\]
 \end{defn}
 
 \end{document}
