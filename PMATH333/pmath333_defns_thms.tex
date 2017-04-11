@@ -1,0 +1,127 @@
+% Document Head
+\documentclass[11pt, oneside]{book}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+
+% Essential Packages
+\usepackage{ragged2e}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[hyperref]{ntheorem}
+
+% Theorem Style Customization
+\setlength\theorempreskipamount{2ex}
+\setlength\theorempostskipamount{3ex}
+
+% ntheorem Declarations
+\theoremstyle{break}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{proof}{Proof}
+\newtheorem{crly}{Corollary}[thm]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{propo}{Proposition}[section]
+\newtheorem*{remark}{Remark}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{eg}{Example}[section]
+
+% Shortcuts
+\newcommand{\bb}[1]{\mathbb{#1}}		% using bb instead of mathbb
+
+% Main Body
+\title{UW W17 PMATH333: Definitions and Theorems}
+\author{Johnson Ng}
+
+\usepackage{hyperref}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter*{List of Definitions}
+\theoremlisttype{all}
+\listtheorems{defn}
+
+\chapter*{List of Theorems}
+\theoremlisttype{all}
+\listtheorems{lemma, thm, crly, propo}
+
+\appendix
+
+\chapter{Zermelo-Fraenkel Set Theory and the Axiom of Choice}
+\section{Introduction}
+\begin{eg}[Russel's Paradox]
+	Let X be the set of all sets, and let $S = \{ A \in X | A \notin A\}$.\\
+	Note for example that $Z \notin Z \implies Z \in S$, and $X \in X \implies X \notin S$.\\
+	Thus we have $S \in S \iff S \notin S$.
+\end{eg}
+
+To ensure that mathematical paradoxes (like the above) can no longer arise, mathematicians considered the following questions, and with these questions, rough answers are provided:
+\begin{enumerate}
+	\item What exactly is an allowable mathematical object? \\
+	A: Every mathematical object is a mathematical set, and a mathematical set can be constructed using certain rules, for e.g. the now widely accepted Zermelo-Fraenkel Set Theory and the Axiom of Choice. While the Axiom of Choice is still highly criticized even today (e.g. the highly controversial \href{https://en.wikipedia.org/wiki/Banach–Tarski_paradox}{Banach-Tarski Paradox}), the Zermelo-Fraenkel Set Theory is widely welcomed, but not without critics. We shall call the Zermelo-Fraenkel Set Theory and the Axiom of Choice as the ZFC Axioms of Set Theory.
+	\item What exactly is an allowable mathematical statement? \\
+	A: Every mathematical statement can be expressed in a formal symbolic language, which uses symbols rather than words from any spoken language.
+	\item What exactly is allowable in a mathematical proof? \\
+	A: Every mathematical proof is a finite list of ordered pairs $(\mathscr{S}_n, \mathscr{F}_n)$ (which we can think of as proven theorems), where each $\mathscr{S}_n$ is a finite set of formulas (called the $\textit{premises}$) and each $\mathscr{F}_n$ is a single formula (called the $\textit{conclusion}$), which that each pair $(\mathscr{S}_n, \mathscr{F}_n)$ can be obtained from previous pairs $(\mathscr{S}_i, \mathscr{F}_i)$ with $i < n$, using certain proof rules.
+\end{enumerate}
+
+In the remainder of this appendix, we shall look more into the first 2 questions.
+
+\begin{defn}[Mathematical Symbols]
+	We allow ourselves to use only the following symbols from the following symbol set: \\
+	\begin{center}
+		\begin{tabular}{c l}
+			$\neg$		&	not \\
+			$\land$		&	and \\
+			$\lor$		&	or \\
+			$\implies$	&	implies \\
+			$\iff$	&	if and only if \\
+			$=$			&	equals \\
+			$\in$		&	is an element of \\
+			$\forall$	&	for all \\
+			$\exists$	&	there exists \\
+			$()\quad\{\}\quad[]$	&	parenthesis
+		\end{tabular}
+	\end{center}
+	along with some variable symbols such as $x, y, z, u, v, w,... \text{ or } x_1, x_2, x_3,...$
+\end{defn}
+
+\begin{defn}[Formula]
+	A formula (in the formal symbolic language of first order set theory) is a non-empty finite string of symbols, from the above list, which can be obtained using finitely many applications following the three rules below:
+	\begin{enumerate}
+		\item If x and y are variable symbols, then each of the following strings are formulas.
+		\[
+			x = y, \quad x \in y
+		\]
+		\item If F and G are formulas then each of the following strings are formulas.
+		\[
+			\neg F, \quad (F \land G), \quad (F \lor G), \quad (F \implies G), \quad (F \iff G)
+		\]
+		\item If x is a variable symbol and F is a formula then each of the following is a formula.
+		\[
+			\forall x \in F, \quad \exists x \in F
+		\]
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Free or Bounded Variable]
+	Let x be a variable symbol and let F be a formula. For each occurrence of the symbol x, which does not immediately follow a quantifier, in the formula F, we define whether the occurrence of x is free or bound inductively as follows:
+	\begin{enumerate}
+		\item If F is a formula of one of the forms y = z or $y \in z$, where y and z are variable symbols (possibly equal to x), then every occurence of x in F is free, and no occurrence is bound.
+
+		\item If F is a formula of one of the forms $\neg H, (H \land G), (H \lor G), (H \implies G), (H \iff G)$, where G and H are formulas, then each occurence of the symbol x is either an occurrence in the formula G or an occurrence in the formula H, and each free (respectively, bound) occurence of x in G remains free (respectively, bound) in F, and similarly for each free (or bound) occurrence of x in G. In other words, wlog, if x is bounded in G, then it is bounded in F, and vice versa.
+		\item If F is a formula of one of the forms $\forall y \in G \text{ or } \exists y \in G$, where G is a formula and y is a variable symbol. If y is different from x, then each free (or bound) occurrence of x in G remains free (or bound) in the formula G, and if y = x then every free occurrence of x in G becomes bound in F, and every bound occurrence of x in G remains bound in F.
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Is Bound By and Binds]
+	When a quantifier symbol occurs in a given formula F, and is followed by the variable symbol x and then by the formula G, any free occurence of x in G will become bound in the given formula F (by the 3rd definition above). We shall say that the occurrence of x is bound by (that occurrence of) the quantifier symbol, or that (the occurrence of) the quantifier symbol binds the occurence of x.
+\end{defn}
+
+\end{document}
+% Document End

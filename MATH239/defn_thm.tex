@@ -11,7 +11,7 @@
 \usepackage{amsmath}
 \usepackage{mathrsfs}
 \usepackage[utf8]{inputenc}
-% \usepackage[english]{babel}
+\usepackage[english]{babel}
 \usepackage[hyperref]{ntheorem}
 
 % Theorem Style Customization
@@ -771,6 +771,17 @@ Only thing to note here is that a walk is an equivalence relation, i.e. it satis
 	Let G be a connected graph. Then G has an Eulerian citcuit iff every vertex has even degree.
 \end{thm}
 
+\begin{remark}[Strategy for finding an Eulerian Circuit]
+	\begin{enumerate}
+		\item First, try to find a large cycle and use that as the "base" of where the circuit will revolve around.
+		\item Trace from any vertex on the cycle in any direction.
+		\item Whenever you meet a vertex that is incident with an edge not on the cycle, go to the vertex on the other end.
+		\item You can try to work from step 1 and apply the same strategy, or simply trace an Eulerian circuit on that subgraph.
+		\item When you come back to the vertex on the "base" cycle, continue to iterate through step 3 to 5.
+		\item Perform the operation until you complete the "base" cycle. This will give you an Eulerian circuit (on a connected graph).
+	\end{enumerate}
+\end{remark}
+
 
 \section{Bridges}
 
@@ -1106,7 +1117,7 @@ while(T is not a spanning tree of G) \{
 
 \chapter{Matchings}
 
-\section{Mathing}
+\section{Matching}
 
 \begin{defn}[Matching]
 	A matching in a graph G is a set of M edges of G such taht no 2 edges in M have a common end.
