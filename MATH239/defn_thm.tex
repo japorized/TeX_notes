@@ -1,0 +1,1215 @@
+% Document Head
+\documentclass[11pt, oneside]{book}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+
+% Essential Packages
+\usepackage{ragged2e}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage[utf8]{inputenc}
+% \usepackage[english]{babel}
+\usepackage[hyperref]{ntheorem}
+
+% Theorem Style Customization
+\setlength\theorempostskipamount{5ex}
+
+% ntheorem Declarations
+\theoremstyle{break}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{crly}{Corollary}[thm]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{propo}{Proposition}[section]
+\newtheorem{defn}{Definition}[section]
+\newtheorem{eg}{Example}[section]
+\newtheorem*{proof}{Proof}
+\newtheorem*{remark}{Remark}
+
+% Shortcuts
+\newcommand{\bb}[1]{\mathbb{#1}}		% using bb instead of mathbb
+
+% ntheorem Listing style
+\newtheoremlisttype{list}
+	{\begin{trivlist}\item}
+	{\item[##2]\ ##3\dotfill ##4}
+	{\end{trivlist}}
+
+% Main Body
+\title{MATH239 Review for All Definitions and Theorems by Chapter and Section}
+\author{Johnson Ng}
+
+\usepackage{hyperref}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter*{List of Definitions}
+\theoremlisttype{all}
+\listtheorems{defn}
+
+\chapter*{List of Theorems}
+\theoremlisttype{all}
+\listtheorems{lemma, thm, crly, propo}
+
+\chapter{Combinatorial Analysis}
+
+
+\section{Introduction}
+\begin{defn}[Composition, Parts, Weights]
+	A composition of $n \in \bb{N}$ is a sequence $(m_1, m_2, ..., m_k)$ where $\forall k \in \bb{Z}^+ \quad m_k \in \bb{Z}^+$ such that
+	\begin{gather*}
+		\sum_{i=1}^{k}m_i = n
+	\end{gather*}
+	The numbers $m_i$, for all $i\in\{1, 2, ..., k\}$, are called parts of the composition. We define the weight of a composition to be the sum of its parts.
+		
+\end{defn}
+
+\begin{defn}[Binary Strings]
+	(We shall write bin strs to represent binary strings in short) \\
+	A bin str of length n is a sequence $a_1, a_2, ..., a_n$ where $\forall i \in \{1, 2, ..., n\} \quad a_i = 0$ or $a_i = 1$. We write the binary string as a concatenation, i.e. $a_1a_2a_3\hdots a_n$.
+\end{defn}
+
+\begin{remark}
+	There are $2^n$ bin strs of length n.
+\end{remark}
+
+
+\section{Sums and Products}
+
+\begin{defn}[Union \& Disjoint]
+	Let A and B be sets. The union of A and B, denoted $A \cup B$, is defined as
+	\begin{gather*}
+		A \cup B := \{x : x \in A \lor x \in B\}
+	\end{gather*}
+	The two sets are said to be disjoint if their intersection is an empty set, i.e.
+	\begin{gather*}
+		A \cap B = \emptyset
+	\end{gather*}
+\end{defn}
+
+\begin{remark}
+	\begin{gather*}
+		|A \cup B| = |A| + |B|
+	\end{gather*}
+\end{remark}
+
+\begin{defn}[Cartesian Product]
+	The Cartesian Product $A \times B$ of sets A and B is the set of ordered pairs $(a ,b)$ such that $a \in A$ and $b \in B$, i.e.
+	\begin{gather*}
+		A \times B := \{(a,b) : a \in A, b \in B \}
+	\end{gather*}
+	Thus
+	\begin{gather*}
+		|AB| = |A||B|
+	\end{gather*}
+\end{defn}
+
+\begin{defn}[Cartesian Power]
+	The Cartesian Power $A^k$ is defined as the ordered k-tuples of elements from A, i.e.
+	\begin{gather*}
+		A^k := \Bigr\{(a_1, a_2, ..., a_k): \forall i \in \{1, 2, ..., k\}, a_i \in A\Bigl\}
+	\end{gather*}
+\end{defn}
+
+\begin{remark}
+	When A is finite, $|A^k| = |A|^k$
+\end{remark}
+
+
+\section{Binomial Coefficients}
+
+\begin{thm}
+	$\forall n,k \in \bb{N}$, the number of k-element subsets of an n-element set is
+	\begin{gather*}
+		\binom{n}{k} = \frac{n!}{k!(n-k)!} = \frac{n(n-1)(n-2)\hdots(n-k+1)}{k!}
+	\end{gather*}
+\end{thm}
+
+\begin{propo}[Binomial Identities]
+	The following are some binomial identities:
+	\begin{enumerate}
+		\item $\binom{n}{k} = \binom{n}{n-k}$
+		\item $(1-x)^n = \sum_{k=0}^{n}\binom{n}{k}x^k$
+		\item $\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}$
+		\item $\binom{n+k}{n} = \sum_{i=0}^{k}\binom{n+i-1}{n-1}$
+	\end{enumerate}
+\end{propo}
+
+
+\section{Generating Series}
+
+\begin{defn}[Generating Series]
+	Let $S$ be a set of configurations with a weight function $w$. The generating series for $S$ with respect to $w$ is defined by
+	\begin{gather*}
+		\Phi_S(x) = \sum_{\sigma \in S}x^{w(\sigma)}
+	\end{gather*}
+\end{defn}
+
+\begin{thm}
+	Let $\Phi_S(x)$ be a generating series for a finite set S with respect to weight function $w$. Then,
+	\begin{enumerate}
+		\item $\Phi_S(1) = |S|$;
+		\item $\sum_{\sigma \in S}w(\sigma) = \Phi'_S(1)$; and
+		\item the average weight of an element in S is $\frac{\Phi'_S(1)}{\Phi_S(1)}$.
+	\end{enumerate}
+\end{thm}
+
+
+\section{Formal Power Series}
+
+\begin{defn}[Formal Power Series]
+	Let $(a_0, a_1, a_2, ...)$ be a sequence such that $\forall k \in \bb{N} \quad k \in \bb{Q}$.\\
+	\begin{gather*}
+		A(x) = \sum_{k=0}^{\infty}a_kx^k =  a_o + a_1x + a_2x^2 + \hdots
+	\end{gather*}
+	is called a formal power series. We say that $a_n$ is the coefficient of $x^n$ in $A(x)$ , and write
+	\begin{gather*}
+		[x^n]A(x) = a_n
+	\end{gather*}
+	A formal power series should be regarded as a way of encoding a sequence of numbers. Therefore, 2 formal power series are equal if and only if they share the same sequence of coefficients.
+\end{defn}
+
+\begin{defn}[Additional And Multiplication Rules of Formal Power Series]
+	Let $A(x)$ and $B(x)$ be formal power series. \\
+	(Addition)
+	\begin{gather*}
+		A(x) + B(x) = (a_0 + b_0) + (a_1 + b_1)x + (a_2 + b_2)x^2 + \hdots = \sum_{k = 0}^{\infty}(a_k + b_k)x^k
+	\end{gather*}
+	(Multiplication)
+	\begin{align*}
+		A(x)B(x) &= \Bigg(\sum_{i \geq 0}a_ix^i\Bigg)\Bigg(\sum_{j \geq 0}b_jx^j\Bigg) \\
+				 &= \sum_{i \geq 0}\sum_{j \geq 0}a_ib_jx^{i+j} \\
+				 &= \sum_{n \geq 0}\sum_{k = 0}^{n}a_kb_{n-k}x^n
+	\end{align*}
+\end{defn}
+
+\begin{thm}
+	Let $A(x) = a_0 + a_1x + a_2x^2 + \hdots, P(x) = p_0 + p_1x + p_2x^2 + \hdots$, and $Q(x) = 1 - q_1x - q_2x^2 - \hdots$ be formal power series. Then
+	\begin{gather*}
+		Q(x)A(x) = P(x) \\
+		\iff \\
+		a_n = p_n + q_1a_{n-1} + q_2a_{n-2} + \hdots + q_na_0
+	\end{gather*}
+\end{thm}
+
+\begin{crly}
+	Let $P(x)$ and $Q(x)$ be formal power series.
+	\begin{gather*}
+		Q(0) \neq 0 \implies \exists!A(x) \quad Q(x)A(x) = P(x)
+	\end{gather*}
+\end{crly}
+
+\begin{defn}[Inverse of a Formal Power Series]
+	We say that $B(x)$ is the inverse of $A(x)$ when
+	\begin{gather*}
+		A(x)B(x) = 1
+	\end{gather*}
+	and denote this by
+	\begin{gather*}
+		B(x) = A(x)^{-1} \quad \text{or} \quad B(x) = \frac{1}{A(x)}
+	\end{gather*}
+\end{defn}
+
+\begin{remark}[Some important series]
+	(Infinite Sum of a Geometric Series)
+	\[
+		1 + x + x^2 + \hdots = \sum_{i \geq 0}x^i = \frac{1}{1-x}
+	\]
+	(Sum of k terms in a Geometric Series)
+	\[
+		1 + x + x^2 + \hdots + x^k = \sum_{i=0}^{k} x^i = \frac{1 - x^{k+1}}{1 - x}
+	\]
+
+	(Negative Binomial Series)
+	\[
+		(1-x)^{-k} = \sum_{n \geq 0} \binom{n+k-1}{k-1}x^n
+	\]
+\end{remark}
+
+\begin{thm}[Unique Existence of the Inverse of a Formal Power Series]
+	A formal power series $P(x)$ has an inverse if and only if $P(0) \neq 0$. Moreover, the inverse if unique.
+\end{thm}
+
+\begin{defn}[Composition of Formal Power Series]
+	The composition of formal power series $A(x) = a_0 + a_1x + a_2x^2 + \hdots$ and $B(x)$ is defined by
+	\[
+		A\Big(B(x)\Big) = a_0 + a_1B(x) + a_2B(x)^2 + \hdots = \sum_{i \geq 0} a_iB(x)^i
+	\]
+\end{defn}
+
+\begin{thm}
+	Let $A(x)$ and $B(x)$ be formal power series.
+	\[
+		B(0) = 0 \implies A\Big(B(x)\Big) \quad \text{is a formal power series}
+	\]
+\end{thm}
+
+
+\section{Sum and Product Lemmas}
+
+\begin{thm}[Sum Lemma]
+	Let S be a set. Let $(A, B)$ be a partition of S such that A and B is a disjoint union of S. Then
+	\[
+		\Phi_S(x) = \Phi_A(x) + \Phi_B(x)
+	\]
+\end{thm}
+
+\begin{remark}
+	\[
+		\Phi_S(x) = \Phi_A(x) + \Phi_B(x) - \Phi_{A \cap B}(x)
+	\]
+\end{remark}
+
+\begin{thm}[Product Lemma]
+	Let A and B be sets of configurations with weight functions $\alpha$ and $\beta$ respectively.
+	\[
+		\Big(\forall \sigma = (a, b) \in A \times B \quad w(\sigma) = \alpha(a) + \beta(b) \Big) \implies \Phi_{A \times B}(x) = \Phi_A(x) \Phi_B(x)
+	\]
+\end{thm}
+
+
+
+\chapter{Compositions \& Strings}
+
+
+\section{Compositions of an Integer}
+
+\begin{defn}[Compositions of an Integer, Parts, and the Empty Composition]
+	$\forall n,k \in \bb{N}$, a composition of n with k parts is an ordered list $(c_1, c_2, ..., c_k)$ where
+	\[
+		\forall i \in \{1, 2, ...,k\} \quad \sum_{i=1}^{k}c_i = n
+	\]
+	The $c_i$'s are called the parts of the composition.
+	We define the composition of the number 0 as the empty composition, which is the only composition of length 0.
+\end{defn}
+
+
+\section{Subsets with Restrictions}
+
+It is common to recast problems in order to allow us to invoke the Sum and Product Lemmas.
+
+
+\section{Binary Strings}
+
+\begin{defn}[Concatenation]
+	Let A and B be bin strs. AB is said to be a concatenation where the bin str B is appended to the bin str A, i.e.
+	\[
+		AB := \{ab : a \in A, b \in B\}
+	\]
+	Similarly, we define
+	\begin{align*}
+		A^* &:= \{\epsilon\} \cup A \cup AA \cup AAA \cup \hdots\\
+			&\,= \{\epsilon\} \cup A \cup A^2 \cup A^3 \cup \hdots
+	\end{align*}
+\end{defn}
+
+\begin{defn}[Substring]
+	For bin strs A and B, we say that B is a substring of A iff A = CBD where C and D are some bin str.
+\end{defn}
+
+\begin{defn}[Blocks]
+	A block of a bin str is a maximal substring consisting of only 0's or 1's.
+\end{defn}
+
+
+\section{Unambiguous Expressions}
+
+\begin{defn}[Ambiguity of an Expression]
+	Let A and B be set of bin strs. Let AB is be the concatenation of A and B.\\
+	AB is ambiguous
+	\[
+		\iff \exists(a_1, b_1), (a_2, b_2) \in A \times B \quad (a_1 \neq a_2 \land b_1 \neq b_2 \land a_1b_1 = a_2b_2)
+	\]
+	AB is unambiguous
+	\[
+		\iff \forall c \in AB \quad \exists! a \in A \land \exists! b \in B \quad c = ab
+	\]
+\end{defn}
+
+
+\section{Some Decomposition Rules}
+Some common decompositions rules: For a set S of all bin strs,
+\begin{itemize}
+	\item Decomposte a string after each 0 or 1. Each piece in the decomposition will be either 0 or 1, so this gives
+	\[
+		S = \{0, 1\}^*
+	\]
+	\item Decomposte a string after each occurrence of 0. Each piece in the decomposition will be of the form
+	\[
+		\{0, 10, 110, ...\} = \{1\}^* 0
+	\]
+	except possibly for the last piece that may consist of only 1's. Thus
+	\[
+		S = \Big(\{1\}^*0\Big)^*{1}^*
+	\]
+	\item Decompose a string after each block of 0's. Each piece in the decomposition, except possible the first and last piece, will consist of a block of 1's followed by a block of 0's. The first piece may consist of only block of 0's and the last piece, block of 1's. So
+	\[
+		S = \{0\}^*\Big(1\{1\}^*0\{0\}^*\Big)^*\{1\}^*
+	\]
+\end{itemize}
+
+
+\section{Sum and Product Rules for Strings}
+
+\begin{thm}
+	Let A, and B be bin strs.
+	\begin{enumerate}
+		\item If AB is unambiguous, then
+			\[
+				\Phi_{AB}(x) = \Phi_{A}(x) \Phi_{B}(x)
+			\]
+		\item If $A^*$ is unambiguous, then
+			\[
+				\Phi_{A^*}(x) = \frac{1}{1-\Phi_{A}(x)}
+			\]
+	\end{enumerate}
+\end{thm}
+
+
+\section{Decomposition Using Blocks}
+
+No definitions and theorems here, but examples of how to decompose a given binary string with its set of conditions.
+
+
+\section{Recursive Decomposition of Binary Strings}
+
+\begin{defn}[Recursive Definition]
+	A recursive decomposition is a set that is decomposed in terms of itself. Let S be the set of all bin strs. We define S in the following way:
+	\begin{enumerate}
+		\item $\{\epsilon\} \in S$; and
+		\item Any other elem of S consists of either 0 or 1, followed by an element of S.
+	\end{enumerate}
+	Such a definition is called a recursive definition. This leads the the recurive decomposition
+	\[
+		S = \{\epsilon\} \cup \{0, 1\}S
+	\]
+\end{defn}
+
+
+
+\chapter{Resurrences, Binary Trees and Sorting}
+
+
+\section{Coefficient of Rational Functions}
+
+\begin{propo}[Partial Fractions]
+	Let $a, b, c, k, x \in \bb{R}$
+	\begin{center}
+		\begin{tabular}{c | c}
+			Factor in Denominator	&	Term in partial fraction decomposition \\
+			\hline
+			$ax + b$	 &	$\frac{A}{ax+b}$ \\
+			$(ax+b)^k$	&	$\frac{A_1}{ax+b} + \frac{A_2}{(ax+b)^2} + \hdots + \frac{A_k}{(ax+b)^k}$\\
+			$ax^2 + bx + c$	& $\frac{Ax+B}{ax^2 + bx + c}$\\
+			$(ax^2 + bx + c)^k$	& $\frac{A_1x + B_1}{ax^2 + bx + c} + \frac{A_2x + B_2}{(ax^2 + bx + c)^2} + \hdots + \frac{A_kx + B_k}{(ax^2 + bx + c)^k}$
+		\end{tabular}
+	\end{center}
+\end{propo}
+
+\begin{lemma}
+	\[
+		f(x) \in \bb{P}_{\leq r} \implies \exists P(n) \in \bb{P}_{\leq r}(F) \quad [x^n]\frac{f(x)}{(1-\theta x)^r} = P(n) \theta^n
+	\]
+\end{lemma}
+
+\begin{lemma}
+	Suppose f and g are polynomials with $deg(f) < deg(g)$.
+	\[
+		\exists g_1, g_2 \in \bb{P}(F) \quad g_1 \perp g_2 \quad g(x) = g_1(x)g_2(x)
+	\]
+	\[
+		\implies \exists f_1, f_2 \in \bb{P}(F) \quad \text{for } i = 1, 2 \quad deg(f_i) < deg(g_i) \text{ and } \frac{f(x)}{g(x)} = \frac{f_1(x)}{g_1(x)} + \frac{f_2(x)}{g_2(x)}
+	\]
+\end{lemma}
+
+\begin{thm}
+	Assumptions: $f, g \in \bb{P}(F) \quad deg(f) < deg(g)$. \\
+	\begin{gather*}
+		\forall i \in \bb{Z}_{\leq k}^+ \quad \exists \theta_i \in \bb{C} \quad \exists m_i \in \bb{Z}^+ \\
+		g(x) = \prod_{i} (1 - \theta_i x)^{m_i} \\
+		\implies \exists P_i \in \bb{P}(F) \quad deg(P_i) < m_i \\
+		\text{and} \\
+		[x^n]\frac{f(x)}{g(x)} = \sum_{i}P_i(n) \theta_i^n
+	\end{gather*}
+\end{thm}
+
+\section{Solutions to Recurrence Equations}
+\begin{thm}
+	Let $C(x) = \sum_{n \geq 0} c_nx^n$ where the coefficients $c_n$ satisfy the recurrence $c_n + q_1c_{n-1} + \hdots + q_kc_{n-k} = 0, n \geq k$
+	\begin{gather*}
+		g(x) := 1 + q_1x + \hdots + q_kx^k \\
+		\implies \exists f(x) \in \bb{P}(N) \quad deg(f) < k \\
+		C(x) = \frac{f(x)}{g(x)}
+	\end{gather*}
+\end{thm}
+
+\begin{thm}
+	SPS $\langle c_n \rangle _{n \geq 0}$ satisfies the recurrence
+	\[
+		c_n + q_1c_{n-1} + \hdots + q_kc_{n-k} = 0
+	\]
+	so that the characteristic polynomial exists. If the characteristic polynomial of this recurrence has root $\beta_i$ with multiplicity $m_i$, for i = 1, ..., j, where j is the number of distinct roots, then the general solution for the recurrence is
+	\[
+		c_n = P_1(n)\beta_1^n + \hdots + P_j(n)\beta_j^n
+	\]
+	where $P_i(n)$ is a polynomial in n with degree less tahn $m_i$, and these polynomials are determined by the $c_i$'s.
+\end{thm}
+
+
+\section{Nonhomogenous Recurrence Equations}
+
+\begin{thm}
+	SPS that $a_0, a_1, ...$ is a solution to $b_n + q_1b_{n-1} + \hdots + q_kb_{n-k} = f(n)$ (any solution without checking the initial conditions). Then the general solution is given by
+	\[
+		b_n = a_n + c_n \quad n \geq 0
+	\]
+	where $c_n$ is given by Theorem 3.2.2, and the k constants $b_{1,1}, ..., b_{j,m_j}$ in $c_n$ can be chosen to fit the initial conditions for $b_n$.
+\end{thm}
+
+\begin{remark}[Some heuristics in solving non-homogeneous recurrences]
+\mbox{}\\[-2ex]
+	\begin{tabular}{c | c | c}
+		If f(n) is					& 	First, try						&	Otherwise \\
+		\hline
+		constant 					& 	d 								& $d_1n + d_2$ \\
+		$b_1n + b_2$	&	$d_1n + d_2$	&	$d_1n^2 + d_2n + d_3$ \\
+		$\sum_{i=0}^{k}b_{k+1}n^{k+i}$ &	polynomial of degree k 	& polunomial of degree k + 1 \\
+		$bs^n$				&	$ds^n$						& $dns^n$ \\
+	\end{tabular}
+
+	For all cases, if the otherwise case still does not work, try the variable n with a higher degree, or a polynomial of n with a higher degree.
+\end{remark}
+
+\textbf{Strategy to fight non-homogeneous recurrence}
+
+\begin{enumerate}
+	\item Find a general solution to the associated homogeneous recurrence.
+	\item Find a single specific solution to the non-homogeneous recurrence.
+	\item $a_n = \bigg(\text{general solution to homogeneous equation}\bigg) + c_n$
+	\item Use initial conditions to solve for the remaining variables.
+\end{enumerate}
+
+
+\section{Binary Trees}
+
+\begin{defn}[Binary Trees]
+	A binary tree is either
+	\begin{enumerate}
+		\item an empty tree $\{\epsilon\}$
+		\item a tree with a fixed root vertex such that each vertex has a left branch and a right branch (either of which may be empty)
+	\end{enumerate}
+\end{defn}
+
+\begin{remark}
+	Note that a binary tree with a right branch is not equal to a binary tree with a left branch, even if they have the same number of vertices.
+\end{remark}
+
+\begin{remark}[A decomposition of the binary tree]
+	Let $\mathscr{T}$ be the set of all binary trees. We cab decompose $\mathscr{T}$ recursively as
+	\[
+		\mathscr{T} = \{\epsilon\} \cup \{\cdot\} \times \mathscr{T} \times \mathscr{T}
+	\]
+	And since this is an unambiguous decomposition, we have
+	\[
+		\Phi_{\mathscr{T}}(x) = 1 + x\Phi_{\mathscr{T}}(x)^2
+	\]
+	which if we let $T(x) = \Phi_{\mathscr{T}}(x)$ , it leads us to
+	\[
+		(2xT(x) - 1)^2 = 1 - 4x
+	\]
+\end{remark}
+
+
+\section{The Binomial Series}
+
+\begin{thm}[The Generalized Binomial Theorem]
+	\begin{gather*}
+		\forall a \in \bb{Q} \\
+		(1 - x)^a = \sum_{k \geq 0} \binom{a}{k}x^k
+	\end{gather*}
+\end{thm}
+
+\begin{remark}[Catalan Numbers]
+	The number of binary trees with $n \geq 0$ vertices is
+	\[
+		\frac{1}{n + 1} \binom{2n}{n}
+	\]
+	which is called the Catalan Numbers.
+\end{remark}
+
+
+
+\chapter{Introduction to Graph Theory}
+
+
+\section{Definitions}
+
+\begin{defn}[Graph]
+	A graph F iis a finite nonempty set, V(G), of objects called $\textbf{vertices}$, together with a set, E(G), of unordered pairs of distinct vertice. The elements of E(G) are called $\textbf{edges}$.
+\end{defn}
+
+\begin{defn}[Adjacency]
+	2 vertices u and v are said to be adjacent if there is an edge connecting them. This edge is said to be $\textbf{incident}$ with vertices u and v, or that the edge $\textbf{joins}$ u and v.
+\end{defn}
+
+\begin{defn}[Neighbours]
+	Vertices adjacent to a vertices u are called neighbours of u. The set of neighbours of u is denoted N(u).
+\end{defn}
+
+\begin{defn}[Planar]
+	A graph which can be represented with no edges crossing is said to be planar.
+\end{defn}
+
+\begin{defn}[Directed graph or Digraph]
+	A "graph" whose edges are non-distinct ordered pairs.
+\end{defn}
+
+\begin{defn}[Multigraph]
+	A graph where multiple edges are allowed between 2 vertices.
+\end{defn}
+
+
+\section{Isomorphism}
+
+\begin{defn}[Isomorphism]
+	2 graphs $G_1$ and $G_2$ are isomorphic if
+	\[
+		\exists f:V(G_1) \mapsto V(G_2)
+	\]
+	that is a bijection, such that vertices f(u) and f(v) are adjacent in $G_2$ if and only if u and v are adjacent in $G_1$.
+\end{defn}
+
+\begin{defn}[Isomorphism Class]
+	Collection of graphs that are isomorphic to G forms an isomorphism class of G.
+\end{defn}
+
+\begin{remark}
+	In almost all cases, a graph shares its properties with graphs from the same isomorphism class. It is also feasible to think that there are infinitely many graphs in an isomorphism class. However, the number of isomorphism classes of graphs with a given finite set of vertices is finite itself.
+\end{remark}
+
+\begin{defn}[Automorphism and Identity Map]
+	An automorphism of G is an isomorphism of G to itself. \\
+	An identity map on V(G) is an isomorphism from the graph G to itself.
+\end{defn}
+
+
+\section{Degree}
+
+\begin{defn}[Degree]
+	The degree of a vertex v is the number of edges that are incident with v.
+\end{defn}
+
+\begin{thm}[Handshake Lemma]
+	For any graph G,
+	\[
+		\sum_{v \in V(G)} deg(v) = 2 | E(G) |
+	\]
+\end{thm}
+
+\begin{crly}
+	The number of vertices of odd degree in a graph is even.
+\end{crly}
+
+\begin{crly}
+	The average degree of a verex in a graph G is
+	\[
+		\frac{2| E(G) |}{V(G)}
+	\]
+\end{crly}
+
+\begin{defn}[k-regular Graph]
+	A graph in which every vertex has degree k, for some fixed k, is called a k-regular graph.
+\end{defn}
+
+\begin{defn}[Complete Graph]
+	A complete graph is one in which all pairs of distinct vertices are adjacent to each other. The complete graph with p vertices is denoted $K_p$.
+\end{defn}
+
+
+\section{Bipartite Graph}
+
+\begin{defn}[Bipartite Graph]
+	A bipartite graph is a graph in which its vertices are partitioned into 2 sets, A and B. G is said to have a bipartition (A, B), such that each edge in G joins a vertex in A to a vertex in B.
+\end{defn}
+
+\begin{remark}
+	A $\textbf{complete bipartite graph}, K_{m, n}$ has all vertices in A adjacent to all vertices in B with $|A| = m$ and $|B| = n$. 
+\end{remark}
+
+\begin{defn}[n-cube]
+	For $n \geq 0$, the n-cube is the graph whose vertices are the $\{0, 1\}$-strings of length n, and 2 strings are adjacent to each other if and only if they differ by exactly one position (or one byte).
+\end{defn}
+
+
+\section{How to Specify A Graph}
+Not covered by MATH239
+
+
+\section{Paths and Cycles}
+
+\begin{defn}[Subgraph]
+	A subgraph S of a graph G is a graph such that $V(S) \subseteq V(G) \text{ and } E(S) \subseteq E(G)$. If $V(S) = V(G)$ then S is a spanning subgraph of G. If S is a subgraph of G but $S \neq G$ , then S is a proper subgraph of G.
+\end{defn}
+
+\begin{defn}[Walk]
+	A walk in a graph G from $v_0$ to $v_n, n /geq 0$, is an alternating sequence of vertices and edges of G
+	\[
+		v_0, \{v_0, v_1\}, v_1, \{v_1, v_2\}, v_2, ..., v_{n-1}, \{v_{n-1}, v_n\}, v_n
+	\]
+	which begins with $v_0$ and ends with $v_n$ and $\{v_i, v_j\}$ denotes the edges incident to the vertices contained in the set notation. Such a walk is called a $v_0, v_n \text{-} walk$. The length of a walk is the number of the edges in the walk. \\
+	If $v_0 = v_n$, then the walk is called a closed walk.
+\end{defn}
+
+\begin{defn}[Path]
+	A path is a walk where all its vertices are distinct.
+\end{defn}
+
+\begin{thm}
+	If there is a walk from vertex x to vertex y in G, then there is a path from x to y in G.
+\end{thm}
+
+\begin{crly}
+	Let $x, y, z \in V(G)$ where G is a graph. If there is a path from x to y in G and a path from y to z in G, then there is a path from x to z in G.
+\end{crly}
+
+\begin{defn}[Cycle]
+	A cycle in a graph G is a subgraph with n distinct vertices $v_0, v_1, ..., v_{n-1}, \text{ for } n \geq 0$, and n distinct edges $\{v_0, v_1\}, \{v_1, v_2\}, ..., \{v_{n-2}, v_{n-1}\}, \{v_{n-1}, v_0\}$. Equivalently, a cycle is a connected graph that is 2-regular. A cycle with n edges is called an n-cycle, or a cycle of length n.
+\end{defn}
+
+\begin{remark}[Comparison of Path and Cycles]
+	\mbox{}\\[-2ex]
+	\begin{tabular}{l | l}
+		Paths											&			Cycles \\
+		\hline
+		\multicolumn{2}{c}{Similarities} \\
+		\hline
+		\multicolumn{2}{l}{$\bullet$ The two drawings may look similar} \\
+		\multicolumn{2}{l}{$\bullet$ Both go through the same vertex once (save the initial which can be equal to the final one)} \\
+		\hline
+		\multicolumn{2}{c}{Differences} \\
+		\hline
+		$\bullet$ Described as a sequence of vertices 	&	$\bullet$ A cycle is a graph \\
+		$\bullet$ Has more information (i.e. direction) &	$\bullet$ Has no particular direction \\
+		$\bullet$ Has a specific starting vertex		&	$\bullet$ Any vertex can be a starting vertex \\
+		$\bullet$ Can have length 0 (for closed paths)	&	$\bullet$ Must have at least 3 vertices \\
+
+	\end{tabular}
+\end{remark}
+
+\begin{thm}
+	SPS G is a graph. If $\forall v \in V(G), deg(v) = 2 \implies$ G contains a cycle.
+\end{thm}
+
+\begin{defn}[Hamilton Cycle]
+	A spanning cycle in a graph is known as a Hamilton Cycle.
+\end{defn}
+
+
+\section{Equivalence Relations}
+
+Only thing to note here is that a walk is an equivalence relation, i.e. it satisfies the properties:
+\begin{enumerate}
+	\item Reflexivity
+	\item Symmetry
+	\item Trasitivity
+\end{enumerate}
+
+
+\section{Connectedness}
+
+\begin{defn}[Connected]
+	A graph G is connected if $\forall x, y \in V(G)$ there is a path from x to y.
+\end{defn}
+
+\begin{thm}
+	Let G be a graph and let $v \in V(G)$. If $\forall w \in V(G)$ there is a path from v to w in G, then G is connected.
+\end{thm}
+
+\begin{defn}[Component]
+	A component of G is a subgraph C of GF such that\
+	\begin{enumerate}
+		\item C is connected; and
+		\item No subgraph of G that properly contains C is connected.
+	\end{enumerate}
+\end{defn}
+
+\begin{remark}
+	\begin{enumerate}
+		\item The two conditions may sometimes be stated as "a component of G is a subgraph which is maximal, subject to being connected."
+		\item If a graph has more than one component, the graph is said to be disconnected.
+	\end{enumerate}
+\end{remark}
+
+\begin{defn}[Edge Cut]
+	Let G be a graph and $X \subseteq V(G)$. The edges of G with one end in X and one end in $X^c$ form an edge cut of G.
+\end{defn}
+
+\begin{thm}
+	A graph G is disconnected if and only if there exists a non-empty proper subgraph of G such that the cut induced by X on G is empty.
+\end{thm}
+
+\begin{defn}[Equivalence Class]
+	Let G be a graph. The equivalence class under the graph connected by a related path are called connected components (or components) of G.
+\end{defn}
+
+
+\section{Eulerian Circuits}
+
+\begin{defn}[Eulerian Circuit]
+	An Eulerian circuit of a graph G is a closed walk that contains every edge of G exactly once.
+\end{defn}
+
+\begin{defn}[Eulerian Trail]
+	An Eulerian Trail on a graph G is a walk that contains every edge of G exactly once.
+\end{defn}
+
+\begin{thm}
+	Let G be a connected graph. Then G has an Eulerian citcuit iff every vertex has even degree.
+\end{thm}
+
+
+\section{Bridges}
+
+\begin{defn}[Bridge]
+	An edge e of G is called a bridge if G-e has more components than G.
+\end{defn}
+
+\begin{remark}
+	This definition implies that if G is connected, then G-e is disconnected.
+\end{remark}
+
+\begin{lemma}
+	Let G be a connected graph. For some $x, y \in V(G)$, if $e=\{x, y\}$ is a bridge, then G-e has precisely 2 components; Furthermore, x and y are in different components.
+\end{lemma}
+
+\begin{thm}
+	An edge e is a bridge of a graph G iff it is not connected in any cycle of G.
+\end{thm}
+
+\begin{crly}
+	If there are 2 distinct paths from vertex u to vertex v in G, then G contains a cycle.
+\end{crly}
+
+
+\section{Certifying Properties}
+$\textbf{Certifying connectedness:}$
+\begin{itemize}
+	\item G is connected if:
+	\begin{itemize}
+		\item $\forall x,y \in V(G)$, there exists a path in G that connects x and y
+	\end{itemize}
+	\item G is not connected if:
+	\begin{itemize}
+		\item A cut can be producted; SPS sets A and B, where $A, B \subseteq V(G) \quad A \cap B = \emptyset \quad \nexists e = \{x, y\} \in E(G)$ where $x \in A \text{ and } y \in B$
+	\end{itemize}
+\end{itemize}
+
+
+$\textbf{Certifying whether an edge e is a bridge in a connected graph G:}$
+
+\begin{itemize}
+	\item e is a bridge if:
+	\begin{itemize}
+		\item A cut can be induced from A to B for G-e, where if $e=\{u, v\}$ where for $A, B \in V(G) \quad A \cap B = \emptyset \quad u \in A \land v \in B$ 
+	\end{itemize}
+	\item e is not a bridge if:
+	\begin{itemize}
+		\item A cycle that contains e can be found; or
+		\item Showing that G-e is connected (usually tedious)
+	\end{itemize}
+\end{itemize}
+
+
+
+\chapter{Trees}
+
+
+\section{Trees}
+
+\begin{defn}[Tree]
+	A tree is a connected graph with no cycles.
+\end{defn}
+
+\begin{lemma}
+	There is a unique path between every pair of vertices u and v in a tree T.
+\end{lemma}
+
+\begin{lemma}
+	Every edge of a tree is a bridge.
+\end{lemma}
+
+\begin{defn}[Forest]
+	A graph with no cycles, not necessarily connected, is a forest.
+\end{defn}
+
+\begin{defn}[Leaf]
+	A vertex of degree 1 on a tree is called a leaf.
+\end{defn}
+
+\begin{propo}
+	\begin{enumerate}
+		\item Every subgraph of a tree is forest.
+		\item If a tree T has at least 2 vertices, then T has at least 2 leaves.
+		\item If a tree T has a leaf v, then T-v is also a tree.
+		\item If T is a tree, then $|E(T)| = |V(T)| - 1$.
+	\end{enumerate}
+\end{propo}
+
+\begin{propo}
+	If G is a tree, TFAE:
+	\begin{enumerate}
+		\item G is connected
+		\item G has no cycles
+		\item $|E(G)| = |V(G)| - 1$
+	\end{enumerate}
+\end{propo}
+
+
+\section{Spanning Trees}
+
+\begin{defn}[Spanning Trees]
+	A spanning subgraph that is also a tree is called a spanning tree.
+\end{defn}
+
+\begin{thm}
+	A graph G is connected iff G has a spanning tree.
+\end{thm}
+
+\begin{thm}
+	If T is a spanning tree of G and e is an edge not in T, then T + e contains exactly one cycle C. Moreover, if e' is any edge on C, then T + e - e' is also a spanning tree of G.
+\end{thm}
+
+\begin{thm}
+	If T is a spanning tree of G and e is an edge in T, then T - e has 2 components. Moreover, if e' is in the cut induced by one of the components, then T - e + e' is also a spanning tree of G.
+\end{thm}
+
+
+\section{Characterizing Bipartite Graphs}
+
+\begin{defn}[Odd cycle]
+	An odd cycle is a cycle with an odd number of vertices.
+\end{defn}
+
+\begin{lemma}
+	An odd cycle is not bipartite.
+\end{lemma}
+
+\begin{thm}
+	A graph is bipartite iff it has no odd cycles.
+\end{thm}
+
+
+\section{Minimum Spanning Tree (MST)}
+
+\begin{defn}[Minimal Spanning Tree]
+	If each edge of a graph G has a certain weight function, then an MST is a spanning tree that has the smallest weight.
+\end{defn}
+
+$\textbf{Prim's Algorithm}$ \\
+Let x be an arbitrary vertex in a connected graph G, and let T be the tree that consists only of x. \\
+while(T is not a spanning tree of G) \{
+	\begin{enumerate}
+		\item Compare all edge cuts induced by V(T)
+		\item Let e = uv be an edge cut with the smallest weight in the cut, where $u \in V(T) \land v \notin V(T)$
+		\item Add v to V(T) and add e to E(T)
+	\end{enumerate}
+\}
+
+\begin{thm}
+	Prim's algorithm always produces an MST for G.
+\end{thm}
+
+
+
+\chapter{Planar Graphs}
+
+
+\section{Planarity}
+
+\begin{defn}[Planar, Planar Embedding / Planar Map]
+	A graph G is planer if it has a drawing in the plane so that its edges intersect only at their ends, and so that no 2 vertices coincide. The actual drawing is called a plannar embedding of G, or a planar map.
+\end{defn}
+
+\begin{defn}[Faces]
+	A planar embedding partitions the plane in to connected regions called faces. One of those regions, called the outer face, is unbounded.
+\end{defn}
+
+
+\begin{defn}[Boundary of a face, Adjacent Faecs, Boundary Walk]
+	Consider a planar embedding of a connected graph G. The subgraph formed by the vertices and edges of a face is called the boundary of the face. We say that 2 faces are adjacent if they are incident with a common edge. As on moves around the perimeter of a face f, we may describe this as a closed walk, called the boundary walk of the face f.
+\end{defn}
+
+\begin{defn}[Degree of a face]
+	Consider a planer embedding of a connected graph G with an arbitrary face f in G. We denote $w_f \equiv$ number of edges in the boundary walk of f, or the degree of the face f.
+\end{defn}
+
+\begin{thm}[colloquially the Faceshaking Lemma]
+	If we have a planar embedding of a connected graph G with s faces $f_1, f_2, ..., f_s$, then
+	\[
+		\sum_{i=1}^{s}deg(f_i) = 2| E(G) |	
+	\]
+\end{thm}
+
+\begin{crly}
+	If the connected graph G has a planar embedding with f faces, the average degree of a face in the embedding is
+	\[
+		\frac{2|E(G)|}{f}
+	\]
+\end{crly}
+
+
+\section{Euler's Formula}
+
+\begin{thm}[Euler's Formula]
+	Let G be a connected graph with p vertices and q edges. If G has a planar embedding with f faces then
+	\[
+		p - q + f = 2
+	\]
+\end{thm}
+
+
+\section{Stereographic Projection}
+
+\begin{thm}
+	A graph is planar iff it can be drawn on the surface of a sphere.
+\end{thm}
+
+
+\section{Plantonic Solids}
+
+\begin{propo}
+	There are only 5 platonic solids:
+	\begin{enumerate}
+		\item Tetrahedron
+		\item Cube
+		\item Octahedron
+		\item Dodecahedron
+		\item Icosahedron
+	\end{enumerate}
+\end{propo}
+
+\begin{lemma}
+	Let G be a planar embedding with p vertices, q edges and f faces, in which each vertex has degree $d \geq 3$ and each face has degree $d^* \geq 3$. Then $(d, d^*)$ is one of the five pairs
+	\[
+		\{(3, 3), (3, 4), (4, 3), (3, 5), (5, 3)\}
+	\]
+\end{lemma}
+
+\begin{lemma}
+	If G is platonic with p vertices, q edges and f faces, where each vertex has degreee d and each face has degree $d^*$, then
+	\[
+		q = \frac{2dd^*}{2d + 2d^* -dd^*}
+	\]
+	where $p=\frac{2q}{d}$ and $f = \frac{2q}{d^*}$
+\end{lemma}
+
+\begin{thm}
+	There are exactly 5 platonic graphs.
+\end{thm}
+
+
+\section{Nonplanar graphs}
+
+\begin{lemma}
+	If G is connected and not a tree, then in a planar embedding G, the boundary of each face contains a cycle.
+\end{lemma}
+
+\begin{lemma}
+	Let G be a planar embedding with p vertices and q edges. IF each face of G has degree at least $d^*$, then $(d^* - 2)q \leq d^*(p-2)$
+\end{lemma}
+
+\begin{thm}
+	In a connected planar graph with $p \geq 3$ vertices and q edges, we have
+	\[
+		q \leq 3p - 6
+	\]
+	In a connected planar graph that is bipartite with similar traits,
+	\[
+		q \leq 2p - 4
+	\]
+\end{thm}
+
+\begin{crly}
+	$K_5$ is nonplanar.
+\end{crly}
+
+\begin{crly}
+	A planar graph has a vertex of degree at most 5.
+\end{crly}
+
+\begin{lemma}
+	$K_{3, 3}$ is nonplanar.
+\end{lemma}
+
+
+\section{Kuratowski's Theorem}
+
+\begin{defn}[Edge Subdivision]
+	Edge subdivision of a graph is obtained by replacing any number of edges in the graph by paths of length 1 or more, with new interval vertices.
+\end{defn}
+
+\begin{thm}[Kurotowski's Theorem]
+	A graph is nonplanar iff it has a subgraph that is a edge subdivision of $K_5$ or $K_{3, 3}$.
+\end{thm}
+
+
+\section{Colouring and Planar Graphs}
+
+\begin{defn}[Colouring]
+	A k-colouring of a graph G is a function from V(G) to a set of size k (whose elements are called colours), so that adjacent vertices always have different colours. A graph with a k-colouring is called a k-colourable graph.
+\end{defn}
+
+\begin{thm}
+	A graph is 2-colourable iff it is bipartite.
+\end{thm}
+
+\begin{thm}
+	$K_n$ is n-colourable, and not k-colourable for any k < n.
+\end{thm}
+
+\begin{thm}
+	Every planar graph is 6-colourable.
+\end{thm}
+
+\begin{defn}[Edge Contraction]
+	Let G be a graph and let e = {x, y} be an edge of G. The graph G-e obatined from G by contracting the edge e is the graph with vertex set $V(G) - \{x, y\} \cup \{z\}$, where z is a new vertex, and edge set
+	\[
+		\Bigr\{\{u, v\} \in E(G) : \{u, v\}\cap\{x, y\}=\emptyset\Bigl\}\cup\Bigr\{\{u, z\}:u\notin\{x,y\},\{u, w\}\in E(G) \text{ for some } w\in\{x, y\}\Bigl\}
+	\]
+\end{defn}
+
+\begin{thm}
+	Every planar graph is 5-colourable.
+\end{thm}
+
+\begin{thm}
+	Every planar graph is 4-colourable.
+\end{thm}
+
+
+\section{Dual Planar Graphs}
+
+\begin{defn}[Dual]
+	Given a connected planar embedding G, the dual $G^*$ is a planar embedding constructed as follows:\\
+	\begin{enumerate}
+		\item $G^*$ has one vertex in each face of G
+		\item 2 vertices of $G^*$ are joined by an edge if the corresponding faces are adjacent
+		\item The edge is drawn across the common boundary in G.
+	\end{enumerate}
+\end{defn}
+
+
+
+\chapter{Matchings}
+
+\section{Mathing}
+
+\begin{defn}[Matching]
+	A matching in a graph G is a set of M edges of G such taht no 2 edges in M have a common end.
+\end{defn}
+
+\begin{defn}[Saturation]
+	We say that a vertex v of G is saturated by M, or that M saturates v, if v is incident with an edge in M.
+\end{defn}
+
+\begin{defn}[Maximum Matching]
+	The maximum matching of G is the largest matching in G.
+\end{defn}
+
+\begin{defn}[Perfect Matching]
+	A maximum matching where the size of the matching is $\frac{p}{2}$ where p is the number of vertieces in the graph.
+\end{defn}
+
+\begin{remark}
+	Not every graph has a perfect matching, especially when p is odd.
+\end{remark}
+
+\begin{defn}[Alternating Path]
+	We say that a path $v_0v_1v_2\hdots v_n$is an alternating path with respect to a matching M if one of the following is true:
+	\begin{itemize}
+		\item $\{v_i, v_{i+1}\} \in M$ if i is even AND $\{v_i, v_{i+1}\} \notin M$ if i is odd.
+		\item $\{v_i, v_{i+1}\} \in M$ if i is odd AND $\{v_i, v_{i+1}\} \notin M$ if i is even.
+	\end{itemize}
+\end{defn}
+
+\begin{defn}[Augmenting Path]
+	An augmenting path with respect to a matching M is an alternating path joining 2 distinct vertices neither of which is saturated by M.
+\end{defn}
+
+\begin{lemma}
+	If M has an augmenting path, it is not a maximum matching.
+\end{lemma}
+
+
+\section{Covers}
+
+\begin{defn}[Cover]
+	A cover of a graph G is a set C of vertices such taht every edge of G has at least one end in C.
+\end{defn}
+
+\begin{lemma}
+	If M is a matching of G and C is a cover of G, then $|M| \leq |C|$.
+\end{lemma}
+
+\begin{lemma}
+	If M is a matching and C is a coevr and $|M| = |C|$, then M is a maximum matching and C is a minimum cover.
+\end{lemma}
+
+
+\section{König's Theorem}
+
+\begin{thm}[König's Theorem]
+	In a bipartite graph the maximum size of a matching is the minimum size of a cover.
+\end{thm}
+
+$\textbf{König's Algorithm}$ \\
+const G = graph\\
+let $M = \emptyset \quad$ // not necessarily empty\\
+let A, B = bipartition of G\\
+declare X, Y, pr()\\
+while($|M| \neq |Y| \cup |A - X|$) \{
+\begin{align*}
+	\text{ let } &X = \{ u \in A : \text{ u is unsaturated by M } \}, \\
+					   &Y = \emptyset, \\
+					   &pr(v) = \text{ undefined } \forall v \in V(G);
+\end{align*}
+
+	$\quad$ for each $v \in B - Y$ with an edge uv where $u \in X$ \{\\
+		$\text{ }\quad \quad$Y.push(v); \\
+		$\text{ }\quad \quad$ set pr(v) = u;\\
+		$ $\\
+		$\text{ }\quad \quad$ if v is saturated \{\\
+			$\text{ }\quad \quad \quad$ trace back (v, pr(v), pr(pr(v)), ...); \\
+			$\text{ }\quad \quad \quad$ swap the augmenting path to get larger M;\\
+			$\text{ }\quad \quad \quad$ continue while;\\
+		$\text{ }\quad \quad$\}\\
+	$\text{ }\quad$\}\\
+
+	$\quad$ for each $v \in A - X$ with an edge uv where $u \in Y$ \{\\
+		$\text{ }\quad \quad$X.push(v); \\
+		$\text{ }\quad \quad$ set pr(v) = u; \\
+	$\text{ }\quad$\}\\
+\}\\
+$ $\\
+return M and $C = Y \cup (A - X)$
+
+\section{Applications of König's Theorem}
+
+\begin{defn}[Neighbour Set]
+	Let G be a graph. Let $D \subseteq V(G)$. The neighbor set is
+	\[
+		N(D) := \{v \in V(G) : \exists u \in D, uv \in E(G)\}
+	\]
+\end{defn}
+
+\begin{thm}[Hall's Theorem]
+	A bipartite graph G with bipartition (A, B) has a matching saturating every vertex in A
+	\[
+		\iff \forall D \subseteq A \quad |N(D)| \geq |D|
+	\]
+\end{thm}
+\end{document}
