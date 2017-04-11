@@ -1,146 +1,146 @@
-\contentsline {defn}{{Definition}{1.1.{1}}{Composition, Parts, Weights}}{7}{defn.1.1.1}
-\contentsline {defn}{{Definition}{1.1.{2}}{Binary Strings}}{7}{defn.1.1.2}
-\contentsline {remark}{{Remark}{1}{}}{7}{remark.1}
-\contentsline {defn}{{Definition}{1.2.{1}}{Union \& Disjoint}}{8}{defn.1.2.1}
-\contentsline {remark}{{Remark}{2}{}}{8}{remark.2}
-\contentsline {defn}{{Definition}{1.2.{2}}{Cartesian Product}}{8}{defn.1.2.2}
-\contentsline {defn}{{Definition}{1.2.{3}}{Cartesian Power}}{8}{defn.1.2.3}
-\contentsline {remark}{{Remark}{3}{}}{8}{remark.3}
-\contentsline {thm}{{Theorem}{1.3.{1}}{}}{8}{thm.1.3.1}
-\contentsline {propo}{{Proposition}{1.3.{1}}{Binomial Identities}}{9}{propo.1.3.1}
-\contentsline {defn}{{Definition}{1.4.{1}}{Generating Series}}{9}{defn.1.4.1}
-\contentsline {thm}{{Theorem}{1.4.{1}}{}}{9}{thm.1.4.1}
-\contentsline {defn}{{Definition}{1.5.{1}}{Formal Power Series}}{9}{defn.1.5.1}
-\contentsline {defn}{{Definition}{1.5.{2}}{Additional And Multiplication Rules of Formal Power Series}}{10}{defn.1.5.2}
-\contentsline {thm}{{Theorem}{1.5.{1}}{}}{10}{thm.1.5.1}
-\contentsline {crly}{{Corollary}{1.5.{1}.{1}}{}}{10}{crly.1.5.1.1}
-\contentsline {defn}{{Definition}{1.5.{3}}{Inverse of a Formal Power Series}}{10}{defn.1.5.3}
-\contentsline {remark}{{Remark}{4}{Some important series}}{11}{remark.4}
-\contentsline {thm}{{Theorem}{1.5.{2}}{Unique Existence of the Inverse of a Formal Power Series}}{11}{thm.1.5.2}
-\contentsline {defn}{{Definition}{1.5.{4}}{Composition of Formal Power Series}}{11}{defn.1.5.4}
-\contentsline {thm}{{Theorem}{1.5.{3}}{}}{11}{thm.1.5.3}
-\contentsline {thm}{{Theorem}{1.6.{1}}{Sum Lemma}}{12}{thm.1.6.1}
-\contentsline {remark}{{Remark}{5}{}}{12}{remark.5}
-\contentsline {thm}{{Theorem}{1.6.{2}}{Product Lemma}}{12}{thm.1.6.2}
-\contentsline {defn}{{Definition}{2.1.{1}}{Compositions of an Integer, Parts, and the Empty Composition}}{13}{defn.2.1.1}
-\contentsline {defn}{{Definition}{2.3.{1}}{Concatenation}}{13}{defn.2.3.1}
-\contentsline {defn}{{Definition}{2.3.{2}}{Substring}}{14}{defn.2.3.2}
-\contentsline {defn}{{Definition}{2.3.{3}}{Blocks}}{14}{defn.2.3.3}
-\contentsline {defn}{{Definition}{2.4.{1}}{Ambiguity of an Expression}}{14}{defn.2.4.1}
-\contentsline {thm}{{Theorem}{2.6.{1}}{}}{15}{thm.2.6.1}
-\contentsline {defn}{{Definition}{2.8.{1}}{Recursive Definition}}{15}{defn.2.8.1}
-\contentsline {propo}{{Proposition}{3.1.{1}}{Partial Fractions}}{16}{propo.3.1.1}
-\contentsline {lemma}{{Lemma}{3.1.{1}}{}}{16}{thm.3.1.1}
-\contentsline {lemma}{{Lemma}{3.1.{2}}{}}{16}{thm.3.1.2}
-\contentsline {thm}{{Theorem}{3.1.{3}}{}}{17}{thm.3.1.3}
-\contentsline {thm}{{Theorem}{3.2.{1}}{}}{17}{thm.3.2.1}
-\contentsline {thm}{{Theorem}{3.2.{2}}{}}{17}{thm.3.2.2}
-\contentsline {thm}{{Theorem}{3.3.{1}}{}}{18}{thm.3.3.1}
-\contentsline {remark}{{Remark}{6}{Some heuristics in solving non-homogeneous recurrences}}{18}{remark.6}
-\contentsline {defn}{{Definition}{3.4.{1}}{Binary Trees}}{18}{defn.3.4.1}
-\contentsline {remark}{{Remark}{7}{}}{19}{remark.7}
-\contentsline {remark}{{Remark}{8}{A decomposition of the binary tree}}{19}{remark.8}
-\contentsline {thm}{{Theorem}{3.5.{1}}{The Generalized Binomial Theorem}}{19}{thm.3.5.1}
-\contentsline {remark}{{Remark}{9}{Catalan Numbers}}{19}{remark.9}
-\contentsline {defn}{{Definition}{4.1.{1}}{Graph}}{20}{defn.4.1.1}
-\contentsline {defn}{{Definition}{4.1.{2}}{Adjacency}}{20}{defn.4.1.2}
-\contentsline {defn}{{Definition}{4.1.{3}}{Neighbours}}{20}{defn.4.1.3}
-\contentsline {defn}{{Definition}{4.1.{4}}{Planar}}{20}{defn.4.1.4}
-\contentsline {defn}{{Definition}{4.1.{5}}{Directed graph or Digraph}}{20}{defn.4.1.5}
-\contentsline {defn}{{Definition}{4.1.{6}}{Multigraph}}{20}{defn.4.1.6}
-\contentsline {defn}{{Definition}{4.2.{1}}{Isomorphism}}{21}{defn.4.2.1}
-\contentsline {defn}{{Definition}{4.2.{2}}{Isomorphism Class}}{21}{defn.4.2.2}
-\contentsline {remark}{{Remark}{10}{}}{21}{remark.10}
-\contentsline {defn}{{Definition}{4.2.{3}}{Automorphism and Identity Map}}{21}{defn.4.2.3}
-\contentsline {defn}{{Definition}{4.3.{1}}{Degree}}{21}{defn.4.3.1}
-\contentsline {thm}{{Theorem}{4.3.{1}}{Handshake Lemma}}{21}{thm.4.3.1}
-\contentsline {crly}{{Corollary}{4.3.{1}.{1}}{}}{21}{crly.4.3.1.1}
-\contentsline {crly}{{Corollary}{4.3.{1}.{2}}{}}{21}{crly.4.3.1.2}
-\contentsline {defn}{{Definition}{4.3.{2}}{k-regular Graph}}{22}{defn.4.3.2}
-\contentsline {defn}{{Definition}{4.3.{3}}{Complete Graph}}{22}{defn.4.3.3}
-\contentsline {defn}{{Definition}{4.4.{1}}{Bipartite Graph}}{22}{defn.4.4.1}
-\contentsline {remark}{{Remark}{11}{}}{22}{remark.11}
-\contentsline {defn}{{Definition}{4.4.{2}}{n-cube}}{22}{defn.4.4.2}
-\contentsline {defn}{{Definition}{4.6.{1}}{Subgraph}}{23}{defn.4.6.1}
-\contentsline {defn}{{Definition}{4.6.{2}}{Walk}}{23}{defn.4.6.2}
-\contentsline {defn}{{Definition}{4.6.{3}}{Path}}{23}{defn.4.6.3}
-\contentsline {thm}{{Theorem}{4.6.{1}}{}}{23}{thm.4.6.1}
-\contentsline {crly}{{Corollary}{4.6.{1}.{1}}{}}{23}{crly.4.6.1.1}
-\contentsline {defn}{{Definition}{4.6.{4}}{Cycle}}{23}{defn.4.6.4}
-\contentsline {remark}{{Remark}{12}{Comparison of Path and Cycles}}{23}{remark.12}
-\contentsline {thm}{{Theorem}{4.6.{2}}{}}{24}{thm.4.6.2}
-\contentsline {defn}{{Definition}{4.6.{5}}{Hamilton Cycle}}{24}{defn.4.6.5}
-\contentsline {defn}{{Definition}{4.8.{1}}{Connected}}{24}{defn.4.8.1}
-\contentsline {thm}{{Theorem}{4.8.{1}}{}}{24}{thm.4.8.1}
-\contentsline {defn}{{Definition}{4.8.{2}}{Component}}{24}{defn.4.8.2}
-\contentsline {remark}{{Remark}{13}{}}{25}{remark.13}
-\contentsline {defn}{{Definition}{4.8.{3}}{Edge Cut}}{25}{defn.4.8.3}
-\contentsline {thm}{{Theorem}{4.8.{2}}{}}{25}{thm.4.8.2}
-\contentsline {defn}{{Definition}{4.8.{4}}{Equivalence Class}}{25}{defn.4.8.4}
-\contentsline {defn}{{Definition}{4.9.{1}}{Eulerian Circuit}}{25}{defn.4.9.1}
-\contentsline {defn}{{Definition}{4.9.{2}}{Eulerian Trail}}{25}{defn.4.9.2}
-\contentsline {thm}{{Theorem}{4.9.{1}}{}}{25}{thm.4.9.1}
-\contentsline {remark}{{Remark}{14}{Strategy for finding an Eulerian Circuit}}{26}{remark.14}
-\contentsline {defn}{{Definition}{4.10.{1}}{Bridge}}{26}{defn.4.10.1}
-\contentsline {remark}{{Remark}{15}{}}{26}{remark.15}
-\contentsline {lemma}{{Lemma}{4.10.{1}}{}}{26}{thm.4.10.1}
-\contentsline {thm}{{Theorem}{4.10.{2}}{}}{26}{thm.4.10.2}
-\contentsline {crly}{{Corollary}{4.10.{2}.{1}}{}}{26}{crly.4.10.2.1}
-\contentsline {defn}{{Definition}{5.1.{1}}{Tree}}{28}{defn.5.1.1}
-\contentsline {lemma}{{Lemma}{5.1.{1}}{}}{28}{thm.5.1.1}
-\contentsline {lemma}{{Lemma}{5.1.{2}}{}}{28}{thm.5.1.2}
-\contentsline {defn}{{Definition}{5.1.{2}}{Forest}}{28}{defn.5.1.2}
-\contentsline {defn}{{Definition}{5.1.{3}}{Leaf}}{28}{defn.5.1.3}
-\contentsline {propo}{{Proposition}{5.1.{1}}{}}{28}{propo.5.1.1}
-\contentsline {propo}{{Proposition}{5.1.{2}}{}}{29}{propo.5.1.2}
-\contentsline {defn}{{Definition}{5.2.{1}}{Spanning Trees}}{29}{defn.5.2.1}
-\contentsline {thm}{{Theorem}{5.2.{1}}{}}{29}{thm.5.2.1}
-\contentsline {thm}{{Theorem}{5.2.{2}}{}}{29}{thm.5.2.2}
-\contentsline {thm}{{Theorem}{5.2.{3}}{}}{29}{thm.5.2.3}
-\contentsline {defn}{{Definition}{5.3.{1}}{Odd cycle}}{29}{defn.5.3.1}
-\contentsline {lemma}{{Lemma}{5.3.{1}}{}}{29}{thm.5.3.1}
-\contentsline {thm}{{Theorem}{5.3.{2}}{}}{30}{thm.5.3.2}
-\contentsline {defn}{{Definition}{5.4.{1}}{Minimal Spanning Tree}}{30}{defn.5.4.1}
-\contentsline {thm}{{Theorem}{5.4.{1}}{}}{30}{thm.5.4.1}
-\contentsline {defn}{{Definition}{6.1.{1}}{Planar, Planar Embedding / Planar Map}}{31}{defn.6.1.1}
-\contentsline {defn}{{Definition}{6.1.{2}}{Faces}}{31}{defn.6.1.2}
-\contentsline {defn}{{Definition}{6.1.{3}}{Boundary of a face, Adjacent Faecs, Boundary Walk}}{31}{defn.6.1.3}
-\contentsline {defn}{{Definition}{6.1.{4}}{Degree of a face}}{31}{defn.6.1.4}
-\contentsline {thm}{{Theorem}{6.1.{1}}{colloquially the Faceshaking Lemma}}{31}{thm.6.1.1}
-\contentsline {crly}{{Corollary}{6.1.{1}.{1}}{}}{32}{crly.6.1.1.1}
-\contentsline {thm}{{Theorem}{6.2.{1}}{Euler's Formula}}{32}{thm.6.2.1}
-\contentsline {thm}{{Theorem}{6.3.{1}}{}}{32}{thm.6.3.1}
-\contentsline {propo}{{Proposition}{6.4.{1}}{}}{32}{propo.6.4.1}
-\contentsline {lemma}{{Lemma}{6.4.{1}}{}}{33}{thm.6.4.1}
-\contentsline {lemma}{{Lemma}{6.4.{2}}{}}{33}{thm.6.4.2}
-\contentsline {thm}{{Theorem}{6.4.{3}}{}}{33}{thm.6.4.3}
-\contentsline {lemma}{{Lemma}{6.5.{1}}{}}{33}{thm.6.5.1}
-\contentsline {lemma}{{Lemma}{6.5.{2}}{}}{33}{thm.6.5.2}
-\contentsline {thm}{{Theorem}{6.5.{3}}{}}{33}{thm.6.5.3}
-\contentsline {crly}{{Corollary}{6.5.{3}.{1}}{}}{33}{crly.6.5.3.1}
-\contentsline {crly}{{Corollary}{6.5.{3}.{2}}{}}{34}{crly.6.5.3.2}
-\contentsline {lemma}{{Lemma}{6.5.{4}}{}}{34}{thm.6.5.4}
-\contentsline {defn}{{Definition}{6.6.{1}}{Edge Subdivision}}{34}{defn.6.6.1}
-\contentsline {thm}{{Theorem}{6.6.{1}}{Kurotowski's Theorem}}{34}{thm.6.6.1}
-\contentsline {defn}{{Definition}{6.7.{1}}{Colouring}}{34}{defn.6.7.1}
-\contentsline {thm}{{Theorem}{6.7.{1}}{}}{34}{thm.6.7.1}
-\contentsline {thm}{{Theorem}{6.7.{2}}{}}{34}{thm.6.7.2}
-\contentsline {thm}{{Theorem}{6.7.{3}}{}}{34}{thm.6.7.3}
-\contentsline {defn}{{Definition}{6.7.{2}}{Edge Contraction}}{34}{defn.6.7.2}
-\contentsline {thm}{{Theorem}{6.7.{4}}{}}{35}{thm.6.7.4}
-\contentsline {thm}{{Theorem}{6.7.{5}}{}}{35}{thm.6.7.5}
-\contentsline {defn}{{Definition}{6.8.{1}}{Dual}}{35}{defn.6.8.1}
-\contentsline {defn}{{Definition}{7.1.{1}}{Matching}}{36}{defn.7.1.1}
-\contentsline {defn}{{Definition}{7.1.{2}}{Saturation}}{36}{defn.7.1.2}
-\contentsline {defn}{{Definition}{7.1.{3}}{Maximum Matching}}{36}{defn.7.1.3}
-\contentsline {defn}{{Definition}{7.1.{4}}{Perfect Matching}}{36}{defn.7.1.4}
-\contentsline {remark}{{Remark}{16}{}}{36}{remark.16}
-\contentsline {defn}{{Definition}{7.1.{5}}{Alternating Path}}{36}{defn.7.1.5}
-\contentsline {defn}{{Definition}{7.1.{6}}{Augmenting Path}}{37}{defn.7.1.6}
-\contentsline {lemma}{{Lemma}{7.1.{1}}{}}{37}{thm.7.1.1}
-\contentsline {defn}{{Definition}{7.2.{1}}{Cover}}{37}{defn.7.2.1}
-\contentsline {lemma}{{Lemma}{7.2.{1}}{}}{37}{thm.7.2.1}
-\contentsline {lemma}{{Lemma}{7.2.{2}}{}}{37}{thm.7.2.2}
-\contentsline {thm}{{Theorem}{7.3.{1}}{König's Theorem}}{37}{thm.7.3.1}
-\contentsline {defn}{{Definition}{7.4.{1}}{Neighbour Set}}{38}{defn.7.4.1}
-\contentsline {thm}{{Theorem}{7.4.{1}}{Hall's Theorem}}{38}{thm.7.4.1}
+\contentsline {defn}{{Definition}{1.1.{1}}{Composition, Parts, Weights}}{9}{defn.1.1.1}
+\contentsline {defn}{{Definition}{1.1.{2}}{Binary Strings}}{9}{defn.1.1.2}
+\contentsline {remark}{{Remark}{1}{}}{9}{remark.1}
+\contentsline {defn}{{Definition}{1.2.{1}}{Union \& Disjoint}}{10}{defn.1.2.1}
+\contentsline {remark}{{Remark}{2}{}}{10}{remark.2}
+\contentsline {defn}{{Definition}{1.2.{2}}{Cartesian Product}}{10}{defn.1.2.2}
+\contentsline {defn}{{Definition}{1.2.{3}}{Cartesian Power}}{10}{defn.1.2.3}
+\contentsline {remark}{{Remark}{3}{}}{10}{remark.3}
+\contentsline {thm}{{Theorem}{1.3.{1}}{}}{10}{thm.1.3.1}
+\contentsline {propo}{{Proposition}{1.3.{1}}{Binomial Identities}}{11}{propo.1.3.1}
+\contentsline {defn}{{Definition}{1.4.{1}}{Generating Series}}{11}{defn.1.4.1}
+\contentsline {thm}{{Theorem}{1.4.{1}}{}}{11}{thm.1.4.1}
+\contentsline {defn}{{Definition}{1.5.{1}}{Formal Power Series}}{11}{defn.1.5.1}
+\contentsline {defn}{{Definition}{1.5.{2}}{Additional And Multiplication Rules of Formal Power Series}}{12}{defn.1.5.2}
+\contentsline {thm}{{Theorem}{1.5.{1}}{}}{12}{thm.1.5.1}
+\contentsline {crly}{{Corollary}{1.5.{1}.{1}}{}}{12}{crly.1.5.1.1}
+\contentsline {defn}{{Definition}{1.5.{3}}{Inverse of a Formal Power Series}}{12}{defn.1.5.3}
+\contentsline {remark}{{Remark}{4}{Some important series}}{13}{remark.4}
+\contentsline {thm}{{Theorem}{1.5.{2}}{Unique Existence of the Inverse of a Formal Power Series}}{13}{thm.1.5.2}
+\contentsline {defn}{{Definition}{1.5.{4}}{Composition of Formal Power Series}}{13}{defn.1.5.4}
+\contentsline {thm}{{Theorem}{1.5.{3}}{}}{13}{thm.1.5.3}
+\contentsline {thm}{{Theorem}{1.6.{1}}{Sum Lemma}}{14}{thm.1.6.1}
+\contentsline {remark}{{Remark}{5}{}}{14}{remark.5}
+\contentsline {thm}{{Theorem}{1.6.{2}}{Product Lemma}}{14}{thm.1.6.2}
+\contentsline {defn}{{Definition}{2.1.{1}}{Compositions of an Integer, Parts, and the Empty Composition}}{15}{defn.2.1.1}
+\contentsline {defn}{{Definition}{2.3.{1}}{Concatenation}}{15}{defn.2.3.1}
+\contentsline {defn}{{Definition}{2.3.{2}}{Substring}}{16}{defn.2.3.2}
+\contentsline {defn}{{Definition}{2.3.{3}}{Blocks}}{16}{defn.2.3.3}
+\contentsline {defn}{{Definition}{2.4.{1}}{Ambiguity of an Expression}}{16}{defn.2.4.1}
+\contentsline {thm}{{Theorem}{2.6.{1}}{}}{17}{thm.2.6.1}
+\contentsline {defn}{{Definition}{2.8.{1}}{Recursive Definition}}{17}{defn.2.8.1}
+\contentsline {propo}{{Proposition}{3.1.{1}}{Partial Fractions}}{18}{propo.3.1.1}
+\contentsline {lemma}{{Lemma}{3.1.{1}}{}}{18}{thm.3.1.1}
+\contentsline {lemma}{{Lemma}{3.1.{2}}{}}{18}{thm.3.1.2}
+\contentsline {thm}{{Theorem}{3.1.{3}}{}}{19}{thm.3.1.3}
+\contentsline {thm}{{Theorem}{3.2.{1}}{}}{19}{thm.3.2.1}
+\contentsline {thm}{{Theorem}{3.2.{2}}{}}{19}{thm.3.2.2}
+\contentsline {thm}{{Theorem}{3.3.{1}}{}}{20}{thm.3.3.1}
+\contentsline {remark}{{Remark}{6}{Some heuristics in solving non-homogeneous recurrences}}{20}{remark.6}
+\contentsline {defn}{{Definition}{3.4.{1}}{Binary Trees}}{20}{defn.3.4.1}
+\contentsline {remark}{{Remark}{7}{}}{21}{remark.7}
+\contentsline {remark}{{Remark}{8}{A decomposition of the binary tree}}{21}{remark.8}
+\contentsline {thm}{{Theorem}{3.5.{1}}{The Generalized Binomial Theorem}}{21}{thm.3.5.1}
+\contentsline {remark}{{Remark}{9}{Catalan Numbers}}{21}{remark.9}
+\contentsline {defn}{{Definition}{4.1.{1}}{Graph}}{22}{defn.4.1.1}
+\contentsline {defn}{{Definition}{4.1.{2}}{Adjacency}}{22}{defn.4.1.2}
+\contentsline {defn}{{Definition}{4.1.{3}}{Neighbours}}{22}{defn.4.1.3}
+\contentsline {defn}{{Definition}{4.1.{4}}{Planar}}{22}{defn.4.1.4}
+\contentsline {defn}{{Definition}{4.1.{5}}{Directed graph or Digraph}}{22}{defn.4.1.5}
+\contentsline {defn}{{Definition}{4.1.{6}}{Multigraph}}{22}{defn.4.1.6}
+\contentsline {defn}{{Definition}{4.2.{1}}{Isomorphism}}{23}{defn.4.2.1}
+\contentsline {defn}{{Definition}{4.2.{2}}{Isomorphism Class}}{23}{defn.4.2.2}
+\contentsline {remark}{{Remark}{10}{}}{23}{remark.10}
+\contentsline {defn}{{Definition}{4.2.{3}}{Automorphism and Identity Map}}{23}{defn.4.2.3}
+\contentsline {defn}{{Definition}{4.3.{1}}{Degree}}{23}{defn.4.3.1}
+\contentsline {thm}{{Theorem}{4.3.{1}}{Handshake Lemma}}{23}{thm.4.3.1}
+\contentsline {crly}{{Corollary}{4.3.{1}.{1}}{}}{23}{crly.4.3.1.1}
+\contentsline {crly}{{Corollary}{4.3.{1}.{2}}{}}{23}{crly.4.3.1.2}
+\contentsline {defn}{{Definition}{4.3.{2}}{k-regular Graph}}{24}{defn.4.3.2}
+\contentsline {defn}{{Definition}{4.3.{3}}{Complete Graph}}{24}{defn.4.3.3}
+\contentsline {defn}{{Definition}{4.4.{1}}{Bipartite Graph}}{24}{defn.4.4.1}
+\contentsline {remark}{{Remark}{11}{}}{24}{remark.11}
+\contentsline {defn}{{Definition}{4.4.{2}}{n-cube}}{24}{defn.4.4.2}
+\contentsline {defn}{{Definition}{4.6.{1}}{Subgraph}}{25}{defn.4.6.1}
+\contentsline {defn}{{Definition}{4.6.{2}}{Walk}}{25}{defn.4.6.2}
+\contentsline {defn}{{Definition}{4.6.{3}}{Path}}{25}{defn.4.6.3}
+\contentsline {thm}{{Theorem}{4.6.{1}}{}}{25}{thm.4.6.1}
+\contentsline {crly}{{Corollary}{4.6.{1}.{1}}{}}{25}{crly.4.6.1.1}
+\contentsline {defn}{{Definition}{4.6.{4}}{Cycle}}{25}{defn.4.6.4}
+\contentsline {remark}{{Remark}{12}{Comparison of Path and Cycles}}{25}{remark.12}
+\contentsline {thm}{{Theorem}{4.6.{2}}{}}{26}{thm.4.6.2}
+\contentsline {defn}{{Definition}{4.6.{5}}{Hamilton Cycle}}{26}{defn.4.6.5}
+\contentsline {defn}{{Definition}{4.8.{1}}{Connected}}{26}{defn.4.8.1}
+\contentsline {thm}{{Theorem}{4.8.{1}}{}}{26}{thm.4.8.1}
+\contentsline {defn}{{Definition}{4.8.{2}}{Component}}{26}{defn.4.8.2}
+\contentsline {remark}{{Remark}{13}{}}{27}{remark.13}
+\contentsline {defn}{{Definition}{4.8.{3}}{Edge Cut}}{27}{defn.4.8.3}
+\contentsline {thm}{{Theorem}{4.8.{2}}{}}{27}{thm.4.8.2}
+\contentsline {defn}{{Definition}{4.8.{4}}{Equivalence Class}}{27}{defn.4.8.4}
+\contentsline {defn}{{Definition}{4.9.{1}}{Eulerian Circuit}}{27}{defn.4.9.1}
+\contentsline {defn}{{Definition}{4.9.{2}}{Eulerian Trail}}{27}{defn.4.9.2}
+\contentsline {thm}{{Theorem}{4.9.{1}}{}}{27}{thm.4.9.1}
+\contentsline {remark}{{Remark}{14}{Strategy for finding an Eulerian Circuit}}{28}{remark.14}
+\contentsline {defn}{{Definition}{4.10.{1}}{Bridge}}{28}{defn.4.10.1}
+\contentsline {remark}{{Remark}{15}{}}{28}{remark.15}
+\contentsline {lemma}{{Lemma}{4.10.{1}}{}}{28}{thm.4.10.1}
+\contentsline {thm}{{Theorem}{4.10.{2}}{}}{28}{thm.4.10.2}
+\contentsline {crly}{{Corollary}{4.10.{2}.{1}}{}}{28}{crly.4.10.2.1}
+\contentsline {defn}{{Definition}{5.1.{1}}{Tree}}{30}{defn.5.1.1}
+\contentsline {lemma}{{Lemma}{5.1.{1}}{}}{30}{thm.5.1.1}
+\contentsline {lemma}{{Lemma}{5.1.{2}}{}}{30}{thm.5.1.2}
+\contentsline {defn}{{Definition}{5.1.{2}}{Forest}}{30}{defn.5.1.2}
+\contentsline {defn}{{Definition}{5.1.{3}}{Leaf}}{30}{defn.5.1.3}
+\contentsline {propo}{{Proposition}{5.1.{1}}{}}{30}{propo.5.1.1}
+\contentsline {propo}{{Proposition}{5.1.{2}}{}}{31}{propo.5.1.2}
+\contentsline {defn}{{Definition}{5.2.{1}}{Spanning Trees}}{31}{defn.5.2.1}
+\contentsline {thm}{{Theorem}{5.2.{1}}{}}{31}{thm.5.2.1}
+\contentsline {thm}{{Theorem}{5.2.{2}}{}}{31}{thm.5.2.2}
+\contentsline {thm}{{Theorem}{5.2.{3}}{}}{31}{thm.5.2.3}
+\contentsline {defn}{{Definition}{5.3.{1}}{Odd cycle}}{31}{defn.5.3.1}
+\contentsline {lemma}{{Lemma}{5.3.{1}}{}}{31}{thm.5.3.1}
+\contentsline {thm}{{Theorem}{5.3.{2}}{}}{32}{thm.5.3.2}
+\contentsline {defn}{{Definition}{5.4.{1}}{Minimal Spanning Tree}}{32}{defn.5.4.1}
+\contentsline {thm}{{Theorem}{5.4.{1}}{}}{32}{thm.5.4.1}
+\contentsline {defn}{{Definition}{6.1.{1}}{Planar, Planar Embedding / Planar Map}}{33}{defn.6.1.1}
+\contentsline {defn}{{Definition}{6.1.{2}}{Faces}}{33}{defn.6.1.2}
+\contentsline {defn}{{Definition}{6.1.{3}}{Boundary of a face, Adjacent Faecs, Boundary Walk}}{33}{defn.6.1.3}
+\contentsline {defn}{{Definition}{6.1.{4}}{Degree of a face}}{33}{defn.6.1.4}
+\contentsline {thm}{{Theorem}{6.1.{1}}{colloquially the Faceshaking Lemma}}{33}{thm.6.1.1}
+\contentsline {crly}{{Corollary}{6.1.{1}.{1}}{}}{34}{crly.6.1.1.1}
+\contentsline {thm}{{Theorem}{6.2.{1}}{Euler's Formula}}{34}{thm.6.2.1}
+\contentsline {thm}{{Theorem}{6.3.{1}}{}}{34}{thm.6.3.1}
+\contentsline {propo}{{Proposition}{6.4.{1}}{}}{34}{propo.6.4.1}
+\contentsline {lemma}{{Lemma}{6.4.{1}}{}}{35}{thm.6.4.1}
+\contentsline {lemma}{{Lemma}{6.4.{2}}{}}{35}{thm.6.4.2}
+\contentsline {thm}{{Theorem}{6.4.{3}}{}}{35}{thm.6.4.3}
+\contentsline {lemma}{{Lemma}{6.5.{1}}{}}{35}{thm.6.5.1}
+\contentsline {lemma}{{Lemma}{6.5.{2}}{}}{35}{thm.6.5.2}
+\contentsline {thm}{{Theorem}{6.5.{3}}{}}{35}{thm.6.5.3}
+\contentsline {crly}{{Corollary}{6.5.{3}.{1}}{}}{35}{crly.6.5.3.1}
+\contentsline {crly}{{Corollary}{6.5.{3}.{2}}{}}{36}{crly.6.5.3.2}
+\contentsline {lemma}{{Lemma}{6.5.{4}}{}}{36}{thm.6.5.4}
+\contentsline {defn}{{Definition}{6.6.{1}}{Edge Subdivision}}{36}{defn.6.6.1}
+\contentsline {thm}{{Theorem}{6.6.{1}}{Kurotowski's Theorem}}{36}{thm.6.6.1}
+\contentsline {defn}{{Definition}{6.7.{1}}{Colouring}}{36}{defn.6.7.1}
+\contentsline {thm}{{Theorem}{6.7.{1}}{}}{36}{thm.6.7.1}
+\contentsline {thm}{{Theorem}{6.7.{2}}{}}{36}{thm.6.7.2}
+\contentsline {thm}{{Theorem}{6.7.{3}}{}}{36}{thm.6.7.3}
+\contentsline {defn}{{Definition}{6.7.{2}}{Edge Contraction}}{36}{defn.6.7.2}
+\contentsline {thm}{{Theorem}{6.7.{4}}{}}{37}{thm.6.7.4}
+\contentsline {thm}{{Theorem}{6.7.{5}}{}}{37}{thm.6.7.5}
+\contentsline {defn}{{Definition}{6.8.{1}}{Dual}}{37}{defn.6.8.1}
+\contentsline {defn}{{Definition}{7.1.{1}}{Matching}}{38}{defn.7.1.1}
+\contentsline {defn}{{Definition}{7.1.{2}}{Saturation}}{38}{defn.7.1.2}
+\contentsline {defn}{{Definition}{7.1.{3}}{Maximum Matching}}{38}{defn.7.1.3}
+\contentsline {defn}{{Definition}{7.1.{4}}{Perfect Matching}}{38}{defn.7.1.4}
+\contentsline {remark}{{Remark}{16}{}}{38}{remark.16}
+\contentsline {defn}{{Definition}{7.1.{5}}{Alternating Path}}{38}{defn.7.1.5}
+\contentsline {defn}{{Definition}{7.1.{6}}{Augmenting Path}}{39}{defn.7.1.6}
+\contentsline {lemma}{{Lemma}{7.1.{1}}{}}{39}{thm.7.1.1}
+\contentsline {defn}{{Definition}{7.2.{1}}{Cover}}{39}{defn.7.2.1}
+\contentsline {lemma}{{Lemma}{7.2.{1}}{}}{39}{thm.7.2.1}
+\contentsline {lemma}{{Lemma}{7.2.{2}}{}}{39}{thm.7.2.2}
+\contentsline {thm}{{Theorem}{7.3.{1}}{König's Theorem}}{39}{thm.7.3.1}
+\contentsline {defn}{{Definition}{7.4.{1}}{Neighbour Set}}{40}{defn.7.4.1}
+\contentsline {thm}{{Theorem}{7.4.{1}}{Hall's Theorem}}{40}{thm.7.4.1}

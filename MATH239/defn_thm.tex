@@ -17,6 +17,8 @@
 % Theorem Style Customization
 \setlength\theorempostskipamount{5ex}
 
+\usepackage{hyperref}
+
 % ntheorem Declarations
 \theoremstyle{break}
 \newtheorem{thm}{Theorem}[section]
@@ -31,29 +33,54 @@
 % Shortcuts
 \newcommand{\bb}[1]{\mathbb{#1}}		% using bb instead of mathbb
 
-% ntheorem Listing style
-\newtheoremlisttype{list}
-	{\begin{trivlist}\item}
-	{\item[##2]\ ##3\dotfill ##4}
-	{\end{trivlist}}
+% ntheorem listtheorem style
+\makeatletter
+	% Definition List Style
+\def\thm@@thmline@name#1#2#3#4{%
+        \@dottedtocline{-2}{0em}{2.3em}%
+                   {\makebox[\widesttheorem][l]{\protect\numberline{#2}}#3}%
+                   {#4}}
+\@ifpackageloaded{hyperref}{
+\def\thm@@thmline@name#1#2#3#4#5{%
+    \ifx\\#5\\%
+        \@dottedtocline{-2}{0em}{2.3em}%
+            {\makebox[\widesttheorem][l]{\protect\numberline{#2}}#3}%
+            {#4}
+    \else
+        \ifHy@linktocpage\relax\relax
+            \@dottedtocline{-2}{0em}{2.3em}%
+                {\makebox[\widesttheorem][l]{\protect\numberline{#2}}#3}%
+                {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
+        \else
+            \@dottedtocline{-2}{0em}{2.3em}%
+                {\hyper@linkstart{link}{#5}%
+                  {\makebox[\widesttheorem][l]{\protect\numberline{#2}}#3}\hyper@linkend}%
+                    {#4}%
+        \fi
+    \fi}
+}
+\makeatother
+
+\newlength\widesttheorem
+\AtBeginDocument{
+  \settowidth{\widesttheorem}{Proposition 1.1.1.1\quad}
+}
 
 % Main Body
 \title{MATH239 Review for All Definitions and Theorems by Chapter and Section}
 \author{Johnson Ng}
-
-\usepackage{hyperref}
 
 \begin{document}
 \maketitle
 \tableofcontents
 
 \chapter*{List of Definitions}
-\theoremlisttype{all}
+\theoremlisttype{allname}
 \listtheorems{defn}
 
 \chapter*{List of Theorems}
-\theoremlisttype{all}
-\listtheorems{lemma, thm, crly, propo}
+\theoremlisttype{allname}
+\listtheorems{lemma,thm,crly,propo}
 
 \chapter{Combinatorial Analysis}
 

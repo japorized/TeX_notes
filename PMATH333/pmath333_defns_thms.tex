@@ -41,23 +41,23 @@
 \makeatletter
 \def\thm@@thmline@name#1#2#3#4{%
         \@dottedtocline{-2}{0em}{2.3em}%
-                   {\makebox[\widesttheorem][l]{\protect\numberline{#2}}#3}%
+                   {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
                    {#4}}
 \@ifpackageloaded{hyperref}{
 \def\thm@@thmline@name#1#2#3#4#5{%
     \ifx\\#5\\%
         \@dottedtocline{-2}{0em}{2.3em}%
-            {\makebox[\widesttheorem][l]{\protect\numberline{#2}}#3}%
+            {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
             {#4}
     \else
         \ifHy@linktocpage\relax\relax
             \@dottedtocline{-2}{0em}{2.3em}%
-                {\makebox[\widesttheorem][l]{\protect\numberline{#2}}#3}%
+                {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
                 {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
         \else
             \@dottedtocline{-2}{0em}{2.3em}%
                 {\hyper@linkstart{link}{#5}%
-                  {\makebox[\widesttheorem][l]{\protect\numberline{#2}}#3}\hyper@linkend}%
+                  {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}\hyper@linkend}%
                     {#4}%
         \fi
     \fi}
@@ -65,7 +65,7 @@
 \makeatother
 \newlength\widesttheorem
 \AtBeginDocument{
-  \settowidth{\widesttheorem}{Proposition 10\quad}
+  \settowidth{\widesttheorem}{Proposition A.1.1.1\quad}
 }
 
 \theoremlisttype{allname}
@@ -74,7 +74,7 @@
 \newcommand{\bb}[1]{\mathbb{#1}}		% using bb instead of mathbb
 
 % Main Body
-\title{UW W17 PMATH333: Definitions and Theorems}
+\title{UW W17 PMATH333 - Definitions and Theorems}
 \author{Johnson Ng}
 
 \begin{document}
@@ -87,11 +87,11 @@
 
 \chapter*{List of Theorems}
 \theoremlisttype{allname}
-\listtheorems{lemma, thm, crly, propo}
+\listtheorems{lemma,thm,crly,propo}
 
 \appendix
 
-\chapter{Zermelo-Fraenkel Set Theory and the Axiom of Choice}
+\chapter{ZF Set Theory and the Axiom of Choice}
 \section{Introduction}
 \begin{eg}[Russel's Paradox]\label{russel_paradox}
 	Let X be the set of all sets, and let $S = \{ A \in X | A \notin A\}$.\\
@@ -110,6 +110,9 @@ To ensure that mathematical paradoxes (like the above) can no longer arise, math
 \end{enumerate}
 
 In the remainder of this appendix, we shall look more into the first 2 questions.
+
+
+\section{ZFC Axioms of Set Theory}
 
 \begin{defn}[Mathematical Symbols]
 	We allow ourselves to use only the following symbols from the following symbol set: \\
@@ -191,14 +194,8 @@ In the remainder of this appendix, we shall look more into the first 2 questions
 		\item Power Set Axiom: If u is a set then $\mathcal{P}(u) = \{v : v \in u\}$ is a set.
 		\item Axiom of Infinity: If we define the natural numbers to be the sets $0 = \emptyset, 1 = \{0\}, 2 = \{0, 1\}, 3 = \{0, 1, 2\}$ and so on, then $\bb{N} = \{0, 1, 2, 3, ...\}$ is a set.
 		\item Replacement Axiom: If u is a ste and F(x, y) is a statement about x and y with the property that $\forall x \> \exists! y \> F(x,y)$ then $\{y : \exists x \in u \> F(x,y)\}$ is a set.
-		\item Axiom of Choice: Given a set u of non-empty pairwise disjoint sets, there exists a set which contains exactly one element from each of the sets in u, i.e.
+		\item Axiom of Choice: Given a set u of non-empty pairwise disjoint sets, there exists a set which contains exactly one element from each of the sets in u.
 	\end{itemize}
-
-	We may write the Axiom of Choice symbolically as:
-	\begin{gather*}
-		\forall i \in \bb{N} \quad u_i \neq \emptyset \quad \forall j \neq i \in \bb{N} \quad u_i \cap u_j = \emptyset\\
-		\exists v = \{x_1, x_2, x_3, ... : \forall k \in \bb{N}, x_k \in u_k \}
-	\end{gather*}
 \end{remark}
 
 \begin{defn}[Empty Set Axiom]
@@ -215,7 +212,7 @@ In the remainder of this appendix, we shall look more into the first 2 questions
 	\]
 \end{defn}
 
-\begin{thm}
+\begin{thm}[Uniqueness of the Empty Set]
 	The empty set is unique.
 \end{thm}
 
@@ -264,10 +261,362 @@ In the remainder of this appendix, we shall look more into the first 2 questions
 	\]Given two sets u and v, we define the union of u and v to be the set
 	\[
 		u \cup v := \bigcup \{u, v\}.
-	\]Given three sets u, v, and w, note that \{z\} = \{z, z\} is a set and so $\{x, y, z\} = \{x, y\} \cup \{z\}$ is also a set. More generally, if $u_1, u_2, ..., u_n$ are sets then $\{u_1, u_2, ..., u_n\}$ is a set and we define the union of the sets $u_1, u_2, ..., u_n$ to be
+	\]
+	Given three sets u, v, and w, note that \{z\} = \{z, z\} is a set and so $\{x, y, z\} = \{x, y\} \cup \{z\}$ is also a set. More generally, if $u_1, u_2, ..., u_n$ are sets then $\{u_1, u_2, ..., u_n\}$ is a set and we define the union of the sets $u_1, u_2, ..., u_n$ to be
 	\[
 		u_1 \cup u_2 \cup \hdots \cup u_n = \bigcup_{k = 1}^{n} u_k = \bigcup \{u_1, u_2, ..., u_n\}
 	\]
+\end{defn}
+
+\begin{defn}[Intersection]
+	Given a st u, we define the intersection of the elements in u to be the set
+	\[
+		\bigcap u = \biggl\{ x \in \bigcup u \> \Big| \> \forall v (v \in u \implies x \in v) \biggr\}
+	\] Given two sets u and v, we define the intersection of u and v to be the set
+	\[
+		u \cap v = \bigcap \{u, v\}
+	\] and more generally, given sets $u_1, u_2, ..., u_n$, we define the intersection of $u_1, u_2, ..., u_n$ to be the set
+	\[
+	 	u_1 \cap u_2 \cap \hdots \cap u_n = \bigcap_{k=1}^{n} u_k = \bigcap \{u_1, u_2, ..., u_n\}
+	\] 
+\end{defn}
+
+\begin{defn}[Power Set Axiom]
+	The Power Set Axiom is the formula
+	\[
+		\forall u \> \exists w \> \forall v (v \in w \iff v \subseteq u)
+	\]
+\end{defn}
+
+\begin{defn}[Power Set]
+	Given a set u, the set w is with the property that $\forall v (v \in w \iff v \subseteq u)$ (which exists by the Power Set Axiom and is unique by the Extension Axiom) is called the power set of u and is denoted by $\mathcal{P}(u)$, so we have
+	\[
+		\mathcal{P}(u) = \{v | v \subseteq u\}
+	\]
+\end{defn}
+
+\begin{defn}[Ordered Pair]
+	Given two sets x and y, we define the ordered pair (x, y) to be the set
+	\[
+		(x, y) = \{\{x\}, \{x, y\}\}.
+	\]
+	Given two sets u and v, note that if $x \in u$ and $y \in v$ then we have $\{x\} \in \mathcal{P}(u \cup v)$ and $\{x, y\} \in \mathcal{P}(u \cup v)$ and so $(x, y) = \{\{x\}, \{x, y\}\} \in \mathcal{P}(\mathcal{P}(u \cup v))$. We define the product $u \times v$ to be the set
+	\[
+		u \times v = \{(x, y) | x \in u \land y \in v\},
+	\] i.e.
+	\[
+		u \times v = \Bigr\{ z \in \mathcal{P}(\mathcal{P}(u \cup v)) | \exists x \exists y \big( (x \in u \land y \in v) \land z = (x, y) \big) \Bigr\}
+	\]
+\end{defn}
+
+\begin{defn}[Successor, Inductive]
+	We define
+	\[
+		0 = \emptyset, \quad	1 = \{0\}, \quad	2 = \{0, 1\} = 1 \cup \{1\}, \quad	3 = \{0, 1, 2\} = 2 \cup \{2\},
+	\] and so on. For a set x, we define the successor of x to be the set
+	\[
+		x + 1 = x \cup \{x\}.
+	\] A set u is called inductive when it has the property that
+	\[
+		(0 \in u \land \forall x (x \in u \implies x + 1 \in u))
+	\]
+\end{defn}
+
+\begin{defn}[Axiom of Infinity]
+	The Axiom of Infinity is the formula
+	\[
+		\exists u (0 \in u \land \forall x (x \in u \implies x + 1 \in u))
+	\] so the Axiom of Infinity states that there exists an inductive set.
+\end{defn}
+
+\begin{thm}[Existence \& Uniqueness of an Inductive Set]
+	$\exists w := \{x | x \in v \text{ for every inductive set v }\}$ \\
+	Moreover, this set w is an inductive set.
+\end{thm}
+
+\begin{defn}[Natural Numbers]
+	The unique set w in the above theorem is called the set of natural numbers, and we denote it by $\bb{N}$. We write
+	\begin{align*}
+		\bb{N} &= \{x | x \in v \text{ for every inductive set v }\} \\
+			   &= \{0, 1, 2, 3, ...\}
+	\end{align*}
+	For $x, y \in \bb{N}$, we write x < y when $x \in y$ and write $x \leq y$ when $x < y \lor x = y$.
+\end{defn}
+
+\begin{remark}
+	For a formula F, we write $\forall x \in u \> F$ as a shorthand notation for the formula $\forall x (x \in u \implies F)$. Similarly, we write $\exists x \in u \> F$ as a shorthand notation for $\exists x (x \in u \land F)$
+\end{remark}
+
+\begin{thm}[Principle of Induction]
+	Let F(x) be a statement about x. SPS that
+	\begin{enumerate}
+		\item F(0), and
+		\item $\forall x \in \bb{N} (F(x) \implies F(x+1))$.
+	\end{enumerate}
+	Then $\forall x \in \bb{N} \> F(x)$
+\end{thm}
+
+\begin{remark}
+	The expression F(0) is short for $\forall x (x = 0 \implies F(x))$, which in turn is short for $\forall x (\forall y \> \neg y \in x \implies F(x))$.Similarly, F(x + 1) is short for the formula $\forall y (y = x + 1 \implies F(y))$, where F(y) is short for $\forall x (x = y \implies F(x))$.
+\end{remark}
+
+\begin{defn}[Replacement Axiom]
+	Given a statement F(x, y) about x and y, the following formula is an axiom:
+	\[
+		\forall u \Big( \forall x \exists! y \> F(x,y) \implies \exists w \forall y \big( y \in w \iff \exists x \in u \> F(x, y) \big) \Big)
+	\]
+	where $\exists! y \> F(x, y)$ is short for $\exists y \Big(F(x, y) \land \forall z \big(F(x, z) \implies z = y)\Big)$ with F(x ,z) short for the formula $\forall y (y = z \implies F(x, y))$. More generally, given a statement $F(x, y, u_1, ..., u_n)$ about $x, y, u_1, ..., u_n$ with $n \geq 0$, the following formula is an axiom:
+	\[
+		\forall u \forall u_1 \hdots \forall u_n \Big( \forall x \exists!y \> F(x, y, u_1, ..., u_n) \implies \exists w \forall y \big( y \in w \iff \exists x \in u \> F(x, y, u_1, ..., u_n) \big) \Big)
+	\]
+	An axiom of this form is called a Replacement Axiom.
+\end{defn}
+
+\begin{defn}[Axiom of Choice]
+	The Axiom of Choice is the formula given by
+	\[
+		\forall u \Big( \big( \neg \phi \in u \land \forall x \in u \> \forall y \in u (\neg x = y \implies x \cap y = \emptyset) \big) \implies \exists w \forall v \in u \> \exists!x \in v \> x \in w \Big)
+	\]
+\end{defn}
+
+From this point on, we will be using upper-case letters to denote sets, instead of lower-case as per the statements above.
+
+
+\section{Relations, Equivalence Relations, Functions and Recursion}
+
+\begin{defn}[Binary Relation]
+	A binary relation R on a set X is a subset $R \subseteq X \times X$. More generally, a binary relation is any set R whose elements are ordered pairs. For a binary relation R, we usually write xRy instead of $(x, y) \in R$.
+\end{defn}
+
+\begin{defn}[Domain, Range, Image, Inverse Image, Inverse, Composition]
+	Let R and S be binary relations. \\
+	The domain of R is
+	\[
+		\text{Domain}(R) = \{x | \exists y \> xRy\}
+	\]
+	and the range of R is
+	\[
+		\text{Range}(R) = \{x | \exists y \> xRy\}.
+	\]
+	For any set A, the image of A under R is
+	\[
+		R(A) = \{y | \exists x \in A \> xRy\}
+	\]
+	and the inverse image of A under R is
+	\[
+		R^{-1}(A) = \{x | \exists y \in A \> xRy\}.
+	\]
+	The inverse of R is
+	\[
+		R^{-1} = \{(y, x) | (x, y) \in R\}
+	\]
+	and the composition S composed with R is
+	\[
+		S \circ R = \{(x, z) | \exists y \> xRy \land ySz \}
+	\]
+\end{defn}
+
+\begin{thm}[Domain, Range, Image and Inverse Image as Sets]
+	Let A be a set and let R be a binary relation. Then Domain(R), Range(R), R(A) and $R^{-1}(A)$ are sets.
+\end{thm}
+
+\begin{thm}[Inverse and Composition as Binary Relations]
+	Let A be a set and let R and S be binary relations. Then $R^{-1}$ and $S \circ R$ are binary relations.
+\end{thm}
+
+\begin{defn}[Equivalence Relation]
+	An equivalence relation on a set X is a binary relation R on X such that
+	\begin{enumerate}
+		\item R is $\textbf{reflexive}$, i.e. $\forall x \in X \> xRx$
+		\item R is $\textbf{symmetric}$, i.e. $\forall x, y \in X \> (xRy \implies yRx)$, and
+		\item R is $\textbf{transitive}$, i.e. $\forall x, y, z \in R \> \big( (xRy \land yRz) \implies xRz \big)$.
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Equivalence Class]
+	Let R be an equivalence relation on the set X. For $a \in X$, the equivalence class of a modulo R is the set
+	\[
+		[a]_R = \{x \in X | xRa \}
+	\]
+\end{defn}
+
+\begin{defn}[Partition]
+	A partition of a set X is a set S of non-empty pairwise disjoint sets whose union is X, that is a set S such that
+	\begin{enumerate}
+		\item $\forall X, Y \in S \> (X \neq Y \implies X \cap Y = \emptyset)$
+		\item $\bigcup S = X$.
+	\end{enumerate}
+\end{defn}
+
+\begin{thm}[Correspondence of Equivalence Relations and Partitions]
+	Given a set X, we have the following correspondence between equivalence relations on X and partitions of X.
+	\begin{enumerate}
+		\item Given an equivalence relation R on X, the set of all equivalence classes
+		\[
+			S_R = \{[a]_R | a \in X\}
+		\] is a partition of X.
+		\item Given a partition S of X, the relation $R_S$ on X is defined by
+		\[
+			R_S = \{(x, y) \in X \times X | \exists A \in S (x \in A \land y \in A)\}
+		\] is an equivalence relation on X.
+		\item Given an equivalence relation R on X we have $R_{S_R} = R$, and a given partition S of X, we have $S_{R_S} = S$.
+	\end{enumerate}
+\end{thm}
+
+\begin{note}[Set of All Equivalence Classes]
+	Given an equivalence relation R on X, the set of all equivalence classes, which we denote by $S_R$ in the above theorem, is usually denoted by $X/R$, so
+	\[
+		X/R = \{[a]_R | a \in X\}
+	\]
+\end{note}
+
+\begin{defn}[Set of Representatives]
+	Let R be an equivalence relation. A set of representatives for R is a subset of X which contains exactly one element from each equivalence class in X/R.
+\end{defn}
+
+\begin{remark}
+	Notice that the AC is equivalent to the statement that every equivalence relation has a set of representatives.
+\end{remark}
+
+\begin{defn}[Function]
+	Get sets X and Y, a function from X to Y is a binary relation $f \subseteq X \times Y$ with the property that
+	\[
+		\forall x \in X \> \exists! y \in Y \> (x,y) \in f
+	\]
+	More generally, a function is a binary relation with the property that
+	\[
+		\forall x \in Domain(f) \> \exists! y \> (x, y) \in f.
+	\]
+	For a function f, we usually write y = f(x) instead of xfy. It is customary to use the notation $f: X \mapsto Y$ when X = Domain(f) and Y is any set with $Range(f) \subseteq Y$.
+\end{defn}
+
+\begin{defn}[One-to-one \& Onto]
+	Let $f: X \mapsto Y$. THe function f is called one-to-one (or injective) when
+	\[
+		\forall y \in Y \> \exists \text{ at most one } x \in X \> y = f(x)
+	\]
+	and f is called onto (or surjective) when
+	\[
+		\forall y \in Y \> \exists \text{ at least one } x \in X \> y = f(x)
+	\]
+\end{defn}
+
+\begin{defn}[Left and Right Inverses]
+	Let $f: X \mapsto Y$. Let $I_X$ and $I_Y$ denote the identity function on X and Y respectively. A left inverse of f is a function $g: Y \mapsto X$ such that $g \circ f = I_X$. A right inverse of f is a function $H: X \mapsto Y$ such that $f \circ H = I_Y$. Note that if f has a left inverse g and a right inverse H, then we have $g = g \circ I_Y = g \circ f \circ H = I_X \circ H = H$. In this case, we say that g is the (unique two-sided) inverse of f.
+\end{defn}
+
+\begin{thm}[Surjective and Injective VS Inverses]
+	Let $f: X \mapsto Y$. Then
+	\begin{enumerate}
+		\item f is one-to-one if and only if f has a left inverse.
+		\item f is onto if and only if f has a right inverse.
+		\item f is one-to-one and onto if and only if f has a (two-sided) inverse.
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}[Invertible]
+	A function $f: X \mapsto Y$ is called invertible (or bijective) when it is one-to-one and onto, or equivalently, when it has a (unique two-sided) inverse.
+\end{defn}
+
+\begin{thm}[The Recursion Theorem]\label{recursion_theorem}
+	\begin{enumerate}
+		\item Let A be a set, let $a \in A$, and let $g : A \times \bb{N} \mapsto A$. Then there exists a unique function $f: \bb{N} \mapsto A$ such that
+		\[
+			f(0) = a \text{ and } f(n+1) = g(f(n), n) \text{ for all } n \in \bb{N}
+		\]
+		\item Let A and B be sets, let $g: A \mapsto B$, and let $h: A \times B \times \bb{N} \mapsto B$. Then there exists a unique function $f:A \times \bb{N} \mapsto B$ such that for all $a \in A$ we have
+		\[
+			f(a, 0) = g(a) \text{ and } f(a, n + 1) = h(a, f(a, n), n) \text{ for all } n \in \bb{N}
+		\]
+	\end{enumerate}
+\end{thm}
+
+
+\section{Construction of Integers, Rational, Real and Complex Numbers}
+
+\begin{defn}[Sum and Product]
+	By Part(2) of the \hyperref[recursion_theorem]{Recursion Theorem}, there is a unique function $s: \bb{N} \times \bb{N} \mapsto \bb{N}$ such that for all $a, b \in \bb{N}$ we have
+	\[
+		s(a, 0) = a, \quad s(1, b + 1) = s(a, b) + 1.
+	\]
+	We call s(a, b) the sum of a and b $\in \bb{N}$ and write it as
+	\[
+		a + b = s(a, b).
+	\]
+	Also, there is a unique function $p: \bb{N} \times \bb{N} \mapsto \bb{N}$ such that for all a, b $\in \bb{N}$ we have
+	\[
+		p(a, 0) = 0, \quad p(a, b + 1) = p(a, b) + a
+	\]
+	We call p(a, b) the product of a and b in $\bb{N}$, and we write it as
+	\[
+		a \cdot b = p(a, b)
+	\]
+\end{defn}
+
+\begin{defn}[Integers]
+	We define the set of integers to be the set
+	\[
+		\bb{Z} = (\bb{N} \times \bb{N})/R
+	\]
+	where R is the equivalence relation given by
+	\[
+		(a, b)R(c,d) \iff a + d = b + c
+	\]
+	For [(a, b)] and [(c,d)] in $\bb{Z}$, we define
+	\begin{gather*}
+		[(a, b)] \leq [(c, d)] \iff b + c \leq a + d \\
+		[(a, b)] + [(c ,d)] \iff [(a + c, b + d)] \\
+		[(a, b)] \cdot [(c, d)] = [(ac + bd, ad + bc)]
+	\end{gather*}
+	For $n \in \bb{N}$ we write n = [(n, 0)] and -n = [(0, n)], so that every element of $\bb{Z}$ can be written as $\pm n$ for some $n \in \bb{N}$, and we can identity $\bb{N}$ with a subset of $\bb{Z}$
+\end{defn}
+
+\begin{defn}[Rational Numbers]
+	We define the set of reational numbers to be the set
+	\[
+		\bb{Q} = (\bb{N} \times \bb{Z}^+)/R
+	\]
+	where $\bb{Z}^+ = \{x \in \bb{N} | x \neq 0\}$ and R is the equivalence relation given by
+	\[
+		(a, b)R(c, d) \iff ad = bc
+	\]
+	For [(a, b)] and [(c, d)] in $\bb{Q}$ we define
+	\begin{gather*}
+		[(a, b)] \leq [(c, d)] \iff a \cdot d \leq b \cdot c \\
+		[(a, b)] + [(c ,d)] \iff [(a \cdot d + b \cdot c, b \cdot d)] \\
+		[(a, b)] \cdot [(c, d)] = [(ac, bd)]
+	\end{gather*}
+	For $a \in \bb{N}$ and $b \in \bb{Z}^+$, it is customary to write $\frac{a}{b} = [(a, b)]$. Also for $a \in \bb{Z}$ we write a = [(a, 1)], and we identify $\bb{Z}$ with a subset of $\bb{Q}$
+\end{defn}
+
+\begin{defn}[Real Numbers]
+	We define the set of real numbers of the the set
+	\[
+		\bb{R} = \{x \subseteq \bb{Q} | x \neq \emptyset, x \neq \bb{Q}, \forall a \in x \> \forall b \in \bb{Q}(b \leq a \implies b \in x), \forall a \in x \> \exists b \in x \> a < b \}
+	\]
+	For $x, y \in \bb{R}$ we define
+	\begin{gather*}
+		x \leq y \iff x \subseteq y \\
+		x + y = \{ a + b | a, b \in \bb{Q}, a \in x, b \in y\}
+	\end{gather*}
+	For $0 \leq x, y \in \bb{R}$ we define
+	\[
+		x \cdot y = \{ a \cdot b | 0 \leq a, b \in \bb{Q}, a \in x, b \in y\} \cup \{c \in \bb{Q} | c < 0\},
+	\]
+	and YOU can try to, similarly, define $x \cdot y$ in the case that x < 0 and y < 0.
+\end{defn}
+
+\begin{defn}[Complex Numbers]
+	We define the set of complex numbers to be the set
+	\[
+		\bb{C} = \bb{R} \times \bb{R}.
+	\]
+	We define addition and multiplication in $\bb{C}$ by
+	\begin{align*}
+		(a, b) + (c, d) &= (a + c, b + d) \\
+		(a, b) \cdot (c, d) &= (ac - bd, ad + bc).
+	\end{align*}
+	We write $i = (0, 1).$ For $x \in \bb{R}$ we write x = (x, 0) and identify $\bb{R}$ with a subset of $\bb{C}$.
 \end{defn}
 
 \end{document}
