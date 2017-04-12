@@ -89,9 +89,58 @@
 \theoremlisttype{allname}
 \listtheorems{lemma,thm,crly,propo}
 
+
+\chapter{The Real Number System}
+
+\section{Ordered Field Axioms}
+Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notations that are introduced in Appendix A. We will also introduce one more notation.
+
+\begin{defn}[Removal]
+	Let A and B be sets. The set A remove B, denoted as $A \setminus B$, is the set
+	\[
+		A \setminus B = \{ x | x \in A \land x \notin B \}
+	\]
+\end{defn}
+
+\begin{defn}[Disjoint]
+	Let A and B be sets. We say that A and B are disjoint when $A \cap B = \emptyset$
+\end{defn}
+
+\begin{thm}[Properties of Sets]
+	Let $A, B, C \subseteq X$. Then
+	\begin{enumerate}
+		\item (Idempotence) $A \cup A = A, A \cap A = A$
+		\item (Identity) $A \cup \emptyset = A, A \cap \emptyset = \emptyset, A \cup X = X, A \cap X = A$
+		\item (Associativity) $(A \cup B) \cup C = A \cup (B \cup C)$ and $(A \cap B) \cap C = A \cap (B \cap C)$
+		\item (Commutativity) $A \cup B = B \cup A$ and $A \cap B = B \cap A$
+		\item (Distributivity) $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$ and $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
+		\item (De Morgan's Laws) $X \setminus (A \cup B) = (X \setminus A) \cap (X \setminus B)$ and $X \setminus (A \cap B) = (X \setminus A) \cup (X \setminus B)$
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}[Intervals]
+	For $a, b \in \bb{R}$ with $a \leq b$ we write
+	\begin{center}
+		\begin{tabular}{c c}
+			$(a, b) = \{x \in \bb{R} | a < x < b\}$,	&	$[a, b] = \{x \in \bb{R} | a \leq x \leq b \}$,\\
+			$(a, b] = \{x \in \bb{R} | a < x \leq b \}$,	&	$[a, b) = \{x \in \bb{R} | a \leq x < b \}$,\\
+			$(a, \infty) = \{x \in \bb{R} | a < x \}$,	&	$[a, \infty) = \{x \in \bb{R} | a \leq x\}$,\\
+			$(-\infty, b) = \{x \in \bb{R} | x \leq b\}$,	&	$(-\infty, b] = \{x \in \bb{R} | x < b\}$,\\
+			\multicolumn{2}{c}{$(-\infty, \infty) = \bb{R}$}
+		\end{tabular}
+	\end{center}
+
+	An interval in $\bb{R}$ is any set of one of the above forms. In the case that a = b, we have $(a, b) = [a, b) = (a, b] = \emptyset$ and $[a, b] = \{a\}$, and these intervals are called $\textbf{denegerate}$ intervals. The intervals $\emptyset, (a, b), (a, \infty), (-\infty, b) \text{ and } (\infty, \infty)$ are called open intervals. The intervals $\emptyset, [a, b], [a, \infty), (-\infty, b] \text{ and } (-\infty, \infty)$ are called closed intervals.
+\end{defn}
+
+\begin{remark}
+	Note on how the intervals $\emptyset$ and $(-\infty, \infty)$ are both open and closed intervals.
+\end{remark}
+
+% Appendix Begins
 \appendix
 
-\chapter{ZF Set Theory and the Axiom of Choice}
+\chapter{ZF Set Theory and the Axiom of Choice}\label{apdxA}
 \section{Introduction}
 \begin{eg}[Russel's Paradox]\label{russel_paradox}
 	Let X be the set of all sets, and let $S = \{ A \in X | A \notin A\}$.\\
