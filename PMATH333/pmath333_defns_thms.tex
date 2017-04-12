@@ -72,6 +72,8 @@
 
 % Shortcuts
 \newcommand{\bb}[1]{\mathbb{#1}}		% using bb instead of mathbb
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}	% simplifying the writing of a floor function
+\newcommand{\ceiling}[1]{\lceil #1 \rceil}	% simplifying the writing of a ceiling function
 
 % Main Body
 \title{UW W17 PMATH333 - Definitions and Theorems}
@@ -79,6 +81,10 @@
 
 \begin{document}
 \maketitle
+
+\chapter*{Preface}
+PMATH333 is offered as a course that attempts to bridge the gap for students who have taken the regular math courses instead of the advanced math courses, in particular for MATH147, MATH148 and MATH247 in UW. This set of notes is taken from the W2017 term.
+
 \tableofcontents
 
 \chapter*{List of Definitions}
@@ -136,6 +142,259 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 \begin{remark}
 	Note on how the intervals $\emptyset$ and $(-\infty, \infty)$ are both open and closed intervals.
 \end{remark}
+
+\begin{defn}[Ring]
+	A ring is a set F with two distinct elements $0, 1 \in F$ and two binary operations + and $\cdot$ such that
+	\begin{enumerate}
+		\item (Additive Associativity) For all $x, y, z \in F$ we have (x + y) = z = x + (y + z),
+		\item (Additive Commutativity) For all $x, y \in F$ we have x + y = y + x,
+		\item (Additive Identity) For all $x \in F$ we have 0 + x = x.
+		\item (Additive Inverse) $\forall x \in F \> \exists! y \in F \> x + y = 0$
+		\item (Multiplicative Associativity) $\forall x, y, z \in F$ we have $(x \cdot y) \cdot z = x \cdot (y \cdot z)$,
+		\item (Multiplicative Identity) $\forall x \in F$ we have $1 \cdot x = x = x \cdot 1$,
+		\item (Distributivity) $\forall x, y, z \in F$ we have $x \cdot (y + z) = (x \cdot y) + (x \cdot z)$
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Commutative Ring]
+	A ring F is a commutative ring if it has the following (additional) property: \\
+	(Multiplicative Commutativity) $\forall x, y \in F$ we have $x \cdot y = y \cdot x$.
+\end{defn}
+
+\begin{defn}[Field]
+	A commutative ring F is a field if it has the following (additional) property: \\
+	(Multiplicative Inverse) $\forall x \neq 0 \in F \> \exists! y \in F$ such that $x \cdot y = 1$.
+\end{defn}
+
+\begin{remark}
+	For the sake of simplicity, we will write $x \cdot y = xy$ for any x and y.
+\end{remark}
+
+\begin{thm}[$\bb{Q} \text{ and } \bb{R}$ as Fields]
+	$\bb{Q} \text{ and } \bb{R}$ are fields.
+\end{thm}
+
+\begin{remark}
+	Note that $\bb{Z}$ and $\bb{N}$ are not fields since their elements do have have a multiplicative inverse. They are, however, commutative rings.
+\end{remark}
+
+\begin{remark}[Some shorthand notations]
+	Let F be a friend and let $a ,b \in F$. We denote the unique additive inverse of a by -a and we write a - b = a + (-b). When $a \neq -$, we denote the unique multiplicatie inverse of a by $a^{-1}$ and we write $b \div a = \frac{b}{a} = ba^{-1}$.
+\end{remark}
+
+\begin{thm}[Cancellations \& Identities]
+	Lt F be a field. Then $\forall x, y z \in F$ we have
+	\begin{enumerate}
+		\item (Additive Cancellation) $x + y = x + z \implies x = z$
+		\item (Uniqueness of Additive Identity) $x + y = x \implies y = 0$
+		\item (Multiplicative Cancellation) $xy = xz \implies (x = 0 \lor y = z)$
+		\item (Uniqueness of Multiplicative Identity) $xy = x \implies y = 1$
+		\item (No Zero Divisors) $xy = 0 \implies (x = 0 \lor y = 0)$
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Properties of Fields]
+	Let F be a field. Then for all $x, y \in F$ we have
+	\begin{center}
+		\begin{tabular}{c c c c}
+			$0 \cdot x = 0$	&	-(-x) = x 	&	-(x + y) = -x - y 	&	(-1)x = x \\
+			(-x)y = -(xy) &	(-x)(-y) = xy &	$(a^{-1})^{-1} = a$	&	$(ab)^{-1} = a^{-1}b^{-1}$ \\
+			\multicolumn{4}{c}{$(-a)^{-1} = -a^{-1}$}
+		\end{tabular}
+	\end{center}
+\end{thm}
+
+\begin{defn}[Order]
+	An order on a set X is a binary relation $\leq$ on X such that
+	\begin{enumerate}
+		\item (Totality) $\forall x, y \in X (x \leq y \lor y \leq x)$
+		\item (Antisymmetry) $\forall x, y \in X \> (x \leq y \land y \leq x) \implies x = y$
+		\item (Transitivity) $\forall x, y, z \in X \> (x \leq y \land y \leq z) \implies x \leq z$
+	\end{enumerate}
+\end{defn}
+
+\begin{remark}[Order defined using the $<$ operator]
+	Note that we may also make a definition of the above using < instead of $\leq$. Then the properties that will define an order will be:
+	\begin{enumerate}
+		\item (Trichotomy Property) $\forall x, y \in X (x < y \lor y < x \lor x = y)$
+		\item (Transitive Property) $\forall x, y, z \in X (x < y \land y < z) \implies x < z$
+		\item (Additive Property) $\forall x, y, z \in X \> x < y \implies x + z < y + z$
+		\item (Multiplicative Property) $\forall a, b, c \in X$ we have
+		\begin{enumerate}
+			\item $a < b \land c > 0 \implies ac < bc$ 
+			\item $a < b \land c < 0 \implies bc < ac$
+
+		\end{enumerate}
+	\end{enumerate}
+\end{remark}
+
+\begin{remark}[Non-negative and Non-positive]
+	 Let $a \in \bb{R}$. We say that a is non-negative when $0 \leq a$ and that a is non-positive $a \leq 0$.
+\end{remark}
+
+\begin{remark}
+	Some ways of writing the order symbol. Let $a, b, c \in \bb{R}$
+	\begin{itemize}
+		\item b > a is equivalent to b < a
+		\item $b \leq a$ is equivalent to $b < a \lor b = a$
+		\item If a < b and b < c, we can write a < b < c.
+	\end{itemize}
+\end{remark}
+
+\begin{thm}[$\bb{N}, \bb{Z}, \bb{Q}$ and $\bb{R}$ are ordered]
+	Each of $\bb{N}, \bb{Z}, \bb{Q}$ and $\bb{R}$  is an ordered set using the standard order $\leq$. Under the inclusions $\bb{N} \subseteq \bb{Z} \subseteq \bb{Q} \subseteq \bb{R}$ the orders coincide (e.g. when $a, b \in \bb{N}$ we have $a \leq b$ in $\bb{N}$ if and only if $a \leq b$ in $\bb{R}$)
+\end{thm}
+
+\begin{defn}[Ordered Field]
+	An ordered field is a field F with an order $\leq$ such that for all $x ,y ,z \in F$
+	\begin{enumerate}
+		\item $x \leq y \implies x + z \leq y + z$, and
+		\item $0 \leq x \land 0 \leq y \implies 0 \leq xy$.
+	\end{enumerate}
+\end{defn}
+
+\begin{thm}[$\bb{Q}$ and $\bb{R}$ as Ordered Fields]
+	$\bb{Q}$ and $\bb{R}$ are ordered fields.
+\end{thm}
+
+\begin{thm}[Properties of Ordered Fields]
+	Let F be an ordered field. Then $\forall x, y, z \in F$ we have
+	\begin{enumerate}
+		\item $x > 0 \implies -x < 0$ and $x < 0 \implies -x > 0$
+		\item $x \neq 0 \implies x^2 > 0$ and in particular 1 > 0
+		\item $0 < x < y \implies 0 < \frac{1}{y} < \frac{1}{x}$
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}[Absolute Value]
+	Let F be an ordered field. For $a \in F$ we define the absolute value of a to be
+	\begin{gather*}
+		|a| =
+		\begin{cases}
+			 a & \text{ if } a \geq 0, \\
+			-a & \text{ if } a \leq 0.
+		\end{cases}
+	\end{gather*}
+\end{defn}
+
+\begin{thm}[Properties of Absolute Values]
+	Let F be an ordered field. Then for all $x, y, z \in F$ we have
+	\begin{enumerate}
+		\item (Positive Definiteness) $|x| \geq 0$ and $|x| = 0 \iff x = 0$
+		\item (Symmetry) $|x - y| = |y - x|$
+		\item (Multiplicativeness) $|xy| = |x||y|$
+		\item (Triangle Inequality) $|x + y| \leq |x| + |y|$
+		\item (Approximation) $|x - y| \leq z \implies y - z \leq x \leq y + z$
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Basic Order Properties in $\bb{Z}$]
+	\begin{enumerate}
+		\item $\forall n \in \bb{Z} (n \in \bb{N} \iff n \geq 0)$
+		\item $\forall k, n \in \bb{Z} (k \leq n \iff k < n + 1)$
+	\end{enumerate}
+\end{thm}
+
+
+\section{Completeness Axiom}
+
+\begin{defn}[Upper and Lower Bounds]
+	Let X be an ordered set and let $A \subseteq X$
+	\begin{enumerate}
+		\item We say that A is bounded above (in X) when $\exists b \in X \> \forall a \in A \> a \leq b$, in which case we call b the upper bound of A.
+		\item We say that A is bounded below (in X) when $\exists c \in X \> \forall a \in A \> c \leq a$, in which case we call c the lower bound of A.
+	\end{enumerate}
+	We say that A is bounded when it is bounded above and below.
+\end{defn}
+
+\begin{defn}[Supremum and Infimum]
+	Let X be an ordered set and let $A \subseteq X$.
+	\begin{enumerate}
+		\item We say that A has a supremum (or the least upper bound) when
+			\[
+				\exists b \in X (\forall a \in A \> a \leq b) \quad \forall c \in X (\forall a \in A \> a \leq c) \quad b < c.
+			\]
+			We write b = sup A. \\
+			Now if b = sup A and $b \in A$, we call b the maximum of A, and denote it as b = max A. \\
+		\item We say that A has an infimum (or the greatest lower bound) when
+			\[
+				\exists d \in X (\forall a \in A \> d \leq a) \quad \forall c \in X (\forall a \in A \> c \leq a) \quad c < d.
+			\]
+			We write d = inf A. \\
+			Now if d = inf A and $d \in A$, we call d the minimum of A, and denote it as d = min A.
+	\end{enumerate}
+\end{defn}
+
+\begin{thm}[Approximation Property of Supremum and Infimum]
+	Let $\emptyset \neq A \subseteq \bb{R}$.
+	\begin{enumerate}
+		\item $b = \sup A \implies \forall 0 < \epsilon \in \bb{R} \> \exists x \in A \> (b - \epsilon < x \leq b)$
+		\item $c = \inf A \implies \forall 0 < \epsilon \in \bb{R} \> \exists x \in A \> (c \leq x < c + \epsilon)$
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Completeness Properties of $\bb{R}$]
+	\begin{enumerate}
+		\item $\forall \emptyset \neq A \subseteq \bb{R}$, if A is bounded above, then A has a supremum in $\bb{R}$
+		\item $\forall \emptyset \neq A \subseteq \bb{R}$, if A is bounded below, then A has an infimum in $\bb{R}$
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Well-Ordering Properties of $\bb{Z}$ in $\bb{R}$]
+	\begin{enumerate}
+		\item Every nonempty subset of $\bb{Z}$ which is bounded above in $\bb{R}$ has a maximum.
+		\item Every nonempty subset of $\bb{Z}$ which is bounded below in $\bb{R}$ has a minimum. In particular, every nonempty subset of $\bb{N}$ has a minimum.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Floor and Ceiling Properties of $\bb{Z}$ in $\bb{R}$]
+	\begin{enumerate}
+		\item (Floor Properties) $\forall x \in \bb{R} \> \exists! n \in \bb{Z} \> (x - 1 < n \leq x)$
+		\item (Ceiling Properties) $\forall x \in \bb{R} \> \exists! n \in \bb{Z} \> (x \leq n < x + 1)$
+	\end{enumerate}	
+\end{thm}
+
+\begin{defn}[Floor and Ceiling Functions]
+	Given $x \in \bb{R}$ we define the floor of x to be the unique $n \in \bb{Z}$ with $x - 1 < n \leq x$ and denote the floor of x by $\floor{x}$. The function $f: \bb{R} \to \bb{Z}$ given by $f(x) = \floor{x}$ is called the floor function.
+
+	Similarly, we define the ceiling of x to be the unique $n \in \bb{Z}$ with $x \leq n < x + 1$ and denote the ceiling of x by $\ceiling{x}$. The function $f: \bb{R} \to \bb{Z}$ given by $f(x) = \ceiling{x}$ is called the ceiling function.
+\end{defn}
+
+\begin{thm}[Archimedean Properties of $\bb{Z}$ in $\bb{R}$]
+	\begin{enumerate}
+		\item $\forall x \in \bb{R} \> \exists n \in \bb{Z} \> (n > x)$
+		\item $\forall x \in \bb{R} \> \exists m \in \bb{Z} \> (m < x)$
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Density of $\bb{Q}$]
+	\begin{gather*}
+		\forall a, b \in \bb{R} (a < b) \quad \exists q \in \bb{Q} (a < q < b)
+	\end{gather*}
+\end{thm}
+
+
+
+\chapter{Sequences}
+
+\section{Limits of Sequences}
+
+\begin{defn}[Sequence]
+	For $p \in \bb{Z}$, let $\bb{Z}_{\geq p} = \{k \in \bb{Z} | k \geq p\}$. A sequence in a set A is a function of the form $x: \bb{Z}_{\geq p} \to A$ for some $p \in \bb{Z}$. Given a sequence $x: \bb{Z}_{\geq p} \to A$, the k-th term of the sequence is the element $x_k = x(k) \in A$, and we denote the sequence x by
+	\[
+		\langle x_k \rangle_{k \geq p} = \{x_k | k \geq p\} = \{x_p, x_{p + 1}, x_{p + 2}, ...\}
+	\]
+	Note that the range of the sequence $\langle x_k \rangle_{k \geq p}$ is the set $\{x_k\}_{k \geq p} = \{x_k | k \geq p\}$.
+\end{defn}
+
+\begin{remark}
+	While the notation $\{x_k\}_{k \geq p}$ is more commonly used, since this set of notes works a lot between sequences and sets, we shall use the notation $\langle x_k \rangle_{k \geq p}$ to denote a sequence instead to make a clear distinction of the two.
+\end{remark}
+
+\begin{defn}[Convergence, Divergence and Limits of a Sequence]
+	
+\end{defn}
+
 
 % Appendix Begins
 \appendix
@@ -527,7 +786,7 @@ From this point on, we will be using upper-case letters to denote sets, instead 
 	Notice that the AC is equivalent to the statement that every equivalence relation has a set of representatives.
 \end{remark}
 
-\begin{defn}[Function]
+\begin{defn}[Function]\label{fn_apdxA}
 	Get sets X and Y, a function from X to Y is a binary relation $f \subseteq X \times Y$ with the property that
 	\[
 		\forall x \in X \> \exists! y \in Y \> (x,y) \in f
@@ -536,11 +795,11 @@ From this point on, we will be using upper-case letters to denote sets, instead 
 	\[
 		\forall x \in Domain(f) \> \exists! y \> (x, y) \in f.
 	\]
-	For a function f, we usually write y = f(x) instead of xfy. It is customary to use the notation $f: X \mapsto Y$ when X = Domain(f) and Y is any set with $Range(f) \subseteq Y$.
+	For a function f, we usually write y = f(x) instead of xfy. It is customary to use the notation $f: X \to Y$ when X = Domain(f) and Y is any set with $Range(f) \subseteq Y$.
 \end{defn}
 
 \begin{defn}[One-to-one \& Onto]
-	Let $f: X \mapsto Y$. THe function f is called one-to-one (or injective) when
+	Let $f: X \to Y$. THe function f is called one-to-one (or injective) when
 	\[
 		\forall y \in Y \> \exists \text{ at most one } x \in X \> y = f(x)
 	\]
@@ -551,11 +810,11 @@ From this point on, we will be using upper-case letters to denote sets, instead 
 \end{defn}
 
 \begin{defn}[Left and Right Inverses]
-	Let $f: X \mapsto Y$. Let $I_X$ and $I_Y$ denote the identity function on X and Y respectively. A left inverse of f is a function $g: Y \mapsto X$ such that $g \circ f = I_X$. A right inverse of f is a function $H: X \mapsto Y$ such that $f \circ H = I_Y$. Note that if f has a left inverse g and a right inverse H, then we have $g = g \circ I_Y = g \circ f \circ H = I_X \circ H = H$. In this case, we say that g is the (unique two-sided) inverse of f.
+	Let $f: X \to Y$. Let $I_X$ and $I_Y$ denote the identity function on X and Y respectively. A left inverse of f is a function $g: Y \to X$ such that $g \circ f = I_X$. A right inverse of f is a function $H: X \to Y$ such that $f \circ H = I_Y$. Note that if f has a left inverse g and a right inverse H, then we have $g = g \circ I_Y = g \circ f \circ H = I_X \circ H = H$. In this case, we say that g is the (unique two-sided) inverse of f.
 \end{defn}
 
 \begin{thm}[Surjective and Injective VS Inverses]
-	Let $f: X \mapsto Y$. Then
+	Let $f: X \to Y$. Then
 	\begin{enumerate}
 		\item f is one-to-one if and only if f has a left inverse.
 		\item f is onto if and only if f has a right inverse.
@@ -564,16 +823,16 @@ From this point on, we will be using upper-case letters to denote sets, instead 
 \end{thm}
 
 \begin{defn}[Invertible]
-	A function $f: X \mapsto Y$ is called invertible (or bijective) when it is one-to-one and onto, or equivalently, when it has a (unique two-sided) inverse.
+	A function $f: X \to Y$ is called invertible (or bijective) when it is one-to-one and onto, or equivalently, when it has a (unique two-sided) inverse.
 \end{defn}
 
 \begin{thm}[The Recursion Theorem]\label{recursion_theorem}
 	\begin{enumerate}
-		\item Let A be a set, let $a \in A$, and let $g : A \times \bb{N} \mapsto A$. Then there exists a unique function $f: \bb{N} \mapsto A$ such that
+		\item Let A be a set, let $a \in A$, and let $g : A \times \bb{N} \to A$. Then there exists a unique function $f: \bb{N} \to A$ such that
 		\[
 			f(0) = a \text{ and } f(n+1) = g(f(n), n) \text{ for all } n \in \bb{N}
 		\]
-		\item Let A and B be sets, let $g: A \mapsto B$, and let $h: A \times B \times \bb{N} \mapsto B$. Then there exists a unique function $f:A \times \bb{N} \mapsto B$ such that for all $a \in A$ we have
+		\item Let A and B be sets, let $g: A \to B$, and let $h: A \times B \times \bb{N} \to B$. Then there exists a unique function $f:A \times \bb{N} \to B$ such that for all $a \in A$ we have
 		\[
 			f(a, 0) = g(a) \text{ and } f(a, n + 1) = h(a, f(a, n), n) \text{ for all } n \in \bb{N}
 		\]
@@ -584,7 +843,7 @@ From this point on, we will be using upper-case letters to denote sets, instead 
 \section{Construction of Integers, Rational, Real and Complex Numbers}
 
 \begin{defn}[Sum and Product]
-	By Part(2) of the \hyperref[recursion_theorem]{Recursion Theorem}, there is a unique function $s: \bb{N} \times \bb{N} \mapsto \bb{N}$ such that for all $a, b \in \bb{N}$ we have
+	By Part(2) of the \hyperref[recursion_theorem]{Recursion Theorem}, there is a unique function $s: \bb{N} \times \bb{N} \to \bb{N}$ such that for all $a, b \in \bb{N}$ we have
 	\[
 		s(a, 0) = a, \quad s(1, b + 1) = s(a, b) + 1.
 	\]
@@ -592,7 +851,7 @@ From this point on, we will be using upper-case letters to denote sets, instead 
 	\[
 		a + b = s(a, b).
 	\]
-	Also, there is a unique function $p: \bb{N} \times \bb{N} \mapsto \bb{N}$ such that for all a, b $\in \bb{N}$ we have
+	Also, there is a unique function $p: \bb{N} \times \bb{N} \to \bb{N}$ such that for all a, b $\in \bb{N}$ we have
 	\[
 		p(a, 0) = 0, \quad p(a, b + 1) = p(a, b) + a
 	\]
@@ -667,6 +926,170 @@ From this point on, we will be using upper-case letters to denote sets, instead 
 	\end{align*}
 	We write $i = (0, 1).$ For $x \in \bb{R}$ we write x = (x, 0) and identify $\bb{R}$ with a subset of $\bb{C}$.
 \end{defn}
+
+
+
+\chapter{Functions and Cardinality}
+
+
+\section{Functions}
+\begin{defn}[Range, Image, and Inverse Image]
+	Let X and Y be sets and let $f: X \to Y$. Recall (see \hyperref[fn_apdxA]{Function in Appendix A}) that the domain of f and the range of f are the sets
+	\[
+		\text{Domain}(f) = X, \quad \text{Range}(f) = f(X) = \{f(x) | x \in X\}
+	\]
+	For $A \subseteq X$, the image of A under f is the set
+	\[
+		f(A) = \{f(x) | x \in A\}
+	\]
+	For $B \subseteq Y$, the inverse image of B under f is the set
+	\[
+		f^{-1}(B) = \{x \in X | f(x) \in B\}
+	\]
+\end{defn}
+
+\begin{defn}[Composite Function]
+	Let X, Y and Z be sets. Let $f: X \to Y$ and let $g: Y \to Z$. We define the composite function $g \circ f: X \to Z$ by $(g \circ f)(x) = g \big( f(x) \big)$ for all $x \in X$
+\end{defn}
+
+\begin{defn}[Bijection]
+	Let X and Y be sets. Let $f: X \to Y$. We say that f is a bijection, or that f is bijective, if f is both one-to-one and onto (or that f is both injective and surjective).
+\end{defn}
+
+\begin{thm}[Bijectiveness and Inverse of the Composite Function]
+	Let X, Y and Z be sets. Let $f: X \to Y$ and $g: Y \to Z$. Then
+	\begin{enumerate}
+		\item if f and g are both injective then so is $g \circ f$,
+		\item if f and g are both surjective then so is $g \circ f$, and
+		\item if f and g are both invertible then so is $g \circ f$, and in this case $(g \circ f)^{-1} = f^{-1} \circ g^{-1}$
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}[Identity Function]
+	For a set X, we define the identity function on X to be the function $I_X: X \to X$ given by $I_X(x) = x$ for all $x \in X$. Note that for $f: X \to Y$ we have $f \circ I_X = f$ and $I_Y \circ f = f$.
+\end{defn}
+
+\begin{thm}[Bijectiveness and Invertability of Functions]
+	Let X and Y be nonempty sets and let $f: X \to Y$. Then
+	\begin{enumerate}
+		\item f is injective if and only if f has a left inverse,
+		\item f is surjective if and only if f has a right inverse, and
+		\item f is bijective if and only if f has a left inverse g and a right inverse h, and in this case we have g = h = $f^{-1}$.
+	\end{enumerate}
+\end{thm}
+
+\begin{crly}[Relationship between Injection and Surjection]
+	Let X and Y be sets. Then there exists an injective map $f: X \to Y$ if and only if there exists a surjective map $g: Y \to X$.
+\end{crly}
+
+
+\section{Cardinality}
+
+\begin{defn}[Equal Cardinality]
+	Let A and B be sets. We say that A and B have the same cardinality, and wrtie |A| = |B|, when there exists a bijective map $f: A \to B$.
+
+	We say that the cardinality of A is less than or equal to the cardinality of B, and write $|A| \leq |B|$, when there exists an injective map $f: A \to B$.
+
+	We say that the cardinality of A is less than the cardinality of B, and write $|A| < |B|$, when $|A| \leq |B| \land |A| \neq |B|$ (i.e. there exists an injective map from A to B but no surjective map from A to B).
+
+	We also write $|A| \geq |B|$ when $|B| \leq |A|$ and $|A| > |B|$ when $|B| < |A|$.
+\end{defn}
+
+\begin{defn}[Properties for Cardinality of Sets]
+	For all sets A, B, and C,
+	\begin{enumerate}
+		\item |A| = |A|,
+		\item if |A| = |B|, then |B| = |A|,
+		\item if |A| = |B| and |B| = |C|, then |A| = |C|,
+		\item $|A| \leq |B| \iff (|A| = |B| \lor |A| < |B|)$, and
+		\item $|A| \leq |B| \land |B| \leq |C| \implies |A| \leq |C|$.
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Finiteness and Countability of Sets]
+	Let A be a set. For each $n \in \bb{N}$, let $S_n = \{0, 1, 2, ..., n - 1\}$. For $n \in \bb{N}$, we say that the cardinality of A is equal to n, or that A has n elements, and write |A| = n, when $|A| = |S_n|$. We say that A is finite when |A| = n for some $n \in \bb{N}$. We say that A is infinite when A is not finite. We say that A is countable when $|A| = |\bb{N}|$.
+\end{defn}
+
+\begin{remark}
+	Note that a set A is said to be countable when A is of the form $A = \{a_0, a_1, a_2, ...\}$ where all its element are distinct.
+\end{remark}
+
+\begin{thm}
+	Let A be a set. Then the following are equivalent.
+	\begin{enumerate}
+		\item A is infinite.
+		\item A contains a countable subset.
+		\item $|\bb{N}| \leq |A|$
+		\item There exists a map $f: A \to A$ which is injective but not surjective.
+	\end{enumerate}
+\end{thm}
+
+\begin{crly}
+	Let A and B be sets.
+	\begin{enumerate}
+		\item If A is countable then A is infinite.
+		\item When $|A| \leq |B|$, if B is finite then so is A, and if A is infinite, so is B.
+		\item If |A| = n and |B| = m, then |A| = |B| iff n = m.
+		\item If |A| = n and |B| = m, then $|A| \leq |B| \iff n \leq m$.
+		\item When one of the two sets A or B is finite. If $|A| \leq |B| \land |B| \leq |A| \implies |A| = |B|$.
+	\end{enumerate}
+\end{crly}
+
+\begin{thm}[$|\bb{N}|$ as a Threshold for Finiteness and Countability]
+	Let A be a set. $|A| \leq |\bb{N}| \iff$ A is finite or countable.
+\end{thm}
+
+\begin{thm}
+	Let A be a set. Then
+	\begin{enumerate}
+		\item $|A| < |\bb{N}| \iff$ A is finite,
+		\item $|\bb{N}| < |A| \iff$ A is neither finite nor countable, and
+		\item $|A| \leq |\bb{N}| \land |\bb{N}| \leq |A| \implies |A| = |\bb{N}|$.
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}[Countability and $\aleph_0$]
+	Let A be a set. When A is countable we write $|A| = \aleph_0$.
+
+	When A is finite we write $|A| < \aleph_0$.
+
+	When A is infinite we write $|A| \geq \aleph_0$.
+
+	When A is either finite or countable we write $|A| \leq \aleph_0$, and say that A is at most countable.
+
+	When A is neither finite nor countable we write $|A| > \aleph_0$, and say that A is uncountable.
+\end{defn}
+
+\begin{thm}[Set Cartesian Product and Union, and $\bb{Q}$ are Countable]
+	\begin{enumerate}
+		\item If A and B are countable sets, then so is $A \times B$.
+		\item If A and B are countable sets, then so is $A \cup B$.
+		\item If $A_0, A_1, A_2, ...$ are countable sets, then so is $\bigcup_{k = 0}^{\infty} A_k$.
+		\item $\bb{Q}$ is countable.
+	\end{enumerate}
+\end{thm}
+
+\begin{remark}
+	For a set A, we let $2^A$ denote the set of all functions from A to $S_2 = \{0, 1\}$, i.e.
+	\[
+		2^A = \{f | f: A \to S_2 \}
+	\]
+\end{remark}
+
+\begin{thm}[$\bb{R}$ as an Uncountable Set]
+	\begin{enumerate}
+		\item For every set A, $|\mathcal{P}(A| = |2^A|$.
+		\item For every set A, $|A| < |\mathcal{P}(A)|$.
+		\item $\bb{R}$ is uncountable.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Cantor-Schröder-Bernstein Theorem]
+	Let A and B be sets.
+	\[
+		|A| \leq |B| \land |B| \leq |A| \implies |A| = |B|.
+	\]
+\end{thm}
 
 \end{document}
 % Document End
