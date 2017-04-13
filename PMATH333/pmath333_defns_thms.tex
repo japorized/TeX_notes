@@ -388,13 +388,68 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 \end{defn}
 
 \begin{remark}
-	While the notation $\{x_k\}_{k \geq p}$ is more commonly used, since this set of notes works a lot between sequences and sets, we shall use the notation $\langle x_k \rangle_{k \geq p}$ to denote a sequence instead to make a clear distinction of the two.
+	While the notation $\{x_k\}_{k \geq p}$ is more commonly used, since this set of notes works a lot between sequences and sets, we shall use the notation $\langle x_k \rangle_{k \geq p}$ to denote a sequence instead to make a clear distinction between the two.
 \end{remark}
 
-\begin{defn}[Convergence, Divergence and Limits of a Sequence]
-	
+\begin{defn}[Subsequence]
+	Let $\langle x_k \rangle_{k \geq p}$ be a sequence. A subsequence of $\langle x_k \rangle_{k \geq p}$ is a sequence of the form $\langle x_{k_n} \rangle_{n \in \bb{N}}$ such that $k_1 < k_2 < k_3 < \hdots$ and $x_{k_1} < x_{k_2} < x_{k_3} < \hdots$, where $x_{k_l} = x_m$ for all $n \geq l \in \bb{N}$ and a unique $k \geq m \in \bb{Z}_{\geq p}$.
 \end{defn}
 
+\begin{remark}
+	In other words, a subsequence $\langle x_{k_n} \rangle_{n \in \bb{N}}$ is constructed from $\langle x_k \rangle_{k \geq p}$ by "removing" from $x_p, x_{p + 1}, x_{p + 2}, ...$ all the $x_m$'s except for those such that $m = k_l$ for some l.
+\end{remark}
+
+\begin{defn}[Extended Ordered Field]
+	Let F be an ordered field. We can define the extended ordered field $\hat{F}$ to be the set $\hat{F} = F \cup \{-\infty, \infty\}$, such that $\forall a \in F, -\infty < a < \infty$.
+
+	We also define, $\forall a \in F$:
+	\begin{itemize}
+		\item $a + \infty = \infty$,
+		\item $a - \infty = -\infty$,
+		\item if $a > 0$, then $a \cdot \infty = \infty$, and
+		\item if $a < 0$, then $a \cdot \infty = -\infty$.
+	\end{itemize}
+
+	We define some indeterminant forms:
+	\[
+		\infty - \infty, \; \infty \cdot 0, \; \frac{\infty}{\infty}, \; \frac{\infty}{0}, \; \frac{0}{\infty}
+	\]
+	We extend the order relation < on F such that $-\infty < \infty$.
+\end{defn}
+
+\begin{defn}[Convergence, Divergence and Limits of a Sequence]
+	Let F be an extended ordered field. and $\langle x_k \rangle_{k \geq p}$ be a sequence in F. For $a \in F$, we say that the sequence $\langle x_k \rangle_{k \geq p}$ converseges to a (or that the limit of $\langle x_k \rangle_{k \geq p}$ is equal to a), and we write $x_k \to a (\text{as } k \to \infty)$, or we write $\lim_{k \to \infty} = a$, when
+	\[
+		\forall 0 < \epsilon \in F \; \exists m \in \bb{Z} \; \forall k \in \bb{Z}_{\geq p} \; (k \geq m \implies |x_k - a| \leq \epsilon).
+	\]
+	We say that the sequence $\langle x_k \rangle_{k \geq p}$ diverges (in F) when it does not converge (to any $a \in F$). We say that $\langle x_k \rangle_{k \geq p}$ diverges to infinity, or that the limit of $\langle x_k \rangle_{k \geq p}$ is equal to infinity, and we write $x_k \to \infty (\text{as } k \to \infty$, or we write $\lim_{k \to \infty}x_k = \infty$, when
+	\[
+		\forall r \in F \; \exists m \in \bb{Z} \; \forall k \in \bb{Z}_{\geq p} \; (k \geq m \implies x_k \geq r)
+	\]
+	Similarly, we say that $\langle x_k \rangle_{k \geq p}$ diverges to $-\infty$, or that the limit of $\langle x_k \rangle_{k \geq p}$ is equal to negative infinity, and we write $x_k \to -\infty (\text{as } k \to \infty)$, or we write $\lim_{k \to \infty}x_k = -\infty$, when
+	\[
+		\forall r \in F \; \exists m \in \bb{Z} \; \forall k \in \bb{Z}_{\geq p} \; (k \geq m \implies x_k \leq r)
+	\]
+\end{defn}
+
+\begin{thm}[Independence of Limit from Initial Terms]
+	Let $\langle x_k \rangle_{k \geq p}$ be a sequence in a subfield F of $\bb{R}$.
+	\begin{enumerate}
+		\item If $q \geq p$ and $y_k = x_k$ for all $k \geq q$, then $\langle x_k \rangle_{k \geq p}$ converges iff $\langle y_k \rangle_{k \geq q}$ converges, and in this case $\lim_{k \to \infty} x_k = \lim_{k \to \infty} y_k$.
+
+		(Note that in this statement, $\langle y_k \rangle_{k \geq q}$ is a subsequence of $\langle x_k \rangle_{k \geq p}$, such that it takes on all the elements of the sequence after some $q \geq p$.)
+		\item If $l \geq 0$ and $y_k = x_{k + l}$ for all $k \geq p$, then $\langle x_k \rangle_{k \geq p}$ converges iff $\langle y_k \rangle_{k \geq p}$ converges, and in this case $\lim_{k \to \infty} x_k = \lim_{k \to \infty} y_k$.
+
+		(Note that in this statement, $\langle x_k \rangle_{k \geq p}$ is a subsequence of $\langle y_k \rangle_{k \geq p}$ instead, such that $\langle x_k \rangle_{k \geq p}$ takes on all the values of $\langle y_k \rangle_{k \geq p}$ from k + l.)
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Uniqueness of Limit]
+	
+\end{thm}
+
+
+\section{Limit Theorems}
 
 % Appendix Begins
 \appendix
