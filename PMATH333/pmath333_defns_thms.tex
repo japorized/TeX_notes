@@ -85,7 +85,6 @@
 % =================================
 % 		Preface
 % =================================
-
 \chapter*{Preface}
 PMATH333 is offered as a course that attempts to bridge the gap for students who have taken the regular math courses instead of the advanced math courses, in particular for MATH147, MATH148 and MATH247 in UW. This set of notes is taken from the W2017 term.
 
@@ -103,7 +102,6 @@ PMATH333 is offered as a course that attempts to bridge the gap for students who
 % =================================
 % 		Chapter 1
 % =================================
-
 \chapter{The Real Number System}
 
 \section{Ordered Field Axioms}
@@ -385,7 +383,6 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 % =================================
 % 		Chapter 2
 % =================================
-
 \chapter{Sequences}\label{chp2}
 
 \section{Limits of Sequences}
@@ -627,7 +624,6 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 % =================================
 % 		Chapter 3
 % =================================
-
 \chapter{Functions on \texorpdfstring{$\bb{R}$}{R}}
 
 
@@ -817,7 +813,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\[
 		\forall a \in A \; \forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in A \; (|x - a| \leq \delta \implies |f(x) - f(a)| \leq \epsilon)
 	\]
-	(where note that $\delta$ depends on $a, f, \text{ and, especially, } \epsilon$ in general).
+	(Note that $\delta$ depends on $a, f, \text{ and, especially, } \epsilon$ in general).
 
 	f is said to be continuous (in A) when f is continuous at every point $a \in A$.
 \end{defn}
@@ -862,28 +858,481 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 \end{thm}
 
 \begin{defn}[Maximum, Minimum and Extreme Values]
-	
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, and let $f: A \to F$. For $a \in A$, fi $f(x) \geq f(x)$ for every $x \in A$, then we say that f(a) is the maximum value of f or that f attains its maximum value at a. Similarly for $b \in A$, if $f(b) \leq f(x)$ for every $x \in A$, we say that f(b) is the minimum value of f, or that f attains its minimum at b.
+
+	We say that f attains its extreme values in A when f attains its maximum value at some point $a \in A$ and f attains its minimum value at some point $b \in A$.
 \end{defn}
 
+\begin{thm}[Extreme Value Theorem]\label{EVT}
+	Let $, b \in \bb{R}$ with $a < b$, and let $f: [a, b] \to \bb{R}$ be continuous. Then f attains its extreme values in $[a, b]$.
+\end{thm}
+
+\begin{defn}[Uniform Continuity]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, and let $f: A \to F$. We say that f is uniformly continuous in A when
+	\[
+		\forall \epsilon > 0 \; \exists \delta > 0 \; \forall a \in A \; \forall x \in A \; (|x - a| \leq \delta \implies |f(x) - f(a)| \leq \epsilon)
+	\]
+\end{defn}
+
+\begin{thm}[Closed Bounded Intervals and Uniform Continuity]
+	Let $a, b \in \bb{R}$ with a < b and let $f: [a, b] \to \bb{R}$. If f is continuous (on [a, b]) then f is uniformly continuous (on [a, b]).
+\end{thm}
 
 % =================================
 % 		Chapter 4
 % =================================
+\chapter{Differentiability on \texorpdfstring{$\bb{R}$}{R}}
 
+
+\section{The Derivative}
+
+\begin{defn}[Differentiable on a Point]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, and let $a \in A$ be a limit point of A. We say that f is differentiable at a when the limit
+	\[
+		\lim_{x \to a} \frac{f(x) - f(a)}{x - a}
+	\]
+	exists in F. In this case we call the limit the derivative of f at a, and we denote that by $f'(a)$, so we have
+	\[
+		f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}.
+	\]
+	When $a \in A$ is a limit point of A from the right, we sya that f is differentiable from the right at a and that $f'_+(a)$ is the derivative from the right of f at a, when
+	\[
+		f'_+(a) = \lim_{x \to a^+} \frac{f(x) - f(a)}{x - a}.
+	\]
+	Similarly, when $a \in A$ is a limit point of A from the left, we say that f is differentiable from the left at a and that $f'_{-}(a)$ is the derivative from the left of f at a when
+	\[
+		f'_{-}(a) = \lim_{x \to a^-} \frac{f(x) - f(a)}{x - a}.
+	\]
+\end{defn}
+
+\begin{defn}[Differentiable in a Domain]
+	We say that f is differentiable (in A) when f is differentiable at every point $a \in A$, or that f is in $C^1$. In this case, the derivative of f is the function $f': A \to F$ defined by
+	\[
+		f'(x) = \lim_{u \to x} \frac{f(u) - f(x)}{u - x}.
+	\]
+\end{defn}
+
+\begin{defn}[Differentiable n-times \& n-th Derivative]
+	When $f'$ is differentiable at a, we denote the derivative of $f'$ at a by $f''(a)$, and we call $f''(a)$ the second derivative of f at a. When $f''(a)$ exists for every a in A, we say that f is twice differentiable (in A), or that it is in $C^2$, and we call the function $f'': A \to F$ is called the second derivative of f. Similarly, $f'''(a)$ is he derivative of $f''$ at a, and so on.
+
+	More generally, for any function $f: A \to F$, we define its derivative to be the function $f': B \to F$ where $B = \{a \in A | f \text{ is differentaible at a}\}$, and we define its second derivative to be the function $f'': C \to F$ where $C = \{a \in B | f' \text{ is differentiable at a}\}$, and so on.
+\end{defn}
+
+\begin{remark}
+	Note that
+	\[
+		\lim_{x \to a} \frac{f(x) - f(a)}{x - a} = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h}.
+	\]
+	To be precise, the limit on the left exists in F iff the limit on the right exists in F, and in this case the two limits are equal.
+\end{remark}
+
+\begin{thm}[Definition of Differentiablity in $\epsilon$-$\delta$]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f: A \to F$, and let $a \in A$ be a limit point of A. Then f is differentiable at a with derivative $f'(a) \iff$
+	\[
+		\forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in A \; (|x - a| \leq \delta \implies |f(x) - f(a) - f'(a)(x-a)| \leq \epsilon)
+	\]
+\end{thm}
+
+\begin{defn}[Linearization \& Tangent Line]
+	When $f: A \to F$ is differentiable at a with derivative $f'(a)$, the function
+	\[
+		l(x) = f(a) + f'(a)(x-a)
+	\]
+	is called the linearization of f at a.
+
+	Note that the graph $y = l(x)$ of the linearization is the line through the point $(a, f(a))$ with slope $f'(a)$. This line is called the tangent line to the graph $y = f(x)$ at the point $(a, f(a))$.
+\end{defn}
+
+\begin{thm}[Differentiablility $\implies$ Continuity]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f: A \to F$ and let $a \in A$ be a limit point of A.
+	\[
+		\text{f is differentiable at a} \implies \text{f is continuous at a}.
+	\]
+\end{thm}
+
+
+\section{Differentiability Theorems}
+
+\begin{thm}[Local Determination of the Derivative]
+	Let F be a subfield of $\bb{R}$, let $A, B \subseteq F$, let $f: A \to F$ and $g:B \to F$, and let $a \in A \cap B$ be a limit point of both A and B. SPS that for some $\delta > 0$ we have $\{ x \in A \; | \; |x - a| \leq \delta \} \subset \{x \in B \; | \; |x - a| \leq \delta\}$. If g is differentiable at a then so is f, and we have $f'(a) = g'(a)$.
+\end{thm}
+
+\begin{thm}[Operations on Derivatives]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f, g: A \to F$, let $a \in A$ be a limit point of A, and let $c \in F$. SPS that f and g are differentiable at a. Then
+	\begin{enumerate}
+		\item (Linearity) the functions cf and f $\pm$ g are differentiable at a with
+			\[
+				(cf)'(a) = cf'(a), \quad (f \pm g)'(a) = f'(a) \pm g'(a)
+			\]
+		\item (Product Rule) the function fg is differentiable at a with
+			\[
+				(fg)'(a) = f'(a)g(a) + f(a)g'(a)
+			\]
+		\item (Reciprocal Rule) if $g(a) \neq 0$ then the function 1/g is differentiable at a with
+			\[
+				(\frac{1}{g})'(a) = -\frac{g'(a)}{g(a)^2}
+			\]
+		\item (Quotient Rule) if $g(a) \neq 0$ then the function f/g is differentiable at a with
+			\[
+				(\frac{f}{g})'(a) = \frac{f'(a)g(a) - f(a)g'(a)}{g(a)^2}
+			\]
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Chain Rule]
+	Let F be a subfield of $\bb{R}$, let $A, B \subseteq F$, let $f: A \to F$, let $g:B \to F$ and let $h = g \circ f: C \to F$ where $C = A \cap f^{-1}(B)$. Let $a \in C$ be a limit point of C (hence also for A) and let $b = f(a) \in B$. SPS that f is differentiable at a and g is differentiable at b. Then h is differentiable at a with
+	\[
+		h'(a) = g'\big( f(a) \big)f'(a)
+	\]
+\end{thm}
+
+
+\section{Inverse Function Theorems}
+
+\begin{thm}[Monotonic Functions]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$ and let $f: A \to F$. Then f is monotonic iff f has the property that for all $a, b, c \in A$, if b lies between a and c, then f(b) lies between f(a) and f(c).
+\end{thm}
+
+\begin{thm}[Continuity and Strictly Monotonous Functions]
+	Let I be an interval in $\bb{R}$, let $f: I \to \bb{R}$ and let J = f(I).
+	\begin{enumerate}
+		\item If f is continuous then its range J = f(I) is an interval in $\bb{R}$.
+		\item If f is injective and continuous, then f is strictly monotonic.
+		\item If $f: I \to J$ is strictly monotonic, then so is its inverse $g: J \to I$.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Inverse Function Theorem]
+	Let I be an interval in $\bb{R}$, let $f: I \to \bb{R}$ and let $J = f(I)$.
+	\begin{enumerate}
+		\item If f is bijective and continuous, then its inverse g is continuous.
+		\item If f is bijective and continuous, and f is differentiable at a with $f'(a) \neq 0$, then its inverse g is differentiable a b = f(a) with $g'(b) = \frac{1}{f'(a)}$.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Derivatives of the Basic Elementary Functions]
+	The basic elementary functions have the following derivatives.
+	\begin{enumerate}
+		\item $(x^a)' = a x^{a-1}$ where $a, x \in \bb{R}$ and $x^{a - 1}$ is defined.
+		\item $(a^x)' = (\ln a) \cdot a^x$ where $a > 0$ and $x \in \bb{R}$ and \\
+		 	  $(\log_a x)' = \frac{1}{\ln a} \cdot \frac{1}{x}$ where $0 < a \neq 1$ and $x > 0$, and in particular \\
+		 	  $(e^x)' = e^x$ for all $x \in \bb{R}$ and $(\ln x)' = \frac{1}{x}$ for all $x > 0$.
+		\item $(\sin x)' = \cos x$ and $(\cos x)' = -\sin x$ for all $x \in \bb{R}$, and \\
+			  $(\tan x)' = \sec^2 x$ and $(\sec x)' = \sec x \tan x$ for all $x \in \bb{R}$ with $x \neq \frac{\pi}{2} + k\pi, k \in \bb{Z}$,\\
+			  $(\cot x)' = -\csc^2 x$ and $(\csc x)' = -\cot x \csc x$ for all $x \in \bb{R}$ with $x \neq \pi + k \pi, k \in \bb{Z}$.
+		\item $(\arcsin x)' = \frac{1}{\sqrt{1 - x^2}}$ and $(\arccos x)' = \frac{-1}{\sqrt{1 - x^2}}$ for $|x| < 1$, \\
+			  $(\sec^{-1} x)'' = \frac{1}{x \sqrt{x^2 - 1}}$ and $(\csc^{-1} x)' = \frac{-1}{x \sqrt{x^2 - 1}}$ for $|x| > 1$, and \\
+			  $(\arctan x)' = \frac{1}{1 + x^2}$ and $(\cot^{-1} x)' = -\frac{1}{1 + x^2}$ for all $x \in \bb{R}$.
+	\end{enumerate}
+\end{thm}
+
+
+\section{Mean Value Theorem}
+
+\begin{defn}[Local Maximum and Minimum]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f: A \to F$ and let $a \in A$. We say that f has a local maximum value at a when
+	\[
+		\exists \delta > 0 \; \forall x \in A \; \big(|x-a| \leq \delta \implies f(x) \leq f(a) \big)
+	\]
+	Similarly, we say that f has a local minimum value at a when
+	\[
+		\exists \delta > 0 \; \forall x \in A \; \big( |x-a| \leq \delta \implies f(x) \geq f(a) \big)
+	\]
+\end{defn}
+
+\begin{thm}[Fermat's Theorem]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f: A \to F$. SPS that $a \in A$ is a limit point of A, both from above and from below. SPS that f is differentiable at a and that f has a local maximum or minimum value at a. Then $f'(a) = 0$.
+\end{thm}
+
+\begin{thm}[Rolle's Theorem]
+	SPS that $a, b \in \bb{R}$ with a < b. If $f: [a, b] \to \bb{R}$ is continuous on [a, b] and differentiable on (a, b), with f(a) = 0 = f(b), then there exists a point $c \in (a, b)$ such that $f'(c) = 0$.
+\end{thm}
+
+\begin{remark}
+	The continuity hypothesis and differentiability hypothesis in Rolle's Theorem cannot be relaxed at even one point in [a, b].
+\end{remark}
+
+\begin{thm}[Mean Value Theorem]
+	Let $a, b \in \bb{R}$ with a < b. If $f: [a, b] \to \bb{R}$ is differentiable on (a, b) and continuous on [a, b], then there exists a point $c \in (a, b)$ with
+	\[
+		f'(c) = \frac{f(b) - f(a)}{b - a}
+	\]
+\end{thm}
+
+\begin{thm}[Cauchy/Generalized Mean Value Theorem]
+	Let $a, b \in \bb{R}$ with a < b. If $f, g: [a, b] \to \bb{R}$ are differentiable on (a, b) and continuous on [a, b], then there exists a point $c \in (a, b)$ such that
+	\[
+		g'(c)\big( f(b) - f(a) \big) = f'(c)\big( g(b) - g(a) \big)
+	\]
+\end{thm}
+
+\begin{crly}[Trichotomy of The Derivative]
+	Let $a, b \in \bb{R}$ with a < b. Let $f: [a, b] \to \bb{R}$. SPS that f is differentiable in (a, b) and continuous at a and b.
+	\begin{enumerate}
+		\item $\forall x \in (a, b) \; f'(x) \geq 0 \implies $ f is increasing on [a, b].
+		\item $\forall x \in (a, b) \; f'(x) > 0 \implies $ f is strictly increasing on [a, b].
+		\item $\forall x \in (a, b) \; f'(x) \leq 0 \implies $ f is decreasing on [a, b].
+		\item $\forall x \in (a, b) \; f'(x) < 0 \implies $ f is strictly decreasing on [a, b].
+		\item $\forall x \in (a, b) \; f'(x) = 0 \implies $ f is constant on [a,b].
+		\item If $g: [a ,b] \to \bb{R}$ is continuous at a and b and differentiable in 9a, b) with $g'(x) = f'(x)$ for all $x \in (a, b)$, then for some $c \in \bb{R}$ we have $g(x) = f(x) + c$ for all $x \in (a, b)$.
+	\end{enumerate}
+\end{crly}
+
+\begin{crly}[The Second Derivative Test]
+	Let I be an interval in $\bb{R}$, let $f: I \to \bb{R}$ and let $a \in I$. SPS that f is differentiable in I with $f'(a) = 0$.
+	\begin{enumerate}
+		\item If $f''(a) > 0$ then f has a local minimum at a.
+		\item If $f''(a) < 0$ then f has a local maximum at a.
+	\end{enumerate}
+\end{crly}
+
+
+\section{Taylor's Theorem and l'Hôpital's Rule}
+
+\begin{thm}[l'Hôpital's Rule]
+	Let I be a non degenerate interval in $\bb{R}$. Let $a \in I$, or let a be an endpoint of I. Let $f, g: I \setminus \{a\} \to \bb{R}$. SPS that f and g are differentiable in $I \setminus \{a\}$ with $g'(x) \neq 0$ for all $x \in I \setminus \{a\}$. SPS further that $\lim\limits_{x \to a} f(x) = \lim\limits_{x \to a} g(x) = 0 \text{ or } \pm \infty$, and suppose that $\lim\limits_{x \to a} \frac{f'(x)}{g'(x)} \in \hat{\bb{R}}$. Then
+	\[
+		\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}
+	\]
+\end{thm}
+
+\begin{thm}[Taylor's Formula]
+	Let $n \in \bb{N}$ and let $a ,b \in \hat{\bb{R}}$ with a < b. If $f: (a, b) \to \bb{R}$ and $f^{(n + 1)}$ exists on (a, b), then for each pair of points $x, x_0 \in (a, b)$ there is a number c between x and $x_0$ such that
+	\[
+		f(x) = f(x_0)) + \sum_{k=1}^{n}\frac{f^{(k)} (x_0)}{k!}(x - x_0)^k + \frac{f^{(n + 1)}(c)}{(n + 1)!}(x - x_0)^{n + 1}
+	\]
+\end{thm}
 
 % =================================
 % 		Chapter 5
 % =================================
+\chapter{Integrability on \texorpdfstring{$\bb{R}$}{R}}
+
+\section{The Riemann Integral}
+
+\begin{defn}[Partition \& Subintervals]
+	A partition of the closed interval [a, b] is a set $X = \{x_0, x_1, ..., x_n\}$ with
+	\[
+		a = x_0 < x_1 < x_2 < \hdots < x_n = b.
+	\]
+	The intervals $[x_{i-1}, x_i]$ are called the subintervals of [a, b], and we write
+	\[
+		\Delta_i x = x_i - x_{i-1}
+	\]
+	for the size of the $i^{th}$ subinterval. Note that
+	\[
+		\sum_{i=1}^{n} \Delta_i x = b - a
+	\]
+	The size (or norm) of the partition X, denoted by $\Delta X$ is
+	\[
+		\Delta X = \max \{\Delta_i x | 1 \leq i \leq n\}
+	\]
+	i.e. $\Delta X$ is the largest subinterval in X.
+\end{defn}
+
+\begin{defn}[The Riemann Sum]
+	Let X be a partition of [a, b], and let $f: [a, b] \to \bb{R}$ be bounded. A Riemann sum for f on X is a sum of the form
+	\[
+		S = \sum_{i=1}^{n} f(t_i) \Delta_i x \quad \text{for some } t_i \in [x_{i - 1}, x_i].
+	\]
+	The points $t_i$ are called sample points.
+\end{defn}
+
+\begin{defn}[(Riemann) Integrable]
+	Let $f: [a, b] \to \bb{R}$ be bounded. We say that f is (Riemann) integrable on [a, b] when
+	\begin{gather*}
+		\exists I \in \bb{R} \; \forall \epsilon > 0 \; \exists \delta > 0 \; \forall X = \{x_0, x_1, ..., x_n\} \\
+		\Delta X < \delta \implies \bigg(\forall t_i \in [x_{i -1}, x_i] \quad \Bigg|\sum_{i=1}^{n} f(t_i) \Delta_i x - I \Bigg| < \epsilon \bigg)
+	\end{gather*}
+	where $X = \{x_0, x_1, ..., x_n\}$ is a partition on [a, b].
+
+	The number I is unique, and it is called the (Riemann) integral of f on [a, b], and we write
+	\[
+		I = \int_{a}^{b} f, \text{ or } I = \int_{a}^{b} f(x) dx
+	\]
+\end{defn}
+
+
+\section{Upper and Lower Riemann Sums}
+
+\begin{defn}[Upper and Lower Riemann Sums]
+	Let X be a partition for [a, b] and let $f: [a, b] \to \bb{R}$ be bounded. The upper Riemann sum for f on X, denoted by U(f, X), is
+	\[
+		U(f, X) = \sum_{i=1}^{n} M_i \Delta_i X \quad \text{where } M_i = \sup \{f(t) \; | \; t \in [x_{i-1}, x_i] \}
+	\]
+	and the lower Riemann sum for f on X, denoted L(f, X), is
+	\[
+		L(f, X) = \sum_{i = 1}^{n} m_i \Delta_i X \quad \text{where } m_i = \inf \{f(t) \; | \; t \in [x_{i-1}, x_i]\}
+	\]
+\end{defn}
+
+\begin{remark}
+	\begin{itemize}
+		\item U(f, X) and L(f, X) are not necessarily Riemann sums themselves, since we do not always have $M_i = f(t_i)$ or $m_i = f(s_i)$, for any $t_i, s_i \in [x_{i-1}, x_i]$.
+		\item If f is increasing, then $M_i = f(x_i)$ and $m_i = f(x_{i-1})$, and in this case U(f, X) and L(f, X) are Riemann sums.
+		\item Similarly, if f is decreasing, then $M_i = f(x_{i-1})$ and $m_i = f(x_i)$, and U(f, X) and L(f, X) are Riemann sums.
+		\item If f is continuous, then by the \hyperref[EVT]{Extreme Value Theorem}, we have $M_i = f(t_i)$ and $m_i = f(s_i)$ for some $t_i, s_i \in [x_{i-1}, x_i]$, and so in this case U(f, X) and L(f, X) are again Riemann sums.
+	\end{itemize}
+\end{remark}
+
+\begin{thm}[Upper and Lower Riemann Sums and the Riemann Sum]
+	Let X be a partition of [a, b] and let $f: [a, b] \to \bb{R}$ be bounded. Then
+	\begin{align*}
+		U(f, X) &= \sup \left\{\sum_{i=1}^{n} f(t_i) \Delta_i x \; \Bigg| \; t_i \in [x_{i-1}, x_i] \right\} \\
+		L(f, X) &= \inf \left\{\sum_{i=1}^{n} f(t_i) \Delta_i x \; \Bigg| \; t_i \in [x_{i-1}, x_i] \right\}
+	\end{align*}
+	In particular, for every Riemann sum S for f on X we have
+	\[
+		L(f, X) \leq \sum_{i=1}^{n} f(t_i) \Delta_i x \leq U(f, X)
+	\]
+	for every $t_i \in [x_{i-1}, x_i]$.
+\end{thm}
+
+\begin{thm}[Partition Refinement]
+	Let $f: [a, b] \to \bb{R}$ be bounded with upper and lower bounds M and m. Let $X = \{x_0, x_1, ..., x_n\}$ and $Y = \{y_0, y_1, ..., y_m\}$ be partitions of [a, b] such that $\{x_0, x_1, ..., x_n\} \subseteq \{y_0, y_1, ..., y_m\}$ (or $m \geq n$). Then
+	\begin{gather*}
+		0 \leq L(f, Y) - L(f, X) \leq (M - m) \Delta X \\
+		0 \leq U(f, X) - U(f, Y) \leq (M - m) \Delta X
+	\end{gather*}
+\end{thm}
+
+\begin{remark}
+	Let X and Y be partitions of [a, b] with $X \subset Y$. Then
+	\[
+		L(f, X) \leq L(f, Y) \leq U(f, Y) \leq U(f, X)
+	\]
+\end{remark}
+
+\begin{defn}[Upper and Lower Integral]
+	Let $f: [a, b] \to \bb{R}$ be bounded. The upper integral of f on [a, b], denoted by U(f), is given by
+	\[
+		U(f) = \inf \{U(f, X) | \text{ X is a partition of [a, b]} \}
+	\]
+	and the lower integral of f on [a, b], denoted by L(f), is given by
+	\[
+		L(f) = \sup \{L(f, X) | \text{ X is a partition of [a, b]} \}.
+	\]
+\end{defn}
+
+\begin{thm}[Upper Integral $\geq$ Lower Integral]
+	Let $f: [a, b] \to \bb{R}$. We always have $L(f) \leq U(f)$.
+\end{thm}
+
+\begin{thm}[Equivalent Definitions of Integrability]
+	Let $f: [a, b] \to \bb{R}$ be bounded. Then TFAE:
+	\begin{enumerate}
+		\item f is integrable on [a, b].
+		\item $\forall \epsilon > 0 \; \exists \text{ partition } X \; U(f, X) - L(f, X) < \epsilon$.
+		\item L(f) = U(f).
+	\end{enumerate}
+\end{thm}
+
+
+\section{Evaluating Integrals of Continuous Functions}
+
+\begin{thm}[Continuous Functions are Integrable]
+	Let $f: [a, b] \to \bb{R}$ be continuous. Then f is integrable on [a, b].
+\end{thm}
+
+\begin{lemma}[Summation Formulas]
+	We have
+	\[
+		\sum_{i=1}^{n} 1 = n, \quad \sum_{i = 1}^{n} i = \frac{n(n+1)}{2}, \quad \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6}, \quad \sum_{i=1}^{n} i^3 = \frac{n^2 (n+1)^2}{4}
+	\]
+\end{lemma}
+
+
+\section{Basic Properties of Integrals}
+
+\begin{thm}[Linearity]
+	Let f and g be integrable on [a, b] and let $c \in \bb{R}$. Then f + g and cf are both integrable on [a, b] and
+	\[
+		\int_{a}^{b} (f+g) = \int_{a}^{b} f + \int_{a}^{b} g
+	\]
+	and
+	\[
+		\int_{a}^{b} cf = c \int_{a}^{b} f
+	\]
+\end{thm}
+
+\begin{thm}[Comparison Theorem for Integrals]
+	Let f and g be integrable on [a, b]. If $f(x) \leq g(x)$ for all $x \in [a, b]$ then
+	\[
+		\int_{a}^{b} f \leq \int_{a}^{b} g.
+	\]
+\end{thm}
+
+\begin{thm}[Additivity]
+	Let $a < b < c$ and let $f: [a, c] \to \bb{R}$ be bounded. Then f is integrable on [a, c] iff f is integrable both on [a, b] and on [b, c], and in this case
+	\[
+		\int_{a}^{b} f + \int_{b}^{c} f = \int_{a}^{c} f.
+	\]
+\end{thm}
+
+\begin{defn}[Integral at a Point \& Integral from the Right]
+	We define $\int_{a}^{a} f = 0$ and for a < b we define $\int_{b}^{a} f = -\int_{a}^{b} f$.
+\end{defn}
+
+\begin{note}
+	Using the above definition, the Additivity Theorem extends to the case that a, b, c $\in \bb{R}$ are not in increasing order: for any a, b, c $\in \bb{R}$, if f is integrable on $[\max \{a, b, c\}, \min \{a, b, c\}]$ then
+	\[
+		\int_{a}^{b} f + \int_{b}^{c} f = \int_{a}^{c} f.
+	\]
+\end{note}
+
+\begin{thm}[Estimation]
+	Let f be integrable on [a, b]. Then $|f|$ is integrable on [a, b] and
+	\[
+		\left|\int_{a}^{b} f \right| \leq \int_{a}^{b} |f|
+	\]
+\end{thm}
+
+
+\section{Fundamental Theorem of Calculus}
+
+\begin{note}
+	For a function F, defined on an interval containing [a, b], we write
+	\[
+		[F(x)]_a^b = F(b) - F(a).
+	\]
+\end{note}
+
+\begin{thm}[The Fundamental Theorem of Calculus]
+	\begin{enumerate}
+		\item Let f be integrable on [a, b]. Define $F: [a, b] \to \bb{R}$ by
+			\[
+				F(x) = \int_{a}^{x} f = \int_{a}^{x} f(t) dt
+			\]
+			Then F is continuous on [a, b]. Moreover, if f is continuous at a point $x \in [a, b]$, then F is differentiable at x and
+			\[
+				F'(x) = f(x).
+			\]
+		\item Let f be integrable on [a, b]. Let F be differentiable on [a, b] with $F' = f$. Then
+			\[
+				\int_{a}^{b} f = \lbrack F(x) \rbrack_a^b = F(b) - F(a)
+			\]
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}[Antiderivative]
+	A function F such that $F' = f$ on an interval is called an antiderivative of f on the interval.
+\end{defn}
 
 
 % =================================
 % 		Chapter 6
 % =================================
-
+\chapter{Sequences and Series}
 
 % =================================
 % 		Chapter 7
 % =================================
+\chapter{Sequences and Series of Functions}
+
+% =================================
+% 		Chapter 8
+% =================================
+\chapter{Topology in Euclidean Space}
 
 
 % =================================
