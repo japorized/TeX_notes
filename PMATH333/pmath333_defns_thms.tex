@@ -82,6 +82,10 @@
 \begin{document}
 \maketitle
 
+% =================================
+% 		Preface
+% =================================
+
 \chapter*{Preface}
 PMATH333 is offered as a course that attempts to bridge the gap for students who have taken the regular math courses instead of the advanced math courses, in particular for MATH147, MATH148 and MATH247 in UW. This set of notes is taken from the W2017 term.
 
@@ -95,6 +99,10 @@ PMATH333 is offered as a course that attempts to bridge the gap for students who
 \theoremlisttype{allname}
 \listtheorems{lemma,thm,crly,propo}
 
+
+% =================================
+% 		Chapter 1
+% =================================
 
 \chapter{The Real Number System}
 
@@ -374,8 +382,11 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 \end{thm}
 
 
+% =================================
+% 		Chapter 2
+% =================================
 
-\chapter{Sequences}
+\chapter{Sequences}\label{chp2}
 
 \section{Limits of Sequences}
 
@@ -444,14 +455,440 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\end{enumerate}
 \end{thm}
 
+\begin{remark}
+	Because of the above theorem, we often simply denote $\langle x_k \rangle_{k \geq p}$ as $\langle x_k \rangle$
+\end{remark}
+
 \begin{thm}[Uniqueness of Limit]
-	
+	Let $\langle x_k \rangle$ be a sequence in an ordered field F. If $\langle x_k \rangle$ has a limit (finite or infinite) then its limit is unique.
 \end{thm}
 
 
 \section{Limit Theorems}
 
-% Appendix Begins
+\begin{thm}[Basic Limits]
+	In any ordered field F, for $a \in F$ we have
+	\[
+		\lim_{k \to infty} a = a, \quad \lim_{k \to \infty} k = \infty, \quad \lim_{k \to \infty} \frac{1}{k} = 0
+	\]
+\end{thm}
+
+\begin{thm}[Operations on Limits]
+	Let $\langle x_k \rangle$ and $\langle y_k \rangle$ be sequnces in an ordefred field F and let $c \in F$. SPS that $\langle x_k \rangle$ and $\langle y_k \rangle$ both converge with $x_k \to a$ and $y_k \to b$. Then
+	\begin{enumerate}
+		\item $ cx_k \to ca$
+		\item $(x_k + y_k) \to a + b$
+		\item $(x_k - y_k) \to a - b$
+		\item $x_k y_k \to ab$
+		\item If $b \neq 0$, then $\frac{x_k}{y_k} \to \frac{a}{b}$
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Extended Operations on Limits]
+	Let $\langle x_k \rangle$ and $\langle y_k \rangle$ be sequences in F. SPS that $\lim_{k \to \infty} x_k = u$ and $\lim_{k \to \infty} y_k = v$, where $u, v \in \hat{F}$.
+	\begin{enumerate}
+		\item If u + v is defined in $\hat{F}$, then $\lim_{k \to \infty} (x_k + y_k) = u + v$.
+		\item If u - v is defined in $\hat{F}$, then $\lim_{k \to \infty} (x_k - y_k) = u - v$.
+		\item If uv is defined in $\hat{F}$, then $\lim_{k \to \infty} x_k y_k = uv$.
+		\item If $\frac{u}{v}$ is defined in $\hat{F}$, then $\lim_{k \to \infty} \frac{x_k}{y_k} = \frac{u}{v}$
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Monotonic Surjective Functions]
+	Let I and J be intervqals in a subfield $F \subseteq \bb{R}$. SPS $f: I \to J$ is increasing and surjective. Let $\langle x_k \rangle$ be a sequence in I. Then
+	\begin{enumerate}
+		\item If $x_K \to a \in I$, then $f(x_k) \to f(a) \in J$.
+		\item If $x_k \to u \in F \cup \{\infty\}$ is the right endpoint of I, then $f(x_k) \to v \in F \cup \{\infty\}$ is the right endpoint in J.
+		\item If $x_k \to u \in F \cup \{-\infty\}$ is the left endpoint of I, then $f(x_k) \to v \in F \cup \{-\infty\}$ is the left endpoint in J.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Basic Elementary functions Acting on Limits]
+	Let $\langle x_k \rangle$ be a sequence in $\bb{R}$ ad let $b \in \bb{R}$. Then
+	\begin{enumerate}
+		\item $x_k \to a > 0 \implies x_k^b \to a^b$ and \\
+			\[
+				x_k \to \infty \implies \lim_{k \to \infty} x_k^b =
+				\begin{cases}
+					\infty 	& b > 0 \\
+					1		& b = 0 \\
+					0 		& b < 0
+				\end{cases}
+			\]
+		\item $(x_k \to a \land b > 0) \implies b^{x_k} \to b^a$ and \\
+			\[
+				(x_k \to \infty \land b > 0) \implies \lim_{k \to \infty} b^{x_k} =
+				\begin{cases}
+					\infty 	& b > 1 \\
+					1		& b = 1 \\
+					0		& 0 < b < 1
+				\end{cases}
+			\]
+		\item $(x_k \to a > 0 \land b > 0) \implies \log_b x_k \to \log_b a$ and \\
+			\[
+				(x_k \to \infty \land b > 0) \implies \lim_{k \to \infty} \log_b x_k = 
+				\begin{cases}
+					\infty 	& b > 1 \\
+					0		& b = 1 \\
+					-\infty & 0 < b < 1
+				\end{cases}
+			\]
+		\item $x_k \to a \implies (\sin x_k \to \sin a \land \cos x_k \to \cos a)$ and \\
+			  $(x_k \to a (\forall t \in \bb{Z} \> a \neq \frac{\pi}{2} + 2 \pi t)) \implies \tan x_k \to \tan a$
+		\item $x_k \to a \in [-1, 1] \implies (\arcsin x_k = \arcsin a \land \arccos x_k = \arccos a)$, \\
+			  $x_k \to a \implies \arctan x_k \to \arctan a$, \\
+			  $x_k \to \infty \implies \arctan x_k \to \frac{\pi}{2}$, and \\
+			  $x_k \to -\infty \implies \arctan x_k \to -\frac{\pi}{2}$
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Comparison Theorem for Sequences]
+	Let $\langle x_k \rangle$ and $\langle y_k \rangle$ be sequences in a subfield $F \subseteq \bb{R}$. SPS that $x_k \leq y_k$ for all k. Then
+	\begin{enumerate}
+		\item $(x_k \to a \land y_k \to b) \implies a \leq b$
+		\item $x_k \to \infty \implies y_k \to \infty$
+		\item $y_k \to -\infty \implies x_k \to -\infty$
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Squeeze Theorem for Sequences]
+	Let $\langle x_k \rangle$, $\langle y_k \rangle$ and $\langle z_k \rangle$ be sequences in a subfield $F \subseteq \bb{R}$.
+	\begin{enumerate}
+		\item $(\forall k \in \bb{N} \; x_k \leq y_k \leq x_k \> \land \> x_k \to a \land z_k \to a) \implies y_k \to a$
+		\item $(\forall k \in \bb{N} \; |x_k| \leq y_k \> \land \> y_k \to 0) \implies x_k \to 0$
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}[Bounds]
+	Let $\langle x_k \rangle$ be a sequence in an ordered set X. We say that
+	\begin{enumerate}
+		\item $\langle x_k \rangle$ is bounded above iff the set $\{x_k | n \in \bb{N} \}$ is bounded above;
+		\item $\langle x_k \rangle$ is bounded below iff the set $\{x_k | n \in \bb{N} \}$ is bounded below.
+	\end{enumerate}
+\end{defn}
+
+
+\section{Bolzano-Weierstrass Theorem}
+
+\begin{defn}[Increasing, Decreasing, and Monotonic Sequences]
+	Let $\langle x_k \rangle$ be a sequence in a subfiend $F \subseteq \bb{R}$. We say that
+	\begin{enumerate}
+		\item $\langle x_k \rangle$ is increasing iff $\forall k, l \in \bb{Z}_{\geq p} \> (k \leq l \implies x_k \leq x_l)$
+		\item $\langle x_k \rangle$ is strictly increasing iff $\forall k, l \in \bb{Z}_{\geq p} \> (k < l \implies x_k < x_l)$
+		\item $\langle x_k \rangle$ is decreasing iff $\forall k, l \in \bb{Z}_{\geq p} \> (k \leq l \implies x_k \geq x_l)$
+		\item $\langle x_k \rangle$ is strictly decreasing iff $\forall k, l \in \bb{Z}_{\geq p} \> (k < l \implies x_k > x_l)$
+	\end{enumerate}
+	We say that $\langle x_k \rangle$ is monotonic when it is either increasing or decreasing only.
+\end{defn}
+
+\begin{thm}[Monotone Convergence Theorem]
+	Let $\langle x_k \rangle$ be a sequence in $\bb{R}$.
+	\begin{enumerate}
+		\item SPS $\langle x_k \rangle$ is increasing. If $\langle x_k \rangle$ is bounded above, then $x_k \to \sup \{x_k\}$. If $\langle x_k \rangle$ is not bounded above, then $x_k \to \infty$.
+		\item SPS $\langle x_k \rangle$ is decreasing. If $\langle x_k \rangle$ is bounded below, then $x_k \to \inf \{x_k\}$. If $\langle x_k \rangle$ is not bounded below, then $x_k \to -\infty$.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Nested Interval Theorem]
+	Let $I_0, I_1, I_2, ...$ be nonempty, closed, and bounded intervals in $\bb{R}$. SPS $I_0 \supseteq I_1 \supseteq I_2 \supseteq \hdots$, then $\bigcap_{k = 0}^\infty I_k \neq \emptyset$. Moreover, if the lengths of these intervals satisfy $|I_k| \to 0$ as $k \to \infty$, then $\bigcap_{k = 0}^\infty I_k$ is a single point.
+\end{thm}
+
+\begin{defn}[Rearrangement of a Sequence]
+	Let $\langle x_k \rangle_{k \geq p}$ be a sequence in a set X. Given a bijective function $F: \bb{Z}_{\geq q} \to \bb{Z}_{\geq p}$ such that $f(l) = k_l$ and let $y_l = x_{k_l}$ for $l \geq q$. Then the sequence $\langle y_l \rangle_{l \geq q}$ is called a rearrangement of the sequence $\langle x_k \rangle_{k \geq p}$.
+\end{defn}
+
+\begin{thm}[Convergence of Subsequences and Rearrangements]
+	Let $\langle x_k \rangle$ be a sequence in a subfield $F \subseteq \bb{R}$. SPS that $x_k \to a$. Then
+	\begin{enumerate}
+		\item every subsequence of $\langle x_k \rangle$ converges to a; and
+		\item every rearrangement of $\langle x_k \rangle$ converges to a.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Bolzano-Weierstrass Theorem]
+	Every bounded sequence of $\bb{R}$ has a convergent subsequence.
+\end{thm}
+
+
+\section{Cauchy Sequences}
+
+\begin{defn}[Cauchy]
+	Let $\langle x_k \rangle_{k \geq p}$ be a seuqnece in a subfield $F \subseteq \bb{R}$. We say that $\langle x_k \rangle$ is Cauchy when
+	\[
+		\forall \epsilon > 0 \; \exists m \in \bb{Z} \; \forall k, l \in \bb{Z}_{k \geq p}\; (k, l \geq m \implies |x_k - x_l| \leq \epsilon)
+	\]
+\end{defn}
+
+\begin{thm}[Cauchy Criterion for Convergence]
+	Let $\langle x_k \rangle$ be a sequnce of $\bb{R}$. Then $\langle x_k \rangle$ is Cauchy iff $\langle x_k \rangle$ converges (to some point $a \in \bb{R}$).
+\end{thm}
+
+
+% =================================
+% 		Chapter 3
+% =================================
+
+\chapter{Functions on \texorpdfstring{$\bb{R}$}{R}}
+
+
+\section{Two-Sided Limits}
+
+\begin{defn}[Limit Point]
+	Let $U \subseteq F$ where F is an ordered field. Let $f: U \to F$. For $a \in F$ we say that a is a limit point of U when
+	\[
+		\forall \epsilon > 0 \; \exists x \in U \; 0 < |x - a| < \epsilon
+	\]
+
+	When a is a limit point of A, we make the following definitions.
+	\begin{enumerate}
+		\item For $b \in F$ we say that the limit of f(x) as x tends to a is equal to b, and write $\lim\limits_{x \to a} f(x) = b$ when
+			\[
+				\forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in U \; (0 < |x - a| \leq \delta \implies |f(x) - b| \leq \epsilon).
+			\]
+		\item We say that the limit of f(x) as x tends to a is equal to infinity, and write $\lim\limits_{x \to a} f(x) = \infty$ when
+			\[
+				\forall r \in F \; \exists \delta > 0 \; \forall x \in U \; (0 < |x - a| \leq \delta \implies f(x) \geq r).
+			\]
+		\item We say that the limit of f(x) as x tends to a is equal to negative infinity, and write $\lim\limits_{x \to a}f(x) = -\infty$ when
+			\[
+				\forall r \in F \; \exists \delta > 0 \; \forall x \in U \; (0 < |x - a| \leq \delta \implies f(x) \leq r).
+			\]
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Limit Point from Above and Below]
+	Let $U \subseteq F$ where F is an ordered field. Let $f: U \to F$.
+
+	For $a \in F$, we say that a is a $\textbf{limit point from below}$ when
+	\[
+		\forall \delta > 0 \; \exists x \in U \; a - \delta < \leq x < a
+	\]
+	When a is a limit point of U from below and $b \in F$, we define:
+	\begin{enumerate}
+		\item $\lim\limits_{x \to a^-} f(x) = b \iff \forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in U \; (a - \delta \leq x < a \implies |f(x) - b| \leq \epsilon)$.
+		\item $\lim\limits_{x \to a^-} f(x) = \infty \iff \forall r \in F \; \exists \delta > 0 \; \forall x \in U \; (a - \delta \leq x < a \implies f(x) \geq r)$.
+		\item $\lim\limits_{x \to a^-} f(x) = -\infty \iff \forall r \in F \; \exists \delta > 0 \; \forall x \in U \; (a - \delta \leq x < a \implies f(x) \leq r)$.
+	\end{enumerate}
+
+	For $a \in F$, we say that a is a $\textbf{limit point from above}$ when
+	\[
+		\forall \delta > 0 \; \exists x \in U \; a < x \leq a + \delta
+	\]
+	When a is a limit point of U from above and $b \in F$, we define:
+	\begin{enumerate}
+		\item $\lim\limits_{x \to a^+} f(x) = b \iff \forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in U \; (a < x \leq a + \delta \implies |f(x) - b| \leq \epsilon)$.
+		\item $\lim\limits_{x \to a^+} f(x) = \infty \iff \forall r \in F \; \exists \delta > 0 \; \forall x \in U \; (a < x \leq a + \delta \implies f(x) \geq r)$.
+		\item $\lim\limits_{x \to a^+} f(x) = -\infty \iff \forall r \in F \; \exists \delta > 0 \; \forall x \in U \; (a < x \leq a + \delta \implies f(x) \leq r)$			
+	\end{enumerate}
+\end{defn}
+
+\begin{defn}[Infinity As A Limit Point]
+	Let $U \subseteq F$ where F is an ordered field. Let $f: U \to F$.
+
+	We say that infinity is a limit point (from below) when U is not bounded above, i.e $\forall m \in F \; \exists x \in U \; x \geq m$. When U is not bounded above and $b \in F$, we make the following definitions:
+	\begin{enumerate}
+		\item $\lim\limits_{x \to \infty} f(x) = b \iff \forall \epsilon > 0 \; \exists m \in F \; \forall x \in U \; (x \geq m \implies |f(x) - b| \leq \epsilon).$
+		\item $\lim\limits_{x \to \infty} f(x) = \infty \iff \forall r \in F \; \exists m \in F \; \forall x \in U \; (x \geq m \implies f(x) \geq r).$
+		\item $\lim\limits_{x \to \infty} f(x) = -\infty \iff \forall r \in F \; \exists m \in F \; \forall x \in U \; (x \geq m \implies f(x) \leq r).$
+	\end{enumerate}
+
+	We say that negative infinity is a limit point (from above) when U is not bounded below, i.e. $\forall m \in F \; \exists x \in U \; x \leq m$. When U is not bounded below and $b \in F$, we make the following definitions:
+	\begin{enumerate}
+		\item $\lim\limits_{x \to -\infty} f(x) = b \iff \forall \epsilon > 0 \; \exists m \in F \; \forall x \in U \; (x \leq m \implies |f(x) - b| \leq \epsilon).$
+		\item $\lim\limits_{x \to -\infty} f(x) = \infty \iff \forall r \in F \; \exists m \in F \; \forall x \in U \; (x \leq m \implies f(x) \geq r).$
+		\item $\lim\limits_{x \to -\infty} f(x) = -\infty \iff \forall r \in F \; \exists m \in F \; \forall x \in U \; (x \leq m \implies f(x) \leq r).$
+	\end{enumerate}
+\end{defn}
+
+\begin{thm}[Two-sided Limits]
+	Let F be a subfield of $\bb{R}$. Let $A \subseteq F$. Let $f: A \to F$. Let $a \in F$. SPS that a is a limit point of A both from above and below. Then $\forall u \in F$, we have $\lim\limits_{x \to a} f(x) = u \iff \lim\limits_{x \to a^-} f(x) = u = \lim\limits_{x \to a^+} f(x)$.
+\end{thm}
+
+\begin{thm}[Sequential Characterization of Limits of Functions]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f: A \to F$ and $u \in F$.
+	\begin{enumerate}
+		\item When $a \in F$ is a limit point of A, $\lim\limits_{x \to a} f(x) = u$ iff for every sequence $\langle x_k \rangle$ in $A \setminus \{a\}$ with $x_k \to a$ we have $f(x_k) \to u$.
+		\item When a is a limit point of A from below, $\lim\limits_{x \to a^-} f(x) = u$ iff for every sequence $\langle x_k \rangle$ in $\{x \in A | x < a\}$ with $x_k \to a$ we have $f(x_k) \to u$.
+		\item When a is a limit point of A from above, $\lim\limits_{x \to a^+} f(x) = u$ iff for every sequence $\langle x_k \rangle$ in $\{x \in A | x > a\}$ with $x_k \to a$ we have $f(x_k) \to u$.
+		\item When A is not bounded above, $\lim\limits_{x \to \infty} f(x) = u$ iff for every sequence $\langle x_k \rangle$ in A with $x_k \to \infty$ we have $f(x_k) \to u$.
+		\item When A is not bounded below, $\lim\limits_{x \to -\infty} f(x) = u$ iff for every sequence $\langle x_k \rangle$ in A with $x_k \to -\infty$ we have $f(x_k) \to u$.
+	\end{enumerate}
+\end{thm}
+
+\begin{remark}
+	It follows form the Sequential Characterization of Limits of Functions that all the theorems about limits of sequences (see \hyperref[chp2]{Chapter 2}) imply analogous theorems in the more general setting of limits of functions. We will state those theorems for easier reference.
+\end{remark}
+
+\begin{thm}[Local Determination of Limits]
+	Let F be a subfield of $\bb{R}$, let $A, B \subseteq F$, let $f: A \to F$ and $g: B \to F$. SPS that $a \in F$ is a limit point of both sets A and B, and that for some $\delta > 0$ we have $C = \{x \in A \; | \; 0 < |x - a| \leq \delta\} \subseteq \{x \in B \; | \; 0 < |x - a| \leq \delta\}$ and that f(x) = g(x) for all $x \in C$. Then for $u \in \hat{F}$
+		\[
+			\lim_{x \to a} g(x) = u \iff \lim_{x \to a} f(x) = u
+		\]
+	Analogous results hold for limits $x \to a^\pm$ and $x \to \pm \infty$.
+\end{thm}
+
+\begin{thm}[Uniquness of Limits]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f: A \to F$ and let $a \in F$ be a limit point of A. For $u, v \hat{F}$,
+		\[
+			\lim_{x \to a} f(x) = u \land \lim_{x \to a} f(x) = v \implies u = v
+		\]
+	Analogous result holds for limits $x \in a^\pm$ and $x \to \pm \infty$.
+\end{thm}
+
+\begin{thm}[Extended Operations on Limits]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f, g: A \to F$, and let $a \in F$ be a limit point of A. Let $u ,v \in \cap{F}$, and SPS that $\lim_{x \to a} f(x) = u$ and $\lim_{x \to a} g(x) = v$. Then
+	\begin{enumerate}
+		\item $u \pm v \in \hat{F} \implies \lim_{x \to a} (f \pm g)(x) = u \pm v$
+		\item $uv \in \hat{F} \implies \lim_{x \to a} (f \cdot g)(x) = uv$
+		\item $\frac{u}{v} \in \hat{F} \implies \lim_{x \to a} (\frac{f}{g})(x) = \frac{u}{v}$
+	\end{enumerate}
+	Analogous results hold for limits $x \to a^\pm$ and $x \to \pm \infty$.
+\end{thm}
+
+\begin{thm}[Basic Elementary Functions Acting on Limits]
+	For $A \subseteq \bb{R}$, let $f: A \to \bb{R}$ and $a, b \in \bb{R}$ with a as a limit point of A. We have
+	\begin{enumerate}
+		\item $\lim_{x \to a} f(x) = b > 0 \implies \lim_{x \to a} f(x)^c = b^c$ \\
+			  $\lim_{x \to a} f(x) = \infty \implies \lim_{x \to a} f(x)^c = \begin{cases}
+			  	\infty 	& c > 0 \\
+			  	1		& c = 0 \\
+			  	0		& c < 0
+			  \end{cases}$ \\
+			  $\forall x \in A \; (f(x) > 0 \land \lim_{x \to a} f(x) = 0) \implies \lim_{x \to a} f(x)^c = \begin{cases}
+			  	0		& c > 0 \\
+			  	1		& c = 0 \\
+			  	\infty 	& c < 0
+			  \end{cases}$
+		\item $\lim_{x \to a} f(x) = \infty \land c > 0 \implies \lim_{x \to a} c^{f(x)} = \begin{cases}
+				\infty		& c > 1 \\
+				1			& c = 1 \\
+				0 			& c < 1
+			  \end{cases}$ \\
+			  $\lim_{x \to a} f(x) = b \land c > 0 \implies \lim_{x \to a} c^{f(x)} = c^b$ \\
+			  $\lim_{x \to a} f(x) = -\infty \land c > 0 \implies \lim_{x \to a} c^{f(x)} = \begin{cases}
+			  	\infty 		& c < 1 \\
+			  	1			& c = 1 \\
+			  	0 			& c > 1
+			  \end{cases}$
+		\item $\lim_{x \to a} f(x) = b > 0 \land c > 0 \implies \lim_{x \to a} \log_c f(x) = \log_c b$ \\
+			  $\lim_{x \to a} f(x) = \infty \land c > 0 \implies \lim_{x \to a} \log_c f(x) = \begin{cases}
+			  	\infty 	& c > 1 \\
+			  	0 		& c = 1 \\
+			  	-\infty & c < 1
+			  \end{cases}$ \\
+			  $\forall x \in A \; (f(x) > 0 \land \lim\limits_{x \to a} f(x) = 0 \land 1 \neq c > 0) \implies \lim\limits_{x \to a} \log_c f(x) = \begin{cases}
+			  	-\infty 	& c > 1 \\
+			  	\infty 		& c < 1
+			  \end{cases}$
+		\item $\lim_{x \to a} f(x) = b \implies (\lim_{x \to a} \sin f(x) = \sin b \land \lim_{x \to a} \cos f(x) = \cos b)$ \\
+			  The limits $\lim_{x \to \pm \infty} \sin x, \lim_{x \to \pm \infty} \cos x, \text{ and } \lim_{x \to \pm \infty} \tan x$ do not exists.
+		\item $\forall x \in A \; (f(x) \in [-1, 1] \land \lim_{x \to a} f(x) = b) \implies \lim_{x \to a} \arcsin f(x) = \arcsin b$. \\
+			  $\lim_{x \to a} f(x) = b \in \bb{R} \implies \lim_{x \to a} \arctan f(x) = \arctan b$ \\
+			  $\lim_{x \to a} f(x) = \infty \implies \lim_{x \to a} \arctan f(x) = \frac{\pi}{2}$ and \\
+			  $\lim_{x \to a} f(x) = -\infty \implies \lim_{x \to a} \arctan f(x) = -\frac{\pi}{2}$.
+	\end{enumerate}
+
+	Similar results hold for limits $x \to a^\pm$ and $x \to \pm \infty$ (unless stated otherwise in the above statements).
+\end{thm}
+
+\begin{thm}[Comparison Theorem for Functions]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f, g: A \to F$ and let $a \in F$ be a limit point of A. SPS that $\forall x \in A \; f(x) \leq g(x)$. Then
+	\begin{enumerate}
+		\item $\exists u, v \in \hat{F} \; (\lim\limits_{x \to a} f(x) = u \land \lim\limits_{x \to a} g(x) = v) \implies u \leq v.$
+		\item $\lim\limits_{x \to a} f(x) = \infty \implies \lim\limits_{x \to a} g(x) = \infty,$ and
+		\item $\lim\limits_{x \to a} g(x) = -\infty \implies \lim\limits_{x \to a} f(x) = -\infty.$
+ 	\end{enumerate}
+ 	Similar results hold for when $x \to a^\pm$ and $x \to \pm \infty$.
+\end{thm}
+
+\begin{thm}[Squeeze Theorem for Functions]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f, g, h: A \to F$, let $b \in F$ and let a be a limit point of A. We have that
+	\begin{enumerate}
+		\item $\forall x \in A \; \Big(f(x) \leq g(x) \leq h(x) \land \lim\limits_{x \to a} f(x) = b = \lim\limits_{x \to a} h(x) \Big) \implies \lim\limits_{x \to a} g(x) = b.$
+		\item $\forall x \in A \; \Big(|f(x)| \leq g(x) \land \lim\limits_{x \to a} g(x) = 0 \Big) \implies \lim\limits_{x \to a} f(x) = 0$
+	\end{enumerate}
+\end{thm}
+
+
+\section{Continuity}
+
+\begin{defn}[Continuity]
+	Let F be a subfield of $\bb{R}$, let $A \in F$, and let $f: A \to F$. For all $a \in A$, we say that f is continuous at a iff
+	\[
+		\forall a \in A \; \forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in A \; (|x - a| \leq \delta \implies |f(x) - f(a)| \leq \epsilon)
+	\]
+	(where note that $\delta$ depends on $a, f, \text{ and, especially, } \epsilon$ in general).
+
+	f is said to be continuous (in A) when f is continuous at every point $a \in A$.
+\end{defn}
+
+\begin{defn}[Limit Point and Continuity]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f: A \to F$ and let $a \in A$. Then
+	\begin{enumerate}
+		\item if a is not a limit point of A then f is continuous on a; and
+		\item if a is a limit point of A, then f is continuous on a iff $\lim_{x \to a} f(x) = f(a)$.
+	\end{enumerate}
+\end{defn}
+
+\begin{thm}[Sequential Characterization of Continuity]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f: A \to F$ and let $a \in A$. Then f is continuous at a iff for every sequence $\langle x_k \rangle$ in A with $x_k \to a$ we have $f(x_k) \to f(a)$.
+\end{thm}
+
+\begin{thm}[Operations on Continuous Functions]
+	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f, g: A \to F$, let $a \in A$ and let $c \in F$. SPS that f and g are continuous at a. Then the functions cf, f $\pm$ g and fg are call continuous at a, and if $g(a) \neq 0$, then the function $\frac{f}{g}$ is continuous at a.
+\end{thm}
+
+\begin{thm}[Composition of Continuous Functions]
+	Let F be a subfield of $\bb{R}$, let $A, b \subseteq \bb{R}$, and let $f: A \to \bb{R}$ and $g: B \to \bb{R}$. Let $h = g \circ f : C \to \bb{R}$ where $C = A \cap f^{-1}(B)$
+	\begin{enumerate}
+		\item If f is continuous at $a \in C$ and g is continuous at f(a), then h is continuous at a.
+		\item If f is continuous (in A) and g is continuous (in B), then h is continuous (in C).
+	\end{enumerate}
+\end{thm}
+
+\begin{crly}[Continuity of Elementary Functions]
+	Every elementary function is continuous (in their respective domain).
+\end{crly}
+
+\begin{thm}[Functions Acting on Limits]
+	Let F be a subfield of $\bb{R}$, let $A, B \subseteq F$, let $f: A \to F$ and $g: B \to F$, and let $h = g \circ f : C \to F$ where $C = A \cap f^{-1}(B)$. Let s be a limit point of C (hence also of A) and let b be a limit point of B. Let $c \in F$. SPS that $\lim\limits_{x \to a} f(x) = a \land \lim\limits_{y \to b} g(y) = c$. SPS either that $\forall x \in C \setminus \{a\} \; f(x) \neq b$ or g is continuous at b. Then $\lim\limits_{x \to a} h(x) = c$.
+\end{thm}
+
+\begin{thm}[Intermediate Value Theorem]
+	Let I be an interval in $\bb{R}$ and let $f: I \to \bb{R}$ be continuus (in I). Let $a, b \in I$ with $a \leq b$ and let $y \in \bb{R}$.
+	\[
+		\min \{f(a), f(b)\} \leq y \leq \max \{f(a), f(b)\} \implies \exists x \in [a, b] \; (f(x) = y)
+	\]
+\end{thm}
+
+\begin{defn}[Maximum, Minimum and Extreme Values]
+	
+\end{defn}
+
+
+% =================================
+% 		Chapter 4
+% =================================
+
+
+% =================================
+% 		Chapter 5
+% =================================
+
+
+% =================================
+% 		Chapter 6
+% =================================
+
+
+% =================================
+% 		Chapter 7
+% =================================
+
+
+% =================================
+% 		Appendix
+% =================================
 \appendix
 
 \chapter{ZF Set Theory and the Axiom of Choice}\label{apdxA}
