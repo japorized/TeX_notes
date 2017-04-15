@@ -1322,12 +1322,176 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 % =================================
 % 		Chapter 6
 % =================================
-\chapter{Sequences and Series}
+\chapter{Series of \texorpdfstring{$\bb{R}$}{R}}
+
+
+\section{Introduction}
+
+\begin{defn}[Series]
+	Let $\{a_n\}_{n \geq k}$ be a sequence. The series $\sum_{n \geq k} a_n$ is defined to be the sequence $\{S_l\}_{l \geq k}$ where
+	\[
+		S_l = \sum_{n = k}^{l} a_n = a_k + a_{k + 1} + a_{k + 2} + \hdots + a_l
+	\]
+	The term $S_l$ is called the $l^{th}$ partial sum of the series $\sum_{n \geq k} a_n$. The sum of the series, denoted by
+	\[
+		S = \sum_{n = k}^{\infty} a_n = a_k + a_{k + 1} + a_{k + 2} + \hdots ,
+	\]
+	is the limit of the sequence of the partial sums, if it exists, and we say that the series converges when the sum exists and is finite.
+\end{defn}
+
+\begin{eg}[Geometric Series]
+	For $a \neq 0$, the series $\sum_{n \geq k} a_n$ converges iff $|r| < 1$, and in this case
+	\[
+		\sum_{n = k}^{\infty} ar^n = \frac{ar^k}{1 - r}.
+	\]
+\end{eg}
+
+\begin{thm}[First Finitely Many Terms Do Not Affect Convergence]
+	Let $\{a_n\}_{n \geq k}$ be a sequence. Then for any interger $m \geq k$, the series $\sum_{n \geq k} a_n$ converges iff the series $\sum_{n \geq m} a_n$ converges, and in this case
+	\[
+		\sum_{n = k}^{\infty} a_n = (a_k + a_{k + 1} + \hdots + a_{m - 1}) + \sum_{n = m}^{\infty} a_n.
+	\]
+\end{thm}
+
+\begin{defn}[Error]
+	When we approximate a value x by the value y, the error in our approximation is $|x - y|$.
+\end{defn}
+
+\begin{thm}[Linearity]
+	If $\sum a_n$ and $\sum b_n$ are convergent series then
+	\begin{enumerate}
+		\item for any $c \in \bb{R}$, $\sum ca_n$ converges and $\sum\limits_{n=k}^{\infty} ca_n = c \sum\limits_{n=k}^{\infty} a_n$, and
+		\item the series $\sum (a_n + b_n)$ converges and $\sum\limits_{n=k}^{\infty} (a_n + b_n) = \sum\limits_{n=k}^{\infty} a_n + \sum\limits_{n=k}^{\infty} b_n$
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Series of Positive Terms]
+	Let $\sum a_n$ be a series.
+	\begin{enumerate}
+		\item If $a_n \geq 0$ for all $n \geq k$ then either $\sum a_n$ converges or $\sum\limits_{n = k}^{\infty} a_n = \infty$.
+		\item If $a_n \leq 0$ fora ll $n \geq k$ then either $\sum a_n$ converges or $\sum\limits_{n = k}^{\infty} a_n = -\infty$.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Cauchy Criterion]
+	Let $\sum a_n$ be a series. Then $\sum a_n$ converges iff
+	\[
+		\forall \epsilon > 0 \; \exists N \in \bb{Z}_{\geq k} \; \forall l, m \in \bb{Z}_{\geq k} \; \Bigg(m > l > N \implies \left|\sum_{n = l +1}^{m} a_n \right| < \epsilon \Bigg)
+	\]
+\end{thm}
+
+
+\section{Convergence Tests}
+
+\begin{thm}[Divergence Test]
+	If $\sum a_n$ converges then $\lim\limits_{n \to \infty} a_n = 0$. Equivalently, if $\lim\limits_{n \to \infty} a_n$ either does not exists, or exists but is not equal to 0, then $\sum a_n$ diverges.
+\end{thm}
+
+\begin{remark}
+	Converse of the Divergence Test is false. E.g. $\sum \frac{1}{n}$ (Harmonic Series) diverges but $\lim\limits \frac{1}{n} = 0$.
+\end{remark}
+
+\begin{thm}[Integral Test]
+	Let f(x) be positive and decreasing for $x \geq k$, and let $a_n = f(n)$ for all integers $n \geq k$. Then $\sum a_n$ converges iff $\int_{k}^{\infty} f(x) dx$ converges, and in this case, for any $l \geq k$ we have
+	\[
+		\int_{l + 1}^{\infty} f(x) dx \leq \sum_{n = l + 1}^{\infty} a_n \leq \int_{l}^{\infty} f(x) dx
+	\]
+\end{thm}
+
+\begin{crly}[p-Series]
+	The series
+	\[
+		\sum_{k = 1}^{\infty} \frac{1}{k^p}
+	\]
+	converges iff $p > 1$.
+\end{crly}
+
+\begin{thm}[Comparison Test]
+	SPS that $0 \leq a_n \leq b_n$ for all $n \geq k$. Then if $\sum b_n$ converges, then so does $\sum a_n$ and in this case,
+	\[
+		\sum_{n = k}^{\infty} a_n \leq \sum_{n = k}^{\infty} b_n.
+	\]
+\end{thm}
+
+\begin{thm}[Limit Comparison Test]
+	Let $a_n \geq 0$ and let $b_n > 0$ for all $n \geq k$. SPS that $\lim\limits_{n \to \infty} \frac{a_n}{b_n} = r$. Then
+	\begin{enumerate}
+		\item if $r = \infty$ and $\sum a_n$ converges, then so does $\sum b_n$.
+		\item if r = 0 and $\sum b_n$ conveges, then so does $\sum a_n$, and
+		\item if $0 < r < \infty$, then $\sum a_n$ converges iff $\sum b_n$ converges.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Ratio Test]
+	Let $a_n > 0$ for all $n \geq k$. SPS $\lim\limits_{n \to \infty} \frac{a_{n + 1}}{a_n} = r$. Then
+	\begin{enumerate}
+		\item if $r < 1$, then $\sum a_n$ converges, and
+		\item if $r > 1$, then $\lim\limits_{n \to \infty} a_n = \infty$ so $\sum a_n = \infty$
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}[Limit Supremum]
+	The limit supremum of a sequence of real numbers $\{x_k\}$ is defined to be
+	\[
+		\limsup_{k \to \infty} x_k := \lim_{n \to \infty} \left( \sup_{k > n} x_k \right).
+	\]
+\end{defn}
+
+\begin{thm}[Root Test]
+	Let $a_n \geq 0$ for all $n \geq k$. Let $r = \limsup\limits_{n \to \infty} \sqrt[n]{a_n}$. Then
+	\begin{enumerate}
+		\item if $r < 1$, then $\sum a_n$ converges, and
+		\item if r > 1, then $\lim_{n \to \infty} a_n = \infty$ so $\sum a_n = \infty$.
+	\end{enumerate}
+\end{thm}
+
+\begin{remark}
+	The Root and Ratio Tests are inconclusive when r = 1.
+\end{remark}
+
+\begin{defn}[Alternating Sequence]
+	A sequence $\{a_n\}_{n \geq k}$ is said to be alternating when either we have $a_n = (-1)^n|a_n|$ for all $n \geq k$ or we have $a_n = (-1)^{n + 1}|a_n|$ for all $n \geq k$.
+\end{defn}
+
+\begin{thm}[Alternating Series Test]
+	Let $\{a_n\}_{n \geq k}$ be an alternating series. If $\{|a_n|\}$ is decreasing with $\lim\limits_{n \to \infty} |a_n| = 0$, then $\sum_{n \geq k} a_n$ converges, and in this case
+	\[
+		\left| \sum_{n=k}^{\infty} a_n \right| \leq |a_k|
+	\]
+\end{thm}
+
+\begin{defn}[Converge Absolutely \& Converge Conditionally]
+	A series $\sum_{n \geq k} a_n$ is said to converge absolute when $\sum_{n \geq k} |a_n|$ converges.
+
+	The series is said to converge conditionally if $\sum_{n \geq k} a_n$ converges but $\sum_{n \geq k} |a_n|$ diverges.
+\end{defn}
+
+\begin{thm}[Absolute Converges $\implies$ Convergence]
+	If $\sum |a_n|$ converges then so does $\sum a_n$.
+\end{thm}
+
+
+\section{Fubini's Theorem for Series}
+\begin{defn}[Multiplication of Series]
+	SPS that $\sum_{n \geq 0} |a_n|$ and $\sum_{n \geq 0} b_n$ both converge, and define $c_n = \sum\limits_{k = 0}^{n} a_n b_{n - k}$. Then $\sum_{n \geq 0} c_n$ converges and
+	\[
+		\sum_{n = 0}^{\infty} c_n = \left( \sum_{n = 0}^{\infty} a_n \right) \left(\sum_{n = 0}^{\infty} b_n \right)
+	\]
+\end{defn}
+
+\begin{thm}[Fubini's Theorem for Series]
+	Let $a_{n, m} \in \bb{R}$ for all $n, m \geq 0$. SPS that $\sum_{m \geq 0} |a_{n, m}|$ converges for each $n \geq 0$ and that $\sum\limits_{n \geq 0} \left(\sum\limits_{m = 0}^{\infty} |a_{n, m}| \right)$ converges. Then$\sum_{m \geq 0} a_{n, m}$ converges for all $n \geq 0$, $\sum\limits_{n \geq 0} \left( \sum\limits_{m = 0}^{\infty} a_{n, m} \right)$ converges, $\sum_{n \geq 0} a_{n, m}$ converges for all $m \geq 0, \sum\limits_{m \geq 0} \left(\sum\limits_{n = 0}^{\infty} a_{n, m} \right)$ converges, and
+	\[
+		\sum_{n = 0}^{\infty} \left(\sum_{m = 0}^{\infty} a_{n, m} \right) = \sum_{m = 0}^{\infty} \left(\sum_{n = 0}^{\infty} a_{n, m} \right)
+	\]
+\end{thm}
 
 % =================================
 % 		Chapter 7
 % =================================
 \chapter{Sequences and Series of Functions}
+
+\section{Pointwise Convergence}
 
 % =================================
 % 		Chapter 8
