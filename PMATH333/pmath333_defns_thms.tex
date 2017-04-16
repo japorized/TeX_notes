@@ -610,14 +610,14 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 \section{Cauchy Sequences}
 
 \begin{defn}[Cauchy]
-	Let $\langle x_k \rangle_{k \geq p}$ be a seuqnece in a subfield $F \subseteq \bb{R}$. We say that $\langle x_k \rangle$ is Cauchy when
+	Let $\langle x_k \rangle_{k \geq p}$ be a sequence in a subfield $F \subseteq \bb{R}$. We say that $\langle x_k \rangle$ is Cauchy when
 	\[
 		\forall \epsilon > 0 \; \exists m \in \bb{Z} \; \forall k, l \in \bb{Z}_{k \geq p}\; (k, l \geq m \implies |x_k - x_l| \leq \epsilon)
 	\]
 \end{defn}
 
-\begin{thm}[Cauchy Criterion for Convergence]
-	Let $\langle x_k \rangle$ be a sequnce of $\bb{R}$. Then $\langle x_k \rangle$ is Cauchy iff $\langle x_k \rangle$ converges (to some point $a \in \bb{R}$).
+\begin{thm}[Cauchy Criterion for Convergence]\label{CauchyCriterion_Seq}
+	Let $\langle x_k \rangle$ be a sequence of $\bb{R}$. Then $\langle x_k \rangle$ is Cauchy iff $\langle x_k \rangle$ converges (to some point $a \in \bb{R}$).
 \end{thm}
 
 
@@ -1087,19 +1087,12 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 \end{crly}
 
 
-\section{Taylor's Theorem and l'Hôpital's Rule}
+\section{l'Hôpital's Rule}
 
 \begin{thm}[l'Hôpital's Rule]
 	Let I be a non degenerate interval in $\bb{R}$. Let $a \in I$, or let a be an endpoint of I. Let $f, g: I \setminus \{a\} \to \bb{R}$. SPS that f and g are differentiable in $I \setminus \{a\}$ with $g'(x) \neq 0$ for all $x \in I \setminus \{a\}$. SPS further that $\lim\limits_{x \to a} f(x) = \lim\limits_{x \to a} g(x) = 0 \text{ or } \pm \infty$, and suppose that $\lim\limits_{x \to a} \frac{f'(x)}{g'(x)} \in \hat{\bb{R}}$. Then
 	\[
 		\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}
-	\]
-\end{thm}
-
-\begin{thm}[Taylor's Formula]
-	Let $n \in \bb{N}$ and let $a ,b \in \hat{\bb{R}}$ with a < b. If $f: (a, b) \to \bb{R}$ and $f^{(n + 1)}$ exists on (a, b), then for each pair of points $x, x_0 \in (a, b)$ there is a number c between x and $x_0$ such that
-	\[
-		f(x) = f(x_0)) + \sum_{k=1}^{n}\frac{f^{(k)} (x_0)}{k!}(x - x_0)^k + \frac{f^{(n + 1)}(c)}{(n + 1)!}(x - x_0)^{n + 1}
 	\]
 \end{thm}
 
@@ -1148,7 +1141,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 
 	The number I is unique, and it is called the (Riemann) integral of f on [a, b], and we write
 	\[
-		I = \int_{a}^{b} f, \text{ or } I = \int_{a}^{b} f(x) dx
+		I = \int_{a}^{b} f, \text{ or } I = \int_{a}^{b} f(x) \, dx
 	\]
 \end{defn}
 
@@ -1301,7 +1294,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\begin{enumerate}
 		\item Let f be integrable on [a, b]. Define $F: [a, b] \to \bb{R}$ by
 			\[
-				F(x) = \int_{a}^{x} f = \int_{a}^{x} f(t) dt
+				F(x) = \int_{a}^{x} f = \int_{a}^{x} f(t) \, dt
 			\]
 			Then F is continuous on [a, b]. Moreover, if f is continuous at a point $x \in [a, b]$, then F is differentiable at x and
 			\[
@@ -1357,7 +1350,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	When we approximate a value x by the value y, the error in our approximation is $|x - y|$.
 \end{defn}
 
-\begin{thm}[Linearity]
+\begin{thm}[Linearity]\label{series_linearity}
 	If $\sum a_n$ and $\sum b_n$ are convergent series then
 	\begin{enumerate}
 		\item for any $c \in \bb{R}$, $\sum ca_n$ converges and $\sum\limits_{n=k}^{\infty} ca_n = c \sum\limits_{n=k}^{\infty} a_n$, and
@@ -1392,9 +1385,9 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 \end{remark}
 
 \begin{thm}[Integral Test]
-	Let f(x) be positive and decreasing for $x \geq k$, and let $a_n = f(n)$ for all integers $n \geq k$. Then $\sum a_n$ converges iff $\int_{k}^{\infty} f(x) dx$ converges, and in this case, for any $l \geq k$ we have
+	Let f(x) be positive and decreasing for $x \geq k$, and let $a_n = f(n)$ for all integers $n \geq k$. Then $\sum a_n$ converges iff $\int_{k}^{\infty} f(x) \, dx$ converges, and in this case, for any $l \geq k$ we have
 	\[
-		\int_{l + 1}^{\infty} f(x) dx \leq \sum_{n = l + 1}^{\infty} a_n \leq \int_{l}^{\infty} f(x) dx
+		\int_{l + 1}^{\infty} f(x) \, dx \leq \sum_{n = l + 1}^{\infty} a_n \leq \int_{l}^{\infty} f(x) \, dx
 	\]
 \end{thm}
 
@@ -1471,8 +1464,8 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 \end{thm}
 
 
-\section{Fubini's Theorem for Series}
-\begin{defn}[Multiplication of Series]
+\section{Fubini's Theorem for Series}\label{fubinithm_series}
+\begin{defn}[Multiplication of Series]\label{series_multiplication}
 	SPS that $\sum_{n \geq 0} |a_n|$ and $\sum_{n \geq 0} b_n$ both converge, and define $c_n = \sum\limits_{k = 0}^{n} a_n b_{n - k}$. Then $\sum_{n \geq 0} c_n$ converges and
 	\[
 		\sum_{n = 0}^{\infty} c_n = \left( \sum_{n = 0}^{\infty} a_n \right) \left(\sum_{n = 0}^{\infty} b_n \right)
@@ -1492,6 +1485,258 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 \chapter{Sequences and Series of Functions}
 
 \section{Pointwise Convergence}
+
+\begin{defn}[Pointwise Convergence of Sequences of Functions]
+	Let $I \subset \bb{R}$, let $f: I \to \bb{R}$, and for each interger $n \geq k$ let $f_n : I \to \bb{R}$. We say that the sequence of functions $\{f_n\}_{n \geq k}$ converges pointwise to f on I, and write $f_n \to f$ pointwise on I, when $\lim\limits_{n \to \infty} f_n(x) = f(x)$ for all $x \in I$, i.e.
+	\[
+		\forall x \in I \; \forall \epsilon > 0 \; \exists N \geq k \; \forall n \geq k \; (n > N \implies |f_n(x) - f(x)| < \epsilon)
+	\]
+\end{defn}
+
+\begin{remark}
+	Not that by the \hyperref[CauchyCriterion_Seq]{Cauchy Criterion for Convergence (for sequences)}, the sequence $\{f_n\}_{n \geq k}$ converges pointwise to some function f(x) on I iff
+	\[
+		\forall x \in I \; \forall \epsilon > 0 \; \exists N \geq k \; \forall n, m \geq k \; (n, m > N \implies |f_n(x) - f_m(x)| < \epsilon)
+	\]
+\end{remark}
+
+
+\section{Uniform Convergence}
+
+\begin{defn}[Uniform Convergence of Sequences of Functions]
+	Let $I \subset \bb{R}$, let $f: I \to \bb{R}$, and for each integer $n \geq k$, let $f_n: I \to \bb{R}$. We say that the sequence of functions $\{f_n\}_{n \geq k}$ converges uniformly to f on I, and write $f_n \to f$ uniformly on I, when
+	\[
+		\forall \epsilon > 0 \; \exists N \geq k \; \forall x \in I \; \forall n \geq k \; (n > N \implies |f_n(x) - f(x)| < \epsilon)
+	\]
+\end{defn}
+
+\begin{thm}[Cauchy Criterion for Uniform Convergence - Sequence of Functions]
+	Let $\{f_n\}_{n \geq k}$ be a sequence of functions on $I \subset \bb{R}$. Then $\{f_n\}_{n \geq k}$ converges uniformly to some function f on I
+	\[
+		\iff \forall \epsilon > 0 \; \exists N \geq k \; \forall x \in I \; \forall n, m \geq k \; (n , m > N \implies |f_n(x) - f_m(x)| < \epsilon)
+	\]
+\end{thm}
+
+\begin{thm}[Uniform Convergence, Limits and Continuity - Sequence of Functions]
+	SPS that $f_n \to f$ uniformly on I. Let x be a limit point of I. If $\lim_{y \to x} f_n(y)$ exists for each n, then
+	\[
+		\lim_{y \to x} \lim_{n \to \infty} f_n(y) = \lim_{n \to \infty} \lim_{y \to x} f_n(y)
+	\]
+	In particular, if each $f_n$ is continuous on I, then so is f.
+\end{thm}
+
+\begin{remark}
+	The above theorem allows us to ``interchange'' limit notations.
+\end{remark}
+
+\begin{thm}[Uniform Convergence and Integration - Sequence of Functions]
+	SPS that $f_n \to f$ uniformly on [a, b]. If each $f_n$ is integrable on [a, b] then so is f. In this case, if $g_n(x) = \int_{a}^{x} f_n(t) \,dt$ and $g(x) = \int_{a}^{x} f(t) dt$, then $g_n \to g$ uniformly on [a, b]. In particular, we have
+	\[
+		\lim_{n \to \infty} \int_{a}^{b} f_n(x) \, dx = \int_{a}^{b} \lim_{n \to \infty} f_n(x) \, dx
+	\]
+\end{thm}
+
+\begin{remark}
+	The above theorem can be interpretted as if we have a sequence of integrable functions, $f_n$ on a closed domain [a, b], then the function that the sequence of functions converge uniformly to, i.e. f, is also integrable on [a, b].
+
+	Moreover, we can ``interchange'' the limit and integration signs in the function.
+\end{remark}
+
+\begin{thm}[Uniform Convergence and Differentiation - Sequence of Functions]
+	Let $\{f_n\}$ be a sequence of functions on [a, b]. SPS that each $f_n$ is differentiable on [a, b], $\{f_n'\}$ converges uniformly on [a, b], and $\{f_n(c)\}$ converges for some $c \in [a, b]$. Then $\{f_n\}$ converges uniformly on [a, b], $\lim\limits_{n \to \infty} f_n(x)$ is differentiable, and
+	\[
+		\frac{d}{dx} \lim_{n \to \infty} f_n(x) = \lim_{n \to \infty} \frac{d}{dx} f_n(x)
+	\]
+\end{thm}
+
+\begin{remark}
+	The above theorem allows us to ``interchange'' the process of differentiation and taking the limit of a sequence of function.
+\end{remark}
+
+
+\section{Series of Functions}
+\begin{defn}[Series of Functions]
+	Let $\{f_n\}_{n \geq k}$ be a sequence of functions on $I \subseteq \bb{R}$. The series of functions $\sum\limits_{n \geq k} f_n(x)$ is defined to be the sequence $\{S_l(x)\}$ where $S_l(x) = \sum\limits_{n = k}^{l} f_n(x)$. The function $S_l(x)$ is called the $l^{th}$ partial sum of the series. We say that the series $\sum\limits_{n \geq k} f_n(x)$ converges pointwise (or uniformly) on I when the sequence $\{S_l\}$ converges, pointwise (or uniformly) on I. In this case, the sum of the series of functions is defined to be the function
+	\[
+		f(x) = \sum_{n = k}^{\infty} f_n(x) = \lim_{n \to \infty} S_l = \lim_{n \to \infty} \sum_{n = k}^{l} f_n(x)
+	\]
+\end{defn}
+
+\begin{note}
+	Many of the following theorems have similar proofs to the earlier two sections.
+\end{note}
+
+\begin{thm}[Cauchy Criterion for Uniform Convergence - Series of Functions]
+	The series $\sum_{n \geq k} f_n(x)$ converges uniformly (to some function f) on I
+	\[
+		\iff \forall \epsilon > 0 \; \exists N \geq k \; \forall x \in I \; \forall m, l \geq k \; \Bigg(m > l > N \implies \left|\sum_{n = l + 1}^{m} f_n(x) \right| < \epsilon \Bigg)
+	\]
+\end{thm}
+
+\begin{thm}[Uniform Convergence, Limits and Continuity - Series of Functions]\label{unif_conv_series_fn}
+	SPS that $\sum_{n \geq k} f_n(x)$ converges uniformly on I. Let x be a limit point of I. If $\lim\limits_{y \to x} f_n(y)$ exists for all $n \geq k$, then
+	\[
+		\lim_{y \to x} \sum_{n = k}^{\infty} f_n(y) = \sum_{n = k}^{\infty} \lim_{y \to x} f_n(y)
+	\]
+	In particular, if each $f_n(x)$ is continuous on I, then so is $\sum_{n = k}^{\infty} f_n(x)$.
+\end{thm}
+
+\begin{thm}[Term-by-Term Integration]
+	SPS that $\sum_{n \geq k} f_n(x)$ converges uniformly on [a, b]. If each $f_n(x)$ is integrable on [a, b], then so is $\sum_{n \geq k} f_n(x)$. In this case, if $g_n(x) := \int_{a}^{x} f_n(t) \, dt$ and $g(x) := \int_{a}^{x} \sum_{n = k}^{\infty} f_n(t) \, dt$, then $\sum_{n \geq k} g_n(x)$ converges uniformly to g(x) on I. In particular, we have
+	\[
+		\int_{a}^{b} \sum_{n = k}^{\infty} f_n(x) \, dx = \sum_{n = k}^{\infty} \int_{a}^{b} f_n(x) \, dx
+	\]
+\end{thm}
+
+\begin{thm}[Term-by-Term Differentiation]
+	SPS that each $f_n(x)$ is differentiable on [a, b], $\sum_{n \geq k} f'_n(x)$ converges uniformly on [a, b], and $\sum_{n \geq k} f_n(c)$ converges for some $c \in [a, b]$. Then $\sum_{n \geq k} f_n(x)$ converges uniformly on [a, b], and
+	\[
+		\frac{d}{dx} \sum_{n = k}^{\infty} f_n(x) = \sum_{n = k}^{\infty} \frac{d}{dx} f_n(x)
+	\]
+\end{thm}
+
+\begin{thm}[Weierstrass M-Test]
+	SPS that $f_n$ is bounded with $|f_n(x)| \leq M_n$ for all $n \geq k$ and $x \in I$, and $\sum_{n \geq k} M_n$ converges. Then $\sum_{n \geq k} f_n(x)$ converges uniformly on I.
+\end{thm}
+
+
+\section{Power Series}
+\begin{defn}[Power Series]
+	A power series centered at a is a series of the form $\sum\limits_{n \geq 0} a_n (x - a)^n$ for some real numbers $a_n$, where we use the convention that $(x - a)^0 = 1$.
+\end{defn}
+
+\begin{lemma}[Abel's Formula]
+	Let $\{a_n\}$ and $\{b_n\}$ be sequences. Then we have
+	\[
+		\sum_{n = m}^{l} a_n b_n + \sum_{[p = m]}^{l - 1} \left( \sum_{n = m}^{p} a_n \right) (b_{p -1} - b_p) = \left(\sum_{n = m}^{l} a_n \right) b_l
+	\]
+\end{lemma}
+
+\begin{thm}[The Interval and Radius of Convergence]
+	Let $\sum\limits_{n \geq 0} a_n (x - a)^n$ be a power series and let $R = \frac{1}{ \limsup\limits_{n \to \infty} \sqrt[n]{|a_n|} } \in [0, \infty)\ $. Then the set of $x \in \bb{R}$ for which the power series converges is an interval I centered at a of radius R. Indeed
+	\begin{enumerate}
+		\item $|x - a| > R \implies \lim\limits_{n \to \infty} a_n (x - a) \neq 0 \implies \sum\limits_{n \geq 0} a_n (x - a)^n$ diverges,
+		\item $|x - a| < R \implies \sum\limits_{n \geq 0} a_n (x - a)^n$ converges absolutely,
+		\item $0 < r < R \implies \sum\limits_{n \geq 0} a_n (x - a)^n$ converges uniformly in $[a - r, a + r]$.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Abel's Theorem]
+	Let $\sum\limits_{n \geq 0} a_n (x - a)^n$ be a power series and let $R = \frac{1}{ \limsup\limits_{n \to \infty} \sqrt[n]{|a_n|} } \in [0, \infty)\ $. If $\sum_{n \geq 0} a_n (x - a)^n$ converges when $x = a + R$, then the convergence is uniform on $[a, a + R]$, and, similarly, if $\sum_{n \geq 0} a_n (x - a)^n$ converges when $x = a - R$ then the convergence is uniform on $[a - R, a]$.
+\end{thm}
+
+\begin{defn}[Interval and Radius of Convergence]
+	The number R is the previous 2 theorems is called the radius of convergence, and the interval I is called the interval of convergence of the power series.
+\end{defn}
+
+
+\section{Operations on Power Series}
+
+\begin{thm}[Continuity of Power Series]
+	SPS that the power series $\sum a_n (x - a)^n$ converges in an interval I. Then the sum $f(x) = \sum_{n = 0}^{\infty} a_n (x - a)^n$ is continuous on I.
+\end{thm}
+
+\begin{proof}
+	This follows from \hyperref[unif_conv_series_fn]{uniform convergence} of $\sum a_n (x - a)^n$ in closed subintervals of I.
+\end{proof}
+
+\begin{thm}[Addition and Subtraction of Power Series]
+	SPS that the power series $\sum a_n (x-a)^n$ and $\sum b_n (x-a)^n$ both converge in the interval I. Then $\sum (a_n + b_n)(x-a)^n$ and $\sum (a_n - b_n)(x-a)^n$ both converge in I, and for all $x \in I$ we have
+	\[
+		\left( \sum_{n=0}^{\infty} a_n (x-a)^n \right) \pm \left( \sum_{n=0}^{\infty} b_n (x-a)^n \right) = \sum_{n=0}^{\infty} (a_n \pm b_n)(x-a)^n
+	\]
+\end{thm}
+
+\begin{proof}
+	This follows from \hyperref[series_linearity]{linearity}.
+\end{proof}
+
+\begin{thm}[Multiplication of Power Series]
+	SPS that the power series $\sum a_n (x-a)^n$ and $\sum b_n (x-a)^n$ both converge in an open interval I wuth $a \in I$. Let $c_n = \sum\limits_{k=0}^{n} a_k b_{n-k}$. Then $\sum c_n (x-a)^n$ converges in I and for all $x \in I$ we have
+	\[
+		\sum_{n=0}^{\infty} c_n (x-a)^n = \sum\limits_{k=0}^{n} a_k b_{n-k} = \left( \sum_{n=0}^{\infty} a_n (x-a)^n \right) \left( \sum_{n=0}^{\infty} b_n (x-a)^n \right)
+	\]
+\end{thm}
+
+\begin{proof}
+	This follows from \hyperref[series_multiplication]{Multiplication of Series}, since the power series converge absolutely on I.
+\end{proof}
+
+\begin{thm}[Division of Power Series]
+	SPS that the power series $\sum a_n (x-a)^n$ and $\sum b_n (x-a)^n$ both converge in an open interval I wuth $a \in I$ and that $b_0 \neq 0$. Define $c_n$ by
+	\[
+		c_0 = \frac{a_0}{b_0}, \text{ and for } n > 0, \; c_n = \frac{a_n}{b_n} - \frac{b_n c_0}{b_0} - \frac{b_{n-1} c_1}{b_{n-1}} - \hdots - \frac{b_1 c_{n-1}}{b_1}. 
+	\]
+	Then there is an open interval J with $a \in J$ such that $\sum c_n (x-a)^n$ converges in J and for all $x \in J$,
+	\[
+		\sum_{n = 0}^{\infty} = \frac{ \sum\limits_{n=0}^{\infty} a_n (x-a)^n }{ \sum\limits_{n=0}^{\infty} b_n (x-a)^n }.
+	\]
+\end{thm}
+
+\begin{thm}[Composition of Power Series]
+	Let $f(x) = \sum\limits_{n=0}^{\infty} a_n (x-a)^n$ in an open interval I with $a \in I$, and let $g(y) = \sum\limits_{m=0}^{\infty} b_m (y-b)^m$ in an open interval J with $b \in J$ and with $a_0 \in J$. Let K be an open interval with $a \in K$ such that $f(K) \subset J$. For each $m \geq 0$, let $c_{n, m}$ be the coefficients, found by multiplying power series, such that $\sum\limits_{n=0}^{\infty} c_{n, m} (x-a)^n = b_n \left( \sum\limits_{n=0}^{\infty} a_n (x-a)^n - b \right)^m$. Then $\sum_{m \geq 0} c_{n, m}$ converges for all $m \geq 0$, and for all $x \in K, \sum\limits_{n \geq 0} \left( \sum\limits_{m = 0}^{\infty} c_{n, m} \right)(x-a)^n$ converges and
+	\[
+		\sum_{n=0}^{\infty} \left( \sum_{m=0}^{\infty} c_{n, m} \right)(x-a)^n = g(f(x))
+	\]
+\end{thm}
+
+\begin{proof}
+	This follows from \hyperref[fubinithm_series]{Fubini's Theorem for Series} since
+	\[
+		g(f(x)) = \sum_{m=0}^{\infty} b_m (f(x) - b)^m = \sum_{m=0}^{\infty} \left(\sum_{n=0}^{\infty} a_n (x-a)^n - b \right) = \sum_{m=0}^{\infty} \left( \sum_{n=0}^{\infty} c_{n, m} (x-a)^n \right).
+	\]
+\end{proof}
+
+\begin{thm}[Integration of Power Series]
+	SPS that $\sum a_n (x-a)^n$ converges in the interval I. Then $\forall x\ in I$, the sum $f(x) = \sum_{n=0}^{\infty} a_n (x-a)^n$ is integrable on $[\min\{a, x\}, \max\{a, x\}]$ and
+	\[
+		\int_{a}^{x} \sum_{n=0}^{\infty} a_n (t-a)^n \, dt = \sum_{n=0}^{\infty} \int_{a}^{x} a_n (t-a)^n \, dt = \sum_{n=0}^{\infty} \frac{a_n}{n+1} (x-a)^{n+1}.
+	\]
+\end{thm}
+
+\begin{thm}[Differentiation of Power Series]\label{power_series_differentiation}
+	SPS that $\sum a_n (x-a)^n$ converges in the interval I. Then the sum $f(x) = \sum_{n=0}^{\infty} a_n (x-a)^n$ is differentiable in I and
+	\[
+		f'(x) = \sum_{n=1}^{\infty} a_n (x-a)^{n-1}.
+	\]
+\end{thm}
+
+
+\section{Taylor Series}
+
+\begin{thm}[Coefficients of the Taylor Series]
+	SPS that $\sum_{n=0}^{\infty} a_n (x-a)^n$ in an open interval I centered at a. Then f is infinitely differentiable at a and for all $n \geq 0$, we have
+	\[
+		a_n = \frac{f^{(n)} (a)}{n!}, 
+	\]
+	where $f^{(n)}(a)$ denotes the n-th derivative of f at a.
+\end{thm}
+
+\begin{proof}
+	By repeatedly applying \hyperref[power_series_differentiation]{Differentiation on Power Series}, we can obtain our desired result.
+\end{proof}
+
+\begin{defn}[Taylor Series and Polynomial]
+	Given a function $f(x)$ whose derivatives of all order exists at x = a, we define the Taylor series of $f(x)$ centered at a to be the power series
+	\[
+		T(x) = \sum_{n \geq 0} a_n (x-a)^n \quad \text{where } a_n = \frac{f^{(n)}(a)}{n!} 
+	\]
+	abd we define the $l^{th}$ Taylor Polynomial of $f(x)$ centered at a to be the $l^{th}$ partial sum
+	\[
+		T_l(x) = \sum_{n=0}^{l} a_n (x-a)^n \quad \text{where } a_n = \frac{f^{(n)}(a)}{n!}.
+	\]
+\end{defn}
+
+\begin{thm}[Taylor's Theorem]
+	Let $f(x)$ be infinitely differentiable in an open interval I with $a \in I$. Let $T_l(x)$ be the $l^{th}$ Taylor polynomial for $f(x)$ centered at a. Then for all $x \in I$ there exists a number c between a and x such that
+	\[
+		f(x) - T_l(x) = \frac{f^{(l + 1)}(c)}{(l + 1)!} (x-a)^{l+1}. 
+	\]
+\end{thm}
+
+\begin{thm}[(?) Accuracy of the Maclaurin Expansion]
+	The functions $e^x, \sin x$ and $(1+x)^p$ are all exactly equal to the sum of their Taylor series centered at 0 in the interval of convergence.
+\end{thm}
 
 % =================================
 % 		Chapter 8
