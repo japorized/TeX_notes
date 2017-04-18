@@ -74,6 +74,7 @@
 \newcommand{\bb}[1]{\mathbb{#1}}		% using bb instead of mathbb
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}	% simplifying the writing of a floor function
 \newcommand{\ceiling}[1]{\lceil #1 \rceil}	% simplifying the writing of a ceiling function
+\newcommand{\dotp}{\, \cdotp}	% dot product to distinguish from \cdot
 
 % Main Body
 \title{UW W17 PMATH333 - Definitions and Theorems}
@@ -1743,6 +1744,386 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 % =================================
 \chapter{Topology in Euclidean Space}
 
+
+\section{Algebraic Structure}
+
+\begin{defn}[Dot Product]
+	For vectors $x, y \in \bb{R}^n$ we define the dot product of x and y to be
+	\begin{equation*}
+		x \dotp y = y^T x = \sum_{i=1}^{n} x_i y_i.
+	\end{equation*}
+\end{defn}
+
+\begin{thm}[Properties of Dot Product]
+	For all $x, y, z \in \bb{R}^n$ and for all $t \in \bb{R}$ we have
+	\begin{enumerate}
+		\item (Bilinearity) 
+			\begin{enumerate}
+				\item $(x + y) \dotp z = x \dotp z + y \dotp z$,
+				\item $(tx) \dotp y = t (x \dotp y)$,
+				\item $x \dotp (y + z) = x \dotp y + x \dotp z$,
+				\item $x \dotp (ty) = t (x \dotp y)$
+			\end{enumerate}
+		\item (Symmetry) $x \dotp y = y \dotp x$, and
+		\item (Positive Definiteness) $x \dotp x \geq 0$ with $x \dotp x = 0 \iff x = \vec{0}$
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}[Norm]
+	For a vector $x \in \bb{R}^n$, we define the norm (or length) of x to be
+	\begin{equation*}
+		|x| = \sqrt{x \dotp x} = \sqrt{\sum_{i=1}^{n} x_i^2}
+	\end{equation*}
+	We say that x is a unit vector when $|x| = 1$.
+\end{defn}
+
+\begin{thm}[Properties of Norm]
+	Let $x, y \in \bb{R}^n$ and let $t \in \bb{R}$. Then
+	\begin{enumerate}
+		\item (Positive Definiteness) $|x| \geq 0$ with $|x| = 0 \iff x = \vec{0}$
+		\item (Scaling) $|tx| = |t||x|$
+		\item (Square of a basic Linear Combination) $|x \pm y|^2 = |x|^2 \pm 2(x \dotp y) + |y|^2$
+		\item (The Polarization Identities) $x \dotp y = \frac{1}{2} (|x + y|^2 - |x|^2 - |y|^2) = \frac{1}{4} (|x + y|^2 - |x - y|^2)$
+		\item (The Cauchy-Schwarz Inequality) $|x \dotp y| \leq |x||y|$ with $|x \dotp y| = |x||y| \iff $ the set $\{x, y\}$ is linearly dependent, and
+		\item (The Triangle Inequality) $|x + y| \leq |x| + |y|$
+	\end{enumerate}
+\end{thm}
+
+\begin{remark}[Linearly Dependent]
+	Two vectors $x, y \in \bb{R}^n$ are said to be linearly dependent iff $x = ty$ for some $t \in \bb{R}$.
+\end{remark}
+
+\begin{defn}[Distance]
+	For points $a, b \in \bb{R}^n$, we define the distance between and b to be
+	\begin{equation*}
+		\text{dist}(a, b) = |b - a|
+	\end{equation*}
+\end{defn}
+
+\begin{thm}[Properties of Distance]
+	Let $a, b, c \in \bb{R}$. Then
+	\begin{enumerate}
+		\item (Positive Definiteness) $\text{dist}(a, b) \geq 0$ with $\text{dist}(a, b) = 0 \iff a = b$
+		\item (Symmetry) $\text{dist}(a, b) = \text{dist}(b, a)$
+		\item (The Triangle Inequality) $\text{dist}(a, c) \leq \text{dist}(a, b) + \text{dist}(b, c)$
+	\end{enumerate}
+\end{thm}
+
+
+\section{Topology in \texorpdfstring{$\bb{R}^n$}{Rn}}
+
+\begin{defn}[Sphere, Open Ball, Closed Ball, Punctured Ball]
+	For $a \in \bb{R}^n$ and $0 < r \in \bb{R}$, the sphere, the open ball, the closed ball, and the (open) punctured ball in $\bb{R}^n$ centered at a of radius r are defined to be the sets
+	\begin{align*}
+		S(a, r) 	  &= \{x \in \bb{R}^n \, | \, \text{dist}(x, a) = r \} = \{x \in \bb{R}^n \, | \, |a - x| = r\} \quad \text{(the sphere)}, \\
+		B(a, r) 	  &= \{x \in \bb{R}^n \, | \, \text{dist}(x, a) < r \} = \{x \in \bb{R}^n \, | \, |a - x| < r\} \quad \text{(the open ball)}, \\
+		\bar{B}(a, r) &= \{x \in \bb{R}^n \, | \, \text{dist}(x, a) \leq r \} = \{x \in \bb{R}^n \, | \, |a - x| \leq r\} \quad \text{(the closed ball)}, \\
+		B^*(a, r)	  &= \{x \in \bb{R}^n \, | \, 0 < \text{dist}(x, a) < r \} = \{x \in \bb{R}^n \, | \, 0 < |a - x| < r\} \quad \text{([open] punctured ball)}
+	\end{align*}
+\end{defn}
+
+\begin{defn}[Open and Closed Sets]
+	For a set $A \subseteq \bb{R}^n$, we say that A is open (in $\bb{R}^n$) when
+	\begin{equation*}
+		\forall a \in A \; \exists r > 0 \; B(a, r) \subseteq A
+	\end{equation*}
+	We say that A is closed (in $\bb{R}^n$) when its complement $A^c = \bb{R}^n \setminus A$ is open in $\bb{R}^n$.
+\end{defn}
+
+\begin{remark}
+	Note that we may also define a closed set to be:
+	\begin{equation*}
+		\forall A \subseteq \bb{R}^n \; \forall a \in A \; \exists r > 0 \; \bar{B}(a, r) \subseteq A
+	\end{equation*}
+	But we shall note that this definition can eventually be confusing.
+\end{remark}
+
+\begin{thm}[Basic Properties of Open Sets]
+	\begin{enumerate}
+		\item The sets $\emptyset$ and $\bb{R}^n$ are open in $\bb{R}^n$.
+		\item If S is a set of open sets then the union $\bigcup S$ is open.
+		\item If S is a finite set of open sets then the intersection $\bigcap S$ is open.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Basic Properties of Closed Sets]
+	\begin{enumerate}
+		\item The sets $\emptyset$ and $\bb{R}^n$ are closed in $\bb{R}^n$.
+		\item If S is a set of closed sets then the intersection $\bigcap S$ is closed.
+		\item If S is a finite set of closed sets then the union $\bigcup S$ is closed.
+	\end{enumerate}
+\end{thm}
+
+
+\section{Interior, Closure and Boundary}
+
+\begin{defn}[Interior and Closure]
+	Let $A \subseteq \bb{R}^n$. The interior of A (in $\bb{R}^n$) is the set
+	\begin{equation*}
+		A^0 = \bigcup \{ U \subseteq \bb{R}^n \, | \, U \text{ is open} \land U \subseteq A\}
+	\end{equation*}
+	The closure of A (in $\bb{R}^n$) is the set
+	\begin{equation*}
+		\bar{A} = \bigcap \{ K \subseteq \bb{R}^n \, | \, K \text{ is closed} \land A \subseteq K\}
+	\end{equation*}
+\end{defn}
+
+\begin{thm}[Interior of a Set as Its Largest Open Set]
+	Let $A \subseteq \bb{R}^n$. The interior of A is the largest open set which is contained in A. In other words, $A^0 \subseteq A$ and $A^0$ is open $\iff \forall \text{open set } U \subseteq A \; (U \subseteq A^0)$
+\end{thm}
+
+\begin{thm}[Closure of a Set as The Smallest Closed Set Containing It]
+	Let $A \subseteq \bb{R}^n$. The closure of A is the smallest closed set that contains A. In other words, $A \subseteq \bar{A}$ and $\bar{A}$ is closed $\iff \forall \text{closed set } K \; (A \subseteq K) \; \bar{A} \subseteq K$
+\end{thm}
+
+\begin{crly}[Another Certificate for Open and Closed Sets]
+	Let $A \subseteq \bb{R}^n$.
+	\begin{enumerate}
+		\item $(A^0)^0$ and $\bar{\bar{A}} = \bar{A}$.
+		\item A is open iff $A = A^0$.
+		\item A is closed iff $A = \bar{A}$.
+	\end{enumerate}
+\end{crly}
+
+\begin{defn}[Interior, Isolated, Limit and Boundary Points]
+	Let $A \subseteq \bb{R}^n$. An interior point of A is defined such that
+	\begin{equation*}
+		\forall a \in A \; \exists r > 0 \; B(a, r) \subseteq A
+	\end{equation*}
+	An isolated point of A is defined such that
+	\begin{equation*}
+		\forall a \in A \; \exists r > 0 \; B^*(a,r) \cap A = \emptyset \text{ or } B(a,r) \cap A = \{a\}
+	\end{equation*}
+	(i.e., in laymen's language, for all a in A, there are no other points in A that are close to a)
+	
+	A limit point of A is defined such that
+	\begin{equation*}
+		\forall a \in A \; \forall r > 0 \; B^*(a,r) \cap A \neq \emptyset
+	\end{equation*}
+	(i.e., in laymen's language, for all a in A, there is always points in A other than a that is close to a)
+
+	The set of all limit points is denoted as $A'$.
+	
+	A boundary point of A is defined such that
+	\begin{equation*}
+		\forall a \in A \; \forall r > 0 \; ( B(a,r) \cap A \neq \emptyset \land B(a,r) \cap A^c \neq \emptyset)
+	\end{equation*}
+	(i.e., in laymen's language, for all a in A, there are always points that are in A and not in A that are near a in the same ``radius'')
+
+	The set of all boundary points of A, denoted $\partial A$, is called the boundary of A.
+\end{defn}
+
+\begin{thm}[Equivalent Topological Definitions]
+	Let $A \subseteq \bb{R}^n$.
+	\begin{enumerate}
+		\item A is closed iff $A' \subseteq A$
+		\item $\bar{A} = A \cup A'$
+		\item $A^0$ is equal to the set of all interior points of A.
+		\item $\partial A = \bar{A} \setminus A^0$
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}[Connectedness]
+	Let $A \subseteq \bb{R}^n$. We say that A is disconnected when there exists open sets U and V in $\bb{R}^n$ such that
+	\begin{equation*}
+		U \cap A \neq \emptyset, \; V \cap A \neq \emptyset, \; U \cap V = \emptyset \text{ and } A = U \cup V
+	\end{equation*}
+	When A is disconnected, such open sets U and V are said to separate A.
+
+	We say that A is connected when it is not disconnected.
+\end{defn}
+
+\begin{thm}[Connected sets in $\bb{R}$ are Intervals]
+	The connected sets in $\bb{R}$ are the (open and closed) intervals (including degenerate intervals).
+\end{thm}
+
+
+\section{Heine-Borel Theorem}
+
+\begin{defn}[Bounded in $\bb{R}^n$]
+	Let $A \subseteq \bb{R}^n$. We say that A is bounded when
+	\begin{equation*}
+		\exists a \in \bb{R}^n \; \exists r > 0 \; A \subseteq B(a, r).
+ 	\end{equation*}
+ 	Equivalently,
+ 	\begin{equation*}
+ 		\exists R > 0 \; A \subseteq B(0, R).
+ 	\end{equation*}
+\end{defn}
+
+\begin{defn}[Open Cover, Subcover, and Compactness]
+	Let $A \subseteq \bb{R}^n$. An open cover of A is a set S of open sets such that $A \subseteq \bigcup S$. When S is an open cover, a subcover of S is a subset $T \subseteq S$ such that $A \subseteq \bigcup T$.
+
+	We say that A is compact when every open cover of A has a finite subcover.
+\end{defn}
+
+\begin{defn}[Closed Rectangle]
+	A closed rectangle in $\bb{R}^n$ is a set of the form
+	\begin{align*}
+		R &= [a_1, b_1] \times [a_2, b_2] \times \hdots \times [a_n, b_n] \\
+		  &= \{(x_1, x_2, ..., x_n) \in \bb{R}^n \, | \, a_i \leq x_i \leq b_i \text{ for all i}\}
+	\end{align*}
+\end{defn}
+
+\begin{thm}[Nested Rectangles Theorem]
+	Let $R_1, R_2, R_3, \hdots$ be closed rectangles in $\bb{R}^n$ with $R_1 \supseteq R_2 \supseteq R_3 \supseteq \hdots $. Then
+	\begin{equation*}
+		\bigcap_{k=1}^\infty R_k \neq \emptyset
+	\end{equation*}
+\end{thm}
+
+\begin{thm}[Compactness of Closed Rectangles]
+	Every closed rectangle in $\bb{R}^n$ is compact.
+\end{thm}
+
+\begin{thm}[Heine-Borel Theorem]
+	Let $A \subseteq \bb{R}^n$. A is compact iff A is closed and bounded.
+\end{thm}
+
+
+% =================================
+% 		Chapter 9 (supposedly)
+% =================================
+\chapter{Convergence in \texorpdfstring{$\bb{R}^n$}{Rn}}
+
+
+\section{Limits of Functions}
+
+\begin{defn}[Relatively Open and Closed Sets]
+	Let $A \subseteq \bb{R}^n$.
+	\begin{enumerate}
+		\item A set $U \subseteq A$ is said to be relatively open in A iff there exists an open set S such that $U = A \cap S$.
+		\item A set $U \subseteq A$ is said to be relatively closed in A iff there exists a closed set S such that $U = A \cap S$, or $U^c = A \setminus U$ is open in A.
+	\end{enumerate}
+\end{defn}
+
+\begin{thm}[Relatively Open, Closed, and Disconnected]
+	Let $A \subseteq S \subseteq \bb{R}^n$.
+	\begin{enumerate}
+		\item A is open in S iff $\forall a \in A \; \exists r > 0 \; B(a, r) \cap S \subseteq A$.
+		\item A is closed in S iff there exists a closed set $K \subseteq \bb{R}^n$ such that $A = S \cap K$.
+		\item S is disconnected iff
+			\begin{equation*}
+				\exists \emptyset \neq A \subsetneq S
+			\end{equation*}
+			such that A is both open and closed in S.
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}[Sequences in $\bb{R}^n$]
+	Let $\langle a_n \rangle_{n \geq p}$ be a sequence in $\bb{R}^m$. We say that the sequence $\langle a_n \rangle_{n \geq p}$ is bounded when
+	\begin{equation*}
+		\exists R > 0 \; \forall n \in \bb{Z}_{\geq p} \; |a_n| \leq R.
+	\end{equation*}
+	For $b \in \bb{R}^m$, we say that the sequence $\langle a_n \rangle_{n \geq p}$ converges to b, and write $\lim\limits_{n \to \infty} a_n = b$ (or $a_n \to b$), when
+	\begin{equation*}
+		\exists b \in \bb{R}^m \; \forall \epsilon > 0 \; \exists N \in \bb{Z}_{\geq p} \; \forall n \in \bb{Z}_{\geq p} \; (n \geq N \implies |a_n - b| < \epsilon)
+	\end{equation*}
+	We say that the sequence $\langle a_n \rangle_{n \geq p}$ diverges to $\infty$, and write $\lim\limits_{n \to \infty} a_n = \infty$ (or $a_n \to \infty$), when
+	\begin{equation*}
+		\forall R > 0 \; \exists N \in \bb{Z}_{\geq p} \; \forall n \in \bb{Z}_{\geq p} \; (n \geq N \implies |a_n| \geq R).
+	\end{equation*}
+	We say that the sequence $\langle a_n \rangle_{n \geq p}$ converges when it converges to some point $b \in \bb{R}^m$ and otherwise we say that it diverges.
+
+	We say that the sequence $\langle a_n \rangle_{n \geq p}$ is Cauchy when
+	\begin{equation*}
+		\forall \epsilon > 0 \; \exists N \in \bb{Z}_{\geq p} \; \forall k, l \in \bb{Z}_{\geq p} \; (k, l \geq N \implies |a_k - a_l| < \epsilon)
+	\end{equation*}
+\end{defn}
+
+For the following theorems, our main variable $\langle a_n \rangle_{n \geq p}$ is a sequence of sequences.
+
+\begin{thm}[Boundedness, Limits, and Convergence of Sequences]
+	Let $\langle a_n \rangle_{n \geq p}$ be a sequence in $\bb{R}^m$, say $a_n = (a_{n ,1}, a_{n, 2}, ..., a_{n, m}) \in \bb{R}^m$
+	\begin{enumerate}
+		\item $\langle a_n \rangle_{n \geq p}$ is bounded iff $\langle a_{n, i} \rangle_{n \geq p}$ is bounded for all indices $i = 1, 2, ..., m$.
+		\item $\langle a_n \rangle_{n \geq p}$ converges iff, for all i, $\langle a_{n, i} \rangle_{n \geq p}$ converges
+		\item For $b = (b_1, b_2, ..., b_m) \in \bb{R}^m$ we have $\lim\limits_{n \to \infty} a_n = b \iff \forall i \in \{1, 2, ..., m\} \; \lim\limits_{n \to \infty} a_{n, i} = b_i$.
+		\item $\langle a_n \rangle_{n \geq p}$ is Cauchy iff, for all i, $\langle a_{n, i} \rangle_{n \geq p}$ is Cauchy
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Uniqueness of Limits and Convergence of Subsequences]
+	Let $\langle a_n \rangle_{n \geq p}$ be a sequence in $\bb{R}^m$ and let $u, v \in \bb{R}^m \cup \{\infty\}$
+	\begin{enumerate}
+		\item $\lim\limits_{n \to \infty} a_n = u \land \lim\limits_{n \to \infty} = v \implies u = v$.
+		\item $\lim\limits_{n \to \infty} = u \land \langle a_{n_j} \rangle_{j \geq q}$ is a subsequence of $\langle a_n \rangle_{n \geq p}$ then $\lim\limits_{n \to \infty} a_{n_j} = u$.
+		\item If $\langle a_n \rangle_{n \geq p}$ converges then it is bounded.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Bolzano-Weierstrass Theorem for $\bb{R}^n$]
+	Every bounded sequence in $\bb{R}^n$ has a convergent subsequence.
+\end{thm}
+
+\begin{thm}[Completeness of $\bb{R}^n$]
+	For every sequence in $\bb{R}^n$, the sequence converges iff it is Cauchy.
+\end{thm}
+
+\begin{defn}[Limit on a Point]
+	Let $A \subseteq \bb{R}^n$ and let $f: A \to \bb{R}^m$ (note n is not necessarily equal to m). When a is a limit point of A and $b \in \bb{R}^m$, we say that $f(x)$ converges to b as x tends to a, and write $\lim\limits_{x \to a} f(x) = b$, when
+	\begin{equation*}
+		\forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in A \; (0 < |x - a| < \delta \implies |f(x) - b| < \epsilon)
+	\end{equation*}
+	When a is a limit point of A, we say that $f(x)$ diverges to $\infty$, and write $\lim\limits_{x \to a} f(x) = \infty$, when
+	\begin{equation*}
+		\forall R > 0 \; \exists \delta > 0 \; \forall x \in A \; (0 < |x - a| < \delta \implies |f(x)| \geq R)
+	\end{equation*}
+\end{defn}
+
+\begin{thm}[Sequential Characterization of Limits in $\bb{R}^n$]
+	Let $A \subseteq \bb{R}^n$, let $f: A \to \bb{R}^m$, let a be a limit point of A and let $u \in \bb{R}^m \cup \{\infty\}$. Then $\lim\limits_{x \to \infty} f(x) = u \iff \lim\limits_{n \to \infty} f(x_n) = u$ for every sequence $\langle x_n \rangle$ in $A \setminus \{a\}$ with $\lim\limits_{n \to \infty} x_n = a$.
+\end{thm}
+
+\begin{thm}[Limit of a Function and the Limit of Its Elements]
+	Let $A \subseteq \bb{R}^n$ and let $f:A \to \bb{R}^m$, let a be a limit point of A, let $b = (b_1, b_2, ..., b_m) \in \bb{R}^n$, and say $f(x) = (f_1(x), f_2(x), ..., f_m(x)) \in \bb{R}^m$ for each $x \in A$ so that $f_i: A \to \bb{R}$ for each i. Then $\lim\limits_{x \to a} f(x) = b \iff \forall i = \{1, 2, ...., m\}\; \lim\limits_{x \to a} f_i(x) = b_i$.
+\end{thm}
+
+\begin{defn}[Continuity in $\bb{R}^n$]
+	Let $A \subseteq \bb{R}^n$, let $B \subseteq \bb{R}^m$, let $f: A \to B$. For $a \in A$, we say that f is continuous at a when
+	\begin{equation*}
+		\forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in A \; (|x - a| < \delta \implies |f(x) - f(a)| < \epsilon)
+	\end{equation*}
+	We say that f is continuous (on A) when f is continuous at every $a \in A$, i.e,
+	\begin{equation*}
+		\forall a \in A \; \forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in A \; (|x - a| < \delta \implies |f(x) - f(a)| < \epsilon)
+	\end{equation*}
+	We say that f is uniformly continuous in A when
+	\begin{equation}
+		\forall \epsilon > 0 \; \exists \delta > 0 \; \forall a, x \in A \; (|x - a| < \delta \implies |f(x) - f(a)| < \epsilon)
+	\end{equation}
+\end{defn}
+
+\begin{thm}[Sequential Characterization of Continuity]
+	Let $A \subseteq \bb{R}^n$, let $f: A \to \bb{R}^n$, and let $a \in A$. Then f is continuous at a iff $\lim\limits_{n \to \infty} f(x_n) = f(a)$ for every sequence $\langle x_n \rangle_{n \geq p}$ in A iwth $\lim\limits_{n \to \infty} x_n = a$.
+\end{thm}
+
+\begin{thm}[Topological Characterization of Continuity]
+	Let $A \subseteq \bb{R}^n$, let $B \subseteq \bb{R}^m$, and let $f: A \to B$.
+	\begin{enumerate}
+		\item f is continuous iff $f^{-1}(U)$ is relatively open in A for every open set U in B.
+		\item f is continuous iff $f^{-1}(K)$ is relatively closed in A for every closed set K in B.
+	\end{enumerate}
+\end{thm}
+
+\begin{thm}[Properties of Continuous Functions]
+	Let $A \subseteq \bb{R}^n$, let $B \subseteq \bb{R}^m$, and let $f:A \to B$ be continuous.
+	\begin{enumerate}
+		\item If A is bounded then f(A) is bounded.
+		\item If A is connected then f(A) is connected.
+		\item If A is compact then f(A) is compact.
+		\item If A is compact then f is uniformly continuous on A.
+		\item If A is compact and m = 1 then f(x) attains its maximum and minimum values on A.
+	\end{enumerate}
+\end{thm}
+
+\begin{defn}[Path \& Path-connected]
+	Let $A \subseteq \bb{R}^n$ and let $a, b \in A$. A (continuous) path from a to b in A is a continuous function $f: [0, 1] \to A$ with $f(0) = a$ and $f(1) = b$. We say that A is path-connected when for every $a, b \in A$ there exists a continuous path from a to b in A.
+\end{defn}
+
+\begin{thm}[Path-connectedness and Connectedness]
+	Let $A \subseteq \bb{R}^n$. If A is path-connected then A is connected.
+\end{thm}
 
 % =================================
 % 		Appendix
