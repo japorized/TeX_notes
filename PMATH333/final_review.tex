@@ -1,0 +1,203 @@
+% Document Head
+\documentclass[11pt, oneside]{book}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+
+% Essential Packages
+\usepackage{ragged2e}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[hyperref]{ntheorem}
+
+% Theorem Style Customization
+\setlength\theorempreskipamount{2ex}
+\setlength\theorempostskipamount{3ex}
+
+% hyperref Package Settings
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks = true,
+	linkcolor = magenta
+}
+
+% ntheorem Declarations
+\theoremstyle{break}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{proof}{Proof}
+\newtheorem{crly}{Corollary}[thm]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{propo}{Proposition}[section]
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{eg}{Example}[section]
+
+% ntheorem listtheorem style
+\makeatletter
+\def\thm@@thmline@name#1#2#3#4{%
+        \@dottedtocline{-2}{0em}{2.3em}%
+                   {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
+                   {#4}}
+\@ifpackageloaded{hyperref}{
+\def\thm@@thmline@name#1#2#3#4#5{%
+    \ifx\\#5\\%
+        \@dottedtocline{-2}{0em}{2.3em}%
+            {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
+            {#4}
+    \else
+        \ifHy@linktocpage\relax\relax
+            \@dottedtocline{-2}{0em}{2.3em}%
+                {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
+                {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
+        \else
+            \@dottedtocline{-2}{0em}{2.3em}%
+                {\hyper@linkstart{link}{#5}%
+                  {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}\hyper@linkend}%
+                    {#4}%
+        \fi
+    \fi}
+}
+\makeatother
+\newlength\widesttheorem
+\AtBeginDocument{
+  \settowidth{\widesttheorem}{Proposition A.1.1.1\quad}
+}
+
+\theoremlisttype{allname}
+
+% Shortcuts
+\newcommand{\bb}[1]{\mathbb{#1}}			% using bb instead of mathbb
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}	% simplifying the writing of a floor function
+\newcommand{\ceiling}[1]{\lceil #1 \rceil}	% simplifying the writing of a ceiling function
+\newcommand{\dotp}{\, \cdotp}				% dot product to distinguish from \cdot
+
+% Main Body
+\title{Final Exam Content Revision}
+\author{Johnson Ng}
+
+\usepackage{hyperref}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\chapter*{List of Theorems}
+\theoremlisttype{allname}
+\listtheorems{lemma,thm,crly,propo}
+
+
+\chapter{Important Theorems}
+\begin{thm}[Monotone Convergence Theorem]
+	
+\end{thm}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{thm}[Nested Interval Theorem]
+	For each $k \in \bb{N}$, if each $I_k$ is closed, bounded, and nonempty. If $I_0 \supseteq I_1 \supseteq I_2 \supseteq \hdots$, then $\bigcap I_k \neq \emptyset$. Moreover, if $|I_k| \to 0$ as $k \to \infty$, $\bigcap I_k$ is a single point.
+\end{thm}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{thm}[Intermediate Value Theorem]
+	Let $a, b \in \bb{R}$ with $a < b$, let $f: [a, b] \to \bb{R}$ be continous.
+	\begin{equation*}
+		\forall y \in \bb{R} \enspace \min\{f(a), f(b)\} \leq y \leq \max\{f(a), f(b)\} \implies \exists x \in [a, b] \; f(x) = y
+	\end{equation*}
+\end{thm}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{thm}[Closed Bounded Intervals and Uniform Convergence]
+	Let $a, b \in \bb{R}$ with $a < b$. If $f: [a, b] \to \bb{R}$ is continous, then f is uniformly continuous.
+\end{thm}
+
+\begin{thm}[Equivalent Definitions of Integrability]
+	Let Let $a, b \in \bb{R}$ and $f: [a, b] \to \bb{R}$. TFAE:
+	\begin{enumerate}
+		\item $f$ is integrable on $[a, b]$.
+		\item $\forall \epsilon > 0 \exists \; P \text{ that is a partition} \; U(f, P) - L(f, P) < \epsilon$
+		\item $U(f) = L(f)$
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{thm}[Continuous Functions are Integrable]
+	Let $a, b \in \bb{R}$. Every continuous function $f: [a, b] \to \bb{R}$ is integrable.
+\end{thm}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{thm}[Cauchy Criterion for Uniform Convergence - Sequence of Functions]
+	Let $I \subseteq \bb{R}, \; \forall n \in \bb{Z}^+ \; f_n: I \to \bb{R}$.
+	\begin{gather*}
+		\exists g: I \to \bb{R} \; f_n \to g \text{ uniformly on } I \\
+		\iff \\
+		\forall \epsilon > 0 \; \exists N \in \bb{Z}^+ \; \forall x \in I \; \forall k, l \in \bb{Z}^+ \; (k, l \geq N \implies |f_k(x) - f_l(x)| < \epsilon)
+	\end{gather*}
+\end{thm}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{thm}[Uniform Convergence, Limits and Continuity]
+	Supposed $f_n \to f$ uniformly on $I \subseteq \bb{R}$, where $\forall n \in \bb{Z}^+ \; f_n: I \to \bb{R}$. If $\lim\limits_{y \to x} f_n(y)$ exists for each n, then
+	\begin{equation*}
+	 	\lim_{n \to \infty} \lim_{y \to x} f_n(y) = \lim_{y \to x} \lim_{n \to \infty} f_n(y)
+	\end{equation*}
+	Furthermore, if $f_n$ is continuous on I for each n, then f is continous on I.
+\end{thm}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{thm}[Equivalent Topological Definitions]
+	Let $A \subseteq \bb{R}^n$.
+	\begin{enumerate}
+		\item A is closed iff $A' \subseteq A$
+		\item $\bar{A} = A' \cup A$
+		\item $A^0$ is equal to the set of all interior points of A
+		\item $\partial A = \bar{A} \setminus A^0$
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	
+\end{proof}
+
+\begin{thm}[Heine-Borel Theorem]
+	Every subset of $\bb{R}^n$ is compact iff it is closed and bounded.
+\end{thm}
+
+\begin{proof}
+	
+\end{proof}
+
+\chapter{Important Examples}
+
+
+\chapter{FAQ for Self}
+
+
+\chapter{Food for Thought}
+\end{document}
+% Document End

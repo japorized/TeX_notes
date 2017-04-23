@@ -1,0 +1,315 @@
+\contentsline {defn}{{Definition}{1.1.{1}}{Removal}}{15}{defn.1.1.1}
+\contentsline {defn}{{Definition}{1.1.{2}}{Disjoint}}{15}{defn.1.1.2}
+\contentsline {thm}{{Theorem}{1.1.{1}}{Properties of Sets}}{15}{thm.1.1.1}
+\contentsline {defn}{{Definition}{1.1.{3}}{Intervals}}{15}{defn.1.1.3}
+\contentsline {remark}{{Remark}{1}{}}{16}{remark.1}
+\contentsline {defn}{{Definition}{1.1.{4}}{Ring}}{16}{defn.1.1.4}
+\contentsline {defn}{{Definition}{1.1.{5}}{Commutative Ring}}{16}{defn.1.1.5}
+\contentsline {defn}{{Definition}{1.1.{6}}{Field}}{16}{defn.1.1.6}
+\contentsline {remark}{{Remark}{2}{}}{16}{remark.2}
+\contentsline {thm}{{Theorem}{1.1.{2}}{$\bb {Q} \text { and } \bb {R}$ as Fields}}{16}{thm.1.1.2}
+\contentsline {remark}{{Remark}{3}{}}{17}{remark.3}
+\contentsline {remark}{{Remark}{4}{Some shorthand notations}}{17}{remark.4}
+\contentsline {thm}{{Theorem}{1.1.{3}}{Cancellations \& Identities}}{17}{thm.1.1.3}
+\contentsline {thm}{{Theorem}{1.1.{4}}{Properties of Fields}}{17}{thm.1.1.4}
+\contentsline {defn}{{Definition}{1.1.{7}}{Order}}{17}{defn.1.1.7}
+\contentsline {remark}{{Remark}{5}{Order defined using the $<$ operator}}{17}{remark.5}
+\contentsline {remark}{{Remark}{6}{Non-negative and Non-positive}}{18}{remark.6}
+\contentsline {remark}{{Remark}{7}{}}{18}{remark.7}
+\contentsline {thm}{{Theorem}{1.1.{5}}{$\bb {N}, \bb {Z}, \bb {Q}$ and $\bb {R}$ are ordered}}{18}{thm.1.1.5}
+\contentsline {defn}{{Definition}{1.1.{8}}{Ordered Field}}{18}{defn.1.1.8}
+\contentsline {thm}{{Theorem}{1.1.{6}}{$\bb {Q}$ and $\bb {R}$ as Ordered Fields}}{18}{thm.1.1.6}
+\contentsline {thm}{{Theorem}{1.1.{7}}{Properties of Ordered Fields}}{18}{thm.1.1.7}
+\contentsline {defn}{{Definition}{1.1.{9}}{Absolute Value}}{18}{defn.1.1.9}
+\contentsline {thm}{{Theorem}{1.1.{8}}{Properties of Absolute Values}}{19}{thm.1.1.8}
+\contentsline {thm}{{Theorem}{1.1.{9}}{Basic Order Properties in $\bb {Z}$}}{19}{thm.1.1.9}
+\contentsline {defn}{{Definition}{1.2.{1}}{Upper and Lower Bounds}}{19}{defn.1.2.1}
+\contentsline {defn}{{Definition}{1.2.{2}}{Supremum and Infimum}}{19}{defn.1.2.2}
+\contentsline {thm}{{Theorem}{1.2.{1}}{Approximation Property of Supremum and Infimum}}{20}{thm.1.2.1}
+\contentsline {thm}{{Theorem}{1.2.{2}}{Completeness Properties of $\bb {R}$}}{20}{thm.1.2.2}
+\contentsline {thm}{{Theorem}{1.2.{3}}{Well-Ordering Properties of $\bb {Z}$ in $\bb {R}$}}{20}{thm.1.2.3}
+\contentsline {thm}{{Theorem}{1.2.{4}}{Floor and Ceiling Properties of $\bb {Z}$ in $\bb {R}$}}{20}{thm.1.2.4}
+\contentsline {defn}{{Definition}{1.2.{3}}{Floor and Ceiling Functions}}{20}{defn.1.2.3}
+\contentsline {thm}{{Theorem}{1.2.{5}}{Archimedean Properties of $\bb {Z}$ in $\bb {R}$}}{20}{thm.1.2.5}
+\contentsline {thm}{{Theorem}{1.2.{6}}{Density of $\bb {Q}$}}{21}{thm.1.2.6}
+\contentsline {defn}{{Definition}{2.1.{1}}{Sequence}}{22}{defn.2.1.1}
+\contentsline {remark}{{Remark}{8}{}}{22}{remark.8}
+\contentsline {defn}{{Definition}{2.1.{2}}{Subsequence}}{22}{defn.2.1.2}
+\contentsline {remark}{{Remark}{9}{}}{22}{remark.9}
+\contentsline {defn}{{Definition}{2.1.{3}}{Extended Ordered Field}}{22}{defn.2.1.3}
+\contentsline {defn}{{Definition}{2.1.{4}}{Convergence, Divergence and Limits of a Sequence}}{23}{defn.2.1.4}
+\contentsline {thm}{{Theorem}{2.1.{1}}{Independence of Limit from Initial Terms}}{23}{thm.2.1.1}
+\contentsline {remark}{{Remark}{10}{}}{24}{remark.10}
+\contentsline {thm}{{Theorem}{2.1.{2}}{Uniqueness of Limit}}{24}{thm.2.1.2}
+\contentsline {thm}{{Theorem}{2.2.{1}}{Basic Limits}}{24}{thm.2.2.1}
+\contentsline {thm}{{Theorem}{2.2.{2}}{Operations on Limits}}{24}{thm.2.2.2}
+\contentsline {thm}{{Theorem}{2.2.{3}}{Extended Operations on Limits}}{24}{thm.2.2.3}
+\contentsline {thm}{{Theorem}{2.2.{4}}{Monotonic Surjective Functions}}{25}{thm.2.2.4}
+\contentsline {thm}{{Theorem}{2.2.{5}}{Basic Elementary functions Acting on Limits}}{25}{thm.2.2.5}
+\contentsline {thm}{{Theorem}{2.2.{6}}{Comparison Theorem for Sequences}}{26}{thm.2.2.6}
+\contentsline {thm}{{Theorem}{2.2.{7}}{Squeeze Theorem for Sequences}}{26}{thm.2.2.7}
+\contentsline {defn}{{Definition}{2.2.{1}}{Bounds}}{26}{defn.2.2.1}
+\contentsline {defn}{{Definition}{2.3.{1}}{Increasing, Decreasing, and Monotonic Sequences}}{26}{defn.2.3.1}
+\contentsline {thm}{{Theorem}{2.3.{1}}{Monotone Convergence Theorem}}{26}{thm.2.3.1}
+\contentsline {proof}{{Proof}{1}{Proof of Part(1)}}{27}{proof.1}
+\contentsline {thm}{{Theorem}{2.3.{2}}{Nested Interval Theorem}}{27}{thm.2.3.2}
+\contentsline {proof}{{Proof}{2}{}}{27}{proof.2}
+\contentsline {defn}{{Definition}{2.3.{2}}{Rearrangement of a Sequence}}{29}{defn.2.3.2}
+\contentsline {thm}{{Theorem}{2.3.{3}}{Convergence of Subsequences and Rearrangements}}{29}{thm.2.3.3}
+\contentsline {thm}{{Theorem}{2.3.{4}}{Bolzano-Weierstrass Theorem}}{29}{thm.2.3.4}
+\contentsline {defn}{{Definition}{2.4.{1}}{Cauchy}}{29}{defn.2.4.1}
+\contentsline {thm}{{Theorem}{2.4.{1}}{Cauchy Criterion for Convergence}}{29}{thm.2.4.1}
+\contentsline {defn}{{Definition}{3.1.{1}}{Limit Point}}{30}{defn.3.1.1}
+\contentsline {defn}{{Definition}{3.1.{2}}{Limit Point from Above and Below}}{30}{defn.3.1.2}
+\contentsline {defn}{{Definition}{3.1.{3}}{Infinity As A Limit Point}}{31}{defn.3.1.3}
+\contentsline {thm}{{Theorem}{3.1.{1}}{Two-sided Limits}}{32}{thm.3.1.1}
+\contentsline {thm}{{Theorem}{3.1.{2}}{Sequential Characterization of Limits of Functions}}{32}{thm.3.1.2}
+\contentsline {remark}{{Remark}{11}{}}{32}{remark.11}
+\contentsline {thm}{{Theorem}{3.1.{3}}{Local Determination of Limits}}{32}{thm.3.1.3}
+\contentsline {thm}{{Theorem}{3.1.{4}}{Uniqueness of Limits}}{32}{thm.3.1.4}
+\contentsline {thm}{{Theorem}{3.1.{5}}{Extended Operations on Limits}}{33}{thm.3.1.5}
+\contentsline {thm}{{Theorem}{3.1.{6}}{Basic Elementary Functions Acting on Limits}}{33}{thm.3.1.6}
+\contentsline {thm}{{Theorem}{3.1.{7}}{Comparison Theorem for Functions}}{34}{thm.3.1.7}
+\contentsline {thm}{{Theorem}{3.1.{8}}{Squeeze Theorem for Functions}}{34}{thm.3.1.8}
+\contentsline {defn}{{Definition}{3.2.{1}}{Continuity}}{34}{defn.3.2.1}
+\contentsline {defn}{{Definition}{3.2.{2}}{Limit Point and Continuity}}{34}{defn.3.2.2}
+\contentsline {thm}{{Theorem}{3.2.{1}}{Sequential Characterization of Continuity}}{35}{thm.3.2.1}
+\contentsline {thm}{{Theorem}{3.2.{2}}{Operations on Continuous Functions}}{35}{thm.3.2.2}
+\contentsline {thm}{{Theorem}{3.2.{3}}{Composition of Continuous Functions}}{35}{thm.3.2.3}
+\contentsline {crly}{{Corollary}{3.2.{3}.{1}}{Continuity of Elementary Functions}}{35}{crly.3.2.3.1}
+\contentsline {thm}{{Theorem}{3.2.{4}}{Functions Acting on Limits}}{35}{thm.3.2.4}
+\contentsline {thm}{{Theorem}{3.2.{5}}{Intermediate Value Theorem}}{35}{thm.3.2.5}
+\contentsline {proof}{{Proof}{3}{}}{35}{proof.3}
+\contentsline {defn}{{Definition}{3.2.{3}}{Maximum, Minimum and Extreme Values}}{37}{defn.3.2.3}
+\contentsline {thm}{{Theorem}{3.2.{6}}{Extreme Value Theorem}}{37}{thm.3.2.6}
+\contentsline {defn}{{Definition}{3.2.{4}}{Uniform Continuity}}{37}{defn.3.2.4}
+\contentsline {thm}{{Theorem}{3.2.{7}}{Closed Bounded Intervals and Uniform Continuity}}{37}{thm.3.2.7}
+\contentsline {proof}{{Proof}{4}{}}{37}{proof.4}
+\contentsline {defn}{{Definition}{4.1.{1}}{Differentiable on a Point}}{39}{defn.4.1.1}
+\contentsline {defn}{{Definition}{4.1.{2}}{Differentiable in a Domain}}{39}{defn.4.1.2}
+\contentsline {defn}{{Definition}{4.1.{3}}{Differentiable n-times \& n-th Derivative}}{40}{defn.4.1.3}
+\contentsline {remark}{{Remark}{12}{}}{40}{remark.12}
+\contentsline {thm}{{Theorem}{4.1.{1}}{Definition of Differentiablity in $\epsilon $-$\delta $}}{40}{thm.4.1.1}
+\contentsline {defn}{{Definition}{4.1.{4}}{Linearization \& Tangent Line}}{40}{defn.4.1.4}
+\contentsline {thm}{{Theorem}{4.1.{2}}{Differentiablility $\implies $ Continuity}}{40}{thm.4.1.2}
+\contentsline {thm}{{Theorem}{4.2.{1}}{Local Determination of the Derivative}}{40}{thm.4.2.1}
+\contentsline {thm}{{Theorem}{4.2.{2}}{Operations on Derivatives}}{41}{thm.4.2.2}
+\contentsline {thm}{{Theorem}{4.2.{3}}{Chain Rule}}{41}{thm.4.2.3}
+\contentsline {thm}{{Theorem}{4.3.{1}}{Monotonic Functions}}{41}{thm.4.3.1}
+\contentsline {thm}{{Theorem}{4.3.{2}}{Continuity and Strictly Monotonous Functions}}{41}{thm.4.3.2}
+\contentsline {thm}{{Theorem}{4.3.{3}}{Inverse Function Theorem}}{42}{thm.4.3.3}
+\contentsline {thm}{{Theorem}{4.3.{4}}{Derivatives of the Basic Elementary Functions}}{42}{thm.4.3.4}
+\contentsline {defn}{{Definition}{4.4.{1}}{Local Maximum and Minimum}}{42}{defn.4.4.1}
+\contentsline {thm}{{Theorem}{4.4.{1}}{Fermat's Theorem}}{42}{thm.4.4.1}
+\contentsline {thm}{{Theorem}{4.4.{2}}{Rolle's Theorem}}{43}{thm.4.4.2}
+\contentsline {remark}{{Remark}{13}{}}{43}{remark.13}
+\contentsline {thm}{{Theorem}{4.4.{3}}{Mean Value Theorem}}{43}{thm.4.4.3}
+\contentsline {thm}{{Theorem}{4.4.{4}}{Cauchy/Generalized Mean Value Theorem}}{43}{thm.4.4.4}
+\contentsline {crly}{{Corollary}{4.4.{4}.{1}}{Trichotomy of The Derivative}}{43}{crly.4.4.4.1}
+\contentsline {crly}{{Corollary}{4.4.{4}.{2}}{The Second Derivative Test}}{43}{crly.4.4.4.2}
+\contentsline {thm}{{Theorem}{4.5.{1}}{l'Hôpital's Rule}}{44}{thm.4.5.1}
+\contentsline {defn}{{Definition}{5.1.{1}}{Partition \& Subintervals}}{45}{defn.5.1.1}
+\contentsline {defn}{{Definition}{5.1.{2}}{The Riemann Sum}}{45}{defn.5.1.2}
+\contentsline {defn}{{Definition}{5.1.{3}}{(Riemann) Integrable}}{46}{defn.5.1.3}
+\contentsline {defn}{{Definition}{5.2.{1}}{Upper and Lower Riemann Sums}}{46}{defn.5.2.1}
+\contentsline {remark}{{Remark}{14}{}}{46}{remark.14}
+\contentsline {thm}{{Theorem}{5.2.{1}}{Upper and Lower Riemann Sums and the Riemann Sum}}{47}{thm.5.2.1}
+\contentsline {thm}{{Theorem}{5.2.{2}}{Partition Refinement}}{47}{thm.5.2.2}
+\contentsline {remark}{{Remark}{15}{}}{47}{remark.15}
+\contentsline {defn}{{Definition}{5.2.{2}}{Upper and Lower Integral}}{47}{defn.5.2.2}
+\contentsline {thm}{{Theorem}{5.2.{3}}{Upper Integral $\geq $ Lower Integral}}{47}{thm.5.2.3}
+\contentsline {thm}{{Theorem}{5.2.{4}}{Equivalent Definitions of Integrability}}{47}{thm.5.2.4}
+\contentsline {proof}{{Proof}{5}{}}{48}{proof.5}
+\contentsline {thm}{{Theorem}{5.3.{1}}{Every Continuous Functions are Integrable}}{51}{thm.5.3.1}
+\contentsline {proof}{{Proof}{6}{}}{51}{proof.6}
+\contentsline {lemma}{{Lemma}{5.3.{2}}{Summation Formulas}}{52}{thm.5.3.2}
+\contentsline {thm}{{Theorem}{5.4.{1}}{Linearity}}{52}{thm.5.4.1}
+\contentsline {thm}{{Theorem}{5.4.{2}}{Comparison Theorem for Integrals}}{52}{thm.5.4.2}
+\contentsline {thm}{{Theorem}{5.4.{3}}{Additivity}}{52}{thm.5.4.3}
+\contentsline {defn}{{Definition}{5.4.{1}}{Integral at a Point \& Integral from the Right}}{52}{defn.5.4.1}
+\contentsline {note}{{Note}{1}{}}{52}{note.1}
+\contentsline {thm}{{Theorem}{5.4.{4}}{Estimation}}{53}{thm.5.4.4}
+\contentsline {note}{{Note}{2}{}}{53}{note.2}
+\contentsline {thm}{{Theorem}{5.5.{1}}{The Fundamental Theorem of Calculus}}{53}{thm.5.5.1}
+\contentsline {defn}{{Definition}{5.5.{1}}{Antiderivative}}{53}{defn.5.5.1}
+\contentsline {defn}{{Definition}{6.1.{1}}{Series}}{54}{defn.6.1.1}
+\contentsline {eg}{{Example}{6.1.{1}}{Geometric Series}}{54}{eg.6.1.1}
+\contentsline {thm}{{Theorem}{6.1.{1}}{First Finitely Many Terms Do Not Affect Convergence}}{54}{thm.6.1.1}
+\contentsline {defn}{{Definition}{6.1.{2}}{Error}}{55}{defn.6.1.2}
+\contentsline {thm}{{Theorem}{6.1.{2}}{Linearity}}{55}{thm.6.1.2}
+\contentsline {thm}{{Theorem}{6.1.{3}}{Series of Positive Terms}}{55}{thm.6.1.3}
+\contentsline {thm}{{Theorem}{6.1.{4}}{Cauchy Criterion}}{55}{thm.6.1.4}
+\contentsline {thm}{{Theorem}{6.2.{1}}{Divergence Test}}{55}{thm.6.2.1}
+\contentsline {remark}{{Remark}{16}{}}{55}{remark.16}
+\contentsline {thm}{{Theorem}{6.2.{2}}{Integral Test}}{56}{thm.6.2.2}
+\contentsline {crly}{{Corollary}{6.2.{2}.{1}}{p-Series}}{56}{crly.6.2.2.1}
+\contentsline {thm}{{Theorem}{6.2.{3}}{Comparison Test}}{56}{thm.6.2.3}
+\contentsline {thm}{{Theorem}{6.2.{4}}{Limit Comparison Test}}{56}{thm.6.2.4}
+\contentsline {thm}{{Theorem}{6.2.{5}}{Ratio Test}}{56}{thm.6.2.5}
+\contentsline {defn}{{Definition}{6.2.{1}}{Limit Supremum}}{56}{defn.6.2.1}
+\contentsline {thm}{{Theorem}{6.2.{6}}{Root Test}}{56}{thm.6.2.6}
+\contentsline {remark}{{Remark}{17}{}}{57}{remark.17}
+\contentsline {defn}{{Definition}{6.2.{2}}{Alternating Sequence}}{57}{defn.6.2.2}
+\contentsline {thm}{{Theorem}{6.2.{7}}{Alternating Series Test}}{57}{thm.6.2.7}
+\contentsline {defn}{{Definition}{6.2.{3}}{Converge Absolutely \& Converge Conditionally}}{57}{defn.6.2.3}
+\contentsline {thm}{{Theorem}{6.2.{8}}{Absolute Converges $\implies $ Convergence}}{57}{thm.6.2.8}
+\contentsline {defn}{{Definition}{6.3.{1}}{Multiplication of Series}}{57}{defn.6.3.1}
+\contentsline {thm}{{Theorem}{6.3.{1}}{Fubini's Theorem for Series}}{57}{thm.6.3.1}
+\contentsline {defn}{{Definition}{7.1.{1}}{Pointwise Convergence of Sequences of Functions}}{59}{defn.7.1.1}
+\contentsline {remark}{{Remark}{18}{}}{59}{remark.18}
+\contentsline {defn}{{Definition}{7.2.{1}}{Uniform Convergence of Sequences of Functions}}{59}{defn.7.2.1}
+\contentsline {thm}{{Theorem}{7.2.{1}}{Cauchy Criterion for Pointwise Convergence - Sequence of Functions}}{60}{thm.7.2.1}
+\contentsline {thm}{{Theorem}{7.2.{2}}{Cauchy Criterion for Uniform Convergence - Sequence of Functions}}{60}{thm.7.2.2}
+\contentsline {proof}{{Proof}{7}{}}{60}{proof.7}
+\contentsline {thm}{{Theorem}{7.2.{3}}{Uniform Convergence, Limits and Continuity - Sequence of Functions}}{61}{thm.7.2.3}
+\contentsline {proof}{{Proof}{8}{}}{61}{proof.8}
+\contentsline {remark}{{Remark}{19}{}}{62}{remark.19}
+\contentsline {thm}{{Theorem}{7.2.{4}}{Uniform Convergence and Integration - Sequence of Functions}}{62}{thm.7.2.4}
+\contentsline {remark}{{Remark}{20}{}}{62}{remark.20}
+\contentsline {thm}{{Theorem}{7.2.{5}}{Uniform Convergence and Differentiation - Sequence of Functions}}{62}{thm.7.2.5}
+\contentsline {remark}{{Remark}{21}{}}{62}{remark.21}
+\contentsline {defn}{{Definition}{7.3.{1}}{Series of Functions}}{63}{defn.7.3.1}
+\contentsline {note}{{Note}{3}{}}{63}{note.3}
+\contentsline {thm}{{Theorem}{7.3.{1}}{Cauchy Criterion for Uniform Convergence - Series of Functions}}{63}{thm.7.3.1}
+\contentsline {thm}{{Theorem}{7.3.{2}}{Uniform Convergence, Limits and Continuity - Series of Functions}}{63}{thm.7.3.2}
+\contentsline {thm}{{Theorem}{7.3.{3}}{Term-by-Term Integration}}{63}{thm.7.3.3}
+\contentsline {thm}{{Theorem}{7.3.{4}}{Term-by-Term Differentiation}}{63}{thm.7.3.4}
+\contentsline {thm}{{Theorem}{7.3.{5}}{Weierstrass M-Test}}{64}{thm.7.3.5}
+\contentsline {defn}{{Definition}{7.4.{1}}{Power Series}}{64}{defn.7.4.1}
+\contentsline {lemma}{{Lemma}{7.4.{1}}{Abel's Formula}}{64}{thm.7.4.1}
+\contentsline {thm}{{Theorem}{7.4.{2}}{The Interval and Radius of Convergence}}{64}{thm.7.4.2}
+\contentsline {thm}{{Theorem}{7.4.{3}}{Abel's Theorem}}{64}{thm.7.4.3}
+\contentsline {defn}{{Definition}{7.4.{2}}{Interval and Radius of Convergence}}{65}{defn.7.4.2}
+\contentsline {thm}{{Theorem}{7.5.{1}}{Continuity of Power Series}}{65}{thm.7.5.1}
+\contentsline {proof}{{Proof}{9}{}}{65}{proof.9}
+\contentsline {thm}{{Theorem}{7.5.{2}}{Addition and Subtraction of Power Series}}{65}{thm.7.5.2}
+\contentsline {proof}{{Proof}{10}{}}{65}{proof.10}
+\contentsline {thm}{{Theorem}{7.5.{3}}{Multiplication of Power Series}}{65}{thm.7.5.3}
+\contentsline {proof}{{Proof}{11}{}}{65}{proof.11}
+\contentsline {thm}{{Theorem}{7.5.{4}}{Division of Power Series}}{65}{thm.7.5.4}
+\contentsline {thm}{{Theorem}{7.5.{5}}{Composition of Power Series}}{66}{thm.7.5.5}
+\contentsline {proof}{{Proof}{12}{}}{66}{proof.12}
+\contentsline {thm}{{Theorem}{7.5.{6}}{Integration of Power Series}}{66}{thm.7.5.6}
+\contentsline {thm}{{Theorem}{7.5.{7}}{Differentiation of Power Series}}{66}{thm.7.5.7}
+\contentsline {thm}{{Theorem}{7.6.{1}}{Coefficients of the Taylor Series}}{67}{thm.7.6.1}
+\contentsline {proof}{{Proof}{13}{}}{67}{proof.13}
+\contentsline {defn}{{Definition}{7.6.{1}}{Taylor Series and Polynomial}}{67}{defn.7.6.1}
+\contentsline {thm}{{Theorem}{7.6.{2}}{Taylor's Theorem}}{67}{thm.7.6.2}
+\contentsline {thm}{{Theorem}{7.6.{3}}{(?) Accuracy of the Maclaurin Expansion}}{67}{thm.7.6.3}
+\contentsline {defn}{{Definition}{8.1.{1}}{Dot Product}}{68}{defn.8.1.1}
+\contentsline {thm}{{Theorem}{8.1.{1}}{Properties of Dot Product}}{68}{thm.8.1.1}
+\contentsline {defn}{{Definition}{8.1.{2}}{Norm}}{68}{defn.8.1.2}
+\contentsline {thm}{{Theorem}{8.1.{2}}{Properties of Norm}}{69}{thm.8.1.2}
+\contentsline {remark}{{Remark}{22}{Linearly Dependent}}{69}{remark.22}
+\contentsline {defn}{{Definition}{8.1.{3}}{Distance}}{69}{defn.8.1.3}
+\contentsline {thm}{{Theorem}{8.1.{3}}{Properties of Distance}}{69}{thm.8.1.3}
+\contentsline {defn}{{Definition}{8.2.{1}}{Sphere, Open Ball, Closed Ball, Punctured Ball}}{70}{defn.8.2.1}
+\contentsline {defn}{{Definition}{8.2.{2}}{Open and Closed Sets}}{70}{defn.8.2.2}
+\contentsline {remark}{{Remark}{23}{}}{70}{remark.23}
+\contentsline {thm}{{Theorem}{8.2.{1}}{Basic Properties of Open Sets}}{70}{thm.8.2.1}
+\contentsline {thm}{{Theorem}{8.2.{2}}{Basic Properties of Closed Sets}}{70}{thm.8.2.2}
+\contentsline {defn}{{Definition}{8.3.{1}}{Interior and Closure}}{71}{defn.8.3.1}
+\contentsline {thm}{{Theorem}{8.3.{1}}{Interior of a Set as Its Largest Open Set}}{71}{thm.8.3.1}
+\contentsline {thm}{{Theorem}{8.3.{2}}{Closure of a Set as The Smallest Closed Set Containing It}}{71}{thm.8.3.2}
+\contentsline {crly}{{Corollary}{8.3.{2}.{1}}{Another Certificate for Open and Closed Sets}}{71}{crly.8.3.2.1}
+\contentsline {defn}{{Definition}{8.3.{2}}{Interior, Isolated, Limit and Boundary Points}}{71}{defn.8.3.2}
+\contentsline {thm}{{Theorem}{8.3.{3}}{Equivalent Topological Definitions}}{72}{thm.8.3.3}
+\contentsline {proof}{{Proof}{14}{}}{72}{proof.14}
+\contentsline {defn}{{Definition}{8.3.{3}}{Connectedness}}{74}{defn.8.3.3}
+\contentsline {thm}{{Theorem}{8.3.{4}}{Connected sets in $\bb {R}$ are Intervals}}{74}{thm.8.3.4}
+\contentsline {defn}{{Definition}{8.4.{1}}{Bounded in $\bb {R}^n$}}{75}{defn.8.4.1}
+\contentsline {defn}{{Definition}{8.4.{2}}{Open Cover, Subcover, and Compactness}}{75}{defn.8.4.2}
+\contentsline {defn}{{Definition}{8.4.{3}}{Closed Rectangle}}{75}{defn.8.4.3}
+\contentsline {thm}{{Theorem}{8.4.{1}}{Nested Rectangles Theorem}}{75}{thm.8.4.1}
+\contentsline {thm}{{Theorem}{8.4.{2}}{Compactness of Closed Rectangles}}{75}{thm.8.4.2}
+\contentsline {thm}{{Theorem}{8.4.{3}}{Heine-Borel Theorem}}{75}{thm.8.4.3}
+\contentsline {proof}{{Proof}{15}{}}{75}{proof.15}
+\contentsline {defn}{{Definition}{9.1.{1}}{Relatively Open and Closed Sets}}{78}{defn.9.1.1}
+\contentsline {thm}{{Theorem}{9.1.{1}}{Relatively Open, Closed, and Disconnected}}{78}{thm.9.1.1}
+\contentsline {defn}{{Definition}{9.1.{2}}{Sequences in $\bb {R}^n$}}{78}{defn.9.1.2}
+\contentsline {thm}{{Theorem}{9.1.{2}}{Boundedness, Limits, and Convergence of Sequences}}{79}{thm.9.1.2}
+\contentsline {thm}{{Theorem}{9.1.{3}}{Uniqueness of Limits and Convergence of Subsequences}}{79}{thm.9.1.3}
+\contentsline {thm}{{Theorem}{9.1.{4}}{Bolzano-Weierstrass Theorem for $\bb {R}^n$}}{79}{thm.9.1.4}
+\contentsline {thm}{{Theorem}{9.1.{5}}{Completeness of $\bb {R}^n$}}{79}{thm.9.1.5}
+\contentsline {defn}{{Definition}{9.1.{3}}{Limit on a Point}}{80}{defn.9.1.3}
+\contentsline {thm}{{Theorem}{9.1.{6}}{Sequential Characterization of Limits in $\bb {R}^n$}}{80}{thm.9.1.6}
+\contentsline {thm}{{Theorem}{9.1.{7}}{Limit of a Function and the Limit of Its Elements}}{80}{thm.9.1.7}
+\contentsline {defn}{{Definition}{9.1.{4}}{Continuity in $\bb {R}^n$}}{80}{defn.9.1.4}
+\contentsline {thm}{{Theorem}{9.1.{8}}{Sequential Characterization of Continuity}}{80}{thm.9.1.8}
+\contentsline {thm}{{Theorem}{9.1.{9}}{Topological Characterization of Continuity}}{80}{thm.9.1.9}
+\contentsline {thm}{{Theorem}{9.1.{10}}{Properties of Continuous Functions}}{81}{thm.9.1.10}
+\contentsline {defn}{{Definition}{9.1.{5}}{Path \& Path-connected}}{81}{defn.9.1.5}
+\contentsline {thm}{{Theorem}{9.1.{11}}{Path-connectedness and Connectedness}}{81}{thm.9.1.11}
+\contentsline {eg}{{Example}{A.1.{1}}{Russel's Paradox}}{82}{eg.A.1.1}
+\contentsline {defn}{{Definition}{A.2.{1}}{Mathematical Symbols}}{83}{defn.A.2.1}
+\contentsline {defn}{{Definition}{A.2.{2}}{Formula}}{83}{defn.A.2.2}
+\contentsline {defn}{{Definition}{A.2.{3}}{Free or Bounded Variable}}{84}{defn.A.2.3}
+\contentsline {defn}{{Definition}{A.2.{4}}{Is Bound By and Binds}}{84}{defn.A.2.4}
+\contentsline {defn}{{Definition}{A.2.{5}}{Free Variable, Statement, Statement About}}{84}{defn.A.2.5}
+\contentsline {defn}{{Definition}{A.2.{6}}{Unique Existence}}{84}{defn.A.2.6}
+\contentsline {remark}{{Remark}{24}{The ZFC Axioms of Set Theory (informal)}}{85}{remark.24}
+\contentsline {defn}{{Definition}{A.2.{7}}{Empty Set Axiom}}{85}{defn.A.2.7}
+\contentsline {defn}{{Definition}{A.2.{8}}{Extension Axiom}}{85}{defn.A.2.8}
+\contentsline {thm}{{Theorem}{A.2.{1}}{Uniqueness of the Empty Set}}{85}{thm.A.2.1}
+\contentsline {defn}{{Definition}{A.2.{9}}{$\emptyset $}}{85}{defn.A.2.9}
+\contentsline {defn}{{Definition}{A.2.{10}}{Subset}}{86}{defn.A.2.10}
+\contentsline {defn}{{Definition}{A.2.{11}}{Separation Axiom}}{86}{defn.A.2.11}
+\contentsline {note}{{Note}{4}{}}{86}{note.4}
+\contentsline {defn}{{Definition}{A.2.{12}}{Pair Axiom}}{86}{defn.A.2.12}
+\contentsline {defn}{{Definition}{A.2.{13}}{Union Axiom}}{86}{defn.A.2.13}
+\contentsline {defn}{{Definition}{A.2.{14}}{Union}}{86}{defn.A.2.14}
+\contentsline {defn}{{Definition}{A.2.{15}}{Intersection}}{87}{defn.A.2.15}
+\contentsline {defn}{{Definition}{A.2.{16}}{Power Set Axiom}}{87}{defn.A.2.16}
+\contentsline {defn}{{Definition}{A.2.{17}}{Power Set}}{87}{defn.A.2.17}
+\contentsline {defn}{{Definition}{A.2.{18}}{Ordered Pair}}{87}{defn.A.2.18}
+\contentsline {defn}{{Definition}{A.2.{19}}{Successor, Inductive}}{88}{defn.A.2.19}
+\contentsline {defn}{{Definition}{A.2.{20}}{Axiom of Infinity}}{88}{defn.A.2.20}
+\contentsline {thm}{{Theorem}{A.2.{2}}{Existence \& Uniqueness of an Inductive Set}}{88}{thm.A.2.2}
+\contentsline {defn}{{Definition}{A.2.{21}}{Natural Numbers}}{88}{defn.A.2.21}
+\contentsline {remark}{{Remark}{25}{}}{88}{remark.25}
+\contentsline {thm}{{Theorem}{A.2.{3}}{Principle of Induction}}{88}{thm.A.2.3}
+\contentsline {remark}{{Remark}{26}{}}{89}{remark.26}
+\contentsline {defn}{{Definition}{A.2.{22}}{Replacement Axiom}}{89}{defn.A.2.22}
+\contentsline {defn}{{Definition}{A.2.{23}}{Axiom of Choice}}{89}{defn.A.2.23}
+\contentsline {defn}{{Definition}{A.3.{1}}{Binary Relation}}{89}{defn.A.3.1}
+\contentsline {defn}{{Definition}{A.3.{2}}{Domain, Range, Image, Inverse Image, Inverse, Composition}}{89}{defn.A.3.2}
+\contentsline {thm}{{Theorem}{A.3.{1}}{Domain, Range, Image and Inverse Image as Sets}}{90}{thm.A.3.1}
+\contentsline {thm}{{Theorem}{A.3.{2}}{Inverse and Composition as Binary Relations}}{90}{thm.A.3.2}
+\contentsline {defn}{{Definition}{A.3.{3}}{Equivalence Relation}}{90}{defn.A.3.3}
+\contentsline {defn}{{Definition}{A.3.{4}}{Equivalence Class}}{90}{defn.A.3.4}
+\contentsline {defn}{{Definition}{A.3.{5}}{Partition}}{90}{defn.A.3.5}
+\contentsline {thm}{{Theorem}{A.3.{3}}{Correspondence of Equivalence Relations and Partitions}}{91}{thm.A.3.3}
+\contentsline {note}{{Note}{5}{Set of All Equivalence Classes}}{91}{note.5}
+\contentsline {defn}{{Definition}{A.3.{6}}{Set of Representatives}}{91}{defn.A.3.6}
+\contentsline {remark}{{Remark}{27}{}}{91}{remark.27}
+\contentsline {defn}{{Definition}{A.3.{7}}{Function}}{91}{defn.A.3.7}
+\contentsline {defn}{{Definition}{A.3.{8}}{One-to-one \& Onto}}{92}{defn.A.3.8}
+\contentsline {defn}{{Definition}{A.3.{9}}{Left and Right Inverses}}{92}{defn.A.3.9}
+\contentsline {thm}{{Theorem}{A.3.{4}}{Surjective and Injective VS Inverses}}{92}{thm.A.3.4}
+\contentsline {defn}{{Definition}{A.3.{10}}{Invertible}}{92}{defn.A.3.10}
+\contentsline {thm}{{Theorem}{A.3.{5}}{The Recursion Theorem}}{92}{thm.A.3.5}
+\contentsline {defn}{{Definition}{A.4.{1}}{Sum and Product}}{93}{defn.A.4.1}
+\contentsline {defn}{{Definition}{A.4.{2}}{Integers}}{93}{defn.A.4.2}
+\contentsline {defn}{{Definition}{A.4.{3}}{Rational Numbers}}{93}{defn.A.4.3}
+\contentsline {defn}{{Definition}{A.4.{4}}{Real Numbers}}{94}{defn.A.4.4}
+\contentsline {defn}{{Definition}{A.4.{5}}{Complex Numbers}}{94}{defn.A.4.5}
+\contentsline {defn}{{Definition}{B.1.{1}}{Range, Image, and Inverse Image}}{95}{defn.B.1.1}
+\contentsline {defn}{{Definition}{B.1.{2}}{Composite Function}}{95}{defn.B.1.2}
+\contentsline {defn}{{Definition}{B.1.{3}}{Bijection}}{95}{defn.B.1.3}
+\contentsline {thm}{{Theorem}{B.1.{1}}{Bijectiveness and Inverse of the Composite Function}}{95}{thm.B.1.1}
+\contentsline {defn}{{Definition}{B.1.{4}}{Identity Function}}{96}{defn.B.1.4}
+\contentsline {thm}{{Theorem}{B.1.{2}}{Bijectiveness and Invertability of Functions}}{96}{thm.B.1.2}
+\contentsline {crly}{{Corollary}{B.1.{2}.{1}}{Relationship between Injection and Surjection}}{96}{crly.B.1.2.1}
+\contentsline {defn}{{Definition}{B.2.{1}}{Equal Cardinality}}{96}{defn.B.2.1}
+\contentsline {defn}{{Definition}{B.2.{2}}{Properties for Cardinality of Sets}}{96}{defn.B.2.2}
+\contentsline {defn}{{Definition}{B.2.{3}}{Finiteness and Countability of Sets}}{97}{defn.B.2.3}
+\contentsline {remark}{{Remark}{28}{}}{97}{remark.28}
+\contentsline {thm}{{Theorem}{B.2.{1}}{}}{97}{thm.B.2.1}
+\contentsline {crly}{{Corollary}{B.2.{1}.{1}}{}}{97}{crly.B.2.1.1}
+\contentsline {thm}{{Theorem}{B.2.{2}}{$|\bb {N}|$ as a Threshold for Finiteness and Countability}}{97}{thm.B.2.2}
+\contentsline {thm}{{Theorem}{B.2.{3}}{}}{97}{thm.B.2.3}
+\contentsline {defn}{{Definition}{B.2.{4}}{Countability and $\aleph _0$}}{98}{defn.B.2.4}
+\contentsline {thm}{{Theorem}{B.2.{4}}{Set Cartesian Product and Union, and $\bb {Q}$ are Countable}}{98}{thm.B.2.4}
+\contentsline {remark}{{Remark}{29}{}}{98}{remark.29}
+\contentsline {thm}{{Theorem}{B.2.{5}}{$\bb {R}$ as an Uncountable Set}}{98}{thm.B.2.5}
+\contentsline {thm}{{Theorem}{B.2.{6}}{Cantor-Schröder-Bernstein Theorem}}{98}{thm.B.2.6}

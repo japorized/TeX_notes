@@ -71,10 +71,10 @@
 \theoremlisttype{allname}
 
 % Shortcuts
-\newcommand{\bb}[1]{\mathbb{#1}}		% using bb instead of mathbb
+\newcommand{\bb}[1]{\mathbb{#1}}			% using bb instead of mathbb
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}	% simplifying the writing of a floor function
 \newcommand{\ceiling}[1]{\lceil #1 \rceil}	% simplifying the writing of a ceiling function
-\newcommand{\dotp}{\, \cdotp}	% dot product to distinguish from \cdot
+\newcommand{\dotp}{\, \cdotp}				% dot product to distinguish from \cdot
 
 % Main Body
 \title{UW W17 PMATH333 - Definitions and Theorems}
@@ -332,7 +332,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\end{enumerate}
 \end{defn}
 
-\begin{thm}[Approximation Property of Supremum and Infimum]
+\begin{thm}[Approximation Property of Supremum and Infimum]\label{approx_prop}
 	Let $\emptyset \neq A \subseteq \bb{R}$.
 	\begin{enumerate}
 		\item $b = \sup A \implies \forall 0 < \epsilon \in \bb{R} \> \exists x \in A \> (b - \epsilon < x \leq b)$
@@ -471,7 +471,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\]
 \end{thm}
 
-\begin{thm}[Operations on Limits]
+\begin{thm}[Operations on Limits]\label{operations_limits}
 	Let $\langle x_k \rangle$ and $\langle y_k \rangle$ be sequnces in an ordefred field F and let $c \in F$. SPS that $\langle x_k \rangle$ and $\langle y_k \rangle$ both converge with $x_k \to a$ and $y_k \to b$. Then
 	\begin{enumerate}
 		\item $ cx_k \to ca$
@@ -493,7 +493,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 \end{thm}
 
 \begin{thm}[Monotonic Surjective Functions]
-	Let I and J be intervqals in a subfield $F \subseteq \bb{R}$. SPS $f: I \to J$ is increasing and surjective. Let $\langle x_k \rangle$ be a sequence in I. Then
+	Let I and J be intervals in a subfield $F \subseteq \bb{R}$. SPS $f: I \to J$ is increasing and surjective. Let $\langle x_k \rangle$ be a sequence in I. Then
 	\begin{enumerate}
 		\item If $x_K \to a \in I$, then $f(x_k) \to f(a) \in J$.
 		\item If $x_k \to u \in F \cup \{\infty\}$ is the right endpoint of I, then $f(x_k) \to v \in F \cup \{\infty\}$ is the right endpoint in J.
@@ -540,7 +540,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\end{enumerate}
 \end{thm}
 
-\begin{thm}[Comparison Theorem for Sequences]
+\begin{thm}[Comparison Theorem for Sequences]\label{comparison_seq}
 	Let $\langle x_k \rangle$ and $\langle y_k \rangle$ be sequences in a subfield $F \subseteq \bb{R}$. SPS that $x_k \leq y_k$ for all k. Then
 	\begin{enumerate}
 		\item $(x_k \to a \land y_k \to b) \implies a \leq b$
@@ -549,7 +549,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\end{enumerate}
 \end{thm}
 
-\begin{thm}[Squeeze Theorem for Sequences]
+\begin{thm}[Squeeze Theorem for Sequences]\label{squeeze_seq}
 	Let $\langle x_k \rangle$, $\langle y_k \rangle$ and $\langle z_k \rangle$ be sequences in a subfield $F \subseteq \bb{R}$.
 	\begin{enumerate}
 		\item $(\forall k \in \bb{N} \; x_k \leq y_k \leq x_k \> \land \> x_k \to a \land z_k \to a) \implies y_k \to a$
@@ -579,7 +579,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	We say that $\langle x_k \rangle$ is monotonic when it is either increasing or decreasing only.
 \end{defn}
 
-\begin{thm}[Monotone Convergence Theorem]
+\begin{thm}[Monotone Convergence Theorem]\label{monotone_convergence}
 	Let $\langle x_k \rangle$ be a sequence in $\bb{R}$.
 	\begin{enumerate}
 		\item SPS $\langle x_k \rangle$ is increasing. If $\langle x_k \rangle$ is bounded above, then $x_k \to \sup \{x_k\}$. If $\langle x_k \rangle$ is not bounded above, then $x_k \to \infty$.
@@ -587,9 +587,83 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\end{enumerate}
 \end{thm}
 
+\begin{proof}
+	[Proof of Part(1)]
+
+	WTP $\langle x_k \rangle$ is increasing and bounded above $\implies x_k \to \sup \{x_k\}$.
+
+	By assumption
+	\begin{gather*}
+		\exists b \in \bb{R} \; \forall k \in \bb{N} \; x_k \leq b \\
+		A := \{ x_k \, | \, k \in \bb{N} \} \\
+		\because A \neq \emptyset \text{ and } \forall c \in A \; c \leq b
+	\end{gather*}
+	By \hyperref[completeness_R]{Completeness Property of $\bb{R}$},
+	\begin{gather*}
+		a := \sup A \\
+		\\
+		\forall \epsilon > 0
+	\end{gather*}
+	By the \hyperref[approx_prop]{Approximation Property for the Supremum},
+	\begin{gather*}
+		\exists m \in \bb{N} \enspace x_m \in A \enspace a - \epsilon < x_m \leq a \leq b \quad (\text{since } a = \sup A) \\
+		\because \langle x_k \rangle \text{ is increasing} \\
+		\forall k \in \bb{N} \enspace x_m \leq x_k \\
+		\implies a - \epsilon < x_m \leq x_k \leq a < a + \epsilon \implies |x_k - a| < \epsilon
+	\end{gather*}
+
+	WTP $\langle x_k \rangle$ is increasing and not bounded above $\implies x_k \to \infty$.
+
+	Let $r > 0$. Since the sequence is unbounded, choose $m \in \bb{Z}_{\geq p}$ such that $x_m \geq r$. Then $\forall l \in \bb{Z}_{\geq p}$, if $l \geq m$, then $r \leq x_m \leq x_l$.
+
+	Part(2) follows a similar argument as in the proof of Part(1).
+\end{proof}
+
 \begin{thm}[Nested Interval Theorem]
 	Let $I_0, I_1, I_2, ...$ be nonempty, closed, and bounded intervals in $\bb{R}$. SPS $I_0 \supseteq I_1 \supseteq I_2 \supseteq \hdots$, then $\bigcap_{k = 0}^\infty I_k \neq \emptyset$. Moreover, if the lengths of these intervals satisfy $|I_k| \to 0$ as $k \to \infty$, then $\bigcap_{k = 0}^\infty I_k$ is a single point.
 \end{thm}
+
+\begin{proof}
+	\begin{gather*}
+		\forall k \in \bb{N} \enspace a_k, b_k \in \bb{R} \enspace a_k < b_k \qquad I_k := [a_k, b_k] \\
+		I_k \supseteq I_{k + 1} \implies a_k \leq a_{k + 1} < b_{k + 1} \leq b_k \\
+		\\
+		\langle a_k \rangle := \{a_k \, | \, k \in \bb{N} \} \quad \langle b_k \rangle := \{b_k \, | \, k \in \bb{N} \} \\
+		a_k \leq a_{k + 1} \implies \langle a_k \rangle \text{ is increasing} \\
+		b_{k + 1} \leq b_k \implies \langle b_k \rangle \text{ is decreasing} \\
+		\\
+		\because a_0 \leq a_1 \leq \hdots \leq a_{k - 1} \leq a_k < b_k \leq b_{k - 1} \leq \hdots \leq b_0 \\
+		\forall k \in \bb{N} \quad a_k < b_0 \land a_0 \leq b_k \\
+		\therefore \langle a_k \rangle \text{ is increasing and bounded above (by $b_0$)} \\
+		\langle b_k \rangle \text{ is decreasing and bounded below (by $a_0$)}
+	\end{gather*}
+	By the \hyperref[monotone_convergence]{Monotone Convergence} Theorem
+	\begin{gather*}
+		a := \sup \{ a_k \} = \lim_{k \to \infty} a_k \qquad b := \inf \{ b_k \} = \lim_{k \to \infty} b_k \\
+		\because \forall k \in \bb{N} \quad a_0 \leq a_1 \leq \hdots \leq a_{k - 1} \leq a_k < b_k \leq b_{k - 1} \leq \hdots \leq b_0 \\
+		a_k \leq b_k
+	\end{gather*}
+	By the \hyperref[comparison_seq]{Comparison Theorem}
+	\begin{gather*}
+		a \leq b \implies [a, b] \neq \emptyset \\
+		\because a = \sup \{ a_k \} \text{ and } b = \inf \{ b_k \} \\
+		\forall k \in \bb{N} \quad a_k \leq a \text{ and } b \leq b_k \\
+		\therefore [a, b] \subseteq [a_k, b_k] = I_k
+		\implies [a, b] \subseteq \bigcap\limits_{k=1}^\infty I_k \implies \bigcap\limits_{k=1}^\infty I_k \neq \emptyset
+	\end{gather*}
+	Furthermore,
+	\begin{equation*}
+		a = b \implies [a, b] = \{a\} \implies \bigcap\limits_{k=1}^\infty I_k = \{a\}
+	\end{equation*}
+	Indeed,
+	\begin{equation*}
+		|I_k| \to 0 \; (\text{as } k \to \infty) \implies b_k - a_k \to 0
+	\end{equation*}
+	By \hyperref[operations_limits]{Operations on Limits}
+	\begin{gather*}
+		a = b
+	\end{gather*}
+\end{proof}
 
 \begin{defn}[Rearrangement of a Sequence]
 	Let $\langle x_k \rangle_{k \geq p}$ be a sequence in a set X. Given a bijective function $F: \bb{Z}_{\geq q} \to \bb{Z}_{\geq p}$ such that $f(l) = k_l$ and let $y_l = x_{k_l}$ for $l \geq q$. Then the sequence $\langle y_l \rangle_{l \geq q}$ is called a rearrangement of the sequence $\langle x_k \rangle_{k \geq p}$.
@@ -603,7 +677,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\end{enumerate}
 \end{thm}
 
-\begin{thm}[Bolzano-Weierstrass Theorem]
+\begin{thm}[Bolzano-Weierstrass Theorem]\label{bolzano-weierstass_R}
 	Every bounded sequence of $\bb{R}$ has a convergent subsequence.
 \end{thm}
 
@@ -724,7 +798,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	Analogous results hold for limits $x \to a^\pm$ and $x \to \pm \infty$.
 \end{thm}
 
-\begin{thm}[Uniquness of Limits]
+\begin{thm}[Uniqueness of Limits]
 	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f: A \to F$ and let $a \in F$ be a limit point of A. For $u, v \hat{F}$,
 		\[
 			\lim_{x \to a} f(x) = u \land \lim_{x \to a} f(x) = v \implies u = v
@@ -827,7 +901,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\end{enumerate}
 \end{defn}
 
-\begin{thm}[Sequential Characterization of Continuity]
+\begin{thm}[Sequential Characterization of Continuity]\label{seq_char_cts}
 	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, let $f: A \to F$ and let $a \in A$. Then f is continuous at a iff for every sequence $\langle x_k \rangle$ in A with $x_k \to a$ we have $f(x_k) \to f(a)$.
 \end{thm}
 
@@ -853,10 +927,58 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 
 \begin{thm}[Intermediate Value Theorem]
 	Let I be an interval in $\bb{R}$ and let $f: I \to \bb{R}$ be continuus (in I). Let $a, b \in I$ with $a \leq b$ and let $y \in \bb{R}$.
-	\[
+	\begin{equation*}
 		\min \{f(a), f(b)\} \leq y \leq \max \{f(a), f(b)\} \implies \exists x \in [a, b] \; (f(x) = y)
-	\]
+	\end{equation*}
 \end{thm}
+
+\begin{proof}
+	WLOG SPS $f(a) \leq y \leq f(b)$. $f(a) = y \implies x = a$ and $f(b) = y \implies x = b$. \\
+	Thus STP for $f(a) < y < f(b)$
+	\begin{gather*}
+		A := \{t \in (a, b) \, | \, f(t) < y \} \\
+		\because f(a) < y \enspace a \in A \implies A \neq \emptyset \\
+		\because \forall t \in A \enspace t \leq b \implies A \text{ is bounded above}
+	\end{gather*}
+	By the \hyperref[completeness_R]{Completeness Property of $\bb{R}$},
+	\begin{gather*}
+		x := sup A \\
+		\\
+		WTP \; f(x) = y \\
+	\end{gather*}
+	Suppose, for contradiction, that $f(x) \neq y$.
+	\begin{gather*}
+		SPS \; f(x) < y \\
+		\therefore x \in A \\
+		\because x \neq b \enspace \exists \delta_1 > 0 \enspace [x, x + \delta_1] \subseteq [a, b] \\
+		\because f \text{ is continuous} \\
+		\text{fix } \epsilon = y - f(x) > 0 \enspace \exists \delta_2 > 0 \; \forall t \in [a, b] \\
+		|t - x| < \delta_2 \implies |f(t) - f(x)| < \epsilon \implies f(t) < y \\
+		\\
+		\delta := \min\{\delta_1, \delta_2\} \enspace [x, x + \delta] \subseteq [a, b] \\
+		\forall t \in [x, x + \delta] \enspace |t - x| < \delta \implies f(t) < y \\
+		\implies f(x + \delta) < y \implies x < x + \delta \in A \implies x \neq \sup A
+	\end{gather*}
+	which is a contradiction.
+	\begin{gather*}
+		SPS \; f(x) > y \\
+		\because x \neq a \enspace \exists \delta_1 > 0 \enspace [x - \delta_1, x] \subseteq [a, b] \\
+		\because f \text{ is continuous} \\
+		\text{fix } \epsilon = y - f(x) > 0 \enspace \exists \delta_2 > 0 \; \forall t \in [a, b] \\
+		|t - x| < \delta_2 \implies |f(t) - f(x)| < \epsilon \implies f(t) > y \\
+		\\
+		\delta := \min\{\delta_1, \delta_2\} \enspace [x - \delta, x] \subseteq [a, b]
+	\end{gather*}
+	By the \hyperref[approx_prop]{Approximation Property for the Supremum}, we can have
+	\begin{equation*}
+		x - \delta < t \leq x \implies t \in A \implies f(t) < y
+	\end{equation*}
+	But
+	\begin{gather*}
+		\forall t \in [x - \delta, x] \enspace |t - x| < \delta \implies f(t) > y \\
+	\end{gather*}
+	which is, hence, our desired contradiction. Thus $f(x) = y$ for some $x \in [a, b]$.
+\end{proof}
 
 \begin{defn}[Maximum, Minimum and Extreme Values]
 	Let F be a subfield of $\bb{R}$, let $A \subseteq F$, and let $f: A \to F$. For $a \in A$, fi $f(x) \geq f(x)$ for every $x \in A$, then we say that f(a) is the maximum value of f or that f attains its maximum value at a. Similarly for $b \in A$, if $f(b) \leq f(x)$ for every $x \in A$, we say that f(b) is the minimum value of f, or that f attains its minimum at b.
@@ -875,9 +997,43 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\]
 \end{defn}
 
-\begin{thm}[Closed Bounded Intervals and Uniform Continuity]
-	Let $a, b \in \bb{R}$ with a < b and let $f: [a, b] \to \bb{R}$. If f is continuous (on [a, b]) then f is uniformly continuous (on [a, b]).
+\begin{thm}[Closed Bounded Intervals and Uniform Continuity]\label{closed_bounded_cts_fn_unif}
+	Let $a, b \in \bb{R}$ with $a < b$ and let $f: [a, b] \to \bb{R}$. If f is continuous (on [a, b]) then f is uniformly continuous (on [a, b]).
 \end{thm}
+
+\begin{proof}
+	SPS, for contradiction, that f is continous but not uniformly continuous.
+	\begin{gather*}
+		\because f \text{ is not uniformly continuous} \\
+		\exists \epsilon > 0 \; \forall \delta > 0 \; \forall x, t \in [a, b] \\
+		|t - x| < \delta \; \land \; |f(x) - f(t)| > \epsilon \\
+		\\
+		\forall k \in \bb{N} \enspace \exists x_k, t_k \in [a, b] \\
+		|x_k - t_k| < \frac{1}{k} \; \land \; |f(x_k) - f(t_k)| > \epsilon
+	\end{gather*}
+	By the \hyperref[bolzano-weierstass_R]{Bolzano-Weierstass Theorem},
+	\begin{equation*}
+		\langle t_{k_j} \rangle := \{t_k \, | \, \forall j \in \bb{N}, k_j = k \} \enspace c := \lim_{j \to \infty} t_{k_j}
+	\end{equation*}
+	Also, construct (without using Bolzano-Weierstass),
+	\begin{gather*}
+		\langle x_{k_j} \rangle := \{x_k \, | \, \forall j \in \bb{N}, k_j = k \} \\
+		\therefore \forall j \in \bb{N} \enspace |x_{k_j} - t_{k_j}| < \frac{1}{k_j} \; \land \; |f(x_{k_j}) - f(t_{k_j})| > \epsilon \\
+		|x_{k_j} - t_{k_j}| < \frac{1}{k_j} \implies t_{k_j} - \frac{1}{k_j} < x_{k_j} < t_{k_j} + \frac{1}{k_j} \\
+		\because t_{k_j} \to c \, \land \, \frac{1}{k_j} \to 0 \implies t_{k_j} \pm \frac{1}{k_j} \to c
+	\end{gather*}
+	By the \hyperref[squeeze_seq]{Squeeze theorem},
+	\begin{equation*}
+		x_{k_j} \to c
+	\end{equation*}
+	Since f is continuous, by the \hyperref[seq_char_cts]{Sequential Characterization of Continuity},
+	\begin{gather*}
+		f(t_{k_j}) \to f(c) \, \land \, f(x_{k_j}) \to f(c) \\
+		\implies f(x_{k_j}) - f(t_{k_j}) \to 0 \\
+		\implies \exists j \in \bb{N} \; |f(x_{k_j}) - f(t_{k_j})| < \epsilon
+	\end{gather*}
+	which is a contradiction.
+\end{proof}
 
 % =================================
 % 		Chapter 4
@@ -1182,11 +1338,11 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	for every $t_i \in [x_{i-1}, x_i]$.
 \end{thm}
 
-\begin{thm}[Partition Refinement]
-	Let $f: [a, b] \to \bb{R}$ be bounded with upper and lower bounds M and m. Let $X = \{x_0, x_1, ..., x_n\}$ and $Y = \{y_0, y_1, ..., y_m\}$ be partitions of [a, b] such that $\{x_0, x_1, ..., x_n\} \subseteq \{y_0, y_1, ..., y_m\}$ (or $m \geq n$). Then
+\begin{thm}[Partition Refinement]\label{partition_refinement}
+	Let $f: [a, b] \to \bb{R}$ be bounded with upper and lower bounds M and m. Let $X = \{x_0, x_1, ..., x_n\}$ and $Y = \{y_0, y_1, ..., y_q\}$ be partitions of [a, b] such that $\{x_0, x_1, ..., x_n\} \subseteq \{y_0, y_1, ..., y_q\}$ (or $q \geq n$). Then
 	\begin{gather*}
-		0 \leq L(f, Y) - L(f, X) \leq (M - m) \Delta X \\
-		0 \leq U(f, X) - U(f, Y) \leq (M - m) \Delta X
+		U(f, X) - (M - m)(q - n) \Delta X \leq U(f, Y) \leq U(f, X) \\
+		L(f, X) \leq L(f, Y) \leq L(f, X) + (M - m)(q - n) \Delta X
 	\end{gather*}
 \end{thm}
 
@@ -1221,12 +1377,148 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\end{enumerate}
 \end{thm}
 
+\begin{proof}
+	$((1) \implies (2))$
+	By assumption,
+	\begin{gather*}
+		\exists I \in \bb{R} \enspace \forall \epsilon > 0 \enspace \exists \delta > 0 \enspace \forall P = \{x_0 = a, x_1, ..., x_n = b\} \\
+		\Delta_i x := |x_i - x_{i-1}| \enspace \Delta P := \max\{\Delta_i x \, | \, i \in \bb{Z}^+\} \\
+		\Delta P < \delta \implies \forall t_i \in [x_{i-1}, x_i] \; \left| \sum_{i=1}^{n} f(t_i) \Delta_i x - I \right| < \epsilon \\
+		\\
+		\forall i \in \bb{Z}^+ \enspace M_i := \{f(t_i) \, | \, t_i \in [x_{i-1}, x_i] \} \enspace m_i := \{f(t_i) \, | \, t_i \in [x_{i-1}, x_i]\}
+	\end{gather*}
+	By the \hyperref[approx_prop]{Approximation Property for the Supremum and Infimum},
+	\begin{gather*}
+		\forall i \in \bb{Z}^+ \\
+		\exists s_i \in [x_{i-1}, x_i] \enspace M_i - \frac{\epsilon}{4n} < f(s_i) < M_i \\
+		\implies U(f, P) - \frac{\epsilon}{4} < \sum_{i=1}^{n} f(s_i) \Delta_i x \leq U(f, P) \implies \left| U(f, P) - \sum_{i=1}^{n} f(s_i) \Delta_i x \right| < \frac{\epsilon}{4} \\
+		\text{and} \\
+		\exists r_i \in [x_{i-1}, x_i] \enspace m_i \leq f(r_i) \leq m_i + \frac{\epsilon}{4n} \\
+		\implies L(f, P) \leq \sum_{i=1}^{n} f(r_i) \Delta_i x \leq L(f, P) + \frac{\epsilon}{4} \implies \left| \sum_{i=1}^{n} f(r_i) \Delta_i x - L(f, P) \right| < \frac{\epsilon}{4} \\
+		\\
+		S_1 := \sum_{i=1}^{n} f(s_i) \Delta_i x \quad S_2 := \sum_{i=1}^{n} f(r_i) \Delta_i x \\
+	\end{gather*}
+	By the Triangle Inequality,
+	\begin{align*}
+		|U(f, P) - L(f, P)| &\leq |U(f, P) - S_1| + |S_1 - I| + |I - S_2| + |S_2 - L(f, P)| \\
+							&\leq \frac{\epsilon}{4} + \frac{\epsilon}{4} + \frac{\epsilon}{4} + \frac{\epsilon}{4} \\
+							&= \epsilon
+	\end{align*}
+
+	$((2) \implies (3))$
+	By assumption,
+	\begin{equation*}
+		\forall \epsilon > 0 \enspace \exists P_n = \{x_0, x_1, ..., x_n\} \enspace U(f, P_n) - L(f, P_n) < \frac{\epsilon}{3}
+	\end{equation*}
+	Since
+	\begin{align*}
+		U(f) &= \inf \{U(f, P) \, | \, P \text{ is a partition} \} \\
+		L(f) &= \sup \{L(f, P) \, | \, P \text{ is a partition} \}
+	\end{align*}
+	By the \hyperref[approx_prop]{Approximation Property for the Supremum and Infimum},
+	\begin{gather*}
+		\exists P_1 \enspace U(f) \leq U(f, P_1) < U(f) + \frac{\epsilon}{3} \\
+		\exists P_2 \enspace L(f) - \frac{\epsilon}{3} < L(f, P_2) \leq L(f)
+	\end{gather*}
+	By \hyperref[partition_refinement]{Partition Refinement}, choose
+	\begin{gather*}
+		P = P_1 \cup P_2 \text{ so that} \\
+		U(f) \leq U(f, P) \leq U(f, P_1) < U(f) + \frac{\epsilon}{3} \\
+		L(f) - \frac{\epsilon}{3} < L(f, P_2) \leq L(f, P) \leq L(f)
+	\end{gather*}
+	Therefore,
+	\begin{align*}
+		U(f) - L(f) &= (U(f) - U(f, P)) + (U(f, P) - L(f, P)) + (L(f, P) - L(f)) \\
+					&< \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} \\
+					&= \epsilon
+	\end{align*}
+	WTP $0 \leq U(f) - L(f)$ \\
+	Let $P_0, P_1, P_2, ...$ be partitions such that $\forall k \in \bb{N} \enspace P_k$ is finer than $P_{k-1}$. \\
+	By \hyperref[partition_refinement]{Partition Refinement}, we have that $\forall k \in \bb{N}$
+	\begin{gather*}
+		L(f, P_0) \leq L(f, P_1) \leq \hdots \leq L(f, P_k) \leq U(f, P_k) \leq U(f, P_{k - 1}) \leq \hdots \leq U(f, P_0) \\
+		\therefore \forall k \in \bb{N} \enspace L(f, P_k) \leq U(f, P_k)
+	\end{gather*}
+	By \hyperref[comparison_seq]{Comparison Theorem},
+	\begin{gather*}
+		\lim_{k \to \infty} L(f, P_k) = L(f) \leq U(f) = \lim_{k \to \infty} U(f, P_k) \\
+		\implies 0 \leq U(f) - L(f)
+	\end{gather*}
+	Thus
+	\begin{equation*}
+		0 \leq U(f) - L(f) \leq \epsilon
+	\end{equation*}
+	Since $\epsilon > 0$, it follows that
+	\begin{equation*}
+		0 = U(f) - L(f) \implies U(f) = L(f)
+	\end{equation*}
+
+	$((3) \implies (2))$ \\
+	\begin{equation*}
+		\forall \epsilon > 0 \enspace \exists X_0 \enspace |U(f) - U(f, X_0)| < \frac{\epsilon}{2} \enspace \exists X_1 \enspace |L(f) - L(f, X_1)| < \frac{\epsilon}{2} 
+	\end{equation*}
+	By \hyperref[partition_refinement]{Partition Refinement},
+	\begin{equation*}
+		\exists X = X_0 \cup X_1 \quad |U(f) - U(f, X)| < \frac{\epsilon}{2} \quad |L(f) - L(f, X)| < \frac{\epsilon}{2}
+	\end{equation*}
+	\begin{align*}
+		\implies U(f, X) - L(f, X) &= U(f, X) - U(f) + U(f) - L(f) - L(f) + L(f) - L(f, X) \\
+								   &< \frac{\epsilon}{2} + 0 + \frac{\epsilon}{2} \\
+								   &= \epsilon
+	\end{align*}
+
+	$((3) \implies (1))$
+	\begin{gather*}
+		\exists I \in \bb{R} \enspace I = U(f) = L(f) \quad \forall \epsilon > 0 \\
+		\because (3) \implies (2) \enspace \exists X_0 := (x_0, x_1, ..., x_n) \enspace U(f) - U(f, X_0) < \frac{\epsilon}{2} \quad L(f) - L(f, X_0) < \frac{\epsilon}{2} \\
+		\exists \delta = \frac{\epsilon}{2n(M - m)} > 0 \quad \forall X \text{ that is a partition} \quad \Delta X < \delta \\
+		Y := X \cup X_0
+	\end{gather*}
+	Since Y is constructed from the arbitrary partition X by adding at most n points (from $X_0$), the size of each interval in partition Y is either smaller or equal to those of partition X, thus $\Delta Y < \delta$. Also, by \hyperref[partition_refinement]{Partition Refinement},
+	\begin{gather*}
+		U(f, X) - U(f, Y) \leq (M - m)(n) \Delta X \enspace \land \enspace L(f, Y) - L(f, X) \leq (M - m)(n) \Delta X \\
+		\text{Note: } U(f, Y) \leq U(f, X_0) \quad L(f, X_0) \leq L(f, Y) \\
+		X := (y_0, y_1, ..., y_k) \enspace \Delta_i y := |y_i - y_{i-1} | \enspace \forall t_i \in [y_{i-1}, y_i]
+	\end{gather*}
+	\begin{align*}
+		\sum_{i=1}^{k} f(t_i) \Delta_i y - I &\leq U(f, X) - U(f) \\
+											 &= U(f, X) - U(f, Y) + U(f, Y) - U(f) \\
+											 &\leq U(f, X) - U(f, Y) + U(f, X_0) - U(f) \\
+											 &< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon \\
+		I - \sum_{i=1}^{k} f(t_i) \Delta_i y &\leq L(f) - L(f, X) \\
+											 &= L(f) - L(f, Y) + L(f, Y) - L(f, X) \\
+											 &\leq L(f) - L(f, X_0) + L(f, Y) - L(f, X) \\
+											 &< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+	\end{align*}
+\end{proof}
+
 
 \section{Evaluating Integrals of Continuous Functions}
 
-\begin{thm}[Continuous Functions are Integrable]
+\begin{thm}[Every Continuous Functions are Integrable]
 	Let $f: [a, b] \to \bb{R}$ be continuous. Then f is integrable on [a, b].
 \end{thm}
+
+\begin{proof}
+	By \hyperref[closed_bounded_cts_fn_unif]{Closed Bounded Intervals and Uniform Continuity}, f is uniformly continuous. Thus
+	\begin{gather*}
+		\forall \epsilon > 0 \; \exists \delta > 0 \; \forall x, y \in [a, b] \\
+		|x - y| < \delta \implies |f(x) - f(y)| < \epsilon \\
+		\\
+		\forall X \text{ that is a partition}
+	\end{gather*}
+	By \hyperref[EVT]{Extreme Value Theorem}, for some i
+	\begin{gather*}
+		\exists t_i \in [x_{i - 1} , x_i] \; M_i = f(t_i) \quad \exists s_i \in [x_{i - 1}, x_i] \; m_i = f(s_i) \\
+		|t_i - s_i| \leq |x_i - x_{i-1}| \leq \Delta X < \delta \implies |M_i - m_i| = |f(t_i) - f(s_i)| < \frac{\epsilon}{b - a}
+	\end{gather*}
+	\begin{align*}
+		U(f, X) - L(f, X) &= \sum |M_i - m_i| \Delta_i x \\
+						  &= \sum |f(t_i) - f(s_i)| \Delta_i x \\
+						  &\leq \sum \frac{\epsilon}{b - a} \Delta_i x \\
+						  &\leq \frac{\epsilon}{b - a} (b - a) = \epsilon 
+	\end{align*}
+\end{proof}
 
 \begin{lemma}[Summation Formulas]
 	We have
@@ -1511,20 +1803,99 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\]
 \end{defn}
 
-\begin{thm}[Cauchy Criterion for Uniform Convergence - Sequence of Functions]
-	Let $\{f_n\}_{n \geq k}$ be a sequence of functions on $I \subset \bb{R}$. Then $\{f_n\}_{n \geq k}$ converges uniformly to some function f on I
-	\[
-		\iff \forall \epsilon > 0 \; \exists N \geq k \; \forall x \in I \; \forall n, m \geq k \; (n , m > N \implies |f_n(x) - f_m(x)| < \epsilon)
-	\]
+\begin{thm}[Cauchy Criterion for Pointwise Convergence - Sequence of Functions]\label{Cauchy_pointwise_seq_fn}
+	Let $\{f_n\}_{n \geq k}$ be a sequence of functions on $I \subset \bb{R}. \; \exists g: I \to \bb{R} \quad f_n \to g$ pointwise on I as $n \to \infty$ 
+	\begin{align*}
+		\iff &\forall x \in I \; \forall \epsilon > 0 \; \exists N \geq k \; \forall m, n \geq k \\
+			 &( m, n \geq N \implies |f_m(x) - f_n(x)| < \epsilon )
+	\end{align*}
 \end{thm}
+
+\begin{thm}[Cauchy Criterion for Uniform Convergence - Sequence of Functions]
+	Let $\{f_n\}_{n \geq k}$ be a sequence of functions on $I \subset \bb{R}. \; \exists g: I \to \bb{R} \quad f_n \to g$ uniformly on I as $n \to \infty$ 
+	\begin{align*}
+		\iff &\forall \epsilon > 0 \; \exists N \geq k \; \forall x \in I \; \forall n, m \geq k \; \\
+			 &( n, m > N \implies |f_n(x) - f_m(x)| < \epsilon )
+	\end{align*}
+\end{thm}
+
+\begin{proof}
+	SPS that the sequence of functions $\langle f_n \rangle$ converges uniformly to some function $g: I \to \bb{R}$ as $n \to \infty$.
+	\begin{gather*}
+		SPS \; \exists g(x) := \lim_{n \to \infty} f_n(x) \quad g: I \to \bb{R} \text{ such that } \\
+		\forall \epsilon > 0 \; \exists N \in \bb{Z}_{\geq k} \; \forall x \in I \; \forall n \in \bb{Z}_{\geq k} \\
+		n \geq N \implies |f_n(x) - g(x)| < \frac{\epsilon}{2} \\
+		\implies \forall s, t \in \bb{Z}_{\geq k} \enspace s, t \geq N
+	\end{gather*}
+	\begin{align*}
+		\implies |f_s(x) - f_t(x)| &\leq |f_s(x) - g(x)| + |g(x) - f_t(x)| \\
+								   &\leq \epsilon
+	\end{align*}
+
+	\begin{gather*}
+		SPS \; \forall \epsilon > 0 \; \exists N \in \bb{Z}_{\geq k} \; \forall x \in I \; \forall k, l \in \bb{Z}_{\geq k} \\
+		k, l \geq N \implies |f_k(x) - f_l(x)| \leq \epsilon \\
+		\\
+		\forall x \in I \; \{f_n(x)\} := \{f_k(x), f_{k + 1}(x), ...\} \text{ is a Cauchy sequence} \\
+	\end{gather*}
+	By \hyperref[Cauchy_pointwise_seq_fn]{Cauchy Criterion for Pointwise Convergence},
+	\begin{gather*}
+		g(x) := \lim_{n \to \infty} f_n(x) \quad g:I \to \bb{R} \\
+		\text{i.e. } f_n \to g \text{ pointwise on } I
+	\end{gather*}
+	Then for each $x \in I$,
+	\begin{equation*}
+		\exists t \in \bb{Z}_{\geq k} \enspace t \geq N \implies |f_l(x) - g(x)| < \frac{\epsilon}{2}
+	\end{equation*}
+	Thus,
+	\[
+		\forall \epsilon > 0 \; \exists N \in \bb{Z}_{\geq k} \; \forall x \in I \; \forall s, t \in \bb{Z}_{\geq k}
+	\]
+	\begin{align*}
+		|f_s(x) - g(x)| &\leq |f_s(x) - f_l(x)| + |f_l(x) - g(x)| \\
+						&\leq \epsilon
+	\end{align*}
+\end{proof}
 
 \begin{thm}[Uniform Convergence, Limits and Continuity - Sequence of Functions]
 	SPS that $f_n \to f$ uniformly on I. Let x be a limit point of I. If $\lim_{y \to x} f_n(y)$ exists for each n, then
-	\[
+	\begin{equation*}
 		\lim_{y \to x} \lim_{n \to \infty} f_n(y) = \lim_{n \to \infty} \lim_{y \to x} f_n(y)
-	\]
+	\end{equation*}
 	In particular, if each $f_n$ is continuous on I, then so is f.
 \end{thm}
+
+\begin{proof}
+	\begin{gather*}
+		SPS \; \forall n \in \bb{Z}^+ \; g_n := \lim_{y \to x} f_n(y) \\
+		STP \; \lim_{n \to \infty} g_n = \lim_{y \to x} f(y)
+	\end{gather*}
+	Claim: $\{g_n\}$ converges.
+	\begin{gather*}
+		\forall \epsilon > 0 \; \exists N \in \bb{Z}^+ \; \forall s, t \in \bb{Z}^+ \; \left(s, t \geq N \implies |f_s(y) - f_t(y)| < \frac{\epsilon}{3} \right) \\
+		\because g_n = \lim_{y \to x} f_n(y) \quad |f_s(y) - g_s| < \frac{\epsilon}{3} \enspace |f_t(y) - g_t| < \frac{\epsilon}{3} \\
+		\implies |g_s - g_t| \leq |g_s - f_s(y)| + |f_s(y) - f_t(y)| + |f_t(y) - g_t| < \epsilon
+	\end{gather*}
+	By \hyperref[CauchyCriterion_Seq]{Cauchy Criterion for Sequences}, $\{g_n\}$ converges. Thus,
+	\begin{gather*}
+		g := \lim_{n \to \infty} g_n \qquad STP \; g = \lim_{y \to x} f(y) \\
+		\forall \epsilon > 0 \; \exists N \in \bb{Z}^+ \; \forall y \in I \; \forall n \in \bb{Z}^+ \\
+		\left( n \geq N \implies |f_n(y) - f(y)| < \frac{\epsilon}{3} \; \land \; |g - g_n| < \frac{\epsilon}{3}  \right) \\
+		\because g_n = \lim_{y \to x} f_n(y) \quad |f_n(y) - g_n| < \frac{\epsilon}{3} \\
+		\therefore |g - f(y)| \leq |g - g_n| + |g_n - f_n(y)| + |f_n(y) - f(y)| < \epsilon
+	\end{gather*}
+	Furthermore,
+	\begin{equation*}
+		SPS \; \forall n \in \bb{Z}^+ \; \forall a \in I \; \forall \epsilon > 0 \; \exists \delta > 0 \; \forall y \in I \; \left( 0 < |y - a| < \delta \implies |f_n(y) - f_n(a)| < \frac{\epsilon}{3}  \right) \\
+	\end{equation*}
+	By the above argument, and since $f_n \to f$ uniformly on I, for each a and y in our assumption,
+	\begin{gather*}
+		|f(y) - f_n(y)| < \frac{\epsilon}{3} \quad |f_n(a) - f(a)| < \frac{\epsilon}{3} \\
+		\therefore \forall a \in I \; \forall \epsilon > 0 \; \exists \delta > 0 \; \forall y \in I \quad 0 < |y - a| < \delta \\
+		\implies |f(y) - f(a)| \leq |f(y) - f_n(y)| + |f_n(y) - f_n(a)| + |f_n(a) - f(a)| < \epsilon
+	\end{gather*}
+	Thus f is continuous on I by definition.
+\end{proof}
 
 \begin{remark}
 	The above theorem allows us to ``interchange'' limit notations.
@@ -1913,7 +2284,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	The set of all boundary points of A, denoted $\partial A$, is called the boundary of A.
 \end{defn}
 
-\begin{thm}[Equivalent Topological Definitions]
+\begin{thm}[Equivalent Topological Definitions]\label{ETD}
 	Let $A \subseteq \bb{R}^n$.
 	\begin{enumerate}
 		\item A is closed iff $A' \subseteq A$
@@ -1922,6 +2293,93 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 		\item $\partial A = \bar{A} \setminus A^0$
 	\end{enumerate}
 \end{thm}
+
+\begin{proof}
+	Part (1)
+	\begin{align*}
+		A \text{ is closed} &\iff A^c \text{ is open} \\
+							&\iff \forall a \notin A \; \exists r > 0 \; B(a, r) \subseteq A^c \\
+							&\iff \forall a \in \bb{R}^n (a \notin A \implies \exists r > 0 \; B(a, r) \cap A = \emptyset) \\
+							&\iff \forall a \in \bb{R}^n (a \notin A \implies \exists r > 0 \; B^*(a, r) \cap A = \emptyset) \\
+							&\iff \forall a \in \bb{R}^n (\forall r > 0 \; B^*(a, r) \cap A \neq \emptyset \implies a \in A) \quad \text{by contrapositive} \\
+							&\iff \forall a \in \bb{R}^n (a \in A' \implies a \in A) \quad \text{by definition of a limit in $R^n$} \\
+							&\iff A' \subseteq A
+	\end{align*}
+
+	Part (2) \\
+	WTP $A \cup A'$ is the smallest cover of A. By definition of a cover, we first require $A \cup A'$ to be closed and contains A. Clearly, $A \subseteq A \cup A'$. It remains to prove that $(A \cup A')^c$ is open.
+	\begin{gather*}
+		\forall a \in (A \cup A')^c \; A \notin A \; \land \; a \notin A' \\
+		\because a \notin A \; \exists r > 0 \; B(a, r) \cap A = \emptyset \\
+	\end{gather*}
+	WTP $B(a, r) \cap A' = \emptyset$. Suppose not.
+	\begin{gather*}
+		\forall b \in B(a, r) \cap A' \\
+		\because b \in B(a, r) \quad \exists s > 0 \; B(b, s) \subseteq B(a, r) \\
+		\because b \in A' \quad B^*(b, s) \cap A \neq \emptyset \; (\text{by definition of a Limit Point in $\bb{R}^n$}) \\
+		\because B^*(b, s) \subseteq B(b, s) \subseteq B(a, r) \quad B(a, r) \cap A \neq \emptyset
+	\end{gather*}
+	which contradicts our earlier argument. Thus $B(a, r) \cap A' = \emptyset$.
+
+	It remains to prove that $A \cup A'$ is the smallest cover of A. Let K be a cover of A. By defintion, $A \subseteq K$. STP $A' \subseteq K'$ since K is closed, which the conclusion will then follow from Part (1).
+	\begin{align*}
+		\forall a \in A' &\implies \forall r > 0 \; B(a, r) \cap A \neq \emptyset \\
+						 &\implies \forall r > 0 \; B(a, r) \cap K \neq \emptyset \quad \text{since } A \subseteq K \\
+						 &\implies a \in K'
+	\end{align*}
+	This completes the proof. \\
+
+	Part (3) \\
+	\begin{equation*}
+		S := \{ X \subseteq \bb{R}^n \, | \, X \text{ is open} \, \land X \subseteq A \}
+	\end{equation*}
+	By definition, $A^0 = \bigcup S$.
+	\begin{gather*}
+		\forall a \in A^0 \; \exists X \in S \; a \in X \\
+		\implies \exists r > 0 \; B(a, r) \subseteq X \subseteq A \\
+	\end{gather*}
+	$\implies$ a is an interior point of A. \\
+	SPS a is an interior point of A. By definition,
+	\begin{gather*}
+		\exists r > 0 \; B(a, r) \subseteq A \\
+		\because B(a, r) \text{ is open} \, \land \, B(a, r) \subseteq A \quad B(a, r) \in S \\
+		\implies a \in B(a, r) \subseteq \bigcup S = A^0 \implies a \in A^0
+	\end{gather*}
+	This completes the proof. \\
+
+	Part (4) \\
+	\begin{gather*}
+		\forall a \in \partial A \; \forall r > 0 \; (B(a, r) \cap A \neq \emptyset \, \land \, B(a, r) \cap A^c \neq \emptyset) \\
+		WTP \; a \in \bar{A} \quad STP \; a \in \partial A \land a \notin A \implies a \in A' \\
+		SPS \; a \notin A \quad \because B(a, r) \cap A \neq \emptyset \quad B^*(a, r) \cap A \neq \emptyset \\
+		\implies \forall r > 0 \; B^*(a, r) \cap A \neq \emptyset \implies a \in A' \\
+		\\
+		WTP \; a \notin A^0 \quad SPS \; a \in A^0
+	\end{gather*}
+	By Part (3), a is an interior point of A.
+	\begin{equation*}
+		\exists s > 0 \; B(a, s) \subseteq A \implies B(a, s) \cap A^c = \emptyset
+	\end{equation*}
+	which is a contradiction to our assumption that $a \in \partial A$. \\
+	Conversely,
+	\begin{equation*}
+		SPS \; \forall a \in \bar{A} \setminus A^0 \implies a \in A' \lor a \in A \land a \notin A^0
+	\end{equation*}
+	Case 1: $a \in A$
+	\begin{gather*}
+		\exists r > 0 \; B(a, r) \cap A \neq \emptyset \\
+		WTP \; B(a, r) \cap A^c \neq \emptyset \quad SPS \; B(a, r) \cap A^c = \emptyset \\
+		\therefore B(a, r) \subseteq A \quad \because a \notin A^0 \; \forall s > 0 \; B(a, s) \nsubseteq A
+	\end{gather*}
+	which is a contradiction. Thus $B(a, r) \cap A^c \neq \emptyset$. Thus, by definition, $a \in \partial A$. \\
+	Case 2: $a \notin A$
+	\begin{gather*}
+		\because a \in \bar{A} \enspace a \in A' \implies \forall r > 0 \; B^*(a, r) \cap A \neq \emptyset \\
+		\because a \notin A \quad B(a, r) \cap A \neq \emptyset \\
+		\because a \notin A \; a \in A^c \implies \exists s > 0 \; B(a, s) \subseteq A^c \implies B(a, s) \cap A^c \neq \emptyset
+	\end{gather*}
+	Thus $a \in \partial A$ by definition, once again.
+\end{proof}
 
 \begin{defn}[Connectedness]
 	Let $A \subseteq \bb{R}^n$. We say that A is disconnected when there exists open sets U and V in $\bb{R}^n$ such that
@@ -1972,13 +2430,70 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\end{equation*}
 \end{thm}
 
-\begin{thm}[Compactness of Closed Rectangles]
+\begin{thm}[Compactness of Closed Rectangles]\label{compact_closed_rect}
 	Every closed rectangle in $\bb{R}^n$ is compact.
 \end{thm}
 
 \begin{thm}[Heine-Borel Theorem]
 	Let $A \subseteq \bb{R}^n$. A is compact iff A is closed and bounded.
 \end{thm}
+
+\begin{proof}
+	(Compactness $\implies$ Boundedness) \\
+	\begin{equation*}
+		S := \{B(0, k) \, | \, k \in \bb{Z}^+\} \implies \bigcup S = \bb{R}^n
+	\end{equation*}
+	So in particular, S is an open cover of $\bb{R}^n$. Since $A \subseteq \bb{R}^n \subseteq \bigcup S$, S is an open cover of A. Then
+	\begin{gather*}
+		\exists R > 0 \; A \subseteq \bigcup_{k=1}^R S = B(0, R)
+	\end{gather*}
+	where we note that $\bigcup_{k=1}^R S$ is a finite subcover that contains A as in the definition of compactness. So $\exists R > 0 \; A \subseteq B(0, R)$, i.e. by definition A is bounded. \\
+
+	(Compactness $\implies$ Closed) \\
+	SPS A is compact and not closed, i.e. A is open. By \hyperref[ETD]{Part (1) of the Equivalent Topological Definitions}, $A' \nsubseteq A$. Then
+	\begin{gather*}
+		\forall a \in A' \, \land \, a \notin A \; \forall k \in \bb{Z}^+ \; T_k := \bar{B} \left(a, \frac{1}{k} \right)^c \; S := \{T_k \, | \, k \in \bb{Z}^+\} \\
+		\implies \bigcup S = \bb{R}^n \setminus \{a\} \implies A \subseteq \bigcup S \; (\because a \notin A \, \land \, A \subseteq \bb{R}^n) \\
+		\because A \text{ is compact} \; \exists T := \{T_{k_j} \, | \, j \in \bb{Z}_{\leq m}^+ \} \; \text{ where } k_1 < k_2 < \hdots < k_m \quad A \subseteq \bigcup T \\
+		\because T_{k_1} \subseteq T_{k_2} \subseteq \hdots \subseteq T_{k_m} \quad \bigcup T = T_{k_m} = \bar{B} \left(a, \frac{1}{k_m} \right)^c \implies A \subseteq \bar{B} \left(a, \frac{1}{k_m} \right)^c \\
+		\because a \in A' \quad \forall r > 0 \; B^*(a, r) \cap A \neq \emptyset \implies B(a,r) \cap A \neq \emptyset \; (\text{since } a \notin A) \\
+		\implies \bar{B} \left(a, r \right) \cap A \neq \emptyset \implies A \nsubseteq \bar{B}(a, r)^c
+	\end{gather*}
+	Since $\frac{1}{k_m}$ is a specific $r$, we have that
+	\begin{equation*}
+		A \nsubseteq \bar{B} \left(a, \frac{1}{k_m} \right)^c
+	\end{equation*}
+	which is a contradiction. Thus A is compact implies A is closed.
+
+	Conversely, since A is bounded
+	\begin{gather*}
+		\exists r > 0 \; A \subseteq B(0, r) \\
+		R := \{\vec{x} \in \bb{R}^n \, | \, \forall k \in \bb{N}_{\leq n} \; |x_k| < r \}
+	\end{gather*}
+	which is a closed rectangle. By the \hyperref[compact_closed_rect]{Compactness of Closed Rectangles}, R is compact. Note that
+	\begin{gather*}
+		\forall \vec{x} = (x_0, x_1, ..., x_n) \in B(0, r) \; \forall k \in \bb{N}_{\leq n} \\
+		|x_k| = (x_k^2)^\frac{1}{2} \leq \sqrt{\sum_{i=0}^{n} x_i^2} < r \\
+		\implies \vec{x} \in R \implies A \subseteq B(0, r) \subseteq R
+	\end{gather*}
+	We now have that
+	\begin{itemize}
+		\item A is closed,
+		\item $A \subseteq R$, and
+		\item R is compact.
+	\end{itemize}
+	A is closed implies $A^c$ is open. Let S be an open cover of A, i.e. $A \subseteq \bigcup S$.
+	\begin{equation*}
+		\because A \subseteq \bigcup S \quad \bigcup S \cup \{A^c\} = \bb{R}^n \\
+	\end{equation*}
+	Since $R \in \bb{R}^n = \bigcup S \cup \{A^c\}, \; \bigcup S \cup \{A^c\}$ is an open cover for R. Since R is compact,
+	\begin{gather*}
+		\exists T \subseteq \bigcup S \cup \{A^c\} \quad R \subseteq \bigcup T \\
+		\because A \subseteq R \quad A \subseteq \bigcup T \\
+		\because A \nsubseteq A^c \quad A \subseteq \bigcup T \setminus \{A^c\}
+	\end{gather*}
+	Since $\bigcup T$ is a finite, so is $\bigcup T \setminus \{A^c\} \subseteq \bigcup S \cup \{A^c\} \setminus \{A^c\} = \bigcup S$. Thus every open cover of A has a finite subcover, i.e. A is compact.
+\end{proof}
 
 
 % =================================
@@ -2056,7 +2571,7 @@ For the following theorems, our main variable $\langle a_n \rangle_{n \geq p}$ i
 	Every bounded sequence in $\bb{R}^n$ has a convergent subsequence.
 \end{thm}
 
-\begin{thm}[Completeness of $\bb{R}^n$]
+\begin{thm}[Completeness of $\bb{R}^n$]\label{completeness_R}
 	For every sequence in $\bb{R}^n$, the sequence converges iff it is Cauchy.
 \end{thm}
 
@@ -2089,9 +2604,9 @@ For the following theorems, our main variable $\langle a_n \rangle_{n \geq p}$ i
 		\forall a \in A \; \forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in A \; (|x - a| < \delta \implies |f(x) - f(a)| < \epsilon)
 	\end{equation*}
 	We say that f is uniformly continuous in A when
-	\begin{equation}
+	\begin{equation*}
 		\forall \epsilon > 0 \; \exists \delta > 0 \; \forall a, x \in A \; (|x - a| < \delta \implies |f(x) - f(a)| < \epsilon)
-	\end{equation}
+	\end{equation*}
 \end{defn}
 
 \begin{thm}[Sequential Characterization of Continuity]
