@@ -1,0 +1,122 @@
+% Document Head
+\documentclass[11pt, oneside]{book}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+
+% Essential Packages
+\usepackage{ragged2e}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[hyperref]{ntheorem}
+
+% Theorem Style Customization
+\setlength\theorempreskipamount{2ex}
+\setlength\theorempostskipamount{3ex}
+
+% hyperref Package Settings
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks = true,
+	linkcolor = magenta
+}
+
+% ntheorem Declarations
+\theoremstyle{break}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{proof}{Proof}
+\newtheorem{crly}{Corollary}[thm]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{propo}{Proposition}[section]
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{eg}{Example}[section]
+
+% ntheorem listtheorem style
+\makeatletter
+\def\thm@@thmline@name#1#2#3#4{%
+        \@dottedtocline{-2}{0em}{2.3em}%
+                   {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
+                   {#4}}
+\@ifpackageloaded{hyperref}{
+\def\thm@@thmline@name#1#2#3#4#5{%
+    \ifx\\#5\\%
+        \@dottedtocline{-2}{0em}{2.3em}%
+            {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
+            {#4}
+    \else
+        \ifHy@linktocpage\relax\relax
+            \@dottedtocline{-2}{0em}{2.3em}%
+                {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
+                {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
+        \else
+            \@dottedtocline{-2}{0em}{2.3em}%
+                {\hyper@linkstart{link}{#5}%
+                  {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}\hyper@linkend}%
+                    {#4}%
+        \fi
+    \fi}
+}
+\makeatother
+\newlength\widesttheorem
+\AtBeginDocument{
+  \settowidth{\widesttheorem}{Proposition A.1.1.1\quad}
+}
+
+\theoremlisttype{allname}
+
+% Shortcuts
+\newcommand{\bb}[1]{\mathbb{#1}}			% using bb instead of mathbb
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}	% simplifying the writing of a floor function
+\newcommand{\ceiling}[1]{\lceil #1 \rceil}	% simplifying the writing of a ceiling function
+\newcommand{\dotp}{\, \cdotp}				% dot product to distinguish from \cdot
+
+% Main Body
+\title{Personal Notes for An Introduction to Analysis William R. Wade}
+\author{Johnson Ng}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\chapter{Differentiability on \texorpdfstring{$\bb{R}$}{R}}
+
+\section{The Derivative}
+
+\begin{defn}[Differentiable]
+    A real function f is said to be differentiable at a point $a \in \bb{R}$ if and only if f is defined on some open interval I containing a and
+    \begin{equation}\label{eq:1.1}
+        f'(a) := \lim_{h \to \infty} \frac{f(a+h) - f(a)}{h}
+    \end{equation}
+    exists. In this case, $f'(a)$ is called the derivative of f at a.
+\end{defn}
+
+There are two characterizations of diffrentiability which we shall use to study derivatives. The first one which characterizes the derivatives in terms of the "chord function"
+
+\begin{equation}\label{eq:1.2}
+    F(x) := \frac{f(x) - f(a)}{x-a} \quad x \neq a,
+\end{equation}
+
+will be used to establish the Chain Rule.
+
+\begin{thm}
+    A real function f is differentiable at some point $a \in \bb{R} \iff \exists$ an open interval I and a function $F: I \to \bb{R}$ such that $a \in I$, f is defined on I, F is continuous on a, and
+    \begin{equation}\label{eq:1.3}
+        f(x) = F(x)(x-a) + f(a)
+    \end{equation}
+    holds for all $x \in I$, in which case $F(a) = f'(a)$.
+\end{thm}
+
+\begin{proof}
+    Notice that $\forall x \in I \setminus \{a\}$, \ref{eq:1.2} and \ref{eq:1.3} are equivalent. SPS f is differentiable at a. Then by definition, f is defined on some open interval I that contains a, and the limit in \ref{eq:1.1} exists. Define F on I by \ref{eq:1.2} if $x \neq a$ and $F(a) := f'(a)$. Then \ref{eq:1.3} holds $\forall x \in I$ and F is continuous on a by \ref{eq:1.2} since $f'(a)$ exists.
+
+    Conversely, SPS \ref{eq:1.3} holds. Then \ref{eq:1.2} holds $\forall x \in I \setminus \{a\}$. As $x \to a$, since F is continuous on a, we have that $F(a) = f'(a)$. Thus by definition, f is differentiable on a.
+\end{proof}
+
+\end{document}
