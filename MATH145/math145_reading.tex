@@ -1,0 +1,139 @@
+% Document Head
+\documentclass[11pt, oneside]{book}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+
+% Essential Packages
+\usepackage{ragged2e}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[hyperref]{ntheorem}
+
+% Theorem Style Customization
+\setlength\theorempreskipamount{2ex}
+\setlength\theorempostskipamount{3ex}
+
+% hyperref Package Settings
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks = true,
+	linkcolor = magenta
+}
+
+% ntheorem Declarations
+\theoremstyle{break}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{proof}{Proof}
+\newtheorem{crly}{Corollary}[thm]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{propo}{Proposition}[section]
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{eg}{Example}[section]
+
+% ntheorem listtheorem style
+\makeatletter
+\def\thm@@thmline@name#1#2#3#4{%
+        \@dottedtocline{-2}{0em}{2.3em}%
+                   {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
+                   {#4}}
+\@ifpackageloaded{hyperref}{
+\def\thm@@thmline@name#1#2#3#4#5{%
+    \ifx\#5\%
+        \@dottedtocline{-2}{0em}{2.3em}%
+            {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
+            {#4}
+    \else
+        \ifHy@linktocpage\relax\relax
+            \@dottedtocline{-2}{0em}{2.3em}%
+                {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
+                {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
+        \else
+            \@dottedtocline{-2}{0em}{2.3em}%
+                {\hyper@linkstart{link}{#5}%
+                  {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}\hyper@linkend}%
+                    {#4}%
+        \fi
+    \fi}
+}
+\makeatother
+\newlength\widesttheorem
+\AtBeginDocument{
+  \settowidth{\widesttheorem}{Proposition A.1.1.1\quad}
+}
+
+\theoremlisttype{allname}
+
+% Shortcuts
+\newcommand{\bb}[1]{\mathbb{#1}}			% using bb instead of mathbb
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}	% simplifying the writing of a floor function
+\newcommand{\ceiling}[1]{\lceil #1 \rceil}	% simplifying the writing of a ceiling function
+\newcommand{\dotp}{\, \cdotp}				% dot product to distinguish from \cdot
+
+% Main Body
+\title{MATH145 Readings}
+\author{Johnson Ng}
+
+\begin{document}
+\maketitle
+
+\chapter*{Introduction}
+\textit{Below is an introduction written by the author of the referred notes, Kenneth R. Davidson.}
+
+As a student entering university to study mathematics, you probably have encountered prime bumbers. Chances are great that you believe that every integer factors uniquely into a product of primes but have not seen a proof. This important fact, known as the Fundamental Theorem of Algebra, is of crucial importance in the theory of numbers. It is not easy to prove. More importantly, it is not \textit{intuitively obvious}. Indeed, its significance is only realized with very large numbers beyond our real experience. The crucial fact that enables us to prove this with relative ease is the Euclidean Algorithm for finding greatest common divisors. The first two chapters deal with these basic properties of the integers and modular arithmetic.
+
+It is worth noting that there are number systems not very much different from the intergers in which this unique factorization into primes fails. Far from being a disaster, this is an opportunity to investigate why this phenomena occurs. It shows us which properties of the integers themsevles are crucial to make the theory work. That is why we make a foray into quadratic number domains in chapter 3. Naturally, we merely touch the surface here as this theory lies in a rather deep connection between algebra and number theory.
+
+A nice application of modular arithmetic is the Rivest-Shamir-Adelman (RSA) public key cryptography scheme. This code allows the author to publish the method of \textit{encoding} a message in a public place, while keeping the method of \textit{decoding} the message secret. This is a rather different idea of coding, as for all previously known codes, the method of decoding merely reversed the endoing method. The secret here is that it is very easy (with a computer) to find large primes (say 100-200 digits) but very difficult to factor the product of two large primes. If you believe that checking whether a number is prime involes trial division by all numbers up to the square root, it might be hard to imagine why determining if a number if prime should be any easier than finding factors. So we delve more deeply into methods used to determine whether a number is prime or composite. It quickly becomes clear that simple tests can determine beyond any doubt that a number is composite without giving any information at all about the factors.
+
+In chapter 5, we introduce the complex numbers. There is a tacit assumption that the student is already reasionably familiar with the real numbers from studying calculus. However, a section is devoted to a brief discussion of how the real numbers are developed. No attempt is made to separate algebra from analysis. Indeed, all of mathematics is integrated and it is foolish to pretend that there are natural walls. In particular, we prove the Fundamental Theorem of Algebra that every complex polynomial factors into a product of linear terms. In spite of its name, this is a theorem of analysis because it relies on the (topological) completeness of the complex numbers. The proof we give is one of the simplest, and relies on the Extreme Value Theorem. We also develop the complex exponential function. This again is really a theorem of analysis. But it is included because it plays such an important role in other applications of the compelx numbers.
+
+In chapter 6, we show that the same theory applies to the algebra of polynomials. In particular, there is a Euclidean Algorithm and unique factorization into irreducible polynomials. We exanime various tests for irreducibility, and study connections with irrationality of the roots. Then we do a few special topics about real and complex polynomials such as Sturm's Theorem for counting real roots, and the formula for solving cubics. Then in chapter 7, we study finite fields in some detail. This is just doing modular arithmetic modulo an irreducible polynomial instead of modulo a prime integer. Many of the results for $\bb{Z}_p$ carry over to finite fields with the same ideas. A rather beautiful application of these ideas is an algorithm for factoring polynomials over the rationals. This algorithm is based on a method for factoring polynomial of degree \textit{d} mod \textit{p} is much easeier than factoring a \textit{d} digit base \textit{p} number.
+
+\tableofcontents
+
+\chapter*{List of Definitions}
+\theoremlisttype{all}
+\listtheorems{defn}
+
+\chapter*{List of Theorems}
+\theoremlisttype{all}
+\listtheorems{lemma,thm,crly,propo}
+
+
+% =================================
+% 		The Integers
+% =================================
+\chapter{The Integers}
+
+\section{Basic Properties}
+
+The following list of properties is what a student taught in the `modern' style would come up with when talking about properties of integers.
+
+\begin{enumerate}
+	\item The \textbf{integers} consist of a set $\bb{Z}$ together with two binary operations \textbf{addition} (+) and \textbf{multiplication} ($\cdot$)
+	\item (\textbf{commutativity of addition}) $\forall a, b \in \bb{Z} \quad a + b = b + a$
+	\item (\textbf{associativity of addition}) $\forall a, b, c \in \bb{Z} \quad (a + b) + c = a + (b + c)$
+	\item (\textbf{additive identity}) $\exists 0 \in \bb{Z} \enspace \forall a \in \bb{Z} \quad a + 0 = a = 0 + a$
+	\item (\textbf{additive inverse}) $\forall a \in \bb{Z} \enspace \exists (-a) \in \bb{Z} \quad a + (-a) = 0$
+	\item (\textbf{commutativity of multiplication}) $\forall a, b \in \bb{Z} \quad a \cdot b = b \cdot a$
+	\item (\textbf{associativity of multiplication}) $\forall a, b, c \in \bb{Z} \quad (a \cdot b) \cdot c = a \cdot (b \cdot c)$
+	\item (\textbf{multiplicative identity}) $\exists 1 \in \bb{Z} \enspace \forall a \in \bb{Z} \quad a \cdot 1 = a = 1 \cdot a$
+	\item (\textbf{distributive law}) $\forall a, b, c \in \bb{Z} \enspace (a + b) \cdot c = a \cdot c + b \cdot c$
+\end{enumerate}
+
+But this does not fully distinguish integers from many other sets, for example:
+\begin{enumerate}
+	\item The real numbers $\bb{R}$
+	\item The set $\bb{Z}[\sqrt{3}] = \{a + b\sqrt{3} \; | \; a, b \in \bb{Z}\}$
+	
+\end{enumerate}
+
+\end{document}
+% Document End
