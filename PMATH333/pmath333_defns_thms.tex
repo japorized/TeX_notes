@@ -1471,12 +1471,12 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	\begin{gather*}
 		\exists I \in \bb{R} \enspace I = U(f) = L(f) \quad \forall \epsilon > 0 \\
 		\because (3) \implies (2) \enspace \exists X_0 := (x_0, x_1, ..., x_n) \enspace U(f) - U(f, X_0) < \frac{\epsilon}{2} \quad L(f) - L(f, X_0) < \frac{\epsilon}{2} \\
-		\exists \delta = \frac{\epsilon}{2n(M - m)} > 0 \quad \forall X \text{ that is a partition} \quad \Delta X < \delta \\
+		\exists \delta = \frac{\epsilon}{2(n-1)(M - m)} > 0 \quad \forall X \text{ that is a partition} \quad \Delta X < \delta \\
 		Y := X \cup X_0
 	\end{gather*}
-	Since Y is constructed from the arbitrary partition X by adding at most n points (from $X_0$), the size of each interval in partition Y is either smaller or equal to those of partition X, thus $\Delta Y < \delta$. Also, by \hyperref[partition_refinement]{Partition Refinement},
+	Since Y is constructed from the arbitrary partition X by adding at most n - 1 points (from $X_0$), the size of each interval in partition Y is either smaller or equal to those of partition X, thus $\Delta Y < \delta$. Also, by \hyperref[partition_refinement]{Partition Refinement},
 	\begin{gather*}
-		U(f, X) - U(f, Y) \leq (M - m)(n) \Delta X \enspace \land \enspace L(f, Y) - L(f, X) \leq (M - m)(n) \Delta X \\
+		U(f, X) - U(f, Y) \leq (M - m)(n - 1) \Delta X \enspace \land \enspace L(f, Y) - L(f, X) \leq (M - m)(n - 1) \Delta X \\
 		\text{Note: } U(f, Y) \leq U(f, X_0) \quad L(f, X_0) \leq L(f, Y) \\
 		X := (y_0, y_1, ..., y_k) \enspace \Delta_i y := |y_i - y_{i-1} | \enspace \forall t_i \in [y_{i-1}, y_i]
 	\end{gather*}
@@ -2309,7 +2309,7 @@ Please review \hyperref[apdxA]{Appendix A}. We shall use all of the set notation
 	Part (2) \\
 	WTP $A \cup A'$ is the smallest cover of A. By definition of a cover, we first require $A \cup A'$ to be closed and contains A. Clearly, $A \subseteq A \cup A'$. It remains to prove that $(A \cup A')^c$ is open.
 	\begin{gather*}
-		\forall a \in (A \cup A')^c \; A \notin A \; \land \; a \notin A' \\
+		\forall a \in (A \cup A')^c \; a \notin A \; \land \; a \notin A' \\
 		\because a \notin A \; \exists r > 0 \; B(a, r) \cap A = \emptyset \\
 	\end{gather*}
 	WTP $B(a, r) \cap A' = \emptyset$. Suppose not.
