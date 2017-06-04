@@ -70,6 +70,9 @@
 
 \theoremlisttype{allname}
 
+\renewcommand{\labelenumii}{\theenumii}
+\renewcommand{\theenumii}{\theenumi.\arabic{enumii}.}
+
 % Shortcuts
 \newcommand{\bb}[1]{\mathbb{#1}}			% using bb instead of mathbb
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}	% simplifying the writing of a floor function
@@ -114,26 +117,159 @@ In chapter 6, we show that the same theory applies to the algebra of polynomials
 
 \section{Basic Properties}
 
-The following list of properties is what a student taught in the `modern' style would come up with when talking about properties of integers.
+The following list of properties is what a student taught in the `modern' style would come up with when talking about properties of integers. We give the name Commutative Rings for sets of numbers that satisfy these properties.
 
-\begin{enumerate}
-	\item The \textbf{integers} consist of a set $\bb{Z}$ together with two binary operations \textbf{addition} (+) and \textbf{multiplication} ($\cdot$)
-	\item (\textbf{commutativity of addition}) $\forall a, b \in \bb{Z} \quad a + b = b + a$
-	\item (\textbf{associativity of addition}) $\forall a, b, c \in \bb{Z} \quad (a + b) + c = a + (b + c)$
-	\item (\textbf{additive identity}) $\exists 0 \in \bb{Z} \enspace \forall a \in \bb{Z} \quad a + 0 = a = 0 + a$
-	\item (\textbf{additive inverse}) $\forall a \in \bb{Z} \enspace \exists (-a) \in \bb{Z} \quad a + (-a) = 0$
-	\item (\textbf{commutativity of multiplication}) $\forall a, b \in \bb{Z} \quad a \cdot b = b \cdot a$
-	\item (\textbf{associativity of multiplication}) $\forall a, b, c \in \bb{Z} \quad (a \cdot b) \cdot c = a \cdot (b \cdot c)$
-	\item (\textbf{multiplicative identity}) $\exists 1 \in \bb{Z} \enspace \forall a \in \bb{Z} \quad a \cdot 1 = a = 1 \cdot a$
-	\item (\textbf{distributive law}) $\forall a, b, c \in \bb{Z} \enspace (a + b) \cdot c = a \cdot c + b \cdot c$
-\end{enumerate}
+\begin{defn}[Commutative Rings]\label{defn-commutative-rings}
+	A commutative ring is a set of numbers that satisfy these properties.
+	\begin{enumerate}
+		\item The \textbf{integers} consist of a set $\bb{Z}$ together with two binary operations \textbf{addition} (+) and \textbf{multiplication} ($\cdot$)
+		\item (\textbf{commutativity of addition}) $\forall a, b \in \bb{Z} \quad a + b = b + a$
+		\item (\textbf{associativity of addition}) $\forall a, b, c \in \bb{Z} \quad (a + b) + c = a + (b + c)$
+		\item (\textbf{additive identity}) $\exists 0 \in \bb{Z} \enspace \forall a \in \bb{Z} \quad a + 0 = a = 0 + a$
+		\item (\textbf{additive inverse}) $\forall a \in \bb{Z} \enspace \exists (-a) \in \bb{Z} \quad a + (-a) = 0$
+		\item (\textbf{commutativity of multiplication}) $\forall a, b \in \bb{Z} \quad a \cdot b = b \cdot a$
+		\item (\textbf{associativity of multiplication}) $\forall a, b, c \in \bb{Z} \quad (a \cdot b) \cdot c = a \cdot (b \cdot c)$
+		\item (\textbf{multiplicative identity}) $\exists 1 \in \bb{Z} \enspace \forall a \in \bb{Z} \quad a \cdot 1 = a = 1 \cdot a$
+		\item (\textbf{distributive law}) $\forall a, b, c \in \bb{Z} \enspace (a + b) \cdot c = a \cdot c + b \cdot c$
+	\end{enumerate}
+\end{defn}
 
 But this does not fully distinguish integers from many other sets, for example:
 \begin{enumerate}
-	\item The real numbers $\bb{R}$
-	\item The set $\bb{Z}[\sqrt{3}] = \{a + b\sqrt{3} \; | \; a, b \in \bb{Z}\}$
-	
+	\item The real numbers $\bb{R}$.
+	\item The set $\bb{Z}[\sqrt{3}] = \{a + b\sqrt{3} \; | \; a, b \in \bb{Z}\}$ \\
+		See Exercise 1 for proof.
+	\item The set $\bb{Z} \oplus \bb{Z} := \{(a, b) \, | \, a, b \in \bb{Z}\}$ with coordinate-wise addition and multiplication.
 \end{enumerate}
+
+\begin{defn}[Ring]
+	A ring is a set of numbers that satisfy all properies of a commutative ring except for property 6, \textbf{commutativity of multiplication}, and added with an additional distributive law
+	\begin{equation*}
+		\forall a, b, c \in \bb{Z} \quad a \cdot (b + c) = a \cdot b + a \cdot c
+	\end{equation*}
+\end{defn}
+
+\begin{eg}
+	An example of a non-commutative ring is the set of $2 \times 2$ matrices with integer entries. While addition is coordinate-wise, multiplication is defined by the rule: $\forall a, b, c, d, w, x, y, z \in \bb{Z}$
+	\begin{equation*}
+		\begin{bmatrix}
+			a & b \\
+			c & d
+		\end{bmatrix}
+		\begin{bmatrix}
+			w & x \\
+			y & z
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			aw + by & ax + bz \\
+			cw + dy & cx + dz
+		\end{bmatrix}
+	\end{equation*}
+	which is clearly non-commutative since
+	\begin{equation*}
+		\begin{bmatrix}
+			w & x \\
+			y & z
+		\end{bmatrix}
+		\begin{bmatrix}
+			a & b \\
+			c & d
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+			aw + cx & bw + dx \\
+			ay + cz & by + dz
+		\end{bmatrix}
+	\end{equation*}
+\end{eg}
+
+\begin{eg}
+	Another important example is the set of integers \textbf{modulo} n. Consider the ring $\bb{Z}_2$ consisting of two elements $\{0, 1\}$ with operations given by the tables: \\
+	\begin{center}
+		\begin{tabular}{c|c c}
+			$+$	&	0	&	1 \\
+			\hline
+			0	&	0	&	1 \\
+			1	&	1	&	0
+		\end{tabular}
+		$\quad$
+		\begin{tabular}{c|c c}
+			$\times$	&	0	&	1 \\
+			\hline
+			0			&	0	&	0 \\
+			1			&	0	&	1
+		\end{tabular}
+	\end{center}
+\end{eg}
+
+The above example gives us a clue about how to add further properties to our list in Definition \ref{defn-commutative-rings} to ensure that the integers become our only example.
+
+For instance, we declare the following property so as to distinguish many other commutative rings from the integers.
+
+\begin{enumerate}
+	\setcounter{enumi}{9}
+	\item $\bb{Z}$ is generated by $\{0, 1\}$
+\end{enumerate}
+
+With this, we have laid the foundations of starting our set starting with 0 and 1, then form the rest of the elements of $\bb{Z}$ so as to provide the \textit{minimal} collection satisfying all our properties. In particular, since a ring is \textit{closed} under addition and multiplication, we need all the numbers of the form $1, 1 + 1, 1 + 1 + 1, 1 + 1 + 1 + 1, ...$.
+
+Note that such a construction ensures that the set is indeed closed under addition and multiplication. The set is closed under addition since
+\begin{gather*}
+	\forall a, b \in \bb{Z} \\
+	a + b = \underbrace{\underbrace{1 + 1 + \hdots + 1}_\text{a many 1's} + \underbrace{1 + 1 + \hdots + 1}_\text{b many 1's}}_\text{(a + b) many 1's}
+\end{gather*}
+which thus implies that $a + b \in \bb{Z}$ since a ring is closed under addition. The set is closed under multiplication since
+\begin{align*}
+	a \cdot b &= (\underbrace{1 + 1 + \hdots + 1}_\text{a many 1's}) \cdot (\underbrace{1 + 1 + \hdots + 1}_\text{b many 1's}) \\
+			  &= \underbrace{1 \cdot (\underbrace{1 + 1 + \hdots + 1}_\text{b many 1's}) + 1 \cdot (\underbrace{1 + 1 + \hdots + 1}_\text{b many 1's}) + \hdots + 1 \cdot (\underbrace{1 + 1 + \hdots + 1}_\text{b many 1's})}_\text{a times}
+\end{align*}
+by the distributive law, and since each $1 \cdot (\underbrace{1 + 1 + \hdots + 1}_\text{b many 1's}) \in \bb{Z}$, we have, once again, that
+\begin{equation*}
+	a \cdot b = \underbrace{1 \cdot (\underbrace{1 + 1 + \hdots + 1}_\text{b many 1's}) + 1 \cdot (\underbrace{1 + 1 + \hdots + 1}_\text{b many 1's}) + \hdots + 1 \cdot (\underbrace{1 + 1 + \hdots + 1}_\text{b many 1's})}_\text{a times} \quad \in \bb{Z}
+\end{equation*}
+and thus our construction is closed under multiplication.
+
+Next, in order to satisfy the \textbf{additive inverse property}, we \textit{may} have to add in $-1, -(1 + 1), -(1 + 1 + 1), ...$ The proof that such a collection is enough to satisfy all the properties of a commutative ring is similar to our exercise above.
+
+Our legwork is not done yet, since we still have, for example, $\bb{Z}_2$ also being generated by its 0 and 1. We can, fortunately, eliminate this group of sets by stating that $1, 1 + 1, 1 + 1 + 1, ...$ are all unique. If such a property holds in any ring, then the collection $S = \{1, 1 + 1, 1 + 1 + 1, ...\}$ will be indistinguishable from the \textbf{natural numbers $\bb{N}$} (without the 0) by any mathematical property. In fact, to ensure that all the elements are distinct, it is important that none of them are 0, since for example:
+\begin{equation*}
+	0 = 1 + 1 + 1 + 1 \implies (1 + 1 + 1 + 1) + 1 = 1 \; \text{but} \; (1 + 1) + (1 + 1 + 1) = 5
+\end{equation*}
+by the distributive law.
+
+With that said, then $-S \cap S = \emptyset$, and thus $R = S \cup \{0\} \cup -S$ is a ring that has indistinguishable properties from $\bb{Z}$. To clarify the explanation above, we state the following as a property:
+
+\begin{enumerate}
+	\setcounter{enumi}{10}
+	\item No nontrivial sum of 1's is equal to 0.
+\end{enumerate}
+
+\textbf{Exercises}
+\begin{enumerate}
+	\item[1.1] Show that $\bb{Z}[\sqrt{3}]$ is a commutative ring.
+\end{enumerate}
+
+Let $a, b, c, d, f, g \in \bb{Z}$. Note that $a + b\sqrt{3}, c + d\sqrt{3} \in \bb{Z}[\sqrt{3}]$
+
+\textbf{Commutativity of Addition}
+\begin{align*}
+	a + b\sqrt{3} + c + d\sqrt{3} &= \underbrace{1 + 1 + \hdots + 1}_\text{a many 1's} + (\underbrace{1 + 1 + \hdots + 1}_\text{b many 1's})\sqrt{3} \\
+		& \qquad + \underbrace{1 + 1 + \hdots + 1}_\text{c many 1's} + (\underbrace{1 + 1 + \hdots + 1}_\text{d many 1's})\sqrt{3} \\
+		&= \underbrace{1 + 1 + \hdots + 1}_\text{c many 1's} + (\underbrace{1 + 1 + \hdots + 1}_\text{d many 1's})\sqrt{3} \\
+		& \qquad + \underbrace{1 + 1 + \hdots + 1}_\text{a many 1's} + (\underbrace{1 + 1 + \hdots + 1}_\text{b many 1's})\sqrt{3} \quad (*) \\
+		&= c + d\sqrt{3} + a + b\sqrt{3}
+\end{align*}
+where $(*)$ above is by commutativity of addition for $\bb{Z}$.
+
+\textbf{Associativity of Addition}
+\begin{align*}
+	a + b\sqrt{3} + c + d\sqrt{3} + f + g\sqrt{3}
+\end{align*}
+\begin{align*}
+	(a + b\sqrt{3}) \cdot (c + d\sqrt{3}) &= ac + ad\sqrt{3} + bc\sqrt{3} + 3bd \\
+										  &= (ac + 3bd) + (ad + bc)\sqrt{3} \quad \in \bb{Z}[\sqrt{3}]
+\end{align*}
 
 \end{document}
 % Document End
