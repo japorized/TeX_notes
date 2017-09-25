@@ -87,7 +87,9 @@
 \author{Johnson Ng}
 
 \begin{document}
+\hypersetup{pageanchor=false}
 \maketitle
+\hypersetup{pageanchor=true}
 \tableofcontents
 
 \chapter*{List of Definitions}
@@ -95,12 +97,22 @@
 \listtheorems{defn}
 
 \chapter*{List of Theorems}
-\theoremlisttype{all}
-\listtheorems{lemma,thm,crly,propo}
+\theoremlisttype{allname}
+\listtheorems{axiom,lemma,thm,crly,propo}
 
 \chapter*{List of Symbols}\label{symbol_list}
-\begin{tabular}{c l}
-    $D_{2n}$    &   set of all symmetries
+\begin{tabular}{l l}
+    $S_n$               &   symmetric group on n letters \\
+    $D_{2n}$            &   dihedral group of order 2n \\
+    $A \times B$        &   Cartesian product of A and B \\
+    $A \simeq B$        &   A is isomorphic to B \\
+    $\ker(\phi)$        &   kernel of $\phi$ \\
+    $I_m(\phi)$         &   image set of $\phi$ \\
+    $gH, Hg$            &   left coset, right coset of H with coset representative g \\
+    $[G : H]$           &   index of the subgroup H in G \\
+    $H \triangleleft G$ &   H is a normal subgroup of G \\
+    $\rem_n(a)$         &   remainder of a when divided by n \\
+
 \end{tabular}
 
 \chapter{Lecture 1: Sept 8, 2017}\label{lec1}
