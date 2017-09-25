@@ -1,0 +1,1345 @@
+% Document Head
+\documentclass[11pt, oneside]{book}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+
+% Essential Packages
+\usepackage{ragged2e}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[hyperref]{ntheorem}
+
+% Theorem Style Customization
+\setlength\theorempreskipamount{2ex}
+\setlength\theorempostskipamount{3ex}
+
+% hyperref Package Settings
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks = true,
+	linkcolor = magenta
+}
+
+% ntheorem Declarations
+\theoremstyle{break}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem*{proof}{Proof}
+\newtheorem{crly}{Corollary}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{propo}{Proposition}[section]
+\newtheorem{claim}{Claim}[section]
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{eg}{Example}[section]
+\newtheorem{ex}{Exercise}[section]
+
+% ntheorem listtheorem style
+\makeatletter
+\def\thm@@thmline@name#1#2#3#4{%
+        \@dottedtocline{-2}{0em}{2.3em}%
+                   {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
+                   {#4}}
+\@ifpackageloaded{hyperref}{
+\def\thm@@thmline@name#1#2#3#4#5{%
+    \ifx\#5\%
+        \@dottedtocline{-2}{0em}{2.3em}%
+            {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
+            {#4}
+    \else
+        \ifHy@linktocpage\relax\relax
+            \@dottedtocline{-2}{0em}{2.3em}%
+                {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
+                {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
+        \else
+            \@dottedtocline{-2}{0em}{2.3em}%
+                {\hyper@linkstart{link}{#5}%
+                  {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}\hyper@linkend}%
+                    {#4}%
+        \fi
+    \fi}
+}
+\makeatother
+\newlength\widesttheorem
+\AtBeginDocument{
+  \settowidth{\widesttheorem}{Proposition A.1.1.1\quad}
+}
+
+\theoremlisttype{allname}
+
+% Shortcuts
+\newcommand{\bb}[1]{\mathbb{#1}}			% using bb instead of mathbb
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}	% simplifying the writing of a floor function
+\newcommand{\ceiling}[1]{\lceil #1 \rceil}	% simplifying the writing of a ceiling function
+\newcommand{\dotp}{\, \cdotp}				% dot product to distinguish from \cdot
+
+% Custom math operator
+\DeclareMathOperator{\rem}{rem}
+\DeclareMathOperator{\id}{id}
+
+% Main Body
+\title{PMATH347 - Groups and Rings (Class Notes)}
+\author{Johnson Ng}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter*{List of Definitions}
+\theoremlisttype{all}
+\listtheorems{defn}
+
+\chapter*{List of Theorems}
+\theoremlisttype{all}
+\listtheorems{lemma,thm,crly,propo}
+
+\chapter*{List of Symbols}\label{symbol_list}
+\begin{tabular}{c l}
+    $D_{2n}$    &   set of all symmetries
+\end{tabular}
+
+\chapter{Lecture 1: Sept 8, 2017}\label{lec1}
+
+\section{Logistics}
+Textbook is relatively important. The level of the text is about the same as the class, so it works to read ahead. (Problem is, the syllabus is not listed in the course outline, so what should we read?)
+
+\section{Group theory: Dihedral and Permutation groups}
+Fix $n \geq 3$, regular n-gon on a plane. For e.g. n=7
+
+\begin{defn}[Symmetry]
+	Rigid motions in $\bb{R}^3$, in which we can move it(?) around in $\bb{R}^3$ and put it back to get the same region.
+\end{defn}
+
+\begin{defn}[Dihedral Group]
+	$D_{2n}$ - set of all such symmetries (which is a ``group'').
+\end{defn}
+
+Our interest: the end results
+
+Two symmetries are the same if they have the same final position.
+
+Fix a labelling of the vertices.
+
+An element of $D_{2n}$ determines and is determined by how it permutes the vertices (labels).
+
+\begin{defn}[Permutation]
+	A permutation of a set X is a bijection $\sigma: X \to X$. $S_X$ is the set (or ``group'') of all permutations of X.
+	$S_n := S_{\{1, ..., n\}}$
+\end{defn}
+
+So $D_{2n} \subset S_n$, we view $\sigma \in D_{2n}$ as the permutation $\{1, ..., n\} \to \{1, ..., n\}$. So $i \mapsto$ the vertex that the symmetry $\sigma$ takes i to.
+
+Not all permutations are symmetries!
+
+\begin{eg}
+	n = 4, with labels 1, 2, 3, 4
+
+	Let $\sigma \in S_4$ with mapping $1 \mapsto 2, 2 \mapsto 1, 3 \mapsto 3, 4 \mapsto 4$.
+
+	So $\sigma \notin D_8$
+\end{eg}
+
+\begin{claim}
+	$|S_n| = n!$
+\end{claim}
+
+\begin{proof}
+	There are n labels. Firstly, pick 1, then there will be n - 1 choices for 2. Then, pick 2, then there remains n - 2 choices. Continue this argument. This completes the proof.
+\end{proof}
+
+\begin{claim}
+	$|D_{2n}| = 2n$
+\end{claim}
+
+\begin{proof}
+	For each vertex, $i \in \{1, ..., n\}$, we have the rigid motion that takes vertex 1 to vertex i. Then we have a choice of placing vertex 2 at vertex i + 1 (where n + 1 = 1) or i - 1 (where 1 - 1 = n). Both choices are possible and give distinct symmetries. E.g. They take the pair (1, 2) to distinct pairs. So we have 2n elements in $D_{2n}$ so far. But a symmetry is determined by where it takes (1, 2).
+\end{proof}
+
+We can ``multiply'' the elements of $D_{2n}$ -- and also of $S_n$ -- by composition.
+
+Given $\sigma, \tau \in S_n$, denote by $\sigma\tau$ the permutation that first does $\tau$ then does $\sigma$, and then does $\sigma, r$ times is expressed as
+$\sigma^r := \sigma\sigma\hdots\sigma$.
+
+\begin{note}
+    \begin{enumerate}
+        \item If $\sigma, \tau \in D_{2n}$, then $\sigma\tau \in D_{2n}$. We can also ``invert'' elements of $D_{2n}$. If $\sigma \in S_n, \sigma^{-1} \in S_n$.
+        \item $\sigma \in D_{2n} \implies \sigma^{-1} \in D_{2n}$.
+        \item $(\sigma^r)^{-1} = (\sigma^{-1})^r =: \sigma^{-r}$
+    \end{enumerate}
+\end{note}
+
+In $D_{2n}$, we have a distinguished element called the \textbf{identity}, denoted by 1, which does nothing.
+
+Convention: $\sigma \in S_n, \sigma^0 = 1$
+
+Our proof that $|D_{2n}| = 2n$ actually showed us that:
+
+\begin{claim}
+    Every element of $D_{2n}$ can be written uniquely as $r^i s^k$ where $k = 0, 1$, $i = 0, ..., n - 1$, $r$ is the rotation of the n-gon by $\frac{2\pi}{n}$ radians (by one vertex), and $s =$ reflection across the line that passes through i and the origin.
+\end{claim}
+
+\chapter{Lecture 2: Sept 11, 2017}\label{lec2}
+
+\section{Last time}
+
+$D_{2n} \subseteq S_n$ for $n \geq 3$.
+
+\begin{claim}
+    Every element of $D_{2n}$ can be written uniquely as $r^i s^k$ where $k = 0, 1$, $i = 0, ..., n - 1$, $r$ is the rotation of the n-gon by $\frac{2\pi}{n}$ radians (by one vertex), and $s =$ reflection across the line that passes through i and the origin.
+\end{claim}
+
+\section{Continuing on Dihedral groups}
+
+We can ``compute'' $D_{2n}$.
+
+\begin{eg}
+    Consider the element of $D_{2n}$ given by $r_{-1}sr^2s$ which is equals to $r^{-1}r^{-2}ss = r^{-3}s^2 = r^{-3} = r^{n - 3}$.
+\end{eg}
+
+\begin{note}[General identities in $D_2n$]
+    \begin{enumerate}
+        \item $sr^i = r^{-i}s \quad i = 0, ..., n - 1$
+        \item $s^2 = 1$
+        \item $r^{-1} = r^{n - i}$
+    \end{enumerate}
+\end{note}
+
+\section{Groups}\label{sect:group_intro}
+
+\begin{defn}[Group]
+    A group is a non-empty set G equipped with a binary operation, i.e. a function
+    \begin{equation}
+        * : G \times G \to G
+    \end{equation}
+    which is from ordered pairs of leemnts in G to G, satisfying the following three axioms:
+    \begin{enumerate}
+        \item Associativity: $\forall a, b, c \in G \; a * (b * c) = (a * b) * c$.
+        \item $\exists$ identity element $e \in G$ with the property $\forall a \in G \; a * e = e * a = a$.
+        \item $\forall a \in G \; \exists $ an inverse $a^{-1} \in G \quad a * a^{-1} = a^{-1} = e$.
+    \end{enumerate}
+\end{defn}
+
+\begin{eg}
+    $S_n$ is a (finite) group with
+    \begin{enumerate}
+        \item $* = $ composition
+        \item $e = 1$
+        \item $a^{-1} = $ inverse permutation
+    \end{enumerate}
+\end{eg}
+
+\begin{eg}
+    $D_{2n}$ is a group.
+\end{eg}
+
+\begin{defn}[Subgroup]
+    A subgroup of a group G is a non-empty subset $H \subseteq G$ that is closed under both $*$ and taking inverses, i.e.
+    \begin{itemize}
+        \item $a, b \in H \subseteq G \implies a * b \in H$
+        \item $a \in H \subseteq G \implies a^{-1} \in H$
+    \end{itemize}
+
+    We denote H as a subgroup of G by $H \leq G$.
+\end{defn}
+
+\begin{remark}
+    If $H \leq G$, then $*\restriction_{H \times H} : H \times H \to H$ and this makes H into a group.
+\end{remark}
+
+\begin{proof}
+    $* \restriction_{H \times H}$
+    is the fact that H is closed under $*$.
+
+    Associativiy of $* \restriction_{H \times H}$ on H follows from associativity of $*$ on G.
+
+    For axiom (ii), take $a \in H$. So $a^{-1} \in H$. Then $a * a^{-1} \in H$. But since $a * a^{-1} = e \in G$ by axiom (iii). Thus $e \in H$.
+
+    Axiom (iii) is from the fact that H is closed under taking inverses.
+\end{proof}
+
+Given a subgroup H of a group $(G, *)$, we call (H, $*\restriction_{H \times H}$) the induced group structure on H.
+
+\begin{eg}
+    $D_{2n} \leq S_n$
+\end{eg}
+
+\begin{eg}
+    (a) $S_n$
+
+    (b) $D_{2n}$
+
+    (c) $\bb{R}^* = $ non-zero real numbers, $*$ = usual multiplication, $a^{-1} = \frac{1}{a}, e = 1$.
+
+    (d) More generally, for $n \geq 1$, $GL_n (\bb{R}) =$ set of $n \times n$ invertible matrices with real entries ($GL_n (\bb{R}) = \bb{R}^*$), * = matrix multiplication, e = I, inverse is $M^{-1}$ if $M \in GL_n (\bb{R})$.
+
+    This works with $\bb{R}$ replaced by $\bb{Q}, \bb{C}, \bb{Z}_p$.
+\end{eg}
+
+\begin{defn}[Abelian Group]
+    A group $(G, *)$ is called abelian if $*$ is commutative, i.e. $a * b = b * a$ for all $a, b \in G$.
+\end{defn}
+
+\begin{eg}
+   From our previous example, (a) and (b) are non-abelian (for $n \geq 3$). (c) is abelian. (d) is non-abelian for $n > 1$.
+
+    Continuing the numbering of the example,
+
+    (e) The following are abelian groups: $(\bb{Z}, +)$, $(\bb{Q}, +)$, $(\bb{R}, +)$, $(\bb{C}, +)$, $(\bb{Z}_p, +)$
+
+    where we have $* = +, e = 0, a^{-1} = -a$
+\end{eg}
+
+\begin{note}[Multiplicative Notation]
+    We often write $ab$ for $a*b$ and we tend to write 1 for $e$.
+\end{note}
+
+\begin{note}[Additive Notation]
+    If we are working with a group (G, *) that we know is abelian, we often write $a + b$ instead of $a * b$. We write 0 instead of $e$ and write $-a$ instead of $a^{-1}$.
+\end{note}
+
+We never use Additive Notation if we are unsure about the commutativity of the group.
+
+\chapter{Lecture 3: Sept 13, 2017}\label{lec3}
+
+\section{Properties of Groups}
+
+\begin{propo}
+    Suppose G is a group.
+    \begin{enumerate}
+        \item The identitiy element is unique.
+        \item For each $a \in G$, $a$ has a unique inverse.
+        \item $(a^{-1})^{-1} = a$
+        \item $(ab)^{-1} = b^{-1} a^{-1}$
+        \item Generalised associativity law: $\forall a_1, ... a_n \in G$, then $a_1 a_2 ... a_n$ gives the same value regardless of how we associate the expressions.
+        \item In any group G, $1^{-1} = 1$
+    \end{enumerate}
+\end{propo}
+
+\begin{proof}
+    \begin{enumerate}
+        \item Suppose $e, e' \in G$ are both identity elements (WTP $e = e'$). 
+            \begin{align*}
+                e &= e' e \quad \text{since $e'$ is an identity} \\
+                  &= e' \quad \text{since $e$ is an identity}
+            \end{align*}
+        \item Suppose $b, c \in G$ are both inverses of $a \in G$. So
+            \begin{align*}
+                &ab = 1 = ac \\
+                &\implies b(ab) = b(ac) \\
+                &\implies (ba)b = (ba)c \quad \text{associativity)} \\
+                &\implies 1b = 1c \quad \text{(since $ba = 1$)} \\
+                &\implies b = c
+            \end{align*}
+        \item By defn of inverse,
+            \begin{gather*}
+                aa^{-1} = 1 \\
+                a^{-1}a = 1
+            \end{gather*}
+            Thus $a$ is the inverse of $a^{-1}$.
+        \item $\forall a, b \in G$
+            \begin{align*}
+                (b^{-1}a^{-1})(ab) &= b^{-1}(a^{-1}(ab)) \\
+                                   &= b^{-1}((a^{-1}a)b) \\
+                                   &= b^{-1}(1b) \\
+                                   &= b^{-1}b = 1
+            \end{align*}
+            Similarly, $(ab)(b^{-1}a^{-1}) = 1$. Therefore $(ab)^{-1} = b^{-1}a^{-1}$.
+        \item \textit{Proof for this proposition is intuitive, and we can use induction on n. See Dummit Section 1.1.}
+        \item $1 \cdot 1 = 1$
+    \end{enumerate}
+\end{proof}
+
+The fifth proposition allows us to drop the parenthesis without ambiguity.
+
+\begin{note}[Notation]
+    $\forall a \in G \; n > 0$
+    \begin{equation*}
+        a^n = a \cdot a \cdot \hdots \cdot a, \quad a^0 = 1, \quad a^{-n} = (a^n)^{-1}
+    \end{equation*}
+\end{note}
+
+\begin{remark}
+    \begin{enumerate}
+        \item By Proposition (d), $a^{-n} = (a^n)^{-1}$
+        \item In general, $(ab)^n \neq a^n b^n$ (especially for non-abelian)
+    \end{enumerate}
+\end{remark}
+
+\begin{propo}[Cancellation law]
+    For any $a, b, u, v \in G$
+    \begin{enumerate}
+        \item $au = av \implies u = v$ (Left-cancellation)
+        \item $ub = vb \implies u = v$ (Right-cancellation)
+    \end{enumerate}
+\end{propo}
+
+\begin{proof}
+    \begin{enumerate}
+        \item \begin{align*}
+            au &= av \\
+            a^{-1}au &= a^{-1}av \\
+            u = v
+        \end{align*}
+        \item Similar to above.
+    \end{enumerate}
+\end{proof}
+
+\begin{remark}
+    Note that 0 is not in a group, since every element must have an inverse but 0 does not.
+\end{remark}
+
+\section{Homomorphism}
+
+\begin{defn}[Group Homomorphism]
+    A group homomorphism $\phi : G \to H$ where $G, H$ are groups, is a function from G to H with with the property that for all $a, b \in G$
+    \begin{equation*}
+        \phi(ab) = \phi(a)\phi(b)
+    \end{equation*}
+    (aka a morphism of groups)
+
+    A homomorphism $\phi: G \to H$ is called an isomorphism if it is bijective.
+
+    We say that $G \simeq H$, and say that G is isomorphic to H, if there exists an isomorphism $\phi: G \to H$.
+\end{defn}
+
+\begin{remark}
+    $ab$ is a multiplication in G.
+
+    $\phi(a)\phi(b)$ is a multiplication in H.
+\end{remark}
+
+\begin{propo}
+    If $\phi: G \to H$ is a group homomorphism, then
+    \begin{enumerate}
+        \item $\phi(1_G) = 1_H$
+        \item $\forall a \in G \enspace \phi(a^{-1}) = \phi(a)^{-1}$
+    \end{enumerate}
+\end{propo}
+
+\begin{proof}
+    \begin{enumerate}
+        \item $1_H \phi(1_G) = \phi(1_G) = \phi(1_G 1_G) = \phi(1_G)\phi(1_G)$.
+            Thus, by Cancellation Law, $1_H = \phi(1_G)$.
+        \item $\forall a \in G$
+            \begin{gather*}
+                \phi(a^{-1})\phi(a) = \phi(a^{-1}a) = \phi(1_G) = 1_H \\
+                \phi(a)\phi(a^{-1}) = \phi(aa^{-1}) = \phi(1_G) = 1_H \\
+                \implies \phi(a^{-1}) = \phi(a)^{-1}
+            \end{gather*}
+    \end{enumerate}
+\end{proof}
+
+\begin{defn}[Kernel]
+    If $\phi: G \to H$ is a group homomorphism, then the kernal of $\phi$ is
+    \begin{equation}
+        \ker(\phi) = \{a \in G: \phi(a) = 1\}
+    \end{equation}
+\end{defn}
+
+\begin{propo}
+    $\ker(\phi) \leq G$
+\end{propo}
+
+\begin{proof}
+    Suppose $a, b \in \ker(\phi)$.
+    \begin{align*}
+        \phi(ab) &= \phi(a)\phi(b) \\
+                 &= 1_H 1_H = 1_H
+    \end{align*}
+    So $ab \in \ker(\phi)$. So $\ker(\phi)$ is closed under the group operation of G.
+
+    Suppose $a \in \ker(\phi)$.
+    \begin{equation*}
+        \phi(a^{-1}) = \phi(a)^-1 = 1_H^{-1} = 1_H
+    \end{equation*}
+    So $\ker(\phi)$ is closed under inverses.
+
+    Also, $\ker(\phi) \neq \emptyset$ since $\phi(1_G) = 1_H$ by proposition 3(a), so $1_G \in \ker(\phi)$.
+\end{proof}
+
+\chapter{Lecture 4: Sep 15, 2017}\label{lec4}
+
+\section{Examples of Homomorphism}\label{eg_homomorphism}
+
+\begin{eg}
+    Fix $n \geq 2$.
+    \begin{enumerate}
+        \item $\bb{Z}_n = \{0, 1, ..., n - 1\}$
+
+            addition: $a \oplus b$ = remainder of $a + b$ when divided by $n$
+
+            multiplication: $a \otimes b$ = remainder of $ab$ when divided by $n$
+
+            $(\bb{Z}_n , \oplus)$ is an abelian group with identity 0.
+
+            The fact that this is a (finite) group uses basic arithmetic of congruences.
+
+        \item $(\bb{Z} , +)$ is an abelian group.
+
+            $\rem : \bb{Z} \to \bb{Z}_n$
+
+            $\rem(a) = $ remainder of a when divided by n.
+
+            This is a group homomorphism.
+    \end{enumerate}
+    
+\end{eg}
+
+\begin{proof}
+    \begin{enumerate}
+        \setcounter{enumi}{1}
+        \item Need to show $\rem(a + b) = \rem(a) \oplus \rem(b)$
+
+            We know
+
+            \begin{align*}
+                a &\equiv \rem(a) \mod n \\
+                b &\equiv \rem(b) \mod n \\
+                    \\
+                \implies a + b &\equiv \rem(a) + \rem(b) \mod n \\
+                \text{and} \\
+                a + b &\equiv \rem(a + b) \mod n \\
+                    \\
+                \implies \rem(a + b) &\equiv (\rem(a) + \rem(b)) \mod n
+            \end{align*}
+
+            But $0 \leq \rem(a + b) \leq n - 1$. Therefore,
+            \begin{align*}
+                \rem(a + b) &= \text{remainder when } (\rem(a) + \rem(b)) \text{ is divided by } n \\
+                    &= \rem(a) \oplus \rem(b)
+            \end{align*}
+            
+    \end{enumerate}
+\end{proof}
+
+\begin{note} \begin{align*}
+        \ker(\rem) &= \{an : a \in \bb{Z}\} \\
+            &= \{ b \in \bb{Z} : n | b \} = n \bb{Z}    
+    \end{align*}
+    So $n \bb{Z} \leq \bb{Z}$, i.e. $n \bb{Z}$ is a subgroup of $\bb{Z}$.
+\end{note}
+
+\begin{eg}
+   $G = \bb{R}^{> 0}$ is a group under multiplication.
+
+   Note: $\bb{R}^{> 0} \leq R^X$
+
+   $H = (\bb{R}, +)$
+
+   $\exp: \bb{R} \to \bb{R}^{> 0} \quad \text{e.g.} \quad r \mapsto e^r$
+
+   Group homomorphism from $H \to G$: $\exp(a + b) = e^{a + b} = e^a e^b = \exp(a)\exp(b)$
+
+   $\exp(a + b)$ is a group operation on $H$.
+
+   $\exp(a)\exp(b)$ is a group operation on $G$.
+
+   So $\exp$ is a group homomorphsim from the additive group of reals to the multiplicative group of the positive reals. In fact, it is an isomorphism since it is bijective.
+
+   \textbf{\textit{$\exp$ is injective}}
+   \begin{gather*}
+       e^a = e^b \\
+       \implies \ln(e^a) = \ln(e^b) \\
+       \implies a = b
+   \end{gather*}
+
+   \textbf{\textit{$\exp$ is surjective}}
+   \begin{gather*}
+       r \in \bb{R}^{ > 0} \quad a = \ln(r) \\
+       \implies e^a = e^{\ln r} = r \\
+       \ln: (\bb{R}^{> 0}, x) \to (\bb{R}, +) \; \text{is also a group homomorphism} \\
+       \ln(ab) = \ln(a) + \ln(b) \\
+       \exp \circ \ln : \bb{R}^{> 0} \to \bb{R}^{> 0} \quad r \mapsto r \\
+       \exp \circ \ln : id_G \\
+       \ln \circ \exp : id_H
+   \end{gather*}
+\end{eg}
+
+\begin{defn}[Inverse of a Group Homomorphism]
+    If $\phi : G \to H$ is a group homomorphism, then an inverse to $\phi$ is a group homomorphism
+    \begin{equation}
+        \psi: H \to G
+    \end{equation}
+    such that
+    \begin{align*}
+        \psi \circ \phi = id_G \\
+        \phi \circ \psi = id_H
+    \end{align*}
+\end{defn}
+
+\begin{eg}[Exercise]
+    A group homomorphism is an isomorphism iff it has an inverse group homomorphism.
+\end{eg}
+
+\begin{note}
+    $(\bb{R}, +) \simeq (\bb{R}^{> 0}. \times)$
+\end{note}
+
+\begin{propo}\label{propo_5}
+    Suppose $\phi : G \to H$ is a surjective group homomorphism. If $G$ is abelian, then so is H
+\end{propo}
+
+\begin{proof}
+    \begin{gather*}
+        a, b \in H \qquad \exists r, s \in G \; a = \phi(r) \; b = \phi(s) \\
+        ab = \phi(r)\phi(s) = \phi(rs) = \phi(sr) = \phi(s)\phi(r) = ba
+    \end{gather*}
+\end{proof}
+
+\begin{crly}
+    If $G \simeq H$ then G is abelian iff H is abelian.
+\end{crly}
+
+\begin{eg}
+    $GL_1(\bb{C}) \not\simeq GL_2(\bb{C})$
+
+    $GL_1(\bb{C})$ is abelian.
+
+    $GL_2(\bb{C})$ is not abelian.
+\end{eg}
+
+\begin{eg}
+    $G = (\bb{Z}_4, \oplus)$
+
+    $H = (\bb{Z}_5^\times, \otimes)$
+
+    $\bb{Z}_5^\times = \{1, 2, 3, 4\}$ | identity = 1
+
+    (Note $\bb{Z}_6^\times$ is not a group under $\otimes$)
+
+    $\phi: G \to H$
+
+    \begin{gather*}
+        \phi(0) = 1 \\
+        \phi(1) = 2 \\
+        \phi(2) = 3 \\
+        \phi(3) = 4
+    \end{gather*}
+
+    But then $\phi(1 \oplus 1) = \phi(2) = 3$ and $\phi(1) \otimes \phi(1) = 2 \otimes 2 = 4$.
+
+    So $\phi(1 \oplus 1 \neq \phi(1) \otimes \phi(1)$.
+
+    \textbf{But} actually $G \simeq H$, since
+
+    \begin{gather*}
+        \psi(0) = 1 \\
+        \psi(1) = 2 \\
+        \psi(2) = 4 \\
+        \psi(3) = 3
+    \end{gather*}
+
+    is an isomorphism.
+\end{eg}
+
+\chapter{Lecture 5: Sep 18, 2017}\label{lec5}
+
+\section{Group Actions}\label{sect:group_actions}
+
+\begin{defn}[Group Action]
+    A group action is a group $G$ on a set $A$ is a function
+    \begin{equation}
+        G \times A \to A
+    \end{equation}
+    denoted by $\cdot$, i.e.
+    \begin{equation}
+        (g, a) \mapsto g \cdot a \in A
+    \end{equation}
+    satisfying
+    \begin{enumerate}
+        \item \begin{align*}
+                            &\text{multiplication in $G$} \\
+            g_1 \cdot (g_2 \cdot a) = &\overset{\downarrow}{(g_1 g_2)} \underset{\uparrow}{\cdot} a \\
+                            &\text{group action}
+        \end{align*}
+
+        \item $1 \cdot a = a$
+    \end{enumerate}
+    forall $g_1, g_2 \in G, \; a \in A$.
+
+    If $G$ acts on $A$, for each $g \in G$ we get $\sigma_g : A \to A$, i.e. $a \mapsto g \cdot a$
+\end{defn}
+
+\begin{lemma}[$\sigma_g$ as a bijection]
+    \label{lemma:6}
+    G acts on A, $g \in G$. Then $\sigma_g: A \to A$ is a bijection.
+\end{lemma}
+
+\begin{proof}
+    For injection,
+    \begin{gather*}
+        \forall a, b \in A \; \sigma_g(a) = \sigma_g(b) \\
+        \implies g \cdot a = g \cdot b \\
+        \implies g^{-1} \cdot (g \cdot a) = g^{-1} \cdot (g \cdot b) \\
+        \implies (g^{-1} g) \cdot a = (g^{-1} g) \cdot b \\
+        \implies 1 \cdot a = 1 \cdot b \\
+        \implies a = b \quad \text{by property 2}
+    \end{gather*}
+    For surjection,
+    \begin{gather*}
+        \forall b \in A \quad \text{Let } a = g^{-1} \cdot b \\
+        \sigma_g (a) = g \cdot a =  g \cdot (g^{-1} \cdot b) = (gg^{-1}) \cdot b = b
+    \end{gather*}
+\end{proof}
+
+\begin{note}[Warning]
+    Do not confuse the action of G on A and group operation on G, especially as we often write $ga$ instead of $g \cdot a$ for the group action.
+
+    Hopefully, the difference is clear by context.
+\end{note}
+
+\begin{note}[Recall]
+    For any set A
+    \begin{equation}
+        S_a = \text{ group of bijections of } \sigma: A \to A \text{ under composition}
+    \end{equation}
+    If G acts on A, we have just defined a function
+    \begin{gather*}
+        G \to S_A \quad \text{\autoref{lemma:6}} \\
+        g \mapsto \sigma_g
+    \end{gather*}
+\end{note}
+
+\begin{propo}[Permutation Representation]
+    \label{propo_7}
+    The function $G \to S_A$ given by $g \mapsto \sigma_g$ is a group homomorphism.
+\end{propo}
+
+\begin{proof}
+    All we have to check is that for any $g, h \in G$
+    \begin{equation}
+        \sigma_{gh} = \sigma_g \circ \sigma_h
+    \end{equation}
+    Both sides are permutations of A.
+
+    Let $a \in A$ be arbitrary.
+    \begin{align*}
+        \sigma_{gh} (a) &= (gh) \cdot a \\
+                        &= g\cdot (h \cdot a) \\
+                        &= g\cdot (\sigma_h (a)) \\
+                        &= \sigma_g (\sigma_h (a))
+    \end{align*}
+\end{proof}
+
+\begin{ex}
+    Prove the converse of \autoref{propo_7}: Suppose G is a group, A is a set, and $\phi : G \to S_A$ is a group homomorphism. Then we get an action of G on A by
+    \begin{equation}
+        g \cdot a := \phi(g)(a) \in A
+    \end{equation}
+    Moreover, the associated $G \to S_A$ which $g \mapsto \sigma_g$ is just $\phi$.
+\end{ex}
+
+\begin{defn}[Trivial Homomorphism]
+    For G, H groups, the trivial homomorphism $\phi : G \to H$ is $\phi(g) = 1_H$ for all $g \in G$, i.e. $\ker(\phi) = G$.
+\end{defn}
+
+\begin{eg}
+    \begin{enumerate}
+        \item Trivial action: Every group G acts on every set A by $g \cdot a = a$.
+            \begin{itemize}
+                \item $g_1 \cdot (g_2 \cdot a) = g_1 \cdot a = a = (g_1 g_2) \cdot a$
+            \end{itemize}
+            The associated permuration representation $G \to S_A$ is the trivial homomorphism, i.e. 
+            $\sigma_g = \id_A : A \to A$ which $a \mapsto a$ for all $g \in G$. Everything is in the kernel of the action.
+    \end{enumerate}
+\end{eg}
+
+\begin{defn}[Kernel of the Action]
+    Suppose G acts on A and $\phi: G \to S_A$ which $g \mapsto \sigma_g$ is the corresponding homomorphism. 
+    We call $\ker(\phi) \leq G$ the kernel of the action of G on A. It is the set of elements in G that acts trivially on A.
+\end{defn}
+
+\begin{eg}
+    \begin{enumerate}
+        \setcounter{enumi}{1}
+        \item Grenary set $A, S_A$ acts on A by
+            \begin{equation}
+                \sigma \cdot a := \sigma(a)
+            \end{equation}
+            The corresponding homomorphism
+            \begin{equation}
+                S_A \to S_A
+            \end{equation}
+            is the identity homomorphism, i.e.
+            \begin{equation}
+                \sigma_\tau = \tau \quad \text{any } \tau \in S_A
+            \end{equation}
+
+        \item $V$ is an $\bb{R}$-vector space. Then scaloar multiplication
+            \begin{gather*}
+                \bb{R}^\times \times V \to V \\
+                (r, v) \mapsto rv \\
+                r(sv) = (rs) v \quad \text{is a vector space axiom}
+            \end{gather*}
+            Note: $\bb{R}^\times$ is the non-zero reals
+
+            So $(\bb{R}^\times, \times)$ acts on the vector space V.
+
+            The associated homomorphism from $\bb{R}^\times \to S_V$ is injection if V is nontrivial (exercise).
+    \end{enumerate}
+\end{eg}
+
+\begin{note}[Bad notation last lecture]
+    \begin{equation}
+        \bb{Z}_5^\times = \{1, 2, 3, 4\} \; \text{ with } \otimes
+    \end{equation}
+    but
+    \begin{equation}
+        \bb{Z}_6 \setminus \{0\}
+    \end{equation}
+    is not a group.
+
+    ($\bb{Z}_6^\times$ is something else, see homework)
+\end{note}
+
+\chapter{Lecture 5: Sep 20, 2017}\label{chp:lec5}
+
+\section{Logistics}
+
+\begin{note}[Homework 1]
+    Q5 $(\bb{Z}_n, \oplus)$
+\end{note}
+
+\begin{note}[Midterm Confusion]
+    - check email
+\end{note}
+
+\begin{note}
+    symmetric group ($S_A$) = permutation groups
+\end{note}
+
+\section{More on Group Actions}\label{sect:group_action_cont}
+
+We continue with two important group actions:
+
+\begin{eg}
+    \begin{enumerate}
+        \setcounter{enumi}{3}
+        \item Groups acting on themsevles by left multiplication:
+
+            Let G be a group. G acts on itself by
+            \begin{equation}
+                g \in G, \; a \in G \quad g \cdot a = ga
+            \end{equation}
+            associativity of group operation
+            \begin{equation}
+                \iff g \cdot (h \cdot a) = (gh) \cdot a
+            \end{equation}
+            group axiom about identity
+            \begin{equation}
+                \implies 1 \cdot a = a
+            \end{equation}
+    \end{enumerate}
+\end{eg}
+
+\begin{ex}
+    Multiplication on the right is not a group action.
+\end{ex}
+
+We have a corresponding permutation representation
+\begin{equation}
+    G \to S_G
+\end{equation}
+
+\begin{propo}
+    \label{propo_8}
+    $G \to S_G$ is injective.
+\end{propo}
+
+\begin{proof}
+    $\forall g, h \in G \; \sigma_g = \sigma_h$
+
+    In particular, $\sigma_g(1) = \sigma_h(1)$.
+
+    \begin{gather*}
+        \sigma_g(1) = g \cdot 1 = g1 = g \\
+        \sigma_h(1) = h \cdot 1 = h1 = h
+    \end{gather*}
+
+    Therefore, $g = h$.
+\end{proof}
+
+In particular, the kernel of this action is trivial, i.e., the subgroup $\{1\} \leq G$.
+
+\begin{defn}[Faithful]
+    A group action G on A is said to be faithful if the kernel of the action is trivial, i.e. 
+    the only group element fixing all of A pointwise is the identity element $1_G$.
+\end{defn}
+
+\begin{defn}[Image Set]
+    Suppose $\phi : G \to H$ is a group homomorphism. Then 
+    $I_m(\phi) = \{h \in H : h = \phi(g) \text{ for some } g \in G\}$
+\end{defn}
+
+\begin{lemma}[Lemma 9]
+    \label{lemma:9}
+    Suppose $\phi : G \to H$ is a group homomorphism.
+    \begin{enumerate}
+        \item $I_m(\phi) \leq H$
+        \item If $\phi$ is injective then it induces an isomorphism
+            \begin{equation}
+                G \overset{\simeq}{\to} I_m(\phi)
+            \end{equation}
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \begin{enumerate}
+        \item Suppose $h_1, h_2 \in I_m(\phi) \implies \exists g_1, g_2 \in G \; \phi(g_1) = h_1 \; \phi(g_2) = h_2$.
+            \begin{align*}
+                h_1 h_2 &= \phi(g_1) \phi(g_2) \\
+                        &= \phi(g_1 g_2)
+            \end{align*}
+            Since $g_1 g_2 \in G \implies h_1 h_2 \in I_m(\phi)$
+
+            Also $\phi(1_G) = 1_H$ so
+            \begin{gather*}
+                1_G \in I_m(\phi) \implies I_m(\phi) \neq \emptyset \\
+                \implies I_m(\phi) \leq H
+            \end{gather*}
+
+        \item $I_m(\phi)$ is a group and
+            \begin{equation}
+                \phi: G \to I_m(\phi)
+            \end{equation}
+            is a bijection group homomorphism. Hence
+            \begin{equation}
+                G \simeq I_m(\phi)
+            \end{equation}
+    \end{enumerate}
+\end{proof}
+
+\begin{crly}[Cayley's Theorem]
+    \label{thm:cayley}
+    Every group is isomorphic to a subgroup of some permutation. Moreover, is a group G 
+    is finite, i.e. $|G| = n$ for some $n$, then G is isomorphic to a subgroup $S_n$.
+\end{crly}
+
+\begin{proof}
+    Consider the action of G on itself by left multiplication. By \autoref{propo_8}, this gives us an injective group homomorphism $\phi: G \to S_G$. 
+    By \autoref{lemma:9}, $G \simeq I_m(\phi) \leq S_G$.
+    Moreover, if $|G| = n$, then $S_G \simeq S_n := S_{\{1, 2, ..., n\}}$.
+\end{proof}
+
+\begin{eg}
+    \begin{enumerate}
+        \setcounter{enumi}{4}
+        \item Groups acting on themselves by conjugation
+    \end{enumerate}
+\end{eg}
+
+\begin{defn}[Conjugation]
+    For a group G, $\forall g, h \in G$. Then the conjugate of $h$ by $g$ is the element $ghg^{-1}$.
+\end{defn}
+
+\begin{remark}
+    If G is abelian, then $ghg^{-1} = hgg^{-1} = h$, i.e. a conjugation does nothing in abelian groups. Thus the notion of a conjugation is only interesting for non-abelian groups.
+\end{remark}
+
+\begin{eg}
+    Conjugation as an action of G on itself, i.e. given $g \in G, \; a \in G, g \cdot a := gag^{-1}$
+
+    Given $g, h \in G, \; g \cdot (h \cdot a) = g \cdot (hah^{-1}) = g(hah^{-1})g^{-1} = (gh)a(h^{-1}g^{-1}) = (gh)a(gh)^{-1} = (gh) \cdot a$.
+
+    $1 \cdot a = 1 a 1^{-1} = a$
+\end{eg}
+
+\begin{eg}
+    We get another permutation representation
+    \begin{equation}
+        \psi: G \to S_G
+    \end{equation}
+    coming from G acting on itself by conjugation.
+
+    $\ker(\psi) = \{g \in G : ga = ag \; \forall a \in G\}$
+
+    Note that $gag^{-1} = 1 \iff ga = ag$
+
+    If G is abelian, this is the trivial action.    
+\end{eg}
+
+\begin{defn}[Center of the Group]
+    For any group G, 
+    \begin{equation}
+        Z(G) = \{g \in G : \forall h \in G \; gh = hg \}
+    \end{equation}
+    is called the \textbf{center of G}.
+\end{defn}
+
+\begin{remark}
+    \begin{enumerate}
+        \item If G is abelian, then $Z(G) = G$.
+        \item $Z(G) \leq G$ since $Z(G) = \ker(\psi)$ which is the kernel of the action of G on itself by conjugation.
+    \end{enumerate}
+\end{remark}
+
+\chapter{Lecture 7: Sep 22, 2017}\label{chp:lec7}
+
+\section{Cosets}\label{sect:cosets}
+
+\begin{defn}[Left Cosets]
+    Let G is a group and $H \leq G$.
+
+    A \textbf{left coset} of H is a set of the form $aH = \{a \cdot h : h \in H\}$ for some $a \in G$
+\end{defn}
+
+\begin{eg}
+    \begin{align*}
+        G &= S_3em\quad (= D_6) \\
+          &= <r, s | r^3 = s^2 = 1, r^2s = sr > \\
+          &= \{1, r, r^2, s, rs, r^2 s\}
+    \end{align*}
+
+    \begin{align*}
+        H = \{1, s\} = \substack{\text{ subgroup generated by s} \\ \text{ smallest subgroup of G containing s} \\ (1 \in H, ss = 1 \in H)}
+    \end{align*}
+
+    The left cosets of H are:
+    \begin{align*}
+        1H   &= H    &= \{1, s\} \\
+        rH   &= \{r, rs\} &\\
+        r^2 H &= \{r^2, r^2s\} &\\
+        sH   &= \{s, s^2\}   &= \{1, s\} \\
+        rsH  &= \{rs, rs^2\} &= \{r, rs\} \\
+        r^2 sH  &= \{r^2s, r^2s^2\} &= \{r^2, r^2s\}
+    \end{align*}
+
+    Observe that
+    \begin{enumerate}
+        \item $1H = sH = \{1, s\}$
+
+            $rH = rsH = \{r, rs\}$
+
+            $r^2H = r^2sH = \{r^2, r^2s\}$
+        \item $aH \neq bH \implies aH \cap bH = \emptyset$
+        \item $\bigcup_{a \in G} aH = G$
+        \item All of the left cosets have the same size.
+    \end{enumerate}
+\end{eg}
+
+\begin{propo}[Proposition 11]\label{propo:11}
+    Let G be a group and $H \leq G$, and $a, b \in G$. Then $aH = bH \iff a \in bH$.
+\end{propo}
+
+\begin{proof}
+    Suppose $aH = bH$, then $a = a 1$ and since $1 \in H$, $a 1 \in aH = bH$.
+
+    Suppose $a \in bH$. Then $a = bh$ for some $h \in H$. For any $h' \in H$, $ah' = bhh'$ and since $hh' \in H$, $ah \in bH$. This implies that $aH \subset bH$.
+
+    For any $h'' \in H$, since $a = bh$ thus we have that $bh'' = ah^{-1}h''$ and since $h^{-1}h'' \in aH$. Thus $bH \subset aH$.
+
+    Therefore, $aH = bH$.
+\end{proof}
+
+\begin{crly}
+    \begin{enumerate}
+        \item $aH = bH \iff b^{-1}a \in H$
+
+            $aH = H \iff a \in H$
+
+        \item $aH \cap bH \neq \emptyset \implies aH = bH$
+    \end{enumerate}
+\end{crly}
+
+\begin{proof}
+    \begin{enumerate}
+        \item \begin{align*}
+            aH = bH &\iff a = bh \text{ for some } h \in H \\
+                &\iff b^{-1}a = h \text{ for some } h \in H \\
+                &\iff b^{-1}a \in H
+        \end{align*}
+
+        \item Suppose $c \in aH \cap bH$. Then $c \in aH \implies cH = aH$ and $c \in bH \implies cH = bH$. Therefore $aH = bH$.
+    \end{enumerate}
+\end{proof}
+
+\begin{propo}
+    \begin{equation}
+        \bigcup_{a \in G} aH = G
+    \end{equation}
+\end{propo}
+
+\begin{proof}
+    \begin{align*}
+        \bigcup_{a \in G} aH \subset G
+    \end{align*}
+    For any $g \in G$, $g \in gH \subset \bigcup_{a \in G} aH \implies G \subset \bigcup_{a \in G} aH$
+\end{proof}
+
+\begin{propo}
+    Let G be a group, $H \leq G, a \in G$. Then the map
+    \begin{align*}
+        \sigma_a &: H \to aH \\
+            & h \mapsto ah
+    \end{align*}
+    is a bijection of sets.
+\end{propo}
+
+\begin{proof}
+    By definition of left cosets, $aH$, $\sigma_a$ is surjective, since $ah = \sigma_a(h)$.
+
+    If $\sigma_g(h_1) = \sigma_a(h_2)$ for $h_1, h_2 \in H$, then $ah_1 = ah_2$, which then $h_1 = h_2$. Thus $\sigma_a$ is injective.
+\end{proof}
+
+\begin{crly}
+    If H is finite, then $|H| = |aH|$ for any $a \in G$. This means that all left cosets have the same size.
+\end{crly}
+
+\begin{remark}
+    We now know that
+    \begin{itemize}
+        \item All left cosets have the same size.
+        \item G is the union of all left cosets, and furthermore, it can be partitioned into all the distinct left cosets. Thus if G is finite, then
+        \begin{equation}
+            |G| = |H| (\text{number of distinct left cosets})
+        \end{equation}
+        We call the number of distinct left cosets of H the index of H in G, denoted by $[G : H]$.
+    \end{itemize}
+\end{remark}
+
+\begin{eg}
+    \begin{gather*}
+        G = S_3 \\
+        H = \{1, s\} \\
+        rH = \{r, rs\} \\
+        r^2H = \{r^2, r^2s\} \\
+        G = \{1, s\} \cup \{r, rs\} \cup \{r^2, r^2 s\} \\
+        |G| = 2 + 2 + 2 \\
+        [G : H] = 3
+    \end{gather*}
+\end{eg}
+
+\begin{crly}[12. Lagrange's Theorem]\label{thm:lagrange}
+    If G is a finite group and $H \leq G$, then
+    \begin{equation}
+        |H| \Big| |G|
+    \end{equation}
+\end{crly}
+
+\begin{proof}
+    $|G| = |H|[G : H]$ and $[G : H] \in \bb{Z}$
+\end{proof}
+
+\begin{defn}[Order]
+    The order of a group G is the cardinality of G.
+\end{defn}
+
+\begin{eg}
+    In our previous example, note that $S_3$ cannot have a subgroup of order 4.
+\end{eg}
+
+\begin{eg}[Subgroups of $S_3$]
+    $S_3 = \{1, r, r^2, s, rs, r^2s\}$
+    \begin{gather*}
+        H \leq S_3 \implies |H| = 1 \text{ or } 2 \text{ or } 3 \text{ or } 6 \\
+        |H| = 1 \implies H =\{1\}
+        |H| = 6 \implies H = S_3 \\
+        |H| = 2 \implies H = \{1,s\} \text{ or } \{1, rs\} \text{ or } \{1, r^2s\} \\
+        |H| = 3 \implies 
+    \end{gather*}
+
+    Suppose $|H| = 2$. Then $H = \{1, a\}$ for some $a \in G$.
+    \begin{gather*}
+        a^2 \in H \implies a^2 = 1 \text{ or } a^2 = a 
+    \end{gather*}
+    but $a^2 = a \implies a = 1$.
+    So $\{1, s\} \leq G \iff a^2 = 1$ since $a^2 = 1 \implies a^{-1} = a \in H$.
+
+    Suppose $|H| = 3$. Can H contain S? No, since if $s \in H$, then $\{1, s\} \subset H$ and $\{1, s\}$, but by \autoref{thm:lagrange} $2 \not| 3$. Likewise, $rs, r^2 s \notin H$. Thus
+    \begin{align*}
+        H &= \{1, r, r^2\} \\
+         &= \text{ smallest subgroup containing r} \\
+         &= \text{ subgroup generated by r}
+    \end{align*}
+\end{eg}
+
+Converse of \autoref{thm:lagrange} is false.
+
+There exists a finite group G and a positive integer $m | |G|$ such that G does not have a subroup of order m.
+
+\begin{eg}\begin{align*}
+        G &= A_4 \\
+        &= \text{ group of symmetries of a regular tetrahedron, order 12} \\
+        &= \{1, (1, 2)(3, 4), (1, 4)(2, 3), (1, 3)(2, 4), (2, 3, 4), (4, 3, 2), (1, 3, 4), (1, 2, 4), (4, 2, 1), (1, 2, 3), (3, 2, 1)\}    
+    \end{align*}
+
+    $A_4$ has no subgroup of order 6 (exercise)
+\end{eg}
+
+\chapter{Lecture 8: Sep 25, 2017}\label{chp:lec8}
+
+\section{Continuing with Cosets}\label{sect:cosets_cont}
+
+We can similarly define right cosets as
+\begin{equation}
+    \forall a \in G \; H \leq G \quad H_a := \{ha : h \in H\}
+\end{equation}
+
+\begin{defn}[Set of Left Cosets]
+    Let $H \leq G$
+    \begin{align}
+        G/H &:= \text{ set of all left cosets of H in G} \\
+            &:= \{aH : a \in G\}
+    \end{align}
+    which we call as G mod H.
+\end{defn}
+
+\begin{note}
+    We have a natural action of G on $G/H$ given by: $\forall g \in G$
+    \begin{equation}
+        g \cdot aH := (ga)H
+    \end{equation}
+
+    \begin{align}
+        \text{The kernel of this action} &= \{g \in G: gaH = aH \; \forall a \in G\} \\
+                &= \{g \in G: a^{-1}ga \in H \; \forall a \in G\}
+    \end{align}
+\end{note}
+
+\begin{eg}
+    $G = (\bb{Z}, +) \quad d > 0 \; H = d\bb{Z} \leq \bb{Z}$
+    \begin{align}
+        \bb{Z} / d\bb{Z} &= \{a + d\bb{Z} : a \in \bb{Z} \} \\
+                    &= \{ [a]_d : a \in \bb{Z} \}
+    \end{align}
+    where $[a]_d = \{n \in \bb{Z} : n \equiv a \mod d\} = a + d\bb{Z}$.
+
+    So the congruence class of $a \mod d$ is just the left coset of $d \bb{Z}$ by a.
+
+    This has a natural group structure: $[a]_d + [b]_d = [a = b]_d$.
+\end{eg}
+
+So left cosets generalises congruences classes to arbitrary groups.
+
+We now try to put a natural group structure on $G/H$:
+
+\begin{align}\label{eq:natural group struct}
+    (aH)(bH) &:= abH
+\end{align}
+
+But in general, given any
+\begin{gather}
+    X, Y \subseteq G \nonumber \\
+    XY := \{ xy : x \in X, \; y \in Y\} \subseteq G \label{eq:natural set multiplication}
+\end{gather}
+Note that \autoref{eq:natural set multiplication} is a \textbf{natural definition}.
+
+If
+\begin{gather*}
+    X = aH \; Y = bH \implies XY = \{ah_1 bh_2 : h_1, h_2 \in H \} \\
+    abH = \{abh : h \in H\} \\
+    abH \subseteq XY \\
+    XY \not\subseteq abH \quad \text{in general}
+\end{gather*}
+If G is abelian, then $XY = abH$ and \autoref{eq:natural group struct} is a good definition.
+
+G abelian: $XY \subseteq abH$
+
+\begin{proof}
+    $ah_1bh_2 = abh_1h_2$ then we can just take $h = h_1h_2$.
+
+    All we need for $abH = (aH)(bH)$ is that for all $h_1 \in H$, for some $h' \in H$, $h_1b = bh'$. Then
+    \begin{align*}
+        ah_1bh_2 = abh'h_2 = abh
+    \end{align*}
+    by $h = h'h_2 \in H$.
+\end{proof}
+
+\begin{defn}[Normal Subgroup]
+    A subgroup $H \leq G$ is normal if $\forall b \in H \; Hb = bH$, i.e.
+    \begin{equation}
+        \forall h \in H \; \exists h' \in H \quad hb = bh'
+    \end{equation}
+    We denote a normal subgroup by $H \triangleleft G$.
+\end{defn}
+
+\begin{lemma}[Lemma 13]\label{lemma:13}
+    $H \leq G$. TFAE:
+    \begin{enumerate}
+        \item $H \triangleleft$ G
+        \item $\forall b \in G \; b^{-1}Hb \subseteq H$
+        \item $b^{-1}Hb = H$
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    $1 \iff 3$ Suppose $H \triangleleft G \; b \in G$
+    \begin{gather*}
+        Hb = \{hb : h \in H\} \\
+        bH = \{bh : h \in H\} \\
+        b^{-1}Hb = \{b^{-1}hb : h \in H\} \\
+        \\
+        Hb = bH \\
+        \implies b^{-1}Hb = H
+    \end{gather*}
+
+    $3 \implies 2$ is straightforward
+
+    $2 \implies 3$ Apply 2 to $b^{-1}$, so that
+    \begin{gather*}
+        (b^{-1})^{-1} H (b^{-1}) \subseteq H \\
+        bHb^{-1} \subseteq H \\
+        Hb^{-1} \subseteq b^{-1}H \\
+        H \subseteq b^{-1}Hb
+    \end{gather*}
+    Therefore, $\forall b \in G \; H = b^{-1}Hb$
+\end{proof}
+
+For $1 \implies 3$, we needed the following
+
+\begin{defn}
+    $X \subseteq G$
+    \begin{gather*}
+        bH := \{bx : x \in X\} \\
+        Xb := \{xb : x \in X\}
+    \end{gather*}
+\end{defn}
+
+\begin{ex}
+    \begin{itemize}
+        \item $X = Y \implies bX = bY$
+        \item $a(bX) = (ab)X$
+    \end{itemize}
+\end{ex}
+
+\begin{lemma}[Lemma 14]\label{lemma:14}
+    If $H \triangleleft G$ and $a, b \in G$, then
+    \begin{align}
+        \underbrace{(aH)(bH)}_{\text{set product}} = (ab)H
+    \end{align}
+\end{lemma}
+
+\begin{proof}
+    is an exercise (yay) - it is what motivated the definition of a normal subgroup
+\end{proof}
+
+\begin{remark}
+    Suppose $H \triangleleft G$. Let G act on $G/H$. The kernel of the action is H.
+
+    \begin{proof}
+        \begin{gather*}
+            h \in H \; a \in G \; \exists h' \in H \\
+            haH = ah'H \quad (\text{since $H \triangleleft G$}) = aH
+        \end{gather*}
+
+        So h is in the kernel of the action.
+
+        Suppose $g \in G$ is in the kernel of the action. So
+        \begin{gather*}
+            \forall a \in G \; gaH = aH
+        \end{gather*}
+        in part, take a = 1. So $gH = H \implies g \in H$.
+    \end{proof}
+\end{remark}
+
+\chapter{Lecture 9: Sep 27, 2017}\label{chp:lec9}
+
+
+
+\end{document}
+% Document End
