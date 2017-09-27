@@ -9,7 +9,7 @@ If you wish to get a copy of these documents, please take them with utmost discr
 
 The LaTeX Template of my notes is saved as tex\_default.sh.
 
-For VIm users, if you wish to have this as the default TeX template for all of your TeX files, copy the .sh file into your `.vim` folder, and add the following to your vimrc
+For VIm users, if you wish to have this as the default TeX template for all of your TeX files, copy the .sh file into your `.vim/templates` folder, and add the following to your vimrc
 
 ```
 if has("autocmd")
