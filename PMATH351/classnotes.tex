@@ -1378,7 +1378,7 @@ We let, for $1 \leq p < \infty$,
 \end{thm}
 
 \begin{proof}
-	We shall rpvoe these statements together. Suppose that $x, y \in \ell_p$. Then
+	We shall prove these statements together. Suppose that $x, y \in \ell_p$. Then
 	\begin{align*}
 		||x + y||_p &= \left( \sum_{k=1}^{\infty} |x_k + y_k|^p \right)^{\frac{1}{p}} \quad \text{(may be $\infty, \infty^{\frac{1}{p}} = \infty$)} \\
 				&= \left( \lim_{n \to \infty} \sum_{k=1}^{n} |x_k + y_k|^p \right)^{\frac{1}{p}} \\
@@ -1405,6 +1405,174 @@ We let, for $1 \leq p < \infty$,
 	\end{align*}
 	Other properties are easy (exercise).\qed
 \end{proof}
+
+\chapter{Lecture 9: Sep 27, 2017}\label{chp:lec9}
+
+\section{Last Time}
+
+\begin{note}
+	\begin{gather*}
+		1 \leq p < \infty \\
+		\ell_p = \left\{x = (x_k)_{k = 1}^\infty \in \bb{R}^\bb{N} : ||x||_p = \left(\sum_{k=1}^{n} |x_k|^p \right)^{\frac{1}{p}} \right\} \\
+		\ell_\infty = \left\{ x = (x_k)_{k = 1}^\infty \in \bb{R}^\bb{N} : ||x||_\infty = \sup_{k \in \bb{N}}|x_k| \right\}
+	\end{gather*}
+\end{note}
+
+\section{Continuing with \texorpdfstring{$\ell_p$}{lp}}\label{sect:l_p space cont}
+
+\begin{gather*}
+	c_0 = \{x = (x_k)_{k = 1}^\infty \in \bb{R}^\bb{N} : \lim_{k \to \infty} x_k = 0 \}
+\end{gather*}
+
+Note that $c_0$  is a $\bb{R}$-subspace of $\bb{R}^\bb{N} : x, y \in c_0$ and $\alpha \in \bb{R}$, then
+\begin{gather*}
+	x + y = (x_k + y_k)_{k = 1}^\infty \in c_0 \left[ x_k + y_k \overset{k \to \infty}{\to} 0 \right], \; \alpha x \in c_0
+\end{gather*}.
+Also $(0) = (0, 0, ... ) \in c_0$. Also, $c_l \subset \ell_\infty$. Indeed, let $n_1 \in \bb{N}$ such taht
+\begin{gather*}
+	n \geq n_1 \implies |x_n - 0| = |x_k| < 1 \quad (\text{here, } \epsilon = 1)
+\end{gather*}
+Then for $h \in \bb{N}$,
+\begin{gather*}
+	|x_k| \leq \max\{x_1|, ..., |x_{n_1 - 1}|, 1 \} = M
+\end{gather*}
+i.e. $||x||_\infty = \sup_{h \in \bb{N}} |x_k| \leq M$.
+
+\begin{defn}[\texorpdfstring{$C[a, b]$}{}]
+	Let $a < b \in \bb{R}$, and
+	\begin{equation}
+		C[a, b] = \{f \in \bb{R}^{[a,b]} : f \text{ is continuous } \}
+	\end{equation}
+
+	Note that $C[a, b]$ is a $\bb{R}$-vector space $f, g \in C[a, b], \; \alpha \in \bb{R}$, define $f + g, \alpha f \in \bb{R}^{[a,b]}$ by
+	\begin{equation}
+		(f+g)(t) = f(t) + g(t), \; (\alpha f)(t) = \alpha f(t)
+	\end{equation}
+	for all $t \in [a, b]$
+\end{defn}
+
+\begin{thm}[Extreme Value Theorem]\label{thm:evt}
+	if $f \in C[a,b]$ then there exists $t_{\min}, t_{\max} \in [a, b]$ for which
+	\begin{equation}
+		f(t_{\min}) \leq f(t) \leq f(t_{\max}) \quad \text{for all} t \in [a, b]
+	\end{equation}
+\end{thm}
+
+Consequently from the \autoref{thm:evt}, if $f \in C[a, b], \; |f(\cdot)| \in C[a, b]$ and there is $t_{\max} \in [a, b]$ for which $|f(t)| \leq |f(t_{\max})|$ for $r \in [a, b]$. Define, for $f \in C[a,b]$, $||f||_\infty = \max_{t \in [a,b]} |f(t)|$.
+
+Just like for $(\ell_\infty, ||\cdot||_\infty)$, we have that $(C[a,b], ||\cdot||_\infty)$ is a normed vector space.
+
+We note that $||\cdot||_\infty$ is not the only norm on $C[a,b]$. Let $1 \leq p < \infty$ and let, for $f \in C[a, b]$
+\begin{equation}
+	||f||_p = \left( \int_{a}^{b} |f(t)|^p dt \right)^{\frac{1}{p}} \quad (\text{good ol' Riemann integral})
+\end{equation}
+
+\begin{thm}[(\texorpdfstring{$C[a, b], ||\cdot||_p$}{}) as a normed vector space]
+	$(C[a,b], ||\cdot||_p), \; (1 \leq p < \infty)$ is a normed vector space.
+\end{thm}
+
+\begin{proof}
+	First, let us recall right endpoint Riemann sums: $f, g \in C[a,b]$, then
+	\begin{equation}
+		\int_{a}^{b} g(t) dt = \lim_{n \to \infty} \sum_{k=1}^{n} g \left(a + \frac{k}{n} (b - a) \right)\frac{b-a}{n}
+	\end{equation}
+	Hence if $f \in C[a,b]$, then
+	\begin{align*}
+		||f||_p &= \left( \lim_{n \to \infty} \sum_{k=1}^{n} |f(b_k)|^p \frac{b-a}{n}  \right) \quad \text{where } b_k = a + \frac{k}{n} (b - a) \\
+			&= \lim_{n \to \infty} \left(\sum_{k=1}^{n} |f(b_k)|^p \right)^{\frac{1}{p}} \left( \frac{b-a}{n} \right)^{\frac{1}{p}}
+	\end{align*}
+	Now, suppose, $f, g \in C[a,b]$
+	\begin{align*}
+		||f + g||_p &= \lim_{n \to \infty} \left( \sum_{k=1}^{n} |f(b_k) + g(b_k)|^p \right) \left(\frac{b-a}{n} \right)^{\frac{1}{p}} \\
+			&\leq \lim_{n \to \infty} \left[ \left(\sum_{k=1}^{n} |f(b_k)|^p \right)^{\frac{1}{p}} + \left(\sum_{k=1}^{n} |g(b_k)|^p \right)^{\frac{1}{p}} \right] \left( \frac{b-s}{n} \right)^{\frac{1}{p}} \quad \autoref{thm:minkowski} \\
+			&= \lim_{n \to \infty} \left(\sum_{k=1}^{n} |f(b_k)|^p \right)^{\frac{1}{p}} \left( \frac{b-a}{n} \right)^{\frac{1}{p}} + \lim_{n \to \infty} \left(\sum_{k=1}^{n} |g(b_k)|^p \right)^{\frac{1}{p}} \left( \frac{b-a}{n} \right)^{\frac{1}{p}} \\
+			&= ||f||_p + ||g||_p
+	\end{align*}
+	hence we have subadditivity of $||\cdot||_p$. It is routine to verify that for $\alpha \in \bb{R}, \; f \in C[a,b]$ we have
+	\begin{equation}
+		||\alpha f|_p = |\alpha|||f||_p
+	\end{equation}
+	and $||f||_p \geq 0$ as $|f(\cdot)|^p \geq 0$ and finally
+	\begin{equation}
+		||f||_p = 0 \iff \int_{a}^{b} |f(t)|^p dx = 0 \overset{(1)}{\iff} |f(t)|^p = 0 \text{ for all } t \in [a,b] \iff f = 0
+	\end{equation}
+	((1) as $|f(t)|^p \geq 0$ for all t).
+\end{proof}
+
+\begin{note}[Summary thus far about Normed Vector Spaces]
+	\begin{gather*}
+		(\bb{R}, |\cdot|) \\
+		(\bb{R}^\bb{N}, ||\cot||_p), \; 1 \leq p < \infty \\
+		(\ell_p, ||\cdot||_p), \; 1 \leq p < \infty \\
+		(c_0, ||\cdot||_\infty) \\
+		(C[a,b], ||\cdot||_p), \; 1 \leq p < \infty
+	\end{gather*}
+\end{note}
+
+\section{Topology of metric spaces}\label{sect:topology of metric spaces}
+
+\begin{defn}[Open and Closed Balls (It's Balls AGAIN!!)]
+	Let $(X, d)$ be a metric space, $x_0 \in X$, and $\epsilon > 0$. We define
+	\begin{itemize}
+		\item (open ball) $B(x_0, \epsilon) = \{ x \in X : d(x_0, x) < \epsilon \}$ \\
+		\item (closed ball) $B[x, \epsilon] = \{ x \in X : d(x_0, x) \leq \epsilon \}$
+	\end{itemize}
+\end{defn}
+
+\begin{eg}
+	In $\bb{R}$ we have for $a < b$
+	\begin{gather*}
+		(a, b) = B \left( \frac{1}{2} (a + b), \frac{1}{2} (b - a) \right) \\
+		[a, b] = B \left[ \frac{1}{2} (a + b), \frac{1}{2} (b - a) \right]
+	\end{gather*}
+\end{eg}
+
+\begin{defn}[Open and Closed Sets]
+	Let ${X, d}$ be a metric space.
+	\begin{itemize}
+		\item A set $U \subseteq X$ is open if
+			\begin{gather}
+				\forall x \in U \; \exists \epsilon_x > 0 \; B(x, \epsilon_x) \subseteq U
+			\end{gather}
+
+		\item A set $F \subseteq X$ is closed if $X \setminus F$ is open.
+	\end{itemize}
+\end{defn}
+
+\begin{propo}[Open/Closed Balls are Open/Closed Sets]
+	Let $(X, d), x_0, \epsilon$ as above.
+	\begin{enumerate}
+		\item $B(x_0, \epsilon)$ is open.
+		\item $B[x_0, \epsilon]$ is closed.
+	\end{enumerate}
+\end{propo}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Let $x \in B(x_0, \epsilon)$. Let $\epsilon_x = \epsilon - d(x_0, x) > 0$. Then for $y \in B(x, \epsilon_x)$ and we have
+			\begin{align*}
+				d(x_0, y) \leq d(x_0, x) + d(y, x) &< d(x_0, x) + \epsilon_x \\
+						&= d(x_0, x) + \epsilon - d(x_0, x) = \epsilon
+			\end{align*}
+			So $y \in B(x_0, \epsilon)$, i.e. $B(x, \epsilon_x) \subseteq B(x_0, \epsilon)$.
+
+		\item Let $x \in X \setminus B[x_0, \epsilon]$, and let $\epsilon_x = d(x, x_0) - \epsilon > 0$. Now if $y \in B(x, \epsilon_x)$ then
+			\begin{align*}
+				d(x, x_0) &\leq d(x,y) + d(y, x_0) \\
+					&< \epsilon_x + d(y, x_0) \\
+					&= d(x, x_0) - \epsilon + d(y, x_0)
+			\end{align*}
+			$\implies \epsilon < d(y, x_0)$, i.e. $y \notin B[x_0, \epsilon]$, i.e. $y \in X \setminus b[x_0, \epsilon]$, so $B(x, \epsilon_x) \subseteq X \setminus B[x_0, \epsilon]$.
+	\end{enumerate}
+\end{proof}
+
+\begin{remark}
+	We may let
+	\begin{equation}
+		B[x_0, 0] = \{x \in X : d(x_0, x) \leq 0 \} = \{x_0\}
+	\end{equation}
+	As above, singleton sets $\{x_0\}$ are closed.
+\end{remark}
 
 \end{document}
 % Document End

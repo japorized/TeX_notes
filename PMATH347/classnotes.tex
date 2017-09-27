@@ -39,6 +39,11 @@
 \newtheorem{eg}{Example}[section]
 \newtheorem{ex}{Exercise}[section]
 
+\providecommand*{\axiomautorefname}{Axiom}
+\providecommand*{\lemmaautorefname}{Lemma}
+\providecommand*{\thmautorefname}{Theorem}
+\providecommand*{\propoautorefname}{Proposition}
+
 % ntheorem listtheorem style
 \makeatletter
 \def\thm@@thmline@name#1#2#3#4{%
@@ -1446,7 +1451,7 @@ Location: TBA
     Therefore $G/H$ is a group under set multiplication.
 
     \begin{align*}
-        \pi(ab) &= abH = aHbH \autoref{lemma:14} \\
+        \pi(ab) &= abH = aHbH \quad \autoref{lemma:14} \\
             &= \pi(a) \pi(b)
     \end{align*}
 
