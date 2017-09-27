@@ -5,6 +5,13 @@ Most of the content are compiled from my (scavenged) lecture notes and recommend
 If you wish to get a copy of these documents, please take them with utmost discreet.
 
 ---
+### Typos?
+
+Please feel free to either contact me or send a pull request for rectifying typos.
+
+For users familiar with git, you do not have to clone the entire repo just to make that correction, since you may use the editor on GitHub to make amends.
+
+---
 ### LaTeX Template
 
 The LaTeX Template of my notes is saved as tex\_default.sh.
