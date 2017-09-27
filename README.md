@@ -16,7 +16,7 @@ For users familiar with git, you do not have to clone the entire repo just to ma
 
 The LaTeX Template of my notes is saved as tex\_default.sh.
 
-For VIm users, if you wish to have this as the default TeX template for all of your TeX files, copy the .sh file into your `.vim/templates` folder, and add the following to your vimrc
+For VIm users, if you wish to have this as the default TeX template for all of your TeX files, make sure that your VIm has autocmd. You can check so by executing `:echo has("autocmd")` while being in a VIm session. If the command returns 1, you're good to go. Copy the .sh file into your `.vim/templates` folder, and add the following to your vimrc
 
 ```
 if has("autocmd")
