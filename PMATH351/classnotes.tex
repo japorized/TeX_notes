@@ -1,9 +1,10 @@
-% Document Head
+%  Document Head
 \documentclass[11pt, oneside]{book}
 \usepackage{geometry}
 \geometry{letterpaper}
 \usepackage[parfill]{parskip}
 \usepackage{graphicx}
+\graphicspath{ {images/} }
 
 % Essential Packages
 \usepackage{ragged2e}
@@ -1573,6 +1574,215 @@ We note that $||\cdot||_\infty$ is not the only norm on $C[a,b]$. Let $1 \leq p 
 	\end{equation}
 	As above, singleton sets $\{x_0\}$ are closed.
 \end{remark}
+
+\chapter{Lecture 10: Sep 27, 2017}\label{chp:lec10}
+
+\section{Continuing with Balls}\label{sect:balls cont}
+
+\begin{note}[Recall]
+	$(X, d)$ be a metric space, $x_0 \in X, \; \epsilon > 0$
+	\begin{gather*}
+		B(x_0, \epsilon) = \{x \in X : d(x_0, x) < \epsilon \} \\
+		B[x_0, \epsilon] = \{x \in X : d(x_0, x) \leq \epsilon \}
+	\end{gather*}
+\end{note}
+
+\begin{eg}
+	\begin{enumerate}
+		\item $X \neq \emptyset, \; |X| \geq 2$, the discrete metric
+			\begin{equation*}
+				d(x,y) = 
+					\begin{cases}
+						0 & x = y \\
+						1 & x \neq y
+					\end{cases}
+			\end{equation*}
+			We have for $x_0 \in X$,
+			\begin{align*}
+				B(x_0 \epsilon) &= 
+					\begin{cases}
+						\{x_0\} & 0 < \epsilon \leq 1 \\
+						X & \epsilon > 1
+					\end{cases} \\
+				B[x_0, \epsilon] &=
+					\begin{cases}
+						\{x_0\} & 0 < \epsilon < 1 \\
+						X & \epsilon \geq 1
+					\end{cases}
+			\end{align*}
+
+		\item (Geometry of balls in $\bb{R}^2$)
+
+			\begin{gather*}
+				1 \leq p < \infty, \; B_p(0, 1) = \{x \in \bb{R}^2, d_p(0, x) = ||x||_p < 1 \}
+			\end{gather*}
+
+			Pictures
+
+			$B_1(0, 1) : x_1 + x_2 = 1$ is a diamond-shaped ``ball''
+
+			$B_2(0, 1)$ is a round ``ball''
+
+			$B_\infty(0, 1)$ is a squared ``ball''
+
+			$B_p (0, 1) \; 1 < p < 2$ the ``ball'' is inscribed inside the circle
+
+			$B_p(0, 1) \; 2 < p < \infty$ : circle is inscribed within (a square with rounded corners)
+
+			\begin{center}
+				\includegraphics{images/geometryOfBalls.jpg}	
+			\end{center}
+	\end{enumerate}
+\end{eg}
+
+\begin{propo}
+	Let $(X, d)$ be a metric space.
+	\begin{enumerate}
+		\item $X, \emptyset$ are both open and closed.
+		\item If $\{U\}_{i \in I}$ is a family of open sets, then
+			\begin{equation}
+				\bigcup_{i \in I} U_i \quad \text{is open}
+			\end{equation}
+		\item If $\{U_1, ..., U_n\}$ is a finite family of open sets, then
+			\begin{equation}
+				\bigcap_{i = 1}^{n} U_i \quad \text{is open}
+			\end{equation}
+		\item If $\{F_i\}_{i \in I}$ is a family of closed sets, then
+			\begin{equation}
+				\bigcap_{i \in I} F_i \quad \text{is closed}
+			\end{equation}
+		\item Of $\{F_1, ..., F_n\}$ is a finite family of closed sets, then
+			\begin{equation}
+				\bigcup_{i = 1}^{n} F_i \quad \text{is closed}
+			\end{equation}
+			[Recall that singleton sets are closed, hence (5) implies that finite sets are closed]
+	\end{enumerate}
+\end{propo}
+
+\begin{proof}
+	\begin{enumerate}
+		\item Let $x \in X$. Then $x \in B(x, 1) \subseteq X$, so $X$ is open. The test for openness of $\emptyset$ is vacuously true (i.e. there are no points to speak of: there are no $x \in \emptyset$ at all, hence for any such $x$, we have $x$ is ``contained'' in a ball in $\emptyset$).
+
+			We have $\emptyset = X \setminus X, \; X = X \setminus \emptyset$ are closed.
+
+		\item Let $x \in U = \bigcup_{i \in I} U_i$. Then there is some $i_0 \in I$ so $x \in U_{i_0}$, which is open, so there is an $\epsilon_x > 0$ such that
+			\begin{equation}
+				x \in B(x, \epsilon_x) \subseteq U_{i_0} \subseteq U
+			\end{equation}
+
+		\item Let $x \in V = \bigcap_{i = 1}^{n} U_i$. Then for each $i = 1, ..., n$, there is $\epsilon_i > 0$ so $B(x, \epsilon_i) \subseteq U_i$. Let $\epsilon = \min\{\epsilon_1, ..., \epsilon_n\} > 0$ and $B(x, \epsilon) \subseteq \bigcap_{i = 1}^{n} B(x, \epsilon_i) \subseteq V$
+	\end{enumerate}
+
+	For (4) and (5), use De Morgan's Laws and (2) \& (3) from above.
+\end{proof}
+
+\begin{defn}[Boundary]
+	Given a metric space $(X, d)$, $A \subseteq X$, we define the boundary of A as
+	\begin{equation}
+		\partial A = \{x \in X : \forall \epsilon > 0 \; B(x, \epsilon) \cap A \neq \emptyset, \; \underbrace{B(x, \epsilon) \setminus A}_{B(x, \epsilon) \cap (X \setminus A)} \neq \emptyset \}
+	\end{equation}
+\end{defn}
+
+\begin{remark}
+	$\partial A = \partial(X \setminus A)$
+\end{remark}
+
+\begin{defn}[Interior]
+	We let the interior of A
+	\begin{equation}
+		A^{\circ} = \bigcup \{U \subseteq X : U \subseteq A \land U \text{ is open} \}
+	\end{equation}
+\end{defn}
+
+\begin{propo}[Characterizations of the Interior]
+	If $(X, d)$, A are as above, then
+	\begin{align}
+		A^{\circ} &= \{x \in X : \exists \epsilon_x > 0 \; B(x, \epsilon_x) \subseteq A \} \\
+			&= A \setminus \partial A \label{eq:A without its boundary}
+	\end{align}
+\end{propo}
+
+\begin{proof}
+	Let $x \in A$. Then we have either
+	\begin{itemize}
+		\item for some $\epsilon_x > 0, \; x \in \underbrace{B(x, \epsilon_x)}_{\text{open}} \subseteq A \implies x \in A^{\circ}$; or
+
+		\item $\forall \epsilon > 0, \; B(x. \epsilon) \setminus A \neq \emptyset \implies \text{since } x \in A \cap B(x, \epsilon)$, we have $x \in \partial A$. Since $A^{\circ} \subseteq A$, we see that the the two equalities in \autoref{eq:A without its boundary} coincide.
+	\end{itemize}
+\end{proof}
+
+\begin{defn}[]
+	Let $(X, d)$ be a metric space, $(x_n)_{n = 1}^\infty \subseteq X$ and $x_0 \in X$. Then we say that $(x_n)_{n = 1}^\infty$ converges to the limit $x_0$, written
+	\begin{equation}
+		x_0 = \lim_{n \to \infty} x_n
+	\end{equation}
+	or
+	\begin{equation}
+		x_n \underset{n \to \infty}{\to} x_0
+	\end{equation}
+	if
+	\begin{gather*}
+		\forall \epsilon > 0 \; \exists n_\epsilon \in \bb{N} \\
+		n \geq n_\epsilon \implies d(x_0, x_n) < \epsilon
+	\end{gather*}
+\end{defn}
+
+\begin{remark}
+	The limit, if it exists, is unique. Indeed, since
+	\begin{gather*}
+		x_0 = \lim_{n \to \infty} x_n \land y_0 = \lim_{n \to \infty} x_n
+	\end{gather*}
+	then
+	\begin{gather*}
+		\forall \epsilon > 0 \; \exists n_\epsilon, n_\epsilon' \in \bb{N} \\
+		n \geq n_\epsilon \implies d(x_0, x_n) < \frac{\epsilon}{2} \\
+		n \geq n_\epsilon' \implies d(y_0, x_n) < \frac{\epsilon}{2} 
+	\end{gather*}
+	But then if $n \geq \max\{n_\epsilon, n_\epsilon'\}$ we have
+	\begin{equation*}
+		d(x_0, y_0) \leq d(x_0, x_n) + d(x_n, y_0) < \epsilon
+	\end{equation*}
+	If this holds for all $\epsilon > 0, \; d(x_0, y_0) = 0$ so $x_0 = y_0$.
+\end{remark}
+
+\begin{eg}
+	Let $(V, ||\cdot||)$ be a normed vector space. A subset $\{e_n\}_{n = 1}^\infty \subseteq V$ is a \textbf{Schauder basis} provided that
+	\begin{gather*}
+		\forall x \in V \; \exists! \{x_n\}_{n = 1}^\infty \\
+		x = \lim_{n \to \infty} \sum_{k=1}^{n} x_k e_k \quad \in V
+	\end{gather*}
+
+	Example: In $\ell_p \; (1 \leq p < \infty)$, let $e_n = (0, ..., 0, \underset{\text{n-th place}}{1}, 0, ..)$
+\end{eg}
+
+\begin{defn}[Accumulation points]
+	We let $(X, d)$ is a metric space, $A \subseteq X$ as above, the set of accumulation points (or cluster points) be given
+	\begin{equation}
+		A' = \{x \in X : \forall \epsilon > 0 \; \left( B(x, \epsilon) \setminus \{x\} \right) \cap A \neq \emptyset \}
+	\end{equation}
+	(aka a punctured ball).
+
+	Furthermore, we call elements of $A \setminus A'$ as isolated points.
+\end{defn}
+
+\begin{propo}
+	Given $(X, d)$ as a metric space, $A \subseteq X$ as above, the set of all accumulation points
+	\begin{equation*}
+		A' = \{x \in X : x = \lim_{n \to \infty} x_n, \text{ where } (x_n)_{n = 1}^\infty \subseteq A \setminus \{x\} \}
+	\end{equation*}
+\end{propo}
+
+\begin{proof}
+	If $x \in A'$, let $x_1 \in \left( B(x, 1)\setminus\{x\} \right) \cap A$, and inductively let
+	\begin{gather*}
+		x_{n + 1} \in \left( B (x, \epsilon_n) \setminus \{x\} \right) \cap A
+	\end{gather*}
+	where $\epsilon+m = \min\{\frac{1}{n}, d(x, x_n)$.
+
+	Then we have (exercise) that $x = \lim_{n \to \infty}$, while $(x_n)_{n = 1}^\infty \subseteq A \setminus \{x\}$. [Notice the points $x_1, x_2, ..., x_n$ are distinct]
+
+	The converse inclusion just uses the definition of limits. \qed
+\end{proof}
 
 \end{document}
 % Document End
