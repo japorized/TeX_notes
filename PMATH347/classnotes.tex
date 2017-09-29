@@ -419,7 +419,9 @@ The fifth proposition allows us to drop the parenthesis without ambiguity.
         \phi(ab) = \phi(a)\phi(b)
     \end{equation*}
     (aka a morphism of groups)
+\end{defn}
 
+\begin{defn}[Isomorphism]
     A homomorphism $\phi: G \to H$ is called an isomorphism if it is bijective.
 
     We say that $G \simeq H$, and say that G is isomorphic to H, if there exists an isomorphism $\phi: G \to H$.
@@ -595,7 +597,7 @@ The fifth proposition allows us to drop the parenthesis without ambiguity.
 \end{eg}
 
 \begin{note}
-    $(\bb{R}, +) \simeq (\bb{R}^{> 0}. \times)$
+    $(\bb{R}, +) \simeq (\bb{R}^{> 0}, \times)$
 \end{note}
 
 \begin{propo}\label{propo_5}
@@ -1471,6 +1473,157 @@ Location: TBA
             &\iff a \in H \quad \autoref{propo:11}\text{(1)}
     \end{align*}
 \end{proof}
+
+\chapter{Lecture 10: Sep 29, 2017}\label{chp:lec10}
+
+\section{Continuing with Normal Subgroups}\label{sect:normal subgroups cont 2}
+
+\begin{note}
+    $H \triangleleft G$ then G/H is a group under the set %muH%.
+    and 
+    \begin{gather*}
+        \pi : G \to G/H \quad \text{surjective} \\
+        a \mapsto aH
+    \end{gather*}
+
+    group homomorphism $\ker(\pi) = H$. The function collapses each coset such that they become a single point, $G/H$.
+\end{note}
+
+\begin{eg}
+    \begin{enumerate}
+            \item
+                \begin{gather*}
+                    \langle 1 \rangle = \{ 1 \} \triangleleft G \\
+                    a1a^{-1} = 1 \quad \text{for any $a \in G$} \\
+                    \pi : G \to G/\langle a \rangle \quad \text{quotient map}
+                \end{gather*}
+                $\pi$ is an isomorphism:
+                \begin{align*}
+                    \pi(a) = \pi(b) &\iff a \langle a \rangle = b \langle 1 \rangle \\
+                        &\iff a = b
+                \end{align*}
+            \item $H = G \triangleleft G$ singce for any $a \in G$, $aGa^{-1} \subseteq G$
+                \begin{gather*}
+                    \pi : G \to G/G
+                \end{gather*}
+                where $G/G$ is the trivial group. For any $a, b \in G$, $b^{-1}a \in G \implies aG = bG$. In fact, $aG = G$.
+            \item If G is abelian, every subgroup H of G is normal, i.e. $H \triangleleft G$, since
+                \begin{gather*}
+                    \forall a \in H \; h \in H \; aha^{-1} = aa^{-1}h = h \in H \\
+                    \therefore aHa^{-1} \subseteq H
+                \end{gather*}
+                Example: $G = (\bb{Z}, +) \quad H = d\bb{Z} \quad d \geq 0$
+                \begin{gather*}
+                    \bb{Z}/d\bb{Z} \quad \substack{d = 0 \text{ in case (1)} \\ d = 1 \text{ in case (2)} \\ d > 1 \; \bb{Z}/d\bb{Z} \text{ group of congruence classes modulo d}} \\
+                    \bb{Z} / d\bb{Z} = \{[0]_d, ..., [d-1]_d \} \simeq \bb{Z}_d = \{0, 1, ..., d - 1 \}
+                \end{gather*}
+
+                \item $\phi : G \to H$ is a group homomorphism then $\ker(\phi) \triangleleft G$.
+
+                \begin{proof}
+                    Let $a \in G$ and $b \in \ker(\phi)$
+                    \begin{align*}
+                        \phi(aba^{-1}) &= \phi(a)\phi(b)\phi(a)^{-1} \\
+                            &= \phi(a)\phi(a)^{-1} \quad b \in \ker(\phi) \\
+                            &= 1_H \quad \therefore aba^{-1} \in \ker(\phi)
+                    \end{align*}
+                    Thus we observe that $a\ker(\phi)a^{-1} \subseteq \ker(\phi)$. Therefore, $\ker(\phi) \triangleleft G$.
+                \end{proof}
+    \end{enumerate}
+\end{eg}
+
+So normal subgroups of G are precisely the kernels of homomorphisms on G.
+
+\begin{eg}
+    \begin{enumerate}
+        \setcounter{enumi}{4}
+        \item $G = D_{10} = $ group of rigid transformations of a regular pentagon (n = 5, so 2n = 10). Note that it's not an abelian group. This is also called a dihedral group of order 10 (recall).
+
+            Note: $s \in D_{10}$ reflection. $\order(s) = 2$.
+
+            \begin{align*}
+                \langle s \rangle = \{1, s\} \leq D_{10} \not\triangleleft D_{10}
+            \end{align*}
+            Let $r = \frac{2 \pi}{5}$ clockwise rotation.
+            \begin{align*}
+                rsr^{-1} &= rrs \\
+                    &= r^2 s \neq 1 \\
+                    &\neq s
+            \end{align*}
+            since every element in $D_{10}$ can be uniquely expressed as $r^i s^k$ for $i = 0, 1, 2, 3, 4$ and $k = 0, 1$.
+
+            Note that
+            \begin{gather*}
+                1 = r^0 s^0 \\
+                s = r^0 s^1
+            \end{gather*}
+
+            So
+            \begin{align*}
+                r^2s &\neq 1
+                    &\neq s
+            \end{align*}
+            $\therefore \langle s \rangle \not\triangleleft D_{10}$
+
+            On the other hand
+            \begin{align*}
+                \langle r \rangle &= \{1, r, r^2, r^3, r^4 \} \triangleleft D_{10}
+            \end{align*}
+            since $\order(r) = 5$.
+
+            \begin{proof}
+                Let $a \in D_{10} \; a = r^i s^k$ where $i = 0, 1, ..., 4$ and $k = 0, 1$. Let $l = 0, ..., 4$.
+                \begin{align*}
+                    a r^l a^{-1} &= r^i s^k r^l s^{-k} r^{-i} \\
+                    (\text{if } h = 0) \quad ar^l &= r^i r^l r^{-i} \\
+                            &= r^{i - l - i} = r^l \in \langle r \rangle \\
+                    (\text{if } k = 1) \quad ar^{-l}a^{-1} &= r^i sr^l s^{-1} r^{-i} \\
+                        &= r^i r^{-l} ss^{-1} r^{-i} \quad \text{by A1Q1(b)} \\
+                        &= r^ir^{-l}r^{-i} = r^{-l} \in \langle r \rangle
+                \end{align*}
+                Therefore,
+                \begin{gather*}
+                    ar^la^{-1} \in \langle r \rangle \quad \therefore \; a \langle r \rangle a^{-1} \leq \langle r \rangle \; \text{ any $a \in D_{10}$} \\
+                    \langle r \rangle \triangleleft D_{10}
+                \end{gather*}
+
+                \begin{gather*}
+                    \pi : D_{10} \to D_{10}/\langle r \rangle \quad \text{quotient map}
+                \end{gather*}
+                What is $D_{10}/\langle r \rangle$?
+
+                $|D_{10}| = 10, \; |\langle r \rangle| = 5$ by \autoref{thm:lagrange}
+
+                There are exactly two cosets:
+                \begin{gather*}
+                    \langle r \rangle = \{1, r, r^2, r^3, r^4 \} \\
+                    s \langle r \rangle = \{s, sr, sr^2, sr^3, sr^4 \}
+                \end{gather*}
+                It is clear that these two are disjoint.
+            \end{proof}
+
+            So $D_{10} / \langle r \rangle$ is a group of size (or order) 2. Up to isomorphism, there is only 1 group with two elements.
+
+            \begin{gather*}
+                G = \{1, a\} \; a \neq 1 \quad \text{Cayley Group} \\
+            \end{gather*}
+            \begin{tabular}{c | c | c}
+             G & 1 & a \\
+             \hline
+             1 & 1 & a \\
+             \hline
+             a & a & 1 (1)
+            \end{tabular}
+
+            (1) :
+            \begin{gather*}
+                a^2 - 1 \text{ or } a \\
+                a^2 = a \implies a = 1 \\
+                \text{so } a^2 = 1
+            \end{gather*}
+
+    \end{enumerate}
+\end{eg}
 
 \end{document}
 % Document End
