@@ -1167,9 +1167,23 @@ We are one property short of making $\preceq$ as an order relation.
 				d_f: \bb{R}^2 \to [0, \infty) \enspace d_f(x,y) = |f(x) - f(y)|
 			\end{equation}
 
-			Exercise: check for its properties.
-
 			E.g. $f(x) = \frac{x}{|x| + 1}$.
+
+			Exercise: check for its properties.
+			\begin{proof}
+				By definition of $d_f$, it is non-negative and symmetric.
+
+				If $x = y$, then $d_f(x, y) = |f(x) - f(y)| = |f(x) - f(x)| = 0$. Suppose $x \neq y$. Since $f$ is strictly increasing, without loss of generality, suppose $f(x) < f(y)$. Then $d_f(x, y) > 0$ since $f(y) - f(x) > 0$. Thus $d_f$ is non-degenerate.
+
+				Let $x, y, z \in \bb{R}^2$.
+				\begin{align*}
+					d_f(x, z) &= |f(x) - f(z)| \\
+						&= |f(x) - f(y) + f(y) - f(z)| \\
+						&\leq |f(x) - f(y)| + |f(y) - f(z)| \\
+						&= d_f(x, y) + d_f(y, z)
+				\end{align*}
+			\end{proof}
+			
 
 		\item (French railroad metric) Suppose we have a set $X \neq \emptyset$, and a function $f: X \to [0, \infty)$ which satisfies $f^{-1}(\{0\}) = \{p_0\}$. Notice that $f(x) > 0$ if $x \in X \setminus \{p_0\}$.
 			\begin{equation}
@@ -1181,26 +1195,43 @@ We are one property short of making $\preceq$ as an order relation.
 			\end{equation}
 
 			Easy exercise: This is a metric.
+			\begin{proof}
+				Non-negativity and non-degeneracy are embeded in the function, since $\forall x, y \in X$, since $f(x), f(y) \in [0, \infty)$, we have that $d_f(x, y) = f(x) + f(y) \geq 0$, and if $x = y$, $d_f(x,y) = 0$.
+
+				The function is also symmetric, since
+				\begin{gather*}
+					\forall x, y \in X \\
+					x \neq y \implies d_f(x, y) = f(x) + f(y) = f(y) + f(x) = d_f(y, x) \\
+					x = y \implies d_f(x,y) = 0 = d_f(y, x)
+				\end{gather*}
+
+				To prove the triangle inequality, let $x, y, z \in X$. If $x = y = z$, $d_f$ is trivially a metric. Without loss of generality, suppose $x = y \neq z$, then $d(x, z) = f(x) + f(z) \overset{(1)}{=} f(y) + f(z) = d(x,y) + d(y, z)$, where (1) is since $f(x) = f(y)$, and $d(x,y) = 0$. Suppose $x \neq y \neq z$, then
+				\begin{align*}
+					d_f(x, z) &= f(x) + f(z) \\
+						&\leq f(x) + f(y) + f(y) + f(z) \quad \text{since $f(y) \geq 0$} \\
+						&= d_f(x, y) + d_f(y, z)
+				\end{align*}
+			\end{proof}
 	\end{enumerate}
 \end{eg}
 
 \begin{defn}[Norm, Normed Vector Space]
-	Let V be a vector space over $\bb{R}$. A \textbf{norm} is a function $||\cdot|| : V \to \bb{R}$ which satisfies, for $x, y \in V, \; \alpha \in \bb{R}$
+	Let V be a vector space over $\bb{R}$. A \textbf{norm} is a function $\Vert \cdot \Vert : V \to \bb{R}$ which satisfies, for $x, y \in V, \; \alpha \in \bb{R}$
 	\begin{enumerate}
-		\item \textbf{(non-negativity)} $||x|| \geq 0$
-		\item \textbf{(non-degeneracy)} $||x|| = 0 \iff x = 0$
-		\item \textbf{($||\cdot||$-homogeneity)} $||\alpha x|| = |\alpha|||x||$
-		\item \textbf{(subadditivity)} $||x + y|| \leq ||x|| + ||y||$
+		\item \textbf{(non-negativity)} $\Vert x \Vert  \geq 0$
+		\item \textbf{(non-degeneracy)} $\Vert x \Vert  = 0 \iff x = 0$
+		\item \textbf{($\Vert \cdot\Vert $-homogeneity)} $\Vert \alpha x \Vert  = |\alpha| \, \Vert x \Vert $
+		\item \textbf{(subadditivity)} $\Vert x + y \Vert  \leq \Vert x \Vert  + \Vert y \Vert $
 	\end{enumerate}
 	We call the pair $(V, ||\cdot||)$ a \textbf{normed vector space}.
 \end{defn}
 
 \begin{note}
-	If $(V, ||\cdot||)$is a normed vector space, then
+	If $(V, \Vert \cdot\Vert )$is a normed vector space, then
 	\begin{equation}
-		d: V \times V \to [0, \infty) \enspace d(x,y) = ||x - y||
+		d: V \times V \to [0, \infty) \enspace d(x,y) = \Vert x - y \Vert
 	\end{equation}
-	is always a metric on V. Everything is easy to check; subadditivity of $||\cdot|| \implies$ triangle inequality of d.
+	is always a metric on V. Everything is easy to check; subadditivity of $\Vert \cdot\Vert  \implies$ triangle inequality of d.
 \end{note}
 
 \begin{eg}
@@ -1208,32 +1239,32 @@ We are one property short of making $\preceq$ as an order relation.
 		\item $(\bb{R}, |\cdot|)$ is a normed vector space.
 		\item On $\bb{R}^n$, for $x = (x_1, ..., x_n)$
 			\begin{equation}
-				||x||_2 = \sqrt{x_1^2 + \hdots + x_n^2}
+				\Vert x\Vert _2 = \sqrt{x_1^2 + \hdots + x_n^2}
 			\end{equation}
 			This is the Euclidean norm.
 
 			Consider, also
 			\begin{gather*}
-				||x||_1 = |x_1| + \hdots + |x_n| \\
-				||x||_\infty = \max\{|x_1|, ..., |x_n|\}
+				\Vert x\Vert _1 = |x_1| + \hdots + |x_n| \\
+				\Vert x\Vert _\infty = \max\{|x_1|, ..., |x_n|\}
 			\end{gather*}
 
 			\begin{note}
-				non-degeneracy and $|\cdot|$-homogeneity are obvious for $||\cdot||_1, \; ||\cdot||_\infty$
+				non-degeneracy and $|\cdot|$-homogeneity are obvious for $\Vert \cdot\Vert _1, \; \Vert \cdot\Vert _\infty$
 			\end{note}
 
 			Let us consider subadditivity
 			\begin{align*}
-				||x + y||_1 &= |x_1 + y_1| + \hdots + |x_n + y_n| \\
+				\Vert x + y\Vert _1 &= |x_1 + y_1| + \hdots + |x_n + y_n| \\
 										&\leq |x_1| + |y_1| + \hdots + |x_n| + |y_n| \\
 										&= |x_1| + \hdots + |x_n| + |y_1| + \hdots + |y_n| \\
-										&= ||x||_1 + ||y||_1 \\
+										&= \Vert x\Vert _1 + \Vert y\Vert _1 \\
 										\\
-				||x + y||_\infty &= \max\{|x_i + y_i| : i = 1, ..., n\} \\
+				\Vert x + y\Vert _\infty &= \max\{|x_i + y_i| : i = 1, ..., n\} \\
 												&= \max\{|x_i| + |y_i| : i = 1, ..., n\} \\
 												&= \max\{|x_i| + |y_j| : i, j = 1, ..., n\} \\
 												&= \max\{|x_i| : i = 1, ..., n\} + \max\{|y_j| : j = 1, ..., n\}\\
-												&= ||x||_\infty + ||y||_\infty
+												&= \Vert x\Vert _\infty + \Vert y\Vert _\infty
 			\end{align*}
 			Now for $1 < p < \infty$ consider
 			\begin{equation}
@@ -1244,14 +1275,14 @@ We are one property short of making $\preceq$ as an order relation.
 					\end{cases}
 			\end{equation}
 			\begin{align*}
-				||x||_p = (|x_1|^p + \hdots + |x_n|^p)^{\frac{1}{p}}
+				\Vert x\Vert _p = (|x_1|^p + \hdots + |x_n|^p)^{\frac{1}{p}}
 			\end{align*}
 
 	\end{enumerate}
 \end{eg}
 
 \begin{remark}[Cauchy-Bunyakovsky-Schwartz]
-	$|x \cdot y| \leq ||x||_2 ||y||_2$
+	$|x \cdot y| \leq \Vert x\Vert _2 \Vert y\Vert _2$
 \end{remark}
 
 \begin{lemma}[$\alpha\beta \leq \frac{\alpha^p}{p} + \frac{\beta^q}{q}$]\label{lemma:alphabeta}
@@ -1274,7 +1305,7 @@ We are one property short of making $\preceq$ as an order relation.
 \begin{thm}[Holder's Inequality]\label{thm:holder}
 	Let $x, y \in \bb{R}^n, \; 1 < p < \infty$ and $q$ be so $\frac{1}{p} + \frac{1}{q} = 1$, then
 	\begin{equation}
-		\left| \sum_{j=1}^{n} x_j y_j \right| \leq \sum_{j=1}^{n} |x_j| |y_j| \leq \left( \sum_{j=1}^{n} |x_j|^p \right)^\frac{1}{p} \left(\sum_{j=1}^{n} |y_j|^q \right)^\frac{1}{q} = ||x||_p ||y||_q
+		\left| \sum_{j=1}^{n} x_j y_j \right| \leq \sum_{j=1}^{n} |x_j| |y_j| \leq \left( \sum_{j=1}^{n} |x_j|^p \right)^\frac{1}{p} \left(\sum_{j=1}^{n} |y_j|^q \right)^\frac{1}{q} = \Vert x\Vert _p \Vert y\Vert _q
 	\end{equation}
 \end{thm}
 
@@ -1286,64 +1317,64 @@ Expect assignment 2 to be up tonight!
 \section{Continuing Normed Vector Space}\label{sect:normed_cont}
 
 \begin{proof}[Holder's Inequality]
-	$||x||_p ||y||_q = 0 \implies (x = 0 \lor y = 0) \land $ the inequality is trivial. Let us assume $||x||_p ||y||_q \neq 0$. For $j = 1, ..., n$
+	$\Vert x\Vert _p \Vert y\Vert _q = 0 \implies (x = 0 \lor y = 0) \land $ the inequality is trivial. Let us assume $\Vert x\Vert _p \Vert y\Vert _q \neq 0$. For $j = 1, ..., n$
 	\begin{gather*}
-		\alpha_j = \frac{|x_j|}{||x||_p}, \quad \beta_j = \frac{|y_j|}{||y||_q}
+		\alpha_j = \frac{|x_j|}{\Vert x\Vert _p}, \quad \beta_j = \frac{|y_j|}{\Vert y\Vert _q}
 	\end{gather*}
 	Then
-	\begin{gather*}
-		\frac{1}{||x||_p ||y||_q} \sum_{j=1}^{n} |x_j||y_j| = \sum_{j=1}^{n} \alpha_j \beta_j \overset{(1)}{\leq} \sum_{j=1}^{n} \left( \frac{\alpha_j^p}{p} + \frac{\beta_j^q}{q} \right) \\
-		= \frac{1}{p} \sum_{j=1}^{n} \alpha_j^p + \frac{1}{q} \sum_{j=1}^{n} \beta_j^q \\
-		= \frac{1}{p||x||_p^p} \sum_{j=1}^{n} |x_j|^p + \frac{1}{q ||y||_q^q} \sum_{j=1}^{n} |y_j|^q \\
-		= \frac{1}{p ||x||_p^p} ||x||_p^p + \frac{1}{q ||y||_q^q} ||y||_q^q = \frac{1}{p} + \frac{1}{q} \overset{(2)}{=} 1
-	\end{gather*}
+	\begin{align*}
+		\frac{1}{\Vert x\Vert _p \Vert y\Vert _q} \sum_{j=1}^{n} |x_j||y_j| &= \sum_{j=1}^{n} \alpha_j \beta_j \overset{(1)}{\leq} \sum_{j=1}^{n} \left( \frac{\alpha_j^p}{p} + \frac{\beta_j^q}{q} \right) \\
+		&= \frac{1}{p} \sum_{j=1}^{n} \alpha_j^p + \frac{1}{q} \sum_{j=1}^{n} \beta_j^q \\
+		&= \frac{1}{p\Vert x\Vert _p^p} \sum_{j=1}^{n} |x_j|^p + \frac{1}{q \Vert y\Vert _q^q} \sum_{j=1}^{n} |y_j|^q \\
+		&= \frac{1}{p \Vert x\Vert _p^p} \Vert x\Vert _p^p + \frac{1}{q \Vert y\Vert _q^q} \Vert y\Vert _q^q = \frac{1}{p} + \frac{1}{q} \overset{(2)}{=} 1
+	\end{align*}
 	where (1) is by \autoref{lemma:alphabeta} and (2) is by choice of q.
 
-	Hence, we multiply by $||x||_p ||y||_q$ and see that
+	Hence, we multiply by $\Vert x\Vert _p \Vert y\Vert _q$ and see that
 	\begin{equation}
-		\sum_{j=1}^{n} |x_j||y_j| \leq ||x||_p ||y||_q
+		\sum_{j=1}^{n} |x_j||y_j| \leq \Vert x\Vert _p \Vert y\Vert _q
 	\end{equation}\qed
 \end{proof}
 
 \begin{thm}[Minkowski's Inequality]\label{thm:minkowski}
 	Let $x, y \in \bb{R}^n$ and $1 < p < \infty$. Then
 	\begin{equation}
-		||x + y|| \leq ||x||_p + ||y||_p
+		\Vert x + y\Vert  \leq \Vert x\Vert _p + \Vert y\Vert _p
 	\end{equation}
 \end{thm}
 
 \begin{proof}
 	If $x  + y = 0$, this is trivial, hence suppose $x + y \neq 0$. Compute
 	\begin{align*}
-		||x + y||_p^p = \sum_{j=1}^{n} |x_j + y_j|^p &= \sum_{j=1}^{n} |x_j + y_j||x_j + y_j|^{p - 1} \\
+		\Vert x + y\Vert _p^p = \sum_{j=1}^{n} |x_j + y_j|^p &= \sum_{j=1}^{n} |x_j + y_j||x_j + y_j|^{p - 1} \\
 					&= \sum_{j=1}^{n} \left( |x_j| + |y_j| \right) |x_j + y_j|^{p - 1} \\
 					&= \sum_{j=1}^{n} |x_j||x_j + y_j|^{p-1} + \sum_{j=1}^{n} |y_j||x_j + y_J|^{p-1} \\
 					\begin{split}
 						&\leq \left( \sum_{j=1}^{n} |x_j|^p \right)^{\frac{1}{p}} \left( \sum_{j=1}^{n} |x_j + y_j|^{(p-1)q} \right)^{\frac{1}{q} } \\
 						 &\qquad + \left( \sum_{j=1}^{n} |y_j|^p \right)^{\frac{1}{p}} \left( \sum_{j=1}^{n} |x_j + y_j|^{(p-1)q} \right)^{\frac{1}{q}}
 					\end{split} \\
-					&= (||x||_p + ||y||_p) \left( \sum_{j=1}^{n} |x_j + y_j|^{(p-1)q} \right)^{\frac{1}{q}}
+					&= (\Vert x\Vert _p + \Vert y\Vert _p) \left( \sum_{j=1}^{n} |x_j + y_j|^{(p-1)q} \right)^{\frac{1}{q}}
 	\end{align*}
 	We have $\frac{1}{p} + \frac{1}{q} = 1 \implies \frac{1}{q} = 1 - \frac{1}{p} = \frac{p-1}{p} \implies p = q(p - 1)$, and thus
 	\begin{align*}
-		||x + y||_p^p &\leq (||x||_p + ||y||_p) \left(\sum_{j=1}^{n} |x_j + y_j|^p \right)^{\frac{1}{q} } \\
-					&= (||x||_p + ||y||_p) ||x + y||_p^\frac{p}{q} 
+		\Vert x + y\Vert _p^p &\leq (\Vert x\Vert _p + \Vert y\Vert _p) \left(\sum_{j=1}^{n} |x_j + y_j|^p \right)^{\frac{1}{q} } \\
+					&= (\Vert x\Vert _p + \Vert y\Vert _p) \Vert x + y\Vert _p^\frac{p}{q} 
 	\end{align*}
-	Now divide $||x + y||_p^\frac{p}{q}  \neq 0$, we get
+	Now divide $\Vert x + y\Vert _p^\frac{p}{q}  \neq 0$, we get
 	\begin{equation}
-		||x + y||_p = ||x + y||_p^{p - \frac{p}{q}} \leq ||x||_p + ||y||_p \quad (\text{since } p - \frac{p}{q} = p(1 - \frac{1}{q}) = \frac{p}{p} = 1)
+		\Vert x + y\Vert _p = \Vert x + y\Vert _p^{p - \frac{p}{q}} \leq \Vert x\Vert _p + \Vert y\Vert _p \quad (\text{since } p - \frac{p}{q} = p(1 - \frac{1}{q}) = \frac{p}{p} = 1)
 	\end{equation}
 \end{proof}
 
-\begin{crly}[$||\cdot||_p$ is a norm]
-	Given $1 < p < \infty, ||\cdot||_p$ is a norm on $\bb{R}^n$.
+\begin{crly}[$\Vert \cdot\Vert _p$ is a norm]
+	Given $1 < p < \infty, \Vert \cdot\Vert _p$ is a norm on $\bb{R}^n$.
 \end{crly}
 
 \begin{proof}
-	Clearly, $||\cdot||_p$ is non-negative and non-degenerate. If $\alpha \in \bb{R}, x \in \bb{R}^n$ then
+	Clearly, $\Vert \cdot\Vert _p$ is non-negative and non-degenerate. If $\alpha \in \bb{R}, x \in \bb{R}^n$ then
 	\begin{align*}
-		||\alpha x||_p = \left( \sum_{j=1}^{n} |\alpha x_j|_p^p \right)^{\frac{1}{p}} &= \left( \sum_{j=1}^{n} |\alpha|^p|x_j|^p \right)^{\frac{1}{p}} \\
-						&= |\alpha| \left( \sum_{j=1}^{n} |x_)j|^p \right)^{\frac{1}{p}} = |\alpha|||x||_p
+		\Vert \alpha x\Vert _p = \left( \sum_{j=1}^{n} |\alpha x_j|_p^p \right)^{\frac{1}{p}} &= \left( \sum_{j=1}^{n} |\alpha|^p|x_j|^p \right)^{\frac{1}{p}} \\
+						&= |\alpha| \left( \sum_{j=1}^{n} |x_)j|^p \right)^{\frac{1}{p}} = |\alpha|\Vert x \Vert_p
 	\end{align*}
 	Finally, subadditivity is provided by \autoref{thm:minkowski}.
 \end{proof}
@@ -1366,7 +1397,7 @@ We let, for $1 \leq p < \infty$,
 		On $\ell_p$ we define
 
 		\begin{equation}
-			||x||_p =
+			\Vert x\Vert _p =
 			\begin{cases}
 				\left( \sum_{k=1}^{\infty} |x_k|^p \right)^{\frac{1}{p}}	&	1 \leq p < \infty \\
 				\sup_{k \in \bb{N}} |x_k|		&		p = \infty
@@ -1375,34 +1406,34 @@ We let, for $1 \leq p < \infty$,
 \end{itemize}
 
 \begin{thm}[$\ell_p$ is a $\bb{R}$-subspace]
-	Let $1 \leq p < \infty$. Then $\ell_p$ is a $\bb{R}$-subspace of $\bb{R}^\bb{N}$ and $||\cdot||_p$ is a norm.
+	Let $1 \leq p < \infty$. Then $\ell_p$ is a $\bb{R}$-subspace of $\bb{R}^\bb{N}$ and $\Vert \cdot\Vert _p$ is a norm.
 \end{thm}
 
 \begin{proof}
 	We shall prove these statements together. Suppose that $x, y \in \ell_p$. Then
 	\begin{align*}
-		||x + y||_p &= \left( \sum_{k=1}^{\infty} |x_k + y_k|^p \right)^{\frac{1}{p}} \quad \text{(may be $\infty, \infty^{\frac{1}{p}} = \infty$)} \\
+		\Vert x + y\Vert _p &= \left( \sum_{k=1}^{\infty} |x_k + y_k|^p \right)^{\frac{1}{p}} \quad \text{(may be $\infty, \infty^{\frac{1}{p}} = \infty$)} \\
 				&= \left( \lim_{n \to \infty} \sum_{k=1}^{n} |x_k + y_k|^p \right)^{\frac{1}{p}} \\
 				&= \lim_{n \to \infty} \left( \sum_{k=1}^{n} |x_k + y_k|^p \right)^{\frac{1}{p}} \quad \left(\substack{x \mapsto x^{\frac{1}{p}} \text{ is cts on } [0, \infty) \\ x \to \infty \implies x^{\frac{1}{p}} \to \infty} \right) \\
 				&\leq \lim_{n \to \infty} \left[ \left( \sum_{k=1}^{n} |x_k|^p \right)^{\frac{1}{p}} + \left( \sum_{k=1}^{n} |y_k|^p \right)^{\frac{1}{p}} \right] \quad \text{by \autoref{thm:minkowski} on each n} \\
 				&= \left( \lim_{n \to \infty} \sum_{k=1}^{n} |x_k|^p \right)^{\frac{1}{p}} + \left( \lim_{n \to \infty} \sum_{k=1}^{n} |y_k|^p \right)^{\frac{1}{p}} \quad \text{cty again} \\
-				&= \left( \sum_{k=1}^{\infty} |x_k|^p \right)^{\frac{1}{p}} + \left( \sum_{k=1}^{\infty} |y_k|^p \right)^{\frac{1}{p}} = ||x||_p + ||y||_p < \infty
+				&= \left( \sum_{k=1}^{\infty} |x_k|^p \right)^{\frac{1}{p}} + \left( \sum_{k=1}^{\infty} |y_k|^p \right)^{\frac{1}{p}} = \Vert x\Vert _p + \Vert y\Vert _p < \infty
 	\end{align*}
-	 Thus $x + y \in \ell_p$, and we get subaddivity of $||\cdot||_p$.
+	 Thus $x + y \in \ell_p$, and we get subaddivity of $\Vert \cdot\Vert _p$.
 
-	 We note that non-negativity and non-degeneracy of $||\cdot||_p$ are obvious properties. Liekwise, the $|\cdot|$-homogeneity is straightforward.\qed
+	 We note that non-negativity and non-degeneracy of $\Vert \cdot\Vert _p$ are obvious properties. Liekwise, the $|\cdot|$-homogeneity is straightforward.\qed
 \end{proof}
 
-\begin{thm}[$(\ell_\infty, ||\cdot||_\infty)$ is a normed vector space]
-	$(\ell_\infty, ||\cdot||_\infty)$ is a normed vector space.
+\begin{thm}[$(\ell_\infty, \Vert \cdot\Vert _\infty)$ is a normed vector space]
+	$(\ell_\infty, \Vert \cdot\Vert _\infty)$ is a normed vector space.
 \end{thm}
 
 \begin{proof}
 	$x, y \in \ell_\infty \implies$
 	\begin{align*}
-		||x + y||_\infty = \sup_{k \in \bb{N}} |x_k + y_k| &\leq \sup_{k \in \bb{N}} (|x_k| + y_k|) \\
+		\Vert x + y\Vert _\infty = \sup_{k \in \bb{N}} |x_k + y_k| &\leq \sup_{k \in \bb{N}} (|x_k| + y_k|) \\
 				&\leq \sup_{j, k \in \bb{N}} (|x_j| + |y_k|) \\
-				&= \sup_{j \in \bb{N}} |x_j| + \sup_{k \in \bb{N}} |y_k| = ||x||_\infty + ||y||_\infty
+				&= \sup_{j \in \bb{N}} |x_j| + \sup_{k \in \bb{N}} |y_k| = \Vert x\Vert _\infty + \Vert y\Vert _\infty
 	\end{align*}
 	Other properties are easy (exercise).\qed
 \end{proof}
@@ -1414,8 +1445,8 @@ We let, for $1 \leq p < \infty$,
 \begin{note}
 	\begin{gather*}
 		1 \leq p < \infty \\
-		\ell_p = \left\{x = (x_k)_{k = 1}^\infty \in \bb{R}^\bb{N} : ||x||_p = \left(\sum_{k=1}^{n} |x_k|^p \right)^{\frac{1}{p}} \right\} \\
-		\ell_\infty = \left\{ x = (x_k)_{k = 1}^\infty \in \bb{R}^\bb{N} : ||x||_\infty = \sup_{k \in \bb{N}}|x_k| \right\}
+		\ell_p = \left\{x = (x_k)_{k = 1}^\infty \in \bb{R}^\bb{N} : \Vert x\Vert _p = \left(\sum_{k=1}^{n} |x_k|^p \right)^{\frac{1}{p}} \right\} \\
+		\ell_\infty = \left\{ x = (x_k)_{k = 1}^\infty \in \bb{R}^\bb{N} : \Vert x\Vert _\infty = \sup_{k \in \bb{N}}|x_k| \right\}
 	\end{gather*}
 \end{note}
 
@@ -1437,7 +1468,7 @@ Then for $h \in \bb{N}$,
 \begin{gather*}
 	|x_k| \leq \max\{x_1|, ..., |x_{n_1 - 1}|, 1 \} = M
 \end{gather*}
-i.e. $||x||_\infty = \sup_{h \in \bb{N}} |x_k| \leq M$.
+i.e. $\Vert x\Vert _\infty = \sup_{h \in \bb{N}} |x_k| \leq M$.
 
 \begin{defn}[\texorpdfstring{$C[a, b]$}{}]
 	Let $a < b \in \bb{R}$, and
@@ -1459,17 +1490,17 @@ i.e. $||x||_\infty = \sup_{h \in \bb{N}} |x_k| \leq M$.
 	\end{equation}
 \end{thm}
 
-Consequently from the \autoref{thm:evt}, if $f \in C[a, b], \; |f(\cdot)| \in C[a, b]$ and there is $t_{\max} \in [a, b]$ for which $|f(t)| \leq |f(t_{\max})|$ for $r \in [a, b]$. Define, for $f \in C[a,b]$, $||f||_\infty = \max_{t \in [a,b]} |f(t)|$.
+Consequently from the \autoref{thm:evt}, if $f \in C[a, b], \; |f(\cdot)| \in C[a, b]$ and there is $t_{\max} \in [a, b]$ for which $|f(t)| \leq |f(t_{\max})|$ for $r \in [a, b]$. Define, for $f \in C[a,b]$, $\Vert f\Vert _\infty = \max_{t \in [a,b]} |f(t)|$.
 
-Just like for $(\ell_\infty, ||\cdot||_\infty)$, we have that $(C[a,b], ||\cdot||_\infty)$ is a normed vector space.
+Just like for $(\ell_\infty, \Vert \cdot\Vert _\infty)$, we have that $(C[a,b], \Vert \cdot\Vert _\infty)$ is a normed vector space.
 
-We note that $||\cdot||_\infty$ is not the only norm on $C[a,b]$. Let $1 \leq p < \infty$ and let, for $f \in C[a, b]$
+We note that $\Vert \cdot\Vert _\infty$ is not the only norm on $C[a,b]$. Let $1 \leq p < \infty$ and let, for $f \in C[a, b]$
 \begin{equation}
-	||f||_p = \left( \int_{a}^{b} |f(t)|^p dt \right)^{\frac{1}{p}} \quad (\text{good ol' Riemann integral})
+	\Vert f\Vert _p = \left( \int_{a}^{b} |f(t)|^p dt \right)^{\frac{1}{p}} \quad (\text{good ol' Riemann integral})
 \end{equation}
 
-\begin{thm}[(\texorpdfstring{$C[a, b], ||\cdot||_p$}{}) as a normed vector space]
-	$(C[a,b], ||\cdot||_p), \; (1 \leq p < \infty)$ is a normed vector space.
+\begin{thm}[(\texorpdfstring{$C[a, b], \Vert \cdot\Vert _p$}{}) as a normed vector space]
+	$(C[a,b], \Vert \cdot\Vert _p), \; (1 \leq p < \infty)$ is a normed vector space.
 \end{thm}
 
 \begin{proof}
@@ -1479,23 +1510,23 @@ We note that $||\cdot||_\infty$ is not the only norm on $C[a,b]$. Let $1 \leq p 
 	\end{equation}
 	Hence if $f \in C[a,b]$, then
 	\begin{align*}
-		||f||_p &= \left( \lim_{n \to \infty} \sum_{k=1}^{n} |f(b_k)|^p \frac{b-a}{n}  \right) \quad \text{where } b_k = a + \frac{k}{n} (b - a) \\
+		\Vert f\Vert _p &= \left( \lim_{n \to \infty} \sum_{k=1}^{n} |f(b_k)|^p \frac{b-a}{n}  \right) \quad \text{where } b_k = a + \frac{k}{n} (b - a) \\
 			&= \lim_{n \to \infty} \left(\sum_{k=1}^{n} |f(b_k)|^p \right)^{\frac{1}{p}} \left( \frac{b-a}{n} \right)^{\frac{1}{p}}
 	\end{align*}
 	Now, suppose, $f, g \in C[a,b]$
 	\begin{align*}
-		||f + g||_p &= \lim_{n \to \infty} \left( \sum_{k=1}^{n} |f(b_k) + g(b_k)|^p \right) \left(\frac{b-a}{n} \right)^{\frac{1}{p}} \\
+		\Vert f + g\Vert _p &= \lim_{n \to \infty} \left( \sum_{k=1}^{n} |f(b_k) + g(b_k)|^p \right) \left(\frac{b-a}{n} \right)^{\frac{1}{p}} \\
 			&\leq \lim_{n \to \infty} \left[ \left(\sum_{k=1}^{n} |f(b_k)|^p \right)^{\frac{1}{p}} + \left(\sum_{k=1}^{n} |g(b_k)|^p \right)^{\frac{1}{p}} \right] \left( \frac{b-s}{n} \right)^{\frac{1}{p}} \quad \autoref{thm:minkowski} \\
 			&= \lim_{n \to \infty} \left(\sum_{k=1}^{n} |f(b_k)|^p \right)^{\frac{1}{p}} \left( \frac{b-a}{n} \right)^{\frac{1}{p}} + \lim_{n \to \infty} \left(\sum_{k=1}^{n} |g(b_k)|^p \right)^{\frac{1}{p}} \left( \frac{b-a}{n} \right)^{\frac{1}{p}} \\
-			&= ||f||_p + ||g||_p
+			&= \Vert f\Vert _p + \Vert g\Vert _p
 	\end{align*}
-	hence we have subadditivity of $||\cdot||_p$. It is routine to verify that for $\alpha \in \bb{R}, \; f \in C[a,b]$ we have
+	hence we have subadditivity of $\Vert \cdot\Vert _p$. It is routine to verify that for $\alpha \in \bb{R}, \; f \in C[a,b]$ we have
 	\begin{equation}
-		||\alpha f|_p = |\alpha|||f||_p
+		\Vert \alpha f \Vert_p = |\alpha|\Vert f\Vert _p
 	\end{equation}
-	and $||f||_p \geq 0$ as $|f(\cdot)|^p \geq 0$ and finally
+	and $\Vert f\Vert _p \geq 0$ as $|f(\cdot)|^p \geq 0$ and finally
 	\begin{equation}
-		||f||_p = 0 \iff \int_{a}^{b} |f(t)|^p dx = 0 \overset{(1)}{\iff} |f(t)|^p = 0 \text{ for all } t \in [a,b] \iff f = 0
+		\Vert f\Vert _p = 0 \iff \int_{a}^{b} |f(t)|^p dx = 0 \overset{(1)}{\iff} |f(t)|^p = 0 \text{ for all } t \in [a,b] \iff f = 0
 	\end{equation}
 	((1) as $|f(t)|^p \geq 0$ for all t).
 \end{proof}
@@ -1503,10 +1534,10 @@ We note that $||\cdot||_\infty$ is not the only norm on $C[a,b]$. Let $1 \leq p 
 \begin{note}[Summary thus far about Normed Vector Spaces]
 	\begin{gather*}
 		(\bb{R}, |\cdot|) \\
-		(\bb{R}^\bb{N}, ||\cot||_p), \; 1 \leq p < \infty \\
-		(\ell_p, ||\cdot||_p), \; 1 \leq p < \infty \\
-		(c_0, ||\cdot||_\infty) \\
-		(C[a,b], ||\cdot||_p), \; 1 \leq p < \infty
+		(\bb{R}^\bb{N}, \Vert \cdot\Vert _p), \; 1 \leq p < \infty \\
+		(\ell_p, \Vert \cdot\Vert _p), \; 1 \leq p < \infty \\
+		(c_0, \Vert \cdot\Vert _\infty) \\
+		(C[a,b], \Vert \cdot\Vert _p), \; 1 \leq p < \infty
 	\end{gather*}
 \end{note}
 
