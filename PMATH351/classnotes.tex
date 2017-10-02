@@ -751,7 +751,7 @@ We are one property short of making $\preceq$ as an order relation.
 	\label{thm:CBS}
 	If, for non-empty set A, B, we have
 	\begin{equation}
-		A \preceq B \land \quad B \preceq A \implies A \sim B
+		A \preceq B \; \land \; B \preceq A \implies A \sim B
 	\end{equation}
 	i.e.
 	\begin{equation}
@@ -1839,6 +1839,145 @@ We note that $\Vert \cdot\Vert _\infty$ is not the only norm on $C[a,b]$. Let $1
 	Then we have (exercise) that $x = \lim_{n \to \infty} x_n$, while $(x_n)_{n = 1}^\infty \subseteq A \setminus \{x\}$. [Notice the points $x_1, x_2, ..., x_n$ are distinct]
 
 	The converse inclusion just uses the definition of limits. \qed
+\end{proof}
+
+\chapter{Lecture 11: Oct 2, 2017}\label{chp:lec11}
+
+\section{Last time}
+
+\begin{note}[3 Descriptions of interior $A^\circ$]
+	\begin{equation*}
+		\bigcup \{U \subseteq A : U \text{ open in } X\}, \{x \in X : \exists \epsilon_x > 0, \; B(x, \epsilon_x) \subseteq A \}
+	\end{equation*}
+\end{note}
+
+\section{Continuing with Accumulation Points}\label{sect:accumulation points cont}
+
+\begin{gather*}
+	A' = \{x \in X : \forall \epsilon > 0, \left( B(x \epsilon) \setminus \{x \} \right) \cap A \neq \emptyset \} \\
+	\text{Also } A' = \{x \in X : x = \lim_{n \to \infty} x_n, \; (x_n)_{n = 1}^\infty \subset A \setminus \{x \} \}
+\end{gather*}
+
+\begin{defn}[Closure]
+	Given a metric space $(X, d)$ and $A \subseteq X$, define the closure of A by
+	\begin{equation}
+		\bar{A} = \cap \{F \subseteq X : A \subseteq F, \; F \text{ is closed in } X\}
+	\end{equation}
+	Of course, $A^\circ \subseteq A \subseteq \bar{A}$.
+\end{defn}
+
+\begin{thm}[Characterization of the Closure]
+	Given a metric space $(X, d)$, $A \subseteq X$, the following sets are the same
+	\begin{gather}
+		\bar{A} \quad A \cup \partial A \quad A \cup A'
+	\end{gather}
+	(``meet'' set) $A_m = \{x \in X : \forall \epsilon > 0, \; B(x, \epsilon) \cap A \neq \emptyset \}$.
+
+	(``limit'' set) $A_L = \{x \in X : x = \lim_{n \to \infty} x_n , \; \text{ where } (x_n)_{n = 1}^\infty \subseteq A \}$
+
+	[The notations $A_L, A_m$ will not be used afterwards, we shall use $\bar{A}$.]
+\end{thm}
+
+\begin{proof}
+	We have
+	\begin{align*}
+		\bar{A} &= \bigcap \{F \subseteq X : A \subseteq F, \; F \text{ closed}\} \\
+			&= \bigcap \{X \setminus U : U \subseteq X \setminus A, \; U \text{ open in } X \}\\
+			&= X \setminus \bigcup \{U : U \subseteq X \setminus A \; U \text{ open in } X \} \quad \text{De Morgon's Law} \\
+			&= X \setminus [(X \setminus A)^\circ] \quad \text{(complement of interior)} \\
+			&= X \setminus [(X \setminus A) \setminus \partial (X \setminus A)] \quad \text{(definition of $(X \setminus A)^\circ$)} \\
+			&= X \setminus [(X \setminus A) \setminus \partial A] \\
+			&= A \cup \partial A
+	\end{align*}
+	We thus have that $\bar{A} = A \cup \partial A$.
+
+	Now if $x \in A \cup \partial A$, then $\forall \epsilon > 0, B(x, \epsilon) \cap A \neq \emptyset$ [i.e. either $x \in A \cap B(x, \epsilon)$, or $x \in \partial A$, so that $B(x, \epsilon) \cap A \neq \emptyset$]. Thus $A \cup \partial A \subseteq A_m$. Conversely, if $x \in A_m$, then, either
+	\begin{itemize}
+		\item $\exists \epsilon > 0, \; B(x, \epsilon) \subset A \implies x \in A^\circ \subseteq A$, or
+		\item $\forall \epsilon > 0, \; B(x, \epsilon) \cap A \neq \emptyset$, in which case $x \in \partial A$.
+	\end{itemize}
+	Hence, $x \in A_m \implies x \in A \cup \partial A$ so $A_m \subseteq A \cup \partial A$.
+
+	If $x \in A \cup A'$, then $\forall \epsilon > 0, \; B(x, \epsilon) \cap A \neq \emptyset$. Indeed, as above, either $x \in A$, so $\forall \epsilon > 0, x \in B(x, \epsilon) \cap A$, or $x \in A'$ so that $B(x, \epsilon) \cap A \supseteq (B(x, \epsilon) \setminus \{x\}) \cap A \neq \emptyset$. Hence $A \cup A' \subseteq A_m$.
+
+	The definition of a limit of a sequence shows that $A_m = A_L$.
+
+	Finally, consider
+	\begin{align*}
+		X \setminus (A \cup A') &\subseteq \{x \in X : \exists \epsilon_x > 0, \; B(x, \epsilon_x) \cap A = \emptyset (\implies B(x, \epsilon_x) \subseteq X \setminus A) \} \\
+			&= (X \setminus A)^\circ \implies X \setminus [(X \setminus A)^\circ] \subseteq X \setminus [X \setminus (A \cup A')]
+	\end{align*}
+	Hence
+	\begin{align*}
+		\bar{A} = X \setminus [(X \setminus A)^\circ] &\subseteq X \setminus [X \setminus (A \cup A')] \\
+			&= A \cup A'
+	\end{align*}
+	Hence $\bar{A} \subseteq A \cup A' \subseteq A_m = \bar{A}$, so $\bar{A} = A \cup A'$.\qed
+\end{proof}
+
+\begin{note}
+	The ``limit'' set is going to help in A2
+\end{note}
+
+\section{Continuous Functions}\label{sect:cont functions}
+
+\begin{defn}[Continuity]\label{defn:continuity}
+	Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces. Let $f: X \to Y$ and $x_0 \in X$. We say that $f$ is continuous at $x_0$ if
+	\begin{gather}
+		\forall \epsilon > 0 \quad \delta > 0 \nonumber \\
+		d_X(x, x_0) < \delta \implies d_Y(f(x), f(x_0)) < \epsilon \label{eq:continuous defn}
+	\end{gather}
+	We say that $f$ is continuous at the domain $X$ if it is continuous at each point in $X$.
+\end{defn}
+
+\begin{note}
+	\begin{align*}
+		\autoref{eq:continuous defn} &\iff f(B(x, \delta) \subseteq B(f(x), \epsilon) ) \\
+			&\iff B(x, \delta) \subseteq f^{-1}B((f(x), \epsilon))
+	\end{align*}
+\end{note}
+
+\begin{defn}[Neighbourhood]\label{defn:neighbourhood}
+	In a metric space, a set $N$ is a \textbf{neighbourhood} of a point $x_0$, if $x_0 \in N^\circ$ (interior).
+\end{defn}
+
+\begin{thm}[Characterization of continuity at a point]\label{thm:char of cont at a point}
+	If $(X, d_X), (Y, d_Y), f : X \to Y, x \in X$ are as above, then TFAE:
+	\begin{enumerate}
+		\item $f$ is continuous at $x_0$
+		\item $\forall N$ of $f(x_0) \in (Y, d_Y)$, we have $f^{-1}(N)$ is a neighbourhood of $x_0$ in $(X, d_X)$.
+		\item $x_0 = \lim_{n \to \infty} x_n \in (X, d_X) \implies f(x_0) = \lim_{n \to \infty} f(x_n) \in (Y, d_Y)$
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	$(1) \implies (2)$
+
+	Given a neighbourhood $N$ of $f(x_0)$, $\exists \epsilon > 0, \; B(f(x_0), \epsilon) \subseteq N$. By assumption of $(1)$, $\exists \delta > 0, \; B(x_0, \delta) \subseteq f^{-1} (B(f(x_0), \epsilon) \subseteq f^{-1}(N)$. Thus $f^{-1}(N)$ is a neighbourhood of $x_0$.
+
+	$(2) \implies (1) \implies (3)$
+
+	Given $\epsilon > 0, \; B(f(x_0), \epsilon)$ is a neighbourhood of $f(x_0)$, so $f^{-1}(B(f(x_0), \epsilon))$ is a neighbourhood of $x_0$, and hence $\exists \delta > 0, \; B(x_0, \delta) \subseteq f^{-1}(B(f(x_0), \epsilon))$, which proves $(1)$.
+
+	Now if $x_0 = \lim_{n \to \infty} x_n \in (X, d_X)$, then by definition, $\exists n_\delta \in \bb{N}$ such that if $n \geq n_\delta, \; x_n \in B(x_0, \delta)$. But then for $n \geq n_\delta$, we have
+	\begin{equation*}
+		f(x_n) \in f(B(x, \delta)) \subseteq B(f(x_0), \epsilon)
+	\end{equation*}
+	and hence $f(x_0) = \lim_{n \to \infty} f(x_n)$.
+
+	$(3) \implies (1)$ which we shall prove by contrapositive, i.e. $\neg (1) \implies \neg (3)$
+
+	If $\neg (1)$, then $\exists \epsilon > 0, \; \forall \delta > 0$
+	\begin{equation*}
+		B(x_0, \delta) \not\subset f^{-1}(B(f(x_0), \epsilon)).
+	\end{equation*}
+
+	Hence for each $n \in \bb{N}$, we may find
+	\begin{equation*}
+	 	x_n \in B(x_0, \frac{1}{n}) \setminus f^{-1}(B(f(x_0), \epsilon)
+	\end{equation*}
+	Given  $\epsilon' > 0, \; \exists n_{\epsilon'} \in \bb{N}, \; \forall n_{\epsilon'} \geq \frac{1}{\epsilon'}$. Then for $n \geq n_{\epsilon'}, \; x_n \in B(x_0, {\epsilon'})$ thus $\lim_{n \to \infty} x_n = x_0$. However, each $f(x_n) \notin B(f(x_0), \epsilon)$, so $f(x_n) \underset{n \to \infty}{\not\to} f(x_0)$.
+
 \end{proof}
 
 \end{document}
