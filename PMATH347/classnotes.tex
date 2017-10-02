@@ -1625,5 +1625,155 @@ So normal subgroups of G are precisely the kernels of homomorphisms on G.
     \end{enumerate}
 \end{eg}
 
+\chapter{Lecture 11: Oct 2, 2017}\label{chp:lec11}
+
+\section{Continuing with Normal Subgroups}\label{sect:normal subgroups cont 3}
+
+\begin{eg}
+    \begin{enumerate}
+        \setcounter{enumi}{5}
+        \item $G = \bb{C}^\times$ mutiplicative group of complex numbers.
+            \begin{equation}
+                S := \{ z \in \bb{C}^\times : |z| = 1 \}
+            \end{equation}
+            So $S \leq \bb{C}^\times$ (Note circle S is closed in multiplication)
+
+            Since $\bb{C}^\times$ is abelian, thus $S \triangleleft \bb{C}^\times$.
+
+            What is $\bb{C}^\times / S$? $\bb{C}^\times / S \simeq (\bb{R}^{> 0}, \cdot)$
+
+            \begin{equation}
+                \pi : \bb{C}^\times \to \bb{C}^\times / S
+            \end{equation}
+
+            A typical element of $\bb{C}^\times / S$ is a left coset $wS, w \in \bb{C}^\times$:
+            \begin{equation}
+                ws = \text{circle of radius } |w|
+            \end{equation}
+
+            Proof: $w \in S, |wz| = |w| |z| = |w|$.
+            \begin{gather*}
+                |0| = |w| \implies u = w \cdot \frac{u}{w} , \left| \frac{u}{w} \right| = \frac{|u|}{|w|} = 1
+            \end{gather*}
+            $\therefore \frac{u}{w} \in S$
+
+            So $\bb{C}^\times / S =$ set of all circles in the complex plane centered at the origin.
+
+            \begin{equation*}
+                uS \cdot wS = uwS = \text{ circle of radius } |uw| = |u||w|
+            \end{equation*}
+            In $\bb{C}^\times / S$, we multiply circles by multiplying radii.
+    \end{enumerate}
+\end{eg}
+
+\section{Quotient Maps}\label{sect:quotient maps}
+
+\begin{defn}[Fibre]
+    Given $H \triangleleft G$, $\pi : G \to G/H$ quotient map. Given an element $aH \in G / H$, the fibre (the pullback) $\pi^{-1} (\underbrace{aH}_{\in G/H}) = aH \subseteq G$.
+\end{defn}
+
+\begin{remark}
+    Why $\pi^{-1} (\underbrace{aH}_{\in G/H}) = aH \subseteq G$?
+
+    $\forall b \in G, \pi((b) = aH \iff bH = aH \iff a^{-1}b \in H \iff a^{-1}b = h$ for some $h \in H \iff b = ah$ for some $h \in H \iff b \in aH$.
+\end{remark}
+
+\begin{remark}
+    $aH = bH \iff a^{-1}b \in H \iff a \in bH \iff b \in aH$
+\end{remark}
+
+Since $H = \ker(\pi)$, the fibres of $\pi$ are all left cosets of the kernel (true for any group homomorphism).
+
+\begin{propo}[Proposition 17]\label{propo:17}
+    Let $\phi : G \to H$ be a group homomorphism. Let $K = \ker(\phi) \triangleleft G$. The nonempty fibres of $\phi$ are the left cosets of $K$.
+\end{propo}
+
+\begin{proof}
+    $h \in I_m(\phi) \leq H$. Fix $a \in \phi^{-1}(h) := \{g \in G : \phi(g) = a\}$.
+
+    Claim: $\phi^{-1} (h) = aK$. Let $b \in G$, then
+    \begin{align*}
+        b \in \phi^{-1} (h) &\iff \phi(b) = h \\
+                &\iff \phi(b) = \phi(a) \\
+                &\iff \phi(a)^{-1} \phi(b) = 1_H \\
+                &\iff \phi(a^{-1}b) = 1_H \\
+                &\iff a^{-1}b \in K \\
+                &\iff b \in aK
+    \end{align*}
+
+    Conversely, let $aK$ be a left coset.
+    \begin{gather*}
+        b \in aK \implies b = ak \text{ for some } k \in K \\
+            \implies \phi(b) = \phi(a)\phi(k) = \phi(a) \text{ since } k \in K = \ker(\phi) \\
+            \implies b \in \phi^{-1} (\phi(a)) \\
+            \therefore aK \subseteq \phi^{-1}(\phi(a)) = bK
+    \end{gather*}
+    By the previous part, $\phi^{-1}(\phi(a)) = bK$ for some $b \in G \implies aK = bK = \phi^{-1}(\phi(a))$.
+\end{proof}
+
+\begin{crly}[Corollary 18]\label{crly:18}
+    A group homomorphism $\phi: G \to H$ is injective iff $\ker(\phi) = \langle a \rangle$
+\end{crly}
+
+\begin{proof}
+    By \autoref{propo:17} the nonempty fibres of $\phi$ are cosets $a \ker(\phi)$. $\phi$ is injective iff the nonempty fibres are singletons. Since $\ker(\phi) \to a\ker(\phi)$ which $x \mapsto ax$ is an injection, we get that
+    \begin{align*}
+        a \ker(\phi) \text{ is a singleton} &\iff \ker(\phi) \text{ is a singleton} \\
+            &\iff \ker(\phi) = \langle 1 \rangle
+    \end{align*}
+\end{proof}
+
+\begin{remark}
+    \autoref{propo:17} and \autoref{crly:18} are about group homomorphisms.
+\end{remark}
+
+Given $\phi : G \to H$ as a group homomorphism, then we know that $\ker(\phi) \triangleleft G$. Consider $\pi : G \to G / \ker(\phi)$ as the quotient homomorphism. $\ker(\pi) = \ker(\phi)$
+
+\begin{defn}[Universal]
+    Suppose $N \triangleleft G$. If $\phi: G \to H$ is any group homomorphism with $\ker(\phi) \geq N$, then $\exists!$ group homomorphism $\bar{\phi} : G / N \to H$ such that
+    \begin{equation}
+        G \overset{\phi}{\to} H \quad G \overset{\pi}{\to} G / N \quad G / N \overset{\bar{\phi}}{\to} H
+    \end{equation}
+    This means for any $a \in G$,
+    \begin{equation}
+        \bar{\phi} \pi(a) = \phi(a)
+    \end{equation}
+
+    We say $\bar{\phi}$ is \textbf{induced} by $\phi$
+\end{defn}
+
+\begin{thm}[Theorem 19: Universal Property of Quotients]\label{thm:19}
+    Suppose $N \triangleleft G$. Then $\pi : G \to G / N$, the quotient map, is universal with respect to all group homomorphisms on $G$ whose kernel contains in $N$.
+\end{thm}
+
+\begin{proof}
+    Define $\bar{\phi} : G/N \to H$ by, for any $a \in G$,
+    \begin{equation}
+        \bar{\phi} (aN) = \phi(a)
+    \end{equation}
+
+    $\bar{\phi}$ is well defined: Suppose $aN = bN$.
+    \begin{align*}
+        &\implies b^{-1}a \in N \leq \ker(\phi) \\
+        &\implies \phi(b^{-1} a) = 1_H \\
+        &\implies \phi(b^{-1})\phi(a) = 1_H \\
+        &\implies \phi(a) = \phi(b)
+    \end{align*}
+
+    $\bar{\phi}$ is a homomorphism:
+    \begin{align*}
+        \bar{\phi} ((aN)(bN)) &= \bar{\phi} (abN) \\
+            &= \phi(ab) = \phi(a)\phi(b) \\
+            &= \bar{\phi}(aN) \bar{\phi}(bN)
+    \end{align*}
+
+    Commuting diagram: For $a \in G$
+    \begin{equation}
+        \bar{\phi}(\pi(a)) = \bar{\phi} (aN) = \phi(a)
+    \end{equation}
+
+    Uniqueness of $\bar{\phi} : G \to H$ as a homomorphism: (exercise)
+\end{proof}
+
 \end{document}
 % Document End
