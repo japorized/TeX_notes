@@ -5,6 +5,11 @@ Most of the content are compiled from my (scavenged) lecture notes and recommend
 If you wish to get a copy of these documents, please take them with utmost discreet.
 
 ---
+### Information about PMATH351F17 and PMATH347F17
+
+These notes will stop at Lecture 11, since I have to drop these courses due to personal reasons. I will continue to accept typo amendments wherever necessary. Please feel free to copy these notes for yourselves and continue editing from there.
+
+---
 ### Typos?
 
 Please feel free to either contact me or send a pull request for rectifying typos.

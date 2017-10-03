@@ -45,6 +45,12 @@
 \providecommand*{\propoautorefname}{Proposition}
 
 % ntheorem listtheorem style
+\makeatother
+\newlength\widesttheorem
+\AtBeginDocument{
+  \settowidth{\widesttheorem}{Proposition A.1.1.1\quad}
+}
+
 \makeatletter
 \def\thm@@thmline@name#1#2#3#4{%
         \@dottedtocline{-2}{0em}{2.3em}%
@@ -69,13 +75,31 @@
         \fi
     \fi}
 }
-\makeatother
-\newlength\widesttheorem
-\AtBeginDocument{
-  \settowidth{\widesttheorem}{Proposition A.1.1.1\quad}
-}
 
-\theoremlisttype{allname}
+\makeatletter
+\def\thm@@thmline@noname#1#2#3#4{%
+        \@dottedtocline{-2}{0em}{5em}%
+                   {{\protect\numberline{#2}}#3}%
+                   {#4}}
+\@ifpackageloaded{hyperref}{
+\def\thm@@thmline@noname#1#2#3#4#5{%
+    \ifx\#5\%
+        \@dottedtocline{-2}{0em}{5em}%
+            {{\protect\numberline{#2}}#3}%
+            {#4}
+    \else
+        \ifHy@linktocpage\relax\relax
+            \@dottedtocline{-2}{0em}{5em}%
+                {{\protect\numberline{#2}}#3}%
+                {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
+        \else
+            \@dottedtocline{-2}{0em}{5em}%
+                {\hyper@linkstart{link}{#5}%
+                  {{\protect\numberline{#2}}#3}\hyper@linkend}%
+                    {#4}%
+        \fi
+    \fi}
+}
 
 % Shortcuts
 \newcommand{\bb}[1]{\mathbb{#1}}			% using bb instead of mathbb
@@ -1134,7 +1158,7 @@ In particular, the kernel of this action is trivial, i.e., the subgroup $\{1\} \
     \end{gather*}
 \end{eg}
 
-\begin{crly}[12. Lagrange's Theorem]\label{thm:lagrange}
+\begin{crly}[(12) Lagrange's Theorem]\label{thm:lagrange}
     If G is a finite group and $H \leq G$, then
     \begin{equation}
         |H| \Big| |G|
@@ -1502,7 +1526,7 @@ Location: TBA
                     \pi(a) = \pi(b) &\iff a \langle a \rangle = b \langle 1 \rangle \\
                         &\iff a = b
                 \end{align*}
-            \item $H = G \triangleleft G$ singce for any $a \in G$, $aGa^{-1} \subseteq G$
+            \item $H = G \triangleleft G$ since for any $a \in G$, $aGa^{-1} \subseteq G$
                 \begin{gather*}
                     \pi : G \to G/G
                 \end{gather*}
@@ -1529,14 +1553,11 @@ Location: TBA
                     \end{align*}
                     Thus we observe that $a\ker(\phi)a^{-1} \subseteq \ker(\phi)$. Therefore, $\ker(\phi) \triangleleft G$.
                 \end{proof}
-    \end{enumerate}
-\end{eg}
 
-So normal subgroups of G are precisely the kernels of homomorphisms on G.
+                \begin{note}
+                    When $n \geq 3$ is even, $Z(D_{2n}) = \{1, r^{\frac{n}{2}} \}$.
+                \end{note}
 
-\begin{eg}
-    \begin{enumerate}
-        \setcounter{enumi}{4}
         \item $G = D_{10} = $ group of rigid transformations of a regular pentagon (n = 5, so 2n = 10). Note that it's not an abelian group. This is also called a dihedral group of order 10 (recall).
 
             Note: $s \in D_{10}$ reflection. $\order(s) = 2$.
@@ -1560,7 +1581,7 @@ So normal subgroups of G are precisely the kernels of homomorphisms on G.
 
             So
             \begin{align*}
-                r^2s &\neq 1
+                r^2s &\neq 1 \\
                     &\neq s
             \end{align*}
             $\therefore \langle s \rangle \not\triangleleft D_{10}$
@@ -1742,7 +1763,7 @@ Given $\phi : G \to H$ as a group homomorphism, then we know that $\ker(\phi) \t
     We say $\bar{\phi}$ is \textbf{induced} by $\phi$
 \end{defn}
 
-\begin{thm}[Theorem 19: Universal Property of Quotients]\label{thm:19}
+\begin{thm}[(19) Universal Property of Quotients]\label{thm:19}
     Suppose $N \triangleleft G$. Then $\pi : G \to G / N$, the quotient map, is universal with respect to all group homomorphisms on $G$ whose kernel contains in $N$.
 \end{thm}
 
@@ -1774,6 +1795,12 @@ Given $\phi : G \to H$ as a group homomorphism, then we know that $\ker(\phi) \t
 
     Uniqueness of $\bar{\phi} : G \to H$ as a homomorphism: (exercise)
 \end{proof}
+
+\chapter{Lecture 12: Oct 4, 2017}
+\label{chp:lec12}
+
+
+
 
 \end{document}
 % Document End
