@@ -4,6 +4,8 @@ Most of the content are compiled from my (scavenged) lecture notes and recommend
 
 If you wish to get a copy of these documents, please take them with utmost discreet.
 
+My main editor is Sublime Text, but I have a setup for VIm as well.
+
 ---
 ### Information about PMATH351F17 and PMATH347F17
 
@@ -36,3 +38,10 @@ endif
 ```
 <scope>text.tex.latex</scope>
 ```
+
+---
+### Snippets
+
+My TeX snippet for VIm is in the `tex.snippet` file, and I use [vim-snipmate](https://vimawesome.com/plugin/vim-snipmate-mine) to tab-complete as I type.
+
+My Sublime Text snippet is provided in the file `tex.sublime-completions`. Put it in your `SUBLIME_PATH/Packages/User/` folder to get it working.
