@@ -29,15 +29,26 @@
 \theoremstyle{break}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem*{proof}{Proof}
-\newtheorem{crly}{Corollary}[thm]
-\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{crly}{Corollary}[section]
+\newtheorem{lemma}{Lemma}[section]
 \newtheorem{propo}{Proposition}[section]
+\newtheorem{claim}{Claim}[section]
 \newtheorem*{remark}{Remark}
 \newtheorem*{note}{Note}
 \newtheorem{defn}{Definition}[section]
 \newtheorem{eg}{Example}[section]
+\newtheorem{ex}{Exercise}[chapter]
+
+\providecommand{\defnautorefname}{Definition}
+\providecommand{\thmautorefname}{Theorem}
 
 % ntheorem listtheorem style
+\makeatother
+\newlength\widesttheorem
+\AtBeginDocument{
+  \settowidth{\widesttheorem}{Proposition A.1.1.1\quad}
+}
+
 \makeatletter
 \def\thm@@thmline@name#1#2#3#4{%
         \@dottedtocline{-2}{0em}{2.3em}%
@@ -62,13 +73,31 @@
         \fi
     \fi}
 }
-\makeatother
-\newlength\widesttheorem
-\AtBeginDocument{
-  \settowidth{\widesttheorem}{Proposition A.1.1.1\quad}
-}
 
-\theoremlisttype{allname}
+\makeatletter
+\def\thm@@thmline@noname#1#2#3#4{%
+        \@dottedtocline{-2}{0em}{5em}%
+                   {{\protect\numberline{#2}}#3}%
+                   {#4}}
+\@ifpackageloaded{hyperref}{
+\def\thm@@thmline@noname#1#2#3#4#5{%
+    \ifx\#5\%
+        \@dottedtocline{-2}{0em}{5em}%
+            {{\protect\numberline{#2}}#3}%
+            {#4}
+    \else
+        \ifHy@linktocpage\relax\relax
+            \@dottedtocline{-2}{0em}{5em}%
+                {{\protect\numberline{#2}}#3}%
+                {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
+        \else
+            \@dottedtocline{-2}{0em}{5em}%
+                {\hyper@linkstart{link}{#5}%
+                  {{\protect\numberline{#2}}#3}\hyper@linkend}%
+                    {#4}%
+        \fi
+    \fi}
+}
 
 % Shortcuts
 \newcommand{\bb}[1]{\mathbb{#1}}			% using bb instead of mathbb
@@ -81,17 +110,63 @@
 \author{Johnson Ng}
 
 \begin{document}
+\hypersetup{pageanchor=false}
 \maketitle
+\hypersetup{pageanchor=true}
 
 \tableofcontents
+
+\chapter*{List of Definitions}
+\theoremlisttype{all}
+\listtheorems{defn}
+
+\chapter*{List of Theorems}
+\theoremlisttype{allname}
+\listtheorems{axiom,lemma,thm,crly,propo}
+
+\chapter{Information from Earlier Chapters}\label{chp:important theorems and definitions}
+
+\section{Real Number System}\label{sect:Real Number System}
+
+\begin{defn}[Open and Closed Intervals]\label{defn:Open and Closed Intervals}
+    Let $a$ and $b$ be real numbers. A \textbf{closed interval} is a set of the form
+    \begin{gather*}
+        [a, b] := \{ x \in \bb{R} : a \leq x \leq b \}, \quad [a, \infty) := \{ x \in \bb{R} : a \leq x \}, \\
+        (-\infty, b] := \{ x \in \bb{R} : x \leq b \}, \quad \text{or } (-\infty, \infty) := \bb{R}
+    \end{gather*}
+    and an \textbf{open interval} is a set of the form
+    \begin{gather*}
+        (a, b) := \{ x \in \bb{R} : a < x < b \}, \quad (a, \infty) := \{ x \in \bb{R} : a < x \}, \\
+        (-\infty, b) := \{ x \in \bb{R} : x < b \}, \quad \text{or } (-\infty, \infty) := \bb{R}
+    \end{gather*}
+\end{defn}
+
+\begin{defn}[Degenerate and Non-Degenerate Intervals]\label{defn:Degenerate and Non-Degenerate}
+    Given \hyperref[defn:Open and Closed Intervals]{the above definition}, an interval $I$ with endpoints $a, b$ is called \textbf{degenerate} if $a = b$ and \textbf{non-degenerate} if $a < b$.
+
+    A degenerate open interval is the empty set, and a non-degenerate closed interval is a point $a = b$.
+\end{defn}
+
+\section{Continuity}\label{sect:Continuity}
+
+\begin{defn}[Continuity]\label{defn:Continuity}
+    Let $\emptyset \neq E \subseteq \bb{R}$ and $f: E \to R$.
+    \begin{enumerate}
+        \item $f$ is said to be \textbf{continuous} at a point $a \in E$ if and only if given $\epsilon > 0, \; \exists \delta > 0$ (which in general depends on $\epsilon, f$ and $a$) such that
+            \begin{equation}
+                |x - a| < \delta \; \land \; x \in E \implies |f(x) - f(a)| < \epsilon
+            \end{equation}
+        \item $f$ is said to be \textbf{continuous} on $E$ (notation: $f: E \to \bb{R}$ is continuous) if and only if $f$ is continuous at every $x \in E$.
+    \end{enumerate}
+\end{defn}
 
 \chapter{Differentiability on \texorpdfstring{$\bb{R}$}{R}}
 
 \section{The Derivative}
 
-\begin{defn}[Differentiable]
+\begin{defn}[Differentiable]\label{defn:Differentiable}
     A real function f is said to be differentiable at a point $a \in \bb{R}$ if and only if f is defined on some open interval I containing a and
-    \begin{equation}\label{eq:1.1}
+    \begin{equation}\label{eq:differentation defn}
         f'(a) := \lim_{h \to \infty} \frac{f(a+h) - f(a)}{h}
     \end{equation}
     exists. In this case, $f'(a)$ is called the derivative of f at a.
@@ -99,24 +174,74 @@
 
 There are two characterizations of diffrentiability which we shall use to study derivatives. The first one which characterizes the derivatives in terms of the "chord function"
 
-\begin{equation}\label{eq:1.2}
+\begin{equation}\label{eq:equiv differentiation defn}
     F(x) := \frac{f(x) - f(a)}{x-a} \quad x \neq a,
 \end{equation}
 
 will be used to establish the Chain Rule.
 
-\begin{thm}
-    A real function f is differentiable at some point $a \in \bb{R} \iff \exists$ an open interval I and a function $F: I \to \bb{R}$ such that $a \in I$, f is defined on I, F is continuous on a, and
-    \begin{equation}\label{eq:1.3}
-        f(x) = F(x)(x-a) + f(a)
+\begin{thm}[Differentiability and Continuity]\label{thm:Differentiability and Continuity}
+    A real function $f$ is differentiable at some point $a \in \bb{R}$ if and only if there exists an open interval $I$ and a function $F : I \to \bb{R}$ such that $a \in I, f$ is defined on $I$, $F$ is continuous at $a$, and
+    \begin{equation}\label{eq:2.3}
+        f(x) = F(x)(x - a) + f(a)
     \end{equation}
     holds for all $x \in I$, in which case $F(a) = f'(a)$.
 \end{thm}
 
 \begin{proof}
-    Notice that $\forall x \in I \setminus \{a\}$, \ref{eq:1.2} and \ref{eq:1.3} are equivalent. SPS f is differentiable at a. Then by definition, f is defined on some open interval I that contains a, and the limit in \ref{eq:1.1} exists. Define F on I by \ref{eq:1.2} if $x \neq a$ and $F(a) := f'(a)$. Then \ref{eq:1.3} holds $\forall x \in I$ and F is continuous on a by \ref{eq:1.2} since $f'(a)$ exists.
+    Note that for $x \in I \setminus \{a\}$, \autoref{eq:equiv differentiation defn} and \autoref{eq:2.3} are equivalent. Suppose $f$ is differentiable at $a \in \bb{R}$. By \autoref{defn:Differentiable}, $f$ is defined on some \textbf{open interval $I$ containing $a$} and the limit in \autoref{eq:differentation defn} exists. Define
+    \begin{equation*}
+        F(x) = \begin{cases}
+            \frac{f(x) - f(a)}{x - a}   &   x \neq a \\
+            f'(a)                       &   x = a
+        \end{cases}
+    \end{equation*}
+    Then \autoref{eq:2.3} holds for all $x \in I$, $F$ is continuous on $a$ by \autoref{eq:equiv differentiation defn} since $f'(a)$ exists.
 
-    Conversely, SPS \ref{eq:1.3} holds. Then \ref{eq:1.2} holds $\forall x \in I \setminus \{a\}$. As $x \to a$, since F is continuous on a, we have that $F(a) = f'(a)$. Thus by definition, f is differentiable on a.
+    Conversely, if \autoref{eq:2.3} holds, then \autoref{eq:equiv differentiation defn} holds for $x \in I \setminus \{a\}$. Taking the limit of \autoref{eq:equiv differentiation defn} as $x \to a$, and since $F$ is continuous on $a$, $F(a) = f'(a)$. Thus by \hyperref[defn:Differentiable]{Definition of Differentiability}, $f$ is continuous on $a$.
 \end{proof}
 
+\begin{thm}
+    A real function $f$ is differentiable at $a$ if and only if $\exists T(x) := mx$ which is a function, such that
+    \begin{equation}\label{eq:2.4}
+        \lim_{h \to 0} \frac{f(a + h) - f(a) - T(h)}{h} = 0
+    \end{equation}
+\end{thm}
+
+\begin{proof}
+    Suppose $f$ is differentiable at $a$, and let $m := f'(a)$, then
+    \begin{equation*}
+        \frac{f(a + h) - f(a) - T(h)}{h} = \frac{f(a + h) - f(a)}{h} - f'(a) \to 0
+    \end{equation*}
+    as $h \to 0$.
+
+    Conversely, suppose \autoref{eq:2.4} holds for $T(x) := mx$ and $h \neq 0$. Then
+    \begin{align}
+        \frac{f(a + h) - f(a)}{h} &= m + \frac{f(a + h) - f(a) - mh}{h} \nonumber \\
+                &= m + \frac{f(a + h) - f(a) - T(h)}{h} \label{eq:2.4.1}
+    \end{align}
+    By \autoref{eq:2.4}, the limit of \autoref{eq:2.4.1} is $m$. Thus it follows that $\left( f(a + h) - f(a) \right) / h \to m$ as $h \to 0$; i.e. that $f'(a)$ exists and equals $m$ by \hyperref[defn:Differentiable]{Definition of Differentiability}, and thus $f$ is differentiable at $a$.
+\end{proof}
+
+With \autoref{thm:Differentiability and Continuity}, we will answer a rather interesting question: Are differentiability and continuity related? If so, how?
+
+\begin{thm}[Differentiability $\implies$ Continuity]\label{thm:differentiability implies continuity}
+    $f$ is differentiable at $a \implies f$ is continuous at $a$.
+\end{thm}
+
+\begin{proof}
+    Suppose that $f$ is differentiable at $a$. By \autoref{thm:Differentiability and Continuity}, there is an open interval $I$ and a function $F$, that is continuous at $a$, such that
+    \begin{equation}\label{eq:2.4.2}
+        \forall x \in I \enspace f(x) = F(x)(x - a) + f(a).
+    \end{equation}
+    So taking the limit of \autoref{eq:2.4.2} as $x \to a$, we observe that
+    \begin{equation*}
+        \lim_{x \to a} f(x) = F(a) \cdot 0 + f(a) = f(a).
+    \end{equation*}
+    In particular, $f(x) \to f(a)$ as $x \to a$, which by \hyperref[defn:Continuity]{Definition of Continuity}, $f$ is continuous at $a$.
+\end{proof}
+
+
+
 \end{document}
+% Document END
