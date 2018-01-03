@@ -12,12 +12,12 @@
 		{ "trigger": "equl", "contents": "\\begin{equation}\n	\\label{eq:${2:lbl}}\n	$0\n\\end{equation}" },
 		{ "trigger": "ali", "contents": "\\begin{align${1:ed}}\n	$0\n\\end{align$1}" },
 		{ "trigger": "gather", "contents": "\\begin{gather${1:ed}}\n	$0\n\\end{gather$1}"},
-		{ "trigger": "eg", "contents": "\\begin{eg}\n	$0\n\\end{eg}" },
-		{ "trigger": "egl", "contents": "\\begin{eg}\n	\\label{$2{eg:ref}}\n	$0\n\\end{eg}" },
+		{ "trigger": "eg", "contents": "\\begin{eg}\n	\\label{$2{eg:ref}}\n	$0\n\\end{eg}" },
 		{ "trigger": "cases", "contents": "\\begin{cases}\n	$0\n\\end{cases}\n" },
 		{ "trigger": "itemize", "contents": "\\begin{itemize}\n	\\item $0\n\\end{itemize}" },
 
 		{ "trigger": "defn", "contents": "\\begin{defn}[${1:Definition Name}]\\label{defn:${2:$1}}\n	$0\n\\end{defn}" },
+    { "trigger": "note", "contents": "\\begin{note}\n $0\n\\end{note}" },
 
 		{ "trigger": "frac", "contents": "\\frac{${1:a}}{${2:b}} $0" },
 		{ "trigger": "summ", "contents": "\\sum_{${1:i=1}}^{${2:n}} $0" },
@@ -26,6 +26,8 @@
 		{ "trigger": "lra", "contents": "\\langle ${1:a} \\rangle $0" },
 
 		{ "trigger": "bf", "contents": "\\textbf{${1:bold}} $0" },
-		{ "trigger": "it", "contents": "\\textit{${1:italic}} $0"}
+		{ "trigger": "it", "contents": "\\textit{${1:italic}} $0"},
+
+    { "trigger": "mathbb", "contents": "\\mathbb{$1} $0" }
 	]
 }
