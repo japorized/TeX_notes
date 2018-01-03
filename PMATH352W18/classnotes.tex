@@ -170,9 +170,11 @@ middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
 
 \begin{defn}[Sum and Product]\label{defn:Sum and Product}
 	We define the sum of two complex numbers to be the usual vector sum, i.e.
-	\begin{equation*}
-		(a + ib) + (c + id) = \begin{pmatrix} a \\ b \end{pmatrix} + \begin{pmatrix} c \\ d \end{pmatrix} = \begin{pmatrix} a + c \\ b + d \end{pmatrix} = (a + c) + i (b + d)
-	\end{equation*}
+	\begin{align*}
+		(a + ib) + (c + id) &= \begin{pmatrix} a \\ b \end{pmatrix} + \begin{pmatrix} c \\ d \end{pmatrix} \\
+											&= \begin{pmatrix} a + c \\ b + d \end{pmatrix} \\
+											&= (a + c) + i (b + d)
+	\end{align*}
 	where $a, b, c, d \in \mathbb{R}$.
 
 	We define the product of two complex numbers by setting $i^2 = -1$, and by requiring the product to be commutative, associative, and distributive over the sum. In this setup, we have that
