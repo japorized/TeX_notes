@@ -12,6 +12,7 @@
 \usepackage{mathrsfs}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
+\usepackage{pgf,tikz}
 \usepackage{pgfplots}
 \usepackage[hyperref]{ntheorem}
 \usepackage{hyperref}
@@ -29,11 +30,6 @@
 \usepgflibrary{shapes.geometric}
 \usetikzlibrary{calc}
 
-% Graph styles
-\pgfplotsset{compat=1.15}
-\pgfplotsset{four quads/.append style={axis x line=middle, axis y line=
-middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
-
 % Theorem Style Customization
 \setlength\theorempreskipamount{2ex}
 \setlength\theorempostskipamount{3ex}
@@ -48,6 +44,7 @@ middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
 \newtheorem*{remark}{Remark}
 \newtheorem*{note}{Note}
 \newtheorem*{notation}{Notation}
+\newtheorem{ex}{Exercise}[section]
 \newtheorem{defn}{Definition}[section]
 \newtheorem{eg}{Example}[section]
 \newtheorem{axiom}{Axiom}[section]
@@ -115,6 +112,14 @@ middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
 % \DeclareMathOperator{\rem}{rem}
 \DeclareMathOperator{\re}{Re}
 \DeclareMathOperator{\im}{Im}
+
+% Graph styles
+\pgfplotsset{compat=1.15}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{four quads/.append style={axis x line=middle, axis y line=
+middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
+\pgfplotsset{four quad complex/.append style={axis x line=middle, axis y line=
+middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 
 % Shortcuts
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}      % simplifying the writing of a floor function
@@ -255,7 +260,7 @@ middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
 	Let $z = 3 + 4i$. Then the $\bar{z} = 3 - 4i$. Represented in the complex plane, we have the following:
 	\begin{center}
 		\begin{tikzpicture}
-			\begin{axis}[four quads, xlabel={$\re$}, ylabel={$\im$}, xtick={-4,-3,...,4}, ytick={-5,-4,...,5}, xmin=-4, xmax=4, ymin=-5, ymax=5]
+			\begin{axis}[four quad complex, xtick={-4,-3,...,4}, ytick={-5,-4,...,5}, xmin=-4, xmax=4, ymin=-5, ymax=5]
 				\node[label={0:{$z$}},circle,fill,inner sep=2pt] at (axis cs:3,4) {};
 				\node[label={0:{$\bar{z}$}},circle,fill,inner sep=2pt] at (axis cs:3,-4) {};
 			\end{axis}
@@ -328,13 +333,168 @@ middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
 
 	\begin{center}
 		\begin{tikzpicture}
-			\begin{axis}[four quads, xlabel={$\re$}, ylabel={$\im$}, xtick={-3,-2,...,3}, ytick={-3,-2,...,3}, xmin=-3, xmax=3, ymin=-1, ymax=3]
+			\begin{axis}[four quad complex, xtick={-3,-2,...,3}, ytick={-3,-2,...,3}, xmin=-3, xmax=3, ymin=-1, ymax=3]
 				\draw (axis cs:0, 1) circle [radius=1];
 			\end{axis}
 		\end{tikzpicture}
 	\end{center}
 
 	Let $a, b \in \mathbb{C}$ describe the set $\left\{z \in \mathbb{C} : \abs{z - a} < \abs{z - b} \right\}$.
+
+	Suppose the following coordinates for $a$ and $b$ are arbitrary,
+
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[four quad complex, xmin=-15, xmax=15, ymin=-15, ymax=15]
+				\draw[line width=0pt,dashed,fill=black,fill opacity=0.25](-20,20)--(-20,-20)--(20,-20)--(20,-10)--(-5,15);
+				\draw[color=black] (-1,13) node {$f$};
+				\draw[line width=2pt,solid](2,2)--(8,8);
+				\draw[color=black] (3.5,5) node {$g$};
+				\node[label={0:{$a$}},circle,fill,inner sep=2pt] at (axis cs:2,2) {};
+				\node[label={0:{$b$}},circle,fill,inner sep=2pt] at (axis cs:8,8) {};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+
+	In the above, $g$ is the line segment that connects the points $a$ and $b$ on the complex plane, while $f$ is the perpendicular bisector of the line segment $g$. The area described by the set $\left\{z \in \mathbb{C} : \abs{z - a} < \abs{z - b} \right\}$ is the shaded area which is below $f$.
+\end{eg}
+
+\begin{eg}
+	Let $a \in \mathbb{C}$. Describe the set $\{z \in \mathbb{C} : 1 < \abs{z-a} < 2\}$.
+
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[
+				four quad complex,
+				xmin=-2, xmax=7,
+				ymin=-2, ymax=7
+			]
+				\draw [fill=black,fill opacity=0.25] (3,3) circle (1.4142135623730951);
+				\draw[fill=white](3,3) circle (1);
+				\node[label={0:{$a$}},circle,fill,inner sep=1pt] at (axis cs:3,3) {};
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+\end{eg}
+
+\begin{eg}
+	\label{eg:complex number has exactly two roots}
+	Show that every non-zero complex number has exactly two complex square roots, and find a formula for the square roots.
+
+	Let $z = x + iy \in \mathbb{C}, x, y \in \mathbb{R}$, and let $w = u + iv, u, v \in \mathbb{R}$. Then
+
+	\begin{alignat}{3}
+		&w^2 = z &&\iff && (u + iv)^2 = x + iy \nonumber \\
+		&	&&\iff 	&& (u^2 - v^2) + i(2uv) = x + iy \nonumber \\
+		&	&&\iff && x = u^2 + v^2 \quad \text{and} \label{tworoots 1} \\
+		&	&&	   && y = 2uv \label{tworoots 2}
+	\end{alignat}
+
+	Square both sides of \cref{tworoots 2}, and thus we have $y^2 = 4u^2 v^2$.
+
+	Multiply \cref{tworoots 1} by $4u^2$, and we get
+	\begin{alignat*}{3}
+		& 	  &&4u^2 x &&= 4u^4 - 4u^2 v^2 = 4u^4 - y^2 \\
+		&\iff &&0 	&&= 4u^4 - 4u^2 x - y^2 \\
+		&\iff &&u^2 &&= \frac{4x \pm \sqrt{16x^2 + 16y^2}}{8} \\
+		&	  &&	&&= \frac{x \pm \sqrt{x^2 + y^2}}{2} 
+	\end{alignat*}
+
+	Suppose $y \neq 0$. Note that $x < \sqrt{x^2 + y^2}$. Thus $u^2 = \frac{x + \sqrt{x^2 + y^2}}{2} \implies u = \left(\frac{x + \sqrt{x^2 + y^2}}{2} \right)^{\frac{1}{2}}$.
+
+	Similarly, we can get
+	\begin{equation*}
+		v = \pm \left(\frac{-x + \sqrt{x^2 + y^2}}{2}\right)^{\frac{1}{2}}
+	\end{equation*}
+
+	Note that all four choices of signs satisfy \cref{tworoots 1}. If $y > 0$, then $u$ and $v$ are either both positive or both negative by \cref{tworoots 2}.
+
+	Suppose $y = 0$. Then we have
+	\begin{equation*}
+		w^2 = z = x
+	\end{equation*}
+
+	Therefore, we get
+	\begin{equation*}
+		w = \begin{cases}
+			\pm \left[ \left(\frac{x + \sqrt{x^2 + y^2}}{2} \right)^{\frac{1}{2}} + i \left( \frac{-x + \sqrt{x^2 + y^2}}{2} \right)^{\frac{1}{2}} \right] & y > 0 \\
+			\pm \left[ \left(\frac{x + \sqrt{x^2 + y^2}}{2} \right)^{\frac{1}{2}} - i \left(\frac{-x + \sqrt{x^2 + y^2}}{2} \right)^{\frac{1}{2}} \right] & y < 0 \\
+			\pm \sqrt{x} & y = 0, x > 0 \\
+			\pm i \sqrt{x} & y = 0, x < 0
+		\end{cases}
+	\end{equation*}
+\end{eg}
+
+\begin{remark}
+	Let $z \in \mathbb{C}$. The notation $\sqrt{z}$ may represent either one of the square roots of $z$ or both of the square roots, i.e. it is possible that $\sqrt{z}$ represents a set.
+\end{remark}
+
+\begin{ex}\label{ex:Separation of Multiplication in Square Roots}
+	Is it always okay for complex numbers such that $\sqrt{zw} = \sqrt{z} \sqrt{w}$, for $z, w \in \mathbb{C}$?
+
+	No. For example, consider $z = w = -1$. Then we have
+	\begin{equation*}
+		\sqrt{zw} = \sqrt{1} = \pm 1
+	\end{equation*}
+	while
+	\begin{equation*}
+		\sqrt{z} \sqrt{w} = i \cdot i = -1
+	\end{equation*}
+	and thus
+	\begin{equation*}
+		\sqrt{zw} \neq \sqrt{z} \sqrt{w}.
+	\end{equation*}
+\end{ex}
+
+\begin{eg}
+	Find the values of $\sqrt{3 - 4i}$.
+
+	By \cref{eg:complex number has exactly two roots},
+
+	\begin{align*}
+		\sqrt{3 - 4i} &= \pm \left( \sqrt{\frac{3 + \sqrt{9 + 16}}{2}} - i \sqrt{\frac{-3 + \sqrt{9 + 16}}{2}} \right) \\
+			&= \pm (2 - i)
+	\end{align*}
+\end{eg}
+
+\begin{remark}\label{remark:quadratic formula for complex numbers}
+	The quadratic formula holds for complex polynomials, i.e.
+	\begin{equation*}
+		\forall a, b, c \in \mathbb{C} \quad a \neq 0 \quad \forall z \in \mathbb{C} \; az^2 + bz + c = 0,
+	\end{equation*}
+	the solution for $z$ is given by
+	\begin{equation}\label{eq:quadractic formula for complex numbers}
+		z_{1, 2} = \frac{-b + \sqrt{b^2 - 4ac}}{b} 
+	\end{equation}
+
+	The following is a short proof.
+
+	\begin{proof}
+		\begin{align*}
+			az^2 + bz + c = 0 &\iff z^2 + \frac{b}{a} z + \frac{c}{a} = 0 \\
+				&\iff z^2 + \frac{b}{a} z + \left(\frac{b}{2a} \right)^2 - \left(\frac{b}{2a}\right)^2 + \frac{c}{a} = 0 \\
+				&\iff \left(z + \frac{b}{2a} \right)^2 = \frac{b^2}{4a^2} - \frac{c}{a} = \frac{b^2 - 4ac}{4a^2} \\
+				&\iff z = \frac{-b + \sqrt{b^2 - 4ac}}{2a}  
+		\end{align*}
+	\end{proof}
+
+	(Personal Note: where did the $-$ for the supposed $\pm$ go? Or should it really be $\pm$?)
+\end{remark}
+
+\begin{eg}
+	Solve $iz^2 - (2 + 3i)z + 5(1 - i) = 0$.
+
+	\begin{align*}
+		z &= \frac{2 + 3i + \sqrt{(2 + 3i)^2 - 4i[5(1 - i)]}}{2i} \\
+			&= \frac{2 + 3i + \sqrt{-5 + 12i - 20i - 20}}{2i} \\
+			&= \frac{2 + 3i + \sqrt{-25 - 8i}}{2i} 
+	\end{align*}
+
+	\begin{align*}
+		\sqrt{-25 - 8i} &= \pm \left[ \left(\frac{-25 + \sqrt{625 + 64}}{2} \right)^{\frac{1}{2}}  - i \left(\frac{25 + \sqrt{625 + 64}}{2} \right)^{\frac{1}{2}} \right]
+	\end{align*}
+
+	(Personal note: temporarily stuck, seeing that there's no ``nice'' solution)
 \end{eg}
 
 \end{document}

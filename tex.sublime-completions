@@ -12,7 +12,7 @@
 		{ "trigger": "equl", "contents": "\\begin{equation}\n	\\label{eq:${2:lbl}}\n	$0\n\\end{equation}" },
 		{ "trigger": "ali", "contents": "\\begin{align${1:ed}}\n	$0\n\\end{align$1}" },
 		{ "trigger": "gather", "contents": "\\begin{gather${1:ed}}\n	$0\n\\end{gather$1}"},
-		{ "trigger": "eg", "contents": "\\begin{eg}\n	\\label{$2{eg:ref}}\n	$0\n\\end{eg}" },
+		{ "trigger": "eg", "contents": "\\begin{eg}\n	\\label{${2:eg:ref}}\n	$0\n\\end{eg}" },
 		{ "trigger": "cases", "contents": "\\begin{cases}\n	$0\n\\end{cases}\n" },
 		{ "trigger": "itemize", "contents": "\\begin{itemize}\n	\\item $0\n\\end{itemize}" },
 
