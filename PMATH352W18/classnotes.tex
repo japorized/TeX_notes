@@ -173,6 +173,14 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 	\end{equation*}
 \end{defn}
 
+\begin{note}
+	\begin{itemize}
+		\item It is easy to see how $\mathbb{R}$ is a subset of $\mathbb{C}$.
+		\item Complex Numbers of the form $\left(\begin{smallmatrix} 0 \\ y \end{smallmatrix}\right)$ where $y \in \mathbb{R}$ are called \textit{purely imaginary numbers}.
+		\item Certain authors may prefer to denote $i = \left(\begin{smallmatrix} 0 \\ 1 \end{smallmatrix}\right)$.
+	\end{itemize}
+\end{note}
+
 \begin{defn}[Sum and Product]\label{defn:Sum and Product}
 	We define the sum of two complex numbers to be the usual vector sum, i.e.
 	\begin{align*}
@@ -188,6 +196,14 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 						 &= (ac - bd) + i (ad + bc) \label{eq:complex multiplication}
 	\end{align}
 \end{defn}
+
+\begin{note}
+ It is interesting to note that \textit{any complex number times zero is zero}, just like what we have with real numbers.
+ \begin{gather*}
+ 	\forall z = x + iy \in \mathbb{C} \; x, y \in \mathbb{R} \enspace 0 \in \mathbb{C} \\
+ 	z \cdot 0 = (x + iy)(0 + i0) = 0 + i0 = 0
+ \end{gather*}
+\end{note}
 
 \begin{eg}\label{eg:1}
 	Let $z = 2 + i, w = 1 + 3i$. Find $z + w$ and $zw$.
@@ -250,6 +266,8 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 			u(v + w)		& uv + uw
 		\end{tabular}
 	\end{center}
+
+	Since the distributive law holds for complex numbers, note that the binomial expansion works for $(w + z)^n$ where $w, z \in \mathbb{C}$ and $n \in \mathbb{N}$. (I did not verify if this is still true for when $n \in \mathbb{R}$.)
 \end{note}
 
 \begin{defn}[Conjugate]\label{defn:Conjugate}
@@ -266,6 +284,8 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 			\end{axis}
 		\end{tikzpicture}
 	\end{center}
+
+	We observe that on the complex plane, the conjugate of a complex number is simply its reflection on the real axis.
 \end{eg}
 
 \begin{defn}[Modulus]\label{defn:Modulus}
@@ -274,6 +294,10 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 		\abs{z} = \sqrt{x^2 + y^2} \in \mathbb{R}.
 	\end{equation}
 \end{defn}
+
+\begin{note}
+ Note that this definition is consistent with the notion of the absolute value in real numbers when $z$ is a real number, since if $y = 0$, $\abs{z} = \abs{x + i0} = \sqrt{x^2} = \pm x$.
+\end{note}
 
 \begin{note}
  For $z, w \in \mathbb{R}$, we have
@@ -287,11 +311,15 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
  but note that $\abs{z + w} \neq \abs{z} + \abs{w}$.
 \end{note}
 
+\begin{note}
+ While inequalities such as $z_1 < z_2$, where $z_1, z_2 \in \mathbb{C}$, are meaningless unless if both of them are real, $\abs{z_1} < \abs{z_2}$ means that the point $z_1$ in the complex plane is closer to the origin than the point $z_2$.
+\end{note}
+
 \begin{propo}[Basic Inequalities]\label{propo:Basic Inequalities}
 	\begin{enumerate}
 		\item $\abs{\re(z)} \leq \abs{z}$ \\
 		\item $\abs{\im(z)} \leq \abs{z}$ \\
-		\item $\abs{z + w} \leq \abs{z} + \abs{w} \quad$ Triangle Inequality \\
+		\item $\abs{z + w} \leq \abs{z} + \abs{w} \quad$ Triangle Inequality \label{eq:triangle inequality}\\
 		\item $\abs{z + w} \geq \abs{\;\abs{z} - \abs{w}\;} \quad$ Inverse Triangle Inequality
 	\end{enumerate}
 \end{propo}
@@ -328,6 +356,32 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 	as required.\qed
 \end{proof}
 
+\cref{eq:triangle inequality} in \cref{propo:Basic Inequalities} can be generalized by the means of mathematical induction to sums involving any finite number of terms, as:
+\begin{equation}\label{eq:generalized triangle inequality}
+	\abs{z_1 + z_2 + \hdots + z_n} \leq \abs{z_1} + \abs{z_2} + \hdots + \abs{z_n}
+\end{equation}
+where $n \in \mathbb{N} \setminus \{0, 1\}$.
+
+To note the induction proof, when $n = 2$, \cref{eq:generalized triangle inequality} is just \cref{eq:triangle inequality}. If \cref{eq:generalized triangle inequality} is true for when $n = m$ where $m \in \mathbb{N} \setminus \{0, 1\}$, $n = m + 1$ is also true since by \cref{eq:triangle inequality},
+\begin{align*}
+	\abs{(z_1 + z_2 + \hdots + z_m) + z_{m+1}} &\leq \abs{z_1 + z_2 + \hdots + z_m} + \abs{z_{m + 1}} \\
+			&\leq (\abs{z_1} + \abs{z_2} + \hdots + \abs{z_m}) + \abs{z_{m+1}}.
+\end{align*}
+
+The distance between two points $z_1 = x_1 + iy_1, z_2 = x_2 + iy_2 \in \mathbb{C}, x_1, x_2, y_1, y_2 \in \mathbb{R}$ is $\abs{z_1 - z_2}$, since $\abs{z_1 - z_2} = \sqrt{(x_1 - x_2)^2 (y_1 - y_2)^2}$ is our usual notion of the Euclidean distance of two points on a plane.
+
+Also, note that
+\begin{equation*}
+	z_1 - z_2 = z_1 + (-z_2)
+\end{equation*}
+and thus if we apply our knowledge of vector representation, $z_1 - z_2$ is the directed line segment from the point $z_2$ to $z_1$.
+
+With the notion of a ``distance'' set on the complex plane, we can now explore upon points lying on a circle with a center $z_0$ and radius $R$, which satisfies the equation
+\begin{equation*}
+	\abs{z - z_0} = R.
+\end{equation*}
+We may simply refer to this set of points as the circle $\abs{z - z_0} = R$.
+
 \begin{eg}
 	We may describe a set $\left\{z \in \mathbb{C} : \abs{z -i} = 1 \right\}$ as follows:
 
@@ -358,6 +412,10 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 
 	In the above, $g$ is the line segment that connects the points $a$ and $b$ on the complex plane, while $f$ is the perpendicular bisector of the line segment $g$. The area described by the set $\left\{z \in \mathbb{C} : \abs{z - a} < \abs{z - b} \right\}$ is the shaded area which is below $f$.
 \end{eg}
+
+\chapter{Lecture 2 - Jan 5th, 2018}\label{chp:Lecture 2 - Jan 5th, 2018}
+
+\section{Complex Numbers and Their Properties (Continued)}\label{sect:Complex Numbers and Their Properties (Continued)}
 
 \begin{eg}
 	Let $a \in \mathbb{C}$. Describe the set $\{z \in \mathbb{C} : 1 < \abs{z-a} < 2\}$.
@@ -496,5 +554,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 
 	(Personal note: temporarily stuck, seeing that there's no ``nice'' solution)
 \end{eg}
+
+\chapter{Lecture 3 - Jan 8th, 2018}\label{chp:Lecture 3 - Jan 8th, 2018}
 
 \end{document}
