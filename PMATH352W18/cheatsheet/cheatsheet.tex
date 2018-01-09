@@ -6,7 +6,7 @@
 \usepackage{amsmath}
 \usepackage{tikz,pgf}
 \usepackage{pgfplots}
-\usetikzlibrary{shapes,positioning,arrows,fit,calc,graphs,graphs.standard}
+\usetikzlibrary{angles,shapes,positioning,arrows,fit,calc,graphs,graphs.standard}
 \usepackage{multicol}
 \usepackage{wrapfig}
 \usepackage[top=0mm,bottom=1mm,left=0mm,right=1mm]{geometry}
@@ -17,8 +17,11 @@
 
 \DeclareMathOperator{\re}{Re}
 \DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\caparg}{Arg}
 
 \newcommand{\abs}[1]{\left|#1\right|}           % absolute value
+\newcommand{\Arg}[1]{\caparg #1}
+\renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
 
 \pgfplotsset{compat=1.15}
 \usepgfplotslibrary{fillbetween}
@@ -192,5 +195,6 @@ by~Johnson~Ng,~page~\thepage~of~1
 \small
 \begin{multicols*}{5}
 \input{section1}
+
 \end{multicols*}
 \end{document}

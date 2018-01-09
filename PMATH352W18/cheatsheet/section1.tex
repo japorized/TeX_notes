@@ -1,21 +1,21 @@
 \section{Complex Numbers and Their Properties}
 \subsection*{Complex Plane as a Set}
 $\mathbb{C} = \mathbb{R}^2 = \left\{\begin{pmatrix} x \\ y \end{pmatrix} : x, y \in \mathbb{R} \right\}$
-\subsection*{Real and Imaginary Part of a Complex Number}
+\subsection*{Real and Imaginary Part}
 $\forall z = x + iy \in \mathbb{C} \; x, y \in \mathbb{R} \\ \re(z) = x \; \im(z) = y$
-\subsection*{Product of Complex Numbers}
+\subsection*{Product}
 $\forall z = a + ib, w = c + id \in \mathbb{C} \; a, b, c, d \in \mathbb{R} \\
 zw = (ac - bd) + i (ad + bc)$
 \subsection*{Inverse of a Complex Number}
 $\forall z = a + ib \in \mathbb{C} \; a, b \in \mathbb{R} \\
 \exists z^{-1} = \frac{a}{aa^2 + b^2} - i \frac{b}{a^2 + b^2} \in \mathbb{C}$
-\subsection*{Conjugate of a Complex Number}
+\subsection*{Conjugate}
 $\forall z = a + ib \in \mathbb{C} \; a, b \in \mathbb{R} \\
 \exists \bar{z} = a - ib \in \mathbb{C}$
-\subsection*{Modulus of a Complex Number}
+\subsection*{Modulus}
 $\forall z = x = iy \in \mathbb{C} \; x, y \in \mathbb{R} \\
 \abs{z} = \sqrt{x^2 + y^2} \in \mathbb{R}$
-\subsection*{Basic Inequalities of Complex Numbers}
+\subsection*{Basic Inequalities}
 $\forall z, w \in \mathbb{C},$
 \begin{enumerate}
 	\item $\abs{\re(z)} \leq \abs{z}$
@@ -50,8 +50,39 @@ $\forall z = x = iy \in \mathbb{C} \; x, y \in \mathbb{R} \\
 		\end{cases}$
 	}
 \end{equation*}
-\subsection*{Quadratic Formula for Complex Numbers}
+\subsection*{Quadratic Formula}
 $\forall a, b, c \in \mathbb{C} \; a \neq 0 \; az^2 + bz + c = 0$
 \begin{equation*}
 	z = \frac{-b + \sqrt{b^2 - 4ac}}{2a}
 \end{equation*}
+\subsection*{Argument}
+\begin{tikzpicture}
+	\tikzset{>=stealth}
+	\draw[->] (-1, 0) -- ++(3, 0) coordinate (X) node[below] {$\re$};
+	\draw[->] (0, -1) -- ++(0, 3) node[left] {$\im$};
+	\coordinate (O) at (0, 0);
+
+	\draw[->] (O) -- (1,1) coordinate (z) node[above] {$z$};
+	\path (X) -- (O) -- (z) pic [draw,->,pic text=$\Arg{z}$, angle eccentricity=2.0] {angle=X--O--z};
+\end{tikzpicture}
+\subsection*{Polar Form}
+$\forall z \in \mathbb{C} \; \exists r, \theta \in \mathbb{R} \; \theta \in [0, 2\pi)$ \\
+$z = re^{i\theta}$
+\subsection*{Polar to Cartesian}
+$x = r \cos \theta \quad y = r \sin \theta$
+\subsection*{Cartesian to Polar}
+$r = \abs{z} \quad \tan \theta = \frac{x}{y}$
+\subsection*{Conjugate in Polar Form}
+$z = re^{i\theta} \iff \bar{z} = re^{-i\theta}$
+\subsection*{Inverse in Polar Form}
+$z = re^{i \theta} \land z \neq 0 \\
+\implies z^{-1} = \frac{1}{r} e^{-i \theta}$
+\subsection*{Product in Polar Form}
+\begin{itemize}
+	\item $z_1 z_2 = r_1 r_2 e^{i (\theta_1 + \theta_2)}$
+	\item $\forall n \in \mathbb{Z} \enspace (re^{in}) = r^n e^{in\theta}$
+\end{itemize}
+\subsection*{nth Roots of a Complex Number}
+$\left\{ r^{\frac{1}{n}} e^{i \left(\frac{\theta + 2 \pi k}{n} \right)} : k = 0, 1, ..., n - 1 \right\}$
+\subsection*{nth Roots of Unity}
+$\left\{ e^{i \left(\frac{2 \pi k}{n} \right)} : k = 0, 1, ..., n - 1 \right\}$
