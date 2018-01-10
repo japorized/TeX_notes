@@ -38,6 +38,7 @@
 \theoremstyle{break}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem*{proof}{Proof}
+\newtheorem*{solution}{Solution}
 \newtheorem{crly}{Corollary}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{propo}{Proposition}[section]
@@ -788,6 +789,280 @@ It is easy to see how the nth roots of unity partitions the unit circle into n p
 				\theta = \frac{\frac{2\pi}{3} + 2\pi k}{4} = \frac{(2k + \frac{2}{3}) \pi}{4}, \quad k = 0, 1, 2, 3  
 			\end{gather*}
 	\end{enumerate}
+\end{ex}
+
+\chapter{Lecture 4 - Jan 10th, 2018}\label{chp:Lecture 4 - Jan 10th, 2018}
+
+\section{Examples for nth Roots of Unity}\label{sect:Examples for nth Roots of Unity}
+
+Recall that the $n$th roots of unity are given by $e^{i \frac{2\pi k}{n}}, k = 0, 1, ..., n - 1$.
+
+\begin{ex}\label{ex:sum of root of unity other than one is negative one}
+	Let $z$ be any $n$th root of unity other than 1. Show that
+	\begin{equation}
+		z^{n - 1} + z^{n - 2} + \hdots + z + 1 = 0
+	\end{equation}
+
+	\begin{proof}
+		By the Sum of Finite Geometric Terms,
+		\begin{equation*}
+			z^{n - 1} + z^{n - 2} + \hdots + z + 1 = \frac{1 - z^n}{1 - z}.
+		\end{equation*}
+		Since $z^n = 1$, RHS is thus zero, which in turn completes the proof.
+	\end{proof}
+\end{ex}
+
+As an aside, if we wish to remove the restriction that $z$ can also be 1, we may consider that
+\begin{equation*}
+	z^n - 1 = (z - 1)(1 + z + \hdots + z^{n - 1})
+\end{equation*}
+Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1}) = 0$.
+
+\begin{ex}
+	Consider the $n - 1$ diagonals of a regular $n$-gon, inscribed in a circle of radius 1, obtained by connecting one vertex on the $n$-gon to all its other vertices.
+
+	For example, if we are given $n = 6$, we obtain the following diagram.
+
+	\begin{figure}
+		\begin{center}
+			\begin{tikzpicture}
+				\newcommand \CircleRadius {2};
+				\draw(0, 0) circle (\CircleRadius);
+				\coordinate (a) at (180:\CircleRadius);
+				\coordinate (z1) at (120:\CircleRadius);
+				\coordinate (z2) at (60:\CircleRadius);
+				\coordinate (z3) at (0:\CircleRadius);
+				\coordinate (z4) at (300:\CircleRadius);
+				\coordinate (z5) at (240:\CircleRadius);
+				\node[label={180:{$a$}},circle,fill,inner sep=1pt] at (a) {};
+				\foreach \x in {1, ..., 5} {
+					\draw (a)--(z\x) node[midway,fill=white] {$z_\x$};
+				};
+				\draw[dotted] (0:\CircleRadius) \foreach \x in {0, 60, ..., 300} {
+					-- (\x:\CircleRadius)
+				} -- cycle;
+			\end{tikzpicture}
+		\end{center}
+		\caption[loftitle]{$n = 6$, where $a$ is an arbitrary vertex on the hexagon}
+		\label{figure:regular hexagon with one point connected to all other vertices}
+	\end{figure}
+
+	Show that the product of the lengths of these diagonals is equal to n.
+
+	\begin{proof}
+		Note that \cref{figure:regular hexagon with one point connected to all other vertices} can be translated into \cref{figure:regular n-gon with roots of unity}.
+
+		\begin{figure}
+			\begin{center}
+				\begin{tikzpicture}
+					\tikzset{>=stealth}
+					\draw[->] (-3, 0) -- ++(6, 0) coordinate (X);
+					\draw[->] (0, -3) -- ++(0, 6);
+					\newcommand \CircleRadius {2};
+					\newcommand \Vertices {10};
+					\draw(0, 0) circle (\CircleRadius);
+					\foreach \i [evaluate=\i as \x using (\i - 1)*(360 / \Vertices)] in {1, ..., 6} {
+						\coordinate (z\i) at (\x:\CircleRadius);
+						\ifthenelse{\i<5}{
+							\node[label={\x:{\ifthenelse{\i=1}{$a=z_\i$}{$z_\i$}}},circle,fill,inner sep=1pt] at (z\i) {};
+						}{};
+					};
+					\foreach \i [evaluate=\i as \j using \i + 1] in {1, ..., 5} {
+						\ifthenelse{\i<4}{
+							\draw (z\i)--(z\j);
+						}{
+							\draw[dotted] (z\i)--(z\j);
+						}
+					}
+					\draw (z1)--(z3);
+					\draw (z1)--(z4);
+					\draw[dotted] (z1)--(z5);
+				\end{tikzpicture}
+			\end{center}
+			\caption[loftitle]{A regular $n$-gon with the roots of unity on its vertices}
+			\label{figure:regular n-gon with roots of unity}
+		\end{figure}
+
+		Thus the equation that we wish to prove becomes
+		\begin{equation}\label{eq:total length from one vertex to all others is n}
+			\abs{1 - z_2}\abs{1 - z_3}\hdots\abs{1 - z_n} = n
+		\end{equation}
+		Note that $z_2, ..., z_n$ are the $n$th roots of unity other than 1.
+
+		Let $z$ be a variable and consider the polynomial
+		\begin{equation}\label{eq:roots of unity polynomial}
+			P(z) := 1 + z + z^2 + \hdots + z^{n - 1}
+		\end{equation}
+		Since the roots of $P(z)$ are the $n$th roots of unity other than 1, we can factorize \cref{eq:roots of unity polynomial} into
+		\begin{equation*}
+			P(z) = (z - z_2)(z - z_3) \hdots (z - z_n)
+		\end{equation*}
+		Now let $z = 1$ and take the modulus of $P(z)$, and we get \cref{eq:total length from one vertex to all others is n}.
+	\end{proof}
+\end{ex}
+
+\begin{ex}
+	Let $n \in \mathbb{N}$. Show that $\sum_{j=0}^{n} \binom{3n}{3j} = \frac{2^{3n} + 2(-1)^n}{3}$.
+
+	\begin{proof}
+		Let $\alpha = e^{i \frac{2\pi}{3}}$. Then $\alpha$ is a cubic root of unity, i.e. $\alpha^3 = 1$, and from \cref{ex:sum of root of unity other than one is negative one}, $1 + \alpha + \alpha^2 = 0$.
+
+		Consider
+		\begin{align}
+			\begin{split}\label{eq:combinatorial problem solved in complex terminology 1}
+			(1 + 1)^{3n}
+				=& \binom{3n}{0} + \binom{3n}{1} + \binom{3n}{2} + \binom{3n}{3} + \binom{3n}{4} \\
+				&+ \binom{3n}{5} + \binom{3n}{6} + \hdots + \binom{3n}{3n}
+			\end{split} \\
+			\begin{split}\label{eq:combinatorial problem solved in complex terminology 2}
+			(1 + \alpha)^{3n}
+				=& \binom{3n}{0} + \binom{3n}{1}\alpha + \binom{3n}{2}\alpha^2 + \binom{3n}{3} + \binom{3n}{4}\alpha \\
+				&+ \binom{3n}{5}\alpha^2 + \binom{3n}{6} + \hdots + \binom{3n}{3n}
+			\end{split} \\
+			\begin{split}\label{eq:combinatorial problem solved in complex terminology 3}
+			(1 + \alpha^2)^{3n}
+				=&\binom{3n}{0} + \binom{3n}{1}\alpha^2 + \binom{3n}{2}\alpha + \binom{3n}{3} + \binom{3n}{4}\alpha^2 \\
+				&+ \binom{3n}{5}\alpha + \binom{3n}{6} + \hdots + \binom{3n}{3n}
+			\end{split}
+			\phantom{a}
+		\end{align}
+
+		Adding \cref{eq:combinatorial problem solved in complex terminology 1}, \cref{eq:combinatorial problem solved in complex terminology 2} and \cref{eq:combinatorial problem solved in complex terminology 3}, we observe that the terms with coefficients $\binom{3n}{k}$ where $k$ is not a multiple of 3 sums to 0 as given by $1 + \alpha + \alpha^2 = 0$, and therefore we obtain
+		\begin{align*}
+			2^{3n} + (1 + \alpha)^{3n} + (1 + \alpha^2)^{3n} &= 3 \sum_{j=0}^{n} \binom{3n}{3j} \\
+			\frac{1}{3} \left[2^{3n} + (1 + \alpha)^{3n} + (1 + \alpha^2)^{3n}\right] &= \sum_{j=0}^{n} \binom{3n}{3j} \\
+			\frac{1}{3} \left[2^{3n} + (-\alpha^2)^{3n} + (-\alpha)^{3n} \right] &= \sum_{j=0}^{n} \binom{3n}{3j} \quad \text{since } 1 + \alpha + \alpha^2 = 0 \\
+			\frac{1}{3} \left[2^{3n} + (-1)^n + (-1)^n \right] &= \sum_{j=0}^{n} \binom{3n}{3j} \quad \text{since } \alpha^3 = 1 \\
+			\frac{2^{3n} + 2(-1)^n}{3} &= \sum_{j=0}^{n} \binom{3n}{3j}
+		\end{align*}
+		as required.
+	\end{proof}
+\end{ex}
+
+\begin{ex}
+	Note that we can define $\Arg{z}$ in any interval of length $2 \pi$, i.e. it is not necessary that $\Arg{z} \in [0, 2\pi)$.
+
+	For example, if we restrict $\Arg{z} \in [-\pi, \pi]$, then we can write
+	\begin{equation*}
+		\Arg{\left(-\frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}} i \right)} = - \frac{3\pi}{4}
+	\end{equation*}
+
+	Let $z$ be on the unit circle and $\Arg{z} \in [-\pi, \pi]$. Suppose that $z \notin \mathbb{R}$, i.e. $z \neq 1, z \neq -1$. Show that
+	\begin{equation*}
+		\Arg{\left( \frac{z-1}{z+1} \right)} = \begin{cases}
+			\frac{\pi}{2} & \im{z} > 0 \\
+			-\frac{\pi}{2} & \im{z} < 0
+		\end{cases}
+	\end{equation*}
+
+	\begin{proof}
+		Note that $\forall w_1, w_2 \in \mathbb{C}$, where $\Arg{w_1} = \tau_1, \Arg{w_2} = \tau_2$ for $\tau_1, \tau_2$ in the same $2\pi$-interval,
+		\begin{equation*}
+			\Arg{\frac{w_1}{w_2} = \frac{e^{i\tau_1}}{e^{i\tau_2}} \equiv e^{i (\tau_1 - \tau_2)} = \Arg{w_1} - \Arg{w_2}}
+		\end{equation*}
+		in modulo $2\pi$.
+
+		Suppose $\im{z} > 0$. Let $\theta_1 = \Arg{(z - 1)}$ and $\theta_2 = \Arg{(z + 1)}$. Consider \cref{figure:angle division example}. We observe that
+		\begin{align*}
+			\frac{\pi}{2} &= \theta_2 + \pi - \theta_1 \\
+			\theta_1 - \theta_2 &= \frac{\pi}{2}
+		\end{align*}
+		as desired.
+
+		\begin{figure}
+			\begin{center}
+				\begin{tikzpicture}
+					\tikzset{>=stealth}
+					\draw[->] (-2, 0) -- ++(4, 0) coordinate (X);
+					\draw[->] (0, -2) -- ++(0, 4);
+					\coordinate (O) at (0,0);
+					\draw (0,0) circle (1);
+					\coordinate (z) at (60:1);
+					\node[label={90:{$z$}},circle,fill,inner sep=1pt] at (z) {};
+					\coordinate (z-1) at ($(z) + (-1,0)$);
+					\node[label={90:{$z-1$}},circle,fill,inner sep=1pt] at (z-1) {};
+					\coordinate (z+1) at ($(z) + (1,0)$);
+					\node[label={90:{$z+1$}},circle,fill,inner sep=1pt] at (z+1) {};
+					\draw[dotted] (z+1)--(z-1);
+					\draw[dotted] (O)--(z-1);
+					\draw[dotted] (O)--(z+1);
+					\path (X) -- (O) -- (z-1) pic [draw,->,pic text=$\theta_1$, angle radius=0.3cm,angle eccentricity=1.6] {angle=X--O--z-1};
+					\path (X) -- (O) -- (z+1) pic [draw,->,pic text=$\theta_2$, angle radius=1.2cm,angle eccentricity=1.2] {angle=X--O--z+1};
+				\end{tikzpicture}
+				\hspace{3cm}
+				\begin{tikzpicture}
+					\tikzset{>=stealth}
+					\draw[->] (-2, 0) -- ++(4, 0) coordinate (X);
+					\draw[->] (0, -2) -- ++(0, 4);
+					\coordinate (O) at (0,0);
+					\draw (0,0) circle (1);
+					\coordinate (z) at (60:1);
+					\node[label={90:{$z$}},circle,fill,inner sep=1pt] at (z) {};
+					\coordinate (z-1) at ($(z) + (-1,0)$);
+					\node[label={90:{$z-1$}},circle,fill,inner sep=1pt] at (z-1) {};
+					\coordinate (z+1) at ($(z) + (1,0)$);
+					\node[label={90:{$z+1$}},circle,fill,inner sep=1pt] at (z+1) {};
+					\coordinate (-1) at (180:1);
+					\coordinate (1) at (0:1);
+					\draw[dotted] (z+1)--(z-1);
+					\draw[dotted] (O)--(z-1);
+					\draw[dotted] (O)--(z+1);
+					\draw (-1)--(z);
+					\draw (1)--(z);
+					\path (X)--(-1)--(z) pic[draw,->,pic text=$\theta_2$,angle eccentricity=1.5] {angle=X---1--z};
+					\path (X)--(1)--(z) pic[draw,->,pic text=$\theta_1$,angle radius=0.3cm,angle eccentricity=1.6] {angle=X--1--z};
+				\end{tikzpicture}
+			\end{center}
+			\caption[loftitle]{(Right) Depicted question, (Left) Translated Angles}
+			\label{figure:angle division example}
+		\end{figure}
+
+		Similarly, we can obtain $\theta_1 - \theta_2 = -\frac{\pi}{2}$ for when $\im{z} < 0$. This completes the proof.
+	\end{proof}
+\end{ex}
+
+\begin{ex}
+	Let $f(z) = e^z$ for $z \in \mathbb{C}$. Let $A = \{z = x + iy \in \mathbb{C} : x \leq 1, y \in [0, \pi] \}$. Describe the image of $f(A)$.
+
+	\begin{solution}
+		Firstly, note that
+		\begin{align*}
+			e^z &= e^{x + iy} \\
+			e^x &\in (0, e] \\
+			y &\in [0, \pi]
+		\end{align*}
+		It is clear that the image will be in on the positive side of the imaginary-axis. Also, since $e^x \in (0, e]$, we get the right graph represented in \cref{figure:domain and image of f(A)}. The image of $f(A)$ is described in the left image of \cref{figure:domain and image of f(A)}.
+
+		\begin{figure}
+			\begin{center}
+				\begin{tikzpicture}
+					\tikzset{>=stealth}
+					\draw[->] (-2, 0) -- ++(4, 0) coordinate (X) node[below, right] {$\re$};
+					\draw[->] (0, -2) -- ++(0, 4) node[above,right] {$\im$};
+					\draw [draw=none,fill=black,fill opacity=0.25] (-2,0) rectangle (1,1.5);
+					\draw (1,0)--(1,1.5)--(-2,1.5);
+					\node[label={270:{$1$}}] at (1,0) {};
+					\node[label={155:{$\pi$}}] at (0,1.5) {};
+				\end{tikzpicture}
+				\hspace{3cm}
+				\begin{tikzpicture}
+					\tikzset{>=stealth}
+					\draw[->] (-2, 0) -- ++(4, 0) coordinate (X) node[below,right] {$\re$};
+					\draw[->] (0, -2) -- ++(0, 4) node[above,right] {$\im$};
+					\begin{scope}
+					    \clip (-1,0) rectangle (1,1);
+					    \draw[fill=black,fill opacity=0.25] (0,0) circle(1);
+					    \draw (-1,0) -- (1,0);
+					\end{scope}
+					\node[label={270:{$e$}}] at (1,0) {};
+					\node[label={270:{$-e$}}] at (-1,0) {};
+					\node[label={155:{$e$}}] at (0,1) {};
+				\end{tikzpicture}
+			\end{center}
+			\caption[loftitle]{(Right) Domain of $f(A)$, (Left) Image of $f(A)$}
+			\label{figure:domain and image of f(A)}
+		\end{figure}
+	\end{solution}
 \end{ex}
 
 \end{document}
