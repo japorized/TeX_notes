@@ -10,6 +10,8 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{mathrsfs}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{pgf,tikz}
@@ -1011,6 +1013,7 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 					\draw (1)--(z);
 					\path (X)--(-1)--(z) pic[draw,->,pic text=$\theta_2$,angle eccentricity=1.5] {angle=X---1--z};
 					\path (X)--(1)--(z) pic[draw,->,pic text=$\theta_1$,angle radius=0.3cm,angle eccentricity=1.6] {angle=X--1--z};
+					\tkzMarkRightAngle[size=0.2,color=black](-1,z,1);
 				\end{tikzpicture}
 			\end{center}
 			\caption[loftitle]{(Right) Depicted question, (Left) Translated Angles}
