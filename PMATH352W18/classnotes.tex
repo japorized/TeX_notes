@@ -16,6 +16,8 @@
 \usepackage[english]{babel}
 \usepackage{pgf,tikz}
 \usepackage{pgfplots}
+\usepackage{faktor}
+\usepackage{float}
 \usepackage[hyperref]{ntheorem}
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
@@ -133,6 +135,8 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\abs}[1]{\left|#1\right|}						% absolute value
 \newcommand{\Arg}[1]{\caparg #1}
 \renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
+\newcommand{\quotient}[2]{\faktor{#1}{#2}}
+\newcommand{\cyclic}[1]{\left\langle #1 \right\rangle}
 
 % Main Body
 \title{PMATH352W18 Complex Analysis - Class Notes}
@@ -825,7 +829,7 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 
 	For example, if we are given $n = 6$, we obtain the following diagram.
 
-	\begin{figure}
+	\begin{figure}[H]
 		\begin{center}
 			\begin{tikzpicture}
 				\newcommand \CircleRadius {2};
@@ -854,7 +858,7 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 	\begin{proof}
 		Note that \cref{figure:regular hexagon with one point connected to all other vertices} can be translated into \cref{figure:regular n-gon with roots of unity}.
 
-		\begin{figure}
+		\begin{figure}[H]
 			\begin{center}
 				\begin{tikzpicture}
 					\tikzset{>=stealth}
@@ -959,19 +963,19 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 
 	\begin{proof}
 		Note that $\forall w_1, w_2 \in \mathbb{C}$, where $\Arg{w_1} = \tau_1, \Arg{w_2} = \tau_2$ for $\tau_1, \tau_2$ in the same $2\pi$-interval,
-		\begin{equation*}
+		\begin{equation}\label{eq:angle division modulo 2 pi}
 			\Arg{\frac{w_1}{w_2} = \frac{e^{i\tau_1}}{e^{i\tau_2}} \equiv e^{i (\tau_1 - \tau_2)} = \Arg{w_1} - \Arg{w_2}}
-		\end{equation*}
+		\end{equation}
 		in modulo $2\pi$.
 
-		Suppose $\im{z} > 0$. Let $\theta_1 = \Arg{(z - 1)}$ and $\theta_2 = \Arg{(z + 1)}$. Consider \cref{figure:angle division example}. We observe that
+		Suppose $\im{z} > 0$. Let $\theta_1 = \Arg{(z - 1)}$ and $\theta_2 = \Arg{(z + 1)}$. Consider \cref{figure:angle division example}. Note that since both $\theta_1, \theta_2 \in [0, \pi]$, we have that $\theta_1 - \theta_2 \in [-\pi, \pi]$, and thus \cref{eq:angle division modulo 2 pi} holds true without the need of the condition of being in modulo $2 \pi$. We observe that
 		\begin{align*}
 			\frac{\pi}{2} &= \theta_2 + \pi - \theta_1 \\
 			\theta_1 - \theta_2 &= \frac{\pi}{2}
 		\end{align*}
 		as desired.
 
-		\begin{figure}
+		\begin{figure}[H]
 			\begin{center}
 				\begin{tikzpicture}
 					\tikzset{>=stealth}
@@ -1034,9 +1038,8 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 			e^x &\in (0, e] \\
 			y &\in [0, \pi]
 		\end{align*}
-		It is clear that the image will be in on the positive side of the imaginary-axis. Also, since $e^x \in (0, e]$, we get the right graph represented in \cref{figure:domain and image of f(A)}. The image of $f(A)$ is described in the left image of \cref{figure:domain and image of f(A)}.
 
-		\begin{figure}
+		\begin{figure}[H]
 			\begin{center}
 				\begin{tikzpicture}
 					\tikzset{>=stealth}
@@ -1065,7 +1068,148 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 			\caption[loftitle]{(Right) Domain of $f(A)$, (Left) Image of $f(A)$}
 			\label{figure:domain and image of f(A)}
 		\end{figure}
+
+		It is clear that the image will be in on the positive side of the imaginary-axis. Also, since $e^x \in (0, e]$, we get the right graph represented in \cref{figure:domain and image of f(A)}. The image of $f(A)$ is described in the left image of \cref{figure:domain and image of f(A)}.
 	\end{solution}
 \end{ex}
+
+\chapter{Lecture 5 - Jan 12, 2018}\label{chp:Lecture 5 - Jan 12, 2018}
+
+\section{Complex Functions}\label{sect:Complex Functions}
+\subsection{Limits} % (fold)
+\label{sub:limits}
+
+\begin{defn}[Convergence]\label{defn:Convergence}
+	A sequence of complex numbers $z_1, z_2, z_3, ...$ converges to $z \in \mathbb{C}$ if
+	\begin{equation}
+		\lim_{n \to \infty} \abs{z_n - z} = 0
+	\end{equation}
+	or we may say
+	\begin{equation}
+		\forall \epsilon > 0 \enspace \exists N \in \mathbb{N} \enspace \forall n > N \enspace \abs{z_n - z} < \epsilon
+	\end{equation}
+\end{defn}
+
+\begin{note}
+ If $\{z_n\}_{n \in \mathbb{N}}$ converges to $z$, we may write $\lim_{n \to \infty} z_n = z$ or $z_n \to z$ (as $n \to \infty$).
+\end{note}
+
+\begin{eg}
+	For $\abs{z} > 1$, does $\{\frac{1}{z^n}\}^\infty_{n = 1}$ converge? Explain.
+
+	\begin{solution}
+		We claim that the limit is 0. Since $\abs{z} > 1$, we have that
+		\begin{align*}
+			\lim_{n \to \infty} \abs{\frac{1}{z^n} - 0}
+				&= \lim_{n \to \infty} \abs{\frac{1}{z}}^n \\
+				&= 0
+		\end{align*}
+
+		Another way to prove this, since $\abs{z} > 1 \implies 0 < \abs{\frac{1}{z}} < 1$,
+		\begin{gather*}
+			\forall \epsilon = \abs{\frac{1}{z}} > 0 \\
+			\abs{\frac{1}{z^n} - 0} = \abs{\frac{1}{z}}^n < \abs{\frac{1}{z}} = \epsilon
+		\end{gather*}
+	\end{solution}
+\end{eg}
+
+\begin{defn}[Convergence for Complex Functions]\label{defn:Convergence for Complex Functions}
+	$\forall \Omega \subseteq \mathbb{C}$, let $f: \Omega \to \mathbb{C}$. We say that
+	\begin{equation}
+		\lim_{z \to z_0} f(z) = L
+	\end{equation}
+	for some $L \in \mathbb{C}$ if for every sequence $\{z_n\}_n \subseteq \Omega$, we have that
+	\begin{equation}
+		z_n \to z_0 \implies f(z_n) \to L
+	\end{equation}
+	Note that $L$ need not be in $\Omega$. (I copied $z$ instead of $L$ in class. Needs further confirmation.)
+\end{defn}
+
+\begin{eg}\label{eg:limit dne}
+	Let $f(z) = \frac{\bar{z}}{z}, z \in \mathbb{C} \setminus \{0\}$. Find $\lim_{z \to 0} f(z)$.
+
+	\begin{solution}
+		Suppose $z = x \in \mathbb{R} \setminus \{0\}$. Then $f(z) = f(x) = \frac{x}{x} = 1$.
+
+		Suppose $z = iy, y \in \mathbb{R} \setminus \{0\}$. Then $f(z) = f(iy) = \frac{-iy}{iy} = -1$.
+
+		Therefore, the limit $\lim_{z \to 0} f(z)$ does not exist.
+	\end{solution}
+\end{eg}
+
+\begin{ex}
+	Show that $z_n \to z \iff \re(z_n) \to \re(z) \land \im(z_n) \to \im(z)$. \\
+	(Hint: $\abs{\re(z)}, \abs{\im(z)} \leq \abs{z} \leq \abs{\re(z)} + \abs{\im(z)}$)
+
+	\begin{solution}
+		Suppose $z_n \to z$. Then $\forall \epsilon_0 > 0 \; \exists N \in \mathbb{N} \; \forall n > N \; \abs{z_n - z} < \epsilon$. Note once and for all that
+		\begin{gather*}
+			\re(z_n - z) = \re(z_n) - \re(z) \\
+			\im(z_n - z) = \im(z_n) - \im(z).
+		\end{gather*}
+		Thus
+		\begin{align*}
+			\abs{\re(z_n) - \re(z)} &= \abs{\re(z_n - z)} \\
+					&\leq \abs{z_n - z} < \epsilon \\
+			\abs{\im(z_n) - \im(z)} &= \abs{\im(z_n - z)} \\
+					&\leq \abs{z_n - z} < \epsilon
+		\end{align*}
+
+		For the other direction,
+		\begin{gather*}
+			\forall \frac{\epsilon}{2} > 0 \enspace \exists N_0 \in \mathbb{N} \enspace \forall n > N_0 \enspace \abs{\re(z_n) - \re(z)} < \frac{\epsilon}{2} \\
+			\forall \frac{\epsilon}{2} > 0 \enspace \exists N_1 \in \mathbb{N} \enspace \forall n > N_1 \enspace \abs{\im(z_n) - \im(z)} < \frac{\epsilon}{2}.
+		\end{gather*}
+		Therefore,
+		\begin{align*}
+			\abs{z_n - z} &= \abs{\re(z_n) + \im(z_n) - \re(z) - \im(z)} \\
+				&\leq \abs{\re(z_n) - \re(z)} + \abs{\im(z_n) - \im(z)} \\
+				&\leq \epsilon
+		\end{align*}
+		$\qed$
+	\end{solution}
+\end{ex}
+
+% subsection limits (end)
+
+\subsection{Continuity} % (fold)
+\label{sub:continuity}
+
+\begin{defn}[Continuity]\label{defn:Continuity}
+	$\forall \Omega \subseteq \mathbb{C}$, let $f: \Omega \to \mathbb{C}$. We say that $f$ is continuous at $z_0 \in \Omega$ if
+	\begin{enumerate}
+		\item $\forall \{z_n\}_{n \in \mathbb{N}} \\
+				z_n \to z_0 \implies f(z_n) \to f(z_0)$
+		\item $\forall \epsilon > 0 \enspace \exists \delta > 0 \\
+				\abs{z - z_0} < \delta \implies \abs{f(z) - f(z_0)} < \epsilon$
+	\end{enumerate}
+\end{defn}
+
+\begin{remark}
+	\begin{enumerate}
+		\item $f$ is continuous on $\Omega$ if it is continuous on every point in $\Omega$.
+		\item We may split $f$ into its feal and imaginary parts, i.e.
+			\begin{equation*}
+				f(z) = f(x, y) = u(x, y) + iv(x, y)
+			\end{equation*}
+			where $u, v : \mathbb{R}^2 \to \mathbb{R}$.
+	\end{enumerate}
+\end{remark}
+
+\begin{eg}
+	Let $f: \mathbb{C} \to \mathbb{C}$ and for $z \in \mathbb{C}, f(z) = \frac{\bar{z}}{z}$. To split $f$ into real and imaginary parts:
+	\begin{align*}
+		f(z) &= \frac{\bar{z}}{z} \\
+			&= (x + iy)\left(\frac{x}{x^2 + y^2} - i \frac{y}{x^2 + y^2} \right) \\
+			&= \frac{x^2 - y^2}{x^2 + y^2} + i \frac{(-2xy)}{x^2 + y^2} 
+	\end{align*}
+	and we get
+	\begin{align*}
+		u(x, y) &= \frac{x^2 - y^2}{x^2 + y^2} \\
+		v(x, y) &= -\frac{2xy}{x^2 + y^2} 
+	\end{align*}
+\end{eg}
+
+% subsection continuity (end)
 
 \end{document}
