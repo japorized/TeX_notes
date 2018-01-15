@@ -3,9 +3,9 @@
 
 	"completions":
 	[
-		{ "trigger": "chp", "contents": "\\chapter{$1}\\label{chp:${2:$1}}$0" },
-		{ "trigger": "sect", "contents": "\\section{$1}\\label{sect:${2:$1}}$0" },
-		{ "trigger": "sub", "contents": "\\subsection{$1}\\label{sub:${2:$1}}$0" },
+		{ "trigger": "chp", "contents": "\\chapter{$1}\n	\\label{chapter:${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}}}\n\n$0\n\n% chapter ${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}} (end)"},
+		{ "trigger": "sec", "contents": "\\section{$1}\n	\\label{sec:${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}}}\n\n$0\n\n% section ${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}} (end)" },
+		{ "trigger": "sub", "contents": "\\subsection{$1}\n	\\label{sub:${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}}}\n\n$0\n\n% subsection ${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}} (end)" },
 		{ "trigger": "subsub", "contents": "\\subsubsection{$1}\\label{subsub:${2:$1}}$0" },
 
 		{ "trigger": "equ", "contents": "\\begin{equation$1}\n	$0\n\\end{equation$1}" },

@@ -156,9 +156,11 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \theoremlisttype{allname}
 \listtheorems{axiom,lemma,thm,crly,propo}
 
-\chapter{Lecture 1 - Jan 3, 2018}\label{chp:Lecture 1 - Jan 3, 2018}
+\chapter{Lecture 1 Jan 3 2018}
+	\label{chapter:lecture_1_jan_3_2018}
 
-\section{Complex Numbers and Their Properties}\label{sect:Complex Numbers and Their Properties}
+\section{Complex Numbers and Their Properties} % (fold)
+\label{sec:complex_numbers_and_their_properties}
 
 \begin{defn}[Complex Number, Complex Plane]\label{defn:Complex Number, Complex Plane}
 	A \textbf{complex number} is a vector in $\mathbb{R}^2$. The \textbf{complex plane}, denoted by $\mathbb{C}$, is a set of complex numbers,
@@ -423,9 +425,15 @@ We may simply refer to this set of points as the circle $\abs{z - z_0} = R$.
 	In the above, $g$ is the line segment that connects the points $a$ and $b$ on the complex plane, while $f$ is the perpendicular bisector of the line segment $g$. The area described by the set $\left\{z \in \mathbb{C} : \abs{z - a} < \abs{z - b} \right\}$ is the shaded area which is below $f$.
 \end{eg}
 
-\chapter{Lecture 2 - Jan 5th, 2018}\label{chp:Lecture 2 - Jan 5th, 2018}
+% section complex_numbers_and_their_properties (end)
 
-\section{Complex Numbers and Their Properties (Continued)}\label{sect:Complex Numbers and Their Properties (Continued)}
+% chapter lecture_1_jan_3_2018 (end)
+
+\chapter{Lecture 2 Jan 5th 2018}
+	\label{chapter:lecture_2_jan_5th_2018}
+
+\section{Complex Numbers and Their Properties (Continued)} % (fold)
+\label{sec:complex_numbers_and_their_properties_continued}
 
 \begin{eg}
 	Let $a \in \mathbb{C}$. Describe the set $\{z \in \mathbb{C} : 1 < \abs{z-a} < 2\}$.
@@ -571,9 +579,15 @@ We may simply refer to this set of points as the circle $\abs{z - z_0} = R$.
 	\end{align*}
 \end{eg}
 
-\chapter{Lecture 3 - Jan 8th, 2018}\label{chp:Lecture 3 - Jan 8th, 2018}
+% section complex_numbers_and_their_properties_continued (end)
 
-\section{Complex Numbers and Their Properties (Continued 2)}\label{sect:Complex Numbers and Their Properties (Continued 2)}
+% chapter lecture_2_jan_5th_2018 (end)
+
+\chapter{Lecture 3 Jan 8th 2018}
+	\label{chapter:lecture_3_jan_8th_2018}
+
+\section{Complex Numbers and Their Properties (Continued 2)} % (fold)
+\label{sec:complex_numbers_and_their_properties_continued_2}
 
 \begin{defn}[Argument of a Complex Number]\label{defn:Argument of a Complex Number}
 	Let $z \in \mathbb{C} \setminus \{0\}$. The \textbf{argument} (or the angle) of $z$, denoted by $\arg{z}$, $\Arg{z}$, or simply $\theta = \theta(z)$, is the angle modulo $2 \pi$ (i.e. $0 \leq \theta < 2 \pi$) between the vector defining $z$ and the positive real axis (in the counterclockwise direction).
@@ -595,7 +609,7 @@ We may simply refer to this set of points as the circle $\abs{z - z_0} = R$.
 \end{defn}
 
 \begin{notation}
-	Let $e^{i \theta} := \cos \theta + i \sin \theta$. Note that this definition can be derived by the extending the Taylor expansion of $e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} $ for when $x \in \mathbb{C}$ (the sum of the real parts of the expansion is the Taylor expansion of cosine while the imaginary part for sine).
+	Let $e^{i \theta} := \cos \theta + i \sin \theta$. Note that this definition, called \textit{Euler's formula}, can be derived by the extending the Taylor expansion of $e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} $ for when $x \in \mathbb{C}$ (the sum of the real parts of the expansion is the Taylor expansion of cosine while the imaginary part for sine).
 
 	Now $e^{i \theta}$ is on the unit circle.
 	\begin{center}
@@ -615,6 +629,10 @@ We may simply refer to this set of points as the circle $\abs{z - z_0} = R$.
 		\end{tikzpicture}
 	\end{center}
 \end{notation}
+
+\begin{remark}
+	If $z = 0$, the coordinate $\theta$ is undefined, and so it is implied that $z \neq 0$ whenever we use the polar form.
+\end{remark}
 
 \begin{eg}
 Some examples of $\theta \in [0, 2\pi)$:
@@ -682,9 +700,9 @@ On another note,
 	z = re^{i \theta} \implies \bar{z} = re^{-i \theta}
 \end{equation*}
 and
-\begin{equation*}
+\begin{equation}\label{eq:inverse of nonzero complex number in polar coords}
 	z \neq 0 \implies \frac{1}{z} = \frac{1}{r} e^{-i \theta}
-\end{equation*}
+\end{equation}
 
 \begin{remark}
 	\begin{gather*}
@@ -706,11 +724,43 @@ and
 	\end{align*}
 
 	Generalizing the above, we get that
+	\begin{equation}\label{eq:demoivre's law}
+		\forall n \in \mathbb{Z} \enspace z = (re^{in}) = r^n e^{in\theta}
+	\end{equation}
+	which is commonly known as \textbf{deMoivre's Law}. Note that by simply generalizing the above, all we have is that $n \in \mathbb{Z^+}$. But by \cref{eq:inverse of nonzero complex number in polar coords}, we can have that for $n \in \mathbb{Z^-}$, let $m = -n$, and thus
 	\begin{equation*}
-		\forall n \in \mathbb{Z} \enspace (re^{in}) = r^n e^{in\theta}
+		z^n = \left[ \frac{1}{r} e^{i (-\theta)} \right]^m = \left(\frac{1}{r}\right)^m e^{im (-\theta)} = \left(\frac{1}{r} \right)^{-n} e^{i (-n) (-\theta)} = r^n e^{i\theta}
 	\end{equation*}
-	which is commonly known as \textbf{deMoivre's Law}.
+	This proves that deMoivre's Law also holds for when $n \in \mathbb{Z^-}$.
+
+	Observe that if $r = 1$, \cref{eq:demoivre's law} becomes
+	\begin{equation}
+		(e^{i\theta})^n = e^{in\theta} \quad \text{for all } n \in \mathbb{Z} \setminus \{0\} 
+	\end{equation}
+	When written in the form
+	\begin{equation}\label{eq:demoivre's formula}
+		(\cos \theta + i \sin \theta)^n = \cos n\theta + i \sin n\theta \quad (n \in \mathbb{Z} \setminus \{0\})
+	\end{equation}
+	this is known as \textit{deMoivre's formula}.
 \end{remark}
+
+\begin{eg}
+	\cref{eq:demoivre's formula} with $n = 2$ tells us that
+	\begin{equation*}
+		(\cos \theta + i \sin \theta)^n = \cos 2\theta + i \sin 2\theta
+	\end{equation*}
+	or we can express the equation as
+	\begin{equation*}
+		\cos^2 \theta - \sin^2 \theta + i2 \sin\theta \cos\theta = \cos 2\theta + i \sin 2\theta
+	\end{equation*}
+	Equating real and imaginary parts, we have the familiar double angle trigonometric identities
+	\begin{equation*}
+		\cos 2\theta = \cos^2 \theta - \sin^2 \theta, \quad \sin 2\theta = 2\sin\theta\cos\theta.
+	\end{equation*}
+\end{eg}
+
+\subsection{Roots of Complex Numbers} % (fold)
+\label{sub:roots_of_complex_numbers}
 
 \begin{propo}[nth Roots of a Complex Number]\label{propo:nth Roots of a Complex Number}
 	\begin{gather*}
@@ -797,9 +847,17 @@ It is easy to see how the nth roots of unity partitions the unit circle into n p
 	\end{enumerate}
 \end{ex}
 
-\chapter{Lecture 4 - Jan 10th, 2018}\label{chp:Lecture 4 - Jan 10th, 2018}
+% subsection roots_of_complex_numbers (end)
 
-\section{Examples for nth Roots of Unity}\label{sect:Examples for nth Roots of Unity}
+% section complex_numbers_and_their_properties_continued_2 (end)
+
+% chapter lecture_3_jan_8th_2018 (end)
+
+\chapter{Lecture 4 Jan 10th 2018}
+	\label{chapter:lecture_4_jan_10th_2018}
+
+\section{Examples for nth Roots of Unity} % (fold)
+\label{sec:examples_for_nth_roots_of_unity}
 
 Recall that the $n$th roots of unity are given by $e^{i \frac{2\pi k}{n}}, k = 0, 1, ..., n - 1$.
 
@@ -1073,9 +1131,16 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 	\end{solution}
 \end{ex}
 
-\chapter{Lecture 5 - Jan 12, 2018}\label{chp:Lecture 5 - Jan 12, 2018}
+% section examples_for_nth_roots_of_unity (end)
 
-\section{Complex Functions}\label{sect:Complex Functions}
+% chapter lecture_4_jan_10th_2018 (end)
+
+\chapter{Lecture 5 Jan 12 2018}
+	\label{chapter:lecture_5_jan_12_2018}
+
+\section{Complex Functions} % (fold)
+\label{sec:complex_functions}
+
 \subsection{Limits} % (fold)
 \label{sub:limits}
 
@@ -1118,7 +1183,7 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 	\begin{equation}
 		\lim_{z \to z_0} f(z) = L
 	\end{equation}
-	for some $L \in \mathbb{C}$ if for every sequence $\{z_n\}_n \subseteq \Omega$, we have that
+	for some $L \in \mathbb{C}$ if for every sequence $\{z_n\}_n \subseteq \Omega$ (not including $z_0$ if it is in $\Omega$), we have that
 	\begin{equation}
 		z_n \to z_0 \implies f(z_n) \to L
 	\end{equation}
@@ -1137,7 +1202,7 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 	\end{solution}
 \end{eg}
 
-\begin{ex}
+\begin{ex}\label{ex:convergence in complex iff convergence of real and imaginary parts in real}
 	Show that $z_n \to z \iff \re(z_n) \to \re(z) \land \im(z_n) \to \im(z)$. \\
 	(Hint: $\abs{\re(z)}, \abs{\im(z)} \leq \abs{z} \leq \abs{\re(z)} + \abs{\im(z)}$)
 
@@ -1189,9 +1254,9 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 	\begin{enumerate}
 		\item $f$ is continuous on $\Omega$ if it is continuous on every point in $\Omega$.
 		\item We may split $f$ into its feal and imaginary parts, i.e.
-			\begin{equation*}
+			\begin{equation}\label{eq:complex function expressed in real-valued functions}
 				f(z) = f(x, y) = u(x, y) + iv(x, y)
-			\end{equation*}
+			\end{equation}
 			where $u, v : \mathbb{R}^2 \to \mathbb{R}$.
 	\end{enumerate}
 \end{remark}
@@ -1212,4 +1277,179 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 
 % subsection continuity (end)
 
+% section complex_functions (end)
+
+% chapter lecture_5_jan_12_2018 (end)
+
+\chapter{Lecture 6 Jan 15th 2018}
+	\label{chapter:lecture_6_jan_15th_2018}
+
+\section{Continuity (Continued)} % (fold)
+\label{sec:continuity}
+
+\begin{ex}\label{ex:continuity in complex iff continuity in real-valued functions in real}
+	Let $f: \Omega \to \mathbb{C}$. Prove that $f(z)$ is continuous at $z_0 = x_0 + iy_0 \in \mathbb{C} \iff$ functions $u, v: \mathbb{R}^2 \to \mathbb{R}$, such that $f(z) = u(x, y) + iv(x,y)$ are both continuous at $(x_0, y_0)$.
+
+	\begin{solution}
+		We shall first prove the forward direction. Suppose that $f(z)$ is continuous at $z_0 = x_0 + iy_0 \in \mathbb{C}$. By \cref{defn:Continuity}, $\forall \{z_n\}_{n \in \mathbb{N}} \subseteq \Omega$, $z_n \to z_0 \implies f(z_n) \to f(z_0)$. By \cref{ex:convergence in complex iff convergence of real and imaginary parts in real},
+		\begin{align}
+			z_n \to z_0 &\iff \re z_n \to \re z_0 \land \im z_n \to \im z_0 \nonumber \\
+				&\iff x_n \to x_0 \land y_n \to y_0 \label{eq:continuity in complex iff continuity in real-valued functions in real 1}
+		\end{align}
+		where $z_n = x_n + iy_n$ for $x_n, y_n \in \mathbb{R}$.
+
+		Similarly so, and by \cref{eq:complex function expressed in real-valued functions},
+		\begin{equation}\label{eq:continuity in complex iff continuity in real-valued functions in real 2}
+			f(z_n) + f(z_0) \iff u(x_n, y_n) \to u(x_0, y_0) \land v(x_n, y_n) \to v(x_0, y_0)
+		\end{equation}
+
+		Putting together \cref{eq:continuity in complex iff continuity in real-valued functions in real 1} and \cref{eq:continuity in complex iff continuity in real-valued functions in real 2}, we get
+		\begin{equation*}
+			(x_n, y_n) \to (x_0, y_0) \implies u(x_n, y_n) \to u(x_0, y_0) \land v(x_n, y_n) \to v(x_0, y_0)
+		\end{equation*}
+		as desired.
+
+		The proof of the other direction is simply a reversed process of the above. \qed
+	\end{solution}
+\end{ex}
+
+% section continuity (end)
+
+\section{Differentiability} % (fold)
+\label{sec:differentiability}
+
+\begin{defn}[Neighbourhood]\label{defn:Neighbourhood}
+	For $z_0 \in \mathbb{C}, r \in \mathbb{R}$, let
+	\begin{equation}\label{eq:neighbourhood_set}
+		D(z_0, r) := \{ z \in \mathbb{C} : \abs{z - z_0} < r \}.
+	\end{equation}
+	On the complex plane, this is seen as a open disk centered around the point $z_0$ with radius $r$, as shown below.
+	\begin{figure}[H]
+		\begin{center}
+			\begin{tikzpicture}
+				\tikzset{>=stealth}
+				\draw[->] (-1, 0) -- ++(5, 0) coordinate (X) node[below,right] {$\re$};
+				\draw[->] (0, -1) -- ++(0, 5) node[above,right] {$\im$};
+				\draw[dashed,fill=black,fill opacity=0.25] (2, 2) circle (1);
+				\coordinate (a) at (1, 2);
+				\coordinate (z0) at (2, 2);
+				\node[label={0:{$z_0$}},fill,circle,inner sep=1pt] at (z0) {};
+				\draw[<->] (z0)--(a) node[midway, above] {$r$};
+			\end{tikzpicture}
+		\end{center}
+		\caption[loftitle]{Open disk centered around $z_0$ with radius $r$}
+		\label{figure:neighbourhood_open_disk}
+	\end{figure}
+	This open disk is called a \textbf{neighbourhood} of $z_0$.
+\end{defn}
+
+\begin{defn}[Differentiable/Holomorphic]\label{defn:Differentiable/Holomorphic}
+	Let $f(z)$ be defined in a neighbourhood of $z_0 \in \mathbb{C}$. We say $f$ is \textbf{differentiable/holomorphic} at $z_0$ if for some $h \in \mathbb{C}$,
+	\begin{equation}\label{eq:holomorphic}
+		\lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h} 
+	\end{equation}
+	exists. If such a limit exists, we denot ethe limit by $f'(z_0)$.
+\end{defn}
+
+\begin{remark}
+	$h \in \mathbb{C}: h$ need not necessarily be real. In this sense, $h$ approaches $0$ from any direction around $0 \in \mathbb{C}$.
+\end{remark}
+
+\begin{eg}
+	For $z \in \mathbb{C} \setminus \{0\},$ let $f(z) = \frac{1}{z}$. Let $z_0 \in \mathbb{C} \setminus \{0\}$. Note that
+	\begin{equation*}
+		\lim_{h \to 0} \frac{\frac{1}{z_0 + h} - \frac{1}{z_0}}{h} = \lim_{h \to 0} \frac{1}{h} \left[ \frac{-h}{(z_0 + h)z_0} \right] = -\frac{1}{z_0^2} 
+	\end{equation*}
+	Thus $f$ is holomorphic at any $z \in \mathbb{C} \setminus \{0\}$, and hence $f'(z) = -\frac{1}{z}$.
+\end{eg}
+
+\begin{eg}
+	For $z \in \mathbb{C},$ let $f(z) = \bar{z}$. Let $z_0 \in \mathbb{C}$. Notice that
+	\begin{equation*}
+		\lim_{h \to 0} \frac{\bar{z_0 + h} - \bar{z}}{h} = \lim_{h \to 0} \frac{\bar{h}}{h}.
+	\end{equation*}
+	From \cref{eg:limit dne}, we know that such a limit does not exist. Thus $f$ is not holomorphic on any $z \in \mathbb{C}$.
+\end{eg}
+
+\begin{note}
+	If we look at the example above from the perspective of $f$ being treated as a real-valued function, i.e. $f(z) = u(x, y) + iv(x, y)$ where $u, v: \mathbb{R}^2 \to \mathbb{R}$ and $z = x + iy$, observe that $\forall (x, y) \in \mathbb{R}^2, (x, y) \mapsto (x, -y)$, which we see that $u$ and $v$ are partially differentiable in $\mathbb{R}^2$.
+
+	We will now look into this ``discrepancy''.
+\end{note}
+
+Consider the following function taken from \cref{eq:holomorphic},
+\begin{equation}\label{eq:holomorphic 2}
+	f'(z_0) = \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h}
+\end{equation}
+While $h$ may approach $0 \in \mathbb{C}$ from infinitely many sides on the complex plane, we will consider 2 cases.
+
+\textit{Case 1: }$\mathit{h \to 0}$\textit{ via the real axis}
+
+In this case, $h = x + i(0)$ and $x \to 0 \in \mathbb{R}$. Then \cref{eq:holomorphic 2} gives
+\begin{align}
+	f'(z_0) &= \lim_{x \to 0} \frac{u(x_0 + x, y_0) + iv(x_0 + x, y_0) - u(x_0, y_0) - iv(x_0, y_0)}{x} \nonumber \\
+		&= \lim_{x \to 0} \left[ \frac{u(x_0 + x, y_0) - u(x_0, y_0)}{x} + i \frac{v(x_0 + x, y_0) - v(x_0, y_0)}{x} \right] \nonumber \\
+		&= \frac{\partial u}{\partial x} \Bigr|_{(x_0, y_0)} + i \frac{\partial v}{\partial x} \Bigr|_{(x_0, y_0)} \label{eq:holomorphic approach via real axis}
+\end{align}
+
+\textit{Case 2: }$\mathit{h \to 0}$\textit{ via the imaginary axis}
+
+In this case, $h = 0 + iy$ and $y \to 0 \in \mathbb{R}$. In a similar fashion, \cref{eq:holomorphic 2} becomes
+\begin{align}
+	f'(z_0) &= \lim_{y \to 0} \left[ \frac{u(x_0, y_0 + y) - u(x_0, y_0)}{iy} + \frac{v(x_0, y_0 + y) - v(x_0, y_0)}{y} \right] \nonumber \\
+		&= \frac{1}{i} \cdot \frac{\partial u}{\partial y} \Bigr|_{(x_0, y_0)} + \frac{\partial v}{\partial y} \Bigr|_{(x_0, y_0)} \label{eq:holomorphic approach via imaginary axis}
+\end{align}
+
+Note that since $f'(z_0)$ exists, the real and imaginary part of \cref{eq:holomorphic approach via real axis} and \cref{eq:holomorphic approach via imaginary axis} must equate. Also note that $\frac{1}{i} = -i$. With that, we obtain the following theorem.
+
+\begin{thm}[Cauchy-Riemann Equations]\label{thm:cauchy_riemann_equations}
+	If $f(z)$ is holomorphic at $z_0 = x_0 + iy_0 \in \mathbb{C}$ where $x_0, y_0 \in \mathbb{R}$, then, at $(x_0, y_0)$,
+	\begin{equation}\label{eq:cauchy_riemann_equations}
+		\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \quad \text{ and } \quad \frac{\partial v}{\partial x} = - \frac{\partial u}{\partial y}.
+	\end{equation}
+\end{thm}
+
+\begin{ex}[Holomorphic Functions Properties]\label{ex:holomorphic_functions_properties}
+	If $f, g$ are holomorphic at $z \in \mathbb{C}$, prove that
+	\begin{enumerate}
+		\item $f + g$ is holomorphic and $(f + g)' = f' + g'$. \label{item:holomorphic_linearity}
+		\item $fg$ is holomorphic and $(fg)' = f'g + fg'$. \label{item:holomorphic_product_rule}
+		\item if $g(z) \neq 0, \frac{f}{g}$ is holomorphic and $(\frac{f}{g})' = \frac{f'g - fg'}{g^2}$. \label{item:holomorphic_quotient_rule}
+	\end{enumerate}
+
+	\begin{solution}
+		\begin{enumerate}
+			\item For $f + g$,
+			\begin{align*}
+					&\lim_{h \to 0} \frac{f(z + h) + g(z + h) - f(z) - g(z)}{h} \\
+				= &\lim_{h \to 0} \left[ \frac{f(z + h) - f(z)}{h} + \frac{g(z + h) - g(z)}{g} \right] \\
+				= & f'(z) + g'(z) 
+			\end{align*}
+			Thus $(f + g)' = f' + g'$.
+
+			\item For $fg$,
+			\begin{align*}
+					&\lim_{h \to 0} \frac{f(z + h)g(z + h) - f(z)g(z)}{h} \\
+				= &\lim_{h \to 0} \frac{f(z + h)g(z + h) + f(z)g(z + h) - f(z)g(z + h) - f(z)g(z)}{h} \\
+				= &\lim_{h \to 0} \left[ \frac{f(z + h) - f(z)}{h} g(z + h) + f(z) \frac{g(z + h) - g(z)}{h} \right] \\
+				= &f'(z)g(z) + f(z)g'(z)
+			\end{align*}
+			Therefore, $(fg)' = f'g + fg'$.
+
+			\item When $\forall z \in \mathbb{C} \; g(z) \neq 0$, for $\frac{f}{g}$,
+			\begin{align*}
+					&\lim_{h \to 0} \frac{\frac{f(z + h)}{g(z + h)} - \frac{f(z)}{g(z)}}{h} \\
+				= &\lim_{h \to 0} \frac{1}{h} \left[ \frac{f(z + h)g(z) - f(z)g(z + h)}{g(z + h)g(z)} \right] \\
+				= &\lim_{h \to 0} \frac{1}{g(z + h)g(z)} \left[ \frac{f(z + h)g(z) + f(z)g(z) - f(z)g(z) - f(z)g(z + h)}{g} \right] \\
+				= &\lim_{h \to 0} \frac{1}{g(z + h)g(z)} \left[ \frac{[f(z + h) - f(z)]g(z) - f(z)[g(z + h) - g(z)]}{h} \right] \\
+				= &\frac{f'(z)g(z) - f(z)g'(z)}{g^2(z)}  
+			\end{align*}
+			Hence, $\frac{f}{g} = \frac{f'g - fg'}{g^2} $
+		\end{enumerate}
+	\end{solution}
+\end{ex}
+
+% section differentiability (end)
+
+% chapter lecture_6_jan_15th_2018 (end)
 \end{document}
