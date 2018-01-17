@@ -1,5 +1,5 @@
 <snippet>
-	<content><![CDATA[
+    <content><![CDATA[
 % Document Head
 \documentclass[11pt, oneside]{book}
 \usepackage{geometry}
@@ -12,10 +12,29 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{mathrsfs}
+\usepackage{tkz-euclide}
+\usetkzobj{all}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{ntheorem}
-\usepackage[noabbrev,captialize,nameinlink]{cleveref}
+\usepackage{pgf,tikz}
+\usepackage{pgfplots}
+\usepackage{faktor}
+\usepackage{float}
+\usepackage[hyperref]{ntheorem}
+\usepackage{hyperref}
+\usepackage[noabbrev,capitalize,nameinlink]{cleveref}
+
+% hyperref Package Settings
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks = true,
+	linkcolor = magenta
+}
+
+% tikz Libraries
+\usepgfplotslibrary{polar}
+\usepgflibrary{shapes.geometric}
+\usetikzlibrary{angles,patterns,calc}
 
 % Theorem Style Customization
 \setlength\theorempreskipamount{2ex}
@@ -25,11 +44,14 @@
 \theoremstyle{break}
 \newtheorem{thm}{Theorem}[section]
 \newtheorem*{proof}{Proof}
+\newtheorem*{solution}{Solution}
 \newtheorem{crly}{Corollary}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem{propo}{Proposition}[section]
 \newtheorem*{remark}{Remark}
 \newtheorem*{note}{Note}
+\newtheorem*{notation}{Notation}
+\newtheorem{ex}{Exercise}[section]
 \newtheorem{defn}{Definition}[section]
 \newtheorem{eg}{Example}[section]
 \newtheorem{axiom}{Axiom}[section]
@@ -48,7 +70,7 @@
                    {#4}}
 \@ifpackageloaded{hyperref}{
 \def\thm@@thmline@name#1#2#3#4#5{%
-    \ifx\\#5\\%
+    \ifx\#5\%
         \@dottedtocline{-2}{0em}{2.3em}%
             {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
             {#4}
@@ -93,22 +115,39 @@
 
 \theoremlisttype{allname}
 
+% Custom math operator
+% \DeclareMathOperator{\rem}{rem}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\caparg}{Arg}
+
+% Graph styles
+\pgfplotsset{compat=1.15}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{four quads/.append style={axis x line=middle, axis y line=
+middle, xlabel={\$x\$}, ylabel={\$y\$}, axis equal }}
+\pgfplotsset{four quad complex/.append style={axis x line=middle, axis y line=
+middle, xlabel={\$\re\$}, ylabel={\$\im\$}, axis equal }}
+
 % Shortcuts
-\newcommand{\bb}[1]{\mathbb{#1}}                % using bb instead of mathbb
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}      % simplifying the writing of a floor function
 \newcommand{\ceiling}[1]{\lceil #1 \rceil}      % simplifying the writing of a ceiling function
 \newcommand{\dotp}{\, \cdotp}			        % dot product to distinguish from \cdot
 \newcommand{\qed}{\hfill\ensuremath{\square}}   % Q.E.D sign
-
-% Custom math operator
-% \DeclareMathOperator{\rem}{rem}
+\newcommand{\abs}[1]{\left|#1\right|}						% absolute value
+\newcommand{\Arg}[1]{\caparg #1}
+\renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
+\newcommand{\quotient}[2]{\faktor{#1}{#2}}
+\newcommand{\cyclic}[1]{\left\langle #1 \right\rangle}
 
 % Main Body
 \title{${1:Title}}
 \author{Johnson Ng}
 
 \begin{document}
+\hypersetup{pageanchor=false}
 \maketitle
+\hypersetup{pageanchor=true}
 \tableofcontents
 
 \chapter*{List of Definitions}
@@ -119,12 +158,12 @@
 \theoremlisttype{allname}
 \listtheorems{axiom,lemma,thm,crly,propo}
 
-${2:Body}
+${2:body}
 
 \end{document}
 ]]></content>
-	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<!-- <tabTrigger>hello</tabTrigger> -->
-	<!-- Optional: Set a scope to limit where the snippet will trigger -->
-	<scope>text.tex.latex</scope>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <!-- <tabTrigger>hello</tabTrigger> -->
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>text.tex.latex</scope>
 </snippet>

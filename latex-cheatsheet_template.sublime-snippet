@@ -178,7 +178,9 @@ by~Your~Name,~page~\thepage~of~2
 \begin{document}
 \small
 \begin{multicols*}{5}
+
 \input{section1}
+
 \end{multicols*}
 \end{document}
 ]]></content>

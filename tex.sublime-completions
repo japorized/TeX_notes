@@ -6,7 +6,7 @@
 		{ "trigger": "chp", "contents": "\\chapter{$1}\n	\\label{chapter:${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}}}\n\n$0\n\n% chapter ${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}} (end)"},
 		{ "trigger": "sec", "contents": "\\section{$1}\n	\\label{sec:${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}}}\n\n$0\n\n% section ${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}} (end)" },
 		{ "trigger": "sub", "contents": "\\subsection{$1}\n	\\label{sub:${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}}}\n\n$0\n\n% subsection ${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}} (end)" },
-		{ "trigger": "subsub", "contents": "\\subsubsection{$1}\\label{subsub:${2:$1}}$0" },
+		{ "trigger": "subsub", "contents": "\\subsubsection{$1}\n	\\label{subsub:${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}}}\n\n$0\n\n % subsubsection ${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}}} (end)" },
 
 		{ "trigger": "equ", "contents": "\\begin{equation$1}\n	$0\n\\end{equation$1}" },
 		{ "trigger": "equl", "contents": "\\begin{equation}\n	\\label{eq:${2:lbl}}\n	$0\n\\end{equation}" },
@@ -17,17 +17,17 @@
 		{ "trigger": "itemize", "contents": "\\begin{itemize}\n	\\item $0\n\\end{itemize}" },
 
 		{ "trigger": "defn", "contents": "\\begin{defn}[${1:Definition Name}]\\label{defn:${2:$1}}\n	$0\n\\end{defn}" },
-    { "trigger": "note", "contents": "\\begin{note}\n $0\n\\end{note}" },
+    	{ "trigger": "note", "contents": "\\begin{note}\n $0\n\\end{note}" },
 
 		{ "trigger": "frac", "contents": "\\frac{${1:a}}{${2:b}} $0" },
 		{ "trigger": "summ", "contents": "\\sum_{${1:i=1}}^{${2:n}} $0" },
 		{ "trigger": "intg", "contents": "\\int_{${1:a}}^{${2:b}} $0" },
 
-		{ "trigger": "lra", "contents": "\\langle ${1:a} \\rangle $0" },
+		{ "trigger": "lra", "contents": "\\left\\langle ${1:a} \\right\\rangle $0" },
 
 		{ "trigger": "bf", "contents": "\\textbf{${1:bold}} $0" },
 		{ "trigger": "it", "contents": "\\textit{${1:italic}} $0"},
 
-    { "trigger": "mathbb", "contents": "\\mathbb{$1} $0" }
+    	{ "trigger": "mathbb", "contents": "\\mathbb{$1} $0" }
 	]
 }
