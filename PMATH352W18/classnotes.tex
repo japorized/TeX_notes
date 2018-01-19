@@ -18,15 +18,27 @@
 \usepackage{pgfplots}
 \usepackage{faktor}
 \usepackage{float}
+\usepackage{xcolor}
 \usepackage[hyperref]{ntheorem}
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
 
+% xcolor
+\definecolor{base16-eighties-bg}{HTML}{2D2D2D}
+\definecolor{base16-eighties-text}{HTML}{D3D0C8}
+\definecolor{base16-eighties-magenta}{HTML}{CD98CD}
+\definecolor{base16-eighties-red}{HTML}{F47678}
+\definecolor{base16-eighties-yellow}{HTML}{E2B552}
+\definecolor{base16-eighties-green}{HTML}{98CD97}
+\definecolor{base16-eighties-lightblue}{HTML}{61CCCD}
+\definecolor{base16-eighties-blue}{HTML}{6498CE}
+\definecolor{base16-eighties-brown}{HTML}{D47B4E}
+
 % hyperref Package Settings
 \usepackage{hyperref}
 \hypersetup{
-	colorlinks = true,
-	linkcolor = magenta
+	colorlinks,
+	linkcolor=base16-eighties-magenta
 }
 
 % tikz Libraries
@@ -137,11 +149,20 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
 \newcommand{\quotient}[2]{\faktor{#1}{#2}}
 \newcommand{\cyclic}[1]{\left\langle #1 \right\rangle}
+	% highlighting shortcuts
+\newcommand{\hlimpo}[1]{\textcolor{base16-eighties-red}{\textbf{#1}}}
+\newcommand{\hlwarn}[1]{\textcolor{base16-eighties-yellow}{\textbf{#1}}}
+\newcommand{\hldefn}[1]{\textcolor{base16-eighties-blue}{\textbf{#1}}}
+\newcommand{\hlnotea}[1]{\textcolor{base16-eighties-green}{\textbf{#1}}}
+\newcommand{\hlnoteb}[1]{\textcolor{base16-eighties-lightblue}{\textbf{#1}}}
+\newcommand{\hlnotec}[1]{\textcolor{base16-eighties-brown}{\textbf{#1}}}
 
 % Main Body
 \title{PMATH352W18 Complex Analysis - Class Notes}
 \author{Johnson Ng}
 
+\pagecolor{base16-eighties-bg}
+\color{base16-eighties-text}
 \begin{document}
 \hypersetup{pageanchor=false}
 \maketitle
@@ -163,7 +184,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \label{sec:complex_numbers_and_their_properties}
 
 \begin{defn}[Complex Number, Complex Plane]\label{defn:Complex Number, Complex Plane}
-	A \textbf{complex number} is a vector in $\mathbb{R}^2$. The \textbf{complex plane}, denoted by $\mathbb{C}$, is a set of complex numbers,
+	A \hldefn{complex number} is a vector in $\mathbb{R}^2$. The \hldefn{complex plane}, denoted by $\mathbb{C}$, is a set of complex numbers,
 	\begin{equation*}
 		\mathbb{C} = \mathbb{R}^2 = \left\{ \begin{pmatrix} x \\ y \end{pmatrix} : x , y \in \mathbb{R} \right\}
 	\end{equation*}
@@ -179,7 +200,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 	\begin{equation*}
 		x + iy = x + yi = \begin{pmatrix} x \\ y \end{pmatrix}
 	\end{equation*}
-	If for $x, y \in \mathbb{R}, \; z = x + iy$, then $x$ is aclled the real part of $z$ and $y$ is called the imaginary part of $z$, and we write
+	If for $x, y \in \mathbb{R}, \; z = x + iy$, then $x$ is called the \hldefn{real part} of $z$ and $y$ is called the \hldefn{imaginary part} of $z$, and we write
 	\begin{equation*}
 		\re(z) = x \quad \im(z) = y.
 	\end{equation*}
@@ -188,7 +209,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \begin{note}
 	\begin{itemize}
 		\item It is easy to see how $\mathbb{R}$ is a subset of $\mathbb{C}$.
-		\item Complex Numbers of the form $\left(\begin{smallmatrix} 0 \\ y \end{smallmatrix}\right)$ where $y \in \mathbb{R}$ are called \textit{purely imaginary numbers}.
+		\item Complex Numbers of the form $\left(\begin{smallmatrix} 0 \\ y \end{smallmatrix}\right)$ where $y \in \mathbb{R}$ are called \hlnotea{purely imaginary numbers}.
 		\item Certain authors may prefer to denote $i = \left(\begin{smallmatrix} 0 \\ 1 \end{smallmatrix}\right)$.
 	\end{itemize}
 \end{note}
@@ -202,7 +223,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 	\end{align*}
 	where $a, b, c, d \in \mathbb{R}$.
 
-	We define the product of two complex numbers by setting $i^2 = -1$, and by requiring the product to be commutative, associative, and distributive over the sum. In this setup, we have that
+	We define the product of two complex numbers by setting $i^2 = -1$, and by requiring the product to be \hlimpo{commutative, associative, and distributive} over the sum. In this setup, we have that
 	\begin{align}
 		(a + ib)(c + id) &= ac + iad + ibc + i^2 bd \nonumber \\
 						 &= (ac - bd) + i (ad + bc) \label{eq:complex multiplication}
@@ -210,7 +231,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \end{defn}
 
 \begin{note}
- It is interesting to note that \textit{any complex number times zero is zero}, just like what we have with real numbers.
+ It is interesting to note that \hlwarn{any complex number times zero is zero}, just like what we have with real numbers.
  \begin{gather*}
  	\forall z = x + iy \in \mathbb{C} \; x, y \in \mathbb{R} \enspace 0 \in \mathbb{C} \\
  	z \cdot 0 = (x + iy)(0 + i0) = 0 + i0 = 0
@@ -230,7 +251,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \end{eg}
 
 \begin{eg}\label{eg:multiplicative inverse of a complex number}
-	Show that every non-zero complex number has a multiplicative inverse, $z^{-1}$, and find a formula for this inverse.
+	Show that every non-zero complex number has a \hldefn{multiplicative inverse}, $z^{-1}$, and find a formula for this inverse.
 
 	Let $z = a + ib$ where $a, b \in \mathbb{R}$ with $a^2 + b^2 \neq 0$. Then
 	\begin{align*}
@@ -268,7 +289,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \end{eg}
 
 \begin{note}
-	The set of complex numbers is a \textbf{field} under the operations of additiona and multiplication. This means that $\forall u, v, w \in \mathbb{C}$,
+	The set of complex numbers is a \hlnotea{field} under the operations of addition and multiplication. This means that $\forall u, v, w \in \mathbb{C}$,
 	\begin{center}
 		\begin{tabular}{r@{\;{=}\;}l r@{\;{=}\;}l}
 			u + v 			& v + u 			& uv 			& vu \\
@@ -279,11 +300,11 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 		\end{tabular}
 	\end{center}
 
-	Since the distributive law holds for complex numbers, note that the binomial expansion works for $(w + z)^n$ where $w, z \in \mathbb{C}$ and $n \in \mathbb{N}$. (I did not verify if this is still true for when $n \in \mathbb{R}$.)
+	Since the distributive law holds for complex numbers, note that the \hlwarn{binomial expansion works} for $(w + z)^n$ where $w, z \in \mathbb{C}$ and $n \in \mathbb{N}$. (I did not verify if this is still true for when $n \in \mathbb{R}$.)
 \end{note}
 
 \begin{defn}[Conjugate]\label{defn:Conjugate}
-	If $z = x + iy$ where $x, y \in \mathbb{R}$, then the $\textbf{conjugate of z}$ is given by $\bar{z} = x - iy$
+	If $z = x + iy$ where $x, y \in \mathbb{R}$, then the \hldefn{conjugate of z} is given by $\bar{z} = x - iy$
 \end{defn}
 
 \begin{eg}\label{eg:4}
@@ -301,7 +322,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \end{eg}
 
 \begin{defn}[Modulus]\label{defn:Modulus}
-	We define the \textbf{modulus} (length, magnitude) of $z = x + iy \in \mathbb{C}, x, y \in \mathbb{R}$, to be
+	We define the \hldefn{modulus} (length, magnitude) of $z = x + iy \in \mathbb{C}, x, y \in \mathbb{R}$, to be
 	\begin{equation}
 		\abs{z} = \sqrt{x^2 + y^2} \in \mathbb{R}.
 	\end{equation}
@@ -317,12 +338,14 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
  	\begin{tabular}{r@{\;{=}\;}l r@{\;{=}\;}l r@{\;{=}\;}l}
  		$\bar{\bar{z}}$ 	& z 									& $z + \bar{z}$ 	& $2 \re(z)$ 			& $z - \bar{z}$ 	& $2i \im(z)$ \\
  		$z\bar{z}$				& $\abs{z}^2$					& $\abs{z}$				& $\abs{\bar{z}}$	& $\bar{z \pm w}$	& $\bar{z} \pm \bar{w}$ \\
- 		$\bar{zw}$		& $\bar{z}\bar{w}$	& $\abs{zw}$			&	$\abs{z}\abs{w}$	& $\bar{z}^n$ & $\bar{z^n}$
+ 		\color{base16-eighties-lightblue}$\bar{zw}$		& \color{base16-eighties-lightblue}$\bar{z}\bar{w}$
+ 		& $\abs{zw}$			&	$\abs{z}\abs{w}$
+ 		& $\bar{z}^n$ & $\bar{z^n}$
  	\end{tabular}
  \end{center}
  but note that $\abs{z + w} \neq \abs{z} + \abs{w}$.
 
- Also, note that the last equation is a generalization of the last third equation.
+ Also, note that the last equation is a generalization of the \hlnoteb{highlighted equation}.
 \end{note}
 
 \begin{note}
@@ -344,11 +367,11 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 	To prove 3, we have that
 	\begin{align*}
 		\abs{z + w}^2 &= (z + w)(\bar{z} + \bar{w}) \\
-									&= \abs{z}^2 + \abs{w}^2 + (w\bar{z} + \bar{w}z) \\
-									&= \abs{z}^2 + \abs{w}^2 + 2\re(w\bar{z}) \\
-									&\leq \abs{z}^2 + \abs{w}^2 + 2\abs{w\bar{z}} \quad \text{by 1} \\
-									&= \abs{z}^2 + \abs{w}^2 + 2\abs{wz} \quad \text{since } \abs{w\bar{z}} = \abs{w}\abs{\bar{z}} \text{ and } \abs{z} = \abs{\bar{z}} \\
-									&= (\abs{z} + \abs{w})^2
+				&= \abs{z}^2 + \abs{w}^2 + (w\bar{z} + \bar{w}z) \\
+				&= \abs{z}^2 + \abs{w}^2 + 2\re(w\bar{z}) \\
+				&\leq \abs{z}^2 + \abs{w}^2 + 2\abs{w\bar{z}} \quad \text{by 1} \\
+				&= \abs{z}^2 + \abs{w}^2 + 2\abs{wz} \quad \text{since } \abs{w\bar{z}} = \abs{w}\abs{\bar{z}} \text{ and } \abs{z} = \abs{\bar{z}} \\
+				&= (\abs{z} + \abs{w})^2
 	\end{align*}
 	
 	To prove 4, note that
@@ -415,7 +438,7 @@ We may simply refer to this set of points as the circle $\abs{z - z_0} = R$.
 		\begin{tikzpicture}
 			\begin{axis}[four quad complex, xmin=-15, xmax=15, ymin=-15, ymax=15]
 				\draw[line width=0pt,dashed,fill=black,fill opacity=0.25](-20,20)--(-20,-20)--(20,-20)--(20,-10)--(-5,15);
-				\draw[color=black] (-1,13) node {$f$};
+				\draw (-1,13) node {$f$};
 				\draw[line width=2pt,solid](2,2)--(8,8);
 				\draw[color=black] (3.5,5) node {$g$};
 				\node[label={0:{$a$}},circle,fill,inner sep=2pt] at (axis cs:2,2) {};
@@ -447,8 +470,7 @@ We may simply refer to this set of points as the circle $\abs{z - z_0} = R$.
 				xmin=-2, xmax=7,
 				ymin=-2, ymax=7
 			]
-				\draw [fill=black,fill opacity=0.25] (3,3) circle (1.4142135623730951);
-				\draw[fill=white](3,3) circle (1);
+				\draw [fill=black,fill opacity=0.25,even odd rule] (3,3) circle (1.4142135623730951) (3,3) circle (1);
 				\node[label={0:{$a$}},circle,fill,inner sep=1pt] at (axis cs:3,3) {};
 			\end{axis}
 		\end{tikzpicture}
@@ -504,7 +526,7 @@ We may simply refer to this set of points as the circle $\abs{z - z_0} = R$.
 \end{eg}
 
 \begin{remark}
-	Let $z \in \mathbb{C}$. The notation $\sqrt{z}$ may represent either one of the square roots of $z$ or both of the square roots, i.e. it is possible that $\sqrt{z}$ represents a set.
+	Let $z \in \mathbb{C}$. The notation $\sqrt{z}$ may represent either one of the square roots of $z$ or both of the square roots, i.e. \hlwarn{it is possible that $\sqrt{z}$ represents a set}.
 \end{remark}
 
 \begin{ex}\label{ex:Separation of Multiplication in Square Roots}
@@ -592,7 +614,7 @@ We may simply refer to this set of points as the circle $\abs{z - z_0} = R$.
 \label{sec:complex_numbers_and_their_properties_continued_2}
 
 \begin{defn}[Argument of a Complex Number]\label{defn:Argument of a Complex Number}
-	Let $z \in \mathbb{C} \setminus \{0\}$. The \textbf{argument} (or the angle) of $z$, denoted by $\arg{z}$, $\Arg{z}$, or simply $\theta = \theta(z)$, is the angle modulo $2 \pi$ (i.e. $0 \leq \theta < 2 \pi$) between the vector defining $z$ and the positive real axis (in the counterclockwise direction).
+	Let $z \in \mathbb{C} \setminus \{0\}$. The \hldefn{argument} (or the angle) of $z$, denoted by $\arg{z}$, $\Arg{z}$, or simply $\theta = \theta(z)$, is the angle modulo $2 \pi$ (i.e. $0 \leq \theta < 2 \pi$) between the vector defining $z$ and the positive real axis (in the counterclockwise direction).
 
 	\begin{center}
 		\begin{tikzpicture}
@@ -611,7 +633,7 @@ We may simply refer to this set of points as the circle $\abs{z - z_0} = R$.
 \end{defn}
 
 \begin{notation}
-	Let $e^{i \theta} := \cos \theta + i \sin \theta$. Note that this definition, called \textit{Euler's formula}, can be derived by the extending the Taylor expansion of $e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} $ for when $x \in \mathbb{C}$ (the sum of the real parts of the expansion is the Taylor expansion of cosine while the imaginary part for sine).
+	Let $e^{i \theta} := \cos \theta + i \sin \theta$. Note that this definition, called \hldefn{Euler's formula}, can be derived by the extending the Taylor expansion of $e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} $ for when $x \in \mathbb{C}$ (the sum of the real parts of the expansion is the Taylor expansion of cosine while the imaginary part for sine).
 
 	Now $e^{i \theta}$ is on the unit circle.
 	\begin{center}
@@ -677,8 +699,8 @@ Some examples of $\theta \in [0, 2\pi)$:
 
 With that, we now have two representations of a complex number:
 \begin{itemize}
-	\item Cartesian representation: $z = x + iy$ where $x = \re(z)$ and $y = \im(z)$
-	\item Polar representation: $z = re^{i \theta}$ where $r = \abs{z}$ and $\theta = \Arg{z} \in [0, 2\pi)$
+	\item \hlnotea{Cartesian representation}: $z = x + iy$ where $x = \re(z)$ and $y = \im(z)$
+	\item \hlnotea{Polar representation}: $z = re^{i \theta}$ where $r = \abs{z}$ and $\theta = \Arg{z} \in [0, 2\pi)$
 \end{itemize}
 
 To convert between the two representations, we have the following equations:
@@ -729,7 +751,7 @@ and
 	\begin{equation}\label{eq:demoivre's law}
 		\forall n \in \mathbb{Z} \enspace z = (re^{in}) = r^n e^{in\theta}
 	\end{equation}
-	which is commonly known as \textbf{deMoivre's Law}. Note that by simply generalizing the above, all we have is that $n \in \mathbb{Z^+}$. But by \cref{eq:inverse of nonzero complex number in polar coords}, we can have that for $n \in \mathbb{Z^-}$, let $m = -n$, and thus
+	which is commonly known as \hldefn{deMoivre's Law}. Note that by simply generalizing the above, all we have is that $n \in \mathbb{Z^+}$. But by \cref{eq:inverse of nonzero complex number in polar coords}, we can have that for $n \in \mathbb{Z^-}$, let $m = -n$, and thus
 	\begin{equation*}
 		z^n = \left[ \frac{1}{r} e^{i (-\theta)} \right]^m = \left(\frac{1}{r}\right)^m e^{im (-\theta)} = \left(\frac{1}{r} \right)^{-n} e^{i (-n) (-\theta)} = r^n e^{i\theta}
 	\end{equation*}
@@ -743,7 +765,7 @@ and
 	\begin{equation}\label{eq:demoivre's formula}
 		(\cos \theta + i \sin \theta)^n = \cos n\theta + i \sin n\theta \quad (n \in \mathbb{Z} \setminus \{0\})
 	\end{equation}
-	this is known as \textit{deMoivre's formula}.
+	this is known as \hldefn{deMoivre's formula}.
 \end{remark}
 
 \begin{eg}
@@ -791,7 +813,7 @@ and
 \end{propo}
 
 \begin{remark}[nth Roots of Unity]\label{remark:nth Roots of Unity}
-	The nth roots of unity is a direct consequence of \cref{propo:nth Roots of a Complex Number} where we solve for the equation $z^n = 1$ for any $z \in \mathbb{C}, n \in \mathbb{Z}$.
+	The \hlnotea{nth roots of unity} is a direct consequence of \cref{propo:nth Roots of a Complex Number} where we solve for the equation $z^n = 1$ for any $z \in \mathbb{C}, n \in \mathbb{Z}$.
 
 	The set that describes the nth roots of unity is
 	\begin{equation}\label{eq:nth roots of unity}
@@ -799,7 +821,7 @@ and
 	\end{equation}
 \end{remark}
 
-It is easy to see how the nth roots of unity partitions the unit circle into n parts.
+It is easy to see how the nth roots of unity \hlnoteb{partitions the unit circle into n parts}.
 
 \begin{eg}
 	Find the cubic roots of $-2 + 2i$.
@@ -902,7 +924,7 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 				\coordinate (z5) at (240:\CircleRadius);
 				\node[label={180:{$a$}},circle,fill,inner sep=1pt] at (a) {};
 				\foreach \x in {1, ..., 5} {
-					\draw (a)--(z\x) node[midway,fill=white] {$z_\x$};
+					\draw (a)--(z\x) node[midway, above] {$z_\x$};
 				};
 				\draw[dotted] (0:\CircleRadius) \foreach \x in {0, 60, ..., 300} {
 					-- (\x:\CircleRadius)
@@ -1147,7 +1169,7 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 \label{sub:limits}
 
 \begin{defn}[Convergence]\label{defn:Convergence}
-	A sequence of complex numbers $z_1, z_2, z_3, ...$ converges to $z \in \mathbb{C}$ if
+	A sequence of complex numbers $z_1, z_2, z_3, ...$ \hldefn{converges} to $z \in \mathbb{C}$ if
 	\begin{equation}
 		\lim_{n \to \infty} \abs{z_n - z} = 0
 	\end{equation}
@@ -1189,7 +1211,7 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 	\begin{equation}
 		z_n \to z_0 \implies f(z_n) \to L
 	\end{equation}
-	Note that $L$ need not be in $\Omega$. (I copied $z$ instead of $L$ in class. Needs further confirmation.)
+	Note that $L$ need not be in $\Omega$.
 \end{defn}
 
 \begin{eg}\label{eg:limit dne}
@@ -1243,7 +1265,7 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 \label{sub:continuity}
 
 \begin{defn}[Continuity]\label{defn:Continuity}
-	$\forall \Omega \subseteq \mathbb{C}$, let $f: \Omega \to \mathbb{C}$. We say that $f$ is continuous at $z_0 \in \Omega$ if
+	$\forall \Omega \subseteq \mathbb{C}$, let $f: \Omega \to \mathbb{C}$. We say that $f$ is \hldefn{continuous} at $z_0 \in \Omega$ if
 	\begin{enumerate}
 		\item $\forall \{z_n\}_{n \in \mathbb{N}} \\
 				z_n \to z_0 \implies f(z_n) \to f(z_0)$
@@ -1255,7 +1277,7 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 \begin{remark}
 	\begin{enumerate}
 		\item $f$ is continuous on $\Omega$ if it is continuous on every point in $\Omega$.
-		\item We may split $f$ into its feal and imaginary parts, i.e.
+		\item We may \hlnotea{split} $f$ into its feal and imaginary parts, i.e.
 			\begin{equation}\label{eq:complex function expressed in real-valued functions}
 				f(z) = f(x, y) = u(x, y) + iv(x, y)
 			\end{equation}
@@ -1342,19 +1364,19 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 		\caption[loftitle]{Open disk centered around $z_0$ with radius $r$}
 		\label{figure:neighbourhood_open_disk}
 	\end{figure}
-	This open disk is called a \textbf{neighbourhood} of $z_0$.
+	This open disk is called a \hldefn{neighbourhood} of $z_0$.
 \end{defn}
 
 \begin{defn}[Differentiable/Holomorphic]\label{defn:Differentiable/Holomorphic}
-	Let $f(z)$ be defined in a neighbourhood of $z_0 \in \mathbb{C}$. We say $f$ is \textbf{differentiable/holomorphic} at $z_0$ if for some $h \in \mathbb{C}$,
+	Let $f(z)$ be defined in a neighbourhood of $z_0 \in \mathbb{C}$. We say $f$ is \hldefn{differentiable/holomorphic} at $z_0$ if for some $h \in \mathbb{C}$,
 	\begin{equation}\label{eq:holomorphic}
 		\lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h} 
 	\end{equation}
-	exists. If such a limit exists, we denot ethe limit by $f'(z_0)$.
+	exists. If such a limit exists, we denote the limit by $f'(z_0)$.
 \end{defn}
 
 \begin{remark}
-	$h \in \mathbb{C}: h$ need not necessarily be real. In this sense, $h$ approaches $0$ from any direction around $0 \in \mathbb{C}$.
+	$h \in \mathbb{C}: h$ need not necessarily be real. In this sense, $h$ approaches $0$ from \hlwarn{any direction} around $0 \in \mathbb{C}$.
 \end{remark}
 
 \begin{eg}
@@ -1469,7 +1491,7 @@ Note that since $f'(z_0)$ exists, the real and imaginary part of \cref{eq:holomo
 \subsection{Cauchy-Riemann Equations (Continued)} % (fold)
 \label{sub:cauchy_riemann_equations_continued}
 
-It is natural to wonder if the converse of \cref{thm:cauchy_riemann_equations} is true. We present the following example.
+It is natural to wonder if the \hlnotea{converse} of \cref{thm:cauchy_riemann_equations} is true. We present the following example.
 
 \begin{eg}\label{eg:counterexample_for_converse_of_cre}
 	Let
@@ -1548,7 +1570,7 @@ A proof of the theorem is in page 36 of Newman and Bak (recommended text of PMAT
 \label{sub:power_series}
 
 \begin{defn}[Power Series]\label{defn:power_series}
-	A \textbf{power series} in $\mathbb{C}$ is an infinite series of the form
+	A \hldefn{power series} in $\mathbb{C}$ is an infinite series of the form
 	\begin{equation}\label{eq:generic_power_series_formula}
 		\sum_{n \in \mathbb{N}} c_n z^n,
 	\end{equation}
@@ -1592,11 +1614,127 @@ We also know that \cref{eq:generic_power_series_formula} converges absolutely if
 
 Another note that we shall point out is that if \cref{eq:generic_power_series_formula} converges absolutely for some $z_0 \in \mathbb{C}$, then it converges absolutely for any $z$ where $\abs{z} < \abs{z_0}$.
 
-These notions, in turn, begs the question of what is the largest possible $\abs{z_0}$ for the series to converge absolutely.
+These notions, in turn, begs the question of \hlwarn{what is the largest possible $\abs{z_0}$ for the series to converge absolutely}.
 
 % subsection power_series (end)
 
 % section differentiability_continued (end)
 
 % chapter lecture_7_jan_17_2018 (end)
+
+\chapter{Lecture 8 Jan 19 2018}
+	\label{chapter:lecture_8_jan_19_2018}
+
+\section{Power Series (Continued)} % (fold)
+\label{sec:power_series_continued}
+
+\begin{thm}[Convergence in the Radius of Convergence]\label{thm:convergence_in_the_radius_of_convergence}
+	For any power series $\sum_{n \in \mathbb{N}} c_n z^n$, $\exists 0 \leq R < \infty$, such that
+	\begin{enumerate}
+		\item $\abs{z} < R \implies $ series converges absolutely.
+		\item $\abs{z} > R \implies $ series diverges.
+	\end{enumerate}
+	Moreover, $R$ is given by \hlnotea{Hadamard's Formula}:
+	\begin{equation}\label{eq:hadamards_formula}
+		\frac{1}{R} := \limsup_{n \to \infty} \abs{c_n}^\frac{1}{n}
+	\end{equation}
+\end{thm}
+
+\begin{remark}
+	\begin{enumerate}
+		\item $R$ is called the \hldefn{radius of convergence} of the series. $\{z \in \mathbb{C} : \abs{z} < R\}$ is called the disk of convergence of the series.
+		\item Recall the definition of the \hldefn{limit supremum}
+		\begin{equation}
+			\label{eq:defn_limsup}
+			\limsup_{n \to \infty} a_n := \lim_{n \to \infty} (\sup_{m \geq n} a_m)
+		\end{equation}
+		which we may colloquially say as the ``highest peak `reached' by $a_n$'s as $n \to \infty$''
+	\end{enumerate}
+\end{remark}
+
+\begin{propo}[A Property of limsup]\label{propo:a_property_of_limsup}\begin{gather*}
+		\forall \{a_n\}_{n \in \mathbb{N}} \quad L := \limsup_{n \to \infty} a_n \implies \\
+		\forall \epsilon > 0 \quad \exists N > 0 \quad \forall n > N \\
+		L - \epsilon < a_n < L + \epsilon
+	\end{gather*}
+\end{propo}
+
+(Proof to be included)
+
+\begin{proof}[\cref{thm:convergence_in_the_radius_of_convergence}]
+	Let $L := \frac{1}{R} = \limsup_{n \to \infty} \abs{c_n}^\frac{1}{n}$. Clearly, $L \geq 0$.
+	\begin{enumerate}
+		\item Suppose $\abs{z} < R$. $\exists \epsilon > 0, r := \abs{z}(L + \epsilon)$ such that $0 < r < 1$. By \cref{propo:a_property_of_limsup}, $\exists N \in \mathbb{N}, \forall n > N, \abs{c_n}^\frac{1}{n} < L + \epsilon$.
+
+		Now since $L = \frac{1}{R}$,
+		\begin{equation*}
+			\sum_{n=N}^{\infty} \abs{c_n}\abs{z}^n = \sum_{n=N}^{\infty} (\abs{c_n}^\frac{1}{n} \abs{z})^n < \sum_{n=N}^{\infty} r^n
+		\end{equation*}
+		and since $0 < r < 1$, the final summation converges (as it is a geometric sum). Thus by comparison test, $\sum_{n=N}^{\infty} \abs{c_n} \abs{z}^n$ converges.
+
+		We may also proceed with noticing that the partial sum of $\sum_{n=N}^{\infty} \abs{c_n}\abs{z}^n$ is \hlnotea{bounded and monotonic}, which shows that the series converges.
+
+		\item Suppose $\abs{z} > R$. $\exists \epsilon > 0, r := \abs{z}(L - \epsilon)$ such that $r > 1$. By \cref{propo:a_property_of_limsup}, $\exists N \in \mathbb{N}, \forall n > N, \abs{c_n}^\frac{1}{n} > L - \epsilon$. Then analogous to the proof above,
+		\begin{equation*}
+			\sum_{n=N}^{\infty} \abs{c_n}\abs{z}^n = \sum_{n=N}^{\infty} (\abs{c_n}^\frac{1}{n} \abs{z})^n > \sum_{n=N}^{\infty} r^n
+		\end{equation*}
+		where the final summation diverges, and thus implying that $\sum_{n=N}^{\infty} \abs{c_n}\abs{z}^n$ diverges.
+	\end{enumerate}
+\end{proof}
+
+\begin{thm}[Power function, holomorphic function, region of convergence]\label{thm:power_function_holomorphic_function_region_of_convergence}
+	Suppose $f(z) = \sum_{n\in \mathbb{N}} c_n z^n$ has a radius of convergence $R \in \mathbb{R}$. Then $f'(z)$ exists and equals
+	\begin{equation*}
+		\sum_{n=1}^{\infty} nc_nz^{n - 1}
+	\end{equation*}
+	throughout $\abs{z} < R$.
+
+	Moreover, $f'$ has the \hlimpo{same radius of convergence} as $f$.
+\end{thm}
+
+\begin{proof}
+	Note that $f'$ has the same radius of convergence as $f$ since
+	\begin{equation*}
+		\limsup_{n \to \infty} \abs{nc_n}^\frac{1}{n} = \limsup_{n \to \infty} \abs{n}^\frac{1}{n} \abs{c_n}^\frac{1}{n} = \limsup_{n \to \infty} \abs{c_n}^\frac{1}{n}
+	\end{equation*}
+	where note that $\lim_{n \to \infty} \abs{n}^\frac{1}{n} = 1$.
+
+	Let $\abs{z_0} \leq r < R$ and $g(z_0) := \sum_{n=1}^{\infty} nc_n z_0^{n - 1} $.
+
+	WTS
+	\begin{equation*}
+		\lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h} = g(z_0)
+	\end{equation*}
+	OR
+	\begin{gather*}\label{eq:power_function_defines_holomorphic_function_epsilondelta}\tag{$\dagger$}
+		\forall \epsilon > 0 \enspace \exists \delta > 0 \\
+		\abs{h} < \delta \implies \abs{\frac{f(z_0 + h) - f(z_0)}{h} -g(z_0)} < \epsilon
+	\end{gather*}
+	(Note that we would want $\delta > 0$ such that $\abs{z_0 + h} \leq r < R$)
+
+	WTP \eqref{eq:power_function_defines_holomorphic_function_epsilondelta}. $\forall \epsilon > 0$, choose $\delta > 0$. Suppose $\abs{z_0 + h} < \abs{z_0 + \delta} \leq r < R$. Write
+	\begin{equation*}
+		f(z) = \sum_{n=0}^{N} c_n z^n + \sum_{n=N}^{\infty} c_n z^n
+	\end{equation*}
+	and let $S_N(z)$ and $E_N(z)$ be the first and second terms respectively.
+	Then we have that
+	\begin{equation*}
+		S_N'(z) = \sum_{n=1}^{N} nc_n z^{n - 1}
+	\end{equation*}
+	Consider
+	\begin{align*}
+			&\abs{\frac{S_N(z_0 + h) - S_N(z_0)}{h} + \frac{E_N(z_0 + h) - E_N(z_0)}{h} - g(z_0) + S_N'(z_0) - S_N'(z_0)} \\
+		\leq &\abs{\frac{S_N(z_0 + h) - S_N(z_0)}{h} - S_N'(z_0)} + \abs{\frac{E_N(z_0 + h) - E_N(z_0)}{h}} + \abs{S_N'(z_0) - g(z_0)}.
+	\end{align*}
+	For the second term, since $a^2 - b^2 = (a - b)(a^{n - 1} + a^{n - 2}b + \hdots ab^{n - 2} + b^{n - 1})$ and $\abs{z_0}, \abs{z_0 + h} < r \leq R$, we obtain $(z_0 + h)^n - z_0^n \leq hnr^{n - 1}$. Thus
+	\begin{equation*}
+		\abs{\frac{E_N(z_0 + h) - E_N(z_0)}{h}} = \abs{\frac{1}{h} \sum_{n=N+1}^{\infty} c_n [(z_0 + h)^n - z_0^n]} \leq \sum_{n=N+1}^{\infty} nc_nr^{n-1}.
+	\end{equation*}
+
+	\hlwarn{(Proof is incomplete, and will be continued in the following lecture)}
+\end{proof}
+
+% section power_series_continued (end)
+
+% chapter lecture_8_jan_19_2018 (end)
 \end{document}
