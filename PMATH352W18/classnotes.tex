@@ -312,15 +312,17 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \end{note}
 
 \begin{note}
- For $z, w \in \mathbb{R}$, we have
+ For $z, w \in \mathbb{C}$ and $n \in \mathbb{N}$, we have
  \begin{center}
  	\begin{tabular}{r@{\;{=}\;}l r@{\;{=}\;}l r@{\;{=}\;}l}
  		$\bar{\bar{z}}$ 	& z 									& $z + \bar{z}$ 	& $2 \re(z)$ 			& $z - \bar{z}$ 	& $2i \im(z)$ \\
  		$z\bar{z}$				& $\abs{z}^2$					& $\abs{z}$				& $\abs{\bar{z}}$	& $\bar{z \pm w}$	& $\bar{z} \pm \bar{w}$ \\
- 		$\bar{zw}$		& $\bar{z} - \bar{w}$	& $\abs{zw}$			&	$\abs{z}\abs{w}$
+ 		$\bar{zw}$		& $\bar{z}\bar{w}$	& $\abs{zw}$			&	$\abs{z}\abs{w}$	& $\bar{z}^n$ & $\bar{z^n}$
  	\end{tabular}
  \end{center}
  but note that $\abs{z + w} \neq \abs{z} + \abs{w}$.
+
+ Also, note that the last equation is a generalization of the last third equation.
 \end{note}
 
 \begin{note}
@@ -1371,44 +1373,6 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 	From \cref{eg:limit dne}, we know that such a limit does not exist. Thus $f$ is not holomorphic on any $z \in \mathbb{C}$.
 \end{eg}
 
-\begin{note}
-	If we look at the example above from the perspective of $f$ being treated as a real-valued function, i.e. $f(z) = u(x, y) + iv(x, y)$ where $u, v: \mathbb{R}^2 \to \mathbb{R}$ and $z = x + iy$, observe that $\forall (x, y) \in \mathbb{R}^2, (x, y) \mapsto (x, -y)$, which we see that $u$ and $v$ are partially differentiable in $\mathbb{R}^2$.
-
-	We will now look into this ``discrepancy''.
-\end{note}
-
-Consider the following function taken from \cref{eq:holomorphic},
-\begin{equation}\label{eq:holomorphic 2}
-	f'(z_0) = \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h}
-\end{equation}
-While $h$ may approach $0 \in \mathbb{C}$ from infinitely many sides on the complex plane, we will consider 2 cases.
-
-\textit{Case 1: }$\mathit{h \to 0}$\textit{ via the real axis}
-
-In this case, $h = x + i(0)$ and $x \to 0 \in \mathbb{R}$. Then \cref{eq:holomorphic 2} gives
-\begin{align}
-	f'(z_0) &= \lim_{x \to 0} \frac{u(x_0 + x, y_0) + iv(x_0 + x, y_0) - u(x_0, y_0) - iv(x_0, y_0)}{x} \nonumber \\
-		&= \lim_{x \to 0} \left[ \frac{u(x_0 + x, y_0) - u(x_0, y_0)}{x} + i \frac{v(x_0 + x, y_0) - v(x_0, y_0)}{x} \right] \nonumber \\
-		&= \frac{\partial u}{\partial x} \Bigr|_{(x_0, y_0)} + i \frac{\partial v}{\partial x} \Bigr|_{(x_0, y_0)} \label{eq:holomorphic approach via real axis}
-\end{align}
-
-\textit{Case 2: }$\mathit{h \to 0}$\textit{ via the imaginary axis}
-
-In this case, $h = 0 + iy$ and $y \to 0 \in \mathbb{R}$. In a similar fashion, \cref{eq:holomorphic 2} becomes
-\begin{align}
-	f'(z_0) &= \lim_{y \to 0} \left[ \frac{u(x_0, y_0 + y) - u(x_0, y_0)}{iy} + \frac{v(x_0, y_0 + y) - v(x_0, y_0)}{y} \right] \nonumber \\
-		&= \frac{1}{i} \cdot \frac{\partial u}{\partial y} \Bigr|_{(x_0, y_0)} + \frac{\partial v}{\partial y} \Bigr|_{(x_0, y_0)} \label{eq:holomorphic approach via imaginary axis}
-\end{align}
-
-Note that since $f'(z_0)$ exists, the real and imaginary part of \cref{eq:holomorphic approach via real axis} and \cref{eq:holomorphic approach via imaginary axis} must equate. Also note that $\frac{1}{i} = -i$. With that, we obtain the following theorem.
-
-\begin{thm}[Cauchy-Riemann Equations]\label{thm:cauchy_riemann_equations}
-	If $f(z)$ is holomorphic at $z_0 = x_0 + iy_0 \in \mathbb{C}$ where $x_0, y_0 \in \mathbb{R}$, then, at $(x_0, y_0)$,
-	\begin{equation}\label{eq:cauchy_riemann_equations}
-		\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \quad \text{ and } \quad \frac{\partial v}{\partial x} = - \frac{\partial u}{\partial y}.
-	\end{equation}
-\end{thm}
-
 \begin{ex}[Holomorphic Functions Properties]\label{ex:holomorphic_functions_properties}
 	If $f, g$ are holomorphic at $z \in \mathbb{C}$, prove that
 	\begin{enumerate}
@@ -1449,7 +1413,190 @@ Note that since $f'(z_0)$ exists, the real and imaginary part of \cref{eq:holomo
 	\end{solution}
 \end{ex}
 
+\begin{note}
+	If we look at the example above from the perspective of $f$ being treated as a real-valued function, i.e. $f(z) = u(x, y) + iv(x, y)$ where $u, v: \mathbb{R}^2 \to \mathbb{R}$ and $z = x + iy$, observe that $\forall (x, y) \in \mathbb{R}^2, (x, y) \mapsto (x, -y)$, which we see that $u$ and $v$ are partially differentiable in $\mathbb{R}^2$.
+
+	We will now look into this ``discrepancy''.
+\end{note}
+
+\subsection{Cauchy-Riemann Equations} % (fold)
+\label{sub:cauchy_riemann_equations}
+
+% subsection cauchy_riemann_equations (end)
+
+Consider the following function taken from \cref{eq:holomorphic},
+\begin{equation}\label{eq:holomorphic 2}
+	f'(z_0) = \lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h}
+\end{equation}
+While $h$ may approach $0 \in \mathbb{C}$ from infinitely many sides on the complex plane, we will consider 2 cases.
+
+\textit{Case 1: }$\mathit{h \to 0}$\textit{ via the real axis}
+
+In this case, $h = x + i(0)$ and $x \to 0 \in \mathbb{R}$. Then \cref{eq:holomorphic 2} gives
+\begin{align}
+	f'(z_0) &= \lim_{x \to 0} \frac{u(x_0 + x, y_0) + iv(x_0 + x, y_0) - u(x_0, y_0) - iv(x_0, y_0)}{x} \nonumber \\
+		&= \lim_{x \to 0} \left[ \frac{u(x_0 + x, y_0) - u(x_0, y_0)}{x} + i \frac{v(x_0 + x, y_0) - v(x_0, y_0)}{x} \right] \nonumber \\
+		&= \frac{\partial u}{\partial x} \Bigr|_{(x_0, y_0)} + i \frac{\partial v}{\partial x} \Bigr|_{(x_0, y_0)} \label{eq:holomorphic approach via real axis}
+\end{align}
+
+\textit{Case 2: }$\mathit{h \to 0}$\textit{ via the imaginary axis}
+
+In this case, $h = 0 + iy$ and $y \to 0 \in \mathbb{R}$. In a similar fashion, \cref{eq:holomorphic 2} becomes
+\begin{align}
+	f'(z_0) &= \lim_{y \to 0} \left[ \frac{u(x_0, y_0 + y) - u(x_0, y_0)}{iy} + \frac{v(x_0, y_0 + y) - v(x_0, y_0)}{y} \right] \nonumber \\
+		&= \frac{1}{i} \cdot \frac{\partial u}{\partial y} \Bigr|_{(x_0, y_0)} + \frac{\partial v}{\partial y} \Bigr|_{(x_0, y_0)} \label{eq:holomorphic approach via imaginary axis}
+\end{align}
+
+Note that since $f'(z_0)$ exists, the real and imaginary part of \cref{eq:holomorphic approach via real axis} and \cref{eq:holomorphic approach via imaginary axis} must equate. Also note that $\frac{1}{i} = -i$. With that, we obtain the following theorem.
+
+\begin{thm}[Cauchy-Riemann Equations]\label{thm:cauchy_riemann_equations}
+	If $f(z)$ is holomorphic at $z_0 = x_0 + iy_0 \in \mathbb{C}$ where $x_0, y_0 \in \mathbb{R}$, then, at $(x_0, y_0)$,
+	\begin{equation}\label{eq:cauchy_riemann_equations}
+		\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \quad \text{ and } \quad \frac{\partial v}{\partial x} = - \frac{\partial u}{\partial y}.
+	\end{equation}
+\end{thm}
+
 % section differentiability (end)
 
 % chapter lecture_6_jan_15th_2018 (end)
+
+\chapter{Lecture 7 Jan 17 2018}
+	\label{chapter:lecture_7_jan_17_2018}
+
+\section{Differentiability (Continued)} % (fold)
+\label{sec:differentiability_continued}
+
+\subsection{Cauchy-Riemann Equations (Continued)} % (fold)
+\label{sub:cauchy_riemann_equations_continued}
+
+It is natural to wonder if the converse of \cref{thm:cauchy_riemann_equations} is true. We present the following example.
+
+\begin{eg}\label{eg:counterexample_for_converse_of_cre}
+	Let
+	\begin{equation*}
+		f(z) = \begin{cases}
+			\frac{\bar{z}^2}{z} & \text{if } z \neq 0 \\
+			0		& \text{if } z = 0
+		\end{cases}
+	\end{equation*}
+	Check if
+	\begin{enumerate}
+		\item $f$ is holomorphic at $0$.
+		\item \cref{thm:cauchy_riemann_equations} holds at $(0, 0)$.
+	\end{enumerate}
+
+	\begin{proof}
+		\begin{enumerate}
+			\item Observe that by letting $h = x_h + iy_h$ where $x_h, y_h \in \mathbb{R}$,
+			\begin{equation*}
+				\lim_{h \to 0} \frac{\frac{\bar{0 + h}^2}{0 + h} - 0}{h} = \lim_{h \to 0} \frac{\bar{h}^2}{h} = \lim_{x_h + iy_h \to 0} \left(\frac{x_h - iy_h}{x_h + iy_h} \right)^2
+			\end{equation*}
+			Consider $y_h = kx_h$, for $k \in \mathbb{R} \setminus \{0\}$. Then
+			\begin{equation*}
+				\lim_{x_h \to 0} \left( \frac{x_h - ikx_h}{x_h + ikx_h} \right)^2 = \left( \frac{1 - ik}{1 + ik} \right)^2,
+			\end{equation*}
+			where we see that the limit depends on the value of $k$. Therefore, the limit DNE. Hence $f$ is not holomorphic at $0$.
+
+			\item Let $z = x + iy$ for $x, y \in \mathbb{R}$. Then
+			\begin{equation*}
+				\frac{\bar{z}^2}{z} = \frac{(x - iy)^2}{x + iy} = \frac{(x - iy)^3}{x^2 + y^2} = \frac{x^3 - 3xy^2}{x^2 + y^2} + i \frac{(-3x^2y + y^3)}{x^2 + y^2}
+			\end{equation*}
+			Therefore, we obtain
+			\begin{align*}
+				u(x, y) &= \begin{cases}
+					\frac{x^3 - 3xy^2}{x^2 + y^2} & (x, y) \neq (0, 0) \\
+					0	& (x, y) = (0, 0)
+				\end{cases} \\
+				v(x, y) &= \begin{cases}
+					\frac{y^3 - 3x^2y}{x^2 + y^2} & (x, y) \neq (0, 0) \\
+					0	& (x, y) = (0, 0)
+				\end{cases}
+			\end{align*}
+			Observe that
+			\begin{align*}
+				\frac{\partial u}{\partial x} \Bigr|_{(0, 0)}
+					&= \lim_{x \to 0} \frac{u(x, 0) - u(0, 0)}{x} = 1 \\
+				\frac{\partial v}{\partial y} \Bigr|_{(0, 0)}
+					&= \lim_{y \to 0} \frac{v(0, y) - v(0, 0)}{y} = 1 \\
+					&\text{and} \\
+				\frac{\partial u}{\partial y} \Bigr|_{(0, 0)}
+					&= \lim_{y \to 0} \frac{u(0, y) - u(0, 0)}{y} = 0 \\
+				\frac{\partial v}{\partial x} \Bigr|_{(0, 0)}
+					&= \lim_{x \to 0} \frac{v(x, 0) - v(0, 0)}{x} = 0
+			\end{align*}
+			satisfies \cref{eq:cauchy_riemann_equations}.
+		\end{enumerate}
+		This illustrates that the converse of \cref{thm:cauchy_riemann_equations} is not true. We will, however, show that the converse will be true given an extra condition.
+	\end{proof}
+\end{eg}
+
+\begin{thm}[Conditional Converse of CRE]\label{thm:conditional_converse_of_cre}
+	Let $z_0 = x_0 + iy_0 \in \Omega \subseteq \mathbb{C}, x_0, y_0 \in \mathbb{R}$, and $u, v : \mathbb{R}^2 \to \mathbb{R}, f = u + iv : \Omega \to \mathbb{C}$. If
+	\begin{enumerate}
+		\item the partials of $u, v$ exist in a neighbourhood of $(x_0, y_0)$,
+		\item the partials of $u, v$ are continuous at $(x_0, y_0)$, and
+		\item $\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \quad \text{and} \quad \frac{\partial v}{\partial x} = - \frac{\partial u}{\partial y} \quad \text{at } (x_0, y_0)$,
+	\end{enumerate}
+	then $f$ is holomorphic at $z_0$.
+\end{thm}
+
+A proof of the theorem is in page 36 of Newman and Bak (recommended text of PMATH352W18). I may include the proof whenever I am free.
+
+% subsection cauchy_riemann_equations_continued (end)
+
+\subsection{Power Series} % (fold)
+\label{sub:power_series}
+
+\begin{defn}[Power Series]\label{defn:power_series}
+	A \textbf{power series} in $\mathbb{C}$ is an infinite series of the form
+	\begin{equation}\label{eq:generic_power_series_formula}
+		\sum_{n \in \mathbb{N}} c_n z^n,
+	\end{equation}
+	where each $c_n \in \mathbb{C}$ is the coefficient of $z$ of the $n$-th power.
+\end{defn}
+
+In this subsection, we are interested to see if \cref{eq:generic_power_series_formula} converges.
+
+Recall the notion of convergence in series from $\mathbb{R}$. \cref{eq:generic_power_series_formula} converges if the sequence of partial sums $\{S_N\}$ converges as $N \to \infty$, where
+\begin{equation*}
+	S_N := \sum_{n = 0}^{N} c_n z^n
+\end{equation*}
+
+In other words, using the same definition of $S_N$,
+\begin{gather*}
+	\forall \epsilon > 0 \quad \exists N \in \mathbb{N} \setminus	\{0\} \quad \forall n > N \\
+	\abs{S_n - L} < \epsilon
+\end{gather*}
+where $L \in \mathbb{C}$ is the limit that the sequence converges to.
+
+We also know that \cref{eq:generic_power_series_formula} converges absolutely if $\sum_{n = 0}^{\infty} \abs{c_n} \abs{z}^n$ converges. This is a stronger statement (i.e. absolute convergence $\implies$ convergence)
+\begin{equation*}
+	\because \abs{\sum_{n = 0}^{N} c_n z^n} \leq \sum_{n = 0}^{N} \abs{c_n} \abs{z}^n \quad \text{for each } N \in \mathbb{N}
+\end{equation*}
+
+\begin{eg}
+	$\sum_{n = 0}^{\infty} z^n$ converges absolutely for $\abs{z} < 1$.
+
+	Note that the partial sum of a geometric series is
+	\begin{equation*}
+		\sum_{n = 0}^{N} r^n = \frac{1 - r^{N + 1}}{1 - r}
+	\end{equation*}
+	and so the limit as $N \to \infty$ exists if $\abs{r} < 1$, and hence we see that
+	\begin{equation*}
+		\sum_{n = 0}^{N} r^n \to \frac{1}{1 - r} 
+	\end{equation*}
+	if $\abs{r} < 1$ as $N \to \infty$.
+
+	However, if $\abs{z} = 1$, the power series diverges.
+\end{eg}
+
+Another note that we shall point out is that if \cref{eq:generic_power_series_formula} converges absolutely for some $z_0 \in \mathbb{C}$, then it converges absolutely for any $z$ where $\abs{z} < \abs{z_0}$.
+
+These notions, in turn, begs the question of what is the largest possible $\abs{z_0}$ for the series to converge absolutely.
+
+% subsection power_series (end)
+
+% section differentiability_continued (end)
+
+% chapter lecture_7_jan_17_2018 (end)
 \end{document}

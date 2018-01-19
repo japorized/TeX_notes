@@ -4,10 +4,10 @@
 \documentclass[11pt, oneside]{book}
 \usepackage{geometry}
 \geometry{letterpaper}
-\usepackage[parfill]{parskip}
-\usepackage{graphicx}
 
 % Essential Packages
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
 \usepackage{ragged2e}
 \usepackage{amssymb}
 \usepackage{amsmath}

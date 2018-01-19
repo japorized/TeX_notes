@@ -16,7 +16,7 @@
 		{ "trigger": "cases", "contents": "\\begin{cases}\n	$0\n\\end{cases}\n" },
 		{ "trigger": "itemize", "contents": "\\begin{itemize}\n	\\item $0\n\\end{itemize}" },
 
-		{ "trigger": "defn", "contents": "\\begin{defn}[${1:Definition Name}]\\label{defn:${2:$1}}\n	$0\n\\end{defn}" },
+		{ "trigger": "defn", "contents": "\\begin{defn}[${1:Definition Name}]\\label{defn:${2:${1/^(\\w)|(?:\\s(\\w))/(?1\\l$1:)(?2_\\l$2:)/g}}}\n	$0\n\\end{defn}" },
     	{ "trigger": "note", "contents": "\\begin{note}\n $0\n\\end{note}" },
 
 		{ "trigger": "frac", "contents": "\\frac{${1:a}}{${2:b}} $0" },
