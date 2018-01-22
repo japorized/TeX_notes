@@ -156,6 +156,8 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\hlnotea}[1]{\textcolor{base16-eighties-green}{\textbf{#1}}}
 \newcommand{\hlnoteb}[1]{\textcolor{base16-eighties-lightblue}{\textbf{#1}}}
 \newcommand{\hlnotec}[1]{\textcolor{base16-eighties-brown}{\textbf{#1}}}
+\newcommand{\WTP}{\textcolor{base16-eighties-brown}{WTP}}
+\newcommand{\WTS}{\textcolor{base16-eighties-brown}{WTS}}
 
 % Main Body
 \title{PMATH352W18 Complex Analysis - Class Notes}
@@ -1630,6 +1632,9 @@ These notions, in turn, begs the question of \hlwarn{what is the largest possibl
 \section{Power Series (Continued)} % (fold)
 \label{sec:power_series_continued}
 
+\subsection{Radius of Convergence} % (fold)
+\label{sub:radius_of_convergence}
+
 \begin{thm}[Convergence in the Radius of Convergence]\label{thm:convergence_in_the_radius_of_convergence}
 	For any power series $\sum_{n \in \mathbb{N}} c_n z^n$, $\exists 0 \leq R < \infty$, such that
 	\begin{enumerate}
@@ -1703,7 +1708,7 @@ These notions, in turn, begs the question of \hlwarn{what is the largest possibl
 
 	Let $\abs{z_0} \leq r < R$ and $g(z_0) := \sum_{n=1}^{\infty} nc_n z_0^{n - 1} $.
 
-	WTS
+	\WTS
 	\begin{equation*}
 		\lim_{h \to 0} \frac{f(z_0 + h) - f(z_0)}{h} = g(z_0)
 	\end{equation*}
@@ -1714,7 +1719,7 @@ These notions, in turn, begs the question of \hlwarn{what is the largest possibl
 	\end{gather*}
 	(Note that we would want $\delta > 0$ such that $\abs{z_0 + h} \leq r < R$)
 
-	WTP \eqref{eq:power_function_defines_holomorphic_function_epsilondelta}. $\forall \epsilon > 0$, choose $\delta > 0$. Suppose $\abs{z_0 + h} < \abs{z_0 + \delta} \leq r < R$. Write
+	\WTP \eqref{eq:power_function_defines_holomorphic_function_epsilondelta}. $\forall \epsilon > 0$, choose $\delta > 0$. Suppose $\abs{z_0 + h} < \abs{z_0 + \delta} \leq r < R$. Write
 	\begin{equation*}
 		f(z) = \sum_{n=0}^{N} c_n z^n + \sum_{n=N}^{\infty} c_n z^n
 	\end{equation*}
@@ -1724,19 +1729,135 @@ These notions, in turn, begs the question of \hlwarn{what is the largest possibl
 		S_N'(z) = \sum_{n=1}^{N} nc_n z^{n - 1}
 	\end{equation*}
 	Consider
-	\begin{align*}
-			&\abs{\frac{S_N(z_0 + h) - S_N(z_0)}{h} + \frac{E_N(z_0 + h) - E_N(z_0)}{h} - g(z_0) + S_N'(z_0) - S_N'(z_0)} \\
-		\leq &\abs{\frac{S_N(z_0 + h) - S_N(z_0)}{h} - S_N'(z_0)} + \abs{\frac{E_N(z_0 + h) - E_N(z_0)}{h}} + \abs{S_N'(z_0) - g(z_0)}.
-	\end{align*}
+	\begin{align}
+			&\abs{\frac{S_N(z_0 + h) - S_N(z_0)}{h} + \frac{E_N(z_0 + h) - E_N(z_0)}{h} - g(z_0) + S_N'(z_0) - S_N'(z_0)} \nonumber \\
+		\leq &\abs{\frac{S_N(z_0 + h) - S_N(z_0)}{h} - S_N'(z_0)} + \abs{\frac{E_N(z_0 + h) - E_N(z_0)}{h}} + \abs{S_N'(z_0) - g(z_0)} \label{eq:power_function_defines_holomorphic_function_1}
+	\end{align}
 	For the second term, since $a^2 - b^2 = (a - b)(a^{n - 1} + a^{n - 2}b + \hdots ab^{n - 2} + b^{n - 1})$ and $\abs{z_0}, \abs{z_0 + h} < r \leq R$, we obtain $(z_0 + h)^n - z_0^n \leq hnr^{n - 1}$. Thus
 	\begin{equation*}
 		\abs{\frac{E_N(z_0 + h) - E_N(z_0)}{h}} = \abs{\frac{1}{h} \sum_{n=N+1}^{\infty} c_n [(z_0 + h)^n - z_0^n]} \leq \sum_{n=N+1}^{\infty} nc_nr^{n-1}.
 	\end{equation*}
 
-	\hlwarn{(Proof is incomplete, and will be continued in the following lecture)}
+	Note that
+	\begin{equation}\label{eq:power_function_defines_holomorphic_function_2}
+		\sum_{n=1}^{\infty} nc_nr^{n-1} = g(r),
+	\end{equation}
+	and since $r < R$, \cref{eq:power_function_defines_holomorphic_function_2} converges absolutely by \cref{thm:convergence_in_the_radius_of_convergence}, thus the tail
+	$\sum_{n=N+1}^{\infty} nc_n r^{n - 1}$ converges absolutely. Therefore, by comparison, we can pick $\frac{\epsilon}{3} > 0$ so that $\exists N_1 \in \mathbb{N}, \forall n > N_1$
+	\begin{equation*}
+		\abs{\frac{E_N(z_0 + h) - E_N(z_0)}{h}} < \frac{\epsilon}{3}.
+	\end{equation*}
+	
+	For the third term in \cref{eq:power_function_defines_holomorphic_function_1}, we observe that by definition, $S_N'(z_0) = \sum_{n=1}^{N} nc_n z^{n - 1}$. Since
+	\begin{equation*}
+		\lim_{N \to \infty} S_N'(z_0) = \lim_{N \to \infty} \sum_{n=1}^{N} nc_n z^{n - 1} = \sum_{n=1}^{\infty} nc_n z^{n - 1} = g(z_0)
+	\end{equation*}
+	we know that we can pick $\frac{\epsilon}{3} > 0, \exists N_2 \in \mathbb{N}, \forall n > N_2$, we have
+	\begin{equation*}
+		\abs{S_N'(z_0) - g(z_0)} < \frac{\epsilon}{3}
+	\end{equation*}.
+
+	For the first term in \cref{eq:power_function_defines_holomorphic_function_1}, note that $(S_N(z_0))' = S_N'(z_0)$. Let $\frac{\epsilon}{3} > 0, \exists \delta > 0, \exists N > \max\{N_1, N_2\}, \forall n > N$, since $\abs{h} < \delta$, we have that
+	\begin{equation*}
+		\abs{\frac{S_N(z_0 + h) - S_N(z_0)}{h} - S_N'(z_0)} < \frac{\epsilon}{3}
+	\end{equation*}
+
+	This completes the proof. \qed
 \end{proof}
+
+% subsection radius_of_convergence (end)
 
 % section power_series_continued (end)
 
 % chapter lecture_8_jan_19_2018 (end)
+
+\chapter{Lecture 9 Jan 22 2018}
+	\label{chapter:lecture_9_jan_22_2018}
+
+\section{Power Series (Continued 2)} % (fold)
+\label{sec:power_series_continued_2}
+
+\subsection{Radius of Convergence (Continued)} % (fold)
+\label{sub:radius_of_convergence_continued}
+
+\begin{eg}
+	Let $f(z) = \sum_{n=1}^{\infty} \frac{z^n}{n}$. To find the radius of convergence, we use Hadamard's Formula:
+	\begin{equation*}
+		\frac{1}{R} = \limsup_{n \to \infty} \left(\frac{1}{n} \right)^\frac{1}{n} = 1 \qquad \because \lim_{n \to \infty} n^\frac{1}{n} = 1
+	\end{equation*}
+	Therefore $R = 1$. Thus, by \cref{thm:convergence_in_the_radius_of_convergence}, $f$ converges absolutely when $\abs{z} < 1$ and diverges when $\abs{z} > 1$. As for the boundary, i.e. $\abs{z} = 1$, consider the following two cases:
+	\begin{enumerate}
+		\item If $z = 1$, then $f(1) = \sum_{n=1}^{\infty} \frac{1}{n}$ is a \hlnotea{harmonic series}, and hence $f$ diverges.
+		\item If $z = i$, then
+		\begin{align*}
+			f(i) &= \sum_{n=1}^{\infty} \frac{i^n}{n} \\
+				 &= i - \frac{1}{2} + \frac{-i}{3} + \frac{1}{4} + \frac{i}{5} - \frac{1}{6} \\
+				 &= \left(-\frac{1}{2} + \frac{1}{4} - \frac{1}{6} + \hdots	\right) + i \left(1 - \frac{1}{3} + \frac{1}{5} + \hdots \right).
+		\end{align*}
+		Observe that both the real and imaginary parts are alternating series where the absolute values of each term is decreasing, which, by the \hlnotea{alternating series test}, converge. Thus in this case, $f$ converges.
+	\end{enumerate}
+	Therefore, we observe that \hlnoteb{both convergence and divergence may occur} on the boundary, depending on the value of $z$.
+\end{eg}
+
+\begin{note}
+	We may not always exchange the position of $\lim$ and $\sum_{a=1}^{b}$ when we consider an infinite sum (i.e. $b = \infty$). Here's an example why this is true. Consider the function $f(x) = \sum_{n=1}^{\infty} (x^n - x^{n - 1})$ for $\abs{x} < 1$. Is
+	\begin{equation*}
+		\lim_{x \to 1} \sum_{n=1}^{\infty} (x^n - x^{n - 1}) = \sum_{n=1}^{\infty} \lim_{x \to 1} (x^n x^{n - 1})
+	\end{equation*}
+	true?
+
+	Clearly, RHS is 0. For LHS, note that
+	\begin{align*}
+		f(x) &= \lim_{N \to \infty} \sum_{n=1}^{N} (x^n - x^{n - 1}) \\
+			&= \lim_{N \to \infty} (x - x^2 + x^2 - x^3 + \hdots + x^N x^{N + 1}) \\
+			&= \lim_{N \to \infty} (x - x^{N + 1}) = x.
+	\end{align*}
+	So,
+	\begin{equation*}
+		\text{LHS} = \lim_{x \to 1} x = 1
+	\end{equation*}
+	And we see that RHS $\neq$ LHS.
+\end{note}
+
+\begin{defn}[Entire Function]
+	A function $f$ is said to be \hldefn{entire} if $f$ is holomorphic in \hlnoteb{the entire complex plane}.
+\end{defn}
+
+\begin{ex}
+	Define $e^z = \sum_{n=0}^{\infty} \frac{z^n}{n!}$. Show that
+	\begin{enumerate}
+		\item the radius of convergence of this series is $\infty$, and hence that $e^z$ is an entire function. (Hint: Use \hlnotea{Stirling's formula}: $n! \sim (\frac{n}{e})^n \sqrt{2 \pi n}$)
+		\item $(e^z)' = e^z$
+	\end{enumerate}
+
+	\begin{solution}
+		\begin{enumerate}
+			\item Using Stirling's formula, note that we have
+			\begin{equation*}
+				e^z = \sum_{n=0}^{\infty} \frac{1}{\sqrt{2 \pi n}} \left(\frac{ez}{n} \right)^n
+			\end{equation*}
+			To find $R$, we have
+			\begin{align*}
+				\frac{1}{R} &= \limsup_{n \to \infty} \abs{\frac{1}{\sqrt{2 \pi n}} \left(\frac{e}{n} \right)}^\frac{1}{n} \\
+					&= \limsup_{n \to \infty} \abs{\frac{e}{n}} \limsup_{n \to \infty} \abs{\frac{1}{\sqrt{2 \pi n}}}^\frac{1}{n} \\
+					&= 0
+			\end{align*}
+			since $\limsup_{n \to \infty} \frac{e}{n} = 0$. Thus $R = \infty$. By \cref{thm:convergence_in_the_radius_of_convergence}, $e^z$ is an entire function.
+
+			\item Note that
+			\begin{align*}
+				\lim_{h \to 0} \frac{e^{z + h} - e^z}{h} &= e^z \lim_{h \to 0} \frac{e^h - 1}{h}  \\
+					&= e^z \lim_{h \to 0} \frac{1 + h + \frac{h^2}{2} + \frac{h^3}{3} + \hdots - 1}{h} \\
+					&= e^z
+			\end{align*}
+			Thus $(e^z)' = e^z$ as required.
+		\end{enumerate}
+	\end{solution}
+\end{ex}
+
+% subsection radius_of_convergence_continued (end)
+
+% section power_series_continued_2 (end)
+
+% chapter lecture_9_jan_22_2018 (end)
 \end{document}
