@@ -12,7 +12,16 @@
 \usepackage[framemethod=tikz]{mdframed}
 \usepackage{microtype}
 
-\let\bar\overline
+% Shortcuts
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}      % simplifying the writing of a floor function
+\newcommand{\ceiling}[1]{\lceil #1 \rceil}      % simplifying the writing of a ceiling function
+\newcommand{\dotp}{\, \cdotp}             % dot product to distinguish from \cdot
+\newcommand{\qed}{\hfill\ensuremath{\square}}   % Q.E.D sign
+\newcommand{\abs}[1]{\left|#1\right|}           % absolute value
+\newcommand{\Arg}[1]{\caparg #1}
+\renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
+\newcommand{\quotient}[2]{\faktor{#1}{#2}}
+\newcommand{\cyclic}[1]{\left\langle #1 \right\rangle}
 
 \definecolor{myblue}{cmyk}{1,.72,0,.38}
 

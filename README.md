@@ -7,16 +7,9 @@ If you wish to get a copy of these documents, please take them with utmost discr
 My main editor is Sublime Text, but I have a setup for VIm as well.
 
 ---
-### Information about PMATH351F17 and PMATH347F17
+### Typos? Erroneous proof?
 
-These notes will stop at Lecture 11, since I have to drop these courses due to personal reasons. I will continue to accept typo amendments wherever necessary. Please feel free to copy these notes for yourselves and continue editing from there.
-
----
-### Typos?
-
-Please feel free to either contact me or send a pull request for rectifying typos.
-
-For users familiar with git, you do not have to clone the entire repo just to make that correction, since you may use the editor on GitHub to make amends.
+Please feel free to either contact me or create an issue.
 
 ---
 ### LaTeX Template
@@ -39,9 +32,21 @@ endif
 <scope>text.tex.latex</scope>
 ```
 
+**Preamble**
+
+Find out where the texmf directory should go on your system (different across Linux, macOS, and Windows). Put the preamble documents in `$DIR_TO_TEXMF/texmf/latex/local/`, and use `kpsewhich $PREAMBLE_FILE` to see if your texlive installation can detect the file.
+
 ---
 ### Snippets
 
 My TeX snippet for VIm is in the `tex.snippet` file, and I use [vim-snipmate](https://vimawesome.com/plugin/vim-snipmate-mine) to tab-complete as I type.
 
 My Sublime Text snippet is provided in the file `tex.sublime-completions`. Put it in your `SUBLIME_PATH/Packages/User/` folder to get it working.
+
+---
+
+## Other info
+
+### Information about PMATH351F17 and PMATH347F17
+
+These notes will stop at Lecture 11, since I have to drop these courses due to personal reasons. I will continue to accept typo amendments wherever necessary. Please feel free to copy these notes for yourselves and continue editing from there.

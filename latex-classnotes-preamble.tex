@@ -1,13 +1,9 @@
-<snippet>
-    <content><![CDATA[
-% Document Head
-\documentclass[11pt, oneside]{book}
 \usepackage{geometry}
 \geometry{letterpaper}
-
-% Essential Packages
 \usepackage[parfill]{parskip}
 \usepackage{graphicx}
+
+% Essential Packages
 \usepackage{ragged2e}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -20,15 +16,26 @@
 \usepackage{pgfplots}
 \usepackage{faktor}
 \usepackage{float}
+\usepackage{xcolor}
 \usepackage[hyperref]{ntheorem}
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
 
+% xcolor (scheme: base16 eighties)
+\definecolor{base16-eighties-dark}{HTML}{2D2D2D}
+\definecolor{base16-eighties-light}{HTML}{D3D0C8}
+\definecolor{base16-eighties-magenta}{HTML}{CD98CD}
+\definecolor{base16-eighties-red}{HTML}{F47678}
+\definecolor{base16-eighties-yellow}{HTML}{E2B552}
+\definecolor{base16-eighties-green}{HTML}{98CD97}
+\definecolor{base16-eighties-lightblue}{HTML}{61CCCD}
+\definecolor{base16-eighties-blue}{HTML}{6498CE}
+\definecolor{base16-eighties-brown}{HTML}{D47B4E}
+
 % hyperref Package Settings
-\usepackage{hyperref}
 \hypersetup{
-	colorlinks = true,
-	linkcolor = magenta
+	colorlinks,
+	linkcolor=base16-eighties-magenta
 }
 
 % tikz Libraries
@@ -125,9 +132,9 @@
 \pgfplotsset{compat=1.15}
 \usepgfplotslibrary{fillbetween}
 \pgfplotsset{four quads/.append style={axis x line=middle, axis y line=
-middle, xlabel={\$x\$}, ylabel={\$y\$}, axis equal }}
+middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
 \pgfplotsset{four quad complex/.append style={axis x line=middle, axis y line=
-middle, xlabel={\$\re\$}, ylabel={\$\im\$}, axis equal }}
+middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 
 % Shortcuts
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}      % simplifying the writing of a floor function
@@ -139,31 +146,16 @@ middle, xlabel={\$\re\$}, ylabel={\$\im\$}, axis equal }}
 \renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
 \newcommand{\quotient}[2]{\faktor{#1}{#2}}
 \newcommand{\cyclic}[1]{\left\langle #1 \right\rangle}
+	% highlighting shortcuts
+\newcommand{\hlimpo}[1]{\textcolor{base16-eighties-red}{\textbf{#1}}}
+\newcommand{\hlwarn}[1]{\textcolor{base16-eighties-yellow}{\textbf{#1}}}
+\newcommand{\hldefn}[1]{\textcolor{base16-eighties-blue}{\textbf{#1}}}
+\newcommand{\hlnotea}[1]{\textcolor{base16-eighties-green}{\textbf{#1}}}
+\newcommand{\hlnoteb}[1]{\textcolor{base16-eighties-lightblue}{\textbf{#1}}}
+\newcommand{\hlnotec}[1]{\textcolor{base16-eighties-brown}{\textbf{#1}}}
+\newcommand{\WTP}{\textcolor{base16-eighties-brown}{WTP}}
+\newcommand{\WTS}{\textcolor{base16-eighties-brown}{WTS}}
 
-% Main Body
-\title{${1:Title}}
-\author{Johnson Ng}
-
-\begin{document}
-\hypersetup{pageanchor=false}
-\maketitle
-\hypersetup{pageanchor=true}
-\tableofcontents
-
-\chapter*{List of Definitions}
-\theoremlisttype{all}
-\listtheorems{defn}
-
-\chapter*{List of Theorems}
-\theoremlisttype{allname}
-\listtheorems{axiom,lemma,thm,crly,propo}
-
-${2:body}
-
-\end{document}
-]]></content>
-    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-    <!-- <tabTrigger>hello</tabTrigger> -->
-    <!-- Optional: Set a scope to limit where the snippet will trigger -->
-    <scope>text.tex.latex</scope>
-</snippet>
+% Comment the two lines below if you want to print the document
+\pagecolor{base16-eighties-dark}
+\color{base16-eighties-light}

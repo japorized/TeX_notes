@@ -1,9 +1,10 @@
-% Document Head
+<snippet>
+    <content><![CDATA[
 \documentclass[11pt, oneside]{book}
 \input{latex-classnotes-preamble.tex}
 
 % Main Body
-\title{Title}
+\title{${1:Title}}
 \author{Johnson Ng}
 
 \begin{document}
@@ -20,6 +21,12 @@
 \theoremlisttype{allname}
 \listtheorems{axiom,lemma,thm,crly,propo}
 
-
+$0
 
 \end{document}
+]]></content>
+    <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+    <!-- <tabTrigger>hello</tabTrigger> -->
+    <!-- Optional: Set a scope to limit where the snippet will trigger -->
+    <scope>text.tex.latex</scope>
+</snippet>
