@@ -14,6 +14,7 @@
 \usepackage[english]{babel}
 \usepackage{pgf,tikz}
 \usepackage{pgfplots}
+\usepackage{array}
 \usepackage{faktor}
 \usepackage{float}
 \usepackage{xcolor}
@@ -38,10 +39,17 @@
 	linkcolor=base16-eighties-magenta
 }
 
-% tikz Libraries
+% tikz
 \usepgfplotslibrary{polar}
 \usepgflibrary{shapes.geometric}
-\usetikzlibrary{angles,patterns,calc}
+\usetikzlibrary{angles,patterns,calc,decorations.markings}
+\tikzset{midarrow/.style={
+        decoration={markings,
+            mark= at position 0.5 with {\arrow{#1}} ,
+        },
+        postaction={decorate}
+    }
+}
 
 % Theorem Style Customization
 \setlength\theorempreskipamount{2ex}
@@ -121,6 +129,11 @@
 }
 
 \theoremlisttype{allname}
+
+% Custom table columning
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 % Custom math operator
 % \DeclareMathOperator{\rem}{rem}

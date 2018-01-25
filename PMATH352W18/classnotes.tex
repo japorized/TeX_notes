@@ -1700,4 +1700,222 @@ These notions, in turn, begs the question of \hlwarn{what is the largest possibl
 % section power_series_continued_2 (end)
 
 % chapter lecture_9_jan_22_2018 (end)
+
+\chapter{Lecture 10 Jan 24 2018}
+	\label{chapter:lecture_10_jan_24_2018}
+
+\section{Power Series (Continued 3)} % (fold)
+\label{sec:power_series_continued_3}
+
+\subsection{Radius of Convergence (Continued 2)} % (fold)
+\label{sub:radius_of_convergence_continued_2}
+
+A power series is infinitely $\mathbb{C}$-differentiable in its radius of convergence. All its derivatives are also power series, obtained by term-wise differentiation.
+
+E.g.
+
+\begin{equation*}
+	f(z) - \sum_{n=0}^{\infty} c_n z^n \enspace \text{ then } \enspace f^{(2)}(z) = \sum_{n=0}^{\infty} n(n-1)c_n z^{n - 2}
+\end{equation*}
+
+In general, we may have $\sum_{n=0}^{\infty} c_n (z - z_0)^n$, which is a power series centered at $z_0 \in \mathbb{C}$. Then, as before, the radius of convergence of this power series is given by
+
+\begin{equation*}
+	\frac{1}{R} = \limsup_{n \to \infty} \abs{c_n}^\frac{1}{n}
+\end{equation*}
+
+So instead of having the disc of convergence centered around $0$, we now have one that is centered around $z_0$.
+
+\begin{crly}[Corollary of \cref{thm:power_function_holomorphic_function_region_of_convergence}]
+	From \cref{thm:power_function_holomorphic_function_region_of_convergence}, we have shown that
+
+	\begin{tabular}{L{7cm} C{2cm} R{5cm}}
+		$f(z)$ has a power series expansion at $z_0$ (i.e. $f(z) = \sum_{n=0}^\infty c_n (z - z_0)^n$ in some neighbourhood of $z_0$) with radius of convergence $R > 0$ &
+		$\implies$ &
+		$f$ is holomorphic at $z_0$
+	\end{tabular}
+\end{crly}
+
+The converse of the statement above is true, i.e.
+
+\begin{tabular}{L{5cm} C{2cm} R{7cm}}
+	$f$ is holomorphic at $z_0$ &
+	$\implies$ &
+	$f(z)$ has a power series expansion at $z_0$ (i.e. $f(z) = \sum_{n=0}^\infty c_n (z - z_0)^n$ in some neighbourhood of $z_0$) with radius of convergence $R > 0$
+\end{tabular}
+
+This converse, however, is not possible to be proven given the current tools on our belt. And so we now have to venture into integrals in $\mathbb{C}$.
+
+% subsection radius_of_convergence_continued_2 (end)
+
+% section power_series_continued_3 (end)
+
+\section{Integration in \texorpdfstring{$\mathbb{C}$}{C}} % (fold)
+\label{sec:integration_in_c}
+
+\subsection{Curves and Paths} % (fold)
+\label{sub:curves_and_paths}
+
+Before we begin with the definition of a curve in $\mathbb{C}$, let us consider how a straight line should be described as a vector-valued function in the complex plane. For instance, if we have two points $\alpha, \beta \in \mathbb{C}$, and we want to describe the straight line connecting the two.
+
+\begin{tabular}{C{5cm} L{10cm}}
+	\begin{tikzpicture}
+		\coordinate (a) at (-1, -1);
+		\coordinate (b) at (1, 1);
+		\node[label={225:{$\alpha$}},circle,fill=base16-eighties-light,inner sep=1pt] at (a) {};
+		\node[label={45:{$\beta$}},circle,fill=base16-eighties-light,inner sep=1pt] at (b) {};
+		\draw[midarrow={>}] (a)--(b);
+	\end{tikzpicture} &
+	Let $\gamma$ be the function that describes this line. We may then define $\gamma : [0, 1] \to \mathbb{C}$ to be either
+	\begin{equation*}
+		\gamma(t) = \alpha + (\beta - \alpha) t \enspace \text{ or } \enspace \gamma = \alpha(1 - t) + \beta t.
+	\end{equation*}
+	We would then have the following mapping:
+\end{tabular}
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{tabular}{c c c}
+			\begin{tikzpicture}
+				\draw[-] (2, 0) -- (-2, 0) node[left] {$\mathbb{R}$};
+				\node at (0, -2.5) {};
+				\node at (0, 4) {};
+				\node[label={270:{a}}] at (-1, 0) {[};
+				\node[label={270:{b}}] at (1, 0) {]};
+				\node[label={90:{c}},fill=base16-eighties-light,inner sep=1pt] at (0, 0) {};
+			\end{tikzpicture} &
+			\begin{tikzpicture}
+				\draw[->] (0, 0) arc (135:45:2) node[midway,above] {$\gamma$};
+				\node[label={0:{}}] at (0,-3) {};
+			\end{tikzpicture} &
+			\begin{tikzpicture}
+				\draw[->] (-3, 0) -- ++(6, 0) node[right] {$\mathbb{C}$};
+				\draw[->] (0, -2.5) -- (0, 2);
+				\node[label={270:{a}},fill=base16-eighties-light,inner sep=1pt] at (-2.3, -1.287) {};
+    			\node[label={90:{b}},fill=base16-eighties-light,inner sep = 1pt] at (1.2, 1.258) {};
+    			\node[label={270:{c}},fill=base16-eighties-light,inner sep=1pt] at (-0.55,-1.011375) {};
+				\clip (-2.3,-2.5) rectangle (1.2,1.2);
+    			\draw[midarrow={>},domain=-2.5:1.5] plot (\x, {pow(\x,3)+2*pow(\x,2)-\x-2});
+			\end{tikzpicture}
+		\end{tabular}
+	\end{center}
+	\caption[loftitle]{Mapping from $\mathbb{R} \to \mathbb{C}$ with $\gamma$, which is called \hlnoteb{the curve $\gamma$}}
+	\label{figure:map_from_r_to_c_with_upsilon}
+\end{figure}
+
+\begin{defn}[Curves in $\mathbb{C}$]\label{defn:curves_in_c}
+	A curve in $\mathbb{C}$ is a continuous function, $\gamma(t): [a, b] \to \mathbb{C}$, where $a, b \in \mathbb{R}$. The image of $\gamma$ in $\mathbb{C}$ is called $\gamma^*$.
+\end{defn}
+
+\begin{eg}
+	Let $z_0 \in \mathbb{C}, r > 0$. \\
+	\begin{tabular}{L{9cm} R{5cm}}
+		\begin{enumerate}
+			\item Let $\gamma : [0, 2 \pi] \to \mathbb{C}$, such that $\gamma (t) = z_0 + re^{it}$.
+			\item Let $\gamma' : [0, 1] \to \mathbb{C}$, such that $\gamma' (t) = z_0 + re^{2 \pi i t}$.
+		\end{enumerate}
+		The two functions above describe a circle centered at $z_0$ with radius $r$, anticlockwise-oriented. &
+		\begin{tikzpicture}
+			\draw[->] (-0.5, 0) -- (3, 0);
+			\draw[->] (0, -0.5) -- (0, 3);
+			\coordinate (z0) at (1.5,1.5);
+			\draw (z0) circle (1);
+			\node[label={0:{$z_0$}},fill=base16-eighties-light,inner sep=1pt] at (z0) {};
+			\draw[<->] (z0)--(0.5,1.5) node[midway,above] {$r$};
+			\node[label={0:{$t=0$ or $2 \pi$}},fill=base16-eighties-light,inner sep=1pt] at (2.5,1.5) {};
+			\node[label={90:{$t=\frac{\pi}{2}$}},fill=base16-eighties-light,inner sep=1pt] at (1.5,2.5) {};
+			\node[label={180:{$t=\pi$}},fill=base16-eighties-light,inner sep=1pt] at (0.5,1.5) {};
+			\node[label={270:{$t=\frac{3\pi}{2}$}},fill=base16-eighties-light,inner sep=1pt] at (1.5,0.5) {};
+		\end{tikzpicture}
+	\end{tabular}
+\end{eg}
+
+We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same oriented path.
+
+\begin{defn}[Equivalent Parameterization]\label{defn:equivalent_parameterization}
+	Let $\gamma_1 : [a, b] \to \mathbb{C}, \gamma_2 : [c, d] \to \mathbb{C}$ where $a, b, c, d \in \mathbb{C}$ describe the path $\gamma^*$. The two \hldefn{paramaterization are said to be equivalent} if $\exists h: [a, b] \to [c, d]$ that is a bijection and a continuous function such that
+	\begin{equation*}
+		\gamma_1(t) = \gamma_2(h(t))
+	\end{equation*}
+	where $t \in [a, b]$.
+\end{defn}
+
+\begin{note}
+ 	We will not look at functions like the Weierstrass function in this course.
+\end{note}
+
+\begin{defn}[Smooth Curve]\label{defn:smooth_curve}
+	Let $\gamma : [a, b] \to \mathbb{C}, a, b, \in \mathbb{C}$. $\gamma$ is said to be smooth if its derivative $\gamma'$ exists and is continuous on $[a, b]$ and $\forall t \in [a, b], \gamma'(t) \neq 0$.
+\end{defn}
+
+\begin{defn}[Piecewise Smooth]\label{defn:piecewise_smooth}
+	Let $\gamma: [a, b] \to \mathbb{C}$. $\gamma$ is said to be piecewise smooth if it is smooth on $[a, b]$ except on finitely many points in $[a, b]$.
+\end{defn}
+
+\begin{remark}
+	Piecewise smooth curves shall be called paths.
+\end{remark}
+
+% subsection curves_and_paths (end)
+
+\subsection{Integral} % (fold)
+\label{sub:integral}
+
+\begin{defn}[Integral of $f$ over a path $\gamma$]\label{defn:integral_of_f_over_a_path_gamma}
+	Given a path $\gamma: [a, b] \to \mathbb{C}$ and $f : \mathbb{C} \to \mathbb{C}$, a function continuous on $\gamma$. We define the integral $f$ along $\gamma$ as
+	\begin{equation}
+		\int_{\gamma} f(z) dz := \int_{a}^{b} f(\gamma(t))\gamma'(t) dt
+	\end{equation}
+	where we let $z = \gamma(t)$ and hence $dz = \gamma'(t) dt$.
+\end{defn}
+
+\begin{remark}
+	\begin{enumerate}
+		\item Suppose $g$ is a complex-valued function, then
+			\begin{equation*}
+				\int_{a}^{b} g(t) dt = \int_{a}^{b} \re(g(t)) dt + i \int_{a}^{b} \im(g(t)) dt
+			\end{equation*}
+		\item The integral of $f$ along $\gamma$ can be shown to be independent of the chosen parameterization for $\gamma^*$.
+
+		\begin{proof}
+			Let $a, b, c, d \in \mathbb{R}, \gamma_1 : [a, b] \to \mathbb{C}, \gamma_2 : [c, d] \to \mathbb{C}$ describe the same path $\gamma^*$. By \cref{defn:equivalent_parameterization}, define a bijection $h : [a, b] \to [c, d]$ that is a continuous function such that $t \mapsto \tau$, so that
+			\begin{equation*}
+				\gamma_1(t) = \gamma_2(h(t)) = \gamma(\tau).
+			\end{equation*}
+			Note that
+			\begin{align*}
+				\gamma_1'(t) &= h'(t)\gamma_2'(h(t)) \text{ and } \\
+				h(t) &= \tau \implies h'(t) dt = d\tau.
+			\end{align*}
+			Now since $h$ is a bijection, we claim that $h(a) = c$ while $h(b) = d$.
+
+			We know that $h$ cannot be a constant function. Suppose $h$ is an increasing function, then since $a \leq b$ and $c \leq d$, it is clear that $h(a) = c$ and $h(b) = d$. Similarly, if $h$ is a decreasing function, then $h(a) = d$ and $h(b) = c$. But this is a contradiction to our supposition that $\gamma_1$ and $\gamma_2$ describe the same orientation. Thus $h$ must be an increasing function, and hence we have $h(a) = c$ and $h(b) = d$.
+
+			\hlnotec{(This can be more rigorous but that is an easy proof, and we may use perhaps the Approximation Property of $\mathbb{R}$ to that end, which is a fun exercise that shall not be included within these covers.)}
+
+			Now
+			\begin{align*}
+				\int_{\gamma_1} f(z) dz
+					&= \int_{a}^{b} f\big( \gamma_1(t) \big) \gamma_1'(t) dt \\
+					&= \int_{a}^{b} f\Big( \gamma_2 \big( h(t) \big) \Big) h'(t) \gamma_2'(h(t)) dt \\
+					&= \int_{c}^{d} f\big( \gamma_2(\tau) \big) \gamma_2'(\tau) d\tau \\
+					&= \int_{\gamma_2} f(z) dz
+			\end{align*}
+			This completes the proof.
+		\end{proof}
+	\end{enumerate}
+\end{remark}
+
+\begin{propo}[Properties of integrals in $\mathbb{C}$]\label{propo:properties_of_integrals_in_c}
+	Let $\alpha, \beta \in \mathbb{C}$.
+	\begin{enumerate}
+		\item $\int_{\gamma} \left(\alpha f(z) + \beta g(z) \right) dz = \alpha \int_{\gamma} f(z) dz + \beta \int_{\gamma} g(z) dz$.
+	\end{enumerate}
+\end{propo}
+
+% subsection integral (end)
+
+% section integration_in_c (end)
+
+% chapter lecture_10_jan_24_2018 (end)
 \end{document}
