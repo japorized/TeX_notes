@@ -1874,7 +1874,7 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 		\item Suppose $g$ is a complex-valued function, then
 			\begin{equation*}
 				\int_{a}^{b} g(t) dt = \int_{a}^{b} \re(g(t)) dt + i \int_{a}^{b} \im(g(t)) dt
-			\end{equation*}
+			\end{equation*}\label{remark:integral_into_real_and_imaginary_parts}
 		\item The integral of $f$ along $\gamma$ can be shown to be independent of the chosen parameterization for $\gamma^*$.
 
 		\begin{proof}
@@ -1901,21 +1901,164 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 					&= \int_{c}^{d} f\big( \gamma_2(\tau) \big) \gamma_2'(\tau) d\tau \\
 					&= \int_{\gamma_2} f(z) dz
 			\end{align*}
-			This completes the proof.
+			This completes the proof. \qed
 		\end{proof}
 	\end{enumerate}
 \end{remark}
-
-\begin{propo}[Properties of integrals in $\mathbb{C}$]\label{propo:properties_of_integrals_in_c}
-	Let $\alpha, \beta \in \mathbb{C}$.
-	\begin{enumerate}
-		\item $\int_{\gamma} \left(\alpha f(z) + \beta g(z) \right) dz = \alpha \int_{\gamma} f(z) dz + \beta \int_{\gamma} g(z) dz$.
-	\end{enumerate}
-\end{propo}
 
 % subsection integral (end)
 
 % section integration_in_c (end)
 
 % chapter lecture_10_jan_24_2018 (end)
+
+\chapter{Lecture 11 Jan 26 2018}
+	\label{chapter:lecture_11_jan_26_2018}
+
+\section{Integration in \texorpdfstring{$\mathbb{C}$}{C} (Continued)} % (fold)
+\label{sec:integration_in_c_continued}
+
+\subsection{Integral (Continued)} % (fold)
+\label{sub:integral_continued}
+
+\begin{note}[Recall]
+	Let $\gamma: [a, b] \to \mathbb{C}$ be a piecewise smooth curve. For a function $f$ that is continuous on $\gamma$, we defined
+	\begin{align*}
+		\int_{\gamma} f(z) dz
+			&= \int_{a}^{b} f\big( \gamma(t) \big) \gamma'(t) dt \\
+			&= \int_{a}^{b} \re\Big(f\big( \gamma(t) \big) \gamma'(t) \Big) dt + i \int_{a}^{b} \im\Big(f\big( \gamma(t) \big) \gamma'(t) \Big) dt
+	\end{align*}
+	and have
+	\begin{gather*}
+		\gamma'(t) = u'(t) + iv'(t) \\
+		\text{if } \gamma(t) = u(t) + iv(t)
+	\end{gather*}
+\end{note}
+
+\begin{eg}
+	Let $f(z) = f(x + iy) = x^2 + y^2$ be continuous along $\gamma : [0, 1] \to \mathbb{C} \enspace t \mapsto t + it$. Evaluate $\int_{\gamma} f(z) dz$.
+	\begin{solution}
+		\begin{align*}
+			\int_{\gamma} f(z) dz
+				&= \int_{0}^{1} f(t + it)(1 + i) dt \\
+				&= (1 + i)^2 \int_{0}^{1} t^2 dt \\
+				&= (1 + i)^2 \cdot \frac{1}{3} t^3 \Big|_{0}^{1} \\
+				&= \frac{2i}{3}
+		\end{align*}
+	\end{solution}
+\end{eg}
+
+\begin{eg}
+	$\forall n \in \mathbb{Z}$, evaluate $\int_{\gamma} z^n dz$ that is continue on the path $\gamma$ that describes any circle centered at origin oriented anticlockwise.
+
+	\begin{solution}
+		Let $R \in \mathbb{R}$, and define
+		\begin{gather*}
+			\gamma: [0, 1] \to \mathbb{C} \enspace t \mapsto Re^{2\pi i t} \\
+			\gamma'(t) = 2R\pi i e^{2\pi i t} = 2 \pi i \gamma(t)
+		\end{gather*}
+		Then
+		\begin{align*}
+			\int_{\gamma} z^n dz
+				&= \int_{0}^{1} R^ne^{2 \pi i n t} \cdot 2 \pi i \cdot Re^{2 \pi i t} dt \\
+				&= 2 \pi i R^{n + 1} \int_{0}^{1} e^{2 \pi i (n + 1) t} dt \\
+				&= \begin{cases}
+					\frac{R^{n + 1}}{n + 1} e^{2 \pi i (n + 1) t} \Big|_{0}^{1} & \text{if } n \in \mathbb{Z} \setminus \{-1\} \\
+					2 \pi i t \Big|_{0}^{1} & \text{if } n = -1
+				\end{cases} \\
+				&= \begin{cases}
+					\frac{R^{n + 1}}{n + 1} \left(e^{2 \pi i (n + 1)} - 1 \right) & \text{if } n \in \mathbb{Z} \setminus \{-1\} \\
+					2 \pi i 	& \text{if } n = -1
+				\end{cases} \enspace \because e^{2 \pi k i} \equiv 1 \mod 2 \pi\\
+				&= \begin{cases}
+					0	& \text{if } n \in \mathbb{Z} \setminus \{-1\} \\
+					2 \pi i & \text{if } n = -1
+				\end{cases}
+		\end{align*}
+		Note that our final answer does not depend on $R$, the radius of the circle.
+	\end{solution}
+\end{eg}
+
+\begin{propo}[Properties of integrals in $\mathbb{C}$]\label{propo:properties_of_integrals_in_c}
+	\begin{enumerate}
+		\item \hlnotea{(Linearity)} Let $\alpha, \beta \in \mathbb{C}$. $\int_{\gamma} \left(\alpha f(z) + \beta g(z) \right) dz = \alpha \int_{\gamma} f(z) dz + \beta \int_{\gamma} g(z) dz$. \label{item:linearity_property_of_integrals}
+		\item \begin{enumerate}
+			\item For any complex-valued function $g$, and $b \geq a$,
+				\begin{equation*}
+					\abs{\int_{a}^{b} g(t) dt} \leq \int_{a}^{b} \abs{g(t)} dt
+				\end{equation*} \label{item:absval_integral_less_than_integral_absval}
+				\item For any function $f(z)$ that is continuous on a path $\gamma: [a, b] \to \mathbb{C}$,
+					\begin{equation*}
+						\abs{\int_{\gamma} f(z) dz} \leq \sup_{z \in \gamma} \abs{f(z)} \cdot \underbrace{\int_{a}^{b} \abs{\gamma'(t)} dt}_{\text{length of the path}}
+					\end{equation*}\label{item:absval_integral_less_than_fnsup_times_arc_length}
+		\end{enumerate}
+		\item If $\gamma^-$ is the path $\gamma: [a, b] \to \mathbb{C}$ with a reversed direction, then
+			\begin{equation*}
+				\int_{\gamma^-} f(z) dz = - \int_{\gamma} f(z) dz
+			\end{equation*}\label{item:reversed_path_orientation_gives_negative_integral}
+	\end{enumerate}
+\end{propo}
+
+\begin{proof}
+	\begin{enumerate}
+		\item \begin{align*}
+			\text{LHS}=&\int_{\gamma} \alpha f(z) + \beta g(z) dz \\
+				= &\int_{\gamma} \alpha \Big( \re(f(z)) + i \im(f(z)) \Big) + \beta \Big( \re(g(z)) + i \im(g(z)) \Big) dz \\
+				= \begin{split}
+					&\alpha \int_{a}^{b} \Big( \re(f(z)) + i \im(f(z)) \Big) dt \\
+					&\quad + \beta \int_{a}^{b} \Big( \re(g(z)) + i \im(g(z)) \Big) dt
+				\end{split} \tag{$\dagger$}\label{eq:linearity_in_r} \\
+				= & \alpha \int_{a}^{b} f(z) dz + \beta \int_{a}^{b} g(z) dz
+			\end{align*}
+			where \eqref{eq:linearity_in_r} is because of \cref{remark:integral_into_real_and_imaginary_parts} from an earlier remark and Linearity of Integrals in $\mathbb{R}$.\qed
+
+		\item \begin{enumerate}
+			\item Let $R \in \mathbb{R}$. Suppose $\int_{a}^{b} g(t) dt = Re^{i \theta}$. Then
+				\begin{align*}
+					\text{LHS} &= R = \int_{a}^{b} \underbrace{e^{-i \theta} g(t)}_{u(t) + iv(t)} dt \\
+						&= \int_{a}^{b} u(t) dt + i \int_{a}^{b} v(t) dt
+				\end{align*}
+				Since $R \in \mathbb{R}$, we have $\int_{a}^{b} v(t) dt = 0$, so
+				\begin{align*}
+					R &= \int_{a}^{b} u(t) dt \\
+					  &\leq \int_{a}^{b} \abs{u(t)} dt \quad \because a \leq b \land u(t) \leq \abs{u(t)} \in \mathbb{R} \\
+					  &\leq \int_{a}^{b} \abs{u(t) + iv(t)} dt \\
+					  &= \int_{a}^{b} \abs{e^{-i \theta} g(t)} dt \qquad \text{\hlwarn{*(is this really correct?)}}\\
+					  &= \int_{a}^{b} \abs{g(t)} dt = \text{RHS}
+				\end{align*} \qed
+			\item \begin{align*}
+					\text{LHS} &= \abs{\int_{\gamma} f(z) dz} \\
+						&= \abs{\int_{a}^{b} f\big( \gamma(t) \big) \gamma'(t) dt} \\
+						&\leq \int_{a}^{b} \abs{f\big( \gamma(t) \big) \gamma'(t)} dt \quad \text{by } \cref{item:absval_integral_less_than_integral_absval} \\
+						&\leq \int_{a}^{b} \sup_{z \in \gamma} \abs{f(z)} \abs{\gamma'(t)} dt \quad \text{since } \abs{f(z)} \leq \sup_{z \in \gamma} \abs{f(z)} \\
+						&= \sup_{z \in \gamma} \abs{f(z)} \cdot \int_{a}^{b} \abs{\gamma'(t)} dt = \text{RHS}
+				\end{align*}\qed
+		\end{enumerate}
+		\item Let $\gamma^-: [b, a] \to \mathbb{C}$ such that $\gamma^- = \gamma(b - t + a)$. Let $k = b - t + a$ so that $dk = -dt$, and $t = b \implies k = a \land t = a \implies k = b$. Note that $k \in [a, b]$ with this definition. Then
+			\begin{align*}
+				\text{LHS} &= \int_{\gamma^-} f(z) dz \\
+					&= \int_{b}^{a} f\big( \gamma^- (t) \big) \gamma^{-'}(t) dt \\
+					&= \int_{b}^{a} f\big( \gamma(b - t + a) \big) \gamma'(b - t + a) dt \\
+					&= - \int_{a}^{b} f\big(\gamma(k)\big) \gamma'(k) dk \\
+					&= - \int_{\gamma} f(z) dz = \text{RHS}
+			\end{align*}
+			as required. \qed
+	\end{enumerate}
+\end{proof}
+
+We are now in a position to generalize the \hlnotea{Fundamental Theorem of Calclus} for $\mathbb{C}$.
+
+\begin{thm}[Fundamental Theorem of Calculus]\label{thm:fundamental_theorem_of_calculus}
+	Let $\gamma:[a,b] \to \mathbb{C}$ be a path inside an open set $\Omega \subseteq \mathbb{C}$. Suppose $f(z)$ is continuous on $\gamma$, and has an antiderivative $F$ which is holomorphic on $\Omega$ (i.e. $\forall z \in \Omega \; f(z) = F'(z)$ and $F$ is holomorphic in $\Omega$). Then
+	\begin{equation}
+		\label{eq:fundamental_theorem_of_calculus}
+		\int_{\gamma} f(z) dz = F\big(\gamma(b)\big) - F\big(\gamma(a)\big)
+	\end{equation}
+\end{thm}
+
+% subsection integral_continued (end)
+
+% section integration_in_c (end)
+
+% chapter lecture_11_jan_26_2018 (end)
 \end{document}
