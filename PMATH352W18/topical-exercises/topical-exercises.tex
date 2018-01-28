@@ -1,8 +1,6 @@
 % Document Head
 \documentclass[11pt, oneside]{book}
-\usepackage{geometry}
-\geometry{letterpaper}
-\usepackage{defaultstyle}
+\input{latex-classnotes-preamble.tex}
 
 % Main Body
 \title{PMATH352W18 - Complex Analysis - Topical Exercises}
@@ -22,15 +20,175 @@
 
 \begin{enumerate}
 	\item Verify that
-	\begin{enumerate}
+
+	\begin{inlinelist}
 		\item $(\sqrt{2} - i) - i (1 - \sqrt{2}i) = -2i$
 		\item $(2 - 3i)(-2 + i) = -1 + 8i$
 		\item $(3 + i)(3 - i)(\frac{1}{5} - \frac{1}{10} i) = 2 + i$
-	\end{enumerate}
+	\end{inlinelist}
+	\item Find the complex numbers which are complex conjugates of
+
+	\begin{inlinelist}
+		\item Their own squares;
+		\item Their own cubes.
+	\end{inlinelist}
+
+	\item Caclulate the following quantities:
+
+	\begin{inlinelist}
+		\item $\frac{1 + i \tan \theta}{1 - i \tan \theta}$;
+		\item $\frac{(1 + 2i)^3 - (1 - i)^3}{(3 + 2i)^3 - (2 + i)^2}$;
+		\item $\frac{(1 - i)^5 - 1}{(1 + i)^5 + 1}$;
+		\item $\frac{(1 + i)^9}{(1 - i)^7}$. 
+	\end{inlinelist}
+
+	\item Find the points $z = x + iy$ such that
+
+	\begin{inlinelist}
+		\item $\abs{z} \leq 2$;
+		\item $\im z > 0$;
+		\item $\re z \leq \frac{1}{2}$;
+		\item $\re (z^2) = a$;
+		\item $\abs{z^2 - 1} = a$;
+		\item $\abs{\frac{z-1}{z + 1}} \leq 1$;
+		\item $\abs{\frac{z - \alpha}{z - \beta}} = 1$.
+	\end{inlinelist}
 \end{enumerate}
 
 % section basic_algebraic_properties (end)
 
+\section{Polar Form} % (fold)
+\label{sec:polar_form}
+
+\begin{enumerate}
+	\item Represent the following complex numbers in polar form:
+
+	\begin{inlinelist}
+		\item $1 = i$;
+		\item $-1 + i$;
+		\item $-1 - i$;
+		\item $1 - i$;
+		\item $ 1 + \sqrt{3} i$;
+		\item $-1 + \sqrt{3} i$;
+		\item $-1 - \sqrt{3} i$;
+		\item $ 1 + \sqrt{3} i$;
+		\item $2 + \sqrt{3} + i$.
+	\end{inlinelist}
+
+	\item Generalize the Triangle Inequality.
+	\item Prove the identity
+	\begin{equation*}
+		\abs{z_1 + z_2}^2 + \abs{z_1 - z_2}^2 = 2(\abs{z_1}^2 + \abs{z_2}^2),
+	\end{equation*}
+	for arbitrary complex numbers $z_1, z_2, ..., z_n$.
+
+	\item When do three points $z_1, z_2, z_3 \in \mathbb{C}$ lie on a straight line in the complex plane?
+
+	\item Let $\sigma$ be the line segment joining two points $z_1$ and $z_2$. Find the point $z$ dividign $\sigma$ in the ratio $\lambda_1 : \lambda_2$.
+
+	\item Four points $z_1, z_2, z_3, z_4$ satisfy the conditions
+	\begin{equation*}
+		z_1 + z_2 + z_3 + z_4 = 0, \quad \abs{z_1} = \abs{z_2} = \abs{z_3} = \abs{z_4} = 1.
+	\end{equation*}
+	Show that the points either lie ast the vertices of a square inscribed in the unit circle or else coincide in pairs.
+
+	\item Calculate the following quantities:
+
+	\begin{inlinelist}
+		\item $(1 + i)^{25}$;
+		\item $\left(\frac{1 + \sqrt{3} i}{1 - i} \right)^{30}$;
+		\item $\left( 1 - \frac{\sqrt{3 - i}}{2} \right)^24$;
+		\item $\frac{(-1 + \sqrt{3}i)^{15}}{(1 - i)^{30}} + \frac{(-1-\sqrt{3}i)^{15}}{(1 + i)^{20}}$.
+	\end{inlinelist}
+
+	\item Use De Moivre's theorem to express $\cos nx$ and $\sim nx$ in terms of powers of $\cos x$ and $\sin x$.
+
+	\item Express $\tan 6x$ in terms of $\tan x$.
+
+	\item Write $\sqrt{1 + i}$ in polar form.
+\end{enumerate}
+
+% section polar_form (end)
+
+\section{Roots of a Complex Number} % (fold)
+\label{sec:roots_of_a_complex_number}
+
+\begin{enumerate}
+	\item Find all the values of the following roots:
+
+	\begin{inlinelist}
+		\item $\sqrt[3]{1}$;
+		\item $\sqrt[3]{i}$;
+		\item $\sqrt[4]{-1}$;
+		\item $\sqrt[6]{-8}$;
+		\item $\sqrt[8]{1}$;
+		\item $\sqrt{3 + 4i}$;
+		\item $\sqrt[3]{-2 + 2i}$;
+		\item $\sqrt[5]{-4 + 3i}$;
+		\item $\sqrt[6]{\frac{1 - i}{\sqrt{3} + i}}$;
+		\item $\sqrt[8]{\frac{1 + i}{\sqrt{3} - i}}$;
+	\end{inlinelist}
+
+	\item Prove that the sum of all the distinct $n$th roots of unity is zero. What geometric fact does this express?
+
+	\item Let $\epsilon$ be any $n$th root of unity other than 1. prove that
+	\begin{equation*}
+		1 + 2\epsilon + 3 \epsilon^2 + \hdots + n\epsilon^{n - 1} = \frac{n}{\epsilon - 1} 
+	\end{equation*}
+
+	\item Prove that every complex number $\alpha \neq -1$ of unit modulus can be represented in the form
+	\begin{equation*}
+		\alpha = \frac{1 + it}{1 - it},
+	\end{equation*}
+	where $t \in \mathbb{R}$.
+\end{enumerate}
+
+% section roots_of_a_complex_number (end)
+
 % chapter complex_numbers (end)
+
+\chapter{Complex Functions}
+	\label{chapter:complex_functions}
+
+\section{Limits and Continuity} % (fold)
+\label{sec:limits_and_continuity}
+
+\begin{enumerate}
+	\item Let $f : \Omega \subseteq \mathbb{C} \to \mathbb{C}$, $z_0 \in \Omega$. $\forall z \in \Omega$, prove that
+	\begin{equation*}
+		(z \to z_0 \implies f(z) \to \infty) \iff (z \to z_0 \implies \psi(z) = \frac{1}{f(z)} \to 0)
+	\end{equation*}
+
+	\item The \hlnotea{Cauchy Convergence Criterion for sequences} states that a complex sequence $z_n$ is convergent iff
+	\begin{gather*}
+		\forall \epsilon > 0 \; \exists N = N(\epsilon) > 0 \; \forall m, n > N \\
+		\abs{z_m - z_n} < \epsilon.
+	\end{gather*}
+	Prove the generalization of the criterion: The function $f(z)$ approaches a limit as $z \to z_0$ iff
+	\begin{gather*}
+		\forall \epsilon > 0 \; \exists \delta = \delta(\epsilon) > 0 \\
+		(0 < \abs{z' - z_0} < \delta \; \land \; 0 < \abs{z'' - z} < \delta) \implies \abs{f(z') - f(z'')} < \epsilon
+	\end{gather*}
+
+	\item Let $f(z)$ be a rational function, i.e., a ratio
+	\begin{equation}\label{eq:1}
+		f(z) = \frac{a_0 + a_1 z + \hdots a_m z^m}{b_0 + b_1z + \hdots + b_n z^n} \enspace (a_m \neq 0, b_n \neq 0)
+	\end{equation}
+	of two polynomials. Discuss the possible values of $\lim_{z \to \infty} f(z)$.
+
+	\item Where is the function \cref{eq:1} continuous?
+
+	\item Prove that if $f(z)$ is continuous in a region $\Omega$, then so is $\abs{f(z)}$.
+
+	\item Is the function
+	\begin{equation*}
+		f(zz) = \frac{1}{1 - z}
+	\end{equation*}
+	continuous in the open disk $\abs{z} < 1$?
+\end{enumerate}
+
+% section limits_and_continuity (end)
+
+% chapter complex_functions (end)
 
 \end{document}

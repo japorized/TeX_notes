@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 
 % Essential Packages
+\usepackage{enumitem}
 \usepackage{ragged2e}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -49,6 +50,12 @@
         },
         postaction={decorate}
     }
+}
+
+% enumitems
+\newlist{inlinelist}{enumerate*}{1}
+\setlist*[inlinelist,1]{%
+  label=(\roman*),
 }
 
 % Theorem Style Customization

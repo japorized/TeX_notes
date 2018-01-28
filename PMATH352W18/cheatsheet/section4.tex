@@ -1,0 +1,57 @@
+\section{Integration} % (fold)
+\label{sec:integration}
+
+\subsection{Curves} % (fold)
+\label{sub:curves}
+A curve in $\mathbb{C}$ is a cont' fn $\gamma : [a, b] \subseteq \mathbb{R} \to \mathbb{C}$. Image of $\gamma$ is called $\gamma^*$.
+% subsection curves (end)
+
+\subsection{Equivalent Parameterization} % (fold)
+\label{sub:equivalent_parameterization}
+Let $\gamma_1 : [a, b] \subseteq \mathbb{R} \to \mathbb{C} \; \gamma_2 : [c, d] \subseteq \mathbb{R} \to \mathbb{C}$ desc path $\gamma^*$. $\gamma_1, \gamma_2$ are equiv if $\exists h : [a, b] \to [c, d]$, bijective and cont', s.t. $\forall t \in \dom(h) \; \gamma_1 (t) = \gamma_2(h(t))$.
+% subsection equivalent_parameterization (end)
+
+\subsection{Smooth Curve} % (fold)
+\label{sub:smooth_curve}
+$\gamma$ is smooth if $\exists \gamma'$ is cont' on $\dom(\gamma) \; \land \; \forall t \in \dom(\gamma) \; \gamma'(t) \neq 0$.
+% subsection smooth_curve (end)
+
+\subsection{Piecewise Smooth Curve} % (fold)
+\label{sub:piecewise_smooth_curve}
+$\gamma$ is piecewise smooth if $\gamma$ is smooth on $\dom(\gamma)$ except on finitely many pts.
+% subsection piecewise_smooth_curve (end)
+
+\subsection{Integral over path} % (fold)
+\label{sub:integral_over_path}
+Let $\gamma: [a, b] \to \mathbb{C} \; \land \; f : \mathbb{C} \to \mathbb{C}$ con' on $\gamma$. Integral $f$ along $\gamma$ is
+\begin{equation*}
+	\int_{\gamma} f(z) dz = \int_{a}^{b} f(\gamma(t))\gamma'(t) dt
+\end{equation*}
+Integral over a curve $\gamma^*$ is independent of the path chosen.
+% subsection integral_over_path (end)
+
+\subsection{Splitting Integral into Real and Imaginary Parts} % (fold)
+\label{sub:splitting_integral_into_real_and_imaginary_parts}
+\begin{equation*}
+	\int_{a}^{b} g(t) dt = \int_{a}^{b} \re(g(t)) dt + i \int_{a}^{b} \im(g(t)) dt
+\end{equation*}
+% subsection splitting_integral_into_real_and_imaginary_parts (end)
+
+\subsection{Integral Properties} % (fold)
+\label{sub:integral_properties}
+\begin{enumerate}
+	\item (Linearity) $\int_{\gamma} (\alpha f + \beta g) = \alpha \int_{\gamma} f + \beta \int_{\gamma} g$
+	\item \begin{enumerate}
+		\item $\abs{\int_{a}^{b} g} \leq \int_{a}^{b} \abs{g}$
+		\item $\abs{\int_{\gamma} f dz} \leq \sup_{z \in \Omega} f(z) \cdot \int_{a}^{b} \abs{\gamma'(t)} dt$
+	\end{enumerate}
+	\item $\gamma^-$ is in opposite orientation of $\gamma \implies \int_{\gamma^-} f = - \int_{\gamma} f$
+\end{enumerate}
+% subsection integral_properties (end)
+
+\subsection{Fundamental Theorem of Calculus} % (fold)
+\label{sub:fundamental_theorem_of_calculus}
+Let $(\gamma : [a, b] \subseteq \mathbb{R} \to \mathbb{C}) \in \Omega \subseteq \mathbb{C}$. $f$ cont' on $\gamma \; \exists F' = f$ holo on $\Omega \implies \int_{\gamma} f = F(\gamma(b)) - F(\gamma(a))$
+% subsection fundamental_theorem_of_calculus (end)
+
+% section integration (end)

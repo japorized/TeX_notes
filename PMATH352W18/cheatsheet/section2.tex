@@ -1,0 +1,39 @@
+\section{Complex Functions} % (fold)
+\label{sec:complex_functions}
+
+\subsection{Convergence} % (fold)
+\label{sub:convergence}
+$\forall \{z_n\}_{n \in \mathbb{N}} \subseteq \mathbb{C} \enspace \land \enspace z \in \mathbb{Z} \\
+	(n \to \infty \implies z_n \to z) \iff \lim_{n \to \infty} \abs{z_n - z} = 0$
+
+May also write as $\lim_{n \to \infty} z_n = z$
+% subsection convergence (end)
+
+\subsection{Convergence for Complex Functions} % (fold)
+\label{sub:convergence_for_complex_functions}
+$\forall \Omega \subseteq \mathbb{C} \enspace \forall f : \Omega \to \mathbb{C} \enspace z_0 \in \mathbb{C} \enspace \exists L \in \mathbb{C} \enspace \forall \{z_n\}_{n \in \mathbb{N}} \subseteq \Omega \setminus \{z_0\}$
+
+$(z_n \to z_0 \implies f(z_0) \to L) \implies \lim_{z \to z_0} f(z) = L$
+% subsection convergence_for_complex_functions (end)
+
+\subsection{Continuity} % (fold)
+\label{sub:continuity}
+
+$\forall f : \Omega \subseteq \mathbb{C} \to \mathbb{C}$
+
+$f$ is continuous on $z_0 \implies$
+\begin{enumerate}
+	\item $\forall \{z_0\}_{n \in \mathbb{N}} \enspace z_n \to z_0 \implies f(z_n) \to f(z_0)$
+	\item $\forall z \in \Omega \; \forall \epsilon > 0 \; \exists \delta > 0 \enspace \abs{z - z_0} < \delta \implies \abs{f(z) - f(z_0)} < \epsilon$
+\end{enumerate}
+
+% subsection continuity (end)
+
+\subsection{Real and Imaginary Parts of a Function} % (fold)
+\label{sub:real_and_imaginary_parts_of_a_function}
+
+$f(z) = u(x, y) + iv(x, y)$
+
+% subsection real_and_imaginary_parts_of_a_function (end)
+
+% section complex_functions (end)
