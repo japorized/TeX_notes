@@ -1642,13 +1642,13 @@ These notions, in turn, begs the question of \hlwarn{what is the largest possibl
 \begin{note}
 	We may not always exchange the position of $\lim$ and $\sum_{a=1}^{b}$ when we consider an infinite sum (i.e. $b = \infty$). Here's an example why this is true. Consider the function $f(x) = \sum_{n=1}^{\infty} (x^n - x^{n - 1})$ for $\abs{x} < 1$. Is
 	\begin{equation*}
-		\lim_{x \to 1} \sum_{n=1}^{\infty} (x^n - x^{n - 1}) = \sum_{n=1}^{\infty} \lim_{x \to 1} (x^n - x^{n - 1})
+		\lim_{x \to 1} \sum_{n=1}^{\infty} (x^n - x^{n - 1}) = \sum_{n=1}^{\infty} \lim_{x \to 1} (x^n - x^{n + 1})
 	\end{equation*}
 	true?
 
 	Clearly, RHS is 0. For LHS, note that
 	\begin{align*}
-		f(x) &= \lim_{N \to \infty} \sum_{n=1}^{N} (x^n - x^{n - 1}) \\
+		f(x) &= \lim_{N \to \infty} \sum_{n=1}^{N} (x^n - x^{n + 1}) \\
 			&= \lim_{N \to \infty} (x - x^2 + x^2 - x^3 + \hdots + x^N - x^{N + 1}) \\
 			&= \lim_{N \to \infty} (x - x^{N + 1}) = x.
 	\end{align*}
@@ -1678,7 +1678,7 @@ These notions, in turn, begs the question of \hlwarn{what is the largest possibl
 			\end{equation*}
 			To find $R$, we have
 			\begin{align*}
-				\frac{1}{R} &= \limsup_{n \to \infty} \abs{\frac{1}{\sqrt{2 \pi n}} \left(\frac{e}{n} \right)}^\frac{1}{n} \\
+				\frac{1}{R} &= \limsup_{n \to \infty} \abs{\frac{1}{\sqrt{2 \pi n}} \left(\frac{e}{n} \right)^n }^\frac{1}{n} \\
 					&= \limsup_{n \to \infty} \abs{\frac{e}{n}} \limsup_{n \to \infty} \abs{\frac{1}{\sqrt{2 \pi n}}}^\frac{1}{n} \\
 					&= 0
 			\end{align*}
