@@ -1642,14 +1642,14 @@ These notions, in turn, begs the question of \hlwarn{what is the largest possibl
 \begin{note}
 	We may not always exchange the position of $\lim$ and $\sum_{a=1}^{b}$ when we consider an infinite sum (i.e. $b = \infty$). Here's an example why this is true. Consider the function $f(x) = \sum_{n=1}^{\infty} (x^n - x^{n - 1})$ for $\abs{x} < 1$. Is
 	\begin{equation*}
-		\lim_{x \to 1} \sum_{n=1}^{\infty} (x^n - x^{n - 1}) = \sum_{n=1}^{\infty} \lim_{x \to 1} (x^n x^{n - 1})
+		\lim_{x \to 1} \sum_{n=1}^{\infty} (x^n - x^{n - 1}) = \sum_{n=1}^{\infty} \lim_{x \to 1} (x^n - x^{n - 1})
 	\end{equation*}
 	true?
 
 	Clearly, RHS is 0. For LHS, note that
 	\begin{align*}
 		f(x) &= \lim_{N \to \infty} \sum_{n=1}^{N} (x^n - x^{n - 1}) \\
-			&= \lim_{N \to \infty} (x - x^2 + x^2 - x^3 + \hdots + x^N x^{N + 1}) \\
+			&= \lim_{N \to \infty} (x - x^2 + x^2 - x^3 + \hdots + x^N - x^{N + 1}) \\
 			&= \lim_{N \to \infty} (x - x^{N + 1}) = x.
 	\end{align*}
 	So,
@@ -1948,7 +1948,7 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 	\end{solution}
 \end{eg}
 
-\begin{eg}
+\begin{eg}\label{eg:integral_of_path_on_a_circle}
 	$\forall n \in \mathbb{Z}$, evaluate $\int_{\gamma} z^n dz$ that is continue on the path $\gamma$ that describes any circle centered at origin oriented anticlockwise.
 
 	\begin{solution}
@@ -2048,17 +2048,131 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 
 We are now in a position to generalize the \hlnotea{Fundamental Theorem of Calclus} for $\mathbb{C}$.
 
+% subsection integral_continued (end)
+
+% section integration_in_c (end)
+
+% chapter lecture_11_jan_26_2018 (end)
+
+\chapter{Lecture 12 Jan 29th 2018}
+	\label{chapter:lecture_12_jan_29th_2018}
+
+\section{Integration in \texorpdfstring{$\mathbb{C}$}{C} (Continued 2)} % (fold)
+\label{sec:integration_in_c_continued_2}
+
+\subsection{Fundamental Theorem of Calculus} % (fold)
+\label{sub:fundamental_theorem_of_calculus}
+
+To simplify statements from hereon, we shall use the following notations.
+
+\begin{notation}
+	Let $\Omega \subseteq \mathbb{C}$ be an open set in $\mathbb{C}$. We denote $f \in H(\Omega) \iff f $ is holomorphic on $\Omega$.
+\end{notation}
+
 \begin{thm}[Fundamental Theorem of Calculus]\label{thm:fundamental_theorem_of_calculus}
-	Let $\gamma:[a,b] \to \mathbb{C}$ be a path inside an open set $\Omega \subseteq \mathbb{C}$. Suppose $f(z)$ is continuous on $\gamma$, and has an antiderivative $F$ which is holomorphic on $\Omega$ (i.e. $\forall z \in \Omega \; f(z) = F'(z)$ and $F$ is holomorphic in $\Omega$). Then
+	Let $\gamma:[a,b] \to \mathbb{C}$ be a path inside an open set $\Omega \subseteq \mathbb{C}$. Suppose $f(z)$ is continuous on $\gamma$, and has an antiderivative $F \in \Omega$. Then
 	\begin{equation}
 		\label{eq:fundamental_theorem_of_calculus}
 		\int_{\gamma} f(z) dz = F\big(\gamma(b)\big) - F\big(\gamma(a)\big)
 	\end{equation}
 \end{thm}
 
-% subsection integral_continued (end)
+\begin{proof}
+	Let $G = F \circ \gamma$ and suppose $\gamma$ is a smooth function. Since $\gamma$ is smooth, $\gamma'$ exists and is continuous on $[a, b]$ and $\gamma'(t) \neq 0$ for all $t \in [a, b]$, and since $f$ is continuous on $[a, b]$, $G(t) = F'(\gamma(t))\gamma'(t)$ is continuous as well.
 
-% section integration_in_c (end)
+	Now
+	\begin{align*}
+		\int_{\gamma} f(z) dz
+			&= \int_{a}^{b} f\big(\gamma(t)\big)\gamma'(t) dt \\
+			&= \int_{a}^{b} F'\big(\gamma(t)\big)\gamma'(t) dt \\
+			&= \int_{a}^{b} G'(t) dt \\
+			&= G(b) - G(a) \quad \text{by applying FTC in } \mathbb{R} \text{ to real and imaginary parts} \\
+			&= F(\gamma(b)) F(\gamma(a))
+	\end{align*}
 
-% chapter lecture_11_jan_26_2018 (end)
+	If $\gamma$ is piecewise smooth, then we can simply apply the above to each of the smooth paths separately and sum up all of the integrals. \qed
+\end{proof}
+
+\begin{defn}[Closed Path]\label{defn:closed_path}
+	A path $\gamma: [a, b] \to \mathbb{C}$ is said to be \hldefn{closed} if $\gamma(a) = \gamma(b)$.
+\end{defn}
+
+\begin{crly}[Corollary of FTC]\label{crly:corollary_of_ftc}
+	If $F \in H(\Omega), \Omega \subseteq \mathbb{C}$ (hence $F'$ is continuous on $\Omega$), then
+	\begin{equation*}
+		\int_{\gamma} F'(z) dz = 0
+	\end{equation*}
+	on any closed path $\gamma$ on $\Omega$.
+\end{crly}
+
+\begin{proof}
+	A closed path $\gamma: [a, b] \to \mathbb{C}$ has $\gamma(a) = \gamma(b)$. By \cref{thm:fundamental_theorem_of_calculus}, $\int_{\gamma} F'(z) dz = F(\gamma(b)) - F(\gamma(a)) = 0$ as required. \qed
+\end{proof}
+
+\begin{eg}
+	Take $f(z) = z^n$ where $n \in \mathbb{Z} \setminus \{-1\}$ as in \cref{eg:integral_of_path_on_a_circle}. Then $f$ is continuous on $\mathbb{C} \setminus \{0\}$ \hlwarn{(not sure why this would be problematic when we've already excluded -1 for n)}. Then $f = F'$ for $F(z) = \frac{z^{n + 1}}{n + 1}$ and $F \in H(\mathbb{C} \setminus \{0\})$. Therefore by \cref{crly:corollary_of_ftc}, $\int_{\gamma} z^n dz = 0$ for any closed path $\gamma$ not passing through $0$.
+
+	If we do include $-1$ for $n$, note that $F'$ would not be continuous on $0$, and thus the corollary would not apply. We have also shown in the earlier example that $\int_{\gamma} \frac{1}{z} dz = 2 \pi i$.
+\end{eg}
+
+\begin{note}[Recall]
+	The \hldefn{interior} of a set $\Omega$ is defined as $\{z \in \Omega : \forall \epsilon > 0 \; B(z, \epsilon) \subseteq \Omega\}$.
+\end{note}
+
+\begin{thm}[Goursat's Theorem / Cauchy's Theorem for a triangle]\label{thm:goursat_s_theorem}
+	Let $\Omega \subseteq \mathbb{C}$ be an open set. Suppose $\Delta \subseteq \Omega$ is a closed triangle whose interior is also contained in $\Omega$. Let $f \in H(\Omega)$. Then
+	\begin{equation*}
+		\int_{\Delta} f(z) dz = 0
+	\end{equation*}
+\end{thm}
+
+This theorem holds more meaning than the presented statement, as it implies that, essentially, given any two points connected by two different paths in an open set in $\mathbb{C}$, and a function that is holomorphic over the two paths, the \hlnoteb{two path integrals of the function will yield the same result}!
+
+\begin{proof}
+	Let $\Delta_1^{(1)}, \Delta_2^{(1)}, \Delta_3^{(1)}, \Delta_4^{(1)}$ be smaller triangles by bisecting each side of $\Delta$. $\forall i \in \{1, 2, 3, 4\}$, orient $\Delta_i^{(1)}$ anticlockwise. Then we have
+	\begin{equation}\label{eq:goursat_eq1}
+		J := \int_{\Delta} f(z) dz = \sum_{i=1}^{4} \int_{\Delta_i^{(1)}} f(z) dz 
+	\end{equation}
+	Note that there must at least one of the $\Delta_i^{(1)}$ such that $\abs{\int_{\Delta_i^{(1)}} } \geq \frac{\abs{J}}{4}$, since $\forall i \in \{1, 2, 3, 4\}, \abs{\int_{\Delta_i^{(1)}} } < \frac{\abs{J}}{4}$ would contradict \cref{eq:goursat_eq1}. Without loss of generality, let $\Delta_1^{(1)}$ be the largest triangle of the four.
+
+	Now note that each of the perimeter of $\Delta_i^{(1)}$ is half of the perimeter of $\Delta$. Let $\ell(x)$ be the perimeter of $x$. Continue with taking bisectors of $\Delta_1^{(1)}, \Delta_1^{(2)}, \hdots$ such that
+	\begin{equation*}
+		\Delta \supseteq \Delta_1^{(1)} \supseteq \Delta_1^{(2)} \supseteq \hdots,
+	\end{equation*}
+	then we have that for each $j \in \mathbb{N} \setminus \{0\}$, $\Delta_i^{(j)}$ is such that
+	\begin{equation*}
+		\abs{\int_{\Delta_i^{(j)}} f(z) dz} \geq \frac{\abs{J}}{4^j} 
+	\end{equation*}
+	and $\ell(\Delta_i^{(j)}) = \frac{1}{2^j} \ell (\Delta)$. From real analysis, $\exists z_0 \in \mathbb{C}$ such that $z_0 \in \Delta_i^{(j)}$ for all $j \in \mathbb{N} \setminus \{0\}$ that is a limit point. Since $z_0 \in \Omega \; \land \; f \in H(\Omega)$, we have that
+	\begin{gather*}
+		\forall z \in \Omega \enspace \forall \epsilon > 0 \enspace \exists \delta > 0 \\
+		0 < \abs{z - z_0} < \delta \implies \abs{\frac{f(z) - f(z_0)}{z - z_0} - f'(z_0)} < \epsilon
+	\end{gather*}
+
+	Consider $D(z_0, \delta), \exists n \in \mathbb{N} \setminus \{0\}, \Delta_1^{(n)} \subseteq D(z_0, \delta)$. Consider
+	\begin{equation*}
+		\int_{\Delta_1^{(n)}} f(z) dz = \int_{\Delta_1^{(n)}} \big(f(z) - f(z_0) - f'(z_0)(z - z_0)\big) dz,
+	\end{equation*}
+	where we note that $\int_{\Delta_1^{(n)}} f(z_0) dz = \int_{\Delta_1^{(n)}} f'(z_0)(z - z_0) dz = 0$ by \cref{crly:corollary_of_ftc}.
+
+	\hlwarn{(I am still trying to understand the reason behind the steps from hereon)}
+
+	By \cref{item:absval_integral_less_than_integral_absval},
+	\begin{align*}
+		\abs{\int_{\Delta_1^{(n)}} f(z) dz}
+			&\leq \int_{\Delta_1^{(n)}} \abs{f(z) - f(z_0) - f'(z_0)(z - z_0)} dz \\
+			&\leq \int_{\Delta_1^{(n)}} \epsilon \abs{z - z_0} dz \leq \epsilon \ell(\Delta_1^{(n)})\int_{\Delta_1^{(n)}} dz
+	\end{align*}
+	which implies that
+	\begin{align*}
+		\frac{\abs{J}}{4^n} \leq \epsilon \ell(\Delta_1^{(n)})^2 \leq \epsilon \frac{\ell(\Delta)^2}{4} = \abs{J} \leq \epsilon
+	\end{align*}
+	and therefore, $\abs{J} = 0$!
+\end{proof}	
+
+% subsection fundamental_theorem_of_calculus (end)
+
+% section integration_in_c_continued_2 (end)
+
+% chapter lecture_12_jan_29th_2018 (end)
 \end{document}
