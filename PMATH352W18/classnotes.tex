@@ -1682,7 +1682,7 @@ These notions, in turn, begs the question of \hlwarn{what is the largest possibl
 					&= \limsup_{n \to \infty} \abs{\frac{e}{n}} \limsup_{n \to \infty} \abs{\frac{1}{\sqrt{2 \pi n}}}^\frac{1}{n} \\
 					&= 0
 			\end{align*}
-			since $\limsup_{n \to \infty} \frac{e}{n} = 0$. Thus $R = \infty$. By \cref{thm:convergence_in_the_radius_of_convergence}, $e^z$ is an entire function.
+			since $\limsup_{n \to \infty} \frac{e}{n} = 0$ and $\limsup_{n \to \infty} \abs{\frac{1}{\sqrt{2 \pi n}}}^\frac{1}{n} = 1$. Thus $R = \infty$. By \cref{thm:convergence_in_the_radius_of_convergence}, $e^z$ is an entire function.
 
 			\item Note that
 			\begin{align*}
@@ -1764,7 +1764,7 @@ Before we begin with the definition of a curve in $\mathbb{C}$, let us consider 
 		\coordinate (b) at (1, 1);
 		\node[label={225:{$\alpha$}},circle,fill=base16-eighties-light,inner sep=1pt] at (a) {};
 		\node[label={45:{$\beta$}},circle,fill=base16-eighties-light,inner sep=1pt] at (b) {};
-		\draw[midarrow={>}] (a)--(b);
+		\draw[midarrow] (a)--(b);
 	\end{tikzpicture} &
 	Let $\gamma$ be the function that describes this line. We may then define $\gamma : [0, 1] \to \mathbb{C}$ to be either
 	\begin{equation*}
@@ -1795,7 +1795,7 @@ Before we begin with the definition of a curve in $\mathbb{C}$, let us consider 
     			\node[label={90:{b}},fill=base16-eighties-light,inner sep = 1pt] at (1.2, 1.258) {};
     			\node[label={270:{c}},fill=base16-eighties-light,inner sep=1pt] at (-0.55,-1.011375) {};
 				\clip (-2.3,-2.5) rectangle (1.2,1.2);
-    			\draw[midarrow={>},domain=-2.5:1.5] plot (\x, {pow(\x,3)+2*pow(\x,2)-\x-2});
+    			\draw[midarrow,domain=-2.5:1.5] plot (\x, {pow(\x,3)+2*pow(\x,2)-\x-2});
 			\end{tikzpicture}
 		\end{tabular}
 	\end{center}
@@ -1861,8 +1861,8 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 \subsection{Integral} % (fold)
 \label{sub:integral}
 
-\begin{defn}[Integral of $f$ over a path $\gamma$]\label{defn:integral_of_f_over_a_path_gamma}
-	Given a path $\gamma: [a, b] \to \mathbb{C}$ and $f : \mathbb{C} \to \mathbb{C}$, a function continuous on $\gamma$. We define the integral $f$ along $\gamma$ as
+\begin{defn}[Contour]\label{defn:contour}
+	Given a path $\gamma: [a, b] \to \mathbb{C}$ and $f : \mathbb{C} \to \mathbb{C}$, a function continuous on $\gamma$. We define the integral $f$ along $\gamma$, called a \hldefn{contour}, as
 	\begin{equation}
 		\int_{\gamma} f(z) dz := \int_{a}^{b} f(\gamma(t))\gamma'(t) dt
 	\end{equation}
@@ -1987,7 +1987,7 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 				\begin{equation*}
 					\abs{\int_{a}^{b} g(t) dt} \leq \int_{a}^{b} \abs{g(t)} dt
 				\end{equation*} \label{item:absval_integral_less_than_integral_absval}
-				\item For any function $f(z)$ that is continuous on a path $\gamma: [a, b] \to \mathbb{C}$,
+			\item For any function $f(z)$ that is continuous on a path $\gamma: [a, b] \to \mathbb{C}$,
 					\begin{equation*}
 						\abs{\int_{\gamma} f(z) dz} \leq \sup_{z \in \gamma} \abs{f(z)} \cdot \underbrace{\int_{a}^{b} \abs{\gamma'(t)} dt}_{\text{length of the path}}
 					\end{equation*}\label{item:absval_integral_less_than_fnsup_times_arc_length}
@@ -2175,4 +2175,157 @@ This theorem holds more meaning than the presented statement, as it implies that
 % section integration_in_c_continued_2 (end)
 
 % chapter lecture_12_jan_29th_2018 (end)
+
+\chapter{Tutorial Jan 31 2018}
+	\label{tutorial:tutorial_jan_31_2018}
+
+\begin{note}
+	Consider the power series $\sum_{n \geq 0} a_n (z - z_0)^n$ and let $\frac{1}{R} := \limsup_{n \to \infty} \sup \sqrt[n]{\abs{a_n}} \in [0, \infty)$.
+	\begin{itemize}
+		\item If $\abs{z - z_0} < R$, $\sum_{n \geq 0} a_n (z - z_0)^n$ converges absolutely.
+		\item If $\abs{z - z_0} > R, \sum_{n \geq 0} a_n (z - z_0)^n$ diverges.
+		\item If $0 < r < R$, then $\sum_{n \geq 0} a_0 (z - z_0)^n$ converges uniformly on $\{z : \abs{z - z_0} < r\}$.
+	\end{itemize}
+\end{note}
+
+\section{Practice Problems} % (fold)
+\label{sec:practice_problems}
+
+\begin{enumerate}
+	\item Parameterize the semicircle $\abs{z - 4 - 5i} = 3$ clockwise, starting from $z = 4 + 8i$ to $z = 4 + 2i$.
+
+		\begin{solution}
+			Let $\gamma: [-\frac{\pi}{2}, \frac{\pi}{2}] \to \mathbb{C}$ such that $\gamma(t) = 3e^{-it} + 4 + 5i$. Note that $\gamma$ parameterizes the given semicircle:
+			\begin{align*}
+				\gamma\left(-\frac{\pi}{2}\right) &= 4 + 8i \\
+				\gamma(0) &= 7 + 5i \\
+				\gamma\left(\frac{\pi}{2} \right) &= 4 + 2i
+			\end{align*}
+			\begin{figure}[H]
+				\begin{center}
+					\resizebox{5cm}{!}{
+						\begin{tikzpicture}
+							\draw[->] (-0.5, 0) -- (8, 0) node[right] {$\re$};
+							\draw[->] (0, -0.5) -- (0, 9) node[above] {$\im$};
+							\draw[midarrow={latex}{0.7}] (4, 8) arc(90:-90:3);
+							\coordinate (z0) at (4, 5);
+							\coordinate (gs) at (6.1213203435596425732, 7.1213203435596425732);
+							\node[label={270:{$4 - 5i$}},circle,fill,inner sep=1pt] at (z0) {};
+							\node[label={90:{$\gamma(-\frac{\pi}{2})$}},circle,fill,inner sep=1pt] at (4, 8) {};
+							\node[label={0:{$\gamma(0)$}},circle,fill,inner sep=1pt] at (7, 5) {};
+							\node[label={270:{$\gamma(\frac{\pi}{2})$}},circle,fill,inner sep=1pt] at (4, 2) {};
+							\draw[<->] (z0) -- (gs) node[midway,above] {$3$};
+						\end{tikzpicture}
+					}
+				\end{center}
+				\caption[loftitle]{Semicircle $\abs{z - 4 - 5i} = 3$ oriented clockwise, parameterized by $\gamma$}
+			\end{figure}
+		\end{solution}
+
+	\item If the power series $f(z) = \sum_{n=0}^{\infty} c_n (z - z_0)^n$ centered at $z_0$ has a non-zero radius of convergence, then show that
+		\begin{equation*}
+			c_m = \frac{f^{(m)}(z_0)}{m!}
+		\end{equation*}
+		for any $m \in \mathbb{Z}, m \geq 0,$ where $f^{(m)}(z_0)$ denotes the $m$th derivative of $f$ at $z_0$.
+
+		\begin{solution}
+			Since $f(z)$ is a power series and the radius of convergence $R \neq 0$, by \cref{thm:power_function_holomorphic_function_region_of_convergence}, $f(z)$ is $\mathbb{C}$-differentiable and each derivative has the same radius of convergence. By induction, it can be shown that
+			\begin{equation*}
+				f^{(m)}(z) = \sum_{n=m}^{\infty} \frac{n!}{(n - m)!} c_n (z - z_0)^{n - m} 
+			\end{equation*}
+			Evaluating $f^{(m)}$ at $z_0$, we have
+			\begin{align*}
+				f^{(m)}(z_0)
+					&= \sum_{n=m}^{\infty} \frac{n!}{(n - m)!} c_n (z_0 - z_0)^{n - m} \\
+					&= m! c_m
+			\end{align*}
+			where all terms above $m$ are 0. Then we obtain
+			\begin{equation*}
+				c_m = \frac{f^{(m)}(z_0)}{m!}
+			\end{equation*}
+			as desired. \qed
+		\end{solution}
+	\item Let $\gamma$ be the arc of the unit circle centered at the origin in the first quadrant oriented clockwise (from $i$ to 1). Evaluate the integral
+		\begin{equation*}
+			\int_{\gamma} \bar{z}^2 dz
+		\end{equation*}
+		by parameterizing the curve.
+
+		\begin{solution}
+			Consider the parameterization $\gamma: [ -\frac{\pi}{2}, 0 ] \to \mathbb{C}$ given by $\gamma(t) = e^{-it}$. Note that $\bar{e^{-it}} = e^{it}$. Then
+			\begin{align*}
+				\int_{\gamma} \bar{z}^2 dz
+					&= \int_{-\frac{\pi}{2}}^{0} e^{2it} \cdot \left( -i e^{-it} \right) dt \\
+					&= -i \int_{-\frac{\pi}{2}}^{0} e^{it} dt \\
+					&= -e^{it} \at{\frac{\pi}{2}}{0} \\
+					&= - 1 - i
+			\end{align*}\qed
+		\end{solution}
+	\item Evaluate the above integral by finding an antiderivative. (Hint: Use $\left(\frac{z\bar{z}}{z} \right)^2$)
+		\begin{solution}
+			Note that $z\bar{z} = \abs{z}^2$, so on the circle, we have $\bar{z} = \frac{1}{z}$. Thus the integral is equivalent to
+			\begin{equation*}
+				\int_{\gamma} \frac{1}{z^2} dz
+			\end{equation*}
+			Note that the antiderivative of $\frac{1}{z^2}$ is $-\frac{1}{z}$. Thus by \cref{thm:fundamental_theorem_of_calculus},
+			\begin{equation*}
+				\int_{\gamma} \bar{z}^2 dz = \int_{\gamma} \frac{1}{z^2} = F(\gamma(0)) - F\left(\gamma\left(-\frac{\pi}{2}\right)\right) = -\frac{1}{e^{-i(0)}} + \frac{1}{e^{-i(-\pi/2)}} = - 1 - i 
+			\end{equation*}
+		\end{solution}
+
+	\item Let $\{c_n\}_{n = 0}^\infty$ be a sequence of positive real numbers such that
+		\begin{equation*}
+			L = \lim_{n \to \infty} \frac{c_{n + 1}}{c_n}
+		\end{equation*}
+		exists. Then show that
+		\begin{equation*}
+			\lim_{n \to \infty} c_n^{\frac{1}{n}} = L
+		\end{equation*}
+		This shows that, when applicable, the \hlnotea{ratio test} can be used instead of the root test to calculate the radius of convergence of a power series.
+
+		\begin{solution}
+			\hlwarn{no solution yet}
+
+			Current ideas: If the sequence is a constant sequence, then L is 1 and thus the proof is trivial. Will have to look at the other two cases.
+		\end{solution}
+
+	\item Find the radius of convergence of
+		\begin{enumerate}
+			\item $\sum_{n=0}^{\infty} \frac{n^n z^n}{n!}$
+			\item $\sum_{n=0}^{\infty} z^{2^n}$
+		\end{enumerate}
+
+		\begin{solution}
+			\begin{enumerate}
+				\item By Stirling's Approximation, i.e. $n! \sim (\frac{n}{e})^n \sqrt{2 \pi n}$, we have that Hadamard's formula is
+					\begin{align*}
+						\frac{1}{R} &= \limsup_{n \to \infty} \abs{\frac{n^n}{n!}}^\frac{1}{n} \\
+							&= \limsup_{n \to \infty} \abs{\frac{n^n}{\left(\frac{n}{e} \right)^n \sqrt{2 \pi n}}}^\frac{1}{n} \\
+							&= \limsup_{n \to \infty} \abs{\frac{e^n}{\sqrt{2 \pi n}} }^\frac{1}{n} \\
+							&= e \limsup_{n \to \infty} \abs{\frac{1}{\sqrt{2 \pi n}} }^\frac{1}{n} = e
+					\end{align*}
+					Therefore, $R = \frac{1}{e}$.
+
+					\item \hlwarn{no solution yet: current problem, not being able to express the sum as a power series, in turn failing to get $c_n$ which is needed for $\frac{1}{R}$.}
+			\end{enumerate}
+		\end{solution}
+	\item Show that for any path $\gamma: [a, b] \to \mathbb{C}$ and $f(z)$ continuous on $\gamma$, we have
+		\begin{equation*}
+			\abs{\int_{\gamma} f(z) dz} \leq \sup_{z \in \gamma} \abs{f(z)} \int_{a}^{b} \abs{\gamma'(t)} dt
+		\end{equation*}
+
+		\begin{solution}
+			\begin{align*}
+				\text{LHS} &= \abs{\int_{\gamma} f(z) dz} \\
+					&= \abs{\int_{a}^{b} f\big( \gamma(t) \big) \gamma'(t) dt} \text{ by definition} \\
+					&\leq \int_{a}^{b} \abs{f\big( \gamma(t) \big) \gamma'(t)} dt \quad \text{by } \cref{item:absval_integral_less_than_integral_absval} \text{ of } \cref{propo:properties_of_integrals_in_c} \\
+					&\leq \int_{a}^{b} \sup_{z \in \gamma} \abs{f(z)} \abs{\gamma'(t)} dt \quad \text{since } \abs{f(z)} \leq \sup_{z \in \gamma} \abs{f(z)} \\
+					&= \sup_{z \in \gamma} \abs{f(z)} \cdot \int_{a}^{b} \abs{\gamma'(t)} dt = \text{RHS}
+			\end{align*}
+		\end{solution}
+\end{enumerate}
+
+% section practice_problems (end)
+
+% chapter tutorial_jan_31_2018 (end)
 \end{document}
