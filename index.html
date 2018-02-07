@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Tufte CSS</title>
+    <link rel="stylesheet" href="tufte.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <article>
+      <h1>Japorized's LaTeX Notes</h1>
+      <section id="files">
+        
+      </section>
+    </article>
+
+    <script type="text/javascript" src="jquery-ajax.js"></script>
+    <script type="text/javascript">
+      function arrayContains(n,e){return e.indexOf(n)>-1}var fileMan=document.querySelector("#files");$.getJSON("files.json",function(n){var e=[".git","_scripts","et-book","Personal Notes"];$.each(n.children,function(n,a){"folder"!=a.type||arrayContains(a.name,e)||(fileMan.innerHTML+="<h2>"+a.name+"<h2>\n",$.each(a.children,function(n,e){e.name.indexOf(".pdf")>-1?fileMan.innerHTML+='PDF: <a href="'+e.path+'">'+e.name+"</a><br />":e.name.indexOf(".tex")>-1&&(fileMan.innerHTML+='tex: <a href="'+e.path+'">'+e.name+"</a><br />")}))})});
+    </script>
+  </body>
+</html>
