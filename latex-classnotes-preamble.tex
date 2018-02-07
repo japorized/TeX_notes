@@ -44,12 +44,13 @@
 \usepgfplotslibrary{polar}
 \usepgflibrary{shapes.geometric}
 \usetikzlibrary{angles,patterns,calc,decorations.markings}
-\tikzset{midarrow/.style={
+\tikzset{midarrow/.style 2 args={
         decoration={markings,
-            mark= at position 0.5 with {\arrow{#1}} ,
+            mark= at position #2 with {\arrow{#1}} ,
         },
         postaction={decorate}
-    }
+    },
+    midarrow/.default={>}{0.5}
 }
 
 % enumitems
@@ -162,6 +163,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\dotp}{\, \cdotp}			        % dot product to distinguish from \cdot
 \newcommand{\qed}{\hfill\ensuremath{\square}}   % Q.E.D sign
 \newcommand{\abs}[1]{\left|#1\right|}						% absolute value
+\newcommand{\at}[2]{\Big|_{#1}^{#2}}
 \newcommand{\Arg}[1]{\caparg #1}
 \renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
 \newcommand{\quotient}[2]{\faktor{#1}{#2}}

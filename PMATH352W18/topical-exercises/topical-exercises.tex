@@ -22,9 +22,9 @@
 	\item Verify that
 
 	\begin{inlinelist}
-		\item $(\sqrt{2} - i) - i (1 - \sqrt{2}i) = -2i$
-		\item $(2 - 3i)(-2 + i) = -1 + 8i$
-		\item $(3 + i)(3 - i)(\frac{1}{5} - \frac{1}{10} i) = 2 + i$
+		\item $(\sqrt{2} - i) - i (1 - \sqrt{2}i) = -2i$;
+		\item $(2 - 3i)(-2 + i) = -1 + 8i$;
+		\item $(3 + i)(3 - i)(\frac{1}{5} - \frac{1}{10} i) = 2 + i$.
 	\end{inlinelist}
 	\item Find the complex numbers which are complex conjugates of
 
@@ -72,6 +72,8 @@
 	\item Verify that $\sqrt{2}\abs{z} \geq \abs{\re z} + \abs{\im z}$. (Hint: Reduce this inequality to $(\abs{x} - \abs{y})^2 \geq 0$.)
 \end{enumerate}
 
+(Jump to \hyperref[sub:basic_algebraic_properties]{solutions})
+
 % section basic_algebraic_properties (end)
 
 \section{Polar Form} % (fold)
@@ -81,14 +83,14 @@
 	\item Represent the following complex numbers in polar form:
 
 	\begin{inlinelist}
-		\item $1 = i$;
+		\item $1 + i$;
 		\item $-1 + i$;
 		\item $-1 - i$;
 		\item $1 - i$;
 		\item $ 1 + \sqrt{3} i$;
 		\item $-1 + \sqrt{3} i$;
 		\item $-1 - \sqrt{3} i$;
-		\item $ 1 + \sqrt{3} i$;
+		\item $ 1 - \sqrt{3} i$;
 		\item $2 + \sqrt{3} + i$.
 	\end{inlinelist}
 
@@ -207,5 +209,66 @@
 % section limits_and_continuity (end)
 
 % chapter complex_functions (end)
+
+\chapter*{Answers}\label{chapter:answers}
+\addcontentsline{toc}{chapter}{Answers}
+
+\fontsize{9}{11}\selectfont
+
+\section*{Chapter 1} % (fold)
+\label{sec:chapter_1}
+
+\subsection*{Basic Algebraic Properties} % (fold)
+\label{sub:basic_algebraic_properties}
+
+(Jump to: \cref{sec:basic_algebraic_properties})
+
+\begin{enumerate}
+	\item 
+	\item \begin{enumerate}
+		\item $(0, 0), (1, 0), (-\frac{1}{2} , \pm \sqrt{\frac{3}{4}})$
+		\item $(0, 0), (1, 0), (-1, 0), (0, i), (0, -i)$
+	\end{enumerate}
+	\item \begin{enumerate}
+		\item $(\cos \theta - i \sin \theta)^2$
+		\item 
+		\item $\frac{9 - 40i}{41}$
+		\item $2$
+	\end{enumerate}
+	\item \begin{enumerate}
+		\item $\{(x, y) : x^2 + y^2 \leq 4\}$
+		\item $\{(x, y) : y > 0\}$
+		\item $\{(x, y) : x \leq \frac{1}{2} \}$
+		\item $x^2 - y^2 = a$. Also, refer to this graph on Desmos: \url{https://www.desmos.com/calculator/buwtyobjrn}
+		\item Refer to graph on Desmos: \url{https://www.desmos.com/calculator/a3pnbwueja}
+	\end{enumerate}
+	\item \begin{align*}
+		\left( \frac{z_1}{z_3} \right) \left( \frac{z_2}{z_4} \right)
+			&= z_1 \left( \frac{\bar{z_3}}{\abs{z_3}^2} \right) z_2 \left( \frac{\bar{z_4}}{\abs{z_4}^2} \right) \quad \text{since } z\bar{z} = \abs{z}^2 \\
+			&= z_1 z_2 \left( \frac{\bar{z_3} \bar{z_4}}{\abs{z_3}^2 \abs{z_4}^2} \right) \\
+			&= z_1 z_2 \left( \frac{\bar{z_3 z_4}}{\abs{z_3 z_4}^2} \right) \quad \text{since } \bar{z}\bar{w} = \bar{zw} \text{ and } \abs{z}\abs{w} = \abs{zw} \\
+			&= \frac{z_1 z_2}{z_3 z_4} \quad \text{since } z\bar{z} = \abs{z}^2
+	\end{align*}
+	\item $\frac{z_1 z}{z_2 z} = \left( \frac{z_1}{z_2} \right) \left(\frac{z}{z} \right) = \frac{z_1}{z_2}$
+	\item By the Triangle Inequality,
+	\begin{equation*}
+		\abs{z_1} + \abs{z_2} \geq \abs{z_1 + z_2} \geq \sqrt{\re(z_1 + z_2)^2 + \im(z_1 + z_2)^2} \geq \sqrt{\re(z_1 + z_2)} = \re(z_1 + z_2)
+	\end{equation*}
+	and by the Reversed Triangle Inequality,
+	\begin{gather*}
+		\abs{z_3 + z_4} \geq \abs{\abs{z_3} - \abs{z_4}} \\
+		\implies \frac{1}{\abs{z_3 + z_4}} \leq \frac{1}{\abs{\abs{z_3} - \abs{z_4}}} 
+	\end{gather*}
+	Thus
+	\begin{equation*}
+		\frac{\re(z_1 + z_2)}{\abs{z_3 + z_4}} \leq \frac{\abs{z_1} + \abs{z_2}}{\abs{z_3 + z_4}} \leq \frac{\abs{z_1} + \abs{z_2}}{\abs{\abs{z_3} - \abs{z_4}}}
+	\end{equation*}
+\end{enumerate}
+
+% subsection basic_algebraic_properties (end)
+
+% section chapter_1 (end)
+
+% chapter answers (end)
 
 \end{document}

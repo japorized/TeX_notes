@@ -692,7 +692,7 @@ It is easy to see how the nth roots of unity \hlnoteb{partitions the unit circle
 	\begin{center}
 		\begin{tikzpicture}
 			\begin{axis}[four quad complex, xmin=-2, xmax=2, ymin=-1, ymax=2]
-				\draw[line width=0pt,dashed,fill=black,fill opacity=0.25](-3,0)--(3,0)--(3,3)--(-3,3);
+				\draw[line width=0pt,dashed,fill=base16-eighties-brown,fill opacity=0.25](-3,0)--(3,0)--(3,3)--(-3,3);
 			\end{axis}
 		\end{tikzpicture}
 	\end{center}
@@ -971,7 +971,7 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 					\tikzset{>=stealth}
 					\draw[->] (-2, 0) -- ++(4, 0) coordinate (X) node[below, right] {$\re$};
 					\draw[->] (0, -2) -- ++(0, 4) node[above,right] {$\im$};
-					\draw [draw=none,fill=black,fill opacity=0.25] (-2,0) rectangle (1,1.5);
+					\draw [draw=none,fill=base16-eighties-brown,fill opacity=0.25] (-2,0) rectangle (1,1.5);
 					\draw (1,0)--(1,1.5)--(-2,1.5);
 					\node[label={270:{$1$}}] at (1,0) {};
 					\node[label={155:{$\pi$}}] at (0,1.5) {};
@@ -983,7 +983,7 @@ Since $z^n = 1$, LHS is zero. Then either $z = 1$ or $(1 + z + \hdots + z^{n - 1
 					\draw[->] (0, -2) -- ++(0, 4) node[above,right] {$\im$};
 					\begin{scope}
 					    \clip (-1,0) rectangle (1,1);
-					    \draw[fill=black,fill opacity=0.25] (0,0) circle(1);
+					    \draw[fill=base16-eighties-brown,fill opacity=0.25] (0,0) circle(1);
 					    \draw (-1,0) -- (1,0);
 					\end{scope}
 					\node[label={270:{$e$}}] at (1,0) {};
@@ -2284,9 +2284,37 @@ This theorem holds more meaning than the presented statement, as it implies that
 		This shows that, when applicable, the \hlnotea{ratio test} can be used instead of the root test to calculate the radius of convergence of a power series.
 
 		\begin{solution}
-			\hlwarn{no solution yet}
-
-			Current ideas: If the sequence is a constant sequence, then L is 1 and thus the proof is trivial. Will have to look at the other two cases.
+			Suppose that
+			\begin{equation*}
+				L = \lim_{n \to \infty} \frac{c_{n + 1}}{c_n}
+			\end{equation*}
+			exists. By definition, we have
+			\begin{gather*}
+				\forall \epsilon > 0 \enspace \exists N \in \mathbb{N} \enspace \forall n > N \\
+				\abs{\frac{c_n}{c_{n - 1}} - L} < \epsilon
+			\end{gather*}
+			Thus for $n \geq N$,
+			\begin{align*}
+				c_n ^\frac{1}{n}
+					&= \left(\frac{c_n}{c_{n - 1}} \cdot \frac{c_{n - 1}}{c_{n - 2}} \hdots \frac{c_N}{c_{N - 1}} \cdot c_{N - 1} \right)^\frac{1}{n} \\
+					&= \left(\frac{c_n}{c_{n - 1}}\right)^\frac{1}{n} \left(\frac{c_{n - 1}}{c_{n - 2}} \right)^\frac{1}{n} \hdots \left(\frac{c_N}{c_{N - 1}} \right)^\frac{1}{n} c_{N - 1}^\frac{1}{n}
+			\end{align*}
+			Now
+			\begin{alignat*}{2}
+				(L - \epsilon)^\frac{1}{n} (L - \epsilon)^\frac{1}{n} \hdots (L - \epsilon)^\frac{1}{n}  c_{N - 1}^\frac{1}{n} &\leq c_n^\frac{1}{n} &&\leq (L + \epsilon)^\frac{1}{n} (L + \epsilon)^\frac{1}{n}  \hdots (L + \epsilon)^\frac{1}{n} c_{N - 1}^\frac{1}{n} \\
+				(L - \epsilon)^\frac{n - N + 1}{n} c_{N - 1}^\frac{1}{n} &\leq c_n^\frac{1}{n} &&\leq (L + \epsilon)^\frac{n - N + 1}{n} c_{N - 1}^\frac{1}{n} 
+			\end{alignat*}
+			Note that
+			\begin{align*}
+				\lim_{n \to \infty} (L - \epsilon)^\frac{n - N + 1}{n} c_{N - 1}^\frac{1}{n} &= L - \epsilon \\
+				\lim_{n \to \infty} (L + \epsilon)^\frac{n - N + 1}{n} c_{N - 1}^\frac{1}{n} &= L + \epsilon
+			\end{align*}
+			Thus we have
+			\begin{gather*}
+				L - \epsilon \leq c_n^\frac{1}{n} \leq L + \epsilon \\
+				\abs{c_n^\frac{1}{n} - L} \leq \epsilon
+			\end{gather*}
+			as desired. \qed
 		\end{solution}
 
 	\item Find the radius of convergence of
