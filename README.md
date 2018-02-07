@@ -1,4 +1,9 @@
 # Japorized's Personal Study Notes
+
+You can also see most of the files on [https://japorized.github.io/TeX_notes]( https://japorized.github.io/TeX_notes )
+
+Page uses [tufte-css](https://github.com/edwardtufte/tufte-css) for styling
+
 ---
 Most of the content are compiled from my (scavenged) lecture notes and recommended reading materials, or perhaps from my personal studies and further reading. Citations will be provided wherever necessary.
 
