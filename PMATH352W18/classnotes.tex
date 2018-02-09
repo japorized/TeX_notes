@@ -2143,7 +2143,7 @@ This theorem holds more meaning than the presented statement, as it implies that
 	\begin{equation*}
 		\abs{\int_{\Delta_i^{(j)}} f(z) dz} \geq \frac{\abs{J}}{4^j} 
 	\end{equation*}
-	and $\ell(\Delta_i^{(j)}) = \frac{1}{2^j} \ell (\Delta)$. From real analysis, $\exists z_0 \in \mathbb{C}$ such that $z_0 \in \Delta_i^{(j)}$ for all $j \in \mathbb{N} \setminus \{0\}$ that is a limit point. Since $z_0 \in \Omega \; \land \; f \in H(\Omega)$, we have that
+	and $\ell(\Delta_i^{(j)}) = \frac{1}{2^j} \ell (\Delta)$. By the \hlnotea{Nested Rectangle Theorem from Real Analysis}, $\exists z_0 \in \mathbb{C}$ such that $z_0 \in \Delta_i^{(j)}$ for all $j \in \mathbb{N} \setminus \{0\}$ that is a limit point. Since $z_0 \in \Omega \; \land \; f \in H(\Omega)$, we have that
 	\begin{gather*}
 		\forall z \in \Omega \enspace \forall \epsilon > 0 \enspace \exists \delta > 0 \\
 		0 < \abs{z - z_0} < \delta \implies \abs{\frac{f(z) - f(z_0)}{z - z_0} - f'(z_0)} < \epsilon
@@ -2155,17 +2155,15 @@ This theorem holds more meaning than the presented statement, as it implies that
 	\end{equation*}
 	where we note that $\int_{\Delta_1^{(n)}} f(z_0) dz = \int_{\Delta_1^{(n)}} f'(z_0)(z - z_0) dz = 0$ by \cref{crly:corollary_of_ftc}.
 
-	\hlwarn{(I am still trying to understand the reason behind the steps from hereon)}
-
-	By \cref{item:absval_integral_less_than_integral_absval},
+	By \cref{item:absval_integral_less_than_integral_absval} in \cref{propo:properties_of_integrals_in_c},
 	\begin{align*}
 		\abs{\int_{\Delta_1^{(n)}} f(z) dz}
 			&\leq \int_{\Delta_1^{(n)}} \abs{f(z) - f(z_0) - f'(z_0)(z - z_0)} dz \\
-			&\leq \int_{\Delta_1^{(n)}} \epsilon \abs{z - z_0} dz \leq \epsilon \ell(\Delta_1^{(n)})\int_{\Delta_1^{(n)}} dz
+			&\leq \int_{\Delta_1^{(n)}} \epsilon \abs{z - z_0} dz \leq \epsilon \ell(\Delta_1^{(n)})\int_{\Delta_1^{(n)}} dz = \epsilon \ell(\Delta_1^{(n)})^2
 	\end{align*}
-	which implies that
+	where we note that $\abs{z - z_0} \leq \ell(\Delta_1^{(n)}$ since $z \in \Delta_1^{(n)}$. This implies that
 	\begin{align*}
-		\frac{\abs{J}}{4^n} \leq \epsilon \ell(\Delta_1^{(n)})^2 \leq \epsilon \frac{\ell(\Delta)^2}{4} = \abs{J} \leq \epsilon
+		\frac{\abs{J}}{4^n} \leq \epsilon \ell(\Delta_1^{(n)})^2 \leq \epsilon \frac{\ell(\Delta)^2}{4^n} = \abs{J} \leq \epsilon
 	\end{align*}
 	and therefore, $\abs{J} = 0$!
 \end{proof}	
@@ -2176,7 +2174,8 @@ This theorem holds more meaning than the presented statement, as it implies that
 
 % chapter lecture_12_jan_29th_2018 (end)
 
-\chapter{Tutorial Jan 31 2018}
+\chapter*{Tutorial Jan 31 2018}
+\addcontentsline{toc}{chapter}{Tutorial}
 	\label{tutorial:tutorial_jan_31_2018}
 
 \begin{note}
@@ -2188,7 +2187,7 @@ This theorem holds more meaning than the presented statement, as it implies that
 	\end{itemize}
 \end{note}
 
-\section{Practice Problems} % (fold)
+\section*{Practice Problems} % (fold)
 \label{sec:practice_problems}
 
 \begin{enumerate}
@@ -2356,4 +2355,170 @@ This theorem holds more meaning than the presented statement, as it implies that
 % section practice_problems (end)
 
 % chapter tutorial_jan_31_2018 (end)
+
+\chapter{Lecture 13 Feb 9th 2018}
+	\label{chapter:lecture_13_feb_9th_2018}
+
+\section{Cauchy's Integral Formula} % (fold)
+\label{sec:cauchy_s_integral_formula}
+
+\begin{defn}[Convex Set]\label{defn:convex_set}
+	A set $S \subseteq \mathbb{C}$ is called a \hldefn{convex set} if the line segment joining any pair of points in $S$ lies entirely in $S$.
+\end{defn}
+
+\begin{thm}[Cauchy's Theorem for Convex Set]\label{thm:cauchy_s_theorem_for_convex_set}
+	Let $\Omega \subseteq \mathbb{C}$ be a convex open set, and $f \in H(\Omega)$. Then
+	\begin{enumerate}
+	 	\item $f = F'$ for some $F \in H(\Omega)$.
+	 	\item $\int_{\gamma} f(z) dz = 0$ for any closed path $\gamma \in \Omega$.
+	 \end{enumerate} 
+\end{thm}
+
+\begin{proof}
+	Note that it is sufficient to prove 1 since 1 $\implies$ 2 by \cref{thm:fundamental_theorem_of_calculus}.
+
+	Let $a \in \Omega$, and let $[a, z]$ denote the straight line from $a$ to $z$. Since $\Omega$ is a convex set, $[a, z]$ is in $\Omega$. Define $F(z)$\footnote{It can be verified that $F$ is continuous.} $= \int_{[a, z]} f(z) dz$\footnote{This is a keys step: defining an ``antiderivative'' as how we would expect it to be.}.
+
+	\begin{tabular}{L{9cm} C{6cm}}
+		\hlnotec{WTS} $F \in H(\Omega), F'(z_0) = f(z_0)$ for any $z_0 \in \Omega$.
+
+		Now by \cref{thm:goursat_s_theorem},
+
+		{$\!\begin{aligned}
+			0 &= \int_{\Delta} f(z) dz \\
+			  &= \int_{[a, z]} f(z) dz + \int_{[z, z_0]} f(z) dz +  \int_{[z_0, a]} f(z) dz \\
+			  &= F(z) + \int_{[z, z_0]} f(z) dz + \left(- F(z_0) \right)
+		\end{aligned}$}
+		&
+		\resizebox{6cm}{!}{
+		\begin{tikzpicture}
+            \draw  plot[smooth, tension=.7] coordinates {(-3.5,0.5) (-3,2.5) (-1,3.5) (1.5,3.75) (4,3.5) (5,2.5) (5,0.5) (2.5,-2) (0,-3) (-3,-2) (-3.5,0.5)};
+            \node[label={45:{$\Omega$}}] at (5,3) {};
+            \coordinate (a) at (-1, 2);
+            \coordinate (z) at (-1.5, -1);
+            \coordinate (z0) at (4, 0.5);
+            \node[label={90:{$a$}},circle,fill=base16-eighties-light,inner sep=1pt] at (a) {};
+            \node[label={270:{$z$}},circle,fill=base16-eighties-light,inner sep=1pt] at (z) {};
+            \node[label={0:{$z_0$}},circle,fill=base16-eighties-light,inner sep=1pt] at (z0) {};
+            \draw[midarrow] (a) -- (z);
+            \draw[midarrow] (z) -- (z0);
+            \draw[midarrow] (z0) -- (a);
+            \node[label={60:{$\Delta$}}] at (1.5, 1.5) {};
+        \end{tikzpicture}
+        }
+	\end{tabular}
+
+	This implies that
+	\begin{equation*}
+		F(z) - F(z_0) = \int_{[z_0, z]} f(z) dz.
+	\end{equation*}
+	Divide both sides by $z - z_0$, then
+	\begin{align*}
+		\frac{F(z) - F(z_0)}{z - z_0} - f(z_0)
+			&= \frac{1}{z - z_0} \int_{[z_0, z]} f(z) dz - f(z_0) \\
+			&= \frac{1}{z - z_0} \int_{[z_0, z]} f(z) - f(z_0) dz \quad \text{since } \int_{[z_0, z]} dz = z - z_0
+	\end{align*}
+	Since $f \in H(\Omega)$ and is hence continuous, we have that
+	\begin{gather*}
+		\forall \epsilon > 0 \; \exists \delta > 0 \\
+		\abs{z - z_0} < \delta \implies \abs{f(z) - f(z_0)} < \epsilon
+	\end{gather*}
+	which in turn implies that
+	\begin{equation*}
+		\abs{\frac{F(z) - F(z_0)}{z - z_0} - f(z_0)} = \abs{\frac{1}{z - z_0} \int_{[z_0, z]} f(z) - f(z_0) dz} \leq \frac{1}{\abs{z - z_0}} \abs{\int_{[z_0, z]} \epsilon \; dz} = \epsilon
+	\end{equation*}
+	Hence, by first principle, $F'(z_0) = f(z_0)$. \qed
+\end{proof}
+
+\begin{thm}\label{thm:keyhole_thm}
+Let $\Omega \subseteq \mathbb{C}$ be a convex open set, and $C$ be a closed circle path in $\Omega$. If $w \in \Omega \setminus C^*$, where $C^*$ is the \hldefn{boundary of $C$}, and $f \in H(\Omega)$, then
+
+	\begin{tabular}{L{10cm} C{5cm}}
+		\begin{equation*}
+			f(w) \ind{w}{C} = \frac{1}{2 \pi i} \int_{C} \frac{f(z)}{z - w} dz
+		\end{equation*}
+		where
+		\begin{equation*}
+			\ind{w}{C} = \begin{cases}
+				1 & \text{if } w \text{ is inside } C \\
+				0 & \text{if } w \text{ is outside } C
+			\end{cases}
+		\end{equation*}
+		&
+		\resizebox{5cm}{!}{
+		\begin{tikzpicture}
+			\draw  plot[smooth, tension=.7] coordinates {(-3.5,0.5) (-3,2.5) (-1,3.5) (1.5,3.5) (3,2.5) (2.5,-1) (0,-2) (-3,-1.5) (-3.5,0.5)};
+            \node[label={45:{$\Omega$}}] at (3,3) {};
+            \draw[midarrow={latex}{0.1}] (0, 0) circle (1.5);
+            \node[label={45:{$C$}}] at (1, 1) {};
+            \node[label={315:{$w$}},circle,fill=base16-eighties-light,inner sep=1pt] at (0.5, 0.5) {};
+		\end{tikzpicture}
+		}
+	\end{tabular}
+	is called the \hlnoteb{index of $w$ with respect to $C$}, or the \hldefn{winding number} of $C$ around $w$.
+\end{thm}
+
+\begin{proof}
+	$ $ \\
+	\begin{tabular}{L{9cm} C{6cm}}
+		Let $w \in \Omega \setminus C^*$. Define
+		\begin{equation*}
+			g(w) = \begin{cases}
+				\frac{f(z) - f(w)}{z - w} & \text{if } z \neq w \\
+				f'(w) 	& \text{if } z = w
+			\end{cases}
+		\end{equation*}
+		By the construction of $g$, $g$ is continuous on $\Omega$, and $g \in H(\Omega \setminus \{w\})$.
+
+		\hlnotec{We need to} construct a convex set $\Omega' \subseteq \Omega$ that contains $\gamma_{\delta, \epsilon}$ such that $g \in H(\Omega')$.
+		&
+		\resizebox{6cm}{!}{
+		\begin{tikzpicture}
+			\draw  plot[smooth, tension=.7] coordinates {(-3.5,0.5) (-3,2.5) (-1,3.5) (1.5,3.5) (3,2.5) (2.5,-1) (0,-2) (-3,-1.5) (-3.5,0.5)};
+            \node[label={45:{$\Omega$}}] at (3,3) {};
+            \centerarc[midarrow={latex}{0.5}](0,0)(50:400:1.5);
+            \node[label={180:{$\gamma_{\delta, \epsilon}$}}] at (-1.4,-0.5) {};
+            \node[label={0:{$C$}}] at (1.5,0) {};
+            \coordinate (w) at (0.5, 0.5);
+            \node[label={270:{$w$}},circle,fill=base16-eighties-light,inner sep=1pt] at (w) {};
+            \centerarc[midarrow={latex}{0.5}](w)(390:60:0.5);
+            \node[label={270:{$C_\epsilon$}}] at (0.5, 0) {};
+            \draw[<->] (w) -- (0, 0.5) node[midway,above] {$\epsilon$};
+            \draw[midarrow] (0.75, 0.93301270189221932338) -- (0.96418141452980898948, 1.1490666646784670528);
+            \draw[midarrow] (1.1490666646784670528, 0.96418141452980898948) -- (0.93301270189221932338, 0.75);
+            \draw[<->] (1.07418141452980898948, 1.2590666646784670528) -- (1.2590666646784670528, 1.07418141452980898948) node[midway,above] {$\delta$};
+		\end{tikzpicture}
+		}
+	\end{tabular}
+
+	We now follow a similar argument as in the proof for \cref{thm:cauchy_s_theorem_for_convex_set}. Let $\epsilon > 0$ such that $\exists \delta > 0$,  so that we can define the ``keyhole'' $\gamma_{\delta, \epsilon}$ which omits $w$. Consider $D(w, \epsilon)$, call the image of the border of $D(w, \epsilon)$ as $C_\epsilon$, let $\delta$ be the width of the ``corridor'', and the two paths that are the ``sides of the corridor'' be called $C_{\delta_1}, C_{\delta_2}$ respectively. Define $G(z) = \int_{[a, z]} g(z) dz$, where $a$ and $z$ are in the interior of $C$ but not in the interior of $C_\epsilon$. Then if we define a set $\Omega'$ such that it contains the interior of $\gamma_{\delta, \epsilon}$, we have that $\Omega'$ is a convex open set, and $G \in H(\Omega')$. By \cref{thm:cauchy_s_theorem_for_convex_set}, $G' = g$.
+
+	Also from \cref{thm:cauchy_s_theorem_for_convex_set}, we have that $\int_{\gamma_{\delta, \epsilon}} g(z) dz = 0$ for any $\epsilon, \delta > 0$. As $\delta \to 0^+$, we have that the integrals over $C_{\delta_1}$ and $C_{\delta_2}$ cancel out. Hence, we are left with
+
+	\begin{equation*}
+		\int_{C} g(z) dz + \int_{C_\epsilon} g(z) dz = 0
+	\end{equation*}
+
+	Let's put our focus on the smaller circle, $C_\epsilon$. Now as $\epsilon \to 0^+$, $\frac{f(z) - f(w)}{z - w} \to 0$, and thus
+	\begin{equation*}
+		\int_{C_\epsilon} g(z) dz = \int_{C_\epsilon} \frac{f(z) - f(w)}{z - w} dz \to 0
+	\end{equation*}
+	Therefore,
+	\begin{equation*}
+		\int_{C} g(z) dz = 0
+	\end{equation*}
+	which implies, in the limit, that
+	\begin{align*}
+		\int_{C} \frac{f(z)}{z - w} dz
+			&= \int_{C} \frac{f(w)}{z - w} dz \\
+			&= 2 \pi i f(w) \ind{w}{C} \quad \text{where } \ind{w}{C} = \int_{C} \frac{dz}{z - w} 
+	\end{align*}
+	This completes the proof. \qed
+
+	\hlwarn{Note: sketchy proof; amend on next lecture}
+\end{proof}
+
+% section cauchy_s_integral_formula (end)
+
+% chapter lecture_13_feb_9th_2018 (end)
 \end{document}

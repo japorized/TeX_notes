@@ -1,0 +1,40 @@
+<snippet>
+	<content><![CDATA[
+% Document Head
+\documentclass[11pt, oneside]{book}
+\input{latex-classnotes-preamble.tex}
+\usepackage[most]{tcolorbox}
+
+\pagecolor{white}
+\color{black}
+
+% Main Body
+\title{${1:Title}}
+\author{Johnson Ng}
+
+\begin{document}
+
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} l @{\extracolsep{\fill}} l @{\extracolsep{\fill}} l}
+	Student name &: ${2:name}	&	UW ID\#		&: ${3:student code} \\\\
+	Class 		 &: ${4:class code}		&	Assignment 	&: \#${5:assignment number} \\\\
+	Term 		 &: ${6:term}
+\end{tabular*}
+
+\hrule
+
+\begin{enumerate}
+	\item ${0:question}
+	\begin{tcolorbox}[arc=0mm]
+		\begin{proof}
+			
+		\end{proof}
+	\end{tcolorbox}
+\end{enumerate}
+
+\end{document}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<!-- <tabTrigger>hello</tabTrigger> -->
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>text.tex.latex</scope>
+</snippet>

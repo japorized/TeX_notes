@@ -50,8 +50,10 @@
         },
         postaction={decorate}
     },
-    midarrow/.default={>}{0.5}
+    midarrow/.default={latex}{0.5}
 }
+\def\centerarc[#1](#2)(#3:#4:#5)% Syntax: [draw options] (center) (initial angle:final angle:radius)
+    { \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5); }
 
 % enumitems
 \newlist{inlinelist}{enumerate*}{1}
@@ -148,6 +150,7 @@
 \DeclareMathOperator{\re}{Re}
 \DeclareMathOperator{\im}{Im}
 \DeclareMathOperator{\caparg}{Arg}
+\DeclareMathOperator{\Ind}{Ind}
 
 % Graph styles
 \pgfplotsset{compat=1.15}
@@ -177,6 +180,8 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\hlnotec}[1]{\textcolor{base16-eighties-brown}{\textbf{#1}}}
 \newcommand{\WTP}{\textcolor{base16-eighties-brown}{WTP}}
 \newcommand{\WTS}{\textcolor{base16-eighties-brown}{WTS}}
+\newcommand{\ind}[2]{\Ind_{#2}(#1)}
+\renewcommand{\epsilon}{\varepsilon}
 
 % Comment the two lines below if you want to print the document
 \pagecolor{base16-eighties-dark}
