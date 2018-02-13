@@ -1864,9 +1864,9 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 \begin{defn}[Contour]\label{defn:contour}
 	Given a path $\gamma: [a, b] \to \mathbb{C}$ and $f : \mathbb{C} \to \mathbb{C}$, a function continuous on $\gamma$. We define the integral $f$ along $\gamma$, called a \hldefn{contour}, as
 	\begin{equation}
-		\int_{\gamma} f(z) dz := \int_{a}^{b} f(\gamma(t))\gamma'(t) dt
+		\int_{\gamma} f(z) \dif{z} := \int_{a}^{b} f(\gamma(t))\gamma'(t) dt
 	\end{equation}
-	where we let $z = \gamma(t)$ and hence $dz = \gamma'(t) dt$.
+	where we let $z = \gamma(t)$ and hence $\dif{z} = \gamma'(t) dt$.
 \end{defn}
 
 \begin{remark}
@@ -1895,11 +1895,11 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 
 			Now
 			\begin{align*}
-				\int_{\gamma_1} f(z) dz
+				\int_{\gamma_1} f(z) \dif{z}
 					&= \int_{a}^{b} f\big( \gamma_1(t) \big) \gamma_1'(t) dt \\
 					&= \int_{a}^{b} f\Big( \gamma_2 \big( h(t) \big) \Big) h'(t) \gamma_2'(h(t)) dt \\
 					&= \int_{c}^{d} f\big( \gamma_2(\tau) \big) \gamma_2'(\tau) d\tau \\
-					&= \int_{\gamma_2} f(z) dz
+					&= \int_{\gamma_2} f(z) \dif{z}
 			\end{align*}
 			This completes the proof. \qed
 		\end{proof}
@@ -1924,7 +1924,7 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 \begin{note}[Recall]
 	Let $\gamma: [a, b] \to \mathbb{C}$ be a piecewise smooth curve. For a function $f$ that is continuous on $\gamma$, we defined
 	\begin{align*}
-		\int_{\gamma} f(z) dz
+		\int_{\gamma} f(z) \dif{z}
 			&= \int_{a}^{b} f\big( \gamma(t) \big) \gamma'(t) dt \\
 			&= \int_{a}^{b} \re\Big(f\big( \gamma(t) \big) \gamma'(t) \Big) dt + i \int_{a}^{b} \im\Big(f\big( \gamma(t) \big) \gamma'(t) \Big) dt
 	\end{align*}
@@ -1936,10 +1936,10 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 \end{note}
 
 \begin{eg}
-	Let $f(z) = f(x + iy) = x^2 + y^2$ be continuous along $\gamma : [0, 1] \to \mathbb{C} \enspace t \mapsto t + it$. Evaluate $\int_{\gamma} f(z) dz$.
+	Let $f(z) = f(x + iy) = x^2 + y^2$ be continuous along $\gamma : [0, 1] \to \mathbb{C} \enspace t \mapsto t + it$. Evaluate $\int_{\gamma} f(z) \dif{z}$.
 	\begin{solution}
 		\begin{align*}
-			\int_{\gamma} f(z) dz
+			\int_{\gamma} f(z) \dif{z}
 				&= \int_{0}^{1} f(t + it)(1 + i) dt \\
 				&= (1 + i)^2 \int_{0}^{1} t^2 dt \\
 				&= (1 + i)^2 \cdot \frac{1}{3} t^3 \Big|_{0}^{1} \\
@@ -1949,7 +1949,7 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 \end{eg}
 
 \begin{eg}\label{eg:integral_of_path_on_a_circle}
-	$\forall n \in \mathbb{Z}$, evaluate $\int_{\gamma} z^n dz$ that is continue on the path $\gamma$ that describes any circle centered at origin oriented anticlockwise.
+	$\forall n \in \mathbb{Z}$, evaluate $\int_{\gamma} z^n \dif{z}$ that is continue on the path $\gamma$ that describes any circle centered at origin oriented anticlockwise.
 
 	\begin{solution}
 		Let $R \in \mathbb{R}$, and define
@@ -1959,7 +1959,7 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 		\end{gather*}
 		Then
 		\begin{align*}
-			\int_{\gamma} z^n dz
+			\int_{\gamma} z^n \dif{z}
 				&= \int_{0}^{1} R^ne^{2 \pi i n t} \cdot 2 \pi i \cdot Re^{2 \pi i t} dt \\
 				&= 2 \pi i R^{n + 1} \int_{0}^{1} e^{2 \pi i (n + 1) t} dt \\
 				&= \begin{cases}
@@ -1981,7 +1981,7 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 
 \begin{propo}[Properties of integrals in $\mathbb{C}$]\label{propo:properties_of_integrals_in_c}
 	\begin{enumerate}
-		\item \hlnotea{(Linearity)} Let $\alpha, \beta \in \mathbb{C}$. $\int_{\gamma} \left(\alpha f(z) + \beta g(z) \right) dz = \alpha \int_{\gamma} f(z) dz + \beta \int_{\gamma} g(z) dz$. \label{item:linearity_property_of_integrals}
+		\item \hlnotea{(Linearity)} Let $\alpha, \beta \in \mathbb{C}$. $\int_{\gamma} \left(\alpha f(z) + \beta g(z) \right) \dif{z} = \alpha \int_{\gamma} f(z) \dif{z} + \beta \int_{\gamma} g(z) \dif{z}$. \label{item:linearity_property_of_integrals}
 		\item \begin{enumerate}
 			\item For any complex-valued function $g$, and $b \geq a$,
 				\begin{equation*}
@@ -1989,12 +1989,12 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 				\end{equation*} \label{item:absval_integral_less_than_integral_absval}
 			\item For any function $f(z)$ that is continuous on a path $\gamma: [a, b] \to \mathbb{C}$,
 					\begin{equation*}
-						\abs{\int_{\gamma} f(z) dz} \leq \sup_{z \in \gamma} \abs{f(z)} \cdot \underbrace{\int_{a}^{b} \abs{\gamma'(t)} dt}_{\text{length of the path}}
+						\abs{\int_{\gamma} f(z) \dif{z}} \leq \sup_{z \in \gamma} \abs{f(z)} \cdot \underbrace{\int_{a}^{b} \abs{\gamma'(t)} dt}_{\text{length of the path}}
 					\end{equation*}\label{item:absval_integral_less_than_fnsup_times_arc_length}
 		\end{enumerate}
 		\item If $\gamma^-$ is the path $\gamma: [a, b] \to \mathbb{C}$ with a reversed direction, then
 			\begin{equation*}
-				\int_{\gamma^-} f(z) dz = - \int_{\gamma} f(z) dz
+				\int_{\gamma^-} f(z) \dif{z} = - \int_{\gamma} f(z) \dif{z}
 			\end{equation*}\label{item:reversed_path_orientation_gives_negative_integral}
 	\end{enumerate}
 \end{propo}
@@ -2002,13 +2002,13 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 \begin{proof}
 	\begin{enumerate}
 		\item \begin{align*}
-			\text{LHS}=&\int_{\gamma} \alpha f(z) + \beta g(z) dz \\
-				= &\int_{\gamma} \alpha \Big( \re(f(z)) + i \im(f(z)) \Big) + \beta \Big( \re(g(z)) + i \im(g(z)) \Big) dz \\
+			\text{LHS}=&\int_{\gamma} \alpha f(z) + \beta g(z) \dif{z} \\
+				= &\int_{\gamma} \alpha \Big( \re(f(z)) + i \im(f(z)) \Big) + \beta \Big( \re(g(z)) + i \im(g(z)) \Big) \dif{z} \\
 				= \begin{split}
 					&\alpha \int_{a}^{b} \Big( \re(f(z)) + i \im(f(z)) \Big) dt \\
 					&\quad + \beta \int_{a}^{b} \Big( \re(g(z)) + i \im(g(z)) \Big) dt
 				\end{split} \tag{$\dagger$}\label{eq:linearity_in_r} \\
-				= & \alpha \int_{a}^{b} f(z) dz + \beta \int_{a}^{b} g(z) dz
+				= & \alpha \int_{a}^{b} f(z) \dif{z} + \beta \int_{a}^{b} g(z) \dif{z}
 			\end{align*}
 			where \eqref{eq:linearity_in_r} is because of \cref{remark:integral_into_real_and_imaginary_parts} from an earlier remark and Linearity of Integrals in $\mathbb{R}$.\qed
 
@@ -2027,7 +2027,7 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 					  &= \int_{a}^{b} \abs{g(t)} dt = \text{RHS}
 				\end{align*} \qed
 			\item \begin{align*}
-					\text{LHS} &= \abs{\int_{\gamma} f(z) dz} \\
+					\text{LHS} &= \abs{\int_{\gamma} f(z) \dif{z}} \\
 						&= \abs{\int_{a}^{b} f\big( \gamma(t) \big) \gamma'(t) dt} \\
 						&\leq \int_{a}^{b} \abs{f\big( \gamma(t) \big) \gamma'(t)} dt \quad \text{by } \cref{item:absval_integral_less_than_integral_absval} \\
 						&\leq \int_{a}^{b} \sup_{z \in \gamma} \abs{f(z)} \abs{\gamma'(t)} dt \quad \text{since } \abs{f(z)} \leq \sup_{z \in \gamma} \abs{f(z)} \\
@@ -2036,11 +2036,11 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 		\end{enumerate}
 		\item Let $\gamma^-: [b, a] \to \mathbb{C}$ such that $\gamma^- = \gamma(b - t + a)$. Let $k = b - t + a$ so that $dk = -dt$, and $t = b \implies k = a \land t = a \implies k = b$. Note that $k \in [a, b]$ with this definition. Then
 			\begin{align*}
-				\text{LHS} &= \int_{\gamma^-} f(z) dz \\
+				\text{LHS} &= \int_{\gamma^-} f(z) \dif{z} \\
 					&= \int_{b}^{a} f\big( \gamma^- (t) \big) \gamma^{-'}(t) dt \\
 					&= \int_{b}^{a} f\big( \gamma(b - t + a) \big) \gamma'(b - t + a) dt \\
 					&= - \int_{a}^{b} f\big(\gamma(k)\big) \gamma'(k) dk \\
-					&= - \int_{\gamma} f(z) dz = \text{RHS}
+					&= - \int_{\gamma} f(z) \dif{z} = \text{RHS}
 			\end{align*}
 			as required. \qed
 	\end{enumerate}
@@ -2073,7 +2073,7 @@ To simplify statements from hereon, we shall use the following notations.
 	Let $\gamma:[a,b] \to \mathbb{C}$ be a path inside an open set $\Omega \subseteq \mathbb{C}$. Suppose $f(z)$ is continuous on $\gamma$, and has an antiderivative $F \in \Omega$. Then
 	\begin{equation}
 		\label{eq:fundamental_theorem_of_calculus}
-		\int_{\gamma} f(z) dz = F\big(\gamma(b)\big) - F\big(\gamma(a)\big)
+		\int_{\gamma} f(z) \dif{z} = F\big(\gamma(b)\big) - F\big(\gamma(a)\big)
 	\end{equation}
 \end{thm}
 
@@ -2082,12 +2082,12 @@ To simplify statements from hereon, we shall use the following notations.
 
 	Now
 	\begin{align*}
-		\int_{\gamma} f(z) dz
+		\int_{\gamma} f(z) \dif{z}
 			&= \int_{a}^{b} f\big(\gamma(t)\big)\gamma'(t) dt \\
 			&= \int_{a}^{b} F'\big(\gamma(t)\big)\gamma'(t) dt \\
 			&= \int_{a}^{b} G'(t) dt \\
 			&= G(b) - G(a) \quad \text{by applying FTC in } \mathbb{R} \text{ to real and imaginary parts} \\
-			&= F(\gamma(b)) F(\gamma(a))
+			&= F(\gamma(b)) - F(\gamma(a))
 	\end{align*}
 
 	If $\gamma$ is piecewise smooth, then we can simply apply the above to each of the smooth paths separately and sum up all of the integrals. \qed
@@ -2100,29 +2100,29 @@ To simplify statements from hereon, we shall use the following notations.
 \begin{crly}[Corollary of FTC]\label{crly:corollary_of_ftc}
 	If $F \in H(\Omega), \Omega \subseteq \mathbb{C}$ (hence $F'$ is continuous on $\Omega$), then
 	\begin{equation*}
-		\int_{\gamma} F'(z) dz = 0
+		\int_{\gamma} F'(z) \dif{z} = 0
 	\end{equation*}
 	on any closed path $\gamma$ on $\Omega$.
 \end{crly}
 
 \begin{proof}
-	A closed path $\gamma: [a, b] \to \mathbb{C}$ has $\gamma(a) = \gamma(b)$. By \cref{thm:fundamental_theorem_of_calculus}, $\int_{\gamma} F'(z) dz = F(\gamma(b)) - F(\gamma(a)) = 0$ as required. \qed
+	A closed path $\gamma: [a, b] \to \mathbb{C}$ has $\gamma(a) = \gamma(b)$. By \cref{thm:fundamental_theorem_of_calculus}, $\int_{\gamma} F'(z) \dif{z} = F(\gamma(b)) - F(\gamma(a)) = 0$ as required. \qed
 \end{proof}
 
 \begin{eg}
-	Take $f(z) = z^n$ where $n \in \mathbb{Z} \setminus \{-1\}$ as in \cref{eg:integral_of_path_on_a_circle}. Then $f$ is continuous on $\mathbb{C} \setminus \{0\}$ \hlwarn{(not sure why this would be problematic when we've already excluded -1 for n)}. Then $f = F'$ for $F(z) = \frac{z^{n + 1}}{n + 1}$ and $F \in H(\mathbb{C} \setminus \{0\})$. Therefore by \cref{crly:corollary_of_ftc}, $\int_{\gamma} z^n dz = 0$ for any closed path $\gamma$ not passing through $0$.
+	Take $f(z) = z^n$ where $n \in \mathbb{Z} \setminus \{-1\}$ as in \cref{eg:integral_of_path_on_a_circle}. Then $f$ is continuous on $\mathbb{C} \setminus \{0\}$ \hlwarn{(not sure why this would be problematic when we've already excluded -1 for n)}. Then $f = F'$ for $F(z) = \frac{z^{n + 1}}{n + 1}$ and $F \in H(\mathbb{C} \setminus \{0\})$. Therefore by \cref{crly:corollary_of_ftc}, $\int_{\gamma} z^n \dif{z} = 0$ for any closed path $\gamma$ not passing through $0$.
 
-	If we do include $-1$ for $n$, note that $F'$ would not be continuous on $0$, and thus the corollary would not apply. We have also shown in the earlier example that $\int_{\gamma} \frac{1}{z} dz = 2 \pi i$.
+	If we do include $-1$ for $n$, note that $F'$ would not be continuous on $0$, and thus the corollary would not apply. We have also shown in the earlier example that $\int_{\gamma} \frac{1}{z} \dif{z} = 2 \pi i$.
 \end{eg}
 
 \begin{note}[Recall]
-	The \hldefn{interior} of a set $\Omega$ is defined as $\{z \in \Omega : \forall \epsilon > 0 \; B(z, \epsilon) \subseteq \Omega\}$.
+	The \hldefn{interior} of a set $\Omega$ is defined as $\{z \in \Omega : \forall \epsilon > 0 \; B(z, \epsilon) \subseteq \Omega\}$, and denoted as $\Omega^0$.
 \end{note}
 
 \begin{thm}[Goursat's Theorem / Cauchy's Theorem for a triangle]\label{thm:goursat_s_theorem}
 	Let $\Omega \subseteq \mathbb{C}$ be an open set. Suppose $\Delta \subseteq \Omega$ is a closed triangle whose interior is also contained in $\Omega$. Let $f \in H(\Omega)$. Then
 	\begin{equation*}
-		\int_{\Delta} f(z) dz = 0
+		\int_{\Delta} f(z) \dif{z} = 0
 	\end{equation*}
 \end{thm}
 
@@ -2131,7 +2131,7 @@ This theorem holds more meaning than the presented statement, as it implies that
 \begin{proof}
 	Let $\Delta_1^{(1)}, \Delta_2^{(1)}, \Delta_3^{(1)}, \Delta_4^{(1)}$ be smaller triangles by bisecting each side of $\Delta$. $\forall i \in \{1, 2, 3, 4\}$, orient $\Delta_i^{(1)}$ anticlockwise. Then we have
 	\begin{equation}\label{eq:goursat_eq1}
-		J := \int_{\Delta} f(z) dz = \sum_{i=1}^{4} \int_{\Delta_i^{(1)}} f(z) dz 
+		J := \int_{\Delta} f(z) \dif{z} = \sum_{i=1}^{4} \int_{\Delta_i^{(1)}} f(z) \dif{z} 
 	\end{equation}
 	Note that there must at least one of the $\Delta_i^{(1)}$ such that $\abs{\int_{\Delta_i^{(1)}} } \geq \frac{\abs{J}}{4}$, since $\forall i \in \{1, 2, 3, 4\}, \abs{\int_{\Delta_i^{(1)}} } < \frac{\abs{J}}{4}$ would contradict \cref{eq:goursat_eq1}. Without loss of generality, let $\Delta_1^{(1)}$ be the largest triangle of the four.
 
@@ -2141,7 +2141,7 @@ This theorem holds more meaning than the presented statement, as it implies that
 	\end{equation*}
 	then we have that for each $j \in \mathbb{N} \setminus \{0\}$, $\Delta_i^{(j)}$ is such that
 	\begin{equation*}
-		\abs{\int_{\Delta_i^{(j)}} f(z) dz} \geq \frac{\abs{J}}{4^j} 
+		\abs{\int_{\Delta_i^{(j)}} f(z) \dif{z}} \geq \frac{\abs{J}}{4^j} 
 	\end{equation*}
 	and $\ell(\Delta_i^{(j)}) = \frac{1}{2^j} \ell (\Delta)$. By the \hlnotea{Nested Rectangle Theorem from Real Analysis}, $\exists z_0 \in \mathbb{C}$ such that $z_0 \in \Delta_i^{(j)}$ for all $j \in \mathbb{N} \setminus \{0\}$ that is a limit point. Since $z_0 \in \Omega \; \land \; f \in H(\Omega)$, we have that
 	\begin{gather*}
@@ -2151,15 +2151,15 @@ This theorem holds more meaning than the presented statement, as it implies that
 
 	Consider $D(z_0, \delta), \exists n \in \mathbb{N} \setminus \{0\}, \Delta_1^{(n)} \subseteq D(z_0, \delta)$. Consider
 	\begin{equation*}
-		\int_{\Delta_1^{(n)}} f(z) dz = \int_{\Delta_1^{(n)}} \big(f(z) - f(z_0) - f'(z_0)(z - z_0)\big) dz,
+		\int_{\Delta_1^{(n)}} f(z) \dif{z} = \int_{\Delta_1^{(n)}} \big(f(z) - f(z_0) - f'(z_0)(z - z_0)\big) \dif{z},
 	\end{equation*}
-	where we note that $\int_{\Delta_1^{(n)}} f(z_0) dz = \int_{\Delta_1^{(n)}} f'(z_0)(z - z_0) dz = 0$ by \cref{crly:corollary_of_ftc}.
+	where we note that $\int_{\Delta_1^{(n)}} f(z_0) \dif{z} = \int_{\Delta_1^{(n)}} f'(z_0)(z - z_0) \dif{z} = 0$ by \cref{crly:corollary_of_ftc}.
 
 	By \cref{item:absval_integral_less_than_integral_absval} in \cref{propo:properties_of_integrals_in_c},
 	\begin{align*}
-		\abs{\int_{\Delta_1^{(n)}} f(z) dz}
-			&\leq \int_{\Delta_1^{(n)}} \abs{f(z) - f(z_0) - f'(z_0)(z - z_0)} dz \\
-			&\leq \int_{\Delta_1^{(n)}} \epsilon \abs{z - z_0} dz \leq \epsilon \ell(\Delta_1^{(n)})\int_{\Delta_1^{(n)}} dz = \epsilon \ell(\Delta_1^{(n)})^2
+		\abs{\int_{\Delta_1^{(n)}} f(z) \dif{z}}
+			&\leq \int_{\Delta_1^{(n)}} \abs{f(z) - f(z_0) - f'(z_0)(z - z_0)} \dif{z} \\
+			&\leq \int_{\Delta_1^{(n)}} \epsilon \abs{z - z_0} \dif{z} \leq \epsilon \ell(\Delta_1^{(n)})\int_{\Delta_1^{(n)}} \dif{z} = \epsilon \ell(\Delta_1^{(n)})^2
 	\end{align*}
 	where we note that $\abs{z - z_0} \leq \ell(\Delta_1^{(n)}$ since $z \in \Delta_1^{(n)}$. This implies that
 	\begin{align*}
@@ -2176,7 +2176,6 @@ This theorem holds more meaning than the presented statement, as it implies that
 
 \chapter*{Tutorial Jan 31 2018}
 \addcontentsline{toc}{chapter}{Tutorial}
-	\label{tutorial:tutorial_jan_31_2018}
 
 \begin{note}
 	Consider the power series $\sum_{n \geq 0} a_n (z - z_0)^n$ and let $\frac{1}{R} := \limsup_{n \to \infty} \sup \sqrt[n]{\abs{a_n}} \in [0, \infty)$.
@@ -2187,7 +2186,7 @@ This theorem holds more meaning than the presented statement, as it implies that
 	\end{itemize}
 \end{note}
 
-\section*{Practice Problems} % (fold)
+\section{Practice Problems} % (fold)
 \label{sec:practice_problems}
 
 \begin{enumerate}
@@ -2225,7 +2224,7 @@ This theorem holds more meaning than the presented statement, as it implies that
 		\begin{equation*}
 			c_m = \frac{f^{(m)}(z_0)}{m!}
 		\end{equation*}
-		for any $m \in \mathbb{Z}, m \geq 0,$ where $f^{(m)}(z_0)$ denotes the $m$th derivative of $f$ at $z_0$.
+		for any $m \in \mathbb{Z}, m \geq 0,$ where $f^{(m)}(z_0)$ denotes the $m$th derivative of $f$ at $z_0$. \label{item:tutorial_q2}
 
 		\begin{solution}
 			Since $f(z)$ is a power series and the radius of convergence $R \neq 0$, by \cref{thm:power_function_holomorphic_function_region_of_convergence}, $f(z)$ is $\mathbb{C}$-differentiable and each derivative has the same radius of convergence. By induction, it can be shown that
@@ -2246,14 +2245,14 @@ This theorem holds more meaning than the presented statement, as it implies that
 		\end{solution}
 	\item Let $\gamma$ be the arc of the unit circle centered at the origin in the first quadrant oriented clockwise (from $i$ to 1). Evaluate the integral
 		\begin{equation*}
-			\int_{\gamma} \bar{z}^2 dz
+			\int_{\gamma} \bar{z}^2 \dif{z}
 		\end{equation*}
 		by parameterizing the curve.
 
 		\begin{solution}
 			Consider the parameterization $\gamma: [ -\frac{\pi}{2}, 0 ] \to \mathbb{C}$ given by $\gamma(t) = e^{-it}$. Note that $\bar{e^{-it}} = e^{it}$. Then
 			\begin{align*}
-				\int_{\gamma} \bar{z}^2 dz
+				\int_{\gamma} \bar{z}^2 \dif{z}
 					&= \int_{-\frac{\pi}{2}}^{0} e^{2it} \cdot \left( -i e^{-it} \right) dt \\
 					&= -i \int_{-\frac{\pi}{2}}^{0} e^{it} dt \\
 					&= -e^{it} \at{\frac{\pi}{2}}{0} \\
@@ -2264,11 +2263,11 @@ This theorem holds more meaning than the presented statement, as it implies that
 		\begin{solution}
 			Note that $z\bar{z} = \abs{z}^2$, so on the circle, we have $\bar{z} = \frac{1}{z}$. Thus the integral is equivalent to
 			\begin{equation*}
-				\int_{\gamma} \frac{1}{z^2} dz
+				\int_{\gamma} \frac{1}{z^2} \dif{z}
 			\end{equation*}
 			Note that the antiderivative of $\frac{1}{z^2}$ is $-\frac{1}{z}$. Thus by \cref{thm:fundamental_theorem_of_calculus},
 			\begin{equation*}
-				\int_{\gamma} \bar{z}^2 dz = \int_{\gamma} \frac{1}{z^2} = F(\gamma(0)) - F\left(\gamma\left(-\frac{\pi}{2}\right)\right) = -\frac{1}{e^{-i(0)}} + \frac{1}{e^{-i(-\pi/2)}} = - 1 - i 
+				\int_{\gamma} \bar{z}^2 \dif{z} = \int_{\gamma} \frac{1}{z^2} = F(\gamma(0)) - F\left(\gamma\left(-\frac{\pi}{2}\right)\right) = -\frac{1}{e^{-i(0)}} + \frac{1}{e^{-i(-\pi/2)}} = - 1 - i 
 			\end{equation*}
 		\end{solution}
 
@@ -2338,12 +2337,12 @@ This theorem holds more meaning than the presented statement, as it implies that
 		\end{solution}
 	\item Show that for any path $\gamma: [a, b] \to \mathbb{C}$ and $f(z)$ continuous on $\gamma$, we have
 		\begin{equation*}
-			\abs{\int_{\gamma} f(z) dz} \leq \sup_{z \in \gamma} \abs{f(z)} \int_{a}^{b} \abs{\gamma'(t)} dt
+			\abs{\int_{\gamma} f(z) \dif{z}} \leq \sup_{z \in \gamma} \abs{f(z)} \int_{a}^{b} \abs{\gamma'(t)} dt
 		\end{equation*}
 
 		\begin{solution}
 			\begin{align*}
-				\text{LHS} &= \abs{\int_{\gamma} f(z) dz} \\
+				\text{LHS} &= \abs{\int_{\gamma} f(z) \dif{z}} \\
 					&= \abs{\int_{a}^{b} f\big( \gamma(t) \big) \gamma'(t) dt} \text{ by definition} \\
 					&\leq \int_{a}^{b} \abs{f\big( \gamma(t) \big) \gamma'(t)} dt \quad \text{by } \cref{item:absval_integral_less_than_integral_absval} \text{ of } \cref{propo:properties_of_integrals_in_c} \\
 					&\leq \int_{a}^{b} \sup_{z \in \gamma} \abs{f(z)} \abs{\gamma'(t)} dt \quad \text{since } \abs{f(z)} \leq \sup_{z \in \gamma} \abs{f(z)} \\
@@ -2370,14 +2369,14 @@ This theorem holds more meaning than the presented statement, as it implies that
 	Let $\Omega \subseteq \mathbb{C}$ be a convex open set, and $f \in H(\Omega)$. Then
 	\begin{enumerate}
 	 	\item $f = F'$ for some $F \in H(\Omega)$.
-	 	\item $\int_{\gamma} f(z) dz = 0$ for any closed path $\gamma \in \Omega$.
+	 	\item $\int_{\gamma} f(z) \dif{z} = 0$ for any closed path $\gamma \in \Omega$.
 	 \end{enumerate} 
 \end{thm}
 
 \begin{proof}
 	Note that it is sufficient to prove 1 since 1 $\implies$ 2 by \cref{thm:fundamental_theorem_of_calculus}.
 
-	Let $a \in \Omega$, and let $[a, z]$ denote the straight line from $a$ to $z$. Since $\Omega$ is a convex set, $[a, z]$ is in $\Omega$. Define $F(z)$\footnote{It can be verified that $F$ is continuous.} $= \int_{[a, z]} f(z) dz$\footnote{This is a keys step: defining an ``antiderivative'' as how we would expect it to be.}.
+	Let $a \in \Omega$, and let $[a, z]$ denote the straight line from $a$ to $z$. Since $\Omega$ is a convex set, $[a, z]$ is in $\Omega$. Define $F(z)$\footnote{It can be verified that $F$ is continuous.} $= \int_{[a, z]} f(z) \dif{z}$\footnote{This is a keys step: defining an ``antiderivative'' as how we would expect it to be.}.
 
 	\begin{tabular}{L{9cm} C{6cm}}
 		\hlnotec{WTS} $F \in H(\Omega), F'(z_0) = f(z_0)$ for any $z_0 \in \Omega$.
@@ -2385,9 +2384,9 @@ This theorem holds more meaning than the presented statement, as it implies that
 		Now by \cref{thm:goursat_s_theorem},
 
 		{$\!\begin{aligned}
-			0 &= \int_{\Delta} f(z) dz \\
-			  &= \int_{[a, z]} f(z) dz + \int_{[z, z_0]} f(z) dz +  \int_{[z_0, a]} f(z) dz \\
-			  &= F(z) + \int_{[z, z_0]} f(z) dz + \left(- F(z_0) \right)
+			0 &= \int_{\Delta} f(z) \dif{z} \\
+			  &= \int_{[a, z]} f(z) \dif{z} + \int_{[z, z_0]} f(z) \dif{z} +  \int_{[z_0, a]} f(z) \dif{z} \\
+			  &= F(z) + \int_{[z, z_0]} f(z) \dif{z} + \left(- F(z_0) \right)
 		\end{aligned}$}
 		&
 		\resizebox{6cm}{!}{
@@ -2410,13 +2409,13 @@ This theorem holds more meaning than the presented statement, as it implies that
 
 	This implies that
 	\begin{equation*}
-		F(z) - F(z_0) = \int_{[z_0, z]} f(z) dz.
+		F(z) - F(z_0) = \int_{[z_0, z]} f(z) \dif{z}.
 	\end{equation*}
 	Divide both sides by $z - z_0$, then
 	\begin{align*}
 		\frac{F(z) - F(z_0)}{z - z_0} - f(z_0)
-			&= \frac{1}{z - z_0} \int_{[z_0, z]} f(z) dz - f(z_0) \\
-			&= \frac{1}{z - z_0} \int_{[z_0, z]} f(z) - f(z_0) dz \quad \text{since } \int_{[z_0, z]} dz = z - z_0
+			&= \frac{1}{z - z_0} \int_{[z_0, z]} f(z) \dif{z} - f(z_0) \\
+			&= \frac{1}{z - z_0} \int_{[z_0, z]} f(z) - f(z_0) \dif{z} \quad \text{since } \int_{[z_0, z]} \dif{z} = z - z_0
 	\end{align*}
 	Since $f \in H(\Omega)$ and is hence continuous, we have that
 	\begin{gather*}
@@ -2425,25 +2424,23 @@ This theorem holds more meaning than the presented statement, as it implies that
 	\end{gather*}
 	which in turn implies that
 	\begin{equation*}
-		\abs{\frac{F(z) - F(z_0)}{z - z_0} - f(z_0)} = \abs{\frac{1}{z - z_0} \int_{[z_0, z]} f(z) - f(z_0) dz} \leq \frac{1}{\abs{z - z_0}} \abs{\int_{[z_0, z]} \epsilon \; dz} = \epsilon
+		\abs{\frac{F(z) - F(z_0)}{z - z_0} - f(z_0)} = \abs{\frac{1}{z - z_0} \int_{[z_0, z]} \left[f(z) - f(z_0)\right] \dif{z}} \leq \frac{1}{\abs{z - z_0}} \abs{\int_{[z_0, z]} \epsilon \; \dif{z}} = \epsilon
 	\end{equation*}
 	Hence, by first principle, $F'(z_0) = f(z_0)$. \qed
 \end{proof}
 
-\begin{thm}\label{thm:keyhole_thm}
+\begin{thm}[Cauchy's Integral Formula 1]\label{thm:cauchy_s_integral_formula_1}
 Let $\Omega \subseteq \mathbb{C}$ be a convex open set, and $C$ be a closed circle path in $\Omega$. If $w \in \Omega \setminus C^*$, where $C^*$ is the \hldefn{boundary of $C$}, and $f \in H(\Omega)$, then
 
 	\begin{tabular}{L{10cm} C{5cm}}
 		\begin{equation*}
-			f(w) \ind{w}{C} = \frac{1}{2 \pi i} \int_{C} \frac{f(z)}{z - w} dz
+			f(w) \ind{w}{C} = \frac{1}{2 \pi i} \int_{C} \frac{f(z)}{z - w} \dif{z}
 		\end{equation*}
 		where
 		\begin{equation*}
-			\ind{w}{C} = \begin{cases}
-				1 & \text{if } w \text{ is inside } C \\
-				0 & \text{if } w \text{ is outside } C
-			\end{cases}
+			\ind{w}{C} = \frac{1}{2 \pi i} \int_{\gamma} \frac{\dif{z}}{z - w}
 		\end{equation*}
+		denotes the number of times the countour $C$ winds around the point $w$.
 		&
 		\resizebox{5cm}{!}{
 		\begin{tikzpicture}
@@ -2491,34 +2488,238 @@ Let $\Omega \subseteq \mathbb{C}$ be a convex open set, and $C$ be a closed circ
 		}
 	\end{tabular}
 
-	We now follow a similar argument as in the proof for \cref{thm:cauchy_s_theorem_for_convex_set}. Let $\epsilon > 0$ such that $\exists \delta > 0$,  so that we can define the ``keyhole'' $\gamma_{\delta, \epsilon}$ which omits $w$. Consider $D(w, \epsilon)$, call the image of the border of $D(w, \epsilon)$ as $C_\epsilon$, let $\delta$ be the width of the ``corridor'', and the two paths that are the ``sides of the corridor'' be called $C_{\delta_1}, C_{\delta_2}$ respectively. Define $G(z) = \int_{[a, z]} g(z) dz$, where $a$ and $z$ are in the interior of $C$ but not in the interior of $C_\epsilon$. Then if we define a set $\Omega'$ such that it contains the interior of $\gamma_{\delta, \epsilon}$, we have that $\Omega'$ is a convex open set, and $G \in H(\Omega')$. By \cref{thm:cauchy_s_theorem_for_convex_set}, $G' = g$.
+	We now follow a similar argument as in the proof for \cref{thm:cauchy_s_theorem_for_convex_set}. Let $\epsilon > 0$ such that $\exists \delta > 0$,  so that we can define the ``keyhole'' $\gamma_{\delta, \epsilon}$ which omits $w$. Consider $D(w, \epsilon)$, call the image of the border of $D(w, \epsilon)$ as $C_\epsilon$, let $\delta$ be the width of the ``corridor'', and the two paths that are the ``sides of the corridor'' be called $C_{\delta_1}, C_{\delta_2}$ respectively. Define $G(z) = \int_{[a, z]} g(z) \dif{z}$, where $a$ and $z$ are in the interior of $C$ but not in the interior of $C_\epsilon$. Then if we define a set $\Omega'$ such that it contains the interior of $\gamma_{\delta, \epsilon}$, we have that $\Omega'$ is a convex open set, and $G \in H(\Omega')$. By \cref{thm:cauchy_s_theorem_for_convex_set}, $G' = g$.
 
-	Also from \cref{thm:cauchy_s_theorem_for_convex_set}, we have that $\int_{\gamma_{\delta, \epsilon}} g(z) dz = 0$ for any $\epsilon, \delta > 0$. As $\delta \to 0^+$, we have that the integrals over $C_{\delta_1}$ and $C_{\delta_2}$ cancel out. Hence, we are left with
+	Also from \cref{thm:cauchy_s_theorem_for_convex_set}, we have that $\int_{\gamma_{\delta, \epsilon}} g(z) \dif{z} = 0$ for any $\epsilon, \delta > 0$. As $\delta \to 0^+$, we have that the integrals over $C_{\delta_1}$ and $C_{\delta_2}$ cancel out. Hence, we are left with
 
 	\begin{equation*}
-		\int_{C} g(z) dz + \int_{C_\epsilon} g(z) dz = 0
+		\int_{C} g(z) \dif{z} + \int_{C_\epsilon} g(z) \dif{z} = 0
 	\end{equation*}
 
 	Let's put our focus on the smaller circle, $C_\epsilon$. Now as $\epsilon \to 0^+$, $\frac{f(z) - f(w)}{z - w} \to 0$, and thus
 	\begin{equation*}
-		\int_{C_\epsilon} g(z) dz = \int_{C_\epsilon} \frac{f(z) - f(w)}{z - w} dz \to 0
+		\int_{C_\epsilon} g(z) \dif{z} = \int_{C_\epsilon} \frac{f(z) - f(w)}{z - w} \dif{z} \to 0
 	\end{equation*}
 	Therefore,
 	\begin{equation*}
-		\int_{C} g(z) dz = 0
+		\int_{C} g(z) \dif{z} = 0
 	\end{equation*}
 	which implies, in the limit, that
-	\begin{align*}
-		\int_{C} \frac{f(z)}{z - w} dz
-			&= \int_{C} \frac{f(w)}{z - w} dz \\
-			&= 2 \pi i f(w) \ind{w}{C} \quad \text{where } \ind{w}{C} = \int_{C} \frac{dz}{z - w} 
-	\end{align*}
-	This completes the proof. \qed
-
-	\hlwarn{Note: sketchy proof; amend on next lecture}
+	\begin{equation*}
+		\int_{C} \frac{f(z)}{z - w} \dif{z}
+			= \int_{C} \frac{f(w)}{z - w} \dif{z}
+			= f(w) \int_{C} \frac{\dif{z}}{z - w}
+	\end{equation*}
+	
+	We now require $\int_{C} \frac{\dif{z}}{z - w} = 2 \pi i$, but we shall prove for a more general case as a lemma.
 \end{proof}
 
 % section cauchy_s_integral_formula (end)
 
 % chapter lecture_13_feb_9th_2018 (end)
+
+\chapter{Lecture 14 Feb 12 2018}
+	\label{chapter:lecture_14_feb_12_2018}
+
+\section{Cauchy's Integral Formula (Continued)} % (fold)
+\label{sec:cauchy_s_integral_formula_continued}
+
+\begin{lemma}\label{lemma:integral_equals_2_pi_i}
+	\hlnoteb{(Lemma and proof from Newman \& Bak on Complex Analysis, 3rd Ed.)}
+
+	Suppose $a \in C_\rho^0$ such that $\exists \alpha \in C_\rho$ that is the center of the circle $C_\rho$, where $\rho$ is the radius of $C_\rho$, and hence $\abs{a - \alpha} < \rho$. Then
+	\begin{equation*}
+		\int_{C_\rho} \frac{\dif{z}}{z - a} = 2 \pi i
+	\end{equation*}
+\end{lemma}
+
+\begin{proof}
+	Let $z \equiv \alpha + \rho e^{i \theta}$, then $\dif{z} = i \rho e^{i \theta} d \theta$. Thus
+	\begin{equation*}
+		\int_{C_\rho} \frac{\dif{z}}{z - \alpha} = \int_{0}^{2 \pi} \frac{i \rho e^{i \theta}}{\rho e^{i \theta}} d \theta = 2 \pi i
+	\end{equation*}
+	while
+	\begin{equation}\label{eq:lemma_integral_equals_2_pi_i_eq1}
+		\int_{C_\rho} \frac{\dif{z}}{(z - \alpha)^{k + 1}} = 0 \quad \text{for } k = 1, 2, 3, ... \; .
+	\end{equation}
+	The \cref{eq:lemma_integral_equals_2_pi_i_eq1} follows not only from a direct evaluation of the integral
+	\begin{equation*}
+		\int_{C_\rho} \frac{\dif{z}}{(z - \alpha)^{k + 1}} = \int_{0}^{2 \pi} \frac{i \rho e^{i \theta}}{(\rho e^{i \theta})^{k + 1}} d \theta = \frac{i}{\rho^k} \int_{0}^{2 \pi} e^{-i k \theta} d \theta = 0
+	\end{equation*}
+	but also the fact that $\frac{1}{(z - \alpha)^{k + 1}}$ is the derivative of $-\frac{1}{k(z - \alpha)^k}$, which can be verified to be holomorphic on $C_\rho$, which simply makes \cref{eq:lemma_integral_equals_2_pi_i_eq1} true by \cref{thm:fundamental_theorem_of_calculus}.
+
+	To evaluate $\int_{C_\rho} \frac{\dif{z}}{z - a}$, write
+	\begin{align*}
+		\frac{1}{z - a}
+			&= \frac{1}{(z - \alpha) - (a - \alpha)} = \frac{1}{(z - \alpha)[1 - \frac{a - \alpha}{z - \alpha}]} \\
+			&= \frac{1}{z - \alpha} \cdot \frac{1}{1 - \omega} 
+	\end{align*}
+	where
+	\begin{equation}\label{eq:lemma_integral_equals_2_pi_i_eq2}
+		\omega = \frac{a - \alpha}{z - \alpha} \text{ has fixed modulus } \frac{\abs{a - \alpha}}{\rho} < 1 \text{ throughout } C_\rho 
+	\end{equation}
+	By \cref{eq:lemma_integral_equals_2_pi_i_eq2} and by the \hlnotea{Infinite Geometric Sum} that $\frac{1}{1 - \omega} = 1 + \omega + \omega^2 + \hdots$, we get
+	\begin{align*}
+		\frac{1}{z - a}
+			&= \frac{1}{z - \alpha} \left[ 1 + \frac{a - \alpha}{z - \alpha} + \frac{(a - \alpha)^2}{(z - \alpha)^2} + \hdots \right] \\
+			&= \frac{1}{z - \alpha} + \frac{a - \alpha}{(z - \alpha)^2} + \frac{(a - \alpha)^2}{(z - \alpha)^3} + \hdots . 
+	\end{align*}
+	Since the convergence is uniform throughout $C_\rho$,
+	\begin{equation*}
+		\int_{C_\rho} \frac{1}{z - a} \dif{z}
+			= \int_{C_\rho} \frac{1}{z - \alpha} \dif{z} + \sum_{k=1}^{\infty} \int_{C_\rho} \frac{(a - \alpha)^k}{(z - \alpha)^{k + 1}} \dif{z} = 2 \pi i
+	\end{equation*}\qed
+\end{proof}
+
+We may now continue with completing the previous proof.
+
+\begin{proof}[Continued - \cref{thm:cauchy_s_integral_formula_1}]
+	\cref{lemma:integral_equals_2_pi_i} completes the part where we required $\int_{C} \frac{\dif{z}}{z - w} = 2 \pi i$.
+
+	We now have
+	\begin{equation*}
+		f(w) = \frac{1}{2 \pi i} \int_{C} \frac{f(z)}{z - w} \dif{z}
+	\end{equation*}
+
+	Now note that if we further generalize the number of times the contour $C_\rho$ made around $a$, where in this case $C_\rho$ is a closed path instead of a simple circle in $\Omega$, in \cref{lemma:integral_equals_2_pi_i}, we would get $\int_{C_\rho} \frac{\dif{z}}{z - a} = 2k \pi i$ where $k$ would represent that number.
+
+	In this case, we would get
+	\begin{equation*}
+		f(w) k = \frac{1}{2 \pi i} \int_{C} \frac{f(z)}{z - w} \dif{z}
+	\end{equation*}
+	where $k = \ind{w}{C} = \frac{1}{2 \pi i} \int_{C} \frac{\dif{z}}{z - w}$ which represents the number of times the contour $C$ winds around $w$. \qed
+\end{proof}
+
+\begin{remark}
+	As noted, \cref{thm:cauchy_s_integral_formula_1} holds for any closed path $\gamma \in \Omega$ instead of a simple circle $C$. If $w \in \Omega \setminus \gamma^*$, we get
+	\begin{equation*}
+		\frac{1}{2 \pi i} \int_{\gamma} \frac{f(z)}{z - w} \dif{z} = f(w) \ind{w}{\gamma}
+	\end{equation*}
+\end{remark}
+
+\begin{propo}[Holomorphic Functions can be expressed as Power series]\label{propo:holomorphic_functions_can_be_expressed_as_power_series}
+	Let $\Omega \subseteq \mathbb{C}$ be an open set, $f \in H(\Omega)$. Then $f$ can be expressed as a power series.
+\end{propo}
+
+\begin{proof}
+	$\forall w \in \Omega, \exists C \subseteq \Omega$ that is a closed circle path with $w \in C^0$. By \cref{thm:cauchy_s_integral_formula_1}, and since $C$ is a circle, i.e. the contour winds around $w$ only once, we have
+	\begin{equation*}
+		f(w) = \frac{1}{2 \pi i} \int_{C} \frac{f(z)}{z - w} \dif{z}.
+	\end{equation*}
+	Let $w_0 \in \Omega$ be the center of $C$. Then $\forall z \in C^*, 0 < \abs{w - w_0} < \abs{z - w_0}$\footnote{This is the key step}. This implies that
+	\begin{align*}
+		&0 < \frac{\abs{w - w_0}}{\abs{z - w_0}} < 1 \\
+		&\implies \sum_{n=0}^{\infty} \left(\frac{w - w_0}{z - w_0} \right)^n = \frac{1}{1 - \frac{w - w_0}{z - w_0}} = \frac{z - w_0}{z - w} \enspace \text{by the Infinite Geometric Sum} \\
+		&\implies \frac{1}{2 \pi i} \int_{C} \frac{f(z)}{z - w} \dif{z} = \frac{1}{2 \pi i} \int_{C} \frac{f(z)}{z - w_0} \frac{z - w_0}{z - w} \dif{z} = \frac{1}{2 \pi i} \int_{C} \frac{f(z)}{z - w_0} \sum_{n=0}^{\infty} \left( \frac{w - w_0}{z - w_0} \right)^n \dif{z}
+	\end{align*}
+	Note that each of the terms in the integrand of the last expression are absolutely convergent, thus by \hlnotea{Fubini's Theorem}, we can interchange the summation and integral sign to get
+	\begin{equation*}
+		f(w) = \sum_{n=0}^{\infty} \underbrace{\left[ \frac{1}{2 \pi i} \int_{C} \frac{f(z)}{(z - w_0)^{n + 1}} \dif{z} \right]}_{a_n} (w - w_0)^n
+	\end{equation*}
+	which is a power series centered at $w_0$ with coefficient $a_n$.
+\end{proof}
+
+\begin{note}[Recall]
+	Consider the power series $f(w) = \sum_{n=0}^{\infty} a_n (w - w_0)^n$. Recall \cref{item:tutorial_q2} from \cref{sec:practice_problems} that
+	\begin{equation*}
+		a_n = \frac{f^{(n)}(w_0)}{n!}
+	\end{equation*}
+
+	Applying this to \cref{propo:holomorphic_functions_can_be_expressed_as_power_series}, we get
+	\begin{equation*}
+		\frac{f^{(n)} (w_0)}{n!} = \frac{1}{2 \pi i} \int_{C} \frac{f(z)}{(z - w_0)^{n + 1}} \dif{z}
+	\end{equation*}
+	which holds for any $w_0 \in \Omega$ by having $C \subseteq \Omega$ centered at $w_0$.
+\end{note}
+
+\begin{thm}[Cauchy's Integral Formula 2]\label{thm:cauchy_s_integral_formula_2}
+	Let $\Omega \subseteq \mathbb{C}$ be open, $f \in H(\Omega)$. Then
+	\begin{enumerate}
+		\item $\forall w \in \Omega$, $f$ has a power series expansion at $w$.
+		\item $f$ is differentiable infinitely many times in $\Omega$.
+		\item $\forall C \subseteq \Omega$ that is a closed circle, we have that $\forall w \in C^0$, \label{item:true_cauchy_s_integral_formula}
+			\begin{equation*}
+			 	f^{(n)} (w) = \frac{n!}{2 \pi i} \int_{C} \frac{f(z)}{(z - w)^{n + 1}} \dif{z} 
+			\end{equation*} 
+	\end{enumerate}
+\end{thm}
+
+\begin{remark}
+	\cref{item:true_cauchy_s_integral_formula} is the actual Cauchy's Integral Formula in the theorem.
+\end{remark}
+
+\begin{proof}
+	We have shown 1 from \cref{propo:holomorphic_functions_can_be_expressed_as_power_series} and 2 from \cref{thm:power_function_holomorphic_function_region_of_convergence}. It remains to prove 3, which we shall prove by induction.
+
+	When $n = 0$, it is simply \cref{thm:cauchy_s_integral_formula_1}. Suppose $f$ has up to $n - 1$ complex derivatives and that
+	\begin{equation*}
+		f^{(n - 1)} (w) = \frac{(n - 1)!}{2 \pi i} \int_{C} \frac{f(z)}{(z - w)^n} \dif{z} .
+	\end{equation*}
+	Consider $h > 0$, the difference of the quotient for $f^{(n - 1)}$ is
+	\begin{equation}\label{eq:cauchy_s_integral_formula_2_eq1}
+		\frac{f^{(n-1)} (w - h) - f^{(n - 1)}(w)}{h} = \frac{(n-1)!}{2 \pi i} \int_{C} f(z) \frac{1}{h} \left[ \frac{1}{z - w - h} - \frac{1}{z - w} \right] \dif{z} 
+	\end{equation}
+	Note that
+	\begin{equation*}
+		A^n - B^n = (A - B)(A^{n-1} + A^{n - 2}B + \hdots + AB^{n - 2} + B^{n - 1})
+	\end{equation*}
+	Let $A = \frac{1}{z - w -h}, B = \frac{1}{z - w}$\footnote{Key step}, then the term in square brackets in \cref{eq:cauchy_s_integral_formula_2_eq1} becomes
+	\begin{equation*}
+		\frac{h}{(z - w - h)(z - w)} \left[A^{n - 1} + A^{n - 2}B + \hdots + AB^{n - 2} + B^{n - 1}\right]
+	\end{equation*}
+	Thus as $h \to 0$, we have
+	\begin{equation*}
+		f^{(n)} = \frac{(n - 1)!}{2 \pi i} \int_{C} f(z) \left[\frac{1}{(z - w)^2} \right] \left[ \frac{n}{(z - w)^{n - 1}} \right] \dif{z} = \frac{n!}{2 \pi i} \int_{C} \frac{f(z)}{(z - w)^{n + 1}} \dif{z}
+	\end{equation*}
+	which completes the induction proof and proves 3. \qed
+\end{proof}
+
+\begin{crly}[Taylor Expansion of Entire Functions]\label{crly:taylor_expansion_of_entire_functions}
+	If $f$ is an entire function, then $\forall z_0 \in \mathbb{C}$, we have
+	\begin{equation*}
+		f(z) = f(z_0) + f'(z_0)(z - z_0) + \frac{f''(z_0)}{2!} (z - z_0)^2 + \hdots
+	\end{equation*}
+	which is a \hlnotea{Taylor Expansion} of $f$ around $z_0$.
+\end{crly}
+
+\begin{proof}
+	By \cref{propo:holomorphic_functions_can_be_expressed_as_power_series}, we have that
+	\begin{align}
+		f(z) &= \sum_{n=0}^{\infty} \left[ \frac{1}{2 \pi i} \int_{C} \frac{f(w)}{(w - z_0)^{n + 1}} \dif{w} \right] (z - z_0)^n \nonumber \\
+			&= \frac{1}{2 \pi i} \int_{C} \frac{f(w)}{w - z_0} \dif{w} + \left[ \frac{1}{2 \pi i} \int_{C} \frac{f(w)}{(w - z_0)^2} \right](z - z_0) \label{eq:crly_taylor_expansion_of_entire_functions_eq1} \\
+			&\quad\quad + \left[ \frac{1}{2 \pi i} \int_{C} \frac{f(w)}{(w - z_0)^3} \dif{w} \right] (z - z_0)^2 + \hdots \nonumber \\
+			&\quad\quad + \left[ \frac{1}{2 \pi i} \int_{C} \frac{f(w)}{(w - z_0)^{k + 1}} \dif{w} \right] (z - z_0)^k + \hdots \nonumber
+	\end{align}
+	Now by \cref{thm:cauchy_s_integral_formula_2}, we have
+	\begin{align*}
+		f(z_0) &= f^{(0)}(z_0) = \frac{0!}{2 \pi i} \int_{C} \frac{f(w)}{w - z_0} \dif{w} = \frac{1}{2 \pi i} \int_{C} \frac{f(w)}{w - z_0} \dif{w} \\
+		f^{(1)}(z_0) &= \frac{1!}{2 \pi i} \int_{C} \frac{f(w)}{(w - z_0)^2} \dif{w} \\
+		f^{(2)}(z_0) &= \frac{2!}{2 \pi i} \int_{C} \frac{f(w)}{(w - z_0)^3} \dif{w} \\
+		&\quad\vdots \\
+		f^{(k)}(z_0) &= \frac{k!}{2 \pi i} \int_{C} \frac{f(w)}{(w - z_0)^{k + 1}} \dif{w} \\
+		&\quad\vdots
+	\end{align*}
+	Thus \cref{eq:crly_taylor_expansion_of_entire_functions_eq1} becomes
+	\begin{equation*}
+		f(z) = f(z_0) + f^{(1)}(z_0)(z - z_0) + \frac{f^{(2)}(z_0)}{2!} (z - z_0)^2 + \hdots + \frac{f^{(k)}(z_0)}{k!} (z - z_0)^k + \hdots
+	\end{equation*}
+	as required. \qed
+\end{proof}
+
+\begin{ex}
+	\begin{enumerate}
+		\item \hlnotea{(Cauchy's Inequality)} Prove that $\forall z_0 \in \mathbb{C} \; \forall R > 0 \in \mathbb{R} \; \forall f \in H(D(z_0, R))$ \label{item:cauchy_s_inequality}
+			\begin{equation*}
+				f^{(n)}(z_0) \leq \frac{n!}{R^n} \cdot \sup_{z \in \mathbb{C}} \abs{f(z)}
+			\end{equation*}
+
+			\begin{proof}
+				
+			\end{proof}
+	\end{enumerate}
+\end{ex}
+
+% section cauchy_s_integral_formula_continued (end)
+
+% chapter lecture_14_feb_12_2018 (end)
 \end{document}
