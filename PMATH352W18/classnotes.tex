@@ -2430,7 +2430,7 @@ This theorem holds more meaning than the presented statement, as it implies that
 \end{proof}
 
 \begin{thm}[Cauchy's Integral Formula 1]\label{thm:cauchy_s_integral_formula_1}
-Let $\Omega \subseteq \mathbb{C}$ be a convex open set, and $C$ be a closed circle path in $\Omega$. If $w \in \Omega \setminus C^*$, where $C^*$ is the \hldefn{boundary of $C$}, and $f \in H(\Omega)$, then
+Let $\Omega \subseteq \mathbb{C}$ be a convex open set, and $C$ be a closed circle path in $\Omega$. If $w \in \Omega \setminus \partial C$, where $\partial C$ is the \hldefn{boundary of $C$}, and $f \in H(\Omega)$, then
 
 	\begin{tabular}{L{10cm} C{5cm}}
 		\begin{equation*}
@@ -2458,7 +2458,7 @@ Let $\Omega \subseteq \mathbb{C}$ be a convex open set, and $C$ be a closed circ
 \begin{proof}
 	$ $ \\
 	\begin{tabular}{L{9cm} C{6cm}}
-		Let $w \in \Omega \setminus C^*$. Define
+		Let $w \in \Omega \setminus \partial C$. Define
 		\begin{equation*}
 			g(w) = \begin{cases}
 				\frac{f(z) - f(w)}{z - w} & \text{if } z \neq w \\
@@ -2606,7 +2606,7 @@ We may now continue with completing the previous proof.
 	\begin{equation*}
 		f(w) = \frac{1}{2 \pi i} \int_{C} \frac{f(z)}{z - w} \dif{z}.
 	\end{equation*}
-	Let $w_0 \in \Omega$ be the center of $C$. Then $\forall z \in C^*, 0 < \abs{w - w_0} < \abs{z - w_0}$\footnote{This is the key step}. This implies that
+	Let $w_0 \in \Omega$ be the center of $C$. Then $\forall z \in \partial C, 0 < \abs{w - w_0} < \abs{z - w_0}$\footnote{This is the key step}. This implies that
 	\begin{align*}
 		&0 < \frac{\abs{w - w_0}}{\abs{z - w_0}} < 1 \\
 		&\implies \sum_{n=0}^{\infty} \left(\frac{w - w_0}{z - w_0} \right)^n = \frac{1}{1 - \frac{w - w_0}{z - w_0}} = \frac{z - w_0}{z - w} \enspace \text{by the Infinite Geometric Sum} \\
@@ -2637,10 +2637,10 @@ We may now continue with completing the previous proof.
 	\begin{enumerate}
 		\item $\forall w \in \Omega$, $f$ has a power series expansion at $w$.
 		\item $f$ is differentiable infinitely many times in $\Omega$.
-		\item $\forall C \subseteq \Omega$ that is a closed circle, we have that $\forall w \in C^0$, \label{item:true_cauchy_s_integral_formula}
-			\begin{equation*}
+		\item $\forall C \subseteq \Omega$ that is a closed circle oriented anticlockwise, we have that $\forall w \in C^0$, \label{item:true_cauchy_s_integral_formula}
+			\begin{equation}\label{eq:cauchy_s_integral_formula_2}
 			 	f^{(n)} (w) = \frac{n!}{2 \pi i} \int_{C} \frac{f(z)}{(z - w)^{n + 1}} \dif{z} 
-			\end{equation*} 
+			\end{equation} 
 	\end{enumerate}
 \end{thm}
 
@@ -2706,20 +2706,132 @@ We may now continue with completing the previous proof.
 	as required. \qed
 \end{proof}
 
+% section cauchy_s_integral_formula_continued (end)
+
+% chapter lecture_14_feb_12_2018 (end)
+
+\chapter{Lecture 15 Feb 14 2018} % (fold)
+\label{cha:lecture_15_feb_14_2018}
+
+\section{Cauchy's Integral Formula (Continued 1)} % (fold)
+\label{sec:cauchy_s_integral_formula_continued_1}
+
+\begin{remark}
+	\begin{enumerate}
+		\item We have proven, in the previous lecture, that Holomorphicity $\implies$ Analyticity
+		\item Should we have defined, in \cref{thm:cauchy_s_integral_formula_2}, that the closed circle orients clockwise, then we would have a negative equation for \cref{eq:cauchy_s_integral_formula_2}.
+	\end{enumerate}
+\end{remark}
+
+\subsection{Applications of Cauchy's Integral Formula} % (fold)
+\label{sub:applications_of_cauchy_s_integral_formula}
+
 \begin{ex}
 	\begin{enumerate}
-		\item \hlnotea{(Cauchy's Inequality)} Prove that $\forall z_0 \in \mathbb{C} \; \forall R > 0 \in \mathbb{R} \; \forall f \in H(D(z_0, R))$ \label{item:cauchy_s_inequality}
+		\item \hlnotea{(Cauchy's Inequality)}\footnote{In a sense, this inequality implies that as we take higher derivatives, the value of the derivatives become smaller.} Prove that $\forall z_0 \in \mathbb{C} \; \forall R > 0 \in \mathbb{R} \; \forall f \in H(C = D(z_0, R))$ \label{item:cauchy_s_inequality}
 			\begin{equation*}
 				f^{(n)}(z_0) \leq \frac{n!}{R^n} \cdot \sup_{z \in \mathbb{C}} \abs{f(z)}
 			\end{equation*}
 
 			\begin{proof}
-				
+				From \cref{eq:cauchy_s_integral_formula_2}, we have
+				\begin{equation*}
+					f^{(n)}(z_0) = \frac{n!}{2 \pi i} \int_{C} \frac{f(z)}{(z - z_0)^{n + 1}} \dif{z} 
+				\end{equation*}
+				Parameterize $C$ with $\gamma: [0, 2 \pi] \to \mathbb{C}$, where $t \mapsto z_0 + Re^{it}$. Then
+				\begin{align*}
+					f^{(n)} (z_0) &= \frac{n!}{2 \pi i} \int_{0}^{2 \pi} \frac{f(z_0 + Re^{it})}{(Re^{it})^{n + 1}} Rie^{it} \dif{t} \\
+					\abs{f^{(n)}(z_0)} &\leq \frac{n!}{2 \pi} \int_{0}^{2 \pi} \frac{\abs{f(z_0 + Re^{it})}}{R^n} \dif{t} \quad \because \abs{Re^{it}} = R \\
+						&\leq \frac{n!}{2 \pi R^n} \sup_{z \in C} \abs{f(z)} \int_{0}^{2\pi} \dif{t} \\
+						&= \frac{n!}{R^n} \sup_{z \in C} \abs{f(z)}
+				\end{align*}
+				This completes the proof. \qed
+			\end{proof}
+
+		\item \hlnotea{(Liouville's Theorem)} A bounded entire function $f: \mathbb{C} \to \mathbb{C}$ is a constant\footnote{The theorem is not true in $\mathbb{R}$, since $\sin x$ is a bounded function differentiable everywhere, but is not a constant.} \footnote{The theorem also implies that ``trigonometry'' in $\mathbb{C}$ is unbounded, whatever the definition of ``trigonometry'' may be.}.\label{item:liouville_s_theorem}
+
+			\begin{proof}
+				Since $f$ is entire, we may take $R$, in \cref{item:cauchy_s_inequality}, to be any large value. Let $M$ be the bound of $f$, i.e. $\exists M \in \mathbb{C}, \, \forall z_0 \in \mathbb{C}, \, \abs{f^{(n)}(z_0)} \leq \frac{n!}{R^n} \sup_{z \in \mathbb{C}} \abs{f(z)} = \frac{n!}{R^n} \sup_{z \in \mathbb{C}} M$. Let $n = 1$, then $\abs{f'(z_0)} = \frac{M}{R}$. Thus we observe that $R \to \infty \implies f(z_0) \to 0$ for any $z_0 \in \mathbb{C}$. By A2Q5(a), $f$ is a constant.
+			\end{proof}
+
+		\item \hlnotea{(Parseval's Theorem)} Let $\Omega \subseteq \mathbb{C}$ be open, $f \in H(\Omega), \, \bar{D(z_0, R)} \subseteq \Omega$. Then $\forall z \in \bar{D(z_0, R)}, \, f(z) = \sum_{n=0}^{\infty} c_n (z - z_0)^n$, which in turn implies that \footnote{This is why the $L^2$-norm is perserved, as seen in AMATH231.}\label{item:parseval_s_theorem}
+		\begin{equation*}\tag{$\dagger$}\label{eq:parseval_s_l2_norm}
+			\forall z \in \bar{D(z_0, R)} \quad f(z_0 + re^{i \theta}) = \sum_{n=0}^{\infty} c_n (re^{i \theta})^n
+		\end{equation*}
+
+			Consider (the $L^2$norm)
+			\begin{align*}
+				& \frac{1}{2 \pi} \int_{0}^{2 \pi} \abs{f(z_0 + re^{i \theta})}^2 \dif{\theta} \\
+				=&\frac{1}{2 \pi} \int_{0}^{2 \pi} \abs{\sum_{n=0}^{\infty} c_n (re^{i \theta})^n}^2 \dif{\theta} \\
+				=& \frac{1}{2 \pi} \int_{0}^{2 \pi} \left[ \sum_{n=0}^{\infty} c_n r^n e^{i n \theta} \right] \left[\sum_{m=0}^{\infty} \bar{c_m} r^m e^{-i n \theta} \right] \dif{\theta} \\
+				=& \frac{1}{2 \pi} \int_{0}^{2 \pi} \sum_{n=0}^{\infty} \sum_{m=0}^{\infty} c_n \bar{c_m} r^{n + m} e^{i (n - m) \theta} \dif{\theta} 
+			\end{align*}
+			Since the series are absolutely convergent, use may use Fubini's Theorem, and thus
+			\begin{align*}
+				=& \frac{1}{2 \pi} \sum_{n,m = 0}^{\infty} c_n \bar{c_m} r^{n + m} \int_{0}^{2 \pi} e^{i (n - m) \theta} \dif{\theta} \\
+				=& \begin{cases}
+					\frac{1}{2 \pi} \sum_{n,m = 0}^{\infty} c_n \bar{c_m} r^{n + m} 2 \pi & \text{if } n = m \\
+					\frac{1}{2 \pi} \sum_{n,m = 0}^{\infty} c_n \bar{c_m} r^{n + m} \frac{e^{i (n - m) \theta}}{i (n - m)} \at{0}{2 \pi} = 0 & \text{if } n \neq m
+				\end{cases} \\
+				=& \sum_{n=0}^{\infty} \abs{c_n}^2 r^{2n} \quad \text{if } n = m
+			\end{align*}
+			Therefore, we have what is known as \hlnotea{Parseval's Identity}:
+			\begin{equation}\label{eq:parseval_s_identity}
+				\frac{1}{2 \pi} \int_{0}^{2 \pi} \abs{f(z_0 + re^{i \theta})}^2 \dif{\theta} = \sum_{n=0}^{\infty} \abs{c_n}^2 r^{2n}
+			\end{equation}
+
+			Parseval's Theorem states that:
+
+			$L^2$-norm of LHS in \cref{eq:parseval_s_identity} $=$ $L^2$-norm of RHS of \cref{eq:parseval_s_l2_norm}
+	\end{enumerate}
+
+	Before going into the next application, please see \cref{lemma:zeros_everywhere_or_isolated_points}.
+
+	\begin{enumerate}
+		\setcounter{enumi}{3}
+		\item \hlnotea{(Maximum Modulus Principle)} Let $\Omega \subseteq \mathbb{C}$ be open and connected, and $f \in H(\Omega)$. Then \label{item:maximum_modulus_principle}
+		\begin{equation*}
+			\sup_{z \in \Omega} \abs{f(z)} = \max_{z \in \partial \Omega} \abs{f(z)}.
+		\end{equation*}
+		This implies that $f$ cannot attain its maximum value in $\Omega^0$.
+
+			\begin{proof}
+				Suppose not, i.e. $\exists z_0 \in \Omega^0, \, \forall z \in \Omega$ such that $\abs{f(z_0)} = \max_{z \in \Omega} \abs{f(z)} \geq \abs{f(z)}$
+				\begin{align*}
+					&\implies \exists r > 0 \quad \bar{D(z_0, r)} \subseteq \Omega \\
+					&\implies \forall z \in \bar{D(z_0, r)} \quad f(z) = \sum_{n=0}^{\infty} c_n (z - z_0)^n
+				\end{align*}
+				Note that $c_0 = \frac{f^{(0)}(z_0)}{0!} = f(z_0)$. By \cref{item:parseval_s_theorem},
+				\begin{align*}
+					\sum_{n=0}^{\infty} \abs{c_n}^2 r^{2n} &= \frac{1}{2\pi} \int_{0}^{2 \pi} \abs{f(z_0 + re^{i \theta})}^2 \dif{\theta} \\
+					\implies  f(z_0)^2 + \sum_{n=1}^{\infty} \abs{c_n}^2 r^{2n} & = \frac{1}{2 \pi} \abs{f(z_0 + re^{i \theta})}^2 \dif{\theta} \\
+					& \leq \frac{1}{2 \pi} \abs{f(z_0)}^2 (2 \pi) \quad \because f(z_0) = \max_{z \in \Omega} f(z) \\
+					\implies  f(z_0)^2 + \sum_{n=1}^{\infty} \abs{c_n}^2 r^{2n} & \leq \abs{f(z_0)}^2 \\
+					\implies  \sum_{n=1}^{\infty} \abs{c_n}^2 r^{2n} & \leq 0 \\
+					\implies c_1, c_2, ... & = 0 \\
+					\implies & f \text{ is a constant in } \bar{D(z_0, r)} \\
+					\implies & f \text{ is a constant in } \Omega \text{ by } \cref{lemma:zeros_everywhere_or_isolated_points}
+				\end{align*}
+				which is a contradiction. \qed
 			\end{proof}
 	\end{enumerate}
+
 \end{ex}
 
-% section cauchy_s_integral_formula_continued (end)
+\begin{lemma}[Zeros Everywhere or Isolated Points]\label{lemma:zeros_everywhere_or_isolated_points}
+	Let $\Omega \subseteq \mathbb{C}$ be open and connected, and $f \in H(\Omega)$. Let $Z(f) = \{a in \Omega : f(a) = 0 \}$. Then either
+	\begin{itemize}
+		\item $Z(f) = \Omega$, i.e. $\forall z \in \Omega, \, f(z) = 0$; or
+		\item $Z(f)$ has no limit point, i.e. points where $f = 0$ are isolated
+	\end{itemize}
+\end{lemma}
 
-% chapter lecture_14_feb_12_2018 (end)
+This is a powerful result, since if we can find a small region for where $f$ is $0$ in $\Omega$, then $f$ would be $0$ in the entirety of $\Omega$. If not, then $f$ is only $0$ at isolated points, i.e. points where $f = 0$ are all apart from each other.
+
+% subsection applications_of_cauchy_s_integral_formula (end)
+
+% section cauchy_s_integral_formula_continued_1 (end)
+
+% chapter lecture_15_feb_14_2018 (end)
+
 \end{document}
