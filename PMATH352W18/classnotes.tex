@@ -2023,7 +2023,7 @@ We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same
 					R &= \int_{a}^{b} u(t) dt \\
 					  &\leq \int_{a}^{b} \abs{u(t)} dt \quad \because a \leq b \land u(t) \leq \abs{u(t)} \in \mathbb{R} \\
 					  &\leq \int_{a}^{b} \abs{u(t) + iv(t)} dt \\
-					  &= \int_{a}^{b} \abs{e^{-i \theta} g(t)} dt \qquad \text{\hlwarn{*(is this really correct?)}}\\
+					  &= \int_{a}^{b} \abs{e^{-i \theta} g(t)} \dif{t} \\
 					  &= \int_{a}^{b} \abs{g(t)} dt = \text{RHS}
 				\end{align*} \qed
 			\item \begin{align*}
@@ -2732,7 +2732,7 @@ At this point, it is important that we provide the following definition:
 \subsection{Applications of Cauchy's Integral Formula} % (fold)
 \label{sub:applications_of_cauchy_s_integral_formula}
 
-\begin{ex}
+\begin{ex}\label{ex:applications_of_cauchy_s_integral_formula}
 	\begin{enumerate}
 		\item \hlnotea{(Cauchy's Inequality)}\footnote{In a sense, this inequality implies that as we take higher derivatives, the value of the derivatives become smaller.} Prove that $\forall z_0 \in \mathbb{C} \; \forall R > 0 \in \mathbb{R} \; \forall f \in H(C = D(z_0, R))$ \label{item:cauchy_s_inequality}
 			\begin{equation*}
@@ -2839,5 +2839,67 @@ This is a powerful result, since if we can find a small region for where $f$ is 
 % section cauchy_s_integral_formula_continued_1 (end)
 
 % chapter lecture_15_feb_14_2018 (end)
+
+\chapter{Lecture 16 Feb 16th 2018}
+	\label{chapter:lecture_16_feb_16th_2018}
+
+\section{Cauchy's Integral Formula (Continued 3)} % (fold)
+\label{sec:cauchy_s_integral_formula_continued_3}
+
+\subsection{Applications of Cauchy's Integral Formula (Continued)} % (fold)
+\label{sub:applications_of_cauchy_s_integral_formula_continued}
+
+\textbf{\cref{ex:applications_of_cauchy_s_integral_formula} (Continued)}
+
+We shall restate the \cref{item:maximum_modulus_principle} in the following manner.
+
+\begin{enumerate}
+	\setcounter{enumi}{3}
+	\item \hlnotea{Maximum Modulus Principle (MMP)} Let $\Omega \subseteq \mathbb{C}, \, f \in H(\Omega), \, D_{z_0} = \bar{D(z_0, r)} \subseteq \Omega$. Then $\abs{f(z_0)} \leq \max_{z \in \partial D_{z_0}} \abs{f(z)}$ with \label{item:maximum_modulus_principle_strong}
+	\begin{equation*}
+		\abs{f(z_0)} = \max_{z \in \partial D_{z_0}} \abs{f(z)} \iff f \text{ is a constant on } \Omega
+	\end{equation*}
+
+	\begin{remark}
+		\begin{enumerate}
+			\item This implies that for a non-constant analytic function $f$, $\forall z \in \Omega^0, \, f(z) \neq \max_{w \in \Omega} f(w)$.
+			\item Since a global maximum is also a local maximum, we observe that for any smaller region $\Omega_0 \subseteq \Omega$, $f$ cannot attain its maximum value for any point in $\Omega_0^0$. This is a stronger statement than the our previous statement about the MMP.
+		\end{enumerate}
+	\end{remark}
+
+	\begin{proof}
+		Suppose for \Lightning that $f$ has a maximum in $\Omega^0$, say at $z_0$. Hence $\exists r > 0, D_{z_0} = \bar{D(z_0, r)}$ where
+		\begin{equation*}
+			\abs{f(z_0)} \geq \max_{z \in D_{z_0}} \abs{f(z)}
+		\end{equation*}
+		On $D_{z_0}$, we have
+		\begin{equation}\label{eq:mmp_strong_eq1}
+			f(z) = \sum_{n=0}^{\infty} c_n (z - z_0)^n
+		\end{equation}
+		Note that $c_0 = f(z_0)$. By \cref{item:parseval_s_theorem}, on $D_{z_0}$,
+		\begin{align*}
+			\sum_{n=0}^{\infty} \abs{c_n}^2 r^{2n}
+				&= \frac{1}{2 \pi} \int_{0}^{2 \pi} \abs{f(z_0 + re^{i \theta})}^2 \dif{\theta} \quad \text{by } \cref{eq:parseval_s_identity} \\
+				&\leq \frac{1}{2 \pi} \int_{0}^{2 \pi} \abs{f(z_0)}^2 \dif{\theta} \quad \text{by } \cref{eq:mmp_strong_eq1} \\
+				&= \abs{f(z_0)}^2.
+		\end{align*}
+		Then we have
+		\begin{align*}
+			\abs{c_0}^2 + \sum_{n=1}^{\infty} \abs{c_n}^2 r^{2n}
+				&= \abs{f(z_0)}^2 \\
+			\abs{f(z_0)}^2 + \sum_{n=1}^{\infty} \abs{c_n}^2 r^{2n}
+				&= \abs{f(z_0)}^2 \\
+			\sum_{n=1}^{\infty} \abs{c_n}^2 r^{2n} &= 0
+		\end{align*}
+		which $\implies c_1 = c_2 = \hdots = 0$. Thus $\forall z \in D_{z_0}, \, f(z) \equiv c_0 \mod 2 \pi$
+ 	\end{proof}
+\end{enumerate}
+
+
+% subsection applications_of_cauchy_s_integral_formula_continued (end)
+
+% section cauchy_s_integral_formula_continued_3 (end)
+
+% chapter lecture_16_feb_16th_2018 (end)
 
 \end{document}
