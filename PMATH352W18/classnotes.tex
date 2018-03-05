@@ -3010,6 +3010,123 @@ We shall restate the important lemma that we have been using in the last two lec
 
 % section analytic_continuity (end)
 
+\section{Morera's Theorem} % (fold)
+\label{sec:morera_s_theorem}
+
+\begin{remark}[Recall]
+	From \hyperref[thm:cauchy_s_theorem_for_convex_set]{Cauchy's Theorem}, we know that $\forall f \in H(\Omega) \implies \forall \gamma \in \Omega \; \int f = 0$. We used \hyperref[thm:goursat_s_theorem]{Goursat's Theorem}, i.e. $\forall \Delta \in \Omega \; \int_{\Delta} f = 0$ to proof this, and in the process we constructed an antiderivative. Now, our question is, is the converse of the said Cauchy's Theorem true?
+\end{remark}
+Unfortunately for us, that is not true (\hlwarn{example needed}). But a ``partial'' converse exists.
+
+\begin{thm}[Morera's Theorem]\label{thm:morera_s_theorem}
+	Let $f$ be continuous on $\Omega \subseteq \mathbb{C}$, which is an open set, and $\forall \Delta \in \Omega, \, \int_{\Delta} f = 0$, where $\Delta$ is a triangular path. Then $f \in H(\Omega)$.
+\end{thm}
+
+\begin{proof}
+	Use the same construction as in \hyperref[thm:cauchy_s_theorem_for_convex_set]{Cauchy's Theorem for Convex Sets} to get an antiderivative $F$ for $f$, where $F \in H(\Omega)$, i.e.
+	\begin{equation*}
+		F(z) := \int_{[a, z]} f(z) \dif{z}
+	\end{equation*}
+	Then $F'(z) = f(z)$, which in turn implies that $f \in H(\Omega)$ since $F$ is $\mathbb{C}$-differentiable on $\Omega$ by \cref{thm:cauchy_s_integral_formula_2}.
+\end{proof}
+
+% section morera_s_theorem (end)
+
 % chapter lecture_17_feb_26th_2018 (end)
+
+\chapter{Lecture 18 Feb 28th 2018}
+	\label{chapter:lecture_18_feb_28th_2018}
+
+\section{Winding Numbers} % (fold)
+\label{sec:winding_numbers}
+
+Recall \hyperref[thm:cauchy_s_integral_formula_1]{Cauchy's Integral Formula}. We claimed that
+\begin{equation*}
+	\ind{w}{C} = \begin{cases}
+		1	& w \in C^0 \\
+		0	& w \notin C
+	\end{cases}
+\end{equation*}
+
+We will now formally define this index.
+
+\begin{defn}[Winding Numbers]\label{defn:winding_numbers}
+	Let $\gamma : [a, b] \to \mathbb{C}$ be a closed and oriented anti-clockwise, and $\gamma^*$ be the image of $\gamma$ in $\mathbb{C}$. Let $\Omega = \mathbb{C} \setminus \gamma^*$. $\forall w \in \Omega$, define the index of $w$ with respect to $\gamma$ as
+	\begin{equation*}
+		\frac{1}{2 \pi i} \int_{\gamma} \frac{\dif{z}}{z - w} 
+	\end{equation*}
+	in which shall be called the winding number of $\gamma$ around $w$.
+\end{defn}
+
+\begin{thm}[Winding Number Theorem]\label{thm:winding_number_theorem}
+	We shall use notation as the definition above. $\ind{w}{\gamma}$ is
+	\begin{enumerate}
+		\item always an integer;
+		\item constant on any connected component of $\Omega$; and
+		\item zero on the unbounded component of $\Omega$.
+	\end{enumerate}
+\end{thm}
+
+\begin{note}
+	$\gamma$ is compact in $\mathbb{C}$ (since it creates a ring from $[a, b]$ under $\gamma$). So for some disc $D$, $\gamma^* \subseteq D$. Let $\Omega \supset \mathbb{C} \setminus D$, where we note that the contained set is connected and unbounded. Then $\Omega$ contains one unbounded component, while other components of $\Omega$ are inside $D$. Therefore, we know that components in $D$ are bounded.
+\end{note}
+
+\begin{proof}
+	\begin{enumerate}
+		\item By definition,
+		\begin{align*}
+			\ind{w}{\gamma}
+				&= \frac{1}{2 \pi i } \int_{\gamma} \frac{\dif{z}}{z - w} \\
+				&= \frac{1}{2 \pi i} \int_{a}^{b} \frac{\gamma'(t) \dif{t}}{\gamma(t) - w} 
+		\end{align*}
+		\hlnotec{WTS} $\ind{w}{\gamma} \in \mathbb{Z} \equiv \int_{a}^{b} \frac{\gamma'(t) \dif{t}}{\gamma(t) - w} \in 2 \pi i \mathbb{Z}$.
+
+		Note that $z \in 2 \pi i \mathbb{Z} \iff e^z = 1$. Thus it suffices to show that
+		\begin{equation*}
+			e^{\int_{a}^{b} \frac{\gamma'(t) \dif{t}}{\gamma(t) - w}} = 1
+		\end{equation*}
+
+		\textbf{Idea: } Think of $\exp\left(\int_{a}^{u} \frac{\gamma'(t) \dif{t}}{\gamma(t) - w}\right)$ as a function of $u$, call it $\phi(u)$. Then we just need to show that $\phi(b) = 1$. We know that $\phi(a) = \exp\left(\int_{a}^{a} \hdots \right) = 1$. This motivates us to find the derivative of $\phi$.
+
+		Define $\phi$ accordingly, and then since $(e^{f(u)})' = e^{f(u)} \cdot f'(u)$,
+		\begin{align*}
+			\phi'(u) &= \phi(u) \cdot \frac{d}{du} \int_{a}^{u} \frac{\gamma'(t) \dif{t}}{\gamma(t) - w} \\
+			\text{by FTC} &\implies \frac{\phi'(u)}{\phi(u)} = \frac{\gamma'(u)}{\gamma(u) - w} \\
+			&\implies \phi'(u) \left( \gamma(u) - w \right) - \gamma'(u) \phi(u) = 0 \\
+			&\implies \frac{d}{du} \left( \frac{\phi(u)}{\gamma(u) - w} \right) = 0 \quad \text{by quotient rule} \\
+			&\implies \frac{\phi(b)}{\gamma(b) - w} = \frac{\phi(a)}{\gamma(a) - w} \enspace \text{since } \frac{\phi(u)}{\gamma(u) - w} \text{ is a constant function of } u \\
+			&\implies \phi(b) = \phi(a) = 1 \enspace \because \gamma \text{ is closed.}
+		\end{align*}
+
+		\item Note that $\ind{w}{\gamma}$ is continuous (\hlwarn{why?}) and takes only integer values, thus it must be constant on each open connected component\footnote{We may invoke \cref{lemma:principle_of_analytic_continuation} but it is, to an extent, unnecessary for such a powerful statement.} (\hlwarn{why?}).
+
+		\item Note that
+		\begin{equation*}
+			\abs{\ind{w}{\gamma}} = \frac{1}{2 \pi} \abs{\int_{a}^{b} \frac{\gamma'(t) \dif{t}}{\gamma(t) - w}}
+		\end{equation*}
+		Let $w$ be in the unbounded component in the complement of $\gamma$ such that $\abs{w} \to \infty$. Then $\forall t \in [a, b], \, \exists M > 0$ such that
+		\begin{equation*}
+			\frac{1}{\abs{\gamma(t) - w}} \leq \frac{1}{M}
+		\end{equation*}
+		which implies that
+		\begin{align*}
+			&\abs{\ind{w}{\gamma}} \leq \frac{1}{2 \pi} \frac{1}{M} \cdot \underbrace{\int_{a}^{b} \abs{\gamma'(t)} \dif{t}}_{\parbox{3cm}{is a fixed constant as $\gamma$ is a fixed path}} \\
+			&\implies (\abs{w} \to \infty \implies M \to \infty \implies \abs{\ind{w}{\gamma}} \to 0)
+		\end{align*}
+		Then by parts 1 and 2, the proof is completed. \qed
+	\end{enumerate}
+\end{proof}
+
+\begin{remark}
+	Note that by 2, we have that $\forall w \in C^0$,
+	\begin{equation*}
+		\frac{1}{2 \pi i} \int_{C} \frac{\dif{z}}{z - w} = \frac{1}{2 \pi i} \int_{C} \frac{\dif{z}}{z - z_0} = \frac{1}{2 \pi i } \int_{0}^{2 \pi} \frac{Rie^{i \theta}}{Re^{i \theta}} \dif{\theta} = 1  
+	\end{equation*}
+	where $z_0$ is the center of the circle path $C$.
+\end{remark}
+
+% section winding_numbers (end)
+
+% chapter lecture_18_feb_28th_2018 (end)
 
 \end{document}
