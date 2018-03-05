@@ -3129,4 +3129,130 @@ We will now formally define this index.
 
 % chapter lecture_18_feb_28th_2018 (end)
 
+\chapter{Lecture 19 Mar 2 2018}
+	\label{chapter:lecture_19_mar_2_2018}
+
+\section{Singularities} % (fold)
+\label{sec:singularities}
+
+\begin{ex}
+	Let $C : [0, 2 \pi] \to \mathbb{C}$ such that $\forall t \in [0, 2 \pi], \, t \to e^{it}$. Suppose $f \in H(\Omega)$, then by Cauchy
+	\begin{equation*}
+		\int_{C} f(z) \dif{z} = 0
+	\end{equation*}
+
+	Let $f(z) = \frac{1}{z}$, then $\int_{C} \frac{1}{z} \dif{z} = 2 \pi i \ind{0}{C} = 2 \pi i$ when it is ``supposed'' to be $0$ by the argument above. Then in this case, $f \notin H(\Omega)$. In fact, $f$ is undefined at $0$.
+\end{ex}
+
+The example above introduces us to the study of such exceptional points.
+
+\begin{defn}[(Isolated) Singularity]\label{defn:singularity}
+	$\forall a \in \mathbb{C}, \, \exists r > 0 , \, \exists D = D(a, r)$.
+	\begin{gather*}
+		f \in H(D \setminus \{a\}) \; \land \; f(a) \text{ is undefined} \iff
+	\end{gather*}
+	$f$ has a(n) \hldefn{point/isolated singularity} at $z = a$.
+\end{defn}
+
+\begin{eg}
+	\begin{enumerate}
+		\item Given $f \in H(\mathbb{C} \setminus \{0\})$, define $f(z) = \frac{e^z - 1}{z}$. Clearly, $z$ is a singularity. Consider the function $(e^z - 1) \in H(\mathbb{C})$. Then we have that the function has a power series expansion around $z = 0$. So $\forall z \in \mathbb{C}$,
+		\begin{equation*}
+			e^z - 1 = z + \frac{z^2}{2!} + \frac{z^3}{3!} + \hdots
+		\end{equation*}
+		And for $z \neq 0$, we have
+		\begin{equation}\label{eq:eg_singularity_eq1}
+			\frac{e^z - 1}{z} = 1 + \frac{z}{2!} + \frac{z^2}{3!} + \hdots
+		\end{equation}
+		This motivates us to define
+		\begin{equation*}
+			g(z) = \begin{cases}
+				\frac{e^z - 1}{z} 	& z \in \mathbb{C} \setminus \{0\} \\
+				1					& z = 0
+			\end{cases}
+		\end{equation*}
+		Clearly then $g \in H(\mathbb{C})$, where in $\mathbb{C} \setminus \{0\}$ its holomorphicity is given by $f$, and in a neighbourhood of $0$, from \cref{eq:eg_singularity_eq1}. Therefore, y assigning $f$ the value of $1$ at $z = 0$, we can make $f$ ``entire''.
+
+		We call such a point $z$ as a \hlnotea{removable singularity} for $f$.
+
+		\item Given $f \in H(\mathbb{C} \setminus \{0\})$, define $f(z) = \frac{1}{z}$. Is the singularity at $0$ removable?
+
+		Suppose $\exists g \in H(\mathbb{C})$ such that
+		\begin{equation}\label{eq:eg_singularity_eq2}
+			\forall z \in \mathbb{C} \setminus \{0\} \quad g(z) = f(z)
+		\end{equation}
+		$\therefore \exists r > 0 \; \forall z \in D(0, r)$
+		\begin{equation}\label{eq:eg_singularity_eq3}
+			g(z) = c_0 + c_1 z + c_2 z^2 + \hdots
+		\end{equation}
+		Consider the function $zg(z)$. By \cref{eq:eg_singularity_eq2},
+		\begin{equation*}
+			\forall z \in \mathbb{C} \setminus \{0\} \quad zg(z) = 1
+		\end{equation*}
+		By \cref{eq:eg_singularity_eq3}, $z = 0 \implies zg(z) = 0$. But this cannot happen since $zg(z) \in H(\mathbb{C})$ (\hlnoteb{if we pick an open ball of, say, $\frac{1}{2}$ around $0$, then there are no points in the entirety of $\mathbb{C}$ that is close to $0$}). Therefore $z = 0$ is not a removable singularity for $f$.
+	\end{enumerate}
+\end{eg}
+
+\begin{defn}[Removable Singularity, Pole, Essential Singularity]\label{defn:removable_singularity_pole_essential_singularity}
+	Let $f$ have a singularity at $z_0 \in \mathbb{C}$.
+	\begin{enumerate}
+		\item $\exists r > 0 \enspace \forall z \in D = D(z_0, r) \enspace \exists g(z) \in H(D) \enspace \forall z \in D \setminus \{z_0\} \enspace g(z) = f(z) \\ \implies f$ has a \hldefn{removable singularity} at $z_0$\footnote{For the laymen, "the value of $f$ at $z_0$ can be corrected or defined to make it holomorphic in its designated region."}.
+
+		\item $\exists r > 0 \enspace \forall z \in D = D*(z_0, r) \enspace \exists A, B \in H(D) \enspace A(z_0) \neq 0 \, \land \, B(z_0) = 0 \enspace f(z) = \frac{A(z)}{B(z)} \\ \implies f$ has a \hldefn{pole} at $z_0$ (a non-removable singularity)\footnote{For the laymen, "the singularity of $f$ comes from a zero of its denominator."}
+
+		\item $f$ has a singularity at $z_0$ which is neither removeable nor a pole $\implies$ $f$ has an \hldefn{essential singularity} at $z_0$.
+	\end{enumerate}
+\end{defn}
+
+\begin{eg}
+	To show an example of an essential singularity, consider the function $f(z) = e^{\frac{1}{z}}$. If we attempt to do a ``Taylor expansion'' on the function (which is invalid at $z = 0$), we have
+	\begin{equation*}
+		f(z) = 1 + \frac{1}{z} + \frac{1}{2! z^2} + \frac{1}{3! z^3} + \hdots
+	\end{equation*}
+	The point $0$ for $f$ is said to be a ``pole of infinite order'' (this shall be defined later on)
+\end{eg}
+
+While \hldefn{removable singularities} are nice to have, they are not as interesting to us. On the other hand, we are more interested in their non-removable counterpart, the \hldefn{poles}. This motivates the study of zeros of holomorphic functions.
+
+\begin{thm}[Theorem 9]\label{thm:theorem_9}
+	Let $\Omega \subseteq \mathbb{C}$ be open and connected. Suppose that $f \in H(\Omega)$ with $f \not\equiv 0$ on $\Omega$ and that $f$ has a zero at $z_0 \in \Omega$. Then
+	\begin{gather}
+		\exists r > 0 \enspace \forall z \in D = D(z_0, r) \enspace \exists g \in H(D) \enspace g(z_0) \neq 0 \enspace \exists! n \in \mathbb{N} \nonumber \\
+		f(z) = (z - z_0)^n \cdot g(z) \label{eq:theorem_9_eq}
+	\end{gather}
+\end{thm}
+
+\begin{proof}
+	By \hyperref[lemma:principle_of_analytic_continuation]{Analytic Continuation}, zeros of $f$ are isolated since $f \not\equiv 0$. So $\exists r > 0$ such that $\exists D = D(z_0, r)$, in which $\forall z \in D \setminus \{z_0\}$, $f(z) \neq 0$.
+
+	Since $f \in H(\Omega)$, $\forall z \in D$,
+	\begin{equation*}
+		f(z) = \sum_{k=0}^{\infty} c_k (z - z_0)^k
+	\end{equation*}
+	As $f \not\equiv 0$ in $D$, $\exists n \in \mathbb{N \setminus \{0\}}$ that is the smallest such that $c_n \neq 0$\footnote{$n \neq 0$ since we have $f(z_0) = 0$ which implies $c_0 = 0$.}.
+
+	\begin{align*}
+		\therefore f(z)
+			&= c_n(z - z_0)^n + c_{n + 1} (z - z_0)^{n + 1} + \hdots \\
+			&= (z - z_0)^n \underbrace{\left[ c_n + c_{n + 1} (z - z_0) + \hdots \right]}_{\text{call this } g(z)}
+	\end{align*}
+	Note that $g(z_0) \neq 0$ since $c_n \neq 0$. Thus $g(z) \in H(D)$ since it has the same radius of convergence as $f$.
+
+	To prove uniqueness, suppose that we may write
+	\begin{equation*}
+		f(z) = \sum_{k=0}^{\infty} (z - z_0)^n \cdot g(z) = (z - z_0)^m \cdot h(z)
+	\end{equation*}
+	for some $m \in \mathbb{N}$ and that $h(z) \neq 0$. If $m > n$, dividing both sides by $(z - z_0)^n$,
+	\begin{equation*}
+		g(z) = (z - z_0)^{m - n} h(z).
+	\end{equation*}
+	As $z \to z_0$, we would have $g(z_0) = 0$, which is a contradiction. If $m < n$, we can perform a similar argument and have that as $z \to z_0$, $h(z_0) = 0$, also a contradiction. Therefore, $m = n$ and $h = g$. \qed
+\end{proof}
+
+We say that $f$ has a \hlnotea{zero of order $n$} at $z_0$ if \cref{eq:theorem_9_eq} holds.
+
+% section singularities (end)
+
+% chapter lecture_19_mar_2_2018 (end)
+
 \end{document}
