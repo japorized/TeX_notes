@@ -3374,4 +3374,83 @@ The \hldefn{residue} shall be more carefully studied later on.
 
 % chapter lecture_20_mar_5th_2018 (end)
 
+\chapter{Lecture 21 Mar 7th 2018}
+	\label{chapter:lecture_21_mar_7th_2018}
+
+\section{Singularity (Continued 2)} % (fold)
+\label{sec:singularity_continued_2}
+
+\begin{thm}[Casorati-Weierstrass]\label{thm:casorati_weierstrass}
+	Let $z_0 \in \Omega$ and $f \in H(\Omega \setminus \{z_0\})$. Suppose $f$ has a singularity at $z_0$. Then one of the following occurs:
+	\begin{enumerate}
+		\item $f$ is a removable singularity at $z_0$;
+		\item $\exists m \in \mathbb{N}, \, \{c_j\}_{j = 1}^m \subseteq \mathbb{C}, \, f(z) - \sum_{j=1}^{m} c_j (z - z_0)^-j$ has a removable singularity at $z_0$; or
+		\item $\forall r > 0, \, B(z_0, r) \subseteq$ such that $f(B^0(z_0, r))$ is dense in $\mathbb{C}$ (Note: $B^0(z_0, r)$ is the punctured ball)
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	Suppose 3. does not hold, i.e. $f(B^0(z_0, r))$ is not dense in $\mathbb{C}$ for some $r > 0$. Then $\exists w \in \mathbb{C}, \, \exists \delta > 0$, such that
+	\begin{gather*}
+		f\big( B^0(z_0, r) \big) \, \cap \, B(w, \delta) = \emptyset \\
+		\implies \forall z \in B^0(z_0, r) \quad \abs{f(z) - w} > \delta
+	\end{gather*}
+	Consider $g(z) = \frac{1}{f(z) - w}$ for $z \in B^0(z_0, r)$, in which $g \in H(B^0(z_0, r))$. Then $\abs{g(z)} \leq \frac{1}{\delta}$ for all $z \in B^0(z_0, r)$, which implies that
+	\begin{equation*}
+		\lim_{z \to z_0} (z - z_0) g(z) = 0
+	\end{equation*}
+	By \cref{thm:theorem_10}, $g$ has a removable singularity at $z_0$, thus we can extend the function to a function $\tilde{g} \in H(B(z_0, r))$. From here, we try to construct a function that extends on $f$ onto the singularity $z_0$, say, $\tilde{f}$. The construction of $\tilde{g}$ satisfies the equation $\frac{1}{\tilde{g}(z)} + w = f(z)$ except, possibly, at $z_0$.
+
+	\textbf{Case 1:} Suppose $\tilde{g}(z_0) \neq 0$.
+
+	We can simply define
+	\begin{equation*}
+		\frac{1}{\tilde{g}(z)} = \begin{cases}
+			f(z) - w 	& z \in B^0(z_0, r) \\
+			\frac{1}{\tilde{g}(z_0)} & z = z_0
+		\end{cases}
+	\end{equation*}
+	Clearly then $\frac{1}{\tilde{g}} \in H(B^0(z_0, r))$. At $z_0$,
+	\begin{equation*}
+		\tilde{g}(z_0) \neq 0 \implies \exists r_1 > 0 \; D = D(z_0, r_1) \; \forall z \in D \; \tilde{g}(z) \neq 0 \implies \frac{1}{\tilde{g}} \in H(D)
+	\end{equation*}
+	Therefore, $\frac{1}{\tilde{g}} \in H(B(z_0, r))$\footnote{$\frac{1}{\tilde{g}}$ is the inverse of a non-zero holomorphic function.}
+
+	Since $\forall z \in B^0(z_0, r) \; f(z) = \frac{1}{\tilde{g}(z)} + w$ by construction, we may define
+	\begin{equation*}
+		\tilde{f}(z) = \frac{1}{\tilde{g}(z)} + w
+	\end{equation*}
+	such that $f(z_0)$ is defined as $\frac{1}{\tilde{g}(z_0)} + w$. By this construction, 1. holds.
+
+	\textbf{Case 2:} $\tilde{g}(z_0) = 0$.
+
+	$\because \tilde{g} \in H(B^0(z_0, r)) \, \land \, \tilde{g}(z_0) = 0 \, \land \, (\forall z \in B^0(z_0, r) \; \tilde{g}(z_0) \neq 0)$
+
+	By \cref{thm:theorem_9}, 
+	\begin{gather}
+		\exists ! m \in \mathbb{N} \enspace \exists 0 < r_1 < r \enspace \exists g_1 \in H\big(B(z_0, r_1)\big) \nonumber \\
+		\forall z \in B(z_0, r_1) \enspace \tilde{g}(z) = (z - z_0)^m g_1(z) \label{eq:casorati-weierstrass_pf:eq1}
+	\end{gather}
+
+	$\because g_1 \in H\big( B(z_0, r_1) \big) \, \land \, g(z_0) \neq 0$, we can repeat the argument as in \textbf{Case 1} for $g_1$ to get that $\frac{1}{g_1} \in H\big( B(z_0, r_1) \big)$, which implies
+	\begin{equation*}
+		\forall z \in B(z_0, r_1) \enspace \frac{1}{g_1(z)} = a_0 + a_1 (z - z_0) + \hdots
+	\end{equation*}
+	By construction given by \cref{eq:casorati-weierstrass_pf:eq1}, $\forall z \in B^0(z_0, r_1)$
+	\begin{align*}
+		f(z) - w
+			&= \frac{1}{g_1(z) (z - z_0)^m} \\
+			&= \frac{a_0}{(z - z_0)^m} + \frac{a_1}{(z - z_0)^{m - 1}} + \hdots + \frac{a_{m - 1}}{z - z_0} + a_m + a_{m + 1} (z - z_0) + \hdots 
+	\end{align*}
+	$\therefore \forall z \in B^0(z_0, r_1)$,
+	\begin{equation*}
+		f(z) - \frac{a_0}{(z - z_0)^m} - \hdots - \frac{a_{m - 1}}{z - z_0} = w + a_m + a_{m + 1}(z - z_0) \hdots 
+	\end{equation*}
+	Thus we may define an ``extended'' function of $f$, $\tilde{f}$ to be $w + a_m$ at the singularity $z_0$. Therefore, $f(z) - \sum_{j=1}^{m} a_j (z - z_0)^{-j}$ has a removable singularity at $z_0$, i.e. 2. holds. \qed
+\end{proof}
+
+% section singularity_continued_2 (end)
+
+% chapter lecture_21_mar_7th_2018 (end)
+
 \end{document}
