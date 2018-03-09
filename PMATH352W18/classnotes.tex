@@ -3098,7 +3098,22 @@ We will now formally define this index.
 			&\implies \phi(b) = \phi(a) = 1 \enspace \because \gamma \text{ is closed.}
 		\end{align*}
 
-		\item Note that $\ind{w}{\gamma}$ is continuous (\hlwarn{why?}) and takes only integer values, thus it must be constant on each open connected component\footnote{We may invoke \cref{lemma:principle_of_analytic_continuation} but it is, to an extent, unnecessary for such a powerful statement.} (\hlwarn{why?}).
+		We will prove that $\ind{w}{\gamma}$ is continuous.
+		\begin{gather*}
+			\forall w \in \Omega \; \forall z \in \gamma^* \enspace \exists M > 0 \; \abs{w - z} > M \\
+			\forall \epsilon > 0 \; \exists \delta = \frac{M^2 \pi \epsilon}{ \int_{\gamma} \dif{z} } > 0 \; \forall w_0 \in \Omega \\
+			\abs{w - w_0} < \delta \, \land \, \abs{w_0 - z} > \frac{M}{2}
+		\end{gather*}
+		then
+		\begin{align*}
+			\abs{\ind{w}{\gamma} - \ind{w_0}{\gamma}} &= \abs{\frac{1}{2 \pi i} \int_{\gamma} \frac{\dif{z}}{z - w}	- \frac{1}{2 \pi i} \int_{\gamma} \frac{\dif{z}}{z - w_0} } \\
+				&= \frac{1}{2 \pi} \abs{\int_{\gamma} \frac{w - w_0}{(z - w)(z - w_0)} \dif{z} } \\
+				&\leq \frac{1}{2 \pi} \int_{\gamma} \abs{\frac{w - w_0}{(z - w)(z - w_0)} } \dif{z} \\
+				&< \frac{1}{2 \pi} \delta \int_{\gamma} \abs{\frac{2}{M \cdot M} } \dif{z} \\
+				&= \frac{1}{M^2 \pi} \delta \int_{\gamma} \dif{z} = \epsilon
+		\end{align*}
+
+		\item Also $\ind{w}{\gamma}$ takes only integer values, thus it must be constant on each open connected component\footnote{We may invoke \cref{lemma:principle_of_analytic_continuation} but it is, to an extent, unnecessary for such a powerful statement.} (\hlwarn{why?}).
 
 		\item Note that
 		\begin{equation*}
@@ -3452,5 +3467,99 @@ The \hldefn{residue} shall be more carefully studied later on.
 % section singularity_continued_2 (end)
 
 % chapter lecture_21_mar_7th_2018 (end)
+
+\chapter{Lecture 22 Mar 9th 2018}
+\label{chp:lecture_22_mar_9th_2018}
+
+\section{Singularity (Continued 3)} % (fold)
+
+\begin{crly}\label{crly:casorati_weierstrass_crly}
+If $f$ has an essential singularity at $z_0$ and is holomorphic in some $B^0(z_0, r)$ where $r > 0$, then $f(B^0(z_0, r))$ is dense in $\mathbb{C}$.
+\end{crly}
+
+\begin{proof}
+  Suppose not, i.e. 3. of \cref{thm:casorati_weierstrass} does not hold. Then either 1., which implies that $z_0$ is removable, or 2., which implies that $z_0$ is a pole, is true. This contradicts the assumption that $z_0$ is an essential singularity. \qed
+\end{proof}
+
+\begin{remark}
+  There are a lot more that are actually true from \cref{thm:casorati_weierstrass}! \hlnotea{Picard} showed that in any such punctured ball $B^0(z_0, r)$ around the essential singularity $z_0$, $f$ takes on every complex value (except possibly one value) infinitely often.
+\end{remark}
+
+% section singularity_continued_3 (end)
+
+\section{The Residue Theorem} % (fold)
+
+\begin{note}[Recall]
+  If $f$ has a pole at $z_0$, $f \in H(\Omega \setminus \{z_0\})$, then in some open neighbourhood $D$ of $z_0$, we can write $\forall z \in D \setminus \{z_0\}$
+  \begin{equation}\label{eq:function_at_a_pole}
+    f(z) = \underbrace{ \frac{c_{-k}}{(z - z_0)^k} + \hdots + \frac{c_{-1}}{(z - z_0)} }_{\text{Principal Part}} + \underbrace{ c_0 + c_1 (z - z_0) + \hdots }_{G(z)}
+  \end{equation}
+  with $G \in H(D)$.
+\end{note}
+
+\begin{thm}[Cauchy's Residue Theorem]\label{thm:cauchy_s_residue_theorem}
+  Let $\Omega \subseteq \mathbb{C}$ be open, $f \in H(\Omega \setminus \{z_0\})$ where $z_0 \in \Omega$ is a pole. If $\gamma$ is a closed path in $\Omega \setminus \{z_0\}$ such that $\forall w \not\in \Omega, \, \ind{w}{\gamma} = 0$. Then
+  \begin{equation*}
+    \frac{1}{2 \pi i} \int_{\gamma} f(z) \dif(z) = \left( \res{f}{z_0} \right) \ind{z_0}{\gamma}
+  \end{equation*}
+  where $\ind{z_0}{\gamma} := \frac{1}{2 \pi i} \int_{\gamma} \frac{1}{z - z_0} \dif{z}$.
+\end{thm}
+
+\begin{proof}
+  Using notation of \cref{eq:casorati-weierstrass_pf:eq1}, define $g(z)$ such that
+  \begin{equation*}
+    g(z) := \begin{cases}
+      f(z) - \sum_{j = 1}^{k} \frac{c_{-j}}{(z - z_0)^j}  & z \in \Omega \setminus \{z_0\} \\
+      c_0                                                 & z = z_0
+    \end{cases}
+  \end{equation*}
+  Clearly, $g \in H(\Omega \setminus \{z_0\})$, since $f(z)$ minus finitely many polynomials with non-zero denominators is still a holomorphic function. At $z_0$, with a neighbourhood D around the point, we have, from \cref{eq:casorati-weierstrass_pf:eq1},
+  \begin{equation*}
+    g(z) = c_0 + c_1 (z - z_0) + \hdots
+  \end{equation*}
+  which $g(z_0)$ agrees with $c_0$ and for any point $z \in D \setminus \{z_0\}$, by definition of $g$ using \cref{eq:casorati-weierstrass_pf:eq1}. This implies that $g \in H(D) \implies g \in H(\Omega)$.
+
+  Thus, by \cref{thm:cauchy_s_theorem_for_convex_set},
+  \begin{equation*}
+    \int_{\gamma} g(z) \dif{z} = 0
+  \end{equation*}
+  Then $\forall z \in \gamma$ and since $z_0 \not\in \gamma$, we get
+  \begin{equation*}
+    \int_{\gamma} f(z) \dif{z} = \int_{\gamma} \sum_{j = 1}^k \frac{c_{-j}}{(z - z_0)^j} \dif{z}
+  \end{equation*}
+
+  Consider each term of RHS in turn. Note that for $m \geq 2$, since $\frac{-1}{(m - 1)(z - z_0)^{m - 1}}$ is the antiderivative of $\frac{1}{(z - z_0)^m}$,
+  \begin{align*}
+    \int_{\gamma} \frac{1}{(z - z_0)^m} \dif{z}
+      &= F\big( \gamma(b) \big) - F\big( \gamma(a) \big) \quad \text{by } \cref{thm:fundamental_theorem_of_calculus} \\
+      &= 0 \quad \text{since } \gamma \text{ is closed.}
+  \end{align*}
+  If $m = 1$, then
+  \begin{equation*}
+    \frac{1}{2 \pi i} \int_{\gamma} \frac{1}{z - z_0} \dif{z} = \ind{z_0}{\gamma} \text{ by definition}
+  \end{equation*}
+  \begin{align*}
+    \therefore \frac{1}{2 \pi i} \int_{\gamma} f(z) \dif{z}
+      &= c_{-1} \ind{z_0}{\gamma} \\
+      &= \left( \res{f}{z_0} \right) \ind{z_0}{\gamma}
+  \end{align*}\qed
+\end{proof}
+
+\begin{defn}[Meromorphic Functions]\label{defn:meromorphic_functions}
+  A function $f$ is said to be meromorphic on $\Omega$ if $\exists \mathscr{A} \subseteq \Omega$ such that
+  \begin{enumerate}
+    \item $A^* = \emptyset$
+    \item $f \in H(\Omega \setminus \mathscr{A})$
+    \item $\forall z \in \mathscr{A} \quad f$ has a pole of finite order on $z$.
+  \end{enumerate}
+\end{defn}
+
+\begin{remark}
+  Holomorphicity $\subseteq$ Meromorphicity (let $\matscr{A} = \emptyset$)
+\end{remark}
+
+% section the_residue_theorem (end)
+
+% chapter lecture_22_mar_9th_2018
 
 \end{document}
