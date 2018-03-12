@@ -2825,7 +2825,7 @@ At this point, it is important that we provide the following definition:
 \end{ex}
 
 \begin{lemma}[Principle of Analytic Continuation]\label{lemma:principle_of_analytic_continuation}
-	Let $\Omega \subseteq \mathbb{C}$ be open and connected, and $f \in H(\Omega)$. Let $Z(f) = \{a in \Omega : f(a) = 0 \}$. Then either
+	Let $\Omega \subseteq \mathbb{C}$ be open and connected, and $f \in H(\Omega)$. Let $Z(f) = \{a \in \Omega : f(a) = 0 \}$. Then either
 	\begin{itemize}
 		\item $Z(f) = \Omega$, i.e. $\forall z \in \Omega, \, f(z) = 0$; or
 		\item $Z(f)$ has no limit point, i.e. points where $f = 0$ are isolated
@@ -3244,7 +3244,7 @@ While \hldefn{removable singularities} are nice to have, they are not as interes
 	\begin{equation*}
 		f(z) = \sum_{k=0}^{\infty} c_k (z - z_0)^k
 	\end{equation*}
-	As $f \not\equiv 0$ in $D$, $\exists n \in \mathbb{N \setminus \{0\}}$ that is the smallest such that $c_n \neq 0$\footnote{$n \neq 0$ since we have $f(z_0) = 0$ which implies $c_0 = 0$.}.
+	As $f \not\equiv 0$ in $D$, $\exists n \in \mathbb{N} \setminus \{ 0\}$ that is the smallest such that $c_n \neq 0$\footnote{$n \neq 0$ since we have $f(z_0) = 0$ which implies $c_0 = 0$.}.
 
 	\begin{align*}
 		\therefore f(z)
@@ -3380,7 +3380,7 @@ Suppose $f$ has an isolated singularity at $z_0$, and that there exists a neighb
 \end{defn}
 
 \begin{defn}[Residue]\label{defn:residue}
-	In \cref{thm:theorem_11}, the coefficient $c_{-1}$ is called the \hldefn{residue} of $f$ at the pole $z_0$, denoted $\res{f}{z_0}$.
+	In \cref{thm:theorem_11}, the coefficient $c_{-1}$ is called the \hldefn{residue} of $f$ at the pole $z_0$, denoted $\res{f(z)}{z = z_0}$.
 \end{defn}
 
 The \hldefn{residue} shall be more carefully studied later on.
@@ -3500,7 +3500,7 @@ If $f$ has an essential singularity at $z_0$ and is holomorphic in some $B^0(z_0
 \begin{thm}[Cauchy's Residue Theorem]\label{thm:cauchy_s_residue_theorem}
   Let $\Omega \subseteq \mathbb{C}$ be open, $f \in H(\Omega \setminus \{z_0\})$ where $z_0 \in \Omega$ is a pole. If $\gamma$ is a closed path in $\Omega \setminus \{z_0\}$ such that $\forall w \not\in \Omega, \, \ind{w}{\gamma} = 0$. Then
   \begin{equation*}
-    \frac{1}{2 \pi i} \int_{\gamma} f(z) \dif(z) = \left( \res{f}{z_0} \right) \ind{z_0}{\gamma}
+    \frac{1}{2 \pi i} \int_{\gamma} f(z) \dif(z) = \left( \res{f(z)}{z = z_0} \right) \ind{z_0}{\gamma}
   \end{equation*}
   where $\ind{z_0}{\gamma} := \frac{1}{2 \pi i} \int_{\gamma} \frac{1}{z - z_0} \dif{z}$.
 \end{thm}
@@ -3541,25 +3541,95 @@ If $f$ has an essential singularity at $z_0$ and is holomorphic in some $B^0(z_0
   \begin{align*}
     \therefore \frac{1}{2 \pi i} \int_{\gamma} f(z) \dif{z}
       &= c_{-1} \ind{z_0}{\gamma} \\
-      &= \left( \res{f}{z_0} \right) \ind{z_0}{\gamma}
+      &= \left( \res{f(z)}{z = z_0} \right) \ind{z_0}{\gamma}
   \end{align*}\qed
 \end{proof}
 
 \begin{defn}[Meromorphic Functions]\label{defn:meromorphic_functions}
   A function $f$ is said to be meromorphic on $\Omega$ if $\exists \mathscr{A} \subseteq \Omega$ such that
   \begin{enumerate}
-    \item $A^* = \emptyset$
+    \item $\mathscr{A}^* = \emptyset$
     \item $f \in H(\Omega \setminus \mathscr{A})$
     \item $\forall z \in \mathscr{A} \quad f$ has a pole of finite order on $z$.
   \end{enumerate}
 \end{defn}
 
 \begin{remark}
-  Holomorphicity $\subseteq$ Meromorphicity (let $\matscr{A} = \emptyset$)
+  Holomorphicity $\subseteq$ Meromorphicity (let $\mathscr{A} = \emptyset$)
 \end{remark}
 
 % section the_residue_theorem (end)
 
 % chapter lecture_22_mar_9th_2018
+
+\chapter{Lecture 23 Mar 12th 2018}
+  \label{chapter:lecture_23_mar_12th_2018}
+
+\section{The Residue Theorem (Continued)} % (fold)
+\label{sec:the_residue_theorem_continued}
+
+We can generalize \cref{thm:cauchy_s_residue_theorem} for when there are more than one pole.
+
+\begin{thm}[Cauchy's Residue Theorem - Generalized]\label{thm:cauchy_s_residue_theorem_generalized}
+  Let $\Omega \subseteq \mathbb{C}$ be open, $f$ be meromorphic on $\Omega$, $\mathscr{A}$ be a set of poles. If $\gamma$ is a closed path in $\Omega \setminus \mathscr{A}$ such that $\forall w \not\in \Omega \enspace \ind{w}{\gamma} = 0$, then
+  \begin{equation*}
+    \frac{1}{2 \pi i} \int_{\gamma} f(z) \dif{z} = \underbrace{\sum_{a \in \mathscr{A}} \big( \res{f(z)}{z = a} \big) \ind{a}{\gamma}}_{\text{this is a finite sum}}
+  \end{equation*}
+\end{thm}
+
+The proof is an exercise in Assignment 4 (which shall be included once that assignment is over)
+
+\begin{remark}
+  We need $\Omega$ to be connected with the interior of $\gamma$ contained in $\Omega$, i.e. $\Omega$ is simply connected.
+\end{remark}
+
+Now all the above begs the question: how exactly do we find the residue of a pole?
+
+Suppose that $f$ has a pole of order $k$ at $z_0$. Then in some neighbourhood $D$ of $z_0$, we have the Laurent expansion
+\begin{equation*}
+  f(z) = \frac{a_{-k}}{(z - z_0)^k} + \hdots + \frac{a_{-1}}{z - z_0} + a_0 + a_1 (z - z_0) + \hdots  
+\end{equation*}
+which implies
+\begin{equation*}
+  f(z) (z - z_0)^k = a_{-k} + a_{-k + 1}(z - z_0) + \hdots + a_{-1}(z - z_0)^{k - 1} + \hdots
+\end{equation*}
+So $a_{-1}$ is the $(k-1)^{\text{th}}$ coefficient for $f(z) (z - z_0)^k$, i.e. we can get
+\begin{equation*}
+  \res{f(z)}{z = z_0} = a_{-1} = \lim_{z \to z_0} \frac{1}{(k - 1)!} \frac{d^{k - 1}}{dz^{k -1}} f(z) (z - z_0)^k  
+\end{equation*}
+
+% section the_residue_theorem_continued (end)
+
+\section{Applications of Cauchy's Residue Theorem} % (fold)
+\label{sec:applications_of_cauchy_s_residue_theorem}
+
+\begin{ex}
+  Evaluate $\int_{-\infty}^{\infty} \frac{1}{1 + x^4} \dif{x}$.
+
+  The typical approach (from a complex analysis standpoint) is:
+  \begin{enumerate}
+    \item Choose a complex function and integrate along some path / contour $\gamma$. By the Residue Theorem, we can get our answer in a straightforward way.
+    \item Break the contour into different parts
+    \begin{itemize}
+      \item the needed real integral
+      \item use symmetry, decay of function, etc., in the limit (\hlwarn{we shall see more about this later on})
+    \end{itemize}
+  \end{enumerate}
+
+  Let $f(z) = \frac{1}{1 + z^4}$. The singularities are
+  \begin{equation*}
+    z^4 = -1 \implies z = e^{i \frac{\pi}{4}}, \, e^{i \frac{3 \pi}{4}}, \, e^{i \frac{5 \pi}{4} }, \, e^{i \frac{7 \pi}{4} }
+  \end{equation*}
+  (Note: These are all simple poles)
+
+  Let $R > 0$, and let $\Gamma_R$ be the semi-circular, anti-clockwise contour, centered at zero, sitting in the positive side of the imaginary axis on the complex plane. \cref{thm:cauchy_s_residue_theorem_generalized} gives that
+  \begin{equation*}
+    \frac{1}{2 \pi i} \int_{\gamma} f(z) \dif{z} = \res{f(z)}{z = e^{i \frac{\pi}{4} }} + \res{f(z)}{z = e^{i \frac{3 \pi}{4} }}
+  \end{equation*}
+\end{ex}
+
+% section applications_of_cauchy_s_residue_theorem (end)
+
+% chapter lecture_23_mar_12th_2018 (end)
 
 \end{document}

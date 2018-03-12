@@ -152,7 +152,7 @@
 \DeclareMathOperator{\im}{Im}
 \DeclareMathOperator{\caparg}{Arg}
 \DeclareMathOperator{\Ind}{Ind}
-\DeclareMathOperator{\Res}{res}
+\DeclareMathOperator{\Res}{Res}
 
 % Graph styles
 \pgfplotsset{compat=1.15}
@@ -182,8 +182,8 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\hlnotec}[1]{\textcolor{base16-eighties-brown}{\textbf{#1}}}
 \newcommand{\WTP}{\textcolor{base16-eighties-brown}{WTP}}
 \newcommand{\WTS}{\textcolor{base16-eighties-brown}{WTS}}
-\newcommand{\ind}[2]{\Ind_{#2}(#1)}
-\newcommand{\res}[2]{\Res_{#2}{#1}}
+\newcommand{\ind}[2]{\Ind_{#2}\left( #1 \right)}
+\newcommand{\res}[2]{\underset{#2}{\Res} \left( #1 \right)}
 \renewcommand{\epsilon}{\varepsilon}
 \newcommand*\dif{\mathop{}\!d}
 
