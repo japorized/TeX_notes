@@ -295,6 +295,18 @@
             {
               "children": [
                 {
+                  "name": "0365ef558448cae05548d528c16573b643a70f",
+                  "path": "./.git/objects/20/0365ef558448cae05548d528c16573b643a70f",
+                  "type": "file"
+                }
+              ],
+              "name": "20",
+              "path": "./.git/objects/20",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "0748e41322032d0c5689854fa529145c716a6c",
                   "path": "./.git/objects/21/0748e41322032d0c5689854fa529145c716a6c",
                   "type": "file"
@@ -658,6 +670,18 @@
             {
               "children": [
                 {
+                  "name": "a0bd621cc5219dcd1b620ff105597f97b0cec0",
+                  "path": "./.git/objects/97/a0bd621cc5219dcd1b620ff105597f97b0cec0",
+                  "type": "file"
+                }
+              ],
+              "name": "97",
+              "path": "./.git/objects/97",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "239adef25f3fc593f35e39623614f82a3de613",
                   "path": "./.git/objects/9a/239adef25f3fc593f35e39623614f82a3de613",
                   "type": "file"
@@ -665,6 +689,18 @@
               ],
               "name": "9a",
               "path": "./.git/objects/9a",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "name": "d4a518ce1d0ca83458991cf1be6b22835f4a4b",
+                  "path": "./.git/objects/9d/d4a518ce1d0ca83458991cf1be6b22835f4a4b",
+                  "type": "file"
+                }
+              ],
+              "name": "9d",
+              "path": "./.git/objects/9d",
               "type": "folder"
             },
             {
@@ -1335,19 +1371,26 @@
       "children": [
         {
           "name": "fut.pdf",
-          "path": "./Personal Notes/fut.pdf",
+          "path": "./Others/fut.pdf",
           "type": "file"
         },
         {
           "name": "fut.tex",
-          "path": "./Personal Notes/fut.tex",
+          "path": "./Others/fut.tex",
           "type": "file"
         },
         {
           "name": "fut.thm",
-          "path": "./Personal Notes/fut.thm",
+          "path": "./Others/fut.thm",
           "type": "file"
-        },
+        }
+      ],
+      "name": "Others",
+      "path": "./Others",
+      "type": "folder"
+    },
+    {
+      "children": [
         {
           "name": "Notes_Intro_to_Analysis_WWade.pdf",
           "path": "./Personal Notes/Notes_Intro_to_Analysis_WWade.pdf",
