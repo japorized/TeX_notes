@@ -5,6 +5,11 @@
 \input{latex-classnotes-preamble.tex}
 \usepackage[most]{tcolorbox}
 
+\hypersetup{
+  colorlinks,
+  linkcolor=black
+}
+
 \pagecolor{white}
 \color{black}
 
@@ -24,7 +29,7 @@
 
 \begin{enumerate}
 	\item ${0:question}
-	\begin{tcolorbox}[arc=0mm]
+	\begin{tcolorbox}[arc=0mm, breakable, enhanced]
 		\begin{proof}
 			
 		\end{proof}

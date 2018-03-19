@@ -4,6 +4,8 @@
 \usepackage{graphicx}
 
 % Essential Packages
+\usepackage{makeidx}
+\makeindex
 \usepackage{enumitem}
 \usepackage{ragged2e}
 \usepackage{amssymb}
@@ -176,15 +178,16 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 	% highlighting shortcuts
 \newcommand{\hlimpo}[1]{\textcolor{base16-eighties-red}{\textbf{#1}}}
 \newcommand{\hlwarn}[1]{\textcolor{base16-eighties-yellow}{\textbf{#1}}}
-\newcommand{\hldefn}[1]{\textcolor{base16-eighties-blue}{\textbf{#1}}}
+\newcommand{\hldefn}[1]{\textcolor{base16-eighties-blue}{\index{#1}\textbf{#1}}}
 \newcommand{\hlnotea}[1]{\textcolor{base16-eighties-green}{\textbf{#1}}}
 \newcommand{\hlnoteb}[1]{\textcolor{base16-eighties-lightblue}{\textbf{#1}}}
 \newcommand{\hlnotec}[1]{\textcolor{base16-eighties-brown}{\textbf{#1}}}
 \newcommand{\WTP}{\textcolor{base16-eighties-brown}{WTP}}
 \newcommand{\WTS}{\textcolor{base16-eighties-brown}{WTS}}
 \newcommand{\ind}[2]{\Ind_{#2}\left( #1 \right)}
-\newcommand{\res}[2]{\underset{#2}{\Res} \left( #1 \right)}
+\newcommand{\res}[2]{\underset{#2}{\Res} #1 }
 \renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\atop}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
 \newcommand*\dif{\mathop{}\!d}
 
 % Comment the two lines below if you want to print the document

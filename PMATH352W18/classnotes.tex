@@ -1315,7 +1315,7 @@ In this case, $h = 0 + iy$ and $y \to 0 \in \mathbb{R}$. In a similar fashion, \
 
 Note that since $f'(z_0)$ exists, the real and imaginary part of \cref{eq:holomorphic approach via real axis} and \cref{eq:holomorphic approach via imaginary axis} must equate. Also note that $\frac{1}{i} = -i$. With that, we obtain the following theorem.
 
-\begin{thm}[Cauchy-Riemann Equations]\label{thm:cauchy_riemann_equations}
+\begin{thm}[Cauchy-Riemann Equations\index{Cauchy-Riemann Equations}]\label{thm:cauchy_riemann_equations}
 	If $f(z)$ is holomorphic at $z_0 = x_0 + iy_0 \in \mathbb{C}$ where $x_0, y_0 \in \mathbb{R}$, then, at $(x_0, y_0)$,
 	\begin{equation}\label{eq:cauchy_riemann_equations}
 		\frac{\partial u}{\partial x} = \frac{\partial v}{\partial y} \quad \text{ and } \quad \frac{\partial v}{\partial x} = - \frac{\partial u}{\partial y}.
@@ -1833,7 +1833,7 @@ Before we begin with the definition of a curve in $\mathbb{C}$, let us consider 
 We say that $\gamma$ and $\gamma'$ are equivalent parameterizations for the same oriented path.
 
 \begin{defn}[Equivalent Parameterization]\label{defn:equivalent_parameterization}
-	Let $\gamma_1 : [a, b] \to \mathbb{C}, \gamma_2 : [c, d] \to \mathbb{C}$ where $a, b, c, d \in \mathbb{C}$ describe the path $\gamma^*$. The two \hldefn{paramaterization are said to be equivalent} if $\exists h: [a, b] \to [c, d]$ that is a bijection and a continuous function such that
+	Let $\gamma_1 : [a, b] \to \mathbb{C}, \gamma_2 : [c, d] \to \mathbb{C}$ where $a, b, c, d \in \mathbb{C}$ describe the path $\gamma^*$. The two parameterizations are said to be \hldefn{equivalent parameterizations} if $\exists h: [a, b] \to [c, d]$ that is a bijection and a continuous function such that
 	\begin{equation*}
 		\gamma_1(t) = \gamma_2(h(t))
 	\end{equation*}
@@ -2069,7 +2069,7 @@ To simplify statements from hereon, we shall use the following notations.
 	Let $\Omega \subseteq \mathbb{C}$ be an open set in $\mathbb{C}$. We denote $f \in H(\Omega) \iff f $ is holomorphic on $\Omega$.
 \end{notation}
 
-\begin{thm}[Fundamental Theorem of Calculus]\label{thm:fundamental_theorem_of_calculus}
+\begin{thm}[Fundamental Theorem of Calculus\index{Fundamental Theorem of Calculus}]\label{thm:fundamental_theorem_of_calculus}
 	Let $\gamma:[a,b] \to \mathbb{C}$ be a path inside an open set $\Omega \subseteq \mathbb{C}$. Suppose $f(z)$ is continuous on $\gamma$, and has an antiderivative $F \in \Omega$. Then
 	\begin{equation}
 		\label{eq:fundamental_theorem_of_calculus}
@@ -2119,7 +2119,7 @@ To simplify statements from hereon, we shall use the following notations.
 	The \hldefn{interior} of a set $\Omega$ is defined as $\{z \in \Omega : \forall \epsilon > 0 \; B(z, \epsilon) \subseteq \Omega\}$, and denoted as $\Omega^0$.
 \end{note}
 
-\begin{thm}[Goursat's Theorem / Cauchy's Theorem for a triangle]\label{thm:goursat_s_theorem}
+\begin{thm}[Goursat's Theorem / Cauchy's Theorem for a triangle\index{Goursat's Theorem}]\label{thm:goursat_s_theorem}
 	Let $\Omega \subseteq \mathbb{C}$ be an open set. Suppose $\Delta \subseteq \Omega$ is a closed triangle whose interior is also contained in $\Omega$. Let $f \in H(\Omega)$. Then
 	\begin{equation*}
 		\int_{\Delta} f(z) \dif{z} = 0
@@ -2365,7 +2365,7 @@ This theorem holds more meaning than the presented statement, as it implies that
 	A set $S \subseteq \mathbb{C}$ is called a \hldefn{convex set} if the line segment joining any pair of points in $S$ lies entirely in $S$.
 \end{defn}
 
-\begin{thm}[Cauchy's Theorem for Convex Set]\label{thm:cauchy_s_theorem_for_convex_set}
+\begin{thm}[Cauchy's Theorem for Convex Set\index{Cauchy's Theorem for Convex Set}]\label{thm:cauchy_s_theorem_for_convex_set}
 	Let $\Omega \subseteq \mathbb{C}$ be a convex open set, and $f \in H(\Omega)$. Then
 	\begin{enumerate}
 	 	\item $f = F'$ for some $F \in H(\Omega)$.
@@ -2429,7 +2429,7 @@ This theorem holds more meaning than the presented statement, as it implies that
 	Hence, by first principle, $F'(z_0) = f(z_0)$. \qed
 \end{proof}
 
-\begin{thm}[Cauchy's Integral Formula 1]\label{thm:cauchy_s_integral_formula_1}
+\begin{thm}[Cauchy's Integral Formula 1\index{Cauchy's Integral Formula}]\label{thm:cauchy_s_integral_formula_1}
 Let $\Omega \subseteq \mathbb{C}$ be a convex open set, and $C$ be a closed circle path in $\Omega$. If $w \in \Omega \setminus \partial C$, where $\partial C$ is the \hldefn{boundary of $C$}, and $f \in H(\Omega)$, then
 
 	\begin{tabular}{L{10cm} C{5cm}}
@@ -2632,7 +2632,7 @@ We may now continue with completing the previous proof.
 	which holds for any $w_0 \in \Omega$ by having $C \subseteq \Omega$ centered at $w_0$.
 \end{note}
 
-\begin{thm}[Cauchy's Integral Formula 2]\label{thm:cauchy_s_integral_formula_2}
+\begin{thm}[Cauchy's Integral Formula 2\index{Cauchy's Integral Formula}]\label{thm:cauchy_s_integral_formula_2}
 	Let $\Omega \subseteq \mathbb{C}$ be open, $f \in H(\Omega)$. Then
 	\begin{enumerate}
 		\item $\forall w \in \Omega$, $f$ has a power series expansion at $w$.
@@ -2894,7 +2894,7 @@ We shall restate the \cref{item:maximum_modulus_principle} in the following mann
 		which $\implies c_1 = c_2 = \hdots = 0$. Thus $\forall z \in D_{z_0}, \, f(z) \equiv c_0 \mod 2 \pi$. Then by \cref{lemma:principle_of_analytic_continuation}, since $f(z_0) - c_0$, as $f(z) - c_0)$ contains $\bar{D(z-0, r)}$, we see that $f(z) - c_0 \equiv 0$ in $\Omega$, which implies the equality of \cref{item:maximum_modulus_principle_strong}. \qed
  	\end{proof}
 
- 	\item \hlnotea{Fundamental Theorem of Algebra (FTA)} Any polynomial $P(z) \in \mathbb{C}[z]$ of degree greater than $1$ has precisely $n$ roots in $\mathbb{C}$, given by $\alpha_1, \alpha_2, ..., \alpha_n$. $P(z)$ can be factored as $P(z) = A(z - \alpha_1)\hdots(z - \alpha_n)$ for some $A \in \mathbb{C}$. \label{item:fta}
+ 	\item \hlnotea{Fundamental Theorem of Algebra}\index{Fundamental Theorem of Algebra} (FTA) Any polynomial $P(z) \in \mathbb{C}[z]$ of degree greater than $1$ has precisely $n$ roots in $\mathbb{C}$, given by $\alpha_1, \alpha_2, ..., \alpha_n$. $P(z)$ can be factored as $P(z) = A(z - \alpha_1)\hdots(z - \alpha_n)$ for some $A \in \mathbb{C}$. \label{item:fta}
 
  	\begin{proof}
  		We may write $P(z) = A(z^n + a_{n - 1} z^{n - 1} + \hdots a_1 z + a_0)$, which then
@@ -3018,7 +3018,7 @@ We shall restate the important lemma that we have been using in the last two lec
 \end{remark}
 Unfortunately for us, that is not true (\hlwarn{example needed}). But a ``partial'' converse exists.
 
-\begin{thm}[Morera's Theorem]\label{thm:morera_s_theorem}
+\begin{thm}[Morera's Theorem\index{Morera's Theorem}]\label{thm:morera_s_theorem}
 	Let $f$ be continuous on $\Omega \subseteq \mathbb{C}$, which is an open set, and $\forall \Delta \in \Omega, \, \int_{\Delta} f = 0$, where $\Delta$ is a triangular path. Then $f \in H(\Omega)$.
 \end{thm}
 
@@ -3058,7 +3058,7 @@ We will now formally define this index.
 	in which shall be called the winding number of $\gamma$ around $w$.
 \end{defn}
 
-\begin{thm}[Winding Number Theorem]\label{thm:winding_number_theorem}
+\begin{thm}[Winding Number Theorem\index{Winding Number Theorem}]\label{thm:winding_number_theorem}
 	We shall use notation as the definition above. $\ind{w}{\gamma}$ is
 	\begin{enumerate}
 		\item always an integer;
@@ -3336,7 +3336,7 @@ $f(z_0) = 0 \implies$
 	If $n = 1$, we say that $z_0$ is a \hldefn{simple zero}.
 \end{defn}
 
-\textbf{Recall definition of} \hldefn{a pole} \textbf{from \cref{defn:removable_singularity_pole_essential_singularity}}
+\textbf{Recall definition of} a pole \textbf{from \cref{defn:removable_singularity_pole_essential_singularity}}
 
 Suppose $f$ has an isolated singularity at $z_0$, and that there exists a neighbourhood $D$ around $z_0$ where $A, B \in H(D)$, in which $A$ and $B$ are defined such that $\forall z \neq z_0 \in D$, $A(z_0) \neq 0 \, \land \, B(z_0) = 0$, so that we can let $f(z) = \frac{A(z)}{B(z)}$. Then $f$ has a pole at $z_0$.
 
@@ -3395,12 +3395,12 @@ The \hldefn{residue} shall be more carefully studied later on.
 \section{Singularity (Continued 2)} % (fold)
 \label{sec:singularity_continued_2}
 
-\begin{thm}[Casorati-Weierstrass]\label{thm:casorati_weierstrass}
+\begin{thm}[Casorati-Weierstrass\index{Casorati-Weierstrass}]\label{thm:casorati_weierstrass}
 	Let $z_0 \in \Omega$ and $f \in H(\Omega \setminus \{z_0\})$. Suppose $f$ has a singularity at $z_0$. Then one of the following occurs:
 	\begin{enumerate}
 		\item $f$ is a removable singularity at $z_0$;
 		\item $\exists m \in \mathbb{N}, \, \{c_j\}_{j = 1}^m \subseteq \mathbb{C}, \, f(z) - \sum_{j=1}^{m} c_j (z - z_0)^-j$ has a removable singularity at $z_0$; or
-		\item $\forall r > 0, \, B(z_0, r) \subseteq$ such that $f(B^0(z_0, r))$ is dense in $\mathbb{C}$ (Note: $B^0(z_0, r)$ is the punctured ball)
+		\item $\forall r > 0, \, B(z_0, r) \subseteq \Omega$ such that $f(B^0(z_0, r))$ is dense in $\mathbb{C}$ (Note: $B^0(z_0, r)$ is the punctured ball)
 	\end{enumerate}
 \end{thm}
 
@@ -3497,7 +3497,7 @@ If $f$ has an essential singularity at $z_0$ and is holomorphic in some $B^0(z_0
   with $G \in H(D)$.
 \end{note}
 
-\begin{thm}[Cauchy's Residue Theorem]\label{thm:cauchy_s_residue_theorem}
+\begin{thm}[Cauchy's Residue Theorem\index{Cauchy's Residue Theorem}]\label{thm:cauchy_s_residue_theorem}
   Let $\Omega \subseteq \mathbb{C}$ be open, $f \in H(\Omega \setminus \{z_0\})$ where $z_0 \in \Omega$ is a pole. If $\gamma$ is a closed path in $\Omega \setminus \{z_0\}$ such that $\forall w \not\in \Omega, \, \ind{w}{\gamma} = 0$. Then
   \begin{equation*}
     \frac{1}{2 \pi i} \int_{\gamma} f(z) \dif(z) = \left( \res{f(z)}{z = z_0} \right) \ind{z_0}{\gamma}
@@ -3519,7 +3519,7 @@ If $f$ has an essential singularity at $z_0$ and is holomorphic in some $B^0(z_0
   \end{equation*}
   which $g(z_0)$ agrees with $c_0$ and for any point $z \in D \setminus \{z_0\}$, by definition of $g$ using \cref{eq:casorati-weierstrass_pf:eq1}. This implies that $g \in H(D) \implies g \in H(\Omega)$.
 
-  Thus, by \cref{thm:cauchy_s_theorem_for_convex_set},
+  Thus, by \hyperref[thm:cauchy_s_theorem_for_convex_set]{Cauchy's Theorem},
   \begin{equation*}
     \int_{\gamma} g(z) \dif{z} = 0
   \end{equation*}
@@ -3531,7 +3531,7 @@ If $f$ has an essential singularity at $z_0$ and is holomorphic in some $B^0(z_0
   Consider each term of RHS in turn. Note that for $m \geq 2$, since $\frac{-1}{(m - 1)(z - z_0)^{m - 1}}$ is the antiderivative of $\frac{1}{(z - z_0)^m}$,
   \begin{align*}
     \int_{\gamma} \frac{1}{(z - z_0)^m} \dif{z}
-      &= F\big( \gamma(b) \big) - F\big( \gamma(a) \big) \quad \text{by } \cref{thm:fundamental_theorem_of_calculus} \\
+      &= F\big( \gamma(b) \big) - F\big( \gamma(a) \big) \quad \text{by } \hyperref[thm:fundamental_theorem_of_calculus]{FTC} \\
       &= 0 \quad \text{since } \gamma \text{ is closed.}
   \end{align*}
   If $m = 1$, then
@@ -3570,7 +3570,7 @@ If $f$ has an essential singularity at $z_0$ and is holomorphic in some $B^0(z_0
 
 We can generalize \cref{thm:cauchy_s_residue_theorem} for when there are more than one pole.
 
-\begin{thm}[Cauchy's Residue Theorem - Generalized]\label{thm:cauchy_s_residue_theorem_generalized}
+\begin{thm}[Cauchy's Residue Theorem - Generalized\index{Cauchy's Residue Theorem - Generalized}]\label{thm:cauchy_s_residue_theorem_generalized}
   Let $\Omega \subseteq \mathbb{C}$ be open, $f$ be meromorphic on $\Omega$, $\mathscr{A}$ be a set of poles. If $\gamma$ is a closed path in $\Omega \setminus \mathscr{A}$ such that $\forall w \not\in \Omega \enspace \ind{w}{\gamma} = 0$, then
   \begin{equation*}
     \frac{1}{2 \pi i} \int_{\gamma} f(z) \dif{z} = \underbrace{\sum_{a \in \mathscr{A}} \big( \res{f(z)}{z = a} \big) \ind{a}{\gamma}}_{\text{this is a finite sum}}
@@ -3631,5 +3631,391 @@ So $a_{-1}$ is the $(k-1)^{\text{th}}$ coefficient for $f(z) (z - z_0)^k$, i.e. 
 % section applications_of_cauchy_s_residue_theorem (end)
 
 % chapter lecture_23_mar_12th_2018 (end)
+
+\chapter{Lecture 24 Mar 14 2018}
+  \label{chapter:lecture_24_mar_14_2018}
+
+\section{Application of Cauchy's Residue Theorem (Continued)} % (fold)
+\label{sec:application_of_cauchy_s_residue_theorem_continued}
+
+We will continue with the previous example.
+
+\begin{ex}
+  Evaluate $I = \int_{-\infty}^{\infty} \frac{1}{1 + x^4} \dif{x}$.
+
+  Consider the function $f(z) = \frac{1}{1 + z^4}$. Then $f$ has simple poles at $\alpha_1 = e^{i \frac{\pi}{4} }, \, \alpha_2 = e^{i \frac{3 \pi}{4} }, \, \alpha_3 = e^{i \frac{5 \pi}{4} }, \, \alpha_4 = e^{i \frac{7 \pi}{4} }$. Consider the contour $\Gamma_R$, where $R$ is large, that consists of an anticlockwise semi-circle $C_R$ going from $R$ to $-R$, and a straight line from $-R$ to $R$ on the real axis.
+
+  By \hyperref[thm:cauchy_s_residue_theorem_generalized]{the Residue Theorem},
+  \begin{equation}\label{ex:resthm_application_eq_1}
+    \frac{1}{2 \pi i} \int_{\gamma} \frac{1}{1 + z^4} \dif{z} = \res{f(z)}{z = \alpha_1} + \res{f(z)}{z = \alpha_2}
+  \end{equation}
+  Note that for \cref{ex:resthm_application_eq_1},
+  \begin{equation*}
+    LHS = \frac{1}{2 \pi i} \left[ \int_{-R}^{R} \frac{1}{1 + x^4} \dif{x} + \int_{C_R} \frac{1}{1 + z^4} \dif{z} \right] 
+  \end{equation*}
+  On $C_R$, we have that $\abs{z} = R$, so $\abs{1 + z^4} \geq \abs{\abs{1} - \abs{z}^4} = R^4 - 1$, and therefore
+  \begin{align*}
+    \abs{\int_{C_R} \frac{1}{1 + z^4} \dif{z} }
+      &\leq \int_{C_R} \abs{\frac{1}{1 + z^4} } \dif{z} \\
+      &\leq \int_{C_R} \frac{1}{R^4 - 1} \dif{z} \\
+      &= \frac{1}{R^4 - 1} \int_{C_R} \abs{\dif{z}} \\
+      &= \frac{1}{R^4 - 1} \cdot \pi R
+  \end{align*}
+  As $R \to \infty$, we have $\int_{C_R} \frac{1}{1 + z^4} \dif{z} \to 0$, since it is bounded above by $\frac{\pi R}{R^4 - 1}$ that goes to $0$.
+
+  Therefore, taking the limit of LHS (as well as RHS) as $R \to \infty$ in \cref{ex:resthm_application_eq_1}, we have
+  \begin{equation*}
+    \frac{1}{2 \pi i} \int_{-\infty}^{\infty} \frac{1}{1 + x^4} = \res{f(z)}{z = \alpha_1} + \res{f(z)}{z = \alpha_2}
+  \end{equation*}
+
+  Next, we compute the residues:
+  \begin{align*}
+    \res{f(z)}{z = \alpha_1}
+      &= \lim_{z \to \alpha_1} f(z)(z - \alpha_1) \\
+      &= \lim_{z \to \alpha_1} \frac{z - \alpha_1}{g(z)} \enspace \text{where } g(z) = 1 + z^4 \\
+      &= \lim_{z \to \alpha_1} \frac{z - \alpha_1}{g(z) - g(\alpha_1)} \enspace \because g(\alpha_1) = 0 \\
+      &= \frac{1}{g'(z)} \at{z = \alpha_1}{} = \frac{1}{4z^3} \at{\alpha_1}{} = \frac{1}{4\alpha_1^3} \\
+    \res{f(z)}{z = \alpha_2}
+      &= \frac{1}{4z^3} \at{\alpha_2}{} = \frac{1}{4 \alpha_2^3}
+  \end{align*}
+  So RHS of \cref{ex:resthm_application_eq_1} is
+  \begin{equation*}
+    RHS = \frac{1}{4} \left( \frac{1}{e^{3i \frac{\pi}{4} }} + \frac{1}{e^{9i \frac{\pi}{4} }} \right) = \frac{1}{4} \left( e^{- i \frac{3\pi}{4} } + e^{i \frac{\pi}{4} } \right) = \frac{i}{2} \sin \frac{\pi}{4} = -\frac{i}{2 \sqrt{2}} 
+  \end{equation*}
+  Therefore,
+  \begin{equation*}
+    \int_{-\infty}^{\infty} \frac{1}{1 + x^4} \dif{x} = 2 \pi i \left(-\frac{i}{2 \sqrt{2}} \right) = \frac{\pi}{2} 
+  \end{equation*}
+\end{ex}
+
+\begin{ex}
+  Show that $\int_{-\infty}^{\infty} \frac{\sin x}{x} \dif{x} = \pi$ \\
+  (Note: This integrand is not absolutely convergent)
+
+  If we try $f(z) = \frac{\sin z}{z}$ on some semi-circle arc $C_R$ with $\abs{f(z)} \leq \frac{1}{R}$, then
+  \begin{equation*}
+    \abs{\int_{C_R} f(z) \dif{z} } \leq \int_{C_R} \frac{1}{R} \abs{\dif{z}} = \frac{\text{length of } C_R}{R} \approx \pi
+  \end{equation*}
+  which means that the \hlnotea{decay} of the $f$ is insufficient to help us compute our desired result.
+
+  Consider $\sin x = \frac{e^{ix} - e^{-ix}}{2 i}$. We then need to show
+  \begin{equation*}
+    I = \int_{-\infty}^{\infty} \frac{e^{ix} - e^{-ix}}{2 i x} \dif{x} = \pi
+  \end{equation*}
+  Let $f(z) = \frac{e^{iz}}{z} = \frac{1}{z} (1 + iz + \frac{(iz)^2}{2} + \hdots )$. Thus $F$ has a simple poles at $z = 0$ with residue $1$.
+
+  Consider the countour $\Gamma_R$:
+  \begin{figure}[H]
+    \begin{center}
+      \resizebox{6cm}{!}{
+        \begin{tikzpicture}
+          \draw[->] (-5.5, 0) -- (5.5, 0) node[right] {$\re$};
+          \draw[->] (0, -0.5) -- (0, 6) node[above] {$\im$};
+          \draw[midarrow={latex}{0.7}] (5, 0) arc(0:180:5) node [midway,above,right,xshift=5,yshift=7] {$C_R$};
+          \draw[midarrow={latex}{0.7}] (-3, 0) arc(-180:-360:3) node [midway,above,left,xshift=-5,yshift=7] {$C_\epsilon$};
+          \draw[midarrow={latex}{0.5}] (-5,0) -- (-3,0);
+          \draw[midarrow={latex}{0.5}] (3, 0) -- ( 5,0);
+          \node[label={270:{$R$}},circle,fill,inner sep=2pt] at (5,0) {};
+          \node[label={270:{$-R$}},circle,fill,inner sep=2pt] at (-5,0) {};
+          \node[label={270:{$\epsilon$}},circle,fill,inner sep=2pt] at (3,0) {};
+          \node[label={270:{$-\epsilon$}},circle,fill,inner sep=2pt] at (-3,0) {};
+        \end{tikzpicture}
+      }
+    \end{center}
+    \caption[loftitle]{Contour $\Gamma_R$}
+  \end{figure}
+
+  The Residue Theorem gives
+  \begin{gather*}
+    \frac{1}{2 \pi i} \int_{\Gamma_R} \frac{e^{iz}}{z} \dif{z} = 0 \\
+    \implies 0 = \int_{-R}^{-\epsilon} \frac{e^{ix}}{x} \dif{x} + \int_{C_\epsilon} \frac{e^{iz}}{z} \dif{z} + \int_{\epsilon}^{R} \frac{e^{ix}}{x} \dif{x} + \int_{C_R} \frac{e^{iz}}{z} \dif{z} 
+  \end{gather*}
+  Note that
+  \begin{align*}
+    \abs{\int_{C_R} \frac{e^{iz}}{z} \dif{z} }
+      &= \abs{\int_{0}^{\pi} \frac{e^{iR(\cos \theta + i \sin \theta)}}{Re^{i \theta}} Rie^{i \theta} \dif{\theta} } \\
+      &\leq \int_{0}^{\pi} e^{-R \sin \theta} \dif{\theta}  \\
+      &= \int_{0}^{\frac{\pi}{2}} e^{-R \sin \theta} \dif{\theta} + \int_{\frac{\pi}{2}}^{\pi} e^{-R \sin \theta} \dif{\theta} \\
+      &= 2 \int_{0}^{\frac{\pi}{2}} e^{-R \sin \theta} \dif{\theta} \enspace \text{by symmetry} 
+  \end{align*}
+  By a similar argument as in A3Q1(c), on $[0, \frac{\pi}{2} ]$,
+  \begin{gather*}
+    \sin \theta \geq \frac{2}{\pi} \theta \\
+    e^{- \sin \theta} \leq e^{- \frac{2}{\pi} \theta}
+  \end{gather*}
+  Thus
+  \begin{align*}
+    \abs{\int_{C_R} \frac{e^{iz}}{z} \dif{z} }
+      &\leq 2 \int_{0}^{\frac{\pi}{2}} e^{-\frac{2R \theta}{\pi}} \dif{\theta} \\
+      &= 2 \left( -\frac{\pi}{2R} \right) e^{-\frac{2R \theta}{\pi} }\at{0}{\frac{\pi}{2}} = -\frac{\pi}{R} e^{-R - 1}
+  \end{align*}
+  Thus we observe that as $R \to \infty$, RHS $\to 0$.
+
+  By A4Q4, on $C_\epsilon$, as $\epsilon \to 0$, we pick up half of the residue at $z = 0$, i.e.
+  \begin{equation*}
+    \frac{1}{2 \pi i} \int_{C_\epsilon} \frac{e^{iz}}{z} \dif{z} = - \frac{1}{2},
+  \end{equation*}
+  in which we note that the value is negative since $C_\epsilon$ is clockwise.
+
+  Therefore,
+  \begin{equation*}
+    \lim_{\substack{R \to \infty \\ \epsilon \to 0}} \left[ \int_{-R}^{-\epsilon} \frac{e^{ix}}{x} \dif{x} + \int_{\epsilon}^{R} \frac{e^{ix}}{x} \dif{x} \right] = \int_{-\infty}^{\infty} \frac{e^{ix}}{x} \dif{x} = \pi i
+  \end{equation*}
+
+  Using a similar argument (\hlwarn{do this as an exercise}), it can be shown that
+  \begin{equation*}
+    \int_{-\infty}^{\infty} \frac{e^{-ix}}{x} \dif{x} = - \pi i
+  \end{equation*}
+
+  And with that, we obtain the final solution of
+  \begin{equation*}
+    \frac{\pi i - (- \pi i)}{2i} = \pi
+  \end{equation*}
+  as required.
+\end{ex}
+
+Refer to Stein \& Shakarchi, Section 2.1, for \hlimpo{more examples}.
+
+% section application_of_cauchy_s_residue_theorem_continued (end)
+
+% chapter lecture_24_mar_14_2018 (end)
+
+\chapter{Lecture 25 Mar 16 2018}
+  \label{chapter:lecture_25_mar_16_2018}
+
+We are now in a position to look into how we can define ``logarithms'' for $\mathbb{C}$.
+
+\section{The Argument Principle} % (fold)
+\label{sec:the_argument_principle}
+
+Since we may express $z = Re^{i (\theta + 2k \pi)}$ for some $k \in \mathbb{Z}$, we would expect a logarithm to be of the form
+\begin{equation*}
+  \log z = \log R + i (\theta + 2k \pi)
+\end{equation*}
+So in general,
+\begin{equation*}
+  \log f(z) = \log \abs{f(z)} + i \arg{f(z)}
+\end{equation*}
+The derivative of $\log z$ is $\frac{f'(z)}{f(z)}$, should we expect the same idea extending from the reals, which is single-valued. Then the integral
+\begin{equation*}
+  \int_{\gamma} \frac{f'(z)}{f(z)} \dif{z} 
+\end{equation*}
+can be interpreted as the change in the argument\index{argument} of $f$ as $z$ traverses the curve $\gamma$. Moreover, assuming that $\gamma$ is a closed path, this change of argument is determined entirely by the zeros and poles of $f$ in $\gamma$. 
+
+\begin{note}[Stein \& Shakarchi, pg. 89]
+  The addivitity formula for $\log$,
+  \begin{equation*}
+    \log(f_1 f_2) = \log f_1 + \log f_2
+  \end{equation*}
+  fails in general.
+\end{note}
+
+\begin{thm}[Argument Principle\index{Argument Principle}]\label{thm:argument_principle}
+  Suppose $f$ is meromorphic on a region (open \& connected) $\Omega \subseteq \mathbb{C}$, $\gamma$ a closed path such that $\gamma^* \in \Omega \setminus (\mathscr{A} \cup Z(f))$ such that
+  \begin{itemize}
+    \item $\forall w \not\in \Omega \enspace \ind{w}{\gamma} = 0$
+    \item $\forall w \in \Omega \setminus \gamma^* \enspace \ind{w}{\gamma} = 0$ or $1$
+  \end{itemize}
+  Then
+  \begin{equation*}
+    \frac{1}{2 \pi i} \int_{\gamma} \frac{f'(z)}{f(z)} \dif{z} = \abs{Z(f) \cap \gamma^0} - \abs{\mathscr{A} \cap \gamma^0}
+  \end{equation*}
+  where the zeros and poles are counted by multiplicity.
+\end{thm}
+
+\begin{proof}
+  (\hlwarn{include proof here: use \cref{thm:cauchy_s_residue_theorem_generalized} to CTP}).
+\end{proof}
+
+\hlnoteb{Question:} What are the poles of $\frac{f'}{f}$?
+
+Suppose that $f$ has a zero of order $k$ at $z_0$. Then $\exists r > 0, \, \forall z \in D(z_0, r), \, f(z) = (z - z_0)^k g(z)$ where $g \in H\big(D(z_0, r)\big)$ and $g \not\equiv 0$ on $D(z_0, r)$. So
+\begin{gather*}
+  f'(z) = k(z - z_0)^{k - 1} g(z) + (z - z_0)^k g'(z) \implies \\
+  \frac{f'(z)}{f(z)} = \frac{k}{z - z_0} + \frac{g'(z)}{g(z)} \implies
+\end{gather*}
+$\frac{f'}{f}$ has a simple pole at $z_0$ with residue $k$.
+
+Suppose $f$ has a pole of order $k$. Then $\exists r > 0, \, \forall z \in D(z_0, r), \, \exists h \in H\big(D(z_0, r)\big) \; h \not\equiv 0, \, f(z) = (z - z_0)^{-k} h(z)$. Then
+\begin{gather*}
+  f'(z) = -k (z - z_0)^{-k-1} h(z) + (z - z_0)^{-k} h'(z) \implies \\
+  \frac{f'(z)}{f(z)} = \frac{-k}{z - z_0} + \frac{h'(z)}{h(z)} \implies
+\end{gather*}
+$\frac{f'}{f}$ has a simple pole at $z_0$ with residue $-k$.
+
+$\therefore \, f$ is meromorphic on $\Omega \implies \frac{f'}{f}$ has simple zeros and poles at exactly the zeros and poles of $f$ with residue equals to the order of zeros of $f$ and negative of the order of poles of $f$, respectively.
+
+\begin{thm}[Rouch\'e's Theorem\index{Rouch\'e's Theorem}]\label{thm:rouche_s_theorem}
+  Let $\Omega \subseteq \mathbb{C}$ be a region, $f, g \in H(\Omega)$, $\gamma$ a closed path on $\Omega$ with
+  \begin{itemize}
+    \item $\forall w \not\in \Omega \enspace \ind{w}{\gamma} = 0$,
+    \item $\forall w \in \Omega \setminus \gamma^* \enspace \ind{w}{\gamma} = 0$ or $1$.
+  \end{itemize}
+  If $f, g$ satisfy
+  \begin{equation*}
+    \forall z \in \gamma^* \enspace \abs{f(z) - g(z)} < \abs{f(z)},
+  \end{equation*}
+  then $f$ and $g$ have the same number of zeros on $\gamma^*$ (counted with multiplicity).
+\end{thm}
+
+\begin{proof}[Idea]
+  \hlnotec{WTS} $\frac{1}{2 \pi i} \int_{\gamma} \frac{f'}{f} = \frac{1}{2 \pi i} \int_{\gamma} \frac{g'}{g}$, since the result would follow by \cref{thm:argument_principle}. This is equivalent to $\frac{1}{2 \pi i} = \int_{\gamma} \left[ \frac{f'}{f} - \frac{g'}{g} \right] = 0$. By our small argument about how a $\log$ function should behave in $\mathbb{C}$, observe that we thus have
+  \begin{equation*}
+    \left( \log f \right)' - \left( \log g \right)' = \left( \log \frac{f}{g} \right)'
+  \end{equation*}
+  So we wish to get either $\frac{g}{f}$ or $\frac{f}{g}$.
+\end{proof}
+
+\begin{proof}
+  Given that $\forall z \in \gamma^*, \, \abs{f - g} < \abs{f}$. Note that $f \not\equiv 0$; otherwise we would have the impossible case of $\abs{0 - g} < \abs{0}$.
+
+  Divide both sides by $\abs{f}$, then
+  \begin{equation*}
+    \forall z \in \gamma^* \enspace \abs{1 - \frac{g}{f} } < 1
+  \end{equation*}
+  Therefore, $\forall z \in \gamma^*, \, F = \frac{g}{f} \in B(1, 1)$. Let $\gamma : [a, b] \to \mathbb{C}$ be a parameterization of $\gamma^*$. Consider the function $F \circ \gamma$, which is a closed path that is contained in $B(1, 1)$. $\because z = 0$ \hlwarn{lies outside}\footnote{Is $z = 0$ not on $\gamma^*$?}, we have $\ind{0}{F \circ \gamma} = 0$. Then
+  \begin{align}
+    &\frac{1}{2 \pi i} \int_{F \circ}^{\gamma} \frac{1}{z} \dif{z} = 0 \nonumber \\
+    &\implies \frac{1}{2 \pi i} \int_{a}^{b} \frac{F'\big(\gamma(t)\big) \gamma(t) \dif{t}}{F\big(\gamma(t)\big)} = 0 \nonumber \\
+    &\implies \frac{1}{2 \pi i} \int_{\gamma} \frac{F'(z)}{F(z)} \dif{z} = 0 \enspace \text{by letting} \gamma(t) = z \nonumber \\
+    &\implies \frac{1}{2 \pi i} \int_{\gamma} \left(\frac{g'}{g} - \frac{f'}{f} \right) \dif{z} = 0 \tag{$\dagger$}\label{eq:rouche_pf_eq1}
+  \end{align}
+  where for \cref{eq:rouche_pf_eq1}, note that
+  \begin{gather*}
+    F' = \frac{g'f - gf'}{f^2} \enspace \text{by Quotient Rule} \\
+    \frac{F'}{F} = \frac{g'f - gf'}{f^2} \cdot \frac{f}{g} = \frac{g'}{g} - \frac{f'}{f} 
+  \end{gather*}
+  The proof is complete by \cref{thm:argument_principle}.
+\end{proof}
+
+% section the_argument_principle (end)
+
+% chapter lecture_25_mar_16_2018 (end)
+
+\chapter{Lecture 26 Mar 19 2018}
+  \label{chapter:lecture_26_mar_19_2018}
+
+\section{The Argument Principle (Continued)} % (fold)
+\label{sec:the_argument_principle_continued}
+
+\begin{note}[Notation]
+  Let $f$ be a function meromorphic on a region $\Omega \subseteq \mathbb{C}$. We write
+  \begin{align*}
+    N_f &:= \#\text{zeros of } f \text{ inside } \gamma^* - \#\text{poles of } f \text{ inside } \gamma^* \\
+      &= \abs{Z(f) \cap \gamma^0} - \abs{\mathscr{A} \cap \gamma^0}
+  \end{align*}
+\end{note}
+
+\begin{remark}
+  If all conditions of \hyperref[thm:rouche_s_theorem]{Rouch\'e's Theorem} hold except that, instead, $f$ \& $g$ are meromorphic on $\Omega$, then if $\gamma^*$ contains no poles of $f$ \& $g$ then we can conclude that $N_f = N_g$
+\end{remark}
+
+\begin{ex}
+  Find the number of roots of $P(z) = z^8 - 5z^3 + z - 2$ lying in $\abs{z} \leq 1$.
+
+  \begin{solution}
+    Let $\gamma$ be the circle $\abs{z} = 1$, oriented anticlockwise. Let $g(z) = P(z), \, f(z) = -5z^3$\footnote{We pick the dominant term in $P$ for $f$}. Then $\abs{f(z)} = \abs{5z^3} = 5$, and
+    \begin{align*}
+      \abs{f(z) - g(z)} &= \abs{z^8 + z - 2} \\
+        &\leq 1 + 1 + 2 \enspace \text{by Triangle Inequality, and on } \gamma \\
+        &= 4 < 5 = \abs{f(z)}
+    \end{align*}
+    So the inequality in Rouch\'e's Theorem holds. Hence by Rouch\'e, $P(z) = g(z)$ has $3$ roots (at $z = 0$, counted thrice since it has order $3$) in $\abs{z} < 1$.
+
+    To get the zeros for $\abs{z} \leq 1$, change $\gamma$ to be on $\abs{z} = 1 + \epsilon$ for some $\epsilon > 0$ and proceed from there.
+  \end{solution}
+\end{ex}
+
+\hlimpo{You should try more of these problems from the recommended texts.}
+
+\subsection{Alternative Proof for FTA} % (fold)
+\label{sub:alternative_proof_for_fta}
+
+Before proceeding with providing with alternative proof, note the following two definitions about polynomials.
+
+\begin{defn}[Monic Polynomial\index{Monic Polynomial}]\label{defn:monic_polynomial}
+  A monic polynomial is a polynomial with a leading coefficient of $1$.
+\end{defn}
+
+\begin{defn}[Monomial\index{Monomial}]\label{defn:monomial}
+  A monomial is a polynomial with only one term.
+\end{defn}
+
+Recall the statement of the Fundamental Theorem of Algebra\index{Fundamental Theorem of Algebra} (FTA)
+
+$\forall P \in C[z]$ with $\deg P = n$ for some $n \in \mathbb{N}$, $P$ has $n$ roots in $\mathbb{C}$.
+
+\begin{proof}
+  Without loss of generality, assume that the polynomial is monic (divide the polynomial by the leading coefficient if necessary). Take
+  \begin{equation*}
+    g(z) = z^n + a_{n - 1}z^{n - 1} + \hdots + a_1 z + a_0
+  \end{equation*}
+  with $a_1 \in \mathbb{C}$ for $i \in [1, n - 1] \subset \mathbb{N}$. Let $\gamma$ be the circle $\abs{z} = R > \max\left\{\sum_{j=0}^{n-1} \abs{a_j}, 1 \right\}$\footnote{This is chosen from the later part of the proof}, oriented anticlockwise. Let $f(z) = z^n$. Then $\abs{f(z)} = R^n$ on $\gamma$. We also have
+  \begin{align*}
+    \abs{g(z) - f(z)}
+      &= \abs{a_{n - 1} z^{n - 1} + \hdots + a_1 z + a_0} \\
+      &\leq \abs{a_{n-1}} R^{n - 1} + \hdots + \abs{a_1} R + \abs{a_0} \\
+      &\leq \left( \abs{a_{n-1}} + \hdots + \abs{a_1} + \abs{a_0} \right) R^{n - 1} \\
+      &< R^n
+  \end{align*}
+  Hence, the inequality for \hyperref[thm:rouche_s_theorem]{Rouch\'e's Theorem} holds. Hence by Rouch\'e, $N_f = N_g$ and $N_f = n$.
+
+  \textit{\hlnoteb{Exercise: }} Show that these are the only zeros of $g(z)$, using factorization of polynomials in the ring $\mathbb{C}[z]$.
+
+  Suppose not, i.e. say $g$ has $m \neq n$ zeros. If $m > n$, then that would imply that $\deg g = m$, which \Lightning assumption. If $m < n$, then we can write
+  \begin{equation*}
+    g(z) = (z - \alpha_1)(z - \alpha_2) \hdots (z - \alpha_m) P_1(z)
+  \end{equation*}
+  where each $\alpha_j \in \mathbb{C}$ is a root of $g$ and $P_1 \in \mathbb{C} [z]$ has $\deg P_1 = n - m$ and that $P_1$ has no roots (otherwise we would have $m + 1$ roots). Then $P_1$ must be a constant polynomial, but that would imply that $\deg g = m \neq n$, which is yet another \Lightning. \qed
+\end{proof}
+
+The above proof leads to the following result:
+
+\begin{crly}\label{crly:rouche_fta_crly}
+  All the zeros of a monic polynomial lie inside the disc $\abs{z} \leq R$ with $R = \max\left\{ \sum_{j=0}^{n-1} \abs{a_j} , a \right\}$ where $\{a_j\}_{j = 0}^{n - 1} \subset \mathbb{C}$ are the coefficients of the monic polynomial.
+\end{crly}
+
+% subsection alternative_proof_for_fta (end)
+
+\subsection{Open Mapping Theorem} % (fold)
+\label{sub:open_mapping_theorem}
+
+\begin{thm}[Open Mapping Theorem\index{Open Mapping Theorem}]\label{thm:open_mapping_theorem}
+  If $f$ is holomorphic and non-constant in a region in $\mathbb{C}$, then $f$ maps open sets to open sets.
+\end{thm}
+
+\begin{proof}
+  Let $w_0 = f(z_0)$ for some $z_0 \in \Omega \subseteq \mathbb{C}$. Let $d > 0$.
+
+  \hlnotec{WTS} $w_0 \in f\big(B(z_0, \delta) \big)^0$.
+
+  Let $\gamma = \partial B(z_0, \delta)$ (i.e. $\abs{z - z_0} = \delta$), oriented anticlockwise. $\forall z \in B(z_0, \delta)$, let $F(z) := f(z) - w_0$. Then $F$ has at least one zero inside $\gamma$ (in particular, $z_0$). Let $G(z) := f(z) - w$ for some $w \in f\big( B(z_0, \delta) \big)$.
+
+  \hlnotec{Want to have} $G(z)$ having a zero inside $\gamma$ for $w$ ``close enough'' to $w_0$.
+
+  Our setup satisfies Rouch\'e's inequality:
+  \begin{gather*}
+    \forall z \in \gamma^* \enspace \abs{F(z) - G(z)} < \abs{F(z)} \\
+    \text{or } \abs{w - w_0} < \abs{f(z) - w_0} \text{ on } \gamma^*
+  \end{gather*}
+
+  (\hlwarn{there are some extra comments here which I shall include after confirming my notes, cause I am skeptical of what I've jotted down})
+
+  Let $\epsilon = \max_{z \in \gamma^*} \abs{f(z) - w_0} > 0$. Observe that
+  \begin{align*}
+    \abs{w - w_0} < \epsilon
+      &\implies Z(G) \cap \gamma^0 \neq \emptyset \\
+      &\implies w \in f\big( B(z_0, \delta) \big) \\
+      &\implies w_0 \in f\big( B(z_0, \delta) \big)^0
+  \end{align*}\qed
+\end{proof}
+
+% subsection open_mapping_theorem (end)
+
+% section the_argument_principle_continued (end)
+
+% chapter lecture_26_mar_19_2018 (end)
+
+\printindex
 
 \end{document}

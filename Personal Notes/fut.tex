@@ -1,0 +1,51 @@
+\documentclass[11pt, oneside]{book}
+\input{latex-classnotes-preamble.tex}
+
+% Main Body
+\title{Frequently Used Theorems}
+\author{Johnson Ng}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\maketitle
+\hypersetup{pageanchor=true}
+\tableofcontents
+
+\chapter*{List of Definitions}
+\theoremlisttype{all}
+\listtheorems{defn}
+
+\chapter*{List of Theorems}
+\theoremlisttype{allname}
+\listtheorems{axiom,lemma,thm,crly,propo}
+
+\chapter*{Foreword}
+  \label{chapter:foreword}
+
+This booklet contains some of the frequently used theorems that I simply cannot remember and always have to waste time searching for the theorem. Proofs may or may not be included depending on how I find them relevant. Note that these theorems are introduced based on the curriculum of my varsity.
+
+For anyone that wishes to grab this pdf for yourself, feel free to do so.
+
+% chapter foreword (end)
+
+\chapter{General}
+  \label{chapter:general}
+
+
+
+% chapter general (end)
+
+\chapter{Calculus/Analysis}
+  \label{chapter:calculus/Analysis}
+
+\begin{thm}[Mean Value Theorem]\label{thm:mean_value_theorem}
+   \begin{gather*}
+     \forall a, b \in \mathbb{R} \\
+     f: [a, b] \to \mathbb{R} \text{ differentiable in } (a, b) \implies \\
+     \exists c \in (a, b) \quad f'(c) = \frac{f(b) - f(a)}{b - a} 
+   \end{gather*}
+\end{thm}
+
+% chapter calculus/Analysis (end)
+
+\end{document}
