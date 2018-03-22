@@ -1,6 +1,8 @@
 % Document Head
 \documentclass[11pt, oneside]{book}
 
+\renewcommand{\baselinestretch}{1.2}
+
 \input{latex-classnotes-preamble.tex}
 
 % Main Body
@@ -3873,7 +3875,7 @@ $\therefore \, f$ is meromorphic on $\Omega \implies \frac{f'}{f}$ has simple ze
   \begin{equation*}
     \forall z \in \gamma^* \enspace \abs{1 - \frac{g}{f} } < 1
   \end{equation*}
-  Therefore, $\forall z \in \gamma^*, \, F = \frac{g}{f} \in B(1, 1)$. Let $\gamma : [a, b] \to \mathbb{C}$ be a parameterization of $\gamma^*$. Consider the function $F \circ \gamma$, which is a closed path that is contained in $B(1, 1)$. $\because z = 0$ \hlwarn{lies outside}\footnote{Is $z = 0$ not on $\gamma^*$?}, we have $\ind{0}{F \circ \gamma} = 0$. Then
+  Therefore, $\forall z \in \gamma^*, \, F = \frac{g}{f} \in B(1, 1)$. Let $\gamma : [a, b] \to \mathbb{C}$ be a parameterization of $\gamma^*$. Consider the function $F \circ \gamma$, which is a closed path that is contained in $B(1, 1)$. $\because z = 0$ lies outside of $F \circ \gamma$, we have $\ind{0}{F \circ \gamma} = 0$. Then
   \begin{align}
     &\frac{1}{2 \pi i} \int_{F \circ}^{\gamma} \frac{1}{z} \dif{z} = 0 \nonumber \\
     &\implies \frac{1}{2 \pi i} \int_{a}^{b} \frac{F'\big(\gamma(t)\big) \gamma(t) \dif{t}}{F\big(\gamma(t)\big)} = 0 \nonumber \\
@@ -3999,7 +4001,7 @@ The above proof leads to the following result:
     \text{or } \abs{w - w_0} < \abs{f(z) - w_0} \text{ on } \gamma^*
   \end{gather*}
 
-  (\hlwarn{there are some extra comments here which I shall include after confirming my notes, cause I am skeptical of what I've jotted down})
+  \hlnotec{We want} $f(z) \neq w_0$ on $\gamma$. Now we can choose a $\delta > 0$ such that $B(z_0, \delta) \subseteq \Omega$ and $\forall z \in \partial B(z_0, \delta), \, f(z) \neq w_0$.
 
   Let $\epsilon = \max_{z \in \gamma^*} \abs{f(z) - w_0} > 0$. Observe that
   \begin{align*}
@@ -4007,7 +4009,7 @@ The above proof leads to the following result:
       &\implies Z(G) \cap \gamma^0 \neq \emptyset \\
       &\implies w \in f\big( B(z_0, \delta) \big) \\
       &\implies w_0 \in f\big( B(z_0, \delta) \big)^0
-  \end{align*}\qed
+  \end{align*}
 \end{proof}
 
 % subsection open_mapping_theorem (end)
@@ -4015,6 +4017,127 @@ The above proof leads to the following result:
 % section the_argument_principle_continued (end)
 
 % chapter lecture_26_mar_19_2018 (end)
+
+\chapter{Lecture 27 Mar 21 2018}
+  \label{chapter:lecture_27_mar_21_2018}
+
+\section{Introductory Passage to Log Functions in \texorpdfstring{$\mathbb{C}$}{C}} % (fold)
+\label{sec:introductory_passage_to_log_functions_in_c}
+
+We have dealt with integrals of real numbers using our approach from complex analysis. But what would we do if we come across a problem of the form
+\begin{equation*}
+  \int_{-\infty}^{\infty} f(x) x^a \dif{x} \enspace \text{ for some } a \in \mathbb{R}?
+\end{equation*}
+If we try to apply residue integrals to the problem, we would need to consider $f(z) z^a$. But what is $z^a$, since $a \in \mathbb{R}$ and not simply $\in \mathbb{Z}$!?
+
+When $a \in \mathbb{N}$, we know that $z^a = \underbrace{z \hdots z}_{a \text{ times}}$. When $a \in \mathbb{R}$, we want to be able to interpret $z^a$ as $e^{a \log z}$ just as we can do so in $\mathbb{R}$. This leads to the study of $\log$ functions as complex variables.
+
+We shall try to approach the problem via \hldefn{analytic continuation}.
+
+\begin{ex}[A simple problem in analytic continuation]
+  Let $f(z) = \sum_{n=0}^{\infty} z^n$ for $\abs{z} < 1$. We want to \hlnotea{analytically continue} $f$ onto $\mathbb{C}$ if possible.
+
+  For $\abs{z} < 1$, we know that $\sum_{n=0}^{\infty} z^n = \frac{1}{1 - z}$. So let $g(z) = \frac{1}{1 - z}$. Then we have that $g \in H(\mathbb{C} \setminus \{1\} )$, where $z = 1$ is a simple pole, and $g$ agrees with $f$ on $\abs{z} < 1$.
+
+  $\therefore \, g$ is an analytic continuation of $f$ to $\mathbb{C} \setminus \{1\}$, or we say that $f$ can be analytically continued except at $z = 1$, which is a simple pole.
+\end{ex}
+
+In real analysis, $\log$ is the inverse of $e$\footnote{$e$ in $\mathbb{R}$ is 1-1, and goes from $\mathbb{R} \to \mathbb{R}^+$}. But on $\mathbb{C}$, the exponential function is not 1-1, e.g.
+\begin{equation*}
+  e^z = 1 \iff z \in 2 \pi i \mathbb{Z}
+\end{equation*}
+
+As such, we would like to restrict the domain (\hlwarn{why?}) for the exponential function. That begs the question: what is the natural domain on which $\log z$ lives for $z \in \mathbb{C}$?
+
+\begin{itemize}
+  \item Globally, we would require the notion of \hlnotea{Riemann Surfaces}
+  \item Locally, we would require the notion of \hlnotea{Simply Connected Domains}
+\end{itemize}
+
+(\hlwarn{What does local and global mean here?})
+
+% section introductory_passage_to_log_functions_in_c (end)
+
+\section{Simply Connected Domains} % (fold)
+\label{sec:simply_connected_domains}
+
+\begin{defn}[Homotopy\index{Homotopy} (Poincar\'e)]\label{defn:homotopy}
+  Let $X$ be a topological space\footnote{which we did not define}. Recall that a curve in $X$ is a continuous map $\gamma : I \to X$ where $I = [0, 1]$, and $\gamma$ is said to be closed if $\gamma(0) = \gamma(1)$.
+
+  Two closed curves $\gamma_0$ and $\gamma_1$ are said to be \hldefn{homotopic} if $\exists H : I \times I \to X$ with
+  \begin{equation*}
+    H(s, 0) = \gamma_0(s) \enspace H(s, 1) = \gamma_1(s)
+  \end{equation*}
+  and $H(s, t)$ be continuous with respect to $s$ and $t$.
+
+  \textbf{Alternative Definition from Stein-Shakarchi - Complex Analysis}\footnote{I preferred this definition cause it's easier to read, but I shall be using the definition from the lecture for the class itself unless stated otherwise}
+
+  Let $\gamma_0$ and $\gamma_1$ be two curves in an open set $\Omega$ with common end-points. So if $\gamma_0$ and $\gamma_1$ are two parameterizations on $[a, b]$, then
+  \begin{equation*}
+    \gamma_0(a) = \gamma_1(a) = \alpha \enspace \text{and} \enspace \gamma_0(b) = \gamma_1(b) = \beta
+  \end{equation*}
+  where $\alpha, \beta \in \Omega$. The two curves are said to be \hldefn{homotopic} in $\Omega$ if for each $0 \leq s \leq 1$, $\exists \gamma_s \subset \Omega$ parameterized by $\gamma_s(t)$ defined on $[a, b]$, such that $\forall s$, 
+  \begin{equation*}
+    \gamma_s(a) = \alpha \enspace \text{and} \enspace \gamma_s(b) = \beta,
+  \end{equation*}
+  and $\forall t \in [a, b]$, 
+  \begin{equation*}
+    \gamma_s(t) \at{s = 0}{} = \gamma_0(t) \enspace \text{and} \enspace \gamma_s(t) \at{s = 1}{} = \gamma_1(t).
+  \end{equation*}
+  Moreover, $\gamma_s(t)$ should be jointly continuous in $s \in [0, 1]$ and $t \in [a, b]$.
+\end{defn}
+
+Loosely speaking, $\gamma_0, \gamma_1$ are homotopic if we can \hlnoteb{continuously deform} $\gamma_0$ to $\gamma_1$ (wlog) without any obstruction in $X$.
+
+\begin{defn}[Simply Connected Domain\index{Simply Connected Domain}]\label{defn:simply_connected_domain}
+  Let $\Omega \subseteq \mathbb{C}$ be open. We say $\Omega$ is \hldefn{simply connected} if $\Omega$ is connected, and $\forall \gamma$ that is closed in $\Omega$ is homotopic to a point (i.e. a constant map $\gamma : I \to X$).
+\end{defn}
+
+\begin{ex}
+  \begin{enumerate}
+    \item $\mathbb{C}$ is simply connected.
+    \item $\mathbb{C} \setminus \{z = x + iy \, : \, x \leq 0, y = 0\}$ is simply connected.
+    \item $\mathbb{C} \setminus \{0\}$ is not simply connected.
+  \end{enumerate}
+\end{ex}
+
+\begin{note}
+  I will temporarily use $\sim$ to represent homotopy, since it is an equivalence relation.
+
+  Here's a quick proof of that:
+  \begin{enumerate}
+    \item (Reflexive) Define $H : I \times I \to X$, where $I = [a, b] \subseteq \mathbb{R}$, with $H(s, t) = \gamma_t(s)$, where, in this case, $t = 0$. This shows reflexivity.
+
+    \item (Symmetric) Suppose $\gamma_0 \sim \gamma_1$. Then $\exists H$ as above such that, this time, $t \in [0, 1]$. Choose $G : I \times I \to X$ with $G(s, t) = \gamma_{-t}(s)$ with $t \in [0, 1]$. Then $\gamma_1 \sim \gamma_0$.
+
+    \item (Transitive) Suppose $\gamma_0 \sim \gamma_1$ and $\gamma_1 \sim \gamma_2$. Then $\exists H_1, H,2 : I \times I \to X$, $I$ as above, with
+    \begin{gather*}
+      H_1(s, t) = \gamma_t(s) \\
+      H_2(s, q) = \gamma_q(s)
+    \end{gather*}
+    with $t \in [0, 1]$ and $q \in [1, 2]$. Then we can simply create $G : I \times I \to X$, now with the 2nd argument, say, $p \in [0, 2]$. such that
+    \begin{equation*}
+      G(s, p) = \begin{cases}
+        H_1(s, p) = \gamma_p (s) & p \in [0, 1] \\
+        H_2(s, p) = \gamma_p (s) & p \in (1, 2]
+      \end{cases}
+    \end{equation*}
+    Then $\gamma_0 \sim \gamma_2$.
+  \end{enumerate}
+
+  One of the key facts about simply connected domains is that, if $f \in H(\Omega)$, then whenever $\gamma_0 \sim \gamma_1$ in $\Omega$
+  \begin{equation*}
+    \int_{\gamma_0} f = \int_{\gamma_1} f
+  \end{equation*}
+
+  i.e. in a simply connected domain, the \hlnoteb{integral does not depend on the chosen path}\footnote{This should remind you of \hyperref[thm:goursat_s_theorem]{Goursat's Theorem} and \hyperref[thm:cauchy_s_theorem_for_convex_set]{Cauchy's Theorem}}.
+\end{note}
+
+(\hlwarn{There are two more parts to today's lecture, but I will need info from the next lecture before I can compose them in an easily consumable way})
+
+% section simply_connected_domains (end)
+
+% chapter lecture_27_mar_21_2018 (end)
 
 \printindex
 
