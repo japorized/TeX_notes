@@ -5,6 +5,8 @@
 
 \input{latex-classnotes-preamble.tex}
 
+\DeclareMathOperator{\Log}{Log}
+
 % Main Body
 \title{PMATH352W18 Complex Analysis - Class Notes}
 \author{Johnson Ng}
@@ -4133,11 +4135,276 @@ Loosely speaking, $\gamma_0, \gamma_1$ are homotopic if we can \hlnoteb{continuo
   i.e. in a simply connected domain, the \hlnoteb{integral does not depend on the chosen path}\footnote{This should remind you of \hyperref[thm:goursat_s_theorem]{Goursat's Theorem} and \hyperref[thm:cauchy_s_theorem_for_convex_set]{Cauchy's Theorem}}.
 \end{note}
 
-(\hlwarn{There are two more parts to today's lecture, but I will need info from the next lecture before I can compose them in an easily consumable way})
-
 % section simply_connected_domains (end)
 
 % chapter lecture_27_mar_21_2018 (end)
+
+\chapter{Lecture 28 Mar 23 2018}
+  \label{chapter:lecture_28_mar_23_2018}
+
+\section{Constructing Logarithm} % (fold)
+\label{sec:constructing_logarithm}
+
+\begin{thm}[Theorem 17]\label{thm:theorem_17}
+  Suppose $\Omega$ is simply connected with $0 \not\in \Omega$. Then in $\Omega$, we can define a function, call it $\Log z$\footnote{This is called a branch of the logarithm}, such that
+  \begin{enumerate}
+    \item $\Log z \in H(\Omega) \, \land \, \left( \Log z \right)' = \frac{1}{z}$
+    \item $e^{\Log z} = z$ for all $z \in \Omega$
+    \item $\forall r \in \mathbb{R}^+ \; [1, r] \subseteq \Omega \implies \Log r - \Log 1 = \log r$ where $\log$ denotes the usual natural logarithm on $\mathbb{R}^+$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item The proof can be completed using the method used in proving \hyperref[thm:cauchy_s_theorem_for_convex_set]{Cauchy's Theorem for Convex Sets} if we define $\Log$ as follows:
+    \begin{equation*}
+      \forall z \in \Omega \enspace \exists w_0 \in \mathbb{C} \enspace e^{w_0} = z_0
+    \end{equation*}
+    (If we let $z_0 = Re^{i \theta}$, then we choose $w_0 = \log R + i \theta$)
+    Define
+    \begin{equation}\tag{$\dagger$}\label{eq:first_defn_of_log}
+      \Log z = w-0 + \int_{z_0}^{z} \frac{1}{w} \dif{w}
+    \end{equation}
+    where the integral is over any path between the points $z_0$ and $z$ in $\Omega$. From here, use the proof provided in Cauchy's Theorem for Convex Sets to complete the proof.
+    
+    \item Let $G(z) = e^{- \Log z} \cdot z$. \WTS $G(z) = 1$.
+
+    Note that by part 1,
+    \begin{equation*}
+      \forall z \in \Omega \enspace G'(z) = e^{- \Log z} - z \cdot \frac{1}{z} \cdot e^{- \Log z} = 0
+    \end{equation*}
+    $\therefore G' \equiv 0$ in $\Omega$. $\because G \in H(\Omega)$, we may write $G$ as a power series, and since $G' \equiv 0$ on $\Omega$, we have that $G(z) = G(z_0)$ in a neighbourhood of a chosen center $z_0 \in \Omega$, say with radius $r_0 > 0$. Therefore
+    \begin{equation*}
+      \exists c \in \mathbb{C} \; \forall z \in B(z_0, r_0) \enspace G(z) = c
+    \end{equation*}
+    Thus by \hyperref[lemma:principle_of_analytic_continuation]{Analytic Continuation}, since $\Omega$ is connected, we have that $\forall z \in \Omega$, $G(z) = c$.
+
+    It is therefore sufficient to show that $G(z_0) = 1$, and this is true by the following:
+    \begin{align*}
+      G(z_0) &= e^{- \Log z_0} \cdot c_0 \\
+            &= e^{- w_0} \cdot z_0 \enspace \because \cref{eq:first_defn_of_log} \\
+            &= \frac{z_0}{e^{w_0}} = 1 \enspace \because e^{w_0} = z_0 
+    \end{align*}
+    Thus we have $G \equiv 1$ on $\Omega$ and hence $\forall z \in \Omega$, $e^{\Log z} = z$.
+
+    \item Suppose $r \in \mathbb{R}^+$ and $[1, r] \subseteq \Omega$. By \cref{eq:first_defn_of_log},
+    \begin{align*}
+      \Log r &= w_0 + \frac{z-0}{r} \frac{1}{w} \dif{w} \\
+        &= w_0 + \int_{z_0}^{1} \frac{1}{w} \dif{w} + \int_{1}^{r} \frac{1}{w} \dif{w} \\
+        &= \underbrace{w_0 + \int_{z_0}^{1} \frac{1}{w} \dif{w} }_{\Log 1 \text{ by } \cref{eq:first_defn_of_log}} + \underbrace{\int_{1}^{r} \frac{1}{t} \dif{t} }_{\log r - \log 1 = \log r}
+    \end{align*}
+    where we choose the straight line $[1, r]$ as the path for the 3rd term in the last line. Therefore we have
+    \begin{equation*}
+      \Log r - \Log 1 = \log r
+    \end{equation*}
+    as required. \qed
+  \end{enumerate}
+\end{proof}
+
+\begin{note}
+  If we choose $z_0 = 1$ and $w_0 = 0$, then $\Log 1 = 0$, and hence $\Log r = \log r$ for any $r \in \mathbb{R}^+$ with $[1, r] \subseteq \Omega$.
+\end{note}
+
+% section constructing_logarithm (end)
+
+\section{Branches of the Logarithm} % (fold)
+\label{sec:branches_of_the_logarithm}
+
+\begin{enumerate}
+  \item (\hldefn{Principal Branch}) Let $\Omega_1 = \mathbb{C} \setminus (- \infty, 0]$. We will write $z \in \Omega_1$ as $z = re^{i \theta}$ with $r > 0$ and $\theta \in (- \pi, \pi)$. Pick $z_0 = 1 \, \land \, w_0 = 0$> By \cref{eq:first_defn_of_log}, $\Log z = \int_{1}^{z} \frac{1}{w} \dif{w}$. Then in this case,
+  \begin{equation*}
+    \Log z = \log r + i \theta \quad \text{when } z = re^{i \theta} \text{ with } \theta \in (- \pi, \pi)
+  \end{equation*}
+  To see this, pick the straight line path from $1$ to $r$, and then any path from $r$ to $z = re^{i \theta}$
+  \begin{center}
+      \begin{tikzpicture}
+        \draw[->] (-4.5, 0) -- (4.5, 0) node[right] {$\re$};
+        \draw[->] (0, -0.5) -- (0, 3.5) node[above] {$\im$};
+        \node[label={315:{$0$}},circle,draw,inner sep=2pt] at (0,0) {};
+        \foreach \x in {-4.5, -4, ..., -0.5}
+          \draw (\x cm - 2pt, -2pt) -- (\x cm + 2pt, 2pt);
+
+        \coordinate (a) at (1, 0);
+        \coordinate (r) at (3.5,0);
+        \coordinate (z) at (2.5, 2.44948974278317809819);
+        \node[label={270:{$1$}},circle,fill,inner sep=1pt] at (a) {};
+        \node[label={270:{$r$}},circle,fill,inner sep=1pt] at (r) {};
+        \node[label={270:{$z$}},circle,fill,inner sep=1pt] at (z) {};
+        \draw[midarrow] (a) .. controls (2,0.5) and (1.5,2) .. (z);
+        \draw[midarrow] (a) -- (r);
+        \draw[midarrow] (r) arc (0:45:3.5);
+      \end{tikzpicture}
+  \end{center}
+  Then
+  \begin{align*}
+    \int_{1}^{z} \frac{1}{w} \dif{w}
+      &= \int_{1}^{r} \frac{1}{t} \dif{t} + \int_{0}^{\pi} \frac{ire^{i t}}{re^{i t}} \dif{t} \\
+      &= \log r + i \theta
+  \end{align*}
+\end{enumerate}
+
+\begin{ex}
+  Let $z_1 = e^{\frac{2 \pi i}{3}}$, then, using the Principal Branch, $\Log z_1 = i \frac{2 \pi}{3}$. But note that $\Log (z_1^2) \neq i \frac{4 \pi}{3}$. Instead, since
+  \begin{equation*}
+    z_1^2 = e^{\frac{4 \pi i}{3}} = e^{- \frac{2 \pi i}{3}}
+  \end{equation*}
+  ($\because$ the region in consideration is $(- \pi, \pi)$), we have that
+  \begin{equation*}
+    \Log (z_1^2) = -i \frac{2 \pi}{3}
+  \end{equation*}
+\end{ex}
+
+\begin{enumerate}
+  \setcounter{enumi}{1}
+  \item (a different branch) Let $\Omega_2 = \mathbb{C} \setminus [0, \infty)$. Write $z \in \Omega_2$ as $z = re^{i \theta}$ with $r > 0 \, \land \, \theta \in (0, 2 \pi)$. Now we can pick \hlnoteb{some function} so that
+  \begin{equation*}
+    \Log z = \log r + i \theta \quad \text{with } z = re^{i \theta} \, \land \, \theta \in (0, 2\pi)
+  \end{equation*}
+  In this case, we have that $\Log (z_1^2) = 2 \Log z_1$ does hold.
+\end{enumerate}
+
+With that established, we may now use $z^a = e^{a \Log z}$ if we fix a branch (and a simply connected domain) and stick with it till the end of the problem.
+
+\begin{remark}
+  For the Principal Branch of the logarithm, the following Taylor expansion holds: \\
+  For $\abs{z} < 1$,
+  \begin{align*}
+    \log (1 + z) &= z - \frac{z^2}{2} + \frac{z^3}{3} - \hdots \\
+      &= \sum_{n=1}^{\infty} \frac{(-1)^{n + 1}}{n!} \frac{z^n}{n}
+  \end{align*}
+  (To remember this: note $- \log (1 - z) = \sum_{n=1}^{\infty} \frac{z^n}{n}$)
+  Let
+  \begin{align*}
+    F(z) &= - \log (1 - z) \\
+    G(z) &= \sum_{n=1}^{\infty} \frac{z^n}{n}.
+  \end{align*}
+  It can be shown that for $\abs{z} < 1$,
+  \begin{equation*}
+    F'(z) = \frac{1}{1 - z} = G'(z)
+  \end{equation*}
+  which hence implies that
+  \begin{align*}
+    &(F - G)' \equiv 0 \\
+    &\implies F - C = c \quad \text{for some } c \in \mathbb{C}
+  \end{align*}
+  Plug in $z = 0$ and we will get $c = 0$.
+\end{remark}
+
+% section branches_of_the_logarithm (end)
+
+% chapter lecture_28_mar_23_2018 (end)
+
+\chapter{Lecture 29 Mar 26 2018}
+  \label{chapter:lecture_29_mar_26_2018}
+
+\section{Examples for Analytic Continuation} % (fold)
+\label{sec:examples_for_analytic_continuation}
+
+\hldefn{Gamma Function}
+
+For $s \in \mathbb{R}^+$, we define
+\begin{equation*}
+  \Gamma(s) = \int_{0}^{\infty} e^{-t} t^s \frac{\dif{t}}{t}
+\end{equation*}
+where
+\begin{align*}
+  \int_{0}^{\infty} &: \text{ the integral over a locally compact topological group } \mathbb{R}^+ \\
+  e^{- t} &: \text{ additive character of } \mathbb{R}^+ \text{ (homomorphism from $(\mathbb{R}^+, +)$ to $\mathbb{R}$)} \\
+  t^s &: \text{ multiplicative character of } \mathbb{R}^+ \text{ (homomorphism from $(\mathbb{R}^+, \cdot)$ to $\mathbb{R}$)} \\
+  \frac{\dif{t}}{t} &: \text{ \hldefn{Haar measure} for } \mathbb{R}^+ \text{ (invariant under multiplication)}
+\end{align*}
+
+\begin{ex}
+  The integral $\int_{0}^{\infty} e^{-t} t^s \frac{\dif{t}}{t}$ converges for $s > 0$. Prove this.
+\end{ex}
+
+\begin{note}[Euler]
+  Euler observed that
+  \begin{align*}
+    \Gamma (n + 1)
+      &= \int_{0}^{\infty} e^{-t} t^{n + 1} \frac{\dif{t}}{t} \\
+      &= \int_{0}^{\infty} e^{-t} t^n \dif{t} \\
+      &= - t^n e^{-t} \at{0}{\infty} + n \int_{0}^{\infty} e^{-t} t^{n - 1} \dif{t} \quad \text{by IBP} \\
+      &= n \Gamma(n) \\
+      &\vdots \\
+      &= n (n - 1) \hdots 2 \cdot 1 \cdot \Gamma(1)
+  \end{align*}
+  and since $\Gamma(1) = \int_{0}^{\infty} e^{-t} \dif{t} = 1$, we have that
+  \begin{equation*}
+    \Gamma(n + 1) = n!
+  \end{equation*}
+\end{note}
+
+\begin{remark}
+  Euler observed that $\Gamma(s)$ is a continuous and differentiable function of $s$ that interpolates the factorials.
+\end{remark}
+
+We can extend $\Gamma(s)$ to complex numbers $s$ as follows:
+\begin{equation*}
+  \forall s \in \mathbb{C} \enspace \re{s} > 0 \quad \Gamma(s) = \int_{0}^{\infty} e^{-t} t^s \frac{\dif{t}}{t}
+\end{equation*}
+
+\begin{note}
+  \begin{enumerate}
+    \item $\Gamma(s)$ is holomorphic for $\re{s} > 0$
+    \begin{itemize}
+      \item It can be shown that $\int_{0}^{\infty} e^{- t} t^s \frac{\dif{t}}{t}$ converges for $\re{s} > 0$
+      \item It can also show that this is $\mathbb{C}$-differentiable
+    \end{itemize}
+
+    \item $\Gamma$ is a \hldefn{Functional Equation}: We can repeat Euler's calculation to show that
+    \begin{equation*}
+      \forall s \in \mathbb{C} \enspace \re{s} > 0 \quad \Gamma(s + 1) = s \Gamma(s)
+    \end{equation*}
+    which implies that, if $s \neq 0$,
+    \begin{equation*}
+      \underbrace{\Gamma(s)}_{\text{defined for } \re{s} > 0} = \underbrace{\frac{\Gamma(s + 1)}{s}}_{\text{defined for } \re{s} > -1}
+    \end{equation*}
+    because RHS makes sense for $\re{s} > -1$, in which we may do
+    \begin{equation*}
+      -1 < \re{s} < 0 \implies 0 < \re{(s + 1)} < 1.
+    \end{equation*}
+    Thus, we can define, for $-1 < \re{s} < 0$, that, if $s \neq 0$,
+    \begin{equation*}
+      \Gamma(s) = \frac{\Gamma(s + 1)}{s}
+    \end{equation*}
+    It is noteworthy that this definition agrees with our original definition of $\Gamma$ due to \cref{eq:first_defn_of_log}.
+  \end{enumerate}
+\end{note}
+
+Q: What happens at $s = 0$? \\
+Consider \cref{eq:first_defn_of_log}, with $s \to 0^+$. Then
+\begin{equation*}
+  \lim_{s \to 0^+} \left[ s \Gamma(s) \right] = \Gamma(1) = 0! = 1
+\end{equation*}
+$\therefore \, \Gamma(s)$ behaves like $\frac{1}{s}$ near $s = 0$, i.e. $\Gamma$ has a simple poles at $s = 0$.
+
+Q: Can we continue the procedure above and go beyond $\re{s} > -1$? \\
+Yes. \cref{eq:first_defn_of_log} holes for $\Gamma(s + 2)$ as well, which then
+we have, for $\re{s} > 0$,
+\begin{equation*}
+  \Gamma(s + 2) = (s + 1) \Gamma(s + 1) = (s + 1) (s) \Gamma(s)
+\end{equation*}
+And thus for $\re{s} > -2$ and $s \neq 0, \, -1$,
+\begin{equation*}
+  \Gamma(s) = \frac{\Gamma(s + 2)}{s (s + 1)}
+\end{equation*}
+We can proceed with this procedure inductively so and analytically continue $\Gamma$ to $\mathbb{C} \setminus \{0, -1, -2, ...\}$.
+
+% section examples_for_analytic_continuation (end)
+
+\section{Characterizing Logarithms} % (fold)
+\label{sec:characterizing_logarithms}
+
+\begin{thm*}[Theorem 18]\label{thm:theorem_18}
+  Any entire function $f(z)$ without any zeros has the form $Ae^{g(z)}$ where $g$ is some entire function and $A \in \mathbb{C}$ is some constant.
+\end{thm*}
+
+This is a characterization of the function $f$ that has no zeros or poles.
+
+% section characterizing_logarithms (end)
+
+% chapter lecture_29_mar_26_2018 (end)
 
 \printindex
 
