@@ -4012,6 +4012,7 @@ The above proof leads to the following result:
       &\implies w \in f\big( B(z_0, \delta) \big) \\
       &\implies w_0 \in f\big( B(z_0, \delta) \big)^0
   \end{align*}
+  This completes the proof. \qed
 \end{proof}
 
 % subsection open_mapping_theorem (end)
@@ -4163,7 +4164,7 @@ Loosely speaking, $\gamma_0, \gamma_1$ are homotopic if we can \hlnoteb{continuo
     (If we let $z_0 = Re^{i \theta}$, then we choose $w_0 = \log R + i \theta$)
     Define
     \begin{equation}\tag{$\dagger$}\label{eq:first_defn_of_log}
-      \Log z = w-0 + \int_{z_0}^{z} \frac{1}{w} \dif{w}
+      \Log z = w_0 + \int_{z_0}^{z} \frac{1}{w} \dif{w}
     \end{equation}
     where the integral is over any path between the points $z_0$ and $z$ in $\Omega$. From here, use the proof provided in Cauchy's Theorem for Convex Sets to complete the proof.
     
@@ -4538,7 +4539,7 @@ Before proceeding with an important result about infinite products, consider the
       &= \abs{P_N}\abs{\prod_{j=N + 1}^{M} (1 + u_j) - 1} \\
       &\leq \abs{P_N} \abs{\prod_{j = N + 1}^{M} (1 + \abs{u_j}) - 1} \enspace \text{By 2 of } \cref{lemma:bounds_of_the_partial_product} \\
       &\leq \abs{P_N} \abs{\exp{\left( \sum_{j=N + 1}^{M} \abs{u_j} \right)} - 1} \enspace \text{By 1 of } \cref{lemma:bounds_of_the_partial_product} \\
-      &\leq P_N^* \left(\exp{\left(\sum_{j=N + 1}^{M} \right)} - 1 \right).
+      &\leq P_N^* \left(\exp{\left(\sum_{j=N + 1}^{M} \abs{u_j} \right)} - 1 \right).
   \end{align*}
   Thus $\forall \epsilon > 0$, $\because \sum_{j=1}^{\infty} \abs{u_j} < \infty$ by assumption, we can choose an appropriate $N_0(\epsilon) > 0$ such that $\forall M > N \geq N_0$,
   \begin{equation*}
@@ -4552,8 +4553,8 @@ Before proceeding with an important result about infinite products, consider the
   Note that
   \begin{align*}
     P_N &\leq \exp{\left( \sum_{j=1}^{N} \abs{u_j} \right)} \enspace \text{By 1 of } \cref{lemma:bounds_of_the_partial_product} \\
-      \leq \exp{c} \enspace \text{For some } c \in \mathbb{C} \\
-      = c_0 \enspace \text{For some } c_0 \in \mathbb{C}
+      &\leq \exp{c} \enspace \text{For some } c \in \mathbb{C} \\
+      &= c_0 \enspace \text{For some } c_0 \in \mathbb{C}
   \end{align*}
 
   Therefore, for $M > N \geq N_0$, we have $\abs{P_M - P_N} \leq c_0 \epsilon$ and $P_N$ is hence Cauchy.
@@ -4571,7 +4572,7 @@ Before proceeding with an important result about infinite products, consider the
 \section{Infinite Products (Continued)} % (fold)
 \label{sec:infinite_products_continued}
 
-\begin{proof}[(Continued)]
+\begin{proof}[Continued]
   Note that in the earlier part of the proof, we showed that
   \begin{equation}\label{eq:thm19_eq1}
     \abs{P_M - P_N} \leq \abs{P_N} \left( \exp{\left(\sum_{j= N + 1}^{M} u_j \right)} - 1 \right)
@@ -4665,6 +4666,198 @@ This will be useful for the next statement.
 % section infinite_products_continued (end)
 
 % chapter lecture_31_apr_02_2018 (end)
+
+\chapter{Lecture 32 Apr 04 2018}
+  \label{chapter:lecture_32_apr_04_2018}
+
+\section{Infinite Products (Continued 2)} % (fold)
+\label{sec:infinite_products_continued_2}
+
+\subsection{Weierstrass Products} % (fold)
+\label{sub:weierstrass_products}
+
+\newthought{Problem: } Given a sequence $\{a_n\}_{n \in \mathbb{N}} \subseteq \mathbb{C}$, where $\forall n \in \mathbb{N}, \, a_n \neq 0$, construct an entire function $f$ with zeros precisely at each of the $a_n$'s.
+
+It is tempting to consider an infinite product such as $\prod_{n=1}^{\infty} \left(1 - \frac{z}{a_n}\right)$. But this may not converge all the time except for some specific sequence $\{a_n\}$.
+
+The idea to approach this problem is to take the product of exponential factors so that it takes care of the convergence problem.
+
+\newthought{Define: } $\forall n \in \mathbb{N}$
+\begin{align*}
+  P_n(z) &:= z + \frac{z^2}{2} + \frac{z^3}{3} + \hdots + \frac{z^n}{n} \\
+  E_n(z) &:= (1 - z) \exp{\left( P_n(z) \right)}
+\end{align*}
+and for $n = 0$, define
+\begin{equation*}
+  E_0(z) := 1 - z
+\end{equation*}
+
+\newthought{Observe } that
+\begin{itemize}
+  \item $E_n$ is entire and has a simple zero at exactly $z = 1$.
+  \item $E_n(0) = 1$ and $E_n(1) = 0$
+  \item $P_n'(z) = 1 + z + z^2 + \hdots + z^{n - 1} = \frac{z^n - 1}{z - 1}$\sidenote{Finite geometric sum}
+\end{itemize}
+
+\begin{thm}[Theorem 20]\label{thm:theorem_20}
+  For $\abs{z} \leq 1$, $\abs{1 - E_n(z)} \leq \abs{z}^{n + 1}$.
+\end{thm}
+
+\begin{proof}
+  Note that
+  \begin{align*}
+    E_n'(z) &= (1 - z) \exp{\left( P_n(z) \right)} \cdot \left(\frac{z^n - 1}{z - 1}\right) - \exp{\left( P_n(z) \right)} \\
+      &= - z^n \exp{( P_n(z) )}
+  \end{align*}
+  and note that by the Taylor expansion of the exponent,
+  \begin{equation*}
+    \exp{( P_n(z) )} = 1 + P_n(z) + \frac{( P_n(z) )^2}{2!} + \hdots.
+  \end{equation*}
+  Since the power/Taylor expansion of $P_n(z)$ has non-negative and real coefficients, so does $\exp{( P_n(z) )}$. Therefore, we have
+  \begin{align}
+    -E_n'(z) &= z^n \exp{( P_n(z) )} \nonumber \\
+      &= z^n \cdot \sum_{m=0}^{\infty} a_m z^m \enspace a_0 \neq 0\footnotemark, \, \forall m \in \mathbb{N} \; a_m \geq 0 \nonumber \\
+      &= \sum_{m=n}^{\infty} c_m z^{m} \enspace c_0 \neq 0, \, \forall m > n \; c_m \geq 0 \tag{$\star$}\label{eq:thm20_eq1},
+  \end{align}
+  \footnotetext{This is because the exponential function is non-zero.}
+  which holds $\forall z \in \mathbb{C}$ since $E_n'$ is entire\sidenote{This is true by \cref{thm:convergence_in_the_radius_of_convergence}, since $E_n$ is entire.}.
+
+  Now note that
+  \begin{align*}
+    \int_{0}^{z} - E_n'(w) \dif{w} &= - E_n(z) + E_n (0) \enspace \text{by FTC} \\
+      &= 1 - E_n(z).
+  \end{align*}
+  Also, by \cref{eq:thm20_eq1},
+  \begin{equation*}
+    \int_{0}^{z} - E_n'(w) \dif{w} = \sum_{m=n}^{\infty} \frac{c_m}{m + 1} z^{m + 1}.
+  \end{equation*}
+  Therefore,
+  \begin{equation*}
+    1 - E_n(z) = \sum_{m=n}^{\infty} \frac{c_m}{m + 1} z^{m + 1} = \frac{c_n}{n + 1} z^{n + 1} + \hdots,
+  \end{equation*}
+  which implies that
+  \begin{equation*}
+    \frac{1 - E_n(z)}{z^{n + 1}} = \sum_{m=n}^{\infty} \frac{c_m}{m + 1} z^{m - n} \quad \because c_n \neq 0
+  \end{equation*}
+
+  Let $\phi_n(z) := \frac{1 - E_n(z)}{z^{n + 1}} = \sum_{k=0}^{\infty} b_k z^k$, where as defined, we have that $b_0 \neq 0$ and $\forall k \in \mathbb{N} \; b_k \geq 0$. By the Triangle Inequality, and since $\abs{z} \leq 1$, we have that
+  \begin{align*}
+    \abs{\frac{1 - E_n(z)}{z^{n + 1}} } &= \abs{\sum_{k=0}^{\infty} b_k z^k}
+      \leq \sum_{k=0}^{\infty} \abs{b_k z^k}
+      \leq \sum_{k=0}^{\infty} \left( \abs{b_k} \cdot 1 \right) \\
+      &= \sum_{k=0}^{\infty} b_k = \phi_n (1) = \frac{1 - E_n(1)}{1} = 1.
+  \end{align*}
+  Hence for $\abs{z} \leq 1$, we have the desired inequality,
+  \begin{equation*}
+    \abs{1 - E_n(z)} \leq \abs{z}^{n + 1}
+  \end{equation*}\qed
+\end{proof}
+
+\begin{thm}[Theorem 21]\label{thm:theorem_21}
+  Let $\{a_n\}_{n \in \mathbb{N}} \subseteq \mathbb{C}$ with $a_n \to \infty$ as $n \to \infty$, and $\forall n \in \mathbb{N}, \, a_n \neq 0$. Then the \hldefn{Weierstrass Product}
+  \begin{equation}\label{eq:weierstrass_product}
+    f(z) = \prod_{n=1}^{\infty} E_n \left( \frac{z}{a_n} \right)
+  \end{equation}
+  is entire and has zeros at exactly $\{a_n\}$ and nowhere else.
+\end{thm}
+
+\begin{proof}
+  Let $R > 0$ and $\Omega = D(0, R) \subseteq \mathbb{C}$. Let $z \in \Omega$. $\because \abs{a_n} \to \infty$, $\exists N_0 > 0 \enspace \forall n \geq N_0 \enspace \abs{a_n} \geq 2R$. Note
+  \begin{equation*}
+    \prod_{n=N_0}^{\infty} E_n\left( \frac{z}{a_n} \right) = \prod_{n=N_0}^{\infty} \left(1 + \underbrace{\left(E_n \left( \frac{z}{a_n} \right) - 1 \right)}_{\text{call this } u_n(z)} \right)
+  \end{equation*}
+
+  On $\Omega$, since $\abs{z} \leq R \, \land \, \forall n \geq N_0 \enspace \abs{a_n} \geq 2R$, by \cref{thm:theorem_20} we have that $\forall n \geq N_0 \, \land \, \forall z \in \Omega$,
+  \begin{equation*}
+    \abs{\frac{z}{a_n}} \leq 1 \implies \abs{E_n\left( \frac{z}{a_n} \right) - 1} \leq \abs{\frac{z}{a_n} }^{n + 1} \leq \frac{1}{2^{n + 1}} 
+  \end{equation*}
+  Then by \cref{thm:theorem_19} and its remark, since $\sum_{n=1}^{\infty} u_n(z)$ converges absolutely and uniformly on $\Omega$, the infinite product $\prod_{n=N_0}^{\infty} \left(1 + u_n(z) \right)$ converges. \\
+  \hlnotec{Exercise} To prove that the infinite product converges uniformly on $\Omega$, it suffices to show that it satisfies the Cauchy criterion: Define $f_n := \sum_{j=n}^{\infty} (1 + u_j(z))$. Note that for $m > n \geq N_0$, 
+  \begin{align*}
+    \abs{f_m -  f_n} &= \abs{\sum_{j=n}^{m - 1} \big( 1 + u_j(z) \big)} \\
+      &\leq \abs{\sum_{j=n}^{m-1} \big( 1 + \abs{u_j(z)} \big)} \enspace \text{by 2 of } \cref{lemma:bounds_of_the_partial_product} \\
+      &\leq \exp{\sum_{j=n}^{m-1} \abs{u_j(z)}} \enspace \text{by 1 of } \cref{lemma:bounds_of_the_partial_product}
+  \end{align*}
+  So $\forall \epsilon > 0$, since $\sum_{j=1}^{\infty} \abs{u_n(z)}$ converges, $\exists N_0 > 0$\sidenote{choose an $N_0$ different from the earlier $N_0$ if necessary}$\enspace \forall m > n \geq N_0$, such that
+  \begin{equation*}
+    \sum_{j = n}^{m - 1} \abs{u_n(z)} \leq \epsilon
+  \end{equation*}
+  and hence
+  \begin{equation*}
+    \abs{f_m - f_n} \leq e^\epsilon,
+  \end{equation*}
+  thus satisfying the Cauchy criterion and hence showing that the infinite product is uniformly convergent.
+
+  \hlnotec{Exercise}\marginnote{A more complete statement and proof of this statement is available in Stein \& Shakarchi's Complex Analysis (Chapter 2, Section 5.2, Theorem 5.2).} We now need to show that the infinite product is a holomorphic function on $\Omega$. Note that by construction of $E_n$, it has no poles, and is entire. Note that we have that the $\{f_n\}_{n \in \mathbb{N} }$ is a sequence in $\mathbb{C}$ that is uniformly convergent to the function $f(z) = \prod_{n=1}^{\infty} E_n \left( \frac{z}{a_n} \right)$ in $\Omega$. Let $D$ be any disc whose closure\sidenote{$\bar{D} := \{ K \in \mathbb{C} : K$ closed $\, \land \, D \subseteq K \}$} is contained in $\Omega$, and $T$ any triangle in $D$. Then by \hyperref[thm:goursat_s_theorem]{Goursat's Theorem},
+  \begin{equation*}
+    \int_{T} f_n = 0.
+  \end{equation*}
+  Since $\{f_n\}_{n \in \mathbb{N}}$ converges uniformly to $f$, $f$ is continuous\sidenote{This is a relatively easy proof that can be done using techniques from Real Analysis.
+  \begin{ex}
+    Prove that $f$ is continuous under the supposition that $\{f_n\}_{n \in \mathbb{N}}$ is uniformly convergent.
+  \end{ex}
+  } and
+  \begin{equation*}
+    \int_{T} f_n \to \int_{T} f.
+  \end{equation*}
+  Thus $\int_{T} f = 0$. Then by \hyperref[thm:morera_s_theorem]{Morera's Theorem}, we have that $f \in H(D)$ and since $D$ is arbitrary, $f \in H(\Omega)$ as required.
+
+  Now since $R$ is arbitrary, we have that $f \in H(\mathbb{C})$, i.e. $f$ is entire.
+
+  To find the zeros of $f$, let $z \in \Omega$. By \cref{thm:theorem_19} and in particular its remark, we have that
+  \begin{equation*}
+    \prod_{j = N_0}^{\infty} E_j \left( \frac{z}{a_j} \right) = 0 \iff E_n \left( \frac{z}{a_n} \right) = 0 \enspace \text{for some } n \geq N_0,
+  \end{equation*}
+  Therefore,
+  \begin{equation*}
+    \prod_{j=1}^{\infty} E_N \left( \frac{z}{a_j} \right) = 0 \iff E_n \left( \frac{z}{a_n} \right) = 0 \iff z = a_n
+  \end{equation*}
+  for some $n \in \mathbb{N}$. This shows that
+  \begin{equation*}
+    Z(f) = \{a_n\} \cap \Omega,
+  \end{equation*}
+  and since $R > 0$ is arbitrary, we have that $Z(f) = \{a_n : n \in \mathbb{N} \}$. This completes the proof. \qed
+\end{proof}
+
+\begin{eg}
+  Construct an entire function with simple zeros at $z = 0, \pm 1, \pm 2, ...$, i.e. $z \in \mathbb{Z}$.
+
+  \newthought{Solution 1}: Define $f_1(z) = \prod_{n=1}^{\infty} E_n \left(\frac{z}{n} \right)$, which is entire and has zeros at exactly $\mathbb{N}$ by \cref{thm:theorem_21}, and $f_2(z) = f_1(-z)$, which would have zeros at $- \mathbb{N}$. Then simply choose the function
+  \begin{equation*}
+    f(z) = z \cdot f_1(z) \cdot f_2(z)
+  \end{equation*}
+  so that we include the root $z = 0$.
+
+  \newthought{Solution 2}: We can also choose
+  \marginnote{\begin{ex}
+      Check that $f$ indeed has its zeros at all integers.
+  \end{ex}}
+  \begin{equation*}
+    f(z) = z \cdot \prod_{n=1}^{\infty} \left( 1 - \left( \frac{z}{n} \right)^2 \right)
+  \end{equation*}
+  Note that $\sin ( \pi z )$ is entire and has simple zeros at exactly $z \in \mathbb{Z}$. Then
+  \begin{equation*}
+    \frac{\sin (\pi z)}{f(z)} \text{ has no zeros or poles } \forall z,
+  \end{equation*}
+  and therefore by \cref{thm:theorem_18}, $\exists g \in H(\mathbb{C})$, such that
+  \begin{equation*}
+    \frac{\sin (\pi z)}{f(z)} = e^{g(z)}.
+  \end{equation*}
+  By the \hldefn{Product Formula of Sine}\sidenote{First proven by Euler, although incomplete.}\sidenote{It turns out $g(z) = \log \pi$.}, we have that
+  \begin{equation*}
+    \sin (\pi z) = \pi z \prod_{n=1}^{\infty} \left( 1 - \frac{z^2}{n^2} \right)
+  \end{equation*}
+  and hence
+  \begin{equation*}
+    f(z) = \prod_{n=1}^{\infty} \left( 1 - \frac{z^2}{n^2} \right) = \frac{\sin  (\pi z)}{\pi}.
+  \end{equation*}
+\end{eg}
+
+% subsection weierstrass_products (end)
+
+% section infinite_products_continued_2 (end)
+
+% chapter lecture_32_apr_04_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
