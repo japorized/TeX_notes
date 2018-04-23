@@ -3345,13 +3345,13 @@ $f(z_0) = 0 \implies$
 Suppose $f$ has an isolated singularity at $z_0$, and that there exists a neighbourhood $D$ around $z_0$ where $A, B \in H(D)$, in which $A$ and $B$ are defined such that $\forall z \neq z_0 \in D$, $A(z_0) \neq 0 \, \land \, B(z_0) = 0$, so that we can let $f(z) = \frac{A(z)}{B(z)}$. Then $f$ has a pole at $z_0$.
 
 \begin{thm}[Theorem 9.1]\label{thm:theorem_9.1}
+\textit{Stein \& Shakarchi - Complex Analysis (pg. 74)}
+
 	If $f$ has a pole at $z_0 \in \Omega$, then in a neighbourhood of that point there exists a non-vanishing holomorphic function $h$ and a unique positive integer $n$ such that
 	\begin{equation*}
 		f(z) = (z - z_0)^{-n} h(z)
 	\end{equation*}
 \end{thm}
-
-\textit{Stein \& Shakarchi - Complex Analysis (pg. 74)}
 
 \begin{proof}
 	By \cref{thm:theorem_9}, we have $\frac{1}{f(z)} = (z - z_0)^n g(z)$, where $g$ is holomorphic and non-vanishing in a neighbourhood of $z_0$, so the result follows with $h(z) = \frac{1}{g(z)}$. \qed
@@ -3404,7 +3404,7 @@ The \hldefn{residue} shall be more carefully studied later on.
 	\begin{enumerate}
 		\item $f$ is a removable singularity at $z_0$;
 		\item $\exists m \in \mathbb{N}, \, \{c_j\}_{j = 1}^m \subseteq \mathbb{C}, \, f(z) - \sum_{j=1}^{m} c_j (z - z_0)^-j$ has a removable singularity at $z_0$; or
-		\item $\forall r > 0, \, B(z_0, r) \subseteq \Omega$ such that $f(B^0(z_0, r))$ is dense in $\mathbb{C}$ (Note: $B^0(z_0, r)$ is the punctured ball)
+		\item $\forall r > 0, \, B(z_0, r) \subseteq \Omega$ such that $f(B^0(z_0, r))$ is dense in $\mathbb{C}$.\sidenote{$B^0(z_0, r)$ is the punctured ball.}
 	\end{enumerate}
 \end{thm}
 
@@ -3414,9 +3414,9 @@ The \hldefn{residue} shall be more carefully studied later on.
 		f\big( B^0(z_0, r) \big) \, \cap \, B(w, \delta) = \emptyset \\
 		\implies \forall z \in B^0(z_0, r) \quad \abs{f(z) - w} > \delta
 	\end{gather*}
-	Consider $g(z) = \frac{1}{f(z) - w}$ for $z \in B^0(z_0, r)$, in which $g \in H(B^0(z_0, r))$. Then $\abs{g(z)} \leq \frac{1}{\delta}$ for all $z \in B^0(z_0, r)$, which implies that
+	Consider $g(z) = \frac{1}{f(z) - w}$\marginnote{Plausible since $f(z) - w \neq 0$.} for $z \in B^0(z_0, r)$, in which $g \in H(B^0(z_0, r))$. Then $\abs{g(z)} \leq \frac{1}{\delta}$ for all $z \in B^0(z_0, r)$, which implies that
 	\begin{equation*}
-		\lim_{z \to z_0} (z - z_0) g(z) = 0
+		\lim_{z \to z_0} (z - z_0) g(z) = 0\mathmarginnote{Squeeze Theorem}
 	\end{equation*}
 	By \cref{thm:theorem_10}, $g$ has a removable singularity at $z_0$, thus we can extend the function to a function $\tilde{g} \in H(B(z_0, r))$. From here, we try to construct a function that extends on $f$ onto the singularity $z_0$, say, $\tilde{f}$. The construction of $\tilde{g}$ satisfies the equation $\frac{1}{\tilde{g}(z)} + w = f(z)$ except, possibly, at $z_0$.
 
@@ -3576,12 +3576,71 @@ We can generalize \cref{thm:cauchy_s_residue_theorem} for when there are more th
 
 \begin{thm}[Cauchy's Residue Theorem - Generalized\index{Cauchy's Residue Theorem - Generalized}]\label{thm:cauchy_s_residue_theorem_generalized}
   Let $\Omega \subseteq \mathbb{C}$ be open, $f$ be meromorphic on $\Omega$, $\mathscr{A}$ be a set of poles. If $\gamma$ is a closed path in $\Omega \setminus \mathscr{A}$ such that $\forall w \not\in \Omega \enspace \ind{w}{\gamma} = 0$, then
-  \begin{equation*}
+  \begin{equation}\label{eq:generalized_residue_theorem}
     \frac{1}{2 \pi i} \int_{\gamma} f(z) \dif{z} = \underbrace{\sum_{a \in \mathscr{A}} \big( \res{f(z)}{z = a} \big) \ind{a}{\gamma}}_{\text{this is a finite sum}}
-  \end{equation*}
+  \end{equation}
 \end{thm}
 
-The proof is an exercise in Assignment 4 (which shall be included once that assignment is over)
+\begin{proof}
+  We will first need to prove that $\mathscr{A}$ has only finitely many points.
+
+  Since $f$ is meromorphic, the set of poles, $\mathscr{A}$, must not contain its limit points by definition of meromorphisms, i.e. each of the poles are isolated singularities and $\mathscr{A}^* = \emptyset$. Let $\mathscr{A}' := \{a \in \mathscr{A} \, : \, \ind{a}{\gamma} \neq 0\}$. Suppose, for contradiction, that $\mathscr{A}'$ has infinitely many points. Since the union of $\gamma$ and its interior is compact, by Bolzano-Weierstrass, any infinite subset (subsequence, to be exact, but we may simply index the points in the subset) must converge to a point in the union of $\gamma$ and its interior, call it $w$. Since $\mathscr{A}'$ is a subset (subsequence) of the union of $\gamma$ and its interior, $\mathscr{A}'$ converges to $w$. Now since $\abs{f(z)} \to \infty$ and $z \to a$ for all $a \in \mathscr{A}'$, and since $f$ is continuous since it is meromorphic and hence holomorphic, we have that $\abs{f(z)} \to \infty$ as $z \to w$. Hence $w$ is a pole in the interior of $\gamma$ and is hence in $\mathscr{A}'$. In other words, $\mathscr{A}'$ contains its limit points, which contradicts the fact that $\mathscr{A}' \subseteq \mathscr{A}$ does not contain its limit points. Therefore, there are only finitely many points in $\mathscr{A}'$.
+
+  It remains to prove \cref{eq:generalized_residue_theorem}.
+
+  Since $\mathscr{A}$ is finite, let $\abs{\mathscr{A}} = n$ for some $n \in \mathbb{N}$. For any $a, b \in \mathbb{N}$, $\forall z_a, z_b \in \mathscr{A}, \, \exists r_a, r_b > 0$ such that $z_b \not\in D(z_a, r_a) \, \land \, z_a \not\in D(z_b, r_b)$. Therefore, $\forall l \in \mathbb{N}, \, \forall z_l \in \mathscr{A}$, we can write, $\forall z \in D(z_l, r_l)$, that
+  \begin{equation}\label{eq:2_1}
+    f(z) = \frac{c_{l, -k_l}}{(z - z_l)^{k_l}} + \hdots + \frac{c_{l, -1}}{z - z_l} + c_{l, 0} + c_{l, 1} (z - z_l) + \hdots,
+  \end{equation}
+  where $k_l$ is the order of the pole $z_l$. Since we are only concerned with the poles in the interior of $\gamma$, let $\mathscr{A}' := \{a \in \mathscr{A} : \ind{a}{\gamma} = 1 \} = \{z_1, z_2, ..., z_n\}$.
+
+  Consider the function
+  \begin{equation*}
+    g(z) = \begin{cases}
+      f(z) - \displaystyle \sum_{l=1}^{n} \sum_{j=1}^{k_{l}} \frac{c_{l, -j}}{(z - z_l)^j} & \forall z \in \Omega \setminus \mathscr{A}' \\
+      c_{l, 0} - \displaystyle \sum_{\substack{m=1 \\ m \neq l}}^{n} \sum_{j=1}^{k_m} \frac{c_{m, -j}}{(z - z_m)^j}       & z \in \mathscr{A}'
+    \end{cases}
+  \end{equation*}
+
+  At the neighbourhood of each $z_l \in \mathscr{A}'$ save $z_l$ itself, that is in $D(z_l, r_l) \setminus \{z_l\}$ where $D(z_l, r_l)$ is as defined above, we have that
+  \begin{equation}\label{eq:2_2}
+    g(z) = \underbrace{f(z) - \sum_{j=1}^{k_l} \frac{c_{l, -j}}{(z - z_l)^j}}_{A_{z, l}} - \underbrace{\sum_{\substack{m=1 \\ m \neq l}}^{n} \sum_{j=1}^{k_m} \frac{c_{m, -j}}{(z - z_m)^j}}_{B_{z, l}}
+  \end{equation}
+  in which we observe that $A_{z, l}$ is holomorphic by Casorati-Weierstrass, and $B_{z, l}$ is holomorphic in $D(z_l, r_l)$ since $\forall z \in D(z_l, r_l) \setminus \{z_l\}$, $z \not\in \mathscr{A}'$ and hence the denominators cannot be zero. Thus $g \in H\big( D(z_l, r_l) \big)$. At $z_l$, $g(z_l)$ agrees with \cref{eq:2_2} by \cref{eq:2_1}. Thus $g \in H\big(D(z_l, r_l)\big)$.
+
+  Then by Cauchy's Theorem,
+  \begin{equation*}
+    \int_{\gamma} g(z) \dif{z} = 0.
+  \end{equation*}
+  Then, $\forall z \in \gamma^*$ (image of $\gamma$), since $\mathscr{A} \cap \gamma^* = \emptyset$ (since $\gamma* \in \Omega \setminus \mathscr{A}$), we get
+  \begin{equation*}
+    \int_{\gamma} f(z) \dif{z} = \int_{\gamma} \sum_{l=1}^{n} \sum_{j=1}^{k_l} \frac{c_{l, -j}}{(z - z_0))^j} \dif{z}
+  \end{equation*}
+
+  For each of the terms in $\sum_{j=1}^{k_l} \frac{c_{l, -j}}{(z - z_l)^j}$, for $j \geq 2$, we have that the antiderivative of $\frac{1}{(z - z_l)^j}$ is $- \frac{1}{(j - 1)(z - z_0)^{j - 1}}$. Thus by the Fundamental Theorem of Calculus, since we are integrating over the closed path $\gamma$, the integral of these terms are $0$. When $j = 1$, since $ \frac{1}{2 \pi i} \int_{\gamma} \frac{1}{z - z_l} = \ind{z_l}{\gamma}$, we have that
+  \begin{align*}
+    \frac{1}{2 \pi i} \int_{\gamma} f(z) \dif{z}
+      &= \sum_{l=1}^{n} c_{l, -1} \ind{z_l}{\gamma} \\
+      &= \sum_{l=1}^{n} \Big( \res{f(z)}{z = z_l} \Big) \ind{z_l}{\gamma}
+  \end{align*}
+  as required.
+
+  \noindent Another proof that we can be shown is as follows:
+
+  Using similar notations as above, on each of the neighbourhood of the points in $\mathscr{A}$, we define a keyhole-like path around the points, with a circular path $\gamma_l$, oriented in the opposite direction of $\gamma$, of radius $r_l \geq \epsilon_l > 0$ centered around each $z_l$, connected to the path $\gamma$ through a corridor of width $\delta_l$. This construction is similar to the proof of Cauchy's Integral Formula in our lectures, where we extend the path of $\gamma$ inwards so as to avoid the poles. As each $\delta_l \to 0$, we have
+  \begin{equation*}
+    \int_{\gamma} f(z) \dif{z} = \sum_{l=1}^{n} \int_{\gamma_l} f(z) \dif{z} = \sum_{l=1}^{n} \int_{\gamma_l} \sum_{j=-k_l}^{\infty} c_{l, j} (z - z_l)^j \dif{z} 
+  \end{equation*}
+  Now for $-k_l \leq j \leq 2$, the term $c_{l, j} (z - z_0)^j$ have antiderivatives as described above, and are thus $0$ by FTC, on the path $\gamma_l$. When $j \geq 0$, $\sum_{j=0}^{\infty} c_{l, j} (z - z_l)^j$ is a holomorphic function by construction, and hence their integrals are $0$ by Cauchy's Theorem. We are, therefore, left with
+  \begin{equation*}
+    \int_{\gamma} f(z) = \sum_{l=1}^{n} \int_{\gamma_l} \frac{c_{l, -1}}{z - z_l} \dif{z}  
+  \end{equation*}
+  which in turn implies
+  \begin{equation*}
+    \frac{1}{2 \pi i} \int_{\gamma} f(z) \dif{z} = \sum_{l=1}^{n} \Big( \res{f(z)}{z = z_l} \Big) \ind{z_l}{\gamma_l}
+  \end{equation*}
+  This implies the desired result (through a similar proof given in \cref{thm:cauchy_s_residue_theorem}). \qed
+\end{proof}
 
 \begin{remark}
   We need $\Omega$ to be connected with the interior of $\gamma$ contained in $\Omega$, i.e. $\Omega$ is simply connected.
@@ -3766,7 +3825,13 @@ We will continue with the previous example.
     \lim_{\substack{R \to \infty \\ \epsilon \to 0}} \left[ \int_{-R}^{-\epsilon} \frac{e^{ix}}{x} \dif{x} + \int_{\epsilon}^{R} \frac{e^{ix}}{x} \dif{x} \right] = \int_{-\infty}^{\infty} \frac{e^{ix}}{x} \dif{x} = \pi i
   \end{equation*}
 
-  Using a similar argument (\hlwarn{do this as an exercise}), it can be shown that
+  Using a similar argument\marginnote{Work out the similar case as an exercise
+  \begin{ex}
+    Show that
+    \begin{equation*}
+      \int_{-\infty}^{\infty} \frac{e^{- i x}}{x} \dif{x} = - \pi i
+    \end{equation*}
+  \end{ex}}, it can be shown that
   \begin{equation*}
     \int_{-\infty}^{\infty} \frac{e^{-ix}}{x} \dif{x} = - \pi i
   \end{equation*}
@@ -3779,6 +3844,87 @@ We will continue with the previous example.
 \end{ex}
 
 Refer to Stein \& Shakarchi, Section 2.1, for \hlimpo{more examples}.
+
+\newthought{Interesting Examples} from Stein \& Shakarchi
+\begin{eg}
+  Prove that for $0 < a < 1$,
+  \begin{equation*}
+    \int_{-\infty}^{\infty} \frac{e^{ax}}{1 + e^x} \dif{x} = \frac{\pi}{\sin \pi a} 
+  \end{equation*}
+
+  Choose $f(z) = \frac{e^{az}}{1 + e^z}$. Note that $f$ has one pole at $z = i \pi$. Consider a rectangle lying on the upper-half side of the plane with its base lying on the real axis and its top the line $2 \pi$.
+
+  \begin{figure}
+    \begin{center}
+      \resizebox{6cm}{!}{
+        \begin{tikzpicture}
+          \draw[->] (-5.5, 0) -- (5.5, 0) node[right] {$\re$};
+          \draw[->] (0, -0.5) -- (0, 6) node[above] {$\im$};
+          \draw[midarrow] (-5,5) -- (-5, 0);
+          \draw[midarrow] (-5,0) -- (0,0);
+          \draw[midarrow] (0,0) -- (5,0);
+          \draw[midarrow] (5,0) -- (5,5);
+          \draw[midarrow] (5,5) -- (0,5);
+          \draw[midarrow] (0,5) -- (-5,5);
+          \node[label={135:{$2 \pi$}},circle,fill,inner sep=2pt] at (0,5) {};
+          \node[label={135:{$\pi$}},circle,fill,inner sep=2pt] at (0,2.5) {};
+          \node[label={270:{$R$}},circle,fill,inner sep=2pt] at (5,0) {};
+          \node[label={270:{$-R$}},circle,fill,inner sep=2pt] at (-5,0) {};
+          \node[label={90:{$\Gamma_R$}}] at (3,5) {};
+        \end{tikzpicture}
+      }
+    \end{center}
+    \caption[loftitle]{Contour $\Gamma_R$}
+  \end{figure}
+
+  By the Residue Theorem, we have that
+  \begin{equation*}
+    \frac{1}{2 \pi i} \int_{\Gamma_R} f(z) \dif{z} = \res{f(z)}{z = i \pi}
+  \end{equation*}
+  To evaluate the residue, note that
+  \begin{equation*}
+    (z - i \pi) \cdot \frac{e^{az}}{1 + e^z} = e^{az} \cdot \frac{z - i \pi}{e^z - e^{i \pi}}
+  \end{equation*}
+  and $\lim_{z \to i \pi} \frac{z - i \pi}{e^z - e^{i \pi}}$ is the inverse of the difference quotient (of first principles), and is hence $e^{i \pi} = -1$. Therefore
+  \begin{equation*}
+    \res{f(z)}{z = i \pi} = \lim_{z \to \infty} (z - i \pi) \cdot \frac{e^{az}}{1 + e^z} = - \lim_{z \to i \pi} e^{az} = - e^{a i \pi}.
+  \end{equation*}
+
+  Let $I$ be the desired integral and 
+  \begin{equation*}
+     I_R := \int_{-R}^{R} f(z) \dif{z}
+  \end{equation*}
+  so that we may have $I_R \to I$ as $R \to \infty$. This will describe the bottom part of the rectangle. For the top part of the integral, notice that it is simply
+  \begin{align*}
+    \int_{R}^{-R} \frac{e^{az}}{1 + e^z} \dif{z}
+      &= - \int_{-R}^{R} \frac{e^{a (x + 2 \pi i)}}{1 + e^{x + 2 \pi i}} \dif{x} \\
+      &= - \int_{-R}^{R} \frac{e^{ax} e^{2 \pi i a}}{1 + e^x e^{2 \pi i}} \dif{x} \\
+      &= - e^{2 \pi i a} \int_{-R}^{R} \frac{e^{ax}}{1 + e^x} \dif{x} \enspace \because e^{2 \pi i} = 1 \\
+      &= - e^{2 \pi i a} I_R.
+  \end{align*}
+
+  Let $\gamma_r$ parameterize the vertical path on the right side of the rectangle, i.e. $\gamma_r : [0, 2 \pi] \to \mathbb{C}$ such that $\gamma_r (t) = R + it$. Then
+  \begin{align*}
+    \abs{\int_{\gamma_r} \frac{e^{az}}{1 + e^z} \dif{z}}
+      &= \abs{\int_{0}^{2 \pi} \frac{e^{a(R + ti)}}{1 + e^{R + ti}} \dif{t}} \\
+      &\leq \frac{e^{aR}}{1 + e^R} \int_{0}^{2 \pi} \dif{t}
+  \end{align*}
+  which goes to $0$ as $R \to \infty$ since $aR < R$ for $0 < a < 1$. Thus the integral of the vertical path evaluates to $0$. We can perform a similar procedure for the path on the left and end up with the same result.
+
+  With that, we have that
+  \begin{equation*}
+    I_R - e^{2 \pi i a} I_R = - 2 \pi i e^{\pi i a}
+  \end{equation*}
+  and so
+  \begin{equation*}
+    I_R = \frac{- 2 \pi i e^{\pi i a}}{1 - e^{2 \pi i a}} = \frac{2 \pi i}{e^{\pi i a} - e^{- \pi i a}} = \frac{\pi}{\sin \pi a}  
+  \end{equation*}
+  and hence as $R \to \infty$, we have
+  \begin{equation*}
+    \int_{-\infty}^{\infty} \frac{e^{ax}}{1 + e^x} \dif{x} = \frac{\pi}{\sin \pi a} 
+  \end{equation*}
+  as required.
+\end{eg}
 
 % section application_of_cauchy_s_residue_theorem_continued (end)
 
@@ -3831,7 +3977,8 @@ can be interpreted as the change in the argument\index{argument} of $f$ as $z$ t
   (\hlwarn{include proof here: use \cref{thm:cauchy_s_residue_theorem_generalized} to CTP}).
 \end{proof}
 
-\hlnoteb{Question:} What are the poles of $\frac{f'}{f}$?
+\begin{eg}
+What are the poles of $\frac{f'}{f}$?
 
 Suppose that $f$ has a zero of order $k$ at $z_0$. Then $\exists r > 0, \, \forall z \in D(z_0, r), \, f(z) = (z - z_0)^k g(z)$ where $g \in H\big(D(z_0, r)\big)$ and $g \not\equiv 0$ on $D(z_0, r)$. So
 \begin{gather*}
@@ -3848,6 +3995,7 @@ Suppose $f$ has a pole of order $k$. Then $\exists r > 0, \, \forall z \in D(z_0
 $\frac{f'}{f}$ has a simple pole at $z_0$ with residue $-k$.
 
 $\therefore \, f$ is meromorphic on $\Omega \implies \frac{f'}{f}$ has simple zeros and poles at exactly the zeros and poles of $f$ with residue equals to the order of zeros of $f$ and negative of the order of poles of $f$, respectively.
+\end{eg}
 
 \begin{thm}[Rouch\'e's Theorem\index{Rouch\'e's Theorem}]\label{thm:rouche_s_theorem}
   Let $\Omega \subseteq \mathbb{C}$ be a region, $f, g \in H(\Omega)$, $\gamma$ a closed path on $\Omega$ with

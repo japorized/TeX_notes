@@ -201,6 +201,11 @@
                   "type": "file"
                 },
                 {
+                  "name": "6c27a4dd68ac7f6be1c6d2d1e4efdce402f5b6",
+                  "path": "./.git/objects/09/6c27a4dd68ac7f6be1c6d2d1e4efdce402f5b6",
+                  "type": "file"
+                },
+                {
                   "name": "9e99454ad2216563a6eed923c160edc3e9982d",
                   "path": "./.git/objects/09/9e99454ad2216563a6eed923c160edc3e9982d",
                   "type": "file"
@@ -225,6 +230,18 @@
             {
               "children": [
                 {
+                  "name": "8603042c4858983520d35f988b814e9c5a24bf",
+                  "path": "./.git/objects/0b/8603042c4858983520d35f988b814e9c5a24bf",
+                  "type": "file"
+                }
+              ],
+              "name": "0b",
+              "path": "./.git/objects/0b",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "73c910b292e704987064e4d6020482c579a35b",
                   "path": "./.git/objects/0c/73c910b292e704987064e4d6020482c579a35b",
                   "type": "file"
@@ -236,6 +253,11 @@
             },
             {
               "children": [
+                {
+                  "name": "1773bfd651928ac72ed7ea57adb95894522bb6",
+                  "path": "./.git/objects/0f/1773bfd651928ac72ed7ea57adb95894522bb6",
+                  "type": "file"
+                },
                 {
                   "name": "a88e7ffa55a02790da52369172a56cf7f91dd8",
                   "path": "./.git/objects/0f/a88e7ffa55a02790da52369172a56cf7f91dd8",
@@ -278,6 +300,18 @@
               ],
               "name": "15",
               "path": "./.git/objects/15",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "name": "91fd2906179ce9f0975536d7e4e60ab64b806e",
+                  "path": "./.git/objects/16/91fd2906179ce9f0975536d7e4e60ab64b806e",
+                  "type": "file"
+                }
+              ],
+              "name": "16",
+              "path": "./.git/objects/16",
               "type": "folder"
             },
             {
@@ -336,13 +370,42 @@
             {
               "children": [
                 {
+                  "name": "1c74d5fe7e5683d79dea0a2a40d9a50fd6c2e7",
+                  "path": "./.git/objects/2e/1c74d5fe7e5683d79dea0a2a40d9a50fd6c2e7",
+                  "type": "file"
+                }
+              ],
+              "name": "2e",
+              "path": "./.git/objects/2e",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "7588e2a72b7a3be9c3a49bf05ddd8e2c333e4c",
                   "path": "./.git/objects/30/7588e2a72b7a3be9c3a49bf05ddd8e2c333e4c",
+                  "type": "file"
+                },
+                {
+                  "name": "77794590cff97ee995c1f8585bbd057b4706b8",
+                  "path": "./.git/objects/30/77794590cff97ee995c1f8585bbd057b4706b8",
                   "type": "file"
                 }
               ],
               "name": "30",
               "path": "./.git/objects/30",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "name": "2c53e7e77acab52b3ff8f84eee7a15d3cf1529",
+                  "path": "./.git/objects/31/2c53e7e77acab52b3ff8f84eee7a15d3cf1529",
+                  "type": "file"
+                }
+              ],
+              "name": "31",
+              "path": "./.git/objects/31",
               "type": "folder"
             },
             {
@@ -355,6 +418,30 @@
               ],
               "name": "32",
               "path": "./.git/objects/32",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "name": "c9e0b1faca0b2e84bc1fabd503daa2bd223f8e",
+                  "path": "./.git/objects/33/c9e0b1faca0b2e84bc1fabd503daa2bd223f8e",
+                  "type": "file"
+                }
+              ],
+              "name": "33",
+              "path": "./.git/objects/33",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "name": "27872370bf7658fc0ff9363fbd3e13f1cd228f",
+                  "path": "./.git/objects/3a/27872370bf7658fc0ff9363fbd3e13f1cd228f",
+                  "type": "file"
+                }
+              ],
+              "name": "3a",
+              "path": "./.git/objects/3a",
               "type": "folder"
             },
             {
@@ -384,8 +471,25 @@
             {
               "children": [
                 {
+                  "name": "30f620c0716349b435939cc8c84521990920b8",
+                  "path": "./.git/objects/40/30f620c0716349b435939cc8c84521990920b8",
+                  "type": "file"
+                }
+              ],
+              "name": "40",
+              "path": "./.git/objects/40",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "60ad78789bc0de6598cb46240624376619e5ac",
                   "path": "./.git/objects/42/60ad78789bc0de6598cb46240624376619e5ac",
+                  "type": "file"
+                },
+                {
+                  "name": "7c183c111598e0e7af43fe2345531c59a7e23c",
+                  "path": "./.git/objects/42/7c183c111598e0e7af43fe2345531c59a7e23c",
                   "type": "file"
                 }
               ],
@@ -420,6 +524,11 @@
             {
               "children": [
                 {
+                  "name": "33e8bd9fb6cd74128b756d07f525f9856aefa5",
+                  "path": "./.git/objects/4c/33e8bd9fb6cd74128b756d07f525f9856aefa5",
+                  "type": "file"
+                },
+                {
                   "name": "b87b8954f48f137fa80d7b8c2e8c4c6ccf7fff",
                   "path": "./.git/objects/4c/b87b8954f48f137fa80d7b8c2e8c4c6ccf7fff",
                   "type": "file"
@@ -434,6 +543,11 @@
                 {
                   "name": "bb2e973314bc07086326f7896930444114b9b9",
                   "path": "./.git/objects/4d/bb2e973314bc07086326f7896930444114b9b9",
+                  "type": "file"
+                },
+                {
+                  "name": "c957904dfd402669ad36d0e68469359dcb1758",
+                  "path": "./.git/objects/4d/c957904dfd402669ad36d0e68469359dcb1758",
                   "type": "file"
                 }
               ],
@@ -467,6 +581,23 @@
             },
             {
               "children": [
+                {
+                  "name": "2575daa656f2e3e075e9e65ccac40d73411545",
+                  "path": "./.git/objects/5c/2575daa656f2e3e075e9e65ccac40d73411545",
+                  "type": "file"
+                }
+              ],
+              "name": "5c",
+              "path": "./.git/objects/5c",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "name": "0f69cbf4bfb3253a4b1c97567b31e2337c7a9a",
+                  "path": "./.git/objects/5f/0f69cbf4bfb3253a4b1c97567b31e2337c7a9a",
+                  "type": "file"
+                },
                 {
                   "name": "c6f9feaa3b54c3d8b1dc6523a4046b92bec251",
                   "path": "./.git/objects/5f/c6f9feaa3b54c3d8b1dc6523a4046b92bec251",
@@ -516,6 +647,18 @@
             {
               "children": [
                 {
+                  "name": "ec8f5a57331fe8ebe9b56183f2910e916f4959",
+                  "path": "./.git/objects/6b/ec8f5a57331fe8ebe9b56183f2910e916f4959",
+                  "type": "file"
+                }
+              ],
+              "name": "6b",
+              "path": "./.git/objects/6b",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "65d8e69ffeaafc481b3080e437ed5b74780d1f",
                   "path": "./.git/objects/6d/65d8e69ffeaafc481b3080e437ed5b74780d1f",
                   "type": "file"
@@ -557,6 +700,18 @@
             {
               "children": [
                 {
+                  "name": "c5631a460688408f4ff2dae5a05395523e6c9b",
+                  "path": "./.git/objects/72/c5631a460688408f4ff2dae5a05395523e6c9b",
+                  "type": "file"
+                }
+              ],
+              "name": "72",
+              "path": "./.git/objects/72",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "2e8b5c7bd84bad80095c1c961235dec30d15fb",
                   "path": "./.git/objects/73/2e8b5c7bd84bad80095c1c961235dec30d15fb",
                   "type": "file"
@@ -564,6 +719,23 @@
               ],
               "name": "73",
               "path": "./.git/objects/73",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "name": "4ceecc34c3e3e5b6ab9707b52a6b05a7970403",
+                  "path": "./.git/objects/7f/4ceecc34c3e3e5b6ab9707b52a6b05a7970403",
+                  "type": "file"
+                },
+                {
+                  "name": "52474fe984a9047d7cdceb40254b035610438d",
+                  "path": "./.git/objects/7f/52474fe984a9047d7cdceb40254b035610438d",
+                  "type": "file"
+                }
+              ],
+              "name": "7f",
+              "path": "./.git/objects/7f",
               "type": "folder"
             },
             {
@@ -580,6 +752,11 @@
             },
             {
               "children": [
+                {
+                  "name": "25a4b78a60d5b4981d621a82fd5a0a48592c27",
+                  "path": "./.git/objects/81/25a4b78a60d5b4981d621a82fd5a0a48592c27",
+                  "type": "file"
+                },
                 {
                   "name": "287471e46f2d480091879c62fdfb3a53f6e048",
                   "path": "./.git/objects/81/287471e46f2d480091879c62fdfb3a53f6e048",
@@ -718,6 +895,18 @@
             {
               "children": [
                 {
+                  "name": "e982838e4dfaf5f31bd64ffe548273fd3f641c",
+                  "path": "./.git/objects/a3/e982838e4dfaf5f31bd64ffe548273fd3f641c",
+                  "type": "file"
+                }
+              ],
+              "name": "a3",
+              "path": "./.git/objects/a3",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "a1f80046a2a2285e86a785f76877e50e4fc808",
                   "path": "./.git/objects/a4/a1f80046a2a2285e86a785f76877e50e4fc808",
                   "type": "file"
@@ -737,6 +926,18 @@
               ],
               "name": "ad",
               "path": "./.git/objects/ad",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "name": "6c32aa92b195fd97f59a7744e90f6edd2fe81a",
+                  "path": "./.git/objects/af/6c32aa92b195fd97f59a7744e90f6edd2fe81a",
+                  "type": "file"
+                }
+              ],
+              "name": "af",
+              "path": "./.git/objects/af",
               "type": "folder"
             },
             {
@@ -777,6 +978,11 @@
             },
             {
               "children": [
+                {
+                  "name": "951d032bcbe1841b24af9833ff1b058f0867ab",
+                  "path": "./.git/objects/b6/951d032bcbe1841b24af9833ff1b058f0867ab",
+                  "type": "file"
+                },
                 {
                   "name": "a658542f744d9e0f8d2c2ba714c7ecc0c3962d",
                   "path": "./.git/objects/b6/a658542f744d9e0f8d2c2ba714c7ecc0c3962d",
@@ -843,6 +1049,30 @@
             {
               "children": [
                 {
+                  "name": "abd7d5904446559622fe54bebdb7bb9d4854f7",
+                  "path": "./.git/objects/c8/abd7d5904446559622fe54bebdb7bb9d4854f7",
+                  "type": "file"
+                }
+              ],
+              "name": "c8",
+              "path": "./.git/objects/c8",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "name": "d5b12d73b6abb0e2fa4b18bdb3f56ff3423e34",
+                  "path": "./.git/objects/c9/d5b12d73b6abb0e2fa4b18bdb3f56ff3423e34",
+                  "type": "file"
+                }
+              ],
+              "name": "c9",
+              "path": "./.git/objects/c9",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "f969b799b557cc3d8c045e8d25400210a5feed",
                   "path": "./.git/objects/ca/f969b799b557cc3d8c045e8d25400210a5feed",
                   "type": "file"
@@ -854,6 +1084,11 @@
             },
             {
               "children": [
+                {
+                  "name": "65fc6f8c0125b2b6ace1cbc2486c9c4d54c94b",
+                  "path": "./.git/objects/cd/65fc6f8c0125b2b6ace1cbc2486c9c4d54c94b",
+                  "type": "file"
+                },
                 {
                   "name": "c995f6f51ff31b2fe9a23dce3ec4382fa79766",
                   "path": "./.git/objects/cd/c995f6f51ff31b2fe9a23dce3ec4382fa79766",
@@ -920,6 +1155,18 @@
             {
               "children": [
                 {
+                  "name": "4284edc4aa2a56efc397ad320332edfc55b6d3",
+                  "path": "./.git/objects/db/4284edc4aa2a56efc397ad320332edfc55b6d3",
+                  "type": "file"
+                }
+              ],
+              "name": "db",
+              "path": "./.git/objects/db",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "0a06091daa44ba5e3e653aa786a3b1a3abb2c8",
                   "path": "./.git/objects/dc/0a06091daa44ba5e3e653aa786a3b1a3abb2c8",
                   "type": "file"
@@ -944,6 +1191,18 @@
             {
               "children": [
                 {
+                  "name": "270f0fc1aff048fe0878e1a81d82af5a0d7ff6",
+                  "path": "./.git/objects/e0/270f0fc1aff048fe0878e1a81d82af5a0d7ff6",
+                  "type": "file"
+                }
+              ],
+              "name": "e0",
+              "path": "./.git/objects/e0",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "3c59903a566a1f634d0ac6509a1108e20746cd",
                   "path": "./.git/objects/e1/3c59903a566a1f634d0ac6509a1108e20746cd",
                   "type": "file"
@@ -951,6 +1210,18 @@
               ],
               "name": "e1",
               "path": "./.git/objects/e1",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "name": "01e5b0d611a5473c7d8f9d9ed3389604f256d1",
+                  "path": "./.git/objects/e5/01e5b0d611a5473c7d8f9d9ed3389604f256d1",
+                  "type": "file"
+                }
+              ],
+              "name": "e5",
+              "path": "./.git/objects/e5",
               "type": "folder"
             },
             {
@@ -968,6 +1239,18 @@
             {
               "children": [
                 {
+                  "name": "381f40f27792cc37c3846997709ec90c813450",
+                  "path": "./.git/objects/eb/381f40f27792cc37c3846997709ec90c813450",
+                  "type": "file"
+                }
+              ],
+              "name": "eb",
+              "path": "./.git/objects/eb",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "463eb3e65582b2dfcf17f646cc855fed9976b2",
                   "path": "./.git/objects/ee/463eb3e65582b2dfcf17f646cc855fed9976b2",
                   "type": "file"
@@ -975,6 +1258,18 @@
               ],
               "name": "ee",
               "path": "./.git/objects/ee",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "name": "aad9feead065e6c563cf80877e91750bc0ffd1",
+                  "path": "./.git/objects/ef/aad9feead065e6c563cf80877e91750bc0ffd1",
+                  "type": "file"
+                }
+              ],
+              "name": "ef",
+              "path": "./.git/objects/ef",
               "type": "folder"
             },
             {
@@ -1314,6 +1609,11 @@
       "type": "file"
     },
     {
+      "name": "latex-assignments-preamble.tex",
+      "path": "./latex-assignments-preamble.tex",
+      "type": "file"
+    },
+    {
       "name": "latex-cheatsheet_template.sublime-snippet",
       "path": "./latex-cheatsheet_template.sublime-snippet",
       "type": "file"
@@ -1504,33 +1804,38 @@
         {
           "children": [
             {
+              "name": "cheatsheet.aux",
+              "path": "./PMATH352W18/cheatsheet/cheatsheet.aux",
+              "type": "file"
+            },
+            {
+              "name": "cheatsheet.fdb_latexmk",
+              "path": "./PMATH352W18/cheatsheet/cheatsheet.fdb_latexmk",
+              "type": "file"
+            },
+            {
+              "name": "cheatsheet.fls",
+              "path": "./PMATH352W18/cheatsheet/cheatsheet.fls",
+              "type": "file"
+            },
+            {
+              "name": "cheatsheet.log",
+              "path": "./PMATH352W18/cheatsheet/cheatsheet.log",
+              "type": "file"
+            },
+            {
               "name": "cheatsheet.pdf",
               "path": "./PMATH352W18/cheatsheet/cheatsheet.pdf",
               "type": "file"
             },
             {
+              "name": "cheatsheet.synctex.gz",
+              "path": "./PMATH352W18/cheatsheet/cheatsheet.synctex.gz",
+              "type": "file"
+            },
+            {
               "name": "cheatsheet.tex",
               "path": "./PMATH352W18/cheatsheet/cheatsheet.tex",
-              "type": "file"
-            },
-            {
-              "name": "section1.tex",
-              "path": "./PMATH352W18/cheatsheet/section1.tex",
-              "type": "file"
-            },
-            {
-              "name": "section2.tex",
-              "path": "./PMATH352W18/cheatsheet/section2.tex",
-              "type": "file"
-            },
-            {
-              "name": "section3.tex",
-              "path": "./PMATH352W18/cheatsheet/section3.tex",
-              "type": "file"
-            },
-            {
-              "name": "section4.tex",
-              "path": "./PMATH352W18/cheatsheet/section4.tex",
               "type": "file"
             }
           ],
@@ -1584,8 +1889,8 @@
           "type": "file"
         },
         {
-          "name": "classnotes.synctex.gz",
-          "path": "./PMATH352W18/classnotes.synctex.gz",
+          "name": "classnotes.synctex(busy)",
+          "path": "./PMATH352W18/classnotes.synctex(busy)",
           "type": "file"
         },
         {
@@ -1648,6 +1953,11 @@
     {
       "name": "tex_default.sh",
       "path": "./tex_default.sh",
+      "type": "file"
+    },
+    {
+      "name": "tufte-book-local.tex",
+      "path": "./tufte-book-local.tex",
       "type": "file"
     },
     {
