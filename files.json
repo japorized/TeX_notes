@@ -172,6 +172,18 @@
             {
               "children": [
                 {
+                  "name": "80dfdd2fcb5aff21f710d463cdcc2b90a7fa5e",
+                  "path": "./.git/objects/01/80dfdd2fcb5aff21f710d463cdcc2b90a7fa5e",
+                  "type": "file"
+                }
+              ],
+              "name": "01",
+              "path": "./.git/objects/01",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "a5c297fdf814e32b74aac1d6ba3e67f794695c",
                   "path": "./.git/objects/03/a5c297fdf814e32b74aac1d6ba3e67f794695c",
                   "type": "file"
@@ -288,6 +300,18 @@
               ],
               "name": "12",
               "path": "./.git/objects/12",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
+                  "name": "9188af1a2839184c47755cd916c1f501aa9b32",
+                  "path": "./.git/objects/14/9188af1a2839184c47755cd916c1f501aa9b32",
+                  "type": "file"
+                }
+              ],
+              "name": "14",
+              "path": "./.git/objects/14",
               "type": "folder"
             },
             {
@@ -438,6 +462,11 @@
                   "name": "27872370bf7658fc0ff9363fbd3e13f1cd228f",
                   "path": "./.git/objects/3a/27872370bf7658fc0ff9363fbd3e13f1cd228f",
                   "type": "file"
+                },
+                {
+                  "name": "5d21aca1cc10852f45543ae60c6d593f1eae44",
+                  "path": "./.git/objects/3a/5d21aca1cc10852f45543ae60c6d593f1eae44",
+                  "type": "file"
                 }
               ],
               "name": "3a",
@@ -458,6 +487,11 @@
             },
             {
               "children": [
+                {
+                  "name": "7fb327675c45e391b357d4c133aa5350e80b70",
+                  "path": "./.git/objects/3f/7fb327675c45e391b357d4c133aa5350e80b70",
+                  "type": "file"
+                },
                 {
                   "name": "e103b8e0e1acf4b5c32afe78a66914dec28fac",
                   "path": "./.git/objects/3f/e103b8e0e1acf4b5c32afe78a66914dec28fac",
@@ -514,6 +548,11 @@
                 {
                   "name": "18a7c882d19baa3b365a5510f0b25b53283eea",
                   "path": "./.git/objects/49/18a7c882d19baa3b365a5510f0b25b53283eea",
+                  "type": "file"
+                },
+                {
+                  "name": "53b9750f6104ec7ec76ec93343db46f24887ca",
+                  "path": "./.git/objects/49/53b9750f6104ec7ec76ec93343db46f24887ca",
                   "type": "file"
                 }
               ],
@@ -582,8 +621,25 @@
             {
               "children": [
                 {
+                  "name": "ba268c25fa6f919ea725cb3dd57202def57fd6",
+                  "path": "./.git/objects/5a/ba268c25fa6f919ea725cb3dd57202def57fd6",
+                  "type": "file"
+                }
+              ],
+              "name": "5a",
+              "path": "./.git/objects/5a",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "2575daa656f2e3e075e9e65ccac40d73411545",
                   "path": "./.git/objects/5c/2575daa656f2e3e075e9e65ccac40d73411545",
+                  "type": "file"
+                },
+                {
+                  "name": "2dd1ad527c89dd1b514279e69267cfd7a5f7eb",
+                  "path": "./.git/objects/5c/2dd1ad527c89dd1b514279e69267cfd7a5f7eb",
                   "type": "file"
                 }
               ],
@@ -859,6 +915,18 @@
             {
               "children": [
                 {
+                  "name": "65addea474e0ba6400216e28dd2311f589614a",
+                  "path": "./.git/objects/98/65addea474e0ba6400216e28dd2311f589614a",
+                  "type": "file"
+                }
+              ],
+              "name": "98",
+              "path": "./.git/objects/98",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "239adef25f3fc593f35e39623614f82a3de613",
                   "path": "./.git/objects/9a/239adef25f3fc593f35e39623614f82a3de613",
                   "type": "file"
@@ -1008,6 +1076,18 @@
             {
               "children": [
                 {
+                  "name": "84ebfff76514c6a48f5fde35b71d79e3b8b673",
+                  "path": "./.git/objects/ba/84ebfff76514c6a48f5fde35b71d79e3b8b673",
+                  "type": "file"
+                }
+              ],
+              "name": "ba",
+              "path": "./.git/objects/ba",
+              "type": "folder"
+            },
+            {
+              "children": [
+                {
                   "name": "d1d2bb6bd9c02da4975e4879ef9c3c3af10178",
                   "path": "./.git/objects/bd/d1d2bb6bd9c02da4975e4879ef9c3c3af10178",
                   "type": "file"
@@ -1060,6 +1140,11 @@
             },
             {
               "children": [
+                {
+                  "name": "44d9d31babfec747e1f0a669e46c5f6d55ddc9",
+                  "path": "./.git/objects/c9/44d9d31babfec747e1f0a669e46c5f6d55ddc9",
+                  "type": "file"
+                },
                 {
                   "name": "d5b12d73b6abb0e2fa4b18bdb3f56ff3423e34",
                   "path": "./.git/objects/c9/d5b12d73b6abb0e2fa4b18bdb3f56ff3423e34",
@@ -1773,6 +1858,78 @@
     {
       "children": [
         {
+          "name": "classnotes.aux",
+          "path": "./PMATH347S18/classnotes.aux",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.fdb_latexmk",
+          "path": "./PMATH347S18/classnotes.fdb_latexmk",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.fls",
+          "path": "./PMATH347S18/classnotes.fls",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.idx",
+          "path": "./PMATH347S18/classnotes.idx",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.ilg",
+          "path": "./PMATH347S18/classnotes.ilg",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.ind",
+          "path": "./PMATH347S18/classnotes.ind",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.log",
+          "path": "./PMATH347S18/classnotes.log",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.out",
+          "path": "./PMATH347S18/classnotes.out",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.pdf",
+          "path": "./PMATH347S18/classnotes.pdf",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.synctex.gz",
+          "path": "./PMATH347S18/classnotes.synctex.gz",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.tex",
+          "path": "./PMATH347S18/classnotes.tex",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.thm",
+          "path": "./PMATH347S18/classnotes.thm",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.toc",
+          "path": "./PMATH347S18/classnotes.toc",
+          "type": "file"
+        }
+      ],
+      "name": "PMATH347S18",
+      "path": "./PMATH347S18",
+      "type": "folder"
+    },
+    {
+      "children": [
+        {
           "children": [
             {
               "name": "geometryOfBalls.jpg",
@@ -1804,33 +1961,8 @@
         {
           "children": [
             {
-              "name": "cheatsheet.aux",
-              "path": "./PMATH352W18/cheatsheet/cheatsheet.aux",
-              "type": "file"
-            },
-            {
-              "name": "cheatsheet.fdb_latexmk",
-              "path": "./PMATH352W18/cheatsheet/cheatsheet.fdb_latexmk",
-              "type": "file"
-            },
-            {
-              "name": "cheatsheet.fls",
-              "path": "./PMATH352W18/cheatsheet/cheatsheet.fls",
-              "type": "file"
-            },
-            {
-              "name": "cheatsheet.log",
-              "path": "./PMATH352W18/cheatsheet/cheatsheet.log",
-              "type": "file"
-            },
-            {
               "name": "cheatsheet.pdf",
               "path": "./PMATH352W18/cheatsheet/cheatsheet.pdf",
-              "type": "file"
-            },
-            {
-              "name": "cheatsheet.synctex.gz",
-              "path": "./PMATH352W18/cheatsheet/cheatsheet.synctex.gz",
               "type": "file"
             },
             {
@@ -1842,46 +1974,6 @@
           "name": "cheatsheet",
           "path": "./PMATH352W18/cheatsheet",
           "type": "folder"
-        },
-        {
-          "name": "classnotes.aux",
-          "path": "./PMATH352W18/classnotes.aux",
-          "type": "file"
-        },
-        {
-          "name": "classnotes.fdb_latexmk",
-          "path": "./PMATH352W18/classnotes.fdb_latexmk",
-          "type": "file"
-        },
-        {
-          "name": "classnotes.fls",
-          "path": "./PMATH352W18/classnotes.fls",
-          "type": "file"
-        },
-        {
-          "name": "classnotes.idx",
-          "path": "./PMATH352W18/classnotes.idx",
-          "type": "file"
-        },
-        {
-          "name": "classnotes.ilg",
-          "path": "./PMATH352W18/classnotes.ilg",
-          "type": "file"
-        },
-        {
-          "name": "classnotes.ind",
-          "path": "./PMATH352W18/classnotes.ind",
-          "type": "file"
-        },
-        {
-          "name": "classnotes.log",
-          "path": "./PMATH352W18/classnotes.log",
-          "type": "file"
-        },
-        {
-          "name": "classnotes.out",
-          "path": "./PMATH352W18/classnotes.out",
-          "type": "file"
         },
         {
           "name": "classnotes.pdf",
@@ -1901,11 +1993,6 @@
         {
           "name": "classnotes.thm",
           "path": "./PMATH352W18/classnotes.thm",
-          "type": "file"
-        },
-        {
-          "name": "classnotes.toc",
-          "path": "./PMATH352W18/classnotes.toc",
           "type": "file"
         },
         {
@@ -1939,6 +2026,88 @@
       "name": "README.md",
       "path": "./README.md",
       "type": "file"
+    },
+    {
+      "children": [
+        {
+          "name": "classnotes.aux",
+          "path": "./STAT330S18/classnotes.aux",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.bbl",
+          "path": "./STAT330S18/classnotes.bbl",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.blg",
+          "path": "./STAT330S18/classnotes.blg",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.fdb_latexmk",
+          "path": "./STAT330S18/classnotes.fdb_latexmk",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.fls",
+          "path": "./STAT330S18/classnotes.fls",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.idx",
+          "path": "./STAT330S18/classnotes.idx",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.ilg",
+          "path": "./STAT330S18/classnotes.ilg",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.ind",
+          "path": "./STAT330S18/classnotes.ind",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.log",
+          "path": "./STAT330S18/classnotes.log",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.out",
+          "path": "./STAT330S18/classnotes.out",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.pdf",
+          "path": "./STAT330S18/classnotes.pdf",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.synctex.gz",
+          "path": "./STAT330S18/classnotes.synctex.gz",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.tex",
+          "path": "./STAT330S18/classnotes.tex",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.thm",
+          "path": "./STAT330S18/classnotes.thm",
+          "type": "file"
+        },
+        {
+          "name": "classnotes.toc",
+          "path": "./STAT330S18/classnotes.toc",
+          "type": "file"
+        }
+      ],
+      "name": "STAT330S18",
+      "path": "./STAT330S18",
+      "type": "folder"
     },
     {
       "name": "tex.snippets",

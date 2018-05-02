@@ -1,0 +1,369 @@
+\documentclass[notoc,notitlepage]{tufte-book}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{5}
+
+\renewcommand{\baselinestretch}{1.1}
+
+\input{latex-classnotes-preamble.tex}
+
+% Main Body
+\title{STAT330S18 - Mathematical Statistics}
+\author{Johnson Ng}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\maketitle
+\hypersetup{pageanchor=true}
+\tableofcontents
+
+\chapter*{List of Definitions}
+\theoremlisttype{all}
+\listtheorems{defn}
+
+\chapter*{List of Theorems}
+\theoremlisttype{allname}
+\listtheorems{axiom,lemma,thm,crly,propo}
+
+\chapter*{Foreword}
+  \label{chapter:foreword}
+
+\begin{fullwidth}
+The proofs in this set of notes will be more rigourous compared to the expectations of the course. If you are not the author and is interested in reading the notes, you may skip the proofs should you have little interest in them. The rigour is required almost exclusively for the author himself, for his own practice, and because he transferred his STAT230 course from a class that is clean of proofs.
+
+Also, many of the common mathematical notations will be heavily used both in the author's notes and proofs.
+\end{fullwidth}
+
+% chapter foreword (end)
+
+\chapter{Lecture 1 May 1st 2018}
+  \label{chapter:lecture_1_may_1st_2018}
+
+\section{Introduction} % (fold)
+\label{sec:introduction}
+
+\begin{defn}[Sample Space\index{Sample Space}]\label{defn:sample_space}
+  A \textbf{sample space}, \textbf{$S$} of a random experiment is the set of all possible outcomes of the experiment.
+\end{defn}
+
+\begin{eg}
+  \label{eg:sample_space_eg}
+  The following are some random experiments and their sample space.
+  \begin{itemize}
+    \item Flipping a coin\\
+      $S = \{H, T\}$ where $H$ denotes head and $T$ tail.
+    \item Rolling a 6-faced dice twice\\
+      $S = \{(x, y) : x, y \in \mathbb{N}, \; 1 \leq x, y \leq 6 \}$
+    \item Measuring a patient's height\\
+      $S = R^+ = \{x \in \mathbb{R} : x \geq 0\}$
+  \end{itemize}
+\end{eg}
+
+\begin{defn}[$\sigma$-field\index{$\sigma$-field}]\label{defn:sigma_field}
+  Let $S$ be a sample space. The collection of sets $\mathscr{B} \subseteq \mathbb{P}(S)$\sidenote{The \hldefn{power set} of $S$, $\mathbb{P}(S)$, is defined as the set that contains all subsets of $S$.}, is called a $\sigma$-field (or \hldefn{$\sigma$-algebra}) on $S$ if:
+  \begin{enumerate}
+    \item $\emptyset \in \mathscr{B}$ and $S \in \mathscr{B}$;
+    \item $\forall A \in \mathscr{B} \quad A^C \in \mathscr{B}$; \sidenote{We shall denote the compliment of a set by a superscript $C$ in this set of notes. The supplemental notes provided in the class uses an overhead bar, e.g. $\bar{A}$, while lecture notes will use $A^C$ and $A'$ interchangably.} and
+    \item $\forall n \in \mathbb{N} \quad \forall \{A_j\}_{j = 1}^{n} \subseteq \mathscr{B} \quad \cup_{j=1}^{n} A_j \in \mathscr{B}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Measurable Space\index{Measurable Space}]\label{defn:measurable_space}
+  Given that $S$ is a non-empty set, and $\mathscr{B}$ is a $\sigma$-field, $(S, \mathscr{B})$ is a \textbf{measurable space}.\sidenote{A measurable space is a basic object in \hlnotea{measure theory}.}
+\end{defn}
+
+\begin{eg}
+  \label{eg:sigma_field_eg}
+  Consider $S = \{1, 2, 3, 4\}$. Check if $\mathscr{B} = \{\emptyset, \{1, 2, 3, 4\}, \{1, 2\}, \{3, 4\} \}$ is a $\sigma$-field on $S$.
+  \begin{enumerate}
+    \item It is clear that $\emptyset, S \in \mathscr{B}$.
+    \item Note that $S^C = \emptyset$ and $\{1, 2\}^C = \{3, 4\}$.
+    \item Note that the largest possible result of any countable union of the elements of $\mathscr{B}$ is $\{1, 2, 3, 4\}$, which is an element of $\mathscr{B}$.
+  \end{enumerate}
+\end{eg}
+
+\newthought{Because} $(S, \mathscr{B})$ is a measurable space, we can define a measure on it.
+
+\begin{defn}[Probability Measure\index{Probability Measure}]\label{defn:probability_measure}
+  Suppose $S$ is a sample space of a random experiment. Let $\mathscr{B} = \{A_1, A_2, ...\} \subseteq \mathbb{P}(S)$ be the $\sigma$-field on $S$. The \hldefn{probability set function} (or \textbf{probability measure}), $P : \mathscr{B} \to [0, 1]$, is a function that satisfies the following:\sidenote{These conditions are also known as \hldefn{Kolmogorov Axioms}, or \hldefn{probability axioms}.}
+  \begin{itemize}
+    \item $\forall A \in \mathscr{B} \enspace P(A) \geq 0$;
+    \item $P(S) = 1$;
+    \item $\forall \{A_j\}_{j = 1}^{\infty} \subseteq \mathscr{B} \enspace \forall i \neq j \in \mathbb{N} \; A_i \cap A_j = \emptyset \implies$
+      \begin{equation}\label{eq:probability_of_union_of_disjoint_sets}
+        P \left( \bigcup_{j=1}^{\infty} A_j \right) = \sum_{j=1}^{\infty} P(A_j)
+      \end{equation}
+  \end{itemize}
+  $(S, \mathscr{B}, P)$ is called a \hldefn{probability space}.
+\end{defn}
+
+\begin{eg}
+  \label{eg:probability_measure}
+  Consider flipping a coin where $S = \{H, T\}$. Let $P$ be defined as follows
+  \begin{equation*}
+    P(\{H\}) = \frac{1}{3} \quad P(\{T\}) = \frac{2}{3} \quad P(\emptyset) = 0 \quad  P(S) = 1
+  \end{equation*}
+  Conditions 1 and 2 of \cref{defn:probability_measure} are met. Notice that
+  \begin{equation*}
+    P(\{H\} \cup \{T\}) = P(S) = 1 \enspace \text{and} \enspace P(\{H\}) + P(\{T\}) = \frac{1}{3} + \frac{2}{3} = 1.
+  \end{equation*}
+  Hence condition 3 is also fulfilled.
+\end{eg}
+
+\begin{propo}[Properties of Probability Set Functions]\label{propo:properties_of_probability_set_functions}
+  Let $P$ be a probability set function and $A, B$ be any set in $\mathscr{B}$. Prove the following:\sidenote{Many among these properties illustrate that the probability is indeed a \hlnotea{measure}.}
+  \begin{enumerate}
+    \item $P(A^C) = 1 - P(A)$
+    \item $P(\emptyset) = 0$
+    \item $P(A) \leq 1$
+    \item $P(A \cap B^C) = P(A) - P(A \cap B)$
+    \item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+    \item $A \subseteq B \implies P(A) \leq P(B)$
+  \end{enumerate}
+  \marginnote{\begin{ex}
+    Prove that $A \subseteq B \iff B^C \subseteq A^C$.
+  \end{ex}}
+
+  \begin{proof}
+    Let $S$ be the sample space for $P$.
+    \begin{enumerate}
+      \item Note that\\
+        $A \in \mathscr{B} \implies A \in \mathbb{P}(S) \iff A \subseteq S$\\
+        $A \in \mathscr{B} \iff A^C \in \mathscr{B} \implies A^C \subseteq S$.
+        Also, since $A^C$ is the complement of $A$, it is clear that $S = A \cup A^C$.
+        \begin{equation*}
+          \therefore P(S) = 1 \iff P(A \cup A^C) = 1 \overset{1}{\iff} P(A) + P(A^C) = 1
+        \end{equation*}
+        where $1$ is by condition 3 in \cref{defn:probability_measure} since $A \cap A^C = \emptyset$ by definition of a complement of a set.
+
+      \item Note that $S \cup \emptyset = S$ and $S \cap \emptyset = \emptyset$. Using a similar argument as above,
+        \begin{equation*}
+          1 = P(S) = P(S \cup \emptyset) = P(S) + P(\emptyset) \implies P(\emptyset) = 0
+        \end{equation*}
+
+      \item By 1 from above, $P(A) = 1 - P(A^C)$. Since $0 \leq P(A^C) \leq 1$, we have that $P(A)$ is at most $1$, as required.
+
+      \item Note that $A = (A \cap B) \cup ( A \cap B^C )$. Clearly, $(A \cap B) \cap (A \cap B^C) = \emptyset$.\sidenote{This is an easy proof using the basic way of proving membership.} Hence by condition 3 in \cref{defn:probability_measure},
+        \begin{equation*}
+          P(A) = P(A \cap B) + P(A \cap B^C)
+        \end{equation*}
+
+      \item Consider $P(A \cup B) + P(A \cap B)$. By definition,
+        \begin{equation*}
+          A \cup B = (A \cap B^C) \cup (A \cap B) \cup (A^C \cap B)
+        \end{equation*}
+        where each of the sets in brackets are disjoint from each other\sidenote{Again, this is not hard to show}. By condition 3 of \cref{defn:probability_measure}, we would then have
+        \begin{align*}
+          &P(A \cup B) + P(A \cap B) \\
+            &= P(A \cap B^C) + P(A \cap B) + P(A^C \cap B) + P(A \cap B) \\
+            &= 2 P(A \cap B) + P(A) - P(A \cap B) + P(B) - P(A \cap B) \enspace \text{by 4} \\
+            &= P(A) + P(B)
+        \end{align*}
+
+      \item Note that $B = B \cap S = B \cap (A^C \cup A) = (B \cap A^C) \cup A$. Clearly, $A \cap (B \cap A^C) \neq \emptyset$. By condition 3 in \cref{defn:probability_measure}, we thus have that
+        \begin{equation}\tag{$\dagger$}\label{eq:properties_prob_set_fn_6_1}
+          P(B) = P(B \cap A^C) + P(A).
+        \end{equation}
+        Suppose $A \subsetneq B$. Then $B \cap A^C \neq \emptyset$. I shall make the claim that $B \cap A^C \in \mathscr{B}$. Since $A \subseteq B$ we have that
+        \begin{align*}
+          a \in (B \cap A^C) &\iff a \in B \, \land \, a \in A^C \\
+            &\iff a \in B \, \land \, a \notin A \\
+            &\iff a \in (B \setminus A).
+        \end{align*}
+        But $B \setminus A$ is a subset of $B$ from the above steps\sidenote{This is rather obvious from the steps, since $\forall a \in (B \cap A^C)$, $a \in B$.}. Therefore, $(B \cap A^C) \subseteq B \in \mathscr{B}$ as required.
+
+        With that done, by condition 1 in \cref{defn:probability_measure}, $P(B \cap A^C) \geq 0$. Hence from \cref{eq:properties_prob_set_fn_6_1}, we have that
+        \begin{align*}
+          P(B) &= P(B \cap A^C) + P(A) \\
+            &\geq P(A)
+        \end{align*}
+        as required. \qed
+    \end{enumerate}
+  \end{proof}
+\end{propo}
+
+\begin{defn}[Conditional Probability\index{Conditional Probability}]\label{defn:conditional_probability}
+  Suppose $S$ is a sample space of a random experiment, and $A, B \subseteq S$. The \hlnoteb{conditional probability of $A$ given $B$} is given by
+  \begin{equation}\label{eq:conditional_probability}
+    P(A | B) = \frac{P(A \cap B)}{P(B)} \quad \text{provided } P(B) > 0.
+  \end{equation}
+\end{defn}
+
+\begin{defn}[Independent Events\index{Independent Events}]\label{defn:independent_events}
+  Suppose $S$ is a sample space of a random experiment, and $A, B \subseteq S$. $A$ and $B$ are said to be \hlnoteb{independent of each other} if
+  \begin{equation*}
+    P(A \cap B) = P(A) P(B)
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[Boole's Inequality\index{Boole's Inequality}]\label{propo:boole_s_inequality}
+  If $\{A_j\}_{j = 1}^{\infty}$ is a sequence of events, then
+  \begin{equation*}
+    P \left( \bigcup_{j = 1}^{\infty} A_j \right) \leq \sum_{j=1}^{\infty} P(A_j)
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  \hlwarn{Proof shall be provided later}
+\end{proof}
+
+\begin{propo}[Bonferroni's Inequality\index{Bonferroni's Inequality}]\label{propo:bonferroni_s_inequality}
+  If $\{A_j\}_{j = 1}^{k}$ is a set of events where $k \in \mathbb{N}$, then
+  \begin{equation*}
+    P \left( \bigcap_{j = 1}^{k} A_j \right) \geq 1 - \sum_{j=1}^{k} P(A^C_j)
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  \hlwarn{Proof shall be provided later}
+\end{proof}
+
+\begin{propo}[Continuity Property\index{Continuity Property}]\label{propo:continuity_property}
+  If $A_1 \subset A_2 \subset \hdots$ is a sequence where $A = \cup_{i = 1}^{n} A_i$, then
+  \begin{equation*}
+    \lim_{n \to \infty} P \left( \bigcup_{i = 1}^{n} A_i \right) = P(A)
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  \hlwarn{Proof shall be provided later}
+\end{proof}
+
+% section introduction (end)
+
+\section{Random Variable} % (fold)
+\label{sec:random_variable}
+
+\begin{defn}[Random Variable\index{Random Variable}]\label{defn:random_variable}
+  In a given probability space $(S, \mathscr{B}, P)$, the function $X : S \to \mathbb{R}$ is called a \hlnoteb{random variable}\sidenote{We shall use rv as shorthand for random variable in this set of notes.} if
+  \begin{equation}\label{eq:random_var_defn}
+    P(X \leq x) = P \left( \{ \omega \in S \, : \, X(\omega) \leq x \} \right)
+  \end{equation}
+  is defined for all $x \in \mathbb{R}$\sidenote{$X \leq x$ is an abbreviation for $\{\omega \in S \, : \, X(\omega) \leq x \} \in \mathscr{B}$.}.
+\end{defn}
+
+\begin{eg}
+  \label{eg:random_var_eg}
+  In a coin flip experiment, we have that $S = \{H, T\}$ where $\mathbb{P}(S) = \{\emptyset, S, \{H\}, \{T\} \}$. Define $X$ : the number of heads in a flip, i.e.
+  \begin{equation*}
+    X(\{H\}) = 1 \text{ and } X(\{T\}) = 0
+  \end{equation*}
+  To prove why $X$ is a random variable given this definition, notice that
+  \begin{align*}
+    x < 0 &\implies P(X \leq x) = P(\{\omega \in S \, : \, X(\omega) < 0\}) = P(\emptyset) = 0 \\
+    x \geq 1 &\implies P(X \leq x) = P(\{\omega \in S \, : \, X(\omega) \leq x\}) = P(\{H, T\}) \\
+      & \qquad = P(\{H\}) + P(\{T\}) = 1 \text{ by Independence} \\
+    0 \leq x < 1 &\implies P(X \leq x) = P(\{\omega \in S \, : \, X(\omega) \leq x\}) = P(T) \geq 0
+  \end{align*}
+  which shows that $P$ is deiined for all $x \in \mathbb{R}$. Hence $X$ is a random variable.
+\end{eg}
+
+\begin{defn}[Cumulative Distribution Function\index{Cumulative Distribution Function}]\label{defn:cumulative_distribution_function}
+  The \hlnoteb{cumulative distribution function (c.d.f)} of a random variable $X$ is defined as
+  \begin{equation*}
+    \forall x \in \mathbb{R} \quad F(x) = P(X \leq x)
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  \newthought{Notice} that $F(x)$ is defined for \hlimpo{all} real numbers, and since it is a probability, we have $0 \leq F(x) \leq 1$.
+\end{note}
+
+\begin{propo}[Properties of the cdf\index{Properties of the cdf}]\label{propo:properties_of_the_cdf}
+  \begin{enumerate}
+    \item $\forall x_1 < x_2 \in \mathbb{R} \quad F(x_1) \leq F(x_2)$ 
+    \item $\lim_{x \to -\infty} = 0 \, \land \, \lim_{x \to \infty} = 1$
+    \item $\lim_{x \to a^+} F(x) = F(a)$ \sidenote{$F$ is a \hldefn{right-continuous} function.}
+    \item $\forall a < b \in \mathbb{R} \quad P(a < X \leq b) = P(X \leq b) - P(X \leq a) = F(b) - F(a)$
+    \item $P(X = b) = F(b) - \lim_{a \to b^-} F(a)$ \sidenote{This is also called \hlnotea{the magnitude of the jump}.}
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \hlwarn{Proof shall be provided later}
+\end{proof}
+
+\begin{note}
+  The definition and properties of the cdf hold for the rv $X$ regardless of whether $S$ is discrete (finite or countable) or not.
+\end{note}
+
+% section random_variable (end)
+
+\section{Discrete Random Variable} % (fold)
+\label{sec:discrete_random_variable}
+
+\begin{defn}[Discrete Random Variable\index{Discrete Random Variable}]\label{defn:discrete_random_variable}
+  An rv $X$ is a \hlnoteb{discrete random variable} when its image is finite or countably infinite, i.e. $X \in \{x_1, x_2, ...\}$. The function
+  \begin{equation*}
+    \forall x \in \mathbb{R} \quad f(x) := P(X = x) = F(x) - \lim_{\epsilon \to 0^+} F(x - \epsilon)
+  \end{equation*}
+  is its probability function, commonly known as the \hldefn{probability mass function} (pmf). The set $A := \{x : f(x) > 0\}$ is called the \hldefn{support set} of $X$, and
+  \begin{equation}\label{eq:defn_discrete_rv_prob_sum}
+    \sum_{x \in A} f(x) = \sum_{i=1}^{\infty} f(x_i) = 1.
+  \end{equation}
+\end{defn}
+
+\begin{propo}[Properties of pmf\index{Properties of pmf}]\label{propo:properties_of_pmf}
+  Prove that
+  \begin{enumerate}
+    \item $\forall x \in \mathbb{R} \quad f(x) \geq 0$
+    \item $\sum_{x \in A} f(x) = 1$
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \hlwarn{Proof shall be provided later}
+\end{proof}
+
+\begin{ex}
+  Consider an urn containing $r$ red marbles and $b$ black marbles. Find the pmf of the rv for the following:
+  \begin{enumerate}
+    \item $X =$ number of red balls in $n$ selections without replacement.
+    \item $X =$ number of red balls in $n$ selections with replacement.
+    \item $X =$ number of black balls selected before obtaining the first red ball if sampling is done with replacement.
+    \item $X =$ number of black balls selected before obtaining the $k$th red ball if sampling is done with replacement.
+  \end{enumerate}
+
+  \begin{solution}
+    \begin{enumerate}
+      \item Let $d = \max\{n, r + b\}$. The desired pmf is therefore the pmf from the hypergeometric distribution
+      \begin{equation*}
+        \forall x \in \mathbb{Z}_{\leq r}^{+} \quad f(x) = \frac{\binom{r}{x} \binom{b}{d - x}}{\binom{r + b}{d}}.
+      \end{equation*}
+      \item $\forall x \in \mathbb{Z}^+ \quad f(x) = \binom{n}{x} \left( \frac{r}{r + b} \right)^x \left( \frac{b}{r + b} \right)^{n - x}$, which is the pmf of the binomial distribution.
+      \item $\forall x \in \mathbb{Z}^{+} \quad f(x) = \left( \frac{b}{r + b} \right)^x \left( \frac{r}{r + b} \right)$
+      \item $\forall x \in \mathbb{Z}^{+} \quad f(x) = \binom{x + k - 1}{k - 1} \left( \frac{b}{r + b} \right)^x \left( \frac{r}{r + b} \right)^k$
+    \end{enumerate}
+  \end{solution}
+\end{ex}
+
+\begin{eg}
+  Consider the function
+  \begin{equation*}
+    f(x) = \begin{cases}
+      \frac{C \mu^x}{x!} & x \in \mathbb{Z}^+, \, \mu > 0 \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  Find $C$ such that $f(x)$ is a pmf for the rv $X$.
+
+  \begin{solution}
+    We have that\marginnote{This gives us that $\forall x \in \mathbb{Z}^+$, $f(x) = \frac{e^{- \mu} \mu^x}{x!}$, and this is, of course, the pmf of the \hlnotea{Poisson distribution}.}
+    \begin{align*}
+      1 &= \sum_{x \in \mathbb{Z}^+} \frac{C \mu^x}{x!} \\
+        &= C \sum_{x \in \mathbb{Z}^+} \frac{\mu^x}{x!} \\
+        &= C e^\mu
+    \end{align*}
+    Thus $C = e^{- \mu}$.
+  \end{solution}
+\end{eg}
+
+% section discrete_random_variable (end)
+
+% chapter lecture_1_may_1st_2018 (end)
+
+\nobibliography*
+\bibliography{bibliography}
+
+\printindex
+
+\end{document}
