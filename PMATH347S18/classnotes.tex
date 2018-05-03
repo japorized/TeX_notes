@@ -1,6 +1,6 @@
 \documentclass[notoc,notitlepage]{tufte-book}
 \setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{5}
+\setcounter{tocdepth}{3}
 
 \renewcommand{\baselinestretch}{1.1}
 
@@ -24,7 +24,151 @@
 \theoremlisttype{allname}
 \listtheorems{axiom,lemma,thm,crly,propo}
 
+\chapter{Lecture 1 May 02 2018}
+  \label{chapter:lecture_1_may_02_2018}
 
+\section{Introduction} % (fold)
+\label{sec:introduction}
+
+\subsection{Numbers} % (fold)
+\label{sub:numbers}
+
+The following are some of the number sets that we are already familiar with:
+\begin{gather*}
+  \mathbb{N} = \{1, 2, 3, ...\} \qquad \mathbb{Z} = \{.., -2, -1, 0, 1, 2, ...\} \\
+  \mathbb{Q} = \left\{\frac{a}{b} : a \in \mathbb{Z}, b \in \mathbb{N} \right\} \qquad \mathbb{R} = \text{ set of real numbers} \\
+  \mathbb{C} = \{a + bi : a, b \in \mathbb{R}, i = \sqrt{-1} \} = \text{ set of complex numbers} 
+\end{gather*}
+For $n \in \mathbb{Z}$, let $\mathbb{Z}_n$ denote the set of integers modulo $n$, i.e.
+\begin{equation*}
+  \mathbb{Z}_n = \{ [0], [1], ..., [n - 1] \}
+\end{equation*}
+where the $[r]$, $0 \leq r \leq n - 1$, are the congruence classes, i.e.
+\begin{equation*}
+  [r] = \{z \in \mathbb{Z} : z \equiv r \mod n\}
+\end{equation*}
+
+These sets share some common properties, e.g. $+$ and $\times$. Let's try to break that down to make further observation.
+
+\newthought{Note that} for $R = \mathbb{N}, \, \mathbb{Z}, \, \mathbb{Q}, \, \mathbb{R}, \, \mathbb{C},$ or $\mathbb{Z}_n$, $R$ has 2 operations, i.e. addition and multiplication.
+
+\paragraph{Addition} If $r_1, r_2, r_3 \in R$, then
+\begin{itemize}
+  \item (\hldefn{closure}) $r_1 + r_2 \in R$
+  \item (\hldefn{associativity}) $r_1 + (r_2 + r_3) = (r_1 + r_2) + r_3$
+\end{itemize}
+Also, if $R \neq \mathbb{N}$, then $\exists 0 \in R$ (the \hldefn{additive identity}) such that
+\begin{equation*}
+  \forall r \in R \quad r + 0 = r = 0 + r.
+\end{equation*}
+Also, $\forall r \in R$, $\exists (-r) \in R$ such that
+\begin{equation*}
+  r + (-r) = 0 = (-r) + r.
+\end{equation*}
+
+\paragraph{Multiplication} For $r_1, r_2, r_3 \in R$, we have
+\begin{itemize}
+  \item (\hlnoteb{closure}) $r_1 r_2 \in R$
+  \item (\hlnoteb{associativity}) $r_1 (r_2 r_3) = (r_1 r_2) r_3$
+\end{itemize}
+Also, $\exists 1 \in R$ (a.k.a the \hldefn{mutiplicative identity}), such that
+\begin{equation*}
+  \forall r \in R \quad r \cdot 1 = r = 1 \cdot r.
+\end{equation*}
+Finally, for $R = \mathbb{Q}, \, \mathbb{R},$ or $\mathbb{C}$, $\forall r \in R, \, \exists r^{-1} \in R$ such that
+\begin{equation*}
+  r \cdot r^{-1} = 1 = r^{-1} \cdot r.
+\end{equation*}
+Note that for $R = \mathbb{Z}_n$, where $n \in \mathbb{Z}$, not all $[r] \in \mathbb{Z}_n$ have a multiplicative inverse. For example, for $[2] \in \mathbb{Z}_4$, there is no $[x] \in \mathbb{Z}_4$ such that $[2][x] = [1]$.\sidenote{This is best proven using techniques introduced in MATH135/145.}
+
+% subsection numbers (end)
+
+\subsection{Matrices}
+  \label{sub:matrices}
+
+For $n \in \mathbb{N} \setminus \{1\}$, an $n \times n$ matrix over $\mathbb{R}$ \sidenote{$\mathbb{R}$ can be replaced by $\mathbb{Q}$ or $\mathbb{C}$.} is an $n \times n$ array that can be expressed as follows:
+\begin{equation*}
+  A = [a_{ij}] = \begin{bmatrix}
+    a_{11} & a_{12} & \hdots & a_{1n} \\
+    a_{21} & a_{22} & \hdots & a_{2n} \\
+    \vdots & \vdots &        & \vdots \\
+    a_{n1} & a_{n2} & \hdots & a_{nn}
+  \end{bmatrix}
+\end{equation*}
+where for $1 \leq i, j \leq n$, $a_{ij} \in \mathbb{R}$. We denote $M_n(\mathbb{R})$ as the set of all $n \times n$ matrices over $\mathbb{R}$.
+
+As in \cref{sub:numbers}, we can perform \hlnotea{addition and multiplication} on $M_n(\mathbb{R})$.
+
+\paragraph{Matrix Addition} Given $A = [a_{ij}], B = [b_{ij}], C = [c_{ij}] \in M_n(\mathbb{R})$, we define matrix addition as
+\begin{equation*}
+  A + B = [a_{ij} + b_{ij}],
+\end{equation*}
+which immediately gives the \hlnoteb{closure property}, since $a_{ij} + b_{ij} \in \mathbb{R}$ and hence $A + B \in M_n(\mathbb{R})$. Also, by this definition, we also immediately obtain the \hlnoteb{associativity property}, i.e.
+\begin{equation*}
+  A + (B + C) = (A + B) + C.
+\end{equation*}
+We define the zero matrix as
+\begin{equation*}
+  0 = \begin{bmatrix}
+    0      &   0    & \hdots &   0 \\
+    0      &   0    & \hdots &   0 \\
+    \vdots & \vdots &        & \vdots \\
+    0      &   0    & \hdots &   0
+  \end{bmatrix}.
+\end{equation*}
+Then we have that $0$ is the \hlnoteb{additive identity}, i.e.
+\begin{equation*}
+  A + 0 = A = 0 + A.
+\end{equation*}
+Finally, $\forall A \in M_n(\mathbb{R})$, $\exists (-A) \in M_n(\mathbb{R})$ (the \hlnoteb{additive inverse}) such that
+\begin{equation*}
+  A + (-A) = 0 - (-A) + A.
+\end{equation*}
+
+Note that in this case, we also have that that the operation is \hlnoteb{commutative}, i.e.
+\begin{equation*}
+  A + B = B + A.
+\end{equation*}
+
+\paragraph{Matrix Multiplication} Given $A = [a_{ij}], B = [b_{ij}], C = [c_{ij}] \in M_n(\mathbb{R})$, we define the matrix multiplication as
+\begin{equation*}
+  AB = [d_{ij}] \text{ where } c_{ij} = \sum_{k=1}^{n} a_{ik} b_{kj} \in \mathbb{R}.
+\end{equation*}
+Clearly, $AB \in M_n(\mathbb{R})$, i.e. it is \hlnoteb{closed under matrix multiplication}. Also, we have that, under such a defintion, matrix multiplication is \hlnoteb{associative}, i.e.
+\begin{equation*}
+  A(BC) = (AB)C.
+\end{equation*}
+Define the identity matrix, $I \in M_n(\mathbb{R})$, as follows:
+\begin{equation*}
+  I = \begin{bmatrix}
+    1      &   0    & \hdots & 0 \\
+    0      &   1    & \hdots & 0 \\
+    \vdots & \vdots &        & \vdots \\
+    0      &   0    & \hdots & 1
+  \end{bmatrix}.
+\end{equation*}
+Then we have that $I$ is the \hlnoteb{multiplicative identity}, since
+\begin{equation*}
+  AI = A = IA.
+\end{equation*}
+However, contrary to matrix addition, $\forall A \in M_n(\mathbb{R})$, it is not always true that $\exists A^{-1} \in M_n(\mathbb{R})$ such that\marginnote{This is especially true if the \hlnotea{determinant} of $A$ is $0$.}
+\begin{equation*}
+  AA^{-1} = I = A^{-1} A.
+\end{equation*}
+
+Also, we can always find some $A, B \in M_n(\mathbb{R})$ such that
+\begin{equation*}
+  AB \neq BA,
+\end{equation*}
+i.e. matrix multiplication is not always commutative.
+
+\newthought{The common properties} of the operations from above: \hlimpo{closure, associativity, and existence of an inverse}, are not unique to just addition and multiplication. We shall see in the next lecture that there are other operations where these properties will continue to hold, e.g. \hlnoteb{permutations}.
+
+% subsection matrices (end)
+
+% section introduction (end)
+
+% chapter lecture_1_may_02_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
