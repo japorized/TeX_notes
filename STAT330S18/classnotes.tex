@@ -6,6 +6,13 @@
 
 \input{latex-classnotes-preamble.tex}
 
+\DeclareMathOperator{\BIN}{BIN }
+\DeclareMathOperator{\GEO}{GEO }
+\DeclareMathOperator{\POI}{POI }
+\DeclareMathOperator{\EXP}{EXP }
+\DeclareMathOperator{\NOR}{N }
+\DeclareMathOperator{\GAM}{GAM }
+
 % Main Body
 \title{STAT330S18 - Mathematical Statistics}
 \author{Johnson Ng}
@@ -160,9 +167,9 @@ Also, many of the common mathematical notations will be heavily used both in the
         \end{align*}
 
       \item Note that $B = B \cap S = B \cap (A^C \cup A) = (B \cap A^C) \cup A$. Clearly, $A \cap (B \cap A^C) \neq \emptyset$. By condition 3 in \cref{defn:probability_measure}, we thus have that
-        \begin{equation}\tag{$\dagger$}\label{eq:properties_prob_set_fn_6_1}
+        \begin{equation*}\tag{$\dagger$}\label{eq:properties_prob_set_fn_6_1}
           P(B) = P(B \cap A^C) + P(A).
-        \end{equation}
+        \end{equation*}
         Suppose $A \subsetneq B$. Then $B \cap A^C \neq \emptyset$. I shall make the claim that $B \cap A^C \in \mathscr{B}$. Since $A \subseteq B$ we have that
         \begin{align*}
           a \in (B \cap A^C) &\iff a \in B \, \land \, a \in A^C \\
@@ -357,9 +364,61 @@ Also, many of the common mathematical notations will be heavily used both in the
   \end{solution}
 \end{eg}
 
+\begin{ex}
+  Prove that the pdf of $X \sim \POI(\mu)$ sums to $1$ over all of its values.
+
+  \begin{solution}
+    \begin{align*}
+      \sum_{x \in \mathbb{N}} \frac{\mu^x e^{- \mu}}{x!}
+        &= e^{- \mu} \sum_{x \in \mathbb{N}} \frac{\mu^x}{x!} \\
+        &= e^{- \mu} e^\mu \quad \because \sum_{x \in \mathbb{N}}^{\infty} \frac{k^x}{x!} = e^k \\
+        &= 1
+    \end{align*}
+  \end{solution}
+\end{ex}
+
+\begin{ex}
+  If $X$ is a random variable with pmf
+  \begin{equation*}
+    f(x) = \frac{- (1 - p)^x}{x \log p}, \enspace x = 1, 2, ... \; ; \; 0 < p < 1,
+  \end{equation*}
+  show that
+  \begin{equation*}
+    \sum_{x \in \mathbb{N}} f(x) = 1
+  \end{equation*}
+
+  \begin{solution}
+    \begin{align*}
+      \sum_{x \in \mathbb{N}} \frac{- (1 - p)^x}{x \log p}
+        &= - \frac{1}{\log p} \sum_{x \in \mathbb{N}} \frac{(-1)^x (p - 1)^x}{x} \\
+        &= - \frac{1}{\log p} \underbrace{ \left[ - (p - 1) + \frac{(p - 1)^2}{2} - \frac{(p - 1)^3}{3} + \hdots \right] }_{\text{Taylor expansion of } - \log p} \\
+        &= 1
+    \end{align*}
+  \end{solution}
+\end{ex}
+
 % section discrete_random_variable (end)
 
 % chapter lecture_1_may_1st_2018 (end)
+
+\chapter{Lecture 2 May 03rd 2018}
+  \label{chapter:lecture_2_may_03rd_2018}
+
+\section{Continuous Random Variable} % (fold)
+\label{sec:continuous_random_variable}
+
+\begin{defn}[Continuous Random Variable\index{Continuous Random Variable}]\label{defn:continuous_random_variable}
+  Suppose $X$ is an rv with cdf $F$. If $F$ is a continuous function for all $x \in \mathbb{R}$ and $F$ is differentiable except possibly at countably many points, then $X$ is a \hlnoteb{continuous rv}. The probability function, or more commonly known as the \hldefn{probability density function} (pdf), of $X$ is $f(x) = F'(x)$ wherever $F$ is differentiable on $x$ and $0$ otherwise.
+
+  The set $A = \{x : f(x) > 0\}$ is called the \hlnoteb{support set} of $X$ and
+  \begin{equation*}
+    \int_{x \in A} f(x) \dif{x} = 1
+  \end{equation*}
+\end{defn}
+
+% section continuous_random_variable (end)
+
+% chapter lecture_2_may_03rd_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
