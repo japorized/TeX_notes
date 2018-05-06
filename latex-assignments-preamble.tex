@@ -22,16 +22,15 @@
 \usepackage{faktor}
 \usepackage{float}
 \usepackage{xcolor}
-\usepackage{silence}
-  \WarningFilter*{latex}{Marginpar on page \thepage\space moved}
 \usepackage[hyperref]{ntheorem}
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
+\usepackage[most]{tcolorbox}
 
 % hyperref Package Settings
 \hypersetup{
 	colorlinks,
-	linkcolor=base16-eighties-magenta
+	linkcolor=black
 }
 
 % tikz
@@ -134,20 +133,10 @@
 
 \theoremlisttype{allname}
 
-\AtBeginDocument{\renewcommand\contentsname{Table of Contents}}
-
 % Custom table columning
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-
-% Custom math operator
-% \DeclareMathOperator{\rem}{rem}
-\DeclareMathOperator{\re}{Re}
-\DeclareMathOperator{\im}{Im}
-\DeclareMathOperator{\caparg}{Arg}
-\DeclareMathOperator{\Ind}{Ind}
-\DeclareMathOperator{\Res}{Res}
 
 % Graph styles
 \pgfplotsset{compat=1.15}
@@ -164,21 +153,10 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\qed}{\hfill\ensuremath{\square}}   % Q.E.D sign
 \newcommand{\abs}[1]{\left|#1\right|}						% absolute value
 \newcommand{\at}[2]{\Big|_{#1}^{#2}}
-\newcommand{\Arg}[1]{\caparg #1}
 \renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
 \newcommand{\quotient}[2]{\faktor{#1}{#2}}
 \newcommand{\cyclic}[1]{\left\langle #1 \right\rangle}
 	% highlighting shortcuts
-\newcommand{\hlimpo}[1]{\textcolor{base16-eighties-red}{\textbf{#1}}}
-\newcommand{\hlwarn}[1]{\textcolor{base16-eighties-yellow}{\textbf{#1}}}
-\newcommand{\hldefn}[1]{\textcolor{base16-eighties-blue}{\index{#1}\textbf{#1}}}
-\newcommand{\hlnotea}[1]{\textcolor{base16-eighties-green}{\textbf{#1}}}
-\newcommand{\hlnoteb}[1]{\textcolor{base16-eighties-lightblue}{\textbf{#1}}}
-\newcommand{\hlnotec}[1]{\textcolor{base16-eighties-brown}{\textbf{#1}}}
-\newcommand{\WTP}{\textcolor{base16-eighties-brown}{WTP} }
-\newcommand{\WTS}{\textcolor{base16-eighties-brown}{WTS} }
-\newcommand{\ind}[2]{\Ind_{#2}\left( #1 \right)}
-\newcommand{\res}[2]{\underset{#2}{\Res} #1 }
 \renewcommand{\epsilon}{\varepsilon}
 \renewcommand{\atop}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
 \newcommand*\dif{\mathop{}\!d}
