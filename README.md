@@ -1,5 +1,7 @@
 # Japorized's Personal Study Notes
 
+**Note: The style that I'm using, tufte-latex, is somewhat broken since I upgraded to texlive2018. While most of the most important stuff are intact and safe, certain headers will look broken.**
+
 You can also see most of the files on [https://japorized.github.io/TeX_notes]( https://japorized.github.io/TeX_notes )
 
 Page uses [tufte-css](https://github.com/edwardtufte/tufte-css) for styling
