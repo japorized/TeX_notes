@@ -24,7 +24,7 @@
 \usepackage{xcolor}
 \usepackage{silence}
   \WarningFilter*{latex}{Marginpar on page \thepage\space moved}
-  \usepackage[hyperref]{ntheorem}
+\usepackage[amsmath,hyperref]{ntheorem}
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
 
@@ -70,21 +70,74 @@
 \setlength\theorempreskipamount{2ex}
 \setlength\theorempostskipamount{3ex}
 
+% ntheorem + framed
+\makeatletter
+
 % ntheorem Declarations
+\theorempreskip{10pt}
+\theorempostskip{5pt}
 \theoremstyle{break}
-\newtheorem{thm}{Theorem}[section]
-\newtheorem*{proof}{Proof}
+
 \newtheorem*{solution}{Solution}
-\newtheorem{crly}{Corollary}[section]
-\newtheorem{lemma}{Lemma}[section]
-\newtheorem{propo}{Proposition}[section]
 \newtheorem*{remark}{Remark}
-\newtheorem*{note}{Note}
-\newtheorem*{notation}{Notation}
-\newtheorem{ex}{Exercise}[section]
-\newtheorem{defn}{Definition}[section]
 \newtheorem{eg}{Example}[section]
+\newtheorem{ex}{Exercise}[section]
+
+\theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt}}
+\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt}}
+\theoremindent10pt
+\newtheorem{defn}{Definition}[section]
+
+    % theorem envs
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theoremindent10pt
+\newtheorem{thm}{Theorem}[section]
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theoremindent10pt
+\newtheorem{propo}{Proposition}[section]
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theoremindent10pt
+\newtheorem{crly}{Corollary}[section]
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theoremindent10pt
+\newtheorem{lemma}{Lemma}[section]
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theoremindent10pt
 \newtheorem{axiom}{Axiom}[section]
+
+    % proof env
+\theoremprework{\textcolor{base16-eighties-brown}{\hrule height 2pt}}
+\theoremheaderfont{\color{base16-eighties-brown}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-brown}{\hrule height 2pt}}
+\newtheorem*{proof}{Proof}
+
+    % note and notation env
+\theoremprework{\textcolor{base16-eighties-yellow}{\hrule height 2pt}}
+\theoremheaderfont{\color{base16-eighties-yellow}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-yellow}{\hrule height 2pt}}
+\newtheorem*{note}{Note}
+
+\theoremprework{\textcolor{base16-eighties-yellow}{\hrule height 2pt}}
+\theorempostwork{\textcolor{base16-eighties-yellow}{\hrule height 2pt}}
+\newtheorem*{notation}{Notation}
+
+    % warning env
+\theoremprework{\textcolor{base16-eighties-red}{\hrule height 2pt}}
+\theoremheaderfont{\color{base16-eighties-red}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-red}{\hrule height 2pt}}
+\theoremindent10pt
+\newtheorem*{warning}{Warning}
 
 % ntheorem listtheorem style
 \makeatother

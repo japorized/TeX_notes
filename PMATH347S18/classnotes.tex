@@ -351,27 +351,27 @@ With all the above, we have for ourselves the following proposition:
 If we represent the action of $\sigma$ geometrically, we get
 
 \begin{tabular}{c c c}
-\begin{tikzcd}
- & 1 \arrow[rd] &  \\
-2 \arrow[ru] &  & 3 \arrow[ld] \\
- & 7 \arrow[lu] & 
-\end{tikzcd}
-&
-\begin{tikzcd}
-4 \arrow[dd, bend left] \\
- \\
-6 \arrow[uu, bend left]
-\end{tikzcd}
-&
-\begin{tikzcd}
- & 5 \arrow[rdd] &  \\
- &  &  \\
-8 \arrow[ruu] &  & 9 \arrow[ll]
-\end{tikzcd}
-\\ &
-\begin{tikzcd}
-  10 \arrow[loop below]
-\end{tikzcd}
+  \begin{tikzcd}
+   & 1 \arrow[rd] &  \\
+  2 \arrow[ru] &  & 3 \arrow[ld] \\
+   & 7 \arrow[lu] & 
+  \end{tikzcd}
+  &
+  \begin{tikzcd}
+  4 \arrow[dd, bend left] \\
+   \\
+  6 \arrow[uu, bend left]
+  \end{tikzcd}
+  &
+  \begin{tikzcd}
+   & 5 \arrow[rdd] &  \\
+   &  &  \\
+  8 \arrow[ruu] &  & 9 \arrow[ll]
+  \end{tikzcd}
+  \\ &
+  \begin{tikzcd}
+    10 \arrow[loop below]
+  \end{tikzcd}
 \end{tabular}
 We observe that $\sigma$ can be \hlnotea{decomposed} into one $4$-cycle, $\begin{pmatrix} 1 & 3 & 7 & 2 \end{pmatrix}$, one $2$-cycle, $\begin{pmatrix} 4 & 6 \end{pmatrix}$, one $3$-cycle, $\begin{pmatrix} 5 & 9 & 8 \end{pmatrix}$, and one $1$-cycle, $\begin{pmatrix} 10 \end{pmatrix}$.
 
@@ -406,6 +406,178 @@ Although the decomposition of the cycle notation is not unique (i.e. you may rea
 % section introduction_continued (end)
 
 % chapter lecture_2_may_04th_2018 (end)
+
+\chapter{Lecture 3 May 07th 2018}
+  \label{chapter:lecture_3_may_07th_2018}
+
+\section{Groups} % (fold)
+\label{sec:groups}
+
+\subsection{Groups} % (fold)
+\label{sub:groups}
+
+\begin{defn}[Groups\index{Groups}]\label{defn:groups}
+  Let $G$ be a set and $*$ an operation on $G \times G$. We say that $G = (G, *)$ is a \hlnoteb{group} if it satisfies\sidenote{If you wonder why the uniqueness is not specified for \hlnoteb{Identity} and \hlnoteb{Inverse}, see \cref{propo:uniqueness_of_group_identity_and_group_element_inverse}.}
+  \begin{enumerate}
+    \item \hlnoteb{Closure}: $\forall a, b \in G \quad a * b \in G$
+    \item \hlnoteb{Associativity}: $\forall a, b, c \in G \quad a * (b * c) = (a * b) * c$
+    \item \hlnoteb{Identity}: $\exists e \in G \enspace \forall a \in G \quad a * e = a = e * a$
+    \item \hlnoteb{Inverse}: $\forall a \in G \enspace \exists b \in G \quad a * b = e = b * a$
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Abelian Group\index{Abelian Group}]\label{defn:abelian_group}
+  A group $G$ is said to be abelian if $\forall a, b \in G$, we have $a * b = b * a$.
+\end{defn}
+
+\begin{propo}[Group Identity and Group Element Inverse]\label{propo:uniqueness_of_group_identity_and_group_element_inverse}
+  Let $G$ be a group and $a \in G$.
+  \begin{enumerate}
+    \item The identity of $G$ is unique.
+    \item The inverse of $a$ is unique.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $e_1, e_2 \in G$ are both identities of $G$, then we have
+      \begin{equation*}
+        e_1 \overset{(1)}{=} e_1 * e_2 \overset{(2)}{=} e_2
+      \end{equation*}
+      where $(1)$ is because $e_2$ is an identity and $(2)$ is because $e_1$ is an identity.
+
+    \item Let $a \in G$. If $b_1, b_2 \in G$ are both the inverses of $a$, then we have
+      \begin{equation*}
+        b_1 = b_1 * e = b_1 * (a * b_2) \overset{(1)}{=} e * b_2 = b_2
+      \end{equation*}
+      where $(1)$ is by associativity.
+  \end{enumerate}
+\end{proof}
+
+\begin{eg}
+  The sets $(\mathbb{Z}, +), \, (\mathbb{Q}, +), \, (\mathbb{R}, +)$, and $(\mathbb{C}, +)$ are all abelian, wehre the additive identity is $0$, and the additive inverse of an element $r$ is $(-r)$.
+\end{eg}
+
+\begin{note}
+  $(\mathbb{N}, +)$ is not a group for neither does it have an identity nor an inverse for any of its elements.
+\end{note}
+
+\begin{eg}
+  The sets $(\mathbb{Q}, \cdot), \, (\mathbb{R}, \cdot)$ and $(\mathbb{C}, \cdot)$ are \hlwarn{not} groups, since $0$ has no multiplicative inverse in $\mathbb{Q}, \mathbb{R}$ or $\mathbb{C}$.
+\end{eg}
+
+We may define that for a set $S$, let $S^* \subseteq S$ contain all the elements of $S$ that has a multiplicative inverse. For example, $\mathbb{Q}^* = \mathbb{Q} \setminus \{0\}$. Then, $(\mathbb{Q}, \cdot), (\mathbb{R}, \cdot)$ and $(\mathbb{C}, \cdot)$ are groups and are in fact abelian, where the multiplicative identity is $1$ and the multiplicative of an element $r$ is $\frac{1}{r}$.
+
+\begin{eg}
+  The set $\big( M_n(\mathbb{R}), + \big)$ is an abelian group, where the additive identity is the zero matrix, $0 \in M_n(\mathbb{R})$, and the additive inverse of an element $M = [a_{ij}] \in M_n(\mathbb{R})$ is $-M = [-a_{ij}] \in M_n(\mathbb{R})$.
+\end{eg}
+
+\newthought{Consider} the set $M_n(\mathbb{R})$ under the matrix mutiplication operation that we have introduced in \nameref{chapter:lecture_1_may_02nd_2018}. We found that the identity matrix is
+\begin{equation*}
+  I = \begin{bmatrix}
+    1 & 0 & \hdots & 0 \\
+    0 & 1 & \hdots & 0 \\
+    \vdots & \vdots & & \vdots \\
+    0 & 0 & \hdots & 1
+  \end{bmatrix} \in M_n(\mathbb{R}).
+\end{equation*}
+But since not all elements of $M_n(\mathbb{R})$ have a multiplicative inverse\sidenote{The multiplicative inverse of a matrix does not exist if its determinant is $0$.}, $(M_n(\mathbb{R}), \cdot)$ is not a group.
+
+But we can try to do something similar as to what we did before: by excluding the elements that do not have an inverse. In this case, we exclude elements whose determinant is $0$. Define the set
+\begin{equation*}
+  GL_n(\mathbb{R}) := \{ M \in M_n(\mathbb{R}) \, : \, \det M \neq 0 \}
+\end{equation*}
+Note that $\because \det I = 1 \neq 0$, we have that $I \in GL_n(\mathbb{R})$. \\
+Also, $\forall A, B \in GL_n(\mathbb{R} )$, we have that $\because \det A \neq 0 \, \land \, \det B \neq 0$,
+\begin{equation*}
+  \det AB = \det A \det B \neq 0,
+\end{equation*}
+and therefore $AB \in GL_n(\mathbb{R} )$. Finally, $\forall M \in GL_n(\mathbb{R})$, $\exists M^{-1} \in GL_n(\mathbb{R})$ such that
+\begin{equation*}
+  MM^{-1} = I = M^{-1} M
+\end{equation*}
+since $\det M \neq 0$. $\therefore (GL_n(\mathbb{R}), \cdot)$ is a group, and is in fact called the \hldefn{general linear group} \hlnoteb{of degree $n$ over $\mathbb{R}$}.
+
+\newthought{Since} we have introduced permutations in \nameref{chapter:lecture_2_may_04th_2018}, we shall formalize the purpose of its introduction below.
+
+\begin{eg}
+  Consider $S_n$, the set of all permutations on $\{1, 2, ..., n\}$. By \cref{propo:properties_of_Sn}, we know that $S_n$ is a group. We call $S_n$ the \hldefn{symmetry group} \hlnoteb{of degree $n$}. For $n \geq 3$, the group $S_n$ is not abelian\sidenote{Let us make this an exercise.
+  \begin{ex}
+    For $n \geq 3$, prove that the group $S_n$ is not abelian.
+  \end{ex}}.
+\end{eg}
+
+\newthought{Now that} we have a fairly good idea of the basic concept of a group, we will now proceed to look into handling multiple groups. One such operation is known as the \hldefn{direct product}.
+
+\begin{eg}
+  \label{eg:direct_product}
+  Let $G$ and $H$ be groups. Their direct product is the set $G \times H$ with the component-wise operation defined by
+  \begin{equation*}
+    (g_1, h_1) * (g_2, h_2) = (g_1 *_G g_2, h_1 *_H h_2)
+  \end{equation*}
+  where $g_1, g_2 \in G$, $h_1, h_2 \in H$, $*_G$ is the operation on $G$, and $*_H$ is the operation on $H$.
+
+  The \hlnoteb{closure} and \hlnoteb{associativity} property follow immediately from the definition of the operation. The identity is $(1_G, \, 1_H)$ where $1_G$ is the identity of $G$ and $1_H$ is the identity of $H$. The inverse of an element $(g_1, \, h_1) \in G \times H$ is $(g_1^{-1}, \, h_1^{-1})$.
+\end{eg}
+
+By induction, we can show that if $G_1, G_2, ..., G_n$ are groups, then so is $G_1 \times G_2 \times \hdots \times G_n$.
+
+To facilitate our writing, use shall use the following notations:
+
+\begin{notation}
+  Given a group $G$ and $g_1, g_2 \in G$, we often denote its identity by $1$, and write $g_1 * g_2 = g_1 g_2$. Also, we denote the unique inverse of an element $g \in G$ as $g^{-1}$.
+
+  We will write $g^0 = 1$. Also, for $n \in \mathbb{N}$, we define
+  \begin{equation*}
+     g^n = \underbrace{g * g * \hdots * g}_{n \text{ times}}
+  \end{equation*}
+  and
+  \begin{equation*}
+    g^{-n} = (g^{-1})^n
+  \end{equation*}
+\end{notation}
+
+With the above notations,
+
+\begin{propo}\label{propo:group_notations}
+  Let $G$ be a group and $g, h \in G$. We have \marginnote{
+    \begin{ex}
+      Prove \cref{propo:group_notations} as an exercise.
+    \end{ex}
+  }
+  \begin{enumerate}
+    \item $(g^{-1})^{-1} = g$
+    \item $(gh)^{-1} = h^{-1} g^{-1}$
+    \item $g^n g^m = g^{n + m}$ for all $n, m \in \mathbb{Z}$
+    \item $(g^n)^m = g^{nm}$ for all $n, m \in \mathbb{Z}$
+  \end{enumerate}
+\end{propo}
+
+\begin{warning}
+  In general, it is not true that if $g, h \in G$, then $(gh)^n = g^n h^n$. For example,
+  \begin{equation*}
+    (gh)^2 = ghgh \quad \text{but} \quad g^2 h^2 = gghh.
+  \end{equation*}
+  The two are only equal if and only if $G$ is abelian.
+\end{warning}
+
+\begin{propo}[Cancellation Laws]\label{propo:cancellation_laws}
+  Let $G$ be a group and $g, h, f \in G$. Then
+  \begin{enumerate}
+    \item (\hlnoteb{Left and Right Cancellation})
+      \begin{enumerate}
+        \item $gh = gf \implies h = f$
+        \item $hg = fg \implies h = f$
+      \end{enumerate}
+    \item The equation $ax = b$ and $ya = b$ have unique solution for $x, y \in G$.
+  \end{enumerate}
+\end{propo}
+
+% subsection groups (end)
+
+% section groups (end)
+
+% chapter lecture_3_may_07th_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
