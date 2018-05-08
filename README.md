@@ -14,6 +14,27 @@ If you wish to get a copy of these documents, please take them with utmost discr
 My main editor is Sublime Text, but I have a setup for VIm as well.
 
 ---
+### Setups
+
+* Class notes
+  * Uses [`tufte-latex`](https://github.com/Tufte-LaTeX/tufte-latex) with some modifications to how chapter, section and subsection is presented
+  * Personalized theorem (& co.) environments through `ntheorem` and `xcolor`
+  * Color is based on [base16](https://github.com/chriskempson/base16)-eighties; mainly uses dark color as background and light color as foreground (it's better for my eyes and for long reading times)
+  * White background with black text is compiled after a note is considered to be complete
+  * Uses `pdflatex`
+* Special setup - Japanese notes
+  * Mostly the same setup as the above, except that it uses LuaLaTeX for the sake of staying sane while dealing with unicode
+* Assignments
+  * Standard white background, black foreground
+  * Uses tcolorbox to highlight solutions
+  * Uses `pdflatex`
+
+---
+### Known Issues
+
+* `tufte-latex` is likely broken in texlive2018, and there may be no hope of fixing it since it looks like the package is no longer maintained (last commit was in Jan 2016). I will, however, continue to use it, for there is nothing that can replace the sidenote and marginnote that it provides. It can still be successfully compiled if errors are ignored, but the headings will be broken. Everything else seems to work fine.
+
+---
 ### Typos? Erroneous proof?
 
 Please feel free to either contact me or create an issue.
