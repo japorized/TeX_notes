@@ -11,7 +11,7 @@ Most of the content are compiled from my (scavenged) lecture notes and recommend
 
 If you wish to get a copy of these documents, please take them with utmost discreet.
 
-My main editor is Sublime Text, but I have a setup for VIm as well.
+My main editor is Sublime Text, but I have a setup for nvim as well.
 
 ---
 ### Setups
@@ -32,7 +32,7 @@ My main editor is Sublime Text, but I have a setup for VIm as well.
 ---
 ### Known Issues
 
-* `tufte-latex` is likely broken in texlive2018, and there may be no hope of fixing it since it looks like the package is no longer maintained (last commit was in Jan 2016). I will, however, continue to use it, for there is nothing that can replace the sidenote and marginnote that it provides. It can still be successfully compiled if errors are ignored, but the headings will be broken. Everything else seems to work fine.
+* `tufte-latex` is likely broken in texlive2018, and there may be no hope of fixing it since it looks like the package is no longer maintained (last commit was in Jan 2016). I will, however, continue to use it, for there is nothing that can replace the sidenote and marginnote that it provides. I am using `fancyhdr` to replace the default header in `tufte-latex` (which I believe is what they used as well).
 
 ---
 ### Typos? Erroneous proof?
@@ -42,9 +42,9 @@ Please feel free to either contact me or create an issue.
 ---
 ### LaTeX Template
 
-The LaTeX Template of my notes is saved as tex\_default.sh.
+The LaTeX Template of my notes is saved as `tex_default.sh`.
 
-**For VIm users,** if you wish to have this as the default TeX template for all of your TeX files, make sure that your VIm has autocmd. You can check so by executing `:echo has("autocmd")` while being in a VIm session. If the command returns 1, you're good to go. Copy the .sh file into your `.vim/templates` folder, and add the following to your vimrc
+**For nvim users,** if you wish to have this as the default TeX template for all of your TeX files, make sure that your VIm has autocmd. You can check so by executing `:echo has("autocmd")` while being in a VIm session. If the command returns 1, you're good to go. Copy the .sh file into your `.vim/templates` folder, and add the following to your vimrc
 
 ```
 if has("autocmd")
@@ -62,14 +62,14 @@ endif
 
 **Preamble**
 
-Find out where the texmf directory should go on your system (different across Linux, macOS, and Windows). Put the preamble documents in `$DIR_TO_TEXMF/texmf/latex/local/`, and use `kpsewhich $PREAMBLE_FILE` to see if your texlive installation can detect the file.
+Find out where the `texmf` directory should go on your system (different across Linux, macOS, and Windows). Put the preamble documents in `$DIR_TO_TEXMF/texmf/latex/local/`, and use `kpsewhich $PREAMBLE_FILE` to see if your texlive installation can detect the file.
 
 ---
 ### Snippets
 
-My TeX snippet for VIm is in the `tex.snippet` file, and I use [vim-snipmate](https://vimawesome.com/plugin/vim-snipmate-mine) to tab-complete as I type.
+My TeX snippet for VIm is in the `tex.snippet` and `texmath.snippet` file, and I use [UltiSnip](https://github.com/SirVer/ultisnips) for completion. My autocompletion plugin in [deoplete](https://github.com/Shougo/deoplete.nvim).
 
-My Sublime Text snippet is provided in the file `tex.sublime-completions`. Put it in your `SUBLIME_PATH/Packages/User/` folder to get it working.
+My Sublime Text snippet is provided in the file `tex.sublime-completions`. Put it in your `$SUBLIME_PATH/Packages/User/` folder to get it working.
 
 ---
 

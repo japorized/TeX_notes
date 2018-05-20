@@ -1,10 +1,24 @@
 % Document Head
-\documentclass[11pt, oneside]{book}
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+\renewcommand{\baselinestretch}{1.1}
+
 \input{latex-classnotes-preamble.tex}
 
-% Main Body
 \title{Title}
 \author{Johnson Ng}
+
+% Header formatting
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\makeatletter
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO]{\textsl{\@title} \enspace \thepage}
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark \enspace - \enspace \rightmark}}
+\makeatother
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -21,5 +35,9 @@
 \listtheorems{axiom,lemma,thm,crly,propo}
 
 
+\nobibliography*
+\bibliography{bibliography}
+
+\printindex
 
 \end{document}

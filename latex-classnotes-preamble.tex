@@ -18,6 +18,7 @@
 \usepackage{marvosym}
 \usepackage{pgf,tikz}
 \usepackage{pgfplots}
+\usepackage{fancyhdr}
 \usepackage{array}
 \usepackage{faktor}
 \usepackage{float}
@@ -41,8 +42,8 @@
 
 % hyperref Package Settings
 \hypersetup{
-	colorlinks,
-	linkcolor=base16-eighties-magenta
+	colorlinks=true,
+	allcolors=base16-eighties-magenta,
 }
 
 % tikz
@@ -200,7 +201,7 @@
 
 \AtBeginDocument{\renewcommand\contentsname{Table of Contents}}
 
-% Header formattings
+% Heading formattings
 % chapter format
 \titleformat{\chapter}%
   {\huge\rmfamily\itshape\color{base16-eighties-magenta}}% format applied to label+text
@@ -258,6 +259,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\dotp}{\, \cdotp}			        % dot product to distinguish from \cdot
 \newcommand{\qed}{\hfill\ensuremath{\square}}   % Q.E.D sign
 \newcommand{\abs}[1]{\left|#1\right|}						% absolute value
+\newcommand{\lra}[1]{\langle \; #1 \; \rangle}
 \newcommand{\at}[2]{\Big|_{#1}^{#2}}
 \newcommand{\Arg}[1]{\caparg #1}
 \renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
@@ -274,6 +276,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\WTS}{\textcolor{base16-eighties-brown}{WTS} }
 \newcommand{\ind}[2]{\Ind_{#2}\left( #1 \right)}
 \newcommand{\res}[2]{\underset{#2}{\Res} #1 }
+\newcommand{\tworow}[3]{\begin{tabular}{@{}#1@{}} #2 \\ #3 \end{tabular}}
 \renewcommand{\epsilon}{\varepsilon}
 \renewcommand{\atop}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
 \newcommand*\dif{\mathop{}\!d}

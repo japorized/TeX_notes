@@ -1,4 +1,5 @@
 \documentclass[notoc,notitlepage]{tufte-book}
+\nonstopmode
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{5}
 
@@ -6,16 +7,28 @@
 
 \input{latex-classnotes-preamble.tex}
 
-\DeclareMathOperator{\BIN}{BIN }
-\DeclareMathOperator{\GEO}{GEO }
-\DeclareMathOperator{\POI}{POI }
-\DeclareMathOperator{\EXP}{EXP }
-\DeclareMathOperator{\NOR}{N }
-\DeclareMathOperator{\GAM}{GAM }
+\DeclareMathOperator{\Bin}{Bin }
+\DeclareMathOperator{\Geo}{Geo }
+\DeclareMathOperator{\Poi}{Poi }
+\DeclareMathOperator{\Exp}{Exp }
+\DeclareMathOperator{\Unif}{Unif }
+\DeclareMathOperator{\Nor}{N }
+\DeclareMathOperator{\Gau}{G }
+\DeclareMathOperator{\Dom}{Dom }
+\DeclareMathOperator{\Var}{Var }
 
-% Main Body
 \title{STAT330S18 - Mathematical Statistics}
 \author{Johnson Ng}
+
+% Header formatting
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\makeatletter
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO]{\textsl{\@title} \enspace \thepage}
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark \enspace - \enspace \rightmark}}
+\makeatother
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -48,7 +61,7 @@ Also, many of the common mathematical notations will be heavily used both in the
 \section{Introduction} % (fold)
 \label{sec:introduction}
 
-\begin{defn}[Sample Space\index{Sample Space}]\label{defn:sample_space}
+\begin{defn}[Sample Space]\label{defn:sample_space}\index{Sample Space}
   A \textbf{sample space}, \textbf{$S$} of a random experiment is the set of all possible outcomes of the experiment.
 \end{defn}
 
@@ -65,7 +78,7 @@ Also, many of the common mathematical notations will be heavily used both in the
   \end{itemize}
 \end{eg}
 
-\begin{defn}[$\sigma$-field\index{$\sigma$-field}]\label{defn:sigma_field}
+\begin{defn}[$\sigma$-field]\label{defn:sigma_field}\index{$\sigma$-field}
   Let $S$ be a sample space. The collection of sets $\mathscr{B} \subseteq \mathbb{P}(S)$\sidenote{The \hldefn{power set} of $S$, $\mathbb{P}(S)$, is defined as the set that contains all subsets of $S$.}, is called a $\sigma$-field (or \hldefn{$\sigma$-algebra}) on $S$ if:
   \begin{enumerate}
     \item $\emptyset \in \mathscr{B}$ and $S \in \mathscr{B}$;
@@ -74,7 +87,7 @@ Also, many of the common mathematical notations will be heavily used both in the
   \end{enumerate}
 \end{defn}
 
-\begin{defn}[Measurable Space\index{Measurable Space}]\label{defn:measurable_space}
+\begin{defn}[Measurable Space]\label{defn:measurable_space}\index{Measurable Space}
   Given that $S$ is a non-empty set, and $\mathscr{B}$ is a $\sigma$-field, $(S, \mathscr{B})$ is a \textbf{measurable space}.\sidenote{A measurable space is a basic object in \hlnotea{measure theory}.}
 \end{defn}
 
@@ -90,7 +103,7 @@ Also, many of the common mathematical notations will be heavily used both in the
 
 \newthought{Because} $(S, \mathscr{B})$ is a measurable space, we can define a measure on it.
 
-\begin{defn}[Probability Measure\index{Probability Measure}]\label{defn:probability_measure}
+\begin{defn}[Probability Measure]\label{defn:probability_measure}\index{Probability Measure}
   Suppose $S$ is a sample space of a random experiment. Let $\mathscr{B} = \{A_1, A_2, ...\} \subseteq \mathbb{P}(S)$ be the $\sigma$-field on $S$. The \hldefn{probability set function} (or \textbf{probability measure}), $P : \mathscr{B} \to [0, 1]$, is a function that satisfies the following:\sidenote{These conditions are also known as \hldefn{Kolmogorov Axioms}, or \hldefn{probability axioms}.}
   \begin{itemize}
     \item $\forall A \in \mathscr{B} \enspace P(A) \geq 0$;
@@ -129,73 +142,72 @@ Also, many of the common mathematical notations will be heavily used both in the
   \marginnote{\begin{ex}
     Prove that $A \subseteq B \iff B^C \subseteq A^C$.
   \end{ex}}
-
-  \begin{proof}
-    Let $S$ be the sample space for $P$.
-    \begin{enumerate}
-      \item Note that\\
-        $A \in \mathscr{B} \implies A \in \mathbb{P}(S) \iff A \subseteq S$\\
-        $A \in \mathscr{B} \iff A^C \in \mathscr{B} \implies A^C \subseteq S$.
-        Also, since $A^C$ is the complement of $A$, it is clear that $S = A \cup A^C$.
-        \begin{equation*}
-          \therefore P(S) = 1 \iff P(A \cup A^C) = 1 \overset{1}{\iff} P(A) + P(A^C) = 1
-        \end{equation*}
-        where $1$ is by condition 3 in \cref{defn:probability_measure} since $A \cap A^C = \emptyset$ by definition of a complement of a set.
-
-      \item Note that $S \cup \emptyset = S$ and $S \cap \emptyset = \emptyset$. Using a similar argument as above,
-        \begin{equation*}
-          1 = P(S) = P(S \cup \emptyset) = P(S) + P(\emptyset) \implies P(\emptyset) = 0
-        \end{equation*}
-
-      \item By 1 from above, $P(A) = 1 - P(A^C)$. Since $0 \leq P(A^C) \leq 1$, we have that $P(A)$ is at most $1$, as required.
-
-      \item Note that $A = (A \cap B) \cup ( A \cap B^C )$. Clearly, $(A \cap B) \cap (A \cap B^C) = \emptyset$.\sidenote{This is an easy proof using the basic way of proving membership.} Hence by condition 3 in \cref{defn:probability_measure},
-        \begin{equation*}
-          P(A) = P(A \cap B) + P(A \cap B^C)
-        \end{equation*}
-
-      \item Consider $P(A \cup B) + P(A \cap B)$. By definition,
-        \begin{equation*}
-          A \cup B = (A \cap B^C) \cup (A \cap B) \cup (A^C \cap B)
-        \end{equation*}
-        where each of the sets in brackets are disjoint from each other\sidenote{Again, this is not hard to show}. By condition 3 of \cref{defn:probability_measure}, we would then have
-        \begin{align*}
-          &P(A \cup B) + P(A \cap B) \\
-            &= P(A \cap B^C) + P(A \cap B) + P(A^C \cap B) + P(A \cap B) \\
-            &= 2 P(A \cap B) + P(A) - P(A \cap B) + P(B) - P(A \cap B) \enspace \text{by 4} \\
-            &= P(A) + P(B)
-        \end{align*}
-
-      \item Note that $B = B \cap S = B \cap (A^C \cup A) = (B \cap A^C) \cup A$. Clearly, $A \cap (B \cap A^C) \neq \emptyset$. By condition 3 in \cref{defn:probability_measure}, we thus have that
-        \begin{equation*}\tag{$\dagger$}\label{eq:properties_prob_set_fn_6_1}
-          P(B) = P(B \cap A^C) + P(A).
-        \end{equation*}
-        Suppose $A \subsetneq B$. Then $B \cap A^C \neq \emptyset$. I shall make the claim that $B \cap A^C \in \mathscr{B}$. Since $A \subseteq B$ we have that
-        \begin{align*}
-          a \in (B \cap A^C) &\iff a \in B \, \land \, a \in A^C \\
-            &\iff a \in B \, \land \, a \notin A \\
-            &\iff a \in (B \setminus A).
-        \end{align*}
-        But $B \setminus A$ is a subset of $B$ from the above steps\sidenote{This is rather obvious from the steps, since $\forall a \in (B \cap A^C)$, $a \in B$.}. Therefore, $(B \cap A^C) \subseteq B \in \mathscr{B}$ as required.
-
-        With that done, by condition 1 in \cref{defn:probability_measure}, $P(B \cap A^C) \geq 0$. Hence from \cref{eq:properties_prob_set_fn_6_1}, we have that
-        \begin{align*}
-          P(B) &= P(B \cap A^C) + P(A) \\
-            &\geq P(A)
-        \end{align*}
-        as required. \qed
-    \end{enumerate}
-  \end{proof}
 \end{propo}
 
-\begin{defn}[Conditional Probability\index{Conditional Probability}]\label{defn:conditional_probability}
+\begin{proof}
+  Let $S$ be the sample space for $P$.
+  \begin{enumerate}
+    \item Note that\\
+      $A \in \mathscr{B} \implies A \in \mathbb{P}(S) \iff A \subseteq S$\\
+      $A \in \mathscr{B} \iff A^C \in \mathscr{B} \implies A^C \subseteq S$.
+      Also, since $A^C$ is the complement of $A$, it is clear that $S = A \cup A^C$.
+      \begin{equation*}
+        \therefore P(S) = 1 \iff P(A \cup A^C) = 1 \overset{1}{\iff} P(A) + P(A^C) = 1
+      \end{equation*}
+      where $1$ is by condition 3 in \cref{defn:probability_measure} since $A \cap A^C = \emptyset$ by definition of a complement of a set.
+
+    \item Note that $S \cup \emptyset = S$ and $S \cap \emptyset = \emptyset$. Using a similar argument as above,
+      \begin{equation*}
+        1 = P(S) = P(S \cup \emptyset) = P(S) + P(\emptyset) \implies P(\emptyset) = 0
+      \end{equation*}
+
+    \item By 1 from above, $P(A) = 1 - P(A^C)$. Since $0 \leq P(A^C) \leq 1$, we have that $P(A)$ is at most $1$, as required.
+
+    \item Note that $A = (A \cap B) \cup ( A \cap B^C )$. Clearly, $(A \cap B) \cap (A \cap B^C) = \emptyset$.\sidenote{This is an easy proof using the basic way of proving membership.} Hence by condition 3 in \cref{defn:probability_measure},
+      \begin{equation*}
+        P(A) = P(A \cap B) + P(A \cap B^C)
+      \end{equation*}
+
+    \item Consider $P(A \cup B) + P(A \cap B)$. By definition,
+      \begin{equation*}
+        A \cup B = (A \cap B^C) \cup (A \cap B) \cup (A^C \cap B)
+      \end{equation*}
+      where each of the sets in brackets are disjoint from each other\sidenote{Again, this is not hard to show}. By condition 3 of \cref{defn:probability_measure}, we would then have
+      \begin{align*}
+        &P(A \cup B) + P(A \cap B) \\
+          &= P(A \cap B^C) + P(A \cap B) + P(A^C \cap B) + P(A \cap B) \\
+          &= 2 P(A \cap B) + P(A) - P(A \cap B) + P(B) - P(A \cap B) \enspace \text{by 4} \\
+          &= P(A) + P(B)
+      \end{align*}
+
+    \item Note that $B = B \cap S = B \cap (A^C \cup A) = (B \cap A^C) \cup A$. Clearly, $A \cap (B \cap A^C) \neq \emptyset$. By condition 3 in \cref{defn:probability_measure}, we thus have that
+      \begin{equation*}\tag{$\dagger$}\label{eq:properties_prob_set_fn_6_1}
+        P(B) = P(B \cap A^C) + P(A).
+      \end{equation*}
+      Suppose $A \subsetneq B$. Then $B \cap A^C \neq \emptyset$. I shall make the claim that $B \cap A^C \in \mathscr{B}$. Since $A \subseteq B$ we have that
+      \begin{align*}
+        a \in (B \cap A^C) &\iff a \in B \, \land \, a \in A^C \\
+          &\iff a \in B \, \land \, a \notin A \\
+          &\iff a \in (B \setminus A).
+      \end{align*}
+      But $B \setminus A$ is a subset of $B$ from the above steps\sidenote{This is rather obvious from the steps, since $\forall a \in (B \cap A^C)$, $a \in B$.}. Therefore, $(B \cap A^C) \subseteq B \in \mathscr{B}$ as required.
+
+      With that done, by condition 1 in \cref{defn:probability_measure}, $P(B \cap A^C) \geq 0$. Hence from \cref{eq:properties_prob_set_fn_6_1}, we have that
+      \begin{align*}
+        P(B) &= P(B \cap A^C) + P(A) \\
+          &\geq P(A)
+      \end{align*}
+      as required. \qed
+  \end{enumerate}
+\end{proof}
+\begin{defn}[Conditional Probability]\label{defn:conditional_probability}\index{Conditional Probability}
   Suppose $S$ is a sample space of a random experiment, and $A, B \subseteq S$. The \hlnoteb{conditional probability of $A$ given $B$} is given by
   \begin{equation}\label{eq:conditional_probability}
     P(A | B) = \frac{P(A \cap B)}{P(B)} \quad \text{provided } P(B) > 0.
   \end{equation}
 \end{defn}
 
-\begin{defn}[Independent Events\index{Independent Events}]\label{defn:independent_events}
+\begin{defn}[Independent Events]\label{defn:independent_events}\index{Independent Events}
   Suppose $S$ is a sample space of a random experiment, and $A, B \subseteq S$. $A$ and $B$ are said to be \hlnoteb{independent of each other} if
   \begin{equation*}
     P(A \cap B) = P(A) P(B)
@@ -240,7 +252,7 @@ Also, many of the common mathematical notations will be heavily used both in the
 \section{Random Variable} % (fold)
 \label{sec:random_variable}
 
-\begin{defn}[Random Variable\index{Random Variable}]\label{defn:random_variable}
+\begin{defn}[Random Variable]\label{defn:random_variable}\index{Random Variable}
   In a given probability space $(S, \mathscr{B}, P)$, the function $X : S \to \mathbb{R}$ is called a \hlnoteb{random variable}\sidenote{We shall use rv as shorthand for random variable in this set of notes.} if
   \begin{equation}\label{eq:random_var_defn}
     P(X \leq x) = P \left( \{ \omega \in S \, : \, X(\omega) \leq x \} \right)
@@ -264,7 +276,7 @@ Also, many of the common mathematical notations will be heavily used both in the
   which shows that $P$ is deiined for all $x \in \mathbb{R}$. Hence $X$ is a random variable.
 \end{eg}
 
-\begin{defn}[Cumulative Distribution Function\index{Cumulative Distribution Function}]\label{defn:cumulative_distribution_function}
+\begin{defn}[Cumulative Distribution Function]\label{defn:cumulative_distribution_function}\index{Cumulative Distribution Function}
   The \hlnoteb{cumulative distribution function (c.d.f)} of a random variable $X$ is defined as
   \begin{equation*}
     \forall x \in \mathbb{R} \quad F(x) = P(X \leq x)
@@ -298,7 +310,7 @@ Also, many of the common mathematical notations will be heavily used both in the
 \section{Discrete Random Variable} % (fold)
 \label{sec:discrete_random_variable}
 
-\begin{defn}[Discrete Random Variable\index{Discrete Random Variable}]\label{defn:discrete_random_variable}
+\begin{defn}[Discrete Random Variable]\label{defn:discrete_random_variable}\index{Discrete Random Variable}
   An rv $X$ is a \hlnoteb{discrete random variable} when its image is finite or countably infinite, i.e. $X \in \{x_1, x_2, ...\}$. The function
   \begin{equation*}
     \forall x \in \mathbb{R} \quad f(x) := P(X = x) = F(x) - \lim_{\epsilon \to 0^+} F(x - \epsilon)
@@ -309,8 +321,8 @@ Also, many of the common mathematical notations will be heavily used both in the
   \end{equation}
 \end{defn}
 
-\begin{propo}[Properties of pmf\index{Properties of pmf}]\label{propo:properties_of_pmf}
-  Prove that
+\begin{propo}[Properties of pmf]\label{propo:properties_of_pmf}\index{Properties of pmf}
+  With the notation from \cref{defn:discrete_random_variable}, prove that
   \begin{enumerate}
     \item $\forall x \in \mathbb{R} \quad f(x) \geq 0$
     \item $\sum_{x \in A} f(x) = 1$
@@ -318,7 +330,17 @@ Also, many of the common mathematical notations will be heavily used both in the
 \end{propo}
 
 \begin{proof}
-  \hlwarn{Proof shall be provided later}
+  \begin{enumerate}
+    \item This result follows from the fact that $f$ is a pdf, a probability, i.e. $\forall x \in R$, $f(x) = 0$ is $x \notin S$ where $S$ is the sample space, and $0 \leq f(x) \leq 1$ if $x \in S$.
+    \item Since $A = \{x : f(x) > 0\}$, we know that
+      \begin{equation*}
+         \sum_{x \in A} f(x) > 0.
+      \end{equation*}
+      If we consider all the elements of $A$, we have that the events $(X = x_i)$, for $x_i \in A$, constitutes the entire sample space. Therefore,
+      \begin{equation*}
+        \sum_{x \in A} f(x) = \sum_{x \in A} P(X = x) = P(S) = 1.
+      \end{equation*}
+  \end{enumerate}\qed
 \end{proof}
 
 \begin{ex}
@@ -407,7 +429,7 @@ Also, many of the common mathematical notations will be heavily used both in the
 \section{Continuous Random Variable} % (fold)
 \label{sec:continuous_random_variable}
 
-\begin{defn}[Continuous Random Variable\index{Continuous Random Variable}]\label{defn:continuous_random_variable}
+\begin{defn}[Continuous Random Variable]\label{defn:continuous_random_variable}\index{Continuous Random Variable}
   Suppose $X$ is an rv with cdf $F$. If $F$ is a continuous function for all $x \in \mathbb{R}$ and $F$ is differentiable except possibly at countably many points, then $X$ is a \hlnoteb{continuous rv}. The probability function, or more commonly known as the \hldefn{probability density function} (pdf), of $X$ is $f(x) = F'(x)$ wherever $F$ is differentiable on $x$ and $0$ otherwise.
 
   The set $A = \{x : f(x) > 0\}$ is called the \hlnoteb{support set} of $X$ and
@@ -416,9 +438,1693 @@ Also, many of the common mathematical notations will be heavily used both in the
   \end{equation*}
 \end{defn}
 
+\begin{propo}[Properties of pdf]\label{propo:properties_of_pdf}\index{Properties of pdf}
+Let $X$ be a random variable and $f$ be its pdf.
+  \begin{enumerate}
+    \item $\forall x \in \mathbb{R} \quad f(x) \geq 0$
+    \item $\int_{-\infty}^{\infty} f(x) \dif{x} = 1$
+    \item $f(x) = \lim_{h \to 0} \frac{F(x + h) - F(x)}{h} = \lim_{h \to 0} \frac{P(x \leq X \leq x + h)}{h}$ (if the limit exists)
+    \item $\forall x \in \mathbb{R} \quad F(x) = \int_{-\infty}^{x} f(t) \dif{t}$
+    \item $P(a < X \leq b) = \int_{a}^{b} f(x) \dif{x} = F(b) - F(a)$
+    \item $P(X = b) = F(b) - \lim_{a \to b^{-}} F(a) = F(b) - F(b) = 0$
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item The argument of this proof is similar to that provided in \cref{propo:properties_of_pmf}.
+    \item Same as above, except that the support set can now have complete intervals.
+    \item The first equation follows from the first principles of Calculus. The second equation follows by method of calculation using the cdf.
+    \item $F(x) = P(X \leq x) = \int_{-\infty}^{x} f(t) \dif{t}$.
+    \item This follows immediately from the above property.
+    \item The first part of the equation is a way to interpret the above property. The limit equates to $F(b)$ since $F$ is continuous.
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{eg}
+  Consider the function
+  \begin{equation*}
+    f(x) = \begin{cases}
+      \frac{\theta}{x^{\theta + 1}}   & x \geq 1 \\
+      0                               & x < 1 
+    \end{cases}
+  \end{equation*}
+  For what values of $\theta$ is $f$ a pdf?
+
+  \begin{solution}
+    If $f$ is a pdf, then $\theta \geq 0$. In fact, $\theta \neq 0$; otherwise $f$ would be equivalently $0$ for all $x \in \mathbb{R}$, which would imply that $\int_\mathbb{R} f = 0$, which is impossible. It remains to check if $\theta > 0$ is a safe choice. Now
+    \begin{equation*}
+      \int_{1}^{\infty} \frac{\theta}{x^{\theta + 1}} \dif{x} = - \frac{1}{x^{\theta}} \at{1}{\infty} = 1
+    \end{equation*}
+    Note that the above integral is valid because $\frac{1}{x^{\theta + 1}} \leq \frac{1}{x}$. Therefore the choice of $\theta > 0$ is safe.
+  \end{solution}
+\end{eg}
+
 % section continuous_random_variable (end)
 
+\section{Examples of Discrete RVs}
+\label{sec:examples_of_discrete_rvs}
+% section Examples of Discrete RVs
+
+\subsection{Binomial Distribution}
+\label{sub:binomial_distribution}
+\index{Binomial Distribution}
+% subsection Binomial Distribution
+
+\begin{defn}[Binomial RV]\label{defn:binomial_rv}
+  Consider $X$ to be the number of successes in a sequence of $n$ experiments where
+  \begin{enumerate}
+    \item experiments are \hlnoteb{independent};
+    \item the outcome of each experient is a \hlnoteb{binary} (e.g. success or failure); and
+    \item has the \hlnoteb{probability of success, $p$} for each singular experiment.
+  \end{enumerate}
+  $X$ is called a \hlnotea{Binomial} rv, and we write $X \sim \Bin(n, p)$ and its pmf is
+  \begin{equation*}
+    P(X = x) = \begin{cases} 
+      \binom{n}{x} p^x (1 - p)^{n - x} & x = 0, 1, 2, ..., n \\
+      0                                & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+\end{defn}
+
+% subsection Binomial Distribution (end)
+
+\subsection{Geometric Distribution}
+\label{sub:geometric_distribution}
+\index{Geometric Distribution}
+% subsection Geometric Distribution
+
+\begin{defn}[Geometric RV]\label{defn:geometric_rv}
+  Consider a sequence of independent success/failure (binary) experiments, each of which has a success probability of $p$. Let $X$ be the \hlnoteb{number of failures} before the \hlnoteb{first success} is reached. We call $X$ a \hlnotea{Geometric} rv, and we write $X \sim \Geo(p)$, and its pmf is
+  \begin{equation*}
+    P(X = x) = \begin{cases} 
+      (1 - p)^x p & x = 0, 1, 2, ..., n \\
+      0           & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Some authors would define the Geometric rv as:
+
+  Let $X$ be the number of experiments until the first success.
+
+  But that really is just a play of words.
+\end{note}
+
+% subsection Geometric Distribution (end)
+
+\subsection{Poisson Distribution}
+\label{sub:poisson_distribution}
+\index{Poisson Distribution}
+% subsection Poisson Distribution
+
+\begin{defn}[Poisson RV]\label{defn:poisson_rv}
+  Suppose $X$ is defined to be the number of occurrences of an event in a given time period. If the process on which the events occur satisfies the following:
+  \begin{enumerate}
+    \item The number of occurrences in non-overlapping intervals are independent of each other;
+    \item The probability of the occurrence of an event in a short interval of length $h$ is proportional to $h$;
+    \item For sufficiently short time periods of length $h$, the probability of $2$ or more events occurring in the interval is negligible, i.e. almost zero;
+  \end{enumerate}
+  then $X$ is a \hlnotea{Poisson} rv, and we write $X \sim \Poi(\lambda)$, with $\lambda > 0$, and the pmf is
+  \begin{equation*}
+    P(X = x) = \begin{cases} 
+      \frac{e^{- \lambda} \lambda^x}{x!} & x = 0, 1, ... \\
+      0                                  & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+\end{defn}
+
+% subsection Poisson Distribution (end)
+
+% section Examples of Discrete RVs (end)
+
+\section{Examples of Continuous RVs}
+\label{sec:examples_of_continuous_rvs}
+% section Examples of Continuous RVs
+
+\subsection{Normal/Gaussian Distribution}
+\label{sub:normal_gaussian_distribution}
+\index{Normal Distribution}\index{Gaussian Distribution}
+% subsection Normal/Gaussian Distribution
+
+\begin{defn}[Normal / Gaussian RV]\label{defn:normal_gaussian_rv}
+  The \hlnoteb{Normal/Gaussian} Distribution is a continuous probability distribution that is symmetric about the mean, showing that data around the mean is more frequent than data far from the mean. If $X$ is a \hlnotea{Normal/Gaussian} rv, we write $X \sim \Nor(\mu, \sigma^2)$, and its pdf is
+  \begin{equation*}
+    f(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{- \frac{(x - \mu)^2}{2 \sigma^2}} \quad \text{for } x \in \mathbb{R}.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Standard Normal Distribution]\label{defn:standard_normal_distribution}
+\index{Standard Normal Distribution}
+  The \hlnoteb{Standard Normal Distribution} is the simplest case of a Normal Distribution. An rv $Z$ is called the \hlnotea{Standard Normal} rv if $\mu = 0$ and $\sigma = 1$. We write $Z \sim \Nor(0, 1)$ and its pdf is
+  \begin{equation*}
+    f(x) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{x^2}{2}} \quad \text{for } x \in \mathbb{R}.
+  \end{equation*}
+\end{defn}
+
+% subsection Normal/Gaussian Distribution (end)
+
+\subsection{Uniform Distribution}
+\label{sub:uniform_distribution}
+\index{Uniform Distribution}
+% subsection Uniform Distribution
+
+\begin{defn}[Uniform RV]\label{defn:uniform_rv}
+  If $X$ represents the result of drawing a real number from an interval $(a, b)$, with $a < b$, such that all numbers in between are equally likely to be chosen, then $X$ is called a \hlnotea{Uniform} rv, and we write $X \sim \Unif(a, b)$, and its pdf is
+  \begin{equation*}
+    f(x) = \begin{cases} 
+      \frac{1}{b - a} & x \in (a, b) \\
+      0               & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+\end{defn}
+
+% subsection Uniform Distribution (end)
+
+\subsection{Exponential Distribution}
+\label{sub:exponential_distribution}
+\index{Exponential Distribution}
+% subsection Exponential Distribution
+
+\begin{defn}[Exponential RV]\label{defn:exponential_rv}
+  Let $X$ show the time between two consecutive events in a \hlnoteb{Poisson process}, i.e. the 3 conditions in \nameref{defn:poisson_rv} are satisfied. Then $X$ is called an \hlnotea{Exponential} rv, and we write $X \sim \Exp(\theta)$, where $\theta > 0$, with its pdf
+  \begin{equation*}
+    f(x) = \begin{cases} 
+      \frac{1}{\theta} e^{- \frac{x}{\theta}} & x > 0 \\
+      0                                       & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+\end{defn}
+
+% subsection Exponential Distribution (end)
+
+\subsection{Gamma Distribution}
+\label{sub:gamma_distribution}
+\index{Gamma Distribution}
+% subsection Gamma Distribution
+
+\begin{defn}[Gamma RV]\label{defn:gamma_rv}
+  Let $X$ be the sum of $n$ independent \hlnotea{Exponential} rvs with some fixed $\theta$. Then $X$ is called a \hlnotea{Gamma} rv, in which we write $X \sim \Gamma(n, \theta)$, and its pdf is
+  \begin{equation*}
+    f(x) = \begin{cases} 
+      \frac{x^{n - 1} e^{- \frac{x}{\theta}}}{\Gamma(n) \theta^n} & x > 0 \, \land \, \theta, n > 0 \\
+      0                                                           & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  where $\Gamma(n) = \int_{0}^{\infty} e^{-y} y^{n - 1} \dif{y} = (n - 1)!$, where the last equality is true when $n$ is an integer.
+\end{defn}
+
+\begin{note}
+  The Gamma Distribution is usually used for when we are looking for the probability of the occurrence of the $n$-th event in the desired waiting time.
+\end{note}
+
+% subsection Gamma Distribution (end)
+
+% section Examples of Continuous RVs (end)
+
+\section{Functions of Random Variables}
+\label{sec:functions_of_random_variables}
+% section Functions of Random Variables
+
+\newthought{Consider} the rv $X$ with pdf/pmf $f$ and cdf $F$. Given $Y = h(X)$ where $h$ is some real-valued function, we are interested in finding the pdf/pmf of $Y$.
+
+The following are some possible scenarios:
+\begin{enumerate}
+  \item $X$ and $Y$ are both discrete;
+  \item $X$ is continuous and $Y$ is discrete;
+  \item $X$ and $Y$ are both continuous
+\end{enumerate}
+We may also define $Y = h(X)$ for a continuous rv $X$ such that $Y$ is \hlimpo{neither discrete nor continuous} (e.g. discrete for some values of $X$ while continuous for others).
+
+\subsection{Discrete $X$ and Discrete $Y$}%
+\label{sub:discrete_x_and_discrete_y}
+% subsection discrete_x_and_discrete_y
+
+If $X$ and $Y = h(X)$ are both discrete, we can derive $P(Y = y)$ by mapping values in $Y$ onto their corresponding value through $h$, i.e.
+\begin{equation*}
+  P(Y = y) = \sum_{\{x : h(x) = y\}} P(X = x)
+\end{equation*}
+
+\begin{ex}
+  Let $X$ have the following probability function:
+  \begin{equation*}
+    f_X (x) = \begin{cases}
+      \frac{e^{-1}}{x!} & x = 0, 1, 2, ... \\
+      0                 & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  Find the pmf of $Y = (X - 1)^2$.
+  
+  \begin{solution}
+    Note that since
+    \begin{equation*}
+      \Dom X = \{0, 1, 2, 3, 4, ...\},
+    \end{equation*}
+    we have that
+    \begin{equation*}
+      \Dom Y = \{1, 0, 1, 4, 9, ...\}.
+    \end{equation*}
+    With that, note that
+    \begin{align*}
+      P(Y = 0) &= P(X = 1) = \frac{e^{-1}}{1!} \\
+      P(Y = 1) &= P(X = 0 \text{ or } 2) = P(X = 0) + P(X = 2) \\
+               &= \frac{e^{-1}}{0!} + \frac{e^{-1}}{2!}
+                = e^{-1} \left( 1 + \frac{1}{2} \right) = \frac{3}{2} e^{-1} \\
+      P(Y = 4) &= P(X = 3) = \frac{e^{-1}}{3!} \\
+      P(Y = 9) &= P(X = 4) = \frac{e^{-1}}{4!}.
+    \end{align*}
+    Therefore, the pmf of $Y = (X - 1)^2$ is
+    \begin{equation*}
+      P(Y = y) = \begin{cases}
+        e^{-1}                         & y = 0 \\
+        \frac{3}{2} e^{-1}             & y = 1 \\
+        \frac{e^{-1}}{(1 + \sqrt{y})!} & y = 4, 9, 16, ... \\
+        0                              & \text{otherwise}
+      \end{cases}
+    \end{equation*}
+  \end{solution}
+\end{ex}
+
+% subsection discrete_x_and_discrete_y (end)
+
+\subsection{Continuous $X$ and Discrete $Y$}%
+\label{sub:continuous_x_and_discrete_y}
+% subsection continuous_x_and_discrete_y
+
+If $X$ is continuous and $Y$ is discrete, we can use the method that we have used in the previous subsection, and replace $\Sigma$ by the integral sign $\int$, i.e. define $A := \{x : h(x) = y\}$ such that we have
+\begin{equation*}
+  P(Y = y) = \int_{A} f(x) \dif{x}
+\end{equation*}
+
+\begin{eg}[Example 2.9]\label{eg:cont_x_disc_y}
+  Suppose $X$ is a random variable with the following probability function
+  \begin{equation*}
+    f_X(x) = \begin{cases}
+      2e^{2x} & x > 0 \\
+      0       & \text{otherwise}
+    \end{cases}.
+  \end{equation*}
+  Suppose $Y = h(X)$ is defined as follows:
+  \begin{equation*}
+    Y = \begin{cases}
+      1 & X < 1 \\
+      2 & 1 \leq X \leq 2 \\
+      3 & X > 2
+    \end{cases}
+  \end{equation*}
+  Find the probability function of $Y$.
+
+  \begin{solution}
+    Note that $X \sim \Exp(\frac{1}{2})$. So it is clear that $X$ is a crv and since $Y = 1, 2$, or $3$, we have that $Y$ is discrete. Now
+    \begin{align*}
+      P(Y = 1) &= P(X < 1) = \int_{0}^{1} 2e^{-2x} \dif{x} \\
+               &= -e^{-2x} \at{0}{1} = 1 - e^{-2} \\
+      P(Y = 2) &= P(1 \leq X \leq 2) = \int_{1}^{2} 2e^{-2x} \dif{x} \\
+               &= -e^{-2x} \at{1}{2} = e^{-2} - e^{-4} \\
+      P(Y = 3) &= P(X > 2) = \int_{2}^{\infty} 2e^{-2x} \dif{x} \\
+               &= -e^{-2x} \at{2}{\infty} = e^{-4}
+    \end{align*}
+    Thus the pmf is
+    \begin{align*}
+      P(Y = y) = \begin{cases}
+        1 - e^{-2}      & Y = 1 \\
+        e^{-2} - e^{-4} & Y = 2 \\
+        e^{-4}          & Y = 3
+      \end{cases}
+    \end{align*}
+  \end{solution}
+\end{eg}
+
+% subsection continuous_x_and_discrete_y (end)
+
+\subsection{Continuous $X$ and Continuous $Y$}%
+\label{sub:continuous_x_and_continuous_y}
+% subsection continuous_x_and_continuous_y
+
+If $X$ and $Y= h(X)$ are both continous, start with the definition of the cdf of $Y$, i.e.
+\begin{equation*}
+  F_Y(y) = P(Y \leq y) = P(h(X) \leq y)
+\end{equation*}
+solve the inequality for $X$, and then obtain the cdf of $Y$. We will then only need to differentiate the cdf wrt $y$ to get the pdf that we desire.
+
+\begin{eg}[Example 2.10]
+  Let $X$ have the following pdf:
+  \begin{equation*}
+    f_X (x) = \begin{cases}
+      2e^{-2x} & x \geq 0 \\
+      0        & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  Find the pdf of $Y = \sqrt{X}$.
+
+  \begin{solution}
+    We have that the range of values where $f_Y (y) \leq 0$ is $y \geq 0$. Now
+    \begin{align*}
+      F_Y(y) &= P(Y \leq y) = P(\sqrt{X} \leq y) = P(X \leq y^2) \\
+             &= \int_{0}^{y^2} 2e^{-2x} \dif{x} \\
+             &= -e^{-2x} \at{0}{y^2} = 1 - e^{-2y^2}
+    \end{align*}
+    Therefore, the pdf of Y is
+    \begin{equation*}
+      f_Y(y) = \begin{cases}
+        \frac{d}{dy} 1 - e^{-2y^2} = 4ye^{-2y^2} & y \leq 0 \\
+        0 & \text{otherwise}
+      \end{cases}.
+    \end{equation*}
+  \end{solution}
+\end{eg}
+
+% subsection continuous_x_and_continuous_y (end)
+
+\subsection{A Formula for the Continuous Case}%
+\label{sub:a_formula_for_the_continuous_case}
+% subsection a_formula_for_the_continuous_case
+
+\begin{thm}[One-to-One Transformation of a Random Variable]
+\label{thm:one_to_one_transformation_of_a_random_variable}
+  Suppose $X$ is a continuous random variable with pdf $f_X$ and support set $A = \{x : f_X(x) > 0\}$ and $Y = h(X)$ where $h$ is a real-valued function. Let $f_Y$ be the pdf of the rv $Y$ and let $B = \{y : f_Y(y) > 0\}$. If $h$ is a one-to-one function from $A$ to $B$ and if $h'$ is continuous, then
+  \begin{equation*}
+    f_Y(y) = f \big( h^{-1}(y) \big) \cdot \abs{ \frac{d}{dy}h^{-1}(y) }, \quad y \in B
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Note that since $h$ is one-to-one, it is monotonous. Suppose $h$ is increasing. Then $h^{-1}$ is also an increasing function. Note that the cdf of $Y$ is
+  \begin{equation*}
+    F_Y(y) = P(Y \leq y) = P(X \leq h^{-1}(y)) = F_X \big( h^{-1}(y) \big).
+  \end{equation*}
+  Then the cdf of $Y$ is
+  \begin{align*}
+    f_Y(y) = \frac{d}{dy} F_X \big( h^{-1}(y) \big) = f_X \big( h^{-1}(y) \big) \cdot \frac{d}{dy} h^{-1}(y)
+  \end{align*}
+  If $h$ is decreasing, then so is its inverse. Thus
+  \begin{equation*}
+    F_Y(y) = P(Y \leq y) =  P(X \geq h^{-1}(y)) = 1 - F_X( h^{-1}(y) )
+  \end{equation*}
+  Thus the cdf of $Y$ is
+  \begin{equation*}
+    f_Y(y) = \frac{d}{dy} ( 1 - F_X( h^{-1}(y) ) ) = - f_X( h^{-1} (y) ) \cdot \frac{d}{dy} h^{-1}(y).
+  \end{equation*}
+  Note that the pdf of $Y$ is indeed positive since $h^{-1}$ is decreasing.
+
+  Combining the two, we have that
+  \begin{equation*}
+    f_Y(y) = f_X( h^{-1}(y) ) \cdot \abs{ \frac{d}{dy} h^{-1}(y) },
+  \end{equation*}
+  as required. \qed
+\end{proof}
+
+% subsection a_formula_for_the_continuous_case (end)
+
+% section Functions of Random Variables (end)
+
 % chapter lecture_2_may_03rd_2018 (end)
+
+\chapter{Lecture 3 May 08th 2018}
+\label{chp:lecture_3_may_08th_2018}
+% chapter lecture_3_may_08th_2018
+
+\section{Functions of Random Variables (Continued)}%
+\label{sec:functions_of_random_variables_continued}
+% section functions_of_random_variables_continued
+
+\subsection{Special Cases}%
+\label{sub:special_cases}
+% subsection special_cases
+
+\begin{eg}
+  Recall \cref{eg:cont_x_disc_y}. Suppose $X$ is a rv with the following probability function
+  \begin{equation*}
+    f_X(x) = \begin{cases}
+      2e^{-2x} & x > 0 \\
+      0        & \text{otherwise}
+    \end{cases}.
+  \end{equation*}
+  Define $Y = h(X)$ as follows:
+  \begin{equation*}
+    Y = \begin{cases}
+      1 & X < 1 \\
+      X & 1 \leq X \leq 2 \\
+      3 & X > 2
+    \end{cases}
+  \end{equation*}
+  Find the cdf of $Y$.
+  
+  \begin{solution}
+    \hlwarn{Solution is given differently in the 2 sections. I am not happy with either solutions because some things don't add up. My opinion is that the definition of $Y$ is badly given, along with a badly phrased question. As a result, there are more ways than one to interpret an already confusing information, and thus we have ourselves one hell of a mess.}
+  \end{solution}
+\end{eg}
+
+% subsection special_cases (end)
+
+% section functions_of_random_variables_continued (end)
+
+\section{Probability Integral Transformation}%
+\label{sec:probability_integral_transformation}
+% section probability_integral_transformation
+
+
+\begin{thm}[Probability Integral Transformation]\index{Probability Integral Transformation}
+\label{thm:probability_integral_transformation}
+  If $X$ is a contiunous rv with cdf $F$, then $Y = F(X) \sim \Unif(0, 1)$. $Y = F(X)$ is called the \hlnoteb{probability integral transformation}.
+\end{thm}
+
+\begin{note}
+  The distribution of $Y = F(X)$ can be proven.
+\end{note}
+
+\begin{proof}
+  Let $X$ be a continuous rv and $Y = F(X)$. Since $F(X)$ is one-to-one and increasing (i.e. monotonous), there exists $F^{-1}(Y)$ that is a real-valued and increasing function. Then
+  \begin{align*}
+    F_Y(y) &= P(Y \leq y) = P( F_X(X) \leq y ) = P(X \leq F^{-1}(y) ) \\
+           &= F( F^{-1}(y) ) = y
+  \end{align*}
+  Note that $F_Y(y) = y$ is the cdf of a $\Unif(0, 1)$ rv, i.e. the \hlnotea{standard uniform random variable}. Thus $Y \sim \Unif(0, 1)$.
+\end{proof}
+
+\begin{note}
+  This theorem essentially states that any rv from a continuous distribution can be transformed into a standard uniform distribution.
+\end{note}
+
+\begin{eg}[Example 2.11]
+  Suppose $X \sim \Exp(0 1)$. We know that $F_X(x) = 1 - e^{-10x}$ for all $x \in \mathbb{R}$a. By \nameref{thm:probability_integral_transformation}, we have that $Y = F_X(X) = 1 - e^{-10X} \sim \Unif(0, 1)$.
+\end{eg}
+
+  Note that the converse of \nameref{thm:probability_integral_transformation} is true:
+
+\begin{thm}[Converse of Probability Integral Transformation]
+\label{thm:converse_of_probability_integral_transformation}
+  Suppose $X$ is a continuous rv with cdf $F$ such that $F^{-1}$ exists. If $U \sim \Unif(0, 1)$, we have that $Y = F^{-1}(U) \sim X$.
+\end{thm}
+
+\begin{proof}
+  Note that
+  \begin{align*}
+    F_Y(y) &= P(Y \leq y) = P( F^{-1}(U) \leq y ) \\
+           &= P(U \leq F_X(y)) = F_X(y).
+  \end{align*}\qed
+\end{proof}
+
+\begin{eg}[Example 2.12]
+  Suppose $X \sim \Unif(0, 1)$. Find a transformation $T$ such that $T(X) \sim \exp(\theta)$.
+
+  \begin{solution}
+    Let $Y = T(X) \sim \Exp(\theta)$. Note that
+    \begin{equation*}
+      F_Y(y) = 1 - e^{-\frac{y}{\theta}}, \quad y > 0
+    \end{equation*}
+    Observe that since
+    \begin{equation*}
+      x = 1 - e^{-\frac{y}{\theta}} \implies y = - \theta \ln (1 - x)
+    \end{equation*}
+    we have that
+    \begin{equation*}
+      F_Y^{-1}(X) = - \theta \ln (1 - X).
+    \end{equation*}
+    By \autoref{thm:converse_of_probability_integral_transformation}, we have that $T = F_Y^{-1}$.
+  \end{solution}
+\end{eg}
+
+% section probability_integral_transformation (end)
+
+\section{Location-Scale Families}%
+\label{sec:location_scale_families}
+% section location_scale_families
+
+When we look into methods for constructing confidence intervals for an unknown parameter $\theta$. If the parameter $\theta$ is either a \textit{scale parameter} or \textit{location parameter}, then a confidence interval is easier to construct.
+
+\begin{defn}[Location Parameter and Family]\index{Location Parameter}\index{Location Family}
+\label{defn:location_parameter_and_family}
+  Suppose $X$ is a continuous rv with pdf $f(x; \mu)$, where $\mu$ is a parameter of the distribution of $X$. Let $F_0(x) = F_X(x; \mu = 0)$, where $F_X$ is the cdf of $X$, and $f_0(x) = f(x; \mu = 0)$. The parameter $\mu$ is called a \hlnoteb{location paramter} of the distribution if
+  \begin{equation*}
+    F_X(x; \mu) = F_0( x - \mu ), \quad \mu \in \mathbb{R}
+  \end{equation*}
+  or equivalently,
+  \begin{equation*}
+    f(x; \mu) = f_0( x - \mu ), \quad \mu \in \mathbb{R}.
+  \end{equation*}
+  We say that $F$ belongs to a \hlnoteb{location family} of distributions.
+\end{defn}
+
+\begin{defn}[Scale Parameter and Family]\index{Scale Parameter}\index{Scale Family}
+\label{defn:scale_parameter_and_family}
+  Suppose $X$ is a continuous rv with pdf $f(x; \theta)$, where $\theta$ is a parameter of the distribution of $X$. Let $F_1(x) = F_X(x; \theta = 1)$, where $F_X$ is the cdf of $X$, and $f_1(x) = (x; \theta = 1)$. The parameter $\theta$ is called a \hlnoteb{scale parameter} of the distribution if
+  \begin{equation*}
+    F_X( x ; \theta ) = F_1( \frac{x}{\theta} ). \quad \theta > 0
+  \end{equation*}
+  or equivalently,
+  \begin{equation*}
+    f(x ; \theta) = \frac{1}{\theta} f_0( \frac{x}{\theta} ), \quad \theta > 0.
+  \end{equation*}
+  We say that $F$ belongs to a \hlnoteb{scale family} of distributions.
+\end{defn}
+
+\begin{defn}[Location-Scale Family]\index{Location-Scale Family}
+\label{defn:location_scale_family}
+  Suppose $X$ is an rv with cdf $F(x ; \mu, \sigma)$ where $\mu \in \mathbb{R}$ and $\sigma > 0$ are the parameters of the distribution. Let $Y = \frac{X - \mu}{\sigma}$. If the distribution of $Y$ does not depend on $\mu$ and/or $\sigma$, then $F$ is said to belong to a \hlnoteb{location-scale family} of distributions, with \hlnoteb{location parameter} $\mu$ and \hlnoteb{scale parameter} $\sigma$. In other words, $F$ belongs to a location-scale family of distributions if
+  \begin{equation*}
+    F(x; \mu, \theta) = F_0 \left( \frac{x - \mu}{\theta} \right),
+  \end{equation*}
+  where $F_0 (x) = F(x; \mu = 0, \theta = 1)$, or equivalently,
+  \begin{equation*}
+    f(x; \mu, \theta) = \frac{1}{\theta} f_0 \left( \frac{x - \mu}{\theta} \right),
+  \end{equation*}
+  where $f_0(x) = f(x; \mu = 0, \theta = 1)$.
+\end{defn}
+
+\begin{eg}[Example 2.13]
+  Consider $X \sim \Gau(\mu, \sigma)$. Show that $F_X$ belongs to a location-scale family of distributions.
+
+  We know that if $\mu = 0$ and $\sigma = 1$, then $Y = \frac{X - \mu}{\sigma} \sim \Gau(0, 1)$, and we know that $\Gau(0, 1)$ has no dependence on unknowns $\mu$ and $\sigma$. Therefore, $F_X$ belongs to the location-scale family of distributions, with location parameter $\mu$ and scale parameter $\sigma$.
+
+  Another solution is to show that one of the equations in the definition is fulfilled. Observe that
+  \begin{equation*}
+    f_x(x) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{- \frac{(x - \mu)^2}{2 \sigma^2}}
+  \end{equation*}
+  So if we set $\mu = 0$ and $\sigma = 1$ to get $f_0$, we have that
+  \begin{equation*}
+    f_0(x) = \frac{1}{\sqrt{2 \pi}} e^{- \frac{x^2}{2}}.
+  \end{equation*}
+  Now, note that
+  \begin{equation*}
+    f(x) = \frac{1}{\sigma} \frac{1}{\sqrt{2 \pi}} e^{- \frac{1}{2} \left(\frac{(x - \mu)}{\sigma}\right)^2}.
+  \end{equation*}
+  Let $y = \frac{x - \mu}{\sigma}$, and we have ourselves
+  \begin{equation*}
+    f(x) = \frac{1}{\sigma} \frac{1}{\sqrt{2 \pi}} e^{- \frac{y^2}{2}} = \frac{1}{\sigma} f_0 (\frac{x - \mu}{\sigma})
+  \end{equation*}
+\end{eg}
+
+\begin{eg}[Example 2.14]
+  Consider $X \in \Gau(\mu, 2)$ where $\mu = E(X)$. Show that $\mu$ is a location parameter.
+
+  We can use a similar approach as before and define $Y = X - \mu$ which follows $\Gau(0, 2)$. It is clear that we then have that $F_X$, the cdf of $X$, belongs to a location family of distributions.
+\end{eg}
+
+\begin{eg}[Example 2.15]
+  Consider $X \sim \Exp(\theta)$. Show that $F_X$ belongs to a scale family of distributions and find the scale parameter.
+
+  Note that
+  \begin{equation*}
+    f(x) = \begin{cases}
+      \frac{1}{\theta} e^{- \frac{x}{\theta}} & x > 0 \\
+      0                                       & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  Let $Y = \frac{X}{\theta}$. Then
+  \begin{align*}
+    F_Y (y) &= P(Y \leq y) = P(\frac{X}{\theta} \leq y) \\
+            &= P(X \leq \theta y) = \int_{0}^{\theta y} \frac{1}{\theta} e^{-\frac{x}{\theta}} \dif{x} \\
+            &= - e^{- \frac{x}{\theta}} \at{0}{\theta}{y} = 1 - e^{-y}
+  \end{align*}
+  and we have
+  \begin{equation*}
+    f_Y(y) = \begin{cases}
+      e^{-y} & y > 0 \\
+      0      & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  Note that if we set $\sigma = 1$ to get $f_1$, we have
+  \begin{equation*}
+    f_1(x) = \begin{cases}
+      e^{-x} & x > 0 \\
+      0      & \text{otherwise}
+    \end{cases}.
+  \end{equation*}
+  Therefore, $F_X$ belongs to a scale family of distributions.
+\end{eg}
+
+% section location_scale_families (end)
+
+\section{Expectations}%
+\label{sec:expectations}
+% section expectations
+
+\subsection{Expectations}%
+\label{sub:expectations}
+% subsection expectations
+
+\begin{defn}[Expectation of A Discrete RV]
+\label{defn:expectation_of_a_discrete_rv}
+  If $X$ is a discrete rv with pmf $f$ and support set $A$, then the \hlnoteb{expectation} of $X$, or the \hldefn{expected value} of $X$ is defined by
+  \begin{equation}\label{eq:expectation_discrete}
+    E(X) = \sum_{x \in A} x f(x)
+  \end{equation}
+  provided that the sum converges absolutely, i.e.
+  \begin{equation*}
+    E(\abs{X}) = \sum_{x \in A} \abs{x} f(x) < \infty.
+  \end{equation*}
+  If $E(\abs{X})$ does not converge, then we say that $E(X)$ does not exist.
+\end{defn}
+
+\begin{defn}[Expectation of A Continuous RV]
+\label{defn:expectation_of_a_continuous_rv}
+  If $X$ is a continuous rv with pdf $f$ and support set $A$, then the \hlnoteb{expectation} of $X$, or the \hldefn{expected value} of $X$ is defined by
+  \begin{equation}\label{eq:expectation_discrete}
+    E(X) = \int_{x \in A} x f(x)
+  \end{equation}
+  provided that the integral converges absolutely, i.e.
+  \begin{equation*}
+    E(\abs{X}) = \int_{x \in A} \abs{x} f(x) < \infty.
+  \end{equation*}
+  If $E(\abs{X})$ does not converge, then we say that $E(X)$ does not exist.
+\end{defn}
+
+\begin{eg}[Example 2.16]
+  Suppose $X \sim \Poi(\lambda)$. Calculate $E(X)$.
+
+  \begin{solution}
+    Note
+    \begin{equation*}
+      f(x) = \begin{cases}
+        \frac{e^{- \lambda} \lambda^x}{x!}  & x = 0, 1, 2, ... \\
+        0                                   & \text{otherwise}
+      \end{cases}.
+    \end{equation*}
+    Then
+    \begin{align*}
+      E(X) &= \sum_{x = 0}^{\infty} x \frac{e^{-\lambda} \lambda^x}{x!} \\
+           &= 0 + \sum_{x = 1}^{\infty} \frac{e^{-\lambda} \lambda^x}{(x - 1)!} \\
+           &= e^{-\lambda} \lambda \sum_{x = 1}^{\infty} \frac{\lambda^{x - 1}}{(x - 1)!} \\
+           &= e^{-\lambda} \lambda e^{\lambda} = \lambda
+    \end{align*}
+  \end{solution}
+\end{eg}
+
+\begin{eg}[Example 2.18]
+  Suppose $X$ is an rv with
+  \begin{equation*}
+    f(x) = \begin{cases}
+      \frac{1}{x^2} & 1 < x < \infty \\
+      0             & \text{otherwise}
+    \end{cases}.
+  \end{equation*}
+  Calculate $E(X)$.
+
+  \begin{solution}
+    Observe that $x \cdot \frac{1}{x^2} = \frac{1}{x}$ and the antiderivative of $\frac{1}{x}$ is $\ln x$, which would need to be evaluated at $\ln \infty$. Thus, we should instead immediately check if the integral converges absolutely.
+    \begin{align*}
+      E(\abs{X}) &= \int_{1}^{\infty} \abs{x} \frac{1}{x^2} \dif{x} \\
+                 &= \int_{1}^{\infty} \abs{x} \frac{1}{\abs{x} \abs{x}} \dif{x} \\
+                 &= \int_{1}^{\infty} \frac{1}{\abs{x}} \dif{x} \\
+                 &= \int_{1}^{\infty} \frac{1}{x} \dif{x},
+    \end{align*}
+    and we notice that the integral would not converge. Therefore, $E(X)$ does not exist.
+  \end{solution}
+\end{eg}
+
+% subsection expectations (end)
+
+% section expectations (end)
+
+% chapter lecture_3_may_08th_2018 (end)
+
+\chapter{Lecture 4 May 10th 2018}%
+\label{chp:lecture_4_may_10th_2018}
+% chapter lecture_4_may_10th_2018
+
+\section{Expectations (Continued)}%
+\label{sec:expectations_continued}
+% section expectations_continued
+
+\subsection{Expectations (Continued)}%
+\label{sub:expectations_continued}
+% subsection expectations_continued
+
+\begin{thm}[Expectation from the cdf]
+\label{thm:expectation_from_the_cdf}
+  Suppose $X$ is a non-negative continuous rv with cdf $F$, and $E(X) < \infty$. Then
+  \begin{equation}\label{eq:cont_cdf_to_expectation}
+    E(X) = \int_{0}^{\infty} \left[ 1 - F(x) \right] \dif{x} = \int_{0}^{\infty} P(X \geq x) \dif{x}
+  \end{equation}
+  If $X$ is a discrete rv with cdf $F$, and $E(X) < \infty$, then
+  \begin{equation}\label{eq:discrete_cdf_to_expectation}
+    E(X) = \sum_{x = 0}^{\infty} \left[ 1 - F(x) \right] = \sum_{x = 0}^{\infty} P(X \geq x)
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  Note that for a continuous rv $X$, we have
+  \begin{equation*}
+    1 - F(x) = P(X \geq x) = \int_{x}^{\infty} f(t) \dif{t}
+  \end{equation*}
+  Therefore,
+  \begin{equation*}
+    \int_{0}^{\infty} \left[ 1 - F(x) \right] \dif{x} = \int_{0}^{\infty} \int_{x}^{\infty} f(t) \dif{t} \dif{x}.
+  \end{equation*}
+  Since $1 - F(x)$ is a finite value, so is $\int_{0}^{\infty} f(t) \dif{t}$, and thus we can apply \hlnotea{Fubini's Theorem}\sidenote{Condition for Fubini's Theorem to hold is that the integrand of the double integral must be absolutely convergent. See \href{https://en.wikipedia.org/wiki/Fubini\%27s_theorem}{Wikipedia}.}:
+  \begin{equation*}
+    \int_{0}^{\infty} \left[ 1 - F(x) \right] \dif{x} = \int_{0}^{\infty} \int_{x}^{\infty} f(t) \dif{t} \dif{x} = \int_{0}^{\infty} \int_{0}^{t} f(t) \dif{x} \dif{t}     
+  \end{equation*}
+  Note that the limits of the integral utilizes the following figure:
+	\begin{center}
+		\begin{tikzpicture}
+        \draw[->] (-0.5, 0) -- (3, 0) node[right] {$t$};
+        \draw[->] (0, -0.5) -- (0, 3) node[above] {$x$};
+				\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(3,0)--(3,3)--(0,0);
+        \draw[line width=0pt,dashed](3,3)--(0,0) node[midway,left] [label=left:\textcolor{base16-eighties-light}{$t = x$}] {};
+		\end{tikzpicture}
+	\end{center}
+  \marginnote{Work on the discrete case as an exercise.
+    \begin{ex}
+      For a non-negative discrete rv $X$ with cdf $F$ and $E(X) < \infty$, prove that
+      \begin{equation*}
+        E(X) = \sum_{x = 0}^{\infty} [ 1 - F(x) ]
+      \end{equation*}
+    \end{ex}
+  }
+  With that, note that
+  \begin{equation*}
+    \int_{0}^{t} f(t) \dif{x} = x f(t) \at{0}{t} = tf(t)
+  \end{equation*}
+  Since $t$ is just a dummy variable, we can indeed let $t = x$, and thus we have
+  \begin{equation*}
+    \int_{0}^{\infty} \left[ 1 - F(x) \right] \dif{x} = \int_{0}^{\infty} xf(x) \dif{x} = E(X)
+  \end{equation*}
+  as required.
+
+  \qed
+\end{proof}
+
+\begin{eg}[Example 2.20]
+  Suppose $X \sim \Exp(\theta)$. Use \cref{thm:expectation_from_the_cdf} to calculate $E(X)$.
+
+  \begin{solution}
+    Note that $X$ is a non-negative rv. The cdf of $X \im \Exp(\theta)$ is
+    \begin{equation*}
+      F_X (x) = 1 - e^{-\frac{x}{\theta}}.
+    \end{equation*}
+    Then
+    \begin{align*}
+      E(X) &= \int_{0}^{\infty} 1 - F_X(x) \dif{x} = \int_{0}^{\infty} e^{-\frac{x}{\theta}} \dif{x} \\
+           &= -\theta e^{-\frac{x}{\theta}} \at{0}{\infty} = \theta
+    \end{align*}\qed
+  \end{solution}
+\end{eg}
+
+\begin{thm}[Expected Value of a Function of X]
+\label{thm:expected_value_of_a_function_of_x}
+  Suppose $h(x)$ is a real-valued function.
+
+  If $X$ is a discrete rv with pmf $f$ and support set $A$, then
+  \begin{equation}\label{eq:discrete_function_to_expectation}
+    E[ h(x) ] = \sum_{x \in A} h(x) f(x)
+  \end{equation}
+  provided that the sum converges absolutely.
+
+  If $X$ is a continuous rv with pdf $f$, then
+  \begin{equation}\label{eq:continous_function_to_expectation}
+    E[ h(x) ] = \int_{-\infty}^{\infty} h(x) f(x) \dif{x}
+  \end{equation}
+  provided that the integral converges absolutely.
+\end{thm}
+
+The proof is, unfortunately, not trivial. One would have to look into Lesbesgue integrals (or at the very least, Riemann-Stieltjes integrals) in order to prove this statement. This ``theorem'' is also called \hlnotea{The Law of the Unconscious Statistician} [\href{https://en.wikipedia.org/wiki/Law_of_the_unconscious_statistician}{Reference - Wikipedia}]\index{Law of the Unconscious Statistician}. An idea of the proof is given on \href{https://math.stackexchange.com/questions/1277800/expected-value-of-a-function-of-a-random-variable}{Math SE}.
+
+\begin{eg}
+  Suppose $X \sim \Unif(0, \theta)$. Calculate $E(X^2)$.
+
+  \begin{solution}
+    \begin{equation*}
+      E(X^2) = \int_{0}^{\theta} \frac{x^2}{\theta} \dif{x} = \frac{1}{\theta} \frac{x^3}{3} \at{x = 0}{\theta} = \frac{\theta^2}{3}
+    \end{equation*}
+  \end{solution}
+\end{eg}
+
+\begin{ex}
+  Find the pdf of $Y = X^2$ and find $E(Y)$ by evaluating $\int_{-\infty}^{\infty} y f_Y(y) \dif{y}$
+\end{ex}
+
+\begin{thm}[Linearity of Expectation]
+\index{Linearity - Expectation}
+\label{thm:linearity_of_expectation}
+  Suppose $X$ is an rv with pf $f$. Let $a_i, b_i \in \mathbb{R}$, for $i = 1, ..., n$, be constants, and $g_i (x)$, for $i = 1, ..., n$, are real-valued functions. Then
+\marginnote{This theorem essentially states that the expectation is a linear operator.}
+  \begin{equation}\label{eq:linearity_of_expectation}
+    E \left[ \sum_{i = 1}^{n} \left( a_i g_i(X) + b_i \right) \right] = \sum_{i = 1}^{n} \left( a_i E[ g_i(X) ] + b_i \right)
+  \end{equation}
+  provided that $E[g_i(X)] < \infty$ for $i = 1, ..., n$.
+\end{thm}
+
+\begin{proof}
+  Suppose $X$ is a discrete rv with support set $A$. Then
+  \begin{align*}
+    E \left[ \sum_{i = 1}^{n} \left( a_i g_i(X) + b_i \right) \right]
+      &= \sum_{x \in A} \left[ \sum_{i = 1}^{n} ( a_i g_i(x) + b_i ) \right] f(x) \quad \because \cref{thm:expected_value_of_a_function_of_x} \\
+      &= \sum_{x \in A} \sum_{i = 1}^{n} \left[ a_i g_i(x) f(x) + b_i f(x) \right] \\
+      &= \sum_{i = 1}^{n} \sum_{x \in A} \left[ a_i g_i(x) f(x) + b_i f(x) \right] \qquad (*) \\
+      &= \sum_{i = 1}^{n} \left[ a_i \sum_{x \in A} g_i(x) f(x) + b_i \sum_{x \in A} f(x) \right] \\
+      &= \sum_{i = 1}^{n} (a_i E[g_i(X)] + b_i)
+  \end{align*}
+  where note that $(*)$ is valid because $a_i, b_i$ are constants, and $g_i(x), f(x)$ are finite real-valued functions.
+\end{proof}
+
+\begin{note}
+  In general, $E(g(X)) \neq g(E(X))$ unless if $g$ is a linear function. For example, for $a, b \in \mathbb{R}$, we have
+  \begin{equation*}
+    E(aX + b) = aE(X) + b
+  \end{equation*}
+\end{note}
+
+% subsection expectations_continued (end)
+
+\subsection{Moments and Variance}%
+\label{sub:moments_and_variance}
+% subsection moments_and_variance
+
+Since these concepts were introduced in STAT230 and were given little treatment in the lecture, we shall only cover over them briefly.
+
+\begin{defn}[Variance]\index{Variance}
+\label{defn:variance}
+  The expectation tof the squared deviation of an rv from its mean is called the \hlnoteb{variance}, i.e. for an rv $X$ with mean $\mu = E(X)$,
+  \begin{equation*}
+    \sigma^2 = \Var(X) = E[ (X - \mu)^2 ] = E(X^2) - E(X)^2
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Moments]\index{Moments}
+\label{defn:moments}
+  Let $X$ be an rv with mean $\mu$.
+
+  The $k$\textsuperscript{th} \hlnoteb{moment about the origin} is defined as:
+  \begin{equation*}
+    E(X^k)
+  \end{equation*}
+
+  The $k$\textsuperscript{th} \hlnoteb{moment about the mean} is defined as:
+  \begin{equation*}
+    E[ (X - \mu)^k ]
+  \end{equation*}
+
+  The $k$\textsuperscript{th} \hldefn{factorial moment} is defined as:
+  \begin{equation*}
+    E[ X^{(k)} ] = E [ X (X - 1) \hdots (X - k + 1) ] = E \left[ \frac{X!}{(X - k)!} \right]
+  \end{equation*}
+\end{defn}
+
+\begin{thm}[Variance of a Linear Function]
+\label{thm:variance_of_a_linear_function}
+  Suppose $X$ is an rv with pf $f$ and $a, b \in \mathbb{R}$. Then
+  \begin{equation*}
+    \Var(aX + b) = a^2 \Var(X)
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Observe that
+  \begin{align*}
+    \Var(aX + b) &= E[ (aX + b)^2 ] - E(aX + b)^2 \\
+                 &= E[ a^2 X^2 + 2abX + b^2 ] - (aE(X) + b)^2 \\
+                 &= a^2 E(X^2) + 2abE(X) + b^2 - (a^2 E(X)^2 + 2abE(X) + b^2) \\
+                 &= a^2 E(X^2) - a^2 E(X)^2 = a^2 \Var(X)
+  \end{align*}\qed
+\end{proof}
+
+\begin{eg}[Example 2.22 (course notes - 2.6.10 (1))]
+  If $X \sim \Poi(\theta)$, then $E[ X^{(k)} ] = \theta^k$ for $k = 1, 2, ...$.
+
+  \begin{solution}
+    Note
+    \begin{equation*}
+      f_X (x) = \begin{cases}
+        \frac{e^{-\theta} \theta^x}{x!} & x = 0, 1, 2, ... \\
+        0                               & \text{otherwise}
+      \end{cases}
+    \end{equation*}
+    So
+    \marginnote{Note that it is not necessarily true that
+    \begin{equation*}
+      x (x - 1)\hdots(x - k + 1) = \frac{x!}{(x - k)!}
+    \end{equation*}
+    for $0 \leq x \leq k - 1$. And so we can only say that the equality is true for $x \geq k$, and hence we have the approach that we use in $(*)$.
+    }
+    \begin{align*}
+      E[ X^{(k)} ]
+        &= E( X(X-1)(X-2)\hdots(X-k+1) ) \\
+        &= \sum_{x = 0}^{\infty} x(x-1)(x-2)\hdots(x-k+1) \frac{e^{-\theta} \theta^x}{x!} \\
+        &= 0 + \sum_{x = k}^{\infty} x(x-1)(x-2)\hdots(x-k+1) \frac{e^{-\theta} \theta^x}{x!} \qquad (*) \\
+        &= \sum_{x = k}^{\infty} \frac{x!}{(x - k)!} \frac{e^{-\theta} \theta^x}{x!} \quad \because x(x-1)\hdots(x-k+1)=\frac{x!}{(x - k)!}\\
+        &= e^{-\theta} \theta^k \sum_{x = k}^{\infty} \frac{\theta^{x - k}}{(x - k)!} \\
+        &= e^{-\theta} \theta^k \sum_{y = 0}^{\infty} \frac{\theta^y}{y!} \qquad \text{let } y = x - k \\
+        &= e^{-\theta} \theta^k e^{\theta} = \theta^k
+    \end{align*}
+    where for $(*)$ we have that $\sum_{x = 0}^{k - 1} x(x-1)\hdots(x-k+1) A = 0$ for any $A \in \mathbb{R}$.
+  \end{solution}
+\end{eg}
+
+% subsection moments_and_variance (end)
+
+% section expectations_continued (end)
+
+\section{Inequalities}%
+\label{sec:inequalities}
+% section inequalities
+
+\subsection{Markov/Chebyshev Style Inequalities}%
+\label{sub:markov_chebyshev_style_inequalities}
+% subsection markov_chebyshev_style_inequalities
+
+\begin{thm}[Markov's Inequality]
+\index{Markov's Inequality}
+\label{thm:markov_s_inequality}
+  If $X$ is a non-negative rv and $a > 0$, then the probability that $X$ is no less than $a$ is no greater than the expectation of $X$ divided by $a$, i.e.
+  \begin{equation}\label{eq:markov_s_inequality}
+    P(X \geq a) \leq \frac{E(X)}{a}
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  We shall prove for the discrete case. Suppose $X$ is a non-negative discrete rv with pf $f$. Let $A \subset S$, where $S$ is the sample space, such that \\\noindent$A = \{w \in S : X(w) \geq a\}$.
+  \marginnote{
+  \begin{ex}
+    Prove Markov's Inequality for a continuous rv.
+  \end{ex}
+  }
+  \begin{align*}
+    E(X) &= \sum_{x \in S} x f(x) \\
+         &= \sum_{x \in A} xf(x) + \sum_{x \notin A} xf(x) \\
+         &\geq \sum_{x \in A} xf(x) \quad \because \sum_{x \notin A} xf(x) \geq 0  \\
+         &\geq \sum_{x \in A} af(x) \\
+         &= a \sum_{x \in A} f(x) = a \cdot P(A) \\
+         &= a \cdot P(\{w \in S : X(w) \geq a\}) = a P(X \geq a).
+  \end{align*}\qed
+\end{proof}
+
+\begin{thm}[Markov's Inequality 2]
+\index{Markov's Inequality 2}
+\label{thm:markov_s_inequality_2}
+  If $X$ is a non-negative rv and $a, k > 0$, then the probability that $X$ is no less than $a$ is no greater than the expectation of $X$ divided by $a$, i.e.
+  \begin{equation}\label{eq:markov_s_inequality_2}
+    P(\abs{ X } \geq a) \leq \frac{E(\abs{ X }^k)}{a^k}
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  We shall, again, prove for the discrete case. Suppose $X$ is a non-negative discrete rv with pf $f$. $A := \{w \in S : \abs{X(w)} \geq a\} \subseteq S$. Then
+  \marginnote{\hlnotec{Question:} Can we write
+    \begin{equation*}
+      P(\{w \in S : \abs{X(w)} \geq a\}) = P(\abs{X} \geq a)?
+    \end{equation*}
+    \begin{ex}
+      Prove for the continuous case.
+    \end{ex}
+  }
+  \begin{align*}
+    E(\abs{X}^k) &= \sum_{x \in S} \abs{x}^k f(x) \\
+                 &= \sum_{x \in A} \abs{x}^k f(x) + \sum_{x \notin A} \abs{x}^k f(x) \\
+                 &\geq \sum_{x \in A} \abs{x}^k f(x) \geq \sum_{x \in A} af(x) \\
+                 &= a^k P(A) = a^k P(\abs{X} \geq a).
+  \end{align*}\qed
+\end{proof}
+
+\begin{thm}[Chebyshev's Inequality]
+\index{Chebyshev's Inequality}
+\label{thm:chebyshev_s_inequality}
+  Suppose $X$ is an rv with finite mean $\mu$ and finite variance $\sigma^2$. Then for any $k > 0$,
+  \begin{equation}\label{eq:chebyshev_s_inequality}
+    P(\abs{X - \mu} \geq k \sigma) \leq \frac{1}{k^2}
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  By \cref{thm:markov_s_inequality_2},
+  \begin{equation*}
+    P(\abs{X - \mu} \geq k \sigma) \leq \frac{E(\abs{X - \mu}^2)}{(k\sigma)^2} = \frac{1}{k^2}
+  \end{equation*} since $E(\abs{X - \mu}^2) = \Var(X) = \sigma^2$.\qed
+\end{proof}
+
+\begin{eg}[Example 2.23]
+  A post office handles, on average, $10000$ letters a day. What can be said about the probability that it will handle at least $15000$ letters tomorrow?
+
+  \begin{solution}
+    $X :=$ number of letters handled in a day. Note that by its definition, $X$ is a non-negative discrete rv. Then, using \cref{thm:markov_s_inequality}, since $E(X) = 10000$
+    \begin{equation*}
+      P(X \geq 15000) \leq \frac{10000}{15000} = \frac{2}{3}.
+    \end{equation*}
+    Thus, we know that there is less than two-third of chance that the post office will handle more than $15000$ tomorrow.
+  \end{solution}
+\end{eg}
+
+% subsection markov_chebyshev_style_inequalities (end)
+
+% section inequalities (end)
+
+% chapter lecture_4_may_10th_2018 (end)
+
+\chapter{Lecture 5 May 15th 2018}
+\label{chp:lecture_5_may_15th_2018}
+% chapter Lecture 5 May 15th 2018
+
+\section{Inequalities (Continued)}%
+\label{sec:inequalities_continued}
+% section inequalities_continued
+
+\subsection{Markov/Chebyshev Style Inequalities (Continued)}%
+\label{sub:markov_chebyshev_style_inequalities_continued}
+% subsection markov_chebyshev_style_inequalities_continued
+
+\begin{eg}[Example 2.24]
+  A post office handles $10000$ letters per day with a variance of $2000$ letters. What can be said about the probability that this post office handles between $8000$ and $12000$ letters tomorrow? What about the probability that more than $15000$ letters come in (use \cref{thm:chebyshev_s_inequality})?
+
+  \begin{enumerate}
+    \item \textit{Probability that this post office handles between $8000$ and $12000$ letters tomorrow:}
+      \begin{align*}
+        &P(8000 < X < 12000) \\
+          &= P(-2000 < X - 10000 < 2000) \\
+          &= P(\abs{X - 10000} < 2000) = 1 - P(\abs{X - 10000} \geq 2000) \\
+          &\geq 1 - \frac{1}{(\sqrt{2000})^2} \quad \because \cref{thm:chebyshev_s_inequality} \, \land \, k = \frac{2000}{\sigma} = \sqrt{2000} \\
+          &= \frac{1999}{2000}
+      \end{align*}
+
+    \item \textit{Probability that more than 15000 letters come in:} 
+      \begin{align*}
+        P(X > 15000) &= P(X - 10000 > 15000 - 10000) \\
+          &= P(X - 10000 > 5000) \\
+          &\leq P(X - 10000 > 5000) + P(X - 10000 < 5000) \\
+          &\leq P(\abs{X - 10000} > 5000) \\
+          &\leq \frac{1}{\left( \frac{5000}{\sqrt{2000}} \right)^2} = \frac{2000}{5000^2}
+      \end{align*}
+  \end{enumerate}
+\end{eg}
+
+% subsection markov_chebyshev_style_inequalities_continued (end)
+
+% section inequalities_continued (end)
+
+\section{Moment Generating Function}
+\label{sec:moment_generating_function}
+% section Moment Generating Function
+
+Moment generating functions are important because they uniquely define the distribution of an rv.
+
+\begin{defn}[Moment Generating Function]\label{defn:moment_generating_function}
+\index{Moment Generating Function}
+  If $X$ is an rv, then $M_X (t) = E(e^{tx})$ is called the \hlnoteb{moment generating function} (mgf) of $X$ provided this expectation exists for all $t \in (-h , h)$ for some $h > 0$.
+\end{defn}
+
+\begin{note}
+  When determining the mgf of an rv, the values of $t$ for which the expectation exists must always be stated. The range of $t$ where the expectation is defined is ``essentially'' the \hlnotea{radius of convergence}.
+\end{note}
+
+\begin{ex}[Example 2.25 (2.9.2 (1) of the course notes)]
+  Find the mgf of $X \sim \Gamma(\alpha, \beta)$. Make sure you specify the domain on which the mgf is defined.
+
+  \begin{solution}
+    Note that the pdf of the Gamma distribution is:
+    \begin{align*}
+      f(x) &= \begin{cases}
+        \frac{1}{\beta^\alpha \Gamma(\alpha)} x^{\alpha - 1} e^{- \frac{X}{\beta} } & x > 0 \\
+        0 & \text{otherwise}
+      \end{cases}
+    \end{align*}
+    Therefore
+    \begin{align*}
+      M_X (t) &= E(e^{tx})
+        = \int_{0}^{\infty}e^{tx} \frac{1}{\beta^\alpha} x^{\alpha - 1} e^{- \frac{x}{\beta}} \dif{x} \\
+        &= \frac{1}{\beta^\alpha} \int_{0}^{\infty}  \frac{1}{\Gamma( \alpha )} x^{\alpha} e^{-x \left(\frac{1}{\beta} - t \right)} \dif{x} \\
+        &= \frac{\left( \frac{\beta}{1 - t\beta} \right)^\alpha}{\beta^\alpha} \underbrace{ \int_{0}^{\infty} \frac{1}{\left( \frac{\beta}{1 - t \beta} \right)^\alpha \Gamma(\alpha)} x^{\alpha - 1} e^{-\frac{x}{\frac{\beta}{1 - t \beta}}} \dif{x} }_{\text{sum over all values for pdf of } \Gamma(\alpha, \frac{\beta}{1 - t \beta} = 1)} \quad \text{for } \frac{1}{\beta} - t > 0 \\
+        &= (1 - t \beta)^{- \alpha} \qquad \text{for } t < \frac{1}{\beta}
+    \end{align*}
+  \end{solution}
+\end{ex}
+
+\begin{defn}[Indicator Function]\index{Indicator Function}
+\label{defn:indicator_function}
+  The function $\mathbb{1}_A$ is called the \hlnoteb{indicator function} of the set $A$, i.e.
+  \begin{equation}\label{eq:indicator_function}
+    \mathbb{1}_A = \begin{cases}
+      1 & \text{if } A \text{ occurs } \\
+      0 & \text{if } A^C \text{ occurs }
+    \end{cases}
+  \end{equation}
+\end{defn}
+
+\begin{eg}
+  The pdf
+  \begin{equation*}
+    f(x) = \begin{cases}
+      \frac{1}{\theta} & 0 \leq x \leq \theta \\
+      0                & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  can be represented as
+  \begin{equation*}
+    f(x) = \frac{1}{\theta} \mathbb{1}_{\{0 \leq x \leq \theta \}}
+  \end{equation*}
+\end{eg}
+
+\begin{eg}[Example 2.26]
+  Find the mgf of $X \sim \Poi(\lambda)$. Make sure you specify the domain on which the mgf is defined.
+
+  \begin{solution}
+    Note that the pmf of $X$ is
+    \begin{equation*}
+      f_X(x) = \frac{e^{-\lambda} \lambda^x}{x!} \mathbb{1}_{\{0, 1, 2, ...\}}
+    \end{equation*}
+    The mgf is thus
+    \begin{align*}
+      M_X(t) &= E(e^{tX}) = \sum_{x = 0}^{\infty} e^{tx} \frac{e^{-\lambda} \lambda^x}{x!} \\
+             &= e^{-\lambda} \sum_{x = 0}^{\infty} \frac{(e^t \lambda)^x}{x!} = e^{-\lambda} e^{e^{t} \lambda} \\
+             &= e^{\lambda( e^t - 1 )} \qquad \forall t \in \mathbb{R} 
+    \end{align*}
+  \end{solution}
+\end{eg}
+
+\begin{propo}[Properties of the MGF]
+\label{propo:properties_of_the_mgf}
+  Suppose $X$ is an rv. Then
+  \begin{enumerate}
+    \item $M_X(0) = 1$
+    \item Suppose the derivatives $M_X^{(k)}(t)$, for $k = 1, 2, ...$, exists for $t \in (-h, h)$ for some $h > 0$, then the \hlnotea{Maclaurin Series}\sidenote{The Maclaurin series is the Taylor expansion around $0$.} of $M_X(t)$ is
+      \begin{equation*}
+        M_X(t) = \sum_{k = 0}^{\infty} \frac{M_X^{(k)} (t) \at{t = 0}{}}{k!} t^k
+      \end{equation*}
+    \item If the mgf exists, then the $k$\textsuperscript{th} moment of $X$ is:
+      \begin{equation*}
+        E(X^k) = \frac{d^k M_X(t)}{dt^k} \at{t = 0}{}
+      \end{equation*}
+    \item Putting 2 and 3 together, we have
+      \begin{equation*}
+        M_X(t) = \sum_{k = 0}^{\infty} \frac{E(X^k)}{k!} t^k
+      \end{equation*}
+  \end{enumerate}
+  The final item shows why $M_X(t)$ is called the \hlnoteb{moment generating function}.
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item $M_X(t) \at{t = 0}{} = E(e^{tX}) \at{t = 0}{} = E(e^{0}) = 1$
+    \item This is simply a result of using the Maclaurin series.
+    \item Note that
+      \begin{align*}
+        E(e^{tX})
+          &= E \left[ 1 + tX + \frac{1}{2} (tX)^2 + \frac{1}{3!} (tX)^3 + \hdots \right] \\
+          &= 1 + tE(X) + \frac{t^2}{2} E(X^2) + \frac{t^3}{3!} E(X^3) + \hdots.
+      \end{align*}
+      So
+      \begin{equation*}
+        \frac{d^k}{dt^k} E(e^{tX}) \at{t = 0}{}
+          &= \frac{k!}{k!} E(X^k) + \underbrace{ \frac{k! \cdot t}{(k + 1)!} E(X^{k + 1}) + \hdots }_{= 0 \text{ when } t = 0} \at{t = 0}{} = E(X^k)
+      \end{equation*}
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{eg}[Example 2.27]
+  A discrete random variable $X$ has the pmf
+  \begin{equation*}
+    f(x) = \left( \frac{1}{2} \right)^{x + 1} \mathbb{1}_{\{0, 1, 2, ...\}}
+  \end{equation*}
+  Derive the mgf of $X$ and use it calculate its mean and variance.
+
+  \begin{align*}
+    M_X(t) &= \sum_{x = 0}^{\infty} e^{tx} \left( \frac{1}{2} \right)^{x + 1} \\
+           &= \frac{1}{2} \cdot \sum_{x = 0}^{\infty} \left( \frac{e^t}{2} \right)^x \\
+           &= \frac{1}{2} \cdot \frac{1}{1 - \frac{e^t}{2}} \quad \text{for } \abs{\frac{e^t}{2}} < 1 \text{ or } t < \ln 2 \\
+           &= \frac{1}{2 - e^t}
+  \end{align*}
+  To get the first two moments,
+  \begin{align*}
+    E(X) &= \frac{d}{dt} M_X(t) \at{t = 0}{} \\
+      &= \frac{e^t}{( 2 - e^t )^2} \at{t = 0} = 1 \\
+    E(X^2) &= \frac{d^2}{dt^2} M_X(t) \at{t = 0}{} \\
+      &= \frac{e^t}{(2 - e^t)^2} + \frac{2e^t}{(2 - e^t)^3} \at{t = 0}{} \\
+      &= 1 + 2 = 3
+  \end{align*}
+  Thus we have that the expected value and variance are
+  \begin{align*}
+    E(X) &= 1 \\
+    \Var(X) &= E(X^2) - E(X)^2 = 3 - 1 = 2
+  \end{align*}
+  respectively.
+\end{eg}
+
+\subsection{MGF of a Linear Transformation}
+\label{sub:mgf_of_a_linear_transformation}
+% subsection MGF of a Linear Transformation
+
+\begin{thm}[MGF of a Linear Transformation]
+\label{thm:mgf_of_a_linear_transformation}
+  Suppose the rv $X$ has an mgf $M_X(t)$ defined for $t \in (-h, h)$ for some $h > 0$. Let $Y = aX + b$, where $a, b \in \mathbb{R}$ and $a \neq 0$. Then the mgf of $Y$ is
+  \begin{equation}\label{eq:mgf_of_a_linear_transformation}
+    M_Y(t) = e^{bt} M_X(at), \quad \abs{t} \leq \frac{h}{\abs{a}}.
+  \end{equation}
+\end{thm}
+
+\begin{proof}
+  Observe that
+  \begin{align*}
+    M_Y(t) = E(e^{tY}) = E(e^{t(aX + b)}) = E(e^{atX}e^{tb}) = e^{bt} M_X(at).
+  \end{align*}
+  The range of $t$ is
+  \begin{equation*}
+    \abs{at} < h \overset{a \neq 0}{\iff} \abs{t} < \frac{h}{\abs{a}}
+  \end{equation*}
+\end{proof}
+
+\begin{eg}[Example 2.28]
+  Consider $X \sim \UNIF(\theta_1, \theta_2)$. Find the mgf of $Y = 5X + 3$.
+
+  \begin{solution}
+    Note that
+    \begin{align*}
+      M_X(t) &= \int_{\theta_1}^{\theta_2} \frac{e^{tx}}{\theta_2 - \theta_1} \dif{x} \\
+        &= \begin{cases}
+          \frac{e^{tx}}{t ( \theta_2 - \theta_1 )} \at{\theta_1}{\theta_2} & t \neq 0 \\
+          1 & t = 0
+        \end{cases} \\
+        &= \begin{cases}
+          \frac{e^{t \theta_2} - e^{t \theta_1}}{t (\theta_2 - \theta_1)} & t \neq 0 \\
+          1 & t = 0
+        \end{cases}
+    \end{align*}
+    Thus by \cref{thm:mgf_of_a_linear_transformation},
+    \begin{equation*}
+      M_Y(t) = e^{3t} M_X(5t) &= \begin{cases}
+        e^{3t} \frac{e^{5t \theta_2} - e^{5t \theta_1}}{5t (\theta_2 - \theta_1)} & t \neq 0 \\
+        1 & t = 0
+      \end{cases}
+    \end{equation*}
+  \end{solution}
+\end{eg}
+
+% subsection MGF of a Linear Transformation (end)
+
+\subsection{Uniqueness of the MGF}
+\label{sub:uniqueness_of_the_mgf}
+% subsection Uniqueness of the MGF
+
+\begin{thm}[Uniqueness of the MGF]
+\label{thm:uniqueness_of_the_mgf}
+  Suppose the rv $X$ has mgf $M_X(t)$ and the rv $Y$ has mgf $M_Y(t)$. Suppose also that $M_X(y) = M_Y(t)$ for all $t \in (-h, h)$ for some $h > 0$. Then $X$ and $Y$ have the same distribution, that is, $\forall s \in \mathbb{R}$,
+  \begin{equation*}
+    P(X \leq s) = F_X(s) = F_Y(s) = P(Y \leq s)
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  The proof of this theorem is not trivial. See \href{https://math.stackexchange.com/q/2388038}{this comment} on Math SE for information. It appears that the 2nd bullet point points to a material that I might be able to understand. If I can find that material, and understand it, I may change this proof section to become my own notes.
+\end{proof}
+
+\begin{eg}[Example 2.29]
+  Suppose $X \sim \UNIF(0, 1)$. Define $Y = -2 \log X$, and use the mgf method to show that $Y \sim \chi_2^2$.\\
+\noindent ( Hint: Find mgf of $\chi_2$ and show that $Y$ has the same mgf )
+
+  \begin{solution}
+    Let $Z = \chi_2^2$. The pdf of $Z$ is therefore
+    \begin{equation*}
+      f_Z (z) = \frac{1}{2} e^{- \frac{z}{2}} \mathbb{1}_{\{z > 0\}}.
+    \end{equation*}
+    Then
+    \begin{align*}
+      M_Z(t) = E(e^{tZ}) &= \int_{0}^{\infty} e^{tz} \frac{1}{2} e^{- \frac{z}{2}} \dif{z} \\
+        &= \frac{1}{2} \int_{0}^{\infty} e^{(t - \frac{1}{2}) z} \dif{z} \\
+        &= \begin{cases} 
+          \frac{1}{2} \frac{1}{t - \frac{1}{2}} e^{(t - \frac{1}{2}) z} \at{z = 0}{\infty} & t \neq \frac{1}{2} \\
+          \infty & t = \frac{1}{2}
+        \end{cases} \\
+        &= \frac{1}{2t - 1} \qquad t \neq \frac{1}{2}
+    \end{align*}
+  \end{solution}
+\end{eg}
+
+% subsection Uniqueness of the MGF (end)
+
+% section Moment Generating Function (end)
+
+% chapter Lecture 5 May 15th 2018 (end)
+
+\chapter{Lecture 6 May 17th 2018}%
+\label{chp:lecture_6_may_17th_2018}
+% chapter lecture_6_may_17th_2018
+
+\section{Joint Distributions}%
+\label{sec:joint_distributions}
+% section joint_distributions
+
+\subsection{Introduction to Joint Distributions}%
+\label{sub:introduction_to_joint_distributions}
+% subsection introduction_to_joint_distributions
+
+\begin{note}[Motivation]
+  Most studies collect information for multiple variables per subject rather than just one variable. Because these variables may interfere/interact with each other and hence give us results that may not be fully reliant on a single variable, it is in our interest to study the interaction of these variables.
+
+  To start off with the basics, we will first look at the bivariate case of a joint distribution.
+\end{note}
+
+% subsection introduction_to_joint_distributions (end)
+
+\subsection{Joint and Marginal CDFs}%
+\label{sub:joint_and_marginal_cdfs}
+% subsection joint_and_marginal_cdfs
+
+\begin{defn}[Joint CDF]\index{Joint CDF}
+\label{defn:joint_cdf}
+  Suppose $X$ and $Y$ are rvs defined on a sample space $S$. The \hlnoteb{joint cdf} of $X$ and $Y$ is given by
+  \begin{equation*}
+    \forall (x, y) \in \mathbb{R}^2 \qquad F(x, y) = P(X \leq x, Y \leq y).
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item Depending on whether $X$ and $Y$ are both discrete or both continuous, we can derive the joint pmf or joint pdf of $(X, Y)$, respectively.
+    \item \cref{defn:joint_cdf} only concerns two variables (a bivariate case), but we can certainly extend the idea to a $k$-dimensional joint cdf for the rvs $X_1, X_2, ..., X_k$ as $\forall (x_1, x_2, ..., x_k) \in \mathbb{R}^k$,
+    \begin{equation*}
+      F(x_1, x_2, ..., x_k) = P(X_1 \leq x_1, X_2 \leq x_2, ..., X_k \leq x_k).
+    \end{equation*}
+  \end{itemize}
+\end{note}
+
+\begin{propo}[Properties of Joint CDF]
+\label{propo:properties_of_joint_cdf}
+  Suppose $X, Y$ are rvs, either both continuous or discrete, and has a joint cdf $F$. Then
+  \begin{enumerate}
+    \item $F$ is non-decreasing in $x$ for fixed $y$.
+    \item $F$ is non-decreasing in $y$ for fixed $x$.
+    \item $\lim_{x \to - \infty} F(x, y) = 0$ and $\lim_{y \to -infty} F(x, y) = 0$.
+    \item $\lim_{(x, y) \to (-\infty, -\infty)} F(x, y) = 0$ and $\lim_{(x, y) \to (\infty, \infty)} F(x, y) = 1$
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Suppose not, i.e. that we have instead that $F$ is decreasing for $x$. Then for $x_1 < x_2 \in \mathbb{R}$, we would have
+      \begin{align*}
+        &F(x_1, y) > F(x_2, y) \\
+        &\implies P(X \leq x_1, Y \leq y) > P(X \leq x_2, Y \leq y)
+      \end{align*}
+      In other words,
+      \begin{align*}
+        &P(\{ (w, v) : (w, v) \in S, \; X(w) \leq x_1 , \, Y(v) \leq y\}) \\
+        &> P(\{ (w, v) : (w, v) \in S, \; X(w) \leq x_2 , \, Y(v) \leq y\})
+      \end{align*}
+      However, note that for fixed $y$, since $x_1 < x_2$, we must have that
+      \begin{align*}
+        &\{(w, v) \in S : X(w) \leq x_1 , Y(v) \leq y \} \\
+        &\subseteq \{(w, v) \in S : X(w) \leq x_2, Y(v) \leq y \}.
+      \end{align*}
+      By \cref{propo:properties_of_probability_set_functions}, we have that
+      \begin{align*}
+        &P(\{ (w, v) : (w, v) \in S, \; X(w) \leq x_1 , \, Y(v) \leq y\}) \\
+        &\leq P(\{ (w, v) : (w, v) \in S, \; X(w) \leq x_2 , \, Y(v) \leq y\}).
+      \end{align*}
+      This is clearly a contradiction.
+    \item The proof for this statement is similar to the above.
+    \item Note that
+      \begin{align*}
+        \lim_{x \to -\infty} F(x, y) &= \lim_{x \to - \infty} P(X \leq x, Y \leq y) \\
+          &= P(X \leq -\infty, Y \leq y) \\
+          &= P([ X \leq -\infty ] \cap [ Y \leq y ]) \\
+          &= P( \emptyset \cup [Y \leq y] ) = P(\emptyset) = 0
+      \end{align*}
+      The proof for the case where $y \to -\infty$ is similar.
+    \item This is simply a consequence of 3.
+  \end{enumerate}
+\end{proof}
+
+\begin{note}
+    We say that $F$ is a joint cdf if it satisfies all the conditions in \cref{propo:properties_of_joint_cdf}.\sidenote{Many literature actually claims this, and it does look like it will be assumed so for this class.}
+\end{note}
+
+\begin{eg}[Example 3.1]\label{eg:eg_3_1}
+  Consider the following joint cdf of two rvs $(X_1, X_2)$:
+  \begin{equation*}
+    F(x_1, x_2) = \begin{cases}
+      0    & x_1 < 0 \, \lor \, x_2 < 0 \\
+      0.49 & 0 \leq x_1 < 1 \, \land \, 0 \leq x_2 < 1 \\
+      0.7  & 0 \leq x_1 < 1 \, \land \, x_2 > 1 \\
+      0.7  & x_1 \geq 1 \, \land \, 0 \leq x_2 < 1 \\
+      1    & x_1 \geq 1 \, \land \, x_2 \geq 1
+    \end{cases}
+  \end{equation*}
+  Flipping an unfair coin with $P(\{H\}) = 0.3$ twice independently, we define for $i = 1, 2$
+  \begin{equation*}
+    X_i = \begin{cases}
+      1 & \text{if the } i \text{\textsuperscript{th} flip is heads} \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  The joint cdf of $(X_1, X_2)$ is the given $F$ above. Verify that under this experiment, $F$ is indeed a cdf.
+
+  \begin{solution}
+    Note that conditions 3 and 4 of \cref{propo:properties_of_joint_cdf} are automatically satisfied by the definition of $F$.
+
+    \hlwarn{incomplete example}
+  \end{solution}
+\end{eg}
+
+\begin{defn}[Marginal CDF]\index{Marginal CDF}
+\label{defn:marginal_cdf}
+  For the rvs $X, Y$ with joint cdf $F$, the \hlnoteb{marginal cdf} of $X$ is
+  \marginnote{Note that the marginal cdf is defined for both discrete and continuous cases.}
+  \begin{equation*}
+    F_X(x) = P(X \leq x) = \lim_{y \to \infty} F(x, y) = F(x, \infty) \quad \forall x \in \mathbb{R}
+  \end{equation*}
+  and the \hlnoteb{marginal cdf} of $Y$ is
+  \begin{equation*}
+    F_Y(y) = P(Y \leq y) = \lim_{x \to \infty} F(x, y) = F(\infty, y) \quad \forall y \in \mathbb{R}
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  Based on \cref{eg:eg_3_1}, derive $F_{X_i}(x_i)$ for $i = 1, 2$.
+
+  \begin{solution}
+    \begin{align*}
+      F_{X_1} (x_1) &= \lim_{x_2 \to \infty} F(x_1, x_2) \\
+          &= \begin{cases}
+            0   & x_1 < 0 \\
+            0.7 & 0 \leq x_1 < 1 \\
+            1   & x_1 \geq 1
+          \end{cases}
+    \end{align*}
+    The solution for $F_{X_2}(x_2)$ is similar.
+  \end{solution}
+\end{eg}
+
+% subsection joint_and_marginal_cdfs (end)
+
+\subsection{Joint Discrete RVs}%
+\label{sub:joint_discrete_rvs}
+% subsection joint_discrete_rvs
+
+\begin{defn}[Joint Discrete RV]\index{Joint Discrete Random Variables}
+\label{defn:joint_discrete_rv}
+  Suppose $X$ amd $Y$ are rvs defined on a sample space $S$. If $S$ is discrete then $X$ and $Y$ are discrete rvs. The \hlnoteb{joint pmf}\index{Joint PMF} of $X$ and $Y$ is given by
+  \begin{equation*}
+    \forall (x, y) \in \mathbb{R}^2 \quad f(x, y) = P(X = x, Y = y).
+  \end{equation*}
+  The set $A = \{(x, y) : f(x, y) > 0\}$ is called the \hldefn{support set} of $(X, Y)$.
+\end{defn}
+
+\begin{propo}[Properties of Joint PMF]
+\label{propo:properties_of_joint_pmf}
+  Suppose $X, Y$ are discrete rvs with joint pmf $f$ and support set $A$. Then
+  \begin{enumerate}
+    \item $\forall (x, y) \in \mathbb{R}^2 \qquad f(x, y) \geq 0$
+    \item $\underset{(x, y) \in A}{\sum \enspace \sum} f(x, y) = 1$
+    \item $\forall R \subset \mathbb{R}^2$,
+      \begin{equation*}
+        P[ (X, Y) \in R ] = \underset{(x, y) \in R}{\sum \enspace \sum} f(x, y)
+      \end{equation*}
+  \end{enumerate}
+\end{propo}
+
+The proof is analogous to the univariate case as seen in \cref{propo:properties_of_pmf}
+
+\begin{eg}[Example 3.2]\label{eg:eg_3_2}
+  Consider the following joint pmf where the numbers inside the table show $P(X = x, Y = y)$. Find $c$. Then, calculate $P(X + Y \leq 2)$.
+  \[
+  \begin{tabular}{c | c | c | c}
+          & x = -2 & x = 0 & x = 2 \\
+    \hline
+    y = 0 & 0.05   & 0.1   & 0.15 \\
+    \hline
+    y = 1 & 0.07   & 0.11  & c \\
+    \hline
+    y = 2 & 0.02   & 0.25  & 0.05 \\
+  \end{tabular}
+  \]
+
+  \begin{solution}
+    Since the sum of all the probabilities must be $1$, thus
+    \begin{equation*}
+      c = 1 - 0.05 - 0.07 - 0.02 - \hdots - 0.15 - 0.05 = 0.2.
+    \end{equation*}
+    Notice that the only cases where $X + Y > 2$ is when
+    \begin{itemize}
+      \item $X = 2, Y = 1$; and
+      \item $X = 2, Y = 2$.
+    \end{itemize}
+    Thus
+    \begin{align*}
+      P(X + Y \leq 2) &= 1 - P(X = 2, Y = 1) - P(X = 2, Y = 2) \\
+        &= 1 - 0.2 - 0.05 = 0.75
+    \end{align*}
+  \end{solution}
+\end{eg}
+
+\begin{eg}[Example 3.3]
+  A small college has $90$ male and $30$ female professors. An ad hoc committee of $5$ is selected at random to write the vision and mission of the college. Let $X$ and $Y$ be the number of men and women in this committee, respectively. Derive the joint distribution of $(X, Y)$.
+
+  \begin{solution}
+    Observe that the support set of this distribution is
+    \begin{equation*}
+      A = \{(x, y) : x + y = 5, x, y = 0, 1, 2, 3, 4, 5 \}.
+    \end{equation*}
+    We have that the distribution is
+    \begin{equation*}
+      P(X = x, Y = y) = \begin{cases}
+        \frac{\binom{90}{x} \binom{30}{y}}{\binom{120}{5}} & \substack{x, y = 0, \; 1, \; 2, \; 3, \; 4, \; 5 \\ x + y = 5} \\
+        0             & \text{otherwise}
+      \end{cases}
+    \end{equation*}
+  \end{solution}
+\end{eg}
+
+\begin{defn}[Marginal Distribution - Discrete Case]\index{Marginal Distribution}
+\label{defn:marginal_distribution_discrete_case}
+  Suppose $X$ and $Y$ are discrete rvs with joint pf $f$. Then the \hlnoteb{marginal pf} of $X$ is 
+  \begin{equation*}
+    \forall x \in \mathbb{R}^2 \quad f_X (x) = P(X = x) = \sum_{y \in \mathbb{R}} f(x, y),
+  \end{equation*}
+  and the \hlnoteb{marginal pf} of $Y$ is
+  \begin{equation*}
+    \forall y \in \mathbb{R}^2 \quad f_Y (y) = P(Y = Y) = \sum_{x \in \mathbb{R}} f(x, y).
+  \end{equation*}
+\end{defn}
+
+\begin{eg}[Example 3.4]
+  Consider the joint pmf from \cref{eg:eg_3_2}. Find the marginal distributions, i.e. marginal pmfs of $X$ and $Y$.
+  \[
+  \begin{tabular}{c | c | c | c}
+          & x = -2 & x = 0 & x = 2 \\
+    \hline
+    y = 0 & 0.05   & 0.1   & 0.15 \\
+    \hline
+    y = 1 & 0.07   & 0.11  & 0.2 \\
+    \hline
+    y = 2 & 0.02   & 0.25  & 0.05
+  \end{tabular}
+  \]
+
+  \begin{solution}
+    Using the definition, we have that
+    \begin{equation*}
+      f_X(x) = \sum_{y \in \mathbb{R}} f(x, y) = \begin{cases}
+        0.14 & x = -2 \\
+        0.46 & x = 0 \\
+        0.40 & x = 2
+      \end{cases}
+    \end{equation*}
+    and
+    \begin{equation*}
+      f_Y(y) = \sum_{x \in \mathbb{R}} f(x, y) = \begin{cases}
+        0.3  & y = 0 \\
+        0.38 & y = 1 \\
+        0.32 & y = 2
+      \end{cases}
+    \end{equation*}
+  \end{solution}
+\end{eg}
+
+\begin{eg}[Example 3.5]
+  Suppose that a penny and a nickel are each tossed $10$ times so that every pair of sequences of tosses ($n$ tosses in each sequence) is equally likely to occur. Let $X$ be the number of heads obtained with the penny, and $Y$ be the number of heads obtained with the nickel. It can be shown that (show it!) the joint pmf of $X$ and $Y$ is as follows.
+  \begin{equation*}
+    P(X = x, Y = y) = \begin{cases}
+      \binom{10}{x} \binom{10}{y} \left( \frac{1}{2} \right)^{20} & x, y = 0, ..., 10 \\
+      0                                                           & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+
+  \begin{solution}
+    Note that the support set of $X$ and $Y$ are the same, i.e.
+    \begin{equation*}
+      A_X = A_Y = \{ 0, 1, ..., 10 \}.
+    \end{equation*}
+    We may assume that the penny and the nickel are fair coins, i.e. if we let $p_x$ and $p_y$ be the probability of getting a head for a penny and nickel, respectively, then $p_x = p_y = \frac{1}{2}$. Since there are $10$ ways to get $x$ heads with the penny, and similarly so for the nickel, we have that
+    \begin{align*}
+      P(X = x, Y = y) &= \begin{cases}
+        \binom{10}{x} \binom{10}{y} \left( \frac{1}{2} \right)^{10} \left( \frac{1}{2} \right)^{10} & x, y = 0, 1, ..., 10 \\
+        0            & \text{otherwise}
+      \end{cases} \\
+      &= \begin{cases}
+        \binom{10}{x} \binom{10}{y} \left( \frac{1}{2} \roght)^{20} & x, y = 0, 1, ... , 10 \\
+        0   & \text{otherwise}
+      \end{cases}
+    \end{align*}
+    as required.
+  \end{solution}
+\end{eg}
+
+\begin{note}
+  It is interesting to observe that the two rvs in the last example have seemingly no relationship with one another in terms of the experiment conducted, since they do not affect each other. This leads us to introducing the next concept.
+\end{note}
+
+% subsection joint_discrete_rvs (end)
+
+\subsection{Independence}%
+\label{sub:independence}
+% subsection independence
+
+\begin{defn}[Independence]\index{Independence}
+\label{defn:independence}
+  Two rvs $X$ and $Y$ with joint cdf $F$ are said to be \hlnoteb{independent} if and only if
+  \begin{equation*}
+    \forall x, y \in \mathbb{R} \quad F(x, y) = F_X(x) F_Y(y)
+  \end{equation*}
+\end{defn}
+
+\begin{thm}[Independence by PF]
+\label{thm:independence_by_pf}
+  \marginnote{I am not certain as to why this is presented as a theorem that repeats the definition. As so, the prove for the 2nd equation will not be shown.}
+  Suppose $X$ and $Y$ are rvs with joint cdf $F$, joint pf $f$, marginal cdf $F_X$ and $F_Y$ respectively, and marginal pf $f_X$ and $f_Y$ respectively. Also, suppoes that $A_X = \{x : f_X (x) > 0\}$ is the support set of $X$ and $A_Y = \{y : f_Y(y) > 0\}$ is the support set of $Y$. Then $X$ and $Y$ are independent rvs if and only if either 
+  \begin{equation*}
+    \forall (x, y) \in A_X \times A_Y \quad f(x, y) = f_X(x) f_Y(y)
+  \end{equation*}
+  holds, or
+  \begin{equation*}
+    \forall x, y \in \mathbb{R} \quad F(x, y) = F_X(x) F_Y(y)
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  The $(\implies)$ direction is simply a result of \hlnotea{Clairaut's Theorem}. While the $(\impliedby)$ direction is a direct result of applying double integrals. \qed
+\end{proof}
+
+\begin{eg}[Example 3.6]
+  Suppose $X$ and $Y$ are discrete rvs with joint pf
+  \begin{equation*}
+    f(x, y) = \frac{\theta^{x + y} e^{- 2 \theta}}{x! y!} \mathbb{1}_{\{x, y = 0, 1, ...\}}.
+  \end{equation*}
+  Are $X$ and $Y$ independent of each other?
+
+  \begin{solution} 
+    Note that we may write $f$ as
+    \begin{equation*}
+      f(x, y) = \left( \frac{\theta^x e^{-\theta}}{x!} \cdot \frac{\theta^y e^{- \theta}}{y!} \right) \mathbb{1}_{\{x, y = 0, 1, ...\}}
+    \end{equation*}
+    and so this suggests that we can indeed break down $f$ into two parts, each only affected by $x$ and $y$ respectively, ``indepdent'' of each other. Indeed, since
+    \begin{align*}
+      f_X(x) &= \sum_{y = 0}^{\infty} \frac{\theta^{x + y} e^{- \theta}}{x! y!} \mathbb{1}_{\{x,y = 0, 1, ... \}} \\
+        &= \sum_{y = 0}^{\infty} \left( \frac{\theta^x e^{-\theta}}{x!} \cdot \frac{\theta^y e^{- \theta}}{y!} \right) \mathbb{1}_{\{x = 0, 1, ...\}} \\
+        &= \frac{\theta^x e^{-\theta}}{x!} \underbrace{ \sum_{y = 0}^{\infty} \frac{\theta^y e^{-\theta}}{y!} }_{\text{sum of pmf of } \Poi(\theta) = 1} \\
+        &= \frac{\theta^x e^{-\theta}}{x!}
+    \end{align*}
+    Similarly, we can obtain
+    \begin{equation*}
+      f_Y(y) = \frac{\theta^y e^{-\theta}}{y!}
+    \end{equation*}
+    Multiplying $f_X(x)$ and $f_Y(y)$ together, we indeed get back to the original joint pmf.
+  \end{solution}
+\end{eg}
+
+% subsection independence (end)
+
+% section joint_distributions (end)
+
+% chapter lecture_6_may_17th_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}

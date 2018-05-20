@@ -8,9 +8,18 @@
 
 \input{latex-classnotes-preamble.tex}
 
-% Main Body
 \title{${1:Title}}
 \author{Johnson Ng}
+
+% Header formatting
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\makeatletter
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO]{\textsl{\@title} \enspace \thepage}
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark \enspace - \enspace \rightmark}}
+\makeatother
 
 \begin{document}
 \hypersetup{pageanchor=false}
