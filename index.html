@@ -11,6 +11,7 @@
     <article>
       <h1>Japorized's LaTeX Notes</h1>
       <p class="subtitle">Style from <a href="https://github.com/edwardtufte/tufte-css">tufte-css</a> | Notes from this Github <a href="https://github.com/japorized/TeX_notes">repo</a> | Written by <a href="https://japorized.github.io">Japorized</a></p>
+      <noscript>Please enable JS to allow the files to be generated. I did not hard code the files, but used a JSON generator to do the job for me.</noscript>
 
       <section id="files">
         
@@ -20,7 +21,7 @@
 
     <script type="text/javascript" src="jquery-ajax.js"></script>
     <script type="text/javascript">
-      function arrayContains(n,e){return e.indexOf(n)>-1}var fileMan=document.querySelector("#files");$.getJSON("files.json",function(n){var e=[".git","_scripts","et-book","Personal Notes"];$.each(n.children,function(n,a){"folder"!=a.type||arrayContains(a.name,e)||(fileMan.innerHTML+="<h2>"+a.name+"<h2>\n",$.each(a.children,function(n,e){e.name.indexOf(".pdf")>-1?fileMan.innerHTML+='PDF: <a href="'+e.path+'">'+e.name+"</a><br />":e.name.indexOf(".tex")>-1&&(fileMan.innerHTML+='tex: <a href="'+e.path+'">'+e.name+"</a><br />")}))})});
+var fileMan=document.querySelector('#files');$.getJSON('files.json',function(data){var dirs=[],excluded=['.git','_scripts','et-book','Personal Notes'];$.each(data.children,function(key,val){if(val.type=="folder"&&!arrayContains(val.name,excluded)){fileMan.innerHTML+="<h2>"+val.name+"<h2>\n";$.each(val.children,function(k,v){if(v.name.indexOf('.pdf')>-1){fileMan.innerHTML+='PDF: <a href="'+v.path+'">'+v.name+"</a><br />"}else if(v.name.indexOf('.tex')>-1){fileMan.innerHTML+='tex: <a href="'+v.path+'">'+v.name+"</a><br />"}})}})});function arrayContains(needle,arrhaystack){return(arrhaystack.indexOf(needle)>-1)}function nightSwitcher(){var rawtime=new Date(),curHours=rawtime.getHours();if(curHours>17){document.querySelector('head').innerHTML+="<link rel='stylesheet' href='night-mode.css' />"}}nightSwitcher();
     </script>
   </body>
 </html>

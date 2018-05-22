@@ -1,0 +1,10 @@
+body {
+  background-color: #2d2d2d;
+  color: #fffff8;
+}
+
+a:link {
+  background: none;
+  text-shadow: none;
+  text-decoration: underline;
+}

@@ -19,3 +19,14 @@ $.getJSON('files.json', function( data ) {
 function arrayContains(needle, arrhaystack) {
   return (arrhaystack.indexOf(needle) > -1);
 }
+// Night Switcher
+function nightSwitcher() {
+  var rawtime = new Date(),
+      curHours = rawtime.getHours();
+
+  if (curHours > 17) {
+    document.querySelector('head').innerHTML += "<link rel='stylesheet' href='night-mode.css' />";
+  }
+}
+
+nightSwitcher();
