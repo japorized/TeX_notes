@@ -830,7 +830,7 @@ Recall that the general linear group is defined as:
   \end{equation*}
 \end{defn}
 
-\begin{eg}
+\begin{eg}\label{eg:special_linear_group_as_a_subgroup}
   Clearly, $SL_n(\mathbb{R}) \subseteq GL_n(\mathbb{R})$. Note that the identity matrix $I$ must be in $SL_n(\mathbb{R})$ since $\det I = 1$. Also, $\forall A, B \in SL_n(\mathbb{R})$, we have that
   \begin{equation*}
     \det AB = \det A \det B = 1
@@ -1212,6 +1212,566 @@ Recall the definition of a cyclic groups.
 % section subgroups_continued_3 (end)
 
 % chapter lecture_7_may_16th_2018 (end)
+
+\chapter{Lecture 8 May 18th 2018}%
+\label{chp:lecture_8_may_18th_2018}
+% chapter lecture_8_may_18th_2018
+
+\section{Subgroups (Continued 4)}%
+\label{sec:subgroups_continued_4}
+% section subgroups_continued_4
+
+\subsection{Cyclic Groups (Continued)}%
+\label{sub:cyclic_groups_continued}
+% subsection cyclic_groups_continued
+
+\begin{note}
+  Consider the converse of \cref{propo:cyclic_groups_are_abelian}: Are abelian groups cyclic? \hlimpo{No!} For example, $K_4 \cong C_2 \times C_2$ is abelian but not cyclic, since no one element can generate the entire group.
+\end{note}
+
+\begin{propo}[Subgroups of Cyclic Groups are Cyclic]
+\label{propo:subgroups_of_cyclic_groups_are_cyclic}
+  Every subgroup of a cyclic group is cyclic.
+\end{propo}
+
+\begin{proof}
+  Let $G = \lra{g}$ and $H$ be a subgroup of $G$.
+  \begin{align*}
+    H = \{1\} &\implies H = \lra{1} \\
+    H \neq \{1\} & \implies \exists k \neq 0 \in \mathbb{Z} \enspace g^k \in H \\
+                 & \implies g^{-k} \in H \quad (\because H \text{ is a group })
+  \end{align*}
+  We may assume that $k \in \mathbb{N}$. By the \hlnotea{Well Ordering Principle}, let $m \in \mathbb{N}$ be the smallest positive integer such that $g^m \in H$. We will now show that $H = \lra{g^m}$.
+
+  \begin{align*}
+    g^m \in H &\implies \lra{g^m} \subseteq H \\
+    \because H \subseteq G = \lra{g} &\quad \forall h \in H \; \exists k \in \mathbb{Z} \; h = g^k \\
+    \hlnotea{Division Algorithm} &: \exists q, r \in \mathbb{Z} \; 0 \leq r < m \quad k = mq + r \\
+    h = g^k \implies g^r = g^{k - mq} &= g^k (g^m)^{-q} = g^k (1) \in H \\
+    r \neq 0 \implies \exists 0 < r < m &\quad g^r \in H \quad \text{\Lightning} \quad m \text{ is the smallest +ve integer } \\
+    \implies g^k \in \lra{g^m} & \implies H \subseteq \lra{g^m}
+  \end{align*}
+  Finally,
+  \begin{equation*}
+    \lra{g^m} \subseteq H \, \land \, H \subseteq \lra{g^m} &\implies H = \lra{g^m}
+  \end{equation*}\qed
+\end{proof}
+
+\begin{propo}[Other generators in the same group]
+\label{propo:other_generators_in_the_same_group}
+  Let $G = \lra{g}$ with $o(g) = n \in \mathbb{N}$. We have
+\marginnote{If we have $k$ such that $g^k \in G$, and $k$ and $n$ are coprimes, then $g^k$ is also a generator of $G$.}
+  \begin{equation*}
+    G = \lra{g^k} \iff \gcd(k, n) = 1
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  For $(\implies)$,
+  \begin{align*}
+    G = \lra{g^k} &\implies g \in \lra{g^k} \implies \exists x \in \mathbb{Z} \quad g = g^{kx} \\
+      &\implies 1 = g^{kx - 1} \implies n \, | \, (kx - 1) \quad (\because \cref{propo:properties_of_elements_of_finite_order}) \\
+      &\implies \exists y \in \mathbb{Z} \quad kx - 1 = ny \quad (\because \hlnotea{Division Algorithm}) \\
+      &\implies 1 = kx + ny
+  \end{align*}
+  Then
+  \begin{gather*}
+    \because 1 \, | \, kx \enspace \land \enspace 1 \, | \, ny \enspace \land \enspace 1 = kx + ny \\
+    \gcd(k, n) = 1 \qquad (\because \hlnotea{gcd Characterization})
+  \end{gather*}
+
+  For $(\impliedby)$, note that $g \in G \implies \lra{g^k} \subseteq G$. It suffices to show that $G \subseteq \lra{g^k}$, i.e. $g \in \lra{g^k}$.
+  \begin{align*}
+    \gcd(k, n) = 1 &\implies \exists x, y \in \mathbb{Z} \enspace 1 = kx + ny \quad (\because \hlnotea{Bezout's Lemma}) \\
+        &\implies g = g^1 = g^{kx + ny} = (g^k)^x (g^n)^y = (g^k)^x \in \lra{g^k}
+  \end{align*}\qed
+\end{proof}
+
+\begin{thm}[Fundamental Theorem of Finite Cyclic Groups]
+\label{thm:fundamental_theorem_of_finite_cyclic_groups}
+  \marginnote{This is a significant result that classifies the structure of a cyclic group (hence its name). The theorem tells us that for a group with finite order, it has only finitely many subgroups, and the order of each of these subgroups are multiples of $n$. Inversely, there are no subgroups of $G$ where its order is some integer that does not divide $n$.
+  
+\noindent  \hlimpo{Note:} It is clear that $d \in \mathbb{N}$ and $d \leq n$.
+
+In a sense, this theorem is more powerful than \cref{propo:subgroups_of_cyclic_groups_are_cyclic}.
+  }
+  Let $G = \lra{g}$ with $o(g) = n \in \mathbb{N}$.
+  \begin{enumerate}
+    \item $H$ is a subgroup of $G \implies \exists d \in \mathbb{N} \enspace d \, | \, n \quad H = \lra{g^d} \implies \abs{H} \, | \, n$.
+    \item $k \, | \, n \implies \lra{g^{\frac{k}{n}}}$ is the unique subgroup of $G$ of order $k$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Note
+      \begin{equation*}
+        \cref{propo:subgroups_of_cyclic_groups_are_cyclic} \implies \exists m \in \mathbb{N} \enspace H = \lra{g^m} 
+      \end{equation*}
+      Let $d = \gcd(m, n)$. Want to show that $H = \lra{g^d}$.
+      \begin{align*}
+        d = \gcd(m, n) &\implies d \, | \, m \implies \exists k \in \mathbb{Z} \enspace m = dk \\
+          &\implies g^m = g^{dk} = (g^d)^k \in \lra{g^d} \implies H \subseteq \lra{g^d} \\
+        d = \gcd(m, n) &\implies \exists x, y \in \mathbb{Z} \quad d = mx + ny \quad (\because \hlnotea{Bezout's Lemma}) \\
+          &\implies g^d = g^{mx + ny} = (g^m)^x (g^n)^y = (g^m)^x (1) \in H \\
+          &\implies \lra{g^d} \subseteq H \\
+          &\therefore H = \lra{g^d}
+      \end{align*}
+      Note: $d = \gcd(m, n) \implies d \, | \, n \implies \abs{H} = o(g^d) = \frac{n}{d}$ \\ $\because \cref{propo:orders_of_powers_of_the_element}$. Thus $\abs{H} \, | \, n$.
+
+    \item Let $K$ be a subgroup of $G$ with order $k$ such that $k \, | \, n$. By 1, we have $K = \lra{g^d}$ with $d \, | \, n$. Note that
+    \begin{equation*}
+      k = \abs{K} \overset{(1)}{=} o(g^d) \overset{(2)}{=} \frac{n}{d}
+    \end{equation*}
+    where $(1)$ is by \cref{propo:properties_of_elements_of_finite_order} and $(2)$ is by \cref{propo:orders_of_powers_of_the_element}. Thus $d = \frac{n}{k}$ and $K = \lra{g^{\frac{n}{k}}}$
+  \end{enumerate}\qed
+\end{proof}
+
+% subsection cyclic_groups_continued (end)
+
+% section subgroups_continued_4 (end)
+
+% chapter lecture_8_may_18th_2018 (end)
+
+\chapter{Lecture 9 May 22nd 2018}%
+\label{chp:lecture_9_may_22nd_2018}
+% chapter lecture_9_may_22nd_2018
+
+\section{Subgroups (Continued 5)}%
+\label{sec:subgroups_continued_5}
+% section subgroups_continued_5
+
+\subsection{Examples of Non-Cyclic Groups}%
+\label{sub:examples_of_non_cyclic_groups}
+% subsection examples_of_non_cyclic_groups
+
+\begin{eg}
+  The Klein $4$-group is
+  \begin{equation*}
+    K_4 = \{1, a, b, c\} \enspace \text{where } a^2 = b^2 = c^2 = 1 \text{ and } ab = c.
+  \end{equation*}
+  We may also write
+  \begin{equation*}
+    K_4 = \lra{ a, b : a^2 = 1 = b^2, \, ab = ba }.
+  \end{equation*}
+  Note that we can replace $( a, \, b )$ by $( a, \, c )$ or $( b, \, c )$.
+\end{eg}
+
+\begin{eg}
+  The symmetric group of degree $3$ is
+  \begin{equation*}
+    S_3 = \{\epsilon, \sigma, \sigma^2, \tau, \tau \sigma, \tau \sigma^2 \}
+  \end{equation*}
+  where $\sigma^3 = \epsilon = \tau^2$ and $\sigma \tau = \tau \sigma^2$. We may also express $S_3$ as
+  \begin{equation*}
+    S_3 = \lra{ \sigma, \tau : \sigma^3 = \epsilon = \tau^2, \, \sigma \tau = \tau \sigma^2 }
+  \end{equation*}
+\end{eg}
+
+\begin{defn}[Dihedral Group]\index{Dihedral Group}
+\label{defn:dihedral_group}
+\marginnote{Recall from Assignment 1 that the dihedral group is a set of rigid motions for transforming a regular polygon back to its original position while changing the index of its vertices.}
+  For $n \geq 2$, the \hlnoteb{dihedral group} of order $2n$ is
+  \begin{equation*}
+    D_{2n} = \{1, a, ..., a^{n - 1}, b, ba, ..., b^{n - 1}\ }
+  \end{equation*}
+  where $a^n = 1 = b^2$ and $aba = b$. Note that $a$ represents a rotation of $\frac{2 \pi}{n}$ radians, and $b$ represents a reflection through the $x$-axis
+\end{defn}
+
+\begin{eg}
+  We may write the dihedral group as
+  \begin{equation*}
+    D_{2n} = \lra{ a, b : a^n = 1 = b^2, \, aba = b }
+  \end{equation*}
+\end{eg}
+
+\begin{ex}
+  Prove the following:
+  \begin{enumerate}
+    \item $D_4 \cong K_4$
+    \item $D_6 \cong S_3$
+  \end{enumerate}
+\end{ex}
+
+% subsection examples_of_non_cyclic_groups (end)
+
+% section subgroups_continued_5 (end)
+
+\section{Normal Subgroup}%
+\label{sec:normal_subgroup}
+% section normal_subgroup
+
+\subsection{Homomorphism and Isomorphism}%
+\label{sub:homomorphism_and_isomorphism}
+% subsection homomorphism_and_isomorphism
+
+\begin{defn}[Homomorphism]\index{Homomorphism}
+\label{defn:homomorphism}
+  Let $G, H$ be groups. A mapping
+  \begin{equation*}
+    \alpha : G \to H
+  \end{equation*}
+  is called a \hlnoteb{homomorphism} if $\forall a, b \in G$,\sidenote{
+  Note that $ab$ uses the operation of $G$ while $\alpha(a)\alpha(b)$ uses the operation of $H$.}
+  \begin{equation*}
+    \alpha(ab) = \alpha(a)\alpha(b).
+  \end{equation*}
+\end{defn}
+
+\begin{eg}[A classical example]\label{eg:homomorphism_classical_eg}
+  Consider the determinant map:\marginnote{Note that $\mathbb{R}^*$ is the set of real numbers that has a multiplicative inverse.}
+  \begin{equation*}
+    \det : GL_n(\mathbb{R}) \to \mathbb{R}^* \quad \text{given by } A \to \det A
+  \end{equation*}
+  Since
+  \marginnote{This is a classical example to show a homomorphism, especially since the group $GL_n(\mathbb{R})$ uses \hlnoteb{matrix multiplication} while $\mathbb{R}^*$ uses regular \hlnoteb{arithmetic multiplication}.}
+  \begin{equation*}
+    \det AB = \det A \det B
+  \end{equation*}
+  we have that the determinant map is a homomorphism.
+\end{eg}
+
+\begin{propo}[Properties of Homomorphism]
+\label{propo:properties_of_homomorphism}
+  Let $\alpha: G \to H$ be a group homomorphism. Then
+  \begin{enumerate}
+    \item $\alpha(1_G) = 1_H$
+    \item $\forall g \in G \enspace \alpha(g^{-1}) = \alpha(g)^{-1}$
+    \item $\forall g \in G \; \forall k \in \mathbb{Z} \enspace \alpha(g^k) = \alpha(g)^k$
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Note that
+      \begin{equation*}
+        \alpha(1_G) \alpha(g) = \alpha(1_G \cdot g) = \alpha(g) = \alpha(g \cdot 1_G) = \alpha(g) \alpha(1_G)
+      \end{equation*}
+      Thus it must be that $\alpha(1_G) = 1_H$ for only the identity of $H$ satisfies this equation.
+
+    \item Since $H$ is a group, we know that
+      \begin{equation*}
+        1_H = \alpha(g)\alpha(g)^{-1}.
+      \end{equation*}
+      Now with part 1, we have that
+      \begin{equation*}
+        \alpha(g)\alpha(g^{-1}) = \alpha(gg^{-1}) = \alpha(1_G) = 1_H = \alpha(g)\alpha(g)^{-1}.
+      \end{equation*}
+      By \cref{propo:cancellation_laws}, we have that $\alpha(g^{-1}) = \alpha(g)^{-1}$.
+
+    \item This is simply a result of applying the definition repeatedly, which we can then perform an induction procedure to complete the proof.\qed
+  \end{enumerate}
+\end{proof}
+
+\begin{defn}[Isomorphism]\index{Isomorphism}
+\label{defn:isomorphism}
+  Let $G, H$ be groups. Consider a mapping
+  \begin{equation*}
+    \alpha: G \to H
+  \end{equation*}
+  We say that $\alpha$ is an \hlnoteb{isomorphism} if it is a homomorphism and bijective.
+
+  If $\alpha$ is an isomorphism, we say that $G$ is \hldefn{isomorphic to} to $H$, or that $G$ and $H$ are \hldefn{isomorphic}, and denote that by $G \cong H$.
+\end{defn}
+
+\begin{propo}[Isomorphism as an Equivalence Relation]
+\label{propo:isomorphism_as_an_equivalence_relation}\index{Equivalence Relation}
+  \begin{enumerate}
+    \item \hlnotea{(Reflexive)} The identity map $G \to G$ is an isomorphism.
+    \item \hlnotea{(Symmetric)} If $\sigma : G \to H$ is an isomorphism, then the inverse map $\sigma^{-1} : H \to G$ is also an isomorphism.
+    \item \hlnotea{(Transitive)} If $\sigma : G \to H$ and $\tau : H \to K$, then the composition map $\tau \sigma : G \to K$ is also an isomorphism.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item The identity map is clearly bijective. For all $g_1, g_2 \in G$, we have that
+      \begin{equation*}
+        \alpha(g_1 g_2) = g_1 g_2 = \alpha(g_1)\alpha(g_2).
+      \end{equation*}
+      Thus the identity map is a homomorphism, and hence an isomorphism.
+    
+    \item Since $\sigma$ is a bijective map, its inverse $\sigma^{-1}$ exists and is also a bijective map. Since $\sigma$ is bijective, we have that
+      \begin{equation*}
+        \forall h_1, h_2 \in H \enspace \exists ! g_1, g_2 \in G \quad \sigma(g_1) = h_1, \, \sigma(g_2) = h_2.
+      \end{equation*}
+      Note that since $\sigma$ has a bijective inverse, we also have
+      \begin{equation*}
+        g_1 = \sigma^{-1}(h_1) \text{ and } g_2 = \sigma^{-1}(h_2).
+      \end{equation*}
+      Then since $\sigma$ is a homomorphism,
+      \begin{align*}
+        \sigma^{-1}(h_1 h_2) &= \sigma^{-1}(\sigma(g_1)\sigma(g_2)) = \sigma^{-1}(\sigma(g_1 g_2)) \\
+          &= g_1 g_2 = \sigma^{-1}(h_1) \sigma^{-1}(h_2).
+      \end{align*}
+
+    \item We know that the composition map of two bijective map is bijective. Let $g_1, g_2 \in G$, then since both $\tau$ and $\sigma$ are homomorphisms
+      \begin{equation*}
+        \tau \sigma (g_1 g_2) = \tau( \sigma(g_1) \sigma(g_2) ) = \tau \sigma(g_1) \tau \sigma(g_2),
+      \end{equation*}
+      where we note that $\sigma(g_1), \sigma(g_2) \in H$.
+\end{enumerate}\qed
+\end{proof}
+
+\begin{eg}
+  Let $\mathbb{R}^+ = \{r \in \mathbb{R} : r \geq 0 \}$. Show that $(\mathbb{R}, +) \cong (\mathbb{R}^+, \cdot)$.
+
+  \begin{solution}
+    Consider the map
+    \begin{equation*}
+      \alpha : (\mathbb{R}, +) \to (\mathbb{R}^+, \cdot) \quad r \mapsto e^r,
+    \end{equation*}
+    where $e$ is the natural exponent. Note that the exponential map from $\mathbb{R}$ to $\mathbb{R}^+$ is bijective\sidenote{The image of the map covers all positive real numbers while taking all real numbers, which is the perfect candidate as a map here.}. Also, $\forall r, s \in \mathbb{R}$ we have that
+    \begin{equation*}
+      \alpha(r + s) = e^{r + s} = e^r e^s = \alpha(r) \alpha(s).
+    \end{equation*}
+    Therefore, $\alpha$ is an isomorphism and $(\mathbb{R}, +) \cong (\mathbb{R}^+, \cdot)$.\qed
+  \end{solution}
+\end{eg}
+
+\begin{eg}
+  Show that $(\mathbb{Q}, +) \not\cong (\mathbb{Q}^*, \cdot)$.
+
+  \begin{solution}
+    Suppose, for contradiction, that $\tau : (\mathbb{Q}, +) \to (\mathbb{Q}^*, \cdot)$ is an isomorphism. In particular, we have that $\tau$ is onto. Then $\exists q \in \mathbb{Q}$ such that $\tau(q) = 2$. Let $\tau(\frac{q}{2}) = \alpha$. Since $\tau$ is an isomorphism, we have
+    \begin{equation*}
+      \alpha^2 = \tau(\frac{q}{2}) \tau(\frac{q}{2}) = \tau(\frac{q}{2} + \frac{q}{2}) = \tau(q) = 2.
+    \end{equation*}
+    But that implies that $\alpha = \sqrt{2}$, which is clearly not rational. Thus, we know that there is no such $\tau$ and
+    \begin{equation*}
+      (\mathbb{Q}, +) \not\cong (\mathbb{Q}^*, \cdot)
+    \end{equation*}
+    as required. \qed
+  \end{solution}
+\end{eg}
+
+% subsection homomorphism_and_isomorphism (end)
+
+\subsection{Cosets and Lagrange's Theorem}%
+\label{sub:cosets_and_lagrange_s_theorem}
+% subsection cosets_and_lagrange_s_theorem
+
+\begin{defn}[Coset]\index{Coset}
+\label{defn:coset}
+  Let $H$ be a subgroup of a group $G$.
+  \begin{equation*}
+    \forall a \in G \quad Ha = \{ha : h \in H\} \quad \text{is the right coset of H generated by } a
+  \end{equation*}
+  and
+  \begin{equation*}
+    \forall a \in G \quad aH = \{ah : h \in H\} \quad \text{is the left coset of H generated by } a
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Note that $1H = H = H1$. Also, since $a1 = a$ and $1 \in H$, we have that $a \in aH$, and similarly so for $a \in Ha$.
+
+  In general, $aH$ and $Ha$ are not subgroups of $G$. See example
+
+  Also, in general, $aH \neq Ha$, since not all groups are abelian.
+\end{note}
+
+\begin{propo}[Properties of Cosets]
+\label{propo:properties_of_cosets}
+  Let $H$ be a subgroup of $G$, and let $a, b \in G$. Then
+  \begin{enumerate}
+    \item $Ha = Hb \iff ab^{-1} \in H$. In particular, $Ha = H \iff a \in H$.
+    \item $a \in Hb \implies Ha = Hb$.
+    \item $Ha = Hb \veebar Ha \cap Hb = \emptyset$.\sidenote{$\veebar \equiv $ XOR} Then the distinct right cosets of $H$ forms a partition of $G$.\sidenote{Note that this is true because by definition, we iterate over all elements of $G$ to construct the cosets of the subgroup $H$. The earlier part of this statement implies that cosets must be distinct (otherwise, they are the same set), and so if we take the union of these cosets, by iterating through all elements of $G$, we get that
+    \begin{equation*}
+      \bigcup_{a \in G} Ha = G.
+    \end{equation*}
+    Summarizing the above argument, we observe that the distinct cosets partitions $G$.
+    }
+  \end{enumerate}
+  We can create an analogued version of this proposition for the left cosets.
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item For $(\implies)$,
+      \begin{align*}
+        Ha = Hb &\implies a = 1a \in Ha = Hb \\
+                &\implies \exists h \in H \enspace a = hb \\
+                &\implies ab^{-1} = h \in H.
+      \end{align*}
+      For $(\impliedby)$,
+      \begin{align*}
+        ab^{-1} \in H &\implies \forall h \in H \enspace ha = h(ab^{-1})b \in Hb \\
+            &\implies Ha \subseteq Hb \\
+        ab^{-1} \in H &\implies (ab^{-1})^{-1} = ba^{-1} \in H \\
+            &\implies \forall h \in H \enspace hb = h(ba^{-1})a \in Ha \\
+            &\implies Hb \subseteq Ha
+      \end{align*}
+      Let $b = 1$. Then
+      \begin{equation*}
+        Ha = H \iff a \in H \qquad \because 1^{-1} = 1
+      \end{equation*}
+
+    \item Note
+      \begin{equation*}
+        a \in Hb \implies \exists h \in H \enspace a = hb \implies ab^{-1} \in H \overset{\text{by 1}}{\implies} Ha = Hb
+      \end{equation*}
+
+    \item Trivially, if $Ha \cap Hb = \emptyset$, we are done.
+      \begin{align*}
+        &Ha \cap Hb \neq \emptyset \\ 
+        &\implies \exists x \in Ha \cap Hb \\
+        &\implies ( x \in Ha \overset{\text{by 1}}{\implies} Hx = Hb ) \, \land \, ( x \in Hb \overset{\text{by 1}}{\implies} Hx = Hb ) \\
+        &\implies Ha = Hb
+      \end{align*}
+  \end{enumerate}\qed
+\end{proof}
+
+By \cref{propo:properties_of_cosets}, we have that $G$ can be written as a disjoint union of cosets of a subgroup $H$. We now define the following terminology that we shall use for the upcoming content.
+
+\begin{defn}[Index]\index{Index}
+\label{defn:index}
+  Let $H$ be a subgroup of a group $G$. We call the number of disjoint cosets of $H$ in $G$ as the \hlnoteb{index} of $H$ in $G$, and denote this number by $[G : H]$.
+\end{defn}
+
+% subsection cosets_and_lagrange_s_theorem (end)
+
+% section normal_subgroup (end)
+
+% chapter lecture_9_may_22nd_2018 (end)
+
+\chapter{Lecture 10 May 23rd 2018}%
+\label{chp:lecture_10_may_23rd_2018}
+% chapter lecture_10_may_23rd_2018
+
+\section{Normal Subgroup (Continued)}%
+\label{sec:normal_subgroup_continued}
+% section normal_subgroup_continued
+
+\subsection{Cosets and Lagrange's Theorem (Continued)}%
+\label{sub:cosets_and_lagrange_s_theorem_continued}
+% subsection cosets_and_lagrange_s_theorem_continued
+
+\begin{thm}[Lagrange's Theorem]
+\index{Lagrange's Theorem}
+\label{thm:lagrange_s_theorem}
+  Let $H$ be a subgroup of a \hlimpo{finite} group $G$. Then
+  \begin{equation*}
+    \abs{H} \, \Big| \, \abs{G} \text{ and } [G : H] = \frac{\abs{G}}{\abs{H}}
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Since $G$ is finite, there can only be finitely many cosets of $H$. Let $k = [G : H]$ and $Ha_1, Ha_2, ..., Ha_k$ be the distinct right cosets of $H$ in $G$. By \cref{propo:properties_of_cosets}, we have that these cosets partition $G$, i.e.
+  \begin{equation*}
+    G = \bigcup_{i = 1}^{k} Ha_i.
+  \end{equation*}
+  Note that by the definition of a right coset, the map 
+  \begin{equation*}
+    H \to Hb \; \text{ defined by } \; h \mapsto hb
+  \end{equation*}
+  is a surjection from $H$ to $Hb$. By \hyperref[propo:cancellation_laws]{Cancellation Laws}, the map is injective, since if $hb_1 = hb_2$, then $b_1 = b_2$. Therefore, for $i = 1, ..., k$,
+  \begin{equation*}
+    \abs{H} = \abs{Ha_i}.
+  \end{equation*}
+  Then we have
+  \begin{equation*}
+    \abs{G} = k \abs{H} \implies \abs{H} \, \Big| \, \abs{G} \, \land \, [G : H] = k = \frac{\abs{G}}{\abs{H}}
+  \end{equation*}\qed
+\end{proof}
+
+\begin{crly}
+\label{crly:lagrange_s_theorem_crly1}
+  \begin{enumerate}
+    \item If $G$ is a finite group and $g \in G$, then $o(g) \, \Big| \, G$.
+    \item If $G$ is a finite group and $\abs{G} = n$, then $g^n = 1$.
+  \end{enumerate}
+\end{crly}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Let $H = \lra{g}$. Then by \autoref{thm:lagrange_s_theorem}, $o(g) = \abs{H} \, \Big| \, \abs{G}$.
+
+    \item For some $g \in G$, let $o(g) = m \in \mathbb{Z} \setminus \{0\}$. Then by 1, $m \, | \, n$ and so $g^n = (g^m)^{\frac{n}{m}} = 1$.
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{note}
+  Let $n \in \mathbb{N} \setminus \{1\}$. \hldefn{Euler's Totient Function}, or more generally written as \hldefn{Euler's $\phi$-function} is defined as
+  \begin{equation}\label{eq:euler_s_totient_function}
+    \phi(n) \equiv \Big| \big\{k \in \{1, ..., n - 1\} \, : \, \gcd(k, n) = 1 \big\} \Big|.
+  \end{equation}
+  Note that the set $\mathbb{Z}_n^*$ under multiplication has a similar definition to the set on the RHS, since the only numbers from $1$ to $n$ that has an inverse are those that are coprime with $n$. Thus $\phi(n) = \abs{\mathbb{Z}_n^*}$.
+
+  With \cref{crly:lagrange_s_theorem_crly1}, we have \hldefn{Euler's Theorem} that states that
+  \begin{equation}\label{eq:euler_s_theorem}
+    \forall a \in \mathbb{Z} \enspace \gcd(a, n) = 1 \implies a^{\phi(n)} \equiv 1 \mod n.
+  \end{equation}
+  If $n = p$ where $p$ is some prime number, then Euler's Theorem implies \hldefn{Fermat's Little Theorem}, i.e. $a^{p - 1} \equiv 1 \mod p$.
+\end{note}
+
+\begin{crly}
+\label{crly:lagrange_s_theorem_crly2}
+  If $p$ is prime, then every group $G$ of order $p$ is cyclic. In fact, $g = \lra{g}$ fpr $g \neq 1 \in G$. Hence, the only subgroup of $G$ are $\{1\}$ and $G$ itself.
+\end{crly}
+
+\begin{proof}
+  \hlwarn{There's something that I'd like to make sure before putting down this proof}
+\end{proof}
+
+\begin{crly}
+\label{crly:lagrange_s_theorem_crly3}
+  Let $H$ and $K$ be finite subgroups of $G$. If $\gcd(\abs{H}, \abs{K}) = 1$, then $H \cap K = \{1\}$.
+\end{crly}
+
+\begin{proof}
+  Since $H \cap K$ is a subgroup of $H$ and of $K$, by \autoref{thm:lagrange_s_theorem}, $\abs{H \cap K} \Big| \abs{H} \, \land \, \abs{H \cap K} \Big| \abs{K}$. By assumption that $\gcd(\abs{H}, \abs{K}) = 1$, we have\sidenote{$\abs{H \cap K}$ is a common divisor for $\abs{H}$ and $\abs{K}$. But $\gcd(\abs{H}, \abs{K}) = 1$} that $\abs{H \cap K} = 1$, and hence $\abs{H \cap K} = \{ 1 \}$. \qed
+\end{proof}
+
+% subsection cosets_and_lagrange_s_theorem_continued (end)
+
+\subsection{Normal Subgroup}%
+\label{sub:normal_subgroup}
+% subsection normal_subgroup
+
+We have seen that given $H$ is a subgroup of a group $G$ and $g \in G$, $gH$ and $Hg$ are generally not the same.
+
+\begin{defn}[Normal Subgroup]\index{Normal Subgroup}
+\label{defn:normal_subgroup}
+  Let $H$ be a subgroup of a group $G$. If $\forall g \in G$, we have $Hg = gH$, then we say that $H$ is a \hlnoteb{normal subgroup} of $G$, and write
+  \begin{equation*}
+    H \triangleleft G
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  $\{1\} \triangleleft G$ and $G \triangleleft G$.
+\end{eg}
+
+\begin{eg}
+  The \hyperref[defn:center_of_a_group]{center}, $Z(G)$, of a group $G$ is an abelian group. By \cref{defn:normal_subgroup},
+  \begin{equation*}
+    Z(G) \triangleleft G.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  If $G$ is abelian, then every subgroup of $G$ is normal in $G$.
+\end{eg}
+
+\begin{propo*}[Normality Test]
+  Let $H$ be a subgroup of $G$. The following are equivalent:
+  \begin{enumerate}
+    \item $H \triangleleft G$;
+    \item $\forall g \in G \quad gHg^{-1} \subseteq H$;
+    \item $\forall g \in G \quad gHg^{-1} = H$ \sidenote{This means that
+    \begin{equation*}
+      H \triangleleft G \iff H \text{ is the only conjugate of } H
+    \end{equation*}}
+  \end{enumerate}
+\end{propo*}
+
+% subsection normal_subgroup (end)
+
+% section normal_subgroup_continued (end)
+
+% chapter lecture_10_may_23rd_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
