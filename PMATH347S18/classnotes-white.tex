@@ -1,0 +1,93 @@
+\documentclass[notoc,notitlepage]{tufte-book}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\renewcommand{\baselinestretch}{1.1}
+
+\usepackage{tikz-cd}
+\input{latex-classnotes-preamble.tex}
+
+\title{PMATH347S18 - Groups \& Rings}
+\author{Johnson Ng}
+
+% Header formatting
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\makeatletter
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO]{\textsl{\@title} \enspace \thepage}
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark \enspace - \enspace \rightmark}}
+\makeatother
+
+\pagecolor{white}
+\color{base16-eighties-dark}
+
+\hypersetup{
+	colorlinks=false,
+  allbordercolors=base16-eighties-magenta,
+  pdfborderstyle={/S/U/W 1}
+}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\maketitle
+\hypersetup{pageanchor=true}
+\tableofcontents
+
+\chapter*{List of Definitions}
+\theoremlisttype{all}
+\listtheorems{defn}
+
+\chapter*{List of Theorems}
+\theoremlisttype{allname}
+\listtheorems{axiom,lemma,thm,crly,propo}
+
+\chapter*{Foreword}%
+% chapter 
+
+\section*{Usage}%
+% section 
+
+\begin{itemize}
+  \item Notes are presented in two columns: main notes on the left, and sidenotes on the right. Main notes will have a larger margin.
+  \item The following is the color code for the notes: \\
+    \begin{tabular}{l l}
+    \color{base16-eighties-blue}{Blue} & Definitions \\
+    \hlimpo{Red}                       & Important points \\
+    \hlwarn{Yellow}                    & Points to watch out for / comment for incompletion \\
+    \hlnotea{Green}                    & External definitions, theorems, etc. \\
+    \hlnoteb{Light Blue}               & Regular highlighting \\
+    \hlnotec{Brown}                    & Secondary highlighting
+    \end{tabular}
+  \item The following is the color code for boxes, that begin and end with a line of the same color: \\
+    \begin{tabular}{l l}
+    \color{base16-eighties-blue}{Blue}       & Definitions \\
+    \hlimpo{Red}                             & Warning \\
+    \hlwarn{Yellow}                          & Notes, remarks, etc. \\
+    \hlnotec{Brown}                          & Proofs \\
+    \textcolor{base16-eighties-magenta}{Magenta} & Theorems, Propositions, Lemmas, etc.
+    \end{tabular}
+  \item Hyperlinks are underlined in \textcolor{base16-eighties-magenta}{magenta}. If your PDF reader supports it, you can follow the links to either be redirected to an external website, or a theorem, definition, etc., in the same document. Note that this is only reliable if you have the full set of notes as a single document, which you can find on: \\ \url{https://japorized.github.io/TeX_notes}
+\end{itemize}
+
+\input{lectures/lec01.tex}
+\input{lectures/lec02.tex}
+\input{lectures/lec03.tex}
+\input{lectures/lec04.tex}
+\input{lectures/lec05.tex}
+\input{lectures/lec06.tex}
+\input{lectures/lec07.tex}
+\input{lectures/lec08.tex}
+\input{lectures/lec09.tex}
+\input{lectures/lec10.tex}
+\input{lectures/lec11.tex}
+
+\nobibliography*
+\bibliography{bibliography}
+
+\printindex
+
+\input{list_of_symbols.tex}
+
+\end{document}

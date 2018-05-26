@@ -1,0 +1,136 @@
+\chapter{Lecture 10 May 23rd 2018}%
+\label{chp:lecture_10_may_23rd_2018}
+% chapter lecture_10_may_23rd_2018
+
+\section{Normal Subgroup (Continued)}%
+\label{sec:normal_subgroup_continued}
+% section normal_subgroup_continued
+
+\subsection{Cosets and Lagrange's Theorem (Continued)}%
+\label{sub:cosets_and_lagrange_s_theorem_continued}
+% subsection cosets_and_lagrange_s_theorem_continued
+
+\begin{thm}[Lagrange's Theorem]
+\index{Lagrange's Theorem}
+\label{thm:lagrange_s_theorem}
+  Let $H$ be a subgroup of a \hlimpo{finite} group $G$. Then
+  \begin{equation*}
+    \abs{H} \, \Big| \, \abs{G} \text{ and } [G : H] = \frac{\abs{G}}{\abs{H}}
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Since $G$ is finite, there can only be finitely many cosets of $H$. Let $k = [G : H]$ and $Ha_1, Ha_2, ..., Ha_k$ be the distinct right cosets of $H$ in $G$. By \cref{propo:properties_of_cosets}, we have that these cosets partition $G$, i.e.
+  \begin{equation*}
+    G = \bigcup_{i = 1}^{k} Ha_i.
+  \end{equation*}
+  Note that by the definition of a right coset, the map 
+  \begin{equation*}
+    H \to Hb \; \text{ defined by } \; h \mapsto hb
+  \end{equation*}
+  is a surjection from $H$ to $Hb$. By \hyperref[propo:cancellation_laws]{Cancellation Laws}, the map is injective, since if $hb_1 = hb_2$, then $b_1 = b_2$. Therefore, for $i = 1, ..., k$,
+  \begin{equation*}
+    \abs{H} = \abs{Ha_i}.
+  \end{equation*}
+  Then we have
+  \begin{equation*}
+    \abs{G} = k \abs{H} \implies \abs{H} \, \Big| \, \abs{G} \, \land \, [G : H] = k = \frac{\abs{G}}{\abs{H}}
+  \end{equation*}\qed
+\end{proof}
+
+\begin{crly}
+\label{crly:lagrange_s_theorem_crly1}
+  \begin{enumerate}
+    \item If $G$ is a finite group and $g \in G$, then $o(g) \, \Big| \, G$.
+    \item If $G$ is a finite group and $\abs{G} = n$, then $g^n = 1$.
+  \end{enumerate}
+\end{crly}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Let $H = \lra{g}$. Then by \autoref{thm:lagrange_s_theorem}, $o(g) = \abs{H} \, \Big| \, \abs{G}$.
+
+    \item For some $g \in G$, let $o(g) = m \in \mathbb{Z} \setminus \{0\}$. Then by 1, $m \, | \, n$ and so $g^n = (g^m)^{\frac{n}{m}} = 1$.
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{note}
+  Let $n \in \mathbb{N} \setminus \{1\}$. \hldefn{Euler's Totient Function}, or more generally written as \hldefn{Euler's $\phi$-function} is defined as
+  \begin{equation}\label{eq:euler_s_totient_function}
+    \phi(n) \equiv \Big| \big\{k \in \{1, ..., n - 1\} \, : \, \gcd(k, n) = 1 \big\} \Big|.
+  \end{equation}
+  Note that the set $\mathbb{Z}_n^*$ under multiplication has a similar definition to the set on the RHS, since the only numbers from $1$ to $n$ that has an inverse are those that are coprime with $n$. Thus $\phi(n) = \abs{\mathbb{Z}_n^*}$.
+
+  With \cref{crly:lagrange_s_theorem_crly1}, we have \hldefn{Euler's Theorem} that states that
+  \begin{equation}\label{eq:euler_s_theorem}
+    \forall a \in \mathbb{Z} \enspace \gcd(a, n) = 1 \implies a^{\phi(n)} \equiv 1 \mod n.
+  \end{equation}
+  If $n = p$ where $p$ is some prime number, then Euler's Theorem implies \hldefn{Fermat's Little Theorem}, i.e. $a^{p - 1} \equiv 1 \mod p$.
+\end{note}
+
+\begin{crly}
+\label{crly:lagrange_s_theorem_crly2}
+  If $p$ is prime, then every group $G$ of order $p$ is cyclic. In fact, $g = \lra{g}$ fpr $g \neq 1 \in G$. Hence, the only subgroup of $G$ are $\{1\}$ and $G$ itself.
+\end{crly}
+
+\begin{proof}
+  \hlwarn{There's something that I'd like to make sure before putting down this proof}
+\end{proof}
+
+\begin{crly}
+\label{crly:lagrange_s_theorem_crly3}
+  Let $H$ and $K$ be finite subgroups of $G$. If $\gcd(\abs{H}, \abs{K}) = 1$, then $H \cap K = \{1\}$.
+\end{crly}
+
+\begin{proof}
+  Since $H \cap K$ is a subgroup of $H$ and of $K$, by \autoref{thm:lagrange_s_theorem}, $\abs{H \cap K} \Big| \abs{H} \, \land \, \abs{H \cap K} \Big| \abs{K}$. By assumption that $\gcd(\abs{H}, \abs{K}) = 1$, we have\sidenote{$\abs{H \cap K}$ is a common divisor for $\abs{H}$ and $\abs{K}$. But $\gcd(\abs{H}, \abs{K}) = 1$} that $\abs{H \cap K} = 1$, and hence $\abs{H \cap K} = \{ 1 \}$. \qed
+\end{proof}
+
+% subsection cosets_and_lagrange_s_theorem_continued (end)
+
+\subsection{Normal Subgroup}%
+\label{sub:normal_subgroup}
+% subsection normal_subgroup
+
+We have seen that given $H$ is a subgroup of a group $G$ and $g \in G$, $gH$ and $Hg$ are generally not the same.
+
+\begin{defn}[Normal Subgroup]\index{Normal Subgroup}
+\label{defn:normal_subgroup}
+  Let $H$ be a subgroup of a group $G$. If $\forall g \in G$, we have $Hg = gH$, then we say that $H$ is a \hlnoteb{normal subgroup} of $G$, and write
+  \begin{equation*}
+    H \triangleleft G
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  $\{1\} \triangleleft G$ and $G \triangleleft G$.
+\end{eg}
+
+\begin{eg}
+  The \hyperref[defn:center_of_a_group]{center}, $Z(G)$, of a group $G$ is an abelian group. By \cref{defn:normal_subgroup},
+  \begin{equation*}
+    Z(G) \triangleleft G.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  If $G$ is abelian, then every subgroup of $G$ is normal in $G$.
+\end{eg}
+
+\begin{propononum}[Normality Test]
+  Let $H$ be a subgroup of $G$. The following are equivalent:
+  \begin{enumerate}
+    \item $H \triangleleft G$;
+    \item $\forall g \in G \quad gHg^{-1} \subseteq H$;
+    \item $\forall g \in G \quad gHg^{-1} = H$ \sidenote{This means that
+    \begin{equation*}
+      H \triangleleft G \iff H \text{ is the only conjugate of } H
+    \end{equation*}}
+  \end{enumerate}
+\end{propononum}
+
+% subsection normal_subgroup (end)
+
+% section normal_subgroup_continued (end)
+
+% chapter lecture_10_may_23rd_2018 (end)

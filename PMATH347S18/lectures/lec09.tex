@@ -1,0 +1,302 @@
+\chapter{Lecture 9 May 22nd 2018}%
+\label{chp:lecture_9_may_22nd_2018}
+% chapter lecture_9_may_22nd_2018
+
+\section{Subgroups (Continued 5)}%
+\label{sec:subgroups_continued_5}
+% section subgroups_continued_5
+
+\subsection{Examples of Non-Cyclic Groups}%
+\label{sub:examples_of_non_cyclic_groups}
+% subsection examples_of_non_cyclic_groups
+
+\begin{eg}
+  The Klein $4$-group is
+  \begin{equation*}
+    K_4 = \{1, a, b, c\} \enspace \text{where } a^2 = b^2 = c^2 = 1 \text{ and } ab = c.
+  \end{equation*}
+  We may also write
+  \begin{equation*}
+    K_4 = \lra{ a, b : a^2 = 1 = b^2, \, ab = ba }.
+  \end{equation*}
+  Note that we can replace $( a, \, b )$ by $( a, \, c )$ or $( b, \, c )$.
+\end{eg}
+
+\begin{eg}
+  The symmetric group of degree $3$ is
+  \begin{equation*}
+    S_3 = \{\epsilon, \sigma, \sigma^2, \tau, \tau \sigma, \tau \sigma^2 \}
+  \end{equation*}
+  where $\sigma^3 = \epsilon = \tau^2$ and $\sigma \tau = \tau \sigma^2$. We may also express $S_3$ as
+  \begin{equation*}
+    S_3 = \lra{ \sigma, \tau : \sigma^3 = \epsilon = \tau^2, \, \sigma \tau = \tau \sigma^2 }
+  \end{equation*}
+\end{eg}
+
+\begin{defn}[Dihedral Group]\index{Dihedral Group}
+\label{defn:dihedral_group}
+\marginnote{Recall from Assignment 1 that the dihedral group is a set of rigid motions for transforming a regular polygon back to its original position while changing the index of its vertices.}
+  For $n \geq 2$, the \hlnoteb{dihedral group} of order $2n$ is
+  \begin{equation*}
+    D_{2n} = \{1, a, ..., a^{n - 1}, b, ba, ..., b^{n - 1}\ }
+  \end{equation*}
+  where $a^n = 1 = b^2$ and $aba = b$. Note that $a$ represents a rotation of $\frac{2 \pi}{n}$ radians, and $b$ represents a reflection through the $x$-axis
+\end{defn}
+
+\begin{eg}
+  We may write the dihedral group as
+  \begin{equation*}
+    D_{2n} = \lra{ a, b : a^n = 1 = b^2, \, aba = b }
+  \end{equation*}
+\end{eg}
+
+\begin{ex}
+  Prove the following:
+  \begin{enumerate}
+    \item $D_4 \cong K_4$
+    \item $D_6 \cong S_3$
+  \end{enumerate}
+\end{ex}
+
+% subsection examples_of_non_cyclic_groups (end)
+
+% section subgroups_continued_5 (end)
+
+\section{Normal Subgroup}%
+\label{sec:normal_subgroup}
+% section normal_subgroup
+
+\subsection{Homomorphism and Isomorphism}%
+\label{sub:homomorphism_and_isomorphism}
+% subsection homomorphism_and_isomorphism
+
+\begin{defn}[Homomorphism]\index{Homomorphism}
+\label{defn:homomorphism}
+  Let $G, H$ be groups. A mapping
+  \begin{equation*}
+    \alpha : G \to H
+  \end{equation*}
+  is called a \hlnoteb{homomorphism} if $\forall a, b \in G$,\sidenote{
+  Note that $ab$ uses the operation of $G$ while $\alpha(a)\alpha(b)$ uses the operation of $H$.}
+  \begin{equation*}
+    \alpha(ab) = \alpha(a)\alpha(b).
+  \end{equation*}
+\end{defn}
+
+\begin{eg}[A classical example]\label{eg:homomorphism_classical_eg}
+  Consider the determinant map:\marginnote{Note that $\mathbb{R}^*$ is the set of real numbers that has a multiplicative inverse.}
+  \begin{equation*}
+    \det : GL_n(\mathbb{R}) \to \mathbb{R}^* \quad \text{given by } A \to \det A
+  \end{equation*}
+  Since
+  \marginnote{This is a classical example to show a homomorphism, especially since the group $GL_n(\mathbb{R})$ uses \hlnoteb{matrix multiplication} while $\mathbb{R}^*$ uses regular \hlnoteb{arithmetic multiplication}.}
+  \begin{equation*}
+    \det AB = \det A \det B
+  \end{equation*}
+  we have that the determinant map is a homomorphism.
+\end{eg}
+
+\begin{propo}[Properties of Homomorphism]
+\label{propo:properties_of_homomorphism}
+  Let $\alpha: G \to H$ be a group homomorphism. Then
+  \begin{enumerate}
+    \item $\alpha(1_G) = 1_H$
+    \item $\forall g \in G \enspace \alpha(g^{-1}) = \alpha(g)^{-1}$
+    \item $\forall g \in G \; \forall k \in \mathbb{Z} \enspace \alpha(g^k) = \alpha(g)^k$
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Note that
+      \begin{equation*}
+        \alpha(1_G) \alpha(g) = \alpha(1_G \cdot g) = \alpha(g) = \alpha(g \cdot 1_G) = \alpha(g) \alpha(1_G)
+      \end{equation*}
+      Thus it must be that $\alpha(1_G) = 1_H$ for only the identity of $H$ satisfies this equation.
+
+    \item Since $H$ is a group, we know that
+      \begin{equation*}
+        1_H = \alpha(g)\alpha(g)^{-1}.
+      \end{equation*}
+      Now with part 1, we have that
+      \begin{equation*}
+        \alpha(g)\alpha(g^{-1}) = \alpha(gg^{-1}) = \alpha(1_G) = 1_H = \alpha(g)\alpha(g)^{-1}.
+      \end{equation*}
+      By \cref{propo:cancellation_laws}, we have that $\alpha(g^{-1}) = \alpha(g)^{-1}$.
+
+    \item This is simply a result of applying the definition repeatedly, which we can then perform an induction procedure to complete the proof.\qed
+  \end{enumerate}
+\end{proof}
+
+\begin{defn}[Isomorphism]\index{Isomorphism}
+\label{defn:isomorphism}
+  Let $G, H$ be groups. Consider a mapping
+  \begin{equation*}
+    \alpha: G \to H
+  \end{equation*}
+  We say that $\alpha$ is an \hlnoteb{isomorphism} if it is a homomorphism and bijective.
+
+  If $\alpha$ is an isomorphism, we say that $G$ is \hldefn{isomorphic to} to $H$, or that $G$ and $H$ are \hldefn{isomorphic}, and denote that by $G \cong H$.
+\end{defn}
+
+\begin{propo}[Isomorphism as an Equivalence Relation]
+\label{propo:isomorphism_as_an_equivalence_relation}\index{Equivalence Relation}
+  \begin{enumerate}
+    \item \hlnotea{(Reflexive)} The identity map $G \to G$ is an isomorphism.
+    \item \hlnotea{(Symmetric)} If $\sigma : G \to H$ is an isomorphism, then the inverse map $\sigma^{-1} : H \to G$ is also an isomorphism.
+    \item \hlnotea{(Transitive)} If $\sigma : G \to H$ and $\tau : H \to K$, then the composition map $\tau \sigma : G \to K$ is also an isomorphism.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item The identity map is clearly bijective. For all $g_1, g_2 \in G$, we have that
+      \begin{equation*}
+        \alpha(g_1 g_2) = g_1 g_2 = \alpha(g_1)\alpha(g_2).
+      \end{equation*}
+      Thus the identity map is a homomorphism, and hence an isomorphism.
+    
+    \item Since $\sigma$ is a bijective map, its inverse $\sigma^{-1}$ exists and is also a bijective map. Since $\sigma$ is bijective, we have that
+      \begin{equation*}
+        \forall h_1, h_2 \in H \enspace \exists ! g_1, g_2 \in G \quad \sigma(g_1) = h_1, \, \sigma(g_2) = h_2.
+      \end{equation*}
+      Note that since $\sigma$ has a bijective inverse, we also have
+      \begin{equation*}
+        g_1 = \sigma^{-1}(h_1) \text{ and } g_2 = \sigma^{-1}(h_2).
+      \end{equation*}
+      Then since $\sigma$ is a homomorphism,
+      \begin{align*}
+        \sigma^{-1}(h_1 h_2) &= \sigma^{-1}(\sigma(g_1)\sigma(g_2)) = \sigma^{-1}(\sigma(g_1 g_2)) \\
+          &= g_1 g_2 = \sigma^{-1}(h_1) \sigma^{-1}(h_2).
+      \end{align*}
+
+    \item We know that the composition map of two bijective map is bijective. Let $g_1, g_2 \in G$, then since both $\tau$ and $\sigma$ are homomorphisms
+      \begin{equation*}
+        \tau \sigma (g_1 g_2) = \tau( \sigma(g_1) \sigma(g_2) ) = \tau \sigma(g_1) \tau \sigma(g_2),
+      \end{equation*}
+      where we note that $\sigma(g_1), \sigma(g_2) \in H$.
+\end{enumerate}\qed
+\end{proof}
+
+\begin{eg}
+  Let $\mathbb{R}^+ = \{r \in \mathbb{R} : r \geq 0 \}$. Show that $(\mathbb{R}, +) \cong (\mathbb{R}^+, \cdot)$.
+
+  \begin{solution}
+    Consider the map
+    \begin{equation*}
+      \alpha : (\mathbb{R}, +) \to (\mathbb{R}^+, \cdot) \quad r \mapsto e^r,
+    \end{equation*}
+    where $e$ is the natural exponent. Note that the exponential map from $\mathbb{R}$ to $\mathbb{R}^+$ is bijective\sidenote{The image of the map covers all positive real numbers while taking all real numbers, which is the perfect candidate as a map here.}. Also, $\forall r, s \in \mathbb{R}$ we have that
+    \begin{equation*}
+      \alpha(r + s) = e^{r + s} = e^r e^s = \alpha(r) \alpha(s).
+    \end{equation*}
+    Therefore, $\alpha$ is an isomorphism and $(\mathbb{R}, +) \cong (\mathbb{R}^+, \cdot)$.\qed
+  \end{solution}
+\end{eg}
+
+\begin{eg}
+  Show that $(\mathbb{Q}, +) \not\cong (\mathbb{Q}^*, \cdot)$.
+
+  \begin{solution}
+    Suppose, for contradiction, that $\tau : (\mathbb{Q}, +) \to (\mathbb{Q}^*, \cdot)$ is an isomorphism. In particular, we have that $\tau$ is onto. Then $\exists q \in \mathbb{Q}$ such that $\tau(q) = 2$. Let $\tau(\frac{q}{2}) = \alpha$. Since $\tau$ is an isomorphism, we have
+    \begin{equation*}
+      \alpha^2 = \tau(\frac{q}{2}) \tau(\frac{q}{2}) = \tau(\frac{q}{2} + \frac{q}{2}) = \tau(q) = 2.
+    \end{equation*}
+    But that implies that $\alpha = \sqrt{2}$, which is clearly not rational. Thus, we know that there is no such $\tau$ and
+    \begin{equation*}
+      (\mathbb{Q}, +) \not\cong (\mathbb{Q}^*, \cdot)
+    \end{equation*}
+    as required. \qed
+  \end{solution}
+\end{eg}
+
+% subsection homomorphism_and_isomorphism (end)
+
+\subsection{Cosets and Lagrange's Theorem}%
+\label{sub:cosets_and_lagrange_s_theorem}
+% subsection cosets_and_lagrange_s_theorem
+
+\begin{defn}[Coset]\index{Coset}
+\label{defn:coset}
+  Let $H$ be a subgroup of a group $G$.
+  \begin{equation*}
+    \forall a \in G \quad Ha = \{ha : h \in H\} \quad \text{is the right coset of H generated by } a
+  \end{equation*}
+  and
+  \begin{equation*}
+    \forall a \in G \quad aH = \{ah : h \in H\} \quad \text{is the left coset of H generated by } a
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Note that $1H = H = H1$. Also, since $a1 = a$ and $1 \in H$, we have that $a \in aH$, and similarly so for $a \in Ha$.
+
+  In general, $aH$ and $Ha$ are not subgroups of $G$. See example
+
+  Also, in general, $aH \neq Ha$, since not all groups are abelian.
+\end{note}
+
+\begin{propo}[Properties of Cosets]
+\label{propo:properties_of_cosets}
+  Let $H$ be a subgroup of $G$, and let $a, b \in G$. Then
+  \begin{enumerate}
+    \item $Ha = Hb \iff ab^{-1} \in H$. In particular, $Ha = H \iff a \in H$.
+    \item $a \in Hb \implies Ha = Hb$.
+    \item $Ha = Hb \veebar Ha \cap Hb = \emptyset$.\sidenote{$\veebar \equiv $ XOR} Then the distinct right cosets of $H$ forms a partition of $G$.\sidenote{Note that this is true because by definition, we iterate over all elements of $G$ to construct the cosets of the subgroup $H$. The earlier part of this statement implies that cosets must be distinct (otherwise, they are the same set), and so if we take the union of these cosets, by iterating through all elements of $G$, we get that
+    \begin{equation*}
+      \bigcup_{a \in G} Ha = G.
+    \end{equation*}
+    Summarizing the above argument, we observe that the distinct cosets partitions $G$.
+    }
+  \end{enumerate}
+  We can create an analogued version of this proposition for the left cosets.
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item For $(\implies)$,
+      \begin{align*}
+        Ha = Hb &\implies a = 1a \in Ha = Hb \\
+                &\implies \exists h \in H \enspace a = hb \\
+                &\implies ab^{-1} = h \in H.
+      \end{align*}
+      For $(\impliedby)$,
+      \begin{align*}
+        ab^{-1} \in H &\implies \forall h \in H \enspace ha = h(ab^{-1})b \in Hb \\
+            &\implies Ha \subseteq Hb \\
+        ab^{-1} \in H &\implies (ab^{-1})^{-1} = ba^{-1} \in H \\
+            &\implies \forall h \in H \enspace hb = h(ba^{-1})a \in Ha \\
+            &\implies Hb \subseteq Ha
+      \end{align*}
+      Let $b = 1$. Then
+      \begin{equation*}
+        Ha = H \iff a \in H \qquad \because 1^{-1} = 1
+      \end{equation*}
+
+    \item Note
+      \begin{equation*}
+        a \in Hb \implies \exists h \in H \enspace a = hb \implies ab^{-1} \in H \overset{\text{by 1}}{\implies} Ha = Hb
+      \end{equation*}
+
+    \item Trivially, if $Ha \cap Hb = \emptyset$, we are done.
+      \begin{align*}
+        &Ha \cap Hb \neq \emptyset \\ 
+        &\implies \exists x \in Ha \cap Hb \\
+        &\implies ( x \in Ha \overset{\text{by 1}}{\implies} Hx = Hb ) \, \land \, ( x \in Hb \overset{\text{by 1}}{\implies} Hx = Hb ) \\
+        &\implies Ha = Hb
+      \end{align*}
+  \end{enumerate}\qed
+\end{proof}
+
+By \cref{propo:properties_of_cosets}, we have that $G$ can be written as a disjoint union of cosets of a subgroup $H$. We now define the following terminology that we shall use for the upcoming content.
+
+\begin{defn}[Index]\index{Index}
+\label{defn:index}
+  Let $H$ be a subgroup of a group $G$. We call the number of disjoint cosets of $H$ in $G$ as the \hlnoteb{index} of $H$ in $G$, and denote this number by $[G : H]$.
+\end{defn}
+
+% subsection cosets_and_lagrange_s_theorem (end)
+
+% section normal_subgroup (end)
+
+% chapter lecture_9_may_22nd_2018 (end)

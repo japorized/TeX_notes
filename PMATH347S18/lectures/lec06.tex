@@ -1,0 +1,171 @@
+\chapter{Lecture 6 May 14th 2018}
+\label{chp:lecture_6_may_14th_2018}
+% chapter Lecture 6 May 14th 2018
+
+\section{Subgroups (Continued 2)}
+\label{sec:subgroups_continued_2}
+% section Subgroups (Continued 2)
+
+\subsection{Alternating Groups}
+\label{sub:alternating_groups}
+% subsection Alternating Groups
+
+Recall that $\forall \sigma \in S_n$, with $\sigma \neq \epsilon$, $\sigma$ can be uniquely decomposed (up to the order) as disjoint cycles of length at least $2$. We will now present a related concept.
+
+\begin{defn}[Transposition]\label{defn:transposition}
+\index{Transposition}
+  A \hlnoteb{transposition} $\sigma \in S_n$ is a cycle of length $2$, i.e. $\sigma = \begin{pmatrix} a & b \end{pmatrix}$, where $a, b \in \{1, ..., n\}$ and $a\ neq b$.
+\end{defn}
+
+\begin{eg}
+  We have that\sidenote{If we apply the permutations on the right hand side, we have that
+    \begin{gather*}
+      1 \quad 2 \quad 3 \quad 4 \quad 5 \\
+      \downarrow \\
+      1 \quad 2 \quad 3 \quad 5 \quad 4 \\
+      \downarrow \\
+      1 \quad 4 \quad 3 \quad 5 \quad 2 \\
+      \downarrow \\
+      2 \quad 4 \quad 3 \quad 5 \quad 1
+    \end{gather*}
+  }
+  \begin{equation*}
+    \begin{pmatrix} 1 & 2 & 4 & 5 \end{pmatrix} = \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 2 & 4 \end{pmatrix} \begin{pmatrix} 4 & 5 \end{pmatrix}
+  \end{equation*}
+  Also, we can show that\sidenote{
+  \begin{ex}
+    Show that \autoref{eq:transposition_eg} is true.
+  \end{ex}
+
+  \begin{ex}
+    Play around with the same idea and create a few of your own transpositions. Note that you will only be able to get an odd number of tranpositions (why?).
+  \end{ex}
+  }
+  \begin{equation}\label{eq:transposition_eg}
+    \begin{pmatrix} 1 & 2 & 4 & 5 \end{pmatrix} = \begin{pmatrix} 2 & 3 \end{pmatrix} \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 2 & 5 \end{pmatrix} \begin{pmatrix} 1 & 3 \end{pmatrix} \begin{pmatrix} 2 & 4 \end{pmatrix}
+  \end{equation}
+\end{eg}
+
+Observe that the factorization into transpositions are \hlimpo{not unique or disjoint}. However, the following property is true.
+
+\begin{thm}[Parity Theorem]\label{thm:parity_theorem}
+\index{Parity Theorem}
+  If a permutations $\sigma$ has $2$ factorizations
+  \begin{equation*}
+    \sigma = \gamma_1 \gamma_2 \hdots \gamma_r = \mu_1 \mu_2 \hdots \mu_s,
+  \end{equation*}
+  where each $\gamma_i$ and $\mu_j$ are transpositions, then $r \equiv s \mod 2$.
+\end{thm}
+
+\begin{proof}
+  \hlwarn{This is the bonus question in A2. Proof shall be included after the end of the assignment.}
+\end{proof}
+
+\begin{defn}[Odd and Even Permutations]\label{defn:odd_and_even_permutations}
+\index{Odd Permutations}\index{Even Permutations}
+  A permutation $\sigma$ is even (or odd) if it can be written as a product of an even (or odd) number of transpositions. By \autoref{thm:parity_theorem}, a permutation must either be even or odd, but not both.
+\end{defn}
+
+\begin{thm}[Alternating Group]\label{thm:alternating_group}
+\index{Alternating Group}
+  For $n \geq 2$, let $A_n$ denote the set of all even permutations in $S_n$. Then
+  \begin{enumerate}
+    \item $\epsilon \in A_n$
+    \item $\forall \sigma, \tau \in A_n \enspace \sigma \tau \in A_n$ and $\exists \sigma^{-1} \in A_n$ such that $\sigma \sigma^{-1} = \epsilon = \sigma^{-1} \sigma$
+    \item $\abs{A_n} = \frac{1}{2} n!$
+  \end{enumerate}
+\end{thm}
+
+\begin{note}
+  From items 1 and 2, we know that $A_n$ si a subgroup of $S_n$. $A_n$ is called the \hlnoteb{alternating subgroup of degree $n$}.
+\end{note}
+
+\begin{proof}
+  \begin{enumerate}
+    \item We have that $\epsilon = \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 1 & 2 \end{pmatrix}$. Thus $\epsilon$ is even and so $\epsilon \in A_n$.
+    \item $\forall \sigma, \tau \in A_n$, we may write
+      \begin{align*}
+        \sigma &= \sigma_1 \sigma_2 \hdots \sigma_r \quad \text{and} \\
+        \tau   &= \tau_1 \tau_2 \hdots \tau_s,
+      \end{align*}
+      where $\sigma_i, \tau_j$ are transpositions, and $r, s$ are even integers. Then
+      \begin{equation*}
+        \sigma \tau = \sigma_1 \sigma_2 \hdots \sigma_r \tau_1 \tau_2 \hdots \tau_s
+      \end{equation*}
+      is a product of $(r + s)$ transpositions, and thus $\sigma \tau$ is even. THus $\sigma \tau \in A_n$.
+
+      For the inverse, note that since $\sigma_i$ is a transposition, we have that $\sigma_i^2 = \epsilon$ and thus $\sigma_i^{-1} = \sigma_i$. It follows that
+      \begin{align*}
+        \sigma^{-1} &= (\sigma_1 \sigma_2 \hdots \sigma_r)^{-1} \\
+          &= \sigma_r^{-1} \sigma_{r - 1}^{-1} \hdots \sigma_2^{-1} \sigma_1^{-1} \\
+          &= \sigma_r \sigma_{r - 1} \hdots \sigma_2 \sigma_1
+      \end{align*}
+      which is an even permutation and
+      \begin{equation*}
+        \sigma \sigma^{-1} = \sigma_1 \sigma_2 \hdots \sigma_r \sigma_r \hdots \sigma_2 \sigma_1 = \epsilon.
+      \end{equation*}
+      Thus $\exists \sigma^{-1} \in A_n$ such that it is the inverse of $\sigma$.
+    \item Let $O_n$ denote the set of odd permutations in $S_n$.\marginnote{For the proof of 3, we know that $\abs{S_n} = n!$, which is twice of the suggested order of $A_n$. Since we took out the even permutations of $S_n$, we just need to make the rest of the permutations, the odd permutations, into a set and prove that $A_n$ and this new set has the same size. One way to show this is by creating a bijection between the two.
+    
+        Also, note that the set of all odd permutations of $S_n$ is not a group, since
+        \begin{itemize}
+          \item there is no identity element in this set; and
+          \item this set is not closed under map composition.
+        \end{itemize}
+    
+        We have shown that $\epsilon$ is an even permutation, and so by the \hyperref[thm:parity_theorem]{Parity Theorem}, it cannot be an odd permutation, and there is only one identity in $S_n$. The set is not closed under map composition since if we compose two odd permutations, we would get an even permutation, which does not belong to this set.
+    } Then we have $S_n = A_n \cup O_n$, and by the \hyperref[thm:parity_theorem]{Parity Theorem}, we have that $A_n \cap O_n = \emptyset$. Since $\abs{S_n} = n!$, to prove that $\abs{A_n} = \frac{1}{2} n!$, it suffices to show that $\abs{A_n} = \abs{O_n}$.
+    
+    Let $\gamma = \begin{pmatrix} 1 & 2 \end{pmatrix}$ and $f : A_n \to O_n$ such that $f(\sigma) = \gamma \sigma$. Since $\sigma$ is even, $\gamma \sigma$ is odd, and so $f$ is well-defined.
+    
+    Also, if $\gamma \sigma_1 = \gamma \sigma_2$, then by \hyperref[propo:cancellation_laws]{Cancellation Laws}, $\sigma_1 = \sigma_2$, and hence $f$ is injective.
+    
+    Finally, $\forall \tau \in O_n$, we have that $\gamma \tau = \sigma \in A_n$. Note that
+  \begin{equation*}
+    f(\sigma) = \gamma \sigma = \gamma \gamma \tau = \tau.
+  \end{equation*}
+  Therefore, $f$ is surjective.
+
+  It follows that $\abs{A_n} = \abs{O_n}$. \qed
+  \end{enumerate}
+\end{proof}
+
+% subsection Alternating Groups (end)
+
+\subsection{Order of Elements}
+\label{sub:order_of_elements}
+% subsection Order of Elements
+
+\begin{notation}
+  If $G$ is a group and $g \in G$, we denote
+  \begin{equation*}
+    \lra{g} = \{ g^k : k \in \mathbb{Z} \}.
+  \end{equation*}
+  Note that $1 = g^0 \in \lra{g}$.
+
+  If $x = g^m, y = g^n \in \lra{g}$ where $m, n \in \mathbb{Z}$, then
+  \begin{equation*}
+    xy = g^m g^n = g^{m + n} \in \lra{g}
+  \end{equation*}
+  and we have $\exists x^{-1} = g^{-m} \in \lra{g}$ such that
+  \begin{equation*}
+    xx^{-1} = g^m g^{-m} = g^0 = 1.
+  \end{equation*}
+\end{notation}
+
+Along with the \hlnoteb{Subgroup Test}, we have the following proposition:
+
+\begin{propo}[Cyclic Group as A Subgroup]\label{propo:cyclic_group_as_a_subgroup}
+  If $G$ is a group and $g \in G$, then $\lra{g}$ is a subgroup of $G$.
+\end{propo}
+
+\begin{defn}[Cyclic Groups]\label{defn:cyclic_groups}
+\index{Cyclic Group}
+  Let $G$ be a group and $g \in G$. Then we call $\lra{g}$ the \hlnoteb{cyclic subgroup} of $G$ generated by $g$. If $G = \lra{g}$ for some $g \in G$, then we say that $G$ is a \hlnoteb{cyclic group}, and $g$ is a \hldefn{generator} of $G$.
+\end{defn}
+
+% subsection Order of Elements (end)
+
+% section Subgroups (Continued 2) (end)
+
+% chapter Lecture 6 May 14th 2018 (end)

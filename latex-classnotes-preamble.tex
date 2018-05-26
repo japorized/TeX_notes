@@ -42,8 +42,13 @@
 
 % hyperref Package Settings
 \hypersetup{
-	colorlinks=true,
-	allcolors=base16-eighties-magenta,
+    bookmarks=true,         % show bookmarks bar?
+    unicode=true,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=false,        % show Acrobat’s toolbar?
+    pdfmenubar=false,        % show Acrobat’s menu?
+    pdffitwindow=true,     % window fit to page when opened
+    colorlinks=true,
+    allcolors=base16-eighties-magenta,
 }
 
 % tikz
@@ -84,38 +89,73 @@
 \newtheorem{eg}{Example}[section]
 \newtheorem{ex}{Exercise}[section]
 
+    % definition env
 \theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt}}
 \theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem{defn}{Definition}[section]
+\newtheorem{defn}{Definition}
+
+    % definition env no num
+\theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt}}
+\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt}}
+\theoremindent10pt
+\newtheorem*{defnnonum}{Definition}
 
     % theorem envs
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem{thm}{Theorem}[section]
+\newtheorem{thm}{Theorem}
 
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem{propo}{Proposition}[section]
+\newtheorem{propo}[thm]{Proposition}
 
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem{crly}{Corollary}[section]
+\newtheorem{crly}[thm]{Corollary}
 
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem{lemma}{Lemma}[section]
+\newtheorem{lemma}[thm]{Lemma}
 
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem{axiom}{Axiom}[section]
+\newtheorem{axiom}[thm]{Axiom}
+
+    % theorem envs without counter
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theoremindent10pt
+\newtheorem*{thmnonum}{Theorem}
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theoremindent10pt
+\newtheorem*{propononum}{Proposition}
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theoremindent10pt
+\newtheorem*{crlynonum}{Corollary}
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theoremindent10pt
+\newtheorem*{lemmanonum}{Lemma}
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
+\theoremindent10pt
+\newtheorem*{axiomnonum}{Axiom}
 
     % proof env
 \theoremprework{\textcolor{base16-eighties-brown}{\hrule height 2pt}}

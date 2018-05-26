@@ -1,0 +1,241 @@
+\chapter{Lecture 2 May 04th 2018}
+  \label{chapter:lecture_2_may_04th_2018}
+
+\section{Introduction (Continued)} % (fold)
+\label{sec:introduction_continued}
+
+\subsection{Permutations} % (fold)
+\label{sub:permutations}
+
+\begin{defn}[Injectivity]\label{defn:injectivity}
+\index{Injectivity}
+  Let $f: X \to Y$ be a function. We say that $f$ is \hlnoteb{injective} (or \hldefn{one-to-one}) if $f(x_1) = f(x_2)$ implies $x_1 = x_2$.
+\end{defn}
+
+\begin{defn}[Surjectivity]\label{defn:surjectivity}
+\index{Surjectivity}
+  Let $f: X \to Y$ be a function. We say that $f$ is \hlnoteb{surjective} (or \hldefn{onto}) if $\forall y \in Y \enspace \exists x \in X \enspace f(x) = y$.
+\end{defn}
+
+\begin{defn}[Bijectivity]\label{defn:bijectivity}
+\index{Bijectivity}
+  Let $f: X \to Y$ be a function. We say that $f$ is \hlnoteb{bijective} if it is both \hlnoteb{injective} and \hlnoteb{surjective}.
+\end{defn}
+
+\begin{defn}[Permutations]\label{defn:permutations}
+\index{Permutations}
+  Given a non-empty set $L$, a permutation of $L$ is a bijection from $L$ to $L$. The set of all permutations of $L$ is denoted by $S_L$.
+\end{defn}
+
+\begin{eg}
+  \label{eg:permutations_first}
+  Consider the set $L = \{1, 2, 3\}$, which has the following $6$ different permutations: \marginnote{\begin{note}
+    \begin{equation*}
+      \begin{pmatrix} 1 & 2 & 3 \\ 1 & 3 & 2 \end{pmatrix}
+    \end{equation*}
+    indicates the bijection $\sigma: \{1, 2, 3\} \to \{1, 2, 3\}$ with $\sigma(1) = 1$, $\sigma(2) = 3$ and $\sigma(3) = 2$.
+  \end{note}}
+
+  \begin{gather*}
+     \begin{pmatrix} 1 & 2 & 3 \\ 1 & 2 & 3 \end{pmatrix} \quad \begin{pmatrix} 1 & 2 & 3 \\ 1 & 3 & 2 \end{pmatrix} \quad \begin{pmatrix} 1 & 2 & 3 \\ 2 & 1 & 3 \end{pmatrix} \\
+     \begin{pmatrix} 1 & 2 & 3 \\ 2 & 3 & 1 \end{pmatrix} \quad \begin{pmatrix} 1 & 2 & 3 \\ 3 & 1 & 2 \end{pmatrix} \quad \begin{pmatrix} 1 & 2 & 3 \\ 3 & 2 & 1 \end{pmatrix}
+   \end{gather*} 
+\end{eg}
+
+\newthought{For $n \in \mathbb{N}$}, we denote $S_n := S_{\{1, 2, ..., n\}}$, the set of all permutations of $\{1, 2, ..., n\}$. \cref{eg:permutations_first} shows the elements of the set $S_3$.
+
+\begin{defn}[Order]\label{defn:order}
+\index{Order}
+  The \hlnoteb{order} of a set $A$, denoted by $\abs{A}$, is the cardinality of the set.
+\end{defn}
+
+\begin{eg}
+  \label{eg:order_of_prev_eg}
+  We have seen that the order of $S_3$, $\abs{S_3}$ is $6 = 3!$.
+\end{eg}
+
+\begin{propo}\label{propo:order_of_Sn_is_n}
+  $\abs{S_n} = n!$
+\end{propo}
+
+\begin{proof}
+  $\forall \sigma \in S_n$, there are $n$ choices for $\sigma(1)$, $n - 1$ choices for $\sigma(2)$, ..., $2$ choices for $\sigma(n - 1)$, and finally $1$ choice for $\sigma(n)$. \qed
+\end{proof}
+
+\paragraph{Do elements of $S_n$ share the same properties as what we've seen in the numbers?} Given $\sigma, \tau \in S_n$, we can \hlnotea{compose} the 2 together to get a third element in $S_n$, namely $\sigma \tau$ (wlog), where $\sigma \tau : \{1, ..., n\} \to \{1, ..., n\}$ is given by $\forall x \in \{1, ..., n\}$, $x \mapsto \sigma( \tau(x) )$.
+
+It is important to note that $\because \sigma, \tau$ are \hlimpo{both bijective}, $\sigma \tau$ is also bijective. Thus, together with the fact that $\sigma \tau : \{1, ..., n\} \to \{1, ..., n\}$, we have that $\sigma \tau \in S_n$ by definition of $S_n$.
+
+$\therefore \forall \sigma, \tau \in S_n, \; \sigma \tau, \tau \sigma \in S_n$, but $\sigma \tau \neq \tau \sigma$ in general. The following is an example of the stated case:
+
+\begin{eg}
+  \label{eg:commutativity_of_Sn}
+  Let
+  \begin{equation*}
+    \sigma &= \begin{pmatrix}
+      1 & 2 & 3 & 4 \\
+      3 & 4 & 1 & 2
+    \end{pmatrix}, \text{ and } 
+    \tau &= \begin{pmatrix}
+      1 & 2 & 3 & 4 \\
+      2 & 4 & 3 & 1
+    \end{pmatrix}.
+  \end{equation*}
+  Compute $\sigma \tau$ and $\tau \sigma$ to show that they are not equal.
+
+  \begin{solution}
+    \begin{equation*}
+      \sigma \tau &= \begin{pmatrix}
+        1 & 2 & 3 & 4 \\
+        4 & 2 & 1 & 3
+      \end{pmatrix} \text{ but } 
+      \tau \sigma &= \begin{pmatrix}
+        1 & 2 & 3 & 4 \\
+        3 & 1 & 2 & 4
+      \end{pmatrix}
+    \end{equation*}
+  \end{solution}
+\end{eg}
+
+Perhaps what is interesting is the question of: \textbf{when does commutativity occur?} One such case is when $\sigma$ and $\tau$ have support sets that are disjoint\sidenote{This is proven in A1}.
+
+On the other hand, the associative property holds\sidenote{
+  \begin{ex}
+    Prove this as an exercise.
+  \end{ex}
+}, i.e.
+\begin{equation*}
+  \forall \sigma, \tau, \mu \in S_n \enspace \sigma (\tau \mu) = (\sigma \tau) \mu
+\end{equation*}
+
+The set $S_n$ also has an identity element\sidenote{
+  \begin{ex}
+    Verify that the given identity element is indeed the identity, i.e.
+    \begin{equation*}
+      \forall \sigma \in S_n \enspace \sigma \epsilon = \sigma = \epsilon \sigma.
+    \end{equation*}
+  \end{ex}
+}, namely
+\begin{equation*}
+  \epsilon = \begin{pmatrix}
+    1 & 2 & \hdots & n \\
+    1 & 2 & \hdots & n
+  \end{pmatrix}
+\end{equation*}
+
+Finally, $\forall \sigma \in S_n$, since $\sigma$ is a bijection, we have that its inverse function, $\sigma^-1$ is also a bijection, and thus satisfies the requirements to be in $S_n$. We call $\sigma^{-1} \in S_n$ to be the \hldefn{inverse permutation} of $\sigma$, such that
+\begin{equation*}
+  \forall x, y \in \{1, ..., n\} \quad \sigma^{-1}(x) = y \iff \sigma(y) = x.
+\end{equation*}
+It follows, immediately, that
+\begin{equation*}
+  \sigma \big( \sigma^{-1}(x) \big) = x \, \land \, \sigma^{-1} \big( \sigma(y) \big) = y.
+\end{equation*}
+$\therefore$ We have that 
+\begin{equation*}
+  \sigma \sigma^{-1} = \epsilon = \sigma^{-1} \sigma.
+\end{equation*}
+
+\begin{eg}
+  \label{eg:inverse_permutation}
+  Find the inverse of
+  \begin{equation*}
+    \sigma = \begin{pmatrix}
+      1 & 2 & 3 & 4 & 5 \\
+      4 & 5 & 1 & 2 & 3
+    \end{pmatrix}
+  \end{equation*}
+
+  \begin{solution}
+    By rearranging the image in ascending order, using them now as the object and their respective objects as their image, construct
+    \begin{equation*}
+      \tau = \begin{pmatrix}
+        1 & 2 & 3 & 4 & 5 \\
+        3 & 4 & 5 & 1 & 2
+      \end{pmatrix}.
+    \end{equation*}
+    It can easily (although perhaps not so prettily) be shown that
+    \begin{equation*}
+      \sigma \tau = \epsilon = \tau \sigma.
+    \end{equation*}
+  \end{solution}
+\end{eg}
+
+With all the above, we have for ourselves the following proposition:
+
+\begin{propo}[Properties of $S_n$]\label{propo:properties_of_Sn}
+  We have
+  \begin{enumerate}
+    \item $\forall \sigma, \tau \in S_n \enspace \sigma \tau, \tau \sigma \in S_n$.
+    \item $\forall \sigma, \tau, \mu \in S_n \enspace \sigma (\tau \mu) = (\sigma \tau) \mu$.
+    \item $\exists \epsilon \in S_n \enspace \forall \sigma \in S_n \enspace \sigma \epsilon = \sigma = \epsilon \sigma$.
+    \item $\forall \sigma \in S_n \enspace \exists! \sigma^{-1} \in S_n \enspace \sigma \sigma^{-1} = \epsilon = \sigma^{-1} \sigma$.
+  \end{enumerate}
+\end{propo}
+
+\newthought{Consider}
+\begin{equation*}
+  \sigma = \begin{pmatrix}
+    1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
+    3 & 1 & 7 & 6 & 9 & 4 & 2 & 5 & 8 & 10
+  \end{pmatrix} \in S_{10}
+\end{equation*}
+If we represent the action of $\sigma$ geometrically, we get
+
+\begin{tabular}{c c c}
+  \begin{tikzcd}
+   & 1 \arrow[rd] &  \\
+  2 \arrow[ru] &  & 3 \arrow[ld] \\
+   & 7 \arrow[lu] & 
+  \end{tikzcd}
+  &
+  \begin{tikzcd}
+  4 \arrow[dd, bend left] \\
+   \\
+  6 \arrow[uu, bend left]
+  \end{tikzcd}
+  &
+  \begin{tikzcd}
+   & 5 \arrow[rdd] &  \\
+   &  &  \\
+  8 \arrow[ruu] &  & 9 \arrow[ll]
+  \end{tikzcd}
+  \\ &
+  \begin{tikzcd}
+    10 \arrow[loop below]
+  \end{tikzcd}
+\end{tabular}
+We observe that $\sigma$ can be \hlnotea{decomposed} into one $4$-cycle, $\begin{pmatrix} 1 & 3 & 7 & 2 \end{pmatrix}$, one $2$-cycle, $\begin{pmatrix} 4 & 6 \end{pmatrix}$, one $3$-cycle, $\begin{pmatrix} 5 & 9 & 8 \end{pmatrix}$, and one $1$-cycle, $\begin{pmatrix} 10 \end{pmatrix}$.
+
+Note that these cycles are (pairwise) \hlnotea{disjoint}, and we can write\sidenote{We generally do not include the $1$-cycle and assume that by excluding them, it is known that any number that is supposed to appear loops back to themselves.}
+\begin{equation*}
+  \sigma = \begin{pmatrix} 1 & 3 & 7 & 2 \end{pmatrix}\begin{pmatrix} 4 & 6 \end{pmatrix}\begin{pmatrix} 5 & 9 & 8 \end{pmatrix}
+\end{equation*}
+Note that we may also write
+\begin{align*}
+  \sigma &= \begin{pmatrix} 4 & 6 \end{pmatrix}\begin{pmatrix} 5 & 9 & 8 \end{pmatrix}\begin{pmatrix} 1 & 3 & 7 & 2 \end{pmatrix} \\
+    &= \begin{pmatrix} 6 & 4 \end{pmatrix}\begin{pmatrix} 9 & 8 & 5 \end{pmatrix}\begin{pmatrix} 7 & 2 & 1 & 3 \end{pmatrix}
+\end{align*}
+It is interesting to note that the cycles can rotate their ``elements'' in a \hlnotea{cyclic} manner, i.e.
+\begin{gather*}
+  \begin{pmatrix} 1 & 3 & 7 & 2 \end{pmatrix} = \begin{pmatrix} 7 & 2 & 1 & 3 \end{pmatrix} \neq \begin{pmatrix} 1 & 2 & 7 & 3 \end{pmatrix}.
+\end{gather*}
+Although the decomposition of the cycle notation is not unique (i.e. you may rearrange them), each individual cycle is unique, and is proven below\sidenote{See bonus question of A1. Proof will be included in the notes once the assignment is over.}.
+
+\begin{thm}[Cycle Decomposition Theorem]\label{thm:cycle_decomposition_theorem}
+\index{Cycle Decomposition Theorem}
+  If $\sigma \in S_n$, $\sigma \neq \epsilon$, then $\sigma$ is a product of (one or more) disjoint cycles of length at least $2$. This factorization is unique up to the order of the factors.
+\end{thm}
+
+\begin{note}[Convention]
+ Every permutation in $S_n$ can be regarded as a permutation of $S_{n + 1}$ by fixing the permutation of $n + 1$. Therefore, we have that
+ \begin{equation*}
+   S_1 \subseteq S_2 \subseteq \hdots \subseteq S_n \subseteq S_{n + 1} \subseteq \hdots
+ \end{equation*}
+\end{note}
+
+% subsection permutations (end)
+
+% section introduction_continued (end)
+
+% chapter lecture_2_may_04th_2018 (end)

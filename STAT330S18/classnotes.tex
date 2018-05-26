@@ -2079,7 +2079,7 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
 \begin{thm}[Independence by PF]
 \label{thm:independence_by_pf}
   \marginnote{I am not certain as to why this is presented as a theorem that repeats the definition. As so, the prove for the 2nd equation will not be shown.}
-  Suppose $X$ and $Y$ are rvs with joint cdf $F$, joint pf $f$, marginal cdf $F_X$ and $F_Y$ respectively, and marginal pf $f_X$ and $f_Y$ respectively. Also, suppoes that $A_X = \{x : f_X (x) > 0\}$ is the support set of $X$ and $A_Y = \{y : f_Y(y) > 0\}$ is the support set of $Y$. Then $X$ and $Y$ are independent rvs if and only if either 
+  Suppose $X$ and $Y$ are rvs with joint cdf $F$, joint pf $f$, marginal cdf $F_X$ and $F_Y$ respectively, and marginal pf $f_X$ and $f_Y$ respectively. Also, suppose that $A_X = \{x : f_X (x) > 0\}$ is the support set of $X$ and $A_Y = \{y : f_Y(y) > 0\}$ is the support set of $Y$. Then $X$ and $Y$ are independent rvs if and only if either 
   \begin{equation*}
     \forall (x, y) \in A_X \times A_Y \quad f(x, y) = f_X(x) f_Y(y)
   \end{equation*}
@@ -2090,7 +2090,19 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
 \end{thm}
 
 \begin{proof}
-  The $(\implies)$ direction is simply a result of \hlnotea{Clairaut's Theorem}. While the $(\impliedby)$ direction is a direct result of applying double integrals. \qed
+  The $(\implies)$ direction is simply a result of \hlnotea{Clairaut's Theorem}\sidenote{Work needs to be done to show that our statement actually satisfies the condition for Clairaut's Theorem to apply. Clairaut's Theorem states that:
+  
+  \begin{thm*}[Clairaut's Theorem]
+  \index{Clairaut's Theorem}
+  \label{thm*:clairaut_s_theorem}
+    If $(x_0, y_0)$ is a point in the domain of a function $f$ with
+    \begin{itemize}
+      \item $f$ is defined on all points in an open disk centered at $(x_0, y_0)$;
+      \item the first partial derivatives, $f_{xy}$ and $f_{yx}$ are all continuous for all points in the open disk.
+    \end{itemize}
+    Then $f_{xy}(x_0, y_0) = f_{yx}(x_0, y_0)$.
+  \end{thm*}
+  }. While the $(\impliedby)$ direction is a direct result of applying double integrals. \qed
 \end{proof}
 
 \begin{eg}[Example 3.6]
@@ -2105,7 +2117,7 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
     \begin{equation*}
       f(x, y) = \left( \frac{\theta^x e^{-\theta}}{x!} \cdot \frac{\theta^y e^{- \theta}}{y!} \right) \mathbb{1}_{\{x, y = 0, 1, ...\}}
     \end{equation*}
-    and so this suggests that we can indeed break down $f$ into two parts, each only affected by $x$ and $y$ respectively, ``indepdent'' of each other. Indeed, since
+    and so this suggests that we can indeed break down $f$ into two parts, each only affected by $x$ and $y$ respectively, ``indenpdent'' of each other. Indeed, since
     \begin{align*}
       f_X(x) &= \sum_{y = 0}^{\infty} \frac{\theta^{x + y} e^{- \theta}}{x! y!} \mathbb{1}_{\{x,y = 0, 1, ... \}} \\
         &= \sum_{y = 0}^{\infty} \left( \frac{\theta^x e^{-\theta}}{x!} \cdot \frac{\theta^y e^{- \theta}}{y!} \right) \mathbb{1}_{\{x = 0, 1, ...\}} \\
@@ -2125,6 +2137,117 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
 % section joint_distributions (end)
 
 % chapter lecture_6_may_17th_2018 (end)
+
+\chapter{Lecture 7 May 24th 2018}%
+\label{chp:lecture_7_may_24th_2018}
+% chapter lecture_7_may_24th_2018
+
+\section{Joint Distributions (Continued)}%
+\label{sec:joint_distributions_continued}
+% section joint_distributions_continued
+
+\subsection{Independence (Continued)}%
+\label{sub:independence_continued}
+% subsection independence_continued
+
+\begin{eg}[Example 3.7]
+  Consider the joint pmf below from \cref{eg:eg_3_2}. Are $X$ and $Y$ independent? Prove or disprove.
+  \[
+  \begin{tabular}{c | c | c | c | c}
+             & x = -2 & x = 0 & x = 2 & P(Y = y) \\
+    \hline
+    y = 0    & 0.05   & 0.1   & 0.15  & 0.3 \\
+    \hline
+    y = 1    & 0.07   & 0.11  & 0.2   & 0.38 \\
+    \hline
+    y = 2    & 0.02   & 0.25  & 0.05  & 0.32 \\
+    \hline
+    P(X = x) & 0.14   & 0.46  & 0.4
+  \end{tabular}
+  \]
+
+  \begin{solution}
+    Note that
+    \begin{gather*}
+      P(X = -2, Y = 0) = 0.5 \text{ but }\\
+      P(X = -2) P(Y = 0) = 0.14 \cdot 0.3 = 0.042 \neq 0.5.
+    \end{gather*}
+    Thus $X$ and $Y$ are not independent.
+  \end{solution}
+\end{eg}
+
+% subsection independence_continued (end)
+
+\subsection{Joint Continuous RVs}%
+\label{sub:joint_continuous_rvs}
+% subsection joint_continuous_rvs
+
+\begin{defn}[Joint Continuous RVs]\index{Joint Continuous Random Variables}
+\label{defn:joint_continuous_rvs}
+  Two random variables $X$ and $Y$ are said to be \hlnoteb{jointly continuous} if there exists a function $f(x, y)$ such that the joint cdf of $X$ and $Y$ can be written as
+  \begin{equation*}
+    \forall (x, y) \in \mathbb{R}^2 \quad F(x,y) = \int_{-\infty}^{x} \int_{-\infty}^{y} f(t_1, t_2) d_{t_2} d_{t_1}.
+  \end{equation*}
+  The function $f$ is called the \hldefn{joint density function} of $X$ and $Y$. It follows from the above defintiion that when the second partial derivative exists, we have
+  \begin{equation*}
+    f(x, y) = \frac{\partial^2}{\partial x \partial y} F(x, y)
+  \end{equation*}
+  The set $\{(x, y) : f(x, y) > 0 \}$ is called the \hldefn{support set} of $(X, Y)$.
+\end{defn}
+
+\begin{note}[Convention]
+  Define $f(x, y) = 0$ when $\frac{\partial^2}{\partial x \partial y} F(x, y)$ does not exist.
+\end{note}
+
+\begin{eg}[Example 3.8]
+  Suppose $X$ and $Y$ have joint pdf $f(x, y) = \mathbb{1}_{\{0 < x, y < 1\}} = \mathbb{1}_{\{0 < x < 1, \, 0 < y < 1 \}}$. Calculate the joint cdf of $X$ and $Y$.
+
+  \begin{solution}
+    \begin{equation*}
+      F(x, y) &= \begin{cases}
+        0         & x \leq 0, \, \lor \, y \leq 0 \\
+        \int_{0}^{x} \int_{0}^{y} 1 \dif{s} \dif{t} = xy & 0 < x < 1 \, \land \, 0 < y < 1 \\
+        \int_{0}^{1} \int_{0}^{y} 1 \dif{s} \dif{t} = y  & x \geq 1 \, \land \, 0 < y < 1 \\
+        \int_{0}^{x} \int_{0}^{1} 1 \dif{s} \dif{t} = x  & 0 < x < 1 \, \land \, y \geq 1 \\
+        \int_{0}^{1} \int_{0}^{1} 1 \dif{s} \dif{t} = 1  & x \geq 1 \, \land \, y \geq 1
+      \end{cases}
+    \end{equation*}
+  \end{solution}
+\end{eg}
+
+\begin{propo}[Properties of Joint PDF]
+\label{propo:properties_of_joint_pdf}
+  \begin{enumerate}
+    \item $\forall (x, y) \in \mathbb{R}^2 \quad f(x, y) \geq 0$
+    \item $\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x, y) \dif{x} \dif{y} = 1$
+    \item $\forall B \subset \mathbb{R}^2$,
+      \begin{equation*}
+        P[ (X, Y) \in B ] = \underset{(x, y) \in B}{\int \int} f(x, y) \dif{x} \dif{y} 
+      \end{equation*}
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  
+\end{proof}
+
+\begin{eg}[Example 3.9]
+  Suppose that $f(x, y) = Kxy \cdot \mathbb{1}_{\{0 < x \, y < 1 \}}$ for some constant $K > 0$. Find $K$ so that $f$ is a valid joint pdf. If $X$ and $Y$ have the joint density $f$, calculate $P(X > Y)$.
+
+  \begin{solution}
+    Note that
+    \begin{equation*}
+      1 &= \int_{0}^{1} \int_{0}^{1} Kxy \dif{x} \dif{y} = \frac{K}{4}.
+    \end{equation*}
+    Thus $K = 4$.
+  \end{solution}
+\end{eg}
+
+% subsection joint_continuous_rvs (end)
+
+% section joint_distributions_continued (end)
+
+% chapter lecture_7_may_24th_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}

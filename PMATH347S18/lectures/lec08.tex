@@ -1,0 +1,119 @@
+\chapter{Lecture 8 May 18th 2018}%
+\label{chp:lecture_8_may_18th_2018}
+% chapter lecture_8_may_18th_2018
+
+\section{Subgroups (Continued 4)}%
+\label{sec:subgroups_continued_4}
+% section subgroups_continued_4
+
+\subsection{Cyclic Groups (Continued)}%
+\label{sub:cyclic_groups_continued}
+% subsection cyclic_groups_continued
+
+\begin{note}
+  Consider the converse of \cref{propo:cyclic_groups_are_abelian}: Are abelian groups cyclic? \hlimpo{No!} For example, $K_4 \cong C_2 \times C_2$ is abelian but not cyclic, since no one element can generate the entire group.
+\end{note}
+
+\begin{propo}[Subgroups of Cyclic Groups are Cyclic]
+\label{propo:subgroups_of_cyclic_groups_are_cyclic}
+  Every subgroup of a cyclic group is cyclic.
+\end{propo}
+
+\begin{proof}
+  Let $G = \lra{g}$ and $H$ be a subgroup of $G$.
+  \begin{align*}
+    H = \{1\} &\implies H = \lra{1} \\
+    H \neq \{1\} & \implies \exists k \neq 0 \in \mathbb{Z} \enspace g^k \in H \\
+                 & \implies g^{-k} \in H \quad (\because H \text{ is a group })
+  \end{align*}
+  We may assume that $k \in \mathbb{N}$. By the \hlnotea{Well Ordering Principle}, let $m \in \mathbb{N}$ be the smallest positive integer such that $g^m \in H$. We will now show that $H = \lra{g^m}$.
+
+  \begin{align*}
+    g^m \in H &\implies \lra{g^m} \subseteq H \\
+    \because H \subseteq G = \lra{g} &\quad \forall h \in H \; \exists k \in \mathbb{Z} \; h = g^k \\
+    \hlnotea{Division Algorithm} &: \exists q, r \in \mathbb{Z} \; 0 \leq r < m \quad k = mq + r \\
+    h = g^k \implies g^r = g^{k - mq} &= g^k (g^m)^{-q} = g^k (1) \in H \\
+    r \neq 0 \implies \exists 0 < r < m &\quad g^r \in H \quad \text{\Lightning} \quad m \text{ is the smallest +ve integer } \\
+    \implies g^k \in \lra{g^m} & \implies H \subseteq \lra{g^m}
+  \end{align*}
+  Finally,
+  \begin{equation*}
+    \lra{g^m} \subseteq H \, \land \, H \subseteq \lra{g^m} &\implies H = \lra{g^m}
+  \end{equation*}\qed
+\end{proof}
+
+\begin{propo}[Other generators in the same group]
+\label{propo:other_generators_in_the_same_group}
+  Let $G = \lra{g}$ with $o(g) = n \in \mathbb{N}$. We have
+\marginnote{If we have $k$ such that $g^k \in G$, and $k$ and $n$ are coprimes, then $g^k$ is also a generator of $G$.}
+  \begin{equation*}
+    G = \lra{g^k} \iff \gcd(k, n) = 1
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  For $(\implies)$,
+  \begin{align*}
+    G = \lra{g^k} &\implies g \in \lra{g^k} \implies \exists x \in \mathbb{Z} \quad g = g^{kx} \\
+      &\implies 1 = g^{kx - 1} \implies n \, | \, (kx - 1) \quad (\because \cref{propo:properties_of_elements_of_finite_order}) \\
+      &\implies \exists y \in \mathbb{Z} \quad kx - 1 = ny \quad (\because \hlnotea{Division Algorithm}) \\
+      &\implies 1 = kx + ny
+  \end{align*}
+  Then
+  \begin{gather*}
+    \because 1 \, | \, kx \enspace \land \enspace 1 \, | \, ny \enspace \land \enspace 1 = kx + ny \\
+    \gcd(k, n) = 1 \qquad (\because \hlnotea{gcd Characterization})
+  \end{gather*}
+
+  For $(\impliedby)$, note that $g \in G \implies \lra{g^k} \subseteq G$. It suffices to show that $G \subseteq \lra{g^k}$, i.e. $g \in \lra{g^k}$.
+  \begin{align*}
+    \gcd(k, n) = 1 &\implies \exists x, y \in \mathbb{Z} \enspace 1 = kx + ny \quad (\because \hlnotea{Bezout's Lemma}) \\
+        &\implies g = g^1 = g^{kx + ny} = (g^k)^x (g^n)^y = (g^k)^x \in \lra{g^k}
+  \end{align*}\qed
+\end{proof}
+
+\begin{thm}[Fundamental Theorem of Finite Cyclic Groups]
+\label{thm:fundamental_theorem_of_finite_cyclic_groups}
+  \marginnote{This is a significant result that classifies the structure of a cyclic group (hence its name). The theorem tells us that for a group with finite order, it has only finitely many subgroups, and the order of each of these subgroups are multiples of $n$. Inversely, there are no subgroups of $G$ where its order is some integer that does not divide $n$.
+  
+\noindent  \hlimpo{Note:} It is clear that $d \in \mathbb{N}$ and $d \leq n$.
+
+In a sense, this theorem is more powerful than \cref{propo:subgroups_of_cyclic_groups_are_cyclic}.
+  }
+  Let $G = \lra{g}$ with $o(g) = n \in \mathbb{N}$.
+  \begin{enumerate}
+    \item $H$ is a subgroup of $G \implies \exists d \in \mathbb{N} \enspace d \, | \, n \quad H = \lra{g^d} \implies \abs{H} \, | \, n$.
+    \item $k \, | \, n \implies \lra{g^{\frac{k}{n}}}$ is the unique subgroup of $G$ of order $k$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Note
+      \begin{equation*}
+        \cref{propo:subgroups_of_cyclic_groups_are_cyclic} \implies \exists m \in \mathbb{N} \enspace H = \lra{g^m} 
+      \end{equation*}
+      Let $d = \gcd(m, n)$. Want to show that $H = \lra{g^d}$.
+      \begin{align*}
+        d = \gcd(m, n) &\implies d \, | \, m \implies \exists k \in \mathbb{Z} \enspace m = dk \\
+          &\implies g^m = g^{dk} = (g^d)^k \in \lra{g^d} \implies H \subseteq \lra{g^d} \\
+        d = \gcd(m, n) &\implies \exists x, y \in \mathbb{Z} \quad d = mx + ny \quad (\because \hlnotea{Bezout's Lemma}) \\
+          &\implies g^d = g^{mx + ny} = (g^m)^x (g^n)^y = (g^m)^x (1) \in H \\
+          &\implies \lra{g^d} \subseteq H \\
+          &\therefore H = \lra{g^d}
+      \end{align*}
+      Note: $d = \gcd(m, n) \implies d \, | \, n \implies \abs{H} = o(g^d) = \frac{n}{d}$ \\ $\because \cref{propo:orders_of_powers_of_the_element}$. Thus $\abs{H} \, | \, n$.
+
+    \item Let $K$ be a subgroup of $G$ with order $k$ such that $k \, | \, n$. By 1, we have $K = \lra{g^d}$ with $d \, | \, n$. Note that
+    \begin{equation*}
+      k = \abs{K} \overset{(1)}{=} o(g^d) \overset{(2)}{=} \frac{n}{d}
+    \end{equation*}
+    where $(1)$ is by \cref{propo:properties_of_elements_of_finite_order} and $(2)$ is by \cref{propo:orders_of_powers_of_the_element}. Thus $d = \frac{n}{k}$ and $K = \lra{g^{\frac{n}{k}}}$
+  \end{enumerate}\qed
+\end{proof}
+
+% subsection cyclic_groups_continued (end)
+
+% section subgroups_continued_4 (end)
+
+% chapter lecture_8_may_18th_2018 (end)

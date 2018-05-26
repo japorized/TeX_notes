@@ -1,0 +1,214 @@
+\chapter{Lecture 11 May 25th 2018}%
+\label{chp:lecture_11_may_25th_2018}
+% chapter lecture_11_may_25th_2018
+
+The following theorem is useful for A2. The proof is not provided in this lecture, but expect the corollary to be restated and proven in a later lecture.
+
+\begin{crlynonum}
+  Let $G$ be a finite group and $H, K \triangleleft G$, $H - K = \{1\}$ and $\abs{H} \abs{K} = \abs{G}$. Then $G \cong H \times K$.
+\end{crlynonum}
+
+\section{Normal Subgroup (Continued 2)}%
+\label{sec:normal_subgroup_continued_2}
+% section normal_subgroup_continued_2
+
+\subsection{Normal Subgroup (Continued)}%
+\label{sub:normal_subgroup_continued}
+% subsection normal_subgroup_continued
+
+\begin{note}[Recall]
+  Recall the definition of a normal subgroup as in \cref{defn:normal_subgroup}. Let $H$ be a subgroup of $G$. If $gH = Hg$ for all $g \in G$, then $H \triangleleft G$.
+\end{note}
+
+\begin{propo}[Normality Test]
+\index{Normality Test}
+\label{propo:normality_test}
+  Let $H$ be a subgroup of a group $G$. The following are equivalent:
+  \marginnote{
+    \begin{note}
+  Note that item 3 is indeed a stronger statement that item 2. But since the statements are equivalent, while using the \hlnoteb{Normality Test}, if we can show that item 2 is true, item 3 is automatically true.
+    \end{note}
+    }
+  \begin{enumerate}
+    \item $H \triangleleft G$
+    \item $\forall g \in G \enspace gHg^{-1} \subseteq H$
+    \item $\forall g \in G \enspace gHg^{-1} = H$
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  $( 1 ) \implies ( 2 )$:
+  \begin{align*}
+    x \in gHg^{-1} &\implies \exists h \in H \enspace x = ghg^{-1} \\
+      &\implies \exists h_1 \in H \enspace gh = h_1 g \qquad \because gh \in gH = Hg \\
+      &\implies x = ghg^{-1} = h_1 gg^{-1} = h_1 \in H \\
+      &\implies gHg^{-1} \subseteq H
+  \end{align*}
+
+  \noindent$( 2 ) \implies ( 3 )$:
+  \begin{align*}
+    ( 2 ) &\implies \forall g \in G \quad gHg^{-1} \subseteq H \\
+      &\implies \exists g^{-1} \in G \quad g^{-1}Hg \subseteq H \\
+      &\implies H \subseteq gHg^{-1} \\
+      &\overset{(2)}{\implies} gHg^{-1} = H
+  \end{align*}
+
+  \noindent$( 3 ) \implies ( 1 )$:
+  \begin{align*}
+    ( 3 ) &\implies \forall g \in G \quad gHg^{-1} = H \\
+      &\implies \forall x \in gH \quad xg^{-1} \in gHg^{-1} = H \\
+      &\implies x \in Hg \qquad \because gg^{-1} = 1 \\
+      &\implies gH \subseteq Hg
+  \end{align*}
+  Using a similar argument, we would have $Hg \subseteq Hg$. And so $gH = Hg$ as required.\qed
+\end{proof}
+
+\begin{eg}
+  Let $G = GL_n(\mathbb{R})$ and $H = SL_n(\mathbb{R})$.\index{General Linear Group}\index{Special Linear Group}\sidenote{Recall \cref{defn:general_linear_group} and \cref{defn:special_linear_group}.} For $A \in G$ and $B \in H$ we have
+  \begin{equation*}
+    \det ABA^{-1} = \det A \det B \det A^{-1} = \det A (1) \frac{1}{\det A} = 1.
+  \end{equation*}
+  Thus $\forall A \in G, \, ABA^{-1} \in H$. By \cref{propo:normality_test}, $H \triangleleft G$, i.e. $SL_n(\mathbb{R}) \triangleleft GL_n(\mathbb{R})$.\sidenote{
+  \begin{note}
+    The normality is true for any field, not just $\mathbb{R}$.
+  \end{note}
+  }
+\end{eg}
+
+\begin{propo}[Subgroup of Index 2 is Normal]
+\label{propo:subgroup_of_index_2_is_normal}
+  \begin{equation*}
+    \forall H \text{ subgroup of } G \, \land \, [G : H] = 2 \implies H \triangleleft G
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Let $a \in G$.
+  \begin{align*}
+    a \in H &\implies aH = H = Ha \\
+    a \notin H &\implies G = H \cup Ha \implies Ha = G \setminus H \quad \because \cref{propo:properties_of_cosets} \\
+    a \notin H &\implies G = H \cup aH \implies aH = G \setminus H \quad \because \cref{propo:properties_of_cosets}
+  \end{align*}
+  That implies that $aH = Ha$ for any $a \in G$. Hence, by \cref{propo:normality_test}, $H \triangleleft G$.\qed
+\end{proof}
+
+\begin{eg}
+  Let $A_n$ be the \hldefn{Alternating Group} contained by $S_n$.\sidenote{Recall the definition of alternating group from \cref{thm:alternating_group} and $S_n$ from \cref{defn:permutations}} By \cref{propo:subgroup_of_index_2_is_normal}, since $[S_n : A_n] = 2$ because $S_n = A_n \cup O_n$ and $O_n$ is a coset of $A_n$, we have that
+  \begin{equation*}
+    A_n \triangleleft S_n.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Let
+  \begin{equation*}
+    D_{2n} = \{1, a, a^2, ..., a^{n - 1}, b, ba, ba^2, ..., ba^{n - 1} \}
+  \end{equation*}
+  be the \hldefn{Dihedral Group} of order $2n$. Since $[D_{2n} : \lra{a}] = 2$,\sidenote{The coset of $\lra{a}$ is $b\lra{a}$.} we have that
+  \begin{equation*}
+    \lra{a} \triangleleft D_{2n} \quad \because \cref{propo:normality_test}.
+  \end{equation*}
+\end{eg}
+
+\newthought{Let} $H$ and $K$ be subgroups of a group $G$. Recall an earlier discussion: $H \cap K$ is the largest subgroup contained in both $H$ and $K$.
+
+What is the ``smallest'' subgroup that contains both $H$ and $K$? Since $H \cap K$ is the largest, it makes sense to think about $H \cup K$. However,
+\begin{equation*}
+  H \cup K \text{ is a subgroup of } G \iff H \subseteq K \veebar K \subseteq H
+\end{equation*}
+While we know that $H \cup K$ can indeed be such a subgroup, the price of the restriction is too high, since it is overly restrictive.
+
+A more ``useful'' construction turns out to be the \hlnoteb{product} of the subgroups.
+
+\begin{defn}[Product of Groups]\index{Product of Groups}
+\label{defn:product_of_groups}
+  \begin{equation*}
+    HK := \{ hk \, : \, h \in H, \, k \in K \}
+  \end{equation*}
+\end{defn}
+
+However, $HK$ is not necessarily a subgroup. For example, for $h_1 k_1, h_2 k_2 \in HK$, it is not necessary that $h_1 k_1 h_2 k_2 \in HK$, since $k_1 h_2$ is not necessarily equal to $h_2 k_1$.
+
+\begin{lemma}[Product of Groups as a Subgroup]
+\label{lemma:product_of_groups_as_a_subgroup}
+  Let $H$ and $K$ be subgroups of $G$. The following are equivalent:
+  \begin{enumerate}
+    \item $HK$ is a subgroup of $G$
+    \item $HK = KH$ \sidenote{If one of $H$ or $K$ is normal, then the lemma immediately kicks in.}
+    \item $KH$ is a subgroup of $G$
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  It suffices to prove $(1) \iff (2)$, since $(1) \iff (3)$ simply through exchanging $H$ and $K$.
+
+  \noindent $(1) \implies (2)$: Let $kh \in KH$ such that $k \in K$ and $h \in H$. Their inverses are $k^{-1} \in K$ and $h^{-1} \in H$, since $K$ and $H$ are groups. Note that
+  \begin{equation*}
+    kh = (h^{-1} k^{-1})^{-1} \in HK \quad \because HK \text{ is a subgroup of } G.
+  \end{equation*}
+  Therefore $kh \in HK$, which implies $KH \subseteq HK$. By a similar argument, we can arrive at $HK \subseteq KH$ and so $HK = KH$.
+
+  \noindent $(2) \implies (1)$: Note that 1 = 1 \cdot 1 \in HK. For all $hk \in HK$, $(hk)^{-1} = k^{-1} h^{-1} \in KH = HK$. For $h_1 k_1, h_2 k_2 \in HK$, note that $k_1 h_2 \in KH = HK$, so there exists $h k \in HK$ such that $k_1 h_2 = hk$. Therefore,
+  \begin{equation*}
+    h_1 k_1 h_2 k_2 = h_1 h k k_2 \in HK.
+  \end{equation*}
+  By the \hlnoteb{Subgroup Test}, $HK$ is a subgroup of $G$.\qed
+\end{proof}
+
+\begin{propo}[Product of Normal Subgroups is Normal]
+\label{propo:product_of_normal_subgroups_is_normal}
+  Let $H$ and $K$ be subgroups of $G$.
+  \begin{enumerate}
+    \item $H \triangleleft G \, \lor \, K \triangleleft G \implies HK = KH$ is a subgroup of $G$
+    \item $H, K \triangleleft G \implies HK = KH \triangleleft G$
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Without loss of generality, suppose $H \triangleleft G$. Then
+      \begin{equation}\label{eq:product_of_normal_subgroups_is_normal_pf_1}
+        HK = \bigcup_{k \in K} Hk = \bigcup_{k \in K} kH = KH
+      \end{equation}
+      By \cref{lemma:product_of_groups_as_a_subgroup}, $HK = KH$ is a subgroup of $G$.
+
+    \item Suppose $H, K \triangleleft G$. Then
+      \begin{align*}
+        \forall g \in G \enspace \forall hk \in HK \quad g^{-1}( hk )g = (g^{-1} hg)(g^{-1} k g) \in HK
+      \end{align*}
+      Thus $gHKg^{-1} \subseteq HK$. Thus by \cref{propo:normality_test}, we have that $HK \triangleleft G$.
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{note}
+  Note that \cref{eq:product_of_normal_subgroups_is_normal_pf_1} is a weaker statement than the regular normality that we have defined, since it only requires all elements of $K$ to work instead of the entire $G$.
+\end{note}
+
+With that, we define the following notion:
+
+\begin{defn}[Normalizer]\index{Normalizer}
+\label{defn:normalizer}
+  Let $H$ be a subgroup of $G$. The \hlnoteb{normalizer of $H$}, denoted by $N_G(H)$, is defined to be
+  \begin{equation*}
+    N_G(H) := \{ g \in G \, : \, gH = Hg \}
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  By the above definition, we immediately see that $H \triangleleft G \iff N_G(H) = G$ by \cref{eq:product_of_normal_subgroups_is_normal_pf_1}. Observe that since we only needed $kH = Hk$ in \cref{eq:product_of_normal_subgroups_is_normal_pf_1} for all $k \in K$, we have that $k \in N_G(H)$.
+\end{note}
+
+We shall now provide the following corollary which shall be proven in the next lecture.
+
+\begin{crlynonum}
+  Let $H$ and $K$ be subgroups of a group $G$.
+  \begin{equation*}
+    K \subseteq N_G(H) \, \lor \, H \subseteq N_G(K) \implies HK = KH \text{ is a subgroup of } G
+  \end{equation*}
+\end{crlynonum}
+
+% subsection normal_subgroup_continued (end)
+
+% section normal_subgroup_continued_2 (end)
+
+% chapter lecture_11_may_25th_2018 (end)

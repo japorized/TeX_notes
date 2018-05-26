@@ -1,0 +1,120 @@
+\chapter{Lecture 5 May 11th 2018}
+\label{chp:lecture_5_may_11th_2018}
+
+\section{Subgroups (Continued)}
+\label{sec:subgroups_continued}
+% section Subgroups (Continued)
+
+\subsection{Subgroups (Continued)}
+\label{sub:subgroups_continued}
+% subsection Subgroups (Continued)
+
+\begin{note}[Recall: definition of a subgroup]
+  Let $G$ be a group and $H \subseteq G$. If $H$ itself is a group, then we say that $H$ is a subgroup of $G$.
+\end{note}
+
+\begin{note}
+  Since $G$ is a group, $\forall h_1, h_2, h_3 \in H \subseteq G$, we have $h_1 (h_2 h_3) = (h_1 h_2) h_3$. So $H$ is a subgroup of $G$ if it satisfies the following conditions, which we shall hereafter refer to as the Subgroup Test.
+
+\noindent\hldefn{Subgroup Test} \\
+  \marginnote{Note that the identity in $H$ must also be the identity in $G$. This is because if $h_1, h_1^{-1} \in H$, then $h_1 h_1^{-1} = 1_H$, but $h_1, h_1^{-1} \in G$ as well, and so $h_1 h_1^{-1} = 1_G$. Thus $1_H = 1_G$.}
+  \begin{enumerate}
+    \item $h_1 h_2 \in H$
+    \item $1_G \in H$
+    \item $\exists h_1^{-1} \in H$ such that $h_1 h_1^{-1} = 1_G$
+  \end{enumerate}
+\end{note}
+
+\begin{eg}
+  Given a group $G$, it is clear that $\{1\}$ and $G$ are both subgroups of $G$.
+\end{eg}
+
+\begin{eg}
+  We have the following chain of groups:
+  \begin{equation*}
+    (\mathbb{Z}, +) \subseteq (\mathbb{Q}, +) \subseteq (\mathbb{R}, +) \subseteq (\mathbb{C}, +)
+  \end{equation*}
+\end{eg}
+
+Recall that the general linear group is defined as:
+\begin{equation*}
+  GL_n(\mathbb{R}) = (GL_n(\mathbb{R}), \cdot) = \{A \in M_n(\mathbb{R}) : \det A \neq 0 \}
+\end{equation*}
+
+\begin{defn}[Special Linear Group]\label{defn:special_linear_group}
+\index{Special Linear Group}
+  The \hlnoteb{special linear group} of order $n$ of $\mathbb{R}$ is defined as
+  \begin{equation*}
+    SL_n(\mathbb{R}) = (SL_n(\mathbb{R}), \cdot) = \{A \in M_n(\mathbb{R}) : \det A = 1 \}
+  \end{equation*}
+\end{defn}
+
+\begin{eg}\label{eg:special_linear_group_as_a_subgroup}
+  Clearly, $SL_n(\mathbb{R}) \subseteq GL_n(\mathbb{R})$. Note that the identity matrix $I$ must be in $SL_n(\mathbb{R})$ since $\det I = 1$. Also, $\forall A, B \in SL_n(\mathbb{R})$, we have that
+  \begin{equation*}
+    \det AB = \det A \det B = 1
+  \end{equation*}
+  $\therefore AB \in SL_n(\mathbb{R})$. Also, since $\det A^{-1} = \frac{1}{\det A} = 1$, we also have that $\A^{-1} \in SL_n(\mathbb{R})$. We see that $SL_n(\mathbb{R})$ satisfies the \hlnoteb{Subgroup Test}, and hence it is a subgroup of $GL_n(\mathbb{R})$.
+\end{eg}
+
+\begin{defn}[Center of a Group]\label{defn:center_of_a_group}
+\index{Center of a Group}
+  Given a group $G$, the \hlnoteb{the center of a group $G$} is defined as
+  \begin{equation*}
+    Z(G) = \{z \in G \, : \, \forall g \in G \enspace zg = gz \}
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  For a group $G$, $Z(G)$ is an abelian subgroup of $G$.
+
+  \begin{proof}
+    Clearly, $1_G \in Z(G)$. Let $y, z \in G$. $\forall g \in G$, we have that
+    \begin{equation*}
+      (yz)g = y(zg) = y(gz) = (yg)z = (gy)z = g(yz)
+    \end{equation*}
+    Therefore $yz \in Z(G)$ and so $Z(G)$ is closed under its operation. Also, $\forall h 
+    in G$, we can write $h = (h^{-1})^{-1} = g^{-1}$. Since $z \in Z(G)$, we have that $\forall g \in G$,
+    \begin{align*}
+      zg = gz \iff (zg)^{-1} = (gz)^{-1} &\iff g^{-1} z^{-1} = z^{-1} g^{-1} \\
+          &\iff hz^{-1} = z^{-1} h
+    \end{align*}
+    Therefore $z^{-1} \in Z(G)$. By the \hlnoteb{Subgroup Test}, it follows that $Z(G)$ is a subgroup of $G$.
+
+    Finally, since $Z(G) \subseteq G$, by its definition, we have that $\forall x, y \in Z(G)$, $x, y \in G$ as well, and we have that $xy = yx$. Therefore, $Z(G)$ is abelian. \qed
+  \end{proof}
+\end{eg}
+
+\begin{propo}[Intersection of Subgroups is a Subgroup]\label{propo:intersection_of_subgroups_is_a_subgroup}
+  Let $H$ and $K$ be subgroups of a group $G$. Then their intersection
+  \begin{equation*}
+    H \cap K = \{g \in G : g \in H \, \land \, g \in K\}
+  \end{equation*}
+  is also a subgroup of $G$.
+\end{propo}
+
+\begin{proof}
+  Since $H$ and $K$ are subgroups, we have that $1 \in H$ and $1 \in K$ and hence $1 \in H \cap K$. Let $a, b \in H \cap K$. Since $H$ and $K$ are subgroups, we have that $ab \in H$ and $ab \in K$. Therefore, $ab \in H \cap K$. Similarly, since $a^{-1} \in H$ and $a^{-1} \in K$, $a^{-1} \in H \cap K$. By the \hlnoteb{Subgroup Test}, $H \cap K$ is a subgroup of $G$. \qed
+\end{proof}
+
+\begin{propo}[Finite Subgroup Test]\label{propo:finite_subgroup_test}
+\index{Finite Subgroup Test}
+\marginnote{This result says that if $H$ is a finite nonempty subset, then we only need to prove that it is closed under its operation to prove that it is a subgroup. The other two conditions in the \hlnoteb{Subgroup Test} are automatically implied.}
+  If $H$ is a finite nonempty subset of a group $G$, then $H$ is a subgroup if and only if $H$ is closed under its operation.
+\end{propo}
+
+\begin{proof}
+  The forward direction of the proof is trivially true, since $H$ must satisfy the closure property for it to be a subgroup.
+
+  For the converse, since $H \neq \emptyset$, let $h \in H$. Since $H$ is closed under its operation, we have that
+  \begin{equation*}
+    h, h^2, h^3, ...
+  \end{equation*}
+  are all in $H$. Since $H$ is finite, not all of the $h^n$'s are distinct. Then, $\forall n \in \mathbb{N}$, there must $\exists m \in \mathbb{N}$ such that $h^n = h^{n + m}$. Then by \autoref{propo:cancellation_laws}, $h^m = 1$ and so $1 \in H$. Also, because $1 = h^{m - 1} h$, we have that $h^{-1} = h^{m - 1}$, and thus the inverse of $h$ is also in $H$. Therefore, $H$ is a subgroup of $G$ as requried. \qed
+\end{proof}
+
+% subsection Subgroups (Continued) (end)
+
+% section Subgroups (Continued) (end)
+
+% chapter lecture_5_may_11th_2018 (end)

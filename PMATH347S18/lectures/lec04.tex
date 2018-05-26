@@ -1,0 +1,194 @@
+\chapter{Lecture 4 May 09 2018}
+  \label{chapter:lecture_4_may_09_2018}
+
+\section{Groups (Continued)} % (fold)
+\label{sec:groups_continued}
+
+\subsection{Groups (Continued)} % (fold)
+\label{sub:groups_continued}
+
+\begin{propo}[Cancellation Laws]\label{propo:cancellation_laws}
+  Let $G$ be a group and $g, h, f \in G$. Then
+  \begin{enumerate}
+    \item \begin{enumerate}
+        \item (\hlnoteb{Right Cancellation}) $gh = gf \implies h = f$
+        \item (\hlnoteb{Left Cancellation}) $hg = fg \implies h = f$
+      \end{enumerate}
+    \item The equation $ax = b$ and $ya = b$ have unique solution for $x, y \in G$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item \begin{enumerate}
+      \item By left multiplication and associativity,
+        \begin{equation*}
+          gh = gf \iff g^{-1} gh = g^{-1} gf \iff h = f
+        \end{equation*}
+      \item By right multiplication and associativity,
+        \begin{equation*}
+          hg = fg \iff hgg^{-1} = fgg^{-1} \iff h = f
+        \end{equation*}
+    \end{enumerate}
+
+    \item Let $x = a^{-1} b$. Then
+      \begin{equation*}
+        a x = a (a^{-1} b) = (aa^{-1}) b = b.
+      \end{equation*}
+      If $\exists u \in G$ that is another solution, then
+      \begin{equation*}
+        au = b = ax \implies u = x
+      \end{equation*}
+      by Left Cancellation. The proof for $ya = b$ is similar by letting $y = ba^{-1}$.
+  \end{enumerate}\qed
+\end{proof}
+
+% subsection groups_continued (end)
+
+\subsection{Cayley Tables} % (fold)
+\label{sub:cayley_tables}
+
+For a finite group, defining its operation by means of a table is sometimes convenient.
+
+\begin{defn}[Cayley Table]\label{defn:cayley_table}
+\index{Cayley Table}
+  Let $G$ be a group. Given $x, y \in G$, let the product $xy$ be an entry of a table in the row corresponding to $x$ and column corresponding to $y$. Such a table is called a \hlnoteb{Cayley Table}.
+\end{defn}
+
+\begin{note}
+  By \autoref{propo:cancellation_laws}, the entries in each row (and respectively, column) of a Cayley Table are all distinct.
+\end{note}
+
+\begin{eg}
+  Consider the group $(\mathbb{Z}_2, +)$. Its Cayley Table is
+  \begin{center}
+    \begin{tabular}{c|c|c}
+      $\mathbb{Z}_2$ & $[0]$ & $[1]$ \\
+      \hline
+      $[0]$     & $[0]$ & $[1]$ \\
+      $[1]$     & $[1]$ & $[0]$ 
+    \end{tabular}
+  \end{center}
+  where note that we must have $[1] + [1] = [0]$; otherwise if $[1] + [1] = [1]$ then $[1]$ does not have its additive inverse, which contradicts the fact that it is in the group.
+\end{eg}
+
+\marginnote {
+  If we replace $1$ by $[0]$ and $-1$ by $[1]$, the Cayley Tables of $\mathbb{Z}_2$ and $\mathbb{Z}^*$ are the same. In thie case, we say that $\mathbb{Z}_2$ and $\mathbb{Z}^*$ are \hlnotea{isomorphic}, which we denote by $\mathbb{Z}_2 \cong \mathbb{Z}^*$.
+}
+
+\begin{eg}
+  Consider the group $\mathbb{Z}^* = \{1. -1\}$. Its Cayley Table (under multiplication) is
+  \begin{center}
+    \begin{tabular}{c|c|c}
+      $\mathbb{Z}^*$ & $1$    & $-1$ \\
+      \hline
+      $1$              & $1$  & $-1$ \\
+      $-1$             & $-1$ & $1$
+    \end{tabular}
+  \end{center}
+\end{eg}
+
+\begin{eg}\label{eg:cyclic_group_cayley_table}
+  Given $n \in \mathbb{N}$, the \hldefn{Cyclic Group} of order $n$ is defined by
+  \begin{equation*}
+    C_n = \{1, a, a^2, ..., a^{n - 1}\} \quad \text{with } a^n = 1.
+  \end{equation*}
+  We write $C_n = \langle a : a^n = 1 \rangle$ and $a$ is called a generator of $C_n$. The Cayley Table of $C_n$ is
+  \begin{center}
+    \begin{tabular}{c | c c c c c c}
+      $C_n$     & $1$       & $a$       & $a^2$  & \hdots & $a^{n - 2}$ & $a^{n - 1}$ \\
+      \hline
+      $1$       & $1$       & $a$       & $a^2$  & \hdots & $a^{n - 2}$ & $a^{n - 1}$ \\
+      $a$       & $a$       & $a^2$     & $a^3$  & \hdots & $a^{n - 1}$ & $1$ \\
+      $a^2$     & $a^2$     & $a^3$     & $a^4$  & \hdots & $1$         & $a$ \\
+      \vdots    & \vdots    & \vdots    & \vdots &        & \vdots      & \vdots \\
+      $a^{n-2}$ & $a^{n-2}$ & $a^{n-1}$ & $1$    & \hdots & $a^{n-4}$   & $a^{n-3}$ \\
+      $a^{n-1}$ & $a^{n-1}$ & $1$       & $a$    & \hdots & $a^{n-3}$   & $a^{n-2}$
+    \end{tabular}
+  \end{center}
+\end{eg}
+
+\begin{propo}\label{propo:small_groups}
+  Let $G$ be a group. Up to isomorphism, we have
+  \begin{enumerate}
+    \item if $\abs{G} = 1$, then $G \cong \{1\}$.
+    \item if $\abs{G} = 2$, then $G \cong C_2$.
+    \item if $\abs{G} = 3$, then $G \cong C_3$.
+    \item if $\abs{G} = 4$, then either $G \cong C_4$ or $G \cong K_4 \cong C_2 \times C_2$ \marginnote{$K_n$ is known as the \hldefn{Klein n-group}}.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $\abs{G} = 1$, then it can only be $G = \{1\}$ where $1$ is the identity element.
+    \item $\abs{G} = 2 \implies G = \{1, g\}$ with $g \neq 1$. The Cayley Table of $G$ is thus
+      \begin{center}
+        \begin{tabular}{c | c c}
+        $G$ & $1$ & $g$ \\
+        \hline
+        $1$ & $1$ & $g$ \\
+        $g$ & $g$ & $1$
+        \end{tabular}
+      \end{center}
+      where we note that $g^2 = 1$; otherwise if $g^2 = g$, then we would have $g = 1$ by \autoref{propo:cancellation_laws}, which contradicts the fact that $g \neq 1$. Comparing the above Cayley Table with that of $C_2$, we see that $G = \langle g : g^2 = 1 \rangle \cong C_2$.
+    \item $\abs{G} = 3 \implies G = \{1, g, h\}$ with $g \neq 1 \neq h$ and $g \neq h$. We can then start with the following Cayley Table:
+      \begin{center}
+        \begin{tabular}{c | c c c}
+        $G$ & $1$ & $g$ & $h$ \\
+        \hline
+        $1$ & $1$ & $g$ & $h$ \\
+        $g$ & $g$ &     &     \\
+        $h$ & $h$ &     &     
+        \end{tabular}
+      \end{center}
+      We know that by \autoref{propo:cancellation_laws}, $gh \neq g$ and $gh \neq h$. Thus $gh = 1$. Similarly, we get that $hg = 1$.
+
+      \underline{Claim:} Entries in a row (or column) must be distinct. Suppose not. Then say $g^2 = 1$. But since $gh = 1$, by \autoref{propo:cancellation_laws}, we have that $h = g$, which is a contradiction.
+
+      With that, we can proceed to fill in the rest of the entries: with $g^2 = h$ and $h^2 = g$. Therefore,
+      \begin{center}
+        \begin{tabular}{c | c c c}
+        $G$ & $1$ & $g$ & $h$ \\
+        \hline
+        $1$ & $1$ & $g$ & $h$ \\
+        $g$ & $g$ & $h$ & $1$ \\
+        $h$ & $h$ & $1$ & $g$
+        \end{tabular}
+      \end{center}
+
+      Recall that the Cayley Table for $C_3$ is:
+      \begin{center}
+        \begin{tabular}{c | c c c}
+        $C_3$ & $1$   & $a$   & $a^2$ \\
+        \hline
+        $1$   & $1$   & $a$   & $a^2$ \\
+        $a$   & $a$   & $a^2$ & $1$ \\
+        $a^2$ & $a^2$ & $1$   & $a$
+        \end{tabular}
+      \end{center}
+      $\therefore G \cong C_3$ (by identifying $g = a$ and $h = a^2$).
+
+    \item \hlwarn{Proof will be added once assignment 1 is over}
+  \end{enumerate}
+\end{proof}
+
+% subsection cayley_tables (end)
+
+% section groups_continued (end)
+
+\section{Subgroups}
+\label{sec:subgroups}
+
+\subsection{Subgroups}
+\label{sub:subgroups}
+
+\begin{defn}[Subgroup]\label{defn:subgroup}
+\index{Subgroup}
+  Let $G$ be a group and $H \subseteq G$. If $H$ itself is a group, then we say that $H$ is a subgroup of $G$
+\end{defn}
+
+% subsection subgroups (end)
+
+% section subgroups (end)
+
+% chapter lecture_4_may_09_2018 (end)
