@@ -1,6 +1,7 @@
 % !TEX TS-program = lualatex
 \documentclass[notoc,notitlepage]{tufte-book}
 \usepackage{luatexja}
+\usepackage{pxrubrica}
 \nonstopmode
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{5}
@@ -10,15 +11,29 @@
 \usepackage{CJKutf8}
 \input{latex-classnotes-preamble.tex}
 
+\newenvironment{lrcases}
+  {\left\lbrace\quad\begin{aligned}}
+  {\end{aligned}\quad\right\rbrace}
+\renewcommand\rubysize{.6}
+
 \theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt}}
 \theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt}}
 \theoremindent10pt
 \newtheorem{grammar}{文法}[section]
 
-% Main Body
 \title{JAPAN201RS18}
 \author{Johnson Ng}
+
+% Header formatting
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\makeatletter
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO]{\textsl{\@title} \enspace \thepage}
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark \enspace - \enspace \rightmark}}
+\makeatother
 
 \begin{document}
 
@@ -383,11 +398,47 @@ Convert the base forms to their potential forms: \marginnote{We can drop the ら
 
   \begin{enumerate}
     \item ケンア (Kenya)
+      \begin{align*}
+        A &: \text{ケニヤに行ったことがありますか。} \\
+        B &: \text{いいえ。ありません。でも、行ってみたいです。} \\
+        A &: \text{そうですか。ケニャで何がしたいですか。} \\
+        B &: \text{ケニヤでサバンナの\ruby[j]{日暮}{ひ|ぐ}れと\ruby[j]{野生動物}{や|せい|どう|ぶつ}を見たり、お\ruby[j]{寺}{てら}を行ったりしてみたいです。}
+      \end{align*}
     \item 東京
+      \begin{align*}
+        A &: \text{東京に行ったことがありますか。} \\
+        B &: \text{はい、去年五月に行きました。} \\
+        A &: \text{そうですか。何がしたんですか。} \\
+        B &: \text{ラーメンとつけ\ruby[j]{麺}{めん}を食べたり、\ruby[j]{周}{まわ}りの観光地に行ったりしていた。}
+      \end{align*}
     \item タイ (Thailand)
+      \begin{align*}
+        A &: \text{タイに行ったことがありますか。} \\
+        B &: \text{いいえ、行ったことないです。でも、行ってみたいです。} \\
+        A &: \text{そうですか。タイで何がしたいですか。} \\
+        B &: \text{タイでメコン川に遊んたり、トムヤムを食べたりしてみたいです。}
+      \end{align*}
     \item ブラジル (Brazil)
+      \begin{align*}
+        A &: \text{ブラジルに行ったことがありますか。} \\
+        B &: \text{いいえ、ないです。でも、行ってみたいです。} \\
+        A &: \text{そうですか。ブラジルで何がしたいですか。} \\
+        B &: \text{ブラジルで\ruby[j]{滝}{たき}を見たり、山を\ruby[j]{乗}{の}ったりしてみたいです。}
+      \end{align*}
     \item チベット (Tibet)
+      \begin{align*}
+        A &: \text{チベットに行ったことがありますか。} \\
+        B &: \text{いいえ、ないです。でも、行ってみたいです。} \\
+        A &: \text{そうですか。チベットで何がしたいですか。} \\
+        B &: \text{チベットでお寺を見たり、\ruby[j]{自然}{しぜん}を近づくたりしてみたいです。}
+      \end{align*}
     \item Your own
+      \begin{align*}
+        A &: \text{マレシアに行ったことがありますか。} \\
+        B &: \text{はい、ありますよ。} \\
+        A &: \text{そうですか。マレシアで何がしたんですか。} \\
+        B &: \text{マレシアで美味しい食べ物を食べたり、海で泳いでたりしていました。}
+      \end{align*}
   \end{enumerate}
 \end{ex}
 
@@ -399,7 +450,148 @@ Convert the base forms to their potential forms: \marginnote{We can drop the ら
 \label{chp:lecture_4_wu_yue_shi_si_ri_yue_yao_ri}
 % chapter lecture_4_wu_yue_shi_si_ri_yue_yao_ri
 
+\section{〜なら}%
+\label{sec:_nara}
+% section _nara
 
+\begin{grammar}[なら]
+\label{grammar:nara}
+  A statement of the form "noun A なら predicate X" says that the predicate X \textit{applies only to} A and is not more generally valid. The main ideas of a なら sentence, in other words, are contrast (as in \cref{eg:nara_situation_1}) and limitation (as in \cref{eg:nara_situation_2}).
+\end{grammar}
+
+\begin{eg}[Situation 1]\label{eg:nara_situation_1}
+\noindent    Q : ブラジルに行ったことがありますか。 \\
+\noindent \quad\enspace Have you ever been to Brazil? \\
+\noindent    A : チリ\underline{なら}行ったことがありますが、ブラジルはいったことがありません。\sidenote{
+  \begin{note}
+    Optionally, we can keep the particle に before なら in this example. Particles such as に, で, and から may, but do not have to, intervene between the noun and なら, while は, が, and を never go with なら.
+  \end{note}
+  } \\
+\noindent \quad\enspace I've been to Chile, but never to Brazil. 
+\end{eg}
+
+\begin{eg}[Situation 2]\label{eg:nara_situation_2}
+\noindent Q : 日本語がわかりますか。\\
+\noindent \quad\enspace Do you understand Japanese? \\
+\noindent A : ひたがな\underline{なら}わかります。\\
+\noindent \quad\enspace If it is (written) in hiragana, yes.
+\end{eg}
+
+\begin{note}
+  \marginnote{The examples illustrate a good way to keep the conversation ball rolling by adding related information to a question that can simply be answered with a no. Q can then use the ``positive'' information received from A to continue the conversation, instead of just ending the conversation or have a difficult time continuing it.}
+  ならintroduces a sentence that says something ``positive'' about the item that is contrasted. In the first situation above, なら puts Chile in a positive light, and in constrast with Brazil, which the question was originally about. In the second situation, a smaller part, namely \textit{hiragana}, is brought up and contrasted with a larger area, namely, the language as  whole. 
+\end{note}
+
+\begin{ex}[げんき II - 44 ページ、V パート A]
+  Answer the questions as in the example.
+
+  \textbf{例：} \\
+  \noindent Q: メアリーさんはけさ、コーヒーを飲みますか。\\
+  \noindent A: ($\circ$ tea $\times$ coffee) \\
+  \noindent \quad\enspace $\to$ \ruby[j]{紅茶}{こう|ちゃ}なら飲みましたが、コーヒーは\sidenote{
+    \begin{note}
+      It is entirely okay for us to use は here instead of を as we would normally do, since we are trying to make a comparison between コーヒー and 紅茶.
+    \end{note}
+  }飲みませんでした。
+
+  \begin{enumerate}
+    \item メアリーさんはバイクに乗れますか。($\circ$ bicycle $\times$ motorbike) \\
+      \textbf{答え：}自転車なら乗れますが、バイクには乗れません。 
+    \item メアリーさんはニュージーランドに行ったことありますか。($\circ$ Australia $\times$ New Zealand) \\
+      \textbf{答え：}オーストラリアなら行ったことありますが、ニュージーランドはまだ行ったことありません。 
+    \item メアリーさんはゴルフをしますか。($\circ$ tennis $\times$ golf) \\
+      \textbf{答え：}テニスならしますが、ゴルフはしたことないです。
+    \item けんさんは日本の\ruby[j]{経済}{けい|ざい}に\ruby[j]{興味}{きょう|み}がありますか。($\circ$ history $\times$ economics) \\
+      \textbf{答え：}歴史なら興味がありますが、経済はあまり興味がありません。 
+    \item けんさんは\ruby[j]{彼女}{かのじょ}がいますか。($\circ$ friend $\times$ girlfriend) \\
+      \textbf{答え：}友達ならいますが、彼女はいません。 
+    \item けんさんは土曜日に出かけられますか。($\circ$ Sunday $\times$ Saturday) \\
+      \textbf{答え：}日曜日なら出かけられますが、土曜日はちょっといけません。 
+  \end{enumerate}
+\end{ex}
+
+\begin{ex}[げんき II - 45 ページ、V パート B]
+  Answer the following questions. Use 〜なら whenever possible.
+
+  \textbf{例：}\\
+  \noindent Q: スポーツをよく見ますか。\\
+  \noindent A: ええ、\ruby[j]{野球}{や|きゅう}なら見ます。/いいえ、見ません。
+
+  \begin{enumerate}
+    \item 外国語ができますか。\\
+      \textbf{答え：}はい、中国語、英語、マレー語、広東語と台湾語ならできます。 
+    \item アルバイトをしたことがありますか。\\
+      \textbf{答え：}はい、\ruby[j]{官公庁}{かん|こう|ちょう} にデータ\ruby[j]{分析}{ぶん|せき}の仕事がしたことがあります。
+    \item 日本の料理が作れますか。\\
+      \textbf{答え：}いいえ、 日本の料理が好きですが、作れません。
+    \item 有名人に会ったことがありますか。\\
+      \textbf{答え：}いいえ、そういう\ruby[j]{機会}{き|かい}がないです。 
+    \item \ruby[j]{楽器}{がっ|き}できますか。\\
+      \textbf{答え：}いいえ。でも、ギータなら前に\ruby[j]{学}{まな}びました。 
+    \item お金を\ruby[j]{貸}{か}せますか。\\
+      \textbf{答え：}お金を貸せませんが、何のお\ruby[j]{手伝}{て|つだ}いをほしいですか。 
+  \end{enumerate}
+\end{ex}
+
+% section _nara (end)
+
+\section{一週間に三回}%
+\label{sec:yi_zhou_jian_nisan_hui_}
+% section yi_zhou_jian_nisan_hui_
+
+\begin{grammar}[(period) に (frequency)]
+\label{grammar:_period_ni_frequency_}
+  We can describe the frequency of events over a period of time using the following framework:
+  \begin{center}
+    (period) に (frequency) \qquad (frequency) per (period)
+  \end{center}
+\end{grammar}
+
+\begin{eg}
+\noindent 私は\underline{一週間に三回}髪を\ruby[j]{洗}{あら}います。\\
+\noindent 私は\underline{一ヶ月に一回}家族に電話をかけます。\\
+\noindent 父は\underline{一年に二回}旅行します。
+\end{eg}
+
+\begin{ex}[げんき II - 45 ページ、VI パートA]
+  Express the following activities and their frequencies as in the given example.
+
+  \textbf{例：} \\
+  eat twice a day \\
+  一日に二回食べます。
+
+  \begin{enumerate}
+    \item brush (teeth) twice a day \\
+      $\to$ 一日に三回\ruby[j]{歯}{は}を\ruby[j]{磨}{み}きます。
+    \item sleep seven hours a day \\
+      $\to$ 一日に七時寝ます。
+    \item study three hours a day \\
+      $\to$ 一日に三時勉強します。
+    \item do house chores once a week \\
+      $\to$ 一週間に一回\ruby[j]{家事}{か|じ}をします。
+    \item do the laundry twice a week
+      $\to$ 一週間に二回洗濯します。
+    \item do part-time job three days a week \\
+      $\to$ 一週間に三日アルバイトをします。
+    \item go to school five days a week \\
+      $\to$ 一週間に五日学校に行きます。
+    \item go to the movies once a month \\
+      $\to$ 一ヶ月に一回\ruby[j]{映画館}{えい|が|かん}に行って、映画を見ます。
+  \end{enumerate}
+\end{ex}
+
+\begin{ex}[げんき II - 46 ページ、 VI パート B]
+  From the last exercise, create questions above the given activities using the following method:
+  \begin{equation*}
+    \begin{lrcases} 一日 \\ 一週間 \\ 一ヶ月 \end{lrcases} に \begin{lrcases} 何回 \\ 何時間 \\ 何日 \end{lrcases} 〜ますか
+  \end{equation*}
+
+  \textbf{例：} \\
+\noindent A: Bさんは一日に何回食べますか。 \\
+\noindent B: そうですね。たいてい一日に二回食べます。朝食は食べません。
+\end{ex}
+
+% section yi_zhou_jian_nisan_hui_ (end)
 
 % chapter lecture_4_wu_yue_shi_si_ri_yue_yao_ri (end)
 
@@ -407,7 +599,20 @@ Convert the base forms to their potential forms: \marginnote{We can drop the ら
 \label{chp:lecture_5_wu_yue_shi_liu_ri_shui_yao_ri_}
 % chapter lecture_5_wu_yue_shi_liu_ri_shui_yao_ri_
 
+\begin{ex}[げんき II - 47 ページ、VII パート A]
+  Answer the following questions.
 
+  \begin{enumerate}
+    \item 子供の時に何ができましたが。何ができませんでしたか。
+    \item 百円で何が買えますか。
+    \item どこに行ってみたいですか。どうしてですか。
+    \item 子供の時、何がしてみたかったですか。
+    \item 今、何がしてみたいですか。
+    \item 一日に何時間ぐらい勉強しますか。
+    \item 一週間に何回レストランに行きますか。
+    \item 一ヶ月にいくらぐらい使いますか。
+  \end{enumerate}
+\end{ex}
 
 % chapter lecture_5_wu_yue_shi_liu_ri_shui_yao_ri_ (end)
 
