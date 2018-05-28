@@ -38,14 +38,14 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
-  - PMATH333/
-  - PMATH347F17/
-  - PMATH347S18/
-  - PMATH351F17/
-  - PMATH352W18/
-  - MATH145/
-  - MATH239/
-  - JAPAN201RS18/
-  - STAT330S18
-  - Others/
+  # - PMATH333/
+  # - PMATH347F17/
+  # - PMATH347S18/
+  # - PMATH351F17/
+  # - PMATH352W18/
+  # - MATH145/
+  # - MATH239/
+  # - JAPAN201RS18/
+  # - STAT330S18
+  # - Others/
   - Personal\ Notes/
