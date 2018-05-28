@@ -57,7 +57,6 @@
               {% for tex in file.tex %}
               <div class="course-file file-tex">
                 <a href="{{ tex.src }}">
-                  <!-- <span class="far fa-file-code"></span><br /> -->
                   <span class="fas fa-align-left"></span><br />
                   {{ tex.title }}
                 </a>
@@ -69,7 +68,6 @@
       </section>
     </article>
 
-    <script type="text/javascript" src="assets/js/jquery-ajax.js"></script>
     <script type="text/javascript">
 function nightSwitcher(){var rawtime=new Date(),curHours=rawtime.getHours();if(curHours>17||curHours<8){document.querySelector('head').innerHTML+="<link rel='stylesheet' href='assets/css/night-mode.css' />"}}nightSwitcher();
     </script>
