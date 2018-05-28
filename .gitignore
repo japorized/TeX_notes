@@ -221,3 +221,8 @@ TSWLatexianTemp*
 
 # macOS Files
 .DS_Store
+
+# jekyll files
+_site
+.sass-cache
+.jekyll-metadata

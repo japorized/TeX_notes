@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="assets/css/tufte.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <style>
+      .course-card {
+        width: 90%
+      }
+      .course-card h2 {
+        margin-bottom: 20px;
+      }
+      .course-files {
+        display: block;
+      }
+      .course-file {
+        text-align: center;
+        margin: 10px;
+      }
+      .course-file a .fas, .course-file a .far {
+        font-size: 45px;
+        margin-bottom: 10px;
+      }
+
+      @media (min-width: 767px) {
+        .course-card {
+          width: 400px;
+        }
+        .course-files {
+          display: flex;
+          justify-content: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <article>
+      <h1>Japorized's LaTeX Notes</h1>
+      <p class="subtitle">Style from <a href="https://github.com/edwardtufte/tufte-css">tufte-css</a> | Notes from this Github <a href="https://github.com/japorized/TeX_notes">repo</a> | Written by <a href="https://japorized.github.io">Japorized</a></p>
+
+      <section id="files">
+        {% for file in site.data.files %}
+          <div class="course-card">
+            <h2>{{ file.title }}</h2>
+            <div class="course-files">
+              {% for pdf in file.pdf %}
+              <div class="course-file file-pdf">
+                <a href="{{ pdf.src }}">
+                  <span class="fas fa-file-pdf"></span><br />
+                  {{ pdf.title }}
+                </a>
+              </div>
+              {% endfor %}
+              {% for tex in file.tex %}
+              <div class="course-file file-tex">
+                <a href="{{ tex.src }}">
+                  <!-- <span class="far fa-file-code"></span><br /> -->
+                  <span class="fas fa-align-left"></span><br />
+                  {{ tex.title }}
+                </a>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </section>
+    </article>
+
+    <script type="text/javascript" src="assets/js/jquery-ajax.js"></script>
+    <script type="text/javascript">
+function nightSwitcher(){var rawtime=new Date(),curHours=rawtime.getHours();if(curHours>17||curHours<8){document.querySelector('head').innerHTML+="<link rel='stylesheet' href='assets/css/night-mode.css' />"}}nightSwitcher();
+    </script>
+  </body>
+</html>
+

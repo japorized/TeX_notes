@@ -1,0 +1,59 @@
+- title: PMATH347 S18
+  pdf:
+  - title: classnotes.pdf
+    src: ./PMATH347S18/classnotes.pdf
+  - title: classnotes-white.pdf
+    src: ./PMATH347S18/classnotes-white.pdf
+  tex:
+  - title: classnotes.tex
+    src: /PMATH347S18/classnotes.tex
+  - title: classnotes-white.tex
+    src: ./PMATH347S18/classnotes-white.tex
+
+- title: STAT330 S18
+  pdf:
+  - title: classnotes.pdf
+    src: ./STAT330S18/classnotes.pdf
+  tex:
+  - title: classnotes.tex
+    src: ./STAT330S18/classnotes.tex
+
+- title: JAPAN201R S18
+  pdf:
+  - title: readingnotes.pdf
+    src: ./JAPAN201RS18/readingnotes.pdf
+  tex:
+  - title: readingnotes.tex
+    src: ./JAPAN201RS18/readingnotes.tex
+
+- title: PMATH352 W18
+  pdf:
+  - title: classnotes.pdf
+    src: ./PMATH352W18/classnotes.pdf
+  - title: classnotes-white.pdf
+    src: ./PMATH352W18/classnotes-white.pdf
+  tex:
+  - title: classnotes.tex
+    src: ./PMATH352W18/classnotes.tex
+  - title: classnotes-white.tex
+    src: ./PMATH352W18/classnotes-white.pdf
+
+- title: PMATH333 W17
+  pdf:
+  - title: pmath333_defns_thms.pdf
+    src: ./PMATH333/pmath333_defns_thms.pdf
+  - title: final_review.pdf
+    src: ./PMATH333/final_review.pdf
+  tex:
+  - title: pmath333_defns_thms.tex
+    src: ./PMATH333/pmath333_defns_thms.tex
+  - title: final_review.pdf
+    src: ./PMATH333/final_review.tex
+
+- title: MATH239 W17
+  pdf:
+  - title: defn_thm.pdf
+    src: ./MATH239/defn_thm.pdf
+  tex:
+  - title: defn_thm.tex
+    src: ./MATH239/defn_thm.tex
