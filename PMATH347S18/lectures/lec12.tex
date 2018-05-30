@@ -1,0 +1,119 @@
+\chapter{Lecture 12 May 28th 2018}%
+\label{chp:lecture_12_may_28th_2018}
+% chapter lecture_12_may_28th_2018
+
+\section{Normal Subgroup (Continued 3)}%
+\label{sec:normal_subgroup_continued_3}
+% section normal_subgroup_continued_3
+
+\subsection{Normal Subgroup (Continued 2)}%
+\label{sub:normal_subgroup_continued_2}
+% subsection normal_subgroup_continued_2
+
+\begin{thm}
+\label{thm:product_and_cross_product_of_normal_subgroups_are_isomorphic}
+  If $H \triangleleft G$ and $K \triangleleft G$ satisfy $H \cap K = \{ 1 \}$, then
+  \begin{equation*}
+    HK \cong H \times K
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  \underline{Claim 1:}
+  \begin{equation*}
+    H \triangleleft G \, \land \, K \triangleleft G \, \land \, H \cap K = \{1\} \implies \forall h \in H \enspace \forall k \in K \quad hk = kh
+  \end{equation*}
+
+  Consider $x = hkh^{-1}k^{-1}$. Note that since $H \triangleleft G$, by \cref{propo:normality_test}, we have that $\forall g \in G$, $gHg^{-1} = H$. Then $khk^{-1} \in kHk^{-1} = H$. Thus $x = h(kh^{-1}k^{-1}) \in H$. Using a similar argument, we can get that $x \in K$. Since $x \in H \cap K = \{1\}$, we have that $hkh^{-1}k^{-1} = 1$, we have that $hk = kh$ as claimed.
+
+  Note that since $H \triangleleft G$, by \cref{propo:product_of_normal_subgroups_is_normal}, we have that $HK$ is a subgroup of $G$.\sidenote{We do not need the more powerful statement that says that $HK$ is a normal subgroup.} Define $\sigma : H \times K \to HK$ by
+  \begin{equation*}
+    \forall h \in H \enspace \forall k \in K \qquad \sigma\big( (h, k) \big) = hk
+  \end{equation*}
+
+  \noindent\underline{Claim 2:} $\sigma$ is an isomorphism.
+
+  Let $(h, k), (h_1, k_1) \in H \times K$. By Claim 1, note that $h_1 k = kh_1$. Therefore,
+  \begin{align*}
+    \sigma\big( (h, k)\cdot(h_1, k_1) \big)
+      &= \sigma\big( (hh_1, kk_1) \big) = hh_1 kk_1 \\
+      &= hkh_1k_1 = \sigma\big( (h, k) \big) \sigma\big( (h_1, k_1) \big)
+  \end{align*}
+  Thus we see that $\sigma$ is a group homomorphism. Note that by the definition of $HK$, $\sigma$ is a surjection. Also, if $\sigma\big( (h, k) \big) = \sigma\big( (h_1, k_1) \big)$, we have that
+  \begin{align*}
+    hk = h_1 k_1 &\implies h_1^{-1} h = k_1 k^{-1} \in H \cap K = \{ 1 \} \\
+      &\implies h_1^{-1} h = 1 = k_1 k^{-1} \implies h_1 = h \, \land \, k_1 = k.
+  \end{align*}
+  Thus $\sigma$ is an injection, and hence $\sigma$ is bijective. Therefore, $\sigma$ is an isomorphism. This proves that $HK \cong H \times K$. \qed
+\end{proof}
+
+An immediate result is the corollary that we were given in the last class but not proven.
+
+\begin{crly}
+\label{crly:group_iso_with_cross_prod_of_its_subgroups}
+  Let $G$ be a finite group, $H, K \triangleleft G$ such that $H \cap K = \{1\}$ and $\abs{H} \abs{K} = \abs{G}$. Then $G \cong H \times K$.
+\end{crly}
+
+\begin{eg}
+  Let $m, n \in \mathbb{N}$ with $\gcd(m ,n) = 1$. Let $G$ be a cyclic group of order $mn$. Write $G = \lra{a}$ with $o(a) = mn$. Let $H = \lra{a^n}$ and $K = \lra{a^m}$. Then we have
+  \begin{equation*}
+    \abs{H} = o(a^n) = m \, \land \, \abs{K} = o(a^m) = n.
+  \end{equation*}
+  It follows that $\abs{H}\abs{K} = mn = \abs{G}$. Note that $H \cong C_m$ and $K \cong C_n$. Since $\gcd(m, n) = 1$, by \cref{crly:lagrange_s_theorem_crly3}, we have that $H \cap K = \{1\}$.
+
+  Also, since $G$ is cyclic and thus abelian, we have that $H, K \triangleleft G$. Then by \cref{crly:group_iso_with_cross_prod_of_its_subgroups}, we have that $G \cong C_{mn} \cong C_m \times C_n$.
+\end{eg}
+
+% subsection normal_subgroup_continued_2 (end)
+
+% section normal_subgroup_continued_3 (end)
+
+\section{Isomorphism Theorems}%
+\label{sec:isomorphism_theorems}
+% section isomorphism_theorems
+
+\subsection{Quotient Groups}%
+\label{sub:quotient_groups}
+% subsection quotient_groups
+
+Let $G$ be a group and $K$ a subgroup of $G$. Given a set
+\begin{equation*}
+  \{Ka \, : \, a \in G \},
+\end{equation*}
+how can we create a group out of it?
+
+A ``natural'' way to define an operation on the set of right cosets above is
+\begin{equation}\tag{$\dagger$}\label{eq:intro_to_quotients}
+  \forall a, b \in G \qquad Ka * Kb = Kab.
+\end{equation}
+Note that it is entirely possible that for $a_1 \neq a$ and $b_1 \neq b$, we have $Ka = Ka_1$ and $Kb = Kb_1$. In order for \cref{eq:intro_to_quotients} to make sense as an operation, it is necessary that
+\begin{equation*}
+  Ka = Ka_1 \, \land \, Kb = Kb_1 \implies Kab = Ka_1 b_1.
+\end{equation*}
+If the condition is satisfied, we say that the ``multiplication'' $KaKb$ is well-defined.
+
+\begin{lemma}[Multiplication of Cosets of Normal Subgroups]
+\label{lemma:multiplication_of_cosets_of_normal_subgroups}
+  Let $K$ be a subset of $G$. The following are equivalent:
+  \begin{enumerate}
+    \item $K \triangleleft G$;
+    \item $\forall a, b \in G \enspace Ka Kb = Kab$ is well-defined.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  $(1) \implies (2)$ Suppose $K \triangleleft G$. Suppose $Ka = Ka_1$ and $Kb = Kb_1$. Then $aa_1^{-1} \in K$ and $bb_1^{-1} \in K$. To show that $Kab = Ka_1 b_1$, it suffices to show that $(ab) (a_1 b_1)^{-1} \in K$. Note that since $K \triangleleft G$, we have that $aKa^{-1} = K$. Therefore,
+  \begin{align*}
+    ab(a_1 b_1)^{-1} &= ab (b_1^{-1} a_1^{-1}) = a(bb_1^{-1}) a_1^{-1} \\
+      &= \big(a ( bb_1^{-1} ) a^{-1}\big) (a a_1^{-1}) \in K.
+  \end{align*}
+  Therefore $Kab = Ka_1 b_1$ as required.
+
+  \noindent $(2) \implies (1)$ If $a \in G$, we need to show that $\forall k \in K$, $aka^{-1} \in K$. Since $Ka = Ka$ and $Kk = K(1)$ \sidenote{This is cause $1$ is in the same coset.}, by $(2)$, we have that $Kak = Ka(1)$, i.e. $Kak = Ka$. Thus $aka^{-1} = 1 \in K$, implying that $aKa^{-1} \subseteq K$ and hence $K \triangleleft G$. \qed
+\end{proof}
+
+% subsection quotient_groups (end)
+
+% section isomorphism_theorems (end)
+
+% chapter lecture_12_may_28th_2018 (end)

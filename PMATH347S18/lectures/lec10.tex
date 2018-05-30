@@ -74,7 +74,7 @@
 \end{crly}
 
 \begin{proof}
-  \hlwarn{There's something that I'd like to make sure before putting down this proof}
+  Let $g \in G$ such that $g \neq 1$. By \cref{crly:lagrange_s_theorem_crly1}, $o(g) \, | \, p$. Since $g \neq 1$ and $p$ is prime, by \hlnotea{uniqueness of prime factorization}, it must be that $o(g) = p$. Thus we can write $G = \lra{g}$. If $H$ is a subgroup of $G$, then by \hyperref[thm:lagrange_s_theorem]{Lagrange's Theorem}, we have $\abs{H} \, \big| \, p$. Since $p$ is prime, we either have $\abs{H} = 1$ or $p$. In other words, we either have that $H = \{1\}$ or $H = G$, respectively. \qed
 \end{proof}
 
 \begin{crly}

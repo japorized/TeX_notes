@@ -32,11 +32,15 @@
     src: ./PMATH352W18/classnotes.pdf
   - title: classnotes-white.pdf
     src: ./PMATH352W18/classnotes-white.pdf
+  - title: cheatsheet.pdf
+    src: ./PMATH352W18/cheatsheet/cheatsheet.pdf
   tex:
   - title: classnotes.tex
     src: ./PMATH352W18/classnotes.tex
   - title: classnotes-white.tex
     src: ./PMATH352W18/classnotes-white.pdf
+  - title: cheatsheet.tex
+    src: ./PMATH352W18/cheatsheet/cheatsheet.tex
 
 - title: PMATH333 W17
   pdf:

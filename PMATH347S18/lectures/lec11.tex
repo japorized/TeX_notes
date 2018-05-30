@@ -5,7 +5,7 @@
 The following theorem is useful for A2. The proof is not provided in this lecture, but expect the corollary to be restated and proven in a later lecture.
 
 \begin{crlynonum}
-  Let $G$ be a finite group and $H, K \triangleleft G$, $H - K = \{1\}$ and $\abs{H} \abs{K} = \abs{G}$. Then $G \cong H \times K$.
+  Let $G$ be a finite group and $H, K \triangleleft G$, $H \cap K = \{1\}$ and $\abs{H} \abs{K} = \abs{G}$. Then $G \cong H \times K$.
 \end{crlynonum}
 
 \section{Normal Subgroup (Continued 2)}%
@@ -198,14 +198,14 @@ With that, we define the following notion:
   By the above definition, we immediately see that $H \triangleleft G \iff N_G(H) = G$ by \cref{eq:product_of_normal_subgroups_is_normal_pf_1}. Observe that since we only needed $kH = Hk$ in \cref{eq:product_of_normal_subgroups_is_normal_pf_1} for all $k \in K$, we have that $k \in N_G(H)$.
 \end{note}
 
-We shall now provide the following corollary which shall be proven in the next lecture.
-
-\begin{crlynonum}
+\begin{crly}\label{crly:subsets_of_normalizers_form_a_product_that_is_a_subgroup}
   Let $H$ and $K$ be subgroups of a group $G$.
   \begin{equation*}
     K \subseteq N_G(H) \, \lor \, H \subseteq N_G(K) \implies HK = KH \text{ is a subgroup of } G
   \end{equation*}
-\end{crlynonum}
+\end{crly}
+
+The proof of \cref{crly:subsets_of_normalizers_form_a_product_that_is_a_subgroup} is embedded in the proof of \cref{propo:product_of_normal_subgroups_is_normal} while using the definition of a \hlnoteb{normalizer}.
 
 % subsection normal_subgroup_continued (end)
 
