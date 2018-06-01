@@ -16,6 +16,7 @@
 \DeclareMathOperator{\Gau}{G }
 \DeclareMathOperator{\Dom}{Dom }
 \DeclareMathOperator{\Var}{Var }
+\DeclareMathOperator{\supp}{supp }
 
 \title{STAT330S18 - Mathematical Statistics}
 \author{Johnson Ng}
@@ -2064,12 +2065,12 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
 
 % subsection joint_discrete_rvs (end)
 
-\subsection{Independence}%
-\label{sub:independence}
+\subsection{Independence of Discrete RVs}%
+\label{sub:independence_of_discrete_rvs}
 % subsection independence
 
-\begin{defn}[Independence]\index{Independence}
-\label{defn:independence}
+\begin{defn}[Independence of Discrete RVs]\index{Independence}
+\label{defn:independence_of_discrete_rvs}
   Two rvs $X$ and $Y$ with joint cdf $F$ are said to be \hlnoteb{independent} if and only if
   \begin{equation*}
     \forall x, y \in \mathbb{R} \quad F(x, y) = F_X(x) F_Y(y)
@@ -2146,8 +2147,8 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
 \label{sec:joint_distributions_continued}
 % section joint_distributions_continued
 
-\subsection{Independence (Continued)}%
-\label{sub:independence_continued}
+\subsection{Independence of Discrete RVs (Continued)}%
+\label{sub:independence_of_discrete_rvs_continued}
 % subsection independence_continued
 
 \begin{eg}[Example 3.7]
@@ -2239,15 +2240,279 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
     \begin{equation*}
       1 &= \int_{0}^{1} \int_{0}^{1} Kxy \dif{x} \dif{y} = \frac{K}{4}.
     \end{equation*}
-    Thus $K = 4$.
+    Thus $K = 4$. To solve the next part, observe that for $X > Y$, we have the diagram to the right to show the support set of the joint distribution. 
+    \marginnote{
+	  \begin{center}
+	  	\begin{tikzpicture}
+          \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
+          \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
+	  			\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(2.5,0)--(2.5,2.5)--(0,0);
+          \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+          \draw[line width=0pt,dashed](2.5,2.5)--(0,2.5) node[left] {1};
+          \node [label={270:1}] at (2.5,0) {};
+	  	\end{tikzpicture}
+	  \end{center}
+    }
+    The shaded region is the support set. We then have
+    \begin{align*}
+      P(X > Y) &= \int_{0}^{1} \int_{0}^{x} 4xy \dif{y} \dif{x} = \int_{0}^{1} 2xy^2 \at{0}{x} \dif{x} \\
+        &= \int_{0}^{1} 2x^3 \dif{x} = \frac{1}{2} x^3 \at{0}{1} = \frac{1}{2}
+    \end{align*}
   \end{solution}
 \end{eg}
 
+\begin{eg}[Example 3.10]
+  Suppose that
+  \begin{equation*}
+    f(x, y) = \begin{cases}
+      Cxy & 0 < x, y < 1, \, x + y < 1 \\
+      0   & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  Find $C$ so that $f(x, y)$ is a valid joint probability density function, and calculate $P(Y^2 < X)$.
+\end{eg}
+
+\begin{solution}
+  Note that the diagram on the right shows the support set of $(X, Y)$.\marginnote{
+  \begin{center}
+  	\begin{tikzpicture}
+        \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
+        \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
+  			\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(2.5,0)--(0,2.5)--(0,0);
+        \draw[line width=0pt,dashed](0,2.5)--(2.5,0);
+        \node [label=right:\textcolor{base16-eighties-light}{$y = 1 - x$}] at (1.25,1.25) {};
+        \node [label={180:1}] at (0,2.5) {};
+        \node [label={270:1}] at (2.5,0) {};
+  	\end{tikzpicture}
+  \end{center}
+  } To find $C$,
+  \begin{align*}
+    1 &= \int_{0}^{1} \int_{0}^{1 - x} Cxy \dif{y} \dif{x} = \int_{0}^{1} \frac{C}{2}xy^2 \at{0}{1 - x} \dif{x} \\
+      &= C \int_{0}^{1} \frac{1}{2} x (x^2 - 2x + 1) \dif{x} = C \int_{0}^{1} \frac{1}{2} ( x^3 - 2x^2 + x ) \dif{x} \\
+      &= C \left( \frac{1}{8} x^4 - \frac{1}{3} x^3 + \frac{1}{4} x^2 \right) \at{0}{1} = C \left( \frac{3}{24} - \frac{8}{24} + \frac{6}{24} \right) = \frac{C}{24}.
+  \end{align*}
+  And so $C = 24$.
+  \pagebreak
+
+  To calculate $P(Y^2 < X)$, note the diagram to the right. Then
+  \marginnote{
+  \begin{center}
+  	\begin{tikzpicture}
+        \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
+        \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
+  			\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25,rotate=-22](1.5450849718747371205,0) +(180:1.5450849718747371205) arc (180:108:1.5450849718747371205) -- (1.43,0.57);
+  			\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](1.5450849718747371205,0) -- (2.5,0) -- (1.5450849718747371205,0.9549150281252628795) -- (1.5450849718747371205,0);
+        \draw[line width=0pt,dashed](0,2.5)--(2.5,0);
+        \node [label=right:\textcolor{base16-eighties-light}{$y = 1 - x$}] at (1.25,1.25) {};
+        \draw[line width=0pt,rotate=-22,dashed] (1.5450849718747371205,0) +(180:1.5450849718747371205) arc (180:108:1.5450849718747371205);
+        \node [label={180:1}] at (0,2.5) {};
+        \node [label={270:1}] at (2.5,0) {};
+        \draw[line width=0pt,dashed] (1.5450849718747371205,0) -- (1.5450849718747371205,0.9549150281252628795);
+        \node [label={270:$\frac{3 + \sqrt{5}}{2}$}] at (1.5450849718747371205,0) {};
+        \draw[line width=0pt,dashed] (0,0.9549150281252628795) -- (1.5450849718747371205,0.9549150281252628795);
+        \node [label={180:$\frac{-1 + \sqrt{5}}{2}$}] at (0,0.9549150281252628795) {};
+  	\end{tikzpicture}
+  \end{center}
+  Solve for $y = 1 - x$ and $y^2 = x$ to get the intersection.
+  }
+  \begin{align*}
+    P(Y^2 < X) &= \int_{0}^{\frac{3 + \sqrt{5}}{2}} \int_{0}^{\sqrt{x}} 24xy \dif{y} \dif{x} + \int_{\frac{ 3 + \sqrt{5} }{2}}^{1} \int_{0}^{1 - x} 24xy \dif{y} \dif{x} \\
+      &= \int_{0}^{\frac{3 + \sqrt{5}}{2}} 12xy^2 \at{0}{\sqrt{x}} \dif{x} + \int_{\frac{3 + \sqrt{5}}{2}}^{1} 12xy^2 \at{0}{1 - x} \dif{x} \\
+      &= 4x^3\at{0}{\frac{3 + \sqrt{5}}{2}} + \int_{\frac{3 + \sqrt{5}}{2}}^{1} 24 (x^3 - 2x^2 + x) \dif{x} \\
+      &= 4 \left( \frac{3 + \sqrt{5}}{2} \right)^3 + 24 \left[ \frac{1}{4}x^4 - \frac{2}{3}x^3 + \frac{1}{2}x^2 \right] \at{\frac{3 + \sqrt{5}}{2}}{1} = \hdots
+  \end{align*}
+  We shall not proceed to get the final solution since it is a messy process and the result is not important.
+\end{solution}
 % subsection joint_continuous_rvs (end)
+
+\subsection{Marginal Distribution (Continuous)}%
+\label{sub:marginal_distribution_continuous}
+% subsection marginal_distribution_continuous
+
+\begin{defn}[Marginal PDF]\index{Marginal Probability Density Function}
+\label{defn:marginal_pdf}
+  Suppose $X$ and $Y$ are continuous rvs with joint pdf $f$. Then the marginal pdf of $X$ is given by
+  \begin{equation*}
+    \forall x \in \mathbb{R} \quad f_X(x) = \int_{-\infty}^{\infty} f \dif{y},
+  \end{equation*}
+  and the marginal pdf of $Y$ is
+  \begin{equation*}
+    \forall y \in \mathbb{R} \quad f_Y(y) = \int_{-\infty}^{\infty} f \dif{x}.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}[Example 3.11]\label{eg:3_11}
+  Suppose $X$ and $Y$ have joint pdf $f(x, y) = K(x + y) \mathbb{1}_{0 \leq x < y \leq 1}$ for some constant $K$. Find $K$. Then, calculate the marginal density of $X$.
+  \pagebreak
+
+  \begin{solution}
+  A diagram showing the region of the support set is on the right.
+  \marginnote{
+	\begin{center}
+		\begin{tikzpicture}
+        \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
+        \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
+				\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(0,2.5)--(2.5,2.5)--(0,0);
+        \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+        \draw[line width=0pt,dashed](2.5,2.5)--(2.5,0) node[below] {1};
+        \draw[line width=0pt,dashed](2.5,2.5)--(0,2.5) node[left] {1};
+		\end{tikzpicture}
+	\end{center}
+  }
+
+  To get $K$,
+  \begin{align*}
+    1 &= \int_{0}^{1} \int_{x}^{1} K(x + y) \dif{y} \dif{x} = \int_{0}^{1} \left( Kxy + \frac{1}{2}Ky^2 \right) \at{x}{1} \dif{x} \\
+      &= \int_{0}^{1} Kx + \frac{K}{2} - Kx^2 - \frac{1}{2}Kx^2 \dif{x} \\
+      &= \frac{K}{2} \left( x^2 + x - x^3 \right) \at{0}{1} = \frac{K}{2}
+  \end{align*}
+  Thus $K = 2$.
+
+  To get the marginal density of $X$, note that our joint pdf is now the following:
+  \begin{equation*}
+    f(x, y) = 2(x + y) \mathbb{1}_{\{0 \leq x < y \leq 1\}}
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \int_{x}^{1} 2(x + y) \dif{y} = 2xy + y^2 \at{x}{1} = 2x + 1 - 3x^2
+  \end{equation*}
+  And hence
+  \begin{equation*}
+    f_X(x) = \begin{cases}
+      -3x^2 + 2x + 1 & 0 \leq x \leq 1 \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  \end{solution}
+\end{eg}
+
+% subsection marginal_distribution_continuous (end)
+
+\subsection{Independence of Continuous RVs}%
+\label{sub:independence_of_continuous_rvs}
+% subsection independence_of_continuous_rvs
+
+\begin{defn}[Independence of Continuous RVs]\index{Independence}
+\label{defn:independence_of_continuous_rvs}
+  Two random variables $X$ and $Y$ with joint cdf $F$ and joint pdf $f$ are independent iff
+  \begin{equation*}
+    \forall x, y \in \mathbb{R} \quad F(x, y) = F_X(x) F_Y(y)
+  \end{equation*}
+  or\sidenote{It's really an "AND"}
+  \begin{equation*}
+    \forall x, y \in \mathbb{R} \quad f(x, y) = f_X(x) f_Y(y).
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  A necessary, but insufficient, condition for $X$ and $Y$ to be independent is that
+  \begin{equation*}
+    \supp(X, Y) = \supp(X) \times \supp(Y)
+  \end{equation*}
+\end{note}
+
+\begin{eg}[Example 3.12]
+  Are random variables $X$ and $Y$ introduced in \cref{eg:3_11} independent? Explain.
+
+  \begin{solution}
+    Recall that the pdf was given as
+    \begin{equation*}
+      f(x, y) = 2(x + y) \mathbb{1}_{\{1 \leq x < y \leq 1\}}.
+    \end{equation*}
+    We derived the marginal pdf of $X$ in the earlier example:
+    \begin{equation*}
+      f_X (x) = (-3x^2 + 2x + 1) \mathbb{1}_{\{0 \leq x \leq 1\}}.
+    \end{equation*}
+    To get the marginal pdf of $Y$, note
+    \begin{equation*}
+      \int_{0}^{y} 2(x + y) \dif{x} = x^2 + 2xy \at{0}{y} = 3y^2.
+    \end{equation*}
+    Thus
+    \begin{equation*}
+      f_Y(y) = \begin{cases}
+        3y^2 & 0 \leq y \leq 1 \\
+        0 & \text{otherwise.}
+      \end{cases}
+    \end{equation*}
+    Note that
+    \begin{equation*}
+      f_X(x) f_Y(y) = -9x^2y^2 + 6xy^2 + 3y^2 \quad 0 \leq x < y \leq 1
+    \end{equation*}
+    which is not equal to $f$. Thus, $X$ and $Y$ are not independent.
+  \end{solution}
+\end{eg}
+
+% subsection independence_of_continuous_rvs (end)
 
 % section joint_distributions_continued (end)
 
 % chapter lecture_7_may_24th_2018 (end)
+
+\chapter{Lecture 8 May 29th 2018}%
+\label{chp:lecture_8_may_29th_2018}
+% chapter lecture_8_may_29th_2018
+
+\section{Joint Distributions (Continued 2)}%
+\label{sec:joint_distributions_continued_2}
+% section joint_distributions_continued_2
+
+\subsection{Independence of Continuous RVs (Continued)}%
+\label{sub:independence_of_continuous_rvs_continued}
+% subsection independence_of_continuous_rvs_continued
+
+\begin{eg}[Example 3.12 (3.4.8 course note)]
+  Suppose $X$ and $Y$ are continuous with joint pdf
+  \begin{equation*}
+    f(x, y) = \frac{3}{2} y (1 - x^2) \mathbb{1}_{\{-1 \leq x \leq 1 \}} \mathbb{1}_{\{0 \leq y \leq 1 \}}
+  \end{equation*}
+  Are $X$ and $Y$ independent?
+
+  \begin{solution}
+    The marginal pdf of $X$ is
+    \begin{align*}
+      f_X(x) &= \int_{0}^{1} \frac{3}{2}y (1 - x^2) \dif{y} = \frac{3}{4}y^2 (1 - x^2) \at{0}{1} \\
+        &= \begin{cases}
+          \frac{3}{4} ( 1 - x^2 ) & -1 \leq x \leq 1 \\
+          0 & \text{otherwise}
+        \end{cases}
+    \end{align*}
+    The marginal pdf of $Y$ is
+    \begin{align*}
+      f_Y(x) &= \int_{-1}^{1} \frac{3}{2} y (1 - x^2) \dif{x} = \frac{3}{2} y \left(x - \frac{1}{3}x^3 \right) \at{-1}{1} \\
+      &= \begin{cases}
+        2y & 0 \leq y \leq 1 \\
+        0 & \text{otherwise.}
+      \end{cases}
+    \end{align*}
+    Clearly, we have 
+    \begin{equation*}
+      f_X(x) f_Y(y) = \frac{3}{2} y (1 - x^2) = f(x, y) \quad -1 \leq x \leq 1, \, 0 \leq y \leq 1.
+    \end{equation*}
+    Thus $X$ and $Y$ are independent.
+  \end{solution}
+\end{eg}
+
+\begin{thm}[Factorization Theorem for Independence]
+\index{Factorization Theorem}
+\label{thm:factorization_theorem_for_independence}
+  Suppose $X$ and $Y$ are rvs with joint pf $f$, and marginal pf $f_X$ and $f_Y$, respectively. Suppose also that
+  \begin{align*}
+    A &= \{(x, y) : f(x, y) > 0\} \text{ is the support set of } (X, Y) \\
+    A_X &= \{x ; f_X(x) > 0 \} \text{ is the support set of } X \text{, and} \\
+    A_Y &= \{y : f_Y(y) > 0 \} \text{ is the support set of } Y
+  \end{align*}
+  Then $X$ and $Y$ are independent rvs iff $A = A_X \times A_Y$ and there exist non-negative functions $g$ and $h$ such that
+  \begin{equation*}
+    f(x, y) = g(x) h(y)
+  \end{equation*}
+  for all $(x, y) \in A_X \times A_Y$.
+\end{thm}
+
+% subsection independence_of_continuous_rvs_continued (end)
+
+% section joint_distributions_continued_2 (end)
+
+% chapter lecture_8_may_29th_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
