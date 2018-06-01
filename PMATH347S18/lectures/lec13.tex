@@ -1,0 +1,183 @@
+\chapter{Lecture 13 May 30 2018}%
+\label{chp:lecture_13_may_30_2018}
+% chapter lecture_13_may_30_2018
+
+\section{Isomorphism Theorems (Continued)}%
+\label{sec:isomorphism_theorems_continued}
+% section isomorphism_theorems_continued
+
+\subsection{Quotient Groups (Continued)}%
+\label{sub:quotient_groups_continued}
+% subsection quotient_groups_continued
+
+\begin{propo}
+\label{propo:propo_related_to_quotient_groups}
+  Let $K \triangleleft G$ and write $\faktor{G}{K} = \{Ka \, : \, a \ in G\}$ for the set of cosets of $K$.
+  \begin{enumerate}
+    \item $\faktor{G}{K}$ is a group under the operation $Ka Kb = Kab$.
+    \item The mapping $\phi : G \to \faktor{G}{K}$ given by $\phi(a) = Ka$ is a surjective homomorphism.\sidenote{
+    \begin{ex}
+      Is $\phi$ injective?
+    \end{ex}
+
+    \begin{solution}
+      We know that we cannot uniquely express a coset, since for $a, b \in Ka$ such that $a \neq b$, we have that $Ka = Kb$.
+    \end{solution}
+    }
+    \item If $[G : K]$ is finite, then $\abs{\faktor{G}{K}} = [G : K]$. In particular, if $\abs{G}$ is finite, then $\abs{\faktor{G}{K}} = \frac{\abs{G}}{\abs{K}}$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item By \cref{lemma:multiplication_of_cosets_of_normal_subgroups}, the operation is well-defined, and $\faktor{G}{K}$ is closed under the operation. The identity of $\faktor{G}{K}$ is $K = K(1)$ since $\forall Ka \in \faktor{G}{K}$,
+      \begin{equation*}
+        Ka K(1) = Ka = K(1) Ka.
+      \end{equation*}
+      Also, since
+      \begin{equation*}
+        Ka Ka^{-1} = K(1) = Ka^{-1} Ka,
+      \end{equation*}
+      the inverse of $Ka$ is $Ka^{-1}$. Finally, by associativity of $G$, we have that
+      \begin{equation*}
+        Ka(KbKc) = Kabc = (KaKb)Kc.
+      \end{equation*}
+      It follows that $\faktor{G}{K}$ is a group.
+
+    \item Clearly, $\phi$ is surjective. For $a, b \in G$,
+      \begin{equation*}
+        \phi(ab) = Kab = Ka Kb = \phi(a) \phi(b).
+      \end{equation*}
+      Thus $\phi$ is a surjective homomorphism.
+
+    \item If $[G : K]$ is finite, then by definition of the index $[G : K]$, we have that $[G : K] = \abs{\faktor{G}{K}}$. Also, if $\abs{G}$ is finite, then by \cref{thm:lagrange_s_theorem},
+      \begin{equation*}
+        \abs{\faktor{G}{K}} = [G : K] = \frac{\abs{G}}{\abs{K}}.
+      \end{equation*}
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{defn}[Quotient Group]\index{Quotient Group}\index{Coset Map}\index{Quotient Map}
+\label{defn:quotient_group}
+  Let $K \triangleleft G$. The group $\faktor{G}{K}$ of all cosets of $K$ in $G$ is called the \hlnoteb{quotient group} of $G$ by $K$. Also, the mapping
+  \begin{equation*}
+    \phi: G \to \faktor{G}{K} \text{ defined by } a \mapsto Ka
+  \end{equation*}
+  is called the \hlnoteb{coset} (pr \hlnoteb{quotient}) \hlnoteb{map}.
+\end{defn}
+
+% subsection quotient_groups_continued (end)
+
+\subsection{Isomorphism Theorems}%
+\label{sub:isomorphism_theorems}
+% subsection isomorphism_theorems
+
+\begin{defn}[Kernel and Image]\index{Kernel}\index{Image of a Homomorphism}
+\label{defn:kernel_and_image}
+  Let $\alpha: G \to H$ be a group homomorphism. The \hlnoteb{kernel} of $\alpha$ is defined by
+  \begin{equation*}
+    \ker \alpha := \{g \in G \, : \, \alpha(g) = 1_H \} \subseteq G
+  \end{equation*}
+  and the image of $\alpha$ is defined by
+  \begin{equation*}
+    \img \alpha := \alpha(G) = \{\alpha(g) \, : \, g \in G \} \subseteq H.
+  \end{equation*}
+\end{defn}
+
+\begin{propo}
+\label{propo:image_of_hm_is_a_subgroup_n_kernel_of_hm_is_a_normal_subgroup}
+  Let $\alpha : G \to H$ be a group homomorphism.
+  \begin{enumerate}
+    \item $\img \alpha$ is a subgroup of $H$
+    \item $\ker \alpha \triangleleft G$
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Note that $1_H = \alpha(1_G) \in \alpha(G)$ (i.e. the identity is in $\img \alpha$). Also, for $h_1 = \alpha(g_1)$ and $h_2 = \alpha(g_2)$ in $\alpha(G)$ and $h_1, h_2 \in H$, we have
+      \begin{equation*}
+        h_1 h_2 = \alpha(g_1) \alpha(g_2) = \alpha(g_1 g_2) \in \alpha(G).
+      \end{equation*}
+      (i.e. $\img \alpha$ i closed under its operation). By \cref{propo:properties_of_homomorphism}, $\alpha(g)^{-1} = \alpha(g^{-1}) \in \alpha(G)$ (i.e. the inverse of an element is also in $\img \alpha$). Thus by the \hlnotea{Subgroup Test}, we have that $\img \alpha$ is a subgroup of $H$.
+
+    \item For $\ker \alpha$, $\alpha(1_G) = 1_H$. For $k_1, k_2 \in \ker \alpha$, we have
+      \begin{equation*}
+        \alpha(k_1 k_2) = \alpha(k_1) \alpha(k_2) = 1 \cdot 1 = 1.
+      \end{equation*}
+      Also,
+      \begin{equation*}
+        \alpha(k_1^{-1}) = \alpha(k_1)^{-1} = 1^{-1} = 1.
+      \end{equation*}
+      By the \hlnotea{Subgroup Test}, $\ker \alpha$ is a subgroup of $G$.
+
+      If $g \in G$ and $k \in \ker \alpha$, then
+      \begin{equation*}
+        \alpha(gkg^{-1}) = \alpha(g) \alpha(k) \alpha(g^{-1}) = \alpha(g) \alpha(g^{-1}) = 1.
+      \end{equation*}
+      Thus by \cref{propo:normality_test}, $\ker \alpha \triangleleft G$.
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{eg}
+  Consider the determinant map
+  \begin{equation*}
+    \det : GL_n(\mathbb{R}) \to \mathbb{R}^* \text{ defined by } A \mapsto \det A.
+  \end{equation*}
+  Then $\ker \det = SL_n(\mathbb{R})$. Then $SL_n(\mathbb{R}) \triangleleft GL_n(\mathbb{R})$, as proven before.
+\end{eg}
+
+\begin{eg}
+  Define the \hldefn{sign of a permutation} $\sigma \in S_n$ by
+  \begin{equation*}
+    \sign(\sigma) = \begin{cases}
+      1 & \text{if } \sigma \text{ is even;} \\
+      -1 & \text{if } \sigma \text{ is odd.}
+    \end{cases}
+  \end{equation*}
+  Then the sign mapping, $\sign : S_n \to \{\pm 1\}$ defined by $\sigma \mapsto \sign(\sigma)$ is a homomorphism.\sidenote{Think about why. It's quite straightforward using the defintion.} Also, $\ker \sign = A_n$. Thus, we have $A_n \triangleleft S_n$, as proven before.
+\end{eg}
+
+\begin{propo}[Normal Subgroup as the Kernel]
+\label{propo:normal_subgroup_as_the_kernel}
+  If $K \triangleleft G$, then $K = \ker \phi$ where $\phi : G \to \faktor{G}{K}$ is the coset map.
+\end{propo}
+
+\begin{proof}
+  Recall that $\phi : G \to \faktor{G}{K}$ is defined by $g \mapsto Kg$, $\forall g \in G$, and is a group homomorphism. By \cref{propo:properties_of_cosets}, we have
+  \begin{equation*}
+    Kg = K = K1 \iff g \in K.
+  \end{equation*}
+  Thus $K = \ker \phi$.\qed
+\end{proof}
+
+\begin{thm}[First Isomorphism Theorem]
+\index{First Isomorphism Theorem}
+\label{thm:first_isomorphism_theorem}
+  Let $\alpha: G \to H$ be a group homomorphism. We have
+  \begin{equation*}
+    \faktor{G}{\ker \alpha} \cong \img \alpha
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Let $K = \ker \alpha$. Since $K \triangleleft G$ (by \cref{propo:image_of_hm_is_a_subgroup_n_kernel_of_hm_is_a_normal_subgroup}), $\faktor{G}{K}$ is a group. Let\sidenote{We must check that the function is well-defined, since cosets are not uniquely represented and so it is likely that a constructed mapping is not well-defined.}
+  \begin{equation*}
+    \bar{\alpha} : \faktor{G}{K} \to \img \alpha \text{ be defined by } Kg \mapsto \alpha(g)
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    Kg = Kg_1 \iff gg_1^{-1} \in K \iff \alpha(gg_1^{-1}) = 1 \iff \alpha(g) = \alpha(g_1).
+  \end{equation*}
+  Thus $\bar{ \alpha }$ is well-defined and injective. Clearly, $\bar{ \alpha }$ is surjective. It remains to show that $\bar{\alpha}$ is a group homomorphism. $\forall g, h \in G$, we have
+  \begin{equation*}
+    \bar{\alpha}(Kg Kh) = \bar{\alpha}(Kgh) = \alpha(gh) = \alpha(g) \alpha(h) = \bar{\alpha}(Kg) \bar{\alpha}(Kh).
+  \end{equation*}
+  Therefore, we have that $\bar{\alpha}$ is an isomorphism and hence $\faktor{G}{\ker \alpha} \cong \img \alpha$ as desired. \qed
+\end{proof}
+
+% subsection isomorphism_theorems (end)
+
+% section isomorphism_theorems_continued (end)
+
+% chapter lecture_13_may_30_2018 (end)
