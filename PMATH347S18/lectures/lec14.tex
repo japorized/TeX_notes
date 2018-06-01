@@ -1,0 +1,182 @@
+\chapter{Lecture 14 Jun 01 2018}%
+\label{chp:lecture_14_jun_01_2018}
+% chapter lecture_14_jun_01_2018
+
+\section{Isomorphism Theorems (Continued 2)}%
+\label{sec:isomorphism_theorems_continued_2}
+% section isomorphism_theorems_continued_2
+
+\subsection{Isomorphism Theorems (Continued)}%
+\label{sub:isomorphism_theorems_continued}
+% subsection isomorphism_theorems_continued
+
+\begin{note}[Recall]
+  In \autoref{thm:first_isomorphism_theorem}, we had that for a group homomorphism $\alpha : G \to H$ where $G$ and $H$ are groups,
+  \begin{equation*}
+    \faktor{G}{\ker \alpha} \cong \img \alpha
+  \end{equation*}
+
+  Now let $\alpha : G \to H$ be a group homomorphism, $K = \ker \alpha$, $\phi : G \to \faktor{G}{K}$ be the coset map, and $\bar{\alpha}$ be as defined in the proof of \autoref{thm:first_isomorphism_theorem}. We then have the following commutative diagram to illustrate the relationship between the three groups.
+  \begin{center}
+  \begin{tikzcd}
+    G \arrow[dd, "\phi"'] \arrow[rrr, "\alpha"] &  &  & H \\
+     &  &  &  \\
+    G/K \arrow[rrruu, "\bar{\alpha}"'] &  &  & 
+  \end{tikzcd}
+  \end{center}
+\end{note}
+
+A natural question to ask after seeing the relationship is: Is $\bar{\alpha} \phi = \alpha$? If it is, is the definition of $\bar{\alpha}$ unique? The answer is: \hlnotec{YES!} on both accounts.
+
+\begin{proof}
+  Let $g \in G$. Then
+  \begin{equation*}
+    \bar{\alpha} \phi (g) = \bar{\alpha} \big( \phi(g) \big) = \bar{\alpha} (Kg) = \alpha(g)
+  \end{equation*}
+
+  Suppose $\alpha = \beta \phi$ where $\beta : \faktor{G}{K} \to H$. Then
+  \begin{equation*}
+    \beta (Kg) \overset{(1)}{=} \beta ( \phi(g) ) = \beta \phi(g) = \alpha(g) = \bar{\alpha} (Kg)
+  \end{equation*}
+  where $(1)$ is because $\phi$ is surjective by \cref{propo:propo_related_to_quotient_groups}. Therefore, we observe that $\beta = \bar{\alpha}$ for any $Kg \in \faktor{G}{K}$. This proves that $\bar{\alpha}$ is the unique homomorphism such that $\faktor{G}{K} \to H$ satisfying $\alpha = \bar{\alpha} \phi$.\qed
+\end{proof}
+
+With that, we have the following proposition.
+
+\begin{propo}\index{factors through}
+\label{propo:uniqueness_of_homomorphism_factors}
+  Let $\alpha : G \to H$ be a group homomorphism, where $G$ and $H$ are groups. Let $K = \ker \alpha$. Then $\alpha$ factors uniquely as $\alpha = \bar{\alpha} \phi$< where $\phi : G \to \faktor{G}{K}$ is the coset map and $\bar{\alpha} : \gaktor{G}{K} \to H$ is defined by
+  \begin{equation*}
+    \bar{\alpha} (Kg) = \alpha(g).
+  \end{equation*}
+  Note that $\phi$ is surjective and $\bar{\alpha}$ is injective.
+
+  In such a scenario, we also say that $\alpha$ \hlnoteb{factors through} $\phi$.\sidenote{Reference for the terminology: \url{https://math.stackexchange.com/questions/68941/terminology-a-homomorphism-factors}.}
+\end{propo}
+
+\begin{eg}
+  Let $G = \lra{g}$ be a cyclic group. Consider $\alpha : \mathbb{Z} \to G$, defined as
+  \begin{equation*}
+    \forall k \in \mathbb{Z} \quad \alpha(k) = g^k,
+  \end{equation*}
+  which is a group homomorphism. By definition, $\alpha$ is surjective. Note that
+  \begin{equation*}
+    \ker \alpha = \{k \in \mathbb{Z} : g^k = 1 \}.
+  \end{equation*}
+  We have, therefore, two cases to consider.
+  \begin{itemize}
+    \item \underline{$G$ is an infinite group} \\
+      This would imply that $\ker \alpha = \{0\}$ since only $g^0 = 1$. Then by \autoref{thm:first_isomorphism_theorem}, we have that
+      \begin{equation*}
+        \faktor{\mathbb{Z}}{\ker \alpha} \cong G
+      \end{equation*}
+      Note that\sidenote{We are assuming that the group $\mathbb{Z}$ here works under the operation of addition, otherwise, if we employ multiplication, then $\mathbb{Z}$ would not be a group and $\alpha$ would not be a group homomorphism.}
+      \begin{equation*}
+        \faktor{\mathbb{Z}}{\ker \alpha} = \{ ( \ker \alpha ) k : k \in \mathbb{Z} \} = \{ 0 + k : k \in \mathbb{Z} \} = \mathbb{Z}.
+      \end{equation*}
+      Therefore
+      \begin{equation*}
+        \mathbb{Z} \cong G
+      \end{equation*}
+
+    \item \underline{$G$ is a finite group} \\
+      Suppose that $\abs{G} = o(g) = n \in \mathbb{N}$, which is valid by \cref{crly:lagrange_s_theorem_crly1}. Then
+      \begin{equation*}
+        \ker \alpha = n \mathbb{Z}
+      \end{equation*}
+      Then by the \autoref{thm:first_isomorphism_theorem}, we have
+      \begin{equation*}
+        \faktor{\mathbb{Z}}{n \mathbb{Z}} \cong G.
+      \end{equation*}
+      Observe that
+      \begin{equation*}
+        \faktor{\mathbb{Z}}{n \mathbb{Z}} = \{ n \mathbb{Z} + k : k \in \mathbb{Z} \} = \mathbb{Z}_n
+      \end{equation*}
+      since the set in the middle is the definition of the set of integers modulo $n$.\sidenote{This is why we often see texts from various authors using $\faktor{\mathbb{Z}}{n \mathbb{Z}}$ to represent the set of integers modulo $n$.} Therefore,
+      \begin{equation*}
+        \mathbb{Z}_n \cong G
+      \end{equation*}
+  \end{itemize}
+
+  Therefore, we have that
+  \begin{equation*}
+    \mathbb{Z} \cong G \text{ or } \mathbb{Z}_{o(g)} \cong G
+  \end{equation*}
+\end{eg}
+
+\begin{thm}[Second Isomorphism Theorem]
+\index{Second Isomorphism Theorem}
+\label{thm:second_isomorphism_theorem}
+  Let $H$ and $K$ be the subgroups of a group $G$ with $K \triangleleft G$. Then
+  \begin{itemize}
+    \item $HK$ is a subgroup of $G$;
+    \item $K \triangleleft HK$;
+    \item $H \cap K \triangleleft H$; and
+    \item $\faktor{HK}{K} \cong \faktor{H}{H \cap K}$.
+  \end{itemize}
+\end{thm}
+
+\begin{proof}
+  Since $K \triangleleft G$, by \cref{lemma:product_of_groups_as_a_subgroup} and \cref{propo:product_of_normal_subgroups_is_normal}, we have that $HK = KH$ is a subgroup of $G$. Consequently, we have $K \triangleleft HK$, since $K$ is clearly a subgroup of $HK$ and $K \triangleleft G$, and so $\forall x \in HK \subseteq G$ we have that $gK = Kg$.
+
+  Consider $\alpha : H \to \faktor{HK}{K}$, defined by\sidenote{Note that $Kh \in \faktor{HK}{K}$ since $h \in H \subseteq HK$.}
+  \begin{equation*}
+    \alpha(h) = Kh
+  \end{equation*}
+  Now if $x = kh \in KH = HK$, then
+  \begin{equation*}
+    Kx = K(kh) = Kh = \alpha(h).
+  \end{equation*}
+  Therefore, we have that $\alpha$ is surjective. Now by \cref{propo:properties_of_cosets}, observe that
+  \begin{equation*}
+    \ker \alpha = \{h \in H : Kh = K \} = \{h \in H h \in K \} = H \cap K.
+  \end{equation*}
+  Then by the \hyperref[thm:first_isomorphism_theorem]{First Isomorphism Theorem}, we have that
+  \begin{equation*}
+    \faktor{HK}{K} \cong \faktor{H}{H \cap K}.
+  \end{equation*}
+  Since we have that $\ker \alpha = H \cap K$ and $\ker \alpha \triangleleft H$, we have that $H \cap K \triangleleft H$.\qed
+\end{proof}
+
+\begin{thm}[Third Isomorphism Theorem]
+\index{Third Isomorphism Theorem}
+\label{thm:third_isomorphism_theorem}
+  Let $K \subseteq H \subseteq G$ be groups, with $K \triangleleft G$ and $H \triangleleft G$. Then
+  \begin{equation*}
+    \faktor{H}{K} \, \triangleleft \, \faktor{G}{K} \text{ and } \left( \faktor{G}{K} \right) \Big/ \left( \faktor{H}{K} \right) \cong \faktor{G}{H}
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Define $\alpha : \faktor{G}{K} \to \faktor{G}{H}$ by $\alpha(Kg) = Hg$ for all $g \in G$. Clearly, $\alpha$ is surjective. Now if $Kg = Kg_1$, for any $g, g_1 \in G$, then $gg_1 \in K \subseteq H$. Therefore, $Hg = Hg_1$. Thus $\alpha$ is well-defined. Now
+  \begin{equation*}
+    \ker \alpha = \{Kg : Hg = H \} = \{ Kg : g \in H \} = \faktor{H}{K}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \faktor{H}{K} = \ker \alpha \triangleleft \faktor{G}{K}.
+  \end{equation*}
+  By the \hyperref[thm:first_isomorphism_theorem]{First Isomorphism Theorem}, we have
+  \begin{equation*}
+    \left( \faktor{G}{K} \right) \Big/ \left( \faktor{H}{K} \right)
+  \end{equation*}
+  as required. \qed
+\end{proof}
+
+% subsection isomorphism_theorems_continued (end)
+
+% section isomorphism_theorems_continued_2 (end)
+
+\section{Group Actions}%
+\label{sec:group_actions}
+% section group_actions
+
+One reason that we are interested in the symmetric group is that they contain all finite groups.
+
+\begin{thmnonum}[Cayley's Theorem]
+  If $G$ is a finite group of order $n$, then $G$ is isomorphic to a subgroup of $S_n$.
+\end{thmnonum}
+
+% section group_actions (end)
+
+% chapter lecture_14_jun_01_2018 (end)

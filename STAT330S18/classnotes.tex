@@ -2498,7 +2498,7 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
   Suppose $X$ and $Y$ are rvs with joint pf $f$, and marginal pf $f_X$ and $f_Y$, respectively. Suppose also that
   \begin{align*}
     A &= \{(x, y) : f(x, y) > 0\} \text{ is the support set of } (X, Y) \\
-    A_X &= \{x ; f_X(x) > 0 \} \text{ is the support set of } X \text{, and} \\
+    A_X &= \{x : f_X(x) > 0 \} \text{ is the support set of } X \text{, and} \\
     A_Y &= \{y : f_Y(y) > 0 \} \text{ is the support set of } Y
   \end{align*}
   Then $X$ and $Y$ are independent rvs iff $A = A_X \times A_Y$ and there exist non-negative functions $g$ and $h$ such that
@@ -2508,7 +2508,43 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
   for all $(x, y) \in A_X \times A_Y$.
 \end{thm}
 
+\begin{proof}
+  The $\implies$ direction is straightforward: Since $X$ and $Y$ are independent, we have that $f = f_X f_Y$, and so clearly, $A = A_X \times A_Y$ and so $\forall (x, y) \in A = A_x \times A_Y$, we have that $f_X$ and $f_Y$ are non-negative.
+
+  For the $\impliedby$ direction, note that
+  \begin{align*}
+    f_Y(y) &= \int_{x \in A_X} g(x)h(y) \dif{x} = h(y) \int_{x \in A_X} g(x) \dif{x} \\
+    f_X(x) &= \int_{y \in A_Y} g(x)h(y) \dif{y} = g(x) \int_{y \in A_Y} h(x) \dif{y}.
+  \end{align*}
+  Thus,
+  \begin{align*}
+    f_X(x) f_Y(y) &= g(x)h(y) \int_{x \in A_X} g(x) \dif{x} \int_{y \in A_Y} h(y) \dif{y} \\ 
+      &= g(x) h(x) \int_{x \in A_X} \int_{y \in A_Y} g(x)h(y) \dif{y} \dif{x} = g(x) h(y)
+  \end{align*}
+  where line 2 is by \hlnotea{linearity of integration}. Thus $f(x, y) = f_X(x) f_Y(y)$. Thus $X$ and $Y$ are independent. \qed
+\end{proof}
+
+\begin{note}
+  \begin{enumerate}
+    \item If \cref{thm:factorization_theorem_for_independence} holds, then $f_X$ will be proportional to $g$ and $f_Y$ will be proportional to $h$. Clearly so, since
+      \begin{gather*}
+        g(x) \cdot h(y) = f_X(x) f_Y(y) \\
+        g(x) \propto f_X(x) \, \land \, h(y) \propto f_Y(y)
+      \end{gather*}
+
+    \item The definitions and theorems can be easily extended to the random vector $(X_1, X_2, ..., X_n)$. Indeed, if we apply mathematical induction on the proof above, we will be able to get our desired result.\sidenote{I wonder if this statement is equivalent to the \href{https://en.wikipedia.org/wiki/Sufficient_statistic#Fisher\%E2\%80\%93Neyman_factorization_theorem}{Fisher-Neyman Factorization Theorem}.}
+  \end{enumerate}
+\end{note}
+
 % subsection independence_of_continuous_rvs_continued (end)
+
+\subsection{Conditional Distributions}%
+\label{sub:conditional_distributions}
+% subsection conditional_distributions
+
+
+
+% subsection conditional_distributions (end)
 
 % section joint_distributions_continued_2 (end)
 
