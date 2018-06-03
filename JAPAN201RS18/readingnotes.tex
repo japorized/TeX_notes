@@ -2,7 +2,7 @@
 \documentclass[notoc,notitlepage]{tufte-book}
 \usepackage{luatexja}
 \usepackage{pxrubrica}
-\usepackage{longtable}
+\usepackage{longtable,multirow}
 \nonstopmode
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{5}
@@ -791,7 +791,6 @@ Convert the base forms to their potential forms: \marginnote{We can drop the ら
 \label{sec:vocabulary_2}
 % section vocabulary_2
 
-
 \begin{longtable}{r l l l}
 \multicolumn{4}{l}{\hlnotea{名詞 Nouns}} \\
  & あに & 兄 & (my) older brother \\
@@ -862,10 +861,344 @@ Convert the base forms to their potential forms: \marginnote{We can drop the ら
  & 〜ほん & 〜本 & [counter for long objects]
 \end{longtable}
 
-
 % section vocabulary_2 (end)
 
+\section{あげる/くれる/もらう}%
+\label{sec:ageru_kureru_morau}
+% section ageru_kureru_morau
+
+\begin{grammar}[あげる/くれる/もらう]
+\label{grammar:ageru_kureru_morau}
+  Japanese has two verbs for giving. The choice between the pair depends on the direction of the transaction. Refer to the following diagram for a reference of what to use:
+  \begin{center}
+  \begin{tikzpicture}[scale=1, transform shape]
+    \draw[->,line width=2pt] (-3, 2.5) -- (3,2.5) node[middle,above] {あげる};
+    \draw[->,line width=2pt] (3, -2.5) -- (-3,-2.5) node[middle,below] {くれる};
+    \draw[-,fill=base16-eighties-light,fill opacity=0.25] (-3,0.5) -- (-3,-0.5) -- (-2,-0.5) -- (-2,0.5) -- (-3,0.5);
+    \draw[-,fill=base16-eighties-light,fill opacity=0.25] (-3,1) -- (-3,-1) -- (0,-1) -- (0,1) -- (-3,1);
+    \draw[-] (-3,1.5) -- (-3,-1.5) -- (3,-1.5) -- (3,1.5) -- (-3,1.5);
+    \node at (-2.5,0) {\text{I}};
+    \node at (-1,0) {\text{You}};
+    \node at (1.5,0) {\text{Others}};
+  \end{tikzpicture}
+  \end{center}
+  With both あげる and くれる, the giver is the subject of the sentence, and is accompanied by the particle は or が. The recipient is accompanied by the particle に.
+  \begin{center}
+    (giver) は / が (recipient) に \begin{lrcases}あげる \\ くれる \end{lrcases} \\
+    (giver) gives to (recipient)
+  \end{center}
+  Transactions that are described iwth the verb くれる can also be described in the terms of ``receiving'' or もらう. With もらう, it is the recipient that is the subject of the sentence, with は or が, and the giver is accompanied by the particle に or から.
+  \begin{center}
+    (recipient) は / が (giver) に / から もらう \\
+    (recipient) receives from (giver)
+  \end{center}
+\end{grammar}
+
+\begin{eg}
+Below are some example sentences.
+  \begin{enumerate}
+    \item わたし\underline{は}その女の人\underline{に}花をあげます。
+    \item その女の人\underline{は}男の人\underline{に}時計をあげました。
+    \item 両親\underline{が}（私\underline{に}）新しい車をくれるかもしれません。
+    \item 私は姉\underline{に}/姉\underline{から}古い辞書をもらえました。
+    \item 姉\underline{が}私\underline{に}古い辞書をくれました。
+  \end{enumerate}
+\end{eg}
+
+\begin{note}[くれる is only possible when ``I'' am involved]
+  When a transaction takes place between two people other than yourself, the verb to use is normally あげる. くれる is possible only in limited contexts in which you think you yourself have benefited because somebody very close to you has received something. It should be relatively easy for you to identify yourself with a member of your immediate family or a very good friend, for example,
+  \begin{center}
+    \ruby[j]{大統領}{だい|とう|りょう}が妹に手紙をくれました。
+  \end{center}
+\end{note}
+
+\begin{note}[もらう and くれる]
+  もらう is like くれる and implies that you identify yourself more closely with the recipient than with the giver. Thus it is wrong to use もらう if \textbf{you} receive from \textbf{me}, for example\sidenote{This is one indication that nobody can be completely detached from their ego.} 
+  \begin{center}
+    $\times$ （あなたは）私から手紙をもらいましたが。
+  \end{center}
+  You can use もらう for third-party transactions if you can assume the perspective of the recipient.
+  \begin{center}
+    妹は大統領に手紙をもらいました。
+  \end{center}
+\end{note}
+
+% section ageru_kureru_morau (end)
+
 % chapter lecture_7_wu_yue_er_shi_san_ri_shui_yao_ri_ (end)
+
+\chapter{Lecture 8 五月二十八日（月曜日）}%
+\label{chp:lecture_8_wu_yue_er_shi_ba_ri_yue_yao_ri_}
+% chapter lecture_8_wu_yue_er_shi_ba_ri_yue_yao_ri_
+
+\section{あげる/くれる/もらう (Continued)}%
+\label{sec:ageru_kureru_morau_continued}
+% section ageru_kureru_morau_continued
+
+\begin{ex}[げんき II - 66ページ、VパートD]
+  Refer to the following diagram and describe who gave what to whom using あげる/くれる/もらう.
+
+  \begin{center}
+  \begin{tikzpicture}
+  \tikzset{
+    giveto/.style={midarrow={latex}{0.8},line width=1pt},
+    item/.style={midway, rectangle, draw=none, fill=base16-eighties-dark},
+    name/.style={rectangle, draw, fill=base16-eighties-dark}
+  }
+    \draw[giveto] (0,0) -- (-6.5,3) node[item] {チョコレート};
+    \draw[giveto] (-2,3) -- (-6,3) node[item] {トレーナー};
+    \draw[giveto] (-2.5,3) -- (0,0) node[item] {ぬいぐるみ};
+    \draw[giveto] (0.5,3) -- (0,0) node[item] {手袋};
+    \draw[giveto] (0.7,3) -- (3.5,2.3) node[item] {靴};
+    \draw[giveto] (2.6,1.7) -- (0,3) node[item] {花束};
+    \draw[giveto] (0,0) -- (3,2) node[item] {漫画};
+    \draw[giveto] (0,-3) -- (3,-2) node[item] {本};
+    \draw[giveto] (0,-3) -- (0,0) node[item] {セーター};
+    \draw[giveto] (-5,-3) -- (-3,0) node[item] {ネクタイ};
+    \draw[giveto] (-3,0) -- (0,0) node[item] {みかん};
+    \node[name] at (0,0) {私};
+    \node[name] at (-6,3) {ディエゴ};
+    \node[name] at (-2,3) {きょうこ};
+    \node[name] at (0,3) {メアリー};
+    \node[name] at (3,2) {たけし};
+    \node[name] at (3,-2) {スー};
+    \node[name] at (0,-3) {ロバート};
+    \node[name] at (-3,0) {けん};
+    \node[name] at (-5,-3) {ナオミ};
+  \end{tikzpicture}
+  \end{center}
+
+  \begin{enumerate}
+    \item \textbf{トレーナー} \\
+      \textbf{あげる} ：きょうこさんはディエゴさんにトレーナーをあげました。\\
+      \textbf{もらう} ：ディエゴさんはきょうこさんにトレーナーをもらいました。
+
+    \item \textbf{チョコレート} \\
+      \textbf{あげる} ：ディエゴにチョコレートをあげました。
+
+    \item \textbf{ぬいぐるみ} \\
+      \textbf{くれる} ：きょうこさんがぬいぐるみをくれました。\\
+      \textbf{もらう} ：私はきょうこさんからぬいぐるみをもらえました。
+
+    \item \textbf{手袋} \\
+      \textbf{くれる} ：メアリーさんが手袋をくれました。\\
+      \textbf{もらう} ：私はメアリーさんから手袋をもらえました。
+
+    \item \textbf{花束} \\
+      \textbf{あげる} ：たけしさんはメアリーさんに花束をあげました。\\
+      \textbf{もらう} ：メアリーさんはたけしさんに花束をもらえました。
+    
+    \item \textbf{靴} \\
+      \textbf{あげる} ：メアリーさんはたけしさんに靴をあげました。\\
+      \textbf{もらう} ：たけしさんはメアリーさんに靴をもらえました。
+
+    \item \textbf{漫画} \\
+      \textbf{あげる} ：たけしさんに漫画を上げました。\\
+
+    \item \textbf{本} \\
+      \textbf{あげる} ：ロバートさんはスーさんに本をあげました。\\
+      \textbf{もらう} ：スーさんはロバートさんに本をもらえました。
+
+    \item \textbf{セーター} \\
+      \textbf{くれる} ：ロバートさんがセーターをくれました。\\
+      \textbf{もらう} ：ロバートさんからセーターをもらえました。
+
+    \item \textbf{ネクタイ} \\
+      \textbf{あげる} ：ナオミさんはけんさんにネクタイをあげました。\\
+      \textbf{もらう} ：けんさんはナオミさんからネクタイをもらえました。
+
+    \item \textbf{みかん} \\
+      \textbf{くれる} ：けんさんがみかんをくれました。\\
+      \textbf{もらう} ：けんさんにみかんをもらえました。
+  \end{enumerate}
+\end{ex}
+
+% section ageru_kureru_morau_continued (end)
+
+\section{〜とらどうですか}%
+\label{sec:_toradoudesuka}
+% section _toradoudesuka
+
+\begin{grammar}[〜たらどうですか]
+\label{grammar:_taradoudesuka}
+  たらどうですか after a verb conveys \hlnoteb{advice or recommendation}. The initial た in たらどうですか stands for the \hlnoteb{same ending as in the past tence short form} of a verb in the affirmative. In casual speech, たらでどうですか can be shortened to たらどう or たら.
+
+  たらどうですか may sometimes have a \hlwarn{critical tone}, criticizing the person for not having performed the activity already. It is, therefore, safer not to use it unless you have been taped for consulation.
+
+  Also, the pattern is \hlwarn{not used for extending invitations}. If, for example, you want to invite your friend to come visit, you do not want to use たらどうですか, but should use ません.
+  \begin{center}
+    うちに来ませんか。\\
+    $\times$ うちに来たらどうですか。
+  \end{center}
+\end{grammar}
+
+\begin{eg}
+  \begin{enumerate}
+    \item もっと勉強したらどうですか。
+    \item \ruby[j]{薬}{くすり}をのんだらどうですか。
+  \end{enumerate}
+\end{eg}
+
+\begin{ex}[げんき II - 68ページ、IVパートA]
+  Give advice to the people below.
+  \begin{itemize}
+    \item メアリー：日本で仕事がしたいんです。
+      \begin{enumerate}
+        \item check newspaper
+        \item consult with the teacher
+        \item send r\'esum\'e to company
+      \end{enumerate}
+    \item ジョン：彼女がほしいです。でも、できないんです。
+      \begin{enumerate}
+        \setcounter{enumi}{3}
+        \item go to a party
+        \item join a club
+        \item give up
+      \end{enumerate}
+    \item けん：彼女と結婚したいんです。
+      \begin{enumerate}
+        \setcounter{enumi}{6}
+        \item propose marriage
+        \item give her a ring
+        \item meet her parents
+      \end{enumerate}
+  \end{itemize}
+  
+  \begin{solution}
+    \begin{enumerate}
+      \item 新聞を見たらどうですか。
+      \item 先生に相談してたらどうですか。
+      \item 履歴書を会社に送ったらどうですか。
+      \item パーティーに行ったらどうですか。
+      \item サークルを入ったらどうですか。
+      \item 諦めたらどうですか。
+      \item プロポーズしたらどうですか。
+      \item 指輪をあげたらどうですか。
+      \item 彼女の両親を会いに行ったらどうですか。
+    \end{enumerate}
+  \end{solution}
+\end{ex}
+
+\begin{ex}[げんき II - 68ページ、IVパートB]
+  Give the following people the right suggestion using 〜たらどうですか.
+  \begin{enumerate}
+    \item 美味しいケーキは食べたいんです。\\
+      \textbf{答え：} ケーキ屋に行ったらどうですか。
+    \item 安いカメラがほしんです。\\
+      \textbf{答え：} ネットで\ruby[j]{調}{しら}べたらどうですか。
+    \item ちょっと\ruby[j]{太}{ふと}ったんです。\\
+      \textbf{答え：} 運動したらどうですか。
+    \item この\ruby[j]{頃}{ごろ}疲れてるんです。\\
+      \textbf{答え：} 少し\ruby[j]{休憩}{きゅ|けい}したらどうですか。
+    \item 勉強が\ruby[j]{大嫌}{だい|きら}いなんです。\\
+      \textbf{答え：} 勉強をゲームとしたらどうですか。
+    \item よく寝られないんです。\\
+      \textbf{答え：} 本を読んだらどうですか。
+    \item 友達ができないんです。\\
+      \textbf{答え：} サークルを入ったらどうですか。
+    \item お金がないんです。\\
+      \textbf{答え：} アルバイトをしたらどうですか。
+    \item 彼/彼女がけちで、何もくれないんです。\\
+      \textbf{答え：} 彼/彼女と話したらどうですか。
+  \end{enumerate}
+\end{ex}
+
+% section _toradoudesuka (end)
+
+\section{数え方}%
+\label{sec:shu_efang_}
+% section shu_efang_
+
+\hlnotea{\ruby[j]{数}{かぞ}え\ruby[j]{方}{かた}}\\
+\begin{longtable}{c | c | c | c | c | c | c}
+                        & こ（個）                    & さつ（冊）             & ひき（匹）                       & ほん（本）                       & だい（台） & まい（枚） \\
+                        & small items                 & bound volumes          & small animal                     & long objects                     & equipment  & flat objects \\
+                        \hline
+1                       & \underline{いっ}こ          & \underline{いっ}さつ   & \underline{いっ}\hlnotec{ぴき}   & \underline{いっ}\hlnotec{ぽん}   & いちだい   & いちまい \\
+2                       & にこ                        & にさつ                 & にひき                           & にほん                           & にだい     & にまい \\
+3                       & さんこ                      & さんさつ               & さん\hlnotec{びき}               & さん\hlnotec{ぼん}               & さんだい   & さんまい \\
+4                       & よんこ                      & こんさつ               & よんひき                         & よんほん                         & よんだい   & よんまい \\
+5                       & ごこ                        & ごさつ                 & ごひき                           & ごほん                           & ごだい     & ごまい \\
+6                       & \underline{ろっ}こ          & ろくさつ               & \underline{ろっ}\hlnotec{ぴき}   & \underline{ろっ}\hlnotec{ぽん}   & ろくだい   & ろくまい \\
+7                       & ななこ                      & ななさつ               & ななひき                         & ななほん                         & ななだい   & ななまい \\
+8                       & \underline{はっ}こ          & \underline{はっ}さつ   & \underline{はっ}\hlnotec{ぴき}   & \underline{はっ}\hlnotec{ぽん}   & はちだい   & はちまい \\
+9                       & きゅうこ                    & きゅうさつ             & きゅうひき                       & きゅうほん                       & きゅうだい & きゅうまい \\
+\multirow{2}{*}{10}     & \underline{じゅっ}こ        & \underline{じゅっ}さつ & \underline{じゅっ}\hlnotec{ぴき} & \underline{じゅっ}\hlnotec{ぽん} & じゅうだい & じゅうまい \\
+                        & \underline{じっ}こ          & \underline{じっ}さつ   & \underline{じっ}\hlnotec{ぴき}   & \underline{じっ}\hlnotec{ぽん}   &            & \\
+\hline
+\tworow{c}{How}{many}   & \tworow{c}{なんこ/}{いくつ} & なんさつ               & なん\hlnotec{びき}               & なん\hlnotec{ぼん}               & なんだい   & なんまい \\
+\hline
+Eg.                     & candy                       & book                   & cat                              & pencil                           & computer   & paper \\
+                        & tomato                      & magazine               & dog                              & umbrella                         & TV         & plate \\
+                        & eraser                      & dictionary             & snake                            & movie                            & car        & T-shirt \\
+                        &                             &                        & bottle                           & bicycle
+\end{longtable}
+
+% section shu_efang_ (end)
+
+% chapter lecture_8_wu_yue_er_shi_ba_ri_yue_yao_ri_ (end)
+
+\chapter{Lecture 9 五月三十日（水曜日）}%
+\label{chp:lecture_9_wu_yue_san_shi_ri_shui_yao_ri_}
+% chapter lecture_9_wu_yue_san_shi_ri_shui_yao_ri_
+
+\section{number + も / number + しか + negative}%
+\label{sec:number_mo_number_shika_negative}
+% section number_mo_number_shika_negative
+
+\begin{grammar}[も/しか]
+\label{grammar:mo_shika}
+  Recall the basic structure of expressing numbers in Japanese.
+  \begin{center}
+    noun \begin{lrcases} が \\ を \end{lrcases} + number
+  \end{center}
+  You can add も to the number word when you want to say ``as many as''.
+
+  You can add しか to the number word, and turn the predicate into the negative when you want to say ``as few as'' or ``only''.
+\end{grammar}
+
+\begin{eg}
+  \begin{enumerate}
+    \item 私の母は猫を三匹も\ruby[j]{飼}{か}っています。
+    \item 昨日のパーティーには学生が二十人も来ました。
+    \item 私は日本語の辞書を一冊しか持っていません。
+    \item この会社にはパソコンが二台しかありません。
+  \end{enumerate}
+\end{eg}
+
+\begin{ex}[げんき II - 69ページ、VパートB]
+  Describe the activities carried out by メアリーさん and ジョンさん as in the table below using 〜も and 〜しか.
+  \begin{center}
+  \begin{tabular}{c | c | c | c | c | c}
+             & ハムバッカー & 本         & ディーヴィディー & ジュース   & 時間 \\
+             \hline
+             & 食べました   & 読みました & 持っています     & 飲みました & 寝ます \\
+             \hline
+    メアリー & 1            & 1          & 50               & 3          & 11 \\
+    ジョン   & 4            & 6          & 2                & 1          & 5
+  \end{tabular}
+  \end{center}
+  \begin{enumerate}
+    \item メアリーさんはハムバッカーを一個しか食べません。\\
+      ジョンさんはハムバッカーを四個も食べます。
+
+    \item メアリーさんは本一冊しか読みません。\\
+      ジョンさんは本を六冊も読みます。
+
+    \item メアリーさんはディーヴィディーを五十枚を持っています。\\
+      ジョンさんはディーヴィディを二枚しか持っていません。
+
+    \item メアリーさんはジュースを三本も飲みます。\\
+      ジョンさんはジュースを一本しか飲みません。
+
+    \item メアリーさんは十一時間も寝ます。\\
+      ジョンさんは五時間しか寝ません。
+  \end{enumerate}
+\end{ex}
+
+% section number_mo_number_shika_negative (end)
+
+% chapter lecture_9_wu_yue_san_shi_ri_shui_yao_ri_ (end)
 
 \chapter*{Appendix}%
 \label{chp:appendix}
