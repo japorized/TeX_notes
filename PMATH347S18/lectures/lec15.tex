@@ -1,0 +1,108 @@
+\chapter{Lecture 15 Jun 04 2018}%
+\label{chp:lecture_15_jun_04_2018}
+% chapter lecture_15_jun_04_2018
+
+\section{Group Action}%
+\label{sec:group_action}
+% section group_action
+
+\subsection{Cayley's Theorem}%
+\label{sub:cayley_s_theorem}
+% subsection cayley_s_theorem
+
+\begin{thm}[Cayley's Theorem]
+\index{Cayley's Theorem}
+\label{thm:cayley_s_theorem}
+  If $G$ is a finite group of order $n$, then $G$ is isomorphic to a subgroup of $S_n$.
+\end{thm}
+
+\begin{proof}
+  Since $G$ is finite, let $G = \{g_1, g_2, ..., g_n\}$ and let $S_G$ be the permutation group of $G$. By identifying $g_i$ with $i$, where $1 \leq i \leq n$, we see that $S_G \cong S_n$ \sidenote{$S_G$ is the permutation group of $G$. We can think of $S_G$ as a group of permutations that permutes the index of the elements of $G$. Since there are $n$ indices, there are $n!$ ways to permute the indices, and so $\abs{S_G} = n! = \abs{S_n}$. Then we can certainly find some isomorphism from $S_G$ to $S_n$, and so $S_G \cong S_n$.}. Therefore, it suffices to find an injective homomorphism\sidenote{\hlwarn{Why do we need injectivity?} We need homomorphicity in order to invoke the \hyperref[thm:first_isomorphism_theorem]{First Isomorphism Theorem} so that we can get $G \cong \img \sigma \leq S_G \cong S_n$.} $\sigma : G \to S_G$.
+
+  Consider the function $\mu_a : G \to G$, where $a \in G$, such that $\mu_a(g) = ag$ for all $g \in G$. Clearly, $\mu_a$ is surjective. Suppose $\mu_a = \mu_b$, where $b \in G$. Then $a = \mu_a (1) = \mu_b (1) = b$. Thus $\mu_a$ is also injective. It follows that $\mu_a \in S_G$ by definition.
+
+  Now define the function $\sigma : G \to S_G$ such that $\sigma(a) = \mu_a$. Clearly, $\sigma$ is injective, since $\sigma(a) = \sigma(b) \implies \mu_a = \mu_b$. Observe that $\sigma(ab) = \mu_{ab} = ab = \mu_a \mu_b$. Thus $\sigma$ is a group homomorphism. Note that $\ker \sigma = \{1\}$, the trivial group. It follows from the \hyperref[thm:first_isomorphism_theorem]{First Isomorphism Theorem} that $G \cong \im \sigma \leq S_G \cong S_n$.\sidenote{We shall use $H \leq G$ to denote that $H$ is a subgroup of $G$ from here on.} \sidenote{This is a result from \cref{propo:image_of_hm_is_a_subgroup_n_kernel_of_hm_is_a_normal_subgroup}} \qed
+\end{proof}
+
+Cayley's Theorem is, however, too strong at times. We can certainly find a smaller integer $m$ such that $G$ is contained in $S_m$. Consider the following example.
+
+\begin{eg}\label{eg:a_smaller_subgroup_of_Sn_that_is_iso_to_G}
+  Let $H \leq G$ with $[G : H] = m < \infty$. Let $X = \{g_1 H, g_2 H, ..., g_m H\}$ be the set of all distinct left cosets of $H$ in $G$ \sidenote{This is simply a consequence of $[G : H] = m$.}. For $a \in G$, define $\lambda_a : X \to X$ by $\lambda_a (gH) = agH$, $gH \in X$.
+
+  Note that $\lambda_a$ is a bijection\sidenote{This is true as shown in the proof above, but it can also serve as a tiny exercise.}, and so $\lambda_a \in S_X$, the permutation group of $X$. Consider the mapping $\tau : G \to S_X$ defined by $\tau (a) = \lambda_a$ for $a \in G$. Note that $\forall a, b \in G$, $\lambda_{ab} = \lambda_a \lambda_b$. Thus $\tau$ is a homomorphism. Note that if $a \in \ker \tau$, then $aH = H$ which implies $a \in H$ by \cref{propo:properties_of_cosets}. Thus $\ker \tau \subseteq H$.
+\end{eg}
+
+From the example above, if we apply the \hyperref[thm:first_isomorphism_theorem]{First Isomorphism Theorem}, then
+\begin{equation*}
+  \faktor{G}{\ker \tau} \cong \img \tau \leq S_X \cong S_m \leq S_n.
+\end{equation*}
+This is the result that we desired.
+
+\begin{thm}[Extended Cayley's Theorem]
+\index{Extended Cayley's Theorem}
+\label{thm:extended_cayley_s_theorem}
+  Let $H \leq G$ with $[G : H] = m < \infty$. If $G$ has no normal subgroup contained in $H$ except for the trivial subgroup $\{1\}$, then $G$ is isomorphic to a subgroup of $S_m$.
+\end{thm}
+
+\begin{proof}
+  By our assumption, let $X$ be the set of all distinct left cosets of $H$ in $G$. Then we have that $\abs{X} = m$ and so $S_X \cong S_m$ \sidenote{This is as argued in the proof of \hyperref[thm:cayley_s_theorem]{Cayley's Theorem}.}. From \cref{eg:a_smaller_subgroup_of_Sn_that_is_iso_to_G}, we have that there exists a group homomorphism $\tau : G \to S_X$ with $K := \ker \tau \subseteq H$. So by the \hyperref[thm:first_isomorphism_theorem]{First Isomorphism Theorem}, we have that
+  \begin{equation*}
+    \faktor{G}{K} \cong \img \tau.
+  \end{equation*}
+  Since $K \subseteq H$ and $K \triangleleft G$, we have, by assumption, that $K = \{1\}$. It follows that
+  \begin{equation*}
+    G \cong \img \tau \leq S_X \cong S_m.
+  \end{equation*}\qed
+\end{proof}
+
+\begin{crly}
+\label{crly:subgroup_with_prime_index_dividing_order_of_group_is_normal}
+  Let $\abs{G} = m \in \mathbb{N}$ and $p$ the smallest prime such that $p \big| m$. If $H \leq G$ with $[G : H] = p$, then $H \triangleleft G$.
+\end{crly}
+
+\begin{proof}
+  Let $X$ be the set of all distinct left cosets of $H$ in $G$. We have $\abs{X} = p$ and so $S_X \cong S_p$. Let $\tau : G \to S_X \cong S_p$ be as defined in \cref{eg:a_smaller_subgroup_of_Sn_that_is_iso_to_G}, with $K := \ker \tau \subseteq H$. By the \hyperref[thm:first_isomorphism_theorem]{First Isomorphism Theorem}, we have that
+  \begin{equation*}
+    \faktor{G}{K} \cong \img \tau \leq S_X \cong S_p,
+  \end{equation*}
+  i.e. $\faktor{G}{K}$ is isomorphic to a subgroup of $S_p$. Therefore, by \hyperref[thm:lagrange_s_theorem]{Lagrange's Theorem}, we have that $\abs{\faktor{G}{K}} \Bigg| \; p!$.
+
+  Also, since $K \subseteq H$, if $[H : K] = k \in \mathbb{N}$, then
+  \begin{equation*}
+    \abs{\faktor{G}{K}} \overset{(1)}{=}\frac{\abs{G}}{\abs{K}} = \frac{\abs{G}}{\abs{H}} \cdot \frac{\abs{H}}{\abs{K}} = pk,
+  \end{equation*}
+  where $(1)$ is by \cref{propo:propo_related_to_quotient_groups}. Therefore we have that $pk \, | p!$ and so $k \, | \, (p - 1)!$.
+  
+  Note that $k \, | \, \abs{H}$ \sidenote{This is clear since $\abs{H} = k \abs{K}$.}, which divides $\abs{G}$, and $p$ is the smallest prime dividing $\abs{G}$. Thus evrey prime divisor of $k$ must be $\geq p$.\sidenote{By the \hlnotea{Fundamental Theorem of Arithmetic}, and since $k$ is finite, let $k = p_1^{a_1} p_2^{a_2} ...p_m^{a_m}$, where $p_i$'s are distinct primes and $a_i \in \mathbb{N}$ are the multiplicities of the $i$\textsuperscript{th}, and by the \hlnotea{Well-Ordering Principle}, let $p_i < p_{i + 1}$. Then we have, for some $b = b_1^{c_1} b_2^{c_2} \hdots b_j^{c_j} \in \mathbb{N}$ where the $b_i$'s are distint primes, $b_i < b_{i + 1}$, and $c_i \in \mathbb{N} \cup \{0\}$,
+  \begin{equation*}
+    m &= kb = p_1^{a_1} p_2^{a_2} \hdots p_m^{a_m} b_1^{c_1} b_2^{c_2} \hdots b_j^{c_j}.
+  \end{equation*}
+  Since $p$ is the smallest prime that divides $m$, we have
+  \begin{align*}
+    p &= \min \{p_1, p_2, ..., p_m, b_1, b_2, ..., b_j\} \\
+      &= \min \{ p_1, b_1 \}
+  \end{align*}
+  } Thus $k = 1$, which implies that $K = H$. Therefore, $H \triangleleft G$ as desired.\qed
+\end{proof}
+
+% subsection cayley_s_theorem (end)
+
+\subsection{Group Action}%
+\label{sub:group_action}
+% subsection group_action
+
+\begin{defn}[Group Action]\index{Group Action}
+\label{defn:group_action}
+  Let $G$ be a group, $X$ a non-empty set. A \hlnoteb{group action} of $G$ on $X$ is a mapping $G \times X \to X$ denoted as $(a, x) \to ax$ such that
+  \begin{enumerate}
+    \item $1 \cdot x = x$, $x \in X$
+    \item $a \cdot (b \cdot x) = (ab) \cdot x$, $a, b \in G, \, x \in X$
+  \end{enumerate}
+  In this case, we say $G$ \hldefn{acts on} $X$.
+\end{defn}
+
+% subsection group_action (end)
+
+% section group_action (end)
+
+% chapter lecture_15_jun_04_2018 (end)
