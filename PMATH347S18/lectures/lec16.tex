@@ -1,0 +1,140 @@
+\chapter{Lecture 16 Jun 06 2018}%
+\label{chp:lecture_16_jun_06_2018}
+% chapter lecture_16_jun_06_2018
+
+\section{Group Action (Continued)}%
+\label{sec:group_action_continued}
+% section group_action_continued
+
+\subsection{Group Action (Continued)}%
+\label{sub:group_action_continued}
+% subsection group_action_continued
+
+\begin{remark}
+  Let $G$ be a group acting on a set $X$. For $a, b \in G$, and $x, y \in X$, we have that
+  \begin{equation*}
+    a \cdot x = b \cdot y \iff (b^{-1} a) \cdot x = y.
+  \end{equation*}
+  In particular, we have
+  \begin{equation*}
+    a \cdot x = a \cdot y \iff x = y.
+  \end{equation*}
+\end{remark}
+
+For $a \in G$, define $\sigma_a : X \to X$ by $\sigma_a(x) = a \cdot x$ for all $x \in X$. In A3, we will be showing that\sidenote{This will be added after the assignment.}:
+\begin{enumerate}
+  \item $\sigma_a \in S_X$, the permutation group of $X$; and
+  \item The function $\Theta : G \to S_X$ given by $\Theta(a) = \sigma_a$ is a group homomorphism with
+    \begin{equation*}
+      \ker \Theta = \{a \in G : a \cdot x = x, \, x \in X \}.
+    \end{equation*}
+\end{enumerate}
+
+Note that the group homomorphism $\Theta : G \to S_X$ gives an \hlimpo{equivalent definition} of a \hldefn{Group Action} of $G$ on $X$. If $X = G$, $\abs{G} = n$ and $\ker \Theta = \{1\}$ \sidenote{This is also called a \hldefn{faithful group action}.}, then the map $\Theta : G \to S_G \cong S_n$ shows that $G$ is isomorphic to a subgroup of $S_n$ \sidenote{
+\begin{ex}
+  Verify that $G$ is indeed isomorphic to a subgroup of $S_n$ using the given information and the equivalent definition of a group action.
+\end{ex}
+}, which the equivalent statement of \hyperref[thm:cayley_s_theorem]{Cayley's Theorem}\index{Cayley's Theorem}.
+
+\begin{eg}\label{eg:group_action_by_conjugation}
+  If $G$ is a group, let $G$ act on itself by $a \cdot x = a \cdot x \cdot a^{-1}$, for all $a, x \in G$. Note that the axioms of a group action is satisfied:
+  \begin{enumerate}
+    \item $1 \cdot x = 1 \cdot x \cdot 1^{-1} = x$; and
+    \item $a \cdot (b \cdot x) = a \cdot ( b \cdot x \cdot b^{-1} ) \cdot a = ab \cdot x \cdot (ab)^{-1} = (ab) \cdot x$.
+  \end{enumerate}
+  In this case, we say that $G$ \hlimpo{acts on itself by} \hldefn{conjugation}.
+\end{eg}
+
+\begin{defn}[Orbit \& Stabilizer]\index{Orbit}\index{Stabilizer}
+\label{defn:orbit_n_stabilizer}
+  Let $G$ be a group acting on a set $X$, and $x \in X$. We denote by\marginnote{There is no standardized way of expressing the orbit and the stabilizer, i.e. the notation for orbit and stabilizers will be different across many references.}
+  \begin{equation*}
+    G \cdot x = \{g \cdot x : \forall g \in G \}
+  \end{equation*}
+  the \hlnoteb{orbit} of $X$ and
+  \begin{equation*}
+    S(x) = \{g \in G : g \cdot x = x \} \subseteq G
+  \end{equation*}
+  the \hlnoteb{stabilizer} of $X$.
+\end{defn}
+
+\begin{propo}
+\label{propo:stabilizer_is_a_subgroup_and_index_of_stabilizer_is_order_of_orbit}
+  Let $G$ be a group acting on a set $X$ an $x \in X$. Let $G \cdot x$ and $S(x)$ be the orbit and stabilizer of $X$ respectively. Then
+  \begin{enumerate}
+    \item $S(x) \leq G$
+    \item there is a bijection from $G \cdot x$ to $\{g S(x) : g \in G \}$ and thus $\abs{G \cdot x} = [G : S(x)]$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Since $1 \cdot x = x$, we have $1 \in S(x)$. If $g, h \in S(x)$, then
+      \begin{equation*}
+        gh \cdot x = g \cdot (h \cdot x) = g \cdot x = x
+      \end{equation*}
+      i.e. $S(x)$ is closed under ``composition of group action''. Also note that
+      \begin{equation*}
+        g^{-1} \cdot x = g^{-1} \cdot (g \cdot x) = (g^{-1}g) \cdot x = 1 \cdot x = 1.
+      \end{equation*}
+      Thus the inverse of each element is also in $S(x)$. Therefore, by the \hlnotea{Subgroup Test}, $S(x) \leq G$.
+
+    \item For the sake of simplicity, let us write $S = S(x)$. Consider the map
+      \begin{equation*}
+        \phi: G \cdot x \to \{g S(x) : g \in G\}
+      \end{equation*}
+      defined by $\phi(g \cdot x) = gS$ \sidenote{We go with the most simplistic and rather naive kind of function here.}. To verify that the map is well-defined, note that
+      \begin{align*}
+        g \cdot x = h \cdot x &\iff (h^{-1} g) \cdot x = x = 1 \cdot x \\
+                              &\iff \phi(h^{-1} g \cdot x) = \phi( 1 \cdot x ) \\
+                              &\iff h^{-1}g S = 1 \cdot S = S \\
+                              &\iff gS = hS
+      \end{align*}
+      We also observe that $\phi$ is injective. It is also clear that $\phi$ is onto, and therefore we have that $\phi$ is a bijection. It follows that
+      \begin{equation*}
+        \abs{G \cdot x} = \abs{ \{gS : g \in G \} } = [G : S]
+      \end{equation*}
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{thm}[Orbit Decomposition Theorem]
+\index{Orbit Decomposition Theorem}
+\label{thm:orbit_decomposition_theorem}
+  Let $G$ be a group acting on a non-empty finite set $X$. Let
+  \begin{equation*}
+    X_f = \{x \in X : a \cdot x = x, \forall a \in G \}
+  \end{equation*}
+  (Note that $x \in X_f \iff \abs{G \cdot x} = 1$)\sidenote{Notice that
+  \begin{align*}
+    x \in X_f &\iff \forall a \in G \enspace a \cdot x = x \\
+      &\iff \forall g \cdot x \in G \cdot x \enspace g \cdot x = x \\
+      &\iff \abs{G \cdot x} = 1
+  \end{align*}}
+
+  Let $G \cdot x_1, \, G \cdot x_2, \, ..., \, G \cdot x_n$ denote the distinct nonsingleton orbits (i.e. $\abs{G \cdot x_i} > 1$ for all $1 \leq i \leq n$). Then
+  \begin{equation*}
+    \abs{X} = \abs{X_f} + \sum_{i = 1}^{n} [ G : S(x_i) ].
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Note that for $a, b \in G$ and $x, y \in X$,
+  \begin{align*}
+    a \cdot x = b \cdot y &\overset{\text{WLOG}}{\iff} (b^{-1}a) \cdot x = y \\
+          &\iff y \in G \cdot x \\
+          &\overset{(1)}{\iff} G \cdot x = G \cdot y
+  \end{align*}
+  where $(1)$ is the conclusion after consider the other case where $(a^{-1}b) \cdot y = x$.
+
+  Thus, we see that the two orbits are either disjoint or the same, but not both. It follows that the orbits form a disjoint union of $X$. Since  $x \in X_f \iff \abs{G \cdot x} = 1$, the set $X \setminus X_f$ contains all nonsingleton orbits, which are disjoint. It follows that
+  \begin{equation*}
+    \abs{X} = \abs{X_f} + \sum_{i = 1}^{n} \abs{G \cdot x_i} \overset{(2)}{=} \abs{X_f} + \sum_{i = 1}^{n} [G : S(x_i)]
+  \end{equation*}
+  where $(2)$ is by \cref{propo:stabilizer_is_a_subgroup_and_index_of_stabilizer_is_orde}.\qed
+\end{proof}
+
+% subsection group_action_continued (end)
+
+% section group_action_continued (end)
+
+% chapter lecture_16_jun_06_2018 (end)
