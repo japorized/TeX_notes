@@ -26,6 +26,7 @@
 		{ "trigger": "intg", "contents": "\\int_{${1:a}}^{${2:b}} $0" },
 
 		{ "trigger": "lra", "contents": "\\left\\langle ${1:a} \\right\\rangle $0" },
+		{ "trigger": "lrb", "contents": "\\left( ${1:a} \\right) $0" },
 
 		{ "trigger": "bf", "contents": "\\textbf{${1:bold}} $0" },
 		{ "trigger": "it", "contents": "\\textit{${1:italic}} $0"},

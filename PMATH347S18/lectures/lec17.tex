@@ -1,0 +1,126 @@
+\chapter{Lecture 17 Jun 08 2018}%
+\label{chp:lecture_17_jun_08_2018}
+% chapter lecture_17_jun_08_2018
+
+\section{Group Action (Continued 2)}%
+\label{sec:group_action_continued_2}
+% section group_action_continued_2
+
+\subsection{Group Action (Continued 2)}%
+\label{sub:group_action_continued_2}
+% subsection group_action_continued_2
+
+\begin{note}[Recall \cref{thm:orbit_decomposition_theorem}]
+  Let $G$ act on a finite set $X \neq \emptyset$. Let\sidenote{$X_f$ is also called the set of elements of $X$ that are fixed by the action of $G$.}
+  \begin{equation*}
+    X_f = \{x \in X : a \cdot x = x, \, a \in G \}
+  \end{equation*}
+  Let $G \cdot x_1, G \cdot x_2, ..., G \cdot x_n$ be distinct nonsingleton orbits (ie. $\abs{G \cdot x_i} > 1$). Then
+  \begin{equation*}
+    \abs{X} = \abs{X_f} + \sum_{i=1}^{n} [ G : S(x_i) ].
+  \end{equation*}
+\end{note}
+
+\begin{eg}[Conjugacy Class \& Centralizer]
+  Let $G$ be a finite group acting on itself by \hlnoteb{conjugation}. In the context of \cref{thm:orbit_decomposition_theorem}, we have that
+  \begin{align*}
+    X &= G \\
+    G_f &= \{x \in G : gxg^{-1} = x, \, g \in G \} \\
+        &= \{x \in G : gx = xg, \, g \in G \} = Z(G),
+  \end{align*}
+  where we recall that $Z(G)$ is the \hyperref[defn:center_of_a_group]{center of $G$}. Now for any $x \in G$, we have
+  \begin{equation*}
+    G \cdot x = \{ gxg^{-1} : g \in G \},
+  \end{equation*}
+  which is known as the \hldefn{conjugacy class} of $x$. We also have
+  \begin{equation*}
+    S(x) = \{g \in G : gxg^{-1} = x \} = \{g \in G : gx = xg \} = C_G(x),
+  \end{equation*}
+  which is called the \hldefn{centralizer} of $x$.
+\end{eg}
+
+Putting the above example with \cref{thm:orbit_decomposition_theorem}, we have the following corollary.
+
+\begin{crly}[Class Equation]
+\index{Class Equation}
+\label{crly:class_equation}
+  Let $G$ be a finite group and $\{gx_1 g^{-1} : g \in G \}, \, ..., \, \{g x_n g^{-1} : g \in G \}$ denote the distinct nonsingleton conjugacy classes. Then
+  \begin{equation*}
+    \abs{G} = \abs{Z(G)} + \sum_{i=1}^{n} [ G : C_G(x_i) ].
+  \end{equation*}
+\end{crly}
+
+\begin{lemma}
+\label{lemma:abs_x_equiv_abs_x_f}
+  Let $G$ be a group of order $o^m$, where $p$ prime and $m \in \mathbb{N}$, which acts on a finite set $X$. Let
+  \begin{equation*}
+    X_f = \{ x \in X : a \cdot x = x, \, a \in G \}.
+  \end{equation*}
+  Then we have
+  \begin{equation*}
+    \abs{X} \equiv \abs{X_f} \mod p
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  By the \hyperref[thm:orbit_decomposition_theorem]{Orbit Decomposition Theorem}, we have that
+  \begin{equation*}
+    \abs{X} = \abs{X_f} + \sum_{i=1}^{n} [ G : S(x_i) ],
+  \end{equation*}
+  where $[ G : S(x_i) ] > 1$ for $1 \leq i \leq n$. For any $x_i$, by \hyperref[thm:lagrange_s_theorem]{Lagrange's Theorem}, $[ G : S(x_i) ] \big| \abs{G} = p^m$. Since $[ G : S(x_i) ] > 1$, we have, by the \hlnotea{Fundamental Theorem of Arithmetic}, that $[ G : S(x_i) ]$ must be a multiple of $p$, i.e. $p$ divides $[ G : S(x_i) ]$, for all $i$. Therefore, $p \, | \, \left( \abs{X} - \abs{X_f} \right)$, i.e.
+  \begin{equation*}
+    \abs{X} \equiv \abs{X_f} \mod p,
+  \end{equation*}
+  as required. \qed
+\end{proof}
+
+\newthought{Recall} \hyperref[thm:lagrange_s_theorem]{Lagrange's Theorem}: If $G$ is finite and $g \in G$, then
+\begin{equation*}
+  o(g) \, \big| \, \abs{G}.
+\end{equation*}
+
+An interesting question to ask here is: Is the converse true? I.e., given a group $G$ with an integer $m$ such that $m \, \big| \, \abs{G}$, does $G$ contain an element of order $m$?
+
+Consider $K_4$, the Klein $4$-group. Note that all elements of $K_4$ have order at most $2$, but $4 | \abs{K_4} = 4$.
+
+Now if $m$ is some prime, is the converse still true?
+
+\begin{thm}[Cauchy]
+\index{Cauchy's Theorem}
+\label{thm:cauchy}
+  Let $p$ be a prime, $G$ be a finite group. If $p \, \big| \abs{G}$, then $G$ contains an element of order $p$.
+\end{thm}
+
+\begin{proof}[McKay]
+  Let $\abs{G} = n$. Suppose $p \, | \, n$. Let
+  \begin{equation*}
+    X = \{(a_1, ..., a_p) : a_i \in G, \, a_1 \hdots a_p = 1 \}.
+  \end{equation*}
+  Note that $X \neq \emptyset$, since $(1, ..., 1) \in X$ (so the proof is not vacuous). Take any $a_1, ..., a_{p - 1} \in G$, then $a_p$ is uniquely determined, i.e.
+  \begin{equation*}
+    a_p = (a_1 \hdots a_{p - 1})^{-1}.
+  \end{equation*}
+  Now for each $a_i$, we have $n$ choices, thus $\abs{X} = n^{p - 1}$.\sidenote{Convince yourself why this is true.}
+
+  Let $\mathbb{Z}_p = ( \mathbb{Z}_p, + )$ act on $X$ by ``cycling'', i.e. $\forall k \in \mathbb{Z}_p$,
+  \begin{equation*}
+    k \cdot (a_1, a_2, ..., a_p) = (a_{k + 1}, a_{k + 2}, ..., a_p, a_1, ..., a_k).
+  \end{equation*}
+  \sidenote{We want to use \cref{thm:orbit_decomposition_theorem} from here.} Note that \\
+  \begin{aligned}
+    $(a_1, ..., a_p) \in X_f$ &$\iff$ every cycled shift of $(a_1, ..., a_p)$ is itself \\
+      &$\iff$ $a_1 = a_2 = \hdots = a_p$ and $a_1 a_2 ... a_p = 1$
+  \end{aligned}
+  i.e. all of the components of the $p$-tuple are the same. Now if $(a_1, ..., a_p)$ has at least 2 distinct components, then its orbits must have $p$ elements. In other words, for some $r \in \mathbb{N}$, for each $1 \leq i \leq r$, we have that $[ G : S(x_i) ] = p$. Then, by the \hyperref[thm:orbit_decomposition_theorem]{Orbit Decomposition Theorem},
+  \begin{gather*}
+    n^{p - 1} = \abs{X} = \abs{X_f} + \sum_{i=1}^{r} [ G : S(x_i) ] \\
+    \abs{X_f} = n^{p - 1} - rp.
+  \end{gather*}
+  We observe that $\abs{X_f}$ is indeed divisible by $p$ and is non-zero, since $(1, ..., 1) \in X_f$. Therefore, there exists some $a \neq 1 \in G$, such that $(a, ..., a) \in X_f$, i.e. $a^p = 1$. We know that $p$ is the smallest power by construction, and therefore $o(a) = p$ as required. \qed
+\end{proof}
+
+% subsection group_action_continued_2 (end)
+
+% section group_action_continued_2 (end)
+
+% chapter lecture_17_jun_08_2018 (end)
