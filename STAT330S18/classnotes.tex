@@ -14,6 +14,7 @@
 \DeclareMathOperator{\Unif}{Unif }
 \DeclareMathOperator{\Nor}{N }
 \DeclareMathOperator{\Gau}{G }
+\DeclareMathOperator{\BetaDist}{Beta }
 \DeclareMathOperator{\Dom}{Dom }
 \DeclareMathOperator{\Var}{Var }
 \DeclareMathOperator{\supp}{supp }
@@ -2542,9 +2543,276 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
 \label{sub:conditional_distributions}
 % subsection conditional_distributions
 
+\begin{defn}[Conditional Distributions]\index{Conditional Distributions}\index{Conditional PF}
+\label{defn:conditional_distributions}
+  Suppose $X$ and $Y$ are rvs with joint pf $f$, and marginal pfs $f_X$ and $f_Y$, respectively. Suppose also that $A = \{(x, y) : f(x, y) > 0 \}$. The \hlnoteb{conditional pf} of $X$ given $Y = y$ is given by
+  \begin{equation*}
+    f_X(x | y) = \frac{f(x, y)}{f_Y(y)}
+  \end{equation*}
+  for $(x, y) \in A$ provided that $f_Y(y) \neq 0$. The \hlnoteb{conditional pf} of $Y$ given $X = x$ is given by
+  \begin{equation*}
+    f_Y(y | x) = \frac{f(x, y)}{f_X(x)}
+  \end{equation*}
+  for $(x, y) \in A$ provided that $f_X(x) \neq 0$.
+\end{defn}
 
+\begin{remark}
+  If $X$ and $Y$ are discrete rvs then
+  \begin{equation*}
+    f_X(x | y) = P(X = x | Y = y) = \frac{P(X = x, Y = y)}{P(Y = y)} = \frac{f(x, y)}{f_Y(y)}
+  \end{equation*}
+  and
+  \begin{equation*}
+    \sum_{x} f_X(x | y) = \sum_{x} \frac{f(x, y)}{f_Y(y)} = \frac{1}{f_Y(y)} \sum_{x} f(x, y) = \frac{f_Y(y)}{f_Y(y)} = 1,
+  \end{equation*}
+  and similarly so for $f_Y(y | x)$. Similarly, if $X$ and $Y$ are both continuous rvs, then
+  \begin{equation*}
+    \int_{-\infty}^{\infty} f_X(x | y) \dif{x} = \int_{-\infty}^{\infty} \frac{f(x, y)}{f_Y(y)} \dif{x} = \frac{1}{f_Y(y)} \int_{-\infty}^{\infty} f(x, y) \dif{x} = \frac{f_Y(y)}{f_Y(y)} = 1
+  \end{equation*}
+
+  Now consider if $X$ is a continuous rv such that $f_X(x) \neq P(X = x)$ and $P(X = x) = 0$ for all $x$. Then to justify the definition of the conditional pdf of $Y$ given $X = x$, when $X$ and $Y$ are both continuous rvs, we consider $P(Y \leq y | X = x)$ using the limit approach:
+  \begin{align*}
+    P(Y \leq y | X = x) &= \lim_{h \to 0} P( Y \leq y | x \leq X \leq x + h ) \\
+      &= \lim_{h \to 0} \frac{\int_{x}^{x + h} \int_{-\infty}^{y} f(u, v) \dif{v} \dif{u} }{ \int_{x}^{x + h} f_X(u) \dif{u} } \\
+      &= \lim_{h \to 0} \frac{\frac{d}{dh} \int_{x}^{x + h} \int_{-\infty}^{y} f(u, v) \dif{v} \dif{u}}{ \frac{d}{dh} \int_{x}^{x + h} f_X(u) \dif{u} } \quad \text{by } \hlnotea{L'H\^opital's Rule} \\
+      &= \lim_{h \to 0} \frac{\int_{-\infty}^{y} \frac{d}{dh} \int_{x}^{x + h} f(u, v) \dif{u} \dif{v} }{\frac{d}{dh} \int_{x}^{x + h} f_X(u) \dif{u} } \quad (1) \\
+      &= \lim_{h \to 0} \frac{\int_{-\infty}^{y} f(x + h, v) \dif{v}}{f_X(x + h)} \quad (2) \\
+      &= \frac{\int_{-\infty}^{y} f(x, v) \dif{v} }{f_X(x)}
+  \end{align*}
+  where $(1)$ is by assuming that the integrands are all convergent so that we may interchange the integral signs and the differential operator, and $(2)$ by the \hlnotea{Fundamental Theorem of Calculus}. If we differentiate the last line with respect to $y$, by the Fundamental Theorem of Calculus, we have
+  \begin{equation*}
+    \frac{d}{dy} P(Y \leq y | X = x) = \frac{f(x, y)}{f_X(x)}
+  \end{equation*}
+  which justifies the using of our definition
+  \begin{equation*}
+    f_Y(y | x) = \frac{f(x, y)}{f_X(x)}.
+  \end{equation*}
+\end{remark}
+
+\begin{eg}\label{eg:basic_conditional_probability}
+  A fair coin is flipped 10 times independently.
+  \begin{enumerate}
+    \item What is the distribution of $Y$, the number of heads in 10 flips?
+    \item Suppose the first 4 flips have all landed on tails. What is the distribution of $Y$ given this information?
+  \end{enumerate}
+
+  \begin{solution}
+    \begin{enumerate}
+      \item Clearly, we know that $Y \sim \Bin \left(10, \frac{1}{2}\right)$.
+      \item Since each flip is independent of each other and the first four flips have already been determined, the range of values for $Y$ changes from $\{0,...,10\}$ to $\{0, ..., 6\}$. Since the experiment is still essentially the same, we have that
+      \begin{equation*}
+        Y \, | \, \text{ first 4 flips are tails} \sim \Bin \left( 6, \frac{1}{2} \right).
+      \end{equation*}
+    \end{enumerate}
+  \end{solution}
+\end{eg}
+
+\begin{eg}[Example 3.13]
+  Consider the experiment carried out in \cref{eg:basic_conditional_probability}. Let
+  \begin{align*}
+    X &:= \text{ number of heads in the first } 4 \text{ flips } \\
+    Y &:= \text{ number of heads in } 10 \text{ flips }
+  \end{align*}
+  Derive the conditional distribution of $Y$ given that the first 4 flips landed on heads, i.e. derive the distribution for $Y | X = 4$.
+
+  \begin{solution}
+    Let $W$ be the number of heads in the last 6 flips. Then $W$ has the same distribution as in part 2 of our earlier example. Also, $X \sim \Bin\left(4, \frac{1}{2}\right)$ Clearly, $Y = X + W$. We proceed to derive the joint pf of $X$ and $Y$:
+    \begin{align*}
+      P(X = x, \, Y = y) &= P(X = x, \, X + W = y) = P(X = x, \, W = y - x) \\
+        &= P(X = x) P(W = y - x) \quad \text{by }\hlnoteb{Independence} \\
+        &= \binom{4}{x} \left( \frac{1}{2} \right)^x \left( \frac{1}{2} \right)^{4 - x} \cdot \binom{6}{y - x} \left( \frac{1}{2} \right)^{y - x} \left( \frac{1}{2} \right)^{6 - y + x} \\
+        &= \binom{4}{x} \binom{6}{y - x} \left( \frac{1}{2} \right)^{10}
+    \end{align*}
+    Then
+    \begin{align*}
+      P(Y | X = 4) &= \frac{P(X = 4, \, Y = y)}{P(X = 4)} \\
+        &= \frac{\binom{4}{4} \binom{6}{y - 4} \left( \frac{1}{2} \right)^{10}}{\binom{4}{4} \left( \frac{1}{2} \right)^4 \left( \frac{1}{2} \right)^{0}} \\
+        &= \binom{6}{y - 4} \left( \frac{1}{2} \right)^{6} \quad y \in \{4, 5, ..., 10\}.
+    \end{align*}
+    We may also re-label the conditional distribution to have
+    \begin{equation*}
+      \binom{6}{y^*} \left( \frac{1}{2} \right)^{6} \quad y^* \in \{0, ..., 6\}
+    \end{equation*}
+  \end{solution}
+\end{eg}
+
+\begin{eg}[Example 3.14]
+  From \cref{eg:3_11}, we had that
+  \begin{equation*}
+    f(x, y) = 2 ( x + y ) \mathbb{1}_{\P0 \leq x < y \leq 1\}}
+  \end{equation*}
+  and the marginal density of $X$ is
+  \begin{equation*}
+    f_X(x) = (2x - 3x^2 + 1) \mathbb{1}_{\{ 0 \leq x < 1 \}}.
+  \end{equation*}
+  Derive the conditional distribution of $Y | X = \frac{1}{2}$.
+
+  \begin{solution}
+    Observe that
+    \begin{align*}
+      f(y | X = \frac{1}{2}) = \frac{f \left( \frac{1}{2}, \, y \right)}{f_X \left( \frac{1}{2} \right)} = \frac{2 \left( \frac{1}{2} + y \right)}{2 \left( \frac{1}{2} \right) - 3 \left( \frac{1}{2} \right)^2 + 1} = \frac{8}{13} ( 1 + 2y )
+    \end{align*}
+    for $\frac{1}{2} < y \leq 1$.
+  \end{solution}
+\end{eg}
+
+\begin{propo}[Properties of Conditional Distributions]
+\label{propo:properties_of_conditional_distributions}
+  Let $X$ and $Y$ be rvs. If both $X$ and $Y$ are discrete, then
+\marginnote{
+\begin{ex}
+  Prove \cref{propo:properties_of_conditional_distributions}.
+\end{ex}
+}
+  \begin{itemize}
+    \item $\sum_{x} f(x | y) = 1$;
+    \item $F(x | y) = \sum_{\{w : w \leq x\}} f(w | y)$; and
+    \item $f(x | y) = F(x | y) - F(x^- | y)$.
+  \end{itemize}
+  If $X$ and $Y$ are both continuous, then
+  \begin{itemize}
+    \item $\int_{x} f(x | y) \dif{x} = 1$;
+    \item $F(x | y) = \int_{-\infty}^{x} f(t | y) \dif{t}$; and
+    \item $f(x | y) = \frac{\partial}{\partial x} F(x | y)$
+  \end{itemize}
+\end{propo}
+
+\begin{thm}[Product Rule]
+\index{Product Rule}
+\label{thm:product_rule}
+  Suppose $X$ and $Y$ are rvs with joint pf $f$, marginal pfs $f_X(x)$ and $f_Y(y)$ respectively, and conditional pfs $f_X(x | y)$ and $f_Y(y | x)$ respectively. Then
+  \begin{equation*}
+    f(x, y) = f_X(x | y) f_Y(y) = f_Y(y | x) f_X(x).
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Notice once and for all that by rearranging the definition of conditional distribution
+  \begin{equation*}
+    f_X(x | y) f_Y(y) = f(x, y) = f_Y(y | x) f_X(x)
+  \end{equation*}\qed
+\end{proof}
+
+\begin{propo}[Independence from Conditionality]
+\label{propo:independence_from_conditionality}
+  Suppose $X$ and $Y$ are rvs with marginal pfs $f_X(x)$ and $f_Y(y)$ respectively, and conditional pfs $f_X(x | y)$ and $f_Y(y | x)$ respectively. Let $A_X = \{x : f_X(x) > 0\}$ and $A_Y = \{ y : f_Y(y) > 0 \}$. $X$ and $Y$ are independent rvs iff either of the following holds:
+  \begin{equation*}
+    \forall x \in A_X \quad f_X(x | y) = f_X(x)
+  \end{equation*}
+  or
+  \begin{equation*}
+    \forall y \in A_Y \quad f_Y(y | x) = f_Y(y).
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Suppose that $X$ and $Y$ are independent rvs. Then
+  \begin{equation*}
+    f(x, y) = f_X(x) f_Y(y).
+  \end{equation*}
+  Then
+  \begin{align*}
+    f_X(x | y) &= \frac{f(x, y)}{f_Y(y)} = \frac{f_X(x) f_Y(y)}{f_Y(y)} = f_X(x) \\
+    f_Y(y | x) &= \frac{f(x, y)}{f_X(x)} = \frac{f_X(x) f_Y(y)}{f_Y(y)} = f_Y(y).
+  \end{align*}
+  for $x \in A_X$ and $y \in A_Y$.
+
+  Suppose WLOG that $f_X(x | y) = f_X(x)$. Thus by \cref{thm:product_rule}
+  \begin{equation*}
+    f(x, y) = f_X(x | y) f_Y(y) = f_X(x) f_Y(y) \text{ for } x \in A_X, \, y \in A_Y.
+  \end{equation*}
+  \qed
+\end{proof}
+
+\begin{eg}[Example 3.15]
+  In a game of chance, a random number is generated from $P \sim \BetaDist( \alpha, \beta )$. Given $P = p$, a coin with $P( \{H\} ) = p$ is flipped independently $n$ times, where the player is rewarded the same amount of dollars as the number of heads in $n$. Calculate the probability that a random player earns at least \$1 in this game.
+
+  \begin{solution}
+    Let $X$ be the number of heads that appear in $n$ flips, which equates to the total amount of \$1 earned. Then
+    \begin{equation*}
+      X \, | P = p \sim \Bin(n, p)
+    \end{equation*}
+    However, note that
+    \begin{equation*}
+      P (X \geq 1) = P(\text{earn at least \$1}) &= 1 - P(\text{earn nothing}) = 1 - P(X = 0)
+    \end{equation*}
+    To get $P(X = x)$, we need to do the following: note that the support set of $P$ is from $0$ to $1$, then
+    \marginnote{
+    \begin{defn}[Beta Distribution]\index{Beta Distribution}
+    \label{defn:beta_distribution}
+    If $X \sim \BetaDist(\alpha, \beta)$, then
+      \begin{equation*}
+        f(x) = \frac{x^{\alpha - 1} (1 - x)^{\beta - 1}}{B(\alpha, \beta)}
+      \end{equation*}
+      where
+      \begin{equation*}
+        B(\alpha, \beta) = \frac{\Gamma(\alpha) \Gamma(\beta)}{\Gamma(\alpha + \beta)}
+      \end{equation*}
+    \end{defn}
+    }
+    \begin{align*}
+    Pr(X = x) &= \int_{0}^{1} Pr(X = x, P = p) \dif{p} \\
+           &= \int_{0}^{1} Pr(X = x | P = p) Pr(P = p) \dif{p} \qquad \text{by } \cref{thm:product_rule} \\
+           &= \int_{0}^{1} \binom{n}{x} p^x (1 - p)^{n - x} \frac{p^{\alpha - 1} (1 - x)^{\beta - 1} }{B(\alpha, \beta)} \dif{p} \\ 
+           &= \binom{n}{x} \frac{1}{B(\alpha, \beta)} \int_{0}^{1} p^{\alpha + x  -1} (1 - p)^{\beta + n - x - 1} \dif{p} \\
+           &= \binom{n}{x} \frac{B(\alpha + x , \beta + n - x)}{B(\alpha, \beta)} \int_{0}^{1} \underbrace{ \frac{p^{\alpha + x - 1} (1 - p)^{\beta + n - x - 1}}{B (\alpha + x, \beta + n - x)} }_{\text{pdf of } \BetaDist(\alpha + x, \beta + n - x)} \dif{p} \\
+           &= \binom{n}{x} \frac{B( \alpha + x, \beta + n - x )}{B( \alpha, \beta )}
+    \end{align*}
+    Therefore,
+    \begin{align*}
+      P(X \geq 1) &= 1 - P(X = 0) = 1 - \binom{n}{0} \frac{\Gamma(\alpha)\Gamma(\beta + n)}{\Gamma( \alpha + \beta + n )} \frac{\Gamma( \alpha + \beta )}{\Gamma(\alpha) \Gamma(\beta)} \\
+        &= 1 - \frac{\Gamma(\alpha + \beta) \Gamma(\beta + n)}{\Gamma( \alpha + \beta + n ) \Gamma(\beta)}
+    \end{align*}
+  \end{solution}
+\end{eg}
 
 % subsection conditional_distributions (end)
+
+\subsection{Joint Expectations}%
+\label{sub:joint_expectations}
+% subsection joint_expectations
+
+\begin{defn}[Joint Expectation]\index{Joint Expectation}
+\label{defn:joint_expectation}
+  Suppose $h(x, y)$ is a real-valued function. If $X$ and $Y$ are discrete rvs with joint pf $f$ and support $A$, then
+  \begin{equation*}
+    E[ h(x, y) ] = \underset{(x, y) \in A}{\sum\sum} h(x, y) f(x, y).
+  \end{equation*}
+  provided that the joint sum converges absolutely.
+
+  If $X$ and $Y$ are continuous rvs with joint pf $f$, then
+  \begin{equation*}
+    E[ h(x, y) ] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} h(x, y) f(x, y) \dif{x} \dif{y}
+  \end{equation*}
+  provided that the joint integral converges absolutely.
+
+  This is also known as the \hldefn{Law of the Unconscious Statistician} for two rvs.
+\end{defn}
+
+\begin{eg}[Example 3.16]
+  Consider $X$ and $Y$ with the following joint probability distribution. Calculate $E(XY)$.
+  \[
+  \begin{tabular}{c | c | c | c}
+         & x = -2 & x = 0 & x = 2 \\
+  \hline
+  y = 0  & 0.05   & 0.1   & 0.15 \\
+  \hline
+  y = 1  & 0.07   & 0.1   & 0.2 \\
+  \hline
+  y = 2  & 0.02   & 0.25  & 0.05
+  \end{tabular}
+  \]
+
+  \begin{solution}
+    \begin{align*}
+      E(XY) &= \sum_{x} \sum_{y} xy f(x, y) \\
+        &= -2 (1) (0.07) - 2(2)(0.02) + 2(1)(0.2) + 2(2)(0.05) \\
+        &= 0.38
+    \end{align*}
+  \end{solution}
+\end{eg}
+
+% subsection joint_expectations (end)
 
 % section joint_distributions_continued_2 (end)
 
@@ -2554,5 +2822,6 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
 \bibliography{bibliography}
 
 \printindex
+
 
 \end{document}
