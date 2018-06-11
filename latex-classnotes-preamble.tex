@@ -262,7 +262,7 @@
 % chapter format
 \titleformat{\chapter}%
   {\huge\rmfamily\itshape\color{base16-eighties-magenta}}% format applied to label+text
-  {\llap{\colorbox{base16-eighties-magenta}{\parbox{1.5cm}{\hfill\itshape\huge\color{base16-eighties-dark}\thechapter}}}}% label
+  {\llap{\colorbox{base16-eighties-magenta}{\parbox{1.5cm}{\hfill\itshape\huge\textcolor{base16-eighties-dark}{\thechapter}}}}}% label
   {5pt}% horizontal separation between label and title body
   {}% before the title body
   []% after the title body
@@ -270,7 +270,7 @@
 % section format
 \titleformat{\section}%
   {\normalfont\Large\rmfamily\itshape\color{base16-eighties-blue}}% format applied to label+text
-  {\llap{\colorbox{base16-eighties-blue}{\parbox{1.5cm}{\hfill\itshape\color{base16-eighties-dark}\thesection}}}}% label
+  {\llap{\colorbox{base16-eighties-blue}{\parbox{1.5cm}{\hfill\itshape\textcolor{base16-eighties-dark}{\thesection}}}}}% label
   {5pt}% horizontal separation between label and title body
   {}% before the title body
   []% after the title body
@@ -278,7 +278,7 @@
 % subsection format
 \titleformat{\subsection}%
   {\normalfont\large\itshape\color{base16-eighties-green}}% format applied to label+text
-  {\llap{\colorbox{base16-eighties-green}{\parbox{1.5cm}{\hfill\color{base16-eighties-dark}\thesubsection}}}}% label
+  {\llap{\colorbox{base16-eighties-green}{\parbox{1.5cm}{\hfill\textcolor{base16-eighties-dark}{\thesubsection}}}}}% label
   {1em}% horizontal separation between label and title body
   {}% before the title body
   []% after the title body
