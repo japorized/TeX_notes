@@ -1,0 +1,142 @@
+\chapter{Lecture 18 Jun 13th 2018}%
+\label{chp:lecture_18_jun_13th_2018}
+% chapter lecture_18_jun_13th_2018
+
+\section{Finite Abelian Groups}%
+\label{sec:finite_abelian_groups}
+% section finite_abelian_groups
+
+\subsection{Primary Decomposition}%
+\label{sub:primary_decomposition}
+% subsection primary_decomposition
+
+\begin{note}[Notation]
+  Let $G$ be an abelian group and $m \in \mathbb{Z}.$ We define
+  \begin{equation*}
+    G^{(m)} := \{g \in G : g^m = 1\}
+  \end{equation*}
+\end{note}
+
+\begin{propo}[Group of Elements of the Same Order is a Subgroup]
+\label{propo:group_of_elements_of_the_same_order_is_a_subgroup}
+  Let $G$ be an abelian group. Then $G^{(m)} \leq G$.
+\end{propo}
+
+\begin{proof}
+  Note that $1^m = 1 \in G^{(m)}$. $\forall g, h \in G^{(m)}$, since $G$ is abelian, we have that\sidenote{Pay attention that this is only true if $G$ is abelian.}
+  \begin{equation*}
+    \left( gh \right)^m = g^m h^m = 1 \cdot 1 = 1.
+  \end{equation*}
+  Therefore $gh \in G^{(m)}$. Also, for $g \in G^{(m)}$, we have 
+  \begin{equation*}
+    \left( g^{-1} \right)^m = \left( g^m \right)^{-1} = 1.
+  \end{equation*}
+  Thus $g^{-1} \in G^{(m)}$. By the \hlnotea{Subgroup Test}, we have that $G^{(m)} \leq G$. \qed
+\end{proof}
+
+\begin{propo}[Decomposition of a Finite Abelian Group]
+\label{propo:decomposition_of_a_finite_abelian_group}
+  Let $G$ be a finite abelian group with $\abs{G} = mk$ such that $\gcd(m, k) = 1$. Then
+  \begin{enumerate}
+    \item $G \cong G^{(m)} \times G^{(k)}$; and
+    \item $\abs{G^{(m)}} = m$ and $\abs{G^{(k)}} = k$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Since $G$ is abelian, $G^{(m)} \triangleleft G$ and $G^{(k)} \triangleleft G$.
+
+      \underline{Claim 1}: $G^{(m)} \cap G^{(k)} = \{1\}$ \\
+      \textbf{Proof of Claim 1:} $\forall g \in G^{(m)} \cap G^{(k)}$, $g^m = 1 = g^k$ \\
+      $\because \gcd(m, k) = 1$, by \hlnotea{Bezout's Lemma}, $\exists x, y \in \mathbb{Z} \quad 1 = mx + ky$ \\
+      $\implies g = g^1 = g^{mx + ky} = ( g^m )^x ( g^k )^y = 1 \cdot 1 = 1$ \\
+      $\implies G^{(m)} \cap G^{(k)} = \{1\}$ as claimed.
+
+      \underline{Claim 2}: $G = G^{(m)}G^{(k)}$ \sidenote{Recall that this is the \hyperref[defn:product_of_groups]{Product}}\\
+      $\forall g \in G \enspace \because o(g) = mk \quad 1 = g^{mk} = ( g^k )^m = ( g^m )^k$ \\
+      It follows that $g^k \in G^{(m)}$ and $g^m \in G^{(k)}$. From \textbf{Claim 1} and by abelianness, we have that
+      \begin{equation*}
+        g = g^{mx + ky} = (g^k)^y (g^m)^x \in G^{(m)}G^{(k)}
+      \end{equation*}
+      Thus $G \subseteq G^{(m)}G^{(k)}$. On the other hand, since $G^{(m)} \triangleleft G$ and $G^{(k)} \triangleleft G$, by \cref{lemma:product_of_groups_as_a_subgroup}, we have that $G^{(m)}G^{(k)} \leq G$ and hence $G^{(m)} G^{(k)} \subseteq G$. Thus $G = G^{(m)}G^{(k)}$ as claimed.
+
+      From \textbf{Claims 1 and 2}, we can conclude by \cref{crly:group_iso_with_cross_prod_of_its_subgroups}\sidenote{Should this not be \cref{thm:product_and_cross_product_of_normal_subgroups_are_isomorphic}?}, that $G \cong G^{(m)} \times G^{(k)}$ as required.
+
+    \item Write $\abs{G^(m)} = m'$ and $\abs{G^{(k)}} = k'$. By part $(1)$, we have that $mk = \abs{G} = m'k'$.
+
+      \underline{Claim 3}: $\gcd(m, k') = 1$ \\
+      Suppose not\\
+      $\implies \exists p$ prime $ \quad p \, | \, m$ and $p \, | \, k'$\\
+      $\implies \exists g \in G^{(k)} \quad o(g) = p \qquad \because \hyperref[thm:cauchy]{\text{Cauchy's Theorem}}$\\
+      Now $p \, | \, m \implies \exists q \in \mathbb{Z} \quad m = pq$\\
+      $\implies g^m = g^{pq} = 1 \enspace \because o(g) = p$\\
+      $\implies g \in G^{(m)}$.\\
+      By part $(1)$, we have that $g \in G^{(m)} \cap G^{(k)} = \{1\} \implies g = 1$, which contradicts the fact that $o(g) = p$. Thus $\gcd(m, k') = 1$ as claimed. Similarly, we can get that $\gcd(m', k) = 1$.
+
+      Notice that $mk = m'k' \implies m \, | \, m'k'$ \\
+      $\implies m \, | \, m' \quad \because \gcd(m, k') = 1$
+      and similarly $k \, | \, k'$. But then $mk = m'k'$ would imply that $m' = m$ and $k' = k$.
+  \end{enumerate}\qed
+\end{proof}
+
+As a direct consequence of \cref{propo:decomposition_of_a_finite_abelian_group}, we have the following:
+
+\begin{thm}[Primary Decomposition]
+\index{Primary Decomposition}
+\label{thm:primary_decomposition}
+  Let $G$ be a finite abelian group with $\abs{G} = p_1^{n_1} \hdots p_k^{n_k}$, where $p_1, ..., p_k$ are distinct primes, and $n_1, ..., n_k \in \mathbb{N}$. Then
+  \begin{enumerate}
+    \item $G \cong G^{\left(p_1^{n_1}\right)} \times \hdots \times G^{\left(p_k^{n_k}\right)}$; and
+    \item $\forall i \enspace 1 \leq i \leq k \quad \abs{G^{\left(p_i^{n_i}\right)}} = p_i^{n_i}$.
+  \end{enumerate}
+\end{thm}
+
+% subsection primary_decomposition (end)
+
+\subsection{p-Groups}%
+\label{sub:p_groups}
+% subsection p_groups
+
+On a related note of the groups $G^{\left(p_i^{n_i}\right)}$, we define the following:
+
+\begin{defn}[p-Group]\index{p-Group}
+\label{defn:p_group}
+  Let $p$ be a prime. A \hlnoteb{p-group} is a group in which every element has an order that is a non-negative power of $p$.
+\end{defn}
+
+\begin{propo}[p-Groups are Finite]
+\index{p-Groups are Finite}
+\label{propo:p_groups_are_finite}
+  A finite group $G$ is a p-group $\iff$ $\abs{G}$ is a power of $p$ (including $p^0$).
+\end{propo}
+
+\begin{proof}
+  $(\impliedby)$ If $\abs{G} = p^\alpha$ for some $\alpha \in \mathbb{N} \cup \{0\}$ and $g \in G$, by \cref{crly:lagrange_s_theorem_crly1}, $o(g) \, | \, p^\alpha$ \\
+  $\implies G$ is a p-group.
+
+  \noindent $(\implies)$ Consider the contrapositive and let $\abs{G} = p^n p_2^{n_2} \hdots p_k^{n_k}$ where $p, p_2, ..., p_k$ are distinct primes, $n \in \mathbb{N} \cup \{0\}$, and $n_2, ..., n_k \in \mathbb{N}$. For $k \geq 2$, by \hyperref[thm:cauchy]{Cauchy's Theorem}, $p_2 \, | \, \abs{G}$\\
+  $\implies \exists g_1 \in G \quad o(g_1) = p_2$\\
+  $\implies G$ is not a p-group.\\
+  Therefore, our desired result follows.\qed
+\end{proof}
+
+\newthought{Our end goal} here is to prove to ourselves that all finite abelian groups can be written as cross products of cyclic groups, i.e. if $G$ is an abelian group, then
+\begin{equation*}
+  G \cong C_1 \times C_2 \times \hdots \times C_n.
+\end{equation*}
+With \cref{thm:primary_decomposition}, we have that
+\begin{equation*}
+  G \cong G_1 \times G_2 \times \hdots \times G_n.
+\end{equation*}
+The following proposition will enable us to get to our goal from our current position:
+
+\begin{propononum}[Finite Abelian p-Groups of order $p$ are Cyclic]
+If $G$ is a finite abelian p-group that contains only one subgroup of order $p$, where $p$ is prime, then $G$ is cyclic. In other words, if a finite abelian p-group is not cyclic, then it must have at least $2$ subgroups of order $p$.
+\end{propononum}
+
+% subsection p_groups (end)
+
+% section finite_abelian_groups (end)
+
+% chapter lecture_18_jun_13th_2018 (end)
