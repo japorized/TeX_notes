@@ -1,5 +1,5 @@
 \documentclass[notoc,notitlepage]{tufte-book}
-\nonstopmode
+% \nonstopmode
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{5}
 
@@ -17,6 +17,7 @@
 \DeclareMathOperator{\BetaDist}{Beta }
 \DeclareMathOperator{\Dom}{Dom }
 \DeclareMathOperator{\Var}{Var }
+\DeclareMathOperator{\Cov}{Cov }
 \DeclareMathOperator{\supp}{supp }
 
 \title{STAT330S18 - Mathematical Statistics}
@@ -389,7 +390,7 @@ Also, many of the common mathematical notations will be heavily used both in the
 \end{eg}
 
 \begin{ex}
-  Prove that the pdf of $X \sim \POI(\mu)$ sums to $1$ over all of its values.
+  Prove that the pdf of $X \sim \Poi(\mu)$ sums to $1$ over all of its values.
 
   \begin{solution}
     \begin{align*}
@@ -1627,7 +1628,7 @@ Moment generating functions are important because they uniquely define the distr
       So
       \begin{equation*}
         \frac{d^k}{dt^k} E(e^{tX}) \at{t = 0}{}
-          &= \frac{k!}{k!} E(X^k) + \underbrace{ \frac{k! \cdot t}{(k + 1)!} E(X^{k + 1}) + \hdots }_{= 0 \text{ when } t = 0} \at{t = 0}{} = E(X^k)
+          = \frac{k!}{k!} E(X^k) + \underbrace{ \frac{k! \cdot t}{(k + 1)!} E(X^{k + 1}) + \hdots }_{= 0 \text{ when } t = 0} \at{t = 0}{} = E(X^k)
       \end{equation*}
   \end{enumerate}\qed
 \end{proof}
@@ -1685,7 +1686,7 @@ Moment generating functions are important because they uniquely define the distr
 \end{proof}
 
 \begin{eg}[Example 2.28]
-  Consider $X \sim \UNIF(\theta_1, \theta_2)$. Find the mgf of $Y = 5X + 3$.
+  Consider $X \sim \Unif(\theta_1, \theta_2)$. Find the mgf of $Y = 5X + 3$.
 
   \begin{solution}
     Note that
@@ -1702,7 +1703,7 @@ Moment generating functions are important because they uniquely define the distr
     \end{align*}
     Thus by \cref{thm:mgf_of_a_linear_transformation},
     \begin{equation*}
-      M_Y(t) = e^{3t} M_X(5t) &= \begin{cases}
+      M_Y(t) = e^{3t} M_X(5t) = \begin{cases}
         e^{3t} \frac{e^{5t \theta_2} - e^{5t \theta_1}}{5t (\theta_2 - \theta_1)} & t \neq 0 \\
         1 & t = 0
       \end{cases}
@@ -1729,7 +1730,7 @@ Moment generating functions are important because they uniquely define the distr
 \end{proof}
 
 \begin{eg}[Example 2.29]
-  Suppose $X \sim \UNIF(0, 1)$. Define $Y = -2 \log X$, and use the mgf method to show that $Y \sim \chi_2^2$.\\
+  Suppose $X \sim \Unif(0, 1)$. Define $Y = -2 \log X$, and use the mgf method to show that $Y \sim \chi_2^2$.\\
 \noindent ( Hint: Find mgf of $\chi_2$ and show that $Y$ has the same mgf )
 
   \begin{solution}
@@ -2052,7 +2053,7 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
         0            & \text{otherwise}
       \end{cases} \\
       &= \begin{cases}
-        \binom{10}{x} \binom{10}{y} \left( \frac{1}{2} \roght)^{20} & x, y = 0, 1, ... , 10 \\
+        \binom{10}{x} \binom{10}{y} \left( \frac{1}{2} \right)^{20} & x, y = 0, 1, ... , 10 \\
         0   & \text{otherwise}
       \end{cases}
     \end{align*}
@@ -2206,7 +2207,7 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
 
   \begin{solution}
     \begin{equation*}
-      F(x, y) &= \begin{cases}
+      F(x, y) = \begin{cases}
         0         & x \leq 0, \, \lor \, y \leq 0 \\
         \int_{0}^{x} \int_{0}^{y} 1 \dif{s} \dif{t} = xy & 0 < x < 1 \, \land \, 0 < y < 1 \\
         \int_{0}^{1} \int_{0}^{y} 1 \dif{s} \dif{t} = y  & x \geq 1 \, \land \, 0 < y < 1 \\
@@ -2239,7 +2240,7 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
   \begin{solution}
     Note that
     \begin{equation*}
-      1 &= \int_{0}^{1} \int_{0}^{1} Kxy \dif{x} \dif{y} = \frac{K}{4}.
+      1 = \int_{0}^{1} \int_{0}^{1} Kxy \dif{x} \dif{y} = \frac{K}{4}.
     \end{equation*}
     Thus $K = 4$. To solve the next part, observe that for $X > Y$, we have the diagram to the right to show the support set of the joint distribution. 
     \marginnote{
@@ -2533,7 +2534,7 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
         g(x) \propto f_X(x) \, \land \, h(y) \propto f_Y(y)
       \end{gather*}
 
-    \item The definitions and theorems can be easily extended to the random vector $(X_1, X_2, ..., X_n)$. Indeed, if we apply mathematical induction on the proof above, we will be able to get our desired result.\sidenote{I wonder if this statement is equivalent to the \href{https://en.wikipedia.org/wiki/Sufficient_statistic#Fisher\%E2\%80\%93Neyman_factorization_theorem}{Fisher-Neyman Factorization Theorem}.}
+    \item The definitions and theorems can be easily extended to the random vector $(X_1, X_2, ..., X_n)$. Indeed, if we apply mathematical induction on the proof above, we will be able to get our desired result.\sidenote{I wonder if this statement is equivalent to the \href{https://en.wikipedia.org/wiki/Sufficient_statistic\#Fisher\%E2\%80\%93Neyman_factorization_theorem}{Fisher-Neyman Factorization Theorem}.}
   \end{enumerate}
 \end{note}
 
@@ -2734,7 +2735,7 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
     \end{equation*}
     However, note that
     \begin{equation*}
-      P (X \geq 1) = P(\text{earn at least \$1}) &= 1 - P(\text{earn nothing}) = 1 - P(X = 0)
+      P (X \geq 1) = P(\text{earn at least \$1}) = 1 - P(\text{earn nothing}) = 1 - P(X = 0)
     \end{equation*}
     To get $P(X = x)$, we need to do the following: note that the support set of $P$ is from $0$ to $1$, then
     \marginnote{
@@ -2817,6 +2818,479 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
 % section joint_distributions_continued_2 (end)
 
 % chapter lecture_8_may_29th_2018 (end)
+
+\chapter{Lecture 9 May 31st 2018}%
+\label{chp:lecture_9_may_31st_2018}
+% chapter lecture_9_may_31st_2018
+
+\section{Joint Distributions (Continued 3)}%
+\label{sec:joint_distributions_continued_3}
+% section joint_distributions_continued_3
+
+\subsection{Joint Expectations (Continued)}%
+\label{sub:joint_expectations_continued}
+% subsection joint_expectations_continued
+
+\begin{thm}[Linearity of Expectation in Bivariate Case]\index{Linearity - Expectation}
+\label{thm:linearity_of_expectation_in_bivariate_case}
+  Suppose $X$ and $Y$ are two rvs with joint pf $f$, $a_i, \, b_i$, for $i = 1, ..., n$, are constants, and $g_i(x, y)$, for $i = 1, ..., n$, are real-valued functions. Then
+  \begin{equation*}
+    E\left[ \sum_{i=1}^{n} \left( a_i g_i (X, Y) + b_i \right) \right] = \sum_{i = 1}^{n} ( a_i E[ g_i(X, Y) ] ) + \sum_{i=1}^{n} b_i
+  \end{equation*}
+  provided that $E[g_i(X, Y)]$ is finite for $i = 1, ..., n$.
+\end{thm}
+
+\begin{proof}
+  This is simply an extension of \cref{thm:linearity_of_expectation}.
+\end{proof}
+
+\begin{thm}[Implication of Independence on Joint Expectation]
+\label{thm:implication_of_independence_on_joint_expectation}
+  If $X$ and $Y$ are independent rvs with joint pf $f$, and $g(x)$ and $h(y)$ are real valued funcctions, then
+  \begin{equation*}
+    E[ g(X) h(Y) ] = E[ g(X) ] E[ h(Y) ]
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  We shall prove for the discrete case and leave the continuous case for future exercises.\marginnote{
+  \begin{ex}
+    Prove \cref{thm:implication_of_independence_on_joint_expectation} for the continuous case.
+  \end{ex}
+  }
+
+  Observe that 
+  \begin{align*}
+    E[ g(X) h(Y) ] &= \sum_{x} \sum_{y} g(x) h(y) f(x, y) \quad \because \cref{defn:joint_expectation} \\
+      &= \sum_{x} \sum_{y} g(x) h(y) f_X(x) f_Y(y) \\
+      &= \sum_{x} g(x) f_X(x) \sum_{y} h(y) f_Y(y) \\
+      &= E[ g(X) ] E[ h(Y) ]
+  \end{align*}
+  where $f_X(x)$ and $f_Y(y)$ are the marginal pfs of $X$ and $Y$ respectively.\qed
+\end{proof}
+
+We may repeatedly apply the above proof for $n$ rvs through induction and get the following result.
+
+\begin{thm}[Generalized Implication of Independence on Joint Expectation]
+\label{thm:generalized_implication_of_independence_on_joint_expectation}
+  If $X_1, X_2, ..., X_n$, for some $n \in \mathbb{N}$, are independent rvs and $h_1, h_2, ..., h_n$ are real valued functions, then
+  \begin{equation*}
+    E \left[ \prod_{i = 1}^{n} h_i (X_i) \right] = \prod_{i = 1}^{n} E[ h_i(X_i) ].
+  \end{equation*}
+\end{thm}
+
+% subsection joint_expectations_continued (end)
+
+\subsection{Covariance}%
+\label{sub:covariance}
+% subsection covariance
+
+\newthought{Independence} of two rvs $X$ and $Y$ implies that knowledge of the value of $X$ does not provide any information whatsoever about the distribution of $Y$. Essentially, we can say that there is no ``relationship'' between $X$ and $Y$. In statistics, \hlnoteb{linear relationships} are often the subject of interest. The strength of a linear relationship is related to \hlnoteb{covariance} and measured by the \hlnoteb{correlation coefficient}, usually denoted by $\rho$.
+
+It can be shown that when $X$ and $Y$ have no linear relationship iff their covariance is $0$.
+
+On a related thought, does covariance relate to independence? If so, how?
+
+\begin{defn}[Covariance]\index{Covariance}
+\label{defn:covariance}
+  The \hlnoteb{covariance} of rvs $X$ and $Y$ is given by
+  \begin{equation}\label{eq:covariance}
+    \Cov( X, Y ) = E[ (X - \mu_X) (Y - \mu_Y) ] = E(XY) - \mu_X \mu_Y.
+  \end{equation}
+  where $\mu_X = E[X]$ and $\mu_Y = E[Y]$.
+
+  If $\Cov(X, Y) = 0$, then $X$ and $Y$ are called \hldefn{uncorrelated} rvs.
+\end{defn}
+
+\begin{note}
+  Note that the 2nd and 3rd term are equivalent in \cref{eq:covariance} since
+  \begin{align*}
+    E[ (X - \mu_X) (Y - \mu_Y) ]
+      &= E[ XY - \mu_X Y - \mu_Y X + \mu_X \mu_Y ] \\
+      &= E[ XY ] - \mu_X E[Y] - \mu_Y E[X] + \mu_X \mu_Y \because \cref{thm:linearity_of_expectation_in_bivariate_case} \\
+      &= E[ XY ] - \mu_X \mu_Y - \mu_X \mu_Y + \mu_X \mu_Y = E[ XY ] - \mu_X \mu_Y
+  \end{align*}
+
+  From here, it is easy to see from \cref{thm:implication_of_independence_on_joint_expectation}, that since $E[XY] = E[X] E[Y] = \mu_X \mu_Y$, we have that the independence of $X$ from $Y$ will imply that $\Cov(X, Y) = 0$.
+
+  However, the converse of the above is \hlimpo{not true}.
+\end{note}
+
+\begin{eg}
+  Source: \href{https://stats.stackexchange.com/questions/12842/covariance-and-independence\#12844}{Stats SE}
+
+  Let $X$ be an rv that it is $ - 1$ or $1$ with probability $0.5$. Then let $Y$ be an rv such that $Y=0$ if $X=-1$, and $Y$ is randomly $-1$ or $1$ with probability $0.5$ if $X=1$.
+
+  Clearly $X$ and $Y$ are highly dependent (since knowing $Y$ allows me to perfectly know $X$). They both have zero mean: 
+  \begin{align*}
+    E[X] &= -1 \left(\frac{1}{2}\right) + 1 \left(\frac{1}{2}\right) = 0 \\
+    E[Y] &= -1 \left(\frac{1}{2}\right) + 1 \left(\frac{1}{2}\right) = 0
+  \end{align*}
+  and
+  \begin{align*}
+    E[ XY ] &= (-1) \cdot 0 P(X = -1, Y = 0) + 1 (-1) \cdot P(X = 1, Y = -1) \\
+      &\qquad + 1 (1) P(X = 1, Y = 1) \\
+      &= - \frac{1}{4} + \frac{1}{4} = 0
+  \end{align*}
+  Thus $\Cov(X, Y) = 0$
+
+  Or more generally, take any distribution $P(X)$ and any $P(Y | X)$ such that $P(Y = a | X)=P(Y=-a | X)$ for all $X$ (i.e., a joint distribution that is symmetric around the $x$ axis), and you will always have zero covariance. But you will have non-independence whenever $P(Y | X) \neq P(Y)$, i.e., the conditionals are not all equal to the marginal, and vice versa for symmetry around the y axis. 
+\end{eg}
+
+\begin{note}
+  \begin{itemize}
+    \item If $\Cov(X, Y) = 0$, then $X$ and $Y$ are called \hlnoteb{uncorrelated} rvs.
+    \item By definition, $\Cov(X, X) = \Var(X)$, since
+      \begin{equation*}
+        \Cov(X, X) = E[ (X - \mu_X)^2 ] = \Var(X)
+      \end{equation*}
+  \end{itemize}
+\end{note}
+
+\begin{eg}[Example 3.17]
+  Consider the rvs $X$ and $Y$ with the joint pdf
+  \begin{equation*}
+    f(x, y) = \begin{cases}
+      2 & 0 \leq x \leq y \leq 1 \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  Calculate $\Cov(X, Y)$.
+
+  \begin{solution}
+  Observe the diagram of the support set of $X$ and $Y$ to our right.
+  \marginnote{
+	\begin{center}
+		\begin{tikzpicture}
+        \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
+        \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
+				\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(0,2.5)--(2.5,2.5)--(0,0);
+        \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+        \draw[line width=0pt,dashed](2.5,2.5)--(2.5,0) node[below] {1};
+        \draw[line width=0pt,dashed](2.5,2.5)--(0,2.5) node[left] {1};
+		\end{tikzpicture}
+	\end{center}
+  }
+
+  Then we can calculate
+  \begin{align*}
+    E[ XY ]  & = \int_{0}^{1} \int_{x}^{1} 2xy \dif{y} \dif{x} = \int_{0}^{1} xy^2 \at{x}{1} \dif{x} \\
+             & = \int_{0}^{1} x - x^3 \dif{x} = \frac{1}{2} - \frac{1}{4} = \frac{1}{4} \\
+    f_X(x)   & = \int_{x}^{1} 2 \dif{y} = \begin{cases}
+                  2 - 2x & 0 \leq x \leq 1 \\
+                  0      & \text{otherwise}
+                \end{cases} \\
+    E[X]     & = \int_{0}^{1} x (2 - 2x) \dif{x} = 1 - \frac{2}{3} = \frac{1}{3}\\
+    f_Y(y)   & = \int_{0}^{y} 2 \dif{x} = \begin{cases}
+                  2y & 0 \leq y \leq 1 \\
+                  0  & \text{otherwise}
+                \end{cases} \\
+    E[Y]     & = \int_{0}^{1} 2y^2 \dif{y} = \frac{2}{3}
+  \end{align*}
+  Thus
+  \begin{equation*}
+    \Cov(X, Y) = \frac{1}{4} - \frac{1}{3} \left( \frac{2}{3} \right) = \frac{1}{36}
+  \end{equation*}
+  We observe that the covariance is positive. This implies a \hlnoteb{positive linear relationship}. However, we cannot tell from this value the strength of the relationship between $X$ and $Y$.
+  \end{solution}
+\end{eg}
+
+\begin{eg}[Example 3.18]
+  Consider rvs $X$ and $Y$ with the joint pf
+  \begin{equation*}
+    f(x, y) = \frac{xy}{7} \mathbb{1}_{\{y = 1, 2\}} \mathbb{1}_{\{x = 0, ..., y\}}.
+  \end{equation*}
+  Calculate $\Cov(X, Y)$.
+
+  \begin{solution}
+    The following table captures all the probabilities that can be found from the given pf
+
+    \[
+    \begin{tabular}{c | c | c | c}
+            & x = 0 & x = 1       & x = 2 \\
+      \hline
+      y = 1 & 0     & $\frac{1}{7}$ & 0 \\
+      \hline
+      y = 2 & 0     & $\frac{2}{7}$ & $\frac{4}{7}$
+    \end{tabular}
+    \]
+
+    Observe that we thus have
+    \begin{align*}
+      f_X(x) &= \begin{cases}
+        \frac{3}{7} & x = 1 \\
+        \frac{4}{7} & x = 2
+      \end{cases} \\
+      E[X] &= \frac{3}{7} + 2 \left( \frac{4}{7} \right) = \frac{11}{7} \\
+      f_Y(y) &= \begin{cases}
+        \frac{1}{7} & y = 1 \\
+        \frac{6}{7} & y = 2
+      \end{cases} \\
+      E[Y] &= \frac{1}{7} + 2 \left( \frac{6}{7} \right) = \frac{13}{7}
+    \end{align*}
+    Also,
+    \begin{equation*}
+      E[XY] = \frac{1}{7} + 2 \left( \frac{2}{7} \right) + 4 \left( \frac{4}{7} \right) = 3
+    \end{equation*}
+    Therefore,
+    \begin{equation*}
+      \Cov(X, Y) = E[XY] - E[X]E[Y] = 3 - \frac{11}{7} \frac{13}{7} = \frac{4}{49}
+    \end{equation*}
+  \end{solution}
+\end{eg}
+
+\begin{thm}[Variance of Linear Combinations]
+\label{thm:variance_of_linear_combinations}
+  Suppose $X$ and $Y$ are rvs and $a, b, c$ are real constants. Then
+  \begin{equation*}
+    \Var(aX + bY + c) = a^2 \Var(X) + b^2 \Var(Y) + 2ab \Cov (X, Y)
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Let $E[ aX + bY + c ] = \mu$. Observe that
+  \begin{align*}
+    &\Var[ aX + bY + c ] \\
+    &= E \left[ [ ( aX + bY + c ) - \mu ]^2 \right] \\
+    &= E \left[ (aX + bY + c)^2 - 2\mu (aX + bY + c) + \mu^2 \right] \\
+    &= E \left[ a^2X^2 + abXY + acX + abXY + b^2 Y^2 + bcY + c^2 \right. \\
+    & \qquad \left. - 2\mu(aX + bY+c) + \mu^2 \right] \\
+    &= a^2 E[X^2] + 2ab E[XY] + ac E[X] + b^2 E[Y^2] + bc E[Y] + c^2 - \mu^2
+  \end{align*}
+  Note that
+  \begin{align*}
+    \mu^2 &= E \left[ aX + bY + c \right]^2 \\
+      &= \left( aE[X] + bE[Y] + c \right)^2 \\
+      &= a^2 E[X]^2 + b^2 E[Y]^2 + 2abE[X]E[Y] + acE[X] + bcE[Y] + c^2
+  \end{align*}
+  Therefore, we have that
+  \begin{align*}
+    &\Var[aX + bY + c] \\
+    &= a^2 E[X^2] + a^2 E[X]^2 + b^2 E[Y^2] - b^2 E[Y]^2 + 2ab E[XY] - 2ab E[X]E[Y] \\
+    &= a^2 \left( E[X^2] - E[X]^2 \right) + b^2 \left( E[Y^2] - E[Y]^2 \right) + 2ab \left( E[XY] - E[X]E[Y] \right) \\
+    &= a^2 \Var(X) + b^2 \Var{Y} + 2ab \Cov(X, Y)
+  \end{align*}
+  as required. \qed
+\end{proof}
+
+By applying \cref{thm:variance_of_linear_combinations} repeatedly, we have the following generalized theorem.
+
+\begin{thm}[Generalized Variance of Linear Combinations]
+\label{thm:generalized_variance_of_linear_combinations}
+  Suppose $X_1, X_2, ..., X_n$ are rvs with $\Var(X_i) = \sigma_i^2$, and $a_1, a_2, ..., a_n$ are real constants. Then
+  \begin{equation*}
+    \Var \left( \sum_{i=1}^{n} a_i X_i \right) = \sum_{i = 1}^{n} a_i^2 \sigma_i^2 + 2 \sum_{i=1}^{n-1} \sum^{n}_{j = i + 1} a_i a_j \Cov(X_i, X_j)
+  \end{equation*}
+\end{thm}
+
+Note that the prove the above, we have to also use the fact that
+\begin{equation*}
+  \Cov(X_i, X_j) = \Cov(X_j, X_i)
+\end{equation*}
+
+\begin{note}
+  Note that in \cref{thm:generalized_variance_of_linear_combinations}, if the rvs are independent rvs, then $\Cov(X_i, X_j) = 0$ for $i \neq j$, thus wiping off the 2nd term in the equation, leaving us with
+  \begin{equation*}
+    \Var \left( \sum_{i=1}^{n} a_i X_i \right) = \sum_{i=1}^{n} a_i^2 \sigma_i^2
+  \end{equation*}
+\end{note}
+
+\begin{eg}[Example 3.19]
+  To build a ship engine piece, suppose two pole-shaped components $A$ and $B$ are attached at one end to each other to make one long pole-shaped component $C$. Suppose the length of part $A$ is an rv with a mean of $3$ inches and a variance of $0.25$ inch$^2$. Similarly, the length of component $B$ is an rv with a mean of $25$ inches and a variance of $0.5$ inch$^2$.
+
+  Find the mean and the variance of the length of part $C$ if
+  \begin{enumerate}
+    \item the lengths of $A$ and $B$ are independent;
+    \item the covariance between lengths of $A$ and $B$ is $-0.3$ inch$^2$.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  Note that we are given that $C = A + B$
+  \begin{enumerate}
+    \item We have that
+      \begin{equation*}
+        E(C) = E(A + B) = E(A) + E(B) = 3 + 25 = 28.
+      \end{equation*}
+      For variance, since $A$ and $B$ are independent, $\Cov(A, B) = 0$, thus
+      \begin{align*}
+        \Var(C) &= \Var(A + B) = \Var(A) + \Var(B) + 2 \Cov(A, B) \\
+          &= 0.25 + 0.5 + 0 = 0.75
+      \end{align*}
+
+    \item Since $C$ is a linear equation, the covariance does not affect the expectation and thus we still have
+    \begin{equation*}
+      E(C) = 28.
+    \end{equation*}
+    Now, given that $\Cov(A, B) = -0.3$, we have
+    \begin{equation*}
+      \Var(C) = \Var(A) + \Var(B) + 2 \Cov(A, B) = 0.75 - 0.6 = 0.15.
+    \end{equation*}
+  \end{enumerate}
+\end{solution}
+
+% subsection covariance (end)
+
+\subsection{Correlation}%
+\label{sub:correlation}
+% subsection correlation
+
+The \hlnoteb{covariance} is a real number which depends on the units of measurement of $X$ and $Y$. The information part of a covariance is its \hlimpo{sign}, unless if it is used as the context.
+
+To use the covariance as the context, and to quantitatively measure the strength of a linear relationship, which we have discussed and desired before, we use the \hlnoteb{correlation coefficient}.
+
+\begin{defn}[Correlation Coefficient]\index{Correlation Coefficient}
+\label{defn:correlation_coefficient}
+  The \hlnoteb{correlation coefficient} of rvs $X$ and $Y$ is given by
+  \marginnote{
+  \noindent Note that this is the definition of the \hldefn{Pearson Correlation Coefficient}. There are other correlation coefficients but we will be using only Pearson, at it seems.
+  }
+  \begin{equation*}
+    \rho(X, Y) = \frac{\Cov(X, Y)}{\sigma_X \sigma_Y}
+  \end{equation*}
+  where $\sigma_X = \sqrt{\Var(X)}$ and $\sigma_Y = \sqrt{\Var(Y)}$.
+\end{defn}
+
+\begin{propo}[Properties of the Correlation Coefficient]
+\label{propo:properties_of_the_correlation_coefficient}
+  Let $X$ and $Y$ be rvs, and $\rho(X, Y)$ the correlation coefficient of $X$ and $Y$. Then
+  \begin{enumerate}
+    \item $\abs{\rho(X, Y)} \leq 1$;
+    \item ( \hlnoteb{perfect positive linear relationship}  ) \\
+      $\rho(X, Y) = 1 \iff Y = aX + b$ for some $a > 0$;
+    \item ( \hlnoteb{perfect inverse linear relationship} ) \\
+      $\rho(X, Y) = -1 \iff Y = aX + b$ for some $a < 0$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item This is somewhat beyond the scope of what we can cover now but we shall use this result presented on \href{https://en.wikipedia.org/wiki/Covariance\#Relationship_to_inner_products}{Wikipedia}:
+      \begin{equation*}
+        \abs{ \Cov(X, Y) } \leq \sqrt{ \Var(X) \Var(Y) }.
+      \end{equation*}
+      Then given the formula of $\rho(X, Y)$, the proof is complete:
+      \begin{equation*}
+        \abs{ \rho(X, Y) } = \abs{ \frac{\Cov(X, Y)}{\sqrt{ \Var(X) \Var(Y) }} } \leq \frac{\sqrt{ \Var(X) \Var(Y) }}{\sqrt{ \Var(X) \Var(Y) }} = 1
+      \end{equation*}
+  \end{enumerate}
+  Proving 2 and 3 is currently outside of my abilities. Refer to this \href{https://math.stackexchange.com/questions/478137/proving-y-ax-b-given-correlation-coefficient-rhox-y-1#478147}{Math SE} Q\&A for a hint on how to prove this statement.
+\end{proof}
+
+\begin{eg}[Example 3.20]
+  Consider rvs $X$ and $Y$ with the joint pdf
+  \begin{equation*}
+    f(x, y) = \begin{cases}
+      2 & 0 \leq x \leq y \leq 1 \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  Calculate $\rho(X, Y)$.
+\end{eg}
+
+\begin{solution}
+    The diagram to the right is an illustration of the region of support for $X$ and $Y$.
+    \marginnote{
+		\begin{tikzpicture}
+        \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
+        \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
+				\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(0,2.5)--(2.5,2.5)--(0,0);
+        \draw[line width=0pt](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+        \draw[line width=0pt,dashed](2.5,2.5)--(2.5,0) node[below] {1};
+        \draw[line width=0pt](2.5,2.5)--(0,2.5) node[left] {1};
+		\end{tikzpicture}
+    }
+    We now calculate the following values:
+    \begin{align*}
+      E(XY)  &= \int_{0}^{1} \int_{x}^{1} 2xy \dif{y} \dif{x} = \int_{0}^{1} x - x^3 \dif{x} = \frac{1}{4} \\
+      f_X(x) &= \int_{x}^{1} 2 \dif{y} = 2 - 2x \quad 0 \leq x \leq 1 \\
+      f_Y(y) &= \int_{0}^{y} 2 \dif{x} = 2y \quad 0 \leq y \leq 1 \\
+      E(X)   &= \int_{0}^{1} 2x - 2x^2 \dif{x} = \left( x^2 - \frac{2}{3}x^3 \right)\at{0}{1} = \frac{1}{3} \\
+      E(X^2) &= \int_{0}^{1} 2x^2 - 2x^3 \dif{x} = \left( \frac{2}{3}x^3 - \frac{1}{2}x^4 \right)\at{0}{1} = \frac{1}{6} \\
+      E(Y)   &= \int_{0}^{1} 2y^2 \dif{y} = \frac{2}{3} \\
+      E(Y^2) &= \int_{0}^{1} 2y^3 \dif{y} = \frac{1}{2} \\
+      \Var(X)&= E(X^2) - E(X)^2 = \frac{1}{6} - \left( \frac{1}{3} \right)^2 = \frac{1}{18} \\
+      \Var(Y)&= E(Y^2) - E(Y)^2 = \frac{1}{2} - \left( \frac{2}{3} \right)^2 = \frac{1}{18}
+    \end{align*}
+    Therefore we have that
+    \begin{gather*}
+      \Cov(X, Y) = E(XY) - E(X)E(Y) = \frac{1}{4} - \frac{2}{9} = \frac{1}{36} \\
+      \sqrt{\Var(X) \Var(Y)} = \frac{1}{18}
+    \end{gather*}
+    and so
+    \begin{equation*}
+      \rho(X, Y) = \frac{\Cov(X, Y)}{\sqrt{\Var(X) \Var(Y)}} = \frac{\frac{1}{36}}{\frac{1}{18}} = \frac{1}{2}
+    \end{equation*}
+\end{solution}
+
+% subsection correlation (end)
+
+\subsection{Conditional Expectation}%
+\label{sub:conditional_expectation}
+% subsection conditional_expectation
+
+\begin{defn}[Conditional Expectation]\index{Conditional Expectation}
+\label{defn:conditional_expectation}
+  Let $G$ be a real-valued function. The \hlnoteb{conditional expectation} of $g(Y)$ given $X = x$, denoted as $g(Y) \, | \, \left( X = x \right)$ is given by
+  \begin{equation*}
+    E \left[ g(Y) \, | \, x \right] = \sum_{y} g(y) f_Y( y \, | \, x )
+  \end{equation*}
+  if $Y | (X = x)$ is a discrete rv and
+  \begin{equation*}
+    E \left[ g(Y) \, | \, x \right] = \int_{y} g(y) f_Y( y \, | \, x )
+  \end{equation*}
+  if $Y | (X = x)$ is a continuous rv. This definition only holds provided that the sum and the integral converges absolutely. The conditional expectation of $h(X)$ given $Y = y$, where $h$ is a real-valued function, is defined in a similar manner.
+
+  We also call $E[ Y \, | \, X = x ]$ the \hldefn{conditional mean}, which may be denoted as $E( Y \, | \, x )$, and $\Var(Y \, | \, X = x)$ the \hldefn{conditional variance}, which may be denoted as $\Var(Y \, | \, x)$.
+\end{defn}
+
+\begin{note}
+  Note that there is also the notation $E(Y \, | \, X)$, which is an rv, and hence different from $E(Y \, | \, x)$.
+\end{note}
+
+\begin{eg}[Example 3.21]
+  Consider $f(x, y) = 8xy \mathbb{1}_{\{0 < x < y < 1\}}$. Calculate the conditional mean and the conditional variance of $X \, | \, \left( Y = \frac{1}{2} \right)$.
+\end{eg}
+
+\begin{solution}
+  The diagram to the right illustrates the region of support for $X$ and $Y$.
+  \marginnote{
+  \begin{tikzpicture}
+      \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
+      \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
+  		\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(0,2.5)--(2.5,2.5)--(0,0);
+      \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+      \draw[line width=0pt,dashed](2.5,2.5)--(2.5,0) node[below] {1};
+      \draw[line width=0pt,dashed](2.5,2.5)--(0,2.5) node[left] {1};
+  \end{tikzpicture}
+  }
+  To derive the conditional distribution, we first need $f_Y(y)$.
+  \begin{equation*}
+    f_Y(y) &= \int_{0}^{y} 8xy \dif{x} = 4x^2y \at{0}{y} = 4y^3
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    f_X \left(X \, | \, Y = \frac{1}{2}\right) &= \frac{f\left(x, \frac{1}{2}\right)}{f_Y\left(\frac{1}{2}\right)} = \frac{4x}{\frac{1}{2}} = 8x \quad 0 < x < \frac{1}{2}
+  \end{equation*}
+  Therefore the conditional mean is
+  \begin{equation*}
+    E\left[ X  \, | \, \frac{1}{2} \right] = \int_{0}^{\frac{1}{2}} 8x^2 \dif{x} = \frac{8}{3} \cdot \frac{1}{2^3} = \frac{1}{3},
+  \end{equation*}
+  the second conditional moment is
+  \begin{equation*}
+    E \left[ X^2 \, | \, \frac{1}{2} \right] = \int_{0}^{\frac{1}{2}} 8x^3 \dif{x} = 2 \cdot \frac{1}{2^4} = \frac{1}{8},
+  \end{equation*}
+  and so the conditional variance is
+  \begin{equation*}
+    \Var \left( X^2 \, | \, \frac{1}{2} \right) = E\left[ X^2 \, | \, \frac{1}{2} \right] + E\left[ X \, | \, \frac{1}{2} \right]^2 = \frac{1}{8} - \frac{1}{9} = \frac{1}{72}
+  \end{equation*}
+\end{solution}
+
+% subsection conditional_expectation (end)
+
+% section joint_distributions_continued_3 (end)
+
+% chapter lecture_9_may_31st_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
