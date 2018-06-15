@@ -1,0 +1,109 @@
+\chapter{Lecture 19 Jun 15th 2018}%
+\label{chp:lecture_19_jun_15th_2018}
+% chapter lecture_19_jun_15th_2018
+
+\section{Finite Abelian Groups (Continued)}%
+\label{sec:finite_abelian_groups_continued}
+% section finite_abelian_groups_continued
+
+\subsection{p-Groups (Continued)}%
+\label{sub:p_groups_continued}
+% subsection p_groups_continued
+
+\begin{note}[Recall]
+  Recall the definition of a $p$-group:
+
+  $G$ is a $p$-group if the order of all of its elements is a non-negative power of $p \iff \abs{G} = p^k$ for some $k \in \mathbb{N} \cup \{0\}$.
+\end{note}
+
+We shall now proceed to prove the proposition mentioned by the end of last class.
+
+\begin{propo}[Finite Abelian $p$-Groups of Order $p$ are Cyclic]
+\label{propo:finite_abelian_p_groups_of_order_p_are_cyclic}
+  If $G$ is a finite abelian $p$-group that contains only $1$ subgroup of order $p$, then $G$ is cyclic. In other words, if a finite abelian $p$-group is not cyclic, then $G$ has at least $2$ subgroups of order $p$.
+\end{propo}
+
+\begin{proof}
+  Since $G$ is finite, let $y \in G$ have maximal order. \\
+  \underline{Claim}: $G = \lra{y}$ \\
+  \textbf{Proof of Claim}: Suppose not. Since $\lra{y} \triangleleft G$ \sidenote{We have $\lra{y} \leq G$ and $G$ is abelian.}, consider the quotient group $\faktor{G}{\lra{y}}$, which is, therefore, a nontrivial $p$-group, since $\abs{\lra{y}} = p$. By \hyperref[thm:cauchy]{Cauchy's Theorem}, we know that $\exists z \in \faktor{G}{\lra{y}}$ such that $o(z) = p$ \sidenote{Note that we have $\faktor{G}{\lra{y}}$ is a $p$-group $\iff$ $\abs{ \faktor{G}{\lra{y}} } = p^k$ for some $k \in \mathbb{N} \cup \{0\}$. The existence of our chosen $z$ follows from there by Cauchy's Theorem.}. In particular, we have that $z \neq 1$ \sidenote{If $z = 1$, then its order would not be $p$.}. Consider the coset map
+  \begin{equation*}
+    \pi : G \to \faktor{G}{\lra{y}}.
+  \end{equation*}
+  Let $x \in G$ such that $\pi(x) = z$ \sidenote{Recall that $\pi$ is surjective by \cref{propo:propo_related_to_quotient_groups}.}. Since
+  \begin{equation*}
+    \pi( x^p ) = \pi(x)^p = z^p = 1,
+  \end{equation*}
+  we have that $x^p$ gets mapped to $1$ by $\pi$, i.e. $x^p \in \lra{y}$. \\
+  $\implies \exists m \in \mathbb{Z}$ such that $x^p = y^m$. We shall consider two cases: \\
+  \noindent\textbf{Case 1}: $p \nmid m$. \\
+  $\because p \nmid m$, we have that $\gcd(m, \abs{\lra{y}}) = 1$, and hence by \cref{propo:other_generators_in_the_same_group} \sidenote{ \begin{propononum}[Proposition 18]
+  Let $G = \lra{g}$ with $o(g) = n \in \mathbb{N}$. We have
+  \begin{equation*}
+    G = \lra{g^k} \iff \gcd(k, n) = 1
+  \end{equation*}
+  \end{propononum} }, we have that $o\left(y^m\right) = o(y)$. Because $y$ has maximal order, we have
+  \begin{equation*}
+    o( x^p ) \overset{(1)}{<} o(x) \leq o(y) = o(y^m) = o(x^p)
+  \end{equation*}
+  where note that $(1)$ is true because $x$ would need to take more powers of $p$ than $x^p$ to get back to $1$. We observe that we have arrived at a contradiction. \\
+  \noindent\textbf{Case 2}: $p \mid m$.\\
+  $p \mid m \implies \exists k \in \mathbb{Z} \enspace m = pk \implies x^p = y^m = y^{pk}$ \\
+  $\because G$ is abelian, we have that $\left( xy^-k \right)^p = 1$. \\
+  By assumption, there is only one subgroup of $G$ of order $p$, call it $H$. Thus $xy^k \in H$. On the other hand, by the \hyperref[thm:fundamental_theorem_of_finite_cyclic_groups]{Fundamental Theorem of Finite Cyclic Groups} \sidenote{
+  \begin{thmnonum}[Theorem 19]
+    Let $G = \lra{g}$ with $o(g) = n \in \mathbb{N}$.
+    \begin{enumerate}
+      \item $H$ is a subgroup of $G \implies \exists d \in \mathbb{N} \enspace d \, | \, n \quad H = \lra{g^d} \implies \abs{H} \, | \, n$.
+      \item $k \, | \, n \implies \lra{g^{\frac{k}{n}}}$ is the unique subgroup of $G$ of order $k$.
+    \end{enumerate}
+  \end{thmnonum}
+  }, $\lra{y}$ has only one subgroup of of order $p$, which must be $H$. Therefore, in particular, we have $xy^{-k} \in \lra{y}$ which implies $x \in \lra{y}$. It follows that $z = \pi(x) = 1$ since $\lra{y}$ is the identity in the quotient group $\faktor{G}{\lra{y}}$, which contradicts our choice of $z \neq 1$.
+
+  Therefore, by combining the two cases, we have that $G = \lra{y}$.\qed
+\end{proof}
+
+\begin{propo}
+\label{propo:p_gp_broken_down}
+  Let $G \neq \{1\}$ be a finite abelian $p$-group that contains one subgroup of order $p$. Let $C$ be the cyclic subgroup of $G$ of maximal order. Then $\exists B \leq G$ such that $G = CB$ and $C \cap B = \{1\}$. By \cref{crly:group_iso_with_cross_prod_of_its_subgroups}, we have $G \cong C \times B$.
+\end{propo}
+
+\begin{proof}
+  We shall prove this result by induction. If $\abs{G} = p$, then $C = G$ by definition and we can choose $B = \{1\}$. The result follows from there. Suppose that the result holds for all groups of order $p^{n - 1}$ with $n \in \mathbb{N}$ and $n \geq 2$. Consider the case for $\abs{G} = p^n$. There are two cases to consider from here.
+
+  \noindent \textbf{Case 1}: If $C = G$, then we can pick $B = \{1\}$ so that the result follows.
+
+  \noindent \textbf{Case 2}: If $C \neq G$, then $G$ is not cyclic. By \cref{propo:finite_abelian_p_groups_of_order_p_are_cyclic}, there exists at least 2 subgroups of $G$ that are of order $p$. Since $C$ is cyclic, by the \hyperref[thm:fundamental_theorem_of_finite_cyclic_groups]{Fundamental Theorem for Finite Cyclic Groups}, we have that $C$ contains exactly one subgroup of order $p$. Then $\exists D \leq G$ such that $\abs{D} = p$ and $D \not\subseteq C$, and consequently $C \cap D = \{1\}$. Now since $G$ is abelian, $D \triangleleft G$ and hence we may consider its coset map:
+  \begin{equation*}
+    \pi : G \to \faktor{G}{D}.
+  \end{equation*}
+  If we consider $\pi \restriction_C$, called the \hldefn{restriction} of $\pi$ on $C$ \sidenote{The restriction of $\pi$ on $C$ simply means that we restrict the domain of $\pi$ to work solely for the subset $C$. In plain words, we are only considering the case where $\pi$ is applied onto elements of $C$.}, then $\ker \pi \restriction_C = C \cap D = \{1\}$. Then by the \hyperref[thm:first_isomorphism_theorem]{First Isomorphism Theorem}, we have
+  \begin{equation*}
+    C = \faktor{C}{\ker \pi \restriction_C} \cong \img \pi \restriction_C = \pi(C).
+  \end{equation*}
+  Now let $y$ be the generator of the cyclic group $C$. Then since $\pi(C) \cong C$, we have $\pi(C) = \lra{ \pi(y) }$. By assumption on $C$, $\pi(C)$ is the cyclic subgroup of $\faktor{G}{D}$ of maximal order \sidenote{\hlwarn{I need to get some clarification from the professor on this.}}. Since $\abs{ \faktor{G}{D} } = p^{n - 1}$ by\\
+  \noindent \hyperref[thm:lagrange_s_theorem]{Lagrange's Theorem}, by the induction hypothesis, $\faktor{G}{D}$ has a subgroup $E$ such that $\pi(C) E = \faktor{G}{D}$ and $\pi(C) \cap E = \{1\}$.
+
+  Therefore, choose $B = \pi^{-1} (E)$, i.e. $\pi(B) = E$.
+
+  \noindent\underline{Claim 1}: $G = CB$ \\
+  Note that $D \subseteq B$ \sidenote{\hlwarn{This needs clarification as well.}}. If $x \in G$, $\because \pi(C) \pi(B) = \pi(C) E = \faktor{G}{D}$, we have that $\exists u \in C, \, \exists v \in B$ such that
+  \begin{equation*}
+    \pi(x) = \pi(u)\pi(v).
+  \end{equation*}
+  By homomorphicity, we have $\pi(xu^{-1}v^{-1}) = 1$ which implies $xu^{-1}v^{-1} \in D \subseteq B$. Then because $v \in B$, we have that $xu^{-1} \in B$ since $B$ is a group. Then since $G$ is abelian, we have
+  \begin{equation*}
+    x = u x u^{-1} \in CB.
+  \end{equation*}
+
+  \noindent\underline{Claim 2}: $C \cap B = \{1\}$. \\
+  Let $x \in C \cap B$. Then $\pi(x) \in \pi(C) \cap \pi(B) = \pi(C) \cap E = \{1\}$. Then, $\because \pi(x) = 1 \in \faktor{C}{D}$ \sidenote{\hlwarn{I need to double check this to make sure that it is indeed $C$ and not $G$, because it does not make sense with $C$ being the one that $D$ is onto.}}, we have that $x \in D$. Therefore, $x \in C \cap D = \{1\}$ which then $x = 1$.
+
+  Since \textbf{Claims 1 \& 2} hold, the result follows by induction.\qed 
+\end{proof}
+
+% subsection p_groups_continued (end)
+
+% section finite_abelian_groups_continued (end)
+
+% chapter lecture_19_jun_15th_2018 (end)
