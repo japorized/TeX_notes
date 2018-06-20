@@ -1,0 +1,137 @@
+\chapter{Lecture 20 Jun 18th 2018}%
+\label{chp:lecture_20_jun_18th_2018}
+% chapter lecture_20_jun_18th_2018
+
+\section{Finite Abelian Groups (Continued 2)}%
+\label{sec:finite_abelian_groups_continued_2}
+% section finite_abelian_groups_continued_2
+
+\subsection{p-Groups (Continued 2)}%
+\label{sub:p_groups_continued_2}
+% subsection p_groups_continued_2
+
+Recall that we had the following subgroup of a group $G$.
+\begin{equation*}
+  G^{(m)} = \{ g \in G : g^m = 1 \}.
+\end{equation*}
+We discussed about the Primary Decomposition, \cref{thm:primary_decomposition}, and then arrived at \cref{propo:p_gp_broken_down}. With these, we can have the following theorem:
+
+\begin{thm}[Finite Abelian Groups are Isomorphic to a Direct Product of Cyclic Groups]
+\label{thm:finite_abelian_groups_are_isomorphic_to_a_direct_product_of_cyclic_groups}
+Let $G \neq \{1\}$ be a finite abelian $p$-group. Then $G$ is isomorpic to a direct product of cylic groups.
+\end{thm}
+
+\begin{proof}
+  By \cref{propo:p_gp_broken_down}, there is a cyclic group $C_1$ and a subgroup $B_1$ of $G$, such that $G \cong C_1 \times B_1$. Since $B_1 \leq G$, we have that $\abs{B_1} \, \Big| \, \abs{G}$, and so by \cref{thm:lagrange_s_theorem}, $B_1$ is also a $p$-group. If $B_1 \neq \{1\}$, then by \cref{propo:p_gp_broken_down}, there exists a cyclic group $C_2$ and a $B_2 \leq B_1$ such that $B_1 \cong C_2 \times B_2$.
+
+  By continuing this line of argument, we can get $C_1, C_2, ...$ until we get to some $C_k$ with $B_k = \{1\}$, for some $k \in \mathbb{N}$. Then
+  \begin{equation*}
+    G \cong C_1 \times C_2 \times \hdots \times C_k
+  \end{equation*}
+  as required. \qed
+\end{proof}
+
+\begin{remark}
+  We can verify that the decomposition of a finite abelian $p$-group into a direct product of cyclic groups is in fact unique up to their orders.\sidenote{This is the bonus question on A4. It will be included once the assignment is over.}
+\end{remark}
+
+Combining the above remark, \cref{thm:primary_decomposition} and \cref{thm:finite_abelian_groups_are_isomorphic_to_a_direct_product_of_cyclic_groups}, we have the following theorem.
+
+\begin{thm}[Finite Abelian Group Structure]
+\index{Finite Abelian Group Structure}
+\label{thm:finite_abelian_group_structure}
+  If $G$ is a finite abelian group, then
+  \begin{equation*}
+    G \cong C_{p_1^{n_i}} \times \hdots \times C_{p_k^{n_k}}
+  \end{equation*}
+  where $C_{p_i^{n_i}}$ is a cyclic group of order $p_i^{n_i}$, where $1 \leq i \leq k$. The numbers $p_i^{n_i}$ are uniquely determined up to their order.\sidenote{Note that the $p_i$'s do not have to be unique.}
+\end{thm}
+
+\begin{remark}
+  Note that if $p_1$ and $p_2$ are distinct primes, then
+  \begin{equation*}
+    C_{p_1^{n_1}} \times C_{p_2^{n_2}} \cong C_{p_1^{n_1} p_2^{n_2}},
+  \end{equation*}
+  the cyclic group of order $p_1^{n_1} p_2^{n_2}$. Thus, by combining suitable prime factors together, for a finite abelian group $G$, we can also write
+  \begin{equation*}
+    G \cong \mathbb{Z}_{m_1} \times \mathbb{Z}_{m_2} \times \hdots \times \mathbb{Z}_{m_r},
+  \end{equation*}
+  where $m_i \in \mathbb{N}$, $i \leq 1 \leq r$, $m_1 > 1$ and
+  \begin{equation*}
+    m_1 \, \big| \, m_2 \, \big| \hdots \big| \, m_r
+  \end{equation*}
+\end{remark}
+
+\begin{eg}
+  Conder an abelian group $G$ with order $48$. Since $48 = 2^4 \cdot 3$, an abelian group of order $48$ is isomorphic to $H \times \mathbb{Z}_3$, where $H$ is an abelian group of order $2^4$. The options for $H$ are:
+  \begin{gather*}
+    \mathbb{Z}_{2^4} \qquad \mathbb{Z}_{2^3} \times \mathbb{Z}_2 \qquad \mathbb{Z}_{2^2} \times \mathbb{Z}_{2^2} \\
+    \mathbb{Z}_{2^2} \times \mathbb{Z}_2 \times \mathbb{Z}_2 \qquad \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2
+  \end{gather*}
+  Therefore, we have the following possible decompositions of $G$:
+  \begin{align*}
+    G &\cong \mathbb{Z}_{2^4} \times \mathbb{Z}_3 \cong \mathbb{Z}_{48} \\
+    G &\cong \mathbb{Z}_{2^3} \times \mathbb{Z}_2 \times \mathbb{Z}_3 = \mathbb{Z}_2 \times \mathbb{Z}_{24} \\ 
+    G &\cong \mathbb{Z}_{2^2} \times \mathbb{Z}_{2^2} \times \mathbb{Z}_3 = \mathbb{Z}_4 \times \mathbb{Z}_{12} \\ 
+    G &\cong \mathbb{Z}_{2^2} \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_3 = \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_{12} \\ 
+    G &\cong \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_3 = \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_2 \times \mathbb{Z}_6
+  \end{align*}
+\end{eg}
+
+% subsection p_groups_continued_2 (end)
+
+% section finite_abelian_groups_continued_2 (end)
+
+\section{Rings}%
+\label{sec:rings}
+% section rings
+
+\subsection{Rings}%
+\label{sub:rings}
+% subsection rings
+
+\begin{defn}[Ring]\index{Ring}
+\label{defn:ring}
+  A set $R$ is a ring if $\forall a, b, c \in R$,
+  \marginnote{\noindent As daunting as this definition seems, it is much easier to remember if we think of $R$ being an \hlnoteb{abelian group under addition}, \hlnoteb{``almost'' a group under multiplication}, save the fact that the \hlimpo{multiplicative inverse of an element does not necessarily exist}, and with the \hlnoteb{distributive law}. }
+  \begin{enumerate}
+    \item $a + b \in R$
+    \item $a + b = b + a$
+    \item $a + (b + c) = (a + b) + c$
+    \item $\exists 0 \in R \enspace a + 0 = a = 0 + a$
+    \item $\exists (-a) \in R \enspace a + (-a) = 0 = (-a) + a$
+    \item $ab \in R$
+    \item $a(bc) = (ab)c$
+    \item $\exists 1 \in R \enspace 1 \cdot a = a = a \cdot 1$
+    \item $a ( b + c ) = ab + ac$ and $(b + c) a = ba + ca$
+  \end{enumerate}
+  We call $1$ as the \hldefn{Unity} of $R$, $0$ as the \textcolor{base16-eighties-blue}{Zero}\index{Zero of a Ring} of $R$, and $-a$ as the \hlnoteb{negative} of $a$.
+
+  The ring $R$ is called a \hldefn{Commutative Ring} if it also satisfies the following:
+  \begin{enumerate}
+    \setcounter{enumi}{9}
+    \item $ab = ba$.
+  \end{enumerate}
+\end{defn}
+
+\begin{eg}
+  $\mathbb{Z}, \mathbb{Q}, \mathbb{R}$ and $\mathbb{C}$ are commutative rings with the zero being $0$, and unity being $1$.
+\end{eg}
+
+\begin{eg}
+  For $n \in \mathbb{N}, \, n \geq 2$, $\mathbb{Z}_n$ is a commutative ring with the zero being $[0]$, and unity being $[1]$.
+\end{eg}
+
+\begin{eg}
+  The set $M_n(\mathbb{R})$ is a ring using matrix addition and matrix multiplication, with zero being the zero matrix $0$, and unity being the identity matrix $I$. We also know that $M_n(\mathbb{R})$ is not commutative.
+\end{eg}
+
+\begin{warning}
+  Note that since $(R, \cdot)$ is not a group, we no longer have the liberty of using \cref{propo:cancellation_laws}, i.e. we do not have left or right cancellation. For example, in $\mathbb{Z}$, $0 \cdot x = 0 \cdot y \notimply x = y$.
+\end{warning}
+
+% subsection rings (end)
+
+% section rings (end)
+
+% chapter lecture_20_jun_18th_2018 (end)
