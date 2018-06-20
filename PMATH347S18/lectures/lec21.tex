@@ -1,0 +1,171 @@
+\chapter{Lecture 21 Jun 20th 2018}%
+\label{chp:lecture_21_jun_20th_2018}
+% chapter lecture_21_jun_20th_2018
+
+\section{Rings (Continued)}%
+\label{sec:rings_continued}
+% section rings_continued
+
+\subsection{Rings (Continued)}%
+\label{sub:rings_continued}
+% subsection rings_continued
+
+\begin{note}[Notation]
+  Given a ring $R$, to distinguish the difference between multiples in addition and in multiplication, for $n \in \mathbb{N} \, \land \, a \in R$, we write
+  \begin{equation*}
+    na = \underbrace{a + a + \hdots + a}_{n \text{ times }}
+  \end{equation*}
+  and
+  \begin{equation*}
+    a^n = \underbrace{a \cdot a \cdot \hdots \cdot a}_{n \text{ times }}
+  \end{equation*}
+  respectively. Also, we will define
+  \begin{equation*}
+    (-n) a = \underbrace{(-a) + (-a) + \hdots + (-a)}_{n \text{ times }}
+  \end{equation*}
+  and
+  \begin{equation*}
+    a^{-n} = \left( a^{-1} \right)^n
+  \end{equation*}
+  if $a^{-1}$ exists.
+\end{note}
+
+\begin{note}
+  Recall that for a group $G$ and $g \in G$, we have $g^0 = 1$, $g^1 = g$, and $\left(g^{-1}\right)^{-1} = g$. Thus for addition, we have
+  \begin{gather*}
+    \overarrow{0}{\text{integer}} \cdot a = \underarrow{0}{\text{zero in } R} \qquad 1 \cdot a = a \\
+    - (-a) = a
+  \end{gather*}
+
+  Also, by \cref{propo:group_notations}, if $n, m \in \mathbb{Z}$, we have
+  \begin{gather*}
+    m \cdot a + n \cdot a = (m + n) \cdot a \\
+    n(ma) = (nm)a \\
+    n(a + b) = na + nb
+  \end{gather*}
+\end{note}
+
+\begin{propo}[More Properties of Rings]
+\label{propo:more_properties_of_rings}
+  Let $R$ be a ring and $r, s \in \mathbb{R}$.\marginnote{This is a problem in A4.}
+  \begin{enumerate}
+    \item If $0$ is the zero of $R$, then $0 \cdot r = 0 = r \cdot 0$; \sidenote{i.e. all the $0$'s are zeros of $R$.}
+    \item $-r (s) = - (rs) = r (-s)$;
+    \item $(-r)(-s) = rs$;
+    \item $\forall m, n \in \mathbb{Z}, \, (mr)(ns) = (mn)(rs)$.
+  \end{enumerate}
+\end{propo}
+
+\begin{defn}[Trivial Ring]\index{Trivial Ring}
+\label{defn:trivial_ring}
+A \hlnoteb{trivial ring} is a ring of only one element. In this case, we have $1 = 0$, i.e. the unity is the zero and vice versa.
+\end{defn}
+
+\begin{remark}
+  If $R$ is a ring with $R \neq \{0\}$, since $r = r \cdot 1$ for all $r \in R$, we have $1 \neq 0$. Otherwise, if $1 = 0$, then $r = r \cdot 1 = r \cdot 0 = 0$, i.e. $R = \{0\}$.
+\end{remark}
+
+\begin{eg}\label{eg:direct_product_of_rings}
+  Let $R_1, R_2, ..., R_n$ be rings. We define component-wise operation on the product
+  \begin{equation*}
+    R_1 \times R_2 \times \hdots \times R_n
+  \end{equation*}
+  as follows:
+  \begin{align*}
+    (r_1, r_2, ..., r_n) + (s_1, s_2, ..., s_n) &= (r_1 + s_1, r_2 + s_2, ..., r_n + s_n) \\
+    (r_1, r_2, ..., r_n)(s_1, s_2, ..., s_n) &= (r_1 s_1, r_2 s_2, ..., r_n s_n)
+  \end{align*}
+  We can check that $R_1 \times R_2 \times \hdots \times R_n$ is a ring with the zro being $(0, 0, ..., 0)$ and the unity being $(1, 1, ..., 1)$. This set
+  \begin{equation*}
+    R_1 \times R_2 \times \hdots \times R_n
+  \end{equation*}
+  is called the \hldefn{direct product} of $R_1, R_2, ..., R_n$.
+\end{eg}
+
+\begin{defn}[Characteristic of a Ring]\index{Characteristic}
+\label{defn:characteristic_of_a_ring}
+  If $R$ is a ring, we define the \hlnoteb{characteristic} of $R$, denoted by $\ch(R)$, in terms of the order of $1_R$ in the additive group $(R, +)$, by
+  \begin{equation*}
+    \ch(R) = \begin{cases}
+      n & \text{if } o(1_R) = n \in \mathbb{N} \text{ in } (R, +) \\
+      0 & \text{if } o(1_R) = \infty \text{ in } (R, +)
+    \end{cases}
+  \end{equation*}
+\end{defn}
+
+For $k \in \mathbb{Z}$, we write $kR = 0$ to mean that $\forall r \in R$, $kr = 0$.
+
+By \cref{propo:more_properties_of_rings}, we have
+\begin{equation*}
+  kr = k (1_R \cdot r) = (k 1_R) \cdot r
+\end{equation*}
+and so $kR = 0$ if and only if $k 1_R = 0$. Then, since $(R, +)$ is a group, by \cref{propo:properties_of_elements_of_finite_order} and \cref{propo:property_of_elements_of_infinite_order}, it follows that:
+
+\begin{propo}[Implications of the Characteristic]
+\label{propo:implications_of_the_characteristic}
+  Let $R$ be a ring and $k \in \mathbb{Z}$.\sidenote{This is why we defined $\ch(R) = 0$ if $o(1_R) = \infty$}
+  \begin{enumerate}
+    \item $\ch(R) = n \in \mathbb{N} \implies \left( kR = 0 \iff n \mid k \right)$
+    \item $\ch(R) = 0 \implies \left( kR = 0 \iff k = 0 \right)$
+  \end{enumerate}
+\end{propo}
+
+\begin{eg}
+  Each of $\mathbb{Z}, \mathbb{Q}, \mathbb{R}$ and $\mathbb{C}$ has characteristic $0$. For $n \in \mathbb{N}$ with $n \geq 2$, the ring $\mathbb{Z}_n$ has characteristic $n$.
+\end{eg}
+
+% subsection rings_continued (end)
+
+\subsection{Subring}%
+\label{sub:subring}
+% subsection subring
+
+\begin{defn}[Subring]\index{Subring}
+\label{defn:subring}
+A subset $S$ of a ring $R$ is a subring if $S$ is a ring itself (under the same operations: addition and multiplication).\marginnote{Unlike subgroups, since there is no proper suggestion of a symbolic representation, I shall use $S \leq_r R$ to denote that $S$ is a subring of $R$, in comparison to $\leq$ for subgroups, which has no subscript. Note that this is purely for keeping my writing succinct, and so the subscript $r$ is used simply to indicate that the $\leq$ symbol is for denoting a subring and should not be confused with other $r$'s that may be used in a proof. This notation is also not used in class, and should be avoided during materials outside of this set of notes.}
+\end{defn}
+
+Note that properties (2), (3), (7) and (9) from \cref{defn:ring} are automatically satisfied. Thus, to show that $S$ is a subring, it suffices to show the following:
+
+\hldefn{Subring Test}\label{spe:subring_test}
+\begin{enumerate}
+  \item $0, 1 \in S$
+  \item $s, t \in S \implies ( s - t ), st \in S$
+\end{enumerate}
+
+\begin{eg}
+  We have the following chain of commutative rings:
+  \begin{equation*}
+    \mathbb{Z} \leq_r \mathbb{Q} \leq_r \mathbb{R} \leq_r \mathbb{C}
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  If $R$ is a ring, the \textcolor{base16-eighties-blue}{center}\index{Center of a Ring} $Z(R)$ of $R$ is defined as
+  \begin{equation*}
+    Z(R) = \{ z \in R : zr = rz, r \in R \}.
+  \end{equation*}
+  Note taht $0, 1 \in Z(R)$. Also, if $s, t \in Z(R)$, then $\forall r \in R$,
+  \begin{equation*}
+    (s - t) r = sr - tr = rs - rt = r( s - t )
+  \end{equation*}
+  and so $(s - t) \in Z(R)$. Also,
+  \begin{equation*}
+    (st)r = s(tr) = s(rt) = (sr)t = (rs)t = r(st)
+  \end{equation*}
+  and so $st \in Z(R)$. By the \hlnotea{Subring Test}, $Z(R) \leq_r R$.
+\end{eg}
+
+\begin{eg}
+  Let
+  \begin{equation*}
+    \mathbb{Z}[c] = \{a + bi : a, b \in \mathbb{Z}, \, i^2 = -1 \} \subseteq \mathbb{C}.
+  \end{equation*}
+  It can be shown that $\mathbb{Z}[i] \leq_r \mathbb{C}$, and is called the ring of \hldefn{Gaussian integers}.\sidenote{Proof that the Gaussian integers is a subring is in A4, which shall be included after the assignment is over.}
+\end{eg}
+
+% subsection subring (end)
+
+% section rings_continued (end)
+
+% chapter lecture_21_jun_20th_2018 (end)

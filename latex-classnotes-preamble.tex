@@ -12,6 +12,8 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{mathrsfs}
+\usepackage{mathtools}
+\usepackage{xparse}
 \usepackage{tkz-euclide}
 \usetkzobj{all}
 \usepackage[utf8]{inputenc}
@@ -339,6 +341,14 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \renewcommand{\epsilon}{\varepsilon}
 \renewcommand{\atop}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
 \newcommand*\dif{\mathop{}\!d}
+
+  % inspiration from: https://tex.stackexchange.com/questions/8720/overbrace-underbrace-but-with-an-arrow-instead#37758
+\newcommand{\overarrow}[2]{
+  \overset{\makebox[0pt]{\begin{tabular}{@{}c@{}}#2\\[0pt]\ensuremath{\uparrow}\end{tabular}}}{#1}
+}
+\newcommand{\underarrow}[2]{
+  \underset{\makebox[0pt]{\begin{tabular}{@{}c@{}}\downarrow\\[0pt]\ensuremath{#2}\end{tabular}}}{#1}
+}
 
 % Comment the two lines below if you want to print the document
 \pagecolor{base16-eighties-dark}

@@ -9,6 +9,52 @@
     src: /PMATH347S18/classnotes.tex
   - title: classnotes-white.tex
     src: ./PMATH347S18/classnotes-white.tex
+  - title: list_of_symbols.tex
+    src: ./PMATH347S18/list_of_symbols.tex
+  - title: math-operators.tex
+    src: ./PMATH347S18/math-operators.tex
+  - title: lec01.tex
+    src: ./PMATH347S18/lectures/lec01.tex
+  - title: lec02.tex
+    src: ./PMATH347S18/lectures/lec02.tex
+  - title: lec03.tex
+    src: ./PMATH347S18/lectures/lec03.tex
+  - title: lec04.tex
+    src: ./PMATH347S18/lectures/lec04.tex
+  - title: lec05.tex
+    src: ./PMATH347S18/lectures/lec05.tex
+  - title: lec06.tex
+    src: ./PMATH347S18/lectures/lec06.tex
+  - title: lec07.tex
+    src: ./PMATH347S18/lectures/lec07.tex
+  - title: lec08.tex
+    src: ./PMATH347S18/lectures/lec08.tex
+  - title: lec09.tex
+    src: ./PMATH347S18/lectures/lec09.tex
+  - title: lec10.tex
+    src: ./PMATH347S18/lectures/lec10.tex
+  - title: lec11.tex
+    src: ./PMATH347S18/lectures/lec11.tex
+  - title: lec12.tex
+    src: ./PMATH347S18/lectures/lec12.tex
+  - title: lec13.tex
+    src: ./PMATH347S18/lectures/lec13.tex
+  - title: lec14.tex
+    src: ./PMATH347S18/lectures/lec14.tex
+  - title: lec15.tex
+    src: ./PMATH347S18/lectures/lec15.tex
+  - title: lec16.tex
+    src: ./PMATH347S18/lectures/lec16.tex
+  - title: lec17.tex
+    src: ./PMATH347S18/lectures/lec17.tex
+  - title: lec18.tex
+    src: ./PMATH347S18/lectures/lec18.tex
+  - title: lec19.tex
+    src: ./PMATH347S18/lectures/lec19.tex
+  - title: lec20.tex
+    src: ./PMATH347S18/lectures/lec20.tex
+  - title: lec21.tex
+    src: ./PMATH347S18/lectures/lec21.tex
 
 - title: STAT330 S18
   pdf:
