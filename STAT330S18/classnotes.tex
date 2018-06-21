@@ -3587,6 +3587,204 @@ $ $ \\
 
 % chapter lecture_10_jun_05th_2018 (end)
 
+\chapter{Lecture 11 Jun 07th 2018}%
+\label{chp:lecture_11_jun_07th_2018}
+% chapter lecture_11_jun_07th_2018
+
+\subsection{Working with Multivariate Cases}%
+\label{sub:working_with_multivariate_cases}
+% subsection working_with_multivariate_cases
+
+Almost everything that has been introduced above can be extended to cases where we have more than just $2$ rvs. For example:
+
+\begin{defn}[k-variate CDF]\index{k-variate CDF}
+\label{defn:k_variate_cdf}
+  The \hlnoteb{k-variate CDF}, $k > 2$, rvs $X_1, ..., X_k$ is defined as
+  \begin{equation*}
+    F(x_1, ..., x_k) = P(X_1 \leq x_1, X_2 \leq x_2, ..., X_k \leq x_k).
+  \end{equation*}
+  In the continuous case, we may write
+  \begin{equation*}
+    f(x_1, ..., x_k) = \frac{\partial^k}{\partial x_1 \hdots \partial x_k} F(x_1, ..., x_k).
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[k-variate Support Set]\index{k-variate Support Set}
+\label{defn:k_variate_support_set}
+  The support set of the distribution for $X_1, X_2, ..., X_k$ is
+  \begin{equation*}
+    \{(x_1, ..., x_k) : f(x_1, ..., x_k) > 0 \}
+  \end{equation*}
+\end{defn}
+
+We also have the following:
+
+\begin{propo}[Law of Total Probability - Multivariate]
+\label{propo:law_of_total_probability_multivariate}
+  If $X_1, ..., X_k$ are continuous rvs, then
+  \begin{equation*}
+    \int_{x_1} \hdots \int_{x_k} f(x_1, ..., x_k) \dif{x_1} \hdots \dif{x_k} = 1.
+  \end{equation*}
+  Should they by discrete, then
+  \begin{equation*}
+    \sum_{x_1} \hdots \sum_{x_k} f(x_1, ..., x_k) = 1
+  \end{equation*}
+\end{propo}
+
+\begin{defn}[k-Variate Marginal Distribution]
+\label{defn:k_variate_marginal_distribution}
+  To get the marginal distribution of a subset of $m$ variables from $X_1, ..., X_k$ ($1 \leq m \leq k$), we will sum or integrate over the other ones if they are discrete or continuous, respectively. For example,
+  \begin{equation*}
+    f(x_1, x_2, x_3) = \int_{x_4} \hdots \int_{x_k} f(x_1, ..., x_k) \dif{x_4} \hdots \dif{x_k}
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[k-Variate Joint MGF]\index{k-Variate Joint MGF}
+\label{defn:k_variate_joint_mgf}
+  The joint mgf of $X_1, ..., X_k$ is defined as
+  \begin{equation*}
+    M(t_1, t_2, ..., t_k) = E \left( e^{t_1 X_1 + \hdots + t_k X_k} \right)
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[Independence for Multivariate Cases]
+\label{propo:independence_for_multivariate_cases}
+  If $X_1, ..., X_k$ are independent, then
+  \begin{gather*}
+    f(x_1, ..., x_k) = \prod_{i=1}^{k} f_{X_i}(x_i) \qquad F(x_1, ..., x_k) = \prod_{i=1}^{k} F_{X_i}(x_i) \\
+    M(t_1, ..., t_k) = \prod_{i=1}^{k} M_{X_i}(t_i)
+  \end{gather*}
+\end{propo}
+
+\newthought{There are} many different examples of multivariate distributions. We shall discuss two:
+\begin{itemize}
+  \item Multinomial Distribution
+  \item Multivariate Normal Distribution
+\end{itemize}
+
+The \hlnoteb{multinomial distribution} is an extension of the binomial distribution to cases where there are more categories than two results. For a multinomial distribution, we have that
+\begin{itemize}
+  \item the experiment involves $n$ trials, each with $k$ categories
+  \item the outcome of trials are independent of each other
+  \item the probability of each category, $p_i$, remains the same across $n$ trials
+  \item $X = (X_1, ..., X_k) \sim \Mult(n, p_1, ..., p_k)$ counts the number of elements in each category among the $n$ trials.
+\end{itemize}
+
+\begin{defn}[Mutlinomial Distribution]\index{Mutlinomial Distribution}
+\label{defn:mutlinomial_distribution}
+  Suppose $X_1, ..., X_k$ are discrete rvs with joint pf
+  \begin{equation*}
+    f(x_1, ..., x_k) = \frac{n!}{x_1! x_2! \hdots x_k! x_{k + 1}!} p_1^{x_1} p_2^{x_2} \hdots P_k^{x_k} p_{k + 1}^{x_{k + 1}}
+  \end{equation*}
+  where $x_i = 0, ..., n,$, $x_{k + 1} = n - \sum_{i=1}^{k} x_i$, $0 < p_i < 1$, $p_{k + 1} = 1 - \sum_{i=1}^{k} p_i$, for $i = 1, ..., k + 1$.
+
+  Under these conditions, $(X_1, ..., X_k)$ is said to have a multinomial distribution, and we write $(X_1, ..., X_k) \sim \Mult(n, p_1, ..., p_k)$.
+\end{defn}
+
+\begin{note}
+  Observe that $\Bin(n, p) = \Mult(n, p, p)$.
+\end{note}
+
+\begin{propo}[Properties of Multinomial Distribution]
+\label{propo:properties_of_multinomial_distribution}
+  Suppose $(X_1, ..., X_k) \sim \Mult(n, p_1, ..., p_k)$, then
+  \begin{enumerate}
+    \item $\forall (t_1, ..., t_k) \in \mathbb{R}^k$, the random vector $(X_1, ..., X_k)$ has joint mgf
+      \begin{equation*}
+        M(t_1, ..., t_k) = E \left( e^{t_1 X_1 + \hdots t_k X_k} \right) = (p_1 e^{t_1} + \hdots + p_k e^{t_k} + p_{k + 1})^n
+      \end{equation*}
+
+    \item Any subset of $X_1, ..., X_{k + 1}$ also has a multinomial distribution. In particular, $X_i \sim \Bin(n, p_i), \, i = 1, ..., k + 1$.
+    \item If $T = X_i + X_j$, for $i \neq j$, then $T \sim \Bin(n, p_i + p_j)$
+    \item $\Cov(X_i, X_j) = -n p_i p_j$, for $i \neq j$
+    \item The conditional distribution of any subset of $(X_1, ..., X_{k + 1})$ given the rest of the coordinates is a multinomial distribution. In particular, the conditional pf of $X_i$ given $X_j = x_j$, $i \neq j$, is
+      \begin{equation*}
+        X_i \, | \, X_j = x_j \sim \Bin\left( n - x_j, \frac{p_i}{1 - p_j} \right)
+      \end{equation*}
+
+    \item The conditional distribution of $X_i$ given $T = X_i + X_j = t$, for $i \neq j$, is
+      \begin{equation*}
+        X_i \, | \, X_i + X_j = t \sim \Bin \left( t, \frac{p_i}{p_i + p_j} \right)
+      \end{equation*}
+  \end{enumerate}
+\end{propo}
+
+\newthought{We shall} look at the bivariate normal distribution so that it is easier to be explained. The same idea can be extended to a multivariate Normal distribution.
+
+\begin{defn}[Bivariate Normal Distribution]\index{Bivariate Normal Distribution}
+\label{defn:bivariate_normal_distribution}
+    Let $X_1$ and $X_2$ be rvs with joint pdf
+    \begin{align*}
+      f(x_1, x_2)
+        &= \frac{1}{2 \pi \abs{\Sigma}^{\frac{1}{2}}} \exp \left\{ - \frac{1}{2} ( x - \mu )^T \Sigma^{-1} (x - \mu) \right\} \\
+        &= \frac{1}{2 \pi \sigma_1 \sigma_2 \sqrt{ 1 - \rho^2 }} \exp \left\{ - \frac{1}{2( 1 - \rho^2 )} \left[ \frac{(x_1 - \mu_1)^2}{\sigma_1^2} \right. \\
+        &\qquad + \frac{(x_2 - \mu_2)^2}{\sigma_2^2} - \frac{2 \rho (x_1 - \mu_1)(x_2 - \mu_2)}{\sigma_1 \sigma_2} \right] \Bigg\}
+    \end{align*}
+    where $(x_1, x_2) \in \mathbb{R}^2$ and
+    \begin{equation*}
+      x = \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}, \mu = \begin{pmatrix} \mu_1 \\ \mu_2 \end{pmatrix}, \Sigma = \begin{bmatrix}
+        \sigma_1^2 & \rho \sigma_1 \sigma_2 \\
+        \rho \sigma_1 \sigma_2 & \sigma_2^2
+      \end{bmatrix}
+    \end{equation*}
+    where $\Sigma$ is a nonsingular matrix. Then $X = (X_1, X_2)^T$ is said to have a bivariate normal distribution, and we write $X \sim \BVN(\mu, \Sigma)$.
+\end{defn}
+
+\begin{propo}[Properties of Bivariate Normal Distribution]
+\label{propo:properties_of_bivariate_normal_distribution}
+  Suppose $X \sim \BVN(\mu, \Sigma)$, where
+  \begin{equation*}
+    \mu = \begin{pmatrix}
+      \mu_1 \\ \mu_2
+    \end{pmatrix},
+    \Sigma = \begin{bmatrix}
+      \sigma_1^2 & \rho \sigma_1 \sigma_2 \\
+      \rho \sigma_1 \sigma_2 & \sigma_2^2
+    \end{bmatrix}
+  \end{equation*}
+  \begin{enumerate}
+    \item $X$ has a joint mgf of
+      \begin{equation*}
+        M(t_1, t_2) = E[ \exp\left( t^T X \right) ] = E\left( e^{t_1 X_1 + t_2 X_2} \right) = \exp\left( \mu^T t + \frac{1}{2} t^T \Sigma t \right)
+      \end{equation*}
+      $\forall (t_1, t_2) \in \mathbb{R}^2$.
+
+    \item $X_1 \sim N(\mu_1, \sigma_1^2)$ and $X_2 \sim N(\mu_2, \sigma_2^2)$
+    \item $\Cov(X_1, X_2) = \rho \sigma_1 \sigma_2$ and $\Corr(X_1, X_2) = \rho$ where $\abs{rho} \leq 1$
+    \item $X_1$ and $X_2$ are independent rvs iff $\rho = 0$
+    \item $c = (c_1, c_2)^T$ is a nonzero vector of constants $\implies$
+      \begin{equation*}
+        c^T X = \sum_{i=1}^{2} c_i X_i \sim N \left( c^T \mu, c^T \Sigma c \right).
+      \end{equation*}
+    \item If $A$ is a $2 \times 2$ nonsingular matrix and $b$ is a $2 \times 1$ vector, then $Y = AX + b \sim \BVN\left( A\mu + b, A \Sigma A^T \right)$.
+    \item
+      \begin{gather*}
+        X_2 \, | \, X_1 = x_1 \sim N \left( \mu_2 + \rho \frac{\sigma_2}{\sigma_1}( x_1 - \mu_1 ), \sigma_2^2 (1 - \rho^2) \right) \\
+        X_1 \, | \, X_2 = x_2 \sim N \left( \mu_1 + \rho \frac{\sigma_1}{\sigma_2}( x_2 - \mu_2 ), \sigma_1^2 (1 - \rho^2) \right)
+      \end{gather*}
+
+    \item $(X - \mu)^T \Sigma^{-1} (X - \mu_ \sim \chi^2 (2))$
+  \end{enumerate}
+\end{propo}
+
+\begin{defn}[Random Sample (IID)]\index{Random Sample}
+\label{defn:random_sample_iid}
+  Rvs $X_1, ..., X_2$ are said to form a \hlnoteb{simple random sample} or are said to be \hlnoteb{independent and identically distributed} (IID) if $X_1, ..., X_n$ are independent, and $f_{X_i} = f_{X_j}$, $\forall i \neq j$.
+\end{defn}
+
+\begin{eg}[Example 3.28]
+  Let $X_1, ..., X_{10}$ be a random sample of standard normal distribution. Let $Y_1$ denote the number of these variables that are between $-1$ and $1$, let $Y_2$ denote the number that have absolute value between $1$ and $2$, and let $Y_3$ denote the number that have absolute value larger than $2$. Calculate:
+  \begin{enumerate}
+    \item $P(Y_1 \leq 2)$
+    \item $E[ Y_2 \, | \, Y_1 = 5 ]$
+  \end{enumerate}
+\end{eg}
+
+% subsection working_with_multivariate_cases (end)
+
+% section joint_distribution_continued_4 (end)
+
+% chapter lecture_11_jun_07th_2018 (end)
 \nobibliography*
 \bibliography{bibliography}
 
