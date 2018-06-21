@@ -27,6 +27,29 @@
       .file-tex {
         display: none;
       }
+      .option-container {
+        display: flex;
+        align-items: center;
+      }
+      .tex-toggle {
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        margin: 20px;
+        border: 1px solid #2d2d2d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        cursor: pointer;
+        float: left;
+      }
+      div.tex-toggle::selection {
+        background: red;
+      }
+      div.tex-toggle::-moz-selection {
+        background: transparent;
+      }
 
       @media (min-width: 767px) {
         .course-card {
@@ -37,9 +60,6 @@
           justify-content: flex-start;
           flex-wrap: wrap;
         }
-        .file-tex {
-          display: block;
-        }
       }
     </style>
   </head>
@@ -47,6 +67,11 @@
     <article>
       <h1>Japorized's LaTeX Notes</h1>
       <p class="subtitle">Style from <a href="https://github.com/edwardtufte/tufte-css">tufte-css</a> | Notes from this Github <a href="https://github.com/japorized/TeX_notes">repo</a> | Written by <a href="https://japorized.github.io">Japorized</a></p>
+      <noscript><p>Enable JS to toggle .tex files</p></noscript>
+
+      <div class="option-container">
+        <div class="tex-toggle"></div> Show .tex files
+      </div>
 
       <section id="files">
         {% for file in site.data.files %}
@@ -76,7 +101,7 @@
     </article>
 
     <script type="text/javascript">
-function nightSwitcher(){var rawtime=new Date(),curHours=rawtime.getHours();if(curHours>17||curHours<8){document.querySelector('head').innerHTML+="<link rel='stylesheet' href='assets/css/night-mode.css' />"}}nightSwitcher();
+function nightSwitcher(){var rawtime=new Date(),curHours=rawtime.getHours();if(curHours>17||curHours<8){document.querySelector('head').innerHTML+="<link rel='stylesheet' href='assets/css/night-mode.css' />"}}nightSwitcher(); var btn = document.querySelector('.tex-toggle'), texfiles = document.querySelectorAll('.file-tex'); btn.addEventListener('click', function(e) { if ( btn.innerHTML != 'X' ) { btn.innerHTML = 'X'; texfiles.forEach( function(file) { file.style.display="block"; }); } else { btn.innerHTML = ''; texfiles.forEach( function(file) { file.style.display="none"; }); } });
     </script>
   </body>
 </html>
