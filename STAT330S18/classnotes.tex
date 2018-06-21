@@ -15,9 +15,12 @@
 \DeclareMathOperator{\Nor}{N }
 \DeclareMathOperator{\Gau}{G }
 \DeclareMathOperator{\BetaDist}{Beta }
+\DeclareMathOperator{\Mult}{Mult }
+\DeclareMathOperator{\BVN}{BVN }
 \DeclareMathOperator{\Dom}{Dom }
 \DeclareMathOperator{\Var}{Var }
 \DeclareMathOperator{\Cov}{Cov }
+\DeclareMathOperator{\Corr}{Corr }
 \DeclareMathOperator{\supp}{supp }
 
 \title{STAT330S18 - Mathematical Statistics}
@@ -3266,11 +3269,11 @@ To use the covariance as the context, and to quantitatively measure the strength
   }
   To derive the conditional distribution, we first need $f_Y(y)$.
   \begin{equation*}
-    f_Y(y) &= \int_{0}^{y} 8xy \dif{x} = 4x^2y \at{0}{y} = 4y^3
+    f_Y(y) = \int_{0}^{y} 8xy \dif{x} = 4x^2y \at{0}{y} = 4y^3
   \end{equation*}
   Thus
   \begin{equation*}
-    f_X \left(X \, | \, Y = \frac{1}{2}\right) &= \frac{f\left(x, \frac{1}{2}\right)}{f_Y\left(\frac{1}{2}\right)} = \frac{4x}{\frac{1}{2}} = 8x \quad 0 < x < \frac{1}{2}
+    f_X \left(X \, | \, Y = \frac{1}{2}\right) = \frac{f\left(x, \frac{1}{2}\right)}{f_Y\left(\frac{1}{2}\right)} = \frac{4x}{\frac{1}{2}} = 8x \quad 0 < x < \frac{1}{2}
   \end{equation*}
   Therefore the conditional mean is
   \begin{equation*}
@@ -3291,6 +3294,298 @@ To use the covariance as the context, and to quantitatively measure the strength
 % section joint_distributions_continued_3 (end)
 
 % chapter lecture_9_may_31st_2018 (end)
+
+\chapter{Lecture 10 Jun 05th 2018}%
+\label{chp:lecture_10_jun_05th_2018}
+% chapter lecture_10_jun_05th_2018
+
+\section{Joint Distribution (Continued 4)}%
+\label{sec:joint_distribution_continued_4}
+% section joint_distribution_continued_4
+
+\subsection{Conditional Expectation (Continued)}%
+\label{sub:conditional_expectation_continued}
+% subsection conditional_expectation_continued
+
+\begin{eg}[Example 3.22]
+  Given the joint distribution below, calculate $\Var(X \, | \, Y = 1)$ and compare it to $\Var(X)$.
+  \[
+  \begin{tabular}{c | c | c | c || c}
+            & x = -2 & x = 0 & x = 2 & P(Y = y) \\
+  \hline
+  y = 0     & 0.05   & 0.1   & 0.15  & 0.3 \\
+  \hline
+  y = 1     & 0.07   & 0.11  & 0.2   & 0.38 \\
+  \hline
+  y = 2     & 0.02   & 0.25  & 0.05  & 0.32 \\
+  \hline
+  \hline
+  P(X = x)  & 0.14   & 0.46  & 0.4   &
+  \end{tabular}
+  \]
+\end{eg}
+
+\begin{solution}
+  Note that
+  \begin{align*}
+    \Var(X) &= E(X^2) - E(X)^2 \\
+      &= 4 \cdot 0.14 + 4 \cdot 0.4 - ( -2 \cdot 0.14 + 2 \cdot 0.4 )^2 = 1.8896
+  \end{align*}
+  To get $\Var(X \, | \, Y = 1)$, we first need
+  \begin{equation*}
+    f(X \, | \, Y = 1) = \frac{P(X = x, Y = 1)}{P(Y = 1)} = \begin{cases}
+      \frac{0.07}{0.38} = 0.1842 & x = -2 \\
+      \frac{0.11}{0.38} = 0.2895 & x = 0 \\
+      \frac{0.2}{0.38} = 0.5263 & x = 2
+    \end{cases}
+  \end{equation*}
+  Thus
+  \begin{align*}
+    \Var(X \, | \, Y = 1) &= E[ X^2 | Y = 1 ] - E[ X \, | \, Y = 1 ]^2 \\
+      &= \frac{14}{19} + \frac{40}{19} - ( \frac{13}{19} )^2 = \frac{857}{361} = 2.3740
+  \end{align*}
+\end{solution}
+
+\begin{propo}[Independence on Conditional Expectation]
+\label{propo:independence_on_conditional_expectation}
+  If $X$ and $Y$ are independent rvs then $E[ g(Y) \, | \, x ] = E [ g(Y) ]$ and $E[ h(X) \, | \, y ] = E[ h(X) ]$.
+\end{propo}
+
+\begin{proof}
+  We shall prove one of the above for the other will follow a similar argument. Also, we shall prove the continuous case and leave the discrete case as an exercise.\marginnote{ \begin{ex}
+    Prove the discrete case for \cref{propo:independence_on_conditional_expectation}.
+  \end{ex} }
+
+  Observe that
+  \begin{align*}
+    E [ g(Y) \, | \, X = x ] &= \int_{y} g(y) \frac{f(x, y)}{f_X (x)} \dif{y} \\
+      &= \int_{y} g(y) \frac{f_X(x) f_Y(y)}{f_X(x)} \dif{y} \quad \because \text{ independence } \\
+      &= \int_{y} g(y) f_Y(y) \dif{y} = E[g(Y)]
+  \end{align*}\qed
+\end{proof}
+
+\begin{thm}[Law of Total Expectation]
+\index{Law of Total Expectation}
+\label{thm:law_of_total_expectation}
+  Suppose $X$ and $Y$ are rvs, then
+  \begin{equation*}
+    E\left( E[ g(Y) \, | \, X ] \right) = E[ g(Y) ]
+  \end{equation*}
+  If $g$ is the identity function, we have $E( E[Y \, | \, X] ) = E(Y)$.
+\end{thm}
+
+\begin{proof}
+  We shall prove for the discrete case and leave the continuous case as an exercise.\marginnote{ \begin{ex}
+    Prove the continuous case for \cref{thm:law_of_total_expectation}.
+  \end{ex} }
+  Observe that
+  \begin{align*}
+    E[ g(Y) \, | \, X ] &= \sum_{y} \left[ g(y) \cdot P(Y = y \, | \, X) \right] \\
+    E[E[ g(Y) \, | \, X ]] &= \sum_{x} \left[ \sum_{y} \left[ g(y) \cdot P(Y = y \, | \, X) \right] \right] P(X = x) \\
+      &= \sum_{x} \sum_{y} g(y) \cdot P(X = x, Y = y) \\
+      &= \sum_{y} g(y) \sum_{x} P(X = x, Y = y) \\
+      &= \sum_{y} \left[ g(y) \cdot P(Y = y) \right] = E[ g(Y) ]
+  \end{align*}\qed
+\end{proof}
+
+\begin{eg}[Example 3.23 - A Classical Example]
+\marginnote{This is a very classical example to illustrate the power of the \hlnoteb{Law of Total Expectation}.}
+A man is lost in a mine, and 3 paths are in front of him. If he takes path 1, after 3 hours, he will be back at his current place. If he takes path 2, the time to get out of the mine (in hours) follows an $\Exp(1)$ distriburion. If he takes the 3rd path, he will be back to his current place after 2 hours. Suppose that the man cannot recognize which path he took every time he comes back to the original spot (after going through either path 1 or 3), and so he randomly chooses a path every time he comes back to this original spot. What is the expected time that he will take to get out of the mine?
+\end{eg}
+
+$ $ \\
+
+\begin{solution}
+  Let $X$ an rv that represents the path number, i.e. $X = 1, 2$ or $3$, and let $Y$ represent the total time that the man takes to exit the mine. We are given that
+  \begin{equation*}
+    P(X = 1) = P(X = 2) = P(X = 3) = \frac{1}{3}.
+  \end{equation*}
+  We are also given that
+  \begin{align*}
+    E[ Y \, | \, X = 1 ] &= 3 + E[Y] \\
+    E[ Y \, | \, X = 2 ] &= 1 \quad \because Y \, | \, (X = 2) \sim \Exp(1) \\
+    E[ Y \, | \, X = 3 ] &= 2 + E[Y].
+  \end{align*}
+  Therefore, to get the expected time, by \cref{thm:law_of_total_expectation},
+  \begin{align*}
+    E[Y] &= E[ E[ Y \, | \, X ] ] \\
+      &= \frac{1}{3} \cdot E[ Y \, | \, X = 1 ] + \frac{1}{3} \cdot E[ Y \, | \, X = 2 ] + \frac{1}{3} \cdot E[ Y \, | \, X = 3 ] \\
+      &= \frac{1}{3} \cdot ( 3 + E[Y] ) + \frac{1}{3} \cdot 1 + \frac{1}{3} (2 + E[Y]) \\
+      &= 2 + \frac{2}{3} E[Y]
+  \end{align*}
+  and hence
+  \begin{equation*}
+    E[Y] = 6
+  \end{equation*}
+\end{solution}
+
+\begin{thm}[Law of Total Variance]
+\index{Law of Total Variance}
+\label{thm:law_of_total_variance}
+  Suppose $X$ and $Y$ are rvs. Then
+  \begin{equation*}
+    \Var(Y) = E[ \Var(Y \, | \, X) ] + \Var[ E(Y \, | \, X) ]
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Note that
+  \begin{align*}
+    \Var(Y | X) &= E( Y^2 | X ) - E( Y | X )^2 \\
+    E[ \Var(Y | X) ] &= E[ E( Y^2 | X ) - E( Y|X )^2 ] \\
+      &= E[Y^2] - E [ E(Y|X)^2 ] \\
+      &= E[Y^2] - \left[ \Var( E(Y|X) ) + E \left( E(Y|X) \right)^2 \right] \\
+      &= \Var(Y) - \Var( E(Y | X) )
+  \end{align*}
+  By rearranging the above, we get
+  \begin{equation*}
+    \Var(Y) = E[ \Var(Y|X) ] + \Var[ E(Y|X) ]
+  \end{equation*}\qed
+\end{proof}
+
+\begin{eg}[Example 3.24 (Course Note 3.7.11)]
+  Suppose $P \sim \Unif(0, 0.1)$ and $Y \, | \, P = p \sim \Bin(10, p)$. Find $E(Y)$ and $\Var(Y)$.
+\end{eg}
+
+\begin{solution}
+  \begin{align*}
+    E[Y] &= E[ E[Y|P] ] = E[ 10P ] = 10 E[P] \\
+      &= 10 \cdot \int_{0}^{0.1} \frac{p}{0.1} \dif{p} = \frac{10}{0.2} p^2 \at{0}{0.1} = 0.05 \\
+    \text{Note: }& E[P^2] = \int_{0}^{0.1} \frac{p^2}{0.1} \dif{p} = \frac{p^3}{0.3}\at{0}{0.1} = \frac{0.001}{0.3} = \frac{1}{300} \\
+    \Var(Y) &= E[ \Var(V|P) ] + \Var[ E[Y|P] ] \\
+      &= E[ 10P(1 - P) ] + \Var[ 10P ] \\
+      &= 10E[P] - 10E[P^2] + 100 \Var(P) \\
+      &= 0.05 - \frac{1}{30} + 100 \left[ E[P^2] - E[P]^2 \right] \\
+      &= \frac{1}{60} + 100 \left[ \frac{1}{300} - 0.05^2 \right] = \frac{1}{60} + 100 \left[ \frac{1}{300} - \frac{1}{400} \right] \\
+      &= \frac{1}{60} + \frac{1}{12} = \frac{1}{10}
+  \end{align*}
+\end{solution}
+
+% subsection conditional_expectation_continued (end)
+
+\subsection{Joint Moment Generating Functions}%
+\label{sub:joint_moment_generating_functions}
+% subsection joint_moment_generating_functions
+
+\begin{defn}[Joint Moment Generating Functions]\index{Joint Moment Generating Functions}
+\label{defn:joint_moment_generating_functions}
+  The \hlnoteb{joint moment generating function} of two rvs $X$ and $Y$ is defined as
+  \begin{equation*}
+    M( t_1, t_2 ) = E\left( e^{t_1 X + t_2 Y} \right)
+  \end{equation*}
+  if the expectation exists for all $t_1 \in (-h_1, h_1)$ and $t_2 \in (-h_2, h_2)$ for some $h_1, h_2 > 0$.
+
+  More generally, if $X_1, X_2, ..., X_n$ are rvs, then
+  \begin{equation*}
+    M( t_1, t_2, ..., t_n ) = E \left[ \exp\left( \sum_{i=1}^{n} t_i X_i \right) \right]
+  \end{equation*}
+  is called the \hlnoteb{joint mgf} of $X_1, X_2, ..., X_n$ is the expectation exists for all $t_i \in (-h_i, h_i)$ for some $h_i > 0$, where $i = 1, ..., n$.
+\end{defn}
+
+\begin{defn}[Joint Moments and Marginal MGF]\index{Joint Moments}\index{Marginal MGF}
+\label{defn:joint_moments_and_marginal_mgf}
+  Given the joint mgf $M(t_1, t_2)$, we can calculate the joint moments. In particular,
+  \begin{equation*}
+    E\left( X^j Y^k \right) = \frac{\partial^{j + k}}{\partial t_i^j \partial t_2^k} M(t_1, t_2) \at{( t_1, t_2 ) = (0, 0)}{}
+  \end{equation*}
+  If $M(t_1, t_2)$ exists for all $t_1 \in (-h_1, h_1)$ and $t_2 \in (-h_2, h_2)$ for some $h_1, h_2 > 0$, then the mdf of $X$ is given by
+  \begin{equation*}
+    M_X(t) = E \left( e^{tX} \right) = M(t, 0) \quad t \in (-h_1, h_1)
+  \end{equation*}
+  and the mgf of $Y$ is given by
+  \begin{equation*}
+    M_Y(t) = E \left( e^{tY} \right) = M(0, t) \quad t \in (-h_2, h_2).
+  \end{equation*}
+\end{defn}
+
+\begin{eg}[Example 3.25]\label{eg:3_25}
+  Given the joint distribution below, calculate the joint mgf $M(t_1, t_2)$, the first joint moment, $E[XY]$, from the joint mgf, and the marginal mgf of $X$ and that of $Y$.
+  \[
+  \begin{tabular}{c | c | c}
+          & x = -1 & x = 1 \\
+    \hline
+    y = 1 & 0.5    & 0.3 \\
+    \hline
+    y = 2 & 0.1    & 0.1
+  \end{tabular}
+  \]
+\end{eg}
+
+\begin{solution}
+  Since all probabilities are provided,
+  \begin{align*}
+    M(t_1, t_2) &= E\left( e^{t_1 X + t_2 Y} \right) = \sum_{x} \sum_{y} e^{t_1 x + t_2 y} P(X = x, Y = y) \\
+      &= 0.5 e^{-t_1 + t_2} + 0.3 e^{t_1 + t_2} + 0.1 e^{-t_1 + 2t_2} + 0.1 e^{t_1 + 2t_2} \\
+    E(XY) &= \frac{\partial^2}{\partial t_1 \partial t_2} M(t_1, t_2) \at{t_1 = 0, \, t_2 = 0}{} \\
+      &= \frac{\partial}{\partial t_1} \left[ 0.5 e^{-t_1 + t_2} + 0.3 e^{t_1 + t_2} + 0.2 e^{-t_1 + 2t_2} + 0.2e^{t_1 + 2t_2} \right] \at{t_1 = 0, t_2 = 0}{} \\
+      &= -0.5 e^{-t_1 + t_2} + 0.3e^{t_1 + t_2} - 0.2 e^{-t_1 + 2t_2} + 0.2e^{t_1 + 2t_2} \at{t_1 = 0, t_2 = 0}{} \\
+      &= -0.2 \\
+    M_X(t_1) &= M(t_1, 0) = 0.5e^{-t_1} + 0.3e^{t_1} + 0.1 e^{-t_1} + 0.1^{t_1} \\
+      &= 0.6e^{-t_1} + 0.4 e^{t_1} \\
+    M_Y(t_2) &= M(0, t_2) = 0.5e^{t_2} + 0.3e^{t_2} + 0.1 e^{2t_2} + 0.1 e^{2t_2} \\
+      &= 0.8 e^{t_2} + 0.2 e^{2t_2}
+  \end{align*}
+\end{solution}
+
+\begin{propo}[Independence on Joint MGF]
+\label{propo:independence_on_joint_mgf}
+  Suppose $X$ and $Y$ are rvs with joint mgf $M(t_1, t_2)$ which exists $\forall t_1 \in (-h_1, h_1), \, t_2 \in (-h_2, h_2)$, for some $h_1, h_2 > 0$. Then $X$ and $Y$ are independent rvs iff
+  \begin{equation*}
+    \forall t_1 \in (-h_1, h_1), \, t_2 \in (-h_2, h_2) \quad M(t_1, t_2) = M_X(t_1) M_Y(t_2)
+  \end{equation*}
+  where $M_X(t_1) = M(t_1, 0)$ and $M_Y(t_2) = M(0, t_2)$.
+\end{propo}
+
+\begin{proof}
+  \hlwarn{to be proven later}
+\end{proof}
+
+\begin{eg}[Example 3.26 (Course Note 3.8.5)]
+  Suppose $X$ and $Y$ are continous rvs with joint pdf
+  \begin{equation*}
+    f(x, y) = e^{-y} \quad 0 < x < y < \infty
+  \end{equation*}
+  Find the joint mdf of $X$ and $Y$. Are $X$ and $Y$ independent rvs? What is the marginal mgf of $X$ and $Y$?
+\end{eg}
+
+\begin{solution}
+  \begin{align*}
+    M(t_1, t_2) &= E[ e^{t_1 X + t_2 Y} ] = \int_{0}^{\infty} \int_{0}^{y} e^{t_1 x + t_2 y} e^{-y} \dif{x} \dif{y} \\
+      &= \int_{0}^{\infty} \frac{1}{t_1}e^{t_1 x + t_2 y - y} \at{0}{y} \dif{y} \\
+      &= \int_{0}^{\infty} \frac{1}{t_1} \left[e^{y(t_2 - 1)} - e^{y( t_1 + t_2 - 1 )}\right] \dif{y} \\
+      &= \frac{1}{t_1} \left[ \frac{1}{t_2 - 1}e^{y(t_2 - 1)} - \frac{1}{t_1 + t_2 - 1)} e^{y(t_1 + t_2 - 1)} \right] \at{0}{\infty} \\
+      &= \frac{1}{t_1} \left[ \frac{t_1}{(t_2 - 1) (t_1 + t_2 - 1)} \right] \\
+      &= \frac{1}{(t_2 - 1)(t_1 + t_2 - 1)} \quad t_2 < 1 \, \land \, t_1 + t_2 < 1 \\
+    M_X(t_1) &= M(t_1, 0) = \frac{1}{t_1 - 1} \quad t_1 < 1 \\
+    M_Y(t_2) &= M(0, t_2) = \frac{1}{(t_2 - 1)^2} \quad t_2 < 1
+  \end{align*}
+  Observe that
+  \begin{equation*}
+    M_X(t_1) M_Y(t_2) = \frac{1}{(t_1 - 1)(t_2 - 1)^2} \neq M(t_1, t_2)
+  \end{equation*}
+  and so by \cref{propo:independence_on_joint_mgf}, $X$ and $Y$ are not independent.
+\end{solution}
+
+\begin{eg}[Example 3.27]
+  Investigate the independence of $X$ and $Y$ in \cref{eg:3_25} using the mgf method.
+\end{eg}
+
+\begin{solution}
+  We had that
+  \begin{align*}
+    M_X(t_1) &= 0.6^{-t_1} + 0.4e^{t_1} \quad t_1 \in \mathbb{R} \\
+    M_Y(t_2) &= 0.8e^{t_2} + 0.2 e^{2t_2} \quad t_2 \in \mathbb{R}.
+  \end{align*}
+  Since
+  \begin{equation*}
+    M_X \left( \frac{1}{2} \right) M_Y\left( \frac{1}{2} \right) \neq M\left( \frac{1}{2}, \frac{1}{2} \right)
+  \end{equation*}
+  we have that $X$ and $Y$ are not independent.
+\end{solution}
+
+% subsection joint_moment_generating_functions (end)
+
+% chapter lecture_10_jun_05th_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
