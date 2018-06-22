@@ -14,6 +14,7 @@
 \DeclareMathOperator{\Unif}{Unif }
 \DeclareMathOperator{\Nor}{N }
 \DeclareMathOperator{\Gau}{G }
+\DeclareMathOperator{\Gam}{Gam }
 \DeclareMathOperator{\BetaDist}{Beta }
 \DeclareMathOperator{\Mult}{Mult }
 \DeclareMathOperator{\BVN}{BVN }
@@ -3717,8 +3718,8 @@ The \hlnoteb{multinomial distribution} is an extension of the binomial distribut
     \begin{align*}
       f(x_1, x_2)
         &= \frac{1}{2 \pi \abs{\Sigma}^{\frac{1}{2}}} \exp \left\{ - \frac{1}{2} ( x - \mu )^T \Sigma^{-1} (x - \mu) \right\} \\
-        &= \frac{1}{2 \pi \sigma_1 \sigma_2 \sqrt{ 1 - \rho^2 }} \exp \left\{ - \frac{1}{2( 1 - \rho^2 )} \left[ \frac{(x_1 - \mu_1)^2}{\sigma_1^2} \right. \\
-        &\qquad + \frac{(x_2 - \mu_2)^2}{\sigma_2^2} - \frac{2 \rho (x_1 - \mu_1)(x_2 - \mu_2)}{\sigma_1 \sigma_2} \right] \Bigg\}
+        &= \frac{1}{2 \pi \sigma_1 \sigma_2 \sqrt{ 1 - \rho^2 }} \exp \left\{ - \frac{1}{2( 1 - \rho^2 )} \left[ \frac{(x_1 - \mu_1)^2}{\sigma_1^2} \right. \right. \\
+        &\qquad \left. \left. + \frac{(x_2 - \mu_2)^2}{\sigma_2^2} - \frac{2 \rho (x_1 - \mu_1)(x_2 - \mu_2)}{\sigma_1 \sigma_2} \right] \right\}
     \end{align*}
     where $(x_1, x_2) \in \mathbb{R}^2$ and
     \begin{equation*}
@@ -3785,6 +3786,317 @@ The \hlnoteb{multinomial distribution} is an extension of the binomial distribut
 % section joint_distribution_continued_4 (end)
 
 % chapter lecture_11_jun_07th_2018 (end)
+
+\chapter{Lecture 12 Jun 12th 2018}%
+\label{chp:lecture_12_jun_12th_2018}
+% chapter lecture_12_jun_12th_2018
+
+\section{Functions of Random Variables}%
+\label{sec:functions_of_random_variables}
+% section functions_of_random_variables
+
+\subsection{Transformation of Two or More Random Variables}%
+\label{sub:transformation_of_two_or_more_random_variables}
+% subsection transformation_of_two_or_more_random_variables
+
+In earlier lectures we discussed about basic transformations from one random variable to another, for example, from a continuous rv $X$ to $Y = g(X)$. In particular, we methods were presented:
+
+\begin{itemize}
+  \item \newthought{The direct method}, i.e. $P(Y \leq y) = P( g(X) \leq y )$, and taking the derivative of $P(Y \leq y)$ with respect to $y$.
+  \item \newthought{Using the mgf of $Y$}, and then translate it as the mgf of $X$.
+\end{itemize}
+
+\begin{note}[Recall]
+  In \cref{sub:a_formula_for_the_continuous_case}, we used the following idea to obtain the result that we desire: for rvs $X$ and $Y = g(X)$ where $g$ is some continuous and injective function
+  \begin{align*}
+    P(Y \leq y) &= P( g(X) \leq y ) = P(X \leq g^{-1}(y)) = F_X( g^{-1}(y) ) \\
+    f_Y(y) &= \frac{d}{dy} F_X( g^{-1}(y) ) = ( g^{-1}(y) )' f_X( g^{-1}(y) )
+  \end{align*}
+\end{note}
+
+In this chapter, we will now study the case where we have more than one rv involved. In particular, let $X$ and $Y$ be two continuous rvs with joint pdf $f(x, y)$. Our questions are:
+\begin{enumerate}
+  \item What is the distribution of $U = h_1( X, Y )$?
+  \item What is the joint distribution of $U = h_1(X, Y)$ and $V = h_2 (X, Y)$?
+\end{enumerate}
+
+To answer the first question, we can actually still employ the direct method:
+
+\begin{eg}[Example 4.1 (Course Notes 4.1.1)]\label{eg:4_1}
+  Suppose $X$ and $Y$ are continuous rvs with joint pdf
+  \begin{equation*}
+    f(x, y) = 3y \mathbb{1}_{0 \leq x \leq y \leq 1}
+  \end{equation*}
+  Find the pdf of $T = XY$.
+\end{eg}
+
+\begin{solution}
+  First, note that\sidenote{I wonder if the last step is actually valid. The support of $X$ definitely includes $0$, so the division would not make sense with $\frac{t}{X}$. We can, however, still make sense of the event in the 2nd term, which we would have $P(0 \leq t)$. Should we be concerned about $X = 0$, or can we neglect that single point given that $X$ is a continuous rv? \\
+  $ $ \\}
+  \begin{equation*}
+    P(T \leq t) = P( XY \leq t ) = P\left(Y \leq \frac{t}{X}\right)
+  \end{equation*}
+  The diagram to the right shows us the support of the joint probability.\marginnote{
+  \begin{tikzpicture}
+      \draw[->] (-0.5, 0) -- (4, 0) node[right] {$x$};
+      \draw[->] (0, -0.5) -- (0, 4) node[above] {$y$};
+  		\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25] (0,0) -- (0,2.5) -- (2.5,2.5) -- (0,0);
+      \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+      \draw[line width=0pt,dashed](2.5,2.5)--(2.5,0) node[below] {1};
+      \draw[line width=0pt,dashed](2.5,2.5)--(0,2.5) node[left] {1};
+      \draw[domain=0.25:4,dashed] plot ({\x},{1/\x}) node[above] {$y = \frac{t}{x} \quad 0 < t < 1$};
+      \draw[domain=1.75:4,dashed] plot ({\x},{7/\x}) node[above] {$y = \frac{t}{x} \quad t > 1$};
+      \node at (0.25, 0.75) {A};
+      \node at (1, 2) {B};
+  \end{tikzpicture}
+  }
+  We observe that if $t \leq 0$, then $P( T \leq t ) = 0$, and if $t \geq 1$, then $P( T \leq t ) = 1$. Now if $0 < t < 1$, the region that we are looking for is the shaded region with the label A, and so we consider
+  \begin{align*}
+    P( T \leq t ) &= 1 - P(B) = 1 - \underset{B}{\int \int} f(x, y) \dif{x} \dif{y} \\
+                  &\overset{(1)}{=} 1 - \int_{\sqrt{t}}^{1} \int_{\frac{t}{y}}^{\sqrt{t}} f(x, y) \dif{x} \dif{y} - \int_{\sqrt{t}}^{1} \int_{\sqrt{t}}^{y} f(x, y) \dif{x} \dif{y} \\
+                  &\overset{(2)}{=} 1 - \int_{\sqrt{t}}^{1} \int_{\frac{t}{y}}^{y} f(x, y) \dif{x} \dif{y} \\
+                  &= 1 - \int_{\sqrt{t}}^{1} \int_{\frac{t}{y}}^{y} 3y \dif{x} \dif{y} \\
+                  &= 1 - \int_{\sqrt{t}}^{1} 3y \left( y - \frac{t}{y} \right) \dif{y} \quad \because \text{\hlnotea{FTC}} \\
+                  &= 1 - \frac{\sqrt{t}}{1} \left( 3y^2 - 3t \right) \dif{y} \\
+                  &= 1 - \left[ y^3 - 3ty \right]\at{\sqrt{t}}{1} = 1 - ( 1 - 3t - \sqrt{t}^3 + 3t \sqrt{t} ) \\
+                  &= 3t - 2t\sqrt{t} \text{ for } 0 < t < 1
+  \end{align*}
+  where for step $(1)$, we broke B into two parts, in particular at $x = \sqrt{t}$ where $y = x$ and $y = \frac{t}{x}$ coincide, and step $(2)$ is true by linearity of integration. With that, i.e. with the CDF of $T$, we can then obtain
+  \begin{equation*}
+    f_T(t) = \begin{cases}
+      3 - 3\sqrt{t} & 0 < t < 1 \\
+      0             & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Example 4.2 (Course Note 4.1.2)]
+  Using the info in \cref{eg:4_1}, find the pdf of $T = \frac{X}{Y}$.
+\end{eg}
+
+\begin{solution}
+  The diagram to the right shows the support of $X, Y$ and the function $t = \frac{x}{y}$.\marginnote{
+  \begin{tikzpicture}
+      \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
+      \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
+  		\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25] (0,0) -- (0,2.5) -- (2.5,2.5) -- (0,0);
+      \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+      \draw[line width=0pt,dashed](2.5,2.5)--(2.5,0) node[below] {1};
+      \draw[line width=0pt,dashed](2.5,2.5)--(0,2.5) node[left] {1};
+      \draw[domain=-0.5:0.5,dashed] plot ({\x},{-\x});
+      \draw[domain=-0.5:3,dashed] plot ({\x},{0.5*\x}) node[right] {$y = \frac{1}{t} x \quad t > 1$};
+      \draw[domain=-0.25:1.5,dashed] plot ({\x},{2*\x}) node[right] {$y = \frac{1}{t}x \quad 0 < t < 1$};
+      \node at (0.5,2) {A};
+      \node at (1.5,2) {B};
+  \end{tikzpicture}
+  }
+  We observe that if $t = 0$, then $x = 0$, and we would have the line on the axis, and so $P(T \leq t) = 0$. If $t < 0$, we would have $y = mx$ where $m = \frac{1}{t} < 0$, which, regardless of what $t < 0$ is, will not interact with the support of $X$ and $Y$. So for $t < 0$, $P(T \leq t) = 0$. Now if $t > 0$, we have
+  \begin{equation*}
+    P(T \leq t) = P\left(\frac{X}{Y} \leq t\right) = P\left( Y \geq \frac{1}{t}X \right).
+  \end{equation*}
+  Consider the case where $t \geq 1$, we have that the event would still cover the entire support set of $X$ and $Y$, and so $P (T \leq t) = 1$ for $t \geq 1$. With that, the only remaining case is when $0 < t < 1$. In this case,
+  \begin{equation*}
+    P( T \leq t ) = \int_{0}^{1} \int_{0}^{ty} 3y \dif{x} \dif{y} = \int_{0}^{1} 3ty^2 \dif{y} = t
+  \end{equation*}
+  and so the pdf of $T$ is
+  \begin{equation*}
+    f_T(t) = \begin{cases}
+      1 & 0 < t < 1 \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Example 4.3 (Course Note 4.1.3) - Order Statistics]\label{eg:4_3}
+  Suppose $X_1, ..., X_n$ are IID samples, each from a continuous distribution, and with pdf $f$ and cdf $F$. Find the pdf of
+  \begin{enumerate}
+    \item $T = \min( X_1, ..., X_n ) = X_{(1)}$
+    \item $Y = \max( X_1, ..., X_n ) = X_{(n)}$
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item For $T$, we have that its cdf is\sidenote{The use the \hlnotea{Law of Total Probability} here so that we can use the following argument: ``the \textit{smallest} rv is larger than $t$, and so rest of the rvs must be the same.''}
+      \begin{align*}
+        P(T \leq t) &= 1 - P(T > t) = 1 - P( \min(X_1, ..., X_n) > t ) \\
+                    &= 1 - P( X_1 > t, X_2 > t, ..., X_n > t ) \\
+                    &= 1 - \prod_{i=1}^{n} P(X_i > t) \qquad \because \text{independence} \\
+                    &= 1 - \prod_{i=1}^{n} P(X_1 > t) \qquad \because \text{identical distribution} \\
+                    &= 1 - P(X_1 > t)^n = 1 - [ 1 - F_{X_1}(t) ]^n
+      \end{align*}
+      and so its pdf is
+      \begin{align*}
+        f_T(t) &= - \frac{d}{dt} [ 1 - F_{X_1}(t) ]^n = -n ( -F_{X_1}(t) )' [ 1 - F_{X_1}(t) ]^{n - 1} \\
+               &= n f_{X_1}(t) [ 1 - F_{X_1}(t) ]^{n - 1}.
+      \end{align*}
+      Since $T$ relies entirely on $X_1$ (due to IID), and since we did not have to condition on the values of $t$, we have that
+      \begin{equation*}
+        \supp(T) = \supp(X_1) = \supp(X_i) \quad \text{ for } i = 1, ..., n.
+      \end{equation*}
+
+    \item For $Y$, we have that its cdf is\sidenote{This time, we do not have to employ the \hlnotea{Law of Total Probability}, because we simply have that ``the \textit{largest} rv is smaller than $t$, and so must the rest of the rvs.''}
+      \begin{align*}
+        P(Y \leq t) &= P( \max(X_1, ..., X_n) \leq y) = P(X_1 \leq y, ..., X_n \leq y) \\
+                    &= \prod_{i=1}^{n} P(X_i \leq y) \quad \because \text{independence} \\
+                    &= \prod_{i=1}^{n} P(X_1 \leq y) \quad \because \text{identical distribution} \\
+                    &= P(X_1 \leq t)^n = F_{X_1}(t)^n
+      \end{align*}
+      and therefore its pdf is
+      \begin{align*}
+        f_Y(y) &= \frac{d}{dy} F_{X_1}(y)^n = n f_{X_1}(y) F_{X_1}(y)^{n - 1}.
+      \end{align*}
+  \end{enumerate}
+\end{solution}
+
+\begin{ex}
+  From \cref{eg:4_3}, find the joint distribution of $X_{(1)}$ and $X_{(n)}$.
+\end{ex}
+
+% subsection transformation_of_two_or_more_random_variables (end)
+
+\subsection{One-to-One Bivariate Transformations}%
+\label{sub:one_to_one_bivariate_transformations}
+% subsection one_to_one_bivariate_transformations
+
+\begin{defn}[One-to-One Bivariate Transformation]\index{One-to-One Transformation}
+\label{defn:one_to_one_bivariate_transformation}
+Let $X$ and $Y$ be rvs, and $R_{XY} = \supp[(X, Y)] \in \mathbb{R}^2$. We define
+  \begin{gather*}
+    U = h_1(X, Y) \quad V = h_2(X, Y) \\
+    S : R_{XY} \to \mathbb{R}^2 \text{ by } (x, y) \mapsto ( h_1(x, y), h_2(x, y )
+  \end{gather*}
+  The mapping $S$ is called a \hlnoteb{one-to-one mapping} if and only if \sidenote{There is nothing magnificent about this definition, since this is simply the definition of a one-to-one function.} $\forall (u, v) \in R_{UV}$, $\exists! (x, y) \in R_{XY}$, $\exists w_1, w_2$ that are functions such that
+  \begin{equation*}
+    x = w_1(u, v) \quad y = w_2(u, v)
+  \end{equation*}
+  i.e. $\exists S^{-1} : R_{UV} \to R_{XY}$ such that $(u, v) \mapsto (x, y)$. The \hldefn{Jacobian} of the transformation $S^{-1}$ is
+  \begin{equation*}
+    \frac{\partial(x, y)}{\partial (u, v)} = \begin{vmatrix}
+      \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+      \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
+    \end{vmatrix} = \abs{ \frac{\partial (u, v)}{\partial (x, y)} }^{-1}
+  \end{equation*}
+  where $\frac{\partial (u, v)}{\partial (x, y)}$ is the Jacobian of the transformation $S$.
+\end{defn}
+
+\begin{thm}[One-to-One Bivariate Transformations]
+\index{One-to-One Bivariate Transformations}
+\label{thm:one_to_one_bivariate_transformations}
+  \marginote{This is a generalization of \cref{thm:one_to_one_transformation_of_a_random_variable}.} Let $X$ and $Y$ be continuous rvs with joint pdf $f_{XY}$ and let $R_{XY} = \{( x, y ) : f(x, y) > 0\}$ be the support set of $(X, Y)$, and $R_{UV}$ be the support set of $(U, V)$. Suppose the transformation $S: R_{XY} \to R_{UV}$ defined by
+  \begin{equation*}
+    U = h_1(X, Y) \quad V = h_2(X, Y)
+  \end{equation*}
+  is a one-to-one transformation, with inverse transformation
+  \begin{equation*}
+    X = w_1(U, V) \quad Y = w_2(U, V).
+  \end{equation*}
+  Then $g(u, v)$, the joint pdf of $U$ and $V$, is given by
+  \begin{equation*}
+    \forall (u, v) \in R_{UV} \quad g(u, v) = f(w_1(u,v), w_2(u,v)) \abs{ \frac{\partial (x, y)}{\partial (u, v)} }.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Let the inverse transformation be labelled as $S^{-1} : R_{UV} \supset B \to A \subset R_{XY}$. Then
+  \begin{align*}
+    \underset{B}{\int\int} g(u, v) \dif{v} \dif{u}
+      &= P[ (U, V) \in B ] = P[ (X, Y) \in A ] \\
+      &= \underset{A}{\int\int} f(x, y) \dif{x} \dif{y} \\
+      &= \underset{B}{\int\int} f( w_1 (u, v), w_2 (u, v) ) \abs{ \frac{\partial (x, y)}{\partial (u, v)} } \dif{u} \dif{v}
+  \end{align*}
+  where the last step is by the \href{http://mathworld.wolfram.com/ChangeofVariablesTheorem.html}{Change of Variables Theorem}. And so by comparing integrands, we have
+  \begin{equation*}
+    \forall (u, v) \in R_{UV} \quad g(u, v) = f(w_1(u,v), w_2(u,v)) \abs{ \frac{\partial (x, y)}{\partial (u, v)} }
+  \end{equation*}
+  as required. \qed
+\end{proof}
+
+\begin{propo}[Properties of the Jacobian]\index{Jacobian}
+\label{propo:properties_of_the_jacobian}
+Given the setup in \cref{defn:one_to_one_bivariate_transformation}, we have that \begin{enumerate}
+    \item if $S$ is a linear transformation, i.e. $\exists a_1, b_1, c_1, a_2, b_2, c_2 \in \mathbb{R}$ such that $u(x, y) = a_1 x + b_1 y + c_1$ and $v(x, y) = a_2 x + b_2 y + c_2$, then the Jacobian is a constant;
+    \item if $S$ is a one-to-one transformation, then $\abs{\frac{\partial(x, y)}{\partial (u, v)}} \neq 0$
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item We have
+      \begin{gather*}
+        \frac{\partial u}{\partial x} = a_1 \qquad \frac{\partial u}{\partial y} = b_1 \\
+        \frac{\partial v}{\partial x} = a_2 \qquad \frac{\partial v}{\partial y} = b_2
+      \end{gather*}
+      and so
+      \begin{equation*}
+        \abs{ J } = \frac{\partial (u, v)}{\partial (x, y)} = \begin{vmatrix}
+            a_1 & b_1 \\
+            a_2 & b_2
+        \end{vmatrix} = a_1 b_2 - a_2 b_1
+      \end{equation*}
+      which is a constant, as required.
+
+    \item \hlwarn{I have no idea how to prove this.}
+  \end{enumerate}
+\end{proof}
+
+\begin{eg}[Example 4.4 (Course Notes 4.2.4)]
+  Suppose $X \sim \Gam(a, 1)$ and $Y \sim \Gam(b, 1)$ independently. Find the joint pdf of $U = X + Y$ and $V = \frac{X}{X + Y}$. Show that $U \sim \Gam(a + b, 1)$ and $V \sim \BetaDist(a, b)$, independently. Find $E(V)$.
+\end{eg}
+
+\begin{solution}
+  Given $U = X + Y$ and $V = \frac{X}{X + Y}$, rearranging variables, we have
+  \begin{equation*}
+    X = UV \text{ and } Y = U ( 1 - V )
+  \end{equation*}
+  In order for $U$ to have a Gamma distribution, we need $U$ to be non-negative, which we do since both $X$ and $Y$ have Gamma distributions.
+  Note that the transformation is indeed one to one, since $\forall (u_1, v_1), (u_2, v_2) \in R_{UV}$ with
+  \begin{gather*}
+    u_1 = x_1 + y_1 \quad v_1 = \frac{x_1}{x_1 + y_1} \\
+    u_2 = x_2 + y_2 \quad v_2 = \frac{x_2}{x_2 + y_2},
+  \end{gather*}
+  we have that, if we let $\phi$ denote the transformation,
+  \begin{gather*}
+    \phi(u_1, v_1) = \phi(u_2, v_2) \\
+    \implies \left( x_1 + y_1 , \frac{x_1}{x_1 + y_1} \right) = \left( x_2 + y_2, \frac{x_2}{x_2 + y_2} \right)
+  \end{gather*}
+  which then
+  \begin{align}
+    x_1 + y_1 &= x_2 + y_2 \label{eq:eg_4_4_1} \\
+    \frac{x_1}{x_2 + y_2} &= \frac{x_2}{x_2 + y_2} \nonumber \\
+    \overset{\cref{eq:eg_4_4_1}}{\implies} x_1 &= x_2 \nonumber \\
+    \overset{\cref{eq:eg_4_4_1}}{\implies} y_1 &= y_2. \nonumber
+  \end{align}
+  We shall now get the Jacobian so that we may use \cref{thm:one_to_one_bivariate_transformations}, so that we may consequently get the distributions for $U$ and $V$.
+  \begin{gather*}
+    J = \begin{vmatrix}
+      \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+      \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
+    \end{vmatrix}
+    = \begin{vmatrix}
+      v     & u \\
+      1 - v & -u
+    \end{vmatrix}
+    = -vu - u(1 - v) = -u \\
+    \abs{J} = u
+  \end{gather*}
+  By \cref{thm:one_to_one_bivariate_transformations}, and since $X$ and $Y$ are independent, we have
+  \begin{align*}
+    f_{U, V}(u, v) &= f_{X, Y}(x, y) \cdot \abs{J} = f_X(x) f_Y(y) \cdot \abs{J} \\
+                   &= \frac{x^{a - 1} e^{-x}}{\Gamma(a)} \frac{y^{b - 1} e^{-y}}{\Gamma(b)} \cdot \abs{J} \\
+                   &= \frac{e^{-a} e^{-b}}{\Gamma(a) \Gamma(b)} (uv)^{a - 1} u^{b - 1} ( 1 - v )^{b - 1} u \\
+                   &= \underbrace{ \frac{u^{a + b - 1} e^{-(a + b)}}{\Gamma(a + b)} }_{\text{pdf of } \Gam(a + b, 1)} \cdot \underbrace{ \frac{\Gamma(a + b)}{\Gamma(a) \Gamma(b)} v^{a - 1} (1 - v)^{b - 1} }_{\text{pdf of } \Beta(a, b)}
+  \end{align*}
+  We have already shown that $U$ is a non-negative rv, and so $U \sim \Gam(a + b, 1)$ as required. Note that for $V$, we have
+  $X + Y > X > 0 \implies 1 > \frac{X}{X + Y} > 0 \quad \because X + Y \neq 0$ and so $0 < V < 1$. Therefore $V \sim \BetaDist(a, b)$.
+\end{solution}
+
+% subsection one_to_one_bivariate_transformations (end)
+
+% section functions_of_random_variables (end)
+
+% chapter lecture_12_jun_12th_2018 (end)
+
 \nobibliography*
 \bibliography{bibliography}
 
