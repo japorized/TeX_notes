@@ -80,7 +80,7 @@
             <div class="course-files">
               {% for pdf in file.pdf %}
               <div class="course-file file-pdf">
-                <a href="{{ pdf.src }}">
+                <a href="{{ pdf.src }}" target="_blank">
                   <span class="fas fa-file-pdf"></span><br />
                   {{ pdf.title }}
                 </a>
@@ -88,7 +88,7 @@
               {% endfor %}
               {% for tex in file.tex %}
               <div class="course-file file-tex">
-                <a href="{{ tex.src }}">
+                <a href="{{ tex.src }}" target="_blank">
                   <span class="fas fa-align-left"></span><br />
                   {{ tex.title }}
                 </a>
