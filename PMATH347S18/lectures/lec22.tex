@@ -1,0 +1,146 @@
+\chapter{Lecture 22 Jun 22 2018}%
+\label{chp:lecture_22_jun_22_2018}
+% chapter lecture_22_jun_22_2018
+
+\section{Ring (Continued 2)}%
+\label{sec:ring_continued_2}
+% section ring_continued_2
+
+\subsection{Ideals}%
+\label{sub:ideals}
+% subsection ideals
+
+Let $R$ be a ring and $A$ an additive subgroup of $R$. Since $(R, +)$ is abelian, we have that $A \triangleleft R$. Thus, we can talk about the additive quotient group
+\begin{gather*}
+  \faktor{R}{A} = \{r + a : r \in \mathbb{R} \} \text{ with } \\
+  r + A = \{ r + a : a \in A \}
+\end{gather*}
+
+Using the properties that we know about cosets and quotient groups, we have the following proposition.
+
+\begin{propo}[Properties of the Additive Quotient Group]
+\label{propo:properties_of_the_additive_quotient_group}
+  Let $R$ be a ring and $A$ an additive subgroup of $R$. For $r, s \in R$, we have\marginnote{This is just a translation of the properties of cosets and quotient groups, that we are familiar with, into the language of addition. You can (read: should) prove this as an exercise for yourself (read: myself).}
+  \begin{enumerate}
+    \item $r + A = s + A \iff (r - s) \in A$
+    \item $(r + A) + (s + A) = (r + s) + A$
+    \item $0 + A = A$ is the additive identity of $\faktor{R}{A}$
+    \item $- (r + A) = (-r) + A$ is the additive inverse of $r + A$
+    \item $\forall k \in \mathbb{Z} \quad k(r + A) = kr + A$
+  \end{enumerate}
+\end{propo}
+
+Since $R$ is a ring, it is natural to ask if we could make $\faktor{R}{A}$ into a ring\sidenote{\textit{Ideally} (see what I did there?), we would want $\faktor{R}{A}$ as a ring, just as we had $\faktor{R}{A}$ as a group.}. A natural way to define ``multiplication'' in $\faktor{R}{A}$ is
+\begin{equation}\tag{$\dagger$}\label{eq:ideal_quotient_ring_multiplication}
+  (r + A)(s + A) = rs + A \quad \forall r, s \in \mathbb{R}
+\end{equation}
+Note, however, that we would have
+\begin{equation*}
+  r + A = r_1 + A \qquad s + A = s_1 + A
+\end{equation*}
+with $r \neq r_1$ and $s \neq s_1$. In order for (\ref{eq:ideal_quotient_ring_multiplication}) to make sense, it is necessary that
+\begin{equation*}
+  r + A = r_1 + A \, \land \, s + A = s_1 + A \implies rs + A = r_1 s_1 + A
+\end{equation*}
+so that this ``multiplication'' is \hlimpo{well-defined}.
+
+\begin{propo}
+\label{propo:equivalent_defn_of_a_well_defined_coset_multiplication}
+  Let $A$ be an additive subgroup of a ring $R$. Then $\forall a \in A$, define
+  \begin{equation*}
+    Ra = \{ ra : r \in R \} \quad aR = \{ ar : r \in R \}.
+  \end{equation*}
+  The following are equivalent (TFAE):
+  \begin{enumerate}
+    \item $Ra \subseteq A$ and $aR \subseteq A$, $\forall a \in A$;
+    \item $\forall r, s \in R$, $(r + A)(s + A) = rs + A$ is well-defined in $\faktor{R}{A}$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  $(1) \implies (2)$: If $r + A = r_1 + A$ and $s + A = s_1 + A$, for $r, r_1, s, s_1 \in R$, we need to show that
+  \begin{equation*}
+    rs + A = r_1 s_1 + A.
+  \end{equation*}
+  By \cref{propo:properties_of_the_additive_quotient_group}, we have that $(r - r_1), (s - s_1) \in A$, and so by $(1)$, we have
+  \begin{align*}
+    rs - r_1 s_1 &= rs - r_1 s + r_1 s - r_1 s_1 \\
+                 &= (r - r_1)s + r_1 (s - s_1) \\
+                 &\in (r - r_1) R + R (s - s_1) \subseteq A
+  \end{align*}
+  Therefore, by \cref{propo:properties_of_the_additive_quotient_group} again, we have $rs + A = r_1 s_1 + A$.
+
+  \noindent $(2) \implies (1)$: Let $r \in R$ and $a \in A$. We have that
+  \begin{align*}
+    ra + A &= (r + A)(a + A) \quad \because (2) \\
+           &= (r + A)(\underarrow{0}{\text{zero of } R} + A) \quad \because a, 0 \in A \\
+           &= ( r \cdot 0 ) + A \quad \because (2) \\
+           &= 0 + A \quad \because \cref{propo:more_properties_of_rings} \\
+           &= A \quad \because \cref{propo:properties_of_the_additive_quotient_group}
+  \end{align*}
+  Thus $ra \in A$ and so $Ra \susbeteq A$. Similarly, we can show that $aR \subseteq A$.\qed
+\end{proof}
+
+\begin{defn}[Ideal]\index{Ideal}
+\label{defn:ideal}
+  An additive subgroup $A$ of a ring $R$ is called an \hlnoteb{ideal} of $R$ if $Ra, aR \subseteq A$, $\forall a \in A$.
+\end{defn}
+
+\begin{eg}
+  If $R$ is a ring, $\{0\}$ and $R$ are both ideals of $R$.
+\end{eg}
+
+\begin{propo}[The Only Ideal with the Multiplicative Identity is the Ring Itself]
+\label{propo:the_only_ideal_with_the_multiplicative_identity_is_the_ring_itself}
+Let $A$ be an ideal of a ring $R$. If $1 \in A$, then $A = R$.\marginnote{This also shows that if we want a non-trivial ideal, then the ideal should not have $1$.}
+\end{propo}
+
+\begin{proof}
+  $\forall r \in R$, $\because A$ is an ideal and $1 \in A$, we have $r = r \cdot 1 \in A$. It follows that $R \subseteq A \subseteq R$ and so $R = A$.\qed
+\end{proof}
+
+\begin{propo}[Construction of the Quotient Ring]
+\label{propo:construction_of_the_quotient_ring}
+Let $A$ be an ideal of a ring $R$. Then the additive quotient group $\faktor{R}{A}$ is a ring with the multiplication $(r + A)(s + A) = rs + A$, $\forall r, s \in R$. The unity of $\faktor{R}{A}$ is $1 + A$.
+\end{propo}
+
+\begin{proof}
+  $\because A$ is an additive subgroup of a ring $R$, $\faktor{R}{A}$ is an additive abelian group. By \cref{propo:equivalent_defn_of_a_well_defined_coset_multiplication}, the multiplication on $\faktor{R}{A}$ is well-defined. The multiplication is associative, since $\forall r, s, q \in R$,
+  \begin{align*}
+    (r + A)\big( (s + A)(q + A) \big) &= (r + A) ( sq + A ) = (rsq + A) \\
+                                      &= (rs + A)(q + A) \\
+                                      &= \big( (r + A)(s + A) \big)(q + A).
+  \end{align*}
+  We also have
+  \begin{equation*}
+    (r + A)(1 + A) = r + A = (1 + A)(r + A)
+  \end{equation*}
+  and so the unity of $\faktor{R}{A}$ is $1 + A$. The distributive property is inherited from $R$.\qed
+\end{proof}
+
+\begin{defn}[Quotient Ring]\index{Quotient Ring}
+\label{defn:quotient_ring}
+  Let $A$ be an ideal of a ring $R$. Then the ring $\faktor{R}{A}$ is called the \hlnoteb{quotient ring} of $R$ by $A$.
+\end{defn}
+
+\begin{defn}[Principal Ideal]\index{Principal Ideal}
+\label{defn:principal_ideal}
+Let $R$ be a commutative ring and $A$ an ideal of $R$. If $A = aR = \{ ar : r \in R \} = Ra$ for some $a \in A$, we say that $A$ is a \hlnoteb{principal ideal} \textcolor{base16-eighties-blue}{generated}\index{generator} by $a$, and denote $A = \lra{a}$.
+\end{defn}
+
+\begin{eg}
+  If $n \in \mathbb{Z}$, then $\lra{n} = n \mathbb{Z}$ is a(n) (principal) ideal of $\mathbb{Z}$, since $\mathbb{Z}$ is commutative.
+\end{eg}
+
+\begin{propononum}[Ideals of $\mathbb{Z}$ are Principal Ideals]
+\label{propononum:ideals_of_z_are_principal_ideals}
+All ideals of $\mathbb{Z}$ are of the form $\lra{a}$ for some $n \in \mathbb{Z}$.
+\end{propononum}
+
+We shall prove this in the next lecture.
+
+% subsection ideals (end)
+
+% section ring_continued_2 (end)
+
+% chapter lecture_22_jun_22_2018 (end)
