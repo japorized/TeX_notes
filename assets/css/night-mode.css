@@ -8,3 +8,7 @@ a:link {
   text-shadow: none;
   text-decoration: underline;
 }
+
+.tex-toggle {
+  border-color: #fffff8;
+}
