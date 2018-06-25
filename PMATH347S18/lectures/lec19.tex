@@ -81,13 +81,13 @@ We shall now proceed to prove the proposition mentioned by the end of last class
   \begin{equation*}
     C = \faktor{C}{\ker \pi \restriction_C} \cong \img \pi \restriction_C = \pi(C).
   \end{equation*}
-  Now let $y$ be the generator of the cyclic group $C$. Then since $\pi(C) \cong C$, we have $\pi(C) = \lra{ \pi(y) }$. By assumption on $C$, $\pi(C)$ is the cyclic subgroup of $\faktor{G}{D}$ of maximal order \sidenote{\hlwarn{I need to get some clarification from the professor on this.}}. Since $\abs{ \faktor{G}{D} } = p^{n - 1}$ by\\
-  \noindent \hyperref[thm:lagrange_s_theorem]{Lagrange's Theorem}, by the induction hypothesis, $\faktor{G}{D}$ has a subgroup $E$ such that $\pi(C) E = \faktor{G}{D}$ and $\pi(C) \cap E = \{1\}$.
+  Now let $y$ be the generator of the cyclic group $C$. Then since $\pi(C) \cong C$, we have $\pi(C) = \lra{ \pi(y) }$. By assumption on $C$, $\pi(C)$ is the cyclic subgroup of $\faktor{G}{D}$ of maximal order \sidenote{Since $C \cong \pi(C)$, this is a clear result. Otherwise, if there is some other $\pi(K)$ that has a larger order than $\pi(C)$, then by $\pi^{-1}(K)$, we will get some cyclic subgroup that has an order that is larger than $C$, which is a clear contradiction to our assumption.}. Since $\abs{ \faktor{G}{D} } = p^{n - 1}$ by\\
+  \noindent \hyperref[thm:lagrange_s_theorem]{Lagrange's Theorem}, and by the induction hypothesis, $\faktor{G}{D}$ has a subgroup $E$ such that $\pi(C) E = \faktor{G}{D}$ and $\pi(C) \cap E = \{1\}$.
 
   Therefore, choose $B = \pi^{-1} (E)$, i.e. $\pi(B) = E$.
 
   \noindent\underline{Claim 1}: $G = CB$ \\
-  Note that $D \subseteq B$ \sidenote{\hlwarn{This needs clarification as well.}}. If $x \in G$, $\because \pi(C) \pi(B) = \pi(C) E = \faktor{G}{D}$, we have that $\exists u \in C, \, \exists v \in B$ such that
+  Note that $D \subseteq B$ \sidenote{Note that $E$ is a subgroup of $\faktor{G}{D}$, so the identity of $\faktor{G}{D}$, $D$ must be in $E$. Therefore, we clearly have $D \subseteq B$.}. If $x \in G$, $\because \pi(C) \pi(B) = \pi(C) E = \faktor{G}{D}$, we have that $\exists u \in C, \, \exists v \in B$ such that
   \begin{equation*}
     \pi(x) = \pi(u)\pi(v).
   \end{equation*}
@@ -97,7 +97,7 @@ We shall now proceed to prove the proposition mentioned by the end of last class
   \end{equation*}
 
   \noindent\underline{Claim 2}: $C \cap B = \{1\}$. \\
-  Let $x \in C \cap B$. Then $\pi(x) \in \pi(C) \cap \pi(B) = \pi(C) \cap E = \{1\}$. Then, $\because \pi(x) = 1 \in \faktor{C}{D}$ \sidenote{\hlwarn{I need to double check this to make sure that it is indeed $C$ and not $G$, because it does not make sense with $C$ being the one that $D$ is onto.}}, we have that $x \in D$. Therefore, $x \in C \cap D = \{1\}$ which then $x = 1$.
+  Let $x \in C \cap B$. Then $\pi(x) \in \pi(C) \cap \pi(B) = \pi(C) \cap E = \{1\}$. Then, $\because \pi(x) = 1 \in \faktor{C}{D}$, we have that $x \in D$. Therefore, $x \in C \cap D = \{1\}$ which then $x = 1$.
 
   Since \textbf{Claims 1 \& 2} hold, the result follows by induction.\qed 
 \end{proof}

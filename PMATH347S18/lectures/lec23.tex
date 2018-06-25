@@ -1,0 +1,220 @@
+\chapter{Lecture 23 Jun 25th 2018}%
+\label{chp:lecture_23_jun_25th_2018}
+% chapter lecture_23_jun_25th_2018
+
+\section{Ring (Continued 3)}%
+\label{sec:ring_continued_3}
+% section ring_continued_3
+
+\subsection{Ideals (Continued)}%
+\label{sub:ideals_continued}
+% subsection ideals_continued
+
+\begin{propo}[Ideals of $\mathbb{Z}$ are Principal Ideals]
+\label{propo:ideals_of_z_are_principal_ideals}
+  All ideals of $\mathbb{Z}$ are of the form $\lra{n}$ for some $n \in \mathbb{Z}$. 
+\end{propo}
+
+\begin{proof}
+  Let $A$ be an ideal of $\mathbb{Z}$. If $A = \{0\}$, then $A = \lra{0}$. Otherwise, let $a \in A$ with $a \neq 0$, and $\abs{a}$ be the minimum. Clearly, $\lra{a} = a \mathbb{Z} \subseteq A$. To prove the other inclusion, let $b \in A$. By the \hlnotea{Division Algorithm}, $\exists q, t \in \mathbb{Z}$ with $0 \leq r < \abs{a}$ such that $b = qa + r$. Because $A$ is an ideal, we have $r = b - qa \in A$. Since $\abs{r} < \abs{a}$ which is the minimal case, it must be that $r = 0$. Therefore $b = qa \in \lra{a}$ and so $A \subseteq \lra{a}$.\qed
+\end{proof}
+
+% subsection ideals_continued (end)
+
+\subsection{Isomorphism Theorems for Rings}%
+\label{sub:isomorphism_theorems_for_rings}
+% subsection isomorphism_theorems_for_rings
+
+\begin{defn}[Ring Homomorphism]\index{Ring Homomorphism}\index{Homomorphism}
+\label{defn:ring_homomorphism}
+  Let $R$ and $S$ be rings. A mapping
+  \begin{equation*}
+    \Theta : R \to S
+  \end{equation*}
+  is a ring \hlnoteb{homomorphism} if $\forall a, b \in R$, we have
+  \begin{enumerate}
+    \item $\Theta(a + b) = \Theta(a) + \Theta(b)$
+    \item $\Theta(ab) = \Theta(a) \Theta(b)$
+    \item $\Theta(1_R) = 1_S$
+  \end{enumerate}
+\end{defn}
+
+\begin{note}[Remark]
+  $(2) \notimply (3)$ because $\Theta(1_R) \in S$ does not necessarily have a multiplicative inverse, since $S$ is a ring.
+\end{note}
+
+\begin{eg}
+  The mapping $k \mapsto [k]$ from $\mathbb{Z} \to \mathbb{Z}_n$ is a surjective ring homomorphism.
+\end{eg}
+
+\begin{eg}[Direct Product of Rings]\label{eg:direct_product_of_rings}
+  If $R_1, R_2$ are rings, the projection
+  \begin{equation*}
+    \pi_1 : R_1 \times R_2 \to R_1 \text{ defined by } \pi_1 (r_1, r_2) = r_1
+  \end{equation*}
+  is a surjective ring homomorphism, since
+  \begin{enumerate}
+    \item $\pi_1(r_1 + r_2, q_1 + q_2) = r_1 + r_2 = \pi_1(r_1, q_1) + \pi_1(r_2, q_2)$;
+    \item $\pi_1(r_1 r_2, q_1 q_2) = r_1 r_2 = \pi_1(r_1, q_1) \pi_1(r_2, q_2)$; and
+    \item $\pi(1, 1) = 1$.
+  \end{enumerate}
+  We can a similar $\pi_2 : R_1 \times R_2 \to R_2$ such that $(r_1, r_2) \mapsto r_2$, and we will get that $\pi_2$ is also a surjective ring homomorphism.
+\end{eg}
+
+\begin{propo}[Properties of Ring Homomorphisms]
+\label{propo:properties_of_ring_homomorphisms}
+  Let $\Theta: R \to S$ be a ring homomorphism and let $r \in R$. Then
+  \begin{enumerate}
+    \item $\Theta(0_R) = 0_S$
+    \item $\Theta(-r) = - \Theta(r)$
+    \item $\Theta(kr) = k \Theta(r)$
+    \item $\forall n \in \mathbb{N} \cup \{0\} \quad \Theta(r^n) = \Theta(r)^n$
+    \item $u \in R^* \implies \forall k \in \mathbb{Z} \quad \Theta(u^k) = \Theta(u)^k$
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Note that
+      \begin{equation*}
+        \Theta(r) = \Theta(0_R + r) = \Theta(0_R) + \Theta(r).
+      \end{equation*}
+      Therefore,
+      \begin{equation*}
+        \Theta(0_R) = 0_S
+      \end{equation*}
+      as required.
+    \item Note that
+      \begin{equation*}
+        0_S = \Theta(0_R) = \Theta(r - r) = \Theta(r) + \Theta(-r),
+      \end{equation*}
+      so
+      \begin{equation*}
+        \Theta(-r) = -\Theta(r).
+      \end{equation*}
+    \item Observe that
+      \begin{equation*}
+        \Theta(kr) = \Theta(\underbrace{r + r + \hdots + r}_{k \text{ times }}) = \underbrace{\Theta(r) + \Theta(r) + \hdots + \Theta(r)}_{k \text{ times }} = k \Theta(r)
+      \end{equation*}
+  \end{enumerate}
+  Item 4 follows by induction on the definition of a ring homomorphism, and Item 5 follows as a result from Item 4 because if $u \in R^*$, then $u^{-1} \in R^*$ such that $uu^{-1} = 1_R$.\qed
+\end{proof}
+
+\begin{defn}[Ring Isomorphism]\index{Ring Isomorphism}
+\label{defn:ring_isomorphism}
+  A mapping of rings $\Theta: R \to S$ is a ring \hlnoteb{isomorphism} if $\Theta$ is a bijective ring homomorphism. In this case, we say that $R$ and $S$ are \hlnoteb{isomorphic} and denote that by $R \cong S$.
+\end{defn}
+
+\begin{defn}[Kernel and Image]\index{Kernel}\index{Image}
+\label{defn:kernel_and_image}
+  Let $\Theta: R \to S$ be a ring homomorphism. The \hlnoteb{kernel} of $\Theta$ is defined by
+  \begin{equation*}
+    \ker \Theta = \{r \in R : \Theta(r) = 0_S\}
+  \end{equation*}
+  and the \hlnoteb{image} of $\Theta$ is defined by
+  \begin{equation*}
+    \img \Theta := \Theta(R) = \{\Theta(r) : r \in R\}.
+  \end{equation*}
+\end{defn}
+
+\begin{propo}
+\label{propo:image_of_hm_is_a_subring_n_kernel_of_hm_is_a_normal_subring}
+  Let $\Theta: R \to S$ be a ring homomorphism. Then
+  \begin{enumerate}
+    \item $\img \Theta \leq_r S$
+    \item $\ker \Theta$ is an ideal of $R$
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item $\Theta(1_R) = 1_S$ by definition of a homomorphism so $\Theta(1_R) \in \img \Theta$. Suppose $s_1 = \Theta(r_1)$ and $s_2 = \Theta(r_2)$, then
+      \begin{align*}
+        s_1 - s_2 &= \Theta(r_1) - \Theta(r_2) = \Theta(r_1 - r_2) \\
+        s_1 s_2 &= \Theta(r_1) \Theta(r_2) = \Theta(r_1 r_2)
+      \end{align*}
+      are both in $\img \Theta$. By the \hyperref[spe:subring_test]{Subring Test}, $\img \Theta \leq_r S$.
+
+    \item Since $\ker \Theta$ is an additive subgroup of $R$, it suffices to show that $ra, ar \in \ker \Theta$ for all $r \in R$ and $a \in \ker \Theta$. Let $r \in R$ and $a \in \ker \Theta$. Then
+      \begin{equation*}
+        \Theta(ra) = \Theta(r) \Theta(a) = \Theta(r) \cdot 0 = 0
+      \end{equation*}
+      So $ra \in \ker \Theta$. Similarly so,
+      \begin{equation*}
+        \Theta(ar) = \Theta(a) \Theta(r) = 0 \cdot \Theta(r) = 0
+      \end{equation*}
+      and so $ar \in \ker \Theta$. Therefore, $\ker \Theta$ is an ideal of $R$.
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{thm}[First Isomorphism Theorem for Rings]
+\index{First Isomorphism Theorem}
+\label{thm:first_isomorphism_theorem_for_rings}
+  Let $\Theta : R \to S$ be a ring homomorphism. Then
+  \begin{equation*}
+    \faktor{R}{\ker \Theta} \cong \img \Theta.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Let $A = \ker \Theta$. Since $A$ is an ideal of $R$, we have that $\faktor{R}{A}$ is a ring. Define 
+  \begin{equation*}
+    \bar{\Theta} : \faktor{R}{A} \to \img \Theta \text{ by } ( r + A ) \mapsto \theta(a).
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    r + A = s + A \iff (r - s) \in A \iff \Theta(r - s) = 0 \iff \Theta(r) = \Theta(s).
+  \end{equation*}
+  Therefore $\bar{\Theta}$ is well-defined and injective. Also, it is clear that $\bar{\Theta}$ is surjective. To show that $\bar{\Theta}$ is a homomorphism, note that $\forall r, s \in R$, we have
+  \begin{align*}
+    \bar{\Theta}(r + A + s + A) &= \bar{\Theta}(r + s + A) = \Theta(r + s) \\
+                                &= \Theta(r) + \Theta(s) = \bar{\Theta}(r + A) + \bar{\Theta}(s + A).
+  \end{align*}
+  It follows that $\bar{\Theta}$ is a ring isomorphism and so
+  \begin{equation*}
+    \faktor{R}{\ker \Theta} \cong \img \Theta
+  \end{equation*}
+  as required. \qed
+\end{proof}
+
+\begin{ex}
+  Let $A, B \leq_r R$, where $R$ is a ring. Prove that
+  \begin{enumerate}
+    \item $A \cap B$ is the largest subring of $R$ contained in both $A$ and $B$.
+    \item If either $A$ or $B$ is an ideal of $R$, the sum
+      \begin{equation*}
+        A + B = \{a + b : a \in A, \, b \in B \}
+      \end{equation*}
+      is a subring of $R$, and is the smallest subring of $R$ that contains both $A$ and $B$.
+  \end{enumerate}
+\end{ex}
+
+\begin{thm}[Second Isomorphism Theorem for Rings]
+\index{Second Isomorphism Theorem}
+\label{thm:second_isomorphism_theorem_for_rings}
+  Let $A$ be a subring and $B$ an ideal of a ring $R$. Then
+  \begin{enumerate}
+    \item $A + B \leq_r R$;
+    \item $B$ is an ideal of $A + B$;
+    \item $A \cap B$ is an ideal of $A$; and
+    \item 
+      \begin{equation*}
+        \faktor{(A + B)}{B} \cong \faktor{A}{(A \cap B)}
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}[Third Isomorphism Theorem for Rings]
+\index{Third Isomorphism Theorem}
+\label{thm:third_isomorphism_theorem_for_rings}
+  Let $A$ and $B$ be ideals of $R$ with $A \subseteq B$, then $\faktor{B}{A}$ is an ideal of $\faktor{R}{A}$ and
+  \begin{equation*}
+    \left(\faktor{R}{A}\right)\Big/\left(\faktor{B}{A}\right) \cong \faktor{R}{B}.
+  \end{equation*}
+\end{thm}
+
+% subsection isomorphism_theorems_for_rings (end)
+
+% section ring_continued_3 (end)
+
+% chapter lecture_23_jun_25th_2018 (end)
