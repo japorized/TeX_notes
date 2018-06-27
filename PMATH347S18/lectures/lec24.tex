@@ -1,0 +1,236 @@
+\chapter{Lecture 24 Jun 27th 2018}%
+\label{chp:lecture_24_jun_27th_2018}
+% chapter lecture_24_jun_27th_2018
+
+\section{Rings (Continued 4)}%
+\label{sec:rings_continued_4}
+% section rings_continued_4
+
+\subsection{Isomorphism Theorems for Rings (Continued)}%
+\label{sub:isomorphism_theorems_for_rings_continued}
+% subsection isomorphism_theorems_for_rings_continued
+
+\begin{thm}[Chinese Remainder Theorem]
+\index{Chinese Remainder Theorem}
+\label{thm:chinese_remainder_theorem}
+  Let $A$ and $B$ be ideals of $R$.
+  \begin{enumerate}
+    \item $A + B = R \implies \faktor{R}{(A \cap B)} \cong \faktor{R}{A} \times \faktor{R}{B}$
+    \item $A + B = R \, \land \, A \cap B = \{0\} \implies R \cong \faktor{R}{A} \times \faktor{R}{B}$
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  It suffices to prove $(1)$ since if $(1)$ is true and $A \cap B = \{0\}$, then $(2)$ immediately follows.
+
+  Define
+  \begin{equation*}
+    \Theta: R \to \faktor{R}{A} \times \faktor{R}{B} \qquad r \mapsto ( r + A, r + B )
+  \end{equation*}
+  Then $\Theta$ is a ring homomorphism \sidenote{
+  \begin{ex}
+    Prove that $\Theta$ is a ring homomorphism.
+  \end{ex}
+  }.
+
+  \begin{proof}[$\Theta$ is a ring homomorphism]
+    $\forall r, s \in R$, we have
+    \begin{align*}
+      \Theta(rs) &= (rs + A, rs + B) \\
+                 &\overset{(*)}{=} (r + A, r + B)(s + A, s + B) \\
+                 &= \Theta(r) \Theta(s)
+    \end{align*}
+    where $(*)$ is by \cref{propo:construction_of_the_quotient_ring}. Also by the same proposition, we have
+    \begin{equation*}
+      \Theta(1) = (1 + A, 1 + B).
+    \end{equation*}
+    Then,
+    \begin{align*}
+      \Theta(r + s) &= (r + s + A, r + s + B) \\
+                    &\overset{(\dagger)}{=} (r + A, r + B) + (s + A, s + B) \\
+                    &= \Theta(r) + \Theta(s)
+    \end{align*}
+    where $(\dagger)$ is by \cref{propo:properties_of_the_additive_quotient_group}.
+  \end{proof}
+  Note that $\ker \Theta = A \cap B$, since
+  \begin{equation*}
+    \ker \Theta = \{ r \in R : \Theta(r) = (A, B) \} = \{r \in A \, \land \, r \in B \} = A \cap B.
+  \end{equation*}
+  To show that $\Theta$ is surjective, let $(s + A, t + B) \in \faktor{R}{A} \times \faktor{R}{B}$ with $s, \, t \in R$. Since $A + B = R$, $\exists a \in A, \, \exists b \in B$ such that $a + b = 1$. Let $r = sb + ta$. Then
+  \begin{align*}
+    s - r &= s - sb - ta = s(1 - b) - ta = sa - ta = (s - t) a \in A \\
+    t - r &= t - sb - ta = t(1 - a) - sb = tb - sb = (t - s) b \in B
+  \end{align*}
+  and so by \cref{propo:properties_of_the_additive_quotient_group},
+  \begin{equation*}
+    s + A = r + A \text{ and } t + B = r + B.
+  \end{equation*}
+  Therefore
+  \begin{equation*}
+    \Theta(r) = (r + A, r + B) = (s + A, t + B),
+  \end{equation*}
+  and so $\Theta$ is surjecive. Then by the \cref{thm:first_isomorphism_theorem_for_rings},
+  \begin{equation*}
+    \faktor{R}{(A \cap B)} \cong \faktor{R}{A} \times \faktor{R}{B}.
+  \end{equation*}\qed
+\end{proof}
+
+\newthought{Why is} \cref{thm:chinese_remainder_theorem} called the Chinese Remainder Theorem?
+
+Let $m, n \in \mathbb{N}$ with $\gcd(m, n) = 1$. Then we know that
+\begin{equation*}
+  m \mathbb{Z} \cap n \mathbb{Z} = mn \mathbb{Z}.
+\end{equation*}
+Also, $m \mathbb{Z} + n \mathbb{Z} = \mathbb{Z}$ since $1 = ma + nb$ for some $a, b \in \mathbb{Z}$ by \hlnotea{Bezout's Lemma}. And so:
+
+\begin{crly}
+\label{crly:why_crt}
+  \begin{enumerate}
+    \item If $m, n \in \mathbb{N}$ with $\gcd(m, n) = 1$, then
+      \begin{equation*}
+        \faktor{\mathbb{Z}}{mn \mathbb{Z}} \cong \faktor{\mathbb{Z}}{m \mathbb{Z}} \times \faktor{\mathbb{Z}}{n \mathbb{Z}}
+      \end{equation*}
+      i.e.
+      \begin{equation*}
+        \mathbb{Z}_{mn} \cong \mathbb{Z}_m \times \mathbb{Z}_n
+      \end{equation*}
+
+    \item If $m, n \in \mathbb{N}$ with $m, n \geq 2$ and $\gcd(m, n) = 1$, then
+      \begin{equation*}
+        \phi(mn) = \phi(m)\phi(n)
+      \end{equation*}
+      where $\phi(m) = \abs{\mathbb{Z}_m^*}$ is \hldefn{Euler's $\phi$-function}\index{Euler's Totient Function}.
+  \end{enumerate}
+\end{crly}
+
+\newthought{Let} $p$ be a prime. Recall that one consequence of \hyperref[thm:lagrange_s_theorem]{Lagrange's Theorem} is that every group $G$ of order $p$ is cyclic, i.e. $G \cong C_p$.
+
+An analogous notion in rings is the following:
+
+\begin{propo}[Ring With Prime Order Is Isomorphic to Integer Modulo Prime]
+\label{propo:ring_with_prime_order_is_isomorphic_to_integer_modulo_prime}
+  If $R$ is a non-trivial ring with $\abs{R} = p$ where $p$ is prime, then $R \cong \mathbb{Z}_p$.
+\end{propo}
+
+\begin{proof}
+  Define
+  \begin{equation*}
+    \Theta : \mathbb{Z}_p \to R \qquad [k] \mapsto k \cdot 1_R.
+  \end{equation*}
+  Note that since $R$ is an additive group with $\abs{R} = p$, by \hyperref[thm:lagrange_s_theorem]{Lagrange's Theorem}, $o(1_R) = 1$ or $p$. Since $R$ is non-trivial, we have that $1_R \neq 0$ by the remark on the definition of a \hyperref[defn:trivial_ring]{trivial ring}, and so $o(1_R) \neq 1$. Thus $o(1_R) = p$. Then, by \cref{propo:implications_of_the_characteristic}, we have
+  \begin{equation*}
+    [k] = [m] \iff p \, | \, (k - m) \iff (k - m) 1_R = 0 \iff k \cdot 1_R = m \cdot 1_R
+  \end{equation*}
+  in $R$. Thus, $\Theta$ is well-defined and injective. $\Theta$ is also a ring homomorphism \sidenote{
+  \begin{ex}
+    Prove that $\Theta$ is a ring homomorphism.
+  \end{ex}
+  }.
+
+  \begin{proof}[$\Theta$ is a ring homomorphism]
+    $\forall [a], [b] \in \mathbb{Z}$, we have
+    \begin{align*}
+      \Theta([a][b]) &= \Theta( [ab] ) = ab \cdot 1_R \\
+                     &= ( a \cdot 1_R )( b \cdot 1_R ) = \Theta([a])\Theta([b]).
+    \end{align*}
+    \begin{equation*}
+      \Theta([1]) = 1 \cdot 1_R = 1_R
+    \end{equation*}
+    and
+    \begin{align*}
+      \Theta([a] + [b]) &= \Theta([ a + b ]) = (a + b) \cdot 1_R \\
+                        &= a \cdot 1_R + b \cdot 1_R = \Theta([a]) + \Theta([b]).
+    \end{align*}
+    So $\Theta$ is a ring homomorphism.
+  \end{proof}
+  Now because $\abs{\mathbb{Z}_p} = p = \abs{R}$ and $\Theta$ is injective, $\Theta$ must be surjective. Therefore $\Theta$ is a ring isomorphism and hence $R \cong \mathbb{Z}_p$ as required. \qed
+\end{proof}
+
+% subsection isomorphism_theorems_for_rings_continued (end)
+
+% section rings_continued_4 (end)
+
+\section{Commutative Rings}%
+\label{sec:commutative_rings}
+% section commutative_rings
+
+\subsection{Integral Domain and Fields}%
+\label{sub:integral_domain_and_fields}
+% subsection integral_domain_and_fields
+
+\begin{defn}[Units]\index{Units}
+\label{defn:units_and_group_of_units}
+  Let $R$ be a ring. We say that $u \in R$ is a \hlnoteb{unit} if $u$ has a multiplicative inverse in $R$, and denote it by $u^{-1}$. We have
+  \begin{equation*}
+    uu^{-1} = 1 = u^{-1} u
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  If $u$ is a unit in $R$, and $r, s \in R$, we have
+  \begin{align*}
+    ur = us &\implies r = s \quad \text{\hlnotea{( Right Cancellation )}} \\
+    ru = su &\implies r = s \quad \text{\hlnotea{( Left Cancellation )}}
+  \end{align*}
+  Let $R^*$ denote the set of all units in $R$. We know that the definition of a ring is that $R$ is ``almost'' a group under multiplication except that its elements do not necessarily have multiplicative inverses. Since $R^* \susbeteq R$ is the set that contains all units, i.e. all elements with multiplicative inverses in $R$, we have that $(R^*, \cdot)$ is a group. This is called the \hldefn{Group of Units} of $R$.
+\end{note}
+
+\begin{eg}
+  Note that $2$ is a unit in $\mathbb{Q}$, but it is not a unit in $\mathbb{Z}$. We have that
+  \begin{equation*}
+    \mathbb{Q}^* = \mathbb{Q} \setminus \{0\} \text{ and } \mathbb{Z}^* = \{ \pm 1 \}
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Consider the ring of \hldefn{Gaussian Integers},
+  \begin{equation*}
+    \mathbb{Z}[i] = \{a + bi : a, b \in \mathbb{Z}, \, i^2 = -1 \} \subseteq \mathbb{C}.
+  \end{equation*}
+  Then\sidenote{\hlwarn{Proof to be added once A4 is over.}}
+  \begin{equation*}
+    \mathbb{Z}[i]^* = \{ \pm 1, \pm i \}.
+  \end{equation*}
+\end{eg}
+
+\begin{defn}[Division Ring and Field]\index{Division Ring}\index{Field}
+\label{defn:division_ring_and_field}
+  A non-trivial ring $R$ is a \hlnoteb{division ring} if
+  \begin{equation*}
+    R^* = R \setminus \{0\}.
+  \end{equation*}
+  A commutative division ring is a \hlnoteb{field}.
+\end{defn}
+
+\begin{eg}
+  $\mathbb{Q}, \, \mathbb{R}, \, \mathbb{C}$ are fields but $\mathbb{Z}$ is not.
+\end{eg}
+
+\begin{eg}
+  $\mathbb{Z}_n$ is a field $\iff \, n$ is prime.
+\end{eg}
+
+\begin{remark}
+\marginnote{This remark is not as useful or spectacular within this course, but it will be once we go into PMATH348 contents.} If $R$ is a division ring or a field, then its only ideals are $\{0\}$ or $R$, since if $A \neq \{0\}$ is an ideal of $R$, then $\exists a \in A$, $a \neq 0$, such that $1 = aa^{-1} \in A$, which implies that $A = R$ by \cref{propo:the_only_ideal_with_the_multiplicative_identity_is_the_ring_itself}.
+\end{remark}
+
+\begin{remark}
+  It can be shown that every finite division ring is a field, and this is known as \href{https://en.wikipedia.org/wiki/Wedderburn_Theorem}{Wedderburn's Theorem}.
+\end{remark}
+
+\newthought{Note that} if $n = ab$ for some integer $n$ with $0 < a, b < n$, then in $\mathbb{Z}$ we have
+\begin{equation*}
+  [a][b] = [n] = [0]
+\end{equation*}
+but $[a] \neq [0] \neq [b]$ by our definition of $a, b$.
+
+\begin{defn}[Zero Divisor]\index{Zero Divisor}
+\label{defn:zero_divisor}
+  Let $R$ be a non-trivial ring. If $0 \neq a \in R$, then $a$ is called a \hlnoteb{zero divisor} if $\exists 0 \neq b \in R$ such that $ab = 0$.
+\end{defn}
+
+% subsection integral_domain_and_fields (end)
+
+% section commutative_rings (end)
+
+% chapter lecture_24_jun_27th_2018 (end)
