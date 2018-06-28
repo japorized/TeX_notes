@@ -4312,6 +4312,101 @@ for $t \in (-h, h)$.
 
 % chapter lecture_13_jun_26th_2018 (end)
 
+\chapter{Lecture 14 Jun 19th 2018}%
+\label{chp:lecture_14_jun_19th_2018}
+% chapter lecture_14_jun_19th_2018
+
+\section{Functions of Random Variables (Continued 2)}%
+\label{sec:functions_of_random_variables_continued_2}
+% section functions_of_random_variables_continued_2
+
+\subsection{Moment Generating Function Method (Continued)}%
+\label{sub:moment_generating_function_method_continued}
+% subsection moment_generating_function_method_continued
+
+\begin{thm}[Gaussian Distribution]\index{Gaussian Distribution}
+\label{thm:gaussian_distribution}
+If $X_i \sim \Nor( \mu_i, \sigma_i^2 )$, with $i = 1, ..., n$ independently, then
+\begin{equation*}
+  \sum_{i=1}^{n} a_i X_i \sim \Nor\left( \sum_{i=1}^{n} a_i \mu_i, \sum_{i=1}^{n} a_i^2 \sigma_i^2 \right).
+\end{equation*}
+\end{thm}
+
+\begin{proof}
+  Let $Y_i = a_i X_i$. Then by \cref{thm:mgf_of_a_linear_transformation}, we have
+  \begin{equation*}
+    M_{Y_i}(t) = M_{X_i}(a_i t) = \exp\left[ \mu_i a_i t + \frac{\sigma_i^2 a_i^2 t^2}{2} \right],
+  \end{equation*}
+  which implies that $Y_i \sim \Nor( a_i \mu_i, a_i^2 \sigma_i^2 )$ by \cref{thm:uniqueness_of_the_mgf}. Then let $Y = \sum_{i=1}^{n} Y_i$. Then
+  \begin{equation*}
+    M_Y(t) = \prod_{i=1}^{n} \exp\left[ \mu_i a_i t + \frac{\sigma_i^2 a_i^2 t_2}{2} \right] = \exp\left[ t \sum_{i=1}^{n} a_i \mu_i + \frac{t^2}{2} \sum_{i=1}^{n} a_i^2 \sigma_i^2 \right],
+  \end{equation*}
+  which implies that $Y \sim \Nor\left( \sum_{i=1}^{n} a_i \mu_i , \sum_{i=1}^{n} a_i^2 \sigma_i^2 \right)$.\qed
+\end{proof}
+
+\begin{thm}[Properties of the Gaussian Distribution]
+\label{thm:properties_of_the_gaussian_distribution}
+  Asumme $X_1, ..., X_n \sim \Nor( \mu, \sigma_2 )$, independently, where $\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X-i$, and $S^2 = \frac{\sum_{i=1}^{n} ( X_i - \bar{X} )^2}{n - 1}$. Then
+  \begin{enumerate}
+    \item $\bar{X} \sim \Nor\left( \mu, \frac{\sigma^2}{n} \right)$.
+    \item (\hldefn{Cochran's Theorem}) $\frac{( n - 1 ) S^2}{\sigma^2} = \frac{\sum_{i=1}^{n} (X_i - \bar{X})^2}{\sigma^2} \sim \chi^2 ( n - 1 )$.
+    \item (\hldefn{t-test}) $\frac{\bar{X} - \mu}{S / \sqrt{n}} \sim t(n - 1)$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Let $Y_i = \frac{X_i}{n}$. \cref{thm:gaussian_distribution} implies that $Y_i \sim \Nor\left( \frac{\mu}{n} , \frac{\sigma^2}{n^2} \right)$. Let $Y = \sum_{i=1}^{n} Y_i$. Then \cref{thm:gaussian_distribution} implies that $Y \sim \Nor\left( \sum_{i=1}^{n} \frac{\mu}{n}, \sum_{i=1}^{n} \frac{\sigma^2}{n^2} \right) = \Nor\left( \mu, \frac{\sigma^2}{n} \right)$.\qed
+    \item The proof of Cochran's Theorem is beyond the scope of this course, for it uses knowledge from linear algebra and involving Fourier Transforms. [\href{https://en.wikipedia.org/wiki/Cochran\%27s_theorem}{Reference - Wikipedia}]
+    \item The proof of this statement is non-trivial: [\href{https://en.wikipedia.org/wiki/Student\%27s\_t\-distribution}{Reference - Wikipedia}] [\href{https://math.stackexchange.com/questions/474733/derivation-of-the-density-function-of-student-t-distribution-from-this-big-integ}{Reference - Math SE}]
+ \end{enumerate}
+\end{proof}
+
+\begin{thm}[F Distribution]
+\index{F Distribution}
+\label{thm:f_distribution}
+Suppose $X_1, ..., X_n$ is a random sample from the $\Nor(\mu_1, \sigma_1^2)$ distribution and independently $Y_1, ..., Y_m$ is a random sample from the $\Nor(\mu_2, \sigma_2^2)$ distribution. Let
+\begin{equation*}
+  S_1^2 = \frac{1}{n - 1} \sum_{i=1}^{n} (X_i - \bar{X})^2 \text{ and } S_2^2 = \frac{1}{m - 1} \sum_{i=1}^{m} (Y_i - \bar{Y})^2.
+\end{equation*}
+Then
+\begin{equation*}
+  \frac{S_1^2 / \sigma_1^2}{S_2^2 / \sigma_2^2} \sim F( n - 1, m - 1 ).
+\end{equation*}
+\end{thm}
+
+\begin{proof}
+  This is, once again, an incomplete proof. Rigor shall be appended where it is due or they shall be stated with reference, or if it is at a level that I cannot understand and that I cannot find a reference, I shall state that as well.
+
+  Note that the definition of the F distribution is as follows:
+  \begin{equation*}
+    F_{\gamma_1, \gamma_2} = \frac{\chi^2( \gamma_1 ) / \gamma_1}{\chi^2( \gamma_2 ) / \gamma_2}
+  \end{equation*}
+  where $\chi^2(\gamma_1)$ and $\chi^2(\gamma_2)$ are independent.
+
+  Now we are given that $X_1, ..., X_n$ and $Y_1, ..., Y_m$ are independent of one another. It can likely be shown, using induction, that the following two are independent of one another:
+  \begin{gather*}
+    \sum_{i=1}^{n} \left( \frac{X_i - \bar{X}}{\sigma_1} \right)^2 \sim \chi^2( n - 1 ) \\
+    \sum_{j=1}^{m} \left( \frac{Y_j - \bar{Y}}{\sigma_2} \right)^2 \sim \chi^2( m - 1 ).
+  \end{gather*}
+  Then
+  \begin{equation*}
+    \frac{\sum\limits_{i=1}^{n} \left( \frac{X_1 - \bar{X}}{\sigma_1} \right)^2}{\sum\limits_{j=1}^{m} \left( \frac{Y_j - \bar{Y}}{\sigma_2} \right)^2}
+    &= \frac{( n - 1 ) S_1^2 / \sigma_1^2}{( m - 1 ) S_2^2 / \sigma_2^2}.
+  \end{equation*}
+  With that, we have that
+  \begin{equation*}
+    \frac{S_1^2 / \sigma_1^2}{S_2^2 / \sigma_2^2} = \frac{\frac{(n-1)S_1^2}{\sigma_1^2} / ( n - 1 )}{\frac{(m-1)S_2^2}{\sigma_2^2} / ( m - 1 )}.
+  \end{equation*}
+  The result follows.
+\end{proof}
+
+% subsection moment_generating_function_method_continued (end)
+
+% section functions_of_random_variables_continued_2 (end)
+
+% chapter lecture_14_jun_19th_2018 (end)
+
 \nobibliography*
 \bibliography{bibliography}
 
