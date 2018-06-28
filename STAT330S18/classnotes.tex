@@ -4,12 +4,19 @@
 \setcounter{tocdepth}{5}
 
 \renewcommand{\baselinestretch}{1.1}
+\usepackage{longtable,multirow,booktabs}
 
 \input{latex-classnotes-preamble.tex}
+
+\setlength\extrarowheight{10pt}
+\newcolumntype{e}{>{$}l<{$}}
+\newcolumntype{w}{>{$}r<{$}}
+\newcolumntype{m}{>{$}c<{$}}
 
 \DeclareMathOperator{\Bin}{Bin }
 \DeclareMathOperator{\Geo}{Geo }
 \DeclareMathOperator{\Poi}{Poi }
+\DeclareMathOperator{\NB}{NB }
 \DeclareMathOperator{\Exp}{Exp }
 \DeclareMathOperator{\Unif}{Unif }
 \DeclareMathOperator{\Nor}{N }
@@ -3764,7 +3771,7 @@ The \hlnoteb{multinomial distribution} is an extension of the binomial distribut
         X_1 \, | \, X_2 = x_2 \sim N \left( \mu_1 + \rho \frac{\sigma_1}{\sigma_2}( x_2 - \mu_2 ), \sigma_1^2 (1 - \rho^2) \right)
       \end{gather*}
 
-    \item $(X - \mu)^T \Sigma^{-1} (X - \mu_ \sim \chi^2 (2))$
+    \item $(X - \mu)^T \Sigma^{-1} (X - \mu) \sim \chi^2 (2)$
   \end{enumerate}
 \end{propo}
 
@@ -3983,7 +3990,7 @@ Let $X$ and $Y$ be rvs, and $R_{XY} = \supp[(X, Y)] \in \mathbb{R}^2$. We define
 \begin{thm}[One-to-One Bivariate Transformations]
 \index{One-to-One Bivariate Transformations}
 \label{thm:one_to_one_bivariate_transformations}
-  \marginote{This is a generalization of \cref{thm:one_to_one_transformation_of_a_random_variable}.} Let $X$ and $Y$ be continuous rvs with joint pdf $f_{XY}$ and let $R_{XY} = \{( x, y ) : f(x, y) > 0\}$ be the support set of $(X, Y)$, and $R_{UV}$ be the support set of $(U, V)$. Suppose the transformation $S: R_{XY} \to R_{UV}$ defined by
+  \marginnote{This is a generalization of \cref{thm:one_to_one_transformation_of_a_random_variable}.} Let $X$ and $Y$ be continuous rvs with joint pdf $f_{XY}$ and let $R_{XY} = \{( x, y ) : f(x, y) > 0\}$ be the support set of $(X, Y)$, and $R_{UV}$ be the support set of $(U, V)$. Suppose the transformation $S: R_{XY} \to R_{UV}$ defined by
   \begin{equation*}
     U = h_1(X, Y) \quad V = h_2(X, Y)
   \end{equation*}
@@ -4085,10 +4092,17 @@ Given the setup in \cref{defn:one_to_one_bivariate_transformation}, we have that
     f_{U, V}(u, v) &= f_{X, Y}(x, y) \cdot \abs{J} = f_X(x) f_Y(y) \cdot \abs{J} \\
                    &= \frac{x^{a - 1} e^{-x}}{\Gamma(a)} \frac{y^{b - 1} e^{-y}}{\Gamma(b)} \cdot \abs{J} \\
                    &= \frac{e^{-a} e^{-b}}{\Gamma(a) \Gamma(b)} (uv)^{a - 1} u^{b - 1} ( 1 - v )^{b - 1} u \\
-                   &= \underbrace{ \frac{u^{a + b - 1} e^{-(a + b)}}{\Gamma(a + b)} }_{\text{pdf of } \Gam(a + b, 1)} \cdot \underbrace{ \frac{\Gamma(a + b)}{\Gamma(a) \Gamma(b)} v^{a - 1} (1 - v)^{b - 1} }_{\text{pdf of } \Beta(a, b)}
+                   &= \underbrace{ \frac{u^{a + b - 1} e^{-(a + b)}}{\Gamma(a + b)} }_{\text{pdf of } \Gam(a + b, 1)} \cdot \underbrace{ \frac{\Gamma(a + b)}{\Gamma(a) \Gamma(b)} v^{a - 1} (1 - v)^{b - 1} }_{\text{pdf of } \BetaDist(a, b)}
   \end{align*}
   We have already shown that $U$ is a non-negative rv, and so $U \sim \Gam(a + b, 1)$ as required. Note that for $V$, we have
   $X + Y > X > 0 \implies 1 > \frac{X}{X + Y} > 0 \quad \because X + Y \neq 0$ and so $0 < V < 1$. Therefore $V \sim \BetaDist(a, b)$.
+
+  With that, we can look for $E[V]$.
+  \begin{align*}
+    E[V] &= \int_{0}^{1} v \frac{\Gamma(a + b)}{\Gamma(a) \Gamma(b)} v^{a - 1} (1 - v)^{b - 1} \dif{v} \\
+         &= \frac{\Gamma(a + b) \Gamma(a + 1)}{\Gamma(a) \Gamma(a + b + 1)} \int_{0}^{1} \underbrace{ \frac{\Gamma(a + b + 1)}{\Gamma(a + 1) \Gamma(b)} v^a (1 - v)^{b - 1} }_{\text{pdf of } \BetaDist(a + 1, b)} \dif{v} \\
+         &= \frac{a \Gamma(a) \Gamma(a + b)}{(a + b) \Gamma(a) \Gamma(a + b)} = \frac{a}{a + b}
+  \end{align*}
 \end{solution}
 
 % subsection one_to_one_bivariate_transformations (end)
@@ -4097,8 +4111,284 @@ Given the setup in \cref{defn:one_to_one_bivariate_transformation}, we have that
 
 % chapter lecture_12_jun_12th_2018 (end)
 
+\chapter{Lecture 13 Jun 26th 2018}%
+\label{chp:lecture_13_jun_26th_2018}
+% chapter lecture_13_jun_26th_2018
+
+\section{Functions of Random Variables (Continued)}%
+\label{sec:functions_of_random_variables_continued}
+% section functions_of_random_variables_continued
+
+\subsection{One to One Bivariate Transformations (Continued)}%
+\label{sub:one_to_one_bivariate_transformations_continued}
+% subsection one_to_one_bivariate_transformations_continued
+
+\begin{eg}[Example 4.5 (Course Notes 4.2.8)]
+  Suppose $X$ and $Y$ are continuous rvs with joint pdf
+  \begin{equation*}
+    f(x, y) = e^{-x - y} \mathbb{1}_{\{0 < x, y < \infty\}}.
+  \end{equation*}
+  Let $U = X + Y$ and $V = X - Y$. Find the joint pdf of $U$ and $V$. (Note: Be sure to specify the support of $(U, V)$.) Then, find the marginal pdf of $U$ and $V$ respectively.
+\end{eg}
+
+\begin{solution}
+  Note that because $0 < x, y < \infty$,
+  \begin{gather*}
+    u = x + y \implies 0 < u < \infty \\
+    v = x - y \implies -\infty < v < \infty
+  \end{gather*}
+  The Jacobian is
+  \begin{equation*}
+    \abs{ \frac{\partial (u, v)}{\partial (x, y)} } = \abs{ \begin{vmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{vmatrix} } = \abs{-2} = 2
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \abs{ \frac{\partial(x, y)}{\partial (u, v)} } = \abs{ \frac{\partial (u, v)}{\partial (x, y)} }^{-1} = \frac{1}{2}.
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    X = \frac{U - V}{2} \quad Y = \frac{U - V}{2}.
+  \end{equation*}
+  and so
+  \begin{gather*}
+    x = \frac{u + v}{2} > 0 \implies u > -v \\
+    y = \frac{u - v}{2} > 0 \implies u > v.
+  \end{gather*}
+  The diagram to the right shows the support of $U, V$.\marginnote{
+  \begin{tikzpicture}
+      \draw[->] (-0.5, 0) -- (3, 0) node[right] {$u$};
+      \draw[->] (0, -3) -- (0, 3) node[above] {$v$};
+  		\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25] (0,0) -- (3,-3) -- (3,3) -- (0,0);
+      \draw[domain=-0.5:3] plot ({\x},{\x}) node[right] [label=right:\textcolor{base16-eighties-light}{$v = u$}] {};
+      \draw[domain=-0.5:3] plot ({\x},{-\x}) node[right] [label=right:{$v = -u$}] {};
+  \end{tikzpicture}
+  }
+  With that,
+  \begin{align*}
+    g(u, v) &= f( \frac{u + v}{2}, \frac{u - v}{2} ) \cdot \frac{1}{2} \\
+            &= \frac{1}{2} e^{- \left( \frac{u + v}{2} \right) - \left( \frac{u - v}{2} \right)} = \frac{1}{2} e^{-u}.
+  \end{align*}
+  With that, the marginal pdf of $V$ is\sidenote{$V$ is also called the \href{http://atomic.phys.uni-sofia.bg/local/nist-e-handbook/e-handbook/eda/section3/eda366c.htm}{Double Exponential Distribution}.}
+  \begin{align*}
+    v < 0 \implies f_V(v) &= \int_{-v}^{\infty} \frac{1}{2} e^{-u} \dif{u} = \frac{1}{2} e^v \\
+    v \geq 0 \implies f_V(v) &= \int_{v}^{\infty} \frac{1}{2} e^{-v} \dif{u} = \frac{1}{2} e^{-v}.
+  \end{align*}
+  For the marignal pdf of $U$, we have
+  \begin{align*}
+    f_U(u) &= \int_{-u}^{u} \frac{1}{2}e^{-u} \dif{v} = ue^{-u} \quad \text{ for } 0 < u \leq \infty.
+  \end{align*}
+\end{solution}
+
+% subsection one_to_one_bivariate_transformations_continued (end)
+
+\subsection{Moment Generating Function Method}%
+\label{sub:moment_generating_function_method}
+% subsection moment_generating_function_method
+
+This method is particularly useful in finding distributions of sums of independent rvs.
+
+\begin{thm}[Sums of MGF]
+\label{thm:sums_of_mgf}
+Suppose $X_1, ..., X_n$ are independent rvs and $X_i$ has mgf $M_i(t)$ which exists for $t \in (-h, h)$ for some $H > 0$. The mgf of $Y = \sum_{i=1}^{n} X_i$ is given by
+\begin{equation*}
+  M_Y(t) = \prod_{i=1}^{n} M_i(t)
+\end{equation*}
+for $t \in (-h, h)$.
+\end{thm}
+
+\begin{proof}
+  Observe that
+  \begin{align*}
+    M_Y(t) &= E\left[ e^{tY} \right] = E\left[ e^{t \sum_{i=1}^{n} X_i} \right] = E\left[ \prod_{i=1}^{n} e^{tX_i} \right] \\
+           &= \prod_{i=1}^{n} E\left[ e^{tX_i} \right] = \prod_{i=1}^{n} M_i(t)
+  \end{align*}
+  and $t \in (-h, h)$ is preserved. \qed
+\end{proof}
+
+\begin{note}
+  \begin{enumerate}
+    \item If $X_i$'s are IID rvs each with mgf $M(t)$ then $Y$ has mgf
+      \begin{equation*}
+        M_Y(t) = [ M(t) ]^n \quad \text{ for } t \in (-h, h).
+      \end{equation*}
+
+    \item Used in conjunction with the Uniqueness Theorem for mgfs, this theorem can be used to find the distribution of $Y$.
+  \end{enumerate}
+\end{note}
+
+\begin{ex}
+  Show the following results:
+  \begin{enumerate}
+    \item If $X \sim \Gam(\alpha, \beta)$, where $\alpha \in \mathbb{N}$, then $\frac{2X}{\beta} \sim \chi^2 (2 \alpha)$.
+    \item If $X_i \sim \Gam(\alpha_i, \beta), \, i = 1, ..., n$ independently, then
+      \begin{equation*}
+        \sum_{i=1}^{n} X_i \sim \Gam\left( \sum_{i=1}^{n} \alpha_i, \, \beta \right).
+      \end{equation*}
+    \item If $X_i \sim \Gam(1, \beta) = \Exp(\beta)$, $i = 1, ..., n$ independently, then
+      \begin{equation*}
+        \sum_{i=1}^{n} X_i  \sim \Gam(n, \, \beta).
+      \end{equation*}
+    \item If $X_i \sim \Gam\left( \frac{k_i}{2}, 2 \right) = \chi^2 ( k_i )$, $i = 1, ..., n$ independently, then
+      \begin{equation*}
+        \sum_{i=1}^{n} X_i \sim \chi^2 \left( \sum_{i=1}^{n} k_i \right).
+      \end{equation*}
+    \item If $X_i \sim \Nor( \mu, \, \sigma^2 )$, $i = 1, ..., n$ independently, then
+      \begin{equation*}
+        \sum_{i=1}^{n} \left( \frac{X_i - \mu}{\sigma} \right)^2 \sim \chi^2(n).
+      \end{equation*}
+    \item If $X_i \sim \Poi(\mu_i)$, $i = 1, ..., n$ independently, then
+      \begin{equation*}
+        \sum_{i=1}^{n} X_i \sim \Poi\left( \sum_{i=1}^{n} \mu_i \right).
+      \end{equation*}
+    \item If $X_i \sim \Bin(n_i, p)$, $i = 1, ..., n$ independently, then
+      \begin{equation*}
+        \sum_{i=1}^{n} X_i \sim \Bin\left( \sum_{i=1}^{n} n_i, p \right).
+      \end{equation*}
+    \item If $X_i \sim \NB(k_i, p)$, $i = 1, ..., n$ indepdently, then
+      \begin{equation*}
+        \sum_{i=1}^{n} X_i \sim \NB\left( \sum_{i=1}^{n} k_i, p \right).
+      \end{equation*}
+  \end{enumerate}
+\end{ex}
+
+\begin{solution}
+  \begin{enumerate}
+    \item Using the mgf method,
+      \begin{align*}
+        M_Y(t) &= E\left[ e^{tY} \right] = E\left[ e^{t \cdot \frac{2x}{\beta}} \right] = \int_{0}^{\infty} e^{ \frac{2tx}{\beta} } \frac{1}{\beta^\alpha \Gamma(a)} x^{\alpha - 1} e^{- \frac{x}{\beta}} \dif{x} \\
+               &= \frac{1}{\beta^\alpha} \int_{0}^{\infty} \frac{1}{\Gamma(a)} x^{\alpha - 1} e^{ - \frac{x ( 1 - 2t )}{\beta} } \dif{x} \\
+               &\overset{(*)}{=} \frac{1}{\beta^\alpha} \left( \frac{\beta}{1 - 2t} \right)^\alpha \int_{0}^{\infty} \underbrace{ \frac{1}{\left( \frac{\beta}{1 - 2t} \right) \Gamma(\alpha)} x^{\alpha - 1} e^{ - \frac{x}{\left( \frac{\beta}{1 - 2t} \right)} } }_{\text{pdf of } \Gam\left(\alpha, \frac{\beta}{1 - 2t}\right)} \dif{x} \\
+               &= \left( \frac{1}{1 - 2t} \right)^\alpha = ( 1 - 2t )^\alpha
+      \end{align*}
+      where in $(*)$ we note that $1 - 2t > 0$ and so $t > \frac{1}{2}$. Observe that the mgf of $Y$ is the mgf of $\chi^2 ( 2 \alpha )$ and so by the \cref{thm:uniqueness_of_the_mgf}, $Y = \frac{2X}{\beta} \sim \chi^2 (2 \alpha)$.
+    \item Using the mgf method, let $Y = \sum_{i=1}^{n} X_i$
+      \begin{align*}
+        M_Y(t) &= E\left[ e^{tY} \right] = E\left[ \prod_{i=1}^{n} e^{tX_i} \right] = \prod_{i=1}^{n} E[ e^{tX_i} ] \\
+               &= \prod_{i=1}^{n} M_{X_i}(t) = \prod_{i=1}^{n} ( 1 - \beta t )^{-\alpha_1} = (1 - \beta t)^{- \sum_{i=1}^{n} \alpha_1}
+      \end{align*}
+      and we observe that the last term is the mgf of $\Gam\left( \sum_{i=1}^{n} \alpha_i, \beta \right)$ and so the result follows.
+    \item From $(2)$ is $\alpha_i = 1$ for $i = 1, ..., n$, then $\sum_{i=1}^{n} \alpha_1 = \sum_{i=1}^{n} 1 = n$. The result follows.
+    \item By $(2)$, we have $\sum_{i=1}^{n} X_i \sim \Gam\left( \sum_{i=1}^{n} \frac{k_1}{2}, 2 \right)$. Then by $(1)$, we have that
+      \begin{equation*}
+        \sum_{i=1}^{n} X_i \sim \chi^2\left( \sum_{i=1}^{n} k_i \right)
+      \end{equation*}
+      as required.
+    \item We know that $Y_i = \frac{X_i - \mu}{\sigma} \sim Z(0, 1)$. Let $W_i = Y_i^2$. Then
+      \begin{align*}
+        M_{W_i}(t) &= E\left[ e^{tY_i} \right] = \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{-\frac{y^2}{2}} e^{ty^2} \dif{y} \\
+                   &= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}} \exp\left\{ - \frac{y^2}{2 ( 1 - 2t )^_{-1}} \right\} \dif{y} \\
+                   &= (1 - 2t)^{-\frac{1}{2}} \int_{-\infty}^{\infty} \underbrace{ \frac{1}{\sqrt{2 \pi} (1 - 2t)^{-\frac{1}{2}}} \exp \left\{ \frac{y^2}{2 ( 1 - 2t )^{-1}} \right\} }_{\text{pdf of } \Nor\left(0, (1 - 2t)^{-\frac{1}{2}}\right)} \dif{y} \\
+                   &= (1 - 2t)^{-\frac{1}{2}},
+      \end{align*}
+      which is the mgf of $\chi^2 (1)$. Let $W = \sum_{i=1}^{n} W_i$. Then
+      \begin{equation*}
+        M_W(t) = \prod_{i=1}^{n} (1 - 2t)^{-\frac{1}{2}} = (1 - 2t)^{-\frac{n}{2}}
+      \end{equation*}
+      which is the mgf of $\chi^2 ( n )$.
+    \item Let $Y = \sum_{i=1}^{n} X_i$. Then
+      \begin{equation*}
+        M_Y(t) = \prod_{i=1}^{n} e^{\mu_i (e^t - 1)} = \exp\left[ (e^t - 1) \sum_{i=1}^{n} \mu_i \right]
+      \end{equation*}
+      is the mgf of $\Poi\left( \sum_{i=1}^{n} \mu_i \right)$.
+    \item Let $Y = \sum_{i=1}^{n} X_i$. Then
+      \begin{equation*}
+        M_Y(t) = \prod_{i=1}^{n} ( pe^t + q )^{n_i} = ( p e^t + q )^{\sum_{i=1}^{n} n_i}
+      \end{equation*}
+      is the mgf of $\Bin\left( \sum_{i=1}^{n} n_i, p \right)$.
+    \item Again, a similar approach: let $Y = \sum_{i=1}^{n} X_i$. Then
+      \begin{align*}
+        M_Y(t) = \prod_{i=1}^{n} \left( \frac{1 - p}{1 - pe^t} \right)^{k_i} = \left( \frac{1 - p}{1 - pe^t} \right)^{\sum_{i=1}^{n} k_i}
+      \end{align*}
+      is the mgf of $\NB\left(\sum_{i=1}^{n} k_i, p\right)$.
+  \end{enumerate}
+\end{solution}
+
+% subsection moment_generating_function_method (end)
+
+% section functions_of_random_variables_continued (end)
+
+% chapter lecture_13_jun_26th_2018 (end)
+
 \nobibliography*
 \bibliography{bibliography}
+
+\chapter{Appendix}%
+\label{chp:appendix}
+% chapter appendix
+
+\section{Commonly Used Distributions}%
+\label{sec:commonly_used_distributions}
+% section commonly_used_distributions
+
+\begin{fullwidth}
+\begin{longtable}{e m m m m}
+\hline
+\text{Distribution} & \text{pf} & \text{Mean} & \text{Var} & \text{mgf} \\
+\hline
+\multicolumn{5}{e}{\text{Binomial Distribution }: X \sim \Bin(n, p)} \\
+\hline
+x \in \mathbb{N} \cup \{0\}  & \multirow{3}{*}{$\binom{n}{x} p^x (1 - p)^{n - x}$} & \multirow{3}{*}{ np } & \multirow{3}{*}{ np(1 - p) } & \multirow{3}{*}{ (pe^t + 1 - p)^n } \\
+n \in \mathbb{N} & & & & \\
+0 < p < 1 & & & & \\
+\hline
+\multicolumn{5}{e}{\text{Geometric Distribution }: X \sim \Geo(p)} \\
+\hline
+x \in \mathbb{N} \cup \{0\} &  \multirow{2}{*}{ p (1 - p)^x } & \multirow{2}{*}{$\frac{1 - p}{p}$} & \multirow{2}{*}{ $\frac{1 - p }{p^2}$ } & \frac{p}{1 - (1 - p)e^t} \\
+0 < p < 1 & & & & t < - \log ( 1- p ) \\
+\hline
+\multicolumn{5}{e}{\text{Poisson Distribution }: X \sim \Poi(\mu)} \\
+\hline
+x \in \mathbb{N} \cup \{0\} &  \multirow{2}{*}{ $\frac{e^{-\mu} \mu^x}{x!}$ } & \multirow{2}{*}{ \mu } & \multirow{2}{*}{ \mu } & \multirow{2}{*}{ e^{\mu ( e^t - 1 )} } \\
+\mu > 0 & & & & \\
+\hline
+\multicolumn{5}{e}{\text{Uniform Distribution } : X \sim \Unif(a, b)} \\
+\hline
+a \leq x \leq b & \multirow{2}{*}{ $\frac{1}{b - a}$ } & \multirow{2}{*}{ $\frac{a + b}{2}$ } & \multirow{2}{*}{ $\frac{(b - a)^2}{12}$ } & \frac{e^{bt} - e^{at}}{(b - a)^t} \\
+a < b \in \mathbb{R} & & & & t \neq 0 \\
+\hline
+\multicolumn{5}{e}{\text{Normal Distribution } : X \sim \Nor(\mu, \sigma)} \\
+\hline
+x \in \mathbb{R} & \multirow{3}{*}{ $\frac{1}{\sqrt{2 \pi \sigma^2}}e^{- \frac{(x - \mu)^2}{2 \sigma^2}}$} & \multirow{3}{*}{ \mu } & \multirow{3}{*}{ \sigma^2 } & \multirow{3}{*}{ $e^{\mu t + \frac{\sigma^2 t^2}{2}}$ } \\
+\mu \in \mathbb{R} & & & & \\
+\sigma > 0 & & & & \\
+\hline
+\multicolumn{5}{e}{\text{Gamma Distribution } : X \sim \Gamma(\alpha, \beta)} \\
+\hline
+x \in \mathbb{R}_{\geq 0} & \multirow{3}{*}{ $\frac{1}{\beta^\alpha \Gamma(\alpha)} x^{\alpha - 1} e^{- \frac{x}{\beta}}$ } & \multirow{3}{*}{ \alpha \beta } & \multirow{3}{*}{ \alpha \beta^2 } & \multirow{3}{*}{ \tworow{m}{ (1 - \beta t)^{-\alpha} }{ t < \frac{1}{\beta} } } \\
+\alpha > 0 & & & & \\
+\beta > 0 & & & & \\
+\hline
+\multicolumn{5}{e}{\text{Exponential Distribution } : X \sim \Exp(\theta)} \\
+\hline
+x \in \mathbb{R}_{> 0} & \multirow{2}{*}{ $\frac{1}{\theta} e^{- \frac{x}{\theta}}$ } & \multirow{2}{*}{ \theta } & \multirow{2}{*}{ \theta^2 } & (1 - \theta t)^{-t} \\
+\theta > 0 & & & & t < \frac{1}{\theta} \\
+\hline
+\multicolumn{5}{e}{\text{Negative Binomial Distribution } : X \sim \NB(r, p)} \\
+\hline
+x \in \mathbb{N} \cup \{0\} & \multirow{3}{*}{ $\binom{x + r - 1}{x} \cdot ( 1 - p )^r p^{x}$ } & \multirow{3}{*}{$\frac{pr}{1 - p}$} & \multirow{3}{*}{$\frac{pr}{(1 - p)^2}$} & \left( \frac{1 - p}{1 - pe^t} \right)^r \\
+r > 0 & & & & t < - \log p \\
+p \in (0, 1) & & & & \\
+\hline
+\multicolumn{5}{e}{\text{Beta Distribution } : X \sim \BetaDist(\alpha, \beta)} \\
+\hline
+\tworow{m}{x \in [0, 1] or}{x \in (0, 1)} & \multirow{3}{*}{ $\frac{\Gamma(\alpha) \Gamma(\beta)}{\Gamma(a + b)} x^{\alpha - 1}(1 - x)^{\beta - 1}$ } & \multirow{3}{*}{ $\frac{\alpha}{\alpha + \beta}$ } & \multirow{3}{*}{ $\frac{\alpha \beta}{(\alpha + \beta)^2 ( \alpha + \beta + 1 )}$ } & \multirow{3}{*}{ $1 + \sum\limits_{k=1}^{\infty} \left( \prod_{r=0}^{k-1} \frac{\alpha + r}{\alpha + \beta + r} \right) \frac{t^k}{k!}$ } \\
+\alpha > 0 & & & & \\
+\beta > 0 & & & &
+\hline
+\multicolumn{5}{e}{\text{Chi-Squared Distribution } : X \sim \chi^2(k)} \\
+\hline
+k \in \mathbb{N} & \multirow{3}{*}{$\frac{1}{2^{\frac{k}{2}} \Gamma(\frac{k}{2})} x^{\frac{k}{2} - 1} e^{-\frac{x}{2}}$} & \multirow{3}{*}{ k } & \multirow{3}{*}{2k} & (1 - 2t)^{-\frac{k}{2}} \\
+\tworow{e}{\text{if k = 1}}{ x \in (0, \infty)} & & & & t < \frac{1}{2} \\
+\tworow{e}{\text{otherwise}}{ x \in [0, \infty]} & & & & \\
+\end{longtable}
+\end{fullwidth}
+
+% section commonly_used_distributions (end)
+
+% chapter appendix (end)
 
 \printindex
 
