@@ -350,6 +350,16 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
   \underset{\makebox[0pt]{\begin{tabular}{@{}c@{}}\downarrow\\[0pt]\ensuremath{#2}\end{tabular}}}{#1}
 }
 
+% Document header formatting
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+\makeatletter
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO]{\textsl{\@title} \enspace \thepage}
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark \enspace - \enspace \rightmark}}
+\makeatother
+
 % Comment the two lines below if you want to print the document
 \pagecolor{base16-eighties-dark}
 \color{base16-eighties-light}

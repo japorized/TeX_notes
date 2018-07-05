@@ -4,7 +4,10 @@
 \setcounter{tocdepth}{5}
 
 \renewcommand{\baselinestretch}{1.1}
-\usepackage{longtable,multirow,booktabs}
+\usepackage{longtable,multirow}
+
+\title{STAT330S18 - Mathematical Statistics}
+\author{Johnson Ng}
 
 \input{latex-classnotes-preamble.tex}
 
@@ -13,6 +16,7 @@
 \newcolumntype{w}{>{$}r<{$}}
 \newcolumntype{m}{>{$}c<{$}}
 
+\DeclareMathOperator{\Bernoulli}{Bernoulli }
 \DeclareMathOperator{\Bin}{Bin }
 \DeclareMathOperator{\Geo}{Geo }
 \DeclareMathOperator{\Poi}{Poi }
@@ -31,18 +35,8 @@
 \DeclareMathOperator{\Corr}{Corr }
 \DeclareMathOperator{\supp}{supp }
 
-\title{STAT330S18 - Mathematical Statistics}
-\author{Johnson Ng}
-
-% Header formatting
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{#1}}
-\makeatletter
-\pagestyle{fancy}
-\fancyhead{}
-\fancyhead[RO]{\textsl{\@title} \enspace \thepage}
-\fancyhead[LE]{\thepage \enspace \textsl{\leftmark \enspace - \enspace \rightmark}}
-\makeatother
+\newcommand{\convd}{\overset{D}{\to}}
+\newcommand{\convp}{\overset{P}{\to}}
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -4111,9 +4105,9 @@ Given the setup in \cref{defn:one_to_one_bivariate_transformation}, we have that
 
 % chapter lecture_12_jun_12th_2018 (end)
 
-\chapter{Lecture 13 Jun 26th 2018}%
-\label{chp:lecture_13_jun_26th_2018}
-% chapter lecture_13_jun_26th_2018
+\chapter{Lecture 13 Jun 14th 2018}%
+\label{chp:lecture_13_jun_14th_2018}
+% chapter lecture_13_jun_14th_2018
 
 \section{Functions of Random Variables (Continued)}%
 \label{sec:functions_of_random_variables_continued}
@@ -4279,7 +4273,7 @@ for $t \in (-h, h)$.
     \item We know that $Y_i = \frac{X_i - \mu}{\sigma} \sim Z(0, 1)$. Let $W_i = Y_i^2$. Then
       \begin{align*}
         M_{W_i}(t) &= E\left[ e^{tY_i} \right] = \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}} e^{-\frac{y^2}{2}} e^{ty^2} \dif{y} \\
-                   &= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}} \exp\left\{ - \frac{y^2}{2 ( 1 - 2t )^_{-1}} \right\} \dif{y} \\
+                   &= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2 \pi}} \exp\left\{-\frac{y^2}{2 ( 1 - 2t )^{-1}} \right\} \dif{y} \\
                    &= (1 - 2t)^{-\frac{1}{2}} \int_{-\infty}^{\infty} \underbrace{ \frac{1}{\sqrt{2 \pi} (1 - 2t)^{-\frac{1}{2}}} \exp \left\{ \frac{y^2}{2 ( 1 - 2t )^{-1}} \right\} }_{\text{pdf of } \Nor\left(0, (1 - 2t)^{-\frac{1}{2}}\right)} \dif{y} \\
                    &= (1 - 2t)^{-\frac{1}{2}},
       \end{align*}
@@ -4310,7 +4304,7 @@ for $t \in (-h, h)$.
 
 % section functions_of_random_variables_continued (end)
 
-% chapter lecture_13_jun_26th_2018 (end)
+% chapter lecture_13_jun_14th_2018 (end)
 
 \chapter{Lecture 14 Jun 19th 2018}%
 \label{chp:lecture_14_jun_19th_2018}
@@ -4392,7 +4386,7 @@ Then
   Then
   \begin{equation*}
     \frac{\sum\limits_{i=1}^{n} \left( \frac{X_1 - \bar{X}}{\sigma_1} \right)^2}{\sum\limits_{j=1}^{m} \left( \frac{Y_j - \bar{Y}}{\sigma_2} \right)^2}
-    &= \frac{( n - 1 ) S_1^2 / \sigma_1^2}{( m - 1 ) S_2^2 / \sigma_2^2}.
+    = \frac{( n - 1 ) S_1^2 / \sigma_1^2}{( m - 1 ) S_2^2 / \sigma_2^2}.
   \end{equation*}
   With that, we have that
   \begin{equation*}
@@ -4406,6 +4400,239 @@ Then
 % section functions_of_random_variables_continued_2 (end)
 
 % chapter lecture_14_jun_19th_2018 (end)
+
+\chapter{Lecture 15 Jun 21st 2018}%
+\label{chp:lecture_15_jun_21st_2018}
+% chapter lecture_15_jun_21st_2018
+
+\section{Limiting or Asymptotic Distributions}%
+\label{sec:limiting_or_asymptotic_distributions}
+% section limiting_or_asymptotic_distributions
+
+\subsection{Convergence in Distribution}%
+\label{sub:convergence_in_distribution}
+% subsection convergence_in_distribution
+
+\begin{defn}[Convergence in Distribution]\index{Convergence in Distribution}\index{Limiting Distribution}\index{Asymptotic Distribution}
+\label{defn:convergence_in_distribution}
+  Let $X_1, X-2, ..., X_n, ...$ be a sequence of rvs such that $X_i$ has cdf $F_i$, for $i \in \mathbb{N}$. Let $X$ be an rv with cdf $F$. We say that $X_i$ \hlnoteb{converges in distribution} to $X$ and we write
+  \begin{equation*}
+    X_n \overset{D}{\to} X
+  \end{equation*}
+  if
+  \begin{equation*}
+    \lim_{i \to \infty} F_i(x) = F(x)
+  \end{equation*}
+  at all points $x$ at which $F$ is continuous. We call $F$ the \hlnoteb{limiting} or \hlnoteb{asymptotic distribution} of $X_i$.
+\end{defn}
+
+The following theorem, that we shall not prove, will be useful for the remainder of the notes. 
+
+\begin{thm}[Taylor Series with Lagrange's Remainder]
+\index{Taylor Series with Lagrange's Remainder}
+\label{thm:taylor_series_with_lagrange_s_remainder}
+  Suppose that $f:[a, b] \to \mathbb{R}$ is infinitely differentiable, and $x \in [a, b]$. Then $\forall x \in [a, b]$ and $\forall k \in \mathbb{N}$,
+  \begin{equation*}
+    f(x) = \sum_{i=1}^{k} \frac{f^{(i)}(x)(x - c)^i}{i!} + \frac{f^{(k + 1)}( \zeta_X )(x - c)^{k + 1}}{(k + 1)!}
+  \end{equation*}
+  for some $\zeta_X \in [c, x]$.
+\end{thm}
+
+The proof for the above involves the use of the \hlnotea{Mean Value Theorem for Integrals}.
+
+\begin{thm}[Generalized Limit Definition of $e$]
+\label{thm:generalized_limit_definition_of_e_}
+  If $b, c \in \mathbb{R}$ are constants and $\lim\limits_{n \to \infty} \psi(n) = 0$, then
+  \begin{equation*}
+    \lim_{n \to \infty} \left[ 1 + \frac{b}{n} + \frac{\psi(n)}{n} \right]^{cn} = e^{bc}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  The above equation can be rewritten as
+  \begin{equation*}
+    \lim_{n \to \infty} e^{cn \log \left( 1 + \frac{b}{n} + \frac{\psi(n)}{n} \right)} = e^{bc}
+  \end{equation*}
+  and so it suffices to prove that
+  \begin{equation*}
+    \lim_{n \to \infty} cn \log\left( 1 + \frac{b}{n} + \frac{\psi(n)}{n} \right) = bc
+  \end{equation*}
+  Note that the Taylor Expansion with Lagrange's Remainders (\cref{thm:taylor_series_with_lagrange_s_remainder}) of $log(1 + x)$, where we pick $c = 0$ and $k = 1$ for convenience,
+  \begin{equation*}
+    \log(1 + x) = \frac{\log(1) x^0}{0!} + \frac{\left( \frac{1}{1 - 0} \right) x^1}{1!} + \frac{- \frac{1}{(1 + \zeta_x)^2} x^2}{2!} = x - \frac{x^2}{2 ( 1 + \zeta_x )}
+  \end{equation*}
+  where $\zeta \in [0, x]$. Then
+  \begin{equation*}
+    cn \log \left[ 1 + \frac{b}{n} + \frac{\psi(n)}{n} \right] = cb + c \psi(n) - \frac{c (b + \psi(n))^2}{2n(1 + \zeta)^2}
+  \end{equation*}
+  where $\zeta \in \left[0, \frac{b + \psi(n)}{n}\right]$. Note that by \hlnotea{L'H\^opital's Rule}, we have that
+  \begin{equation*}
+    \lim_{n \to \infty} \frac{b + \psi(n)}{n} = \lim_{n \to \infty} \frac{\psi'(n)}{1} = 0
+  \end{equation*}
+  and so the possible highest value for $\zeta$ goes to $0$ as $n \to \infty$. Then
+  \begin{equation*}
+    \lim_{n \to \infty} \frac{c( b + \psi(n) )^2}{2n ( 1 + \zeta )^2} = 0.
+  \end{equation*}
+  As a result, we have
+  \begin{equation*}
+    \lim_{n \to \infty} cn \log\left( 1 + \frac{b}{n} + \frac{\psi(n)}{n} \right) = bc
+  \end{equation*}
+  as required.\qed
+\end{proof}
+
+\begin{crly}[Limit definition of $e$]
+\label{crly:limit_definition_of_e_}
+  If $b, c \in \mathbb{R}$ are constants, then
+  \begin{equation*}
+    \lim_{n \to \infty} \left( 1 + \frac{b}{n} \right)^{cn} = e^{bc}
+  \end{equation*}
+\end{crly}
+
+\begin{eg}[Example 5.1 (Course Notes 5.1.4)]
+  Let $X_i \sim \Exp(1)$, where $i \in \mathbb{N}$, independently so. Consider the sequence of rvs $Y_1, Y_2, ..., Y_n, ...$, where $Y_n = \max( X_1, ..., X_n ) - \log n$. Find the limiting distribution of $Y_n$.
+\end{eg}
+
+\begin{solution}
+  Firstly, observe that to find the support set of $Y_n$, note
+  \begin{gather*}
+    0 < x_1, ..., x_n < \infty \\
+    0 < \max( x_1, ..., x_n ) < \infty \\
+    -\log n < \max( x_1, ..., x_n ) - \log n < \infty
+  \end{gather*}
+  so
+  \begin{equation*}
+    \supp(Y) = (- \log n, \infty)
+  \end{equation*}
+  Now the pf of $Y_n$ is
+  \begin{align*}
+    F_n(y) &= P(Y_n \leq y) = P( \max(X_1, ..., X_n) - \log n \leq y ) \\
+           &= P( \max(X_1, ..., X_n) \leq y + \log n ) \\
+           &= \prod_{i=1}^{n} P(X_1 \leq y + \log n) \quad \because X_1, ..., X_n \text{ are IID } \\
+           &= \prod_{i=1}^{n} \left[ 1 - e^{- y - \log n} \right] = \prod_{i=1}^{n} \left[ 1 - \frac{e^-y}{n} \right] = \left[ 1 - \frac{e^-y}{n} \right]^n.
+  \end{align*}
+  Thus the limiting distribution of $Y_i$ is
+  \begin{equation*}
+    \lim_{n \to \infty} F_n(y) = \lim_{n \to \infty} \left[ 1 - \frac{e^-y}{n} \right]^n = e^{-e^{-y}} \text{ for } y \in ( -\log n, \infty ).
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Example 5.2 (Course Notes 5.1.5)]
+  Let $X_i \sim \Unif(0, \theta)$, $i \in \mathbb{N}$, independently so. Consider the sequence of random variables $Y_1, Y_2, ..., Y_n, ...$, where $Y_n = \max(X_1, ..., X_n)$. Find the limiting distribution of $Y_n$.
+\end{eg}
+
+\begin{solution}
+  Clearly, support of $Y_n = ( 0, \theta )$. Note that
+  \begin{equation*}
+    f_{X_i}(x) = \frac{1}{\theta} \mathbb{1}_{0 < x < \theta}.
+  \end{equation*}
+  Now since $X_i$ are IID,
+  \begin{equation*}
+    F_n (y) = P(Y_n \leq y) = \prod_{i=1}^{n} P( X_1 \leq y ) = \prod_{i=1}^{n} \frac{y}{\theta} = \left( \frac{y}{\theta} \right)^n \quad y \in ( 0, \theta )
+  \end{equation*}
+  Then the limiting distribution is
+  \begin{equation*}
+    \lim_{n \to \infty} F_n(y) = \lim_{n \to \infty} \left( \frac{y}{\theta} \right)^n = \begin{cases}
+      0 & y < \theta \\
+      1 & y \geq \theta
+    \end{cases}
+  \end{equation*}
+  Define $Y$ to have a distribution such that $P(Y = \theta) = 1$. Then
+  \begin{equation*}
+    Y_n \convd Y.
+  \end{equation*}
+\end{solution}
+
+\begin{defn}[Degenerate Distribution]\index{Degenerate Distribution}
+\label{defn:degenerate_distribution}
+  A function $F$ is the cdf of a degenerate distribution at value $y = c$ if
+  \begin{equation*}
+    F(y) = \begin{cases}
+      0 & y < c \\
+      1 & y \geq c
+    \end{cases}.
+  \end{equation*}
+  In other words, $F$ is the CDF of a discrete distribution where
+  \begin{equation*}
+    P(Y = y) = \begin{cases}
+      1 & y = c \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+\end{defn}
+
+We have that the earlier example gives us that the limiting distribution is a degenerate distribution.
+
+% subsection convergence_in_distribution (end)
+
+\subsection{Convergence in Probability}%
+\label{sub:convergence_in_probability}
+% subsection convergence_in_probability
+
+\begin{defn}[Convergence in Probability]\index{Convergence in Probability}
+\label{defn:convergence_in_probability}
+  A sequence of rvs $X_1, X_2,..., X_n, ...$ \hlnoteb{converges in probability} to an rv $X$ if, for every $\epsilon > 0$,
+  \begin{equation*}
+    \lim_{n \to \infty} P ( \abs{X_n - X} \geq \epsilon ) = 0
+  \end{equation*}
+  or equivalently
+  \begin{equation*}
+    \lim_{n \to \infty} P(\abs{X_n - X} < \epsilon) = 1
+  \end{equation*}
+  We write
+  \begin{equation*}
+    X_n \convp X.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}[Example 5.3]
+  Consider $X \sim \Bernoulli(0.3)$. Define the sequence $X_n = \left(1 + \frac{1}{n}\right) X$, $n \in \mathbb{N}$. Show that $X_n \convp X$.
+\end{eg}
+
+\begin{solution}
+  Note that
+  \begin{equation*}
+    P(X = x) = \begin{cases}
+      0.3 & x = 1 \\
+      0.7 & x = 0
+    \end{cases}
+  \end{equation*}
+  Since $X_n = \left(1 + \frac{1}{n}\right) X$, we have
+  \begin{equation*}
+    X_1 = 2X, \, X_2 = \frac{3}{2} X, \, X_3 = \frac{4}{3} X, \, ... \,.
+  \end{equation*}
+  Note that $\abs{X_n - X} = \abs{\left(1 - \frac{1}{n}\right) X - X} = \abs{\frac{1}{n}X} = \frac{1}{n} X$, so
+  \begin{align*}
+    P(\abs{X_n - X} < \epsilon) &= P \left( \frac{1}{n} X < \epsilon \right) = P( X < n \epsilon ) \\
+                                &= \begin{cases}
+    P( X = 0 ) = 0.7 & n < \frac{1}{\epsilon} \\
+    P( X = 1 ) + P( X = 0 ) = 1 & n \geq \frac{1}{\epsilon}
+                                \end{cases}.
+  \end{align*}
+  Therefore
+  \begin{equation*}
+    \lim_{n \to \infty} P( \abs{X_n - X} < \epsilon ) = 1
+  \end{equation*}
+  and so
+  \begin{equation*}
+    X_n \convp X.
+  \end{equation*}
+\end{solution}
+
+We shall look into the following proposition in the next lecture.
+
+\begin{propononum}
+  Suppose $X_n$, $\forall n \in \mathbb{N}$, is a sequence of rvs. We have
+  \begin{equation*}
+    X_n \convp X \implies X_n \convd X
+  \end{equation*}
+  where $X$ is an rv.
+\end{propononum}
+
+% subsection convergence_in_probability (end)
+
+% section limiting_or_asymptotic_distributions (end)
+
+% chapter lecture_15_jun_21st_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
@@ -4425,18 +4652,18 @@ Then
 \hline
 \multicolumn{5}{e}{\text{Binomial Distribution }: X \sim \Bin(n, p)} \\
 \hline
-x \in \mathbb{N} \cup \{0\}  & \multirow{3}{*}{$\binom{n}{x} p^x (1 - p)^{n - x}$} & \multirow{3}{*}{ np } & \multirow{3}{*}{ np(1 - p) } & \multirow{3}{*}{ (pe^t + 1 - p)^n } \\
+x \in \mathbb{N} \cup \{0\}  & \multirow{3}{*}{$\binom{n}{x} p^x (1 - p)^{n - x}$} & \multirow{3}{*}{ $np$ } & \multirow{3}{*}{ $np(1 - p)$ } & \multirow{3}{*}{ $(pe^t + 1 - p)^n$ } \\
 n \in \mathbb{N} & & & & \\
 0 < p < 1 & & & & \\
 \hline
 \multicolumn{5}{e}{\text{Geometric Distribution }: X \sim \Geo(p)} \\
 \hline
-x \in \mathbb{N} \cup \{0\} &  \multirow{2}{*}{ p (1 - p)^x } & \multirow{2}{*}{$\frac{1 - p}{p}$} & \multirow{2}{*}{ $\frac{1 - p }{p^2}$ } & \frac{p}{1 - (1 - p)e^t} \\
+x \in \mathbb{N} \cup \{0\} &  \multirow{2}{*}{ $p (1 - p)^x$ } & \multirow{2}{*}{$\frac{1 - p}{p}$} & \multirow{2}{*}{ $\frac{1 - p }{p^2}$ } & \frac{p}{1 - (1 - p)e^t} \\
 0 < p < 1 & & & & t < - \log ( 1- p ) \\
 \hline
 \multicolumn{5}{e}{\text{Poisson Distribution }: X \sim \Poi(\mu)} \\
 \hline
-x \in \mathbb{N} \cup \{0\} &  \multirow{2}{*}{ $\frac{e^{-\mu} \mu^x}{x!}$ } & \multirow{2}{*}{ \mu } & \multirow{2}{*}{ \mu } & \multirow{2}{*}{ e^{\mu ( e^t - 1 )} } \\
+x \in \mathbb{N} \cup \{0\} &  \multirow{2}{*}{ $\frac{e^{-\mu} \mu^x}{x!}$ } & \multirow{2}{*}{ $\mu$ } & \multirow{2}{*}{ $\mu$ } & \multirow{2}{*}{ $e^{\mu ( e^t - 1 )}$ } \\
 \mu > 0 & & & & \\
 \hline
 \multicolumn{5}{e}{\text{Uniform Distribution } : X \sim \Unif(a, b)} \\
@@ -4446,19 +4673,19 @@ a < b \in \mathbb{R} & & & & t \neq 0 \\
 \hline
 \multicolumn{5}{e}{\text{Normal Distribution } : X \sim \Nor(\mu, \sigma)} \\
 \hline
-x \in \mathbb{R} & \multirow{3}{*}{ $\frac{1}{\sqrt{2 \pi \sigma^2}}e^{- \frac{(x - \mu)^2}{2 \sigma^2}}$} & \multirow{3}{*}{ \mu } & \multirow{3}{*}{ \sigma^2 } & \multirow{3}{*}{ $e^{\mu t + \frac{\sigma^2 t^2}{2}}$ } \\
+x \in \mathbb{R} & \multirow{3}{*}{ $\frac{1}{\sqrt{2 \pi \sigma^2}}e^{- \frac{(x - \mu)^2}{2 \sigma^2}}$} & \multirow{3}{*}{ $\mu$ } & \multirow{3}{*}{ $\sigma^2$ } & \multirow{3}{*}{ $e^{\mu t + \frac{\sigma^2 t^2}{2}}$ } \\
 \mu \in \mathbb{R} & & & & \\
 \sigma > 0 & & & & \\
 \hline
 \multicolumn{5}{e}{\text{Gamma Distribution } : X \sim \Gamma(\alpha, \beta)} \\
 \hline
-x \in \mathbb{R}_{\geq 0} & \multirow{3}{*}{ $\frac{1}{\beta^\alpha \Gamma(\alpha)} x^{\alpha - 1} e^{- \frac{x}{\beta}}$ } & \multirow{3}{*}{ \alpha \beta } & \multirow{3}{*}{ \alpha \beta^2 } & \multirow{3}{*}{ \tworow{m}{ (1 - \beta t)^{-\alpha} }{ t < \frac{1}{\beta} } } \\
+x \in \mathbb{R}_{\geq 0} & \multirow{3}{*}{ $\frac{1}{\beta^\alpha \Gamma(\alpha)} x^{\alpha - 1} e^{- \frac{x}{\beta}}$ } & \multirow{3}{*}{ $\alpha \beta$ } & \multirow{3}{*}{ $\alpha \beta^2$ } & \multirow{3}{*}{ \tworow{m}{ (1 - \beta t)^{-\alpha} }{ t < \frac{1}{\beta} } } \\
 \alpha > 0 & & & & \\
 \beta > 0 & & & & \\
 \hline
 \multicolumn{5}{e}{\text{Exponential Distribution } : X \sim \Exp(\theta)} \\
 \hline
-x \in \mathbb{R}_{> 0} & \multirow{2}{*}{ $\frac{1}{\theta} e^{- \frac{x}{\theta}}$ } & \multirow{2}{*}{ \theta } & \multirow{2}{*}{ \theta^2 } & (1 - \theta t)^{-t} \\
+x \in \mathbb{R}_{> 0} & \multirow{2}{*}{ $\frac{1}{\theta} e^{- \frac{x}{\theta}}$ } & \multirow{2}{*}{ $\theta$ } & \multirow{2}{*}{ $\theta^2$ } & (1 - \theta t)^{-t} \\
 \theta > 0 & & & & t < \frac{1}{\theta} \\
 \hline
 \multicolumn{5}{e}{\text{Negative Binomial Distribution } : X \sim \NB(r, p)} \\
@@ -4471,7 +4698,7 @@ p \in (0, 1) & & & & \\
 \hline
 \tworow{m}{x \in [0, 1] or}{x \in (0, 1)} & \multirow{3}{*}{ $\frac{\Gamma(\alpha) \Gamma(\beta)}{\Gamma(a + b)} x^{\alpha - 1}(1 - x)^{\beta - 1}$ } & \multirow{3}{*}{ $\frac{\alpha}{\alpha + \beta}$ } & \multirow{3}{*}{ $\frac{\alpha \beta}{(\alpha + \beta)^2 ( \alpha + \beta + 1 )}$ } & \multirow{3}{*}{ $1 + \sum\limits_{k=1}^{\infty} \left( \prod_{r=0}^{k-1} \frac{\alpha + r}{\alpha + \beta + r} \right) \frac{t^k}{k!}$ } \\
 \alpha > 0 & & & & \\
-\beta > 0 & & & &
+\beta > 0 & & & & \\
 \hline
 \multicolumn{5}{e}{\text{Chi-Squared Distribution } : X \sim \chi^2(k)} \\
 \hline
