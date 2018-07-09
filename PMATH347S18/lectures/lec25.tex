@@ -1,0 +1,177 @@
+\chapter{Lecture 25 Jun 29th 2018}%
+\label{chp:lecture_25_jun_29th_2018}
+% chapter lecture_25_jun_29th_2018
+
+\section{Commutative Rings (Continued)}%
+\label{sec:commutative_rings_continued}
+% section commutative_rings_continued
+
+\subsection{Integral Domain and Fields (Continued)}%
+\label{sub:integral_domain_and_fields_continued}
+% subsection integral_domain_and_fields_continued
+
+Recall the definition of a \hlnoteb{zero divisor}.
+
+\begin{defnnonum}[Zero Divisor]
+\label{defnnonum:zero_divisor}
+Let $R$ be a non-trivial ring. If $0 \neq a \in R$, then $a$ is called a \hlnoteb{zero divisor} if $\exists 0 \neq b \in R$ such that $ab = 0$.
+\end{defnnonum}
+
+\begin{eg}
+  $[2], [3], [6]$ in $\mathbb{Z}_6$ are all zero divisors since
+  \begin{equation*}
+    [0] = [2][3] = [4][3] = [6][2].
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  The matrix $\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}$ is a zero divisor in $M_n(\mathbb{R})$ since
+  \begin{equation*}
+    \begin{bmatrix}
+      1 & 0 \\ 0 & 0
+    \end{bmatrix} \begin{bmatrix}
+      0 & 0 \\ 0 & 1
+    \end{bmatrix} = \begin{bmatrix}
+      0 & 0 \\ 0 & 0
+    \end{bmatrix}.
+  \end{equation*}
+\end{eg}
+
+\begin{propo}[Ring Cancellations and Zeros]
+\label{propo:ring_cancellations_and_zeros}
+  Let $R$ be a ring. TFAE:
+  \begin{enumerate}
+    \item $\forall ab = 0 \in R \quad a = 0 \lor b = 0$ ;
+    \item $\forall ab = ac \in R \land a \neq 0 \implies b = c$ ;
+    \item $\forall ba = ca \in R \land a \neq 0 \implies b = c$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  It suffices to prove $(1) \iff (2)$, since $(1) \iff (3)$ would have a similar argument.
+
+    \noindent $(1) \implies (2)$: Let $ab = ac$ with $a \neq 0$. Then $a(b - c) = 0$. Then by $(1)$, since $a \neq 0$, $(b - c) = 0 \iff b = c$.
+
+    \noindent $(2) \implies (1)$: Let $ab = 0 \in R$. We now have 2 cases:
+    \begin{enumerate}
+      \item[Case 1] If $a = 0$, we are done.
+      \item[Case 2] If $a \neq 0$, then $ab = 0 = a \cdot 0$, and so by $(2)$, $b = 0$.
+    \end{enumerate}\qed
+\end{proof}
+
+With that, we can make the following definition.
+
+\begin{defn}[Integral Domain]\index{Integral Domain}
+\label{defn:integral_domain}
+A commutative ring $R \neq \{0\}$ (i.e. non-trivial ring) is called an \hlnoteb{integral domain} if it has \hlimpo{no zero divisor}, i.e. if $ab = 0 \in R$ then $a = 0$ or $b = 0$.
+\end{defn}
+
+\begin{eg}\label{eg:integral_domain_that_is_not_a_field}
+  $\mathbb{Z}$ is an integral domain since $ab = 0 \implies a = 0$ or $b = 0$.
+\end{eg}
+
+\begin{eg}
+  Note that if $p$ is prime, then $p \, | \, ab \implies p \, | \, a \, \lor p \, | \, b$, i.e. $[a][b] = [0]$ in $\mathbb{Z}_p \implies [a] = 0$ or $[b] = 0$. So $\mathbb{Z}_p$ is an integral domain.
+
+  However, for $n$ not prime, with $n = ab$, if we have $n = ab$ such that $1 < a, b < n$, then
+  \begin{equation*}
+    [a][b] = [0] \text{ in } \mathbb{Z}_n
+  \end{equation*}
+  but neither $[a]$ nor $[b]$ is $[0]$.
+
+  With that, we have that $\mathbb{Z}_n$ is an integral domain if and onoly if $n$ is prime.
+\end{eg}
+
+\begin{propo}[Fields are Integral Domains]
+\label{propo:fields_are_integral_domains}
+Every field is an integral domain.
+\end{propo}
+
+\begin{proof}
+  $\forall a, b \in R$, where $R$ is a field, such that $ab = 0$, we want to show that $a = 0$ or $b = 0$. We have 2 cases:
+
+  \noindent \underline{\textbf{Case 1}}: $a = 0$. There is nothing to do since the proof is complete.
+
+  \noindent \underline{\textbf{Case 2}}: $a \neq 0$. Since $a \neq 0 \in R$, we know that $\exists a^{-1} \in R$ since $R$ is a field. And so
+  \begin{equation*}
+    b = a^{-1} ab = a^{-1} \cdot 1 = 0
+  \end{equation*}
+  
+  Therefore, by definition, the field $R$ is an integral domain.\qed
+\end{proof}
+
+\begin{note}
+  Using the proof from above, we can show that every subring of a field is an integral domain\sidenote{This will become useful in PMATH348}.
+\end{note}
+
+\begin{note}
+  The converse of \cref{propo:fields_are_integral_domains} is not true. As shown in \cref{eg:integral_domain_that_is_not_a_field}, $\mathbb{Z}$ is an integral domain but not a field.
+\end{note}
+
+However, we have the following partial converse:
+
+\begin{propo}[Finite Integral Domains are Fields]
+\label{propo:finite_integral_domains_are_fields}
+  Every \hlnotec{finite} integral domain is a field.
+\end{propo}
+
+\begin{proof}
+  Let $R$ be a finite integral domain, say $\abs{R} = n \in \mathbb{N}$. Let
+  \begin{equation*}
+    R = \{r_1, r_2, ..., r_n\}.
+  \end{equation*}
+  Then for some $a \in R$ such that $a \neq 0$, by \cref{propo:ring_cancellations_and_zeros}, the set
+  \begin{equation*}
+    \{ ar_1, ar_2, ..., ar_n \}
+  \end{equation*}
+  have distinct elements. Since $R$ is finite and so $\abs{aR} = n$, and $aR \subseteq R$, we have that $aR = R$. In particular, $\exists 1 \in aR$ such that $1 = ab$ for some $b \in R$ \sidenote{We can prove for a more general case by not assuming that $R$ is a commutative ring: We can find $c \in R$ such that $1 = ca$. Then
+  \begin{equation*}
+    b = (ca)b = c(ab) = c.
+  \end{equation*}}. It follows that $ab = 1 = ba$ since $R$ is commutative, which then implies that $a$ is a unit. Therefore, $R$ is a field.\qed
+\end{proof}
+
+Recall that the \hyperref[defn:characteristic_of_a_ring]{characteristic} of a ring $R$, denoted by $\ch(R)$, is the order of the unity, $1_R$, in $(R, +)$, and write
+\begin{equation*}
+  \ch(R) = \begin{cases}
+    0 & o(1_R) = \infty \\
+    n & o(1_R) = n \in \mathbb{N}
+  \end{cases}
+\end{equation*}
+
+\begin{propo}[Integral Domains have Zero or Prime Characteristics]
+\label{propo:integral_domains_have_zero_or_prime_characteristics}
+  The characteristic of any integral domain is $0$ or a prime $p$.
+\end{propo}
+
+\begin{proof}
+  Let $R$ be an integral domain. We have 2 cases:
+
+  \noindent \underline{\textbf{Case 1}}: $\ch(R) = 0$. Our job is done.
+  
+  \noindent \underline{\textbf{Case 2}}: $\ch(R) = n \in \mathbb{N}$. Suppose $n \neq p$ a prime, and say $n = ab$ for some $a, b \in R$ such that $1 < a, b < n$. If $1$ is the unity of $R$, then by \cref{propo:more_properties_of_rings}, we have
+  \begin{equation*}
+    ab = (a \cdot 1)(b \cdot 1) = (ab) (1) = n (1) = 0.
+  \end{equation*}
+  Since $R$ is an integral domain, we have that either
+  \begin{equation*}
+    a \cdot 1 = 0 \text{ or } b \cdot 1 = 0.
+  \end{equation*}
+  This contradicts that fact that $n$ is the characteristic. Therefore, $n$ must be prime.\qed
+\end{proof}
+
+\begin{note}
+  Let $R$ be an integral domain with $\ch(R) = p$ a prime. For $a, b \in R$, by the \hlnotea{Binomial Theorem}, we have
+  \begin{equation*}
+    (a + b)^p = \sum_{i=1}^{p} \binom{p}{i} a^{p - i} b^i.
+  \end{equation*}
+  Since $p$ is prime, we have $p \, | \binom{p}{i} = \frac{p(p-1)\hdots(p-i+1)}{i!}$ for $1 \leq i \leq p - 1$. Therefore, since $\ch(R) = p$, we have that\marginnote{This is known as the \href{https://en.wikipedia.org/wiki/Freshman\'s_dream}{Freshman's Dream}.}
+  \begin{equation*}
+    (a + b)^p = a^p + b^p
+  \end{equation*}
+\end{note}
+
+% subsection integral_domain_and_fields_continued (end)
+
+% section commutative_rings_continued (end)
+
+% chapter lecture_25_jun_29th_2018 (end)

@@ -10,6 +10,7 @@
 \usepackage{ragged2e}
 \usepackage{etoolbox}
 \usepackage{amssymb}
+\usepackage{fontawesome}
 \usepackage{amsmath}
 \usepackage{mathrsfs}
 \usepackage{mathtools}
@@ -104,7 +105,7 @@
 \theorempostskip{5pt}
 \theoremstyle{break}
 
-\newtheorem*{solution}{Solution}
+\newtheorem*{solution}{\faPencil $\enspace$ Solution}
 \newtheorem*{remark}{Remark}
 \newtheorem{eg}{Example}[section]
 \newtheorem{ex}{Exercise}[section]
@@ -114,91 +115,91 @@
 \theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem{defn}{Definition}
+\newtheorem{defn}{\faBook \enspace Definition}
 
     % definition env no num
 \theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt}}
 \theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem*{defnnonum}{Definition}
+\newtheorem*{defnnonum}{\faBook \enspace Definition}
 
     % theorem envs
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem{thm}{Theorem}
+\newtheorem{thm}{\faCoffee \enspace Theorem}
 
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem{propo}[thm]{Proposition}
+\newtheorem{propo}[thm]{\faTint \enspace Proposition}
 
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem{crly}[thm]{Corollary}
+\newtheorem{crly}[thm]{\faSpaceShuttle \enspace Corollary}
 
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{lemma}[thm]{\faTree \enspace Lemma}
 
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem{axiom}[thm]{Axiom}
+\newtheorem{axiom}[thm]{\faShield \enspace Axiom}
 
     % theorem envs without counter
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem*{thmnonum}{Theorem}
+\newtheorem*{thmnonum}{\faCoffee \enspace Theorem}
 
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem*{propononum}{Proposition}
+\newtheorem*{propononum}{\faTint \enspace Proposition}
 
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem*{crlynonum}{Corollary}
+\newtheorem*{crlynonum}{\faSpaceShuttle \enspace Corollary}
 
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem*{lemmanonum}{Lemma}
+\newtheorem*{lemmanonum}{\faTree \enspace Lemma}
 
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem*{axiomnonum}{Axiom}
+\newtheorem*{axiomnonum}{\faShield \enspace Axiom}
 
     % proof env
 \theoremprework{\textcolor{base16-eighties-brown}{\hrule height 2pt}}
 \theoremheaderfont{\color{base16-eighties-brown}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-brown}{\hrule height 2pt}}
-\newtheorem*{proof}{Proof}
+\newtheorem*{proof}{\faPencil \enspace Proof}
 
     % note and notation env
 \theoremprework{\textcolor{base16-eighties-yellow}{\hrule height 2pt}}
 \theoremheaderfont{\color{base16-eighties-yellow}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-yellow}{\hrule height 2pt}}
-\newtheorem*{note}{Note}
+\newtheorem*{note}{\faQuoteLeft \enspace Note}
 
 \theoremprework{\textcolor{base16-eighties-yellow}{\hrule height 2pt}}
 \theorempostwork{\textcolor{base16-eighties-yellow}{\hrule height 2pt}}
-\newtheorem*{notation}{Notation}
+\newtheorem*{notation}{\faPaw \enspace Notation}
 
     % warning env
 \theoremprework{\textcolor{base16-eighties-red}{\hrule height 2pt}}
 \theoremheaderfont{\color{base16-eighties-red}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-red}{\hrule height 2pt}}
 \theoremindent10pt
-\newtheorem*{warning}{Warning}
+\newtheorem*{warning}{\faBug \enspace Warning}
 
 % ntheorem listtheorem style
 \makeatother
@@ -259,7 +260,7 @@
 
 \theoremlisttype{allname}
 
-\AtBeginDocument{\renewcommand\contentsname{Table of Contents}}
+\AtBeginDocument{\renewcommand\contentsname{\faAlignJustify \enspace Table of Contents}}
 
 % Heading formattings
 % chapter format
