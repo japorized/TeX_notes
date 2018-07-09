@@ -1,0 +1,179 @@
+\chapter{Lecture 28 Jul 09th 2018}%
+\label{chp:lecture_28_jul_09th_2018}
+% chapter lecture_28_jul_09th_2018
+
+\section{Polynomial Ring (Continued)}%
+\label{sec:polynomial_ring_continued}
+% section polynomial_ring_continued
+
+\subsection{Factorization of Polynomials (Continued)}%
+\label{sub:factorization_of_polynomials_continued}
+% subsection factorization_of_polynomials_continued
+
+Since the actual focus of our study right now is really fields instead of just integral domains, we shall use fields in place of integral domains or commutative rings from here on unless explicitly stated otherwise. So we redefine \cref{defn:division_of_polynomials} as follows:
+
+\begin{defnnonum}[Division of Polynomials]
+  Let $F$ be a field and consider $F[x]$. For $f(x), g(x) \in F[x]$, we say that $f(x) \, | \, g(x)$ if $\exists q(x) \in F[x]$ such that
+  \begin{equation*}
+    g(x) = q(x) f(x).
+  \end{equation*}
+\end{defnnonum}
+
+and restate the last stated proposition as follows:
+
+\begin{propo}[$f(x) \, | \, g(x) \, \land \, g(x) \, | \, f(x) \implies f(x) = g(x)$]
+\label{propo:f_div_g_and_g_div_f_implies_f_is_g}
+Let $F$ be a field and $f(x), g(x) \in F[x]$ be monic polynomials\sidenote{Note that polynomials being monic is analogous to integers being positive. For example, you (read: I) should try to reiterate the proof below by replacing the monic property with positive integers.}. If $f(x) \, | \, g(x)$ and $g(x) \, | \, f(x)$, then $f(x) = g(x)$.
+\end{propo}
+
+\begin{proof}
+  Since $f(x) \, | \, g(x)$ and $g(x) \, | \, f(x)$, $\exists r(x), s(x) \in F[x]$ such that
+  \begin{equation*}
+    g(x) = r(x) f(x) \text{ and } f(x) = s(x) g(x).
+  \end{equation*}
+  Then
+  \begin{equation*}
+    f(x) = s(x) r(x) f(x).
+  \end{equation*}
+  By \cref{propo:polynomial_ring_is_an_integral_domain}, we have that
+  \begin{equation*}
+    \deg f = \deg s + \deg r + \deg f
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \deg s + \deg r = 0 \implies \deg s = \deg r = 0 \quad \because \deg s, \, \deg r \geq 0.
+  \end{equation*}
+  And so $\exists t \in F$ such that $f(x) = tg(x)$. Since $f(x)$ and $g(x)$ are monic, we must have $t = 1$ and so $f(x) = g(x)$.\qed
+\end{proof}
+
+\begin{propo}[Division Algorithm for Polynomials]
+\index{Division Algorithm}
+\label{propo:division_algorithm_for_polynomials}
+  Let $F$ be a field, and $f(x), g(x) \in F[x]$ with $f(x) \neq 0$. Then $\exists ! q(x), \, r(x) \in F[x]$ such that
+  \begin{equation*}
+    g(x) = q(x) f(x) + r(x)
+  \end{equation*}
+  with $\deg r < \deg f$.\sidenote{Note that this includes the case for $r = 0$, and this is yet another reason why we defined $\deg 0 = -\infty$.}
+\end{propo}
+
+\begin{proof}
+  We shall first prove the existence of such a $q(x)$ and $r(x)$. For simplicity, write
+  \begin{equation*}
+    \deg f = m \text{ and } \deg g = n.
+  \end{equation*}
+  If $n < m$, then
+  \begin{equation*}
+    g(x) = 0 f(x) + g(x)
+  \end{equation*}
+  and we are done. Suppose that $n \geq m$ and proceed by induction of $n$. Write
+  \begin{gather*}
+    f(x) = a_0 + a_1 x + \hdots + a_m x^m \\
+    g(x) = b_0 + b_1 x + \hdots + b_n x^n.
+  \end{gather*}
+  Consider\sidenote{We are implicitly using the fact that $x \in Z[x]$.}
+  \begin{align*}
+    g_1 (x) &= g(x) - b_n a_m^{-1} x^{n - m} f(x) \\
+            &= (b_n x^n + \hdots + b_0) - b_n a_m^{-1} x^{n - m} ( a_m x^m + \hdots a_0 ) \\
+            &= 0 x^n + (b_{n - 1} - b_n a_m^{-1} a_{m - 1}) x^{n - 1} + \hdots,
+  \end{align*}
+  thus either $g_1 (x) = 0$ or $g_1(x) \neq 0$, but in any case, $\deg g_1 < n$.
+
+  \noindent \textbf{Case 1}: $g_1(x) = 0$. In this case, we have
+  \begin{equation*}
+    g(x) = b_n a_m^{-1} x^{n - m} f(x)
+  \end{equation*}
+  and so we can pick
+  \begin{gather*}
+    q(x) = b_n a_m^{-1} x^{n - m} \\
+    r(x) = 0,
+  \end{gather*}
+  and the result follows.
+
+  \noindent \textbf{Case 2}: $g_1(x) \neq 0$. By induction, we can find some $q_1 (x), r_1(x) \in F[x]$ such that
+  \begin{equation*}
+    g_1(x) = q_1(x) f(x) + r_1(x)
+  \end{equation*}
+  with $\deg r_1 < \deg f$. It follows that
+  \begin{align*}
+    g(x) &= g_1(x) + b_n a_m^{-1} x^{n - m} f(x) \\
+         &= q_1(x) f(x) + r_1(x) + b_n a_m^{-1} x^{n - m} f(x).
+  \end{align*}
+  So pick
+  \begin{gather*}
+    q(x) = q_1 (x) + b_n a_m^{-1} x^{n - m} \\
+    r(x) = r_1 (x) < \deg f,
+  \end{gather*}
+  and so the result follows.
+
+  To prove uniqueness, suppose we have
+  \begin{equation*}
+    q_1(x) f(x) + r_1(x) = q_2(x) f(x) + r_2(x)
+  \end{equation*}
+  with $\deg r_1, \deg r_2 < \deg f$. Then
+  \begin{equation*}
+    r_2(x) - r_1(x) = [ q_1(x) - q_2(x) ] f(x).
+  \end{equation*}
+  If $q_1(x) - q_2(x) \neq 0$, then
+  \begin{equation*}
+    \deg (r_2 - r_1) = \deg (q_1 - q_2) + \deg f \geq \deg f
+  \end{equation*}
+  which is a contradiction since $\deg (r_2 - r_1) < \deg f$. Thus we must have $q_1(x) = q_2(x)$ and so $r_1 (x) = r_2(x)$.\qed
+\end{proof}
+
+\begin{propo}[Properties of the Greatest Common Divisor]\index{Greatest common divisor}
+\label{propo:properties_of_the_greatest_common_divisor}
+Let $F$ be a field and $f(x), \, g(x) \in F[x]$ with $f(x) \neq 0 \neq g(x)$. Then $\exists ! d(x) \in F[x]$ such that
+\begin{enumerate}
+  \item $d(x)$ is monic;
+  \item $d(x) \, | \, f(x)$ and $d(x) \, | \, g(x)$;
+  \item $e(x) \, | \, f(x) \, \land \, e(x) \, | \, g(x) \implies e(x) \, | \, d(x)$;
+  \item $\exists u(x), v(x) \in F[x] \quad d(x) = u(x) f(x) + v(x) g(x)$
+\end{enumerate}
+In this case, we say that $d(x)$ is the \hlnoteb{greatest common divisor} of $f(x)$ and $g(x)$, and denote this by $d(x) = \gcd[ f(x), g(x) ]$.
+\end{propo}
+
+\begin{proof}
+  Consider the set
+  \begin{equation*}
+    X = \{ u(x) f(x) + v(x) g(x) : u(x), \, v(x) \in F[x] \}.
+  \end{equation*}
+  Since $f(x) = 1 \cdot f(x) + 0 \cdot g(x) \in X$, the set $X$ contains non-zero polynomial and thus contains monic polynomials (since $F$ is a field\sidenote{This is cause if we have
+  \begin{equation*}
+    f(x) = a_m x^m + \hdots + a_0
+  \end{equation*}
+  Then
+  \begin{equation*}
+    a_m^{-1} f(x) = x^m + \hdots + a_m^{-1} a_0
+  \end{equation*}
+  is a moic polynomial in $F[x]$.}). Among all of the monic polynomials, choose
+  \begin{equation*}
+    d(x) = u(x) f(x) + v(x) g(x)
+  \end{equation*}
+  to have minimal degree. Then we get $(1)$ and $(4)$ in the bag automatically so. $(3)$ also follows almost immediately, since
+  \begin{align*}
+    &e(x) \, | \, f(x) \, \land \, e(x) \, | \, g(x) \\
+    &\implies \exists a(x), b(x) \in F[x] \quad f(x) = a(x) e(x) \, \land \, g(x) = b(x) e(x) \\
+    &\implies d(x) = u(x) f(x) + v(x) = [ u(x) a(x) + v(x) b(x) ] e(x) \\
+    &\implies e(x) \, | \, d(x).
+  \end{align*}
+  It remains to prove $(2)$. By \cref{propo:division_algorithm_for_polynomials}, we have that $\exists q(x), r(x) \in F[x]$ with $\deg r < \deg f$ such that
+  \begin{equation*}
+    f(x) = q(x) d(x) + r(x).
+  \end{equation*}
+  Then\marginnote{
+  \begin{ex}
+    Reiterate this proof for integers, by removing the `$(x)$' and replacing instances of monic polynomials with positive integers.
+  \end{ex}
+  }
+  \begin{align*}
+    r(x) &= f(x) - q(x) d(x) = f(x) - q(x) [ u(x) f(x) + v(x) g(x) ] \\
+         &= [ 1 - q(x) u(x) ] f(x) - q(x) v(x) g(x).
+  \end{align*}
+  Note that if $r(x) \neq 0$, then write $k \neq 0 \in F$ as the leading coefficient of $r(x)$. Since $F$ is a field, we have that $\exists k^{-1} \in F$, and so $k^{-1} r(x)$ is a monic polynomial of $X$ with $\deg( k^{-1} r ) < \deg d$, which contradicts the fact that the degree of $d(x)$ is minimal. Thus $r(x) = 0$ and $d(x) \, | \, f(x)$. Using a similar argument, we can show that $d(x) \, | \, g(x)$. Therefore, $(2)$ follows.\qed
+\end{proof}
+
+% subsection factorization_of_polynomials_continued (end)
+
+% section polynomial_ring_continued (end)
+
+% chapter lecture_28_jul_09th_2018 (end)
