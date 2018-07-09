@@ -1,0 +1,156 @@
+\chapter{Lecture 26 July 04th 2018}%
+\label{chp:lecture_26_july_04th_2018}
+% chapter lecture_26_july_04th_2018
+
+\section{Commutative Rings (Continued 2)}%
+\label{sec:commutative_rings_continued_2}
+% section commutative_rings_continued_2
+
+\subsection{Prime Ideals and Maximal Ideals}%
+\label{sub:prime_ideals_and_maximal_ideals}
+% subsection prime_ideals_and_maximal_ideals
+
+\begin{defn}[Prime Ideals]\index{Prime Ideals}
+\label{defn:prime_ideals}
+  Let $R$ be a commutative ring. An ideal $P \neq R$ is a prime ideal of $R$ if $r, s \in R$ satisfy: $rs \in R \implies r \in P$ or $s \in P$.
+\end{defn}
+
+\begin{eg}
+  For $n \in \mathbb{N} \setminus \{1\}$, $n \mathbb{Z} = \lra{n}$ is a prime ideal if and only if $n$ is prime.
+\end{eg}
+
+\begin{propo}[Ideal is Prime $\iff$ Quotient of Ring by Ideal is an Integral Domain]
+\label{propo:ideal_is_prime_iff_quotient_of_ring_by_ideal_is_an_integral_domain}
+If $R$ is a commutative ring, then an ideal $P \neq R$ of $R$ is a prime ideal if and only if $\faktor{R}{P}$ is an integral domain.
+\end{propo}
+
+\begin{proof}
+  Since $R$ is commutative, so is $\faktor{R}{P}$. Since $P \neq R$, we know that $1 \notin P$ \sidenote{See \cref{propo:the_only_ideal_with_the_multiplicative_identity_is_the_ring_itself}.}, i.e. $0 + P = P \neq 1 + P$, and so $\faktor{R}{P}$ is a non-trivial ring.
+
+  \noindent To prove $(\implies)$, let $(r + P)(s + P) = 0 + P = P$. Since $P$ is an ideal\sidenote{See \cref{propo:equivalent_defn_of_a_well_defined_coset_multiplication}.}, we have that $rs + P = P$ and so $rs \in P$. WLOG, since $P$ is a prime ideal, if $r \in P$, then $r + P = P$. And so $\faktor{R}{P}$ is an integral domain.
+
+  \noindent To prove $(\impliedby)$, let $rs \in P$. Then since $P$ is an ideal,
+  \begin{equation*}
+    (r + P)(s + P) = rs + P = P.
+  \end{equation*}
+  Since $\faktor{R}{P}$ is an integral domain, either
+  \begin{equation*}
+    r + P = P \text{ or } s + P = P
+  \end{equation*}
+  so $r \in P$ or $s \in P$, which implies that $P$ is a prime ideal.\qed
+\end{proof}
+
+\begin{defn}[Maximal Ideals]\index{Maximal Ideals}
+\label{defn:maximal_ideals}
+  Let $R$ be a (commutative) ring. An ideal $M \neq R$ or $R$ is a maximal ideal if $\forall A$ that is an ideal of $R$, we have that
+  \begin{equation*}
+    M \subseteq A \subseteq R \implies A = M \text{ or } A + R.
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[Ideal is Maximal $\iff$ Quotient of Ring by Ideal is a Field]
+\label{propo:ideal_is_maximal_iff_quotient_of_ring_by_ideal_is_a_field}
+  If $R$ is a commutative ring, then an ideal $M \neq R$ is a maximal ideal if and only if $\faktor{R}{M}$ is a field.
+\end{propo}
+
+\begin{proof}
+  Similar to the proof of \cref{propo:ideal_is_prime_iff_quotient_of_ring_by_ideal_is_an_integral_domain}, $\faktor{R}{M}$ is a nontrivial commutative ring. Let $r \in R$.
+
+  \noindent $(\implies)$ Suppose $M$ is a maximal ideal. Since $\faktor{R}{M}$ is non-trivial, let $r + M \neq 0 + M \in \faktor{R}{M}$. Let $\lra{r} = rR$ Note that $r \notin M$ and $r \in \lra{r} + M$. Thus, $M \subsetneq \lra{r} + M$. Since $M$ is maximal and $M$ is a proper subset of $\lra{r} + M$, we have that $\lra{r} + M = R$. In particular, we have $1 \in \lra{r} + M$ and so $\exists s \in R$ and $m \in M$ such that $1 = rs + m$. Thus
+  \begin{equation*}
+    1 + M = rs + M = (r + M)(s + M).
+  \end{equation*}
+  Therefore $s + M$ is the multiplicative inverse of $r + M$, and so $\faktor{R}{M}$ is a field.
+
+  \noindent $(\impliedby)$ Since $\faktor{R}{M}$ is a non-trivial field, we know $0 + M \neq 1 + M$. Therefore $M \neq R$. Suppose $A$ is an ideal such that $M \subsetneq A \subseteq R$. Choose $r \in A \setminus M$. Since $r \notin M$ and so $r + M \neq 0 + M$ and $\faktor{R}{M}$ is a field, we have that $\exists s + M \in \faktor{R}{M}$ such that $(r + M)(s + M) = 1 + M$. Since $M$ is an ideal, we have
+  \begin{equation*}
+    rs + M = 1 + M \implies \exists m \in M \quad 1 = rs + m.
+  \end{equation*}
+  Since $r, m \in A$ and $A$ is an ideal, we have that $1 \in A$ and so $A = R$, implying that $M$ is maximal. \qed
+\end{proof}
+
+Combining \cref{propo:fields_are_integral_domains}, \cref{propo:ideal_is_prime_iff_quotient_of_ring_by_ideal_is_an_integral_domain}, and \cref{propo:ideal_is_maximal_iff_quotient_of_ring_by_ideal_is_a_field}, we get the following corollary.
+
+\begin{crly}[Maximal Ideals of a Commutative Rings are Prime]
+\label{crly:maximal_ideals_of_a_commutative_rings_are_prime}
+  Every maximal ideal of a commutative ring is a prime ideal.
+\end{crly}
+
+\begin{note}
+  The converse of \cref{crly:maximal_ideals_of_a_commutative_rings_are_prime} is not true.
+\end{note}
+
+\begin{eg}
+  In $\mathbb{Z}$, $\{0\}$ is a prime ideal, but is clearly not maximal.
+\end{eg}
+
+% subsection prime_ideals_and_maximal_ideals (end)
+
+\subsection{Fields of Fractions}%
+\label{sub:fields_of_fractions}
+% subsection fields_of_fractions
+
+Recall that every subring of a field is an integral domain. The converse is actually true\sidenote{This is in comparison with \cref{propo:fields_are_integral_domains}.}, i.e. every integral domain $R$ is isomorphic to a subring of a field $F$.
+
+Let $R$ be an integral domain and $D = R \setminus \{0\}$. Consider
+\begin{equation*}
+  X = R \times D = \{ (r, s) : r \in R, s \in D \}
+\end{equation*}
+We say that
+\begin{equation}\label{eq:defining_fractions}
+  (r, s) \equiv (r_1, s_1) \in X \iff rs_1 = r_1 s
+\end{equation}
+
+\begin{eg}
+  Show that \cref{eq:defining_fractions} is an equivalence relation.
+  \begin{enumerate}
+    \item $(r, s) \equiv (r, s)$
+    \item $(r, s) \equiv (r_1, s_1) \iff (r_1, s_1) \equiv (r, s)$
+    \item $(r, s) \equiv (r_1, s_1) \, \land \, (r_1, s_1) \equiv (r_2, s_2) \implies (r, s) = (r_2, s_2)$
+  \end{enumerate}
+\end{eg}
+
+Note that using the above idea, we can construct the smallest field that contains $\mathbb{Z}$, and that field is $\mathbb{Q}$. Motivated by this idea, we make the following definition.
+
+\begin{defn}[Fraction]\index{Fraction}
+\label{defn:fraction}
+  Let $R$ be an integral domain, $D = R \setminus \{0\}$, and $X = R \times D$. The \hlnoteb{fraction}, $\frac{r}{s}$ to be the equivalent class $[(r, s)]$ of the pair $(r, s) \in X$.
+\end{defn}
+
+Let $F$ denote the set of all these fractions, i.e.
+\begin{equation*}
+  F = \{ [ (r, s) ] : r \in R, s \in D \} = \{ \frac{r}{s} : r \in R, s \in R \setminus \{0\} \}.
+\end{equation*}
+The addition and multiplication of $F$ are defined by
+\begin{gather*}
+  \frac{r}{s} + \frac{r_1}{s_1} = \frac{rs_1 + sr_1}{ss_1} \\
+  \frac{r}{s} \cdot \frac{r_1}{s_1} = \frac{rr_1}{ss_1}
+\end{gather*}
+where we note that $ss_1 \neq 0$ since $s, s_1 \in R \setminus \{0\}$ and $R$ is an integral domain.
+
+It can be shown that $F$ is a field\sidenote{Prove this as an easy exercise to ease yourself with the concept.
+\begin{ex}
+  Prove that $F$ is a field.
+\end{ex}
+}. Also, we have $R \cong R' = \frac{r}{1} : r \in R \} \subseteq F$.
+
+\begin{thm}[Field of Fractions]
+\index{Field of Fractions}
+\label{thm:field_of_fractions}
+  Let $R$ be an integral domain. Then there is a field $F$ containing fractions $\frac{r}{s}$ with $r, s \in R$ and $s \neq 0$. By identifying that $r = \frac{r}{1}$, for any $r \in R$, we have that $R$ is a subring of $F$. The field $F$ is called the \hlnoteb{field of fractions} of $R$.
+\end{thm}
+
+\begin{note}
+  We can generalize $D = R \setminus \{0\}$ to any subset $D \subseteq R$ satisfying
+  \begin{enumerate}
+    \item $1 \in D$
+    \item $0 \notin D$
+    \item $a, b \in D \implies ab \in D$
+  \end{enumerate}
+\end{note}
+
+% subsection fields_of_fractions (end)
+
+% section commutative_rings_continued_2 (end)
+
+% chapter lecture_26_july_04th_2018 (end)
