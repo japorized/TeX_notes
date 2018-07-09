@@ -1,0 +1,231 @@
+\chapter{Lecture 27 July 06th 2018}%
+\label{chp:lecture_27_july_06th_2018}
+% chapter lecture_27_july_06th_2018
+
+\section{Polynomial Ring}%
+\label{sec:polynomial_ring}
+% section polynomial_ring
+
+\subsection{Polynomials}%
+\label{sub:polynomials}
+% subsection polynomials
+
+\begin{defn}[Polynomials]
+\label{defn:polynomials}
+  Let $R$ be a ring and $x$ a variable. Let
+  \begin{equation*}
+    R[x] = \left\{ f(x) = \sum_{i=0}^{m} a_i x^i : m \in \mathbb{N} \cup \{0\}, \, a_i \in R, 0 \leq i \leq m \right\}.
+  \end{equation*}
+  Each element in $R[x]$ is called a \hldefn{polynomial} in $x$ over $R$. If $a_m \neq 0$, we say that $f(x)$ has \hldefn{degree} $m$, denoted by $\deg f = m$, and we say that $a_m$ is the \hldefn{leading coefficient} of $f(x)$.
+
+  If $\deg f = 0$, then $f(x) = a_0 \in R$. In this case, we call $f(x)$ a \hldefn{constant polynomial}. Note if
+  \begin{equation*}
+    f(x) = 0 \iff a_0 = a_1 = ... = a_m = 0,
+  \end{equation*}
+  we define $\deg 0 = - \infty$, and $f(x)$ is called a \hldefn{zero polynomial}.
+\end{defn}
+
+For
+\begin{gather*}
+  f(x) = a_0 + a_1 x + \hdots + a_m x^m \\
+  g(x) = b_0 + b_1 x + \hdots + b_n x^n
+\end{gather*}
+in $R[x]$. If $m \leq n$, we can define $a_i = 0$ for $m + 1 \leq i \leq n$. Then the addition and multiplication on $R[x]$ can be defined as
+\begin{align*}
+  f(x) + g(x) &= (a_0 + b_0) + (a_1 + b_1) x + \hdots + (a_n + b_n) x^n \\
+  f(x) g(x) &= (a_0 + a_1 x + \hdots + a_m x^m) (b_0 + b_1 x + \hdots + b_n x^n) \\
+            &= a_0 b_0 + (a_1 b_0 + a_1 b_0) x + (a_2 b_0 + a_1 b_1 + a_0 b_2) x^2 + \hdots \\
+            &\quad + (a_m b_m) x^{m + n} \\
+            &= c_0 + c_1 x + \hdots + c_{m + n} x^{m + n}
+\end{align*}
+where $c_i = a_0 b_i + a_1 b_{i - 1} + \hdots + a_{i - 1} b_1 + a_i b_0$.
+
+\begin{propo}[Ring is a Subring of Its Polynomial Ring]
+\label{propo:ring_is_a_subring_of_its_polynomial_ring}
+  Let $R$ be a ring and $x$ a variable.
+  \begin{enumerate}
+    \item $R[x]$ is a ring
+    \item $R$ is a subring of $R[x]$
+    \item If $Z = Z(R)$ denote the center of $R$, then the center of $R[x]$ is $Z[x]$. In particular, $x$ is in the center of $R[x]$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item \textbf{Checking all 9 properties}: Let 
+          \begin{gather*}
+            f(x) = a_0 + a_1 x + \hdots + a_m x^m \\
+            g(x) = b_0 + b_1 x + \hdots + b_n x^n \\
+            h(x) = d_0 + d_1 x + \hdots + d_k x^k
+          \end{gather*}
+          be in $R[x]$.
+      \begin{itemize}
+        \item (\textbf{Closed under addition and multiplication})
+          Suppose, WLOG, that $m \leq n$. Let $a_i = 0$ for $m + 1 \leq i \leq n$. Then
+          \begin{equation*}
+            f(x) + g(x) = (a_0 + b_0) + (a_1 + b_1) x + \hdots + (a_n + b_n) x^n
+          \end{equation*}
+          and we observe that $a_i + b_i \in R$ for $0 \leq i \leq n$ since $R$ is a ring. And so $f(x) + g(x) \in R[x]$. Also, we have
+          \begin{align*}
+            f(x) g(x) = c_0 + c_1 x + \hdots + c_{m + n} x^{m + n}
+          \end{align*}
+          where $c_i = a_0 b_i + a_1 b_{i - 1} + \hdots + a_{i - 1} b_1 + a_i b_0 \in R$ for $1 \leq i \leq m + n$. And so $f(x) g(x) \in R[x]$.
+        \item (\textbf{Commutativity of Addition}) Suppose, WLOG, that $m \leq n$. Let $a_i = 0$ for $m + 1 \leq i \leq n$. Then
+          \begin{align*}
+            f(x) + g(x) &= (a_0 + b_0) + (a_1 + b_1) x + \hdots + (a_n + b_n) x^n \\
+                        &= (b_0 + a_0) + (b_1 + a_1) x + \hdots + (b_n + a_n) x^n \\
+                        &= g(x) + f(x)
+          \end{align*}
+        \item (\textbf{Zero and Unity}) It is clear that the zero and unity of $R$ are the zero and unity of $R[x]$ respectively, since only
+          \begin{equation*}
+            f(x) + 0 = f(x) = 0 + f(x)
+          \end{equation*}
+          and
+          \begin{equation*}
+            1 f(x) = f(x) = f(x) \cdot 1.
+          \end{equation*}
+        \item (\textbf{Associativity}) Suppose, WLOG, that $m \leq n \leq k$. Let $a_i = b_j = 0$ for $m + 1 \leq i \leq k$ and $n + 1 \leq j \leq k$. Then
+          \begin{align*}
+            &f(x) + [ g(x) + h(x) ]\\
+            &= f(x) + [ (b_0 + d_0) + (b_1 + d_1) x + \hdots + (b_k d_k) x^k ] \\
+            &= (a_0 + b_0 + d_0) + (a_1 + b_1 + d_1) x + \hdots + (a_k + b_k + d_k) x^k \\
+            &= [(a_0 + b_0) + (a_1 + b_1) x + \hdots + (a_k + b_k) x^k] + d(x) \\
+            &= [ f(x) + g(x) ] + h(x)
+          \end{align*}
+          and if we use the summation notation for $f(x), g(x)$ and $h(x)$, we have
+          \begin{align*}
+            f(x) [ g(x) d(x) ] &= f(x) \left[ \left( \sum_{j=0}^{n} b_j x^j \right)\left( \sum_{l=0}^{k} d_l x^l \right) \right] \\
+                               &= \left[ \sum_{i=0}^{m} a_i x^i \right] \left[ \sum_{j=0}^{n} \sum_{l=0}^{k} b_j d_l x^{j + l} \right] \\
+                               &= \sum_{i=0}^{m} \sum_{j=0}^{n} \sum_{l=0}^{k} a_i b_j d_l x^{i + j + k} \\
+                               &= \left[ \sum_{i=0}^{m} \sum_{j=0}^{n} a_i b_j x^{i + j} \right] \left[ \sum_{l=0}^{k} d_l x^l \right] \\
+                               &= \left[ \left( \sum_{i=0}^{m} a_i x^i \right) \left( \sum_{j=0}^{n} b_j x^j \right) \right] h(x) \\
+                               &= [ f(x) g(x) ] h(x)
+          \end{align*}
+        \item (\textbf{Inverse}) Since $R$ is a ring, and in particular an additive ring, for each $a_i \in R$, $0 \leq i \leq m$, we have that $\exists (-a_i) \in R$ such that $a_i + (-a_i) = 0$. Particularly, we have that
+          \begin{equation*}
+            - f(x) = ( - a_0 ) + ( - a_1 ) x + ( - a_2 ) x^2 + \hdots + ( - a_m ) x^m
+          \end{equation*}
+          is the inverse of $f(x) \in R[x]$.
+        \item (\textbf{Distributivity}) Again, using the summation notation, since $R$ is a ring, we have
+          \begin{align*}
+            &f(x) [ g(x) + h(x) ] \\
+            &= \left[ \sum_{i=0}^{m} a_i x^i \right] \left[ \sum_{j=0}^{n} b_j x^j + \sum_{l=0}^{k} d_l x^l \right] \\
+            &= \left[ \sum_{i=0}^{m} a_i x^i \right] \left[ \sum_{j=0}^{k} (b_j + d_j) x^j \right] \\
+            &= \sum_{i=0}^{m} \sum_{j=0}^{k} a_i (b_j + d_j) x^{i + j} = \sum_{i=0}^{m} \sum_{j=0}^{k} (a_i b_j + a_i d_j) x^{i + j} \\
+            &= \sum_{i=0}^{m} \sum_{j=0}^{k} a_i b_j x^{i + j} + \sum_{i=0}^{m} \sum_{j=0}^{k} a_i d_j x^{i + j} \\
+            &= \sum_{i=0}^{m} \sum_{j=0}^{n} a_i b_j x^{i + j} + \sum_{i=0}^{m} \sum_{j=0}^{k} a_i d_j x^{i + j} \\
+            &= f(x) g(x) + f(x) d(x).
+          \end{align*}
+          Proof for the other side is similar.
+        \end{itemize}
+        With that, we have that $R[x]$ is a ring.
+
+      \item We already have that $R$ is a ring, and so it suffices to prove that $R \subseteq R[x]$. This is, however, rather simple, since $\forall r \in R$, we have that $r$ is a constant polynomial, and so $r \in R[x]$, and therefore $R \subseteq R[x]$.
+
+      \item Let
+        \begin{gather*}
+          f(x) = a_0 + a_1 x + a_2 x^2 + \hdots + a_m x^m \in Z[x] \\
+          g(x) = b_0 + b_1 x + b_2 x^2 + \hdots + b_n x^n \in R[x].
+        \end{gather*}
+        We have that
+        \begin{equation*}
+          f(x) g(x) = \sum_{i=0}^{m} \sum_{j=0}^{n} a_i b_j x^{i + j}.
+        \end{equation*}
+        Since $a_i \in Z$ for $0 \leq i \leq n$, we have
+        \begin{equation*}
+          f(x) g(x) = \sum_{i=0}^{m} \sum_{j=0}^{n} b_j a_i x^{i + j} = \sum_{j=0}^{n} \sum_{i=0}^{m} b_j a_i x^{j + i} = g(x) f(x)
+        \end{equation*}
+        for any $g(x) \in R[x]$. And so $Z[x] = Z(R[x])$.
+
+        For $\supseteq$, $f(x) \in Z(R[x]) \implies \forall b \in R \subseteq R[x]$ we have $f(x) b = bf(x)$. It follows that
+        \begin{equation*}
+          \forall 0 \leq i \leq n \quad a_i b = b a_i
+        \end{equation*}
+        and so $a_i \in Z(R)$, which implies that $Z(R[x]) \subseteq Z[x]$. Therefore, $Z(R[x]) = Z[x]$.
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{warning}
+  Althought $f(x) \in R[x]$ can be used to define a function from $R \to R$, the polynomial is not the same as the function it defines. For example, if $R = \mathbb{Z}_2$, then $\mathbb{Z}_2[x]$ is an infinite set, but there are only $4$ different functions from $\mathbb{Z}_2 \to \mathbb{Z}_2$
+\end{warning}
+
+\begin{propo}[Polynomial Ring is an Integral Domain]
+\label{propo:polynomial_ring_is_an_integral_domain}
+  Let $R$ be an integral domain. Then
+  \begin{enumerate}
+    \item $R[x]$ is an integral domain.
+    \item If $f(x) \neq 0$ and $g(x) \neq 0$ in $R[x]$, then\sidenote{In order to preserve this for when we have the case of $\deg 0$, we have to define $\deg 0 = - \infty$. Otherwise, say if we define $\deg 0 = -1$, then if $\deg f = -1$, then $\deg (fg) = \deg f + \deg g$ would imply that $\deg g = -2$, which is undefined.}
+      \begin{equation*}
+        \deg (fg) = \deg f + \deg g
+      \end{equation*}
+    \item The units in $R[x]$ are $R^*$, the units in $R$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  We shall prove $(1)$ and $(2)$ together.
+  \begin{enumerate}
+    \item[1 \& 2.] Suppose $f(x) \neq 0 \neq g(x) \in R[x]$, say
+      \begin{gather*}
+        f(x) = a_0 + a_1 x + \hdots + a_m x^m \quad a_m \neq 0 \\
+        g(x) = b_0 + b_1 x + \hdots + b_n x^n \quad b_n \neq 0.
+      \end{gather*}
+      Then
+      \begin{equation*}
+        f(x) g(x) = a_m b_n x^{m + n} + \hdots a_0 b_0.
+      \end{equation*}
+      Now since $R$ is an integral domain, we have that $a_m b_n \neq 0$ and so $f(x) g(x) \neq 0$. Thus $R[x]$ is an integral domain. Moreover, we see that
+      \begin{equation*}
+        \deg (fg) = m + n = \deg f + \deg g.
+      \end{equation*}
+
+      \setcounter{enumi}{2}
+    \item Suppose that $u(x) \in R[x]$ is a unit of $R[x]$ with inverse $u^{-1}(x)$ which we shall write as $v(x)$. Since $u(x) v(x) = 1$, by $(2)$, we have that
+      \begin{equation}\label{eq:polynomial_ring_is_an_integral_domain_eq1}
+        \deg u + \deg v = \deg 1 = 0.
+      \end{equation}
+      Now by $(1)$, $R[x]$ is an integral domain, and so since $u(x) v(x) = 1$, we have that $u(x) \neq 0 \neq v(x)$. Therefore, $\deg u, \deg v \geq 0$, which implies that we must have $\deg u = 0 = \deg v$ from \cref{eq:polynomial_ring_is_an_integral_domain_eq1}. Therefore, units in $R[x]$ are from $R^*$.
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{note}
+  Recall that $\mathbb{Z}_n$ is an integral domain if and only if $n = p$ a prime. If $n \neq p$, then, e.g., for $\mathbb{Z}_4[x]$, we have
+  \begin{equation*}
+    2x\cdot 2x = 4x^2 = 0
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \deg (2x) + \deg (2x) \neq \deg (4x^2) = \deg (2x \cdot 2x).
+  \end{equation*}
+\end{note}
+
+% subsection polynomials (end)
+
+\subsection{Factorization of Polynomials}%
+\label{sub:factorization_of_polynomials}
+% subsection factorization_of_polynomials
+
+\begin{defn}[Division of Polynomials]\index{Division of Polynomials}
+\label{defn:division_of_polynomials}
+  Let $R$ be a commutative ring and $f(x), g(x) \in R[x]$. We say that $f(x)$ divides $g(x)$, denoted as $f(x) \, | \, g(x)$ if $\exists q(x) \in R[x]$ such that
+  \begin{equation*}
+    g(x) = q(x) f(x)
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Monic Polynomial]\index{Monic Polynomial}
+\label{defn:monic_polynomial}
+  Let $R$ be a commutative ring and $f(x) \in R[x]$. $f(x)$ is monic if its leading coefficient is $1$.
+\end{defn}
+
+We shall prove the following proposition next class.
+
+\begin{propononum}
+  Let $R$ be an integral domain, and $f(x), \, g(x) \in R[x]$ be monic polynomials. If $f(x) \, | \, g(x)$ and $g(x) \, | \, f(x)$, then $f(x) = g(x)$.
+\end{propononum}
+
+% subsection factorization_of_polynomials (end)
+
+% section polynomial_ring (end)
+
+% chapter lecture_27_july_06th_2018 (end)
