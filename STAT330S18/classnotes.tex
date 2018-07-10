@@ -6,8 +6,13 @@
 \renewcommand{\baselinestretch}{1.1}
 \usepackage{longtable,multirow,booktabs}
 
+\usepackage{classnotetitle}
+
 \title{STAT330S18 - Mathematical Statistics}
 \author{Johnson Ng}
+\subtitle{Classnotes for Spring 2018}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
 
 \input{latex-classnotes-preamble.tex}
 
@@ -56,9 +61,11 @@
   \label{chapter:foreword}
 
 \begin{fullwidth}
-The proofs in this set of notes will be more rigourous compared to the expectations of the course. If you are not the author and is interested in reading the notes, you may skip the proofs should you have little interest in them. The rigour is required almost exclusively for the author himself, for his own practice, and because he transferred his STAT230 course from a class that is clean of proofs.
+  The proofs in this set of notes will be more rigourous compared to the expectations of the course (at least, for the course this term). If you are not the author and is interested in reading the notes, you may skip the proofs should you have little interest in them. The rigour is required almost exclusively for the author himself, for his own practice, and because he transferred his STAT230 course from a class that is clean of proofs.
 
-Also, many of the common mathematical notations will be heavily used both in the author's notes and proofs.
+  Also, many of the common mathematical notations will be heavily used both in the author's notes and proofs. The author cannot guarantee that his proofs are absolutely correct, but he tries, to the best of his abilities to minimize and assure of that. Should you be suspicious about the proofs, or should you notice errorneous ones, please do inform the author at \url{https://github.com/japorized/TeX_notes/issues}.
+
+  You are also warned that the author is rather bummed with how the course is presented in the term that he is/was taking it, and so there may be sarcastic language (towards the lectures) mixed in his notes.
 \end{fullwidth}
 
 % chapter foreword (end)
@@ -378,7 +385,7 @@ Also, many of the common mathematical notations will be heavily used both in the
   \begin{equation*}
     f(x) = \begin{cases}
       \frac{C \mu^x}{x!} & x \in \mathbb{Z}^+, \, \mu > 0 \\
-      0 & \text{otherwise}
+      0                  & \text{otherwise}
     \end{cases}
   \end{equation*}
   Find $C$ such that $f(x)$ is a pmf for the rv $X$.
@@ -4906,7 +4913,7 @@ Let $X_1, X_2, ..., X_n, ...$ be a sequence of rvs such that $X_n$ has mgf $M_n(
 \begin{solution}
   Note that by \cref{thm:mgf_of_a_linear_transformation}, we have that
   \begin{equation*}
-    M_{\bar{Y}_n}(t) = \prod_{i=1}^{n} M_{Y_i}\left(\frac{t}{n}\right) = \prod_{i=1}^{n} e^{\frac{\mu t}{n} + \frac{(\sigma t)^2}{2 n^2}} = e^{ \mu t + \frac{\sigma^2 t^}{2 n} }.
+  M_{\bar{Y}_n}(t) = \prod_{i=1}^{n} M_{Y_i}\left(\frac{t}{n}\right) = \prod_{i=1}^{n} e^{\frac{\mu t}{n} + \frac{(\sigma t)^2}{2 n^2}} = e^{ \mu t + \frac{\sigma^2 t^2}{n} }.
   \end{equation*}
   which is the mgf of $\Gau\left(\mu, \frac{\sigma}{\sqrt{n}}\right)$. Let $X_n = \frac{\bar{Y}_n - \mu}{\sigma / \sqrt{n}}$.
   
@@ -4928,7 +4935,7 @@ Let $X_1, X_2, ..., X_n, ...$ be a sequence of rvs such that $X_n$ has mgf $M_n(
 \begin{solution}
   By \cref{thm:mgf_of_a_linear_transformation}, we have
   \begin{align*}
-    M_{W_n}(t) &= e^{ - t \sqrt{n} } M_Y_n (t) \left( \frac{t}{2 \sqrt{n}} \right) = e^{- t \sqrt{n}} \left( 1 - 2 \left( \frac{t}{2 \sqrt{n}} \right) \right)^{-n} \\
+    M_{W_n}(t) &= e^{ - t \sqrt{n} } M_{ Y_n } (t) \left( \frac{t}{2 \sqrt{n}} \right) = e^{- t \sqrt{n}} \left( 1 - 2 \left( \frac{t}{2 \sqrt{n}} \right) \right)^{-n} \\
                &= \left[ e^{\frac{t}{\sqrt{n}}} \left( 1 - \frac{t}{\sqrt{n}} \right) \right]^{-n} = \left[ \left(1 - \frac{t}{\sqrt{n}}\right) \sum_{k=0}^{\infty} \frac{(t / \sqrt{n})^k}{k!} \right]^{-n} \\
                &= \left[ \left( 1 - \frac{t}{\sqrt{n}} \right) \left( 1 + \frac{t}{\sqrt{n}} + \frac{t^2}{2n} + \frac{t^3}{3 \sqrt{n^3}} + \hdots \right) \right]^{-n} \\
                &= \left( 1 - \frac{t}{\sqrt{n}} + \frac{t}{\sqrt{n}} - \frac{t^2}{n} + \frac{t^2}{2 n} - \frac{t^3}{2 \sqrt{n^3}} + \frac{t^3}{3 \sqrt{n^3}} - \frac{t^4}{3 n^2} + \hdots \right)^{-n} \\
@@ -5089,7 +5096,7 @@ where $\bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i$.
       \begin{equation*}
         P[ \abs{ g(X_n ) - g(a)} < \epsilon ] \geq P[ \abs{X_n - a} < \delta ]
       \end{equation*}
-      since $P(B) \geq P(A)$ whenever $A \subset B$ \sidenote{While I do not have a rigorous proof of this for our case here, it is a sensible result seeing that $\delta$ depends on $\epsilon$.}. Since $X_n \convp a$, we have that for any $\delta > 0$, we have
+      since $P(B) \geq P(A)$ whenever $A \subset B$ \sidenote{\st{While I do not have a rigorous proof of this for our case here, it is a sensible result seeing that $\delta$ depends on $\epsilon$.} My hunch was right: thinking about the two probability measures using the definition of a random variable, we see that the $w \in S$ that works for $\abs{X_n - a} < \delta$ will definitely work for $\abs{g(X_n) - g(a)} < \epsilon$, but the converse is not necessarily true. Therefore, the events covered in the left term is a larger set that contains the event on the right.}. Since $X_n \convp a$, we have that for any $\delta > 0$, we have
       \begin{equation*}
         1 \geq \lim_{n \to \infty} P[ \abs{g(X_n) - g(a)} < \epsilon ] \geq \lim_{n \to \infty} P[ \abs{X_n - a} < \delta ] = 1.
       \end{equation*}
@@ -5132,7 +5139,10 @@ where $\bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i$.
     \item Since $a > 0$, we have the function $g(x) = \sqrt{x}$ is continuous on $a$, and so by \cref{propo:other_limit_theorems}, we have that $\sqrt{X_n} \convp \sqrt{a}$.
     \item Since the function $g(x, y) = x + y$ is continous on the real number 2-tuple $(a, b)$, we have that $X_n + Y_n \convp a + b$.
     \item Since the function $g(x, z) = xz$ is continuous on the real number 2-tuple $(x, z)$ for all $x \in \supp(X_n)$ and $z \in \supp(Z_n)$, by \hlnotea{Slutsky's Theorem}, we have $X_n Z_n \convd a Z \sim \Gau(0, a)$.
-    \item Note that the function $g(z) = \frac{1}{z}$ is continuous for all $z \in \supp(X)$ except at $z = 0$. But since $Z \sim \Gau(0, 1)$ is a continuous distribution, at a single point $z = 0$, $P(Z = 0) = 0$... \hlwarn{I need more info before finishing this problem.} 
+    \item Note that the function $g(z) = \frac{1}{z}$ is continuous for all $z \in \supp(X)$ except at $z = 0$. But since $Z \sim \Gau(0, 1)$ is a continuous distribution, at a single point $z = 0$, $P(Z = 0) = 0$, and in a distribution it is of negligible value\sidenote{This is a painful thing to write down for me...}. Therefore, we have that
+      \begin{equation*}
+        \frac{1}{Z_n} \convd \frac{1}{Z}
+      \end{equation*}
   \end{enumerate}
 \end{solution}
 
@@ -5259,6 +5269,192 @@ where $\bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i$.
 
 % chapter lecture_16_jun_26th_2018 (end)
 
+\chapter{Lecture 17 Jun 28th 2018}%
+\label{chp:lecture_17_jun_28th_2018}
+% chapter lecture_17_jun_28th_2018
+
+\section{Estimation}%
+\label{sec:estimation}
+% section estimation
+
+\newthought{Suppose} $X_1, ..., X_n \sim f(x; \theta)$ is an IID sequence of rvs, where $f(x; \theta)$ is the pf of the $X_i$'s. The joint distribution of $X_1, ..., X_n$ is
+\begin{equation*}
+  \prod_{i=1}^{n} f(x_i; \theta)
+\end{equation*}
+where the unknown parameter $\theta$ can either be a scalar in $\Omega$, where $\Omega$ is the parameter space or the set of possible values of $\theta$, or a vector, i.e. $\theta = \begin{pmatrix} \theta_1 & \theta_2 & \hdots & \theta_n \end{pmatrix}^T$.
+
+We are interested in making inferences about the unknown parameter $\theta$, i.e. we want to find \hlnoteb{estimators} (point and interval) of $\theta$ and we want to test our hypothesis about $\theta$.
+
+Before proceeding the the rest of this chapter (actual chapter, ahem...), we require the following definitions.
+
+\begin{defn}[Statistic]\index{Statistic}
+\label{defn:statistic}
+  A \hlnoteb{statistic}, $T = T(X) = T(X_1, ..., X_n)$, is a function of the data which does not depend on any unknown parameter(s).
+\end{defn}
+
+\begin{eg}
+  Suppose $X_1, ..., X_n$ is a random sample from a distribution with $E[X_i] = \mu$ and $\Var(X_i) = \sigma^2$, where $\mu$ and $\sigma^2$ are unknown. The sample mean $\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i$ and the sample variance $S^2 = \frac{1}{n} \sum_{i=1}^{n} (X_i - \bar{X})^2$ are statistics, while $\frac{\bar{X} - \mu}{\sigma / \sqrt{n}}$ is not a statistic.
+\end{eg}
+
+\begin{defn}[Estimators and Estimates]\index{Estimator}\index{Estimate}
+\label{defn:estimator}
+A statistic $T = T(X) = T(X_1, ..., X_n)$ that is used to estimate $\tau(\theta)$, a function of $\theta$, is called an \hlnoteb{estimator} of $\tau(\theta)$, and an observed value of the statistic $t = t(x) = t(x_1, ..., x_n)$ is called an \hlnoteb{estimate} of $\tau(\theta)$.
+\end{defn}
+
+\begin{eg}
+  Suppose $X_1, ..., X_n$ are IID rvs with $E[X_i] = \mu$. The rv $\bar{X}$ is an estimator of $\mu$. For a given set of observations, $x_1, ..., x_n$, the number $\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$ is an estimate of $\mu$.
+\end{eg}
+
+There are certain ``properties'' of an estimator that we look for, in particular, for an estimator, $\tilde{\theta}$, of an unknown parameter $\theta$, we want that the estimator
+\begin{itemize}
+  \item is not biased, aka an \hldefn{unbiased estimator}, i.e. $E[\tilde{\theta}]$;
+  \item has small variance;
+  \item is consistent, i.e. $\tilde{\theta} \convp \theta$.
+\end{itemize}
+
+\subsection{Maximum Likelihood Estimation}%
+\label{sub:maximum_likelihood_estimation}
+% subsection maximum_likelihood_estimation
+
+\newthought{Suppose} $X$ is a discrete rv with pf $P(X = x; \theta) = f(x; \theta), \, \theta \in \Omega$ where the scalar parameter $\theta$ is unknown. Suppose $x$ is an observed value of the rv $X$. Then the probability of observing this value is
+\begin{equation*}
+  P(X = x; \theta) = f(x; \theta).
+\end{equation*}
+With the observed value of $x$ substituted into $f(x; \theta)$, we have a function of the parameter $\theta$, referred to as the \hlnoteb{likelihood function}, and denoted $L(\theta)$. In the absense of any other information, it seems logical (temptingly so) that we should estimate the parameter $\theta$ using a value that is ``the most compatible'' with the data. E.g., we might choose the value of $\theta$ of which it maximizes the probability of the observed data, or equivalently, the value of $\theta$ which maximizes the likelihood function $L(\theta)$.
+
+But first, let us formally state the definition of a likelihood function.
+
+\begin{defn}[Likelihood function]\index{Likelihood function}
+\label{defn:likelihood_function}
+  Suppose $X$ is an rv with pf $f(x; \theta)$, where $\theta \in \Omega$ is a scalar. If $x$ is the observed data, then the \hlnoteb{likelihood function} for $\theta$ based on $x$ is
+  \begin{equation*}
+    L(\theta) = P(X = x; \theta) = f(x; \theta) \quad \text{ for } \theta \in \Omega.
+  \end{equation*}
+
+  Similarly so, suppose $X_1, ..., X_n$ is a random sample from a distribution, each with pf $f(x; \theta)$, and let $x_1, ..., x_n$ be the observed data. Then the \hlnoteb{likelihood function} for $\theta$ based on $x_1, ..., x_n$ is
+  \begin{equation*}
+    L(\theta) = P(X_1 = x_1, ..., X_n = x_n ; \theta) = \prod_{i=1}^{n} f(x_i; \theta) \quad \text{ for } \theta \in \Omega.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  As discussed earlier, a natural estimate of $\theta$ is the value which maximizes the probability of the observed sample, and we denote this notion as
+  \begin{equation*}
+    \hat{\theta} = \argmax_{\theta \in \Omega} L(\theta)
+  \end{equation*}
+  and call $\hat{\theta}$ the \hldefn{maximum likelihood estimate} (ML estimate). In practice, it is often convenient to work, instead, with the natural logarithm of the likelihood function, in which we call the \hldefn{Log-likelihood}:
+  \begin{equation*}
+    \ell(\theta) = \ln L(\theta).
+  \end{equation*}
+  Note that the maximum likelihood estimate for both the likelihood function and the log-likelihood are the same since $\log$ is a strictly increasing function.
+\end{note}
+
+\begin{eg}[Example 6.1]\label{eg:6_1}
+  Consider flipping a coin repeatedly, where for $i \in \mathbb{N}$
+  \begin{equation*}
+    X_i = \begin{cases}
+      1 & \text{if the } i \text{\textsuperscript{th} flip lands on heads} \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  Based on $4$ independent flips, we are given that $X_1, X_2, X_3, X_4 \sim \Bernoulli(p)$ are IID rvs. The sample has been observed as $x_1 = 1, \, x_2 = 1 \, x_3 = 0, \, x_4 = 1$. Write the probability of this sample as a function of $p$. Then, compute the likelihood function and find the ML estimate.
+\end{eg}
+
+\begin{solution}
+  Since the $X_i$'s are IID rvs, we have
+  \begin{align*}
+    f(x_1, x_2, x_3, x_4 ; p) &= \prod_{i=1}^{4} P(X_i = x_i ; p) \\
+                              &= \prod_{i=1}^{4} p^{x_i} (1 - p)^{1 - x_i} = p^{\sum_{i=1}^{4} x_i} (1 - p)^{\sum_{i=1}^{4} ( 1 - x_i )}.
+  \end{align*}
+  Note that the likelihood function for $p$ under the observed values is therefore
+  \begin{equation*}
+    L(p) = p^3 (1 - p).
+  \end{equation*}
+  To find the ML estimate, we do
+  \begin{align}
+    0 = \frac{dL(p)}{dp} = 3p^2 - 4p^3 = p^2( 3 - 4p )
+  \end{align}
+  and we observe that $p = 0$ or $\frac{3}{4}$. Clearly, $p = \frac{3}{4}$ maximizes the likelihood function.
+\end{solution}
+
+\begin{note}
+  \newthought{We have been} talking almost solely about the discrete case, so what about the continuous case? We have that $P(X = x) = 0$, and so we consider a small neighbourhood of radius $\delta > 0$. Then for a small $\delta > 0$ around any point $x \in \supp(X)$, we have that
+  \begin{equation}\label{eq:ml_estimate_for_continuous_case_eq1}
+    P( x - \delta < X < x + \delta; \theta ) = \int_{x - \delta}^{x + \delta} f(t; \theta) \dif{t} \approx 2 \delta \cdot f(x; \theta).
+  \end{equation}
+  And so for an observed value $x$, since $\delta$ is fixed in \cref{eq:ml_estimate_for_continuous_case_eq1}, we have that the value of $\theta$ that maximizes $f(t; \theta)$ also maximizes $2 \delta \cdot f(t ; \theta)$.
+\end{note}
+
+\begin{warning}
+  We shall clarify the following notations: we use
+  \begin{itemize}
+    \item $\tilde{\theta}$ as the estimator, which is an rv; and
+    \item $\hat{\theta}$ as an estimate, which is a fixed value.
+  \end{itemize}
+\end{warning}
+
+\begin{eg}[Example 6.2 (Course Notes 6.2.4)]
+  Recall the coin flip example in \cref{eg:6_1}. Suppose $X_1, ..., X_n \sim \Bernoulli(p)$ is a sequence of IID rvs. Calculate the ML estimate of $p$.
+\end{eg}
+
+\begin{solution}
+  Since $X_1, ..., X_n$ are IID, let $\vec{x} = ( x_1 \; x_2 \; \hdots \; x_n )$, then the joint distribution is
+  \begin{align*}
+    f(\vec{x}; p) &= \prod_{i=1}^{n} f(x_i; p) \\
+                  &= \prod_{i=1}^{n} p^{x_i} ( 1 - p )^{1 - x_i} = p^{ \sum\limits_{i=1}^{n} x_i }(1 - p)^{\sum\limits_{i=1}^{n} (1 - x_i)}
+  \end{align*}
+  To get an ML estimator, we shall use the log-likelihood:
+  \begin{equation*}
+    \ell(p) = \left( \sum_{i=1}^{n} x_i \right) \ln p + \left( n - \sum_{i=1}^{n} x_i \right) \ln (1 - p)
+  \end{equation*}
+  and so to get the ML estimator\marginnote{Note that when looking for an \hlnoteb{ML estimate}, we should also check for the case when $\frac{\partial^2}{\partial p^2} \ell(p) \at{p = \hat{p}}{} < 0$ to ensure maximality (instead of minimality).}
+  \begin{align*}
+    0 = \frac{\partial}{\partial p} \ell(p) \at{p = \hat{p}}{} &= \left( \sum_{i=1}^{n} x_i \right) \left( \frac{1}{\hat{ p }} \right) - \left( n - \sum_{i=1}^{n} x_i \right) \left( \frac{1}{1 - \hat{ p }} \right) \\
+                                                               &= \frac{\Sigma x_i}{\hat{p}} - \frac{n - \Sigma x_i}{1 - \hat{p}} = \frac{(1 - \hat{p}) \Sigma x_i - n\hat{p} + \hat{p} \Sigma x_i}{\hat{p} (1 - \hat{p})} \\
+                                                               &= \frac{\Sigma x_i - n\hat{p}}{\hat{p}(1 - \hat{p})}
+  \end{align*}
+  where we represent $\sum_{i=1}^{n} x_i$ by $\Sigma x_i$ for sanity. Thus we have that\marginnote{Note that the \hlnoteb{ML estimator} in this case would be represented as
+  \begin{equation*}
+    \tilde{p} = \bar{X}.
+  \end{equation*}}
+  \begin{equation*}
+    n \hat{p} = \sum_{i=1}^{n} x_i \implies \hat{p} = \frac{1}{n} \sum_{i=1}^{n} x_i = \bar{x}
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Example 6.3 (Course Notes 6.2.5)]
+  Suppose we have the data $\vec{x} = ( x_1 \; x_2 \; \hdots \; x_n )$ for the sequence of IID rvs $X_1, X_2, ..., X_n \sim \Poi(\theta)$. Find the likelihood function, log-likelihood, the ML estimate $\hat{\theta}$, and the ML estimator $\tilde{\theta}$.
+\end{eg}
+
+\begin{solution}
+  Since each of the $X_i$'s are IID, we have that their joint pmf, and in particular, their likelihood function, is
+  \begin{equation*}
+    L(\theta) = \prod_{i=1}^{n} \frac{e^{- \theta } \theta^x}{x!} = e^{-n \theta} \theta^{ \sum\limits_{i=1}^{n} x_i } \left( \prod\limits_{i=1}^{n} x! \right)^{-1}.
+  \end{equation*}
+  Then the log-likelihood is
+  \begin{equation*}
+    \ell(\theta) = - n \theta + \left( \sum_{i=1}^{n} x_i \right) \log \theta - \sum_{i=1}^{n} \log ( x_i ! ).
+  \end{equation*}
+  To get the ML estimate, note that
+  \begin{equation*}
+    0 = \frac{\partial}{\partial \theta} \ell(\theta) \at{\theta = \hat{\theta}}{} = -n + \frac{1}{\hat{ \theta }} \sum_{i=1}^{n} x_i
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \hat{\theta} = \frac{1}{n} \sum^{n}_{i=1} x_i = \bar{x}.
+  \end{equation*}
+  Consequently, we have that the ML estimator is
+  \begin{equation*}
+    \tilde{\theta} = \bar{X}.
+  \end{equation*}
+\end{solution}
+
+% subsection maximum_likelihood_estimation (end)
+
+% section estimation (end)
+
+% chapter lecture_17_jun_28th_2018 (end)
+
 \nobibliography*
 \bibliography{bibliography}
 
@@ -5337,6 +5533,7 @@ k \in \mathbb{N} & \multirow{3}{*}{$\frac{1}{2^{\frac{k}{2}} \Gamma(\frac{k}{2})
 
 % chapter appendix (end)
 
+\pagestyle{empty}
 \printindex
 
 
