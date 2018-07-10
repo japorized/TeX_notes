@@ -1,0 +1,30 @@
+% Copyright note:
+\ProvidesPackage{classnotetitle}[Japorized's Personal Classnotes Title Page]
+\newcommand*{\subtitle}[1]{\gdef\@subtitle{#1}}
+\newcommand*{\@subtitle}{}
+\newcommand*{\credentials}[1]{\gdef\@credentials{#1}}
+\newcommand*{\@credentials}{}
+\newcommand*{\institution}[1]{\gdef\@institution{#1}}
+\newcommand*{\@institution}{}
+\newcommand*\nbvspace[1][3]{\vspace*{\stretch{#1}}}
+\newcommand*\nbstretchyspace{\spaceskip0.5em plus 0.25em minus 0.25em}
+\newcommand*{\nbtitlestretch}{\spaceskip0.6em}
+\renewcommand*{\maketitle}{%
+\clearpage
+\begin{titlepage}
+\nbvspace[1]
+  \centering
+{\nbtitlestretch\Huge\bfseries\@title\unskip\strut\par}
+\vspace{2cm}
+{\scshape\Large\@subtitle\unskip\strut\par}
+\vspace{2cm}
+by\unskip\strut\par
+{\Large\itshape\@author\unskip\strut\par}
+\vfill
+\footnotesize \@credentials\unskip\strut\par
+\@institution\unskip\strut\par
+
+\vfill
+\end{titlepage}
+}
+\endinput
