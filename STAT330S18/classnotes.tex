@@ -4,7 +4,7 @@
 \setcounter{tocdepth}{5}
 
 \renewcommand{\baselinestretch}{1.1}
-\usepackage{longtable,multirow}
+\usepackage{longtable,multirow,booktabs}
 
 \title{STAT330S18 - Mathematical Statistics}
 \author{Johnson Ng}
@@ -44,11 +44,11 @@
 \hypersetup{pageanchor=true}
 \tableofcontents
 
-\chapter*{List of Definitions}
+\chapter*{\faBook \enspace List of Definitions}
 \theoremlisttype{all}
 \listtheorems{defn}
 
-\chapter*{List of Theorems}
+\chapter*{\faPaperclip \enspace List of Theorems}
 \theoremlisttype{allname}
 \listtheorems{axiom,lemma,thm,crly,propo}
 
@@ -1089,7 +1089,7 @@ When we look into methods for constructing confidence intervals for an unknown p
 \begin{defn}[Expectation of A Continuous RV]
 \label{defn:expectation_of_a_continuous_rv}
   If $X$ is a continuous rv with pdf $f$ and support set $A$, then the \hlnoteb{expectation} of $X$, or the \hldefn{expected value} of $X$ is defined by
-  \begin{equation}\label{eq:expectation_discrete}
+  \begin{equation}\label{eq:expectation_continuous}
     E(X) = \int_{x \in A} x f(x)
   \end{equation}
   provided that the integral converges absolutely, i.e.
@@ -4340,7 +4340,7 @@ If $X_i \sim \Nor( \mu_i, \sigma_i^2 )$, with $i = 1, ..., n$ independently, the
 
 \begin{thm}[Properties of the Gaussian Distribution]
 \label{thm:properties_of_the_gaussian_distribution}
-  Asumme $X_1, ..., X_n \sim \Nor( \mu, \sigma_2 )$, independently, where $\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X-i$, and $S^2 = \frac{\sum_{i=1}^{n} ( X_i - \bar{X} )^2}{n - 1}$. Then
+  Asumme $X_1, ..., X_n \sim \Nor( \mu, \sigma_2 )$, independently, where $\bar{X} = \frac{1}{n} \sum_{i=1}^{n} X_i$, and $S^2 = \frac{\sum_{i=1}^{n} ( X_i - \bar{X} )^2}{n - 1}$. Then
   \begin{enumerate}
     \item $\bar{X} \sim \Nor\left( \mu, \frac{\sigma^2}{n} \right)$.
     \item (\hldefn{Cochran's Theorem}) $\frac{( n - 1 ) S^2}{\sigma^2} = \frac{\sum_{i=1}^{n} (X_i - \bar{X})^2}{\sigma^2} \sim \chi^2 ( n - 1 )$.
@@ -4433,7 +4433,7 @@ The following theorem, that we shall not prove, will be useful for the remainder
 \label{thm:taylor_series_with_lagrange_s_remainder}
   Suppose that $f:[a, b] \to \mathbb{R}$ is infinitely differentiable, and $x \in [a, b]$. Then $\forall x \in [a, b]$ and $\forall k \in \mathbb{N}$,
   \begin{equation*}
-    f(x) = \sum_{i=1}^{k} \frac{f^{(i)}(x)(x - c)^i}{i!} + \frac{f^{(k + 1)}( \zeta_X )(x - c)^{k + 1}}{(k + 1)!}
+    f(x) = \sum_{i=0}^{k} \frac{f^{(i)}(c)(x - c)^i}{i!} + \frac{f^{(k + 1)}( \zeta_X )(x - c)^{k + 1}}{(k + 1)!}
   \end{equation*}
   for some $\zeta_X \in [c, x]$.
 \end{thm}
@@ -4621,7 +4621,7 @@ We have that the earlier example gives us that the limiting distribution is a de
 We shall look into the following proposition in the next lecture.
 
 \begin{propononum}
-  Suppose $X_n$, $\forall n \in \mathbb{N}$, is a sequence of rvs. We have
+  Suppose $\forall n \in \mathbb{N}$, $\{ X_n \}$ is a sequence of rvs. Then
   \begin{equation*}
     X_n \convp X \implies X_n \convd X
   \end{equation*}
@@ -4633,6 +4633,631 @@ We shall look into the following proposition in the next lecture.
 % section limiting_or_asymptotic_distributions (end)
 
 % chapter lecture_15_jun_21st_2018 (end)
+
+\chapter{Lecture 16 Jun 26th 2018}%
+\label{chp:lecture_16_jun_26th_2018}
+% chapter lecture_16_jun_26th_2018
+
+\section{Limiting or Asymptotic Distributions (Continued)}%
+\label{sec:limiting_or_asymptotic_distributions_continued}
+% section limiting_or_asymptotic_distributions_continued
+
+\subsection{Convegence in Probability (Continued)}%
+\label{sub:convegence_in_probability_continued}
+% subsection convegence_in_probability_continued
+
+Before proving the proposition introduced in last class, we require the following lemma.
+
+\begin{lemma}
+\label{lemma:cdf_bounded_abv}
+  Let $X$, $Y$ be rvs, $a \in \mathbb{R}$, and $\epsilon > 0$. Then
+  \begin{equation*}
+    P( Y \leq a ) \leq P( X \leq a + \epsilon ) + P ( \abs{Y - X} > \epsilon )
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Note that
+  \begin{align}
+    P(Y \leq a) &= P(Y \leq a, X \leq a + \epsilon) + P( Y \leq a, X > a + \epsilon ) \label{eq:lemma_cdf_bounded_abv_1} \\
+                &\leq P(X \leq a + \epsilon) + P( Y - X \leq a - X , a - X < - \epsilon ) \label{eq:lemma_cdf_bounded_abv_2} \\
+                &\leq P(X \leq a + \epsilon) + P( Y - X < - \epsilon ) \label{eq:lemma_cdf_bounded_abv_3} \\
+                &\leq P(X \leq a + \epsilon) + P( Y - X < - \epsilon ) + P( Y - X > \epsilon ) \label{eq:lemma_cdf_bounded_abv_4} \\
+                &= P(X \leq a + \epsilon) + P( \abs{Y - X} > \epsilon ) \nonumber
+  \end{align}
+  where \cref{eq:lemma_cdf_bounded_abv_1} is by \hlnotea{Law of Total Probability}, \cref{eq:lemma_cdf_bounded_abv_2} and \cref{eq:lemma_cdf_bounded_abv_3} are by the fact that for non-empty sets $A$ and $B$, $P(A \cap B) \leq P(A)$, and \cref{eq:lemma_cdf_bounded_abv_4} is because $P(Y - X > \epsilon) \geq 0$.\qed
+\end{proof}
+
+\begin{propo}[Convergence in Probability Implies Convergence in Distribution]
+\label{propo:convergence_in_probability_implies_convergence_in_distribution}
+\marginnote{This only states for the case of scalar random variables.}
+  Suppose $\forall n \in \mathbb{N}$, $\{ X_n \}$ is a sequence of rvs. Then
+  \begin{equation*}
+    X_n \convp X \implies X_n \convd X
+  \end{equation*}
+  where $X$ is an rv.
+\end{propo}
+
+\begin{proof}
+  By \cref{lemma:cdf_bounded_abv}, we have that\sidenote{We choose to use \cref{lemma:cdf_bounded_abv} to have $P(X_n \leq a)$ in two inequalities. Note that our goal is to show that
+  \begin{equation*}
+    \lim_{n \to \infty} P(X_n \leq a) = P(X \leq a).
+  \end{equation*}
+We already know that $\epsilon \to 0$, so we should use that to our advantage in the case of $X$. Also, in hindsight, it is clear why we choose this method as the \hlnotea{Squeeze Theorem} is suitable to help us reach our conclusion.}
+  \begin{gather*}
+    P(X_n \leq a) \leq P(X \leq a + \epsilon) + P(\abs{X_n - X} > \epsilon) \\
+    P(X \leq a - \epsilon) \leq P(X_n \leq a) + P(\abs{X_n - X} > \epsilon)
+  \end{gather*}
+  Then
+  \begin{align*}
+    &P(X \leq a - \epsilon) - P(\abs{X_n - X} > \epsilon) \\
+    &\leq P(X_n \leq a) \\
+    &\leq P(X \leq a + \epsilon) + P(\abs{X_n - X} > \epsilon)
+  \end{align*}
+  As $n \to \infty$, by assumption that $X_n \convp X$, we have that $P(\abs{X_n - X} > \epsilon) \to 0$, and so
+  \begin{equation*}
+    P(X \leq a - \epsilon) \leq \lim_{n \to \infty} P(X_n \leq a) \leq P(X \leq a + \epsilon)
+  \end{equation*}
+  Now as $\epsilon \to 0^+$, note that we must have the cdf of $X$ be continuous on $a$ by assumption, and so
+  \begin{equation*}
+    P(X \leq a) \leq \lim_{n \to \infty} P(X_n \leq a) \leq P(X \leq a)
+  \end{equation*}
+  and so by the \hlnotea{Squeeze Theorem},
+  \begin{equation*}
+    \lim_{n \to \infty} P(X_n \leq a) = P(X \leq a)
+  \end{equation*}
+  which then
+  \begin{equation*}
+    X_n \convd X
+  \end{equation*}
+  as required.\qed
+\end{proof}
+
+\begin{defn}[Convergence in Probability to a Constant]
+\label{defn:convergence_in_probability_to_a_constant}
+  A sequence of rvs $\{X_i\}_{i \in \mathbb{N}}$ converges in probability to a constant $b \in \mathbb{R}$ if $\forall \epsilon > 0$,
+  \begin{equation*}
+    \lim_{n \to \infty} P( \abs{X_n - b} \geq \epsilon ) = 0
+  \end{equation*}
+  or equivalently
+  \begin{equation*}
+    \lim_{n \to \infty} P( \abs{X_n - b} < \epsilon ) = 1.
+  \end{equation*}
+  We write
+  \begin{equation*}
+    X_n \convp b.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}[Example 5.4 - \hldefn{Weak Law of Large Numbers}]\label{eg:weak_law_of_large_numbers}\label{eg:bernoulli_s_theorem}\marginnote{The Weak Law of Large Numbers is also known as \hldefn{Bernoulli's Theorem}.}
+  Let $X_1, ..., X_n, ...$ be a sequence of IID rvs, each having mean $\mu$ and variance $\sigma^2$. Let
+  \begin{equation*}
+    \bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i.
+  \end{equation*}
+  Then $\bar{X}_n \convp \mu$.
+\end{eg}
+
+\begin{solution}
+  Observe that
+  \begin{equation*}
+    E\left[\bar{X}_n\right] = E\left[ \frac{1}{n} \sum_{i=1}^{n} X_i \right] = \frac{1}{n} \sum_{i=1}^{n} E[X_i] = \frac{n \mu}{n} = \mu,
+  \end{equation*}
+  Also, we have that
+  \begin{equation*}
+    \Var\left( \bar{X}_n \right) = \Var\left( \frac{1}{n} \sum_{i=1}^{n} X_i \right) = \frac{1}{n^2} \sum_{i=1}^{n} \Var(X_i) = \frac{1}{n^2} \cdot n \sigma^2 = \frac{\sigma^2}{2}.
+  \end{equation*}
+  Then by \cref{thm:markov_s_inequality_2}, we have that $\forall \epsilon > 0$,
+  \begin{equation*}
+    P(\abs{\bar{X}_n - \mu} \geq \epsilon) \leq \frac{\Var(\bar{X}_n)}{\epsilon^2} = \frac{\sigma^2}{n \epsilon^2}.
+  \end{equation*}
+  Therefore, we have
+  \begin{equation*}
+    0 \leq P(\abs{\bar{X}_n - \mu} \geq \epsilon) \leq \min\left( 1, \frac{\sigma^2}{n \epsilon^2} \right)
+  \end{equation*}
+  As $n \to \infty$, by \hlnotea{Squeeze Theorem}, we have that
+  \begin{equation*}
+    \lim_{n \to \infty} P(\abs{\bar{X}_n - \mu} \geq \epsilon) = 0
+  \end{equation*}
+  i.e. $\bar{X}_n \convp \mu$.
+\end{solution}
+
+Note that the converse of \cref{propo:convergence_in_probability_implies_convergence_in_distribution} is not generally true. \hlwarn{(Example required)} However, with an additional condition, the converse becomes true.
+
+\begin{propo}[Partial Converse of \cref{propo:convergence_in_probability_implies_convergence_in_distribution}]
+\label{propo:partial_converse_of_convp_implies_convd}
+  Suppose $\forall n \in \mathbb{N}$, $\{X_n\}$ is a sequence of rvs, each with cdf $F_n$. If
+  \begin{equation*}
+    \lim_{n \to \infty} F_n(x) = \lim_{n \to \infty} P( X_n \leq x ) = \begin{cases}
+      0 & x < c \\
+      1 & x > c
+    \end{cases},
+  \end{equation*}
+  then
+  \begin{equation*}
+    X_n \convp c.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Note that for $\epsilon > 0$, we have
+  \begin{align*}
+    P( \abs{X_n - c} > \epsilon ) &= P( X_n - c < -\epsilon ) + P( X_n - c > \epsilon ) \\
+                                  &= P( X_n < c - \epsilon ) + P( X_n > c + \epsilon ) \\
+                                  &= 1 - P( X_n < c + \epsilon ) + P ( X_n < c - \epsilon )
+  \end{align*}
+  By assumption, we have that
+  \begin{gather*}
+    \lim_{n \to \infty} P( X_n \leq c + \epsilon ) = 1 \\
+    \lim_{n \to \infty} P( X_n \leq c - \epsilon ) = 0
+  \end{gather*}
+  So
+  \begin{equation*}
+    \lim_{n \to \infty} P(\abs{X_n - c} > \epsilon) = 1 - 1 - 0 = 0
+  \end{equation*}
+  and so by definition, we have $X_n \convp c$.\qed
+\end{proof}
+
+\begin{defn}[Double Parameter Exponential Distribution]\index{Double Parameter Exponential Distribution}
+\label{defn:double_parameter_exponential_distribution}
+We say that an rv $X \sim \Exp(\lambda, \theta)$ when $X$ has pdf
+\begin{equation*}
+  f(x) = e^{- \frac{x - \theta}{\lambda}} \text{ for } x \in (\theta, \infty)
+\end{equation*}
+where $\lambda$ is the scale parameter, and $\theta$ the location parameter.
+\end{defn}
+
+\begin{eg}[Example 5.5 (Course Notes 5.2.5)]
+  Let $X_i \sim \Exp(1, \theta)$, $i = 1, 2, ...$, independently. Consider the sequence of rvs $Y_1, Y_2, ...$ where $Y_n = \min(X_1, X_2, ..., X_n)$, $n = 1, 2, ...$. Show that $Y_n \convp \theta$.
+\end{eg}
+
+\begin{solution}
+  Since we want to show that $Y_n \convp \theta$, and $\theta$ is a constant, we can use \cref{propo:partial_converse_of_convp_implies_convd}.
+  Thus we need to show that
+  \begin{equation*}
+    \lim_{n \to \infty} F_{Y_n} (y) = \lim_{n \to \infty} P ( Y_n \leq y ) = \begin{cases}
+      0 & y < \theta \\
+      1 & y > \theta
+    \end{cases}
+  \end{equation*}
+  Since $Y_n$ is defined as the minimum of $n$ of the first $X_i$ rvs, we need to use the \hlnotea{Law of Total Probability} in order to be able to make sense of the order statistics, i.e.
+  \begin{equation*}
+    P( Y_n \leq y ) = 1 - P( Y_n > y )
+  \end{equation*}
+  Now
+  \begin{align*}
+    P( Y_n > y ) &= \prod_{i=1}^{n} P(X_i > y) = \prod_{i=1}^{n} \left[ \int_{y}^{\infty} e^{- ( x - \theta )} \dif{x} \right] \\
+                 &= \prod_{i=1}^{n} \left[ e^{- (y - \theta)} \right] = e^{ -n (y - \theta) }
+  \end{align*}
+  Thus
+  \begin{align*}
+    \lim_{n \to \infty} P (Y_n \leq y) &= \begin{cases}
+      1 - \lim\limits_{n \to \infty} P( Y_n > y ) & y > \theta \\
+      0 & y \leq \theta
+    \end{cases} \\
+    &= \begin{cases}
+       1 - \lim\limits_{n \to \infty} e^{-n (y - \theta)} = 1 & y > \theta \\
+       0 & y \leq \theta
+    \end{cases}
+  \end{align*}
+  since if $y < \theta$
+  \begin{equation*}
+    P( Y_n \leq y ) = P( \min( X_1, X_2, ..., X_n ) \leq y ) = 0.
+  \end{equation*}
+  Note that if $y = \theta$, then
+  \begin{equation*}
+    e^{-n ( y - \theta )} = 1.
+  \end{equation*}
+  The proof is complete with \cref{propo:partial_converse_of_convp_implies_convd}.
+\end{solution}
+
+% subsection convegence_in_probability_continued (end)
+
+\subsection{Limit Theorems}%
+\label{sub:limit_theorems}
+% subsection limit_theorems
+
+\begin{propo}[Convergence in Distribution and MGF]
+\label{propo:convergence_in_distribution_and_mgf}
+Let $X_1, X_2, ..., X_n, ...$ be a sequence of rvs such that $X_n$ has mgf $M_n(t)$. Let $X$ be an rv with mgf $M(t)$.
+\begin{equation*}
+  X_n \convd X \iff \left[ \exists h > 0 \; \forall t \in (-h, h) \quad \lim_{n \to \infty} M_n(t) = M(t) \right]
+\end{equation*}
+\end{propo}
+
+\begin{proof}
+  Note that
+  \begin{equation*}
+    \lim_{n \to \infty} M_n(t) = \lim_{n \to \infty} \int\limits_{\supp(X_n)} e^{tx} \frac{d}{dx} F_{X_n} (x) \dif{x} 
+  \end{equation*}
+  and
+  \begin{equation*}
+    M(t) = \int\limits_{\supp(X)} e^{tx} \frac{d}{dx} F_X(x) \dif{x} 
+  \end{equation*}
+  The result follows assuming that the integral converges\sidenote{This allows us to ``swap'' the limit, the integral sign, and the differential operator.}.\qed
+\end{proof}
+
+\begin{eg}
+  Consider the sequence $Y_1, Y_2, ...$, where $Y_i \sim \Bin\left(n , \frac{\mu}{n}\right)$, for $i = 1, 2, ...$. Find the limiting distribution of $Y_n$.
+\end{eg}
+
+\begin{solution}[Example 5.6]
+  Note that $Y_n \sim \Bin\left(n, \frac{\mu}{n}\right) \implies$
+  \begin{equation*}
+    M_{Y_n}(t) = \left( \frac{\mu}{n} e^t + 1 - \frac{\mu}{n}\right)^n = \left( 1 + \frac{\mu \left( e^t - 1 \right)}{n} \right)^n.
+  \end{equation*}
+  So
+  \begin{equation*}
+    \lim_{n \to \infty} M_{Y_n}(t) = \lim_{n \to \infty} \left( 1 + \frac{\mu \left( e^t - 1 \right)}{n} \right)^n = e^{\mu \left(e^t - 1\right)}
+  \end{equation*}
+  which is the mgf of a Poisson Distribution. Thus by \cref{propo:convergence_in_distribution_and_mgf}, we have that
+  \begin{equation*}
+    Y_n \convd Y \sim \Poi(\mu).
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Example 5.7]
+  Let $Y_1, Y_2, ... \sim \Gau(\mu, \sigma)$. Then
+  \begin{equation*}
+    \frac{\bar{Y}_n - \mu}{\sigma / \sqrt{n}} \sim \Gau(0, 1)
+  \end{equation*}
+  where $\bar{Y}_n = \frac{1}{n} \sum_{i=1}^{n} Y_i$.
+\end{eg}
+
+\begin{solution}
+  Note that by \cref{thm:mgf_of_a_linear_transformation}, we have that
+  \begin{equation*}
+    M_{\bar{Y}_n}(t) = \prod_{i=1}^{n} M_{Y_i}\left(\frac{t}{n}\right) = \prod_{i=1}^{n} e^{\frac{\mu t}{n} + \frac{(\sigma t)^2}{2 n^2}} = e^{ \mu t + \frac{\sigma^2 t^}{2 n} }.
+  \end{equation*}
+  which is the mgf of $\Gau\left(\mu, \frac{\sigma}{\sqrt{n}}\right)$. Let $X_n = \frac{\bar{Y}_n - \mu}{\sigma / \sqrt{n}}$.
+  
+  Then again, by \cref{thm:mgf_of_a_linear_transformation}, we have
+  \begin{align*}
+    M_{X_n}(t) &= e^{- \frac{\mu t}{\sigma / \sqrt{n}}} M_{\bar{Y}_n}(t) \left( \frac{t}{\sigma / \sqrt{n}} \right) \\
+    &= e^{- \frac{\mu t}{\sigma / \sqrt{n}}} e^{ \frac{\mu t}{\sigma / \sqrt{n}} + \frac{\sigma^2 / n}{2} \left( \frac{t}{\sigma / \sqrt{n}} \right)^2 } = e^{\frac{t^2}{2}}
+  \end{align*}
+  which is the mgf of $\Gau(0, 1)$.
+\end{solution}
+
+\begin{eg}[Example 5.8]\label{eg:5_8}
+  Let $Y_n \sim \Gam( n, 2 )$. Find the limiting distribution of
+  \begin{equation*}
+    W_N = \frac{1}{2 \sqrt{n}} ( Y_n - 2n ).
+  \end{equation*}
+\end{eg}
+
+\begin{solution}
+  By \cref{thm:mgf_of_a_linear_transformation}, we have
+  \begin{align*}
+    M_{W_n}(t) &= e^{ - t \sqrt{n} } M_Y_n (t) \left( \frac{t}{2 \sqrt{n}} \right) = e^{- t \sqrt{n}} \left( 1 - 2 \left( \frac{t}{2 \sqrt{n}} \right) \right)^{-n} \\
+               &= \left[ e^{\frac{t}{\sqrt{n}}} \left( 1 - \frac{t}{\sqrt{n}} \right) \right]^{-n} = \left[ \left(1 - \frac{t}{\sqrt{n}}\right) \sum_{k=0}^{\infty} \frac{(t / \sqrt{n})^k}{k!} \right]^{-n} \\
+               &= \left[ \left( 1 - \frac{t}{\sqrt{n}} \right) \left( 1 + \frac{t}{\sqrt{n}} + \frac{t^2}{2n} + \frac{t^3}{3 \sqrt{n^3}} + \hdots \right) \right]^{-n} \\
+               &= \left( 1 - \frac{t}{\sqrt{n}} + \frac{t}{\sqrt{n}} - \frac{t^2}{n} + \frac{t^2}{2 n} - \frac{t^3}{2 \sqrt{n^3}} + \frac{t^3}{3 \sqrt{n^3}} - \frac{t^4}{3 n^2} + \hdots \right)^{-n} \\
+               &= \left( 1 - \frac{t^2}{2n} - \smash{ \underbrace{ \frac{t^3}{6 \sqrt{n^3}} - \frac{t^4}{3n^2} + \hdots }_{\to 0 \text{ as } n \to \infty} } \right)^{-n}
+  \end{align*}
+
+  \noindent So we have, by \cref{thm:generalized_limit_definition_of_e_},
+  \begin{equation*}
+    \lim_{n \to \infty} M_{W_n}(t) = \lim_{n \to \infty} ( 1 - \frac{t^2 / 2}{n} - \frac{t^3}{6 \sqrt{n^3}} - \frac{t^4}{3 n^2} + \hdots )^{-n} = e^{-(- \frac{t^2}{2})} = e^{\frac{t^2}{2}},
+  \end{equation*}
+  which is the mgf of $\Gau(0, 1)$. So we know that
+  \begin{equation*}
+    W_n \convd W \sim \Gau(0, 1)
+  \end{equation*}
+  for some limiting distribution $W$ that has a $\Gau(0, 1)$ distribution.
+\end{solution}
+
+\begin{thm}[Central Limit Theorem]
+\index{Central Limit Theorem}
+\label{thm:central_limit_theorem}
+Suppose $X_1, X_2,...$ is a sequence of IID rvs with $E(X_i) = \mu$ and $\Var(X_i) = \sigma^2 < \infty$, for $i = 1, 2, ...$. Then\marginnote{\faLightbulbO \; We actually also need the condition that all moments of $\frac{X_i - \mu}{\sigma}$ exists and is bounded. }
+\begin{equation*}
+  \frac{\bar{X}_n - \mu}{\sigma / \sqrt{n}} = \frac{\sqrt{n} ( \bar{X}_n - \mu )}{\sigma} \convd Z \sim \Nor(0, 1)
+\end{equation*}
+where $\bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i$.
+\end{thm}
+
+\begin{proof}
+  Since the first and second moment exist, the mgf must be well-defined, and is at least of class $C^2$ \sidenote{You should remember this from your calculus courses. Otherwise, \href{https://en.wikipedia.org/wiki/Differentiable_function\#Differentiability_classes}{[Reference - Wiki]}.}. We will use \cref{propo:convergence_in_distribution_and_mgf} and\\ \noindent \cref{thm:taylor_series_with_lagrange_s_remainder} in this proof. Firstly note that
+  \begin{equation*}
+    E\left[ \sum_{i=1}^{n} X_i \right] = n \mu \text{ and } \Var\left( \sum_{i=1}^{n} X_i \right) = n \sigma^2
+  \end{equation*}
+  Let $\Sigma X_n = \sum_{i=1}^{n} X_i$ and $Z = \frac{\sqrt{n} ( \bar{X}_n - \mu )}{\sigma}$. Note that
+  \begin{equation*}
+    Z = \frac{\sqrt{n} ( \bar{X}_n - \mu )}{\sigma} = \frac{n \bar{X}_n - \mu n}{\sigma \sqrt{n}} = \frac{\Sigma X_n - n \mu}{\sigma \sqrt{n}} = \sum_{i=1}^{n} \frac{X_i - \mu}{\sigma \sqrt{n}}.
+  \end{equation*}
+  Let $Y_i = \frac{X_i - \mu}{\sigma}$ so that
+  \begin{equation*}
+    Z = \sum^{n}_{i=1} \frac{1}{\sqrt{n}} Y_i.
+  \end{equation*}
+  Now the mgf of $Z$, by \cref{thm:mgf_of_a_linear_transformation} and \cref{propo:independence_on_joint_mgf}, is
+  \begin{equation}\label{eq:clt_eq1}
+    M_Z(t) = \prod_{i=1}^{n} M_{Y_i}\left(\frac{t}{\sqrt{n}}\right) = M_{Y_i}\left(\frac{t}{\sqrt{n}}\right)^n.
+  \end{equation}
+  Note that
+  \begin{gather*}
+    E(Y_i) = E\left( \frac{X_i - \mu}{\sigma} \right) = \frac{1}{\sigma} E(X) - \frac{\mu}{\sigma} = 0 \\
+    \Var(Y_i) = \Var\left( \frac{X_i - \mu}{\sigma} \right) = \frac{1}{\sigma^2} \Var(X_i) = 1.
+  \end{gather*}
+  So by \cref{thm:taylor_series_with_lagrange_s_remainder} up to the second derivative, we have
+  \begin{equation*}
+    M_{Y_i}\left(\frac{t}{\sqrt{n}}\right) = 1 + \frac{t^2}{2n} + \frac{M_{Y_i}^{(3)} ( \zeta ) \left( \frac{t}{\sqrt{n}} \right)^3}{3!}
+  \end{equation*}
+  where $\zeta \in \left[0, \frac{t}{\sqrt{n}}\right]$. Note that the last term in the above equation goes to $0$ faster than the second term as $n \to \infty$, since we would have $n^{\frac{3}{2}}$ in the denominator, which is larger than $n$ in the second term. With that, continuing with \cref{eq:clt_eq1} and now taking the limit as $n \to \infty$, we have
+  \begin{equation*}
+    \lim_{n \to \infty} M_Z (t) = \lim_{n \to \infty} \left[ 1 + \frac{t^2}{2n} + o(\frac{t}{n}) \right]^n
+  \end{equation*}
+  where $o\left(\frac{t}{n}\right)$ represents the last term\sidenote{This is a commonly used notation called the \href{https://en.wikipedia.org/wiki/Little-o_notation\#Little-o_notation}{Little-o Notation}.}. Then by \cref{thm:generalized_limit_definition_of_e_}, we have
+  \begin{equation*}
+    \lim_{n \to \infty} M_Z(t) = e^{\frac{t^2}{2}}
+  \end{equation*}
+  which is the mgf of $\Nor(0, 1)$. This completes the proof.\qed
+\end{proof}
+
+\begin{eg}[Example 5.9]
+  Revisit \cref{eg:5_8} using the \hyperref[thm:central_limit_theorem]{\faCoffee \; Central Limit Theorem}. Given
+  \begin{equation*}
+    W_n = \frac{Y - 2n}{2 \sqrt{n}}
+  \end{equation*}
+  where $Y \sim \Gam( n, 2 )$, find sequences $a_n$ and $b_n$ such that
+  \begin{equation*}
+    a_n ( Y - b_n ) \convd Z \sim G(0, 1).
+  \end{equation*}
+\end{eg}
+
+\begin{solution}
+  \marginnote{This involves the knowledge that the sum of $n$ exponential distributions with mean $\mu$ results in a gamma distribution with parameter $n$ and $\mu$. Since this has never been proven in this set of notes, it shall be proven here in this solution.} Let $X_1, X_2, ...$ be a sequence of IID rvs with distribution $\Exp(2)$. Note that we then have $E(X_i) = 2$ and $\Var(X_i) = 4$. Let $Y_n = \sum_{i=1}^{n} X_i$. Note that
+  \begin{equation*}
+    M_{Y_n}(t) = [ M_{X_i}(t) ]^n = (1 - 2t)^{-n}
+  \end{equation*}
+  which is the mgf of $\Gam(n, 2)$. By CLT, we have that
+  \begin{equation*}
+    \frac{\frac{1}{n} Y_n - 2}{2 / \sqrt{n}} \convd \Gau(0, 1).
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    \frac{\frac{1}{n}Y_n - 2}{2 / \sqrt{n}} = \frac{\sqrt{n}}{2 n} ( Y_n - 2n )
+  \end{equation*}
+  and so
+  \begin{equation*}
+    a_n = \frac{1}{2}\sqrt{n} \text{ and } b_n = 2n
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Example 5.10 (Course Notes 5.3.6)]
+  Suppose $Y_n \sim \chi^2(n)$, $n = 1, 2, ...$. Consider the sequence of rvs $Z_1, Z_2,...$ where $Z_n = (Y_n - n) / \sqrt{2n}$. Show that
+  \begin{equation*}
+    Z_n = \frac{Y_n - n}{\sqrt{2n}} \convd Z \sim G(0, 1).
+  \end{equation*}
+\end{eg}
+
+\begin{solution}
+  \marginnote{Once again our class pulls the card of ``not explaining or showing stuff that they are supposed to''. We will be using the fact that a sum of $n$ Chi-Squared Distirbutions, each with degree of freedom k, will result in a gamma distribution with parameter $\frac{nk}{2}$ and $2$. This will be proven in this exercise. } Let $X_1, X_2, ... \sim \chi^2(1)$ be IID rvs, and so $E[X_i] = 1$ and $\Var(X_i) = 2$ for $1 \leq i \leq n$, and let $Y_n = \sum_{i=1}^{n} X_i$. Note that
+  \begin{equation*}
+    M_{Y_n}(t) = [ M_{X_i}(t) ]^n = (1 - 2t)^{-\frac{n}{2}}
+  \end{equation*}
+  is the mgf of $\chi^2 (n)$. By CLT, we have that
+  \begin{equation*}
+    \frac{\frac{1}{n} \sum_{i=1}^{n} X_i - 1}{\sqrt{2} / \sqrt{2}} \convd Z \sim \Gau(0, 1).
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    \frac{\frac{1}{n} \sum_{i=1}^{n} X_i - 1}{\sqrt{2} / \sqrt{n}} = \frac{Y_n - n}{\sqrt{2} n / \sqrt{n}} = \frac{Y_n - n}{\sqrt{2n}}.
+  \end{equation*}
+  This completes our example.
+\end{solution}
+
+\begin{eg}[Example 5.11 (Course Notes 5.3.7)]
+  Suppose $Y_n \sim \Bin(n, p)$, $n = 1, 2, ...$. Consider the sequence of rvs $Z_1, Z_2, ...$, where $Z_n = \frac{Y_n - np}{\sqrt{np(1 - p)}}$. Show that
+  \begin{equation*}
+    Z_n = \frac{Y_n - np}{\sqrt{np(1 - p)}} \convd Z \sim \Nor(0, 1).
+  \end{equation*}
+\end{eg}
+
+\begin{solution}
+  Let $X_1, X_2, ...$ be a sequence of IID Bernoulli trials with success probability $0 \leq p \leq 1$. Note that for $i \in \mathbb{N}$, we have that $E[X_i] = p$ and $\Var(X_i) = p(1 - p)$. Now let $Y_n = \sum_{i=1}^{n} X_i$. We note that this satisfies our assumption, i.e. $Y_n \sim \Bin(n, p)$ since
+  \begin{equation*}
+    M_{Y_n}(t) = [ M_{X_1} ]^n = (pe^t + 1 - p)^n
+  \end{equation*}
+  is the mgf of $\Bin(n, p)$. By CLT, we have that
+  \begin{equation*}
+    \frac{\frac{1}{n} \sum_{i=1}^{n} X_i - p}{\sqrt{ p(1 - p) } / \sqrt{n}} \convd Z \sim \Nor(0, 1).
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    \frac{\frac{1}{n} \sum_{i=1}^{n} X_i - p}{\sqrt{p (1 - p) / \sqrt{n}}} = \frac{Y_n - np}{\sqrt{np(1 - p)}}
+  \end{equation*}
+  and so this completes our proof.
+\end{solution}
+
+\begin{propo}[Other Limit Theorems]
+\label{propo:other_limit_theorems}
+  \begin{enumerate}
+    \item $X_n \convp a \, \land \, g$ continuous at $x = a \implies g(X_n) \convp g(a)$.
+    \item $X_n \convp a \, \land \, Y_n \convp b \, \land \, g$ continous at $(x, y) = (a, b) \implies g(X_n, Y_n) \convp g(a, b)$.
+    \item (\hldefn{Slutsky's Theorem}) $X_n \convd X \, \land \, Y_n \convp b \, \land \, g$ continous at $(x, y) = (x, b)$ for all $x \in \supp( X ) \implies g(X_n, Y_n) \convd g(X, b)$.
+    \item (\hldefn{Continuous Mapping Theorem}) $X_n \convd X \, \land \, g$ continous at all $x \in \supp(X) \implies g(X_n) \convd g(X)$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Since $g$ is continuous at $a$, we have that
+      \begin{equation*}
+        \forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in \supp(X) \; ( \abs{x -a} < d \implies \abs{g(x) - g(a)} < \epsilon )
+      \end{equation*}
+      It follows that
+      \begin{equation*}
+        P[ \abs{ g(X_n ) - g(a)} < \epsilon ] \geq P[ \abs{X_n - a} < \delta ]
+      \end{equation*}
+      since $P(B) \geq P(A)$ whenever $A \subset B$ \sidenote{While I do not have a rigorous proof of this for our case here, it is a sensible result seeing that $\delta$ depends on $\epsilon$.}. Since $X_n \convp a$, we have that for any $\delta > 0$, we have
+      \begin{equation*}
+        1 \geq \lim_{n \to \infty} P[ \abs{g(X_n) - g(a)} < \epsilon ] \geq \lim_{n \to \infty} P[ \abs{X_n - a} < \delta ] = 1.
+      \end{equation*}
+      Thus
+      \begin{equation*}
+      \lim_{n \to \infty} P[ \abs{g(X_n - g(a)} < \epsilon ] = 1
+      \end{equation*}
+      and so
+      \begin{equation*}
+        g(X_n) \convp g(a)
+      \end{equation*}
+      as required.
+
+    \item This is simply a more general case than $(1)$.\qed
+
+    \item See this \href{https://en.wikipedia.org/wiki/Slutsky\'s_theorem}{Wikipedia article} for a proof. Requires knowledge of measure theory (in particular, convergence of measures).
+      
+    \item See this \href{https://en.wikipedia.org/wiki/Continuous_mapping_theorem}{Wikipedia article} for a proof. Requires knowledge of measure theory (in particular, convergence of measures).
+  \end{enumerate}
+\end{proof}
+
+\begin{eg}
+  If $X_n \convp 10$ and $Y_n \convp 2$, then $X_n Y_n \convp 20$ since $g(x, y) = xy$ is continuous at $(10, 2)$.
+
+  \noindent If $Z_n \convd Z \sim G(0, 1)$ and $a_n \convp a$ where $a$ is a constant, then $a_n Z_n \convd aZ \sim (0, a)$ since $g(a, z) = az$ is continous at $(a, z)$ for all $z \in \supp(Z)$..
+\end{eg}
+
+\begin{eg}[Example 5.12 (Course Notes 5.3.10)]
+  If $X_n \convp a > 0$, $Y_n \convp b \neq 0$ and $Z_n \convd Z \sim \Gau(0, 1)$, the find the limiting distributions of each of the following:
+  \begin{enumerate}
+    \item $\sqrt{X_n}$
+    \item $X_n + Y_n$
+    \item $X_n Z_n$
+    \item $\frac{1}{Z_n}$
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item Since $a > 0$, we have the function $g(x) = \sqrt{x}$ is continuous on $a$, and so by \cref{propo:other_limit_theorems}, we have that $\sqrt{X_n} \convp \sqrt{a}$.
+    \item Since the function $g(x, y) = x + y$ is continous on the real number 2-tuple $(a, b)$, we have that $X_n + Y_n \convp a + b$.
+    \item Since the function $g(x, z) = xz$ is continuous on the real number 2-tuple $(x, z)$ for all $x \in \supp(X_n)$ and $z \in \supp(Z_n)$, by \hlnotea{Slutsky's Theorem}, we have $X_n Z_n \convd a Z \sim \Gau(0, a)$.
+    \item Note that the function $g(z) = \frac{1}{z}$ is continuous for all $z \in \supp(X)$ except at $z = 0$. But since $Z \sim \Gau(0, 1)$ is a continuous distribution, at a single point $z = 0$, $P(Z = 0) = 0$... \hlwarn{I need more info before finishing this problem.} 
+  \end{enumerate}
+\end{solution}
+
+\begin{eg}[Example 5.13 (Course Notes 5.3.11)]\label{eg:involved_eg_for_limit_theorems}
+  Suppose $X_1, X_2, ... \sim \Poi(\mu)$ are IID rvs. Define $Z_n = \frac{\sqrt{n} ( \bar{X}_n - \mu )}{\sqrt{\bar{X}_n}}$. Find the limiting distribution of $Z_n$.
+\end{eg}
+
+\begin{solution}
+  Firstly, note that the parameter for a Poisson distribution is positive. Note that by CLT, we have
+  \begin{equation*}
+    \frac{\bar{X}_n - \mu}{\sqrt{\mu} / \sqrt{n}} \sim Z \sim \Gau(0, 1)
+  \end{equation*}
+  Note that since $\sqrt{m}$ is a constant, we have that $\sqrt{m} \convp \sqrt{m}$ is trivially true. Thus by our limit theorems, we have
+  \begin{equation*}
+    \sqrt{n} ( \bar{X}_n - \mu ) \sim \sqrt{m} Z \sim \Gau(0, \sqrt{m}).
+  \end{equation*}
+  Now by the \hyperref[eg:weak_law_of_large_numbers]{Weak Law of Large Numbers}, we have
+  \begin{equation*}
+    \bar{X}_n \convp \mu.
+  \end{equation*}
+  Since a function $g(x) = \sqrt{x}$ is continuous for $x = \mu > 0$, we have that
+  \begin{equation*}
+    \sqrt{\bar{ X }}_n \convp \sqrt{m}.
+  \end{equation*}
+  Then by the \hlnoteb{Continuous Mapping Theorem}, we have that
+  \begin{equation*}
+    Z_n = \frac{\sqrt{n} ( \bar{X}_n - \mu )}{\sqrt{\bar{X}_n}} \sim \frac{\sqrt{\mu} Z}{\sqrt{\mu}} \sim \Gau(0, 1).
+  \end{equation*}
+\end{solution}
+
+\begin{thm}[Generalized $\delta$-Method]
+\label{thm:generalized_delta_method}
+  Let $X_1, X_2, ...$ be a sequence of rvs such that
+  \begin{equation*}
+    n^b (X_n - a) \convd X
+  \end{equation*}
+  for some $b > 0$. Suppose the function $g(x)$ is differentiable at $a$ and $g'(a) \neq 0$. Then
+  \begin{equation*}
+    n^b [ g(X_n) - g(a) ] \convd g'(a) X.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Using the \hlnotea{Mean Value Theorem}, we have that
+  \begin{equation}\label{eq:delta_method_eq1}
+    g(X_n) = g(a) + g'(c) ( X_n - a )
+  \end{equation}
+  for some $c$ in between $X_n$ and $a$. Since $X_n \convp a$ \sidenote{\hlwarn{ I have no idea why... }}, and, WLOG, $X_n < c < a$, $c \convp a$. Then by the \hlnoteb{Continuous Mapping Theorem}, we have $g(c) \convp g(a)$.
+
+  \noindent Now by rearranging \cref{eq:delta_method_eq1} and multiplying both sides by $n^b$, we get
+  \begin{equation*}
+    n^b [ g(X_n) - g(a) ] = g'(c) n^b [ X_n - a ] \convd g'(a) X
+  \end{equation*}
+  by \hlnoteb{Slutsky's Theorem}.\qed
+\end{proof}
+
+\begin{crly}[$\delta$-Method]
+\index{$\delta$-Method}
+\label{crly:_delta_method}
+  Let $X_1, X_2, ...$ be a sequence of IID rvs with mean $\mu$ and variance $\sigma^2$. Suppose the function $g(x)$ is differentiable at $\mu$ and $g'(\mu) \neq 0$. Then
+  \begin{equation*}
+    \sqrt{n} [ g(\bar{X}_n) - g(\mu) ] \convd Z \sim N\left( 0, [ g'(\mu) ]^2 \sigma^2 \right)
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  Note that by the same working as in \cref{eg:involved_eg_for_limit_theorems} for $\sqrt{n} ( \bar{X}_n - \mu )$, we have that\sidenote{This is actually stated as an assumption on the $\delta$-Method Wikipedia article - [\href{https://en.wikipedia.org/wiki/Delta_method}{Reference}].}
+  \begin{equation*}
+    \sqrt{n} ( \bar{X}_n - \mu ) \convd Y \sim \Nor(0, \sigma^2).
+  \end{equation*}
+  Then by \cref{thm:generalized_delta_method}, we have that
+  \begin{equation*}
+    \sqrt{n} ( g(\bar{X}_n) - g(\mu) ) \convd g'(\mu) Y \sim \Nor\left( 0, [g'(\mu)]^2 \sigma^2 \right)
+  \end{equation*}
+  as required.\qed
+\end{proof}
+
+\begin{eg}[Example 5.14]
+  Let $X_1, X_2, ... \sim \Geo(p)$ is a sequence of IID rvs, each with support $\supp(X_i) = \{0, 1, 2, ...\}$. Derive the limiting distribution of
+  \begin{equation*}
+    W_n = \sqrt{n} \left( \frac{1}{\bar{X}_n} - \frac{p}{1 - p} \right)
+  \end{equation*}
+\end{eg}
+
+\begin{solution}
+  Note that by CLT, we have that
+  \begin{equation*}
+    \frac{\bar{X}_n - \frac{1 - p}{p}}{\sqrt{\frac{1 - p}{p^2}} / \sqrt{n}} \convd Z \sim \Nor(0, 1)
+  \end{equation*}
+  Then using \cref{propo:other_limit_theorems}, we have
+  \begin{equation*}
+    \sqrt{n} \left( \bar{X}_n - \frac{1 - p}{p} \right) \convd \sqrt{ \frac{1 - p}{p^2} } Z \sim N\left(0, \frac{1 - p}{p^2}\right)
+  \end{equation*}
+  \hlwarn{We took} $g(x) = \frac{1}{x}$ and the given solution in class somehow circumvents the fact that $x = 0$ is a case.
+\end{solution}
+
+\begin{eg}[Example 5.15]
+  Suppose that $X_1, X_2,... \sim \Exp(\theta)$ is a sequence of IID rvs. Find constants $a_n$ and $b_n$ such that
+  \begin{equation*}
+    W_n = b_n (\bar{X}_n^2 - a_n)
+  \end{equation*}
+  has a non-denegerate limiting distribution.
+\end{eg}
+
+\begin{solution}
+  By CLT, we have
+  \begin{equation*}
+    \frac{\bar{X}_n - \theta}{\theta / \sqrt{n}} \convd Z \sim \Nor(0, 1)
+  \end{equation*}
+  which then by \cref{propo:other_limit_theorems}, we have
+  \begin{equation*}
+    \sqrt{n} ( \bar{X}_n - \theta ) \convd \theta Z \sim N(0, \theta^2).
+  \end{equation*}
+  Let $g(x) = x^2$. Then $g$ is continous on any $x \in \supp(X_n)$ and on $\theta$. Then using \cref{crly:_delta_method}, we have
+  \begin{equation*}
+    \sqrt{n} ( \bar{X}_n^2 - \theta^2 ) \sim \theta^2 Z \sim \Nor(0, 4 \theta^2).
+  \end{equation*}
+  So we just need to pick $b_n = \sqrt{n}$ and $a_n = \theta^2$.
+\end{solution}
+
+% subsection limit_theorems (end)
+
+% section limiting_or_asymptotic_distributions_continued (end)
+
+% chapter lecture_16_jun_26th_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
@@ -4685,7 +5310,7 @@ x \in \mathbb{R}_{\geq 0} & \multirow{3}{*}{ $\frac{1}{\beta^\alpha \Gamma(\alph
 \hline
 \multicolumn{5}{e}{\text{Exponential Distribution } : X \sim \Exp(\theta)} \\
 \hline
-x \in \mathbb{R}_{> 0} & \multirow{2}{*}{ $\frac{1}{\theta} e^{- \frac{x}{\theta}}$ } & \multirow{2}{*}{ $\theta$ } & \multirow{2}{*}{ $\theta^2$ } & (1 - \theta t)^{-t} \\
+x \in \mathbb{R}_{> 0} & \multirow{2}{*}{ $\frac{1}{\theta} e^{- \frac{x}{\theta}}$ } & \multirow{2}{*}{ $\theta$ } & \multirow{2}{*}{ $\theta^2$ } & (1 - \theta t)^{-1} \\
 \theta > 0 & & & & t < \frac{1}{\theta} \\
 \hline
 \multicolumn{5}{e}{\text{Negative Binomial Distribution } : X \sim \NB(r, p)} \\
