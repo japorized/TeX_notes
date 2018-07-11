@@ -107,10 +107,10 @@ Now if $m$ is some prime, is the converse still true?
     k \cdot (a_1, a_2, ..., a_p) = (a_{k + 1}, a_{k + 2}, ..., a_p, a_1, ..., a_k).
   \end{equation*}
   \sidenote{We want to use \cref{thm:orbit_decomposition_theorem} from here.} Note that \\
-  \begin{aligned}
-    $(a_1, ..., a_p) \in X_f$ &$\iff$ every cycled shift of $(a_1, ..., a_p)$ is itself \\
-      &$\iff$ $a_1 = a_2 = \hdots = a_p$ and $a_1 a_2 ... a_p = 1$
-  \end{aligned}
+  \begin{align*}
+    (a_1, ..., a_p) \in X_f &\iff \text{ every cycled shift of } (a_1, ..., a_p) \text{ is itself } \\
+      &\iff a_1 = a_2 = \hdots = a_p \text{ and } a_1 a_2 ... a_p = 1
+  \end{align*}
   i.e. all of the components of the $p$-tuple are the same. Now if $(a_1, ..., a_p)$ has at least 2 distinct components, then its orbits must have $p$ elements. In other words, for some $r \in \mathbb{N}$, for each $1 \leq i \leq r$, we have that $[ G : S(x_i) ] = p$. Then, by the \hyperref[thm:orbit_decomposition_theorem]{Orbit Decomposition Theorem},
   \begin{gather*}
     n^{p - 1} = \abs{X} = \abs{X_f} + \sum_{i=1}^{r} [ G : S(x_i) ] \\

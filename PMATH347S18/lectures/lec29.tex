@@ -1,0 +1,151 @@
+\chapter{Lecture 29 Jul 11th 2018}%
+\label{chp:lecture_29_jul_11th_2018}
+% chapter lecture_29_jul_11th_2018
+
+\section{Polynomial Ring (Continued)}%
+\label{sec:polynomial_ring_continued}
+% section polynomial_ring_continued
+
+\subsection{Factorization of Polynomials (Continued 2)}%
+\label{sub:factorization_of_polynomials_continued_2}
+% subsection factorization_of_polynomials_continued_2
+
+\begin{note}
+  If $d(x)$ and $d_1(x)$ satisfies \cref{propo:properties_of_the_greatest_common_divisor}, then in particular $(3)$ is satisfied, i.e.
+  \begin{equation*}
+    d(x) \, | \, d_1(x) \text{ and } d_1(x) \, | \, d(x),
+  \end{equation*}
+  then since $d_1(x) = d(x)$ by \cref{propo:f_div_g_and_g_div_f_implies_f_is_g}. Thus $d(x)$ is unique and is therefore called the greatest common divisor of $f(x)$ and $g(x)$, denoted by $\gcd\Big( f(x), \, g(x) \Big) = d(x)$.
+\end{note}
+
+\newthought{Note that} in integers, $p \in \mathbb{Z}$ is prime if $p \geq 2$ and whenever $p = ab$, then $a = \pm 1$ or $b = \pm 1$, where $a, \, b \in \mathbb{Z}$. We can have an ``analogous'' notion with polynomials.
+
+\begin{defn}[Irreducible Polynomials]\index{Irreducible Polynomials}
+\label{defn:irreducible_polynomials}
+  Let $F$ be a field. A non-zero polynomial $l(x) \in F[x]$ is \hlnoteb{irreducible} if $\deg l \geq 1$ and if
+  \begin{equation*}
+    l(x) = l_1 (x) l_2 (x)
+  \end{equation*}
+  for $l_1(x), \, l_2 (x) \in F[x]$, then $\deg l_1 = 0$ or $\deg l_2 = 0$ \sidenote{Note that polynomials of degree $0$ are the units of $F[x]$.}.
+
+  Polynomials that are not irreducible are called \hldefn{reducible polynomials}.
+\end{defn}
+
+\begin{propo}[Euclid's Lemma for Polynomials]
+\label{propo:euclid_s_lemma_for_polynomials}
+Let $F$ be a field and $f(x), g(x) \in F[x]$. If $l(x) \in F[x]$ is irreducible and $l(x) \, | \, a(x) b(x)$, then $l(x) \, | \, a(x)$ or $l(x) \, | \, b(x)$.
+\end{propo}
+\marginnote{This is a good proof for an exercise.
+\begin{ex}
+  Prove \cref{propo:euclid_s_lemma_for_polynomials}.
+\end{ex}}
+
+\begin{proof}
+  Suppose $l(x) \, | \, f(x) g(x)$ and $l(x) \not| \, f(x)$. Since $l(x) \not| f(x)$, we have $\gcd[ l(x), f(x) ] = 1$. Then by \cref{propo:properties_of_the_greatest_common_divisor}, $\exists s(x), t(x) \in F[x]$ such that
+  \begin{equation*}
+    l(x) s(x) + f(x) t(x) = 1.
+  \end{equation*}
+  Multiplying the equation by $g(x)$, and since $F[x]$ is a field, we have
+  \begin{equation*}
+    l(x) s(x) g(x) + f(x) g(x) t(x) = g(x).
+  \end{equation*}
+  Since $l(x) \, | \, f(x) g(x)$ by assumption, we have that $l(x)$ divides the right hand side, and so it must also divide the left hand side, i.e. $l(x) \, | \, g(x)$.\qed
+\end{proof}
+
+\begin{thm}[Unique Factorization Theorem for Polynomials]
+\index{Unique Factorization Theorem for Polynomials}
+\label{thm:unique_factorization_theorem_for_polynomials}
+Let $F$ be a field and $f(x) \in F[x]$ with $\deg f \geq 1$. Then we can write
+\begin{equation*}
+  f(x) = c l_1(x) l_2(x) \hdots l_m(x)
+\end{equation*}
+where $c \in F^*$ is a unit, and for $1 \leq i \leq m$, $l_i(x)$ is a irreducible monic polynomial. This factorization is unique up to the order of $l_i$.
+\end{thm}
+\marginnote{This is, yet again, a good proof for an exercise.
+\begin{ex}
+  Proof \cref{thm:unique_factorization_theorem_for_polynomials}.
+\end{ex}}
+
+\begin{proof}
+  We shall only prove for when $f(x)$ is a monic polynomial, for if $f(x)$ is not monic, then it has some leading coefficient $a \neq 1 \in F$. Then since $F$ is a field, we have that $a^{-1} f(x)$ is a monic polynomial for which we can continue our consideration.
+
+  Suppose $f(x)$ is a monic polynomial that has the least degree such that it cannot be expressed as a product of irreducible monic polynomials. Clearly, $f(x)$ cannot be irreducible itself, or it would trivially be expressible as a product of irreducible monic polynomials. Therefore, $\exists s(x), t(x) \in F[x]$ such that
+  \begin{equation*}
+    f(x) = s(x) t(x)
+  \end{equation*}
+  where $1 \leq \deg s, \, \deg t \leq \deg f$. Since $f(x)$ is the polynomial of the least degree that cannot be expressed as a product of irreducible monic polnomials, $r(x)$ and $t(x)$ must be expressible as a product of irreducible monic polynomials. But this would contradict the fact that $f(x)$ is not expressible as a product of irreducible monic polynomials, and so $f(x)$ must be
+  \begin{equation*}
+    f(x) = l_1(x) l_2(x) \hdots l_m(x)
+  \end{equation*}
+  where $l_i(x)$ is an irreducible monic polynomial, for $1 \leq i \leq m$. For the case where $f(x)$ is not monic, say with $a$ as its leading coefficient, we would have
+  \begin{equation*}
+    f(x) = a l_1(x) l_2(x) \hdots l_m(x).
+  \end{equation*}
+
+  For uniqueness, suppose
+  \begin{equation*}
+    f(x) = c l_1(x) l_2(x) \hdots l_m(x) = d k_1(x) k_2(x) \hdots k_n(x)
+  \end{equation*}
+  for units $c, d \in F^*$ and irreducible monic polynomials $l_i, \, k_j$ for $1 \leq i \leq m$ and $1 \leq j \leq n$. Since $l_1(x) \, | \, f(x)$, by \cref{propo:euclid_s_lemma_for_polynomials}, $l_1(x) \, | \, k_j(x)$ for some $1 \leq j \leq n$. Relabelling the indices for the $k_j$'s if necessary, we can have that $l_1(x) \, | \, k_1(x)$. Since $k_1(x)$ is irreducible and monic, we must have that $l_1(x) = k_1(x)$.
+
+  Now if we continue this line of argument for $i = 2, 3, ..., m$, and end up with $l_2(x) = k_2(x), \, l_3(x) = k_3(x), \, \hdots , \, l_m(x) = k_m(x)$, where, WLOG, we suppose that $m \leq n$. However, we must have that $n = m$, otherwise we would have some $k_j$, where $m < j \leq n$ that cannot divide any of the $l_i$'s.\qed
+\end{proof}
+
+\newthought{For the sake of comparison with} $\mathbb{Z}$, observe the table below:
+
+{\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{l | c | c}
+                & $\mathbb{Z}$                                                                & $F[x]$ \\
+  \hline
+  elements      & $m$                                                                         & $f(x)$ \\
+  \hline
+  size          & $\abs{m}$                                                                   & $\deg f$ \\
+  \hline
+  units         & $\{ \pm 1 \}$                                                               & $F^*$ \\
+                & $\Big( \mathbb{Z} \setminus \{0\} \Big) \Big/ \{ \pm 1 \} \cong \mathbb{N}$ & $\Big( F[x] \setminus \{0\} \Big) \Big/ F^* \cong \{ h : h \text{ is monic } \}$ \\
+  \hline
+  unique        & $m = \pm 1 p_1^{\alpha_1} \hdots p_n^{\alpha_n}$                            & $f(x) = c l_1(x)^{\alpha_1} \hdots l_n(x)^{\alpha_n} $ \\
+  factorization & $p_i$ prime                                                                 & $\deg f \geq 1$ and $l_i$ are irreducible \\
+  \hline
+  ideals        & $\lra{n} : n \in \mathbb{N}$                                                & $\lra{h(x)} : h$ monic \\
+                & $\faktor{\mathbb{Z}}{\lra{n}}$ is a field                                   & $\faktor{F[x]}{\lra{h(x)}}$ is a field \\
+                & iff $n$ prime                                                               & iff $h(x)$ is irreducible
+\end{tabular}}
+
+In the next section, we will be investigating if the analogy given in the last row for polynomials holds.
+
+% subsection factorization_of_polynomials_continued_2 (end)
+
+\subsection{Quotient Rings of Polynomials}%
+\label{sub:quotient_rings_of_polynomials}
+% subsection quotient_rings_of_polynomials
+
+\begin{propo}[Ideals of {$F[x]$} are Principal Ideals]
+\label{propo:ideals_of_f_x_are_principal_ideals}
+If $F$ is a field. Then all ideas of $F[x]$ are of the form
+\begin{equation*}
+  \lra{h(x)} = h(x) F[x] \enspace \text{ for any } h(x) \in F[x].
+\end{equation*}
+If $\lra{h(x)} \neq \{0\}$ and $h(x)$ is monic, then it is uniquely determined.
+\end{propo}
+
+\begin{proof}
+  Let $A$ be an ideal of $F[x]$. If $A = \{0\}$, then $A = \lra{0}$. If $A \neq \{0\}$, then it contains a non-zero polynomial. Since $A$ is an ideal, it has a monic polynomial\sidenote{If $f(x) \in A$ has a leading coefficient $a$, then we know that $a^{-1} \in F$, and so $a^{-1} f(x) \in F f(x) \subseteq A$ is monic.}. Amongst all monic polynomials in $A$, choose $h(x) \in A$ that has the minimal degree. Clearly, $\lra{h(x)} \subseteq A$. To prove for $\supseteq$, note that for $f(x) \in A$, by \cref{propo:division_algorithm_for_polynomials},
+  \begin{equation*}
+    \exists q(x), r(x) \in F[x] \quad f(x) = q(x) h(x) + r(x) \quad \deg r < \deg h.
+  \end{equation*}
+  If $r(x) \neq 0$, then let $u \neq 0$ be the leading coefficient of $r(x)$. Then since $A$ is an ideal and $f(x), h(x) \in A$, we have
+  \begin{align*}
+    u^{-1} r(x) &= u^{-1}\left( f(x) - q(x) h(x) \right) \\
+                &= u^{-1} f(x) - u^{-1} q(x) h(x) \in A.
+  \end{align*}
+  Then we have that $\deg u^{-1} r = \deg r < \deg h$ is a monic polynomial in $A$, contradicting the minimality of $\deg h$. Thus $r(x) = 0$ and so $f(x) = q(x) h(x) \in \lra{h(x)}$. Therefore $A \susbeteq \lra{h(x)}$ and so $A = \lra{h(x)}$.
+
+  Now suppose that $A = \lra{h(x)} = \lra{k(x)}$. Then we must have $h(x) \, | \, k(x)$ and $k(x) \, | \, h(x)$. Since $h(x)$ and $k(x)$ are both monic, by \cref{propo:f_div_g_and_g_div_f_implies_f_is_g}, we have that $h(x) = k(x)$.\qed
+\end{proof}
+
+% subsection quotient_rings_of_polynomials (end)
+
+% section polynomial_ring_continued (end)
+
+% chapter lecture_29_jul_11th_2018 (end)
