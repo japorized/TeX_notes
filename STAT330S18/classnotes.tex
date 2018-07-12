@@ -5393,7 +5393,7 @@ But first, let us formally state the definition of a likelihood function.
   \end{itemize}
 \end{warning}
 
-\begin{eg}[Example 6.2 (Course Notes 6.2.4)]
+\begin{eg}[Example 6.2 (Course Notes 6.2.4)]\label{eg:6_2}
   Recall the coin flip example in \cref{eg:6_1}. Suppose $X_1, ..., X_n \sim \Bernoulli(p)$ is a sequence of IID rvs. Calculate the ML estimate of $p$.
 \end{eg}
 
@@ -5422,7 +5422,7 @@ But first, let us formally state the definition of a likelihood function.
   \end{equation*}
 \end{solution}
 
-\begin{eg}[Example 6.3 (Course Notes 6.2.5)]
+\begin{eg}[Example 6.3 (Course Notes 6.2.5)]\label{eg:6_3}
   Suppose we have the data $\vec{x} = ( x_1 \; x_2 \; \hdots \; x_n )$ for the sequence of IID rvs $X_1, X_2, ..., X_n \sim \Poi(\theta)$. Find the likelihood function, log-likelihood, the ML estimate $\hat{\theta}$, and the ML estimator $\tilde{\theta}$.
 \end{eg}
 
@@ -5454,6 +5454,256 @@ But first, let us formally state the definition of a likelihood function.
 % section estimation (end)
 
 % chapter lecture_17_jun_28th_2018 (end)
+
+\chapter{Lecture 18 Jul 3rd 2018}%
+\label{chp:lecture_18_jul_3rd_2018}
+% chapter lecture_18_jul_3rd_2018
+
+\section{Estimation (Continued)}%
+\label{sec:estimation_continued}
+% section estimation_continued
+
+\subsection{Maximum Likelihood Estimation (Continued)}%
+\label{sub:maximum_likelihood_estimation_continued}
+% subsection maximum_likelihood_estimation_continued
+
+\begin{defn}[Score Function]\index{Score Function}
+\label{defn:score_function}
+  The \hlnoteb{score function} is defined as
+  \begin{equation*}
+    S(\theta) = S(\theta; x) = \frac{d}{d\theta}\ell(\theta) = \frac{d}{d\theta} \ln L(\theta) \quad \theta \in \Omega.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Notice that to find the ML estimate, we usually set the score function to zero and solve for $S(\theta) = 0$.
+\end{note}
+
+\begin{defn}[Information Function]\index{Information Function}
+\label{defn:information_function}
+  The \hlnoteb{information function} is defined as
+  \begin{equation*}
+    I(\theta) = I(\theta ; x) = - \frac{d^2}{d\theta^2} \ell(\theta) = - \frac{d^2}{d\theta^2} \ln L(\theta) \quad \theta \in \Omega
+  \end{equation*}
+  If $\hat{\theta}$ is the ML estimate of $\theta$, then $l(\hat{\theta})$ is called the \hldefn{observed information}.
+\end{defn}
+
+\begin{eg}\label{eg:6_2_sub1}
+  Going back to our example in \cref{eg:6_2}, we had that the likelihood function was
+  \begin{equation*}
+    L(p) = p^{\sum\limits_{i=1}^{n} x_i} (1 - p)^{n - \sum\limits_{i=1}^{n} x_i}
+  \end{equation*}
+  the log-likelihood was
+  \begin{equation*}
+    \ell(p) = \left( \sum_{i=1}^{n} x_i \right) \ln p + \left( n - \sum_{i=1}^{n} x_i \right) \ln (1 - p).
+  \end{equation*}
+  So the score function is
+  \begin{equation*}
+    S(p) = \frac{d}{dp} \ell(p) = \frac{1}{p} \sum_{i=1}^{n} x_i - \frac{1}{1 - p} \left( n - \sum_{i=1}^{n} x_i \right)
+  \end{equation*}
+  Consequently, the information function is
+  \begin{align*}
+    I(p) &= - \frac{d^2}{dp^2} \ell(p) = - \frac{d}{dp} S(p) \\
+         &= \frac{1}{p^2} \sum_{i=1}^{n} x_i + \frac{1}{(1 - p)^2} \left( n - \sum_{i=1}^{n} x_i \right)
+  \end{align*}
+\end{eg}
+
+\begin{note}
+  Recall from the calculus knowledge of the 2nd derivative being the ``curvature'' of the original function, and so $I(\theta)$ is a function about the curvature of the log-likelihood. In particular, we have that $I(\hat{\theta})$ tells us about the convacity of the log-likelihood function at the ML estimate.
+
+  Note that the information function is a function that has two variables: the unknown parameter $\theta$, and the data $\vec{X} = (X_1 \; ... \; X_n)$.
+
+  In a later lecture, we shall see how the observed information $I(\hat{\theta})$ can be used to construct approximate confidence intervals for the unknown parameter $\theta$. 
+\end{note}
+
+\begin{defn}[Fisher Information]\index{Fisher Information}
+\label{defn:fisher_information}
+  If $\theta$ is a scalar, then the \hlnoteb{expected information}, or $\hlnoteb{Fisher information}$ (function) is given by
+  \begin{equation*}
+    J(\theta) = E[ I(\theta ; \vec{X}) ] = E\left[ - \frac{\partial^2}{\partial \theta^2} \ell(\theta; \vec{X}) \right] \quad \theta \in \Omega
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Just to take away the layers of definitions and compare the Fisher information with our pf for the rv(s), if $X_1, ..., X_n$ is a random sample (i.e. IID rvs), each with pf $f(x; \theta)$, then
+  \begin{equation*}
+    J(\theta) = E\left[ - \frac{\partial^2}{\partial \theta^2} \ell(\theta; \vec{X}) \right] = nE\left[ - \frac{\partial^2}{\partial \theta^2} \ln f(x; \theta) \right]
+  \end{equation*}
+  where $\vec{X} = ( X_1 \; ... \; X_n )$.
+\end{note}
+
+\begin{eg}[Example 6.4 (Course Notes 6.2.10)]
+  Suppose $X_1, ..., X_n \sim \Bernoulli(p)$ is a sequence of IID rvs. We have showed in \cref{eg:6_2} that the ML estimator of $p$ is $\tilde{p} = \bar{X}$. Calculate the Fisher information and compare it with the variance of the ML estimator of $p$.
+\end{eg}
+
+\begin{solution}
+  Recall that from \cref{eg:6_2_sub1}, we had
+  \begin{align*}
+    \ell(p) &= \left( \sum_{i=1}^{n} x_i \right) \ln p + \left( n - \sum_{i=1}^{n} x_i \right) \ln ( 1 - p ) \\
+    S(p) &= \frac{1}{p} \sum_{i=1}^{n} x_i - \frac{1}{1 - p} \left( n - \sum_{i=1}^{n} x_i \right) \\
+    I(p) &= \frac{1}{p^2} \sum_{i=1}^{n} x_i + \frac{1}{(1 - p)^2} \left( n - \sum_{i=1}^{n} x_i \right),
+  \end{align*}
+  So the Fisher information is
+  \begin{align*}
+    E[ I(p) ] &= E\left[ \frac{1}{p^2} \sum_{i=1}^{n} X_i + \frac{1}{(1 - p)^2} \left( n - \sum_{i=1}^{n} X_i \right) \right] \\
+              &= \frac{1}{p^2} \sum_{i=1}^{n} E[X_i] + \frac{1}{(1 - p)^2} \left( n - \sum_{i=1}^{n} E[X_i] \right) \\
+              &= \frac{1}{p^2} ( np ) + \frac{1}{(1 - p)^2} ( n - np ) \\
+              &= \frac{n}{p} + \frac{n}{1 - p} = \frac{n}{p ( 1 - p )}.
+  \end{align*}
+  On the other hand, note that the variance of the ML estimator is
+  \begin{equation*}
+    \Var(\tilde{p}) = \Var(\bar{X}) = \frac{1}{n} \Var(X_i) = \frac{p( 1 - p )}{n}.
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Example 6.5 (Course Notes 6.2.10)]
+  Suppose $X_1, ..., X_n \sim \Poi(\theta)$ is a sequence of IID rvs. We showed in \cref{eg:6_3} the ML estimator of $\theta$ is $\tilde{\theta} = \bar{X}$. Calculate the Fisher information and compare it with the variance of the ML estimator of $\theta$.
+\end{eg}
+
+\begin{solution}
+  We had the that log-likelihood is
+  \begin{equation*}
+    \ell(\theta) = -n \theta + \left( \sum_{i=1}^{n} x_i \right) \log \theta - \sum_{i=1}^{n} \log (x_i!).
+  \end{equation*}
+  So the score function is
+  \begin{equation*}
+    S(\theta) = -n + \frac{1}{\theta} \sum_{i=1}^{n} x_i,
+  \end{equation*}
+  and so the information function is
+  \begin{equation*}
+    I(\theta; x) = \frac{1}{\theta^2} \sum_{i=1}^{n} x_i.
+  \end{equation*}
+  Then the Fisher information is
+  \begin{equation*}
+    E[ I(\theta; \vec{X}) ] = \frac{n}{\theta^2} E[X_i] = \frac{n}{\theta}.
+  \end{equation*}
+  The variance of the ML estimator of $\theta$ is
+  \begin{equation*}
+    \Var(\tilde{\theta}) = \frac{1}{n} \Var(X_i) = \frac{\theta}{n}.
+  \end{equation*}
+\end{solution}
+
+\begin{note}
+  We observe from the above two examples that
+  \begin{equation*}
+    J(\theta) = \frac{1}{\Var{\tilde{\theta}}}
+  \end{equation*}
+  where $\tilde{\theta} = \bar{X}$. It is tempting to verify if this is the case in general, but there does not seem to be reliable sources that points to this case (at least, online searches have yet to yield me results). The lecture claims that this is only true for certain families of distributions.
+\end{note}
+
+\begin{eg}[Example 6.6 (Course Notes 6.2.12)]\label{eg:6_6}
+  Suppose $X_1, ..., X_n$ is a random sample, each from a distribution with pdf
+  \begin{equation*}
+    f(x; \theta) = \theta x^{\theta - 1} \quad 0 \leq x \leq 1, \enspace \theta > 0.
+  \end{equation*}
+  Find the score function, the ML estimator of $\theta$, the information function and the observed information.
+\end{eg}
+
+\begin{solution}
+  Since $X_1, ..., X_n$ are IID, we have
+  \begin{equation*}
+    L(\theta) = \prod_{i=1}^{n} \theta x_i^{\theta - 1} = \theta^n \left( \prod_{i=1}^{n} x_i \right)^{\theta - 1}.
+  \end{equation*}
+  So the log-likelihood is
+  \begin{equation*}
+    \ell(\theta) = n \ln \theta + ( \theta - 1 ) \ln \left( \prod_{i=1}^{n} x_i \right) = n \ln \theta + ( \theta - 1 ) \sum_{i=1}^{n} \ln x_i.
+  \end{equation*}
+  The score function is therefore
+  \begin{equation*}
+    S(\theta) = \frac{n}{\theta} + \sum_{i=1}^{n} \ln x_i,
+  \end{equation*}
+  and so the ML estimator of $\theta$ is
+  \begin{equation*}
+    \tilde{\theta} = - \frac{n}{\sum\limits_{i=1}^{n} \ln x_i}.
+  \end{equation*}
+  From the score function, the information function is
+  \begin{equation*}
+    I(\theta) = \frac{n}{\theta^2},
+  \end{equation*}
+  and so the observed information is
+  \begin{equation*}
+    I(\hat{\theta}) = \frac{n}{\left( - \frac{n}{\sum_{i=1}^{n} \ln x_i} \right)^2} = \frac{1}{n} \left( \sum_{i=1}^{n} \ln x_i \right)^2
+  \end{equation*}
+\end{solution}
+
+\begin{note}
+  In the above example, note that the Fisher information is
+  \begin{equation*}
+    J(\theta) = E[I(\theta; \vec{X})] = \frac{n}{\theta^2}.
+  \end{equation*}
+\end{note}
+
+\begin{eg}[Example 6.7 (Course Notes 6.2.13)]\label{eg:eg_where_derivatives_for_mle_fail}
+  Suppose $X_1, ..., X_n \sim \Unif(0, \theta)$ is a random sample. Find the ML estimator of $\theta$.
+\end{eg}
+
+\begin{solution}
+  Note that $f_{X_i}(x_i; \theta) = \frac{1}{\theta}$ for $0 \leq x_i \leq \theta$. So the likelihood function is
+  \begin{align*}
+    L(\theta) &= \prod_{i=1}^{n} \frac{1}{\theta} \mathbb{1}_{\{0 \leq x_i \leq \theta\}} \\
+              &= \theta^{-n} \mathbb{1}_{\{ 0 \leq x_1 \leq \theta, \, 0 \leq x_2 \leq \theta, \, ..., \, 0 \leq x_n \leq \theta\}} \\
+              &= \theta^{-n} \mathbb{1}_{\{0 \leq x_{(n)} \leq \theta\}}
+  \end{align*}
+  where we use the order statistics notation to simplify the equation. Notice that if we take the derivative of the likelihood function from this point and try to get the ML estimate/estimator, we would run into the following equation:
+  \begin{equation*}
+    - \frac{n}{\theta^{n + 1}} = 0
+  \end{equation*}
+  in which we would have trouble getting the MLE.
+\end{solution}
+
+\begin{eg}[Example 6.8]
+  Suppose $X_1, ..., X_n$ is a random sample, each from the $\Unif(\theta, \theta + 1)$ distribution. Find  the ML estimator of $\theta$.
+\end{eg}
+
+\begin{solution}
+  This time, we have that the pdf for each $X_i$ is
+  \begin{equation*}
+    f_{X_i}(x_i ; \theta) = \mathbb{1}_{\{\theta \leq x_i \leq \theta + 1\}}.
+  \end{equation*}
+  Then the likelihood function is\marginnote{
+  \begin{tikzpicture}
+      \draw[->] (-0.5, 0) -- (3, 0) node[right] {$\theta$};
+      \draw[->] (0, -0.5) -- (0, 2) node[above] {$L(\theta)$};
+  		\draw (1,1) -- (2,1);
+      \draw[dashed] (1,1) -- (1, 0) node[below] {$x_{(n)} - 1$}; 
+      \draw[dashed] (2,1) -- (2, 0) node[below] {$x_{(1)}$};
+  \end{tikzpicture}
+  }
+  \begin{align*}
+    L(\theta) &= \prod_{i=1}^{n} f(x_i; \theta) = \mathbb{1}_{\{\theta \leq x_1 \leq \theta + 1, \, ..., \, \theat \leq x_n \leq \theta + 1\}} \\
+              &= \mathbb{1}_{\{\theta \leq x_{(1)}\}} \mathbb{1}_{\{ x_{(n)} \leq \theta + 1 \} } \\
+              &= \mathbb{1}_{\{\theta \leq x_{(1)}\}} \mathbb{1}_{\{ x_{(n)} - 1 \leq \theta \} } = \mathbb{1}_{\{x_{(n)} - 1 \leq \theta \leq x_{(1)} \}}
+  \end{align*}
+  where we, once again, use the order statistics notation. Consequently, we have the graph of $\theta$ versus $\L(\theta)$ on the right.
+
+  Thus we observe that the MLE is not unique, since it can be any number between $x_{(n)} - 1$ and $x_{(1)}$.
+\end{solution}
+
+\begin{thm}[Invariance Property of the MLE]
+\index{Invariance Property of MLE}
+\label{thm:invariance_property_of_the_mle}
+  Suppose $\tau = h(\theta)$ is an injective function of $\theta$. Suppose also that $\hat{\theta}$ is the ML estimator of $\theta$. Then $\hat{\tau} = h(\theta)$ is the ML estimator of $\tau$.
+\end{thm}
+
+\begin{warning}
+  We are short on certain tools to actually prove this theorem.
+\end{warning}
+
+\begin{eg}[Example 6.9]
+  Suppose $X_1, ..., X_n \sim f(x; \theta) = \theta x^{\theta - 1} \mathbb{1}_{\{0 < x < 1\}}$, where $\theta > 0$. Find the MLE of the median of the distribution.
+\end{eg}
+
+\begin{solution}
+  Recall from \cref{eg:6_6} that we had
+  \begin{equation*}
+    \hat{\theta} = - \frac{n}{\sum\limits_{i=1}^{n} \ln x_i}.
+  \end{equation*}
+  Let $m$ be the median. The goal is to use \cref{thm:invariance_property_of_the_mle}. \hlwarn{Something feels off...}
+\end{solution}
+
+% section estimation_continued (end)
+
+% chapter lecture_18_jul_3rd_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
