@@ -1,0 +1,189 @@
+\chapter{Lecture 30 Jun 13th 2018}%
+\label{chp:lecture_30_jun_13th_2018}
+% chapter lecture_30_jun_13th_2018
+
+\section{Polynomial Ring (Continued 3)}%
+\label{sec:polynomial_ring_continued_3}
+% section polynomial_ring_continued_3
+
+\subsection{Quotient Rings of Polynomials (Continued)}%
+\label{sub:quotient_rings_of_polynomials_continued}
+% subsection quotient_rings_of_polynomials_continued
+
+Let $A$ be a non-zero ideal in $F[x]$. By \cref{propo:ideals_of_f_x_are_principal_ideals}, we know that $A$ is a principal ideal\index{Principal Ideal} and can be written as $A = \lra{h(x)}$, for a unique polynomial $h(x) \in F[x]$.
+
+Suppose that $\deg h = m \geq 1$. Consider the quotient ring $R = \faktor{F[x]}{A}$, and so we have
+\begin{equation*}
+  R = \left\{ \bar{f(x)} : f(x) + A, f(x) \in F[x] \right\}.
+\end{equation*}
+Write $t = \bar{x} = x + A$. Then by the \hlnoteb{Division Algorithm}\sidenote{This entire part until Proposition 89 might need to be rewritten since I am a little lost as to some of the details regarding the discussion.}, we have
+\begin{equation*}
+  R = \{ \bar{a_0} + \bar{a_1} t + \hdots + \bar{a_{m - 1}} t^{m - 1} : a_i \in F \}.
+\end{equation*}
+The map $\theta : F \to R$, given by $a \mapsto \bar{a}$, is an injective homomorphism, since $\theta$ is not a zero map and $\ker \theta$ is an ideal of $F$ \sideote{Note that a field $F$ has only 2 ideals: $\{0\}$ and $F$ itself. Since $\ker \theta \neq F$, we have that $\ker \theta = \{0\}$ and so $\theta$ is injective.}. Since we have $F \cong \theta(F)$ by the \hyperref[thm:first_isomorphism_theorem_for_rings]{First Isomorphism Theorem for Rings}, by identifying $F$ with $\theta(F)$, we can write
+\begin{equation*}
+  R = \{ a_0 + a_1 t + \hdots a_{m - 1} t^{m - 1} : a_i \in F \}.
+\end{equation*}
+
+It is clear that, in $R$, we have
+\begin{gather*}
+  a_0 + a_1 t + \hdots + a_{m - 1} t^{m - 1} = b_0 + b_1 t + \hdots + b_{m - 1} t^{m - 1} \\
+  \iff \\
+  \forall i \in \mathbb{Z} \enspace 0 \leq i \leq m - 1 \quad a_i = b_i
+\end{gather*}
+
+Finally, in the ring $R$, we have $h(t) = 0$.
+
+The following proposition follows from the above discussion.
+
+\begin{propo}
+\label{propo:remainder_ring}
+Let $F$ be a field and let $h(x), f(x) \in F[x]$ be monic with $( \deg h, \, \deg f \geq 1 )$. Then the quotient ring $R = F[x] / A$ is given by
+\begin{equation*}
+  R = \{ a_0 + a_1 t + \hdots + a_{m - 1} t^{m - 1} : a_i \in F, \, h(t) = 0 \}
+\end{equation*}
+in which each element of $R$ can be uniquely represented in the above form.
+\end{propo}
+
+\begin{note}
+  In $\mathbb{Z}$, we have that $\mathbb{Z} / \lra{n} = \mathbb{Z}_n = \{ [0], [1], ..., [n-1] \}$ which is analogous to our statement in \cref{propo:remainder_ring} for the case of integers.
+\end{note}
+
+\begin{eg}
+  Consider $\mathbb{R}[x]$ and let $h(x) = x^2 + 1 \in \mathbb{R}[x]$. Then
+  \begin{equation*}
+    \mathbb{R}[x] = \{a + bt : a, b \in \mathbb{R}, \, t^2 + 1 = 0 \} \cong \{ a + bi : a, b \in \mathbb{R}, \, i^2 = -1 \} = \mathbb{C}
+  \end{equation*}
+\end{eg}
+
+\begin{note}
+  Recall that $\mathbb{Z}_n$ is a field (or an integral domain) if and only if $n$ is prime.
+\end{note}
+
+\begin{propo}
+\label{propo:principal_ideals_of_polyms_as_fields}
+  Let $F$ be a field nad $h(x) \in F[x]$ be a monic polynomial with $\deg h \geq 1$. TFAE:
+  \begin{enumerate}
+    \item $F[x] \big/ \lra{h(x)}$ is a field;
+    \item $F[x] \big/ \lra{h(x)}$ is an integral domain;
+    \item $h(x)$ is irreducible in $F[x]$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  $(1) \implies (2)$ since a field is an integral domain (see \cref{propo:fields_are_integral_domains}).
+
+  \noindent $(2) \implies (3)$: Write $A = \lra{h(x)}$, If $h(x) = f(x) g(x)$ for $f(x), \, g(x) \in F[x]$, then
+  \begin{align*}
+    [ f(x) + A ] [ g(x) + A ] &= f(x) g(x) + A \quad \because A \text{ is an ideal } \\
+                              &= h(x) + A = 0 \in F[x] \big/ A.
+  \end{align*}
+  Then by $(2)$, either $f(x) + A = 0$ or $g(x) + A = 0$, i.e. either $f(x) \in A$ or $g(x) \in A$. But if $f(x) \in A = \lra{h(x)}$, then $f(x) = q(x) h(x)$ for some $q(x) \in F[x]$. Then $h(x) = f(x) g(x) = q(x) h(x) g(x)$, which then implies that $0 = h(x) [ 1 - q(x) g(x) ] \implies q(x) g(x) = 1$ since $F[x]$ is an integral domain. Then we have that $\deg g = 0$. Similarly, if $g(x) \in A$, then we have $\deg f = 0$. Therefore, $h(x)$ is irreducible in $F[x]$ by definition.
+
+  \noindent $(3) \implies (1)$: Note that $F[x] \big/ \lra{h(x)}$ is a commutative ring. To show that it is a field, it suffices to show that every non-zero element of $F[x] \big/ \lra{h(x)}$ has an inverse. Let $f(x) + A \neq 0 \in F[x] \big/ \lra{h(x)}$ with $f(x) \in F[x]$. Then $f(x) \notin A$, and so $h(x) \not| \, f(x)$. Since $h(x)$ is irreducible by $(3)$, we have that
+  \begin{equation*}
+    d(x) = \gcd[ f(x), h(x) ] = 1.
+  \end{equation*}
+  Then by \cref{propo:properties_of_the_greatest_common_divisor}, $\exists u(x), v(x) \in F[x]$ such that
+  \begin{equation*}
+    1 = u(x) h(x) + v(x) f(x).
+  \end{equation*}
+  Since $h(x) u(x) \in A$, we have that
+  \begin{equation*}
+    [v(x) + A] [f(x) + A] = 1 + A.
+  \end{equation*}
+  It follows that $f(x) + A$ has an inverse in $F[x] \big/ \lra{h(x)}$ and thus $F[x] \big/ \lra{h(x)}$ is a field. \qed
+\end{proof}
+
+% subsection quotient_rings_of_polynomials_continued (end)
+
+% section polynomial_ring_continued_3 (end)
+
+\section{Factorizations in Integral Domains}%
+\label{sec:factorizations_in_integral_domains}
+% section factorizations_in_integral_domains
+
+\subsection{Irreducibles and Primes}%
+\label{sub:irreducibles_and_primes}
+% subsection irreducibles_and_primes
+
+We have discussed much about the similarities between $\mathbb{Z}$ and $F[x]$, and in this chapter, we wish to abstract these similarties and study them in a more general manner to see if other sets that share the same kind of properties. For example, if a set has a \hlnoteb{unique factorization} for elements and the \hlnoteb{principal ideal} being the only ideal of the set, then do we still see the same analogy playing out?
+
+\begin{defn}[Division]\index{Division}
+\label{defn:division}
+  Let $R$ be an integral domain and $a, \, b \in R$. We say that $a \, | \, b$ if $b = ca$ for some $c \in R$.
+\end{defn}
+
+\begin{note}
+  Recall that in $\mathbb{Z}$, if $n \, | \, m$ and $m \, | \, n$, then $n = \pm m$, and the ideal generated by them are the same, i.e. $\lra{n} = \lra{m}$.
+
+  Similarly so in $F[x]$< if $f(x) \, | \, g(x)$ and $g(x) \, | \, f(x)$, then $f(x) = cg(x)$ for some $x \in F[x]^* = F^*$, and $\lra{f(x)} = \lra{g(x)}$.
+\end{note}
+
+\begin{propo}[Division in an Integral Domain]
+\label{propo:division_in_an_integral_domain}
+Let $R$ be an integral domain. Then $\forall a, b \in R$, TFAE:\marginnote{This should be an easy exercise.
+\begin{ex}
+  Prove \cref{propo:division_in_an_integral_domain}.
+\end{ex}
+}
+  \begin{enumerate}
+    \item $a \, | \, b$ and $b \, | \, a$;
+    \item $a = ub$ for some unit $u \in R$;
+    \item $\lra{a} = \lra{b}$.
+  \end{enumerate}
+\end{propo}
+
+\begin{defn}[Association]\index{Association}
+\label{defn:association}
+  Let $R$ be an integral domain. $\forall a, b \in R$, we say that $a$ is \hldefn{associated to} $b$, denoted by $a \sim b$, if $a \, | \, b$ and $b \, | \, a$.
+\end{defn}
+
+\begin{note}
+  By \cref{propo:division_in_an_integral_domain}, we have that $a \sim a$ for any $a \in R$.
+
+  \noindent Also, $a \sim b \iff b \sim a$.
+
+  \noindent We also have $a \sim b \, \land \, b \sim c \implies a \sim c$.
+  
+  In other words, $\sim$ is an equivalence relation\index{Equivalence Relation} in $R$. Also, it can be shown that\sidenote{More exercise is always good.
+  \begin{ex}
+    Prove that the two statements following this is true.
+  \end{ex}
+  }
+  \begin{enumerate}
+    \item $a \sim a' \, \land \, b \sim b' \implies ab \sim a' b'$.
+    \item $a \sim a' \, \land \, b \sim b' \implies ( a \, | \, b \iff b \, | \, a )$
+  \end{enumerate}
+\end{note}
+
+\begin{eg}
+  Let $R = \mathbb{Z}[\sqrt{3}] = \{ m + n \sqrt{3} : m, n \in \mathbb{Z} \}$. Note that this is an integral domain\sidenote{For $(a + b\sqrt{3}), \, (c + d\sqrt{3}) \in R$ such that
+  \begin{equation*}
+    (a + b \sqrt{3})(c + d \sqrt{3}) = 0
+  \end{equation*}
+  we would have that
+  \begin{gather*}
+    (a + b\sqrt{3})(a - b \sqrt{3})(c + d\sqrt{3})(c - d\sqrt{3}) = 0 \\
+    ( a^2 - 3b^2 )( c^2 - 3d^2 ) = 0.
+  \end{gather*}
+  Since $\mathbb{Z}$ is an integral domain, suppose $a^2 - 3b^2 = 0$. If $b = 0$, then $a = 0$ and we are done. If $b \neq 0$, then we have $3 = \left( \frac{a}{b} \right)^2$, and we notice that $\sqrt{3}$ is irrational. Thus it can only be that $b = 0$. Therefore, $a + b\sqrt{3} = 0$, implying that there are no zero divisors in $R = \mathbb{Z}[\sqrt{3}]$.
+  }. Observe that
+  \begin{equation*}
+    (2 + \sqrt{3})(2 - \sqrt{3}) = 1 \implies 2 + \sqrt{3} \text{ is a unit in } R.
+  \end{equation*}
+  Then we would have
+  \begin{equation*}
+    3 + 2 \sqrt{3} = (2 + \sqrt{3}) \sqrt{3}
+  \end{equation*}
+  and so by \cref{propo:division_in_an_integral_domain}, we have
+  \begin{equation*}
+    3 + 2 \sqrt{3} \sim \sqrt{3} \in \mathbb{Z}[\sqrt{3}].
+  \end{equation*}
+\end{eg}
+
+% subsection irreducibles_and_primes (end)
+
+% section factorizations_in_integral_domains (end)
+
+% chapter lecture_30_jun_13th_2018 (end)
