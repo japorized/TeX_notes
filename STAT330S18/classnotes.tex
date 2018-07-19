@@ -5,6 +5,7 @@
 
 \renewcommand{\baselinestretch}{1.1}
 \usepackage{longtable,multirow,booktabs}
+\usepackage{pgfplots}
 
 \usepackage{classnotetitle}
 
@@ -42,6 +43,10 @@
 
 \newcommand{\convd}{\overset{D}{\to}}
 \newcommand{\convp}{\overset{P}{\to}}
+
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -5670,7 +5675,7 @@ But first, let us formally state the definition of a likelihood function.
   \end{tikzpicture}
   }
   \begin{align*}
-    L(\theta) &= \prod_{i=1}^{n} f(x_i; \theta) = \mathbb{1}_{\{\theta \leq x_1 \leq \theta + 1, \, ..., \, \theat \leq x_n \leq \theta + 1\}} \\
+    L(\theta) &= \prod_{i=1}^{n} f(x_i; \theta) = \mathbb{1}_{\{\theta \leq x_1 \leq \theta + 1, \, ..., \, \theta \leq x_n \leq \theta + 1\}} \\
               &= \mathbb{1}_{\{\theta \leq x_{(1)}\}} \mathbb{1}_{\{ x_{(n)} \leq \theta + 1 \} } \\
               &= \mathbb{1}_{\{\theta \leq x_{(1)}\}} \mathbb{1}_{\{ x_{(n)} - 1 \leq \theta \} } = \mathbb{1}_{\{x_{(n)} - 1 \leq \theta \leq x_{(1)} \}}
   \end{align*}
@@ -5704,6 +5709,287 @@ But first, let us formally state the definition of a likelihood function.
 % section estimation_continued (end)
 
 % chapter lecture_18_jul_3rd_2018 (end)
+
+\chapter{Lecture 19 July 5 2018}%
+\label{chp:lecture_19_july_5_2018}
+% chapter lecture_19_july_5_2018
+
+\section{Estimation (Continued 2)}%
+\label{sec:estimation_continued_2}
+% section estimation_continued_2
+
+\subsection{Maximum Likelihood Estimation (Continued 2)}%
+\label{sub:maximum_likelihood_estimation_continued_2}
+% subsection maximum_likelihood_estimation_continued_2
+
+\begin{defn}[Relative Likelihood]\index{Relative Likelihood}
+\label{defn:relative_likelihood}
+  Suppose $X_1, ..., X_n \sim f(x; \theta)$ is an IID sequence of rvs where the likelihood function is $L(\theta)$ and the MLE of $\theta$ is $\hat{\theta}$. The \hlnoteb{relative likelihood} function is defined by
+  \begin{equation*}
+    R(\theta) = R(\theta; x) = \frac{L(\theta)}{L(\hat{\theta})}, \quad \theta \in \Omega 
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Note that since $L(\hat{\theta})$ is maximum since $\hat{\theta}$ is the maximum likelihood estimate, we have that $L(\theta) \leq L(\hat{\theta})$, and so\sidenote{Note that the likelihood function $L(\theta) = f(x; \theta)$ is nonnegative, since the cdf of a distribution is nondecreasing, and so the pf must be nonnegative.}
+  \begin{equation*}
+    0 \leq R(\theta) = \frac{L(\theta)}{L(\hat{\theta})} \leq 1.
+  \end{equation*}
+\end{note}
+
+\begin{note}
+  Given the data $\theta = (x_1 \; ... \; x_n)$, we say that
+  \begin{itemize}
+    \item if $R(\theta)$ is small (usual threshold is $0.1$), then we say that $\theta$ is \hldefn{implausible};
+    \item if $R(\theta)$ is large (usual threshold is $0.5$), then we say that $\theta$ is \hldefn{plausible}.
+  \end{itemize}
+\end{note}
+
+\begin{defn}[Likelihood Region \& Likelihood Interval]\index{Likelihood Region}\index{Likelihood Interval}
+\label{defn:likelihood_region_n_likelihood_interval}
+  The set of $\theta$ values for which $R(\theta) \geq p$ is called a $100p \%$ \hlnoteb{likelihood region} for $\theta$. If the region is an interval of real values, then it is called a $100p\%$ \hlnoteb{likelihood interval} (LI) for $\theta$.
+\end{defn}
+
+\begin{note}
+  Using the definition, we can extend on the previous note:
+  \begin{itemize}
+    \item Values inside the $10\%$ LI are referred to as \hlnoteb{plausible} and values outside of this interval as \hlnoteb{implausible};
+    \item Values inside a $50\%$ LI are very plausible; and
+    \item Values outside a $1\%$ LI are very implausible in light of the data.
+  \end{itemize}
+\end{note}
+
+As how we had the log-likelihood from the likelihood function, we can have the log relative likelihood.
+
+\begin{defn}[Log Relative Likelihood]\index{Log Relative Likelihood}
+\label{defn:log_relative_likelihood}
+  The \hlnoteb{log relative likelihood} is the natural logarithm of the relative likelihood function:
+  \begin{equation*}
+    r(\theta) = r(\theta ; x) = \ln [ R(\theta) ] = log[ L(\theta) ] - \log[ L(\hat{\theta}) ] = \ell(\theta) - \ell(\hat{\theta})
+  \end{equation*}
+  for $\theta \in \Omega$.
+\end{defn}
+
+\begin{note}[Unimodality]
+  If for $\theta \in \Omega$, $R(\theta)$ is unimodal as shown in the graph to the right,\marginnote{
+		\begin{tikzpicture}
+      \begin{axis}[
+        no markers, domain=0:2, samples=100,
+        axis lines*=left, xlabel=$\theta$, ylabel=$R(\theta)$,
+        every axis y label/.style={at=(current axis.above origin),anchor=south},
+        every axis x label/.style={at=(current axis.right of origin),anchor=west},
+        height=5cm, width=5.5cm,
+        xtick={4,6.5}, ytick=\empty,
+        enlargelimits=false, clip=false, axis on top,
+        grid = major
+        ]
+        \addplot [very thick,base16-eighties-blue!50!base16-eighties-dark] {gauss(1,0.5)};
+      \end{axis}
+      \draw[dashed] (4, 2) -- (0, 2) node[left] {$p$};
+      \draw[dashed] (1, 2) -- (1, 0) node[below] {$a_p$};
+      \draw[dashed] (3, 2) -- (3, 0) node[below] {$b_p$};
+		\end{tikzpicture}
+  } then $R(\theta) \geq p$ will give us the likelihood interval, in which this case we have that the interval is $[a_p, b_p]$.
+\end{note}
+
+\begin{eg}[Example 6.10]
+  Let $X_1, ..., X_{100} \sim \Poi(\theta)$ be an IID sequence of rvs. Based on the observed values, you are given that $\sum_{i=1}^{100} x_i = 980$. Find a $10\%$ and $50\%$ likelihood intervals for $\theta$.
+\end{eg}
+
+\begin{solution}
+  From \cref{eg:6_3}, we had
+  \begin{equation*}
+    L(\theta) = e^{-n \theta} \theta^{n \bar{x}} \left( \prod_{i=1}^{n} x_i! \right)^{-1} \quad \text{and } \hat{\theta} = \bar{x}.
+  \end{equation*}
+  The relative likelihood is therefore
+  \begin{equation*}
+    R(\theta) = \frac{L(\theta)}{L(\hat{\theta})} = \frac{e^{-n \theta} \theta^{n \bar{x}}}{e^{-n \hat{\theta} \hat{\theta}^{n \bar{x}}}} \left( \prod_{i=1}^{n} x_i! \right)^{-1} \left( \prod_{i=1}^{n} x_i! \right) = e^{-n ( \theta - \bar{x} )} \left( \frac{\theta}{\bar{x}} \right)^{n \bar{x}}.
+  \end{equation*}
+  We were given that
+  \begin{equation*}
+    \bar{x} = \frac{1}{100} \sum_{i=1}^{100} x_i = \frac{980}{100} = 9.8,
+  \end{equation*}
+  and so get
+  \begin{equation*}
+    R(\theta) = e^{- 100 ( \theta - 9.8 )} \left( \frac{\theta}{9.8} \right)^{980}.
+  \end{equation*}
+  Using WolframAlpha, we get that the $50\%$ likelihood interval for $\theta$ is $[9.436, 10.173]$. Unfortunately so, I cannot get the solution for the $10\%$ likelihood interval since the allowed free computation time is exceeded, and so I shall leave the likelihood interval as
+  \begin{equation*}
+    \left\{ \theta \in \Omega : e^{-100(\theta - 9.8)}\left( \frac{\theta}{9.8} \right)^{980} \right\}.
+  \end{equation*}
+  \end{itemize}
+\end{solution}
+
+\begin{eg}[Example 6.11 (Course Notes 6.2.24)]
+  Suppose $X_1, ..., X_n$ is a random sample from $\Exp(1, \theta)$. Plot the relative likelihood function for $\theta$ if $n = 20$ and $x_{(1)} = \min\{x_1, ..., x_n\} = 1$. Find the $10\%$ and $50\%$ likelihood intervals for $\theta$.
+\end{eg}
+
+\begin{solution}
+  Recall the definition of the \hyperref[defn:double_parameter_exponential_distribution]{Double Parameter Exponential Distribution}. We have that the pdf of each $X_i$ is
+  \begin{equation*}
+    f_{X_i}(x_i) = e^{- \frac{x_i - \theta}{1}} = e^{- ( x_i - \theta )}.
+  \end{equation*}
+  Since the $X_i$'s form a random sample, we have that
+  \begin{equation*}
+    L(\theta) = \prod_{i=1}^{n} e^{- ( x_i - \theta )} \mathbb{1}_{\{x_i \geq \theta\}} = e^{- \sum_{i=1}^{n} x_i + n \theta} \; \mathbb{1}_{\{x_{(1)} \geq \theta\}}.
+  \end{equation*}
+  Firstly, note that $L(\theta)$ is an increasing function with respect to $\theta$. Now, note that if the indicator function is $1$, we would have that $\hat{\theta}_0 = \bar{x}$, where we denote the ``supposed'' ML estimate as $\hat{\theta}_0$. However, since the condition for the indicator function to be $1$ is that $\theta \leq x_{(1)}$, we must then have that $\hat{\theta} = x_{(1)}$, since $x_{(1)} \leq \bar{x}$ as $x_{(1)} = \min\{x_1, ..., x_n\}$.
+
+  With that, we can calculate the relative likelihood function:
+  \begin{equation*}
+    R(\theta) = \frac{L(\theta)}{L(\hat{\theta})} = e^{n \left( \theta - x_{(1)} \right)} \mathbb{1}_{\{x_{(1)} \geq \theta\}}.
+  \end{equation*}
+  Given $n = 20$ and $x_{(1)} = 1$, we have that
+  \begin{equation*}
+    R(\theta) = e^{20 (\theta - 1)} \mathbb{1}_{\{\theta \leq 1\}}.
+  \end{equation*}
+  To get the $50\%$ likelihood interval, we have
+  \begin{gather*}
+    e^{20(\theta - 1)} \geq 0.5 \\
+    \theta \geq 1 + \frac{1}{20} \ln 0.5 \; .
+  \end{gather*}
+  Note that $\ln 0.5 < 0$, so we have that the $50\%$ likelihood interval is $[1 + 0.05 \ln 0.5, \, 1]$.
+  For the $10\%$ likelihood interval, we have
+  \begin{gather*}
+    e^{20(\theta - 1)} \geq 0.1 \\
+    \theta \geq 1 + \frac{1}{20} \ln 0.1 \; .
+  \end{gather*}
+  Again, note that $\ln 0.1 < 0$, and so we have that the $10\%$ likelihood interval is $[1 + 0.05 \ln 0.1, \, 1]$.
+\end{solution}
+
+\newthought{We can extend} our methods analogously for the multiparameter case. Assume $\theta = ( \theta_1 \; ... \; \theta_k )^{T}$. Then the likelihood function, $L(\theta)$, is a function of $k$ parameters. Then the log-likelihood function is $\ell(\theta) = \ln L(\theta)$. From there, we can then use the same approach to get the ML estimate of $\theta$,
+\begin{equation*}
+  \hat{\theta} = \left( \hat{\theta}_1 \; \hdots \; \hat{\theta}_k \right)^{T} = \argmax_{\theta_1, \, ..., \, \theta_k} \ell(\theta).
+\end{equation*}
+
+We shall also note that we can extend \cref{thm:invariance_property_of_the_mle} to the multivariate case.
+
+Furthermore, we will restate some of the definitions that were stated in univariate context for the multivariate case.
+
+\begin{defn}[Score Vector]\index{Score Vector}
+\label{defn:score_vector}
+  Suppose $X_1, ..., X_n \sim f(x; \theta)$ is a sequence of IID rvs, where $\theta = (\theta_1 \; \hdots \; \theta_k)^T$. The \hlnoteb{score vector} is defined as
+  \begin{equation*}
+    S(\theta) = S(\theta; x) = \left[ \frac{\partial \ell}{\partial \theta_1} \; \hdots \; \frac{\partial \ell}{\partial \theta_k} \right]^T
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Information Matrix]\index{Information Matrix}
+\label{defn:information_matrix}
+Suppose $X_1, ..., X_n \sim f(x; \theta)$ be a sequence of IID rvs, where $\theta = (\theta_1 \; \hdots \; \theta_k)^T$. The \hlnoteb{information matrix}, $I(\theta) = I(\theta; x)$, is a $k \times k$ symmetric matrix whose $(i, \, j)$ entry is given by
+\begin{equation*}
+  - \frac{\partial^2}{\partial \theta_i \partial \theta_j} \ell(\theta).
+\end{equation*}
+The constant matrix $I(\hat{\theta})$ is called the \hldefn{observed information matrix}.
+\end{defn}
+
+\begin{defn}[Fisher Information Matrix]\index{Fisher Information Matrix}
+\label{defn:fisher_information_matrix}
+  Suppose $X_1, ..., X_n \sim f(x; \theta))$ is a sequence of IID rvs, where $\theta = (\theta_1 \; \hots \; \theta_k)^T$. The \hlnoteb{Fisher information matrix}, $J(\theta)$ is a $k \times k$ symmetric matrix whose $(i, \, j)$ entry is given by
+  \begin{equation*}
+    E\left[ - \frac{\partial^2}{\partial \theta_i \partial \theta_j} \ell(\theta; X) \right],
+  \end{equation*}
+  where $X = (X_1 \; \hdots X_k)^T$.
+\end{defn}
+
+\begin{defn}[Likelihood Region - Multivariate]\index{Likelihood Region}
+\label{defn:likelihood_region_multivariate}
+  Suppose $X_1, ..., X_n \sim f(x; \theta))$ is a sequence of IID rvs, where $\theta = (\theta_1 \; \hots \; \theta_k)^T$. The set of $\theta = (\theta_1 \; \hdots \; \theta_k)^T$ for which $R(\theta) \geq p$, for some $0 \leq p \leq 1$, is called a $100p\%$ \hlnoteb{likelihood region} for $\theta$, which is a region in a $k$-dimensional space $\mathbb{R}^k$.
+\end{defn}
+
+\begin{note}
+  Recall that in the univariate case, we can certainly check if our choice of the $\hat{\theta}$ is indeed a maximizing value by taking the second derivative of $\ell(\theta)$ or $L(\theta)$, and checking that $I(\hat{\theta}) > 0$. The analogous approach for the multivariate case is to ensure that the \hlnoteb{observed information matrix}, $I(\hat{\theta})$ is \href{https://en.wikipedia.org/wiki/Positive-definite_matrix}{positive definite}\sidenote{A matrix $M$ is called a \hlnoteb{positive definite} if the scalar $z^T M z > 0$ for every non-zero column vector $z$.}.
+
+  We have two methods to verify that a matrix $M$ is positive definite:
+  \begin{itemize}
+    \item $\det M > 0$;
+    \item eigenvalues of $M$ are all positive.
+  \end{itemize}
+\end{note}
+
+\begin{eg}[Example 6.12]
+  Suppose $X_1, ..., X_n \sim \Nor\left( \mu, \sigma^2 \right)$ is a sequence of IID rvs.
+  \begin{enumerate}
+    \item Derive the MLE of the parameters $\mu$ and $\sigma^2$.
+    \item Derive the MLE of the coefficient of variation $CV = \frac{\sigma}{\mu}$.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item Since the $X_i$'s are IID, we have
+      \begin{equation*}
+        L\left(\mu, \sigma^2\right) = ( 2 \pi )^{- \frac{n}{2}} \left( \sigma^2 \right)^{- \frac{n}{2}} \exp \left\{ - \frac{1}{2 \sigma^2} \sum_{i=1}^{n} \left( x_i - \mu \right)^2 \right\}.
+      \end{equation*}
+      Then the log-likelihood is
+      \begin{equation*}
+        \ell\left( \mu, \sigma^2 \right) = - \frac{n}{2} \ln (2 \pi) - \frac{n}{2} \log \sigma^2 - \frac{1}{2 \sigma^2} \sum_{i=1}^{n} ( x_i - \mu )^2.
+      \end{equation*}
+      Now, note that the first partial derivatives of $\ell\left(\mu, \sigma^2\right)$ are
+      \begin{align*}
+        \frac{\partial \ell}{\partial \mu} &= \frac{1}{\sigma^2} \sum_{i=1}^{n} ( x_i - \mu ) = \frac{1}{\sigma^2} \left( \sum_{i=1}^{n} x_i - n \mu \right) \\
+        \frac{\partial \ell}{\partial \sigma^2} &= - \frac{n}{2 \sigma^2} + \frac{1}{2 \sigma^4} \sum_{i=1}^{n} (x_i - \mu)^2.
+      \end{align*}
+      So the score vector is
+      \begin{equation*}
+        S\left(\mu, \sigma^2\right) = \begin{bmatrix}
+          \frac{\partial \ell}{\partial \mu} \\
+          \frac{\partial \ell}{\partial \sigma^2}
+        \end{bmatrix} = \begin{bmatrix}
+          \frac{1}{\sigma^2} \left( \sum_{i=1}^{n} x_i - n \mu  \right) \\
+          - \frac{n}{2 \sigma^2} + \frac{1}{2 \sigma^4} \sum_{i=1}^{n} ( x_i - \mu )^2
+        \end{bmatrix}.
+      \end{equation*}
+      So the possible candidates for $\hat{\mu}$ and $\hat{\sigma}^2$ is
+      \begin{equation*}
+        \hat{\mu} = \bar{x} \quad \hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^{n} (x_i - \mu)^2.
+      \end{equation*}
+      It remains to verify that $\hat{mu}$ and $\hat{\sigma}^2$ are indeed the ``maximizers'', note that
+      \begin{align*}
+        \frac{\partial^2 \ell}{\partial \mu^2} &= - \frac{n}{\sigma^2} \\
+        \frac{\partial^2 \ell}{\partial (\sigma^2)^2} &= \frac{n}{2 \sigma^4} - \frac{1}{\sigma^8} \sum_{i=1}^{n} (x_i - \mu)^2 \\
+        \frac{\partial^2 \ell}{\partial \mu \partial \sigma^2} &= \frac{n \mu}{\sigma^4} - \frac{1}{\sigma^4} \sum_{i=1}^{n} x_i,
+      \end{align*}
+      and so the information matrix is
+      \begin{equation*}
+        I\left(\mu, \sigma^2\right) = \begin{bmatrix}
+          \frac{n}{\sigma^2} & \frac{n \mu}{\sigma^4} - \frac{1}{\sigma^4} \sum_{i=1}^{n} x_i \\
+          \frac{n \mu}{\sigma^4} - \frac{1}{\sigma^4} \sum_{i=1}^{n} x_i & \frac{1}{\sigma^8} \sum_{i=1}^{n} (x_i - \mu)^2 - \frac{n}{2 \sigma^4}
+        \end{bmatrix}.
+      \end{equation*}
+      Then the observed matrix is
+      \begin{align*}
+        I\left(\hat{\mu}, \hat{\sigma}^2\right) &= \begin{bmatrix}
+          \frac{n}{\hat{\sigma}^2} & \frac{n \bar{x}}{\left(\hat{\sigma}^2\right)^2} - \frac{1}{\left(\hat{\sigma}^2\right)^2} \sum_{i=1}^{n} x_i \\
+          \frac{n \bar{x}}{\left(\hat{\sigma}^2\right)^2} - \frac{1}{\left(\hat{\sigma}^2\right)^2} \sum_{i=1}^{n} x_i & \frac{1}{\left(\hat{\sigma}^2\right)^4} \sum_{i=1}^{n} (x_i - \bar{x})^2 - \frac{n}{2 \left(\hat{\sigma}^2\right)^2}
+        \end{bmatrix} \\
+        &= \begin{bmatrix}
+        \frac{n}{\hat{\sigma}^2} & 0 \\
+        0 & \frac{1}{\left(\hat{\sigma}^2\right)^2} \left( \hat{\sigma}^2 \right) - \frac{n}{2 \left(\hat{\sigma}^2\right)^2}
+        \end{bmatrix} \\
+        &= \begin{bmatrix}
+        \frac{n}{\hat{\sigma}^2} & 0 \\
+        0 & \frac{n}{\left(\hat{\sigma}^2\right)^2}
+        \end{bmatrix}.
+      \end{align*}
+      We have that the determinant of the observed information matrix is
+      \begin{equation*}
+        \det I\left(\hat{\mu}, \hat{\sigma}^2\right) = \frac{n}{\hat{\sigma}^2} \cdot \frac{n}{\left(\hat{\sigma}^2\right)^2} > 0
+      \end{equation*}
+      since $\hat{\sigma}^2 > 0$.
+
+    \item By \cref{thm:invariance_property_of_the_mle}, we have that the MLE of the coefficient of variation, $CV$, is
+      \begin{equation*}
+        \hat{CV} = \frac{\hat{\sigma}}{\hat{\mu}} = \frac{1}{\bar{x}} \sqrt{ \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n} } = \frac{\hat{\sigma}}{\sqrt{n} \bar{x}}
+      \end{equation*}
+  \end{enumerate}
+\end{solution}
+
+% subsection maximum_likelihood_estimation_continued_2 (end)
+
+% section estimation_continued_2 (end)
+
+% chapter lecture_19_july_5_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
