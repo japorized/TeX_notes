@@ -5,16 +5,25 @@
 
 \renewcommand{\baselinestretch}{1.1}
 
+\usepackage{classnotetitle}
+\title{PMATH352W18 - Complex Analysis}
+\author{Johnson Ng}
+\subtitle{Classnotes for Winter 2018}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
+
 \input{latex-classnotes-preamble.tex}
 
 \pagecolor{white}
 \color{black}
 
-\DeclareMathOperator{\Log}{Log}
+\hypersetup{
+	colorlinks=false,
+  allbordercolors=base16-eighties-magenta,
+  pdfborderstyle={/S/U/W 1}
+}
 
-% Main Body
-\title{PMATH352W18 Complex Analysis - Class Notes}
-\author{Johnson Ng}
+\DeclareMathOperator{\Log}{Log}
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -5013,6 +5022,7 @@ and for $n = 0$, define
 \nobibliography*
 \bibliography{bibliography}
 
+\pagestyle{empty}
 \printindex
 
 \end{document}

@@ -1,0 +1,221 @@
+\chapter{Lecture 31 Jul 16th 2018}%
+\label{chp:lecture_31_jul_16th_2018}
+% chapter lecture_31_jul_16th_2018
+
+\section{Factorizations in Integral Domains (Continued)}%
+\label{sec:factorizations_in_integral_domains_continued}
+% section factorizations_in_integral_domains_continued
+
+\subsection{Irreducibles and Primes (Continued)}%
+\label{sub:irreducibles_and_primes_continued}
+% subsection irreducibles_and_primes_continued
+
+\begin{note}
+  Recall that if $R$ is an integral domain and $a, b \in R$, we say that $a \, | \, b$ if $\exists c \in R$ such that $b = ca$.
+\end{note}
+
+Also, recall the definition of \hlnoteb{associativity}.
+
+\begin{defnnonum}[Associativity]
+  If $a \, | \, b$ and $b \, | \, a$, then we say that $a$ is associative to $b$, and denote $a \sim b$ if and only if $\exists u \in R$, which is a unit, such that $a = ub$, and we have $\lra{a} = \lra{b}$.
+\end{defnnonum}
+
+\begin{defn}[Irreducible]\index{Irreducible}
+\label{defn:irreducible}
+  Let $R$ be an integral domain. We say $p \in R$ is \hlnoteb{irreducible} if $p \neq 0$ is not a unit, and $p = ab \in R$, then either $a$ or $b$ is a unit. An element that is not \hlnoteb{irreducible} is \hlnoteb{reducible}\index{reducible}.
+\end{defn}
+
+\begin{eg}\label{eg:irreducible_eg}
+  Let $R = \mathbb{Z}[\sqrt{-5}] = \{ m + n \sqrt{-5} : m, \, n \in \mathbb{Z} \}$ and $p = 1 + \sqrt{-5}$. We want to show that $p$ is an irreducible in $R$. Note that for $z = m + n \sqrt{-5} \in R$, the \hldefn{norm} of $z$ is defined to be
+  \begin{equation*}
+    N(z) = \left(m + n \sqrt{-5}\right)\left(m - n \sqrt{-5}\right) = m^2 + 5n^2 \in \mathbb{N} \cup \{0\}
+  \end{equation*}
+  Note that\sidenote{
+  \begin{proof}
+    Let $x = m + n \sqrt{-5}$ and $y = a + b \sqrt{-5}$. Note that
+    \begin{equation*}
+      N(x) = m^2 + 5n^2.
+    \end{equation*}
+    Then
+    \begin{align*}
+      &N(x) N(b) \\
+      &= m^2 a^2 + 25 n^2 b^2 + 5 (n^2 a^2 + m^2 b^2).
+    \end{align*}
+    and since
+    \begin{equation*}
+      xy = ma - 5nb + \sqrt{-5} ( na + mb ),
+    \end{equation*}
+    we have
+    \begin{align*}
+      &N(xy) \\
+      &= (ma - 5nb)^2 + 5(na + mb)^2 \\
+      &= m^2 a^2 + 25 n^2 b^2 + 5 ( n^2 a^2 + m^2 b^2 )
+    \end{align*}
+  \end{proof}
+  }
+  \begin{equation*}
+    N(xy) = N(x) N(y).
+  \end{equation*}
+  Now suppose that $p = ab \in R$. Then
+  \begin{equation*}
+    6 = N(p) = N(a)N(b).
+  \end{equation*}
+  However, since $N(z) = m^2 + 5n^2$ for some $m, \, n \in \mathbb{Z}$, we must have that $N(z) \neq 2, \, 3$. Thus, we have either $N(a) = 1$ or $N(b) = 1$, which in turn implies that $a = \pm 1$ and $b = \pm 1$, which implies that $a$ or $b$ is a unit. Therefore, $p$ is irreducible.
+\end{eg}
+
+\begin{propo}[Properties of Irreducibles]
+\label{propo:properties_of_irreducibles}
+  Let $R$ be an integral domain. Let $0 \neq p \in R$. TFAE:
+  \begin{enumerate}
+    \item $p$ is irreducible;
+    \item $d \, | \, p \implies d \sim 1 \veebar d \sim p$;
+    \item $p \sim ab \in R \implies p \sim a \veebar p \sim b$;
+    \item $p = ab \in R \implies p \sim a \veebar p \sim b$.
+  \end{enumerate}
+  Consequently, if $p \sim q$, we have $p$ is irreducible if and only if $q$ is irreducible.
+\end{propo}
+
+\begin{proof}
+  $(1) \implies (2)$: $\quad d \, | \, p \implies \exists c \in R \quad dc = p$. \\
+  $d$ is a unit $\implies d \sim 1 \enspace \square$ ;\\
+  $d$ is not a unit $\implies c$ is a unit $\because p$ is irreducible\\
+  $\implies \exists c^{-1} \in R \quad cc^{-1} = 1 \implies d = pc^{-1} \implies d \sim p$.
+
+  \noindent $(2) \implies (3)$ : $\quad p \sim ab \implies \exists c, c^{-1} \in R \enspace cc^{-1} = 1 \quad p = cab$\\
+  Suppose $p \not\sim a$.\\
+  $a \, | \, cab \implies a \, | \, p \overset{(2)}{\implies} a \sim 1 \implies ca$ is a unit $\implies p \sim b$.
+
+  \noindent $(3) \implies (4)$ : $\quad 1$ is a unit and so $p = ab \implies p \sim ab$, and the result follows from $(3)$.
+
+  \noindent $(4) \implies (1)$ : $\quad \because (4) \enspace p = ab \implies p \sim a \veebar p \sim b$.\\
+  WLOG $p \sim a \implies \exists c, c^{-1} \in R \enspace cc^{-1} = 1 \quad p = ac\implies ac = ab$\\
+  Note $a \neq 0 \because p \neq 0 \, \land \, p \sim a$. \\
+  Then by \cref{propo:ring_cancellations_and_zeros}, $c = b \implies b$ is a unit $\implies p$ is irreducible.
+
+  By $(3)$ and $(1)$, $p \sim q \iff p, \, q$ are irreducibles.\qed
+\end{proof}
+
+\begin{defn}[Prime]\index{Prime}
+\label{defn:prime}
+  Let $R$ be an integral domain and $p \in R$. We say $p$ is \hlnoteb{prime} in $R$ if $p \neq 0$ is not a unit, and if $p \, | \, ab \in R \implies p \, | \, a \veebar p \, | \, b$.
+\end{defn}
+
+\begin{note}
+  If $p \sim q$, then $p$ is prime $\iff q$ is prime. This is a clear result, since $p \sim q \implies p \, | \, q \, \land \, q \, | \, p$, and if $p$ is prime, then $q \, | \, p \, | \, ab \implies q \, | \, p \, | \, a \; \veebar \; q \, | \, p \, | \, b$.
+
+  Also, by induction, if $p$ is prime and
+  \begin{equation*}
+    p \, | \, a_1 a_2 ..., a_n,
+  \end{equation*}
+  then $p \, | \, a_i$ for some $1 \leq i \leq n$.
+\end{note}
+
+\begin{propo}[Primes are Irreducible]
+\label{propo:primes_are_irreducible}
+  Let $R$ be an integral domain and $p \in R$. $p$ is prime $\implies p$ is irreducible.
+\end{propo}
+
+\begin{proof}
+  $\because p$ is prime $\quad p = ab \implies p \, | \, a \, \veebar \, p \, | \, b$. \\
+  WLOG $p \, | \, a \implies \exists d \in R \quad dp = a$\\
+  $\implies a = dp = dab = adb \quad \because R$ is commutative \\
+  $\because a \neq 0$ and $R$ is an integral domain, by \cref{propo:ring_cancellations_and_zeros}, $1 = db \implies b$ is a unit (with $d$ being its multiplicative inverse). \\
+  $\therefore p$ is irreducible.\qed
+\end{proof}
+
+The converse of \cref{propo:primes_are_irreducible} is false.
+
+\begin{eg}
+  Recall from \cref{eg:irreducible_eg} that $1 + \sqrt{-5}$ is irredubile in $\mathbb{Z}[\sqrt{-5}]$. Recall that for $d = m + n \sqrt{-5} \in \mathbb{Z}[\sqrt{-5}]$, we defined the \hlnoteb{norm} as
+  \begin{equation*}
+    N(d) = m^2 + 5n^2 \in \mathbb{N} \cup \{0\}.
+  \end{equation*}
+  Before proceeding further, note that
+  \begin{equation*}
+    2 \cdot 3 = 6 = (1 + \sqrt{-5})(1 - \sqrt{-5}) = p ( 1 - \sqrt{-5} ).
+  \end{equation*}
+  Suppose $p$ is prime, which then $p \, | \, 2 \cdot 3 \implies p \, | \, 2 \, \veebar \, p \, | \, 3$. Suppose $p \, | \, 2 \implies \exists q \in \mathbb{Z}[\sqrt{-5}] \quad 2 = pq$. It follows that
+  \begin{equation*}
+    4 = N(2) = N(p)N(q) = 6 N(q)
+  \end{equation*}
+  which is impossible. Similarly, $p \, | \, 3 \implies \exists r \in R \quad 3 = rp \implies$
+  \begin{equation*}
+    9 = N(3) = N(r)N(p) = 6N(r)
+  \end{equation*}
+  is also impossible. Therefore, $p$ is not prime.
+\end{eg}
+
+% subsection irreducibles_and_primes_continued (end)
+
+\subsection{Ascending Chain Condition}%
+\label{sub:ascending_chain_condition}
+% subsection ascending_chain_condition
+
+\begin{defn}[Ascengding Chain Condition on Principal Ideals (ACCP)]\index{Ascengding Chain Condition on Principal Ideals}\index{ACCP}
+\label{defn:ascengding_chain_condition_on_principal_ideals}
+An integral domain $R$ is said to satisfy the \hlnoteb{ascending chain condition on principal ideals} (ACCP) if for any ascending chain
+\begin{equation*}
+  \lra{a_1} \subseteq \lra{a_2} \subseteq \lra{a_3} \subseteq \hdots
+\end{equation*}
+of principal ideals in $R$, $\exists n \in \mathbb{N}$ such that
+\begin{equation*}
+  \lra{a_n} = \lra{a_{n + 1}} = \hdots \; .
+\end{equation*}
+\end{defn}
+
+\begin{eg}
+  $\mathbb{Z}$ satisfies ACCP.
+
+  If $\lra{a_1} \subseteq \lra{a_2} \subseteq \lra{a_3} \subseteq \hdots$ in $\mathbb{Z}$, then
+  \begin{equation*}
+    a_2 \, | \, a_1, \, a_3 \, | \, a_2, \, \hdots \; .
+  \end{equation*}
+  Taking the absolute value of each of the $a_i$'s, we have that
+  \begin{equation*}
+    \abs{a_1} \geq \abs{a_2} \geq \abs{a_3} \geq \hdots \; .
+  \end{equation*}
+  Since each of the $\abs{a_i} \geq 0$ is an integer, there must be some $n \in \mathbb{N}$ where
+  \begin{equation*}
+    \abs{a_n} = \abs{a_{n + 1}} = \hdots \; .
+  \end{equation*}
+  This implies that $a_{i + 1} = \pm a_i$ for $i \geq n$. Therefore, we have that 
+  \begin{equation*}
+    \lra{a_i} = \lra{a_{i + 1}} \quad \text{for } i \geq n,
+  \end{equation*}
+  thus showing that the ACCP is satisfied.
+\end{eg}
+
+\begin{thm}[Factorization on an Integral Domain Satisfying ACCP]
+\label{thm:factorization_on_an_integral_domain_satisfying_accp}
+  Let $R$ be an integral domain that satisfies ACCP. Let $0 \neq a \in R$ be a non-unit. Then $a$ is a product of irreducible elements of $R$.
+\end{thm}
+
+\begin{proof}
+  Suppose to the contrary that $a$ is not a product of irreducible elements of $R$. Then $a$ itself must not be irreducible. By \cref{propo:properties_of_irreducibles}, $\exists x_1 \in R$ such that
+  \begin{equation*}
+    a = x_1 a_1 \quad a \not\sim x_1 \, \land \, a \not\sim a_1.
+  \end{equation*}
+  Note that at least one of $x_1$ or $a_1$ is not a product of irreducible elements, for otherwise $a$ would be a product of irreducible elements. WLOG, suppose $a_1$ is not a product of irreducible elements. Then \cref{propo:properties_of_irreducibles} $\implies \exists x_2 \in R$
+  \begin{equation*}
+    a_1 = x_2 a_2 \quad a_1 \not\sim x_2 \, \land \, a \not\sim a_2.
+  \end{equation*}
+  We can continue this argument infinitely so, in which we will then get an ascending chain of principal ideals
+  \begin{equation*}
+    \lra{a} \subseteq \lra{a_1} \subseteq \lra{a_2} \subseteq \hdots \; .
+  \end{equation*}
+  However, since
+  \begin{equation*}
+    a \not\sim a_1 \not\sim a_2 \not\sim \hdots \;,
+  \end{equation*}
+  \cref{propo:division_in_an_integral_domain} implies that
+  \begin{equation*}
+    \lra{a} \subsetneq \lra{a_1} \subsetneq \lra{a_2} \subsetneq \hdots\; ,
+  \end{equation*}
+  which contradicts the assumption that $R$ satisfies ACCP. Therefore, all non-unit $0 \neq a \in R$ is a product of irreducible elements of $R$.\qed
+\end{proof}
+
+% subsection ascending_chain_condition (end)
+
+% section factorizations_in_integral_domains_continued (end)
+
+% chapter lecture_31_jul_16th_2018 (end)
