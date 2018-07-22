@@ -1,0 +1,196 @@
+\chapter{Lecture 32 Jul 18th 2018}%
+\label{chp:lecture_32_jul_18th_2018}
+% chapter lecture_32_jul_18th_2018
+
+\section{Factorizations in Integral Domains (Continued 2)}%
+\label{sec:factorizations_in_integral_domains_continued_2}
+% section factorizations_in_integral_domains_continued_2
+
+\subsection{Ascending Chain Condition (Continued)}%
+\label{sub:ascending_chain_condition_continued}
+% subsection ascending_chain_condition_continued
+
+\begin{thm}[Integral Domain that Satisfies ACCP has a Polynomial Ring that Satisfies ACCP]
+\label{thm:integral_domain_that_satisfies_accp_has_a_polynomial_ring_that_satisfies_accp}
+  If $R$ is an integral domain satisfying ACCP, so does $R[x]$.
+\end{thm}
+
+\begin{proof}
+  Suppose not, i.e. $R[x]$ does not satisfy ACCP. Then there exists a chain of principal ideals such that
+  \begin{equation}\label{eq:thm95_eq1}
+    \lra{f_1} \subsetneq \lra{f_2} \subsetneq \lra{f_3} \subsetneq \hdots \quad \text{in } R[x].
+  \end{equation}
+  Let $a_i$ be the leading coefficient of $f_i$. Note that $a_i \in R$. From \cref{eq:thm95_eq1}, we have that $f_{i + 1} \, | \, f_i$, and so we must have $a_{i + 1} \, | \, a_i$. Then
+  \begin{equation*}
+    \lra{a_1} \subseteq lra{a_2} \subseteq \lra{a_3} \subseteq \hdots \;.
+  \end{equation*}
+  Since $R$ satisfies ACCP, $\exists n \in \mathbb{N}$ such that
+  \begin{equation*}
+    \lra{a_n} = \lra{a_{n + 1}} = \hdots \;,
+  \end{equation*}
+  i.e. $a_n \sim a_{n + 1} \sim \hdots$. For $m \geq n$, let $f_m = g f_{m + 1}$ for some $g(x) \in R[x]$. If $b \in R$ is the leading coefficient of $g(x)$, then $a_m = b a_{m + 1}$. Since $a_m \sim a_{m + 1}$. $b$ is a unit in $R$. However, $g(x)$ is not a unit in $R[x]$ since $\lra{f_m} \subsetneq \lra{f_{m + 1}}$. Thus $g(x) \neq b$, which implies $\deg g \geq 1$. Then by \cref{propo:polynomial_ring_is_an_integral_domain},
+  \begin{equation*}
+    \deg f_m > \deg f_{m + 1},
+  \end{equation*}
+  which is true for $m \geq n$. By the same argument, we have that
+  \begin{equation*}
+    \deg f_m > \deg f_{m + 1} > \deg f_{m + 2} > \hdots \;,
+  \end{equation*}
+  which leads to a contradiction since $\deg f_i \geq 0$ for all $i \in \mathbb{N}$. Thus $R[x]$ must satisfy ACCP.\qed
+\end{proof}
+
+\begin{eg}
+  Since $\mathbb{Z}$ satisfies ACCP, by \cref{thm:integral_domain_that_satisfies_accp_has_a_polynomial_ring_that_satisfies_accp}, $\mathbb{Z}[x]$ also satisfies ACCP.
+\end{eg}
+
+% subsection ascending_chain_condition_continued (end)
+
+\subsection{Unique Factorization Domains and Principal Ideal Domains}%
+\label{sub:unique_factorization_domains_and_principal_ideal_domains}
+% subsection unique_factorization_domains_and_principal_ideal_domains
+
+\begin{defn}[Unique Factorization Domain (UFD)]\index{Unique Factorization Domain}\index{UFD}
+\label{defn:unique_factorization_domain}
+  An integral domain $R$ is called a \hlnoteb{unique factorization domain} (UFD) if it satisfies the following conditions:
+  \begin{enumerate}
+    \item If $0 \neq a \in R$ is a non-unit, then $a$ is a product of irreducible elements in $R$.
+    \item If $p_1 p_2 \hdots p_r \sim q_1 q_2 \hdots q_s$ where $p_i$ and $q_i$ are irreducibles, then $r = s$ and (possibly after relabelling) $p_i \sim q_i$ for each $1 \leq i \leq r = s$.
+  \end{enumerate}
+\end{defn}
+
+\begin{eg}
+  Both $\mathbb{Z}$ and $F[x]$, where $F$ is a field, are UFDs.
+\end{eg}
+
+\begin{eg}
+  Any field is a UFD since all elements in a field are either $0$ or units.
+\end{eg}
+
+Recall \cref{propo:primes_are_irreducible}: If $p$ is a prime, then $p$ is irreducible. In comparison, we have the following:
+
+\begin{propo}[Irreducibles are Primes in a UFD]
+\label{propo:irreducibles_are_primes_in_a_ufd}
+  Let $R$ be a UFD and $p \in R$. If $p$ is irreducible, then $p$ is a prime.\marginnote{This also means that in a UFD, primes and irreducibles are the same.}
+\end{propo}
+
+\begin{proof}
+  Let $p \in R$ be an irreducible. If $p \, | \, ab \in R$, then $\exists d \in R$ such that $ab = pd$. Since $R$ is a UFD, we can factor $a, b, $ and $d$ into irreducible elements, say
+  \begin{align*}
+    a &= p_1 p_2 \hdots p_k \\
+    b &= q_1 q_2 \hdots q_l \\
+    d &= r_1 r_2 \hdots r_m.
+  \end{align*}
+  where $k, l, m \in \mathbb{N} \cup \{0\}$. Then
+  \begin{equation*}
+    ab = pd \iff p_1 \hdots p_k q_1 \hdots q_l = p r_1 \hdots r_m.
+  \end{equation*}
+  Since $p$ is irreducible, by \cref{propo:properties_of_irreducibles}, $p \sim p_i$ or $p \sim q_i$. Therefore $p \, | \, a$ or $p \, | \, b$, which is the definition of a prime.\qed
+\end{proof}
+
+\begin{eg}
+  Consider $R = \mathbb{Z}[\sqrt{-5}]$ and $p = 1 + \sqrt{-5}$. We proved that $p$ is irreducible but $p$ is not prime. Then by \cref{propo:irreducibles_are_primes_in_a_ufd}, we have that $\mathbb{Z}[\sqrt{-5}]$ is not a UFD.
+\end{eg}
+
+\begin{defn}[Greatest Common Divisor]\index{Greatest Common Divisor}
+\label{defn:greatest_common_divisor}
+  Let $R$ be an integral domain, and $a, b \in R$. We say $d \in R$ is the \hlnoteb{greatest common divisor} of $a, b$, denoted as $\gcd(a, b) = d$, if it satisfies the following conditions:
+  \begin{enumerate}
+    \item $d \, | \, a$ and $d \, | \, b$;
+    \item $e \in R \; e \, | \, a \, \land \, e \, | \, b \implies e \, | \, d$.
+  \end{enumerate}
+\end{defn}
+
+\begin{propo}
+\label{propo:associates_of_the_gcd}
+Let $R$ be a UFD and $a, \, b \in R$. If $p_1, ..., p_k$ are the non-associated primes dividing $a$ and $b$, say\marginnote{
+\begin{ex}
+  Prove \cref{propo:associates_of_the_gcd}.
+\end{ex}}
+  \begin{gather*}
+    a \sim p_1^{a_1} \hdots p_k^{a_k} \\
+    b \sim p_1^{b_1} \hdots b_k^{b_k}
+  \end{gather*}
+  with $a_i, \, b_i \in \mathbb{N}$, then
+  \begin{equation*}
+    \gcd(a, b) \sim p_1^{\min(a_1, b_1)} \hdots p_k^{\min(a_k, b_k)}
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Let $d = \gcd(a, b)$. It suffices to show that
+  \begin{equation*}
+    d \, | \, p_1^{\min(a_1, b_1)} \hdots p_k^{\min(a_k, b_k)},
+  \end{equation*}
+  since $p_1^{\min(a_q, b_1)} \hdots p_k^{\min(a_k, b_k)}$ divides $a$ and $b$ and so it must also divide $d$.
+
+  Suppose that $d \nmid p_1^{\min(a_1, b_1)} \hdots p_k^{\min(a_k, b_k)}$. Then $d \not\sim p_i^{\min(a_i, b_i)}$ for $1 \leq i \leq k$. But that implies that $d = 1$, otherwise $d \nmid \, a$ and $d \nmid b$. However,
+  \begin{equation*}
+    p_1^{\min(a_1, b_1)} \hdots p_k^{\min(a_k, b_k)} \, \nmid 1
+  \end{equation*}
+  which contradicts the choice of $d$ as the greatest common divisor.\qed
+\end{proof}
+
+\begin{note}
+  If $R$ is a UFD with $d, a_1, ..., a_m \in R$, then
+  \begin{equation*}
+    \gcd(da_1, da_2, ..., da_m) \sim d \gcd(a_1, ..., a_m).
+  \end{equation*}
+\end{note}
+
+\begin{thm}[UFD and ACCP]
+\label{thm:ufd_and_accp}
+  Let $R$ be an integral domain. TFAE:
+  \begin{enumerate}
+    \item $R$ is a UFD;
+    \item $R$ satisfies ACCP and $\forall a, \, b \in R$, $\exists d = gcd(a, b) \in R$;
+    \item $R$ satsifies ACCP and every irreducible element in $R$ is a prime.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  $(1) \implies (2)$: By \cref{propo:associates_of_the_gcd}, $\forall a, \, b \in R \quad \exists d = \gcd(a, b) \in R$. Suppose there exists
+  \begin{equation*}
+    0 \neq \lra{a_1} \subsetneq \lra{a_2} \subsetneq \lra{a_3}\ subsetneq \hdots \; \text{in } R.
+  \end{equation*}
+  Since $\lra{a_1} \neq R$, $a_1$ is not a unit\sidenote{Otherwise, $1 \in \lra{a_1} \implies \lra{a_1} = R$.} Since $R$ is a UFD, let $a_1 \sim p_1^{k_1} \hdots p_r^{k_r}$, where the $p_i$'s are non-associated primes and $k_i \in \mathbb{N}$, for $1 \leq i \leq r$. Since $a_i \mid a_1$ for $2 \leq i \leq r$, we have that
+  \begin{equation*}
+    a_i \sim p_1^{d_{i, 1}} p_2^{d_{i, 2}} \hdots p_r^{d_{i, r}}
+  \end{equation*}
+  where $0 \leq d_{i, j} \leq k_j$ for $1 \leq j \leq r$. This implies that there are only finitely many non-associated choices for $a_i$, which implies that there exists $m \neq n$ such that $a_m \sim a_n \implies \lra{a_m} = \lra{a_n}$, a contradiction. Therefore, $R$ must satisfy ACCP.
+
+  \noindent $(2) \implies (3)$: Let $p \in R$ be an irreducible, and suppose $p \, | \, ab$. By $(2)$, let $d = \gcd(a, p)$. Then $d \mid p$, and by \cref{propo:properties_of_irreducibles}, we have either $p \sim 1$ or $d \sim p$ since $p$ is an irreducible. If $d \sim p$, since $d \mid 1$, we have that $p \mid 1$. If $d \sim 1$, note that we have that
+  \begin{equation*}
+    \gcd(ab, pb) \sim b \gcd(a, p) \sim b.
+  \end{equation*}
+  Since $p \mid ab$ and $p \mid pb$, we have $p \mid \gcd(ab, pb)$ and so $p \mid b$.
+
+  \noindent: $(3) \implies (1)$: $R$ satisfies ACCP implies, by \cref{propo:irreducibles_are_primes_in_a_ufd}, every non-unit non-zero $a \in R$ is a product of irreducible elements in $R$. It sufficies to prove that the factorization is unique\sidenote{This would ssatisfy the definition of a UFD.}. Suppose we have
+  \begin{equation*}
+    p_1 p_2 \hdots p_r \sim q_1 q_2 \hdots q_s
+  \end{equation*}
+  where $p_i$ and $q_j$ are irreducibles, for $1 \leq i \leq r$ and $1 \leq j \leq s$. Now $p_1 \mid p_1 p_2 \hdots p_r$, and so $p_1 \mid q_1 q_2 \hdots q_s$. By \cref{propo:properties_of_irreducibles} and since $p_1$ is an irreducible, $p_1 \sim q_j$ for some $1 \leq j \leq s$. We may relabel this $q_j$ to be $q_1$. Now since $p_1 \sim q_1$ and $p_1 p_2 \hdots p_r \sim q_1 q_2 \sim q_s$, $\exists a, \, b \in R$ that are units suchthat
+  \begin{gather*}
+    ap_1 = q_1 \; \text{ and } \; p_1 p_2 \hdots p_r = b q_1 q_2 \hdots q_s = bap_1 q_2 \hdots q_s \\
+    \implies p_2 \hdots p_r = ba q_2 \hdots q_s \implies p_2 \hdots p_r \sim q_2 \hdots q_s.
+  \end{gather*}
+  By repeating the same argument, we have that $r = s$ and $p_i \sim q_i$ for $1 \leq i \leq r$. Therefore the factorization is unique.\qed
+\end{proof}
+
+\begin{defn}[Principal Ideal Domain (PID)]\index{Principal Ideal Domain}\index{PID}
+\label{defn:principal_ideal_domain}
+  An integral domain $R$ is a \hlnoteb{principal ideal domain} (PID) if every ideal is principal.
+\end{defn}
+
+\begin{eg}
+  A field $F$ is a PID since its only ideals are $\{0\} = \lra{0}$ and $F = \lra{1}$.
+\end{eg}
+
+\begin{eg}
+  $\mathbb{Z}$ and $F[x]$ are PIDs.
+\end{eg}
+
+% subsection unique_factorization_domains_and_principal_ideal_domains (end)
+
+% section factorizations_in_integral_domains_continued_2 (end)
+
+% chapter lecture_32_jul_18th_2018 (end)
