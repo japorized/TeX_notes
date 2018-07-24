@@ -55,6 +55,28 @@
     src: ./PMATH347S18/lectures/lec20.tex
   - title: lec21.tex
     src: ./PMATH347S18/lectures/lec21.tex
+  - title: lec22.tex
+    src: ./PMATH347S18/lectures/lec22.tex
+  - title: lec23.tex
+    src: ./PMATH347S18/lectures/lec23.tex
+  - title: lec24.tex
+    src: ./PMATH347S18/lectures/lec24.tex
+  - title: lec25.tex
+    src: ./PMATH348S18/lectures/lec25.tex
+  - title: lec26.tex
+    src: ./PMATH348S18/lectures/lec26.tex
+  - title: lec27.tex
+    src: ./PMATH348S18/lectures/lec27.tex
+  - title: lec28.tex
+    src: ./PMATH348S18/lectures/lec28.tex
+  - title: lec29.tex
+    src: ./PMATH349S18/lectures/lec29.tex
+  - title: lec30.tex
+    src: ./PMATH350S18/lectures/lec30.tex
+  - title: lec31.tex
+    src: ./PMATH351S18/lectures/lec31.tex
+  - title: lec32.tex
+    src: ./PMATH351S18/lectures/lec32.tex
 
 - title: STAT330 S18
   pdf:
