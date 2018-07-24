@@ -90,6 +90,8 @@
   pdf:
   - title: readingnotes.pdf
     src: ./JAPAN201RS18/readingnotes.pdf
+  - title: readingnotes-white.pdf
+    src: ./JAPAN201RS18/readingnotes-white.pdf
   tex:
   - title: readingnotes.tex
     src: ./JAPAN201RS18/readingnotes.tex
