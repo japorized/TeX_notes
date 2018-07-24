@@ -34,6 +34,15 @@
 \theoremindent10pt
 \newtheorem{grammar}{\faBook \enspace 文法}[section]
 
+% \pagecolor{white}
+% \color{base16-eighties-dark}
+
+% \hypersetup{
+% 	colorlinks=false,
+%   allbordercolors=base16-eighties-magenta,
+%   pdfborderstyle={/S/U/W 1}
+% }
+
 \begin{document}
 \hypersetup{pageanchor=false}
 \maketitle
@@ -936,8 +945,8 @@ Below are some example sentences.
   \begin{tikzpicture}
   \tikzset{
     giveto/.style={midarrow={latex}{0.8},line width=1pt},
-    item/.style={midway, rectangle, draw=none, fill=base16-eighties-dark},
-    name/.style={rectangle, draw, fill=base16-eighties-dark}
+    item/.style={midway, rectangle, draw=none, fill=base16-eighties-dark, text=base16-eighties-light},
+    name/.style={rectangle, draw, fill=base16-eighties-dark, text=base16-eighties-light}
   }
     \draw[giveto] (0,0) -- (-6.5,3) node[item] {チョコレート};
     \draw[giveto] (-2,3) -- (-6,3) node[item] {トレーナー};
