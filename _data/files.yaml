@@ -92,9 +92,13 @@
     src: ./JAPAN201RS18/readingnotes.pdf
   - title: readingnotes-white.pdf
     src: ./JAPAN201RS18/readingnotes-white.pdf
+  - title: vocabsheet.pdf
+    src: ./JAPAN201RS18/vocabsheet/vocabsheet.pdf
   tex:
   - title: readingnotes.tex
     src: ./JAPAN201RS18/readingnotes.tex
+  - title: vocabsheet.tex
+    src: ./JAPAN201RS18/vocabsheet/vocabsheet.tex
 
 - title: PMATH352 W18
   pdf:

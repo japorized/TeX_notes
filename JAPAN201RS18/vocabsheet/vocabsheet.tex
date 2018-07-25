@@ -1,0 +1,298 @@
+% !TEX TS-program = lualatex
+\documentclass[10pt,landscape,a4paper]{article}
+% Style from https://stackoverflow.com/questions/1911516/how-to-make-cheat-sheets-in-latex/36768704#36768704
+\usepackage{luatexja}
+\usepackage{pxrubrica}
+\usepackage{CJKutf8}
+\usepackage{longtable,multirow}
+\nonstopmode
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{mathrsfs}
+\usepackage{tikz,pgf}
+\usepackage{pgfplots}
+\usetikzlibrary{angles,shapes,positioning,arrows,fit,calc,graphs,graphs.standard}
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage[top=0mm,bottom=1mm,left=0mm,right=1mm]{geometry}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{microtype}
+
+% xcolor (scheme: base16 eighties)
+\definecolor{base16-eighties-dark}{HTML}{2D2D2D}
+\definecolor{base16-eighties-light}{HTML}{D3D0C8}
+\definecolor{base16-eighties-magenta}{HTML}{CD98CD}
+\definecolor{base16-eighties-red}{HTML}{F47678}
+\definecolor{base16-eighties-yellow}{HTML}{E2B552}
+\definecolor{base16-eighties-green}{HTML}{98CD97}
+\definecolor{base16-eighties-lightblue}{HTML}{61CCCD}
+\definecolor{base16-eighties-blue}{HTML}{6498CE}
+\definecolor{base16-eighties-brown}{HTML}{D47B4E}
+
+  % highlighting shortcuts
+\newcommand{\hlimpo}[1]{\textcolor{base16-eighties-red}{\textbf{#1}}}
+\newcommand{\hlwarn}[1]{\textcolor{base16-eighties-yellow}{\textbf{#1}}}
+\newcommand{\hldefn}[1]{\textcolor{base16-eighties-blue}{\textbf{#1}}}
+\newcommand{\hlnotea}[1]{\textcolor{base16-eighties-green}{\textbf{#1}}}
+\newcommand{\hlnoteb}[1]{\textcolor{base16-eighties-lightblue}{\textbf{#1}}}
+\newcommand{\hlnotec}[1]{\textcolor{base16-eighties-brown}{\textbf{#1}}}
+\renewcommand*\rubysize{.6}
+
+\pgfplotsset{compat=1.15}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{four quads/.append style={axis x line=middle, axis y line=
+middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
+\pgfplotsset{four quad complex/.append style={axis x line=middle, axis y line=
+middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
+
+\def\firstcircle{(0,0) circle (1.5cm)}
+\def\secondcircle{(0:2cm) circle (1.5cm)}
+
+\colorlet{circle edge}{base16-eighties-blue}
+\colorlet{circle area}{base16-eighties-blue!5}
+
+\tikzset{filled/.style={fill=circle area, draw=circle edge, thick},
+    outline/.style={draw=circle edge, thick}}
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+\everymath\expandafter{\the\everymath \color{base16-eighties-blue}}
+\everydisplay\expandafter{\the\everydisplay \color{base16-eighties-blue}}
+
+\renewcommand{\baselinestretch}{1.1}
+\pagestyle{empty}
+
+\global\mdfdefinestyle{header}{%
+linecolor=gray,linewidth=1pt,%
+leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
+}
+
+\newcommand{\header}{
+\begin{mdframed}[style=header]
+\footnotesize
+\sffamily
+JAPAN201RS18 Vocabulary Sheet\\
+by~Johnson~Ng,~page~\thepage~of~1
+\end{mdframed}
+}
+
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {.2ex}%
+                                {.2ex}%x
+                                {\color{base16-eighties-blue}\sffamily\small\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{1}{0mm}%
+                                {.2ex}%
+                                {.2ex}%x
+                                {\sffamily\bfseries}}
+
+
+
+\def\multi@column@out{%
+   \ifnum\outputpenalty <-\@M
+   \speci@ls \else
+   \ifvoid\colbreak@box\else
+     \mult@info\@ne{Re-adding forced
+               break(s) for splitting}%
+     \setbox\@cclv\vbox{%
+        \unvbox\colbreak@box
+        \penalty-\@Mv\unvbox\@cclv}%
+   \fi
+   \splittopskip\topskip
+   \splitmaxdepth\maxdepth
+   \dimen@\@colroom
+   \divide\skip\footins\col@number
+   \ifvoid\footins \else
+      \leave@mult@footins
+   \fi
+   \let\ifshr@kingsaved\ifshr@king
+   \ifvbox \@kludgeins
+     \advance \dimen@ -\ht\@kludgeins
+     \ifdim \wd\@kludgeins>\z@
+        \shr@nkingtrue
+     \fi
+   \fi
+   \process@cols\mult@gfirstbox{%
+%%%%% START CHANGE
+\ifnum\count@=\numexpr\mult@rightbox+2\relax
+          \setbox\count@\vsplit\@cclv to \dimexpr \dimen@-1cm\relax
+\setbox\count@\vbox to \dimen@{\vbox to 1cm{\header}\unvbox\count@\vss}%
+\else
+      \setbox\count@\vsplit\@cclv to \dimen@
+\fi
+%%%%% END CHANGE
+            \set@keptmarks
+            \setbox\count@
+                 \vbox to\dimen@
+                  {\unvbox\count@
+                   \remove@discardable@items
+                   \ifshr@nking\vfill\fi}%
+           }%
+   \setbox\mult@rightbox
+       \vsplit\@cclv to\dimen@
+   \set@keptmarks
+   \setbox\mult@rightbox\vbox to\dimen@
+          {\unvbox\mult@rightbox
+           \remove@discardable@items
+           \ifshr@nking\vfill\fi}%
+   \let\ifshr@king\ifshr@kingsaved
+   \ifvoid\@cclv \else
+       \unvbox\@cclv
+       \ifnum\outputpenalty=\@M
+       \else
+          \penalty\outputpenalty
+       \fi
+       \ifvoid\footins\else
+         \PackageWarning{multicol}%
+          {I moved some lines to
+           the next page.\MessageBreak
+           Footnotes on page
+           \thepage\space might be wrong}%
+       \fi
+       \ifnum \c@tracingmulticols>\thr@@
+                    \hrule\allowbreak \fi
+   \fi
+   \ifx\@empty\kept@firstmark
+      \let\firstmark\kept@topmark
+      \let\botmark\kept@topmark
+   \else
+      \let\firstmark\kept@firstmark
+      \let\botmark\kept@botmark
+   \fi
+   \let\topmark\kept@topmark
+   \mult@info\tw@
+        {Use kept top mark:\MessageBreak
+          \meaning\kept@topmark
+         \MessageBreak
+         Use kept first mark:\MessageBreak
+          \meaning\kept@firstmark
+        \MessageBreak
+         Use kept bot mark:\MessageBreak
+          \meaning\kept@botmark
+        \MessageBreak
+         Produce first mark:\MessageBreak
+          \meaning\firstmark
+        \MessageBreak
+        Produce bot mark:\MessageBreak
+          \meaning\botmark
+         \@gobbletwo}%
+   \setbox\@cclv\vbox{\unvbox\partial@page
+                      \page@sofar}%
+   \@makecol\@outputpage
+     \global\let\kept@topmark\botmark
+     \global\let\kept@firstmark\@empty
+     \global\let\kept@botmark\@empty
+     \mult@info\tw@
+        {(Re)Init top mark:\MessageBreak
+         \meaning\kept@topmark
+         \@gobbletwo}%
+   \global\@colroom\@colht
+   \global \@mparbottom \z@
+   \process@deferreds
+   \@whilesw\if@fcolmade\fi{\@outputpage
+      \global\@colroom\@colht
+      \process@deferreds}%
+   \mult@info\@ne
+     {Colroom:\MessageBreak
+      \the\@colht\space
+              after float space removed
+              = \the\@colroom \@gobble}%
+    \set@mult@vsize \global
+  \fi}
+
+\makeatother
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\small
+
+\begin{longtable}{l l l l l l l l}
+  \multicolumn{8}{l}{\hlnoteb{名詞}} \\
+ウェイター                     & waiter                     & お\ruby[j]{宅}{たく}                    & (someone's) house/home    & \ruby[j]{大人}{おと|な}          & adult                       & \ruby[j]{外国語}{がい|こく|ご}                   & foreign language \\
+\ruby[j]{楽器}{がっ|き}        & musical instruments        & \ruby[j]{空手}{から|て}                 & karate                    & カレー                           & curry                       & \ruby[j]{着物}{き|もの}                          & kimono \\
+\ruby[j]{広告}{こう|こく}      & advertisement              & \ruby[j]{紅茶}{こう|ちゃ}               & black tea                 & \ruby[j]{言葉}{こと|ば}          & language                    & ゴルフ                                           & golf \\
+セーター                       & sweater                    & \ruby[j]{象}{ぞう}                      & elephant                  & バイオリン                       & violin                      & バイク                                           & motorcycle \\
+\ruby[j]{物価}{ぶっ|か}        & (consumer) prices          & \ruby[j]{文法}{ぶん|ぽう}               & grammar                   & \ruby[j]{弁護士}{べん|ご|し}     & lawyer                      & \ruby[j]{募集}{ぼ|しゅう}                        & recruitment \\
+\ruby[j]{店}{みせ}             & shop; store                & やくざ                                  & \textit{yakuza}; gangster & \ruby[j]{約束}{やく|そく}        & promise; appointment        & レポート                                         & (term) paper; report \\
+\ruby[j]{私}{わたくし}         & I (formal)                 & \ruby[j]{兄}{あに}                      & (my) older brother        & \ruby[j]{大家}{おお|や}さん      & landlord; landlady          & お\ruby[j]{返}{かえ}し                           & return \\
+\ruby[j]{奥}{おく}さん         & (your/his) wife            & おじさん                                & uncle; middle-aged man    & おばさん                         & aunt; middle-aged woman     & グラス                                           & tumbler; glass \\
+クリスマス                     & Christmas                  & ご\ruby[j]{主人}{しゅ|じん}             & (your/her) husband        & \ruby[j]{皿}{さら}               & plate; dish                 & \ruby[j]{時間}{じ|かん}                          & time \\
+チケット                       & ticket                     & チョコレート                            & chocolate                 & トレーナー                       & sweat shirt                 & ぬいぐるみ                                       & sutffed animal \\
+ネクタイ                       & necktie                    & バレンタインデー                        & St. Valentine's Day       & ヴィデオカメラ                   & camcorder                   & \ruby[j]{夫婦}{ふう|ふ}                          & married couple \\
+ホワイトデー                   & "White Day"                & マフラー                                & winter scarf              & \ruby[j]{漫画}{まん|が}          & comic book                  & マンション                                       & condominium \\
+みかん                         & mandarin orange            & \ruby[j]{皆}{みな}さん                  & everyone; all of you      & \ruby[j]{指輪}{ゆび|わ}          & ring                        & ラジオ                                           & radio  \\
+\ruby[j]{両親}{りょう|しん}    & parents                    & \ruby[j]{履歴書}{り|れき|しょ}          & r\'esum\'e                & インターネット                   & Internet                    & \ruby[j]{絵}{え}                                 & painting; picture; drawing \\
+\ruby[j]{映画館}{えい|が|かん} & movie theater              & \ruby[j]{外国人}{がい|こく|じん}        & foreigner                 & \ruby[j]{家具}{か|ぐ}            & furniture                   & クラブ                                           & night club \\
+\ruby[j]{経験}{けい|けん}      & experience                 & \ruby[j]{結婚式}{けっ|こん|しき}        & wedding                   & \ruby[j]{地震}{じ|しん}          & earthquake                  & \ruby[j]{締}{し}め\ruby[j]{切}{き}り             & deadline \\
+ジャケット                     & jacket                     & \ruby[j]{習慣}{しゅう|かん}             & custom; habit             & \ruby[j]{税金}{ぜい|きん}        & tax                         & \ruby[j]{卒業式}{そつ|ぎょう|しき}               & graduation ceremony \\
+そば                           & \textit{soba}              & \ruby[j]{地図}{ち|ず}                   & map                       & \ruby[j]{電池}{でん|ち}          & battery                     & \ruby[j]{庭}{にわ}                               & garden \\
+\ruby[j]{発表}{はっ|ぴょう}    & presentation; announcement & \ruby[j]{番組}{ばん|ぐみ}               & broadcast program         & プール                           & swimming pool               & ペット                                           & pet \\
+\ruby[j]{保険}{ほ|けん}        & insurance                  & \ruby[j]{予定}{よ|てい}                 & plan; appointment         & \ruby[j]{旅館}{りょ|かん}        & Japanese inn                & \ruby[j]{割引券}{わり|びき|けん}                 & discount coupon \\
+\ruby[j]{駅員}{えき|いん}      & station attendant          & \ruby[j]{大}{おお}きさ                  & size                      & \ruby[j]{親}{おや}               & parent                      & \ruby[j]{期末試験}{き|まつ|し|けん}              & end-of-term examination \\
+\ruby[j]{研究}{けん|きゅう}    & research                   & ごみ                                    & garbage                   & \ruby[j]{砂糖}{さ|とう}          & sugar                       & \ruby[j]{奨学金}{しょう|がく|きん}               & scholarship \\
+\ruby[j]{親戚}{しん|せき}      & relatives                  & \ruby[j]{推薦状}{すい|せん|じょう}      & letter of recommendation  & \ruby[j]{大学院}{だい|がく|いん} & graduate school             & \ruby[j]{台風}{たい|ふう}                        & typhoon \\
+\ruby[j]{日}{ひ}               & day                        & ファイル                                & file; portfolio           & \ruby[j]{道}{みち}               & way; road; directions       & \ruby[j]{目覚}{め|ざ}まし\ruby[j]{時計}{ど|けい} & alarm clock \\
+お\ruby[j]{客}{きゃく}さん     & guest; visitor; client     & \ruby[j]{男}{おとこ}                    & man                       & お\ruby[j]{湯}{ゆ}               & hot water                   & \ruby[j]{女}{おんは}                             & woman \\
+\ruby[j]{鍵}{かぎ}             & lock; key                  & \ruby[j]{火事}{か|じ}                   & fire                      & \ruby[j]{紙}{かみ}               & paper                       & \ruby[j]{給料}{きゅう|りょう}                    & salary \\
+コンタクト                     & contact lenses             & \ruby[j]{最低}{さい|てい}               & the lowest; the worst     & サラリーマン                     & salaryman; company employee & \ruby[j]{残業}{ざん|ぎょう}                      & overtime work \\
+\ruby[j]{首相}{しゅ|しょう}    & prime minister             & ショッピングモール                      & shopping mall             & スプーン                         & spoon                       & \ruby[j]{宝}{たから}くじ                         & lottery \\
+\ruby[j]{違}{ち}い             & difference                 & \ruby[j]{動物園}{どう|ぶつ|えん}        & zoo                       & ニュース                         & news                        & パンダ                                           & panda \\
+ヒーター                       & heater                     & \ruby[j]{髭}{ひげ}                      & beard                     & \ruby[j]{秘密}{ひ|みつ}          & secret                      & ブーツ                                           & boots \\
+\ruby[j]{寮}{りょう}           & dormitory                  & \ruby[j]{旅行会社}{りょ|こう|がい|しゃ} & travel agency \\
+\multicolumn{8}{l}{\hlnoteb{い　形容詞}} \\
+  \ruby[j]{嬉}{うれ}しい & glad                & \ruby[j]{悲}{かな}しい & sad         & \ruby[j]{辛}{から}い       & hot and spicy; salty        & \ruby[j]{厳}{きび}しい & strict \\
+  すごい                 & incredible; awesome & \ruby[j]{近}{ちか}い   & close; near & \ruby[j]{欲}{ほ}しい       & to want (\textit{thing} が) & \ruby[j]{広}{ひろ}い   & spacious; wide \\
+  \ruby[j]{汚}{きたな}い & dirty               & \ruby[j]{危}{あぶ}ない & dangerous   & \ruby[j]{羨}{うらや}ましい & envious                     & \ruby[j]{少}{すく}ない & a little; a few \\
+  \ruby[j]{強}{つよ}い   & strong \\
+  \multicolumn{8}{l}{\hlnoteb{な　形容詞}} \\
+  いろいろ（な） & various; different kinds of & \ruby[j]{幸}{しやわ}せ & happy (lasting happiness) & だめ（な）     & no good & けち（な）& stingy; cheap \\
+  \multicolumn{8}{l}{\hlnoteb{う　動詞}} \\
+  \ruby[j]{編}{あ}む                            & to knit （〜を）            & \ruby[j]{貸}{か}す                              & to lend; to rent           & \ruby[j]{頑張}{がん|ば}る                & to do one's best; to try hard  & \ruby[j]{泣}{な}く                       & to cry \\
+  \ruby[j]{磨}{みが}く                          & to brush (teeth); to polish & \ruby[j]{約束}{やく|そく}を\ruby[j]{守}{まも}る & to keep a promise          & \ruby[j]{送}{おく}る                     & to send                        & \ruby[j]{似合}{に|あ}う                  & to look good (on somebody) \\
+  \ruby[j]{売}{う}る                            & to sell （〜を）            & \ruby[j]{下}{おろ}ろす                          & to withdraw (money)        & \ruby[j]{描}{か}く                       & to draw; to paint              & \ruby[j]{探}{さが}す                     & to search; to look for \\
+                                                &                             &                                                 & to take down; to unload \\
+  \ruby[j]{誘}{さそ}う                          & to invite; to entice        & \ruby[j]{喋}{しゃべ}る                          & to chat                    & \ruby[j]{付}{つ}き\ruby[j]{合}{あ}う     & (1) to date (someone)          & \ruby[j]{着}{つ}く                       & to arrive \\
+                                                &                             &                                                 &                            &                                          & (2) to keep company \\
+  \ruby[j]{保険}{ほ|けん}に\ruby[j]{入}{はい}る & to buy insurance            & \ruby[j]{起}{お}こす                            & to wake (someone) up       & おごる                                   & to treat (someone) to a meal   & \ruby[j]{落}{お}ち\ruby[j]{込}{こ}む     & to get depressed \\
+  \ruby[j]{困}{こま}る                          & to have difficulty          & \ruby[j]{出}{だ}す                              & to take (something) out;   & \ruby[j]{連}{つ}れて\ruby[j]{行}{い}く   & to take (someone) to (a place) & \ruby[j]{直}{なお}す                     & to correct; to fix \\
+                                                &                             &                                                 & to hand in (something) \\
+  \ruby[j]{道}{みち}に\ruby[j]{迷}{まよ}う      & to become lost;             & \ruby[j]{見}{み}つかる                          & to be found                & \ruby[j]{迎}{むか}えに\ruby[j]{行}{い}く & to go pick up                  & \ruby[j]{訳}{やく}す                     & to translate \\
+                                                & to lose one's way \\
+  \ruby[j]{笑}{わら}う                          & to laugh                    & \ruby[j]{選}{えら}ぶ                            & to choose; to select       & お\ruby[j]{湯}{ゆ}お\ruby[j]{沸}{わ}かす & to boil water                  & \ruby[j]{髪}{かみ}を\ruby[j]{梳}{と}かす & to comb one's hair \\
+  \ruby[j]{込}{こ}む                            & to get crowded              & \ruby[j]{宝}{たから}くじに\ruby[j]{当}{あ}たる  & to win a lottery           & \ruby[j]{脱}{ぬ}ぐ                       & to take off (clothes)          & \ruby[j]{髭}{ひげ}を\ruby[j]{剃}{そ}る   & to shave one's beard \\
+  \multicolumn{8}{l}{\hlnoteb{る　動詞}} \\
+  \ruby[j]{諦}{あきら}める & to give up & あげる & to give (to others) & くれる & to give (me) & できる & to come into existence; \\
+                           &            &        &                     &        &              &        & to be made \\
+  \ruby[j]{気}{き}をつける & to be cautious/careful & \ruby[j]{調}{しら}べる     & to look into (a matter) & \ruby[j]{見}{み}える     & to be visible & アイロンをかける & to iron (clothes) \\
+  \ruby[j]{集}{あつ}める & to collect & \ruby[j]{入}{い}れる & to put (something) in & \ruby[j]{乗}{の}り\ruby[j]{遅}{おく}れる & to miss (a train, bus, etc.) & \ruby[j]{見}{み}せる & to show \\
+  \ruby[j]{入}{い}れる     & to make tea, coffee, etc. &  \ruby[j]{生}{う}まれる   & to be born & \ruby[j]{鍵}{かぎ}をかける & to lock & \ruby[j]{足}{た}りる     & to be sufficient; to be enough \\
+  \ruby[j]{慣}{な}れる     & to get used to \\
+  \multicolumn{8}{l}{\hlnoteb{Irregular Verbs}} \\
+  \ruby[j]{感動}{かん|どう}する & to be moved/touched & \ruby[j]{相談}{そう|だん}する & to consult & プロポーズする & to propose marriage & \ruby[j]{観光}{かん|こう}する & to do sightseeing \\
+  する           & to decide on (an item) & \ruby[j]{卒業}{そつ|ぎょう}する & to graduate (from...) & \ruby[j]{予約}{よ|やく}する & to reserve & \ruby[j]{朝寝坊}{あさ|ね|ぼう}する & to oversleep \\
+  \ruby[j]{案内}{あん|ない}する & to show (someone) around & \ruby[j]{説明}{せつ|めい}する & to explain & \ruby[j]{迎}{むか}えに\ruby[j]{来}{く}る & to come to pick up & お\ruby[j]{祈}{いの}りする & to pray \\
+  \ruby[j]{化粧}{け|しょう}する   & to put makeup on & \ruby[j]{就職}{しゅう|しょく}する   & to get a full-time job (at...) & する             & to wear small items (necktie, & \ruby[j]{離婚}{り|こん}する   & to get a divorce \\
+                                  &                  &                                     &                                &                  &  watch, etc.)（〜を）\\
+  \multicolumn{8}{l}{\hlnoteb{Adverbs and Other Expressions}} \\
+  \ruby[j]{同}{おな}じ                 & same                      & 〜\ruby[j]{君}{くん}                   & Mr./Ms. ... (casual)       & こんな〜                           & ... like this; this kind of... & \ruby[j]{達}{たち}              & [makes a noun plural] \\
+  \ruby[j]{私達}{わたし|たち}          & we                        & ちょうど                               & exactly                    & どうしたらいい                     & what should one do             & \ruby[j]{良}{よ}く              & well \\
+  \ruby[j]{一日中}{いち|にち|じゅう}   & all day long              & 〜けど                                 & ..., but; ..., so          & \ruby[j]{最近}{さい|きん}          & recently                       & 〜\ruby[j]{番}{ばん}            & number... \\
+〜\ruby[j]{目}{め}                     & -th \\
+もう\ruby[j]{一度}{いち|ど}            & one more time             & ええと                                 & well...; let me see...     & \ruby[j]{今日中}{きょ|う|じゅう}に & by the end of today            & この\ruby[j]{間}{あいだ}        & the other day \\
+このぐらい                             & about this much           & ごめん                                 & I'm sorry (casual)         & これから                           & from now on                    & \ruby[j]{失礼}{しつ|れい}します & Excuse me\\
+                                       & （これぐらい/これくらい） &                                        &                            &                                    &                                &                                 & Sorry to interrupt you \\
+\ruby[j]{自分}{じ|ぶん}で              & (do something) by oneself & \ruby[j]{授業中}{じゅ|ぎょう|ちゅう}に & in class; during the class & \ruby[j]{他}{ほか}の               & other                          & おめでとうございます            & Congratulations! \\
+〜かな（あ）                           & I wonder... (casual)      & \ruby[j]{自分}{じ|ぶん}                & oneself                    & \ruby[j]{随分}{ずい|ぶん}          & very                           & そうか                          & I see. (casual) \\
+それに                                 & moreover, ...             & \ruby[j]{例}{たと}えば                 & for example                & 〜に\ruby[j]{比}{くら}べて         & compared with...               & 〜によると                      & according to... \\
+\ruby[j]{前}{まえ}                     & before...                 & やっぱり                               & after all \\
+  \multicolumn{8}{l}{\hlnoteb{Counters}} \\
+  〜\ruby[j]{個}{こ}   & [generic counter              & 〜\ruby[j]{冊}{さつ} & [counter for bound volumes] & 〜\ruby[j]{台}{だい} & [counter for equipment] & 〜\ruby[j]{匹}{ひき} & [counter for smaller animals] \\
+                       & for smaller items] \\
+  〜\ruby[j]{本}{ほん} & [counter for long objects] \\
+\end{longtable}
+
+\end{document}
