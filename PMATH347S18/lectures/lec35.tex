@@ -1,0 +1,73 @@
+\chapter{Lecture 35 Jul 25th 2018}%
+\label{chp:lecture_35_jul_25th_2018}
+% chapter lecture_35_jul_25th_2018
+
+\section{Factorizations in Integral Domains (Continued 5)}%
+\label{sec:factorizations_in_integral_domains_continued_5}
+% section factorizations_in_integral_domains_continued_5
+
+\subsection{Gauss' Lemma (Continued 2)}%
+\label{sub:gauss_lemma_continued_2}
+% subsection gauss_lemma_continued_2
+
+We have shown in \cref{eg:polynomials_with_integer_coefficients_is_not_a_pid} that $\mathbb{Z}[x]$ is not a PID. Our goal now is the show that, in spite of that, $\mathbb{Z}[x]$ is a UFD.
+
+\begin{note}
+  Recall the following results from the recent lectures: Let $R$ be a UFD with $F$ being its field of fractions. We have
+  \begin{itemize}
+    \item $l(x) \in R[x]$ is irreducible $\implies \con(l) \sim 1$ (\cref{lemma:non_trivial_irreducible_polynomials_are_primitive});
+    \item $\con(fg) \sim \con(f) \con(g)$ (\cref{lemma:role_of_the_content});
+    \item $l(x)$ is irreducible in $R[x] \implies l(x)$ is irreducible in $F[x]$\\ (\cref{thm:reducibility_in_the_field_of_fractions}).
+  \end{itemize}
+\end{note}
+
+\begin{note}
+  Recall that the contrapositive of \cref{thm:reducibility_in_the_field_of_fractions} is: if $l(x)$ is reducible in $F[x]$, then $l(x)$ is reducible in $R[x]$.
+
+  In other words, for $f(x) \in R[x]$, if $f(x) = g(x) h(x) \in F[x]$, then $\exists \tilde{g}(x), \, \tilde{h}(x) \in R[x]$ such that
+  \begin{equation*}
+    f(x) = \tilde{g}(x) \tilde{h}(x) \in R[x].
+  \end{equation*}
+\end{note}
+
+\begin{eg}
+  $2x^2 + 7x + 3 \in \mathbb{Z}[x]$, which we observe that
+  \begin{align*}
+    2x^2 + 7x + 3 &= \left(x + \frac{1}{2}\right)(2x + 6) \\
+                  &= (2x + 1)(x + 3).
+  \end{align*}
+\end{eg}
+
+We want to take advantage of the fact that $\mathbb{Q}[x]$ is a UFD to show that $\mathbb{Z}[x]$ is also a UFD.
+
+Recall from \cref{eq:irreducibility_in_field_of_fractions_does_not_imply_irreducibility_in_the_original_ring} that $2x + 4 \in \mathbb{Q}[x]$ is irreducible, but is reducible in $\mathbb{Z}[x]$. Therefore, we have that the converse of \cref{thm:reducibility_in_the_field_of_fractions} is not true.
+
+\begin{propo}
+\label{propo:the_missing_condition_tying_irreducibility}
+Let $R$ be a UFD with field of fractions $F$. TFAE:
+\begin{enumerate}
+  \item $f(x)$ is irreducible in $R[x]$;
+  \item $f(x)$ is primitive and irreducible in $F[x]$.
+\end{enumerate}
+\end{propo}
+
+\begin{proof}
+  $(1) \implies (2)$ follows from \cref{lemma:non_trivial_irreducible_polynomials_are_primitive}, \cref{thm:gauss_lemma} and\\\noindent \cref{thm:reducibility_in_the_field_of_fractions}.
+
+  \noindent $(2) \implies (1)$: Suppose that $f(x)$ is primitive and irreducibile in $F[x]$ but reducible in $R[x]$. Then a non-trivial factorization of $f(x) \in R[x]$ must take the form $f(x) = dg(x)$ with $d \in R$ and $d \not\sim 1$ \sidenote{Note that we cannot have both factors to have degree $\geq 1$, otherwise this would be a non-trivial factorization in $F[x]$, contradicting the irreducibility of $f(x)$ in $F[x]$.}. Since $d \mid f(x)$, $d \not\sim 1$ must then divide each of the coefficients of $f(x)$, which contradicts the assumption that $f(x)$ is primitive.\qed
+\end{proof}
+
+\begin{thm}[Polynomial Ring of a UFD is also a UFD]
+\label{thm:polynomial_ring_of_a_ufd_is_also_a_ufd}
+  If $R$ is a UFD, then the polynomial ring $R[x]$ is also a UFD.
+\end{thm}
+
+\begin{proof}
+  By \cref{thm:integral_domain_that_satisfies_accp_has_a_polynomial_ring_that_satisfies_accp}, since $R$ is a UFD and hence satisfies ACCP \sidenote{See note on page \pageref{note:chain_of_definitions}.}, we have $R[x]$ also satisfies ACCP. Then by \cref{thm:ufd_and_accp}, to complete the proof, it suffices to show that every irreducible element $l(x) \in R[x]$ is prime. To show that an irreducible element $l(x) \in R[x]$ is prime, we need to show that if $l(x) \mid f(x) g(x)$ in $R[x]$, then $l(x) \mid f(x)$ or $l(x) \mid g(x)$.
+\end{proof}
+
+% subsection gauss_lemma_continued_2 (end)
+
+% section factorizations_in_integral_domains_continued_5 (end)
+
+% chapter lecture_35_jul_25th_2018 (end)
