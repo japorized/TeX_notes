@@ -63,13 +63,27 @@
 \input{lectures/lec30.tex}
 \input{lectures/lec31.tex}
 \input{lectures/lec32.tex}
+\input{lectures/lec33.tex}
 
 \nobibliography*
 \bibliography{bibliography}
 
-\pagestyle{empty}
 \printindex
 
+\makeatletter
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO]{\textsl{\@title} \enspace \thepage}
+\fancyhead[LE]{\thepage \enspace \textsl{Index }}
+\makeatother
+
 \input{list_of_symbols.tex}
+
+\makeatletter
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RO]{\textsl{\@title} \enspace \thepage}
+\fancyhead[LE]{\thepage \enspace \textsl{List of Symbols }}
+\makeatother
 
 \end{document}

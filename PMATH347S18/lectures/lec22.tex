@@ -38,7 +38,7 @@ Note, however, that we would have
 \begin{equation*}
   r + A = r_1 + A \qquad s + A = s_1 + A
 \end{equation*}
-with $r \neq r_1$ and $s \neq s_1$. In order for (\ref{eq:ideal_quotient_ring_multiplication}) to make sense, it is necessary that
+with $r \neq r_1$ and $s \neq s_1$. In order for \cref{eq:ideal_quotient_ring_multiplication} to make sense, it is necessary that
 \begin{equation*}
   r + A = r_1 + A \, \land \, s + A = s_1 + A \implies rs + A = r_1 s_1 + A
 \end{equation*}
@@ -73,12 +73,12 @@ so that this ``multiplication'' is \hlimpo{well-defined}.
   \noindent $(2) \implies (1)$: Let $r \in R$ and $a \in A$. We have that
   \begin{align*}
     ra + A &= (r + A)(a + A) \quad \because (2) \\
-           &= (r + A)(\underarrow{0}{\text{zero of } R} + A) \quad \because a, 0 \in A \\
+           &= (r + A)(0 + A) \quad \because a, 0 \in A \\
            &= ( r \cdot 0 ) + A \quad \because (2) \\
            &= 0 + A \quad \because \cref{propo:more_properties_of_rings} \\
            &= A \quad \because \cref{propo:properties_of_the_additive_quotient_group}
   \end{align*}
-  Thus $ra \in A$ and so $Ra \susbeteq A$. Similarly, we can show that $aR \subseteq A$.\qed
+  Thus $ra \in A$ and so $Ra \subseteq A$. Similarly, we can show that $aR \subseteq A$.\qed
 \end{proof}
 
 \begin{defn}[Ideal]\index{Ideal}

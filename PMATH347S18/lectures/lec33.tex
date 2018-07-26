@@ -1,0 +1,168 @@
+\chapter{Lecture 33 Jul 20th 2018}%
+\label{chp:lecture_33_jul_20th_2018}
+% chapter lecture_33_jul_20th_2018
+
+\section{Factorizations in Integral Domains (Continued 3)}%
+\label{sec:factorizations_in_integral_domains_continued_3}
+% section factorizations_in_integral_domains_continued_3
+
+\subsection{Unique Factorization Domains and Principal Ideal Domains (Continued)}%
+\label{sub:unique_factorization_domains_and_principal_ideal_domains_continued}
+% subsection unique_factorization_domains_and_principal_ideal_domains_continued
+
+\begin{note}
+  Recall the definition of a gcd: $d = \gcd(a, b)$ if
+  \begin{enumerate}
+    \item $d \mid a \, \land \, d \mid b$
+    \item $\forall e \in R \; e \mid a \, \land \, e \mid b \implies e \mid d$
+  \end{enumerate}
+\end{note}
+
+\begin{propo}[Bezout's Lemma in PIDs]
+\label{propo:bezout_s_lemma_in_pids}
+  Let $R$ be a PID and let $a_1, ..., a_n$ be non-zero elements of $R$. Then $d \sim \gcd(a_1, ..., a_n)$ exists and $\exists r_1, ..., r_n \in R$ such that
+  \begin{equation*}
+    \gcd(a_1, ..., a_n) = r_1 a_1 + \hdots + r_n a_n.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Consider
+  \begin{equation*}
+    A = \{ r_1 a_1 + \hdots + r_n a_n : r_i \in R \}.
+  \end{equation*}
+  Note that $A$ is an ideal of $R$, since $\forall a \in A \; \forall r \in R$, we have
+  \begin{equation*}
+    aR \ni ar = rr_1 a_1 + \hdots + rr_n a_n \in A.
+  \end{equation*}
+  Since $R$ is a PID, $\exists d \in R$ such that $A = \lra{d}$. Thus
+  \begin{equation*}
+    \exists r_1, ..., r_n \in R \quad d = r_1 a_1 + \hdots r_n a_n.
+  \end{equation*}
+  It remains to prove that $d \sim \gcd(a_1, ..., a_n)$. Since $A = \lra{d}$ and $a_i \in R$, clearly so $d \mid a_i$, for all $1 \leq i \leq n$. Also, $\exists r \in R \; 1 \leq i \leq n \; r \mid a_i \implies r \mid (r_1 a_1 + \hdots + r_n a_n) \implies r \mid d$. Then by the definition of a gcd, we have $d \sim \gcd(a_1, ..., a_n)$.\qed
+\end{proof}
+
+\begin{thm}[PIDs are UFDs]
+\label{thm:pids_are_ufds}
+  Every PID is a UFD.
+\end{thm}
+
+\begin{proof}
+  If $R$ is a PID, by \cref{thm:ufd_and_accp} and \cref{propo:bezout_s_lemma_in_pids}, it suffices to show that $R$ satisfies ACCP. If $\lra{a_1} \subseteq \lra{a_2} \subseteq \hdots$ in $R$, let
+  \begin{equation*}
+    A = \lra{a_1} \cup \lra{a_2} \cup \hdots \;.
+  \end{equation*}
+  Note that $A$ is an ideal, since $\forall a \in A$, $a \in \lra{a_i}$ for some $i$, and so $\forall r \in R$, we have $ar \in \lra{a_i} \subseteq A$. Now since $R$ is a PID, $\exists a \in R$ such that $A = \lra{a}$. Then $a \in \lra{a_n}$ for some $n \in \mathbb{N}$. Then
+  \begin{equation*}
+    \lra{a} \subseteq \lra{a_n} \subseteq \lra{a_{n + 1}} \subseteq \hdots \subseteq A = \lra{a}.
+  \end{equation*}
+  which implies that $\lra{a_n} = \lra{a_{n + 1}} = \hdots$ in $R$, i.e. $R$ satisfies ACCP. Therefore $R$ is a UFD.\qed
+\end{proof}
+
+\begin{note}
+  We have the following chain of definitions:
+  \begin{equation*}
+    \text{field} \subsetneq \text{PID} \subsetneq \text{UFD} \subsetneq \text{ACCP} \subsetneq \text{commutative ring} \subsetneq \text{ring}.
+  \end{equation*}
+\end{note}
+
+\newthought{If $F$ is a field}, then we have shown that both $F$ and $F[x]$ are PIDs. And so we have the following consequence from \cref{thm:pids_are_ufds}:
+
+\begin{crly}[Polynomial Rings over a Field is a UFD]
+\label{crly:polynomial_rings_over_a_field_is_a_ufd}
+If $F$ is a field, then $F$ and $F[x]$ are UFDs.
+\end{crly}
+
+\begin{eg}
+  $\mathbb{Z}[x]$ is not a PID.
+
+  Consider
+  \begin{equation*}
+    A = \{ 2n + xf(x) : n \in \mathbb{Z} , \, f(x) \in \mathbb{Z}[x] \}.
+  \end{equation*}
+  Note that $A$ is indeed an ideal, since $\forall a \in A$ and $g(x) \in \mathbb{Z}[x]$, let $g(x) = b_0 + b_1 x + \hdots b_m x^m$, and we have
+  \begin{align*}
+    ag(x) &= (2n + xf(x)) g(x) \\
+          &= 2nb_0 + 2n\left( b_1x + \hdots b_mx^m \right) + x f(x) g(x) \\
+          &= 2nb_0 + x( 2nb_1 + \hdots + 2nb_mx^{m - 1} ) + x f(x) g(x) \\
+          &= 2nb_0 + x[ h(x) + f(x) g(x) ] \in A
+  \end{align*}
+  where $h(x) = 2nb_1 + 2nb_2 x + \hdots + 2bnb_m x^{m - 1}$. Suppose for contradiction that $A = \lra{g(x)}$  for some $g(x) \in \mathbb{Z}[x]$. Since $2 \in A$, we must have $g(x) \mid 2$. It follows that $g(x) = \pm 1$ or $\pm 2$ \sidenote{We must have $\deg g = 0$, otherwise there is no way that $g(x) \mid 2$. And as $\deg g = 0$, we have that $\abs{g(x)} \leq 2$ in $\mathbb{Z}$, and hence the result.}. Thus $A = \mathbb{Z}[x]$ or $A = \lra{2}$, respectively for $g(x) = \pm 1$ or $\pm 2$. However, $A = \mathbb{Z}[x]$ means that $A$ is not a principal ideal, and if $A = \lra{2}$, then there must be no $x f(x)$ in $A$, i.e. this is an impossible case. Therefore $\mathbb{Z}[x]$ is not a PID.
+\end{eg}
+
+\begin{thm}[Quotient over a PID]
+\label{thm:quotient_over_a_pid}
+  Let $R$ be a PID and $0 \neq p \in R$ a non-unit. TFAE:
+  \begin{enumerate}
+    \item $p$ is prime;
+    \item $R \big/ \lra{p}$ is a field;
+    \item $R \big/ \lra{p}$ is an integral domain.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  $(1) \implies (2)$: Consider a non-zero element $a + \lra{p} \in R \big/ \lra{p}$. Clearly then, $a \notin \lra{p}$ and so $p \nmid a$. Consider
+  \begin{equation*}
+    A = \{ ra + sp : r, s \in R \},
+  \end{equation*}
+  which is (quite clearly so) an ideal in $R$. Since $R$ is a PID, $\exists d \in R$ such that $A = \lra{d}$. Since $p \in A$ \sidenote{Since $R$ is a PID, it is a integral domain and so $0 \in R$. Then $0 \cdot a + 1 \cdot p = p \in A$.}, we have $d \mid p$. Since $p$ is prime, $p$ is irreducible\sidenote{By \cref{propo:primes_are_irreducible}.}, and so $d \sim p$ or $d \sim 1$ by \cref{propo:properties_of_irreducibles}. If $d \sim p$, then $\lra{p} = \lra{d} = A \implies p \mid a$, which contradicts the fact that $p \nmid a$.
+
+  And so we are left with $d \sim 1$. It follows that $A = \lra{1} = R$. In particular, we have $1 \in A$, and say then $ba + cp = 1$ for some $b, c \in R$. It so follows that
+  \begin{equation*}
+    (b + \lra{p})(a + \lra{p}) = ba + \lra{p} = 1 + \lra{p} \in R \big/ \lra{p}.
+  \end{equation*}
+  Therefore $a + \lra{p}$ is a unit and so $R \big/ \lra{p}$ is a field.
+
+  \noindent $(2) \implies (3)$: By \cref{propo:fields_are_integral_domains}, every field is an integral domain.
+
+  \noindent $(3) \implies (1)$: Suppose $p \mid ab \in R$. Then
+  \begin{equation*}
+    (a + \lra{p}) (b + \lra{p}) = ab + \lra{p} = 0 + \lra{p}.
+  \end{equation*}
+  Since $R \big/ \lra{p}$ is an integral domain, WLOG, say we have that $a + \lra{p} = 0 + \lra{p}$. Then $a \in \lra{p} \implies p \mid a$. Otherwise, we would have $p \mid b$. \qed
+\end{proof}
+
+Conseuqently, alongside with \cref{propo:ideal_is_prime_iff_quotient_of_ring_by_ideal_is_an_integral_domain} and \cref{propo:ideal_is_maximal_iff_quotient_of_ring_by_ideal_is_a_field}, we have:
+
+\begin{crly}[Non-Zero Prime Ideals in a PID are Maximal]
+\label{crly:non_zero_prime_ideals_in_a_pid_are_maximal}
+Every non-zero prime ideal of a PID is maximal.\sidenote{In other words, in a PID, maximal ideals are prime ideals and vice versa (see \cref{crly:maximal_ideals_of_a_commutative_rings_are_prime}.)}
+\end{crly}
+
+\begin{note}
+  The results of \cref{thm:quotient_over_a_pid} may fail if we are simply in a UFD.
+\end{note}
+
+\begin{eg}
+  $R = \mathbb{Z}[x]$ is a UFD. Consider the principal ideal $\lra{x} \subseteq R$. Then $R \big/ \lra{x} \cong \mathbb{Z}$, which we know is an integral domain but not a field. $\therefore \lra{x}$ is a prime ideal in $\mathbb{Z}[x]$ but not maximal.
+\end{eg}
+
+% subsection unique_factorization_domains_and_principal_ideal_domains_continued (end)
+
+\subsection{Gauss' Lemma}%
+\label{sub:gauss_lemma}
+% subsection gauss_lemma
+
+\begin{defn}[Content]\index{Content}
+\label{defn:content}
+If $R$ is a UFD and if $0 \neq f(x) \in R[x]$, the greatest common divisor of the non-zero coefficients of $f(x)$ is called the \hlnoteb{content} of $f(x)$, and denoted by $\con(f)$.
+\end{defn}
+
+\begin{defn}[Primitive Polynomials]\index{Primitive Polynomials}
+\label{defn:primitive_polynomials}
+If $R$ is a UFD and if $0 \neq f(x) \in R[x]$, then if $\con(f) \sim 1$, we say that $f(x)$ is a \hlnoteb{primitive polynomial}, or simply say that $f(x)$ is \hldefn{primitive}.
+\end{defn}
+
+\begin{eg}
+  In $\mathbb{Z}[x]$, we have
+  \begin{align*}
+    \text{(primitive)} &: \con( 6 + 10x^2 + 15x^3 ) \sim 1 \\
+    \text{(non-primitive)} &: \con( 6 + 9x^2 + 15x^3 ) \sim 3
+  \end{align*}
+\end{eg}
+
+% subsection gauss_lemma (end)
+
+% section factorizations_in_integral_domains_continued_3 (end)
+
+% chapter lecture_33_jul_20th_2018 (end)
