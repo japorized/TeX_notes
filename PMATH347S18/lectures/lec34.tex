@@ -1,0 +1,153 @@
+\chapter{Lecture 24 Jul 23rd 2018}%
+\label{chp:lecture_24_jul_23rd_2018}
+% chapter lecture_24_jul_23rd_2018
+
+\section{Factorizations in Integral Domains (Continued 4)}%
+\label{sec:factorizations_in_integral_domains_continued_4}
+% section factorizations_in_integral_domains_continued_4
+
+\subsection{Gauss' Lemma (Continued)}%
+\label{sub:gauss_lemma_continued}
+% subsection gauss_lemma_continued
+
+\begin{lemma}[Role of the Content]
+\label{lemma:role_of_the_content}
+  Let $R$ be a UFD and let $0 \neq f(x) \in R[x]$.
+  \begin{enumerate}
+    \item $f(x)$ can be written as
+      \begin{equation*}
+        f(x) = \con(f) f_1(x)
+      \end{equation*}
+      where $f_1(x)$ is primitive.
+    \item If $0 \neq b \in R$, then $\con(bf) = b\con(f)$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Let $c = \con(f) \sim \gcd(a_0, a_1, ..., a_m)$, where we let $f(x) = a_m x^m + \hdots + a_0$. Since $c$ is the gcd, for $0 \leq i \leq m$, write
+      \begin{equation*}
+        a_i = cb_i.
+      \end{equation*}
+      Then $f(x) = c f_1(x)$ where
+      \begin{equation*}
+        f_1(x) = b_m x^m + \hdots + b_0.
+      \end{equation*}
+      Then by \cref{propo:associates_of_the_gcd}, we have
+      \begin{equation*}
+        c \sim \gcd(a_0, a_1, ..., a_m) \sim \gcd(cb_0, ..., cb_m) \sim c \gcd(b_0, ..., b_m).
+      \end{equation*}
+      It follows that $\gcd(b_0, ..., b_m) \sim 1$ and so $f_1(x)$ is primitive.
+    \item This is an immediate result from \cref{propo:associates_of_the_gcd}.
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{lemma}[Non-Trivial Irreducible Polynomials are Primitive]
+\label{lemma:non_trivial_irreducible_polynomials_are_primitive}
+Let $R$ be a UFD and $l(x) \in R[x]$ be irreducible with $\deg l \geq 1$. Then $\con(l) \sim 1$.
+\end{lemma}
+
+\begin{proof}
+  By \cref{lemma:role_of_the_content}, we can write
+  \begin{equation*}
+    l(x) = \con(l) l_1(x)
+  \end{equation*}
+  for some $l_1(x) \in R[x]$. Since $l(x)$ is irreducible, by \cref{propo:properties_of_irreducibles}, we have either $\con(l) \sim 1$ or $\l_1(x) \sim 1$. However, since $\deg l = \deg l_1 \geq 1$, we have that $l_1(x) \not\sim 1$ and so $\con(l) \sim 1$.\qed
+\end{proof}
+
+\begin{eg}
+  The polynomial $2x + 4 \in \mathbb{Q}[x]$ is irreducible\sidenote{Any factorization of $2x + 4$ in $\mathbb{Q}[x]$ will always result in one of the factors being a unit.}. However, the polynomial $2x + 4 \in \mathbb{Z}[x]$ is not irreducible. For instance,
+  \begin{equation*}
+    2x + 4 = 2(x + 2)
+  \end{equation*}
+  but both $2$ and $(x + 2)$ are not units of $\mathbb{Z}[x]$.
+\end{eg}
+
+\begin{thm}[Gauss' Lemma]
+\index{Gauss' Lemma}
+\label{thm:gauss_lemma}
+  Let $R$ be a UFD. For any non-zero $f(x), \, f(x) \in R[x]$, we have
+  \begin{equation*}
+    \con(fg) \sim \con(f) \con(g)
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  By \cref{lemma:role_of_the_content}, let
+  \begin{align*}
+    f(x) &= \con(f) f_1(x) \\
+    g(x) &= \con(g) g_1(x),
+  \end{align*}
+  where $f_1(x)$ and $g_1(x)$ are primitive. Then by part $(2)$ of \cref{lemma:role_of_the_content}, we have
+  \begin{equation*}
+    \con(fg) = \con( \con(f) f_1 \con(g) g_1 ) = \con(f) \con(g) \con( f_1 g_1 ).
+  \end{equation*}
+  From here, if $\conf( f_1 g_1 ) \sim 1$, our proof is complete. Thus, it suffices to show that $f(x) g(x)$ is primitive when $f(x)$ and $g(x)$ are primitive, i.e. $\con(f) \sim 1 \con(g)$.
+  
+  Suppose that we have that $f(x)$ and $g(x)$ are primitive but $f(x) g(x)$ is not primitive. Since $R$ is a UFD, by \cref{thm:ufd_and_accp}, $\exists p \in R$ such that $p$ divides each coefficient of $f(x) g(x)$. Write
+  \begin{align*}
+    f(x) &= a_0 + a_1 x + \hdots a_m x^m \\
+    g(x) &= b_0 + b_1 x + \hdots b_n x^n.
+  \end{align*}
+  Since $f(x)$ and $g(x)$ are primitive, $p$ does not divide each $a_i$ or each $b_j$ \sidenote{Otherwise, $f(x)$ and $g(x)$ would not be primitives since if $p$ does divide all of the coefficients, then $\con(f) \not\sim 1$ or $\con(g) \not\sim 1$, i.e. they are not primitives.}. Then $\exists k, s \in \mathbb{N} \cup \{0\}$ such that
+  \begin{itemize}
+    \item $p \nmid a_k$ but $p \mid a_i$ for $0 \leq i < k$ and
+    \item $p \nmid b_s$ but $p \mid b_j$ for $0 \leq j < s$.
+  \end{itemize}
+  Note that the coefficient of $x^{k + s}$ in $f(x) g(x)$ is
+  \begin{equation*}
+    c_{k + s} = \sum_{i + j = k + s} a_i b_j.
+  \end{equation*}
+  From the two bullet points, we have that $p$ divides all $a_i$ and $b_j$ with $i + j = k + s$ except $a_k b_s$. It follows that $p \nmid c_{k + s}$, which contradicts the fact that $p$ divides all coefficient of $f(x) g(x)$. Therefore, $f(x) g(x)$ is primitive.\qed
+\end{proof}
+
+\begin{thm}[Reducibility in the Field of Fractions]
+\label{thm:reducibility_in_the_field_of_fractions}
+\marginnote{The contrapositive of this theorem is rather interesting: If $f(x) \in F[x]$ is reducible, then $f(x)$ is also reducible in $R[x]$!}Let $R$ be a UFD whose field of fractions is $F$ \sidenote{Note that we regard $R \subseteq F$ as a subring of $F$, as per usual.}. If $l(x) \in R[x]$ is irreducible in $R[x]$< then $l(x)$ is irreducible in $F[x]$.
+\end{thm}
+
+\begin{proof}
+  Let $l(x) \in R[x]$ be irreducible. Suppose $l(x) = g(x) h(x) \in F[x]$ for some $g(x), \, h(x) \in F[x]$. If $a$ and $b$ \sidenote{They are both in $F$.} are the products of the denominators of the coefficients of $g(x)$ and $h(x)$, respectively, then
+  \begin{equation*}
+    \left.\begin{aligned}
+      g_1(x) &= ag(x) \\
+      h_1(x) &= bh(x)
+  \end{aligned}\right\} \in R[x].
+  \end{equation*}
+  Then $abl(x) = g_1(x) h_1(x)$ is a factorization in $R[x]$. Since $l(x)$ is irreducible in $R[x]$, we have that $\con(l) \sim 1$ by \cref{lemma:non_trivial_irreducible_polynomials_are_primitive}. Then by \cref{thm:gauss_lemma}, we have
+  \begin{equation}\label{eq:thm107_eq1}
+    ab \sim ab\con(l) \sim \con(abl) \sim \con(g_1 h_1) \sim \con(g_1) \con(h_1).
+  \end{equation}
+  By \cref{lemma:role_of_the_content}, write
+  \begin{align*}
+    g_1(x) &= \con(g_1) g_2(x) \\
+    h_1(x) &= \con(h_1) h_2(x)
+  \end{align*}
+  where $g_2(x), \, h_2(x) \in R[x]$ are primitive. Then we have
+  \begin{equation*}
+    abl(x) = g_1(x) h_1(x) = \con(g_1) \con(h_1) g_2(x) h_2(x).
+  \end{equation*}
+  Then by \cref{eq:thm107_eq1}, we have
+  \begin{equation*}
+    l(x) \sim g_2(x) h_2(x).
+  \end{equation*}
+  Since $l(x)$ is irreducible in $R[x]$, it follows, WLOG, that $g_2(x) \sim 1$, which then
+  \begin{equation*}
+    ag(x) = g_1(x) = \con(g_1) g_2(x) = \con(g_1) v
+  \end{equation*}
+  for some unit $v \in R$. And so
+  \begin{equation*}
+    g(x) = a^{-1} \con(g_1) v
+  \end{equation*}
+  is also a unit. Therefore, we have that
+  \begin{equation*}
+    l(x) = g(x) h(x) \in F[x]
+  \end{equation*}
+  implies that either $g(x)$ or $h(x)$ is a unit, i.e. $l(x)$ is irreducible in $F[x]$.\qed
+\end{proof}
+
+% subsection gauss_lemma_continued (end)
+
+% section factorizations_in_integral_domains_continued_4 (end)
+
+% chapter lecture_24_jul_23rd_2018 (end)
