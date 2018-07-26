@@ -1,7 +1,5 @@
 # Japorized's Personal Study Notes
 
-**Note: The style that I'm using, tufte-latex, is somewhat broken since I upgraded to texlive2018. While most of the most important stuff are intact and safe, certain headers will look broken.**
-
 You can also see most of the files on [https://japorized.github.io/TeX_notes]( https://japorized.github.io/TeX_notes )
 
 Page uses [tufte-css](https://github.com/edwardtufte/tufte-css) for styling
@@ -11,7 +9,7 @@ Most of the content are compiled from my (scavenged) lecture notes and recommend
 
 If you wish to get a copy of these documents, please take them with utmost discreet.
 
-My main editor is Sublime Text, but I have a setup for nvim as well.
+My main editor is nvim, but I have a setup for Sublime Text as well.
 
 ---
 ### Setups
@@ -67,7 +65,7 @@ Find out where the `texmf` directory should go on your system (different across 
 ---
 ### Snippets
 
-My TeX snippet for VIm is in the `tex.snippet` and `texmath.snippet` file, and I use [UltiSnip](https://github.com/SirVer/ultisnips) for completion. My autocompletion plugin in [deoplete](https://github.com/Shougo/deoplete.nvim).
+My TeX snippet for nvim is in the `tex.snippet` and `texmath.snippet` file, and I use [UltiSnip](https://github.com/SirVer/ultisnips) for completion. My autocompletion plugin in [deoplete](https://github.com/Shougo/deoplete.nvim).
 
 My Sublime Text snippet is provided in the file `tex.sublime-completions`. Put it in your `$SUBLIME_PATH/Packages/User/` folder to get it working.
 
