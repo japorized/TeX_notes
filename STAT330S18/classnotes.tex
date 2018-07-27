@@ -35,6 +35,7 @@
 \DeclareMathOperator{\BetaDist}{Beta }
 \DeclareMathOperator{\Mult}{Mult }
 \DeclareMathOperator{\BVN}{BVN }
+\DeclareMathOperator{\Wei}{Wei }
 \DeclareMathOperator{\Dom}{Dom }
 \DeclareMathOperator{\Var}{Var }
 \DeclareMathOperator{\Cov}{Cov }
@@ -4996,9 +4997,13 @@ where $\bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i$.
   \end{equation*}
   where $\zeta \in \left[0, \frac{t}{\sqrt{n}}\right]$. Note that the last term in the above equation goes to $0$ faster than the second term as $n \to \infty$, since we would have $n^{\frac{3}{2}}$ in the denominator, which is larger than $n$ in the second term. With that, continuing with \cref{eq:clt_eq1} and now taking the limit as $n \to \infty$, we have
   \begin{equation*}
-    \lim_{n \to \infty} M_Z (t) = \lim_{n \to \infty} \left[ 1 + \frac{t^2}{2n} + o(\frac{t}{n}) \right]^n
+    \lim_{n \to \infty} M_Z (t) = \lim_{n \to \infty} \left[ 1 + \frac{t^2}{2n} + \phi(n) \right]^n
   \end{equation*}
-  where $o\left(\frac{t}{n}\right)$ represents the last term\sidenote{This is a commonly used notation called the \href{https://en.wikipedia.org/wiki/Little-o_notation\#Little-o_notation}{Little-o Notation}.}. Then by \cref{thm:generalized_limit_definition_of_e_}, we have
+  where 
+  \begin{equation*}
+    \phi(n) = \frac{M_{Y_i}^{(3)} ( \zeta ) \left( \frac{t}{\sqrt{n}} \right)^3}{3!}.
+  \end{equation*}
+  Then by \cref{thm:generalized_limit_definition_of_e_}, we have
   \begin{equation*}
     \lim_{n \to \infty} M_Z(t) = e^{\frac{t^2}{2}}
   \end{equation*}
@@ -5095,7 +5100,7 @@ where $\bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i$.
   \begin{enumerate}
     \item Since $g$ is continuous at $a$, we have that
       \begin{equation*}
-        \forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in \supp(X) \; ( \abs{x -a} < d \implies \abs{g(x) - g(a)} < \epsilon )
+        \forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in \supp(X) \; ( \abs{x -a} < \delta \implies \abs{g(x) - g(a)} < \epsilon )
       \end{equation*}
       It follows that
       \begin{equation*}
@@ -5907,7 +5912,7 @@ The constant matrix $I(\hat{\theta})$ is called the \hldefn{observed information
   \end{itemize}
 \end{note}
 
-\begin{eg}[Example 6.12]
+\begin{eg}[Example 6.12 Part 1]\label{eg:6_12_pt1}
   Suppose $X_1, ..., X_n \sim \Nor\left( \mu, \sigma^2 \right)$ is a sequence of IID rvs.
   \begin{enumerate}
     \item Derive the MLE of the parameters $\mu$ and $\sigma^2$.
@@ -5990,6 +5995,272 @@ The constant matrix $I(\hat{\theta})$ is called the \hldefn{observed information
 % section estimation_continued_2 (end)
 
 % chapter lecture_19_july_5_2018 (end)
+
+\chapter{Lecture 20 Jul 10 2018}%
+\label{chp:lecture_20_jul_10_2018}
+% chapter lecture_20_jul_10_2018
+
+\section{Estimation (Continued 3)}%
+\label{sec:estimation_continued_3}
+% section estimation_continued_3
+
+\subsection{Maximum Likelihood Estimation (Continued 3)}%
+\label{sub:maximum_likelihood_estimation_continued_3}
+% subsection maximum_likelihood_estimation_continued_3
+
+\begin{eg}[Example 6.12 Part 2]\label{eg:6_12_pt2} 
+  Continuing with \cref{eg:6_12_pt1}, answer the following questions:
+  \begin{itemize}
+    \item Derive the Fisher information for the parameter vector $(\mu, \sigma^2)$.
+  \end{itemize}
+\end{eg}
+
+\begin{solution}
+  Recall that the information matrix was
+  \begin{equation*}
+    I\left(\mu, \sigma^2\right) = \begin{bmatrix}
+      \frac{n}{\sigma^2} & \frac{n\mu}{\sigma^4} - \frac{1}{\sigma^4} \sum_{i=1}^{n} x_i \\
+      \frac{n\mu}{\sigma^4} - \frac{1}{\sigma^4} \sum_{i=1}^{n} x_i & \frac{1}{\sigma^8} \sum_{i=1}^{n} (x_i - \mu)^2 - \frac{n}{2\sigma^4}
+    \end{bmatrix}.
+  \end{equation*}
+  Thus the Fisher information matrix is
+  \begin{align*}
+    J\left(\mu, \sigma^2\right) &= \begin{bmatrix}
+      E\left( \frac{n}{\sigma^2} \right) & E\left[ \frac{n\mu}{\sigma^4} - \frac{1}{\sigma^4} \sum_{i=1}^{n} x_i \right] \\
+      E\left[ \frac{n\mu}{\sigma^4} - \frac{1}{\sigma^4} \sum_{i=1}^{n} x_i \right] & E\left[ \frac{1}{\sigma^8} \sum_{i=1}^{n} (x_i - \mu)^2 - \frac{n}{2 \sigma^4} \right]
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+    \frac{n}{\sigma^2} & \frac{n \mu}{\sigma^4} - \frac{1}{\sigma^4} \sum_{i=1}^{n} E[X_i] = 0 \\
+    0 & \frac{n}{\sigma^6} - \frac{n}{2\sigma^4}
+    \end{bmatrix}.
+  \end{align*}
+\end{solution}
+
+\begin{note}
+  Notice that we have, yet again, a similar scenario as when we first introduced the Fisher information in the univariate case: notice that
+  \begin{equation*}
+    \tilde{\mu} = \bar{X} \implies \Var(\tilde{\mu}) = \Var(\bar{X}) = \frac{\sigma^2}{n} = \frac{1}{J\left(\mu, \sigma^2\right)_{11}}
+  \end{equation*}
+  and
+  \begin{align*}
+    \tilde{\sigma}^2 = \frac{1}{n} \sum_{i=1}^{n} (X_i - \bar{X})^2 \implies& \Var\left(\tilde{ \sigma }^2\right) = \frac{1}{n^2} \Var\left((n - 1)S^2\right) \\
+                                                                            &= \frac{\sigma^4}{n^2} \Var\left(\frac{n - 1}{\sigma^2} S^2\right) = \frac{\sigma^4 2(n - 1)}{n^2}
+  \end{align*}
+  by \hyperref[thm:properties_of_the_gaussian_distribution]{Cochran's Theorem}. Note that $\Var\left(\hat{\sigma}^2\right) \approx J(\mu, \sigma^2)_{22}$.
+\end{note}
+
+\begin{eg}[Example 6.13 (Course Notes 6.3.8)]
+  Suppose $Y_i \sim \Nor\left( \alpha + \beta x_i, \sigma^2 \right)$, $i= 1, ..., n$, is a sequence of IID rvs. Show that the ML estimators of $\alpha, \beta$ and $\sigma^2$ are given by\marginnote{Note that $\tilde{\alpha}$ and $\tilde{\beta}$ are also the \hlnoteb{least squares estimators} of $\alpha$ and $\beta$.}
+  \begin{align*}
+    \tilde{\alpha} &= \bar{Y} - \tilde{\beta} \bar{x} \\
+    \tilde{\beta} &= \frac{\sum\limits_{i=1}^{n} (x_i - \bar{x})(Y_i - \bar{Y})}{\sum\limits_{i=1}^{n} (x_i - \bar{x})^2} \\
+    \tilde{\sigma}^2 &= \frac{1}{n} \sum_{i=1}^{n} \left(Y_i - \tilde{\alpha} - \tilde{\beta}x_i\right)^2
+  \end{align*}
+\end{eg}
+
+\begin{solution}
+  Since the $Y_i$'s constitute a random sample, the likelihood function is
+  \begin{align*}
+    L(\alpha, \beta, \sigma) &= \prod_{i=1}^{n} \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left\{ - \frac{(y_i - \alpha - \beta x_i)^2}{2 \sigma^2} \right\} \\
+                             &= (2\pi)^{- \frac{n}{2}} \left( \sigma^2 \right)^{-\frac{n}{2}} \exp \left\{ - \frac{1}{2 \sigma^2} \sum_{i=1}^{n} \left(y_i - \alpha - \beta x_i\right)^2 \right\}
+  \end{align*}
+  and consequently the log-likelihood is
+  \begin{equation*}
+    \ell(\alpha, \beta, \sigma) = - \frac{n}{2} \ln ( 2 \pi ) - \frac{n}{2} \ln \sigma^2 - \frac{1}{2 \sigma^2} \sum_{i=1}^{n} \left( y_i - \alpha - \beta x_i \right)^2.
+  \end{equation*}
+  The first partial derivatives are
+  \begin{align*}
+    \frac{\partial \ell}{\partial \alpha} &= \frac{1}{\sigma^2} \sum_{i=1}^{n} (y_i - \alpha - \beta x_i) = \frac{n}{\sigma^2} \left[ \bar{y} - \alpha - \beta \bar{x} \right] \\
+    \frac{\partial \ell}{\partial \beta} &= \frac{1}{\sigma^2} \sum_{i=1}^{n} \left[ x_i (y_i - \alpha - \beta x_i) \right] = \frac{1}{\sigma^2} \left[ \sum_{i=1}^{n} x_i y_i  - \alpha \sum_{i=1}^{n} x_i - \beta \sum_{i=1}^{n} x_i^2 \right] \\
+    \frac{\partial \ell}{\partial \sigma} &= - \frac{n}{\sigma} + \frac{1}{\sigma^3} \sum_{i=1}^{n} \left(y_i - \alpha - \beta x_i\right)^2.
+  \end{align*}
+  The score vector is therefore
+  \begin{equation*}
+    S(\alpha, \beta, \sigma) = \begin{bmatrix}
+      \frac{n}{\sigma^2} \left[ \bar{y} - \alpha - \beta \bar{x} \right] \\
+      \frac{1}{\sigma^2} \left[ \sum_{i=1}^{n} x_i y_i  - \alpha \sum_{i=1}^{n} x_i - \beta \sum_{i=1}^{n} x_i^2 \right] \\
+      \frac{1}{\sigma^3} \sum_{i=1}^{n} (y_i - \alpha - \beta x_i)^2 - \frac{n}{\sigma}
+    \end{bmatrix}.
+  \end{equation*}
+  To get the candidates for respective MLE,
+  \begin{align*}
+    \hat{\alpha} &= \bar{y} - \hat{\beta} \bar{x} \\
+    \hat{\beta} &= \frac{\sum_{i=1}^{n} x_i y_i - \hat{\alpha} \sum_{i=1}^{n} x_i}{\sum_{i=1}^{n} x_i^2} = \frac{\sum_{i=1}^{n} x_i y_i - ( \bar{y} - \hat{\beta} \bar{x} ) \sum_{i=1}^{n} x_i}{\sum_{i=1}^{n} x_i^2} \\
+                &= \frac{\sum_{i=1}^{n} x_i y_i - n \bar{x}\bar{y} + n \hat{\beta} \bar{x}^2}{\sum_{i=1}^{n} x_i^2} = \frac{\sum_{i=1}^{n} x_i y_i - n \bar{x}\bar{y}}{\sum_{i=1}^{n} x_i^2 - n \bar{x}^2} \\
+    \hat{\sigma}^2 &= \frac{1}{n} \sum_{i=1}^{n} \left( y_i - \alpha - \beta x_i \right)^2
+  \end{align*}
+  For $\hat{\beta}$, note that
+  \begin{align*}
+    \sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y}) &= \sum_{i=1}^{n} \left[ x_i y_i - \bar{x} y_i - \bar{y} x_i + \bar{x}\bar{y} \right] \\
+                                                  &= \sum x_i y_i - \bar{x} \sum y_i - \bar{y} \sum x_i + n \bar{x} \bar{y} \\
+                                                  &= \sum x_i y_i - \bar{x} (n \bar{y}) - \bar{y} ( n \bar{x} ) + n \bar{x} \bar{y} \\
+                                                  &= \sum x_i y_i - n \bar{x} \bar{y}
+  \end{align*}
+  and similarly so we have
+  \begin{equation*}
+    \sum_{i=1}^{n} (x_i - \bar{x})^2 = \sum_{i=1}^{n} x_i^2 - n \bar{x}^2.
+  \end{equation*}
+  Therefore
+  \begin{equation*}
+    \hat{\beta} = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2}
+  \end{equation*}
+  Thus the potential ML esimators are
+  \begin{gather*}
+    \tilde{\alpha} = \bar{Y} - \tilde{\beta}\bar{x} \\
+    \tilde{\beta} = \frac{\sum_{i=1}^{n} (x_i - x)(Y_i - \bar{Y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2} \\
+    \tilde{\sigma}^2 = \frac{1}{n} \sum_{i=1}^{n} \left( Y_i - \tilde{\alpha} - \tilde{\beta}x_i \right)^2.
+  \end{gather*}
+  To verify that these are indeed maximizing estimates, we need the following second order partial derivatives:
+  \begin{align*}
+    \frac{\partial^2 \ell}{\partial \alpha^2} &= - \frac{n}{\sigma^2} \\
+    \frac{\partial^2 \ell}{\partial \beta \partial \alpha} &= - \frac{n \bar{x}}{\sigma^2} \\
+    \frac{\partial^2 \ell}{\partial \sigma \partial \alpha} &= - \frac{2n}{\sigma^3} \left[ \bar{y} - \alpha - \beta \bar{x} \right] \\
+    \frac{\partial^2 \ell}{\partial \alpha \partial \beta} &= - \frac{n \bar{x}}{\sigma^2} \\
+    \frac{\partial^2 \ell}{\partial \beta^2} &= - \frac{1}{\sigma^2} \sum_{i=1}^{n} x_i^2 \\
+    \frac{\partial^2 \ell}{\partial \sigma \partial \beta} &= - \frac{2}{\sigma^3} \left( \sum x_i y_i - \alpha \sum x_i - \beta \sum x_i^2 \right) \\
+    \frac{\partial^2 \ell}{\partial \alpha \partial \sigma} &= - \frac{2n}{\sigma^3} \left[ \bar{y} - \alpha - \beta \bar{x} \right] \\
+    \frac{\partial^2 \ell}{\partial \beta \partial \sigma} &= - \frac{2}{\sigma^3} \left( \sum x_i y_i - \alpha \sum x_i - \beta \sum x_i^2 \right) \\
+    \frac{\partial^2 \ell}{\partial \sigma^2} &= \frac{n}{\sigma^2} - \frac{3}{\sigma^4} \sum_{i=1}^{n} \left( y_i - \alpha - \beta x_i \right)^2.
+  \end{align*}
+  It remains to show that the observed information matrix is positive definite, which will not be shown since the working is too tedious.
+\end{solution}
+
+% subsection maximum_likelihood_estimation_continued_3 (end)
+
+\subsection{Asymptotic Properties of ML Estimators}%
+\label{sub:asymptotic_properties_of_ml_estimators}
+% subsection asymptotic_properties_of_ml_estimators
+
+\begin{thm}[Asymptotic Distribution of the ML Estimator]
+\label{thm:asymptotic_distribution_of_the_ml_estimator}
+Suppose $X = (X_1 \; \hdots \; X_n)$ be a random sample from $f(x; \theta)$. Let $\tilde{\theta}_n = \tilde{\theta}_n(X_1, ..., X_n)$ be the ML estimator of $\theta$ based on $X$. Then under \hlwarn{certain regularity conditions}\sidenote{To be investigated... The following document may hold the answer: \url{http://www2.econ.iastate.edu/classes/econ671/hallam/documents/Asymptotic_Dist.pdf}. A proof of this theorem is also given in the document.}:
+\begin{enumerate}
+  \item \hldefn{Consistency}:
+    \begin{equation}\label{eq:consistency}
+      \tilde{\theta}_n \convp \theta.
+    \end{equation}
+  \item \hldefn{Asymptotic Normality}:
+    \begin{equation}\label{eq:asymptotic_normality}
+      \sqrt{J(\theta)} ( \tilde{\theta}_n - \theta ) \convd Z \sim \Nor(0, 1).
+    \end{equation}
+  \item \hldefn{Asymptotic Distribution of Relative Likelihood}:
+    \begin{equation*}
+      - 2 \ln R(\theta; X) = 2 [ \ell(\tilde{\theta}_n ; X) - \ell(\theta; X) ] \convd W \sim \chi^2(1)
+    \end{equation*}
+    where $\theta$ is the unknown true parameter. If \hlnoteb{consistency} holds, then we call $\hat{\theta}_n$ a \hldefn{consistent estimator} of $\theta$.
+\end{enumerate}
+\end{thm}
+
+\begin{note}
+  The above theorem implies that for sufficiently large $n$, $\hat{\theta}_n$ has, approximately, an $\Nor\left(\theta, [J(\theta)]^{-1}\right)$ distribution (using methods from \cref{propo:other_limit_theorems}). $[J(\theta)]^{-1}$ is called the \hldefn{asymptotic variance} of $\hat{\theta}_n$. Consequently, for sufficiently large $n$, we have that
+  \begin{equation*}
+    \Var\left(\hat{\theta}_n\right) \approx [ J(\theta) ]^{-1},
+  \end{equation*}
+  where we shall note that \hlimpo{$J(\theta)$ is unknown since $\theta$ is unknown}.
+\end{note}
+
+In the next section, we shall study how these results can be used to construct approximate \hlnoteb{confidence intervals} for $\theta$.
+
+\begin{eg}[Example 6.14 (Course Notes 6.4.2)]
+  Suppose $X_1, ..., X_n$ is a random sample from the $\Wei(\theta, 2)$ distribution. Verify that the \textit{consistency} and \textit{Normal distribution assumption} hold for this distribution. Also, show that
+  \begin{equation*}
+    [ I(\tilde{\theta}_n; X) ]^{\frac{1}{2}} ( \tilde{\theta}_n - \theta ) \convd Z \sim \Nor(0, 1).
+  \end{equation*}
+  Note that if $X \sim \Wei(\theta, 2)$, then $E(X^k) = \theta^k \Gamma\left( \frac{k}{2} + 1 \right)$ and its pf is
+  \begin{equation*}
+    f_{X_i}(x_i) = \frac{2}{\theta^2} x_i e^{- \left( \frac{x_i}{\theta} \right)^2}
+  \end{equation*}
+\end{eg}
+
+\begin{solution}
+  Since the $X_i$'s form a random sample, we have that the likelihood function is
+  \begin{equation*}
+    L(\theta) = \prod_{i=1}^{n} \frac{2}{\theta^2} x_i e^{- \left( \frac{x_i}{\theta} \right)^2} = \left( \frac{2}{\theta^2} \right)^n e^{- \frac{1}{\theta^2} \sum\limits_{i=1}^{n} x_i^2} \prod_{i=1}^{n} x_i.
+  \end{equation*}
+  Then the log-likelihood is
+  \begin{equation*}
+    \ell(\theta) = n \ln 2 - 2n \ln \theta - \frac{1}{\theta^2} \sum_{i=1}^{n} x_i^2 + \sum_{i=1}^{n} \ln x_i.
+  \end{equation*}
+  To get a candidate for the MLE, we have
+  \begin{equation*}
+    \frac{d \ell}{d \theta} = - \frac{2n}{\theta} + \frac{2}{\theta^3} \sum_{i=1}^{n} x_i^2,
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \hat{\theta}^2 = \frac{1}{n} \sum_{i=1}^{n} x_i \text{ and } \tilde{\theta}^2 = \frac{1}{n} \sum_{i=1}^{n} X_i^2.
+  \end{equation*}
+  To verify that this candidate is indeed a maximum, note that we have
+  \begin{equation}\label{eq:eg_6_14_eq1}
+    \frac{d^2 \ell}{d \theta^2} = \frac{2n}{\theta^2} - \frac{6}{\theta^4} \sum_{i=1}^{n} x_i^2.
+  \end{equation}
+  Evaluating the above at $\hat{\theta}^2 = \frac{1}{n} \sum_{i=1}^{n} x_i^2$, we have
+  \begin{equation*}
+    \frac{2n}{\frac{1}{n} \sum\limits_{i=1}^{n} x_i^2} - \frac{6}{\left(\frac{1}{n}\right)^2 \left( \sum\limits_{i=1}^{n} x_i^2 \right)^2} \sum_{i=1}^{n} x_i^2 = - \frac{4n^2}{\sum\limits_{i=1}^{n} x_i^2} < 0.
+  \end{equation*}
+  Thus $\hat{\theta}$ is indeed the maximum likelihood estimate. Now to show consistency, note that we have
+  \begin{equation*}
+    E(X_i^2) = \theta^2 \Gamma(1 + 1) = \theta^2,
+  \end{equation*}
+  and so
+  \begin{equation*}
+    E\left( \tilde{\theta}^2 \right) = E\left( \frac{1}{n} \sum_{i=1}^{n} X_i^2 \right) = \frac{1}{n} \sum_{i=1}^{n} E\left(X_i^2\right) = \theta^2.
+  \end{equation*}
+  From here, to simplify notations, we shall write\sidenote{Note that $\bar{X^2} \neq \bar{X}^2$.}
+  \begin{equation*}
+    \bar{X^2} = \frac{1}{n} \sum_{i=1}^{n} X_i^2 \text{ and } \sum x_i^2 = \sum_{i=1}^{n} x_i^2.
+  \end{equation*}
+  By the \hyperref[eg:weak_law_of_large_numbers]{Weak Law of Large Numbers}, we have that $\bar{X^2} \convp \theta^2$. Since $\bar{X^2} \geq 0$, the function $g(x) = \sqrt{x}$ is continuous on its support, and so using \cref{propo:other_limit_theorems}, we have
+  \begin{equation*}
+    \tilde{\theta} = \sqrt{ \bar{X^2} } \convp \theta.
+  \end{equation*}
+  To show normality, note that the Fisher information is
+  \begin{equation}\label{eq:eg_6_14_eq2}
+    J(\theta) = E\left[ - \frac{d^2}{d \theta^2} \ell(\theta) \right] = \frac{6}{\theta^4} \sum_{i=1}^{n} E(X_i^2) - \frac{2n}{\theta^2} = \frac{4n}{\theta^2}
+  \end{equation}
+  where we shall note the use of \cref{eq:eg_6_14_eq1}. We want to invoke \\
+  \noindent\hyperref[thm:central_limit_theorem]{CLT}, and so we also need $\Var(\bar{X^2})$.
+  \begin{equation*}
+    \Var(\bar{X^2}) = \frac{1}{n^2} \sum_{i=1}^{n} \Var(X_i^2) = \frac{1}{n^2} \sum_{i=1}^{n} \left[ E\left(X_i^4\right) - \left[ E\left(X_i^2\right) \right]^2 \right] = \frac{\theta^4}{n}.
+  \end{equation*}
+  Then by the CLT, we have
+  \begin{equation*}
+    \frac{\sqrt{n} ( \bar{X^2} - \theta^2 )}{\theta^2} \convd Z \sim \Nor(0, 1).
+  \end{equation*}
+  By \cref{propo:other_limit_theorems},
+  \begin{equation*}
+    \sqrt{n} ( \bar{X^2} - \theta^2 ) \convd \theta^2 Z \sim \Nor\left(0, \theta^4\right).
+  \end{equation*}
+  Using the same $g(x) = \sqrt{x}$ as above, by \cref{crly:_delta_method}, we have
+  \begin{equation*}
+    \sqrt{n}( \tilde{\theta} - \theta ) \convd \frac{\theta}{2} Z \sim \Nor\left(0, \frac{\theta^2}{4}\right)
+  \end{equation*}
+  Since \cref{eq:eg_6_14_eq2}, using \cref{propo:other_limit_theorems} again, we have
+  \begin{equation*}
+    \left[ J(\theta) \right]^{\frac{1}{2}} ( \tilde{\theta} - \theta ) = \frac{2\sqrt{n}}{\theta} ( \tilde{\theta} - \theta ) \convd \frac{2}{\theta} \cdot \frac{\theta}{2} Z = Z \sim \Nor(0, 1)
+  \end{equation*}
+  Now from \cref{eq:eg_6_14_eq1}, we have that the information function is
+  \begin{equation*}
+    I(\theta; X) = \frac{6}{\theta^4} \sum_{i=1}^{n} X_i^2 - \frac{2n}{\theta^2}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    I(\tilde{\theta}; X) = \frac{6n^2}{\left( \sum\limits_{i=1}^{n} X_i^2 \right)^2} \sum_{i=1}^{n} X_i^2 - \frac{2n^2}{ \sum\limits_{i=1}^{n} X_i^2 } = \frac{4n^2}{\sum_{i=1}^{n} X_i^2} = \frac{4n}{\tilde{\theta}^2}.
+  \end{equation*}
+  Since $\tilde{\theta} \convp \theta$, again by Limit Theorems, we have $\frac{\theta^2}{\tilde{\theta}^2} \convp 1$, and so
+  \begin{equation*}
+    \frac{\sqrt{I(\tilde{\theta}; X)}}{\sqrt{J(\theta)}} = \frac{\theta^2}{\tilde{\theta}^2} \convp 1.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    [I(\tilde{\theta}; X)]^{\frac{1}{2}} ( \tilde{\theta} - \theta ) = \frac{\sqrt{I(\tilde{\theta}; X)}}{\sqrt{J(\theta)}} [ J(\theta) ]^{\frac{1}{2}} (\tilde{\theta} - \theta) \convd 1 \cdot Z = Z \sim \Nor(0, 1).
+  \end{equation*}
+\end{solution}
+
+% subsection asymptotic_properties_of_ml_estimators (end)
+
+% section estimation_continued_3 (end)
+
+% chapter lecture_20_jul_10_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
