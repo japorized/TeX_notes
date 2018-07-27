@@ -81,6 +81,8 @@
     src: ./PMATH351S18/lectures/lec33.tex
   - title: lec34.tex
     src: ./PMATH351S18/lectures/lec34.tex
+  - title: lec35.tex
+    src: ./PMATH351S18/lectures/lec35.tex
 
 - title: STAT330 S18
   pdf:
