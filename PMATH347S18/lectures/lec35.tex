@@ -64,6 +64,90 @@ Let $R$ be a UFD with field of fractions $F$. TFAE:
 
 \begin{proof}
   By \cref{thm:integral_domain_that_satisfies_accp_has_a_polynomial_ring_that_satisfies_accp}, since $R$ is a UFD and hence satisfies ACCP \sidenote{See note on page \pageref{note:chain_of_definitions}.}, we have $R[x]$ also satisfies ACCP. Then by \cref{thm:ufd_and_accp}, to complete the proof, it suffices to show that every irreducible element $l(x) \in R[x]$ is prime. To show that an irreducible element $l(x) \in R[x]$ is prime, we need to show that if $l(x) \mid f(x) g(x)$ in $R[x]$, then $l(x) \mid f(x)$ or $l(x) \mid g(x)$.
+
+  \textbf{Claim}: It suffices to show that
+  \begin{equation*}
+    l(x) \mid f_1(x) g_1(x) \implies l(x) \mid f_1(x) \, \lor \, l(x) \mid g_1(x)
+  \end{equation*}
+  where $f_1(x)$ and $g_1(x)$ are primitive, then given any non-primitive $f(x)$ and $g(x)$ such that $l(x) \mid f(x) g(x)$, we can reduce it to the primitive case, which then $l(x) \mid f(x)$ or $l(x) \mid g(x)$.
+
+  Suppose $l(x) \mid f(x) g(x)$, which then $\exists h(x) \in R[x]$ such that $l(x) h(x) = f(x) g(x)$. Note that at this point, it is not necessary that $f(x)$ and $g(x)$ are primitive. Then by \cref{lemma:role_of_the_content}, we may write
+  \begin{align*}
+    f(x) &= \con(f) f_1(x) \\
+    g(x) &= \con(g) g_1(x) \\
+    h(x) &= \con(h) h_1(x)
+  \end{align*}
+  for some primitive polynomials $f_1(x), \, g_1(x)$ and $h_1(x)$ in $R[x]$. Since $l(x)$ is irreducible, by \cref{lemma:non_trivial_irreducible_polynomials_are_primitive}, we have $\con(l) \sim 1$. It thus follows that $\con(h) \sim \con(f) \con(g)$. Since
+  \begin{equation*}
+    \con(h) h_1(x) = \con(f) \con(g) f_1(x) g_1(x),
+  \end{equation*}
+  we have that
+  \begin{equation*}
+    h_1(x) l(x) \sim f_1(x) g_1(x).
+  \end{equation*}
+  Then we have that $l(x) \mid f_1(x) g_1(x)$, and so by the assumption, we have that $l(x) \mid f_1(x)$ or $l(x) \mid g_1(x)$, and so we have $l(x) \mid f(x)$ or $l(x) \mid g(x)$.
+
+  We may now assume that $l(x) \mid f(x) g(x)$ where $f(x), \, g(x)$ are primitive in $R[x]$. Let $F$ denote the field of fractions of $R$, and consider $R \subseteq F$ is a subring of $F$. Then by extension, we have that $l(x) \mid f(x) g(x)$ in $F[x]$. Since $l(x)$ is irreducible in $R[x]$, we also have that $l(x)$ is irreducible in $F[x]$, by \cref{thm:reducibility_in_the_field_of_fractions}. Then by \cref{propo:euclid_s_lemma_for_polynomials}, since $F[x]$ is a field, we have $l(x) \mid f(x)$ or $l(x) \mid g(x)$.
+
+  Suppose that $l(x) \mid f(x)$ in $F[x]$, say $\exists k(x) \in F[x]$ such that
+  \begin{equation*}
+    f(x) = l(x) k(x).
+  \end{equation*}
+  If $d \in R$ is the product of all denominators of the non-zero coefficients of $k(x)$, then $k_0(x) = dk(x) \in R[x]$, and so we have
+  \begin{equation*}
+    df(x) = dl(x) k(x) = l(x) k_0(x).
+  \end{equation*}
+  Since $f(x)$ is primitive and $l(x)$ is irreducible, by \cref{lemma:non_trivial_irreducible_polynomials_are_primitive} and \cref{thm:gauss_lemma}, we have
+  \begin{equation}\label{eq:thm109_eq1}
+    d \sim \con(df) \sim \con(lk_0) \sim \con(l) \con(k_0) \sim \con(k_0).
+  \end{equation}
+  Now if we write $k_0(x) = \con(k_0) k_1(x)$ using \cref{lemma:role_of_the_content}, for some primitive $k_1(x) \in R[x]$, then
+  \begin{equation*}
+    df(x) = l(x) k_0(x) = \con(k_0) l(x) k_1(x).
+  \end{equation*}
+  Then from \cref{eq:thm109_eq1}, we have
+  \begin{equation*}
+    f(x) \sim l(x) k_1(x).
+  \end{equation*}
+  Thus we have $l(x) \mid f(x)$ in $R[x]$. Similarly so, if $l(x) \mid g(x)$ in $F[x]$, we can show that $l(x) \mid g(x)$ in $R[x]$. It follows that $l(x)$ is therefore prime and so $R[x]$ is a UFD.\qed
+\end{proof}
+
+\newthought{Let $R$ be a UFD}, and $x_1, ..., x_n$ be $n$ commuting variables, i.e. $\forall i, \, j \in \{1, ..., n\}$ we have
+\begin{equation*}
+  x_i x_j = x_j x_i.
+\end{equation*}
+We may then inductively define the ring $R[x_1, ..., x_n]$ of polynomials in $n$ variables by
+\begin{equation*}
+  $R[x_1, ..., x_n] = \left( R[x_1, ..., x_{n - 1}] \right)[x_n]$
+\end{equation*}
+for $n \geq 1$. Then, as a direct corollary of \cref{thm:polynomial_ring_of_a_ufd_is_also_a_ufd}, we have:
+
+\begin{crly}[Multiparametered Polynomial Ring of a UFD is also a UFD]
+\label{crly:multiparametered_polynomial_ring_of_a_ufd_is_also_a_ufd}
+If $R$ is a UFD, then $\forall n \in \mathbb{N}$, $R[x_1, ..., x_n]$ is also a UFD.
+\end{crly}
+
+Now since $\mathbb{Z}$ is a UFD, we have, therefore:
+
+\begin{crly}[Polynomial Ring over Integers is a UFD]
+\label{crly:polynomial_ring_over_integers_is_a_ufd}
+  $\mathbb{Z}[x]$ and $\mathbb{Z}[x_1, ..., x_n]$ are UFDs.
+\end{crly}
+
+Another application of \hyperref[thm:gauss_lemma]{Gauss' Lemma} is:
+
+\begin{thm}[Eisenstein's Criterion of {$\mathbb{Z}[x]$}]
+\index{Eisenstein's Criterion of $\mathbb{Z}[x]$}
+\label{thm:eisenstein_s_criterion_of_z_x_}
+Let $f(x) = a_n x^n + \hdots + a_0 \in \mathbb{Z}[x]$ and $p$ a prime. Suppose that
+\begin{equation*}
+  p \nmid a_n, \quad p \nmid a_i \text{ for } 0 \leq i \leq n - 1 \quad \text{ and } \quad p^2 \nmid a_o.
+\end{equation*}
+Then $f(x)$ is irreducible in $\mathbb{Q}[x]$. In particular, if $f(x)$ is primitive, then $f(x)$ is irreducible in $\mathbb{Z}[x]$.\sidenote{e.g. $f(x)$ is monic $\implies f(x)$ is primitive.}
+\end{thm}
+
+\begin{proof}
+  \hlimpo{Take PMATH348!!}\sidenote{And so we have a teaser right at the end!!}
 \end{proof}
 
 % subsection gauss_lemma_continued_2 (end)
