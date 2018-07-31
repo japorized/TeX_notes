@@ -16,6 +16,24 @@
 \institution{University of Waterloo}
 
 \usepackage{soul}
+\usepackage{listings}
+\lstset{frame=tb,
+  language=R,
+  aboveskip=3mm,
+  belowskip=3mm,
+  frame=single,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{base16-eighties-magenta},
+  keywordstyle=\color{base16-eighties-blue},
+  commentstyle=\color{base16-eighties-gray},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
 \input{latex-classnotes-preamble.tex}
 
 \setlength\extrarowheight{10pt}
@@ -5538,7 +5556,7 @@ But first, let us formally state the definition of a likelihood function.
 \begin{note}
   Just to take away the layers of definitions and compare the Fisher information with our pf for the rv(s), if $X_1, ..., X_n$ is a random sample (i.e. IID rvs), each with pf $f(x; \theta)$, then
   \begin{equation*}
-    J(\theta) = E\left[ - \frac{\partial^2}{\partial \theta^2} \ell(\theta; \vec{X}) \right] = nE\left[ - \frac{\partial^2}{\partial \theta^2} \ln f(x; \theta) \right]
+    J(\theta) = E\left[ - \frac{\partial^2}{\partial \theta^2} \ell(\theta; \vec{X}) \right] = nE\left[ - \frac{\partial^2}{\partial \theta^2} \ln f(\vec{X}; \theta) \right]
   \end{equation*}
   where $\vec{X} = ( X_1 \; ... \; X_n )$.
 \end{note}
@@ -5798,7 +5816,7 @@ As how we had the log-likelihood from the likelihood function, we can have the l
   } then $R(\theta) \geq p$ will give us the likelihood interval, in which this case we have that the interval is $[a_p, b_p]$.
 \end{note}
 
-\begin{eg}[Example 6.10]
+\begin{eg}[Example 6.10]\label{eg:6_10}
   Let $X_1, ..., X_{100} \sim \Poi(\theta)$ be an IID sequence of rvs. Based on the observed values, you are given that $\sum_{i=1}^{100} x_i = 980$. Find a $10\%$ and $50\%$ likelihood intervals for $\theta$.
 \end{eg}
 
@@ -5821,9 +5839,8 @@ As how we had the log-likelihood from the likelihood function, we can have the l
   \end{equation*}
   Using WolframAlpha, we get that the $50\%$ likelihood interval for $\theta$ is $[9.436, 10.173]$. Unfortunately so, I cannot get the solution for the $10\%$ likelihood interval since the allowed free computation time is exceeded, and so I shall leave the likelihood interval as
   \begin{equation*}
-    \left\{ \theta \in \Omega : e^{-100(\theta - 9.8)}\left( \frac{\theta}{9.8} \right)^{980} \right\}.
+    \left\{ \theta \in \Omega : e^{-100(\theta - 9.8)}\left( \frac{\theta}{9.8} \right)^{980} > 0.1 \right\}.
   \end{equation*}
-  \end{itemize}
 \end{solution}
 
 \begin{eg}[Example 6.11 (Course Notes 6.2.24)]\label{eg:6_11}
@@ -5891,7 +5908,7 @@ The constant matrix $I(\hat{\theta})$ is called the \hldefn{observed information
 
 \begin{defn}[Fisher Information Matrix]\index{Fisher Information Matrix}
 \label{defn:fisher_information_matrix}
-  Suppose $X_1, ..., X_n \sim f(x; \theta))$ is a sequence of IID rvs, where $\theta = (\theta_1 \; \hots \; \theta_k)^T$. The \hlnoteb{Fisher information matrix}, $J(\theta)$ is a $k \times k$ symmetric matrix whose $(i, \, j)$ entry is given by
+  Suppose $X_1, ..., X_n \sim f(x; \theta))$ is a sequence of IID rvs, where $\theta = (\theta_1 \; \hdots \; \theta_k)^T$. The \hlnoteb{Fisher information matrix}, $J(\theta)$ is a $k \times k$ symmetric matrix whose $(i, \, j)$ entry is given by
   \begin{equation*}
     E\left[ - \frac{\partial^2}{\partial \theta_i \partial \theta_j} \ell(\theta; X) \right],
   \end{equation*}
@@ -5900,7 +5917,7 @@ The constant matrix $I(\hat{\theta})$ is called the \hldefn{observed information
 
 \begin{defn}[Likelihood Region - Multivariate]\index{Likelihood Region}
 \label{defn:likelihood_region_multivariate}
-  Suppose $X_1, ..., X_n \sim f(x; \theta))$ is a sequence of IID rvs, where $\theta = (\theta_1 \; \hots \; \theta_k)^T$. The set of $\theta = (\theta_1 \; \hdots \; \theta_k)^T$ for which $R(\theta) \geq p$, for some $0 \leq p \leq 1$, is called a $100p\%$ \hlnoteb{likelihood region} for $\theta$, which is a region in a $k$-dimensional space $\mathbb{R}^k$.
+  Suppose $X_1, ..., X_n \sim f(x; \theta))$ is a sequence of IID rvs, where $\theta = (\theta_1 \; \hdots \; \theta_k)^T$. The set of $\theta = (\theta_1 \; \hdots \; \theta_k)^T$ for which $R(\theta) \geq p$, for some $0 \leq p \leq 1$, is called a $100p\%$ \hlnoteb{likelihood region} for $\theta$, which is a region in a $k$-dimensional space $\mathbb{R}^k$.
 \end{defn}
 
 \begin{note}
@@ -6343,7 +6360,7 @@ In the next section, we shall study how these results can be used to construct a
 \begin{eg}[Example 6.17 (Course Notes 6.5.4)]
   Suppose $X_1, ..., X_n$ is a random sample from the $\Poi(\theta)$ distribution. Show that
   \begin{equation*}
-    \sqrt{n} \frac{(\bar{X_}_n - \theta)}{\sqrt{\bar{X}_n}}
+    \sqrt{n} \frac{(\bar{X}_n - \theta)}{\sqrt{\bar{X}_n}}
   \end{equation*}
   is an asymptotic pivotal quantity.
 \end{eg}
@@ -6454,7 +6471,7 @@ and the ``realized'' interval $[a(x), b(x)]$ is a $100p\%$ CI.
     \frac{d \ell}{d \theta} &= - \frac{n}{\theta} + \frac{1}{\theta} \sum_{i=1}^{n} x_i \\
                             &\implies \hat{\theta} = \frac{1}{n} \sum_{i=1}^{n} x_i = \bar{x}.
   \end{align*}
-  Thus the MLE of $\theta$ is $\tilde{\theta} = \bar{X}$. To get the $100p\%$ CI for $\theta$, we have by \cref{propo:mle_of_a_location_scale_parameter_as_a_pivotal_quantity},
+  Thus the MLE of $\theta$ is $\tilde{\theta} = \bar{X}$. To get the $100p\%$ CI for $\theta$, we have by \cref{propo:mle_of_a_location_scale_parameter_as_a_pivotal_quantity}, $Y = \bar{X}/\theta$ is a pivotal quantity. Then
   \begin{gather*}
     P\left[ a \leq \frac{\bar{X}}{\theta} \leq b \right] = p \\
     P\left[ \frac{1}{b} \bar{X} \leq \theta \leq \frac{1}{a} \bar{X} \right] = p.
@@ -6463,11 +6480,23 @@ and the ``realized'' interval $[a(x), b(x)]$ is a $100p\%$ CI.
   \begin{equation*}
     \left[ \frac{1}{b} \bar{X}, \, \frac{1}{a} \bar{X} \right].
   \end{equation*}
-  For $n = 15, \, \sum_{i=1}^{15} x_i = 36$ (and so $\bar{x} = 36/15 = 2.4$), and to find the $95\%$ equal tail CI for $\theta$, we have that\sidenote{I used \href{https://keisan.casio.com/exec/system/1180573217}{this tool} by Casio to verify the given points.}
+  To solve for $a$ and $b$, we would need to know what the distribution of $Y = \bar{X} / \theta$ is:
+  \begin{align*}
+    M_Y(t) &= E\left( \exp\left\{ \frac{t}{\theta n} \sum_{i=1}^{n} X_i\right\} \right) = E\left(e^{\frac{tX_1}{n \theta}}\right)^n \enspace \because \text{ IID } \\
+           &= M_{X_1}\left( \frac{t}{n \theta} \right)^n = \left(1 - \frac{t}{n}\right)^{-n},
+  \end{align*}
+  which we observe that then $Y \sim \Gam\left(n, \frac{1}{n}\right)$.
+
+  For $n = 15, \, \sum_{i=1}^{15} x_i = 36$ (and so $\bar{x} = 36/15 = 2.4$), and to find the $95\%$ equal tail CI for $\theta$, we have that
   \begin{gather*}
     P\left[ 0.559 \leq \frac{2.4}{\theta} \leq 1.566 \right] = 0.95 \\
     P\left[ 2.4/1.566 \leq \theta \leq 2.4/0.559 \right] = 0.95.
   \end{gather*}
+  where the values of $a$ and $b$ are verified on $R$ using the following:
+  \begin{lstlisting}[caption=R interactive code to get $a$ and $b$]
+    qgamma(0.025, shape=15, rate=15)
+    qgamma(0.975, shape=15, rate=15)
+  \end{lstlisting}
   Thus
   \begin{gather*}
     \left[ \frac{2.4}{1.566}, \, \frac{2.4}{0.559} \right] \\
@@ -6519,6 +6548,208 @@ and the ``realized'' interval $[a(x), b(x)]$ is a $100p\%$ CI.
 % section estimation_continued_4 (end)
 
 % chapter lecture_21_jul_12th_2018 (end)
+
+\chapter{Lecture 22 Jul 17th 2018}%
+\label{chp:lecture_22_jul_17th_2018}
+% chapter lecture_22_jul_17th_2018
+
+\section{Estimate (Continued 5)}%
+\label{sec:estimate_continued_5}
+% section estimate_continued_5
+
+\subsection{Interval Estimators (Continued)}%
+\label{sub:interval_estimators_continued}
+% subsection interval_estimators_continued
+
+\begin{eg}[Example 6.21]
+  Suppose $X_1, ..., X_n \sim \Exp(1, \theta)$ is a random sample. Find an appropriate pivotal quantity. Determine $a$ such that
+  \begin{equation*}
+    [ \hat{\theta} - a, \, \hat{\theta} ]
+  \end{equation*}
+  is a $100p\%$ CI for $\theta$.
+\end{eg}
+
+\begin{solution}
+  Recall from $\cref{eg:6_11}$ that the ML estimate is $\hat{\theta} = x_{(1)}$ and and the estimator is $\tilde{\theta} = X_{(1)}$. Note that $\Exp(1, \theta)$ is from a location parameter family of distributions, since
+  \begin{equation*}
+    f(x; 1, 0) = e^{-x} = f(x - \theta; 1, \theta).
+  \end{equation*}
+  We can then use \cref{propo:mle_of_a_location_scale_parameter_as_a_pivotal_quantity}, and use $Y = \tilde{\theta} - \theta$ as our pivotal quantity. Note that
+  \begin{gather*}
+    P\left( \hat{\theta} - a \leq \theta \leq \hat{\theta} \right) = p \\
+    P( - \hat{\theta} \leq - \theta \leq a - \hat{\theta} ) = p \\
+    P( 0 \leq \hat{\theta} - \theta \leq a ) = p \\
+    P( 0 \leq Y \leq a ) = p
+  \end{gather*}
+  It remains, again, to find the CDF.
+  \begin{align*}
+    F_Y(y) &= P(X_{(1)} - \theta \leq y) = 1 - P(X_{(1)} > y + \theta) \\
+           &= 1 - P(X_1 > y + \theta)^n \quad \because \text{ IID } \\
+           &= 1 - \left[ \int_{y + \theta}^{\infty}e^{-(x + \theta)} \dif{x} \right]^n \\
+           &= 1 - \left[ - e^{-(x + \theta)} \at{y + \theta}{\infty} \right]^n \\
+           &= 1 - e^{-ny}
+  \end{align*}
+  Thus
+  \begin{gather*}
+    F(a) - F(0) = p \\
+    1 - e^{-na} - 1 + 1 = p \\
+    a = - \frac{1}{n} \ln (1 - p)
+  \end{gather*}
+\end{solution}
+
+\newthought{In cases where} we cannot construct an exact pivotal quantity, we can use the limiting distribution of the ML estimator $\tilde{\theta} = \tilde{\theta}(X_1, ..., X_n)$ and construct approximate CIs.
+
+\begin{propo}[Asymptotic Confidence Intervals]\index{Asymptotic Confidence Intervals}
+\label{propo:asymptotic_confidence_intervals}
+Since\sidenote{This is based on \cref{thm:asymptotic_distribution_of_the_ml_estimator}, which we could not prove, and its consequences are more than just fishy. I am also unsure whether this is presented as a proof or definition in the lecture, since there are no indications of that whatsoever both during the lectures and in the course notes.}
+  \begin{equation*}
+    [J(\tilde{\theta})]^{\frac{1}{2}} (\tilde{\theta} - \theta) \convd Z \sim \Nor(0, 1),
+  \end{equation*}
+  then $[J(\tilde{\theta})]^{\frac{1}{2}} (\tilde{\theta} - \theta)$ is an asymptotic pivotal quantity. An \hlnoteb{asymptotic $100p\%$ CI}\sidenote{Also called \hlnoteb{approximate $100p\%$ CI}.} based on this asymptotic pivotal quantity is given by
+  \begin{equation*}
+    [ \hat{\theta} - a[J(\hat{\theta})]^{-\frac{1}{2}}, \; \hat{\theta} + a[J(\hat{\theta})]^{-\frac{1}{2}} ]
+  \end{equation*}
+  where $P(-a < Z < a) = p$ and $Z \sim \Nor(0, 1)$.
+\end{propo}
+
+\begin{note}
+  Similarly, since
+  \begin{equation*}
+    [I(\tilde{\theta})]^{\frac{1}{2}} (\tilde{\theta} - \theta) \convd Z \sim \Nor(0, 1),
+  \end{equation*}
+  then $[I(\tilde{\theta})]^{\frac{1}{2}} (\tilde{\theta} - \theta)$ is an asymptotic pivotal quantity. An asymptotic $100p\%$ CI based on this asymptotic pitoval quantity is given by
+  \begin{equation*}
+    [ \hat{\theta} - a[I(\hat{\theta})]^{-\frac{1}{2}}, \; \hat{\theta} + a[I(\hat{\theta})]^{-\frac{1}{2}} ]
+  \end{equation*}
+  where $I(\hat{\theta})$ is the observed information.
+\end{note}
+
+\begin{eg}[Example 6.22]
+  Suppose $X \sim \Bin(n, \theta)$. Show how you would construct an approximate $100p\%$ CI for $\theta$.\marginnote{
+  I am more than just confused by this example. The very first question that I need to rise here is
+  \begin{enumerate}
+    \item Are the ``regularity conditions'' satisfied?
+  \end{enumerate}
+  There is no way we can verify this given that this course does not introduce to us the regularity conditions that we should know and understand to be able to even start talking about consistency, which then allows us to use the asymptotic normality result in order to invoke \cref{propo:asymptotic_confidence_intervals}. Without all of that, half of the given solution would not even make sense.
+
+  Plus, does it make sense for the Fisher information to have $x$ in it? The Fisher information is defined as $J(\theta) = E[I(\theta; \vec{X})]$. In an earlier section, we discussed that we can take $J(\hat{\theta}) = E[ I(\hat{\theta}; \vec{X}) ]$, the observed information, which is a fixed value. What does it mean to take the expectation of a fixed value? Then it would make $J(\hat{\theta}) = I(\hat{\theta})$.
+  }
+\end{eg}
+
+\begin{solution}
+  Since this is just a single rv, we have
+  \begin{gather*}
+    L(\theta) = \binom{n}{x} \theta^x ( 1 - \theta )^{n - x} \\
+    \ell(\theta) = \ln \binom{n}{x} + x \ln \theta + (n - x) \ln (1 - \theta) \\
+    \frac{d \ell}{d \theta} = \frac{x}{\theta} - \frac{n - x}{1 - \theta} \\
+    \frac{d^2 \ell}{d \theta} = - \frac{x}{\theta^2} - \frac{n - x}{(1 - \theta)^2} < 0
+  \end{gather*}
+  where we note that the ML estimate is $\hat{\theta} = \frac{x}{n}$ and the estimator $\tilde{\theta} = \frac{X}{n}$, and we know that this will be the maximum since the second order derivative is always negative\sidenote{In fact, by rearranging $\frac{d \ell}{d \theta}$, we can show that it is a linear function.}. The information function is
+  \begin{equation*}
+    I(\theta; X) = \frac{X}{\theta} + \frac{n - X}{(1 - \theta)^2}
+  \end{equation*}
+  and so the Fisher information is
+  \begin{equation*}
+    J(\theta) = \frac{E(X)}{\theta^2} + \frac{n - E(X)}{(1 - \theta)^2} = \frac{n}{\theta} + \frac{n}{1 - \theta} = \frac{n}{\theta ( 1 - \theta )}.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    J(\hat{\theta}) = \frac{n^3}{x(n - x)}.
+  \end{equation*}
+  Then by \cref{propo:asymptotic_confidence_intervals}, we have that the asymptotic $100p\%$ CI for $\theta$ is
+  \begin{equation*}
+    \left[ \frac{x}{n} - zn \sqrt{\frac{x ( n - x )}{n}}, \; \frac{x}{n} + zn \sqrt{\frac{x (n - x)}{n}} \right],
+  \end{equation*}
+  where $P(-z \leq Z \leq z) = p$ where $Z \sim \Nor(0, 1)$.
+\end{solution}
+
+\begin{eg}[Example 6.23 (Course Notes 6.5.15)]
+  Suppose $X_1, ... ,X_n$ is a random sample from the $\Poi(\theta)$ distribution. Show how you would construct an asymptotic $100p\%$ CI for $\theta$.
+\end{eg}
+
+\begin{solution}
+  Since the $X_i$'s are IID, we have
+  \begin{gather*}
+    L(\theta) = \prod_{i=1}^{n} \frac{e^{-\theta} \theta^{x_i}}{x_i!} = e^{-n\theta} \theta^{\sum\limits_{i=1}^{n} x_i} \prod_{i=1}^{n} \frac{1}{x_i!} \\
+    \ell(\theta) = -n \theta + \left( \sum_{i=1}^{n} x_i \right) \ln \theta - \sum_{i=1}^{n} \ln x_i! \\
+    \frac{d \ell}{d \theta} = -n + \frac{1}{\theta} \sum_{i=1}^{n} x_i \\
+    \frac{d^2 \ell}{d\theta^2} = - \frac{1}{\theta^2} \sum_{i=1}^{n} x_i.
+  \end{gather*}
+  The candidate for MLE from equating the score function to $0$ is $\hat{\theta} = \frac{1}{n} \sum_{i=1}^{n} x_i = \bar{x}$. We verify that it is indeed a maximum point since
+  \begin{equation*}
+    \frac{d^2 \ell}{d \theta^2} \at{\theta = \hat{\theta}}{} = - \frac{1}{\bar{x}} \sum_{i=1}^{n} = - \frac{1}{n} < 0.
+  \end{equation*}
+  The information function is
+  \begin{equation*}
+    I(\theta; X) = \frac{1}{\theta^2} \sum_{i=1}^{n} X_i
+  \end{equation*}
+  and so the Fisher information is
+  \begin{equation*}
+    J(\theta) = E[ I(\theta; X) ] = \frac{1}{\theta^2} n \theta = \frac{n}{\theta}.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    J(\hat{\theta}) = \frac{n}{\bar{x}}
+  \end{equation*}
+  \hlwarn{Assuming that our random sample satisfies the ``regularity conditions''}, we have that the asymptotic $100p\%$ CI for $\theta$, by \cref{propo:asymptotic_confidence_intervals}, is
+  \begin{equation*}
+    \left[ \bar{x} - z \sqrt{\frac{\bar{x}}{n}}, \; \bar{x} + z \sqrt{\frac{\bar{x}}{n}} \right]
+  \end{equation*}
+\end{solution}
+
+\begin{defn}[Likelihood Interval]\index{Likelihood Interval}
+\label{defn:likelihood_interval}
+  Given a random sample $X_1, ..., X_n$ from $f(x; \theta)$, the $100p\%$ \hlnoteb{likelihood interval} for $\theta$ is defined by
+  \begin{equation*}
+    \{ \theta : R(\theta) > p \}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Recall the 3rd property from \cref{thm:asymptotic_distribution_of_the_ml_estimator}} that\marginnote{The amount of things built on this shady theorem is insane...}
+  \begin{equation*}
+    -2 \log R(\theta; X) \convd W \sim \chi^2(1).
+  \end{equation*}
+  Since the $R(\theta)$ is a unimodal graph, we have
+  \begin{align*}
+    P[ R(\theta; X) \geq p ] &= P[ - 2 \ln R(\theta; X) \leq -2 \ln p ] \\
+                             &\approx P(W \leq - 2 \ln p) \\
+                             &= P(Z^2 \leq -2 \ln p) \\
+                             &= P\left( - \sqrt{-2 \ln p} \leq Z \leq \sqrt{-2 \ln p} \right) \\
+                             &= 2P\left(Z \leq \sqrt{-2 \ln p}\right) - 1.
+  \end{align*}
+  Consequently, if $p = 0.15$, then
+  \begin{equation*}
+    P[R(\theta; X) \geq 0.15] \approx 0.95
+  \end{equation*}
+  i.e. a $15\%$ likelihood interval is, approximately, a $95\%$ CI.
+\end{note}
+
+\begin{eg}[Example 6.24]
+  In \cref{eg:6_10}, based on $X_1, ..., X_{100} \sim \Poi(\theta)$ is a random sample, where $\sum_{i=1}^{100} x_i = 980$, we derived the $10\%$ and $50\%$ likelihood intervals for $\theta$. Compare the approximate $95\%$ confidence interval based on the asymptotic distribution of the MLE to the $15\%$ likelihood interval for $\theta$.
+\end{eg}
+
+\begin{solution}
+  Recall that
+  \begin{equation*}
+    R(\theta) = e^{-n ( \theta - \bar{x} )} \left( \frac{\theta}{\bar{x}} \right)^{n \bar{x}} = e^{-100 ( \theta - 9.8 )} \left( \frac{\theta}{980} \right)^{980}
+  \end{equation*}
+  and that the MLE is $\hat{\theta} = \bar{x}$. Using R \sidenote{This is actually a non-trivial process...}, one can find that the $15\%$ likelihood interval is
+  \begin{equation*}
+    9.2 < \theta < 10.4.
+  \end{equation*}
+  Again, \hlwarn{assuming that the regularity conditions are satisfied}, by \cref{propo:asymptotic_confidence_intervals}, and the previous example, the $95\%$ CI for $\theta$ is
+  \begin{gather*}
+    \left[ 9.8 - 1.96 \frac{\sqrt{980}}{100} , \, 9.8 + 1.96 \frac{\sqrt{980}}{100} \right] \\
+    [ 9.186, 10.414 ]
+  \end{gather*}
+\end{solution}
+
+% subsection interval_estimators_continued (end)
+
+% section estimate_continued_5 (end)
+
+% chapter lecture_22_jul_17th_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
