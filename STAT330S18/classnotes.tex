@@ -15,6 +15,7 @@
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
 \institution{University of Waterloo}
 
+\usepackage{soul}
 \input{latex-classnotes-preamble.tex}
 
 \setlength\extrarowheight{10pt}
@@ -1043,7 +1044,7 @@ When we look into methods for constructing confidence intervals for an unknown p
   We can use a similar approach as before and define $Y = X - \mu$ which follows $\Gau(0, 2)$. It is clear that we then have that $F_X$, the cdf of $X$, belongs to a location family of distributions.
 \end{eg}
 
-\begin{eg}[Example 2.15]
+\begin{eg}[Example 2.15]\label{eg:3_3_3}
   Consider $X \sim \Exp(\theta)$. Show that $F_X$ belongs to a scale family of distributions and find the scale parameter.
 
   Note that
@@ -5112,7 +5113,7 @@ where $\bar{X}_n = \frac{1}{n} \sum_{i=1}^{n} X_i$.
       \end{equation*}
       Thus
       \begin{equation*}
-      \lim_{n \to \infty} P[ \abs{g(X_n - g(a)} < \epsilon ] = 1
+        \lim_{n \to \infty} P[ \abs{g(X_n) - g(a)} < \epsilon ] = 1
       \end{equation*}
       and so
       \begin{equation*}
@@ -5715,9 +5716,9 @@ But first, let us formally state the definition of a likelihood function.
 
 % chapter lecture_18_jul_3rd_2018 (end)
 
-\chapter{Lecture 19 July 5 2018}%
-\label{chp:lecture_19_july_5_2018}
-% chapter lecture_19_july_5_2018
+\chapter{Lecture 19 July 5th 2018}%
+\label{chp:lecture_19_july_5th_2018}
+% chapter lecture_19_july_5th_2018
 
 \section{Estimation (Continued 2)}%
 \label{sec:estimation_continued_2}
@@ -5825,7 +5826,7 @@ As how we had the log-likelihood from the likelihood function, we can have the l
   \end{itemize}
 \end{solution}
 
-\begin{eg}[Example 6.11 (Course Notes 6.2.24)]
+\begin{eg}[Example 6.11 (Course Notes 6.2.24)]\label{eg:6_11}
   Suppose $X_1, ..., X_n$ is a random sample from $\Exp(1, \theta)$. Plot the relative likelihood function for $\theta$ if $n = 20$ and $x_{(1)} = \min\{x_1, ..., x_n\} = 1$. Find the $10\%$ and $50\%$ likelihood intervals for $\theta$.
 \end{eg}
 
@@ -5983,7 +5984,7 @@ The constant matrix $I(\hat{\theta})$ is called the \hldefn{observed information
       \end{equation*}
       since $\hat{\sigma}^2 > 0$.
 
-    \item By \cref{thm:invariance_property_of_the_mle}, we have that the MLE of the coefficient of variation, $CV$, is
+    \item By \cref{thm:invariance_property_of_the_mle}, we have that the MLE of the coefficient of variation, $CV$, is\sidenote{Note that the function $f(x, y) = \frac{x}{y}$ is not injective if $x$ and $y$ are not coprime. Since both $\hat{\sigma}$ and $\hat{\mu}$ has a common multiple of $\sqrt{\frac{1}{n}}$, they are not coprime, so \hlwarn{I do not think we can actually invoke} \cref{thm:invariance_property_of_the_mle}. I shall, however, leave this answer here from the lecture.}
       \begin{equation*}
         \hat{CV} = \frac{\hat{\sigma}}{\hat{\mu}} = \frac{1}{\bar{x}} \sqrt{ \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n} } = \frac{\hat{\sigma}}{\sqrt{n} \bar{x}}
       \end{equation*}
@@ -5994,11 +5995,11 @@ The constant matrix $I(\hat{\theta})$ is called the \hldefn{observed information
 
 % section estimation_continued_2 (end)
 
-% chapter lecture_19_july_5_2018 (end)
+% chapter lecture_19_july_5th_2018 (end)
 
-\chapter{Lecture 20 Jul 10 2018}%
-\label{chp:lecture_20_jul_10_2018}
-% chapter lecture_20_jul_10_2018
+\chapter{Lecture 20 Jul 10th 2018}%
+\label{chp:lecture_20_jul_10th_2018}
+% chapter lecture_20_jul_10th_2018
 
 \section{Estimation (Continued 3)}%
 \label{sec:estimation_continued_3}
@@ -6260,7 +6261,264 @@ In the next section, we shall study how these results can be used to construct a
 
 % section estimation_continued_3 (end)
 
-% chapter lecture_20_jul_10_2018 (end)
+% chapter lecture_20_jul_10th_2018 (end)
+
+\chapter{Lecture 21 Jul 12th 2018}%
+\label{chp:lecture_21_jul_12th_2018}
+% chapter lecture_21_jul_12th_2018
+
+\section{Estimation (Continued 4)}%
+\label{sec:estimation_continued_4}
+% section estimation_continued_4
+
+\subsection{Asymptotic Properties of ML Estimators (Continued)}%
+\label{sub:asymptotic_properties_of_ml_estimators_continued}
+% subsection asymptotic_properties_of_ml_estimators_continued
+
+\begin{eg}[Example 6.15 (Course Notes 6.4.3)]
+  Suppose $X_1, ..., X_n$ is a random sample from the $\Unif(0, \theta)$ distribution. We showed in \cref{eg:eg_where_derivatives_for_mle_fail} that $\tilde{\theta}_n = X_{(n)}$ is the ML estimator of $\theta$. Since the support of $X_i$ depends on $\theta$, \cref{thm:asymptotic_distribution_of_the_ml_estimator} does not hold\sidenote{The lecturer claimed that one of the regularity conditions is that the support of $X$ does not depend on the parameter $\theta$. Whether this is the case remains to be investigated because the ``regularity conditions'' are not introduced to the students.} Show, however, that $X_{(n)}$ is still a consistent estimator of $\theta$.
+\end{eg}
+
+\begin{solution}
+  Since $\theta$ is a fixed (but unknown) value, we have the option of use\\ \noindent \cref{propo:partial_converse_of_convp_implies_convd}. We have
+  \begin{align*}
+    F_{X_{(n)}}(t) &= P(X_{(n)} \leq t) = P(X_1 \leq t, X_2 \leq t, ..., X_n \leq t) \\
+                   &= \prod_{i=1}^{n} P(X_i \leq t) \quad \because \text{ independence } \\
+                   &= \prod_{i=1}^{n} \frac{t}{\theta} = \left( \frac{t}{\theta} \right)^n
+  \end{align*}
+  So the full expression for the CDF of $X_{(n)}$ is
+  \begin{equation*}
+    F_{X_{(n)}}(t) = \begin{cases}
+      0 & t \leq 0 \\
+      \left( \frac{t}{\theta} \right)^n & 0 < t < \theta \\
+      1 & t \geq \theta
+    \end{cases}.
+  \end{equation*}
+  Observe that
+  \begin{equation*}
+    \lim_{n \to \infty}F_{X_{(n)}}(t) = \begin{cases}
+      0 & t < \theta \\
+      1 & t \geq \theta
+    \end{cases}
+  \end{equation*}
+  and so as $n \to \infty$, we have that $X_{(n)}$ has a denegerate distribution, and so the proof for consistency follows from \cref{propo:partial_converse_of_convp_implies_convd}.
+\end{solution}
+
+% subsection asymptotic_properties_of_ml_estimators_continued (end)
+
+\subsection{Interval Estimators}%
+\label{sub:interval_estimators}
+% subsection interval_estimators
+
+\begin{defn}[Interval Estimators]\index{Interval Estimators}\index{Interval Estimate}
+\label{defn:interval_estimators}
+  Suppose $X$ is an rv whose distribution depends on $\theta$. Suppose that $A(x)$ and $B(x)$ are functions such that $A(x) \leq B(x)$ for all $x \in \supp(X)$ and $\theta \in \Omega$. Let $x$ be the observed data. Then $(A(x), B(x))$ is an \hlnoteb{interval estimate} for $\theta$. The interval $(A(X), B(X))$ is an \hlnoteb{interval estimator} for $\theta$.
+\end{defn}
+
+\begin{note}
+  Two interval estimators that we already know\sidenote{Well, one from STAT231, that is.}:
+  \begin{enumerate}
+    \item Confidence intervals
+    \item Likelihood intervals
+  \end{enumerate}
+\end{note}
+
+\newthought{We now consider} a general approach for constructing confidence intervals based on pivotal quantities.
+
+\begin{defn}[Pivotal Quantity]\index{Pivotal Quantity}\index{Asymptotic Pivotal Quantity}
+\label{defn:pivotal_quantity}
+  Suppose $X$ is an rv whose distribution depends on $\theta$. The rv $Q(X; \theta)$ is called a \hlnoteb{pivotal quantity} if the distribution of $Q$ does not depend on $\theta$. $Q(X; \theta)$ is called an \hlnoteb{asymptotic pivotal quantity} if the limiting distribution of $Q$ as $n \to \infty$ does not depend on $\theta$.
+\end{defn}
+
+\begin{eg}[Example 6.16]\label{eg:6_16}
+  Suppose $X_1, ..., X_n$ is a random sample from the $\Nor(\mu, \sigma^2)$ distribution. The following rvs are pivotal quantities.:\marginnote{
+  \begin{ex}
+    Show that the given rvs are pivotal quantities.
+  \end{ex}}
+  \begin{equation*}
+    \frac{\bar{X} - \mu}{\sigma / \sqrt{n}}, \, \frac{\bar{X} - \mu}{S / \sqrt{n}}, \, \frac{\sum\limits_{i=1}^{n} (X_i - \mu)^2}{\sigma^2} \text{ and } \frac{(n - 1) S^2}{\sigma^2} = \frac{\sum\limits_{i=1}^{n} (X_i - \bar{X})^2}{\sigma^2}
+  \end{equation*}
+\end{eg}
+
+\begin{eg}[Example 6.17 (Course Notes 6.5.4)]
+  Suppose $X_1, ..., X_n$ is a random sample from the $\Poi(\theta)$ distribution. Show that
+  \begin{equation*}
+    \sqrt{n} \frac{(\bar{X_}_n - \theta)}{\sqrt{\bar{X}_n}}
+  \end{equation*}
+  is an asymptotic pivotal quantity.
+\end{eg}
+
+\begin{solution}
+  By \cref{thm:central_limit_theorem}, we have that
+  \begin{equation*}
+    \sqrt{n} \frac{\bar{X}_n - \theta}{\sqrt{\theta}} \convd Z \sim \Nor(0, 1).
+  \end{equation*}
+  By \cref{propo:other_limit_theorems}, we have\marginnote{This may be a little late but at this point, it should be clear how Limit Theorems work when it comes to playing with the Normal distribution as the asymptotic distribution. If this is not clear to you, read back from \cref{propo:other_limit_theorems}.}
+  \begin{equation*}
+    \sqrt{n} ( \bar{X}_n - \theta ) \convd \sqrt{\theta} Z \sim \Nor(0, \theta).
+  \end{equation*}
+  Now by the \hyperref[eg:weak_law_of_large_numbers]{Weak Law of Large Numbers}, we have that
+  \begin{equation*}
+    \bar{X}_n \convp \theta.
+  \end{equation*}
+  Since $\bar{X}_n$ takes only non-negative values, and $\theta > 0$, the function $g(x) = \sqrt{x}$ is well-defined on these ``points'', and so by \cref{propo:other_limit_theorems}, we have
+  \begin{equation*}
+    \sqrt{\bar{X}_n} \convp \sqrt{\theta}.
+  \end{equation*}
+  Then by \hyperref[propo:other_limit_theorems]{Slutsky's Theorem}, we have
+  \begin{equation*}
+    \sqrt{n} \frac{\bar{X}_n - \theta}{\sqrt{\bar{X}_n}} \convd Z \sim \Nor(0, 1).
+  \end{equation*}
+  We observe that the limiting distribution of $\sqrt{n}(\bar{X}_n - \theta) / \sqrt{\bar{X}_n}$ depends not on the unknown parameter $\theta$. Therefore it is a asymptotic pivotal quantity.
+\end{solution}
+
+\begin{defn}[Confidence Interval]\index{Confidence Interval}\index{Lower Confidence Limit}\index{Upper Confidence Limit}
+\label{defn:confidence_interval}
+  Suppose $A(X)$ and $B(X)$ are \hyperref[defn:statistic]{statistics}, and are called the \hlnoteb{lower} and \hlnoteb{upper confidence limits}, respectively. If $P[A(X) < \theta < B(X)] = p$, where $0 < p < 1$, then $(a(x), b(x))$ is called a $100p\%$ \hlnoteb{confidence interval} (CI) for $\theta$.
+\end{defn}
+
+Pivotal quantities can be used for constructing CIs in the following way: since the distribution of $Q(X; \theta)$ is known, we can write down a probability statement of the form
+\begin{equation*}
+  P(q_1 \leq Q(X; \theta) \leq q_2) = p.
+\end{equation*}
+If $Q$ is a monotone function of $\theta$, then this statement can be rewritten as
+\begin{equation*}
+  P[ A(X) \leq \theta \leq B(X) ] = p,
+\end{equation*}
+and the ``realized'' interval $[a(x), b(x)]$ is a $100p\%$ CI.
+
+\begin{eg}[Example 6.18 (Course Notes 6.5.6)]
+  Suppose $X_1, ..., X_n$ is a random sample from the $\Nor(\mu, \sigma^2)$ distribution. Use the pivotal quantities in \cref{eg:6_16} to find:
+  \begin{enumerate}
+    \item a $100p\%$ CI for $\mu$ if $\sigma^2$ is unknown;
+    \item a $100p\%$ CI for $\sigma^2$ is $\mu$ is known.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item Since $\sigma^2$ is unknown, we cannot use
+      \begin{equation*}
+        \frac{\bar{X}_n - \mu}{\sigma / \sqrt{n}} \sim \Nor(0, 1)
+      \end{equation*}
+      as our pivotal quantity. We shall in fact, use
+      \begin{equation*}
+        \frac{\bar{X}_n - \mu}{S / \sqrt{n}} \sim t(n - 1)
+      \end{equation*}
+      since it contains the unknowm parameter whose confidence interval is that of what we want to construct, where we know that the rv follows a $t$-Distribution with degrees of freedom $n - 1$ from \cref{thm:gaussian_distribution}. Then since the $t$-Distribution is symmetric\sidenote{See \href{https://en.wikipedia.org/wiki/Student\%27s\_t\-distribution}{Wikipedia} for a graph of the $t$-Distribution.}, we have
+      \begin{gather*}
+        P\left[ -a \leq \frac{\bar{X}_n - \mu}{S / \sqrt{n}} \leq a \right] - p \\
+        P\left[ \bar{X}_n - (S / \sqrt{n}) a \leq \mu \leq \bar{X}_n + (S / \sqrt{n}) a \right] = p.
+      \end{gather*}
+      And so the $100p\%$ CI for $\mu$ when $\sigma^2$ is unknown is
+      \begin{equation*}
+        \left[ \bar{X}_n - (S / \sqrt{n}) a , \bar{X}_n + (S / \sqrt{n}) a \right]
+      \end{equation*}
+
+    \item Since $\mu$ is known, we shall use the rv
+      \begin{equation*}
+        \frac{\sum\limits_{i=1}^{n} (X_i - \mu)^2}{\sigma^2} \sim \chi^2 (n - 1),
+      \end{equation*}
+      where the following of the chi-squared Distribution is from \hyperref[thm:gaussian_distribution]{Cochran's Theorem}. To construct the CI for $\sigma^2$,
+      \begin{gather*}
+        P\left(a \leq \frac{\sum\limits_{i=1}^{n} (X_i - \mu)^2}{\sigma^2} \leq b\right) = p \\
+        P\left( \frac{1}{b} \sum_{i=1}^{n} (X_i - \mu)^2 \leq \sigma^2 \leq \frac{1}{a} \sum_{i=1}^{n} (X_i - \mu)^2 \right) = p.
+      \end{gather*}
+      Thus the CI for $\sigma^2$ is
+      \begin{equation*}
+        \left[ \frac{1}{b} \sum_{i=1}^{n} (X_i - \mu)^2, \, \frac{1}{a} \sum_{i=1}^{n} (X_i - \mu)^2 \right].
+      \end{equation*}
+  \end{enumerate}
+\end{solution}
+
+\begin{propo}[MLE of a Location/Scale Parameter as a Pivotal Quantity]
+\label{propo:mle_of_a_location_scale_parameter_as_a_pivotal_quantity}
+  Let $X = (X_1, ..., X_n)$ be a random sample from $f(x; \theta)$ and let $\tilde{\theta} = \tilde{\theta}(X)$ be the ML estimator of the scalar parameter $\theta$ based on $X$.
+  \begin{enumerate}
+    \item If $\theta$ is a location parameter, then $Q = \tilde{\theta} - \theta$ is a pivotal quantity.
+    \item If $\theta$ is a scale parameter, then $Q = \tilde{\theta} / \theta$ is a pivotal quantity.
+  \end{enumerate}
+\end{propo}
+
+\hlwarn{There is a proof out there and I wish to hunt for it but I do not have the time.}
+
+\begin{eg}[Example 6.19]
+  Suppse $X_1, ..., X_n \sim \Exp(\theta)$ is a random sample. Find a $100p\%$ equal tails CI for $\theta$. For the data $n = 15$ and $\sum_{i=1}^{15} x_i = 36$, find a $95\%$ equal tail CI for $\theta$.
+\end{eg}
+
+\begin{solution}
+  Referring to \cref{eg:3_3_3}, we know that $\Exp(\theta)$ belongs to a scale parameter family of distributions. We shall proceed with finding the MLE of $\theta$ and then use \cref{propo:mle_of_a_location_scale_parameter_as_a_pivotal_quantity} to get a CI for $\theta$. Since the $X_i$'s are IID,
+  \begin{align*}
+    L(\theta) &= \prod_{i=1}^{n} \frac{1}{\theta} e^{- \frac{x_i}{\theta}} = \theta^{-n} \exp\left\{ - \frac{1}{\theta} \sum\limits_{i=1}^{n} x_i \right\} \\
+    \ell(\theta) &= - n \ln \theta - \frac{1}{\theta} \sum_{i=1}^{n} x_i \\
+    \frac{d \ell}{d \theta} &= - \frac{n}{\theta} + \frac{1}{\theta} \sum_{i=1}^{n} x_i \\
+                            &\implies \hat{\theta} = \frac{1}{n} \sum_{i=1}^{n} x_i = \bar{x}.
+  \end{align*}
+  Thus the MLE of $\theta$ is $\tilde{\theta} = \bar{X}$. To get the $100p\%$ CI for $\theta$, we have by \cref{propo:mle_of_a_location_scale_parameter_as_a_pivotal_quantity},
+  \begin{gather*}
+    P\left[ a \leq \frac{\bar{X}}{\theta} \leq b \right] = p \\
+    P\left[ \frac{1}{b} \bar{X} \leq \theta \leq \frac{1}{a} \bar{X} \right] = p.
+  \end{gather*}
+  And so the $100p\%$ CI for $\theta$ is
+  \begin{equation*}
+    \left[ \frac{1}{b} \bar{X}, \, \frac{1}{a} \bar{X} \right].
+  \end{equation*}
+  For $n = 15, \, \sum_{i=1}^{15} x_i = 36$ (and so $\bar{x} = 36/15 = 2.4$), and to find the $95\%$ equal tail CI for $\theta$, we have that\sidenote{I used \href{https://keisan.casio.com/exec/system/1180573217}{this tool} by Casio to verify the given points.}
+  \begin{gather*}
+    P\left[ 0.559 \leq \frac{2.4}{\theta} \leq 1.566 \right] = 0.95 \\
+    P\left[ 2.4/1.566 \leq \theta \leq 2.4/0.559 \right] = 0.95.
+  \end{gather*}
+  Thus
+  \begin{gather*}
+    \left[ \frac{2.4}{1.566}, \, \frac{2.4}{0.559} \right] \\
+    \left[ 1.533, 4.293 \right]
+  \end{gather*}
+\end{solution}
+
+\begin{eg}[Example 6.20 (Course Notes 6.5.11)]
+  Suppose $X_1, ..., X_n \sim \Unif(0, \theta)$ is a random sample. Find an appropriate pivotal quantity. Determine $a$ such that
+  \begin{equation*}
+    \left[ \hat{\theta}, a \hat{\theta} \right]
+  \end{equation*}
+  is a $100p\%$ CI for $\theta$.
+\end{eg}
+
+\begin{solution}
+  Since the $X_i$'s are IID, we have that
+  \begin{align*}
+    L(\theta) &= \prod_{i=1}^{n} \frac{1}{\theta} \mathbb{1}_{\{0 \leq x_i \leq \theta\}} = \theta^{-n} \mathbb{1}_{\{0 \leq x_{(1)} \leq x_{(n)} \leq \theta\}} \\
+    \ell(\theta) &= - n \ln \theta + \ln \mathbb{1}_{\{0 \leq x_{(1)} \leq x_{(n)} \leq \theta\}}.
+  \end{align*}
+  Using a similar argument as in \cref{eg:6_11}, notice that $-n \ln \theta$ is a decreasing function, and so to get the maximum likelihood estimate, we want $\theta$ to be as close to $0$ as possible, but the closest $\theta$ can get to is $x_{(n)}$. Note that if the indicator function turns out to be $1$, then $\theta$ must also be $1$, but this does not maximize the likelihood function.
+
+  So we have $\hat{\theta} = x_{(n)}$ and $\tilde{\theta} = X_{(n)}$. Note that $\Unif(0, \theta)$ is from a scale parameter family of distributions since
+  \begin{equation*}
+    f_{X_i}(x_i) = \frac{1}{\theta} \mathbb{1}_{\{0 \leq x_i \leq \theta\}} = \frac{1}{\theta} f_{X_i}\left(\frac{x_i}{\theta}\right).
+  \end{equation*}
+  Then by \cref{propo:mle_of_a_location_scale_parameter_as_a_pivotal_quantity}, $Y = \tilde{\theta} / \theta = X_{(n)} / \theta$ is a pivotal quantity. Note, then, that we want to solve for
+  \begin{gather*}
+    P\left[ \hat{\theta} \leq \theta \leq a \hat{\theta} \right] = p \\
+    P\left[ \frac{1}{a} \leq \frac{\hat{\theta}}{\theta} \leq 1 \right] = p.
+  \end{gather*}
+  It suffices, from here, to find the CDF of $Y$:
+  \begin{align*}
+    F_Y(y) &= P(Y \leq y) = P\left( \frac{X_{(n)}}{\theta} \leq y \right) = P(X_{(n)} \leq y \theta) \\
+           &= P(X_1 \leq y \theta)^n \quad \because \text{ IID } \\
+           &= \left( \int_{0}^{y \theta} \frac{1}{\theta} \dif{x} \right)^n = y^n
+  \end{align*}
+  Thus
+  \begin{gather*}
+    F(1) - F\left(\frac{1}{a}\right) = p \\
+    1 - \left( \frac{1}{a} \right)^n = p \\
+    a = \frac{1}{\sqrt[n]{p - 1}}
+  \end{gather*}
+\end{solution}
+
+% subsection interval_estimators (end)
+
+% section estimation_continued_4 (end)
+
+% chapter lecture_21_jul_12th_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
