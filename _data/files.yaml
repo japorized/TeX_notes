@@ -88,6 +88,8 @@
   pdf:
   - title: classnotes.pdf
     src: ./STAT330S18/classnotes.pdf
+  - title: classnotes-white.pdf
+    src: ./STAT330S18/classnotes-white.pdf
   tex:
   - title: classnotes.tex
     src: ./STAT330S18/classnotes.tex
