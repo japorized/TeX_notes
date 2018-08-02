@@ -6663,7 +6663,7 @@ Since\sidenote{This is based on \cref{thm:asymptotic_distribution_of_the_ml_esti
   where $P(-z \leq Z \leq z) = p$ where $Z \sim \Nor(0, 1)$.
 \end{solution}
 
-\begin{eg}[Example 6.23 (Course Notes 6.5.15)]
+\begin{eg}[Example 6.23 (Course Notes 6.5.15)]\label{eg:6_23}
   Suppose $X_1, ... ,X_n$ is a random sample from the $\Poi(\theta)$ distribution. Show how you would construct an asymptotic $100p\%$ CI for $\theta$.
 \end{eg}
 
@@ -6706,7 +6706,7 @@ Since\sidenote{This is based on \cref{thm:asymptotic_distribution_of_the_ml_esti
 \end{defn}
 
 \begin{note}
-  Recall the 3rd property from \cref{thm:asymptotic_distribution_of_the_ml_estimator}} that\marginnote{The amount of things built on this shady theorem is insane...}
+  Recall the 3rd property from \cref{thm:asymptotic_distribution_of_the_ml_estimator} that\marginnote{The amount of things built on this shady theorem is insane...}
   \begin{equation*}
     -2 \log R(\theta; X) \convd W \sim \chi^2(1).
   \end{equation*}
@@ -6750,6 +6750,332 @@ Since\sidenote{This is based on \cref{thm:asymptotic_distribution_of_the_ml_esti
 % section estimate_continued_5 (end)
 
 % chapter lecture_22_jul_17th_2018 (end)
+
+\chapter{Lecture 23 Jul 19th 2018}%
+\label{chp:lecture_23_jul_19th_2018}
+% chapter lecture_23_jul_19th_2018
+
+\section{Hypothesis Testing}%
+\label{sec:hypothesis_testing}
+% section hypothesis_testing
+
+\subsection{Introduction}%
+\label{sub:introduction}
+% subsection introduction
+
+\begin{defn}[Hypothesis]\index{Hypothesis}
+\label{defn:hypothesis}
+  In inferential statistics, given a model $f(x; \theta)$, where $\theta = (\theta_1 \; \hdots \theta_n)^T \in \Omega$, and $\Omega$ is a parameter space, a \hlnoteb{hypothesis} is a general statement about the parameters for the model, denoted by
+  \begin{equation*}
+    H : \theta \in \Omega_0 \subseteq \Omega.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Null Hypothesis and Alternative Hypothesis]\index{Null Hypothesis}\index{Alternative Hypothesis}
+\label{defn:null_hypothesis_and_alternative_hypothesis}
+  A \hlnoteb{null hypothesis} is a hypothesis of which its default position is that there is no relationship between the two phenomena measured by the model $f(x; \theta)$. We usually denote the null hypothesis by
+  \begin{equation*}
+    H_0 : \theta \in \Omega_0.
+  \end{equation*}
+  The \hlnoteb{alternative hypothesis} is the other case of the null hypothesis; it is a hypothesis that states that there is a relationship between the two phenomena measured by the model $f(x; \theta)$. We usually denote the alternative hypothesis as
+  \begin{equation*}
+    H_a : \theta \notin \Omega_0.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Test of Hypothesis]\index{Test of Hypothesis}
+\label{defn:test_of_hypothesis}
+  A \hlnoteb{test of hypothesis} is a proedure for evaluating the strength of the evidence provided by the data against the null hypothesis.
+\end{defn}
+
+To measure the evidence against $H_0$ based on the observed data, we use a test statistic or a discrepancy measure.
+
+\begin{defn}[Test Statistic]\index{Test Statistic}
+\label{defn:test_statistic}
+  A \hlnoteb{test statistic} is a \hyperref[defn:statistic]{statistic} that is used for measuring the evidence against $H_0$ using the observed data.
+\end{defn}
+
+\begin{note}
+  \begin{enumerate}
+    \item A small observed value of the test statistic shows close agreement between the observed data and the null hypothesis; while
+    \item A large observed value of the test statistic shows poor agreement. 
+  \end{enumerate}
+\end{note}
+
+\begin{defn}[Significance Level and $p$-Values]\index{Significance Level}\index{$p$-Value}
+\label{defn:significance_level_and_p_values}
+  Assuming that $H_0$ is true, we compute the probability of observing a value of the test statistic being greater than or equal to the actual observed value. This probability is called the \hlnoteb{significance level} or \hlnoteb{$p$-value} of the data in relation with the null hypothesis.
+\end{defn}
+
+\begin{note}
+  The $p$-value is the probability of observing a poor agreement between the null hypothesis and the data.
+  \begin{itemize}
+    \item A small $p$-value indicates that the probability that our observed test statistic occurs under the null hypothesis is low, i.e. an \hlnotec{evidence against the null hypothesis};
+    \item A large $p$-value indicates that the probability that our observed test statistic occurs under the null hypothesis is high, i.e. we have \hlnotec{little evidence against the null hypothesis}.
+  \end{itemize}
+  This also means that the smaller the $p$-value, the stronger the evidence against the null hypothesis.
+\end{note}
+
+There are two types of errors that we may run into while performing hypothesis testing:
+
+\begin{defn}[Type I and Type II Errors]\index{Type I Error}\index{Type II Error}
+\label{defn:type_i_and_type_ii_errors}
+  A \hlnoteb{Type I Error} is the case where we reject a true null hypothesis. A \hlnoteb{Type II Error} is the case where we fail to reject a false null hypothesis.
+
+  \begin{tabular}{r | c | c}
+                          & $H_0 : \theta \in \Omega_0$ & $H_a : \theta \notin \Omega_0$ \\
+    \hline
+    Reject $H_0$          & \hlnoteb{Type I Error}      & \faCheck \enspace (True Negatives) \\
+    Fail to Reject $H_0$  & \faCheck \enspace (True Positives)   & \hlnoteb{Type II Error}
+  \end{tabular}
+\end{defn}
+
+\begin{note}
+  The common practice is to reduce the occurrence of a Type I Error. It is analogous to the \hlnotea{Presumption of Innocence}, where the ``null hypothesis'' is ``correct until proven wrong''. In other words, the goal of this practice is to reduce the occurrence of \hlnoteb{false positives}.
+\end{note}
+
+\begin{eg}[Example 7.11 (Course Notes 7.1.1)]\label{eg:7_1}
+  Suppose $X_1, ..., X_n \sim \Nor\left(\mu, \sigma^2\right)$ is a random sample, where $\sigma^2$ is known. Suppose $n = 25, \, \sigma = 1, \, \bar{x} = 0.5$, and $\mu_0 = 0$. Perform a test of hypothesis on the null hypothesis $H_0 : \mu = \mu_0$ and state the conclusion.
+\end{eg}
+
+\begin{solution}
+  By the CLT, we have
+  \begin{equation*}
+    Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \sim \Nor(0, 1)
+  \end{equation*}
+  which contains all the parameters of our interest and is a statistic\sidenote{Note that it is also a pivotal quantity.}. We shall use this as a test statistic. Under $H_0$, we have $\mu = \mu_0$, i.e.
+  \begin{equation*}
+    \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}} \sim \Nor(0, 1).
+  \end{equation*}
+  Then, the observed test statistic is
+  \begin{equation*}
+    z_0 = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} = \frac{0.5 - 0}{1 / \sqrt{25}} = 2.5,
+  \end{equation*}
+  and so the $p$-value is
+  \begin{equation*}
+    p = 2P(Z \geq 2.5) \approx 0.01241923
+  \end{equation*}
+  by the $Z$-table. Therefore, we observe that the $p$-value is small, and so we have evidence against the null hypothesis $H_0 : \mu_0 = 0$.
+\end{solution}
+
+% subsection introduction (end)
+
+\subsection{Likelihood Ratio Tests for Simple Hypothesis}%
+\label{sub:likelihood_ratio_tests_for_simple_hypothesis}
+% subsection likelihood_ratio_tests_for_simple_hypothesis
+
+\begin{defn}[Simple Hypothesis]\index{Simple Hypothesis}
+\label{defn:simple_hypothesis}
+  Suppose $X_1, ..., X_n$ is a random sample from $f(x; \theta)$, where $\theta = (\theta_1 \; \hdots \; \theta_k)^T$. Suppose we wish to test $H : \theta = \theta_0$, where $\theta_0$ is a completely known $k \times 1$ vector. This hypothesis is called a \hlnoteb{simple hypothesis}, which specifies the values of all unknown parameters in the mode.
+\end{defn}
+
+\begin{defn}[Likelihood Ratio Statistic]\index{Likelihood Ratio Statistic}
+\label{defn:likelihood_ratio_statistic}
+The \hlnoteb{likelihood ratio} (LR) \hlnoteb{statistic} is defined as
+\begin{equation*}
+  \Lambda(\theta_0) = -2 \ln R(\theta_0; X) = -2 \ln \left[ \frac{L(\theta_0; X)}{L(\tilde{\theta}; X)} \right] = 2 \left[ \ell(\tilde{\theta}; X) - \ell(\theta_0; X) \right] \; ,
+\end{equation*}
+where $X = (X_1, ..., X_n)$ are the data and $\tilde{\theta} = \tilde{\theta}(X_1, ..., X_n)$ is the ML estimator of $\theta$. The observed likelihood ratio statistic is thus
+\begin{equation*}
+  \lambda(\theta_0) = - 2 \ln R(\theta_0; x)
+\end{equation*}
+where $x = (x_1, ..., x_n)$.
+\end{defn}
+
+Assuming $H_0$ is true, under \hlwarn{certain regularity conditions}\sidenote{This probably involves, once again, the very shady theorem \cref{thm:asymptotic_distribution_of_the_ml_estimator} with the mysterious ``regularity conditions''...}, we have
+\begin{equation*}
+  \Lambda(\theta_0) = -2 \ln R(\theta_0, X) \convd W \sim \chi^2(k).
+\end{equation*}
+where $k$ is the number of parameters under the general hypothesis minus the number of parameters under $H_0$. Thus an approximate $p$-value is given by
+\begin{equation*}
+  p \approx P\left(W \geq -2 \ln R(\theta_0; x)]\right),
+\end{equation*}
+where $x = (x_1, ..., x_n)$ is the observed data.
+
+\begin{eg}[Example 7.2 (Course Notes 7.2.1)]
+  Continuing with \cref{eg:7_1}, find the LR statistic and compare it to the test statistic used in the example.
+\end{eg}
+
+\begin{solution}
+  Let $H_0 : \mu = \mu_0$ and $H_a : \mu \neq \mu_0$. We need the MLE of $\mu$. Since the $X_i$'s forms a random sample, we have
+  \begin{gather*}
+    L(\mu) = \prod_{i=1}^{n} \frac{1}{\sqrt{2 \pi \sigma^2}} e^{-\frac{(x_i - \mu)^2}{2 \sigma^2}} = (2 \pi)^{-\frac{n}{2}} \sigma^{-n} \exp\left\{ - \frac{1}{2 \sigma^2} \sum_{i=1}^{n} (x_i - \mu)^2 \right\} \\
+    \ell(\mu) = - \frac{n}{2} \ln (2 \pi) - n \ln \sigma - \frac{1}{2 \sigma^2} \sum_{i=1}^{n} (x_i - \mu)^2 \\
+    \frac{d \ell}{d \mu} = \frac{1}{\sigma^2} \sum_{i=1}^{n} (x_i - \mu) = \frac{1}{\sigma^2} ( \sum_{i=1}^{n} x_i - n \mu ) \\
+    \frac{d^2 \ell}{d \mu^2} = - \frac{n}{\sigma^2} < 0
+  \end{gather*}
+  and so the ML estimate for $\mu$ is
+  \begin{equation*}
+    \hat{\mu} = \frac{1}{n} \sum_{i=1}^{n} x_i = \bar{x}.
+  \end{equation*}
+  Thus the likelihood ratio statistic is
+  \begin{align*}
+    \Lambda(\mu_0) &= -2 \ln R(\mu_0, X) = 2 [ \ell(\tilde{\mu}; X) - \ell(\mu_0; X) ] \\
+                   &= \frac{1}{\sigma^2} \left( \sum_{i=1}^{n} (X_i - \mu_0)^2 - \sum_{i=1}^{n} (X_i - \tilde{\mu})^2 \right) \\
+                   &= \frac{n}{\sigma^2} \left[ 2\bar{x}(\tilde{\mu} - \mu_0) + \mu_0^2 - \tilde{\mu}^2 \right]
+  \end{align*}
+  By our argument before this example, we have that
+  \begin{align*}
+    k &= \text{ number of unknown parameters } \\
+      &\qquad- \text{ number of unknown parameters under } H_0 \\
+      &= 1 - 0 = 1.
+  \end{align*}
+  Thus
+  \begin{equation*}
+    \Lambda(\theta_0) \convd W \sim \chi^2(1).
+  \end{equation*}
+  The observed likelihood ratio statistic is
+  \begin{align*}
+    \lambda(\mu_0) &= \frac{n}{\sigma^2} [ 2 \bar{x}( \bar{x} - \mu_0 ) + \mu_0^2 - \bar{x}^2 ] = \frac{n ( \bar{x}^2 - 2 \mu_0 \bar{x} + \mu_0^2 )}{\sigma^2} \\
+                   &= \frac{n (\bar{x} - \mu_0)^2}{\sigma^2}.
+  \end{align*}
+  The $p$-value is therefore
+  \begin{equation*}
+    p \approx P(W \geq \lambda(\mu_0)) = P\left(W \geq \frac{n (\bar{x} - \mu_0)^2}{\sigma^2}\right).
+  \end{equation*}
+  Using the values given in \cref{eg:7_1}, we have
+  \begin{equation*}
+    p \approx P(W \geq 6.25) \approx 0.01241923,
+  \end{equation*}
+  where our value is obtained by the R code:
+  \begin{lstlisting}
+    1 - pchisq(6.25, 1)
+  \end{lstlisting}
+  We can now conclude that the two tests are similar.
+\end{solution}
+
+\begin{eg}[Example 7.3 (Course Notes 7.2.4)]
+  Suppose $X_1, ..., X_n$ is a random sample from the $\Poi(\theta)$ distribution. Find the LR statistic for testing $H : \theta = \theta_0$. Another test statistic which could be used is
+  \begin{equation*}
+    T = \frac{\abs{\bar{X} - \theta_0}}{\sqrt{\theta_0 / n}}.
+  \end{equation*}
+  What is the approximate distribution of
+  \begin{equation*}
+    \frac{\bar{X} - \theta_0}{\sqrt{\theta_0 / n}}
+  \end{equation*}
+  for large $n$ if $H_0$ is true, and how could you use this to find an approximate $p$-value?
+\end{eg}
+
+\begin{solution}
+  Let $H_0 : \theta \in \Omega_0$ and $H_a : \theta \notin \Omega_0$. By \cref{eg:6_23}, we have that $\hat{\theta} = \bar{x}$, and the log-likelihood is
+  \begin{equation*}
+    \ell(\theta) = -n\theta + \left( \sum_{i=1}^{n} x_i \right) \ln \theta - \sum_{i=1}^{n} \ln x_i! \; .
+  \end{equation*}
+  Thus the likelihood ratio statistic is
+  \begin{equation*}
+    \Lambda(\theta_0) = 2[ n\bar{X} \ln \tilde{\theta} - n \bar{X} \ln \theta_0 ] = 2n\bar{X} \ln \left( \frac{\tilde{\theta}}{\theta_0} \right)
+  \end{equation*}
+  and so the observed likelihood ratio statistic is
+  \begin{equation*}
+    \lambda(\theta_0) = 2n \bar{x} \ln \left( \frac{\bar{x}}{\theta_0} \right).
+  \end{equation*}
+  Thus the $p$-value under the assumption of $H_0$ is
+  \begin{equation*}
+    p \approx P(W \geq \lambda(\theta_0)).
+  \end{equation*}
+  On the other hand, by the CLT, we have that
+  \begin{equation*}
+    \frac{\bar{X} - \theta_0}{\sqrt[\theta_0 / n]} \convd Z \sim \Nor(0, 1), \end{equation*}
+  which then the $p$-value under this method is
+  \begin{equation*}
+    p \approx 2 P\left(Z \geq \abs{\frac{\bar{x} - \theta_0}{\sqrt{\theta_0 / n}}}\right).
+  \end{equation*}
+  However, it is not necessary that
+  \begin{equation*}
+    P(W \geq \lambda(\theta_0)) = 2 P\left(Z \geq \abs{\frac{\bar{x} - \theta_0}{\sqrt{\theta_0 / n}}}\right)
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Example 7.4 (Course Notes 7.2.6)]
+  The following table gives the observed frequencies of the six faces in $100$ rolls of a die:
+
+  \begin{center}
+  \begin{tabular}{r | c | c | c | c | c | c | c}
+  Face: $i$   & 1  & 2  & 3  & 4  & 5  & 6  & Total \\
+  \hline
+  Freq: $f_i$ & 16 & 15 & 14 & 20 & 22 & 13 & 100
+  \end{tabular}
+  \end{center}
+
+  Are these observations consistent with the hypothesis that the die is fair?
+\end{eg}
+
+\begin{solution}
+  Let $\theta_i$ be the probability that we get face $i$, and let
+  \begin{gather*}
+    H_0 : \theta_1 = \theta_2 = \hdots = \theta_6 = \frac{1}{6} \\
+    H_a : \text{ at least one of the } \theta_i \neq \theta_j \text{ for } i \neq j, \, 0 \leq i, j \leq 6
+  \end{gather*}
+  Note that the above experiment is of a multinomial model. Let $\theta = (\theta_1, ..., \theta_6)$. Thus we have
+  \begin{equation*}
+    L(\theta) = \frac{100!}{\prod_{i=1}^{6} x_i!} \theta_1^{x_1} \theta_2^{x_2} \hdots \theta_6^{x_6}.
+  \end{equation*}
+  With the constraint that $\sum_{i=1}^{6} \theta_i = 1$, we can use Lagrange's Multiplier\sidenote{A step of that can be found here: \href{https://math.stackexchange.com/questions/421105/maximum-likelihood-estimator-of-parameters-of-multinomial-distribution\#421838}{MathSE}.} to find that
+  \begin{equation*}
+    \hat{\theta}_i = \frac{x_i}{100}.
+  \end{equation*}
+  Then the likelihood ratio statistic is
+  \begin{align*}
+    \Lambda(\theta_0) &= -2 \ln \left[ \frac{L(\theta_0)}{L(\hat{\theta})} \right] = -2 \ln \left[ \frac{ \prod_{i=1}^{6} (\frac{1}{6})^{ X_i }}{\prod_{i=1}^{6} (\frac{X_i}{100})^{X_i}} \right] \\
+                      &= 2 \sum_{i=1}^{6} X_i \ln \frac{6 X_i}{100} \convd W \sim \chi^2(5)
+  \end{align*}
+  where $\hat{\theta} = (\hat{\theta}_1, ..., \hat{\theta_6})$, and the degree of freedom is because $\theta_6 = 1 - \sum_{i=1}^{5} \theta_i$. The observed likelihood ratio statistic is
+  \begin{align*}
+    \lambda(\theta_0) &= 2 \sum_{i=1}^{6} x_i \ln \frac{6x_i}{100} \\
+      &= -1.3063 - 3.1608 - 4.8819 + 7.2929 + 12.2158 - 6.4600 \\
+      &= 3.6997 \; .
+  \end{align*}
+  And so the $p$-value, by
+  \begin{lstlisting}
+    pchisq(3.6997, 5, lower.tail=FALSE)
+  \end{lstlisting}
+  is
+  \begin{align*}
+    p &\approx P(W \geq 3.6997) \approx 0.5934.
+  \end{align*}
+  This shows that we do not have sufficient evidence to reject $H_0$, i.e. we have a fair die.
+\end{solution}
+
+\begin{eg}[Example 7.5]
+  Suppose $X_1, ..., X_n \sim \Nor\left(\mu_0, \sigma^2\right)$ is a random sample. Test the hypothesis $H_0 : \sigma^2 = \sigma_0^2$, where the mean $\mu_0$ is known.
+\end{eg}
+
+\begin{solution}
+  Let $H_a : \sigma^2 \neq \sigma_0^2$. Since the $X_i$'s are IID, we have
+  \begin{gather*}
+    L(\theta) = \prod_{i=1}^{n} \frac{1}{\sqrt{2 \pi \sigma^2}} \exp\left\{ - \frac{(x_i - \mu_0)^2}{2 \sigma^2} \right\} \\
+    = (2 \pi)^{- \frac{n}{2}} (\sigma^2)^{-\frac{n}{2}} \exp\left\{ - \frac{1}{2 \sigma^2} \sum_{i=1}^{n} (x_i - \mu_0)^2 \right\} \\
+    \ell(\sigma^2) = - \frac{n}{2} \ln 2 \pi - \frac{n}{2} \sigma^2 - \frac{1}{2 \sigma^2} \sum_{i=1}^{n} (x_i - \mu_0)^2 \\
+    \frac{d \ell}{d \sigma^2} = - \frac{n}{2 \sigma^2} + \frac{1}{2 \sigma^4} \sum_{i=1}^{n} (x_i - \mu_0)^2 \\
+    \implies \hat{\sigma} = \frac{1}{n} \sum_{i=1}^{n} (x_i - \mu_0)^2 \\
+    \frac{d^2 \ell}{d\left( \sigma^2 \right)^2} = \frac{n}{2 \sigma^4} - \frac{1}{\sigma^6} \sum_{i=1}^{n} (x_i - \mu_0)^2 \\
+    \frac{d^2 \ell}{d\left( \sigma^2 \right)^2} \at{\sigma^2 = \hat{\sigma}^2}{} = \frac{n^3}{\left( \sum\limits_{i=1}^{n} (x_i - \mu_0)^2 \right)^2} ( \frac{1}{2} - n^3 ) < 0
+  \end{gather*}
+  Then, under the null hypothesis, note that
+  \begin{align*}
+    R(\sigma^2) &= \frac{L(\sigma_0^2)}{L(\tilde{\sigma}^2)} = \frac{\left( \sigma_0^2 \right)^{-\frac{n}{2}}}{\left( \tilde{\sigma}^2 \right)^{-\frac{n}{2}}} \exp\left\{ \left( \frac{1}{2 \tilde{\sigma}^2} - \frac{1}{2 \sigma_0^2} \right) \sum_{i=1}^{n} (X_i - \mu_0)^2 \right\} \\
+                &= \left( \frac{\tilde{\sigma}^2}{\sigma_0^2} \right)^{\frac{n}{2}} \exp\left\{ \frac{n}{2} \left( 1 - \frac{\tilde{\sigma}^2}{\sigma_0^2} \right) \right\}
+  \end{align*}
+  and thus
+  \begin{align*}
+    \Lambda(\sigma_0^2) &= -2\ln R(\sigma_0^2) = - n \ln \left( \frac{\tilde{\sigma}^2}{\sigma_0^2} \right) - n \left(1 - \frac{\tilde{\sigma}^2}{\sigma_0^2}\right) \\
+                        &= n \left[ \frac{\tilde{\sigma}^2}{\sigma_0^2} - 1 - \ln \left( \frac{\tilde{\sigma}^2}{\sigma_0^2} \right) \right] \convd W \sim \chi^2(1).
+  \end{align*}
+  The observed likelihood ratio statistic is therefore
+  \begin{equation*}
+    \lambda(\sigma_0^2) = n \left[ \frac{\hat{\sigma}^2}{\sigma_0^2} - 1 - \ln \left( \frac{\hat{\sigma}^2}{\sigma_0^2} \right) \right].
+  \end{equation*}
+  Then the $p$-value can be obtained by evaluating
+  \begin{equation*}
+    p \approx P\left(W \geq n \left[ \frac{\hat{\sigma}^2}{\sigma_0^2} - 1 - \ln \left( \frac{\hat{\sigma}^2}{\sigma_0^2} \right) \right]\right)
+  \end{equation*}
+\end{solution}
+
+% subsection likelihood_ratio_tests_for_simple_hypothesis (end)
+
+% section hypothesis_testing (end)
+
+% chapter lecture_23_jul_19th_2018 (end)
 
 \nobibliography*
 \bibliography{bibliography}
