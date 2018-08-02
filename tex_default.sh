@@ -1,4 +1,3 @@
-% Document Head
 \documentclass[notoc,notitlepage]{tufte-book}
 % \nonstopmode % uncomment to enable nonstopmode
 \setcounter{secnumdepth}{3}

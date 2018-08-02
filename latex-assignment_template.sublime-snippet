@@ -2,16 +2,7 @@
 	<content><![CDATA[
 % Document Head
 \documentclass[11pt, oneside]{book}
-\input{latex-classnotes-preamble.tex}
-\usepackage[most]{tcolorbox}
-
-\hypersetup{
-  colorlinks,
-  linkcolor=black
-}
-
-\pagecolor{white}
-\color{black}
+\input{latex-assignments-preamble.tex}
 
 % Main Body
 \title{${1:Title}}
