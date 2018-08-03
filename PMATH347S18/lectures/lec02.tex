@@ -97,7 +97,11 @@ $\therefore \forall \sigma, \tau \in S_n, \; \sigma \tau, \tau \sigma \in S_n$, 
   \end{solution}
 \end{eg}
 
-Perhaps what is interesting is the question of: \textbf{when does commutativity occur?} One such case is when $\sigma$ and $\tau$ have support sets that are disjoint\sidenote{This is proven in A1}.
+Perhaps what is interesting is the question of: \textbf{when does commutativity occur?} One such case is when $\sigma$ and $\tau$ have support sets\sidenote{Defined as
+\begin{equation*}
+  \supp(\sigma) = \{ x \in (1, 2, ..., n) : \sigma(x) \neq x \}
+\end{equation*}
+} that are disjoint\sidenote{This is proven in A1}.
 
 On the other hand, the associative property holds\sidenote{
   \begin{ex}
@@ -220,12 +224,61 @@ It is interesting to note that the cycles can rotate their ``elements'' in a \hl
 \begin{gather*}
   \begin{pmatrix} 1 & 3 & 7 & 2 \end{pmatrix} = \begin{pmatrix} 7 & 2 & 1 & 3 \end{pmatrix} \neq \begin{pmatrix} 1 & 2 & 7 & 3 \end{pmatrix}.
 \end{gather*}
-Although the decomposition of the cycle notation is not unique (i.e. you may rearrange them), each individual cycle is unique, and is proven below\sidenote{See bonus question of A1. Proof will be included in the notes once the assignment is over.}.
+Although the decomposition of the cycle notation is not unique (i.e. you may rearrange them), each individual cycle is unique, and is proven below.
 
 \begin{thm}[Cycle Decomposition Theorem]\label{thm:cycle_decomposition_theorem}
 \index{Cycle Decomposition Theorem}
   If $\sigma \in S_n$, $\sigma \neq \epsilon$, then $\sigma$ is a product of (one or more) disjoint cycles of length at least $2$. This factorization is unique up to the order of the factors.
 \end{thm}
+
+\begin{proof}
+  Since $\sigma \in S_n$, we may write $\sigma$ as
+  \begin{equation*}
+    \sigma = \begin{pmatrix}
+      1   & 2   & 3   & \hdots & n - 2     & n - 1     & n \\
+      a_1 & a_2 & a_3 & \hdots & a_{n - 2} & a_{n - 1} & a_n
+    \end{pmatrix}
+  \end{equation*}
+  where for $1 \leq i \leq n$, $\sigma(i) = a_i$, $1 \leq a_i \leq n$, for $1 \leq j \leq n$ with $j \neq i$, $a_i \neq a_j$.
+
+  Since $\sigma \neq \epsilon$, then $\exists k \in \mathbb{N}$, where $1 \leq k \leq n$, such that $\sigma (k) \neq l$ for some $l \in \mathbb{N}$, where $1 \leq l \leq n$ and $l \neq k$. If $\sigma(l) = k$, then we would have the cycle $\begin{pmatrix} k & l \end{pmatrix}$, which has length $2$. Consequently, if $\forall j \in \mathbb{N}$, with $1 \leq j \leq n$ and $j \neq k, l$, we have $\sigma(j) = j$, then we may express $\sigma$ simply as
+  \begin{equation*}
+    \sigma = \begin{pmatrix} k & l \end{pmatrix}.
+  \end{equation*}
+  Otherwise, if there is a $j \in \mathbb{N}$, $1 \leq j \leq n$ and $j \neq k, l$, such that $\sigma(j) = i$ for some $i \in \mathbb{N}$, with $1 \leq i \leq n$ and $i \neq j, k, l$. Then, at the very least, we would have that $\sigma$ can be written as
+  \begin{equation*}
+    \sigma = \begin{pmatrix} k & l \end{pmatrix} \begin{pmatrix} j & i & \hdots \end{pmatrix}
+  \end{equation*}
+  Now if for $2 \leq m \leq n - 3$, if $\sigma^m (j) \neq j$, then the above cyclic decomposition is complete. Otherwise, if for some $m < n$, $\sigma^m(j) = j$, then
+  \begin{equation*}
+    \sigma = \begin{pmatrix} k & l \end{pmatrix} \begin{pmatrix} j & i & \sigma^2(j) & \hdots & \sigma^{m - 1}(j) \end{pmatrix} \tau
+  \end{equation*}
+  where $\tau$ is the remaining cyclic decompositions which can be constructed using the same argument for $j$. Similarly, if $\sigma(l) \neq k$, then the first cycle would be ``longer''. Therefore, we observe that for any $\sigma \in S_n$, we have that $sigma$ must be a product of at least one disjoint cycle of length at least $2$.
+
+  Now note that
+  \begin{align}
+    &\begin{pmatrix} k & \sigma(k) & \sigma^2(k) & \hdots & \sigma^m(k) \end{pmatrix} \nonumber \\
+    &= \begin{pmatrix} \sigma(k) & \sigma^2(k) & \hdots & \sigma^m(k) & k \end{pmatrix} \nonumber \\
+    &= \begin{pmatrix} \sigma^2(k) & \sigma^3(k) & \hdots & k & \sigma(k) \end{pmatrix} \tag{$\dagger$}\label{eq:qb_1}\\
+    &\qquad \vdots \nonumber \\
+    &= \begin{pmatrix} \sigma^m(k) & k & \sigma(k) & \hdots & \sigma^{m-1}(k) \end{pmatrix} \nonumber
+  \end{align}
+  for some $k \in \{1, n\} \subseteq \mathbb{N}$ and $m \in \{1, n - 1\} \subseteq \mathbb{N}$. For example,
+  \begin{equation*}
+    \begin{pmatrix} 1 & 2 & 3 \end{pmatrix} = \begin{pmatrix} 2 & 3 & 1 \end{pmatrix},
+  \end{equation*}
+  but
+  \begin{equation*}
+    \begin{pmatrix} 1 & 2 & 3 \end{pmatrix} \neq \begin{pmatrix} 2 & 1 & 3 \end{pmatrix}.
+  \end{equation*}
+  Suppose that $\exists m, l \in \mathbb{N}$ such that $\sigma$ can be expressed as
+  \begin{gather*}
+    \sigma = \alpha_1 \alpha_2 \hdots \alpha_m \quad \text{and} \\
+    \sigma = \beta_1 \beta_2 \hdots \beta_l
+  \end{gather*}
+  where $\alpha_i$ and $\beta_i$ are cycles and factors of $\sigma$ (note that we will enforce the convention of dropping the 1-cycle). Then by \cref{eq:qb_1},  there must be some $1 \leq i \leq m$ and $1 \leq j \leq l$ such that $\alpha_i = \beta_j$. Otherwise, there would be a case such that $\sigma(k) = a_i$ for some $a_i \in \{1, n\}$, where $a_i$ is not in the cycle that $k$ belongs to. We can keep applying this argument and eventually find that it must be the case that $m = l$, and each $\alpha_i$ must be equal to some $\beta_j$. Therefore, the factorization is unique up to the order of the factors. \qed
+
+\end{proof}
 
 \begin{note}[Convention]
  Every permutation in $S_n$ can be regarded as a permutation of $S_{n + 1}$ by fixing the permutation of $n + 1$. Therefore, we have that

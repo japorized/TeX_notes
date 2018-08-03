@@ -168,8 +168,127 @@ For a finite group, defining its operation by means of a table is sometimes conv
       \end{center}
       $\therefore G \cong C_3$ (by identifying $g = a$ and $h = a^2$).
 
-    \item \hlwarn{Proof will be added once assignment 1 is over}
-  \end{enumerate}
+    \item Suppose $G$ is a group of order $4$, i.e. $\abs{G} = 4$. Then, let $G = \{1, g h, f\}$, where $1, g, h, f$ are distinct. We can then draw the following Cayley Table, wherein the blank entries will be discussed.
+
+          \begin{center}
+            \begin{tabular}{c|c|c|c|c}
+              $G$   & 1 & g & h & f \\
+              \hline
+              1     & 1 & g & h & f \\
+              g     & g &   &   &   \\
+              h     & h &   &   &   \\
+              f     & f &   &   &  
+            \end{tabular}
+          \end{center}
+
+          We know that $gh \neq h$, otherwise by Right Cancellation, we would have $g = 1$, which is not true since $1$ and $g$ are distinct elements of $G$. Thus, $gh$ is either $f$ or $1$.
+
+          \underline{Case 1: $g^2 = 1$} \\
+          If $g^2 = 1$, then $fg = h$. Otherwise, if $fg = f$, we would have $g = 1$ which is a contradiction to the fact that $1$ and $g$ are distinct. Consequently, $hg = f$. Similarly, since $gf = f$ would contradict the fact that $g \neq 1$ through Right Cancellation, we have $gh = f$ and $gf = h$. We now have the following form of the Cayley Table:
+          \begin{center}
+            \begin{tabular}{c|c|c|c|c}
+              $G$   & 1 & g & h & f \\
+              \hline
+              1     & 1 & g & h & f \\
+              g     & g & 1 & f & h \\
+              h     & h & f &   &   \\
+              f     & f & h &   &  
+            \end{tabular}
+          \end{center}
+
+          Now there are 2 options, either $h^2 = 1$ or $h^2 = g$.
+
+          \underline{Case 1-1: $h^2 = 1$} \\
+          If $h^2 = 1$, then through elimination, $hf = g$, $fh = g$ and $f^2 = 1$. We then have the following Cayley Table:
+          
+          \begin{center}
+            \begin{tabular}{c|c|c|c|c}
+              $G$   & 1 & g & h & f \\
+              \hline
+              1     & 1 & g & h & f \\
+              g     & g & 1 & f & h \\
+              h     & h & f & 1 & g \\
+              f     & f & h & g & 1
+            \end{tabular}
+          \end{center}
+
+          This is clearly the Cayley Table of the Klein $4$ group.
+
+          \underline{Case 1-2: $h^2 = g$} \\
+          If $h^2 = g$, then through elimination, $hf = 1$, $fh = 1$ and $f^2 = g$. We then have the following Cayley Table:
+
+          \begin{center}
+            \begin{tabular}{c|c|c|c|c}
+              $G$   & 1 & g & h & f \\
+              \hline
+              1     & 1 & g & h & f \\
+              g     & g & 1 & f & h \\
+              h     & h & f & g & 1 \\
+              f     & f & h & 1 & g
+            \end{tabular}
+          \end{center}
+
+          We can rearrange the elements and hence the Cayley Table to the following:
+
+          \begin{center}
+            \begin{tabular}{c|c|c|c|c}
+              $G$   & 1 & f & g & h \\
+              \hline
+              1     & 1 & f & g & h \\
+              f     & f & g & h & 1 \\
+              g     & g & h & 1 & f \\
+              h     & h & 1 & f & g
+            \end{tabular}
+          \end{center}
+
+          which is the Cayley Table of $C_4$.
+
+          Now note that the following case will cover for 2 cases, i.e. $g^2 = h$ and $g^2 = f$, since we can proceed with the argument without loss of generality.
+
+          \underline{Case 2: $g^2 = f$} \\
+          If $g^2 = f$, we have that $hg = 1$, since we can only have distinct elements in a column and in a row. Consequently, we have $fg = h$. Similarly, we must have that $gh = 1$ and consequently $gf = h$. Thus we have the following Cayley Table:
+
+          \begin{center}
+            \begin{tabular}{c|c|c|c|c}
+              $G$   & 1 & g & h & f \\
+              \hline
+              1     & 1 & g & h & f \\
+              g     & g & f & 1 & h \\
+              h     & h & 1 &   &   \\
+              f     & f & h &   &  
+            \end{tabular}
+          \end{center}
+
+          Note that $h^2 \neq g$, because we would then have $fh = f$, which would imply $h = 1$ through Left Cancellation, a contradiction to the fact that $h \neq 1$. Thus $h^2 = g$. Again, since we can only have distinct elements in a row (and a column), we will end up with the following Cayley Table:
+
+          \begin{center}
+            \begin{tabular}{c|c|c|c|c}
+              $G$   & 1 & g & h & f \\
+              \hline
+              1     & 1 & g & h & f \\
+              g     & g & f & 1 & h \\
+              h     & h & 1 & f & g \\
+              f     & f & h & g & 1
+            \end{tabular}
+          \end{center}
+
+          We can rearrange the elements to get the following Cayley Table:
+
+          \begin{center}
+            \begin{tabular}{c|c|c|c|c}
+              $G$   & 1 & h & f & g \\
+              \hline
+              1     & 1 & h & f & g \\
+              h     & h & f & g & 1 \\
+              f     & f & g & 1 & h \\
+              g     & g & 1 & h & f
+            \end{tabular}
+          \end{center}
+
+          in which we observe is the Cayley Table for $C_4$.
+
+          Since we have explored all the possibilities, we have that the only possible groups of order $4$ is the cyclic group $C_4$ and the Klein $4$ group $K_4$.
+  \end{enumerate}\qed
 \end{proof}
 
 % subsection cayley_tables (end)

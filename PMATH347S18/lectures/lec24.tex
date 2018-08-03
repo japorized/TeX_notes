@@ -185,12 +185,83 @@ An analogous notion in rings is the following:
 \begin{eg}
   Consider the ring of \hldefn{Gaussian Integers},
   \begin{equation*}
-    \mathbb{Z}[i] = \{a + bi : a, b \in \mathbb{Z}, \, i^2 = -1 \} \subseteq \mathbb{C}.
+    \mathbb{Z}[i] = \{a + bi : a, b \in \mathbb{Z}, \, i^2 = -1 \} \leq \mathbb{C}.
   \end{equation*}
-  Then\sidenote{\hlwarn{Proof to be added once A4 is over.}}
+  Then
   \begin{equation*}
-    \mathbb{Z}[i]^* = \{ \pm 1, \pm i \}.
+    \mathbb{Z}[i]^* = \{ \pm 1, \pm i \} \leq \mathbb{C}.
   \end{equation*}
+
+  \begin{proof}
+    \textbf{$\mathbb{Z}[i] \leq \mathbb{C}$} : \\
+    Note that $1 = 1 + 0 \cdot i \in \mathbb{Z}[i]$. $\forall x, y \in \mathbb{Z}[i]$, write
+    \begin{equation*}
+      x = a + bi \quad y = c + di
+    \end{equation*}
+    for some $a, b, c, d \in \mathbb{Z}$. Observe that
+    \begin{equation}\label{eq:q5_a_1}
+      xy = (a + bi)(c + di) = (ac - bd) + i (bc + ad) \in \mathbb{Z}[i]
+    \end{equation}
+    since $(ab - bd), (bc + ad) \in \mathbb{Z}$. Also, with a similar reason
+    \begin{equation*}
+      x - y = a + bi - c - di = (a - c) + i (b - d) \in \mathbb{Z}[i].
+    \end{equation*}
+    Therefore, by the Subring Test, $\mathbb{Z}[i]$ is a subring of $\mathbb{C}$.
+
+    \textbf{$\mathbb{Z}[i]^* = \left\{ \pm 1, \, \pm i \right\}$} : \\
+    In order for $x \in \mathbb{Z}[i]^*$, $x \neq 0$, to have an inverse, we must have that
+      \begin{equation*}
+        (ac - bd) + i ( bc + ad ) = 1
+      \end{equation*}
+      from \cref{eq:q5_a_1}, where we shall note that $a^2 + b^2 \neq 0$. Observe that
+      \begin{align*}
+        &( ac - bd ) + i ( bc + ad ) = 1 \\
+        &\iff \begin{pmatrix}
+            ac - bd \\ bc + ad 
+        \end{pmatrix} = \begin{pmatrix}
+              1 \\ 0
+        \end{pmatrix} \\
+        &\iff \begin{pmatrix}
+            a & -b \\ b & a
+        \end{pmatrix} \begin{pmatrix}
+          c \\ d
+        \end{pmatrix} = \begin{pmatrix}
+          1 \\ 0
+        \end{pmatrix} \\
+        &\iff \begin{pmatrix}
+          c \\ d
+        \end{pmatrix} = \frac{1}{a^2 + b^2} \begin{pmatrix}
+          1 \\ 0
+        \end{pmatrix} \begin{pmatrix}
+          a & b \\ -b & a
+        \end{pmatrix} = \frac{1}{a^2 + b^2} \begin{pmatrix}
+          a \\ -b
+        \end{pmatrix} \\
+        &\iff c + id = \frac{a}{a^2 + b^2} + i \left( \frac{-b}{a^2 + b^2} \right)
+      \end{align*}
+      Since $c, d \in \mathbb{Z}$, we must have that
+      \begin{equation*}
+        \frac{a}{a^2 + b^2}, \, \frac{-b}{a^2 + b^2} \in \mathbb{Z}.
+      \end{equation*}
+      Also, since $a^2 + b^2 > a, \, b$, we have that
+      \begin{equation*}
+        \frac{a}{a^2 + b^2}, \, \frac{-b}{a^2 + b^2} \in \mathbb{Z} \iff a^2 + b^2 = 1.
+      \end{equation*}
+      Since $a, \, b \in \mathbb{Z}$, we have that the only integer solutions to $a^2 + b^2 = 1$ are
+      \begin{equation*}
+        (1, \, 0) , \, (0, \, 1) , \, ( -1, \, 0 ) , \, (0, \, -1),
+      \end{equation*}
+      which corresponds to
+      \begin{equation*}
+        x = \pm 1, \, \pm i.
+      \end{equation*}
+      Since we began with $x$ begin an arbitrary element in $\mathbb{Z}[i]^*$, we have that
+      \begin{equation*}
+        \mathbb{Z}[i]^* = \{ \pm 1, \, \pm i \}
+      \end{equation*}
+      as required.
+    \qed
+  \end{proof}
 \end{eg}
 
 \begin{defn}[Division Ring and Field]\index{Division Ring}\index{Field}

@@ -57,8 +57,43 @@ Observe that the factorization into transpositions are \hlimpo{not unique or dis
   where each $\gamma_i$ and $\mu_j$ are transpositions, then $r \equiv s \mod 2$.
 \end{thm}
 
+\marginnote{
+  I have referred to the following source: \url{https://www.maa.org/sites/default/files/images/upload_library/4/vol1/parity/ParityJOKHistory.html}. In the literature review of the author, there are (at least) 6 approaches to proving the statement, some argued to be better or more intutive than the other. Recent proofs, as mentioned in the article, use a reduction method (or algorithm) to proof an alternate version of our statement. I intended to study the proof, but ran short on time, and so I shall present my understanding of the proof provided in Dummit and Foote's 3rd Edition of Abstract Algebra. My opinion of the proof presented in the said book is that it is not immediately intuitive and relies on subtle connections to the actual statement, which is why I looked into other sources and found the source above.
+
+  For the proof provided by Dummit and Foote, as well as in some of the other proofs that I have come across, the Parity Theorem is presented as a statement that is different from, but equivalent to, our statement here.
+}
+
 \begin{proof}
-  \hlwarn{This is the bonus question in A2. Proof shall be included after the end of the assignment.}
+  Let $x_1, x_2, ..., x_n$ be distinct variables. Let $\Delta$ be the following product:
+  \begin{equation*}
+    \Delta = \prod_{1 \leq i < j \leq n} (x_i - x_j).
+  \end{equation*}
+  For each $\sigma \in S_n$, let $\sigma$ act on $\Delta$ by permuting the indices of the variables so as to permute the variables themselves, i.e.
+  \begin{equation*}
+    \sigma( \Delta ) = \prod_{1 \leq i < j \leq n} ( x_{\sigma(i)} - x_{\sigma(j)} ).
+  \end{equation*}
+  Then for each $(x_i - x_j)$ in the product $\Delta$, after applying $\sigma$, we have that the result is either $(x_k - x_l)$ or $(x_l - x_k)$ for $1 \leq k < l \leq n$ but not both. In $\sigma(\Delta)$, for each of the factors, if we have $(x_l - x_k)$ for $1 \leq k < l \leq n$, rewrite that factor as $- (x_k - x_l)$. Now if we collect all the $(-1)$'s, we get that $\sigma(\Delta) = \pm \Delta$ depending on \textbf{whether if there is an odd or even number of factors that are of the form $(x_l - x_k)$ with $k < l$}. From here, we can use the definition of a sign of a permutation (as introduced in class on May 30th, 2018) and write the sign as
+  \begin{equation*}
+    \sign(\sigma) = \begin{cases}
+      1 & \text{if } \sigma(\Delta) = \Delta \\
+      -1 & \text{if } \sigma(\Delta) = -\Delta
+    \end{cases}.
+  \end{equation*}
+  As mentioned in class, the sign of a permutation is a homomorphism. Now for each $\sigma \in S_n$, we can express the permutation as a product of disjoint cycles. Consider the simplest case where $\sigma$ is a permutation with only one cycle. We know that we can rewrite $\sigma$ as a product of transpositions. Suppose $\sigma = \gamma_1 \gamma_2 ... \gamma_r$ for some $r > 0$, where each $\gamma_i$, $1 \leq i \leq r$, is a transposition. We then have that
+  \begin{equation*}
+    \sign(\sigma) = \sign(\gamma_1) \sign(\gamma_2) ... \sign(\gamma_r)
+  \end{equation*}
+  Note that since transpositions are odd permutations, we essentially have
+  \begin{equation*}
+    \sign(\sigma) = (-1)^r.
+  \end{equation*}
+  We have that if $\sign(\sigma) = 1$, then $r$ must be even, which coincides with our bolded argument above. Similarly, if $\sign(\sigma) = -1$, we have that $r$ must be odd. Therefore, if we have that
+  \begin{equation*}
+    \sigma = \gamma_1 \gamma_2 ... \gamma_r = \mu_1 \mu_2 ... \mu_s,
+  \end{equation*}
+  where $s > 0$ and the $\mu_j$'s, for $1 \leq j \leq s$, are transpositions, $r$ and $m$ must either be both even or both odd. In other words, $r \equiv s \mod 2$.
+  
+  For cases with more than one cycle, we can consider the individual cycles and the homomorphicity of the sign will extend our above argument for permutations that is a product of more than one disjoint cycle.\qed
 \end{proof}
 
 \begin{defn}[Odd and Even Permutations]\label{defn:odd_and_even_permutations}
