@@ -6,6 +6,7 @@
 \renewcommand{\baselinestretch}{1.1}
 \usepackage{longtable,multirow,booktabs}
 \usepackage{pgfplots}
+\usepackage{csquotes}
 
 \usepackage{classnotetitle}
 
@@ -75,10 +76,12 @@
 \tableofcontents
 
 \chapter*{\faBook \enspace List of Definitions}
+\addcontentsline{toc}{section}{List of Definitions}
 \theoremlisttype{all}
 \listtheorems{defn}
 
 \chapter*{\faPaperclip \enspace List of Theorems}
+\addcontentsline{toc}{section}{List of Theorems}
 \theoremlisttype{allname}
 \listtheorems{axiom,lemma,thm,crly,propo}
 
@@ -6151,7 +6154,7 @@ The constant matrix $I(\hat{\theta})$ is called the \hldefn{observed information
 
 \begin{thm}[Asymptotic Distribution of the ML Estimator]
 \label{thm:asymptotic_distribution_of_the_ml_estimator}
-Suppose $X = (X_1 \; \hdots \; X_n)$ be a random sample from $f(x; \theta)$. Let $\tilde{\theta}_n = \tilde{\theta}_n(X_1, ..., X_n)$ be the ML estimator of $\theta$ based on $X$. Then under \hlwarn{certain regularity conditions}\sidenote{To be investigated... The following document may hold the answer: \url{http://www2.econ.iastate.edu/classes/econ671/hallam/documents/Asymptotic_Dist.pdf}. A proof of this theorem is also given in the document.}:
+Suppose $X = (X_1 \; \hdots \; X_n)$ be a random sample from $f(x; \theta)$. Let $\tilde{\theta}_n = \tilde{\theta}_n(X_1, ..., X_n)$ be the ML estimator of $\theta$ based on $X$. Then under certain regularity conditions\sidenote{See \cref{chp:regularity_conditions}.}:
 \begin{enumerate}
   \item \hldefn{Consistency}:
     \begin{equation}\label{eq:consistency}
@@ -6169,12 +6172,42 @@ Suppose $X = (X_1 \; \hdots \; X_n)$ be a random sample from $f(x; \theta)$. Let
 \end{enumerate}
 \end{thm}
 
+For a proof of the above theorem see \textit{Casella \& Berger 2002}\cite{CasellaBerger2002}.
+
 \begin{note}
-  The above theorem implies that for sufficiently large $n$, $\hat{\theta}_n$ has, approximately, an $\Nor\left(\theta, [J(\theta)]^{-1}\right)$ distribution (using methods from \cref{propo:other_limit_theorems}). $[J(\theta)]^{-1}$ is called the \hldefn{asymptotic variance} of $\hat{\theta}_n$. Consequently, for sufficiently large $n$, we have that
+  The above theorem implies that for sufficiently large $n$, $\hat{\theta}_n$ has, approximately, an $\Nor\left(\theta, [J(\theta)]^{-1}\right)$ distribution (using methods from \\ \noindent\cref{propo:other_limit_theorems}). $[J(\theta)]^{-1}$ is called the \hldefn{asymptotic variance} of $\hat{\theta}_n$. Consequently, for sufficiently large $n$, we have that
   \begin{equation*}
-    \Var\left(\hat{\theta}_n\right) \approx [ J(\theta) ]^{-1},
+    \Var\left(\hat{\theta}_n\right) \approx [ J(\theta) ]^{-1}.
   \end{equation*}
-  where we shall note that \hlimpo{$J(\theta)$ is unknown since $\theta$ is unknown}.
+  Note that \hlimpo{$J(\theta)$ is unknown since $\theta$ is unknown}.\sidenote{Comments from here on are my own after discussion with the lecturer. The explanation here will try to stay within the syllabus.} Since $\tilde{\theta}_n \convp \theta$, by \cref{propo:other_limit_theorems}, we have $J(\tilde{\theta}_n) \convp J(\theta)$ \sidenote{This is if $J$ is continuous on both $\theta$ and $\tilde{\theta}_n$.}. Then for large $n$, we have
+  \begin{equation*}
+    \Var(\tilde{\theta}_n) \approx [ J(\theta) ]^{-1} \approx [ J(\hat{\theta}_n) ]^{-1}
+  \end{equation*}
+  and so $\tilde{\theta}_n \sim \Nor( \theta, [ J(\theta) ]^{-1} ) \approx \Nor( \theta, [J(\tilde{\theta})]^{-1} )$, and therefore we get
+  \begin{equation*}
+    [J(\tilde{\theta}_n)]^{\frac{1}{2}} (\tilde{\theta}_n - \theta) \convd Z \sim \Nor(0, 1).
+  \end{equation*}
+
+  Now, note that the definition of the information function is
+  \begin{equation*}
+    I(\theta; X) = - \sum_{i=1}^{n} \frac{d^2}{d\theta^2} \ell(\theta; X_i).
+  \end{equation*}
+  According to Geyer \cite{Geyer2007}, by the \hlnotea{Law of Large Numbers},
+  \begin{equation*}
+    \frac{1}{n} I(\tilde{\theta}) \convp \frac{1}{n} J(\theta).
+  \end{equation*}
+  Therefore, by Limit Theorems, we have
+  \begin{equation*}
+    \frac{I(\tilde{\theta})}{J(\theta)} \convp 1
+  \end{equation*}
+  Then by the \hyperref[propo:other_limit_theorems]{Continuous Mapping Theorem}, we have
+  \begin{equation*}
+    [I(\tilde{\theta})]^{\frac{1}{2}} ( \tilde{\theta} - \theta ) \convd Z \sim \Nor(0, 1).
+  \end{equation*}
+  This result implies, by Limit Theorems, that for sufficiently large $n$, we have
+  \begin{equation*}
+    \Var(\tilde{\theta}_n) \approx [ I(\hat{\theta}) ]^{-1}.
+  \end{equation*}
 \end{note}
 
 In the next section, we shall study how these results can be used to construct approximate \hlnoteb{confidence intervals} for $\theta$.
@@ -6293,7 +6326,7 @@ In the next section, we shall study how these results can be used to construct a
 % subsection asymptotic_properties_of_ml_estimators_continued
 
 \begin{eg}[Example 6.15 (Course Notes 6.4.3)]
-  Suppose $X_1, ..., X_n$ is a random sample from the $\Unif(0, \theta)$ distribution. We showed in \cref{eg:eg_where_derivatives_for_mle_fail} that $\tilde{\theta}_n = X_{(n)}$ is the ML estimator of $\theta$. Since the support of $X_i$ depends on $\theta$, \cref{thm:asymptotic_distribution_of_the_ml_estimator} does not hold\sidenote{The lecturer claimed that one of the regularity conditions is that the support of $X$ does not depend on the parameter $\theta$. Whether this is the case remains to be investigated because the ``regularity conditions'' are not introduced to the students.} Show, however, that $X_{(n)}$ is still a consistent estimator of $\theta$.
+  Suppose $X_1, ..., X_n$ is a random sample from the $\Unif(0, \theta)$ distribution. We showed in \cref{eg:eg_where_derivatives_for_mle_fail} that $\tilde{\theta}_n = X_{(n)}$ is the ML estimator of $\theta$. Since the support of $X_i$ depends on $\theta$, \cref{thm:asymptotic_distribution_of_the_ml_estimator} does not hold. Show, however, that $X_{(n)}$ is still a consistent estimator of $\theta$.
 \end{eg}
 
 \begin{solution}
@@ -6625,16 +6658,7 @@ Since\sidenote{This is based on \cref{thm:asymptotic_distribution_of_the_ml_esti
 \end{note}
 
 \begin{eg}[Example 6.22]
-  Suppose $X \sim \Bin(n, \theta)$. Show how you would construct an approximate $100p\%$ CI for $\theta$.\marginnote{
-  I am more than just confused by this example. The very first question that I need to rise here is
-  \begin{enumerate}
-    \item Are the ``regularity conditions'' satisfied?
-  \end{enumerate}
-  There is no way we can verify this given that this course does not introduce to us the regularity conditions that we should know and understand to be able to even start talking about consistency, which then allows us to use the asymptotic normality result in order to invoke \cref{propo:asymptotic_confidence_intervals}. Without all of that, half of the given solution would not even make sense.
-
-  Plus, does it make sense for the Fisher information to have $x$ in it? The Fisher information is defined as $J(\theta) = E[I(\theta; \vec{X})]$. In an earlier section, we discussed that we can take $J(\hat{\theta}) = E[ I(\hat{\theta}; \vec{X}) ]$, the observed information, which is a fixed value. What does it mean to take the expectation of a fixed value? Then it would make $J(\hat{\theta}) = I(\hat{\theta})$.
-  }
-\end{eg}
+  Suppose $X \sim \Bin(n, \theta)$. Show how you would construct an approximate $100p\%$ CI for $\theta$.\end{eg}
 
 \begin{solution}
   Since this is just a single rv, we have
@@ -6691,7 +6715,7 @@ Since\sidenote{This is based on \cref{thm:asymptotic_distribution_of_the_ml_esti
   \begin{equation*}
     J(\hat{\theta}) = \frac{n}{\bar{x}}
   \end{equation*}
-  \hlwarn{Assuming that our random sample satisfies the ``regularity conditions''}, we have that the asymptotic $100p\%$ CI for $\theta$, by \cref{propo:asymptotic_confidence_intervals}, is
+  Assuming that our random sample satisfies the regularity conditions, we have that the asymptotic $100p\%$ CI for $\theta$, by \cref{propo:asymptotic_confidence_intervals}, is
   \begin{equation*}
     \left[ \bar{x} - z \sqrt{\frac{\bar{x}}{n}}, \; \bar{x} + z \sqrt{\frac{\bar{x}}{n}} \right]
   \end{equation*}
@@ -6738,7 +6762,7 @@ Since\sidenote{This is based on \cref{thm:asymptotic_distribution_of_the_ml_esti
   \begin{equation*}
     9.2 < \theta < 10.4.
   \end{equation*}
-  Again, \hlwarn{assuming that the regularity conditions are satisfied}, by \cref{propo:asymptotic_confidence_intervals}, and the previous example, the $95\%$ CI for $\theta$ is
+  Again, assuming that the regularity conditions are satisfied, by \cref{propo:asymptotic_confidence_intervals}, and the previous example, the $95\%$ CI for $\theta$ is
   \begin{gather*}
     \left[ 9.8 - 1.96 \frac{\sqrt{980}}{100} , \, 9.8 + 1.96 \frac{\sqrt{980}}{100} \right] \\
     [ 9.186, 10.414 ]
@@ -6882,7 +6906,7 @@ where $X = (X_1, ..., X_n)$ are the data and $\tilde{\theta} = \tilde{\theta}(X_
 where $x = (x_1, ..., x_n)$.
 \end{defn}
 
-Assuming $H_0$ is true, under \hlwarn{certain regularity conditions}\sidenote{This probably involves, once again, the very shady theorem \cref{thm:asymptotic_distribution_of_the_ml_estimator} with the mysterious ``regularity conditions''...}, we have
+Assuming $H_0$ is true, under certain regularity conditions\sidenote{This probably involves \cref{thm:asymptotic_distribution_of_the_ml_estimator}}, we have
 \begin{equation*}
   \Lambda(\theta_0) = -2 \ln R(\theta_0, X) \convd W \sim \chi^2(k).
 \end{equation*}
@@ -6975,7 +6999,7 @@ where $x = (x_1, ..., x_n)$ is the observed data.
   \end{equation*}
   On the other hand, by the CLT, we have that
   \begin{equation*}
-    \frac{\bar{X} - \theta_0}{\sqrt[\theta_0 / n]} \convd Z \sim \Nor(0, 1), \end{equation*}
+    \frac{\bar{X} - \theta_0}{\sqrt{ \theta_0 / n }} \convd Z \sim \Nor(0, 1), \end{equation*}
   which then the $p$-value under this method is
   \begin{equation*}
     p \approx 2 P\left(Z \geq \abs{\frac{\bar{x} - \theta_0}{\sqrt{\theta_0 / n}}}\right).
@@ -7077,10 +7101,42 @@ where $x = (x_1, ..., x_n)$ is the observed data.
 
 % chapter lecture_23_jul_19th_2018 (end)
 
-\nobibliography*
-\bibliography{bibliography}
+\appendix
 
-\chapter{Appendix}%
+\chapter{Regularity Conditions}%
+\label{chp:regularity_conditions}
+% chapter regularity_conditions
+
+Throughout this course, the phrase ``regularity conditions'' have been regularly coined but never formally introduced. To clarify that, I have sought out for the instructor and confirmed that these are the regularity conditions that are used. This is taken out from \textit{Casella \& Berger 2002}\cite{CasellaBerger2002}.
+
+\begin{displayquote}
+  ``(R)egularity conditions'' are typically very technical, rather boring, and usually satisfied in most reasonable problems. But they are a necessary evil...
+\end{displayquote}
+
+\noindent Furthermore,
+
+\begin{displayquote}
+  These conditions mainly relate to differentiability of the density\sidenote{probability function} and the ability to interchange differentiation and integration.
+\end{displayquote}
+
+The following are the regularity conditions:
+
+\begin{enumerate}
+  \item $X_1, \, ..., \, X_n \sim f(x ; \theta)$ are IID;
+  \item The unknown parameter is \hlnotea{identifiable}, i.e. if $\theta \neq \theta'$, then $f(x ; \theta) \neq f(x; \theta')$;
+  \item The pf's $f(x; \theta)$ have common support, and $f(x; \theta)$ is differentiable in $\theta$;
+  \item The parameter space $\Omega$ contains an open set $\omega \susbet \Omega$ of which the true parameter value $\theta_0$ is an interior point\sidenote{$\omega$ is an open set, and so we can really only talk about interior points. The laymen definition of an interior point, is a point that is in a set but is not the limit point of the set.}.
+  \item $\forall x \in \supp(X)$, the pf $f(x; \theta)$ is three times differentiable with respect to $\theta$, and the third derivative is continuous on $\theta$, and $\int f(x; \theta)$ can be differentiated three times under the integral sign.
+  \item $\forall \theta_0 \in \Omega$, $\exists c \in \mathbb{R}_{> 0}$, $\exists$ a function $M(x)$ \sidenote{Note that both $c$ and $M(x)$ can depend on $\theta_0$, by the way that the statement is laid out.} such that $\forall x \in \supp(X)$,
+    \begin{equation*}
+      \abs{\theta - \theta_0} < c \implies \abs{\frac{\partial^3}{\partial \theta^3} \ln f(x; \theta)} \leq M(x)
+    \end{equation*}
+    with $E_{\theta_0}[M(X)] \leq \infty$ \sidenote{$E_{\theta_0}$ is the expected value operator that acts on the variable $\theta_0$.}
+\end{enumerate}
+
+% chapter regularity_conditions (end)
+
+\chapter{Useful References}%
 \label{chp:appendix}
 % chapter appendix
 
@@ -7155,8 +7211,11 @@ k \in \mathbb{N} & \multirow{3}{*}{$\frac{1}{2^{\frac{k}{2}} \Gamma(\frac{k}{2})
 
 % chapter appendix (end)
 
-\pagestyle{empty}
+\backmatter
+\pagestyle{plain}
 \printindex
 
+\bibliography{references}
+\bibliographystyle{plainnat}
 
 \end{document}
