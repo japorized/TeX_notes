@@ -34,7 +34,7 @@ Note that the group homomorphism $\Theta : G \to S_X$ gives an \hlimpo{equivalen
 \begin{ex}
   Verify that $G$ is indeed isomorphic to a subgroup of $S_n$ using the given information and the equivalent definition of a group action.
 \end{ex}
-}, which the equivalent statement of \hyperref[thm:cayley_s_theorem]{Cayley's Theorem}\index{Cayley's Theorem}.
+}, which is the equivalent statement of \hyperref[thm:cayley_s_theorem]{Cayley's Theorem}\index{Cayley's Theorem}.
 
 \begin{eg}\label{eg:group_action_by_conjugation}
   If $G$ is a group, let $G$ act on itself by $a \cdot x = a \cdot x \cdot a^{-1}$, for all $a, x \in G$. Note that the axioms of a group action is satisfied:
@@ -51,16 +51,16 @@ Note that the group homomorphism $\Theta : G \to S_X$ gives an \hlimpo{equivalen
   \begin{equation*}
     G \cdot x = \{g \cdot x : \forall g \in G \}
   \end{equation*}
-  the \hlnoteb{orbit} of $X$ and
+  the \hlnoteb{orbit} of $x$ and
   \begin{equation*}
     S(x) = \{g \in G : g \cdot x = x \} \subseteq G
   \end{equation*}
-  the \hlnoteb{stabilizer} of $X$.
+  the \hlnoteb{stabilizer} of $x$.
 \end{defn}
 
 \begin{propo}
 \label{propo:stabilizer_is_a_subgroup_and_index_of_stabilizer_is_order_of_orbit}
-  Let $G$ be a group acting on a set $X$ an $x \in X$. Let $G \cdot x$ and $S(x)$ be the orbit and stabilizer of $X$ respectively. Then
+  Let $G$ be a group acting on a set $X$ an $x \in X$. Let $G \cdot x$ and $S(x)$ be the orbit and stabilizer of $x$ respectively. Then
   \begin{enumerate}
     \item $S(x) \leq G$
     \item there is a bijection from $G \cdot x$ to $\{g S(x) : g \in G \}$ and thus $\abs{G \cdot x} = [G : S(x)]$.
@@ -124,7 +124,7 @@ Note that the group homomorphism $\Theta : G \to S_X$ gives an \hlimpo{equivalen
           &\iff y \in G \cdot x \\
           &\overset{(1)}{\iff} G \cdot x = G \cdot y
   \end{align*}
-  where $(1)$ is the conclusion after consider the other case where $(a^{-1}b) \cdot y = x$.
+  where $(1)$ is the conclusion after considering the other case where $(a^{-1}b) \cdot y = x$.
 
   Thus, we see that the two orbits are either disjoint or the same, but not both. It follows that the orbits form a disjoint union of $X$. Since  $x \in X_f \iff \abs{G \cdot x} = 1$, the set $X \setminus X_f$ contains all nonsingleton orbits, which are disjoint. It follows that
   \begin{equation*}
