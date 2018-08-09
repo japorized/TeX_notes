@@ -1,0 +1,748 @@
+% Style from https://stackoverflow.com/questions/1911516/how-to-make-cheat-sheets-in-latex/36768704#36768704
+\documentclass[9pt,landscape,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{tikz,pgf}
+\usepackage{pgfplots}
+\usetikzlibrary{angles,shapes,positioning,arrows,fit,calc,graphs,graphs.standard}
+\usepackage{multicol}
+\usepackage{wrapfig}
+\usepackage[top=0mm,bottom=1mm,left=0mm,right=1mm]{geometry}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{ntheorem}
+\usepackage{fontawesome}
+
+% xcolor (scheme: base16 eighties)
+\definecolor{base16-eighties-dark}{HTML}{2D2D2D}
+\definecolor{base16-eighties-light}{HTML}{D3D0C8}
+\definecolor{base16-eighties-magenta}{HTML}{CD98CD}
+\definecolor{base16-eighties-red}{HTML}{F47678}
+\definecolor{base16-eighties-yellow}{HTML}{E2B552}
+\definecolor{base16-eighties-green}{HTML}{98CD97}
+\definecolor{base16-eighties-lightblue}{HTML}{61CCCD}
+\definecolor{base16-eighties-blue}{HTML}{6498CE}
+\definecolor{base16-eighties-brown}{HTML}{D47B4E}
+\definecolor{base16-eighties-gray}{HTML}{747369}
+
+\let\bar\overline
+
+\input{math-operators.tex}
+
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}      % simplifying the writing of a floor function
+\newcommand{\ceiling}[1]{\lceil #1 \rceil}      % simplifying the writing of a ceiling function
+\newcommand{\dotp}{\, \cdotp}             % dot product to distinguish from \cdot
+\newcommand{\qed}{\hfill\ensuremath{\square}}   % Q.E.D sign
+\newcommand{\abs}[1]{\left|#1\right|}           % absolute value
+\newcommand{\at}[2]{\Big|_{#1}^{#2}}
+\newcommand{\lra}[1]{\langle \; #1 \; \rangle}
+\newcommand{\Arg}[1]{\caparg #1}
+\renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
+\newcommand{\quotient}[2]{\faktor{#1}{#2}}
+\newcommand{\cyclic}[1]{\left\langle #1 \right\rangle}
+  % highlighting shortcuts
+\newcommand{\hlimpo}[1]{\textcolor{base16-eighties-red}{#1}}
+\newcommand{\hlwarn}[1]{\textcolor{base16-eighties-yellow}{#1}}
+\newcommand{\hldefn}[1]{\textcolor{base16-eighties-magenta}{\textbf{#1}}}
+\newcommand{\hlnotea}[1]{\textcolor{base16-eighties-green}{#1}}
+\newcommand{\hlnoteb}[1]{\textcolor{base16-eighties-magenta}{\textbf{#1}}}
+\newcommand{\hlnotec}[1]{\textcolor{base16-eighties-brown}{#1}}
+\newcommand{\WTP}{\textcolor{base16-eighties-brown}{WTP}}
+\newcommand{\WTS}{\textcolor{base16-eighties-brown}{WTS}}
+\newcommand{\ind}[2]{\Ind_{#2}(#1)}
+\newcommand{\res}[2]{\underset{#2}{\Res} #1 }
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand*\dif{\mathop{}\!d}
+
+% Theorem Style Customization
+\setlength\theorempreskipamount{2ex}
+\setlength\theorempostskipamount{3ex}
+
+\makeatletter
+\let\nobreakitem\item
+\let\@nobreakitem\@item
+\patchcmd{\nobreakitem}{\@item}{\@nobreakitem}{}{}
+\patchcmd{\nobreakitem}{\@item}{\@nobreakitem}{}{}
+\patchcmd{\@nobreakitem}{\@itempenalty}{\@M}{}{}
+\patchcmd{\@xthm}{\ignorespaces}{\nobreak\ignorespaces}{}{}
+\patchcmd{\@ythm}{\ignorespaces}{\nobreak\ignorespaces}{}{}
+
+\renewtheoremstyle{empty}%
+  {\item{\theorem@headerfont
+          \theorem@separator}\labelsep\relax}%
+  {\item{\theorem@headerfont
+          ##3\theorem@separator}\labelsep\relax}
+\makeatother
+
+% ntheorem + framed
+\makeatletter
+
+\theorempreskip{10pt}
+\theorempostskip{5pt}
+\theoremstyle{empty}
+
+    % definition env
+\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
+\theoremindent5pt
+\newtheorem{defn}{Definition}
+
+\pgfplotsset{compat=1.15}
+\usepgfplotslibrary{fillbetween}
+\pgfplotsset{four quads/.append style={axis x line=middle, axis y line=
+middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
+\pgfplotsset{four quad complex/.append style={axis x line=middle, axis y line=
+middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
+
+\def\firstcircle{(0,0) circle (1.5cm)}
+\def\secondcircle{(0:2cm) circle (1.5cm)}
+
+\colorlet{circle edge}{base16-eighties-blue}
+\colorlet{circle area}{base16-eighties-blue!5}
+
+\tikzset{filled/.style={fill=circle area, draw=circle edge, thick},
+    outline/.style={draw=circle edge, thick}}
+
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+\everymath\expandafter{\the\everymath \color{base16-eighties-gray}}
+\everydisplay\expandafter{\the\everydisplay \color{base16-eighties-gray}}
+
+\renewcommand{\baselinestretch}{.8}
+\pagestyle{empty}
+
+\global\mdfdefinestyle{header}{%
+linecolor=-base16-eighties-gray,linewidth=1pt,%
+leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm,
+}
+
+\newcommand{\header}{
+\begin{mdframed}[style=header]
+\footnotesize
+\sffamily
+PMATH352W18 Cheatsheet\\
+by~Johnson~Ng,~page~\thepage~of~1
+\end{mdframed}
+}
+
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {.2ex}%
+                                {.2ex}%x
+                                {\color{base16-eighties-blue}\sffamily\small\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{1}{0mm}%
+                                {.2ex}%
+                                {.2ex}%x
+                                {\sffamily\bfseries}}
+
+
+
+\def\multi@column@out{%
+   \ifnum\outputpenalty <-\@M
+   \speci@ls \else
+   \ifvoid\colbreak@box\else
+     \mult@info\@ne{Re-adding forced
+               break(s) for splitting}%
+     \setbox\@cclv\vbox{%
+        \unvbox\colbreak@box
+        \penalty-\@Mv\unvbox\@cclv}%
+   \fi
+   \splittopskip\topskip
+   \splitmaxdepth\maxdepth
+   \dimen@\@colroom
+   \divide\skip\footins\col@number
+   \ifvoid\footins \else
+      \leave@mult@footins
+   \fi
+   \let\ifshr@kingsaved\ifshr@king
+   \ifvbox \@kludgeins
+     \advance \dimen@ -\ht\@kludgeins
+     \ifdim \wd\@kludgeins>\z@
+        \shr@nkingtrue
+     \fi
+   \fi
+   \process@cols\mult@gfirstbox{%
+%%%%% START CHANGE
+\ifnum\count@=\numexpr\mult@rightbox+2\relax
+          \setbox\count@\vsplit\@cclv to \dimexpr \dimen@-1cm\relax
+\setbox\count@\vbox to \dimen@{\vbox to 1cm{\header}\unvbox\count@\vss}%
+\else
+      \setbox\count@\vsplit\@cclv to \dimen@
+\fi
+%%%%% END CHANGE
+            \set@keptmarks
+            \setbox\count@
+                 \vbox to\dimen@
+                  {\unvbox\count@
+                   \remove@discardable@items
+                   \ifshr@nking\vfill\fi}%
+           }%
+   \setbox\mult@rightbox
+       \vsplit\@cclv to\dimen@
+   \set@keptmarks
+   \setbox\mult@rightbox\vbox to\dimen@
+          {\unvbox\mult@rightbox
+           \remove@discardable@items
+           \ifshr@nking\vfill\fi}%
+   \let\ifshr@king\ifshr@kingsaved
+   \ifvoid\@cclv \else
+       \unvbox\@cclv
+       \ifnum\outputpenalty=\@M
+       \else
+          \penalty\outputpenalty
+       \fi
+       \ifvoid\footins\else
+         \PackageWarning{multicol}%
+          {I moved some lines to
+           the next page.\MessageBreak
+           Footnotes on page
+           \thepage\space might be wrong}%
+       \fi
+       \ifnum \c@tracingmulticols>\thr@@
+                    \hrule\allowbreak \fi
+   \fi
+   \ifx\@empty\kept@firstmark
+      \let\firstmark\kept@topmark
+      \let\botmark\kept@topmark
+   \else
+      \let\firstmark\kept@firstmark
+      \let\botmark\kept@botmark
+   \fi
+   \let\topmark\kept@topmark
+   \mult@info\tw@
+        {Use kept top mark:\MessageBreak
+          \meaning\kept@topmark
+         \MessageBreak
+         Use kept first mark:\MessageBreak
+          \meaning\kept@firstmark
+        \MessageBreak
+         Use kept bot mark:\MessageBreak
+          \meaning\kept@botmark
+        \MessageBreak
+         Produce first mark:\MessageBreak
+          \meaning\firstmark
+        \MessageBreak
+        Produce bot mark:\MessageBreak
+          \meaning\botmark
+         \@gobbletwo}%
+   \setbox\@cclv\vbox{\unvbox\partial@page
+                      \page@sofar}%
+   \@makecol\@outputpage
+     \global\let\kept@topmark\botmark
+     \global\let\kept@firstmark\@empty
+     \global\let\kept@botmark\@empty
+     \mult@info\tw@
+        {(Re)Init top mark:\MessageBreak
+         \meaning\kept@topmark
+         \@gobbletwo}%
+   \global\@colroom\@colht
+   \global \@mparbottom \z@
+   \process@deferreds
+   \@whilesw\if@fcolmade\fi{\@outputpage
+      \global\@colroom\@colht
+      \process@deferreds}%
+   \mult@info\@ne
+     {Colroom:\MessageBreak
+      \the\@colht\space
+              after float space removed
+              = \the\@colroom \@gobble}%
+    \set@mult@vsize \global
+  \fi}
+
+\makeatother
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\small
+\begin{multicols*}{5}
+
+\begin{defn}[Injectivity]\label{defn:injectivity}
+\index{Injectivity}
+  Let $f: X \to Y$ be a function. We say that $f$ is \hlnoteb{injective} (or \hldefn{one-to-one}) if $f(x_1) = f(x_2)$ implies $x_1 = x_2$.
+\end{defn}
+
+\begin{defn}[Surjectivity]\label{defn:surjectivity}
+\index{Surjectivity}
+  Let $f: X \to Y$ be a function. We say that $f$ is \hlnoteb{surjective} (or \hldefn{onto}) if $\forall y \in Y \enspace \exists x \in X \enspace f(x) = y$.
+\end{defn}
+
+\begin{defn}[Bijectivity]\label{defn:bijectivity}
+\index{Bijectivity}
+  Let $f: X \to Y$ be a function. We say that $f$ is \hlnoteb{bijective} if it is both \hlnoteb{injective} and \hlnoteb{surjective}.
+\end{defn}
+
+\begin{defn}[Permutations]\label{defn:permutations}
+\index{Permutations}
+  Given a non-empty set $L$, a permutation of $L$ is a bijection from $L$ to $L$. The set of all permutations of $L$ is denoted by $S_L$.
+\end{defn}
+
+\begin{defn}[Order]\label{defn:order}
+\index{Order}
+  The \hlnoteb{order} of a set $A$, denoted by $\abs{A}$, is the cardinality of the set.
+\end{defn}
+
+\begin{defn}[Groups]\label{defn:groups}
+\index{Groups}
+  Let $G$ be a set and $*$ an operation on $G \times G$. We say that $G = (G, *)$ is a \hlnoteb{group} if it satisfies
+  \begin{enumerate}
+    \item \hlnoteb{Closure}: $\forall a, b \in G \quad a * b \in G$
+    \item \hlnoteb{Associativity}: $\forall a, b, c \in G \quad a * (b * c) = (a * b) * c$
+    \item \hlnoteb{Identity}: $\exists e \in G \enspace \forall a \in G \quad a * e = a = e * a$
+    \item \hlnoteb{Inverse}: $\forall a \in G \enspace \exists b \in G \quad a * b = e = b * a$
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Abelian Group]\label{defn:abelian_group}
+\index{Abelian Group}
+  A group $G$ is said to be abelian if $\forall a, b \in G$, we have $a * b = b * a$.
+\end{defn}
+
+\begin{defn}[General Linear Group]\index{General Linear Group}
+\label{defn:general_linear_group}
+  The \hlnoteb{general linear group of degree $n$ over $\mathbb{R}$} is defined as
+  \begin{equation*}
+    GL_n(\mathbb{R}) := \{ M \in M_n(\mathbb{R}) \, : \, \det M \neq 0 \}
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Cayley Table]\label{defn:cayley_table}
+\index{Cayley Table}
+  Let $G$ be a group. Given $x, y \in G$, let the product $xy$ be an entry of a table in the row corresponding to $x$ and column corresponding to $y$. Such a table is called a \hlnoteb{Cayley Table}.
+\end{defn}
+
+\begin{defn}[Subgroup]\label{defn:subgroup}
+\index{Subgroup}
+  Let $G$ be a group and $H \subseteq G$. If $H$ itself is a group, then we say that $H$ is a subgroup of $G$
+\end{defn}
+
+\begin{defn}[Special Linear Group]\label{defn:special_linear_group}
+\index{Special Linear Group}
+  The \hlnoteb{special linear group} of order $n$ of $\mathbb{R}$ is defined as
+  \begin{align*}
+    SL_n(\mathbb{R}) &= (SL_n(\mathbb{R}), \cdot) \\
+                     &= \{A \in M_n(\mathbb{R}) : \det A = 1 \}
+  \end{align*}
+\end{defn}
+
+\begin{defn}[Center of a Group]\label{defn:center_of_a_group}
+\index{Center of a Group}
+  Given a group $G$, the \hlnoteb{the center of a group $G$} is defined as
+  \begin{equation*}
+    Z(G) = \{z \in G \, : \, \forall g \in G \enspace zg = gz \}
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Transposition]\label{defn:transposition}
+\index{Transposition}
+  A \hlnoteb{transposition} $\sigma \in S_n$ is a cycle of length $2$, i.e. $\sigma = \begin{pmatrix} a & b \end{pmatrix}$, where $a, b \in \{1, ..., n\}$ and $a \neq b$.
+\end{defn}
+
+\begin{defn}[Odd and Even Permutations]\label{defn:odd_and_even_permutations}
+\index{Odd Permutations}\index{Even Permutations}
+  A permutation $\sigma$ is even (or odd) if it can be written as a product of an even (or odd) number of transpositions. By the \hlnotea{Parity Theorem}, a permutation must either be even or odd, but not both.
+\end{defn}
+
+\begin{defn}[Cyclic Groups]\label{defn:cyclic_groups}
+\index{Cyclic Group}
+  Let $G$ be a group and $g \in G$. Then we call $\lra{g}$ the \hlnoteb{cyclic subgroup} of $G$ generated by $g$. If $G = \lra{g}$ for some $g \in G$, then we say that $G$ is a \hlnoteb{cyclic group}, and $g$ is a \hldefn{generator} of $G$.
+\end{defn}
+
+\begin{defn}[Order of an Element]\index{Order of an Element}
+\label{defn:order_of_an_element}
+  Let $G$ be a group and $g \in G$. If $n$ is the smallest positive integer such that $g^n = 1$, we say that the order of $g$ is $n$, denoted by $o(g) = n$.
+
+  \noindent If no such $n$ exists, then we say that $g$ has infinite order and write $o(g) = \infty$.
+\end{defn}
+
+\begin{defn}[Dihedral Group]\index{Dihedral Group}
+\label{defn:dihedral_group}
+\marginnote{Recall from Assignment 1 that the dihedral group is a set of rigid motions for transforming a regular polygon back to its original position while changing the index of its vertices.}
+  For $n \geq 2$, the \hlnoteb{dihedral group} of order $2n$ is
+  \begin{equation*}
+    D_{2n} = \{1, a, ..., a^{n - 1}, b, ba, ..., b^{n - 1} \}
+  \end{equation*}
+  where $a^n = 1 = b^2$ and $aba = b$. Note that $a$ represents a rotation of $\frac{2 \pi}{n}$ radians, and $b$ represents a reflection through the $x$-axis
+\end{defn}
+
+\begin{defn}[Group Homomorphism]\index{Group Homomorphism}\index{Homomorphism}
+\label{defn:group_homomorphism}
+  Let $G, H$ be groups. A mapping
+  \begin{equation*}
+    \alpha : G \to H
+  \end{equation*}
+  is called a group \hlnoteb{homomorphism} if $\forall a, b \in G$,\sidenote{
+  Note that $ab$ uses the operation of $G$ while $\alpha(a)\alpha(b)$ uses the operation of $H$.}
+  \begin{equation*}
+    \alpha(ab) = \alpha(a)\alpha(b).
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Isomorphism]\index{Isomorphism}
+\label{defn:isomorphism}
+  Let $G, H$ be groups. Consider a mapping
+  \begin{equation*}
+    \alpha: G \to H
+  \end{equation*}
+  We say that $\alpha$ is an \hlnoteb{isomorphism} if it is a homomorphism and bijective.
+
+  If $\alpha$ is an isomorphism, we say that $G$ is \hldefn{isomorphic to} $H$, or that $G$ and $H$ are \hldefn{isomorphic}, and denote that by $G \cong H$.
+\end{defn}
+
+\begin{defn}[Coset]\index{Coset}
+\label{defn:coset}
+  Let $H$ be a subgroup of a group $G$.
+  \begin{equation*}
+    \forall a \in G \quad Ha = \{ha : h \in H\}
+  \end{equation*}
+  is the right coset of H generated by $a$ and
+  \begin{equation*}
+    \forall a \in G \quad aH = \{ah : h \in H\}
+  \end{equation*}
+  is the left coset of H generated by $a$.
+\end{defn}
+
+\begin{defn}[Normal Subgroup]\index{Normal Subgroup}
+\label{defn:normal_subgroup}
+  Let $H$ be a subgroup of a group $G$. If $\forall g \in G$, we have $Hg = gH$, then we say that $H$ is a \hlnoteb{normal subgroup} of $G$, and write
+  \begin{equation*}
+    H \triangleleft G
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Product of Groups]\index{Product of Groups}
+\label{defn:product_of_groups}
+  \begin{equation*}
+    HK := \{ hk \, : \, h \in H, \, k \in K \}
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Normalizer]\index{Normalizer}
+\label{defn:normalizer}
+  Let $H$ be a subgroup of $G$. The \hlnoteb{normalizer of $H$}, denoted by $N_G(H)$, is defined to be
+  \begin{equation*}
+    N_G(H) := \{ g \in G \, : \, gH = Hg \}
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Quotient Group]\index{Quotient Group}\index{Coset Map}\index{Quotient Map}
+\label{defn:quotient_group}
+  Let $K \triangleleft G$. The group $\faktor{G}{K}$ of all cosets of $K$ in $G$ is called the \hlnoteb{quotient group} of $G$ by $K$. Also, the mapping
+  \begin{equation*}
+    \phi: G \to \faktor{G}{K} \text{ defined by } a \mapsto Ka
+  \end{equation*}
+  is called the \hlnoteb{coset} (or \hlnoteb{quotient}) \hlnoteb{map}.
+\end{defn}
+
+\begin{defn}[Kernel and Image]\index{Kernel}\index{Image of a Homomorphism}
+\label{defn:kernel_and_image}
+  Let $\alpha: G \to H$ be a group homomorphism. The \hlnoteb{kernel} of $\alpha$ is defined by
+  \begin{equation*}
+    \ker \alpha := \{g \in G \, : \, \alpha(g) = 1_H \} \subseteq G
+  \end{equation*}
+  and the image of $\alpha$ is defined by
+  \begin{equation*}
+    \img \alpha := \alpha(G) = \{\alpha(g) \, : \, g \in G \} \subseteq H.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Group Action]\index{Group Action}
+\label{defn:group_action}
+  Let $G$ be a group, $X$ a non-empty set. A \hlnoteb{group action} of $G$ on $X$ is a mapping $G \times X \to X$ denoted as $(a, x) \to ax$ such that
+  \begin{enumerate}
+    \item $1 \cdot x = x$, $x \in X$
+    \item $a \cdot (b \cdot x) = (ab) \cdot x$, $a, b \in G, \, x \in X$
+  \end{enumerate}
+  In this case, we say $G$ \hldefn{acts on} $X$.
+\end{defn}
+
+\begin{defn}[Orbit \& Stabilizer]\index{Orbit}\index{Stabilizer}
+\label{defn:orbit_n_stabilizer}
+  Let $G$ be a group acting on a set $X$, and $x \in X$. We denote by
+  \begin{equation*}
+    G \cdot x = \{g \cdot x : \forall g \in G \}
+  \end{equation*}
+  the \hlnoteb{orbit} of $x$ and
+  \begin{equation*}
+    S(x) = \{g \in G : g \cdot x = x \} \subseteq G
+  \end{equation*}
+  the \hlnoteb{stabilizer} of $x$.
+\end{defn}
+
+\begin{defn}[p-Group]\index{p-Group}
+\label{defn:p_group}
+  Let $p$ be a prime. A \hlnoteb{p-group} is a group in which every element has an order that is a non-negative power of $p$.
+\end{defn}
+
+\begin{defn}[Ring]\index{Ring}
+\label{defn:ring}
+  A set $R$ is a ring if $\forall a, b, c \in R$,
+  \begin{enumerate}
+    \item $a + b \in R$
+    \item $a + b = b + a$
+    \item $a + (b + c) = (a + b) + c$
+    \item $\exists 0 \in R \enspace a + 0 = a = 0 + a$
+    \item $\exists (-a) \in R \enspace a + (-a) = 0 = (-a) + a$
+    \item $ab \in R$
+    \item $a(bc) = (ab)c$
+    \item $\exists 1 \in R \enspace 1 \cdot a = a = a \cdot 1$
+    \item $a ( b + c ) = ab + ac$ and $(b + c) a = ba + ca$
+  \end{enumerate}
+  We call $1$ as the \hldefn{Unity} of $R$, $0$ as the \textcolor{base16-eighties-blue}{Zero}\index{Zero of a Ring} of $R$, and $-a$ as the \hlnoteb{negative} of $a$.
+
+  The ring $R$ is called a \hldefn{Commutative Ring} if it also satisfies the following:
+  \begin{enumerate}
+    \setcounter{enumi}{9}
+    \item $ab = ba$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Trivial Ring]\index{Trivial Ring}
+\label{defn:trivial_ring}
+A \hlnoteb{trivial ring} is a ring of only one element. In this case, we have $1 = 0$, i.e. the unity is the zero and vice versa.
+\end{defn}
+
+\begin{defn}[Characteristic of a Ring]\index{Characteristic}
+\label{defn:characteristic_of_a_ring}
+  If $R$ is a ring, we define the \hlnoteb{characteristic} of $R$, denoted by $\ch(R)$, in terms of the order of $1_R$ in the additive group $(R, +)$, by
+  \begin{equation*}
+    \ch(R) = \begin{cases}
+      n & \text{if } o(1_R) = n \in \mathbb{N} \\
+      0 & \text{if } o(1_R) = \infty
+    \end{cases}
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Subring]\index{Subring}
+\label{defn:subring}
+A subset $S$ of a ring $R$ is a subring if $S$ is a ring itself (under the same operations: addition and multiplication).
+\end{defn}
+
+\begin{defn}[Ideal]\index{Ideal}
+\label{defn:ideal}
+  An additive subgroup $A$ of a ring $R$ is called an \hlnoteb{ideal} of $R$ if $Ra, aR \subseteq A$, $\forall a \in A$.
+\end{defn}
+
+\begin{defn}[Quotient Ring]\index{Quotient Ring}
+\label{defn:quotient_ring}
+  Let $A$ be an ideal of a ring $R$. Then the ring $\faktor{R}{A}$ is called the \hlnoteb{quotient ring} of $R$ by $A$.
+\end{defn}
+
+\begin{defn}[Principal Ideal]\index{Principal Ideal}
+\label{defn:principal_ideal}
+Let $R$ be a commutative ring and $A$ an ideal of $R$. If $A = aR = \{ ar : r \in R \} = Ra$ for some $a \in A$, we say that $A$ is a \hlnoteb{principal ideal} \textcolor{base16-eighties-blue}{generated}\index{generator} by $a$, and denote $A = \lra{a}$.
+\end{defn}
+
+\begin{defn}[Ring Homomorphism]\index{Ring Homomorphism}\index{Homomorphism}
+\label{defn:ring_homomorphism}
+  Let $R$ and $S$ be rings. A mapping
+  \begin{equation*}
+    \Theta : R \to S
+  \end{equation*}
+  is a ring \hlnoteb{homomorphism} if $\forall a, b \in R$, we have
+  \begin{enumerate}
+    \item $\Theta(a + b) = \Theta(a) + \Theta(b)$
+    \item $\Theta(ab) = \Theta(a) \Theta(b)$
+    \item $\Theta(1_R) = 1_S$
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Ring Isomorphism]\index{Ring Isomorphism}
+\label{defn:ring_isomorphism}
+  A mapping of rings $\Theta: R \to S$ is a ring \hlnoteb{isomorphism} if $\Theta$ is a bijective ring homomorphism. In this case, we say that $R$ and $S$ are \hlnoteb{isomorphic} and denote that by $R \cong S$.
+\end{defn}
+
+\begin{defn}[Kernel and Image]\index{Kernel}\index{Image}
+\label{defn:kernel_and_image}
+  Let $\Theta: R \to S$ be a ring homomorphism. The \hlnoteb{kernel} of $\Theta$ is defined by
+  \begin{equation*}
+    \ker \Theta = \{r \in R : \Theta(r) = 0_S\}
+  \end{equation*}
+  and the \hlnoteb{image} of $\Theta$ is defined by
+  \begin{equation*}
+    \img \Theta := \Theta(R) = \{\Theta(r) : r \in R\}.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Units]\index{Units}
+\label{defn:units_and_group_of_units}
+  Let $R$ be a ring. We say that $u \in R$ is a \hlnoteb{unit} if $u$ has a multiplicative inverse in $R$, and denote it by $u^{-1}$. We have
+  \begin{equation*}
+    uu^{-1} = 1 = u^{-1} u
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Division Ring and Field]\index{Division Ring}\index{Field}
+\label{defn:division_ring_and_field}
+  A non-trivial ring $R$ is a \hlnoteb{division ring} if
+  \begin{equation*}
+    R^* = R \setminus \{0\}.
+  \end{equation*}
+  A commutative division ring is a \hlnoteb{field}.
+\end{defn}
+
+\begin{defn}[Zero Divisor]\index{Zero Divisor}
+\label{defn:zero_divisor}
+  Let $R$ be a non-trivial ring. If $0 \neq a \in R$, then $a$ is called a \hlnoteb{zero divisor} if $\exists 0 \neq b \in R$ such that $ab = 0$.
+\end{defn}
+
+\begin{defn}[Integral Domain]\index{Integral Domain}
+\label{defn:integral_domain}
+A commutative ring $R \neq \{0\}$ (i.e. non-trivial ring) is called an \hlnoteb{integral domain} if it has \hlimpo{no zero divisor}, i.e. if $ab = 0 \in R$ then $a = 0$ or $b = 0$.
+\end{defn}
+
+\begin{defn}[Prime Ideals]\index{Prime Ideals}
+\label{defn:prime_ideals}
+  Let $R$ be a commutative ring. An ideal $P \neq R$ is a prime ideal of $R$ if $r, s \in R$ satisfy: $rs \in P \implies r \in P$ or $s \in P$.
+\end{defn}
+
+\begin{defn}[Maximal Ideals]\index{Maximal Ideals}
+\label{defn:maximal_ideals}
+  Let $R$ be a (commutative) ring. An ideal $M \neq R$ or $R$ is a maximal ideal if $\forall A$ that is an ideal of $R$, we have that
+  \begin{equation*}
+    M \subseteq A \subseteq R \implies A = M \text{ or } A + R.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Fraction]\index{Fraction}
+\label{defn:fraction}
+  Let $R$ be an integral domain, $D = R \setminus \{0\}$, and $X = R \times D$. The \hlnoteb{fraction}, $\frac{r}{s}$ to be the equivalent class $[(r, s)]$ of the pair $(r, s) \in X$.
+\end{defn}
+
+\begin{defn}[Polynomials]
+\label{defn:polynomials}
+  Let $R$ be a ring and $x$ a variable. Let
+
+  \resizebox{5.5cm}{!}{
+  \begin{equation*}
+    R[x] = \left\{ f(x) = \sum\limits_{i=0}^{m} a_i x^i : m \in \mathbb{N} \cup \{0\}, \, a_i \in R, 0 \leq i \leq m \right\}.
+  \end{equation*}
+  }
+
+  Each element in $R[x]$ is called a \hldefn{polynomial} in $x$ over $R$. If $a_m \neq 0$, we say that $f(x)$ has \hldefn{degree} $m$, denoted by $\deg f = m$, and we say that $a_m$ is the \hldefn{leading coefficient} of $f(x)$.
+
+  If $\deg f = 0$, then $f(x) = a_0 \in R$. In this case, we call $f(x)$ a \hldefn{constant polynomial}. Note if
+  \begin{equation*}
+    f(x) = 0 \iff a_0 = a_1 = ... = a_m = 0,
+  \end{equation*}
+  we define $\deg 0 = - \infty$, and $f(x)$ is called a \hldefn{zero polynomial}.
+\end{defn}
+
+\begin{defn}[Division of Polynomials]\index{Division of Polynomials}
+\label{defn:division_of_polynomials}
+  Let $R$ be a commutative ring and $f(x), g(x) \in R[x]$. We say that $f(x)$ divides $g(x)$, denoted as $f(x) \, | \, g(x)$ if $\exists q(x) \in R[x]$ such that
+  \begin{equation*}
+    g(x) = q(x) f(x)
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Monic Polynomial]\index{Monic Polynomial}
+\label{defn:monic_polynomial}
+  Let $R$ be a commutative ring and $f(x) \in R[x]$. $f(x)$ is monic if its leading coefficient is $1$.
+\end{defn}
+
+\begin{defn}[Irreducible Polynomials]\index{Irreducible Polynomials}
+\label{defn:irreducible_polynomials}
+  Let $F$ be a field. A non-zero polynomial $l(x) \in F[x]$ is \hlnoteb{irreducible} if $\deg l \geq 1$ and if
+  \begin{equation*}
+    l(x) = l_1 (x) l_2 (x)
+  \end{equation*}
+  for $l_1(x), \, l_2 (x) \in F[x]$, then $\deg l_1 = 0$ or $\deg l_2 = 0$ \sidenote{Note that polynomials of degree $0$ are the units of $F[x]$.}.
+
+  Polynomials that are not irreducible are called \hldefn{reducible polynomials}.
+\end{defn}
+
+\begin{defn}[Division]\index{Division}
+\label{defn:division}
+  Let $R$ be an integral domain and $a, \, b \in R$. We say that $a \, | \, b$ if $b = ca$ for some $c \in R$.
+\end{defn}
+
+\begin{defn}[Association]\index{Association}
+\label{defn:association}
+  Let $R$ be an integral domain. $\forall a, b \in R$, we say that $a$ is \hldefn{associated to} $b$, denoted by $a \sim b$, if $a \, | \, b$ and $b \, | \, a$.
+\end{defn}
+
+\begin{defn}[Irreducible]\index{Irreducible}
+\label{defn:irreducible}
+  Let $R$ be an integral domain. We say $p \in R$ is \hlnoteb{irreducible} if $p \neq 0$ is not a unit, and $p = ab \in R$, then either $a$ or $b$ is a unit. An element that is not \hlnoteb{irreducible} is \hlnoteb{reducible}\index{reducible}.
+\end{defn}
+
+\begin{defn}[Prime]\index{Prime}
+\label{defn:prime}
+  Let $R$ be an integral domain and $p \in R$. We say $p$ is \hlnoteb{prime} in $R$ if $p \neq 0$ is not a unit, and if $p \, | \, ab \in R \implies p \, | \, a \veebar p \, | \, b$.
+\end{defn}
+
+\begin{defn}[Ascending Chain Condition on Principal Ideals (ACCP)]\index{Ascending Chain Condition on Principal Ideals}\index{ACCP}
+\label{defn:ascending_chain_condition_on_principal_ideals}
+An integral domain $R$ is said to satisfy the \hlnoteb{ascending chain condition on principal ideals} (ACCP) if for any ascending chain
+\begin{equation*}
+  \lra{a_1} \subseteq \lra{a_2} \subseteq \lra{a_3} \subseteq \hdots
+\end{equation*}
+of principal ideals in $R$, $\exists n \in \mathbb{N}$ such that
+\begin{equation*}
+  \lra{a_n} = \lra{a_{n + 1}} = \hdots \; .
+\end{equation*}
+\end{defn}
+
+\begin{defn}[Unique Factorization Domain (UFD)]\index{Unique Factorization Domain}\index{UFD}
+\label{defn:unique_factorization_domain}
+  An integral domain $R$ is called a \hlnoteb{unique factorization domain} (UFD) if it satisfies the following conditions:
+  \begin{enumerate}
+    \item If $0 \neq a \in R$ is a non-unit, then $a$ is a product of irreducible elements in $R$.
+    \item If $p_1 p_2 \hdots p_r \sim q_1 q_2 \hdots q_s$ where $p_i$ and $q_i$ are irreducibles, then $r = s$ and (possibly after relabelling) $p_i \sim q_i$ for each $1 \leq i \leq r = s$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Greatest Common Divisor]\index{Greatest Common Divisor}
+\label{defn:greatest_common_divisor}
+  Let $R$ be an integral domain, and $a, b \in R$. We say $d \in R$ is the \hlnoteb{greatest common divisor} of $a, b$, denoted as $\gcd(a, b) = d$, if it satisfies the following conditions:
+  \begin{enumerate}
+    \item $d \, | \, a$ and $d \, | \, b$;
+    \item $e \in R \; e \, | \, a \, \land \, e \, | \, b \implies e \, | \, d$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Principal Ideal Domain (PID)]\index{Principal Ideal Domain}\index{PID}
+\label{defn:principal_ideal_domain}
+  An integral domain $R$ is a \hlnoteb{principal ideal domain} (PID) if every ideal is principal.
+\end{defn}
+
+\begin{defn}[Content]\index{Content}
+\label{defn:content}
+If $R$ is a UFD and if $0 \neq f(x) \in R[x]$, the greatest common divisor of the non-zero coefficients of $f(x)$ is called the \hlnoteb{content} of $f(x)$, and denoted by $\con(f)$.
+\end{defn}
+
+\begin{defn}[Primitive Polynomials]\index{Primitive Polynomials}
+\label{defn:primitive_polynomials}
+If $R$ is a UFD and if $0 \neq f(x) \in R[x]$, then if $\con(f) \sim 1$, we say that $f(x)$ is a \hlnoteb{primitive polynomial}, or simply say that $f(x)$ is \hldefn{primitive}.
+\end{defn}
+
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+$ $ \\
+\end{multicols*}
+\end{document}

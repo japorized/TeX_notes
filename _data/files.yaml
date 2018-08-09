@@ -4,11 +4,15 @@
     src: ./PMATH347S18/classnotes.pdf
   - title: classnotes-white.pdf
     src: ./PMATH347S18/classnotes-white.pdf
+  - title: definitions.pdf
+    src: ./PMATH347S18/definitions.pdf
   tex:
   - title: classnotes.tex
     src: /PMATH347S18/classnotes.tex
   - title: classnotes-white.tex
     src: ./PMATH347S18/classnotes-white.tex
+  - title: definitions.tex
+    src: ./PMATH347S18/definitions.tex
   - title: list_of_symbols.tex
     src: ./PMATH347S18/list_of_symbols.tex
   - title: math-operators.tex
