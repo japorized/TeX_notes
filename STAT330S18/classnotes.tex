@@ -1,13 +1,7 @@
 \documentclass[notoc,notitlepage]{tufte-book}
 % \nonstopmode
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{5}
-
-\renewcommand{\baselinestretch}{1.1}
 \usepackage{longtable,multirow,booktabs}
 \usepackage{pgfplots}
-\usepackage{csquotes}
-
 \usepackage{classnotetitle}
 
 \title{STAT330S18 - Mathematical Statistics}
@@ -76,12 +70,12 @@
 \tableofcontents
 
 \chapter*{\faBook \enspace List of Definitions}
-\addcontentsline{toc}{section}{List of Definitions}
+\addcontentsline{toc}{chapter}{List of Definitions}
 \theoremlisttype{all}
 \listtheorems{defn}
 
 \chapter*{\faPaperclip \enspace List of Theorems}
-\addcontentsline{toc}{section}{List of Theorems}
+\addcontentsline{toc}{chapter}{List of Theorems}
 \theoremlisttype{allname}
 \listtheorems{axiom,lemma,thm,crly,propo}
 
@@ -7107,7 +7101,7 @@ where $x = (x_1, ..., x_n)$ is the observed data.
 \label{chp:regularity_conditions}
 % chapter regularity_conditions
 
-Throughout this course, the phrase ``regularity conditions'' have been regularly coined but never formally introduced. To clarify that, I have sought out for the instructor and confirmed that these are the regularity conditions that are used. This is taken out from \textit{Casella \& Berger 2002}\cite{CasellaBerger2002}.
+Throughout this course, the phrase ``regularity conditions'' have been regularly coined but never formally introduced. To clarify that, I have sought out for the instructor and confirmed that these are the regularity conditions that are used. This is taken out from \textit{Casella \& Berger (2002)}\cite{CasellaBerger2002}.
 
 \begin{displayquote}
   ``(R)egularity conditions'' are typically very technical, rather boring, and usually satisfied in most reasonable problems. But they are a necessary evil...
@@ -7213,9 +7207,8 @@ k \in \mathbb{N} & \multirow{3}{*}{$\frac{1}{2^{\frac{k}{2}} \Gamma(\frac{k}{2})
 
 \backmatter
 \pagestyle{plain}
-\printindex
-
 \bibliography{references}
-\bibliographystyle{plainnat}
+
+\printindex
 
 \end{document}

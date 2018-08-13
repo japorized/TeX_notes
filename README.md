@@ -40,7 +40,7 @@ Please feel free to either contact me or create an issue.
 ---
 ### LaTeX Template
 
-The LaTeX Template of my notes is saved as `tex_default.sh`.
+The LaTeX Template of my notes is saved as `setup-nvim/tex_default.sh`.
 
 **For nvim users,** if you wish to have this as the default TeX template for all of your TeX files, make sure that your VIm has autocmd. You can check so by executing `:echo has("autocmd")` while being in a VIm session. If the command returns 1, you're good to go. Copy the .sh file into your `.vim/templates` folder, and add the following to your vimrc
 
@@ -52,7 +52,7 @@ if has("autocmd")
 endif
 ```
 
-**For Sublime Text users,** copy the contents and create a new snippet, so that you may fetch the template via `Shift + Cmd + p` (on macOS). Be sure to have the following in your snippet under scopes.
+**For Sublime Text users,** copy the appropriate contents from `setup-subl` and create a new snippet, so that you may fetch the template via `Shift + Cmd + p` (on macOS). Be sure to have the following in your snippet under scopes.
 
 ```
 <scope>text.tex.latex</scope>
@@ -67,7 +67,7 @@ Find out where the `texmf` directory should go on your system (different across 
 
 My TeX snippet for nvim is in the `tex.snippet` and `texmath.snippet` file, and I use [UltiSnip](https://github.com/SirVer/ultisnips) for completion. My autocompletion plugin in [deoplete](https://github.com/Shougo/deoplete.nvim).
 
-My Sublime Text snippet is provided in the file `tex.sublime-completions`. Put it in your `$SUBLIME_PATH/Packages/User/` folder to get it working.
+My Sublime Text snippet is provided in the file `setup-subl/tex.sublime-completions`. Put it in your `$SUBLIME_PATH/Packages/User/` folder to get it working (a bootstrapping shell script is available in the setup folder).
 
 ---
 

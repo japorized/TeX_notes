@@ -1,0 +1,14 @@
+#!/usr/bin/env dash
+
+ORIDIR=$HOME/Documents/TeX_notes/setup-subl
+DESTDIR=$HOME/.config/sublime-text-3/Packages/User
+
+for x in $ORIDIR/*
+do 
+  FILE=$(find $x -printf "%f\n")
+  if [ "$FILE" != "bootstrap" ]
+  then
+    rm $DESTDIR/$FILE
+    ln -s $x $DESTDIR/$FILE
+  fi
+done

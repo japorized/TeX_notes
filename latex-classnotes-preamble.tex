@@ -1,3 +1,7 @@
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\renewcommand{\baselinestretch}{1.1}
 \usepackage{geometry}
 \geometry{letterpaper}
 \usepackage[parfill]{parskip}
@@ -7,7 +11,12 @@
 \usepackage{makeidx}
 \makeindex
 \usepackage{enumitem}
+\usepackage[T1]{fontenc}
+% \usepackage{apacite}
+\usepackage{natbib}
+\bibliographystyle{apalike}
 \usepackage{ragged2e}
+\usepackage{csquotes}
 \usepackage{etoolbox}
 \usepackage{amssymb}
 \usepackage{fontawesome}
@@ -261,7 +270,7 @@
 
 \theoremlisttype{allname}
 
-\AtBeginDocument{\renewcommand\contentsname{\faAlignJustify \enspace Table of Contents}}
+\AtBeginDocument{\renewcommand\contentsname{Table of Contents}}
 
 % Heading formattings
 % chapter format

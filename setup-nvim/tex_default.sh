@@ -1,8 +1,5 @@
 \documentclass[notoc,notitlepage]{tufte-book}
 % \nonstopmode % uncomment to enable nonstopmode
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
-\renewcommand{\baselinestretch}{1.1}
 
 \usepackage{classnotetitle}
 
@@ -20,20 +17,27 @@
 \hypersetup{pageanchor=true}
 \tableofcontents
 
-\chapter*{\faBook List of Definitions}
+\chapter*{\faBook \enspace List of Definitions}
+\addcontentsline{toc}{chapter}{List of Definitions}
 \theoremlisttype{all}
 \listtheorems{defn}
 
-\chapter*{\faCoffee List of Theorems}
+\chapter*{\faCoffee \enspace List of Theorems}
+\addcontentsline{toc}{chapter}{List of Theorems}
 \theoremlisttype{allname}
 \listtheorems{axiom,lemma,thm,crly,propo}
 
 
 
-\nobibliography*
-\bibliography{bibliography}
+\appendix
 
-\pagestyle{empty}
+\backmatter
+
+\pagestyle{plain}
+
+\nobibliography*
+\bibliography{references}
+
 \printindex
 
 \end{document}

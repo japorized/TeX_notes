@@ -1,9 +1,4 @@
 \documentclass[notoc,notitlepage]{tufte-book}
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{3}
-
-\renewcommand{\baselinestretch}{1.1}
-
 \usepackage{classnotetitle}
 
 \title{PMATH347S18 - Groups \& Rings}
@@ -32,11 +27,13 @@
 \hypersetup{pageanchor=true}
 \tableofcontents
 
-\chapter*{\faBook List of Definitions}
+\chapter*{\faBook \enspace List of Definitions}
+\addcontentsline{toc}{chapter}{List of Definitions}
 \theoremlisttype{all}
 \listtheorems{defn}
 
-\chapter*{\faCoffee List of Theorems}
+\chapter*{\faCoffee \enspace List of Theorems}
+\addcontentsline{toc}{chapter}{List of Theorems}
 \theoremlisttype{allname}
 \listtheorems{axiom,lemma,thm,crly,propo}
 
@@ -104,26 +101,14 @@
 \input{lectures/lec34.tex}
 \input{lectures/lec35.tex}
 
+\backmatter
+
 \nobibliography*
 \bibliography{bibliography}
 
-\pagestyle{empty}
-\printindex
-
-\makeatletter
-\pagestyle{fancy}
-\fancyhead{}
-\fancyhead[RO]{\textsl{\@title} \enspace \thepage}
-\fancyhead[LE]{\thepage \enspace \textsl{Index }}
-\makeatother
-
 \input{list_of_symbols.tex}
 
-\makeatletter
-\pagestyle{fancy}
-\fancyhead{}
-\fancyhead[RO]{\textsl{\@title} \enspace \thepage}
-\fancyhead[LE]{\thepage \enspace \textsl{List of Symbols }}
-\makeatother
+\pagestyle{plain}
+\printindex
 
 \end{document}
