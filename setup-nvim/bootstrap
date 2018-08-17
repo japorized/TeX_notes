@@ -1,6 +1,0 @@
-#!/usr/bin/env dash
-
-ORIDIR=$HOME/Documents/TeX_notes/setup-nvim
-DESTDIR=$HOME/.vim/templates
-
-cp $ORIDIR/* $DESTDIR/
