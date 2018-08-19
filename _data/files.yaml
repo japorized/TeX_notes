@@ -1,4 +1,4 @@
-- title: PMATH347 S18
+- title: PMATH347 S18 - Groups and Rings
   pdf:
   - title: classnotes.pdf
     src: ./PMATH347S18/classnotes.pdf
@@ -88,7 +88,7 @@
   - title: lec35.tex
     src: ./PMATH351S18/lectures/lec35.tex
 
-- title: STAT330 S18
+- title: STAT330 S18 - Mathematical Statistics
   pdf:
   - title: classnotes.pdf
     src: ./STAT330S18/classnotes.pdf
@@ -98,7 +98,7 @@
   - title: classnotes.tex
     src: ./STAT330S18/classnotes.tex
 
-- title: JAPAN201R S18
+- title: JAPAN201R S18 - Year 2 Japanese
   pdf:
   - title: readingnotes.pdf
     src: ./JAPAN201RS18/readingnotes.pdf
@@ -112,7 +112,7 @@
   - title: vocabsheet.tex
     src: ./JAPAN201RS18/vocabsheet/vocabsheet.tex
 
-- title: PMATH352 W18
+- title: PMATH352 W18 - Complex Analysis
   pdf:
   - title: classnotes.pdf
     src: ./PMATH352W18/classnotes.pdf
@@ -128,7 +128,7 @@
   - title: cheatsheet.tex
     src: ./PMATH352W18/cheatsheet/cheatsheet.tex
 
-- title: PMATH333 W17
+- title: PMATH333 W17 - Intro to Real Analysis
   pdf:
   - title: pmath333_defns_thms.pdf
     src: ./PMATH333/pmath333_defns_thms.pdf
@@ -140,7 +140,7 @@
   - title: final_review.pdf
     src: ./PMATH333/final_review.tex
 
-- title: MATH239 W17
+- title: MATH239 W17 - Intro to Combinatorics
   pdf:
   - title: defn_thm.pdf
     src: ./MATH239/defn_thm.pdf

@@ -27,7 +27,18 @@
       .file-tex {
         display: none;
       }
-      .option-container {
+      .controls-container {
+        display: block;
+      }
+      .filter-control input {
+        height: 10px;
+        width: 250px;
+        background: transparent;
+        color: inherit;
+        border: 1px solid #ededed;
+        padding: 10px;
+      }
+      .texfile-control {
         display: flex;
         align-items: center;
       }
@@ -52,13 +63,19 @@
       }
 
       @media (min-width: 767px) {
-        .course-card {
-          width: 400px;
-        }
         .course-files {
           display: flex;
           justify-content: flex-start;
           flex-wrap: wrap;
+        }
+        .controls-container {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        }
+        .filter-control {
+          padding-right: 20px;
+          border-right: 2px solid #ededed;
         }
       }
     </style>
@@ -66,20 +83,21 @@
   <body>
     <article>
       <h1>Japorized's LaTeX Notes</h1>
-      <p class="subtitle">Style from <a href="https://github.com/edwardtufte/tufte-css">tufte-css</a> | Notes from this Gitlab <a href="https://gitlab.com/japorized/TeX_notes">repo</a> | Written by <a href="https://japorized.gitlab.io">Japorized</a></p>
+      <p class="subtitle"><small>Style from <a href="https://github.com/edwardtufte/tufte-css">tufte-css</a> | Notes from this Gitlab <a href="https://gitlab.com/japorized/TeX_notes">repo</a> | Written by <a href="https://japorized.gitlab.io">Japorized</a></small></p>
       <noscript><p>Enable JS to toggle .tex files</p></noscript>
 
-      <div class="option-container">
-        <div class="tex-toggle"></div> Show .tex files
+      <div class="controls-container">
+        <div class="filter-control"><input id="filterer" type="text" name="filterer" placeholder="Search" /></div>
+        <div class="texfile-control"><div class="tex-toggle"></div> Show .tex files</div>
       </div>
 
       <section id="files">
         {% for file in site.data.files %}
-          <div class="course-card">
+          <div class="course-card" id="{{ file.title | replace: " ", "-" | downcase }}">
             <h2>{{ file.title }}</h2>
             <div class="course-files">
               {% for pdf in file.pdf %}
-              <div class="course-file file-pdf">
+              <div class="course-file file-pdf" id="{{ file.title | replace: " ", "-" | downcase }}_{{ pdf.title | replace: ".", "-" | downcase }}">
                 <a href="{{ pdf.src }}" target="_blank">
                   <span class="fas fa-file-pdf"></span><br />
                   {{ pdf.title }}
@@ -101,7 +119,7 @@
     </article>
 
     <script type="text/javascript">
-      function nightSwitcher(){var rawtime=new Date(),curHours=rawtime.getHours();if(curHours>17||curHours<8){document.querySelector('head').innerHTML+="<link rel='stylesheet' href='assets/css/night-mode.css' />"}}nightSwitcher(); var btn = document.querySelector('.tex-toggle'), texfiles = document.querySelectorAll('.file-tex'); btn.addEventListener('click', function(e) { if ( btn.innerHTML != '<span class="fa fa-check"></span>' ) { btn.innerHTML = '<span class="fa fa-check"></span>'; texfiles.forEach( function(file) { file.style.display="block"; }); } else { btn.innerHTML = ''; texfiles.forEach( function(file) { file.style.display="none"; }); } });
+      function nightSwitcher(){var rawtime=new Date(),curHours=rawtime.getHours();if(curHours>17||curHours<8){document.querySelector('head').innerHTML+="<link rel='stylesheet' href='assets/css/night-mode.css' />"}}nightSwitcher(); var btn = document.querySelector('.tex-toggle'), texfiles = document.querySelectorAll('.file-tex'); btn.addEventListener('click', function(e) { if ( btn.innerHTML != '<span class="fa fa-check"></span>' ) { btn.innerHTML = '<span class="fa fa-check"></span>'; texfiles.forEach( function(file) { file.style.display="block"; }); } else { btn.innerHTML = ''; texfiles.forEach( function(file) { file.style.display="none"; }); } }); var filterer = document.querySelector('#filterer'), courseCards = document.querySelectorAll('.course-card'); filterer.addEventListener('keyup', function (e) { var str = filterer.value.toLowerCase().replace(' ', '-'); for ( var card of courseCards ) { if ( card.id.indexOf(str) == -1 ) { card.style.display = "none"; } else { card.style.display = "block"; } } });
     </script>
   </body>
 </html>
