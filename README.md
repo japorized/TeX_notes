@@ -28,16 +28,6 @@ My main editor is nvim, but I have a setup for Sublime Text as well.
   * Uses `pdflatex`
 
 ---
-### Known Issues
-
-* `tufte-latex` is likely broken in texlive2018, and there may be no hope of fixing it since it looks like the package is no longer maintained (last commit was in Jan 2016). I will, however, continue to use it, for there is nothing that can replace the sidenote and marginnote that it provides. I am using `fancyhdr` to replace the default header in `tufte-latex` (which I believe is what they used as well).
-
----
-### Typos? Erroneous proof?
-
-Please feel free to either contact me or create an issue.
-
----
 ### LaTeX Template
 
 The LaTeX Template of my notes is saved as `setup-nvim/tex_default.sh`.
@@ -60,7 +50,7 @@ endif
 
 **Preamble**
 
-Find out where the `texmf` directory should go on your system (different across Linux, macOS, and Windows). Put the preamble documents in `$DIR_TO_TEXMF/texmf/latex/local/`, and use `kpsewhich $PREAMBLE_FILE` to see if your texlive installation can detect the file.
+Use the `bootstrap` shell script to symlink the `.sty` files and preambles sitting in `tex-common/` to your `TEXMFHOME` path, as determined by `kpsewhich --var-value=TEXMFHOME`. Sorry Windows users, `bootstrap` only works for UNIX-like systems using the POSIX standard.
 
 ---
 ### Snippets
@@ -75,4 +65,4 @@ My Sublime Text snippet is provided in the file `setup-subl/tex.sublime-completi
 
 ### Information about PMATH351F17 and PMATH347F17
 
-These notes will stop at Lecture 11, since I have to drop these courses due to personal reasons. I will continue to accept typo amendments wherever necessary. Please feel free to copy these notes for yourselves and continue editing from there.
+These notes will stop at Lecture 11, since I have to drop these courses due to personal reasons. For PMATH347, I have retaken the course and have a completed set of notes now. See PMATH347S18. I will be taking PMATH351 in F18.

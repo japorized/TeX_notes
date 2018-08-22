@@ -1,0 +1,26 @@
+#!/usr/bin/env sh
+
+texmfhome=$(kpsewhich --var-value=TEXMFHOME)
+texnotesdir=$( cd $(dirname $0) ; pwd )
+
+if [ ! -d "$texmfhome" ]
+then
+  echo "Process will symlink files from $texnotesdir/tex-common"
+  read -p "$texmfhome does not exist. mkdir? (yN) " yn
+  case $yn in
+      [Yy]* ) mkdir -p $texmfhome/tex/latex; echo "[+] $texmfhome created" ; break;;
+      * ) echo "Script terminated" ; exit 0;;
+  esac
+else
+  echo "This operation will overwrite existing files (if any) from the origin to the destination.
+  origin      : $texnotesdir/tex-common
+  destination : $texmfhome/tex/latex"
+  read -p "Overwrite? (yN) " overwrite
+  case $overwrite in
+    [Yy]* ) break ;;
+    * ) echo "Script terminated" ; exit 0 ;;
+  esac
+fi
+
+ln -sf $texnotesdir/tex-common/* $texmfhome/tex/latex/
+echo "[~] symlinks with files in $texnotesdir/tex-common/ established"
