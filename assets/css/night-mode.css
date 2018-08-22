@@ -9,6 +9,6 @@ a:link {
   text-decoration: underline;
 }
 
-.tex-toggle {
+.tex-toggle, .filter-control input, .filter-control {
   border-color: #fffff8;
 }
