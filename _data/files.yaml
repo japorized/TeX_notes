@@ -1,3 +1,11 @@
+- title: ACTSC431 F18 - Loss Model I
+  pdf:
+    - title: classnotes.pdf
+      src: ./ACTSC431/classnotes.pdf
+  tex:
+    - title: classnotes.tex
+      src: ./ACTSC431/classnotes.tex
+
 - title: PMATH347 S18 - Groups and Rings
   pdf:
   - title: classnotes.pdf
