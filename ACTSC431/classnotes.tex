@@ -1,0 +1,162 @@
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{ACTSC 431 - Loss Model I}
+\author{Johnson Ng}
+\subtitle{Classnotes for Fall 2018}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
+
+\input{latex-classnotes-preamble.tex}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\maketitle
+\hypersetup{pageanchor=true}
+\tableofcontents
+
+\chapter*{\faBook \enspace List of Definitions}
+\addcontentsline{toc}{chapter}{List of Definitions}
+\theoremlisttype{all}
+\listtheorems{defn}
+
+\chapter*{\faCoffee \enspace List of Theorems}
+\addcontentsline{toc}{chapter}{List of Theorems}
+\theoremlisttype{allname}
+\listtheorems{axiom,lemma,thm,crly,propo}
+
+\chapter{Lecture 1 Sep 06}%
+\label{chp:lecture_1_sep_06}
+% chapter lecture_1_sep_06
+
+\section{Introduction and Overview}%
+\label{sec:introduction_and_overview}
+% section introduction_and_overview
+
+\paragraph{Course Objective} In Loss Model I, the focus of our study is to learn the basic methods which are used by insurers to quantify risk from mathematical/statistical models, in order for insurers to make various decisions\sidenote{e.g. setting premiums, control expenses, deciding for reinsurance, etc.}. By quantifying risk, it helps us monitor underlying risks so that not only are we aware of them, but also so that we can take actions or preventive measures against them.
+
+Our main interest of this course is:
+\begin{itemize}
+  \item to quantify and seek protection against the loss of funds due either to \hlnoteb{too many claims} or \hlnoteb{a few large claims};
+  \item to reduce adverse financial impact of random events that prevent the realization of reasonable expectations.
+\end{itemize}
+
+\newthought{The main model that shall be the focus} of this course is \hlnoteb{models for liability risk}.
+
+\begin{defn}[Liability Risk]\index{Liability Risk}
+\label{defn:liability_risk}
+  A \hlnoteb{liability risk} is a risk that insurance companies assume by selling insurance contracts.
+\end{defn}
+
+In particular, the liability that we shall focus on is \hlnotea{insurance claims}.\marginnote{Many of the models that we shall see later in the course are also applied for other types of risks, e.g. investment risk, credit risk, liquidity risk, and operational risk.}
+
+\newthought{We are interested} in modelling the total amount of claims, i.e. the \hldefn{aggregate claim amount}, of a group fo insurance policies over a given period of time. In the actuarial literature, there are two main approaches that have been proposed to model the aggrement claim amount of an insurance portfolio, namely:
+\begin{itemize}
+  \item individual risk model;
+  \item collective risk model.
+\end{itemize}
+
+\subsection{Individual Risk Model}%
+\label{sub:individual_risk_model}
+% subsection individual_risk_model
+
+\begin{defn}[Individual Risk Model]\index{Individual Risk Model}
+\label{defn:individual_risk_model}
+  In an \hlnoteb{individual risk model}, the aggregate claim is modeled by
+  \begin{equation*}
+    S = \sum_{i=1}^{n} Z_i
+  \end{equation*}
+  where $n$ is a \hlnotea{deterministic}\sidenote{{\color{base16-eighties-light}i.e. fixed}} integer that represents the \hlnotec{total number of insurance policies}, and $Z_i$ is a random variable for the \hlnotec{potential loss of the $i$\textsuperscript{th} insurance policy.}
+\end{defn}
+
+\begin{note}
+  Since a policy may or may not incur a loss\sidenote{Since a claim may or may not be made!}, we have that
+  \begin{equation*}
+    P(Z_i = 0) > 0.
+  \end{equation*}
+  Thus, in an individual risk model, we may also express the aggregate claim amount as
+  \begin{equation*}
+    S = \sum_{i=1}^{n} X_i I_i
+  \end{equation*}
+  where $I_i$ is the indicator function about the claimant of policy $i$, while $X_i$ represents the size of the claim(s) for the $i$\textsuperscript{th} policy.
+\end{note}
+
+However, in an individual risk model, according to Dhaene and Vyncke (2010)\cite{DhaeneVyncke2010},
+
+\begin{displayquote}
+  A third type of error that may arise when computing aggregate claims follows from the fact that the assumption of mutual independency of the individual claim amounts may be violated in practice.
+\end{displayquote}
+
+Due to complications such as this, the individual risk model will not be the focus of our studies.
+
+% subsection individual_risk_model (end)
+
+\subsection{Collective Risk Model}%
+\label{sub:collective_risk_model}
+% subsection collective_risk_model
+
+\begin{defn}[Collective Risk Model]\index{Collective Risk Model}
+\label{defn:collective_risk_model}
+  In a \hlnoteb{collective risk model}, the aggregate claim is modeled by
+  \begin{equation*}
+    S = \sum_{i=1}^{N} X_i,
+  \end{equation*}
+  where $N$ is a non-negative integer-valued random variable that denotes \hlnotec{the number of claims among a given set of policies}, while $X_i$ denotes the \hlnotec{size of the $i$\textsuperscript{th} policy.}
+\end{defn}
+
+\begin{note}
+  In a collective risk model, we need to determine:
+  \begin{itemize}
+    \item the distribution of the total number of claims for the entire portfolio, i.e. the distribution of $N$; and
+    \item the distribution of the loss amount per claim, i.e. the distribution of $X_i$.
+  \end{itemize}
+\end{note}
+
+% subsection collective_risk_model (end)
+
+In this course, the primary focus of our studies will be on \hlnotea{collective risk models}.
+
+\paragraph{Terminologies} To end today's lecture, the following terminologies are introduced:
+
+\begin{defn}[Severity Distribution]\index{Severity Distribution}
+\label{defn:severity_distribution}
+  The \hlnoteb{severity distribution} is the distribution of the loss amount of the amount paid by the insurer on a given loss/claim.
+\end{defn}
+
+\begin{defn}[Frequency Distribution]\index{Frequency Distribution}
+\label{defn:frequency_distribution}
+  The \hlnoteb{frequency distribution} is the distributino fo the number of losses/claims paid by the insurer over a given period of time.
+\end{defn}
+
+\begin{note}
+  The frequency distribution is typically a discrete distribution.
+\end{note}
+
+\begin{defn}[Aggrement Payment / Loss]\index{Aggrement Payment}\index{Aggregate Loss}
+\label{defn:aggrement_payment_loss}
+  The \hlnoteb{aggregate payment (loss)} is the total amout of all claim payments (losses) over a given period of time.
+\end{defn}
+
+\begin{note}
+  There is a distinction between an aggregate payment and an aggregate loss, since an aggregate payment is ``essentially'' an aggregate loss after certain claim adjustments, such as deductibles, limits, and coinsurance.
+\end{note}
+
+% section introduction_and_overview (end)
+
+% chapter lecture_1_sep_06 (end)
+
+\appendix
+
+\backmatter
+
+\pagestyle{plain}
+
+\nobibliography*
+\bibliography{references}
+
+\printindex
+
+\end{document}
+
