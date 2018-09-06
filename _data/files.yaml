@@ -1,3 +1,11 @@
+- title: PMATH733/433 F18 - Model Theory and Set Theory
+  pdf:
+    - title: classnotes.pdf
+      src: ./PMATH733/classnotes.pdf
+  tex:
+    - title: classnotes.tex
+      src: ./PMATH733/classnotes.tex
+
 - title: ACTSC431 F18 - Loss Model I
   pdf:
     - title: classnotes.pdf
