@@ -38,6 +38,8 @@
 \usepackage{centernot}
 \usepackage{silence}
   \WarningFilter*{latex}{Marginpar on page \thepage\space moved}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
 \usepackage[amsmath,hyperref]{ntheorem}
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
@@ -209,6 +211,48 @@
 \theorempostwork{\textcolor{base16-eighties-red}{\hrule height 2pt}}
 \theoremindent10pt
 \newtheorem*{warning}{\faBug \enspace Warning}
+
+% more environments
+\newtcolorbox{redquote}{
+  blanker,enhanced,breakable,standard jigsaw,
+  opacityback=0,
+  coltext=base16-eighties-light,
+  left=5mm,right=5mm,top=2mm,bottom=2mm,
+  colframe=base16-eighties-red,
+  boxrule=0pt,leftrule=3pt
+}
+\newtcolorbox{bluequote}{
+  blanker,enhanced,breakable,standard jigsaw,
+  opacityback=0,
+  coltext=base16-eighties-light,
+  left=5mm,right=5mm,top=2mm,bottom=2mm,
+  colframe=base16-eighties-blue,
+  boxrule=0pt,leftrule=3pt
+}
+\newtcolorbox{greenquote}{
+  blanker,enhanced,breakable,standard jigsaw,
+  opacityback=0,
+  coltext=base16-eighties-light,
+  left=5mm,right=5mm,top=2mm,bottom=2mm,
+  colframe=base16-eighties-green,
+  boxrule=0pt,leftrule=3pt
+}
+\newtcolorbox{yellowquote}{
+  blanker,enhanced,breakable,standard jigsaw,
+  opacityback=0,
+  coltext=base16-eighties-light,
+  left=5mm,right=5mm,top=2mm,bottom=2mm,
+  colframe=base16-eighties-yellow,
+  boxrule=0pt,leftrule=3pt
+}
+\newtcolorbox{magentaquote}{
+  blanker,enhanced,breakable,standard jigsaw,
+  opacityback=0,
+  coltext=base16-eighties-light,
+  left=5mm,right=5mm,top=2mm,bottom=2mm,
+  colframe=base16-eighties-magenta,
+  boxrule=0pt,leftrule=3pt
+}
 
 % ntheorem listtheorem style
 \makeatother

@@ -1,0 +1,240 @@
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{PMATH433/733 - Model Theory and Set Theory}
+\author{Johnson Ng}
+\subtitle{Classnotes for Fall 2018}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
+
+\input{latex-classnotes-preamble.tex}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\maketitle
+\hypersetup{pageanchor=true}
+\tableofcontents
+
+\chapter*{\faBook \enspace List of Definitions}
+\addcontentsline{toc}{chapter}{List of Definitions}
+\theoremlisttype{all}
+\listtheorems{defn}
+
+\chapter*{\faCoffee \enspace List of Theorems}
+\addcontentsline{toc}{chapter}{List of Theorems}
+\theoremlisttype{allname}
+\listtheorems{axiom,lemma,thm,crly,propo}
+
+\chapter*{Foreword}%
+\label{chp:foreword}
+% chapter foreword
+
+This course has a ratio of about 1:3 for naive set theory to model theory.
+
+% chapter foreword (end)
+
+\chapter{Lecture 1 Sep 06th}%
+\label{chp:lecture_1_sep_06th}
+% chapter lecture_1_sep_06th
+
+\section{Introduction to Set Theory}%
+\label{sec:introduction_to_set_theory}
+% section introduction_to_set_theory
+
+\newthought{In this course}, we shall focus only on \hlnotea{practical set theory}, which is more commonly knowned as \hlnotea{naive set theory}. In practical set theory, we look at set theory as a language of mathematics. Some of the examples of which we look into in this flavour of set theory are (transfinite) induction and recursion, and the measuring of the sizes of sets.
+
+Another approach to set theory, one that is deemed required in order to learn set theory is a more formal way, is to look at set theory as the foundations of mathematics. Such an approach is more axiomatic, rigorous, and grounding as compared to practical set theory. This course will try to work around going into these topics, as they can take a life of their own, and within the context of this course, the topics that will be explored using this approach are not required.
+
+% section introduction_to_set_theory (end)
+
+\section{Ordinals}%
+\label{sec:ordinals}
+% section ordinals
+
+We use the natural numbers, i.e.
+\begin{equation*}
+  0, 1, 2, 3, 4, ...
+\end{equation*}
+to \hlnotea{count} finite sets. There are two related meanings attached to the word ``count'' here:
+\begin{itemize}
+  \item enumeration; and
+  \item measuring (of sizes)
+\end{itemize}
+
+In order to facilitate the introduction to certain axioms that we shall need, let our current goal be to develop an infinitary generalization of the natural numbers, so as to be able to enumerate and measure arbitrary sets.\marginnote{We have that
+\begin{align*}
+  \text{ enumeration } &\to \text{ ordinals } \\
+  \text{ measuring } &\to \text{ cardinals }
+\end{align*}
+where $\to$ represents ``leads to'' here.}
+
+\newthought{To construct} the natural numbers, we require 3 basic notions that shall remain undefined but understood:
+\begin{itemize}
+  \item a set;
+  \item membership, denoted by $\in$; and
+  \item equality.
+\end{itemize}
+
+One such construction is
+\begin{align*}
+  0 &:= \emptyset, \text{ the empty set } \\
+  1 &:= \{0\} = \{ \emptyset \}, \text{ the set whose only member is } 0 \\
+  2 &:= \{0, 1\} = \{ \emptyset, \{ \emptyset \} \}, \text{ the set whose only members are } 0 \text{ and } 1.
+\end{align*}
+
+\begin{defn}[Successor]\index{Successor}
+\label{defn:successor}
+  Given a natural number $n$, the \hlnoteb{successor} of $n$ is the natural number next to $n$, which can be obtained by
+  \begin{equation*}
+    S(n) := n \cup \{ n \}.
+  \end{equation*}
+\end{defn}
+
+We can use the definition of a successor to construct the rest of the natural numbers.
+
+\begin{eg}
+  Just to verify to ourselves that the definition indeed works, observe that
+  \begin{equation*}
+    S(1) = 2 = \{ \emptyset, \{ \emptyset \} \} = \{ \emptyset \} \cup \{ \{ \emptyset \} \}.
+  \end{equation*}
+  So to construct the natural number $3$, we see that
+  \begin{align*}
+    S(2) &= 3 = \{ 0, 1, 2 \} = 2 \cup \{ 2 \} = \{ \emptyset, \{ \emptyset \} \} \cup \{ \{ \emptyset, \{ \emptyset \} \} \} \\
+         &= \{ \emptyset, \{ \emptyset \}, \{ \emptyset, \{ \emptyset \} \} \}
+  \end{align*}
+\end{eg}
+
+Looking at these, we start wondering to ourselves: how do we know that $\emptyset$ exists in the first place? How do we know that we can use $\cup$ and what does it even mean? Now it is meaningless if we cannot take that $\emptyset$ always exists, nor is it meaningful if we cannot take the $\cup$ of sets. And so, to allow us to continue, or even start with these notions, we require axioms.
+
+\begin{axiom}[Empty Set Axiom]
+\index{Empty Set Axiom}
+\label{axiom:empty_set_axiom}
+  There exists a set, denoted by $\emptyset$, with no members.
+\end{axiom}
+
+With this axiom, we can indeed construct $0$. To get $1$ from $0$, we have that $1$ is a set whose only member is zero, and so if we take a member from $1$, that member must be $0$.
+
+\begin{axiom}[Pairset Axiom]
+\index{Pairset Axiom}
+\label{axiom:pairset_axiom}
+  Given set $x, y$, there exists a set, denoted by $\{x , y\}$, whose only members are $x$ and $y$. In other words,
+  \begin{equation*}
+    t \in \{ x, y \} \iff ( t = x \, \lor \, t = y )
+  \end{equation*}
+\end{axiom}
+
+Now note that in \cref{axiom:pairset_axiom}, if $x = y$, then the set $\{x, y\}$ has only $x$ as its member. For example, we realize that $1 = \{ 0, 0 \} = \{ 0 \}$. But why exactly does this equality make sense? What exactly does ``realize'' mean?
+
+\begin{axiom}[Axiom of Extension]
+\index{Axiom of Extension}
+\label{axiom:axiom_of_extension}
+  Given sets $x, y$, $x = y$ if and only if $x$ and $y$ have the same members.
+\end{axiom}
+
+Now, using the above 3 axioms, we are guaranteed that
+\begin{align*}
+  0 &= \emptyset \text{ exists by the Empty Set Axiom } \\
+  1 &= \{ \emptyset \} \text{ exists by the Pairset Axiom } \\
+  2 &= \{ \emptyset, \{ \emptyset \} \} \text{ exists by the Pairset Axiom }
+\end{align*}
+
+Now we've constructed $3$ to be the set whose only members are $0, 1$, and $2$. So far, within our axioms, there is no such thing as $\{0, 1, 2\}$, which is what our $3$ is supposed to be. We now require the following axiom:
+
+\begin{axiom}[Union Set Axiom]
+\index{Union Set Axiom}
+\label{axiom:union_set_axiom}
+  Given a set $x$, there exists a set denoted by $\cup x$, whose members are precisely the members of the members of $x$, i.e.
+  \begin{equation*}
+    t \in \cup x \iff ( t \in y \text{ for some } y \in x )
+  \end{equation*}
+\end{axiom}
+
+So, by this axiom, we have that given any $n$, $S(n) = \cup \{ n, \{ n \} \}$, or in other words,
+\begin{equation*}
+  t \in S(n) \iff t \in n \, \lor \, t = n.
+\end{equation*}
+
+With all of the above axioms, we can iteratively construct each and every natural number in a rigorous manner. However, our goal is to construct infinitely many of them.
+
+It is tempting to simply take the infinitude of natural numbers simply as an axiom, i.e.
+
+\begin{magentaquote}\label{sp:natural_numbers_axiom}
+  There exists a set whose members are precisely the natural numbers.
+\end{magentaquote}
+
+There is a certain rule to which we set down axioms, and that is, axioms must be expressable in a ``finitary'' manner, i.e. they must be expressible using first-order logic.
+
+\begin{defn}[Definite Condition]\index{Definite Condition}
+\label{defn:definite_condition}
+  We define a \hlnoteb{definite condition} as follows:
+  \begin{itemize}
+    \item $x \in y$ and $x = y$ are definite conditions, where $x$ and $y$ are both indeterminants, standing for sets, or are sets themselves;
+    \item if $P$ and $Q$ are definite conditions, then so are
+      \begin{itemize}
+        \item not $P$, denoted as $\neg P$;
+        \item $P$ and $Q$, denoted as $P \land Q$;
+        \item $P$ or $Q$, denoted as $P \lor Q$;
+        \item for all $x$, $P$, denoted as $\forall x P$; and
+        \item there exists $x$, $P$, denoted as $\exists x P$.
+      \end{itemize}
+  \end{itemize}
+\end{defn}
+
+\begin{eg}
+  \begin{equation*}
+    x \in 1, 0 \in 2 , 2 \in 0
+  \end{equation*}
+  are all definite conditions. Note, however, that $2 \in 0$ is false.
+\end{eg}
+
+\begin{note}
+  ``If $P$ then $Q$'' is also a definite condition since it is ``\hlnotea{equivalent}''\sidenote{We have yet to define what equivalent statements are but we shall take this for granted for now.} to the statement $\neg P \lor Q$.
+\end{note}
+
+Now, with this definition, and first-order logic notations in mind, we can write:
+
+\marginnote{
+  \begin{ex}
+    Write \cref{axiom:axiom_of_extension} in first-order logic notation.
+  \end{ex}
+
+  \begin{solution}
+    \begin{gather*}
+      \forall x \; \forall y \\
+      ( x = y ) \iff ( \forall t \; ( ( t \in x ) \iff ( t \in y ) ) )
+    \end{gather*}
+  \end{solution}
+}
+\begin{itemize}
+  \item Empty Set Axiom: $\exists x \; \forall t \; \neg ( t \in x )$
+  \item Pairset Axiom: $\forall x \; \forall y \; \exists p \; \forall t \; ( t \in p \iff ( ( t = x ) \lor ( t = y ) ) )$
+    \item Union Set Axiom: $\forall x \; \exists z \; \forall t \; ( ( t \in z ) \iff ( \exists y \; ( (y \in x) \land ( t \in y ) ) ) )$
+\end{itemize}
+
+Note that the statement that we proposed as an axiom for the set of natural numbers in page \pageref{sp:natural_numbers_axiom} is not definite, although that itself is not obvious.
+
+For example, we may try to write
+\begin{equation*}
+  \exists x \; ( \forall t \; ( ( t \in x ) \iff ( (t = 0) \lor (t = 1) \lor ( t = 2 ) \lor ... ) ) )
+\end{equation*}
+and then notice that we do not have the notion of $...$ within the ``tools'' that we are allowed to use.
+
+% section ordinals (end)
+
+% chapter lecture_1_sep_06th (end)
+
+\appendix
+
+\backmatter
+
+\pagestyle{plain}
+
+\nobibliography*
+% \bibliography{references}
+
+\printindex
+
+\end{document}
+
