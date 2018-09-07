@@ -1,3 +1,11 @@
+- title: PMATH351 F18 - Real Analysis
+  pdf:
+    - title: classnotes.pdf
+      src: ./PMATH351F18/classnotes.pdf
+  tex:
+    - title: classnotes.tex
+      src: ./PMATH351F18/classnotes.tex
+
 - title: PMATH733/433 F18 - Model Theory and Set Theory
   pdf:
     - title: classnotes.pdf

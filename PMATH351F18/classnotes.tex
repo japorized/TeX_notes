@@ -1,0 +1,85 @@
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{PMATH351 - Real Analysis}
+\author{Johnson Ng}
+\subtitle{Classnotes for Fall 2018}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
+
+\input{latex-classnotes-preamble.tex}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\maketitle
+\hypersetup{pageanchor=true}
+\tableofcontents
+
+\chapter*{\faBook \enspace List of Definitions}
+\addcontentsline{toc}{chapter}{List of Definitions}
+\theoremlisttype{all}
+\listtheorems{defn}
+
+\chapter*{\faCoffee \enspace List of Theorems}
+\addcontentsline{toc}{chapter}{List of Theorems}
+\theoremlisttype{allname}
+\listtheorems{axiom,lemma,thm,crly,propo}
+
+\chapter{Lecture 1 Sep 06th}%
+\label{chp:lecture_1_sep_06th}
+% chapter lecture_1_sep_06th
+
+\section{Course Logistics}%
+\label{sec:course_logistics}
+% section course_logistics
+
+No content is covered in today's lecture so this chapter will cover some of the important logistical highlights that were mentioned in class.
+
+\begin{itemize}
+  \item Assignments are designed to help students understand the content.
+  \item Due to shortage of manpower, not all assignment questions will be graded; however, students are encouraged to attempt all of the questions.
+  \item To further motivate students to work on ungraded questions, the midterm and final exam will likely recycle some of the assignment questions.
+  \item There are no required text, but the professor has prepared course notes for reading. The course note are self-contained.
+  \item The approach of the class will be more interactive than most math courses.
+  \item Due to the size of the class, students are encouraged to utilize Waterloo Learn for questions, so that similar questions by multiple students can be addressed at the same time.
+\end{itemize}
+
+% section course_logistics (end)
+
+\section{Preview into the Introduction}%
+\label{sec:preview_into_the_introduction}
+% section preview_into_the_introduction
+
+How do we compare the size of two sets?
+
+\begin{itemize}
+  \item If the sets are finite, this is a relatively easy task.
+  \item If the sets are infinite, we will have to rely on functions.
+    \begin{itemize}
+      \item Injective functions tell us that the \hlnoteb{domain is of size that is lesser than or equal to the codomain}.
+      \item Surjective functions tell us that the \hlnoteb{codomain is of size that is lesser than or equal to the domain}.
+      \item So does a bijective function tell us that the domain and codomain have the same size? Yes, although this is not as intuitive as it looks, as it relies on \hlnotea{Cantor-Schr\"oder-Bernstein Theorem}.
+    \end{itemize}
+\end{itemize}
+
+Now, given two arbitrary sets, are we guaranteed to always be able to compare their sizes? It would be very tempting to immediately say yes, but to do that, one would have to agree on the \hlnotea{Axiom of Choice}. Fortunately, within the realm of this course, the Axiom of Choice is taken for granted.
+
+% section preview_into_the_introduction (end)
+
+% chapter lecture_1_sep_06th (end)
+
+\appendix
+
+\backmatter
+
+\pagestyle{plain}
+
+\nobibliography*
+\bibliography{references}
+
+\printindex
+
+\end{document}
+
