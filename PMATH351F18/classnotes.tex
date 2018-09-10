@@ -70,6 +70,277 @@ Now, given two arbitrary sets, are we guaranteed to always be able to compare th
 
 % chapter lecture_1_sep_06th (end)
 
+\chapter{Lecture 2 Sep 10th}%
+\label{chp:lecture_2_sep_10th}
+% chapter lecture_2_sep_10th
+
+\section{Basic Set Theory}%
+\label{sec:basic_set_theory}
+% section basic_set_theory
+
+We shall use the following notations for some of the common set of numbers that we are already familiar with:
+\begin{itemize}
+  \item $\mathbb{N}$ denotes the set of natural numbers $\{1, 2, 3, ...\}$;
+  \item $\mathbb{Z}$ denotes the set of integers $\{..., -2, -1, 0, 1, 2, ...\}$;
+  \item $\mathbb{Q}$ denotes the set of rational numbers $\left\{ \frac{a}{b} \mid a \in \mathbb{Z}, b \in \mathbb{N} \right\}$; and
+  \item $\mathbb{R}$ denotes the set of real numbers.
+\end{itemize}
+
+We shall start with having certain basic properties of $\mathbb{N}$, $\mathbb{Z}$, and $\mathbb{Q}$.
+
+\newthought{We will use} the notation $A \subset B$ and $A \subseteq B$ interchangably to mean that $A$ is a subset of $B$ with the possibility that $A = B$. When we wish to explicitly emphasize this possibility, we shall use $A \subseteq B$. When we wish to explicitly state that $A$ is a \hlnotea{proper subset} of $B$, we will either specify that $A \neq B$ or simply $A \subsetneq B$.
+
+\begin{defn}[Universal Set]\index{Universal Set}
+\label{defn:universal_set}\marginnote{This is a hand-wavy definition, but it is not in the interest of this course to further explore on this topic.}
+  A universal set, which we shall generally give the label $X$, is a set that contains all the mathematical objects that we are interested in.
+\end{defn}
+
+With a universal set in place, we can have the following definitions:
+
+\begin{defn}[Union]\index{Union}
+\label{defn:union}
+  Let $X$ be a set. If $\{A_\alpha\}_{\alpha \in I}$ such that $A_{\alpha} \subset X$, then the \hlnoteb{union} for all $A_{\alpha}$ is defined as
+  \begin{equation*}
+    \bigcup_{\alpha \in I} A_{\alpha} := \{ x \in X \mid \exists \alpha \in I, x \in A_{\alpha} \}.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Intersection]\index{Intersection}
+\label{defn:intersection}
+  Let $X$ be a set. If $\{A_\alpha\}_{\alpha \in I}$ such that $A_\alpha \subset X$, then the \hlnoteb{intersection} for all $A_\alpha$ is defined as
+  \begin{equation*}
+    \bigcap_{\alpha \in I} A_\alpha := \{ x \in X \mid \forall \alpha \in I, x \in A_\alpha \}.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Set Difference]\index{Set Difference}
+\label{defn:set_difference}
+  Let $X$ be a set and $A, B \subseteq X$. The \hlnoteb{set difference} of $A$ from $B$ is defined as
+  \begin{equation*}
+    A \setminus B := \{ x \in X \mid x \in A, x \notin B \}.
+  \end{equation*}
+\end{defn}
+
+On a similar notion:
+
+\begin{defn}[Symmetric Difference]\index{Symmetric Difference}
+\label{defn:symmetric_difference}
+Let $X$ be a set and $A, B \subseteq X$. The \hlnoteb{symmetric difference} of $A$ and $B$ is defined as\marginnote{In words, for an element in the symmetric difference of two sets, the element is either in $A$ or $B$ but not both. We can also think of the symmetric difference as
+\begin{equation*}
+  ( A \cup B ) \setminus (A \cap B)
+\end{equation*}
+or
+\begin{equation*}
+  ( A \setminus B ) \cup (B \setminus A).
+\end{equation*}
+}
+  \begin{equation*}
+    A \Delta B := \{ x \in X \mid ( x \in A \land x \notin B ) \lor ( x \notin A \land x \in B ) \}.
+  \end{equation*}
+\end{defn}
+
+We can also talk about the non-members of a set:
+
+\begin{defn}[Set Complement]\index{Set Complement}
+\label{defn:set_complement}
+  Let $X$ be a set and $A \subset X$. The set of all non-members of $A$ is called the \hlnoteb{complement} of $A$, which we denote as
+  \begin{equation*}
+    A^c := \{ x \in X \mid x \notin A \}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Note that
+  \begin{equation*}
+    \left( A^c \right)^c = \{ x \in X \mid x \notin A^c \} = \{ x \in X \mid x \in A \} = A.
+  \end{equation*}
+\end{note}
+
+Now taking a step away from that, we define the following:
+
+\begin{defn}[Empty Set]\index{Empty Set}
+\label{defn:empty_set}
+  An \hlnoteb{empty set}, denoted by $\emptyset$, is a set that contains nothing.
+\end{defn}
+
+\begin{note}
+  The empty set is set to be a subset of all sets.
+\end{note}
+
+\begin{defn}[Power Set]\index{Power Set}
+\label{defn:power_set}
+  Let $X$ be a set. The power set of $X$ is the set that contains all subsets of $X$, i.e.
+  \begin{equation*}
+    \mathcal{P}(X) := \{ A \mid A \subset X \}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  A power set is always non-empty, since $\emptyset \in \mathcal{P}(\emptyset)$, and since $\emptyset \subset X$ for any set $X$, we have $\emptyset \in \mathcal{P}(X)$.
+\end{note}
+
+\begin{eg}
+  Let $X = \{1, 2, ..., n\}$. There are several ways we can show that the size of $\mathcal{P}(X)$ is $2^n$. One of the methods is by using a characteristic function that maps from $A$ to $\{0, 1\}$, defined by
+  \begin{gather*}
+    X_A: A \to \{0, 1\} \\
+    X_A(x) = \begin{cases}
+      1 & x \in A \\
+      0 & x \notin A
+    \end{cases}.
+  \end{gather*}
+  Using this function, each element in $X$ have 2 states: one being in the subset, and the other being not in the subset, which are represented by $1$ and $0$ respectively. It is then clear that there are $2^n$ of such configurations.
+\end{eg}
+
+\begin{thm}[De Morgan's Laws]
+\index{De Morgan's Laws}
+\label{thm:de_morgan_s_laws}
+  Let $X$ be a set. Given $\{A_\alpha\}_{\alpha \in I} \subset \mathcal{P}(X)$, we have
+  \begin{enumerate}
+    \item $\left( \bigcup\limits_{\alpha \in I} A_\alpha \right)^c = \bigcap\limits_{\alpha \in I} A_\alpha^c$; and
+    \item $\left( \bigcap\limits_{\alpha \in I} A_\alpha \right)^c = \bigcup\limits_{\alpha \in I} A_\alpha^c$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Note that
+      \begin{align*}
+        x \in \left( \bigcup_{\alpha \in I} A_\alpha \right)^c &\iff \nexists \alpha \in I \enspace x \in A_\alpha \\
+        &\iff \forall \alpha \in I \enspace x \notin A_\alpha \\
+        &\iff \forall \alpha \in I \enspace x \in A_\alpha^c \text{ by set complementation } \\
+        &\iff x \in \bigcap_{\alpha \in I} A_\alpha^c.
+      \end{align*}
+
+    \item Observe that, by part 1,
+      \begin{align*}
+        \left( \bigcap_{\alpha \in I} A_\alpha \right)^c = \left( \left( \bigcup_{\alpha \in I} A_{\alpha}^c \right)^c \right)^c = \bigcup_{\alpha \in I} A_\alpha^c.
+      \end{align*}
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{eg}
+  Suppose $I = \emptyset$. Then what is $\bigcup\limits_{\alpha \in \emptyset} A_\alpha$? It is sensible to think that all we are left with is simply a union of empty sets, and so
+  \begin{equation}\label{eq:union_of_empty_sets}
+    \bigcup_{\alpha \in \emptyset} A_\alpha = \emptyset.
+  \end{equation}
+  And what about $\bigcap\limits_{\alpha \in \emptyset} A_\alpha$? By \cref{thm:de_morgan_s_laws}, it is quite clear from \cref{eq:union_of_empty_sets} that
+  \begin{equation*}
+    \bigcap_{\alpha \in \emptyset} A_\alpha = X.
+  \end{equation*}
+\end{eg}
+
+% section basic_set_theory (end)
+
+\section{Products of Sets}%
+\label{sec:products_of_sets}
+% section products_of_sets
+
+\begin{defn}[Product of Sets]\index{Product of Sets}
+\label{defn:product_of_sets}
+  Given $2$ sets $X$ and $Y$, the \hlnoteb{product} of $X$ and $Y$ is given by
+  \begin{equation*}
+    X \times Y := \{ (x, y) \mid x \in X , y \in Y \}.
+  \end{equation*}
+  We often refer to elements of $X \times Y$ as \hldefn{tuples}.
+\end{defn}
+
+\begin{note}
+  Now if
+  \begin{align*}
+    X &= \{ x_1, x_2, ..., x_n \}, \\
+    Y &= \{ y_1, y_2, ..., y_m \},
+  \end{align*}
+  then
+  \begin{equation*}
+    X \times Y = \{ (x_i, y_j) \mid i = 1, 2, ..., n, \; j = 1, 2, ..., m \}
+  \end{equation*}
+  and so the size of $X \times Y$ is $mn$.
+\end{note}
+
+Consequently, we can think of tuples as two elements being in some ``relation''.
+
+\begin{defn}[Relation]\index{Relation}
+\label{defn:relation}
+  A \hlnoteb{relation} on sets $X$ and $Y$ is a subset $R$ of the product $X \times Y$. We write
+  \begin{equation*}
+    xRy \enspace \text{ if } (x, y) \in R \subset X \times Y.
+  \end{equation*}
+  We call
+  \begin{itemize}
+    \item $\{ x \in X \mid \exists y \in Y, (x, y) \in R \}$ as the \hldefn{domain} of $R$; and 
+    \item $\{ y \in Y \mid \exists x \in X, (x, y) \in R \}$ as the \hldefn{range} of $R$.
+  \end{itemize}
+\end{defn}
+
+In relation to that, functions are, essentially, relations.
+
+\begin{defn}[Function]\index{Function}
+\label{defn:function}
+  A \hlnoteb{function} from $X$ to $Y$ is a relation $R$ such that
+  \begin{equation*}
+    \forall x \in X \; \exists! y \in Y \; (x, y) \in R.
+  \end{equation*}
+\end{defn}
+
+\newthought{Suppose} $X_1, X_2, ..., X_n$ are non-empty\sidenote{We are typically only interested in non-empty sets, since empty sets usually lead us to vacuous truths, which are not interesting.} sets. We can define
+\begin{equation*}
+  X_1 \times X_2 \times \hdots \times X_n = \prod_{i=1}^{n} X_i := \{ (x_1, x_2, ..., x_n) \mid x_i \in X_i \}.
+\end{equation*}
+Now if $X_i = X_j = X$ for all $i, j = 1, 2, ..., n$, we write
+\begin{equation*}
+  \prod_{i=1}^{n} X_i = \prod_{i=1}^{n} X = X^n.
+\end{equation*}
+
+\newthought{And now comes the problem}: given a collection $\{X_\alpha\}_{\alpha \in I}$ of non-empty sets\sidenote{i.e. we now talk about arbitrary $\alpha \in I$.}, what do we mean by
+\begin{equation*}
+  \prod_{\alpha \in I} X_\alpha ?
+\end{equation*}
+
+To motivate for what comes next, consider
+\begin{equation*}
+  \prod_{i=1}^{n} X_i = X_1 \times \hdots \times X_n = \{ (x_1, ..., x_n) \mid x_i \in X_i \}.
+\end{equation*}
+Choose $(x_1, ..., x_n) \in \prod\limits_{i=1}^{n} X_i$. This induces a function
+\begin{equation*}
+  f_{(x_1, ..., x_n)} : \{1, ..., n\} \to \bigcup_{i=1}^{n} X_i
+\end{equation*}
+with
+\begin{align*}
+  f(1) &= x_1 \in X_1 \\
+  f(2) &= x_2 \in X_2 \\
+       &\vdots
+  f(n) &= x_n \in X_n
+\end{align*}
+
+Now assume for a more general $f$ such that
+\begin{equation*}
+  f: \{1, ..., n\} \to \bigcup_{i=1}^{n} X_i
+\end{equation*}
+is defined by
+\begin{equation*}
+  f(i) \in X_i.
+\end{equation*}
+Then, we have
+\begin{equation*}
+  ( f(1), f(2), ..., f(n) ) \in \prod_{i=1}^{n} X_i,
+\end{equation*}
+which leads us to the following notion:
+
+\begin{defn}[Choice Function]\index{Choice Function}
+\label{defn:choice_function}
+  Given a collection $\{X_\alpha\}_{\alpha \in I}$ of non-empty sets, let
+  \begin{equation*}
+    \prod_{\alpha \in I} X_\alpha = \left\{ f: I \to \bigcup_{\alpha \in I} X_\alpha \right\}
+  \end{equation*}
+  such that $f(\alpha) \in X_\alpha$. Such an $f$ is called a \hlnoteb{choice function}.
+\end{defn}
+
+And so we may ask a similar question as before: if each $X_\alpha$ is non-empty, is $\prod\limits_{\alpha \in I} X_\alpha$ non-empty? Turns out this is not as easy to show. In fact, it is essentially impossible to show, because this is exactly the \hlnotea{Axiom of Choice}.
+
+% section products_of_sets (end)
+
+% chapter lecture_2_sep_10th (end)
+
 \appendix
 
 \backmatter
