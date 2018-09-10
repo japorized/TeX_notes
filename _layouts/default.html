@@ -1,0 +1,14 @@
+{% include head.html %}
+<article>
+  <h1>{{ page.title }}</h1>
+  <section>
+    {{ page.content | markdownify }}
+  <section>
+</article>
+<style>
+article h1, article h2 {
+  width: 55%;
+  line-height: 3rem;
+}
+</style>
+{% include footer.html %}

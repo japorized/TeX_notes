@@ -1,6 +1,6 @@
 \documentclass[11pt, oneside]{book}
 
-\include{latex-assignment-preamble}
+\include{latex-assignments-preamble}
 
 % Main Body
 \title{title}

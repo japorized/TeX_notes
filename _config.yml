@@ -23,7 +23,6 @@ url: "https://japorized.github.io/TeX_notes" # the base hostname & protocol for 
 
 # Build settings
 markdown: kramdown
-theme: minima
 plugins:
   - jekyll-feed
 
