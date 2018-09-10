@@ -1,6 +1,7 @@
 {% include head.html %}
 <article>
   <h1>{{ page.title }}</h1>
+  <a href="{{ site.baseurl }}"><span class="fa fa-arrow-left"></span> Back to index</a>
   <section>
     {{ page.content | markdownify }}
   <section>
