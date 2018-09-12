@@ -83,14 +83,14 @@ In particular, the liability that we shall focus on is \hlnotea{insurance claims
   \begin{equation*}
     S = \sum_{i=1}^{n} X_i I_i
   \end{equation*}
-  where $I_i$ is the indicator function about the claimant of policy $i$, while $X_i$ represents the size of the claim(s) for the $i$\textsuperscript{th} policy.
+  where $I_i$ is the indicator function about the claimant of policy $i$, while $X_i$ represents the size of the claim(s) for the $i$\textsuperscript{th} policy provided that there is a claim.\sidenote{\hlimpo{This is actually incorrect, despite being in the recommended textbook. See \cref{chp:individual_risk_model_an_alternative_view}.}}
 \end{note}
 
 However, in an individual risk model, according to Dhaene and Vyncke (2010)\cite{DhaeneVyncke2010},
 
-\begin{displayquote}
+\begin{redquote}
   A third type of error that may arise when computing aggregate claims follows from the fact that the assumption of mutual independency of the individual claim amounts may be violated in practice.
-\end{displayquote}
+\end{redquote}
 
 Due to complications such as this, the individual risk model will not be the focus of our studies.
 
@@ -104,8 +104,7 @@ Due to complications such as this, the individual risk model will not be the foc
 \label{defn:collective_risk_model}
   In a \hlnoteb{collective risk model}, the aggregate claim is modeled by
   \begin{equation*}
-    S = \sum_{i=1}^{N} X_i,
-  \end{equation*}
+    S = \sum_{i=1}^{N} X_i, \end{equation*}
   where $N$ is a non-negative integer-valued random variable that denotes \hlnotec{the number of claims among a given set of policies}, while $X_i$ denotes the \hlnotec{size of the $i$\textsuperscript{th} policy.}
 \end{defn}
 
@@ -150,7 +149,351 @@ In this course, the primary focus of our studies will be on \hlnotea{collective 
 
 % chapter lecture_1_sep_06 (end)
 
+\chapter{Lecture 2 Sep 11th}%
+\label{chp:lecture_2_sep_11th}
+% chapter lecture_2_sep_11th
+
+\section{Review of Probability Theory}%
+\label{sec:review_of_probability_theory}
+% section review_of_probability_theory
+
+Firstly, we shall review the definition of a random variable.
+
+\begin{defn}[Random Variable]\index{Random Variable}
+\label{defn:random_variable}
+  Let $\Omega$ be a sample space and $\mathcal{F}$ its $\sigma$-algebra\sidenote{For definitions of $\Omega$ and $\mathcal{F}$, see notes on STAT330.}. A \hlnoteb{random variable} (rv) $X : \Omega \to (\Omega, \mathcal{F})$ is a function from a possible set of outcomes to a measurable space $(\Omega, \mathcal{F})$. Within the context of our interest, $X$ is real-valued, i.e. $(\Omega, \mathcal{F}) = \mathbb{R}$.
+\end{defn}
+
+\subsection{Discrete Random Variables}%
+\label{sub:discrete_random_variables}
+% subsection discrete_random_variables
+
+\begin{defn}[Discrete Random Variable]\index{Discrete Random Variable}
+\label{defn:discrete_random_variable}
+  A \hlnoteb{discrete random variable} (drv) is an rv $X$ that takes only countable (finite) real values.
+\end{defn}
+
+\begin{note}
+  Let $X$ be a drv.
+  \begin{itemize}
+    \item The \hlnotea{probability mass function} (pmf) of $X$ is: for $i \in \mathbb{N}$,
+      \begin{equation*}
+        p(x_i) = P(X = x_i)
+      \end{equation*}
+
+    \item The \hlnotea{cumulative distribution function} (cdf) of $X$ is
+      \begin{equation*}
+        F(x) = P(X \leq x) = \sum_{x_i \leq x} p(x_i).
+      \end{equation*}
+
+    \item The $k$th \hldefn{moment} of $X$ is\sidenote{This implicitly uses the \href{https://en.wikipedia.org/wiki/Law_of_the_unconscious_statistician}{Law of the Unconcious Statistician}.}
+      \begin{equation*}
+        E[X^k] = \sum_{i \in \mathbb{N}} x_i^k p(x_i)
+      \end{equation*}
+      if $E[X^k]$ is finite.
+
+    \item Some commonly seen/introduced discrete distributions are: Poisson, Binomial, Negative Binomial
+  \end{itemize}
+\end{note}
+
+\begin{eg}
+  Let $X$ take values from $\{x_1, x_2, x_3, x_4\}$, and
+  \begin{equation*}
+    p(x_i) = P(X = x_i) \text{ for } i = 1, 2, 3, 4.
+  \end{equation*}
+  The cdf of $X$ is\marginnote{
+    It is recommended to visualize the cdf first before putting it down in pencil.
+    \resizebox{4.5cm}{!}{
+    \begin{tikzpicture}
+      % axes
+      \draw[->] (0, 0) -- (0, 5) node[above] {$F(x)$};
+      \draw[->] (0, 0) -- (5, 0) node[right] {$x$};
+      \node[below=1.5mm] at (1, 0) {$x_1$};
+      \node[below=1.5mm] at (2, 0) {$x_2$};
+      \node[below=1.5mm] at (3, 0) {$x_3$};
+      \node[below=1.5mm] at (4, 0) {$x_4$};
+
+      % cdf
+      \draw[-,line width=0.5mm] (0, 0) -- (1, 0);
+      \draw[-,line width=0.5mm] (1, 1) -- (2, 1);
+      \draw[-,line width=0.5mm] (2, 2) -- (3, 2);
+      \draw[-,line width=0.5mm] (3, 3) -- (4, 3);
+      \draw[->,line width=0.5mm] (4, 4) -- (5, 4);
+      \node[circle,inner sep=2pt,draw] at (1, 0) {};
+      \node[circle,inner sep=2pt,draw] at (2, 1) {};
+      \node[circle,inner sep=2pt,draw] at (3, 2) {};
+      \node[circle,inner sep=2pt,draw] at (4, 3) {};
+      \node[circle,inner sep=2pt,fill] at (1, 1) {};
+      \node[circle,inner sep=2pt,fill] at (2, 2) {};
+      \node[circle,inner sep=2pt,fill] at (3, 3) {};
+      \node[circle,inner sep=2pt,fill] at (4, 4) {};
+      \draw[dotted] (4, 4) -- (0, 4) node[left] {$1$};
+
+      % jumps
+      \draw[dotted] (1, 1) -- (1, 0) node[midway,left] {$p(x_1)$};
+      \draw[dotted] (2, 2) -- (2, 1) node[midway,left] {$p(x_2)$};
+      \draw[dotted] (3, 3) -- (3, 2) node[midway,left] {$p(x_3)$};
+      \draw[dotted] (4, 4) -- (4, 3) node[midway,left] {$p(x_4)$};
+    \end{tikzpicture}
+    }
+  }
+  \begin{equation*}
+    F(x) = \begin{cases}
+      0               & x < x_1 \\
+      p(x_1)          & x_1 \leq x < x_2 \\
+      p(x_1) + p(x_2) & x_2 \leq x < x_3 \\
+      1 - p(x_4)      & x_3 \leq x < x_4 \\
+      1               & x \geq x_4
+    \end{cases}
+  \end{equation*}
+\end{eg}
+
+\begin{note}
+  \begin{itemize}
+    \item It is important that we stress the need for showing \hlnotea{right continuity} in the graph.
+    \item Note that the cdf always sums to $1$.
+    \item The ``\hlnotea{jumps}'' at $x_i$ correspond to $p(x_i)$, for $i = 1, 2 ,3, 4$.
+  \end{itemize}
+\end{note}
+
+\begin{defn}[Probability Generating Function]\index{Probability Generating Function}
+\label{defn:probability_generating_function}
+  Suppose a drv $X$ only takes \hlimpo{non-negative integer values}. The \hlnoteb{probability generating function} (pgf) of $X$ is defined as
+  \begin{equation*}
+    G(z) = E\left[ z^X \right] = \sum_{k=1}^{\infty} z^k p(k)
+  \end{equation*}
+  where we note that if $\max X = n$, then $p(m) = 0$ for all $m > n$.
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item The pgf uniquely identifies the distribution of the drv\sidenote{\faHandPaperO This was given as is without proof, and I cannot find any resources that proves this.}.
+    \item To get the probability for $k \in \{0, 1, 2, ...\}$, we simply need to do
+      \begin{equation*}
+        p(k) = \frac{1}{k!} G^{(k)}(x) \at{x = 0}{}.
+      \end{equation*}
+  \end{itemize}
+\end{note}
+
+\begin{eg}[Lecture Slides: Example 1]
+  Consider a drv $X$ with pmf
+  \begin{equation*}
+    p(x) = P(X = x) = \begin{cases}
+      0.5 & x = 0 \\
+      0.4 & x = 1 \\
+      0.1 & x = 2
+    \end{cases}
+  \end{equation*}
+  Its cdf is\marginnote{
+    \resizebox{4.5cm}{!}{
+    \begin{tikzpicture}
+      % axes
+      \draw[->] (0, 0) -- (0, 5) node[above] {$F(x)$};
+      \draw[->] (0, 0) -- (3.5, 0) node[right] {$x$};
+      \node[below=1.5mm] at (1, 0) {$0$};
+      \node[below=1.5mm] at (2, 0) {$1$};
+      \node[below=1.5mm] at (3, 0) {$2$};
+
+      % cdf
+      \draw[-,line width=0.5mm] (0, 2) -- (1, 2);
+      \draw[-,line width=0.5mm] (1, 3.6) -- (2, 3.6);
+      \draw[->,line width=0.5mm] (2, 4) -- (3.5, 4);
+      \node[circle,inner sep=2pt,draw] at (1, 2) {};
+      \node[circle,inner sep=2pt,draw] at (2, 3.6) {};
+      \node[circle,inner sep=2pt,fill] at (0, 2) {};
+      \node[circle,inner sep=2pt,fill] at (1, 3.6) {};
+      \node[circle,inner sep=2pt,fill] at (2, 4) {};
+      \draw[dotted] (3, 4) -- (0, 4) node[left] {$1$};
+
+      % jumps
+      \draw[dotted] (0, 0) -- (0, 2) node[midway,left] {$0.5$};
+      \draw[dotted] (1, 2) -- (1, 3.6) node[midway,left] {$0.4$};
+      \draw[dotted] (2, 3.6) -- (2, 4) node[midway,left] {$0.1$};
+    \end{tikzpicture}
+    }
+  }
+  \begin{equation*}
+    F(x) = P(X \leq x) \begin{cases}
+      0   & x < 0 \\
+      0.5 & 0 \leq x < 1 \\
+      0.9 & 1 \leq x < 2 \\
+      1   & x \geq 2
+    \end{cases}
+  \end{equation*}
+  and its pgf is
+  \begin{equation*}
+    G(z) = E\left[ z^X \right] = 0.5 + 0.4z + 0.1z^2.
+  \end{equation*}
+\end{eg}
+
+% subsection discrete_random_variables (end)
+
+\subsection{Continuous Random Variables}%
+\label{sub:continuous_random_variables}
+% subsection continuous_random_variables
+
+\begin{defn}[Continuous Random Variable]\index{Continuous Random Variable}
+\label{defn:continuous_random_variable}
+  A \hlnoteb{continuous random variable} (crv) takes on a continuum of values.
+\end{defn}
+
+\begin{note}
+  Let $X$ be a crv.
+  \begin{itemize}
+    \item $\exists f : X \to \mathbb{R}$ called a \hlnotea{probability density function} (pdf) such that its cdf is
+      \begin{equation*}
+        F(x) = \int_{-\infty}^{x} f(y) \dif{y},
+      \end{equation*}
+      and consequently by the \hlnotea{Fundamental Theorem of Calculus}, we have
+      \begin{equation*}
+        f(x) = F'(x).
+      \end{equation*}
+
+    \item The $k$th moment of $X$ is
+      \begin{equation*}
+        E[X^k] = \int_{x} x^k f(x) \dif{x} 
+      \end{equation*}
+      so long that $E[X^k]$ is defined.
+      
+    \item Some commonly introduced distributions are: Uniform, Exponential, Gamma, Weibull, and Normal.
+  \end{itemize}
+\end{note}
+
+\begin{defn}[Moment Generating Function]\index{Moment Generating Function}
+\label{defn:moment_generating_function}
+Let $X$ be an rv. The \hlnoteb{moment generating function} (mgf)\marginnote{The mgf is also defined for drvs.} of $X$ is, for $t \in \mathbb{R}$ (appropriately so),
+  \begin{equation*}
+    M_X(t) = E\left[e^{tX}\right] = \int_{x} e^{tx} f(x) \dif{x}
+  \end{equation*}
+  provided that the integral is well-defined.
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item The mgf uniquely determines the distribution of its rv\sidenote{\faHandPaperO This shall, also, not be proven in this course.}
+
+    \item With the mgf, we can obtain the $k$th moment of an rv $X$ by
+      \begin{equation*}
+        E\left[X^k\right] = \frac{d^k}{dt^k} M_X(t) \at{t = 0}{}
+      \end{equation*}
+  \end{itemize}
+\end{note}
+
+\begin{eg}[Lecture Notes: Example 2]
+  Consider an exponential rv $X$ with pdf\sidenote{When not explicitly stated, it shall be assumed that domains at which we did not specify $x$ shall have probability $0$.}
+  \begin{equation*}
+    f(x) = 0.1e^{-0.1x}, \; x > 0.
+  \end{equation*}
+  Its cdf is
+  \begin{equation*}
+    F(x) = \int_{-\infty}^{x} f(y) \dif{y} = \begin{cases}
+      1 - e^{-0.1 x} & x \geq 0 \\
+      0              & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  and its mgf is
+  \begin{align*}
+    M_X(t) &= E\left[ e^{tX} \right] = \int_{0}^{\infty} e^{tx} 0.1 e^{-0.1x} \dif{x} \\
+           &= 0.1 \int_{0}^{\infty} e^{( t - 0.1 )x} \dif{x} \\
+           &= \frac{0.1}{0.1 - t}, \enspace t < 0.1,
+  \end{align*}
+  where we note that we must have $t < 0.1$, for otherwise the value of the exponent would render the integral undefined.
+\end{eg}
+
+\begin{defn}[Hazard Rate Function]\index{Hazard Rate Function}
+\label{defn:hazard_rate_function}
+  For a crv $X$, the \hlnoteb{hazard rate function} (aka \hldefn{failure rate}) of $X$ is defined as
+  \begin{equation*}
+    h(x) = \frac{f(x)}{\bar{F}(x)} = - \frac{d}{dx} \ln \bar{F}(x),
+  \end{equation*}
+  where $\bar{F}(x) = 1 - F(x)$ is the \hlnotea{survival function}\sidenote{You should be familiar with this if you have studied for Exam P.}
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item We may also express the survival function in terms of the hazard rate by
+      \begin{equation*}
+        \bar{F}(x) = e^{- \int_{-\infty}^{x} h(y) \dif{y}}.
+      \end{equation*}
+
+    \item In terms of limits, we can express the hazard rate function, for small enough $\delta > 0$, as
+      \begin{align*}
+        h(x) &= \frac{f(x)}{\bar{F}(x)} = \frac{F'(x)}{\bar{F}(x)} \\
+             &\approx \frac{F(x + \delta) - F(x)}{\delta \bar{F}(x)} \\
+             &= \frac{P(x < X \leq x + \delta)}{\delta F(X > x)} \\
+             &= \frac{1}{\delta} P(x < X \leq x + \delta \mid X > x).
+      \end{align*}
+      We can make sense of this expression by recalling the notion of the probability of survival from Exam MLC\sidenote{This also tells us that the hazard rate gets its name from life insurance.}, where if a life has survived over $x$, the hazard rate is the probability that the life does not survive beyond another $\delta$ \sidenote{From the perspective of life insurance, the greater the probability, the more likely the claim is going to happen.}.
+  \end{itemize}
+\end{note}
+
+% subsection continuous_random_variables (end)
+
+% section review_of_probability_theory (end)
+
+% chapter lecture_2_sep_11th (end)
+
 \appendix
+
+\chapter{Individual Risk Model: An Alternative View}%
+\label{chp:individual_risk_model_an_alternative_view}
+% chapter individual_risk_model_an_alternative_view
+
+\textit{This appendix serves to explain why our note of $Z_i = I_i X_i$ is wrong with as mush rigour as we can go for now. There may be hand-wavy parts, but those will be indicated.} 
+
+We mentioned, as shown by Klugman, Panjer and Willmot (2012)\cite{KlugmanPanjerWillmot2012}, that for the \hyperref[defn:individual_risk_model]{Individual Risk Model}, the aggregate claim is modeled by
+\begin{equation*}
+  S = \sum_{i=1}^{n} Z_i
+\end{equation*}
+where $Z_i$ is a random variable for the potential loss of the $i$\textsuperscript{th} insurance policy, while $n$ is fixed. It is claimed that we can also express each $Z_i$ as
+\begin{equation*}
+  Z_i = I_i X_i
+\end{equation*}
+where $I_i$ is an indicator function given by
+\begin{equation*}
+  I_i(x) = \begin{cases}
+    1 & \text{ if a claim occurs } \\
+    0 & \text{ if there are no claims }
+  \end{cases},
+\end{equation*}
+while $X_i$ is the size of the claim(s) for the $i$\textsuperscript{th} policy provided that there is a claim.
+
+\newthought{One problem} that arises is: are $X_i$ and $I_i$ independent? They should be if we wish to define $Z_i$ in such a way. In fact, according to \\
+\noindent\textcolor{base16-eighties-magenta}{\underline{Klugman et. al. in page 177}},
+
+\begin{magentaquote}
+  Let $X_j = I_j B_j$, where $I_1, ..., I_n, B_1, ..., B_n$ are independent.
+\end{magentaquote}
+
+where $X_j$ is our $Z_i$, $I_j$ is our $I_i$, and $B_j$ is our $X_i$.
+
+\paragraph{$\S \; Z_i$ is not well-defined} Let us be explicit about the definitions of $I_i$ and $X_i$; we have
+\begin{gather*}
+  I_i = \mathbb{1}_{\{ Z_i > 0 \}} \\
+  X_i = Z_i \mid Z_i > 0
+\end{gather*}
+However, we observe that such a defintion of $X_i$ is undefined on $Z_i = 0$. So the equation
+\begin{equation*}
+  Z_i = I_i X_i
+\end{equation*}
+is note well-defined.
+
+\paragraph{$\S$ Independence of $I_i$ and $X_i$} We cannot actually tell if $I_i$ and $X_i$ are independent from each other, as it is equivalent to comparing apples with oranges\sidenote{In fact, I think this analogy fits our case perfectly so.}. Recall from our earlier courses, in particular STAT330, of the following notion:
+
+\begin{defnnonum}[Probability Space]
+\label{defn:probability_space}
+  Let $\Omega$ be a sample space, and $\mathcal{F}$ a $\sigma$-algebra defined on $\Omega$\sidenote{Note that $(\Omega, \mathcal{F})$ is called a \hlnotea{measurable space}.}. A \hlnoteb{probability space} is the measurable space $(\Omega, \mathcal{F})$ with a \textcolor{base16-eighties-blue}{probability measure}, $f: \mathcal{F} \to [0, 1]$, defined on the space. We denote a probability space as $(\Omega, \mathcal{F}, f)$.
+\end{defnnonum}
+
+As mentioned in an earlier $\S$, $X_i$ is not defined on $Z_i = 0$, while $I_i$ is defined on $Z_i = 0$ \sidenote{\faHandPaperO \enspace This statement is hand-wavy.}. So the sample space for $X_i$ and $I_i$ are not the same, and so their probability measures are not the same as well. Therefore, \hlimpo{it is meaningless to ask if $X_i$ and $I_i$ are independent}.
+
+Our best attempt at fixing this is probably the following: let
+\begin{equation*}
+  Z_i = \sum_{i=1}^{I_i} X_i,
+\end{equation*}
+which we can then have $X_i$ to be independent from $I_i$. However, interestingly so, this is a very similar approach to a \hyperref[defn:collective_risk_model]{Collective Risk Model}.
+
+% chapter individual_risk_model_an_alternative_view (end)
 
 \backmatter
 
@@ -158,6 +501,8 @@ In this course, the primary focus of our studies will be on \hlnotea{collective 
 
 \nobibliography*
 \bibliography{references}
+
+\input{listofsymbols.tex}
 
 \printindex
 
