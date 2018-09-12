@@ -1,0 +1,359 @@
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{STAT333 - Applied Probability}
+\author{Johnson Ng}
+\subtitle{Classnotes for Winter 2017}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
+
+\input{latex-classnotes-preamble.tex}
+
+\DeclareMathOperator{\Bernoulli}{Bernoulli }
+\DeclareMathOperator{\Bin}{Bin }
+\DeclareMathOperator{\Geo}{Geo }
+\DeclareMathOperator{\Poi}{Poi }
+\DeclareMathOperator{\NB}{NB }
+\DeclareMathOperator{\Exp}{Exp }
+\DeclareMathOperator{\Unif}{Unif }
+\DeclareMathOperator{\Nor}{N }
+\DeclareMathOperator{\Gau}{G }
+\DeclareMathOperator{\HG}{HG }
+\DeclareMathOperator{\Gam}{Gam }
+\DeclareMathOperator{\BetaDist}{Beta }
+\DeclareMathOperator{\Mult}{Mult }
+\DeclareMathOperator{\BVN}{BVN }
+\DeclareMathOperator{\Wei}{Wei }
+\DeclareMathOperator{\Dom}{Dom }
+\DeclareMathOperator{\Var}{Var }
+\DeclareMathOperator{\sd}{sd }
+\DeclareMathOperator{\Cov}{Cov }
+\DeclareMathOperator{\Corr}{Corr }
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\maketitle
+\hypersetup{pageanchor=true}
+\tableofcontents
+
+\chapter*{\faBook \enspace List of Definitions}
+\addcontentsline{toc}{chapter}{List of Definitions}
+\theoremlisttype{all}
+\listtheorems{defn}
+
+\chapter*{\faCoffee \enspace List of Theorems}
+\addcontentsline{toc}{chapter}{List of Theorems}
+\theoremlisttype{allname}
+\listtheorems{axiom,lemma,thm,crly,propo}
+
+\chapter*{Foreword}%
+\label{chp:foreword}
+% chapter foreword
+
+\begin{fullwidth}
+  I am transcribing this set of notes from my handwritten ones in Winter 2017, back at a time which I have yet to organize my notes by lecture. However, I will try my best to organize them by chapters and topics as presented in class.
+
+  I will try to be as rigourous as possible while transcribing my notes. However, given the nature of the course and the presentation, this will not always be possible, and I am mostly keeping these notes for ``legacy purposes'', and so I will not put too much effort into making the notes as complete as my newer ones.
+
+  For this course, you are expected to have basic knowledge of probability in order to be able to understand the material.
+\end{fullwidth}
+
+% chapter foreword (end)
+
+\chapter{Elementary Probability Review}%
+\label{chp:elementary_probability_review}
+% chapter elementary_probability_review
+
+\section{Introductions}%
+\label{sec:introductions}
+% section introductions
+
+\begin{defn}[Fundamental Definition of a Probability Function]
+\label{defn:fundamental_definition_of_a_probability_function}
+  For each event $A$ of a sample space $S$, $P(A)$ is defined as the ``\hlnoteb{probability of the event $A$}'', satisfying these 3 conditions:
+  \begin{enumerate}
+    \item $0 \leq P(A) \leq 1$
+    \item $P(S) = 1$ \sidenote{This can also be stated as $P(\emptyset) = 0$, where $\emptyset$ is the null event.} \label{item:funddefn_probfn_item2}
+    \item $P\left( \bigcup\limits_{i = 1}^{n} A_i \right) = \sum\limits_{i=1}^{n} P(A_i)$, where $A_i \cap A_j = A_i A_j = \emptyset$ for all $i \neq j$ \sidenote{We can also say that the sequence $\{A_i\}_{i = 1}^{n}$ has mutually exclusive elements.} \label{item:funddefn_probfn_item3}
+  \end{enumerate}
+\end{defn}
+
+\begin{note}
+  By \cref{item:funddefn_probfn_item2} and \cref{item:funddefn_probfn_item3}, we have
+  \begin{equation*}
+    1 = P(S) = P(A \cup A^C) = P(A) + P(A^C)
+  \end{equation*}
+  which implies that
+  \begin{equation*}
+    P(A^C) = 1 - P(A).
+  \end{equation*}
+\end{note}
+
+\begin{defn}[Conditional Probability]\index{Conditional Probability}
+\label{defn:conditional_probability}
+  Given events $A$ and $B$ in a sample space $S$, the \hlnoteb{conditional probability of $A$ given $B$} is given by
+  \begin{equation}\label{eq:conditional_probability}
+    P(A \mid B) = \frac{P(A \cap B)}{P(B)} \enspace \text{ where } P(B) > 0.
+  \end{equation}
+\end{defn}
+
+\begin{note}
+  When $B = S$, \cref{eq:conditional_probability} becomes
+  \begin{equation*}
+    P(A \mid S) = \frac{P(A \cap S)}{P(S)} = \frac{P(A)}{1} = P(A).
+  \end{equation*}
+  Also, we have, from \cref{eq:conditional_probability}, that
+  \begin{equation*}
+    P(A \cap B) = P(A \mid B) \cdot P(B).
+  \end{equation*}
+\end{note}
+
+\begin{thm}[Law of Total Probability]
+\index{Law of Total Probability}
+\label{thm:law_of_total_probability}
+  Let $S$ be a sample space. Let $\{ B_i \}_{i = 1}^{n}$ be a sequence of mutually exclusive events such that
+  \begin{equation*}
+    S = \bigcup_{i=1}^{n} B_i.
+  \end{equation*}
+  We say that the sequence $\{ B_i \}_{i = 1}^{n}$ is a \hldefn{partition} of $S$. Let $A \subseteq S$ be an event. Then
+  \begin{equation*}
+    P(A) = \sum_{i=1}^{n} P(A \mid B_i) \cdot P(B_i)
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Observe that
+  \begin{align*}
+    P(A) &= P(A \cap S) = P\left( A \cap \left\{ \bigcup_{i=1}^{n} B_i  \right\} \right) \\
+         &= P\left( \bigcup_{i=1}^{n} \left\{ A \cap B_i \right\} \right) = \sum_{i=1}^{n} P(A \cap B_i) \\
+         &= \sum_{i=1}^{n} P(A \mid B_i) P(B_i)
+  \end{align*}
+  where the second last step is by \cref{item:funddefn_probfn_item3}, and the last step is by \cref{defn:conditional_probability}.\qed
+\end{proof}
+
+Consequently, we have the following:
+
+\begin{crly}[Bayes' Formula/Rule]
+  \index{Bayes' Formula}\index{Bayes' Rule}
+\label{crly:bayes_formula}
+  Let $\{ B_i \}_{i = 1}^{n}$ be a partition of a sample space $S$. Then for any event $A$, we have
+  \begin{equation*}
+    P(B_j \mid A) = \frac{P(A \mid B_j) P(B_j)}{\sum_{i=1}^{n} P(A \mid B_i) \cdot P(B_i)}.
+  \end{equation*}
+\end{crly}
+
+% section introductions (end)
+
+\section{Random Variables}%
+\label{sec:random_variables}
+% section random_variables
+
+\subsection{Discrete Random Variables}%
+\label{sub:discrete_random_variables}
+% subsection discrete_random_variables
+
+\hlwarn{No formal definition of a discrete rv is given in class.}
+
+A discrete rv $X$:
+\begin{itemize}
+  \item takes on either finite or countable number of possible values;
+  \item has a \hldefn{probability mass function} (pmf) expressed as
+    \begin{equation*}
+      p(a) = P(X = a);
+    \end{equation*}
+  \item has a \hldefn{cumulative distribution function} (cdf) expressed as
+    \begin{equation*}
+      F(a) = P(X \leq a) = \sum_{x \leq a}^{p(x)} 
+    \end{equation*}
+\end{itemize}
+
+\begin{note}
+  If $X \in \{a_1, a_2, ...\}$ where $a_1 < a_2 < \hdots$ such that $p(a_i) > 0$ for all $i \in \mathbb{N}$, then
+  \begin{align*}
+    p(a_1) &= F(a_1) \text{ and } \\
+    p(a_i) &= F(a_i) - F(a_{i - 1}) \text{ for } i = 2, 3, 4, ....
+  \end{align*}
+\end{note}
+
+\newthought{The following} are some of the most common discrete distributions.
+
+\paragraph{Binomial Distribution}\index{Binomial Distribution} For an rv $X$ that follows a Binomial Distribution, in which we denote as $X \sim \Bin(n, p)$, where $n \in \mathbb{N}$ and $p \in [0, 1]$, its pmf is
+\begin{equation*}
+  p(x) = \binom{n}{x} p^x (1 - p)^{n - x}.
+\end{equation*}
+
+\paragraph{Bernoulli Distribution}\index{Bernoulli Distribution} Following the above distribution where $n = 1$, we have that $X$ follows what is called a Bernoulli Distribution, denoted as $X \sim \Bernoulli(p)$.
+
+\paragraph{Negative Binomial Distribution}\index{Negative Binomial Distribution} For an rv $X$ that follows a Negative Binomial Distribution, in which we denote as $X \sim \NB(k, p)$, where $k \in \mathbb{N}$ and $p \in [0, 1]$, its pmf is\marginnote{The Negative Binomial Distribution has a model that measures the probability that the $k$th success occurs.}
+\begin{equation*}
+  p(x) = \binom{x - 1}{k - 1} p^k (1 - p)^{x - k}
+\end{equation*}
+
+\paragraph{Geometric Distribution}\index{Geometric Distribution} Following the above distribution where $k = 1$, we have that $X$ folows what is called a Geometric Distribution, denoted as $X \sim \Geo(p)$.
+
+\paragraph{Hypergeometric Distribution}\index{Hypergeometric Distribution} For an rv $X$ that follows a Hypergeometric Distribution, in which we denote as $X \sim \HG(N, r n)$, where $r, n \leq N \in \mathbb{N}$, its pmf is
+\begin{equation*}
+  p(x) = \frac{\binom{r}{x} \binom{N - r}{n - x}}{\binom{N}{n}}
+\end{equation*}
+
+\paragraph{Poisson Distribution}\index{Poisson Distribution} For an rv $X$ that follows a Poisson Distribution, in which we denote as $X \sim \Poi(\lambda)$, where $\lambda > 0$, its pmf is
+\begin{equation*}
+  p(x) = \frac{e^{- \lambda} \lambda^{x}}{x!}
+\end{equation*}
+
+% subsection discrete_random_variables (end)
+
+\subsection{Continuous Random Variables}%
+\label{sub:continuous_random_variables}
+% subsection continuous_random_variables
+
+\hlwarn{No formal definition of a continuous rv is given in class.}
+
+A continuous rv $X$:
+\begin{itemize}
+  \item takes on a continuum of possible values
+  \item has a \hldefn{probability density function} (pdf) expressed as
+    \begin{equation*}
+      f(x) = \frac{d}{dx} F(x)
+    \end{equation*}
+    where $F(x)$ is:
+  \item (has a) \hldefn{cumulative distribution function} (cdf) of
+    \begin{equation*}
+      F(x) = P(X \leq x) = \int_{-\infty}^{x} f(y) \dif{y}
+    \end{equation*}
+\end{itemize}
+
+\begin{note}
+  Note that our convention is that $P(X = x) = 0$ for a continuous rv $X$.
+\end{note}
+
+\newthought{The following} are some of the most common continuous distributions.
+
+\paragraph{Uniform Distribution}\index{Uniform Distribution} For an rv $X$ that follows a Uniform Distribution, in which we denote as $X \sim \Unif(a, b)$, where $a, b \in \mathbb{R}$, its pdf is
+\begin{equation*}
+  f(x) = \frac{1}{b - a}.
+\end{equation*}
+
+\paragraph{Gamma Distribution}\index{Gamma Distribution} For an rv $X$ that follows a Gamma Distribution, in which we denote as $X \sim \Gam(n, \lambda)$, where $n \in \mathbb{N}$ and $\lambda > 0$, its pdf is
+\begin{equation*}
+  f(x) = \frac{\lambda^n x^{n - 1} e^{-\lambda x}}{( n - 1 )!}.
+\end{equation*}
+
+\paragraph{Exponential Distribution}\index{Exponential Distribution} Following the above distribution where $n = 1$, we have that $X$ follows what is called an Exponential Distribution, denoted as $X \sim \Exp(\lambda)$, where its pdf is
+\begin{equation*}
+  f(x) = \lambda e^{- \lambda x}.
+\end{equation*}
+
+% subsection continuous_random_variables (end)
+
+% section random_variables (end)
+
+\section{Moments}%
+\label{sec:moments}
+% section moments
+
+\begin{defn}[Expectation]\index{Expectation}
+  \label{defn:expectation}\marginnote{Note that this definition is actually the \href{https://en.wikipedia.org/wiki/Law_of_the_unconscious_statistician}{Law of the Unconscious Statistician}}
+  Let $X$ be an rv. Given a function $g$ that is defined over $X$, the \hlnoteb{expectation} of $g(X)$ is given by
+  \begin{equation*}
+    E[ g(X) ] = \begin{cases}
+      \sum_{x} g(x) p(x) & \text{ if } X \text{ is a discrete rv } \\
+      \int_{x} g(x) f(x) & \text{ if } X \text{ is a continuous rv }
+    \end{cases}.
+  \end{equation*}
+\end{defn}
+
+Now if $g(X) = X^k$ for some $k \in \mathbb{N}$, we have the following notion:
+
+\begin{defn}[Moment]\index{Moment}
+\label{defn:moment}
+  Let $X$ be an rv. The $k$th moment of $X$ is defined as $E[ X^k ]$.
+\end{defn}
+
+Another notion that is commonly introduced after expectation is the variance.
+
+\begin{defn}[Variance]\index{Variance}
+\label{defn:variance}
+  Let $X$ be an rv. The \hlnoteb{variance} of $X$ is given by
+  \begin{equation*}
+    \Var(X) = E[ (X - E[X])^2 ] = E[ X^2 ] - ( E[X] )^2
+  \end{equation*}
+\end{defn}
+
+In relation to the variance, we have the standard deviation.
+
+\begin{defn}[Standard Deviation]\index{Standard Deviation}
+\label{defn:standard_deviation}
+  Let $X$ be an rv. The \hlnoteb{standard deviation} (sd) is given by
+  \begin{equation*}
+    \sd(X) = \sqrt{\Var(X)} = \sqrt{ E[X^2] - (E[X])^2 }.
+  \end{equation*}
+\end{defn}
+
+We shall state the following properties without providing proof\sidenote{The proofs are very easy, but it serves as a strengthening exercise for the unfamiliar. Therefore,
+\begin{ex}
+  Proof both \cref{propo:linearity_of_the_expectation} and \cref{propo:linearity_of_the_variance}.
+\end{ex}
+}:
+
+\begin{propo}[Linearity of the Expectation]
+\label{propo:linearity_of_the_expectation}
+  Let $X$ be an rv. Let $a, b \in \mathbb{R}$. We have that
+  \begin{equation*}
+    E[ aX + b ] = aE[x] + b
+  \end{equation*}
+\end{propo}
+
+\begin{propo}[Linearity of the Variance]
+\label{propo:linearity_of_the_variance}
+  Let $X$ be an rv. Let $a, b \in \mathbb{R}$. We have that
+  \begin{equation*}
+    \Var(aX + b) = a^2 \Var(X).
+  \end{equation*}
+\end{propo}
+
+Referring back to \cref{defn:expectation}, if $g(X) = e^{tX}$, we have ourselves, what is called, the moment generating function.
+
+\begin{defn}[Moment Generating Function]\index{Moment Generating Function}
+\label{defn:moment_generating_function}
+  Let $X$ be an rv. The \hlnoteb{moment generating function} (mgf) of $X$ is given by
+  \begin{equation*}
+    \phi_X(t) = E\left[ e^{tX} \right].
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  \begin{enumerate}
+    \item Observe that $\phi_X(0) = E\left[ e^0 \right] = 1$.
+    \item The reason such an expression is called a moment generating function is as follows: observe that
+      \begin{align*}
+        \phi_X(t) &= E\left[ e^{tX} \right] = E\left[ \sum_{i=0}^{\infty} \frac{(tX)^i}{i!} \right] \\
+                  &= E\left[ 1 + \frac{tX}{1!} + \frac{(tX)^2}{2!} + \hdots + \frac{(tX)^n}{n!} + \hdots \right] \\
+                  &= \frac{t^0}{0!} E[1] + \frac{t}{1!} E[X] + \frac{t^2}{2!} E\left[X^2\right] + \hdots + \frac{t^n}{n!} E\left[X^n\right] + \hdots
+      \end{align*}
+      by \cref{propo:linearity_of_the_expectation}. If we take the $k$th derivative wrt $t$ and set $t = 0$, we will obtain the $k$th moment of $X$. In other words,
+      \begin{equation*}
+        E[X^k] = \phi_X^{(n)}(0) = \frac{d}{dt} \phi_X (t) \at{t = 0}{}.
+      \end{equation*}
+  \end{enumerate}
+\end{note}
+
+% section moments (end)
+
+% chapter elementary_probability_review (end)
+
+\appendix
+
+\backmatter
+
+\pagestyle{plain}
+
+\nobibliography*
+\bibliography{references}
+
+\printindex
+
+\end{document}
+

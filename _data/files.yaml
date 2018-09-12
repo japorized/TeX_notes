@@ -152,6 +152,14 @@
   - title: cheatsheet.tex
     src: ./PMATH352W18/cheatsheet/cheatsheet.tex
 
+- title: STAT333 W17 - Applied Probability
+  pdf:
+  - title: classnotes.pdf
+    src: ./STAT333/classnotes.pdf
+  tex:
+  - title: classnotes.tex
+    src: ./STAT333/classnotes.tex
+
 - title: PMATH333 W17 - Intro to Real Analysis
   pdf:
   - title: pmath333_defns_thms.pdf
