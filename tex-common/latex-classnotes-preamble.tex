@@ -39,7 +39,8 @@
 \usepackage{silence}
   \WarningFilter*{latex}{Marginpar on page \thepage\space moved}
 \usepackage{tcolorbox}
-\tcbuselibrary{skins}
+\tcbuselibrary{skins,breakable}
+\usepackage{longtable}
 \usepackage[amsmath,hyperref]{ntheorem}
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
@@ -219,7 +220,8 @@
   coltext=base16-eighties-light,
   left=5mm,right=5mm,top=2mm,bottom=2mm,
   colframe=base16-eighties-red,
-  boxrule=0pt,leftrule=3pt
+  boxrule=0pt,leftrule=3pt,
+  fontupper=\itshape
 }
 \newtcolorbox{bluequote}{
   blanker,enhanced,breakable,standard jigsaw,
@@ -227,7 +229,8 @@
   coltext=base16-eighties-light,
   left=5mm,right=5mm,top=2mm,bottom=2mm,
   colframe=base16-eighties-blue,
-  boxrule=0pt,leftrule=3pt
+  boxrule=0pt,leftrule=3pt,
+  fontupper=\itshape
 }
 \newtcolorbox{greenquote}{
   blanker,enhanced,breakable,standard jigsaw,
@@ -235,7 +238,8 @@
   coltext=base16-eighties-light,
   left=5mm,right=5mm,top=2mm,bottom=2mm,
   colframe=base16-eighties-green,
-  boxrule=0pt,leftrule=3pt
+  boxrule=0pt,leftrule=3pt,
+  fontupper=\itshape
 }
 \newtcolorbox{yellowquote}{
   blanker,enhanced,breakable,standard jigsaw,
@@ -243,7 +247,8 @@
   coltext=base16-eighties-light,
   left=5mm,right=5mm,top=2mm,bottom=2mm,
   colframe=base16-eighties-yellow,
-  boxrule=0pt,leftrule=3pt
+  boxrule=0pt,leftrule=3pt,
+  fontupper=\itshape
 }
 \newtcolorbox{magentaquote}{
   blanker,enhanced,breakable,standard jigsaw,
@@ -251,7 +256,8 @@
   coltext=base16-eighties-light,
   left=5mm,right=5mm,top=2mm,bottom=2mm,
   colframe=base16-eighties-magenta,
-  boxrule=0pt,leftrule=3pt
+  boxrule=0pt,leftrule=3pt,
+  fontupper=\itshape
 }
 
 % ntheorem listtheorem style
@@ -395,6 +401,9 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\res}[2]{\underset{#2}{\Res} #1 }
 \newcommand{\tworow}[3]{\begin{tabular}{@{}#1@{}} #2 \\ #3 \end{tabular}}
 \renewcommand{\epsilon}{\varepsilon}
+\newcommand{\lrarrow}{\leftrightarrow}
+\newcommand{\larrow}{\leftarrow}
+\newcommand{\rarrow}{\rightarrow}
 \renewcommand{\atop}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
 \newcommand*\dif{\mathop{}\!d}
 

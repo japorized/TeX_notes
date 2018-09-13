@@ -9,7 +9,10 @@
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
 \institution{University of Waterloo}
 
+\usepackage{stmaryrd}
 \input{latex-classnotes-preamble.tex}
+
+\newcommand{\class}[1]{\left\llbracket \enspace #1 \enspace \right\rrbracket}
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -52,6 +55,10 @@ Another approach to set theory, one that is deemed required in order to learn se
 \section{Ordinals}%
 \label{sec:ordinals}
 % section ordinals
+
+\subsection{Zermelo-Fraenkel Axioms}%
+\label{sub:zermelo_fraenkel_axioms}
+% subsection zermelo_fraenkel_axioms
 
 We use the natural numbers, i.e.
 \begin{equation*}
@@ -121,7 +128,7 @@ With this axiom, we can indeed construct $0$. To get $1$ from $0$, we have that 
 \label{axiom:pairset_axiom}
   Given set $x, y$, there exists a set, denoted by $\{x , y\}$, whose only members are $x$ and $y$. In other words,
   \begin{equation*}
-    t \in \{ x, y \} \iff ( t = x \, \lor \, t = y )
+    t \in \{ x, y \} \lrarrow ( t = x \, \lor \, t = y )
   \end{equation*}
 \end{axiom}
 
@@ -147,13 +154,13 @@ Now we've constructed $3$ to be the set whose only members are $0, 1$, and $2$. 
 \label{axiom:union_set_axiom}
   Given a set $x$, there exists a set denoted by $\cup x$, whose members are precisely the members of the members of $x$, i.e.
   \begin{equation*}
-    t \in \cup x \iff ( t \in y \text{ for some } y \in x )
+    t \in \cup x \lrarrow ( t \in y \text{ for some } y \in x )
   \end{equation*}
 \end{axiom}
 
 So, by this axiom, we have that given any $n$, $S(n) = \cup \{ n, \{ n \} \}$, or in other words,
 \begin{equation*}
-  t \in S(n) \iff t \in n \, \lor \, t = n.
+  t \in S(n) \lrarrow t \in n \, \lor \, t = n.
 \end{equation*}
 
 With all of the above axioms, we can iteratively construct each and every natural number in a rigorous manner. However, our goal is to construct infinitely many of them.
@@ -190,7 +197,12 @@ There is a certain rule to which we set down axioms, and that is, axioms must be
 \end{eg}
 
 \begin{note}
-  ``If $P$ then $Q$'' is also a definite condition since it is ``\hlnotea{equivalent}''\sidenote{We have yet to define what equivalent statements are but we shall take this for granted for now.} to the statement $\neg P \lor Q$.
+  ``If $P$ then $Q$'', which is also written as $P \rarrow Q$, is also a definite condition since it is ``\hlnotea{equivalent}''\sidenote{We have yet to define what equivalent statements are but we shall take this for granted for now.} to the statement $\neg P \lor Q$.
+
+  Consequently, $P if and only if Q$, which is also expressed as $P \lrarrow Q$, can be written as
+  \begin{equation*}
+    (\neg P \lor Q) \land (\neg Q \lor P)
+  \end{equation*}
 \end{note}
 
 Now, with this definition, and first-order logic notations in mind, we can write:
@@ -203,27 +215,235 @@ Now, with this definition, and first-order logic notations in mind, we can write
   \begin{solution}
     \begin{gather*}
       \forall x \; \forall y \\
-      ( x = y ) \iff ( \forall t \; ( ( t \in x ) \iff ( t \in y ) ) )
+      ( x = y ) \lrarrow ( \forall t \; ( ( t \in x ) \lrarrow ( t \in y ) ) )
     \end{gather*}
   \end{solution}
 }
 \begin{itemize}
   \item Empty Set Axiom: $\exists x \; \forall t \; \neg ( t \in x )$
-  \item Pairset Axiom: $\forall x \; \forall y \; \exists p \; \forall t \; ( t \in p \iff ( ( t = x ) \lor ( t = y ) ) )$
-    \item Union Set Axiom: $\forall x \; \exists z \; \forall t \; ( ( t \in z ) \iff ( \exists y \; ( (y \in x) \land ( t \in y ) ) ) )$
+  \item Pairset Axiom: $\forall x \; \forall y \; \exists p \; \forall t \; ( t \in p \lrarrow ( ( t = x ) \lor ( t = y ) ) )$
+    \item Union Set Axiom: $\forall x \; \exists z \; \forall t \; ( ( t \in z ) \lrarrow ( \exists y \; ( (y \in x) \land ( t \in y ) ) ) )$
 \end{itemize}
 
 Note that the statement that we proposed as an axiom for the set of natural numbers in page \pageref{sp:natural_numbers_axiom} is not definite, although that itself is not obvious.
 
 For example, we may try to write
 \begin{equation*}
-  \exists x \; ( \forall t \; ( ( t \in x ) \iff ( (t = 0) \lor (t = 1) \lor ( t = 2 ) \lor ... ) ) )
+  \exists x \; ( \forall t \; ( ( t \in x ) \lrarrow ( (t = 0) \lor (t = 1) \lor ( t = 2 ) \lor ... ) ) )
 \end{equation*}
-and then notice that we do not have the notion of $...$ within the ``tools'' that we are allowed to use.
+and then notice that we do not have the notion of ``$...$'' within the ``tools'' that we are allowed to use.
+
+% subsection zermelo_fraenkel_axioms (end)
 
 % section ordinals (end)
 
 % chapter lecture_1_sep_06th (end)
+
+\chapter{Lecture 2 Sep 11th}%
+\label{chp:lecture_2_sep_11th}
+% chapter lecture_2_sep_11th
+
+\section{Ordinals (Continued)}%
+\label{sec:ordinals_continued}
+% section ordinals_continued
+
+\subsection{Zermelo-Fraenkel Axioms (Continued)}%
+\label{sub:zermelo_fraenkel_axioms_continued}
+% subsection zermelo_fraenkel_axioms_continued
+
+We stopped at the discussion about allowing for an infinite set, so that we can construct our set of infinite natural numbers. The idea here is to take \textit{the smallest set that contains $0$ and is preserved by the successor function}\sidenote{Q: Why the smallest set?}
+
+\begin{axiom}[Infinity Axiom]
+\index{Infinity Axiom}
+\label{axiom:infinity_axiom}
+  There exists a set $I$ that contains $0$ and is preserved by the successor function. We may express this as
+  \begin{equation*}
+    \exists I ( ( 0 \in I ) \land \forall x ( x \in I \rarrow S(x) \in I ) )
+  \end{equation*}
+  where we have defined that $S(x) \in I$ means
+  \begin{equation*}
+    \exists y ( \forall t ( t \in y \lrarrow (t \in x) \lor ( t = x ) ) \land (y \in I) )
+  \end{equation*}
+  We call $I$ the \hldefn{successor set}.
+\end{axiom}
+
+Since we want the smallest of such successor sets, we can try taking the intersection of all successor sets. But before we can do that, we require more axiomatic statements.
+
+\begin{defn}[Subsets]\index{Subsets}
+\label{defn:subsets}
+  $x \subseteq y$ means that every element of $x$ is an element of $y$, i.e.
+  \begin{equation*}
+    \forall t ( ( t \in x ) \rarrow ( t \in y ) )
+  \end{equation*}
+\end{defn}
+
+With a definition of a subset, we can define the Powerset Axiom.
+
+\begin{axiom}[Powerset Axiom]
+\index{Powerset Axiom}
+\label{axiom:powerset_axiom}
+  Given a set $x$, there exists a set $\mathcal{P}(x)$ that contains all subsets of $x$, i.e.
+  \begin{equation*}
+    \forall t ( ( t \subseteq \mathcal{P}(x) ) \lrarrow \left( t \subseteq x \right) )
+  \end{equation*}
+\end{axiom}
+
+We also require the following axiom.
+
+\begin{axiom}[(Bounded) Separation Axiom]
+\index{Bounded Separation Axiom}\index{Separation Axiom}
+\label{axiom:bounded_separation_axiom}
+Given a set $x$ and a definition condition $P$, there exists a set whose elements are precisely the members of $x$ that satisfies $P$, i.e.\marginnote{There are two important aspects to the Bounded Separation Axiom:
+  \begin{itemize}
+    \item it is bounded by the set $x$; and
+    \item $P$ is a definite condition.
+  \end{itemize}
+}
+  \begin{equation*}
+    \forall x \; \exists y \; \forall t \; ( ( t \in y ) \lrarrow \forall y \; ( ( t \in x ) \land P(t) ) )
+  \end{equation*}
+  where
+  \begin{equation*}
+    y = \{ z \in x \mid P(z) \}.
+  \end{equation*}
+\end{axiom}
+
+\begin{ex}[Set Intersection]\index{Set Intersection}
+  Prove that given a non-empty set $x$, there exists a set $\cap x$ satisfying
+  \begin{equation*}
+    \forall t \; ( ( t \in \cap x ) \lrarrow \forall y \; ( ( y \in x ) \rarrow (t \in y) ) )
+  \end{equation*}
+\end{ex}
+
+\begin{proof}
+  \hlwarn{to be solved}
+\end{proof}
+
+\begin{defn}[Natural Numbers]\index{Natural Numbers}
+\label{defn:natural_numbers}
+Let $I$ be a successor set. The set of natural numbers is\sidenote{We can also write $J \subseteq I$ as $J \in \mathcal{P}(I)$ and invoke the Bounded Separation Axiom.}
+  \begin{equation*}
+    \omega := \cap \{ J \subseteq I : J \text{ is a successor set } \}
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  $J$ being a successor set can be expressed by the definite condition
+  \begin{equation*}
+    ( 0 \in J ) \lor \forall x \; ( x \in J \rarrow S(x) \in J ),
+  \end{equation*}
+  so we can write the definite condition in the above definition by
+  \begin{equation*}
+    \omega := \cap \{ J \subseteq I : ( 0 \in J ) \lor \forall x \; ( x \in J \rarrow S(x) \in J ) \}
+  \end{equation*}
+\end{note}
+
+\begin{ex}
+  Show that the definition of $\omega$ does not actually depend on $I$, i.e. if given $I_1$ and $I_2$ such that we have
+  \begin{align*}
+    \omega_1 &= \cap \{ J \subseteq I_1 : J \text{ is a successor set } \} \\
+    \omega_2 &= \cap \{ J \subseteq I_2 : J \text{ is a successor set } \}
+  \end{align*}
+  we have
+  \begin{equation*}
+    \omega_1 = \omega_2.
+  \end{equation*}
+\end{ex}
+
+\begin{proof}
+  \hlwarn{to be solved}
+\end{proof}
+
+Another useful axiom that we will use later is the following:
+
+\begin{axiom}[Replacement Axiom]
+\index{Replacement Axiom}
+\label{axiom:replacement_axiom}
+  Suppose $P$ is a binary definite condition\sidenote{A \hldefn{binary definite condition} has only two variables.} such that for every set $x$, there is a unique $y$ satisfying $P(x, y)$. Given a set $A$, there is a set $B$ such that $t \in B$ if and only if there is an $a \in A$ with $P(a, t)$.
+\end{axiom}
+
+\begin{note}
+  The slogan for the Replacement Axiom is:
+  \begin{redquote}
+    The image of a set under a definite operation exists.
+  \end{redquote}
+\end{note}
+
+These eight axioms, along with another ninth axiom called the Regularity Axiom\sidenote{We shall not discuss too much about this. According to the lecture and the lecture notes, the Regularity Axiom states that every set has a minimal element. On Wikipedia, the axiom states that every set has an element that does not intersect with the set itself.}, constitutes the \hlnotea{Zermelo-Fraenkel Set Theory}.
+
+Note that all axioms, save the \hyperref[axiom:axiom_of_extension]{Extensionality}, assert the existence of sets.
+
+% subsection zermelo_fraenkel_axioms_continued (end)
+
+\subsection{Classes}%
+\label{sub:classes}
+% subsection classes
+
+There are times where we are interested in a collection of sets that do not form a set themselves.
+
+\begin{eg}[Russell's Paradox]\index{Russell's Paradox}
+  There is no set containing all sets.
+
+  \begin{proof}
+    Suppose such a set exists, and call it $U$. Now consider the set
+    \begin{equation*}
+      R := \{ x \in U : x \notin x \},
+    \end{equation*}
+    which exists by \hyperref[axiom:bounded_separation_axiom]{Bounded Separation}. Observe that
+    \begin{gather*}
+      R \in R \implies R \notin R \quad \text{\Lightning} \\
+      \implies R \notin R \implies R \in R \quad \text{\Lightning}
+    \end{gather*}
+    Thus such a set $U$ cannot exist.
+  \end{proof}
+\end{eg}
+
+To talk about such collections, that may or may not be sets, we define \textit{classes}.
+
+\begin{defn}[Class]\index{Class}
+\label{defn:class}
+  A class is any collection of sets defined by definite property, i.e. given any difinite condition $P$,
+  \begin{equation*}
+    \class{ z \mid P(z) }
+  \end{equation*}
+  is the class of all sets satisfying $P$.
+\end{defn}
+
+Here, instead of \hyperref[axiom:bounded_separation_axiom]{Bounded Separation}, we have what is called \hlnotea{unbounded separation}.
+
+\begin{note}
+  We shall use $\class{}$ rather than $\{ \; \; \}$ to emphasize that we are talking about classes, i.e. we may be talking about non-sets.
+\end{note}
+
+\begin{eg}
+  \begin{equation*}
+    \class{ z \mid z = z }
+  \end{equation*}
+  is the universal class of all sets.
+\end{eg}
+
+\begin{note}
+  \begin{itemize}
+    \item Every set is a class.
+      \begin{proof}
+        Suppose $x$ is a set. We may write
+        \begin{equation*}
+          x = \class{ z \mid z \in x }.
+        \end{equation*}\qed
+      \end{proof}
+
+    \item Some classes are not sets; these are called \hldefn{proper classes}. E.g. the universal class of all sets, and
+      \begin{equation*}
+        \text{Russell} := \class{ z \mid z \notin z }.
+      \end{equation*}
+  \end{itemize}
+\end{note}
+
+% subsection classes (end)
+
+% section ordinals_continued (end)
+
+% chapter lecture_2_sep_11th (end)
 
 \appendix
 
