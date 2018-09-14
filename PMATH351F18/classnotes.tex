@@ -11,6 +11,9 @@
 
 \input{latex-classnotes-preamble.tex}
 
+\DeclareMathOperator{\lub}{lub }
+\DeclareMathOperator{\glb}{glb }
+
 \begin{document}
 \hypersetup{pageanchor=false}
 \maketitle
@@ -308,7 +311,7 @@ with
 \begin{align*}
   f(1) &= x_1 \in X_1 \\
   f(2) &= x_2 \in X_2 \\
-       &\vdots
+       &\vdots \\
   f(n) &= x_n \in X_n
 \end{align*}
 
@@ -340,6 +343,290 @@ And so we may ask a similar question as before: if each $X_\alpha$ is non-empty,
 % section products_of_sets (end)
 
 % chapter lecture_2_sep_10th (end)
+
+\chapter{Lecture 3 Sep 12th}%
+\label{chp:lecture_3_sep_12th}
+% chapter lecture_3_sep_12th
+
+\section{Axiom of Choice}%
+\label{sec:axiom_of_choice}
+% section axiom_of_choice
+
+\newthought{Recall} our final question of last lecture: If $\{ X_\alpha \}_{\alpha \in I}$ is a non-empty collection of non-empty sets, is
+\begin{equation*}
+  \prod_{\alpha \in I} X_\alpha \neq \emptyset \enspace ?
+\end{equation*}
+
+Turns out this is widely known (in the world of mathematics) as the \hlnotea{Axiom of Choice}.
+
+\begin{axiom}[Zermelo's Axiom of Choice]
+\index{Zermelo's Axiom of Choice}\index{Axiom of Choice}
+\label{axiom:zermelo_s_axiom_of_choice}
+  If $\{ X_\alpha \}_{\alpha \in I}$ is a non-empty collection of non-empty sets, then
+  \begin{equation*}
+    \prod_{\alpha \in I} X_\alpha \neq \emptyset.
+  \end{equation*}
+\end{axiom}
+
+An equivalent statement of the above axiom is:
+
+\begin{axiom}[Zermelo's Axiom of Choice v2]
+\index{Zermelo's Axiom of Choice}\index{Axiom of Choice}
+\label{axiom:zermelo_s_axiom_of_choice_v2}
+  $X \neq \emptyset \implies$
+  \begin{equation*}
+    \exists f : \mathcal{P}(X) \setminus \{ \emptyset \} \to X \; \forall A \in \mathcal{P}(X) \setminus \{ \emptyset \} \; f(A) \in A
+  \end{equation*}
+  where $f$ is the \hyperref[defn:choice_function]{choice function}.
+\end{axiom}
+
+\begin{ex}
+  Prove that \cref{axiom:zermelo_s_axiom_of_choice} and \cref{axiom:zermelo_s_axiom_of_choice_v2} are equivalent.
+\end{ex}
+
+\begin{proof}
+  \textbf{From \cref{axiom:zermelo_s_axiom_of_choice} to \cref{axiom:zermelo_s_axiom_of_choice_v2}}:
+
+  Since $X \neq \emptyset$, we have that $\mathcal{P}(X) \setminus \{ \emptyset \}$ is a non-empty collection of non-empty sets. Therefore,
+  \begin{equation*}
+    \prod_{A \in \mathcal{P}(X) \setminus \{ \emptyset \} } A \neq \emptyset.
+  \end{equation*}
+  So we know that
+  \begin{equation*}
+    \exists ( x_A )_{A \in \mathcal{P}(X) \setminus \{ \emptyset \} } \in \prod_{A \in \mathcal{P}(X) \setminus \{ \emptyset \} } A.
+  \end{equation*}
+  We then simply need to choose the choice function $f : \mathcal{P}(X) \setminus \{ \emptyset \} \to X$ such that
+  \begin{equation*}
+    f(A) = x_A \in A.
+  \end{equation*}
+
+  \noindent\textbf{From \cref{axiom:zermelo_s_axiom_of_choice_v2} to \cref{axiom:zermelo_s_axiom_of_choice}}: 
+
+  Let $X_\alpha \in \mathcal{P}(X)$ for $\alpha \in I$, where $I$ is some index set. We know that not all $X_\alpha = \emptyset$ since $X \neq \emptyset$. Choose $J \subseteq I$ such that $\{ X_\alpha \}_{\alpha \in J}$ is a non-empty collection of non-empty sets. Let $f: \mathcal{P}(X) \setminus \{ \emptyset \}$ be any choice function. By \cref{axiom:zermelo_s_axiom_of_choice_v2}, 
+  \begin{equation*}
+    \forall X_\alpha \in \mathcal{P}(X) \setminus \{ \emptyset \} \quad f(X_\alpha) \in X_\alpha.
+  \end{equation*}
+  Therefore,
+  \begin{equation*}
+    ( f(X_\alpha) )_{\alpha \in J} \in \prod_{\alpha \in J} X_\alpha.
+  \end{equation*}\qed
+\end{proof}
+
+% section axiom_of_choice (end)
+
+\section{Relations}%
+\label{sec:relations}
+% section relations
+
+Now, it is in our interest to start talking about comparisons or relations between the mathematical objects that we have defined.
+
+\begin{defn}[Relations]\index{Relations}
+\label{defn:relations}
+  A relation $R$ on a set $X$ is \sidenote{We can look at this definition as $R \subseteq X \times X$. Under such a definition, we would have
+  \begin{itemize}
+    \item (\textbf{Reflexive}) $\forall x \in X \enspace (x, x) \in R$;
+    \item (\textbf{Symmetric}) $\forall x, y \in X \enspace (x, y) \in R \iff (y, x) \in R$;
+    \item (\textbf{Anti-symmetric}) $\forall x, y \in X \enspace (x, y), (y, x) \in R \implies x = y$;
+    \item (\textbf{Transitive}) $\forall x, y, z \in X \enspace (x, y), (y, z) \in R \implies (x, z) \in R$.
+  \end{itemize}}
+  \begin{itemize}
+    \item (\hldefn{Reflexive}) $\forall x \in X \enspace xRx$;
+    \item (\hldefn{Symmetric}) $\forall x, y \in X \enspace xRy \iff yRx$;
+    \item (\hldefn{Anti-symmetric}) $\forall x, y \in X \enspace xRy \land yRx \implies x = y$;
+    \item (\hldefn{Transitive}) $\forall x, y , z \in X \enspace xRy \land yRz \implies xRz$.
+  \end{itemize}
+\end{defn}
+
+\begin{eg}
+  Let $X = \mathbb{R}$, and let $xRy \iff x \leq y$, where $\leq$ is the notion of ``less than or equal to'', which we shall assume that it has the meaning that we know. Observe that $\leq$ is:
+  \begin{itemize}
+    \item reflexive: $\forall x \in \mathbb{R} \enspace x \leq x$ is true;
+    \item anti-symmetric: $\forall x, y \in \mathbb{R} \enspace x \leq y \land y \leq x \implies x = y$; and
+    \item transitive: $\forall x, y , z \in \mathbb{R} \enspace x \leq y \land y \leq z \implies x \leq z$.
+  \end{itemize}
+\end{eg}
+
+\begin{eg}
+  Let $Y \neq \emptyset, \, X = \mathcal{P}(Y)$, with $ARB \iff A \subseteq B$. Observe that $\subseteq$ is:
+  \begin{itemize}
+    \item reflexive: $\forall A \in \mathcal{P}(Y) \enspace ARA \iff A \subseteq A$ is true;
+    \item anti-symmetric: $\forall A, B \in \mathcal{P}(Y) \enspace ARB \land BRA \iff A \subseteq B \land B \subseteq A \implies A = B$;
+    \item transitive: $\forall A, B, C \in \mathcal{P}(Y) \enspace ARB \land BRC \iff A \subseteq B \land B \subseteq C \implies A \subseteq C$.
+  \end{itemize}
+\end{eg}
+
+\begin{eg}
+  Let $Y \neq \emptyset, \, X = \mathcal{P}(Y)$, with $ARB \iff A \supseteq B$. Observe that $\supseteq$ is:
+  \begin{itemize}
+    \item reflexive: $\forall A \in \mathcal{P}(Y) \enspace ARA \iff A \subseteq A$;
+    \item anti-symmetric: $\forall A, B \in \mathcal{P}(Y) \enspace ARB \land BRA \iff A \supseteq B \land B \supseteq A \implies A = B$;
+    \item transitive: $\forall A, B, C \in \mathcal{P}(Y) \enspace ARB \land BRC \iff A \supseteq B \land B \supseteq C \implies A \supseteq C$.
+  \end{itemize}
+\end{eg}
+
+All the above examples are also known as \textit{partially ordered sets}.
+
+\begin{defn}[Partially Ordered Sets]\index{Partially Ordered Sets}\index{Poset}
+\label{defn:partially_ordered_sets}
+The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered set} (or a \hlnoteb{poset}) if $R$ is\marginnote{The ``partial'' in `partially ordered'' indicates that not every pair of elements need to be comparable, i.e. there may be pairs for which neither precedes the other (anti-symmetry).}
+  \begin{itemize}
+    \item reflexive;
+    \item anti-symmetric; and
+    \item transitive.
+  \end{itemize}
+  We denote a poset by $(X, R)$.
+\end{defn}
+
+\begin{note}
+  If $(X, R)$ is a poset, then if $A \subseteq X$, and $R_1 = R \restriction_{A \times A}$, then $(A, R_1)$ is also a poset.
+\end{note}
+
+\begin{eg}
+  How many possible relations can we define on these sets to make them into posets?
+  \begin{enumerate}
+    \item $X = \emptyset$
+      \begin{solution}
+        We have that $R = \emptyset \times \emptyset$, and so the only relation we have is an empty relation. Then it is vacuously true that $(X, R)$ a poset.
+      \end{solution}
+    \item $X = \{ x \}$
+      \begin{solution}
+        We have that $R = X \times X = \{ ( x, x ) \}$. It it clear that $(X, R)$ is a poset.
+      \end{solution}
+    \item $X = \{ x, y \}$
+      \begin{solution}
+        There are 3 possible relations:\marginnote{
+        3 possibilities illustrated as graphs, separated by lines:
+
+        \begin{tikzpicture}
+          \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (1, 3) {};
+          \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (3, 3) {};
+
+          \draw[-] (0,2.5) -- (4,2.5);
+
+          \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (1, 2) {};
+          \draw[-] (1,2) -- (1,1);
+          \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (1, 1) {};
+
+          \draw[-] (2,2.5) -- (2,0.5);
+
+          \node[circle,fill,inner sep=1pt,label={0:{ $y$ }}] at (3, 2) {};
+          \draw[-] (3,2) -- (3,1);
+          \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (3, 1) {};
+        \end{tikzpicture}
+        }
+        \begin{itemize}
+          \item a relation where $xRx$ and $yRy$;
+          \item a relation where $xRy$; or
+          \item a relation where $yRx$.
+        \end{itemize}
+      \end{solution}
+    \item $X = \{ x, y, z \}$
+      \begin{solution}
+        The following are all the possibilities represented by graphs, where the underlined numbers represent the number of ways we can rearrange the elements for unique relations:
+
+        \begin{center}
+          \begin{tikzpicture}
+            \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (1, 3) {};
+            \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (2, 3) {};
+            \node[circle,fill,inner sep=1pt,label={left:{ $z$ }}] at (3, 3) {};
+            \node at (-2,3) {\underline{1}};
+
+            \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (-1, 2) {};
+            \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (1, 2) {};
+            \node[circle,fill,inner sep=1pt,label={left:{ $z$ }}] at (0, 1) {};
+            \draw[-] (-1,2) -- (0,1);
+            \draw[-] (1,2) -- (0,1);
+            \node at (-2,1.5) {\underline{3}};
+
+            \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (3, 1) {};
+            \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (5, 1) {};
+            \node[circle,fill,inner sep=1pt,label={left:{ $z$ }}] at (4, 2) {};
+            \draw[-] (4,2) -- (3,1);
+            \draw[-] (4,2) -- (5,1);
+            \node at (6,1.5) {\underline{3}};
+
+            \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (-1, 0) {};
+            \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (1, 0) {};
+            \node[circle,fill,inner sep=1pt,label={left:{ $z$ }}] at (1, -1) {};
+            \draw[-] (1,0) -- (1,-1);
+            \node at (-2,-0.5) {\underline{6}};
+
+            \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (4, 0) {};
+            \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (4, -0.5) {};
+            \node[circle,fill,inner sep=1pt,label={left:{ $z$ }}] at (4, -1) {};
+            \draw[-] (4,0) -- (4,-1);
+            \node at (6,-0.5) {\underline{6}};
+          \end{tikzpicture}
+        \end{center}
+        Therefore, we see that there are a total of
+        \begin{equation*}
+          1 + 3 + 3 + 6 + 6 = 19 \text{ relations}.
+        \end{equation*}
+      \end{solution}
+    \item $X$ with $6$ elements.
+  \end{enumerate}
+\end{eg}
+
+\begin{ex}
+  How many possible relations can we define on a set of $6$ elements to the set into a poset?
+
+  \begin{solution}
+    \hlwarn{to be added}
+  \end{solution}
+\end{ex}
+
+\begin{defn}[Totally Ordered Sets / Chains]\index{Totally Ordered Sets}\index{Chains}
+\label{defn:totally_ordered_sets_chains}
+  The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{totally ordered set} (or a \hlnoteb{chain}) if $(X, R)$ is a poset with the exception that, for any $x, y \in X$, either $xRy$ or $yRx$ but not both.
+\end{defn}
+
+\begin{defn}[Bounds]
+\label{defn:bounds}
+  Let $(X, \leq)$ be a poset. Let $A \subset X$. We say $x_0 \in X$ is an \hldefn{upper bound} for $A$ if
+  \begin{equation*}
+    \forall a \in A \quad a \leq x_0.
+  \end{equation*}
+  If $A$ has an upper bound, we say that $A$ is \hldefn{bounded above}. If $A$ is bounded above, then $x_0$ is the \hldefn{least upper bound} (or \hldefn{supremum}) of $A$ is for any $x_1 \in X$ that is an upper bound of $A$, we have
+  \begin{equation*}
+    x_0 \leq x_1.
+  \end{equation*}
+  We write $x_0 = \lub (A) = \sup (A)$. If $\sup (A) \in A$, then $\sup (A) = \max (A)$ is the \hldefn{maximum} of $A$.
+
+  We can analogously define for:
+  \begin{align*}
+    \text{upper bound } &\to \text{ lower bound } \\
+    \text{bounded above } &\to \text{ bounded below } \\
+    \text{least upper bound, } \lub &\to \text{ greatest lower bound, } \glb \\
+    \text{supremum, } \sup &\to \text{ infimum, } \inf \\
+    \text{maximum, } \max &\to \text{ minimum, } \min
+  \end{align*}
+\end{defn}
+
+\begin{note}
+  By \hlnotea{anti-symmetry} of posets, we have that $\max, \sup, \min, \inf$ are all unique if they exists.
+\end{note}
+
+\begin{eg}[Least Upper Bound Property of $\mathbb{R}$]\index{Least Upper Bound Property of $\mathbb{R}$}
+  Let $X = \mathbb{R}$, and $\leq$ be the order that we have defined. Every bounded non-empty subset of $X$ has a supremum.
+\end{eg}
+
+\begin{eg}
+  Let $Y \neq \emptyset$, and $X = \mathcal{P}(Y)$, and $\subseteq$ the ordering by inclusion. We know that $Y$ is the maximum element of $(X, \subseteq)$. Then the collection $\{ A_\alpha \}_{\alpha \in I} \subset \mathcal{P}(Y)$ is bounded above by $Y$, and we have that\marginnote{Now if $Y = \emptyset$, we would end up having
+  \begin{gather*}
+    \sup \left( \left\{ A_\alpha \right\}_{\alpha \in I} \right) = \emptyset \\
+    \inf \left( \left\{ A_\alpha \right\}_{\alpha \in I} \right) = X
+  \end{gather*}
+  But this makes sense, since the empty set would be the least of upper bounds, and since $X = \mathcal{P}(Y)$ would have to be the greatest of lower bounds.
+  }
+  \begin{gather*}
+    \sup \left( \left\{ A_\alpha \right\}_{\alpha \in I} \right) = \bigcup_{\alpha \in I} A_\alpha \\
+    \inf \left( \left\{ A_\alpha \right\}_{\alpha \in I} \right) = \bigcap_{\alpha \in I} A_\alpha
+  \end{gather*}
+\end{eg}
+
+% section relations (end)
+
+% chapter lecture_3_sep_12th (end)
 
 \appendix
 
