@@ -10,6 +10,7 @@
 \institution{University of Waterloo}
 
 \input{latex-classnotes-preamble.tex}
+\input{probnotation.tex}
 
 \setsidenotefont{\color{base16-eighties-light}\footnotesize}
 \setmarginnotefont{\color{base16-eighties-light}\footnotesize}
@@ -432,6 +433,294 @@ Let $X$ be an rv. The \hlnoteb{moment generating function} (mgf)\marginnote{The 
 % section review_of_probability_theory (end)
 
 % chapter lecture_2_sep_11th (end)
+
+\chapter{Lecture 3 Sep 13th}%
+\label{chp:lecture_3_sep_13th}
+% chapter lecture_3_sep_13th
+
+\section{Review of Probability Theory (Continued)}%
+\label{sec:review_of_probability_theory_continued}
+% section review_of_probability_theory_continued
+
+\subsection{Continuous Random Variables (Continued)}%
+\label{sub:continuous_random_variables_continued}
+% subsection continuous_random_variables_continued
+
+\begin{eg}[Lecture Notes: Example 3]
+  Suppose $X \sim \Wei(\theta, \tau)$ with pdf
+  \begin{equation*}
+    f(x) = \frac{\tau \left( \frac{x}{\theta} \right)^\tau e^{-\left( \frac{x}{\theta} \right)^\tau}}{x}, \quad x > 0,
+  \end{equation*}
+  where $\theta, \tau > 0$. Find its hazard rate function.
+\end{eg}
+
+\begin{solution}
+  We first require the survival function:
+  \begin{align*}
+    \bar{F}(x) &= \int_{x}^{\infty} \frac{1}{y} \tau \left( \frac{y}{\theta} \right)^\tau e^{-\left( \frac{y}{\theta} \right)^\tau} \dif{y} \\
+               &= \int_{\frac{x}{\theta}}^{\infty} \frac{1}{u} \tau u^\tau e^{-u^\tau} \dif{u} \qquad \text{ where } u = \frac{y}{\theta} \\
+               &= \int_{\frac{x}{\theta}}^{\infty} \tau u^{\tau - 1} e^{-u^\tau} \dif{u} \\
+               &= -e^{-u^\tau} \at{\frac{x}{\theta}}{\infty} = e^{-\left( \frac{x}{\theta} \right)^\tau}
+  \end{align*}
+  The hazard rate is therefore
+  \begin{equation*}
+    h(x) = \frac{f(x)}{\bar{F}(x)} = \frac{\tau}{x} \left( \frac{x}{\theta} \right)^\tau
+  \end{equation*}
+\end{solution}
+
+% subsection continuous_random_variables_continued (end)
+
+\subsection{Mixed Random Variable}%
+\label{sub:mixed_random_variable}
+% subsection mixed_random_variable
+
+\begin{defn}[Mixed Random Variable]\index{Mixed Random Variable}
+\label{defn:mixed_random_variable}
+  We call $X$ a \hlnoteb{mixed random variable} (mixed rv) if it has both discrete and continuous components.
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item Mixed rvs are important in modeling insurance claims, e.g., the loss amount is usually a continuous random variable with a probability mass at $0$.
+  \end{itemize}
+\end{note}
+
+The following is a type of mixed random variable:
+
+\begin{defn}[Deductibles]\index{Deductibles}
+\label{defn:deductibles}
+  Let $X$ be an rv and $d$ be a fixed value.
+  \begin{equation*}
+    [ X - d ]_+ = \begin{cases}
+      X - d & x \geq d \\
+      0     & \text{ otherwise }
+    \end{cases}
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  If $X$ be an rv and $d$ a fixed value, the deductible $[X - d]_+$ has a mass point at $0$ since
+  \begin{equation*}
+    P( [ X - d ]_+ = 0 ) = P(X < d) > 0
+  \end{equation*}
+\end{note}
+
+\begin{note}
+  Let $\{ x_1, x_2, ... \}$ be a sequence of real numbers in an increasing order. Suppose $X$ is a rv that takes on values on the real, and has a \hlnotea{density function} $f$ on each interval $(x_i, x_{i + 1})$, and has \hlnotea{discrete mass points} at the boundaries of these intervals, i.e.\marginnote{In other words, we treat the discrete and continuous part of a mixed rv separately.}
+  \begin{equation*}
+    P(X = x_i) = p(x_i) > 0 \quad i \in \mathbb{N}.
+  \end{equation*}
+  Since $X$ is an rv, it must be the case that
+  \begin{equation*}
+    \sum_{i \in \mathbb{N}} p(x_i) + \sum_{i \in \mathbb{N}} \int_{x_i}^{x_{i + 1}} f(x) \dif{x}  = 1.
+  \end{equation*}
+  The cdf of a mixed rv $X$ is
+  \begin{equation*}
+    F(x) = P(X \leq x) = \sum_{i \in \mathbb{N}} p(x_i) \mathbb{1}_{\{x_i \leq x\}} + \sum_{i \in \mathbb{N}} \int_{x_i}^{x_{i + 1}} f(y) \mathbb{1}_{\{ y \leq x \} } \dif{y}.
+  \end{equation*}
+  The $k$th moment of $X$ is
+  \begin{equation*}
+    E\left[X^k\right] = \sum_{i \in \mathbb{N}} (x_i)^k p(x_i) + \sum_{i \in \mathbb{N}} \int_{x_i}^{x_{i + 1}} x^k f(x) \dif{x}.
+  \end{equation*}
+  The mgf of $X$ is
+  \begin{equation*}
+    M_X(t) = E\left[ e^{tX} \right] = \sum_{i \in \mathbb{N}} e^{tx_i} p(x_i) + \sum_{i \in \mathbb{N}} \int_{x_i}^{x_{i + 1}} e^{tx} f(x) \dif{x}.
+  \end{equation*}
+\end{note}
+
+\begin{eg}[Lecture Notes: Example 4]
+  Assume a claim amount of an insurance policy is modeled by a non-negative rv $X$ which has probability mass of $p$ and $0$, and otherwise continuous with a pdf $f$ over $(0, \infty)$. Find its cdf, $k$th moment, and mgf.
+\end{eg}
+
+\begin{solution}
+  The cdf of $X$ is
+  \begin{equation*}
+    F(x) = \begin{cases}
+      p + \int_{0}^{x} f(y) \dif{y} & x \geq 0 \\
+      0                             & \text{ otherwise }
+    \end{cases}
+  \end{equation*}
+  The $k$th moment of $X$ is
+  \begin{equation*}
+    E\left[ X^k \right] = \int_{0}^{\infty} x^k f(x) \dif{x}.
+  \end{equation*}
+  The mgf of $X$ is
+  \begin{equation*}
+    M_X(t) = p + \int_{0}^{\infty} e^{tx} f(x) \dif{x}.
+  \end{equation*}
+\end{solution}
+
+% subsection mixed_random_variable (end)
+
+% section review_of_probability_theory_continued (end)
+
+\section{Distributional Quantities and Risk Measures}%
+\label{sec:distributional_quantities_and_risk_measures}
+% section distributional_quantities_and_risk_measures
+
+\newthought{This chapter} introduces us to some \hlnotea{distributional quantities} for a given rv $X$. These distributional quantities are informative values to describe the characteristics of a risk.
+
+\subsection{Distributional Quantities}%
+\label{sub:distributional_quantities}
+% subsection distributional_quantities
+
+\begin{defn}[Central Moment]\index{Central Moment}
+\label{defn:central_moment}
+  The \hlnoteb{$k$th central moment} of an rv $X$ is defined as
+  \begin{equation*}
+    E\left[ (X - E(X))^k \right].
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  The second central moment is the \hldefn{variance}. The square root of the variance is the \hldefn{standard deviation}.
+\end{note}
+
+\begin{eg}[Lecture Notes: Example 5]
+  Consider an rv $Y = \begin{cases} Y_1 & U = 1 \\ Y_2 & U = 2 \end{cases} \; $\sidenote{This notation is just syntatic sugar for saying $Y_1 = Y \mid ( U = 1 )$ and $Y_2 = Y \mid ( U = 2 )$.}, where $Y_1 = 0$, $Y_2 \sim \Exp(10)$, and $P(U = 1) = P(U = 2) = 0.5$.
+  \begin{enumerate}
+    \item Find the cdf of $Y$.
+    \item Find the mean and variance of $Y$.
+    \item Let $Z = \frac{1}{2} Y_1 + \frac{1}{2} Y_2$. Does $Z$ have the same distribution as $Y$? Answer this by solving the mean and variance of $Z$.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item Note that
+      \begin{equation*}
+        F(y) = P( Y_1 \leq y \mid U = 1 ) P(U = 1) + P( Y_2 \leq y \mid U = 2 ) P(U = 2).
+      \end{equation*}
+      Observe that
+      \begin{equation*}
+        P(Y_1 \leq y \mid U = 1) = \begin{cases}
+          1 & y \geq 0 \\
+          0 & y < 0
+        \end{cases}
+      \end{equation*}
+      and
+      \begin{equation*}
+        P(Y_2 \leq y \mid U = 2) = \begin{cases}
+          1 - e^{-10y} & y \geq 0 \\
+          0            & y < 0
+        \end{cases}
+      \end{equation*}
+      Therefore
+      \begin{equation*}
+        F(y) = \begin{cases}
+          1 - \frac{1}{2} e^{-10 y} & y \geq 0 \\
+          0                         & y < 0
+        \end{cases}
+      \end{equation*}
+
+    \item The mean of $Y$ is
+      \begin{equation*}
+        E(Y) = E(Y \mid U = 1) P(U = 1) + E(Y \mid U = 2) P(U = 2) = 10 \cdot \frac{1}{2} = 5.
+      \end{equation*}
+      To calculate the variance of $Y$, we require
+      \begin{align*}
+        E\left[Y^2\right] &= E\left[Y^2 \mid U = 1\right] P(U = 1) + E\left[Y^2 \mid U = 2\right] P(U = 2) \\
+                          &= ( \Var(Y_2) + E(Y_2)^2 ) \cdot \frac{1}{2} = 100.
+      \end{align*}
+      Therefore
+      \begin{equation*}
+        \Var(Y) = 100 - 5^2 = 75.
+      \end{equation*}
+
+    \item The mean of $Z$ is
+      \begin{equation*}
+        E[Z] = E[ \frac{1}{2} Y_1 + \frac{1}{2} Y_2 ] = 5.
+      \end{equation*}
+      The variance of $Z$ is
+      \begin{equation*}
+        \Var(Z) = \frac{1}{4} \Var(Y_1) + \frac{1}{4} \Var(Y_2) = 25.
+      \end{equation*}
+      Therefore, $Z$ does not have the same distribution as $Y$.
+  \end{enumerate}
+\end{solution}
+
+\begin{defn}[Quantiles]\index{Quantiles}
+\label{defn:quantiles}
+  The \hlnoteb{$100p\%$ quantile} (or \hldefn{percentile}) of an rv $X$ is a set $\pi_p$ such that\marginnote{This definition may also be presented as: any number $\pi_p$ such that
+  \begin{equation*}
+    P(X < \pi_p) \leq p \leq P(X \leq \pi_p).
+  \end{equation*}}
+  \begin{equation*}
+    \pi_p = \{ x \in X \mid P(X < x) \leq p \leq P(X \leq x) \}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item If $X$ is a continuous random variable, we have that $P(X < \pi_p) = P(X \leq \pi_p)$ and so we have to define the quantile as
+      \begin{equation*}
+        \pi_p = F^{-1} (p)
+      \end{equation*}
+      where $F^{-1}$ is the inverse function of $F$, the cdf of $X$.
+
+    \item A quantile \hlimpo{can be a set of numbers}.
+    \item $\pi_{0.5}$ is called the \hldefn{median} of $X$.
+  \end{itemize}
+\end{note}
+
+\marginnote{Graphical method to interpret this notion will be included.}
+
+\begin{eg}[Lecture Notes: Example 1]
+  Find the $100p\%$ quantile of the loss distribution $F(x) = 1 - e^{-\frac{x}{\theta}}$, $x > 0$.
+\end{eg}
+
+\begin{solution}
+  Note that $F$ is the cdf of an exponential distribution, which is a continuous distribution. Therefore,
+  \begin{equation*}
+    F(\pi_p) = 1 - e^{-\frac{\pi_p}{\theta}} = p \implies \pi_p = - \theta \ln (1 - p).
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Lecture Notes: Example 2]
+  Find the median $\pi_{0.5}$ for the following cdf
+  \begin{equation*}
+    F(x) = \begin{cases}
+      0                                & x < 0 \\
+      0.6 + 0.4 (1 - e^{-\frac{x}{3}}) & x \geq 0
+    \end{cases}
+  \end{equation*}
+\end{eg}
+
+\begin{solution}
+  Since $F(0) = 0.6$ and $F$ is an increasing function, we have that $F(x) = 0$ for all $x < 0$. Therefore
+  \begin{equation*}
+    \pi_{0.5} = 0.
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Lecture Notes: Example 3]
+  Find the median $\pi_{0.5}$ for a loss $X$ with pmf
+  \begin{equation*}
+    p(0) = 0.25, \, p(1) = 0.25), \, p(2) = 0.5.
+  \end{equation*}
+\end{eg}
+
+\begin{solution}
+  The cdf of $X$ is
+  \begin{equation*}
+    F(x) = \begin{cases}
+      0    & x < 0 \\
+      0.25 & 0 \leq x < 1 \\
+      0.5  & 1 \leq x < 2 \\
+      1    & x \geq 2
+    \end{cases}
+  \end{equation*}
+  since $F(x) = 0.5$ when $1 \leq x < 2$, we have that
+  \begin{equation*}
+    \pi_{0.5} = [1, 2].
+  \end{equation*}
+\end{solution}
+
+% subsection distributional_quantities (end)
+
+% section distributional_quantities_and_risk_measures (end)
+
+% chapter lecture_3_sep_13th (end)
 
 \appendix
 
