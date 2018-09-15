@@ -481,7 +481,7 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
   If $(X, R)$ is a poset, then if $A \subseteq X$, and $R_1 = R \restriction_{A \times A}$, then $(A, R_1)$ is also a poset.
 \end{note}
 
-\begin{eg}
+\begin{eg}\label{eg:number_of_posets}
   How many possible relations can we define on these sets to make them into posets?
   \begin{enumerate}
     \item $X = \emptyset$
@@ -495,23 +495,23 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
     \item $X = \{ x, y \}$
       \begin{solution}
         There are 3 possible relations:\marginnote{
-        3 possibilities illustrated as graphs, separated by lines:
+          3 possibilities represented as graphs (known as \href{https://en.wikipedia.org/wiki/Hasse_diagram}{Hasse diagram}\index{Hasse diagram}), separated by lines:
 
         \begin{tikzpicture}
-          \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (1, 3) {};
-          \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (3, 3) {};
+          \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (1, 3) {};
+          \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (3, 3) {};
 
           \draw[-] (0,2.5) -- (4,2.5);
 
-          \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (1, 2) {};
+          \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (1, 2) {};
           \draw[-] (1,2) -- (1,1);
-          \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (1, 1) {};
+          \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (1, 1) {};
 
           \draw[-] (2,2.5) -- (2,0.5);
 
           \node[circle,fill,inner sep=1pt,label={0:{ $y$ }}] at (3, 2) {};
           \draw[-] (3,2) -- (3,1);
-          \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (3, 1) {};
+          \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (3, 1) {};
         \end{tikzpicture}
         }
         \begin{itemize}
@@ -526,34 +526,34 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
 
         \begin{center}
           \begin{tikzpicture}
-            \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (1, 3) {};
-            \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (2, 3) {};
-            \node[circle,fill,inner sep=1pt,label={left:{ $z$ }}] at (3, 3) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (1, 3) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (2, 3) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (3, 3) {};
             \node at (-2,3) {\underline{1}};
 
-            \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (-1, 2) {};
-            \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (1, 2) {};
-            \node[circle,fill,inner sep=1pt,label={left:{ $z$ }}] at (0, 1) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (-1, 2) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (1, 2) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (0, 1) {};
             \draw[-] (-1,2) -- (0,1);
             \draw[-] (1,2) -- (0,1);
             \node at (-2,1.5) {\underline{3}};
 
-            \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (3, 1) {};
-            \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (5, 1) {};
-            \node[circle,fill,inner sep=1pt,label={left:{ $z$ }}] at (4, 2) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (3, 1) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (5, 1) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (4, 2) {};
             \draw[-] (4,2) -- (3,1);
             \draw[-] (4,2) -- (5,1);
             \node at (6,1.5) {\underline{3}};
 
-            \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (-1, 0) {};
-            \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (1, 0) {};
-            \node[circle,fill,inner sep=1pt,label={left:{ $z$ }}] at (1, -1) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (-1, 0) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (1, 0) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (1, -1) {};
             \draw[-] (1,0) -- (1,-1);
             \node at (-2,-0.5) {\underline{6}};
 
-            \node[circle,fill,inner sep=1pt,label={left:{ $x$ }}] at (4, 0) {};
-            \node[circle,fill,inner sep=1pt,label={left:{ $y$ }}] at (4, -0.5) {};
-            \node[circle,fill,inner sep=1pt,label={left:{ $z$ }}] at (4, -1) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (4, 0) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (4, -0.5) {};
+            \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (4, -1) {};
             \draw[-] (4,0) -- (4,-1);
             \node at (6,-0.5) {\underline{6}};
           \end{tikzpicture}
@@ -563,7 +563,6 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
           1 + 3 + 3 + 6 + 6 = 19 \text{ relations}.
         \end{equation*}
       \end{solution}
-    \item $X$ with $6$ elements.
   \end{enumerate}
 \end{eg}
 
@@ -627,6 +626,230 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
 % section relations (end)
 
 % chapter lecture_3_sep_12th (end)
+
+\chapter{Lecture 4 Sep 14th}%
+\label{chp:lecture_4_sep_14th}
+% chapter lecture_4_sep_14th
+
+\section{Zorn's Lemma}%
+\label{sec:zorn_s_lemma}
+% section zorn_s_lemma
+
+\begin{defn}[Maximal Element]\index{Maximal Element}
+\label{defn:maximal_element}
+  Let $(X, \leq)$ be a poset. An element $x \in X$ is \hlnoteb{maximal} if whenever $y \in X$ is such that $x \leq y$, we must have $y = x$.
+\end{defn}
+
+\begin{eg}
+  Looking back at \cref{eg:number_of_posets}, on the set $X = \{ x, y, z \}$, we have that the maximal element in each possible poset is/are:\marginnote{This shows to us that the maximal element does not have to be unique.}
+
+  \begin{center}
+  \begin{tikzpicture}
+    \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (-1, 3) {};
+    \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (0, 3) {};
+    \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (1, 3) {};
+    \node[label={right:{$x, y, z$ are all maximal}}] at (2, 3) {};
+
+    \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (-1, 2) {};
+    \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (1, 2) {};
+    \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (0, 1) {};
+    \draw[-] (-1,2) -- (0,1);
+    \draw[-] (1,2) -- (0,1);
+    \node[label={right:{$z$ is maximal}}] at (2, 1.5) {};
+
+    \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (-1, -1) {};
+    \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (1, -1) {};
+    \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (0, 0) {};
+    \draw[-] (0,0) -- (1,-1);
+    \draw[-] (0,0) -- (-1,-1);
+    \node[label={right:{$x, y$ are both maximal}}] at (2, -0.5) {};
+
+    \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (-1, -2) {};
+    \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (1, -2) {};
+    \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (1, -3) {};
+    \draw[-] (1,-2) -- (1,-3);
+    \node[label={right:{$x, z$ are both maximal}}] at (2, -2.5) {};
+
+    \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (0, -4) {};
+    \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (0, -4.5) {};
+    \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (0, -5) {};
+    \draw[-] (0,-4) -- (0,-5);
+    \node[label={right:{$z$ is maximal}}] at (2, -4.5) {};
+  \end{tikzpicture}
+  \end{center}
+\end{eg}
+
+\begin{eg}
+  \begin{itemize}
+    \item Given $X \neq \emptyset$, the maximal element of the poset $(\mathcal{P}(X), \subseteq)$ is $X$.
+    \item Given $X \neq \emptyset$, the maximal element of the poset $(\mathcal{P}(X), \supseteq)$ is $\emptyset$.
+    \item The poset $(\mathbb{R}, \leq)$ has no maximal element.
+  \end{itemize}
+\end{eg}
+
+\begin{axiom}[Zorn's Lemma]
+\index{Zorn's Lemma}
+\label{axiom:zorn_s_lemma}
+  If $(X, \leq)$ is a non-empty poset such that every chain $S \subset X$ has an upper bound, then $(X, \leq)$ has a maximal element.
+\end{axiom}
+
+\begin{thm}[\faStar Non-Zero Vector Spaces has a Basis]
+\label{thm:non_zero_vector_spaces_has_a_basis}
+  Every non-zero vector space, $V$, has a basis.
+\end{thm}
+\marginnote{The flow of this proof is a typical approach when Zorn's Lemma is involved.}
+\begin{proof}[\faStar]
+  Let
+  \begin{equation*}
+    \mathcal{L} := \{ A \subset V \mid A \text{ is linearly independent } \}.
+  \end{equation*}
+  Note that $\mathcal{L} \neq \emptyset$ since $V \neq \{ 0 \}$. Now order elements of $\mathcal{L}$ with $\subseteq$. It suffices to show that $(\mathcal{L}, \subseteq)$ has a maximal element, since this maximal element must be a basis. Otherwise, we would contradict the maximality of such an element.\sidenote{This is the key to this proof.}
+
+  Now let $S = \{ A_\alpha \}_{\alpha \in I}$ be a chain in $\mathcal{L}$. Let
+  \begin{equation*}
+    A_0 = \bigcup_{\alpha \in I} A_\alpha.
+  \end{equation*}
+  \hlwarn{Require clarification before proceeding...}
+\end{proof}
+
+\begin{defn}[Well-Ordered]\index{Well-Ordered}
+\label{defn:well_ordered}\marginnote{
+\begin{ex}
+  Prove that well-ordered sets are chains.
+\end{ex}
+}
+\noindent We say that a poset $(X, \leq)$ is \hlnoteb{well-ordered} if every non-empty subset $A \subset X$ has a least/minimal element in $A$.
+\end{defn}
+
+\begin{eg}
+  $(\mathbb{N}, \leq)$ is well-ordered.
+\end{eg}
+
+\begin{axiom}[Well-Ordering Principle]
+\index{Well-Ordering Principle}
+\label{axiom:well_ordering_principle}
+  Every non-empty set can be well-ordered.
+\end{axiom}
+
+\begin{thm}[Axioms of Choice and Its Equivalents]
+\label{thm:axioms_of_choice_and_its_equivalents}
+  TFAE:\marginnote{\begin{ex}Prove \cref{thm:axioms_of_choice_and_its_equivalents}\end{ex}}
+  \begin{enumerate}
+    \item Axiom of Choice, \cref{axiom:zermelo_s_axiom_of_choice}
+    \item Zorn's Lemma, \cref{axiom:zorn_s_lemma}
+    \item Well-Ordering Principle, \cref{axiom:well_ordering_principle}.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  (3) $\implies$ (1) is simple; let the choice function be such that we pick the minimal element from each set among a non-empty collection of non-empty sets. It is clear that the product of these sets will always have an element, in particular the tuple where each component is the minimal element of each set.
+
+  \hlwarn{The rest will be added once I've worked it out}
+\end{proof}
+
+\begin{eg}
+  Let $X = \mathbb{Q}$. Let $\phi: \mathbb{Q} \to \mathbb{N}$ be defined such that
+  \begin{equation*}
+    \phi\left(\frac{m}{n}\right) = \begin{cases}
+      2^m 5^n    & m > 0 \\
+      1          & m = 1 \\
+      3^{-m} 7^n & m < 0
+    \end{cases}
+  \end{equation*}
+  By the \hlnotea{unique prime factorization of natural numbers} (or \hlnotea{Fundamental Theorem of Arithmetic}), we have that $\phi$ is injective. In fact,
+  \begin{equation*}
+    r \leq s \iff \phi(r) \leq \phi(s),
+  \end{equation*}
+  showing to us that we have a well-ordering on $\mathbb{Q}$.
+\end{eg}
+
+% section zorn_s_lemma (end)
+
+\section{Cardinality}%
+\label{sec:cardinality}
+% section cardinality
+
+\subsection{Equivalence Relation}%
+\label{sub:equivalence_relation}
+% subsection equivalence_relation
+
+\begin{defn}[Equivalence Relation]\index{Equivalence Relation}
+\label{defn:equivalence_relation}
+  Let $X$ be non-empty set. A relation $\sim$ on $X$ is an \hlnoteb{equivalence relation} if it is
+  \begin{itemize}
+    \item reflexive; 
+    \item symmetric; and
+    \item transitive.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}[Equivalence Class]\index{Equivalence Class}
+\label{defn:equivalence_class}
+  Let $X$ be a non-empty set, and $x \in X$. An \hlnoteb{equivalence class} of $x$ under the equivalence relation $\sim$ is defined as
+  \begin{equation*}
+    [x] := \{ y \in X \mid x \sim y \}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Note that we either have $[x] = [y]$ or $[x] \cap [y] = \emptyset$. This is sensible, since if $w \in [x]$, then $w \sim x$. If $w \in [y]$, then we are done. If $w \notin [y]$, suppose $\exists v \in [y]$ such that $w \sim v$, which then implies $w \in [y]$ which is a contradiction.
+
+  This results shows to us that
+  \begin{equation*}
+    X = \bigcup_{x \in X} [x],
+  \end{equation*}
+  or in words, equivalence classes \textit{partition} the set.
+\end{note}
+
+\begin{defn}[Partition]\index{Partition}
+\label{defn:partition}
+  Let $X \neq \emptyset$. A \hloteb{partition} of $X$ is a collection $\{A_{\alpha} \}_{\alpha \in I} \subset \mathcal{P}(X)$ such that
+  \begin{enumerate}
+    \item $A_\alpha \neq \empyset$;
+    \item $A_{\alpha} \cap A_{\beta} = \emptyset$ if $\alpha \neq \beta$ in $I$; and
+    \item $X = \bigcup_{\alpha \in I} A_\alpha$.
+  \end{enumerate}
+\end{defn}
+
+With this, we have ourselves another method to show that $\sim$ is an equivalence relation.
+
+\begin{propo}[Characterization of An Equivalence Relation]
+\label{propo:characterization_of_an_equivalence_relation}
+  If $\{ A_\alpha \}_{\alpha \in I}$ is a partition of $X$ and $x \sim y \iff x, y \in A_{\alpha}$, then $\sim$ is an equivalence relation.\marginnote{The proof of this statement has been stated above.}
+\end{propo}
+
+Similar to when we defined partial orders, we can ask ourselves the following question:
+
+\begin{eg}
+  How many equivalence relations are there on the set $X = \{1, 2, 3\}$?\sidenote{By \cref{propo:characterization_of_an_equivalence_relation}, this question is equivalent to asking for the number of partitions we can create from the set $X$. The study of counting partitions is what is covered by \href{https://en.wikipedia.org/wiki/Bell_number}{Bell's Number}.}
+
+\end{eg}
+
+\begin{solution}
+  Note that we can partition $X$ as
+  \begin{equation*}
+    \{ \{1\}, \{2\}, \{3\} \}, \{ \{1, 2, 3\} \},
+  \end{equation*}
+  and
+  \begin{equation*}
+    \{ \{1, 2\}, \{3\} \},
+  \end{equation*}
+  which we can rearrange in 3 different ways. Therefore, there are 5 different equivalence relations that we can define on $X$.
+\end{solution}
+
+\begin{eg}
+  Let $X$ be any set. Consider $\mathcal{P}(X)$. Define $\sim$ on $\mathcal{P}(X)$ by
+  \begin{equation*}
+    A \sim B \iff \exists f: A \to B
+  \end{equation*}
+  such that $f$ is surjective\sidenote{$\sim$ partitions $X$ into sets that have the same number of elements.}. It is easy to verify that $\sim$ is an equivalence relation.
+\end{eg}
+
+% subsection equivalence_relation (end)
+
+% section cardinality (end)
+
+% chapter lecture_4_sep_14th (end)
 
 \appendix
 
