@@ -167,9 +167,9 @@ With all of the above axioms, we can iteratively construct each and every natura
 
 It is tempting to simply take the infinitude of natural numbers simply as an axiom, i.e.
 
-\begin{magentaquote}\label{sp:natural_numbers_axiom}
+\begin{quotebox}{base16-eighties-magenta}\label{sp:natural_numbers_axiom}
   There exists a set whose members are precisely the natural numbers.
-\end{magentaquote}
+\end{quotebox}
 
 There is a certain rule to which we set down axioms, and that is, axioms must be expressable in a ``finitary'' manner, i.e. they must be expressible using first-order logic.
 
@@ -330,7 +330,7 @@ Let $I$ be a successor set. The set of natural numbers is\sidenote{We can also w
 \begin{note}
   $J$ being a successor set can be expressed by the definite condition
   \begin{equation*}
-    ( 0 \in J ) \lor \forall x \; ( x \in J \rarrow S(x) \in J ),
+    ( 0 \in J ) \land \forall x \; ( x \in J \rarrow S(x) \in J ),
   \end{equation*}
   so we can write the definite condition in the above definition by
   \begin{equation*}
@@ -364,9 +364,9 @@ Another useful axiom that we will use later is the following:
 
 \begin{note}
   The slogan for the Replacement Axiom is:
-  \begin{redquote}
+  \begin{quotebox}{base16-eighties-red}
     The image of a set under a definite operation exists.
-  \end{redquote}
+  \end{quotebox}
 \end{note}
 
 These eight axioms, along with another ninth axiom called the Regularity Axiom\sidenote{We shall not discuss too much about this. According to the lecture and the lecture notes, the Regularity Axiom states that every set has a minimal element. On Wikipedia, the axiom states that every set has an element that does not intersect with the set itself.}, constitutes the \hlnotea{Zermelo-Fraenkel Set Theory}.
@@ -417,7 +417,7 @@ Here, instead of \hyperref[axiom:bounded_separation_axiom]{Bounded Separation}, 
 
 \begin{eg}
   \begin{equation*}
-    \class{ z \mid z = z }
+    \text{ Set } := \class{ z \mid z = z }
   \end{equation*}
   is the universal class of all sets.
 \end{eg}
@@ -444,6 +444,286 @@ Here, instead of \hyperref[axiom:bounded_separation_axiom]{Bounded Separation}, 
 % section ordinals_continued (end)
 
 % chapter lecture_2_sep_11th (end)
+
+\chapter{Lecture 3 Sep 13th}%
+\label{chp:lecture_3_sep_13th}
+% chapter lecture_3_sep_13th
+
+\section{Ordinals (Continued 2)}%
+\label{sec:ordinals_continued_2}
+% section ordinals_continued_2
+
+\subsection{Cartesian Products and Function}%
+\label{sub:cartesian_products_and_function}
+% subsection cartesian_products_and_function
+
+\begin{defn}[Ordered Pairs]\index{Ordered Pairs}
+\label{defn:ordered_pairs}
+  Given sets $x, y$, an \hlnoteb{ordered pair} of $x$ and $y$ is defined as\sidenote{This invokes the Pairset Axiom thrice.}\marginnote{Why did we not define an ordered pair as
+  \begin{equation*}
+    (x, y) = \{ \{x\}, \{y \} \}
+  \end{equation*}
+  instead?}
+  \begin{equation*}
+    (x, y) = \{ \{ x \}, \{ x, y \} \}
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Note that we must have
+  \begin{equation*}
+    ( (x, y) = (x', y') ) \iff ( x = x' \land y = y' ).
+  \end{equation*}
+
+  \begin{proof}
+    The $(\impliedby)$ direction is clear by Extensionality. For the other direction, we shall break it into 2 cases:
+
+    \noindent\textbf{Case 1}: $x = y$. Then $\{x, y\} = \{x\}$ by Extensionality, and so
+    \begin{equation*}
+      (x, y) = \{ \{ x \} \}
+    \end{equation*}
+    Therefore, we have that
+    \begin{equation*}
+      \{ \{ x \} \} = (x, y) = (x', y') = \{ \{ x' \}, \{ x', y' \} \}
+    \end{equation*}
+    So we have
+    \begin{equation*}
+      \{ x \} = \{ x' \} \implies x = x'
+    \end{equation*}
+    and
+    \begin{equation*}
+      \{ x \} = \{ x', y' \} \implies y' = x = y.
+    \end{equation*}
+    Thus we have
+    \begin{equation*}
+      x = x' \land y = y'.
+    \end{equation*}
+
+    \noindent \textbf{Case 2}: Suppose $x \neq y$ and $x' \neq y'$ \sidenote{If any of them are equal, Case 1 would apply.} We have
+    \begin{equation*}
+      \{ \{ x \}, \{ x, y \} \} = \{ \{ x' \}, \{ x', y' \} \}
+    \end{equation*}
+    Then
+    \begin{equation*}
+      \{ x \} = \{ x' \} \lor \{ x \} = \{ x', y' \}
+    \end{equation*}
+    The latter leads to a contradiction, since it would imply
+    \begin{equation*}
+      x' = x = y'.
+    \end{equation*}
+    Thus $x = x'$. Also, we have
+    \begin{equation*}
+      \{ x, y \} = \{ x' \} \lor \{ x, y \} = \{ x', y' \}
+    \end{equation*}
+    Now the former leads to a contradiction since it would imply that
+    \begin{equation*}
+      x = x' = y.
+    \end{equation*}
+    Now since $x = x'$, it must be that $y = y'$, otherwise $y = x' = x$ would contradict our assumption. Therefore, we have that
+    \begin{equation*}
+      x = x' \land y = y'.
+    \end{equation*}\qed
+  \end{proof}
+\end{note}
+
+With ordered pairs, we can build Cartesian products:
+
+\begin{defn}[Cartesian Product]\index{Cartesian Product}
+\label{defn:cartesian_product}
+  Given classes $X$ and $Y$, the \hlnoteb{Cartesian Product} of $X$ and $Y$ is defined as
+  \begin{equation*}
+    X \times Y := \class{ z : z = (x, y), x \in X, y \in Y }
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  We can express this definition using definite conditions;
+  \begin{fullwidth}
+  \begin{gather*}
+    \forall x, y \Bigg( (x \in X) \land (y \in Y) \land \Big( \exists a, b ( \forall t ( t \in a \lrarrow t = x ) ) \land \forall t ( t \in b \lrarrow (t = x) \lor (t = y) ) \Big) \land \\
+    \forall t \Big( t \in z \lrarrow \big( (t = a) \lor (t = b) \big) \Big) \Bigg)
+  \end{gather*}
+  \end{fullwidth}
+\end{note}
+
+\begin{note}
+  \begin{itemize}
+    \item A Cartesian product is a class.
+    \item If $A$ is a set and $B$ is a class, and $B \subseteq A$, then $B$ is also a set. This is easy to show: observe that by Extentionality,
+      \begin{equation*}
+        B = \{ a \in A \mid a \in B \}.
+      \end{equation*}
+      By Bounded Separation Axiom, $B$ is a set\sidenote{This statement can be rephrased as: subclasses of a set are subsets.}.
+  \end{itemize}
+\end{note}
+
+Consequently, Cartesian products of sets are sets themselves; if $X$ and $Y$ are sets, we want to show that $X \times Y$ is a set so it is sufficient to show that it is contained in one. Recall that
+\begin{equation*}
+  (x, y) = \{ \{ x \}, \{ x, y \} \}
+\end{equation*}
+and $\{ x, y \} \subset X \cup Y$ which means $\{ x, y \} \in \mathcal{P}(X)$, and we observe that $\{ x \} \in \mathcal{P}(X \cup Y)$. So $(x, y) \in \mathcal{P}(X \cup Y)$. Therefore, $X \times Y \subset \mathcal{P} ( \mathcal{P} (X \cup Y) )$, and we show to ourselves that $X \times Y$ is indeed a set.
+
+\begin{defn}[Definite Operation]\index{Definite Operation}
+\label{defn:definite_operation}
+  Given classes $X$ and $Y$, a \hlnoteb{definite operation} $f: X \to Y$ is a subclass $\Gamma(f) \subseteq X \times Y$ such that
+  \begin{equation*}
+    \forall x \in X \; \exists ! y \in Y \; (x, y) \in \Gamma(f).
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  We write $f(x) = y$ to mean $(x, y) \in \Gamma(f)$. We also refer to $\Gamma(f)$ as the \hldefn{graph of $f$}.
+\end{note}
+
+\begin{eg}
+  The successor function $S : \text{Set} \to \text{Set}$ is a definite operation such that\marginnote{To show that $S$ is a definite operation, we need to show that $S$ is a definite condition.}
+  \begin{equation*}
+    S(x) = x \cup \{x\}
+  \end{equation*}
+  This is true since is can be expressed as
+  \begin{equation*}
+    \forall t ( t \in y \lrarrow ( t \in x \lor t = x ) ).
+  \end{equation*}
+\end{eg}
+
+\begin{note}
+  If $X$ and $Y$ are sets and $f$ is a definite operation, then $\Gamma(f) \subseteq X \times Y$ is a set. In such a case, we call $f$ a function.
+\end{note}
+
+\begin{defn}[Functions]\index{Functions}
+\label{defn:functions}
+  A function is a definite operation $f : X \to Y$ where $X$ and $Y$ are both sets.
+\end{defn}
+
+We can now restate the Replacement Axiom.
+
+\begin{axiom}[Replacement Axiom (Restated)]
+\index{Replacement Axiom}
+\label{axiom:replacement_axiom_restated}
+  If $f : X \to Y$ is a definite operation, and $A \subseteq X$ is a set, then $\exists B \subseteq Y$ that is a set such that $t \in B$ if and only if $t = f(a)$ for some $a \in A$.
+\end{axiom}
+
+% subsection cartesian_products_and_function (end)
+
+\subsection{The Natural Numbers}%
+\label{sub:the_natural_numbers}
+% subsection the_natural_numbers
+
+\begin{thm}[Induction Principle]
+\index{Induction Principle}
+\label{thm:induction_principle}
+  Suppose $J \subseteq \omega$, $0 \in J$ and whenever $n \in J$, $S(n) \in J$. Then $J = \omega$.
+\end{thm}
+
+\begin{proof}
+  By assumption, $J$ is a successor set, therefore $\omega \subseteq J$ by definition. Thus, sinec $J \subseteq \omega$, we have $J = \omega$.\qed
+\end{proof}
+
+\begin{lemma}[Properties of the Natural Numbers]
+\label{lemma:properties_of_the_natural_numbers}
+  Suppose $n \in \omega$. We have
+  \begin{enumerate}
+    \item $n \subseteq \omega$;
+    \item $\forall m \in n \quad m \subseteq n$;
+    \item $n \notin n$;
+    \item $n = 0 \veebar 0 \in n$; and
+    \item $y \in n \implies S(y) \in n \veebar S(y) = n$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Let\sidenote{We construct this $J$ and show that it is a successor set. Note that if $J = \omega$, our proof is complete.}
+      \begin{equation*}
+        J := \{ n \in \omega : n \subseteq \omega \} \subseteq \omega.
+      \end{equation*}
+      Note that $\emptyset \subseteq \omega$ and so $0 \subseteq \omega$. By membership, $0 \in J$.
+      
+      Suppose $m \in J$. Consider $S(m) = m \cup \{ m \}$. Since $J \subseteq \omega$, $m \in \omega$. Since $m \in \omega$, $\{ m \} \subseteq \omega$. Therefore $S(m) = m \cup \{ m \} \subseteq \omega$, and so $S(m) \in J$. So $J$ is a successor set. And thus by \hyperref[thm:induction_principle]{Induction Principle}, $J = \omega$.
+
+    \item Let
+      \begin{equation*}
+        J := \{ n \in \omega: \forall m \in n, m \subseteq n \}.
+      \end{equation*}
+      It is vacuously true that $0 \in J$ since $\emptyset$ is a subset of every $n \in J$. Suppose $n \in J$. Then $\forall m \in n$, we have $m \subseteq n$. Consider $S(n) = n \cup \{ n \}$. Note that $n \in S(n)$ and $n \subseteq S(n)$. For $x \in S(n)$ such that $x \neq n$, we must have that $x \in n$. By assumption, $x \subseteq n \subseteq S(n)$. Therefore, $S(n) \in J$, and so $J$ is a successor set. By the Induction Principle, $J = \omega$.
+
+    \item Let
+      \begin{equation*}
+        J := \{ n \in \omega : n \notin n \}.
+      \end{equation*}
+      We have $0 = \emptyset \notin \emptyset$. So $0 \in J$.
+
+      Let $n \in J$. Consider $S(n) = n \cup \{n\}$. In particular, note that $n \in S(n)$. Suppose, for contradiction, that $S(n) \in S(n)$. Then $S(n) = n$ or $S(n) \in n$.
+
+      $S(n) = n \implies n \in S(n) = n$ \Lightning $n \notin n$.
+
+      $S(n) \in n \implies S(n) \subseteq n$ by part 2 $\implies n \in n$ \Lightning $n \notin n$.
+
+      Thus $S(n) \notin S(n)$ and so $S(n) \in J$. So $J$ is a successor set, and so by the \hyperref[thm:induction_principle]{Induction Principle}, $J = \omega$.
+
+    \item It suffices to show that
+      \begin{equation*}
+        \omega = \{0\} \cup \{ n \in \omega: 0 \in n \}.
+      \end{equation*}
+      Let $J =$ RHS. We have that $0 \in J$. Suppose $n \in J$ such that $n \neq 0$. Then $0 \in n$. Since $n \subseteq S(n) = n \cup \{n\}$, we have that $0 \in S(n)$. Therefore, $S(n) \in J$. So $J$ is a successor set, and so by the Induction Principle, $J = \omega$ as required.
+
+    \item Let
+      \begin{equation*}
+        J := \{ n \in \omega : y \in n \implies S(y) \in n \veebar S(y) = n \}.
+      \end{equation*}
+      $0 \in J$ is vacuously true, since there are no $y \in 0$. Suppose $n \in J$. Let $y \in S(n) = n \cup \{ n \}$. We have two choices: either $y \in n$ or $y = n$. If $y \in n$, then $S(y) \in n \veebar S(y) = n$, since $n \in J$. We have that
+
+      $S(y) \in n \subseteq S(n)$ in which case we are done; and
+
+      $(sy) \subseteq n \in S(n)$.
+
+      Otherwise, if $y \notin n$, then $y = n$. Then we simply have $S(y) = S(n)$. Thus $J$ is a succesor set and so by the Induction Principle, $J = \omega$.
+  \end{enumerate}\qed
+\end{proof}
+
+% subsection the_natural_numbers (end)
+
+\subsection{Well-Orderings}%
+\label{sub:well_orderings}
+% subsection well_orderings
+
+\begin{defn}[Strict Partially Ordered Set]\index{Strict Partially Ordered Set}\index{Strict Poset}
+\label{defn:strict_partially_ordered_set}
+  A \hlnoteb{strict partially ordered set} (or \hlnoteb{strict poset}\sidenote{This is my unofficial terminology}) is a set $E$ together with $R \subseteq E^2 = E \times E$ such that
+  \begin{enumerate}
+    \item (\hlnotea{anti-reflexive}) $\forall a \in E \quad (a, a) \notin R$;
+    \item (\hlnotea{anti-symmetric}) $\forall a, b \in E \quad (a, b) \in R \land (b, a) \in R \implies a = b$; and
+    \item (\hlnotea{transitivity}) $\forall a, b, c \in E \quad (a, b), (b, c) \in R \implies (a, c) \in R$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Strict Totally Ordered Set]\index{Strict Totally Ordered Set}\index{Strict Linearly Ordered Set}
+\label{defn:strict_totally_ordered_set}
+  A strict poset is \hlnoteb{total} (or \hlnoteb{linear}) if
+  \begin{equation*}
+    \forall a, b \in E \quad (a, b) \in R \veebar (b, a) \in R
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Well-Order]\index{Well-Order}
+\label{defn:well_order}
+  A strict linear order is \hlnoteb{well-ordered} if
+  \begin{equation*}
+    \forall X \subseteq E ( X \neq \emptyset ) \quad \exists a \in X \quad \forall b \in X ( b \neq a ) \quad (a, b) \in R
+  \end{equation*}
+  i.e. every nonempty subset of $E$ has a \hlimpo{least element}.
+\end{defn}
+
+\begin{propononum}[$\omega$ is Strictly Well-ordered]
+\label{propo:_omega_is_strictly_well_ordered}
+  $(\omega, \in)$ is a strict well-ordering.
+\end{propononum}
+
+% subsection well_orderings (end)
+
+% section ordinals_continued_2 (end)
+
+% chapter lecture_3_sep_13th (end)
 
 \appendix
 

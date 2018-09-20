@@ -1,5 +1,5 @@
 \usepackage{geometry}
-\geometry{letterpaper}
+\geometry{letterpaper,lmargin=0.7in,rmargin=3in,bmargin=1in}
 \usepackage[parfill]{parskip}
 \usepackage{graphicx}
 
@@ -75,6 +75,17 @@
 \newtheorem{defn}{Definition}[section]
 \newtheorem{eg}{Example}[section]
 \newtheorem{axiom}{Axiom}[section]
+
+\newenvironment{proofbox}
+  {\begin{tcolorbox}[arc=0mm,breakable,enhanced]
+   \begin{proof}}
+  {\end{proof}
+   \end{tcolorbox}}
+\newenvironment{solbox}
+  {\begin{tcolorbox}[arc=0mm,breakable,enhanced]
+   \begin{solution}}
+  {\end{solution}
+   \end{tcolorbox}}
 
 % ntheorem listtheorem style
 \makeatother
