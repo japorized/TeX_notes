@@ -13,6 +13,8 @@
 
 \DeclareMathOperator{\lub}{lub }
 \DeclareMathOperator{\glb}{glb }
+\DeclareMathOperator{\Range}{Range }
+\DeclareMathOperator{\Domain}{Domain }
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -837,7 +839,7 @@ Similar to when we defined partial orders, we can ask ourselves the following qu
   which we can rearrange in 3 different ways. Therefore, there are 5 different equivalence relations that we can define on $X$.
 \end{solution}
 
-\begin{eg}
+\begin{eg}\label{eg:same_cardinaliy}
   Let $X$ be any set. Consider $\mathcal{P}(X)$. Define $\sim$ on $\mathcal{P}(X)$ by
   \begin{equation*}
     A \sim B \iff \exists f: A \to B
@@ -850,6 +852,199 @@ Similar to when we defined partial orders, we can ask ourselves the following qu
 % section cardinality (end)
 
 % chapter lecture_4_sep_14th (end)
+
+\chapter{Lecture 5 Sep 17th}%
+\label{chp:lecture_5_sep_17th}
+% chapter lecture_5_sep_17th
+
+\section{Cardinality (Continued)}%
+\label{sec:cardinality_continued}
+% section cardinality_continued
+
+\begin{defn}[Finite Sets]\index{Finite Sets}
+\label{defn:finite_sets}
+  A set $X$ is \hlnoteb{finite} if $X = \emptyset$ or if $X \sim \{ 1, 2, ..., n \}$ for some $n \in \mathbb{N}$, where $\sim$ is the equivalence relation defined in \cref{eg:same_cardinaliy}.
+\end{defn}
+
+\begin{defn}[Cardinality]\index{Cardinality}
+\label{defn:cardinality}
+  If $X \sim n$, we say $X$ has \hlnoteb{cardinality} $n$ and write $\abs{X} = n$. We also let $\abs{\emptyset} = 0$.
+\end{defn}
+
+\newthought{Now a good question} here is: if $n \neq m$, is $\{1, 2, ..., n \} \sim \{ 1, 2, ..., m \}$?
+
+\begin{thm}[Pigeonhole Principle]
+\index{Pigeonhole Principle}
+\label{thm:pigeonhole_principle}
+  The set $\{1, 2, ..., n\}$ is not equivalent to any of its proper subset.
+\end{thm}
+
+\begin{proof}
+  We shall prove this by induction on $n$.\marginnote{This is a \textbf{proof by contradiction}, using the fact that we cannot find an injective function from a ``larger'' set to a ``smaller'' set.
+  
+  We can assume that the function $f$ is not surjective, since if the larger set is indeed equivalent to the smaller set, then it should not matter if $f$ is surjective or not. In particular, we only require that there be an injective function.}
+
+  \noindent\textbf{Base case}: $\{1\} \nsim \emptyset$.\marginnote{\hlwarn{Requires clarification and confirmation of proof.}}
+
+  \noindent Assume that the statement holds for $\{1, ..., k\}$. Suppose we have an injective function
+  \begin{equation*}
+    f : \{ 1, 2, ..., k, k + 1 \} \to \{ 1, 2, ..., k, k + 1 \}
+  \end{equation*}
+  that is not surjective. \\
+  \noindent\textbf{Case 1}: $k + 1 \notin \Range(f)$, where $\Range(f)$ is the range of $f$. Then we have\marginnote{Note: $\restriction$ is the restriction sign.}
+  \begin{equation*}
+    f \restriction_{\{1, ..., k\}} : \{1, ..., k \} \to \{1, ..., k\} \setminus \{ f(k + 1) \}.
+  \end{equation*}
+  But $f$ is an injective function and clearly
+  \begin{equation*}
+    \{1, ..., k \} \setminus \{ f(k + 1) \} \subseteq \{1, ..., k\},
+  \end{equation*}
+  a contradition.
+
+  \noindent\textbf{Case 2}: $k + 1 \in \Range(f)$. Then $\exists j_0 \in \{1, ..., k, k + 1 \}$ such that $f(j_0) = k + 1$, and since $f$ is not surjective, $\exists m \in \{1, ..., k\}$ such that $m \notin \Range(f)$. Then consider a new function $g: \{1, ..., k, k + 1\} \to \{1, ..., k\}$ such that
+  \begin{equation*}
+    g(a) = \begin{cases}
+      m        & a = k + 1 \\
+      f(k + 1) & a = j_0 \\
+      f(a)     & a \neq j_0, k + 1
+    \end{cases}
+  \end{equation*}
+\end{proof}
+
+\begin{crly}[Pigeonhole Principle (Finite Case)]
+\label{crly:pigeonhole_principle_finite_case}
+  If the set $X$ is finite, then $X$ is not equivalent to any proper subset.
+\end{crly}
+
+\marginnote{
+  Sketch of proof:
+
+  \begin{tikzpicture}
+    \node at (0, 2) {$\{1, ..., n\}$};
+    \node at (2, 2) {$\{1, ..., n\}$};
+    \node at (0, 0) {$X$};
+    \node at (2, 0) {$A \subsetneq X$};
+
+    \draw[<->] (0, 1.5) -- (0, 0.5) node[midway,right] {$f$};
+    \node[left] at (0,1) {$f^{-1}$};
+    \draw[->] (0.5,0) -- (1.5,0) node[midway,above] {$1 - 1$};
+    \node[below] at (1,0) {onto};
+    \draw[->] (2, 0.5) -- (2, 1.5) node[midway,right] {$f$};
+    \draw[->] (0.75, 2) -- (1.25, 2);
+  \end{tikzpicture}
+}
+\begin{ex}
+  Prove \cref{crly:pigeonhole_principle_finite_case}.
+\end{ex}
+
+\begin{defn}[Infinite Sets]\index{Infinite Sets}
+\label{defn:infinite_sets}
+$X$ is \hlnoteb{infinite} if it is not finite.
+\end{defn}
+
+\begin{eg}
+  Observe that we can construct a function $f : N \to \{ 2, 3, ... \}$ by $f(n) = n + 1$. It is clear that $f$ is a bijective funciton, and so $\mathbb{N} \sim \{2, 3, ... \}$.
+\end{eg}
+
+\begin{propo}[$\mathbb{N}$ is the Smallest Infinite Set]
+\label{propo:_n_is_the_smallest_infinite_set}
+  Every infinite set contains a subset $A \sim \mathbb{N}$.
+\end{propo}
+
+\begin{proof}
+  Suppose $X$ is infinite. Let
+  \begin{equation*}
+    f : \mathcal{P}(X) \setminus \{ \emptyset \} \to X
+  \end{equation*}
+  such that for $S \subset X$ where $S \neq \emptyset$, $f(S) \in S$ \sidenote{\cref{axiom:zermelo_s_axiom_of_choice_v2} ahoy!}. Let $x_1 = f(X)$. Let $x_2 = f(X \setminus \{ x_1 \})$. Recursively, define
+  \begin{equation*}
+    x_n = f(X \setminus \{x_1, ..., x_{n - 1}\}).
+  \end{equation*}
+  This gives us a sequence
+  \begin{equation*}
+    X \supset S = \{x_1, ..., x_n, ... \}
+  \end{equation*}
+  which is equivalent to $\mathbb{N}$ via the map $n \mapsto x_n$.\qed
+\end{proof}
+
+\begin{crly}[Infinite Sets are Equivalent to Its Proper Subsets]
+\label{crly:infinite_sets_are_equivalent_to_its_proper_subsets}
+  Every infinite set $X$ is equivalent to a proper subset of $X$.
+\end{crly}
+
+\begin{proof}
+  Given such an $X$, we construct a sequence $\{ x_n \}$ as in the previous proof. Define $f : X \to X \setminus \{ x_n \}$ by
+  \begin{equation*}
+    f(x) = \begin{cases}
+      x_{n + 1} & x \in \{x_n\} \\
+      x         & x \notin \{ x_n \}.
+    \end{cases}
+  \end{equation*}
+  Clearly so, $f$ is injective.\qed
+\end{proof}
+
+\begin{defn}[Countable]\index{Countable}
+\label{defn:countable}
+  We say that a set is \hlnoteb{countable} (or \hldefn{denumerable}) is either $X$ is finite or if $X \sim \mathbb{N}$. If $X \sim \mathbb{N}$, we can say that $X$ is \hlnoteb{countably infinite} and write $\abs{X} = \abs{\mathbb{N}} = \aleph_0$.
+\end{defn}
+
+\begin{defn}[Smaller Cardinality]
+\label{defn:smaller_cardinality}
+  Given $2$ sets $X, Y$, we write
+  \begin{equation*}
+    \abs{X} \leq \abs{Y}
+  \end{equation*}
+  if $\exists f : X \to Y$ injective.
+\end{defn}
+
+\begin{propo}[Injectivity is Surjectivity Reversed]
+\label{propo:injectivity_is_surjectivity_reversed}
+  TFAE:
+  \begin{enumerate}
+    \item $\exists f : X \to Y$ injective
+    \item $\exists g : Y \to X$ surjective
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  $(1) \implies (2)$: Define
+  \begin{equation*}
+    g(y) = \begin{cases}
+      x   & \exists x \in X \enspace f(x) = y \\
+      x_0 & \text{ any } x_0 \in X
+    \end{cases}
+  \end{equation*}
+  Clearly $g$ is surjective.
+
+  \noindent $(2) \implies (1)$: Since $g$ is surjective, for each $x \in X$, we have that\sidenote{The idea here is to collect the preimages into a set, and use the choice function as an injective map.}
+  \begin{equation*}
+    g^{-1}(\abs{x}) = \{ y \in Y : g(y) = x \} \neq \emptyset.
+  \end{equation*}
+  By the \hyperref[axiom:zermelo_s_axiom_of_choice_v2]{Axiom of Choice}, there exists a choice function $h : \mathcal{P}(Y) \setminus \{ \emptyset \} \to Y$ such that for each $A \subset Y$, $h(A) \in A$. Then, let $f : X \to Y$ such that
+  \begin{equation*}
+    f(x) = h( g^{-1}(\{ x \}) ).
+  \end{equation*}
+  Clearly so, $f$ is injective.\qed
+\end{proof}
+
+\begin{note}
+  Note that we have $\abs{\mathbb{N}} \leq \abs{\mathbb{Q}}$, since we can define an injective function $f: \mathbb{N} \to \mathbb{Q}$ such that $f(n) = \frac{n}{1}$.
+
+  We have also shown that $\abs{\mathbb{Q}} \leq \abs{\mathbb{N}}$ using our injective function $g : \mathbb{Q} \to \mathbb{N}$, given by
+  \begin{equation*}
+    g\left( \frac{m}{n} \right) = \begin{cases}
+      2^m 3^n    & m > 0 \\
+      1          & m = 0 \\
+      5^{-m} 7^n & m < 0
+    \end{cases}
+  \end{equation*}
+\end{note}
+
+\newthought{Question}: Is $\abs{\mathbb{N} = \abs{\mathbb{Q}}}$? In other words, given $\abs{X} \leq \abs{Y} \land \abs{Y} \leq \abs{X}$, is $\abs{X} = \abs{Y}$?
+
+% section cardinality_continued (end)
+
+% chapter lecture_5_sep_17th (end)
 
 \appendix
 
