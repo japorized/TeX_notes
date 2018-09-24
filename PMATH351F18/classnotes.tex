@@ -695,7 +695,7 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
   If $(X, \leq)$ is a non-empty poset such that every chain $S \subset X$ has an upper bound, then $(X, \leq)$ has a maximal element.
 \end{axiom}
 
-\begin{thm}[\faStar Non-Zero Vector Spaces has a Basis]
+\begin{thm}[\imponote Non-Zero Vector Spaces has a Basis]
 \label{thm:non_zero_vector_spaces_has_a_basis}
   Every non-zero vector space, $V$, has a basis.
 \end{thm}
@@ -1045,6 +1045,177 @@ $X$ is \hlnoteb{infinite} if it is not finite.
 % section cardinality_continued (end)
 
 % chapter lecture_5_sep_17th (end)
+
+\chapter{Lecture 6 Sep 19th}%
+\label{chp:lecture_6_sep_19th}
+% chapter lecture_6_sep_19th
+
+\section{Cardinality (Continued 2)}%
+\label{sec:cardinality_continued_2}
+% section cardinality_continued_2
+
+Before delving into resolving our last question in the previous lecture, note the following:
+
+\begin{note}
+  Suppose $f : X \to Y$ is bijective. Let $A \subseteq B$, then\marginnote{Prove this observation as an exercise:
+  
+  \begin{ex}
+    Prove the note on the left.
+  \end{ex}}
+  \begin{equation*}
+    f( B \setminus A ) = f(B) \setminus f(A).
+  \end{equation*}
+\end{note}
+
+\begin{thm}[\vvimponote Cantor-Schr\"{o}der-Bernstein Theorem (CSB)]
+\index{Cantor-Schr\"{o}der-Bernstein Theorem}
+\label{thm:cantor_schroder_bernstein_theorem}
+  Let $A_2 \subset A_1 \subset A_0 = A$. Assume that $A_2 \sim A_0$. Then $A_0 \sim A_1$.
+\end{thm}
+
+\begin{proof}
+  \begin{marginfigure}
+    \begin{tikzpicture}
+      \draw[fill,color=base16-eighties-red] (0, 0) circle(2.2);
+      \node at (0, 2.4) {$A_0$};
+      \draw[fill,color=base16-eighties-yellow] (0, 0) circle(1.8);
+      \node[color=base16-eighties-dark] at (0, 2.0) {$\boldsymbol{A_1}$};
+      \draw[fill,color=base16-eighties-green] (0, 0) circle(1.4);
+      \node[color=base16-eighties-dark] at (0, 1.6) {$\boldsymbol{A_2}$};
+      \draw[fill,color=base16-eighties-lightblue] (0, 0) circle(1.0);
+      \node[color=base16-eighties-dark] at (0, 1.2) {$\boldsymbol{A_3}$};
+      \draw[fill,color=base16-eighties-blue] (0, 0) circle(0.6);
+      \node[color=base16-eighties-dark] at (0, 0.8) {$\boldsymbol{A_4}$};
+      \draw[fill,color=base16-eighties-light] (0, 0) circle(0.2);
+      \node[color=base16-eighties-dark] at (0, 0.4) {$\boldsymbol{A_5}$};
+
+      \draw[thick,->,color=base16-eighties-dark] (1.2,1.59705627484771405856) -- (0.9,0.8797958971132712) node[midway,left] {$\boldsymbol{f}$};
+      \draw[thick,->,color=base16-eighties-dark] (1.2, 0) -- (0.4, 0) node[midway,below] {$\boldsymbol{f}$};
+    \end{tikzpicture}
+    \caption{The core idea of the proof for Cantor-Schr\"{o}der-Bernstein Theorem}
+    \label{fig:csb_pf}
+  \end{marginfigure}
+  Let $\phi : A_0 \to A_2$ be bijective, by assumption. Since $A_1 \subset A_1$, let $A_3 = \phi(A_1) \subset A_2$, and since $A_2 \subset A_0$, let $A_4 = \phi(A_2) \subset A_3$. Recursively so, let
+  \begin{equation*}
+    A_{n + 2} = \phi( A_n )
+  \end{equation*}
+  Notice that
+  \begin{align*}
+    A_0 &= (A_0 \setminus A_1) \cup ( A_1 \setminus A_2 ) \cup ( A_2 \setminus A_3 ) \cup ( A_3 \setminus A_4 ) \cup \hdots \bigcap_{n = 0}^{\infty} A_n \\
+    A_1 &= (A_1 \setminus A_2) \cup ( A_2 \setminus A_3 ) \cup ( A_3 \setminus A_4 ) \cup ( A_4 \setminus A_5 ) \cup \hdots \bigcap_{n = 1}^{\infty} A_n
+  \end{align*}
+  Observe that
+  \begin{equation*}
+    \bigcap_{n = 0}^{\infty} A_n = \bigcap_{n = 1}^{\infty} A_n.
+  \end{equation*}
+  \sidenote{Here, we employ the idea from \cref{fig:csb_pf}.}Define $f : A \to A_1$ by
+  \begin{equation*}
+    f(x) = \begin{cases}
+      x       & x \in \bigcap_{n = 0}^{\infty} A_n \\
+      x       & x \in A_{2k + 1} \setminus A_{2k + 2}, \; k = 0, 1, 2, ... \\
+      \phi(x) & x \in A_{2k} \setminus A_{2k + 1}, \; k = 0, 1, 2, ...
+    \end{cases}
+  \end{equation*}
+\end{proof}
+
+\begin{crly}[Cantor-Schr\"{o}der-Bernstein Theorem - Restated]
+\label{crly:cantor_schroder_bernstein_theorem_restated}
+  If $A_1 \subset A \land B_1 \subset B \land A \sim B_1 \land B \sim A_1$, then $A \sim B$.\sidenote{This is equivalent to the statement
+  \begin{equation*}
+    \abs{A} \leq \abs{B} \land \abs{B} \leq \abs{A} \implies \abs{A} = \abs{B}.
+  \end{equation*}}
+\end{crly}
+
+\begin{proof}
+  By assumption, let $f : A \to B_1$ be bijective, and let $g : B \to A_1$ be bijective. Let $A_2 = g(B_1) \subseteq A_1 \subset A$ Let $A_2 = g(B_1) \subseteq A_1 \subset A$. Then the composite function $g \circ f : A \to A_2$ is bijective, and so $A \sim A_2$. By \cref{thm:cantor_schroder_bernstein_theorem}, we have
+  \begin{equation*}
+    A \sim A_2 \sim A_1 \sim B.
+  \end{equation*}\qed
+\end{proof}
+
+\begin{eg}
+  Our question from last lecture now has an answer: by \cref{thm:cantor_schroder_bernstein_theorem}, we have that $\abs{\mathbb{Q}} = \abs{\mathbb{N}}$.\sidenote{ Now that we know that they have the ssme cardinality:
+ \begin{ex}
+    Find a bijection between $\mathbb{Q}$ and $\mathbb{N}$.
+ \end{ex} }
+\end{eg}
+
+\begin{propo}[Denumerability Check]
+\label{propo:denumerability_check}
+  If $X$ is infinite, then
+  \begin{equation*}
+    \abs{X} = \abs{\mathbb{N}} = \aleph_0 \iff \exists f : X \to \mathbb{N} \text{ bijective. }
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  $(\implies)$ is immediate. For $(\impliedby)$, suppose $f : X \to \mathbb{N}$, which implies that $\abs{X} \leq \abs{\mathbb{N}}$. By \cref{propo:_n_is_the_smallest_infinite_set}, $\abs{\mathbb{N}} \leq \abs{X}$. Therefore, $\abs{X} = \abs{bbN} = \aleph_0$.\qed
+\end{proof}
+
+\begin{eg}
+  $\mathbb{N} \times \mathbb{N}$ is countable. The function
+  \begin{equation*}
+    f : \mathbb{N} \times \mathbb{N} \times \mathbb{N} \text{ given by } f(m, n) = 2^n 3^m
+  \end{equation*}
+  is injective.
+\end{eg}
+
+\begin{defn}[Uncountable]\index{Uncountable}
+\label{defn:uncountable}
+  A set $X$ is \hlnoteb{uncountable} if it is not countable.
+\end{defn}
+
+\begin{thm}[Cantor's Diagonal Argument]
+\index{Cantor's Diagonal Argument}
+\label{thm:cantor_s_diagonal_argument}
+  $(0, 1)$ is uncountable.
+\end{thm}
+
+\begin{proof}
+  Suppose, for contradiction, that $(0, 1)$ is countable. Then we can write
+  \begin{align*}
+    a_1 &= .a_{11} a_{12} a_{13} ... \\
+    a_2 &= .a_{21} a_{22} a_{23} ... \\
+        &\vdots \\
+    a_n &= .a_{n1} a_{n2} a_{n3} ...
+  \end{align*}
+  in $(0, 1)$. This representation is unique if we do not allow the representation to end in a string of $9$'s. Let $b \in (0, 1)$, expressed as $b = . b_1 b_2 b_3 ...$ such that
+  \begin{equation*}
+    b_i = \begin{cases}
+      5 & a_i \neq 5 \\
+      2 & a_i = 5
+    \end{cases}
+  \end{equation*}
+  Then $b \notin (0, 1)$, a contradiction\sidenote{\hlwarn{Require more explanation.}}.\qed
+\end{proof}
+
+\begin{crly}[Uncountability of $\mathbb{R}$]
+\label{crly:uncountability_of_r}
+  $\mathbb{R}$ is uncountable.
+\end{crly}
+
+\begin{proof}
+  Let $f : (0, 1) \to \mathbb{R}$ be given by
+  \begin{equation*}
+    f(x) = \tan \left( \pi x - \frac{\pi}{2} \right).
+  \end{equation*}
+  Clearly so, $(0, 1)$ is bijective.\qed
+\end{proof}
+
+\begin{note}
+  We denote $\abs{\mathbb{R}} = c$.
+\end{note}
+
+\newthought{Question}: Given sets $X, Y$, is it always true that either\sidenote{As compare to $\leq$, $<$ implies that there is no surjection from the set on the LHS to the RHS.}
+\begin{enumerate}
+  \item $\abs{X} = \abs{Y}$;
+  \item $\abs{X} < \abs{Y}$; or
+  \item $\abs{Y} < \abs{X}$.
+\end{enumerate}
+
+% section cardinality_continued_2 (end)
+
+% chapter lecture_6_sep_19th (end)
 
 \appendix
 

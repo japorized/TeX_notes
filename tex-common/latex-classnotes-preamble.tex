@@ -370,6 +370,11 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \renewcommand{\atop}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
 \newcommand*\dif{\mathop{}\!d}
 
+  % stars on important stuff
+\newcommand{\imponote}{\faStar\enspace}
+\newcommand{\vimponote}{\faStar\faStar\enspace}
+\newcommand{\vvimponote}{\faStar\faStar\faStar\enspace}
+
   % inspiration from: https://tex.stackexchange.com/questions/8720/overbrace-underbrace-but-with-an-arrow-instead#37758
 \newcommand{\overarrow}[2]{
   \overset{\makebox[0pt]{\begin{tabular}{@{}c@{}}#2\\[0pt]\ensuremath{\uparrow}\end{tabular}}}{#1}
