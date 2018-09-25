@@ -805,9 +805,9 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
 
 \begin{defn}[Partition]\index{Partition}
 \label{defn:partition}
-  Let $X \neq \emptyset$. A \hloteb{partition} of $X$ is a collection $\{A_{\alpha} \}_{\alpha \in I} \subset \mathcal{P}(X)$ such that
+  Let $X \neq \emptyset$. A \hlnoteb{partition} of $X$ is a collection $\{A_{\alpha} \}_{\alpha \in I} \subset \mathcal{P}(X)$ such that
   \begin{enumerate}
-    \item $A_\alpha \neq \empyset$;
+    \item $A_\alpha \neq \emptyset$;
     \item $A_{\alpha} \cap A_{\beta} = \emptyset$ if $\alpha \neq \beta$ in $I$; and
     \item $X = \bigcup_{\alpha \in I} A_\alpha$.
   \end{enumerate}
@@ -967,7 +967,7 @@ $X$ is \hlnoteb{infinite} if it is not finite.
   which is equivalent to $\mathbb{N}$ via the map $n \mapsto x_n$.\qed
 \end{proof}
 
-\begin{crly}[Infinite Sets are Equivalent to Its Proper Subsets]
+\begin{crly}[Infinite Sets are Equivalent to Its Proper\- Subsets]
 \label{crly:infinite_sets_are_equivalent_to_its_proper_subsets}
   Every infinite set $X$ is equivalent to a proper subset of $X$.
 \end{crly}
@@ -1067,7 +1067,7 @@ Before delving into resolving our last question in the previous lecture, note th
   \end{equation*}
 \end{note}
 
-\begin{thm}[\vvimponote Cantor-Schr\"{o}der-Bernstein Theorem (CSB)]
+\begin{thm}[\vvimponote Cantor-Schr\"{o}der-Bernstein Theorem \-(CSB)]
 \index{Cantor-Schr\"{o}der-Bernstein Theorem}
 \label{thm:cantor_schroder_bernstein_theorem}
   Let $A_2 \subset A_1 \subset A_0 = A$. Assume that $A_2 \sim A_0$. Then $A_0 \sim A_1$.
@@ -1118,7 +1118,7 @@ Before delving into resolving our last question in the previous lecture, note th
   \end{equation*}
 \end{proof}
 
-\begin{crly}[Cantor-Schr\"{o}der-Bernstein Theorem - Restated]
+\begin{crly}[Cantor-Schr\"{o}der-Bernstein Theorem - Resta\-ted]
 \label{crly:cantor_schroder_bernstein_theorem_restated}
   If $A_1 \subset A \land B_1 \subset B \land A \sim B_1 \land B \sim A_1$, then $A \sim B$.\sidenote{This is equivalent to the statement
   \begin{equation*}
@@ -1216,6 +1216,169 @@ Before delving into resolving our last question in the previous lecture, note th
 % section cardinality_continued_2 (end)
 
 % chapter lecture_6_sep_19th (end)
+
+\chapter{Lecture 7 Sep 21st}%
+\label{chp:lecture_7_sep_21st}
+% chapter lecture_7_sep_21st
+
+\section{Cardinality (Continued 3)}%
+\label{sec:cardinality_continued_3}
+% section cardinality_continued_3
+
+\begin{thm}[\imponote Comparability of Cardinals]
+\label{thm:comparability_of_cardinals}
+  If $X$ and $Y$ are non-empty, then either
+  \begin{equation*}
+    \abs{X} \leq \abs{Y} \lor \abs{Y} \leq \abs{X}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Let
+  \begin{equation*}
+    S = \{ (A, B, f) \mid A \subseteq X, B \subseteq Y, f : A \to B \text{ bijective } \}.
+  \end{equation*}
+  Note that $S \neq \emptyset$, since $X$ and $Y$ are non-empty, and so we can have $f(a) = b$ for $A = \{a\} \subset X$ and $B = \abs{b} \subset Y$.\sidenote{We want to use the maximal element to obtain our result. To that end, we need \hyperref[axiom:zorn_s_lemma]{Zorn's Lemma}. So we need $S$ to build this up.} We order $S$ as follows: we say
+  \begin{equation*}
+    (A_1, B_1, f_1) \leq (A_2, B_2, f_2)
+  \end{equation*}
+  if
+  \begin{equation*}
+    A_1 \subseteq A_2, \enspace B_1 \subseteq B_2, \enspace f_1 = f_2 \restriction_{A_1}.
+  \end{equation*}
+  Let $C = \{ (A_\alpha, B_\alpha, f_\alpha) \}_{\alpha \in I}$ be a chain in $(S, \leq)$. Let $A_0 = \bigcup_{\alpha \in I} A_\alpha$, $B_0 = \bigcup_{\alpha \in I} B_\alpha$, and define $f_0 : A_0 \to B_0$ by
+  \begin{equation*}
+    f_0(x) = f_{\alpha_0} (x) \text{ if } x \in A_{\alpha_0}.
+  \end{equation*}
+  Now if $x \in A_{\alpha_1}$, $x \in A_{\alpha_2}$ and
+  \begin{equation*}
+    (A_{\alpha_1}, B_{\alpha_1}, f_{\alpha_1}) \leq (A_{\alpha_2}, B_{\alpha_2}, f_{\alpha_2}),
+  \end{equation*}
+  we have that
+  \begin{equation*}
+    f_{\alpha_1}(x) = f_{\alpha_2} \restriction_{A_{\alpha_1}} (x) = f_{\alpha_2} (x),
+  \end{equation*}
+  i.e. $f_0$ is well-defined.
+
+  \noindent\underline{Claim 1: $f_0 : A_0 \to B_0$ is injective.}
+
+  Let $x_1, x_2 \in A_0$ such that $x_1 \neq x_2$. \\
+  \noindent $\implies \exists \alpha_1, \alpha_2 \in I \enspace x_1 \in A_{\alpha_1} \land x_2 \in A_{\alpha_2} \land A_{\alpha_1} \subseteq A_{\alpha_2}$ (wlog) \\
+  \noindent $\implies x_1. x_2 \in A_{\alpha_2}$ \\
+  \noindent $\implies ( \because f_{\alpha_2} \text{ injective } \implies f_{\alpha_2}(x_1) \neq f_{\alpha_2}(x) )$ \\
+  \noindent $\implies f_0(x_1) \neq f_0(x_2) \implies f_0$ injective.
+
+  \noindent\underline{Claim 2: $f_0 : A_0 \to B_0$ is surjective.}
+
+  Let $y_0 \in B_0$ \\
+  \noindent $\implies \exists \alpha_0 \in I \enspace y_0 \in B_{\alpha_0}$ \\
+  \noindent $\implies \exists x_0 \in A_{\alpha_0} \enspace f_{\alpha_0}(x_0) = y_0$ ($\because f_{\alpha_0}$ surjective) \\
+  \noindent $\implies f_0(x_0) = y_0$
+
+  $\therefore (A_0, B_0, f_0)$ is an upper bound for $C$. Then by \hyperref[axiom:zorn_s_lemma]{Zorn's Lemma}, $(S, \leq)$ has a maximal element $(A, B, f)$.
+
+  \noindent\underline{Case 1:} If $A = X$, then injectivity of $f$ implies $\abs{X} \leq \abs{Y}$.
+  
+  \noindent\underline{Case 2:} If $B = Y$, then surjectivity of $f$ implies $\abs{Y} \leq \abs{A} \leq \abs{X}$.
+
+  \noindent\underline{Case 3:} If $A \neq X \land B \neq Y$, then $X \setminus A \neq \emptyset \land Y \setminus B \neq \emptyset$. Let $x_0 \in X \setminus A, \, y_0 \in Y \setminus B$. Let $A^* = A \cup \{x_0\}$, $B^* = B \cup \{ y_0 \}$, and $f^* : A^* \to B^*$ such that
+  \begin{equation*}
+    f^*(x) = \begin{cases}
+      f(x) & x \in A \\
+      y_0  & x = x_0
+    \end{cases}
+  \end{equation*}
+  Then $(A, B, f) \leq (A^*, B^*, f^*)$, contradicting maximality.\qed
+\end{proof}
+
+\subsection{Cardinal Arithmetic}%
+\label{sub:cardinal_arithmetic}
+% subsection cardinal_arithmetic
+
+\paragraph{Sum of Cardinals} Observe that if $X = \{ x_1, ..., x_n\}$, $Y = \{ y_1, ..., y_m\}$, and $X \cap Y = \emptyset$, then $\abs{X} = n$, $\abs{Y} = m$ and $\abs{X \cup Y} = n + m$. This motivates us to provide the following definition:
+
+\begin{defn}[Sum of Cardinals]\index{Sum of Cardinals}
+\label{defn:sum_of_cardinals}
+  Assume that $X$ and $Y$ are such that $X \cap Y = \emptyset$. We define
+  \begin{equation*}
+    \abs{X} + \abs{Y} = \abs{X \cup Y}.
+  \end{equation*}
+\end{defn}
+
+\newthought{Question}: So what about $\aleph_0 + \aleph_0$?
+
+A thought that motivates us to give the following answer lies in the observation that: if $X$ is the set of even natural numbers and $Y$ the odd natural numbers, then $X \cup Y$ is the set of all natural numbers. All three sets are countably infinite, i.e. they have cardinality $\aleph_0$.
+
+\newthought{Question}: What about $c + c$?
+
+A similar motivation comes from the observation that: given $X = (0, 1)$ and $Y = (1, 2)$, we have
+\begin{equation*}
+  c = \abs{X} \leq \abs{X} + \abs{Y} \leq \abs{R} = c,
+\end{equation*}
+and so $\abs{X} = \abs{Y} = c \implies \abs{X \cup Y} = c$.
+
+\begin{thm}[Sums of Cardinals]
+\label{thm:sums_of_cardinals}
+  Given sets $X$ and $Y$, if $X$ is infinite, then
+  \begin{enumerate}
+    \item $\abs{X} + \abs{X} = \abs{X}$
+    \item $\abs{X} + \abs{Y} = \max( \abs{X}, \abs{Y} )$
+  \end{enumerate}
+\end{thm} \marginnote{
+\begin{ex}
+  Prove \cref{thm:sums_of_cardinals} as an exercise.
+\end{ex}
+}
+
+\paragraph{Multiplication of Cardinals} Given
+\begin{align*}
+  X &= \{ x_1, x_2, ..., x_n \} \\
+  Y &= \{ y_1, y_2, ..., y_m \}
+\end{align*}
+we have that
+\begin{equation*}
+  X \times Y = \{ (x_i, y_j) \mid i = 1, 2, ..., n, \, j = 1, 2, ..., m \}
+\end{equation*}
+and so
+\begin{equation*}
+  \abs{X \times Y} = nm.
+\end{equation*}
+
+\begin{defn}[Multiplication of Cardinals]\index{Multiplication of Cardinals}
+\label{defn:multiplication_of_cardinals}
+  Given sets $X$ and $Y$ , define
+  \begin{equation*}
+    \abs{X} \abs{Y} = \abs{X \times Y}.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  We have $\abs{\mathbb{N} \times \mathbb{N}} = \aleph_0$ since the function $f : \mathbb{N} \times \mathbb{N} \to \mathbb{N}$ given by
+  \begin{equation*}
+    f(n, m) = 2^n 3^m
+  \end{equation*}
+  is injective.
+\end{eg}
+
+\newthought{Question}: What about $c \cdot c$?
+
+\begin{thm}[Multiplication of Cardinals]
+\label{thm:multiplication_of_cardinals}
+  If $X$ is infinite and $Y \neq \emptyset$, then
+  \begin{itemize}
+    \item $\abs{X \times X} = \abs{X} \implies \abs{X} \abs{X} = \abs{X}$;
+    \item $\abs{X \times Y} = \max(\abs{X}, \abs{Y})$.
+  \end{itemize}
+\end{thm}\marginnote{
+\begin{ex}
+  Prove \cref{thm:multiplication_of_cardinals} as an exercise.
+\end{ex}}
+
+% subsection cardinal_arithmetic (end)
+
+% section cardinality_continued_3 (end)
+
+% chapter lecture_7_sep_21st (end)
 
 \appendix
 
