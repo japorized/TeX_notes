@@ -1380,6 +1380,171 @@ and so
 
 % chapter lecture_7_sep_21st (end)
 
+\chapter{Lecture 8 Sep 24th}%
+\label{chp:lecture_8_sep_24th}
+% chapter lecture_8_sep_24th
+
+\section{Cardinality (Continued 4)}%
+\label{sec:cardinality_continued_4}
+% section cardinality_continued_4
+
+\subsection{Cardinal Arithmetic (Continued)}%
+\label{sub:cardinal_arithmetic_continued}
+% subsection cardinal_arithmetic_continued
+
+\paragraph{Exponentiation of Cardinals} Recall if $\{Y_x\}_{x \in X}$ is a collection of non-empty sets, we have\sidenote{This should remind you of \cref{axiom:zermelo_s_axiom_of_choice_v2}}
+\begin{equation*}
+  \prod_{x \in X} Y_x = \{ f : X \to \bigcup_{x \in X} Y_x \mid f(x) \in Y_x \}.
+\end{equation*}
+Now if $Y = Y_x$ for all $x \in X$, we have
+\begin{equation*}
+  Y^X = \prod_{x \in X} = \{ f : X \to Y \}.
+\end{equation*}
+
+\begin{eg}
+  Given
+  \begin{equation*}
+    Y = \{ 1, ..., m \} \quad X = \{ 1, ..., n \}
+  \end{equation*}
+  we have
+  \begin{equation*}
+    Y^X = \{ f : \{ 1, ..., n \} \to \{ 1, ..., m \} \}.
+  \end{equation*}
+  Observe that $Y^X$ is similar to $Y^n$. So $\abs{Y^X} = m^n$.\sidenote{\hlwarn{Need better explanation.}}
+\end{eg}
+
+\begin{defn}[Exponentiation of Cardinals]\index{Exponentiation of Cardinals}
+\label{defn:exponentiation_of_cardinals}
+  Given sets $X$ and $Y$, define
+  \begin{equation*}
+    \abs{Y}^{\abs{X}} := \abs{Y^X}.
+  \end{equation*}
+\end{defn}
+
+\begin{thm}[Exponentiation of Cardinals]
+\label{thm:exponentiation_of_cardinals}
+  If $X, Y, Z$ are non-empty sets, then
+  \begin{itemize}
+    \item $\abs{Y}^{\abs{X}} \cdot \abs{Y}^{\abs{Z}} = \abs{Y}^{\abs{X} + \abs{Z}}$;
+    \item $\left( \abs{Y}^{\abs{X}} \right)^{\abs{Z}} = \abs{Y}^{\abs{X} \cdot \abs{Z}}$.
+  \end{itemize}
+\end{thm}\marginnote{
+\begin{ex}
+  Prove \cref{thm:exponentiation_of_cardinals}.
+\end{ex}}
+
+\begin{thm}[$2^{\aleph_0} = c$]
+\label{thm:2_aleph_0_c}
+We have that $2^{\aleph_0} = c$.
+\end{thm}
+
+\begin{proof}\marginnote{This requires closer studying.}
+  Note that $2^{\aleph_0} = \abs{\{ 0, 1\}^{\mathbb{N}} }$, where\sidenote{Explain 2nd equality.}
+  \begin{equation*}
+    \abs{ \{0, 1 \}^{\mathbb{N}} } = \abs{ \{ f : \mathbb{N} \to \{0, 1\} } = \abs{ \{ \{ a_n \}_{n = 1}^{\infty} \mid a_i = 0, 1 \} }
+  \end{equation*}
+
+  Given a sequence $\{ a_n \} \in \{ 0, 1 \}^{\mathbb{N}}$, define $\phi : \{ 0, 1 \}^{\mathbb{N}} \to (0, 1)$ such that\sidenote{This is a base 3 representation (\hlwarn{of what?})}
+  \begin{equation*}
+    \phi\left( \{ a_n \} \right) := \sum_{i=1}^{\infty} \frac{a_n}{3^n}.
+  \end{equation*}
+  which is injective since there are no trailing $2$'s. Therefore $2^{\aleph_0} \leq c$.
+
+  Given $\alpha \in (0, 1)$, let\sidenote{This is a base 2 representation.}
+  \begin{equation*}
+    \alpha = \sum_{n=1}^{\infty} \frac{b_n}{2^n},
+  \end{equation*}
+  where $b_n = 0, 1$. Let $\psi : (0, 1) \to \{0, 1\}^{\mathbb{N}}$ such that
+  \begin{equation*}
+    \psi(\alpha) = \psi\left( \sum_{i=1}^{\infty} \frac{b_n}{2^n} \right) = \{ b_n \}
+  \end{equation*}
+  Then $\psi$ is injective, and so $c \leq 2^{\aleph_0}$. Thus $2^{\aleph_0} = c$ as required.\qed
+\end{proof}
+
+\begin{eg}
+  Find $\abs{\aleph_0^{\aleph_0}}$ and $c^{\aleph_0}$.
+\end{eg}
+
+\begin{solution}
+  We have that
+  \begin{equation*}
+    c = 2^{\aleph_0} \leq \aleph_0^{\aleph_0} \leq c^{\aleph_0} = \left( 2^{\aleph_0} \right)^{\aleph_0} = 2^{\aleph_0 \cdot \aleph_0} = 2^{\aleph_0} = c
+  \end{equation*}
+\end{solution}
+
+\begin{eg}
+  Show $\abs{\mathcal{P}(X)} = 2^{\abs{X}} = \abs{2^X}$.
+\end{eg}
+
+\begin{solution}
+  Given $f : X \to \{ 0, 1 \}$, let\sidenote{$A$ is a collection of all $x$'s that gets mapped to $f$.}
+  \begin{equation*}
+    A = \{ x \in X \mid f(x) = 1 \} \subset X.
+  \end{equation*}
+  Define $\Gamma : 2^X \to \mathcal{P}(X)$ by
+  \begin{equation*}
+    \Gamma(f) = f^{-1}(\abs{1})
+  \end{equation*}
+  $\Gamma$ is injective\sidenote{\hlwarn{Why?}}.
+
+  Conversely, given $A \subset X$, define the characteristic function
+  \begin{equation*}
+    \chi_A(x) = \begin{cases}
+      1 & x \in A \\
+      0 & x \notin A
+    \end{cases} \in 2^X.
+  \end{equation*}
+  Then define $\Phi : P(A) \to 2^X$ such that
+  \begin{equation*}
+    \Phi(A) = \chi_A.
+  \end{equation*}
+  Clearly so, $\Phi$ is injective.\qed
+\end{solution}
+
+\begin{thm}[Russell's Paradox]
+\index{Russell's Paradox}
+\label{thm:russell_s_paradox}
+  For any $X$, we have $\abs{X} < \abs{\mathcal{P}(X)} = 2^{\abs{X}}$.
+\end{thm}
+
+\begin{proof}
+  Let $f : X \to \mathcal{P}(X)$ be $f(X) = \{ x \}$. Clearly, $f$ is injective, and so $\abs{X} < \abs{\mathcal{P}(X)}$.
+
+  \noindent\underline{Claim: $\nexists g : X \to \mathcal{P}(X)$ surjective}.
+
+  Suppose not. Let\sidenote{By the \hlnotea{Bounded Separation Axiom} (see ZF Set Theory), this is a set, and since it is a subset of $X$, it is a valid element of $\mathcal{P}(X)$. Thus, we can consider such a set.}
+  \begin{equation*}
+     A = \{ x \in X \mid x \notin g(x) \}
+  \end{equation*}
+  Pick $x_0 \in X$ with $g(x_0) = A$. Now if $x_0 \in A$, then $x_0 \in g(x_0)$, but this implies that $x \notin A$, a contradiction.
+
+  So $x_0 \notin A$, i.e. $x \notin g(x_0)$, which in turn implies that $x \in A$, yet another contradiction. Therefore such a function $g$ cannot exist, as claimed.
+
+  Therefore, we have $\abs{X} < \abs{\mathcal{P}(X)}$ as required.\qed
+\end{proof}
+
+\newthought{Question}: Is there anything between $\aleph_0$ and $c$?
+
+\begin{axiom}[Continuum Hypothesis]
+\index{Continuum Hypothesis}
+\label{axiom:continuum_hypothesis}
+  If $\aleph_0 \leq \gamma \leq c$, then either $\gamma = \aleph_0$ or $\gamma = c$.
+\end{axiom}
+
+\begin{axiom}[Generalized Continuum Hypothesis]
+\index{Generalized Continuum Hypothesis}
+\label{axiom:generalized_continuum_hypothesis}
+  If $\abs{X} \leq \gamma \leq 2^{\abs{X}}$, then either $\gamma = \abs{X}$ or $\gamma = 2^{\abs{X}}$.
+\end{axiom}
+
+In this course, we shall assume that the Continuum Hypothesis is true.
+
+% subsection cardinal_arithmetic_continued (end)
+
+% section cardinality_continued_4 (end)
+
+% chapter lecture_8_sep_24th (end)
+
 \appendix
 
 \backmatter
