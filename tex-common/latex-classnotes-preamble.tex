@@ -189,6 +189,60 @@
 \theoremindent10pt
 \newtheorem*{axiomnonum}{\faShield \enspace Axiom}
 
+    % theorem envs for margins
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem{marginthm}{\faCoffee \enspace Theorem}
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem{marginpropo}[thm]{\faTint \enspace Proposition}
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem{margincrly}[thm]{\faSpaceShuttle \enspace Corollary}
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem{marginlemma}[thm]{\faTree \enspace Lemma}
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem{marginaxiom}[thm]{\faShield \enspace Axiom}
+
+    % theorem envs for margins without counter
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem*{marginthmnonum}{\faCoffee \enspace Theorem}
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem*{marginpropononum}{\faTint \enspace Proposition}
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem*{margincrlynonum}{\faSpaceShuttle \enspace Corollary}
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem*{marginlemmanonum}{\faTree \enspace Lemma}
+
+\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem*{marginaxiomnonum}{\faShield \enspace Axiom}
+
     % proof env
 \theoremprework{\textcolor{base16-eighties-brown}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{base16-eighties-brown}\normalfont\bfseries}
@@ -211,6 +265,12 @@
 \theorempostwork{\textcolor{base16-eighties-red}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem*{warning}{\faBug \enspace Warning}
+
+\theoremprework{\textcolor{base16-eighties-red}{\hrule height 2pt width \marginparwidth}}
+\theoremheaderfont{\color{base16-eighties-red}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-red}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem*{marginwarning}{\faBug \enspace Warning}
 
 % more environments
 \newtcolorbox{quotebox}[1]{

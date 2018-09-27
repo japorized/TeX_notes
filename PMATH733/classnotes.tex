@@ -13,6 +13,8 @@
 \input{latex-classnotes-preamble.tex}
 
 \newcommand{\class}[1]{\left\llbracket \enspace #1 \enspace \right\rrbracket}
+\DeclareMathOperator{\Ord}{Ord }
+\DeclareMathOperator{\Set}{Set }
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -417,7 +419,7 @@ Here, instead of \hyperref[axiom:bounded_separation_axiom]{Bounded Separation}, 
 
 \begin{eg}
   \begin{equation*}
-    \text{ Set } := \class{ z \mid z = z }
+    \Set := \class{ z \mid z = z }
   \end{equation*}
   is the universal class of all sets.
 \end{eg}
@@ -576,7 +578,7 @@ and $\{ x, y \} \subset X \cup Y$ which means $\{ x, y \} \in \mathcal{P}(X)$, a
 \end{note}
 
 \begin{eg}
-  The successor function $S : \text{Set} \to \text{Set}$ is a definite operation such that\marginnote{To show that $S$ is a definite operation, we need to show that $S$ is a definite condition.}
+  The successor function $S : \Set \to \Set$ is a definite operation such that\marginnote{To show that $S$ is a definite operation, we need to show that $S$ is a definite condition.}
   \begin{equation*}
     S(x) = x \cup \{x\}
   \end{equation*}
@@ -714,6 +716,8 @@ We can now restate the Replacement Axiom.
   i.e. every nonempty subset of $E$ has a \hlimpo{least element}.
 \end{defn}
 
+We shall prove the following next lecture.\sidenote{Anti-reflexivity and Anti-symmetry were proven in this lecture, but I am moving it to the next for ease of reading.}
+
 \begin{propononum}[$\omega$ is Strictly Well-ordered]
 \label{propo:_omega_is_strictly_well_ordered}
   $(\omega, \in)$ is a strict well-ordering.
@@ -724,6 +728,209 @@ We can now restate the Replacement Axiom.
 % section ordinals_continued_2 (end)
 
 % chapter lecture_3_sep_13th (end)
+
+\chapter{Lecture 4 Sep 18th}%
+\label{chp:lecture_4_sep_18th}
+% chapter lecture_4_sep_18th
+
+\section{Ordinals (Continued 3)}%
+\label{sec:ordinals_continued_3}
+% section ordinals_continued_3
+
+\subsection{Well-Orderings (Continued)}%
+\label{sub:well_orderings_continued}
+% subsection well_orderings_continued
+
+\marginnote{
+  \begin{marginlemmanonum}[\cref{lemma:properties_of_the_natural_numbers}]
+  Suppose $n \in \omega$. We have
+  \begin{enumerate}
+    \item $n \subseteq \omega$;
+    \item $\forall m \in n \quad m \subseteq n$;
+    \item $n \notin n$;
+    \item $n = 0 \veebar 0 \in n$; and
+    \item $y \in n \implies S(y) \in n \veebar S(y) = n$.
+  \end{enumerate}
+\end{marginlemmanonum}
+}
+\begin{propo}[$\omega$ is Strictly Well-Ordered]
+\label{propo:_omega_is_strictly_well_ordered}
+  $(\omega, \in)$ is a strict well-ordering.
+\end{propo}
+
+\begin{proof}
+  By \cref{lemma:properties_of_the_natural_numbers}, we have that $\forall n \in \omega$, $n \notin n$. (\hlnotea{anti-reflexivity \faCheck}).
+
+  \noindent $\forall n, m \in \omega$, suppose, for contradiction, that $n \in m$ and $m \in n$. Again, by \cref{lemma:properties_of_the_natural_numbers}, we have $n \subseteq m$ and $m \subseteq n$, which implies that $n = m$. Thus, we have $n \in m = n$ and $m \in n = m$, a contradiction to the fact that $n \notin n$ and $m \notin m$ (\hlnotea{anti-symmetry \faCheck}).
+
+  \noindent $\forall x, y, z \in \omega$ such that $x \in y$ and $y \in z$, by \cref{lemma:properties_of_the_natural_numbers}, $y \in z \implies y \subseteq z \implies x \in z$ (\hlnotea{transitivity \faCheck}).
+
+  To show totality of the relation, let $n \in \omega$. WTS for any $m \in \omega$, either
+  \begin{equation*}
+    m \in n, \quad m = n, \text{ or } n \in m.
+  \end{equation*}
+  Let\sidenote{We construct $J$ such that $J$ will contain all the possible cases, and use this fact to prove that $J = \omega$ so these 3 cases are the only scenarios that can happen.}
+  \begin{equation*}
+    J = \underset{ \in n }{n} \cup \underset{= n}{ \{ n \} } \cup \underset{> n}{ \{ m \in \omega : n \in m \} }.
+  \end{equation*}
+  \noindent\underline{Case 1: $n = 0$.} In this case, we have\sidenote{Note that $0 = \emptyset$.}
+  \begin{equation*}
+    J = \emptyset \cup \{ \emptyset \} \cup \{ m \in \omega : 0 \in m \}
+  \end{equation*}
+  As a consequence of \cref{lemma:properties_of_the_natural_numbers} (4), we have that $J = \omega$.
+
+  \noindent\underline{Case 2: $n \neq 0$.} Again, by \cref{lemma:properties_of_the_natural_numbers} (4), since $n \neq 0$, we must have $0 \in n \subseteq J$ and so $0 \in J$. Now suppose that $m \in J$.
+
+  \underline{Case 2(a): $m \in n$.} Then by \cref{lemma:properties_of_the_natural_numbers} (5), $S(m) \in n$ or $S(m) = n$.\\
+  $S(m) \in n \implies S(m) \in J$\\
+  $S(m) \in n \implies S(m) \in J$
+
+  \underline{Case 2(b): $m = n$.} Then $S(m) = S(n) = n \cup \{ n \}$. And so $n \in S(m)$, which implies $S(m) \in J$.
+
+  \underline{Case 2(c): $n \in m$} Then since $S(m) = m \cup \{ m \}$, we have that $m \in m \subseteq S(m)$. Therefore $S(m) \in J$.
+
+  Therefore, $J$ is a sucessor subset of $\omega$. Thus by the Induction Principle, $J = \omega$. (\hlnotea{totality \faCheck})
+
+  To prove that $\in$ is a well-ordering, suppose $X \subseteq \omega$ is non-empty. Suppose, for contradiction, that $X$ has no $\in$-least element. Now consider
+  \begin{equation*}
+    J = \{ n \in \omega : S(n) \cap X = \emptyset \}
+  \end{equation*}
+  \noindent\underline{Claim: $J$ is a successor set.}\sidenote{Since we want to prove that $\in$ is a well-ordering, we can suppose that there is a non-empty subset of $\omega$ that is not empty, and has no $\in$-least element. The core idea here is that, by the construction of $J$, if $J = \omega$, then all elements of $\omega$ would be disjoint from $X$, forcing $X$ to be the empty set.}
+
+  By \cref{lemma:properties_of_the_natural_numbers} (4), $0$ is the $\in$-least element of $\omega$. If $0 \in X$, then $0$ would be $\in$-least in $X$, contradicting our supposition. Thus $0 \notin X$, And so
+  \begin{equation*}
+    S(0) \cap X = ( 0 \cup \{ 0 \} ) \cap X = \{ 0 \} \cap X = \emptyset
+  \end{equation*}
+  since $0 \notin X$. Thus $0 \in J$.
+
+  Suppose $n \in J$. By construction of $J$, we have $S(n) \cap X = \emptyset$. Observe that
+  \begin{equation*}
+    S(S(n)) \cap X = ( S(n) \cup \{ S(n) \} ) \cap X.
+  \end{equation*}
+  Now if RHS of the above is non-empty (aiming for contradiction), then we may have $S(n) \in X$. Then $S(n)$ would be the $\in$-least element in $X$, a contradiction. If $m \in S(n)$, we have that $m \notin X$ since $S(n) \cap X = \emptyset$. Thus $SS(n) \cap X = \emptyset$ and so $S(n) \in J$. Therefore, by the Induction Principle, $J = \omega$.
+
+  We observe that $\forall n \in \omega$,
+  \begin{equation*}
+    \emptyset = S(n) \cap X) = ( n \cup \{ n \} ) \cap X
+  \end{equation*}
+  $\implies n \notin X$, and so we must have $X = \emptyset$ (\hlnotea{well-ordered \faCheck}).\qed
+\end{proof}
+
+\begin{note}
+  Given $n, m \in \omega$, we often write $n < m$ to mean $n \in m$.
+\end{note}
+
+\begin{defn}[Ordinals]\index{Ordinals}
+\label{defn:ordinals}
+  An \hlnoteb{ordinal} is a set $\alpha$ satisfying:
+  \begin{enumerate}
+    \item $x \in \alpha \implies x \subseteq \alpha$;
+    \item $(\alpha, \in)$ is a strict well-ordering.
+  \end{enumerate}
+\end{defn}
+
+\begin{eg}
+  $\omega$ is an ordinal: $\forall n \in \omega$, by \cref{lemma:properties_of_the_natural_numbers}, $n \subseteq \omega$, and $\omega$ is proven to have a strict well-ordering under $\in$.
+\end{eg}
+
+\begin{eg}
+  Every natural number is an ordinal (\textit{finite ordinals}): by \cref{lemma:properties_of_the_natural_numbers} (2), the first property is satisfied; well-ordering follows from the property of $\omega$.
+\end{eg}
+
+Let $\Ord$ denote the class of all ordinals. We shall show later that $\Ord$ is a proper class.
+
+\begin{ex}
+  Verify that for a set to be an ordinal is a definite condition.
+
+  \begin{fullwidth}
+  \resizebox{\linewidth}{!}{
+  \begin{equation*}
+    \forall t ( t \in \Ord \lrarrow ( \underbrace{ \forall x ( x \in t \rarrow \forall a ( a \in x \rarrow a \in t ) ) }_{x \in t \implies x \subseteq t} \land \underbrace{ \forall s ( s \subseteq t \land s \neq \emptyset \rarrow \exists a ( a \in s \rarrow \forall b ( b \in s \land b \neq a \rarrow (a, b) \in (\in)) ) ) }_{(t, \in) \text{ is a strict well-ordering }} ) )
+  \end{equation*}
+  }
+  \end{fullwidth}
+\end{ex}
+
+\begin{lemma}[Proper Subsets of an Ordinal Are Its Elements]
+\label{lemma:proper_subsets_of_an_ordinal_are_its_elements}
+  If $\alpha, \beta \in \Ord$ and $\alpha \subsetneq \beta$, then $\alpha \in \beta$.
+\end{lemma}
+
+\begin{proof}
+  We shall prove that $\alpha$ is the least element in $\beta$ that is not in $\alpha$ itself.\sidenote{We shall construct a subset of $\beta \setminus \alpha$ and show that $\alpha$ is its element.}
+
+  Let $D := \beta \setminus \alpha = \{ x \in \beta : x \notin \alpha \} \subset \beta$ \sidenote{Exists by Bounded Separation Axiom.}. Since $\alpha \subsetneq \beta$, $D \neq \emptyset$. Since $\beta \in \Ord$, $(\beta, \in)$ has a strict well-ordering, and so $D$ has a least element, $d$. Note that $d \in \beta$, and since $\beta \in \Ord$, $d \subseteq \beta$.
+
+  \noindent\underline{Claim: $\alpha = d$.}\sidenote{If $\alpha = d$, then $\alpha$ is the said least element.} WTS $\alpha \subseteq d$. $\forall x \in \alpha$, we have $x, d \in \beta$. Then since $(\beta, \in)$ is a strict well-ordering, we have either
+  \begin{equation*}
+    x < d, \quad x = d, \; \text{ or } d < x
+  \end{equation*}
+  Note that $x \neq d$, otherwise $x = d \in D = \beta \setminus \alpha$.
+
+  \sidenote{
+    This is an errorneous proof.
+    \begin{marginwarning}
+      \begin{gather*}
+      d < x \land x < \alpha \\
+      \underset{\text{transitivity}}{\implies} d < \alpha \implies d \in \alpha
+      \end{gather*}
+
+      This argument is errorneous because we do not yet know if $\alpha \in \beta$.
+    \end{marginwarning}} If $d < x$, then $d \in x$ (by our notation). Now since $\alpha \in \Ord$, $x < \alpha \implies x \in \subseteq$, and so $d \in \alpha$, which is yet another contradiction ($d \in D = \beta \setminus \alpha$).
+
+    Thus we must have $x < d$, i.e. $x \in d$. So $\alpha \subseteq d$.
+
+    WTS $d \subseteq \alpha$. Suppose not. Then let $x \in d \setminus \alpha$. Then since $d \in D = \beta \setminus \alpha$, we have $x \in \beta \setminus \alpha$, which then contradicts the minimality of $d$. Therefore, $d = \alpha$ as required.\qed
+\end{proof}
+
+\begin{propo}[Properties of Ordinals]
+\label{propo:properties_of_ordinals}
+\marginnote{
+  Some of proofs of these properties are available in the course notes.
+  \begin{ex}
+    Prove \cref{item:properties_of_ordinals_3}, \cref{item:properties_of_ordinals_4}, and \cref{item:properties_of_ordinals_5} of \cref{propo:properties_of_ordinals}.
+  \end{ex}
+}
+  \begin{enumerate}
+    \item Every member of an ordinal is an ordinal.\label{item:properties_of_ordinals_1}
+    \item $\alpha \in \Ord \implies \alpha \notin \alpha$.\label{item:properties_of_ordinals_2}
+    \item $\alpha \in \Ord \implies S(\alpha) \in \Ord$.\label{item:properties_of_ordinals_3}
+    \item $\alpha, \beta \in \Ord \implies \alpha \cap \beta \in \Ord$.\label{item:properties_of_ordinals_4}
+    \item $\alpha, \beta \in \Ord \implies \alpha \in \beta \lor \alpha = \beta \lor \beta \in \alpha$.\label{item:properties_of_ordinals_5}
+    \item $E \subseteq \Ord$ a subset $\implies (E, \in)$ is a strict well-ordering.\label{item:properties_of_ordinals_6}
+    \item $\Ord$ is a proper class.\label{item:properties_of_ordinals_7}
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Suppose $x \in \beta \in \Ord$. WTS $x \in \Ord$, and we shall show that $x$ satisfies \cref{defn:ordinals}.
+
+      Since $\beta \in \Ord, \, x \in \beta \implies x \subseteq \beta$. Thus $(x, \in)$ is a strict well-ordering (through inheriting the property). So it suffices to show that $y \in x \implues y \subseteq x$. So let $y \in x$, and let $t \in x$ \sidenote{To show that $y \subseteq x$, we need to show that $\forall t \in y$, $t \in x$.}. Observe that
+      \begin{align*}
+        t \in y &\implies t < y \\
+        y \in x &\implies y < x
+      \end{align*}
+      and $t, y, x \in \beta \in \Ord$. Therefore, by transitivity, we have $t < y < x \implies t \in x$.
+
+    \item Suppose not, i.e. $\alpha \in \alpha$. Then $\alpha \subseteq \alpha \in \Ord$, and so $(\alpha, \in)$ is a strict well-ordering, i.e. $\alpha \notin \alpha$, a contradiction.
+
+    \setcounter{enumi}{5}
+    \item Suppose $A \subseteq E$ and $A \neq \emptyset$. Let $\alpha \in A$.
+
+      \noindent\underline{Case 1: $\alpha \cap A = \emptyset$.} Then $\forall \beta \in \alpha \implies \beta \notin A$. Therefore $\alpha$ is $\in$-least in $A$.
+
+      \noindent\underline{Case 2: $a \cap A \neq \emptyset$.} Let $A' = \alpha \cap A \subseteq \alpha$. Since $\alpha \in A \subseteq E \subseteq \Ord$, we have $(\alpha, \in)$ is a strict well-ordering, and so $A'$ has a strict well-ordering as well, and thus it must have a $\in$-least element, $x$. Then $x$ is the $\in$-least element in $A$.
+
+    \item If $\Ord$ is a set, then by \cref{item:properties_of_ordinals_6}, $(\Ord, \in)$ is a strict well-ordering. Also, by \cref{item:properties_of_ordinals_1}, every element of $\Ord$ is a subset of $\Ord$. Therefore, $\Ord$ satisfies \cref{defn:ordinals}, and so $\Ord \in \Ord$, which contradicts \cref{item:properties_of_ordinals_2}. Therefore $\Ord \notin \Set$.
+  \end{enumerate}\qed
+\end{proof}
+
+% subsection well_orderings_continued (end)
+
+% section ordinals_continued_3 (end)
+
+% chapter lecture_4_sep_18th (end)
 
 \appendix
 
