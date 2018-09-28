@@ -719,7 +719,6 @@ We can now restate the Replacement Axiom.
 We shall prove the following next lecture.\sidenote{Anti-reflexivity and Anti-symmetry were proven in this lecture, but I am moving it to the next for ease of reading.}
 
 \begin{propononum}[$\omega$ is Strictly Well-ordered]
-\label{propo:_omega_is_strictly_well_ordered}
   $(\omega, \in)$ is a strict well-ordering.
 \end{propononum}
 
@@ -897,7 +896,7 @@ Let $\Ord$ denote the class of all ordinals. We shall show later that $\Ord$ is 
     \item $\alpha \in \Ord \implies S(\alpha) \in \Ord$.\label{item:properties_of_ordinals_3}
     \item $\alpha, \beta \in \Ord \implies \alpha \cap \beta \in \Ord$.\label{item:properties_of_ordinals_4}
     \item $\alpha, \beta \in \Ord \implies \alpha \in \beta \lor \alpha = \beta \lor \beta \in \alpha$.\label{item:properties_of_ordinals_5}
-    \item $E \subseteq \Ord$ a subset $\implies (E, \in)$ is a strict well-ordering.\label{item:properties_of_ordinals_6}
+    \item $E \subseteq \Ord$ a subset $\implies (E, \in)$ is a strict well-ordering.\label{item:properties_of_ordinals_6}\sidenote{\hlwarn{I think} that such an $E$ need not be an ordinal itself. For example, $E = \{ 1, 5, 10 \} \subset \Ord$, but $4 \in 5$ and $4 \notin E$, and so $5 \in E$ but $5 \nsubseteq E$.}
     \item $\Ord$ is a proper class.\label{item:properties_of_ordinals_7}
   \end{enumerate}
 \end{propo}
@@ -931,6 +930,167 @@ Let $\Ord$ denote the class of all ordinals. We shall show later that $\Ord$ is 
 % section ordinals_continued_3 (end)
 
 % chapter lecture_4_sep_18th (end)
+
+\chapter{Lecture 5 Sep 20th}%
+\label{chp:lecture_5_sep_20th}
+% chapter lecture_5_sep_20th
+
+\section{Ordinals (Continued 4)}%
+\label{sec:ordinals_continued_4}
+% section ordinals_continued_4
+
+\begin{note}
+  If $A, B \in \Ord$, we will write $A < B$ to mean $A \in B$.
+\end{note}
+
+\begin{propo}[Properties of Ordinals 2]
+\label{propo:properties_of_ordinals_2}
+  \begin{enumerate}
+    \item If $\alpha \in \Ord$, then $\alpha < S(\alpha)$, and there is nothing in between.\label{item:properties_of_ordinals_2_1}
+    \item Let $E \subseteq \Ord$, where $E \neq \emptyset$ is a set, and $\sup E := \cup E$. Then $\sup E \in \Ord$, and it is a least upper bound for $E$.\label{item:properties_of_ordinals_2_2}\sidenote{I noted down from the lectures that this is "not necessarily strict", but I do not remember what it means now. \hlwarn{(Clarification required.)}
+      
+      Perhaps this related to my question; can $E = \sup E$? \newthought{This} is not necessarily true. If $E \notin \Ord$, then $E \neq \sup E$.}
+
+    \item If $E \subseteq \Ord$ is a subset, then there is a least ordinal that is not in $E$.\label{item:properties_of_ordinals_2_3}\marginnote{
+      \begin{ex}
+        Prove \cref{propo:properties_of_ordinals_2} \cref{item:properties_of_ordinals_2_3}.
+      \end{ex}
+      \newthought{Recommended strategy}: $\alpha \in \Ord$ such that $E \subsetneq \alpha$ and take the least element of $\alpha \setminus E$ (which is non-empty). Prove that this least element is the least ordinal that is not in $E$.
+
+      You can take $\alpha = SS(\sup E)$. Verify that this works.
+    }
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Since $S(\alpha) = \alpha \cup \{ \alpha \}$, $\alpha \in S(\alpha)$ and so $\alpha < S(\alpha)$.
+
+      It suffices to show that $\forall x < S(\alpha)$, we have $x \leq \alpha$. Let $x < S(\alpha)$, i.e. $x \in S(\alpha)$. So $x \in \alpha$ or $x = \alpha$, i.e. $x < \alpha$ or $x = \alpha$.
+
+    \item By definition, $\forall x \in E \subseteq \Ord$, we have that $x \subseteq \Ord$. Since $\cup E \subseteq E$, we have that $\cup E \subseteq \Ord$ is a subset. Thus by \cref{propo:properties_of_ordinals} \cref{item:properties_of_ordinals_6}, $(\cup E, \in)$ is a strict well-ordering.
+
+      \sidenote{This part shows that $\cup E$ is also an ordinal.} Suppose $\alpha \in \cup E$, then $\exists e \in E$ such that $\alpha \in e \subseteq E \subseteq \Ord$. So $e$ is an ordinal and so $\alpha \subseteq e$. \sidenote{Now we show that $\alpha \subseteq \cup E$.} $\forall x \in \alpha$, we have $x \in e \in E$, and so $x \in \cup E$ by definition. Therefore $\alpha \subseteq \cup E$.
+
+      And so, we have shown that $\cup E = \sup E \in \Ord$.
+
+      \noindent\underline{Claim 1: $\sup E$ is an upper bound for $E$.}
+
+      Suppose, for contradiction, that $\exists e \in E$ such that $\sup E < e$. Then since $\sup E$ and $e$ are both ordinals, we have $\sup E \in e \in E$. Then by definition of $\cup$, we have that $\sup E \in \cup E = \sup E$, but by \cref{propo:properties_of_ordinals} \cref{item:properties_of_ordinals_2}, $\sup E \notin \sup E$, a contradiction.
+
+      Thus $\sup E$ is an upper bound as claimed.
+
+      \noindent\underline{Claim 2: $\sup E$ is the supremum (least upper bound).}
+
+      $\forall \alpha < \sup E$, we have that $\alpha \in \sup E = \cup E$, and so $\exists e \in E$ such that $\alpha \in e$. Then $\alpha < e \in E$, i.e. $\alpha$ is not an upper bound of $E$.
+  \end{enumerate}
+\end{proof}
+
+\begin{defn}[Successor Ordinal]\index{Successor Ordinal}
+\label{defn:successor_ordinal}
+  The \hlnoteb{successor ordinal} is an ordinal of the form $S(\alpha)$ for some $\alpha \in \Ord$.
+\end{defn}
+
+\begin{defn}[Limit Ordinal]\index{Limit Ordinal}
+\label{defn:limit_ordinal}
+  A \hlnoteb{limit ordinal} is an ordinal that is not a successor.
+\end{defn}
+
+\begin{eg}
+  $0$ and $\omega$ are both limit ordinals; $0$ is vacuosly a limit ordinal, and $\omega$ is not a successor of any $\alpha \in Ord$ \sidenote{Need a more careful proof, which I cannot do. The idea is to show that any such ordinal $\alpha$ will be an element of $\omega$, and so will its successor $S(\alpha)$, and $\omega \notin \omega$.}.
+
+  On the other hand, for $n \in \omega$ such that $n \neq 0$, $\exists \cup n \in \omega$ such that $S(\cup n) = n$ \sidenote{See A1.}.
+\end{eg}
+
+\begin{ex}
+  Prove that $S(\omega)$ is a successor ordinal.
+\end{ex}
+
+\begin{solution}
+  We have that $\omega \in \Ord$, and so $S(\omega)$ is a successor ordinal.
+\end{solution}
+
+\subsection{Transfinite Induction \& Recursion}%
+\label{sub:transfinite_induction_n_recursion}
+% subsection transfinite_induction_n_recursion
+
+\begin{thm}[Transfinite Induction Theorem v1]
+\index{Transfinite Induction Theorem}
+\label{thm:transfinite_induction_theorem_v1}
+  Suppose $P$ is a definite condition, with the property
+  \begin{equation}\label{eq:transfinite_induction_v1_condition}
+    \forall \alpha \in \Ord \land ( \forall \beta < \alpha \; P(\beta) ) \implies P(\alpha).
+  \end{equation}
+  Then $P$ is true of all ordinals.
+\end{thm}
+
+\begin{proof}
+  $P(0)$ is vacuously true, since there are no elements that are less than $0$. Suppose $P(\alpha)$ is false for some $\alpha \in \Ord$ such that $\alpha > 0$. By the Bounded Separation Axiom,
+  \begin{equation*}
+    D := \{ \beta \leq \alpha : \neg P(\beta) \}
+  \end{equation*}
+  is a set \sidenote{Note that $\beta \leq \alpha \iff \beta < \alpha \lor \beta = \alpha \iff \beta \in S(\alpha)$}. Note that $D \neq \emptyset$, since $\alpha \in D$. Since $\alpha \in \Ord$, we have $D \subseteq \alpha \subseteq \Ord$, and so $(D, \in)$ has a strict well-ordering. Let $\alpha_0 \in D$ be $\in$-least. Then $\forall \beta < \alpha_0$, we have that $\neg P(\beta)$, which contradicts the assumption \cref{eq:transfinite_induction_v1_condition}. Thus $P(\alpha)$ is true for all ordinals.\qed
+\end{proof}
+
+\begin{thm}[Transfinite Induction Theorem v2]
+\index{Transfinite Induction Theorem}
+\label{thm:transfinite_induction_theorem_v2}
+  Suppose $P$ is a definite condition satisfying\marginnote{This statement strongly resembles the Induction Princple that we have learnt in the earlier years of university. In contrast, v1 resembles Strong Induction Principle. It can be shown that v1 $\iff$ v2. v1 $\implies$ v2 is proven in this lecture.
+    
+    \begin{ex}
+      Prove that \cref{thm:transfinite_induction_theorem_v2} $\implies$ \cref{thm:transfinite_induction_theorem_v1}.
+    \end{ex}}
+  \begin{enumerate}
+    \item $P(0)$;
+    \item $\forall \beta \in \Ord \; P(\beta) \implies P(S(\beta))$; and
+    \item If $\alpha \in \Ord$ is a limit ordinal and $\forall \beta < \alpha$, $P(\beta)$, then $P(\alpha)$.
+  \end{enumerate}
+  Then $P$ is true of all ordinals.
+\end{thm}
+
+\begin{proof}
+  It suffices to show that $P$ satisfies \cref{eq:transfinite_induction_v1_condition}, i.e. $\forall \alpha \in \Ord$, we want to prove that $\forall \beta < \alpha$, if $P(\beta)$, then $P(\alpha)$.
+
+  When $\alpha = 0$, we have $P(0)$ and so \cref{eq:transfinite_induction_v1_condition} is satisfies. When $\alpha > 0$ is a limit ordinal, our assumption immediately satisfies \cref{eq:transfinite_induction_v1_condition}. Now suppose $\alpha > 0$ is a successor ordinal, and suppose that $\alpha = S(\gamma)$ for some $\gamma \in \Ord$. By the assumption in \cref{eq:transfinite_induction_v1_condition}, we have that
+  \begin{equation*}
+    \forall \beta < \gamma \; P(\beta) \implies P(\gamma)
+  \end{equation*}
+  and so by condition (2), we have $P(S(\gamma))$ since $\gamma \in \Ord$. Thus we have $P(\alpha) = P(S(\gamma))$. \qed
+\end{proof}
+
+We shall prove the following in the next lecture:
+
+\begin{thmnonum}[Transfinite Recursion]
+  Let $X$ be a class of all definite operations whose domain is an ordinal. Given a definite operation
+  \begin{equation*}
+    G : X \to \Set
+  \end{equation*}
+  $\exists ! F : \Ord \to \Set$, a definite operation, such that $F(\alpha = F(F \restriction_{\alpha}))$, for all $\alpha \in \Ord$.
+\end{thmnonum}
+
+We want to use Transfinite Recursion to construct definite operations on ordinals such that they have properties that we are familiar with (and hence desire).
+
+\begin{note}[Notation - Restriction]
+  Let $H : U \to Y$ be a definite operation on classes $U, Y$, and $Z \subseteq U$ a subclass. $H \restriction_{Z}$ is the definite operation
+  \begin{equation*}
+    H \restriction_{Z} : Z \to Y
+  \end{equation*}
+  obtained by restricting $H$ onto $Z$.
+\end{note}
+
+\begin{note}
+  In the theorem, we stated that $F$ has its domain on $\Ord$. We know that for $\alpha \in \Ord$, $\alpha \subseteq \Ord$, and so $F \restriction_{\alpha}$ makes sense; in particular,
+  \begin{equation*}
+    F \restriction_{\alpha} : \alpha \to \Set.
+  \end{equation*}
+  Note that $F \restriction_{\alpha} \in X$, and so $G(F \restriction_{\alpha})$ is valid and makes sense.
+\end{note}
+
+% subsection transfinite_induction_n_recursion (end)
+
+% section ordinals_continued_4 (end)
+
+% chapter lecture_5_sep_20th (end)
 
 \appendix
 
