@@ -1439,6 +1439,163 @@ for any function $g$ such that the expectation exists. In particular, we have
 
 % chapter lecture_6_sep_25th (end)
 
+\chapter{Lecture 7 Sep 27th}%
+\label{chp:lecture_7_sep_27th}
+% chapter lecture_7_sep_27th
+
+\section{Severity Distributions - Creating Severity Distributions (Continued 2)}%
+\label{sec:severity_distributions_creating_severity_distributions_continued_2}
+% section severity_distributions_creating_severity_distributions_continued_2
+
+\subsection{Mixing Distributions (Continued)}%
+\label{sub:mixing_distributions_continued}
+% subsection mixing_distributions_continued
+
+\begin{defn}[Continuous Mixture]\index{Continuous Mixture}
+\label{defn:continuous_mixture}
+  Let $\Theta$ be a crv with density $f_\Theta$, and the cdf and pdf of $X \mid \Theta = \theta$ are given by
+  \begin{equation*}
+    F_{X \mid \Theta}(x \mid \theta) = P(X \leq x \mid \Theta = \theta) \text{ and } f_{X \mid \Theta}(x \mid \theta) = P(X = x \mid \Theta = \theta).
+  \end{equation*}
+  The unconditional distribution of $X$ is said to be a \hlnoteb{continuous mixed distribution} with cdf and pdf
+  \begin{align*}
+    F_X(x) &= \int_{-\infty}^{\infty} F_{X \mid \Theta}(x\mid\theta) f_{\Theta}(\theta) \dif{\theta} \\
+    f_X(x) &= \int_{-\infty}^{\infty} f_{X \mid \Theta}(x\mid\theta) f_{\Theta}(\theta) \dif{\theta}.
+  \end{align*}
+  Furthermore, for any function $H$,
+  \begin{equation*}
+    E[H(X)] = \int_{-\infty}^{\infty} E[H(X) \mid \Theta = \theta] f_{\Theta}(\theta) \dif{\theta}.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  Suppose that $X \mid \Lambda = \lambda$ is exponentially distributed with mean $\frac{1}{\lambda}$, and let $\Lambda$ be a gamma distributed rv with mean $\alpha / \theta$ and variance $\alpha / \theta^2$, i.e.
+  \begin{equation*}
+    f_{\Lambda}(\lambda) = \frac{\theta^\alpha \lambda^{\alpha - 1} e^{-\theta \lambda}}{\Gamma(\alpha)}, \lambda > 0,
+  \end{equation*}
+  where $\Gamma(\alpha) = \int_{0}^{\infty} t^{\alpha - 1} e^{-t} \dif{t}$ is the gamma function. Determine the conditional pdf of $X$.
+\end{eg}
+
+\begin{solution}
+  We have
+  \begin{align*}
+    f_X(x) &= \int_{0}^{\infty} f_{X \mid \Lambda}(x \mid \lambda) f_{\Lambda}(\lambda) \dif{\lambda} \\
+           &= \int_{0}^{\infty} \lambda e^{-x \lambda} \frac{\theta^{\alpha} \lambda^{\alpha - 1} e^{-\theta \lambda}}{\Gamma(\alpha)} \dif{\lambda} \\
+           &= \frac{\theta^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty} \lambda^\alpha e^{-\lambda ( x + \theta )} \dif{\lambda} \\
+           &= \frac{\theta^\alpha}{\Gamma(\alpha) (x + \theta)} \int_{0}^{\infty} \left( \frac{y}{x + \theta} \right)^\alpha e^{-y} \dif{y} \enspace \text{ where } y = \lambda ( x + \theta ) \\
+           &= \frac{\theta^\alpha}{\Gamma(\alpha) ( x + \theta )^{\alpha + 1}} \int_{0}^{\infty} y^\alpha e^{-y} \dif{y} \\
+           &= \frac{\theta^\alpha \Gamma(\alpha + 1)}{\Gamma(\alpha) ( x + \theta )^{\apha + 1}} = \frac{\alpha \theta^\alpha}{(x + \theta)^{\alpha + 1}}.
+  \end{align*}
+\end{solution}
+
+\begin{propo}[Total Expectation and Total Variance]
+\index{Total Expectation}\index{Total Variance}
+\label{propo:total_expectation_and_total_variance}
+  For any rvs $X$ and $\Theta$, provided that the repsective expectation and variance exist, we have
+  \begin{gather*}
+    E[X] = E[ E[ X \mid \Theta ] ] \\
+    \Var(X) = E[ \Var(X \mid \Theta) ] + \Var( E[ X \mid \Theta ] )
+  \end{gather*}
+\end{propo}
+
+\begin{proof}
+  \begin{align*}
+    E[X] &= E\left( \int_{X} xf_{X \mid \Theta}(x \mid \Theta) \dif{x} \right) \\
+         &= \int_{\Theta} \int_{X} xf_{X \mid \Theta}( x \mid \theta ) f_{\Theta}(\theta) \dif{x} \dif{\theta} \\
+         &= \int_{X} x \int_{\Theta} f_{X, \Theta}(x, \theta) \dif{\theta} \dif{x} \enspace \because \text{ Fubini's Theorem } \\
+         &= \int_{X} xf_X(x) \dif{x} = E[X].
+  \end{align*}
+  Note that
+  \begin{equation*}
+    \Var(X \mid \Theta) = E[ X^2 \mid \Theta ] + E[ X \mid \Theta ]^2.
+  \end{equation*}
+  And so
+  \begin{align*}
+    &E[\Var(X \mid \Theta)] + \Var( E[ X \mid \Theta ] ) \\
+    &= E[ E[ X^2 \mid \Theta ] ] - E \left[ E[ X \mid \Theta ]^2 \right] + E \left[ E [ X \mid \Theta ]^2 \right] - E[ E [ X \mid \Theta ] ]^2 \\
+    &= E\left[X^2\right] - E[X]^2 = \Var(X)
+  \end{align*}\qed
+\end{proof}
+
+\begin{eg}
+  Suppose that $X \mid \Theta = \theta \sim \Exp(\theta)$ and $p_{\Theta}(\theta) = \frac{1}{3}$ for $\theta = 1, 2, 3$. Find the mean and variance of $X$.
+\end{eg}
+
+\begin{solution}
+  The mean of $X$ is
+  \begin{equation*}
+    E[X] = EE[X \mid \Theta] = E[\Theta] = \frac{1}{3} (1 + 2 + 3) = 2.
+  \end{equation*}
+  The variance of $X$ is
+  \begin{align*}
+    \Var(X) &= E[\Var(X \mid \Theta)] + \Var( E[X \mid \Theta] ) \\
+            &= E[\Theta^2] + \Var(\Theta) = 2E[\Theta^2] - E[\Theta]^2 \\
+            &= \frac{2}{3}(1 + 4 + 9) - 4 = \frac{28}{3} - \frac{12}{3} = \frac{16}{3}
+  \end{align*}
+\end{solution}
+
+\begin{eg}
+  Suppose that $X \mid \Lambda = \lambda \sim \Exp(\lambda)$ and $\Lambda \sim \Gam(\alpha, \theta)$ with mean $\alpha \theta$ and variance $\alpha \theta^2$. Find the mean and variance of $X$.
+\end{eg}
+
+\begin{solution}
+  The mean of $X$ is
+  \begin{equation*}
+    E[X] = EE[X \mid \Lambda] = E[ \Lambda ] = \alpha\theta.
+  \end{equation*}
+  The variance of $X$ is
+  \begin{align*}
+    \Var(X) &= E[\Var(X \mid \Lambda)] + \Var( E[ X \mid \Lambda ] ) \\
+            &= E[\Lambda^2] + \Var(\Lambda) = 2\Var(\Lambda) + E[\Lambda]^2 \\
+            &= 2 \alpha \theta^2 + \alpha^2 \theta^2.
+  \end{align*}
+\end{solution}
+
+% subsection mixing_distributions_continued (end)
+
+% section severity_distributions_creating_severity_distributions_continued_2 (end)
+
+\section{Severity Distributions - Tail of Distributions}%
+\label{sec:severity_distributions_tail_of_distributions}
+% section severity_distributions_tail_of_distributions
+
+\begin{defn}[Tail]\index{Tail}
+\label{defn:tail}
+  The \hlnoteb{tail} of a distribution (usually the right tail) is the portion of the distribution corresponding to large values of the random variable.
+\end{defn}
+
+It is important that we understand large possible loss values as they have the greatest impact on the total losses that we may have to endure. In general, a loss rv is said to be \hldefn{heavy-tailed} if it has a large probability to take large values.
+
+Two measurements of tail weight:
+\begin{itemize}
+  \item \textbf{relative}: comparing ``sizes'' of the tails of two distributions;
+  \item \textbf{absolute}: classifying distributions as heavy or light-tailed.
+\end{itemize}
+
+The following is a set of criteria to measure or compare the heaviness of the tails of loss distributions:
+\begin{itemize}
+  \item Existence of moments
+  \item Limiting ratios
+  \item Hazard rate function
+  \item Mean excess loss function
+\end{itemize}
+
+\subsection{Existence of Moments}%
+\label{sub:existence_of_moments}
+% subsection existence_of_moments
+
+Recall that the $k$th moment of a loss $X$ is
+\begin{equation*}
+  E\left[X^k\right] = \int_{0}^{\infty} x^k f_X(x) \dif{x}.
+\end{equation*}
+Now if $f_X$ takes on large values for large $x$, we may have $E\left[X^k\right]$ blow up to infinity, and so it is desirable to find/use some distribution with a \hlnotea{decaying} probability function.
+
+% subsection existence_of_moments (end)
+
+% section severity_distributions_tail_of_distributions (end)
+
+% chapter lecture_7_sep_27th (end)
+
 \appendix
 
 \chapter{Additional Material}%
