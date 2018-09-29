@@ -863,7 +863,7 @@ The \hlnoteb{Value-at-Risk (VaR)} is a \hlnotea{quantile} of the distribution of
   \end{itemize}
 \end{warning}
 
-\begin{eg}
+\begin{eg}\label{eg:varp_pareto}
   Suppose that $X$ has a Pareto distribution with cdf
   \begin{equation*}
     F(x) = 1 - \left( \frac{\theta}{x + \theta} \right)^\alpha , \quad x > 0
@@ -908,7 +908,12 @@ To compensate for the weakness of $\VaR$ at giving us the size of the the loss $
 
 \begin{defn}[Tail-Value-at-Risk (TVaR)]\index{Tail-Value-at-Risk}
 \label{defn:tail_value_at_risk}
-  Let $X$ be an rv. The \hlnoteb{Tail-Value-at-Risk (TVaR)} of $X$ at the $100p\%$ level, denoted as $\TVaR_p(X)$, is defined as the average of all $\VaR$ values above the level $p$, and expressed as
+Let $X$ be an rv. The \hlnoteb{Tail-Value-at-Risk (TVaR)} of $X$ at the $100p\%$ level, denoted as $\TVaR_p(X)$, is defined as the average of all $\VaR$ values above the level $p$, and expressed as\marginnote{TVaR also has the following names, used by different regions:
+\begin{itemize}
+  \item \hlnotea{Conditional Tail Expectation} (CTE) - NA
+  \item \hlnotea{Tail Conditional Expectation} (TCE)
+  \item \hlnotea{Expected Shortfall} (ES) - EU
+\end{itemize}}
   \begin{equation*}
     \TVaR_p(X) = \frac{1}{1 - p} \int_{p}^{1} \VaR_\alpha(X) \dif{\alpha} = \frac{1}{1 - p} \int_{p}^{1} \pi_\alpha \dif{\alpha}
   \end{equation*}
@@ -969,11 +974,11 @@ where we let $\alpha = F(x)$ as substitution.
 
 \begin{note}
   From the last example, by the memoryless property of $\Exp(\theta)$, notice that we may also do
-  \begin{align*}
-    \TVaR_p(X) &= E[ X \mid X > \pi_p ] = E [ X - \pi_p + \pi_p \mid X > \pi_p ] \\
-               &= E[ X - \pi_p \mid X > \pi_p ] + E[ \pi_p \mid X > \pi_p ] \\
-               &= E[ X ] + \pi_p
-  \end{align*}
+  \begin{align}
+    \TVaR_p(X) &= E[ X \mid X > \pi_p ] = E [ X - \pi_p + \pi_p \mid X > \pi_p ] \nonumber \\
+               &= E[ X - \pi_p \mid X > \pi_p ] + E[ \pi_p \mid X > \pi_p ] \label{eq:tvar_memoryless_exp}\\
+               &= E[ X ] + \pi_p \nonumber
+  \end{align}
 \end{note}
 
 % subsection risk_measures (end)
@@ -981,6 +986,188 @@ where we let $\alpha = F(x)$ as substitution.
 % section distributional_quantities_and_risk_measures_continued (end)
 
 % chapter lecture_4_sep_18th (end)
+
+\chapter{Lecture 5 Sep 20th}%
+\label{chp:lecture_5_sep_20th}
+% chapter lecture_5_sep_20th
+
+\section{Distrbutional Quantities and Risk Measures (Continued 2)}%
+\label{sec:distrbutional_quantities_and_risk_measures_continued_2}
+% section distrbutional_quantities_and_risk_measures_continued_2
+
+\subsection{Risk Measures (Continued)}%
+\label{sub:risk_measures_continued}
+% subsection risk_measures_continued
+
+Before ending this section, we introduce a notion that is related to $\TVaR$.
+
+\begin{defn}[Mean Excess Loss]\index{Mean Excess Loss}
+\label{defn:mean_excess_loss}
+  Let $X$ be an rv, and $d \in \mathbb{R}$. The \hlnoteb{mean excess loss}, denoted $e_X(d)$, is defined as
+  \begin{equation*}
+    e_X(d) = E[ X - d \mid X > d ]
+  \end{equation*}
+  and $e_X(d) = 0$ for those $d$ such that $P(X > d) = 0$.
+\end{defn}
+
+\begin{propo}[Relation of $\TVaR_p(X)$ and $e_X(d)$]
+\label{propo:relation_of_tvar_p_x_and_e_x_d_}
+  For a crv $X$, we have
+  \begin{equation*}
+    \TVaR_p(X) = e_X(\pi_p) + \VaR_p(X)
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  By \cref{eq:tvar_memoryless_exp}, we have that
+  \begin{equation*}
+    \TVaR_p(X) = E [ X - \pi_p \mid X > \pi_p ] + \pi_p = e_X(\pi_p) + \pi_p.
+  \end{equation*}\qed
+\end{proof}
+
+\begin{propo}[Expection from Survival Function]
+\label{propo:expection_from_survival_function}
+  Let $X$ be a non-negative rv such that $E[X^k] < \infty$, for any $k \in \mathbb{N} \setminus \{ 0 \}$. Then\sidenote{Note that this works for the discrete case as well, by replacing $\int$ with $\sum$.}
+  \begin{equation*}
+    E\left[X^k\right] = k \int_{0}^{\infty} x^{k - 1} \bar{F}(x) \dif{x}
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Firstly, note that since $E[X^k] < \infty$ for all $k \in \mathbb{N} \setminus \{0\}$, we have that $\bar{F}(x)$ decays faster than $x^k$ as $x \to \infty$. Now
+  \begin{align*}
+    E\left[ X^k \right] &= \int_{0}^{\infty} x^k f(x) \dif{x} \quad \because \text{ Law of the Unconscious Statistician} \\
+                        &= \int_{0}^{\infty} x^k \dif{F(x)} \quad \because \dif{F(x)} = f(x) \dif{x} \\
+                        &= - \int_{0}^{\infty} x^k \dif{\bar{F}(x)} \\
+                        &= - \left[ x^k \bar{F}(x) \at{0}{\infty} - \int_{0}^{\infty} kx^{k - 1} \bar{F}(x) \dif{x} \right] \quad \because \text{ IBP } \\
+                        &= k \int_{0}^{\infty} x^{k - 1} \bar{F}(x) \dif{x}
+  \end{align*} \qed
+\end{proof}
+
+\begin{eg}
+  Calculate $e_X(d)$ and $\TVaR_p(X)$ for a Pareto distribution $X$ with cdf
+  \begin{equation*}
+    F(x) = 1 - \left( \frac{\theta}{x + \theta} \right)^\alpha, \quad x > 0,
+  \end{equation*}
+  where $\alpha > 1$ and $\theta > 0$.
+\end{eg}
+
+\begin{solution}
+  Using \cref{propo:expection_from_survival_function},
+  \begin{align*}
+    e_X(d) &= \int_{0}^{\infty} P(X - d > x \mid X > d) \dif{x} = \int_{0}^{\infty} \frac{P(X - d > x, X > d)}{P(X > d)} \dif{x} \\
+           &= \int_{0}^{\infty} \frac{P(X > x + d)}{P(X > d)} \dif{x} = \int_{0}^{\infty} \frac{\bar{F}(x + d)}{\bar{F}(d)} \dif{x} \\
+           &= \int_{0}^{\infty} \left( \frac{d + \theta}{x + d + \theta} \right)^\alpha \dif{x} = \frac{( d + \theta )^\alpha}{1 - \alpha} \left( \frac{1}{x + d + \theta} \right)^{ \alpha - 1 } \at{0}{\infty} \\
+           &= \frac{d + \theta}{\alpha - 1}
+  \end{align*}
+  By \cref{eg:varp_pareto}, we have
+  \begin{equation*}
+    \pi_p = \theta \left[ ( 1 - p )^{-\frac{1}{\alpha}} - 1 \right]
+  \end{equation*}
+  and so
+  \begin{align*}
+    \TVaR_p(X) &= e_X(\pi_p) + \pi_p \\
+               &= \frac{\theta\left[ (1 - p)^{-\frac{1}{\alpha}} - 1 \right] + \theta}{\alpha - 1} + \theta\left[ ( 1 - p )^{-\frac{1}{\alpha}} - 1 \right] \\
+               &= \frac{\theta(1 - p)^{-\frac{1}{\alpha}}}{\alpha - 1} + \frac{\theta(\alpha - 1)(1 - p)^{-\frac{1}{\alpha}}}{\alpha - 1} - \theta \\
+               &= \frac{\theta \alpha ( 1 - p )^{-\frac{1}{\alpha}}}{\alpha - 1} - \theta
+  \end{align*}
+\end{solution}
+
+\begin{propo}[Expected Deductible]
+\label{propo:expected_deductible}
+  We have
+  \begin{equation*}
+    E( [ X - d ]_+ ) = \int_{d}^{\infty} \bar{F}(x) \dif{x}
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  By the Law of the Unconscious Statistician and IBP on the last step,
+  \begin{equation*}
+    E( [ X - d ]_+ ) = \int_{d}^{\infty} ( x - d ) \dif{F(x)} = - \int_{d}^{\infty} (x - d) \dif{\bar{F}(x)} = \int_{d}^{\infty} \bar{F}(x) \dif{x}
+  \end{equation*}\qed
+\end{proof}
+
+\begin{propo}[An Expression for Mean Excess Value]
+\label{propo:an_expression_for_mean_excess_value}
+  If $\bar{F}(d) > 0$, we have
+  \begin{equation*}
+    e_X(d) = \frac{\int_{d}^{\infty} \bar{F}(x) \dif{x}}{\bar{F}(d)}
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Observe that by \cref{propo:expected_deductible}, we have
+  \begin{align*}
+    e_X(d) &= E[ X - d \mid X > d ] = \frac{E[ ( X - d ) \mathbb{1}_{X > d} ]}{P(X > d)} \\
+           &= \frac{E( [ X - d ]_+ )}{\bar{F}(d)} = \frac{\int_{d}^{\infty} \bar{F}(x) \dif{x}}{\bar{F}(d)}
+  \end{align*}\qed
+\end{proof}
+
+% subsection risk_measures_continued (end)
+
+% section distrbutional_quantities_and_risk_measures_continued_2 (end)
+
+\section{Severity Distributions - Creating Severity Distributions}%
+\label{sec:severity_distributions_creating_severity_distributions}
+% section severity_distributions_creating_severity_distributions
+
+\begin{defn}[Severity Distribution]\index{Severity Distribution}
+\label{defn:severity_distribution}
+  A \hlnoteb{severity distribution} is a distribution used to describe single random losses in an insurance portfolio.
+\end{defn}
+
+When a loss occurs, the full amount of the loss is not necessarily the amount paid by the insurer, since an insurance policy typically involves some form of adjustment (e.g. \hlnotea{deductible, limit, coinsurance}). A distinction needs to be made between the actual loss prior to any of the adjustments (aka \hldefn{ground-up loss}) and the amount ultimately paid by the insurer.
+
+Our goal is to find a reasonable model for the \hlnotea{ground-up loss} rv $X$. The following are two desirable properties for $X$:
+\begin{itemize}
+  \item $\text{Im}(X) = \mathbb{R}_{> 0}$, since losses are positive;
+  \item pf of $X$ is right-skewed, since we want the ``tail'' of the distribution to be not heavy.
+    \begin{itemize}
+      \item The motivation for this property is due to the \hlnotea{20-80 rule}: 20\% of the largest claims accountn for 80\% of the total claim amount.
+    \end{itemize}
+\end{itemize}
+
+\newthought{There are} two approaches to constructing a severity distribution:
+\begin{itemize}
+  \item \hlnotea{Parametric approach}\sidenote{This approach shall be the focus of this course.}: specify a ``form'' for the distribution with a finite number of parameters.
+  \item Nonparametric approach: no form is specified; the distribution is constructed directly from the empirical data.
+\end{itemize}
+
+A weakness of the \textbf{Nonparametric approach} is, if there is not enough data, such as in catasthropic risks, is becomes difficult to obtain reliable information. We shall look at one such example in this approach.
+
+\begin{defn}[Empirical Distribution Function]\index{Empirical Distribution Function}
+\label{defn:empirical_distribution_function}
+  Let $\{ X_1, ..., X_n \}$ be an iid sample of a risk $X$. Then its \hlnoteb{empricial distribution function (edf)} is defined as
+  \begin{equation*}
+    \hat{F}_n(x) = \frac{1}{n} \sum_{i=1}^{n}  \mathbb{1}_{\{X_i \leq x\}}, \quad x \in \mathbb{R}.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  Simply put, the edf assigns a probability of $\frac{1}{n}$ to each sample point $X_i$.
+\end{remark}
+
+\begin{eg}
+  Consider a random sample of a risk with size $5$: $\{ 30, 80, 150, 150, 200 \}$. Find the edf of the risk.
+\end{eg}
+
+\begin{solution}
+  The edf is given by
+  \begin{equation*}
+    \har{F}_n(x) = \frac{1}{5} \sum_{i=1}^{5} \mathbb{1}_{\{ X_i \leq x_i \}} = \begin{cases}
+      0           & x < 30 \\
+      \frac{1}{5} & 30 \leq x < 80 \\
+      \frac{2}{5} & 80 \leq x < 150 \\
+      \frac{4}{5} & 150 \leq x < 200 \\
+      1           & x \geq 200
+    \end{cases}
+  \end{equation*}
+\end{solution}
+
+% section severity_distributions_creating_severity_distributions (end)
+
+% chapter lecture_5_sep_20th (end)
 
 \appendix
 
