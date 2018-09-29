@@ -1112,10 +1112,11 @@ Before ending this section, we introduce a notion that is related to $\TVaR$.
 \label{sec:severity_distributions_creating_severity_distributions}
 % section severity_distributions_creating_severity_distributions
 
-\begin{defn}[Severity Distribution]\index{Severity Distribution}
-\label{defn:severity_distribution}
+Recall the definition of a severity distribution.
+
+\begin{defnnonum}[Severity Distribution]\index{Severity Distribution}
   A \hlnoteb{severity distribution} is a distribution used to describe single random losses in an insurance portfolio.
-\end{defn}
+\end{defnnonum}
 
 When a loss occurs, the full amount of the loss is not necessarily the amount paid by the insurer, since an insurance policy typically involves some form of adjustment (e.g. \hlnotea{deductible, limit, coinsurance}). A distinction needs to be made between the actual loss prior to any of the adjustments (aka \hldefn{ground-up loss}) and the amount ultimately paid by the insurer.
 
@@ -1155,7 +1156,7 @@ A weakness of the \textbf{Nonparametric approach} is, if there is not enough dat
 \begin{solution}
   The edf is given by
   \begin{equation*}
-    \har{F}_n(x) = \frac{1}{5} \sum_{i=1}^{5} \mathbb{1}_{\{ X_i \leq x_i \}} = \begin{cases}
+    \hat{F}_n(x) = \frac{1}{5} \sum_{i=1}^{5} \mathbb{1}_{\{ X_i \leq x_i \}} = \begin{cases}
       0           & x < 30 \\
       \frac{1}{5} & 30 \leq x < 80 \\
       \frac{2}{5} & 80 \leq x < 150 \\
@@ -1168,6 +1169,275 @@ A weakness of the \textbf{Nonparametric approach} is, if there is not enough dat
 % section severity_distributions_creating_severity_distributions (end)
 
 % chapter lecture_5_sep_20th (end)
+
+\chapter{Lecture 6 Sep 25th}%
+\label{chp:lecture_6_sep_25th}
+% chapter lecture_6_sep_25th
+
+\section{Severity Distributions - Creating Severity Distributions (Continued)}%
+\label{sec:severity_distributions_creating_severity_distributions_continued}
+% section severity_distributions_creating_severity_distributions_continued
+
+\paragraph{The Parametric Approach} The following is a graph showing the process of a parametric approach:
+
+\begin{figure}[h]
+  \begin{tikzpicture}[
+    block/.style = {rectangle, draw, rounded corners,
+               text width =15em, align=center,
+               color=base16-eighties-dark,fill=base16-eighties-blue},
+    sblock/.style = {rectangle, draw, rounded corners,
+               text width =4em, align=center},
+    ]
+    \node [block] (selection) {\textbf{Model Selection}\\
+      select a model based on prior knowledge of historical datasets};
+    \node [block, below=of selection] (estimation) {\textbf{Model Estimation}\\
+      estimate parameter values based on data};
+    \node [block, below=of estimation] (validation) {\textbf{Model Validation} \\
+      test for goodness-of-fit};
+    \node [block, below=of validation] (decision) {Is model acceptable?};
+    \node [sblock, left=of decision,color=base16-eighties-dark,fill=base16-eighties-red] (no) {\textbf{No}};
+    \node [sblock, right=of decision,color=base16-eighties-dark,fill=base16-eighties-green] (yes) {\textbf{DONE!}};
+    
+    \draw[-latex'] (selection) -- (estimation);
+    \draw[-latex'] (estimation) -- (validation);
+    \draw[-latex'] (validation) -- (decision);
+    \draw[-latex'] (decision) -- (no);
+    \draw[-latex'] (no) |- (selection.west);
+    \draw[-latex'] (decision) -- (yes);
+  \end{tikzpicture}
+  \caption{Process of a Parametric Approach}
+  \label{fig:process_of_a_parametric_approach}
+\end{figure}
+
+\paragraph{Common Techniques in Creating New Parametric Distributions} Before diving into the topic, first, a definition:
+
+\begin{defn}[Parametric Distribution]\index{Parametric Distribution}
+\label{defn:parametric_distribution}
+  A \hlnoteb{parametric distribution} is a set of distribution functions, of which each member is determined by specifying one or more parameters.
+\end{defn}
+
+Some common techniques are the following:
+\begin{itemize}
+  \item Multiplication by a constant
+  \item Raising to a power
+  \item Exponentiation
+  \item Mixture of distributions
+\end{itemize}
+
+\subsection{Multiplication By A Constant}%
+\label{sub:multiplication_by_a_constant}
+% subsection multiplication_by_a_constant
+
+This transformation is equivalent to applying inflation uniformly across all loss levels, and is known as a change of scale.
+
+\begin{propo}[Multiplication by a Constant]
+\label{propo:multiplication_by_a_constant}
+  Let $X$ be a crv with cdf $F_X$ and pdf $f_X$. Let $Y = cX$ for some $c > 0$. Then
+  \begin{equation*}
+    F_Y(y) = F_X\left( \frac{y}{c} \right), \quad f_Y(y) = \frac{1}{c}f_X\left( \frac{y}{c} \right).
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  \begin{gather*}
+    F_Y(y) = P(Y \leq y) = P( cX \leq y ) = P\left( X \leq \frac{y}{c} \right) = F_X\left( \frac{y}{c} \right) \\
+    f_Y(y) = \frac{d}{dy} F_Y(y) = \frac{d}{dy} F_X\left( \frac{y}{c} \right) = \frac{1}{c}f_X\left( \frac{y}{c} \right)
+  \end{gather*}\qed
+\end{proof}
+
+\begin{defn}[Scale Distribution]\index{Scale Distribution}
+\label{defn:scale_distribution}
+  We say that a parametric distribution is a \hlnoteb{scale distribution} if $Y = cY$ for any positive constant $c$ is from the same set of distributions as $X$.
+\end{defn}
+
+It is clear that we have the following result:
+
+\begin{crly}
+\label{crly:constant_multiplication_crly}
+  The parameter $c$ in \cref{propo:multiplication_by_a_constant} is a scale parameter, and $Y$ is a scale distribution.
+\end{crly}
+
+\begin{eg}\label{eg:scale_distn_exp}
+  Let $X \sim \Exp(\theta)$ with pdf
+  \begin{equation*}
+    f_X(x) = \frac{1}{\theta}e^{-\frac{x}{\theta}}, \quad x > 0.
+  \end{equation*}
+  Let $y = cX$ with $c > 0$, it follows that
+  \begin{equation*}
+    f_Y(y) = \frac{1}{c}f_X\left(\frac{y}{c}\right) = \frac{1}{c \theta} e^{- \frac{y}{c \theta}}, \quad y > 0.
+  \end{equation*}
+  Thus $Y \sim \Exp(c\theta)$ and so $Y$ is a scale distribution. In particular, the exponential distribution belongs to a family of scale distributions.
+\end{eg}
+
+\begin{defn}[Scale Parameter]\index{Scale Parameter}
+\label{defn:scale_parameter}
+  A parameter $\theta$ is called a \hlnoteb{scale paramter} of a parametric distribution $X$ if it satisfies the following condition: the parametric value of $cX$ is $c \theta$ for any positive constant $c$, and other parameters (if any) remain unchanged.
+\end{defn}
+
+\begin{eg}
+  From \cref{eg:scale_distn_exp}, we had that
+  \begin{equation*}
+    f_X(x) = \frac{1}{\theta}e^{-\frac{x}{\theta}}, \quad x > 0.
+  \end{equation*}
+  We showed that $Y = cX \sim \Exp(c\theta)$. Therefore, the parameter $\theta$ is a scale parameter.
+\end{eg}
+
+\begin{eg}
+  Determine whether the lognormal distribution $X \sim \LogN(\mu, \sigma^2)$, i.e. $\ln(X) \sim \Nor(\mu, \sigma^2)$, is a scale distribution or not. If yes, determine whether it has any scale parameter.
+\end{eg}
+
+\begin{solution}
+  Let $Y = cX$ for some $c > 0$. Observe that
+  \begin{equation*}
+    \ln Y = \ln cX = \ln c + \ln X \sim \Nor(\mu + \ln c, \sigma^2).
+  \end{equation*}
+  For the last equation, note that if we let $Z = \ln X \sim \Nor(\mu, \sigma^2)$
+  \begin{align*}
+    E\left[ e^{t( Z + \ln c )} \right] &= e^{t \ln c} e^{\mu t + \frac{\sigma^2 t^2}{2}} = e^{t ( \mu + \ln c ) + \frac{\sigma^2 t^2}{2}}
+  \end{align*}
+  we see that the above is the mgf of $\Nor(\mu + \ln c, \sigma^2)$. Thus we have that $Y$ has the same distribution as $X$ and so it is a scale distribution. However, we also see that it has no scale parameters.
+\end{solution}
+
+% subsection multiplication_by_a_constant (end)
+
+\subsection{Raising to a Power}%
+\label{sub:raising_to_a_power}
+% subsection raising_to_a_power
+
+\begin{propo}[Raising to a Power]
+\label{propo:raising_to_a_power}
+  Let $X$ be a crv with pdf $f_X$ and cdf $F_X$ with $F_X(0) = 0$. Let $Y = X^{\frac{1}{\tau}}$. If $\tau > 0$, then
+  \begin{equation*}
+    F_Y(y) = F_X(y^\tau), \quad f_Y(y) = \tau y^{\tau - 1} f_X(y^\tau), \quad y > 0,
+  \end{equation*}
+  while if $\tau < 0$, then
+  \begin{equation*}
+    F_Y(y) = 1 - F_X(y^\tau), \quad f_Y(y) = - \tau y^{\tau - 1} f_X(y^\tau), \quad y > 0.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  When $\tau > 0$,
+  \begin{equation*}
+    F_Y(y) = P(Y \leq y) = P\left(X^{\frac{1}{\tau}}\right) = P\left(X \leq y^\tau\right) = F_X\left(y^\tau\right)
+  \end{equation*}
+  and
+  \begin{equation*}
+    f_Y(y) = \frac{d}{dy} F_Y(y) = \frac{d}{dy}f_X\left(y^\tau\right) = \tau y^{\tau - 1} f_X(y^\tau).
+  \end{equation*}
+  When $\tau < 0$,
+  \begin{equation*}
+    F_Y(y) = P(Y \leq y) = P\left(X^{\frac{1}{\tau}} \leq y\right) = P\left( X \geq y^\tau \right) = \bar{F}_X(y^\tau)
+  \end{equation*}
+  and
+  \begin{equation*}
+    f_Y(y) = \frac{d}{dy} F_Y(y) = \frac{d}{dy} (1 - F_X\left(y^\tau\right)) = - \tau y^{\tau - 1} f_X\left(y^\tau\right).
+  \end{equation*}\qed
+\end{proof}
+
+\begin{eg}
+  Let $X \sim \Exp(\theta)$ and $Y = X^{\frac{1}{\tau}}$ for $\tau > 0$, we have
+  \begin{equation*}
+    F_Y(y) = F_X\left(t^{\tau}\right) = 1 - e^{ \frac{-y^\tau}{\theta} } = 1 - e^{-\left( \frac{y}{\alpha} \right)^\tau},
+  \end{equation*}
+  where $\alpha = \theta^{\frac{1}{\tau}}$. In particular, we have that $Y \sim \Wei(\alpha, \tau)$.
+\end{eg}
+
+% subsection raising_to_a_power (end)
+
+\subsection{Exponentiation}%
+\label{sub:exponentiation}
+% subsection exponentiation
+
+\begin{propo}[Exponentiation Method]
+\label{propo:exponentiation_method}
+  Let $X$ be a crv with pdf $f_X$ and cdf $F_X$. Let $Y = e^X$. Then
+  \begin{equation*}
+    F_Y(y) = F_X(\ln y), \quad f_Y(y) = \frac{1}{y} f_X(\ln y).
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  We have
+  \begin{equation*}
+    F_Y(y) = P\left( e^X \leq y \right) = P( X \leq \ln y ) = F_X(\ln y)
+  \end{equation*}
+  and
+  \begin{equation*}
+    f_Y(y) = \frac{d}{dy} F_Y(y) = \frac{d}{dy} F_X(\ln y) = \frac{1}{y} f_X(\ln y).
+  \end{equation*}\qed
+\end{proof}
+
+\begin{ex}[Lognormal Distribution]\label{eg:lognormal_distribution}
+  Let $X \sim \Nor(\mu, \sigma^2)$. The cdf and pdf of $Y = e^X$ is
+  \begin{gather*}
+    F_Y(y) = F_X(\ln y) = \Phi\left( \frac{\ln y - \mu}{\sigma} \right) \\
+    f_Y(y) = \frac{1}{y} f_X(\ln y) = \frac{1}{y} \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{1}{2} \cdot \left( \frac{\ln y - \mu}{\sigma} \right)^2}
+  \end{gather*}
+\end{ex}
+
+% subsection exponentiation (end)
+
+\subsection{Mixing Distributions}%
+\label{sub:mixing_distributions}
+% subsection mixing_distributions
+
+The rationale behind mixing distributions is to define an rv $X$ conditional on a second rv, say $\Theta$ (aka \hldefn{mixing rv}). The mixing rv $\Theta$ can either be discrete or be continuous, which leads to two types of mixtures:
+\begin{itemize}
+  \item \hlnotea{discrete mixture} : when $\Theta$ is discrete; and
+  \item \hlnotea{continuous mixture} : when $\Theta$ is continuous.
+\end{itemize}
+
+\begin{defn}[Discrete Mixed Distribution]\index{Discrete Mixed Distribution}
+\label{defn:discrete_mixed_distribution}
+  Let $\Theta$ be a drv taking values on $\{ \theta_1, \theta_2, ..., \theta_n \}$ with
+  \begin{equation*}
+    P(\Theta = \theta_i) = p_i > 0, \quad i = 1, ..., n,
+  \end{equation*}
+  and the rv $Y_i := X \mid \Theta = \theta_i$ has cdf
+  \begin{equation*}
+    F_{Y_i}(x) = P(X \leq x \mid \Theta = \theta_i), x \in \mathbb{R}.
+  \end{equation*}
+  Then $X$ is called a \hlnoteb{discrete mixed distribution} with cdf
+  \begin{equation*}
+  F_X(x) = \sum_{i=1}^{n} P(X \leq x \mid \Theta = \theta_i) P(\Theta = \theta_i) = \sum_{i=1}^{n} p_i F_{Y_i}(x).
+  \end{equation*}
+\end{defn}
+
+Following the above definition, by the Law of the Unconscious Statistician, we have
+\begin{equation*}
+  E[g(X)] = \sum^{n}_{i=1} E[g(X) \mid \Theta = \theta_i] P(\Theta = \theta_i) = \sum_{i=1}^{n} p_i E[g(Y_i)],
+\end{equation*}
+for any function $g$ such that the expectation exists. In particular, we have
+\begin{equation*}
+  E[X] = \sum_{i=1}^{n} p_i E[Y_i] \text{ and } E\left[ X^2 \right] = \sum_{i=1}^{n} p_i E\left[Y_i^2\right].
+\end{equation*}
+
+\begin{eg}
+  Let $Y_i \sim \Exp(i)$ for $i = 1, 2, 3$. Define $X$ to be an equal mixture of these three exponential rvs. Fidn the cdf, pdf, and mean of $X$.
+\end{eg}
+
+\begin{solution}
+  The cdf of $X$ is
+  \begin{align*}
+    F_X(x) &= \sum_{i=1}^{3} \frac{1}{3}F_{Y_i}(x) = \frac{(1 - e^{-x}) + (1 - e^{- x / 2}) + (1 - e^{-x / 3})}{3} \\
+           &= 1 - \frac{1}{3} \left( e^{-x} + e^{-\frac{x}{2}} + e^{-\frac{x}{3}} \right), x > 0.
+  \end{align*}
+  The pdf of $X$ is
+  \begin{equation*}
+    f_X(x) = \frac{1}{3} \left( e^{-x} + \frac{1}{2} e^{-\frac{x}{2}} + \frac{1}{3} e^{-\frac{x}{3}} \right), x > 0.
+  \end{equation*}
+  The mean of $X$ is therefore
+  \begin{equation*}
+    E[X] = \sum_{i=1}^{3} E[ Y_i ] = \frac{1}{3} ( 1 + 2 + 3 ) = 2.
+  \end{equation*}
+\end{solution}
+
+% subsection mixing_distributions (end)
+
+% section severity_distributions_creating_severity_distributions_continued (end)
+
+% chapter lecture_6_sep_25th (end)
 
 \appendix
 
