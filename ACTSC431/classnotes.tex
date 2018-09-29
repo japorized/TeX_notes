@@ -15,6 +15,9 @@
 \setsidenotefont{\color{base16-eighties-light}\footnotesize}
 \setmarginnotefont{\color{base16-eighties-light}\footnotesize}
 
+\DeclareMathOperator{\VaR}{VaR}
+\DeclareMathOperator{\TVaR}{TVaR}
+
 \begin{document}
 \hypersetup{pageanchor=false}
 \maketitle
@@ -84,14 +87,14 @@ In particular, the liability that we shall focus on is \hlnotea{insurance claims
   \begin{equation*}
     S = \sum_{i=1}^{n} X_i I_i
   \end{equation*}
-  where $I_i$ is the indicator function about the claimant of policy $i$, while $X_i$ represents the size of the claim(s) for the $i$\textsuperscript{th} policy provided that there is a claim.\sidenote{\hlimpo{This is actually incorrect, despite being in the recommended textbook. See \cref{chp:individual_risk_model_an_alternative_view}.}}
+  where $I_i$ is the indicator function about the claimant of policy $i$, while $X_i$ represents the size of the claim(s) for the $i$\textsuperscript{th} policy provided that there is a claim.\sidenote{\hlimpo{This is actually incorrect, despite being in the recommended textbook. See \cref{sec:individual_risk_model_an_alternate_view}.}}
 \end{note}
 
 However, in an individual risk model, according to Dhaene and Vyncke (2010)\cite{DhaeneVyncke2010},
 
-\begin{redquote}
+\begin{quotebox}{base16-eighties-red}
   A third type of error that may arise when computing aggregate claims follows from the fact that the assumption of mutual independency of the individual claim amounts may be violated in practice.
-\end{redquote}
+\end{quotebox}
 
 Due to complications such as this, the individual risk model will not be the focus of our studies.
 
@@ -722,11 +725,272 @@ The following is a type of mixed random variable:
 
 % chapter lecture_3_sep_13th (end)
 
+\chapter{Lecture 4 Sep 18th}%
+\label{chp:lecture_4_sep_18th}
+% chapter lecture_4_sep_18th
+
+\section{Distributional Quantities and Risk Measures (Continued)}%
+\label{sec:distributional_quantities_and_risk_measures_continued}
+% section distributional_quantities_and_risk_measures_continued
+
+\subsection{Risk Measures}%
+\label{sub:risk_measures}
+% subsection risk_measures
+
+\begin{defn}[Risk Measure]\index{Risk Measure}
+\label{defn:risk_measure}
+  A \hlnoteb{risk measure} is a mapping from the loss rv to the real line $\mathbb{R}$.
+\end{defn}
+
+Klugman, Panjer \& Wilmot (2012) \cite{KlugmanPanjerWillmot2012} on risk measure:
+
+\begin{quotebox}{base16-eighties-yellow}
+  The level of exposure to risk is often described by one number, or at least a small set of numbers. These numbers are necessarily functions of the model and are often called ‘key risk indicators’. Such key risk indicators indicate to risk managers the degree to which the company is subject to particular aspects of risk.
+\end{quotebox}
+
+To ensure its solvency, insurers will have to charge on these risks, i.e. we have to \hlnotea{price these exposures to risks}.
+
+\begin{defn}[Premium Principle]\index{Premium Principle}
+\label{defn:premium_principle}
+  A \hlnoteb{premium principle} (or \hldefn{insurance pricing}) is a rule for assigning a premium to an insurance risk.
+\end{defn}
+
+\begin{note}
+  The following are some of the common principles used by insurers:
+  \begin{itemize}
+    \item \hldefn{Expectation Principle}
+      \begin{equation*}
+        \Pi(X) = ( 1 + \theta ) E(X), \quad \theta > 0
+      \end{equation*}
+    \item \hldefn{Standard Deviation Principle}
+      \begin{equation*}
+        \Pi(X) = E(X) + \theta \sqrt{\Var(X)}, \quad \theta > 0
+      \end{equation*}
+    \item \hldefn{Dutch Principle}
+      \begin{equation*}
+        \Pi(X) = E(X) + \theta E( [ X - E(X) ]_+ ), \quad \theta > 0
+      \end{equation*}
+  \end{itemize}
+\end{note}
+
+One particular measure is known as the \hlnotea{Value-at-Risk} (VaR).
+
+\subsubsection{Value-At-Risk}
+\label{ssub:Value-At-Risk}
+
+\begin{defn}[Value-at-Risk (VaR)]\index{Value-at-Risk}\index{VaR}
+\label{defn:value_at_risk}
+The \hlnoteb{Value-at-Risk (VaR)} is a \hlnotea{quantile} of the distribution of aggregate losses, i.e. the $VaR$ of a risk $X$ at the $100\%p$ level is defined as\sidenote{I must find out why we define using $\inf$ instead of $\min$ (see following remark), and I will not take ``safe definition'' as an answer without full justification.}
+  \begin{align*}
+    \pi_p = \VaR_p (X) &= \inf \{ x \in \mathbb{R} : P (X > x) \leq 1 - p \} \\
+               &= \inf \{ x \in \mathbb{R} : P (X \leq x) \geq p \}.
+  \end{align*}
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item $\VaR$ is often called a \hldefn{quantile risk measure}.
+    \item $\VaR$ is the standard risk measure used to evaluate exposure to risks.
+    \item $\VaR$ measures the amount of capital required by the insurer to remain solvent, with high certainty, in the face of large claims.
+    \item In practice, $p$ is generally high: $99.95\%$ or as low as $95\%$.
+  \end{itemize}
+\end{note}
+
+\begin{remark}
+  Observe that\marginnote{This remark basically points out that the left endpoint of the interval $B$ is always included, which should be quite clear by right-continuity of $F$.}
+  \begin{equation*}
+    B = \{ x \in \mathbb{R} \mid F_X(x) \geq p \} = (A, \infty) \text{ or } [A, \infty)
+  \end{equation*}
+  for some $A \in \mathbb{R}$, since $F$ is an increasing function. Now let $x_0 \in B$ such that
+  \begin{equation*}
+    F(x_0) = P(X \leq x_0) \geq p \quad \land \quad F(x_0-) = P(X < x_0) \leq p,
+  \end{equation*}
+  i.e. it is not necessary that $P(X = x_0) = p$ (see the two example graphs on the margin).
+  \begin{marginfigure}
+    \begin{tikzpicture}
+      \draw[->] (0, 0) -- (4, 0) node[right] {$x$};
+      \draw[->] (0, 0) -- (0, 4) node[above] {$F(x)$};
+      \draw (0, 1) -- (1, 1);
+      \draw (1, 2) -- (2, 2);
+      \draw[->] (2, 3) -- (4, 3);
+      \node[circle,fill,inner sep=1pt] at (1, 2) {};
+      \node[circle,fill,inner sep=1pt] at (2, 3) {};
+      \node[circle,draw,inner sep=1pt] at (1, 1) {};
+      \node[circle,draw,inner sep=1pt] at (2, 2) {};
+      \draw[dotted] (4, 1.5) -- (0, 1.5) node[left] {$p$};
+      \draw[dotted] (1, 2) -- (1, 0) node[below] {$x_0$};
+    \end{tikzpicture}
+    \caption{Discrete cdf}
+  \end{marginfigure}
+  \begin{marginfigure}
+    \begin{tikzpicture}
+      \draw[->] (0, 0) -- (4, 0) node[right] {$x$};
+      \draw[->] (0, 0) -- (0, 4) node[above] {$F(x)$};
+      \draw[->,smooth,domain=0:4] plot (\x,{sqrt(\x)});
+      \draw[dotted] (4, 1.5) -- (0, 1.5) node[left] {$p$};
+      \draw[dotted] (2.25, 2) -- (2.25, 0) node[below] {$x_0$};
+      \node[circle,fill,inner sep=1pt] at (2.25,1.5) {};
+    \end{tikzpicture}
+    \caption{Continuous cdf}
+  \end{marginfigure}
+  Let $\{ x_n \}_{n \in \mathbb{N}}$ be a decreasing sequence of points on $\mathbb{R}$ such that $x_n \to x_0$ as $n \to \infty$. Since $F$ is right-continuous, we have that $F(x_n) \to F(x_0)$ as $n \to \infty$. Therefore,
+  \begin{equation*}
+    B = [ x_0 , \infty )
+  \end{equation*}\marginnote{The lecturer asserts that we can really define $\VaR$ using $\min$ instead of $\inf$, but even with this, I am not completely satisfied or convinced.}
+  This justifies the definition of $\pi_p$.
+\end{remark}
+
+\begin{note}
+  \begin{itemize}
+    \item Note that by definition, we have
+      \begin{equation*}
+        P(X < \pi_p) \leq p \leq P(X \leq \pi_p)
+      \end{equation*}
+    \item If $X$ is a crv whose cdf is strictly increasing, i.e. no constant points, then
+      \begin{equation*}
+        \pi_p = F^{-1}(p)
+      \end{equation*}
+      since $P(X < \pi_p) = P(X \leq \pi_p)$.
+  \end{itemize}
+\end{note}
+
+\begin{warning}[Shortcomings of $\VaR$]
+  \begin{itemize}
+    \item $\VaR$ cannot tell us the size of the potential loss in the $100(1 - p)\%$ cases, making it difficult for us to prepare the right amount in order to safeguard against insolvency.
+    \item $\VaR$ actually fails to satisfy properties to be a \hlnotea{coherent risk measure}\sidenote{See \cref{sec:coherent_risk_measure}.}, for example, \hlnotea{subadditivity}.
+    \item $\VaR$ is extensively used in financial risk management of trading risk over a fixed (usually short) time period, which are usually normally distributed, and $\VaR$ satisfies all coherency requirements.
+    \item In insurance losses, instead of normal distributions, in general, skewed distributions are used, and in this cases, $\VaR$ is flawed as it lacks subadditivity.
+  \end{itemize}
+\end{warning}
+
+\begin{eg}
+  Suppose that $X$ has a Pareto distribution with cdf
+  \begin{equation*}
+    F(x) = 1 - \left( \frac{\theta}{x + \theta} \right)^\alpha , \quad x > 0
+  \end{equation*}
+  where $\alpha, \theta > 0$. Find $\VaR_p(X)$.
+\end{eg}
+
+\begin{solution}
+  Since $F$ is continuous and strictly increasing, we have that
+  \begin{equation*}
+    \pi_p = F^{-1}(p) = \theta \left[ (1 - p)^{-\frac{1}{\alpha}} - 1 \right]
+  \end{equation*}
+\end{solution}
+
+\begin{eg}
+  Find $\VaR_{0.95}(X)$, $\VaR_{0.5}(X)$, and $\VaR_{0.3}(X)$ for a random loss with pmf
+  \begin{equation*}
+    p(0) = 0.25, \, p(1) = 0.25, \, \text{ and } p(2) = 0.5.
+  \end{equation*}
+\end{eg}
+
+\begin{solution}
+  Note that the cdf of $X$ is
+  \begin{equation*}
+    F(x) = \begin{cases}
+      0    & x < 0 \\
+      0.25 & 0 \leq x < 1 \\
+      0.5  & 1 \leq x < 2 \\
+      1    & x \geq 2
+    \end{cases}.
+  \end{equation*}
+  Therefore,
+  \begin{equation*}
+    \VaR_{0.95}(X) = 2, \, \VaR_{0.5}(X) = 1, \, \text{ and } \VaR_{0.3}(X) = 1.
+  \end{equation*}
+\end{solution}
+
+\subsubsection{Tail-Value-at-Risk}
+\label{ssub:Tail-Value-at-Risk}
+
+To compensate for the weakness of $\VaR$ at giving us the size of the the loss $X$ of which we cannot measure, we use the \hlnotea{Tail-Value-at-Risk}.
+
+\begin{defn}[Tail-Value-at-Risk (TVaR)]\index{Tail-Value-at-Risk}
+\label{defn:tail_value_at_risk}
+  Let $X$ be an rv. The \hlnoteb{Tail-Value-at-Risk (TVaR)} of $X$ at the $100p\%$ level, denoted as $\TVaR_p(X)$, is defined as the average of all $\VaR$ values above the level $p$, and expressed as
+  \begin{equation*}
+    \TVaR_p(X) = \frac{1}{1 - p} \int_{p}^{1} \VaR_\alpha(X) \dif{\alpha} = \frac{1}{1 - p} \int_{p}^{1} \pi_\alpha \dif{\alpha}
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  By considering the average of $\VaR$ from $p$'s going up to $1$, we take into account even the extreme cases of which $\VaR$ fails to account for.
+\end{remark}
+
+Perhaps a clearer definition would be the following, although the expression is only sensible if $X$ is a crv:
+
+\begin{defn}[Tail-Value-at-Risk (TVaR)]\index{Tail-Value-at-Risk}
+\label{defn:tail_value_at_risk_v2}
+  Let $X$ be an rv. The \hlnoteb{Tail-Value-at-Risk (TVAR)} of $X$ at the $100p\%$ level, denoted $\TVaR_p(X)$, is the expected loss given that the loss exceeds the $100p$ percentile (or quantile) of the distribution of $X$, expressible as
+  \begin{equation*}
+    \TVaR_p(X) = E[ X \mid X > \pi_p ] = \frac{1}{\bar{F}(\pi_p)} \int_{\pi_p}^{\infty} x f(x) \dif{x}.
+  \end{equation*}
+\end{defn}
+
+Note that the two definitions agree with one another:
+
+\begin{align*}
+  \frac{1}{1 - p} \int_{p}^{1} \pi_\alpha \dif{\alpha} &= \frac{1}{1 - F(\pi_p)} \int_{p}^{1} F^{-1}(\alpha) \dif{\alpha} \\
+                                                       &= \frac{1}{\bar{F}(\pi_p)} \int_{\pi_p}^{1} x f(x) \dif{x}
+\end{align*}
+where we let $\alpha = F(x)$ as substitution.
+
+\begin{note}
+  While it is not difficult to notice that
+  \begin{equation*}
+    \TVaR_p(X) \geq \VaR_p(X),
+  \end{equation*}
+  the proof is also simple:
+  \begin{align*}
+    \TVaR_p(X) &= \frac{1}{1 - p} \int_{p}^{1} \pi_\alpha \dif{\alpha} \\
+               &\geq \frac{1}{1 - p} \pi_p \int_{p}^{1} \dif{\alpha} = \pi_p = \VaR_p(X).
+  \end{align*}
+\end{note}
+
+\begin{eg}
+  Find $\TVaR_p(X)$ for $X \sim \Exp(\theta)$.
+\end{eg}
+
+\begin{solution}
+  Since $X$ is a crv, and $F(x) = 1 - e^{- \frac{x}{\theta}}$, we have that
+  \begin{equation*}
+    \pi_p = F^{-1}(p) = - \theta \ln (1 - p).
+  \end{equation*}
+  Therefore,
+  \begin{align*}
+    \TVaR_p(X) &= \frac{1}{1 - p} \int_{p}^{1} \pi_\alpha \dif{\alpha} = \frac{- \theta}{1 - p} \int_{p}^{1} \ln (1 - \alpha) \dif{\alpha} \\
+               &= \frac{- \theta}{1 - p} \int_{-\infty}^{\ln (1 - p)} ue^u \dif{u} \quad \text{ let } u = \ln ( 1 - \alpha ) \\
+               &= \frac{-\theta}{1 - p} \left[ ue^u \at{-\infty}{\ln (1 - p)} - \int_{-\infty}^{\ln(1-p)} e^u \dif{u} \right] \text{ by IBP } \\
+               &= \frac{-\theta}{1 - p} \left[ (1 - p) \ln (1 - p) - ( 1 - p ) \right]\\
+               &= \theta [ 1 - \ln (1 - p) ]
+  \end{align*}
+\end{solution}
+
+\begin{note}
+  From the last example, by the memoryless property of $\Exp(\theta)$, notice that we may also do
+  \begin{align*}
+    \TVaR_p(X) &= E[ X \mid X > \pi_p ] = E [ X - \pi_p + \pi_p \mid X > \pi_p ] \\
+               &= E[ X - \pi_p \mid X > \pi_p ] + E[ \pi_p \mid X > \pi_p ] \\
+               &= E[ X ] + \pi_p
+  \end{align*}
+\end{note}
+
+% subsection risk_measures (end)
+
+% section distributional_quantities_and_risk_measures_continued (end)
+
+% chapter lecture_4_sep_18th (end)
+
 \appendix
 
-\chapter{Individual Risk Model: An Alternative View}%
-\label{chp:individual_risk_model_an_alternative_view}
-% chapter individual_risk_model_an_alternative_view
+\chapter{Additional Material}%
+\label{chp:additional_material}
+% chapter additional_material
+
+\section{Individual Risk Model: An Alternate View}%
+\label{sec:individual_risk_model_an_alternate_view}
+% section individual_risk_model_an_alternate_view
 
 \textit{This appendix serves to explain why our note of $Z_i = I_i X_i$ is wrong with as mush rigour as we can go for now. There may be hand-wavy parts, but those will be indicated.} 
 
@@ -750,9 +1014,9 @@ while $X_i$ is the size of the claim(s) for the $i$\textsuperscript{th} policy p
 \newthought{One problem} that arises is: are $X_i$ and $I_i$ independent? They should be if we wish to define $Z_i$ in such a way. In fact, according to \\
 \noindent\textcolor{base16-eighties-magenta}{\underline{Klugman et. al. in page 177}},
 
-\begin{magentaquote}
+\begin{quotebox}{base16-eighties-magenta}
   Let $X_j = I_j B_j$, where $I_1, ..., I_n, B_1, ..., B_n$ are independent.
-\end{magentaquote}
+\end{quotebox}
 
 where $X_j$ is our $Z_i$, $I_j$ is our $I_i$, and $B_j$ is our $X_i$.
 
@@ -782,7 +1046,61 @@ Our best attempt at fixing this is probably the following: let
 \end{equation*}
 which we can then have $X_i$ to be independent from $I_i$. However, interestingly so, this is a very similar approach to a \hyperref[defn:collective_risk_model]{Collective Risk Model}.
 
-% chapter individual_risk_model_an_alternative_view (end)
+% section individual_risk_model_an_alternate_view (end)
+
+\section{Coherent Risk Measure}%
+\label{sec:coherent_risk_measure}
+% section coherent_risk_measure
+
+An excerpt from Klugman et. al. (2012)\cite{KlugmanPanjerWillmot2012}:
+
+\begin{quotebox}{base16-eighties-magenta}
+  The study of risk measures and their properties has been carried out by authors such as Wang. Specific desirable properties of risk measures were proposed as axioms in connection with risk pricing by Wang, Young, and Panjer and more generally in risk measurement by Artzer et. al. The Artzner paper introduced the concept of \textbf{coherence} and is considered to be the groundbreaking paper in risk measurement.
+\end{quotebox}
+
+Often, we use the function $\rho(X)$ to denote risk measures. One may think of $\rho(X)$ as \hlnotec{the amount of assets required to protect against adverse outcomes of the risk $X$}.
+
+\begin{defn}[Coherent Risk Measure]\index{Coherent Risk Measure}
+\label{defn:coherent_risk_measure}
+  A \hlnoteb{coherent risk measure} is a risk measure $\rho(X)$ that has the following four properties for any two loss rvs $X$ and $Y$:
+  \begin{enumerate}
+    \item (\hlnotea{Subadditivity}) $\rho(X + Y) \leq \rho(X) + \rho(Y)$.
+    \item (\hlnotea{Monotonicity}) If $X \leq Y$ for all possible outcomes, then $\rho(X) \leq \rho(Y)$.
+    \item (\hlnotea{Positive homogeneity}) $\forall c \in \mathbb{R}_{> 0}$, $\rho(cX) = c\rho(X)$.
+    \item (\hlnotea{Translation invariance}) $\forall c \in \mathbb{R}_{> 0}$, $\rho(X + c) = \rho(X) + c$
+  \end{enumerate}
+\end{defn}
+
+\paragraph{Interpretation of the conditions}
+
+\begin{itemize}
+  \item \textbf{Subadditivity}
+    \begin{itemize}
+      \item the risk measure (and in return, the capital required to cover for it) for two risks combined will not be greater than for the risks to be treated separately;
+      \item reflects the fact that there shuld be some diversification benefit from combining risks;
+      \item this requirement is disputed: e.g. the merger of several small companies into a larger one exposes each of the small companies to the \hlnotea{reputational risks} of the others.
+    \end{itemize}
+
+  \item \textbf{Monotonicity}
+    \begin{itemize}
+      \item if one risk always has greater losses than the other under all circumstances\sidenote{Probabilistically, this means $P(X > Y) = 0$}, then the risk measure of the greater risk should always be greater than the other.
+    \end{itemize}
+
+  \item \textbf{Positive homogeneity}
+    \begin{itemize}
+      \item the risk measure is independent of the currency used to measure it;
+      \item doubling the exposure to a particular risk requires double the capital, which is sensible as doubling provides no diversification.
+    \end{itemize}
+
+  \item \textbf{Translation invariance}
+    \begin{itemize}
+      \item there is no additional risk for an additional risk which has no additional uncertainty.
+    \end{itemize}
+\end{itemize}
+
+% section coherent_risk_measure (end)
+
+% chapter additional_material (end)
 
 \backmatter
 

@@ -1,26 +1,28 @@
-\documentclass[11pt, oneside]{book}
+\documentclass[12pt]{tufte-handout}
+\renewcommand{\baselinestretch}{1.1}
 
 \include{latex-assignments-preamble}
 
-% Main Body
 \title{title}
 \author{Johnson Ng}
 
 \begin{document}
 
-\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} l @{\extracolsep{\fill}} l @{\extracolsep{\fill}} l}
-	Student name &: Ng Keng Seng	&	UW ID\#		&: 20635817 \\
-	Class 		 &: CLASSCODE		&	Assignment 	&: \# \\
-	Term 		 &: TERM 20XX
+\begin{fullwidth}
+\begin{tabular*}{\linewidth}{l @{\extracolsep{\fill}} l @{\extracolsep{\fill}} l @{\extracolsep{\fill}} l}
+	Student name & : Ng Keng Seng & UW ID\#    & : 20635817 \\
+	Class        & : CLASSCODE    & Assignment & : \# \\
+	Term         & : TERM 20XX
 \end{tabular*}
 
 \hrule
+\end{fullwidth}
 
 \begin{enumerate}
-	\item Question
-	\begin{tcolorbox}[arc=0mm, breakable, enhanced]
+	\item Question\marginnote{$\downarrow$ for markings and comments}
+	\begin{solbox}
     Solution
-	\end{tcolorbox}
+	\end{solbox}
 \end{enumerate}
 
 \end{document}

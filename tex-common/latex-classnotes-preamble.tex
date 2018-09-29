@@ -369,6 +369,15 @@
   {}% before the title body
   []% after the title body
 
+% subsubsection format
+\titleclass{\subsubsection}{straight}
+\titleformat{\subsubsection}%
+  {\normalfont\large\itshape\color{base16-eighties-yellow}}% format applied to label+text
+  {\llap{\colorbox{base16-eighties-yellow}{\parbox{1.5cm}{\hfill\textcolor{base16-eighties-dark}{\thesubsection}}}}}% label
+  {1em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
 % Sidenote enhancements
 \def\mathmarginnote#1{%
   \tag*{\rlap{\hspace\marginparsep\smash{\parbox[t]{\marginparwidth}{%
