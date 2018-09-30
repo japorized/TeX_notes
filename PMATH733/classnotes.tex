@@ -15,6 +15,8 @@
 \newcommand{\class}[1]{\left\llbracket \enspace #1 \enspace \right\rrbracket}
 \DeclareMathOperator{\Ord}{Ord }
 \DeclareMathOperator{\Set}{Set }
+\DeclareMathOperator{\Dom}{Dom }
+\DeclareMathOperator{\Img}{Im }
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -905,7 +907,7 @@ Let $\Ord$ denote the class of all ordinals. We shall show later that $\Ord$ is 
   \begin{enumerate}
     \item Suppose $x \in \beta \in \Ord$. WTS $x \in \Ord$, and we shall show that $x$ satisfies \cref{defn:ordinals}.
 
-      Since $\beta \in \Ord, \, x \in \beta \implies x \subseteq \beta$. Thus $(x, \in)$ is a strict well-ordering (through inheriting the property). So it suffices to show that $y \in x \implues y \subseteq x$. So let $y \in x$, and let $t \in x$ \sidenote{To show that $y \subseteq x$, we need to show that $\forall t \in y$, $t \in x$.}. Observe that
+      Since $\beta \in \Ord, \, x \in \beta \implies x \subseteq \beta$. Thus $(x, \in)$ is a strict well-ordering (through inheriting the property). So it suffices to show that $y \in x \implies y \subseteq x$. So let $y \in x$, and let $t \in x$ \sidenote{To show that $y \subseteq x$, we need to show that $\forall t \in y$, $t \in x$.}. Observe that
       \begin{align*}
         t \in y &\implies t < y \\
         y \in x &\implies y < x
@@ -1091,6 +1093,315 @@ We want to use Transfinite Recursion to construct definite operations on ordinal
 % section ordinals_continued_4 (end)
 
 % chapter lecture_5_sep_20th (end)
+
+\chapter{Lecture 6 Sep 25th}%
+\label{chp:lecture_6_sep_25th}
+% chapter lecture_6_sep_25th
+
+\section{Ordinals (Continued 5)}%
+\label{sec:ordinals_continued_5}
+% section ordinals_continued_5
+
+\subsection{Transfinite Induction \& Recursion (Continued)}%
+\label{sub:transfinite_induction_n_recursion_continued}
+% subsection transfinite_induction_n_recursion_continued
+
+\begin{thm}[Transfinite Recursion v1]
+\index{Transfinite Recursion}
+\label{thm:transfinite_recursion_v1}
+  Let $X$ be a class of all definite operations whose domain is an ordinal. Given a definite operation
+  \begin{equation*}
+    G : X \to \Set
+  \end{equation*}
+  $\exists ! F : \Ord \to \Set$, a definite operation, such that $F(\alpha = F(F \restriction_{\alpha}))$, for all $\alpha \in \Ord$.
+\end{thm}
+
+Before proving the theorem, we shall note the following definition.
+
+\begin{defn}[$\alpha$-function]\index{$\alpha$-function}
+\label{defn:alpha_function}
+  Using definitions in \cref{thm:transfinite_recursion}, a function $t$ with domain in the ordinals is called an \hlnoteb{$\alpha$-function} defined by $G$ if
+  \begin{equation*}
+    \forall \beta < \alpha \quad t(\beta) = G(t \restriction_\beta).
+  \end{equation*}
+\end{defn}
+
+\begin{proof}
+  We shall first prove for \textbf{uniqueness}. Suppose $F$ and $F'$ are two definition operations such that
+  \begin{gather*}
+    F: \Ord \to \Set \quad F' : \Ord \to \Set \\
+    F(\alpha) = G(F\restriction_\alpha) \quad F'(\alpha) = G(F'\restriction_\alpha)
+  \end{gather*}
+
+  \sidenote{Here, we want to use \hyperref[thm:transfinite_induction_theorem_v1]{Transfinite Induction v1} to show that they are unique.}Suppose $\forall \beta < \alpha \in \Ord$, we have $F(\beta) = F'(\beta)$. Note that
+  \begin{gather*}
+    F(\beta) = F'(\beta) \iff F\restriction_\alpha = F'\restriction_\alpha \\
+    \implies F(\alpha) = G(F\restriction_\alpha) = G(F'\restriction_\alpha) = F'(\alpha)
+  \end{gather*}
+  Thus, uniqueness of $F$ is guaranteed.
+
+  To prove existence, firstly, we note that the $\alpha$-functions defined in \cref{defn:alpha_function} are approximations to the $F$ that we want. However, before going further, we need to show that they are also unique and that we can form a chain of extensions on these functions over $\Ord$.
+
+  \paragraph{Uniqueness of $t_\alpha$} Let $t, t'$ be a $\alpha$-functions defined by $G$. WTS $\forall \beta < \alpha$, $t(\beta) = t'(\beta)$. If an $\alpha$-function defined by $G$ exists, we shall denote it as $t_\alpha$.
+
+  Consider the definite condition
+  \begin{equation*}
+    P(x) := ( x \geq \alpha ) \lor ( t(x) = t'(x) ).
+  \end{equation*}
+  Suppose that $\forall \gamma < \beta$, $P(\gamma)$ holds, i.e. $\gamma \geq \alpha$ or $t(\gamma) = t'(\gamma)$, which implies that $t\restriction_\beta = t'\restriction_\beta$. Therefore $t(\beta) = t'(\beta)$, i.e. $P(\beta)$ holds. Thus $t_\alpha$ is unique if it exists by Transfinite Induction.
+
+  \paragraph{$t_\alpha$ as a chain of extensions} Now $\forall \beta < \alpha \in \Ord$, we have that $\beta \subseteq \alpha$. If $t_\alpha$ and $t_\beta$ exist, then
+  \begin{equation*}
+    \Gamma(t_\beta) \subseteq \Gamma(t_\alpha),
+  \end{equation*}
+  or in other words
+  \begin{equation*}
+    t_\alpha \restriction_\beta = t_\beta.
+  \end{equation*}
+  We shall denote this relation as $t_\beta \subseteq t_\alpha$.
+
+  \paragraph{Existence of $t_\alpha$} The existence of $t_\alpha$ is a definite condition: by the Replacement Axiom, a function that maps $\alpha \mapsto t_\alpha$ is definite, and by Bounded Separation Axiom, the set
+  \begin{equation*}
+    \Gamma(t_\alpha) = \{ (\beta, G(t_\alpha \restriction_\beta) \mid \beta < \alpha, t_\alpha(\beta) = G(t_\alpha \restriction_\beta) \} \subseteq \Ord \times \Set
+  \end{equation*}
+  exists. \sidenote{We use Transfinite Induction v2 to CTP.}Now $t_0 = t_\emptyset$ is vacuously true. Suppose for any successor ordinal $\alpha$, $t_\alpha$ exists. Since $\alpha \in \Ord$, we have that there is nothing between $\alpha$ and its successor $S(\alpha)$, and $\alpha < S(\alpha)$. Thus
+  \begin{equation*}
+    t_{S(\alpha)} = t_\alpha \cup \{ (\alpha, G(t_\alpha)) \},
+  \end{equation*}
+  which exists by Union Set Axiom. We see that $t_{S(\alpha)}$ extends $t_\alpha$ onto $\alpha$ itself.
+
+  Suppose $\alpha > 0$ is a limit ordinal. Since $t_\alpha$ is a definite condition by Replacement, by Bounded Separation, we have that\sidenote{\hlwarn{Verify the motivation in using or the reason behind getting this.}}
+  \begin{equation*}
+    t_\alpha = \bigcup_{\beta < \alpha} t_\beta = \cup \{ t_\beta : \beta < \alpha \}.
+  \end{equation*}
+  Note that $t_\alpha$ is, indeed, an $\alpha$-function defined by $G$:
+  \begin{itemize}
+    \item $t_\alpha$ is a function on $\alpha$: we have that $\forall \beta < \alpha$,the $t_\beta$'s form a chain of extensions;
+    \item $t_\alpha$ is an $\alpha$-function defined by $G$: $\forall \beta < \alpha$, since $\alpha$ is a limit ordinal, $S(\beta) < \alpha$, and so
+      \begin{equation*}
+        t_\alpha(\beta) = t_{S(\beta)}(\beta) = G(t_{S(\beta)} \restriction_\alpha) = G(t_\beta \restriction_\alpha).
+      \end{equation*}
+  \end{itemize}
+  And so by Transfinite Induction, $\forall \alpha \in Ord$, $t_\alpha$ exists as required.
+
+  \paragraph{Construction of $F$} Now for any $\beta < \alpha$, we have a chain of extensions
+  \begin{equation*}
+    t_0 \subseteq t_1 \subseteq t_2 \subseteq \hdots \subseteq t_\beta \subseteq t_\alpha \subseteq \hdots
+  \end{equation*}
+
+  Let\sidenote{I will leave the proof unfinished here. \hlwarn{Need to verify my understanding}}
+  \begin{equation*}
+    F := \bigcup_{\alpha \in \Ord} t_\alpha = \cup \class{ t_\alpha \mid \alpha \in \Ord }
+  \end{equation*}
+\end{proof}
+
+\begin{crly}[Transfinite Recusions v2]
+\index{Transfinite Recusions}
+\label{crly:transfinite_recusions_v2}
+  Given $G_1 \in \Set$, $G_2 : \Set \to \Set$ a definite operation, $G_3 : X \to \Set$ a definite operation, where $X$ is the class of all definite opeartion whose domain is an ordinal. Then
+  \begin{equation*}
+    \exists ! F : \Ord \to \Set
+  \end{equation*}
+  such that
+  \begin{enumerate}
+    \item $F(0) = G_1$;
+    \item $\forall \alpha \in \Ord \enspace F(S(\alpha)) = G_2(F(\alpha))$; and
+    \item $\forall \beta > 0$ a limit ordinal, $F(\beta) = G_3(F\restriction_\beta)$.
+  \end{enumerate}
+\end{crly}
+
+\begin{proof}
+  The result is clear by \hyperref[thm:transfinite_induction_theorem_v1] with $G : X \to Set$ defined by
+  \begin{equation*}
+    G(f) = \begin{cases}
+      G_1            & f = \emptyset \\
+      G_2(f(\alpha)) & \Dom(f) = S(\alpha) \\
+      G_3(f)         & \Dom(f) > 0 \text{ a limit ordinal }
+    \end{cases}
+  \end{equation*}\qed
+\end{proof}
+
+% subsection transfinite_induction_n_recursion_continued (end)
+
+\subsection{Ordinal Arithmetric}%
+\label{sub:ordinal_arithmetric}
+% subsection ordinal_arithmetric
+
+\subsubsection{Ordinal Addition}
+\label{ssub:Ordinal Addition}
+
+\begin{defn}[Ordinal Addition]\index{Ordinal Addition}
+\label{defn:ordinal_addition}
+  Let $\beta \in \Ord$. For any $\alpha \in \Ord$, we define
+  \begin{equation*}
+    \beta + \alpha
+  \end{equation*}
+  using Transfinite Recursion\sidenote{Note that we are using \cref{crly:transfinite_recusions_v2} with
+  \begin{align*}
+    G_1 &= \beta \\
+    G_2 &= S : \Set \to \Set \\
+    G_3 &: X \to \Set \text{ by } G_3(f) = \sup \Img(f)
+  \end{align*}
+  } on $\alpha$ as follows:
+  \begin{itemize}
+    \item $\beta + 0 := \beta$;
+    \item if $\alpha$ is a successor ordinal, then $\beta + S(\alpha) := S(\beta + \alpha)$; and
+    \item if $\alpha > 0$ is a limit ordinal, then $\beta + \alpha := \sup \{ \beta + \gamma : \gamma < \alpha \}$.
+  \end{itemize}
+\end{defn}
+
+\begin{ex}
+  Using both the Induction Principle and Transfinite Induction, prove that $\beta + \alpha \in \Ord$.
+\end{ex}
+
+\begin{eg}
+  We have that
+  \begin{equation*}
+    0, 1, 2, ..., \omega, \omega + 1, \omega + 2, ..., \omega + \omega
+  \end{equation*}
+  Observe that
+  \begin{equation*}
+    \omega + 1 = \omega + S(0) = S(\omega + 0) = S(\omega)
+  \end{equation*}
+  and so $\omega + 1$ is a successor to $\omega$. In general, we have that $\forall \alpha \in \Ord$, $\alpha + 1 = S(\alpha)$. For example,
+  \begin{equation*}
+    \omega + 2 = \omega + S(1) = S(\omega + 1).
+  \end{equation*}
+  On the other hand, note that
+  \begin{equation*}
+    \omega + \omega = \sup \{ \omega + n : n \in \omega \}.
+  \end{equation*}
+  Unlike regular addition, ordinal addition is not commutative. For instance, while $\omega + 1 = S(\omega)$,
+  \begin{equation*}
+    1 + \omega = \{ 1 + n : n \in \omega \} = \omega.
+  \end{equation*}
+\end{eg}
+
+\begin{ex}
+  Prove that ordinal addition is only commutative for ``finite'' ordinals.
+\end{ex}
+
+\subsubsection{Ordinal Multiplication}
+\label{ssub:Ordinal Multiplication}
+
+\begin{defn}[Ordinal Multiplication]\index{Ordinal Multiplication}
+\label{defn:ordinal_multiplication}
+  Let $\beta \in \Ord$. For any $\alpha \in Ord$, we define
+  \begin{equation*}
+    \beta \cdot \alpha
+  \end{equation*}
+  using Transfinite Recusion\sidenote{Here, we use
+  \begin{align*}
+    G_1    & = 0 \\
+    G_2    & : \Set \to \Set \text{ by } G_2(x) = x + \beta \\
+    G_3(f) & = \sup \Img(f)
+  \end{align*}
+  } as follows:
+  \begin{itemize}
+    \item $\beta \cdot 0 := 0$;
+    \item if $\alpha$ is a successor ordinal, $\beta \cdot S(\alpha) := \beta \alpha + \beta$ \\
+    \item if $\alpha > 0$ is a limit ordinal, $\beta \cdot \alpha := \sup \{ \beta \cdot \gamma : \gamma < \alpha \}$.
+  \end{itemize}
+\end{defn}
+
+\begin{eg}
+  We have
+  \begin{equation*}
+    \omega \cdot 1 = \omega \cdot S(0) = \omega \cdot 0 + \omega = 0 + \omega = \omega.
+  \end{equation*}
+\end{eg}
+
+\begin{ex}
+  Prove that in general, $\forall \beta \in \Ord$, we have $\beta \cdot 1 = \beta$.
+\end{ex}
+
+\begin{ex}
+  Prove that $\forall \alpha, \beta \in \Ord$, $\alpha \cdot \beta \in \Ord$.
+\end{ex}
+
+\begin{eg}
+  We have
+  \begin{equation*}
+    \omega \cdot 2 = \omega \cdot S(1) = \omega \cdot 1 + \omega = \omega + \omega.
+  \end{equation*}
+\end{eg}
+
+\begin{ex}
+  Prove that in general, $\forall \beta \in \Ord$, we have $\beta + \beta$.
+\end{ex}
+
+Note that ordinal multiplication, like its addition counterpart, is not necessarily commutative.
+
+\begin{eg}
+  While we have
+  \begin{equation*}
+    1 \cdot \omega = \sup \{ 1 \cdot n \mid n \in \omega \} = \omega = \omega \cdot 1,
+  \end{equation*}
+  observe that
+  \begin{equation*}
+    2 \cdot \omega = \sup \{ 2 \cdot n \mid n \in \omega \} = \omega \neq \omega + \omega = \omega \cdot 2.
+  \end{equation*}
+\end{eg}
+
+\begin{propo}[Properties of Ordinal Addition \-and Ordinal Multiplication]
+\label{propo:properties_of_ordinal_addition_and_ordinal_multiplication}
+  Let $\alpha, \beta, \delta \in \Ord$.\marginnote{
+  \begin{ex}
+    Prove \cref{propo:properties_of_ordinal_addition_and_ordinal_multiplication}.
+  \end{ex}}
+  \begin{itemize}
+    \item $\alpha < \beta \iff \delta + \alpha < \delta + \beta$;
+    \item $\alpha = \beta \iff \delta + \alpha = \delta + \beta$;
+    \item (\hlnotea{(associativity)}) $(\alpha + \beta) + \delta = \alpha + (\beta + \delta)$;
+    \item if $\delta \neq 0$, then $\alpha < \beta \iff \delta \alpha < \delta \beta$;
+    \item if $\delta \neq 0$, then $\alpha = \beta \iff \delta \alpha = \delta \beta$;
+    \item $(\alpha\beta)\delta = \alpha(\beta\delta)$.
+  \end{itemize}
+\end{propo}
+
+\subsubsection{Ordinal Exponentiation}
+\label{ssub:Ordinal Exponentiation}
+
+\begin{defn}[Ordinal Exponentiation]\index{Ordinal Exponentiation}
+\label{defn:ordinal_exponentiation}
+  Let $\beta \in \Ord$. For any $\alpha \in \Ord$, define
+  \begin{equation*}
+    \beta^\alpha
+  \end{equation*}
+  using Transfinite Recursion by
+  \begin{itemize}
+    \item $\beta^0 := 1$;
+    \item if $\alpha$ is a successor ordinal, then $\beta^{S(\alpha)} := \beta^{\alpha} \cdot \beta$;
+    \item if $\alpha > 0$ is a limit ordinal, then $\beta^\alpha := \sup \{ \beta^\gamma \mid \gamma < \alpha \}$.
+  \end{itemize}
+\end{defn}
+
+% subsection ordinal_arithmetric (end)
+
+In the next lecture, we shall study the following theorem:
+
+\begin{thmnonum}[Strict Well-Ordered Sets are Isomorphic to a Unique Ordinal]
+  Every strict well-ordering is isomorphic to an ordinal Both the ordinal and the isomorphism are unique.
+\end{thmnonum}
+
+The definition of isomorphism is:
+
+\begin{defn}[Isomorphism]\index{Isomorphism}
+\label{defn:isomorphism}
+  Let $E, F$ be sets and $R, S$ be relations defined on each set respectively so. We say that $(E, R)$ and $(F, S)$ are \hldefn{isomorphic}, which we denote by
+  \begin{equation*}
+    (E, R) \simeq (F, S),
+  \end{equation*}
+  if $\exists f : E \to F$, a bijection, such that
+  \begin{equation*}
+    e_1 R e_2 \iff f_1 S f_2.
+  \end{equation*}
+  Such an $f$ is called an \hlnoteb{isomorphism}.
+\end{defn}
+
+% section ordinals_continued_5 (end)
+
+% chapter lecture_6_sep_25th (end)
 
 \appendix
 
