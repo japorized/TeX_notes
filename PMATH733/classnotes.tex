@@ -12,7 +12,11 @@
 \usepackage{stmaryrd}
 \input{latex-classnotes-preamble.tex}
 
+\newcommand{\discup}{\; \overset{\cdot}{\cup} \;}
+\newcommand{\bigdiscup}{\overset{\cdot}{\bigcup}}
 \newcommand{\class}[1]{\left\llbracket \enspace #1 \enspace \right\rrbracket}
+\newcommand{\injection}[1]{\overset{#1}{\hookrightarrow}}
+\newcommand{\surjection}[1]{\overset{#1}{\hookleftarrow}}
 \DeclareMathOperator{\Ord}{Ord }
 \DeclareMathOperator{\Set}{Set }
 \DeclareMathOperator{\Dom}{Dom }
@@ -1381,7 +1385,7 @@ Note that ordinal multiplication, like its addition counterpart, is not necessar
 In the next lecture, we shall study the following theorem:
 
 \begin{thmnonum}[Strict Well-Ordered Sets are Isomorphic to a Unique Ordinal]
-  Every strict well-ordering is isomorphic to an ordinal Both the ordinal and the isomorphism are unique.
+  Every strict well-ordering is isomorphic to an ordinal. Both the ordinal and the isomorphism are unique.
 \end{thmnonum}
 
 The definition of isomorphism is:
@@ -1402,6 +1406,198 @@ The definition of isomorphism is:
 % section ordinals_continued_5 (end)
 
 % chapter lecture_6_sep_25th (end)
+
+\chapter{Lecture 7 Sep 27th}%
+\label{chp:lecture_7_sep_27th}
+% chapter lecture_7_sep_27th
+
+\section{Ordinals (Continued 6)}%
+\label{sec:ordinals_continued_6}
+% section ordinals_continued_6
+
+\subsection{Well-Orderings and Ordinals}%
+\label{sub:well_orderings_and_ordinals}
+% subsection well_orderings_and_ordinals
+
+Before proving the theorem stated at the end of last lecture, we require the following 2 lemmas:
+
+\begin{lemma}[Rigidity of Well-Orderings]
+\index{Rigid}
+\label{lemma:rigidity_of_well_orderings}
+  Well-orderings are rigid, i.e. the only automorphism\sidenote{An \hldefn{automorphism} is an isomorphism from a set to itself.} is the identity.
+\end{lemma}
+
+\begin{proof}
+  Suppose $(E, <)$ is a well-ordering, and $f : E \to E$ an automorphism. Let\sidenote{We look at the fellas that were `moved'.}
+  \begin{equation*}
+    D = \{ x \in E \mid f(x) \neq x \}.
+  \end{equation*}
+  Suppose for contradiction that $f$ is not the identity map, i.e. $D \neq \emptyset$. Then, since $D \subseteq E$, $D$ has a well-ordering, and so we can pick $\alpha \in D$ to be the least element.
+
+  \noindent\underline{Case 1: $f(a) < a$.} Then $f(a) \notin D$ since $a$ is least. But then that would mean
+  \begin{equation*}
+    f( f(a) ) = f(a) \implies f(a) = a
+  \end{equation*}
+  since $f$ is a bijection. This contradicts the choice that $a \in D$.
+
+  \noindent\underline{Case 2: $a < f(a)$.} Since $f$ is a bijection, its inverse exists, and so
+  \begin{align*}
+    f^{-1}(a) < a &\implies f^{-1}(a) \notin D \\
+                  &\iff ff^{-1}(a) = f^{-1}(a) \iff a = f^{-1}(a)
+  \end{align*}
+  which contradicts the choice that $a \in D$, yet again. Thus there is no such element $a \in D$, forcing $D = \emptyset$, and so $f$ must be the identity map.\qed
+\end{proof}
+
+\begin{lemma}[Strict Well-Ordering $\not\simeq$ Any of Its Proper Initial Segment]
+\label{lemma:strict_well_ordering_notsimeq_any_of_its_proper_initial_segment}
+  A strict well-ordering is not isomorphic to any proper initial segment\sidenote{
+  \begin{margindefn}[Initial Segment]\index{Initial Segment}
+  \label{defn:initial_segment}
+  For a strict well-order $(E, <)$, an \hlnoteb{initial segment} is a subset of the form
+  \begin{equation*}
+    \{ x \in E : x < b \}
+  \end{equation*}
+  for some $b \in E$.
+  \end{margindefn}} of itself.
+\end{lemma}
+
+\begin{proof}
+  Let $(E, <)$ be a strict well-ordering. $\forall b \in E$,
+  \begin{equation*}
+    I_b := \{ x \in E : x < b \}
+  \end{equation*}
+  has an induced well-order, in particular $(I_b, <)$.
+
+  Suppose for contradiction that there exists an isomorphism $f : E \to I_b$. Let
+  \begin{equation*}
+    D = \{ x \in E \mid f(x) \neq x \}
+  \end{equation*}
+  $b \notin I_b$ and so $b \notin D$. \hlwarn{Proof is left incomplete until I verify the proof with the prof.}
+\end{proof}
+
+\begin{thm}[Strict Well-Ordered Sets are Isomorphic to a Unique Ordinal]
+\label{thm:strict_well_ordered_sets_are_isomorphic_to_a_unique_ordinal}
+  Every strict well-ordering is isomorphic to an ordinal. Both the ordinal and the isomorphism are unique.
+\end{thm}
+
+\begin{proof}
+  \hlwarn{to be added later}
+\end{proof}
+
+% subsection well_orderings_and_ordinals (end)
+
+% section ordinals_continued_6 (end)
+
+\section{Cardinals}%
+\label{sec:cardinals}
+% section cardinals
+
+While ordinals allow us to enumerate, we cannot use it to ``measure''. For example, $\omega \neq \omega + 1$, but they have the same size.
+
+\begin{defn}[Equinumerous]\index{Equinumerous}
+\label{defn:equinumerous}
+  Two sets $A$ and $B$ have the same size, or \hlnoteb{equinumerous}, if there is a bijection from $A$ to $B$. We denote this relation by $\abs{A} = \abs{B}$.\sidenote{Note that we have yet to define $\abs{\cdot}$.}
+\end{defn}
+
+The following is a well-known theorem that makes proving equinumerosity a lot easier.
+
+\begin{lemma}[Schr\"{o}der-BernStein Theorem]
+\index{Schr\"{o}der-BernStein Theorem}
+\label{lemma:schroder_bernstein_theorem}
+  Given two sets $A$ and $B$, $\abs{A} = \abs{B}$ if and only if there exists injections in both directions, i.e. an injection from $A$ to $B$, and an injection from $B$ to $A$.
+\end{lemma}
+
+\begin{proof}
+  The $(\implies)$ direction is easy, since a bijection exists. So it suffices to show the $(\impliedby)$ direction. We shall use $A \hookrightarrow B$ to say that there is an injection from $A$ to $B$.
+
+  Suppose
+  \begin{equation*}
+    A \injection{} B \injection{g} A
+  \end{equation*}
+  Then $\exists f : A \to A$ an injective map, and we would have
+  \begin{equation}\label{eq:sbthm_core}
+    f(A) \subseteq g(B) \subseteq A.
+  \end{equation}
+  From here, it suffices to show that for an injective ap $f : X \to X$, if we have
+  \begin{equation*}
+    f(X) \subseteq Y \subseteq X,
+  \end{equation*}
+  then $\abs{Y} = \abs{X}$. From our observation in \cref{eq:sbthm_core}, we have
+  \begin{equation*}
+    X \supseteq Y \supseteq f(X) \supseteq f(Y) \supseteq f^2(X) \supseteq f^2(Y) \supseteq f^3(X) \supseteq \hdots
+  \end{equation*}
+  Let
+  \begin{equation*}
+    Z = X \setminus Y \discup f(X) \setminus f(Y) \discup f^2(X) \setminus f^2(Y) \discup \hdots
+  \end{equation*}
+  and
+  \begin{equation*}
+    W = X \setminus Z
+  \end{equation*}
+  Then
+  \begin{equation*}
+    X = Z \discup W
+  \end{equation*}
+
+  \noindent\underline{Claim:} For sets $A$ and $B$ such that $B \subseteq A$, we have that\sidenote{Forgive me if the proof of this claim is a little sloppy.}
+  \begin{equation*}
+    f(A \setminus B) = f(A) \setminus f(B).
+  \end{equation*}
+  Note that since $f$ is injective, $f : B \to f(B)$ is a bijective map. Suppose $\exists x \in A \setminus B$ such that $f(x) \in f(B)$. Since $f : B \to f(B)$ is bijective, $\exists b \in B$ such that $f(b) = f(x)$, but $f$ is injective. Thus the claim is true.
+
+  Using a similar argument, it can be shown that $f(A \discup B) = f(A) \discup f(B)$.
+
+  Observe that
+  \begin{align*}
+    f(Z) &= f(X \setminus Y) \discup f( f(X) \setminus f(Y) ) \discup f ( f^2(X) \setminus f^2(Y) ) \discup \hdots \\
+         &= f(X) \setminus f(Y) \discup f^2(X) \setminus f^2(Y) \discup f^3(X) \setminus f^3(Y) \discup \hdots
+  \end{align*}
+  and note that
+  \begin{equation*}
+    f(Z) = Z \setminus ( X \setminus Y ).
+  \end{equation*}
+  Since $W = X \setminus Z$, we have $W \subseteq Y$. Since $Z \cap W = \emptyset$, we still have $f(Z) \cap W = \emptyset$. Also, note that $( X \setminus Y ) \cap W = \emptyset$. Thus, we have
+  \begin{equation*}
+    Y = X \setminus ( X \setminus Y ) = (Z \discup W) \setminus (X \setminus Y) = f(Z) \discup W
+  \end{equation*}
+  Let $g : X \to Y$ such that
+  \begin{equation*}
+    g(A) = \begin{cases}
+      A    & A \subseteq W \\
+      f(A) & A \subseteq Z
+    \end{cases}
+  \end{equation*}
+  Clearly so, $g$ is bijective.\qed
+\end{proof}
+
+\begin{eg}
+  We claimed that $\abs{\omega} = \abs{\omega + 1}$.
+
+  We can simply use the identity map from $\omega \to \omega + 1$. For $\omega + 1 \to \omega$, consider the mapping
+  \begin{equation*}
+    f(\alpha) = \begin{cases}
+      S(\alpha) & \alpha \in \omega \\
+      0         & \alpha = \omega
+    \end{cases}
+  \end{equation*}
+  This map is clearly injective by properties of elements of $\omega$.
+\end{eg}
+
+\begin{defn}[Cardinal]\index{Cardinal}
+\label{defn:cardinal}
+  A \hlnoteb{cardinal} is an ordinal $\alpha$ with the property that $\forall \beta < \alpha$, $\abs{\alpha} = \abs{\beta}$
+\end{defn}
+
+In the next lecture, we shall see that the collection of cardinals is a proper class, and is a subclass of the ordinals.
+
+\begin{defn}[Finite \& Countable]\index{Finite}\index{Countable}
+\label{defn:finite_n_countable}
+  A set $A$ is \hlnoteb{finite} if $\abs{A} = \abs{n}$ for some $n \in \omega$. $A$ is \hlnoteb{countable} if $A$ is finite or $\abs{A} = \abs{\omega}$.
+\end{defn}
+
+% section cardinals (end)
+
+% chapter lecture_7_sep_27th (end)
 
 \appendix
 

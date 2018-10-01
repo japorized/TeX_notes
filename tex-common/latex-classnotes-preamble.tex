@@ -189,7 +189,7 @@
 \theoremindent10pt
 \newtheorem*{axiomnonum}{\faShield \enspace Axiom}
 
-    % theorem envs for margins
+    % envs on margins
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
@@ -216,7 +216,13 @@
 \theoremindent10pt
 \newtheorem{marginaxiom}[thm]{\faShield \enspace Axiom}
 
-    % theorem envs for margins without counter
+\theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt width \marginparwidth}}
+\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem{margindefn}{\faBook \enspace Definition}
+
+    % envs on margins without counter
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
@@ -242,6 +248,12 @@
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem*{marginaxiomnonum}{\faShield \enspace Axiom}
+
+\theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
+\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
+\theoremindent10pt
+\newtheorem*{margindefnnonum}{\faBook \enspace Definition}
 
     % proof env
 \theoremprework{\textcolor{base16-eighties-brown}{\hrule height 2pt width \textwidth}}
@@ -373,7 +385,7 @@
 \titleclass{\subsubsection}{straight}
 \titleformat{\subsubsection}%
   {\normalfont\large\itshape\color{base16-eighties-yellow}}% format applied to label+text
-  {\llap{\colorbox{base16-eighties-yellow}{\parbox{1.5cm}{\hfill\textcolor{base16-eighties-dark}{\thesubsection}}}}}% label
+  {\llap{\colorbox{base16-eighties-yellow}{\parbox{1.5cm}{\hfill\textcolor{base16-eighties-dark}{\thesubsubsection}}}}}% label
   {1em}% horizontal separation between label and title body
   {}% before the title body
   []% after the title body
