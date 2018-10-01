@@ -116,10 +116,12 @@
 \theorempostskip{5pt}
 \theoremstyle{break}
 
-\newtheorem*{solution}{\faPencil $\enspace$ Solution}
 \newtheorem*{remark}{Remark}
-\newtheorem{eg}{Example}[section]
 \newtheorem{ex}{Exercise}[section]
+\theorembodyfont{\normalfont}
+\newtheorem{eg}{Example}[section]
+\newtheorem*{solution}{\faPencil $\enspace$ Solution}
+\theorembodyfont{\it}
 
     % definition env
 \theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
@@ -257,11 +259,14 @@
 
     % proof env
 \theoremprework{\textcolor{base16-eighties-brown}{\hrule height 2pt width \textwidth}}
+\theorembodyfont{\normalfont}
 \theoremheaderfont{\color{base16-eighties-brown}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-brown}{\hrule height 2pt width \textwidth}}
 \newtheorem*{proof}{\faPencil \enspace Proof}
 
     % note and notation env
+\theorembodyfont{\it}
+
 \theoremprework{\textcolor{base16-eighties-yellow}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{base16-eighties-yellow}\normalfont\bfseries}
 \theorempostwork{\textcolor{base16-eighties-yellow}{\hrule height 2pt width \textwidth}}

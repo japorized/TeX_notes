@@ -16,6 +16,8 @@
 \DeclareMathOperator{\Range}{Range }
 \DeclareMathOperator{\Domain}{Domain }
 
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+
 \begin{document}
 \hypersetup{pageanchor=false}
 \maketitle
@@ -31,6 +33,8 @@
 \addcontentsline{toc}{chapter}{List of Theorems}
 \theoremlisttype{allname}
 \listtheorems{axiom,lemma,thm,crly,propo}
+
+\nocite{bforres2018}
 
 \chapter{Lecture 1 Sep 06th}%
 \label{chp:lecture_1_sep_06th}
@@ -1545,13 +1549,258 @@ In this course, we shall assume that the Continuum Hypothesis is true.
 
 % chapter lecture_8_sep_24th (end)
 
+\chapter{Lecture 9 Sep 26th}%
+\label{chp:lecture_9_sep_26th}
+% chapter lecture_9_sep_26th
+
+\section{Introduction to Metric Spaces}%
+\label{sec:introduction_to_metric_spaces}
+% section introduction_to_metric_spaces
+
+\begin{defn}[Metric \& Metric Space]\index{Metric}\index{Metric Space}
+\label{defn:metric_n_metric_space}
+  Given a set $X$, a \hlnoteb{metric} on $X$ is a function $d : X \times X \to \mathbb{R}$ such that\marginnote{
+  \begin{remark}
+    A metric is an abstract notion of distance.
+  \end{remark}
+  }
+  \begin{enumerate}
+    \item (\hlnotea{positive definiteness}) $d(x, y) \geq 0$ and $d(x, y) = 0 \iff x = y$;
+    \item (\hlnotea{symmetry}) $d(x, y) = d(y, x)$; and
+    \item (\hlnotea{triangle inequality}) $d(x, y) \leq d(x, z) + d(z, y)$.
+  \end{enumerate}
+  The pair $(X, d)$ is called a \hlnoteb{metric space}.
+\end{defn}
+
+\begin{eg}[Standard Metric on $\mathbb{R}$]\label{eg:standard_metric_on_r}\index{Standard Metric}
+  Let $X = \mathbb{R}$, and let $d(x, y) = \abs{ x - y }$.
+
+  Clearly so, the first 2 criterias are satisfied:
+  \begin{itemize}
+    \item $\abs{\cdot} \geq 0$ and $\abs{x - y} = 0 \iff x = y$; and
+      \item $\abs{x - y} = \abs{ y - x }$.
+  \end{itemize}
+  The triangle inequality property is the usual triangle inequality of the absolute value function, i.e.
+  \begin{equation*}
+    \abs{ x - y } \leq \abs{ x } + \abs{ y }.
+  \end{equation*}
+\end{eg}
+
+\newthought{Question}: For an arbitrary set $X$, can we define a metric on $X$? The following example shows that we can,
+
+\begin{eg}[Discrete Metric]\label{eg:discrete_metric}\index{Discrete Metric}
+  Let $X$ be any set. We can simply define
+  \begin{equation*}
+    d(x, y) = \begin{cases}
+      1 & x \neq y \\
+      0 & x = y
+    \end{cases}
+  \end{equation*}
+  This metric clearly satisfies all 3 criterias of being a metric:
+  \begin{itemize}
+    \item $d : X \times X \to \{ 0, 1 \}$ and so $d(x, y) \geq 0$, and by definition, we have $d(x, y) = 0 \iff x = y$;
+    \item By definition, $d(x, y) = d(y, x)$ as it does not matter how the pair is ordered; and
+    \item Since $d(x, y) \geq 0$, we have that $d(x, y) \leq d(x, z) + d(y, z)$.
+  \end{itemize}
+\end{eg}
+
+\begin{eg}[Euclidean Metric / 2-metric on $\mathbb{R}^n$]\label{eg:euclidean_metric}\index{Euclidean Metric}\index{2-metric}
+  Let $X = \mathbb{R}^n$. Let $\vec{x} = \{ x_1, x_2, ..., x_n \}$ and $\vec{y} = \{ y_1, y_2, ..., y_n \}$. Define
+  \begin{equation*}
+    d_2(\vec{x}, \vec{y}) = \sqrt{ \sum_{i=1}^{n} ( x_i - y_i )^2 }
+  \end{equation*}
+  Note that in $\mathbb{R}^2$, this is our regular (Euclidean) distance between two points.
+
+  It is not difficult to see that $d_2$ satisfies the first 2 criterion to being a metric:
+  \begin{marginfigure}
+    \begin{tikzpicture}
+      \draw[->] (-.5,0) -- (2.5,0) node[right] {$x$};
+      \draw[->] (0,-.5) -- (0,2.5) node[above] {$y$};
+      \draw[-latex'] (0, 0) -- (2, 2) node[midway,left] {$\vec{x} + \vec{y}$};
+      \draw[-latex'] (0, 0) -- (1.5, 0.7) node[midway,below] {$\vec{x}$};
+      \draw[-latex'] (1.5, 0.7) -- (2, 2) node[midway,right] {$\vec{y}$};
+    \end{tikzpicture}
+    \caption{A visualization of the triangle inequality in $\mathbb{R}^2$.}
+    \label{fig:visualize_triangle_inequality_r2}
+  \end{marginfigure}
+  \begin{itemize}
+    \item $d_2$ is the square root of the sum of squares, and so $d_2(\vec{x}, \vec{y}) \geq 0$ for any $\vec{x}, \vec{y} \in \mathbb{R}^n$, and $d_2(\vec{x}, \vec{y}) = 0 \iff \forall i \in \{1, ..., n\} \; x_i = y_i \iff \vec{x} = \vec{y}$;
+      \item Since $(x_i - y_i)^2 = (y_i - x_i)^2$ for any $x_i, y_i \in \mathbb{R}$, we have that $d_2(\vec{x}, \vec{y}) = d_2(\vec{y}, \vec{x})$.
+  \end{itemize}
+  However, it is not immediately clear that $d_2$ satisfies the triangle inequality criterion, especially if $n \geq 3$. If $n = 2$, heuristically, the triangle inequality simply tells that the length of any one side of a triangle is less than or equal to the sum of the other two, e.g. \cref{fig:visualize_triangle_inequality_r2}.\marginnote{
+  \begin{remark}
+    Many of the important examples of metric spaces are vector spaces with an abstract length function, or \hlnotea{norm}.
+  \end{remark}
+  }
+\end{eg}
+
+\begin{defn}[Norm \& Normed Linear Space]\index{Norm}\index{Normed Linear Space}
+\label{defn:norm_n_normed_linear_space}
+  Given a vector space $V$ (usually over $\mathbb{R}$), a \hlnoteb{norm} on $V$ is a function
+  \begin{equation*}
+    \norm{\cdot} : V \to \mathbb{R}
+  \end{equation*}
+  such that
+  \begin{enumerate}
+    \item (\hlnotea{positive definiteness}) $\norm{v} \geq 0$ and $\norm{v} = 0 \iff v = 0$;
+    \item (\hlnotea{scalar multiplication}) $\norm{\alpha \cdot v} = \abs{\alpha} \norm{v}$; and
+    \item (\hlnotea{triangle inequality}) $\norm{v + w} \leq \norm{v} + \norm{w}$.
+  \end{enumerate}
+  The pair $(V, \norm{\cdot})$ is called a \hlnoteb{normed linear space}.
+\end{defn}
+
+\begin{remark}
+  Given a normed linear space $(V, \norm{\cdot})$, a natural metric, $d_{\norm{\cdot}}$, on $V$ induced by $\norm{\cdot}$ can be defined as\marginnote{
+  \begin{ex}\label{ex:natural_metric_on_a_normed_linear_space}
+    Prove that $d_{\norm{\cdot}}$ is indeed a metric.
+  \end{ex}}
+  \begin{equation*}
+    d_{\norm{\cdot}} (x, y) = \norm{x - y}.
+  \end{equation*}
+\end{remark}
+
+\begin{proof}[\cref{ex:natural_metric_on_a_normed_linear_space}]
+  \begin{enumerate}
+    \item (positive definiteness) It is clear from the definition of a norm that $d_{\norm{\cdot}}(x, y) = \norm{x - y} \geq 0$, and $d_{\norm{\cdot}}(x, y) = 0 \iff x - y = 0 \iff x = y$.
+    \item (symmetry) Symmetry follows simply from definition, as $\norm{x - y} = \norm{y - x}$.
+    \item (triangle inequality) For $x, y, z \in V$, we have
+      \begin{align*}
+        d_{\norm{\cdot}} (x, y) &= \norm{x - y} = \norm{ x - z + z - y } \\
+                                &\leq \norm{x - z} + \norm{ z - y } \enspace \because \text{ triangle inequality of norms } \\
+                                &= \norm{x - z} + \norm{ y - z } \enspace \because \text{ symmetry } \\
+                                &= d_{\norm{\cdot}}(x, z) + d_{\norm{\cdot}}(y, z)
+      \end{align*}
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{eg}[Euclidean Norm]\label{eg:euclidean_norm}
+  Let $X = \mathbb{R}^n$, and $\vec{x} = \{ x_1, ..., x_n \} \in \mathbb{R}^2$. Define $\norm{\cdot}_2$ such that
+  \begin{equation*}
+    \norm{(x_1, ..., x_n)}_2 = \sqrt{ \sum_{i=1}^{n} x_i^2 }
+  \end{equation*}
+  From \cref{eg:euclidean_metric}, we are given the triangle inequality property, in which we have yet to prove. Positive definiteness is clear. For scalar multiplication, let $\vec{x} = \{ x_1, ..., x_n \}$, and notice that
+  \begin{equation*}
+    \norm{\alpha \cdot \vec{x}}_2 = \sqrt{ \sum_{i=1}^{n} (\alpha x_i)^2 } = \sqrt{ \alpha^2 \sum_{i=1}^{n} x_i^2 } = \abs{\alpha} \sqrt{ \sum_{i=1}^{n} x_i^2 } = \abs{\alpha} \norm{\vec{x}}_2.
+  \end{equation*}
+  Thus $\norm{\cdot}_2$ is indeed a norm. We call $\norm\cdot_2$ the \hldefn{2-norm} or the \hldefn{Euclidean norm}.
+
+  We observe that, in comparison with \cref{eg:euclidean_metric}, we have that
+  \begin{equation*}
+    d_2(\vec{x}, \vec{y}) = \norm{\vec{x} - \vec{y}}_2.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}[1-norm]\label{eg:1_norm}
+  Let $X = \mathbb{R}^n$, and $\vec{x} = \{ x_1, ..., x_n \}$. Define
+  \begin{equation*}
+    \norm{\vec{x}}_1 := \sum_{i = 1}^{n} \abs{x_i}.
+  \end{equation*}
+  Clearly so, $\norm\cdot_1$ is a norm:
+  \begin{itemize}
+    \item (\textbf{positive definiteness}) This is true by the absolute value function, i.e. every $\abs{x_i} \geq 0$, and so the sum over these $x_i$'s is also non-negative, and $\sum_{i=1}^{n} \abs{x_i} = 0 \iff \forall i \in \{ 1, ..., n\} \; x_i = 0 \iff \vec{x} = 0$.
+    \item (\textbf{scalar multiplication}) This uses a similar argument as in the previous example.
+    \item (\textbf{triangle inequality}) This is true by, again, the triangle inequality on absolute values.
+  \end{itemize}
+  We call $\norm\cdot_1$ the \hldefn{1-norm}.
+
+  Thus, we can define
+  \begin{equation*}
+    d_1(\vec{x}, \vec{y}) = \norm{\vec{x} - \vec{y}}_1
+  \end{equation*}
+  and it can easily be verified that $d_1$ is indeed a metric.
+\end{eg}
+
+\begin{eg}
+  Let $X = \mathbb{R}^n$ and $\vec{x} = \{ x_1, ..., x_n \}$. Define
+  \begin{equation*}
+    \norm{\vec{x}}_\infty = \max \{ \abs{x_i} \}
+  \end{equation*}
+  Again, it is easy to see that $\norm\cdot_\infty$ is a norm;
+  \begin{itemize}
+    \item (\textbf{positive definiteness}) $\because \forall i \in \{ 1, ..., n \} \; \abs{x_i} \geq 0 \implies \max \{ \abs{x_i \} \geq 0}$ and $\max \{ \abs{x_i} \} = 0 \iff x_i = 0 \iff \vec{x} = 0$.
+    \item (\textbf{scalar multiplication}) Notice that
+      \begin{equation*}
+        \norm{\alpha \cdot \vec{x}}_\infty = \max \{ \abs{\alpha x_i} \} = \abs{\alpha} \max \{ \abs{x_i} \} = \abs{\alpha} \norm{\vec{x}}_\infty.
+      \end{equation*}
+    \item (\textbf{triangle inequality}) This is once again true by the triangle inequality on the absolute value function, i.e.
+      \begin{gather*}
+        \because \forall i \in \{ 1, ..., n \} \enspace \abs{x_i + y_i} \leq \abs{x_i} + \abs{y_i} \\
+        \max \{ \abs{x_i + y_i} \} \leq \max \{ \abs{x_i} \} + \max \{ \abs{y_i} \}.
+      \end{gather*}
+  \end{itemize}
+  We can then define
+  \begin{equation*}
+    d_\infty(\vec{x}, \vec{y}) = \max \{ \abs{x_i - y_i} \},
+  \end{equation*}
+  which we can easily verify that it is indeed a metric\sidenote{Symmetry holds by the property of the absolute value function.}.
+\end{eg}
+
+\newthought{Here's} an interesting notion: let
+\begin{equation*}
+  S_i = \{ \vec{x} \in \mathbb{R}^2 \mid \norm{\vec{x}}_i = 1 \}, \quad i = 1, 2, \infty
+\end{equation*}
+Notice that we would then have the following graph:\begin{figure}[h]
+  \begin{center}
+  \begin{tikzpicture}
+    \draw[-latex'] (-3, 0) -- (3, 0);
+    \draw[-latex'] (0, -3) -- (0, 3);
+    \draw[-] (2, 2) -- (-2, 2) -- (-2, -2) -- (2, -2) -- (2, 2);
+    \draw (0, 0) circle(2);
+    \draw[-] (2, 0) -- (0, 2) -- (-2, 0) -- (0, -2) -- (2,0);
+    \node[above,right] at (2,2) {$S_\infty$};
+    \node[above,right] at (1.4142135623730950488,1.4142135623730950488) {$S_2$};
+    \node[above,right] at (1, 1) {$S_1$};
+  \end{tikzpicture}
+  \end{center}
+  \caption{Unit ball depending on $\norm{\vec{x}}_i$}
+  \label{fig:unit_ball_depending_on_norm}
+\end{figure}
+In fact, it is true that if we let $i \in \mathbb{N} \setminus \{ 0 \}$, as suggested by \cref{fig:unit_ball_depending_on_norm}, we would see that the ``diamond'' would grow into a ``circle'' as in $S_2$, and as $i \geq 3$, the unit ball will expand and approach the ``square'', which is $S_\infty$.
+
+Another observation that we can make is if we can show that a set is open for a ``smaller'' $S_i$, then the same set is open for any $S_j$ for $j \geq i$.\marginnote{
+Note that if we allow for $0 < i < 1$, then we would have a graph that looks like the following:
+\begin{center}
+\begin{tikzpicture}
+  \draw[-latex'] (-2,0) -- (2, 0);
+  \draw[-latex'] (0,-2) -- (0, 2);
+  \draw (0, 1) arc (180:270:1);
+  \draw (1, 0) arc (90:180:1);
+  \draw (0, -1) arc (0:90:1);
+  \draw (-1, 0) arc (270:360:1);
+\end{tikzpicture}
+\end{center}
+which is a convex graph, i.e. we cannot create well-defined norms.
+}
+
+If we apply these norms into metrics, we have
+\begin{equation*}
+  d_\infty \leq d_2 \leq d_1
+\end{equation*}
+where we say that $d_\infty$ is the \hlnotea{least sensitive}, and $d_1$ being the \hlnotea{most sensitive}\sidenote{For sufficently close points, we see that $d_\infty$ would reflect the least change, while we can see change in $d_1$ for every two points that we take.}.
+
+\begin{eg}
+  For $1 < p < \infty$, define on $\mathbb{R}^n$
+  \begin{equation*}
+    \norm{\vec{x}}_p = \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^\frac{1}{p}
+  \end{equation*}
+  Continuing with the same idea as in previous examples, we can let
+  \begin{equation*}
+    d_p(\vec{x}, \vec{y}) = \left( \sum_{i=1}^{n} \abs{x_i - y_i}^p \right)^\frac{1}{p}
+  \end{equation*}
+  In the next lecture, we will go into proving that this is indeed a norm, and so we can define a metric using this norm.
+\end{eg}
+
+% section introduction_to_metric_spaces (end)
+
+% chapter lecture_9_sep_26th (end)
+
 \appendix
 
 \backmatter
 
 \pagestyle{plain}
 
-\nobibliography*
+% \nobibliography*
 \bibliography{references}
 
 \printindex
