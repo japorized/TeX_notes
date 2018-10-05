@@ -1674,11 +1674,11 @@ In this course, we shall assume that the Continuum Hypothesis is true.
 \end{proof}
 
 \begin{eg}[Euclidean Norm]\label{eg:euclidean_norm}
-  Let $X = \mathbb{R}^n$, and $\vec{x} = \{ x_1, ..., x_n \} \in \mathbb{R}^2$. Define $\norm{\cdot}_2$ such that
+  Let $X = \mathbb{R}^n$, and $\vec{x} = ( x_1, ..., x_n ) \in \mathbb{R}^2$. Define $\norm{\cdot}_2$ such that
   \begin{equation*}
     \norm{(x_1, ..., x_n)}_2 = \sqrt{ \sum_{i=1}^{n} x_i^2 }
   \end{equation*}
-  From \cref{eg:euclidean_metric}, we are given the triangle inequality property, in which we have yet to prove. Positive definiteness is clear. For scalar multiplication, let $\vec{x} = \{ x_1, ..., x_n \}$, and notice that
+  From \cref{eg:euclidean_metric}, we are given the triangle inequality property, in which we have yet to prove. Positive definiteness is clear. For scalar multiplication, let $\vec{x} = { x_1, ..., x_n }$, and notice that
   \begin{equation*}
     \norm{\alpha \cdot \vec{x}}_2 = \sqrt{ \sum_{i=1}^{n} (\alpha x_i)^2 } = \sqrt{ \alpha^2 \sum_{i=1}^{n} x_i^2 } = \abs{\alpha} \sqrt{ \sum_{i=1}^{n} x_i^2 } = \abs{\alpha} \norm{\vec{x}}_2.
   \end{equation*}
@@ -1691,7 +1691,7 @@ In this course, we shall assume that the Continuum Hypothesis is true.
 \end{eg}
 
 \begin{eg}[1-norm]\label{eg:1_norm}
-  Let $X = \mathbb{R}^n$, and $\vec{x} = \{ x_1, ..., x_n \}$. Define
+  Let $X = \mathbb{R}^n$, and $\vec{x} = ( x_1, ..., x_n )$. Define
   \begin{equation*}
     \norm{\vec{x}}_1 := \sum_{i = 1}^{n} \abs{x_i}.
   \end{equation*}
@@ -1711,7 +1711,7 @@ In this course, we shall assume that the Continuum Hypothesis is true.
 \end{eg}
 
 \begin{eg}
-  Let $X = \mathbb{R}^n$ and $\vec{x} = \{ x_1, ..., x_n \}$. Define
+  Let $X = \mathbb{R}^n$ and $\vec{x} = ( x_1, ..., x_n )$. Define
   \begin{equation*}
     \norm{\vec{x}}_\infty = \max \{ \abs{x_i} \}
   \end{equation*}
@@ -1758,7 +1758,8 @@ Notice that we would then have the following graph:\begin{figure}[h]
 In fact, it is true that if we let $i \in \mathbb{N} \setminus \{ 0 \}$, as suggested by \cref{fig:unit_ball_depending_on_norm}, we would see that the ``diamond'' would grow into a ``circle'' as in $S_2$, and as $i \geq 3$, the unit ball will expand and approach the ``square'', which is $S_\infty$.
 
 Another observation that we can make is if we can show that a set is open for a ``smaller'' $S_i$, then the same set is open for any $S_j$ for $j \geq i$.\marginnote{
-Note that if we allow for $0 < i < 1$, then we would have a graph that looks like the following:
+Note that if we allow for $0 < i < 1$, then we would have a graph that looks like the following, which is a convex graph, i.e. we cannot create well-defined norms.}
+\begin{marginfigure}
 \begin{center}
 \begin{tikzpicture}
   \draw[-latex'] (-2,0) -- (2, 0);
@@ -1769,8 +1770,8 @@ Note that if we allow for $0 < i < 1$, then we would have a graph that looks lik
   \draw (-1, 0) arc (270:360:1);
 \end{tikzpicture}
 \end{center}
-which is a convex graph, i.e. we cannot create well-defined norms.
-}
+\caption{$\norm\cdot_p$ for $0 < p < 1$}
+\end{marginfigure}
 
 If we apply these norms into metrics, we have
 \begin{equation*}
@@ -1794,7 +1795,260 @@ where we say that $d_\infty$ is the \hlnotea{least sensitive}, and $d_1$ being t
 
 % chapter lecture_9_sep_26th (end)
 
+\chapter{Lecture 10 Sep 28th}%
+\label{chp:lecture_10_sep_28th}
+% chapter lecture_10_sep_28th
+
+\section{Introduction to Metric Spaces (Continued)}%
+\label{sec:introduction_to_metric_spaces_continued}
+% section introduction_to_metric_spaces_continued
+
+\begin{defn}[$\norm\cdot_p$-norm]\index{$\norm\cdot_p$-norm}
+\label{defn:p_norm}
+  Given $\vec{x} = ( x_1, ..., x_n ) \in \mathbb{R}^n$, we define, for $1 < p < \infty$, the $\norm\cdot_p$-norm to be
+  \begin{equation*}
+    \norm{\vec{x}}_p = \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^{\frac{1}{p}}
+  \end{equation*}
+\end{defn}
+
+We asked the question: why is $\norm\cdot_p$ a norm?
+
+\begin{lemma}
+\label{lemma:lemma_for_holders}
+  If $1 < p < \infty$,
+  \begin{equation*}
+    \frac{1}{p} + \frac{1}{q} = 1,
+  \end{equation*}
+  and if $\alpha, beta > 0$, then
+  \begin{equation*}
+    \alpha \cdot \beta \leq \frac{\alpha^p}{p} + \frac{\beta^q}{q}.
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Motivated by \cref{fig:lemma_for_holders_idea}, using notions from calculus, we have from calculus,
+  \begin{marginfigure}
+    \begin{tikzpicture}
+    \draw[->] (-0.5,0) -- (3,0) node[right] {$t$};
+    \draw[->] (0,-0.5) -- (0,3) node[above] {$u$};
+    \draw[fill=base16-eighties-blue!20!base16-eighties-dark] (1.5,2.25) -- (0, 2.25) -- (0, 0) -- (1.5, 0) -- cycle;
+    \draw[domain=0:1.73205080756887729352] plot ( {\x},{\x^2} ) node[above] {$u = t^{ p - 1 }$};
+    \draw[dotted] (1.5, 2.25) -- (0, 2.25) node[left] {$\beta$};
+    \draw[dotted] (1.5, 2.25) -- (1.5, 0) node[below] {$\alpha$};
+    \end{tikzpicture}
+    \caption{Motivation for \cref{lemma:lemma_for_holders}.}
+    \label{fig:lemma_for_holders_idea}
+  \end{marginfigure}
+  \begin{align*}
+    \alpha \beta &\leq \int_{0}^{\alpha} t^{p - 1} \dif{t} + \int_{0}^{\beta} u^{q - 1} \dif{u} \\
+                 &= \frac{t^p}{p} \at{0}{\alpha} + \frac{u^q}{q} \at{0}{\beta} \\
+                 &= \frac{\alpha^p}{p} + \frac{\beta^q}{q},
+  \end{align*}
+  where we note that
+  \begin{gather*}
+    \frac{1}{p} + \frac{1}{q} = 1 \\
+    \frac{q}{p} = q - 1 \\
+    \frac{p}{q} = p - 1 \\
+    1 = (p - 1)(q - 1)
+  \end{gather*}\qed
+\end{proof}
+
+\begin{thm}[Holder's Inequality]
+\index{Holder's Inequality}
+\label{thm:holder_s_inequality}
+  For $1 < p < \infty$, let $\frac{1}{p} + \frac{1}{q} = 1$ \sidenote{We also call $q$ the conjugate of $p$.}. Let
+  \begin{equation*}
+    \vec{x} = ( x_1, ..., x_n ), \quad \vec{y} = ( y_1, ..., y_n ).
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \sum_{i=1}^{n}  \abs{ x_i y_i } \leq \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^{\frac{1}{p}} \cdot \left( \sum_{i=1}^{n} \abs{y_i}^q \right)^{\frac{1}{q}}.
+  \end{equation*}
+\end{thm}
+
+\begin{note}
+  Note that $p = 2$ is just the \hldefn{Cauchy-Schwarz Inequality}:
+  \begin{gather*}
+    \sum_{i=1}^{n} \abs{x_i y_i} \leq \left( \sum_{i=1}^{n} \abs{x_i}^2 \right)^{ \frac{1}{2} } \cdot \left( \sum_{i=1}^{n} \abs{y_i}^2 \right)^{\frac{1}{2}} \implies \\
+    \left( \sum_{i=1}^{n} \abs{x_i y_i} \right)^2 \leq \left( \sum_{i=1}^{n} \abs{x_i}^2 \right) \cdot \left( \sum_{i=1}^{n} \abs{y_i}^2 \right)
+  \end{gather*}
+\end{note}
+
+\begin{proof}
+  Since if either $\vec{x}$ or $\vec{y}$ is zero, then we have that the inequality is trivially true, we can suppose that $\vec{x} \neq 0 \neq \vec{y}$. Now, note that for $\alpha, \beta \neq 0$, we have that\sidenote{In the second inequality, notice that we can easily get back to the first equation by dividing both sides by $\alpha \beta$.}
+  \begin{gather*}
+    \sum_{i=1}^{n}  \abs{ x_i y_i } \leq \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^{\frac{1}{p}} \cdot \left( \sum_{i=1}^{n} \abs{y_i}^q \right)^{\frac{1}{q}} \\
+    \Updownarrow \\
+    \sum_{i=1}^{n}  \abs{ \alpha x_i \cdot \beta y_i } \leq \left( \sum_{i=1}^{n} \abs{\alpha x_i}^p \right)^{\frac{1}{p}} \cdot \left( \sum_{i=1}^{n} \abs{\beta y_i}^q \right)^{\frac{1}{q}}.
+  \end{gather*}
+  So we can assume that
+  \begin{equation}\label{eq:holders_inequality_core}
+    \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^\frac{1}{p} = 1 = \left( \sum_{i=1}^{n} \abs{y_i}^q \right)^\frac{1}{q},
+  \end{equation}
+  and if not, we can simply choose $\alpha, \beta \neq 0$ to scale these values to become one. By \cref{lemma:lemma_for_holders}, we have
+  \begin{equation*}
+    \abs{x_i y_i} \leq \frac{\abs{x_i}^p}{p} + \frac{\abs{y_i}^q}{q}.
+  \end{equation*}
+  Hence
+  \begin{align*}
+    \sum_{i=1}^{n} \abs{x_i y_i} &\leq \sum_{i=1}^{n} \frac{\abs{x_i}^p}{p} + \sum_{i=1}^{n} \frac{\abs{y_i}^q}{q} = \frac{1}{p} + \frac{1}{q} \quad \because \cref{eq:holders_inequality_core} \\
+                                 &= 1 = \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^\frac{1}{p} \cdot \left( \sum_{i=1}^{n} \abs{y_i}^q \right)^\frac{1}{q}
+  \end{align*}
+  as required.\qed
+\end{proof}
+
+We are now ready to prove our long-awaited result.
+
+\begin{thm}[Minkowski's Theorem]
+\index{Minkowski's Theorem}
+\label{thm:minkowski_s_theorem}
+  Let $1 < p < \infty$. If
+  \begin{equation*}
+    \vec{x} = ( x_1, ..., x_n ), \quad \vec{y} = ( y_1, ..., y_n )
+  \end{equation*}
+  in $\mathbb{R}^n$, then
+  \begin{equation*}
+    \left( \sum_{i=1}^{n} \abs{x_i + y_i}^p \right)^\frac{1}{p} \leq \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^\frac{1}{p} + \left( \sum_{i=1}^{n} \abs{y_i}^p \right)^\frac{1}{p},
+  \end{equation*}
+  i.e.
+  \begin{equation*}
+    \norm{\vec{x} + \vec{y}}_p \leq \norm{\vec{x}}_p + \norm{\vec{y}}_p.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Let
+  \begin{equation*}
+    \frac{1}{p} + \frac{1}{q} = 1.
+  \end{equation*}
+  Once again, we may assume that $\vec{x} \neq 0 \neq \vec{y}$, as otherwise the inequality is true trivially so. Now, notice that
+  \begin{align*}
+    \sum_{i=1}^{n} \abs{x_i + y_i}^p &= \sum_{i=1}^{n} \abs{x_i + y_i} \abs{x_i + y_i}^{p - 1} \\
+                                     &\leq \sum_{i=1}^{n} \abs{x_i} \abs{x_i + y_i}^{p - 1} + \sum_{i=1}^{n} \abs{y_i}\abs{x_i + y_i} \enspace \because \overset{\text{triangle}}{\text{inequality}} \\
+                                     &\leq \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^\frac{1}{p} \left( \sum_{i=1}^{n} \abs{x_i + y_i}^{(p - 1)q} \right)^\frac{1}{q} \\
+                                     & \qquad\quad + \left( \sum_{i=1}^{n} \abs{y_i}^p \right)^\frac{1}{p} \left( \sum_{i=1}^{n} \abs{x_i + y_i}^{(p - 1)q} \right)^\frac{1}{q}
+  \end{align*}
+  Note that $\frac{1}{p} + \frac{1}{q} = 1 \implies p = q(p - 1)$. Thus
+  \begin{gather*}
+    \sum_{i=1}^{n} \abs{x_i + y_i}^p \leq \left[ \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^\frac{1}{p} + \left( \sum_{i=1}^{n} \abs{y_i}^p \right)^{\frac{1}{p}} \right] \cdot \left( \sum_{i=1}^{n} \abs{x_i + y_i}^p \right)^\frac{1}{q} \\
+    \implies \left( \sum_{i=1}^{n} \abs{x_i + y_i}^p \right)^{1 - \frac{1}{q}} \leq \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^\frac{1}{p} + \left( \sum_{i=1}^{n} \abs{y_i}^p \right)^\frac{1}{p}
+  \end{gather*}\qed
+\end{proof}
+
+\begin{note}
+  With this we have that $\norm\cdot_p$ satisfies the triangle inequaltiy condition, and so $\norm\cdot_p$ is a norm on $\mathbb{R}^n$.
+\end{note}
+
+\begin{note}
+  Given $1 \leq p \leq q < \infty$, we have\sidenote{For a visual representation of this result, see \cref{fig:unit_ball_depending_on_norm}.}
+  \begin{equation*}
+    \norm\cdot_\infty \leq \norm\cdot_q \leq \norm\cdot_p \leq \norm\cdot_1.
+  \end{equation*}
+
+  \begin{proof}
+    It is quite clear that $\forall p \geq 1$,
+    \begin{equation*}
+      \norm\cdot_\infty = \max \{ \abs{\cdot} \} \leq \left( \sum \abs{\cdot}^p \right)^{\frac{1}{p}} =\norm\cdot_p.
+    \end{equation*}
+    For $1 \leq p \leq q < \infty$, consider \hyperref[thm:holder_s_inequality]{Holder's Inequality}, where we have
+    \begin{equation*}
+      \sum_{i=1}^{n} \abs{a_i} \abs{b_i} \leq \left( \sum_{i=1}^{n} \abs{a_i}^r \right)^{\frac{1}{r}} \cdot \left( \sum_{i=1}^{n} \abs{b_i}^{\frac{r}{r - 1}} \right)^{1 - \frac{1}{r}}.
+    \end{equation*}
+    Let $\abs{a_i} = \abs{x_i}^p$, $\abs{b_i} = 1$ and $r = \frac{q}{p} \geq 1$ \sidenote{Note that this is true by $p \leq q$.}. Then we have
+    \begin{align*}
+      \sum_{i=1}^{n} \abs{x_i}^p &\leq \left( \sum_{i=1}^{n} \abs{x_i}^q \right)^{\frac{p}{q}} \cdot \left( \sum_{i=1}^{n} 1^{\frac{q}{q - p}} \right)^{1 - \frac{p}{q}} \\
+                                 &= n^{1 - \frac{p}{q}} \cdot \left( \sum_{i=1}^{n} \abs{x_i}^q \right)^\frac{p}{q}
+    \end{align*}
+    Therefore, for $\vec{x} = (x_1..., x_n) \in \mathbb{R}$,
+    \begin{align*}
+      \norm{\vec{x}}_p &= \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^{\frac{1}{p}} \leq \left( n^{1 - \frac{p}{q}} \cdot \left( \sum_{i=1}^{n} \abs{x_i}^q \right)^\frac{p}{q} \right)^{\frac{1}{p}} \\
+                       &= n^{\frac{1}{p} - \frac{1}{q}} \cdot \left( \sum_{i=1}^{n} \abs{x_i}^q \right)^{\frac{1}{q}} = n^{\frac{1}{p} - \frac{1}{q}} \cdot \norm{\vec{x}}_q.
+    \end{align*}
+    Thus, we have
+    \begin{equation*}
+      \norm\cdot_q \leq \norm\cdot_p.
+    \end{equation*}
+    The chain of inequality follows.\qed
+  \end{proof}
+\end{note}
+
+\begin{eg}[Sequence Spaces]\label{eg:sequence_spaces}\index{Sequence Spaces}
+  \begin{enumerate}
+    \item Let $l_1 = \left\{ \{ x_i \} \mid \sum\limits_{i=1}^{\infty} \abs{x_i} < \infty \right\}$. Define
+      \begin{equation*}
+        \norm{ \{ x_i \} }_1 = \sum_{i=1}^{\infty} \abs{x_i}
+      \end{equation*}
+      Let $\{ x_i \}, \{ y_i \} \in l_1$. Observe that $\forall n \in \mathbb{N}$, we have
+      \begin{equation*}
+        \sum_{i=1}^{n} \abs{x_i + y_i} \leq \sum_{i=1}^{n} \abs{x_i} + \sum_{i=1}^{n} \abs{y_i} \leq \norm{ \{ x_i \} }_1 + \norm{ \{ y_i \} }_1.
+      \end{equation*}
+      Then by the \hyperref[thm:monotone_convergence_theorem]{Monotone Convergence Theorem}, we have that
+      \begin{equation*}
+        \sum_{i=1}^{\infty} \abs{x_i + y_i} \leq \norm{ \{ x_i \} }_1 + \norm{ \{ y_i \} }_1.
+      \end{equation*}
+      Thus $\{ x_i + y_i \} \in l_1$ and
+      \begin{equation*}
+        \norm{ \{ x_i + y_i \} }_1 \leq \norm{ \{ x_i \} }_1 + \norm{ \{ y_i \} }_1.
+      \end{equation*}
+
+      Let $\{ x_n \} \in l_1$ and $\alpha \in \mathbb{R}$. Then
+      \begin{equation*}
+        \sum_{i=1}^{\infty} \abs{ \alpha x_i } = \abs{\alpha} \sum_{i=1}^{\infty} \abs{x_i}.
+      \end{equation*}
+      Therefore $\{ \alpha x_n \} \in l_1$ and $\norm{ \{ \alpha x_n \} }_1 = \abs{\alpha} \norm{ \{ x_n \} }_1$.
+
+      Thus, we have that $l_1$ is a vector space, and $(l_1, \norm\cdot_1)$ is a normed linear space.
+
+    \item Let $l_\infty(\mathbb{N}) = l_\infty = \{ \{ x_i \} \mid \{ x_i \} \text{ is bounded } \}$. Define
+      \begin{equation*}
+        \norm{ \{ x_i \} }_\infty = \sup \{ \abs{ x_1 } \mid i \in \mathbb{N} \}.
+      \end{equation*}
+      Observe that $\forall \{ x_i \}, \{ y_i \} \in l_\infty$, then $\forall i \in \mathbb{N}$, we have
+      \begin{equation*}
+        \abs{x_i + y_i} \leq \abs{ x_i } + \abs{ y_i } \leq \norm{\{x_i\}}_\infty + \norm{\{y_i\}}_\infty.
+      \end{equation*}
+      So $\{ x_i + y_i \} \in l_\infty$, and
+      \begin{equation*}
+        \norm{ \{ x_i + y_i \} }_\infty \leq \norm{ \{ x_i\} }_\infty + \norm{ \{ y_i \} }_\infty.
+      \end{equation*}
+      Consequently so, $\{ \alpha x_i \} \in l_\infty$ and
+      \begin{equation*}
+        \norm{ \{ \alpha x_i \} }_\infty = \abs{ \alpha } \norm{ \{ x_i \} }_\infty.
+      \end{equation*}
+  \end{enumerate}
+\end{eg}
+
+\newthought{Question}: What about $l_p(\mathbb{R})$?
+
+% section introduction_to_metric_spaces_continued (end)
+
+% chapter lecture_10_sep_28th (end)
+
 \appendix
+
+\chapter{Useful Theorems from Earlier Calculus}%
+\label{chp:useful_theorems_from_earlier_calculus}
+% chapter useful_theorems_from_earlier_calculus
+
+\begin{thm}[Monotone Convergence Theorem]
+\index{Monotone Convergence Theorem}
+\label{thm:monotone_convergence_theorem}
+  Let $\{x_k\}$ be a sequence in $\mathbb{R}$.
+  \begin{enumerate}
+    \item Suppose $\{x_k\}$ is increasing.
+      \begin{itemize}
+        \item If $\{ x_k \}$ is bounded above, then $x_k \to \sup \{ x_k \}$ as $k \to \infty$.
+        \item If $\{ x_k \}$ is not bounded above, then $x_k \to \infty$ as $k \to \infty$.
+      \end{itemize}
+    \item Suppose $\{ x_k \}$ is decreasing.
+      \begin{itemize}
+        \item If $\{ x_k \}$ is bounded below, then $x_k \to \inf \{ x_k \}$ as $k \to \infty$.
+        \item If $\{ x_k \}$ is not bounded below, then $x_k \to -\infty$.
+      \end{itemize}
+  \end{enumerate}
+\end{thm}
+
+% chapter useful_theorems_from_earlier_calculus (end)
 
 \backmatter
 
