@@ -1853,8 +1853,8 @@ We asked the question: why is $\norm\cdot_p$ a norm?
   \end{gather*}\qed
 \end{proof}
 
-\begin{thm}[Holder's Inequality]
-\index{Holder's Inequality}
+\begin{thm}[H\"{o}lder's Inequality]
+\index{H\"{o}lder's Inequality}
 \label{thm:holder_s_inequality}
   For $1 < p < \infty$, let $\frac{1}{p} + \frac{1}{q} = 1$ \sidenote{We also call $q$ the conjugate of $p$.}. Let
   \begin{equation*}
@@ -1899,9 +1899,9 @@ We asked the question: why is $\norm\cdot_p$ a norm?
 
 We are now ready to prove our long-awaited result.
 
-\begin{thm}[Minkowski's Theorem]
-\index{Minkowski's Theorem}
-\label{thm:minkowski_s_theorem}
+\begin{thm}[Minkowski's Inequality]
+\index{Minkowski's Inequality}
+\label{thm:minkowshi_s_inequality}
   Let $1 < p < \infty$. If
   \begin{equation*}
     \vec{x} = ( x_1, ..., x_n ), \quad \vec{y} = ( y_1, ..., y_n )
@@ -1928,7 +1928,7 @@ We are now ready to prove our long-awaited result.
                                      &\leq \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^\frac{1}{p} \left( \sum_{i=1}^{n} \abs{x_i + y_i}^{(p - 1)q} \right)^\frac{1}{q} \\
                                      & \qquad\quad + \left( \sum_{i=1}^{n} \abs{y_i}^p \right)^\frac{1}{p} \left( \sum_{i=1}^{n} \abs{x_i + y_i}^{(p - 1)q} \right)^\frac{1}{q}
   \end{align*}
-  Note that $\frac{1}{p} + \frac{1}{q} = 1 \implies p = q(p - 1)$. Thus
+  where the last step is by \hyperref[thm:holder_s_inequality]{H\"{o}lder's Inequality}. Note that $\frac{1}{p} + \frac{1}{q} = 1 \implies p = q(p - 1)$. Thus
   \begin{gather*}
     \sum_{i=1}^{n} \abs{x_i + y_i}^p \leq \left[ \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^\frac{1}{p} + \left( \sum_{i=1}^{n} \abs{y_i}^p \right)^{\frac{1}{p}} \right] \cdot \left( \sum_{i=1}^{n} \abs{x_i + y_i}^p \right)^\frac{1}{q} \\
     \implies \left( \sum_{i=1}^{n} \abs{x_i + y_i}^p \right)^{1 - \frac{1}{q}} \leq \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^\frac{1}{p} + \left( \sum_{i=1}^{n} \abs{y_i}^p \right)^\frac{1}{p}
@@ -2023,6 +2023,187 @@ We are now ready to prove our long-awaited result.
 % section introduction_to_metric_spaces_continued (end)
 
 % chapter lecture_10_sep_28th (end)
+
+\chapter{Lecture 11 Oct 01st}%
+\label{chp:lecture_11_oct_01st}
+% chapter lecture_11_oct_01st
+
+\section{Introduction to Metric Spaces (Continued 2)}%
+\label{sec:introduction_to_metric_spaces_continued_2}
+% section introduction_to_metric_spaces_continued_2
+
+We wondered about $l_p(\mathbb{R})$ in the last lecture but let us consider a case that is even more general.
+
+\newthought{Question}: Can we define $l_p(\Gamma)$ for any set $\Gamma$?
+
+\begin{eg}\label{eg:l_infty_on_gamma}
+  Let $l_\infty(\Gamma) = \{ f : \Gamma \to \mathbb{R} \mid f(\Gamma) \text{ is bounded } \}$. If $f \in l_\infty(\Gamma)$, define
+  \begin{equation*}
+    \norm{f}_\infty = \sup \{ \abs{f(x)} \mid x \in \Gamma \}.
+  \end{equation*}
+  Notice that for $f, g \in l_\infty(\Gamma)$, and $\alpha \in \mathbb{R}$, then we have, by the Triangle Inequality,
+  \begin{align*}
+    \norm{f + g}_\infty &= \sup \{ \abs{ (f + g)(x) } \mid x \in \Gamma \} \\
+                        &= \sup \{ \abs{ f(x) + g(x) } \mid x \in \Gamma \} \\
+                        &\leq \sup \{ \abs{ f(x) } \mid x \in \Gamma \} + \sup \{ \abs{ g(x) } \mid x \in \Gamma \} \\
+                        &= \norm{f}_\infty \norm{g}_\infty.
+  \end{align*}
+  So $f + g \in l_\infty(\Gamma)$, and
+  \begin{equation*}
+    \norm{f + g}_\infty \leq \norm{f}_\infty + \norm{f}_\infty.
+  \end{equation*}
+  Also, we have
+  \begin{align*}
+    \norm{\alpha f}_\infty &= \sup \{ \abs{ (\alpha f)(x) } \mid x \in \Gamma \} \\
+                           &= \sup \{ \abs{\alpha} \abs{ f(x) } \mid x \in \Gamma \} \\
+                           &= \abs{\alpha} \sup \{ \abs{f(x)} \mid x \in \Gamma \} \\
+                           &= \abs{\alpha} \norm{f}_\infty.
+  \end{align*}
+  So $\alpha f \in l_\infty(\Gamma)$, and $\norm{\alpha f}_\infty = \abs{\alpha} \norm{f}$.
+
+  Therefore, $(l_\infty(\Gamma), \norm\cdot_\infty)$ is a normed linear space.
+\end{eg}
+
+\begin{eg}
+  Let $l_1(\Gamma) = \{ f : \Gamma \to \mathbb{R} \mid P(f) \}$, where $P(f)$ is the statement\marginnote{\hlwarn{Require clarification} Notice that $\forall f \in l_1(\Gamma)$, for each $n \in \mathbb{N}$,
+  \begin{equation*}
+    A_n = \{ x \in \Gamma \mid \abs{f(x)} \geq \frac{1}{n} \} \text{ is finite. }
+  \end{equation*}
+  So
+  \begin{equation*}
+    A_0 = \bigcup_{n = 1}^{\infty} A_n \text{ is countable. }
+  \end{equation*}
+  and
+  \begin{equation*}
+    A_0 = \{ x \in \Gamma \mid \abs{ f(x) } \neq \emptyset \}
+  \end{equation*}
+  }
+  \begin{equation*}
+    \norm{f}_1 = \sup \left\{ \sum_{i=1}^{n} \abs{f(x_i)} \mid x_1, ..., x_n \in \Gamma, n \in \mathbb{N} \setminus \{ 0 \} \right\} < \infty.
+  \end{equation*}
+  It is clear that $l_1(\Gamma) \subseteq l_\infty(\Gamma)$, where $l_\infty(\Gamma)$ is from \cref{eg:l_infty_on_gamma}. Consequently, $(l_1(\Gamma), \norm\cdot_1)$ is a normed linear space.
+\end{eg}
+
+We can extend the same idea onto $l_p$ spaces.
+
+\begin{eg}
+  Let $X = C[a, b] = \{ f : [a, b] \to \mathbb{R} \mid f \text{ is continuous on } [a, b] \}$, and define\sidenote{Note in this case $\sup$ is also $\max$, since we are on a closed interval.}
+  \begin{align*}
+    \norm{f}_\infty &= \sup \{ \abs{f(x)} \mid x \in [a, b] \} \\
+                    &= \max \{ \abs{f(x)} \mid x \in [a, b] \}
+  \end{align*}
+  By (regular) Triangle Inequality, for any $f, g \in C[a, b]$, we have
+  \begin{align*}
+    \norm{f + g}_\infty &= \max \{ \abs{ f(x) + g(x) } \mid x \in [a, b] \} \\
+                        &\leq \max \{ \abs{f(x)} \mid x \in [a, b] \} + \max \{ \abs{g(x)} \mid x \in [a, b] \} \\
+                        &= \norm{f}_\infty + \norm{g}_\infty,
+  \end{align*}
+  and, for $\alpha \in \mathbb{R}$,
+  \begin{align*}
+    \norm{\alpha f}_\infty &= \max \{ \abs{ \alpha f(x) } \mid x \in [a, b] \} \\
+                           &= \abs{\alpha} \max \{ \abs{f(x)} \mid x \in [a, b] \\
+                           &= \abs{\alpha} \norm{f}_\infty.
+  \end{align*}
+  Thus $\norm\cdot_\infty$ is a norm on $C[a, b]$, and $( C[a, b], \norm\cdot_\infty )$ is a normed linear space\sidenote{This space is complete.}\sidenote{This space is important for us for the purpose of this course.}.
+
+  Also, observe that
+  \begin{equation*}
+    C[a, b] \subset l_\infty( [a, b] ).
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Let $X = C[a, b]$ \sidenote{Some authors also write this as $L'[a, b]$.} have the same definition as the previous example, but this time define
+  \begin{equation*}
+    \norm{f}_1 = \int_{a}^{b} \abs{ f(t) } \dif{t}.
+  \end{equation*}
+  By \hlnotea{linearity of integration}, both the triangle equality and scalar multiplication hold, and so $(C[a, b], \norm\cdot_1)$ is a normed linear space\sidenote{Compared to the last example, this is not a complete space.}.
+\end{eg}
+
+\begin{eg}
+  Let $X = C[a, b]$, and $1 < p < \infty$. Define
+  \begin{equation*}
+    \norm{f}_p = \left( \int_{a}^{b} \abs{f(x)}^p \dif{x} \right)^{\frac{1}{p}}
+  \end{equation*}
+  Again, by linearity of integration, scalar multiplication holds. However, it is not as easy to show for the triangle inequality; we are now asking the same question as we did before for $l_p$, which we solved using \hyperref[thm:holder_s_inequality]{H\"{o}lder's Inequality} and \hyperref[thm:minkowshi_s_inequality]{Minkowski's Inequality}. But now, instead of summations, we have integrations.
+\end{eg}
+
+\begin{thm}[H\"{o}lder's Inequality v2]
+\index{H\"{o}lder's Inequality v2}
+\label{thm:holder_s_inequality_v2}
+  Let $1 < p < \infty$ and $\frac{1}{p} + \frac{1}{q} = 1$. For each $f, g \in C[a, b]$, we have
+  \begin{equation*}
+    \int_{a}^{b} \abs{f(t)g(t)} \dif{t} \leq \left( \int_{a}^{b} \abs{f(t)}^p \dif{t} \right)^\frac{1}{p} \left( \int_{a}^{b} \abs{g(t)}^q \dif{t} \right)^\frac{1}{q}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  If either $f(x) = 0$ or $g(x) = 0$ for all $x \in [a, b]$, then the inequality holds trivially so. Thus, we may assume that $\forall x \in [a, b]$, $f(x) \neq 0 \neq g(x)$. By the linearity of integration, we can apply the same reasoning as we did in \cref{thm:holder_s_inequality}, and assume that
+  \begin{equation*}
+    \int_{a}^{b} \abs{f(t)}^p \dif{t} = 1 = \int_{a}^{b} \abs{g(t)}^q \dif{t} 
+  \end{equation*}
+  By \cref{lemma:lemma_for_holders}, we have
+  \begin{equation*}
+    \abs{f(t) g(t)} \leq \frac{\abs{f(t)}^p}{p} + \frac{\abs{g(t)}^q}{q}.
+  \end{equation*}
+  Thus
+  \begin{align*}
+    \int_{a}^{b} \abs{f(t) g(t)} \dif{t} &\leq \int_{a}^{b} \left( \frac{\abs{f(t)}^p}{p} + \frac{\abs{g(t)}^q}{q} \right) \dif{t} \\
+                                         &= \frac{1}{p} + \frac{1}{q} = 1 \\
+                                         &= \left( \int_{a}^{b} \abs{f(t)}^p \dif{t} \right)^\frac{1}{p} \left( \int_{a}^{b} \abs{g(t)}^q \dif{t} \right)^\frac{1}{q}
+  \end{align*}
+  as required.\qed
+\end{proof}
+
+\begin{thm}[Minkowski's Inequality v2]
+\index{Minkowski's Inequality v2}
+\label{thm:minkowski_s_inequality_v2}
+  Let $1 < p < \infty$. If $f, g \in C[a, b]$, then
+  \begin{equation*}
+    \left( \int_{a}^{b} \abs{(f + g)(t)}^p \dif{t} \right)^\frac{1}{p} \leq \left( \abs{f(t)}^p \dif{t} \right)^\frac{1}{p} \cdot \left( \int_{a}^{b} \abs{g(t)}^p \dif{t} \right)^\frac{1}{p}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  The proof is similar to the one we had in \cref{thm:minkowshi_s_inequality}; if $\forall x \in [a, b]$, either $f(x) = 0$ or $g(x) = 0$, then the inequality holds trivially so. Thus we may assyme that $\forall x \in [a, b]$, $f(x) \neq 0 \neq g(x)$. Now, notice that by (regular) Triangle Inequality and, later on, \cref{thm:holder_s_inequality_v2},
+  \begin{align*}
+    &\int_{a}^{b} \abs{(f + g)(t)}^p \dif{t} \\
+    &= \int_{a}^{b} \abs{(f + g)(t)} \abs{(f + g)(t)}^{p - 1} \dif{t} \\
+    &\leq \int_{a}^{b} \abs{f(t)} \abs{(f + g)(t)}^{p - 1} \dif{t} + \int_{a}^{b} \abs{g(t)} \abs{(f + g)(t)} \dif{t} \\
+    &\leq \left( \int_{a}^{b} \abs{f(t)}^p \dif{t} \right)^\frac{1}{p} \left( \int_{a}^{b} \abs{(f + g)(t)}^{q (p - 1)} \dif{t} \right)^\frac{1}{q} \\
+    &\qquad + \left( \int_{a}^{b} \abs{g(t)}^p \dif{t} \right)^\frac{1}{p} \left( \int_{a}^{b} \abs{(f + g)(t)}^{q (p - 1)} \dif{t} \right)^\frac{1}{q} \\
+    &= \left[ \left( \int_{a}^{b} \abs{f(t)}^p \dif{t} \right)^\frac{1}{p} + \left( \int_{a}^{b} \abs{g(t)}^p \dif{t} \right)^\frac{1}{p} \right] \\
+    &\qquad \cdot \left( \int_{a}^{b} \abs{(f + g)(t)}^{p} \right)^\frac{1}{q}
+  \end{align*}
+  where we note that $\frac{1}{p} + \frac{1}{q} = 1 \implies p = q(p - 1)$. Consequently, since $\frac{1}{p} = 1 - \frac{1}{q}$,
+  \begin{equation*}
+    \left( \int_{a}^{b} \abs{(f + g)(t)}^p \dif{t} \right)^\frac{1}{p} \leq \left( \abs{f(t)}^p \dif{t} \right)^\frac{1}{p} \cdot \left( \int_{a}^{b} \abs{g(t)}^p \dif{t} \right)^\frac{1}{p},
+  \end{equation*}
+  as required.\qed
+\end{proof}
+
+This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, and so $( C[a, b], \norm\cdot_p )$ is a normed linear space.\marginnote{
+\begin{ex}
+  Show that there exists an injection from $(C[a, b], \norm\cdot_2)$ to $l_2(\mathbb{N})$. Note that this does not work for $p \geq 3$.
+\end{ex}}
+
+\begin{eg}[Bounded Operator]
+  Let $(X, \norm\cdot_X)$ and $(Y, \norm\cdot_Y)$ be normed linear spaces. Let $T : X \to Y$ be linear. Define
+  \begin{equation*}
+    \norm{T} = \sup \{ \norm{T_X}_Y \mid \norm{x}_X < 1 \}.
+  \end{equation*}
+  We say that $T$ is bounded if $\norm{T} < \infty$. Let
+  \begin{equation*}
+    B(X, Y) = \{ T : X \to Y \mid T \text{ is bounded } \}.
+  \end{equation*}
+  In the next lecture, we shall show that $(B(X, Y), \norm\cdot)$ is a normed linear space.
+\end{eg}
+
+\newthought{Question}: Consider the transformation $\begin{bmatrix} 1 & 2 \\ 1 & 1 \end{bmatrix} : \mathbb{R}^2 \to \mathbb{R}^2$. What is a norm $\norm{ \begin{bmatrix} 1 & 2 \\ 1 & 1 \end{bmatrix} }$ that works?
+
+% section introduction_to_metric_spaces_continued_2 (end)
+
+% chapter lecture_11_oct_01st (end)
 
 \appendix
 
