@@ -2365,6 +2365,160 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
 
 % chapter lecture_12_oct_03rd (end)
 
+\chapter{Lecture 13 Oct 05th}%
+\label{chp:lecture_13_oct_05th}
+% chapter lecture_13_oct_05th
+
+\section{Topology on Metric Spaces (Continued)}%
+\label{sec:topology_on_metric_spaces_continued}
+% section topology_on_metric_spaces_continued
+
+\begin{thm}[Open Balls are Open]
+\label{thm:open_balls_are_open}
+  \begin{enumerate}
+    \item $B(x_0, \epsilon)$ is open.
+    \item $B[x_0, \epsilon]$ is closed.
+    \item Every open set is the union of open balls.
+    \item $\forall x \in X$, $\{ x \}$ is closed.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Consider $x \in B(x_0, \epsilon)$ and let $r = d(x, x_0)$.
+      \begin{marginfigure}
+        \begin{center}
+        \begin{tikzpicture}
+          \draw[dotted] (0, 0) circle(1.5);
+          \node[above,circle,fill,inner sep=1pt,label={$x_0$}] at (0, 0) {};
+          \draw[<->] (0, 0) -- (1.5, 0) node[midway,above] {$\epsilon$};
+          \node[below,circle,fill,inner sep=1pt,label={270:{$x$}}] at (-.5, -.5) {};
+          \draw[<->] (0, 0) -- (-.5,-.5) node[midway,above] {$r$};
+        \end{tikzpicture}
+        \end{center}
+        \caption{Idea of proof for 1. in $\mathbb{R}^2$.}
+      \end{marginfigure}
+      Let $\alpha = \epsilon - r$. Assume that $y \in B(x, \alpha)$. By the Triangle Inequality,
+      \begin{equation*}
+        d(x_0, y) \leq d(x_0, x) + d(x, y) < r + \alpha = \epsilon.
+      \end{equation*}
+
+    \item Let $y \in B[x_0, \epsilon]^C$, and let $r = d(x_0, y)$.
+      \begin{marginfigure}
+        \begin{center}
+        \begin{tikzpicture}
+          \draw (0, 0) circle(1.5);
+          \node[above,circle,fill,inner sep=1pt,label={$x_0$}] at (0, 0) {};
+          \draw[<->] (-1.5,0) -- (0,0) node[midway,above] {$\epsilon$};
+          \node[above,circle,fill,inner sep=1pt,label={$y$}] at (2, 1) {};
+          \draw[<->] (0, 0) -- (2, 1) node[midway,above] {$r$};
+          \draw[dotted] (2, 1) circle(.7360679774997896964);
+        \end{tikzpicture}
+        \end{center}
+        \caption{Idea of proof for 2. in $\mathbb{R}^2$.}
+      \end{marginfigure}
+      Let $\alpha = r - \epsilon$. Assume $z \in B(y, \alpha)$, and suppose, for contradiction, that $z \in B[x_0, \epsilon]$. Then
+      \begin{equation*}
+        r = d(x_0, y) \leq d(x_0, z) + d(z, y) < \epsilon + \alpha = r,
+      \end{equation*}
+      but $r < r$ contradicts the fact that $r = r$.
+
+    \item Let $U \subset X$ be open. $\forall x \in U$, let $\epsilon_x > 0$ be such that $B(x, e\spilon_x) \subset U$. Then
+      \begin{equation*}
+        U = \bigcup_{x \in U} B(x, \epsilon_x).
+      \end{equation*}
+
+    \item Let $y \in X$ such that $y \neq x$. Let $r = d(y, x)$. Then $x \notin B\left(y, \frac{r}{2}\right)$, and so
+      \begin{equation*}
+        B\left(y, \frac{r}{2}\right) \subset \{ x \}^C.
+      \end{equation*}\qed
+  \end{enumerate}
+\end{proof}
+
+\begin{eg}[Open Intervals are Open]
+  Let $X = \mathbb{R}$, and $d(x, y) = \abs{x - y}$, the standard metric. Let $I = (a, b)$, for some $a, b \in \mathbb{R} \cup \{ \pm \infty \}$. Let $x \in I$. Now let
+  \begin{equation*}
+    \epsilon = \min \{ 1, \abs{x - a}, \abs{x - b} \}.
+  \end{equation*}
+  Then, clearly so, $B(x, \epsilon) \subset I$.
+\end{eg}
+
+If $U \subset \mathbb{R}$ is open, and if we define $\sim$ on $U$ by $x \sim y$ \sidenote{This is what we did in Q1.}. if $(x, y) , (y, x) \subset U$. We proved that $\sim$ is an equivalence relation. Let $I_x = [x]$ be the interval defined by $\sim$. We proved that $I_x$ is an open interval.
+
+Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be expressed as the union of a countable collection $\{ I_\alpha, \alpha \in I \}$ of open intervals, which are pairwise disjoint.
+
+\newthought{Question}: Given $U = \{ (x, y) \mid \abs{x}, \abs{y} < 1 \}$, can we do the same as above, i.e. can we use a countable collection of disjoint open sets to express $U$, or, in other words, cover $U$?
+
+\begin{eg}[Cantor Set]\label{eg:cantor_set}
+  Let's consider the closed interval $[0, 1]$, of which we shall label as $P_0$.
+
+  \begin{figure}[h]
+    \begin{center}
+    \begin{tikzpicture}
+      \draw[-] (-0.5,0) -- (9.5,0);
+      \draw[-] (0, .5) -- (0, -.5) node[below] {$0$};
+      \draw[-] (9, .5) -- (9, -.5) node[below] {$1$};
+
+      \node at (1, -.7) {$\frac{1}{9}$};
+      \node at (2, -.7) {$\frac{2}{9}$};
+      \node at (3, -.7) {$\frac{1}{3}$};
+      \node at (6, -.7) {$\frac{2}{3}$};
+      \node at (7, -.7) {$\frac{7}{9}$};
+      \node at (8, -.7) {$\frac{8}{9}$};
+
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (3,0) -- (6,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (1,0) -- (2,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (7,0) -- (8,0);
+
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},base16-eighties-red] (0, 0) -- (1, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},base16-eighties-red] (2, 0) -- (3, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},base16-eighties-red] (6, 0) -- (7, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},base16-eighties-red] (8, 0) -- (9, 0);
+      
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (0.333333,0) -- (0.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (2.333333,0) -- (2.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (6.333333,0) -- (6.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (8.333333,0) -- (8.666667,0);
+    \end{tikzpicture}
+    \end{center}
+    \caption{Cantor set showing up to $n = 2$, with the excluded interval in $n = 3$ shown.}
+    \label{fig:cantor_set}
+  \end{figure}
+
+  Define $P_1$ by removing an open interval of length $\frac{1}{3}$ sitting in the middle of $P_0$, i.e.
+  \begin{equation*}
+    P_1 = [0, 1] \setminus \left(\frac{1}{3}, \frac{2}{3}\right) = \left[0, \frac{1}{3}\right] \cup \left[ \frac{2}{3}, 1 \right]
+  \end{equation*}
+
+  Define $P_2$ by removing an open interval of length $\frac{1}{3^2}$ sitting in the middle of each of the $2$ closed intervals in $P_1$, ie.
+  \begin{equation*}
+    P_2 = \left[0, \frac{1}{9}\right] \cup \left[ \frac{2}{9}, \frac{1}{3} \right] \cup \left[ \frac{2}{3}, \frac{7}{9} \right] \cup \left[ \frac{8}{9}, 1 \right]
+  \end{equation*}
+
+  Recursively so, define $P_{n + 1}$ by removing an open interval of length $\frac{1}{3^{n + 1}}$ sitting in the middle of each of the $2^n$ closed intervals in $P_n$.
+
+  Let $P$, the \hldefn{Cantor Set} (or \hldefn{Cantor Ternary Set}), be defined as
+  \begin{equation*}
+    P = \bigcap_{n = 0}^{\infty} P_n.
+  \end{equation*}
+  The following are some properties of $P$:
+  \begin{enumerate}
+    \item $P$ is closed, since it is closed under an arbitrary number of closed sets (see \cref{crly:properties_of_closed_sets}).
+    \item We have
+      \begin{equation*}
+        x \in P \iff x = \sum_{i=1}^{\infty} \frac{a_n}{3^n}
+      \end{equation*}
+      where $a_n = 0, 2$. In other words, every element of $P$ is a ternary number.
+    \item $\abs{P} = 2^{\aleph_0} = c$.
+    \item $P_n$ does not contain any interval of length greater than or equal to $\frac{1}{3^n}$.
+    \item Consequently, the length of $P$ is $0$.
+  \end{enumerate}
+\end{eg}
+
+% section topology_on_metric_spaces_continued (end)
+
+% chapter lecture_13_oct_05th (end)
+
 \appendix
 
 \chapter{Useful Theorems from Earlier Calculus}%
