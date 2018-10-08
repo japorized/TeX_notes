@@ -2205,6 +2205,166 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
 
 % chapter lecture_11_oct_01st (end)
 
+\chapter{Lecture 12 Oct 03rd}%
+\label{chp:lecture_12_oct_03rd}
+% chapter lecture_12_oct_03rd
+
+\section{Introduction to Metric Spaces (Continued 3)}%
+\label{sec:introduction_to_metric_spaces_continued_3}
+% section introduction_to_metric_spaces_continued_3
+
+\begin{eg}[Bounded Operator]
+  Let $(X, \norm\cdot_X)$ and $(Y, \norm\cdot_Y)$ be normed linear spaces. Let $T : X \to Y$ be linear. Define\marginnote{In this example, we look at how we can apply a translation of norms from $X$ to $Y$ that preserves the norm.}
+  \begin{equation*}
+    \norm{T} = \sup \{ \norm{T(x)}_Y \mid \norm{x}_X < 1 \}.
+  \end{equation*}
+  We say that $T$ is bounded if $\norm{T} < \infty$. Let
+  \begin{equation*}
+    B(X, Y) = \{ T : X \to Y \mid T \text{ is bounded } \}.
+  \end{equation*}
+  To show that $B(X, Y)$ is a normed linear space, let $S, T \in B(X, Y)$, and let $\norm{x}_X \leq 1$. Then
+  \begin{align*}
+    \norm{(S + T)(x)}_Y &= \norm{S(x) + T(x)}_Y \\
+                        &\leq \norm{S(x)}_Y + \norm{T(x)}_Y \quad \because \norm\cdot_Y \text{ is a norm } \\
+                        &\leq \norm{S} + \norm{T}
+  \end{align*}
+  and so $S + T \in B(X, Y)$ and $\norm{S + T} \leq \norm{S} + \norm{T}$. For $\alpha \in \mathbb{R}$, we have
+  \begin{align*}
+    \norm{\alpha S} &= \sup \{ \norm{(\alpha S)(x)}_Y \mid \norm{x}_X \leq 1 \} \\
+                    &= \abs{\alpha} \sup \{ \norm{S(x)}_Y \mid \norm{x}_X \leq 1 \} \quad \because \norm\cdot_Y \text{ is a norm } \\
+                    &= \abs{\alpha} \norm{S}.
+  \end{align*}
+  So $(\alpha S) \in B(X, Y)$ and $\norm{\alpha S} = \abs{\alpha} \norm{S}$. It is clear that due to $\norm\cdot_Y$ being a norm, and so $\norm\cdot$ is also positive definite. Thus $B(X, Y)$ is a normed linear space as claimed.
+\end{eg}
+
+% section introduction_to_metric_spaces_continued_3 (end)
+
+\section{Topology on Metric Spaces}%
+\label{sec:topology_on_metric_spaces}
+% section topology_on_metric_spaces
+
+\begin{defn}[Open \& Closed]
+\label{defn:open_n_closed}
+  Let $X(, d)$ be a metric space. If $x_0 \in X$, then
+  \begin{equation*}
+    B(x_o, \epsilon) = \{ y \in X \mid d(x, y) < \epsilon \}
+  \end{equation*}
+  is called the \hldefn{open ball} centered at $x_0$ with radius $\epsilon > 0$.
+  \begin{equation*}
+    B[x_0, \epsilon] = \{ y \in X \mid d(x, y) \leq \epsilon \}
+  \end{equation*}
+  is called the \hldefn{closed ball} centered at $x_0$ with radius $\epsilon > 0$.
+
+  We say that $U \subset X$ is \hldefn{open} if
+  \begin{equation*}
+    \forall x \in U \enspace \exists \epsilon_0 > 0 \quad B(x_0, \epsilon_0) \subset U.
+  \end{equation*}
+  We say that $F \subset X$ is \hldefn{closed} if $F^C$ is open.
+\end{defn}
+
+\begin{propo}[Properties of Open Sets]
+\label{propo:properties_of_open_sets}
+  Let $(X, d)$ be a metric space.
+  \begin{enumerate}
+    \item $X, \emptyset$ are open,
+    \item If $\{ U_\alpha \}_{ \alpha \in I }$ is a collection of open sets, then $U = \bigcup_{\alpha \in I}$ is open.
+    \item If $\{ U_1, ..., U_n \}$ is a collection of open sets, then $U = \bigcap_{i = 1}^{n} U_i$ is open.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $x_0 \in X$, then $B(x_0, 1) \subseteq X$, and so $X$ is open. The empty set is open vacuously so.
+    \item Let $U = \bigcup_{\alpha \in I} U_\alpha$ and $x_0 \in U$. Then $\exists \alpha_0 \in I$ such that $x_0 \in U_{\alpha_0}$. Then $\exists \epsilon_0 > 0$ such that
+      \begin{equation*}
+        B(x_0, \epsilon_0) \subset U_{\alpha_0} \subset U.
+      \end{equation*}
+    \item Let $x_0 \in U = \bigcap_{i = 1}^{n}$. Then for each $i \in \{1, ..., n\}$, $\exists \epsilon_i > 0$ such that $B(x_0, \epsilon_i) \subset U_i$. Let
+      \begin{equation*}
+        \epsilon_0 = \min \{ \epsilon_1, ..., \epsilon_n \}.
+      \end{equation*}
+      Then we have that $\forall i \in \{1, ..., n\}$, $\epsilon_0 \leq \epsilon_i$. Thus
+      \begin{equation*}
+        B(x_0, \epsilon_0) \subset B(x_0, \epsilon_i) \subset U_i
+      \end{equation*}
+      for each $i$. Therefore $B(x_0, \epsilon_0) \subset U$.
+  \end{enumerate}\qed
+\end{proof}
+
+\begin{crly}[Properties of Closed Sets]
+\label{crly:properties_of_closed_sets}
+  Let $(X, d)$ be a metric space.
+  \begin{enumerate}
+    \item $X, \emptyset$ are closed.
+    \item If $\{ F_\alpha \}_{\alpha \in I}$ is a collection of closed sets, then $F = \bigcap_{\alpha \in I} F_\alpha$ is closed.
+    \item If $\{ F_1, ..., F_n \}$ is a collection of closed sets, then $F = \bigcup_{i = 1}^{n} F_i$ is closed.
+  \end{enumerate}
+\end{crly}
+
+\begin{proof}
+  The proof follows from \hyperref[thm:de_morgan_s_laws]{De Morgan's Laws}, \cref{propo:properties_of_open_sets}, and by taking set complements.\marginnote{
+  \begin{ex}
+    Write out the full proof for \cref{crly:properties_of_closed_sets} as an exercise.
+  \end{ex}
+  }\qed
+\end{proof}
+
+\begin{eg}
+  Let $X$ be any set and $d$ the discrete metric
+  \begin{equation*}
+    d(x, y) = \begin{cases}
+      1 & x \neq y \\
+      0 & x = y
+    \end{cases}
+  \end{equation*}
+  We want to know what sets are open on $X$ under $d$. Notice that any set of just a singleton is open, since
+  \begin{equation*}
+    B\left(x_0, \frac{1}{2}\right) \subset X.
+  \end{equation*}
+  Consequently, any $A \in \mathcal{P}(X)$ is an arbitrary union of open sets, i.e.
+  \begin{equation*}
+    A = \bigcup_{\x \in A} \{ x \}.
+  \end{equation*}
+  Thus by \cref{propo:properties_of_open_sets}, $A$ is open.
+\end{eg}
+
+\begin{note}
+  On $\mathbb{R}$, only $\emptyset$ and $\mathbb{R}$ itself are both open and closed. This can be proven using the \hldefna{Intermediate Value Theorem}.
+\end{note}
+
+\begin{defn}[Topology]\index{Topology}
+\label{defn:topology}
+  Given any $X$, a set $\tau \subset \mathcal{P}(X)$ is called a \hlnoteb{topology} on $X$ is
+  \begin{enumerate}
+    \item $X, \emptyset \in \tau$
+    \item If $\{ U_\alpha \}_{\alpha \in I}$ such that for each $\alpha \in I$, $U_\alpha \in \tau$, then
+      \begin{equation*}
+        U = \bigcup_{\alpha \in I} U_\alpha \in \tau.
+      \end{equation*}
+    \item If $\{ U_1, ..., U_n \}$ such that $U_i \in \tau$ for each $i \in \{1, ..., n\}$, then
+      \begin{equation*}
+        U = \bigcap_{i = 1}^{n} U_i \in \tau.
+      \end{equation*}
+  \end{enumerate}
+  If $(X, d)$ is a metric space, then
+  \begin{equation*}
+    \tau_d = \{ U \subset X \mid U \text{ open in } (X, d) \}
+  \end{equation*}
+  is called a \hldefn{metric topology}, or \hldefn{$d$-topology}, associated with the metric $d$. We call $(X, \tau)$ a \hldefn{topological space}.
+\end{defn}
+
+\begin{eg}
+  Given $X$,
+  \begin{enumerate}
+    \item $\mathcal{P}(X)$ is a topology on $X$, and it is called the \hldefn{discrete topology};
+    \item $\{ \emptyset, X \}$ is a topology on $X$, and it is called the \hldefn{indiscrete topology}.
+  \end{enumerate}
+\end{eg}
+
+% section topology_on_metric_spaces (end)
+
+% chapter lecture_12_oct_03rd (end)
+
 \appendix
 
 \chapter{Useful Theorems from Earlier Calculus}%
