@@ -1124,7 +1124,7 @@ Before proving the theorem, we shall note the following definition.
 
 \begin{defn}[$\alpha$-function]\index{$\alpha$-function}
 \label{defn:alpha_function}
-  Using definitions in \cref{thm:transfinite_recursion}, a function $t$ with domain in the ordinals is called an \hlnoteb{$\alpha$-function} defined by $G$ if
+  Using definitions in \cref{thm:transfinite_recursion_v1}, a function $t$ with domain in the ordinals is called an \hlnoteb{$\alpha$-function} defined by $G$ if
   \begin{equation*}
     \forall \beta < \alpha \quad t(\beta) = G(t \restriction_\beta).
   \end{equation*}
@@ -1277,7 +1277,7 @@ Before proving the theorem, we shall note the following definition.
   \end{equation*}
   Unlike regular addition, ordinal addition is not commutative. For instance, while $\omega + 1 = S(\omega)$,
   \begin{equation*}
-    1 + \omega = \{ 1 + n : n \in \omega \} = \omega.
+    1 + \omega = \sup \{ 1 + n : n \in \omega \} = \omega.
   \end{equation*}
 \end{eg}
 
@@ -1331,7 +1331,7 @@ Before proving the theorem, we shall note the following definition.
 \end{eg}
 
 \begin{ex}
-  Prove that in general, $\forall \beta \in \Ord$, we have $\beta + \beta$.
+  Prove that in general, $\forall \beta \in \Ord$, we have $\beta \cdot 2 = \beta + \beta$.
 \end{ex}
 
 Note that ordinal multiplication, like its addition counterpart, is not necessarily commutative.
@@ -1481,7 +1481,78 @@ Before proving the theorem stated at the end of last lecture, we require the fol
 \end{thm}
 
 \begin{proof}
-  \hlwarn{to be added later}
+  \hlnotec{Uniqueness}
+
+  Let $(E, R)$ be a strict well-ordering. Suppose that
+  \begin{equation}\label{eq:unique_ordinal_for_swo_1}
+    (E, R) \simeq (\alpha, \in) \text{ and } (E, R) \simeq (\beta, \in)
+  \end{equation}
+  where $\alpha, \beta \in \Ord$. Then, either
+  \begin{equation*}
+    \alpha < \beta, \quad \alpha = \beta \enspace \text{ or } \enspace \beta < \alpha.
+  \end{equation*}
+  Suppose $\alpha < \beta$ (this argument also works for $\beta < \alpha$, by simply swapping the inequality on $\alpha$ and $\beta$). Then $\alpha$ is a proper initial segment of $\beta$. From \cref{eq:unique_ordinal_for_swo_1}, we have that $(\alpha, \in) \simeq (\beta, \in)$ via $(E, R)$, but this contradicts \cref{lemma:strict_well_ordering_notsimeq_any_of_its_proper_initial_segment}. Thus we must have $\alpha = \beta$.
+
+  \noindent\hlnotec{Existence}
+
+  If $E = \emptyset$, then we can choose $0 \in \Ord$ to be the ordinal of which $E$ is isomorphic to. Suppose $E \neq \emptyset$. Denote an initial segment of $E$ by
+  \begin{equation*}
+    I_x := \{ y \in E \mid y < x \}.
+  \end{equation*}
+  Let
+  \begin{equation*}
+    A = \{ x \in E \mid \exists \beta \in \Ord \enspace (I_x, R) \simeq (\beta, \in) \}.
+  \end{equation*}
+  Notice that $(I_x, R) \simeq (\beta, \in)$ is a definite condition: the both $I_x$ and $\beta$ are sets, and so by Replacement, there is a graph, $\Gamma(f)$, from $I_x$ to $\beta$; injectivity of an element in $\Gamma(f)$ is expressible as
+  \begin{equation*}
+    \forall y_1 \forall y_2 \forall \beta_1 \forall \beta_2 ( y_1, y_2 \in I_x \land \beta_1, \beta_2 \in \Ord ( (y_1, \beta_1) = (y_2, \beta_2) \lrarrow y_1 = y_2 ) );
+  \end{equation*}
+  surjectivity is expressible as
+  \begin{equation*}
+    \forall \beta ( \beta \in \alpha \rarrow \exists y ( y \in I_x \rarrow (y, \beta) \in \Gamma(f) ) ).
+  \end{equation*}
+  Thus by Bounded Separation, $A$ is a set. Also, $A$ is nonempty, since the least element of $E$ will be isomorphic to $0$.
+
+  By our uniqueness proof above, let $f$ be a function on $A$, where $f(x)$ is the unique ordinal that is isomorphic to $(I_x, R)$. By Replacement,
+  \begin{equation*}
+    \Img(f) = \{ f(x) \in \Ord \mid x \in A \} \subset \Ord
+  \end{equation*}
+  is a set. By \cref{propo:properties_of_ordinals_2} \cref{item:properties_of_ordinals_2_3}, $\exists \alpha \in \Ord \setminus \Img(f)$ that is $\in$-least. We want to show that $f : A \to \Img(f)$ is an isomorphism between $(E, R)$ and $(\alpha, \in)$.\sidenote{This is why we need to show that
+  \begin{enumerate}
+    \item $f$ is order-preserving, which is one of the requirements of an isomorphism (by our definition in \cref{defn:isomorphism});
+    \item $f$ is injective;
+    \item $\alpha = \Img(f)$;
+    \item $A = E$,
+  \end{enumerate}
+  where the last 2 items will force $f$ to be surjective.}
+
+  \underline{$f$ is order-preserving}: We shall also show here that $A$ is \hlnotea{downward closed}. $\forall x, y \in E$, we want to show that $xRy \land y \in A \implies x \in A$. By the assumption, we have that
+  \begin{equation*}
+    f(x) \overset{h}{\simeq} I_X \subsetneq I_y \overset{h}{\simeq} f(y)
+  \end{equation*}
+  Since $f(x), f(y) \in \Ord$, we have either
+  \begin{equation*}
+    f(x) < f(y), \quad f(x) = f(y), \enspace \text{ or } \enspace f(y) < f(x).
+  \end{equation*}
+  If $f(x) = f(y)$, then $I_x \simeq I_y$ which contradicts \cref{lemma:strict_well_ordering_notsimeq_any_of_its_proper_initial_segment}. If $f(y) < f(x)$, then
+  \begin{equation*}
+    h(I_x) \subseteq h(I_y) = f(y) < f(x) = h(I_x),
+  \end{equation*}
+  which is a contradiction. Thus we must have $f(x) < f(y)$, i.e. $f$ preserves order as claimed, and $f(x)$ is an initial segment of $f(y)$, i.e. $f(x) \in \Ord$, which implies that $x \in A$.
+
+  \underline{$\alpha = \Img(f)$}: Suppose $\beta \in \alpha \implies \beta < \alpha \implies \beta \in \Img(f)$ by choice of $\alpha$ being the least. Therefore, $\alpha \in \Img(f)$.
+
+  Now suppose that $\beta \in \Img(f)$. Then $\exists x \in A$ such that $(I_x, R) \simeq (\beta, \in)$. Again, we have 3 possibilities; either
+  \begin{equation*}
+    \alpha < \beta, \quad \alpha = \beta \enspace \text{ or } \enspace \beta < \alpha.
+  \end{equation*}
+  Now $\alpha < \beta \implies \alpha \in \beta \implies \alpha = h(I_y)$ where $yRx$ and $I_y \subset I_X$. Since $A$ is downward closed, $\alpha \in \Img(f)$, a contradiction. We also have that $\alpha \neq \beta$ since $\beta \in \Img(f)$ and $\alpha \in \Ord \setminus \Img(f)$, i.e. $\alpha \notin \Img(f)$. Thus $\beta < \alpha$, and so $\beta \in \alpha$. Therefore $\alpha = \Img(f)$.
+
+  \underline{$f$ is injective}: Suppose that $f(x) = f(y)$. $xRy \implies I_x$ is an initial segment of $I_y$, which contradicts \cref{lemma:strict_well_ordering_notsimeq_any_of_its_proper_initial_segment}. The argument is similar for if $yRx$. Thus we must have $x = y$.
+
+  \underline{$A = E$}: It suffices to show that $E \setminus A = \emptyset$. Suppose for contradiction that $E \setminus A \neq \emptyset$, i.e. $E = A$. Then $\exists x \in E \setminus A$, since $E \setminus A \subset E$ which has a strict well-ordering. Since $f$ preserves order, for any $y \in E$, $xRy \implies y \notin A$. On the other hand, $yRx \implies y \in A$. Thus $I_x = A$. However, since $f$ is an isomorphism between $(A, R)$ and $(\alpha, \in)$ (since we assume that $A = E$), we have that $I_x = A \simeq \alpha$, i.e. $x \in A$, which is a contradiction to the choice that $x \in E \setminus A$.
+
+  This completes the proof.\qed
 \end{proof}
 
 % subsection well_orderings_and_ordinals (end)
@@ -1501,8 +1572,8 @@ While ordinals allow us to enumerate, we cannot use it to ``measure''. For examp
 
 The following is a well-known theorem that makes proving equinumerosity a lot easier.
 
-\begin{lemma}[Schr\"{o}der-BernStein Theorem]
-\index{Schr\"{o}der-BernStein Theorem}
+\begin{lemma}[Schr\"{o}der-Bernstein Theorem]
+\index{Schr\"{o}der-Bernstein Theorem}
 \label{lemma:schroder_bernstein_theorem}
   Given two sets $A$ and $B$, $\abs{A} = \abs{B}$ if and only if there exists injections in both directions, i.e. an injection from $A$ to $B$, and an injection from $B$ to $A$.
 \end{lemma}
@@ -1585,7 +1656,7 @@ The following is a well-known theorem that makes proving equinumerosity a lot ea
 
 \begin{defn}[Cardinal]\index{Cardinal}
 \label{defn:cardinal}
-  A \hlnoteb{cardinal} is an ordinal $\alpha$ with the property that $\forall \beta < \alpha$, $\abs{\alpha} = \abs{\beta}$
+  A \hlnoteb{cardinal} is an ordinal $\alpha$ with the property that $\forall \beta < \alpha$, $\abs{\alpha} \neq \abs{\beta}$
 \end{defn}
 
 In the next lecture, we shall see that the collection of cardinals is a proper class, and is a subclass of the ordinals.
