@@ -1,7 +1,19 @@
-#!/usr/bin/env sh
+#!/usr/bin/env dash
 
 texmfhome=$(kpsewhich --var-value=TEXMFHOME)
-texnotesdir=$( cd $(dirname $0) ; pwd )
+cd $(dirname "${0}") > /dev/null
+texnotesdir=$(pwd -L)
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]
+then
+  echo "Usage: passed without arguments (-h to get this help message)"
+  echo "This script creates symlinks of files from
+origin      : $texnotesdir/tex-common
+  to
+destination : $texmfhome/tex/latex"
+  exit 0
+fi
+
 
 if [ ! -d "$texmfhome" ]
 then
@@ -12,7 +24,7 @@ then
       * ) echo "Script terminated" ; exit 0;;
   esac
 else
-  echo "This operation will overwrite existing files (if any) from the origin to the destination.
+  echo "This operation will overwrite existing files (if any) from in the destination directory.
   origin      : $texnotesdir/tex-common
   destination : $texmfhome/tex/latex"
   read -p "Overwrite? (yN) " overwrite
