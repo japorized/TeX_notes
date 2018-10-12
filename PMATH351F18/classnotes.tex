@@ -3,7 +3,7 @@
 
 \usepackage{classnotetitle}
 
-\title{PMATH351 - Real Analysis}
+\title{PMATH351 --- Real Analysis}
 \author{Johnson Ng}
 \subtitle{Classnotes for Fall 2018}
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
@@ -15,6 +15,7 @@
 \DeclareMathOperator{\glb}{glb }
 \DeclareMathOperator{\Range}{Range }
 \DeclareMathOperator{\Domain}{Domain }
+\DeclareMathOperator{\bdy}{bdy }
 
 \newcommand{\norm}[1]{\left\| #1 \right\|}
 
@@ -24,12 +25,12 @@
 \hypersetup{pageanchor=true}
 \tableofcontents
 
-\chapter*{\faBook \enspace List of Definitions}
+\chapter*{\faBook\ \enspace\ List of Definitions}
 \addcontentsline{toc}{chapter}{List of Definitions}
 \theoremlisttype{all}
 \listtheorems{defn}
 
-\chapter*{\faCoffee \enspace List of Theorems}
+\chapter*{\faCoffee\ \enspace\ List of Theorems}
 \addcontentsline{toc}{chapter}{List of Theorems}
 \theoremlisttype{allname}
 \listtheorems{axiom,lemma,thm,crly,propo}
@@ -73,7 +74,7 @@ How do we compare the size of two sets?
     \end{itemize}
 \end{itemize}
 
-Now, given two arbitrary sets, are we guaranteed to always be able to compare their sizes? It would be very tempting to immediately say yes, but to do that, one would have to agree on the \hlnotea{Axiom of Choice}. Fortunately, within the realm of this course, the Axiom of Choice is taken for granted.
+Now, given two arbitrary sets, are we guaranteed to always be able to compare their sizes? It is tempting to immediately say yes, but to do that, one would have to agree on the \hlnotea{Axiom of Choice}. Fortunately, within the realm of this course, the Axiom of Choice is taken for granted.
 
 % section preview_into_the_introduction (end)
 
@@ -89,8 +90,8 @@ Now, given two arbitrary sets, are we guaranteed to always be able to compare th
 
 We shall use the following notations for some of the common set of numbers that we are already familiar with:
 \begin{itemize}
-  \item $\mathbb{N}$ denotes the set of natural numbers $\{1, 2, 3, ...\}$;
-  \item $\mathbb{Z}$ denotes the set of integers $\{..., -2, -1, 0, 1, 2, ...\}$;
+  \item $\mathbb{N}$ denotes the set of natural numbers $\{1, 2, 3, \ldots\}$;
+  \item $\mathbb{Z}$ denotes the set of integers $\{\ldots, -2, -1, 0, 1, 2, \ldots\}$;
   \item $\mathbb{Q}$ denotes the set of rational numbers $\left\{ \frac{a}{b} \mid a \in \mathbb{Z}, b \in \mathbb{N} \right\}$; and
   \item $\mathbb{R}$ denotes the set of real numbers.
 \end{itemize}
@@ -99,31 +100,27 @@ We shall start with having certain basic properties of $\mathbb{N}$, $\mathbb{Z}
 
 \newthought{We will use} the notation $A \subset B$ and $A \subseteq B$ interchangably to mean that $A$ is a subset of $B$ with the possibility that $A = B$. When we wish to explicitly emphasize this possibility, we shall use $A \subseteq B$. When we wish to explicitly state that $A$ is a \hlnotea{proper subset} of $B$, we will either specify that $A \neq B$ or simply $A \subsetneq B$.
 
-\begin{defn}[Universal Set]\index{Universal Set}
-\label{defn:universal_set}\marginnote{This is a hand-wavy definition, but it is not in the interest of this course to further explore on this topic.}
+\begin{defn}[Universal Set]\index{Universal Set}\label{defn:universal_set}\marginnote{This is a hand-wavy definition, but it is not in the interest of this course to further explore on this topic.}
   A universal set, which we shall generally give the label $X$, is a set that contains all the mathematical objects that we are interested in.
 \end{defn}
 
 With a universal set in place, we can have the following definitions:
 
-\begin{defn}[Union]\index{Union}
-\label{defn:union}
-  Let $X$ be a set. If $\{A_\alpha\}_{\alpha \in I}$ such that $A_{\alpha} \subset X$, then the \hlnoteb{union} for all $A_{\alpha}$ is defined as
+\begin{defn}[Union]\index{Union}\label{defn:union}
+  Let $X$ be a set. If ${\{A_\alpha\}}_{\alpha \in I}$ such that $A_{\alpha} \subset X$, then the \hlnoteb{union} for all $A_{\alpha}$ is defined as
   \begin{equation*}
     \bigcup_{\alpha \in I} A_{\alpha} := \{ x \in X \mid \exists \alpha \in I, x \in A_{\alpha} \}.
   \end{equation*}
 \end{defn}
 
-\begin{defn}[Intersection]\index{Intersection}
-\label{defn:intersection}
-  Let $X$ be a set. If $\{A_\alpha\}_{\alpha \in I}$ such that $A_\alpha \subset X$, then the \hlnoteb{intersection} for all $A_\alpha$ is defined as
+\begin{defn}[Intersection]\index{Intersection}\label{defn:intersection}
+  Let $X$ be a set. If ${\{A_\alpha\}}_{\alpha \in I}$ such that $A_\alpha \subset X$, then the \hlnoteb{intersection} for all $A_\alpha$ is defined as
   \begin{equation*}
     \bigcap_{\alpha \in I} A_\alpha := \{ x \in X \mid \forall \alpha \in I, x \in A_\alpha \}.
   \end{equation*}
 \end{defn}
 
-\begin{defn}[Set Difference]\index{Set Difference}
-\label{defn:set_difference}
+\begin{defn}[Set Difference]\index{Set Difference}\label{defn:set_difference}
   Let $X$ be a set and $A, B \subseteq X$. The \hlnoteb{set difference} of $A$ from $B$ is defined as
   \begin{equation*}
     A \setminus B := \{ x \in X \mid x \in A, x \notin B \}.
@@ -132,8 +129,7 @@ With a universal set in place, we can have the following definitions:
 
 On a similar notion:
 
-\begin{defn}[Symmetric Difference]\index{Symmetric Difference}
-\label{defn:symmetric_difference}
+\begin{defn}[Symmetric Difference]\index{Symmetric Difference}\label{defn:symmetric_difference}
 Let $X$ be a set and $A, B \subseteq X$. The \hlnoteb{symmetric difference} of $A$ and $B$ is defined as\marginnote{In words, for an element in the symmetric difference of two sets, the element is either in $A$ or $B$ but not both. We can also think of the symmetric difference as
 \begin{equation*}
   ( A \cup B ) \setminus (A \cap B)
@@ -150,8 +146,7 @@ or
 
 We can also talk about the non-members of a set:
 
-\begin{defn}[Set Complement]\index{Set Complement}
-\label{defn:set_complement}
+\begin{defn}[Set Complement]\index{Set Complement}\label{defn:set_complement}
   Let $X$ be a set and $A \subset X$. The set of all non-members of $A$ is called the \hlnoteb{complement} of $A$, which we denote as
   \begin{equation*}
     A^c := \{ x \in X \mid x \notin A \}.
@@ -161,14 +156,13 @@ We can also talk about the non-members of a set:
 \begin{note}
   Note that
   \begin{equation*}
-    \left( A^c \right)^c = \{ x \in X \mid x \notin A^c \} = \{ x \in X \mid x \in A \} = A.
+    {\left( A^c \right)}^c = \{ x \in X \mid x \notin A^c \} = \{ x \in X \mid x \in A \} = A.
   \end{equation*}
 \end{note}
 
 Now taking a step away from that, we define the following:
 
-\begin{defn}[Empty Set]\index{Empty Set}
-\label{defn:empty_set}
+\begin{defn}[Empty Set]\index{Empty Set}\label{defn:empty_set}
   An \hlnoteb{empty set}, denoted by $\emptyset$, is a set that contains nothing.
 \end{defn}
 
@@ -176,8 +170,7 @@ Now taking a step away from that, we define the following:
   The empty set is set to be a subset of all sets.
 \end{note}
 
-\begin{defn}[Power Set]\index{Power Set}
-\label{defn:power_set}
+\begin{defn}[Power Set]\index{Power Set}\label{defn:power_set}
   Let $X$ be a set. The power set of $X$ is the set that contains all subsets of $X$, i.e.
   \begin{equation*}
     \mathcal{P}(X) := \{ A \mid A \subset X \}.
@@ -189,7 +182,7 @@ Now taking a step away from that, we define the following:
 \end{note}
 
 \begin{eg}
-  Let $X = \{1, 2, ..., n\}$. There are several ways we can show that the size of $\mathcal{P}(X)$ is $2^n$. One of the methods is by using a characteristic function that maps from $A$ to $\{0, 1\}$, defined by
+  Let $X = \{1, 2, \ldots, n\}$. There are several ways we can show that the size of $\mathcal{P}(X)$ is $2^n$. One of the methods is by using a characteristic function that maps from $A$ to $\{0, 1\}$, defined by
   \begin{gather*}
     X_A: A \to \{0, 1\} \\
     X_A(x) = \begin{cases}
@@ -200,13 +193,11 @@ Now taking a step away from that, we define the following:
   Using this function, each element in $X$ have 2 states: one being in the subset, and the other being not in the subset, which are represented by $1$ and $0$ respectively. It is then clear that there are $2^n$ of such configurations.
 \end{eg}
 
-\begin{thm}[De Morgan's Laws]
-\index{De Morgan's Laws}
-\label{thm:de_morgan_s_laws}
-  Let $X$ be a set. Given $\{A_\alpha\}_{\alpha \in I} \subset \mathcal{P}(X)$, we have
+\begin{thm}[De Morgan's Laws]\index{De Morgan's Laws}\label{thm:de_morgan_s_laws}
+  Let $X$ be a set. Given ${\{A_\alpha\}}_{\alpha \in I} \subset \mathcal{P}(X)$, we have
   \begin{enumerate}
-    \item $\left( \bigcup\limits_{\alpha \in I} A_\alpha \right)^c = \bigcap\limits_{\alpha \in I} A_\alpha^c$; and
-    \item $\left( \bigcap\limits_{\alpha \in I} A_\alpha \right)^c = \bigcup\limits_{\alpha \in I} A_\alpha^c$.
+    \item ${\left( \bigcup\limits_{\alpha \in I} A_\alpha \right)}^c = \bigcap\limits_{\alpha \in I} A_\alpha^c$; and
+    \item ${\left( \bigcap\limits_{\alpha \in I} A_\alpha \right)}^c = \bigcup\limits_{\alpha \in I} A_\alpha^c$.
   \end{enumerate}
 \end{thm}
 
@@ -214,7 +205,7 @@ Now taking a step away from that, we define the following:
   \begin{enumerate}
     \item Note that
       \begin{align*}
-        x \in \left( \bigcup_{\alpha \in I} A_\alpha \right)^c &\iff \nexists \alpha \in I \enspace x \in A_\alpha \\
+        x \in {\left( \bigcup_{\alpha \in I} A_\alpha \right)}^c &\iff \nexists \alpha \in I \enspace x \in A_\alpha \\
         &\iff \forall \alpha \in I \enspace x \notin A_\alpha \\
         &\iff \forall \alpha \in I \enspace x \in A_\alpha^c \text{ by set complementation } \\
         &\iff x \in \bigcap_{\alpha \in I} A_\alpha^c.
@@ -222,9 +213,9 @@ Now taking a step away from that, we define the following:
 
     \item Observe that, by part 1,
       \begin{align*}
-        \left( \bigcap_{\alpha \in I} A_\alpha \right)^c = \left( \left( \bigcup_{\alpha \in I} A_{\alpha}^c \right)^c \right)^c = \bigcup_{\alpha \in I} A_\alpha^c.
+        {\left( \bigcap_{\alpha \in I} A_\alpha \right)}^c = {\left( {\left( \bigcup_{\alpha \in I} A_{\alpha}^c \right)}^c \right)}^c = \bigcup_{\alpha \in I} A_\alpha^c.
       \end{align*}
-  \end{enumerate}\qed
+  \end{enumerate}\qed\
 \end{proof}
 
 \begin{eg}
@@ -244,8 +235,7 @@ Now taking a step away from that, we define the following:
 \label{sec:products_of_sets}
 % section products_of_sets
 
-\begin{defn}[Product of Sets]\index{Product of Sets}
-\label{defn:product_of_sets}
+\begin{defn}[Product of Sets]\index{Product of Sets}\label{defn:product_of_sets}
   Given $2$ sets $X$ and $Y$, the \hlnoteb{product} of $X$ and $Y$ is given by
   \begin{equation*}
     X \times Y := \{ (x, y) \mid x \in X , y \in Y \}.
@@ -256,20 +246,19 @@ Now taking a step away from that, we define the following:
 \begin{note}
   Now if
   \begin{align*}
-    X &= \{ x_1, x_2, ..., x_n \}, \\
-    Y &= \{ y_1, y_2, ..., y_m \},
+    X &= \{ x_1, x_2, \ldots, x_n \}, \\
+    Y &= \{ y_1, y_2, \ldots, y_m \},
   \end{align*}
   then
   \begin{equation*}
-    X \times Y = \{ (x_i, y_j) \mid i = 1, 2, ..., n, \; j = 1, 2, ..., m \}
+    X \times Y = \{ (x_i, y_j) \mid i = 1, 2, \ldots, n, \; j = 1, 2, \ldots, m \}
   \end{equation*}
   and so the size of $X \times Y$ is $mn$.
 \end{note}
 
 Consequently, we can think of tuples as two elements being in some ``relation''.
 
-\begin{defn}[Relation]\index{Relation}
-\label{defn:relation}
+\begin{defn}[Relation]\index{Relation}\label{defn:relation}
   A \hlnoteb{relation} on sets $X$ and $Y$ is a subset $R$ of the product $X \times Y$. We write
   \begin{equation*}
     xRy \enspace \text{ if } (x, y) \in R \subset X \times Y.
@@ -283,35 +272,34 @@ Consequently, we can think of tuples as two elements being in some ``relation''.
 
 In relation to that, functions are, essentially, relations.
 
-\begin{defn}[Function]\index{Function}
-\label{defn:function}
+\begin{defn}[Function]\index{Function}\label{defn:function}
   A \hlnoteb{function} from $X$ to $Y$ is a relation $R$ such that
   \begin{equation*}
     \forall x \in X \; \exists! y \in Y \; (x, y) \in R.
   \end{equation*}
 \end{defn}
 
-\newthought{Suppose} $X_1, X_2, ..., X_n$ are non-empty\sidenote{We are typically only interested in non-empty sets, since empty sets usually lead us to vacuous truths, which are not interesting.} sets. We can define
+\newthought{Suppose} $X_1, X_2, \ldots, X_n$ are non-empty\sidenote{We are typically only interested in non-empty sets, since empty sets usually lead us to vacuous truths, which are not interesting.} sets. We can define
 \begin{equation*}
-  X_1 \times X_2 \times \hdots \times X_n = \prod_{i=1}^{n} X_i := \{ (x_1, x_2, ..., x_n) \mid x_i \in X_i \}.
+  X_1 \times X_2 \times \hdots \times X_n = \prod_{i=1}^{n} X_i := \{ (x_1, x_2, \ldots, x_n) \mid x_i \in X_i \}.
 \end{equation*}
-Now if $X_i = X_j = X$ for all $i, j = 1, 2, ..., n$, we write
+Now if $X_i = X_j = X$ for all $i, j = 1, 2, \ldots, n$, we write
 \begin{equation*}
   \prod_{i=1}^{n} X_i = \prod_{i=1}^{n} X = X^n.
 \end{equation*}
 
-\newthought{And now comes the problem}: given a collection $\{X_\alpha\}_{\alpha \in I}$ of non-empty sets\sidenote{i.e. we now talk about arbitrary $\alpha \in I$.}, what do we mean by
+\newthought{And now comes the problem}: given a collection ${\{X_\alpha\}}_{\alpha \in I}$ of non-empty sets\sidenote{i.e.\ we now talk about arbitrary $\alpha \in I$.}, what do we mean by
 \begin{equation*}
-  \prod_{\alpha \in I} X_\alpha ?
+  \prod_{\alpha \in I} X_\alpha?
 \end{equation*}
 
 To motivate for what comes next, consider
 \begin{equation*}
-  \prod_{i=1}^{n} X_i = X_1 \times \hdots \times X_n = \{ (x_1, ..., x_n) \mid x_i \in X_i \}.
+  \prod_{i=1}^{n} X_i = X_1 \times \hdots \times X_n = \{ (x_1, \ldots, x_n) \mid x_i \in X_i \}.
 \end{equation*}
-Choose $(x_1, ..., x_n) \in \prod\limits_{i=1}^{n} X_i$. This induces a function
+Choose $(x_1, \ldots, x_n) \in \prod\limits_{i=1}^{n} X_i$. This induces a function
 \begin{equation*}
-  f_{(x_1, ..., x_n)} : \{1, ..., n\} \to \bigcup_{i=1}^{n} X_i
+  f_{(x_1, \ldots, x_n)} : \{1, \ldots, n\} \to \bigcup_{i=1}^{n} X_i
 \end{equation*}
 with
 \begin{align*}
@@ -323,7 +311,7 @@ with
 
 Now assume for a more general $f$ such that
 \begin{equation*}
-  f: \{1, ..., n\} \to \bigcup_{i=1}^{n} X_i
+  f: \{1, \ldots, n\} \to \bigcup_{i=1}^{n} X_i
 \end{equation*}
 is defined by
 \begin{equation*}
@@ -331,13 +319,12 @@ is defined by
 \end{equation*}
 Then, we have
 \begin{equation*}
-  ( f(1), f(2), ..., f(n) ) \in \prod_{i=1}^{n} X_i,
+  ( f(1), f(2), \ldots, f(n) ) \in \prod_{i=1}^{n} X_i,
 \end{equation*}
 which leads us to the following notion:
 
-\begin{defn}[Choice Function]\index{Choice Function}
-\label{defn:choice_function}
-  Given a collection $\{X_\alpha\}_{\alpha \in I}$ of non-empty sets, let
+\begin{defn}[Choice Function]\index{Choice Function}\label{defn:choice_function}
+  Given a collection ${\{X_\alpha\}}_{\alpha \in I}$ of non-empty sets, let
   \begin{equation*}
     \prod_{\alpha \in I} X_\alpha = \left\{ f: I \to \bigcup_{\alpha \in I} X_\alpha \right\}
   \end{equation*}
@@ -358,17 +345,15 @@ And so we may ask a similar question as before: if each $X_\alpha$ is non-empty,
 \label{sec:axiom_of_choice}
 % section axiom_of_choice
 
-\newthought{Recall} our final question of last lecture: If $\{ X_\alpha \}_{\alpha \in I}$ is a non-empty collection of non-empty sets, is
+\newthought{Recall} our final question of last lecture: If ${\{ X_\alpha \}}_{\alpha \in I}$ is a non-empty collection of non-empty sets, is
 \begin{equation*}
-  \prod_{\alpha \in I} X_\alpha \neq \emptyset \enspace ?
+  \prod_{\alpha \in I} X_\alpha \neq \emptyset \enspace?
 \end{equation*}
 
 Turns out this is widely known (in the world of mathematics) as the \hlnotea{Axiom of Choice}.
 
-\begin{axiom}[Zermelo's Axiom of Choice]
-\index{Zermelo's Axiom of Choice}\index{Axiom of Choice}
-\label{axiom:zermelo_s_axiom_of_choice}
-  If $\{ X_\alpha \}_{\alpha \in I}$ is a non-empty collection of non-empty sets, then
+\begin{axiom}[Zermelo's Axiom of Choice]\index{Zermelo's Axiom of Choice}\index{Axiom of Choice}\label{axiom:zermelo_s_axiom_of_choice}
+  If ${\{ X_\alpha \}}_{\alpha \in I}$ is a non-empty collection of non-empty sets, then
   \begin{equation*}
     \prod_{\alpha \in I} X_\alpha \neq \emptyset.
   \end{equation*}
@@ -376,9 +361,7 @@ Turns out this is widely known (in the world of mathematics) as the \hlnotea{Axi
 
 An equivalent statement of the above axiom is:
 
-\begin{axiom}[Zermelo's Axiom of Choice v2]
-\index{Zermelo's Axiom of Choice}\index{Axiom of Choice}
-\label{axiom:zermelo_s_axiom_of_choice_v2}
+\begin{axiom}[Zermelo's Axiom of Choice v2]\index{Zermelo's Axiom of Choice}\index{Axiom of Choice}\label{axiom:zermelo_s_axiom_of_choice_v2}
   $X \neq \emptyset \implies$
   \begin{equation*}
     \exists f : \mathcal{P}(X) \setminus \{ \emptyset \} \to X \; \forall A \in \mathcal{P}(X) \setminus \{ \emptyset \} \; f(A) \in A
@@ -399,7 +382,7 @@ An equivalent statement of the above axiom is:
   \end{equation*}
   So we know that
   \begin{equation*}
-    \exists ( x_A )_{A \in \mathcal{P}(X) \setminus \{ \emptyset \} } \in \prod_{A \in \mathcal{P}(X) \setminus \{ \emptyset \} } A.
+    \exists {( x_A )}_{A \in \mathcal{P}(X) \setminus \{ \emptyset \} } \in \prod_{A \in \mathcal{P}(X) \setminus \{ \emptyset \} } A.
   \end{equation*}
   We then simply need to choose the choice function $f : \mathcal{P}(X) \setminus \{ \emptyset \} \to X$ such that
   \begin{equation*}
@@ -408,14 +391,14 @@ An equivalent statement of the above axiom is:
 
   \noindent\textbf{From \cref{axiom:zermelo_s_axiom_of_choice_v2} to \cref{axiom:zermelo_s_axiom_of_choice}}: 
 
-  Let $X_\alpha \in \mathcal{P}(X)$ for $\alpha \in I$, where $I$ is some index set. We know that not all $X_\alpha = \emptyset$ since $X \neq \emptyset$. Choose $J \subseteq I$ such that $\{ X_\alpha \}_{\alpha \in J}$ is a non-empty collection of non-empty sets. Let $f: \mathcal{P}(X) \setminus \{ \emptyset \}$ be any choice function. By \cref{axiom:zermelo_s_axiom_of_choice_v2}, 
+  Let $X_\alpha \in \mathcal{P}(X)$ for $\alpha \in I$, where $I$ is some index set. We know that not all $X_\alpha = \emptyset$ since $X \neq \emptyset$. Choose $J \subseteq I$ such that ${\{ X_\alpha \}}_{\alpha \in J}$ is a non-empty collection of non-empty sets. Let $f: \mathcal{P}(X) \setminus \{ \emptyset \}$ be any choice function. By \cref{axiom:zermelo_s_axiom_of_choice_v2}, 
   \begin{equation*}
     \forall X_\alpha \in \mathcal{P}(X) \setminus \{ \emptyset \} \quad f(X_\alpha) \in X_\alpha.
   \end{equation*}
   Therefore,
   \begin{equation*}
-    ( f(X_\alpha) )_{\alpha \in J} \in \prod_{\alpha \in J} X_\alpha.
-  \end{equation*}\qed
+    {( f(X_\alpha) )}_{\alpha \in J} \in \prod_{\alpha \in J} X_\alpha.
+  \end{equation*}\qed\
 \end{proof}
 
 % section axiom_of_choice (end)
@@ -426,8 +409,7 @@ An equivalent statement of the above axiom is:
 
 Now, it is in our interest to start talking about comparisons or relations between the mathematical objects that we have defined.
 
-\begin{defn}[Relations]\index{Relations}
-\label{defn:relations}
+\begin{defn}[Relations]\index{Relations}\label{defn:relations}
   A relation $R$ on a set $X$ is \sidenote{We can look at this definition as $R \subseteq X \times X$. Under such a definition, we would have
   \begin{itemize}
     \item (\textbf{Reflexive}) $\forall x \in X \enspace (x, x) \in R$;
@@ -472,9 +454,8 @@ Now, it is in our interest to start talking about comparisons or relations betwe
 
 All the above examples are also known as \textit{partially ordered sets}.
 
-\begin{defn}[Partially Ordered Sets]\index{Partially Ordered Sets}\index{Poset}
-\label{defn:partially_ordered_sets}
-The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered set} (or a \hlnoteb{poset}) if $R$ is\marginnote{The ``partial'' in `partially ordered'' indicates that not every pair of elements need to be comparable, i.e. there may be pairs for which neither precedes the other (anti-symmetry).}
+\begin{defn}[Partially Ordered Sets]\index{Partially Ordered Sets}\index{Poset}\label{defn:partially_ordered_sets}
+The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered set} (or a \hlnoteb{poset}) if $R$ is\marginnote{The ``partial'' in `partially ordered'' indicates that not every pair of elements need to be comparable, i.e.\ there may be pairs for which neither precedes the other (anti-symmetry).}
   \begin{itemize}
     \item reflexive;
     \item anti-symmetric; and
@@ -504,20 +485,20 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
           3 possibilities represented as graphs (known as \href{https://en.wikipedia.org/wiki/Hasse_diagram}{Hasse diagram}\index{Hasse diagram}), separated by lines:
 
         \begin{tikzpicture}
-          \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (1, 3) {};
-          \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (3, 3) {};
+          \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (1, 3) {};
+          \node[circle,fill,inner sep=1pt,label={right:{$y$}}] at (3, 3) {};
 
           \draw[-] (0,2.5) -- (4,2.5);
 
-          \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (1, 2) {};
+          \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (1, 2) {};
           \draw[-] (1,2) -- (1,1);
-          \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (1, 1) {};
+          \node[circle,fill,inner sep=1pt,label={right:{$y$}}] at (1, 1) {};
 
           \draw[-] (2,2.5) -- (2,0.5);
 
-          \node[circle,fill,inner sep=1pt,label={0:{ $y$ }}] at (3, 2) {};
+          \node[circle,fill,inner sep=1pt,label={0:{$y$}}] at (3, 2) {};
           \draw[-] (3,2) -- (3,1);
-          \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (3, 1) {};
+          \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (3, 1) {};
         \end{tikzpicture}
         }
         \begin{itemize}
@@ -532,34 +513,34 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
 
         \begin{center}
           \begin{tikzpicture}
-            \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (1, 3) {};
-            \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (2, 3) {};
-            \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (3, 3) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (1, 3) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$y$}}] at (2, 3) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$z$}}] at (3, 3) {};
             \node at (-2,3) {\underline{1}};
 
-            \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (-1, 2) {};
-            \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (1, 2) {};
-            \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (0, 1) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (-1, 2) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$y$}}] at (1, 2) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$z$}}] at (0, 1) {};
             \draw[-] (-1,2) -- (0,1);
             \draw[-] (1,2) -- (0,1);
             \node at (-2,1.5) {\underline{3}};
 
-            \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (3, 1) {};
-            \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (5, 1) {};
-            \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (4, 2) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (3, 1) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$y$}}] at (5, 1) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$z$}}] at (4, 2) {};
             \draw[-] (4,2) -- (3,1);
             \draw[-] (4,2) -- (5,1);
             \node at (6,1.5) {\underline{3}};
 
-            \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (-1, 0) {};
-            \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (1, 0) {};
-            \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (1, -1) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (-1, 0) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$y$}}] at (1, 0) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$z$}}] at (1, -1) {};
             \draw[-] (1,0) -- (1,-1);
             \node at (-2,-0.5) {\underline{6}};
 
-            \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (4, 0) {};
-            \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (4, -0.5) {};
-            \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (4, -1) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (4, 0) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$y$}}] at (4, -0.5) {};
+            \node[circle,fill,inner sep=1pt,label={right:{$z$}}] at (4, -1) {};
             \draw[-] (4,0) -- (4,-1);
             \node at (6,-0.5) {\underline{6}};
           \end{tikzpicture}
@@ -580,13 +561,11 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
   \end{solution}
 \end{ex}
 
-\begin{defn}[Totally Ordered Sets / Chains]\index{Totally Ordered Sets}\index{Chains}
-\label{defn:totally_ordered_sets_chains}
+\begin{defn}[Totally Ordered Sets / Chains]\index{Totally Ordered Sets}\index{Chains}\label{defn:totally_ordered_sets_chains}
   The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{totally ordered set} (or a \hlnoteb{chain}) if $(X, R)$ is a poset with the exception that, for any $x, y \in X$, either $xRy$ or $yRx$ but not both.
 \end{defn}
 
-\begin{defn}[Bounds]
-\label{defn:bounds}
+\begin{defn}[Bounds]\label{defn:bounds}
   Let $(X, \leq)$ be a poset. Let $A \subset X$. We say $x_0 \in X$ is an \hldefn{upper bound} for $A$ if
   \begin{equation*}
     \forall a \in A \quad a \leq x_0.
@@ -618,14 +597,14 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
 \begin{eg}
   Let $Y \neq \emptyset$, and $X = \mathcal{P}(Y)$, and $\subseteq$ the ordering by inclusion. We know that $Y$ is the maximum element of $(X, \subseteq)$. Then the collection $\{ A_\alpha \}_{\alpha \in I} \subset \mathcal{P}(Y)$ is bounded above by $Y$, and we have that\marginnote{Now if $Y = \emptyset$, we would end up having
   \begin{gather*}
-    \sup \left( \left\{ A_\alpha \right\}_{\alpha \in I} \right) = \emptyset \\
-    \inf \left( \left\{ A_\alpha \right\}_{\alpha \in I} \right) = X
+    \sup \left( {\left\{ A_\alpha \right\}}_{\alpha \in I} \right) = \emptyset \\
+    \inf \left( {\left\{ A_\alpha \right\}}_{\alpha \in I} \right) = X
   \end{gather*}
-  But this makes sense, since the empty set would be the least of upper bounds, and since $X = \mathcal{P}(Y)$ would have to be the greatest of lower bounds.
+  This makes sense, since the empty set would be the least of upper bounds, and since $X = \mathcal{P}(Y)$ would have to be the greatest of lower bounds.
   }
   \begin{gather*}
-    \sup \left( \left\{ A_\alpha \right\}_{\alpha \in I} \right) = \bigcup_{\alpha \in I} A_\alpha \\
-    \inf \left( \left\{ A_\alpha \right\}_{\alpha \in I} \right) = \bigcap_{\alpha \in I} A_\alpha
+    \sup \left( {\left\{ A_\alpha \right\}}_{\alpha \in I} \right) = \bigcup_{\alpha \in I} A_\alpha \\
+    \inf \left( {\left\{ A_\alpha \right\}}_{\alpha \in I} \right) = \bigcap_{\alpha \in I} A_\alpha
   \end{gather*}
 \end{eg}
 
@@ -641,8 +620,7 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
 \label{sec:zorn_s_lemma}
 % section zorn_s_lemma
 
-\begin{defn}[Maximal Element]\index{Maximal Element}
-\label{defn:maximal_element}
+\begin{defn}[Maximal Element]\index{Maximal Element}\label{defn:maximal_element}
   Let $(X, \leq)$ be a poset. An element $x \in X$ is \hlnoteb{maximal} if whenever $y \in X$ is such that $x \leq y$, we must have $y = x$.
 \end{defn}
 
@@ -651,34 +629,34 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
 
   \begin{center}
   \begin{tikzpicture}
-    \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (-1, 3) {};
-    \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (0, 3) {};
-    \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (1, 3) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (-1, 3) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$y$}}] at (0, 3) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$z$}}] at (1, 3) {};
     \node[label={right:{$x, y, z$ are all maximal}}] at (2, 3) {};
 
-    \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (-1, 2) {};
-    \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (1, 2) {};
-    \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (0, 1) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (-1, 2) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$y$}}] at (1, 2) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$z$}}] at (0, 1) {};
     \draw[-] (-1,2) -- (0,1);
     \draw[-] (1,2) -- (0,1);
     \node[label={right:{$z$ is maximal}}] at (2, 1.5) {};
 
-    \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (-1, -1) {};
-    \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (1, -1) {};
-    \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (0, 0) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (-1, -1) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$y$}}] at (1, -1) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$z$}}] at (0, 0) {};
     \draw[-] (0,0) -- (1,-1);
     \draw[-] (0,0) -- (-1,-1);
     \node[label={right:{$x, y$ are both maximal}}] at (2, -0.5) {};
 
-    \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (-1, -2) {};
-    \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (1, -2) {};
-    \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (1, -3) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (-1, -2) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$y$}}] at (1, -2) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$z$}}] at (1, -3) {};
     \draw[-] (1,-2) -- (1,-3);
     \node[label={right:{$x, z$ are both maximal}}] at (2, -2.5) {};
 
-    \node[circle,fill,inner sep=1pt,label={right:{ $x$ }}] at (0, -4) {};
-    \node[circle,fill,inner sep=1pt,label={right:{ $y$ }}] at (0, -4.5) {};
-    \node[circle,fill,inner sep=1pt,label={right:{ $z$ }}] at (0, -5) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$x$}}] at (0, -4) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$y$}}] at (0, -4.5) {};
+    \node[circle,fill,inner sep=1pt,label={right:{$z$}}] at (0, -5) {};
     \draw[-] (0,-4) -- (0,-5);
     \node[label={right:{$z$ is maximal}}] at (2, -4.5) {};
   \end{tikzpicture}
@@ -693,14 +671,11 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
   \end{itemize}
 \end{eg}
 
-\begin{axiom}[Zorn's Lemma]
-\index{Zorn's Lemma}
-\label{axiom:zorn_s_lemma}
+\begin{axiom}[Zorn's Lemma]\index{Zorn's Lemma}\label{axiom:zorn_s_lemma}
   If $(X, \leq)$ is a non-empty poset such that every chain $S \subset X$ has an upper bound, then $(X, \leq)$ has a maximal element.
 \end{axiom}
 
-\begin{thm}[\imponote Non-Zero Vector Spaces has a Basis]
-\label{thm:non_zero_vector_spaces_has_a_basis}
+\begin{thm}[\imponote Non-Zero Vector Spaces has a Basis]\label{thm:non_zero_vector_spaces_has_a_basis}
   Every non-zero vector space, $V$, has a basis.
 \end{thm}
 \marginnote{The flow of this proof is a typical approach when Zorn's Lemma is involved.}
@@ -715,11 +690,10 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
   \begin{equation*}
     A_0 = \bigcup_{\alpha \in I} A_\alpha.
   \end{equation*}
-  \hlwarn{Require clarification before proceeding...}
+  \hlwarn{Require clarification before proceeding…}
 \end{proof}
 
-\begin{defn}[Well-Ordered]\index{Well-Ordered}
-\label{defn:well_ordered}\marginnote{
+\begin{defn}[Well-Ordered]\index{Well-Ordered}\label{defn:well_ordered}\marginnote{
 \begin{ex}
   Prove that well-ordered sets are chains.
 \end{ex}
@@ -731,14 +705,11 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
   $(\mathbb{N}, \leq)$ is well-ordered.
 \end{eg}
 
-\begin{axiom}[Well-Ordering Principle]
-\index{Well-Ordering Principle}
-\label{axiom:well_ordering_principle}
+\begin{axiom}[Well-Ordering Principle]\index{Well-Ordering Principle}\label{axiom:well_ordering_principle}
   Every non-empty set can be well-ordered.
 \end{axiom}
 
-\begin{thm}[Axioms of Choice and Its Equivalents]
-\label{thm:axioms_of_choice_and_its_equivalents}
+\begin{thm}[Axioms of Choice and Its Equivalents]\label{thm:axioms_of_choice_and_its_equivalents}
   TFAE:\marginnote{\begin{ex}Prove \cref{thm:axioms_of_choice_and_its_equivalents}\end{ex}}
   \begin{enumerate}
     \item Axiom of Choice, \cref{axiom:zermelo_s_axiom_of_choice}
@@ -779,8 +750,7 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
 \label{sub:equivalence_relation}
 % subsection equivalence_relation
 
-\begin{defn}[Equivalence Relation]\index{Equivalence Relation}
-\label{defn:equivalence_relation}
+\begin{defn}[Equivalence Relation]\index{Equivalence Relation}\label{defn:equivalence_relation}
   Let $X$ be non-empty set. A relation $\sim$ on $X$ is an \hlnoteb{equivalence relation} if it is
   \begin{itemize}
     \item reflexive; 
@@ -789,8 +759,7 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
   \end{itemize}
 \end{defn}
 
-\begin{defn}[Equivalence Class]\index{Equivalence Class}
-\label{defn:equivalence_class}
+\begin{defn}[Equivalence Class]\index{Equivalence Class}\label{defn:equivalence_class}
   Let $X$ be a non-empty set, and $x \in X$. An \hlnoteb{equivalence class} of $x$ under the equivalence relation $\sim$ is defined as
   \begin{equation*}
     [x] := \{ y \in X \mid x \sim y \}.
@@ -807,8 +776,7 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
   or in words, equivalence classes \textit{partition} the set.
 \end{note}
 
-\begin{defn}[Partition]\index{Partition}
-\label{defn:partition}
+\begin{defn}[Partition]\index{Partition}\label{defn:partition}
   Let $X \neq \emptyset$. A \hlnoteb{partition} of $X$ is a collection $\{A_{\alpha} \}_{\alpha \in I} \subset \mathcal{P}(X)$ such that
   \begin{enumerate}
     \item $A_\alpha \neq \emptyset$;
@@ -819,8 +787,7 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
 
 With this, we have ourselves another method to show that $\sim$ is an equivalence relation.
 
-\begin{propo}[Characterization of An Equivalence Relation]
-\label{propo:characterization_of_an_equivalence_relation}
+\begin{propo}[Characterization of An Equivalence Relation]\label{propo:characterization_of_an_equivalence_relation}
   If $\{ A_\alpha \}_{\alpha \in I}$ is a partition of $X$ and $x \sim y \iff x, y \in A_{\alpha}$, then $\sim$ is an equivalence relation.\marginnote{The proof of this statement has been stated above.}
 \end{propo}
 
@@ -865,22 +832,18 @@ Similar to when we defined partial orders, we can ask ourselves the following qu
 \label{sec:cardinality_continued}
 % section cardinality_continued
 
-\begin{defn}[Finite Sets]\index{Finite Sets}
-\label{defn:finite_sets}
-  A set $X$ is \hlnoteb{finite} if $X = \emptyset$ or if $X \sim \{ 1, 2, ..., n \}$ for some $n \in \mathbb{N}$, where $\sim$ is the equivalence relation defined in \cref{eg:same_cardinaliy}.
+\begin{defn}[Finite Sets]\index{Finite Sets}\label{defn:finite_sets}
+  A set $X$ is \hlnoteb{finite} if $X = \emptyset$ or if $X \sim \{ 1, 2, \ldots, n \}$ for some $n \in \mathbb{N}$, where $\sim$ is the equivalence relation defined in \cref{eg:same_cardinaliy}.
 \end{defn}
 
-\begin{defn}[Cardinality]\index{Cardinality}
-\label{defn:cardinality}
+\begin{defn}[Cardinality]\index{Cardinality}\label{defn:cardinality}
   If $X \sim n$, we say $X$ has \hlnoteb{cardinality} $n$ and write $\abs{X} = n$. We also let $\abs{\emptyset} = 0$.
 \end{defn}
 
-\newthought{Now a good question} here is: if $n \neq m$, is $\{1, 2, ..., n \} \sim \{ 1, 2, ..., m \}$?
+\newthought{Now a good question} here is: if $n \neq m$, is $\{1, 2, \ldots, n \} \sim \{ 1, 2, \ldots, m \}$?
 
-\begin{thm}[Pigeonhole Principle]
-\index{Pigeonhole Principle}
-\label{thm:pigeonhole_principle}
-  The set $\{1, 2, ..., n\}$ is not equivalent to any of its proper subset.
+\begin{thm}[Pigeonhole Principle]\index{Pigeonhole Principle}\label{thm:pigeonhole_principle}
+  The set $\{1, 2, \ldots, n\}$ is not equivalent to any of its proper subset.
 \end{thm}
 
 \begin{proof}
@@ -890,22 +853,22 @@ Similar to when we defined partial orders, we can ask ourselves the following qu
 
   \noindent\textbf{Base case}: $\{1\} \nsim \emptyset$.\marginnote{\hlwarn{Requires clarification and confirmation of proof.}}
 
-  \noindent Assume that the statement holds for $\{1, ..., k\}$. Suppose we have an injective function
+  \noindent Assume that the statement holds for $\{1, \ldots, k\}$. Suppose we have an injective function
   \begin{equation*}
-    f : \{ 1, 2, ..., k, k + 1 \} \to \{ 1, 2, ..., k, k + 1 \}
+    f : \{ 1, 2, \ldots, k, k + 1 \} \to \{ 1, 2, \ldots, k, k + 1 \}
   \end{equation*}
   that is not surjective. \\
   \noindent\textbf{Case 1}: $k + 1 \notin \Range(f)$, where $\Range(f)$ is the range of $f$. Then we have\marginnote{Note: $\restriction$ is the restriction sign.}
   \begin{equation*}
-    f \restriction_{\{1, ..., k\}} : \{1, ..., k \} \to \{1, ..., k\} \setminus \{ f(k + 1) \}.
+    f \restriction_{\{1, \ldots, k\}} : \{1, \ldots, k \} \to \{1, \ldots, k\} \setminus \{ f(k + 1) \}.
   \end{equation*}
-  But $f$ is an injective function and clearly
+  However, $f$ is an injective function and clearly
   \begin{equation*}
-    \{1, ..., k \} \setminus \{ f(k + 1) \} \subseteq \{1, ..., k\},
+    \{1, \ldots, k \} \setminus \{ f(k + 1) \} \subseteq \{1, \ldots, k\},
   \end{equation*}
   a contradition.
 
-  \noindent\textbf{Case 2}: $k + 1 \in \Range(f)$. Then $\exists j_0 \in \{1, ..., k, k + 1 \}$ such that $f(j_0) = k + 1$, and since $f$ is not surjective, $\exists m \in \{1, ..., k\}$ such that $m \notin \Range(f)$. Then consider a new function $g: \{1, ..., k, k + 1\} \to \{1, ..., k\}$ such that
+  \noindent\textbf{Case 2}: $k + 1 \in \Range(f)$. Then $\exists j_0 \in \{1, \ldots, k, k + 1 \}$ such that $f(j_0) = k + 1$, and since $f$ is not surjective, $\exists m \in \{1, \ldots, k\}$ such that $m \notin \Range(f)$. Then consider a new function $g: \{1, \ldots, k, k + 1\} \to \{1, \ldots, k\}$ such that
   \begin{equation*}
     g(a) = \begin{cases}
       m        & a = k + 1 \\
@@ -915,8 +878,7 @@ Similar to when we defined partial orders, we can ask ourselves the following qu
   \end{equation*}
 \end{proof}
 
-\begin{crly}[Pigeonhole Principle (Finite Case)]
-\label{crly:pigeonhole_principle_finite_case}
+\begin{crly}[Pigeonhole Principle (Finite Case)]\label{crly:pigeonhole_principle_finite_case}
   If the set $X$ is finite, then $X$ is not equivalent to any proper subset.
 \end{crly}
 
@@ -924,8 +886,8 @@ Similar to when we defined partial orders, we can ask ourselves the following qu
   Sketch of proof:
 
   \begin{tikzpicture}
-    \node at (0, 2) {$\{1, ..., n\}$};
-    \node at (2, 2) {$\{1, ..., n\}$};
+    \node at (0, 2) {$\{1, \ldots, n\}$};
+    \node at (2, 2) {$\{1, \ldots, n\}$};
     \node at (0, 0) {$X$};
     \node at (2, 0) {$A \subsetneq X$};
 
@@ -941,17 +903,15 @@ Similar to when we defined partial orders, we can ask ourselves the following qu
   Prove \cref{crly:pigeonhole_principle_finite_case}.
 \end{ex}
 
-\begin{defn}[Infinite Sets]\index{Infinite Sets}
-\label{defn:infinite_sets}
+\begin{defn}[Infinite Sets]\index{Infinite Sets}\label{defn:infinite_sets}
 $X$ is \hlnoteb{infinite} if it is not finite.
 \end{defn}
 
 \begin{eg}
-  Observe that we can construct a function $f : N \to \{ 2, 3, ... \}$ by $f(n) = n + 1$. It is clear that $f$ is a bijective funciton, and so $\mathbb{N} \sim \{2, 3, ... \}$.
+  Observe that we can construct a function $f : N \to \{ 2, 3, \ldots \}$ by $f(n) = n + 1$. It is clear that $f$ is a bijective funciton, and so $\mathbb{N} \sim \{2, 3, \ldots \}$.
 \end{eg}
 
-\begin{propo}[$\mathbb{N}$ is the Smallest Infinite Set]
-\label{propo:_n_is_the_smallest_infinite_set}
+\begin{propo}[$\mathbb{N}$ is the Smallest Infinite Set]\label{propo:_n_is_the_smallest_infinite_set}
   Every infinite set contains a subset $A \sim \mathbb{N}$.
 \end{propo}
 
@@ -962,17 +922,16 @@ $X$ is \hlnoteb{infinite} if it is not finite.
   \end{equation*}
   such that for $S \subset X$ where $S \neq \emptyset$, $f(S) \in S$ \sidenote{\cref{axiom:zermelo_s_axiom_of_choice_v2} ahoy!}. Let $x_1 = f(X)$. Let $x_2 = f(X \setminus \{ x_1 \})$. Recursively, define
   \begin{equation*}
-    x_n = f(X \setminus \{x_1, ..., x_{n - 1}\}).
+    x_n = f(X \setminus \{x_1, \ldots, x_{n - 1}\}).
   \end{equation*}
   This gives us a sequence
   \begin{equation*}
-    X \supset S = \{x_1, ..., x_n, ... \}
+    X \supset S = \{x_1, \ldots, x_n, \ldots \}
   \end{equation*}
   which is equivalent to $\mathbb{N}$ via the map $n \mapsto x_n$.\qed
 \end{proof}
 
-\begin{crly}[Infinite Sets are Equivalent to Its Proper\- Subsets]
-\label{crly:infinite_sets_are_equivalent_to_its_proper_subsets}
+\begin{crly}[Infinite Sets are Equivalent to Its Proper\- Subsets]\label{crly:infinite_sets_are_equivalent_to_its_proper_subsets}
   Every infinite set $X$ is equivalent to a proper subset of $X$.
 \end{crly}
 
@@ -987,13 +946,11 @@ $X$ is \hlnoteb{infinite} if it is not finite.
   Clearly so, $f$ is injective.\qed
 \end{proof}
 
-\begin{defn}[Countable]\index{Countable}
-\label{defn:countable}
+\begin{defn}[Countable]\index{Countable}\label{defn:countable}
   We say that a set is \hlnoteb{countable} (or \hldefn{denumerable}) is either $X$ is finite or if $X \sim \mathbb{N}$. If $X \sim \mathbb{N}$, we can say that $X$ is \hlnoteb{countably infinite} and write $\abs{X} = \abs{\mathbb{N}} = \aleph_0$.
 \end{defn}
 
-\begin{defn}[Smaller Cardinality]
-\label{defn:smaller_cardinality}
+\begin{defn}[Smaller Cardinality]\label{defn:smaller_cardinality}
   Given $2$ sets $X, Y$, we write
   \begin{equation*}
     \abs{X} \leq \abs{Y}
@@ -1001,9 +958,8 @@ $X$ is \hlnoteb{infinite} if it is not finite.
   if $\exists f : X \to Y$ injective.
 \end{defn}
 
-\begin{propo}[Injectivity is Surjectivity Reversed]
-\label{propo:injectivity_is_surjectivity_reversed}
-  TFAE:
+\begin{propo}[Injectivity is Surjectivity Reversed]\label{propo:injectivity_is_surjectivity_reversed}
+  TFAE
   \begin{enumerate}
     \item $\exists f : X \to Y$ injective
     \item $\exists g : Y \to X$ surjective
@@ -1071,9 +1027,7 @@ Before delving into resolving our last question in the previous lecture, note th
   \end{equation*}
 \end{note}
 
-\begin{thm}[\vvimponote Cantor-Schr\"{o}der-Bernstein Theorem \-(CSB)]
-\index{Cantor-Schr\"{o}der-Bernstein Theorem}
-\label{thm:cantor_schroder_bernstein_theorem}
+\begin{thm}[\vvimponote Cantor-Schr\"{o}der-Bernstein Theorem \-(CSB)]\index{Cantor-Schr\"{o}der-Bernstein Theorem}\label{thm:cantor_schroder_bernstein_theorem}
   Let $A_2 \subset A_1 \subset A_0 = A$. Assume that $A_2 \sim A_0$. Then $A_0 \sim A_1$.
 \end{thm}
 
@@ -1116,14 +1070,13 @@ Before delving into resolving our last question in the previous lecture, note th
   \begin{equation*}
     f(x) = \begin{cases}
       x       & x \in \bigcap_{n = 0}^{\infty} A_n \\
-      x       & x \in A_{2k + 1} \setminus A_{2k + 2}, \; k = 0, 1, 2, ... \\
-      \phi(x) & x \in A_{2k} \setminus A_{2k + 1}, \; k = 0, 1, 2, ...
+      x       & x \in A_{2k + 1} \setminus A_{2k + 2}, \; k = 0, 1, 2, \ldots \\
+      \phi(x) & x \in A_{2k} \setminus A_{2k + 1}, \; k = 0, 1, 2, \ldots
     \end{cases}
   \end{equation*}
 \end{proof}
 
-\begin{crly}[Cantor-Schr\"{o}der-Bernstein Theorem - Resta\-ted]
-\label{crly:cantor_schroder_bernstein_theorem_restated}
+\begin{crly}[Cantor-Schr\"{o}der-Bernstein Theorem - Resta\-ted]\label{crly:cantor_schroder_bernstein_theorem_restated}
   If $A_1 \subset A \land B_1 \subset B \land A \sim B_1 \land B \sim A_1$, then $A \sim B$.\sidenote{This is equivalent to the statement
   \begin{equation*}
     \abs{A} \leq \abs{B} \land \abs{B} \leq \abs{A} \implies \abs{A} = \abs{B}.
@@ -1138,14 +1091,13 @@ Before delving into resolving our last question in the previous lecture, note th
 \end{proof}
 
 \begin{eg}
-  Our question from last lecture now has an answer: by \cref{thm:cantor_schroder_bernstein_theorem}, we have that $\abs{\mathbb{Q}} = \abs{\mathbb{N}}$.\sidenote{ Now that we know that they have the ssme cardinality:
+  Our question from last lecture now has an answer: by \cref{thm:cantor_schroder_bernstein_theorem}, we have that $\abs{\mathbb{Q}} = \abs{\mathbb{N}}$.\sidenote{Now that we know that they have the same cardinality:
  \begin{ex}
     Find a bijection between $\mathbb{Q}$ and $\mathbb{N}$.
  \end{ex} }
 \end{eg}
 
-\begin{propo}[Denumerability Check]
-\label{propo:denumerability_check}
+\begin{propo}[Denumerability Check]\label{propo:denumerability_check}
   If $X$ is infinite, then
   \begin{equation*}
     \abs{X} = \abs{\mathbb{N}} = \aleph_0 \iff \exists f : X \to \mathbb{N} \text{ bijective. }
@@ -1164,26 +1116,23 @@ Before delving into resolving our last question in the previous lecture, note th
   is injective.
 \end{eg}
 
-\begin{defn}[Uncountable]\index{Uncountable}
-\label{defn:uncountable}
+\begin{defn}[Uncountable]\index{Uncountable}\label{defn:uncountable}
   A set $X$ is \hlnoteb{uncountable} if it is not countable.
 \end{defn}
 
-\begin{thm}[Cantor's Diagonal Argument]
-\index{Cantor's Diagonal Argument}
-\label{thm:cantor_s_diagonal_argument}
+\begin{thm}[Cantor's Diagonal Argument]\index{Cantor's Diagonal Argument}\label{thm:cantor_s_diagonal_argument}
   $(0, 1)$ is uncountable.
 \end{thm}
 
 \begin{proof}
   Suppose, for contradiction, that $(0, 1)$ is countable. Then we can write
   \begin{align*}
-    a_1 &= .a_{11} a_{12} a_{13} ... \\
-    a_2 &= .a_{21} a_{22} a_{23} ... \\
+    a_1 &=.a_{11} a_{12} a_{13} \ldots \\
+    a_2 &=.a_{21} a_{22} a_{23} \ldots \\
         &\vdots \\
-    a_n &= .a_{n1} a_{n2} a_{n3} ...
+    a_n &=.a_{n1} a_{n2} a_{n3} \ldots
   \end{align*}
-  in $(0, 1)$. This representation is unique if we do not allow the representation to end in a string of $9$'s. Let $b \in (0, 1)$, expressed as $b = . b_1 b_2 b_3 ...$ such that
+  in $(0, 1)$. This representation is unique if we do not allow the representation to end in a string of $9$'s. Let $b \in (0, 1)$, expressed as $b =. b_1 b_2 b_3 \ldots$ such that
   \begin{equation*}
     b_i = \begin{cases}
       5 & a_i \neq 5 \\
@@ -1193,8 +1142,7 @@ Before delving into resolving our last question in the previous lecture, note th
   Then $b \notin (0, 1)$, a contradiction\sidenote{\hlwarn{Require more explanation.}}.\qed
 \end{proof}
 
-\begin{crly}[Uncountability of $\mathbb{R}$]
-\label{crly:uncountability_of_r}
+\begin{crly}[Uncountability of $\mathbb{R}$]\label{crly:uncountability_of_r}
   $\mathbb{R}$ is uncountable.
 \end{crly}
 
@@ -1229,8 +1177,7 @@ Before delving into resolving our last question in the previous lecture, note th
 \label{sec:cardinality_continued_3}
 % section cardinality_continued_3
 
-\begin{thm}[\imponote Comparability of Cardinals]
-\label{thm:comparability_of_cardinals}
+\begin{thm}[\imponote Comparability of Cardinals]\label{thm:comparability_of_cardinals}
   If $X$ and $Y$ are non-empty, then either
   \begin{equation*}
     \abs{X} \leq \abs{Y} \lor \abs{Y} \leq \abs{X}.
@@ -1299,10 +1246,9 @@ Before delving into resolving our last question in the previous lecture, note th
 \label{sub:cardinal_arithmetic}
 % subsection cardinal_arithmetic
 
-\paragraph{Sum of Cardinals} Observe that if $X = \{ x_1, ..., x_n\}$, $Y = \{ y_1, ..., y_m\}$, and $X \cap Y = \emptyset$, then $\abs{X} = n$, $\abs{Y} = m$ and $\abs{X \cup Y} = n + m$. This motivates us to provide the following definition:
+\paragraph{Sum of Cardinals} Observe that if $X = \{ x_1, \ldots, x_n\}$, $Y = \{ y_1, \ldots, y_m\}$, and $X \cap Y = \emptyset$, then $\abs{X} = n$, $\abs{Y} = m$ and $\abs{X \cup Y} = n + m$. This motivates us to provide the following definition:
 
-\begin{defn}[Sum of Cardinals]\index{Sum of Cardinals}
-\label{defn:sum_of_cardinals}
+\begin{defn}[Sum of Cardinals]\index{Sum of Cardinals}\label{defn:sum_of_cardinals}
   Assume that $X$ and $Y$ are such that $X \cap Y = \emptyset$. We define
   \begin{equation*}
     \abs{X} + \abs{Y} = \abs{X \cup Y}.
@@ -1311,7 +1257,7 @@ Before delving into resolving our last question in the previous lecture, note th
 
 \newthought{Question}: So what about $\aleph_0 + \aleph_0$?
 
-A thought that motivates us to give the following answer lies in the observation that: if $X$ is the set of even natural numbers and $Y$ the odd natural numbers, then $X \cup Y$ is the set of all natural numbers. All three sets are countably infinite, i.e. they have cardinality $\aleph_0$.
+A thought that motivates us to give the following answer lies in the observation that: if $X$ is the set of even natural numbers and $Y$ the odd natural numbers, then $X \cup Y$ is the set of all natural numbers. All three sets are countably infinite, i.e.\ they have cardinality $\aleph_0$.
 
 \newthought{Question}: What about $c + c$?
 
@@ -1321,14 +1267,13 @@ A similar motivation comes from the observation that: given $X = (0, 1)$ and $Y 
 \end{equation*}
 and so $\abs{X} = \abs{Y} = c \implies \abs{X \cup Y} = c$.
 
-\begin{thm}[Sums of Cardinals]
-\label{thm:sums_of_cardinals}
+\begin{thm}[Sums of Cardinals]\label{thm:sums_of_cardinals}
   Given sets $X$ and $Y$, if $X$ is infinite, then
   \begin{enumerate}
     \item $\abs{X} + \abs{X} = \abs{X}$
     \item $\abs{X} + \abs{Y} = \max( \abs{X}, \abs{Y} )$
   \end{enumerate}
-\end{thm} \marginnote{
+\end{thm}\marginnote{
 \begin{ex}
   Prove \cref{thm:sums_of_cardinals} as an exercise.
 \end{ex}
@@ -1336,21 +1281,20 @@ and so $\abs{X} = \abs{Y} = c \implies \abs{X \cup Y} = c$.
 
 \paragraph{Multiplication of Cardinals} Given
 \begin{align*}
-  X &= \{ x_1, x_2, ..., x_n \} \\
-  Y &= \{ y_1, y_2, ..., y_m \}
+  X &= \{ x_1, x_2, \ldots, x_n \} \\
+  Y &= \{ y_1, y_2, \ldots, y_m \}
 \end{align*}
 we have that
 \begin{equation*}
-  X \times Y = \{ (x_i, y_j) \mid i = 1, 2, ..., n, \, j = 1, 2, ..., m \}
+  X \times Y = \{ (x_i, y_j) \mid i = 1, 2, \ldots, n, \, j = 1, 2, \ldots, m \}
 \end{equation*}
 and so
 \begin{equation*}
   \abs{X \times Y} = nm.
 \end{equation*}
 
-\begin{defn}[Multiplication of Cardinals]\index{Multiplication of Cardinals}
-\label{defn:multiplication_of_cardinals}
-  Given sets $X$ and $Y$ , define
+\begin{defn}[Multiplication of Cardinals]\index{Multiplication of Cardinals}\label{defn:multiplication_of_cardinals}
+  Given sets $X$ and $Y$, define
   \begin{equation*}
     \abs{X} \abs{Y} = \abs{X \times Y}.
   \end{equation*}
@@ -1366,8 +1310,7 @@ and so
 
 \newthought{Question}: What about $c \cdot c$?
 
-\begin{thm}[Multiplication of Cardinals]
-\label{thm:multiplication_of_cardinals}
+\begin{thm}[Multiplication of Cardinals]\label{thm:multiplication_of_cardinals}
   If $X$ is infinite and $Y \neq \emptyset$, then
   \begin{itemize}
     \item $\abs{X \times X} = \abs{X} \implies \abs{X} \abs{X} = \abs{X}$;
@@ -1408,25 +1351,23 @@ Now if $Y = Y_x$ for all $x \in X$, we have
 \begin{eg}
   Given
   \begin{equation*}
-    Y = \{ 1, ..., m \} \quad X = \{ 1, ..., n \}
+    Y = \{ 1, \ldots, m \} \quad X = \{ 1, \ldots, n \}
   \end{equation*}
   we have
   \begin{equation*}
-    Y^X = \{ f : \{ 1, ..., n \} \to \{ 1, ..., m \} \}.
+    Y^X = \{ f : \{ 1, \ldots, n \} \to \{ 1, \ldots, m \} \}.
   \end{equation*}
   Observe that $Y^X$ is similar to $Y^n$. So $\abs{Y^X} = m^n$.\sidenote{\hlwarn{Need better explanation.}}
 \end{eg}
 
-\begin{defn}[Exponentiation of Cardinals]\index{Exponentiation of Cardinals}
-\label{defn:exponentiation_of_cardinals}
+\begin{defn}[Exponentiation of Cardinals]\index{Exponentiation of Cardinals}\label{defn:exponentiation_of_cardinals}
   Given sets $X$ and $Y$, define
   \begin{equation*}
     \abs{Y}^{\abs{X}} := \abs{Y^X}.
   \end{equation*}
 \end{defn}
 
-\begin{thm}[Exponentiation of Cardinals]
-\label{thm:exponentiation_of_cardinals}
+\begin{thm}[Exponentiation of Cardinals]\label{thm:exponentiation_of_cardinals}
   If $X, Y, Z$ are non-empty sets, then
   \begin{itemize}
     \item $\abs{Y}^{\abs{X}} \cdot \abs{Y}^{\abs{Z}} = \abs{Y}^{\abs{X} + \abs{Z}}$;
@@ -1437,8 +1378,7 @@ Now if $Y = Y_x$ for all $x \in X$, we have
   Prove \cref{thm:exponentiation_of_cardinals}.
 \end{ex}}
 
-\begin{thm}[$2^{\aleph_0} = c$]
-\label{thm:2_aleph_0_c}
+\begin{thm}[$2^{\aleph_0} = c$]\label{thm:2_aleph_0_c}
 We have that $2^{\aleph_0} = c$.
 \end{thm}
 
@@ -1505,9 +1445,7 @@ We have that $2^{\aleph_0} = c$.
   Clearly so, $\Phi$ is injective.\qed
 \end{solution}
 
-\begin{thm}[Russell's Paradox]
-\index{Russell's Paradox}
-\label{thm:russell_s_paradox}
+\begin{thm}[Russell's Paradox]\index{Russell's Paradox}\label{thm:russell_s_paradox}
   For any $X$, we have $\abs{X} < \abs{\mathcal{P}(X)} = 2^{\abs{X}}$.
 \end{thm}
 
@@ -1529,15 +1467,11 @@ We have that $2^{\aleph_0} = c$.
 
 \newthought{Question}: Is there anything between $\aleph_0$ and $c$?
 
-\begin{axiom}[Continuum Hypothesis]
-\index{Continuum Hypothesis}
-\label{axiom:continuum_hypothesis}
+\begin{axiom}[Continuum Hypothesis]\index{Continuum Hypothesis}\label{axiom:continuum_hypothesis}
   If $\aleph_0 \leq \gamma \leq c$, then either $\gamma = \aleph_0$ or $\gamma = c$.
 \end{axiom}
 
-\begin{axiom}[Generalized Continuum Hypothesis]
-\index{Generalized Continuum Hypothesis}
-\label{axiom:generalized_continuum_hypothesis}
+\begin{axiom}[Generalized Continuum Hypothesis]\index{Generalized Continuum Hypothesis}\label{axiom:generalized_continuum_hypothesis}
   If $\abs{X} \leq \gamma \leq 2^{\abs{X}}$, then either $\gamma = \abs{X}$ or $\gamma = 2^{\abs{X}}$.
 \end{axiom}
 
@@ -1557,8 +1491,7 @@ In this course, we shall assume that the Continuum Hypothesis is true.
 \label{sec:introduction_to_metric_spaces}
 % section introduction_to_metric_spaces
 
-\begin{defn}[Metric \& Metric Space]\index{Metric}\index{Metric Space}
-\label{defn:metric_n_metric_space}
+\begin{defn}[Metric \& Metric Space]\index{Metric}\index{Metric Space}\label{defn:metric_n_metric_space}
   Given a set $X$, a \hlnoteb{metric} on $X$ is a function $d : X \times X \to \mathbb{R}$ such that\marginnote{
   \begin{remark}
     A metric is an abstract notion of distance.
@@ -1605,7 +1538,7 @@ In this course, we shall assume that the Continuum Hypothesis is true.
 \end{eg}
 
 \begin{eg}[Euclidean Metric / 2-metric on $\mathbb{R}^n$]\label{eg:euclidean_metric}\index{Euclidean Metric}\index{2-metric}
-  Let $X = \mathbb{R}^n$. Let $\vec{x} = \{ x_1, x_2, ..., x_n \}$ and $\vec{y} = \{ y_1, y_2, ..., y_n \}$. Define
+  Let $X = \mathbb{R}^n$. Let $\vec{x} = \{ x_1, x_2, \ldots, x_n \}$ and $\vec{y} = \{ y_1, y_2, \ldots, y_n \}$. Define
   \begin{equation*}
     d_2(\vec{x}, \vec{y}) = \sqrt{ \sum_{i=1}^{n} ( x_i - y_i )^2 }
   \end{equation*}
@@ -1624,7 +1557,7 @@ In this course, we shall assume that the Continuum Hypothesis is true.
     \label{fig:visualize_triangle_inequality_r2}
   \end{marginfigure}
   \begin{itemize}
-    \item $d_2$ is the square root of the sum of squares, and so $d_2(\vec{x}, \vec{y}) \geq 0$ for any $\vec{x}, \vec{y} \in \mathbb{R}^n$, and $d_2(\vec{x}, \vec{y}) = 0 \iff \forall i \in \{1, ..., n\} \; x_i = y_i \iff \vec{x} = \vec{y}$;
+    \item $d_2$ is the square root of the sum of squares, and so $d_2(\vec{x}, \vec{y}) \geq 0$ for any $\vec{x}, \vec{y} \in \mathbb{R}^n$, and $d_2(\vec{x}, \vec{y}) = 0 \iff \forall i \in \{1, \ldots, n\} \; x_i = y_i \iff \vec{x} = \vec{y}$;
       \item Since $(x_i - y_i)^2 = (y_i - x_i)^2$ for any $x_i, y_i \in \mathbb{R}$, we have that $d_2(\vec{x}, \vec{y}) = d_2(\vec{y}, \vec{x})$.
   \end{itemize}
   However, it is not immediately clear that $d_2$ satisfies the triangle inequality criterion, especially if $n \geq 3$. If $n = 2$, heuristically, the triangle inequality simply tells that the length of any one side of a triangle is less than or equal to the sum of the other two, e.g. \cref{fig:visualize_triangle_inequality_r2}.\marginnote{
@@ -1634,8 +1567,7 @@ In this course, we shall assume that the Continuum Hypothesis is true.
   }
 \end{eg}
 
-\begin{defn}[Norm \& Normed Linear Space]\index{Norm}\index{Normed Linear Space}
-\label{defn:norm_n_normed_linear_space}
+\begin{defn}[Norm \& Normed Linear Space]\index{Norm}\index{Normed Linear Space}\label{defn:norm_n_normed_linear_space}
   Given a vector space $V$ (usually over $\mathbb{R}$), a \hlnoteb{norm} on $V$ is a function
   \begin{equation*}
     \norm{\cdot} : V \to \mathbb{R}
@@ -1674,11 +1606,11 @@ In this course, we shall assume that the Continuum Hypothesis is true.
 \end{proof}
 
 \begin{eg}[Euclidean Norm]\label{eg:euclidean_norm}
-  Let $X = \mathbb{R}^n$, and $\vec{x} = ( x_1, ..., x_n ) \in \mathbb{R}^2$. Define $\norm{\cdot}_2$ such that
+  Let $X = \mathbb{R}^n$, and $\vec{x} = ( x_1, \ldots, x_n ) \in \mathbb{R}^2$. Define $\norm{\cdot}_2$ such that
   \begin{equation*}
-    \norm{(x_1, ..., x_n)}_2 = \sqrt{ \sum_{i=1}^{n} x_i^2 }
+    \norm{(x_1, \ldots, x_n)}_2 = \sqrt{ \sum_{i=1}^{n} x_i^2 }
   \end{equation*}
-  From \cref{eg:euclidean_metric}, we are given the triangle inequality property, in which we have yet to prove. Positive definiteness is clear. For scalar multiplication, let $\vec{x} = { x_1, ..., x_n }$, and notice that
+  From \cref{eg:euclidean_metric}, we are given the triangle inequality property, in which we have yet to prove. Positive definiteness is clear. For scalar multiplication, let $\vec{x} = { x_1, \ldots, x_n }$, and notice that
   \begin{equation*}
     \norm{\alpha \cdot \vec{x}}_2 = \sqrt{ \sum_{i=1}^{n} (\alpha x_i)^2 } = \sqrt{ \alpha^2 \sum_{i=1}^{n} x_i^2 } = \abs{\alpha} \sqrt{ \sum_{i=1}^{n} x_i^2 } = \abs{\alpha} \norm{\vec{x}}_2.
   \end{equation*}
@@ -1691,13 +1623,13 @@ In this course, we shall assume that the Continuum Hypothesis is true.
 \end{eg}
 
 \begin{eg}[1-norm]\label{eg:1_norm}
-  Let $X = \mathbb{R}^n$, and $\vec{x} = ( x_1, ..., x_n )$. Define
+  Let $X = \mathbb{R}^n$, and $\vec{x} = ( x_1, \ldots, x_n )$. Define
   \begin{equation*}
     \norm{\vec{x}}_1 := \sum_{i = 1}^{n} \abs{x_i}.
   \end{equation*}
   Clearly so, $\norm\cdot_1$ is a norm:
   \begin{itemize}
-    \item (\textbf{positive definiteness}) This is true by the absolute value function, i.e. every $\abs{x_i} \geq 0$, and so the sum over these $x_i$'s is also non-negative, and $\sum_{i=1}^{n} \abs{x_i} = 0 \iff \forall i \in \{ 1, ..., n\} \; x_i = 0 \iff \vec{x} = 0$.
+    \item (\textbf{positive definiteness}) This is true by the absolute value function, i.e.\ every $\abs{x_i} \geq 0$, and so the sum over these $x_i$'s is also non-negative, and $\sum_{i=1}^{n} \abs{x_i} = 0 \iff \forall i \in \{ 1, \ldots, n\} \; x_i = 0 \iff \vec{x} = 0$.
     \item (\textbf{scalar multiplication}) This uses a similar argument as in the previous example.
     \item (\textbf{triangle inequality}) This is true by, again, the triangle inequality on absolute values.
   \end{itemize}
@@ -1711,20 +1643,20 @@ In this course, we shall assume that the Continuum Hypothesis is true.
 \end{eg}
 
 \begin{eg}
-  Let $X = \mathbb{R}^n$ and $\vec{x} = ( x_1, ..., x_n )$. Define
+  Let $X = \mathbb{R}^n$ and $\vec{x} = ( x_1, \ldots, x_n )$. Define
   \begin{equation*}
     \norm{\vec{x}}_\infty = \max \{ \abs{x_i} \}
   \end{equation*}
   Again, it is easy to see that $\norm\cdot_\infty$ is a norm;
   \begin{itemize}
-    \item (\textbf{positive definiteness}) $\because \forall i \in \{ 1, ..., n \} \; \abs{x_i} \geq 0 \implies \max \{ \abs{x_i \} \geq 0}$ and $\max \{ \abs{x_i} \} = 0 \iff x_i = 0 \iff \vec{x} = 0$.
+    \item (\textbf{positive definiteness}) $\because \forall i \in \{ 1, \ldots, n \} \; \abs{x_i} \geq 0 \implies \max \{ \abs{x_i \} \geq 0}$ and $\max \{ \abs{x_i} \} = 0 \iff x_i = 0 \iff \vec{x} = 0$.
     \item (\textbf{scalar multiplication}) Notice that
       \begin{equation*}
         \norm{\alpha \cdot \vec{x}}_\infty = \max \{ \abs{\alpha x_i} \} = \abs{\alpha} \max \{ \abs{x_i} \} = \abs{\alpha} \norm{\vec{x}}_\infty.
       \end{equation*}
     \item (\textbf{triangle inequality}) This is once again true by the triangle inequality on the absolute value function, i.e.
       \begin{gather*}
-        \because \forall i \in \{ 1, ..., n \} \enspace \abs{x_i + y_i} \leq \abs{x_i} + \abs{y_i} \\
+        \because \forall i \in \{ 1, \ldots, n \} \enspace \abs{x_i + y_i} \leq \abs{x_i} + \abs{y_i} \\
         \max \{ \abs{x_i + y_i} \} \leq \max \{ \abs{x_i} \} + \max \{ \abs{y_i} \}.
       \end{gather*}
   \end{itemize}
@@ -1758,7 +1690,7 @@ Notice that we would then have the following graph:\begin{figure}[h]
 In fact, it is true that if we let $i \in \mathbb{N} \setminus \{ 0 \}$, as suggested by \cref{fig:unit_ball_depending_on_norm}, we would see that the ``diamond'' would grow into a ``circle'' as in $S_2$, and as $i \geq 3$, the unit ball will expand and approach the ``square'', which is $S_\infty$.
 
 Another observation that we can make is if we can show that a set is open for a ``smaller'' $S_i$, then the same set is open for any $S_j$ for $j \geq i$.\marginnote{
-Note that if we allow for $0 < i < 1$, then we would have a graph that looks like the following, which is a convex graph, i.e. we cannot create well-defined norms.}
+Note that if we allow for $0 < i < 1$, then we would have a graph that looks like the following, which is a convex graph, i.e.\ we cannot create well-defined norms.}
 \begin{marginfigure}
 \begin{center}
 \begin{tikzpicture}
@@ -1803,9 +1735,8 @@ where we say that $d_\infty$ is the \hlnotea{least sensitive}, and $d_1$ being t
 \label{sec:introduction_to_metric_spaces_continued}
 % section introduction_to_metric_spaces_continued
 
-\begin{defn}[$\norm\cdot_p$-norm]\index{$\norm\cdot_p$-norm}
-\label{defn:p_norm}
-  Given $\vec{x} = ( x_1, ..., x_n ) \in \mathbb{R}^n$, we define, for $1 < p < \infty$, the $\norm\cdot_p$-norm to be
+\begin{defn}[$\norm\cdot_p$-norm]\index{$\norm\cdot_p$-norm}\label{defn:p_norm}
+  Given $\vec{x} = ( x_1, \ldots, x_n ) \in \mathbb{R}^n$, we define, for $1 < p < \infty$, the $\norm\cdot_p$-norm to be
   \begin{equation*}
     \norm{\vec{x}}_p = \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^{\frac{1}{p}}
   \end{equation*}
@@ -1813,8 +1744,7 @@ where we say that $d_\infty$ is the \hlnotea{least sensitive}, and $d_1$ being t
 
 We asked the question: why is $\norm\cdot_p$ a norm?
 
-\begin{lemma}
-\label{lemma:lemma_for_holders}
+\begin{lemma}\label{lemma:lemma_for_holders}
   If $1 < p < \infty$,
   \begin{equation*}
     \frac{1}{p} + \frac{1}{q} = 1,
@@ -1853,12 +1783,10 @@ We asked the question: why is $\norm\cdot_p$ a norm?
   \end{gather*}\qed
 \end{proof}
 
-\begin{thm}[H\"{o}lder's Inequality]
-\index{H\"{o}lder's Inequality}
-\label{thm:holder_s_inequality}
+\begin{thm}[H\"{o}lder's Inequality]\index{H\"{o}lder's Inequality}\label{thm:holder_s_inequality}
   For $1 < p < \infty$, let $\frac{1}{p} + \frac{1}{q} = 1$ \sidenote{We also call $q$ the conjugate of $p$.}. Let
   \begin{equation*}
-    \vec{x} = ( x_1, ..., x_n ), \quad \vec{y} = ( y_1, ..., y_n ).
+    \vec{x} = ( x_1, \ldots, x_n ), \quad \vec{y} = ( y_1, \ldots, y_n ).
   \end{equation*}
   Then
   \begin{equation*}
@@ -1899,12 +1827,10 @@ We asked the question: why is $\norm\cdot_p$ a norm?
 
 We are now ready to prove our long-awaited result.
 
-\begin{thm}[Minkowski's Inequality]
-\index{Minkowski's Inequality}
-\label{thm:minkowshi_s_inequality}
+\begin{thm}[Minkowski's Inequality]\index{Minkowski's Inequality}\label{thm:minkowshi_s_inequality}
   Let $1 < p < \infty$. If
   \begin{equation*}
-    \vec{x} = ( x_1, ..., x_n ), \quad \vec{y} = ( y_1, ..., y_n )
+    \vec{x} = ( x_1, \ldots, x_n ), \quad \vec{y} = ( y_1, \ldots, y_n )
   \end{equation*}
   in $\mathbb{R}^n$, then
   \begin{equation*}
@@ -1959,7 +1885,7 @@ We are now ready to prove our long-awaited result.
       \sum_{i=1}^{n} \abs{x_i}^p &\leq \left( \sum_{i=1}^{n} \abs{x_i}^q \right)^{\frac{p}{q}} \cdot \left( \sum_{i=1}^{n} 1^{\frac{q}{q - p}} \right)^{1 - \frac{p}{q}} \\
                                  &= n^{1 - \frac{p}{q}} \cdot \left( \sum_{i=1}^{n} \abs{x_i}^q \right)^\frac{p}{q}
     \end{align*}
-    Therefore, for $\vec{x} = (x_1..., x_n) \in \mathbb{R}$,
+    Therefore, for $\vec{x} = (x_1, \ldots, x_n) \in \mathbb{R}$,
     \begin{align*}
       \norm{\vec{x}}_p &= \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^{\frac{1}{p}} \leq \left( n^{1 - \frac{p}{q}} \cdot \left( \sum_{i=1}^{n} \abs{x_i}^q \right)^\frac{p}{q} \right)^{\frac{1}{p}} \\
                        &= n^{\frac{1}{p} - \frac{1}{q}} \cdot \left( \sum_{i=1}^{n} \abs{x_i}^q \right)^{\frac{1}{q}} = n^{\frac{1}{p} - \frac{1}{q}} \cdot \norm{\vec{x}}_q.
@@ -2079,7 +2005,7 @@ We wondered about $l_p(\mathbb{R})$ in the last lecture but let us consider a ca
   \end{equation*}
   }
   \begin{equation*}
-    \norm{f}_1 = \sup \left\{ \sum_{i=1}^{n} \abs{f(x_i)} \mid x_1, ..., x_n \in \Gamma, n \in \mathbb{N} \setminus \{ 0 \} \right\} < \infty.
+    \norm{f}_1 = \sup \left\{ \sum_{i=1}^{n} \abs{f(x_i)} \mid x_1, \ldots, x_n \in \Gamma, n \in \mathbb{N} \setminus \{ 0 \} \right\} < \infty.
   \end{equation*}
   It is clear that $l_1(\Gamma) \subseteq l_\infty(\Gamma)$, where $l_\infty(\Gamma)$ is from \cref{eg:l_infty_on_gamma}. Consequently, $(l_1(\Gamma), \norm\cdot_1)$ is a normed linear space.
 \end{eg}
@@ -2115,7 +2041,7 @@ We can extend the same idea onto $l_p$ spaces.
 \begin{eg}
   Let $X = C[a, b]$ \sidenote{Some authors also write this as $L'[a, b]$.} have the same definition as the previous example, but this time define
   \begin{equation*}
-    \norm{f}_1 = \int_{a}^{b} \abs{ f(t) } \dif{t}.
+    \norm{f}_1 = \int_{a}^{b} \abs{f(t)} \dif{t}.
   \end{equation*}
   By \hlnotea{linearity of integration}, both the triangle equality and scalar multiplication hold, and so $(C[a, b], \norm\cdot_1)$ is a normed linear space\sidenote{Compared to the last example, this is not a complete space.}.
 \end{eg}
@@ -2128,9 +2054,7 @@ We can extend the same idea onto $l_p$ spaces.
   Again, by linearity of integration, scalar multiplication holds. However, it is not as easy to show for the triangle inequality; we are now asking the same question as we did before for $l_p$, which we solved using \hyperref[thm:holder_s_inequality]{H\"{o}lder's Inequality} and \hyperref[thm:minkowshi_s_inequality]{Minkowski's Inequality}. But now, instead of summations, we have integrations.
 \end{eg}
 
-\begin{thm}[H\"{o}lder's Inequality v2]
-\index{H\"{o}lder's Inequality v2}
-\label{thm:holder_s_inequality_v2}
+\begin{thm}[H\"{o}lder's Inequality v2]\index{H\"{o}lder's Inequality v2}\label{thm:holder_s_inequality_v2}
   Let $1 < p < \infty$ and $\frac{1}{p} + \frac{1}{q} = 1$. For each $f, g \in C[a, b]$, we have
   \begin{equation*}
     \int_{a}^{b} \abs{f(t)g(t)} \dif{t} \leq \left( \int_{a}^{b} \abs{f(t)}^p \dif{t} \right)^\frac{1}{p} \left( \int_{a}^{b} \abs{g(t)}^q \dif{t} \right)^\frac{1}{q}.
@@ -2155,9 +2079,7 @@ We can extend the same idea onto $l_p$ spaces.
   as required.\qed
 \end{proof}
 
-\begin{thm}[Minkowski's Inequality v2]
-\index{Minkowski's Inequality v2}
-\label{thm:minkowski_s_inequality_v2}
+\begin{thm}[Minkowski's Inequality v2]\index{Minkowski's Inequality v2}\label{thm:minkowski_s_inequality_v2}
   Let $1 < p < \infty$. If $f, g \in C[a, b]$, then
   \begin{equation*}
     \left( \int_{a}^{b} \abs{(f + g)(t)}^p \dif{t} \right)^\frac{1}{p} \leq \left( \abs{f(t)}^p \dif{t} \right)^\frac{1}{p} \cdot \left( \int_{a}^{b} \abs{g(t)}^p \dif{t} \right)^\frac{1}{p}.
@@ -2243,8 +2165,7 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
 \label{sec:topology_on_metric_spaces}
 % section topology_on_metric_spaces
 
-\begin{defn}[Open \& Closed]
-\label{defn:open_n_closed}
+\begin{defn}[Open \& Closed]\label{defn:open_n_closed}
   Let $X(, d)$ be a metric space. If $x_0 \in X$, then
   \begin{equation*}
     B(x_o, \epsilon) = \{ y \in X \mid d(x, y) < \epsilon \}
@@ -2262,13 +2183,12 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
   We say that $F \subset X$ is \hldefn{closed} if $F^C$ is open.
 \end{defn}
 
-\begin{propo}[Properties of Open Sets]
-\label{propo:properties_of_open_sets}
+\begin{propo}[Properties of Open Sets]\label{propo:properties_of_open_sets}
   Let $(X, d)$ be a metric space.
   \begin{enumerate}
     \item $X, \emptyset$ are open,
     \item If $\{ U_\alpha \}_{ \alpha \in I }$ is a collection of open sets, then $U = \bigcup_{\alpha \in I}$ is open.
-    \item If $\{ U_1, ..., U_n \}$ is a collection of open sets, then $U = \bigcap_{i = 1}^{n} U_i$ is open.
+    \item If $\{ U_1, \ldots, U_n \}$ is a collection of open sets, then $U = \bigcap_{i = 1}^{n} U_i$ is open.
   \end{enumerate}
 \end{propo}
 
@@ -2279,11 +2199,11 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
       \begin{equation*}
         B(x_0, \epsilon_0) \subset U_{\alpha_0} \subset U.
       \end{equation*}
-    \item Let $x_0 \in U = \bigcap_{i = 1}^{n}$. Then for each $i \in \{1, ..., n\}$, $\exists \epsilon_i > 0$ such that $B(x_0, \epsilon_i) \subset U_i$. Let
+    \item Let $x_0 \in U = \bigcap_{i = 1}^{n}$. Then for each $i \in \{1, \ldots, n\}$, $\exists \epsilon_i > 0$ such that $B(x_0, \epsilon_i) \subset U_i$. Let
       \begin{equation*}
-        \epsilon_0 = \min \{ \epsilon_1, ..., \epsilon_n \}.
+        \epsilon_0 = \min \{ \epsilon_1, \ldots, \epsilon_n \}.
       \end{equation*}
-      Then we have that $\forall i \in \{1, ..., n\}$, $\epsilon_0 \leq \epsilon_i$. Thus
+      Then we have that $\forall i \in \{1, \ldots, n\}$, $\epsilon_0 \leq \epsilon_i$. Thus
       \begin{equation*}
         B(x_0, \epsilon_0) \subset B(x_0, \epsilon_i) \subset U_i
       \end{equation*}
@@ -2291,13 +2211,12 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
   \end{enumerate}\qed
 \end{proof}
 
-\begin{crly}[Properties of Closed Sets]
-\label{crly:properties_of_closed_sets}
+\begin{crly}[Properties of Closed Sets]\label{crly:properties_of_closed_sets}
   Let $(X, d)$ be a metric space.
   \begin{enumerate}
     \item $X, \emptyset$ are closed.
     \item If $\{ F_\alpha \}_{\alpha \in I}$ is a collection of closed sets, then $F = \bigcap_{\alpha \in I} F_\alpha$ is closed.
-    \item If $\{ F_1, ..., F_n \}$ is a collection of closed sets, then $F = \bigcup_{i = 1}^{n} F_i$ is closed.
+    \item If $\{ F_1, \ldots, F_n \}$ is a collection of closed sets, then $F = \bigcup_{i = 1}^{n} F_i$ is closed.
   \end{enumerate}
 \end{crly}
 
@@ -2323,17 +2242,16 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
   \end{equation*}
   Consequently, any $A \in \mathcal{P}(X)$ is an arbitrary union of open sets, i.e.
   \begin{equation*}
-    A = \bigcup_{\x \in A} \{ x \}.
+    A = \bigcup_{x \in A} \{ x \}.
   \end{equation*}
   Thus by \cref{propo:properties_of_open_sets}, $A$ is open.
 \end{eg}
 
 \begin{note}
-  On $\mathbb{R}$, only $\emptyset$ and $\mathbb{R}$ itself are both open and closed. This can be proven using the \hldefna{Intermediate Value Theorem}.
+  On $\mathbb{R}$, only $\emptyset$ and $\mathbb{R}$ itself are both open and closed. This can be proven using the \hldefn{Intermediate Value Theorem}.
 \end{note}
 
-\begin{defn}[Topology]\index{Topology}
-\label{defn:topology}
+\begin{defn}[Topology]\index{Topology}\label{defn:topology}
   Given any $X$, a set $\tau \subset \mathcal{P}(X)$ is called a \hlnoteb{topology} on $X$ is
   \begin{enumerate}
     \item $X, \emptyset \in \tau$
@@ -2341,7 +2259,7 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
       \begin{equation*}
         U = \bigcup_{\alpha \in I} U_\alpha \in \tau.
       \end{equation*}
-    \item If $\{ U_1, ..., U_n \}$ such that $U_i \in \tau$ for each $i \in \{1, ..., n\}$, then
+    \item If $\{ U_1, \ldots, U_n \}$ such that $U_i \in \tau$ for each $i \in \{1, \ldots, n\}$, then
       \begin{equation*}
         U = \bigcap_{i = 1}^{n} U_i \in \tau.
       \end{equation*}
@@ -2373,8 +2291,7 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
 \label{sec:topology_on_metric_spaces_continued}
 % section topology_on_metric_spaces_continued
 
-\begin{thm}[Open Balls are Open]
-\label{thm:open_balls_are_open}
+\begin{thm}[Open Balls are Open]\label{thm:open_balls_are_open}
   \begin{enumerate}
     \item $B(x_0, \epsilon)$ is open.
     \item $B[x_0, \epsilon]$ is closed.
@@ -2396,7 +2313,7 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
           \draw[<->] (0, 0) -- (-.5,-.5) node[midway,above] {$r$};
         \end{tikzpicture}
         \end{center}
-        \caption{Idea of proof for 1. in $\mathbb{R}^2$.}
+        \caption{Idea of proof for 1.\ in $\mathbb{R}^2$.}
       \end{marginfigure}
       Let $\alpha = \epsilon - r$. Assume that $y \in B(x, \alpha)$. By the Triangle Inequality,
       \begin{equation*}
@@ -2415,7 +2332,7 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
           \draw[dotted] (2, 1) circle(.7360679774997896964);
         \end{tikzpicture}
         \end{center}
-        \caption{Idea of proof for 2. in $\mathbb{R}^2$.}
+        \caption{Idea of proof for 2.\ in $\mathbb{R}^2$.}
       \end{marginfigure}
       Let $\alpha = r - \epsilon$. Assume $z \in B(y, \alpha)$, and suppose, for contradiction, that $z \in B[x_0, \epsilon]$. Then
       \begin{equation*}
@@ -2423,7 +2340,7 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
       \end{equation*}
       but $r < r$ contradicts the fact that $r = r$.
 
-    \item Let $U \subset X$ be open. $\forall x \in U$, let $\epsilon_x > 0$ be such that $B(x, e\spilon_x) \subset U$. Then
+    \item Let $U \subset X$ be open. $\forall x \in U$, let $\epsilon_x > 0$ be such that $B(x, \epsilon_x) \subset U$. Then
       \begin{equation*}
         U = \bigcup_{x \in U} B(x, \epsilon_x).
       \end{equation*}
@@ -2443,11 +2360,11 @@ This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, 
   Then, clearly so, $B(x, \epsilon) \subset I$.
 \end{eg}
 
-If $U \subset \mathbb{R}$ is open, and if we define $\sim$ on $U$ by $x \sim y$ \sidenote{This is what we did in Q1.}. if $(x, y) , (y, x) \subset U$. We proved that $\sim$ is an equivalence relation. Let $I_x = [x]$ be the interval defined by $\sim$. We proved that $I_x$ is an open interval.
+If $U \subset \mathbb{R}$ is open, and if we define $\sim$ on $U$ by $x \sim y$ \sidenote{This is what we did in Q1.}.\ if $(x, y) , (y, x) \subset U$. We proved that $\sim$ is an equivalence relation. Let $I_x = [x]$ be the interval defined by $\sim$. We proved that $I_x$ is an open interval.
 
 Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be expressed as the union of a countable collection $\{ I_\alpha, \alpha \in I \}$ of open intervals, which are pairwise disjoint.
 
-\newthought{Question}: Given $U = \{ (x, y) \mid \abs{x}, \abs{y} < 1 \}$, can we do the same as above, i.e. can we use a countable collection of disjoint open sets to express $U$, or, in other words, cover $U$?
+\newthought{Question}: Given $U = \{ (x, y) \mid \abs{x}, \abs{y} < 1 \}$, can we do the same as above, i.e.\ can we use a countable collection of disjoint open sets to express $U$, or, in other words, cover $U$?
 
 \begin{eg}[Cantor Set]\label{eg:cantor_set}
   Let's consider the closed interval $[0, 1]$, of which we shall label as $P_0$.
@@ -2456,8 +2373,8 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
     \begin{center}
     \begin{tikzpicture}
       \draw[-] (-0.5,0) -- (9.5,0);
-      \draw[-] (0, .5) -- (0, -.5) node[below] {$0$};
-      \draw[-] (9, .5) -- (9, -.5) node[below] {$1$};
+      \draw[-] (0,.5) -- (0, -.5) node[below] {$0$};
+      \draw[-] (9,.5) -- (9, -.5) node[below] {$1$};
 
       \node at (1, -.7) {$\frac{1}{9}$};
       \node at (2, -.7) {$\frac{2}{9}$};
@@ -2519,15 +2436,171 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
 
 % chapter lecture_13_oct_05th (end)
 
+\chapter{Lecture 14 Oct 12th}%
+\label{chp:lecture_14_oct_12th}
+% chapter lecture_14_oct_12th
+
+\section{Topology on Metric Spaces (Continued 2)}%
+\label{sec:topology_on_metric_spaces_continued_2}
+% section topology_on_metric_spaces_continued_2
+
+\begin{defn}[Closure]\index{Closure}\label{defn:closure}
+  Let $A \susbeteq (X, d)$. We define the \hlnoteb{closure} $\bar{A}$ of $A$ to be
+  \begin{equation*}
+    \bar{A} = \cap \{ F \subset X \mid F \text{ is closed }, A \subset F \}.
+  \end{equation*}
+  $\bar{A}$ is the smallest closed set that contains $A$.
+\end{defn}
+
+\begin{defn}[Interior]\index{Interior}\label{defn:interior}
+  Let $A \subseteq (X, d)$. We define the \hlnoteb{interior} $A^\circ$ of $A$ to be
+  \begin{equation*}
+    A^\circ = \cup \{ U \subset X \mid U \text{ is open }, U \subset A \}.
+  \end{equation*}
+  $A^\circ$ is the largest open set contained in $A$.
+\end{defn}
+
+\begin{remark}
+  We have that
+  \begin{equation*}
+    A^\circ \subset A \subset \bar{A}
+  \end{equation*}
+\end{remark}
+
+\begin{defn}[Neighbourhood]\index{Neighbourhood}\label{defn:neighbourhood}
+  We say that a set $A$ is a \hlnoteb{neighbourhood} of a point $x \in X$ if $x \in A^\circ$.\sidenote{A neighbourhood is \hlimpo{not necessarily open}; the definition applies to elements in the interior after all.}
+\end{defn}
+
+\begin{note}
+  $A$ is a neighourhood of $x \in X$ if and only if $\exists \epsilon > 0$ such that $B(x, \epsilon) \subset A$.
+\end{note}
+
+\begin{defn}[Boundary Point]\index{Boundary Point}\label{defn:boundary_point}
+  Given $A \subset (X, d)$, a point $x$ is called a \hlnoteb{boundary point} for $A$ if
+  \begin{equation*}
+    \forall \epsilon > 0 \quad B(x, \epsilon) \cap A \neq \emptyset \land B(x, \epsilon) \cap A^C \neq \emptyset.
+  \end{equation*}
+  We denote the collection of all boundary points of $A$ by $\bdy(A)$.
+\end{defn}
+
+\begin{propo}[Closed Sets Include Its Boundary Points]\label{propo:closed_sets_include_its_boundary_points}
+  Let $(X, d)$ be a metric space and $A \subset X$. Then $A$ is closed $\iff \bdy(A) \subset A$.
+\end{propo}
+
+\begin{proof}
+  $(1) \implies (2)$: Suppose $x \in A^C$, which is open. Then $\exists \epsilon > 0$ such that $B(x, \epsilon) \subset A^C$. Then $x \notin \bdy(A)$, i.e. $\bdy(A) \subset A$.\sidenote{The idea of this proof is to show that it is impossible for the boundary to be in $A^C$.}
+
+  \noindent$(2) \implies (3)$: \sidenote{To show that $A$ is closed, we should show that $A^C$ is open.}Let $x \in A^C$. Then, by assumption, $x \notin \bdy(A)$. Then $\exists \epsilon > 0$ such that either $B(x, \epsilon) \subset A$ or $B(x, \epsilon) \subset A^C$. But since $x \notin A$, we must have $B(x, \epsilon) \subset A^C$, i.e.\ $A^C$ is open.\qed\
+\end{proof}
+
+\begin{propo}[Closures include the Boundary Points of a Set]\label{propo:closures_include_the_boundary_points_of_a_set}
+  Given $A \subset (X, d)$, we have $\bar{A} = A \cup \bdy(A)$.
+\end{propo}
+
+\begin{proof}
+  By definition, $A \subseteq \bar{A}$, so it suffices to show that $\bdy(A) \subset \bar{A}$ to show that $A \cup \bdy(A) \subseteq \bar{A}$.
+
+  \sidenote{Here, we employ the same proof as the previous proposition.}Assume that $x \notin \bar{A}$, i.e. $x \in \bar{A}^C$, which is open since $\bar{A}$ is closed by definition. Then $\exists \epsilon > 0$ such that $B(x, \epsilon) \susbet \bar{A}^C$. Since $x \notin A \subset \bar{A}$, we have that $B(x, \epsilon) \cap A = \emptyset$, i.e.\ $x \notin \bdy(A)$. Therefore $\bdy(A) \subset \bar{A}$, and so $A \cup \bdy(A) \subseteq \bar{A}$ as claimed.
+
+  \sidenote{For this part, if we can show that $A \cup \bdy(A)$ is closed, then by definition, $\bar{A} \subseteq A \cup \bdy(A)$ since $\bar{A}$ is the smallest such set that contains $A$. To show that $A \cup \bdy(A)$ is closed, we can either show that ${( A \cup \bdy(A) )}^C$ is open, or use \cref{propo:closed_sets_include_its_boundary_points} to show that $\bdy( A \cup \bdy(A) ) \subset (A \cup \bdy(A))$. We shall show for the more complicated expression.}Let $x \in \bdy( A \cup \bdy(A) )$. Then $\forall \epsilon > 0$, we have
+  \begin{gather}
+    B(x, \epsilon) \cap (A \cup \bdy(A)) \neq \emptyset \label{eq:closures_n_boundary_eq1} \\
+    \land \nonumber \\
+    B(x, \epsilon) \cap {(A \cup \bdy(A))}^C \neq \emptyset. \label{eq:closures_n_boundary_eq2}
+  \end{gather}
+  Note that by \hyperref[thm:de_morgan_s_laws]{De Morgan's Laws}, we have that
+  \begin{equation*}
+    {( A \cup \bdy(A) )}^C = A^C \cap {\bdy(A)}^C.
+  \end{equation*}
+  Then \eqref{eq:closures_n_boundary_eq2} would be
+  \begin{equation*}
+    B(x, \epsilon) \cap A^C \cap {\bdy(A)}^C \neq \emptyset,
+  \end{equation*}
+  and so
+  \begin{gather}
+    B(x, \epsilon) \cap A^C \neq \emptyset \label{eq:closures_n_boundary_eq3} \\
+    \land \nonumber \\
+    B(x, \epsilon) \cap {\bdy(A)}^C \neq \emptyset. \label{eq:closures_n_boundary_eq4}
+  \end{gather}
+  From \eqref{eq:closures_n_boundary_eq1}, we have
+  \begin{equation*}
+    B(x, \epsilon) \cap A \neq \emptyset \; \lor \; B(x, \epsilon) \cap \bdy(A) \neq \emptyset.
+  \end{equation*}
+  If $B(x, \epsilon) \cap A \neq \emptyset$, then \because \eqref{eq:closures_n_boundary_eq3},\ $x \in \bdy(A)$, and so
+  \begin{equation}\tag{$\dagger$}\label{eq:closures_n_boundary_repeated_arg}
+    \bdy( A \cup \bdy(A) ) \subseteq ( A \cup \bdy(A) ).
+  \end{equation}
+  If $B(x, \epsilon) \cap \bdy(A) \neq \emptyset$, let $z \in B(x, \epsilon) \cap \bdy(A)$. \because $z \in B(x, \epsilon)$, let $r = d(x, z)$, and $\alpha = \epsilon - r > 0$. Let $z_0 \in B(z, \alpha)$. Then by the Triangle Inequality
+  \begin{equation*}
+    d(x, z_0) \leq d(x, z) + d(z, z_0) < r + \alpha = \epsilon.
+  \end{equation*}
+  Thus $z_0 \in B(x, \epsilon) \implies ( B(z, \alpha) \subseteq B(x, \epsilon) )$. Then \because $z \in \bdy(A)$, we have $B(z, \alpha) \cap A \neq \emptyset$, and so $B(x, \epsilon) \cap A \neq \emptyset$. Then we can just follow the argument we did in \eqref{eq:closures_n_boundary_repeated_arg} and arrive as the same conclusion. Consequently, by \cref{propo:closed_sets_include_its_boundary_points}, $A \cup \bdy(A)$ is closed as claimed.\qed\
+\end{proof}
+
+\begin{eg}
+  Let $X = \mathbb{R}$ and $A = [0, 1)$. We have that
+  \begin{itemize}
+    \item $\bdy(A) = \{0, 1\}$;
+    \item $A^\circ = (0, 1)$; and
+    \item $\bar{A} = [0, 1]$.
+  \end{itemize}
+\end{eg}
+
+\begin{eg}\label{eg:bdy_interior_n_closure_of_q}
+  Let $X = \mathbb{R}$ and $A = \mathbb{Q}$. We have that
+  \begin{itemize}
+    \item $\bdy(A) = \mathbb{R}$ since every open ball around $a \in A$ will always contain elements in $\mathbb{Q}$ and ${\mathbb{Q}}^C$;
+    \item $A^\circ = \emptyset$ since $A^\circ = A \setminus \bdy(A)$; and
+    \item $\bar{A} = \mathbb{R}$ since $\bar{A} = A \cup \bdy(A)$.
+  \end{itemize}
+\end{eg}
+
+\begin{defn}[Separable]\index{Separable}\label{defn:separable}
+  A metric space $(X, d)$ is \hlnoteb{separable} if there exists a countable set $A \subset X$ such that $\bar{A} = X$, and call the metric space \hlnoteb{non-separable} otherwise.
+\end{defn}
+
+\begin{eg}
+  Every finite metric space $(X, d)$ is separable.
+
+  This is true since every subset $A$ of $X$ is countable since $X$ itself is countable. Consequently, if we pick $A$ to be a subset that takes every other element in $X$, then it is clear that $\bar{A} = X$, and so $(X, d)$ is separable.
+\end{eg}
+
+\begin{eg}
+  $\mathbb{R}$ is separable as shown in \cref{eg:bdy_interior_n_closure_of_q}.\sidenote{\begin{ex}
+      Prove that $\bar{\mathbb{Q}} = \mathbb{R}$ using the \hlnotea{Archimedean Property} of $\mathbb{R}$.
+  \end{ex}}
+\end{eg}
+
+\begin{eg}
+  $\mathbb{R}^n$ is separable if $d_p$ for all $1 \leq p \leq \infty$. We can apply the same argument that we had for \cref{eg:bdy_interior_n_closure_of_q} and apply it component-wise. Consequently, $\bar{\mathbb{Q}^n} = \mathbb{R}^n$. In other words, for any $(x_1, \ldots, x_n) \in (\mathbb{R}^n, d_p)$, we can pick a $(r_1, \ldots, r_n) \in \mathbb{Q}^n$ that is as close to $(x_1, \ldots, x_n)$ as possible.
+\end{eg}
+
+\begin{remark}
+  Notice that
+  \begin{equation*}
+    \bar{A} = X \iff \forall x \in X \forall \; \epsilon > 0 \; B(x, \epsilon) \cap A \neq \emptyset.
+  \end{equation*}
+\end{remark}
+
+\begin{defn}[Dense]\index{Dense}\label{defn:dense}
+  $A$ is \hlnoteb{dense} in $(X, d)$ if $\bar{A} = X$.
+\end{defn}
+
+\newthought{Question}: Is $(l_1, \norm\cdot_1)$ separable? Is $(l_\infty, \norm\cdot_\infty)$ separable?
+
+Recall \cref{eg:sequence_spaces}.
+
+% section topology_on_metric_spaces_continued_2 (end)
+
+% chapter lecture_14_oct_12th (end)
+
 \appendix
 
 \chapter{Useful Theorems from Earlier Calculus}%
 \label{chp:useful_theorems_from_earlier_calculus}
 % chapter useful_theorems_from_earlier_calculus
 
-\begin{thm}[Monotone Convergence Theorem]
-\index{Monotone Convergence Theorem}
-\label{thm:monotone_convergence_theorem}
+\begin{thm}[Monotone Convergence Theorem]\index{Monotone Convergence Theorem}\label{thm:monotone_convergence_theorem}
   Let $\{x_k\}$ be a sequence in $\mathbb{R}$.
   \begin{enumerate}
     \item Suppose $\{x_k\}$ is increasing.
@@ -2545,7 +2618,7 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
 
 % chapter useful_theorems_from_earlier_calculus (end)
 
-\backmatter
+\backmatter\
 
 \pagestyle{plain}
 
