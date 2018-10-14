@@ -1843,6 +1843,186 @@ To use $\Card$ to measure all sets, we need every set to be equinumerous with a 
 
 % chapter lecture_8_oct_02nd (end)
 
+\chapter{Lecture 9 Oct 04th}%
+\label{chp:lecture_9_oct_04th}
+% chapter lecture_9_oct_04th
+
+\section{Cardinals (Continued 2)}%
+\label{sec:cardinals_continued_2}
+% section cardinals_continued_2
+
+\subsection{Axiom of Choice (Continued)}%
+\label{sub:axiom_of_choice_continued}
+% subsection axiom_of_choice_continued
+
+From hereon, unless stated otherwise, we shall assume AC.
+
+\begin{propo}[Using Cardinals to Measure Sets]\label{propo:using_cardinals_to_measure_sets}
+  Assume AC. Every set is equinumerous with a cardinal.
+\end{propo}
+
+\begin{proof}
+  Let $A \in \Set$. By the Well-Ordering Principle, $A$ is well-orderable, i.e.\ there is a strict well-ordering on $A$. By \cref{thm:strict_well_ordered_sets_are_isomorphic_to_a_unique_ordinal}, $\exists! \alpha \in \Ord$ such that $(A, <) \simeq (\alpha, \in)$. Let
+  \begin{equation*}
+    S = \{ \beta \leq \alpha \mid \abs{\beta} = \abs{\alpha} \},
+  \end{equation*}
+  which is a set by Bounded Separation. Note that $S \neq \emptyset$ since $\alpha \in S$. Let $\beta$ be the least such ordinal in $S$. By this minimal choice, $\beta \in \Card$, $\abs{\beta} = \abs{\alpha} = \abs{A}$.\qed\
+\end{proof}
+
+And now our notation of $\abs{A} = \abs{B}$ makes sense provided the following definition.
+
+\begin{defn}[Cardinality]\index{Cardinality}\label{defn:cardinality}
+  Let $A \in \Set$. $\abs{A}$, in which we shall call the \hlnoteb{cardinality} of $A$, is the (unique) cardinal which is equinumerous with $A$.
+\end{defn}
+
+\begin{propo}[Lesser Cardinality]\label{propo:lesser_cardinality}
+  $\forall A, B \in \Set \quad \abs{A} \leq \abs{B} \iff \exists f : A \hookrightarrow B$.
+\end{propo}
+
+\begin{proof}
+  Let $\kappa = \abs{A}$ and $\lambda = \abs{B}$. If $\kappa \leq \lambda$, then
+  \begin{equation*}
+    A \overset{\text{bijection}}{\to} \kappa \overset{id}{\hookrightarrow} \lambda \overset{\text{bijection}}{\to} B
+  \end{equation*}
+  By composition of the 3 functions, $A \hookrightarrow B$.
+
+  Conversely, suppose $\exists h : A \hookrightarrow B$. Suppose to the contrary that $\lambda < \kappa$. Then $\lambda \subseteq \kappa$. Then
+  \begin{equation*}
+    \kappa \overset{\text{bijection}}{\to} A \overset{h}{\hookrightarrow} B \overset{\text{bijection}}{\to} \lambda
+  \end{equation*}
+  and so there exists an injection from $\kappa \to \lambda$. By \hyperref[lemma:schroder_bernstein_theorem]{Schr\"{o}der-Bernstein}, we have $\abs{\kappa} = \abs{\lambda}$, which contradicts the fact that $\kappa \in \Card$. Thus $\kappa \leq \lambda$.\qed\
+\end{proof}
+
+\begin{crly}[Cardinalities are Always Comparable]\label{crly:cardinalities_are_always_comparable}
+  $\forall A, B \in \Set \quad A \hookrightarrow B \lor B \hookrightarrow A$.
+\end{crly}
+
+\begin{proof}
+  WLOG, suppose $\neg ( B \hookrightarrow A )$. Then $\neg( \abs{B} \leq \abs{A} )$, i.e.\ $\abs{A} < \abs{B}$, i.e.\ (not by \cref{propo:lesser_cardinality}), $\exists f : A \hookrightarrow B$.\qed
+\end{proof}
+
+\begin{propo}[Functions are ``Lossy Compressions'']\label{propo:functions_are_lossy_compressions}
+  Suppose $f : A \to B$. Then $\abs{\Img(f)} \leq \abs{A}$.
+\end{propo}
+
+\begin{proof}
+  Let
+  \begin{equation*}
+    \mathcal{F} = \{ f^{-1}(y) \mid y \in \Img(f) \}
+  \end{equation*}
+  be the set of \hlnotea{fibres}\sidenote{\begin{margindefn}[Fibres]\index{Fibres}\label{defn:fibres}
+    Let $f : A \to B$. For $y \in \Img(f)$, the \hlnoteb{fibre} of $y$ is defined as
+    \begin{equation*}
+      f^{-1}(y) = \{ x \in A \mid f(x) = y \}.
+    \end{equation*}
+    The fibres are also commonly called the \hldefn{pullback}.
+  \end{margindefn}} of $f$. Note that $\emptyset \notin \mathcal{F}$, as otherwise we would be saying that $\exists y \in \Img(f)$ that has no pre-image. Let $h : \Img(f) \to A$ by
+  \begin{equation*}
+    h(y) := c(f^{-1}(y)) \in A
+  \end{equation*}
+  where $c : \mathcal{F} \to \cup \mathcal{F}$ is a choice function that exists by AC. Clearly so, $h$ is injective, and so by \cref{propo:lesser_cardinality}, $\abs{\Img(f)} \leq \abs{A}$.\qed\
+\end{proof}
+
+\begin{propo}[Countable Union of Countable Sets is Countable]\label{propo:countable_union_of_countable_sets_is_countable}
+  Let $A \in \Set$ be countable, and every $a \in A$ is also countable. Then $\cup A$ is countable.
+\end{propo}
+
+\begin{proof}
+  \hlwarn{to be added}
+\end{proof}
+
+% subsection axiom_of_choice_continued (end)
+
+\subsection{Hierarchy of Infinite Cardinals}%
+\label{sub:hierarchy_of_infinite_cardinals}
+% subsection hierarchy_of_infinite_cardinals
+
+\begin{note}[Notation]
+  Let $\kappa \in \Card$. Let $\kappa^+ := h(\kappa)$, which is the least ordinal not equinumerous with any subset of $\kappa$. We proved that $\forall E \in \Set$, $h(E) \in \Card$. Therefore, $\kappa^+ \in \Card$.
+\end{note}
+
+\begin{remark}
+  $\kappa^+$ is the least cardinal that contains $\kappa$. This follows immediately from the definition of $h(\kappa)$.
+\end{remark}
+
+\newthought{And so} we observe that $\kappa \mapsto \kappa^+$ is a ``successor'' operation on cardinals.\sidenote{Note that $\kappa + 1$ is not necessarily $\kappa^+$.}
+
+\begin{defn}[Cardinal Numbers]\index{Cardinal Numbers}\label{defn:cardinal_numbers}
+  Using Transfinite Recursion, define the following ordinal-enumerated collection of cardinals
+  \begin{itemize}
+    \item $\aleph_0 = \omega$;
+    \item $\forall \alpha \in \Ord$ that is a successor ordinal, $\aleph_{S(\alpha)} = \aleph_{\alpha + 1} = \aleph_\alpha^+$; and
+    \item $\forall \alpha > 0$ that is a limit ordinal, $\aleph_\alpha := \sup \{ \aleph_\beta\mid \beta < \alpha \}$.
+  \end{itemize}
+  The $\aleph_\alpha$'s are called \hlnoteb{cardinal numbers}.
+\end{defn}
+
+\begin{lemma}[Cardinal Numbers are Cardinals]\label{lemma:cardinal_numbers_are_cardinals}
+  If $\alpha \in \Ord$, then $\aleph_\alpha \in \Card$.
+\end{lemma}
+
+\begin{proof}
+  We shall use Transfinite Induction. The result is clear for $\alpha = 0$, since $\aleph_0 = \omega$ and $\forall n \in \omega$, $\abs{n} \neq \abs{\omega}$. For successor ordinals $\alpha$, since $h(\alpha)$ is an ordinal, we have that $\aleph_\alpha^+ = h(\aleph_\alpha)$ is also a cardinal. Now for $\alpha > 0$ a limit ordinal, suppose that $\beta < \aleph_\alpha$. Since $\aleph_\alpha = \sup \{ \aleph_\gamma \mid \gamma < \alpha \}$, $\exists \gamma < \alpha$ such that $\beta < \aleph_\gamma$. Since $\aleph_\gamma$ is a cardinal by the Inductive Hypothesis, and $\beta < \aleph_\gamma < \aleph_\alpha$, we have that
+  \begin{equation*}
+    \abs{\beta} < \abs{\aleph_\gamma} \leq \abs{\aleph_\alpha}.
+  \end{equation*}
+  Thus $\aleph_\alpha$ is not equinumerous with any lesser ordinal, i.e.\ it is a cardinal.\qed\
+\end{proof}
+
+\begin{lemma}[Ordinals Index the Cardinal Numbers]\label{lemma:ordinals_index_the_cardinal_numbers}
+  $\forall \alpha < \beta \in \Ord$, we have $\aleph_\alpha < \aleph_\beta$.
+\end{lemma}
+
+\begin{proof}
+  We shall use Transfinite Induction on $\beta$. $\beta = 0$ is true vacuously so. For $\beta$ a successor ordinal, suppose  $\forall \alpha < \beta$, $\aleph_\alpha < \aleph_\beta$. Now $\aleph_{\beta + 1} = \aleph_\beta^+ = h(\aleph_\beta)$, which we have that $\aleph_\beta < h(\aleph_\beta)$ as proven before.
+
+  Now suppose that $\beta > 0$ is a limit ordinal. Then $\aleph_\beta = \sup \{ \aleph_\alpha \mid \alpha < \beta \}$ and $\forall \gamma < \alpha < \beta$, $\aleph_\gamma < \aleph_\alpha$. Since $\beta$ is a limit ordinal, $\exists \zeta < \beta$ such that $\alpha < \zeta$. By the Induction Hypothesis, we have that $\aleph_\alpha < \aleph_\zeta$, and $\aleph_\zeta \leq \aleph_\beta$. Thus $\aleph_\zeta \subseteq \aleph_\beta$, and so $\aleph_\alpha < \aleph_\beta$.\qed\
+\end{proof}
+
+\begin{lemma}[Infinite Cardinals are Distant]\label{lemma:infinite_cardinals_are_distant}
+  $\forall \alpha \in \Ord$, $\alpha \leq \aleph_\alpha$. The inequality is strict if $\alpha$ is a successor ordinal.
+\end{lemma}
+
+\begin{proof}
+  Again, we shall use Transfinite Induction on $\alpha$. For $\alpha = 0$, we have $0 < \aleph_0 = \omega$, and so $\alpha = 0$ holds. For $\alpha$ a successor ordinal, suppose $\alpha \leq \aleph_\alpha$. Thus $\alpha + 1 \leq \aleph_\alpha + 1$. By definition of $h(\aleph_\alpha)$ and definition of cardinal numbers
+  \begin{equation*}
+    \alpha + 1 \leq \aleph_\alpha + 1 < \aleph_\alpha^+ = \aleph_{\alpha + 1}.
+  \end{equation*}
+  Thus the statement holds for $\alpha + 1$, and indeed, the inequality is strict for successor ordinals. For $\alpha > 0$ a limit ordinal, suppose that $\forall \beta < \alpha$, we have $\beta \leq \aleph_\beta$. By \cref{lemma:ordinals_index_the_cardinal_numbers}, we have
+  \begin{equation*}
+    \beta \leq \aleph_\beta < \aleph_\alpha.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \alpha = \sup \{ \beta \mid \beta < \alpha \} < \aleph_\alpha
+  \end{equation*}
+  as required.\qed\
+\end{proof}
+
+\begin{propo}[All Infinite Cardinals are Indexed by the Ordinals]\label{propo:all_infinite_cardinals_are_indexed_by_the_ordinals}
+  Every infinite cardinal is of the form $\aleph_\alpha$ for some $\alpha \in \Ord$.
+\end{propo}
+
+\begin{proof}
+  Let $\kappa \in \Card$. By \cref{lemma:infinite_cardinals_are_distant}, we have $\kappa \leq \aleph_\kappa < \aleph_{\kappa + 1}$. And so we can show that $\forall \beta \in \Ord$, $\forall \kappa < \aleph_\beta$, $\exists \alpha < \beta$ such that $\kappa = \aleph_\alpha$. We shall use Transfinite Induction on $\beta$.
+  
+  Since there are no infinite cardinals strictly below $\omega$, $\beta = 0$ is trivially true. Suppose $\beta = \gamma + 1$ is a successor ordinal, where $\gamma \in \Ord$, and suppose $\kappa < \aleph_\beta$. Since $\gamma < \beta$, \cref{lemma:ordinals_index_the_cardinal_numbers} implies that $\aleph_\gamma < \aleph_\beta = \aleph_{\gamma + 1} = \aleph_\gamma^+$, and by definition, there are no cardinals between $\aleph_\gamma$ and $\aleph_\beta$. Thus $\kappa \leq \aleph_\gamma$. We thus have that either $\kappa = \aleph_\gamma$ or, by the Induction Hypothesis, $\exists \alpha < \gamma$ such that $\kappa = \aleph_\alpha$. Thus the statement holds for successor ordinals.
+
+  Let $\beta > 0$ be a limit ordinal and $\kappa < \aleph_\beta = \sup \{ \aleph_\gamma \mid \gamma < \beta \}$. Then $\exists \gamma < \beta$ such that $\kappa < \aleph_\gamma$, and so by the Induction Hypothesis, $\exists \alpha < \gamma$ such that $\kappa = \aleph_\alpha$.\qed\
+\end{proof}
+
+Consequently, we have ourselves an \textit{ordinal-valued, order-preserving complete indexing} of the infinite cardinals. 
+
+\begin{ex}
+  For the inequality in \cref{lemma:infinite_cardinals_are_distant}, show that the equality can occur. In particular, consider the sequence of ordinals defined recursively by $\alpha_0 = 0$, and $\alpha_{n + 1} = \aleph_{\alpha_n}$, and verify that $\alpha = \aleph_\alpha$. In fact, this works if we start with any ordinal $\alpha_0$, not just $0$.
+\end{ex}
+
+% subsection hierarchy_of_infinite_cardinals (end)
+
+% section cardinals_continued_2 (end)
+
+% chapter lecture_9_oct_04th (end)
+
 \appendix
 
 \backmatter\
