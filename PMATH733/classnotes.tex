@@ -22,6 +22,7 @@
 \DeclareMathOperator{\Set}{Set }
 \DeclareMathOperator{\Dom}{Dom }
 \DeclareMathOperator{\Img}{Im }
+\DeclareMathOperator{\Fun}{Fun }
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -2023,14 +2024,277 @@ Consequently, we have ourselves an \textit{ordinal-valued, order-preserving comp
 
 % chapter lecture_9_oct_04th (end)
 
+\chapter{Lecture 10 Oct 11th}%
+\label{chp:lecture_10_oct_11th}
+% chapter lecture_10_oct_11th
+
+\section{Cardinals (Continued 3)}%
+\label{sec:cardinals_continued_3}
+% section cardinals_continued_3
+
+\subsection{Cardinal Arithmetic}%
+\label{sub:cardinal_arithmetic}
+% subsection cardinal_arithmetic
+\marginnote{Contents in this lecture should be extended upon. A lot of the contents need to be explored for it was presented tersely so without all the details of which we need.}
+
+\subsubsection{Cardinal Summation}%
+\label{ssub:cardinal_summation}
+% subsubsection cardinal_summation
+
+\begin{defn}[Cardinal Sum]\index{Cardinal Sum}\label{defn:cardinal_sum}
+  $\forall \kappa_1, \kappa_2 \in \Card$. Let the \hlnoteb{cardinal sum}
+  \begin{equation*}
+    \kappa_1 + \kappa_2 := \abs{X_1 \cup X_2}
+  \end{equation*}
+  where $X_1, X_2 \in \Set$ such that
+  \begin{equation*}
+    \abs{X_1} = \kappa_1 \text{ and } \abs{X_2} = \kappa_2
+  \end{equation*}
+  and $X_1 \cap X_2 = \emptyset$.
+\end{defn}
+
+\begin{remark}
+  This definition does not depend on the choice of $X_1$ and $X_2$, i.e. if we have another $X_1'$ and $X_2'$ such that\marginnote{
+\begin{ex}
+  Prove this remark.
+\end{ex}}
+  \begin{equation*}
+    \abs{X_i'} = \abs{X_i} = \kappa_i \quad i = 1, 2
+  \end{equation*}
+  and $X_1' \cap X_2' = \emptyset$, then
+  \begin{equation*}
+    \abs{X_1' \cup X_2'} = \abs{X_1 \cup X_2}.
+  \end{equation*}
+  This shows that the cardinal summation is well-defined.
+\end{remark}
+
+\begin{note}
+  If $X, Y \in \Set$ are arbitarily chosen, then
+  \begin{equation*}
+    \abs{X \cup Y} \leq \abs{X} + \abs{Y}
+  \end{equation*}
+\end{note}
+
+\begin{warning}
+  The cardinal summation is different from ordinal summation. For example, $\aleph_0 + \aleph_0$, where the $+$ represents the ordinal summation, is not a cardinal, as we have shown that $\abs{\omega + \omega} = \abs{\omega}$.
+
+  Therefore, there is a need to explicitly mention the context of which $+$ is used.
+\end{warning}
+
+% subsubsection cardinal_summation (end)
+
+\subsubsection{Cardinal Product}%
+\label{ssub:cardinal_product}
+% subsubsection cardinal_product
+
+\begin{defn}[Cardinal Product]\index{Cardinal Product}\label{defn:cardinal_product}
+  $\forall \kappa_1, \kappa_2 \in \Card$, the \hlnoteb{cardinal product}
+  \begin{equation*}
+    \kappa_1 \kappa_2 := \abs{X_1 \times X_2}
+  \end{equation*}
+  where $X_1, X_2 \in \Set$ with $\abs{X_i} = \kappa_i$, for $i = 1, 2$.
+\end{defn}
+
+\begin{ex}
+  Prove that \cref{defn:cardinal_product} is well-defined.
+\end{ex}
+
+\begin{remark}
+  We may as well choose
+  \begin{equation*}
+    X_1 = \kappa_1 \text{ and } X_2 = \kappa_2,
+  \end{equation*}
+  and so $\kappa_1 \kappa_2 = \abs{\kappa_1 \times \kappa_2}$.\sidenote{We cannot do so for cardinal sums, for $\kappa_1 \cap \kappa_2 \neq \emptyset$.}
+\end{remark}
+
+% subsubsection cardinal_product (end)
+
+\begin{ex}
+  Prove that the cardinal sum and product agrees with ordinal sum and products on the finite ordinals. This is the usual arithmetic on natural numbers.
+\end{ex}
+
+\begin{thm}[Dominance of the Larger Cardinal]\label{thm:dominance_of_the_larger_cardinal}
+  Let $\kappa_1, \kappa_2 \in \Card$ not both finite. Then\marginnote{\begin{ex}
+    Prove/read \cref{thm:dominance_of_the_larger_cardinal}.
+  \end{ex}}
+  \begin{enumerate}
+    \item $\kappa_1 + \kappa_2 = \max \{ \kappa_1, \kappa_2 \}$; and
+    \item if neither $\kappa_1$ or $\kappa_2$ is $0$, then $\kappa_1 \kappa_2 = \max \{ \kappa_1, \kappa_2 \}$.
+  \end{enumerate}
+\end{thm}
+
+We can generalize the notions of cardinal sum and cardinal product. But first, a definition.
+
+\begin{defn}[$I$-sequence]\index{$I$-sequence}\label{defn:i_sequence}
+  Let $I \in \Set$. By an \hlnoteb{$I$-sequence} of sets, we mean a definite operation\sidenote{Note that $f: I \to \Img(f)$ is a function by the Replacement Axiom.}
+  \begin{equation*}
+    f : I \to \Set.
+  \end{equation*}
+  We write such sequences as
+  \begin{equation*}
+    ( x_i : i \in I )
+  \end{equation*}
+  where $x_i := f(i)$.
+\end{defn}
+
+\begin{defn}[Generalized Cardinal Sum]\index{Generalized Cardinal Sum}\label{defn:generalized_cardinal_sum}
+  Suppose $(\kappa_i : i \in I)$ is a sequence of cardinals. We define the \hlnoteb{(generalized) cardinal sum} to be
+  \begin{equation*}
+    \Sigma_{i \in I} \kappa_i := \abs{ \bigcup_{i \in I} X_i }
+  \end{equation*}
+  where $(X_i : i \in I)$ is a sequence of \hlnotec{pairwise disjoint sets} with $\abs{X_i} = \kappa_i$.
+\end{defn}
+
+\begin{ex}
+  Check that \cref{defn:generalized_cardinal_sum} is well-defined.
+\end{ex}
+
+\begin{note}
+  Observe that
+  \begin{equation*}
+    \bigcup_{i \in I} X_i = \cup \{ X_i \mid i \in I \} = \cup \Img(f)
+  \end{equation*}
+  where $(X_i : i \in I)$ is a sequence of functions and $f : I \to Set$ is given by $f(i) = X_i$.
+\end{note}
+
+\begin{thm}[Properties of Cardinal Sum]\label{thm:properties_of_cardinal_sum}
+  Let $I \in \Set$ be infinite, and $(\kappa_i : i \in I)$ a sequence of cardinals not all zero. Then\marginnote{\begin{ex}
+    Prove/read \cref{thm:properties_of_cardinal_sum}
+  \end{ex}}
+  \begin{enumerate}
+    \item $\sup_{i \in I} \kappa_i \in \Card$; and
+    \item $\sum_{i \in I} \kappa_i = \max \{ \abs{I}, \sup_{i \in I} \kappa_i \}$.
+  \end{enumerate}
+\end{thm}
+
+\begin{eg}
+  We have that
+  \begin{equation*}
+    \sum_{0 < n \in \omega} n = \max \{ \abs{\omega \setminus \{0\}}, \sup_{0 < n \in \omega} n \} = \max \{ \aleph_0, \omega \} = \aleph_0.
+  \end{equation*}
+\end{eg}
+
+\begin{defn}[Generalized Cardinal Product]\index{Generalized Cardinal Product}\label{defn:generalized_cardinal_product}
+  Suppose $(\kappa_i : i \in I)$ is a sequence of cardinals. Then the \hlnoteb{cardinal product} is defined as
+  \begin{equation*}
+    \prod_{i \in I} \kappa_i := \abs{ X_1 \times X_2 \times \ldots } = \abs{ \underset{i \in I}{\times} X_i }
+  \end{equation*}
+  where $(X_i : i \in I)$ is a sequence of sets with $\abs{X_i} = \kappa_i$.
+\end{defn}
+
+\begin{ex}
+  Check that \cref{defn:generalized_cardinal_product} is well-defined.
+\end{ex}
+
+\begin{note}
+  Note that $\underset{i \in I}{\times} X_i$ is properly defined, as
+  \begin{align*}
+    \underset_{i \in I}{\times} X_i &:= \{ (a_i : i \in I) \mid \forall i \in I, a_i \in X_i \} \\
+                                    &= \left\{ f : I \to \bigcup_{i \in I} X_i, f(i) = X_i \right\}.
+  \end{align*}
+\end{note}
+
+\begin{remark}
+  Once again, we might as well take $X_i = \kappa_i$, just as we did when we defined pair products.
+\end{remark}
+
+\begin{eg}
+  Suppose $\kappa_i = 2$ for all $i \in I$. Define a function such that
+  \begin{equation*}
+    \underset{i \in I}{\times} 2 \to \mathcal{P}(I)
+  \end{equation*}
+  given by
+  \begin{equation*}
+    (a_i : i \in I) \mapsto \{ i \in I : a_i = 1 \}.
+  \end{equation*}
+  Note that $2 = \{0, 1\}$, and so each $a_i = 0$ or $1$. Clearly so, this is a bijection\sidenote{This is the usual correspondence between subsets and characteristic functions.}. Consequently, we have
+  \begin{equation*}
+    \prod_{i \in I} 2 = \abs{ \underset{i \in I}{\times} 2 } = \abs{\mathcal{P}(I)}
+  \end{equation*}
+\end{eg}
+
+We claim that
+\begin{equation*}
+  \abs{I} < \abs{\mathcal{P}(I)}.
+\end{equation*}
+
+% subsection cardinal_arithmetic (end)
+
+\subsection{An Interlude on the Continuum Hypothesis}%
+\label{sub:an_interlude_on_the_continuum_hypothesis}
+% subsection an_interlude_on_the_continuum_hypothesis
+
+\begin{thm}[Cantor's Diagonalization]\index{Cantor's Diagonalization}\label{thm:cantor_s_diagonalization}
+  $\forall I \in \Set$, we have $\abs{I} < \abs{\mathcal{P}(I)}$.
+\end{thm}
+
+\begin{proof}
+  Clearly we have that $I \hookrightarrow \mathcal{P}(I)$ through the map $i \mapsto \{i\}$. Thus $\abs{I} \leq \abs{\mathcal{P}(I)}$.
+
+  Suppose to the contrary that there exists a bijection $f : I \to \mathcal{P}(I)$. Let\sidenote{This definition looks awfully familiar to Russell's Paradox.}
+  \begin{equation*}
+    \Delta = \{ i \in I : i \notin f(i) \} \subseteq I.
+  \end{equation*}
+  which is a set by Bounded Separation. Thus $\Delta \in \mathcal{P}(I)$. Then $\exists i_0 \in I$ such that $f(i_0) = \Delta$. Now if $i_0 \in \Delta$, then $i_0 \in f(i_0) = \Delta$, but this contradicts the membership condition which states that $i_0 \notin f(i_0)$. If $i_0 \notin \Delta$, then $i_0 \notin f(i_0) = \Delta$, but by the membership condition, it must be that $i_0 \in \Delta$, yet another contradiction. Thus such a bijection does not exist.\qed\
+\end{proof}
+
+This proves our earlier claim. In fact, so long as $\abs{I} > 2$,
+\begin{equation*}
+  \prod_{i \in I} 2 \neq \max \{ \abs{I}, \sup_{i \in I} 2 \} = \max \{ \abs{I}, 2 \},
+\end{equation*}
+since $RHS = \abs{I}$ while $LHS = \abs{\mathcal{P}(I)}$.
+
+\begin{defn}[Cardinal Exponentiation]\index{Cardinal Exponentiation}\label{defn:cardinal_exponentiation}
+  $\forall \kappa, \lambda \in \Card$, the \hlnoteb{cardinal exponentiation} is defined as
+  \begin{equation*}
+    \kappa^\lambda := \abs{ \Fun(\lambda, \kappa) },
+  \end{equation*}
+  where $\Fun(\lambda, \kappa)$ is the set of all functions from $\lambda$ to $\kappa$.
+\end{defn}
+
+\begin{ex}
+  Prove that
+  \begin{equation*}
+    \prod_{i < \lambda} \kappa = \kappa^\lambda.
+  \end{equation*}
+\end{ex}
+
+As a consequence, we have that $2^\lambda = \abs{\mathcal{P}(\lambda)}$. Then what is $\abs{\mathcal{P}(\aleph_0)}$?
+
+\begin{axiom}[Continuum Hypothesis]\index{Continuum Hypothesis}\label{axiom:continuum_hypothesis}
+  We have that
+  \begin{equation*}
+    \aleph_0 < 2^{\aleph_0} = \abs{\mathcal{P}(\aleph_0)},
+  \end{equation*}
+  i.e. $2^{\aleph_0} = \aleph_1$.
+\end{axiom}
+
+More generally,
+
+\begin{axiom}[Generalized Continuum Hypothesis]\index{Generalized Continuum Hypothesis}\label{axiom:generalized_continuum_hypothesis}
+  $\forall \kappa \in \Card$, we have
+  \begin{equation*}
+    2^\kappa = \kappa^+.
+  \end{equation*}
+\end{axiom}
+
+In this course, we will not assume the Continuum Hypothesis (nor for the general case).
+
+It has been proven by Paul Cohen (1963)\cite{cohen1963} that the Continuum Hypothesis is independent from ZFC.
+
+% subsection an_interlude_on_the_continuum_hypothesis (end)
+
+% section cardinals_continued_3 (end)
+
+% chapter lecture_10_oct_11th (end)
+
 \appendix
 
 \backmatter\
 
 \pagestyle{plain}
 
-\nobibliography*
-% \bibliography{references}
+\bibliography{references}
 
 \printindex
 
