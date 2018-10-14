@@ -18,6 +18,7 @@
 \newcommand{\injection}[1]{\overset{#1}{\hookrightarrow}}
 \newcommand{\surjection}[1]{\overset{#1}{\hookleftarrow}}
 \DeclareMathOperator{\Ord}{Ord }
+\DeclareMathOperator{\Card}{Card }
 \DeclareMathOperator{\Set}{Set }
 \DeclareMathOperator{\Dom}{Dom }
 \DeclareMathOperator{\Img}{Im }
@@ -847,13 +848,18 @@ Let $\Ord$ denote the class of all ordinals. We shall show later that $\Ord$ is 
 \begin{ex}
   Verify that for a set to be an ordinal is a definite condition.
 
-  \begin{fullwidth}
-  \resizebox{\linewidth}{!}{
+  Observe that
   \begin{equation*}
-    \forall t ( t \in \Ord \lrarrow ( \underbrace{ \forall x ( x \in t \rarrow \forall a ( a \in x \rarrow a \in t ) ) }_{x \in t \implies x \subseteq t} \land \underbrace{ \forall s ( s \subseteq t \land s \neq \emptyset \rarrow \exists a ( a \in s \rarrow \forall b ( b \in s \land b \neq a \rarrow (a, b) \in (\in)) ) ) }_{(t, \in) \text{ is a strict well-ordering }} ) )
+    \forall t ( t \in \Ord \lrarrow ( ( x \in t \implies x \subseteq t ) \land ( (t, \in) \text{ is a strict well-ordering } ) ) )
   \end{equation*}
-  }
-  \end{fullwidth}
+  where $( x \in t \implies x \subset t )$ is the definite condition
+  \begin{equation*}
+    \forall x ( x \in t \rarrow \forall a ( a \in x \rarrow a \in t ) )
+  \end{equation*}
+  and $(t, \in)$ is a strict well-ordering is the definite condition
+  \begin{equation*}
+    \forall s ( s \subseteq t \land s \neq \emptyset \rarrow \exists a ( a \in s \rarrow \forall b ( b \in s \land b \neq a \rarrow (a, b) \in (\in)) ) )
+  \end{equation*}
 \end{ex}
 
 \begin{lemma}[Proper Subsets of an Ordinal Are Its Elements]
@@ -1117,7 +1123,7 @@ We want to use Transfinite Recursion to construct definite operations on ordinal
   \begin{equation*}
     G : X \to \Set
   \end{equation*}
-  $\exists ! F : \Ord \to \Set$, a definite operation, such that $F(\alpha = F(F \restriction_{\alpha}))$, for all $\alpha \in \Ord$.
+  $\exists ! F : \Ord \to \Set$, a definite operation, such that $F(\alpha) = G(F \restriction_{\alpha}))$, for all $\alpha \in \Ord$.
 \end{thm}
 
 Before proving the theorem, we shall note the following definition.
@@ -1199,9 +1205,9 @@ Before proving the theorem, we shall note the following definition.
   \end{equation*}
 \end{proof}
 
-\begin{crly}[Transfinite Recusions v2]
-\index{Transfinite Recusions}
-\label{crly:transfinite_recusions_v2}
+\begin{crly}[Transfinite Recursion v2]
+\index{Transfinite Recursion}
+\label{crly:transfinite_recursion_v2}
   Given $G_1 \in \Set$, $G_2 : \Set \to \Set$ a definite operation, $G_3 : X \to \Set$ a definite operation, where $X$ is the class of all definite opeartion whose domain is an ordinal. Then
   \begin{equation*}
     \exists ! F : \Ord \to \Set
@@ -1215,7 +1221,7 @@ Before proving the theorem, we shall note the following definition.
 \end{crly}
 
 \begin{proof}
-  The result is clear by \hyperref[thm:transfinite_induction_theorem_v1] with $G : X \to Set$ defined by
+  The result is clear by \cref{thm:transfinite_induction_theorem_v1} with $G : X \to Set$ defined by
   \begin{equation*}
     G(f) = \begin{cases}
       G_1            & f = \emptyset \\
@@ -1240,7 +1246,7 @@ Before proving the theorem, we shall note the following definition.
   \begin{equation*}
     \beta + \alpha
   \end{equation*}
-  using Transfinite Recursion\sidenote{Note that we are using \cref{crly:transfinite_recusions_v2} with
+  using Transfinite Recursion\sidenote{Note that we are using \cref{crly:transfinite_recursion_v2} with
   \begin{align*}
     G_1 &= \beta \\
     G_2 &= S : \Set \to \Set \\
@@ -1670,9 +1676,176 @@ In the next lecture, we shall see that the collection of cardinals is a proper c
 
 % chapter lecture_7_sep_27th (end)
 
+\chapter{Lecture 8 Oct 02nd}%
+\label{chp:lecture_8_oct_02nd}
+% chapter lecture_8_oct_02nd
+
+\section{Cardinals (Continued)}%
+\label{sec:cardinals_continued}
+% section cardinals_continued
+
+\begin{note}
+  If $\kappa \in \Card$ and $\kappa$ is infinite, then $\kappa$ is a limit ordinal. In other words, successor ordinals are either finite or are not Cardinals. This is true since $\forall \alpha \in \Ord$ such that $\alpha \geq \omega$, clearly we have $\alpha \hookrightarrow S(\alpha)$, and we can define a function $f : S(\alpha) \to \alpha$ such that
+  \begin{equation*}
+    f(\beta) = \begin{cases}
+      S(\beta) & \beta < \omega \\
+      \beta    & \omega \leq \beta < \alpha \\
+      0        & \beta = \alpha
+    \end{cases},
+  \end{equation*}
+  which is injective, and so by \hyperref[lemma:schroder_bernstein_theorem]{Schr\"{o}der-Bernstein}, $\abs{S(\alpha)} = \abs{\alpha}$.
+\end{note}
+
+\begin{propo}[The Least Cardinality Not Equinumerous to Subsets of a Set]
+\label{propo:the_least_cardinality_not_equinumerous_to_subsets_of_a_set}
+  $\forall E \in \Set \; \exists \alpha \in \Ord \; \forall e \subseteq E$
+  \begin{equation*}
+    \abs{e} \neq \abs{\alpha}
+  \end{equation*}
+  and there exists a least such $h(E) \in \Ord$.
+\end{propo}
+
+\begin{note}
+  Note that $h(E) \in \Card$.
+
+  \begin{proof}
+    Suppose not, i.e. $\exists \alpha \in Ord$ such that $\abs{h(E)} = \abs{\alpha}$ and $\alpha < h(E)$. Since $h(E)$ is the least, we must have $\abs{\alpha} = \abs{A}$ or some $A \subseteq E$. Then $\abs{h(E)} = \abs{A}$, which is a contradiction to the definition of $h(E)$. \qed
+  \end{proof}
+
+  In particular, we have that $h(\omega)$ is an uncountable cardinal.
+\end{note}
+
+Now to prove \cref{propo:the_least_cardinality_not_equinumerous_to_subsets_of_a_set}.
+
+\begin{proof}
+  It suffices to prove the existence of $h(E)$. Consider the class
+  \begin{equation*}
+    H = \class{ \alpha \in \Ord \mid \exists e \subseteq E \; \abs{e} = \abs{\alpha} }.
+  \end{equation*}
+  If we can show that $H$ is a set, then the least element not in $H$ shall be our $h(E)$. Consider
+  \begin{equation*}
+    W := \{ (A, R) \mid A \subseteq E, \, (A, R) \text{ is a strict well-ordering } \}
+  \end{equation*}
+  which is a set by Replacement, i.e.
+  \begin{equation*}
+    W \subseteq \mathcal{P}(E) \times \mathcal{P}( E \times E ).
+  \end{equation*}
+  Note that $W \neq \emptyset$, since $\emptyset \subseteq E$ and the empty relation would be a well-ordering of $\emptyset$. By \cref{thm:strict_well_ordered_sets_are_isomorphic_to_a_unique_ordinal}, $\exists f : W \to \Ord$ such that $f(A, R)$ is a unique ordinal. By Replacement, $\Img(f) \subseteq \Ord$ is a set.
+
+  \underline{Claim: $\Img(f) = H$}: It is clear that $\Img(f) \subseteq H$, since all elements of $\Img(f)$ are isomorphic to some subset of $E$ by definition. Now let $\alpha \in H$. Then $\exists g : \alpha \to A$ a bijection, for some $A \subseteq E$. Then define $\prec$ on $A$ by
+  \begin{equation*}
+    a \prec b \iff g^{-1}(a) < g^{-1}(b).
+  \end{equation*}
+  Then $(\alpha, <) \overset{g}{\underset{\simeq}{\to}} (A, \prec)$. Therefore, $(A, \prec) \in W$ and $f(A, \prec) = (\alpha, <)$, i.e. $H \subseteq \Img(f)$. Thus $H = \Img(f)$ and so $H$ is a set as required.\qed
+\end{proof}
+
+\begin{remark}
+  This revelation tells us that $\Card$ is a proper class.
+\end{remark}
+
+To use $\Card$ to measure all sets, we need every set to be equinumerous with a cardinal. In particular, every set would then have to be equinumerous to an ordinal. This would then require evrey set to have a strict well-ordering, which is something that we cannot prove with our axioms thus far.
+
+\subsection{Axiom of Choice}%
+\label{sub:axiom_of_choice}
+% subsection axiom_of_choice
+
+\begin{defn}[Choice Function]\index{Choice Function}
+\label{defn:choice_function}
+  Suppose $\mathcal{F}$ is a set. A \hlnoteb{choice function} on $\mathcal{F}$ is a function
+  \begin{equation*}
+    c : \mathcal{F} \to \cup \mathcal{F} \text{ such that } \forall F \in \mathcal{F} \enspace c(F) \in F.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  If $\emptyset \in \mathcal{F}$, then $\mathcal{F}$ has no choice function, since nothing belongs in $\emptyset$.
+\end{note}
+
+\begin{axiom}[Axiom of Choice]
+\index{Axiom of Choice}
+\label{axiom:axiom_of_choice}
+  Every $\mathcal{F} \in \Set$ such that $\emptyset \notin \mathcal{F}$ admits a choice function.\sidenote{This is, again, an existential axiom.}
+\end{axiom}
+
+\begin{note}
+  Unlike the other axioms, while the Axiom of Choice asserts the existence of choice functions on sets, the choice function need not be unique. Recall that in other axioms, the sets of which we assert their existence are unique.
+\end{note}
+
+\begin{thm}[Axiom of Choice and Its Equivalents]\label{thm:axiom_of_choice_and_its_equivalents}
+  TFAE
+  \begin{enumerate}
+    \item Axiom of Choice
+    \item Well-ordering Principle: Every set admits a well-ordering.\label{item:well_ordering_principle}
+    \item Zorn's Lemma: If $(E, R)$ is a strict poset with the property that \hlnotec{every totally ordered subset of $E$ has an upper bound}, i.e.
+      \begin{equation*}
+        \forall A \subset E ( \forall a, b \in A \; aRb \lor bRa \lor a = b ) \; \forall a \in A \exists e \in E ( aRe \lor a = e ).
+      \end{equation*}
+      Then $(E, R)$ has a maximal elements, i.e. $\exists z \in E$ such that $\forall x \in E$, $\neg z R x$.\label{item:zorn_s_lemma}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  $(1) \implies (2)$: Let $A \in \Set$. If $A = \emptyset$, then there is nothing to do and the statement is vacuously true. So suppose $A \neq \emptyset$.  By the asusmption, fix a choice function $c$ on $\mathcal{F} := \mathcal{P}(A) \setminus \{ \emptyset \}$. Let $\theta \in \Ord \setminus A$. Define a definite operation $F : \Ord \to \Set$ such that
+  \begin{equation*}
+    F(\alpha) = \begin{cases}
+      c(A \setminus \Img(F\restriction_\alpha)) & A \setminus \Img(F\restriction_\alpha) \neq \emptyset \\
+      \theta                                    & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  Note that $F$ exists by \hyperref[thm:transfinite_recursion_v1]{Transfinite Recursion}\sidenote{\hlwarn{I am not sure how.}}.
+
+  \underline{Claim 1}: $F$ halts, i.e. $\exists \alpha \in \Ord$ such that $F(\alpha) = \theta$ and $\forall \beta \in \Ord$ such that $\alpha < \beta$, $F(\beta) = \theta$.
+
+  Suppose not. Then $F$ must be injective and has codomain $\cup \mathcal{F} = \cup ( \mathcal{P}(A) \setminus \{ \emptyset \} ) = A$, i.e. we have that $F : \Ord \to A$ injective. Then by \cref{propo:the_least_cardinality_not_equinumerous_to_subsets_of_a_set}, there exists $h(A)$ that is the least ordinal that is not equinumerous with any subset of $A$. We may consider $F \restriction_{h(A)} : h(A) \to A$ since $h(A) \subset \Ord$. Now $\forall \alpha < \beta \in h(A)$, by our supposition, $F(\beta) \neq \theta$, and so $F(\beta) = c(A \setminus \Img( F \restriction_\beta )) \in ( A \setminus \Img(F \restriction_\beta) )$. Thus $F(\beta) \notin \Img(F \restriction_\beta)$. But since $\alpha < \beta$, it must be that $F(\alpha) \in \Img(F \restriction_\beta)$. Then $F(\alpha) \neq F(\beta)$. Consequently, since $\forall \beta \in h(A)$, we have that $F(\beta) \neq \theta$, and so we created an injection from $h(A)$ to $A$. This is impossible by the definition of $h(A)$. Thus it must be the case that $\exists \beta \in h(A)$ such that $F(\beta) = \theta$.
+
+  Let $\alpha$ be the least such $\beta$. The previous paragraph showed that $F \restriction_\alpha$ is an injection from $\alpha$ to $A$. It remains to show that the map is surjective. Suppose $\Img(F\restriction_\alpha) \neq A$. Then $A \setminus \Img(F\restriction_\alpha) \neq \emptyset$. Then
+  \begin{equation*}
+    F(\alpha) = c(A \setminus \Img(F \restriction_\alpha)) \in A
+  \end{equation*}
+  which is a contradiction since $F(\alpha) = \theta$. So $A = \Img(F\restriction_\alpha)$ and so $F \restriction \alpha$ is surjective.
+
+  Therefore $F \restriction_\alpha$ is a bijection from $\alpha$ to $A$, and so $A$ has an induced strict well-ordering from $\alpha$.
+
+  \noindent$(3) \implies (1)$: Let $\mathcal{F}$ be a set such that $\emptyset \notin \mathcal{F}$. Let $\Lambda$ be the set of all partial choice functions on $\mathcal{F}$, identified with their graphs, i.e. $\forall f \in \Lambda$, $f : \mathcal{G} \to \cup \mathcal{G}$ such that $f(G) \in G$ for all $G \in \mathcal{G}$, and $\mathcal{G} \subseteq \mathcal{F}$. Note that $\Lambda$ is indeed a set since the graphs exist by Replacement, and $\Lambda$ is therefore a set from Bounded Separation. $\Lambda \neq \emptyset$, since the function $f(F) = x$ exists for $F \in \mathcal{F} \neq \emptyset$, and $F \neq \emptyset$.
+
+  Now $(\Lambda, \subseteq)$ is a poset, where we order the functions by extensions. For every $\Theta$ that is a totally ordered subset of $\Lambda$, we have that the union, $\cup \Theta$ is the upper bound of $\Theta$. Thus the assumptions for \hyperref[item:zorn_s_lemma]{Zorn's Lemma} are satisfied, and so there exists a maximal function
+  \begin{equation*}
+    f : \mathcal{G} \to \cup \mathcal{G} \text{ in } \Lambda.
+  \end{equation*}
+  To prove that this $f$ is a choice function on $\mathcal{F}$, we want to prove that $f : \mathcal{F} \to \cup \mathcal{F}$, i.e.\ we need to show that $\Dom(f) = \mathcal{F}$. Suppose not, i.e.\ $\exists F \in \mathcal{F}$ such that $F \notin \Dom(f)$. Then since $F \neq \emptyset$, $\exists x \in F$, and so $f \cup \{ (F, x) \}$ is a larger partial choice function on $\mathcal{F}$, contradicting the maximality of $f$ in $\Lambda$. Thus $\Dom(f) = \mathcal{F}$ as claimed, and so $f$ is a choice function on $\mathcal{F}$, proving the Axiom of Choice.
+
+  \noindent$(2) \implies (3)$: Suppose $(E, R)$ is a strict poset. By $(2)$, let $<$ be a strict well-ordering on $E$. Now by \cref{thm:strict_well_ordered_sets_are_isomorphic_to_a_unique_ordinal}, $\exists! \alpha \in \Ord$ such that $(E, R) \simeq (\alpha, \in)$ through a unique isomorphism. Therefore, we may assume that $E \in \Ord$. Suppose that $(E, R)$ satisfies the assumptions of Zorn's Lemma.
+  
+  Assume, to the contrary, that $(E, R)$ does not have an $R$-maximal element. From \cref{propo:the_least_cardinality_not_equinumerous_to_subsets_of_a_set}, $\exists h(E) \in Ord$ such that $\forall \beta < h(E)$, $\forall A \subseteq E$, $\abs{\beta} \neq \abs{A}$\sidenote{The strategy here is to use, once again, \cref{propo:the_least_cardinality_not_equinumerous_to_subsets_of_a_set} to arrive at a contradiction that is similar to when we were proving $(1) \implies (2)$.}. Recursively so, define $F : h(E) \to E$ by
+  \begin{align*}
+    F(0)         & = e \text{ for some } e \in E \\
+    F(S(\beta)) & = \; < \text{-least element } \gamma \text{ of } E \text{ such that } F(\beta)R\gamma \enspace
+  \end{align*}
+  and for $\beta > 0$ a limit ordinal,
+  \begin{equation*}
+    F(\beta) = \begin{cases}
+      < \text{-least } \gamma \text{ such that } F(\zeta) R \gamma \text{ for all } \zeta < \beta \text{ if such } \gamma \text{ exists } \\
+      e \qquad \text{ otherwise}
+    \end{cases}
+  \end{equation*}
+  Note that this function is well-defined, since $F(\beta)R\gamma$ properly distinguishes the ordinals, for there are no $R$-maximal element in $E$, and $<$ is a strict well-ordering on $E$.
+
+  Now since $h(E) \in \Card$, it is a limit ordinal, to show that $F$ is injective, it suffices to show that $\forall \beta < h(E)$, $F \restriction_\beta$ is strictly order-preserving, i.e.\ $\forall x < y < \beta$, $F(x) R F(y)$. We shall prove this by Transfinite Induction.
+
+  $\beta = 0$ is vacuously true. If $\beta > 0$ is a limit ordinal, then $\beta = \bigcup_{\gamma < \beta} \gamma$, and so the strict ordering is preserved as given by the induction hypothesis. For $\beta$ a successor ordinal, consider $F \restriction_{S(\beta)}$. $\forall x < y < S(\beta)$, if $y \neq \beta$, then we are done by the induction hypothesis. Suppose $y = \beta$. Since $\beta$ is a successor ordinal, $\exists \gamma \in \Ord$ such that $S(\gamma) = \beta$. Since $\gamma < S(\gamma)$ (by \cref{propo:properties_of_ordinals_2} \cref{item:properties_of_ordinals_2_1}), either $x = \gamma$ or $x < \gamma$. If $x < \gamma$, then our proof is complete by the induction hypothesis. If $x = \gamma$, then since $x = \gamma < S(\gamma) = \beta$, regardless if $\gamma$ is a limit ordinal or successor ordinal, we have that $F(\gamma) R F(\beta)$.
+
+  Thus, by Transfinite Induction, we have that $F \restriction_\beta$ is strictly order-preserving for any $\beta < h(E)$, implying that $F : h(E) \hookrightarrow E$, hence contradicting the definition of $h(E)$. Thus, an $R$-maximal must exist.\qed\
+\end{proof}
+
+% subsection axiom_of_choice (end)
+
+% section cardinals_continued (end)
+
+% chapter lecture_8_oct_02nd (end)
+
 \appendix
 
-\backmatter
+\backmatter\
 
 \pagestyle{plain}
 
