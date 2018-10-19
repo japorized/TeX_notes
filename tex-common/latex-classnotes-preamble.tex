@@ -20,6 +20,7 @@
 \usepackage{fontawesome}
 \usepackage{amsmath}
 \usepackage{mathrsfs}
+\usepackage{stmaryrd}
 \usepackage{mathtools}
 \usepackage{xparse}
 \usepackage{tkz-euclide}
@@ -137,6 +138,18 @@
 \theoremindent10pt
 \newtheorem*{defnnonum}{\faBook \enspace Definition}
 
+\theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt width \marginparwidth}}
+\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt width \marginparwidth}}
+\theoremindent10pt
+\newtheorem{margindefn}[defn]{\faBook \enspace Definition}
+
+\theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
+\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
+\theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
+\theoremindent10pt
+\newtheorem*{margindefnnonum}{\faBook \enspace Definition}
+
     % theorem envs
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
@@ -218,12 +231,6 @@
 \theoremindent10pt
 \newtheorem{marginaxiom}[thm]{\faShield \enspace Axiom}
 
-\theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt width \marginparwidth}}
-\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt width \marginparwidth}}
-\theoremindent10pt
-\newtheorem{margindefn}{\faBook \enspace Definition}
-
     % envs on margins without counter
 \theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
@@ -250,12 +257,6 @@
 \theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem*{marginaxiomnonum}{\faShield \enspace Axiom}
-
-\theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
-\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
-\theoremindent10pt
-\newtheorem*{margindefnnonum}{\faBook \enspace Definition}
 
     % proof env
 \theoremprework{\textcolor{base16-eighties-brown}{\hrule height 2pt width \textwidth}}

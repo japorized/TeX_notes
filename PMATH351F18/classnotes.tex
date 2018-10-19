@@ -16,6 +16,7 @@
 \DeclareMathOperator{\Range}{Range }
 \DeclareMathOperator{\Domain}{Domain }
 \DeclareMathOperator{\bdy}{bdy }
+\DeclareMathOperator{\Lim}{Lim }
 
 \newcommand{\norm}[1]{\left\| #1 \right\|}
 
@@ -595,7 +596,7 @@ The set $X$ with the relation $R$ on $X$ is called a \hlnoteb{partially ordered 
 \end{eg}
 
 \begin{eg}
-  Let $Y \neq \emptyset$, and $X = \mathcal{P}(Y)$, and $\subseteq$ the ordering by inclusion. We know that $Y$ is the maximum element of $(X, \subseteq)$. Then the collection $\{ A_\alpha \}_{\alpha \in I} \subset \mathcal{P}(Y)$ is bounded above by $Y$, and we have that\marginnote{Now if $Y = \emptyset$, we would end up having
+  Let $Y \neq \emptyset$, and $X = \mathcal{P}(Y)$, and $\subseteq$ the ordering by inclusion. We know that $Y$ is the maximum element of $(X, \subseteq)$. Then the collection ${\{ A_\alpha \}}_{\alpha \in I} \subset \mathcal{P}(Y)$ is bounded above by $Y$, and we have that\marginnote{Now if $Y = \emptyset$, we would end up having
   \begin{gather*}
     \sup \left( {\left\{ A_\alpha \right\}}_{\alpha \in I} \right) = \emptyset \\
     \inf \left( {\left\{ A_\alpha \right\}}_{\alpha \in I} \right) = X
@@ -2512,7 +2513,7 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
   \begin{equation*}
     {( A \cup \bdy(A) )}^C = A^C \cap {\bdy(A)}^C.
   \end{equation*}
-  Then \eqref{eq:closures_n_boundary_eq2} would be
+  Then~\eqref{eq:closures_n_boundary_eq2} would be
   \begin{equation*}
     B(x, \epsilon) \cap A^C \cap {\bdy(A)}^C \neq \emptyset,
   \end{equation*}
@@ -2522,19 +2523,19 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
     \land \nonumber \\
     B(x, \epsilon) \cap {\bdy(A)}^C \neq \emptyset. \label{eq:closures_n_boundary_eq4}
   \end{gather}
-  From \eqref{eq:closures_n_boundary_eq1}, we have
+  From~\eqref{eq:closures_n_boundary_eq1}, we have
   \begin{equation*}
     B(x, \epsilon) \cap A \neq \emptyset \; \lor \; B(x, \epsilon) \cap \bdy(A) \neq \emptyset.
   \end{equation*}
-  If $B(x, \epsilon) \cap A \neq \emptyset$, then \because \eqref{eq:closures_n_boundary_eq3},\ $x \in \bdy(A)$, and so
+  If $B(x, \epsilon) \cap A \neq \emptyset$, then \because~\eqref{eq:closures_n_boundary_eq3},\ $x \in \bdy(A)$, and so
   \begin{equation}\tag{$\dagger$}\label{eq:closures_n_boundary_repeated_arg}
     \bdy( A \cup \bdy(A) ) \subseteq ( A \cup \bdy(A) ).
   \end{equation}
-  If $B(x, \epsilon) \cap \bdy(A) \neq \emptyset$, let $z \in B(x, \epsilon) \cap \bdy(A)$. \because $z \in B(x, \epsilon)$, let $r = d(x, z)$, and $\alpha = \epsilon - r > 0$. Let $z_0 \in B(z, \alpha)$. Then by the Triangle Inequality
+  If $B(x, \epsilon) \cap \bdy(A) \neq \emptyset$, let $z \in B(x, \epsilon) \cap \bdy(A)$. \because\ $z \in B(x, \epsilon)$, let $r = d(x, z)$, and $\alpha = \epsilon - r > 0$. Let $z_0 \in B(z, \alpha)$. Then by the Triangle Inequality
   \begin{equation*}
     d(x, z_0) \leq d(x, z) + d(z, z_0) < r + \alpha = \epsilon.
   \end{equation*}
-  Thus $z_0 \in B(x, \epsilon) \implies ( B(z, \alpha) \subseteq B(x, \epsilon) )$. Then \because $z \in \bdy(A)$, we have $B(z, \alpha) \cap A \neq \emptyset$, and so $B(x, \epsilon) \cap A \neq \emptyset$. Then we can just follow the argument we did in \eqref{eq:closures_n_boundary_repeated_arg} and arrive as the same conclusion. Consequently, by \cref{propo:closed_sets_include_its_boundary_points}, $A \cup \bdy(A)$ is closed as claimed.\qed\
+  Thus $z_0 \in B(x, \epsilon) \implies ( B(z, \alpha) \subseteq B(x, \epsilon) )$. Then \because\ $z \in \bdy(A)$, we have $B(z, \alpha) \cap A \neq \emptyset$, and so $B(x, \epsilon) \cap A \neq \emptyset$. Then we can just follow the argument we did in~\eqref{eq:closures_n_boundary_repeated_arg} and arrive as the same conclusion. Consequently, by \cref{propo:closed_sets_include_its_boundary_points}, $A \cup \bdy(A)$ is closed as claimed.\qed\
 \end{proof}
 
 \begin{eg}
@@ -2593,6 +2594,177 @@ Recall \cref{eg:sequence_spaces}.
 % section topology_on_metric_spaces_continued_2 (end)
 
 % chapter lecture_14_oct_12th (end)
+
+\chapter{Lecture 15 Oct 15th}%
+\label{chp:lecture_15_oct_15th}
+% chapter lecture_15_oct_15th
+
+\section{Topology on Metric Spaces (Continued 3)}%
+\label{sec:topology_on_metric_spaces_continued_3}
+% section topology_on_metric_spaces_continued_3
+
+\begin{defn}[Limit Points]\index{Limit Points}\label{defn:limit_points}
+  Let $(X, d)$ be a metric space, and $A \subset X$. We say that $x_0$ is a \hlnoteb{limit point} for $A$ if for any neighbourhood of $x_0$, we have that
+  \begin{equation*}
+    N \cap \left( A \setminus \{ x_0 \} \right) \neq \emptyset.
+  \end{equation*}
+  Equivalently, $\forall \epsilon > 0$, $\exists x \in A$, where $x \neq \x_0$, such that $x \in B(x_0, \epsilon)$.\sidenote{This also means that $B(x_0, \epsilon)$ must have infinitely many points close to $x_0$, for otherwise, we would be able to find some $\epsilon > \epsilon_0 > 0$ such that $B(x_0, \epsilon_0) \cap A = \emptyset$.} We sometimes call limit points as \hldefn{cluster points}. We denote the set of limit points of $A$ as $\Lim(A) \subset X$ \sidenote{Note that the set of limit points is not necessarily a subset of $A$.}
+\end{defn}
+
+\begin{eg}
+  Let $X = \mathbb{R}$, and $A = [0, 1) \subset \mathbb{R}$. We have that
+  \begin{equation*}
+    \Lim[0, 1) = [ 0, 1 ].
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Let $X = \mathbb{R}$ and $A = \mathbb{N} \subset \mathbb{R}$. Since $\forall n \in \mathbb{N}$, $\exists \epsilon = \frac{1}{2}$ such that $\forall m \in \mathbb{N} \setminus \{ n \}$, we have that $m \notin B\left(n, \frac{1}{2}\right)$, we have
+  \begin{equation*}
+    \Lim \mathbb{N} = \emptyset.
+  \end{equation*}
+\end{eg}
+
+\begin{propo}[Closed Sets Include Its Limit Points]\label{propo:closed_sets_include_its_limit_points}
+  Let $A \subset (X, d)$. Then
+  \begin{enumerate}
+    \item $A$ is closed $\iff \Lim(A) \subset A$;
+    \item $\bar{A} = A \cup \Lim(A)$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item For the $(\implies)$ direction, suppose $A$ is closed. \sidenote{This uses a reversed way of thinking: if we want to show that $\Lim(A) \subset A$, then instead of trying to directly show the containment, we show that all elements in $A^C$ are in fact not limit points due to $A$ being closed.}Let $x_0 \in A^C$. Then $\exists \epsilon > 0$ such that $B(x_0, \epsilon) \cap A = \emptyset$. Thus, by definition, we have that $x_0 \notin \Lim(A)$ \sidenote{Notice there that there are no elements in $A$ that are \hlnotec{close to} $x_0$, and so it's not a limit point.}. Therefore, $\Lim(A) \subset A$.
+
+      For the $(\impliedby)$ direction, suppose $\Lim(A) \subset A$. Let $x_0 \in A^C$. Then $x_0 \notin \Lim(A)$, which means that $\exists \epsilon > 0$ such that $B(x_0, \epsilon) \cap A = \emptyset$, i.e. $B(x_0, \epsilon) \subset A^C$. Thus $A$ is closed.
+
+    \item \sidenote{This proof is similar to that of \cref{propo:closures_include_the_boundary_points_of_a_set}.}It is clear that $A \subset \bar{A}$. Let $x_0 \in \bar{A}^C$. Then $\exists \epsilon > 0$ such that $B(x_0, \epsilon) \subset \bar{A}^C$. In particular, we have that $B(x_0, \epsilon) \cap A = \emptyset$, i.e. $x_0 \notin \Lim(A)$. Thus $\Lim(A) \subset \bar{A}$.
+
+      Again, it suffices to show that $A \cup \Lim(A)$ is closed to CTP. Let $x_0 \in {\left( A \cup \Lim(A) \right)}^C$ \sidenote{It is clear by De Morgan's Law that $x_0 \in A^C$ and $x_0 \notin \Lim(A)$, which implies that $\Lim(A) \subset A$. But this does not give us a clear geometrical picture of the notion.}. Then $\exists \epsilon > 0$ such that $B(x_0, \epsilon) \cap A = \emptyset$. If $z \in \Lim(A)$ and $z \in B(x_0, \epsilon)$, then we have $B(x_0, \epsilon)$ is a neighbourhood of $z$, and so we must have that $B(x_0, \epsilon) \cap A \neq \emptyset$, which is a contradiction. Thus ${ (A \cup \Lim(A)) }^C$ is open, and so $A \cup \Lim(A)$ is closed, as required.\qed\
+  \end{enumerate}
+\end{proof}
+
+\begin{propo}[Mixing the notions]\label{propo:mixing_the_notions}
+  Let $A \subseteq B \subseteq (X, d)$.\marginnote{\begin{ex}Prove \cref{propo:mixing_the_notions}.\end{ex}}
+  \begin{enumerate}
+    \item $\bar{A} \subseteq \bar{B}$;
+    \item $A^\circ \subset B^\circ$;
+    \item $A^\circ = A \setminus \bdy(A)$;
+    \item $\bdy(A) = \bdy(A^C)$;
+    \item $A^\circ = {\left(\bar{A^C}\right)}^C$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item It is clear that $A \subset B \subset \bar{B}$. Suppose $\Lim(A)$ is not a subset of $\bar{B}$. Then $\exists x \in \Lim(A) \setminus \bar{B}$, i.e. $x \in \bar{B}^C$. Since $\bar{B}$ is closed, $B^C$ is open and so $\exists \epsilon > 0$ such that $B(x, \epsilon) \subset B^C$. Since $x \in \Lim(A)$, $\exists a \in A$ such that $a \in B(x, \epsilon) \subset B^C$, but $A \subset B$, a contracdiction. Thus $\Lim(A) \subset \bar{B}$.
+
+    \item $a \in A^\circ \implies \exists \epsilon > 0 \; B(a, \epsilon) \subset A \subset B \implies a \in B^\circ \dashv$
+    \item $x \in A \setminus \bdy(A) \implies \exists \epsilon > 0 \; B(x, \epsilon) \cap A^C = \emptyset \implies x \in A^\circ \dashv$ \\
+      $x \in A^\circ \implies \exists \epsilon_0 > 0 \; B(x, \epsilon_0) \subset A$ \\
+      Sps $x \in \bdy(A)$. Then $\forall \epsilon > 0 \; B(x, \epsilon) \cap A^C \neq \emptyset \implies B(x, \epsilon_0) \cap A^C = \emptyset$ \lightning $B(x, \epsilon_0) \subset A \dashv$
+    \item $x \in \bdy(A) \implies \forall \epsilon > 0 \; B(x, \epsilon) \cap A \neq \emptyset \land B(x, \epsilon) \cap A^C \neq \emptyset$ \\
+      $x \notin \bdy(A^C) \implies \exists \epsilon_0 > 0 \; B(x, \epsilon_0) \cap A = \emptyset \lor B(x, \epsilon_0) \cap A^C = \emptyset$ \\
+      But $B(x, \epsilon_0) \cap A = \emptyset \; \lightning \; \forall \epsilon > 0 \; B(x, \epsilon) \cap A^C \neq \emptyset$ \\
+      and $B(x, \epsilon_0) \cap A^C = \emptyset \; \lightning \; \forall \epsilon > 0 \; B(x, \epsilon) \cap A^C \neq \emptyset$ \\
+      $\implies x \in \bdy(A^C) \dashv$. The converse is a similar argument.
+
+    \item ${\left( \bar{A^C} \right)}^C = {\left( A^C \cup \bdy(A^C) \right)}^C = A \cap \bdy{(A)^C} = A \setminus \bdy(A) = A^\circ \dashv$
+  \end{enumerate}\qed\
+\end{proof}
+
+\begin{propo}[More on Closures and Interiors]\label{propo:more_on_closures_and_interiors}
+  Let $A, B \subseteq (X, d)$.\marginnote{\begin{ex} Prove \cref{item:more_on_closures_and_interiors_2} for \cref{propo:more_on_closures_and_interiors}. \end{ex}}
+  \begin{enumerate}
+    \item $\bar{A \cup B} = \bar{A} \cup \bar{B}$;
+    \item ${( A \cap B )}^\circ = A^\circ \cap B^\circ$.\label{item:more_on_closures_and_interiors_2}
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item We have that $A \subset \bar{A}$ and $B \subset \bar{B}$, so $A \cup B \subset \bar{A} \cup \bar{B}$. Since $\bar{A} \cup \bar{B}$ is closed, we must have that $\bar{A \cup B} \subseteq \bar{A} \cup \bar{B}$. Similarly so, we have
+      \begin{gather*}
+        A \subseteq A \cup B \implies \bar{A} \subseteq \bar{A \cup B} \\
+        B \subseteq A \cup B \implies \bar{B} \subseteq \bar{A \cup B}
+      \end{gather*}
+      and so $\bar{A} \cup \bar{B} \subseteq \bar{A \cup B}$.
+
+    \item Since $A^\circ \subseteq A$ and $B^\circ \subseteq B$, and $A^\circ \cap B^\circ$ is open, we must have that $A^\circ \cap B^\circ \subseteq {(A \cap B)}^\circ$. On the other hand, since ${(A \cap B)}^\circ \subset A^\circ$ and ${(A \cap B)}^\circ \subset B^\circ$, we have that ${(A \cap B)}^\circ \subseteq A^\circ \cap B^\circ$.
+  \end{enumerate}\qed\
+\end{proof}
+
+\newthought{Question}: Is $\bar{A \cap B} = \bar{A} \cap \bar{B}$? No.
+
+\begin{eg}
+  Let $X = \mathbb{R}$, $A = \mathbb{Q}$ and $B = \mathbb{Q}^C$. We know that $\bar{A} = \mathbb{R} = \bar{B}$. But, observe that
+  \begin{equation*}
+    \bar{A \cap B} = \emptyset \text{ while } \bar{A} \cap \bar{B} = \mathbb{R}.
+  \end{equation*}
+\end{eg}
+
+However, we do have that $\bar{A \cap B} \subseteq \bar{A} \cap \bar{B}$.
+
+\newthought{Question}: Given $(X, d)$ a metric space, is
+\begin{equation*}
+  B(x_0, \epsilon) = B[x_0, \epsilon]
+\end{equation*}
+true? Again, no.
+
+\begin{eg}
+  Let $X$ be a set with $\abs{X} \geq 2$, and $d$ the \hyperref[eg:discrete_metric]{discrete metric}. We have that
+  \begin{equation*}
+    B(x_0, 1) = \{ x_0 \} \text{ but } B[x_0, 1] = X.
+  \end{equation*}
+\end{eg}
+
+% section topology_on_metric_spaces_continued_3 (end)
+
+\section{Convergences of Sequences}%
+\label{sec:convergences_of_sequences}
+% section convergences_of_sequences
+
+\begin{defn}[Convergence]\index{Convergence}\label{defn:convergence}
+  Given a sequence $\{ x_n \} \subset (X, d)$ and $x_0 \in X$, we say that the sequence \hlnoteb{converges} to $x_0$ if
+  \begin{equation*}
+    \forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall n \geq N_0 \; d(x_n, x_0) < \epsilon.
+  \end{equation*}
+  This is equivalent to saying that the sequence $\{ d(x_n, x_0) \}$ converges to $0$ in $X$. We denote this by
+  \begin{equation*}
+    x_0 = \lim_{n \to \infty} x_n \text{ or } x_n \to x_0.
+  \end{equation*}
+  If no such $x_0$ exists, we say that the sequence \hldefn{diverges}.
+\end{defn}
+
+\begin{thm}[Uniqueness of Limits of Sequences]\label{thm:uniqueness_of_limits_of_sequences}
+  If $\{ x_n \}$ is a sequence in $(X, d)$ with $x_n \to x_0$ and $x_n \to y_0$, then $x_0 = y_0$.
+\end{thm}
+
+\begin{proof}
+  $x_0 \neq y_0 \implies \exists \epsilon = d(x_0, y_0) \implies B\left(x_0, \frac{\epsilon}{2}\right) \cap B\left(y_0, \frac{\epsilon}{2}\right) = \emptyset$
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[dotted] (0, 1) circle(1);
+      \draw[dotted] (1.7, 0) circle(1);
+      \node[fill,circle,inner sep=1pt,label={180:{$x_0$}}] at (0, 1) {};
+      \node[fill,circle,inner sep=1pt,label={0:{$y_0$}}] at (1.7, 0) {};
+      \draw[<->] (0, 1) -- (1.7,0) node[midway,above] {$\epsilon$};
+    \end{tikzpicture}
+    \caption{A geometric representation of the proof for \cref{thm:uniqueness_of_limits_of_sequences}.}\label{fig:a_geometric_representation_of_the_proof_for_uniqueness_of_limits_of_sequences}
+  \end{marginfigure}
+
+  However, $\exists N_0 \in \mathbb{N} \; \forall n \geq N_0$ \\
+  \begin{equation*}
+    x_n \in B\left(x_0, \frac{\epsilon}{2}\right) \land x_n \in B\left(y_0, \frac{\epsilon}{2}\right)
+  \end{equation*}
+  which is impossible. Thus $x_0 = y_0$.\qed\
+\end{proof}
+
+% section convergences_of_sequences (end)
+
+% chapter lecture_15_oct_15th (end)
 
 \appendix
 
