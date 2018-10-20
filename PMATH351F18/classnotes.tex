@@ -2909,6 +2909,143 @@ Note, however, that $c_00 \subset \ell_1 \subset c_0$ is not closed. Also $\ell_
 
 % chapter lecture_16_oct_17th (end)
 
+\chapter{Lecture 17 Oct 19th}%
+\label{chp:lecture_17_oct_19th}
+% chapter lecture_17_oct_19th
+
+\section{Induced Metric and Topologies}%
+\label{sec:induced_metric_and_topologies}
+% section induced_metric_and_topologies
+
+\begin{defn}[Induced Metric \& Induced Topology]\index{Induced Metric}\index{Induced Topology}\label{defn:induced_metric_n_induced_topology}
+  Given $(X, d)$ and $A \subset X$, we define the \hlnoteb{induced metric} $d_A$ on $A$ by
+  \begin{equation*}
+    d_A : A \times A \to \mathbb{R}
+  \end{equation*}
+  where $d_A(x, y) = d(x, y)$, for all $x, y \in A$, i.e. $d_A = d \restriction_{A \times A}$.
+
+  We define $\tau_A$, the \hlnoteb{induced topology} on $A$ by
+  \begin{equation*}
+    \tau_A = \{ W \subset A \mid W = U \cap A, U \subset X \text{ is open } \}
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Note that $\tau_A$ is indeed a topology: it is clear that $\emptyset \in \tau_A$. Also, $A \in \tau_A$, since $X$ is open and $A = X \cap A$.
+
+  For an arbitrary collection $\{ U_\alpha \}_{\alpha \in I} \subset \tau_A$, we know that each $U_\alpha \subset A$, and so $\bigcup_{\alpha \in I} U_\alpha \subset A$. Since each $U_\alpha \in \tau_A$, $\exists F_\alpha \subset X$ that is an open set such that $U_\alpha = F_\alpha \cap A$. Then
+  \begin{equation*}
+    \bigcup_{\alpha \in I} U_\alpha = \bigcup_{\alpha \in I} F_{\alpha} \cap A.
+  \end{equation*}
+  Thus $\bigcup_{\alpha \in I} U_\alpha \in \tau_A$.
+
+  For a finite collection $\{ U_1, U_2, ..., U_n \} \subset \tau_A$, we have that for each $U_i$, $\exists F_i \subset X$ that is open such that $U_i = F_i \cap A$. By \cref{propo:properties_of_open_sets}, we have that
+  \begin{equation*}
+    \bigcap_{i = 1}^{n} F_i \subset X
+  \end{equation*}
+  is open, and so
+  \begin{equation*}
+    \bigcap_{i = 1}^{n} U_i = \bigcap_{i = 1}^{n} F_i \cap A \subset A.
+  \end{equation*}
+  Therefore, $\bigcap_{i = 1}^{n} U_i \in \tau_A$.
+\end{note}
+
+\begin{thm}[The Metric Topology of a Subset is Its Induced Topology]\label{thm:the_metric_topology_of_a_subset_is_its_induced_topology}
+  We have
+  \begin{equation*}
+    \tau_A = \tau_{d_A}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  \hlbnotea{$\subseteq$} : $W \in \tau_A \implies \exists U \subset X$ open such that $W = U \cap A$ \\
+  $\implies \forall x_0 \in W \; \exists > 0 \; B_X(x_0, \epsilon) \subset U$ \\
+  $\implies B_A(x_0, \epsilon) = B_X(x_0, \epsilon) \cap A \subset W \implies W \in \tau_{d_A} \dashv$ \\
+  $ $ \\
+  \noindent\hlbnotea{$\supseteq$} : $W \in \tau_{d_A} \implies \forall x_0 \in W \; \exists \epsilon_x > 0 \; B_A(x_0, \epsilon_x) \subset W$ \\
+  $\implies W = \bigcup_{x_0 \in W} B_A(x_0, \epsilon_x)$\\
+  Let $U = \bigcup_{x_0 \in W} B_X(x_0, \epsilon_x)$, which is open \\
+  $\implies zW = \bigcup_{x_0 \in W} B_X(x_0, \epsilon_0) \cap A = U \cap A$ \\
+  $\implies W \in \tau_A \dashv$\qed\
+\end{proof}
+
+% section induced_metric_and_topologies (end)
+
+\section{Continuity on Metric Spaces}%
+\label{sec:continuity_on_metric_spaces}
+% section continuity_on_metric_spaces
+
+\begin{defn}[Continuity]\index{Continuity}\label{defn:continuity}
+  Given metric spaces $(X, d_X), (Y, d_Y)$, and $f : X \to Y$, we say that $f$ is \hlnoteb{continuous} at $x_0$ if
+  \begin{equation*}
+    \forall \epsilon > 0 \; \exists \delta > 0 \; \forall x \in X \; d_X(x, x_0) < \delta \implies d_Y( f(x), f(x_0) ) < \epsilon.
+  \end{equation*}
+\end{defn}
+
+\begin{thm}[Continuity and Neighbourhoods]\label{thm:continuity_and_neighbourhoods}
+  Given metric spaces $(X, d_X)$ and $(Y, d_Y)$, and $f : X \to Y$, then TFAE:
+  \begin{enumerate}
+    \item $f$ is continuous at $x_0 \in X$;
+      \begin{marginfigure}
+        \centering
+        \begin{tikzpicture}
+          \draw (0, 0) circle(1) node[below] {$X$};
+          \draw (2.5, 0) circle(1) node[below] {$Y$};
+          \draw[->] (0.3, 0.5) -- (2.3,0.5) node[right] {$y_0$};
+          \draw[dotted] (2.3,0.5) circle(0.35);
+          \draw[dotted] (0.3,0.5) circle(0.4) node[left] {$x_0$};
+        \end{tikzpicture}
+        \caption{Visual representation of \cref{thm:continuity_and_neighbourhoods}}\label{fig:visual_representation_of_continuity_and_neighbourhoods}
+      \end{marginfigure}
+    \item if $W$ is a neighbourhood of $f(x_0) \in Y$, then $f^{-1}(W)$ is a neighbourhood of $x_0 \in X$, where
+      \begin{equation*}
+        f^{-1}(W) = \{ x \in X : f(x) \in W \}.
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnotea{$(1) \implies (2)$} : Sps $f$ is continuous at $x_0 \in X$ and $W$ a neighbourhood of $y_0 = f(x_0)$ \\
+  $\implies f(x_0) = y_0 \in W^\circ$ \\
+  $\implies \exists \epsilon > 0 \; B(f(x_0), \epsilon) \subset W$ \\
+  $\because f$ is continuous, \\
+  $\exists \delta > 0 \; \forall x \in X \enspace x \in B_X(x_0, \delta) \implies d_Y( f(x ), f(x_0) ) < \epsilon$ \\
+  $\implies f(x) \in B_Y(y_0, \epsilon) \subset W$ \\
+  $\implies x \in f^{-1}(W) \implies x_0 \in f^{-1}(W)^\circ \dashv$ \\
+  $ $ \\
+  \noindent\hlbnotea{$(2) \implies (1)$} : Sps $f^{-1}(W)$ is a neighbourhood of $x \in X$ for each neighbourhood $W$ of $y_0 = f(x_0)$ \\
+  $\implies \forall \epsilon > 0 \; W = B_Y(f(x_0), \epsilon)$ is a neighbourhood of $f(x_0)$ \\
+  $\implies U = f^{-1}(W)$ is a neighbourhood of $x_0 \in X$ \\
+  $\implies x_0 \in U$ \\
+  $\implies \exists \delta > 0 \; B(x_0, \delta) \subset U = f^{-1}(W)$ \\
+  $\implies ( d_X(x, x_0) < \delta \implies d_Y( f(x), f(x_0) ) < \epsilon ) \dashv$\qed\
+\end{proof}
+
+\begin{thm}[Sequential Characterization of Continuity]\index{Sequential Characterization of Continuity}\label{thm:sequential_characterization_of_continuity}
+  For metric spaces $(X, d_X)$ and $(Y, d_Y)$, and $f : X \to Y$, TFAE
+  \begin{enumerate}
+    \item $f$ is continuous as $x_0 \in X$;
+    \item $\{ x_n \} \subset X \; x_n \overset{X}{\to} x_0 \implies f(x_n) \overset{Y}{\to} f(x_0)$
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnotea{$(1) \implies (2)$} : Sps $f$ is continuous at $x_0 \in X$. \\
+  $x_n \to x_0 \iff$ \\
+  $ \forall \epsilon > 0 \; \exists \delta > 0 \; x \in B_X(x_0, \delta) \implies f(x) \in B_Y(f(x_0), \epsilon)$ \\
+  $x_n \to x_0 \implies \exists N_0 \in \mathbb{n} \; \forall n \geq N_0$ \\
+  $d_X(x_0, x) < \delta \implies x_n \in B_X(x_0, \delta) \implies f(x) \in B_Y(f(x_0), \epsilon) \dashv$
+
+  \noindent\hlbnotea{$(2) \implies (1)$} (Prove by Contrapositive) : Sps $f$ is $\neg$ continuous at $x_0 \in X$ \\
+  $\implies \exists \epsilon_0 > 0 \; \forall \delta > 0 \; (x_\delta \in B_X(x_0, \delta)) \land (f(x_\delta) \notin B_Y(f(x_0), \epsilon_0))$ \\
+  $\implies \forall n \in \mathbb{N} \; \exists x_n \in B_X\left(x_0, \frac{1}{n}\right) \implies f(x_n) \notin B_Y(f(x_0), \epsilon)$ \\
+  $\implies x_n \to x_0 \land f(x_n) \not\to f(x_0) \dashv$\qed\
+\end{proof}
+
+% section continuity_on_metric_spaces (end)
+
+% chapter lecture_17_oct_19th (end)
+
 \appendix
 
 \chapter{Useful Theorems from Earlier Calculus}%
