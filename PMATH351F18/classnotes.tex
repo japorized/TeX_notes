@@ -1901,11 +1901,11 @@ We are now ready to prove our long-awaited result.
 
 \begin{eg}[Sequence Spaces]\label{eg:sequence_spaces}\index{Sequence Spaces}
   \begin{enumerate}
-    \item Let $l_1 = \left\{ \{ x_i \} \mid \sum\limits_{i=1}^{\infty} \abs{x_i} < \infty \right\}$. Define
+    \item Let $\ell_1 = \left\{ \{ x_i \} \mid \sum\limits_{i=1}^{\infty} \abs{x_i} < \infty \right\}$. Define
       \begin{equation*}
         \norm{ \{ x_i \} }_1 = \sum_{i=1}^{\infty} \abs{x_i}
       \end{equation*}
-      Let $\{ x_i \}, \{ y_i \} \in l_1$. Observe that $\forall n \in \mathbb{N}$, we have
+      Let $\{ x_i \}, \{ y_i \} \in \ell_1$. Observe that $\forall n \in \mathbb{N}$, we have
       \begin{equation*}
         \sum_{i=1}^{n} \abs{x_i + y_i} \leq \sum_{i=1}^{n} \abs{x_i} + \sum_{i=1}^{n} \abs{y_i} \leq \norm{ \{ x_i \} }_1 + \norm{ \{ y_i \} }_1.
       \end{equation*}
@@ -1913,39 +1913,39 @@ We are now ready to prove our long-awaited result.
       \begin{equation*}
         \sum_{i=1}^{\infty} \abs{x_i + y_i} \leq \norm{ \{ x_i \} }_1 + \norm{ \{ y_i \} }_1.
       \end{equation*}
-      Thus $\{ x_i + y_i \} \in l_1$ and
+      Thus $\{ x_i + y_i \} \in \ell_1$ and
       \begin{equation*}
         \norm{ \{ x_i + y_i \} }_1 \leq \norm{ \{ x_i \} }_1 + \norm{ \{ y_i \} }_1.
       \end{equation*}
 
-      Let $\{ x_n \} \in l_1$ and $\alpha \in \mathbb{R}$. Then
+      Let $\{ x_n \} \in \ell_1$ and $\alpha \in \mathbb{R}$. Then
       \begin{equation*}
         \sum_{i=1}^{\infty} \abs{ \alpha x_i } = \abs{\alpha} \sum_{i=1}^{\infty} \abs{x_i}.
       \end{equation*}
-      Therefore $\{ \alpha x_n \} \in l_1$ and $\norm{ \{ \alpha x_n \} }_1 = \abs{\alpha} \norm{ \{ x_n \} }_1$.
+      Therefore $\{ \alpha x_n \} \in \ell_1$ and $\norm{ \{ \alpha x_n \} }_1 = \abs{\alpha} \norm{ \{ x_n \} }_1$.
 
-      Thus, we have that $l_1$ is a vector space, and $(l_1, \norm\cdot_1)$ is a normed linear space.
+      Thus, we have that $\ell_1$ is a vector space, and $(\ell_1, \norm\cdot_1)$ is a normed linear space.
 
-    \item Let $l_\infty(\mathbb{N}) = l_\infty = \{ \{ x_i \} \mid \{ x_i \} \text{ is bounded } \}$. Define
+    \item Let $\ell_\infty(\mathbb{N}) = \ell_\infty = \{ \{ x_i \} \mid \{ x_i \} \text{ is bounded } \}$. Define
       \begin{equation*}
         \norm{ \{ x_i \} }_\infty = \sup \{ \abs{ x_1 } \mid i \in \mathbb{N} \}.
       \end{equation*}
-      Observe that $\forall \{ x_i \}, \{ y_i \} \in l_\infty$, then $\forall i \in \mathbb{N}$, we have
+      Observe that $\forall \{ x_i \}, \{ y_i \} \in \ell_\infty$, then $\forall i \in \mathbb{N}$, we have
       \begin{equation*}
         \abs{x_i + y_i} \leq \abs{ x_i } + \abs{ y_i } \leq \norm{\{x_i\}}_\infty + \norm{\{y_i\}}_\infty.
       \end{equation*}
-      So $\{ x_i + y_i \} \in l_\infty$, and
+      So $\{ x_i + y_i \} \in \ell_\infty$, and
       \begin{equation*}
         \norm{ \{ x_i + y_i \} }_\infty \leq \norm{ \{ x_i\} }_\infty + \norm{ \{ y_i \} }_\infty.
       \end{equation*}
-      Consequently so, $\{ \alpha x_i \} \in l_\infty$ and
+      Consequently so, $\{ \alpha x_i \} \in \ell_\infty$ and
       \begin{equation*}
         \norm{ \{ \alpha x_i \} }_\infty = \abs{ \alpha } \norm{ \{ x_i \} }_\infty.
       \end{equation*}
   \end{enumerate}
 \end{eg}
 
-\newthought{Question}: What about $l_p(\mathbb{R})$?
+\newthought{Question}: What about $\ell_p(\mathbb{R})$?
 
 % section introduction_to_metric_spaces_continued (end)
 
@@ -1959,23 +1959,23 @@ We are now ready to prove our long-awaited result.
 \label{sec:introduction_to_metric_spaces_continued_2}
 % section introduction_to_metric_spaces_continued_2
 
-We wondered about $l_p(\mathbb{R})$ in the last lecture but let us consider a case that is even more general.
+We wondered about $\ell_p(\mathbb{R})$ in the last lecture but let us consider a case that is even more general.
 
-\newthought{Question}: Can we define $l_p(\Gamma)$ for any set $\Gamma$?
+\newthought{Question}: Can we define $\ell_p(\Gamma)$ for any set $\Gamma$?
 
 \begin{eg}\label{eg:l_infty_on_gamma}
-  Let $l_\infty(\Gamma) = \{ f : \Gamma \to \mathbb{R} \mid f(\Gamma) \text{ is bounded } \}$. If $f \in l_\infty(\Gamma)$, define
+  Let $\ell_\infty(\Gamma) = \{ f : \Gamma \to \mathbb{R} \mid f(\Gamma) \text{ is bounded } \}$. If $f \in \ell_\infty(\Gamma)$, define
   \begin{equation*}
     \norm{f}_\infty = \sup \{ \abs{f(x)} \mid x \in \Gamma \}.
   \end{equation*}
-  Notice that for $f, g \in l_\infty(\Gamma)$, and $\alpha \in \mathbb{R}$, then we have, by the Triangle Inequality,
+  Notice that for $f, g \in \ell_\infty(\Gamma)$, and $\alpha \in \mathbb{R}$, then we have, by the Triangle Inequality,
   \begin{align*}
     \norm{f + g}_\infty &= \sup \{ \abs{ (f + g)(x) } \mid x \in \Gamma \} \\
                         &= \sup \{ \abs{ f(x) + g(x) } \mid x \in \Gamma \} \\
                         &\leq \sup \{ \abs{ f(x) } \mid x \in \Gamma \} + \sup \{ \abs{ g(x) } \mid x \in \Gamma \} \\
                         &= \norm{f}_\infty \norm{g}_\infty.
   \end{align*}
-  So $f + g \in l_\infty(\Gamma)$, and
+  So $f + g \in \ell_\infty(\Gamma)$, and
   \begin{equation*}
     \norm{f + g}_\infty \leq \norm{f}_\infty + \norm{f}_\infty.
   \end{equation*}
@@ -1986,13 +1986,13 @@ We wondered about $l_p(\mathbb{R})$ in the last lecture but let us consider a ca
                            &= \abs{\alpha} \sup \{ \abs{f(x)} \mid x \in \Gamma \} \\
                            &= \abs{\alpha} \norm{f}_\infty.
   \end{align*}
-  So $\alpha f \in l_\infty(\Gamma)$, and $\norm{\alpha f}_\infty = \abs{\alpha} \norm{f}$.
+  So $\alpha f \in \ell_\infty(\Gamma)$, and $\norm{\alpha f}_\infty = \abs{\alpha} \norm{f}$.
 
-  Therefore, $(l_\infty(\Gamma), \norm\cdot_\infty)$ is a normed linear space.
+  Therefore, $(\ell_\infty(\Gamma), \norm\cdot_\infty)$ is a normed linear space.
 \end{eg}
 
 \begin{eg}
-  Let $l_1(\Gamma) = \{ f : \Gamma \to \mathbb{R} \mid P(f) \}$, where $P(f)$ is the statement\marginnote{\hlwarn{Require clarification} Notice that $\forall f \in l_1(\Gamma)$, for each $n \in \mathbb{N}$,
+  Let $\ell_1(\Gamma) = \{ f : \Gamma \to \mathbb{R} \mid P(f) \}$, where $P(f)$ is the statement\marginnote{\hlwarn{Require clarification} Notice that $\forall f \in \ell_1(\Gamma)$, for each $n \in \mathbb{N}$,
   \begin{equation*}
     A_n = \{ x \in \Gamma \mid \abs{f(x)} \geq \frac{1}{n} \} \text{ is finite. }
   \end{equation*}
@@ -2008,10 +2008,10 @@ We wondered about $l_p(\mathbb{R})$ in the last lecture but let us consider a ca
   \begin{equation*}
     \norm{f}_1 = \sup \left\{ \sum_{i=1}^{n} \abs{f(x_i)} \mid x_1, \ldots, x_n \in \Gamma, n \in \mathbb{N} \setminus \{ 0 \} \right\} < \infty.
   \end{equation*}
-  It is clear that $l_1(\Gamma) \subseteq l_\infty(\Gamma)$, where $l_\infty(\Gamma)$ is from \cref{eg:l_infty_on_gamma}. Consequently, $(l_1(\Gamma), \norm\cdot_1)$ is a normed linear space.
+  It is clear that $\ell_1(\Gamma) \subseteq \ell_\infty(\Gamma)$, where $\ell_\infty(\Gamma)$ is from \cref{eg:l_infty_on_gamma}. Consequently, $(\ell_1(\Gamma), \norm\cdot_1)$ is a normed linear space.
 \end{eg}
 
-We can extend the same idea onto $l_p$ spaces.
+We can extend the same idea onto $\ell_p$ spaces.
 
 \begin{eg}
   Let $X = C[a, b] = \{ f : [a, b] \to \mathbb{R} \mid f \text{ is continuous on } [a, b] \}$, and define\sidenote{Note in this case $\sup$ is also $\max$, since we are on a closed interval.}
@@ -2035,7 +2035,7 @@ We can extend the same idea onto $l_p$ spaces.
 
   Also, observe that
   \begin{equation*}
-    C[a, b] \subset l_\infty( [a, b] ).
+    C[a, b] \subset \ell_\infty( [a, b] ).
   \end{equation*}
 \end{eg}
 
@@ -2052,7 +2052,7 @@ We can extend the same idea onto $l_p$ spaces.
   \begin{equation*}
     \norm{f}_p = \left( \int_{a}^{b} \abs{f(x)}^p \dif{x} \right)^{\frac{1}{p}}
   \end{equation*}
-  Again, by linearity of integration, scalar multiplication holds. However, it is not as easy to show for the triangle inequality; we are now asking the same question as we did before for $l_p$, which we solved using \hyperref[thm:holder_s_inequality]{H\"{o}lder's Inequality} and \hyperref[thm:minkowshi_s_inequality]{Minkowski's Inequality}. But now, instead of summations, we have integrations.
+  Again, by linearity of integration, scalar multiplication holds. However, it is not as easy to show for the triangle inequality; we are now asking the same question as we did before for $\ell_p$, which we solved using \hyperref[thm:holder_s_inequality]{H\"{o}lder's Inequality} and \hyperref[thm:minkowshi_s_inequality]{Minkowski's Inequality}. But now, instead of summations, we have integrations.
 \end{eg}
 
 \begin{thm}[H\"{o}lder's Inequality v2]\index{H\"{o}lder's Inequality v2}\label{thm:holder_s_inequality_v2}
@@ -2107,7 +2107,7 @@ We can extend the same idea onto $l_p$ spaces.
 
 This shows that our definition of $\norm\cdot_p$ on $C[a, b]$ is indeed a norm, and so $( C[a, b], \norm\cdot_p )$ is a normed linear space.\marginnote{
 \begin{ex}
-  Show that there exists an injection from $(C[a, b], \norm\cdot_2)$ to $l_2(\mathbb{N})$. Note that this does not work for $p \geq 3$.
+  Show that there exists an injection from $(C[a, b], \norm\cdot_2)$ to $\ell_2(\mathbb{N})$. Note that this does not work for $p \geq 3$.
 \end{ex}}
 
 \begin{eg}[Bounded Operator]
@@ -2446,7 +2446,7 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
 % section topology_on_metric_spaces_continued_2
 
 \begin{defn}[Closure]\index{Closure}\label{defn:closure}
-  Let $A \susbeteq (X, d)$. We define the \hlnoteb{closure} $\bar{A}$ of $A$ to be
+  Let $A \subseteq (X, d)$. We define the \hlnoteb{closure} $\bar{A}$ of $A$ to be
   \begin{equation*}
     \bar{A} = \cap \{ F \subset X \mid F \text{ is closed }, A \subset F \}.
   \end{equation*}
@@ -2501,7 +2501,7 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
 \begin{proof}
   By definition, $A \subseteq \bar{A}$, so it suffices to show that $\bdy(A) \subset \bar{A}$ to show that $A \cup \bdy(A) \subseteq \bar{A}$.
 
-  \sidenote{Here, we employ the same proof as the previous proposition.}Assume that $x \notin \bar{A}$, i.e. $x \in \bar{A}^C$, which is open since $\bar{A}$ is closed by definition. Then $\exists \epsilon > 0$ such that $B(x, \epsilon) \susbet \bar{A}^C$. Since $x \notin A \subset \bar{A}$, we have that $B(x, \epsilon) \cap A = \emptyset$, i.e.\ $x \notin \bdy(A)$. Therefore $\bdy(A) \subset \bar{A}$, and so $A \cup \bdy(A) \subseteq \bar{A}$ as claimed.
+  \sidenote{Here, we employ the same proof as the previous proposition.}Assume that $x \notin \bar{A}$, i.e. $x \in \bar{A}^C$, which is open since $\bar{A}$ is closed by definition. Then $\exists \epsilon > 0$ such that $B(x, \epsilon) \subset \bar{A}^C$. Since $x \notin A \subset \bar{A}$, we have that $B(x, \epsilon) \cap A = \emptyset$, i.e.\ $x \notin \bdy(A)$. Therefore $\bdy(A) \subset \bar{A}$, and so $A \cup \bdy(A) \subseteq \bar{A}$ as claimed.
 
   \sidenote{For this part, if we can show that $A \cup \bdy(A)$ is closed, then by definition, $\bar{A} \subseteq A \cup \bdy(A)$ since $\bar{A}$ is the smallest such set that contains $A$. To show that $A \cup \bdy(A)$ is closed, we can either show that ${( A \cup \bdy(A) )}^C$ is open, or use \cref{propo:closed_sets_include_its_boundary_points} to show that $\bdy( A \cup \bdy(A) ) \subset (A \cup \bdy(A))$. We shall show for the more complicated expression.}Let $x \in \bdy( A \cup \bdy(A) )$. Then $\forall \epsilon > 0$, we have
   \begin{gather}
@@ -2527,15 +2527,15 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
   \begin{equation*}
     B(x, \epsilon) \cap A \neq \emptyset \; \lor \; B(x, \epsilon) \cap \bdy(A) \neq \emptyset.
   \end{equation*}
-  If $B(x, \epsilon) \cap A \neq \emptyset$, then \because~\eqref{eq:closures_n_boundary_eq3},\ $x \in \bdy(A)$, and so
+  If $B(x, \epsilon) \cap A \neq \emptyset$, then $\because$ \eqref{eq:closures_n_boundary_eq3}, $x \in \bdy(A)$, and so
   \begin{equation}\tag{$\dagger$}\label{eq:closures_n_boundary_repeated_arg}
     \bdy( A \cup \bdy(A) ) \subseteq ( A \cup \bdy(A) ).
   \end{equation}
-  If $B(x, \epsilon) \cap \bdy(A) \neq \emptyset$, let $z \in B(x, \epsilon) \cap \bdy(A)$. \because\ $z \in B(x, \epsilon)$, let $r = d(x, z)$, and $\alpha = \epsilon - r > 0$. Let $z_0 \in B(z, \alpha)$. Then by the Triangle Inequality
+  If $B(x, \epsilon) \cap \bdy(A) \neq \emptyset$, let $z \in B(x, \epsilon) \cap \bdy(A)$. $\because z \in B(x, \epsilon)$, let $r = d(x, z)$, and $\alpha = \epsilon - r > 0$. Let $z_0 \in B(z, \alpha)$. Then by the Triangle Inequality
   \begin{equation*}
     d(x, z_0) \leq d(x, z) + d(z, z_0) < r + \alpha = \epsilon.
   \end{equation*}
-  Thus $z_0 \in B(x, \epsilon) \implies ( B(z, \alpha) \subseteq B(x, \epsilon) )$. Then \because\ $z \in \bdy(A)$, we have $B(z, \alpha) \cap A \neq \emptyset$, and so $B(x, \epsilon) \cap A \neq \emptyset$. Then we can just follow the argument we did in~\eqref{eq:closures_n_boundary_repeated_arg} and arrive as the same conclusion. Consequently, by \cref{propo:closed_sets_include_its_boundary_points}, $A \cup \bdy(A)$ is closed as claimed.\qed\
+  Thus $z_0 \in B(x, \epsilon) \implies ( B(z, \alpha) \subseteq B(x, \epsilon) )$. Then $\because z \in \bdy(A)$, we have $B(z, \alpha) \cap A \neq \emptyset$, and so $B(x, \epsilon) \cap A \neq \emptyset$. Then we can just follow the argument we did in~\eqref{eq:closures_n_boundary_repeated_arg} and arrive as the same conclusion. Consequently, by \cref{propo:closed_sets_include_its_boundary_points}, $A \cup \bdy(A)$ is closed as claimed.\qed\
 \end{proof}
 
 \begin{eg}
@@ -2587,7 +2587,7 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
   $A$ is \hlnoteb{dense} in $(X, d)$ if $\bar{A} = X$.
 \end{defn}
 
-\newthought{Question}: Is $(l_1, \norm\cdot_1)$ separable? Is $(l_\infty, \norm\cdot_\infty)$ separable?
+\newthought{Question}: Is $(\ell_1, \norm\cdot_1)$ separable? Is $(\ell_\infty, \norm\cdot_\infty)$ separable?
 
 Recall \cref{eg:sequence_spaces}.
 
@@ -2608,7 +2608,7 @@ Recall \cref{eg:sequence_spaces}.
   \begin{equation*}
     N \cap \left( A \setminus \{ x_0 \} \right) \neq \emptyset.
   \end{equation*}
-  Equivalently, $\forall \epsilon > 0$, $\exists x \in A$, where $x \neq \x_0$, such that $x \in B(x_0, \epsilon)$.\sidenote{This also means that $B(x_0, \epsilon)$ must have infinitely many points close to $x_0$, for otherwise, we would be able to find some $\epsilon > \epsilon_0 > 0$ such that $B(x_0, \epsilon_0) \cap A = \emptyset$.} We sometimes call limit points as \hldefn{cluster points}. We denote the set of limit points of $A$ as $\Lim(A) \subset X$ \sidenote{Note that the set of limit points is not necessarily a subset of $A$.}
+  Equivalently, $\forall \epsilon > 0$, $\exists x \in A$, where $x \neq x_0$, such that $x \in B(x_0, \epsilon)$.\sidenote{This also means that $B(x_0, \epsilon)$ must have infinitely many points close to $x_0$, for otherwise, we would be able to find some $\epsilon > \epsilon_0 > 0$ such that $B(x_0, \epsilon_0) \cap A = \emptyset$.} We sometimes call limit points as \hldefn{cluster points}. We denote the set of limit points of $A$ as $\Lim(A) \subset X$ \sidenote{Note that the set of limit points is not necessarily a subset of $A$.}
 \end{defn}
 
 \begin{eg}
@@ -2663,7 +2663,7 @@ Recall \cref{eg:sequence_spaces}.
     \item $a \in A^\circ \implies \exists \epsilon > 0 \; B(a, \epsilon) \subset A \subset B \implies a \in B^\circ \dashv$
     \item $x \in A \setminus \bdy(A) \implies \exists \epsilon > 0 \; B(x, \epsilon) \cap A^C = \emptyset \implies x \in A^\circ \dashv$ \\
       $x \in A^\circ \implies \exists \epsilon_0 > 0 \; B(x, \epsilon_0) \subset A$ \\
-      Sps $x \in \bdy(A)$. Then $\forall \epsilon > 0 \; B(x, \epsilon) \cap A^C \neq \emptyset \implies B(x, \epsilon_0) \cap A^C = \emptyset$ \lightning $B(x, \epsilon_0) \subset A \dashv$
+      Sps $x \in \bdy(A)$. Then $\forall \epsilon > 0 \; B(x, \epsilon) \cap A^C \neq \emptyset \implies B(x, \epsilon_0) \cap A^C = \emptyset \lightning B(x, \epsilon_0) \subset A \dashv$
     \item $x \in \bdy(A) \implies \forall \epsilon > 0 \; B(x, \epsilon) \cap A \neq \emptyset \land B(x, \epsilon) \cap A^C \neq \emptyset$ \\
       $x \notin \bdy(A^C) \implies \exists \epsilon_0 > 0 \; B(x, \epsilon_0) \cap A = \emptyset \lor B(x, \epsilon_0) \cap A^C = \emptyset$ \\
       But $B(x, \epsilon_0) \cap A = \emptyset \; \lightning \; \forall \epsilon > 0 \; B(x, \epsilon) \cap A^C \neq \emptyset$ \\
@@ -2765,6 +2765,149 @@ true? Again, no.
 % section convergences_of_sequences (end)
 
 % chapter lecture_15_oct_15th (end)
+
+\chapter{Lecture 16 Oct 17th}%
+\label{chp:lecture_16_oct_17th}
+% chapter lecture_16_oct_17th
+
+\section{Convergences of Sequences (Continued)}%
+\label{sec:convergences_of_sequences_continued}
+% section convergences_of_sequences_continued
+
+\begin{eg}
+  Let $X = \mathbb{R}^n$, $d = d_p$, for $1 \leq p \leq \infty$, and $\vec{x}_k = \{ ( x_{k, 1}, x_{k, 2}, \ldots, x_{k, n} ) \}$.\\
+  \noindent\hlbnoted{Claim}:
+  \begin{equation*}
+    \vec{X}_k \overset{\ell_p}{\to} \vec{x}_0 = (x_{0, 1}, x_{0, 2}, \ldots, x_{0, n}) \iff \forall j \in \{ 1, \ldots, n \} \; x_{k, j} \to x_{0, j}.
+  \end{equation*}
+  \hlbnoted{Note}: In general, we have
+  \begin{equation*}
+    \abs{x_{k, j} - x_{0, j}} \leq \norm{\vec{x}_k - \vec{x}_0}_p
+  \end{equation*}
+  So it is clear that the $(\implies)$ direction is true, i.e.
+  \begin{equation*}
+    \vec{X}_k \to \vec{x}_0 \implies \forall j \in \{ 1, \ldots, n \} \; x_{k, j} \to x_{0, j}.
+  \end{equation*}
+
+  For the other direction, we look at the different $p$'s to see how it works differently: in all cases, assume that $x_{k, j} \to x_{0, j}$ for all $j$, and that $\epsilon > 0$
+
+  \noindent\hlbnotea{$p = \infty$} : we have that $\exists k_0 \in \mathbb{N}$ such that $\forall k \geq k_0$,
+  \begin{equation*}
+    \abs{x_{k, j} - x_{0, j}} < \epsilon \text{ for } j \in \{ 1, \ldots, n \},
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \norm{\vec{x}_k - \vec{x}_0}_\infty = \max \left\{ \abs{ x_{k, j} - x_{0, j} } : 1 \leq j \leq n \right\} < \epsilon.
+  \end{equation*}
+
+  \noindent\hlbnotea{$p = 1$} : if we assume that for each $j$,
+  \begin{equation*}
+    \abs{ x_{k, j} - x_{0, j} } < \frac{\epsilon}{n},
+  \end{equation*}
+  then
+  \begin{equation*}
+    \norm{\vec{x}_k - \vec{x}_0}_1 = \sum_{j=1}^{n} \abs{ x_{k, j} - x_{0, j} } < \sum_{j=1}^{n} \frac{\epsilon}{n} = \epsilon.
+  \end{equation*}
+
+  \noindent\hlbnotea{$1 < p < \infty$} : this time, we assume that for each $j$,
+  \begin{equation*}
+    \abs{ x_{k, j} - x_{0, j} } < \frac{\epsilon}{\sqrt[p]{n}}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \norm{ \vec{x}_k - \vec{x}_0 }_p = {\left( \sum_{j=1}^{n} {\abs{ x_{k, j} - x_{0, j} }}^p \right)}^{\frac{1}{p}} < {\left( \sum_{j=1}^{n} {\left( \frac{\epsilon}{\sqrt[p]{n}} \right)}^p \right)}^{\frac{1}{p}} = \epsilon.
+  \end{equation*}
+  This completes the proof of our claim.
+\end{eg}
+
+\begin{eg}
+  Let $X = ( C[a, b], \norm\cdot_\infty )$. Then
+  \begin{equation*}
+    f_n \to f \iff \norm{ f_n - f }_\infty \to 0.
+  \end{equation*}
+
+  \noindent Notice that for the $(\implies)$ direction,\sidenote{Note that this is \hlnotea{uniform convergence}, which implies \hlnotea{pointwise convergence}.}
+  \begin{align*}
+    &\left( \forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall n \geq N_0 \; \abs{ f_n - f } < \epsilon \right) \\
+    &\implies \norm{ f_n - f }_\infty = \max \{ \abs{ f_n(x) - f(x) } : x \in [a, b] \} < \epsilon.
+  \end{align*}
+
+  The $(\impliedby)$ direction is easy, since
+  \begin{equation*}
+    \abs{ f_n(x) - f(x) } \leq \max \{ \abs{ f_n(x) - f(x) } : x \in [a, b] \} < \epsilon.
+  \end{equation*}
+\end{eg}
+
+\begin{thm}[Sequential Characterizations of Limit Points, Boundaries, and Closedness]\label{thm:sequential_characterizations_of_limit_points_boundaries_and_closedness}
+  Given $A \subset (X, d)$,
+  \begin{enumerate}
+    \item $x_0 \in \Lim(A) \iff \exists \{ x_n \} \subset A \; ( x_n \neq x_0 ) \land ( x_n \to x_0 )$; \label{item:sequential_characterizations_of_limit_points_boundaries_and_closedness_1}
+    \item $x_0 \in \bdy(A) \iff \exists \{ x_n \} \subset A, \{ y_n \} \subset A^C \; ( x_n \to x_0 ) \land ( y_n \to x_0 )$;\label{item:sequential_characterizations_of_limit_points_boundaries_and_closedness_2}
+      \item $A$ is closed $\iff ( \forall \{ x_n \} \subset A \; x_n \to x_0 \in X \implies x_0 \in A )$\label{item:sequential_characterizations_of_limit_points_boundaries_and_closedness_3}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item $x_0 \in \Lim(A) \implies \forall n \in \mathbb{N} \; x_n \in B\left(x_0, \frac{1}{n}\right) \setminus \{ x_0 \} \implies d(x_n, x_0) < \frac{1}{n} \implies x_n \to x_0 \dashv$ \\
+      $ $ \\
+      $\{ x_n \} \subset A \; ( x_n \to x_0 ) \land ( x_n \neq x_0 ) \implies$ \\
+      $\forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall n \geq N_0 \; x_n \in B(x_0, \epsilon) \dashv$
+
+    \item $x \in \bdy(A) \implies$ \\
+      $( \because \forall \epsilon > 0 \; A \cap B(x, \epsilon) \neq \emptyset ) \; \exists x_n \in A \cap B\left(x, \frac{1}{n}\right) \; \land $ \\
+      $(\because \forall \epsilon > 0 \; A^C \cap B(x, \epsilon) \neq \emptyset ) \; \exists y_n \in A^C \cap B\left(x, \frac{1}{n}\right)$ \\
+      $\implies ( \{ x_n \} \subset A \land x_n \to x_0 ) \land \left( \{ y_n \} \subset A^C \land y_n \to x_0 \right) \dashv$ \\
+      $ $ \\
+      $( \{ x_n \} \subset A \land x_n \to x_0 ) \land ( \{ y_n \} \subset A^C \land y_n \to x_0 )$ \\
+      $\implies \forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall n \geq N_0 \enspace x_n, y_n \in B(x, \epsilon)$ \\
+      $\implies x_0 \in \bdy(A) \dashv$
+
+    \item Sps $A$ is closed and $( \{ x_n \} \subset A ) \land ( x_n \to x_0 \in X )$. \\
+      $x_0 \in A^C \implies \exists \epsilon > 0 \; B(x_0, \epsilon) \subset A^C \implies x_n \notin B(x_0, \epsilon) \; \lightning \; x_n \to x_0$ \\
+      $\implies x_0 \in A$ \\
+      $ $ \\
+      Sps $A$ is $\neg$ closed $\implies$ ($\because$ \cref{propo:closed_sets_include_its_limit_points}) $\exists x_0 \in \Lim(A) \setminus A$ \\
+      $\implies (\because$ \cref{item:sequential_characterizations_of_limit_points_boundaries_and_closedness_1} $) \exists \{ x_n \} \subset A \; (x_n \neq \x_0) \land (x_n \to x_0 \notin A)$, showing that RHS is false $\dashv$
+  \end{enumerate}\qed\
+\end{proof}
+
+\begin{eg}
+  Let $X$ be a set and $d$ a discrete metric. Then
+  \begin{equation*}
+    x_n \to x_0 \iff \exists N \in \mathbb{N} \; \foral ln \geq N \; x_n = x_0.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Let $c_0 = \left\{ \{ x_n \} \mid \lim_{n \to \infty} x_n = 0 \right\} \subset \ell_\infty$.
+
+  \noindent\hlbnoted{Claim} : $c_0$ is closed in $\ell_\infty$.
+
+  Assume $\vec{x}_k = \{ x_{k, j} \}_{j = 1}^{\infty} \subset c_0$, and let
+  \begin{equation*}
+    \vec{x}_k \overset{\norm\cdot_\infty}{\to} \vec{x}_0 = \{ x_{0, j} \}_{j = 1}^{\infty} \subset \ell_\infty,
+  \end{equation*}
+  i.e.
+  \begin{equation*}
+    \forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall k \geq N_0 \enspace \norm{ \vec{x}_k - \vec{x}_0 }_\infty < \frac{\epsilon}{2}
+  \end{equation*}
+  Let $k_0 \geq N_0$. $\because \vec{x}_{k_0} \in c_0$, $\exists J_0 \in \mathbb{N}$ such that $\forall j \geq J_0$, we have $\abs{ x_{k_0, j} } < \frac{\epsilon}{2}$, and so
+  \begin{equation*}
+    \abs{x_{0, j}} \leq \abs{ x_{k_0, j} - x_{0, j} } + \abs{ x_{k_0, j} } < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+  \end{equation*}
+  Thus we have that
+  \begin{equation*}
+    \lim_{j \to \infty} x_{0, j} = 0
+  \end{equation*}
+  and so $\vec{x}_0 \in c_0$. Therefore, by \cref{thm:sequential_characterizations_of_limit_points_boundaries_and_closedness} \cref{item:sequential_characterizations_of_limit_points_boundaries_and_closedness_3}, $c_0$ is closed in $\ell_\infty$.
+\end{eg}
+
+Note, however, that $c_00 \subset \ell_1 \subset c_0$ is not closed. Also $\ell_p$ is not closed in $c_0$.
+
+% section convergences_of_sequences_continued (end)
+
+% chapter lecture_16_oct_17th (end)
 
 \appendix
 
