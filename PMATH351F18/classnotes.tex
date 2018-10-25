@@ -2868,14 +2868,14 @@ true? Again, no.
       $\implies x_0 \in A$ \\
       $ $ \\
       Sps $A$ is $\neg$ closed $\implies$ ($\because$ \cref{propo:closed_sets_include_its_limit_points}) $\exists x_0 \in \Lim(A) \setminus A$ \\
-      $\implies (\because$ \cref{item:sequential_characterizations_of_limit_points_boundaries_and_closedness_1} $) \exists \{ x_n \} \subset A \; (x_n \neq \x_0) \land (x_n \to x_0 \notin A)$, showing that RHS is false $\dashv$
+      $\implies (\because$ \cref{item:sequential_characterizations_of_limit_points_boundaries_and_closedness_1} $) \exists \{ x_n \} \subset A \; (x_n \neq x_0) \land (x_n \to x_0 \notin A)$, showing that RHS is false $\dashv$
   \end{enumerate}\qed\
 \end{proof}
 
 \begin{eg}
   Let $X$ be a set and $d$ a discrete metric. Then
   \begin{equation*}
-    x_n \to x_0 \iff \exists N \in \mathbb{N} \; \foral ln \geq N \; x_n = x_0.
+    x_n \to x_0 \iff \exists N \in \mathbb{N} \; \forall ln \geq N \; x_n = x_0.
   \end{equation*}
 \end{eg}
 
@@ -2903,7 +2903,7 @@ true? Again, no.
   and so $\vec{x}_0 \in c_0$. Therefore, by \cref{thm:sequential_characterizations_of_limit_points_boundaries_and_closedness} \cref{item:sequential_characterizations_of_limit_points_boundaries_and_closedness_3}, $c_0$ is closed in $\ell_\infty$.
 \end{eg}
 
-Note, however, that $c_00 \subset \ell_1 \subset c_0$ is not closed. Also $\ell_p$ is not closed in $c_0$.
+Note, however, that $c_{00} \subset \ell_1 \subset c_0$ is not closed. Also $\ell_p$ is not closed in $c_0$.
 
 % section convergences_of_sequences_continued (end)
 
@@ -3021,7 +3021,7 @@ Note, however, that $c_00 \subset \ell_1 \subset c_0$ is not closed. Also $\ell_
   $\implies ( d_X(x, x_0) < \delta \implies d_Y( f(x), f(x_0) ) < \epsilon ) \dashv$\qed\
 \end{proof}
 
-\begin{thm}[Sequential Characterization of Continuity]\index{Sequential Characterization of Continuity}\label{thm:sequential_characterization_of_continuity}
+\begin{thm}[\imponote\ Sequential Characterization of Continuity]\index{Sequential Characterization of Continuity}\label{thm:sequential_characterization_of_continuity}
   For metric spaces $(X, d_X)$ and $(Y, d_Y)$, and $f : X \to Y$, TFAE
   \begin{enumerate}
     \item $f$ is continuous as $x_0 \in X$;
@@ -3038,13 +3038,139 @@ Note, however, that $c_00 \subset \ell_1 \subset c_0$ is not closed. Also $\ell_
 
   \noindent\hlbnotea{$(2) \implies (1)$} (Prove by Contrapositive) : Sps $f$ is $\neg$ continuous at $x_0 \in X$ \\
   $\implies \exists \epsilon_0 > 0 \; \forall \delta > 0 \; (x_\delta \in B_X(x_0, \delta)) \land (f(x_\delta) \notin B_Y(f(x_0), \epsilon_0))$ \\
-  $\implies \forall n \in \mathbb{N} \; \exists x_n \in B_X\left(x_0, \frac{1}{n}\right) \implies f(x_n) \notin B_Y(f(x_0), \epsilon)$ \\
+  $\implies \forall n \in \mathbb{N} \; \exists x_n \in B_X\left(x_0, \frac{1}{n}\right) \land f(x_n) \notin B_Y(f(x_0), \epsilon_0)$ \\
   $\implies x_n \to x_0 \land f(x_n) \not\to f(x_0) \dashv$\qed\
 \end{proof}
 
 % section continuity_on_metric_spaces (end)
 
 % chapter lecture_17_oct_19th (end)
+
+\chapter{Lecture 18 Oct 22nd}%
+\label{chp:lecture_18_oct_22nd}
+% chapter lecture_18_oct_22nd
+
+\section{Continuity on Metric Spaces (Continued)}%
+\label{sec:continuity_on_metric_spaces_continued}
+% section continuity_on_metric_spaces_continued
+
+\begin{defn}[Continuity on a Space]\index{Continuity on a Space}\label{defn:continuity_on_a_space}
+  We say that
+  \begin{equation*}
+    f : (X, d_X) \to (Y_ d_Y)
+  \end{equation*}
+  is \hlnoteb{continuous} on $X$ if $f$ is continous at each $x_0 \in X$.
+  
+  We let
+  \begin{equation*}
+    C(X, Y) := \{ f : X \to Y \mid f \text{ is continous on } X \},
+  \end{equation*}
+  be the set of all continuous functions on $X$.
+\end{defn}
+
+\begin{note}
+  In the case where $Y = \mathbb{R}$, we will simply write $C(X, X)$ as $C(X)$.
+\end{note}
+
+\begin{remark}
+  We can also define the following set
+  \begin{equation*}
+    C_b(X) = \{ f \in C(X) \mid f \text{ is bounded } \}.
+  \end{equation*}
+  We can define $\norm\cdot_\infty$ on $C_b(X)$ by
+  \begin{equation*}
+    \norm{f}_\infty = \sup \{ \abs{ f(x) } \mid x \in X \}.
+  \end{equation*}
+  Then we have that $C_b(X) \subseteq \ell_\infty(X)$.
+\end{remark}
+
+\begin{thm}[Analogue of Sequantial Characterization of Continuity on a Space, and Continuity and Neighbourhoods]\label{thm:analogue_of_sequantial_characterization_of_continuity_on_a_space_and_continuity_and_neighbourhoods}
+  Let $f: (X, d_X) \to (Y, d_Y)$. TFAE
+  \begin{enumerate}
+    \item $f$ is continuous;
+    \item $f^{-1}(W)$ is open for every open set $W \subset Y$;
+    \item $x_n \to x_0 \in X \implies f(x_n) \to f(x_0) \in Y$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnotea{$(1) \implies (2)$} : Let $W \subset Y$ be open, and $V = f^{-1}(W)$. \\
+  $x_0 \in V \implies f(x_0) = y_0 \in W \implies W$ is a neighbourhood of $y_0$ \\
+  $\implies (\because $ \cref{thm:continuity_and_neighbourhoods} $) V$ is a neighbourhood of $x_0$ \\
+  $\implies x_0 \in V^\circ \implies V$ is open $\dashv$
+
+  \noindent\hlbnotea{$(2) \implies (3)$} : $x_n \to x_0 \in X$ \\
+  $\implies \forall \epsilon > 0 \; (\because B_Y(f(x_0), \epsilon) $ open $)$ \\ 
+  $\implies x_0 \in V = f^{-1}( B_Y(f(x_0), \epsilon) )$, which is open \\
+  $\implies \exists \delta > 0 \; B_X(x_0, \delta) \subset V$ \\
+  $x_n \to x_0 \implies \exists N_0 \in \mathbb{N} \; \forall n \geq N_0 \; x_n \in B_X(x_0, \delta)$ \\
+  $\implies f(x_n) \in B_Y(f(x_0), \epsilon) \implies f(x_n) \to f(x_0) \dashv$
+
+  \noindent\hlbnotea{$(3) \implies (1)$} : Sps $f$ $\neg$ continuous, i.e. \\
+  $\exists \epsilon_0 > 0 \; \forall \delta \geq 0 \; \exists x_\delta \in X \quad d_X(x_\delta, x_0) < \delta \land d_Y(f(x_\delta), f(x_0)) > \epsilon_0$ \\
+  $\implies \forall n \in \mathbb{N} \; \exists x_n \in d_X(x_0, x_n) < \frac{1}{n} \land d_Y(f(x_0), f(x_n)) > \epsilon_0 \dashv$\qed\
+\end{proof}
+
+\begin{remark}
+  Note that if $f: X \to Y$ and $B \subset Y$, then
+  \begin{equation*}
+    {( f^{-1}(B) )}^C = f^{-1}\left( B^C \right).
+  \end{equation*}
+  Thus we have that $f : (X, d_X) \to (Y, d_Y)$ is continuous iff $f^{-1}(F)$ is closed for each closed $F \subset Y$.
+\end{remark}
+
+\newthought{Question}: For the forward direction\sidenote{instead of talking about the pullback}, if $f : (X, d_X) \to (Y, d_Y)$ is continuous, and if $U \subset X$ is open, is $f(U)$ open? \hlimpo{No}.
+
+\begin{eg}
+  Consider $f : \mathbb{R} \to \mathbb{R}$ such that $\forall x \in X, \, f(x) = 1$. Then $f(\mathbb{R})$ is not open.
+\end{eg}
+
+This motivates us to consider such ``nice'' functions that allow us to bring open sets to open sets, and closed to their closed counterpart.
+
+\begin{defn}[Homeomorphism]\index{Homeomorphism}\label{defn:homeomorphism}
+  A function $\phi : (X, d_X) \to (Y, d_Y)$ is a \hlnoteb{homeomorphism} if $\phi$ is bijective and if both $\phi$ and $\phi^{-1}$ are continuous.
+\end{defn}
+
+\begin{note}
+  If $\phi$ is a homeomorphism, then we have
+  \begin{itemize}
+    \item $\phi(W) \subset Y$ is open $\iff W \subset X$ is open;
+  \item $\phi(F) \subset Y$ is closed $\iff F \subset X$ is closed.
+  \end{itemize}
+\end{note}
+
+\begin{defn}[Equivalent Metric Spaces]\index{Equivalent Metric Spaces}\label{defn:equivalent_metric_spaces}
+  We say that $(X, d_X)$ and $(Y, d_Y)$ are \hlnoteb{equivalent metric spaces} if there exists a bijective $\phi : X \to Y$, and $c_1, c_2 \geq 0$ such that
+  \begin{equation*}
+    c+1 d_X(x_1, x_2) \leq d_Y(\phi(x_1), \phi(x_2)) \leq c_2 d_X(x_1, x_2).
+  \end{equation*}
+\end{defn}
+
+\begin{ex}
+  Show that the $\phi$ in \cref{defn:equivalent_metric_spaces} is a \hlnotea{homeomorphism}.
+\end{ex}
+
+\begin{eg}
+  Let $(X, d)$ be a metric space, where $X$ is any set and $d$ is the discrete metric. Let $f : (X, d) \to (Y, d_Y)$, where $(Y, d_Y)$ is another metric space that is arbitrary. Since $(X, d)$ is discrete, it is clear that if $W \subset Y$ is open, then $f^{-1}(W)$ is open.
+\end{eg}
+
+\newthought{Question}: Suppose that $f : (\mathbb{R}, \abs\cdot) \to (Y, d)$. When is $f$ continuous?\marginnote{\begin{ex}
+  Use the \hlnotea{Intermediate Value Theorem} to prove that the only open and closed sets in $\mathbb{R}$ are $\emptyset$ and $\mathbb{R}$.
+\end{ex}}
+
+Let $y_0 \in Y$. We know that $\{ y_0 \}$ is both open and closed. Then if $f$ is continuous, we must have that $f^{-1}( \{ y_0 \} )$ is both open and closed. Therefore, $f$ must be a constant function.
+
+\begin{defn}[Continuity on a set]\index{Continuity}\label{defn:continuity_on_a_set}
+  Let $A \subset (X, d)$ and $f : X \to (Y, d_Y)$. We say that $f$ is \hlnoteb{continuous} on $A$ iff $f \restriction_A$ is continuous on $(A, d_A)$, where $d_A$ is the induced metric, and $f \restriction_A$ is the restriction of $f$ on $A$.
+\end{defn}
+
+\begin{remark}
+  From the sequential characterization of continuity, we have that $(A, d_A)$ is the induced metric iff whenever $\{ x_n \} \subset A$ is a sequence with $x_n \to x_0$, then $f(x_n) \to f(x_0)$.
+\end{remark}
+
+% section continuity_on_metric_spaces_continued (end)
+
+% chapter lecture_18_oct_22nd (end)
 
 \appendix
 
