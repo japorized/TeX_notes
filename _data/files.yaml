@@ -112,6 +112,13 @@
   - title: lec35.tex
     src: ./PMATH351S18/lectures/lec35.tex
 
+- title: Learning Haskell
+  pdf: 
+  - title: learningnotes.pdf
+    src: ./LearningHaskell/learningnotes.pdf
+  - title: learningnotes.tex
+    src: ./LearningHaskell/learningnotes.tex
+
 - title: STAT330 S18 - Mathematical Statistics
   pdf:
   - title: classnotes.pdf
