@@ -3172,6 +3172,140 @@ Let $y_0 \in Y$. We know that $\{ y_0 \}$ is both open and closed. Then if $f$ i
 
 % chapter lecture_18_oct_22nd (end)
 
+\chapter{Lecture 19 Oct 24th}%
+\label{chp:lecture_19_oct_24th}
+% chapter lecture_19_oct_24th
+
+\section{Completeness of Metric Spaces}%
+\label{sec:completeness_of_metric_spaces}
+% section completeness_of_metric_spaces
+
+\newthought{Question}: Is there an intrinsic way for us to tell if a sequence $\{ x_n \} \subset (X, d)$ converges?
+
+\newthought{Observation} Assume that $x_n \to x_0$. Then
+\begin{equation*}
+  \forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall n \geq N_0 \enspace d(x_0, x_n) < \frac{\epsilon}{2}.
+\end{equation*}
+Thus if $m, n \geq N_0$, we have
+\begin{equation*}
+  d(x_m, x_n) < d(x_m, x_0) + d(x_0, x_n) < \epsilon.
+\end{equation*}
+
+\begin{defn}[Cauchy]\index{Cauchy}\label{defn:cauchy}
+  We say that a sequence $\{ x_n \} \subset (X, d)$ is \hlnoteb{Cauchy} if
+  \begin{equation*}
+    \forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall m, n \geq N_0 \; d(x_m, x_n) < \epsilon.
+  \end{equation*}
+\end{defn}
+
+\begin{thm}[Convergent Sequences are Cauchy]\index{Convergent Sequences are Cauchy}\label{thm:convergent_sequences_are_cauchy}
+  Every convergent sequence is Cauchy.
+\end{thm}
+
+We proved this in our observation.
+
+\newthought{Question}: Is the converse true? \hlimpo{No}.
+
+\begin{eg}
+  Let $X = (0, 1)$ with the usual metric. Let $x_n = \frac{1}{n}$. It is clear that $\{ x_n \}$ is Cauchy in $(X, d)$, but the sequence does not converge.\sidenote{The flaw here lies in the fact that $X$ is open. Should we have chosen $X = [0, 1]$, then the limit point $0$ would have been included, allowing the sequence to actually converge.}
+\end{eg}
+
+\begin{defn}[Complete Metric Spaces]\index{Completeness}\label{defn:complete_metric_spaces}
+  A metric space $(X, d)$ is \hlnoteb{complete} if each Cauchy sequence $\{ x_n \} \subset X$ converges in $(X, d)$.
+\end{defn}
+
+\subsection{Basic Properties of Cauchy Sequences}%
+\label{sub:basic_properties_of_cauchy_sequences}
+% subsection basic_properties_of_cauchy_sequences
+
+\newthought{Observation} Given a sequence $\{ x_n \} \subset (X, d)$, it is possible that $\{ x_n \}$ diverges but $\{ x_n \}$ has a subsequence $\{ x_{n, k} \}$ that converges.
+
+\begin{eg}
+  The sequence $\{ x_n \}$ defined by $x_n = (-1)^{n - 1}$, i.e. 
+  \begin{equation*}
+    \{ x_n \} = \{ 1, -1, 1, -1, \ldots \},
+  \end{equation*}
+  is divergent. However, $x_{2k} \to -1$ and $x_{2k + 1} \to 1$.
+\end{eg}
+
+\begin{thm}[\vvimponote\ Convergent Cauchy Subsequences]\label{thm:convergent_cauchy_subsequences}
+  Let $\{ x_n \} \subset (X, d)$ be Cauchy and assume $x_{n, k} \to x_0$ for some subsequence $\{ x_{n, k} \}_{k = 1}^{\infty}$. Then $x_n \to x_0$.
+\end{thm}
+
+\begin{proof}[\vvimponote]
+  $\forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall m, n \in N_0 \enspace d(x_n, x_m) < \frac{\epsilon}{2}$ \\
+  \noindent $x_n \to x_0 \implies \exists k_0 \in \mathbb{N} \; n_{k_0} \geq N_0 \enspace d(x_0, x_{k_0}) < \frac{\epsilon}{2}$ \\
+  \noindent$\therefore n \geq N_0 \implies$
+  \begin{equation*}
+    d(x_n, x_0) \leq d(x_n, x_{k_0}) + d(x_{k_0}, x_0)< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+  \end{equation*}
+  \noindent$\therefore x_n \to x_0$\qed\
+\end{proof}
+
+\begin{defn}[Boundedness]\index{Boundedness}\label{defn:boundedness}
+  Let $A \subset (X, d)$. $A$ is \hlnoteb{bounded} if
+  \begin{equation*}
+    \exists M > 0 \; \exists x_0 \in X \; A \subset B[x_0, M].
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[Cauchy Sequences are Bounded]\label{propo:cauchy_sequences_are_bounded}
+  If $\{ x_n \} \subset (X, d)$ is Cauchy, then $\{ x_n \}$ is bounded.
+\end{propo}
+
+\begin{proof}
+  Let $\epsilon = 1$. $\exists N_0 \in \mathbb{N} \; \forall m, n \geq N_0 \enspace d(x_n, x_m) < \epsilon$. In particular, if $n \geq N_0$, then $d(x_n, x_{N_0}) < 1$. Then, let
+  \begin{equation*}
+    M = \max \{ d\left(x_1, x_{N_0}\right), d\left(x_2, x_{N_0}\right), \ldots, d\left(x_{N_0 - 1}, d_{N_0}\right), 1 \}
+  \end{equation*}
+  Then it is clear that $\{ x_n \} \subset B[x_{N_0}, M]$.\qed\
+\end{proof}
+
+% subsection basic_properties_of_cauchy_sequences (end)
+
+\subsection{Examples of Complete Spaces}%
+\label{sub:examples_of_complete_spaces}
+% subsection examples_of_complete_spaces
+
+\begin{thm}[Bolzano-WeierStrass]\index{Bolzano-WeierStrass}\label{thm:bolzano_weierstrass}
+  Every bounded sequence $\{ x_n \} \subset \mathbb{R}$ has a convergent subsequence.\marginnote{\hlwarn{Be sure to review a proof of this and add it here.}}
+\end{thm}
+
+\begin{thm}[$\mathbb{R}$ is complete]\label{thm:r_is_complete}
+  $\mathbb{R}$ is complete.
+\end{thm}
+
+\begin{proof}
+  If $\{ x_n \} \subset \mathbb{R}$ is Cauchy, then it is bounded by \cref{propo:cauchy_sequences_are_bounded}, and so by Bolzano-Weierstrass, $\{ x_n \}$ has a convergent subsequence $\{ x_{n, k} \}$ such that $x_{n, k} \to x_0$. Since $\{ x_n \}$ is Cauchy, by \cref{thm:convergent_cauchy_subsequences}, $x_n \to x_0$.\qed\
+\end{proof}
+
+\begin{eg}
+  Consider $(\mathbb{R}^n, \norm\cdot_p)$, with $1 \leq p \leq \infty$. Let $\{ \vec{x}_k \} = \{ (x_{k, 1}, x_{k, 2}, \ldots, x_{k, n}) \}$ be Cauchy in $(\mathbb{R}^n, \norm\cdot_p)$. \\
+  \noindent$\because \abs{x_{k, j} - x_{m, j} } \leq \norm{\vec{x}_k - \vec{x}_m}_p$ \\
+  $\implies \{ x_{k, j} \}$ is Cauchy for each $j = 1, \ldots, n$ \\
+  $\implies x_{k, j} \to x_{0, j}$ for each $j = 1, \ldots, n \; \because$ \cref{thm:convergent_cauchy_subsequences} \\
+  $\implies \vec{x}_k \to \vec{x}_0 = (x_{0, 1}, x_{0, 2}, \ldots, x_{0, n})$ \\
+  $\implies (\mathbb{R}, \norm\cdot_p)$ is complete.
+\end{eg}
+
+\begin{eg}
+  Let $(X, d)$ be discrete\sidenote{By discrete, we mean a discrete metric space, i.e. $d$ is a discrete metric.}. If $\{ x_n \}$ is Cauchy, then $\exists N_0 \in \mathbb{N}$ such that $\forall m, n \geq N_0$, we have $x_n = x_m$, i.e. $\{ x_n \}$ converges. Therefore, $(X, d)$ is complete.
+\end{eg}
+
+\begin{eg}[\imponote]
+  Let $X = \left\{ 1, \frac{1}{2}, \frac{1}{3}, \ldots, \frac{1}{n}, \ldots \right\} \subset \mathbb{R}$ with the induced standard metric. Recall that each of the singleton $\{ \frac{1}{n} \}$ is open.
+
+  Note that given $Y = \{ 1, 2, \ldots, n, \ldots \} = \mathbb{N}$ with the discrete metric, if we define $\phi : \mathbb{N} \to \left\{ 1, \frac{1}{2}, \ldots, \frac{1}{n}, \ldots \right\}$ by $\phi(n) = \frac{1}{n}$, then $\phi$ is a \hyperref[defn:homeomorphism]{homeomorphism}, and so $(Y, d)$, where $d$ is the discrete metric, is complete.
+
+  However, as shown before, since $\{ \frac{1}{n} \}$ is Cauchy but not convergent, $X = \left\{ 1, \frac{1}{2}, \ldots, \frac{1}{n}, \ldots \right\}$ is not complete.
+\end{eg}
+
+% subsection examples_of_complete_spaces (end)
+
+% section completeness_of_metric_spaces (end)
+
+% chapter lecture_19_oct_24th (end)
+
 \appendix
 
 \chapter{Useful Theorems from Earlier Calculus}%
