@@ -3,7 +3,7 @@
 
 \usepackage{classnotetitle}
 
-\title{PMATH433/733 - Model Theory and Set Theory}
+\title{PMATH433/733 --- Model Theory and Set Theory}
 \author{Johnson Ng}
 \subtitle{Classnotes for Fall 2018}
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
@@ -23,6 +23,9 @@
 \DeclareMathOperator{\Dom}{Dom }
 \DeclareMathOperator{\Img}{Im }
 \DeclareMathOperator{\Fun}{Fun }
+\DeclareMathOperator{\con}{con}
+\DeclareMathOperator{\fun}{fun}
+\DeclareMathOperator{\rel}{rel}
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -47,6 +50,8 @@
 This course has a ratio of about 1:3 for naive set theory to model theory.
 
 % chapter foreword (end)
+
+\part{Set Theory}
 
 \chapter{Lecture 1 Sep 06th}%
 \label{chp:lecture_1_sep_06th}
@@ -2190,7 +2195,7 @@ We can generalize the notions of cardinal sum and cardinal product. But first, a
   Note that $\underset{i \in I}{\times} X_i$ is properly defined, as
   \begin{align*}
     \underset_{i \in I}{\times} X_i &:= \{ (a_i : i \in I) \mid \forall i \in I, a_i \in X_i \} \\
-                                    &= \left\{ f : I \to \bigcup_{i \in I} X_i, f(i) = X_i \right\}.
+                                    &= \left\{ f : I \to \bigcup_{ i \in I } X_i, f(i) = X_i \right\}.
   \end{align*}
 \end{note}
 
@@ -2287,6 +2292,196 @@ It has been proven by Paul Cohen (1963)\cite{cohen1963} that the Continuum Hypot
 % section cardinals_continued_3 (end)
 
 % chapter lecture_10_oct_11th (end)
+
+\part{Model Theory}
+
+\chapter{Lecture 11 Oct 16th}%
+\label{chp:lecture_11_oct_16th}
+% chapter lecture_11_oct_16th
+
+The course will not cover for cofinality and coregularity, but it may be helpful to read through the material.
+
+\newthought{We shall} now venture into \hlnotea{Model Theory}.
+
+\section{First-order Logic}%
+\label{sec:first_order_logic}
+% section first_order_logic
+
+\subsection{Structure}%
+\label{sub:structure}
+% subsection structure
+
+\begin{defn}[Structure]\index{Structure}\label{defn:structure}
+  A structure $\mathcal{M}$ consists of the following data:
+  \begin{enumerate}
+    \item A non-empty set $M$, called the \hldefn{universe} of $\mathcal{M}$;
+    \item A sequence $(c_i: i \in I_{\con})$, where $I_{\con}$ is an $I$-sequence of constants, of distinguished elements of $M$, called the \hldefn{constants} of $\mathcal{M}$;
+    \item A sequence of $M$-valued functions on powers of $M$,
+      \begin{equation*}
+        ( f_i : M^{n_i} \to M : i \in I_{\fun} ),
+      \end{equation*}
+      called the \hldefn{basic functions} of $\mathcal{M}$, and for each $i \in I_{\fun}$, $n_i < \omega$ is called the \hldefn{arity} of $f_i$;
+    \item A sequence of subsets of powers of $M$,
+      \begin{equation*}
+        ( R_i \subset M^{m_i} : i \in I_{\rel} )
+      \end{equation*}
+      called the \hldefn{basic relations} of $\mathcal{M}$, and for each $i \in I_{\rel}$, $m_i < \omega$ is called the \hldefn{arity} of $R_i$.
+  \end{enumerate}
+\end{defn}
+
+\begin{note}
+  \begin{enumerate}
+    \item Note that we defined $M \neq \emptyset$, as there is nothing too interesting to study from an empty universe.
+    \item Also, note that we shall always use the corresponding capital alphabet as the universe of the structure (e.g. the universe of the structure $\mathcal{M}$ is $M$).
+    \item While $M \neq \emptyset$, we allow $I_{\con}, I_{\fun}$ and $I_{\rel}$ to be $\emptyset$. In such a case, the structure that we have is about a \hlnotea{pure set}.
+    \item If $f$ is a $0-$ary basic function, then we have
+      \begin{equation*}
+        f : M^0 \to M.
+      \end{equation*}
+      By convention, we have that $M^0 = 1 = \{ 0 \}$, and so we have $f(0) \in M$. Thus, such an $f$ is ``essentially'' a basic constant. Therefore, we shall usually assume that the arity of $f$ is strictly positive.
+  \end{enumerate}
+\end{note}
+
+\begin{eg}
+  Consider $\mathbb{R}$, the set of real numbers\sidenote{We did not construct $\mathbb{R}$ in our section on Set Theory. I may write up a full construction from $\mathbb{N}$ to $\mathbb{R}$ on my site.}. The following are some of the structures that we can study on $\mathbb{R}$:
+  \begin{enumerate}
+    \item as a pure set: $\mathcal{R} = \mathbb{R}$, with $I_{\con} = I_{\fun} = I_{\rel} = \emptyset$.
+    \item as an ordered set: $\mathcal{R} = (\mathbb{R}, <)$, with the basic \hlnotec{binary} relation $<$, and no basic functions or constants.
+    \item as an additive group: $\mathcal{R} = (\mathbb{R}, 0, +, -)$, with
+      \begin{itemize}
+        \item $0$ as a constant;
+        \item $+$ as a basic \hlnotec{binary} function; and
+        \item $-$ as a basic \hlnotec{unary} function.
+      \end{itemize}
+
+    \item as a ring: $\mathcal{R} = (\mathbb{R}, 0, 1, +, -, \cdot)$.
+    \item as a $\mathbb{Q}$-vector space: $\mathcal{R} = (\mathbb{R}, 0, +, -, (\lambda_q)_{q \in \mathbb{Q}})$, where $\lambda_q : \mathbb{R} \to \mathbb{R}$ is scalar multiplication by $q$.
+    \item as an ordered ring: $\mathcal{R} = ( \mathbb{R}, 0, 1, +, -, \cdot, < )$.
+  \end{enumerate}
+\end{eg}
+
+\begin{defn}[Expansion \& Reduct]\index{Expansion}\index{Reduct}\label{defn:expansion_n_reduct}
+  Suppose $\mathcal{M}$ and $\mathcal{N}$ are structures with the same universe. We say that $\mathcal{M}$ is an \hlnoteb{expansion} of $\mathcal{N}$ or that $\mathcal{N}$ is a \hlnoteb{reduct} of $\mathcal{M}$ if the basic constants, basic functions, and basic relations of $\mathcal{N}$ are contained in those of $\mathcal{M}$.
+\end{defn}
+
+\begin{eg}
+  \begin{itemize}
+    \item $(\mathbb{R}, 0, +, -)$ is a reduct of $(\mathbb{R}, 0, 1, +, -, \cdot)$;
+    \item $(\mathbb{R}, 0, 1, +, -, \cdot, <)$ is an expansion of $(\mathbb{R}, 0, 1, +, -, \cdot)$.
+  \end{itemize}
+\end{eg}
+
+% subsection structure (end)
+
+\subsection{Language}%
+\label{sub:language}
+% subsection language
+
+\begin{eg}
+  Consider the following 2 structures
+  \begin{gather*}
+    \mathcal{R} = ( \mathbb{R}, 0, +, - ) \\
+    \mathcal{Z} = \left( \faktor{\mathbb{Z}}{2 \mathbb{Z}}, 0, +, - \right)
+  \end{gather*}
+  Notice that the $0, +$ and $-$ do not not actually share the same meaning, since, e.g., $+$ in $\mathcal{R}$ is addition on the reals, while $+$ in $\mathcal{Z}$ is addition on the integers modulo $2$.
+\end{eg}
+
+\begin{defn}[Language]\index{Language}\label{defn:language}
+  A \hlnoteb{language} $\mathcal{L}$ consists of $3$ sets of symbols:
+  \begin{enumerate}
+    \item a set $\mathcal{L}^{\con}$ of constant symbols;
+    \item a set $\mathcal{L}^{\fun}$ of function symbols, where each function symbol comes with an arity, which is a natural number;
+    \item a set $\mathcal{L}^{\rel}$ of relation symbols, where each relation symbol comes with an arity, which is a natural number.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[$\mathcal{L}$-structure]\index{$\mathcal{L}$-structure}\label{defn:l_structure}
+  An \hlnoteb{$\mathcal{L}$-structure} is a structure $\mathcal{M}$ with bijections between
+  \begin{align*}
+    \mathcal{L}^{\con} \to I_{\con} \quad & \quad c \mapsto c^\mathcal{M} \\
+    \mathcal{L}^{\fun} \to I_{\fun} \quad & \quad f \mapsto f^\mathcal{M} \\
+    \mathcal{L}^{\rel} \to I_{\rel} \quad & \quad R \mapsto R^\mathcal{M}
+  \end{align*}
+  that preserves arity. We call
+  \begin{equation*}
+    c^{\mathcal{M}}, f^{\mathcal{M}}, \text{ and } R^{\mathcal{M}}
+  \end{equation*}
+  the \hldefn{interpretation} of $c, f, R$ in $\mathcal{M}$.
+\end{defn}
+
+So in our previous example, we have that $\mathcal{R}$ and $\mathcal{Z}$ are both $\mathcal{L}$-structures, where $\mathcal{L} = \{ 0, +, - \}$ is the language with
+\begin{itemize}
+  \item one constant symbol, $0$;
+  \item one binary function symbol, $+$;
+  \item one unary function symbol, $-$.
+\end{itemize}
+This particular language is often referred to as the \hlnotea{language of additive groups}, for obvious\sidenote{Obvious, if you have studied \href{https://tex.japorized.ink/PMATH347S18/classnotes.pdf}{Group Theory}.} reasons.
+
+\begin{remark}
+  \begin{itemize}
+    \item To be precise, we should really write
+      \begin{equation*}
+        \mathcal{R} = (\mathbb{R}, 0^\mathcal{R}, +^\mathcal{R}, -^\mathcal{R}),
+      \end{equation*}
+      so as to not obfuscate the symbols themselves and their interpretations in $\mathcal{R}$, but we shall forgive ourselves for this abuse of notation, for we shall leave this for the context to resolve this confusion.
+
+    \item Every group is naturally an $\mathcal{L}$-structure, where $\mathcal{L} = \{ 0, +, - \}$. The converse is definitely false. E.g. the following $\mathcal{L}$-structure
+      \begin{equation*}
+        \mathcal{M} = ( \mathbb{Z}, 0^\mathcal{M}, +^\mathcal{M}, -^\mathcal{M} )
+      \end{equation*}
+      given by
+      \begin{align*}
+        0^\mathcal{M} &= 12 \\
+        +^\mathcal{M} &: \mathbb{Z}^2 \to \mathbb{Z} \quad (a, b) \mapsto -2 \\
+        -^\mathcal{M} &: \mathbb{Z} \to \mathbb{Z} \quad a \mapsto 2^2
+      \end{align*}
+      is not a group, since there are no identities nor inverses. But it is indeed an $\mathcal{L}$-structure.
+  \end{itemize}
+\end{remark}
+
+\begin{eg}
+  Let $F$ be a field, and let $\mathcal{L}$ be the language of $F$-vector spaces, i.e.
+  \begin{align*}
+    \mathcal{L}^{\con} &= \{ 0 \} \\
+    \mathcal{L}^{\fun} &= \{ +, -, (\lambda_f)_{f \in F} \} \\
+    \mathcal{L}^{\rel} &= \emptyset
+  \end{align*}
+  where $+$ is a binary function, $-$ a unary function, and $\lambda_f$ a unary function for each $f \in F$. Then any $F$-vector spaces $V$ is an $\mathcal{L}$-structure:
+  \begin{itemize}[leftmargin=2.0cm,labelsep=0.5cm]
+    \item[$0$] is interpreted as the zero vector
+    \item[$+$] is interpreted as vector addition
+    \item[$-$] is interpreted as the additive inverse of a vector
+    \item[$\lambda_f$] is interpreted as scalar multiplication by $f$
+  \end{itemize}
+  The converse is, however, \hlimpo{not true}, and we shall study the reasons behind why this is not true later on.
+\end{eg}
+
+\begin{defn}[$\mathcal{L}$-Embedding]\index{$\mathcal{L}$-Embedding}\label{defn:l_embedding}
+  Suppose $\mathcal{L}$ is a language, and $\mathcal{M}$ and $\mathcal{N}$ are $\mathcal{L}$-structures. An \hlnoteb{$\mathcal{L}$-embedding}, $j : \mathcal{M} \to \mathcal{N}$, is an injective function $j : M \to N$ such that
+  \begin{enumerate}
+    \item $\forall c \in \mathcal{L}^{\con} \quad j(c^\mathcal{M}) = c^\mathcal{N}$;
+    \item $\forall f \in \mathcal{L}^{\fun}$ each with arity $n_f$, and $\forall a_1, \ldots, a_{n_f} \in M$, we have
+      \begin{equation*}
+        j\big( f^\mathcal{M}(a_1, \ldots, a_{n_f}) \big) = f^\mathcal{N} \big( j(a_1), \ldots, j(a_{n_f}) \big)
+      \end{equation*}
+    \item $\forall R \in \mathcal{L}^{\rel}$ each with arity $m_R$, and $\forall (a_1, \ldots, a_{m_R}) \in M^{m_R}$, we have
+      \begin{equation*}
+        (a_1, \ldots, a_{m_R}) \in R^\mathcal{M} \iff \big( j(a_1), \ldots, j(a_{m_R}) \big) \in R^\mathcal{N}.
+      \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Substructure]\index{Substructure}\label{defn:substructure}
+  Continuing with the above assumptions and notation, if $M \subseteq N$, then we say that $\mathcal{M}$ is a \hlnoteb{substructure} on $\mathcal{N}$ if the identity map $id : M \to N$ is an $\mathcal{L}$-embedding. We denote this notion, without confusion, by $\mathcal{M} \subset \mathcal{N}$.
+
+  We may also say that $\mathcal{N}$ is an \hldefn{extension} of $\mathcal{M}$.
+\end{defn}
+
+% subsection language (end)
+
+% section first_order_logic (end)
+
+% chapter lecture_11_oct_16th (end)
 
 \appendix
 
