@@ -23,6 +23,7 @@
 \DeclareMathOperator{\Dom}{Dom }
 \DeclareMathOperator{\Img}{Im }
 \DeclareMathOperator{\Fun}{Fun }
+\DeclareMathOperator{\Var}{Var }
 \DeclareMathOperator{\con}{con}
 \DeclareMathOperator{\fun}{fun}
 \DeclareMathOperator{\rel}{rel}
@@ -2406,7 +2407,7 @@ The course will not cover for cofinality and coregularity, but it may be helpful
   \begin{equation*}
     c^{\mathcal{M}}, f^{\mathcal{M}}, \text{ and } R^{\mathcal{M}}
   \end{equation*}
-  the \hldefn{interpretation} of $c, f, R$ in $\mathcal{M}$.
+  the \hldefn{Interpretation} of $c, f, R$ in $\mathcal{M}$.
 \end{defn}
 
 So in our previous example, we have that $\mathcal{R}$ and $\mathcal{Z}$ are both $\mathcal{L}$-structures, where $\mathcal{L} = \{ 0, +, - \}$ is the language with
@@ -2482,6 +2483,227 @@ This particular language is often referred to as the \hlnotea{language of additi
 % section first_order_logic (end)
 
 % chapter lecture_11_oct_16th (end)
+
+\chapter{Lecture 12 Oct 18th}%
+\label{chp:lecture_12_oct_18th}
+% chapter lecture_12_oct_18th
+
+\section{First-order Logic (Continued)}%
+\label{sec:first_order_logic_continued}
+% section first_order_logic_continued
+
+\subsection{Language (Continued)}%
+\label{sub:language_continued}
+% subsection language_continued
+
+\begin{note}
+  Notice that $\mathcal{L}$-structures $\mathcal{M} \subseteq \mathcal{N}$ iff
+  \begin{itemize}
+    \item $M \subseteq N$;
+    \item $\forall c \in \mathcal{L}^{\con} \quad c^\mathcal{M} = c^\mathcal{N}$;
+    \item $\forall f \in \mathcal{L}^{\fun}$, each with arity $n_f$, $f^\mathcal{M} = f^\mathcal{M} \restriction_{M^{n_f}}$;
+    \item $\forall R \in \mathcal{L}^{\rel}$, each with arity $m_R$, $R^\mathcal{M} \subseteq R^\mathcal{N} \cap M^{m_R}$.
+  \end{itemize}
+\end{note}
+
+\begin{ex}
+  Suppose $\mathcal{N}$ is an $\mathcal{L}$-structure with $A \subset N$, where $A \neq \emptyset$. Show that $A$ is the universe of some (unique) substructure of $\mathcal{N}$ iff
+  \begin{itemize}
+    \item $\forall c \in \mathcal{L}^{\con} \quad c^\mathcal{N} \in A$;
+    \item $\forall f \in \mathcal{L}^{\fun}$ that is $n$-ary, $f^\mathcal{N}(A^n) \subset A$.
+  \end{itemize}
+\end{ex}
+
+\newthought{The choice} of the language determine what the substructures are.
+
+\begin{eg}
+  The following is table showing an example of a substructure in the given structures:
+
+  \begin{tabular}{c | l}
+    \multicolumn{1}{l|}{Structure}                          & Substructures \\
+    \hline
+    $\mathbb{R}$                                            & all non-empty subsets \\
+    $(\mathbb{R}, 0, +)$                                    & all \href{https://en.wikipedia.org/wiki/Monoids}{submonoids} of $\mathbb{R}$ \footnotemark \\
+    $(\mathbb{R}, 0, +, -)$                                 & all subgroups \\
+    $(\mathbb{R}, 0, 1, +, -, \cdot)$                       & all subrings \\
+    $(\mathbb{R}, <)$                                       & all non-empty subsets with induced order \\
+    $(\mathbb{R}, 0, +, -, (\lambda_q)_{q \in \mathbb{Q}})$ & all $\mathbb{Q}$-subspaces
+  \end{tabular}
+  \footnotetext{Not that substructures of $(\mathbb{R}, 0, +)$ is not necessarily a group, and this is why we have always specified for $-$ for the language of additive groups. However, this is not necessary for the unique inverse in the language of fields, of which we shall clarify in a later section.}
+\end{eg}
+
+\begin{defn}[$\mathcal{L}$-isomorphism]\index{$\mathcal{L}$-isomorphism}\label{defn:l_isomorphism}
+  An $\mathcal{L}$-isomorphism is a surjective $\mathcal{L}$-embedding.
+\end{defn}
+
+\begin{ex}
+  Let $j : \mathcal{M} \to \mathcal{N}$ be an $\mathcal{L}$-embedding. Then $j$ induces an $\mathcal{L}$-isomorphism between $\mathcal{M}$ and a unique substructure $\mathcal{M}' \subseteq \mathcal{N}$.
+\end{ex}
+
+% subsection language_continued (end)
+
+\subsection{Terms \& Formulas}%
+\label{sub:terms_n_formulas}
+% subsection terms_n_formulas
+
+From hereon, we shall have the following countable infinite set,
+\begin{equation*}
+  \Var = \{ x_0, x_1, \ldots \},
+\end{equation*}
+which we shall call as our set of \hlnotea{variables}\sidenote{This is not to be confused with the \hlnotea{variance} in probability theory.}.
+
+\begin{defn}[$\mathcal{L}$-terms]\index{$\mathcal{L}$-terms}\label{defn:l_terms}
+  Let $\mathcal{L}$ be a language. The set of \hlnoteb{$\mathcal{L}$-terms} is the smallest set of strings of symbols from
+  \begin{equation*}
+    \mathcal{L} \cup \Var \cup \{ (, ) \} \cup \{ , \} \quad \footnotemark
+  \end{equation*}
+  \footnotetext{By $\{ (, ) \}$ and $\{ , \}$, we mean the punctuation symbols ``('', ``,'', ``)''.} satisfying
+  \begin{itemize}
+    \item every variable is an $\mathcal{L}$-term;
+    \item every constant of $\mathcal{L}^{\con}$ is also an $\mathcal{L}$-term;
+    \item \sidenote{This is a recursive formula.}if $t_1, t_2, \ldots, t_n$ are $\mathcal{L}$-terms and $f \in \mathcal{L}^{\fun}$ is $n$-ary, then $f(t_1, \ldots, t_n)$ is also an $\mathcal{L}$-term.
+  \end{itemize}
+  We often write a term $t$ as
+  \begin{equation*}
+    t = t(x_1, \ldots, x_n)
+  \end{equation*}
+  to mean that the variables in $t$ come from $\{ x_1, \ldots, x_n \}$.
+\end{defn}
+
+\begin{remark}
+  All $x_1, \ldots, x_n$ need not always appear in $t$.
+\end{remark}
+
+We shall use the following example to show another abuse of notation that we shall gladly do in this course:
+
+\begin{eg}
+  Let $\mathcal{L} = \{ 0, 1, +, -, \times \}$. The following is an $\mathcal{L}$-term:
+  \begin{equation*}
+    \times ( + ( x_0, - (x_1) ), \times ( 1, x_2 ) ).
+  \end{equation*}
+  It is fairly straightforward to verify that the above is indeed an $\mathcal{L}$-term: using items $(1)$, $(2)$ and $(3)$ in our \hyperref[defn:l_terms]{definition above}, by the given order,
+  \begin{enumerate}
+    \item all $x_0, x_1, 1, x_2$ are $\mathcal{L}$-terms by $(1)$ and $(2)$;
+    \item $-$ is a unary function, and so by $(3)$, we have that $-(x_1)$ is an $\mathcal{L}$-term;
+    \item $+$ is a binary function, and by $(3)$, we have that $+ ( x_0, - (x_1) )$ is an $\mathcal{L}$-term;
+    \item $\times$ is a binary function, and so by $(3)$, we have that $\times (1, x_2)$ is an $\mathcal{L}$-term;
+    \item finally, by $(3)$, $\times( + ( x_0, - (x_1) ), \times ( 1, x_2 ) )$ is an $\mathcal{L}$-term.
+  \end{enumerate}
+  We shall ``informally'' write this as
+  \begin{equation*}
+    (x_0 + (- x_1))(1 x_2).
+  \end{equation*}
+  Note that we do not simply write $x_2 = 1 x_2$, since we may not have that $1$ acts as a ``multiplicative identity'' of sorts, as we would have in a ring.
+\end{eg}
+
+\begin{defn}[Interpretation]\index{Interpretation}\label{defn:interpretation}
+  Suppose $\mathcal{M}$ is an $\mathcal{L}$-structure, and $t = t(x_1, \ldots, x_n)$ is an $\mathcal{L}$-term. We define the \hlnoteb{itnerpretation} of $t$ in $\mathcal{M}$ to be the function
+  \begin{equation*}
+    t^\mathcal{M} : M^n \to M,
+  \end{equation*}
+  defined recursively by
+  \begin{itemize}
+    \item If $t$ is $x_i$ for some $1 \leq i \leq n$, then
+      \begin{equation*}
+        t^\mathcal{M} : M^n \to M \quad (a_1, \ldots, a_n) \mapsto a_i.
+      \end{equation*}
+    \item If $t$ is $c$ for some $c \in \mathcal{L}^{\con}$, then
+      \begin{equation*}
+        t^\mathcal{M} : M^n \to M \quad (a_1, \ldots, a_n) \mapsto c^\mathcal{M}.
+      \end{equation*}
+    \item If $t$ is $f(t_1, \ldots, t_l)$, where $t_1, \ldots, t_l$ are $\mathcal{L}$-terms and $f$ is an $l$-ary function symbol, then $t^\mathcal{M} : M^n \to M$
+      \begin{equation*}
+        (a_1, \ldots, a_n) \mapsto f( t_1^\mathcal{M}(a_1, \ldots, a_n), t_2^\mathcal{M}(a_1, \ldots, a_n), \ldots, t_l^\mathcal{M}(a_1, \ldots, a_n) )
+      \end{equation*}
+  \end{itemize}
+\end{defn}
+
+\begin{note}
+  Note that the function $t^\mathcal{M}$ depends not just on $t$ but on its presentation $t = t(x_1, \ldots, x_n)$.
+\end{note}
+
+\begin{eg}
+  Let $\mathcal{L} = \{ 0, +, - \}$ and $\mathcal{R} = (\mathbb{R}, 0, +, -)$ an $\mathcal{L}$-structure. Let $t$ be the term $x \in \Var$. Then for $y \in \Var$, the following are some interpretations of $t$ in $\mathcal{R}$:
+  \begin{enumerate}
+    \item if $t = t(x)$, then we may interpret $t^\mathcal{R} : \mathbb{R} \to \mathbb{R}$ as the identity map, i.e. $r \mapsto r$;
+    \item if $t=  t(x, y)$, then we may interpret $t^\mathcal{R} : \mathbb{R}^2 \to \mathbb{R}$ as taking the first component of the tuple, i.e. $(a, b) \mapsto a$;
+    \item if $t = t(x, y)$, then we may interpret $t^\mathcal{R} : \mathbb{R}^2 \to \mathbb{R}$ as taking the second component of the tuple, i.e. $(a, b) \mapsto b$.
+  \end{enumerate}
+\end{eg}
+
+\begin{ex}
+  Prove the following: suppose $\mathcal{M}$ is an $\mathcal{L}$-structure, and $A \subseteq M$ such that $A \neq \emptyset$, then $A$ is the universe of the substructure iff $\forall t = t(x_1, \ldots, x_n)$ that are $\mathcal{L}$-terms, we have $t^\mathcal{M} (A^n) \subseteq A$.
+\end{ex}
+
+\begin{eg}
+  Let $\mathcal{L} = \{ 0, 1, +, -, \times \}$ and $\mathcal{Z} = (\mathbb{Z}, =, 1, + , -, \times)$. Let $P \in \mathbb{Z} [x]$ where $P$ is $x^2 +2y - 1$. Then let $t_P = t_P(x, y)$ be the $\mathcal{L}$-term
+  \begin{equation*}
+    x^2 + (y + y) + (-1).
+  \end{equation*}
+  Then the interpretation of $t_P$ is
+  \begin{equation*}
+    t_P^\mathcal{Z} : \mathbb{Z}^2 \to \mathbb{Z} \quad (a, b) \mapsto a^2 + 2b + 1.
+  \end{equation*}
+\end{eg}
+
+\begin{defn}[Atomic $\mathcal{L}$-Formulas]\index{Atomic $\mathcal{L}$-Formulas}\label{defn:atomic_l_formulas}
+  An \hlnoteb{atomic $\mathcal{L}$-formula} is a (finite) string of symbols from
+  \begin{equation*}
+    \mathcal{L} \cup \Var \cup \{ (, ) \} \cup \{ , \} \cup \{ = \}
+  \end{equation*}
+  of the form:
+  \begin{enumerate}
+    \item $(t = s)$ where $t, s$ are $\mathcal{L}$-terms;
+    \item $R(t_1, \ldots, t_l)$ where $t_1, \ldots, t_l$ are $\mathcal{L}$-terms, and $R \in \mathcal{L}^{\rel}$ with arity $l \in \omega$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[$\mathcal{L}$-formulas]\index{$\mathcal{L}$-formulas}\label{defn:l_formulas}
+  The set of \hlnotea{$\mathcal{L}$-formulas} is the smallest set of (finite) strings of symbols from
+  \begin{equation*}
+    \mathcal{L} \cup \Var \cup \{ (, ) \} \cup \{ , \} \cup \{ = \} \cup \{ \land, \lor, \neg, \exists, \forall \}
+  \end{equation*}
+  satisfying:
+  \begin{enumerate}
+    \item every atomic $\mathcal{L}$-formula is an $\mathcal{L}$-formula;
+    \item if $\phi, \psi$ are $\mathcal{L}$-formulae, then so is $(\phi \land \psi)$, $\neg \phi$, and $(\phi \lor \psi)$;
+    \item if $\phi$ is an $\mathcal{L}$-formula and $x \in \Var$, then $\exists x \phi$ and $\forall x \phi$ are $\mathcal{L}$-formulae.
+  \end{enumerate}
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item We shall use the following abbreviations:
+      \begin{itemize}
+        \item $\phi \rarrow \psi$ for $(\neg \phi \lor \psi)$;
+        \item $\phi \lrarrow \psi$ for $(\phi \rarrow \psi) \land (\psi \rarrow \phi)$.
+      \end{itemize}
+
+    \item We shall gleefully make the following abuse of notation: for the language $\mathcal{L} = \{ \times, < \}$, we write $x < y^2$ instead of $< ( x, \times (y, y) )$.
+  \end{enumerate}
+\end{remark}
+
+\begin{defn}[Bound and Free Variables]\index{Bound}\index{Free Variables}\label{defn:bound_and_free_variables}
+  Suppose $\phi$ is an $\mathcal{L}$-formula. An occurrence of a variable $x$ in $\phi$ is called \hlnoteb{bound} if it appears inside the scope of a quantifer (i.e. in the existence of $\exists$ and $\forall$). Otherwise, they are called \hlnoteb{free}.
+\end{defn}
+
+\begin{eg}
+  Let $\mathcal{L} = \{ \in \}$, and $x, y, z \in \Var$. The following is an $\mathcal{L}$-formula:
+  \begin{equation*}
+    (x \in y) \land \forall z \Big( ( z \in y ) \rarrow \big( ( z \in x ) \lor (z = x) \big) \Big)
+  \end{equation*}
+  We have that $x, y$ are the free variables while $z$ is bound.
+\end{eg}
+
+We write $\phi = \phi(x_1, \ldots, x_n)$ to mean that the free variables of $\phi$ come from $\{ x_1, \ldots, x_n \}$, but it is not necessary that all of the variables appear in the $\mathcal{L}$-formula.
+
+For the sake of convenience, we hall assume that no variable can be simultaneously bound and free in an $\mathcal{L}$-formula.
+
+% subsection terms_n_formulas (end)
+
+% section first_order_logic_continued (end)
+
+% chapter lecture_12_oct_18th (end)
 
 \appendix
 

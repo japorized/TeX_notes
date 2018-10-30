@@ -17,6 +17,7 @@
 \usepackage{ragged2e}
 \usepackage{etoolbox}
 \usepackage{amssymb}
+\usepackage{eso-pic}
 \usepackage{fontawesome}
 \usepackage{amsmath}
 \usepackage{mathrsfs}
@@ -301,6 +302,14 @@
   boxrule=0pt,leftrule=3pt,
   fontupper=\itshape
 }
+
+\providecommand{\parthook}{}
+\patchcmd{\part}{\thispagestyle}{\parthook\thispagestyle}{}{}
+\newcommand{\partimage}[2][]{% \parthook[<options>]{<image>}
+  \renewcommand{\parthook}{% Update \parthook
+    \AddToShipoutPictureBG*{% Add picture to background of THIS page only
+      \AtPageLowerLeft{\includegraphics[width=\paperwidth,height=\paperheight,#1]{#2}}}% Insert image
+    \renewcommand{\parthook}{}}}% Restore \parthook
 
 % ntheorem listtheorem style
 \makeatother
