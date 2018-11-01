@@ -2195,8 +2195,8 @@ We can generalize the notions of cardinal sum and cardinal product. But first, a
 \begin{note}
   Note that $\underset{i \in I}{\times} X_i$ is properly defined, as
   \begin{align*}
-    \underset_{i \in I}{\times} X_i &:= \{ (a_i : i \in I) \mid \forall i \in I, a_i \in X_i \} \\
-                                    &= \left\{ f : I \to \bigcup_{ i \in I } X_i, f(i) = X_i \right\}.
+    \underset{i \in I}{\times} X_i &:= \{ (a_i : i \in I) \mid \forall i \in I, a_i \in X_i \} \\
+                                    &= \left\{ f : I \to \bigcup_{i \in I} X_i, \, f(i) = X_i \right\}.
   \end{align*}
 \end{note}
 
@@ -2496,7 +2496,7 @@ This particular language is often referred to as the \hlnotea{language of additi
 \label{sub:language_continued}
 % subsection language_continued
 
-\begin{note}
+\begin{note}\label{note:interpretations_in_substructs}
   Notice that $\mathcal{L}$-structures $\mathcal{M} \subseteq \mathcal{N}$ iff
   \begin{itemize}
     \item $M \subseteq N$;
@@ -2705,6 +2705,293 @@ For the sake of convenience, we hall assume that no variable can be simultaneous
 
 % chapter lecture_12_oct_18th (end)
 
+\chapter{Lecture 13 Oct 23rd}%
+\label{chp:lecture_13_oct_23rd}
+% chapter lecture_13_oct_23rd
+
+\section{First-order Logic (Continued 2)}%
+\label{sec:first_order_logic_continued_2}
+% section first_order_logic_continued_2
+
+\subsection{Terms \& Formulas (Continued)}%
+\label{sub:terms_n_formulas_continued}
+% subsection terms_n_formulas_continued
+
+\begin{eg}
+  Let $\mathcal{L} = \{ 0, 1, +, -, \cdot \}$, and $x, y \in \Var$. We have that $x^2 = \cdot ( x, x )$ and $y$ are $\mathcal{L}$-terms. Given $\mathcal{R} = (\mathbb{R}, 0, 1, + , - , \cdot)$, we can interpret $x^2$, using $(x, y)$ as
+  \begin{equation*}
+    \left( x^2 \right)^{\mathcal{R}} : \mathbb{R} \to \mathbb{R} \text{ such that } (r, s) \mapsto r^2
+  \end{equation*}
+  and interpret $y$, using $(x, y)$ as
+  \begin{equation*}
+    y^\mathcal{R} : \mathbb{R} \to \mathbb{R} \text{ such that } (r, s) \mapsto s.
+  \end{equation*}
+  Now since $x^2$ and $y$ are $\mathcal{L}$-terms, we have that $x^2 = y$ is an \hlnotea{atomic formula}\sidenote{Atomic formulas are quantifier-free and so all the variables are free.}. In the $\mathcal{L}$-formula $\exists x (x^2 = y)$, the only free variable is $y$, which is not ``specified'' by a quantifier.\marginnote{
+  \begin{remark}
+    Notice that an $\mathcal{L}$-formula with free variable say something about the free variabe. In our example of $\exists x (x^2 = y)$, the $\mathcal{L}$-formula ``says'' that $y$ has a square root.
+
+    In the $\mathcal{L}$-formula $\forall y \; \exists x (x^2 = y)$, the meaning is different: it ``says'' that every element (in $\mathbb{R}$) has a square root. This is an important observation for the next definition.
+  \end{remark}}
+
+  On the other hand, for the $\mathcal{L}$-formula $\forall y ; \exists x (x^2 = y)$, both $x$ and $y$ are bound.
+\end{eg}
+
+\begin{defn}[$\mathcal{L}$-Sentences]\index{$\mathcal{L}$-Sentences}\label{defn:;_sentences}
+  An $\mathcal{L}$-formula with no free variable is called an \hlnoteb{$\mathcal{L}$-sentence}.\marginnote{
+\begin{mnote}
+  An $\mathcal{L}$-sentence has a truth value.
+\end{mnote}}
+\end{defn}
+
+\begin{defn}[Satisfaction / Realization]\index{Satisfaction}\index{Realization}\label{defn:satisfaction_realization}
+  Given a language $\mathcal{L}$ and an $\mathcal{L}$-structure $\mathcal{M}$, for some $n < \omega$, let
+  \begin{equation*}
+    \phi = \phi(x_1, \ldots, x_n)
+  \end{equation*}
+  be an $\mathcal{L}$-formula\sidenote{If $n = 0$, then $\phi$ is simply an $\mathcal{L}$-sentence.}, $\bar{a} = (a_1, \ldots, a_n) \in M^n$ and $\bar{x} = (x_1, \ldots x_n)$.
+
+  We define that $\bar{a}$ \hlnoteb{satisfies} (or \hlnoteb{realizes}) the formula $\phi(\bar{x})$ in $\mathcal{M}$ \sidenote{We may also say that $\phi(\bar{a})$ is true in $\mathcal{M}$.}, of which we denote by $\mathcal{M} \models \phi(\bar{a})$, through the following recursive definition, which we iterate on the complexity of the formula $\phi(\bar{x})$:\marginnote{Notice that in the recursive definition, we start with \hlnotea{atomic $\mathcal{L}$-formulas} first before going to the \hlnotea{$\mathcal{L}$-formulas}.}
+  \begin{enumerate}
+    % for basic atomic formulas
+    \item If $\phi(\bar{x})$ is of the form $t_1 = t_2$, where
+      \begin{equation*}
+        t_1 = t_1(\bar{x}) \text{ and } t_2 = t_2(\bar{x})
+      \end{equation*}
+      are $\mathcal{L}$-terms, then
+      \begin{equation*}
+        \mathcal{M} \models \phi(\bar{a}) \text{ if } t_1^\mathcal{M} (\bar{a}) = t_2^\mathcal{M} (\bar{a}),
+      \end{equation*}
+      where $t_1^\mathcal{M}$ and $t_2^\mathcal{M}$ are realizations of $t_1$ and $t_2$ in $\mathcal{M}$, respectively.
+
+    % for atomic formulas that uses a relation symbol
+    \item If $\phi(\bar{x})$ is of the form
+      \begin{equation*}
+        R(t_1, \ldots, t_l), \text{ where } t_i = t_i(\bar{x}) \text{ are } \mathcal{L}\text{-terms}, \; R \in \mathcal{L}^{\rel}
+      \end{equation*}
+      with arity $l < \omega$, then we define $\mathcal{M} \models \phi(\bar{a})$ if
+      \begin{equation*}
+        \big(t_1^\mathcal{M} (\bar{a}), \, t_2^\mathcal{M} (\bar{a}), \, \ldots, \, t_l^\mathcal{M} (\bar{a}) \big) \in R^\mathcal{M} \subseteq \mathcal{M}^l
+      \end{equation*}
+
+    % for formulas with the logic operator and
+    \item If $\phi(\bar{x})$ is of the form
+      \begin{equation*}
+        \phi_1(\bar{x}) \land \phi_2(\bar{x}),
+      \end{equation*}
+      where $\phi_1(\bar{x}), \phi_2(\bar{x})$ are known $\mathcal{L}$-formulas, then we define
+      \begin{equation*}
+        \mathcal{M} \models \phi(\bar{a}) \iff \mathcal{M} \models \phi_1(\bar{a}) \land \mathcal{M} \models \phi_2(\bar{a}).
+      \end{equation*}
+
+    % for formulas with the logic operator or
+    \item If $\phi(\bar{x})$ is of the form
+      \begin{equation*}
+        \phi_1(\bar{x}) \lor \phi_2(\bar{x}),
+      \end{equation*}
+      where $\phi_1(\bar{x}), \phi_2(\bar{x})$ are known $\mathcal{L}$-formulas, then we define
+      \begin{equation*}
+        \mathcal{M} \models \phi(\bar{a}) \iff \mathcal{M} \models \phi_1(\bar{a}) \lor \mathcal{M} \models \phi_2(\bar{a}).
+      \end{equation*}
+
+    % for formulas with the negation operator
+    \item If $\phi(\bar{x})$ is of the form
+      \begin{equation*}
+        \neg \psi(\bar{x}),
+      \end{equation*}
+      where $\psi(\bar{x})$ is a known $\mathcal{L}$-formula, then we define\sidenote{Here, we conveniently assumed the \href{https://en.wikipedia.org/wiki/Law_of_excluded_middle}{Law of Excluded Middle}.}
+      \begin{equation*}
+        \mathcal{M} \models \phi(\bar{a}) \iff \text{ it is not the case that } \mathcal{M} \models \phi(\bar{a}),
+      \end{equation*}
+      of which the latter shall be denoted as $\mathcal{M} \not\models \psi(\bar{a})$.
+
+    % for formulas with the existential quantifier
+    \item If $\phi(\bar{x})$ is of the form
+      \begin{equation*}
+        \exists y \psi(\bar{x}, y),
+      \end{equation*}
+      where $\psi(\bar{x}, y)$ is an $\mathcal{L}$-formula, and $y$ a (single) variable, then we define
+      \begin{equation*}
+        \mathcal{M} \models \phi(\bar{a}) \iff \text{ there exists } b \in M \text{ such that } \mathcal{M} \models \psi(\bar{a}, b).
+      \end{equation*}
+
+    % for formulas with the universal quantifier
+    \item If $\phi(\bar{x})$ is of the form
+      \begin{equation*}
+        \forall y \psi(\bar{x}, y),
+      \end{equation*}
+      where $\psi(\bar{x}, y)$ is an $\mathcal{L}$-formula, and $y$ a (single) variable, then we define
+      \begin{equation*}
+        \mathcal{M} \models \phi(\bar{a}) \iff \text{ for every} b \in M \text{ such that } \mathcal{M} \models \psi(\bar{a}, b).
+      \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+\begin{note}
+  The \hlnotea{set of all realizations} of an $\mathcal{L}$-formula $\phi$ in the $\mathcal{L}$-structure $\mathcal{M}$ is denoted as
+  \begin{equation*}
+    \phi^\mathcal{M} := \{ \bar{a} \in M^n : \mathcal{M} \models \phi(\bar{a}) \}.
+  \end{equation*}
+  We may also call this set the \hlnotea{subset of $M^n$ defined by $\phi$}. 
+\end{note}
+
+Finally, we can define \hlnotea{definability}.
+
+\begin{defn}[$\mathcal{L}$-Definable]\index{$\mathcal{L}$-Definable}\label{defn:l_definable}
+  A subset $S \subset M^n$ is said to be \hlnoteb{$\mathcal{L}$-definable} if $S = \phi^\mathcal{M}$ for some $\mathcal{L}$-formula $\phi = \phi(\bar{x}) = \phi(x_1, \ldots, x_n)$.
+\end{defn}
+
+\begin{remark}
+  If $n = 0$, we have that $\phi$ is an $\mathcal{L}$-sentence, and since $M^0 = 1 = \{ 0 \}$, there are two possible scenarios and that is
+  \begin{equation*}
+    \text{ either } \mathcal{M} \models \phi \text{ or } \mathcal{M} \models \neg \phi.
+  \end{equation*}
+  Notice that $\phi^\mathcal{M}$ is either $1 = \{ 0 \}$ or $0 = \emptyset$.
+\end{remark}
+
+\begin{eg}
+  Let $\mathcal{L} = \{ 0, 1, +, -, \times \}$, $\psi(x, y)$ be the atomic $\mathcal{L}$-formula $x^2 = y$, and $\phi(y)$ be the $\mathcal{L}$-formula $\exists x (x^2 = y)$. It is clear that we can also write $\phi(y) = \exists x \psi(x, y)$.
+
+  Let $\mathcal{R} = (\mathbb{R}, 0, 1, +, -, \times)$. We have that
+  \begin{equation*}
+    \mathcal{R} \models \neg \phi(-1) \text{ and } \mathcal{R} \models \phi(2).
+  \end{equation*}
+  In fact, $\phi^\mathcal{R} = \mathbb{R}_{\geq 0} \subseteq \mathbb{R}$.
+
+  On the other hand, for the $\mathcal{L}$-structure $\mathcal{Q} = (\mathbb{Q}, 0, 1, +, -, \times)$, we have that
+  \begin{equation*}
+    \mathcal{Q} \models \neg \phi(-1) \text{ and } \mathcal{Q} \models \neg \phi(2).
+  \end{equation*}
+  It is worth noting that
+  \begin{equation*}
+    \phi^\mathcal{Q} = \left\{ \frac{n^2}{m^2} : n, m < \omega, \, m \neq 0 \right\} \subseteq \mathbb{Q}.
+  \end{equation*}
+
+  For the $\mathcal{L}$-structure $\mathcal{C} = (\mathbb{C}, 0, 1, +, -, \times)$, we have that $\phi^\mathcal{C} = \mathbb{C}$, or we may also write that $\mathcal{C} \models \forall y \; \phi (y)$ \sidenote{We may further simplify our notations by letting
+  \begin{equation*}
+    \sigma = \forall y \exists x (x^2 = y),
+  \end{equation*}
+  which we can then simply write $\mathcal{C} \models \sigma$.}.
+\end{eg}
+
+\begin{eg}
+  Consider the same language as in the last example, and let $\phi(y, z) = \exists x (x^2 = y - z)$. In the $\mathcal{L}$-structure $\mathcal{R} = (\mathbb{R}, 0, 1, +, -, \times)$, it is clear that
+  \begin{equation*}
+    \phi^\mathcal{R} = \left\{ (a, b) \in \mathbb{R}^2 : b \leq a \right\} \subseteq \mathbb{R}^2,
+  \end{equation*}
+  and we observe that the set of solutions is also the binary relation $\geq$, i.e. $\geq$ is definable in the $\mathcal{L}$-structure $\mathcal{R}$.
+
+  Similarly so, we can show that $\leq$ is $\mathcal{L}$-definable in $\mathcal{R}$. \sidenote{In other words, this example shows to us that we can define $\leq$ and $\geq$ using just the symbols $=$ and $-$.}
+\end{eg}
+
+\begin{propo}[Structure Traversal with respect to Quantifiers]\label{propo:structure_traversal_with_respect_to_quantifiers}
+  Let $\mathcal{M} \subseteq \mathcal{N}$ be $\mathcal{L}$-structures, where $\mathcal{M}$ is the $\mathcal{L}$-substructure, and variables $\bar{x} = (x_1, \ldots, x_n)$. Let $\phi(\bar{x})$ be an $\mathcal{L}$-formula, and $\bar{a} = (a_1, \ldots, a_n) \in M^n$.
+  Then
+  \begin{enumerate}
+    \item if $\phi$ is a \hlnotea{quantifier-free} formula, then
+      \begin{equation*}
+        \mathcal{M} \models \phi(\bar{a}) \iff \mathcal{N} \models \phi(\bar{a}).
+      \end{equation*}
+    \item if $\phi$ is \hlnotea{universal}, i.e. $\phi(\bar{x})$ is of the form
+      \begin{equation*}
+        \forall y_1 \forall y_2 \hdots \forall y_m \psi(\bar{x}, y_1, y_2, \ldots, y_m),
+      \end{equation*}
+      where $\psi$ is quantifier-free, then
+      \begin{equation*}
+        \mathcal{M} \models \phi(\bar{a}) \impliedby \mathcal{N} \models \phi(\bar{a}).
+      \end{equation*}
+    \item if $\phi$ is \hlnotea{existential}, i.e. $\phi(\bar{x})$ is of the form
+      \begin{equation*}
+        \exists y-1 \exists y_2 \hdots \exists y_m \psi(\bar{x}, y_1, y-2, \ldots, y_m),
+      \end{equation*}
+      where $\psi$ is quantifer-free, then
+      \begin{equation*}
+        \mathcal{M} \models \phi(\bar{a}) \implies \mathcal{N} \models \phi(\bar{a}).
+      \end{equation*}
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \marginnote{I shall directly quote from the course notes from Professor \citeauthor{rahim}:
+
+  \begin{quotebox}{base16-eighties-magenta}
+    This proposition has a very typical proof. In order to prove something about all
+formulas one usually has to begin by proving something about terms and then proceeding by
+induction on the complexity of the formula. The result about terms is itself usually proved
+by induction on the complexity of the term.
+  \end{quotebox}}
+  \begin{enumerate}
+    \item \hlbnoted{Claim}: We shall first show that if $t(\bar{x})$ is an $\mathcal{L}$-term, then $t^\mathcal{M} = t^\mathcal{N} \restriction_{M^n}$. We shall prove this claim by using induction on the complexity of $t$.
+      \begin{itemize}
+        \item If $t$ is a variable $x_i$, then we have
+          \begin{gather}
+            t^\mathcal{M} : M^n \to M \text{ given by } (a_1, \ldots, a_n) \mapsto a_i \label{eq:strcttrav_qf_1}\\
+            t^\mathcal{N} : N^n \to N \text{ given by } (b_1, \ldots, b_n) \mapsto b_i \nonumber
+          \end{gather}
+          Since $M^n \subseteq N^n$, we have that the restriction of $t^\mathcal{N}$ to $M^n$ will give us \eqref{eq:strcttrav_qf_1}.
+        \item If $t$ is a constant symbol, i.e. some $c \in \mathcal{L}^{\con}$, then we simply have $c^\mathcal{M} = c^\mathcal{N}$, for $M \subseteq N$.
+        \item If $t$ is $f(t_1, \ldots t_l)$, where $f \in \mathcal{L}^{\fun}$, where $t_1, \ldots, t_l$ are $\mathcal{L}$-terms, then
+          \begin{align*}
+            t^\mathcal{M}(\bar{a}) &= f^\mathcal{M} \big( t_1^\mathcal{M}(\bar{a}), \ldots, t_l^\mathcal{M}(\bar{a}) \big) \\
+                                   &= f^\mathcal{M} \big( t_1^\mathcal{N}(\bar{a}), \ldots, t_l^\mathcal{N}(\bar{a}) \big) \quad \because \text{ IH } \\
+                                   &= f^\mathcal{N} \big( t_1^\mathcal{N}(\bar{a}), \ldots, t_l^\mathcal{N}(\bar{a}) \big) \quad \because \text{ note on page } \pageref{note:interpretations_in_substructs} \\
+                                   &= t^\mathcal{N} (\bar{a}).
+          \end{align*}
+          Therefore $t^\mathcal{N} \restriction_{M^n} = t^\mathcal{M}$ as claimed $\dashv$.
+
+          Now to prove our original statement. We shall prove the statement by performing induction on $\phi$.
+          \begin{itemize}
+            \item \hlbnotea{$\phi(\bar{x})$ is $t_1 = t_2$}: We have
+              \begin{align*}
+                \mathcal{M} \models \phi(\bar{a}) &\overset{\text{defn}}{\iff} t_1^\mathcal{M} (\bar{a}) = t_2^\mathcal{M} (\bar{a}) \\
+                                                  &\overset{\text{claim}}{\iff} t_1^\mathcal{N} (\bar{a}) = t_2^\mathcal{N} (\bar{a}) \\
+                                                  &\overset{\text{defn}}{\iff} \mathcal{N} \models \phi(\bar{a}).
+              \end{align*}
+
+            \item \hlbnotea{$\phi(\bar{x})$ is $R(t_1, \ldots t_l)$}: Observe that
+              \begin{align*}
+                \mathcal{M} \models \phi(\bar{a}) &\overset{\text{defn}}{\iff} \big( t_1^\mathcal{M} (\bar{a}), \ldots, t_l^\mathcal{M} (\bar{a}) \big) \in R^\mathcal{M} \\
+                                                  &\overset{\text{claim}}{\iff} \big( t_1^\mathcal{N} (\bar{a}), \ldots, t_l^\mathcal{N} (\bar{a}) \big) \in R^\mathcal{M} \\
+                                                  &\iff \big( t_1^\mathcal{N} (\bar{a}), \ldots, t_l^\mathcal{N} (\bar{a}) \big) \in R^\mathcal{N} \enspace \because R^\mathcal{M} = R^\mathcal{N} \cap M^l \\
+                                                  &\overset{\text{defn}}{\iff} \mathcal{N} \models \phi(\bar{a}).
+              \end{align*}
+            From this part onwards, suppose $\phi_1, \phi_2$ are quantifier-free $\mathcal{L}$-formulas.
+
+            \item \hlbnotea{$\phi(\bar{x}) = \phi_1(\bar{x}) \lor \phi_2(\bar{x})$}: We have
+              \begin{align*}
+                \mathcal{M} \models \phi(\bar{a}) &\iff \mathcal{M} \models \phi(\bar{a}) \text{ or } \mathcal{M} \models \phi_2(\bar{a}) \\
+                                                  &\iff \mathcal{N} \models \phi(\bar{a}) \text{ or } \mathcal{N} \models \phi_2(\bar{a}) \enspace \because \text{ IH } \\
+                                                  &\iff \mathcal{N} \models \phi(\bar{a}).
+              \end{align*}
+
+            \item \hlbnotea{$\phi(\bar{x}) = \phi_1(\bar{x}) \land \phi_2(\bar{x})$}: We have
+              \begin{align*}
+                \mathcal{M} \models \phi(\bar{a}) &\iff \mathcal{M} \models \phi_1(\bar{a}) \text{ and } \mathcal{M} \models \phi_2(\bar{a}) \\
+                                                  &\iff \mathcal{N} \models \phi_1(\bar{a}) \text{ and } \mathcal{N} \models \phi_2(\bar{a}) \enspacee \because \text{ IH } \\
+                                                  &\iff \mathcal{N} \models \phi(\bar{a}).
+              \end{align*}
+
+            \item \hlbnotea{$\phi(\bar{x}) = \neg \phi_1(\bar{x})$}: We have
+              \begin{align*}
+                \mathcal{M} \models \phi(\bar{a}) &\iff \mathcal{M} \not\models \phi_1(\bar{a}) \\
+                                                  &\iff \mathcal{N} \not\models \phi_1(\bar{a}) \quad \because \text{ IH } \\
+                                                  &\iff \mathcal{N} \models \phi(\bar{a}).
+              \end{align*}
+          \end{itemize}
+          There is no need to check for cases where $\phi$ is universal or existential, since our assumption is that $\phi$ is quantifier-free. This completes the proof.
+      \end{itemize}
+  \end{enumerate}
+\end{proof}
+
+\begin{ex}
+  Prove (2) and (3) of \cref{propo:structure_traversal_with_respect_to_quantifiers}.
+\end{ex}
+
+% subsection terms_n_formulas_continued (end)
+
+% section first_order_logic_continued_2 (end)
+
+% chapter lecture_13_oct_23rd (end)
+
 \appendix
 
 \backmatter\
@@ -2716,4 +3003,3 @@ For the sake of convenience, we hall assume that no variable can be simultaneous
 \printindex
 
 \end{document}
-
