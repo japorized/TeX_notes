@@ -43,22 +43,25 @@
   \WarningFilter*{latex}{Marginpar on page \thepage\space moved}
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
-\usepackage{longtable}
+\usepackage{longtable,booktabs}
 \usepackage[amsmath,hyperref]{ntheorem}
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
 
 % xcolor (scheme: base16 eighties)
-\definecolor{base16-eighties-dark}{HTML}{2D2D2D}
-\definecolor{base16-eighties-light}{HTML}{D3D0C8}
-\definecolor{base16-eighties-magenta}{HTML}{CD98CD}
-\definecolor{base16-eighties-red}{HTML}{F47678}
-\definecolor{base16-eighties-yellow}{HTML}{E2B552}
-\definecolor{base16-eighties-green}{HTML}{98CD97}
-\definecolor{base16-eighties-lightblue}{HTML}{61CCCD}
-\definecolor{base16-eighties-blue}{HTML}{6498CE}
-\definecolor{base16-eighties-brown}{HTML}{D47B4E}
-\definecolor{base16-eighties-gray}{HTML}{747369}
+\definecolor{dark}{HTML}{2D2D2D}
+\definecolor{light}{HTML}{D3D0C8}
+\definecolor{be-red}{HTML}{F47678}
+\definecolor{be-green}{HTML}{98CD97}
+\definecolor{be-yellow}{HTML}{E2B552}
+\definecolor{be-blue}{HTML}{6498CE}
+\definecolor{be-magenta}{HTML}{CD98CD}
+\definecolor{be-cyan}{HTML}{61CCCD}
+\definecolor{be-gray}{HTML}{747369}
+\definecolor{be-brown}{HTML}{D47B4E}
+
+% \definecolor{dark}{HTML}{FFF3CB}
+% \definecolor{light}{HTML}{010101}
 
 % hyperref Package Settings
 \hypersetup{
@@ -67,7 +70,7 @@
     pdfmenubar=false,        % show Acrobat’s menu?
     pdffitwindow=true,     % window fit to page when opened
     colorlinks=true,
-    allcolors=base16-eighties-magenta,
+    allcolors=be-magenta,
 }
 
 % tikz
@@ -127,183 +130,183 @@
 \theorembodyfont{\it}
 
     % definition env
-\theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
-\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
+\theoremheaderfont{\color{be-blue}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem{defn}{\faBook \enspace Definition}
 
     % definition env no num
-\theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
-\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
+\theoremheaderfont{\color{be-blue}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem*{defnnonum}{\faBook \enspace Definition}
 
-\theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt width \marginparwidth}}
-\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-blue}{\hrule height 2pt width \marginparwidth}}
+\theoremheaderfont{\color{be-blue}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-blue}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem{margindefn}[defn]{\faBook \enspace Definition}
 
-\theoremprework{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
-\theoremheaderfont{\color{base16-eighties-blue}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-blue}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
+\theoremheaderfont{\color{be-blue}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem*{margindefnnonum}{\faBook \enspace Definition}
 
     % theorem envs
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
-\theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
+\theoremheaderfont{\color{be-magenta}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem{thm}{\faCoffee \enspace Theorem}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem{propo}[thm]{\faTint \enspace Proposition}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem{crly}[thm]{\faSpaceShuttle \enspace Corollary}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem{lemma}[thm]{\faTree \enspace Lemma}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem{axiom}[thm]{\faShield \enspace Axiom}
 
     % theorem envs without counter
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
-\theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
+\theoremheaderfont{\color{be-magenta}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem*{thmnonum}{\faCoffee \enspace Theorem}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem*{propononum}{\faTint \enspace Proposition}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem*{crlynonum}{\faSpaceShuttle \enspace Corollary}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem*{lemmanonum}{\faTree \enspace Lemma}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem*{axiomnonum}{\faShield \enspace Axiom}
 
     % envs on margins
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
-\theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremheaderfont{\color{be-magenta}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem{marginthm}{\faCoffee \enspace Theorem}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem{marginpropo}[thm]{\faTint \enspace Proposition}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem{margincrly}[thm]{\faSpaceShuttle \enspace Corollary}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem{marginlemma}[thm]{\faTree \enspace Lemma}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem{marginaxiom}[thm]{\faShield \enspace Axiom}
 
     % envs on margins without counter
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
-\theoremheaderfont{\color{base16-eighties-magenta}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremheaderfont{\color{be-magenta}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem*{marginthmnonum}{\faCoffee \enspace Theorem}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem*{marginpropononum}{\faTint \enspace Proposition}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem*{margincrlynonum}{\faSpaceShuttle \enspace Corollary}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem*{marginlemmanonum}{\faTree \enspace Lemma}
 
-\theoremprework{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
-\theorempostwork{\textcolor{base16-eighties-magenta}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
+\theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem*{marginaxiomnonum}{\faShield \enspace Axiom}
 
     % proof env
-\theoremprework{\textcolor{base16-eighties-brown}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-brown}{\hrule height 2pt width \textwidth}}
 \theorembodyfont{\normalfont}
-\theoremheaderfont{\color{base16-eighties-brown}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-brown}{\hrule height 2pt width \textwidth}}
+\theoremheaderfont{\color{be-brown}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-brown}{\hrule height 2pt width \textwidth}}
 \newtheorem*{proof}{\faPencil \enspace Proof}
 
     % note and notation env
 \theorembodyfont{\it}
 
-\theoremprework{\textcolor{base16-eighties-yellow}{\hrule height 2pt width \textwidth}}
-\theoremheaderfont{\color{base16-eighties-yellow}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-yellow}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-yellow}{\hrule height 2pt width \textwidth}}
+\theoremheaderfont{\color{be-yellow}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-yellow}{\hrule height 2pt width \textwidth}}
 \newtheorem*{note}{\faQuoteLeft \enspace Note}
 
-\theoremprework{\textcolor{base16-eighties-yellow}{\hrule height 2pt width \marginparwidth}}
-\theoremheaderfont{\color{base16-eighties-yellow}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-yellow}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-yellow}{\hrule height 2pt width \marginparwidth}}
+\theoremheaderfont{\color{be-yellow}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-yellow}{\hrule height 2pt width \marginparwidth}}
 \newtheorem*{mnote}{\faQuoteLeft \enspace Note}
 
-\theoremprework{\textcolor{base16-eighties-yellow}{\hrule height 2pt width \textwidth}}
-\theorempostwork{\textcolor{base16-eighties-yellow}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-yellow}{\hrule height 2pt width \textwidth}}
+\theorempostwork{\textcolor{be-yellow}{\hrule height 2pt width \textwidth}}
 \newtheorem*{notation}{\faPaw \enspace Notation}
 
     % warning env
-\theoremprework{\textcolor{base16-eighties-red}{\hrule height 2pt width \textwidth}}
-\theoremheaderfont{\color{base16-eighties-red}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-red}{\hrule height 2pt width \textwidth}}
+\theoremprework{\textcolor{be-red}{\hrule height 2pt width \textwidth}}
+\theoremheaderfont{\color{be-red}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-red}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem*{warning}{\faBug \enspace Warning}
 
-\theoremprework{\textcolor{base16-eighties-red}{\hrule height 2pt width \marginparwidth}}
-\theoremheaderfont{\color{base16-eighties-red}\normalfont\bfseries}
-\theorempostwork{\textcolor{base16-eighties-red}{\hrule height 2pt width \marginparwidth}}
+\theoremprework{\textcolor{be-red}{\hrule height 2pt width \marginparwidth}}
+\theoremheaderfont{\color{be-red}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-red}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
 \newtheorem*{marginwarning}{\faBug \enspace Warning}
 
 % more environments
-\newtcolorbox{quotebox}[1]{
+\newtcolorbox{quotebox}[2]{
   blanker,enhanced,breakable,standard jigsaw,
   opacityback=0,
-  coltext=base16-eighties-light,
+  coltext=\ifblank{#2}{dark}{#2},
   left=5mm,right=5mm,top=2mm,bottom=2mm,
-  colframe=\ifblank{#1}{base16-eighties-gray}{#1},
+  colframe=\ifblank{#1}{be-gray}{#1},
   boxrule=0pt,leftrule=3pt,
   fontupper=\itshape
 }
@@ -317,7 +320,6 @@
     \renewcommand{\parthook}{}}}% Restore \parthook
 
 % ntheorem listtheorem style
-\makeatother
 \newlength\widesttheorem
 \AtBeginDocument{
   \settowidth{\widesttheorem}{Proposition A.1.1.1\quad}
@@ -348,7 +350,6 @@
     \fi}
 }
 
-\makeatletter
 \def\thm@@thmline@noname#1#2#3#4{%
         \@dottedtocline{-2}{0em}{5em}%
                    {{\protect\numberline{#2}}#3}%
@@ -372,33 +373,32 @@
         \fi
     \fi}
 }
+\makeatother
 
-\theoremlisttype{allname}
-
-\AtBeginDocument{\renewcommand\contentsname{Table of Contents}}
+\AtBeginDocument{\renewcommand\contentsname{\slshape Table of Contents\normalfont}}
 \cftpagenumbersoff{part}
 
 % Heading formattings
 % chapter format
 \titleformat{\chapter}%
-  {\huge\rmfamily\itshape\color{base16-eighties-magenta}}% format applied to label+text
-  {\llap{\colorbox{base16-eighties-magenta}{\parbox{1.5cm}{\hfill\itshape\huge\textcolor{base16-eighties-dark}{\thechapter}}}}}% label
+  {\huge\rmfamily\itshape\color{be-magenta}}% format applied to label+text
+  {\llap{\colorbox{be-magenta}{\parbox{1.5cm}{\hfill\itshape\huge\textcolor{dark}{\thechapter}}}}}% label
   {5pt}% horizontal separation between label and title body
   {}% before the title body
   []% after the title body
 
 % section format
 \titleformat{\section}%
-  {\normalfont\Large\rmfamily\itshape\color{base16-eighties-blue}}% format applied to label+text
-  {\llap{\colorbox{base16-eighties-blue}{\parbox{1.5cm}{\hfill\itshape\textcolor{base16-eighties-dark}{\thesection}}}}}% label
+  {\normalfont\Large\rmfamily\itshape\color{be-blue}}% format applied to label+text
+  {\llap{\colorbox{be-blue}{\parbox{1.5cm}{\hfill\itshape\textcolor{dark}{\thesection}}}}}% label
   {5pt}% horizontal separation between label and title body
   {}% before the title body
   []% after the title body
 
 % subsection format
 \titleformat{\subsection}%
-  {\normalfont\large\itshape\color{base16-eighties-green}}% format applied to label+text
-  {\llap{\colorbox{base16-eighties-green}{\parbox{1.5cm}{\hfill\textcolor{base16-eighties-dark}{\thesubsection}}}}}% label
+  {\normalfont\large\itshape\color{be-green}}% format applied to label+text
+  {\llap{\colorbox{be-green}{\parbox{1.5cm}{\hfill\textcolor{dark}{\thesubsection}}}}}% label
   {1em}% horizontal separation between label and title body
   {}% before the title body
   []% after the title body
@@ -406,8 +406,8 @@
 % subsubsection format
 \titleclass{\subsubsection}{straight}
 \titleformat{\subsubsection}%
-  {\normalfont\large\itshape\color{base16-eighties-yellow}}% format applied to label+text
-  {\llap{\colorbox{base16-eighties-yellow}{\parbox{1.5cm}{\hfill\textcolor{base16-eighties-dark}{\thesubsubsection}}}}}% label
+  {\normalfont\large\itshape\color{be-yellow}}% format applied to label+text
+  {\llap{\colorbox{be-yellow}{\parbox{1.5cm}{\hfill\textcolor{dark}{\thesubsubsection}}}}}% label
   {1em}% horizontal separation between label and title body
   {}% before the title body
   []% after the title body
@@ -454,18 +454,18 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\quotient}[2]{\faktor{#1}{#2}}
 \newcommand{\cyclic}[1]{\left\langle #1 \right\rangle}
 	% highlighting shortcuts
-\newcommand{\hlimpo}[1]{\textcolor{base16-eighties-red}{\textbf{#1}}}
-\newcommand{\hlwarn}[1]{\textcolor{base16-eighties-yellow}{\textbf{#1}}}
-\newcommand{\hldefn}[1]{\textcolor{base16-eighties-blue}{\index{#1}\textbf{#1}}}
-\newcommand{\hlnotea}[1]{\textcolor{base16-eighties-green}{\textbf{#1}}}
-\newcommand{\hlnoteb}[1]{\textcolor{base16-eighties-lightblue}{\textbf{#1}}}
-\newcommand{\hlnotec}[1]{\textcolor{base16-eighties-brown}{\textbf{#1}}}
-\newcommand{\hlbnotea}[1]{\colorbox{base16-eighties-green!30!base16-eighties-dark}{\textbf{#1}}}
-\newcommand{\hlbnoteb}[1]{\colorbox{base16-eighties-lightblue!30!base16-eighties-dark}{\textbf{#1}}}
-\newcommand{\hlbnotec}[1]{\colorbox{base16-eighties-brown!30!base16-eighties-dark}{\textbf{#1}}}
-\newcommand{\hlbnoted}[1]{\colorbox{base16-eighties-magenta!30!base16-eighties-dark}{\textbf{#1}}}
-\newcommand{\WTP}{\textcolor{base16-eighties-brown}{WTP} }
-\newcommand{\WTS}{\textcolor{base16-eighties-brown}{WTS} }
+\newcommand{\hlimpo}[1]{\textcolor{be-red}{\textbf{#1}}}
+\newcommand{\hlwarn}[1]{\textcolor{be-yellow}{\textbf{#1}}}
+\newcommand{\hldefn}[1]{\textcolor{be-blue}{\index{#1}\textbf{#1}}}
+\newcommand{\hlnotea}[1]{\textcolor{be-green}{\textbf{#1}}}
+\newcommand{\hlnoteb}[1]{\textcolor{be-cyan}{\textbf{#1}}}
+\newcommand{\hlnotec}[1]{\textcolor{be-brown}{\textbf{#1}}}
+\newcommand{\hlbnotea}[1]{\colorbox{be-green!30!dark}{\textbf{#1}}}
+\newcommand{\hlbnoteb}[1]{\colorbox{be-cyan!30!dark}{\textbf{#1}}}
+\newcommand{\hlbnotec}[1]{\colorbox{be-brown!30!dark}{\textbf{#1}}}
+\newcommand{\hlbnoted}[1]{\colorbox{be-magenta!30!dark}{\textbf{#1}}}
+\newcommand{\WTP}{\textcolor{be-brown}{WTP} }
+\newcommand{\WTS}{\textcolor{be-brown}{WTS} }
 \newcommand{\ind}[2]{\Ind_{#2}\left( #1 \right)}
 \newcommand{\notimply}{\centernot\implies}
 \newcommand{\res}[2]{\underset{#2}{\Res} #1 }
@@ -501,5 +501,5 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \makeatother
 
 % Comment the two lines below if you want to print the document
-\pagecolor{base16-eighties-dark}
-\color{base16-eighties-light}
+\pagecolor{dark}
+\color{light}

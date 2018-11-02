@@ -32,17 +32,23 @@
 \hypersetup{pageanchor=false}
 \maketitle
 \hypersetup{pageanchor=true}
+\begin{fullwidth}
 \tableofcontents
+\end{fullwidth}
 
 \chapter*{\faBook \enspace List of Definitions}
 \addcontentsline{toc}{chapter}{List of Definitions}
-\theoremlisttype{all}
+\theoremlisttype{noname}
+\begin{fullwidth}
 \listtheorems{defn}
+\end{fullwidth}
 
 \chapter*{\faCoffee \enspace List of Theorems}
 \addcontentsline{toc}{chapter}{List of Theorems}
 \theoremlisttype{allname}
+\begin{fullwidth}
 \listtheorems{axiom,lemma,thm,crly,propo}
+\end{fullwidth}
 
 \chapter*{Foreword}%
 \label{chp:foreword}
@@ -183,7 +189,7 @@ With all of the above axioms, we can iteratively construct each and every natura
 
 It is tempting to simply take the infinitude of natural numbers simply as an axiom, i.e.
 
-\begin{quotebox}{base16-eighties-magenta}\label{sp:natural_numbers_axiom}
+\begin{quotebox}{be-magenta}{light}\label{sp:natural_numbers_axiom}
   There exists a set whose members are precisely the natural numbers.
 \end{quotebox}
 
@@ -380,7 +386,7 @@ Another useful axiom that we will use later is the following:
 
 \begin{note}
   The slogan for the Replacement Axiom is:
-  \begin{quotebox}{base16-eighties-red}
+  \begin{quotebox}{be-red}{light}
     The image of a set under a definite operation exists.
   \end{quotebox}
 \end{note}
@@ -2728,7 +2734,7 @@ For the sake of convenience, we hall assume that no variable can be simultaneous
   \end{equation*}
   Now since $x^2$ and $y$ are $\mathcal{L}$-terms, we have that $x^2 = y$ is an \hlnotea{atomic formula}\sidenote{Atomic formulas are quantifier-free and so all the variables are free.}. In the $\mathcal{L}$-formula $\exists x (x^2 = y)$, the only free variable is $y$, which is not ``specified'' by a quantifier.\marginnote{
   \begin{remark}
-    Notice that an $\mathcal{L}$-formula with free variable say something about the free variabe. In our example of $\exists x (x^2 = y)$, the $\mathcal{L}$-formula ``says'' that $y$ has a square root.
+    Notice that an $\mathcal{L}$-formula with free variable say something about the free variable. In our example of $\exists x (x^2 = y)$, the $\mathcal{L}$-formula ``says'' that $y$ has a square root.
 
     In the $\mathcal{L}$-formula $\forall y \; \exists x (x^2 = y)$, the meaning is different: it ``says'' that every element (in $\mathbb{R}$) has a square root. This is an important observation for the next definition.
   \end{remark}}
@@ -2913,7 +2919,7 @@ Finally, we can define \hlnotea{definability}.
 \begin{proof}
   \marginnote{I shall directly quote from the course notes from Professor \citeauthor{rahim}:
 
-  \begin{quotebox}{base16-eighties-magenta}
+  \begin{quotebox}{be-magenta}{light}
     This proposition has a very typical proof. In order to prove something about all
 formulas one usually has to begin by proving something about terms and then proceeding by
 induction on the complexity of the formula. The result about terms is itself usually proved
@@ -2966,7 +2972,7 @@ by induction on the complexity of the term.
             \item \hlbnotea{$\phi(\bar{x}) = \phi_1(\bar{x}) \land \phi_2(\bar{x})$}: We have
               \begin{align*}
                 \mathcal{M} \models \phi(\bar{a}) &\iff \mathcal{M} \models \phi_1(\bar{a}) \text{ and } \mathcal{M} \models \phi_2(\bar{a}) \\
-                                                  &\iff \mathcal{N} \models \phi_1(\bar{a}) \text{ and } \mathcal{N} \models \phi_2(\bar{a}) \enspacee \because \text{ IH } \\
+                                                  &\iff \mathcal{N} \models \phi_1(\bar{a}) \text{ and } \mathcal{N} \models \phi_2(\bar{a}) \enspace \because \text{ IH } \\
                                                   &\iff \mathcal{N} \models \phi(\bar{a}).
               \end{align*}
 
@@ -2979,7 +2985,7 @@ by induction on the complexity of the term.
           \end{itemize}
           There is no need to check for cases where $\phi$ is universal or existential, since our assumption is that $\phi$ is quantifier-free. This completes the proof.
       \end{itemize}
-  \end{enumerate}
+  \end{enumerate}\qed\
 \end{proof}
 
 \begin{ex}
@@ -2991,6 +2997,164 @@ by induction on the complexity of the term.
 % section first_order_logic_continued_2 (end)
 
 % chapter lecture_13_oct_23rd (end)
+
+\chapter{Lecture 14 Oct 25th}%
+\label{chp:lecture_14_oct_25th}
+% chapter lecture_14_oct_25th
+
+\section{First-order Logic (Continued 3)}%
+\label{sec:first_order_logic_continued_3}
+% section first_order_logic_continued_3
+
+\subsection{Terms \& Formulas (Continued 2)}%
+\label{sub:terms_n_formulas_continued_2}
+% subsection terms_n_formulas_continued_2
+
+\begin{eg}
+  Let $\mathcal{L}$ be the language of rings\sidenote{From hereon, for the sake of simplicity, I shall gleefully use such declarations for a language wherever it is convenient, and when the context is clear that I am merely using the common symbols that are used in the said theory.}. We have that in $\mathcal{Z}$, where
+  \begin{equation*}
+    (\mathbb{Z}, 0, 1, +, -, \times) = \mathcal{Z} \subseteq \mathcal{Q} = (\mathbb{Q}, 0, 1, +, -, \times),
+  \end{equation*}
+  for the $\mathcal{L}$-formula $\phi(x) = \exists y (x = 2y)$, we observe that
+  \begin{equation*}
+    \mathcal{Z} \models \neg \phi(1) \text{ but } \mathcal{Q} \models \phi(1).
+  \end{equation*}
+\end{eg}
+
+This shows to us that existential formulas that 
+\begin{itemize}
+  \item are satisfied in an extension may not be satisfied in the substructure;
+  \item is not satisfied in the substructure may be satisfied in the extension.
+\end{itemize}
+
+% subsection terms_n_formulas_continued_2 (end)
+
+\subsection{Elementary Embeddings}%
+\label{sub:elementary_embeddings}
+% subsection elementary_embeddings
+
+Considering \cref{propo:structure_traversal_with_respect_to_quantifiers}, it is interesting for us to consider substructures that satisfies all the formulas of its extension, including formulas that are either universal or existential.
+
+\begin{defn}[Elementary Embeddings]\index{Elementary Embeddings}\label{defn:elementary_embeddings}
+  Suppose $\mathcal{M} \subseteq \mathcal{N}$ are $\mathcal{L}$-structures, and $\mathcal{M}$ is a substructure of $\mathcal{N}$. An $\mathcal{L}$-embedding $j : \mathcal{M} \to \mathcal{N}$ is an \hlnoteb{elementary embedding} if for any $\mathcal{L}$-formula $\phi$ and $\bar{a} \in M^n$,
+  \begin{equation*}
+    \mathcal{M} \models \phi(\bar{a}) \iff \mathcal{N} \models \phi(j( \bar{a} )).
+  \end{equation*}
+  We call such an $\mathcal{M}$ an \hldefn{elementary substructure} of $\mathcal{N}$, and we denote $\mathcal{M} \preceq \mathcal{N}$.
+\end{defn}
+
+In simpler words, any formula that is true in $\mathcal{N}$ is true in its elementary substructure $\mathcal{M}$,
+
+\begin{crly}[Isomorphisms are Elementary Embeddings]\label{crly:isomorphisms_are_elementary_embeddings}
+  Every isomorphism is an elementary embedding.
+\end{crly}
+
+\begin{proof}
+  We already know the result for quantifier-free statements from \cref{propo:structure_traversal_with_respect_to_quantifiers}, and so it suffices to prove this statement by induction on the number of quantifiers, which we shall call $n$. In fact, it suffices to prove for the case of an existential $\mathcal{L}$-formula, since we can write $\forall$ as $\neg \exists \neg$.
+
+  Suppose $g : \mathcal{M} \to \mathcal{N}$ is an $\mathcal{L}$-isomorphism, where $\mathcal{M} \subseteq \mathcal{N}$. There is nothing to show for $n = 0$. Suppose that the statement holds for $n = m$. Consider an $\mathcal{L}$-formula of the form $\phi(\bar{x}) = \exists y \psi(\bar{x}, y)$, where $\bar{x} \in M^{m + 1}$, and $\psi$ an $\mathcal{L}$-formula with lower complexity than $\phi$. Then for $a \in M^{m + 1}$,
+  \begin{align*}
+    \mathcal{M} \models \phi(\bar{a}) &\iff \mathcal{M} \models \exists b \psi (\bar{a}, b) \\
+                                      &\iff \mathcal{N} \models \exists b \psi (g(\bar{a}), g(b)) \quad \because \text{ IH } \\
+                                      &\iff \mathcal{N} \models \exists c \psi (g(\bar{a}), c) \quad \because f \text{ is bijective } \\
+                                      &\iff \mathcal{N} \models \phi(g(\bar{a})).
+  \end{align*}
+  This completes the proof.\qed\
+\end{proof}
+
+\begin{eg}
+  Let $\mathcal{Q} = (\mathbb{Q}, <, 0)$ be an $\mathcal{L} = \{ <, 0 \}$-structure. Show that the graph of addition is not definable in $\mathcal{L}$.
+\end{eg}
+
+\begin{solution}
+  We need make this inference from automorphisms on $\mathcal{Q}$. Let $\sigma : \mathbb{Q} \to \mathbb{Q}$ be an automorphism. Then we have that
+  \begin{gather*}
+    x < y \iff \sigma(x) < \sigma(y) \\
+    \sigma(0) = 0 \\
+    \text{ and } \sigma \text{ is a bijection }
+  \end{gather*}
+  For example, the map $x \mapsto ax$, for some $a > 0$, is an automorphism on $\mathbb{Q}$.
+
+  \hlwarn{Clarification required.}
+\end{solution}
+
+\begin{propo}[\imponote\ Tarski-Vaught Test]\index{Tarski-Vaught Test}\label{propo:tarski_vaught_test}
+  Suppose $\mathcal{M} \subseteq \mathcal{N}$. TFAE
+  \begin{enumerate}
+    \item $\mathcal{M} \preceq \mathcal{N}$
+    \item For every $\mathcal{L}$-formula $\phi(\bar{x}, y)$ and all $n$-tuples $\bar{a} \in M^n$, if $\mathcal{N} \models \exists y \phi(\bar{a}, y)$, then there exists $b \in M$ such that $\mathcal{N} \models \phi(\bar{a}, b)$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \hlbnotea{$(1) \implies (2)$}: Suppose $\mathcal{M} \preceq \mathcal{N}$. Then $\exists j : \mathcal{M} \to \mathcal{N}$ an elementary embedding such that for all $\mathcal{L}$-formula $\phi$ and $\bar{a} \in M^n$, 
+  \begin{equation*}
+    \mathcal{M} \models \phi(\bar{a}) \iff \mathcal{N} \models \phi(j(\bar{a})).
+  \end{equation*}
+  In particular, the identity map is such an embedding. Let $\psi(x) = \exists y \phi(\bar{x}, y)$. Then
+  \begin{align*}
+    \mathcal{N} \models \psi(\bar{a}) &\overset{\text{defn }\ref{defn:elementary_embeddings}}{\iff} \mathcal{M} \models \psi(\bar{a}) \\
+                                      &\iff \mathcal{M} \models \exists b \phi(\bar{a}, b) \\
+                                      &\overset{\text{defn }\ref{defn:elementary_embeddings}}{\iff} \mathcal{N} \models \exists b \phi(\bar{a}, b)
+  \end{align*}
+  This completes $(\implies)$. $\dashv$
+
+  \noindent\hlbnotea{$(2) \implies (1)$}: We shall use induction on the complexity of the $\mathcal{L}$-formula $\phi$. 
+  \begin{itemize}
+    \item If $\phi(\bar{a})$ is quantifier-free, then since $\mathcal{M} \subseteq \mathcal{N}$, by \cref{propo:structure_traversal_with_respect_to_quantifiers}, we have $\mathcal{M} \models \phi(\bar{a}) \iff \mathcal{N} \models \phi(\bar{a})$. This case also covers the atomic formulas.
+      \item If $\phi(\bar{a})$ is of the form $\phi_1(\bar{x}) \lor \phi_2(\bar{x})$, where $\phi_1(\bar{x}), \phi_2(\bar{x})$ are $\mathcal{L}$-formulas whose results are known, then
+        \begin{align*}
+          \mathcal{M} \models \phi(\bar{a}) &\iff \mathcal{M} \models \phi_1(\bar{a}) \text{ or } \mathcal{M} \models \phi_2(\bar{a}) \\
+                                            &\iff \mathcal{N} \models \phi_1(\bar{a}) \text{ or } \mathcal{N} \models \phi_2(\bar{a}) \enspace \because \text{ IH } \\
+                                            &\iff \mathcal{N} \models \phi(\bar{a}).
+        \end{align*}
+
+      \item If $\phi(\bar{x})$ is of the form $\phi_1(\bar{x}) \land \phi_2(\bar{x})$, the proof is the same as the previous item.
+      \item If $\phi(\bar{x})$ is of the form $\neg \psi(\bar{x})$ for some $\mathcal{L}$-formula $\psi$, then
+        \begin{align*}
+          \mathcal{M} \models \phi(\bar{a}) &\iff \mathcal{M} \models \neg \psi(\bar{a}) \\
+                                            &\iff \mathcal{N} \models \neg \psi(\bar{a}) \enspace \because \text{ IH } \\
+                                            &\iff \mathcal{N} \models \phi(\bar{a}).
+        \end{align*}
+
+      \item As stated before in another proof, it suffices to prove for the existential case, since $\forall$ can be written as $\neg \exists \neg$. Suppose $\phi(\bar{x})$ is of the form $\exists y \psi(\bar{x}, y)$, for some $\mathcal{L}$-formula $\psi(\bar{x}, y)$ whose result we already know. We know that $\mathcal{M} \models \phi(\bar{a}) \implies \mathcal{N} \models \phi(\bar{a})$ by \cref{propo:structure_traversal_with_respect_to_quantifiers}. For the converse,
+        \begin{align*}
+          \mathcal{N} \models \phi(\bar{a}) &\iff \mathcal{N} \models \exists y \psi(\bar{a}, y) \\
+                                            &\implies \text{ there exists } b \in M \; \mathcal{N} \models \psi(\bar{a}, b) \\
+                                            &\overset{\text{IH}}{\implies} \text{ there exists } b \in M \; \mathcal{M} \models \psi(\bar{a}, b) \\
+                                            &\implies \mathcal{M} \models \exists y \psi(\bar{a}, y) \\
+                                            &\iff \mathcal{M} \models \phi(\bar{a}).
+        \end{align*}
+    \end{itemize}
+
+    This completes the proof.\qed\
+\end{proof}
+
+\begin{remark}
+  The Tarski-Vaught Test gives us an alternate mechanism to check if a substructure is elementary.
+\end{remark}
+
+\begin{thm}[Downward L\"{o}wenhein-Skolem]\index{Downward L\"{o}wenhein-Skolem}\label{thm:downward_lowenhein_skolem}
+  Suppose $\mathcal{M}$ is an $\mathcal{L}$-structure, and $A \subseteq M$. Then there exists an elementary substructure of $\mathcal{M}$ that contains $A$ and is of cardinality at most $\max\{ \abs{A}, \abs{\mathcal{L}}, \aleph_0 \}$.
+
+  In particular, if $\mathcal{L}$ is countable, then every $\mathcal{L}$-structure has a countable elementary substructure.
+\end{thm}
+
+\begin{proof}
+  Let $\kappa = \max \{ \abs{ A }, \abs{ \mathcal{L} }, \aleph_0 \}$. Define, recursively so, a countable chain of subsets of $M$,
+  \begin{equation*}
+    A = A_0 \subseteq A_1 \subseteq \hdots \subseteq A_n \subseteq \hdots,
+  \end{equation*}
+  such that each of their cardinality is less than $\kappa$, such that for each $n \geq 0$, if $\phi(\bar{x}, y)$ is an $\mathcal{L}$-formula, and $\bar{a} \in A_n$ such that $\mathcal{M} \models \exists y \phi(\bar{a}, y)$, then it is clear that there exists $b \in A_{n + 1}$ with $\mathcal{M} \models \phi(\bar{a}, b)$.
+
+  Given an $A_n$, we shall show a way to construct $A_{n + 1}$. \hlwarn{Requires clarification} 
+\end{proof}
+
+% subsection elementary_embeddings (end)
+
+% section first_order_logic_continued_3 (end)
+
+% chapter lecture_14_oct_25th (end)
 
 \appendix
 
