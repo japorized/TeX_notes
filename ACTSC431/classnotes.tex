@@ -1595,7 +1595,7 @@ Now if $f_X$ takes on large values for large $x$, we may have $E\left[X^k\right]
 \end{ex}
 
 \begin{defn}[Heavy-Tails Light-Tails]\index{Heavy-Tailed Distribution}\index{Light-Tailed Distribution}\label{defn:heavy_tails_light_tails}
-  We say that a distribution is a \hlnoteb{heavy-tailed distribution} if \hlimpo{its moments only exist up to some $k \in \mathbb{N} \setminus \{ 0 \}$}.
+  We say that a distribution is a \hlnoteb{heavy-tailed distribution} if \hlimpo{its moments only exist up to some $k \in \mathbb{N} \setminus \{ 0 \}$}.\marginnote{The actual definition, or should I say notion, of tail-heaviness comes from talking about the boundedness of the tail of the distribution, with reference to the exponential distribution. If a distribution has a tail that has greater value than the tail of the exponential distribution, then we say that the distribution has a heavy-tail.}
 
   We say that a distribution is a \hlnoteb{light-tail distribution} if \hlimpo{its moments exist for all $k \in \mathbb{N} \setminus \{ 0 \}$}.
 \end{defn}
@@ -1757,6 +1757,35 @@ It is not always easy to get the survival function. The following is an alternat
   by a change of variable in the last equality. We notice that if $\frac{f_X(x + y)}{f_X(x)}$ is increasing, then $h_X(x)$ will be decreasing, and so $X$ has a DFR.\qed\
 \end{proof}
 
+\begin{eg}
+  Let $X \sim \Gam(\alpha, \theta)$ with $\alpha > 1$. Determine whether $X$ is a DFR or IFR distribution.
+\end{eg}
+
+\begin{solution}
+  The cdf of $X$ is
+  \begin{equation*}
+    f_X(x) = \frac{x^{\alpha - 1} e^{-\frac{x}{\theta}}}{\theta^\alpha \Gamma(\alpha)}.
+  \end{equation*}
+  The survival function of $X$ is not explicit, and so we should use \cref{propo:ratio_comparison_for_dfr_ifr}. We have
+  \begin{align*}
+    \frac{f_X(x + y)}{f_X(x)} = = \frac{ \frac{(x + y)^{\alpha - 1} e^{- \frac{x + y}{\theta}}}{\theta^{\alpha} \Gamma(\alpha)} }{\frac{ x^{\alpha - 1} e^{-\frac{x}{\theta}} }{\theta^\alpha \Gamma(\alpha)}} = \left( \frac{x + y}{x} \right)^{\alpha - 1} e^{-\frac{y}{\theta}} = \left( 1 + \frac{y}{x} \right)^{\alpha - 1} e^{-\frac{y}{\theta}}.
+  \end{align*}
+  To try to determine if it is increasing or decreasing, we calculate the second derivative of the ratio:
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-0.5,0) -- (4, 0) node[right] {$x$};
+      \draw[->] (0,-0.5) -- (0, 4) node[above] {$f(x)$};
+      \draw[->,domain=0.2:4] plot ({\x},{(1 + ( 1 / \x )) * exp(-0.5)});
+    \end{tikzpicture}
+    \caption{Graph of $\left( 1 + \frac{y}{x} \right)^{\alpha - 1} e^{-\frac{y}{\theta}}$ for $y > -x$ and $x > 0$.}\label{fig:graph_of_left_1_y_x_right_alpha_1_e_y_theta_}
+  \end{marginfigure}
+  \begin{equation*}
+    \frac{d}{dx} \left( 1 + \frac{y}{x} \right)^{\alpha - 1} e^{-\frac{y}{\theta}} = y (\alpha - 1)\left( 1 + \frac{y}{x} \right)^{\alpha - 2} e^{ -\frac{y}{\theta} }.
+  \end{equation*}
+  It is important to note that $y$ is not completely free: it is bounded below by $-x$, as if $y < -x$, then $x + y < 0$, and $f$ is undefined at these values. Also, if $y = -x$, then the ratio is simply a constant, and we cannot use \cref{propo:ratio_comparison_for_dfr_ifr} to reach a conclusion. To be able to use \cref{propo:ratio_comparison_for_dfr_ifr}, we must have $y > -x$. In this case, it is clear that the ratio is increasing as $x$ increases. Thus $X$ has an IFR.
+\end{solution}
+
 % subsubsection hazard_rate (end)
 
 % subsection existence_of_moments_continued (end)
@@ -1792,7 +1821,7 @@ It is not always easy to get the survival function. The following is an alternat
 As defined before in \cref{defn:mean_excess_loss},
 
 \begin{defnnonum}[Mean Excess Loss]\index{Mean Excess Loss}
-  The \hlnoteb{mean excess loss} (or \hldefn{mean residual life}) function is defined as
+  The \hlnoteb{mean excess loss} (or \hldefn{mean residual life}) function is defined as\marginnote{Essentially, the mean excess loss is the average payment in excess of the threshold $d$, given that the loss exceeds the threshold. }
   \begin{equation*}
     e_X(d) = E[T_d] = \int_{0}^{\infty} \bar{F}_{T_d}(x) \dif{x} = \frac{\int_{0}^{\infty} \bar{F}_X(x + d) \dif{x}}{\bar{F}_X(d)} = \frac{\int_{d}^{\infty} \bar{F}_X(y) \dif{y} }{\bar{F}_X(d)}
   \end{equation*}
@@ -1809,12 +1838,10 @@ As defined before in \cref{defn:mean_excess_loss},
 \begin{note}
   \begin{itemize}
     \item IMRL distributions are \hlnotec{heavy-tailed};
-    \item DMRL distributions are \hlnotec{light-tailed}.\marginnote{
-      \begin{ex}
-        Prove this note.
-      \end{ex}
-      }
+    \item DMRL distributions are \hlnotec{light-tailed}.
   \end{itemize}
+
+  The reason of this claim should be rather clear from the context of $e_X(x)$: if $e_X(x)$ is increasing with $x$, then we expect that the survival probability of $T_d$ to be greater, and so the tail should be a heavy one. The following proposition clarifies this notion.
 \end{note}
 
 \begin{propo}[Relation between DFR/IFR and IMRL/DMRL]\label{propo:relation_between_dfr_ifr_and_imrl_dmrl}
@@ -1864,12 +1891,63 @@ As defined before in \cref{defn:mean_excess_loss},
 \end{eg}
 
 \begin{solution}
-  Since both $h_X(x)$ and $e_X(x)$ require the survival function, we shall first derive that. Observe that
+  Since both $h_X(x)$ and $e_X(x)$ require the survival function, we shall first derive that. Observe that\sidenote{It is highly recommended that one gets really used to using integration by parts, to the point that you do not have to repeatedly write down what the $u$ and $dv$ are explicitly every time.}
   \begin{align*}
-    \bar{F}_X(x) &= 
+    \bar{F}_X(x) &= \int_{x}^{\infty} (1 + 2y^2) e^{-2y} \dif{y} = \frac{1}{2} e^{-2x} + 2 \left[ \int_{x}^{\infty} y^2 e^{-2y} \dif{y} \right] \\
+                 &= \frac{1}{2}e^{-2x} + 2 \left[ -\frac{1}{2} y^2 e^{-2y} \at{x}{\infty} + \int_{x}^{\infty} ye^{-2y} \dif{y} \right] \\
+                 &= \frac{1}{2}e^{-2x} + x^2 e^{-2x} + 2 \left[ -\frac{1}{2}ye^{-2y} \at{x}{\infty} + \frac{1}{2} \int_{x}^{\infty} e^{-2y} \dif{y} \right] \\
+                 &= \frac{1}{2}e^{-2x} + x^2 e^{-2x} + xe^{-2x} + \frac{1}{2}e^{-2x} \\
+                 &= (x^2 + x + 1) e^{-2x}.
   \end{align*}
   \begin{enumerate}
-    \item 
+    \item It is clear that
+      \begin{align*}
+        h_X(x) &= \frac{1 + 2x^2}{1 + x + x^2}
+      \end{align*}
+
+    \item By its definition, we have that
+      \begin{equation*}
+        e_X(x) = \frac{\int_{x}^{\infty} \bar{F}_X(y) \dif{y} }{\bar{F}_X(x)},
+      \end{equation*}
+      and so we need to solve for the integral in the numerator. Using pieces from our derivation of $\bar{F}_X(x)$, we obtain
+      \begin{align*}
+        &\int_{x}^{\infty} (1 + y + y^2) e^{-2y} \dif{y} \\
+        &= \frac{1}{2}e^{-2x} + \frac{1}{2}xe^{-2x} + \frac{1}{4}e^{-2x} + \frac{1}{2}x^2 e^{-2x} + \frac{1}{2}xe^{-2x} + \frac{1}{4}e^{-2x} \\
+        &= \left( 1 + x + \frac{1}{2}x^2 \right) e^{-2x}.
+      \end{align*}
+      Thus
+      \begin{equation*}
+        e_X(x) = \frac{1 + x + \frac{1}{2}x^2}{1 + x + x^2}.
+      \end{equation*}
+
+    \item The answers are straightforward\sidenote{\hlwarn{Find out why did we calculate these values.}}
+      \begin{gather*}
+        \lim_{x \to \infty} h_X(x) = \lim_{x \to \infty} \frac{\frac{1}{x^2} + 2}{1 + \frac{1}{x} + \frac{1}{x^2}} = 2 \\
+        \lim_{x \to \infty} e_X(x) = \lim_{x \to \infty} \frac{\frac{1}{x^2} + \frac{1}{x} + \frac{1}{2}}{\frac{1}{x^2} + \frac{1}{x} + 1} = \frac{1}{2}
+      \end{gather*}
+
+    \item First, observe that
+      \begin{align*}
+        e_X'(x) &= \frac{(1 + x)\left( 1 + x + x^2 \right) - (1 + 2x)\left( 1 + x + \frac{1}{2}x^2 \right)}{(1 + x + x^2)} \\
+                &= - \frac{x + \frac{1}{2}x^2}{(1 + x + x^2)^2},
+      \end{align*}
+      and we see that $e_X'(x) < 0$ for $x > 0$. Thus $X$ has a DMRL. For $h_X(x)$,
+      \begin{align*}
+        h_X'(x) &= \frac{4x \left( 1 + x + x^2 \right) - (1 + 2x) \left( 1 + 2x^2 \right)}{\left(1 + x + x^2\right)^2} \\
+                &= \frac{2x^2 + 2x - 1}{x^4 + 2x^3 + 3x^3 + 2x + 1}.
+      \end{align*}
+      It may appear as if $h_X'(x)$ is positive, seeing that $x^4$ should dominate. However, notice that the \href{https://en.wikipedia.org/wiki/Quadratic_equation\#Discriminant}{discriminant} is positive:\sidenote{Lecture notes simply threw the values $1$ and $\frac{1}{2}$ out of nowhere. While the result seems harmless, firstly, $x \neq 0$, since $x > 0$. In fact, since the critical point is $\sqrt{\frac{3}{4}} - \frac{1}{2} \approx 0.366$, $\frac{1}{2}$ is a value that comes after the critical point, so we would not have been able to verify without trying and failing numerous times, especially since the critical point is an irrational value.
+      
+      Here, we are smart and equipped with the knowledge that by solving the first derivative for $x$ by equating to $0$ allows us to find these critical points, which is indicative of a change from positive to negative, or vice versa, slope for $h_X(x)$.}
+      \begin{equation*}
+        2^2 - 4(2)(-1) = 12 > 0,
+      \end{equation*}
+      and so the numerator has a root, i.e. there are critical points on $h_X(x)$. In fact, equating the said numerator to $0$, we can obtain that $x = - \frac{1}{2} + \sqrt{\frac{3}{4}}$ (the other case is ruled out as $x > 0$). Since $h_X'(x)$ looks as if it is increasing, let's try out some values of $x$ for $0 < x < \sqrt{\frac{3}{4}} - \frac{1}{2}$. In particular, notice that
+      \begin{gather*}
+        h_X \left( \frac{1}{10} \right) = \frac{102}{111} \approx 0.9198 \\
+        h_X \left( \frac{1}{5} \right) = \frac{27}{31} \approx 0.8710
+      \end{gather*}
+      but $\frac{1}{10} < \frac{1}{5}$, and so we notice that $X$ is not IFR.
   \end{enumerate}
 \end{solution}
 
