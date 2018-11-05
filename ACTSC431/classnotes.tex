@@ -3,7 +3,7 @@
 
 \usepackage{classnotetitle}
 
-\title{ACTSC 431 - Loss Model I}
+\title{ACTSC 431 --- Loss Model I}
 \author{Johnson Ng}
 \subtitle{Classnotes for Fall 2018}
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
@@ -12,11 +12,12 @@
 \input{latex-classnotes-preamble.tex}
 \input{probnotation.tex}
 
-\setsidenotefont{\color{base16-eighties-light}\footnotesize}
-\setmarginnotefont{\color{base16-eighties-light}\footnotesize}
+\setsidenotefont{\color{light}\footnotesize}
+\setmarginnotefont{\color{light}\footnotesize}
 
 \DeclareMathOperator{\VaR}{VaR}
 \DeclareMathOperator{\TVaR}{TVaR}
+\DeclareMathOperator{\LER}{LER }
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -24,15 +25,19 @@
 \hypersetup{pageanchor=true}
 \tableofcontents
 
-\chapter*{\faBook \enspace List of Definitions}
+\chapter*{\faBook\ \enspace\ List of Definitions}
 \addcontentsline{toc}{chapter}{List of Definitions}
 \theoremlisttype{all}
+\begin{fullwidth}
 \listtheorems{defn}
+\end{fullwidth}
 
-\chapter*{\faCoffee \enspace List of Theorems}
+\chapter*{\faCoffee\ \enspace\ List of Theorems}
 \addcontentsline{toc}{chapter}{List of Theorems}
 \theoremlisttype{allname}
+\begin{fullwidth}
 \listtheorems{axiom,lemma,thm,crly,propo}
+\end{fullwidth}
 
 \chapter{Lecture 1 Sep 06}%
 \label{chp:lecture_1_sep_06}
@@ -42,7 +47,7 @@
 \label{sec:introduction_and_overview}
 % section introduction_and_overview
 
-\paragraph{Course Objective} In Loss Model I, the focus of our study is to learn the basic methods which are used by insurers to quantify risk from mathematical/statistical models, in order for insurers to make various decisions\sidenote{e.g. setting premiums, control expenses, deciding for reinsurance, etc.}. By quantifying risk, it helps us monitor underlying risks so that not only are we aware of them, but also so that we can take actions or preventive measures against them.
+\paragraph{Course Objective} In Loss Model I, the focus of our study is to learn the basic methods which are used by insurers to quantify risk from mathematical/statistical models, in order for insurers to make various decisions\sidenote{e.g.\ setting premiums, control expenses, deciding for reinsurance, etc.}. By quantifying risk, it helps us monitor underlying risks so that not only are we aware of them, but also so that we can take actions or preventive measures against them.
 
 Our main interest of this course is:
 \begin{itemize}
@@ -52,14 +57,13 @@ Our main interest of this course is:
 
 \newthought{The main model that shall be the focus} of this course is \hlnoteb{models for liability risk}.
 
-\begin{defn}[Liability Risk]\index{Liability Risk}
-\label{defn:liability_risk}
+\begin{defn}[Liability Risk]\index{Liability Risk}\label{defn:liability_risk}
   A \hlnoteb{liability risk} is a risk that insurance companies assume by selling insurance contracts.
 \end{defn}
 
-In particular, the liability that we shall focus on is \hlnotea{insurance claims}.\marginnote{Many of the models that we shall see later in the course are also applied for other types of risks, e.g. investment risk, credit risk, liquidity risk, and operational risk.}
+In particular, the liability that we shall focus on is \hlnotea{insurance claims}.\marginnote{Many of the models that we shall see later in the course are also applied for other types of risks, e.g.\ investment risk, credit risk, liquidity risk, and operational risk.}
 
-\newthought{We are interested} in modelling the total amount of claims, i.e. the \hldefn{aggregate claim amount}, of a group fo insurance policies over a given period of time. In the actuarial literature, there are two main approaches that have been proposed to model the aggrement claim amount of an insurance portfolio, namely:
+\newthought{We are interested} in modelling the total amount of claims, i.e.\ the \hldefn{aggregate claim amount}, of a group fo insurance policies over a given period of time. In the actuarial literature, there are two main approaches that have been proposed to model the aggrement claim amount of an insurance portfolio, namely:
 \begin{itemize}
   \item individual risk model;
   \item collective risk model.
@@ -69,13 +73,12 @@ In particular, the liability that we shall focus on is \hlnotea{insurance claims
 \label{sub:individual_risk_model}
 % subsection individual_risk_model
 
-\begin{defn}[Individual Risk Model]\index{Individual Risk Model}
-\label{defn:individual_risk_model}
+\begin{defn}[Individual Risk Model]\index{Individual Risk Model}\label{defn:individual_risk_model}
   In an \hlnoteb{individual risk model}, the aggregate claim is modeled by
   \begin{equation*}
     S = \sum_{i=1}^{n} Z_i
   \end{equation*}
-  where $n$ is a \hlnotea{deterministic}\sidenote{i.e. fixed} integer that represents the \hlnotec{total number of insurance policies}, and $Z_i$ is a random variable for the \hlnotec{potential loss of the $i$\textsuperscript{th} insurance policy.}
+  where $n$ is a \hlnotea{deterministic}\sidenote{i.e.\ fixed} integer that represents the \hlnotec{total number of insurance policies}, and $Z_i$ is a random variable for the \hlnotec{potential loss of the $i$\textsuperscript{th} insurance policy.}
 \end{defn}
 
 \begin{note}
@@ -92,7 +95,7 @@ In particular, the liability that we shall focus on is \hlnotea{insurance claims
 
 However, in an individual risk model, according to Dhaene and Vyncke (2010)\cite{DhaeneVyncke2010},
 
-\begin{quotebox}{base16-eighties-red}
+\begin{quotebox}{be-red}{light}
   A third type of error that may arise when computing aggregate claims follows from the fact that the assumption of mutual independency of the individual claim amounts may be violated in practice.
 \end{quotebox}
 
@@ -104,8 +107,7 @@ Due to complications such as this, the individual risk model will not be the foc
 \label{sub:collective_risk_model}
 % subsection collective_risk_model
 
-\begin{defn}[Collective Risk Model]\index{Collective Risk Model}
-\label{defn:collective_risk_model}
+\begin{defn}[Collective Risk Model]\index{Collective Risk Model}\label{defn:collective_risk_model}
   In a \hlnoteb{collective risk model}, the aggregate claim is modeled by
   \begin{equation*}
     S = \sum_{i=1}^{N} X_i, \end{equation*}
@@ -115,8 +117,8 @@ Due to complications such as this, the individual risk model will not be the foc
 \begin{note}
   In a collective risk model, we need to determine:
   \begin{itemize}
-    \item the distribution of the total number of claims for the entire portfolio, i.e. the distribution of $N$; and
-    \item the distribution of the loss amount per claim, i.e. the distribution of $X_i$.
+    \item the distribution of the total number of claims for the entire portfolio, i.e.\ the distribution of $N$; and
+    \item the distribution of the loss amount per claim, i.e.\ the distribution of $X_i$.
   \end{itemize}
 \end{note}
 
@@ -126,13 +128,11 @@ In this course, the primary focus of our studies will be on \hlnotea{collective 
 
 \paragraph{Terminologies} To end today's lecture, the following terminologies are introduced:
 
-\begin{defn}[Severity Distribution]\index{Severity Distribution}
-\label{defn:severity_distribution}
+\begin{defn}[Severity Distribution]\index{Severity Distribution}\label{defn:severity_distribution}
   The \hlnoteb{severity distribution} is the distribution of the loss amount of the amount paid by the insurer on a given loss/claim.
 \end{defn}
 
-\begin{defn}[Frequency Distribution]\index{Frequency Distribution}
-\label{defn:frequency_distribution}
+\begin{defn}[Frequency Distribution]\index{Frequency Distribution}\label{defn:frequency_distribution}
   The \hlnoteb{frequency distribution} is the distributino fo the number of losses/claims paid by the insurer over a given period of time.
 \end{defn}
 
@@ -140,8 +140,7 @@ In this course, the primary focus of our studies will be on \hlnotea{collective 
   The frequency distribution is typically a discrete distribution.
 \end{note}
 
-\begin{defn}[Aggrement Payment / Loss]\index{Aggrement Payment}\index{Aggregate Loss}
-\label{defn:aggrement_payment_loss}
+\begin{defn}[Aggrement Payment / Loss]\index{Aggrement Payment}\index{Aggregate Loss}\label{defn:aggrement_payment_loss}
   The \hlnoteb{aggregate payment (loss)} is the total amout of all claim payments (losses) over a given period of time.
 \end{defn}
 
@@ -163,8 +162,7 @@ In this course, the primary focus of our studies will be on \hlnotea{collective 
 
 Firstly, we shall review the definition of a random variable.
 
-\begin{defn}[Random Variable]\index{Random Variable}
-\label{defn:random_variable}
+\begin{defn}[Random Variable]\index{Random Variable}\label{defn:random_variable}
   Let $\Omega$ be a sample space and $\mathcal{F}$ its $\sigma$-algebra\sidenote{For definitions of $\Omega$ and $\mathcal{F}$, see notes on STAT330.}. A \hlnoteb{random variable} (rv) $X : \Omega \to (\Omega, \mathcal{F})$ is a function from a possible set of outcomes to a measurable space $(\Omega, \mathcal{F})$. Within the context of our interest, $X$ is real-valued, i.e. $(\Omega, \mathcal{F}) = \mathbb{R}$.
 \end{defn}
 
@@ -172,8 +170,7 @@ Firstly, we shall review the definition of a random variable.
 \label{sub:discrete_random_variables}
 % subsection discrete_random_variables
 
-\begin{defn}[Discrete Random Variable]\index{Discrete Random Variable}
-\label{defn:discrete_random_variable}
+\begin{defn}[Discrete Random Variable]\index{Discrete Random Variable}\label{defn:discrete_random_variable}
   A \hlnoteb{discrete random variable} (drv) is an rv $X$ that takes only countable (finite) real values.
 \end{defn}
 
@@ -260,8 +257,7 @@ Firstly, we shall review the definition of a random variable.
   \end{itemize}
 \end{note}
 
-\begin{defn}[Probability Generating Function]\index{Probability Generating Function}
-\label{defn:probability_generating_function}
+\begin{defn}[Probability Generating Function]\index{Probability Generating Function}\label{defn:probability_generating_function}
   Suppose a drv $X$ only takes \hlimpo{non-negative integer values}. The \hlnoteb{probability generating function} (pgf) of $X$ is defined as
   \begin{equation*}
     G(z) = E\left[ z^X \right] = \sum_{k=1}^{\infty} z^k p(k)
@@ -271,8 +267,8 @@ Firstly, we shall review the definition of a random variable.
 
 \begin{note}
   \begin{itemize}
-    \item The pgf uniquely identifies the distribution of the drv\sidenote{\faHandPaperO This was given as is without proof, and I cannot find any resources that proves this.}.
-    \item To get the probability for $k \in \{0, 1, 2, ...\}$, we simply need to do
+    \item The pgf uniquely identifies the distribution of the drv\sidenote{\faHandPaperO\ This was given as is without proof, and I cannot find any resources that proves this.}.
+    \item To get the probability for $k \in \{0, 1, 2, \ldots\}$, we simply need to do
       \begin{equation*}
         p(k) = \frac{1}{k!} G^{(k)}(x) \at{x = 0}{}.
       \end{equation*}
@@ -336,8 +332,7 @@ Firstly, we shall review the definition of a random variable.
 \label{sub:continuous_random_variables}
 % subsection continuous_random_variables
 
-\begin{defn}[Continuous Random Variable]\index{Continuous Random Variable}
-\label{defn:continuous_random_variable}
+\begin{defn}[Continuous Random Variable]\index{Continuous Random Variable}\label{defn:continuous_random_variable}
   A \hlnoteb{continuous random variable} (crv) takes on a continuum of values.
 \end{defn}
 
@@ -363,8 +358,7 @@ Firstly, we shall review the definition of a random variable.
   \end{itemize}
 \end{note}
 
-\begin{defn}[Moment Generating Function]\index{Moment Generating Function}
-\label{defn:moment_generating_function}
+\begin{defn}[Moment Generating Function]\index{Moment Generating Function}\label{defn:moment_generating_function}
 Let $X$ be an rv. The \hlnoteb{moment generating function} (mgf)\marginnote{The mgf is also defined for drvs.} of $X$ is, for $t \in \mathbb{R}$ (appropriately so),
   \begin{equation*}
     M_X(t) = E\left[e^{tX}\right] = \int_{x} e^{tx} f(x) \dif{x}
@@ -374,7 +368,7 @@ Let $X$ be an rv. The \hlnoteb{moment generating function} (mgf)\marginnote{The 
 
 \begin{note}
   \begin{itemize}
-    \item The mgf uniquely determines the distribution of its rv\sidenote{\faHandPaperO This shall, also, not be proven in this course.}
+    \item The mgf uniquely determines the distribution of its rv\sidenote{\faHandPaperO\ This shall, also, not be proven in this course.}
 
     \item With the mgf, we can obtain the $k$th moment of an rv $X$ by
       \begin{equation*}
@@ -404,8 +398,7 @@ Let $X$ be an rv. The \hlnoteb{moment generating function} (mgf)\marginnote{The 
   where we note that we must have $t < 0.1$, for otherwise the value of the exponent would render the integral undefined.
 \end{eg}
 
-\begin{defn}[Hazard Rate Function]\index{Hazard Rate Function}
-\label{defn:hazard_rate_function}
+\begin{defn}[Hazard Rate Function]\index{Hazard Rate Function}\label{defn:hazard_rate_function}
   For a crv $X$, the \hlnoteb{hazard rate function} (aka \hldefn{failure rate}) of $X$ is defined as
   \begin{equation*}
     h(x) = \frac{f(x)}{\bar{F}(x)} = - \frac{d}{dx} \ln \bar{F}(x),
@@ -449,25 +442,25 @@ Let $X$ be an rv. The \hlnoteb{moment generating function} (mgf)\marginnote{The 
 \label{sub:continuous_random_variables_continued}
 % subsection continuous_random_variables_continued
 
-\begin{eg}[Lecture Notes: Example 3]
+\begin{eg}[Lecture Notes: Example 3 --- Hazard Rate of Weibull Distribution]\label{eg:weibull_hazard_rate}
   Suppose $X \sim \Wei(\theta, \tau)$ with pdf
   \begin{equation*}
-    f(x) = \frac{\tau \left( \frac{x}{\theta} \right)^\tau e^{-\left( \frac{x}{\theta} \right)^\tau}}{x}, \quad x > 0,
+    f(x) = \frac{\tau {\left( \frac{x}{\theta} \right)}^\tau e^{-{\left( \frac{x}{\theta} \right)}^\tau}}{x}, \quad x > 0,
   \end{equation*}
   where $\theta, \tau > 0$. Find its hazard rate function.
 \end{eg}
 
 \begin{solution}
-  We first require the survival function:
+  We first require the survival function\sidenote{\hlnotea{Weibull Survival Function}\label{note:weibull_survival_function}}:
   \begin{align*}
-    \bar{F}(x) &= \int_{x}^{\infty} \frac{1}{y} \tau \left( \frac{y}{\theta} \right)^\tau e^{-\left( \frac{y}{\theta} \right)^\tau} \dif{y} \\
+    \bar{F}(x) &= \int_{x}^{\infty} \frac{1}{y} \tau {\left( \frac{y}{\theta} \right)}^\tau e^{-{\left( \frac{y}{\theta} \right)}^\tau} \dif{y} \\
                &= \int_{\frac{x}{\theta}}^{\infty} \frac{1}{u} \tau u^\tau e^{-u^\tau} \dif{u} \qquad \text{ where } u = \frac{y}{\theta} \\
                &= \int_{\frac{x}{\theta}}^{\infty} \tau u^{\tau - 1} e^{-u^\tau} \dif{u} \\
-               &= -e^{-u^\tau} \at{\frac{x}{\theta}}{\infty} = e^{-\left( \frac{x}{\theta} \right)^\tau}
+               &= -e^{-u^\tau} \at{\frac{x}{\theta}}{\infty} = e^{-{\left( \frac{x}{\theta} \right)}^\tau}
   \end{align*}
   The hazard rate is therefore
   \begin{equation*}
-    h(x) = \frac{f(x)}{\bar{F}(x)} = \frac{\tau}{x} \left( \frac{x}{\theta} \right)^\tau
+    h(x) = \frac{f(x)}{\bar{F}(x)} = \frac{\tau}{x} {\left( \frac{x}{\theta} \right)}^\tau
   \end{equation*}
 \end{solution}
 
@@ -477,8 +470,7 @@ Let $X$ be an rv. The \hlnoteb{moment generating function} (mgf)\marginnote{The 
 \label{sub:mixed_random_variable}
 % subsection mixed_random_variable
 
-\begin{defn}[Mixed Random Variable]\index{Mixed Random Variable}
-\label{defn:mixed_random_variable}
+\begin{defn}[Mixed Random Variable]\index{Mixed Random Variable}\label{defn:mixed_random_variable}
   We call $X$ a \hlnoteb{mixed random variable} (mixed rv) if it has both discrete and continuous components.
 \end{defn}
 
@@ -490,11 +482,10 @@ Let $X$ be an rv. The \hlnoteb{moment generating function} (mgf)\marginnote{The 
 
 The following is a type of mixed random variable:
 
-\begin{defn}[Deductibles]\index{Deductibles}
-\label{defn:deductibles}
+\begin{defn}[Deductibles]\index{Deductibles}\label{defn:deductibles}
   Let $X$ be an rv and $d$ be a fixed value.
   \begin{equation*}
-    [ X - d ]_+ = \begin{cases}
+    {[ X - d ]}_+ = \begin{cases}
       X - d & x \geq d \\
       0     & \text{ otherwise }
     \end{cases}
@@ -502,14 +493,14 @@ The following is a type of mixed random variable:
 \end{defn}
 
 \begin{note}
-  If $X$ be an rv and $d$ a fixed value, the deductible $[X - d]_+$ has a mass point at $0$ since
+  If $X$ be an rv and $d$ a fixed value, the deductible ${[X - d]}_+$ has a mass point at $0$ since
   \begin{equation*}
-    P( [ X - d ]_+ = 0 ) = P(X < d) > 0
+    P( {[ X - d ]}_+ = 0 ) = P(X < d) > 0
   \end{equation*}
 \end{note}
 
 \begin{note}
-  Let $\{ x_1, x_2, ... \}$ be a sequence of real numbers in an increasing order. Suppose $X$ is a rv that takes on values on the real, and has a \hlnotea{density function} $f$ on each interval $(x_i, x_{i + 1})$, and has \hlnotea{discrete mass points} at the boundaries of these intervals, i.e.\marginnote{In other words, we treat the discrete and continuous part of a mixed rv separately.}
+  Let $\{ x_1, x_2, \ldots \}$ be a sequence of real numbers in an increasing order. Suppose $X$ is a rv that takes on values on the real, and has a \hlnotea{density function} $f$ on each interval $(x_i, x_{i + 1})$, and has \hlnotea{discrete mass points} at the boundaries of these intervals, i.e.\marginnote{In other words, we treat the discrete and continuous part of a mixed rv separately.}
   \begin{equation*}
     P(X = x_i) = p(x_i) > 0 \quad i \in \mathbb{N}.
   \end{equation*}
@@ -523,7 +514,7 @@ The following is a type of mixed random variable:
   \end{equation*}
   The $k$th moment of $X$ is
   \begin{equation*}
-    E\left[X^k\right] = \sum_{i \in \mathbb{N}} (x_i)^k p(x_i) + \sum_{i \in \mathbb{N}} \int_{x_i}^{x_{i + 1}} x^k f(x) \dif{x}.
+    E\left[X^k\right] = \sum_{i \in \mathbb{N}} {(x_i)}^k p(x_i) + \sum_{i \in \mathbb{N}} \int_{x_i}^{x_{i + 1}} x^k f(x) \dif{x}.
   \end{equation*}
   The mgf of $X$ is
   \begin{equation*}
@@ -567,11 +558,10 @@ The following is a type of mixed random variable:
 \label{sub:distributional_quantities}
 % subsection distributional_quantities
 
-\begin{defn}[Central Moment]\index{Central Moment}
-\label{defn:central_moment}
+\begin{defn}[Central Moment]\index{Central Moment}\label{defn:central_moment}
   The \hlnoteb{$k$th central moment} of an rv $X$ is defined as
   \begin{equation*}
-    E\left[ (X - E(X))^k \right].
+    E\left[ {(X - E(X))}^k \right].
   \end{equation*}
 \end{defn}
 
@@ -623,7 +613,7 @@ The following is a type of mixed random variable:
       To calculate the variance of $Y$, we require
       \begin{align*}
         E\left[Y^2\right] &= E\left[Y^2 \mid U = 1\right] P(U = 1) + E\left[Y^2 \mid U = 2\right] P(U = 2) \\
-                          &= ( \Var(Y_2) + E(Y_2)^2 ) \cdot \frac{1}{2} = 100.
+                          &= ( \Var(Y_2) + E{(Y_2)}^2 ) \cdot \frac{1}{2} = 100.
       \end{align*}
       Therefore
       \begin{equation*}
@@ -642,8 +632,7 @@ The following is a type of mixed random variable:
   \end{enumerate}
 \end{solution}
 
-\begin{defn}[Quantiles]\index{Quantiles}
-\label{defn:quantiles}
+\begin{defn}[Quantiles]\index{Quantiles}\label{defn:quantiles}
   The \hlnoteb{$100p\%$ quantile} (or \hldefn{percentile}) of an rv $X$ is a set $\pi_p$ such that\marginnote{This definition may also be presented as: any number $\pi_p$ such that
   \begin{equation*}
     P(X < \pi_p) \leq p \leq P(X \leq \pi_p).
@@ -699,7 +688,7 @@ The following is a type of mixed random variable:
 \begin{eg}[Lecture Notes: Example 3]
   Find the median $\pi_{0.5}$ for a loss $X$ with pmf
   \begin{equation*}
-    p(0) = 0.25, \, p(1) = 0.25), \, p(2) = 0.5.
+    p(0) = 0.25, \, p(1) = 0.25, \, p(2) = 0.5.
   \end{equation*}
 \end{eg}
 
@@ -737,21 +726,19 @@ The following is a type of mixed random variable:
 \label{sub:risk_measures}
 % subsection risk_measures
 
-\begin{defn}[Risk Measure]\index{Risk Measure}
-\label{defn:risk_measure}
+\begin{defn}[Risk Measure]\index{Risk Measure}\label{defn:risk_measure}
   A \hlnoteb{risk measure} is a mapping from the loss rv to the real line $\mathbb{R}$.
 \end{defn}
 
-Klugman, Panjer \& Wilmot (2012) \cite{KlugmanPanjerWillmot2012} on risk measure:
+Klugman, Panjer \& Wilmot (2012)~\cite{KlugmanPanjerWillmot2012} on risk measure:
 
-\begin{quotebox}{base16-eighties-yellow}
+\begin{quotebox}{be-yellow}{light}
   The level of exposure to risk is often described by one number, or at least a small set of numbers. These numbers are necessarily functions of the model and are often called ‘key risk indicators’. Such key risk indicators indicate to risk managers the degree to which the company is subject to particular aspects of risk.
 \end{quotebox}
 
-To ensure its solvency, insurers will have to charge on these risks, i.e. we have to \hlnotea{price these exposures to risks}.
+To ensure its solvency, insurers will have to charge on these risks, i.e.\ we have to \hlnotea{price these exposures to risks}.
 
-\begin{defn}[Premium Principle]\index{Premium Principle}
-\label{defn:premium_principle}
+\begin{defn}[Premium Principle]\index{Premium Principle}\label{defn:premium_principle}
   A \hlnoteb{premium principle} (or \hldefn{insurance pricing}) is a rule for assigning a premium to an insurance risk.
 \end{defn}
 
@@ -768,19 +755,17 @@ To ensure its solvency, insurers will have to charge on these risks, i.e. we hav
       \end{equation*}
     \item \hldefn{Dutch Principle}
       \begin{equation*}
-        \Pi(X) = E(X) + \theta E( [ X - E(X) ]_+ ), \quad \theta > 0
+        \Pi(X) = E(X) + \theta E( {[ X - E(X) ]}_+ ), \quad \theta > 0
       \end{equation*}
   \end{itemize}
 \end{note}
 
 One particular measure is known as the \hlnotea{Value-at-Risk} (VaR).
 
-\subsubsection{Value-At-Risk}
-\label{ssub:Value-At-Risk}
+\subsubsection{Value-At-Risk}\label{ssub:Value-At-Risk}
 
-\begin{defn}[Value-at-Risk (VaR)]\index{Value-at-Risk}\index{VaR}
-\label{defn:value_at_risk}
-The \hlnoteb{Value-at-Risk (VaR)} is a \hlnotea{quantile} of the distribution of aggregate losses, i.e. the $VaR$ of a risk $X$ at the $100\%p$ level is defined as\sidenote{I must find out why we define using $\inf$ instead of $\min$ (see following remark), and I will not take ``safe definition'' as an answer without full justification.}
+\begin{defn}[Value-at-Risk (VaR)]\index{Value-at-Risk}\index{VaR}\label{defn:value_at_risk}
+The \hlnoteb{Value-at-Risk (VaR)} is a \hlnotea{quantile} of the distribution of aggregate losses, i.e.\ the $VaR$ of a risk $X$ at the $100\%p$ level is defined as\sidenote{I must find out why we define using $\inf$ instead of $\min$ (see following remark), and I will not take ``safe definition'' as an answer without full justification.}
   \begin{align*}
     \pi_p = \VaR_p (X) &= \inf \{ x \in \mathbb{R} : P (X > x) \leq 1 - p \} \\
                &= \inf \{ x \in \mathbb{R} : P (X \leq x) \geq p \}.
@@ -805,7 +790,7 @@ The \hlnoteb{Value-at-Risk (VaR)} is a \hlnotea{quantile} of the distribution of
   \begin{equation*}
     F(x_0) = P(X \leq x_0) \geq p \quad \land \quad F(x_0-) = P(X < x_0) \leq p,
   \end{equation*}
-  i.e. it is not necessary that $P(X = x_0) = p$ (see the two example graphs on the margin).
+  i.e.\ it is not necessary that $P(X = x_0) = p$ (see the two example graphs on the margin).
   \begin{marginfigure}
     \begin{tikzpicture}
       \draw[->] (0, 0) -- (4, 0) node[right] {$x$};
@@ -833,7 +818,7 @@ The \hlnoteb{Value-at-Risk (VaR)} is a \hlnotea{quantile} of the distribution of
     \end{tikzpicture}
     \caption{Continuous cdf}
   \end{marginfigure}
-  Let $\{ x_n \}_{n \in \mathbb{N}}$ be a decreasing sequence of points on $\mathbb{R}$ such that $x_n \to x_0$ as $n \to \infty$. Since $F$ is right-continuous, we have that $F(x_n) \to F(x_0)$ as $n \to \infty$. Therefore,
+  Let ${\{ x_n \}}_{n \in \mathbb{N}}$ be a decreasing sequence of points on $\mathbb{R}$ such that $x_n \to x_0$ as $n \to \infty$. Since $F$ is right-continuous, we have that $F(x_n) \to F(x_0)$ as $n \to \infty$. Therefore,
   \begin{equation*}
     B = [ x_0 , \infty )
   \end{equation*}\marginnote{The lecturer asserts that we can really define $\VaR$ using $\min$ instead of $\inf$, but even with this, I am not completely satisfied or convinced.}
@@ -846,7 +831,7 @@ The \hlnoteb{Value-at-Risk (VaR)} is a \hlnotea{quantile} of the distribution of
       \begin{equation*}
         P(X < \pi_p) \leq p \leq P(X \leq \pi_p)
       \end{equation*}
-    \item If $X$ is a crv whose cdf is strictly increasing, i.e. no constant points, then
+    \item If $X$ is a crv whose cdf is strictly increasing, i.e.\ no constant points, then
       \begin{equation*}
         \pi_p = F^{-1}(p)
       \end{equation*}
@@ -866,7 +851,7 @@ The \hlnoteb{Value-at-Risk (VaR)} is a \hlnotea{quantile} of the distribution of
 \begin{eg}\label{eg:varp_pareto}
   Suppose that $X$ has a Pareto distribution with cdf
   \begin{equation*}
-    F(x) = 1 - \left( \frac{\theta}{x + \theta} \right)^\alpha , \quad x > 0
+    F(x) = 1 - {\left( \frac{\theta}{x + \theta} \right)}^\alpha , \quad x > 0
   \end{equation*}
   where $\alpha, \theta > 0$. Find $\VaR_p(X)$.
 \end{eg}
@@ -874,7 +859,7 @@ The \hlnoteb{Value-at-Risk (VaR)} is a \hlnotea{quantile} of the distribution of
 \begin{solution}
   Since $F$ is continuous and strictly increasing, we have that
   \begin{equation*}
-    \pi_p = F^{-1}(p) = \theta \left[ (1 - p)^{-\frac{1}{\alpha}} - 1 \right]
+    \pi_p = F^{-1}(p) = \theta \left[ {(1 - p)}^{-\frac{1}{\alpha}} - 1 \right]
   \end{equation*}
 \end{solution}
 
@@ -901,18 +886,16 @@ The \hlnoteb{Value-at-Risk (VaR)} is a \hlnotea{quantile} of the distribution of
   \end{equation*}
 \end{solution}
 
-\subsubsection{Tail-Value-at-Risk}
-\label{ssub:Tail-Value-at-Risk}
+\subsubsection{Tail-Value-at-Risk}\label{ssub:Tail-Value-at-Risk}
 
-To compensate for the weakness of $\VaR$ at giving us the size of the the loss $X$ of which we cannot measure, we use the \hlnotea{Tail-Value-at-Risk}.
+To compensate for the weakness of $\VaR$ at giving us the size of the loss $X$ of which we cannot measure, we use the \hlnotea{Tail-Value-at-Risk}.
 
-\begin{defn}[Tail-Value-at-Risk (TVaR)]\index{Tail-Value-at-Risk}
-\label{defn:tail_value_at_risk}
+\begin{defn}[Tail-Value-at-Risk (TVaR)]\index{Tail-Value-at-Risk}\label{defn:tail_value_at_risk}
 Let $X$ be an rv. The \hlnoteb{Tail-Value-at-Risk (TVaR)} of $X$ at the $100p\%$ level, denoted as $\TVaR_p(X)$, is defined as the average of all $\VaR$ values above the level $p$, and expressed as\marginnote{TVaR also has the following names, used by different regions:
 \begin{itemize}
-  \item \hlnotea{Conditional Tail Expectation} (CTE) - NA
+  \item \hlnotea{Conditional Tail Expectation} (CTE) --- NA
   \item \hlnotea{Tail Conditional Expectation} (TCE)
-  \item \hlnotea{Expected Shortfall} (ES) - EU
+  \item \hlnotea{Expected Shortfall} (ES) --- EU
 \end{itemize}}
   \begin{equation*}
     \TVaR_p(X) = \frac{1}{1 - p} \int_{p}^{1} \VaR_\alpha(X) \dif{\alpha} = \frac{1}{1 - p} \int_{p}^{1} \pi_\alpha \dif{\alpha}
@@ -925,8 +908,7 @@ Let $X$ be an rv. The \hlnoteb{Tail-Value-at-Risk (TVaR)} of $X$ at the $100p\%$
 
 Perhaps a clearer definition would be the following, although the expression is only sensible if $X$ is a crv:
 
-\begin{defn}[Tail-Value-at-Risk (TVaR)]\index{Tail-Value-at-Risk}
-\label{defn:tail_value_at_risk_v2}
+\begin{defn}[Tail-Value-at-Risk (TVaR)]\index{Tail-Value-at-Risk}\label{defn:tail_value_at_risk_v2}
   Let $X$ be an rv. The \hlnoteb{Tail-Value-at-Risk (TVAR)} of $X$ at the $100p\%$ level, denoted $\TVaR_p(X)$, is the expected loss given that the loss exceeds the $100p$ percentile (or quantile) of the distribution of $X$, expressible as
   \begin{equation*}
     \TVaR_p(X) = E[ X \mid X > \pi_p ] = \frac{1}{\bar{F}(\pi_p)} \int_{\pi_p}^{\infty} x f(x) \dif{x}.
@@ -1001,8 +983,7 @@ where we let $\alpha = F(x)$ as substitution.
 
 Before ending this section, we introduce a notion that is related to $\TVaR$.
 
-\begin{defn}[Mean Excess Loss]\index{Mean Excess Loss}
-\label{defn:mean_excess_loss}
+\begin{defn}[Mean Excess Loss]\index{Mean Excess Loss}\label{defn:mean_excess_loss}
   Let $X$ be an rv, and $d \in \mathbb{R}$. The \hlnoteb{mean excess loss}, denoted $e_X(d)$, is defined as
   \begin{equation*}
     e_X(d) = E[ X - d \mid X > d ]
@@ -1010,8 +991,7 @@ Before ending this section, we introduce a notion that is related to $\TVaR$.
   and $e_X(d) = 0$ for those $d$ such that $P(X > d) = 0$.
 \end{defn}
 
-\begin{propo}[Relation of $\TVaR_p(X)$ and $e_X(d)$]
-\label{propo:relation_of_tvar_p_x_and_e_x_d_}
+\begin{propo}[Relation of $\TVaR_p(X)$ and $e_X(d)$]\label{propo:relation_of_tvar_p_x_and_e_x_d_}
   For a crv $X$, we have
   \begin{equation*}
     \TVaR_p(X) = e_X(\pi_p) + \VaR_p(X)
@@ -1022,11 +1002,10 @@ Before ending this section, we introduce a notion that is related to $\TVaR$.
   By \cref{eq:tvar_memoryless_exp}, we have that
   \begin{equation*}
     \TVaR_p(X) = E [ X - \pi_p \mid X > \pi_p ] + \pi_p = e_X(\pi_p) + \pi_p.
-  \end{equation*}\qed
+  \end{equation*}\qed\
 \end{proof}
 
-\begin{propo}[Expection from Survival Function]
-\label{propo:expection_from_survival_function}
+\begin{propo}[Expection from Survival Function]\label{propo:expection_from_survival_function}
   Let $X$ be a non-negative rv such that $E[X^k] < \infty$, for any $k \in \mathbb{N} \setminus \{ 0 \}$. Then\sidenote{Note that this works for the discrete case as well, by replacing $\int$ with $\sum$.}
   \begin{equation*}
     E\left[X^k\right] = k \int_{0}^{\infty} x^{k - 1} \bar{F}(x) \dif{x}
@@ -1041,13 +1020,13 @@ Before ending this section, we introduce a notion that is related to $\TVaR$.
                         &= - \int_{0}^{\infty} x^k \dif{\bar{F}(x)} \\
                         &= - \left[ x^k \bar{F}(x) \at{0}{\infty} - \int_{0}^{\infty} kx^{k - 1} \bar{F}(x) \dif{x} \right] \quad \because \text{ IBP } \\
                         &= k \int_{0}^{\infty} x^{k - 1} \bar{F}(x) \dif{x}
-  \end{align*} \qed
+  \end{align*}\qed\
 \end{proof}
 
 \begin{eg}
   Calculate $e_X(d)$ and $\TVaR_p(X)$ for a Pareto distribution $X$ with cdf
   \begin{equation*}
-    F(x) = 1 - \left( \frac{\theta}{x + \theta} \right)^\alpha, \quad x > 0,
+    F(x) = 1 - {\left( \frac{\theta}{x + \theta} \right)}^\alpha, \quad x > 0,
   \end{equation*}
   where $\alpha > 1$ and $\theta > 0$.
 \end{eg}
@@ -1057,39 +1036,37 @@ Before ending this section, we introduce a notion that is related to $\TVaR$.
   \begin{align*}
     e_X(d) &= \int_{0}^{\infty} P(X - d > x \mid X > d) \dif{x} = \int_{0}^{\infty} \frac{P(X - d > x, X > d)}{P(X > d)} \dif{x} \\
            &= \int_{0}^{\infty} \frac{P(X > x + d)}{P(X > d)} \dif{x} = \int_{0}^{\infty} \frac{\bar{F}(x + d)}{\bar{F}(d)} \dif{x} \\
-           &= \int_{0}^{\infty} \left( \frac{d + \theta}{x + d + \theta} \right)^\alpha \dif{x} = \frac{( d + \theta )^\alpha}{1 - \alpha} \left( \frac{1}{x + d + \theta} \right)^{ \alpha - 1 } \at{0}{\infty} \\
+           &= \int_{0}^{\infty} {\left( \frac{d + \theta}{x + d + \theta} \right)}^\alpha \dif{x} = \frac{{( d + \theta )}^\alpha}{1 - \alpha} {\left( \frac{1}{x + d + \theta} \right)}^{ \alpha - 1 } \at{0}{\infty} \\
            &= \frac{d + \theta}{\alpha - 1}
   \end{align*}
   By \cref{eg:varp_pareto}, we have
   \begin{equation*}
-    \pi_p = \theta \left[ ( 1 - p )^{-\frac{1}{\alpha}} - 1 \right]
+    \pi_p = \theta \left[ {( 1 - p )}^{-\frac{1}{\alpha}} - 1 \right]
   \end{equation*}
   and so
   \begin{align*}
     \TVaR_p(X) &= e_X(\pi_p) + \pi_p \\
-               &= \frac{\theta\left[ (1 - p)^{-\frac{1}{\alpha}} - 1 \right] + \theta}{\alpha - 1} + \theta\left[ ( 1 - p )^{-\frac{1}{\alpha}} - 1 \right] \\
-               &= \frac{\theta(1 - p)^{-\frac{1}{\alpha}}}{\alpha - 1} + \frac{\theta(\alpha - 1)(1 - p)^{-\frac{1}{\alpha}}}{\alpha - 1} - \theta \\
-               &= \frac{\theta \alpha ( 1 - p )^{-\frac{1}{\alpha}}}{\alpha - 1} - \theta
+               &= \frac{\theta\left[ {(1 - p)}^{-\frac{1}{\alpha}} - 1 \right] + \theta}{\alpha - 1} + \theta\left[ {( 1 - p )}^{-\frac{1}{\alpha}} - 1 \right] \\
+               &= \frac{\theta{(1 - p)}^{-\frac{1}{\alpha}}}{\alpha - 1} + \frac{\theta(\alpha - 1){(1 - p)}^{-\frac{1}{\alpha}}}{\alpha - 1} - \theta \\
+               &= \frac{\theta \alpha {( 1 - p )}^{-\frac{1}{\alpha}}}{\alpha - 1} - \theta
   \end{align*}
 \end{solution}
 
-\begin{propo}[Expected Deductible]
-\label{propo:expected_deductible}
+\begin{propo}[Expected Deductible]\label{propo:expected_deductible}
   We have
   \begin{equation*}
-    E( [ X - d ]_+ ) = \int_{d}^{\infty} \bar{F}(x) \dif{x}
+    E( {[ X - d ]}_+ ) = \int_{d}^{\infty} \bar{F}(x) \dif{x}
   \end{equation*}
 \end{propo}
 
 \begin{proof}
   By the Law of the Unconscious Statistician and IBP on the last step,
   \begin{equation*}
-    E( [ X - d ]_+ ) = \int_{d}^{\infty} ( x - d ) \dif{F(x)} = - \int_{d}^{\infty} (x - d) \dif{\bar{F}(x)} = \int_{d}^{\infty} \bar{F}(x) \dif{x}
-  \end{equation*}\qed
+    E( {[ X - d ]}_+ ) = \int_{d}^{\infty} ( x - d ) \dif{F(x)} = - \int_{d}^{\infty} (x - d) \dif{\bar{F}(x)} = \int_{d}^{\infty} \bar{F}(x) \dif{x}
+  \end{equation*}\qed\
 \end{proof}
 
-\begin{propo}[An Expression for Mean Excess Value]
-\label{propo:an_expression_for_mean_excess_value}
+\begin{propo}[An Expression for Mean Excess Value]\label{propo:an_expression_for_mean_excess_value}
   If $\bar{F}(d) > 0$, we have
   \begin{equation*}
     e_X(d) = \frac{\int_{d}^{\infty} \bar{F}(x) \dif{x}}{\bar{F}(d)}
@@ -1100,15 +1077,15 @@ Before ending this section, we introduce a notion that is related to $\TVaR$.
   Observe that by \cref{propo:expected_deductible}, we have
   \begin{align*}
     e_X(d) &= E[ X - d \mid X > d ] = \frac{E[ ( X - d ) \mathbb{1}_{X > d} ]}{P(X > d)} \\
-           &= \frac{E( [ X - d ]_+ )}{\bar{F}(d)} = \frac{\int_{d}^{\infty} \bar{F}(x) \dif{x}}{\bar{F}(d)}
-  \end{align*}\qed
+           &= \frac{E( {[ X - d ]}_+ )}{\bar{F}(d)} = \frac{\int_{d}^{\infty} \bar{F}(x) \dif{x}}{\bar{F}(d)}
+  \end{align*}\qed\
 \end{proof}
 
 % subsection risk_measures_continued (end)
 
 % section distrbutional_quantities_and_risk_measures_continued_2 (end)
 
-\section{Severity Distributions - Creating Severity Distributions}%
+\section{Severity Distributions --- Creating Severity Distributions}%
 \label{sec:severity_distributions_creating_severity_distributions}
 % section severity_distributions_creating_severity_distributions
 
@@ -1137,9 +1114,8 @@ Our goal is to find a reasonable model for the \hlnotea{ground-up loss} rv $X$. 
 
 A weakness of the \textbf{Nonparametric approach} is, if there is not enough data, such as in catasthropic risks, is becomes difficult to obtain reliable information. We shall look at one such example in this approach.
 
-\begin{defn}[Empirical Distribution Function]\index{Empirical Distribution Function}
-\label{defn:empirical_distribution_function}
-  Let $\{ X_1, ..., X_n \}$ be an iid sample of a risk $X$. Then its \hlnoteb{empricial distribution function (edf)} is defined as
+\begin{defn}[Empirical Distribution Function]\index{Empirical Distribution Function}\label{defn:empirical_distribution_function}
+  Let $\{ X_1, \ldots, X_n \}$ be an iid sample of a risk $X$. Then its \hlnoteb{empricial distribution function (edf)} is defined as
   \begin{equation*}
     \hat{F}_n(x) = \frac{1}{n} \sum_{i=1}^{n}  \mathbb{1}_{\{X_i \leq x\}}, \quad x \in \mathbb{R}.
   \end{equation*}
@@ -1171,10 +1147,9 @@ A weakness of the \textbf{Nonparametric approach} is, if there is not enough dat
 % chapter lecture_5_sep_20th (end)
 
 \chapter{Lecture 6 Sep 25th}%
-\label{chp:lecture_6_sep_25th}
-% chapter lecture_6_sep_25th
+\label{chp:lecture_6_sep_25th} % chapter lecture_6_sep_25th
 
-\section{Severity Distributions - Creating Severity Distributions (Continued)}%
+\section{Severity Distributions --- Creating Severity Distributions (Continued)}%
 \label{sec:severity_distributions_creating_severity_distributions_continued}
 % section severity_distributions_creating_severity_distributions_continued
 
@@ -1184,7 +1159,7 @@ A weakness of the \textbf{Nonparametric approach} is, if there is not enough dat
   \begin{tikzpicture}[
     block/.style = {rectangle, draw, rounded corners,
                text width =15em, align=center,
-               color=base16-eighties-dark,fill=base16-eighties-blue},
+               color=dark,fill=be-blue},
     sblock/.style = {rectangle, draw, rounded corners,
                text width =4em, align=center},
     ]
@@ -1195,8 +1170,8 @@ A weakness of the \textbf{Nonparametric approach} is, if there is not enough dat
     \node [block, below=of estimation] (validation) {\textbf{Model Validation} \\
       test for goodness-of-fit};
     \node [block, below=of validation] (decision) {Is model acceptable?};
-    \node [sblock, left=of decision,color=base16-eighties-dark,fill=base16-eighties-red] (no) {\textbf{No}};
-    \node [sblock, right=of decision,color=base16-eighties-dark,fill=base16-eighties-green] (yes) {\textbf{DONE!}};
+    \node [sblock, left=of decision,color=dark,fill=be-red] (no) {\textbf{No}};
+    \node [sblock, right=of decision,color=dark,fill=be-green] (yes) {\textbf{DONE!}};
     
     \draw[-latex'] (selection) -- (estimation);
     \draw[-latex'] (estimation) -- (validation);
@@ -1205,14 +1180,12 @@ A weakness of the \textbf{Nonparametric approach} is, if there is not enough dat
     \draw[-latex'] (no) |- (selection.west);
     \draw[-latex'] (decision) -- (yes);
   \end{tikzpicture}
-  \caption{Process of a Parametric Approach}
-  \label{fig:process_of_a_parametric_approach}
+  \caption{Process of a Parametric Approach}\label{fig:process_of_a_parametric_approach}
 \end{figure}
 
 \paragraph{Common Techniques in Creating New Parametric Distributions} Before diving into the topic, first, a definition:
 
-\begin{defn}[Parametric Distribution]\index{Parametric Distribution}
-\label{defn:parametric_distribution}
+\begin{defn}[Parametric Distribution]\index{Parametric Distribution}\label{defn:parametric_distribution}
   A \hlnoteb{parametric distribution} is a set of distribution functions, of which each member is determined by specifying one or more parameters.
 \end{defn}
 
@@ -1230,8 +1203,7 @@ Some common techniques are the following:
 
 This transformation is equivalent to applying inflation uniformly across all loss levels, and is known as a change of scale.
 
-\begin{propo}[Multiplication by a Constant]
-\label{propo:multiplication_by_a_constant}
+\begin{propo}[Multiplication by a Constant]\label{propo:multiplication_by_a_constant}
   Let $X$ be a crv with cdf $F_X$ and pdf $f_X$. Let $Y = cX$ for some $c > 0$. Then
   \begin{equation*}
     F_Y(y) = F_X\left( \frac{y}{c} \right), \quad f_Y(y) = \frac{1}{c}f_X\left( \frac{y}{c} \right).
@@ -1242,18 +1214,16 @@ This transformation is equivalent to applying inflation uniformly across all los
   \begin{gather*}
     F_Y(y) = P(Y \leq y) = P( cX \leq y ) = P\left( X \leq \frac{y}{c} \right) = F_X\left( \frac{y}{c} \right) \\
     f_Y(y) = \frac{d}{dy} F_Y(y) = \frac{d}{dy} F_X\left( \frac{y}{c} \right) = \frac{1}{c}f_X\left( \frac{y}{c} \right)
-  \end{gather*}\qed
+  \end{gather*}\qed\
 \end{proof}
 
-\begin{defn}[Scale Distribution]\index{Scale Distribution}
-\label{defn:scale_distribution}
+\begin{defn}[Scale Distribution]\index{Scale Distribution}\label{defn:scale_distribution}
   We say that a parametric distribution is a \hlnoteb{scale distribution} if $Y = cY$ for any positive constant $c$ is from the same set of distributions as $X$.
 \end{defn}
 
 It is clear that we have the following result:
 
-\begin{crly}
-\label{crly:constant_multiplication_crly}
+\begin{crly}\label{crly:constant_multiplication_crly}
   The parameter $c$ in \cref{propo:multiplication_by_a_constant} is a scale parameter, and $Y$ is a scale distribution.
 \end{crly}
 
@@ -1269,8 +1239,7 @@ It is clear that we have the following result:
   Thus $Y \sim \Exp(c\theta)$ and so $Y$ is a scale distribution. In particular, the exponential distribution belongs to a family of scale distributions.
 \end{eg}
 
-\begin{defn}[Scale Parameter]\index{Scale Parameter}
-\label{defn:scale_parameter}
+\begin{defn}[Scale Parameter]\index{Scale Parameter}\label{defn:scale_parameter}
   A parameter $\theta$ is called a \hlnoteb{scale paramter} of a parametric distribution $X$ if it satisfies the following condition: the parametric value of $cX$ is $c \theta$ for any positive constant $c$, and other parameters (if any) remain unchanged.
 \end{defn}
 
@@ -1304,8 +1273,7 @@ It is clear that we have the following result:
 \label{sub:raising_to_a_power}
 % subsection raising_to_a_power
 
-\begin{propo}[Raising to a Power]
-\label{propo:raising_to_a_power}
+\begin{propo}[Raising to a Power]\label{propo:raising_to_a_power}
   Let $X$ be a crv with pdf $f_X$ and cdf $F_X$ with $F_X(0) = 0$. Let $Y = X^{\frac{1}{\tau}}$. If $\tau > 0$, then
   \begin{equation*}
     F_Y(y) = F_X(y^\tau), \quad f_Y(y) = \tau y^{\tau - 1} f_X(y^\tau), \quad y > 0,
@@ -1332,13 +1300,13 @@ It is clear that we have the following result:
   and
   \begin{equation*}
     f_Y(y) = \frac{d}{dy} F_Y(y) = \frac{d}{dy} (1 - F_X\left(y^\tau\right)) = - \tau y^{\tau - 1} f_X\left(y^\tau\right).
-  \end{equation*}\qed
+  \end{equation*}\qed\
 \end{proof}
 
 \begin{eg}
   Let $X \sim \Exp(\theta)$ and $Y = X^{\frac{1}{\tau}}$ for $\tau > 0$, we have
   \begin{equation*}
-    F_Y(y) = F_X\left(t^{\tau}\right) = 1 - e^{ \frac{-y^\tau}{\theta} } = 1 - e^{-\left( \frac{y}{\alpha} \right)^\tau},
+    F_Y(y) = F_X\left(t^{\tau}\right) = 1 - e^{ \frac{-y^\tau}{\theta} } = 1 - e^{-{\left( \frac{y}{\alpha} \right)}^\tau},
   \end{equation*}
   where $\alpha = \theta^{\frac{1}{\tau}}$. In particular, we have that $Y \sim \Wei(\alpha, \tau)$.
 \end{eg}
@@ -1349,8 +1317,7 @@ It is clear that we have the following result:
 \label{sub:exponentiation}
 % subsection exponentiation
 
-\begin{propo}[Exponentiation Method]
-\label{propo:exponentiation_method}
+\begin{propo}[Exponentiation Method]\label{propo:exponentiation_method}
   Let $X$ be a crv with pdf $f_X$ and cdf $F_X$. Let $Y = e^X$. Then
   \begin{equation*}
     F_Y(y) = F_X(\ln y), \quad f_Y(y) = \frac{1}{y} f_X(\ln y).
@@ -1365,14 +1332,14 @@ It is clear that we have the following result:
   and
   \begin{equation*}
     f_Y(y) = \frac{d}{dy} F_Y(y) = \frac{d}{dy} F_X(\ln y) = \frac{1}{y} f_X(\ln y).
-  \end{equation*}\qed
+  \end{equation*}\qed\
 \end{proof}
 
 \begin{ex}[Lognormal Distribution]\label{eg:lognormal_distribution}
   Let $X \sim \Nor(\mu, \sigma^2)$. The cdf and pdf of $Y = e^X$ is
   \begin{gather*}
     F_Y(y) = F_X(\ln y) = \Phi\left( \frac{\ln y - \mu}{\sigma} \right) \\
-    f_Y(y) = \frac{1}{y} f_X(\ln y) = \frac{1}{y} \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{1}{2} \cdot \left( \frac{\ln y - \mu}{\sigma} \right)^2}
+    f_Y(y) = \frac{1}{y} f_X(\ln y) = \frac{1}{y} \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{1}{2} \cdot {\left( \frac{\ln y - \mu}{\sigma} \right)}^2}
   \end{gather*}
 \end{ex}
 
@@ -1384,15 +1351,14 @@ It is clear that we have the following result:
 
 The rationale behind mixing distributions is to define an rv $X$ conditional on a second rv, say $\Theta$ (aka \hldefn{mixing rv}). The mixing rv $\Theta$ can either be discrete or be continuous, which leads to two types of mixtures:
 \begin{itemize}
-  \item \hlnotea{discrete mixture} : when $\Theta$ is discrete; and
-  \item \hlnotea{continuous mixture} : when $\Theta$ is continuous.
+  \item \hlnotea{discrete mixture}: when $\Theta$ is discrete; and
+  \item \hlnotea{continuous mixture}: when $\Theta$ is continuous.
 \end{itemize}
 
-\begin{defn}[Discrete Mixed Distribution]\index{Discrete Mixed Distribution}
-\label{defn:discrete_mixed_distribution}
-  Let $\Theta$ be a drv taking values on $\{ \theta_1, \theta_2, ..., \theta_n \}$ with
+\begin{defn}[Discrete Mixed Distribution]\index{Discrete Mixed Distribution}\label{defn:discrete_mixed_distribution}
+  Let $\Theta$ be a drv taking values on $\{ \theta_1, \theta_2, \ldots, \theta_n \}$ with
   \begin{equation*}
-    P(\Theta = \theta_i) = p_i > 0, \quad i = 1, ..., n,
+    P(\Theta = \theta_i) = p_i > 0, \quad i = 1, \ldots, n,
   \end{equation*}
   and the rv $Y_i := X \mid \Theta = \theta_i$ has cdf
   \begin{equation*}
@@ -1443,7 +1409,7 @@ for any function $g$ such that the expectation exists. In particular, we have
 \label{chp:lecture_7_sep_27th}
 % chapter lecture_7_sep_27th
 
-\section{Severity Distributions - Creating Severity Distributions (Continued 2)}%
+\section{Severity Distributions --- Creating Severity Distributions (Continued 2)}%
 \label{sec:severity_distributions_creating_severity_distributions_continued_2}
 % section severity_distributions_creating_severity_distributions_continued_2
 
@@ -1451,8 +1417,7 @@ for any function $g$ such that the expectation exists. In particular, we have
 \label{sub:mixing_distributions_continued}
 % subsection mixing_distributions_continued
 
-\begin{defn}[Continuous Mixture]\index{Continuous Mixture}
-\label{defn:continuous_mixture}
+\begin{defn}[Continuous Mixture]\index{Continuous Mixture}\label{defn:continuous_mixture}
   Let $\Theta$ be a crv with density $f_\Theta$, and the cdf and pdf of $X \mid \Theta = \theta$ are given by
   \begin{equation*}
     F_{X \mid \Theta}(x \mid \theta) = P(X \leq x \mid \Theta = \theta) \text{ and } f_{X \mid \Theta}(x \mid \theta) = P(X = x \mid \Theta = \theta).
@@ -1482,15 +1447,13 @@ for any function $g$ such that the expectation exists. In particular, we have
     f_X(x) &= \int_{0}^{\infty} f_{X \mid \Lambda}(x \mid \lambda) f_{\Lambda}(\lambda) \dif{\lambda} \\
            &= \int_{0}^{\infty} \lambda e^{-x \lambda} \frac{\theta^{\alpha} \lambda^{\alpha - 1} e^{-\theta \lambda}}{\Gamma(\alpha)} \dif{\lambda} \\
            &= \frac{\theta^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty} \lambda^\alpha e^{-\lambda ( x + \theta )} \dif{\lambda} \\
-           &= \frac{\theta^\alpha}{\Gamma(\alpha) (x + \theta)} \int_{0}^{\infty} \left( \frac{y}{x + \theta} \right)^\alpha e^{-y} \dif{y} \enspace \text{ where } y = \lambda ( x + \theta ) \\
-           &= \frac{\theta^\alpha}{\Gamma(\alpha) ( x + \theta )^{\alpha + 1}} \int_{0}^{\infty} y^\alpha e^{-y} \dif{y} \\
-           &= \frac{\theta^\alpha \Gamma(\alpha + 1)}{\Gamma(\alpha) ( x + \theta )^{\apha + 1}} = \frac{\alpha \theta^\alpha}{(x + \theta)^{\alpha + 1}}.
+           &= \frac{\theta^\alpha}{\Gamma(\alpha) (x + \theta)} \int_{0}^{\infty} {\left( \frac{y}{x + \theta} \right)}^\alpha e^{-y} \dif{y} \enspace \text{ where } y = \lambda ( x + \theta ) \\
+           &= \frac{\theta^\alpha}{\Gamma(\alpha) {( x + \theta )}^{\alpha + 1}} \int_{0}^{\infty} y^\alpha e^{-y} \dif{y} \\
+           &= \frac{\theta^\alpha \Gamma(\alpha + 1)}{\Gamma(\alpha) {( x + \theta )}^{\alpha + 1}} = \frac{\alpha \theta^\alpha}{{(x + \theta)}^{\alpha + 1}}.
   \end{align*}
 \end{solution}
 
-\begin{propo}[Total Expectation and Total Variance]
-\index{Total Expectation}\index{Total Variance}
-\label{propo:total_expectation_and_total_variance}
+\begin{propo}[Total Expectation and Total Variance]\index{Total Expectation}\index{Total Variance}\label{propo:total_expectation_and_total_variance}
   For any rvs $X$ and $\Theta$, provided that the repsective expectation and variance exist, we have
   \begin{gather*}
     E[X] = E[ E[ X \mid \Theta ] ] \\
@@ -1507,14 +1470,14 @@ for any function $g$ such that the expectation exists. In particular, we have
   \end{align*}
   Note that
   \begin{equation*}
-    \Var(X \mid \Theta) = E[ X^2 \mid \Theta ] + E[ X \mid \Theta ]^2.
+    \Var(X \mid \Theta) = E[ X^2 \mid \Theta ] + E{[ X \mid \Theta ]}^2.
   \end{equation*}
   And so
   \begin{align*}
     &E[\Var(X \mid \Theta)] + \Var( E[ X \mid \Theta ] ) \\
-    &= E[ E[ X^2 \mid \Theta ] ] - E \left[ E[ X \mid \Theta ]^2 \right] + E \left[ E [ X \mid \Theta ]^2 \right] - E[ E [ X \mid \Theta ] ]^2 \\
-    &= E\left[X^2\right] - E[X]^2 = \Var(X)
-  \end{align*}\qed
+    &= E[ E[ X^2 \mid \Theta ] ] - E \left[ E{[ X \mid \Theta ]}^2 \right] + E \left[ E {[ X \mid \Theta ]}^2 \right] - E{[ E [ X \mid \Theta ] ]}^2 \\
+    &= E\left[X^2\right] - E{[X]}^2 = \Var(X)
+  \end{align*}\qed\
 \end{proof}
 
 \begin{eg}
@@ -1529,7 +1492,7 @@ for any function $g$ such that the expectation exists. In particular, we have
   The variance of $X$ is
   \begin{align*}
     \Var(X) &= E[\Var(X \mid \Theta)] + \Var( E[X \mid \Theta] ) \\
-            &= E[\Theta^2] + \Var(\Theta) = 2E[\Theta^2] - E[\Theta]^2 \\
+            &= E[\Theta^2] + \Var(\Theta) = 2E[\Theta^2] - E{[\Theta]}^2 \\
             &= \frac{2}{3}(1 + 4 + 9) - 4 = \frac{28}{3} - \frac{12}{3} = \frac{16}{3}
   \end{align*}
 \end{solution}
@@ -1546,7 +1509,7 @@ for any function $g$ such that the expectation exists. In particular, we have
   The variance of $X$ is
   \begin{align*}
     \Var(X) &= E[\Var(X \mid \Lambda)] + \Var( E[ X \mid \Lambda ] ) \\
-            &= E[\Lambda^2] + \Var(\Lambda) = 2\Var(\Lambda) + E[\Lambda]^2 \\
+            &= E[\Lambda^2] + \Var(\Lambda) = 2\Var(\Lambda) + E{[\Lambda]}^2 \\
             &= 2 \alpha \theta^2 + \alpha^2 \theta^2.
   \end{align*}
 \end{solution}
@@ -1555,12 +1518,11 @@ for any function $g$ such that the expectation exists. In particular, we have
 
 % section severity_distributions_creating_severity_distributions_continued_2 (end)
 
-\section{Severity Distributions - Tail of Distributions}%
+\section{Severity Distributions --- Tail of Distributions}%
 \label{sec:severity_distributions_tail_of_distributions}
 % section severity_distributions_tail_of_distributions
 
-\begin{defn}[Tail]\index{Tail}
-\label{defn:tail}
+\begin{defn}[Tail]\index{Tail}\label{defn:tail}
   The \hlnoteb{tail} of a distribution (usually the right tail) is the portion of the distribution corresponding to large values of the random variable.
 \end{defn}
 
@@ -1588,7 +1550,7 @@ Recall that the $k$th moment of a loss $X$ is
 \begin{equation*}
   E\left[X^k\right] = \int_{0}^{\infty} x^k f_X(x) \dif{x}.
 \end{equation*}
-Now if $f_X$ takes on large values for large $x$, we may have $E\left[X^k\right]$ blow up to infinity, and so it is desirable to find/use some distribution with a \hlnotea{decaying} probability function.
+Now if $f_X$ takes on large values for large $x$, we may have $E\left[X^k\right]$ blow up to infinity, and so it is desirable to find/use some distribution with a \hlnotea{decaying} probability function, one at which its rate of decay is faster than the growth of $x^{-(k + 1)}$.
 
 % subsection existence_of_moments (end)
 
