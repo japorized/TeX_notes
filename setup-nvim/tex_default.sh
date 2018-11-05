@@ -20,12 +20,16 @@
 \chapter*{\faBook \enspace List of Definitions}
 \addcontentsline{toc}{chapter}{List of Definitions}
 \theoremlisttype{all}
+\begin{fullwidth}
 \listtheorems{defn}
+\end{fullwidth}
 
 \chapter*{\faCoffee \enspace List of Theorems}
 \addcontentsline{toc}{chapter}{List of Theorems}
 \theoremlisttype{allname}
+\begin{fullwidth}
 \listtheorems{axiom,lemma,thm,crly,propo}
+\end{fullwidth}
 
 
 
