@@ -1936,7 +1936,7 @@ As defined before in \cref{defn:mean_excess_loss},
         h_X'(x) &= \frac{4x \left( 1 + x + x^2 \right) - (1 + 2x) \left( 1 + 2x^2 \right)}{\left(1 + x + x^2\right)^2} \\
                 &= \frac{2x^2 + 2x - 1}{x^4 + 2x^3 + 3x^3 + 2x + 1}.
       \end{align*}
-      It may appear as if $h_X'(x)$ is positive, seeing that $x^4$ should dominate. However, notice that the \href{https://en.wikipedia.org/wiki/Quadratic_equation\#Discriminant}{discriminant} is positive:\sidenote{Lecture notes simply threw the values $1$ and $\frac{1}{2}$ out of nowhere. While the result seems harmless, firstly, $x \neq 0$, since $x > 0$. In fact, since the critical point is $\sqrt{\frac{3}{4}} - \frac{1}{2} \approx 0.366$, $\frac{1}{2}$ is a value that comes after the critical point, so we would not have been able to verify without trying and failing numerous times, especially since the critical point is an irrational value.
+      It may appear as if $h_X'(x)$ is positive, seeing that $x^4$ should dominate. However, notice that the \href{https://en.wikipedia.org/wiki/Quadratic_equation\#Discriminant}{discriminant} is positive:\sidenote{Lecture notes simply threw the values $1$ and $\frac{1}{2}$ for $x$ almost out of nowhere. While the result seems harmless, firstly, $x \neq 0$, since $x > 0$. In fact, since the critical point is $\sqrt{\frac{3}{4}} - \frac{1}{2} \approx 0.366$, $\frac{1}{2}$ is a value that comes after the critical point, so we would not have been able to verify without trying and failing numerous times, especially since the critical point is an irrational value.
       
       Here, we are smart and equipped with the knowledge that by solving the first derivative for $x$ by equating to $0$ allows us to find these critical points, which is indicative of a change from positive to negative, or vice versa, slope for $h_X(x)$.}
       \begin{equation*}
@@ -1955,6 +1955,273 @@ As defined before in \cref{defn:mean_excess_loss},
 
 % section severity_distributions_tail_of_distributions_continued_2 (end)
 
+% chapter lecture_9_oct_11th (end)
+
+\chapter{Lecture 10 Oct 16th}%
+\label{chp:lecture_10_oct_16th}
+% chapter lecture_10_oct_16th
+
+\section{Severity Distributions --- Policy Adjustments (Continued)}%
+\label{sec:severity_distributions_policy_adjustments_continued}
+% section severity_distributions_policy_adjustments_continued
+
+Insurance policies contain various \hlnotea{adjustments} to soften the amount that insurers have to pay, to minimize moral hazards, and for various other reasons. In this section, we shall introduce some common policy adjustments.
+
+In the following definitions, suppose that $X$ is our ground-up loss rv, and $H$ a function incurred by the adjustment.
+
+\begin{defn}[Policy Limit]\index{Policy Limit}\label{defn:policy_limit}
+  A fixed level $u > 0$ is called a \hlnoteb{policy limit} if, provided that there are no other adjustments, the insurer shall pay\sidenote{Now that this definition uses the symbol $\land$ for denoting a policy limit, I shall refrain from using the same symbol in proofs, unless if the context is clear.}
+  \begin{equation*}
+    H(X) = \min \{ X, u \} := X \land u = \begin{cases}
+      X & X \leq u \\
+      u & X \geq u
+    \end{cases}.
+  \end{equation*}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-0.5,0) -- (4,0) node[right] {$x$};
+      \draw[->] (0,-0.5) -- (0,4) node[above] {$F(x)$};
+      \draw[->,thick] (0, 0) -- (2, 3) -- (4, 3);
+      \draw[dashed] (2, 3) -- (0, 3) node[left] {$u$};
+    \end{tikzpicture}
+    \caption{Typical graph of a policy limit, without other adjustments.}\label{fig:typical_graph_of_a_policy_limit_}
+  \end{marginfigure}
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item A policy limit protects the insurer from overly large losses.
+    \item This is \hlimpo{noteworthy}: in practice, a policy limit may refer to \hlnotea{the maximum amount paid} by the insurer, but in this course, it is the \hlnotea{maximum loss} coverred by the insurer.
+  \end{itemize}
+\end{note}
+
+\begin{defn}[Ordinary Deductible]\index{Ordinary Deductible}\label{defn:ordinary_deductible}
+  A fixed level $d > 0$ is called an \hlnoteb{ordinary deductible} if, given that there are no other adjustments, the insurer pays
+  \begin{marginfigure}
+    \begin{tikzpicture}
+      \draw[->] (-0.5,0) -- (3,0) node[right] {$x$};
+      \draw[->] (0,-0.5) -- (0,3) node[above] {$F(x)$};
+      \draw[->,thick] (-0.5,0) -- (1, 0) -- (3, 2) node[right] {$H(X)$};
+      \node[below] at (1, 0) {$d$};
+    \end{tikzpicture}
+    \caption{Graph of a policy with ordinary deductible without any other adjustments.}\label{fig:graph_of_a_policy_with_ordinary_deductible_without_any_other_adjustments}
+  \end{marginfigure}
+  \begin{equation*}
+    Y = H(X) = {(X - d)}_+ = X \lor d = \begin{cases}
+      0     & X < d \\
+      X - d & X \geq d
+    \end{cases}
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item For any given loss, the first $d$ dollars falls on the insured.
+    \item It is a protection against frequent small claims.
+  \end{itemize}
+\end{note}
+
+\begin{defn}[Franchise Deductible]\index{Franchise Deductible}\label{defn:franchise_deductible}
+  A fixed level $d > 0$ is called a \hlnoteb{Franchise Deductible} if, given that there are no other adjustments, the insurer pays
+  \begin{marginfigure}
+    \begin{tikzpicture}
+      \draw[->] (-0.5,0) -- (3,0) node[right] {$X$};
+      \draw[->] (0,-0.5) -- (0,3) node[above] {$Y$};
+      \draw[-,thick] (-0.5,0) -- (1, 0);
+      \draw[->,thick] (1, 1) -- (2.7, 2.7) node[right] {$H(X)$};
+      \draw[dotted] (1, 1) -- (1, 0) node[below] {$d$};
+    \end{tikzpicture}
+    \caption{Graph of a policy with Franchise deductible without any other adjustments.}\label{fig:graph_of_a_policy_with_franchise_deductible_without_any_other_adjustments}
+  \end{marginfigure}
+  \begin{align*}
+    H(X) &= X \cdot \mathbb{1}_{\{ X > d \}} = \begin{cases}
+      0 & X \leq d \\
+      X & X > d
+    \end{cases} \\
+    &= (X - d) \mathbb{1}_{\{X > d\}} + d \cdot \mathbb{1}_{\{ X > d\}} \\
+    &= {(X - d)}_+ + d \cdot \mathbb{1}_{\{X > d\}}
+  \end{align*}
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item This differs from the ordinary deductible in that twhen the loss exceeds $d$, the deductible is waived and the \hlnotec{full loss is paid} by the insurer.
+    \item We are not concerned with whether the payment goes out or not at $X = d$ in this course.\sidenote{In the event that a problem of such a nature comes out in either exercises or exams, the point will be explicitly stated.}
+  \end{itemize}
+\end{note}
+
+\begin{remark}
+  This is not a good adjustment as it is prone to \hlnotea{moral hazard}.
+\end{remark}
+
+\begin{defn}[Coinsurance]\index{Coinsurance}\label{defn:coinsurance}
+  A fixed rate $\alpha \in [0, 1]$ is called a \hlnoteb{coinsurance factor} if, given that there are no other adjustments, the insurer pays
+  \begin{marginfigure}
+    \begin{tikzpicture}
+      \draw[->] (-0.5,0) -- (3,0) node[right] {$X$};
+      \draw[->] (0,-0.5) -- (0,3) node[above] {$Y$};
+      \draw[->,thick] (0, 0) -- (3, 3) node[right] {$H(X)$};
+      \draw[latex'-] (1.2,1.5) -- (0.7,2) node[above] {slope $= \alpha$};
+    \end{tikzpicture}
+    \caption{Graph of a policy with coinsurance without any other adjustments.}\label{fig:graph_of_a_policy_with_coinsurance_without_any_other_adjustments}
+  \end{marginfigure}
+  \begin{equation*}
+    H(X) = \alpha X.
+  \end{equation*}
+  For any given loss, the \hlnotec{insurer pays a proportion $100\alpha\%$} of the loss amount the remaining $100(1 - \alpha)\%$ falls on the insured.
+\end{defn}
+
+\subsection{Application Order for Multiple Adjustments}%
+\label{sub:application_order_for_multiple_adjustments}
+% subsection application_order_for_multiple_adjustments
+
+\newthought{If an insurance policy} has more than one adjustment, we assume the adjustments in the following order:
+\begin{itemize}
+  \item Policy limit (if any)
+  \item Policy/ordinary deductible (if any)
+  \item Coninsurance (if any)
+\end{itemize}
+
+\begin{note}
+  \begin{itemize}
+    \item These transformations are not necessarily commutative, so the order must be obeyed.
+    \item This ordering is optimal, i.e.\ it covers for all possible combinations, i.e.\ any other ways of adjustment can be expressed in this form.\sidenote{Claimed by lecturer. Require example.}
+    \item If $d$ is a deductible and $u$ the policy limit, we must have that $d < u$, since if $u < d$, then the insurer will only pay the maximum amount $u$ if the loss exeeds $d$, which is absurd. Therefore, for all of the cases that we shall consider, we will always assume, and safely so, that $d < u$.
+  \end{itemize}
+\end{note}
+
+Applying the ordering, we have
+\begin{equation*}
+  X \to X \land u \to {[ (X \land u) - d ]}_+ \to \alpha {[ ( X \land u ) - d ]}_+
+\end{equation*}
+\begin{marginfigure}
+  \begin{tikzpicture}
+    \draw[->] (-0.5,0) -- (3,0) node[right] {$X$};
+    \draw[->] (0,-0.5) -- (0,3) node[above] {$Y$};
+    \draw[-latex',thick] (-0.5,0) -- (1, 0) -- (2, 2) -- (3, 2) node[right] {$H(X)$};
+    \draw[dotted] (2, 2) -- (0, 2) node[left] {$\alpha(u - d)$};
+    \node[left] at (1.5,1) {slope $\alpha$};
+    \node[below] at (1, 0) {$d$};
+    \draw[dotted] (2, 2) -- (2, 0) node[below] {$u$};
+  \end{tikzpicture}
+  \caption{Graph of $H(X) = \alpha{[ (X \land u) - d ]}_+$.}\label{fig:graph_of_mutiple_adjustments}
+\end{marginfigure}
+and so
+\begin{equation*}
+  H(X) = \alpha {[ (X \land u) - d ]}_+ = \begin{cases}
+    0               & X < d \\
+    \alpha( X - d ) & d \leq X < u \\
+    \alpha( u - d ) & X \geq u
+  \end{cases}
+\end{equation*}
+
+For the case of applying \hlnotea{Franchise deductible} instead of ordinary deductible, we have
+\begin{equation*}
+  X \to X \land u \to ( X \land u ) \mathbb{1}_{\{X > d\}} \to \alpha(X \land u) \cdot \mathbb{1}_{\{X > d\}}
+\end{equation*}
+\begin{marginfigure}
+  \begin{tikzpicture} \draw[->] (-0.5,0) -- (3,0) node[right] {$X$};
+    \draw[->] (0,-0.5) -- (0,3) node[above] {$Y$};
+    \draw[-latex',thick] (1,1) -- (2, 2) -- (3, 2) node[right] {$H(X)$};
+    \draw[dotted] (0,0) -- (1,1);
+    \draw[dotted] (2, 2) -- (0, 2) node[left] {$\alpha(u - d)$};
+    \node[left] at (1.5,1.5) {slope $\alpha$};
+    \draw[dotted] (1, 1) -- (1, 0) node[below] {$d$};
+    \draw[dotted] (2, 2) -- (2, 0) node[below] {$u$};
+  \end{tikzpicture}
+  \caption{Graph of $H(X) = \alpha( X \land u ) \cdot \mathbb{1}_{\{X > d\}}$.}\label{fig:graph_of_mutiple_adjustments_with_franchise_deductible}
+\end{marginfigure}
+Notice that $X \land u \to (X \land u) \mathbb{1}_{\{X > d\}}$, since $X \land u > d$ is simply $X > d$ as $u > d$ by assumption. We have that for the case where we consider the Franchise deductible instead of an ordinary deductible,
+\begin{equation*}\label{eq}
+  H(X) = \alpha( X \land u ) \cdot \mathbb{1}_{\{X > d\}} = \begin{cases}
+    0        & X < d \\
+    \alpha X & d \leq X < u \\
+    \alpha u & X \geq u
+  \end{cases}
+\end{equation*}
+
+% subsection application_order_for_multiple_adjustments (end)
+
+\subsection{\imponote\ Reporting Methods}%
+\label{sub:reporting_methods}
+% subsection reporting_methods
+
+When we consider the amount paid by the insurer, we typically consider (and distinguish) between two types of reporting methods.
+\begin{itemize}
+  \item \hldefn{Loss basis}: $Y_L =$ amount paid per loss
+  \item \hldefn{Payment basis}: $Y_P =$ amount paid per payment
+\end{itemize}
+It is sensible that
+\begin{equation}\label{eq:relationship_of_YP_and_YL}
+  Y_P = Y_L \mid Y_L > 0.
+\end{equation}
+
+The above relationship shows that we can retrieve $Y_P$ from $Y_L$, i.e. $Y_L$ holds more information than $Y_P$. This makes sense; a loss may occur, but the insurer may not have to pay for the loss. For example, if the incurred loss is below a given deductible level.
+
+\subsubsection{Loss Basis}%
+\label{ssub:loss_basis}
+% subsubsection loss_basis
+
+\begin{itemize}
+  \item Each loss is recorded, i.e. each loss has an entry, even if the amount paid is $0$.
+  \item For a policy limit $u$, ordinary deductible $d$ with $d < u$ \sidenote{It would be silly if $d > u$.}, and coinsurance factor $\alpha$, we have
+    \begin{equation*}
+      Y_L = \alpha [ ( X \land u ) - d ]_+.
+    \end{equation*}
+  \item For a policy with limit $u$, Franchise deductible $d$ with $d < u$, and coinsurance factor $\alpha$, we have
+    \begin{equation*}
+      Y_L = \alpha (X \land u) \mathbb{1}_{\{ X > d \}}.
+    \end{equation*}
+  \item Note that in the presence of a deductible $d$, it is \hlnotec{usually the case} that $Y_L$ has a probability mass at $0$, i.e.
+    \begin{equation*}
+      P(Y_L = 0) = P(X \leq d) = F_X(d) > 0.
+    \end{equation*}
+    In this case, $Y_P > 0$ almost surely.
+\end{itemize}
+
+% subsubsection loss_basis (end)
+
+\subsubsection{Payment Basis}%
+\label{ssub:payment_basis}
+% subsubsection payment_basis
+
+\begin{itemize}
+  \item Only \hlnotea{non-zero} payments of the insurer are included, and so not every loss will have an entry. Here, we see that $Y_P$ leaves that information behind.\sidenote{It is still useful to reporting purely on the financial effects of the claims.}
+  \item $Y_P$ does not have a probability mass at $0$ (\hlwarn{Why}?), i.e.
+    \begin{equation*}
+      P(Y_P = 0) = 0,
+    \end{equation*}
+    or equivalently,
+    \begin{equation*}
+      Y_P > 0.
+    \end{equation*}
+\end{itemize}
+
+% subsubsection payment_basis (end)
+
+\begin{eg}
+  Let $X$ be the ground-up loss rv and assume that there is an ordinary deductible of $5$ applied to the loss. The following table is a typical example illustrating how $Y_L$ and $Y_P$ works.
+  \begin{table}[ht]
+    \centering
+    \caption{Example illustrating the relationship between $Y_P$ and $Y_L$.}
+    \label{tab:example_for_yp_and_yp}
+    \begin{tabular}{c | c c c c c c}
+    \toprule
+    $X$   & 3  & 2  & 5  & 7 & 9 & 10 \\
+    \midrule
+    $Y_L$ & 0  & 0  & 0  & 2 & 4 & 5 \\
+    $Y_P$ & NA & NA & NA & 2 & 4 & 5 \\
+    \bottomrule
+    \end{tabular}
+  \end{table}
+\end{eg}
+
+% subsection reporting_methods (end)
+
+% section severity_distributions_policy_adjustments_continued (end)
+
+% chapter lecture_10_oct_16th (end)
 \appendix
 
 \chapter{Additional Material}%
