@@ -1558,6 +1558,325 @@ Now if $f_X$ takes on large values for large $x$, we may have $E\left[X^k\right]
 
 % chapter lecture_7_sep_27th (end)
 
+\chapter{Lecture 8 Oct 02nd}%
+\label{chp:lecture_8_oct_02nd}
+% chapter lecture_8_oct_02nd
+
+\section{Severity Distributions --- Tail of Distributions (Continued)}%
+\label{sec:severity_distributions_tail_of_distributions_continued}
+% section severity_distributions_tail_of_distributions_continued
+
+\subsection{Existence of Moments (Continued)}%
+\label{sub:existence_of_moments_continued}
+% subsection existence_of_moments_continued
+
+\begin{eg}
+  For a Pareto distribution, as $x \to \infty$, we have that $f_X(x) \sim x^{-(\alpha + 1)}$, so its moments are finite if and only if $k < \alpha$.
+
+  We say that the Pareto distribution has a \hlnotea{power tail}.
+\end{eg}
+
+\begin{eg}
+  Given the transformed Gamma distribution, with pdf
+  \begin{equation*}
+    f_X(x) = \frac{{\left( \frac{x}{\theta} \right)}^\alpha e^{- \frac{x}{\theta}}}{x \Gamma(\alpha)}.
+  \end{equation*}
+  Now as $x \to \infty$, we have
+  \begin{equation*}
+    f_X(x) \sim x^{\alpha - 1} e^{-\frac{x}{\theta}}
+  \end{equation*}
+  We see that the exponential term decays faster than the rate of growth of $x^{\alpha - 1}$ for any $\alpha > 0$. Thus all moments of the Gamma distribution exists.
+
+  We say that the Gamma distribution has a \hlnotea{exponential tail}.
+\end{eg}
+
+\begin{ex}
+  The Normal distribution has an exponential tail.
+\end{ex}
+
+\begin{defn}[Heavy-Tails Light-Tails]\index{Heavy-Tailed Distribution}\index{Light-Tailed Distribution}\label{defn:heavy_tails_light_tails}
+  We say that a distribution is a \hlnoteb{heavy-tailed distribution} if \hlimpo{its moments only exist up to some $k \in \mathbb{N} \setminus \{ 0 \}$}.
+
+  We say that a distribution is a \hlnoteb{light-tail distribution} if \hlimpo{its moments exist for all $k \in \mathbb{N} \setminus \{ 0 \}$}.
+\end{defn}
+
+\begin{note}
+  We may also use the mgf to determine if a distribution has a heavy or light tail; the inexistence of the $k$th moment implies the inexistence of the mgf, i.e.\ if the mgf does not exist, then the moments of the distribution is only finite up to some $k \in \mathbb{N} \setminus \{0\}$.
+\end{note}
+
+\subsubsection{Limiting Ratio: Survival Functions}%
+\label{ssub:limiting_ratio_survival_functions}
+% subsubsection limiting_ratio_survival_functions
+
+\begin{defn}[Limiting Ratio]\index{Limiting Ratio}\label{defn:limiting_ratio}
+  The \hlnoteb{limiting ratio} of \hlnoteb{two survival functions} is used to compare the heaviness of tails of the two losses. Consider two losses $X$ and $Y$, and consider the limit of the ratio
+  \begin{equation*}
+    \lim_{x \to \infty} \frac{\bar{F}_X(x)}{\bar{F}_Y(x)}.
+  \end{equation*}
+  If the limit does not exist, we say that the comparison is inconclusive. Otherwise, we have 3 cases:
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}[yscale=2]
+      \draw[->] (-0.5,-0.1) -- (3, -0.1) node[right] {$x$};
+      \draw[->] (0,-0.5) -- (0, 1.5) node[above] {$y$};
+      \draw[-,domain=0:3,color=be-blue,thick] plot ({\x},{ 0.5 * exp( -0.5 * \x )});
+      \draw[-,domain=0:3,color=be-red,thick] plot ({\x},{ 1 * exp( -1 * \x )});
+    \end{tikzpicture}
+    \caption{Limiting Ratio}\label{fig:limiting_ratio}
+  \end{marginfigure}
+  \begin{itemize}
+    \item If $c = 0$, then $\bar{F}_X(x)$ decays faster than $\bar{F}_Y(x)$ as $x \to \infty$, i.e. $Y$ has a heavier tail than $X$;
+    \item If $0 < c < \infty$, then $\bar{F}_X(x)$ and $\bar{F}_Y(x)$ decays at the smae rate, as $x \to \infty$, i.e. $X$ and $Y$ have similar tails;
+    \item If $c = \infty$, then $\bar{F}_X(x)$ decays slower than $\bar{F}_Y(x)$ as $x \to \infty$, i.e. $X$ has a heavier tail than $Y$;
+  \end{itemize}
+  where we let
+  \begin{equation*}
+    c := \lim_{x \to \infty} \frac{\bar{F}_X(x)}{\bar{F}_Y(x)}
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Not all distributions have an explicit survival function, but they will always have a pdf/pmf. Fortunately, by \hlnotea{L'H\^{o}pital's Rule}, the above definition can be applied to the pdfs of $X$ and $Y$, i.e.
+  \begin{equation*}
+    c = \lim_{x \to \infty} \frac{\bar{F}_X(x)}{\bar{F}_Y(x)} = \lim_{x \to \infty} \frac{-f_X(x)}{-f_Y(x)} = \lim_{x \to \infty} \frac{f_X(x)}{f_Y(x)}
+  \end{equation*}
+\end{note}
+
+\begin{eg}
+  Show that the Pareto distribution has a heavier tail than the Gamma distribution using limiting ratio.
+\end{eg}
+
+\begin{solution}
+  Let $X \sim \Pareto(\alpha, \theta)$ and $Y \sim \Gam(\tau, \lambda)$. We have
+  \begin{align*}
+    c = \lim_{x \to \infty} \frac{f_X(x)}{f_Y(x)} &= \lim_{x \to \infty} \frac{\frac{\alpha \theta^{\alpha}}{{( x + \theta )}^{\alpha + 1}}}{\frac{x^{\tau - 1} e^{-\frac{x}{\lambda}}}{\lambda^\tau \Gamma(\tau)}} = \alpha \theta^\alpha \lambda^\tau \Gamma(\tau) \lim_{x \to \infty} \frac{e^{\frac{x}{\lambda}}}{x^{\tau - 1} {(x + \theta)}^{\alpha + 1}}
+  \end{align*}
+  Since the exponential term grows faster than the term in the denominator, we have $c = \infty$, i.e. $X$ has a heavier tail than $Y$, as required.
+\end{solution}
+
+\begin{eg}
+  For two losses $X$ and $Y$, suppose that $f_X(x) = \frac{2}{\pi (1 + x^2)}$ and $f_Y(x) = \frac{1}{(1 + x^2)}$ for $x > 0$. Compare the tail heaviness of the two losses.
+\end{eg}
+
+\begin{solution}
+  Notice that
+  \begin{equation*}
+    c = \lim_{x \to \infty} \frac{f_X(x)}{f_Y(y)} = \lim_{x \to \infty} = \frac{2}{\pi} < \infty,
+  \end{equation*}
+  i.e. $X$ and $Y$ have similar tails.
+\end{solution}
+
+% subsubsection limiting_ratio_survival_functions (end)
+
+\subsubsection{Hazard Rate}%
+\label{ssub:hazard_rate}
+% subsubsection hazard_rate
+
+\newthought{Recall} \cref{defn:hazard_rate_function}. We had
+\begin{gather*}
+  h(x) = \frac{f(x)}{\bar{F}(x)} = - \frac{d}{dx} \ln \bar{F}(x), \\
+  h_X(x) \Delta x \approx P(X \leq x + \Delta x \mid X > x)
+\end{gather*}
+and the hazard rate function relates to the survival function as
+\begin{equation*}
+  \bar{F}(x) = e^{-\int_{-\infty}^{x} h(y) \dif{y} }.
+\end{equation*}
+
+Notice that
+\begin{itemize}
+  \item if the hazard rate function is a \hlnotea{decreasing} function, that implies that the probability of the occurrence of $X \leq x + \Delta x$ decreases given $X > x$, as $x$ increases, i.e. it is more likely that we have $X > x + \Delta x \mid X > x$. So $X$ has a \hlnotea{heavy tail}.
+  \item if the hazard rate function is a \hlnotea{increasing} function, that implies that the probability of the occurrence of $X \leq x + \Delta x$ increases given $X > x$, as $x$ increases, i.e. it is less likely that $X > x + \Delta x \mid X > x$. So $X$ has a \hlnotea{light tail}.
+\end{itemize}
+
+\begin{defn}[Decreasing and Increasing Failure Rates]\index{Decreasing Failure Rate}\index{Increasing Failure Rate}\label{defn:decreasing_and_increasing_failure_rates}
+  Let $X$ be a loss with hazard rate function $h_X$. We say that\sidenote{The following source claims that the \hlnotea{failure rate} and hazard rate are, in fact, not always interchangable terms: \url{https://nomtbf.com/2013/11/difference-hazard-failure-rate/}. Perhaps this is worth looking into.}
+  \begin{itemize}
+    \item $X$ or $F_X$ has a \hlnoteb{decreasing failure rate (DFR)} if $h_X$ is decreasing;
+    \item $X$ or $F_X$ has a \hlnoteb{increasing failure rate (IFR)} if $h_X$ is increasing.
+  \end{itemize}
+\end{defn}
+
+\begin{note}
+  Consequently,
+  \begin{itemize}
+    \item Distributions that have a DFR are heavy-tailed;
+    \item Distributions that have an IFR are light-tailed.
+  \end{itemize}
+\end{note}
+
+\begin{propo}[Exponential has Constant Hazard Rate]\label{propo:exponential_has_constant_hazard_rate}
+  The exponential distribution has a constant hazard rate.
+\end{propo}
+
+\begin{proof}
+  The pdf and survival function of $X \sim \Exp(\lambda)$ is
+  \begin{equation*}
+    f_X(x) = \lambda e^{-\lambda x} \text{ and } \bar{F}_X(x) = e^{-\lambda x},
+  \end{equation*}
+  respectively. Thus the hazard rate of $X$ is
+  \begin{equation*}
+    h(x) = \frac{f_X(x)}{\bar{F}_X(x)} = \lambda,
+  \end{equation*}
+  which is a fixed value.\qed\
+\end{proof}
+
+\begin{note}
+  We say that the exponential distribution is the only distribution which is said to have both DFR and IFR.\sidenote{\hlwarn{Why?}}
+\end{note}
+
+\begin{eg}
+  Let $X \sim \Pareto(\alpha, \theta)$ with $f_X(x) = \frac{\alpha \theta^\alpha}{{(x + \theta)}^{\alpha + 1}}$ and $\bar{F}_X(x) = \frac{\theta^\alpha}{{(x + \theta)}^\alpha}$. Determine whether $X$ has a DFR or IFR.
+\end{eg}
+
+\begin{solution}
+  The hazard rate function of $X$ is
+  \begin{equation*}
+    h_X(x) = \frac{f_X(x)}{\bar{F}_X(x)} = \frac{\frac{\alpha \theta^\alpha}{{(x + \theta)}^{\alpha + 1}}}{\frac{\theta^\alpha}{{(x + \theta)}^\alpha}} = \frac{\alpha}{x + \theta}.
+  \end{equation*}
+  It is clear that $h_X$ is a decreasing function, and so $X \sim \Pareto(\alpha, \theta)$ has a DFR, i.e.\ it is heavy-tailed.
+\end{solution}
+
+It is not always easy to get the survival function. The following is an alternative approach to finding out if the hazard rate function is increasing or decreasing.
+
+\begin{propo}[Ratio Comparison for DFR/IFR]\label{propo:ratio_comparison_for_dfr_ifr}
+  Let $X$ be an rv, and\sidenote{\hlwarn{Any bounds on $y$?}}
+  \begin{equation*}
+    s(x) = \frac{f_X(x + y)}{f_X(x)}.
+  \end{equation*}
+  \begin{enumerate}
+    \item If $s(x)$ is increasing in $x$ for every $y$, then $X$ has a DFR;
+    \item If $s(x)$ is decreasing in $x$ for every $y$, then $X$ has an IFR.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  We shall prove for one case as the other will follow analogously. Notice that
+  \begin{equation*}
+    h_X(x) = \frac{f_X(x)}{\bar{F}_X(x)} = \frac{f_X(x)}{\int_{x}^{\infty} f_X(y) \dif{y}} = \frac{1}{\int_{0}^{\infty} \frac{f_X(x + y)}{f_X(x)}\dif{y} }
+  \end{equation*}
+  by a change of variable in the last equality. We notice that if $\frac{f_X(x + y)}{f_X(x)}$ is increasing, then $h_X(x)$ will be decreasing, and so $X$ has a DFR.\qed\
+\end{proof}
+
+% subsubsection hazard_rate (end)
+
+% subsection existence_of_moments_continued (end)
+
+% section severity_distributions_tail_of_distributions_continued (end)
+
+% chapter lecture_8_oct_02nd (end)
+
+\chapter{Lecture 9 Oct 11th}%
+\label{chp:lecture_9_oct_11th}
+% chapter lecture_9_oct_11th
+
+\section{Severity Distributions --- Tail of Distributions (Continued 2)}%
+\label{sec:severity_distributions_tail_of_distributions_continued_2}
+% section severity_distributions_tail_of_distributions_continued_2
+
+\subsection{Mean Excess Loss}%
+\label{sub:mean_excess_loss}
+% subsection mean_excess_loss
+
+\begin{defn}[Excess Loss Random Variable]\index{Excess Loss Random Variable}\label{defn:excess_loss_random_variable}
+  For a loss rv $X$, we define the \hlnoteb{excess loss rv} as
+  \begin{equation*}
+    T_d = X - d \mid X > d, \quad d > 0.
+  \end{equation*}
+  The survival function of $T_d$ is
+  \begin{align*}
+    \bar{F}_{T_d}(x) &= P(T_d > x) = P(X - d > x \mid X > d) \\
+                     &= \frac{P(X > x + d)}{P(X > d)} = \frac{\bar{F}_X(x + d)}{\bar{F}_X(d)}.
+  \end{align*}
+\end{defn}
+
+As defined before in \cref{defn:mean_excess_loss},
+
+\begin{defnnonum}[Mean Excess Loss]\index{Mean Excess Loss}
+  The \hlnoteb{mean excess loss} (or \hldefn{mean residual life}) function is defined as
+  \begin{equation*}
+    e_X(d) = E[T_d] = \int_{0}^{\infty} \bar{F}_{T_d}(x) \dif{x} = \frac{\int_{0}^{\infty} \bar{F}_X(x + d) \dif{x}}{\bar{F}_X(d)} = \frac{\int_{d}^{\infty} \bar{F}_X(y) \dif{y} }{\bar{F}_X(d)}
+  \end{equation*}
+\end{defnnonum}
+
+\begin{defn}[Increasing and Decreasing Mean Residual Lifetime]\index{Increasing Mean Residual Lifetime}\index{Decreasing Mean Residual Lifetime}\index{IMRL}\index{DMRL}\label{defn:increasing_and_decreasing_mean_residual_lifetime}
+  Given a loss rv $X$,
+  \begin{enumerate}
+    \item we say $X$ or $F_X$ is an \hlnoteb{increasing mean residual lifetime (IMRL)} if $e_X(x)$ is increasing in $x$;
+    \item we say $X$ or $F_X$ is an \hlnoteb{decreasing mean residual lifetime (DMRL)} if $e_X(x)$ is decreasing in $x$.
+  \end{enumerate}
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item IMRL distributions are \hlnotec{heavy-tailed};
+    \item DMRL distributions are \hlnotec{light-tailed}.\marginnote{
+      \begin{ex}
+        Prove this note.
+      \end{ex}
+      }
+  \end{itemize}
+\end{note}
+
+\begin{propo}[Relation between DFR/IFR and IMRL/DMRL]\label{propo:relation_between_dfr_ifr_and_imrl_dmrl}
+  A DFR rv is IMRL, and an IFR rv is a DMRL.
+\end{propo}
+
+\begin{proof}
+  Suppose $X$ has a DFR. The mean excess loss of $X$ is
+  \begin{equation*}
+    e_X(d) = \frac{\int_{0}^{\infty} \bar{F}_X(x + d) \dif{x} }{\bar{F}_X(d)} = \int_{0}^{\infty} \frac{\bar{F}_X(x + d)}{\bar{F}_X(d)} \dif{x}.
+  \end{equation*}
+  Note that by the relationship between the survival function and the hazard rate\sidenote{We use the hazard rate here because it is provided by the assumption.},
+  \begin{equation*}
+    \frac{\bar{F}_X(x + d)}{\bar{F}_X(d)} = \frac{e^{-\int_{0}^{x + d} h_X(y) \dif{y} }}{e^{-\int_{0}^{d} h_X(y) \dif{y} }} = e^{-\int_{d}^{x + d} h_X(y) \dif{y} } = e^{-\int_{0}^{x} h_X(z + d) \dif{z} }.
+  \end{equation*}
+  Since $X$ has a DFR, $h_X$ is decreasing, and thus $\frac{\bar{F}_X(x + d)}{\bar{F}_X(d)}$ is increasing. Thus $e_X(d)$ is increasing and so $X$ is a IMRL, as required. THe argument is similar for $IFL$ being a $DMRL$.\qed\
+\end{proof}
+
+\begin{eg}
+  Let $X \sim \Wei(\theta, \tau)$. Determine whether $X$ is DMRL or IMRL.
+\end{eg}
+
+\begin{solution}
+  Since
+  \begin{equation*}
+    f_X(x) = \frac{\tau x^{\tau - 1} e^{-{\left( \frac{x}{\theta} \right)}^\tau}}{\theta^\tau}
+  \end{equation*}
+  and from \hyperref[note:weibull_survival_function]{an earlier example}, we have
+  \begin{equation*}
+    \bar{F}_X(x) = e^{- {\left( \frac{x}{\theta} \right)}^\tau}
+  \end{equation*}
+  Then the hazard rate is
+  \begin{equation*}
+    h_X(x) = \frac{f_X(x)}{\bar{F}_X(x)} = \frac{\tau}{\theta^\tau} x^{\tau - 1}.
+  \end{equation*}
+  Now if $\tau \geq 1$, then $h_X(x)$ is an increasing function, and so $X$ has an IFR, i.e. $X$ is a DMRL. if $0 < \tau \leq 1$, then $h_X(x)$ is a decreasing function, and so $X$ has a DFR, i.e. $X$ is an IMRL.
+\end{solution}
+
+\begin{eg}
+  Consider a loss $X$ with $f_X(x) = (1 + 2x^2) e^{-2x}$ for $x > 0$.
+  \begin{enumerate}
+    \item Determine $h_X(x)$.
+    \item Determine $e_X(x)$.
+    \item Find $\lim\limits_{x \to \infty} h_X(x)$ and $\lim\limits_{x \to \infty} e_X(x)$.
+    \item Show that $X$ is DMRL but not IFR.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  Since both $h_X(x)$ and $e_X(x)$ require the survival function, we shall first derive that. Observe that
+  \begin{align*}
+    \bar{F}_X(x) &= 
+  \end{align*}
+  \begin{enumerate}
+    \item 
+  \end{enumerate}
+\end{solution}
+
+% subsection mean_excess_loss (end)
+
+% section severity_distributions_tail_of_distributions_continued_2 (end)
+
 \appendix
 
 \chapter{Additional Material}%
