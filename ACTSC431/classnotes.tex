@@ -23,7 +23,9 @@
 \hypersetup{pageanchor=false}
 \maketitle
 \hypersetup{pageanchor=true}
+\begin{fullwidth}
 \tableofcontents
+\end{fullwidth}
 
 \chapter*{\faBook\ \enspace\ List of Definitions}
 \addcontentsline{toc}{chapter}{List of Definitions}
@@ -2222,6 +2224,314 @@ The above relationship shows that we can retrieve $Y_P$ from $Y_L$, i.e. $Y_L$ h
 % section severity_distributions_policy_adjustments_continued (end)
 
 % chapter lecture_10_oct_16th (end)
+
+\chapter{Lecture 11 Oct 18th}%
+\label{chp:lecture_11_oct_18th}
+% chapter lecture_11_oct_18th
+
+\section{Severity Distribution --- Policy Adjustments (Continued 2)}%
+\label{sec:severity_distribution_policy_adjustments_continued_2}
+% section severity_distribution_policy_adjustments_continued_2
+
+\subsection{Distribution \& Moments of $Y_P$ and $Y_L$}%
+\label{sub:distribution_n_moments_of_y_p_and_y_l_}
+% subsection distribution_n_moments_of_y_p_and_y_l_
+
+It suffices for us to closely study $Y_L$ due to the following proposition:
+
+\begin{propo}[$Y_P$ is completely determined by $Y_L$]\label{propo:_y_p_is_completely_determined_by_y_l_}
+  The survival function and moments of $Y_P$ are given by
+  \begin{equation*}
+    \bar{F}_{Y_P}(y) = \begin{cases}
+      1                                         & y < 0 \\
+      \frac{\bar{F}_{Y_L}(y)}{\bar{F}_{Y_L}(0)} & y \geq 0
+    \end{cases}
+  \end{equation*}
+  and
+  \begin{equation*}
+    E \left[ Y_P^k \right] = \frac{E \left[ Y_L^k \right]}{\bar{F}_{Y_L}(0)}, \quad k = 1, 2, \ldots .
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Using the definition of a survival function, we have
+  \begin{align*}
+    \bar{F}_{Y_P}(x) = P(Y_P > x) = P(Y_L > x \mid Y_L > 0) = \begin{cases}
+      1                                         & x < 0 \\
+      \frac{\bar{F}_{Y_L}(x)}{\bar{F}_{Y_L}(0)} & x \geq 0
+    \end{cases}.
+  \end{align*}
+  Consequently,
+  \begin{equation*}
+    e \left[ Y_P^k \right] = k \int_{0}^{\infty} x^{k - 1} \bar{F}_{Y_P}(x) \dif{x} = k \int_{0}^{\infty} x^{k - 1} \frac{\bar{F}_{Y_L}(x)}{\bar{F}_{Y_L}(0)} \dif{x} = \frac{E \left[ Y_L^k \right]}{\bar{F}_{Y_L}(0)}.
+  \end{equation*}\qed\
+\end{proof}
+
+\begin{note}
+  \cref{propo:_y_p_is_completely_determined_by_y_l_} tells us that it suffices to discover the distribution of $Y_L$, since it completely determines $Y_P$,
+\end{note}
+
+\begin{remark}
+  \begin{itemize}
+    \item If there is a deductible $d > 0$, then the distributions of $Y_P$ and $Y_L$ are \hlnotea{usually}\sidenote{This depends on the distribution of $X$ and $Y_L$.} different.
+    \item If $Y_L$ has no mass point at $0$, i.e. $\bar{F}_{Y_L}(0) = 1$, then $Y_P$ nand $Y_L$ have the same distribution.
+  \end{itemize}
+\end{remark}
+
+% subsection distribution_n_moments_of_y_p_and_y_l_ (end)
+
+\subsection{Some Important Identities}%
+\label{sub:some_important_identities}
+% subsection some_important_identities
+
+The following proposition is important for us to venture forward.
+
+\begin{propo}[\vimponote\ Expected Value of the Policy Adjustments]\label{propo:expected_value_of_the_policy_adjustments}
+  Consider a non-negative rv $X$ and $d > 0$. Then
+  \begin{enumerate}
+    \item We have
+      \begin{equation*}
+        E[X] = E[ [ X - d ]_+ ] + E[ X \land d ].
+      \end{equation*}
+    \item For $k = 1, 2, \ldots$,\label{item:expected_value_of_policy_adjustment_base}
+      \begin{equation*}
+        E \left[ X^k \right] = \int_{0}^{\infty} x^{k - 1} \bar{F}_X(x) \dif{x}.
+      \end{equation*}
+    \item For $k = 1, 2, \ldots$,
+      \begin{equation*}
+        E\left[ ( X \land d )^k \right] = \int_{0}^{d} kx^{k - 1}\bar{F}_X(x) \dif{x} .
+      \end{equation*}
+    \item For $k = 1, 2, \ldots$,
+      \begin{equation*}
+        E \left[ [ X - d ]_+^k \right] = \int_{d}^{\infty} k ( x - d )^{k - 1} \bar{F}_X(x) \dif{x}.
+      \end{equation*}
+    \item For $k = 1, 2, \ldots$, and $\bar{F}_X(d) > 0$,
+      \begin{equation*}
+        E \left[ ( X - d )^k \mid X > d \right] = \frac{E \left[ [ X - d ]_+^k \right]}{\bar{F}_X(d)} = \frac{\int_{d}^{\infty} k( x -  d )^{k - 1} \bar{F}_X(x) \dif{x} }{\bar{F}_X(d)}.
+      \end{equation*}
+      In particular, we have an alternate way to derive the mean excess value
+      \begin{equation*}
+        e_X(d) = E \left[ X - d \mid X > d \right] = \frac{\int_{d}^{\infty} \bar{F}_X(x) \dif{x}}{\bar{F}_X(d)}.
+      \end{equation*}
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item For this identity, notice that
+      \begin{equation*}
+        [ X - d ]_+ + ( X \land d ) = \begin{cases}
+          0 + X     & X \leq d \\
+          X - d + d & X > d
+        \end{cases} = X.
+      \end{equation*}
+      The result follows from linearity of $E$.
+
+    \item We have proved this earlier on, but it shall be re-proved for exercise, variety, and ease of reference.\sidenote{\hlimpo{Important}: There are two rules that you must use, and it does not depend on any of your existing knowledge as an undergrad whatsoever.
+      \begin{enumerate}
+        \item Notice that $\frac{d}{dx}F_X(x) = f_X(x) \implies - d\bar{F}_X(x) = f_X(x) \dif{x}$;
+        \item While using integration by parts, let $dv = d\bar{F}_X(x)$ so that $v = \bar{F}_X(x)$.
+      \end{enumerate}
+      Forget any one of these are prepare to be screwed over.}
+      \begin{align*}
+        E \left[ X^k \right] &= \int_{0}^{\infty} x^k f_X(x) \dif{x} = \int_{0}^{\infty} x^k \frac{d}{dx} F_X(x) \dif{x} \\
+                             &= \int_{0}^{\infty} x^k d F_X(x) = \int_{0}^{\infty} x^k d( 1 - \bar{F}_X(x) ) \\
+                             &= - \int_{0}^{\infty} x^k d \bar{F}_X(x) \\
+                             &= - x^k \bar{F}_X(x) \at{0}{\infty} + k \int_{0}^{\infty} x^{k - 1} \bar{F}_X(x) \dif{x} \quad \because \text{ IBP } \\
+                             &= k \int_{0}^{\infty} x^{k - 1} \bar{F}_X(x) \dif{x},
+      \end{align*}
+      under the assumption that $\bar{F}_X(x)$ decays faster than $x^k$ \sidenote{How unlikely is this, I do not know.}.
+
+    \item Using a similar argument as in the earlier part of the last proof, and by the Law of the Unconscious Statistician, we can arrive at
+      \begin{equation*}
+        E \left[ ( X \land u )^k \right] = - \int_{0}^{\infty} (x \land u)^k \dif{\bar{F}_X(x)}.
+      \end{equation*}
+      To proceed, use integration by parts as follows\sidenote{This is hopeless. \hlimpo{If you can't remember this}, or somehow make some sense of this monster (without going through a few lectures on Lesbesgue or Riemann-Stieljes integration), \hlimpo{you're screwed.} }:
+      \begin{gather*}
+        u = ( x \land u )^k \quad v = \bar{F}_X(x) \\
+        du = d(x \land u)^k \quad dv = d\bar{F}_X(x)
+      \end{gather*}
+      We get
+      \begin{equation*}
+        E \left[ ( X \land u )^k \right] = - (x \land u)^k \bar{F}_X(x) \at{0}{\infty} + \int_{0}^{\infty} \bar{F}_X(x) \dif{( x \land u )^k},
+      \end{equation*}
+      and $(x \land u)^k \bar{F}_X(x) \at{0}{\infty} = 0$. Next, it is a ``fact'' that
+      \begin{equation*}
+        d ( x \land u )^k = \begin{cases}
+          k x^{k - 1} \dif{x} & x < u \\
+          0                   & x \geq u
+        \end{cases}
+      \end{equation*}
+      \sidenote{This is yet another monstrosity that makes no sense whatsoever for one that has only taken basic Calculus classes and introductory Analysis. \hlimpo{Remember this ``fact''} or \hlimpo{get screwed over}. The only ``sense'' that I can come up with right now is to consider the cases of when $x < u$ and when $x \geq u$, and determine what $x \land u$ should be in these cases, and provide some baseless rationalization.}Since $x > u$ gives us a $0$ term, we are left with
+      \begin{equation*}
+        E \left[ (X \land u)^k \right] = \int_{0}^{u} k x^{k-1} \bar{F}_X(x) \dif{x}.
+      \end{equation*}
+      
+    \item Using the Law of the Unconscious Statistician and \cref{item:expected_value_of_policy_adjustment_base}, we have
+      \begin{equation*}
+        E \left[ [ X - d ]_+^k \right] = k \int_{0}^{\infty} (x - d)_+^k \bar{F}_X(x) \dif{x} = k \int_{d}^{\infty} (x - d)^k \bar{F}_X(x) \dif{x}.
+      \end{equation*}
+
+    \item Notice once and for all that
+      \begin{align*}
+        E \left[ (X - d)^k \mid X > d \right] &= \frac{E \left[ (X - d)^k \mathbb{1}_{\{ X > d \}} \right]}{\bar{F}_X(d)} \\
+                                              &= \frac{E \left[ [ X - d ]_+^k \right]}{\bar{F}_X(d)} = \frac{\int_{d}^{\infty} k (x - d)^k \bar{F}_X(x) \dif{x}}{\bar{F}_X(d)}.
+      \end{align*}
+  \end{enumerate}\qed\
+\end{proof}
+
+\begin{eg}
+  Consider a ground-up loss $X$ with pdf
+  \begin{equation*}
+    f_X(x) = 0.0005, \quad 0 \leq x \leq 20.
+  \end{equation*}
+  Solve for
+  \begin{enumerate}
+    \item $\bar{F}_X(x)$;
+    \item $E [ X \land 10 ]$ and $E[ X \land 25 ]$;
+    \item $\Var(X \land 10)$;
+    \item $E \left[ [ X - 10 ]_+ \right]$;
+    \item $E \left[ [ X - 10 ]_+^2 \right]$; and
+    \item $e_X(10)$.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item We have
+      \begin{equation*}
+        F_X(x) = \int_{0}^{x} 0.005y \dif{y} = 0.0025x^2
+      \end{equation*}
+      and so
+      \begin{equation*}
+        \bar{F}_X(x) = \begin{cases}
+          1             & x < 0 \\
+          1 - 0.0025x^2 & 0 \leq x \leq 20 \\
+          0             & x > 20
+        \end{cases}.
+      \end{equation*}
+
+    \item Using our identities,
+      \begin{equation*}
+        E [ X \land 10 ] = \int_{0}^{10} \bar{F}_X(x) \dif{x} = 10 - \frac{5}{6000} (10)^3 = \frac{55}{6},
+      \end{equation*}
+      and
+      \begin{equation*}
+        E [ X \land 25 ] = \int_{0}^{20} \bar{F}_X(x) \dif{x} = 25 - \frac{5}{6000} (25)^3 = \frac{40}{3}.
+      \end{equation*}
+    \item To get $\Var(X \land 10)$, we first need the 2nd moment of $X \land 10$:
+      \begin{align*}
+        E \left[ \left( X \land 10 \right)^2 \right] &= 2 \int_{0}^{10} x \bar{F}_X(x) \dif{x} = 2 \left[ \frac{1}{2} x^2 - \frac{5}{8000} x^4 \right]_{0}^{10} \\
+                                                     &= 100 - \frac{25}{2} = \frac{175}{2}.
+      \end{align*}
+      Thus
+      \begin{equation*}
+        \Var \left( X \land 10 \right) = \frac{175}{2} - \left( \frac{55}{6} \right)^2 = \frac{125}{36}.
+      \end{equation*}
+
+    \item We have that
+      \begin{align*}
+        E \left[ [ X - 10 ]_+ \right] &= \int_{10}^{20} 1 - \frac{1}{400}x^2 \dif{x} \\
+                                      &= 10 - \frac{1}{1200} (8000 - 1000) = \frac{25}{6}.
+      \end{align*}
+
+    \item We have that
+      \begin{align*}
+        E \left[ [ X - 10 ]_+^2 \right] &= 2 \int_{10}^{20} ( x - 10 ) \left( 1 - \frac{1}{400}x^2 \right) \dif{x} \\
+                                        &= 2 \int_{10}^{20} \left( -10 + x + \frac{1}{40} x^2 - \frac{1}{400} x^3 \right) \dif{x} \\
+                                        &= 2 \left[ -100 + \frac{300}{2} + \frac{7000}{120} - \frac{150000}{1600} \right] \\
+                                        &= \frac{175}{6}
+      \end{align*}
+
+    \item We have
+      \begin{equation*}
+        e_X(10) = \frac{\int_{10}^{20} \left( 1 - \frac{1}{400} x^2 \right) \dif{x}}{1 - \frac{1}{400} (10)^2} = \frac{10 - \frac{7000}{1200}}{\frac{3}{4}} = \frac{50}{9}
+      \end{equation*}
+  \end{enumerate}
+\end{solution}
+
+\subsubsection{Application of \cref{propo:expected_value_of_the_policy_adjustments}}%
+\label{ssub:application_of_expected_value_of_the_policy_adjustments}
+% subsubsection application_of_expected_value_of_the_policy_adjustments
+
+\paragraph{Policy Limit} If a policy limit $u$ is the only adjustment in a contract, then
+\begin{equation*}
+  Y_L = X \land u \quad \text{ and } \quad Y_P = X \land u \mid X > 0.
+\end{equation*}
+Since in most cases $X > 0$, we have that $\bar{F}_X(0) = 1$, and so $Y_L = Y_P = X \land u$.
+\begin{itemize}
+  \item The survival function is
+    \begin{equation*}
+      \bar{F}_{Y_P} (y) = \bar{F}_{Y_L} (y) = P ( X \land u > y ) = \begin{cases}
+        1            & y < 0 \\
+        \bar{F}_X(y) & 0 \leq y < u \\
+        0            & y \geq u
+      \end{cases}
+    \end{equation*}
+  \item The expected value is
+    \begin{equation*}
+      E \left[ Y_P \right] = E \left[ Y_L \right] = E [ X \land u ] = \int_{0}^{u} \bar{F}_X(x) \dif{x}.
+    \end{equation*}
+  \item The second moment is
+    \begin{equation*}
+      E \left[ Y_P^2 \right] = E \left[ Y_L^2 \right] = E \left[ (X \land u)^2 \right] = 2 \int_{0}^{u} x \bar{F}_X(x) \dif{x}
+    \end{equation*}
+\end{itemize}
+
+\paragraph{Ordinary Deductible} If an ordinary deductible $d$ is the only adjustmnet in a contract, then
+\begin{equation*}
+  Y_L = [ X - d ]_+ = (X - d) \mathbb{1}_{\{X > d\}}
+\end{equation*}
+and
+\begin{equation*}
+  Y_P = [ X - d ]_+ \mid [ X - d ]_+ > 0 = ( X - d ) \mathbb{1}_{\{X > d\}} \mid X > d = X - d \mid X > d
+\end{equation*}
+In most cases, since $\bar{F}_X(d) = P(X > d) < 1$ as it is $P(X < d) \neq 0$, the distribution of $Y_L$ and $Y_P$ differs.
+\begin{itemize}
+  \item The survival function is
+    \begin{equation*}
+      \bar{F}_{Y_L}(y) = P( [ X - d ]_+ > y ) = \begin{cases}
+        1 & y < 0 \\
+        \bar{F}_X(y + d) & y \geq 0
+      \end{cases}
+    \end{equation*}
+    and
+    \begin{equation*}
+      \bar{F}_{Y_P}(y) = \frac{\bar{F}_{Y_L}(y)}{\bar{F}_{Y_L}(0)} = \begin{cases}
+        1                                       & y < 0 \\
+        \frac{\bar{F}_{X}(d + y)}{\bar{F}_X(d)} & y \geq 0
+      \end{cases}
+    \end{equation*}
+    for $Y_L$ and $Y_P$ respectively.
+
+  \item The mean is
+    \begin{equation*}
+      E \left[ Y_L \right] = E \left[ [ X - d ]_+ \right] = \int_{d}^{\infty} \bar{F}_X(x) \dif{x}
+    \end{equation*}
+    and
+    \begin{equation*}
+      E \left[ Y_P \right] = E \left[ X - d \mid X > d \right] = \frac{E [ (X - d) \mathbb{1}_{\{X > d\}} ]}{\bar{F}_X(d)} = \frac{\int_{d}^{\infty} \bar{F}_X(x) \dif{x}}{\bar{F}_X(d)}
+    \end{equation*}
+    for $Y_L$ and $Y_P$ respectively.
+
+  \item The second moment is
+    \begin{equation*}
+      E \left[ Y_L^2 \right] = E \left[ [ X - d ]_+^2 \right] = 2 \int_{d}^{\infty} x \bar{F}_X(x) \dif{x}
+    \end{equation*}
+    and
+    \begin{equation*}
+      E \left[ Y_P^2 \right] = \frac{E \left[ Y_L^2 \right]}{\bar{F}_{Y_L}(0)} = \frac{2 \int_{d}^{\infty} x \bar{F}_X(x) \dif{x}}{\bar{F}_X(d)}
+    \end{equation*}
+    for $Y_L$ and $Y_P$ respectively.
+\end{itemize}
+
+% subsubsection application_of_expected_value_of_the_policy_adjustments (end)
+
+% subsection some_important_identities (end)
+
+% section severity_distribution_policy_adjustments_continued_2 (end)
+
+% chapter lecture_11_oct_18th (end)
 \appendix
 
 \chapter{Additional Material}%
