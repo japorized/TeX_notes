@@ -2532,6 +2532,236 @@ In most cases, since $\bar{F}_X(d) = P(X > d) < 1$ as it is $P(X < d) \neq 0$, t
 % section severity_distribution_policy_adjustments_continued_2 (end)
 
 % chapter lecture_11_oct_18th (end)
+
+\chapter{Lecture 12 Oct 23rd}%
+\label{chp:lecture_12_oct_23rd}
+% chapter lecture_12_oct_23rd
+
+\section{Severity Distribution --- Policy Adjustments (Continued 3)}%
+\label{sec:severity_distribution_policy_adjustments_continued_3}
+% section severity_distribution_policy_adjustments_continued_3
+
+\subsection{Some Important Identities (Continued)}%
+\label{sub:some_important_identities_continued}
+% subsection some_important_identities_continued
+
+\subsubsection{Application of \cref{propo:expected_value_of_the_policy_adjustments} (Continued)}%
+\label{ssub:application_of_expected_value_of_the_policy_adjustments_continued}
+% subsubsection application_of_expected_value_of_the_policy_adjustments_continued
+
+\paragraph{Policy Limit + Ordinary Deductible} If there is a policy limit $u$ and an ordinary deductible $d$ with $u > d$, then
+\begin{equation*}
+  Y_L = [ ( X \land u ) - d ]_+ = \begin{cases}
+    0 & X < d \\
+    X - d & d \leq X < u \\
+    u - d & X \geq u
+  \end{cases}
+\end{equation*}
+and so its survival function is\sidenote{\hlimpo{Important}: Pay attention to the notion here: we are using the actual definition of a deductible to arrive at an explicit solution.}
+\begin{align*}
+  \bar{F}_{Y_L}(y) & = P ( Y_L > y ) = P ( [ (X \land u) - d ]_+ > y ) \\
+                   & = P ( \max\{ 0, (X \land u) - d \} > y ) \\
+                   & = \begin{cases}
+                     1                        & y < 0 \\
+                     P( (X \land u) - d > y ) & y \geq 0
+                   \end{cases} \\
+                   &= \begin{cases}
+                     1            & y < 0 \\
+                     P(X > y + d) & 0 \leq y < u - d \\
+                     P(u > y + d) & y \geq u - d
+                   \end{cases} \\
+                   &= \begin{cases}
+                     1                & y < 0 \\
+                     \bar{F}_X(y + d) & 0 \leq y < u - d \\
+                     0                & y \geq u - d
+                   \end{cases}
+\end{align*}
+Consequently, its moments are
+\begin{align*}
+  E \left[ Y_L^k \right] &= \int_{0}^{\infty} k y^{k - 1} \bar{F}_{Y_L}(y) \dif{y} \\
+                         &= \int_{0}^{u - d} k y^{k - 1} \bar{F}_X(y + d) \dif{y} \\
+                         &= \int_{d}^{u} k ( y - d )^{k - 1} \bar{F}_X(y) \dif{y} 
+\end{align*}
+For $Y_P$, we have
+\begin{align*}
+  Y_P &= Y_L \mid Y_L > 0 = [ (X \land u) - d ]_+ \mid [ (X \land u) - d ]_+ > 0 \\
+      &= (X \land u) - d \mid X > d.
+\end{align*}
+Thus by \cref{propo:_y_p_is_completely_determined_by_y_l_},
+\begin{equation*}
+  \bar{F}_{Y_P}(y) = \begin{cases}
+      1 & y < 0 \\
+      \frac{\bar{F}_{Y_L}(y)}{\bar{F}_{Y_L}(0)} & 0 \leq y < u - d \\
+      0 & y \geq u - d
+    \end{cases}
+\end{equation*}
+Using the same proposition, the moments of $Y_P$ are
+\begin{equation*}
+  E \left[ Y_P^k \right] = \frac{E \left[ Y_L^k \right]}{\bar{F}_X(d)} = \frac{\int_{d}^{u} k ( y - d )^{k - 1} \bar{F}_X(y) \dif{y}}{\bar{F}_X(d)}.
+\end{equation*}
+
+\paragraph{Franchise Deductible} Given a Franchise Deductible $d > 0$, we have
+\begin{equation*}
+  Y_L = X \cdot \mathbb{1}_{\{X > d\}}.
+\end{equation*}
+Its survival function is
+\begin{align*}
+  \bar{F}_{Y_L}(y) &= P ( X \cdot \mathbb{1}_{\{X > d\}} > y ) = \begin{cases}
+                     1 & y < 0 \\
+                     P ( X \cdot \mathbb{1}_{\{X > d\}} > y ) & y \geq 0
+                   \end{cases} \\
+                   &= \begin{cases}
+                     1 & y < 0 \\
+                     \bar{F}_X(d) & 0 \leq y < d \\
+                     \bar{F}_X(y) & y \geq d
+                   \end{cases}.
+\end{align*}
+For the case when $0 \leq y < d$, it is clear that in order for $X \cdot \mathbb{1}_{\{X > d\}} > y$, we first need $X > d$. Now the moments of $Y_L$ are
+\begin{align*}
+  E \left[ Y_L^k \right] &= \int_{0}^{\infty} ky^{k - 1} \bar{F}_{Y_L}(y) \dif{y} \\
+                         &= \bar{F}_X(d) \int_{0}^{d} ky^{k - 1} \dif{y} + \int_{d}^{\infty} k y^{k - 1} \bar{F}_X(y) \dif{y} \\
+                         &= d^k \bar{F}_X(d) + \int_{d}^{\infty} ky^{k - 1} \bar{F}_X(y) \dif{y}.
+\end{align*}
+Now observe that
+\begin{equation*}
+  Y_P = Y_L \mid Y_L > 0 = X \cdot \mathbb{1}_{\{X > d\}} \mid X \cdot \mathbb{1}_{\{X > d\}} > 0 = X \mid X > d
+\end{equation*}
+Again, using \cref{propo:_y_p_is_completely_determined_by_y_l_}, 
+\begin{equation*}
+  \bar{F}_{Y_P}(y) = \frac{\bar{F}_{Y_L}(y)}{\bar{F}_{Y_L}(0)} = \begin{cases}
+    1                                 & y < d \\
+    \frac{\bar{F}_X(y)}{\bar{F}_X(d)} & y \geq d
+  \end{cases}
+\end{equation*}
+and its moments are
+\begin{align*}
+  E \left[ Y_P^k \right] &= \frac{E \left[ Y_L^k \right]}{\bar{F}_X(d)} = \frac{d^k \bar{F}_X(d) + \int_{d}^{\infty} ky^{k - 1} \bar{F}_X(y) \dif{y}}{\bar{F}_X(d)} \\
+                         &= d^k + \frac{\int_{d}^{\infty} ky^{k - 1} \bar{F}_X(y) \dif{y}}{\bar{F}_X(d)}.
+\end{align*}
+
+\paragraph{Coinsurance} Let $\hat{Y_L}$ be the amount to-be-paid per loss without coinsurance. Let $\alpha \in (0, 1)$ be a coinsurance factor. Applying coinsurance for adjustment, we have that
+\begin{equation*}
+  Y_L = \alpha \hat{Y_L}.
+\end{equation*}
+The survival function of $Y_L$ is
+\begin{equation*}
+  \bar{F}_{Y_L}(y) = P\left( \alpha \hat{Y_L} > y \right) = P\left( \hat{Y_L} > \frac{y}{\alpha} \right) = \begin{cases}
+    1 & y < 0 \\
+    \bar{F}_{\hat{Y_L}} \left( \frac{y}{\alpha} \right) & y \geq 0
+  \end{cases}
+\end{equation*}
+and its moments are
+\begin{equation*}
+  E \left[ Y_L^k \right] = E \left[ \alpha^k \hat{Y_L}^k \right] = \alpha^k E \left[ \hat{Y_L}^k \right].
+\end{equation*}
+Then for $Y_P$, we have that its survival function is
+\begin{equation*}
+  \bar{F}_{Y_P}(y) = \frac{\bar{F}_{Y_L}(y)}{\bar{F}_{Y_L}(0)} = \frac{\bar{F}_{\hat{Y_L}}\left( \frac{y}{\alpha} \right)}{\bar{F}_{\hat{Y_L}}(0)}, \quad y \geq 0,
+\end{equation*}
+and its moments
+\begin{equation*}
+  E \left[ Y_P^k \right] = \frac{E \left[ Y_L^k \right]}{\bar{F}_{\hat{Y_L}}(0)} = \frac{\alpha^k E \left[ \hat{Y_L}^k \right]}{\bar{F}_{\hat{Y_L}}(0)}.
+\end{equation*}
+
+\begin{eg}
+  The cdf of a ground-up loss $X$ is given by
+  \begin{equation*}
+    F_X(x) = 1 - \left( 1 - \frac{x}{800} \right)^2, \quad 0 \leq x \leq 800.
+  \end{equation*}
+  Assuming a policy limit of $600$, an ordinary deductible of $200$, and a coinsurance facotr of $0.8$, determine the cdf of $Y_L$ and the expected amount paid per loss $E\left[ Y_L \right]$.
+\end{eg}
+
+\begin{solution}
+  We are given
+  \begin{equation*}
+    Y_L = 0.8 [ (X \land 600) - 200 ]_+.
+  \end{equation*}
+  The survival function of $Y_L$ is
+  \begin{align*}
+    \bar{F}_{Y_L}(y) &= P \left( \max \{ 0, (X \land 600) - 200\} > \frac{y}{0.8} \right) \\
+      &= \begin{cases}
+        1 & y < 0 \\
+        P \left( X \land 600 > \frac{5y}{4} + 200 \right) & y \geq 0
+      \end{cases} \\
+      &= \begin{cases}
+        1 & y < 0 \\
+        P \left( X > \frac{5y}{4} + 200 \right) & 0 \leq y < 0.8(600 - 200) = 320 \\
+        0 & y \geq 320
+      \end{cases} \\
+      &= \begin{cases}
+        1 & y < 0 \\
+        \bar{F}_X \left( \frac{5y}{4} + 200 \right) & 0 \leq y < 320 \\
+        0 & y \geq 320
+      \end{cases}
+  \end{align*}
+  Thus the cdf of $Y_L$ is
+  \begin{equation*}
+    \bar{F}_{Y_L}(y) = \begin{cases}
+      0 & y < 0 \\
+      1 - \bar{F}_X \left( \frac{5y}{4} + 200 \right) & 0 \leq y < 320 \\
+      1 & y \geq 320
+    \end{cases}.
+  \end{equation*}
+  The expected amount paid per loss is
+  \begin{equation*}
+    E \left[ Y_L \right] = 0.8 \int_{200}^{600} \left( 1 - \frac{x}{800} \right)^2 \dif{x} = \frac{260}{3}
+  \end{equation*}
+\end{solution}
+
+\begin{eg}
+  Consider a ground-up loss $X$ with a Franchise deductible $d$. You are given that
+  \begin{itemize}
+    \item $15\%$ of the losses are below the Franchise deductible $d$,
+    \item the mean excess loss $e_X(d) = 50$,
+    \item the expected amount paid per loss is $51$.
+  \end{itemize}
+  Determine the value of $d$.
+\end{eg}
+
+\begin{solution}
+  We are given
+  \begin{gather*}
+    Y_L = X \cdot \mathbb{1}_{\{X > d\}} \\
+    P( X < d ) = 0.15
+  \end{gather*}
+  Thus $P(X > d) = 0.85$. We have
+  \begin{equation*}
+    \bar{F}_{Y_L}(y) = \begin{cases}
+      1 & y < 0 \\
+      \bar{F}_X(d) & 0 \leq y < d \\
+      \bar{F}_X(y) & y \geq d
+    \end{cases} = \begin{cases}
+      1 & y < 0 \\
+      0.85 & 0 \leq y < d \\
+      \bar{F}_X(y) & y \geq d
+    \end{cases}.
+  \end{equation*}
+  We are given
+  \begin{equation*}
+    50 = e_X(d) = \frac{\int_{d}^{\infty} \bar{F}_X(y) \dif{y}}{\bar{F}_X(d)},
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \int_{d}^{\infty} \bar{F}_X(y) \dif{y} = 50 * 0.85 = 42.5.
+  \end{equation*}
+  We are given
+  \begin{align*}
+    51 &= E [ Y_L ] = \int_{0}^{\infty} \bar{F}_X(y) \dif{y} = d\bar{F}_X(d) + \int_{d}^{\infty} \bar{F}_X(y) \dif{y} \\
+       &= 0.85d + 42.5.
+  \end{align*}
+  Thus
+  \begin{equation*}
+    d = \frac{8.5}{0.85} = 10.
+  \end{equation*}
+\end{solution}
+
+% subsubsection application_of_expected_value_of_the_policy_adjustments_continued (end)
+
+% subsection some_important_identities_continued (end)
+
+% section severity_distribution_policy_adjustments_continued_3 (end)
+
+% chapter lecture_12_oct_23rd (end)
 \appendix
 
 \chapter{Additional Material}%
