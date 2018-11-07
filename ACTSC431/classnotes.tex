@@ -2966,6 +2966,199 @@ and so
 % section frequency_distributions_basic_frequency_distributions (end)
 
 % chapter lecture_13_oct_25th (end)
+
+\chapter{Lecture 14 Oct 30th}%
+\label{chp:lecture_14_oct_30th}
+% chapter lecture_14_oct_30th
+
+\section{Frequency Distribution --- Basic Frequency Distributions (Continued)}%
+\label{sec:frequency_distribution_basic_frequency_distributions_continued}
+% section frequency_distribution_basic_frequency_distributions_continued
+
+\subsection{Frequency Distributions (Continued)}%
+\label{sub:frequency_distributions_continued}
+% subsection frequency_distributions_continued
+
+\subsubsection{Poisson Distribution (Continued)}%
+\label{ssub:poisson_distribution_continued}
+% subsubsection poisson_distribution_continued
+
+\begin{propo}[Splitting a Poisson Distribution]\label{propo:splitting_a_poisson_distribution}
+  Suppose that the total number of claim arrivals follows $N \sim \Poi(\lambda)$. There are $m$ distinct types of claims. Given a claim occurs, it is of type $i$ with probability $p_i$ such that
+  \begin{equation*}
+    p_1 + \hdots + p_m = 1.
+  \end{equation*}
+  Then, for each fixed $i = 1, \ldots, m$, the number of claims of type $i$, $N_i \sim \Poi(\lambda p_i)$. Furthermore, $N_1, N_2, \ldots, N_m$ are independent.
+\end{propo}
+
+\begin{note}
+  The above proposition can be visualized using a tree.
+  \begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+      \node[label={180:{$N \sim \Poi(\lambda)$}}] at (0, 0) {};
+      \node[draw,circle,fill,inner sep=1pt,label={180:{A claim}}] (A) at (0, 0.5) {};
+      \node[draw,circle,fill,inner sep=1pt,label={0:{Type 1}}] (one) at (1, 2) {};
+      \node[draw,circle,fill,inner sep=1pt,label={0:{Type 2}}] (two) at (1, 1) {};
+      \node (vdots) at (1, 0) {$\vdots$};
+      \node[draw,circle,fill,inner sep=1pt,label={0:{Type m}}] (m) at (1, -1) {};
+      \draw[-latex'] (A) -- (one);
+      \draw[-latex'] (A) -- (two);
+      \draw[-latex'] (A) -- (vdots);
+      \draw[-latex'] (A) -- (m);
+      \node[label={0:{w/ $p_1 \quad \to N_1 \sim \Poi(\lambda p_1)$}}] at (3, 2) {};
+      \node[label={0:{w/ $p_2 \quad \to N_2 \sim \Poi(\lambda p_2)$}}] at (3, 1) {};
+      \node[label={0:{w/ $p_m \quad \to N_m \sim \Poi(\lambda p_m)$}}] at (3, -1) {};
+    \end{tikzpicture}
+    \caption{Visualization of \cref{propo:splitting_a_poisson_distribution}}
+    \label{fig:visualization_of_splitting_a_poisson_distribution}
+  \end{figure}
+\end{note}
+
+\begin{proof}
+  We shall use \hlnotea{mathematical induction} on $m$, for the statement ``$N_1, N_2, \ldots, N_m$ are independent''. $N_i \sim \Poi(\lambda p_i)$ will follow from the induction step.
+
+  For $m = 1$, there is nothing to prove. It suffices to prove for $m = 2$, since we may think of the problem as
+  \begin{equation*}
+    \text{Type 1} \quad \underbrace{\text{Type 2} \quad \text{Type 3} \hdots \text{Type m}}_{\text{Type 2'}}.
+  \end{equation*}
+
+  \noindent\hlbnotea{Case $m = 2$} Suppose $N = N_1 + N_2 \sim \Poi(\lambda)$. To show that $N_1$ and $N_2$ are independent, a relation which we denote as $N_1 \bot N_2$, we need to show
+  \begin{equation}\label{eq:splitting_poisson_independence}
+    P(N_1 = k_1, N_2 = k_2) = P(N_1 = k_1) P(N_2 = k_2),
+  \end{equation}
+  which is a defining property of independence.
+
+  Firstly, note that if given sets $A \subset B$, we have
+  \begin{equation*}
+    P(A) = P(A \cap B).
+  \end{equation*}
+  With that,
+  \begin{align}
+    P(N_1 = k_1, N_2 = k_2) &= P(\overbrace{N_1 = k_1, N_2 = k_2}^{A}, \overbrace{N_1 + N_2 = k_1 + k_2}^{B}) \nonumber \\
+                            &= P(A \mid B) P(B) \nonumber \\
+                            &= \binom{k_1 + k_2}{k_1} p_1^{k_1} p_2^{k_2} \cdot \frac{e^{-\lambda} \lambda^{k_1 + k_2}}{(k_1 + k_2)!} \nonumber \\
+                            &= \frac{(k_1 + k_2)!}{k_1! k_2!} p_1^{k_1} p_2^{k_2} \cdot \frac{e^{-\lambda (1)} \lambda^{k_1 + k_2}}{(k_1 + k_2)!} \nonumber \\
+                            &= e^{-\lambda (p_1 + p_2)} \cdot \frac{(\lambda p_1)^{k_1}}{k_1!} \cdot \frac{(\lambda p_2)^{k_2}}{k_2!} \nonumber \\
+                            &= \frac{e^{-\lambda p_1} (\lambda p_1)^{k_1}}{k_1!} \cdot \frac{e^{-\lambda p_2} (\lambda p_2)^{k_2}}{k_2!} \label{eq:splitting_poisson_jointdist}
+  \end{align}
+  Thus, the marginal distribution of $N_1$
+  \begin{align*}
+    P(N_1 = k_1) &= \sum_{k_2 = 0}^{\infty} P(N_1 = k_1, N_2 = k_2) \\
+                 &= \frac{e^{-\lambda p_1} (\lambda p_1)^{k_1}}{k_1!} e^{-\lambda p_2} \sum_{k_2 = 0}^{\infty} \frac{(\lambda p_2)^{k_2}}{k_2!} \\
+                 &= \frac{e^{-\lambda p_1} (\lambda p_1)^{k_1}}{k_1!} e^{-\lambda p_2} e^{\lambda p_2} \\
+                 &= \frac{e^{-\lambda p_1} (\lambda p_1)^{k_1}}{k_1!}
+  \end{align*}
+  which is the pmf of $\Poi(\lambda p_1)$. The marginal distribution of $N_2$ is similar. It is clear from \cref{eq:splitting_poisson_jointdist} that we have \cref{eq:splitting_poisson_independence}. The result then follows from induction.\qed\
+\end{proof}
+
+\begin{eg}
+  The number of claims of a portfolio follows $\Poi(\lambda)$. The severity of ground-up loss follows $\Unif(0, b)$. The insurer would like to impose an ordinary deductible $d$ and a policy limit $u$ such that
+  \begin{equation*}
+    0 < d < u < b.
+  \end{equation*}
+  What is the frequency distribution of \hlnotea{positive payments}?
+\end{eg}
+
+\begin{solution}
+  Let Type 1 be the case where $X < d$ and Type 2 be $X > d$. Since the severity of the ground-up loss follows $\Unif(0, b)$, the probability of an occurrence of Type 2 is
+  \begin{equation*}
+    1 - \frac{d}{b} = \frac{b - d}{b}.
+  \end{equation*}
+  By \cref{propo:splitting_a_poisson_distribution}, we have that the frequency distribution of positive payments, i.e. Type 2, follows $\Poi \left( \lambda \frac{b - d}{b} \right)$.
+\end{solution}
+
+% subsubsection poisson_distribution_continued (end)
+
+\subsubsection{Binomial Distribution}%
+\label{ssub:binomial_distribution}
+% subsubsection binomial_distribution
+
+\begin{defn}[Binomial Distribution]\index{Binomial Distribution}\label{defn:binomial_distribution}
+  A counting rv $N$ is said to have a \hlnoteb{binomial distribution} with parameters $q \in (0, 1)$ and $m \in \mathbb{N} \setminus \{ 0 \}$, written as $N \sim \Bin(q, m)$, if it has the pmf
+  \begin{equation*}
+    p_k = P(N = k) = \binom{m}{k} q^k ( 1 - q )^{m - k}, \enspace k = 0, 1, 2, \ldots .
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  It is easy to verify that this is a valid probability distribution, since
+  \begin{equation*}
+    \sum_{k=0}^{m} \binom{m}{k} q^k (1 - q)^{m - k} = (q + 1 - q)^m = 1^m = 1
+  \end{equation*}
+  by the \hlnotea{binomial theorem}.
+\end{remark}
+
+\begin{note}
+  \begin{itemize}
+    \item When $m = 1$, the distribution is called a \hldefn{Bernoulli} rv with mean $q$. 
+    \item The binomial distribution is a \hlnotea{bounded} rv, since it has a fixed number of trials.
+  \end{itemize}
+\end{note}
+
+\begin{propo}[PGF of Binomial Distribution]\label{propo:pgf_of_binomial_distribution}
+  Let $N \sim \Bin(q, m)$. Its pgf is given by
+  \begin{equation*}
+    G(t) = ( 1 - q + tq )^m.
+  \end{equation*}
+  Moreover, its mean and variance are
+  \begin{equation*}
+    E[N] = mq \text{ and } \Var(N) = mq(1 - q)
+  \end{equation*}
+  respectively.
+\end{propo}
+
+\begin{proof}
+  We have
+  \begin{equation*}
+    G(t) = \sum_{k=0}^{m} \binom{m}{k} (tq)^k (1 - q)^{m - k} = ( 1 - q + tq )^m
+  \end{equation*}
+  The mean is, therefore,
+  \begin{equation*}
+    G'(1) = mq (1 - q + (1)q)^{m - 1} = mq,
+  \end{equation*}
+  and its variance
+  \begin{align*}
+    \Var(N) &= G''(1) + G'(1) - G'(1)^2 \\
+            &= m(m-1)q^2 + mq - m^2 q^2 = mq ( 1 - q ).
+  \end{align*}\qed\
+\end{proof}
+
+\begin{propo}[Sum of Independent Binomial RVs]\label{propo:sum_of_independent_binomial_rvs}
+  If $N_1, \ldots, N_n$ are independent and $N_i \sim \Bin(q, m_i)$ for $i = 1, \ldots, n$, then
+  \begin{equation*}
+    N = \sum_{i=1}^{n} N_i \sim \Bin \left( q, \sum_{i=1}^{n} m_i \right).
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  We shall use the pgf to prove this, instead of using the mgf (which is the common approach).
+  \begin{align*}
+    G_N(t) &= E \left[ t^N \right] = E \left[ t^{\sum_{i=1}^{n} N_i} \right] \overset{(*)}{=} \prod_{i=1}^{n} E \left[ t^{N_i} \right] \\
+           &= \prod_{i=1}^{n} (1 - q + tq)^{m_i} = (1 - q + tq)^{\sum\limits_{i=1}^{n} m_i}
+  \end{align*}
+  Thus $N = \sum_{i=1}^{n} N_i \sim \Bin \left( q, \sum\limits_{i=1}^{n} m_i \right)$.\qed\
+\end{proof}
+
+\begin{note}
+  As a result of \cref{propo:sum_of_independent_binomial_rvs}, if we have a sequence of Bernoulli trials, each with the same ``success'' probability $q$, call each of them $I_i$, then
+  \begin{equation*}
+    N = \sum_{i=1}^{m} I_i \sim \Bin ( q, m )
+  \end{equation*}
+  Consequently, it becomes rather silly how easy it is we can get the mean and variance of $N$:
+  \begin{gather*}
+    E[N] = E \left[ \sum_{i=1}^{m} I_i \right] = \sum_{i=1}^{m} E [ I_i ] = mq \\
+    \Var(N) = \Var \left( \sum_{i=1}^{m} I_i \right) = \sum_{i=1}^{m} \Var(I_i) = mq(1 - q)
+  \end{gather*}
+\end{note}
+
+% subsubsection binomial_distribution (end)
+
+% subsection frequency_distributions_continued (end)
+
+% section frequency_distribution_basic_frequency_distributions_continued (end)
+
+% chapter lecture_14_oct_30th (end)
 \appendix
 
 \chapter{Additional Material}%
