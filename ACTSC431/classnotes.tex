@@ -3159,6 +3159,244 @@ and so
 % section frequency_distribution_basic_frequency_distributions_continued (end)
 
 % chapter lecture_14_oct_30th (end)
+
+\chapter{Lecture 15 Nov 01st}%
+\label{chp:lecture_15_nov_01st}
+% chapter lecture_15_nov_01st
+
+\section{Frequency Distribution --- Basic Frequency Distributions (Continued 2)}%
+\label{sec:frequency_distribution_basic_frequency_distributions_continued_2}
+% section frequency_distribution_basic_frequency_distributions_continued_2
+
+\subsection{Frequency Distributions (Continued 2)}%
+\label{sub:frequency_distributions_continued_2}
+% subsection frequency_distributions_continued_2
+
+\subsubsection{Negative Binomial Distribution}%
+\label{ssub:negative_binomial_distribution}
+% subsubsection negative_binomial_distribution
+
+\begin{defn}[Negative Binomial Distribution]\index{Negative Binomial Distribution}\label{defn:negative_binomial_distribution}
+  A counting rv $N$ is said to have a \hlnoteb{negatiev binomial distribution} with parameters $\beta > 0$ and $r > 0$, denoted $N \sim \NB(\beta, r)$, if it has the pmf
+  \begin{equation*}
+    p_k = P(N = k) = \binom{k + r - 1}{k} \left( \frac{1}{1 + \beta} \right)^r \left( \frac{\beta}{1 + \beta} \right)^k, k = 0, 1, 2, \ldots
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  Note that
+  \begin{equation*}
+    \binom{k + r - 1}{k} = \frac{\Gamma(k + r)}{k! \Gamma(r)} = \frac{(k + r - 1)!}{k! (r - 1)!},
+  \end{equation*}
+  where the later equality follows if $r \in \mathbb{N} \setminus \{ 0 \}$.
+\end{remark}
+
+\begin{note}
+  \begin{itemize}
+    \item When $r = 1$, we can also write the pmf of $\NB(\beta, 1)$ as the pmf of the \hlnotea{geometric distribution}:
+      \begin{equation*}
+        p_k = \frac{1}{1 + \beta} \left( \frac{\beta}{1 + \beta} \right)^k, k = 0, 1, 2, \ldots.
+      \end{equation*}
+
+    \item To verify that the negative binomial distribution is a valid probability distribution, we need the following identity:\marginnote{
+      \begin{ex}
+        Verify that the negative binomial distribution is a valid probability distribution.
+      \end{ex}}
+      \begin{equation*}
+        (1 - x)^{-r} = \sum_{k=0}^{\infty} \binom{k + r - 1}{k} x^k,
+      \end{equation*}
+      which is proven as follows:
+
+      \begin{proof}
+        We shall use the \hlnotea{Taylor expansion} of $(1 - x)^{-r}$.
+        \begin{align*}
+          (1 - x)^{-r} &= 1 + (-1)(-r)(1 - x)^{-r-1}\at{x = 0}{} x \\
+                       &\quad + \frac{r}{2} (-1) (-r-2) (1 - x)^{-r-2}\at{x = 0}{} x^2 + \hdots \\
+                       &= 1 + rx + \frac{r(r + 1)}{2} x^2 + \frac{r(r + 1)(r + 2)}{3!} x^3 + \hdots \\
+                       &= \sum_{k=0}^{\infty} \frac{r(r + 1) \hdots (r + k - 1)}{k!} x^K \\
+                       &= \sum_{k=0}^{\infty} \binom{k + r - 1}{k} x^k.
+        \end{align*}\qed\
+      \end{proof}
+
+    \item The negative binomial distribution is an \hlnotea{unbounded} rv, and can take all natural numbers sans $0$.
+  \end{itemize}
+\end{note}
+
+\paragraph{Interpretation} Consider an experiment with independent trails, of which each has only two possible outcomes: success with probability $\frac{1}{1 + \beta}$, and failure with probability $1 - \frac{1}{1 + \beta} = \frac{\beta}{1 + \beta}$. Let $N$ denote the number of failures until reaching the $r$\textsuperscript{th} success.
+
+\begin{propo}[PGF of the Negative Binomial Distribution]\label{propo:pgf_of_the_negative_binomial_distribution}
+  Let $N \sim \NB(\beta, r)$. Its pgf is thus
+  \begin{equation*}
+    G(t) = [1 - \beta(t - 1)]^{-r}.
+  \end{equation*}
+  Moreover, its mean and variance are
+  \begin{equation*}
+    E[N] = r \beta \text{ and } \Var(N) = r\beta(1 + \beta),
+  \end{equation*}
+  respectively.
+\end{propo}
+
+\begin{note}
+  Note that the proof for getting the pgf is similar to how we can verify that $N$ is a probability (same case as in earlier counting distributions).
+\end{note}
+
+\begin{proof}
+  Using the Taylor Expansion $(1 - x)^{-r} = \sum_{k=0}^{\infty} \binom{k + r - 1}{k} x^k$, we have
+  \begin{align*}
+    G(t) &= \sum_{k=0}^{\infty} t^k p_k = \left( \frac{1}{1 + \beta} \right)^r \sum_{k=0}^{\infty} \binom{k + r - 1}{k} \left( \frac{t \beta}{1 + \beta} \right)^k \\
+         &= \left( \frac{1}{1 + \beta} \right)^r \left( 1 - \frac{t \beta}{1 + \beta} \right)^{-r} = [ 1 - \beta (t - 1) ]^{-r}.
+  \end{align*}
+  Consequently, the mean is
+  \begin{equation*}
+    E[N] = G'(1) = -r(-\beta) = r \beta
+  \end{equation*}
+  and variance is
+  \begin{align*}
+    \Var(N) &= G''(1) + G'(1) - G'(1)^2 \\
+            &= -r ( -r - 1 ) \beta^2 + r \beta - r^2 \beta^2 = r \beta ( 1 + \beta )
+  \end{align*}\qed\
+\end{proof}
+
+\begin{propo}[Negative Binomial from Poisson Conditioned on Gamma]\label{propo:negative_binomial_from_poisson_conditioned_on_gamma}
+  Let $N \mid \Lambda = \lambda \sim \Poi(\lambda)$ and $\Lambda \sim \Gam(\alpha, \theta)$. Then
+  \begin{equation*}
+    N \sim \NB(\theta, \alpha).
+  \end{equation*}
+\end{propo}
+
+\begin{note}
+  We may also write $N \mid \Lambda = \lambda \sim \Poi(\lambda)$ as $N \mid \Lambda \sim \Poi(\Lambda)$.
+\end{note}
+
+\begin{proof}
+  We shall prove this statement by finding the pgf of $N$, which identifies the distribution. Note that
+  \begin{equation*}
+    G_N(t) = E\left[ t^N \right] \overset{\text{Proposition }\ref{propo:total_expectation_and_total_variance}}{=} E \left[ E \left[ t^N \mid \Lambda \right] \right] \overset{(*)}{=} E \left[ e^{\Lambda (t - 1)} \right],
+  \end{equation*}
+  where $(*)$ \hlwarn{requires further clarification}. Now since $\Lambda \sim \Gam(\alpha, \theta)$, and $M_\Lambda(t) = E\left[e^{t \Lambda}\right] = (1 - \theta t)^{-\alpha}$, it follows that
+  \begin{equation*}
+    G_N(t) = [ 1 - \theta(t - 1) ]^{-\alpha}.
+  \end{equation*}
+  Thus $N \sim \NB(\theta, \alpha)$.\qed\
+\end{proof}
+
+\begin{propo}[Combining Negative Binomial Distributions]\label{propo:combining_negative_binomial_distributions}
+  If $\{ N_i \}_{i = 1}^{n}$ is a sequence of independent rvs, and $N_i \sim \NB(\beta, r_i)$. Then
+  \begin{equation*}
+    N = \sum_{i=1}^{n} N_i \sim \NB \left( \beta, \sum_{i=1}^{n} r_i \right).
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  We shall, again, use the pgf. We have
+  \begin{align*}
+    G_N(t) &= E \left[ t^N \right] \overset{(*)}{=} \prod_{i=1}^{n} E \left[ t^{N_i} \right] = \prod_{i=1}^{n} G_{N_i}(t) \\
+           &= \prod_{i=1}^{n} [1 - \beta ( t - 1 )]^{r_i} = [ 1 - \beta ( t - 1 ) ]^{- \sum_{i=1}^{n} r_i},
+  \end{align*}
+  where $(*)$ is by independence of the rvs, and the last equality is thanks to $\beta$ being fixed for all the rvs. This completes the proof.\qed\
+\end{proof}
+
+% subsubsection negative_binomial_distribution (end)
+
+% subsection frequency_distributions_continued_2 (end)
+
+\subsection{$(a, b, n)$ Classes}%
+\label{sub:a_b_n_classes}
+% subsection a_b_n_classes
+
+\subsubsection{$(a, b, 0)$ Class}%
+\label{ssub:a_b_0_class}
+% subsubsection a_b_0_class
+
+\begin{defn}[$(a, b, 0)$ Class]\index{$(a, b, 0)$ Class}\label{defn:a_b_0_class}
+  The $(a, b, 0)$ class is a set of counting rvs with pmf $p_k$ satisfying the recursive formula
+  \begin{equation*}
+    \frac{p_k}{p_{k - 1}} = a + \frac{b}{k}, \quad k \in \mathbb{N} \setminus \{ 0 \}.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  An $(a, b, 0)$ distribution is determiend by the parameters $a$ and $b$.
+\end{remark}
+
+\begin{note}
+  Observe that
+  \begin{align*}
+    \frac{p_1}{p_0} &= a + \frac{b}{1} \iff p_1 = p_0 \left( a + \frac{b}{1} \right) \\
+    \frac{p_2}{p_2} &= a + \frac{b}{2} \iff p_2 = p_1 \left( a + \frac{b}{2} \right) = p_0 \left( a + \frac{b}{1} \right)\left( a + \frac{b}{2} \right) \\
+                    &\vdots \\
+    \frac{p_k}{p_{k - 1}} &= a + \frac{b}{k} \iff p_k = p_0 \prod_{i=1}^{k} \left( a + \frac{b}{i} \right).
+  \end{align*}
+  Thus we see that each of the $p_k$ is completely determined by $p_0$. In other words, for the distributions of this class, if we can find $p_0$, then we can get $p_k$, even if we do not know the actual parameters of the distribution.
+
+  In fact, we can solve for $p_0$, if we already know what $a$ and $b$ are: we need to solve for $p_0$ in $\sum_{k=0}^{\infty} p_k = 1$. In particular, we need to solve for
+  \begin{equation*}
+    p_0 \sum_{k=0}^{\infty} \prod_{i=1}^{k} \left( a + \frac{b}{i} \right) = 1.
+  \end{equation*}
+\end{note}
+
+\paragraph{Members of the $(a, b, 0)$ class} It can be shown\sidenote{Perhaps this can be shown using \url{https://www.actuaries.org/ASTIN/Colloquia/Helsinki/Papers/S7_13_Fackler.pdf}.} that the Poisson, Binomial, and Negative Binomial distributions are \hlnotea{the only} distributions that belong to this class. We have that
+
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{l | c | c | c}
+    \toprule
+    Distribution    & $a$                       & $b$                              & $p_0$ \\
+    \midrule
+    $\Poi(\lambda)$ & $0$                       & $\lambda$                        & $e^{-\lambda}$ \\
+    $\Bin(q, m)$    & $-\frac{q}{1 - q}$        & $( m + 1 ) \frac{q}{1 - q}$      & $(1 - q)^m$ \\
+    $\NB(\beta, r)$ & $\frac{\beta}{1 + \beta}$ & $(r - 1)\frac{\beta}{1 + \beta}$ & $(1 + \beta)^{-r}$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{The $(a, b, 0)$ distributions}
+  \label{table:the_a_b_0_distributions}
+\end{table}
+
+We shall prove for the case of $\Poi(\lambda)$.\marginnote{
+\begin{ex}
+  Find $a$, $b$ and $p_0$ for $\Bin(q, m)$ and $\NB(\beta, r)$.
+\end{ex}}
+
+\begin{proof}
+  By the pmf of $\Poi(\lambda)$, it is clear that
+  \begin{equation*}
+    p_0 = \frac{e^{-\lambda} \lambda^0}{0!} = e^{-\lambda}.
+  \end{equation*}
+  Now, since
+  \begin{equation*}
+    p_1 = \lambda e^{-\lambda} \quad p_2 = \frac{1}{2} \lambda^2 e^{-\lambda}
+  \end{equation*}
+  we have the following system of equations:
+  \begin{gather*}
+    \lambda = \frac{p_1}{p_0} = a + b \\
+    \frac{1}{2}\lambda = \frac{p_2}{p_1} = a + \frac{b}{2}
+  \end{gather*}
+  Thus $b = \lambda$ and $a = 0$.\qed\
+\end{proof}
+
+\begin{eg}
+  Assume that the number of claims in a portfolio $N$ follows $(-0.25, 2.75, 0)$ distribution. Calculate the probability that there is at least one claim.
+\end{eg}
+
+\begin{solution}
+  Using \cref{table:the_a_b_0_distributions}, we know that $N \sim \Bin(q, m)$, where
+  \begin{equation*}
+    - \frac{q}{1 - q} = - 0.25 \text{ and } (m + 1) \frac{q}{1 - q} = 2.75,
+  \end{equation*}
+  which gives $q = 0.2$ and $m = 10$. Thus the desired probability is
+  \begin{equation*}
+    P(N \geq 1) = 1 - P(N = 0) = 1 - (1 - 0.8)^{10} = 0.8926.
+  \end{equation*}
+\end{solution}
+
+% subsubsection a_b_0_class (end)
+
+% subsection a_b_n_classes (end)
+
+% section frequency_distribution_basic_frequency_distributions_continued_2 (end)
+
+% chapter lecture_15_nov_01st (end)
+
 \appendix
 
 \chapter{Additional Material}%
@@ -3189,10 +3427,10 @@ where $I_i$ is an indicator function given by
 while $X_i$ is the size of the claim(s) for the $i$\textsuperscript{th} policy provided that there is a claim.
 
 \newthought{One problem} that arises is: are $X_i$ and $I_i$ independent? They should be if we wish to define $Z_i$ in such a way. In fact, according to \\
-\noindent\textcolor{base16-eighties-magenta}{\underline{Klugman et. al. in page 177}},
+\noindent\textcolor{be-magenta}{\underline{Klugman et al.\ in page 177}},
 
-\begin{quotebox}{base16-eighties-magenta}
-  Let $X_j = I_j B_j$, where $I_1, ..., I_n, B_1, ..., B_n$ are independent.
+\begin{quotebox}{be-magenta}{light}
+  Let $X_j = I_j B_j$, where $I_1, \ldots, I_n, B_1, \ldots, B_n$ are independent.
 \end{quotebox}
 
 where $X_j$ is our $Z_i$, $I_j$ is our $I_i$, and $B_j$ is our $X_i$.
@@ -3210,18 +3448,17 @@ is note well-defined.
 
 \paragraph{$\S$ Independence of $I_i$ and $X_i$} We cannot actually tell if $I_i$ and $X_i$ are independent from each other, as it is equivalent to comparing apples with oranges\sidenote{In fact, I think this analogy fits our case perfectly so.}. Recall from our earlier courses, in particular STAT330, of the following notion:
 
-\begin{defnnonum}[Probability Space]
-\label{defn:probability_space}
-  Let $\Omega$ be a sample space, and $\mathcal{F}$ a $\sigma$-algebra defined on $\Omega$\sidenote{Note that $(\Omega, \mathcal{F})$ is called a \hlnotea{measurable space}.}. A \hlnoteb{probability space} is the measurable space $(\Omega, \mathcal{F})$ with a \textcolor{base16-eighties-blue}{probability measure}, $f: \mathcal{F} \to [0, 1]$, defined on the space. We denote a probability space as $(\Omega, \mathcal{F}, f)$.
+\begin{defnnonum}[Probability Space]\label{defn:probability_space}
+  Let $\Omega$ be a sample space, and $\mathcal{F}$ a $\sigma$-algebra defined on $\Omega$\sidenote{Note that $(\Omega, \mathcal{F})$ is called a \hlnotea{measurable space}.}. A \hlnoteb{probability space} is the measurable space $(\Omega, \mathcal{F})$ with a \textcolor{be-blue}{probability measure}, $f: \mathcal{F} \to [0, 1]$, defined on the space. We denote a probability space as $(\Omega, \mathcal{F}, f)$.
 \end{defnnonum}
 
-As mentioned in an earlier $\S$, $X_i$ is not defined on $Z_i = 0$, while $I_i$ is defined on $Z_i = 0$ \sidenote{\faHandPaperO \enspace This statement is hand-wavy.}. So the sample space for $X_i$ and $I_i$ are not the same, and so their probability measures are not the same as well. Therefore, \hlimpo{it is meaningless to ask if $X_i$ and $I_i$ are independent}.
+As mentioned in an earlier $\S$, $X_i$ is not defined on $Z_i = 0$, while $I_i$ is defined on $Z_i = 0$ \sidenote{\faHandPaperO\ \enspace\ This statement is hand-wavy.}. So the sample space for $X_i$ and $I_i$ are not the same, and so their probability measures are not the same as well. Therefore, \hlimpo{it is meaningless to ask if $X_i$ and $I_i$ are independent}.
 
 Our best attempt at fixing this is probably the following: let
 \begin{equation*}
   Z_i = \sum_{i=1}^{I_i} X_i,
 \end{equation*}
-which we can then have $X_i$ to be independent from $I_i$. However, interestingly so, this is a very similar approach to a \hyperref[defn:collective_risk_model]{Collective Risk Model}.
+which we can then have $X_i$ to be independent from $I_i$. However, interestingly so, this is a similar approach to a \hyperref[defn:collective_risk_model]{Collective Risk Model}.
 
 % section individual_risk_model_an_alternate_view (end)
 
@@ -3229,16 +3466,15 @@ which we can then have $X_i$ to be independent from $I_i$. However, interestingl
 \label{sec:coherent_risk_measure}
 % section coherent_risk_measure
 
-An excerpt from Klugman et. al. (2012)\cite{KlugmanPanjerWillmot2012}:
+An excerpt from Klugman et al.\ (2012)~\cite{KlugmanPanjerWillmot2012}:
 
-\begin{quotebox}{base16-eighties-magenta}
-  The study of risk measures and their properties has been carried out by authors such as Wang. Specific desirable properties of risk measures were proposed as axioms in connection with risk pricing by Wang, Young, and Panjer and more generally in risk measurement by Artzer et. al. The Artzner paper introduced the concept of \textbf{coherence} and is considered to be the groundbreaking paper in risk measurement.
+\begin{quotebox}{be-magenta}{light}
+  The study of risk measures and their properties has been carried out by authors such as Wang. Specific desirable properties of risk measures were proposed as axioms in connection with risk pricing by Wang, Young, and Panjer and more generally in risk measurement by Artzer et al.\ The Artzner paper introduced the concept of \textbf{coherence} and is considered to be the groundbreaking paper in risk measurement.
 \end{quotebox}
 
 Often, we use the function $\rho(X)$ to denote risk measures. One may think of $\rho(X)$ as \hlnotec{the amount of assets required to protect against adverse outcomes of the risk $X$}.
 
-\begin{defn}[Coherent Risk Measure]\index{Coherent Risk Measure}
-\label{defn:coherent_risk_measure}
+\begin{defn}[Coherent Risk Measure]\index{Coherent Risk Measure}\label{defn:coherent_risk_measure}
   A \hlnoteb{coherent risk measure} is a risk measure $\rho(X)$ that has the following four properties for any two loss rvs $X$ and $Y$:
   \begin{enumerate}
     \item (\hlnotea{Subadditivity}) $\rho(X + Y) \leq \rho(X) + \rho(Y)$.
@@ -3255,7 +3491,7 @@ Often, we use the function $\rho(X)$ to denote risk measures. One may think of $
     \begin{itemize}
       \item the risk measure (and in return, the capital required to cover for it) for two risks combined will not be greater than for the risks to be treated separately;
       \item reflects the fact that there shuld be some diversification benefit from combining risks;
-      \item this requirement is disputed: e.g. the merger of several small companies into a larger one exposes each of the small companies to the \hlnotea{reputational risks} of the others.
+      \item this requirement is disputed: e.g.\ the merger of several small companies into a larger one exposes each of the small companies to the \hlnotea{reputational risks} of the others.
     \end{itemize}
 
   \item \textbf{Monotonicity}
@@ -3279,7 +3515,7 @@ Often, we use the function $\rho(X)$ to denote risk measures. One may think of $
 
 % chapter additional_material (end)
 
-\backmatter
+\backmatter\
 
 \pagestyle{plain}
 
@@ -3291,4 +3527,3 @@ Often, we use the function $\rho(X)$ to denote risk measures. One may think of $
 \printindex
 
 \end{document}
-
