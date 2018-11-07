@@ -2762,6 +2762,210 @@ and its moments
 % section severity_distribution_policy_adjustments_continued_3 (end)
 
 % chapter lecture_12_oct_23rd (end)
+
+\chapter{Lecture 13 Oct 25th}%
+\label{chp:lecture_13_oct_25th}
+% chapter lecture_13_oct_25th
+
+\section{Severity Distribution --- Policy Adjustments (Continued 3)}%
+\label{sec:severity_distribution_policy_adjustments_continued_3}
+% section severity_distribution_policy_adjustments_continued_3
+
+By introducing policy adjustments, it is within our interest to determine if the introduced adjustments have helped to eliminate the expected propotion of loss.
+
+\begin{defn}[Loss Elimination Ratio]\index{Loss Elimination Ratio}\label{defn:loss_elimination_ratio}
+  The \hlnoteb{loss elimination ratio}, denoted as \hldefn{$\LER$}, is the ratio of which loss has been mitigated, or eliminated, as a result of policy adjustments, and it is given by
+  \begin{equation*}
+    \LER = \frac{E[ X - Y_L ]}{E[X]} = 1 - \frac{E[Y_L]}{E[X]},
+  \end{equation*}
+  where $\frac{E[Y_L]}{E[X]}$ corresponds to the percentage of loss retained by the insurer.
+\end{defn}
+
+\begin{eg}
+  For a policy that has only an ordinary deductible, i.e. $Y_L = {[X - d]}_+$, we have
+  \begin{equation*}
+    \LER = 1 - \frac{E( {[X - d]}_+ )}{E[X]} = 1 - \frac{E[X] - E[X \land d]}{E[X]} = \frac{E[X \land d]}{E[X]}.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Consider a ground-up loss $X \sim \Pareto(\alpha, \theta)$ with $\alpha = 2$ and $\theta = 1000$.
+  \begin{enumerate}
+    \item Calculate the $\LER$ if an ordinary deductible of $500$ is applied.
+    \item What is the required value of $d$ to eliminate $20\%$ of the loss?
+  \end{enumerate}
+
+  \begin{solution}
+    \begin{enumerate}
+      \item Note that
+        \begin{equation*}
+          \bar{F}_X(x) = \frac{\theta^\alpha}{(x + \theta)^\alpha}.
+        \end{equation*}
+        Now
+        \begin{align*}
+          E[X] &= \int_{0}^{\infty} \bar{F}_X(x) \dif{x} = \theta^\alpha \int_{0}^{\infty} \frac{1}{(x + \theta)^\alpha} \dif{x} \\
+               &= \frac{\theta^\alpha}{1 - \alpha} \cdot \frac{1}{( x + \theta )^{ \alpha - 1 }} \at{0}{\infty} = \frac{\theta}{\alpha - 1}.
+        \end{align*}
+        and
+        \begin{align*}
+          E[X \land d] &= \int_{0}^{d} \bar{F}_X(x) \dif{x} = \frac{\theta^\alpha}{1 - \alpha}\cdot \frac{1}{(x + \theta)^{ \alpha - 1 }} \at{0}{d} \\
+                       &= \frac{\theta^\alpha}{1 - \alpha} \left( \frac{1}{(d + \theta)^{ \alpha - 1 }} - \frac{1}{\theta^{\alpha - 1}} \right) \\
+                       &= \frac{\theta}{\alpha - 1} \left( 1 - \left( \frac{\theta}{d + \theta} \right)^{\alpha - 1} \right).
+        \end{align*}
+        Thus
+        \begin{equation*}
+          \LER = \frac{E[X \land d]}{E[X]} = \left( 1 - \left( \frac{\theta}{d + \theta} \right)^{\alpha - 1} \right) = \frac{1}{3}.
+        \end{equation*}
+
+        In other words, $\frac{1}{3}$ is mitigated by setting an ordinary deductible of $500$.
+
+      \item In this case, let $\LER = 0.2 = \frac{1}{5}$. Then
+        \begin{equation*}
+          \frac{1}{5} = 1 - \frac{1000}{d + 1000} \iff \frac{1000}{d + 1000} = \frac{4}{5} \iff d = 250
+        \end{equation*}
+    \end{enumerate}
+  \end{solution}
+\end{eg}
+
+% section severity_distribution_policy_adjustments_continued_3 (end)
+
+\section{Frequency Distributions --- Basic Frequency Distributions}%
+\label{sec:frequency_distributions_basic_frequency_distributions}
+% section frequency_distributions_basic_frequency_distributions
+
+Recall from our \hyperref[defn:collective_risk_model]{Collective Risk Model} that
+\begin{equation*}
+  S = \sum_{i=1}^{N} X_i,
+\end{equation*}
+where
+\begin{align*}
+  X_i &\equiv \text{ size of the } i\text{\textsuperscript{th} claim, modelled by severity distributions} \\
+N &\equiv \text{ a nonnegative integer-valued rv that represents the number of } \\
+  &\quad\; \text{ claims, modelled by frequency distributions }
+\end{align*}
+
+\begin{defn}[Counting Distributions and RVs]\index{Counting Distribution}\index{Counting Random Variables}\label{defn:counting_distributions_and_rvs}
+  A nonnegative rv, usually represented by $N$, is called a \hlnoteb{counting rv} and its distribution is called a \hlnoteb{counting distirbution}.
+\end{defn}
+
+\begin{note}
+  For this section, the \hyperref[defn:probability_generating_function]{pgf} is important.
+\end{note}
+
+\paragraph{Importance of PGF} Given $G(t) = E\left[ t^N \right] = \sum_{k=0}^{\infty} t^K p_k$, provided that the moments exist, we have\marginnote{Also for $(*)$: The derivation is
+\begin{align*}
+  &G_N^{(n)}(t) = \frac{d^n}{dt^n} G_N(t) \\
+  &= \sum_{k=0}^{\infty} \frac{d^n}{dt^n} t^k p_k \\
+  &= \sum_{k=0}^{\infty} k(k - 1) \hdots (k - n + 1) t^{k - n} p_k \\
+  &= E \left[ \prod_{k=1}^{n} ( N - k + 1 ) t^{N - n} \right]
+\end{align*}}
+\begin{align*}
+  G^{(n)}(t) &= \frac{d^n}{dt^n} G(t) \overset{(*)}{=} E\left[ \prod_{i=1}^{n} (N - i + 1)t^{N - n} \right] \\
+             &= \sum_{k=0}^{\infty} \prod_{i=1}^{n} (k - i + 1) t^{k - n} p_k \\
+             &\overset{(**)}{=} \sum_{k=n}^{\infty} \prod_{i=1}^{n} (k - i + 1) t^{k - n} p_k
+\end{align*}
+where $(*)$ is because the moments exist, and $(**)$ is because for $k = 0, 1, \ldots, n - 1$, the product $\prod_{i=1}^{n} (k - i + 1) = 0$.
+
+We can obtain the pmf of $N$ from the pgf by
+\begin{align}
+  G^{(n)}(0) &= \sum_{k=n}^{\infty} \prod_{i=1}^{n} (k - i + 1) t^{k - n} p_k \at{t = 0}{} \nonumber \\
+             &= \prod_{i=1}^{n} ( n - i + 1 ) p_n = n! p_n \label{eq:pmf_from_pgf}
+\end{align}
+where we notice in \cref{eq:pmf_from_pgf} that only the $n$\textsuperscript{th} term survives as $t^{n - n} = 1$.
+
+\hlnoteb{Factorial Moments}\sidenote{
+  \begin{margindefn}[Factorial Moments from PGF]\label{defn:factorial_moments_from_PGF}
+    We can obtain the \hlnoteb{factorial moments} of an rv $X$ from its pgf. In particular,
+    \begin{equation*}
+      G^{(n)}(1) = E \left[ \prod_{i=1}^{n} (X - i + 1) \right]
+    \end{equation*}
+    where $n \in \mathbb{N} \setminus \{ 0 \}$.
+  \end{margindefn}
+} can be obtained by
+\begin{equation*}
+  G^{(n)}(1) = E\left[ \prod_{i=1}^{n} ( N - i + 1 ) \right], \quad n = 1, 2, 3, \ldots.
+\end{equation*}
+In particular, we have that
+\begin{equation*}
+  G'(1) = E[N] \text{ and } G''(1) = E[N(N - 1)] = E(N^2) - E(N)
+\end{equation*}
+and so
+\begin{equation*}
+  \Var(N) = G''(1) + G'(1) - G'(1)^2.
+\end{equation*}
+
+\subsection{Frequency Distributions}%
+\label{sub:frequency_distributions}
+% subsection frequency_distributions
+
+\subsubsection{Poisson Distribution}%
+\label{ssub:poisson_distribution}
+% subsubsection poisson_distribution
+
+\begin{defn}[Poisson Distribution]\index{Poisson Distribution}\label{defn:poisson_distribution}
+  A counting rv $N$ is said to have a \hlnoteb{Poisson distribution} with parameter $\lambda$, and denote $N \sim \Poi(\lambda)$, if it has the pmf
+  \begin{equation*}
+    p_k = P(N = k) = \frac{e^{-\lambda} \lambda^k}{k!}, \quad k = 0, 1, 2, \ldots.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  We can easily verify that the Poisson distribution is indeed a probability distribution, by noticing that
+  \begin{equation*}
+    \sum_{k=0}^{\infty} p_k = \sum_{k=0}^{\infty} \frac{e^{-\lambda} \lambda^k}{k!} = e^{-\lambda} e^{\lambda} = 1
+  \end{equation*}
+  where we used the \hlnotea{Taylor expansion} $e^{x} = \sum_{k=0}^{\infty} \frac{x^k}{k!}$.
+\end{remark}
+
+\begin{propo}[PGF, Mean, and Variance of Poisson Distribution]\label{propo:pgf_mean_and_variance_of_poisson_distribution}
+  For $N \sim \Poi(\lambda)$, its pgf is
+  \begin{equation*}
+    G(t) = e^{\lambda (t - 1)},
+  \end{equation*}
+  and its mean and variance are
+  \begin{equation*}
+    E(N) = \Var(N) = \lambda.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Notice that
+  \begin{equation*}
+    G(t) = E\left[ t^N \right] = \sum_{k=0}^{\infty} t^k p_k = \sum_{k=0}^{\infty} \frac{e^{-\lambda} (t \lambda)^k}{k!} = e^{-\lambda} e^{t \lambda} = e^{\lambda( t - 1 )}.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    E[N] = G'(1) = \lambda \text{ and } G''(1) = \lambda^2,
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \Var(N) = \lambda^2 + \lambda - \lambda^2 = \lambda.
+  \end{equation*}\qed\
+\end{proof}
+
+\begin{propo}[Sum of Independent Poisson RVs]\label{propo:sum_of_independent_poisson_rvs}
+  If $N_1, N_2, \ldots, N_m$ are \hlnotea{independent} Poisson rvs with parameters $\lambda_1, \lambda_2,$ $\ldots, \lambda_m$ respectively, then
+  \begin{equation*}
+    N = \sum_{i=1}^{m} N_i \sim \Poi \left( \sum_{i=1}^{m} \lambda_i \right)
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Using the pgf method for $N$, we see that
+  \begin{align*}
+    G(t) &= e\left[ t^N \right] = E\left[ t^{\sum_{i=1}^{m} N_i} \right] = \prod_{i=1}^{m} E\left[t^{N_i}\right] \\
+         &= \prod_{i=1}^{m} e^{\lambda_i ( t - 1 )} = e^{( t - 1 ) \sum_{i=1}^{m} \lambda_i}
+  \end{align*}
+  which is the pgf of $\Poi\left( \sum_{i=1}^{m} \lambda_i \right)$ as required.\qed\
+\end{proof}
+
+% subsubsection poisson_distribution (end)
+
+% subsection frequency_distributions (end)
+
+% section frequency_distributions_basic_frequency_distributions (end)
+
+% chapter lecture_13_oct_25th (end)
 \appendix
 
 \chapter{Additional Material}%
