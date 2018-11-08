@@ -24,17 +24,23 @@
 \hypersetup{pageanchor=false}
 \maketitle
 \hypersetup{pageanchor=true}
+\begin{fullwidth}
 \tableofcontents
+\end{fullwidth}
 
 \chapter*{\faBook\ \enspace\ List of Definitions}
 \addcontentsline{toc}{chapter}{List of Definitions}
 \theoremlisttype{all}
+\begin{fullwidth}
 \listtheorems{defn}
+\end{fullwidth}
 
 \chapter*{\faCoffee\ \enspace\ List of Theorems}
 \addcontentsline{toc}{chapter}{List of Theorems}
 \theoremlisttype{allname}
+\begin{fullwidth}
 \listtheorems{axiom,lemma,thm,crly,propo}
+\end{fullwidth}
 
 \nocite{bforres2018}
 
@@ -1190,7 +1196,7 @@ Before delving into resolving our last question in the previous lecture, note th
   \begin{equation*}
     S = \{ (A, B, f) \mid A \subseteq X, B \subseteq Y, f : A \to B \text{ bijective } \}.
   \end{equation*}
-  Note that $S \neq \emptyset$, since $X$ and $Y$ are non-empty, and so we can have $f(a) = b$ for $A = \{a\} \subset X$ and $B = \abs{b} \subset Y$.\sidenote{We want to use the maximal element to obtain our result. To that end, we need \hyperref[axiom:zorn_s_lemma]{Zorn's Lemma}. So we need $S$ to build this up.} We order $S$ as follows: we say
+  Note that $S \neq \emptyset$, since $X$ and $Y$ are non-empty, and so we can have $f(a) = b$ for $A = \{a\} \subset X$ and $B = \{ b \} \subset Y$.\sidenote{We want to use the maximal element to obtain our result. To that end, we need \hyperref[axiom:zorn_s_lemma]{Zorn's Lemma}. So we need $S$ to build this up.} We order $S$ as follows: we say
   \begin{equation*}
     (A_1, B_1, f_1) \leq (A_2, B_2, f_2)
   \end{equation*}
@@ -1745,7 +1751,7 @@ where we say that $d_\infty$ is the \hlnotea{least sensitive}, and $d_1$ being t
 
 We asked the question: why is $\norm\cdot_p$ a norm?
 
-\begin{lemma}\label{lemma:lemma_for_holders}
+\begin{lemma}[Young's Inequality]\label{lemma:young_s_inequality}
   If $1 < p < \infty$,
   \begin{equation*}
     \frac{1}{p} + \frac{1}{q} = 1,
@@ -1757,7 +1763,7 @@ We asked the question: why is $\norm\cdot_p$ a norm?
 \end{lemma}
 
 \begin{proof}
-  Motivated by \cref{fig:lemma_for_holders_idea}, using notions from calculus, we have from calculus,
+  Motivated by \cref{fig:young_s_inequality_idea}, using notions from calculus, we have from calculus,
   \begin{marginfigure}
     \begin{tikzpicture}
     \draw[->] (-0.5,0) -- (3,0) node[right] {$t$};
@@ -1767,8 +1773,8 @@ We asked the question: why is $\norm\cdot_p$ a norm?
     \draw[dotted] (1.5, 2.25) -- (0, 2.25) node[left] {$\beta$};
     \draw[dotted] (1.5, 2.25) -- (1.5, 0) node[below] {$\alpha$};
     \end{tikzpicture}
-    \caption{Motivation for \cref{lemma:lemma_for_holders}.}
-    \label{fig:lemma_for_holders_idea}
+    \caption{Motivation for \cref{lemma:young_s_inequality}.}
+    \label{fig:young_s_inequality_idea}
   \end{marginfigure}
   \begin{align*}
     \alpha \beta &\leq \int_{0}^{\alpha} t^{p - 1} \dif{t} + \int_{0}^{\beta} u^{q - 1} \dif{u} \\
@@ -1814,7 +1820,7 @@ We asked the question: why is $\norm\cdot_p$ a norm?
   \begin{equation}\label{eq:holders_inequality_core}
     \left( \sum_{i=1}^{n} \abs{x_i}^p \right)^\frac{1}{p} = 1 = \left( \sum_{i=1}^{n} \abs{y_i}^q \right)^\frac{1}{q},
   \end{equation}
-  and if not, we can simply choose $\alpha, \beta \neq 0$ to scale these values to become one. By \cref{lemma:lemma_for_holders}, we have
+  and if not, we can simply choose $\alpha, \beta \neq 0$ to scale these values to become one. By \cref{lemma:young_s_inequality}, we have
   \begin{equation*}
     \abs{x_i y_i} \leq \frac{\abs{x_i}^p}{p} + \frac{\abs{y_i}^q}{q}.
   \end{equation*}
@@ -2067,7 +2073,7 @@ We can extend the same idea onto $\ell_p$ spaces.
   \begin{equation*}
     \int_{a}^{b} \abs{f(t)}^p \dif{t} = 1 = \int_{a}^{b} \abs{g(t)}^q \dif{t} 
   \end{equation*}
-  By \cref{lemma:lemma_for_holders}, we have
+  By \cref{lemma:young_s_inequality}, we have
   \begin{equation*}
     \abs{f(t) g(t)} \leq \frac{\abs{f(t)}^p}{p} + \frac{\abs{g(t)}^q}{q}.
   \end{equation*}
@@ -3024,7 +3030,7 @@ Note, however, that $c_{00} \subset \ell_1 \subset c_0$ is not closed. Also $\el
 \begin{thm}[\imponote\ Sequential Characterization of Continuity]\index{Sequential Characterization of Continuity}\label{thm:sequential_characterization_of_continuity}
   For metric spaces $(X, d_X)$ and $(Y, d_Y)$, and $f : X \to Y$, TFAE
   \begin{enumerate}
-    \item $f$ is continuous as $x_0 \in X$;
+    \item $f$ is continuous at $x_0 \in X$;
     \item $\{ x_n \} \subset X \; x_n \overset{X}{\to} x_0 \implies f(x_n) \overset{Y}{\to} f(x_0)$
   \end{enumerate}
 \end{thm}
@@ -3084,7 +3090,7 @@ Note, however, that $c_{00} \subset \ell_1 \subset c_0$ is not closed. Also $\el
   Then we have that $C_b(X) \subseteq \ell_\infty(X)$.
 \end{remark}
 
-\begin{thm}[Analogue of Sequantial Characterization of Continuity on a Space, and Continuity and Neighbourhoods]\label{thm:analogue_of_sequantial_characterization_of_continuity_on_a_space_and_continuity_and_neighbourhoods}
+\begin{thm}[Analogue of Sequential Characterization of Continuity on a Space, and Continuity and Neighbourhoods]\label{thm:analogue_of_sequential_characterization_of_continuity_on_a_space_and_continuity_and_neighbourhoods}
   Let $f: (X, d_X) \to (Y, d_Y)$. TFAE
   \begin{enumerate}
     \item $f$ is continuous;
@@ -3267,7 +3273,11 @@ We proved this in our observation.
 \label{sub:examples_of_complete_spaces}
 % subsection examples_of_complete_spaces
 
-\begin{thm}[Bolzano-WeierStrass]\index{Bolzano-WeierStrass}\label{thm:bolzano_weierstrass}
+\subsubsection{Completeness of $\mathbb{R}$}%
+\label{ssub:completeness_of_r_}
+% subsubsection completeness_of_r_
+
+\begin{thm}[Bolzano-Weierstrass]\index{Bolzano-Weierstrass}\label{thm:bolzano_weierstrass}
   Every bounded sequence $\{ x_n \} \subset \mathbb{R}$ has a convergent subsequence.\marginnote{\hlwarn{Be sure to review a proof of this and add it here.}}
 \end{thm}
 
@@ -3300,11 +3310,131 @@ We proved this in our observation.
   However, as shown before, since $\{ \frac{1}{n} \}$ is Cauchy but not convergent, $X = \left\{ 1, \frac{1}{2}, \ldots, \frac{1}{n}, \ldots \right\}$ is not complete.
 \end{eg}
 
+% subsubsection completeness_of_r_ (end)
+
 % subsection examples_of_complete_spaces (end)
 
 % section completeness_of_metric_spaces (end)
 
 % chapter lecture_19_oct_24th (end)
+
+\chapter{Lecture 20 Oct 26th}%
+\label{chp:lecture_20_oct_26th}
+% chapter lecture_20_oct_26th
+
+\section{Completeness of Metric Spaces (Continued)}%
+\label{sec:completeness_of_metric_spaces_continued}
+% section completeness_of_metric_spaces_continued
+
+\subsection{Examples of Complete Spaces}%
+\label{sub:examples_of_complete_spaces}
+% subsection examples_of_complete_spaces
+
+\subsubsection{Completeness of $\ell_p$}%
+\label{ssub:completeness_of_ell_p_}
+% subsubsection completeness_of_ell_p_
+
+\begin{thm}[\imponote\ Completeness of $\ell_p$]\label{thm:completeness_of_ell_p_}
+  $\ell_p$ is complete for every $1 \leq p \leq \infty$.
+\end{thm}
+
+\begin{proof}
+  \hlbnotea{$p = \infty$}: Let $\{ \vec{x}_k \} \subset \ell_\infty$ be Cauchy in $\norm\cdot_\infty$. We have
+  \begin{equation*}
+    \vec{x}_k = \{ x_{k, 1}, x_{k, 2}, \ldots, x_{k, j}, \ldots \}
+  \end{equation*}
+  $\implies \forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall m, n \geq N_0 \enspace \norm{\vec{x}_n - \vec{x}_m}_\infty < \frac{\epsilon}{2}$ \\
+  $\because \abs{ x_{n, j} - x_{m, j} } \leq \norm{\vec{x}_n - \vec{x}_m}_\infty < \frac{\epsilon}{2}$,\\
+  each of the $\vec{x}_k$, for $k \geq N_0$, is Cauchy in $\mathbb{R}$. \\
+  $\implies \exists x_{0, j} \in \mathbb{R} \; x_{k, j} \to x_{0, j} \enspace \because \mathbb{R}$ is complete \\
+  Let $\vec{x}_0 = \{ x_{0, 1}, x_{0, 2}, \ldots, x_{0, j}, \ldots \}$ and $x_{0, j} = \lim\limits_{k \to \infty} x_{k, j}$. \\ By our argument on Line 4, we have that
+  \begin{equation}\label{eq:completeness_of_lp_eq1}
+    \abs{x_{n, j} - x_{0, j}} = \lim_{m \to \infty} \abs{ x_{n, j} - x_{m, j} } \leq \frac{\epsilon}{2} < \epsilon
+  \end{equation}
+
+  $\implies \{ x_{n, j} - x_{0, j} \}_{j = 1}^{\infty} \in \ell_\infty$ \\
+  $\implies \{ x_{0, j} \}_{j = 1}^{\infty} \in \ell_\infty$ \\
+  Also, by \cref{eq:completeness_of_lp_eq1}, we have
+  \begin{equation*}
+    \norm{\vec{x}_n - \vec{x}_0}_\infty \leq \frac{\epsilon}{2} < \epsilon,
+  \end{equation*}
+
+  so $\vec{x}_k \to \vec{x}_0$. $\dashv$.
+
+  \noindent\hlbnotea{$1 \leq p < \infty$}: Let $\{ \vec{x}_k \} \subset \ell_p$ be Cauchy. By the same argument as above, $\abs{x_{n, j} - x_{m, j}} \leq \norm{\vec{x}_n - \vec{x}_m}_p \implies \left\{ x_{k, j} \right\}_{j = 1}^{\infty}$ is Cauchy for each $j$. Since $\mathbb{R}$ is complete, let $x_{0, j} = \lim_{k \to \infty} x_{k, j}$, and
+  \begin{equation*}
+    \vec{x}_0 = \{ x_{0, 1}, x_{0, 2}, \ldots, x_{0, j}, \ldots \}.
+  \end{equation*}
+  Now $\forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall n, m \geq N_0 \enspace \norm{\vec{x}_n - \vec{x}_m} < \frac{\epsilon}{2}$. Thus for $j \in \mathbb{N}$,
+  \begin{equation*}
+    \left( \sum_{i=1}^{j} \abs{ x_{n, i} - x_{m, i} }^p \right)^\frac{1}{p} \leq \norm{\vec{x}_n - \vec{x}_m}_p < \frac{\epsilon}{2}.
+  \end{equation*}
+  Then for $n \geq N_0$,
+  \begin{equation*}
+    \left( \sum_{i=1}^{j} \abs{ x_{k, i} - x_{0, i} }^p \right)^\frac{1}{p} = \lim_{m \to \infty} \left( \sum_{i=1}^{j} \abs{ x_{n, i} - x_{m, i} }^p \right)^\frac{1}{p} \leq \frac{\epsilon}{2}
+  \end{equation*}
+  for each $j$, and so
+  \begin{equation*}
+    \lim_{j \to \infty} \left( \sum_{i=1}^{j} \abs{ x_{n, i} - x_{0, i} }^p \right)^\frac{1}{p} \leq \frac{\epsilon}{2}
+  \end{equation*}
+  $\implies \vec{x}_0 \in \ell_p$ and $\norm{\vec{x}_n - \vec{x}_0}_p \leq \frac{\epsilon}{2} < \epsilon$.\qed\
+\end{proof}
+
+% subsubsection completeness_of_ell_p_ (end)
+
+\subsubsection{Completeness of $(C_b(X), \ell_\infty)$}%
+\label{ssub:completeness_of_c_b_x_ell_infty_}
+% subsubsection completeness_of_c_b_x_ell_infty_
+
+\begin{defn}[Convergence of Functions]\label{defn:convergence_of_functions}
+  A sequence of functions $f_n : (X, d_X) \to (Y, d_Y)$ is said to \hldefn{converge pointwise} to some function $f_0 : (X, d_X) \to (Y, d_Y)$ if for each $x_0 \in X$,
+  \begin{equation*}
+    \forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall n \geq N_0 \enspace d_Y( f_n(x_0) - f_0(x_0) ) < \epsilon.
+  \end{equation*}
+  The sequence $f_n$ is said to \hldefn{converge uniformly} if
+  \begin{equation*}
+    \forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall n \geq N_0 \; \forall x \in X \enspace d_Y(f_n(x) - f_)(x)) < \epsilon.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  It is clear that uniform convergence implies pointwise convergence.
+\end{remark}
+
+\begin{eg}[Pointwise Convergent but not Uniformly Convergent]
+  Let $X = [0, 1]$, $Y = \mathbb{R}$, $f_n(x) = x^n$ for each $n \in \mathbb{N}$. It is quite clear that
+  \begin{equation*}
+    f_n(x) \to f_0(x) = \begin{cases}
+      0 & x \in [0, 1) \\
+      1 & x = 1
+    \end{cases}.
+  \end{equation*}
+  $f_n$ is pointwise convergent but not uniformly convergent; just take $\epsilon = \frac{1}{2}$.
+\end{eg}
+
+\begin{thm}[\vvimponote\ Uniformly Convergent Pointwise Continuous Functions have a Pointwise Continuous Limit]\label{thm:uniformly_convergent_pointwise_continuous_functions_have_a_pointwise_continuous_limit}
+  Assume that $f_n : (X, d_X) \to (Y, d_Y)$ converges uniformly to $f_0 : (X, d_X) \to (Y, d_Y)$. If each $f_n$ is continuous at $x_0 \in X$, then $f_0$ is continuous at $x_0$.\marginnote{This is a classic $\frac{\epsilon}{3}$ argument.}
+\end{thm}
+
+\begin{proof}
+  $\forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall n \geq N_0 \; \forall x \in X \enspace d_Y(f_n(x) - f_0(x)) < \frac{\epsilon}{3}$ \\
+  \noindent$f_n$ is continuous at $x_0 \implies \exists \delta > 0 \; \forall x \in X \enspace x \in B(x_0, \delta)$ \\
+  $\implies \forall n_0 \geq N_0 \enspace d_Y(f_{n_0}(x) - f_{n_0}(x_0)) < \frac{\epsilon}{3}$
+  \begin{align*}
+    \implies &d_Y \left( f_0(x), f_0(x_0) \right) \\
+             &\leq d_Y \left( f_0(x), f_{n_0}(x) \right) + d_Y \left( f_{n_0}(x), f_{n_0}(x_0) \right) + d_Y \left( f_{n_0}(x_0), f_0(x_0) \right) \\
+             &< \epsilon
+  \end{align*}
+  $\implies f_0$ is continuous at $x_0$.\qed\
+\end{proof}
+
+% subsubsection completeness_of_c_b_x_ell_infty_ (end)
+
+% subsection examples_of_complete_spaces (end)
+
+% section completeness_of_metric_spaces_continued (end)
+
+% chapter lecture_20_oct_26th (end)
 
 \appendix
 
