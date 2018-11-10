@@ -3067,7 +3067,7 @@ In simpler words, any formula that is true in $\mathcal{N}$ is true in its eleme
 \end{eg}
 
 \begin{solution}
-  We need make this inference from automorphisms on $\mathcal{Q}$. Let $\sigma : \mathbb{Q} \to \mathbb{Q}$ be an automorphism. Then we have that
+  \sidenote{Question: why did we look at the automorphisms?}We need make this inference from automorphisms on $\mathcal{Q}$. Let $\sigma : \mathbb{Q} \to \mathbb{Q}$ be an automorphism. Then we have that
   \begin{gather*}
     x < y \iff \sigma(x) < \sigma(y) \\
     \sigma(0) = 0 \\
@@ -3150,11 +3150,197 @@ In simpler words, any formula that is true in $\mathcal{N}$ is true in its eleme
   Given an $A_n$, we shall show a way to construct $A_{n + 1}$. \hlwarn{Requires clarification} 
 \end{proof}
 
+\begin{eg}
+  Consider the language $\mathcal{L}$ of rings and the $\mathcal{L}$-structure $\mathcal{C} = (\mathbb{C}, 0, 1, +, -, \times)$. We know that $\mathcal{Q} = (\mathbb{Q}, 0, 1, +, -, \times)$ is an $\mathcal{L}$-substructure of $\mathcal{C}$. It can be shown that the structure that is the \hlnotea{algebraic closure} of $\mathbb{Q}$ is an elementary $\mathcal{L}$-substructure of $\mathcal{C}$.\sidenote{\hlwarn{Why? How can we show this?}}
+\end{eg}
+
 % subsection elementary_embeddings (end)
 
 % section first_order_logic_continued_3 (end)
 
 % chapter lecture_14_oct_25th (end)
+
+\chapter{Lecture 15 Oct 30th}%
+\label{chp:lecture_15_oct_30th}
+% chapter lecture_15_oct_30th
+
+\section{First-order Logic (Continued 5)}%
+\label{sec:first_order_logic_continued_5}
+% section first_order_logic_continued_5
+
+\subsection{Elementary Embeddings (Continued)}%
+\label{sub:elementary_embeddings_continued}
+% subsection elementary_embeddings_continued
+
+\begin{eg}
+  $\mathcal{Q} = (\mathbb{Q}, 0, +, -)$ has no proper elementary subgroups.
+\end{eg}
+
+\begin{proof}
+  Let $G \preceq \mathcal{Q}$. For a fixed $n > 0$, we know that
+  \begin{gather*}
+    \mathcal{Q} \models \forall x \; \forall y \; ( \underbrace{y + y + \hdots + y}_{n \text{ times }} = x ) \\
+    \mathcal{Q} \models \exists x \; ( x \neq 0 )
+  \end{gather*}
+  So $G$ must be some non-trivial divisible subgroup of $\mathcal{Q}$. Let $\frac{n}{m} \in G$, with $n \neq 0$. WMA\sidenote{Short for \hlnotea{We May Assume}. We may indeed assume that both $n$ and $m$ are strictly positive, or we can just factor out $-1$.} $n, m > 0$. Then $n \in G$ by $n$ divisibility in $G$. Thus $1 \in G$ Thus $\mathbb{Z} \leq G \leq \mathbb{Q}$, and so\sidenote{\hlwarn{How does this follow?}} $G = \mathbb{Q}$ by divisibility.
+\end{proof}
+
+\begin{remark}
+  By \cref{thm:downward_lowenhein_skolem}, $(\mathbb{R}, 0, +, -)$ has many proper elementary subgroups, e.g. $\mathbb{Q}$.\sidenote{\hlwarn{How so? Is it simply by taking $q + r$ for $q \in \mathbb{Q}$ and $r \in \mathbb{R} \setminus \mathbb{Q}$.}}
+\end{remark}
+
+% subsection elementary_embeddings_continued (end)
+
+\subsection{Parameters and Definable Sets}%
+\label{sub:parameters_and_definable_sets}
+% subsection parameters_and_definable_sets
+
+\begin{eg}
+  In $(\mathbb{R}, <)$, the subset $(0, 1)$ is not $\mathcal{L}$-definable: we could have said that $(0 < x) \land (x < 1)$, but $0, 1 \notin \mathcal{L}$.
+\end{eg}
+
+We would now like to rid ourselves of such a restriction.
+
+\begin{defn}[Parameters]\index{Parameters}\label{defn:parameters}
+  Suppose $\mathcal{L}$ is a language, $\mathcal{M}$ an $\mathcal{L}$-structure, and $B \subseteq M$. Let
+  \begin{equation*}
+    \mathcal{L}_B := \mathcal{L} \cup \{ \bar{b} : b \in B \}
+  \end{equation*}
+  be the language $\mathcal{L}$ extended with new constant symbols $\bar{b} \in B$. These additional symbols are called \hlnotea{parameters}.
+\end{defn}
+
+We can consequently talk about $\mathcal{L}_B$-structures,
+\begin{equation*}
+  \mathcal{M}_B = (\mathcal{M}, \bar{b}^\mathcal{M} = b)_{b \in B}.
+\end{equation*}
+
+\begin{remark}
+  Since each of the $\bar{b}^\mathcal{M} = b \in M$, we will often just write $\mathcal{M}$ instead of putting a subscript of $B$ for the $\mathcal{L}_B$-structure.\sidenote{Is this saying that from hereon, we will somewhat be more loose on the constants of the language, in that we can use any of the constants from the underlying universe?}
+\end{remark}
+
+\begin{eg}
+  With parameters, in $(\mathbb{R}, <)_{\{ 0, 1 \}}$, we can use the $\mathcal{L}_\{0, 1\}$-formula
+  \begin{equation*}
+    (\bar{0} < x) \land (x < \bar{1}),
+  \end{equation*}
+  or more easily written as
+  \begin{equation*}
+    (0 < x) \land (x < 1),
+  \end{equation*}
+  to define the interval $(0, 1)$.
+\end{eg}
+
+\begin{remark}
+  \begin{enumerate}
+    \item If $\phi(x_1, \ldots, x_n)$ is an $\mathcal{L}_B$-formula, then there exists an $\mathcal{L}$-formula
+      \begin{equation*}
+        \psi(x_1, \ldots, x_n, y_1, \ldots, y_m)
+      \end{equation*}
+      for some $m < \omega$, and $b_1, \ldots, b_m \in B$ such that
+      \begin{equation*}
+        \phi(x_1, \ldots, x_n) = \psi(x_1, \ldots, x_n, \bar{b}_1, \ldots \bar{b}_m).
+      \end{equation*}
+      Moreover, given $a_1, \ldots, a_n \in M$,
+      \begin{equation*}
+        \mathcal{M} \models \phi(a_1, \ldots, a_n) \iff \mathcal{M} \models \psi(a_1, \ldots, a_n, b_1, \ldots, b_m).
+      \end{equation*}
+      As mentioned in an earlier comment, we will often write
+      \begin{equation*}
+        \psi(\vec{x}, \vec{\bar{b}}) \text{ as } \psi(\vec{x}, \vec{b}).
+      \end{equation*}
+
+    \item Suppose $\mathcal{N} \subseteq \mathcal{M}$. Then $\mathcal{N} \preceq \mathcal{M}$ iff for every $\mathcal{L}_N$-sentence $\sigma = \phi(\bar{b}_1, \ldots, \bar{b}_m)$, for some $b_1, \ldots, b_m \in N$,
+      \begin{equation*}
+        \mathcal{N} \models \sigma \iff \mathcal{M} \models \sigma.
+      \end{equation*}
+      In particular, notice that
+      \begin{gather*}
+        \mathcal{N} \models \sigma \iff \mathcal{N}_N \models \sigma \iff \mathcal{N}_N \models \phi(b_1, \ldots, b_m) \\
+          \mathcal{M} \models \sigma \iff \mathcal{M} \models \phi(b_1, \ldots, b_m).
+      \end{gather*}
+  \end{enumerate}
+\end{remark}
+
+\begin{defn}[$B$-Definable]\index{$B$-Definable}\label{defn:_b_definable}
+  Let $\mathcal{M}$ be an $\mathcal{L}$-structure for some language $\mathcal{L}$, and $B \subseteq M$ a subset. A let $X \subseteq M^n$, for some $n < \omega$, is \hlnoteb{$D$-definable} (or \hlnoteb{definable over $B$}) if there is an $\mathcal{L}_B$-formula $\phi(x_1, \ldots, x_n)$ such that
+  \begin{equation*}
+    X = \{ (a_1, \ldots, a_n) \in M^n : \mathcal{M}_B \models \phi(a_1, \ldots, a_n) \}.
+  \end{equation*}
+  We say that $X$ is \hldefn{$0$-definable} if it is \hldefn{$\emptyset$-definable}. We say that $X$ is definable if it is \hldefn{$M$-definable}, i.e. definable with parameters from anywhere in the universe. We say that $X$ is \hldefn{quantifier-free definable} (respectively \hldefn{existentially definable} or \hldefn{universally definable}) if there is a quantifier-free (respectively existential or universal) formula $\phi$ such that $X = \phi^\mathcal{M}$.
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item If $X$ is definable, then it is $B$-definable for some $B \subseteq M$.
+    \item A function $f : X \to Y$ is $B$-definable if $X \subseteq M^n, \, Y \subseteq M^m$ are $B$-definable, and
+      \begin{equation*}
+        \Gamma(f) \subseteq X \times Y \subseteq M^{n + m}
+      \end{equation*}
+      is $B$-definable.
+  \end{itemize}
+\end{note}
+
+\begin{eg}
+  Let $\mathcal{L} = \{ 0, 1, +, -, \times \}$, and $\mathcal{R} = ( \mathbb{R}, 0, 1, +, -, \times ))$. We shall assume (in this course, ``perversely'' so) that a ring is commutative and unitary. What are the definable sets in $\mathcal{R}$?
+\end{eg}
+
+\begin{eg}[Zero Sets of Polynomials]
+  Suppose $\mathcal{M} = (F, 0, 1, +, -, \times)$ where $R$ is a field. Suppose $P_1, \ldots, P_l \in R[X_1, \ldots, X_n]$. The zero set of $\{ P_1, \ldots, P_l \}$
+  \begin{equation*}
+    V ( P_1, \ldots, P_l ) = \{ a \in R^n : P_i(a) = 0, i = 1, \ldots, l \}
+  \end{equation*}
+  is called a \hldefn{variety}. Such sets are called \hlnotea{algebraic sets} of $R^n$. They form the closed sets of a topology on $R^n$, called a \hldefn{Zariski} topology, and the closed sets are called \hlnotea{Zariski's closed subsets}. We can define such a set using the $\mathcal{L}_R$-formula
+  \begin{equation*}
+    \bigwedge_{i=1}^{l} \left( P_i (x_1, \ldots, x_n) = 0 \right).
+  \end{equation*}
+  It is clear that Zariski's closed subsets of $R^n$ are quantifier-free definable in $\mathcal{R}$, with parameters from $R$.
+
+  More generally, any finnite \hlnotea{boolean combination}\sidenote{Boolean combinations include taking unions, intersections, and complements.} of Zariski's closed subsets are quantifier-free definable. Sets that can be expressible as such are said to be \hldefn{Zariski-constructible}.
+\end{eg}
+
+In fact, Zariski's closed subsets are exactly all of the quantifier-free definable sets.
+
+\begin{ex}
+  Let $B \subseteq R$ and $S$ a subring generated by $B$. The $\mathcal{L}_B$-terms of $\mathcal{R}$ are precisely the polynomial functions over $S$, i.e. for any $\mathcal{L}_B$-term, $t(x_1, \ldots, x_n)$, there is $P_t \in S[ X_1, \ldots, X_n ]$ such that $t^\mathcal{R} = P_t$, as functions on $R^n$.
+
+  In fact, for any ring $A \supseteq S$, $t^\mathcal{A} = P_t$, where $\mathcal{A} = (A, 0, 1, +, -, \times)$.
+\end{ex}
+
+Suppoer $\phi$ is an atomic $\mathcal{L}_R$-formula. Then $\phi$ can be
+\begin{equation*}
+  t (x_1, \ldots, x_n) = s (x_1, \ldots, x_n),
+\end{equation*}
+where $t, s$ are $\mathcal{L}_R$-terms. Then by the exercise above, we have that
+\begin{equation*}
+  \phi^\mathcal{R} = \bigvee ( P_t - P_s ),
+\end{equation*}
+i.e. it is Zariski closed (or Z-closed). We see that quantifier-free formulas are Zariski-constructible (Z-constructible).
+
+The following is a ``fact'' of which we shall see again later on.
+
+\begin{thmnonum}
+  If $R = F$ is an algebraically closed field, then every definable set in $(F, 0, 1, +, -, \times)$ is Z-constructible.
+\end{thmnonum}
+
+This is a \hlnotea{quantifier-elimination theorem}, of which we shall study slightly later on in the course.
+
+\begin{remark}
+  With regards to the unnumbered theorem above, the only definable subsetes of $F$ are the finite and cofinite\sidenote{
+  \begin{margindefn}[Cofinite]\index{Cofinite}\label{defn:cofinite}
+    A cofinite set is a set whose complement is a finite set.
+  \end{margindefn}
+  } sets.
+\end{remark}
+
+\begin{eg}
+  In $(\mathbb{R}, 0, 1, +, -, \times)$, $(0, 1)$ is definable by $(0 < x) \land (x < 1)$ and $<$ is definable in the structure. However, we have that $<$ is not a quantifier-free definable set. This is because $\mathbb{R}$ as a field is not algebraically closed.
+\end{eg}
+
+% % subsection parameters_and_definable_sets (end)
+
+% % section first_order_logic_continued_5 (end)
+
+% % chapter lecture_15_oct_30th (end)
 
 \appendix
 
