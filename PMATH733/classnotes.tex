@@ -3555,6 +3555,188 @@ This gives us some sort of comfort knowing that we have some method of checking 
 
 % chapter lecture_16_nov_01st (end)
 
+\chapter{Lecture 17 Nov 06th}%
+\label{chp:lecture_17_nov_06th}
+% chapter lecture_17_nov_06th
+
+\section{First-order Logic (Continued 7)}%
+\label{sec:first_order_logic_continued_7}
+% section first_order_logic_continued_7
+
+\subsection{Theories (Continued)}%
+\label{sub:theories_continued}
+% subsection theories_continued
+
+\begin{defn}[Partial $\mathcal{L}$-elementary Map]\index{Partial $\mathcal{L}$-elementary Map}\label{defn:partial_l_elementary_map}
+  Let $\mathcal{M}$ and $\mathcal{N}$ be $\mathcal{L}$-structures, $A \subseteq M$, and $f : A \to N$ a function. $f$ is a \hlnoteb{partial $\mathcal{L}$-elementary map} (pem) if for all $\mathcal{L}$-formulae $\phi(x_1, \ldots, x_n)$, and for all $a_1, \ldots, a_n \in A$,
+  \begin{equation*}
+    \mathcal{M} \models \phi(a_1, \ldots, a_n) \iff \mathcal{N} \models \phi(f(a_1), \ldots, f(a_n).
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  \begin{itemize}
+    \item $f : \emptyset \to N$ is a pem iff $\mathcal{M} \equiv \mathcal{N}$.
+    \item $f : M \to N$ is a pem iff $\mathcal{M} \preceq \mathcal{N}$ (i.e. $f$ is an elementary embedding).
+  \end{itemize}
+\end{remark}
+
+\begin{propo}[Elementary Equivalence in Finite Stuctures]\label{propo:elementary_equivalence_in_finite_stuctures}
+  Suppose at least one of $\mathcal{M}$ and $\mathcal{N}$ finite. Then
+  \begin{equation*}
+    \mathcal{M} \equiv \mathcal{N} \iff \mathcal{M} \simeq \mathcal{N}.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Without loss of generality, suppose $M$ is finite. Suppose $\mathcal{M} \equiv \mathcal{N}$ and $f : \emptyset \to N$ is a pem. We shall extend $f$, one-by-one, until $\Dom(f) = M$, so that $f$ remains a pem and is an isomorphism (Note: We must have $\abs{M} = \abs{N} = n$ for some $n < \omega$, since one of them is finite).
+
+  By induction, suppose that we have a pem
+  \begin{equation*}
+    f : \{ a_1, \ldots, a_k \} \to N
+  \end{equation*}
+  for $0 \leq k < n$, and $\{ a_1, \ldots, a_k \} \subseteq M$. Let $X_{k + 1, 1}, \ldots, X_{k + 1, m_{k + 1}} \subseteq M$ be the $\{ a_1, \ldots, a_k \}$-definable sets that contains $a_{k + 1}$. Note that there are finitely many such subsets since $\mathcal{P}(M)$ is finite. Let
+  \begin{equation*}
+    \phi_{k + 1, \, j} (a_1, \ldots, a_k, x) \quad 1 \leq j \leq m_{k + 1}
+  \end{equation*}
+  be some (fixed) $\mathcal{L}$-formula that defines $X_{k + 1, \, j}$, respectively so. With that, we have that
+  \begin{equation*}
+    \mathcal{M} \models \bigwedge_{i = 1}^{m_{k + 1}} \phi_{k + 1, \, j}(a_1, \ldots, a_k, a_{k + 1}),
+  \end{equation*}
+  which implies that
+  \begin{equation*}
+    \mathcal{M} \models \exists x \; \left( \bigwedge_{i = 1}^{m_{k + 1}} \phi_{k + 1, \, j} (a_1, \ldots, a_k, x) \right).
+  \end{equation*}
+  Thus by the induction hypothesis and $f$ being a pem,
+  \begin{equation*}
+    \mathcal{N} \models \exists x \; \left( \bigwedge_{i = 1}^{m_{k + 1}} \phi_{k + 1, \, j} \left(f(a_1), \ldots, f(a_k), x\right) \right).
+  \end{equation*}
+  Let $b \in N$ satisfy this formula\sidenote{During lecture, it was mentioned that $b$ should not satisfy other properties. \hlwarn{What are these other properties, and why should $b$ not satisfy these other properties?}} and define $f' : \{ a_1, \ldots, a_k, a_{k + 1} \} \to N$ such that 
+  \begin{gather*}
+    a_1 \mapsto f(a_i) \quad \text{ for } 1 \leq i \leq k \\
+    a_{k + 1} \mapsto b.
+  \end{gather*}
+  It is clear that $f'$ is a pem and an isomorphism. Thus by induction, we have that $\mathcal{M} \simeq \mathcal{N}$.\qed\
+\end{proof}
+
+\begin{remark}
+  This gives us an excuse to ``ignore'' finite structures when it comes to elementary equivalence, since it is no different from studying about isomorphisms.
+\end{remark}
+
+% subsection theories_continued (end)
+
+% section first_order_logic_continued_7 (end)
+
+\section{Compactness}%
+\label{sec:compactness}
+% section compactness
+
+\begin{thm}[Compactness Theorem]\index{Compactness Theorem}\label{thm:compactness_theorem}
+  Let $\mathcal{L}$ be a lagnauge, and $T$ an $\mathcal{L}$-theory. $T$ is consistent iff every finite subset of $T$ is consistent. 
+\end{thm}
+
+The following is an equivalent formulation.
+
+\begin{crly}[Corollary of Compactness Theorem]\label{crly:corollary_of_compactness_theorem}
+  Supppose $T$ is an $\mathcal{L}$-theory for some langauge $\mathcal{L}$, and $\sigma$ some $\mathcal{L}$-sentence. We have $T \models \sigma$ iff there exists a finite subset $\Sigma \subseteq T$ such that $\Sigma \models \sigma$.
+\end{crly}
+
+\begin{proof}
+  It is clear that $T \models \sigma$ iff $T \cup \{ \neg \sigma \}$ is inconsistent.\qed\
+\end{proof}
+
+In this course, we shall study a different proof for the Compactness Theorem, one that uses \hlnotea{ultraproducts}.
+
+\subsection{A proof of compactness using ultraproducts}%
+\label{sub:a_proof_of_compactness_using_ultraproducts}
+% subsection a_proof_of_compactness_using_ultraproducts
+
+\paragraph{Motivation} Observe that $T = \bigcup_{n < \omega} \Sigma_n$, where $\Sigma_n \subseteq T$ is finite, and
+\begin{equation*}
+  \Sigma_0 \subseteq \Sigma_1 \subseteq \Sigma_2 \subseteq \hdots.
+\end{equation*}
+Since each $\Sigma_n$ is consistent, there exists a model $\mathcal{M}_n \models \Sigma_n$. Ideally, the ``limit'' of these $\mathcal{M}_n$'s should be a model of $T$.
+
+\begin{defn}[Filter]\index{Filter}\label{defn:filter}
+  Let $I \in \Set$ and $\mathcal{F} \subseteq \mathcal{P}(I)$. We say that $\mathcal{F}$ is a filter on $I$ if
+  \begin{enumerate}
+    \item $I \in \mathcal{F}$ and $\emptyset \notin \mathcal{F}$;
+    \item $A, B \in \mathcal{F} \implies A \cap B \in \mathcal{F}$;
+    \item $A \in \mathcal{F} \land A \subseteq B \implies B \in \mathcal{F}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{remark}
+  It is reasonable to think of filters as a notion of ``largeness'' for subsets of $I$; indeed, since any superset of a smaller set in the filter is also in the filter itself.
+\end{remark}
+
+\begin{eg}
+  \begin{enumerate}
+    \item $\{ \mathbb{R} \setminus X \mid X \text{ has Lebesgue measure } 0 \}$ is a filter on $\mathbb{R}$.
+    \item Let $I \in Set$, and $\kappa \leq \abs{I} \in \Card$. Then
+      \begin{equation*}
+        \mathcal{F} = \{ A \subset I : \abs{ I \setminus A } < \kappa \}
+      \end{equation*}
+      is a filter. In particular, if $I = \omega$, and $\kappa = \aleph_0$. Then the above filter, which is the set of \hlnotea{cofinite sets}, is called a \hldefn{Frechet filter}.
+    \item Let $I \in \Set \setminus \{\emptyset\}$, and $a \in I$. The set
+      \begin{equation*}
+        \mathcal{F}_a = \{ A \subseteq I \mid a \in A \}
+      \end{equation*}
+      is called a \hldefn{principal filter} on $I$.
+  \end{enumerate}
+\end{eg}
+
+\begin{defn}[Ultrafilter]\index{Ultrafilter}\label{defn:ultrafilter}
+  An \hlnoteb{ultrafilter} on $I$ is a filter that is maximal.
+\end{defn}
+
+\begin{eg}
+  It is not difficult to notice that principal filters are maximal: Suppose $\mathcal{F}_a$ is a principle filter on $I$ based on $a \in I$, and suppose to the contrary that $\mathcal{F}_a \subsetneq \mathcal{G}$ for some filter $\mathcal{G}$ on $I$. Then let $A \in \mathcal{G} \setminus \mathcal{F}_a$. In particular, $a \notin A$. However, $\{ a \} \in \mathcal{F}_a \subseteq G$. Then $\{ a \} \cap A = \emptyset \in \mathcal{G}$ since $\mathcal{G}$ is a filter, but a filter should not contain $\emptyset$.
+\end{eg}
+
+In general, it is rather diffcult to describe a non-principal ultrafilter. However, there is a tool that tells us the existence of ultrafilters at our disposal: \hyperref[item:zorn_s_lemma]{Zorn's Lemma}!
+
+\begin{lemma}[Existence of Ultrafilters]\label{lemma:existence_of_ultrafilters}
+  Every filter on $I$ extends to an ultrafilter on $I$.
+\end{lemma}
+
+\begin{proof}
+  Let $\mathcal{F}$ be a filter on $I$. Consider
+  \begin{equation*}
+    \mathcal{Z} = \{ \mathcal{H} \subseteq \mathcal{P}(I) \mid \mathcal{H} \text{ a filter }, \, \mathcal{F} \subseteq \mathcal{H} \}.
+  \end{equation*}
+  It is rather clear that $(\mathcal{Z}, \subseteq)$ is a poset, closed under unions of chains, and the union of filters is a filter. Thus the chains have an upper bound, and by Zorn's Lemma, there is a maximal filter, which is an ultraproduct.\qed\
+\end{proof}
+
+\begin{lemma}[Equivalent Characterization of an Ultrafilter]\label{lemma:equivalent_characterization_of_an_ultrafilter}
+  Let $\mathcal{F}$ be a filter on $I$. $\mathcal{F}$ is an ultrafilter iff
+  \begin{equation*}
+    \forall A \subseteq I \; (A \subseteq \mathcal{F}) \lor (I \setminus A \in \mathcal{F}).
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \hlbnoted{$(\impliedby)$} Suppose to the contrary that $\mathcal{F} \subsetneq \mathcal{G}$ is a filter. Then let $A \in \mathcal{F} \setminus \mathcal{F}$. Then by assumption, we have $I \setminus A \in \mathcal{F} \in \mathcal{G}$, but that implies
+  \begin{equation*}
+    \emptyset = A \cap (I \setminus A) \in \mathcal{G},
+  \end{equation*}
+  and so $\mathcal{G}$ cannot be a filter. Thus $\mathcal{F}$ is an ultrafilter.
+
+  \noindent\hlbnoted{$(\implies)$} Suppose $\mathcal{F}$ is an ultrafilter. Let $A \subseteq I$, and suppose $A \notin \mathcal{F}$. WTS $I \setminus A \in \mathcal{F}$. Let
+  \begin{equation*}
+    \mathcal{G} := \{ X \subseteq I \mid Y \setminus A \subseteq X, \text{ for some } Y \in \mathcal{F} \}.
+  \end{equation*}
+  We shall verify that $\mathcal{G}$ is a filter: since $I \supseteq Y \setminus A$ for any $Y \in \mathcal{F}$, $I \in \mathcal{G}$. Since $\emptyset$ is not a superset of any set, $\emptyset \notin \mathcal{G}$. Suppose $B, C \in \mathcal{G}$. Then $B \supseteq Y_1 \setminus A$ and $C \supseteq Y_2 \setminus A$, for some $Y_1, Y_2 \in \mathcal{F}$. It is clear that $B \cap C = (Y_1 \cap Y_2) \setminus A$. Thus $B \cap C \in \mathcal{G}$. Suppose $B \in \mathcal{G}$ and $B \subseteq C$. Then there exists $Y_1 \in \mathcal{F}$ such that $C \supseteq B \supseteq Y_1 \setminus A$. Thus $C \in \mathcal{G}$. This proves our claim that $\mathcal{G}$ is a filter.
+
+  Quite clearly so, since $A \notin \mathcal{F}$, $\mathcal{F} \subseteq \mathcal{G}$. Since $\mathcal{F}$ is an ultrafilter, we have that $\mathcal{F} = \mathcal{G}$. Therefore $I \setminus A \in \mathcal{G} = \mathcal{F}$, as required.\qed\
+\end{proof}
+
+% subsection a_proof_of_compactness_using_ultraproducts (end)
+
+% section compactness (end)
+
+% chapter lecture_17_nov_06th (end)
+
 \appendix
 
 \backmatter\
