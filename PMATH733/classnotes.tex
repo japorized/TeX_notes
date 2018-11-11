@@ -27,6 +27,11 @@
 \DeclareMathOperator{\con}{con}
 \DeclareMathOperator{\fun}{fun}
 \DeclareMathOperator{\rel}{rel}
+\DeclareMathOperator{\Aut}{Aut }
+\DeclareMathOperator{\Mod}{Mod }
+\DeclareMathOperator{\inv}{inv}
+\DeclareMathOperator{\Th}{Th }
+\DeclareMathOperator{\alg}{alg}
 
 \begin{document}
 \hypersetup{pageanchor=false}
@@ -3134,7 +3139,7 @@ In simpler words, any formula that is true in $\mathcal{N}$ is true in its eleme
   The Tarski-Vaught Test gives us an alternate mechanism to check if a substructure is elementary.
 \end{remark}
 
-\begin{thm}[Downward L\"{o}wenhein-Skolem]\index{Downward L\"{o}wenhein-Skolem}\label{thm:downward_lowenhein_skolem}
+\begin{thm}[Downward L\"{o}wenheim-Skolem]\index{Downward L\"{o}wenheim-Skolem}\label{thm:downward_lowenheim_skolem}
   Suppose $\mathcal{M}$ is an $\mathcal{L}$-structure, and $A \subseteq M$. Then there exists an elementary substructure of $\mathcal{M}$ that contains $A$ and is of cardinality at most $\max\{ \abs{A}, \abs{\mathcal{L}}, \aleph_0 \}$.
 
   In particular, if $\mathcal{L}$ is countable, then every $\mathcal{L}$-structure has a countable elementary substructure.
@@ -3186,7 +3191,7 @@ In simpler words, any formula that is true in $\mathcal{N}$ is true in its eleme
 \end{proof}
 
 \begin{remark}
-  By \cref{thm:downward_lowenhein_skolem}, $(\mathbb{R}, 0, +, -)$ has many proper elementary subgroups, e.g. $\mathbb{Q}$.\sidenote{\hlwarn{How so? Is it simply by taking $q + r$ for $q \in \mathbb{Q}$ and $r \in \mathbb{R} \setminus \mathbb{Q}$.}}
+  By \cref{thm:downward_lowenheim_skolem}, $(\mathbb{R}, 0, +, -)$ has many proper elementary subgroups, e.g. $\mathbb{Q}$.\sidenote{\hlwarn{How so? Is it simply by taking $q + r$ for $q \in \mathbb{Q}$ and $r \in \mathbb{R} \setminus \mathbb{Q}$.}}
 \end{remark}
 
 % subsection elementary_embeddings_continued (end)
@@ -3336,11 +3341,219 @@ This is a \hlnotea{quantifier-elimination theorem}, of which we shall study slig
   In $(\mathbb{R}, 0, 1, +, -, \times)$, $(0, 1)$ is definable by $(0 < x) \land (x < 1)$ and $<$ is definable in the structure. However, we have that $<$ is not a quantifier-free definable set. This is because $\mathbb{R}$ as a field is not algebraically closed.
 \end{eg}
 
+Fortunately, just so that we can have some sort of closure\sidenote{Not in a mathematical sense, well perhaps.}, we shall present the following theorem without proof.
+
+\begin{thmnonum}[Macintyre]\label{thmnonum:macintyre}
+  If $F$ is a field and the definable sets in $(F, 0, 1, +, -, \times)$ are all Z-constructible, then $F$ is algebraically closed.
+\end{thmnonum}
+
+This gives us some sort of comfort knowing that we have some method of checking if a field is algebraically closed.
+
 % % subsection parameters_and_definable_sets (end)
 
 % % section first_order_logic_continued_5 (end)
 
 % % chapter lecture_15_oct_30th (end)
+
+\chapter{Lecture 16 Nov 01st}%
+\label{chp:lecture_16_nov_01st}
+% chapter lecture_16_nov_01st
+
+\section{First-order Logic (Continued 6)}%
+\label{sec:first_order_logic_continued_6}
+% section first_order_logic_continued_6
+
+\subsection{Parameters and Definable Sets (Continued)}%
+\label{sub:parameters_and_definable_sets_continued}
+% subsection parameters_and_definable_sets_continued
+
+\begin{crly}[Automorphisms on $B$-definable Sets]\label{crly:automorphisms_on_b_definable_sets}
+  Suppose $X \subseteq M^n$ be a $B$-definable set in $\mathcal{M}$, where $B \subseteq M$. Let
+  \begin{equation*}
+    j \in \Aut_B(\mathcal{M}) := \{ \sigma \in \Aut(\mathcal{M}) \mid \sigma \restriction_B = id_B \},
+  \end{equation*}
+  such that $j$ acts on $M^n$ coordinate-wise. Then $j(X) = X$.
+\end{crly}
+
+\begin{proof}
+  Say $X$ is defined by $\phi(\vec{x}, \vec{\bar{b}})$ where $\phi(\vec{x}, \vec{y})$ is a $\mathcal{L}$-formula, $\vec{x} = (x_1, \ldots, x_n)$, $\vec{y} = (y_1, \ldots y_m)$, and $\vec{b} = (b_1, \ldots b_m) \in B^m$. In particular, $X = \{ \vec{a} \in M^n \mid \mathcal{M} \models \phi(\vec{a}, \vec{b})$. Since $j$ is elementary, we have
+    \begin{align*}
+      \vec{a} \in X &\iff \mathcal{M} \models \phi(\vec{a}, \vec{b}) \\
+                    &\iff \mathcal{M} \models \phi(j(\vec{a}), j(\vec{b})) \\
+                    &\iff \mathcal{M} \models \phi(j(\vec{a}), \vec{b}) \quad \because j \text{ fixes } B \text{ pointwise } \\
+                    &\iff j(\vec{a}) \in X
+    \end{align*}
+    Therefore, $j(X) = X$ as required.\qed\
+\end{proof}
+
+% subsection parameters_and_definable_sets_continued (end)
+
+\subsection{Theories}%
+\label{sub:theories}
+% subsection theories
+
+\begin{defn}[$\mathcal{L}$-Theory]\index{$\mathcal{L}$-Theory}\label{defn:_l_theory}
+  An \hlnoteb{$\mathcal{L}$-Theory} is simply a set of $\mathcal{L}$-sentences.
+\end{defn}
+
+\begin{defn}[Model]\index{Model}\label{defn:model}
+  A \hlnoteb{model} of an $\mathcal{L}$-theory $T$ is an $\mathcal{L}$-structure $\mathcal{M}$ such that $\mathcal{M} \models \sigma$ for all $\sigma \in T$. We denote this by $\mathcal{M} \models T$. A theory is said to be \hldefn{consistent} if it has a model.
+\end{defn}
+
+\begin{defn}[$\mathcal{L}$-elementary / $\mathcal{L}$-axiomatizable]\index{$\mathcal{L}$-elementary}\index{$\mathcal{L}$-axiomatizable}\label{defn:l_axiomatizable}
+  A class $K$ of $\mathcal{L}$-structures is said to be \hlnoteb{$\mathcal{L}$-elementary} (or \hlnoteb{$\mathcal{L}$-axiomatizble}) if there is an $\mathcal{L}$-theory $T$ such that
+  \begin{equation*}
+    \mathcal{M} \in K \iff \mathcal{M} \models T.
+  \end{equation*}
+  Given $T$, the models of $T$ is
+  \begin{equation*}
+    \Mod(T) := \class{ \mathcal{M} \mid \mathcal{M} \models T },
+  \end{equation*}
+  so $K$ is $\mathcal{L}$-elementary if $K = \Mod(T)$.
+\end{defn}
+
+\begin{eg}
+  Let $\mathcal{L} = \{ e, \cdot, \inv \}$. The following classes is elementary:\sidenote{\hlwarn{How do we know this?}}
+  \begin{itemize}
+    \item groups
+    \item abelian groups
+    \item divisible groups $(\forall x \; \exists y \; (y^n = x))$ \\
+      (note: this is infinitely axiomatizable)
+    \item torsian free groups $(\forall x \; (x^n = e \rarrow x = e))$ \\
+      (note: this is also infinitely axiomatizble)
+    \item for any $n$, the class of groups of exponent $n$ is elementary $(\forall x \; (x^n = e))$
+  \end{itemize}
+  The following are not elementary (which we shall prove later)
+  \begin{itemize}
+    \item all torsion groups
+    \item all finite groups
+  \end{itemize}
+\end{eg}
+
+\begin{defn}[Theories of a Structure]\label{defn:theories_of_a_structure}
+  If $\mathcal{M}$ is an $\mathcal{L}$-structure, the theories of this structure is
+  \begin{equation*}
+    \Th(\mathcal{M}) := \{ \sigma : \mathcal{M} \models \sigma \},
+  \end{equation*}
+  where $\sigma$ is an $\mathcal{L}$-sentence.
+\end{defn}
+
+\begin{defn}[$\mathcal{L}$-elementarily Equivalent]\index{$\mathcal{L}$-elementarily Equivalent}\label{defn:_l_elementarily_equivalent}
+  Given two $\mathcal{L}$-structures $\mathcal{M}$ and $\mathcal{N}$, we sya that $\mathcal{M}$ is \hlnoteb{$\mathcal{L}$-elementarily equivalent} to $\mathcal{N}$ if
+  \begin{equation*}
+    \Th(\mathcal{M}) = \Th(\mathcal{N}).
+  \end{equation*}
+  We denote this by $\mathcal{M} \equiv \mathcal{N}$.
+\end{defn}
+
+\begin{note}
+  If $j : M \to N$ is an elementary embedding, then $\mathcal{M} \equiv \mathcal{N}$. In particular, if $\mathcal{M} \simeq \mathcal{N}$, then $\mathcal{M} \equiv \mathcal{N}$.
+
+  However, the converse is not true: we know from the \hyperref[thm:downward_lowenheim_skolem]{Downward L\"{o}wenheim Skolem} that $\mathcal{M} \equiv \mathcal{N}$ but it is not necessary that $\mathcal{M} \simeq \mathcal{N}$.
+\end{note}
+
+\begin{propo}\label{propo:elementary_embeddings_iff_expansion_over_parameterized_language}
+  Let $\mathcal{M}$ and $\mathcal{N}$ be $\mathcal{L}$-structures. There exists an $\mathcal{L}$-elementary embedding $j : \mathcal{M} \to \mathcal{N}$ iff $\mathcal{N}$ has an expansion $\mathcal{N}'$ to $\mathcal{L}_M$ such that $\mathcal{N}' \models \Th(\mathcal{M}_M)$.
+\end{propo}
+
+\begin{proof}
+  Given $j : \mathcal{M} \to \mathcal{N}$, let $\mathcal{N}'$ be the $\mathcal{L}_B$-structure that expands $\mathcal{N}$, given by
+  \begin{equation*}
+    \mathcal{N}' = (\mathcal{N}, \bar{b}^{\mathcal{N}'} = j(b)),
+  \end{equation*}
+  for all $b \in M$. Then by the definition of an elementary $\mathcal{L}$-embedding, we must have $\mathcal{N}' \models \Th(\mathcal{M}_M)$.
+
+  Conversely, if there is an expansion $\mathcal{N}'$ of $\mathcal{N}$ on $\mathcal{L}_M$ such that $\mathcal{N}' \models \Th(\mathcal{M}_M)$, then we simply need to consider the mapping
+  \begin{equation*}
+    j : \mathcal{M} \to \mathcal{N} \text{ by } b \mapsto b^{\mathcal{N}'},
+  \end{equation*}
+  which will give us the desired elementary $\mathcal{L}$-embedding.\qed\
+\end{proof}
+
+\begin{eg}[$\subseteq + \equiv \neq \preceq$]
+  Let $\mathcal{N} = (\omega, <)$ and $\mathcal{M} = (\omega \setminus \{ 0 \}, <)$ be $\mathcal{L} = \{ < \}$ structures. Clearly so, $\mathcal{M} \subseteq \mathcal{N}$. They are also isomorphic: $j : \mathcal{N} \to \mathcal{M}$ by $j(n) = n + 1$ is an isomorphism. However, notice that
+  \begin{gather*}
+    \mathcal{M} \models \neg \exists x \; ( x < 1 ) \\\
+    \mathcal{N} \models \exists x \; (x < 1),
+  \end{gather*}
+  so $\mathcal{M} \not\preceq \mathcal{N}$.
+\end{eg}
+
+\begin{defn}[Implication]\index{Implication}\label{defn:implication}
+  Suppose $T$ is an $\mathcal{L}$-theory, and $\sigma$ an $\mathcal{L}$-sentence. We say that $T$ \hlnoteb{implies} $\sigma$ (or $T$ \hlnoteb{entails} $\sigma$), denoted by $T \models \sigma$, if for every $\mathcal{M} \models T$, we have $\mathcal{M} \models \sigma$.
+\end{defn}
+
+\begin{defn}[Complete]\index{Complete}\label{defn:complete}
+  An $\mathcal{L}$-theory $T$ is said to be complete if for every $\mathcal{L}$-sentence $\sigma$,
+  \begin{equation*}
+    \text{ either } T \models \sigma \text{ or } T \models \neg \sigma.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  In words, a theory is complete if every $\mathcal{L}$-formula or its negation can be derived.
+\end{note}
+
+\begin{eg}
+  $\Th(\mathcal{M})$ is complete for any $\mathcal{L}$-structure $\mathcal{M}$.
+\end{eg}
+
+\begin{proof}
+  For every $\mathcal{L}$-sentence $\sigma$, we have either $\sigma \in \Th(\mathcal{M})$ or $\sigma \notin \Th(\mathcal{M})$, which implies $\mathcal{M} \models \sigma$ and $\mathcal{M} \models \neg \sigma$, respectively.
+\end{proof}
+
+\begin{eg}
+  Let's go on a quest for a complete theory: Let $\mathcal{L} = \{ 0, 1, +, -, \times \}$ and $T$ be the theory of rings. Then, let
+  \begin{equation*}
+    \sigma = \forall x \; ( x \neq 0 \rarrow \exists y \; ( xy = 1 ) ),
+  \end{equation*}
+  which asserts that \textit{every non-zero element has a multiplicative inverse}. However, in the models
+  \begin{gather*}
+    \mathcal{Z} = (\mathbb{Z}, 0, 1, +, -, \times) \\
+    \mathcal{Q} = (\mathbb{Q}, 0, 1, +, -, \times)
+  \end{gather*}
+  we know that
+  \begin{equation*}
+    \mathcal{Z} \models \neg \sigma \text{ while } \mathcal{Q} \models \sigma.
+  \end{equation*}
+  So $T \not\models \sigma$ and $T \not\models \neg \sigma$, i.e. $T$ is incomplete.
+
+  Let's add the property of multiplicative inverses to our theory and call the new theory $T_1$. This is the theory of fields. Consider the $\mathcal{L}$-sentence
+  \begin{equation*}
+    \sigma = \exists x \; (x^2 + 1 = 0),
+  \end{equation*}
+  which asserts that \textit{every element has a square root}. However, we know that this is true in $\mathbb{C}$ but not in $\mathbb{R}$. Thus $T_1$ is still incomplete.
+
+  Let $T_2$ be the theory of algebraically closed fields (ACF), i.e. fields where every element is a root of some polynomial, and in particular every element will have a square root, mitigating the incompleteness above. However, the $\mathcal{L}$-sentence $\sigma = 1 + 1 = 0$ is true in $\bar{H}_2^{\alg}$ but not true in $\mathbb{C}$.
+
+  Let $T_3$ be the theory of algebraically closed fields with characteristic $p$, with $p$ either being prime or $0$. This is a complete theory, but we are not ready to prove this.
+\end{eg}
+
+\begin{lemma}[Equivalence to a Complete Theory]\label{lemma:equivalence_to_a_complete_theory}
+  Suppose $T$ is a consistent $\mathcal{L}$-theory. TFAE
+  \begin{enumerate}
+    \item $T$ is complete;
+    \item $\bar{T} := \{ \sigma \mid T \models \sigma \}$, called \hldefn{the set of consequences of $T$}, is maximally consistent;
+    \item $\bar{T} = \Th(\mathcal{M})$ for some (equivalently any)\sidenote{What does this mean?} $\mathcal{M} \models T$;
+    \item Any $2$ models of $T$ are elementarily equivalent.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  \hlbnoted{$(1) \implies (2)$}: Suppose $\bar{T}$ is not maximal, i.e. $\bar{T} \subsetneq S$  for some $S$ an $\mathcal{L}$-theory. Let $\sigma \in S \setminus \bar{T}$. Then $T \not\models \sigma$. But $T$ is complete, and so $T \models \neg \sigma$. Thus $\neg \sigma \in \bar{T} \subsetneq S$. Then we have that $\{ \sigma, \neg \sigma \} \subset S$ and so $S$ has no models, i.e. $S$ is inconsistent.
+
+  \noindent\hlbnoted{$(2) \implies (3)$}: If $\mathcal{M}$ is a model of $T$, then $\mathcal{M}$ is a model of $\bar{T}$, thus $\bar{T} \subseteq \Th(\mathcal{M})$. Since $\bar{T}$ is maximal, we must have $\bar{T} = \Th(\mathcal{M})$.
+
+  \noindent\hlbnoted{$(3) \implies (4)$}: Suppose $\mathcal{M} \models T$ such that $\bar{T} = \Th(\mathcal{M})$. Let $\mathcal{N} \models T$. Then $\mathcal{N} \models \bar{T}$, and as above, we have $\bar{T} = \Th(\mathcal{N})$. Therefore $\Th(\mathcal{M}) = \Th(\mathcal{N})$, i.e. $\mathcal{M} \equiv \mathcal{N}$.
+
+  \noindent\hlbnoted{$(4) \implies (1)$}: Suppose $T \not\models \sigma$, where $\sigma$ is an $\mathcal{L}$-sentence. Then there exists $\mathcal{M} \models T$ such that $\mathcal{M} \models \neg \sigma$. Let $\mathcal{N} \models T$. By assumption, since any two models of $T$ are elementarily equivalent, we must also have $\mathcal{N} \models \neg \sigam$. Therefore $T \models \neg \sigma$.\qed\
+\end{proof}
+
+% subsection theories (end)
+
+% section first_order_logic_continued_6 (end)
+
+% chapter lecture_16_nov_01st (end)
 
 \appendix
 
