@@ -3797,6 +3797,196 @@ We can make a similar derivation of mixed distributions for Binomial and Negativ
 % section frequency_distributions_creating_new_frequency_distributions_and_effect_on_frequency (end)
 
 % chapter lecture_17_nov_13th (end)
+
+\chapter{Lecture 18 Nov 15th}%
+\label{chp:lecture_18_nov_15th}
+% chapter lecture_18_nov_15th
+
+\section{Frequency Distributions --- Creating New Frequency Distributions and Effect on Frequency (Continued)}%
+\label{sec:frequency_distributions_creating_new_frequency_distributions_and_effect_on_frequency_continued}
+% section frequency_distributions_creating_new_frequency_distributions_and_effect_on_frequency_continued
+
+\subsection{Compound Frequency Distributions (Continued)}%
+\label{sub:compound_frequency_distributions_continued}
+% subsection compound_frequency_distributions_continued
+
+\subsubsection{PGF Method}%
+\label{ssub:pgf_method}
+% subsubsection pgf_method
+
+\begin{propo}[PGF Method for Compound RVs]\label{propo:pgf_method_for_compound_rvs}
+  For a compound rv $S = \sum_{i=1}^{N} M_i$, we have
+  \begin{equation*}
+    G_S(t) = G_N( G_M(t) ),
+  \end{equation*}
+  where $G_S, G_N, G_M$ are pgfs of $S, N, M$, respectively.
+\end{propo}
+
+\begin{proof}
+  Given the definition of $S$, we have
+  \begin{align*}
+    G_S(t) &= E \left[ t^S \right] = E \left[ E \left[ t^{M_1 + M_2 + \hdots + M_N} \mid N \right] \right] = E \left[ \prod_{i=1}^{N} E \left[ t^{M_i} \mid N \right] \right] \\
+           &= E \left[ \left( E \left[ t^M \right] \right)^N \right] = E \left[ G_M(t)^N \right] = G_N( G_M(t) ).
+  \end{align*}
+\end{proof}
+
+\begin{note}
+  From \cref{propo:pgf_method_for_compound_rvs}, the pmf of $g_k$ can be computed using
+    \begin{equation*}
+      g_k = \frac{1}{k!}G_S^{(k)}(0).
+    \end{equation*}
+  E.g.
+    \begin{itemize}
+      \item $g_0 = G_S(0) = G_N(G_M(0)) = G_N(f_0)$
+      \item $g_0 = G'_S(0) = G_M'(0) G_N'( G_M(0) ) = f_1 G_N(f_0)$
+    \end{itemize}
+  However, this method is inefficient.
+\end{note}
+
+% subsubsection pgf_method (end)
+
+\subsubsection{PMF Method}%
+\label{ssub:pmf_method}
+% subsubsection pmf_method
+
+We shall develop, perhaps, a more efficient way of getting $g_k$: For $k = 0, 1, 2, \ldots$, we have
+\begin{align*}
+  g_k &= P(S = k) = \sum_{n=0}^{\infty} P(S = k \mid N = n) P(N = n) \\
+      &= \sum_{n = 0}^{\infty} P ( M_1 + \hdots + M_n = k ) p_n \\
+      &= \sum_{n=0}^{\infty} f_k^{*n} p_n,
+\end{align*}
+where we let $f_k^{*n}$ be the \hldefn{$n$-fold convolution} of $f_k$ defined as
+\begin{equation*}
+  f_k^{*n} := P( M_1 + \hdots + M_n = k ).
+\end{equation*}
+
+Note that when $k = 0$, we have
+\begin{equation*}
+  g_0 = \sum_{n = 0}^{\infty} f_0^{*n} p_n = f_0^{*0} p_0 + \sum_{n = 1}^{\infty} f_0^{*n} p_n.
+\end{equation*}
+Note that
+\begin{equation*}
+  f_0^{*0} = P(0 = 0) = 1,
+\end{equation*}
+thus
+\begin{align*}
+  g_0 &= p_0 + \sum_{n=1}^{\infty} f_0^{*n} p_n \\
+      &= p_0 + \sum_{n=1}^{\infty} P(M_1 + \hdots + M_n = 0) p_n \\
+      &= p_0 + \sum_{n=1}^{\infty} p_n \prod_{i=1}^{n} P(M = 0) \\
+      &= p_0 + \sum_{n=1}^{\infty} p_n \prod_{i=1}^{n} f_0 \\
+      &= p_0 + \sum_{n=1}^{\infty} f_0^n p_n.
+\end{align*}
+
+Now in general,
+\begin{equation*}
+  g_k = \sum_{n=0}^{\infty} f_k^{*n} p_n = f_k^{*n} p_0 + \sum_{n=1}^{\infty} f_k^{*n} p_n.
+\end{equation*}
+Observe that 
+\begin{equation*}
+  f_k^{*0} = P(0 = k) = 0.
+\end{equation*}
+Thus
+\begin{align*}
+  g_k &= \sum_{n=1}^{\infty} f_k^{*n} p_n,
+\end{align*}
+for $k \geq 1$.
+
+We are still short of an important information: what exactly is $f_k^{*n}$? Fix $n \in \mathbb{N}$. Observe that we only need to look for the value of $n - 1$ of the $M_i$'s, since the sum of the $M_i$'s must equal to some $k$. Then by using the methods from conditional probability
+\begin{align*}
+  f_k^{*n} &= P(M_1 + \hdots + M_n = k) \\
+           &= \sum_{j=0}^{k} P(M_1 + \hdots + M_n = k \mid M_n = j) P(M_n = j) \\
+           &= \sum_{j=0}^{k} P(M_1 + \hdots + M_{n - 1} = k - j) f_j \\
+           &= \sum_{j=0}^{k} f_{k - j}^{*( n - 1 )} f_j,
+\end{align*}
+and we observe that we have a recursive definition. Fortunately, this recursive definition has a start where we can work with: note that $f_k^{*1} = P( M_1 = k ) = f_k$.
+
+However, for large values of $n$, this method becomes very cumbersome.
+
+\begin{eg}
+  Suppose that $p_0 = 0.4$, $p_1 = 0.4$, and $p_2 = 0.2$. Also, we have $f_0 = 0.5$, $f_1 = 0.3$, and $f_2 = 0.2$. Find the pmf of $S$.
+\end{eg}
+
+\begin{solution}
+  First, notice that since $N, M$ can take values $0, 1, 2$. Thus $S$ can take values $0, 1, 2, 3, 4$.
+  Observe that
+  \begin{align*}
+    g_0 &= p_0 + \sum_{n=1}^{2} f_0^n p_n = 0.4 + 0.5(0.4) + 0.5^2(0.2) = 0.65 \\
+    g_k &= \sum_{n=1}^{2} f_k^{*n} p_n = 0.4 f_k^{*1} + 0.2 f_k^{*2} \\
+        &= 0.4 f_k + 0.2 f_k^{*2}, \quad \text{ for } k = 1, 2, 3, 4.
+  \end{align*}
+  It remains to solve for $f_k^{*2}$, for $k = 1, 2, 3, 4$.
+  \begin{align*}
+    f_1^{*2} &= P( M_1 + M_2 = 1 ) = P(M_1 = 1, M_2 = 0) + P(M_1 = 0, M_2 = 1) \\
+             &= 2f_0 f_1 = 0.3 \\
+    f_2^{*2} &= P(M_1 + M_2 = 2) \\
+             &= f_0 f_2 + f_1 f_1 + f_2 f_0 = 0.29 \\
+    f_3^{*2} &= P(M_1 + M_2 = 3) \\
+             &= f_1 f_2 + f_2 f_1 = 0.12 \\
+    f_4^{*2} &= P(M_1 + M_2 = 4) \\
+             &= f_2 f_2 = 0.04.
+  \end{align*}
+  We can then obtain $g_k$ for $k = 1, 2, 3, 4$ from here.
+\end{solution}
+
+\begin{remark}
+  We observe that in the previous example, the grand method of which we derived is rather cumbersome to work with, even if we just have a maximum of $4$.
+\end{remark}
+
+Now recall \cref{propo:pgf_method_for_compound_rvs}. We shall try using this. To that end, we first need to get $G_N(t)$ and $G_M(t)$, which is not difficult:
+\begin{gather*}
+  G_N(t) = 0.4 + 0.4 t + 0.2 t^2 \\
+  G_M(t) = 0.5 + 0.3 t + 0.2 t^2.
+\end{gather*}
+Then
+
+
+% subsubsection pmf_method (end)
+
+\subsubsection{Panjer's Recursion}%
+\label{ssub:panjer_s_recursion}
+% subsubsection panjer_s_recursion
+
+\begin{thm}[Panjer's Recursion for $(a, b, 0)$ class]\index{Panjer's Recursion}\label{thm:panjer_s_recursion_for_a_b_0_class}
+  For an $(a, b, 0)$ distribution $N$, the pmf of $S$ can be calculated, recursively, by
+  \begin{equation*}
+    g_k = \frac{1}{1 - af_0} \sum_{i=1}^{k} \left( a + \frac{ib}{k} \right) f_i g_{k - 1}, \quad k = 1, 2, \ldots,
+  \end{equation*}
+  where the starting point of the recursion is
+  \begin{equation*}
+    g_0 = G_N(f_0).
+  \end{equation*}
+\end{thm}
+
+\begin{eg}
+  If $N$ is a Poisson rv, or equivalently, if $S$ is a compound Poisson rv, then
+  \begin{equation*}
+    g_k = \sum_{i=1}^{k} \frac{ib}{k} f_i g_{k - 1}, \quad k = 1, 2, \ldots.
+  \end{equation*}
+\end{eg}
+
+\begin{proof}
+  
+\end{proof}
+
+\begin{thm}[Panjer's Recursion for $(a, b, 1)$ Class]\index{Panjer's Recursion}\label{thm:panjer_s_recursion_for_a_b_1_class}
+  For an $(a, b, 1)$ distribution $N$, the pmf of $S$ can be calculated recursively by
+  \begin{equation*}
+    g_k = \frac{p_1 - (a + b)p_0}{1 - af_0} f_k + \frac{1}{1 - af_0} \sum_{i=1}^{k} \left( a + \frac{ib}{k} \right) f_i g_{k - i}, \quad k = 1, 2, ...,
+  \end{equation*}
+  where
+  \begin{equation*}
+    g_0 = G_N(f_0).
+  \end{equation*}
+\end{thm}
+
+% subsubsection panjer_s_recursion (end)
+
+% subsection compound_frequency_distributions_continued (end)
+
+% section frequency_distributions_creating_new_frequency_distributions_and_effect_on_frequency_continued (end)
+
+% chapter lecture_18_nov_15th (end)
+
 \appendix
 
 \chapter{Additional Material}%

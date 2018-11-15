@@ -3067,12 +3067,12 @@ In simpler words, any formula that is true in $\mathcal{N}$ is true in its eleme
   This completes the proof.\qed\
 \end{proof}
 
-\begin{eg}
+\begin{eg}\label{eg:addition_is_not_definable_through_ordering}
   Let $\mathcal{Q} = (\mathbb{Q}, <, 0)$ be an $\mathcal{L} = \{ <, 0 \}$-structure. Show that the graph of addition is not definable in $\mathcal{L}$.
 \end{eg}
 
 \begin{solution}
-  \sidenote{Question: why did we look at the automorphisms?}We need make this inference from automorphisms on $\mathcal{Q}$. Let $\sigma : \mathbb{Q} \to \mathbb{Q}$ be an automorphism. Then we have that
+  \sidenote{Question: why did we look at the automorphisms? \textbf{Answer:} By \cref{crly:automorphisms_on_b_definable_sets}, automorphisms that fixes, in this case, $\emptyset$ pointwise, which is trivially true, should remap the defined set into an element of its own. We use this fact to obtain a contradiction to show that addition is not definable.}We need make this inference from automorphisms on $\mathcal{Q}$. Let $\sigma : \mathbb{Q} \to \mathbb{Q}$ be an automorphism. Then we have that
   \begin{gather*}
     x < y \iff \sigma(x) < \sigma(y) \\
     \sigma(0) = 0 \\
@@ -3080,7 +3080,31 @@ In simpler words, any formula that is true in $\mathcal{N}$ is true in its eleme
   \end{gather*}
   For example, the map $x \mapsto ax$, for some $a > 0$, is an automorphism on $\mathbb{Q}$.
 
-  \hlwarn{Clarification required.}
+  Consider the function
+  \begin{equation*}
+    \phi(x) = \begin{cases}
+      2x + 1 & x < -1 \\
+      x      & x \in [-1, 1] \\
+      2x - 1 & x > 1
+    \end{cases}
+  \end{equation*}
+  which has a graph as in \cref{fig:graph_of_phi_x_in_eg_addition_is_not_definable_through_ordering}.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2.5, 0) -- (2.5, 0) node[right] {$x$};
+      \draw[->] (0, -2.5) -- (0, 2.5) node[above] {$\phi(x)$};
+      \draw[-] (-1,-1) -- (1, 1);
+      \draw[-] (-1,-1) -- (-1.5,-2.5);
+      \draw[-] (1,1) -- (1.5,2.5);
+    \end{tikzpicture}
+    \caption{Graph of $\phi(x)$ in \cref{eg:addition_is_not_definable_through_ordering}}\label{fig:graph_of_phi_x_in_eg_addition_is_not_definable_through_ordering}
+  \end{marginfigure}
+  It is rather clear that $\phi$ is indeed an automorphism, i.e. it has all the properties that we listed above. However, such an automorphism does not preserve addition itself, since
+  \begin{gather*}
+    \phi(1 + 2) = \phi(3) = 5 \\
+    \phi(1) + \phi(2) = 4.
+  \end{gather*}
 \end{solution}
 
 \begin{propo}[\imponote\ Tarski-Vaught Test]\index{Tarski-Vaught Test}\label{propo:tarski_vaught_test}
@@ -3152,11 +3176,11 @@ In simpler words, any formula that is true in $\mathcal{N}$ is true in its eleme
   \end{equation*}
   such that each of their cardinality is less than $\kappa$, such that for each $n \geq 0$, if $\phi(\bar{x}, y)$ is an $\mathcal{L}$-formula, and $\bar{a} \in A_n$ such that $\mathcal{M} \models \exists y \phi(\bar{a}, y)$, then it is clear that there exists $b \in A_{n + 1}$ with $\mathcal{M} \models \phi(\bar{a}, b)$.
 
-  Given an $A_n$, we shall show a way to construct $A_{n + 1}$. \hlwarn{Requires clarification} 
+  Given an $A_n$, we shall show a way to construct $A_{n + 1}$. \todo{\hlwarn{Requires clarification}} 
 \end{proof}
 
 \begin{eg}
-  Consider the language $\mathcal{L}$ of rings and the $\mathcal{L}$-structure $\mathcal{C} = (\mathbb{C}, 0, 1, +, -, \times)$. We know that $\mathcal{Q} = (\mathbb{Q}, 0, 1, +, -, \times)$ is an $\mathcal{L}$-substructure of $\mathcal{C}$. It can be shown that the structure that is the \hlnotea{algebraic closure} of $\mathbb{Q}$ is an elementary $\mathcal{L}$-substructure of $\mathcal{C}$.\sidenote{\hlwarn{Why? How can we show this?}}
+  Consider the language $\mathcal{L}$ of rings and the $\mathcal{L}$-structure $\mathcal{C} = (\mathbb{C}, 0, 1, +, -, \times)$. We know that $\mathcal{Q} = (\mathbb{Q}, 0, 1, +, -, \times)$ is an $\mathcal{L}$-substructure of $\mathcal{C}$. It can be shown that the structure that is the \hlnotea{algebraic closure} of $\mathbb{Q}$ is an elementary $\mathcal{L}$-substructure of $\mathcal{C}$.\sidenote{\todo{\hlwarn{Why? How can we show this?}}}
 \end{eg}
 
 % subsection elementary_embeddings (end)
@@ -3187,11 +3211,11 @@ In simpler words, any formula that is true in $\mathcal{N}$ is true in its eleme
     \mathcal{Q} \models \forall x \; \forall y \; ( \underbrace{y + y + \hdots + y}_{n \text{ times }} = x ) \\
     \mathcal{Q} \models \exists x \; ( x \neq 0 )
   \end{gather*}
-  So $G$ must be some non-trivial divisible subgroup of $\mathcal{Q}$. Let $\frac{n}{m} \in G$, with $n \neq 0$. WMA\sidenote{Short for \hlnotea{We May Assume}. We may indeed assume that both $n$ and $m$ are strictly positive, or we can just factor out $-1$.} $n, m > 0$. Then $n \in G$ by $n$ divisibility in $G$. Thus $1 \in G$ Thus $\mathbb{Z} \leq G \leq \mathbb{Q}$, and so\sidenote{\hlwarn{How does this follow?}} $G = \mathbb{Q}$ by divisibility.
+  So $G$ must be some non-trivial divisible subgroup of $\mathcal{Q}$. Let $\frac{n}{m} \in G$, with $n \neq 0$. WMA\sidenote{Short for \hlnotea{We May Assume}. We may indeed assume that both $n$ and $m$ are strictly positive, or we can just factor out $-1$.} $n, m > 0$. Then $n \in G$ by $n$ divisibility in $G$. Thus $1 \in G$ Thus $\mathbb{Z} \leq G \leq \mathbb{Q}$, and so\sidenote{\todo{\hlwarn{How does this follow?}}} $G = \mathbb{Q}$ by divisibility.
 \end{proof}
 
 \begin{remark}
-  By \cref{thm:downward_lowenheim_skolem}, $(\mathbb{R}, 0, +, -)$ has many proper elementary subgroups, e.g. $\mathbb{Q}$.\sidenote{\hlwarn{How so? Is it simply by taking $q + r$ for $q \in \mathbb{Q}$ and $r \in \mathbb{R} \setminus \mathbb{Q}$.}}
+  By \hyperref[thm:downward_lowenheim_skolem]{Downward L\"{o}wenheim-Skolem}, $(\mathbb{R}, 0, +, -)$ has many proper elementary subgroups, e.g. $\mathbb{Q}$.\sidenote{\todo{\hlwarn{How so? Is it simply by taking $q + r$ for $q \in \mathbb{Q}$ and $r \in \mathbb{R} \setminus \mathbb{Q}$.}}}
 \end{remark}
 
 % subsection elementary_embeddings_continued (end)
@@ -3413,7 +3437,7 @@ This gives us some sort of comfort knowing that we have some method of checking 
 \end{defn}
 
 \begin{eg}
-  Let $\mathcal{L} = \{ e, \cdot, \inv \}$. The following classes is elementary:\sidenote{\hlwarn{How do we know this?}}
+  Let $\mathcal{L} = \{ e, \cdot, \inv \}$. The following classes are elementary:\sidenote{\todo{\hlwarn{How do we know this?}}}
   \begin{itemize}
     \item groups
     \item abelian groups
@@ -3534,7 +3558,7 @@ This gives us some sort of comfort knowing that we have some method of checking 
   \begin{enumerate}
     \item $T$ is complete;
     \item $\bar{T} := \{ \sigma \mid T \models \sigma \}$, called \hldefn{the set of consequences of $T$}, is maximally consistent;
-    \item $\bar{T} = \Th(\mathcal{M})$ for some (equivalently any)\sidenote{What does this mean?} $\mathcal{M} \models T$;
+    \item $\bar{T} = \Th(\mathcal{M})$ for some (equivalently any)\sidenote{\todo{What does this mean?}} $\mathcal{M} \models T$;
     \item Any $2$ models of $T$ are elementarily equivalent.
   \end{enumerate}
 \end{lemma}
@@ -3611,7 +3635,7 @@ This gives us some sort of comfort knowing that we have some method of checking 
   \begin{equation*}
     \mathcal{N} \models \exists x \; \left( \bigwedge_{i = 1}^{m_{k + 1}} \phi_{k + 1, \, j} \left(f(a_1), \ldots, f(a_k), x\right) \right).
   \end{equation*}
-  Let $b \in N$ satisfy this formula\sidenote{During lecture, it was mentioned that $b$ should not satisfy other properties. \hlwarn{What are these other properties, and why should $b$ not satisfy these other properties?}} and define $f' : \{ a_1, \ldots, a_k, a_{k + 1} \} \to N$ such that 
+  Let $b \in N$ satisfy this formula\sidenote{During lecture, it was mentioned that $b$ should not satisfy other properties. \todo{\hlwarn{What are these other properties, and why should $b$ not satisfy these other properties?}}} and define $f' : \{ a_1, \ldots, a_k, a_{k + 1} \} \to N$ such that 
   \begin{gather*}
     a_1 \mapsto f(a_i) \quad \text{ for } 1 \leq i \leq k \\
     a_{k + 1} \mapsto b.
@@ -3677,7 +3701,7 @@ Since each $\Sigma_n$ is consistent, there exists a model $\mathcal{M}_n \models
       \begin{equation*}
         \mathcal{F} = \{ A \subset I : \abs{ I \setminus A } < \kappa \}
       \end{equation*}
-      is a filter. In particular, if $I = \omega$, and $\kappa = \aleph_0$. Then the above filter, which is the set of \hlnotea{cofinite sets}, is called a \hldefn{Frechet filter}.
+      is a filter. In particular, if $I = \omega$, and $\kappa = \aleph_0$. Then the above filter, which is the set of \hlnotea{cofinite sets}, is called a \hldefn{Fr\'{e}chet filter}.
     \item Let $I \in \Set \setminus \{\emptyset\}$, and $a \in I$. The set
       \begin{equation*}
         \mathcal{F}_a = \{ A \subseteq I \mid a \in A \}
@@ -3705,7 +3729,7 @@ In general, it is rather diffcult to describe a non-principal ultrafilter. Howev
   \begin{equation*}
     \mathcal{Z} = \{ \mathcal{H} \subseteq \mathcal{P}(I) \mid \mathcal{H} \text{ a filter }, \, \mathcal{F} \subseteq \mathcal{H} \}.
   \end{equation*}
-  It is rather clear that $(\mathcal{Z}, \subseteq)$ is a poset, closed under unions of chains, and the union of filters is a filter. Thus the chains have an upper bound, and by Zorn's Lemma, there is a maximal filter, which is an ultraproduct.\qed\
+  It is rather clear that $(\mathcal{Z}, \subseteq)$ is a poset, closed under unions of chains, and the union of filters is a filter. Thus the chains have an upper bound, and by Zorn's Lemma, there is a maximal filter, which is an ultrafilter.\qed\
 \end{proof}
 
 \begin{lemma}[Equivalent Characterization of an Ultrafilter]\label{lemma:equivalent_characterization_of_an_ultrafilter}
