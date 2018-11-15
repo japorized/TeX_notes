@@ -3397,6 +3397,197 @@ We shall prove for the case of $\Poi(\lambda)$.\marginnote{
 
 % chapter lecture_15_nov_01st (end)
 
+\chapter{Lecture 16 Nov 6th}%
+\label{chp:lecture_16_nov_6th}
+% chapter lecture_16_nov_6th
+
+\section{Frequency Distribution --- Basic Frequency Distributioned (Continued 3)}%
+\label{sec:frequency_distribution_basic_frequency_distributioned_continued_3}
+% section frequency_distribution_basic_frequency_distributioned_continued_3
+
+\subsection{$(a, b, n)$ Classes (Continued)}%
+\label{sub:a_b_n_classes_continued}
+% subsection a_b_n_classes_continued
+
+\subsubsection{$(a, b, 1)$ Class}%
+\label{ssub:_a_b_1_class}
+% subsubsection _a_b_1_class
+
+\paragraph{Motivation} There are times when the $(a, b, 0)$ class of distributions fail to give a complete characterization of certain insurance data with regards to the claim arrival process. This is especially apparent when we notice that we do not have as much freedom in fixing $P(N = 0)$. This provides us with the motivation to define the $(a, b, 1)$ class.
+
+\begin{defn}[$(a, b, 1)$ Class]\index{$(a, b, 1)$ Class}\label{defn:a_b_1_class}
+  The $(a, b, 1)$ class is defined as a set of counting rvs with pmf $p_k$ satisfying the recursion
+  \begin{equation*}
+    \frac{p_k}{p_{k - 1}} = a + \frac{b}{k}, \quad k = 2, 3, \ldots .
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  Notice that the formula is almost exactly the same as compared to \hyperref[defn:a_b_0_class]{the definition of the $(a, b, 0)$ class}, \hlimpo{except} now we have that $k$ starts from $2$ instead of $1$. This means that this recursive definition will no longer have any control over $p_0$, which is what we want.
+\end{remark}
+
+There are two distributions from the $(a, b, 1)$ class that we shall focus on, namely
+\begin{itemize}
+  \item the zero-truncated distribution; and
+  \item the zero-modified distribution.
+\end{itemize}
+
+\paragraph{Zero-Truncated Distribution}\label{par:zero_truncated_distribution}\index{Zero-Truncated Distribution} In this case, we set $p_0 = 0$, i.e. we always expect a claim.
+
+Let $p_k$, where $k = 0, 1, 2, \ldots$, be the pmf of an $(a, b, 0)$ distribution, of which we label its rv as $N$. Then, let $p_k^T$, for $k = 0, 1, 2, \ldots$, be the pmf of the \hlnoteb{zero-truncated distribution}, whose rv is denoted by $N^T$, with $p_0^T = 0$.
+
+We can obtain values for each of the $p_k^T$'s, from $k = 1, 2, \ldots$, from the $p_k$'s: \sidenote{Perhaps this was implied but it certainly was not explicitly stated: the $a, b$ in the $(a, b, 0)$ can be treated exactly as the $a, b$ from the $(a, b, 0)$ class.}notice that for $k = 2, 3, 4, \ldots$, we have
+\begin{equation*}
+  \frac{p_k^T}{p_{k - 1}^T} = a + \frac{b}{k} = \frac{p_k}{p_{k - 1}} \implies \frac{p_k^T}{p_k} = \frac{p_{k - 1}^T}{p_{k - 1}}.
+\end{equation*}
+Observe that
+\begin{align*}
+  \text{ When } k = 2, &\quad \frac{p_2^T}{p_2} = \frac{p_1^T}{p_1} \\
+  \text{ When } k = 3, &\quad \frac{p_3^T}{p_3} = \frac{p_2^T}{p_2} \\
+  \text{ When } k = 4, &\quad \frac{p_4^T}{p_4} = \frac{p_3^T}{p_3} \\
+                       &\vdots
+\end{align*}
+Therefore, we have that
+\begin{equation*}
+  \frac{p_1^T}{p_1} = \frac{p_2^T}{p_2} = \frac{p_3^T}{p_3} = \hdots =: \beta^T,
+\end{equation*}
+where we give this value a variable. Consequently, we have
+\begin{equation*}
+  p_k^T = \beta^T p_k.
+\end{equation*}
+Of course, we'd like to know what $\beta^T$ is. Since $p_0^T = 0$, we have that
+\begin{equation*}
+  1 = \sum_{k=1}^{\infty} p_k^T = \beta^T \sum_{k=1}^{\infty} p_k = \beta^T ( 1 - p_0 )
+\end{equation*}
+and so
+\begin{equation*}
+  \beta^T = \frac{1}{1 - p_0}.
+\end{equation*}
+To store this information, we look to the pgf of $N^T$: we have
+\begin{equation*}
+  G_{N^T}(t) = \sum_{k=0}^{\infty} t^k p_{k}^T= \sum_{k=0}^{\infty} t^k \beta^T p_k = \frac{1}{1 - p_0} \sum_{k=1}^{\infty} t^k p_k = \frac{G_N(t) - p_0}{1 - p_0}.
+\end{equation*}
+
+\begin{eg}
+  Let $N \sim \NB(\beta, r)$. Its zero-truncated version has pmf of the form
+  \begin{align*}
+    p_K^T &= \frac{p_k}{1 - p_0} = \frac{\binom{k + r - 1}{k} \left( \frac{1}{1 + \beta} \right)^r \left( \frac{\beta}{1 + \beta} \right)^k}{1 - \left( \frac{1}{1 + \beta} \right)^r} \\
+          &= \frac{\Gamma(k + r)}{k! \Gamma(r)} \frac{\left( \frac{\beta}{ + \betab} \right)^k}{(1 + \beta)^r - 1}
+  \end{align*}
+\end{eg}
+
+\paragraph{Zero-Modified Distribution}\label{para:zero_modified_distribution}\index{Zero-Modified Distribution} If we choose $P(N = 0)$ to be some value that is not any of the $p_0$'s of the distributions from the $(a, b, 0)$ class, then this distribution is called a \hlnoteb{zero-modified distribution}.
+
+Let $p_k$, for $k = 0, 1, 2, \ldots$, be the pmf of an $(a, b, 0)$ distribution, labelled $N$. Let $p_k^M$, for $k = 0, 1, 2, \ldots$, be the pmf of the zero-modified distribution, of which we denote by $N^M$, with $p_0^M$ chosen as described.
+
+We can, again, express $p_k^M$ in terms of $p_k$: for $k = 1, 2, 3, \ldots$ \sidenote{Note that in this case, the probabilities after $p_0^M$ is reliant on $p_0$; of course, since the sum of the probabilities must be $1$, within the axioms of probability.},
+\begin{align*}
+  \frac{p_k^M}{p_{k - 1}^M} = a + \frac{b}{k} = \frac{p_k}{p_{k - 1}},
+\end{align*}
+and so we have, again,
+\begin{equation*}
+  p_k^M = \beta^M p_k.
+\end{equation*}
+So we can solve for $\beta^M$:
+\begin{gather*}
+  1 = \sum_{k=0}^{\infty} p_k^M = p_0^M + \sum_{k=1}^{\infty} \beta^M p_k \\
+  \implies 1 - p_0^M = \beta^M \sum_{k=1}^{\infty} p_k \\
+  \implies \beta^M = \frac{1 - p_0^M}{1 - p_0}.
+\end{gather*}
+The pgf of a zero-modified distribution is
+\begin{align*}
+  G_{N^M}(t) &= \sum_{k=0}^{\infty} t^k p_k^M = p_0^M + \sum_{k=1}^{\infty} t^k \beta^M p_k =  p_0^M + \beta^M ( G_N(t) - p_0 ) \\
+             &= p_0^M + \frac{1 - p_0^M}{1 - p_0} ( G_N(t) - p_0 ) \\
+             &= \frac{p_0^M - p_0^M p_0}{1 - p_0} + \frac{1 - p_0^M}{1 - p_0} G_N(t) - \frac{p_0 - p_0^M p_0}{1 - p_0} \\
+             &= \frac{p_0^M - p_0}{1 - p_0} + \frac{1 - p_0^M}{1 - p_0} G_N(t)
+\end{align*}
+
+\begin{remark}
+  As a consequence of the form of the pgf, if $p_0^M > p_0$, we may interpret $N_M$ as
+  \begin{equation*}
+    N^M = \begin{cases}
+      0 & \text{ w/ prob } \frac{p_0^M - p_0}{1 - p_0} \\
+      N & \text{ w/ prob } \frac{1 - p_0^M}{1 - p_0}
+    \end{cases},
+  \end{equation*}
+  which is a mixture of a degenerated distribution at $0$, and the original $(a, b, 0)$ distribution $N$.
+
+  Consequently, we can also solve for $G_{N^M}(t)$ using this notion: let $\Theta$ be the indicator-function-like distribution such that
+  \begin{equation*}
+    P(\Theta = \theta) = \begin{cases}
+      \frac{p_0^M - p_0}{1 - p_0}      & \theta = 0 \\
+      \frac{1 - p_0^M}{1 - p_0} G_N(t) & \theta = 1
+    \end{cases}.
+  \end{equation*}
+  Then
+  \begin{align*}
+    G_{N^M}(t) &= E \left[ t^{N^M} \right] = E \left[ E \left[ t^{N^M} \mid \Theta \right] \right] \\
+               &= E \left[ t^{N^M} \mid \Theta = 0 \right] P(\Theta = 0) + E \left[ t^{N^M} \mid \Theta = 1 \right] P(\Theta = 1) \\
+               &= P(\Theta = 0) E \left[ t^0 \mid \Theta = 0 \right] + P(\Theta = 1) E \left[ t^N \mid \Theta = 1 \right] \\
+               &= \frac{p_0^M - p_0}{1 - p_0} (1) + \frac{1 - p_0^M}{1 - p_0} G_N(t),
+  \end{align*}
+  as what we had.
+\end{remark}
+
+\begin{propo}[Moments of an $(a, b, 1)$ Distribution]\label{propo:moments_of_an_a_b_1_distribution}
+  The moments of an $( a, b, 1 )$ distribution can be compited from the original $(a, b, 0)$ distribution as
+  \begin{equation*}
+    E \left[ \left( N^M \right)^k \right] = \frac{1 - p_0^M}{1 - p_0} E \left[ N^k \right], \quad k = 1, 2, 3, \ldots
+  \end{equation*}
+  where $N^M$ is the rv modified from $N$ from the $(a, b, 0)$ class.
+\end{propo}
+
+\begin{proof}
+  The derivation is straightforward:
+  \begin{align*}
+    E \left[ \left( N^M \right)^k \right] &= \sum_{m = 0}^{\infty} m^k p_K^M = \sum_{m=1}^{\infty} \frac{1 - p_0^M}{1 - p_0} m^k p_k \\
+                                          &= \frac{1 - p_0^M}{1 - p_0} \sum_{m=1}^{\infty} m^k p_k = \frac{1 - p_0^M}{1 - p_0} \sum_{m = 0}^{\infty} m^k p_k \\
+                                          &= \frac{1 - p_0^M}{1 - p_0} E \left[ N \right].
+  \end{align*}\qed\
+\end{proof}
+
+\begin{eg}
+  Let $N \sim \Poi(2)$. Find the pmf of a zero-modified version of the Poisson distribution with $p_0^M = 0.3$.
+\end{eg}
+
+\begin{solution}
+  We are given that the pmf of $N$ is
+  \begin{equation*}
+    p_k = \frac{e^{-2} 2^k}{k!}, \quad k = 0, 1, 2, \ldots .
+  \end{equation*}
+  Thus
+  \begin{align*}
+    p_k^M &= \frac{1 - p_0^M}{1 - p_0} p_k = \frac{1 - 0.3}{1 - e^{-2}} \cdot \frac{e^{-2} 2^k}{k!} \\
+          &= \frac{0.7 \left( 2^k e^{-2} \right)}{k! (1 - e^{-2})}, \quad k = 1, 2, 3, \ldots.
+  \end{align*}
+\end{solution}
+
+\begin{note}
+  It should be noted that a zero-truncated distribution is a special case of the zero-modified distribution.
+\end{note}
+
+In addition to the zero-modified $(a, b, 0)$ distributions, there are other members in the $(a, b, 1)$ distributions. One such example is known as the \hlnotea{logarithmic distribution}, which has the pmf
+\begin{equation*}
+  p_k = \frac{\beta^k}{k ( 1 + \beta )^k \ln ( 1 + \beta )} , \quad k = 1, 2, 3, \ldots,
+\end{equation*}
+with parameter $\beta > 0$. Notice that for $k = 2, 3, 4, \ldots$,
+\begin{align*}
+  \frac{p_k}{p_{k - 1}} &= \frac{\beta^k}{k ( 1 + \beta )^k \ln (1 + \beta)} \cdot \frac{(k - 1) ( 1 + \beta )^{k - 1} \ln ( 1 + \beta )}{\beta^{k - 1}} \\
+                        &= \frac{\beta}{1 + \beta} \cdot \frac{k - 1}{k} = \frac{\beta}{1 + \beta} + \frac{- \frac{\beta}{1 + \beta}}{k},
+\end{align*}
+where we observe that
+\begin{equation*}
+  a = \frac{\beta}{1 + \beta} \text{ and } b = - \frac{\beta}{1 + \beta}.
+\end{equation*}
+
+% subsubsection _a_b_1_class (end)
+
+% subsection a_b_n_classes_continued (end)
+
+% section frequency_distribution_basic_frequency_distributioned_continued_3 (end)
+
+% chapter lecture_16_nov_6th (end)
+
 \appendix
 
 \chapter{Additional Material}%
