@@ -3588,6 +3588,215 @@ where we observe that
 
 % chapter lecture_16_nov_6th (end)
 
+\chapter{Lecture 17 Nov 13th}%
+\label{chp:lecture_17_nov_13th}
+% chapter lecture_17_nov_13th
+
+\section{Frequency Distributions --- Creating New Frequency Distributions and Effect on Frequency}%
+\label{sec:frequency_distributions_creating_new_frequency_distributions_and_effect_on_frequency}
+% section frequency_distributions_creating_new_frequency_distributions_and_effect_on_frequency
+
+\subsection{Mixed Frequency Distributions}%
+\label{sub:mixed_frequency_distributions}
+% subsection mixed_frequency_distributions
+
+This is a concept that we have seen before.
+
+Suppose that $N \mid \Theta = \theta$ has conditional pmf $P(N = n \mid \Theta = \theta)$ and the mixing rv $\Theta$ is either
+\begin{itemize}
+  \item \hlnotea{discrete} with pmf $p_\Theta(\theta_i)$ for $i = 1, \ldots, m$; or
+  \item \hlnotea{continuous} with pdf $f_\Theta(\theta)$.
+\end{itemize}
+Both the distributions of $N \mid \Theta = \theta$ and $\Theta$ are usually given. The unconditional pmf of $N$ is thus
+\begin{equation*}
+  P(N = n) = \begin{cases}
+    \sum_{i=1}^{m} P(N = n \mid \Theta = \theta_i) p_\Theta(\theta_i) & \Theta \text{ is discrete } \\
+    \int_{\Theta} P(N = n \mid \Theta = \theta) f_\Theta(\theta) \dif{\theta} & \Theta \text{ is continuous }
+  \end{cases}.
+\end{equation*}
+
+\begin{remark}
+  Due to the context of which we work in, we shall always, perversely so, assume that $N$ is a counting rv that takes on non-negative integers.
+\end{remark}
+
+\begin{note}
+  Recall \cref{propo:total_expectation_and_total_variance}, which gives us two concepts that are useful to us in this section: we have
+  \begin{gather*}
+    E \left[ E \left[ X \mid \Theta \right] \right] = E [ X ] \\
+    \Var(X) = \Var( E \left[ X \mid \Theta \right] ) + E \left[ \Var(X \mid \Theta) \right].
+  \end{gather*}
+\end{note}
+
+\subsubsection{Mixed Poisson Distribution}%
+\label{ssub:mixed_poisson_distribution}
+% subsubsection mixed_poisson_distribution
+
+\begin{defn}[Mixed Poisson Distribution]\label{defn:mixed_poisson_distribution}
+  If $N \mid \Lambda = \lambda$ follows $\Poi(\lambda)$ for some rv $\Lambda$, we say $N$ follows a \hlnoteb{mixed Poisson Distribution}.
+\end{defn}
+
+\begin{eg}
+  Recall \cref{propo:negative_binomial_from_poisson_conditioned_on_gamma}. We have that given $N \mid \Lambda = \lambda \sim \Poi(\lambda)$ and $\Lambda \sim \Gam(\alpha, \theta)$, we have that
+  \begin{equation*}
+    N \sim \NB(\theta, \alpha).
+  \end{equation*}
+\end{eg}
+
+\begin{propo}[Mixed Poisson Distribution has a Variance Greater than its Mean]\label{propo:mixed_poisson_distribution_has_a_variance_greater_than_its_mean}
+  FOr a mixed Poisson rv $N$, we have $\Var(N) > E[N]$.
+\end{propo}
+
+\begin{proof}
+  When we say that $N$ is a mixed Poisson rv, it actually means that the rv that we have is $N \mid \Lambda = \lambda$, not $N$ alone. Now by \cref{propo:total_expectation_and_total_variance}, since $\Lambda = \lambda$ is the mean of the mixed Poisson rv, we have
+  \begin{align*}
+    \Var(N) &= \Var( E \left[ N \mid \Lambda \right] ) + E \left[ \Var \left( N \mid \Lambda \right) \right] \\
+            &= \Var( \Lambda ) + E [ \Lambda ] = \Var(\Lambda) + E[ N ].
+  \end{align*}
+  Since $\Var(\Lambda) > 0$, the result follows.\qed\
+\end{proof}
+
+\begin{eg}
+  Suppose that $N \mid \Lambda = \lambda$ follows $\Poi(\lambda)$ and the pdf of $\Lambda$ is given by
+  \begin{equation*}
+    f_\Lambda(\lambda) = \frac{\alpha^2}{1 + \alpha}( 1 + \lambda ) e^{-\alpha\lambda}, \quad \lambda > 0,
+  \end{equation*}
+  where $\alpha > 0$. Show that $N$ is the mixture of two negative binomial distributions.
+\end{eg}
+
+\begin{solution}
+  We shall show the claim by the pgf of $N$. We have
+  \begin{align*}
+    G_N(t) &= E \left[ t^N \right] = E \left[ E \left[ t^N \mid \Lambda \right] \right] = E \left[ e^{\Lambda ( t - 1 )} \right] \\
+           &= \int_{0}^{\infty} \frac{\alpha^2}{1 + \alpha} ( 1 + \lambda ) e^{-\lambda( \alpha + 1 - t )} \dif{\lambda}
+  \end{align*}
+  From here, we can only proceed iff $1 + \alpha - t > 0$, i.e. $t < 1 + \alpha$; otherwise the integral diverges. Now, using integration by parts
+  \begin{align*}
+    G_N(t) &= \frac{\alpha^2}{1 + \alpha} \left[ - \frac{1}{\alpha + 1 - t} e^{-\lambda (\alpha + 1 - t)} \at{0}{\infty} + \right. \\
+           &\quad \left. \left[ - \frac{1}{\alpha + 1 - t} \lambda e^{-\lambda(\alpha + 1 - t)} \at{0}{\infty} + \frac{1}{(\alpha + 1 - t)^2} e^{-\lambda(\alpha + 1 - t)} \at{0}{\infty} \right] \right] \\
+           &= \frac{\alpha^2}{1 + \alpha} \left[ \frac{1}{\alpha + 1 - t} + \frac{1}{( \alpha + 1 - t )^2} \right]
+  \end{align*}
+  Now to arrive at a mixture of two negative binomial distributions, we need to know the form of the pgf for a negative binomial distribution. Note that the pgf of $\NB(\beta, r)$ is
+  \begin{equation*}
+    G(t) = \left[ 1 - \beta( t - 1 ) \right]^{-r}.
+  \end{equation*}
+  Notice that
+  \begin{equation*}
+    G_N(t) = \frac{\alpha^2}{1 + \alpha} \left[ [ \alpha - ( t - 1 ) ]^{-1} + [ \alpha - ( t - 1 ) ]^{-2} \right].
+  \end{equation*}
+  If we expand the appropriate power of $\alpha$ into the reciprocals, we can get our desired form:
+  \begin{equation*}
+    G_N(t) = \frac{\alpha}{1 + \alpha} \left[ 1 - \frac{1}{\alpha} (t - 1) \right]^{-1} + \frac{1}{1 + \alpha} \left[ 1 - \frac{1}{\alpha} ( t - 1 ) \right]^{-2}.
+  \end{equation*}
+  It is clear that
+  \begin{equation*}
+    \frac{\alpha}{1 + \alpha} + \frac{1}{1 + \alpha} = 1,
+  \end{equation*}
+  and so we have obtained our desired result; that is $N$ is a weighted mixture of two negative binomial distributions. In particular,
+  \begin{equation*}
+    N = \begin{cases}
+      X_1 \sim \NB \left( \frac{1}{\alpha}, 1 \right) & \text{ w/ prob } \frac{\alpha}{1 + \alpha} \\
+      X_2 \sim \NB \left( \frac{1}{\alpha}, 2 \right) & \text{ w/ prob } \frac{1}{1 + \alpha}
+    \end{cases}.
+  \end{equation*}
+\end{solution}
+
+% subsubsection mixed_poisson_distribution (end)
+
+We can make a similar derivation of mixed distributions for Binomial and Negative Binomial.
+
+% subsection mixed_frequency_distributions (end)
+
+\subsection{Compound Frequency Distributions}%
+\label{sub:compound_frequency_distributions}
+% subsection compound_frequency_distributions
+
+\begin{defn}[Compound Frequency Distribution]\index{Compound Frequency Distribution}\label{defn:compound_frequency_distribution}
+  For two counting rvs $N$ and $M$, let
+  \begin{equation*}
+    S = \sum_{i=1}^{N} M_i = \begin{cases}
+      M_1 + \hdots + M_N & N \geq 1 \\
+      0                  & N = 0
+    \end{cases},
+  \end{equation*}
+  where $\{ M_i \}_{i = 1}^{\infty}$ is a sequence of iid rv's distributed as $M$, and are independent of $N$. We call $S$ a \hldefn{compound rv}, $N$ the \hldefn{primal distribution}, and $M$ the \hldefn{secondary distribution}.
+\end{defn}
+
+\begin{remark}
+  \begin{itemize}
+    \item Compounding two counting rvs is also an approach to create new frequency distributions.
+    \item $S$ is called \hlnotea{compound Poisson, Binomial, or Negative Binomial} if $N$ is a Poisson, a Binomial, or a Negative Binomial rv, respectively.
+  \end{itemize}
+\end{remark}
+
+\begin{eg}[Interpretation]
+  In an insurance context, compound rvs arise rather naturally. E.g. in the auto insurance context, we could have
+  \begin{itemize}
+    \item $N$ represents the number of accidents;
+    \item $M_i$ represents the number of claims generated by the $i$\textsuperscript{th} accident;
+    \item And so in this case $S$ stands for the total number of claims for a portfolio of auto insurance policies over a given time period.
+  \end{itemize}
+\end{eg}
+
+\begin{propo}[Mean and Variance of the Compound RV]\label{propo:mean_and_variance_of_the_compound_rv}
+  For a compound rv $S = \sum_{i=1}^{N} M_i$, where $M_i \sim M$, we have
+  \begin{gather*}
+    E [ S ] = E[N] E[M] \\
+    \Var(S) = \Var(N)E[M]^2 + E[N]\Var(M).
+  \end{gather*}
+\end{propo}
+
+\begin{proof}
+  Note that the definition of $S$ relies on $N$ first, since
+  \begin{equation*}
+    S = \begin{cases}
+      M_1 + \hdots + M_N & N \geq 1 \\
+      0                  & N = 0
+    \end{cases},
+  \end{equation*}
+  so we shall go down of the route of conditioning $S$ by $N$. Observe that
+  \begin{equation*}
+    E [ S \mid N ] = E \left[ \sum_{i=1}^{N} M_i \mid N \right] \overset{(*)}{=} \sum_{i=1}^{N} E [ M_i \mid N ] \overset{(**)}{=} \sum_{i=1}^{N} E[M] = N E[M]
+  \end{equation*}
+  where $(*)$ is by the linearity of the expectation, and $(**)$ is by $M_i \bot N$ for each $i$ and that $M_i \sim M$. The variance of $S$ conditioned on $N$ is
+  \begin{equation*}
+    \Var(S \mid N) = \Var \left( \sum_{i=1}^{N} M_i \mid N \right) = \sum_{i=1}^{N} \Var(M) = N\Var(M)
+  \end{equation*}
+  mostly for the same reason as for the expectation, but the 2nd equality involves independence of the $M_i$'s (otherwise, we would be left with a bunch of covariances).
+
+  Then, using \cref{propo:total_expectation_and_total_variance}, we have
+  \begin{equation*}
+    E[S] = E[ E [ S \mid N ] ] = E [ N E[M] ] = E[N]E[M]
+  \end{equation*}
+  and
+  \begin{align*}
+    \Var(S) &= \Var(E[S \mid N]) + E[\Var(S \mid N)] \\
+            &= \Var( N E[M] ) + E[ N \Var(M) ] \\
+            &= \Var(N)E[M]^2 + E[N]\Var(M)
+  \end{align*}
+  as required.\qed\
+\end{proof}
+
+\begin{note}[Notation]
+  Hereafter, we shall use the following notations: notice that each $M$, $N$, and $S$ are counting rvs, i.e. they are discrete and are non-negative integers, so let
+  \begin{itemize}
+    \item $p_k$ represent the pmf of $N$, the primal distribution;
+    \item $f_k$ represent the pmf of $M$, the secondary distribution; and
+    \item $g_k$ represent the pmf of $S$, the compound rv.
+  \end{itemize}
+\end{note}
+
+\newthought{In the next lecture}, we shall look into how to compuete $g_k$. Namely, we have the following three methods:
+\begin{itemize}
+  \item pgf method;
+  \item pmf method; and
+  \item Panjer's recursion.
+\end{itemize}
+
+% subsection compound_frequency_distributions (end)
+
+% section frequency_distributions_creating_new_frequency_distributions_and_effect_on_frequency (end)
+
+% chapter lecture_17_nov_13th (end)
 \appendix
 
 \chapter{Additional Material}%
