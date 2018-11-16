@@ -17,6 +17,7 @@
 \DeclareMathOperator{\Domain}{Domain }
 \DeclareMathOperator{\bdy}{bdy }
 \DeclareMathOperator{\Lim}{Lim }
+\DeclareMathOperator{\diam}{diam }
 
 \newcommand{\norm}[1]{\left\| #1 \right\|}
 
@@ -1041,21 +1042,21 @@ Before delving into resolving our last question in the previous lecture, note th
 \begin{proof}
   \begin{marginfigure}
     \begin{tikzpicture}
-      \draw[fill,color=base16-eighties-red] (0, 0) circle(2.2);
+      \draw[fill,color=be-red] (0, 0) circle(2.2);
       \node at (0, 2.4) {$A_0$};
-      \draw[fill,color=base16-eighties-yellow] (0, 0) circle(1.8);
-      \node[color=base16-eighties-dark] at (0, 2.0) {$\boldsymbol{A_1}$};
-      \draw[fill,color=base16-eighties-green] (0, 0) circle(1.4);
-      \node[color=base16-eighties-dark] at (0, 1.6) {$\boldsymbol{A_2}$};
-      \draw[fill,color=base16-eighties-lightblue] (0, 0) circle(1.0);
-      \node[color=base16-eighties-dark] at (0, 1.2) {$\boldsymbol{A_3}$};
-      \draw[fill,color=base16-eighties-blue] (0, 0) circle(0.6);
-      \node[color=base16-eighties-dark] at (0, 0.8) {$\boldsymbol{A_4}$};
-      \draw[fill,color=base16-eighties-light] (0, 0) circle(0.2);
-      \node[color=base16-eighties-dark] at (0, 0.4) {$\boldsymbol{A_5}$};
+      \draw[fill,color=be-yellow] (0, 0) circle(1.8);
+      \node[color=dark] at (0, 2.0) {$\boldsymbol{A_1}$};
+      \draw[fill,color=be-green] (0, 0) circle(1.4);
+      \node[color=dark] at (0, 1.6) {$\boldsymbol{A_2}$};
+      \draw[fill,color=be-cyan] (0, 0) circle(1.0);
+      \node[color=dark] at (0, 1.2) {$\boldsymbol{A_3}$};
+      \draw[fill,color=be-blue] (0, 0) circle(0.6);
+      \node[color=dark] at (0, 0.8) {$\boldsymbol{A_4}$};
+      \draw[fill,color=light] (0, 0) circle(0.2);
+      \node[color=dark] at (0, 0.4) {$\boldsymbol{A_5}$};
 
-      \draw[thick,->,color=base16-eighties-dark] (1.2,1.59705627484771405856) -- (0.9,0.8797958971132712) node[midway,left] {$\boldsymbol{f}$};
-      \draw[thick,->,color=base16-eighties-dark] (1.2, 0) -- (0.4, 0) node[midway,below] {$\boldsymbol{f}$};
+      \draw[thick,->,color=dark] (1.2,1.59705627484771405856) -- (0.9,0.8797958971132712) node[midway,left] {$\boldsymbol{f}$};
+      \draw[thick,->,color=dark] (1.2, 0) -- (0.4, 0) node[midway,below] {$\boldsymbol{f}$};
     \end{tikzpicture}
     \caption{The core idea of the proof for Cantor-Schr\"{o}der-Bernstein Theorem}
     \label{fig:csb_pf}
@@ -1768,7 +1769,7 @@ We asked the question: why is $\norm\cdot_p$ a norm?
     \begin{tikzpicture}
     \draw[->] (-0.5,0) -- (3,0) node[right] {$t$};
     \draw[->] (0,-0.5) -- (0,3) node[above] {$u$};
-    \draw[fill=base16-eighties-blue!20!base16-eighties-dark] (1.5,2.25) -- (0, 2.25) -- (0, 0) -- (1.5, 0) -- cycle;
+    \draw[fill=be-blue!20!dark] (1.5,2.25) -- (0, 2.25) -- (0, 0) -- (1.5, 0) -- cycle;
     \draw[domain=0:1.73205080756887729352] plot ( {\x},{\x^2} ) node[above] {$u = t^{ p - 1 }$};
     \draw[dotted] (1.5, 2.25) -- (0, 2.25) node[left] {$\beta$};
     \draw[dotted] (1.5, 2.25) -- (1.5, 0) node[below] {$\alpha$};
@@ -2390,19 +2391,19 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
       \node at (7, -.7) {$\frac{7}{9}$};
       \node at (8, -.7) {$\frac{8}{9}$};
 
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (3,0) -- (6,0);
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (1,0) -- (2,0);
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (7,0) -- (8,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (3,0) -- (6,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (1,0) -- (2,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (7,0) -- (8,0);
 
-      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},base16-eighties-red] (0, 0) -- (1, 0);
-      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},base16-eighties-red] (2, 0) -- (3, 0);
-      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},base16-eighties-red] (6, 0) -- (7, 0);
-      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},base16-eighties-red] (8, 0) -- (9, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},be-red] (0, 0) -- (1, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},be-red] (2, 0) -- (3, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},be-red] (6, 0) -- (7, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},be-red] (8, 0) -- (9, 0);
       
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (0.333333,0) -- (0.666667,0);
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (2.333333,0) -- (2.666667,0);
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (6.333333,0) -- (6.666667,0);
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},base16-eighties-blue] (8.333333,0) -- (8.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (0.333333,0) -- (0.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (2.333333,0) -- (2.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (6.333333,0) -- (6.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (8.333333,0) -- (8.666667,0);
     \end{tikzpicture}
     \end{center}
     \caption{Cantor set showing up to $n = 2$, with the excluded interval in $n = 3$ shown.}
@@ -3063,7 +3064,7 @@ Note, however, that $c_{00} \subset \ell_1 \subset c_0$ is not closed. Also $\el
 \begin{defn}[Continuity on a Space]\index{Continuity on a Space}\label{defn:continuity_on_a_space}
   We say that
   \begin{equation*}
-    f : (X, d_X) \to (Y_ d_Y)
+    f : (X, d_X) \to (Y, d_Y)
   \end{equation*}
   is \hlnoteb{continuous} on $X$ if $f$ is continous at each $x_0 \in X$.
   
@@ -3382,9 +3383,9 @@ We proved this in our observation.
 
 % subsubsection completeness_of_ell_p_ (end)
 
-\subsubsection{Completeness of $(C_b(X), \ell_\infty)$}%
-\label{ssub:completeness_of_c_b_x_ell_infty_}
-% subsubsection completeness_of_c_b_x_ell_infty_
+\subsubsection{Completeness of $(C_b(X), \norm\cdot_\infty)$}%
+\label{ssub:completeness_of_c_b_x_norm_cdot_infty}
+% subsubsection completeness_of_c_b_x_norm_cdot_infty
 
 \begin{defn}[Convergence of Functions]\label{defn:convergence_of_functions}
   A sequence of functions $f_n : (X, d_X) \to (Y, d_Y)$ is said to \hldefn{converge pointwise} to some function $f_0 : (X, d_X) \to (Y, d_Y)$ if for each $x_0 \in X$,
@@ -3428,7 +3429,7 @@ We proved this in our observation.
   $\implies f_0$ is continuous at $x_0$.\qed\
 \end{proof}
 
-% subsubsection completeness_of_c_b_x_ell_infty_ (end)
+% subsubsection completeness_of_c_b_x_norm_cdot_infty (end)
 
 % subsection examples_of_complete_spaces_continued (end)
 
@@ -3448,21 +3449,151 @@ We proved this in our observation.
 \label{sub:examples_of_complete_spaces_continued_2}
 % subsection examples_of_complete_spaces_continued_2
 
-\subsubsection{Completeness of $(C_b(X), \ell_p)$ (Continued)}%
-\label{ssub:completeness_of_c_b_x_ell_p_continued}
-% subsubsection completeness_of_c_b_x_ell_p_continued
+\subsubsection{Completeness of $(C_b(X), \norm\cdot_\infty)$ (Continued)}%
+\label{ssub:completeness_of_c_b_x_norm_cdot_infty_continued}
+% subsubsection completeness_of_c_b_x_norm_cdot_infty_continued
 
 \begin{note}
   A normed linear space $V$ is called a \hldefn{Banach space}  if $(V, \norm\cdot)$ is complete with respect to $d_V$.
 \end{note}
 
-\begin{thm}[Completeness for $C_b(X)$]\label{thm:completeness_for_c_b_x_}
-  The space $(C_b(X), \norm\cdot_\infty)$ is Banach (i.e. complete).
+\begin{thm}[\vvimponote\ Completeness for $C_b(X)$]\label{thm:completeness_for_c_b_x_}
+  The space $(C_b(X), \norm\cdot_\infty)$ is Banach (i.e. complete).\marginnote{\hlimpo{This will come out in the final.}}
 \end{thm}
 
-% subsubsection completeness_of_c_b_x_ell_p_continued (end)
+\begin{proof}
+  Let $\{ f_n \} \subset C_b(X)$ be Cauchy.
+  \begin{equation}\tag{$*$}\label{eq:completeness_of_for_c_b_x_eq1}
+    \implies \forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall n, m \geq N_0 \enspace \norm{ f_n - f_m }_\infty < \frac{\epsilon}{2},
+  \end{equation}
+  and
+  \begin{equation*}
+    \forall x \in X \enspace \abs{ f_n(x) - f_m(x) } \leq \norm{ f_n - f_m }_\infty < \frac{\epsilon}{2}.
+  \end{equation*}
+  $\therefore \{ f_n(x) \}$, for every $x \in X$ is Cauchy, and so $\{ f_n (x) \}$ is complete. \\
+  Let $f_0(x) = \lim\limits_{n \to \infty} f_n(x)$, and in particular, $\forall n \geq N_0$, $\forall x \in X$, we have
+  \begin{equation*}
+    \abs{ f_n(x) - f_0(x) } = \lim_{m \to \infty} \abs{ f_n(x) - f_m(x) } \leq \frac{\epsilon}{2} < \epsilon.
+  \end{equation*}
+  So $f_n \to f_0$ uniformly. By \cref{thm:uniformly_convergent_pointwise_continuous_functions_have_a_pointwise_continuous_limit}, $f_0$ is continuous. \\
+  It remains to show that $f_0$ is bounded: we have that $\{ f_n \}$ is bounded. \\
+  Let $M > 0$ such that $\norm{ f_n }_\infty \leq M$ for all $n \in \mathbb{N}$. Let $x \in X$. \\
+  From \eqref{eq:completeness_of_for_c_b_x_eq1}, we can find $n_0 \in \mathbb{N}$ such that $\abs{ f_{n_0}(x) - f_0(x) } \leq 1$. \\
+  $\implies \abs{ f_0(x) } \leq \abs{ f_0(x) - f_{n_0}(x) } + \abs{ f_{n_0} } \leq 1 + M$ \\
+  $\therefore f_0(x) \in C_b(X)$.\qed\
+\end{proof}
+
+\begin{note}
+  Given any set $X$, if $(X, d)$ is a metric space with the discrete metric, then
+  \begin{equation*}
+    \left( C_b(X), \norm\cdot_\infty \right) = \left( \ell_\infty, \norm\cdot_\infty \right).
+  \end{equation*}
+\end{note}
+
+% subsubsection completeness_of_c_b_x_norm_cdot_infty_continued (end)
 
 % subsection examples_of_complete_spaces_continued_2 (end)
+
+\subsection{Characteriztions of Completeness}%
+\label{sub:characteriztions_of_completeness}
+% subsection characteriztions_of_completeness
+
+We shall state the following without proving it, although the proof is straightforward: view $\{ a_n \}$ and $\{ b_n \}$ as increasing and decreasing sequences respectively and use the monotone convergence theorem.
+
+\begin{thm}[Nested Interval Theorem]\index{Nested Interval Theorem}\label{thm:nested_interval_theorem}
+  If $\{ [ a_n, b_n ] \}$ with $[ a_{n + 1}, b_{n + 1} ] \subset [ a_n, b_n ]$, then
+  \begin{equation*}
+    \bigcap_{n = 1}^{\infty} [ a_n, b_n ] \neq \emptyset.
+  \end{equation*}
+\end{thm}
+
+We know that this works for $\mathbb{R}$, but does this work for $(X, d)$? In particular, we conjecture that:
+
+\begin{quotebox}{be-magenta}{light}
+  If $\{ F_n \}$ is a sequence of non-empty closed sets in $(X, d)$, with $F_{n + 1} \susbeteq F_n$, then
+  \begin{equation*}
+    \bigcap_{n = 1}^{\infty} F_n \neq \emptyset.
+  \end{equation*}
+\end{quotebox}
+
+However, this is not true, as shown in the following example.
+
+\begin{eg}
+  Let $X = \mathbb{R}$, and $F_n [ n, \infty )$, and $F_{n + 1} \subsetneq F_n$. Note that $F_n$ is indeed closed since its complement, $(-\infty, n)$, is open. We notice that
+  \begin{equation*}
+    \bigcap_{n = 1}^{\infty} F_n = \emptyset.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Let $X = (0, 1)$, and $F_n \left(0, \frac{1}{n}\right]$, which is closed in $X$, and that $F_{n + 1} \subsetneq F_n$. However, once again, we notice that
+  \begin{equation*}
+    \bigcap_{n = 1}^{\infty} F_n = \emptyset.
+  \end{equation*}
+\end{eg}
+
+Of course, one would ask the question as to why does such a property not hold. The following notion will explain why.
+
+\begin{defn}[Diameter of a Set]\index{Diameter}\label{defn:diameter_of_a_set}
+  Given a subset $A \subset (X, d)$, we define the \hlnoteb{diameter} of $A$ as
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[dashed] (0, 0) circle(2);
+      \draw[dashed,color=be-red] (1.4142135623730950488,1.4142135623730950488) -- (-1.4142135623730950488,-1.4142135623730950488);
+      \node[draw,fill,circle,inner sep=1pt] at (1.4142135623730950488,1.4142135623730950488) {};
+      \node[draw,fill,circle,inner sep=1pt] at (-1.4142135623730950488,-1.4142135623730950488) {};
+      \draw[dashed,color=be-red] (0, 2) -- (0, -2);
+      \node[draw,fill,circle,inner sep=1pt] at (0, 2) {};
+      \node[draw,fill,circle,inner sep=1pt] at (0, -2) {};
+      \draw[dashed,color=be-cyan] (2, 0) -- (0, -2);
+      \draw[dashed,color=be-cyan] (1,1.73205080756887729352) -- (-1.73205080756887729352,-1);
+    \end{tikzpicture}
+    \caption{Intuitive illustration of \cref{defn:diameter_of_a_set}. Red lines are the diameters, as captured by the $\sup$ function. Blue lines are other possible candidates, but none of them can be a supremum.}\label{fig:intuitive_illustration_of_diameter_of_a_set}
+  \end{marginfigure}
+  \begin{equation*}
+    \diam(A) = \sup \{ d(x, y) \mid x, y \in A \}.
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[Diameters of Subsets]\label{propo:diameters_of_subsets}
+  Let $A \subseteq B \subset (X, d)$. Then
+  \begin{enumerate}
+    \item $\diam(A) \leq \diam(B)$;
+    \item $\diam(A) = \diam(\bar{A})$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $A = B$, then there is nothing to proof. Suppose $A \subsetneq B$. Suppose to the contrary that $\diam(A) > \diam(B)$. Let $x_A, y_A \in A$ such that $d(x_A, y_A) = \diam(A)$ and $x_B, y_B \in B$ such that $d(x_B, y_B)$. By our assumption, we have
+      \begin{equation*}
+        d(x_A, y_A) > d(x_B, y_B).
+      \end{equation*}
+      However, $x_A, y_A \in A \subseteq B$, and by definition of a diameter, we have
+      \begin{equation*}
+        d(x_B, y_B) \geq d(x_A, y_A),
+      \end{equation*}
+      which is a contradiction. This proves the statement.
+    \item If $\diam(A) = \infty$, then we must have $\diam(\bar{A}) = \infty$ since $A \subseteq \bar{A}$. Thus WMA $\diam(A) = d < \infty$. Let $x_0, y_0 \in \bar{A}$. Then given any $\epsilon > 0$, by definition of limits, we can find $x_1, y_1 \in A$ such that
+      \begin{equation*}
+        d(x_0, x_1) < \frac{\epsilon}{2} \text{ and } d(y_0, y_1) < \frac{\epsilon}{2}.
+      \end{equation*}
+      Hence
+      \begin{align*}
+        d(x_0, y_0) &\leq d(x_0, x_1) + d(x_1, y_1) + d(y_1, y_0) \\
+                    &< \frac{\epsilon}{2} + d + \frac{\epsilon}{2} = d + \epsilon.
+      \end{align*}
+      Thus $\diam(\bar{A}) \leq d + \epsilon$, for any $\epsilon > 0$. Therefore by the earlier part,
+      \begin{equation*}
+        \diam(\bar{A}) \leq d = \diam(A) \leq \diam(\bar{A}).
+      \end{equation*}
+  \end{enumerate}\qed\
+\end{proof}
+
+With this notion, we have a partial equivalence to the nested interval theorem, of which we shall prove in the next lecture.
+
+% subsection characteriztions_of_completeness (end)
 
 % section completeness_of_metric_spaces_continued_2 (end)
 
