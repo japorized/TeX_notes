@@ -3731,6 +3731,138 @@ We are now ready to prove the following statement.
 
 % chapter lecture_22_nov_02nd (end)
 
+\chapter{Lecture 23 Nov 05th}%
+\label{chp:lecture_23_nov_05th}
+% chapter lecture_23_nov_05th
+
+\section{Completeness of Metric Spaces (Continued 4)}%
+\label{sec:completeness_of_metric_spaces_continued_4}
+% section completeness_of_metric_spaces_continued_4
+
+\subsection{Characterizations of Completeness (Continued 2)}%
+\label{sub:characterizations_of_completeness_continued_2}
+% subsection characterizations_of_completeness_continued_2
+
+\begin{eg}
+  Let
+  \begin{equation*}
+    \phi(x) = \begin{cases}
+      x     & x \in [0, 1] \\
+      2 - x & x \in [1, 2]
+    \end{cases}.
+  \end{equation*}
+  Extend $\phi$ to $\mathbb{R}$ by
+  \begin{equation*}
+    \phi ( x + 2 ) = \phi(x) \quad \text{ for all } x \in \mathbb{R}.
+  \end{equation*}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2,0) -- (2, 0) node[right] {$x$};
+      \draw[->] (0,-0.5) -- (0, 2) node[above] {$\phi(x)$};
+      \draw[-] (-2,0) -- (-1.5, 1) -- (-1, 0) -- (-.5,1) -- (0,0) -- (0.5,1) -- (1, 0) -- (1.5,1) -- (2,0);
+    \end{tikzpicture}
+    \caption{Sawtooth-like graph from $\phi$}\label{fig:sawtooth_like_graph_from_phi_}
+  \end{marginfigure}
+  \noindent
+  Define
+  \begin{equation*}
+    f(x) = \sum_{n=1}^{\infty} \left( \frac{3}{4} \right)^n \phi \left( 4^n x \right).
+  \end{equation*}
+  \begin{figure}
+    \centering
+    \includegraphics[width=8cm]{weierstrass.png}
+    \caption{Function of $f$ as generated on Desmos. See it \href{https://www.desmos.com/calculator/rj9r0x5jyu}{live}.}\label{fig:function_of_f_as_generated_on_desmos}
+    \setfloatalignment{b}% forces caption to be bottom-aligned
+  \end{figure}
+
+  \cref{fig:function_of_f_as_generated_on_desmos} is a simplified graph of $f$, drawn using the online tool \href{https://www.desmos.com}{Desmos}.
+
+  It is clear that $\phi \in C_b(\mathbb{R})$, and $\norm{ \phi }_\infty = 1$. Thus
+  \begin{equation*}
+    \sum_{n=1}^{\infty} \norm{ \left( \frac{3}{4} \right)^n \phi \left( 4^n x \right)}_\infty = \sum_{n=1}^{\infty} \left( \frac{3}{4} \right)^n < \infty,
+  \end{equation*}
+  and so
+  \begin{equation*}
+    f(x) = \lim_{L \to \infty} \sum_{n=1}^{L} \left( \frac{3}{4} \right)^n \phi \left( 4^n x \right) = \lim_{L \to \infty} S_L(x),
+  \end{equation*}
+  uniformly so. Since the partial sums are continuous, $f \in C_b(\mathbb{R})$.
+
+  However, $f$ is not \hlnotea{differentiable}. Let $x \in \mathbb{R}$. For each $m \in \mathbb{N}$, we can find $k \in \mathbb{Z}$ such that
+  \begin{equation*}
+    k \leq 4^m x \leq k + 1.
+  \end{equation*}
+  Let
+  \begin{equation*}
+    p_m = \frac{k}{4^m} \text{ and } q_m = \frac{k + 1}{4^m},
+  \end{equation*}
+  and for any $n \in \mathbb{N}$,
+  \begin{equation*}
+    \alpha = 4^n p_m = 4^{n - m} k \text{ and } \beta = 4^n q_m = 4^{ n - m } ( k + 1 ).
+  \end{equation*}
+  Now
+  \begin{itemize}
+    \item if $n > m$, then since $\alpha$ and $\beta$ differ by an even integer, $\abs{ \phi ( \alpha ) - \phi ( \beta ) } = 0$;
+    \item if $n = m$, then $\alpha$ and $\beta$ differs by $1$, and so $\abs{ \phi(\alpha) - \phi(\beta) } = 1$;
+    \item if $n < m$, then there are no integers between $\alpha$ and $\beta$, and so
+      \begin{equation*}
+        \abs{ \phi(\alpha) - \phi(\beta) } = \abs{ 4^n p_m - 4^n q_m } \footnotemark = \abs{ 4^{n - m} k - 4^{n - m} ( k + 1 ) } = 4^{n - m}.
+      \end{equation*}
+      \footnotetext{Note that if we have $1 \leq \alpha, \beta \leq 2$, we still get the same formula.}
+  \end{itemize}
+
+  For large enough $m$, consider
+  \begin{align}
+    \abs{ f\left( p_m \right) - f \left( q_m \right) }
+      & = \abs{ \sum_{n=1}^{\infty} \left( \frac{3}{4} \right)^n \left( \phi \left( 4^n p_m \right) - \phi \left( 4^n q_m \right) \right) } \nonumber \\
+      &= \abs{ \sum_{n=1}^{m} \left( \frac{3}{4} \right)^n \left( \phi \left( 4^n p_m \right) - \phi \left( 4^n q_m \right) \right) } \label{eq:weierstrass_fn_eq1} \\
+      &\geq \abs{ \left( \frac{3}{4} \right)^n - \sum_{n=1}^{m - 1} \left( \frac{3}{4} \right)^n \abs{ \phi \left( 4^n p_m \right) - \phi \left( 4^n q_m \right) } } \label{eq:weierstrass_fn_eq2} \\
+      &= \abs{ \left( \frac{3}{4} \right)^n - \sum_{n=1}^{m - 1} \left( \frac{3}{4} \right)^n 4^{n - m} } \label{eq:weierstrass_fn_eq3} \\
+      &= \abs{ \left( \frac{3}{4} \right)^n - \frac{1}{4^m} \sum_{n=1}^{m - 1} 3^n } \nonumber \\
+      &= \abs{ \left( \frac{3}{4} \right)^n - \frac{1}{4^m} \left[ \frac{3^m - 1}{2} \right] } \label{eq:weierstrass_fn_eq4} \\
+      &= \frac{1}{4^m} \left[ \frac{3^m + 1}{2} \right] > \frac{1}{2} \cdot \left( \frac{3}{4} \right)^m \nonumber
+  \end{align}
+  where we note that
+  \begin{itemize}
+    \item[\eqref{eq:weierstrass_fn_eq1}] terms after $m$ are eliminated as they are $0$ as argued previously;
+    \item[\eqref{eq:weierstrass_fn_eq2}] by the reverse Triangle ineq. and the case where $n = m$;
+    \item[\eqref{eq:weierstrass_fn_eq3}] using the argument for when $n < m$;
+    \item[\eqref{eq:weierstrass_fn_eq4}] using the formula for a finite geometric sum.
+  \end{itemize}
+  Hence we observe that
+  \begin{equation*}
+    \frac{\abs{ f(p_m) - f(q_m) }}{\abs{ p_m - q_m }} > 4^m \cdot \frac{3^m}{2 \cdot 4^m} = \frac{3^m}{2}.
+  \end{equation*}
+  Now if $p_m = x$, then
+  \begin{equation*}
+    \frac{\abs{ f(x) - f(q_m) }}{\abs{ x - q_m }} > \frac{3^m}{2}.
+  \end{equation*}
+  If $p_m \neq x$, then
+  \begin{align*}
+    \frac{3^m}{2} &< \frac{\abs{ f(p_m) - f(q_m) }}{\abs{ p_m - q_m }} \leq \frac{\abs{ f(p_m) - f(x) } + \abs{ f(x) - f(q_m) }}{\abs{ p_m - q_m }} \\
+                  &\leq \frac{\abs{ f(p_m) - f(x) }}{\abs{ p_m - x }} + \frac{\abs{ f(x) - f(q_m) }}{\abs{ x - q_m }},
+  \end{align*}
+  which implies that either
+  \begin{equation*}
+    \frac{\abs{ f(x) - f(q_m) }}{\abs{ x - q_m }} > \frac{3^m}{2},
+  \end{equation*}
+  or
+  \begin{equation*}
+    \frac{\abs{ f(p_m) - f(x) }}{\abs{ p_m - x }} > \frac{3^m}{2}.
+  \end{equation*}
+  Then for any sequence $\{ t_m \}$ such that $t_m \to x$, and $t_m \neq x$, we have that
+  \begin{equation*}
+    \frac{\abs{ f(x) - f(t_m) }}{\abs{ x - t_m }} \geq \frac{3^m}{4} \to \infty
+  \end{equation*}
+  as $m \to \infty$. Thus the function $f$ is not differentiable at any $x$.
+\end{eg}
+
+% subsection characterizations_of_completeness_continued_2 (end)
+
+% section completeness_of_metric_spaces_continued_4 (end)
+
+% chapter lecture_23_nov_05th (end)
+
 \appendix
 
 \chapter{Useful Theorems from Earlier Calculus}%
