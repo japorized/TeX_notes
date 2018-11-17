@@ -1,4 +1,4 @@
-#!/usr/bin/env dash
+#!/usr/bin/env bash
 
 texmfhome=$(kpsewhich --var-value=TEXMFHOME)
 cd $(dirname "${0}") > /dev/null
@@ -29,10 +29,12 @@ else
   destination : $texmfhome/tex/latex"
   read -p "Overwrite? (yN) " overwrite
   case $overwrite in
-    [Yy]* ) break ;;
+    [Yy]* ) ;;
     * ) echo "Script terminated" ; exit 0 ;;
   esac
 fi
 
-ln -sf $texnotesdir/tex-common/* $texmfhome/tex/latex/
+for f in $texnotesdir/tex-common/*; do
+  ln -sf "$f" $texmfhome/tex/latex/ ;
+done
 echo "[~] symlinks with files in $texnotesdir/tex-common/ established"

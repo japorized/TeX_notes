@@ -3510,7 +3510,7 @@ We shall state the following without proving it, although the proof is straightf
 We know that this works for $\mathbb{R}$, but does this work for $(X, d)$? In particular, we conjecture that:
 
 \begin{quotebox}{be-magenta}{light}
-  If $\{ F_n \}$ is a sequence of non-empty closed sets in $(X, d)$, with $F_{n + 1} \susbeteq F_n$, then
+  If $\{ F_n \}$ is a sequence of non-empty closed sets in $(X, d)$, with $F_{n + 1} \subseteq F_n$, then
   \begin{equation*}
     \bigcap_{n = 1}^{\infty} F_n \neq \emptyset.
   \end{equation*}
@@ -3598,6 +3598,138 @@ With this notion, we have a partial equivalence to the nested interval theorem, 
 % section completeness_of_metric_spaces_continued_2 (end)
 
 % chapter lecture_21_oct_31st (end)
+
+\chapter{Lecture 22 Nov 02nd}%
+\label{chp:lecture_22_nov_02nd}
+% chapter lecture_22_nov_02nd
+
+\section{Completeness of Metric Spaces (Continued 3)}%
+\label{sec:completeness_of_metric_spaces_continued_3}
+% section completeness_of_metric_spaces_continued_3
+
+\subsection{Characterizations of Completeness (Continued)}%
+\label{sub:characterizations_of_completeness_continued}
+% subsection characterizations_of_completeness_continued
+
+We are now ready to prove the following statement.
+
+\begin{thm}[Cantor's Intersection Principle]\index{Cantor's Intersection Principle}\label{thm:cantor_s_intersection_principle}
+  Let $(X, d)$ be a metric space. TFAE:
+  \begin{enumerate}
+    \item $(X, d)$ is complete.
+    \item If $\{ F_n \}$ is a sequence of non-empty closed subsets such that $F_{n + 1} \subset F_n$ for all $n \in \mathbb{N}$, and if $\lim\limits_{n \to \infty} \diam(F_n) = 0$, then
+      \begin{equation*}
+        \bigcap_{n = 1}^{\infty} F_n \neq \emptyset.
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{$(1) \implies (2)$}: \sidenote{Since we have a sequence of non-empty closed subsets, we can, by using \cref{axiom:zermelo_s_axiom_of_choice}, form a sequence of elements in $X$ from each of the $F_n$'s. By proving that this sequence of elements is Cauchy, we obtain a limit point from the assumption that $X$ is complete. From there, it remains to show that the limit point lives in all of the $F_n$'s.}For each $n \in \mathbb{N}$, pick $x_n \in F_n$. Let $\{ x_n \}_{n = 1}^{\infty}$ be a sequence formed from these $x_n$'s. \\
+  By the assumption that $\lim_{n \to \infty} \diam(F_n) = 0$, we have that
+  \begin{equation*}
+    \forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \diam \left( F_{N_0} \right) < \epsilon.
+  \end{equation*}
+  In particular, for $n, m \geq N_0$, we have that $x_n, x_m \in F_{N_0}$, as $F_n, F_m \subset F_{N_0}$, and so
+  \begin{equation*}
+    d(x_n, x_m) \leq \diam \left( F_{N_0} \right) < \epsilon.
+  \end{equation*}
+  Thus $\{ x_n \}$ is Cauchy. By assumption that $(X, d)$ is complete, $x_n \to x_0 \in X$. Thus $\exists N_1 \in \mathbb{N}$ such that $\forall n \geq N_1$, $d(x_n, x_0) < \epsilon$. Thus, for any such $n$, since $F_{n + 1} \subset F_n$, $\{ x_n, x_{n + 1}, x_{n + 2}, \ldots \} \subset F_n$, and the sequence converges to $x_0$. Since $F_n$ is closed, we must have $x_0 \in F_n$. This forces $x_0 \in F_n$ for every $n \in \mathbb{N}$. This completes $(\implies)$.
+
+  \noindent\hlbnoted{$(2) \implies (1)$}: Let $\{ x_n \} \subset X$ be Cauchy. Let $F_n = \{ x_n, x_{n + 1}, x_{n + 2}, \ldots \}$. We have that $F_n$ is closed: given any $y \notin F_n$, we can pick $\delta = \frac{1}{2} \min \{ d(x_i, x_j) : n \leq i < j \}$ and we would have that $B(y, \delta) \cap F_n = \emptyset$. \\
+  Note that $F_{n + 1} \subset F_n$. \\
+  $\because \{ x_n \}$ is Cauchy, $\forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall n, m \geq N_0 \enspace d(x_n, x_m) < \frac{\epsilon}{2}$.
+  Consequently,
+  \begin{equation*}
+    \diam\left( \{ x_{N_0}, x_{N_0 + 1}, \ldots \right) = \diam\left( F_{N_0} \right) \leq \frac{\epsilon}{2} < \epsilon.
+  \end{equation*}
+  $\therefore \diam(F_n) \to 0$, which, along with assumption, implies that\sidenote{Note that the intersection can only contain one element, since $\diam(F_n) \to 0$.}
+  \begin{equation*}
+    \bigcap_{n=1}^{\infty} F_n = \{ x_0 \}.
+  \end{equation*}
+  Also, since $\diam(F_n) \to 0$, we have that for any $k > 0$, $F_{i_k} \subseteq B \left( x_0, \frac{1}{k} \right)$ \sidenote{Otherwise, $x_0$ cannot be a limit point.}. This implies that for each $k$, $B \left( x_0, \frac{1}{k} \right)$ contains the tail of the sequence $\{ x_n \}$. Then, inductively so, we have
+  \begin{align*}
+    k = 1 &\implies \exists n_1 > 0 \enspace x_{n_1} \in B \left( x_0, 1 \right) \\
+    k = 2 &\implies \exists n_2 > 0 \enspace x_{n_2} \in B \left( x_0, \frac{1}{2} \right) \\
+          &\vdots \\
+    k = m &\implies \exists n_m > 0 \enspace x_{n_m} \in B \left( x_0, \frac{1}{m} \right) \\
+          &\vdots
+  \end{align*}
+  $\therefore x_{n_m} \to x_0$. \\
+  Then since $\{ x_n \}$ is Cauchy, and $\{ x_{n_m} \}$ is a subsequence of $\{ x_n \}$, we have $x_n \to x_0$.\qed\
+\end{proof}
+
+\begin{defn}[Formal Sum]\index{Formal Sum}\label{defn:formal_sum}
+  Let $(X, \norm\cdot)$ be a normed linear space. A series in $X$ is called a \hlnoteb{formal sum}, expressed as
+  \begin{equation}\label{eq:formal_sum}
+    \sum_{n=1}^{\infty} x_n = x_1 + x_2 + \hdots + x_n + \hdots ,
+  \end{equation}
+  where $\{ x_n \} \subseteq X$. For each $k \in \mathbb{N}$, the $k$\textsuperscript{th} \hldefn{partial sum} of \cref{eq:formal_sum} is
+  \begin{equation*}
+    S_k = \sum_{n=1}^{k} x_n = x_1 + x_2 + \hdots + x_k.
+  \end{equation*}
+  We say that $\sum_{n=1}^{\infty} x_n$ converges in $(X, \norm\cdot)$ if $\{ S_k \}_{k = 1}^{\infty}$ converges. In this case, we write
+  \begin{equation*}
+    \sum_{n=1}^{\infty} = \lim_{k \to \infty} S_k.
+  \end{equation*}
+  Otherwise, $\sum_{n=1}^{\infty} x_n$ is said to diverge.
+\end{defn}
+
+\begin{thm}[\vimponote\ Weierstrass M-test]\index{Weierstrass M-test}\label{thm:weierstrass_m_test}
+  Let $(X, \norm\cdot)$ be a normed linear space. TFAE:
+  \begin{enumerate}
+    \item $(X, \norm\cdot)$ is complete, i.e. $(X, \norm\cdot)$ is a Banach space.
+    \item If $\sum_{n=1}^{\infty} x_n$ is such that $\sum_{n=1}^{\infty} \norm{x_n}$ converges, then $\sum_{n=1}^{\infty} x_n$ converges.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{$(1) \implies (2)$}: Given $\sum_{n=1}^{\infty} x_n$, let
+  \begin{equation*}
+    S_k = \sum_{n=1}^{k} x_n \text{ and } T_k = \sum_{n=1}^{k} \norm{ x_n }.
+  \end{equation*}
+  Suppose $T_k$ converges. Then in particular, $\{ T_k \}$ is Cauchy. Thus
+  \begin{gather*}
+    \forall \epsilon > 0 \; \exists N_0 \in \mathbb{N} \; \forall n > m \geq N_0 \\
+    T_n - T_m = \sum_{k=1}^{n} \norm{ x_k } - \sum_{k=1}^{m} \norm{ x_k } = \sum_{k = m + 1}^{n} \norm{ x_k } < \epsilon.
+  \end{gather*}
+  $\therefore N_0 \leq m < n \implies$
+  \begin{align*}
+    \norm{ S_n - S_m } &= \norm{ \sum_{k=1}^{n} x_k - \sum_{k=1}^{m} x_k } = \norm{ \sum_{k=m + 1}^{n} x_k } \\
+                       &\leq \sum_{k=m + 1}^{n} \norm{ x_k } \quad \because \text{ Triangle Ineq. } \\
+                       &< \epsilon.
+  \end{align*}
+  $\therefore \{ S_k \}$ is Cauchy, and since $(X, \norm\cdot)$ is complete, $\{ S_k \}$ is convergent.
+
+  \noindent
+  \hlbnoted{$(2) \implies (1)$}: Suppose $\{ x_n \}$ is Cauchy in $(X, \norm\cdot)$. We can find an increasing sequence
+  \begin{equation*}
+    N_0 < n_1 < n_2 < \hdots < n_j < \hdots \in \mathbb{N},
+  \end{equation*}
+  for some $N_0 \in \mathbb{N}$ such that
+  \begin{equation*}
+    \norm{ x_{n_j} - x-{n_{ j + 1 }} } < \frac{1}{2^j}.
+  \end{equation*}
+  Then by the \hlnotea{infinite geometric series},
+  \begin{equation*}
+    \sum_{j=1}^{\infty} \norm{ x_{n_j} - x_{n_{j + 1}} } \leq \sum_{j=1}^{\infty} \frac{1}{2^j} < \infty.
+  \end{equation*}
+  $\therefore \sum\limits_{j=1}^{\infty} ( x_{n_j} - x_{n_{j + 1}} )$ converges to some $x_0 \in X$. In particular, notice that the partial sums are \hlnotea{telescoping series}:
+  \begin{equation*}
+    S_k = \sum_{j=1}^{k} \left( x_{n_j} - x_{n_{j + 1}} \right) = x_{n_1} - x_{n_{k + 1}} \to x_0.
+  \end{equation*}
+  It follows that as $k \to \infty$,
+  \begin{equation*}
+    x_{n_{k + 1}} \to x_{n_1} - x_0.
+  \end{equation*}
+  We have that the subsequence $\{ x_{n_k} \}$ of our Cauchy sequence $\{ x_n \}$ has a limit point.\qed\
+\end{proof}
+
+% subsection characterizations_of_completeness_continued (end)
+
+% section completeness_of_metric_spaces_continued_3 (end)
+
+% chapter lecture_22_nov_02nd (end)
 
 \appendix
 
