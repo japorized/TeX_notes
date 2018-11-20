@@ -20,7 +20,7 @@ then
   echo "Process will symlink files from $texnotesdir/tex-common"
   read -p "$texmfhome does not exist. mkdir? (yN) " yn
   case $yn in
-      [Yy]* ) mkdir -p $texmfhome/tex/latex; echo "[+] $texmfhome created" ; break;;
+      [Yy]* ) mkdir -p $texmfhome/tex/latex; echo "[+] $texmfhome created" ;;
       * ) echo "Script terminated" ; exit 0;;
   esac
 else

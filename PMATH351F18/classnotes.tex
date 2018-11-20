@@ -2591,7 +2591,7 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
 \end{remark}
 
 \begin{defn}[Dense]\index{Dense}\label{defn:dense}
-  $A$ is \hlnoteb{dense} in $(X, d)$ if $\bar{A} = X$.
+  $A$ is \hlnoteb{dense} in $(X, d)$ if $\bar{A} = X$. Equivalently, $A$ is dense if for every open set $W \subset X$, $W \cap A \neq \emptyset$.
 \end{defn}
 
 \newthought{Question}: Is $(\ell_1, \norm\cdot_1)$ separable? Is $(\ell_\infty, \norm\cdot_\infty)$ separable?
@@ -4216,6 +4216,200 @@ A natural question to ask is:
 % section baire_category_theorem (end)
 
 % chapter lecture_25_nov_09th (end)
+
+\chapter{Lecture 26 Nov 12th}%
+\label{chp:lecture_26_nov_12th}
+% chapter lecture_26_nov_12th
+
+\section{Baire Category Theorem (Continued)}%
+\label{sec:baire_category_theorem_continued}
+% section baire_category_theorem_continued
+
+\begin{defn}[$F_\sigma$ Sets]\index{$F_\sigma$ Sets}\label{defn:_f_sigma_sets}
+  Let $(X, d)$ be a metric space. We say that $A \subseteq X$ is \hlnoteb{$F_\sigma$} if there exists a sequence $\{ F_n \}_{n = 1}^{\infty}$ of closed sets with
+  \begin{equation*}
+    A = \bigcup_{n=1}^{\infty} F_n.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[$G_\delta$ Sets]\index{$G_\delta$ Sets}\label{defn:_g_delta_sets}
+  Let $(X, d)$ be a metric space. We say that $A \subseteq X$ is \hlnoteb{$G_\delta$} if there exists a sequence $\{ U_n \}_{n = 1}^{\infty}$ of open sets such that
+  \begin{equation*}
+    A = \bigcap_{n=1}^{\infty} U_n.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  The interval $[0, 1) \subset \mathbb{R}$ is $G_\delta$, since
+  \begin{equation*}
+    [0, 1) = \bigcap_{n=1}^{\infty} \left( \frac{1}{n}, 1 \right)
+  \end{equation*}
+\end{eg}
+
+\begin{remark}
+  $A$ is $F_\sigma$ iff $A^C$ is $G_\delta$.
+\end{remark}
+
+Recall the definition of a \hyperref[defn:dense]{dense set}. We have the following complementary definition.
+
+\begin{defn}[Nowhere Dense]\index{Nowhere Dense}\label{defn:nowhere_dense}
+  Given a metric space $(X, d)$, we say that $A \subseteq X$ is \hlnoteb{nowhere dense} if $\bar{A}^\circ = \emptyset$.
+\end{defn}
+
+\begin{remark}
+  The above definition is equivalent to saying that $\bar{A}^C$ is dense.
+\end{remark}
+
+\begin{defn}[First Category]\index{First Category}\label{defn:first_category}
+  We say that a set $A$ is of \hlnoteb{first category} if
+  \begin{equation*}
+    A = \bigcup_{n=1}^{\infty} A_n
+  \end{equation*}
+  where each $A_n$ is nowhere dense.
+\end{defn}
+
+\begin{defn}[Second Category]\index{Second Category}\label{defn:second_category}
+  We say that $A$ is of \hlnoteb{second category} is $A$ is not of first category.
+\end{defn}
+
+\begin{remark}
+  We colloquially refer to a set of first category as being \hlnotea{topologically thin}, and a set of second category as being \hlnotea{topologically thick}.
+\end{remark}
+
+\begin{defn}[Residual]\index{Residual}\label{defn:residual}
+  We say that $A \subseteq (X, d)$ is a \hlnoteb{residual} in $X$ if $A^C$ is of first category.
+\end{defn}
+
+\begin{eg}
+  If $F \subset (X, d)$ is closed, then $f$ is $G_\delta$. In particular, notice that
+  \begin{equation*}
+    F = \bigcap_{n=1}^{\infty} \left( \bigcup_{x \in F} B \left( x, \frac{1}{n} \right) \right),
+  \end{equation*}
+  where we note that each of the $B \left( x, \frac{1}{n} \right)$ is $F_\delta$.
+\end{eg}
+
+\begin{thm}[Baire Category Theorem I]\index{Baire Category Theorem I}\label{thm:baire_category_theorem_i}
+  Let $(X, d)$ be complete. Let $\{ U_n \}_{n = 1}^{\infty}$ be a countable collection of dense open sets. Then\sidenote{Note that we have ourselves a dense $G_\delta$ set.}
+  \begin{equation*}
+    \bigcap_{n=1}^{\infty} U_n \text{ is dense in } X.
+  \end{equation*}
+  In particular, it is not empty.
+\end{thm}
+
+\begin{proof}
+  Assume that $\{ U_n \}_{n = 1}^{\infty}$ is a sequence of open and dense sets. Let $W \subset X$ be open and non-empty. Since $U_1$ is dense, we have that $W \cap U_1 \neq \emptyset$. Then $\exists x_1 \in W \cap U_1$ such that $\exists 0 < r_1 \leq 1$ so that
+  \begin{equation*}
+    B(x_1, r_1) \subset B(x_1, r_1) \subset W \cap U_1.
+  \end{equation*}
+  Similarly,
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw (0, 0) circle(1) node[above,left] at (-0.5, 1) {$W$};
+      \draw (0.5,-0.5) circle(1) node[below,right] at (1.5, -0.5) {$U_1$};
+      \draw[dashed] (0.3,-0.3) circle(0.5) node {$B(x_1, r_1)$};
+    \end{tikzpicture}
+    \caption{Visualization of proof for Baire Category Theorem I}\label{fig:visualization_of_proof_for_baire_category_theorem_i}
+  \end{marginfigure}
+  we can find $x_2 \in X$ such that for some $0 < r_2 \leq \frac{1}{2}$,
+  \begin{equation*}
+    B ( x_2 , r_2 ) \subset B [ x_2, r ] \subset B(x_1, r_1) \cap U_2.
+  \end{equation*}
+  We can proceed recursively and find, for $n \in \mathbb{N}$, an $x_{n} \in X$ with $0 < r_{n} \leq \frac{1}{n}$ such that
+  \begin{equation*}
+    B ( x_n, r_n ) \subset B [ x_n, r_n ] \subset B ( x_{n - 1}, r_{n - 1} ) \cap U_{n}.
+  \end{equation*}
+  Now since $(X, d)$ is complete, $\{ \diam( B [x_n, r_n] ) \} = \{ r_n \}$ is a decreasing sequence such that $r_n \to 0$, by \hyperref[thm:cantor_s_intersection_principle]{Cantor's Intersection Principle},
+  \begin{equation*}
+    \exists x_0 \in \bigcap_{n=1}^{\infty} B[x_n, r_n].
+  \end{equation*}
+  Then by this construction, we must have $x_0 \in B[x_1, r_1] \subset W \cap U_1$, and $x_0 \in B[ x_n, r_n ] \subset U_n$ for each $n \in \mathbb{N}$. Thus
+  \begin{equation*}
+    x_0 \in W \cap \left( \bigcap_{n=1}^{\infty} U_n \right).
+  \end{equation*}\qed\
+\end{proof}
+
+Note that the statement does not hold if we have an uncountable collection of dense open sets.
+
+\begin{eg}
+  Consider $U_x = \mathbb{R} \setminus \{ x \}$, where $x \in \mathbb{R}$. This is clearly a dense and open set. Notice, however, that
+  \begin{equation*}
+    \bigcap_{x \in \mathbb{R}} U_x = \emptyset.
+  \end{equation*}
+\end{eg}
+
+\begin{remark}
+  \cref{thm:baire_category_theorem_i} shows that given a countable sequence $\{ U_n \}_{n = 1}^{\infty}$ of open dense sets of $X$, the countable intersection of these sets, $\bigcap_{n=1}^{\infty} U_n$, is a dense $G_\delta$.
+\end{remark}
+
+\begin{thm}[\imponote\ Baire Category Theorem II]\index{Baire Category Theorem II}\label{thm:baire_category_theorem_ii}
+  If $(X, d)$ is complete, then $X$ is of second category.
+\end{thm}
+
+\begin{proof}
+  Suppose to the contrary that $X = \bigcup_{n=1}^{\infty} A_n$ where each $A_n$ is nowhere dense. Note that by definition of being nowhere dense, we have that $A_n = \bar{A_n}$. Let $U_n = \bar{A_n}^C$, which would then be open and dense. However, by \hyperref[thm:de_morgan_s_laws]{De Morgan's Laws}, we have that
+  \begin{equation*}
+    \left( \bigcap_{n=1}^{\infty} U_n \right)^C = \bigcup_{n=1}^{\infty} U_n^C = \bigcup_{n=1}^{\infty} \bar{A_n} = X
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \bigcup_{n=1}^{\infty} U_n = \emptyset,
+  \end{equation*}
+  which is impossible by \cref{thm:baire_category_theorem_i}.\qed\
+\end{proof}
+
+\begin{eg}
+  $\mathbb{R}$ and $\mathbb{R} \setminus \mathbb{Q}$ are of second category. In fact, $\mathbb{R} \setminus \mathbb{Q}$ is a residual, since $\mathbb{Q}$ is of first category.
+\end{eg}
+
+\newthought{Question}: Is
+\begin{equation*}
+  Q = \bigcap_{k=1}^{\infty} \bigcup_{n=1}^{\infty} \left( r_n - \frac{1}{2^{k + n}}, r_n + \frac{1}{2^{k + n}} \right),
+\end{equation*}
+where $Q = \{ r_1, r_2, \ldots \}$, $\mathbb{Q}$? No. Notice that this is fairly close, but it is not.\sidenote{It should be $\mathbb{R}$?}
+
+\begin{crly}[$\mathbb{Q}$ is not $G_\delta$]\label{crly:_q_is_not_g_delta_}
+  $\mathbb{Q}$ is not a $G_\delta$ set.
+\end{crly}
+
+\begin{proof}
+  Suppose to the contrary that $\mathbb{Q}$ is $G_\delta$, i.e. there exists a countable sequence of open sets $\{ U_n \}$ such that
+  \begin{equation*}
+    \mathbb{Q} = \bigcap_{n=1}^{\infty} U_n.
+  \end{equation*}
+  Let $F_n = U_n^C$. Since $\mathbb{Q}$ is dense, it follows that each of the $U_n$'s is also dense. Thus $F_n$ is nowhere dense and closed.
+
+  Let $\mathbb{Q} = \{ r_1, r_2, \ldots \}$, an enumeration on $\mathbb{Q}$, and $S_n = F_n \cup \{ r_n \}$. Then $S_n$ is closed and nowhere dense. However, we would then have
+  \begin{equation*}
+    \mathbb{R} = \bigcup_{n=1}^{\infty} S_n,
+  \end{equation*}
+  which contradicts the fact that $\mathbb{R}$ is of second category.\qed\
+\end{proof}
+
+Consequently:
+
+\begin{crly}[There are no Functions Discontinuous on all Irrational Numbers]\label{crly:there_are_no_functions_discontinuous_on_all_irrational_numbers}
+  There is no function $f : \mathbb{R} \to \mathbb{R}$ for which $D(f) = \mathbb{R} \setminus \mathbb{Q}$.
+\end{crly}
+
+We are now able to show that for a sequence $\{ f_n \} \subset C[a, b]$ that converges pointwise, the limit function must be continuous at each point on a residual set. We require the following notion:
+
+\begin{defn}[Uniformly Convergent Sequence of Functions on a Point]\label{defn:uniformly_convergent_sequence_of_functions_on_a_point}
+  We say that a sequence of functions $\{ f_n \}$ where,
+  \begin{equation*}
+    f_n : (X, d_X) \to (Y, d_Y),
+  \end{equation*}
+  \hlnoteb{converges uniformly} at $x_0 \in X$ if
+  \begin{gather*}
+    \forall \epsilon > 0 \; \exists \delta > 0 \; \exists N \in \mathbb{N} \; \forall n, m \geq N \\
+    x \in B(x_0, \delta) \implies d_Y(f_n(x), f_m(x)) < \epsilon.
+  \end{gather*}
+\end{defn}
+
+% section baire_category_theorem_continued (end)
+
+% chapter lecture_26_nov_12th (end)
+
 \appendix
 
 \chapter{Useful Theorems from Earlier Calculus}%
