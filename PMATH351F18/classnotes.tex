@@ -4021,6 +4021,201 @@ This is known as an \hlnotea{integral transform}.
 % section banach_contractive_mapping_theorem (end)
 
 % chapter lecture_24_nov_07th (end)
+
+\chapter{Lecture 25 Nov 09th}%
+\label{chp:lecture_25_nov_09th}
+% chapter lecture_25_nov_09th
+
+\section{Banach Contractive Mapping Theorem (Continued)}%
+\label{sec:banach_contractive_mapping_theorem_continued}
+% section banach_contractive_mapping_theorem_continued
+
+\begin{defn}[Lipschitz]\index{Lipschitz}\label{defn:lipschitz}
+  A function $f : (X, d_X) \to (Y, d_Y)$ is said to be Lipschitz if there exists $\alpha \geq 0$ such that $\forall x_1, x_2 \in X$,
+  \begin{equation*}
+    d_Y( f(x_1), f(x_2) ) \leq \alpha d_X(x_1, x_2)
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Contraction]\index{Contraction}\label{defn:contraction}
+  A function $f : X \to Y$ is called a \hlnoteb{contraction} if there exists $0 \leq k < 1$ with
+  \begin{equation*}
+    d_Y( f(x_1), f(x_2) ) \leq k d_X(x_1, x_2)
+  \end{equation*}
+  for all $x_1, x_2 \in X$.
+\end{defn}
+
+\begin{note}
+  Notice that a Lipschitz function is uniformly continuous: choose $\delta = \frac{\epsilon}{\alpha}$.
+\end{note}
+
+\begin{ex}
+  Prove that if $f : [a, b] \to \mathbb{R}$ and $f'$ is continuous, then by the \hlnotea{Extreme Value Theorem} and the \hlnotea{Mean Value Theorem}, $f$ is Lipschitz.
+\end{ex}
+
+\begin{thm}[Banach Contractive Mapping Theorem]\index{Banach Contractive Mapping Theorem}\label{thm:banach_contractive_mapping_theorem}
+  Assume that $(X, d)$ is complete. If $\Gamma : X \to X$ is contractive, then there exists a unique $x_0 \in X$ such that $\Gamma (x_0) = x_0$.
+\end{thm}
+
+\begin{proof}
+  Pick $x_1 \in X$. Then, let
+  \begin{equation*}
+    x_2 = \Gamma(x_1), \, x_3 = \Gamma(x_2), \, \ldots , \, x_{n + 1} = \Gamma(x_n), \, \ldots .
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{Claim}: $\{ x_n \}$ is Cauchy\sidenote{This will CTP since $(X, d)$ is complete, i.e. it will give us a limit point at which $\Gamma$ must converge to, and thus forcing its iteration to be terminated at the limit point due to $\Gamma$ being contractive.}
+
+  Let $k \in \mathbb{R}$ such that $0 < k < 1$, so that we have
+  \begin{equation*}
+    d \left( \Gamma(x), \Gamma(y) \right) \leq k d(x, y)
+  \end{equation*}
+  for any $x, y \in X$. Then
+  \begin{align*}
+    d(x_3, x_2) &= d( \Gamma(x_2), \Gamma(x_1) ) \leq k d(x_2, x_1) \\
+    d(x_4, x_3) &= d( \Gamma(x_3), \Gamma(x_1) ) \leq k d(x_3, x_2) \leq k^2 d(x_2, x_1) \\
+                & \vdots \\
+    d(x_{n + 1}, x_n) &= d( \Gamma(x_{n + 1}), \Gamma(x_n) ) \leq k^{n - 1} d(x_2, x_1) \\
+                      & \vdots
+  \end{align*}
+  Also, notice that if $m > n$, then
+  \begin{align*}
+    d(x_m, x_n) &\leq d(x_m, x_{m - 1}) + d(x_{m - 1}, x_{m - 2}) + \hdots + d(x_{n + 1}, x_n) \\
+                &\leq k^{m - 2} d(x_2, x_1) + k^{m - 3} d(x_2, x_1) + \hdots + k^{n - 1} d(x_2, x_1) \\
+                &= \sum_{j=n-1}^{m-2} k^j d(x_2, x_1) = \frac{k^{n - 1}}{1 - k} d(x_2, x_1).
+  \end{align*}
+  Since $k^{n - 1} \to 0$, we have that $\{ x_n \}$ is Cauchy. Since $(X, d)$ is complete, $\exists x_0 \in X$ such that $x_n \to x_0$.
+
+  In particular, we have that $x_{n + 1} \to x_0$, i.e. $\Gamma(x_n) \to x_0$. Since $\Gamma$ is continuous, we mst have that $\Gamma(x_n) \to \Gamma(x_0)$. Therefore $\Gamma(x_0) = x_0$ as required.
+
+  \hlbnotea{(Uniqueness)} Suppose there exists another point $y_0 \in X$ such that $\Gamma(y_0) = y_0$. Then
+  \begin{equation*}
+    d(x_0, y_0) = d(\Gamma(x_0), \Gamma(y_0)) \leq kd(x_0, y_0),
+  \end{equation*}
+  which implies that $d(x_0, y_0) = 0$.\qed\
+\end{proof}
+
+\begin{eg}
+  Show that the equation
+  \begin{equation*}
+    f_0(x) = e^{x} + \int_{0}^{x} \frac{\sin t}{2}f_0(t) \dif{t}
+  \end{equation*}
+  has a unique solution in $C[0, 1]$.
+\end{eg}
+
+\begin{solution}
+  Define $\Gamma : C[0, 1] \to C[0, 1]$ by
+  \begin{equation*}
+    \Gamma(f)(x) = e^x + \int_{0}^{x} \frac{\sin t}{2} f(t) \dif{t}.
+  \end{equation*}
+  Let $f, g \in C[0, 1]$. We have that
+  \begin{align*}
+    \abs{ \Gamma(f)(x) - \Gamma(g)(x) }
+      &= \abs{ \int_{0}^{x} \frac{\sin t}{2} f(t) \dif{t} - \int_{0}^{x} \frac{\sin t}{2} g(t) \dif{t} } \\
+      &= \abs{ \int_{0}^{x} \frac{\sin t}{2} \left( f(t) - g(t) \right) \dif{t} } \\
+      &\leq \int_{0}^{x} \abs{ \frac{\sin t}{2} } \abs{ f(t) - g(t) } \dif{t} \\
+      &\leq \norm{ f - g }_\infty \int_{0}^{1}  \frac{1}{2} \dif{t} \\
+      &= \frac{1}{2} \norm{ f - g }_\infty
+  \end{align*}
+  Thus $\norm{ \Gamma(f) - \Gamma(g) }_\infty \leq \frac{1}{2} \abs{ f - g }_\infty$. Thus $\Gamma$ is contractive. By \cref{thm:banach_contractive_mapping_theorem}, the unique fixed point is the solution.
+\end{solution}
+
+\begin{eg}
+  Show that the equation
+  \begin{equation}\label{eq:banach_contractive_map_eg2}
+    f(x) = x + \int_{0}^{x} t^2 f(t) \dif{t}
+  \end{equation}
+  has a unique solution.
+\end{eg}
+
+\begin{solution}
+  Let $\Gamma(f)(x) = x + \int_{0}^{x} t^2 f(t) \dif{t}$. Then
+  \begin{align*}
+    \abs{ \Gamma(f)(x) - \Gamma(g)(x) } &= \leq \int_{0}^{1} t^2 \norm{ f - g }_\infty \dif{t}  \\
+                                        &= \frac{1}{3}\norm{ f - g }_\infty.
+  \end{align*}
+  By the Banach Contractive Mapping Theorem, \cref{eq:banach_contractive_map_eg2} has a unique solution. In particular,
+  \begin{align*}
+    f_1(x) &= x \\
+    f_2(x) &= \Gamma(f_1)(x) = x + \int_{0}^{x} t^2 t_1(t) \dif{t} \\
+           &= x + \int_{0}^{x} t^3 \dif{t} = x + \frac{1}{4}x^4 \\
+    f_3(x) &= \Gamma(f_2)(x) = x + \int_{0}^{x} t^2 \left( t + \frac{1}{4} t^4 \right) \dif{t} \\
+           &= x + \int_{0}^{x} t^3 + \frac{1}{4} t^6 \dif{t} = x + \frac{1}{4} x^4 + \frac{1}{4 \cdot 7} x^7 \\
+           &\vdots \\
+    f_n(x) &= \frac{x}{1} + \frac{x^4}{4} + \frac{x^7}{4 \cdot 7} + \hdots + \frac{x^{3n - 2}}{4 \cdot 7 \cdot \hdots \cdot (3n - 2)}
+  \end{align*}
+  and so the limit is
+  \begin{equation*}
+    f_0(x) = \sum_{k=1}^{\infty} \frac{x^{3k - 2}}{4 \cdot 7 \cdot \hdots \cdot (3k - 2)}.
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Other Applications]
+  \begin{enumerate}
+    \item \href{https://en.wikipedia.org/wiki/Newton%27s_method}{Newton's Method}.
+      \item (\hldefn{Picard's Theorem}) Let $f : [a, b] \times \mathbb{R} \to \mathbb{R}$ be Lipschitz in $\mathbb{R}$, i.e. $\exists \alpha \geq 0$ such that
+        \begin{equation*}
+          \abs{ f(t, y_1) - f(t, y_2) } \leq \alpha \abs{ _1 - y_2 }
+        \end{equation*}
+        for any $y_1, y_2 \in \mathbb{R}$. If $y_0 \in \mathbb{R}$, then there exists a unique $\phi \in C[a, b]$ such that
+        \begin{equation*}
+          \phi'(t) = f(t, \phi(t))
+        \end{equation*}
+        for all $t \in (a, b)$ with $\phi(a) = y_0$.
+  \end{enumerate}
+\end{eg}
+
+% section banach_contractive_mapping_theorem_continued (end)
+
+\section{Baire Category Theorem}%
+\label{sec:baire_category_theorem}
+% section baire_category_theorem
+
+\begin{eg}[Dirchlet Function]
+  Consider the function
+  \begin{equation*}
+    f(x) = \begin{cases}
+      0           & x \in \mathbb{R} \setminus \mathbb{Q}\\
+      1           & x = 0 \\
+      \frac{1}{m} & x \in \mathbb{Q}
+    \end{cases}
+  \end{equation*}
+  The function $g$ is continuous at each $x \in \mathbb{R} \setminus \mathbb{Q}$, and discontinuous otherwise.
+\end{eg}
+
+\newthought{Question}: Does there exist a function function $f$ such that $f$ is continuous on $\mathbb{Q}$ but not on $\mathbb{R} \setminus \mathbb{Q}$? \hlimpo{No!}
+
+\begin{defn}[Points of Discontinuity]\index{Points of Discontinuity}\label{defn:points_of_discontinuity}
+  Let $f : X \to \mathbb{R}$. For each $n \in \mathbb{N}$, the \hlnoteb{points of discontinuity} is a set defined as
+  \begin{equation*}
+    D_N(f) = \left\{ x_0 \in X : \forall \delta > 0 \; \exists x_1, y_1 \in B(x_0, \delta) \; \abs{ f(x_1) - f(y_1) } \geq \frac{1}{n} \right\}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  \begin{enumerate}
+    \item For each $n \in \mathbb{N}$, $D_n$ is closed.
+    \item $f$ is continuous at $x_0 \iff x_0 \notin \bigcap_{n = 1}^{\infty} D_n$.
+  \end{enumerate}
+\end{note}
+
+\begin{remark}
+  Recall the definition of an $F_\sigma$-set from the midterm (definition also provided in next lecture).
+
+  The set
+  \begin{equation*}
+    D(f) = \{ x_0 \in X \mid f \text{ is discontinuous at } x_0 \} = \bigcap_{n = 1}^{\infty} D_n(f)
+  \end{equation*}
+  is an $F_\sigma$-set.
+\end{remark}
+
+A natural question to ask is:
+
+\newthought{Question}: Is $\mathbb{R} \setminus \mathbb{Q}$ an $F_\sigma$-set?
+
+% section baire_category_theorem (end)
+
+% chapter lecture_25_nov_09th (end)
 \appendix
 
 \chapter{Useful Theorems from Earlier Calculus}%
