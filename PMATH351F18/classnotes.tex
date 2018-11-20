@@ -3863,6 +3863,164 @@ We are now ready to prove the following statement.
 
 % chapter lecture_23_nov_05th (end)
 
+\chapter{Lecture 24 Nov 07th}%
+\label{chp:lecture_24_nov_07th}
+% chapter lecture_24_nov_07th
+
+\section{Completions of Metric Spaces}%
+\label{sec:completions_of_metric_spaces}
+% section completions_of_metric_spaces
+
+\begin{defn}[Isometry]\index{Isometry}\label{defn:isometry}
+  A map $\phi : (X, d_X) \to (Y, d_Y)$ is called an \hlnoteb{isometry} if
+  \begin{equation*}
+    d_Y( \phi(x_1), \phi(x_2) ) = d_X(x_1, x_2).
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Completion]\index{Completion}\label{defn:completion}
+  A \hlnoteb{completion} of a metric space $(X, d)$ is a pair $\left( \left(Y, d_Y\right), \phi \right)$ where $\left(Y, d_Y\right)$ is a complete metric space, $\phi : X \to Y$ is an isometry, and $\bar{\phi(X)} = Y$.
+\end{defn}
+
+\begin{propo}[Subsets of Complete Spaces are Complete if they are Closed]\label{propo:subsets_of_complete_spaces_are_complete_if_they_are_closed}
+  Let $(X, d)$ be a complete metric space. Let $A \subset X$. Then $(A, d_A)$ is complete iff $A$ is closed.
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$(\implies)$}: $(A, d_A)$ is complete \\
+  $\implies \{ x_n \} \subset A$ Cauchy $\implies x_n \to x_0$
+  $\implies x_0 \in A \implies \Lim(A) \subseteq A$ \\
+  $\implies A$ is closed.
+
+  \noindent
+  \hlbnoted{$(\impliedby)$} Let $\{ x_n \} \subset A$ be Cauchy in $(A, d_A)$ \\
+  $\implies \{ x_n \}$ is Cauchy in $(X, d)$ \\
+  $\implies x_n \to x_0 \in X$ \\
+  $\implies (\because A \text{ is closed }) x_0 \in A$ \\
+  $\implies (A, d_A)$ is complete.\qed\
+\end{proof}
+
+A natural question arises: does every space have a completion?
+
+To answer this, we need the following concept:
+
+\begin{defn}[Uniformly Continuous Functions]\index{Uniform Continuity}\label{defn:uniformly_continuous_functions}
+  We say that a function $f : (X, d_X) \to (Y, d_Y)$ is \hlnoteb{uniformly continuous} if
+  \begin{gather*}
+    \forall \epsilon > 0 \; \exists \delta > 0 \; \forall x_1, x_2 \in X \\
+    d_X(x_1, x_2) < \delta \implies d_Y \left( f(x_1) , f(x_2) \right) < \epsilon.
+  \end{gather*}
+\end{defn}
+
+\begin{eg}
+  Given $(X, d)$, and $x_0 \in X$, define
+  \begin{equation*}
+    g_{x_0}(x) = d(x, x_0).
+  \end{equation*}
+  Note that $\abs{ d(x_0, x) - d(x_0, y) } \leq d(x, y)$.\sidenote{Proved in A3} Thus
+  \begin{equation*}
+    \abs{ g_{x_0}(x_1) - g_{x_0}(x_2) } \leq d(x_1, x_2).
+  \end{equation*}
+  Then $\forall \epsilon > 0 \; \exists \delta = \epsilon > 0$, we have
+  \begin{equation*}
+    d(x_1, x_2) < \delta \implies \abs{ g_{x_0}(x_1) - g_{x_0}(x_2) } < \epsilon.
+  \end{equation*}
+  Thus $g_{x_0}$ is uniformly continuous.
+\end{eg}
+
+\begin{thm}[Completion Theorem]\index{Completion Theorem}\label{thm:completion_theorem}
+  Every metric space $(X, d)$ has a completion.
+\end{thm}
+
+\begin{proof}
+  Let $a \in X$. Define $\phi : X \to C_b(X)$ by
+  \begin{equation*}
+    \left( \phi(u) \right)(x) = f_u(x) = d(u, x) - d(x, a).
+  \end{equation*}
+  By our earlier example, $\phi(u)$ is continuous. Notice that we have
+  \begin{equation*}
+    \abs{ f_u(x) } = \abs{ d(u, x) - d(x, a) } \leq d(u, a).
+  \end{equation*}
+  Thus $\phi(u) in C_b(X)$, proving that $\phi$ is well-defined.
+
+  WTS $\phi$ is an isometry. Let $u, v \in X$. Then
+  \begin{align*}
+    \abs{ f_u(x) - f_v(x) } &= \abs{ d(u, x) - d(x, a) - d(v, x) - + d(x, a) } \\
+                            &= \abs{ d(u, x) - d(v, x) } \\
+                            &\leq d(u, v).
+  \end{align*}
+  Thus $\norm{ f_u - f_v }_\infty \leq d(u, v)$ by definition of $\norm\cdot_\infty$. Notice that
+  \begin{equation*}
+    \abs{ f_u(v) - f_v(v) } = d(u, v),
+  \end{equation*}
+  which gives us the greatest possible value. Thus
+  \begin{equation*}
+    \norm{ \phi(u) - \phi(v) }_\infty = \norm{ f_u - f_v }_\infty = d(u, v).
+  \end{equation*}
+  Thus $\phi$ is an isometry.
+
+  Since $(C_b(X), \norm\cdot_\infty)$ is a complete metric space, let $Y = \bar{\phi(X)}$. The proof is complete by \cref{propo:subsets_of_complete_spaces_are_complete_if_they_are_closed}.\qed\
+\end{proof}
+
+\newthought{Question}: If $(X, d)$ has 2 completions, how are they related?
+
+Suppose $(X, d)$ is a metric space that has 2 completions through the functions $\phi$ and $\psi$.
+
+\begin{figure}[!ht]
+  \centering
+  \begin{tikzpicture}
+    \node (X) at (0,0) {$X$};
+    \draw (X) circle(1);
+    \node (phiX) at (3,1) {$\phi(X)$};
+    \draw (phiX) circle(1);
+    \node (psiX) at (2,-2) {$\psi(X)$};
+    \draw (psiX) circle(1);
+
+    \draw[->] (0.5, 0.5) -- (2.5, 1) node[midway,above] {$\phi$};
+    \draw[->] (0.5, -0.5) -- (1.5, -1.5) node[midway,below,left] {$\psi$};
+  \end{tikzpicture}
+  \caption{Relation of the 2 completions of a metric space.}
+  \label{fig:relation_2_completions_metric_space}
+\end{figure}
+
+Since we have that $\phi$ is bijective from $X$ to $\phi(X)$, we can take its inverse. Consequently, we have that the function $\Gamma = \psi \circ \phi^{-1}$ is an isometry.
+
+Now for some $\{ x_n \} \subset X$ that is Cauchy, we know that in $\phi(X)$, $\phi(x_n) \to y_0 \in \phi(X)$. Note that $y_0$ is a limit point of $\phi(X)$. Through $\Gamma$, we have that
+\begin{equation*}
+  \Gamma( \phi(x_n) ) = \psi( x_n ).
+\end{equation*}
+If $\psi(x_n) \to z_0 \in \psi(X)$, then we must have
+\begin{equation*}
+  \Gamma(y_0) = z_0,
+\end{equation*}
+and in particular $z_0$ is a limit point of $\psi(X)$. This forces limits point of $\phi(X)$ to also be limit points of $\psi(X)$, and interior to interior. Thus the two completions are isomorphic.
+
+% section completions_of_metric_spaces (end)
+
+\section{Banach Contractive Mapping Theorem}%
+\label{sec:banach_contractive_mapping_theorem}
+% section banach_contractive_mapping_theorem
+
+\newthought{Question}: Does there exist a function $f \in C[0, 1]$ such that
+\begin{equation}\label{eq:weird_looking_function}
+  f(x) = e^x + \int_{0}^{x} \frac{\sin t}{2} f(t) \dif{t} \quad ?
+\end{equation}
+
+Let $\Gamma : C[0, 1] \to C[0, 1]$ such that
+\begin{equation*}
+  \Gamma (f) (x) = e^x + \int_{0}^{x} \frac{\sin t}{2} f(t) \dif{t}.
+\end{equation*}
+Then $f_0$ is a solution to \cref{eq:weird_looking_function} iff $\Gamma(f_0) = f_0$.
+
+This is known as an \hlnotea{integral transform}.
+
+\begin{defn}[Fixed Point]\index{Fixed Point}\label{defn:fixed_point}
+  Given $(X, d)$, $\Gamma : X \to X$, we say that $x_0$ is a fixed point of $\Gamma$ if $\Gamma(x_0) = x_0$.
+\end{defn}
+
+% section banach_contractive_mapping_theorem (end)
+
+% chapter lecture_24_nov_07th (end)
 \appendix
 
 \chapter{Useful Theorems from Earlier Calculus}%
