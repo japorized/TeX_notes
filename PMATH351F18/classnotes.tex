@@ -4185,6 +4185,8 @@ This is known as an \hlnotea{integral transform}.
 
 \newthought{Question}: Does there exist a function function $f$ such that $f$ is continuous on $\mathbb{Q}$ but not on $\mathbb{R} \setminus \mathbb{Q}$? \hlimpo{No!}
 
+However, to prove that there is need no such function, we need more machinery. In particular, the set of discontinuities of a function $f : (X, d) \to \mathbb{R}$ has a particular topological nature.
+
 \begin{defn}[Points of Discontinuity]\index{Points of Discontinuity}\label{defn:points_of_discontinuity}
   Let $f : X \to \mathbb{R}$. For each $n \in \mathbb{N}$, the \hlnoteb{points of discontinuity} is a set defined as
   \begin{equation*}
@@ -4279,6 +4281,18 @@ Recall the definition of a \hyperref[defn:dense]{dense set}. We have the followi
 \begin{defn}[Residual]\index{Residual}\label{defn:residual}
   We say that $A \subseteq (X, d)$ is a \hlnoteb{residual} in $X$ if $A^C$ is of first category.
 \end{defn}
+
+\begin{thm}[Set of Points of Discontinuity is $F_\sigma$]\label{thm:set_of_points_of_discontinuity_is_f_sigma_}
+  Let $f : (X, d_X) \to (Y, d_Y)$. Then for each $n \in \mathbb{N}$, $D_N(f)$ is closed in $X$. Moreover,
+  \begin{equation*}
+    D(f) = \bigcup_{n=1}^{\infty} D_N(f).
+  \end{equation*}
+  In particular, $D(f)$ is $F_\sigma$.
+\end{thm}
+
+\begin{ex}
+  Prove \cref{thm:set_of_points_of_discontinuity_is_f_sigma_}.
+\end{ex}
 
 \begin{eg}
   If $F \subset (X, d)$ is closed, then $f$ is $G_\delta$. In particular, notice that
@@ -4406,9 +4420,134 @@ We are now able to show that for a sequence $\{ f_n \} \subset C[a, b]$ that con
   \end{gather*}
 \end{defn}
 
+The proof of the following theorem is left as an exercise.
+
+\begin{thm}[Limit of Sequence of Continuous Functions that Converges Pointwise is Continuous]\label{thm:limit_of_sequence_of_continuous_functions_that_converges_pointwise_is_continuous}
+  Let $(X, d_X)$ and $)Y, d_Y)$ be metric spaces. Let $\{ f_n : X \to Y \}$ be a sequence of functions that converges pointwise on $X$ to $f_0$. Assume that $\{ f_n \}$ converges uniformly at $x_0 \in X$. If each $f_n$ is continuous at $x_0$, then so is $f_0$.
+\end{thm}
+
 % section baire_category_theorem_continued (end)
 
 % chapter lecture_26_nov_12th (end)
+
+\chapter{Lecture 27 Nov 14th}%
+\label{chp:lecture_27_nov_14th}
+% chapter lecture_27_nov_14th
+
+\section{Baire Category Theorem (Continued 2)}%
+\label{sec:baire_category_theorem_continued_2}
+% section baire_category_theorem_continued_2
+
+\begin{thm}[Uniform Convergence of A Sequence of Continuous Functions that Converges Pointwise]\label{thm:uniform_convergence_of_a_sequence_of_continuous_functions_that_converges_pointwise}
+  Let $f_n : (a, b) \to \mathbb{R}$ be a sequence of continuous functions that converges pointwise to $f(x)$. Then there exists an $x_0 \in (a, b)$ such that $f_n \to f$ uniformly at $x_0$.
+\end{thm}
+
+\begin{proof}
+  Assume that $f_n \to f_0$ on $(a, b)$, pointwise. \hlwarn{Need clarification on why the claim uses the fact that the sequence $\{ f_n(x^*) \}$ is Cauchy. We only have pointwise convergence.} 
+\end{proof}
+
+\begin{crly}[Continuity of the Limit of a Sequence of Pointwise Convergent Functions on a Residual Set]\label{crly:continuity_of_the_limit_of_a_sequence_of_pointwise_convergent_functions_on_a_residual_set}
+  Let $\{ f_n \} \subset C[a, b]$ be such that $f_n \to f_0$ pointwise on $[a, b]$. Then there exists a residual set $A \subset [a, b]$ such taht $f_0(x)$ is continuous at each $x \in A$.
+\end{crly}
+
+\begin{proof}
+  \cref{thm:uniform_convergence_of_a_sequence_of_continuous_functions_that_converges_pointwise} shows that the set $A$ of which $f_0$ is continuous on is dense in $[a, b]$. However, from XXX that $D(f_0)$ is $F_\sigma$, and so $A$ is a dense $G_\delta$.
+\end{proof}
+
+\begin{remark}
+  Thus we have that $D(f_0)$ is a nowhere dense $F_\sigma$, i.e. it is of first category.
+\end{remark}
+
+\begin{crly}[Derivative of a Function is Continuous on a dense $G_\delta$ set in $\mathbb{R}$]\label{crly:derivative_of_a_function_is_continuous_on_a_dense_g_delta_set_in_r_}
+  Assume that $f : \mathbb{R} \to \mathbb{R}$ is differentiable. Then $f'(x)$ is continuous for every point on a dense $G_\delta$-subset of $\mathbb{R}$.
+\end{crly}
+
+\begin{proof}
+  Using notions from the first principles of calculus, notice that $f'(x)$ is a pointwise limit of the sequence of continuous functions
+  \begin{equation*}
+    \left\{ \frac{f \left( x + \frac{1}{n} \right) - f(x)}{\frac{1}{n}} \right\}.
+  \end{equation*}\qed\
+\end{proof}
+
+% section baire_category_theorem_continued_2 (end)
+
+\section{Compactness}%
+\label{sec:compactness}
+% section compactness
+
+In this section, we study 3 important properties of a topological space, namely:
+\begin{itemize}
+  \item compactness;
+  \item sequential compactness; and
+  \item the Bolzano-Weierstrass Property.
+\end{itemize}
+We shall see that, in fact, the three properties are equivalent.
+
+\begin{defn}[Cover]\index{Cover}\label{defn:cover}
+  Given $(X, d)$ a metric space, an (open) \hlnoteb{cover} of $X$ is a collection $\{ U_\alpha \}_{\alpha \in I}$ of open sets with
+  \begin{equation*}
+    X = \bigcup_{\alpha \in I} U_\alpha.
+  \end{equation*}
+  A \hldefn{subcover} is a subset (or subcollection) $\{ U_\alpha \}_{\alpha \in J \subset I}$ such that
+  \begin{equation*}
+    X = \bigcup_{\alpha \in J} U_\alpha.
+  \end{equation*}
+  If $A \subset X$, then we say that $\{ U_\alpha \}_{\alpha \in I}$ \hlnoteb{covers} $A$ if $A \subset \bigcup_{\alpha \in I} U_\alpha$, or, equivalently, if $\{ U_\alpha \cap A \}_{\alpha \in I}$ is a cover of $(A, d_A)$.
+\end{defn}
+
+\begin{defn}[Compact]\index{Compact}\label{defn:compact}
+  We say that $(X, d)$ is \hlnoteb{compact} iff each cover of $X$, $\{ U_\alpha \}_{\alpha \in I}$, has a finite subcover.
+
+  We say that $A \subset (X, d)$ is \hlnoteb{compact} if every cover $\{ U_\alpha \}_{\alpha \in I}$ of $A$ has a finite subcover (or, equivalently, if $(A, d_A)$ is compact).
+\end{defn}
+
+From earlier courses in Calculus, recall:
+
+\begin{thm}[Heine-Borel Theorem]\index{Heine-Borel Theorem}\label{thm:heine_borel_theorem}
+  $A \subset \mathbb{R}^n$ is compact iff $A$ is closed and bounded.
+\end{thm}
+
+\begin{eg}
+  $[0, 1] \subset \mathbb{R}$ is compact, but $(0, 1) \subset \mathbb{R}$ is not compact.
+\end{eg}
+
+However, the Heine-Borel Theorem is not true for arbitrary metric spaces.
+
+\begin{eg}[\imponote]
+  Let
+  \begin{equation*}
+    A = \{ \{ x_n \} \in \ell_\infty \mid \norm{ x_n }_\infty \leq 1 \}.
+  \end{equation*}
+  It is clear that $A$ is closed and bounded. However, consider $U_{\{ x_n \}} = B \left( \{ x_n \}, \frac{1}{2} \right)$. It is then clear that
+  \begin{equation*}
+    A \subset \bigcup_{\{ x_n \} \in A } U_{\{ x_n \}}.
+  \end{equation*}
+  Let $S = \{ \{ x_n \} \mid x_n = 1 \lor x_n = 0 \}$, which is infinite. Then we notice that $\abs{ S \cap B \left( \{ x_n \}, \frac{1}{2} \right) } \leq 1$, showing to us that we cannot find a finite subcover for $S$ itself is infinite.
+\end{eg}
+
+However, we do have the following implication.
+
+\begin{propo}[Compact Spaces are Closed and Bounded]\label{propo:compact_spaces_are_closed_and_bounded}
+  If $A \subset (X, d)$ is compact, then $A$ is closed and bounded.
+\end{propo}
+
+\begin{proof}
+  Suppose $A$ is not closed. Then $\exists x_0 \in \bdy(A) \setminus A$. Let
+  \begin{equation*}
+    U_n = \left( B \left[ x_0, \frac{1}{n} \right] \right)^C.
+  \end{equation*}
+  Since $x_0 \notin A$, we have that $A \subset \bigcup_{n=1}^{\infty} U_n$. However, $\{ U_n \}_{n = 1}^{\infty}$ has no finite subcover. Otherwise, if it does have some finite subcover, say $\{ U_n \}_{n = 1}^{N}$, then for any $n_0 > N$, we would have that
+  \begin{equation*}
+    \left( B \left[ x_0, \frac{1}{n_0} \right] \right) \supsetneq \bigcup_{n=1}^{N} U_n,
+  \end{equation*}
+  and so $\exists x_1 \in B \left[ x_0, \frac{1}{n_0} \right]$ such that $x_1 \in A$ but $x_0 \notin \bigcup_{n=1}^{N} U_n$. This contradicts the assumption that a subcover exists. But $A$ must have some subcover for we assumed that $A$ is compact. Therefor $A$ must be closed.
+
+  For boundedness, let $x_0 \in X$. Then $\{ B(x_0, n) \}_{n = 1}^{\infty}$ is an open cover of $A$. Since $A$ is compact, $\{ B(x_0, n) \}_{n = 1}^{\infty}$ must have some finite subcover $\{ B(x_0, n_1), B(x_0, n_2), \ldots, B(x_0, n_k) \}$. WMA $n_1 < n_2 < \hdots < n_k$, for we may rearrange the radii. It follows that $A \subset B(x_0, n_k)$, and so $A$ is bounded as required.\qed\
+\end{proof}
+
+% section compactness (end)
+
+% chapter lecture_27_nov_14th (end)
 
 \appendix
 
@@ -4444,4 +4583,3 @@ We are now able to show that for a sequence $\{ f_n \} \subset C[a, b]$ that con
 \printindex
 
 \end{document}
-
