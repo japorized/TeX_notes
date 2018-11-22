@@ -3052,7 +3052,7 @@ and so
   which is the pmf of $\Poi(\lambda p_1)$. The marginal distribution of $N_2$ is similar. It is clear from \cref{eq:splitting_poisson_jointdist} that we have \cref{eq:splitting_poisson_independence}. The result then follows from induction.\qed\
 \end{proof}
 
-\begin{eg}
+\begin{eg}[Thinning Property of the Poisson Distribution]\label{eg:thinning_property_of_poisson}
   The number of claims of a portfolio follows $\Poi(\lambda)$. The severity of ground-up loss follows $\Unif(0, b)$. The insurer would like to impose an ordinary deductible $d$ and a policy limit $u$ such that
   \begin{equation*}
     0 < d < u < b.
@@ -3958,7 +3958,7 @@ Then
 \end{thm}
 
 \begin{proof}
-  \hlwarn{Proof to be added later.} 
+  \hlwarn{Proof to be added later.} Reference to add \url{https://www.casact.org/library/astin/vol12no1/22.pdf}
 \end{proof}
 
 \begin{eg}
@@ -4143,6 +4143,191 @@ since $I_i \sim \Bernoulli(\alpha)$.
 % section frequency_distributions_creating_new_frequency_distributions_and_effect_on_frequency_continued_2 (end)
 
 % chapter lecture_19_nov_20th (end)
+
+\chapter{Lecture 20 Nov 22nd}%
+\label{chp:lecture_20_nov_22nd}
+% chapter lecture_20_nov_22nd
+
+\section{Frequency Distributions --- Creating New Frequency Distirbutions and Effect on Frequency Distribution (Continued 3)}%
+\label{sec:frequency_distributions_creating_new_frequency_distirbutions_and_effect_on_frequency_distribution_continued_3}
+% section frequency_distributions_creating_new_frequency_distirbutions_and_effect_on_frequency_distribution_continued_3
+
+\subsection{Effect on Frequency (Continued)}%
+\label{sub:effect_on_frequency_continued}
+% subsection effect_on_frequency_continued
+
+\subsubsection{Effect of Policy Adjustments (Continued)}%
+\label{ssub:effect_of_policy_adjustments_continued}
+% subsubsection effect_of_policy_adjustments_continued
+
+\begin{eg}
+  Assume that $P(Y_L > 0) = \alpha$. Find the corresponding distribution of $N_P$ given the following distributions of $N_L$.
+  \begin{enumerate}
+    \item $N_L \sim \Poi(\lambda)$;
+    \item $N_L \sim \Bin(m, q)$;
+    \item $N_L \sim \NB(\beta, r)$.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item Given $N_L \sim \Poi(\lambda)$, we have that the pgf of $N_P$ is
+      \begin{align*}
+        G_{N_P}(t) &= G_{N_L} ( G_{\mathbb{1}_{\{ Y_{L, i} > 0 \}}} (t) ) = G_N( 1 - \alpha + \alpha t ) \\
+                   &= e^{\lambda ( 1 - \alpha + \alpha t - 1 )} = e^{ \lambda \alpha ( t - 1 ) }
+      \end{align*}
+      which is the pgf of $\Poi(\lambda \alpha)$. Thus $N_P \sim \Poi(\lambda \alpha)$.
+
+    \item Given $N_L \sim \Bin(m, q)$, we have that the pgf of $N_P$ is
+      \begin{align*}
+        G_{N_P}(t) &= G_N( 1 - \alpha + \alpha t ) = ( 1 - q + ( 1 - \alpha + \alpha t ) q )^m \\
+                   &= ( 1 - \alpha q + t \alpha q )^m
+      \end{align*}
+      which is the pgf of $\Bin(m, \alpha q)$. Thus $N_P \sim \Bin(m, \alpha q)$.
+
+    \item Given $N_L \sim \NB(\beta, r)$, we have that the pgf of $N_P$ is
+      \begin{equation*}
+        G_{N_P}(t) = \left[ 1 - \beta ( 1 - \alpha + \alpha t  - 1) \right]^{-r} = \left[ 1 - \beta \alpha ( t - 1 ) \right]^{-r}
+      \end{equation*}
+      which is the pgf of $\NB(\beta \alpha, r)$. Thus $N_P \sim \NB(\beta \alpha, r)$.
+  \end{enumerate}
+\end{solution}
+
+\begin{remark}
+  Also, to solve for $N_P$ for when $N_L \sim \Poi(\alpha \lambda)$, recall \cref{eg:thinning_property_of_poisson}.
+\end{remark}
+
+% subsubsection effect_of_policy_adjustments_continued (end)
+
+% subsection effect_on_frequency_continued (end)
+
+% section frequency_distributions_creating_new_frequency_distirbutions_and_effect_on_frequency_distribution_continued_3 (end)
+
+\section{Aggregate Risk Models}%
+\label{sec:aggregate_risk_models}
+% section aggregate_risk_models
+
+\marginnote{Textbook reference: Sections 9.1 - 9.7}
+
+We shall now look back at some of the things that we introduced throughout the course and put them together.
+
+\subsection{Indiviual Risk Model}%
+\label{sub:indiviual_risk_model}
+% subsection indiviual_risk_model
+
+Recall the \hyperref[defn:individual_risk_model]{individual risk model}. Consider a portfolio consisting of $n$ insurance policies. Let $Z_i$  denote the amount paid for the $i$\textsuperscript{th} policy. The individual risk model for the aggregate amount paid is given by
+\begin{equation*}
+  S = \sum_{i=1}^{n} Z_i.
+\end{equation*}
+While we are interested in the distribution of $S$, it is usually difficult to obtain an analytical form for the distribution. 
+
+But if $n$ is large, and $\{ Z_i \}_{i = 1}^{n}$ is an iid sequence, we can apply the \hlnotea{normal approximation} (by the \hlnotea{central limit theorem}) to solve for $S$: in particular, as $n \to \infty$, we have
+\begin{equation*}
+  \frac{S - E [ S ]}{\sqrt{ \Var(S) }} \overset{d}{\to} \Nor(0, 1),
+\end{equation*}
+where $\overset{d}{\to}$ means a \hlnotea{convergence in distribution}\sidenote{See \href{https://tex.japorized.ink/STAT330S18/classnotes.pdf}{notes from STAT330}.}
+
+\begin{eg}
+  Consider a portfolio of $100$ iid insurance policies. Each policy is applied to a ground-up loss that follows an exponential distirbution with mean $50$. An ordinary deductible $d = 20$ is applied to each policy and the insurer charges premium as $1.1$ multiple of the expected payment amount. Find the probability that the insurer will have a negative profit with this portfolio by using the normal approximation.
+\end{eg}
+
+\begin{solution}
+  The amount paid for the $i$\textsuperscript{th} policy is $Z_i = [ X_i - 20 ]_+$, where $X_i \sim \Exp(50)$. We want to find
+  \begin{equation*}
+    P( 1.1 E[S] - S < 0 ) = P ( S > 1.1 E[S] ).
+  \end{equation*}
+  Since $n$ is large enough (we suppose so), we can use normal approximation:
+  \begin{equation*}
+    P( S > 1.1 E[S] ) = P \left( \frac{S - E[S]}{\sqrt{ \Var(S) }} > \frac{1.1 E[S] - E[S]}{\sqrt{\Var(S)}} \right)
+  \end{equation*}
+  where $\frac{S - E[S]}{\sqrt{\Var(S)}} \overset{d}{\to} \Nor(0, 1)$. Thus we need to solve for
+  \begin{align*}
+    E[S] &= E \left[ \sum_{i=1}^{100} Z_i \right] = 100 E \left[ \left[ X - 20 \right]_+ \right] \\
+    \Var(S) &= \Var \left( \sum_{i=1}^{100} Z_i \right) 100 \Var(Z_i) = 100 \Var( [ X - 20 ]_+ ).
+  \end{align*}
+  We have
+  \begin{align*}
+    E [ [ X - 20 ]_+ ] &= \int_{20}^{\infty} e^{-\frac{1}{50}x} \dif{x} = -50e^{-\frac{x}{50}} \at{20}{\infty} = 33.516 \\
+    E [ [ X - 20 ]_+^2 ] &= \int_{20}^{\infty} 2(x - 20)e^{-\frac{x}{50}} \dif{x} \\
+                         &= -2000e^{-0.4} + 2 \left[ 1000e^{-0.4} + 50 [ 50e^{-0.4} ] \right] \\
+                         &= 3351.600
+  \end{align*}
+  Thus
+  \begin{equation*}
+    E[S] = 3351.6 \text{ and } \Var(S) = 100 ( 3351.6 - 33.516^2 ) = 222827.7744.
+  \end{equation*}
+  Therefore
+  \begin{align*}
+    P(X > 1.1E[S]) &= P \left( \frac{S - E[S]}{\sqrt{\Var(S)}} > \frac{0.1 E[S]}{\sqrt{\Var(S)}} \right) \\
+                   &= P \left( \frac{S - E[S]}{\sqrt{\Var(S)}} > \frac{335.16}{\sqrt{ 222827.7744 }} \right) \\
+                   &\approx P \left( \frac{S - E[S]}{\sqrt{\Var(S)}} > 0.71 \right) \\
+                   &\approx 1 - P \left( Z \leq 0.71 \right) = 0.2389
+  \end{align*}
+  where $Z \sim \Nor(0, 1)$.
+\end{solution}
+
+% subsection indiviual_risk_model (end)
+
+\subsection{Collective Risk Model}%
+\label{sub:collective_risk_model}
+% subsection collective_risk_model
+
+Recall the \hyperref[defn:collective_risk_model]{collective risk model}: we define the aggregate loss as a random sum of severity amounts, i.e.
+\begin{equation*}
+  S = \sum_{i=1}^{N} X_i,
+\end{equation*}
+where
+\begin{itemize}
+  \item $N$ is a counting rv,
+  \item $\{ X_i \}_{i \geq 1}$ is a sequence of iid severity rvs,
+  \item and we follow the convention that $S = 0$ if $N = 0$.
+\end{itemize}
+
+We are, again, interested in the aggregate amount paid by the insurer. The collective risk model for the aggregate amount paid can be expressed in two forms, as mentioned in \cref{sec:frequency_distributions_creating_new_frequency_distributions_and_effect_on_frequency_distribution_continued_2}.
+
+We first study the distribution of $S$ when the severity distribution $X$ is a \hlnoteb{discrete rv} with pmf
+\begin{equation*}
+  f_X(x) = P(X = x), \quad x = 0, 1, 2, \ldots.
+\end{equation*}
+We have several ways to solve for $S$:
+\begin{itemize}
+  \item Notice that $S$ is also a discrete rv with pmf $f_X(x) = P(S = x)$ for $x = 0, 1, 2, \ldots$, and pgf of $S$ is
+    \begin{equation*}
+      G_S(t) = G_N( G_X(t) )
+    \end{equation*}
+    as discussed in \cref{propo:pgf_method_for_compound_rvs}.
+  \item $S$ is a compound rv with primary rv $N$ and secondary rv $X$, so we can use methods from \cref{sub:compound_frequency_distributions_continued}.
+\end{itemize}
+
+For example, if $N$ is a member of the $(a, b, 0)$ or $(a, b, 1)$ class, we can use \hyperref[thm:panjer_s_recursion_for_a_b_0_class]{Panjer's Recursion} to find the pmf of $S$.
+
+It may be the case that $N$ itself is yet another compound rv with primary rv $N_1$ and secondary rv $N_2$, and in this case the pgf of $S$ would be
+\begin{equation*}
+  G_S(t) = G_N( G_X(t) ) = G_{N_1}( G_{N_2}( G_X(t) ) ) = G_{N_1}(G_Z(t)),
+\end{equation*}
+where we let $Z$ be the compound rv with primary rv $N_2$ and secondary rv $X$.
+
+Again, if $N_1$ and $N_2$ are either members of $(a, b, 0)$ or $(a, b, 1)$, then we can apply Panjer's Recursion in the following manner:
+\begin{itemize}
+  \item[Step 1] Apply Panjer's Recursion on $Z$.
+  \item[Step 2] Apply Panjer's Recursion on $S$.
+\end{itemize}
+
+\paragraph{General Discrete Severity Distribution} Suppose the severity rv $X$ has a pmf 
+\begin{equation*}
+  f_X(x) = P(X = xh), \quad x = 0, 1, 2, \ldots,
+\end{equation*}
+where $h > 0$ is some constant\sidenote{Here, $h$ acts as a scale for the values that the rv can take on, allowing us to take non-integer values in a discrete manner.}. In this case, let
+\begin{equation*}
+  \tilde{S} = \frac{S}{h} = \sum_{i=1}^{N} \tilde{X}_i,
+\end{equation*}
+where $\{\tilde{X}_i\}_{i \geq 1}$ is a sequence of iid copies such that $\tilde{X}_i = \frac{X_i}{h}$.
+
+% subsection collective_risk_model (end)
+
+% section aggregate_risk_models (end)
+
+% chapter lecture_20_nov_22nd (end)
 
 \appendix
 
