@@ -1138,7 +1138,8 @@ Before delving into resolving our last question in the previous lecture, note th
     a_1 &=.a_{11} a_{12} a_{13} \ldots \\
     a_2 &=.a_{21} a_{22} a_{23} \ldots \\
         &\vdots \\
-    a_n &=.a_{n1} a_{n2} a_{n3} \ldots
+    a_n &=.a_{n1} a_{n2} a_{n3} \ldots \\
+        &\vdots
   \end{align*}
   in $(0, 1)$. This representation is unique if we do not allow the representation to end in a string of $9$'s. Let $b \in (0, 1)$, expressed as $b =. b_1 b_2 b_3 \ldots$ such that
   \begin{equation*}
@@ -1147,7 +1148,7 @@ Before delving into resolving our last question in the previous lecture, note th
       2 & a_i = 5
     \end{cases}
   \end{equation*}
-  Then $b \notin (0, 1)$, a contradiction\sidenote{\hlwarn{Require more explanation.}}.\qed
+  However, $b \notin (0, 1)$, otherwise $b$ would be one of the $a_n$'s, a contradiction.\qed
 \end{proof}
 
 \begin{crly}[Uncountability of $\mathbb{R}$]\label{crly:uncountability_of_r}
@@ -4443,11 +4444,48 @@ The proof of the following theorem is left as an exercise.
 \end{thm}
 
 \begin{proof}
-  Assume that $f_n \to f_0$ on $(a, b)$, pointwise. \hlwarn{Need clarification on why the claim uses the fact that the sequence $\{ f_n(x^*) \}$ is Cauchy. We only have pointwise convergence.} 
+  Assume that $f_n \to f_0$ on $(a, b)$, pointwise.
+
+  \noindent
+  \hlbnoted{Claim} There exists $[ \alpha_1, \beta_1 ] \subset (a, b)$ and $N_1 \in \mathbb{N}$ such that if $x \in [\alpha_1, \beta_1]$ and $n, m \geq N_1$, then $\abs{ f_n(x) - f_m(x) } \leq 1$.
+
+  \noindent
+  Suppose not. Then $\exists t_1 \in (a, b)$ and $n_1, m_1 \in \mathbb{N}$ such that \\
+  \noindent
+  $\abs{ f_{n_1}(t_1) - f_{m_1}(t_1) } > 1$. Since $f_{n_1} - f_{m_1}$ is continuous, there exists an open interval $I_1 \subsetneq \bar{I}_1 \subsetneq (a, b)$ such that $\abs{ f_{n_1}(x) - f_{m_1}(x) } > 1$ for all $x \in I_1$.
+
+  Similarly, $\exists t_2 \in I_1$ and $n_2, m_2 \geq \max \{ n_1, m_1 \}$ such that \\
+  \noindent
+  $\abs{ f_{n_2}(t_2) - f_{m_2}(t_2) } > 1$. Again, since $f_{n_2} - f_{m_2}$ is continuous, there exists an open interval $I_2 \subsetneq \bar{I}_2 \subsetneq I_1$ such that $\abs{ f_{n_2}(x) - f_{m_2}(x) } > 1$ for all $x \in I_2$.
+
+  Recursively so, we get a sequence $\{ I_n \}$ of open interval with $I_{n + 1} \subset \bar{I}_{n + 1} \subset \bar{I}_k$, and two sequence of integers $\{ n_k \}$ and $\{ m_k \}$, with $n_{k + 1}, m_{k + 1} \geq \max \{ n_k, m_k \}$ and if $x \in I_k$, we have $\abs{ f_{n_k}(x) - f_{m_k}(x) } > 1$.
+
+  Then, by the \hyperref[thm:nested_interval_theorem]{Nested Interval Theorem}, we have
+  \begin{equation*}
+    \bigcap_{k=1}^{\infty} \bar{I}_k \neq \emptyset.
+  \end{equation*}
+  Let $x^* \in \bigcap_{k=1}^{\infty} \bar{I}_k$. Then by construction, we have that for any $k$, $\abs{ f_{n_k}\left(x^*\right) - f_{m_k} \left( x^* \right) } > 1$. However, since $\{ f_n \}$ converges pointwise, $\{ f_n \left( x^* \right) \}$ is Cauchy and hence we have a contradiction. This proves the claim $\dashv$.
+
+  In a similar manner, we can find a sequence $\{ [ \alpha_k, \beta_k  ] \}$ of closed sets, where $\alpha_k < \beta_k$, such that
+  \begin{equation*}
+    ( \alpha_{k + 1}, \beta_{k + 1} ) \subseteq [ \alpha_{k + 1}, \beta_{k + 1} ] \subseteq (\alpha_k, \beta_k) \subseteq \hdots \subseteq (a, b),
+  \end{equation*}
+  and a sequence
+  \begin{equation*}
+    N_1 < N_2 < \hdots < N_k < \hdots,
+  \end{equation*}
+  such that if $x \in [ \alpha_k, \beta_k ]$ and $n, m \geq N_k$, then $\abs{ f_n(x) - f_m(x) } \leq \frac{1}{k}$. Then, once again, by the Nested Interval Theorem, let $x_0 \in \bigcap_{k=1}^{\infty} [\alpha_k, \beta_k]$. Let $\epsilon > 0$. Now if $\frac{1}{k} < \epsilon$, then if $n, m \geq N_k$, then we have
+  \begin{equation*}
+    \abs{ f_n(x) - f_m(x) } \leq \frac{1}{k} < \epsilon.
+  \end{equation*}
+  Since $x_0 \in \bigcap_{k=1}^{\infty} [ \alpha_k, \beta_k ]$ and $\alpha_k < \beta_k$, we can choose $\delta = \min \{ \beta_k - \alpha_k : k \in \mathbb{N} \setminus \{ 0 \} \} > 0$, so that $(x_0 - \delta, x_0 + \delta) \subset (\alpha_k, \beta_k)$, then for any $x \in (x_0 - \delta, x_0 + \delta)$, we have
+  \begin{equation*}
+    \abs{ f_n(x) - f_m(x) } < \epsilon.
+  \end{equation*}\qed\
 \end{proof}
 
 \begin{crly}[Continuity of the Limit of a Sequence of Pointwise Convergent Functions on a Residual Set]\label{crly:continuity_of_the_limit_of_a_sequence_of_pointwise_convergent_functions_on_a_residual_set}
-  Let $\{ f_n \} \subset C[a, b]$ be such that $f_n \to f_0$ pointwise on $[a, b]$. Then there exists a residual set $A \subset [a, b]$ such taht $f_0(x)$ is continuous at each $x \in A$.
+  Let $\{ f_n \} \subset C[a, b]$ be such that $f_n \to f_0$ pointwise on $[a, b]$. Then there exists a residual set $A \subset [a, b]$ such that $f_0(x)$ is continuous at each $x \in A$.
 \end{crly}
 
 \begin{proof}
@@ -4540,7 +4578,7 @@ However, we do have the following implication.
   \begin{equation*}
     \left( B \left[ x_0, \frac{1}{n_0} \right] \right) \supsetneq \bigcup_{n=1}^{N} U_n,
   \end{equation*}
-  and so $\exists x_1 \in B \left[ x_0, \frac{1}{n_0} \right]$ such that $x_1 \in A$ but $x_0 \notin \bigcup_{n=1}^{N} U_n$. This contradicts the assumption that a subcover exists. But $A$ must have some subcover for we assumed that $A$ is compact. Therefor $A$ must be closed.
+  and so $\exists x_1 \in B \left[ x_0, \frac{1}{n_0} \right]$ such that $x_1 \in A$ but $x_0 \notin \bigcup_{n=1}^{N} U_n$. This contradicts the assumption that a subcover exists. But $A$ must have some subcover for we assumed that $A$ is compact. Therefore $A$ must be closed.
 
   For boundedness, let $x_0 \in X$. Then $\{ B(x_0, n) \}_{n = 1}^{\infty}$ is an open cover of $A$. Since $A$ is compact, $\{ B(x_0, n) \}_{n = 1}^{\infty}$ must have some finite subcover $\{ B(x_0, n_1), B(x_0, n_2), \ldots, B(x_0, n_k) \}$. WMA $n_1 < n_2 < \hdots < n_k$, for we may rearrange the radii. It follows that $A \subset B(x_0, n_k)$, and so $A$ is bounded as required.\qed\
 \end{proof}
@@ -4548,6 +4586,214 @@ However, we do have the following implication.
 % section compactness (end)
 
 % chapter lecture_27_nov_14th (end)
+
+\chapter{Lecture 28 Nov 16th}%
+\label{chp:lecture_28_nov_16th}
+% chapter lecture_28_nov_16th
+
+\section{Compactness (Continued)}%
+\label{sec:compactness_continued}
+% section compactness_continued
+
+We also have the following relation between compact sets and their closed subsets.
+
+\begin{propo}[Closed Subsets of Compact Sets are Compact]\label{propo:closed_subsets_of_compact_sets_are_compact}
+  If $(X, d)$ is compact and $A$ is closed, then $A$ is compact.
+\end{propo}
+
+\begin{proof}
+  Let $\{ U_\alpha \}_{\alpha \in I}$ be a cover of $A$. Then
+  \begin{equation}\tag{$*$}\label{eq:closed_subsets_of_compact_sets_are_compact_eq1}
+    \{ U_\alpha \}_{\alpha \in I} \cup A^C
+  \end{equation}
+  is a cover of $X$. Since $X$ is compact, \cref{eq:closed_subsets_of_compact_sets_are_compact_eq1} has a finite subcover $\{ U_{\alpha_1}, U_{\alpha_2}, \ldots, U_{\alpha_k}, A^C \}$ such that
+  \begin{equation*}
+    \left( \bigcup_{i=1}^{k} U_{\alpha_i} \right) \cup A^C = X.
+  \end{equation*}
+  Since $A \subset X$ and $A \cap A^C = \emptyset $, we must have
+  \begin{equation*}
+    A \subset \bigcup_{i=1}^{k} U_{\alpha_i}.
+  \end{equation*}\qed\
+\end{proof}
+
+We have the following 2 variants of compactness:
+
+\begin{defn}[Sequential Compactness]\index{Sequential Compactness}\label{defn:sequential_compactness}
+  A set $A \subset (X, d)$ is said to be \hlnoteb{sequentially compact} if every sequence\sidenote{Beware that this is not the same as \hyperref[defn:complete_metric_spaces]{completeness}.} $\{ x_n \} \subset A$ has a subsequence $\{ x_{n_k} \}$ such that $x_{n_k} \to x_0 \in A$.
+\end{defn}
+
+\begin{defn}[Bolzano-Weierstrass Property (BWP)]\index{Bolzano-Weierstrass Property}\label{defn:bolzano_weierstrass_property}
+  Let $(X, d)$ be a metric space. We say that $X$ has the \hlnoteb{Bolzano-Weierstrass Property (BWP)} if every infinite subset of $X$ has a limit point in the subset.
+\end{defn}
+
+\begin{ex}
+  Show that for $A \subset \mathbb{R}^n$, $A$ is compact iff $A$ is sequentially compact.
+\end{ex}
+
+\begin{proof}
+  \hlbnoted{$(\implies)$} Suppose $A$ is not sequentially compact. Then
+  \begin{equation*}
+    \exists \{ x_n \} \subset A \; \forall \{ x_{n_k} \} \subset \{ x_n \} \; \forall x_0 \in A \enspace x_{n_k} \not\to x_0.
+  \end{equation*}
+  Let this $\{ x_n \} = \{ x_1, x_2, \ldots, x_n, \ldots \}$. Let
+  \begin{equation*}
+    U_n = A \setminus \{ x_j \mid j \geq n \}.
+  \end{equation*}
+  Then it is clear that
+  \begin{equation*}
+    \bigcup_{n=1}^{\infty} U_n = A,
+  \end{equation*}
+  i.e. $\{ U_n \}$ is a cover of $A$. Since $A$ is compact, $\{ U_n \}$ has a finite subcover, say $\{ U_{n_1}, U_{n_2}, \ldots, U_{n_k} \}$. WMA $n_1 < n_2 < \hdots < n_k$. Then
+  \begin{equation*}
+    A = \bigcup_{m=1}^{k} U_{n_m} = A \setminus \{ x_j \mid j \geq n_k \}.
+  \end{equation*}
+  But that is impossible since $x_{n_k + 1} \notin \bigcup_{m=1}^{k} U_{n_k}$. Thus $A$ must be sequentially compact.
+
+  \noindent
+  \hlbnoted{$(\impliedby)$} Suppose $A$ is sequentially compact. Then
+  \begin{equation*}
+    \forall \{ x_n \} \subset A \; \exists \{ x_{n_k} \} \subset \{ x_n \} \; \exists x_0 \in A \enspace x_{n_k} \to x_0.
+  \end{equation*}
+  Let $\{ U_\alpha \}_{\alpha \in I}$ be a cover of $A$. \hlwarn{Yet to figure out where to go from here}. Tried looking into trying to construct a finite subcover using the convergent subsequence, but that actually leads to nowhere. 
+\end{proof}
+
+\begin{thm}[Sequential Compactness is Equivalent to BWP]\label{thm:sequential_compactness_is_equivalent_to_bwp}
+  Let $(X, d)$ be a metric space. TFAE:
+  \begin{enumerate}
+    \item $(X, d)$ is sequentially compact.
+    \item $(X, d)$ has the BWP.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{$(\implies)$} Let $(X, d)$ be sequentially compact. Let $A \subset (X, d)$ be infinite. By sequential compactness, every sequence $\{ x_n \} \subset A$ has a convergent subsequence $\{ x_{n_k} \}$, such that $x_{n_k} \to x_0 \in A$. $\dashv$
+
+  \noindent
+  \hlbnoted{$(\impliedby)$} Suppose $(X, d)$ has the BWP. Let $\{ x_n \}$ be a sequence in $X$. If $\{ x_n \}$ is not infinite (as a set), then it has a subsequence $\{ x_{n_k} \}$ such that $x_{n_{k_1}} = x_{n_{k_2}}$ for all $k_1, k_2$, which is convergent. WMA $\{ x_n \}$ is infinite (as a set). By the BWP, $\{ x_n \}$ (as a set) has a limit point $x_0 \in \{ x_n \}$. Then for $k \in \mathbb{N} \setminus \{ 0 \}$, let
+  \begin{equation*}
+    x_{n_k} \in B \left( x_0, \frac{1}{k} \right).
+  \end{equation*}
+  Clearly then $x_{n_k} \to x_0$, and $\{ x_{n_k} \}$ is a subsequence of $\{ x_n \}$.\qed\
+\end{proof}
+
+\begin{defn}[Finite Intersection Property (FIP)]\index{Finite Intersection Property}\label{defn:finite_intersection_property}
+  A collection $\{ A_\alpha \}_{\alpha \in I}$ of subsets of $X$ is said to have the \hlnoteb{finite intersection property (FIP)} if
+  \begin{equation*}
+    \bigcap_{i=1}^{n} A_n \neq \emptyset
+  \end{equation*}
+  for all finite subcollections $\{ A_1, \ldots, A_n \}$.
+\end{defn}
+
+\begin{eg}
+  Let $F_n = [n, \infty)$. Then $\{ F_n \}_{n = 1}^{\infty}$ has the FIP, but $\bigcap_{n=1}^{\infty} F_n = \emptyset$.
+\end{eg}
+
+The following theorem can be seen as an upgrade to \hyperref[thm:cantor_s_intersection_principle]{Cantor's Intersection Principle} for compact metric spaces: instead of allowing only a countably infinite intersection, we can now take an arbitrary number of intersections.
+
+\begin{thm}[FIP and Compactness]\label{thm:fip_and_compactness}
+  Let $(X, d)$ be a metric space. TFAE:
+  \begin{enumerate}
+    \item $(X, d)$ is compact.
+    \item If $\{ F_\alpha \}_{\alpha \in I}$ is a non-empty collection of closed sets with the FIP, then
+      \begin{equation*}
+        \bigcap_{\alpha \in I} F_\alpha \neq \emptyset.
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{remark}
+  As compared to \hyperref[thm:cantor_s_intersection_principle]{Cantor's Intersection Principle}, we do not need the notion of a \hyperref[defn:diameter_of_a_set]{diameter of a set} to achieve this result in a compact set.
+\end{remark}
+
+\begin{proof}
+  \hlbnoted{$(1) \implies (2)$} Suppose to the contrary that for a non-empty collection $\{ F_\alpha \}_{\alpha \in I}$ of closed sets with the FIP, we have
+  \begin{equation*}
+    \bigcap_{\alpha \in I} F_\alpha = \emptyset.
+  \end{equation*}
+  Let $U_\alpha = F_\alpha^C$. Then by \hyperref[thm:de_morgan_s_laws]{De Morgan's Laws}, we have $X = \bigcup_{\alpha \in I} U_\alpha$. Since $(X, d)$ is compact, $\exists \{ U_{\alpha_1}, \ldots, U_{\alpha_n} \}$ such that
+  \begin{equation*}
+    \bigcup_{i=1}^{n} U_{\alpha_i} = X.
+  \end{equation*}
+  But that implies that
+  \begin{equation*}
+    \emptyset = X^C = \left( \bigcup_{i=1}^{n} U_{\alpha_i} \right)^C = \bigcap_{i=1}^{n} F_{\alpha_i},
+  \end{equation*}
+  contradicting FIP.
+
+  \noindent
+  \hlbnoted{$(2) \implies (1)$} Suppose to the contrary that $\{ U_\alpha \}_{\alpha \in I}$, a cover of $X$, has no finite subcover. Then $\forall \{ U_{\alpha_1}, \ldots, U_{\alpha_n} \}$, we must have
+  \begin{equation*}
+    X \setminus \bigcup_{i=1}^{n} U_{\alpha_i} \neq \emptyset,
+  \end{equation*}
+  i.e., by \hyperref[thm:de_morgan_s_laws]{De Morgan's Laws}, $\bigcap_{i=1}^{n} U_{\alpha_i}^C \neq \emptyset$. Then $\{ F_\alpha \}_{\alpha \in I}$, where $F_\alpha = U_\alpha^C$, is a non-empty collection of closed sets with the FIP (by our argument), but via De Morgan's Laws, we have
+  \begin{equation*}
+    \bigcap_{\alpha \in I} F_\alpha = \emptyset,
+  \end{equation*}
+  contradicting our assumption.\qed\
+\end{proof}
+
+\begin{crly}[Generalized Nested Interval Theorem for Compact Metric Spaces]\label{crly:generalized_nested_interval_theorem_for_compact_metric_spaces}
+  Let $(X, d)$ be compact and $\{ F_N \}_{n = 1}^{\infty}$ be a sequence of non-empty closed sets such that $F_{n + 1} \subset F_n$. Then
+  \begin{equation*}
+    \bigcap_{n=1}^{\infty} F_n \neq \emptyset.
+  \end{equation*}
+\end{crly}
+
+\begin{crly}[Compact Metric Spaces are Complete]\label{crly:compact_metric_spaces_are_complete}
+  If $(X, d)$ is compact, then $(X, d)$ is complete.
+\end{crly}
+
+\begin{note}\label{note:motivation_for_epsilon_net}
+  \newthought{Recall} the definition for compactness, in which we may then have the following notion: for a compact set $(X, d)$, for $\epsilon > 0$, since $\{ B(x, \epsilon ) \}_{x \in X}$ is an open cover of $X$, we know that there exists $x_1, \ldots, x_n \in X$ such that they form a finite subcover on $X$.
+  \begin{equation*}
+    X = \bigcup_{i=1}^{n} B(x_i, \epsilon).
+  \end{equation*}
+\end{note}
+
+We use the same idea and make the following definition:
+
+\begin{defn}[$\epsilon$-net]\index{$\epsilon$-net}\label{defn:_epsilon_net}
+Given $A \subset (X, d)$ and $\epsilon > 0$. An \hlnoteb{$\epsilon$-net} for $A$ is a finite set $\{ x_1, \ldots, x_n \} \subset X$ such that
+  \begin{equation*}
+    A \subset \bigcup_{i=1}^{n} B(x_i, \epsilon).
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Totally Bounded]\index{Totally Bounded}\label{defn:totally_bounded}
+  We say that a subset $A \subset (X, d)$ is \hlnoteb{totally bounded} if $A$ has an $\epsilon$-net for every $\epsilon > 0$.
+\end{defn}
+
+\begin{thm}[Compact Sets are Totally Bounded]\label{thm:compact_sets_are_totally_bounded}
+  If $(X, d)$ is compact, then $(X, d)$ is totally compact.
+\end{thm}
+
+\begin{proof}
+  The proof immediately follows from the definition of compactness, as discussed in \cref{note:motivation_for_epsilon_net}.
+\end{proof}
+
+Note that boundedness and totally boundedness are \hlimpo{not equivalent}.
+
+\begin{eg}
+  Let
+  \begin{equation*}
+    S = \{ \{ x_n \} \in \ell_\infty \mid \norm{ \{ x_n \} }_\infty \leq 1 \}.
+  \end{equation*}
+  We have that $S$ is bounded, but it does not have a $\frac{1}{2}$-net.
+\end{eg}
+
+\begin{propo}[A Set is Totally Bounded iff Its Closure is Totally Bounded]\label{propo:a_set_is_totally_bounded_iff_its_closure_is_totally_bounded}
+  $A \subset (X, d)$ is totally bounded iff $\bar{A}$ is totally bounded.
+\end{propo}
+\marginnote{\begin{ex}
+  Prove \cref{propo:a_set_is_totally_bounded_iff_its_closure_is_totally_bounded}.
+\end{ex}}
+\begin{proof}
+  The $(\impliedby)$ direction is immediate, since $A \subset \bar{A}$. It suffices to show for $(\implies)$. Suppose $A$ is totally bounded. If $A$ is closed, then we are done, so WMA $A$ is open. Then $\Lim(A) \nsubseteq A$. Let $x_0 \in \Lim(A) \setminus A$. Since $x_0$ is a limit point, for any $\epsilon > 0$, $B(x_0, \epsilon) \cap A \neq \emptyset$. \hlwarn{Need to verify definition of an $\epsilon$-net.}
+\end{proof}
+
+% section compactness_continued (end)
+
+% chapter lecture_28_nov_16th (end)
 
 \appendix
 

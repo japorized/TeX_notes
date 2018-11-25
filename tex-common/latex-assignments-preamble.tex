@@ -18,6 +18,7 @@
 \usepackage{marvosym}
 \usepackage{pgf,tikz}
 \usepackage{pgfplots}
+\usepackage{fancyhdr}
 \usepackage{array}
 \usepackage{faktor}
 \usepackage{float}
@@ -34,6 +35,12 @@
 	allcolors=black
 }
 \def\UrlBreaks{\do\/\do-}
+
+% fancyhdr
+\makeatletter
+\pagestyle{fancy}
+\rhead{\textsl{\@title} \enspace \thepage}
+\makeatother
 
 % tikz
 \usepgfplotslibrary{polar}
