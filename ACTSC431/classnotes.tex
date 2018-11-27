@@ -4307,7 +4307,7 @@ It may be the case that $N$ itself is yet another compound rv with primary rv $N
 \end{equation*}
 where we let $Z$ be the compound rv with primary rv $N_2$ and secondary rv $X$.
 
-Again, if $N_1$ and $N_2$ are either members of $(a, b, 0)$ or $(a, b, 1)$, then we can apply Panjer's Recursion in the following manner:
+Again, if $N_1$ and $N_2$ are \hlimpo{either members of $(a, b, 0)$ or $(a, b, 1)$}, then we can apply Panjer's Recursion in the following manner:
 \begin{itemize}
   \item[Step 1] Apply Panjer's Recursion on $Z$.
   \item[Step 2] Apply Panjer's Recursion on $S$.
@@ -4328,6 +4328,146 @@ where $\{\tilde{X}_i\}_{i \geq 1}$ is a sequence of iid copies such that $\tilde
 % section aggregate_risk_models (end)
 
 % chapter lecture_20_nov_22nd (end)
+
+\chapter{Lecture 21 Nov 27th}%
+\label{chp:lecture_21_nov_27th}
+% chapter lecture_21_nov_27th
+
+\section{Aggregate Risk Models}%
+\label{sec:aggregate_risk_models}
+% section aggregate_risk_models
+
+\subsection{Collective Risk Model}%
+\label{sub:collective_risk_model}
+% subsection collective_risk_model
+
+\paragraph{Continuous Severity Distribution} Suppose that $X$ is a continuous severity rv with pdf $f_X$. Since we usually have that $P(N = 0) > 0$, $S$ is a \hlnoteb{mixture with probability mass at $0$}.
+
+\begin{propo}[MGF of Aggregate Loss of A Continuous Severity Distribution]\label{propo:mgf_of_aggregate_loss_of_a_continuous_severity_distribution}
+  The mgf of aggregate loss $S$ is given by
+  \begin{equation*}
+    M_S(t) = G_N( M_X(t) ),
+  \end{equation*}
+  where $G_N$ is the pgf of frequency rv $N$, and $M_X$ is the mgf of severity rv $X$.
+\end{propo}
+
+\begin{proof}
+  By conditioning on $N$, we have
+  \begin{align*}
+    M_S(t) &= e \left[ e^{tS} \right] = E \left[ E \left[ e^{t ( X_1 + \hdots + X_N )} \mid N \right] \right] \\
+           &= E \left[ E \left[ e^{tX_1} \mid N \right] \hdots E \left[ e^{tX_N} \mid N \right] \right] \\
+           &= E \left[ E \left[ e^{tX} \right]^N \right] = E \left[ M_X(t)^N \right] = G_N(M_X(t)).
+  \end{align*}\qed\
+\end{proof}
+
+The distribution of $S$ is often closely related to the \hlnotea{Erlang distribution}, which is a special case of $\Gam(\alpha, \theta)$ with $\alpha$ as a \hlnotec{positive integer}.
+
+\begin{defn}[Erlang Distribution]\index{Erlang Distribution}\label{defn:erlang_distribution}
+  A crv $X$ is said to follow an \hlnoteb{Erlang Distribution}, dentoed as $X \sim \Erlang(n, \theta)$, if its pdf is
+  \begin{equation*}
+    f_X(x) = \frac{\theta^{-n} x^{n - 1} e^{-\frac{x}{\theta}}}{\Gamma(n)}.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  We usually do not have a nice closed form cdf of a Gamma distribution, except when $\alpha$ is an integer. Thus $X \sim \Erlang(n, \theta)$ has the cdf
+  \begin{equation*}
+    F_X(x) = 1 - \int_{x}^{\infty} \frac{\theta^{-n} y^{n - 1} e^{- \frac{y}{\theta}}}{( n - 1 )!} \dif{y} = 1 - \sum_{k=0}^{n - 1} \frac{\left( \frac{x}{\theta} \right)^k e^{-\frac{x}{\theta}}}{k!}.
+  \end{equation*}
+
+  Also, from the mgf of the Gamma distribution, we have that the mgf of the $\Erlang(n, \theta)$ is
+  \begin{equation*}
+    M(t) = ( 1 - \theta t )^{-n}.
+  \end{equation*}
+\end{remark}
+
+\begin{eg}
+  Suppose that the frequency rv $N$ has pmf $\{ p_k \}_{k = 0}^{\infty}$, and the severity rv $X \sim \Exp(\theta)$. What is the distribution of the aggregate loss $S$?
+\end{eg}
+
+\begin{solution}
+  By \cref{propo:mgf_of_aggregate_loss_of_a_continuous_severity_distribution}, since $G_N(t) = \sum_{k=0}^{\infty} t^k p_k$ and $M_X(t) = ( 1 - \theta t )^{-1}$, we have
+  \begin{align*}
+    M_S(t) &= G_N(M_X(t)) = \sum_{k=0}^{\infty} M_X(t)^k p_k = \sum_{k=0}^{\infty} (1 - \theta t)^{-k} p_k \\
+           &= p_0 + \sum_{k=1}^{\infty} (1 - \theta t)^{-k} p_k.
+  \end{align*}
+  Thus we observe that $S$ is a mixture of $0$ and $\Erlang(k, \theta)$, for $k = 1, 2, \ldots$.
+\end{solution}
+
+\begin{note}
+  Note that since $S$ is a mixture, we can obtain its pf and cdf by taking appropriate weights on each of the distributions in its mixture.
+\end{note}
+
+\paragraph{Normal Approximation of Collective Risk Model} We can also use the normal approximation method for a collective risk model, in particular, given $S = \sum_{i=1}^{N} X_i$ for crvs $X_i$'s, we have
+\begin{equation*}
+  P(S \leq x) \approx P \left( Z \leq \frac{x - E [S]}{\sqrt{\Var( S )}} \right),
+\end{equation*}
+where $Z \sim \Nor(0, 1)$. If the primary distribution $N$ is from the $(a, b, 0)$ class, then the conditions required for applying the normal approximation is
+\begin{itemize}
+  \item large $\lambda$;
+  \item large $m$; and
+  \item large $r$
+\end{itemize}
+for $N \sim \Poi(\lambda)$, $N \sim \Bin(m ,q)$, and $N \sim \NB(r, q)$, respectively.
+
+\begin{eg}
+  Let $X \sim \Exp(2)$, and $N \sim \Poi(50)$. Use the normal approximation to find the $95\%$ quantile of $S$.
+\end{eg}
+
+\begin{solution}
+  Let $X_i \sim X$, for $i = 1, 2, \ldots, N$. Then
+  \begin{equation*}
+    E [S] = E \left[ \sum_{i=1}^{N} X_i \right] = E[N] E[X] = 100,
+  \end{equation*}
+  and
+  \begin{align*}
+    \Var(S) &= \Var \left( \sum_{i=1}^{N} X_i \right) = E \left[ \Var \left( \sum_{i=1}^{N} X_i \mid N \right) \right] + \var \left( E \left[ \sum_{i=1}^{N} X_i \mid N \right] \right) \\
+            &= E[N] \Var(X) + \Var(N) E[X]^2 = 400.
+  \end{align*}
+  The $95\%$ quantile, $\pi_{0.95}$, is such that
+  \begin{equation*}
+    P( S < \pi_{0.95} ) \leq 0.95 \leq P ( \leq \pi_{0.95} ).
+  \end{equation*}
+  Then
+  \begin{align*}
+    0.95 &= F_S( \pi_{0.95} ) = P (S \leq \pi_{0.95}) \\
+         &= P \left( \frac{S - E[S]}{\sqrt{\Var(S)}} \leq \frac{\pi_{0.95} - E[S]}{\sqrt{\Var(S)}} \right) \\
+         &\approx P \left( Z \leq \frac{\pi_{0.95} - 100}{\sqrt{400}} \right) = \Phi \left( \frac{\pi_{0.95} - 100}{20} \right).
+  \end{align*}
+  Thus
+  \begin{equation*}
+    \frac{\pi_{0.95} - 100}{20} = \Phi^{-1}(0.95) = 1.645
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \pi_{0.95} = 121.29.
+  \end{equation*}
+\end{solution}
+
+\paragraph{Discretization Method} The normal approximation has limitations: e.g. how large is large for each of the required parameters.
+
+\begin{defn}[Discretization Method]\index{Discretization Method}\label{defn:discretization_method}
+  The \hlnoteb{discretization method} is to approximate the distribution of a continuous (or mixed) severity rv $X$ by the distribution of a discrete severity rv $\hat{X}$, which has mass points at $\{ 0, h, 2h, \ldots \}$. The pmf of $\hat{X}$ is
+  \begin{gather*}
+    P \left( \hat{X} = 0 \right) = P \left( 0 \leq X \leq \frac{h}{2} \right) \\
+    P \left( \hat{X} = kh \right) = P \left( kh - \frac{h}{2} < X \leq kh + \frac{h}{2} \right)
+  \end{gather*}
+  for $k = 1, 2, \ldots$.
+\end{defn}
+
+\begin{remark}
+  Recall that the aggregate payment can be expressed as
+  \begin{equation*}
+    S = \sum_{i=1}^{N_L} Y_{L, i} \text{ or } S = \sum_{i=1}^{N_P} Y_{P, i}.
+  \end{equation*}
+  Since the amount paid per payment, $Y_P$, is usually continuous (especially so at $0$), we usually apply the discretization method to $Y_P$, and then obtain an approximation to the distribution of $S$.
+\end{remark}
+
+% subsection collective_risk_model (end)
+
+% section aggregate_risk_models (end)
+
+% chapter lecture_21_nov_27th (end)
 
 \appendix
 
