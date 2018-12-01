@@ -4,5 +4,5 @@ ORIDIR=$HOME/Documents/TeX_notes/setup-nvim
 DESTDIR1=$HOME/.vim/templates
 DESTDIR2=$HOME/dotfiles/dotfiles/vim/templates
 
-cp $ORIDIR/tex_default.sh $DESTDIR1/
-cp $ORIDIR/tex_default.sh $DESTDIR2/
+cp $ORIDIR/* $DESTDIR1/
+cp $ORIDIR/* $DESTDIR2/

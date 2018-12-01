@@ -4753,14 +4753,14 @@ The following theorem can be seen as an upgrade to \hyperref[thm:cantor_s_inters
 We use the same idea and make the following definition:
 
 \begin{defn}[$\epsilon$-net]\index{$\epsilon$-net}\label{defn:_epsilon_net}
-Given $A \subset (X, d)$ and $\epsilon > 0$. An \hlnoteb{$\epsilon$-net} for $A$ is a finite set $\{ x_1, \ldots, x_n \} \subset X$ such that
+  Given $A \subset (X, d)$ and $\epsilon > 0$. An \hlnoteb{$\epsilon$-net} for $A$ is a set $\{ x_\alpha \}_{\alpha \in I} \subset X$ such that
   \begin{equation*}
-    A \subset \bigcup_{i=1}^{n} B(x_i, \epsilon).
+    A \subset \bigcup_{\alpha \in I} B(x_i, \epsilon).
   \end{equation*}
 \end{defn}
 
 \begin{defn}[Totally Bounded]\index{Totally Bounded}\label{defn:totally_bounded}
-  We say that a subset $A \subset (X, d)$ is \hlnoteb{totally bounded} if $A$ has an $\epsilon$-net for every $\epsilon > 0$.
+  We say that a subset $A \subset (X, d)$ is \hlnoteb{totally bounded} if $A$ has a \hlimpo{finite} $\epsilon$-net for every $\epsilon > 0$.
 \end{defn}
 
 \begin{thm}[Compact Sets are Totally Bounded]\label{thm:compact_sets_are_totally_bounded}
@@ -4771,7 +4771,7 @@ Given $A \subset (X, d)$ and $\epsilon > 0$. An \hlnoteb{$\epsilon$-net} for $A$
   The proof immediately follows from the definition of compactness, as discussed in \cref{note:motivation_for_epsilon_net}.
 \end{proof}
 
-Note that boundedness and totally boundedness are \hlimpo{not equivalent}.
+Note that bounded and totally bounded are \hlimpo{not equivalent}.
 
 \begin{eg}
   Let
@@ -4794,6 +4794,172 @@ Note that boundedness and totally boundedness are \hlimpo{not equivalent}.
 % section compactness_continued (end)
 
 % chapter lecture_28_nov_16th (end)
+
+\chapter{Lecture 29 Nov 19th}%
+\label{chp:lecture_29_nov_19th}
+% chapter lecture_29_nov_19th
+
+\section{Compactness (Continued 2)}%
+\label{sec:compactness_continued_2}
+% section compactness_continued_2
+
+\begin{thm}[Compact Sets have BWP]\label{thm:compact_sets_have_bwp}
+  If $(X, d)$ is compact, then $(X, d)$ has the BWP.
+\end{thm}
+
+\begin{proof}
+  Suppose $S \subset X$ is infinite. Then we can obtain a sequence $\{ x_n \} \subset S$ such that for $n \neq m$, $x_n \neq x_m$. Then, consider
+  \begin{equation*}
+    F_n = \{ x_n, x_{n + 1}, \, \ldots \}.
+  \end{equation*}
+  We have that $F_{n + 1} \subseteq F_n$ and we observe that $\{ F_n \}$ has the \hyperref[defn:finite_intersection_property]{FIP},  i.e.
+  \begin{equation*}
+    \exists x_0 \in \bigcap_{n = 1}^{\infty} F_n.
+  \end{equation*}
+  Then for any $\epsilon > 0$, for any $n \in \mathbb{N}$, we have that
+  \begin{equation*}
+    B(x_0, \epsilon) \subset F_n.
+  \end{equation*}
+  In fact, $B(x_0, \epsilon) \cap \{ x_n \} \neq \emptyset$ is also infinite. Thus $x_0 \in \Lim(S)$.\qed\
+\end{proof}
+
+\begin{propo}[Sequential Compactness $\implies$ Completeness and Total Boundedness]\label{propo:sequential_compactness_implies_completeness_and_total_boundedness}
+  If $(X, d)$ is \hyperref[defn:sequential_compactness]{sequentially compact}, then $(X, d)$ is both complete and totally bounded.
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{Completeness} Let $\{ x_n \} \subset X$ be Cauchy. Then by the assumption that $X$ is sequentially compact, $\{ x_n \}$ has a subsequence $\{ x_{n_k} \}$ such that $x_{n_k} \to x_0 \in X$. Then by \cref{thm:convergent_cauchy_subsequences}, $x_n \to x_0$. $\dashv$
+
+  \noindent
+  \hlbnoted{Totally Bounded} Suppose to the contrary that $X$ is not totally bounded, i.e. $\exists \epsilon_0 > 0$ such that $X$ has no finite $\epsilon_0$-net. Then we can find $x_1 \in X$ such that $B(x_1, \epsilon_0) \neq X$, an $x_2 \in X \setminus B(x_1, \epsilon_0)$, $x_3 \in X \setminus ( B(x_1, \epsilon_0) \cup B(x_2, \epsilon_2) )$, and so on. In other words, we can construct a sequence $\{ x_n \} \subset X$ such that $d(x_n, x_m) > \epsilon$ for all $n \neq m$. Then by construction, $\{ x_n \}$ has no convergent subsequences, i.e. $X$ is not sequentially compact.\qed\
+\end{proof}
+
+\begin{thm}[Continuity Preserves Sequential Compactness]\label{thm:continuity_preserves_sequential_compactness}
+  If $(X, d)$ is sequentially compact and if $f : (X, d_X) \to (Y, d_Y)$ is continuous, then $f(X)$ is sequentially compact.
+\end{thm}
+
+\begin{proof}
+  Let $\{ y_n \} \subset f(X)$. Consider $\{ x_n \}$ such that $f(x_n) = y_n$. Since $X$ is sequentially compact, $\{ x_n \}$ has a convergent subsequence $\{ x_{n_k} \}$ with $x_{n_k} \to x_0$. Then by continuity,
+  \begin{equation*}
+    y_{n_k} = f(x_{n_k}) \to f(x_0) = y_0.
+  \end{equation*}\qed\
+\end{proof}
+
+\begin{crly}[Extreme Value Theorem]\index{Extreme Value Theorem}\label{crly:extreme_value_theorem}
+  If $(X, d)$ is sequentially compact and $f : X \to \mathbb{R}$ is continuous, then $\exists c, d \in X$ such that
+  \begin{equation*}
+    f(c) \leq f(x) \leq f(d)
+  \end{equation*}
+  for all $x \in X$.
+\end{crly}
+
+\begin{proof}
+  By \cref{thm:continuity_preserves_sequential_compactness}, $f(X)$ is sequentially compact in $\mathbb{R}$, and by \cref{propo:sequential_compactness_implies_completeness_and_total_boundedness}, $f(X)$ is complete, and so by \hyperref[thm:heine_borel_theorem]{Heine-Borel}, $f(X)$ is closed and bounded. Thus
+  \begin{equation*}
+    \sup(f(X)), \inf(f(X)) \in f(X).
+  \end{equation*}\qed\
+\end{proof}
+
+\begin{thm}[Lesbesgue]\index{Lesbesgue}\label{thm:lesbesgue}
+  Let $(X, d)$ be sequentially compact. Let $\{ U_\alpha \}_{\alpha \in I}$ be an open cover of $X$. Then $\exists \epsilon > 0$ such that for every $0 < \delta < \epsilon$, and every $x \in X$ such that for some $\alpha_0 \in I$
+  \begin{equation*}
+    B(x_0, \delta) \subset U_{\alpha_0}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  If $U_{\alpha_0} = X$, then any $\epsilon > 0$ will work. WMA $U_\alpha \neq X$ for any $\alpha \in I$. Let $\phi : X \to \mathbb{R}$ be defined by
+  \begin{equation*}
+    \phi(x) = \sup \left\{ \delta > 0 : B(x, \delta) \subseteq U_{\alpha_0}, \alpha_0 \in I \right\}.
+  \end{equation*}
+  Since $\{ U_\alpha \}_{\alpha \in I}$ is an open cover of $X$, every $x$ must be in one of the $U_\alpha$'s, and so the set
+  \begin{equation*}
+    \{ \delta > 0 : B(x, \delta) \subseteq U_{\alpha_0}, \alpha_0 \in I \}
+  \end{equation*}
+  is non-empty and $\phi(x) > 0$. Also, $\phi(x) < \infty$, since $X$ is bounded (as $X$ is sequentially compact) and $U_\alpha \neq X$ for any $\alpha \in I$.
+
+  % TODO Question: How to show this?
+  Now for any $x, y \in X$, \sidenote{\hlwarn{I should check in with the professor on how to show this}} we have that
+  \begin{equation*}
+    \phi(x) \leq \phi(y) + d(x,y)
+  \end{equation*}
+  by the Triangle Inequality. Thus
+  \begin{equation*}
+    \phi(x) - \phi(y) \leq d(x, y)
+  \end{equation*}
+  and by symmetry we have
+  \begin{equation*}
+    \abs{ \phi(x) - \phi(y) } \leq d(x, y).
+  \end{equation*}
+  Thus $\phi$ is \hyperref[defn:lipschitz]{Lipschitz}, and so $\phi$ is uniformly continuous\sidenote{see note on definition of Lipschitz.}. Then by the Extreme Value Theorem, $\exists \epsilon > 0$ such that $\exists \epsilon > 0$ such that $\phi(x) \geq \epsilon$ for all $x \in X$.\qed\
+\end{proof}
+
+\begin{note}
+  The $\epsilon$ in \hyperref[thm:lesbesgue]{Lesbesgue's Theorem} is also called a \hldefn{Lesbesgue Number}.
+\end{note}
+
+\begin{thm}[Lesbesgue-Borel]\index{Lesbesgue-Borel}\label{thm:lesbesgue_borel}
+  Let $(X, d)$ be a metric space. TFAE:
+  \begin{enumerate}
+    \item $(X, d)$ is compact.
+    \item $(X, d)$ has BWP.
+    \item $(X, d)$ is seqentially compact.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  We already have \hlbnoted{$(1) \implies (2)$} and \hlbnoted{$(2) \iff (3)$}. It suffices to prove \hlbnoted{$(3) \implies (1)$}. Let $\{ U_\alpha \}_{\alpha \in I}$ be a cover of $X$. By Lesbesgue's Theorem, let $\epsilon_0 > 0$, and fix $0 < \delta < \epsilon_0$. Since $(X, d)$ is totally bounded (as it sequentially compact), there exists $\{ x_1, \ldots, x_n \}$ with
+    \begin{equation*}
+      X = \bigcup_{i=1}^{n} B (x_i, \delta).
+    \end{equation*}
+    Then for each $i$, we have that $B(x_i, \delta) \subset U_{\alpha_i}$ for some $\alpha_i \in I$. Then
+    \begin{equation*}
+      X = \bigcup_{i=1}^{n} U_{\alpha_i}
+    \end{equation*}
+    is a finite subcover of the cover $\{ U_\alpha \}_{\alpha \in I}$.\qed\
+\end{proof}
+
+\begin{thm}[Compactness $\iff$ Completeness + Totally Bounded]\label{thm:compactness_iff_completeness_totally_bounded}
+    Let $(X, d)$ be a metric space. TFAE:
+    \begin{enumerate}
+      \item $(X, d)$ is compact.
+      \item $(X, d)$ is compelte and totally bounded.
+    \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  By \cref{thm:lesbesgue_borel} and \cref{propo:sequential_compactness_implies_completeness_and_total_boundedness}, we have \hlbnoted{$(1) \implies (2)$}. Thus it suffices to show for \hlbnoted{$(2) \implies (1)$}. Notice that we only need to show that $(X, d)$ is sequentially compact. Let $\{ x_n \} \subset (X, d)$.
+  
+  Since $(X, d)$ is totally bounded, $X$ can be covered by finitely many open balls of radius $1$. Thus one such ball $S_1 = B(y_1, 1)$, for some $y_1 \in X$, contains infinitely many terms in $\{ x_n \}$ \sidenote{Note that sequences are infinitary by nature in our context.}.
+
+  Similarly, $X$ can be covered by finitelym any open balls of radius $\frac{1}{2}$, and we can pick one of these open balls $S_2 = B\left(y_2, \frac{1}{2}\right)$ which contains infinitely many terms in $\{ x_n \} \cap S_1$.
+
+  Recursively, we may construct a sequence of open balls $\left\{ S_k = B\left(y_k, \frac{1}{k}\right) \right\}$ with the property that each $S_{k + 1}$ contains infinitely many terms is
+  \begin{equation*}
+    \{ x_n \} \cap \left( \bigcap_{i=1}^{k} S_i \right).
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    \diam(S_k) = \frac{2}{k} \to 0
+  \end{equation*}
+  as $k \to \infty$, and siwe can pick
+  \begin{equation*}
+    n_1 < n_2 < \hdots < n_k < \hdots
+  \end{equation*}
+  such that
+  \begin{equation*}
+    x_{n_{k + 1}} \in \bigcap_{i=1}^{k} S_i.
+  \end{equation*}
+  WMA for some $N \in \mathbb{N}$, for any $k, m \geq N$, we ahve that $x_{n_k}, x_{n_m} \in S_N$, i.e.
+  \begin{equation*}
+    \diam(x_{n_k}, x_{n_m}) \leq \diam(S_N).
+  \end{equation*}
+  Thus $\{ x_{n_k} \} \subset \{ x_n \}$ is Cauchy. Since $(X, d)$ is complete, $x_{n_k} \to x_0$, and therefore $X$ is sequentially compact by definition.\qed\
+\end{proof}
+
+% section compactness_continued_2 (end)
+
+% chapter lecture_29_nov_19th (end)
 
 \appendix
 
