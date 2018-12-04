@@ -3570,7 +3570,7 @@ This gives us some sort of comfort knowing that we have some method of checking 
 
   \noindent\hlbnoted{$(3) \implies (4)$}: Suppose $\mathcal{M} \models T$ such that $\bar{T} = \Th(\mathcal{M})$. Let $\mathcal{N} \models T$. Then $\mathcal{N} \models \bar{T}$, and as above, we have $\bar{T} = \Th(\mathcal{N})$. Therefore $\Th(\mathcal{M}) = \Th(\mathcal{N})$, i.e. $\mathcal{M} \equiv \mathcal{N}$.
 
-  \noindent\hlbnoted{$(4) \implies (1)$}: Suppose $T \not\models \sigma$, where $\sigma$ is an $\mathcal{L}$-sentence. Then there exists $\mathcal{M} \models T$ such that $\mathcal{M} \models \neg \sigma$. Let $\mathcal{N} \models T$. By assumption, since any two models of $T$ are elementarily equivalent, we must also have $\mathcal{N} \models \neg \sigam$. Therefore $T \models \neg \sigma$.\qed\
+  \noindent\hlbnoted{$(4) \implies (1)$}: Suppose $T \not\models \sigma$, where $\sigma$ is an $\mathcal{L}$-sentence. Then there exists $\mathcal{M} \models T$ such that $\mathcal{M} \models \neg \sigma$. Let $\mathcal{N} \models T$. By assumption, since any two models of $T$ are elementarily equivalent, we must also have $\mathcal{N} \models \neg \sigma$. Therefore $T \models \neg \sigma$.\qed\
 \end{proof}
 
 % subsection theories (end)
@@ -3754,6 +3754,48 @@ In general, it is rather diffcult to describe a non-principal ultrafilter. Howev
 
   Quite clearly so, since $A \notin \mathcal{F}$, $\mathcal{F} \subseteq \mathcal{G}$. Since $\mathcal{F}$ is an ultrafilter, we have that $\mathcal{F} = \mathcal{G}$. Therefore $I \setminus A \in \mathcal{G} = \mathcal{F}$, as required.\qed\
 \end{proof}
+
+We are now ready to define what an \hlnotea{ultraproduct} is.
+
+\begin{defn}[Ultraproduct]\index{Ultraproduct}\label{defn:ultraproduct}
+  Let $(\mathcal{M}_i : i \in I)$ be a sequence of $\mathcal{L}$-structures indexed by $I \neq \emptyset$, and $\mathcal{U}$ an ultrafilter. An \hlnoteb{ultrafilter} is an $\mathcal{L}$-structure which is defined as follows: we denote the ultraproduct $\mathcal{M}$ as
+  \begin{equation*}
+    \mathcal{M} = \prod_{\mathcal{U}} \mathcal{M}_i,
+  \end{equation*}
+  where
+  \begin{itemize}
+    \item its universe is
+      \begin{equation*}
+        M = \underset{i \in I}{\times} M_i / E,
+      \end{equation*}
+      where $E$ is an equivalence relation defined as
+      \begin{equation*}
+        (a_i : i \in I) E (b_i : i \in I) \iff \{ i \in I : a_i = b_i \} \in \mathcal{U};
+      \end{equation*}
+    \item its constants are
+      \begin{equation*}
+        c^\mathcal{M} = [( c^{\mathcal{M}_i} : i \in I )]
+      \end{equation*}
+      for $c \in \mathcal{L}^{\con}$;
+    \item its $n$-ary functions are
+      \begin{equation*}
+        f^\mathcal{M} ( [ \alpha_1 ], \ldots, [ \alpha_n ] ) = [ ( f^{\mathcal{M}_i}( a_1(i), \ldots, a_n(i) ) : i \in I ) ]
+      \end{equation*}
+      where $[\alpha_1], \ldots, [\alpha_n] \in M$ and $\alpha_j = ( a_j(i) : i \in I )$, where $a_j(i) \in M_i$;
+    \item its $k$-ary relations are
+      \begin{equation*}
+        ( [ \alpha_1 ], \ldots, [ \alpha_n ] ) \in R^\mathcal{M} \iff \{ i \in I : ( a_1(i), \ldots, a_n(i) ) \in R^{\mathcal{M}_i} \} \in \mathcal{U}.
+      \end{equation*}
+  \end{itemize}
+\end{defn}
+
+\begin{ex}
+  Verify that the functions and relations of the ultraproduct $\mathcal{M}$ is well-defined; in particular, the definition of the functions and relations are independent of the elements $[\alpha_i] \in M$.
+\end{ex}
+
+\begin{note}
+  Note that in the definition of an ultraproduct, we may notice that, almost deceivingly so, $\mathcal{U}$ need not be an ultrafilter.
+\end{note}
 
 % subsection a_proof_of_compactness_using_ultraproducts (end)
 
