@@ -3803,6 +3803,176 @@ We are now ready to define what an \hlnotea{ultraproduct} is.
 
 % chapter lecture_17_nov_06th (end)
 
+\chapter{Lecture 18 Nov 08th}%
+\label{chp:lecture_18_nov_08th}
+% chapter lecture_18_nov_08th
+
+\section{Compactness (Continued)}%
+\label{sec:compactness_continued}
+% section compactness_continued
+
+\subsection{A Proof of Compactness Using Ultraproducts (Continued)}%
+\label{sub:a_proof_of_compactness_using_ultraproducts_continued}
+% section a_proof_of_compactness_using_ultraproducts_continued
+
+Recall our last note in the last lecture.
+
+\begin{eg}
+  Suppose that $\mathcal{F} = \{ I \}$ is a filter (which it trivially is), then $E$ is the trivial equivalence relation, and $\mathcal{M}$ would just be the ``cartesian product'' of the $\mathcal{M}_i$'s.
+
+  For instance, suppose that we have the language $\mathcal{L} = \{ 0, 1, +, -, \times \}$ and $I = \omega$. Then $\mathcal{F} = \{ \omega \}$. Consider the $\mathcal{L}$-structure $\mathcal{M} = ( \mathbb{Z}, 0, 1, +, -, \times )$. Then in
+  \begin{equation*}
+    R = \underset{i \in I}{\times} ( \mathbb{Z}, 0, 1, +, -, \times ),
+  \end{equation*}
+  we have
+  \begin{equation*}
+    (1, 0, 1, 0, \ldots) \cdot ( 0, 1, 0, 1, \ldots ) = ( 0, 0, 0, 0, \ldots )
+  \end{equation*}
+  but neither $(1, 0, 1, 0, \ldots)$ nor $(0, 1, 0, 1, \ldots)$ are $(0, 0, 0, 0, \ldots)$. Therefore $R$ is not an \hlnotea{integral domain}.
+
+  Suppose that we have, instead, constructed an ultraproduct
+  \begin{equation*}
+    \mathcal{S} = \prod_{\mathcal{U}} \mathcal{M}_i
+  \end{equation*}
+  with an ultrafilter $\mathcal{U}$. Then in comparison, we have
+  \begin{equation*}
+    [(1, 0, 1, 0, \ldots)] \cdot [(0, 1, 0, 1, \ldots)] = [(0, 0, 0, 0, \ldots)] = 0_\mathcal{S}.
+  \end{equation*}
+  Now if $[(1, 0, 1, 0, \ldots)] \neq 0_\mathcal{S}$, then any of the elements that is zero on the even entries would not be in $\mathcal{U}$. If $[(0, 1, 0, 1, \ldots)] \neq 0_{\mathcal{S}}$, then any of the elements that is zero on the odd entries would not be in $\mathcal{U}$. But these sets are complements of each other, and so one of them must be in $\mathcal{U}$ since $\mathcal{U}$ is an ultrafilter.
+\end{eg}
+
+\begin{thm}[{\L}o\'{s}]\index{{\L}o\'{s}}\label{thm:los}
+  Suppose we have a sequence of $\mathcal{L}$-structures $(\mathcal{M}_i : i \in I)$, an ultrafilter $\mathcal{U}$, an ultraproduct of the $\mathcal{M}_i$'s $\mathcal{M} = \prod_{\mathcal{U}}$, an $\mathcal{L}$-formula $\phi(x_1, \ldots, x_n)$, and elements $[\alpha_1], \ldots, [\alpha_n] \in M$, where $\alpha_1, \ldots, \alpha_n \in \underset{i \in I}{\times} M_i$. Then
+  \begin{equation*}
+    \mathcal{M} \models \phi([\alpha_1], \ldots, [\alpha_n]) \iff \{ i \in I : \mathcal{M}_i \models \phi( \alpha_1(i), \ldots, \alpha_n(i) ) \} \in \mathcal{U}.
+  \end{equation*}
+  In particular, if $n = 0$, i.e. for any $\mathcal{L}$-sentence $\sigma$, we have
+  \begin{equation*}
+    \mathcal{M} \models \sigma \iff \{ i \in I : \mathcal{M}_i \models \sigma \} \in \mathcal{U}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  We shall first prove the following statement about $\mathcal{L}$-terms, of which we will need for the rest of the proof.
+
+  \noindent
+  \hlbnotea{Claim} If $t(x_1, \ldots, x_n)$ is an $\mathcal{L}$-term, then for any $[\alpha_1], \ldots, [\alpha_n] \in \mathcal{M}$, we have
+  \begin{equation*}
+    t^\mathcal{M} ( [ \alpha_1 ], \ldots, [ \alpha_n ] ) = [ ( t^{\mathcal{M}_i} ( \alpha_1(i), \ldots, \alpha_n(i) ) : i \in I ) ].
+  \end{equation*}
+
+  \noindent
+  \hlbnoteb{Proof of claim} This is clearly true for when our $\mathcal{L}$-terms is either constants for functions, simply from the way of which we have defined them. If our $\mathcal{L}$-term is a variable, i.e. if $t(x_i) = x_i$, then the result follows as the $x_i$'s are variables for exactly any of the $[\alpha_j]$'s. $\dashv$
+
+  \noindent
+  We shall prove {\L}o\'{s}'s theorem by the complexity of $\phi(x_1, \ldots, x_n)$.
+
+  \noindent
+  \hlbnoted{Atomic formulae} If $\phi$ is of the form
+  \begin{equation*}
+    t(x_1, \ldots, x_n) = s (x_1, \ldots, x_n),
+  \end{equation*}
+  then we have
+  \begin{align*}
+    &\mathcal{M} \models \phi([\alpha_1], \ldots, [\alpha_n]) \\
+    &\iff t^\mathcal{M} ( [\alpha_1], \ldots, [\alpha_n] ) = s^\mathcal{M} ( [\alpha_1], \ldots, [\alpha_n] ) \\
+    &\iff [(t^{\mathcal{M}_i} ( \alpha_1(i), \ldots, \alpha_n(i) ) : i \in I)] = [( s^{\mathcal{M}_i} ( \alpha_1(i), \ldots, \alpha_n(i) ) : i \in I )] \\
+    &\iff \{ i \in I : t^{\mathcal{M}_i} ( \alpha_1(i), \ldots, \alpha_n(i) ) = s^{\mathcal{M}_i} ( \alpha_1(i), \ldots, \alpha_n(i) ) \} \in \mathcal{U} \\
+    &\iff \{ i \in I : \mathcal{M}_i \models \phi( \alpha_1(i), \ldots, \alpha_n(i) ) \} \in \mathcal{U}.
+  \end{align*}
+
+  If $\phi$ is of the form $(t_1, \ldots, t_k) \in R^k$, where $t_j$'s are $\mathcal{L}$-terms, then
+  \begin{align*}
+    &\mathcal{M} \models \phi([\alpha_1], \ldots, [\alpha_n]) \\
+    &\iff ( t_1^{\mathcal{M}}([\alpha_1], \ldots, [\alpha_n]), \ldots, t_k^\mathcal{M}([\alpha_1], \ldots, [\alpha_n]) ) \in R^\mathcal{M} \subseteq M^k \\
+    &\iff \{ i \in I : (t_1^{\mathcal{M}_i}(\alpha_1(i), \ldots, \alpha_n(i)), \ldots t_n^{\mathcal{M}_i}(\alpha_1(i), \ldots, \alpha_n(i))) \in R^{\mathcal{M}_i} \} \in \mathcal{U} \\
+    &\iff \{ i \in I : \mathcal{M}_i \models \phi(\alpha_1(i), \ldots, \alpha_n(i)) \} \in \mathcal{U},
+  \end{align*}
+  where the second $\iff$ is by the interpretation of $R$ in $\mathcal{M}$.
+
+    \noindent
+    \hlbnoted{Logical Operators} If $\phi$ is of the form $\neg \psi$ for some $\mathcal{L}$-formula $\psi(x_1, \ldots, x_n)$, then
+    \begin{align*}
+      &\mathcal{M} \models \phi([\alpha_1], \ldots, [\alpha_n]) \\
+      &\iff \mathcal{M} \not\models \psi([\alpha_1], \ldots, [\alpha_n]) \\
+      &\overset{IH}{\iff} \{ i \in I : \mathcal{M}_i \models \psi(\alpha_1(i), \ldots, \alpha_n(i)) \} \notin \mathcal{U} \\
+      &\iff \{ i \in I : \mathcal{M}_i \not\models \psi(\alpha_1(i), \ldots, \alpha_n(i)) \} \in \mathcal{U} \enspace \because \mathcal{U} \text{ is an ultrafilter } \\
+      &\iff \{ i \in I : \mathcal{M}_i \models \phi(\alpha_1(i), \ldots, \alpha_n(i)) \} \in \mathcal{U}.
+    \end{align*}
+
+    If $\phi$ is of the form $\phi_1 \lor \phi_2$, where $\phi_1(x_1, \ldots, x_n), \phi_2(x_1, \ldots, x_n)$ are $\mathcal{L}$-formulas, then
+    \begin{align*}
+      &\mathcal{M} \models \phi([\alpha_1], \ldots, [\alpha_n]) \\
+      &\iff \mathcal{M} \models \phi_1([\alpha_1], \ldots, [\alpha_n]) \text{ and } \mathcal{M} \models \phi_2([\alpha_1], \ldots, [\alpha_n]) \\
+      &\iff \{ i \in I : \mathcal{M}_i \models \phi_1(\alpha_1(i), \ldots, \alpha_n(i)) \}, \\
+      &\qquad\qquad \{ i \in I : \mathcal{M}_i \models \phi_2(\alpha_1(i), \ldots, \alpha_n(i)) \} \in \mathcal{U} \\
+      &\iff \{ i \in I : \mathcal{M}_i \models \phi_1(\alpha_1(i), \ldots, \alpha_n(i)), \\
+      &\qquad\qquad \mathcal{M}_i \models \phi_2(\alpha_1(i), \ldots, \alpha_n(i)) \} \in \mathcal{U} \\
+      &\iff \{ i \in I : \mathcal{M}_i \models \phi(\alpha_1(i), \ldots, \alpha_n(i)) \} \in \mathcal{U}.
+    \end{align*}
+
+    There is no need to show for the case of $\land$, as it is equivalent to showing $\neg \lor \neg$.
+
+    \noindent
+    \hlbnoted{Quantifiers} As mentioned in a few of the previous proofs in earlier propositions and theorems, it suffices to only prove for the existential case. Suppose $\phi$ is of the form $\exists y \psi(y)$, for some $\mathcal{L}$-formula $\psi(x_1, \ldots, x_n, y)$. Then
+    \begin{align*}
+      &\mathcal{M} \models \phi([\alpha_1], \ldots, [\alpha_n]) \\
+      &\iff \text{ there exists } [ \beta ] \in M \enspace \mathcal{M} \models \psi([\alpha_1], \ldots, [\alpha_n], [\beta]) \\
+      &\iff \text{ there exists } [\beta] \in M \enspace \\
+      &\qquad\qquad A_\beta := \{ i \in I : \mathcal{M}_i \models \psi(\alpha_1(i), \ldots, \alpha_n(i)) \} \in \mathcal{U}
+    \end{align*}
+    Now our goal is to show that
+    \begin{gather*}
+      A_\beta \in \mathcal{U} \\
+      \iff \\
+      B := \{ i \in I : \text{ there exists } b_i \in M_i \enspace \mathcal{M}_i \models \psi(\alpha_1(i), \ldots, \alpha_n(i), b_i) \} \in \mathcal{U}
+    \end{gather*}
+    We can, in fact, show that $A_\beta = B$. It is clear that $A_\beta \subset B$, since we may just label $b_i = \beta(i)$. For $B \susbeteq A_\beta$, define $\beta : I \to \bigcup_{i \in I} M_i$ by
+    \begin{equation*}
+      \beta(i) = \begin{cases}
+        b_i & i \in B \\
+        e_i & i \notin B
+      \end{cases}
+    \end{equation*}
+    where $e_i$ is just some dummy constant. Then $\beta \in \underset{i \in I}{\times} M_i$.
+    
+    Now if $i \in B$, we have that $\beta(i) = b_i$ such that $\mathcal{M}_i \models \psi(\alpha_1(i), \ldots, \alpha_n(i), b_i)$, and so
+    \begin{equation*}
+      \mathcal{M}_i \models \psi(\alpha_1(i), \ldots, \alpha_n(i), \beta(i)),
+    \end{equation*}
+    i.e. $i \in A_\beta$. This completes the proof.\qed\
+\end{proof}
+
+\begin{eg}
+  The class of finite groups is not axiomatizable.
+\end{eg}
+
+\begin{proof}
+  Let $G_n = \left( Z / n \mathbb{Z}, 0, + , - \right)$. Let $\mathcal{U}$ be an ultrafilter that extends the Fr\'{e}chet Filter. Then, let
+  \begin{equation*}
+    \mathcal{G} = \prod_{\mathcal{U}} G_n.
+  \end{equation*}
+  Since each of the $G_n$'s satisfies the axioms of groups, by \hyperref[thm:los]{{\L}o\'{s}' Theorem}, we have that $\mathcal{G}$ is also a group. Also, $\mathcal{G}$ is infinite. Let $\sigma_n$ be the $\mathcal{L}$-sentence
+  \begin{equation*}
+    \sigma_n = \exists x_1, \ldots, x_n \left( \bigwedge_{1 \leq i < j \leq n} x_i \neq x_j \right),
+  \end{equation*}
+  which is the sentence that says that ``I have $n$ elements (and I may have more)''. Then we have
+  \begin{equation*}
+    \{ m < \omega : G_m \models \sigma_n \} \supseteq \{ m < \omega : m \geq n \} \in \mathcal{U}
+  \end{equation*}
+  since the set in the middle is cofinite. Thus the first set is in $\mathcal{U}$. In particular, we have that
+  \begin{equation*}
+    \mathcal{G} \models \sigma_n \implies \abs{ G } \geq n
+  \end{equation*}
+  for any $n < \omega$. Then there exists an $\mathcal{L}$-sentence $\sigma$ such that it says that ``I have at least $\aleph_0$-many elements (and I may have more)''. This sentence cannot be satisfied by any of the finite structures.
+\end{proof}
+
+% section a_proof_of_compactness_using_ultraproducts_continued (end)
+
+% section compactness_continued (end)
+
+% chapter lecture_18_nov_08th (end)
+
 \appendix
 
 \backmatter\
@@ -3812,5 +3982,7 @@ We are now ready to define what an \hlnotea{ultraproduct} is.
 \bibliography{references}
 
 \printindex
+
+\listoftodos
 
 \end{document}
