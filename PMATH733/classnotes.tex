@@ -3655,9 +3655,9 @@ This gives us some sort of comfort knowing that we have some method of checking 
 \label{sec:compactness}
 % section compactness
 
-\begin{thm}[Compactness Theorem]\index{Compactness Theorem}\label{thm:compactness_theorem}
+\begin{thmnonum}[Compactness Theorem]\index{Compactness Theorem}
   Let $\mathcal{L}$ be a lagnauge, and $T$ an $\mathcal{L}$-theory. $T$ is consistent iff every finite subset of $T$ is consistent. 
-\end{thm}
+\end{thmnonum}
 
 The following is an equivalent formulation.
 
@@ -3813,7 +3813,7 @@ We are now ready to define what an \hlnotea{ultraproduct} is.
 
 \subsection{A Proof of Compactness Using Ultraproducts (Continued)}%
 \label{sub:a_proof_of_compactness_using_ultraproducts_continued}
-% section a_proof_of_compactness_using_ultraproducts_continued
+% subsection a_proof_of_compactness_using_ultraproducts_continued
 
 Recall our last note in the last lecture.
 
@@ -3927,7 +3927,7 @@ Recall our last note in the last lecture.
       \iff \\
       B := \{ i \in I : \text{ there exists } b_i \in M_i \enspace \mathcal{M}_i \models \psi(\alpha_1(i), \ldots, \alpha_n(i), b_i) \} \in \mathcal{U}
     \end{gather*}
-    We can, in fact, show that $A_\beta = B$. It is clear that $A_\beta \subset B$, since we may just label $b_i = \beta(i)$. For $B \susbeteq A_\beta$, define $\beta : I \to \bigcup_{i \in I} M_i$ by
+    We can, in fact, show that $A_\beta = B$. It is clear that $A_\beta \subset B$, since we may just label $b_i = \beta(i)$. For $B \subseteq A_\beta$, define $\beta : I \to \bigcup_{i \in I} M_i$ by
     \begin{equation*}
       \beta(i) = \begin{cases}
         b_i & i \in B \\
@@ -3967,11 +3967,176 @@ Recall our last note in the last lecture.
   for any $n < \omega$. Then there exists an $\mathcal{L}$-sentence $\sigma$ such that it says that ``I have at least $\aleph_0$-many elements (and I may have more)''. This sentence cannot be satisfied by any of the finite structures.
 \end{proof}
 
-% section a_proof_of_compactness_using_ultraproducts_continued (end)
+% subsection a_proof_of_compactness_using_ultraproducts_continued (end)
 
 % section compactness_continued (end)
 
 % chapter lecture_18_nov_08th (end)
+
+\chapter{Lecture 19 Nov 13th}%
+\label{chp:lecture_19_nov_13th}
+% chapter lecture_19_nov_13th
+
+\section{Compactness (Continued 2)}%
+\label{sec:compactness_continued_2}
+% section compactness_continued_2
+
+\subsection{A Proof of Comapactness Using Ultraproducts (Continued 2)}%
+\label{sub:a_proof_of_comapactness_using_ultraproducts_continued_2}
+% subsection a_proof_of_comapactness_using_ultraproducts_continued_2
+
+We shall introduce one of the special cases of an ultraproduct:
+
+\begin{defn}[Ultrapower]\index{Ultrapower}\label{defn:ultrapower}
+  Given $I \neq \emptyset$, $\mathcal{U}$ an ultrafilter on $I$, and a seqeunce $(\mathcal{M}_i : i \in I)$ of $\mathcal{L}$-structures such that $\mathcal{M}_i = \mathcal{M}$, some $\mathcal{L}$-structure. Then
+  \begin{equation*}
+    \mathcal{M}' = \prod_{\mathcal{U}} \mathcal{M}
+  \end{equation*}
+  is called the \hlnoteb{ultrapower} of $\mathcal{M}$.
+\end{defn}
+
+\begin{crly}[Corollary of {\L}o\'{s}]\index{Corollary of {\L}o\'{s}}\label{crly:corollary_of_los}
+  Given an $\mathcal{L}$-structure $\mathcal{M}$, the diagonal map
+  \begin{equation*}
+    \delta : \mathcal{M} \to \prod_{\mathcal{U}} \mathcal{M} \text{ given by } a \mapsto [(a, a, \ldots)]
+  \end{equation*}
+  is an elementary $\mathcal{L}$-embedding.
+\end{crly}
+
+\begin{note}
+  From this corollary, we see that ultrapowers are elementary extensions of the single $\mathcal{L}$-structure.
+
+  Also, if $\mathcal{U}$ is principal, then $\mathcal{M} \simeq \prod_{\mathcal{U}} \mathcal{M}$ \sidenote{This may be an interesting or at least a relatively simple exercise.
+  \begin{ex}
+    Show that if $\mathcal{U}$ is principal in \cref{crly:corollary_of_los}, then $\mathcal{M} \simeq \prod_{\mathcal{U}} \mathcal{M}$.
+  \end{ex}}
+\end{note}
+
+\begin{proof}
+  To show that $\delta$ is an elementary $\mathcal{L}$-embedding, we shall show that $\mathcal{M} \preceq \prod_{\mathcal{U}} \mathcal{M}$. Let $\phi(x_1, \ldots, x_n)$ be an $\mathcal{L}$-formula, and let $d : M \to M^I$ be defined by
+  \begin{equation*}
+    d(a_i) = (a_i, a_i, \ldots).
+  \end{equation*}
+  Then from $\mathcal{M}$, we have
+  \begin{align*}
+    &\mathcal{M} \models \phi(a_1, \ldots, a_n) \\
+    &\implies \{ i \in I : \mathcal{M} \models \phi(d(a_1)(i), \ldots, d(a_n)(i)) \} \\
+    &\qquad \overset{(*)}{=} \{ i \in I : \mathcal{M} \models \phi(a_1, \ldots, a_n) \} \overset{(**)}{=} I \in \mathcal{U} \\
+    &\overset{\hyperref[thm:los]{\text{{\L}o\'{s}}}}{\iff} \prod_{\mathcal{U}} \mathcal{M} \models \phi([d(a_1)], \ldots, [d(a_n)]) \\
+    &\iff \prod_{\mathcal{U}} \mathcal{M} \models \phi(\delta(a_1), \ldots, \delta(a_n)),
+  \end{align*}
+  where $(*)$ is because the two realizations give the same $i$'s, and $(**)$ is because the $i$'s do not matter in the condition, allowing all $i \in I$ to be in the set. This gives us that $\mathcal{L}$-formulas from the original structure is true in its ultrapower.
+
+  From $\prod_{\mathcal{U}} \mathcal{M}$, we have
+  \begin{align*}
+    &\prod_{\mathcal{U}} \mathcal{M} \models \phi(\delta(a_1), \ldots, \delta(a_n)) \\
+    &\overset{\hyperref[thm:los]{\text{{\L}o\'{s}}}}{\iff} \{ i \in I : \mathcal{M} \models \phi(d(a_1)(i), \ldots, d(a_n)(i)) \} \in \mathcal{U}.
+  \end{align*}
+  Then, for any $i_0$ in the above set, we have
+  \begin{equation*}
+    \mathcal{M} \models \phi(d(a_1)(i_0), \ldots, d(a_n)(i_0)) \implies \mathcal{M} \models \phi(a_1, \ldots, a_n).
+  \end{equation*}
+  This completes the proof.\qed\
+\end{proof}
+
+\paragraph{$\aleph_1$-compactness} We shall take a little detour and visit an aside that utilizes \hyperref[thm:los]{{\L}o\'{s}' Theorem}.
+
+\begin{defn}[$\aleph_1$-Compact]\index{$\aleph_1$-Compact}\label{defn:_aleph_1_compact}
+  We say that a set $A$ is \hlnoteb{$\aleph_1$-compact} if any countable collection of definable non-empty sets in $A$, with the \hlnotea{finite intersection property}\sidenote{The finite intersection property is such that every finite non-empty subcollection non-empty sets has a non-empty intersection. See also \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf}{notes on PMATH 351 (Real Analysis)}.}, then the collection has a non-empty intersection.
+\end{defn}
+
+\begin{propo}[Ultraproducts with a Non-Principal Ultrafilter is $\aleph_1$-compact]\label{propo:ultraproducts_with_a_non_principal_ultrafilter_is_aleph_1_compact}
+  Suppose $(\mathcal{M}_i : i < \omega)$ is a sequence of $\mathcal{L}$-structures, and $\mathcal{U}$ a non-principal ultrafilter on $\omega$. Then $\prod_{\mathcal{U}} \mathcal{M}_i$ is $\aleph_1$-compact.
+\end{propo}
+
+\begin{note}
+  \hlwarn{The given proof is not one that I can fully agree with}, since in the proof we may somehow assume that the sets are nested, which is not given in our assumption, and may not actually be a necessary condition. The provided proof will be recorded for archiving purposes. 
+\end{note}
+
+\begin{proof}
+  Let $\mathcal{M} = \prod_{\mathcal{U}} \mathcal{M}_i$, and $(F_i : i < \omega)$ a sequence of definable non-empty sets in $\mathcal{M}$, such that $F_i \neq \emptyset$. \hlwarn{Suppose that $F_j \subseteq F_i$ for $i < j$}. We may assume that $F_0 = M^n$, given by the $\mathcal{L}$-formula $x = x$. For $0 < i < \omega$, let $\phi_i(x)$ be the $\mathcal{L}$-formula that defines $F_i$. For each $i$, let
+  \begin{equation*}
+    n_i = \max \{ n \leq i : \mathcal{M}_i \models \exists x \phi_n(x) \},
+  \end{equation*}
+  where we know that the set above is non-empty as $F_0$ is defined. Then we have that $0 \leq n_i \leq i$. Also for each $i$, let $a_i \in M_i$ be such that $\mathcal{M}_i \models \phi_{n_i}(a_i)$. Now let $a = (a_i : i < \omega)$. We want to show that for all $n < \omega$,
+  \begin{equation*}
+    \mathcal{M} \models \phi_n([a])
+  \end{equation*}
+  so that
+  \begin{equation*}
+    [a] \in \bigcap_{n < \omega} F_n.
+  \end{equation*}
+  \todo{Come back to this proof after the exam.} \marginnote{Leaving it behind for now to focus on the more important stuff. See also \url{https://math.stackexchange.com/questions/3027612/ultraproducts-with-a-non-principal-ultrafilter-is-aleph-one-compact} [solved].}
+\end{proof}
+
+\begin{eg}
+  $(\mathbb{Z}, <)$ is not $\aleph_1$-compact but $\prod_{\mathcal{U}} (\mathbb{Z}, <)$, where $\mathcal{U}$ is a non-principal ultrafilter, is $\aleph_1$-compact.
+\end{eg}
+
+We are now ready to tackle on the problem which we have set out to solve.
+
+\begin{thm}[Compactness Theorem]\index{Compactness Theorem}\label{thm:compactness_theorem}
+  Let $T$ be an infinite $\mathcal{L}$-theory. If every finite subset of $T$ is consistent, then $T$ is consistent.
+\end{thm}
+
+\begin{proof}
+  Let $I$ be the collection of finite subsets of $T$. Then by assumption, we have that for $i \in I$,
+  \begin{equation*}
+    \mathcal{M}_i \models i.
+  \end{equation*}
+  Consider the collection of supersets of $i$
+  \begin{equation*}
+    X_i := \{ i' \in I : i \subseteq i' \}.
+  \end{equation*}
+  The collection of these $X_i$'s gives us the structure of a \hlnotea{lattice}:
+  \begin{marginfigure}
+    \begin{tikzcd}
+    $ $ &  & $ $ &  & $ $ &  & $ $ \\
+     &  &  & i \cup j \arrow[lu, no head, color=be-red] \arrow[ru, no head, color=be-red] &  &  &  \\
+     &  & i \arrow[ru, no head, color=be-red] \arrow[lluu, no head] &  & j \arrow[lu, no head, color=be-red] \arrow[rruu, no head] &  &  \\
+     &  &  & i \cap j \arrow[lu, no head] \arrow[ru, no head] &  &  &  \\
+     &  &  & \emptyset \arrow[u, no head] &  &  & 
+    \end{tikzcd}
+    \caption{Lattice structure from the $X_i$'s. Red lines are the parts captured by $X_i$.}\label{fig:lattice_structure_from_the_x_i_s}
+  \end{marginfigure}
+  \sidenote{Now if we simply consider the collection of these collections:
+  \begin{equation*}
+    \mathcal{V} = \{ X_i : i \in I \},
+  \end{equation*}
+  we notice that $\mathcal{V}$ is almost a filter, but not quite: we have
+  \begin{itemize}
+    \item $I = X_\emptyset \in \mathcal{V}$ and $\emptyset \notin \mathcal{V}$; and
+    \item for $X_i, X_j \in \mathcal{V}$, we have $X_i \cap X_j = X_{i \cup j} \in \mathcal{V}$.
+  \end{itemize}
+  \todo{Need to show an example of $\mathcal{V}$ failing to ``capture'' supersets.}}
+  Consider
+  \begin{equation*}
+    \mathcal{F} := \{ Y \subseteq I : Y \supset X_i, \, i \in I \}.
+  \end{equation*}
+  Notice that $\mathcal{F}$ is a filter, as
+  \begin{itemize}
+    \item $I \in \mathcal{F}$, $\emptyset \in \mathcal{F}$;
+    \item $\forall Y, Z \in \mathcal{F} \enspace Y \cap Z \supset X_{i \cup j} \implies Y \cap Z \in \mathcal{F}$; and
+    \item $\forall Y \in \mathcal{F} \, \land \, Z \supset Y \implies Z \supset Y \supset X_i$ for some $i \in I \implies Z \in \mathcal{F}$.
+  \end{itemize}
+  Let $\mathcal{U} \supset \mathcal{F}$ be an ultrafilter\sidenote{ \begin{ex} Show that $\mathcal{U}$ is a non-principal ultrafilter.  \end{ex}}. Let $\mathcal{M} = \prod_{\mathcal{U}} M_i$.
+
+  To show that $\mathcal{M} \models T$, let $\sigma \in T$. Then $\{ \sigma \} \in I$ and so $X_{\{\sigma\}} \in \mathcal{U}$ by construction. Then
+  \begin{equation*}
+    X_{\{\sigma\}} = \{ i \subset T \text{ finite } : \sigma \in i \}.
+  \end{equation*}
+  By assumption, for each $i \in X_{\{\sigma\}}$, we have $\mathcal{M}_i \models i$, and so in particular $\mathcal{M}_i \models \sigma$. Then in particular,
+  \begin{equation*}
+    X_{\{\sigma\}} \subset S_\sigma := \{ i \in I : \mathcal{M}_i \models \sigma \} \implies S_\sigma \in \mathcal{U}.
+  \end{equation*}
+  Thus by \hyperref[thm:los]{\text{{\L}o\'{s}}} we have $\mathcal{M} \models \sigma$ and so $\mathcal{M} \models T$ as required.\qed\
+\end{proof}
+
+% subsection a_proof_of_comapactness_using_ultraproducts_continued_2 (end)
+
+% section compactness_continued_2 (end)
+
+% chapter lecture_19_nov_13th (end)
 
 \appendix
 
