@@ -4923,7 +4923,7 @@ Note that bounded and totally bounded are \hlimpo{not equivalent}.
     Let $(X, d)$ be a metric space. TFAE:
     \begin{enumerate}
       \item $(X, d)$ is compact.
-      \item $(X, d)$ is compelte and totally bounded.
+      \item $(X, d)$ is complete and totally bounded.
     \end{enumerate}
 \end{thm}
 
@@ -4942,7 +4942,7 @@ Note that bounded and totally bounded are \hlimpo{not equivalent}.
   \begin{equation*}
     \diam(S_k) = \frac{2}{k} \to 0
   \end{equation*}
-  as $k \to \infty$, and siwe can pick
+  as $k \to \infty$, and since can pick
   \begin{equation*}
     n_1 < n_2 < \hdots < n_k < \hdots
   \end{equation*}
@@ -4960,6 +4960,173 @@ Note that bounded and totally bounded are \hlimpo{not equivalent}.
 % section compactness_continued_2 (end)
 
 % chapter lecture_29_nov_19th (end)
+
+\chapter{Lecture 30 Nov 21st}%
+\label{chp:lecture_30_nov_21st}
+% chapter lecture_30_nov_21st
+
+\section{Compactness (Continued 3)}%
+\label{sec:compactness_continued_3}
+% section compactness_continued_3
+
+The proof of the following theorem was left as an exercise:
+
+\begin{thm}[Continuity Preserves Compactness]\label{thm:continuity_preserves_compactness}
+  If $(X, d_X)$ is compact and $f : (X, d_X) \to (Y, d_Y)$ is continuous, then $f(X)$ is compact in $Y$.
+\end{thm}
+
+\begin{proof}
+  The proof easily follows from \cref{thm:lesbesgue_borel} and \cref{thm:continuity_preserves_sequential_compactness}.\qed\
+\end{proof}
+
+% section compactness_continued_3 (end)
+
+\section{Finite Dimensional Normed Linear Spaces}%
+\label{sec:finite_dimensional_normed_linear_spaces}
+% section finite_dimensional_normed_linear_spaces
+
+\begin{defn}[Bounded Linear Map]\index{Bounded Linear Map}\label{defn:bounded_linear_map}
+  A linear map $T : (V, \norm\cdot_V) \to (W, \norm\cdot_W)$ is said to be \hlnoteb{bounded} if
+  \begin{equation*}
+    \norm{T}_T = \sup \{ \norm{T(v)}_W \mid \norm{v}_V \leq 1 \} < \infty.
+  \end{equation*}
+\end{defn}
+
+In assignment 3, we proved the following important result about linear maps in finite dimensional normed lienar spaces.
+
+\begin{thm}[Boundedness is Equivalent to Continuity in Finite Dimensional Normed Linear Spaces]\label{thm:boundedness_is_equivalent_to_continuity_in_finite_dimensional_normed_linear_spaces}
+  Let $T : ( V, \norm\cdot_V ) \to (W, \norm\cdot_W)$ be a linear map. TFAE:
+  \begin{enumerate}
+    \item $T$ is bounded.
+    \item $T$ is continuous.
+    \item $T$ is continuous at $0$.
+  \end{enumerate}
+\end{thm}
+
+\begin{lemma}[Continuity of the Norm]\label{lemma:continuity_of_the_norm}
+  The function $f : ( V, \norm\cdot ) \to \mathbb{R}$ given by $f(x) = \norm{x}$ is continuous.
+\end{lemma}
+
+\begin{propo}[Linear Map Between Spaces of Different Dimensions is Bounded]\label{propo:linear_map_between_spaces_of_different_dimensions_is_bounded}
+  Let $T : (\mathbb{R}^n, \norm\cdot_2) \to (\mathbb{R}^m, \norm\cdot_2)$ be linear. Then $T$ is bounded.
+\end{propo}
+
+\begin{proof}
+  Since $T$ is a linear map, we may represent $T$ using a matrix $A$ such that
+  \begin{equation*}
+    A = \begin{bmatrix}
+      a_{11} & a_{12} & \hdots & a_{1n} \\
+      a_{21} & a_{22} & \hdots & a_{2n} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      a_{m1} & a_{m2} & \hdots & a_{mn}
+    \end{bmatrix}
+    = \begin{bmatrix}
+      \vec{a}_1 \\
+      \vec{a}_2 \\
+      \vdots \\
+      \vec{a}_m
+    \end{bmatrix}.
+  \end{equation*}
+  If $\norm{x} \leq 1$, then
+  \begin{align*}
+    \norm{T(x)}_2 &= \norm{ \begin{bmatrix}
+                          a_{11} & a_{12} & \hdots & a_{1n} \\
+                          a_{21} & a_{22} & \hdots & a_{2n} \\
+                          \vdots & \vdots & \ddots & \vdots \\
+                          a_{m1} & a_{m2} & \hdots & a_{mn}
+                      \end{bmatrix} \cdot \begin{bmatrix}
+                          x_1 \\
+                          \vdots \\
+                          x_n
+                      \end{bmatrix} }
+                      = \norm{ \begin{bmatrix}
+                          \vec{a}_1 \cdot \vec{x} \\
+                          \vec{a}_2 \cdot \vec{x} \\
+                          \vdots \\
+                          \vec{a}_m \cdot \vec{x}
+                      \end{bmatrix} } \\
+                  &= \left( \sum_{i=1}^{m} \left( \vec{a}_i \cdot \vec{x} \right)^2 \right)^\frac{1}{2} \leq \left( \sum_{i=1}^{m} \norm{\vec{a}_i}^2 \norm{\vec{x}}^2 \right)^\frac{1}{2} \\
+                  &\leq \left( \sum_{i=1}^{m} \norm{ \vec{a}_i }^2 \right)^\frac{1}{2}.
+  \end{align*}
+  This completes the proof.\qed\
+\end{proof}
+
+\begin{thm}[Boundedness of Functions between $n$-dimensional Vector Spaces and $n$-dimensional Normed Linear Spaces]\label{thm:boundedness_of_functions_between_n_dimensional_vector_spaces_and_n_dimensional_normed_linear_spaces}
+  Let $(V, \norm\cdot_V)$ be an $n$-dimensional normed linear space with basis $\{ v_1, \ldots, v_n \}$. Let $\Gamma_n : \mathbb{R}^n \to V$ be given by
+  \begin{equation*}
+    \Gamma_n(\alpha_1, \ldots, \alpha_n) = \alpha_1 v_1 + \hdots + \alpha_n v_n.
+  \end{equation*}
+  Then $\Gamma_n$ and $\Gamma_n^{-1}$ are both bounded. Furthermore, they are both continuous by \cref{thm:boundedness_is_equivalent_to_continuity_in_finite_dimensional_normed_linear_spaces}.
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{$\Gamma_n$ is bounded} Suppose $\norm{ (\alpha_1, \ldots, \alpha_n) }_2 \leq 1$. Then
+  \begin{align*}
+    \norm{ \Gamma_n(\alpha_1, \ldots, \alpha_n) }_V &= \norm{ \alpha_1 v_1 + \hdots \alpha_n v_n }_V \\
+                                                    &\leq \abs{ \alpha_1 } \norm{v_1}_V + \hdots \abs{ \alpha_n } \norm{v_n}_V \\
+                                                    &\leq \sum_{i=1}^{n} \norm{ v_i }_V.
+  \end{align*}
+
+  \noindent
+  \hlbnoted{$\Gamma_n^{-1}$ is bounded} Note that since $\Gamma_n$ is bounded, it is continuous. Consider
+  \begin{equation*}
+    S = \{ (\alpha_1, \ldots, \alpha_n) \in \mathbb{R}^n \mid \norm{ (\alpha_1, \ldots, \alpha_n) = 1 }_2 = 1 \}.
+  \end{equation*}
+  Since $S$ is closed and bounded, and is a subset of $\mathbb{R}^n$, $S$ is compact by the \hyperref[thm:heine_borel_theorem]{Heine-Borel Theorem}, and so $\Gamma(S)$ is compact in $V$ by \cref{thm:continuity_preserves_compactness}. Since the mapping $v \to \norm{v}_V$ is continuous, by the \hyperref[crly:extreme_value_theorem]{Extreme Value Theorem},
+  \begin{equation*}
+    \min \{ \norm{ \Gamma_n(\alpha_1, \ldots, \alpha_n) }_V \mid (\alpha_1, \ldots, \alpha_n) \in S \} = \alpha > 0.
+  \end{equation*}
+It follows y continuity that if $\norm{v}_V \leq \alpha$, then $\norm{\Gamma_n^{-1}(v)}_2 \leq 1$. Therefore, we have that $\norm{\Gamma_n^{-1}} \leq \frac{1}{\alpha}$.\qed\
+\end{proof}
+
+\begin{note}
+  \begin{enumerate}
+    \item $\Gamma_n$ is a \hyperref[defn:homeomorphism]{homeomorphism}.
+    \item As a consequence of $\Gamma$ being continuous, we have that $\{ x_n \}$ is Cauchy in $\mathbb{R}^n$ iff $\{ \Gamma(x_n) \}$ is Cauchy in $(V, \norm\cdot_V)$.
+    \item As a result, $(V, \norm\cdot_V)$ is complete by the Heine-Borel Theorem. Since $V$ is arbitrary, we have that \hlimpo{all finite dimensional normed linear spaces are complete}.
+  \end{enumerate}
+\end{note}
+
+\begin{thm}[The Basis of a Infinite Dimensional Banach Spaces is Uncountable]\label{thm:the_basis_of_a_infinite_dimensional_banach_spaces_is_uncountable}
+  Suppose $(W, \norm\cdot)$ is a infinite dimensional Banach Space. If $\{ w_\alpha \}_{\alpha \in I}$ is a basis of $W$, then $I$ is uncountable.
+\end{thm}
+
+\begin{ex}
+  Prove \cref{thm:the_basis_of_a_infinite_dimensional_banach_spaces_is_uncountable} (see also in A3).
+\end{ex}
+
+\begin{thm}[All Linear Maps Between Finite Dimensional Normed Linear Spaces are Bounded]\label{thm:all_linear_maps_between_finite_dimensional_normed_linear_spaces_are_bounded}
+  If $(V, \norm\cdot_V)$ and $(W, \norm\cdot_W)$ are finite dimensional normed linear spaces, and $T: V \to W$ is linear, then $T$ is bounded.
+\end{thm}
+
+\begin{proof}
+  Consider the following diagram that illustrates the relationship between each of the spaces:
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+      \node (V) at (-1.5, 1) {$(V, \norm\cdot_V)$};
+      \node (W) at (1.5, 1) {$(W, \norm\cdot_W)$};
+      \node (Rn) at (-1.5, -1) {$(\mathbb{R}^n, \norm\cdot_2)$};
+      \node (Rm) at (1.5, -1) {$(\mathbb{R}^m, \norm\cdot_2)$};
+      \draw[->] (-1.7, 0.5) -- (-1.7, -0.5) node[midway,left] {$\Gamma_n$};
+      \draw[->] (-1.3, -0.5) -- (-1.3, 0.5) node[midway,right] {$\Gamma_n^{-1}$};
+      \draw[->] (-.7, 1) -- (.7, 1) node[midway,above] {$T$};
+      \draw[->] (1.3, 0.5) -- (1.3, -0.5) node[midway,left] {$\Gamma_m$};
+      \draw[->] (1.7, -0.5) -- (1.7, 0.5) node[midway,right] {$\Gamma_m^{-1}$};
+    \end{tikzpicture}
+    \caption{Relationship between the finite dimensional normed linear spaces.}
+    \label{fig:relationship_between_the_finite_dimensional_normed_linear_spaces}
+  \end{figure}
+  Then, we define $S : (\mathbb{R}^n, \norm\cdot_2) \to (\mathbb{R}^m, \norm\cdot_2)$ such that $S = \Gamma_m \circ T \circ \Gamma_n^{-1}$. By \cref{propo:linear_map_between_spaces_of_different_dimensions_is_bounded}, $S$ is continuous. Consequently, we have that $T = \Gamma_m{-1} \circ S \circ \Gamma_n$, which is a composition of continuous functions. Thus $T$ is continuous, and hence bounded.\qed\
+\end{proof}
+
+\begin{crly}[All Linear Maps from A Finite Dimensional Normed Linear Space to Any Normed Linear Space is Bounded]\label{crly:all_linear_maps_from_a_finite_dimensional_normed_linear_space_to_any_normed_linear_space_is_bounded}
+  If $(V, \norm\cdot_V)$ is a finite dimensional normed lienar space, and $T : (V, \norm\cdot_V) \to (W, \norm\cdot_W)$ is linear, then $T$ is bounded.
+\end{crly}
+
+% section finite_dimensional_normed_linear_spaces (end)
+
+% chapter lecture_30_nov_21st (end)
 
 \appendix
 
