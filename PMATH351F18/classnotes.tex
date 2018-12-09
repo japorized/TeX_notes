@@ -5121,12 +5121,195 @@ It follows y continuity that if $\norm{v}_V \leq \alpha$, then $\norm{\Gamma_n^{
 \end{proof}
 
 \begin{crly}[All Linear Maps from A Finite Dimensional Normed Linear Space to Any Normed Linear Space is Bounded]\label{crly:all_linear_maps_from_a_finite_dimensional_normed_linear_space_to_any_normed_linear_space_is_bounded}
-  If $(V, \norm\cdot_V)$ is a finite dimensional normed lienar space, and $T : (V, \norm\cdot_V) \to (W, \norm\cdot_W)$ is linear, then $T$ is bounded.
+  If $(V, \norm\cdot_V)$ is a finite dimensional normed linear space, and $T : (V, \norm\cdot_V) \to (W, \norm\cdot_W)$ is linear, then $T$ is bounded.
 \end{crly}
 
 % section finite_dimensional_normed_linear_spaces (end)
 
 % chapter lecture_30_nov_21st (end)
+
+\chapter{Lecture 31 Nov 23rd}%
+\label{chp:lecture_31_nov_23rd}
+% chapter lecture_31_nov_23rd
+
+\section{Finite Dimensional Normed Linear Space (Continued)}%
+\label{sec:finite_dimensional_normed_linear_space_continued}
+% section finite_dimensional_normed_linear_space_continued
+
+In the last lecture, we discovered that if $(V, \norm\cdot_V)$ is an $n$-dimensional normed linear space, then
+\begin{equation*}
+  (V, \norm\cdot_V) \simeq (\mathbb{R}^n, \norm\cdot_2 ).
+\end{equation*}
+Notice that if $v \in V$, then $v = \Gamma_n(\Gamma_n^{-1}(v))$, and so
+\begin{equation*}
+  \norm{v} = \norm{ \Gamma_n( \Gamma_n^{-1}(v) ) } \leq \norm{ \Gamma_n } \norm{ \Gamma_n^{-1}(v) }_2.
+\end{equation*}
+By applying $\Gamma_n^{-1}$ once more, we have
+\begin{equation*}
+  \norm{ \Gamma_n^{-1}(v) }_2 \leq \norm{\Gamma_n^{-1}}\norm{v}_V.
+\end{equation*}
+It follows that if we let $\alpha = \frac{1}{\norm{\Gamma_n^{-1}}}$ and $\beta = \norm{\Gamma_n}$, then
+\begin{equation*}
+  \alpha \norm{ \Gamma_n^{-1}(v) }_2 \leq \norm{v}_V \leq \beta \norm{ \Gamma_n^{-1}(v) }_2
+\end{equation*}
+for every $v \in V$.
+
+We can deduce the following from the above:
+\begin{enumerate}
+  \item A set $A \subset V$ is open/closed/compact if $V$ iff $\Gamma_n^{-1}(A)$ is open/closed/compact in $\mathbb{R}^n$.
+  \item $A \subset (V, \norm\cdot)$ is compact iff $A$ is closed and bounded\sidenote{This is also known as the \hldefn{Heine-Borel Property}.}.
+  \item A sequence $\{ v_n \}$ is Cauchy/converges to $v_0$ in $(V, \norm\cdot_V)$ iff $\{ \Gamma_n(v_n) \}$ is Cauchy/converges to $\Gamma_n(v_0)$ in $(\mathbb{R}^n, \norm\cdot_2)$.
+\end{enumerate}
+
+The following result follows from our observations above:
+
+\begin{thm}[Completeness of Finite Dimensional Normed Lienar Spaces]\label{thm:completeness_of_finite_dimensional_normed_lienar_spaces}
+  Let $(V, \norm\cdot_V)$ be a finite dimensional normed linear space. Then $(V, \norm\cdot_V)$ is complete. In particular, if $(W, \norm\cdot_W)$ is any normed linear space, and $V$ is a finite dimensional subspace of $W$, then $V$ is closed in $W$.
+\end{thm}
+
+\begin{eg}[Unbounded Linear Function]
+  Let $(W, \norm\cdot_W)$ be infinite dimensional, with basis $\{ v_\alpha \}_{\alpha \in I}$. WMA that $\{ v_\alpha \}_W = 1$. Choose a countable collection $\{ v_1, v_2, \ldots \} \subset \{ v_\alpha \}_{\alpha \in I}$, and define
+  \begin{equation*}
+    \phi(v_\alpha) = \begin{cases}
+      n & v_\alpha = v_n \\
+      0 & \text{otherwise}
+    \end{cases}
+  \end{equation*}
+  Then if $w = \alpha_1 v_1 + \hdots + \alpha_n v_n$, we have
+  \begin{equation*}
+    \phi(w) = \sum_{i=1}^{n} \alpha+i \phi(v_{\alpha_i}).
+  \end{equation*}
+  Then $\phi : W \to \mathbb{R}$ is linear.
+\end{eg}
+
+\newthought{Question}: Is $\phi$ bounded? No.
+
+% section finite_dimensional_normed_linear_space_continued (end)
+
+\section{Uniform Continuity}%
+\label{sec:uniform_continuity}
+% section uniform_continuity
+
+We will finish on compactness with a few more results about uniform continuity.
+
+\begin{thm}[Sequential Characterization of Uniform Continuity]\label{thm:sequential_characterization_of_uniform_continuity}
+  Let $f : (X, d_X) \to (Z, d_Z)$. TFAE:
+  \begin{enumerate}
+    \item $f$ is uniformly continuous.
+    \item if $\{ x_n \}, \{ y_n \} \subset X$ with $d(x_n, y_n) \to 0$, then $d(f(x_n), f(y_n)) \to 0$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{$(1) \implies (2)$} $f$ is uniformly continuous \\
+  $\implies \forall \epsilon > 0 \; \exists \delta > 0 \; \forall x, y \in X \; d_X(x, y) < \delta \implies d_Z(f(x), f(y)) < \epsilon$ \\
+  $\implies \exists N_0 \in \mathbb{N} \; \forall n \geq N_0 \; d_X(x_n, y_n) < \delta \implies d_Z(f(x_n), f(y_n)) < \epsilon \dashv$
+
+  \noindent
+  \hlbnoted{$(2) \implies (1)$} $f$ is not uniformly continuous \\
+  $\implies \exists \epsilon_0 > 0 \; \forall \delta > 0 \; \exists x_0, y_0 \in X$ \\
+  $\quad d_X(x_0, y_0) < \delta \land d_Z(f(x_0), f(y_0)) > \epsilon_0$ \\
+  $\implies \forall N \in \mathbb{N} \; \exists n_0 \geq N$ \\
+  $\quad d_X(x_n, y_n) < \frac{1}{n} \land d_Z(f(x_n), f(y_n)) > \epsilon_0 \dashv$\qed\
+\end{proof}
+
+\begin{thm}[Continuous Functions from a Compact Set Is Uniformly Continuous]\label{thm:continuous_functions_from_a_compact_set_is_uniformly_continuous}
+  If $(X, d_X)$ is compact and if $f : (X, d_X) \to (Z, d_Z)$ is continuous, then $f$ is uniformly continuous.
+\end{thm}
+
+\begin{proof}
+  Suppose to the contrary that $f$ is not uniformly continuous \\
+  $\implies$ ($\because$ \cref{thm:sequential_characterization_of_uniform_continuity}) $\forall \{ x_n \}, \{ y_n \} \subset X$ \\
+  $\quad d_X(x_n, y_n) \to 0 \land d_Z(f(x_n), f(y_n)) \geq \epsilon_0 > 0$ \\
+  \noindent
+  But compactness $\implies \exists \{ x_{n_k} \} \subset \{ x_n \}, \{ y_{n_k} \} \subset \{ y_n \}$ such that \\
+  $x_{n_k} \to x_0 \in X \land y_{n_k} \to y_0 \in X$ \\
+  $\implies (\because$ continuity$) f(x_{n_k}) \to f(x_0) \land f(y_{n_k}) \to f(y_0)$ \\
+  $\implies d_Z(f(x_{n_k}), f(y_{n_k})) \to 0$ \Lightning\qed\
+\end{proof}
+
+\begin{thm}[Continuous Bijections from a Compact Space is a Homeomorphism]\label{thm:continuous_bijections_from_a_compact_space_is_a_homeomorphism}
+  Assume $(X, d_X)$ is compact and that $f: (X, d_X) \to (Y, d_Y)$ is continuous and bijective. Then $f^{-1} : Y \to X$ is continuous. In particular, $f$ is a homeomorphism.
+\end{thm}
+
+\begin{proof}
+  Notice that $(f^{-1})^{-1} = f$. Thus it suffices to show that if $U \subset X$ is open, then $f(U)$ is open in $Y$. Also, note that $Y = f(X)$ is compact as $X$ is compact.
+
+  \noindent
+  $U \subset X$ is open $\implies F = U^C$ is closed \\
+  $\implies F$ is compact ($\because$ $f$ is continuous) \\
+  $\implies f(F)$ is compact in $Y$ \\
+  $\implies f(F)$ is closed \\
+  $\implies f(U) = (f(F))^C$ is open ($\because f$ is bijective)\qed\
+\end{proof}
+
+% section uniform_continuity (end)
+
+\section{The Space $(C(X), \norm\cdot_\infty)$}%
+\label{sec:the_space_c_x_normcdot_infty_}
+% section the_space_c_x_normcdot_infty_
+
+\subsection{Weierstrass Approximation Theorem}%
+\label{sub:weierstrass_approximation_theorem}
+% subsection weierstrass_approximation_theorem
+
+\begin{eg}
+  Note that by \hlnotea{Taylor's Expansion}, we have that
+  \begin{equation*}
+    e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \hdots
+  \end{equation*}
+  Consider the partial sum
+  \begin{equation*}
+    S_k(x) = \sum_{n=0}^{k} \frac{x^n}{n!}.
+  \end{equation*}
+  Then we have that $S_k(x) \to e^x$ pointwise on $\mathbb{R}$. In fact, $S_k(x) \to e^x$ uniformly on $[-M, M]$.
+\end{eg}
+
+\newthought{Question}: Given a function $f \in C[a, b]$, can $f$ be uniformly approximated by polynomials?
+
+Before going further, notice that if, e.g. we let
+\begin{equation*}
+  \phi(x) = \frac{x - a}{b - a},
+\end{equation*}
+then $\phi : [a, b] \to [0, 1]$ bijectively so. Also, $\phi$ is continuous. Its inverse,
+\begin{equation*}
+  \phi^{-1}(x) = x(b - a) + a
+\end{equation*}
+is also continuous. We can then define $\Gamma: C[0, 1] \to C[a, b]$ by
+\begin{equation*}
+  \Gamma(f)(x) = f \circ \phi^{-1}(x),
+\end{equation*}
+whose inverse is
+\begin{equation*}
+  \Gamma^{-1} : C[a, b] \to C[0, 1] \text{ given by } \Gamma^{-1}(f)(x) = f \circ \phi(x).
+\end{equation*}
+Notice that $\Gamma$ is an \hyperref[defn:isometry]{isometry}: we have
+\begin{equation*}
+  \norm{ \Gamma(f) - \Gamma(g) }_\infty = \norm{ f - g }_\infty
+\end{equation*}
+for any $f, g \in C[0, 1]$. Moreover, \hlimpo{$\Gamma(p)$ is a polynomial iff $p$ is a polynomial}.
+
+Thus every continuous function in $C[a, b]$ can be uniformly approximated by polynomials iff the same is true in $C[0, 1]$, i.e. we only need to consider continuous functions on $[0, 1]$ for approximations.
+
+\newthought{Next}, observe that if $f \in C[0, 1]$, and if we can approximate
+\begin{equation*}
+  g(x) = f(x) - ([f(1) - f(0)] x + f(0)]),
+\end{equation*}
+uniformly to within $\epsilon > 0$, i.e.
+\begin{equation*}
+  \norm{ g - p }_\infty < \epsilon,
+\end{equation*}
+we may do the same for $f(x)$ with polynomials
+\begin{equation*}
+  \norm{g - p}_\infty < \epsilon \iff \norm{ f - [p - q] } < \epsilon,
+\end{equation*}
+where $q(x) = f(1) - f(0)$.
+
+% subsection weierstrass_approximation_theorem (end)
+
+% section the_space_c_x_normcdot_infty_ (end)
+
+% chapter lecture_31_nov_23rd (end)
 
 \appendix
 
