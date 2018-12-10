@@ -18,6 +18,7 @@
 \DeclareMathOperator{\bdy}{bdy }
 \DeclareMathOperator{\Lim}{Lim }
 \DeclareMathOperator{\diam}{diam }
+\DeclareMathOperator{\ND}{ND }
 
 \newcommand{\norm}[1]{\left\| #1 \right\|}
 
@@ -5303,13 +5304,168 @@ we may do the same for $f(x)$ with polynomials
 \begin{equation*}
   \norm{g - p}_\infty < \epsilon \iff \norm{ f - [p - q] } < \epsilon,
 \end{equation*}
-where $q(x) = f(1) - f(0)$.
+where $q(x) = f(1) - f(0)$. Notice that here, we have
+\begin{equation*}
+  g(0) = 0 = g(1).
+\end{equation*}
 
 % subsection weierstrass_approximation_theorem (end)
 
 % section the_space_c_x_normcdot_infty_ (end)
 
 % chapter lecture_31_nov_23rd (end)
+
+\chapter{Lecture 32 Nov 26th}%
+\label{chp:lecture_32_nov_26th}
+% chapter lecture_32_nov_26th
+
+\section{The Space $(C(X), \norm\cdot_\infty)$ (Continued)}%
+\label{sec:the_space_c_x_normcdot_infty_continued}
+% section the_space_c_x_normcdot_infty_continued
+
+\subsection{Weierstrass Approximation Theorem (Continued)}%
+\label{sub:weierstrass_approximation_theorem_continued}
+% subsection weierstrass_approximation_theorem_continued
+
+Before proving Weierstrass' Approximation Theorem, we require the following lemma:
+
+\begin{lemma}[Lemma for Weierstrass Approximation]\label{lemma:lemma_for_weierstrass_approximation}
+  Let $x \in [0, 1]$, then if $n \in \mathbb{N}$, we have
+  \begin{equation*}
+    (1 - x^2)^n \geq 1 - nx^2.
+  \end{equation*}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-.5,0) -- (2, 0) node[right]{$x$};
+      \draw[->] (0,-.5) -- (0, 2) node[right]{$y$};
+      \draw[scale=1.7,domain=0:1] plot ({\x},{(1 - \x^2)^(100)});
+    \end{tikzpicture}
+    \caption{Graph of $(1 - x^2)^n$ for large $n$, where $x \in [0, 1]$.}\label{fig:graph_of_1_x_2_n_for_large_n_where_x_in_0_1_}
+  \end{marginfigure}
+\end{lemma}
+
+\begin{proof}
+  Let $f(x) = (1 - x^2)^n - [ 1 - nx^2 ]$. Notice that $f(0) = 0$. Then
+  \begin{equation*}
+    f'(x) = 2nx\left( 1 - \left( 1 - x^2 \right)^{n - 1} \right) \geq 0.
+  \end{equation*}
+  Thus $f$ is increasing from $x = 0$. It follows that
+  \begin{equation*}
+    (1 - x^2)^n \geq 1 - nx^2,
+  \end{equation*}
+  as required.\qed\
+\end{proof}
+
+\begin{thm}[\vvimponote\ Weierstrass Approximation Theorem]\index{Weierstrass Approximation Theorem}\label{thm:weierstrass_approximation_theorem}
+  If $f \in C[a, b]$, then for each $\epsilon > 0$, there exists a polynomial $p(x)$ such that
+  \begin{equation*}
+    \norm{ f - p }_\infty < \epsilon.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  By our discussion by the end of \cref{sub:weierstrass_approximation_theorem}, we may assume that $[a, b] = [0, 1]$, and that $f(0) = 0 = f(1)$. Consequently, we may extend $f$ to a uniformly continuous function on $\mathbb{R}$ by defining $f(x) = 0$ if $x \in (-\infty, 0] \cup [1, \infty)$.
+
+  Now, let $Q_n(x) = c_n \left( 1 - x^2 \right)^n$, where $x_n$ is closed such that
+  \begin{equation*}
+    \int_{-1}^{1} Q_n(t) \dif{t} = 1.
+  \end{equation*}
+  Notice that
+  \begin{align*}
+    \int_{-1}^{1} \left(1 - x^2\right)^n \dif{x} &= 2 \int_{0}^{1} \left(1 - x^2 \right)^n \dif{x} \geq 2 \int_{0}^{\frac{1}{\sqrt{n}}} \left(1 - nx^2\right) \dif{x} \enspace \footnotemark \\
+                                                 &= \frac{4}{3 \sqrt{n}} > \frac{1}{\sqrt{n}},
+  \end{align*}
+  \footnotetext{How did we arrive at this new limit of $\frac{1}{\sqrt{n}}$?} % TODO weierstrass approx 1/sqrt(n)
+  and so we have
+  \begin{equation*}
+    c_n < \sqrt{n}.
+  \end{equation*}
+  For each $n$, define
+  \begin{align*}
+    p_n(x) &= \int_{-1}^{1} f(x + t) Q_n(t) \dif{t} = \int_{-x}^{1 - x} f(x + t) Q_n(t) \dif{t} \enspace \footnotemark \\
+           &= \int_{0}^{1} f(u) Q_n(u - x) \dif{u}.
+  \end{align*}
+  \footnotetext{Here, we can strink the limits of integration, for anything below $-x$ or above $1 - x$ are $0$ as per our assumption that $f$ is zero at $(-\infty, 0] \cup [1, \infty)$.} Notice that by \href{https://en.wikipedia.org/wiki/Leibniz_integral_rule}{Leibniz's Integral Rule}, we have
+  \begin{equation*}
+    \frac{d^{2n + 1}}{dx^{2n + 1}} p_n(x) = \int_{0}^{1} f(u) \frac{\partial^{2n + 1}}{\partial x^{2n + 1}} Q_n(u - x) \dif{u} = 0
+  \end{equation*}
+  by the construction of $Q_n(t)$. Thus $p_n$ is a polynomial of degree at most $2n$.
+
+  Now, note that since $\int_{-1}^{1} Q_n(t) \dif{t} = 1$, we have that
+  \begin{equation*}
+    f(x) = \int_{-1}^{1} f(x) Q_n(t) \dif{t}.
+  \end{equation*}
+  Let $\epsilon > 0$. By continuity of $f$, we may find $0 < \delta < 1$ such that
+  \begin{equation*}
+    \abs{ x - y } < \delta \implies \abs{ f(x) - f(y) } < \frac{\epsilon}{2}.
+  \end{equation*}
+  Then for $x \in [0, 1]$, we have
+  \begin{align}
+    \abs{ p_n(x) - f(x) } &= \abs{ \int_{-1}^{1} ( f(x + t) - f(x) ) Q_n(t) \dif{t} } \nonumber \\
+                          &\leq \int_{-1}^{1} \abs{ f(x + t) - f(x) } Q_n(t) \dif{t} \nonumber \\
+                          &= \int_{-1}^{-\delta} \abs{ f(x + t) - f(x) } Q_n(t) \dif{t} \nonumber \\
+                          &\qquad + \int_{-\delta}^{\delta} \abs{ f(x + t) - f(x) } Q_n(t) \dif{t} \nonumber \\
+                          &\qquad + \int_{\delta}^{1} \abs{ f(x + t) - f(x) } Q_n(t) \dif{t} \nonumber \\
+                          &\leq 2 \norm{f}_\infty \sqrt{n} \left( 1 - \delta^2 \right)^n + \frac{\epsilon}{2} + 2 \norm{f}_\infty \sqrt{n} \left( 1 - \delta^2 \right)^n \label{eq:weierstrass_approx_eq1} \\
+                          &= 4 \norm{f}_\infty \sqrt{n} \left( 1 - \delta^2 \right)^n + \frac{\epsilon}{2}, \nonumber
+  \end{align}
+  where \cref{eq:weierstrass_approx_eq1} follows by $\int_{-1}^{1} Q_n(t) \dif{t} = 1$ and $Q_n(t) \geq 0$ for $x \in [0, 1]$. Then since $0 < \delta < 1$, it follows that for sufficiently large $N$, we have
+  \begin{equation*}
+    4 \norm{f}_\infty \sqrt{N} \left( 1 - \delta^2 \right)^n \leq \frac{\epsilon}{2}.
+  \end{equation*}\qed\
+\end{proof}
+
+\begin{propo}[Moments]\index{Moments}\label{propo:moments}
+  Assume that $f \in C[0, 1]$, that
+  \begin{equation*}
+    \int_{0}^{1} f(t) \dif{t} = 0,
+  \end{equation*}
+  and
+  \begin{equation*}
+    \int_{0}^{1} f(t) t^n \dif{t} = 0
+  \end{equation*}
+  for every $n \in \mathbb{N}$. Then $f(x) = 0$ for $x \in [0, 1]$.
+\end{propo}
+\marginnote{
+\begin{ex}
+  Prove \cref{propo:moments}.
+\end{ex}
+}
+\begin{proof}
+  Since $f \in C[0, 1]$, by the Weierstrass Approximation Theorem, for $\epsilon > 0$, let $p_n(x)$ be a polynomial such that $\norm{ f - p_n }_\infty < \epsilon$. Then by the linearity of integration, and our assumption, we have
+  \begin{equation*}
+    \int_{0}^{1} f(t) p_n(t) \dif{t} = 0.
+  \end{equation*}
+  Consequently, we have
+  \begin{equation*}
+    \int_{0}^{1} f^2(t) \dif{t} = 0,
+  \end{equation*}
+  and thus $f(x) = 0$ at $[0, 1]$.\qed\
+\end{proof}
+
+\begin{thm}[Banach-Mazurkiewickz Theorem]\index{Banach-Mazurkiewickz Theorem}\label{thm:banach_mazurkiewickz_theorem}
+  Let
+  \begin{equation*}
+    \ND([0, 1]) = \{ f \in C[0, 1] : f \text{ is nowhere differentiable } \}.
+  \end{equation*}
+  Then $\ND([0, 1])$ is \hyperref[defn:residual]{residual}\sidenote{For quick reference, a set is residual if its complement is of first category.} in $(C[0, 1], \norm\cdot_\infty)$.
+\end{thm}
+
+\begin{proof}
+  For each $n$, define
+  \begin{align*}
+    \mathcal{F}_n &= \Bigg\{ f \in C[0, 1] \mid \\
+                  & \exists x_0 \in \left[0, 1 - \frac{1}{n}\right] \; \forall 0 < h < 1 - x_0 \enspace \abs{ f(x_0 + h) - f(x_0) } \leq nh \Bigg\}.
+  \end{align*}
+  We notice that each of the $\mathcal{F}_n$'s is closed. \hlwarn{incomplete proof, require further work} % TODO complete Banach-Mazurkiewickz
+\end{proof}
+
+% subsection weierstrass_approximation_theorem_continued (end)
+
+% section the_space_c_x_normcdot_infty_continued (end)
+
+% chapter lecture_32_nov_26th (end)
 
 \appendix
 
@@ -5343,5 +5499,7 @@ where $q(x) = f(1) - f(0)$.
 \bibliography{references}
 
 \printindex
+
+\listoftodos
 
 \end{document}
