@@ -5461,11 +5461,244 @@ Before proving Weierstrass' Approximation Theorem, we require the following lemm
   We notice that each of the $\mathcal{F}_n$'s is closed. \hlwarn{incomplete proof, require further work} % TODO complete Banach-Mazurkiewickz
 \end{proof}
 
+\begin{remark}
+  There is nothing special about $[0, 1]$ in the above theorem. In particular, it works for any closed interval $[a, b]$.
+\end{remark}
+
 % subsection weierstrass_approximation_theorem_continued (end)
 
 % section the_space_c_x_normcdot_infty_continued (end)
 
 % chapter lecture_32_nov_26th (end)
+
+\chapter{Lecure 33 Nov 28th}%
+\label{chp:lecure_33_nov_28th}
+% chapter lecure_33_nov_28th
+
+\section{The Space $(C(X), \norm\cdot_\infty)$ (Continued 2)}%
+\label{sec:the_space_c_x_normcdot_infty_continued_2}
+% section the_space_c_x_normcdot_infty_continued_2
+
+\subsection{Weierstrass Approximation Theorem (Continued 2)}%
+\label{sub:weierstrass_approximation_theorem_continued_2}
+% subsection weierstrass_approximation_theorem_continued_2
+
+\begin{crly}[Separability of $(C{[a, b]}, {\norm{\cdot}}_\infty)$]\label{crly:separability_of_c_a_b_normcdot_infty}
+  $(C[a, b], \norm\cdot_\infty)$ is \hyperref[defn:separable]{separable}.
+\end{crly}
+
+\begin{proof}
+  Let
+  \begin{gather*}
+    P_n = \{ a_0 + a_1 x + \hdots + a_n x^n : a_i \in \mathbb{R} \} \\
+    Q_n = \{ r_0 + r_1 x + \hdots + r_n x^n : r_i \in \mathbb{Q} \}.
+  \end{gather*}
+  Then $\bar{Q}_n = P_n$. Then by the \hyperref[thm:weierstrass_approximation_theorem]{Weierstrass Approximation Theorem}, $\bigcup_{n=1}^{\infty} P_n$ is dense, and so is the countable set $\bigcup_{n=1}^{\infty} Q_n$.\qed\
+\end{proof}
+
+% subsection weierstrass_approximation_theorem_continued_2 (end)
+
+\subsection{Stone-Weierstrass Theorem}%
+\label{sub:stone_weierstrass_theorem}
+% subsection stone_weierstrass_theorem
+
+\newthought{Question}: Given a compact metric space $(X, d)$, and a subspace $\Phi \subset C(X)$, how can we tell that $\Phi$ is dense?
+
+From here, we shall always assume that $(X, d)$ is a compact metric space.
+
+\begin{defn}[Point-Separating]\index{Point-Separating}\label{defn:point_separating}
+  We say that $\Phi \subset C(X)$ is \hlnoteb{point-separating} if\sidenote{Note that this definition does mean that every $f \in \Phi$ is injective, as the function may depend on either one or both $x$ and $y$. Of course, if every $f \in \Phi$ is injective, then $\Phi$ is, trivially, point-separating.}
+  \begin{equation*}
+    \forall x, y \in X ( x \neq y \implies \exists f \in \Phi ( f(x) \neq f(y) ) ).
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[$C(X)$ is Point-Separating]\label{propo:_c_x_is_point_separating}
+  $C(X)$ is point-separating.
+\end{propo}
+
+\begin{proof}
+  Let $a, b \in X$ such that $a \neq b$. Then, define $f_a(x) = d(a, x)$. It is then clear that $f_a \in C(X)$. Since $a \neq b$, we have that $f_a(b) = d(a, b) > 0$.\qed\
+\end{proof}
+
+\begin{note}
+  Suppose that $\Phi \subset C(X)$, and $x_1, x_2 \in X$ with $x_1 \neq x_2$, such that for any $f \in \Phi$, $f(x_1) = f(x_2)$. Then if $g \in \bar{\Phi}$, we must have $g(x_1) = g(x_2)$\sidenote{For otherwise $g$ would not be continuous}. This shows that if $\Phi$ is dense in $C(X)$, then it must separate points.
+\end{note}
+
+\subsubsection{Lattice Version}%
+\label{ssub:lattice_version}
+% subsubsection lattice_version
+
+\begin{defn}[Lattice]\index{Lattice}\label{defn:lattice}
+  A subspace $\Phi \subset C(X)$ is a \hlnoteb{lattice} if $f \lor g, \, f \land g \in \Phi$ for each $f, g \in \Phi$, where\sidenote{In words, a lattice is a set of functions closed under \hlnotea{maxima and minima}.}
+  \begin{align*}
+    (f \lor g)(x) &= \max \{ f(x), g(x) \} \\
+    (f \land g)(x) &= \min \{ f(x), g(x) \}.
+  \end{align*}
+\end{defn}
+
+\begin{note}\label{note:subspace_as_a_lattice}
+  \begin{enumerate}
+    \item Notice that
+      \begin{equation*}
+        ( f \lor g )(x) = \frac{(f(x) + g(x)) + \abs{ f(x) - g(x) }}{2} \in C(X)
+      \end{equation*}
+      for any $f, g \in C(X)$.
+    \item For minima, we have
+      \begin{equation*}
+        ( f \land g )(x) = - ( -f \lor -g ) = \frac{(f(x) + g(x)) - \abs{ f(x) - g(x) }}{2} \in C(X).
+      \end{equation*}
+  \end{enumerate}
+  It follows that since both $f \lor g$ and $f \land g$ are in $C(X)$ that $C(X)$ is a lattice. Moreover, if $\Phi \subset C(X)$ is a linear subspace, then $\Phi$ is a lattice if $f \lor g \in \Phi$ for every $f, g \in \Phi$.
+\end{note}
+
+\begin{eg}
+  A function $f \in C[a, b]$ is said to be a piecewise linear\index{piecewise linear function} if there exists
+  \begin{equation*}
+    P = \{ a = t_0 < t_1 < \hdots < t_n = b \},
+  \end{equation*}
+  i.e. a partition of $[a, b]$, such that
+  \begin{equation*}
+    f \restriction_{[ t_{i - 1}, t_i ]} (x) = m_i x + b_i.
+  \end{equation*}
+  The function is \hldefn{piecewise polynomial} if
+  \begin{equation*}
+    f \restriction_{[t_{i - 1}, t_i]} = c_{0, i} + c_{1, i} x + \hdots + c_{n, i} x^n,
+  \end{equation*}
+  where $c_{j, i} \in \mathbb{R}$. Let
+  \begin{equation*}
+    \Phi_1 = \{ f \in C[a, b] \mid f \text{ is piecewise linear } \}
+  \end{equation*}
+  and
+  \begin{equation*}
+    \Phi_2 = \{ f \in C[a, b] \mid f \text{ is piecewise polynomial } \}.
+  \end{equation*}
+  It is clear that both $\Phi_1$ and $\Phi_2$ are lattices.
+\end{eg}
+
+\begin{thm}[Stone-Weierstrass Theorem --- Lattice Version]\index{Stone-Weierstrass Theorem --- Lattice Version}\label{thm:stone_weierstrass_theorem_lattice_version}
+  Let $(X, d)$ be a compact metric space. Let $\Phi$ be a linear subspace of $C(X)$ such that
+  \begin{enumerate}
+    \item the constant function $1 \in \Phi$ \sidenote{It is okay that we simultaneously have $1 \in \Phi$ and $\Phi$ separating points, for all we need to know that $\Phi$ separate points is that for any $x, y \in X$ with $x \neq y$, \hlimpo{there exists} some $f \in \Phi$ such that $f(x) \neq f(y)$.};
+    \item $\Phi$ is point-separating; and
+    \item $f \lor g \in \Phi$ for any $f, g \in \Phi$ \sidenote{This implies that $\Phi$ is a lattice by note on page \pageref{note:subspace_as_a_lattice}.}
+  \end{enumerate}
+  Then $\bar{\Phi}$ is dense in $C(X)$.
+\end{thm}
+
+\begin{proof}
+  \marginnote{This is likely not a proof that one can come up in one sitting, especially when it is a theory that covers over 2 centuries of mathematical work. \todo{I need to get a better picture of the motivation of the proof.} As it is, it is very difficult to understand how this proof came by, and many of the steps are purely constructive.}Note that given $\alpha, \beta \in \mathbb{R}$ with $a \neq b \in X$, since $\Phi$ is point-separating (2), we can find $\phi \in \Phi$ such that $\phi(a) \neq \phi(b)$. Then, let
+  \begin{equation*}
+    g(t) = \alpha \cdot 1(t) + ( \beta - \alpha ) \frac{\phi(t) - \phi(a)}{\phi(b) - \phi(a)},
+  \end{equation*}
+  where $1(t)$ is the constant function $1 \in \Phi$. We have that $g \in \Phi$ since it uses operations of which $\Phi$ is closed under. Notice that
+  \begin{equation*}
+    g(a) = \alpha \text{ and } g(b) = \beta.
+  \end{equation*}
+
+  Let $f \in C(X)$ and $\epsilon > 0$. Now for any pair $x, y \in X$, we can find $\phi_{x, y} \in \Phi$ such that $\phi_{x, y}(x) = f(x)$ and $\phi_{x, y}(y) = f(y)$\todo{What else can we understand from $\phi_{x, y}$?} \sidenote{I feel somewhat on edge not having the faintest idea how $\phi_{x, y}$ works, except that it separates $x$ and $y$.}. Let $x \in X$. Since $\phi_{x, y}(y) - f(y) = 0$, and both $\phi_{x, y}$ and $f$ are continuous, we can find, for each $y \in X$, a $\delta_y > 0$ such that if $t \in B\left(y, \delta_y\right)$, then
+  \begin{equation*}
+    -\epsilon < \phi_{x, y}(t) - f(t) < \epsilon.
+  \end{equation*}
+  Now since $(X, d)$ is compact, we can find a finite collection $\{ y_1, \ldots, y_n \} \subset X$ such that
+  \begin{equation*}
+    X = \bigcup_{i=1}^{n} B \left( y_i, \delta_{y_i} \right),
+  \end{equation*}
+  and within each of the $B ( y_i, \delta_{y_i} )$, we have
+  \begin{equation*}
+    - \epsilon < \phi_{x, y_i}(t) - f(t) < \epsilon
+  \end{equation*}
+  for $t \in B(y_i, \delta_{y_i})$. Then, let
+  \begin{equation*}
+    \phi_x = \phi_{x, y_1} \lor \hdots \lor \phi_{x, y_n}.
+  \end{equation*}
+  If $z \in X$, then $z \in B(y_{i_0}, \delta_{i_0})$ for some $i_0 \in \{ 1, \ldots, n \}$, and so
+  \begin{equation*}
+    f(z) - \epsilon \leq \phi_{x, y_{i_0}}(z) \leq \phi_x(z).
+  \end{equation*}
+
+  On the other hand, since $\phi_{x}(x) - f(x) = 0$, and both $\phi_{x}$ and $f$ are continuous, for each $x \in X$, we can find a $\delta_x > 0$ such that if $t \in B(x, \delta_x)$, then
+  \begin{equation}\label{eq:stone_weierstrass_thm_lattice_eq1}
+    - \epsilon < \phi_x(t) - f(t) < \epsilon.
+  \end{equation}
+  As before, by the compactness of $(X, d)$, we can find $\{ x_1, \ldots, x_m \} \subset X$ such that
+  \begin{equation*}
+    X = \bigcup_{i=1}^{m} B \left( x_i, \delta_{x_i} \right).
+  \end{equation*}
+  Then, using a similar argument as in the previous case, by \cref{eq:stone_weierstrass_thm_lattice_eq1}, we have that
+  \begin{equation*}
+    \phi_x(t) < f(t) + \epsilon.
+  \end{equation*}
+  Thus, if $z \in B(x_{i_1}, \delta{x_{i_1}})$ for some $i_1 \in \{ 1, \ldots, m \}$, we have
+  \begin{equation*}
+    \phi(z) := \phi_{x_1}(z) \land \hdots \phi_{x_m}(z) \leq \phi_{x_{i_1}}(z) < f(z) + \epsilon.
+  \end{equation*}
+  Consequently, for any $z \in X$, we have that
+  \begin{equation*}
+    f(z) - \epsilon < \phi(z) < f(z) + \epsilon.
+  \end{equation*}
+  This gives us that for any $W \subset C(X)$, since we can construct such a $\phi$ that is within $\epsilon$-distance of $f$, $W \cap \bar{\Phi} \neq \emptyset$, thus implying that $\bar{\Phi}$ is dense in $C(X)$.\qed\
+\end{proof}
+
+% subsubsection lattice_version (end)
+
+\subsubsection{Subalgebra Version}%
+\label{ssub:subalgebra_version}
+% subsubsection subalgebra_version
+
+\begin{defn}[Subalgebra]\index{Subalgebra}\label{defn:subalgebra}
+  A subspace $\Phi \subset C(X)$ is a \hlnoteb{subalgebra} if $f \cdot g(x) = f(x) g(x) \in \Phi$ for any $f, g \in \Phi$.
+\end{defn}
+
+\begin{eg}
+  Let
+  \begin{equation*}
+    P_n = \{ a_0 + a_1 x + \hdots + a_n x^n \}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    P = \bigcup_{n=1}^{\infty} P_n
+  \end{equation*}
+  is a subalgebra of $C[a, b]$.\sidenote{See a quick work in notes on \href{https://tex.japorized.ink/PMATH347S18/classnotes.pdf\#page160}{PMATH 347}.}
+\end{eg}
+
+\begin{lemma}[Closure of a Subalgebra is a Subalgebra]\label{lemma:closure_of_a_subalgebra_is_a_subalgebra}
+  If $\Phi \subset C(X)$ is a subalgebra, then so is $\bar{\Phi}$.
+\end{lemma}
+
+\begin{proof}
+  Suppose $f_n \to f$ and $g_n \to g$, where $\{ f_n \}, \{ g_n \} \subset \Phi$. Then, we have
+  \begin{equation*}
+    \alpha f_n \to \alpha f
+  \end{equation*}
+  for $\alpha \in \mathbb{R}$, and
+  \begin{equation*}
+    f_n + g_n \to f + g.
+  \end{equation*}
+  Note that $\{ g_n \}$ is bounded if $g_n \to g$. Then,
+  \begin{equation*}
+    \norm{ f_n g_n - f g }_\infty \leq \norm{ g_n }_\infty \norm{ f_n - f }_\infty + \norm{ f }_\infty \norm{ g_n - g }_\infty
+  \end{equation*}
+  would imply that $f_n g_n \to fg$, and so $fg \in \Phi$.\qed\
+\end{proof}
+
+\begin{thmnonum}[Stone-Weierstrass Theorem --- Subalgebra Version]
+  If $\Phi \subset C(X)$ is a linear subspace such that
+  \begin{enumerate}
+    \item $1 \in \Phi$;
+    \item $\Phi$ is point-separating; and
+    \item $f \cdot g \in \Phi$ for all $f, g \in \Phi$ (which implies that $\Phi$ is a subalgebra).
+  \end{enumerate}
+  Then $\bar{\Phi}$ is dense in $C(X)$.
+\end{thmnonum}
+
+% subsubsection subalgebra_version (end)
+
+% subsection stone_weierstrass_theorem (end)
+
+% section the_space_c_x_normcdot_infty_continued_2 (end)
+
+% chapter lecure_33_nov_28th (end)
 
 \appendix
 
