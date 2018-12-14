@@ -5844,7 +5844,7 @@ Consequently, we see that if $f \in S$, we have that
 \begin{eg}
   The set
   \begin{equation*}
-    \Trig([0, 2 \pi)) := \span \{ 1, \cos ( n x ), \sin ( m x ) \mid n, m \in \mathbb{Z} \}
+    \Trig([0, 2 \pi)) := \Span \{ 1, \cos ( n x ), \sin ( m x ) \mid n, m \in \mathbb{Z} \}
   \end{equation*}
   is a subalgebra of $C[0, 2 \pi)$ that is point separating, and has $1$ in it (and closed). By \cref{thm:stone_weierstrass_theorem_subalgebra_version}, $\Trig([0, 2 \pi))$ is dense in $C[0, 2 \pi)$.
 \end{eg}
@@ -5891,6 +5891,181 @@ With this, we have the complex version of the Stone-Weierstrass Theorem.
 % section the_space_c_x_normcdot_infty_continued_3 (end)
 
 % chapter lecture_34_nov_30th (end)
+
+\chapter{Lecture 35 Dec 03rd}%
+\label{chp:lecture_35_dec_03rd}
+% chapter lecture_35_dec_03rd
+
+\section{The Space $(C(X), \norm\cdot_\infty)$ (Continued 4)}%
+\label{sec:the_space_c_x_normcdot_infty_continued_4}
+% section the_space_c_x_normcdot_infty_continued_4
+
+\subsection{Compactness in $C(X)$ and the Ascoli-Arzela Theorem}%
+\label{sub:compactness_in_c_x_and_the_ascoli_arzela_theorem}
+% subsection compactness_in_c_x_and_the_ascoli_arzela_theorem
+
+\newthought{Question}: If $(X, d)$ is compact nad $\mathcal{F} \subset C(X)$, when is $\mathcal{F}$ compact?
+
+We require the following notion:
+
+\begin{defn}[Equicontinuity]\index{Equicontinuity}\label{defn:equicontinuity}
+  Let $(X, d)$ be a metric space with $\mathcal{F} \subset C_b(X)$. We say that $\mathcal{F}$ is \hlnoteb{(pointwise) equicontinuous at $x_0 \in X$} if
+  \begin{gather*}
+    \forall \epsilon > 0 \; \exists \delta_{x_0} > 0 \; \forall f \in \mathcal{F} \; \forall x \in X \\
+    d(x, x_0) < \delta_{x_0} \implies \abs{ f(x) - f(x_0) } < \epsilon.
+  \end{gather*}
+  We say that $\mathcal{F}$ is \hlnoteb{equicontinuous} if it is (pointwise) equicontinous at each $x_0 \in X$.
+
+  We say that $\mathcal{F}$ is \hldefn{uniformly equicontinuous} if
+  \begin{gather*}
+    \forall \epsilon > 0 \; \exists \delta > 0 \; \forall f \in \mathcal{F} \; \forall x, y \in X \\
+    d(x, y) < \delta \implies \abs{ f(x) - f(y) } < \epsilon.
+  \end{gather*}
+\end{defn}
+
+\begin{note}
+  Notice that in the definition above, as compared to \hlnoteb{regular continuity} we have
+  \begin{enumerate}
+    \item for \hlnoteb{continuity}, $\delta$ may depend on $\epsilon$, $f$ and $x_0$;
+    \item for \hlnoteb{uniform continuity}, $\delta$ may depend on $\epsilon$ and $f$;
+    \item for \hlnoteb{equicontinuity}, $\delta$ may depend on $\epsilon$ and $x_0$; while
+    \item for \hlnoteb{uniform equicontinuity}, $\delta$ may solely depend on $\epsilon$.
+  \end{enumerate}
+  This was outlined on \href{https://en.wikipedia.org/wiki/Equicontinuity}{Wikipedia}\sidenote{So take it with a grain of salt?}.
+\end{note}
+
+\begin{eg}
+  A finite collection $\{ f_1, \ldots, f_n \} \subset C_b(X)$ is equicontinuous. This is a clear result since we may check for each of the functions.
+\end{eg}
+
+\begin{propo}[Equicontinuity in a Compact Set is Uniform]\label{propo:equicontinuity_in_a_compact_set_is_uniform}
+  If $(X, d)$ is compact and if $\mathcal{F} \subset C(X)$ is equicontinuous, then $\mathcal{F}$ is uniformly equicontinuous.
+\end{propo}
+
+\begin{proof}
+  Let $\epsilon > 0$. Since $\mathcal{F}$ is equicontinuous, for each $x_0 \in X$, we can find $\delta_{x_0} > 0$ if $x \in B(x_0, \delta_{x_0})$, then $\abs{ f(x) - f(x_0) } < \frac{\epsilon}{2}$ for any $f \in \mathcal{F}$. Since $(X, d)$ is compact, the cover $\{ B(x_0, \delta_{x_0}) \}_{x_0 \in X}$ has a \hyperref[thm:lesbesgue]{Lesbesgue Number} $\delta_0 > 0$. Then, let $0 < \delta < \delta_0$. If for $w , z \in X$ we have $d(w, z) < \delta$, then $z \in B(w, \delta) \subset B(x_0^', \delta_{x_0'})$ for some $x_0' \in X$. Then
+  \begin{equation*}
+    \abs{ f(z) - f(w) } \leq \abs{ f(z) - f(x_0) } + \abs{ f(x_0) - f(w) } < \epsilon.
+  \end{equation*}\qed\
+\end{proof}
+
+\begin{defn}[Pointwise Bounded Functions]\index{Pointwise Bounded Functions}\label{defn:pointwise_bounded_functions}
+  A family of functions $\mathcal{F} \subset C_b(X)$ is \hlnoteb{pointwise bounded} if for each $x_0 \in X$, $\exists M_{x_0} > 0$ such that $\abs {f(x_0)} < M_{x_0}$ for every $f \in \mathcal{F}$. We say that $\mathcal{F}$ is \hlnoteb{uniformly bounded}\index{Uniformly Bounded Functions} if $\exists M > 0$ such that $\norm{f}_\infty \leq M$ for every $f \in \mathcal{F}$.
+\end{defn}
+
+\begin{propo}[Pointwise Bounded Equicontinuous Functions in a Compact Set are Uniformly Bounded]\label{propo:pointwise_bounded_equicontinuous_functions_in_a_compact_set_are_uniformly_bounded}
+  Assume that $(X, d)$ is compact and that $\mathcal{F} \subseteq C(X)$ is equicontinuous and pointwise bounded. Then $\mathcal{F}$ is uniformly bounded.
+\end{propo}
+
+\begin{proof}
+  By \cref{propo:equicontinuity_in_a_compact_set_is_uniform}, $\mathcal{F}$ is uniformly equicontinuous. So let $\epsilon = 1$. Then $\exists \delta > 0$ such that for any $x, y \in X$, if $y \in B(x, \delta)$, then $\abs{ f(x) - f(y) } < 1$ for any $f \in \mathcal{F}$. By compactness of $(X, d)$ there exists a finite subset $\{ x_1, \ldots, x_n \} \subset X$ such that
+  \begin{equation*}
+    X = \bigcup_{i=1}^{n} B(x_i, \delta).
+  \end{equation*}
+  By assumption, we also know that for each of these $x_i$'s, there exists $M_1, \ldots, M_n > 0$ such that for any $f \in \mathcal{F}$, $\abs{ f(x_i) } \leq M_i$. Then let
+  \begin{equation*}
+    M_0 = \max \{ M_1, \ldots, M_n \}.
+  \end{equation*}
+  Then for any $z \in X$, we have that $z \in B(x_{i_0}, \delta)$ for some $i_0$. Therefore, we have that
+  \begin{equation*}
+    \abs{f(z)} \leq \abs{ f(z) - f(x_{i_0}) } + \abs{ f(x_{i_0}) } < 1 + M_0.
+  \end{equation*}\qed\
+\end{proof}
+
+\begin{defn}[Relatively Compact Sets]\index{Relatively Compact Sets}\label{defn:relatively_compact_sets}
+  Let $A \subset (X, d)$. We say that $A$ is \hlnoteb{relatively compact} if $\bar{A}$ is compact.
+\end{defn}
+
+\begin{note}
+  If $(X, d)$ is complete, then we have that $A$ is relatively compact iff $A$ is totally bounded.
+\end{note}
+
+\begin{thm}[Arzel\`{a}-Ascoli]\index{Arzel\`{a}-Ascoli}\label{thm:arzela_ascoli}
+  Let $(X, d)$ be a compact metric space, and $\mathcal{F} \subset C(X)$. TFAE:
+  \begin{enumerate}
+    \item $\mathcal{F}$ is relatively compact.
+    \item $\mathcal{F}$ is equicontinous and pointwise-bounded.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{$(1) \implies (2)$} Since $(X, d)$ is compact, it is complete, and so $\mathcal{F}$ being relatively compact implies that $\mathcal{F}$ is totally bounded. Thus $\mathcal{F}$ has a finite $\frac{\epsilon}{3}$-net $\{ f_1, f_2, \ldots, f_n \} \subset \mathcal{F}$. By an earlier example, we have that $\{ f_1, f_2, \ldots, f_n \}$ is equicontinuous, and hence uniformly equicontinuous by \cref{propo:equicontinuity_in_a_compact_set_is_uniform}. By that, we can find a $\delta > 0$ such that $\forall x, y \in X$, if $d(x, y) < \delta$, we have
+  \begin{equation*}
+    \abs{ f_i(x) - f_i(y) } < \frac{\epsilon}{3}
+  \end{equation*}
+  for all $i = 1, 2, \ldots, n$.
+
+  Now let $f \in \mathcal{F}$ be arbitrary, and let $w, z \in X$ such that $d(w, z) < \delta$. Since $\mathcal{F}$ has a finite$\frac{\epsilon}{3}$-net, there exists $i_0 = 1, 2, \ldots, n$ such that $\norm{ f - f_{i_0} }_\infty < \frac{\epsilon}{3}$. Thus
+  \begin{align*}
+    \abs{ f(w) - f(z) } &\leq \abs{ f(w) - f_{i_0}(w) } + \abs{ f_{i_0}(w) - f_{i_0}(z) } + \abs{ f_{i_0}(z) - f(z) } \\
+                        &\leq \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} < \epsilon.
+  \end{align*}
+  Therefore, $\mathcal{F}$ is uniformly continuous and uniformly bounded\sidenote{We proved for the stronger version.}.
+
+  \noindent
+  \hlbnoted{$(2) \implies (1)$} By \cref{propo:equicontinuity_in_a_compact_set_is_uniform} and \cref{propo:pointwise_bounded_equicontinuous_functions_in_a_compact_set_are_uniformly_bounded}, we have that $\mathcal{F}$ is uniformly continuous and uniformly bounded. Let $\epsilon > 0$. By uniform boundedness, let $M > 0$ be such that $\abs{f(x)} < M$ for every $x \in X$ and every $f \in \mathcal{F}$. Consider the partition
+  \begin{equation*}
+    P = \{ -M = y_0 < y_1 < y_2 < \ldots < y_m = M \},
+  \end{equation*}
+  where $y_j - y_{j - 1} < \frac{\epsilon}{3}$ for each $j = 0, 1, \ldots, m$.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[-] (-1, -2) -- (-1, 2);
+      \draw[-] (1, -2) -- (1, 2);
+      \foreach \x in {1.6,1.3,...,-1.6}
+      { \draw[-] (-1.1,\x) -- (-0.9,\x);
+        \draw[-] (0.9,\x) -- (1.1,\x); }
+      \node[label={0:{$M$}}] at (1.1,1.6) {};
+      \node[label={0:{$-M$}}] at (1.1,-1.4) {};
+      \node[label={0:{$y_j$}}] at (1.1,0.7) {};
+      \node[label={0:{$y_{j - 1}$}}] at (1.1,0.4) {};
+      \draw[<->] (1.9,0.7) -- (1.9,0.4) node[midway,right] {$\frac{\epsilon}{3}$};
+
+      \node[label={180:{$x_1$}}] at (-1.1,1.6) {};
+      \node[label={180:{$x_2$}}] at (-1.1,1.3) {};
+      \node[label={180:{$x_n$}}] at (-1.1,-1.4) {};
+      \draw[<->] (-1.7,1.6) -- (-1.7,1.3) node[midway,left] {$\delta$};
+    \end{tikzpicture}
+    \caption{Basic Visual Sketch of the Proof of the Arzel\`{a}-Ascoli Theorem}\label{fig:basic_visual_sketch_of_the_proof_of_the_arzela_ascoli_theorem}
+  \end{marginfigure}
+  We may also find, by uniform equicontinuity, a $\delta > 0$ such that $d(w, z) < \delta$ implies that $\abs{ f(z) - f(w) } < \frac{\epsilon}{3}$. Since $(X, d)$ is totally bounded (as it is compact), we may find, in particular, a finite $\delta$-net $\{ x_1, \ldots, x_n \} \subset X$ such that
+  \begin{equation*}
+    X = \bigcup_{i=1}^{n} B(x_i, \delta).
+  \end{equation*}
+  Now consider the set functions
+  \begin{equation*}
+    \Phi = \{ \phi \mid \phi : \{ 1, \ldots, n \} \to \{ 1, \ldots, m \} \}.
+  \end{equation*}
+  It is clear that $\Phi$ is finite, and so we may write
+  \begin{equation*}
+    \Phi = \{ \phi-1, \ldots, \phi_l \},
+  \end{equation*}
+  where $l = m^n$.
+
+  Next, for each $k = 1, \ldots, l$, let
+  \begin{equation*}
+    \mathcal{F}_k = \left\{ f \in \mathcal{F} \mid f(x_i) \in \left[ y_{\phi_k(i) - 1}, y_{\phi_k(i)} \right] \right\}.
+  \end{equation*}
+  Clearly so, by construction, while some of the $\mathcal{F}_k$'s may be empty, we have that $\{ \mathcal{F}_k \}$ partitions $\mathcal{F}$, i.e.
+  \begin{equation*}
+    \mathcal{F} = \bigcup_{k=1}^{l} \mathcal{F}_k.
+  \end{equation*}
+  Then for each of the non-empty sets $\mathcal{F}_k$, pick a $f_k \in \mathcal{F}_k$. From here, since we want to show that $\mathcal{F}$ is relatively compact and $(X, d)$ is compact and hence complete itself, it suffices for us to show that $\mathcal{F}$ is totally bounded. In other words, it suffices for us to show that $\mathcal{F}$ has some finite $\epsilon$-net.
+
+  Let $f \in \mathcal{F}$. Then $f \in \mathcal{F}_k$ for some $k = 1, 2, \ldots, l$. Then for $z \in B(x_{i_0}, \delta)$, we have
+  \begin{align*}
+    \abs{ f(z) - f_k(z) } &\leq \abs{ f(z) - f(x_{i_0}) } + \abs{ f(x_{i_0}) - f_k(x_{i_0}) } + \abs{ f_k(x_{i_0}) - f_k(z) } \\
+                          &< \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon.
+  \end{align*}
+  This completes the proof.\qed\
+\end{proof}
+
+% subsection compactness_in_c_x_and_the_ascoli_arzela_theorem (end)
+
+% section the_space_c_x_normcdot_infty_continued_4 (end)
+
+% chapter lecture_35_dec_03rd (end)
 
 \appendix
 
