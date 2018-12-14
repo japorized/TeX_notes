@@ -322,62 +322,6 @@
       \AtPageLowerLeft{\includegraphics[width=\paperwidth,height=\paperheight,#1]{#2}}}% Insert image
     \renewcommand{\parthook}{}}}% Restore \parthook
 
-% ntheorem listtheorem style
-\newlength\widesttheorem
-\AtBeginDocument{
-  \settowidth{\widesttheorem}{Proposition A.1.1.1\quad}
-}
-
-\makeatletter
-\def\thm@@thmline@name#1#2#3#4{%
-        \@dottedtocline{-2}{0em}{2.3em}%
-                   {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
-                   {#4}}
-\@ifpackageloaded{hyperref}{
-\def\thm@@thmline@name#1#2#3#4#5{%
-    \ifx\#5\%
-        \@dottedtocline{-2}{0em}{2.3em}%
-            {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
-            {#4}
-    \else
-        \ifHy@linktocpage\relax\relax
-            \@dottedtocline{-2}{0em}{2.3em}%
-                {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
-                {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
-        \else
-            \@dottedtocline{-2}{0em}{2.3em}%
-                {\hyper@linkstart{link}{#5}%
-                  {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}\hyper@linkend}%
-                    {#4}%
-        \fi
-    \fi}
-}
-
-\def\thm@@thmline@noname#1#2#3#4{%
-        \@dottedtocline{-2}{0em}{5em}%
-                   {{\protect\numberline{#2}}#3}%
-                   {#4}}
-\@ifpackageloaded{hyperref}{
-\def\thm@@thmline@noname#1#2#3#4#5{%
-    \ifx\#5\%
-        \@dottedtocline{-2}{0em}{5em}%
-            {{\protect\numberline{#2}}#3}%
-            {#4}
-    \else
-        \ifHy@linktocpage\relax\relax
-            \@dottedtocline{-2}{0em}{5em}%
-                {{\protect\numberline{#2}}#3}%
-                {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
-        \else
-            \@dottedtocline{-2}{0em}{5em}%
-                {\hyper@linkstart{link}{#5}%
-                  {{\protect\numberline{#2}}#3}\hyper@linkend}%
-                    {#4}%
-        \fi
-    \fi}
-}
-\makeatother
-
 \AtBeginDocument{\renewcommand\contentsname{\slshape Table of Contents\normalfont}}
 \cftpagenumbersoff{part}
 
@@ -481,9 +425,9 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand*\dif{\mathop{}\!d}
 
   % stars on important stuff
-\newcommand{\imponote}{\faStar\enspace}
-\newcommand{\vimponote}{\faStar\faStar\enspace}
-\newcommand{\vvimponote}{\faStar\faStar\faStar\enspace}
+\newcommand{\imponote}{\faStar}
+\newcommand{\vimponote}{\faStar\faStar}
+\newcommand{\vvimponote}{\faStar\faStar\faStar}
 
   % inspiration from: https://tex.stackexchange.com/questions/8720/overbrace-underbrace-but-with-an-arrow-instead#37758
 \newcommand{\overarrow}[2]{

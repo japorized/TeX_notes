@@ -17,18 +17,18 @@
 \hypersetup{pageanchor=true}
 \tableofcontents
 
-\chapter*{\faBook \enspace List of Definitions}
-\addcontentsline{toc}{chapter}{List of Definitions}
-\theoremlisttype{all}
+\newpage
 \begin{fullwidth}
-\listtheorems{defn}
+  \renewcommand{\listtheoremname}{\faBook\ \slshape List of Definitions}
+  \listoftheorems[ignoreall,show={defn}]
+  \addcontentsline{toc}{chapter}{List of Definitions}
 \end{fullwidth}
 
-\chapter*{\faCoffee \enspace List of Theorems}
-\addcontentsline{toc}{chapter}{List of Theorems}
-\theoremlisttype{allname}
+\newpage 
 \begin{fullwidth}
-\listtheorems{axiom,lemma,thm,crly,propo}
+  \renewcommand{\listtheoremname}{\faCoffee\ \slshape List of Theorems}
+  \listoftheorems[ignoreall,show={axiom,lemma,thm,crly,propo}]
+  \addcontentsline{toc}{chapter}{List of Theorems}
 \end{fullwidth}
 
 

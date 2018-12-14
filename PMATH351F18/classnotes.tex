@@ -19,6 +19,8 @@
 \DeclareMathOperator{\Lim}{Lim }
 \DeclareMathOperator{\diam}{diam }
 \DeclareMathOperator{\ND}{ND }
+\DeclareMathOperator{\Span}{span }
+\DeclareMathOperator{\Trig}{Trig }
 
 \newcommand{\norm}[1]{\left\| #1 \right\|}
 
@@ -30,18 +32,18 @@
 \tableofcontents
 \end{fullwidth}
 
-\chapter*{\faBook\ \enspace\ List of Definitions}
-\addcontentsline{toc}{chapter}{List of Definitions}
-\theoremlisttype{all}
+\newpage
 \begin{fullwidth}
-\listtheorems{defn}
+  \renewcommand{\listtheoremname}{\faBook\ \slshape List of Definitions}
+  \listoftheorems[ignoreall,show={defn}]
+  \addcontentsline{toc}{chapter}{List of Definitions}
 \end{fullwidth}
 
-\chapter*{\faCoffee\ \enspace\ List of Theorems}
-\addcontentsline{toc}{chapter}{List of Theorems}
-\theoremlisttype{allname}
+\newpage 
 \begin{fullwidth}
-\listtheorems{axiom,lemma,thm,crly,propo}
+  \renewcommand{\listtheoremname}{\faCoffee\ \slshape List of Theorems}
+  \listoftheorems[ignoreall,show={axiom,lemma,thm,crly,propo}]
+  \addcontentsline{toc}{chapter}{List of Theorems}
 \end{fullwidth}
 
 \nocite{bforres2018}
@@ -5471,9 +5473,9 @@ Before proving Weierstrass' Approximation Theorem, we require the following lemm
 
 % chapter lecture_32_nov_26th (end)
 
-\chapter{Lecure 33 Nov 28th}%
-\label{chp:lecure_33_nov_28th}
-% chapter lecure_33_nov_28th
+\chapter{Lecture 33 Nov 28th}%
+\label{chp:lecture_33_nov_28th}
+% chapter lecture_33_nov_28th
 
 \section{The Space $(C(X), \norm\cdot_\infty)$ (Continued 2)}%
 \label{sec:the_space_c_x_normcdot_infty_continued_2}
@@ -5682,6 +5684,8 @@ From here, we shall always assume that $(X, d)$ is a compact metric space.
   would imply that $f_n g_n \to fg$, and so $fg \in \Phi$.\qed\
 \end{proof}
 
+We are ready for the subalgebra version of Stone-Weierstrass, which we shall prove in the next lecture.
+
 \begin{thmnonum}[Stone-Weierstrass Theorem --- Subalgebra Version]
   If $\Phi \subset C(X)$ is a linear subspace such that
   \begin{enumerate}
@@ -5698,7 +5702,195 @@ From here, we shall always assume that $(X, d)$ is a compact metric space.
 
 % section the_space_c_x_normcdot_infty_continued_2 (end)
 
-% chapter lecure_33_nov_28th (end)
+% chapter lecture_33_nov_28th (end)
+
+\chapter{Lecture 34 Nov 30th}%
+\label{chp:lecture_34_nov_30th}
+% chapter lecture_34_nov_30th
+
+\section{The Space $(C(X), \norm\cdot_\infty)$ (Continued 3)}%
+\label{sec:the_space_c_x_normcdot_infty_continued_3}
+% section the_space_c_x_normcdot_infty_continued_3
+
+\subsection{Stone-Weierstrass Theorem (Continued)}%
+\label{sub:stone_weierstrass_theorem_continued}
+% subsection stone_weierstrass_theorem_continued
+
+\subsubsection{Subalgebra Version (Continued)}%
+\label{ssub:subalgebra_version_continued}
+% subsubsection subalgebra_version_continued
+
+\begin{thm}[Stone-Weierstrass Theorem --- Subalgebra Version]\index{Stone-Weierstrass Theorem --- Subalgebra Version}\label{thm:stone_weierstrass_theorem_subalgebra_version}
+  If $\Phi \subset C(X)$ is a linear subspace such that
+  \begin{enumerate}
+    \item $1 \in \Phi$;
+    \item $\Phi$ is point-separating; and
+    \item $f \cdot g \in \Phi$ for all $f, g \in \Phi$ (which implies $\Phi$ is a subalgebra).
+  \end{enumerate}
+  Then $\bar{\Phi}$ is dense in $C(X)$.
+\end{thm}
+
+\begin{proof}[\vvimponote]
+  By \cref{lemma:closure_of_a_subalgebra_is_a_subalgebra}, we may assume that $\Phi$ is closed.
+
+  Let $f \in \Phi$ and $\epsilon > 0$. Also, let $M = \norm{f}_\infty$. From the \hyperref[thm:weierstrass_approximation_theorem]{Weierstrass Approximation Theorem}, we may find some polynomial
+  \begin{equation*}
+    p(x) = a_0 + a_1 x + \hdots + a_n x^n
+  \end{equation*}
+  such that for an y$t \in [-M, M]$, we get
+  \begin{equation*}
+    \abs{ \abs{ t } - p(t) } < \epsilon.
+  \end{equation*}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2,0) -- (2,0) node[right] {$x$};
+      \draw[->] (0,-0.5) -- (0, 2) node[above] {$y$};
+      \draw[-] (-2,1) -- (0, 0) -- (2, 1);
+      \draw[dashed] (-2,1.2) -- (0, 0.2) -- (2, 1.2);
+      \draw[dashed] (-2,0.8) -- (0, -0.2) -- (2, 0.8);
+    \end{tikzpicture}
+    \caption{Visualization of the proof for \cref{thm:stone_weierstrass_theorem_subalgebra_version}.}\label{fig:visualization_of_the_proof_for_stone_weierstrass_theorem_subalgebra_version}
+  \end{marginfigure}
+  Now consider the composition
+  \begin{equation*}
+    p \circ f = a_0 \cdot 1 + a_1 \cdot f + \hdots + a_n \cdot f^n,
+  \end{equation*}
+  which is in $\Phi$. Thus for $x \in X$, we have
+  \begin{equation*}
+    \abs{ \abs{ f(t) } - p \circ f(x) } < \epsilon.
+  \end{equation*}
+  This implies that
+  \begin{equation*}
+    \norm{ \abs{ f } - p \circ f }_\infty < \epsilon.
+  \end{equation*}
+  Thus by the closure of $\Phi$, we have that $\abs{ f } \in \bar{\Phi} = \Phi$.
+
+  Now notice that for $f, g \in \Phi$, since
+  \begin{equation*}
+    f \lor g = \frac{f + g + \abs{ f - g }}{2},
+  \end{equation*}
+  we have $f \lor g \in \Phi$. Thus by \cref{thm:stone_weierstrass_theorem_lattice_version}, $\bar{\Phi}$ is dense in $C(X)$.\qed\
+\end{proof}
+
+\begin{eg}
+  Let
+  \begin{equation*}
+    \mathcal{P} = \{ a_0 + a_1 x + \hdots + a_n x^n : n \in \mathbb{N}, a_i \in \mathbb{R} \}.
+  \end{equation*}
+  Then by \cref{thm:stone_weierstrass_theorem_subalgebra_version}, $\bar{\mathcal{P}} \subset C[a, b]$ is dense.
+\end{eg}
+
+
+  Let
+  \begin{equation*}
+    \Phi = \Span \{ 1, x^2, x^4, \ldots \} \subseteq C[-1, 1].
+  \end{equation*}
+  It is clear that $\Phi$ is an algebra. However, it does not separate points, since
+  \begin{equation*}
+    (-1)^2 = 1 = (1)^2.
+  \end{equation*}
+  So in this case $\Phi$ is not dense.
+
+  But what about $C[0, 1]$? Notice that $x^2$ separates points on $[0, 1]$, and all other conditions are still met. Thus $\Phi$ is dense in $C[0, 1]$.
+
+
+\newthought{Question}: Then what about
+\begin{equation*}
+  \Phi' = \Span \{ x^2, x^4, \ldots \}?
+\end{equation*}
+Is $\Phi'$ dense in $C[0, 1]$? No. \sidenote{This was given as a reason but I don't know what exactly does it entail. \todo{I should find out about this.} That said, it is clear that $\Phi'$ separates points, and still a subalgebra, but $1$ can we still create the constant function $1$ in $\Phi$ using only the other generators?}If $f \in \Phi'$, then $f(0) = 0$.
+
+But what about the closure
+\begin{equation*}
+  \bar{ \Span \{ x^2, x^4, \ldots \} } \subset C[0, 1]?
+\end{equation*}
+Consider the set
+\begin{equation*}
+  S := \{ f \in C[0, 1] \mid f(0) = 0 \},
+\end{equation*}
+which is a \hlnotea{closed ideal} in $C[0, 1]$. Then, in particular, we have that for any $g \in C[0, 1]$, we have that $gf, fg \in S$ for any $f \in S$. It can be shown\todo{how?}\sidenote{I should probably work this out on my own.} that
+\begin{equation*}
+  S = \bar{ \Span \{ x^2, x^4, \ldots \} }.
+\end{equation*}
+Consequently, we see that if $f \in S$, we have that
+\begin{equation*}
+  f \in \bar{\Span\{ 1, x^2, x^4, \ldots \} } = C[0, 1].
+\end{equation*}
+
+\begin{eg}
+  Let $X = [0, 2 \pi)$ and
+  \begin{equation*}
+    A = \{ \lambda \in \mathbb{C} \mid \abs{ \lambda } = 1 \}.
+  \end{equation*}
+  Consider the function $\phi : X \to A$ given by
+  \begin{equation*}
+    \phi(\theta) = e^{i \theta}.
+  \end{equation*}
+  It is clear that $\phi$ is bijective. We may then define $d : X \to \mathbb{R}$ by
+  \begin{equation*}
+    d(\theta_1, \theta_2) = \text{ shortest arclength between } e^{i \theta_1} \text{ and } e^{i \theta_2}.
+  \end{equation*}
+  Then we have
+  \begin{equation*}
+    ([0, 2 \pi), d) \simeq A,
+  \end{equation*}
+  and the space $([0, 2 \pi))$ is compact. Then in particular, we have
+  \begin{equation*}
+    \{ f \in C[0, 2 \pi] \mid f(0) = f(2 \pi) \} = C[0, 2 \pi) \simeq C(A).
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  The set
+  \begin{equation*}
+    \Trig([0, 2 \pi)) := \span \{ 1, \cos ( n x ), \sin ( m x ) \mid n, m \in \mathbb{Z} \}
+  \end{equation*}
+  is a subalgebra of $C[0, 2 \pi)$ that is point separating, and has $1$ in it (and closed). By \cref{thm:stone_weierstrass_theorem_subalgebra_version}, $\Trig([0, 2 \pi))$ is dense in $C[0, 2 \pi)$.
+\end{eg}
+
+\begin{note}
+  Consider the set
+  \begin{equation*}
+    C(X, \mathbb{C}) = \{ f : X \to \mathbb{C} \mid f \text{ continuous and bounded } \},
+  \end{equation*}
+  with norm
+  \begin{equation*}
+    \norm{ f }_\infty = \sup \{ \abs{ f(x) } \mid x \in X \}.
+  \end{equation*}
+  We say that $\Phi \subset C(X, \mathbb{C})$ is \hldefn{self-adjoint} if
+  \begin{equation*}
+    f \in \Phi \implies \bar{f} \in \Phi.
+  \end{equation*}
+\end{note}
+
+With this, we have the complex version of the Stone-Weierstrass Theorem.
+
+\begin{thm}[Stone-Weierstrass Theorem --- Complex Version]\index{Stone-Weierstrass Theorem --- Complex Version}\label{thm:stone_weierstrass_theorem_complex_version}
+  If $(X, d)$ is compact and $\Phi$ is a linear subspace of $C(X, \mathbb{C})$ that is self-adjoint, with
+  \begin{enumerate}
+    \item $1 \in \Phi$;
+    \item $\Phi$ separates points; and
+    \item $f \cdot g \in \Phi$ for any $f, g \in \Phi$.
+  \end{enumerate}
+  Then $\bar{\Phi}$ is dense in $C(X, \mathbb{C})$.
+\end{thm}
+
+\begin{eg}
+  Reusing our last example, now
+  \begin{equation*}
+    \Trig([0, 2 \pi)) = \Span \{ e^{i n \theta} \mid n \in \mathbb{Z} \}
+  \end{equation*}
+  is dense in $C([0, 2 \pi), \mathbb{C})$.
+\end{eg}
+
+% subsubsection subalgebra_version_continued (end)
+
+% subsection stone_weierstrass_theorem_continued (end)
+
+% section the_space_c_x_normcdot_infty_continued_3 (end)
+
+% chapter lecture_34_nov_30th (end)
 
 \appendix
 

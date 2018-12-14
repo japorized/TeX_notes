@@ -1,8 +1,8 @@
-#!/usr/bin/env dash
+#!/usr/bin/env bash
 
-ORIDIR=$HOME/Documents/TeX_notes/setup-nvim
+ORIDIR=$HOME/Documents/TeX_Notes/setup-nvim
 DESTDIR1=$HOME/.vim/templates
 DESTDIR2=$HOME/dotfiles/dotfiles/vim/templates
 
-cp $ORIDIR/* $DESTDIR1/
-cp $ORIDIR/* $DESTDIR2/
+cp $ORIDIR/tex-* -t "$DESTDIR1/"
+cp $ORIDIR/tex-* -t "$DESTDIR2/"
