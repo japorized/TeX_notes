@@ -4317,7 +4317,7 @@ Recall the definition of a \hyperref[defn:dense]{dense set}. We have the followi
 \begin{proof}
   Assume that $\{ U_n \}_{n = 1}^{\infty}$ is a sequence of open and dense sets. Let $W \subset X$ be open and non-empty. Since $U_1$ is dense, we have that $W \cap U_1 \neq \emptyset$. Then $\exists x_1 \in W \cap U_1$ such that $\exists 0 < r_1 \leq 1$ so that
   \begin{equation*}
-    B(x_1, r_1) \subset B(x_1, r_1) \subset W \cap U_1.
+    B(x_1, r_1) \subset B[x_1, r_1] \subset W \cap U_1.
   \end{equation*}
   Similarly,
   \begin{marginfigure}
@@ -4365,16 +4365,28 @@ Note that the statement does not hold if we have an uncountable collection of de
 \end{thm}
 
 \begin{proof}
-  Suppose to the contrary that $X = \bigcup_{n=1}^{\infty} A_n$ where each $A_n$ is nowhere dense. Note that by definition of being nowhere dense, we have that $A_n = \bar{A_n}$. Let $U_n = \bar{A_n}^C$, which would then be open and dense. However, by \hyperref[thm:de_morgan_s_laws]{De Morgan's Laws}, we have that
+  Suppose to the contrary that $X = \bigcup_{n=1}^{\infty} A_n$ where each $A_n$ is nowhere dense. Since each $A_n$ is nowhere dense, we have that
+  \begin{equation*}
+    X = \bigcup_{n=1}^{\infty} A_n = \bigcup_{n=1}^{\infty} \bar{A_n}.
+  \end{equation*}
+  Let $U_n = \bar{A_n}^C$, which would then be open and dense, as $X$ is complete. However, by \hyperref[thm:de_morgan_s_laws]{De Morgan's Laws}, we have that
   \begin{equation*}
     \left( \bigcap_{n=1}^{\infty} U_n \right)^C = \bigcup_{n=1}^{\infty} U_n^C = \bigcup_{n=1}^{\infty} \bar{A_n} = X
   \end{equation*}
   and so
   \begin{equation*}
-    \bigcup_{n=1}^{\infty} U_n = \emptyset,
+    \bigcap_{n=1}^{\infty} U_n = \emptyset,
   \end{equation*}
   which is impossible by \cref{thm:baire_category_theorem_i}.\qed\
 \end{proof}
+
+\begin{eg}
+  There are set that are neither $F_\sigma$ or $G_\delta$. For instance, consider the union of positive rationals and negative irrationals, i.e. a set
+  \begin{equation*}
+    S = \mathbb{Q}_{> 0} \cup \mathbb{Q}^C_{< 0}.
+  \end{equation*}
+  If $S$ is a $G_\delta$, then by the Baire Category Theorem, $S \cap (0, \infty)$ is also $G_\delta$, but that's the set of positive rationals, which cannot be $G_\delta$. Similarly, if $S$ were $F_\sigma$, then its intersection with $(-\infty, 0)$ is also $F_\sigma$, but the set of negative irrationals cannot be $F_\sigma$. Thus $S$ is neither $F_\sigma$ nor $G_\delta$.
+\end{eg}
 
 \begin{eg}
   $\mathbb{R}$ and $\mathbb{R} \setminus \mathbb{Q}$ are of second category. In fact, $\mathbb{R} \setminus \mathbb{Q}$ is a residual, since $\mathbb{Q}$ is of first category.
@@ -4935,9 +4947,13 @@ Note that bounded and totally bounded are \hlimpo{not equivalent}.
   
   Since $(X, d)$ is totally bounded, $X$ can be covered by finitely many open balls of radius $1$. Thus one such ball $S_1 = B(y_1, 1)$, for some $y_1 \in X$, contains infinitely many terms in $\{ x_n \}$ \sidenote{Note that sequences are infinitary by nature in our context.}.
 
-  Similarly, $X$ can be covered by finitelym any open balls of radius $\frac{1}{2}$, and we can pick one of these open balls $S_2 = B\left(y_2, \frac{1}{2}\right)$ which contains infinitely many terms in $\{ x_n \} \cap S_1$.
+  Similarly, $X$ can be covered by finitely many open balls of radius $\frac{1}{2}$, and we can pick one of these open balls $S_2 = B\left(y_2, \frac{1}{2}\right)$ which contains infinitely many terms in $\{ x_n \} \cap S_1$.
 
-  Recursively, we may construct a sequence of open balls $\left\{ S_k = B\left(y_k, \frac{1}{k}\right) \right\}$ with the property that each $S_{k + 1}$ contains infinitely many terms is
+  Recursively, we may construct a sequence of open balls 
+  \begin{equation*}
+    \left\{ S_k = B\left(y_k, \frac{1}{k}\right) \right\}
+  \end{equation*}
+  with the property that each $S_{k + 1}$ contains infinitely many terms in
   \begin{equation*}
     \{ x_n \} \cap \left( \bigcap_{i=1}^{k} S_i \right).
   \end{equation*}
@@ -4951,11 +4967,11 @@ Note that bounded and totally bounded are \hlimpo{not equivalent}.
   \end{equation*}
   such that
   \begin{equation*}
-    x_{n_{k + 1}} \in \bigcap_{i=1}^{k} S_i.
+    x_{n_k} \in \bigcap_{i=1}^{k} S_i.
   \end{equation*}
-  WMA for some $N \in \mathbb{N}$, for any $k, m \geq N$, we ahve that $x_{n_k}, x_{n_m} \in S_N$, i.e.
+  WMA for some $N \in \mathbb{N}$, for any $k, m \geq N$, we have that $x_{n_k}, x_{n_m} \in S_N$, i.e.
   \begin{equation*}
-    \diam(x_{n_k}, x_{n_m}) \leq \diam(S_N).
+    d(x_{n_k}, x_{n_m}) \leq \diam(S_N).
   \end{equation*}
   Thus $\{ x_{n_k} \} \subset \{ x_n \}$ is Cauchy. Since $(X, d)$ is complete, $x_{n_k} \to x_0$, and therefore $X$ is sequentially compact by definition.\qed\
 \end{proof}
@@ -4995,7 +5011,7 @@ The proof of the following theorem was left as an exercise:
   \end{equation*}
 \end{defn}
 
-In assignment 3, we proved the following important result about linear maps in finite dimensional normed lienar spaces.
+In assignment 3, we proved the following important result about linear maps in finite dimensional normed linear spaces.
 
 \begin{thm}[Boundedness is Equivalent to Continuity in Finite Dimensional Normed Linear Spaces]\label{thm:boundedness_is_equivalent_to_continuity_in_finite_dimensional_normed_linear_spaces}
   Let $T : ( V, \norm\cdot_V ) \to (W, \norm\cdot_W)$ be a linear map. TFAE:
@@ -5166,7 +5182,7 @@ We can deduce the following from the above:
 
 The following result follows from our observations above:
 
-\begin{thm}[Completeness of Finite Dimensional Normed Lienar Spaces]\label{thm:completeness_of_finite_dimensional_normed_lienar_spaces}
+\begin{thm}[Completeness of Finite Dimensional Normed Linear Spaces]\label{thm:completeness_of_finite_dimensional_normed_linear_spaces}
   Let $(V, \norm\cdot_V)$ be a finite dimensional normed linear space. Then $(V, \norm\cdot_V)$ is complete. In particular, if $(W, \norm\cdot_W)$ is any normed linear space, and $V$ is a finite dimensional subspace of $W$, then $V$ is closed in $W$.
 \end{thm}
 
@@ -5180,7 +5196,7 @@ The following result follows from our observations above:
   \end{equation*}
   Then if $w = \alpha_1 v_1 + \hdots + \alpha_n v_n$, we have
   \begin{equation*}
-    \phi(w) = \sum_{i=1}^{n} \alpha+i \phi(v_{\alpha_i}).
+    \phi(w) = \sum_{i=1}^{n} \alpha_i \phi(v_{\alpha_i}).
   \end{equation*}
   Then $\phi : W \to \mathbb{R}$ is linear.
 \end{eg}
@@ -5290,7 +5306,7 @@ Notice that $\Gamma$ is an \hyperref[defn:isometry]{isometry}: we have
 \begin{equation*}
   \norm{ \Gamma(f) - \Gamma(g) }_\infty = \norm{ f - g }_\infty
 \end{equation*}
-for any $f, g \in C[0, 1]$. Moreover, \hlimpo{$\Gamma(p)$ is a polynomial iff $p$ is a polynomial}.
+for any $f, g \in C[0, 1]$. Moreover, \hlimpo{$\Gamma(p)$ is a polynomial iff $p$ is a polynomial}.\sidenote{Basically, this part shows us that we can use $\phi$, which is also a continuous function, to scale the domain of $f$ so as to shrink it down to only at $[0, 1]$ instead of $[a, b]$.}
 
 Thus every continuous function in $C[a, b]$ can be uniformly approximated by polynomials iff the same is true in $C[0, 1]$, i.e. we only need to consider continuous functions on $[0, 1]$ for approximations.
 
@@ -5298,7 +5314,11 @@ Thus every continuous function in $C[a, b]$ can be uniformly approximated by pol
 \begin{equation*}
   g(x) = f(x) - ([f(1) - f(0)] x + f(0)]),
 \end{equation*}
-uniformly to within $\epsilon > 0$, i.e.
+uniformly to within $\epsilon > 0$ \sidenote{\hlimpo{Notice} that if we rearrange the equation, we have
+\begin{equation*}
+  f(x) = g(x) + f(0) + x ( f(1) - f(0) )
+\end{equation*}
+which tells us that if we can approximate $g$ by a polynomial, then we can do so for $f$ cause the later term is also a polynomial.}, i.e.
 \begin{equation*}
   \norm{ g - p }_\infty < \epsilon,
 \end{equation*}
@@ -5341,7 +5361,7 @@ Before proving Weierstrass' Approximation Theorem, we require the following lemm
     \begin{tikzpicture}
       \draw[->] (-.5,0) -- (2, 0) node[right]{$x$};
       \draw[->] (0,-.5) -- (0, 2) node[right]{$y$};
-      \draw[scale=1.7,domain=0:1] plot ({\x},{(1 - \x^2)^(100)});
+      \draw[scale=1.7,domain=0:1] plot ({\x},{(1 - ( \x )^2)^(100)});
     \end{tikzpicture}
     \caption{Graph of $(1 - x^2)^n$ for large $n$, where $x \in [0, 1]$.}\label{fig:graph_of_1_x_2_n_for_large_n_where_x_in_0_1_}
   \end{marginfigure}
@@ -5378,7 +5398,7 @@ Before proving Weierstrass' Approximation Theorem, we require the following lemm
     \int_{-1}^{1} \left(1 - x^2\right)^n \dif{x} &= 2 \int_{0}^{1} \left(1 - x^2 \right)^n \dif{x} \geq 2 \int_{0}^{\frac{1}{\sqrt{n}}} \left(1 - nx^2\right) \dif{x} \enspace \footnotemark \\
                                                  &= \frac{4}{3 \sqrt{n}} > \frac{1}{\sqrt{n}},
   \end{align*}
-  \footnotetext{How did we arrive at this new limit of $\frac{1}{\sqrt{n}}$?} % TODO weierstrass approx 1/sqrt(n)
+  \footnotetext{How did we arrive at this new limit of $\frac{1}{\sqrt{n}}$? \hlwarn{There is} no deep meaning behind the choice of $\frac{1}{\sqrt{n}}$. It's simply because it works.}
   and so we have
   \begin{equation*}
     c_n < \sqrt{n}.
@@ -5388,7 +5408,9 @@ Before proving Weierstrass' Approximation Theorem, we require the following lemm
     p_n(x) &= \int_{-1}^{1} f(x + t) Q_n(t) \dif{t} = \int_{-x}^{1 - x} f(x + t) Q_n(t) \dif{t} \enspace \footnotemark \\
            &= \int_{0}^{1} f(u) Q_n(u - x) \dif{u}.
   \end{align*}
-  \footnotetext{Here, we can strink the limits of integration, for anything below $-x$ or above $1 - x$ are $0$ as per our assumption that $f$ is zero at $(-\infty, 0] \cup [1, \infty)$.} Notice that by \href{https://en.wikipedia.org/wiki/Leibniz_integral_rule}{Leibniz's Integral Rule}, we have
+  \footnotetext{Here, we can strink the limits of integration, for anything below $-x$ or above $1 - x$ are $0$ as per our assumption that $f$ is zero at $(-\infty, 0] \cup [1, \infty)$.
+  
+  Also, in the first integral, we used $Q_n(t)$ to average over the transformation $f(x + t)$, and in the last integral, we see that we can ``massage'' the first integral into one where we have, instead, $f$ as an \hlnotea{averaging function} over $Q_n(u - x)$.} Notice that by \href{https://en.wikipedia.org/wiki/Leibniz_integral_rule}{Leibniz's Integral Rule}, we have
   \begin{equation*}
     \frac{d^{2n + 1}}{dx^{2n + 1}} p_n(x) = \int_{0}^{1} f(u) \frac{\partial^{2n + 1}}{\partial x^{2n + 1}} Q_n(u - x) \dif{u} = 0
   \end{equation*}
@@ -5412,10 +5434,37 @@ Before proving Weierstrass' Approximation Theorem, we require the following lemm
                           &\leq 2 \norm{f}_\infty \sqrt{n} \left( 1 - \delta^2 \right)^n + \frac{\epsilon}{2} + 2 \norm{f}_\infty \sqrt{n} \left( 1 - \delta^2 \right)^n \label{eq:weierstrass_approx_eq1} \\
                           &= 4 \norm{f}_\infty \sqrt{n} \left( 1 - \delta^2 \right)^n + \frac{\epsilon}{2}, \nonumber
   \end{align}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2, 0) -- (2, 0) node[right] {$x$};
+      \draw[->] (0,-0.5) -- (0, 2) node[above] {$y$};
+      \draw[scale=1.7,domain=-1:1] plot ({\x},{(1 - (\x)^2)^(100)});
+      \draw[scale=1.7,domain=-1:1] plot ({\x},{(1 - (\x)^2)^(50)});
+      \draw[scale=1.7,domain=-1:1] plot ({\x},{(1 - (\x)^2)^(10)});
+    \end{tikzpicture}
+    \caption{Dirac Sequence}\label{fig:dirac_sequence}
+  \end{marginfigure}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2, 0) -- (2, 0) node[right] {$x$};
+      \draw[->] (0,-0.5) -- (0, 2) node[above] {$y$};
+      \draw[scale=1.7,domain=-1:1] plot ({\x},{(1 - (\x)^2)^(10)});
+      \draw[dashed] (-0.7,0.25) -- (-0.7,0) node[below] {$-\delta$};;
+      \draw[dashed] (0.7,0.25) -- (0.7,0) node[below] {$\delta$};;
+      \node[draw,circle,fill,inner sep=0.5pt,pin={[pin edge=latex'- pin-distance=2pt]115:{$c_n\left(1 - \delta^2\right)^n$}}] at (-0.7, 0.25) {};
+      \node[draw,circle,fill,inner sep=0.5pt,pin={[pin edge=latex'- pin-distance=2pt]65:{$c_n\left(1 - \delta^2\right)^n$}}] at (0.7, 0.25) {};
+      \node[draw,circle,fill,inner sep=0.5pt,label={270:{$-1$}}] at (-1.2, 0) {};
+      \node[draw,circle,fill,inner sep=0.5pt,label={270:{$1$}}] at (1.2, 0) {};
+    \end{tikzpicture}
+    \caption{One of the Dirac Functions with $\delta$ as an inflection point}\label{fig:one_of_the_dirac_functions_with_delta_as_an_inflection_point}
+  \end{marginfigure}
   where \cref{eq:weierstrass_approx_eq1} follows by $\int_{-1}^{1} Q_n(t) \dif{t} = 1$ and $Q_n(t) \geq 0$ for $x \in [0, 1]$. Then since $0 < \delta < 1$, it follows that for sufficiently large $N$, we have
   \begin{equation*}
-    4 \norm{f}_\infty \sqrt{N} \left( 1 - \delta^2 \right)^n \leq \frac{\epsilon}{2}.
-  \end{equation*}\qed\
+    4 \norm{f}_\infty \sqrt{N} \left( 1 - \delta^2 \right)^N \leq \frac{\epsilon}{2},
+  \end{equation*}
+  as the $\left( 1 - \delta^2 \right)^N$ term will ``decay'' much faster than $\sqrt{N}$.\qed\
 \end{proof}
 
 \begin{propo}[Moments]\index{Moments}\label{propo:moments}
