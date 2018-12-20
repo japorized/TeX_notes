@@ -27,18 +27,18 @@
 \tableofcontents
 \end{fullwidth}
 
-\chapter*{\faBook\ \enspace\ List of Definitions}
-\addcontentsline{toc}{chapter}{List of Definitions}
-\theoremlisttype{all}
+\newpage
 \begin{fullwidth}
-\listtheorems{defn}
+  \renewcommand{\listtheoremname}{\faBook\ \slshape List of Definitions}
+  \listoftheorems[ignoreall,show={defn}]
+  \addcontentsline{toc}{chapter}{List of Definitions}
 \end{fullwidth}
 
-\chapter*{\faCoffee\ \enspace\ List of Theorems}
-\addcontentsline{toc}{chapter}{List of Theorems}
-\theoremlisttype{allname}
+\newpage 
 \begin{fullwidth}
-\listtheorems{axiom,lemma,thm,crly,propo}
+  \renewcommand{\listtheoremname}{\faCoffee\ \slshape List of Theorems}
+  \listoftheorems[ignoreall,show={axiom,lemma,thm,crly,propo}]
+  \addcontentsline{toc}{chapter}{List of Theorems}
 \end{fullwidth}
 
 \chapter{Lecture 1 Sep 06}%
@@ -769,7 +769,7 @@ One particular measure is known as the \hlnotea{Value-at-Risk} (VaR).
 \begin{defn}[Value-at-Risk (VaR)]\index{Value-at-Risk}\index{VaR}\label{defn:value_at_risk}
 The \hlnoteb{Value-at-Risk (VaR)} is a \hlnotea{quantile} of the distribution of aggregate losses, i.e.\ the $VaR$ of a risk $X$ at the $100\%p$ level is defined as\sidenote{I must find out why we define using $\inf$ instead of $\min$ (see following remark), and I will not take ``safe definition'' as an answer without full justification.}
   \begin{align*}
-    \pi_p = \VaR_p (X) &= \inf \{ x \in \mathbb{R} : P (X > x) \leq 1 - p \} \\
+    \VaR_p (X) &= \inf \{ x \in \mathbb{R} : P (X > x) \leq 1 - p \} \\
                &= \inf \{ x \in \mathbb{R} : P (X \leq x) \geq p \}.
   \end{align*}
 \end{defn}
@@ -3471,7 +3471,7 @@ To store this information, we look to the pgf of $N^T$: we have
 \begin{eg}
   Let $N \sim \NB(\beta, r)$. Its zero-truncated version has pmf of the form
   \begin{align*}
-    p_K^T &= \frac{p_k}{1 - p_0} = \frac{\binom{k + r - 1}{k} \left( \frac{1}{1 + \beta} \right)^r \left( \frac{\beta}{1 + \beta} \right)^k}{1 - \left( \frac{1}{1 + \beta} \right)^r} \\
+    p_k^T &= \frac{p_k}{1 - p_0} = \frac{\binom{k + r - 1}{k} \left( \frac{1}{1 + \beta} \right)^r \left( \frac{\beta}{1 + \beta} \right)^k}{1 - \left( \frac{1}{1 + \beta} \right)^r} \\
           &= \frac{\Gamma(k + r)}{k! \Gamma(r)} \frac{\left( \frac{\beta}{1 + \beta} \right)^k}{(1 + \beta)^r - 1}
   \end{align*}
 \end{eg}
@@ -3540,9 +3540,9 @@ The pgf of a zero-modified distribution is
 \begin{proof}
   The derivation is straightforward:
   \begin{align*}
-    E \left[ \left( N^M \right)^k \right] &= \sum_{m = 0}^{\infty} m^k p_K^M = \sum_{m=1}^{\infty} \frac{1 - p_0^M}{1 - p_0} m^k p_k \\
-                                          &= \frac{1 - p_0^M}{1 - p_0} \sum_{m=1}^{\infty} m^k p_k = \frac{1 - p_0^M}{1 - p_0} \sum_{m = 0}^{\infty} m^k p_k \\
-                                          &= \frac{1 - p_0^M}{1 - p_0} E \left[ N \right].
+    E \left[ \left( N^M \right)^k \right] &= \sum_{m = 0}^{\infty} m^k p_m^M = \sum_{m=1}^{\infty} \frac{1 - p_0^M}{1 - p_0} m^k p_m \\
+                                          &= \frac{1 - p_0^M}{1 - p_0} \sum_{m=1}^{\infty} m^k p_m = \frac{1 - p_0^M}{1 - p_0} \sum_{m = 0}^{\infty} m^k p_m \\
+                                          &= \frac{1 - p_0^M}{1 - p_0} E \left[ N^k \right].
   \end{align*}\qed\
 \end{proof}
 
@@ -3563,7 +3563,7 @@ The pgf of a zero-modified distribution is
 \end{solution}
 
 \begin{note}
-  It should be noted that a zero-truncated distribution is a special case of the zero-modified distribution.
+  It should be noted that a zero-truncated distribution is a special case of the zero-modified distribution. In fact, if $p_0^M = 0$, we get that the zero-modified distribution is exactly the zero-truncated distribution.
 \end{note}
 
 In addition to the zero-modified $(a, b, 0)$ distributions, there are other members in the $(a, b, 1)$ distributions. One such example is known as the \hlnotea{logarithmic distribution}, which has the pmf
@@ -3643,7 +3643,7 @@ Both the distributions of $N \mid \Theta = \theta$ and $\Theta$ are usually give
 \end{eg}
 
 \begin{propo}[Mixed Poisson Distribution has a Variance Greater than its Mean]\label{propo:mixed_poisson_distribution_has_a_variance_greater_than_its_mean}
-  FOr a mixed Poisson rv $N$, we have $\Var(N) > E[N]$.
+  For a mixed Poisson rv $N$, we have $\Var(N) > E[N]$.
 \end{propo}
 
 \begin{proof}
@@ -3672,7 +3672,7 @@ Both the distributions of $N \mid \Theta = \theta$ and $\Theta$ are usually give
   From here, we can only proceed iff $1 + \alpha - t > 0$, i.e. $t < 1 + \alpha$; otherwise the integral diverges. Now, using integration by parts
   \begin{align*}
     G_N(t) &= \frac{\alpha^2}{1 + \alpha} \left[ - \frac{1}{\alpha + 1 - t} e^{-\lambda (\alpha + 1 - t)} \at{0}{\infty} + \right. \\
-           &\quad \left. \left[ - \frac{1}{\alpha + 1 - t} \lambda e^{-\lambda(\alpha + 1 - t)} \at{0}{\infty} + \frac{1}{(\alpha + 1 - t)^2} e^{-\lambda(\alpha + 1 - t)} \at{0}{\infty} \right] \right] \\
+           &\quad \left. \left[ - \frac{1}{\alpha + 1 - t} \lambda e^{-\lambda(\alpha + 1 - t)} \at{0}{\infty} - \frac{1}{(\alpha + 1 - t)^2} e^{-\lambda(\alpha + 1 - t)} \at{0}{\infty} \right] \right] \\
            &= \frac{\alpha^2}{1 + \alpha} \left[ \frac{1}{\alpha + 1 - t} + \frac{1}{( \alpha + 1 - t )^2} \right]
   \end{align*}
   Now to arrive at a mixture of two negative binomial distributions, we need to know the form of the pgf for a negative binomial distribution. Note that the pgf of $\NB(\beta, r)$ is
@@ -4009,7 +4009,7 @@ Let $N$ denote the number of claims generated by a portfolio of insurance polici
 \label{ssub:exposure_adjustment}
 % subsubsection exposure_adjustment
 
-Suppose that the total number of claims of an insurance portfolio consisting $k$ policies in the current year is modelled by a countign r $N$ with pgf $G_N(t)$, and suppose that we do not have the model for the number of claims of each policy.
+Suppose that the total number of claims of an insurance portfolio consisting $k$ policies in the current year is modelled by a counting number $N$ with pgf $G_N(t)$, and suppose that we do not have the model for the number of claims of each policy.
 
 \newthought{Question}: In the following year, if the number of policies changes to some $k^*$, and we let $N^*$ be the total number of claims in the new year, what is the relationship between the pgfs of $N$ and $N^*$?
 
@@ -4026,14 +4026,14 @@ Suppose that the total number of claims of an insurance portfolio consisting $k$
   \end{align*}
 \end{eg}
 
-However, it may not be the case where $\frac{k^*}{k}jk$ is a ratio such that $\left[ G_N(t) \right]^{\frac{k^*}{k}}$ is still a pgf.
+However, it may not be the case where $\frac{k^*}{k}$ is a ratio such that $\left[ G_N(t) \right]^{\frac{k^*}{k}}$ is still a pgf.
 
 \begin{defn}[Infinitely Divisible]\index{Infinitely Divisible}\label{defn:infinitely_divisible}
   A discrete distribution with pgf $G(t)$ is said to be \hlnoteb{infinitely divisible} if for all $k =1, 2, \ldots,$ the function $\left[ G(t) \right]^{\frac{1}{k}}$ is the pgf of some rv.
 \end{defn}
 
 \begin{remark}[Namesake]
-  The name comes from the idea that the rv can be ``infinitely divided'' into $k$-many iid rvs, e.g.
+  The name comes from the idea that the rv can be ``infinitely divided'' into $k$-many iid rvs, for any $k \in \mathbb{N}$, e.g.
   \begin{equation*}
     X = Y_1 + \hdots + Y_k.
   \end{equation*}
@@ -4055,7 +4055,7 @@ However, it may not be the case where $\frac{k^*}{k}jk$ is a ratio such that $\l
 \begin{solution}
   Let $N \sim \Poi(\lambda)$. Then for any $k \in \mathbb{N} \setminus \{ 0 \}$, we have
   \begin{equation*}
-    G_N(t) = e^{\lambda( t - 1 )} \implies \left[ G_N(t) \right]^{\frac{1}{k}} e^{\frac{\lambda}{k} ( t - 1 )}
+    G_N(t) = e^{\lambda( t - 1 )} \implies \left[ G_N(t) \right]^{\frac{1}{k}} = e^{\frac{\lambda}{k} ( t - 1 )}
   \end{equation*}
   which is a pgf of $\Poi \left( \frac{\lambda}{k} \right)$.
 
@@ -4211,9 +4211,9 @@ since $I_i \sim \Bernoulli(\alpha)$.
 
 We shall now look back at some of the things that we introduced throughout the course and put them together.
 
-\subsection{Indiviual Risk Model}%
-\label{sub:indiviual_risk_model}
-% subsection indiviual_risk_model
+\subsection{Indiviual Risk Model Revisited}%
+\label{sub:indiviual_risk_model_revisited}
+% subsection indiviual_risk_model_revisited
 
 Recall the \hyperref[defn:individual_risk_model]{individual risk model}. Consider a portfolio consisting of $n$ insurance policies. Let $Z_i$  denote the amount paid for the $i$\textsuperscript{th} policy. The individual risk model for the aggregate amount paid is given by
 \begin{equation*}
@@ -4243,7 +4243,7 @@ where $\overset{d}{\to}$ means a \hlnotea{convergence in distribution}\sidenote{
   where $\frac{S - E[S]}{\sqrt{\Var(S)}} \overset{d}{\to} \Nor(0, 1)$. Thus we need to solve for
   \begin{align*}
     E[S] &= E \left[ \sum_{i=1}^{100} Z_i \right] = 100 E \left[ \left[ X - 20 \right]_+ \right] \\
-    \Var(S) &= \Var \left( \sum_{i=1}^{100} Z_i \right) 100 \Var(Z_i) = 100 \Var( [ X - 20 ]_+ ).
+    \Var(S) &= \Var \left( \sum_{i=1}^{100} Z_i \right) = 100 \Var(Z_i) = 100 \Var( [ X - 20 ]_+ ).
   \end{align*}
   We have
   \begin{align*}
@@ -4266,11 +4266,11 @@ where $\overset{d}{\to}$ means a \hlnotea{convergence in distribution}\sidenote{
   where $Z \sim \Nor(0, 1)$.
 \end{solution}
 
-% subsection indiviual_risk_model (end)
+% subsection indiviual_risk_model_revisited (end)
 
-\subsection{Collective Risk Model}%
-\label{sub:collective_risk_model}
-% subsection collective_risk_model
+\subsection{Collective Risk Model Revisited}%
+\label{sub:collective_risk_model_revisted}
+% subsection collective_risk_model_revisted
 
 Recall the \hyperref[defn:collective_risk_model]{collective risk model}: we define the aggregate loss as a random sum of severity amounts, i.e.
 \begin{equation*}
@@ -4323,7 +4323,7 @@ where $h > 0$ is some constant\sidenote{Here, $h$ acts as a scale for the values
 \end{equation*}
 where $\{\tilde{X}_i\}_{i \geq 1}$ is a sequence of iid copies such that $\tilde{X}_i = \frac{X_i}{h}$.
 
-% subsection collective_risk_model (end)
+% subsection collective_risk_model_revisted (end)
 
 % section aggregate_risk_models (end)
 
@@ -4333,13 +4333,13 @@ where $\{\tilde{X}_i\}_{i \geq 1}$ is a sequence of iid copies such that $\tilde
 \label{chp:lecture_21_nov_27th}
 % chapter lecture_21_nov_27th
 
-\section{Aggregate Risk Models}%
-\label{sec:aggregate_risk_models}
-% section aggregate_risk_models
+\section{Aggregate Risk Models Revisited}%
+\label{sec:aggregate_risk_models_revisited}
+% section aggregate_risk_models_revisited
 
-\subsection{Collective Risk Model}%
-\label{sub:collective_risk_model}
-% subsection collective_risk_model
+\subsection{Collective Risk Model Revisited (Continued)}%
+\label{sub:collective_risk_model_revisited_continued}
+% subsection collective_risk_model_revisited_continued
 
 \paragraph{Continuous Severity Distribution} Suppose that $X$ is a continuous severity rv with pdf $f_X$. Since we usually have that $P(N = 0) > 0$, $S$ is a \hlnoteb{mixture with probability mass at $0$}.
 
@@ -4354,7 +4354,7 @@ where $\{\tilde{X}_i\}_{i \geq 1}$ is a sequence of iid copies such that $\tilde
 \begin{proof}
   By conditioning on $N$, we have
   \begin{align*}
-    M_S(t) &= e \left[ e^{tS} \right] = E \left[ E \left[ e^{t ( X_1 + \hdots + X_N )} \mid N \right] \right] \\
+    M_S(t) &= E \left[ e^{tS} \right] = E \left[ E \left[ e^{t ( X_1 + \hdots + X_N )} \mid N \right] \right] \\
            &= E \left[ E \left[ e^{tX_1} \mid N \right] \hdots E \left[ e^{tX_N} \mid N \right] \right] \\
            &= E \left[ E \left[ e^{tX} \right]^N \right] = E \left[ M_X(t)^N \right] = G_N(M_X(t)).
   \end{align*}\qed\
@@ -4415,18 +4415,18 @@ for $N \sim \Poi(\lambda)$, $N \sim \Bin(m ,q)$, and $N \sim \NB(r, q)$, respect
 \end{eg}
 
 \begin{solution}
-  Let $X_i \sim X$, for $i = 1, 2, \ldots, N$. Then
+  Let $X_i \sim X$, for $i = 1, 2, \ldots, N$. Then by \cref{propo:mean_and_variance_of_the_compound_rv}, we have
   \begin{equation*}
     E [S] = E \left[ \sum_{i=1}^{N} X_i \right] = E[N] E[X] = 100,
   \end{equation*}
   and
   \begin{align*}
-    \Var(S) &= \Var \left( \sum_{i=1}^{N} X_i \right) = E \left[ \Var \left( \sum_{i=1}^{N} X_i \mid N \right) \right] + \var \left( E \left[ \sum_{i=1}^{N} X_i \mid N \right] \right) \\
+    \Var(S) &= \Var \left( \sum_{i=1}^{N} X_i \right) = E \left[ \Var \left( \sum_{i=1}^{N} X_i \mid N \right) \right] + \Var \left( E \left[ \sum_{i=1}^{N} X_i \mid N \right] \right) \\
             &= E[N] \Var(X) + \Var(N) E[X]^2 = 400.
   \end{align*}
   The $95\%$ quantile, $\pi_{0.95}$, is such that
   \begin{equation*}
-    P( S < \pi_{0.95} ) \leq 0.95 \leq P ( \leq \pi_{0.95} ).
+    P( S < \pi_{0.95} ) \leq 0.95 \leq P ( S \leq \pi_{0.95} ).
   \end{equation*}
   Then
   \begin{align*}
@@ -4444,7 +4444,11 @@ for $N \sim \Poi(\lambda)$, $N \sim \Bin(m ,q)$, and $N \sim \NB(r, q)$, respect
   \end{equation*}
 \end{solution}
 
-\paragraph{Discretization Method} The normal approximation has limitations: e.g. how large is large for each of the required parameters.
+\subsubsection{Discretization Method}%
+\label{ssub:discretization_method}
+% subsubsection discretization_method
+
+The normal approximation has limitations: e.g. how large is large for each of the required parameters.
 
 \begin{defn}[Discretization Method]\index{Discretization Method}\label{defn:discretization_method}
   The \hlnoteb{discretization method} is to approximate the distribution of a continuous (or mixed) severity rv $X$ by the distribution of a discrete severity rv $\hat{X}$, which has mass points at $\{ 0, h, 2h, \ldots \}$. The pmf of $\hat{X}$ is
@@ -4463,11 +4467,45 @@ for $N \sim \Poi(\lambda)$, $N \sim \Bin(m ,q)$, and $N \sim \NB(r, q)$, respect
   Since the amount paid per payment, $Y_P$, is usually continuous (especially so at $0$), we usually apply the discretization method to $Y_P$, and then obtain an approximation to the distribution of $S$.
 \end{remark}
 
-% subsection collective_risk_model (end)
+% subsubsection discretization_method (end)
 
-% section aggregate_risk_models (end)
+% subsection collective_risk_model_revisited_continued (end)
+
+% section aggregate_risk_models_revisited (end)
 
 % chapter lecture_21_nov_27th (end)
+
+\chapter{Lecture 22 Nov 29th}%
+\label{chp:lecture_22_nov_29th}
+% chapter lecture_22_nov_29th
+
+\section{Aggregate Risk Models Revisited (Continued)}%
+\label{sec:aggregate_risk_models_revisited_continued}
+% section aggregate_risk_models_revisited_continued
+
+\subsection{Collective Risk Model Revisited(Continued 2)}%
+\label{sub:collective_risk_model_revisited_continued_2}
+% subsection collective_risk_model_revisited_continued_2
+
+\subsubsection{Discretization Method (Continued)}%
+\label{ssub:discretization_method_continued}
+% subsubsection discretization_method_continued
+
+\begin{eg}
+  Assume that the number of losses $N \sim \Poi(3)$. The ground-up loss $X \sim \Pareto(4, 10)$. An individual loss limit of $15$ and an ordinary deductible of $6$ are applied to each loss. Determine the distribution of the discretized aggregate payment with $h = 2.5$.
+\end{eg}
+
+\begin{solution}
+  
+\end{solution}
+
+% subsubsection discretization_method_continued (end)
+
+% subsection collective_risk_model_revisited_continued_2 (end)
+
+% section aggregate_risk_models_revisited_continued (end)
+
+% chapter lecture_22_nov_29th (end)
 
 \appendix
 
