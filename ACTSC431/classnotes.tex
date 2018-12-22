@@ -4283,7 +4283,7 @@ where
   \item and we follow the convention that $S = 0$ if $N = 0$.
 \end{itemize}
 
-We are, again, interested in the aggregate amount paid by the insurer. The collective risk model for the aggregate amount paid can be expressed in two forms, as mentioned in \cref{sec:frequency_distributions_creating_new_frequency_distributions_and_effect_on_frequency_distribution_continued_2}.
+We are, again, interested in the aggregate amount paid by the insurer. The collective risk model for the aggregate amount paid can be expressed in two forms, as mentioned in \cref{sec:frequency_distributions_creating_new_frequency_distributions_and_effect_on_frequency_continued_2}.
 
 We first study the distribution of $S$ when the severity distribution $X$ is a \hlnoteb{discrete rv} with pmf
 \begin{equation*}
@@ -4483,7 +4483,7 @@ The normal approximation has limitations: e.g. how large is large for each of th
 \label{sec:aggregate_risk_models_revisited_continued}
 % section aggregate_risk_models_revisited_continued
 
-\subsection{Collective Risk Model Revisited(Continued 2)}%
+\subsection{Collective Risk Model Revisited (Continued 2)}%
 \label{sub:collective_risk_model_revisited_continued_2}
 % subsection collective_risk_model_revisited_continued_2
 
@@ -4496,10 +4496,145 @@ The normal approximation has limitations: e.g. how large is large for each of th
 \end{eg}
 
 \begin{solution}
-  
+  \marginnote{The goal is to derive the distribution of a discretized aggregate payment $\hat{S} = \sum_{i=1}^{N_P} \hat{Y}_{P, i}$. To that end, we need to figure out the secondary distribution $\hat{Y}_{P, i}$ and the primary distribution $N_P$. For each of the $\hat{Y}_{P, i}$'s, we need to use the discretized method:
+    \begin{equation*}
+      P \left( \hat{Y}_{P, i} = 0 \right) = P\left( 0 \leq Y_{P, i} < \frac{h}{2} \right) \\
+    \end{equation*}
+    \begin{align*}
+      & P \left( \hat{Y}_{P, i} = k \right) \\
+      &= P \left( \frac{(2k - 1)h}{2} \leq Y_{P. i} < \frac{(2k + 1)h}{2} \right)
+    \end{align*}
+    We know what $Y_{P, i}$ is from $Y_{L, i}$. To find out what $N_P$ is, we are given that $N_L = N \sim \Poi(3)$, and so we may use the relation
+    \begin{equation*}
+      G_{N_p}(t) = G_{N_L} ( 1 - \alpha + \alpha t ),
+    \end{equation*}
+    where $\alpha$ is the probability that a loss occurs.
+}
+  Let $Y_L = [ ( X \land 15 ) - 6 ]_+$, let $\{ X_i \}$ be such that $X_i \sim X$, and $\{ Y_{L, i} \}$ be such that $Y_{L, i} = [ ( X_i \land 15 ) - 6 ]_+$ for each $i$. It follows that by this construction, we have $Y_{L, i} \sim Y_L$. Now, since $X \sim \Pareto(4, 10)$, the survival function of $X$ is
+  \begin{equation*}
+    \bar{F}_X(x) = \left( \frac{\theta}{x + \theta} \right)^\alpha = \left( \frac{10}{x + 10} \right)^4.
+  \end{equation*}
+  It follows that the survival function of $Y_L$ is
+  \begin{equation*}
+    \bar{F}_{Y_L}(y) = \begin{cases}
+      1                              & y < 0 \\
+      \bar{F}_X \left( y + 6 \right) & 0 \leq y < 9 \\
+      0                              & y \geq 9
+    \end{cases} = \begin{cases}
+      1                                  & y < 0 \\
+      \left( \frac{10}{y + 16} \right)^4 & 0 \leq y < 9 \\
+      0                                  & y \geq 9
+    \end{cases}
+  \end{equation*}
+  Consequently, we have that
+  \begin{equation*}
+    \bar{F}_{Y_P}(y) = \begin{cases}
+      1 & y < 0 \\
+      \frac{\left( \frac{10}{y + 16} \right)^4}{\left( \frac{10}{16} \right)^4} = \left( \frac{16}{y + 16} \right)^4 & 0 \leq y < 9 \\
+      0 & y \geq 9
+    \end{cases}
+  \end{equation*}
+  The discretized version of each of the $Y_{P, i}$'s is
+  \begin{gather*}
+    f_{\bar{Y}_p / h} (0) = P \left( \hat{Y}_P = 0 \right) = F_{Y_P} \left( \frac{h}{2} \right) = 1 - \bar{F}_{Y_P} \left( \frac{h}{2} \right) \\
+    f_{\hat{Y}_P / h} (k) = P \left( \hat{Y}_P = kh \right) = \bar{F}_{Y_P} \left( \frac{( 2k - 1 ) h}{2} \right) - \bar{F}_{Y_P} \left( \frac{( 2k + 1 ) h}{2} \right).
+  \end{gather*}
+  Now, notice that the probability of a loss occuring is
+  \begin{equation*}
+    \bar{F}_{Y_L} (0) = \left( \frac{10}{16} \right)^4 = \left( \frac{5}{8} \right)^4 =: \lambda.
+  \end{equation*}
+  Therefore, since $N_P = \sum_{i=1}^{N_L} \mathbb{1}_{\{Y_L > 0\}}$, we have
+  \begin{equation*}
+    G_{N_P} (t) = G_{N_L} ( 1 - \lambda + \lambda t ) = e^{3 ( 1 - \lambda + \lambda t - 1 )} = e^{3 \lambda ( t - 1 )},
+  \end{equation*}
+  and so $N_P \sim \Poi(3 \lambda)$. Using \hyperref[thm:panjer_s_recursion_for_a_b_0_class]{Panjer's Recursion} for the $(a, b, 0)$ class (as $N_P \sim \Poi(3 \lambda)$) on $\frac{\hat{S}}{h}$, where $\hat{S}$ is the discretized version of $S = \sum_{i=1}^{N_P} Y_{P, i}$, we have
+  \begin{gather*}
+    g_{\hat{S} / h} (0) = G_{N_P} \left( f_{\hat{Y}_P / h} (0) \right) = e^{3 \lambda \left( f_{\hat{Y}_P / h} (0) - 1 \right)} \\
+    g_{\hat{S} / h} (k) = \sum_{i=1}^{k} \frac{3 \lambda i}{k}f_{\hat{Y}_P / h} (i) g_{\hat{S} / h} (k - i).
+  \end{gather*}
 \end{solution}
 
 % subsubsection discretization_method_continued (end)
+
+\subsubsection{Other Insurance Models based on the Collective Risk Model}%
+\label{ssub:other_insurance_models_based_on_the_collective_risk_model}
+% subsubsection other_insurance_models_based_on_the_collective_risk_model
+
+\begin{defn}[Excess-of-loss Insurance]\index{Excess-of-loss Insurance}\label{defn:excess_of_loss_insurance}
+  Given a collective risk model $S = \sum_{i=1}^{N} X_i$, if an ordinary deductible $d$ is applied to each risk, then the aggregate loss covered by the insurer is
+  \begin{equation*}
+    S^* = \sum_{i=1}^{N} [ X_i - d ]_+.
+  \end{equation*}
+  Such a contract is known as an \hlnoteb{excess-of-loss insurance}.
+\end{defn}
+
+\begin{note}
+  By \cref{propo:mean_and_variance_of_the_compound_rv}, for an excess-of-loss insurance, we have
+  \begin{gather*}
+    E \left( S^* \right) = E (N) E \left[ [ X - d ]_+ \right] \\
+    \Var \left( S^* \right)= E(N) \Var\left( [ X - d ]_+ \right) + \Var(N) E \left[ [ X - d ]_+ \right]^2.
+  \end{gather*}
+\end{note}
+
+\begin{defn}[Stop-loss Insurance]\index{Stop-loss Insurance}\label{defn:stop_loss_insurance}
+  Given a collective risk model $S = \sum_{i=1}^{N} X_i$, a \hlnoteb{stop-loss insurance} is an insurance where an ordinary deductible $d$ is applied on the aggregate loss, i.e.
+  \begin{equation*}
+    S^* = [ S - d ]_+ = \left[ \sum_{i=1}^{N} X_i - d \right]_+.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  By \cref{propo:expected_value_of_the_policy_adjustments}, we have that
+  \begin{equation*}
+    E \left[ S^* \right] = E \left[ [ S - d ]_+ \right] = \int_{d}^{\infty} \bar{F}_S(x) \dif{x}.
+  \end{equation*}
+\end{note}
+
+\begin{propo}[A Recursive Formula for the Expected Value of a Stop-loss Insurance]\label{propo:a_recursive_formula_for_the_expected_value_of_a_stop_loss_insurance}
+  Let $S$ be discrete, taking values in $\mathbb{N}$. Then $E [ [ S - d ]_+ ]$ can be calculated recursively by
+  \begin{equation*}
+    E [ [ S - ( d + 1 ) ]_+ ] = E [ [ S - d ]_+ ] - \bar{F}_S(d),
+  \end{equation*}
+  for $d = 0, 1, \ldots$, starting from $E(S)$.
+\end{propo}
+
+\begin{proof}
+  Note that for any $x \in \mathbb{R}_{\geq 0}$, we have $x \in (d, d + 1)$ for some $d \in \mathbb{N} \cup \{ 0 \}$. Thus $P ( S > x ) = P ( S > d ) = \bar{F}_S(d)$. Following this, we have that
+  \begin{align*}
+    E [ [ S - d ]_+ ] &= \int_{d}^{\infty} \bar{F}_S(x) \dif{x} = \int_{d}^{d + 1} \bar{F}_S(x) \dif{x} + \int_{d + 1}^{\infty} \bar{F}_S(x) \dif{x} \\
+                      &= \int_{d}^{d + 1} \bar{F}_S(d) \dif{x} + E [ [ S - ( d + 1 ) ]_+ ] \\
+                      &= E [ [ S - ( d + 1 ) ]_+ ] + \bar{F}_S(d),
+  \end{align*}
+  as is required.\qed\
+\end{proof}
+
+\begin{eg}
+  Let $S = \sum_{i=1}^{N} X_i$, where $N \sim \Poi(4)$, and $X$ has pmf $p_1 = \frac{3}{4}$ and $p_2 = \frac{1}{4}$. Calculate $E [ [ S - 2 ]_+ ]$.
+\end{eg}
+
+\begin{solution}
+  Note that we have $E[S] = E[N]E[X] = 4 \cdot \left[ \frac{3}{4} + \frac{1}{4} \right] = 5$, and
+  \begin{equation*}
+    \bar{F}_S(0) = P ( S > 0 ) = P ( N > 0 ) = 1 - e^{-4},
+  \end{equation*}
+  where the second equality follows from knowing that $S > 0$ if $N > 0$. Thus
+  \begin{equation*}
+    E [ [ S - 1 ]_+ ] = 5 - 1 + e^{-4}= 4 + e^{-4}.
+  \end{equation*}
+  Now
+  \begin{align*}
+    \bar{F}_S(1) &= P( S > 1 )  = 1 - P ( S = 0 ) - P ( S = 1 ) \\
+                 &= 1 - e^{-4} - P ( N = 1, X = 1 ) \quad \footnotemark \\
+                 &= 1 - e^{-4} - 4e^{-4} \cdot \frac{3}{4} \\
+                 &= 1 - 4e^{-4}.
+  \end{align*}
+  \footnotetext{This follows for $N = 1 , X = 1$ is the only possibility for when $S = 1$.} Thus
+  \begin{equation*}
+    E [ [ S - 2 ]_+ ] = 4 + e^{-4} - 1 + 4 e ^{-4} = 3 + 5 e^{-4}.
+  \end{equation*}
+\end{solution}
+
+% subsubsection other_insurance_models_based_on_the_collective_risk_model (end)
 
 % subsection collective_risk_model_revisited_continued_2 (end)
 
