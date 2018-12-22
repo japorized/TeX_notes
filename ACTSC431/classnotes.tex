@@ -30,7 +30,7 @@
 \newpage
 \begin{fullwidth}
   \renewcommand{\listtheoremname}{\faBook\ \slshape List of Definitions}
-  \listoftheorems[ignoreall,show={defn}]
+  \listoftheorems[ignoreall,show={defn,margindefn}]
   \addcontentsline{toc}{chapter}{List of Definitions}
 \end{fullwidth}
 
@@ -4644,6 +4644,298 @@ The normal approximation has limitations: e.g. how large is large for each of th
 
 \appendix
 
+\chapter{Problem Set 1}%
+\label{chp:problem_set_1}
+% chapter problem_set_1
+
+\begin{enumerate}
+  \item Suppose that the random variable $X$ has density
+    \begin{equation*}
+      f_X(x) = \frac{\beta ( \beta + 1 ) \alpha^\beta x}{( \alpha + x )^{\beta + 2}}, \quad x > 0,
+    \end{equation*}
+    where $\alpha > 0$ and $\beta > 1$.
+    \begin{enumerate}
+      \item Determine the cdf of $X$.
+      \item Determine $E[X]$.
+      \item Determine the hazard rate function, $h(x)$.
+      \item Determine the mean excess loss function $e_X(x)$.
+    \end{enumerate}
+
+  \item Suppose that the loss rv $X$ is an equal mixture of an exponential distribution with mean $\frac{1}{2}$ and a gamma distribution with parameters $\alpha = 3$ and $\theta = \frac{1}{2}$.
+    \begin{enumerate}
+      \item Determine the density function of $X$.
+      \item Determine the survival function of $X$.
+      \item Determine the hazard rate of $X$.
+      \item Determine the mean excess loss function.
+    \end{enumerate}
+
+  \item Suppose that $X \mid \Lambda = \lambda \sim \Exp(\lambda)$, and $\Lambda$ has the density function
+    \begin{equation*}
+      g_\Lambda (\lambda) = \frac{\lambda^{p - 1}}{\Gamma(p) \Gamma( 1 - p ) ( v - \lambda )^p}, \quad 0 < \lambda < v,
+    \end{equation*}
+    where $v > 0$ and $0 < p < 1$. Show that the unconditional distribution of $X$ is $\Gam(p, v)$.
+
+  \item A discrete rv $N$ with probability mass function
+    \begin{equation*}
+      p_n = \frac{1}{n} \left( \frac{\beta}{1 + \beta} \right)^n \frac{1}{\ln ( 1 + \beta )}, \quad n \in \mathbb{N} \setminus \{ 0 \},
+    \end{equation*}
+    for $\beta > 0$ is said to have a logarithmic distribution.
+    \begin{enumerate}
+      \item Find the probability generating function (pgf) $(G(t)$ of $N$. (\textbf{Hint}: use the Taylor series $- \ln ( 1 0 x ) = \sum_{n=1}^{\infty} \frac{x^n}{n}$)
+      \item Using the same pgf above to determine $E[N]$ and $\Var(N)$. (\textbf{Hint}: use \cref{defn:factorial_moments_from_PGF}.)
+    \end{enumerate}
+
+  \item In this course, we often encounter the computation of integrals such as $\int_{0}^{x} t^2 e^{-t} \dif{t} $ and $\int_{x}^{\infty} t^2 e^{-t} \dif{t}$. The following formula can be used to expedite the computation:
+    \begin{equation*}
+      \int_{x}^{\infty} t^n e^{-t} \dif{t} = \sum_{k=0}^{n} \frac{n!}{k!}x^k e^{-x}, \quad n = 0, 1, \ldots.
+    \end{equation*}
+    Also, note that the Gamma function is defined as $\Gamma(\alpha) = \int_{0}^{\infty} e^{\alpha - 1} e^{-t} \dif{t}$ for $\alpha > 0$.
+    \begin{enumerate}
+      \item Prove the identity above by induction.
+      \item Use the identity to show $\Gamma( n + 1 ) = n!$ for $n = 0, 1, \ldots$. Then, show that
+        \begin{equation*}
+          \int_{0}^{x} t^n e^{-t} \dif{t} = \Gamma (n + 1) - \int_{x}^{\infty} t^n e^{-t} \dif{t} = n! - \sum_{k=0}^{n} \frac{n!}{k!}x^k e^{-x}.
+        \end{equation*}
+      \item Consider a loss rv $X \sim \Gam(\alpha, \theta)$ with $\alpha = 3$ and $\theta = 2$, so that it has the pdf
+        \begin{equation*}
+          f(x) = \frac{\left( \frac{x}{2} \right)^3 e^{-\frac{x}{2}}}{x \Gamma(3)}, \quad x > 0.
+        \end{equation*}
+        Compute $\Var(X)$.
+    \end{enumerate}
+\end{enumerate}
+
+% chapter problem_set_1 (end)
+
+\chapter{Problem Set 3}%
+\label{chp:problem_set_3}
+% chapter problem_set_3
+
+\textit{Problem Set 2 was a bunch of questions from the recommended text.} 
+
+\begin{enumerate}
+  \item Suppose that the ground-up loss rv $X$ has the distribution function
+    \begin{equation*}
+      F_X(x) = 1 - \left( 1 - \frac{x}{\theta} \right)^\alpha, \quad 0 \leq x \leq \theta, \enspace \alpha > 0.
+    \end{equation*}
+    An ordinary deductible $d < \theta$ is applied to each loss.
+    \begin{enumerate}
+      \item Show that the distribution of the amount paid per payment $Y_P$ is the same as the distribution of $X$ with $\theta$ replaced by $\theta - d$.
+      \item Is $X$ an IMRL or DMRL distribution? Justify.
+      \item Determine the loss elimination ratio.
+    \end{enumerate}
+
+  \item The density function of the ground-up loss rv $X$ is given by
+    \begin{equation*}
+      f_X(x) = \frac{1}{100} \left( q + \frac{1}{100} ( 1 - q ) x \right) e^{- \frac{x}{100}}, \quad x > 0,
+    \end{equation*}
+    where $0 < q < 1$. With an ordinary deductible of $100$, the expected value of amount paid per payment is known to be $125$. Determine the expected value of amount paid per payment if the deductbile level is adjusted to $200$.
+
+  \item The cdf of a ground-up loss rv $X$ is given by
+    \begin{equation*}
+      F_X(x) = \frac{2x + x^2}{2b + b^2}, \quad 0 \leq x < b.
+    \end{equation*}
+    \begin{enumerate}
+      \item Does $X$ have a DFR, IFR, or neither? Justify your answer.
+      \item Is $X$ a IMRL distribution, DMRL distribution, or neither? Justify your answer.
+      \item Assume that all losses are subject to a Franchise deductible of $d$ with $d < b$. Find the mean of amount paid per loss.
+    \end{enumerate}
+
+  \item Suppose that the ground-up loss rv $X$ is defined as $X = \frac{1}{Y}$, where $Y$ follows an exponential distribution with the pdf
+    \begin{equation*}
+      f_Y(t) = 5e^{-5y}, \quad y > 0.
+    \end{equation*}
+    Assume that a policy limit of $100$, and an ordinary deductible of $10$ are applied to all losses. Determine the probability that the amount paid by the insurer on a per payment basis is less than or equal to $50$.
+
+  \item Assume that the ground-up loss rv $X \sim \Unif(0, 650)$. Suppose there is an ordinary deductible of $150$.
+    \begin{enumerate}
+      \item Find the survival function of the amount paid per loss.
+      \item Find the survival function of the amount paid per payment.
+      \item Find the mean excess loss $e_X(150)$.
+      \item Calculate $\Var( ( X - 150 )^2 \mid X > 150 )$.
+    \end{enumerate}
+
+  \item let $X$ be the ground-up loss for the current year for an insurer with the following pdf
+    \begin{equation*}
+      f_X(x) = \frac{375000}{x^4}, \quad x > 50.
+    \end{equation*}
+    \begin{enumerate}
+      \item Suppose that a Franchise deductible of $100$ is applied to the loss. Find $\bar{F}_{Y_L}(y), \bar{F}_{Y_P}(y), E[Y_L]$ and $E[Y_P]$.
+      \item Suppose that an ordinary deductible of $150$ is applied to the loss. Calculate the loss elimination ratio for the current year.
+      \item Suppose that an annual inflation rate of $5\%$ will prevail. The insurer would like to model its ground-up loss by $1.05X$ for the next year. To keep the same loss elimination ratio for the next year, what should be the ordinary deductible for $d$ for the next year?
+      \item Suppose that the insurer institutes an ordinary deductible of $100$, a coinsurance of $85\%$, and a \textbf{maximum payment} of $1,700$ in the current year. Calculate $\bar{F}_{Y_L}(y), \Var(Y_L)$ and the probability that the amount paid by the insurer on a per payment basis will exceed $50$.
+    \end{enumerate}
+
+  \item Total claims for a health plan have a Pareto distribution with $\alpha = 2$ and $\theta = 500$. The health plan implements an increase to physicians that will pay a bonus of $50\%$ of the amount by which total claims are less than $500$; otherwise no bonus is paid. It is anticipated that with the incentive plan, the claim distribution will change to become Pareto with $\alpha = 2$ and $\theta = K$. With the new distribution, it turns out that the expected claims plus the expected bonus is equal to the expected claims prior to the bonus system. Determine the value of $K$.
+
+  \item Losses follow a Pareto distribution with $\alpha = 2$ and $\theta = 5000$. An insurance policy pays the following for each loss. There is no insurance payment for the first $1000$. For losses between $1000$ and $6000$, the insurance pays $80\%$. Losses above $6000$ are paid by the insured until the insured has made a total payment of $10000$. For any remaining part of the loss, the insurance pays $90\%$. Determine the expected insurance payment per loss.
+\end{enumerate}
+
+% chapter problem_set_3 (end)
+
+\chapter{Problem Set 4}%
+\label{chp:problem_set_4}
+% chapter problem_set_4
+
+
+\begin{enumerate}
+  \item Suppose that $N \mid \Lambda = \lambda \sim \Poi(\lambda)$, and $\Lambda \sim \Unif(0, 5)$. Determine the probability that $N \geq 2$.
+  \item Let $N$ be the number of claims of an insurance portfolio. Assume that $N \mid \Theta = \theta \sim \NB(\theta, 5)$, and $\Theta \sim \Unif(0, 8)$.
+    \begin{enumerate}
+      \item Calculate the expectation of the number of claims.
+      \item Calculate the variance of the number of claims.
+      \item Calculate the probability that there are at least two claims.
+    \end{enumerate}
+  \item Assume that $X \mid \Theta = \theta \sim \Bernoulli(\theta)$, and $\Theta \sim \BetaDist(1, 3, 1)$.
+    \begin{enumerate}
+      \item Show that $X$ follows a Bernoulli distribution and identify its parameter.
+      \item Show that the conditional distribution of $\Theta$, given $X = 0$, is a beta distribution and identify the parameters for this beta distribution.
+    \end{enumerate}
+  \item Suppose that $\Lambda \sim \Gam(\alpha, \theta)$ and $N \mid \Lambda = \lambda \sim \Poi(\lambda + \mu)$. We denote the pmf of $N$ by $\{ p_k \}_{k \in \mathbb{N} \cup \{ 0 \} }$.
+    \begin{enumerate}
+      \item Show that $N$ has the pgf
+        \begin{equation*}
+          G_N(t) = e^{\mu( t - 1 )} [ 1 - \theta(t - 1) ]^{-\alpha}.
+        \end{equation*}
+      \item Find $p_0$.
+      \item Show that $G'_N(t) = [ \mu + \alpha \theta ( 1 + \theta - \theta t )^{-1} ] G_N(t)$, and hence
+        \begin{equation*}
+          ( 1 + \theta ) G'_N(t) = \theta t G'_N(t) + [ \mu ( 1 + \theta ) + \alpha \theta ] G_N(t) - \mu \theta t G_N(t).
+        \end{equation*}
+      \item Use the above identity to show that
+        \begin{gather*}
+          p_i = \left( \mu + \frac{\alpha \theta}{1 + \theta} \right)p_0 \\
+          p_{k + 1} = \frac{[\mu ( 1 + \theta ) + ( \alpha + k )\theta]p_k - \mu \theta p_{k - 1}}{(1 + \theta)(k  +1)}, \enspace k = 1, 2, \ldots.
+        \end{gather*}
+    \end{enumerate}
+
+  \item Consider a counting rv $N$ with pmf
+    \begin{equation*}
+      p_0 = 0.2, \, p_1 = 0.3, \, p_2 = 0.3, \, \text{ and } p_3 = 0.2.
+    \end{equation*}
+    Is $N$ is member of the $(a, b, 0)$ class? Justify.
+
+  \item Let $N$ be a member of the $(a, b, 0)$ class. Prove that
+    \begin{equation*}
+      E [ N ] = \frac{a + b}{1 - a}.
+    \end{equation*}
+    \textbf{Hint}: Show that
+    \begin{equation*}
+      kp_k = a(k - 1) p_{k - 1} + ( a + b ) p_{k - 1}, \quad k = 1, 2, \ldots.
+    \end{equation*}
+\end{enumerate}
+
+% chapter problem_set_4 (end)
+
+\chapter{Problem Set 5}%
+\label{chp:problem_set_5}
+% chapter problem_set_5
+
+\begin{enumerate}
+  \item Let $N$ be a logarithmic rv with pmf
+    \begin{equation*}
+      p_k = \frac{-1}{k \ln ( 1 - \beta )} \beta^k, \quad k = 1, 2, 3, \ldots,
+    \end{equation*}
+    for $0 < \beta < 1$.
+    \begin{enumerate}
+      \item Show that the distribution of $N$ is an $(a, b, 1)$ member. Identify the parameters of $a$ and $b$.
+      \item Show that the pgf of $N$ is
+        \begin{equation*}
+          G_N(t) = \frac{\ln(1 - \beta t)}{\ln( 1 - \beta )}.
+        \end{equation*}
+      \item Let $M$ be an rv with pgf
+        \begin{equation*}
+          G_M(t) = G_N(1 - \alpha + at),
+        \end{equation*}
+        where $0 < \alpha < 1$. Show that the pgf of $M$ can be expressed as
+        \begin{equation*}
+          G_M(t) = q + ( 1 - q ) \frac{\ln( 1 - \beta^* t )}{\ln( 1 - \beta^* )},
+        \end{equation*}
+        where
+        \begin{equation*}
+          q = \frac{\ln( 1 - \beta( 1 - \alpha ) )}{\ln ( 1 - \beta )} \text{ and } \beta^* = \frac{\alpha\beta}{1 - \beta(1 - \alpha)}.
+        \end{equation*}
+      \item From the above, comment on the distribution of the rv $M$.
+    \end{enumerate}
+
+  \item Let $N$ be the logarithmic rv with pmf
+    \begin{equation*}
+      p_k = \frac{\beta^k}{k ( 1 + \beta )^k\ln(1 + \beta)},
+    \end{equation*}
+    and parameter $\beta = 10$. Consider its zero-modified version $N^M$ with $p_0^M = 0.1$.
+    \begin{enumerate}
+      \item Find $P\left(N^M > 2\right)$.
+      \item Find $E \left[ N^M \right]$.
+      \item Find $\Var \left( N^M \right)$.
+    \end{enumerate}
+
+  \item Assume that the number of losses $N_L$ have a zero-truncated Poisson rv with parameter $\lambda$.
+    \begin{enumerate}
+      \item Identify the pmf and the pgf of $N_L$.
+      \item Assume that a loss results in a positive payment with probability $\alpha$ (independently of each other and of the total number of losses). Show that the distribution of the number of positive payments is a zero-modified Poisson rv with parameter $\alpha \lambda$, and identity the probability at $0$.
+      \item Determine the mean and variance of the number of positive payments.
+    \end{enumerate}
+
+  \item Suppose that $N$ has the following mixed Poisson distribution with $N \mid \Theta = \theta \sim \Poi(\theta)$ and $\Theta$ has the pdf
+    \begin{equation*}
+      g(\theta) = \frac{1\beta}{e^{-\frac{1}{\beta}( \theta - \lambda )}}, \quad \theta > \lambda,
+    \end{equation*}
+    where $\lambda, \beta > 0$.
+    \begin{enumerate}
+      \item Prove that
+        \begin{equation*}
+          P(N = n) = \frac{e^{-\lambda}}{1 + \beta} \sum_{k=0}^{n} \frac{1}{( n - k )!}\lambda^{n - k} \left( \frac{\beta}{1 + \beta} \right)^k, \quad n = 0, 1, \ldots.
+        \end{equation*}
+      \item Find the moment generating function of $\Theta$.
+      \item Comment on the distribution of $N$.
+      \item Calculate $E[N]$ and $\Var(N)$.
+      \item Consider a ground-up loss rv $X$ which has a lognormal distribution with paramters $\mu = 3.3$ and $\sigma = 2.5$. Suppose a Franchise deductible of $200$ is imposed. If the number of losses follows the same distribution as $N$, identify the distribution of the number of (nonzero) payments.
+    \end{enumerate}
+
+  \item Consider the compound rv $S$ with primary distribution $N$ and secondary distribution $M$. The primary distribution $N$ is a zero-truncated negative binomial rv with $\beta = 1$ and $r = 3$. The pmf of $M$ is given by $f_0 = 0.1, \, f_1 = 0.65$ and $f_2 = 0.25$. Compute the pmf of $S$, i.e. $g_k = P(S = k)$ for $k = 0, 1, 2, 3$.
+
+  \item The cdf of a ground-up loss $X$ is given by
+    \begin{equation*}
+      F_X(x) = 1 - \frac{1458000(45 + 2x)}{( 90 + x )^4}, \quad x \geq 0.
+    \end{equation*}
+    The insurance policy calls for an ordinary deductible of $30$ to be imposed. It is assumed that the number of payments $N_P$ has a logarithmic distribution with $\beta = \frac{7}{4}$.
+    \begin{enumerate}
+      \item Determine the expected number of payments.
+      \item Find the survival function of the amount paid per payment $Y_P$.
+      \item Discretize the severity distribution of $Y_P$ using the method of rounding with a span of $h = 30$. Determine the probability that $P \left( \hat{Y}_P = 90 \right)$, where $\hat{Y}_P$ is the discretized version of $Y_P$ with $h = 30$.
+      \item Use Panjer's recursion to calculate the discretized distribution of aggregate payments up to a discretized amount paid of $90$.
+    \end{enumerate}
+
+  \item The cdf of a ground-up loss is given by
+    \begin{equation*}
+      F_X(x) = 1 - e^{- \left( \frac{x}{100} \right)^3}, \quad x \geq 0.
+    \end{equation*}
+    You are given that $N_L \sim \NB(2, 1.5)$. Suppose that an ordinary deductible of $50$ is applied to each individual loss.
+    \begin{enumerate}
+      \item Determine the distribution of the number of payments $N_P$.
+      \item Find the survival function of the amoubnt paid per payment $Y_P$.
+      \item Determine the probability that $P \left( \hat{Y}_P = 120 \right)$, where $\hat{Y}_P$ is the discretized version of $Y_P$ with $h = 40$.
+      \item Use Panjer's recursion to calculate the discretized distribution of aggregate payments up to a discretized amount paid of $120$.
+    \end{enumerate}
+
+  \item Consider the compound rv $S$ with secondary distribution $X \sim \Exp(100)$, and primary distribution $N$ with pmf
+    \begin{center}
+      \begin{tabular}{c | c | c | c | c}
+        $n$   & $0$    & $1$   & $2$    & $3$ \\
+        \hline
+        $p_n$ & $0.35$ & $0.3$ & $0.25$ & $0.1$
+      \end{tabular}
+    \end{center}
+    \begin{enumerate}
+      \item Calculate $P(S > 250)$ using the pmf method. You are given that the distribution of $n$-convolution follows $\Exp(100)$, i.e.
+        \begin{equation*}
+          P ( X_1 + \hdots + X_n > x ) = e^{-\frac{x}{100}} \sum_{j=1}^{n-1} \frac{\left( \frac{x}{100} \right)^j}{j!}.
+        \end{equation*}
+      \item Calculate $P(X > 250)$ using the normal approximation.
+    \end{enumerate}
+\end{enumerate}
+
+% chapter problem_set_5 (end)
+
 \chapter{Additional Material}%
 \label{chp:additional_material}
 % chapter additional_material
@@ -4759,6 +5051,182 @@ Often, we use the function $\rho(X)$ to denote risk measures. One may think of $
 % section coherent_risk_measure (end)
 
 % chapter additional_material (end)
+
+\chapter{Answers to Problem Sets}%
+\label{chp:answers_to_problem_sets}
+% chapter answers_to_problem_sets
+
+* \textit{Only final answer is provided for checking (if a final answer exists). For proof problems, hints are provided if a trick is involved.} 
+
+\section{Problem Set 1}%
+\label{sec:problem_set_1}
+% section problem_set_1
+
+\begin{enumerate}
+  \item \begin{enumerate}
+      \item $F_X(x) = 1 - \frac{\alpha^\beta ( \alpha + ( \beta + 1 ) x )}{( \alpha + x )^{\beta + 1}}$
+      \item $E[X] = \frac{2 \alpha}{\beta - 1}$
+      \item $h(x) = \frac{\beta ( \beta + 1 ) x}{(\alpha + x)( \alpha + ( \beta + 1 ) x )}$
+      \item $e_X(x) = \frac{\alpha + x}{\alpha + ( \beta + 1 ) x} \cdot \frac{2 \alpha + ( \beta + 1 ) x}{\beta - 1}$
+    \end{enumerate}
+  \item \begin{enumerate}
+      \item $f_X(x) = ( 1 + 2x^2 ) e^{-2x}$
+      \item $\bar{F}_X(x) = ( 1 + x + x^2 ) e^{-2x}$
+      \item $h(x) = \frac{1 + 2x^2}{1 + x + x^2}$
+      \item $e_X(x) = \frac{1 + x + \frac{x^2}{2}}{1 + x + x^2}$
+    \end{enumerate}
+  \item When encountering an integral with $e$ to some awkward power, it is usually useful to use substitution to, in a sense, transform that power to something more `pleasant'.
+  \item \begin{enumerate}
+      \item $G(t) = 1 - \frac{\ln ( 1 - \beta ( t - 1 ) )}{\ln ( 1 + \beta )}$
+      \item $E[N] = \frac{\beta}{\ln ( 1 + \beta )}$ ; $\Var(N) = \frac{\beta (1 + \beta)}{\ln ( 1 + \beta )} - \left( \frac{\beta}{\ln ( 1 + \beta )} \right)^2$
+    \end{enumerate}
+  \item \begin{enumerate}
+      \setcounter{enumii}{2}
+    \item $\Var(X) = \alpha \theta^2 = 12$
+    \end{enumerate}
+\end{enumerate}
+
+% section problem_set_1 (end)
+
+\section{Problem Set 3}%
+\label{sec:problem_set_3}
+% section problem_set_3
+
+\begin{enumerate}
+  \item \begin{enumerate}
+      \item  $Y_L = [ X - d ]_+$ ; $\bar{F}_{Y_L}(y) = \left( 1 - \frac{d + y}{\theta} \right)^\alpha$ for $0 \leq y \leq \theta - d$
+      \item $X$ is a DMRL distribution.
+      \item $\LER = 1 - \left( \frac{\theta - d}{\theta} \right)^{\alpha + 1}$
+    \end{enumerate}
+  \item $q = \frac{2}{3}$ ; $E[Y_P] = 120$
+  \item \begin{enumerate}
+      \item X has an IFR
+      \item X is a DMRL distribution
+      \item $E[Y_L] = \frac{b^2 - d^2 + \frac{2}{3}( b^3 - d^3 )}{2b + b^2}$
+    \end{enumerate}
+  \item $P(Y_P \leq 50) = 0.79679$
+  \item \begin{enumerate}
+      \item $\bar{F}_{Y_L}(y) = \frac{500 - y}{650}$ for $0 \leq y \leq 500$
+      \item $\bar{F}_{Y_P}(y) = \frac{500 - y}{500}$ for $0 \leq y \leq 500$
+      \item $e_X(150) = 250$
+      \item $\Var((X - 150)^2 \mid X > 150) = 5.5556 x 10^9$
+    \end{enumerate}
+  \item 
+    \begin{enumerate}
+      \item \begin{gather*}
+          \bar{F}_{Y_L}(y) = \begin{cases}
+            1 & y < 0 \\
+            0.125 & 0 \leq y < 100 \\
+            125000y^{-3} & y \geq 100
+          \end{cases} \\
+          \bar{F}_{Y_P} (y) = \begin{cases}
+            1 & y < 100 \\
+            10^6 y^{-3} & y \geq 100
+          \end{cases} \\
+          E [ Y_L ] = 18.75 \quad E [ Y_P ] = 150
+        \end{gather*}
+      \item $\LER = 0.962963$
+      \item maximum payment: $0.85(u - 100) = 1700$
+        \begin{gather*}
+          \bar{F}_{Y_L}(y) = \begin{cases}
+            1 & y < 0 \\
+            125000 \left( \frac{y}{0.85} + 100 \right)^{-3} & 0 \leq y < 1700 \\
+            0 & y \geq 1700
+          \end{cases} \\
+          \Var(Y_L) = 791.066 \\
+          \bar{F}_{Y_P}(50) = 0.2496
+        \end{gather*}
+    \end{enumerate}
+  \item bonus: $Z = \frac{1}{2}( 500 - Y ) \mathbb{1}_{\{ Y < 500\}}$ where $Y \sim \Pareto(2, K)$ ; $K = 353.5534$
+  \item $Y_L = 0.8 [ X - 1000 ]_+ - 0.8 [ X - 6000 ]_+ + 0.9[ X - u ]_+$, where $u$ is the size of the claim such that the insured makes a total payment of $10000$, i.e.
+    \begin{equation*}
+      1000 + 0.2 ( 6000 - 1000 ) + ( u - 6000 ) = 10000;
+    \end{equation*}
+    $E[Y_L] = 2699.362$
+\end{enumerate}
+
+% section problem_set_3 (end)
+
+\section{Problem Set 4}%
+\label{sec:problem_set_4}
+% section problem_set_4
+
+\begin{enumerate}
+  \item $P(N \geq 2) = 0.609433$
+  \item \begin{enumerate}
+      \item $E[N] = 20$
+      \item $\Var(N) = 260$
+      \item $P(N \geq 2) = 0.9375$
+    \end{enumerate}
+  \item \begin{enumerate}
+      \item $X \sim \Bernoulli \left( \frac{1}{4} \right)$
+      \item $\Theta \mid X = 0 \sim \BetaDist(1, 4, 1)$
+    \end{enumerate}
+  \item \begin{enumerate}
+      \setcounter{enumii}{1}
+      \item $p_0 = \frac{e^{-\mu}}{( 1 + \theta )^\alpha}$
+      \setcounter{enumii}{3}
+      \item Substitute the power series $G_N(t)$ and $G'_N(t)$ into the given identity, and compare by coefficients.
+    \end{enumerate}
+  \item No.
+\end{enumerate}
+
+% section problem_set_4 (end)
+
+\section{Problem Set 5}%
+\label{sec:problem_set_5}
+% section problem_set_5
+
+\begin{enumerate}
+  \item \begin{enumerate}
+      \item $a = \beta$ ; $b = - \beta$
+      \item Use the Taylor expansion $\ln(1 - x) = - \sum_{k=1}^{\infty} \frac{x^k}{k}$
+      \setcounter{enumii}{3}
+      \item $M$ is a mixture of a degenerate rv at $0$ with weight $q$, and a logarithmic rv with parameter $\beta^*$ and weight $1 - q$
+    \end{enumerate}
+  \item \begin{enumerate}
+      \item $P \left( N^M > 2 \right) = 0.4037$
+      \item $E \left[ N^M \right] = 3.7533$
+      \item $\Var \left( N^M \right) = 27.199$
+    \end{enumerate}
+  \item \begin{enumerate}
+      \item $p_k^T = \frac{1}{1 - e^{-\lambda}}\frac{\lambda^k e^{-\lambda}}{k!}$ ; $G_{N_L}(t) = \frac{e^{\lambda(t - 1) - e^{-\lambda}}}{1 - e^{-\lambda}}$
+      \item $G_{N_P}(t) = \frac{e^{\alpha \lambda(t - 1) - e^{-\lambda}}}{1 - e^{-\lambda}}$ ; $p_0^M = \frac{e^{-\alpha\lambda} - e^{-\lambda}}{1 - e^{-\lambda}}$
+      \item $\Var(N_P) = \frac{\alpha \lambda (1 - ( 1 + \alpha \lambda ) e^{-\lambda})}{( 1 - e^{-\lambda} )^2}$
+    \end{enumerate}
+  \item \begin{enumerate}
+      \item The binomial theorem is useful here.
+      \item $M_\Theta(t) = \frac{e^{\lambda t}}{1 - \beta t}$
+      \item $G_N(t) = e^{\lambda(t - 1)} \cdot \frac{1}{1 - \beta( t - 1 )}$ ; $N$ is a product of $\Poi(\lambda)$ and $\Geo(\beta)$.
+      \item $E[N] = \lambda + \beta$ ; $\Var(N) = \lambda + \beta( 1 + \beta )$
+      \item $N_P$ can be viewed as an independent sum of a Poisson rv with parameter $\alpha \lambda$ and a geometric rv with parameter $\alpha \beta$
+    \end{enumerate}
+  \item $N$ is an $\left(\frac{1}{2}, 1, 1\right)$ member ; $g_0 = 0.023761$ ;
+    \begin{equation*}
+      g_k = \frac{\frac{3}{14}f_k + \sum_{j=1}^{k} \left( \frac{1}{2} + \frac{j}{k} \right) f_j g_{k - i}}{0.95}
+    \end{equation*}
+    so $g_1 = 0.171006$ ; $g_2 = 0.182776$ ; $g_3 = 0.156716$
+  \item \begin{enumerate}
+      \item $E[N_P] = 1.7299$
+      \item $\bar{F}_{Y_P} = \frac{13824000(105 + 2y)}{7(120 + y)}$ for $y \geq 0$
+      \item $f_0 = 0.197335$ ; $f_1 = 0.28311$ ; $f_2 = 0.17127$ ; $f_3 = 0.10556$
+      \item $P(\hat{S} = 90) = 0.10421$
+    \end{enumerate}
+  \item \begin{enumerate}
+      \item $N_P \sim \NB(2, 1.32375)$
+      \item $\bar{F}_{Y_P}(y) = \exp \left\{ - \left( \frac{y + 50}{100}^3 \right) + \frac{1}{8} \right\}$ for $y \geq 0$
+      \item $P( \hat{Y}_P = 120 ) = 0.0037584$
+      \item $P( \hat{S} = 120 ) = 0.11926$
+    \end{enumerate}
+  \item \begin{enumerate}
+      \item $P(S > 250) = 0.15083$
+      \item $P(S > 250) = 0.4874$
+    \end{enumerate}
+\end{enumerate}
+
+% section problem_set_5 (end)
+
+% chapter answers_to_problem_sets (end)
 
 \backmatter\
 
