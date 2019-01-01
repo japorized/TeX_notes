@@ -30,9 +30,9 @@ My main editor is nvim, but I have a setup for Sublime Text as well.
 ---
 ### LaTeX Template
 
-The LaTeX Template of my notes is saved as `setup-nvim/tex_default.sh`.
+My commonly used LaTeX templates are saved in `setup-nvim/`.
 
-**For nvim users,** if you wish to have this as the default TeX template for all of your TeX files, make sure that your VIm has autocmd. You can check so by executing `:echo has("autocmd")` while being in a VIm session. If the command returns 1, you're good to go. Copy the .sh file into your `.vim/templates` folder, and add the following to your vimrc
+**For (n)vim users,** if you wish to have this as the default TeX template for all of your TeX files, make sure that your VIm has autocmd. You can check so by executing `:echo has("autocmd")` while being in a VIm session. If the command returns 1, you're good to go. Copy the .sh file into your `.vim/templates` folder, and add the following to your vimrc
 
 ```
 if has("autocmd")
@@ -41,6 +41,8 @@ if has("autocmd")
   augroup END
 endif
 ```
+
+Otherwise, check out [`vim-template`](https://gitlab.com/japorized/vim-template).
 
 **For Sublime Text users,** copy the appropriate contents from `setup-subl` and create a new snippet, so that you may fetch the template via `Shift + Cmd + p` (on macOS). Be sure to have the following in your snippet under scopes.
 

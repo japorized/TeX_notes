@@ -6021,8 +6021,7 @@ We require the following notion:
   \end{equation*}\qed\
 \end{proof}
 
-\begin{defn}[Relatively Compact Sets]\index{Relatively Compact Sets}\label{defn:relatively_compact_sets}
-  Let $A \subset (X, d)$. We say that $A$ is \hlnoteb{relatively compact} if $\bar{A}$ is compact.
+\begin{defn}[Relatively Compact Sets]\index{Relatively Compact Sets}\label{defn:relatively_compact_sets} Let $A \subset (X, d)$. We say that $A$ is \hlnoteb{relatively compact} if $\bar{A}$ is compact.
 \end{defn}
 
 \begin{note}
@@ -6137,6 +6136,494 @@ We require the following notion:
       \end{itemize}
   \end{enumerate}
 \end{thm}
+
+\chapter{Assignment 1}%
+\label{chp:assignment_1}
+% chapter assignment_1
+
+\begin{enumerate}
+	\item *
+    \begin{enumerate}
+    \item How many relations are there on the set $\{ 1, 2, 3, ..., n \}$? \\
+      \begin{inlinelist}
+        \item $n$
+        \item $n^2$
+        \item $2^n$
+        \item $2^{n^2}$
+      \end{inlinelist}
+    \item Determine the number of equivalence relations on the set $X = \{1, 2, 3\}$. \\
+      \begin{inlinelist}
+        \item 4
+        \item 5
+        \item 6
+        \item None of the above
+      \end{inlinelist}
+    \item Recall that we would say that $A \sim B$ and that $A$ and $B$ have the same \textit{cardinality}, if there is a $1 - 1$ and onto function from $A$ to $B$.\\
+      If $X = \{1, 2, 3, 4\}$ and $\sim$ is the equivalence relation on $\mathcal{P}(X)$ as above:\label{item:1_c}
+      \begin{enumerate}
+        \item How many different equivalence classes are there in this equivalence relation:\\
+          \begin{inlinelist}[label=\Alph*.]
+            \item $4$
+            \item $2^4$
+            \item $5$
+            \item $2^5$
+          \end{inlinelist}
+        \item List all of the elements of $[A]$ if $A = \{1, 2, 3\}$.
+        \item If $X = \{1, 2, 3, ..., n\}$ and $\sim$ is as in Part \ref{item:1_c}, how many elements are there in $[A]$ where $A = \{1, 2, 3, ..., k\}$? \\
+          \begin{inlinelist}[label=\Alph*.]
+            \item $2^k$
+            \item $k!$
+            \item $\frac{n!}{k!}$
+            \item $\frac{n!}{k! (n - k)!}$
+          \end{inlinelist}
+      \end{enumerate}
+	\end{enumerate}
+
+  \item \begin{enumerate}
+    \item Let $V$ be a vector space. Let $W$ be a subspace of $V$. Show that:
+      \begin{equation*}
+        v \sim y \iff v - y \in W,
+      \end{equation*}
+      defines an equivalence relation on $V$.
+    \item Show that $[z] + [v] = [z + v]$ and $\alpha [z] = [\alpha z]$ is well defined. That is, show that if $z_1 \sim z_2$ and $v_1 \sim v_2$, then $z_1 + v_1 \sim z_2 + v_2$ and $\alpha z_1 \sim \alpha z_2$. \\
+      $ $ \\
+      \textbf{Remark} The set $V / W = [v] \mid v \in V$ is a vector space under the operations above. It is called the \textit{quotient} of $V$ by $W$. 
+  \end{enumerate}
+    
+  \item *\begin{enumerate}
+      \item Use cardinal arithmetic to determine $(\aleph_0)^{\aleph_0}$ and $c^{\aleph_0^{\aleph_0}}$ and $c^{\aleph_0}$.
+      \item Show that there exists a $1 - 1$ map from the power set of $\mathbb{R}$ onto the set of all real-valued functions on $\mathbb{R}$ by showing that $2^c = c^c$.
+      \item Explain why there is a one to one and onto map $\Gamma : \mathbb{Q}^{\infty} \to \mathbb{R}^{\infty}$ where
+        \begin{equation*}
+          \mathbb{Q}^{\infty} = \{ \{ r_n \} \mid r_n \in \mathbb{Q} \}
+        \end{equation*}
+        and
+        \begin{equation*}
+          \mathbb{R}^{\infty} = \{ \{ s_n \} \mid s_n \in \mathbb{R} \}.
+        \end{equation*}
+      \item Let $C(\mathbb{R})$ denote the set of all continuous real-valued functions on $\mathbb{R}$.
+        \begin{enumerate}
+          \item Explain why if $f, g \in C(\mathbb{R})$ and $f(x) = g(x)$ for every $x \in \mathbb{Q}$, then $f = g$.\label{item:3_d_1}
+          \item Determine $\abs{ C(\mathbb{R}) }$.
+        \end{enumerate}
+    \end{enumerate}
+
+  \item A real number $\alpha \in \mathbb{R}$ is called algebraic if there exists a polynomial $p(x)$ with integer coefficients such that $p(\alpha) = 0$. Show that the collection $\Psi$ of all algebraic numbers is countable.
+
+  \item A collection $\Im \subseteq \mathcal{P}(X)$ is called a topology on $X$ if
+    \begin{enumerate}
+      \item $\emptyset, X \in \Im$
+      \item $\left\{ \bigcup\limits_{\alpha \in I} U_{\alpha} \right\} \in \Im$ whenever $\{ U_\alpha \}_{\alpha \in I} \subseteq \Im$
+      \item $\bigcap\limits_{i=1}^{n} U_i \in \Im$ whenever $\{U_1, U_2, ..., U_n\} \subseteq \Im$
+    \end{enumerate}
+    The elements of $\Im$ are called $\Im$-open sets or simply open sets for short.
+    \begin{enumerate}
+      \item Show that if $\{ \Im_\alpha \}_{\alpha \in I}$ is a collection of topologies on $X$, then $\Im = \bigcap\limits_{\alpha \in I} \Im_\alpha$ is also a topology on $X$. In particular, show that if $\Gamma \subseteq \mathcal{P}(X)$, then there is a smallest topology $\Im(\Gamma)$ on $X$ that contains $\Gamma$. $\Im(\Gamma)$ is called \textit{the topology generated by} $\Gamma$. 
+      \item * We call a subset $U$ of $\mathbb{R}$ \textit{open} if for every $x \in U$, there exists an $\epsilon > 0$ such that $( x - \epsilon, x + \epsilon ) \subseteq U$. Let $\Im_{\mathbb{R}}$ denote the collection of all open subsets of $\mathbb{R}$.
+        \begin{enumerate}
+          \item Show that $\Im_{\mathbb{R}}$ is a topology on $\mathbb{R}$.
+          \item Let 
+            \begin{equation*}
+              \Gamma = \{ \emptyset \} \cup \{ (a, b) \mid a \in \mathbb{R}  \cup \{ - \infty \}, b \in \mathbb{R} \cup \{ \infty \}, a < b \}
+            \end{equation*}
+            be the collection of open intervals in $\mathbb{R}$. Show that $\Im_{\mathbb{R}} = \Im(\Gamma)$.
+          \item Let $U \subset \mathbb{R}$ be open and nonempty. Define a relation $\sim$ on $U$ by $x \sim y$ if and only if whenever $x < z < y$ or $y < z < x$, we must have $z \in U$. \\
+            Show that $\sim$ is an equivalence relation on $U$ and that if $I_x = \{ y \in U \mid x \sim y \}$, then $I_x$ is an open interval. (Recall that a set $I$ is an interval if whenever $x, y \in I$ and $x < z < y$, then we must have $z \in I$.) \\
+            \textbf{Remark}: In this case, in fact, $I_x = (\alpha_x, \beta_x)$, where
+            \begin{gather*}
+              \alpha_x = \inf \{ y : (x, y) \subset U \} \\
+              \beta_x = \sup \{ y : (y, x) \subset U \}
+            \end{gather*}
+          \item Show that if $U \in \Im_{\mathbb{R}}$, then $U$ is the union of at most countably many pairwise disjoint open intervals.
+          \item What is $\abs{ \Im_{\mathbb{R}} }$? (Hint: Show that every open set is the countable union of open intervals with rational endpoints.)
+        \end{enumerate}
+
+      \item * Let $X$ be any set. Let $\Im_{cf}(X) = \{ \emptyset \} \cup \{ A \subseteq X \mid A^c \text{ is finite } \}$. Show that $\Im_{cf}(X)$ is a topology on $X$. $\Im_{cf}(X)$ is called the cofinite topology on $X$.
+      \item Let $X$ be any set. Let $\Im_{cc}(X) = \{ \emptyset \} \cup \{ A \subseteq X \mid A^c \text{ is countable } \}$. Show that $\Im_{cc}(X)$ is a topology on $X$. $\Im_{cc}(X)$ is called the cocountable topology on $X$.
+    \end{enumerate}
+
+  \item Let $X$ be a given set. A $\sigma$-algebra on $X$ is a collection $\Psi$ of subsets of $X$ such that
+    \begin{enumerate}[label=(\roman*)]
+      \item $X \in \Psi$;
+      \item If $S \in \Psi$, then so is $S^c$.
+      \item If $\{ S_n \} \subset \Psi$, then $\bigcup\limits_{n = 1}^{\infty} S_n \in \Psi$.
+    \end{enumerate}
+    \begin{enumerate}
+      \item Show that if $\{ \Psi_\alpha \}_{\alpha \in I}$ is any collection of $\sigma$-algebras on $X$, then $\bigcap\limits_{\alpha \in I} \Psi_{\alpha}$ is also a $\sigma$-algebra. In particular, show that if $\mathcal{A} \subseteq \mathcal{P}(X)$, then there is a unique smallest $\sigma$-algebra containing $\mathcal{A}$ which we call the $\sigma$-algebra generated by $\mathcal{A}$, and denote by $\sigma(\mathcal{A})$.
+
+      \item Let $\mathcal{O}$ denote the collection of all open subsets of $\mathbb{R}$. The $\sigma$-algebra, $\sigma(\mathcal{O})$ is called the Borel $\sigma$-algebra of $\mathbb{R}$, and is denoted by $\mathcal{B}(\mathbb{R})$. \\
+        Give an example of a set $A \subset \mathbb{R}$ that is Borel but neither closed or open.
+
+      \item What is $\abs{ \mathcal{B}(\mathbb{R}) }$? (\textbf{Note}: This one is not so easy. Do not spend much time on it and only do so after you have completed the remaining questions)
+      \item True or false: Every uncountable subset $S$ of $\mathbb{R}$ contains a subset $A$ which is not Borel. (Explain your answer.)
+    \end{enumerate}
+
+  \item *\begin{enumerate}
+    \item Show that if $X$ is infinite and countable, you can find two disjoint infinite subsets $S$ and $T$ such that $S \cup T = X$ and\label{item:7_a}
+      \begin{equation*}
+        \abs{S} = \abs{T} = \abs{X}.
+      \end{equation*}
+
+    \item Show that if $X$ is infinite, then you can find two disjoint subsets $S$ and $T$ such that $S \cup T = X$ and $\abs{S} = \abs{T} = \abs{X}$. (\textbf{Hint}: Show that $X$ can be written as the union of a collection of pairwise disjoint countable sets.) \\
+      \textbf{Remark}: This is actually a formal proof of the statement for an infinite set $\abs{X} + \abs{X} = \abs{X}$. 
+  \end{enumerate}
+\end{enumerate}
+
+% chapter assignment_1 (end)
+
+\chapter{Assignment 2}%
+\label{chp:assignment_2}
+% chapter assignment_2
+
+\begin{enumerate}
+  \item *We have seen that the positive rationals can be well ordered via the order\marginnote{$\downarrow$ for markings and comments} $\preceq$ given by $\frac{n}{m} \preceq \frac{j}{k}$ if and only if $2^n 3^m \leq 2^j 3^k$. With respect to this order find the least element in the set $S = \{ r \in \mathbb{Q} \mid \sqrt{2} < r \}$. (Note: In defining $S$ the order we use is the usual order on $\mathbb{R}$.)
+
+  \item *Let $d_1, d_2$ and $d_\infty$ be the metrics on $\mathbb{R}^n$ given by
+    \begin{gather*}
+      d_1(x, y)      = \sum_{i = 1}^{n} \abs{ x_i - y_i } \\
+      d_2(x, y)      = \sqrt{\sum_{i = 1}^{n} (x_i - y_i)^2 } \\
+      d_\infty(x, y) = \max_{i = 1, \ldots, n} \abs{x_i - y_i}
+    \end{gather*}
+    Let $\tau_1, \tau_2$ and $\tau_\infty$ be the topologies induced by the above metrics. Show that $\tau_1 = \tau_2 = \tau_\infty$.
+
+  \item *\begin{enumerate}
+    \item For each of the following sets determine if it is open, closed or neither. Indicate the set of limit points, boundary points and interior points of each set.
+      \begin{enumerate}
+        \item $(0, 1] \subset \mathbb{R}$.
+        \item $\mathbb{Q} \subset \mathbb{R}$.
+      \end{enumerate}
+    \item Let $\mathcal{P}_1 = \{ a_0 + a_1 x \mid a_i \in \mathbb{R} \} \subset (C[0, 1], d_\infty)$. Show that $\mathcal{P}_1$ is closed.
+    \item Let $c_{00} = \{ \{ a_n \} \in l_\infty \mid a_n = 0 \text{ for all but finitely many } n \} \subset l_\infty$. Let $c_0 = \{ \{ a_n \} \in l_\infty \mid \lim_{n \to \infty} a_n = 0 \}$. Show that $c_{00}$ is dense in $c_0$. That is $\bar{c_{00}} = c_0$.
+  \end{enumerate}
+
+  \item \textbf{Least Upper Bound Property:} \\
+    We say that $\alpha$ is an upper bound of $S \subset \mathbb{R}$ if $x \leq \alpha$ for all $x \in S$. We say that $S$ is bounded above if it has an upper bound. We call $\alpha$ the \textit{least upper bound} of $S$ if $\alpha$ is an upper bound of $S$ and if whenever $\beta$ is an upper bound of $S$ we have $\alpha \leq \beta$. We denote $\alpha$ by $\lub(S)$ (We may define lower bounds and the \textit{greatest lower bound ($\glb(S)$)} in the obvious way). The \textit{Least Upper Bound Prperty} states that every nonempty subset $S$ of $\mathbb{R}$ that is bounded above has a least upper bound (or equivalently that every nonempty subset $S$ of $\mathbb{R}$ that is bounded below has a greatest lower bound).
+    \begin{enumerate}
+      \item Prove the Monotone Convergence Theorem: Let $\{ a_n \}$ be a sequence in $\mathbb{R}$ with $a_n \leq a_{n + 1}$ for all $n \in \mathbb{N}$. If $\{ a_n \}$ is bounded above,then $\{ a_n \}$ converges.
+      \item Prove the Nest Interval Theorem: Let $\{[a_n, b_n]\}$ be sequence of closed intervals with $[ a_{n + 1}, b_{n + 1} ] \subseteq [a_n, b_n]$ for each $n \in \mathbb{N}$. Then $\bigcap\limits_{n = 1}^{\infty} [ a_n, b_n ] \neq \emptyset$. \label{item:4b}
+      \item Show that the statement in Part \ref{item:4b} may fail if we use open interavls.
+      \item Use the Nest Interval Theorem to show that if $S \subset \mathbb{R}$ is infinite and bounded, then it has a limit point. (This is called the Bolzano-Weierstrass Theorem.)
+      \item Given a nonempty set $A \subset (X, d)$ we define the diameter of $A$ to be $\diam(A) = \sup\{ d(x, y) \mid x, y \in A \}$. Show that if $A_n$ is a sequence of nonempty closed sets in $\mathbb{R}$ with $A_{n + 1} \subseteq A_n$ and $\diam(A_i) < \infty$, then $\bigcap\limits_{n = 1}^{\infty} A_n \neq \emptyset$.
+    \end{enumerate}
+
+  \item *Let $\{U_\alpha\}_{\alpha \in I}$ be a collection of open sets in $\mathbb{R}$ such that $[0, 1] \subset \bigcup_{\alpha \in I} U_\alpha$.
+    \begin{enumerate}
+      \item Show that there exists finitely many sets $U_{\alpha_1}, U_{\alpha_2} , \ldots, U_{\alpha_n}$ such that $[0, 1] \subset \bigcup\limits_{i = 1}^{n} U_{\alpha_i}$. \\
+        (\textbf{Hint:} Let
+        \begin{equation*}
+          A = \{ x \in [0, 1] \mid [0, x] \text{ can be covered by finitely many } U_\alpha\text{'s} \}.
+        \end{equation*}
+        Show that $1 = \lub(A)$ and then that $1 \in A$. ) \label{item:5a}
+
+      \item Show that the statement in Part \ref{item:5a} can fail if we replace $[0, 1]$ with $(0, 1)$.
+    \end{enumerate}
+
+  \item *A map $\phi : (X, d_X) \to (Y, d_Y)$ is called an isometry if $d_Y(\phi(x_i), \phi(x_2)) = d_X(x_1, x_2)$.
+    \begin{enumerate}
+      \item Determine all possible isometries $\phi : \mathbb{R} \to \mathbb{R}$ and $\psi : \mathbb{R}^2 \to \mathbb{R}^2$ and show that each such map is surjective.
+      \item Given an example of an isometry $\phi : (X, d_X) \to (X, d_X)$ that is not onto.
+    \end{enumerate}
+
+  \item *A topological space $(X, \tau)$ is called separable if there exists a countable subset $S \subset X$ such that $\bar{S} = X$. \\
+    Show that $(\ell_1, d_1)$ is separable but $(\ell_\infty, d_\infty)$ is not.
+
+  \item *Let $\vec{x}_n = \{ x_{n, 1}, x_{n, 2}, x_{n, 3}, \ldots \} \in l_\infty$. Show that if $\vec{x}_n \to \vec{x}_0$ in $l_\infty$ where $\vec{x}_0 = \{ x_{0, 1}, x_{0, 2}, x_{0, 3}, \ldots \}$, then for each $k \in \mathbb{N}$, $\lim\limits_{n \to \infty} x_{n, k} = x_{0, k}$ but that the converse can fail.
+
+  \item Let $P_0 = [0, 1]$. Let $P_1$ be obtained from $P_0$ by removing the open interval of length $\frac{1}{3}$ from the middle of $P_0$. Then construct $P_2$ from $P_1$ by removing open intervals of length $\frac{1}{3^2}$ from the two closed subintervals of $P_1$. In general, $P_{n + 1}$ is obtained from $P_n$ by removing the open interval of length $\frac{1}{3^{n + 1}}$ from the middle of each of the $2^n$ closed subintervals of $P_n$. Let
+    \begin{equation*}
+      P = \bigcap_{n = 0}^{\infty} P_n.
+    \end{equation*}
+    $P$ is called the Cantor set.
+    \begin{enumerate}
+      \item A subset $A$ of a metric space is \textbf{nowhere dense} if $\interior(\bar{A}) = \emptyset$. Show that $P$ is closed and nowhere dense.
+      \item Show that $P$ is uncountable. (Hint: You may use the fact that $x \in P$ if and only if we can express $x = \sum\limits_{n=1}^{\infty} \frac{a_n}{3^n}$ where $a_n = 0, 2$.)
+      \item A subset $A$ of $\mathbb{R}$ is said to be \textit{perfect} if $A = \Lim(A)$. Show that the Cantor set $P$ is perfect. (Again, you can use the fact that $x \in P$ if and only if we can express $x = \sum\limits_{n=1}^{\infty} \frac{a_n}{3^n}$ where $a_m = 0, 2$.)
+    \end{enumerate}
+\end{enumerate}
+
+% chapter assignment_2 (end)
+
+\chapter{Assignment 3}%
+\label{chp:assignment_3}
+% chapter assignment_3
+
+\begin{enumerate}
+  \item \begin{enumerate}
+    \item Let $(X, d)$ be a metric space. Let $x_0 \in X$ be fixed. Define $F_{x_0} : X \to \mathbb{R}$ by
+      \begin{equation*}
+        F_{x_0}(x) = d(x_0, x).
+      \end{equation*}
+      Show that $F_{x_0}$ is continuous.
+    \item * Let $(X, \norm\cdot)$ be a normed linear space. Define $F : X \to \mathbb{R}$ by
+      \begin{equation*}
+        F(x) = \norm{x}.
+      \end{equation*}
+      Show that $F$ is continuous.
+    \end{enumerate}
+
+  \item * Let $f_n [ 0, 1 ] \to \mathbb{R}$ be defined by
+    \begin{equation*}
+      f_n(x) = \sin(x^n).
+    \end{equation*}
+    \begin{enumerate}
+      \item Show that $f_n(x)$ does not converge uniformly on $[0, 1]$.
+      \item Show that$f_n(x)$ does converge uniformly on $\left[0, \frac{1}{2}\right]$.
+    \end{enumerate}
+
+  \item \textbf{Connectedness of $\mathbb{R}$} \\
+    Let $A \subseteq (X, d)$. We say that $A$ is \textit{disconnected} if there exists two open sets $U$ and $V$ such that
+    \begin{enumerate}[label=\roman*)]
+      \item $U \cap V \cap A = \emptyset$
+      \item $U \cap A \neq \emptyset$ and $V \cap A \neq \emptyset$
+      \item $A \subseteq U \cup V$.
+    \end{enumerate}
+    We say that $A$ is \textit{conected} if it is not disconnected.
+    \begin{enumerate}
+      \item Let $(X, d)$ be a metric space and let $A \subset X$. Show that the characteristic function
+        \begin{equation*}
+          \chi_A(x) := \begin{cases}
+            1 & \text{ if } x \in A \\
+            0 & \text{ if } x \notin A
+          \end{cases}
+        \end{equation*}
+        is continuous on $X$ if and only if $A$ is both open and closed.
+      \item * Show that $\mathbb{R}$ is connected.
+      \item Let $A \subseteq (X, d_X)$ be connected. Let $f : A \to (Y, d_Y)$ be continuous. Show that $f(A)$ is connected.
+    \end{enumerate}
+
+  \item A function $f : (X, d_X) \to (Y, d_Y)$ is said to be uniformly continuous if for every $\epsilon > 0$ there exists a $\delta > 0$ such that if $d_X(x_1, x_2) < \delta$, then $d_Y(f(x_1), f(x_2)) < \epsilon$.
+    \begin{enumerate}
+      \item Let $f : (X, d_X) \to (Y, d_Y)$ be uniformly continuous. Show that if $\{ x_n \}$ is Cauchy in $X$, then $\{ f(x_n) \}$ is Cauchy in $Y$.
+      \item Let $(X, d)$ be a metric space and let $A \subset X$. Let $f : A \to \mathbb{R}$. Show that if $f$ is uniformly continous on $A$, then there exists $g : \bar{A} \to \mathbb{R}$ that is continuous on $\bar{A}$ and for which $g \restriction_A = f$. That is $g$ extends $f$ to $\bar{A}$.
+    \end{enumerate}
+
+  \item Let $(X, \norm\cdot_X)$ and $(Y, \norm\cdot_Y)$ be normed linear spaces. Let $T : X \to Y$ be linear. We say that $T$ is bounded if
+    \begin{equation*}
+      \sup_{\norm{x}_X \leq 1} \{ \norm{ T(x) }_Y \} < \infty.
+    \end{equation*}
+    In this case, we write
+    \begin{equation*}
+      \norm{T} = \sup_{\norm{x}_X \leq 1} \{ \norm{T(x)}_Y \}.
+    \end{equation*}
+    Otherwise, we say that $T$ is unbounded.
+    \begin{enumerate}
+      \item * Prove that the following are equivalent
+        \begin{enumerate}
+          \item $T$ is continuous.
+          \item $T$ is continuous at $0$.
+          \item $T$ is bounded.
+        \end{enumerate}
+      \item Assume that $L : \mathbb{R}^n \to \mathbb{R}^n$ is linear and that $L$ is represented by the matrix $A$. We let $\norm{A} = \norm{L}$.
+        \begin{enumerate}
+          \item Assume that
+            \begin{equation*}
+              D = \begin{bmatrix}
+                d_1  &     &     &        & \\
+                     & d_2 &     &        & \\
+                     &     & d_3 &        & \\
+                     &     &     & \ddots & \\
+                     &     &     &        & d_n
+              \end{bmatrix}
+            \end{equation*}
+            is a diagonal matrix. Show that $\norm{D} = \max\limits_{i = 1, \ldots, n} \{ \abs{ d_i } \}$.
+          \item Show that if
+            \begin{equation*}
+              D = \begin{bmatrix}
+                d_1  &     &     &        & \\
+                     & d_2 &     &        & \\
+                     &     & d_3 &        & \\
+                     &     &     & \ddots & \\
+                     &     &     &        & d_n
+              \end{bmatrix}
+            \end{equation*}
+            is a diagonal matrix, then
+            \begin{equation*}
+              \sup_{\norm{x} \leq 1} \{ \abs{ \langle Dx, x \rangle } \} = \max_{i = 1, \ldots, n} \{ \abs{ d_i } \}.
+            \end{equation*}
+          \item Let $U$ be an orthonormal $n \times n$ matrix. Show that if $x \in \mathbb{R}^n$, then $\norm{ Ux } = \norm{x}$.
+          \item * Assume that $L : \mathbb{R}^n \to \mathbb{R}^n$ is linear and that $L$ is represented by the matrix $A$. Show that $\norm{L} = \norm{A} = \sqrt{\abs{\alpha}}$ where $\alpha$ is the largest eigenvalue of the matrix $A^t A$.
+          \item * Assume that $L : \mathbb{R}^2 \to \mathbb{R}^2$ is represented by the matrix
+            \begin{equation*}
+              A = \begin{bmatrix}
+                1 & 1 \\
+                2 & -1
+              \end{bmatrix}.
+            \end{equation*}
+            Find $\norm{A}$. (You can use Maple or MATLAB if you like.)
+        \end{enumerate}
+    \end{enumerate}
+
+  \item * Let $x_0 \in [0, 1]$. Define the linear map $T_{x_0} : C[0, 1] \to \mathbb{R}$ by
+    \begin{equation*}
+      T_{x_0}(f) = f(x_0).
+    \end{equation*}
+    \begin{enumerate}
+      \item Show that as a map from $(C[0, 1], \norm\cdot_\infty) \to \mathbb{R}$, $T_{x_0}$ is bounded with $\norm{ T_{x_0} } = 1$.
+      \item Show that as a map from $(C[0, 1], \norm\cdot_1) \to \mathbb{R}$, $T_0$ is unbounded.
+    \end{enumerate}
+
+  \item Define the linear map $T : C[ 0, 1 ] \to \mathbb{R}$ by
+    \begin{equation*}
+      T(f) = \int_{0}^{1} xf(x) \dif{x}.
+    \end{equation*}
+    \begin{enumerate}
+      \item Show that if $\norm{ f(x) }_\infty \leq 1$, then $\abs{ T(f) } \leq \frac{1}{2}$.
+      \item Show that if $T(1) = \frac{1}{2}$ and hence that $\norm{T} = \frac{1}{2}$.
+    \end{enumerate}
+
+  \item * Let $(X, d)$ be a metric space and $\{ f_n \}$ be a sequence of real valued functions on $X$ which converges pointwise on $X$ to a function $f : X \to \mathbb{R}$. Let $x_0 \in X$. \\
+    We say that $\{ f_n \}$ converges \textit{uniformly} at $x_0$ if for every $\epsilon > 0$, there exists a $\delta > 0$ and an $N \in \mathbb{N}$ such that if $n > N$ and $d(x, x_0) < \delta$, then
+    \begin{equation*}
+      \abs{ f_n(x) - f(x) } < \epsilon.
+    \end{equation*}
+    Show that if each function $f_n$ is continuous at $x_0$ and if $f_n \to f$ uniformly at $x_0$ then $f$ is also continouus at $x_0$. (Hint: This is almost exactly the same as the proof for uniform convergence with one minor change.)
+
+  \item Let $(X, d)$ be a metric space. Let $f : X \to \mathbb{R}$. Let
+    \begin{equation*}
+      D(f) = \{ x_0 \in X \mid f(x) \text{ is discontinous at } x_0 \}.
+    \end{equation*}
+    For each $n \in \mathbb{N}$, let
+    \begin{equation*}
+    D_n(f) = \left\{ x_0 \in X \mid \forall \delta > 0, \, \exists y, z \in B(x_0, \delta) \text{ for which } \abs{ f(y) - f(z)} \geq \frac{1}{n} \right\}.
+    \end{equation*}
+    \begin{enumerate}
+      \item * Show that for each $n \in \mathbb{N}$, $D_n(f)$ is closed. (Hint: Let $\{ x_k \} \subseteq D_n(f)$ be such that $x_k \to x_0$. Show that $x_0 \in D_n(f)$.)
+      \item * A subset $A$ of a metric space is said to be an $F_\sigma$ set if $A = \bigcup\limits_{n = 1}^{\infty} F_n$, where each $F_n$ is closed. Show that $D(f)$ is an $F_\sigma$ set by showing that
+        \begin{equation*}
+          D(f) = \bigcup_{n = 1}^{\infty} D_n(f).
+        \end{equation*}
+      \item * A subset $A$ of $(X, d)$ is said to be \textit{nowhere dense} if $\Int(\bar{A}) = \emptyset$. Assume that $F \subset \mathbb{R}$ is closed and nowhere dense. Let
+        \begin{equation*}
+          f(x) = \chi_F(x) = \begin{cases}
+            1 & \text{ if } x \in F \\
+            0 & \text{ if } x \in F^C
+          \end{cases}.
+        \end{equation*}
+        Find $D(f)$.
+
+      \item * A subset $A$ of $(X, d)$ is said to be \textit{first category} if $A = \bigcup_{n = 1}^{\infty} A_n$ where each $A_n$ is nowhere dense. Show that if $A \subset \mathbb{R}$ is $F_\sigma$ and of first category, then there exists a function $f(x)$ on $\mathbb{R}$ with $D(f) = A$.
+
+      \item \textbf{Bonus Question 5:} Show that if $A \subset \mathbb{R}$ is $F_\sigma$ then there exists a function $f(x)$ on $\mathbb{R}$ with $D(f) = A$.
+    \end{enumerate}
+
+  \item \begin{enumerate}
+      \item * Explain why the integral equation
+        \begin{equation*}
+          f(x) = x + \int_{0}^{x} tf(t) \dif{t}
+        \end{equation*}
+        has a unique solution $\phi(x)$ in $C[0, 1]$, and then find a power series representation for $\phi(x)$.
+      \item \textbf{Fredholm Equation:} Assume that $K(x, y) \in C( [a, b] \times [a, b] )$ with $\norm{ K(x, y) }_\infty = M$. Show that if $\abs{ \lambda } M( b - a ) < 1$ and if $\phi(x) \in C[ a, b ]$, then the map $\Gamma : C[a, b] \to C[a, b]$ given by
+        \begin{equation*}
+          \Gamma(f)(x) = \phi(x) + \lambda \int_{a}^{b} K(x, y) f(y) \dif{y}
+        \end{equation*}
+        is contractive and hence that the integral equation
+        \begin{equation*}\tag{$*$}\label{eq:fredholm}
+          f(x) = \phi(x) + \lambda \int_{a}^{b} K(x, y) f(y) \dif{y}
+        \end{equation*}
+        has a unique solution in $C[a, b]$.
+    \end{enumerate}
+
+  \item * \textbf{Dini's Theorem:} Let $(X, d)$ be a compact metric space. Let $\{ f_n(x) \}$ be a sequence of continous functions on $X$ such that $f_n(x) \leq f_{n + 1}(x)$ for each $n \in \mathbb{N}$ and $f(x) = \lim\limits_{n \to \infty} f_n(x)$.
+    \begin{enumerate}
+      \item Show that $f(x)$ is continuous on $X$ if and only if the sequence converges uniformly. (Hint: Let $\epsilon > 0$. Let $U_n = \{ x \in X \mid f_n(x) > f(x) - \epsilon \}$ and show that $\{ U_n \}$ is an open cover of $X$.)
+      \item Show that Dini's Theorem fails on $[0 ,\infty)$ by giving a sequence $\{ f_n(x) \}$ of continuous functions on $[0, \infty)$ such that $f_n(x) \leq f_{n + 1}(x)$ for each $n \in \mathbb{N}$ and $\lim\limits_{n \to \infty} f_n(x) = 1$ for each $x$ but for which the convergence is not uniform.
+    \end{enumerate}
+
+  \item Let $A \subset (X, d)$ be non-empty. For each $x \in X$, define the distance from $x$ to $A$ by
+    \begin{equation*}
+      \dist(x, A) = \inf \{ d(x, y) \mid y \in A \}.
+    \end{equation*}
+    \begin{enumerate}
+      \item Show that $A$ is closed if and only if the following property holds:
+        \begin{equation*}
+          x \in A \iff \dist(x, A) = 0.
+        \end{equation*}
+      \item Let $F \subseteq X$ be closed and non-empty. Show that
+        \begin{equation*}
+          F = \bigcap_{n \in \mathbb{N}} \left( \bigcup_{x \in F} B \left( x, \frac{1}{n} \right) \right).
+        \end{equation*}
+        (Note: This shows that every closed sets is also $F_\sigma$.)
+      \item Show that the function $f(x) = \dist(x, A)$ is continuous.
+    \end{enumerate}
+
+  \item Let $(X, \norm\cdot)$ be a normed linear space.
+    \begin{enumerate}
+      \item * Prove that if $A \subset (X, \norm\cdot)$ is compact and non-empty, then for each $x_0 \in X$, there exists a $y_0 \in A$ such that
+        \begin{equation*}
+          \norm{ x_0 - y_0 } = \inf \{ \norm{ x_0 - y } \mid y \in A \}.
+        \end{equation*}
+      \item * Assume that $X$ is finite dimensional. Prove that if $A \subset (X, \norm\cdot)$ is closed and non-empty, then for each $x_0 \in X$, there exists a $y_0 \in A$ such that \label{item:14b}
+        \begin{equation*}
+          \norm{ x_0 - y_0 } = \inf \{ \norm{ x_0 - y } \mid y \in A \}.
+        \end{equation*}
+      \item A subset $A$ of a vector space is said to be convex if $\alpha x + ( 1 - \alpha ) y \in A$ whenever $x, y \in A$ and $0 \leq \alpha \leq 1$. \\
+        Let $A \subseteq \mathbb{R}^2$ be convex and closed and let $x_0 \in A^C$. Show that if $\mathbb{R}^2$ is given the norm $\norm\cdot_2$, then the point $y_0$ obtained in part \ref{item:14b} above is unqiue but that this need not be the case if we use the norm $\norm\cdot_\infty$.
+      \item Given $A, B \subseteq X$ non-empty sets, define $\dist(A, B) = \inf \{ d(a, b) \mid a \in A, \, b \in B \}$. Show that if $A$ is closed, $B$ is compact with $A \cap B = \emptyset$, then $\dist(A, B) > 0$. \label{item:14d}
+      \item Show that even in $\mathbb{R}$, \ref{item:14d} can fail if you only assume that $B$ is closed.
+      \item * Let $f(x) \in C[ 0, 1 ]$. Let
+        \begin{equation*}P_n = \{ p(x) = a_0 + a_1 x + \hdots + a_n x^n \mid a_i \in \mathbb{R} \}.
+        \end{equation*}
+        Show that there exists a polynomial $p(x) \in P_n$ such that
+        \begin{equation*}
+          \norm{ f(x) - p(x) }_\infty \leq \norm{ f(x) - q(x) }_\infty
+        \end{equation*}
+        for any $q(x) \in P_n$.
+      \item * Show that if $\{ p_k(x) \}$ is a sequence of polynomials such that $\{ p_k(x) \}$ converges uniformly to $f(x) = e^x$ on $[0, 1]$, then
+        \begin{equation*}
+          \lim_{ k \to \infty } \deg (p_k(x)) = \infty.
+        \end{equation*}
+    \end{enumerate}
+
+  \item * Let $(V, \norm\cdot)$ be an infinite dimensional Banach space.
+    \begin{enumerate}
+      \item Show that if $\mathcal{B} = \{ v_\alpha \}_{\alpha \in I}$ is a basis for $V$, then $I$ is uncountable. (Hint: Assume that $\mathcal{B} = \{ v_1, v_2, v_3, \ldots \}$ was countable. Let $F_n = \Span \{ v_1, v_2, v_3, \ldots, v_n \}$.)
+      \item Show that there exist a linear function $\phi : V \to \mathbb{R}$ that is unbounded. (Hint: You can assume that $V$ has a basis consisting of vectors of norm $1$. From here you need only define $\phi$ on the basis elements and then extend it linearly.)
+    \end{enumerate}
+
+  \item * Let $f(x)$ be continuous on $[0, 1]$. Assume that
+    \begin{equation*}
+      \int_{0}^{1} f(x) \dif{x} = 0
+    \end{equation*}
+    and that
+    \begin{equation*}
+      \int_{0}^{1} f(x) x^n \dif{x} = 0
+    \end{equation*}
+    for each $n \in \mathbb{N}$. Show that $f(x) = 0$ for all $x \in [0, 1]$.
+
+  \item Let $X = [0, 1] \times [0, 1] \subset ( \mathbb{R}^2, \norm\cdot_2 )$. Let $f(x, y) \in C(X)$. For each $y \in [0, 1]$, define $f_y(x) = f(x, y)$ for each $x \in [0, 1]$.
+    \begin{enumerate}
+      \item Show that $\mathcal{F} = \{ f_y \mid y \in [0, 1] \}$ is equicontinuous.
+      \item Show that the map $\Gamma : [0, 1] \to (C[0, 1], \norm\cdot_\infty)$ given by
+        \begin{equation*}
+          \Gamma(y) = f_y
+        \end{equation*}
+        is continuous.
+      \item Is $\mathcal{F}$ compact in $C(X)$? Explain your answer.
+    \end{enumerate}
+
+  \item Let
+    \begin{equation*}
+      \Psi = \left\{ F(x, y) \in C([0, 1] \times [0, 1]) \mid F(x, y) = \sum_{i=1}^{k} f_i(x) g_i(y) \right\}
+    \end{equation*}
+    where in the sum above, the functions $f_i$ and $g_i$ are continous on $[0, 1]$. Show that $\psi$ is dense in $C([0, 1] \times [0, 1])$.
+
+  \item Let $g(x)$ be continuous and strictly increasing on $[a, b]$. Let $f(x) \in C[a, b]$. Let $\epsilon > 0$. Then there exists constants $c_0, c_1, \ldots, c_n$ such that
+    \begin{equation*}
+      \abs{ f(x) - \sum_{k=0}^{n} c_k g^k(x) } < \epsilon
+    \end{equation*}
+    for each $x \in [a, b]$.
+
+  \item Let $I$ be a closed ideal of $C[0, 1]$. (That is, $I$ is a closed subalgebra of $C[0, 1]$ with the property that if $g(x) \in I$ and if $f(x) \in C[0, 1]$, then $f(x) g(x) \in I$.)
+    \begin{enumerate}
+      \item Let $Z(I) = \{ x \in [0, 1] \mid \forall f \in I, \, f(x) = 0 \}$. Show that $Z(I)$ is a closed subset of $[0, 1]$.
+      \item Show that if $Z(I) = \emptyset$, then $I = C[0, 1]$. (Hint: Show that there exists a function $f(x) \in I$ such that $f(x) > 0$ for every $x \in [0, 1]$.)
+      \item Let $A \subseteq [0, 1]$ be closed. Let $I(A) = \{ f \in C[0, 1] \mid \forall x \in A, \, f(x) = 0 \}$. Show that $I$ is a maximal closed ideal in $C[0, 1]$ if and only if $I = I( \{ x_0 \} )$ for some $x_0 \in [0, 1]$. \\
+        (Recall: A closed ideal $I$ is maximal if $I \neq C[0, 1]$ and if $J$ is any closed ideal containing $I$, then either $I = J$ or $J = C[0, 1]$.)
+    \end{enumerate}
+\end{enumerate}
+
+% chapter assignment_3 (end)
+
 
 % chapter useful_theorems_from_earlier_calculus (end)
 
