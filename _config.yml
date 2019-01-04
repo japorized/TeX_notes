@@ -25,6 +25,7 @@ url: "https://japorized.github.io/TeX_notes" # the base hostname & protocol for 
 markdown: kramdown
 plugins:
   - jekyll-feed
+  - jekyll-gzip
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
