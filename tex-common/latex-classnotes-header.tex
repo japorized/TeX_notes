@@ -1,0 +1,18 @@
+\hypersetup{pageanchor=false}
+\maketitle
+\hypersetup{pageanchor=true}
+\tableofcontents
+
+\newpage
+\begin{fullwidth}
+  \renewcommand{\listtheoremname}{\faBook\ \slshape List of Definitions}
+  \listoftheorems[ignoreall,show={defn}]
+  \addcontentsline{toc}{chapter}{List of Definitions}
+\end{fullwidth}
+
+\newpage 
+\begin{fullwidth}
+  \renewcommand{\listtheoremname}{\faCoffee\ \slshape List of Theorems}
+  \listoftheorems[ignoreall,show={axiom,lemma,thm,crly,propo}]
+  \addcontentsline{toc}{chapter}{List of Theorems}
+\end{fullwidth}

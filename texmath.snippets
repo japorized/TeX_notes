@@ -85,8 +85,12 @@ snippet Bglrp "Big left-right parentheses" w
 \Bigg( $1 \Bigg)
 endsnippet
 
-snippet lr| "left| right|" w
+snippet lrv "left| right|" w
 \left| $1 \right|
+endsnippet
+
+snippet lra "left< right>" w
+\langle $1 \rangle
 endsnippet
 
 snippet lrb "left\{ right\}" w
@@ -97,8 +101,12 @@ snippet lrs "left[ right]" w
 \left[ $1 \right]
 endsnippet
 
-snippet hyr "hyperref" w
-\hyperref[$1]{$2} $0
+snippet hyp "hyperref" w
+\hyperref[$1]{$2}
+endsnippet
+
+snippet symbf "bold symbol" w
+\symbf{$1}
 endsnippet
 
 # vim:ft=snippets:
