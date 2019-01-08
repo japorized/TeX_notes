@@ -6,11 +6,14 @@
 
 \title{PMATH365 --- Differential Geometry}
 \author{Johnson Ng}
-\subtitle{Classnotes for Winter 20019}
+\subtitle{Classnotes for Winter 2019}
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
 \institution{University of Waterloo}
 
 \input{latex-classnotes-preamble.tex}
+\usepackage{tikz-3dplot}
+
+\DeclareMathOperator{\std}{std}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -20,9 +23,19 @@
 \label{chp:preface}
 % chapter preface
 
+\nocite{karigiannis2019}
+
 This course is a post-requisite of MATH 235/245 (\href{http://www.ucalendar.uwaterloo.ca/1819/COURSE/course-MATH.html\#MATH235}{Linear Algebra II}) and AMATH 231 (\href{http://www.ucalendar.uwaterloo.ca/1819/COURSE/course-AMATH.html#AMATH231}{Calculus IV}) or MATH 247 (\href{http://www.ucalendar.uwaterloo.ca/1819/COURSE/course-MATH.html#MATH247}{Advanced Calculus III}). In other words, familiarity with vector spaces and calculus is expected.
 
+The course is spiritually separated into two parts. The first part shall be called \textbf{Exterior Differential Calculus}, which allows for a natural, metric-independent generalization of \hlnotea{Stokes' Theorem}, \hlnotea{Gauss's Theorem}, and \hlnotea{Green's Theorem}. Our end goal of this part is to arrive at Stokes' Theorem, that renders the \hlnotea{Fundamental Theorem of Calculus} as a special case of the theorem.
+
+The second part of the course shall be called in the name of the course: \textbf{Differential Geometry}. This part is dedicated to studying geometry using techniques from differential calculus, integral calculus, linear algebra, and multilinear algebra.
+
 % chapter preface (end)
+
+\newgeometry{letterpaper}
+\part{Exterior Differential Calculus}
+\restoregeometry
 
 \chapter{Lecture 1 Jan 7th}%
 \label{chp:lecture_1_jan_7th}
@@ -84,7 +97,138 @@ Now suppose $\dim(V) = n$ for some $n \in \mathbb{N}$. This means that there exi
   Again, this should be clear from the context of the discussion.
 \end{note}
 
+The two conditions that define a basis implies that any $v \in V$ can be expressed as $v^i e_i$, where $v^i \in \mathbb{R}$.
+
+\begin{defn}[Coordinate Vector]\index{Coordinate Vector}\label{defn:coordinate_vector}
+  The $n$-tuple $(v^1, \ldots, v^n) \in \mathbb{R}^n$ is called the \hlnoteb{coordinate vector} $[v]_{\mathcal{B}} \in \mathbb{R}^n$ of $v$ with respect to the basis $\mathcal{B} = \{ e_1, \ldots, e_n \}$.
+\end{defn}
+
+\begin{note}
+  It is clear that the coordinate vector $[v]_{\mathcal{B}}$ is dependent on the basis $\mathcal{B}$. Note that we shall also assume that the basis is ``ordered'', which is somewhat important since the same basis (set-wise) with a different ``ordering'' may give us a completely different coordinate vector.
+\end{note}
+
+\begin{eg}
+  Let $V = \mathbb{R}^n$, and $\hat{e}_i = ( 0, \ldots, 0, 1, 0, \ldots, 0 )$, where $1$ is the $i$\textsuperscript{th} compoenent of $\hat{e}_1$. Then
+  \begin{equation*}
+    \mathcal{B}_{\std} = \left\{ \hat{e}_1, \ldots, \hat{e}_n \right\}
+  \end{equation*}
+  is called the \hldefn{standard basis} of $\mathbb{R}^n$.
+\end{eg}
+
+\begin{note}
+  Let $v = (v^1, \ldots, v^n) \in \mathbb{R}^n$. Then
+  \begin{equation*}
+    v = v^1 \hat{e}_1 + \hdots v^n \hat{e}_n.
+  \end{equation*}
+  So $\mathbb{R}^n \ni [v]_{\mathcal{B}_{\std}} = v \in V = \mathbb{R}^n$.
+
+  This is a privilege enjoyed by the $n$-dimensional vector space $\mathbb{R}^n$.
+\end{note}
+
+Now if we choose a \hldefn{non-standard basis} of $\mathbb{R}^n$, say $\tilde{\mathcal{B}}$, then $[v]_{\tilde{\mathcal{B}}} \neq v$.
+
+\begin{note}
+  It does not make sense to ask if a standard basis exists for an arbitrary space, as we have seen above. A geometrical way of wrestling with this notion is as follows:
+
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (0, 0, 0) -- (2, 0, 0) node[right] {$x$};
+      \draw[->] (0, 0, 0) -- (0, 2, 0) node[above] {$z$};
+      \draw[->] (0, 0, 0) -- (0, 0, 2) node[below,left] {$y$};
+
+      \draw[-,fill=be-blue,fill opacity=0.5] (1.5, 0, 0.5) -- (0.5, 0, 1.5) -- (-1.5, 1, -0.5) -- (-0.5, 1, -1.5) -- (1.5, 0, 0.5);
+      \node[above,right] at (1.5, 1.5, 0) {a $2$-dimensional subspace in $\mathbb{R}^3$};
+    \end{tikzpicture}
+    \caption{An arbitrary $2$-dimensional subspace in a $3$-dimensional space}
+    \label{fig:an_arbitrary_2-dimensional_subspace_in_a_3-dimensional_space}
+  \end{figure}
+
+  While the subspace is embedding in a vector space of which has a standard basis, we cannot establish a ``standard'' basis for this $2$-dimensional subspace. In laymen terms, we cannot tell which direction is up or down, positive or negative for the subspace, without making assumptions.
+\end{note}
+
+However, since we are still in a finite-dimensional vector space, we can still make a connection to a Euclidean space of the same dimension.
+
+\begin{defn}[Linear Isomorphism]\index{Linear Isomorphism}\label{defn:linear_isomorphism}
+  Let $V$ be $n$-dimensional, and $\mathcal{B} = \left\{ e_1, \ldots, e_n \right\}$ be some basis of $V$. The map
+  \begin{equation*}
+    v = v^i e_i \mapsto [v]_{\mathcal{B}}
+  \end{equation*}
+  from $V$ to $\mathbb{R}^n$ is a \hlnoteb{linear isomorphism} of vector spaces.
+\end{defn}
+
+\begin{ex}
+  Prove that the said linear isomorphism is indeed linear and bijective\sidenote{i.e. we are right in calling it linear and being an isomorphism}.
+\end{ex}
+
+\begin{note}
+  Any $n$-dimensional real vecotr space is isomorphic to $\mathbb{R}^n$, but not \hlnotea{canonically} so, as it requires the knowledge of the basis that is arbitrarily chosen. In other words, a different set of basis would give us a different isomorphism.
+\end{note}
+
 % section linear_algebra_review (end)
+
+\section{Orientation}%
+\label{sec:orientation}
+% section orientation
+
+Consider an $n$-dimensional vector space $V$. Recall that for any linear operator $T \in L(V)$, we may associate a real number $\det(T)$, called the \hldefn{determinant} of $T$, such that $T$ is said to be \hldefn{invertible} iff $\det(T) \neq 0$.
+
+\begin{defn}[Same and Opposite Orientations]\index{Same orientation}\index{Opposite orientation}\label{defn:same_and_opposite_orientations}
+  Let
+  \begin{equation*}
+    \mathcal{B} = \left\{ e_1, \ldots, e_n \right\} \quad \text{ and } \quad \tilde{\mathcal{B}} = \left\{ \tilde{e}_1, \ldots, \tilde{e}_n \right\}
+  \end{equation*}
+  be two ordered bases of $V$. Let $T \in L(V)$ be the linear operator defined by
+  \begin{equation*}
+    T(e_i) = \tilde{e}_i
+  \end{equation*}
+  for each $i = 1, 2, \ldots, n$. This mapping is clearly invertible, and so $\det(T) \neq 0$, and $T^{-1}$ is also linear, such that $T^{-1} \left( \tilde{e}_i \right) = e_i$, for each $i$.
+
+  We say that $\mathcal{B}$ and $\tilde{\mathcal{B}}$ determine the \hlnoteb{same orientation} if $\det(T) > 0$, and we say that they determine the \hlnoteb{opposite orientations} if $\det(T) < 0$.
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item This notion of orientation only works in real vector spaces, as, for instance, in a complex vector space, there is no sense of ``positivity'' or ``negativity''.
+    \item Whenever we talk about same and opposite orientation(s), we are usually talking about 2 sets of bases. It makes sense to make a comparison to the standard basis in a Euclidean space, and determine that the compared (non-)standard basis is ``positive'' (same direction) or ``negative'' (opposite), but, again, in an arbitrary space, we do not have this convenience.
+  \end{itemize}
+\end{note}
+
+\begin{ex}[A1Q1]
+  Show that any $n$-dimensional real vector space $V$ admits exactly 2 orientations.
+\end{ex}
+
+\begin{eg}
+  On $\mathbb{R}^n$, consider the standard basis
+  \begin{equation*}
+    \mathcal{B}_{\std} = \{ \hat{e}_1, \ldots, \hat{e}_n \}.
+  \end{equation*}
+  The orientation determined by $\mathcal{B}_{\std}$ is called the \hldefn{standard orientation} of $\mathbb{R}^n$.
+\end{eg}
+
+\begin{defn}[Dual Space]\index{Dual Space}\label{defn:dual_space}
+  Let $V$ be an $n$-dimensional vector space. Then $\mathbb{R}$ is a $1$-dimensional real vector space. Thus we have that $L(V, \mathbb{R})$ is also a real vector space\sidenote{Note that $L(V, \mathbb{R})$ is also finite dimensional since both the domain and codomain are finite dimensional.}. The \hlnoteb{dual space} $V^*$ of $V$ is defined to be
+  \begin{equation*}
+    V^* := L(V, \mathbb{R}).
+  \end{equation*}
+\end{defn}
+
+Let $\mathcal{B}$ be a basis of $V$. For all $i = 1, 2, \ldots, n$, let $e^i \in V^*$ such that
+\begin{equation*}
+  e^i(e_j) = \delta^i_j = \begin{cases}
+    1 & i = j \\
+    0 & i \neq j
+  \end{cases}.
+\end{equation*}
+This $\delta^i_j$ is known as the \hldefn{Kronecker Delta}.
+
+In general, we have that for every $v = v^j e_j \in V$, where $v^i \in \mathbb{R}$, by the linearity of $e^i$, we have
+\begin{equation*}
+  e^i(v) = e^i(v^j e_j) = v^j e^i(e_j) = v_j \delta^i_j = v^i.
+\end{equation*}
+So each of the $e^i$, when applied on $v$, gives us the $i$\textsuperscript{th} component of $[v]_{\mathcal{B}}$, where $\mathcal{B}$ is a basis of $V$.
+
+% section orientation (end)
 
 % chapter lecture_1_jan_7th (end)
 
