@@ -1,3 +1,19 @@
+- title: PMATH365 W19 - Differential Geometry
+  pdf:
+    - title: classnotes.pdf
+      src: ./PMATH365/classnotes.pdf
+  tex:
+    - title: classnotes.tex
+      src: ./PMATH365/classnotes.tex
+
+- title: PMATH348 W19 - Fields and Galois Theory
+  pdf:
+    - title: classnotes.pdf
+      src: ./PMATH348/classnotes.pdf
+  tex:
+    - title: classnotes.tex
+      src: ./PMATH348/classnotes.tex
+
 - title: PMATH351 F18 - Real Analysis
   pdf:
     - title: classnotes.pdf

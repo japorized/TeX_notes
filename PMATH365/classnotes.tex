@@ -1,0 +1,103 @@
+% !TEX TS-program = pdflatex
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{PMATH365 --- Differential Geometry}
+\author{Johnson Ng}
+\subtitle{Classnotes for Winter 20019}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
+
+\input{latex-classnotes-preamble.tex}
+
+\begin{document}
+\input{latex-classnotes-header.tex}
+
+\chapter*{Preface}%
+\addcontentsline{toc}{chapter}{Preface}
+\label{chp:preface}
+% chapter preface
+
+This course is a post-requisite of MATH 235/245 (\href{http://www.ucalendar.uwaterloo.ca/1819/COURSE/course-MATH.html\#MATH235}{Linear Algebra II}) and AMATH 231 (\href{http://www.ucalendar.uwaterloo.ca/1819/COURSE/course-AMATH.html#AMATH231}{Calculus IV}) or MATH 247 (\href{http://www.ucalendar.uwaterloo.ca/1819/COURSE/course-MATH.html#MATH247}{Advanced Calculus III}). In other words, familiarity with vector spaces and calculus is expected.
+
+% chapter preface (end)
+
+\chapter{Lecture 1 Jan 7th}%
+\label{chp:lecture_1_jan_7th}
+% chapter lecture_1_jan_7th
+
+\section{Linear Algebra Review}%
+\label{sec:linear_algebra_review}
+% section linear_algebra_review
+
+\begin{defn}[Linear Map]\index{Linear Map}\label{defn:linear_map}
+  Let $V, W$ be finite dimensional real vector spaces. A map $T : V \to W$ is called \hlnoteb{linear} if $\forall a, b \in \mathbb{R}$, $\forall v \in V$ and $\forall w \in W$,
+  \begin{equation*}
+    T(av + bw) = aT(v) + bT(w).
+  \end{equation*}
+  We define L(U, W) to be the set of all linear maps from $V$ to $W$.
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item Note that $L(U, W)$ is itself a finite dimensional real vector space.
+    \item The structure of the vector space $L(V, W)$ is such that $\forall T, S \in L(V, W)$, and $\forall a, b \in \mathbb{R}$, we have
+      \begin{equation*}
+        aT + bS : V \to W
+      \end{equation*}
+      and
+      \begin{equation*}
+        (aT + bS)(v) = aT(v) + bS(v).
+      \end{equation*}
+    \item A special case: when $W = V$, we usually write
+      \begin{equation*}
+        L(V, W) = L(V),
+      \end{equation*}
+      and we call this the \hldefn{space of linear operators on $V$}.
+  \end{itemize}
+\end{note}
+
+Now suppose $\dim(V) = n$ for some $n \in \mathbb{N}$. This means that there exists a basis $\{ e_1 , \ldots, e_n \}$ of $V$ with $n$ elements.
+
+\begin{defn}[Basis]\index{Basis}\label{defn:basis}
+  A basis $\mathcal{B} = \{ e_1, \ldots, e_n \}$ of an $n$-dimensional vector space $V$ is a subset of $V$ where
+  \begin{enumerate}
+    \item $\mathcal{B}$ \hlnotea{spans} $V$, i.e. $\forall v \in V$
+      \begin{equation*}
+        v = \sum_{i=1}^{n} v^i e_i. \quad \footnotemark
+      \end{equation*}
+      \footnotetext{We shall use a different convention when we write a linear combination. In particular, we use $v^i$ to represent the $i$\textsuperscript{th} coefficient of the linear combination instead of $v_i$. Note that this should not be confused with taking powers, and should be clear from the context of the discussion.}
+    \item $e_1, \ldots, e_n$ are linearly independent, i.e.
+      \begin{equation*}
+        v^i e_i = 0 \implies v^i = 0 \text{ for every } i.
+      \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+\begin{note}
+  We shall abusively write
+  \begin{equation*}
+    v^i e_i = \sum_{i} v^i e_i.
+  \end{equation*}
+  Again, this should be clear from the context of the discussion.
+\end{note}
+
+% section linear_algebra_review (end)
+
+% chapter lecture_1_jan_7th (end)
+
+\appendix
+
+\backmatter
+
+\pagestyle{plain}
+
+\nobibliography*
+\bibliography{references}
+
+\printindex
+
+\end{document}
+
