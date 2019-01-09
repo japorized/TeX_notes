@@ -1,3 +1,10 @@
+- title: PMATH467 W19 - Algebraic Geometry
+  pdf:
+    - title: classnotes.pdf
+      src: ./PMATH467/classnotes.pdf
+  tex:
+    - title: classnotes.tex
+      src: ./PMAHT467/classnotes.tex
 - title: PMATH365 W19 - Differential Geometry
   pdf:
     - title: classnotes.pdf
@@ -5,7 +12,6 @@
   tex:
     - title: classnotes.tex
       src: ./PMATH365/classnotes.tex
-
 - title: PMATH348 W19 - Fields and Galois Theory
   pdf:
     - title: classnotes.pdf
@@ -13,7 +19,6 @@
   tex:
     - title: classnotes.tex
       src: ./PMATH348/classnotes.tex
-
 - title: PMATH351 F18 - Real Analysis
   pdf:
     - title: classnotes.pdf
@@ -21,7 +26,6 @@
   tex:
     - title: classnotes.tex
       src: ./PMATH351F18/classnotes.tex
-
 - title: PMATH733/433 F18 - Model Theory and Set Theory
   pdf:
     - title: classnotes.pdf
@@ -37,7 +41,6 @@
   tex:
     - title: classnotes.tex
       src: ./ACTSC431/classnotes.tex
-
 - title: PMATH347 S18 - Groups and Rings
   pdf:
   - title: classnotes.pdf
@@ -127,14 +130,12 @@
     src: ./PMATH351S18/lectures/lec34.tex
   - title: lec35.tex
     src: ./PMATH351S18/lectures/lec35.tex
-
 - title: Learning Haskell
   pdf: 
   - title: learningnotes.pdf
     src: ./LearningHaskell/learningnotes.pdf
   - title: learningnotes.tex
     src: ./LearningHaskell/learningnotes.tex
-
 - title: STAT330 S18 - Mathematical Statistics
   pdf:
   - title: classnotes.pdf
@@ -144,7 +145,6 @@
   tex:
   - title: classnotes.tex
     src: ./STAT330S18/classnotes.tex
-
 - title: JAPAN201R S18 - Year 2 Japanese
   pdf:
   - title: readingnotes.pdf
@@ -158,7 +158,6 @@
     src: ./JAPAN201RS18/readingnotes.tex
   - title: vocabsheet.tex
     src: ./JAPAN201RS18/vocabsheet/vocabsheet.tex
-
 - title: PMATH352 W18 - Complex Analysis
   pdf:
   - title: classnotes.pdf
@@ -174,7 +173,6 @@
     src: ./PMATH352W18/classnotes-white.pdf
   - title: cheatsheet.tex
     src: ./PMATH352W18/cheatsheet/cheatsheet.tex
-
 - title: STAT333 W17 - Applied Probability
   pdf:
   - title: classnotes.pdf
@@ -182,7 +180,6 @@
   tex:
   - title: classnotes.tex
     src: ./STAT333/classnotes.tex
-
 - title: PMATH333 W17 - Intro to Real Analysis
   pdf:
   - title: pmath333_defns_thms.pdf
@@ -194,7 +191,6 @@
     src: ./PMATH333/pmath333_defns_thms.tex
   - title: final_review.pdf
     src: ./PMATH333/final_review.tex
-
 - title: MATH239 W17 - Intro to Combinatorics
   pdf:
   - title: defn_thm.pdf

@@ -1,0 +1,252 @@
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{Learning Haskell}
+\author{Johnson Ng}
+\subtitle{Personal notes to learning Haskell}
+\credentials{}
+\institution{}
+
+\input{latex-classnotes-preamble.tex}
+\usepackage{listings}
+\lstset{frame=tb,
+  language=Haskell,
+  aboveskip=3mm,
+  belowskip=3mm,
+  frame=single,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\normalfont\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{base16-eighties-magenta},
+  keywordstyle=\color{base16-eighties-blue},
+  commentstyle=\color{base16-eighties-gray},
+  rulecolor=\color{base16-eighties-gray},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\begin{document}
+\hypersetup{pageanchor=false}
+\maketitle
+\hypersetup{pageanchor=true}
+\tableofcontents
+
+\nocite{rwh}
+\nocite{lyah}
+
+\chapter{Getting Started}%
+\label{chp:getting_started}
+% chapter getting_started
+
+\section{Installation}%
+\label{sec:installation}
+% section installation
+
+For Arch-based distributions, and who prefers to manage their packages\sidenote{Not necessarily for Haskell packages, but just for \texttt{cabal} or \texttt{stack}, while managing Haskell packages using either of these two.}, see the \href{https://wiki.archlinux.org/index.php/Haskell}{Arch Wiki}.
+
+For most systems, see the \href{https://www.haskell.org/platform/}{official download site} for an installation guide.
+
+% section installation (end)
+
+\section{Introduction via \texttt{ghci}}%
+\label{sec:introduction_via_ghci}
+% section introduction_via_ghci
+
+Launch \texttt{ghci}\sidenote{\texttt{ghci} stands for ``GHC Interactive''} via the terminal. You should see something along the lines of the following:
+
+\begin{lstlisting}
+  GHCi, version 6.8.2: http://www.haskell.org/ghc/    :? for help
+  Loading package base ... linking ... done.
+  Prelude>
+\end{lstlisting}
+
+The prompt is \texttt{Prelude>}, but since it gets longer as stuff are loaded, we shall simplify that and use \texttt{ghci>}. You can achieve the same in your prompt by running \texttt{:set prompt "ghci>"}.
+
+\texttt{ghci} comes with some of the familiar cli editing, including the \hlnotea{up} arrow key to get the last line of input, and \hlnotea{tab completion}.
+
+\subsection{Basic Arithmetic}%
+\label{sub:basic_arithmetic}
+% subsection basic_arithmetic
+
+Basic arithmetic is similar to most other languages. We write them in \hldefn{infix form}, where the operator appears between its operands.
+
+\begin{lstlisting}
+  ghci> 3 + 7
+  10
+  ghci> 49 * 23
+  1127
+  ghci> 1923 - 333
+  1590
+  ghci> 5 / 2
+  2.5
+\end{lstlisting}
+
+Since we explicitly stated that, it means that there is also another way of writing these expressions. In particular, we can write them in \hldefn{prefix form}.
+
+\begin{lstlisting}
+  ghci> (+) 3 7
+  10 
+  ghci> (*) 49 23
+  1127
+  ghci> (-) 1923 333
+  1590
+  ghci> (/) 5 2
+  2.5
+\end{lstlisting}
+
+\begin{warning}[Negative Numbers]
+  It is often necessary to enclose a negative number in parenthesis, just like we do in mathematics. In Haskell, \texttt{-} is a unary operator, and is in fact its only unary operator, and it cannot be mixed with infix operators.
+  \begin{lstlisting}
+    ghci> 2 + -3
+
+    <interactive>:1:0: error:
+        Precedence parsing error
+            cannot mix `+' [infixl 6] and prefix `-' [infixl 6] in the same infix expression
+  \end{lstlisting}
+  A similar problematic example is the following, despite having a different error message:
+  \begin{lstlisting}
+    ghci> 2*-3
+
+    <interactive>:1:1: error:
+        Variable not in scope: (*-) :: Integer -> Integer -> t
+  \end{lstlisting}
+\end{warning}
+
+% subsection basic_arithmetic (end)
+
+\subsection{Boolean logic, operators, and value comparisons}%
+\label{sub:boolean_logic_operators_and_value_comparisons}
+% subsection boolean_logic_operators_and_value_comparisons
+
+The values of \hldefn{Boolean logic} in Haskell are \texttt{True} and \texttt{False}. Capitalization of the names matter.
+
+There is also
+\begin{itemize}
+  \item \texttt{(\&\&)} as logical ``and''; and
+  \item \texttt{(||)} as logical ``or''.
+\end{itemize}
+
+\begin{lstlisting}
+  ghci> True && False
+  False
+  ghci> False || True
+  True
+\end{lstlisting}
+
+\begin{warning}
+  While some programming languages treat the number zero as \text{False}, this is not the case in Haskell, nor does Haskell consider non-zero values to be \texttt{True}
+  \begin{lstlisting}[escapechar=\%]
+    ghci> False && 0
+
+    <interactive>:18:10: error:
+    %•% No instance for (Num Bool) arising from the literal `0'
+    %•% In the second argument of `(&&)', namely `0'
+      In the expression: False && 0
+      In an equation for `it': it = False && 0
+  \end{lstlisting}
+  Here's a breakdown of the error message:
+  \begin{itemize}
+    \item ``\textnormal{\texttt{No instance for (Num Bool) arising from the literal `0'}}'' tells us that \texttt{ghci} tried to treat the numeric value \texttt{0} as a \texttt{Bool} type, but it failed to do so.
+    \item ``\textnormal{\texttt{In an equation for `it': it = False \&\& 0}}'' refers to a shortcut in \texttt{ghci} that we shall visit later.
+  \end{itemize}
+\end{warning}
+
+The \hldefn{comparison operators} in Haskell are similar to those in C and many other languages.
+
+\begin{lstlisting}
+  ghci> 1 == 1
+  True
+  ghci> 2 < 3
+  True
+  ghci 4 >= 3.99
+  True
+\end{lstlisting}
+
+The ``is not equal to'' operator in Haskell is \texttt{(/=)}.
+
+\begin{lstlisting}
+  ghci> 2 /= 3
+  True
+\end{lstlisting}
+
+The \hldefn{logical negation} for Haskell is \texttt{not}.
+
+\begin{lstlisting}
+  ghci> not True
+  False
+\end{lstlisting}
+
+% subsection boolean_logic_operators_and_value_comparisons (end)
+
+\subsection{Operator precedence and associativity}%
+\label{sub:operator_precedence_and_associativity}
+% subsection operator_precedence_and_associativity
+
+Like in written algebra and other languages that use infix operators, Haskell has operator precedence. We can use parenthesis to explicitly group parts of an expression, and precedence allows us to omit a few parenthesis. For example, we know that multiplication precedes addition, and in Haskell:
+
+\begin{lstlisting}
+  ghci> 1 + ( 4 * 4 )
+  17
+  ghci> 1 + 4 * 4
+  17
+\end{lstlisting}
+
+In Haskell, operators are assigned numeric precedence values, with 1 being the lowest and 9 the highest. An operator with a higher precedence is applied before one that has a lower precedence. We can use \texttt{ghci} to inspect the precedence levels of individual operators using the \texttt{:info} command.
+
+\begin{lstlisting}
+  ghci> :info (+)
+  class Num a where
+    (+) :: a -> a -> a
+    ...
+          -- Defined in `GHC.Num'
+  infixl 6 +
+  ghci> :info (*)
+  class Num a where
+    ...
+    (*) :: a -> a -> a
+    ...
+          -- Defined in `GHC.Num'
+  infixl 7 *
+\end{lstlisting}
+
+The information we want here is in the line ``\texttt{infixl 6 +}'', which says that the \texttt{(+)} operator has precedence 6. Similarly, the \texttt{(*)} operator has precedence 7.
+
+Haskell also defines \hldefn{associativity} of operators\sidenote{See \url{https://en.wikipedia.org/wiki/Operator_associativity}}. The \texttt{(+)} and \texttt{(*)} are left associative, which is shown as \texttt{infixl} in the \texttt{ghci} output above. The right associative operator is displayed with \texttt{infixr}. An example of a right associative operator is
+
+\begin{lstlisting}
+  ghci> :info (^)
+	(^) :: (Num a, Integral b) => a -> b -> a       -- Defined in `GHC.Real'
+	infixr 8 ^
+\end{lstlisting}
+
+Left associativity means that \texttt{1 + 2 + 3} is interpreted as \texttt{(1 + 2) + 3}, while right associativity means that \texttt{1\^{}2\^{}3} is interpreted as \texttt{1\^{}(2\^{}3)}.
+
+The combination of precedence and associativity rules are usually referred to as \hldefn{fixity} rules.
+
+\begin{note}
+  It is sometimes better to leave at least some parentheses in place, even when you are sure that Haskell will parse your expressions correctly by fixity rules. This helps future readers to read and understand the code better.
+\end{note}
+
+% subsection operator_precedence_and_associativity (end)
+
+% section introduction_via_ghci (end)
+
+% chapter getting_started (end)
+
+\appendix
+
+\backmatter
+
+\pagestyle{plain}
+
+\bibliography{references}
+
+\printindex
+
+\end{document}
+
