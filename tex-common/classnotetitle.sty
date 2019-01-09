@@ -1,4 +1,5 @@
 % Copyright note:
+\RequirePackage{geometry}
 \ProvidesPackage{classnotetitle}[Japorized's Personal Classnotes Title Page]
 \newcommand*{\subtitle}[1]{\gdef\@subtitle{#1}}
 \newcommand*{\@subtitle}{}
@@ -10,8 +11,10 @@
 \newcommand*\nbstretchyspace{\spaceskip0.5em plus 0.25em minus 0.25em}
 \newcommand*{\nbtitlestretch}{\spaceskip0.6em}
 \renewcommand*{\maketitle}{%
+
 \clearpage
 \begin{titlepage}
+  \newgeometry{letterpaper}
 \nbvspace[1]
   \centering
 {\nbtitlestretch\Huge\bfseries\@title\unskip\strut\par}

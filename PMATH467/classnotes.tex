@@ -1,0 +1,164 @@
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{PMATH467 --- Algebraic Geometry}
+\author{Johnson Ng}
+\subtitle{Classnotes for Winter 2019}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
+
+\input{latex-classnotes-preamble.tex}
+
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+
+\begin{document}
+\input{latex-classnotes-header.tex}
+
+\chapter*{Preface}%
+\addcontentsline{toc}{chapter}{Preface}
+\label{chp:preface}
+% chapter preface
+
+The basic goal of the course is to be able to find \hlnotea{algebraic invariants}, which we shall use to classify topological spaces up to homeomorphism.
+
+Other questions that we shall also look into include a uniqueness problem about manifolds; in particular, how many manifolds exist for a given invariant up to homeomorphism? We shall see that for a \hlnotea{2-manifold}, the only such manifold is the 2-dimensional sphere $S^2$. For a $4$-manifold, it is the $4$-dimensional sphere $S^4$. In fact, for any other $n$-manifold for $n > 4$, the unique manifold is the respective $n$-sphere. The problem is trickier with the $3$-manifold, and it is known as the Poincar\'{e} Conjecture, solved in 2003 by Russian Mathematician \href{https://en.wikipedia.org/wiki/Grigori_Perelman}{Grigori Perelman}. Indeed, the said manifold is homeomorphic to the $3$-sphere.
+
+For this course, you are expected to be familiar with notions from \hlnotea{real analysis}, such as topology, and concepts from \hlnotea{group theory}.
+
+\section*{Basic Logistics for the Course}%
+% section basic_logistics_for_the_course
+
+I shall leave this here for my own notes, in case something happens to my hard copy.
+
+\begin{itemize}
+  \item OH: (Tue) 1630 - 1800, (Fri) 1245 - 1320
+  \item OR: MC 6457
+  \item EM: aaleyasin
+\end{itemize}
+
+% section basic_logistics_for_the_course (end)
+
+% chapter preface (end)
+
+\newgeometry{letterspace}
+\part{Point-Set Topology}
+\restoregeometry
+
+\chapter{Lecture 1 Jan 07th}%
+\label{chp:lecture_1_jan_07th}
+% chapter lecture_1_jan_07th
+
+\section{Euclidean Space}%
+\label{sec:euclidean_space}
+% section euclidean_space
+
+For any $(x_1, \ldots, x_m) \in \mathbb{R}^m$, we can measure its distance from the origin $0$ using either
+\begin{itemize}
+  \item $\norm{x}_\infty = \max \{ \abs{ x_i } \}$ (the supremum-norm);
+  \item $\norm{x}_2 = \sqrt{ \sum (x_j)^2 }$ (the $2$-norm); or
+  \item $\norm{x}_p = \left( \sum \abs{ x_j }^p \right)^\frac{1}{p}$ (the $p$-norm),
+\end{itemize}
+where we may define a ``distance'' by
+\begin{equation*}
+  d_p(x, y) = \norm{ x - y }_p.
+\end{equation*}
+
+\begin{defn}[Metric]\index{Metric}\label{defn:metric}
+  Let $X$ be an arbitrary space. A function $d : X \times X \to \mathbb{R}$ is called a \hlnoteb{metric} if it satisfies
+  \begin{enumerate}
+    \item (symmetry) $d(x, y) = d(y, x)$ for any $x, y \in X$;
+    \item (positive definiteness) $d(x, y) \geq 0$ for any $x, y \in X$, and $d(x, y) = 0 \iff x = y$; and
+    \item (triangle inequality) $\forall x, y, z \in X$
+      \begin{equation*}
+        d(x, y) \leq d(x, z) + d(y, z).
+      \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Open and Closed Sets]\index{Open sets}\index{Closed sets}\label{defn:open_and_closed_sets}
+  Given a space $X$ with a metric $d$, and $r > 0$, the set
+  \begin{equation*}
+    B(x, r) := \{ w \in X \mid d(x, w) < r \}
+  \end{equation*}
+  is called the \hlnoteb{open ball} of radius $r$ centered at $x$. An \hlnoteb{open set} $A$ is such that $\forall a \in A$, $\exists r > 0$ such that
+  \begin{equation*}
+    B(a, r) \subseteq A.
+  \end{equation*}
+  We say that a set is \hlnoteb{closed} if its complement is open.
+\end{defn}
+
+\begin{defn}[Continuous Map]\index{Continuous Map}\label{defn:continuous_map}
+  A function
+  \begin{equation*}
+    f : (X, d_1) \to (Y, d_2)
+  \end{equation*}
+  is said to be \hlnoteb{continuous} if the preimage of an open set in $Y$ is open in $X$.\marginnote{See \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf\#thm.45}{notes} on Real Analysis for why we defined a continuous map in such a way.}
+\end{defn}
+
+\begin{warn}
+  This definition does not imply that a continuous map $f$ maps open sets to open sets.
+\end{warn}
+
+\begin{ex}
+  Contruct a function on $[0, 1]$ which assumes all values between its maximum and minimum, but is not continuous.
+\end{ex}
+
+\begin{solution}
+  Consider the piecewise function
+  \begin{equation*}
+    f(x) = \begin{cases}
+      x & 0 \leq x < \frac{1}{2} \\
+      x - \frac{1}{2} & x \geq \frac{1}{2}.
+    \end{cases}
+  \end{equation*}
+  It is clear that the maximum and minimum are $\frac{1}{2}$ and $0$ respectively, and $f$ assumes all values between $0$ and $\frac{1}{2}$. However, a piecewise function is not continuous.
+\end{solution}
+
+\begin{defn}[Homeomorphism]\index{Homeomorphism}\label{defn:homeomorphism}
+  A function $f$ is a \hlnoteb{homeomorphism} if it is a bijection and both $f$ and $f^{-1}$ are continuous.
+\end{defn}
+
+\begin{eg}
+  The function
+  \begin{equation*}
+    g : [ 0, 2\pi ) \to \mathbb{R}^2 \text{ given by } \theta \mapsto (\cos \theta, \sin \theta)
+  \end{equation*}
+  is not homeomorphic, since if we consider an alternating series that converges to $0$ on the unit circle on $\mathbb{R}^2$, we have that the preimage of the series does not converge and $f^{-1}$ is in fact discontinuous.
+\end{eg}
+
+\newthought{Now}, we want to talk about topologies without referring to a metric.
+
+\begin{defn}[Topology]\index{Topology}\label{defn:topology}
+  Let $X$ be a space. We say that the set $T \subseteq \mathcal{P}(X)$ is a \hlnoteb{topology} if
+  \begin{enumerate}
+    \item $X, \emptyset \in T$;
+    \item if $\left\{ x_\alpha \right\}_{\alpha \in A} \subseteq T$ for an arbitrary index set $A$, then
+      \begin{equation*}
+        \bigcup_{\alpha \in A} x_\alpha \in T; \text{ and }
+      \end{equation*}
+    \item If $\{ x_\beta \}_{\beta \in B} \subset T$ for some finite index set $B$, then
+      \begin{equation*}
+        \bigcap_{\beta \in B} x_\beta \in T.
+      \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+% section euclidean_space (end)
+
+% chapter lecture_1_jan_07th (end)
+
+\appendix
+
+\backmatter
+
+\pagestyle{plain}
+
+\nobibliography*
+\bibliography{references}
+
+\printindex
+
+\end{document}
+
