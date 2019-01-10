@@ -20,6 +20,7 @@
 \usepackage{eso-pic}
 \usepackage{fontawesome}
 \usepackage{todonotes}
+\usepackage{apptools, chngcntr}
 \usepackage{amsmath}
 \usepackage{mathrsfs}
 \usepackage{stmaryrd}
@@ -303,6 +304,13 @@
 \theoremindent10pt
 \newtheorem*{marginwarning}{\faBug \enspace Warning}
 
+% rule for appendices
+\AtAppendix{\counterwithin{thm}{chapter}}
+\AtAppendix{\counterwithin{propo}{chapter}}
+\AtAppendix{\counterwithin{lemma}{chapter}}
+\AtAppendix{\counterwithin{crly}{chapter}}
+\AtAppendix{\counterwithin{axiom}{chapter}}
+
 % more environments
 \newtcolorbox{quotebox}[2]{
   blanker,enhanced,breakable,standard jigsaw,
@@ -407,10 +415,12 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\hlnotea}[1]{\textcolor{be-green}{\textbf{#1}}}
 \newcommand{\hlnoteb}[1]{\textcolor{be-cyan}{\textbf{#1}}}
 \newcommand{\hlnotec}[1]{\textcolor{be-brown}{\textbf{#1}}}
-\newcommand{\hlbnotea}[1]{\colorbox{be-green!30!dark}{\textbf{#1}}}
-\newcommand{\hlbnoteb}[1]{\colorbox{be-cyan!30!dark}{\textbf{#1}}}
-\newcommand{\hlbnotec}[1]{\colorbox{be-brown!30!dark}{\textbf{#1}}}
-\newcommand{\hlbnoted}[1]{\colorbox{be-magenta!30!dark}{\textbf{#1}}}
+\newcommand{\hlb}[2]{\colorbox{#1!30!dark}{\textbf{#2}}}
+\newcommand{\hlbnotea}[1]{\hlb{be-green}{#1}}
+\newcommand{\hlbnoteb}[1]{\hlb{be-cyan}{#1}}
+\newcommand{\hlbnotec}[1]{\hlb{be-brown}{#1}}
+\newcommand{\hlbnoted}[1]{\hlb{be-magenta}{#1}}
+\newcommand{\hlbnotee}[1]{\hlb{be-red}{#1}}
 \newcommand{\WTP}{\textcolor{be-brown}{WTP} }
 \newcommand{\WTS}{\textcolor{be-brown}{WTS} }
 \newcommand{\ind}[2]{\Ind_{#2}\left( #1 \right)}
@@ -423,6 +433,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\rarrow}{\rightarrow}
 \renewcommand{\atop}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
 \newcommand*\dif{\mathop{}\!d}
+\newcommand{\mmid}{\; \middle| \;}
 
   % stars on important stuff
 \newcommand{\imponote}{\faStar}

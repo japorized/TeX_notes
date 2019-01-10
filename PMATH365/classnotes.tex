@@ -2,7 +2,10 @@
 \documentclass[notoc,notitlepage]{tufte-book}
 % \nonstopmode % uncomment to enable nonstopmode
 
+\input{latex-classnotes-preamble.tex}
+
 \usepackage{classnotetitle}
+\usepackage{tikz-3dplot}
 
 \title{PMATH365 --- Differential Geometry}
 \author{Johnson Ng}
@@ -10,10 +13,10 @@
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
 \institution{University of Waterloo}
 
-\input{latex-classnotes-preamble.tex}
-\usepackage{tikz-3dplot}
-
 \DeclareMathOperator{\std}{std}
+\DeclareMathOperator{\Img}{Im}
+\DeclareMathOperator{\nullity}{nullity}
+\DeclareMathOperator{\rank}{rank}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -37,9 +40,9 @@ The second part of the course shall be called in the name of the course: \textbf
 \part{Exterior Differential Calculus}
 \restoregeometry
 
-\chapter{Lecture 1 Jan 7th}%
-\label{chp:lecture_1_jan_7th}
-% chapter lecture_1_jan_7th
+\chapter{Lecture 1 Jan 07th}%
+\label{chp:lecture_1_jan_07th}
+% chapter lecture_1_jan_07th
 
 \section{Linear Algebra Review}%
 \label{sec:linear_algebra_review}
@@ -189,8 +192,15 @@ Consider an $n$-dimensional vector space $V$. Recall that for any linear operato
 
 \begin{note}
   \begin{itemize}
-    \item This notion of orientation only works in real vector spaces, as, for instance, in a complex vector space, there is no sense of ``positivity'' or ``negativity''.
-    \item Whenever we talk about same and opposite orientation(s), we are usually talking about 2 sets of bases. It makes sense to make a comparison to the standard basis in a Euclidean space, and determine that the compared (non-)standard basis is ``positive'' (same direction) or ``negative'' (opposite), but, again, in an arbitrary space, we do not have this convenience.
+    \item This notion of orientation only works in real vector spaces,
+      as, for instance, in a complex vector space,
+      there is no sense of ``positivity'' or ``negativity''.
+    \item Whenever we talk about same and opposite orientation(s),
+      we are usually talking about 2 sets of bases.
+      It makes sense to make a comparison to the standard basis in a Euclidean space,
+      and determine that the compared (non-)standard basis is
+      ``positive'' (same direction) or ``negative'' (opposite),
+      but, again, in an arbitrary space, we do not have this convenience.
   \end{itemize}
 \end{note}
 
@@ -206,8 +216,18 @@ Consider an $n$-dimensional vector space $V$. Recall that for any linear operato
   The orientation determined by $\mathcal{B}_{\std}$ is called the \hldefn{standard orientation} of $\mathbb{R}^n$.
 \end{eg}
 
+% section orientation (end)
+
+\section{Dual Space}%
+\label{sec:dual_space}
+% section dual_space
+
 \begin{defn}[Dual Space]\index{Dual Space}\label{defn:dual_space}
-  Let $V$ be an $n$-dimensional vector space. Then $\mathbb{R}$ is a $1$-dimensional real vector space. Thus we have that $L(V, \mathbb{R})$ is also a real vector space\sidenote{Note that $L(V, \mathbb{R})$ is also finite dimensional since both the domain and codomain are finite dimensional.}. The \hlnoteb{dual space} $V^*$ of $V$ is defined to be
+  Let $V$ be an $n$-dimensional vector space.
+  Then $\mathbb{R}$ is a $1$-dimensional real vector space.
+  Thus we have that $L(V, \mathbb{R})$ is also a real vector space
+  \sidenote{Note that $L(V, \mathbb{R})$ is also finite dimensional since both the domain and codomain are finite dimensional.}.
+  The \hlnoteb{dual space} $V^*$ of $V$ is defined to be
   \begin{equation*}
     V^* := L(V, \mathbb{R}).
   \end{equation*}
@@ -222,17 +242,396 @@ Let $\mathcal{B}$ be a basis of $V$. For all $i = 1, 2, \ldots, n$, let $e^i \in
 \end{equation*}
 This $\delta^i_j$ is known as the \hldefn{Kronecker Delta}.
 
-In general, we have that for every $v = v^j e_j \in V$, where $v^i \in \mathbb{R}$, by the linearity of $e^i$, we have
+In general, we have that for every $v = v^j e_j \in V$, where $v^i \in \mathbb{R}$,
+by the linearity of $e^i$, we have
 \begin{equation*}
   e^i(v) = e^i(v^j e_j) = v^j e^i(e_j) = v_j \delta^i_j = v^i.
 \end{equation*}
-So each of the $e^i$, when applied on $v$, gives us the $i$\textsuperscript{th} component of $[v]_{\mathcal{B}}$, where $\mathcal{B}$ is a basis of $V$.
+So each of the $e^i$, when applied on $v$,
+gives us the $i$\textsuperscript{th} component of $[v]_{\mathcal{B}}$,
+where $\mathcal{B}$ is a basis of $V$.
 
-% section orientation (end)
+% section dual_space (end)
 
-% chapter lecture_1_jan_7th (end)
+% chapter lecture_1_jan_07th (end)
+
+\chapter{Lecture 2 Jan 09th}%
+\label{chp:lecture_2_jan_09th}
+% chapter lecture_2_jan_09th
+
+\section{Dual Space (Continued)}%
+\label{sec:dual_space_continued}
+% section dual_space_continued
+
+\begin{propo}[Dual Basis]\index{Dual Basis}\label{propo:dual_basis}
+  The set
+  \begin{equation*}
+    \mathcal{B}^* := \left\{ e^1, \ldots, e^n \right\}
+  \end{equation*}
+  \sidenote{Note that the $e^i$'s are defined as in the last part of the last lecture.}
+  is a basis of $V^*$, and is called the \hlnoteb{dual basis} of $\mathcal{B}$,
+  where $\mathcal{B}$ is a basis of $V$.
+  In particular, $\dim V^* = n = \dim V$.
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$\mathcal{B}^*$ spans $V^*$}
+  Let $\alpha \in V^*$. Let $v = v^j e_j \in V$,
+  where we note that
+  \begin{equation*}
+    \mathcal{B} = \left\{ e_i \right\}_{i = 1}^{n}.
+  \end{equation*}
+  We have that
+  \begin{equation*}
+    \alpha(v) = \alpha(v^j e_j) = v^j \alpha( e_j ).
+  \end{equation*}
+  Now for all $j = 1, 2, \ldots, n$, define $\alpha_j = \alpha(e_j)$.
+  Then
+  \begin{equation*}
+    \alpha(v) = \alpha_j v^j = \alpha_j e^j(v),
+  \end{equation*}
+  which holds for all $v \in V$. This implies that $\alpha = \alpha_j e^j$,
+  and so $\mathcal{B}^*$ spans $V^*$.
+
+  \noindent
+  \hlbnoted{$\mathcal{B}^*$ is linearly independent} 
+  Suppose $\alpha_j e^j = 0 \in V^*$.
+  Applying $\alpha_j e^j$ to each of the vectors $e_k$ in $\mathcal{B}$, we have
+  \begin{equation*}
+    \alpha_j e^j(e_k) = 0(e_k) = 0 \in \mathbb{R}
+  \end{equation*}
+  and
+  \begin{equation*}
+    \alpha_j e^j(e_k) = \alpha_j \delta_k^j = \alpha_k.
+  \end{equation*}
+  By A1Q2, we have that $a_k = 0$ for all $k = 1, 2, \ldots, n$,
+  and so $\mathcal{B}^*$ is linearly independent.\qed\
+\end{proof}
+
+\begin{remark}
+  Let $\mathcal{B} = \left\{ e_1, \ldots, e_n \right\}$ be a basis of $V$,
+  with dual space $\mathcal{B}^* = \left\{ e^1, \ldots, e^n \right\}$.
+  Then the map $T : V \to V^*$ such that
+  \begin{equation*}
+    T(e_i) = e^i
+  \end{equation*}
+  is a vector space \hyperref[defn:linear_isomorphism]{isomorphism}.
+  And so we have that $V \simeq V^*$, but not \hlnotea{cannonically} so
+  since we needed to know what the basis is in the first place.
+\end{remark}
+
+We will see later that if we impose an \hlnotea{inner product} on $V$,
+then it will induce a canonical isomorphism from $V$ to $V^*$.
+
+\begin{defn}[Natural Pairing]\index{Natural Pairing}\label{defn:natural_pairing}
+  The function
+  \begin{equation*}
+    \langle \cdot, \cdot \rangle : V^* \times V \to \mathbb{R}
+  \end{equation*}
+  given by
+  \begin{equation*}
+    \langle \alpha, v \rangle \mapsto \alpha (v)
+  \end{equation*}
+  is called a \hlnoteb{natural pairing} of $V^*$ and $V$.
+\end{defn}
+
+\begin{note}
+  A natural pairing is bilinear,
+  i.e. it is linear in $\alpha$ and linear in $v$,
+  which means that
+  \begin{equation*}
+    \langle \alpha, t_1 v_1 + t_2 v_2 \rangle 
+    = t_1 \langle \alpha, v_1 \rangle + t_2 \langle \alpha, v_2 \rangle
+  \end{equation*}
+  and
+  \begin{equation*}
+    \langle t_1 \alpha_1 + t_2 \alpha_2, v \rangle
+    = t_1 \langle \alpha_1, v \rangle + t_2 \langle \alpha_2, v \rangle,
+  \end{equation*}
+  respectively.
+\end{note}
+
+\begin{propo}[Natural Pairings are Nondegenerate]\label{propo:natural_pairings_are_nondegenerate}
+  For a finite dimensional real vector space $V$,
+  a natural pairing is said to be nondegenerate if
+  \marginnote{This is A1Q2.}
+  \begin{equation*}
+    \forall v \in V \enspace \langle \alpha, v \rangle = 0 \iff \alpha = 0
+  \end{equation*}
+  and
+  \begin{equation*}
+    \forall \alpha \in V^* \enspace \langle \alpha, v \rangle = 0 \iff v = 0.
+  \end{equation*}
+\end{propo}
+
+\begin{eg}
+  Fix a basis $\mathcal{B} = \left\{ e_1, \ldots, e_n \right\}$ of $V$.
+  Given $T \in L(V)$,
+  there is an associated $n \times n$ matrix $A = [T]_{\mathcal{B}}$ defined by
+  \begin{equation*}
+    T(e_i) = A_{\underarrow{i}{\text{row index}}}^{\overarrow{j}{\text{column index}}} e_j.
+  \end{equation*}
+  In particular,
+  \begin{equation*}
+    A = \overarrow{
+      \begin{bmatrix}
+        [ T(e_1) ]_{\mathcal{B}} & \hdots & [ T(e_n) ]_{\mathcal{B}}
+      \end{bmatrix}
+    }{\text{block matrix}}
+  \end{equation*}
+  and
+  \begin{equation*}
+    A_i^k = e^k( T(e_i) ) = \langle e^k, T(e_i) \rangle.
+  \end{equation*}
+\end{eg}
+
+\begin{defn}[Double Dual Space]\index{Double Dual Space}\label{defn:double_dual_space}
+  The set
+  \begin{equation*}
+    V^{**} = L(V^*, \mathbb{R})
+  \end{equation*}
+  is called the \hlnoteb{double dual space}.
+\end{defn}
+
+\begin{propo}[The Space and Its Double Dual Space]\label{propo:the_space_and_its_double_dual_space}
+  Let $V$ be a finite dimensional real vector space and $V^{**}$ be its double dual space. There exists a linear map $\xi$ such that
+  \begin{equation*}
+    \xi : V \to V^{**}
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+\marginnote{As messy as this may seem, this is really a follow your nose kind of proof.
+    
+  Since we are proving that a map exists, we need to construct it.
+  Since $\xi : V \to V^{**} = L(V^*, \mathbb{R})$, for any $v \in V$,
+  we must have $\xi(v)$ as some linear map from $V^*$ to $\mathbb{R}$.}
+
+  Let $v \in V$. Then $\xi(v) \in V^{**} = L(V^*, \mathbb{R})$, 
+  i.e. $\xi(v) : V^* \to \mathbb{R}$. Then for any $\alpha \in V^*$,
+  \begin{equation*}
+    \left( \xi(v) \right)(\alpha) \in \mathbb{R}.
+  \end{equation*}
+  Since $\alpha \in V^*$, i.e. $\alpha : V \to \mathbb{R}$,
+  and $\alpha$ is linear, let us define
+  \begin{equation*}
+    \xi(v)(\alpha) = \alpha(v).
+  \end{equation*}
+  To verify that $\xi(v)$ is indeed linear, notice that 
+  for any $t, s \in \mathbb{R}$, and for any $\alpha, \beta \in V^*$,
+  we have
+  \begin{align*}
+    \xi(v)(t \alpha + s \beta)
+      &= (t \alpha + s \beta) (v) \\
+      &= t \alpha(v) + s \beta(v) \\
+      &= t \xi(v)(\alpha) + s \xi(v)(\beta).
+  \end{align*}
+  It remains to show that $\xi$ itself is linear:
+  for any $t, s \in \mathbb{R}$, any $v, w \in V$,
+  and any $\alpha \in V^*$, we have
+  \begin{align*}
+    \xi(tv + sw)(\alpha)
+      &= \alpha (tv + sw) = t \alpha(v) + s \alpha(w) \\
+      &= t \xi(v)(\alpha) + s \xi(v)(\alpha) \\
+      &= [ t \xi(v) + s \xi(w) ](\alpha)
+  \end{align*}
+  by addition of functions.\qed\
+\end{proof}
+
+\begin{propo}[Isomorphism Between The Space and Its Dual Space]\label{propo:isomorphism_between_the_space_and_its_dual_space}
+  The linear map in \cref{propo:the_space_and_its_double_dual_space} is an isomorphism.
+\end{propo}
+
+\begin{proof}
+  From \cref{propo:the_space_and_its_double_dual_space}, $\xi$ is linear.
+  Let $v \in V$ such that $\xi(v) = 0$, i.e. $v \in \ker(\xi)$.
+  Then by the same definition of $\xi$ as above, we have
+  \begin{equation*}
+    0 = (\xi(v))(\alpha) = \alpha(v)
+  \end{equation*}
+  for any $\alpha \in V^*$.
+  By \cref{propo:natural_pairings_are_nondegenerate}, we must have that $v = 0$,
+  i.e. $\ker(\xi) = \{ 0 \}$.
+  Thus by \cref{propo:nullity_of_only_0_and_injectivity}, $\xi$ is injective.
+
+  Now, since
+  \begin{equation*}
+    V^{**} = L(V^*, \mathbb{R}) = L ( L ( V, \mathbb{R} ), \mathbb{R} ),
+  \end{equation*}
+  we have that
+  \begin{equation*}
+    \dim(V^{**}) = \dim(V^*) = \dim(V).
+  \end{equation*}
+  Thus, by the Rank-Nullity Theorem
+  \sidenote{See \cref{sec:rank_nullity_theorem}, and especially \cref{propo:when_rank_equals_the_dimension_of_the_space}.},
+  we have that $\xi$ is surjective.
+  
+  \qed\
+\end{proof}
+
+The above two proposition shows to use that we may
+identify $V$ with $V^{**}$ using $\xi$, and we can
+gleefully assume that $V = V^{**}$.
+
+Consequently, if $v \in V = V^{**}$ and $\alpha \in V^*$,
+we have
+\begin{equation}\label{eq:commutativity_of_the_vector_and_its_linear_operator}
+  \alpha(v) = v(\alpha) = \langle \alpha, v \rangle.
+\end{equation}
+
+% section dual_space_continued (end)
+
+\section{Dual Map}%
+\label{sec:dual_map}
+% section dual_map
+
+\begin{defn}[Dual Map]\index{Dual Map}\label{defn:dual_map}
+  Let $T \in L(V, W)$, where $V, W$ are finite dimensional real vector spaces. Let
+  \begin{equation*}
+    T^* : W^* \to V^*
+  \end{equation*}
+  be defined as follows: for $\beta \in W^*$, we have $T^*(\beta) \in V^*$.
+  Let $v \in V$, and so $(T^*(\beta))(v) \in \mathbb{R}$
+  \sidenote{It shall be verified here that $T^*(\beta)$ is indeed linear:
+  let $v_1, v_2 \in V$ and $c_1, c_2 \in \mathbb{R}$.
+  Indeed
+  \begin{align*}
+    &T^*(\beta)(c_1 v_1 + c_2 v_2) \\
+      &= c_1 T^*(\beta)(v_1) + c_2 T^*(\beta)(v_2)
+  \end{align*}}.
+  From here, we may define
+  \begin{equation*}
+    (T^*(\beta))(v) = \beta(T(v)).
+  \end{equation*}
+  The map $T^*$ is called \hlnoteb{the dual map}.
+\end{defn}
+
+\begin{ex}
+  Prove that $T^* \in L(W^*, V^*)$, i.e. that $T^*$ is linear.
+\end{ex}
+
+\begin{proof}
+  Let $\beta_1, \beta_2 \in W^*$, $t_1, t_2 \in \mathbb{R}$, and $v \in V$.
+  Then
+  \begin{align*}
+    T^*(t_1 \beta_1 + t_2 \beta_2)(v) 
+      &= (t_1 \beta_1 + t_2 \beta_2)(Tv) \\
+      &= t_1 \beta_1 (Tv) + t_2 \beta_2 (Tv) \\
+      &= t_1 T^*(\beta_1)(v) + t_2 T^*(\beta_2)(v).
+  \end{align*}\qed\
+\end{proof}
+
+\begin{note}
+  Note that in \cref{defn:dual_map}, our construction of $T^*$ is canonical,
+  i.e. its construction is independent of the choice of a basis.
+
+  Also, notice that in the language of pairings, we have
+  \begin{equation*}
+    \langle T^*\beta, v \rangle = (T^*(\beta))(v) = \beta(T(v)) = \langle \beta, T(v) \rangle,
+  \end{equation*}
+  where we note that
+  \begin{gather*}
+    T^*(\beta) \in V^* \quad v \in V \\
+    \beta \in W^* \quad T(v) \in W.
+  \end{gather*}
+\end{note}
+
+% section dual_map (end)
+
+% chapter lecture_2_jan_09th (end)
 
 \appendix
+
+\chapter{Review of Earlier Contents}%
+\label{chp:review_of_earlier_contents}
+% chapter review_of_earlier_contents
+
+\section{Rank-Nullity Theorem}%
+\label{sec:rank_nullity_theorem}
+% section rank_nullity_theorem
+
+\nocite{stephen2002}
+
+\begin{defn}[Kernel and Image]\index{Kernel}\index{Image}\label{defn:kernel_and_image}
+  Let $V$ and $W$ be vector spaces, and let $T \in L(V, W)$.
+  The \hlnoteb{kernel} (or \hldefn{null space}) of $T$ is defined as
+  \begin{equation*}
+    \ker(T) := \left\{ v \in V \mmid Tv = 0 \right\},
+  \end{equation*}
+  i.e. the set of vectors in $V$ such that they are mapped to $0$ under $T$.
+
+  The \hlnoteb{image} (or \hldefn{range}) of $T$ is defined as
+  \begin{equation*}
+    \Img(T) = \left\{ Tv \mmid v \in V \right\},
+  \end{equation*}
+  that is the set of all images of vectors of $V$ under $T$.
+\end{defn}
+
+It can be shown that for a linear map $T \in L(V, W)$,
+$\ker (T)$ and $\Img(T)$ are subspaces of $V$ and $W$, respectively.
+As such, we can define the following:
+
+\begin{defn}[Rank and Nullity]\index{Rank}\index{Nullity}\label{defn:rank_and_nullity}
+  Let $V, W$ be vector spaces, and let $T \in L(V, W)$.
+  If $\ker(T)$ and $\Img(T)$ are finite-dimensional
+  \sidenote{In this course, this is always the case, since we are only dealing with finite dimensional real vector spaces.},
+  then we define the \hlnoteb{nullity} of $T$ as
+  \begin{equation*}
+    \nullity(T) := \dim \ker (T),
+  \end{equation*}
+  and the \hlnoteb{rank} of $T$ as
+  \begin{equation*}
+    \rank(T) := \dim \Img(T).
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  From the action of a linear transformation,
+  we observe that the \hlnotec{larger the nullity, the smaller the rank}.
+  Put in another way, the more vectors are sent to $0$ by the linear transformation,
+  the smaller the range.
+
+  Similarly, the larger the rank, the smaller the nullity.
+\end{note}
+
+This observation gives us the Rank-Nullity Theorem.
+
+\begin{thm}[Rank-Nullity Theorem]\index{Rank-Nullity Theorem}\label{thm:rank_nullity_theorem}
+  Let $V$ and $W$ be vector spaces, and $T \in L(V, W)$. If $V$ is finie-dimensional, then
+  \begin{equation*}
+    \nullity(T) + \rank(T) = \dim (V).
+  \end{equation*}
+\end{thm}
+
+From the Rank-Nullity Theorem,
+we can make the following observations about the relationships
+between injection and surjection, and the nullity and rank.
+
+\begin{propo}[Nullity of Only $0$ and Injectivity]\label{propo:nullity_of_only_0_and_injectivity}
+  Let $V$ and $W$ be vector spaces, and $T \in L(V, W)$.
+  Then $T$ is injective iff $\nullity(T) = \left\{ 0 \right\}$.
+\end{propo}
+
+Surjection and injectivity come hand-in-hand when
+we have the following special case.
+
+\begin{propo}[When Rank Equals The Dimension of the Space]\label{propo:when_rank_equals_the_dimension_of_the_space}
+  Let $V$ and $W$ be vector spaces of equal (finite) dimension,
+  and let $T \in L(V, W)$. TFAE
+  \begin{enumerate}
+    \item $T$ is injective;
+    \item $T$ is surjective;
+    \item $\rank(T) = \dim(V)$.
+  \end{enumerate}
+\end{propo}
+
+Note that the proof for \cref{propo:when_rank_equals_the_dimension_of_the_space}
+requires the understanding that $\ker(T) = \{ 0 \}$ implies that $\nullity(T) = 0$.
+See \href{https://math.stackexchange.com/questions/664594/why-mathbf0-has-dimension-zero}{this explanation on Math SE}.
+
+% section rank_nullity_theorem (end)
+
+% chapter review_of_earlier_contents (end)
 
 \backmatter
 

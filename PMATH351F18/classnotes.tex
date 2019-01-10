@@ -1,6 +1,8 @@
 \documentclass[notoc,notitlepage]{tufte-book}
 % \nonstopmode % uncomment to enable nonstopmode
 
+\input{latex-classnotes-preamble.tex}
+
 \usepackage{classnotetitle}
 
 \title{PMATH351 --- Real Analysis}
@@ -8,8 +10,6 @@
 \subtitle{Classnotes for Fall 2018}
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
 \institution{University of Waterloo}
-
-\input{latex-classnotes-preamble.tex}
 
 \DeclareMathOperator{\lub}{lub }
 \DeclareMathOperator{\glb}{glb }
@@ -21,31 +21,12 @@
 \DeclareMathOperator{\ND}{ND }
 \DeclareMathOperator{\Span}{span }
 \DeclareMathOperator{\Trig}{Trig }
+\DeclareMathOperator{\dist}{dist }
 
 \newcommand{\norm}[1]{\left\| #1 \right\|}
 
 \begin{document}
-\hypersetup{pageanchor=false}
-\maketitle
-\hypersetup{pageanchor=true}
-\begin{fullwidth}
-\tableofcontents
-\end{fullwidth}
-
-\newpage
-\begin{fullwidth}
-  \renewcommand{\listtheoremname}{\faBook\ \slshape List of Definitions}
-  \listoftheorems[ignoreall,show={defn}]
-  \addcontentsline{toc}{chapter}{List of Definitions}
-\end{fullwidth}
-
-\newpage 
-\begin{fullwidth}
-  \renewcommand{\listtheoremname}{\faCoffee\ \slshape List of Theorems}
-  \listoftheorems[ignoreall,show={axiom,lemma,thm,crly,propo}]
-  \addcontentsline{toc}{chapter}{List of Theorems}
-\end{fullwidth}
-
+\input{latex-classnotes-header.tex}
 \nocite{bforres2018}
 
 \chapter{Lecture 1 Sep 06th}%
@@ -5992,7 +5973,16 @@ We require the following notion:
 \end{propo}
 
 \begin{proof}
-  Let $\epsilon > 0$. Since $\mathcal{F}$ is equicontinuous, for each $x_0 \in X$, we can find $\delta_{x_0} > 0$ if $x \in B(x_0, \delta_{x_0})$, then $\abs{ f(x) - f(x_0) } < \frac{\epsilon}{2}$ for any $f \in \mathcal{F}$. Since $(X, d)$ is compact, the cover $\{ B(x_0, \delta_{x_0}) \}_{x_0 \in X}$ has a \hyperref[thm:lesbesgue]{Lesbesgue Number} $\delta_0 > 0$. Then, let $0 < \delta < \delta_0$. If for $w , z \in X$ we have $d(w, z) < \delta$, then $z \in B(w, \delta) \subset B(x_0^', \delta_{x_0'})$ for some $x_0' \in X$. Then
+  Let $\epsilon > 0$.
+  Since $\mathcal{F}$ is equicontinuous,
+  for each $x_0 \in X$, we can find $\delta_{x_0} > 0$ if $x \in B(x_0, \delta_{x_0})$,
+  then $\abs{ f(x) - f(x_0) } < \frac{\epsilon}{2}$ for any $f \in \mathcal{F}$.
+  Since $(X, d)$ is compact, the cover $\{ B(x_0, \delta_{x_0}) \}_{x_0 \in X}$
+  has a \hyperref[thm:lesbesgue]{Lesbesgue Number} $\delta_0 > 0$.
+  Then, let $0 < \delta < \delta_0$.
+  If for $w , z \in X$ we have $d(w, z) < \delta$,
+  then $z \in B(w, \delta) \subset B(x_0', \delta_{x_0'})$ for some $x_0' \in X$.
+  Then
   \begin{equation*}
     \abs{ f(z) - f(w) } \leq \abs{ f(z) - f(x_0) } + \abs{ f(x_0) - f(w) } < \epsilon.
   \end{equation*}\qed\
@@ -6335,7 +6325,7 @@ We require the following notion:
     \end{equation*}
     $P$ is called the Cantor set.
     \begin{enumerate}
-      \item A subset $A$ of a metric space is \textbf{nowhere dense} if $\interior(\bar{A}) = \emptyset$. Show that $P$ is closed and nowhere dense.
+      \item A subset $A$ of a metric space is \textbf{nowhere dense} if $\bar{A}^\circ = \emptyset$. Show that $P$ is closed and nowhere dense.
       \item Show that $P$ is uncountable. (Hint: You may use the fact that $x \in P$ if and only if we can express $x = \sum\limits_{n=1}^{\infty} \frac{a_n}{3^n}$ where $a_n = 0, 2$.)
       \item A subset $A$ of $\mathbb{R}$ is said to be \textit{perfect} if $A = \Lim(A)$. Show that the Cantor set $P$ is perfect. (Again, you can use the fact that $x \in P$ if and only if we can express $x = \sum\limits_{n=1}^{\infty} \frac{a_n}{3^n}$ where $a_m = 0, 2$.)
     \end{enumerate}
@@ -6492,7 +6482,7 @@ We require the following notion:
         \begin{equation*}
           D(f) = \bigcup_{n = 1}^{\infty} D_n(f).
         \end{equation*}
-      \item * A subset $A$ of $(X, d)$ is said to be \textit{nowhere dense} if $\Int(\bar{A}) = \emptyset$. Assume that $F \subset \mathbb{R}$ is closed and nowhere dense. Let
+      \item * A subset $A$ of $(X, d)$ is said to be \textit{nowhere dense} if $\bar{A}^\circ = \emptyset$. Assume that $F \subset \mathbb{R}$ is closed and nowhere dense. Let
         \begin{equation*}
           f(x) = \chi_F(x) = \begin{cases}
             1 & \text{ if } x \in F \\

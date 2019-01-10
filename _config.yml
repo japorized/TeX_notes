@@ -38,17 +38,14 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
-  # - PMATH333/
-  # - PMATH347F17/
-  # - PMATH347S18/
-  # - PMATH351F17/
-  # - PMATH352W18/
-  # - MATH145/
-  # - MATH239/
-  # - JAPAN201RS18/
-  # - STAT330S18
-  # - Others/
   - Personal\ Notes/
+  - setup-nvim/
+  - setup-subl/
+  - bootstrap
+  - tex.snippets
+  - texmath.snippets
+  - tex-common/
+  - .gitlab-ci.yml
 
 gitlab-letsencrypt:
   # Gitlab settings:
