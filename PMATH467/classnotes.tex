@@ -12,6 +12,7 @@
 \input{latex-classnotes-preamble.tex}
 
 \newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\Int}[1]{\overset{\circ}{#1}}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -26,6 +27,15 @@ The basic goal of the course is to be able to find \hlnotea{algebraic invariants
 Other questions that we shall also look into include a uniqueness problem about manifolds; in particular, how many manifolds exist for a given invariant up to homeomorphism? We shall see that for a \hlnotea{2-manifold}, the only such manifold is the 2-dimensional sphere $S^2$. For a $4$-manifold, it is the $4$-dimensional sphere $S^4$. In fact, for any other $n$-manifold for $n > 4$, the unique manifold is the respective $n$-sphere. The problem is trickier with the $3$-manifold, and it is known as the Poincar\'{e} Conjecture, solved in 2003 by Russian Mathematician \href{https://en.wikipedia.org/wiki/Grigori_Perelman}{Grigori Perelman}. Indeed, the said manifold is homeomorphic to the $3$-sphere.
 
 For this course, you are expected to be familiar with notions from \hlnotea{real analysis}, such as topology, and concepts from \hlnotea{group theory}.
+
+The following topics shall be covered:
+\begin{enumerate}
+  \item Point-Set Topology
+  \item Introduction to Topological Manifolds
+  \item Simplicial complexes \& Introduction to Homology
+  \item Fundamental Groups \& Covering Spaces
+  \item Classification of Surfaces
+\end{enumerate}
 
 \section*{Basic Logistics for the Course}%
 % section basic_logistics_for_the_course
@@ -97,9 +107,9 @@ where we may define a ``distance'' by
   is said to be \hlnoteb{continuous} if the preimage of an open set in $Y$ is open in $X$.\marginnote{See \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf\#thm.45}{notes} on Real Analysis for why we defined a continuous map in such a way.}
 \end{defn}
 
-\begin{warn}
+\begin{warning}
   This definition does not imply that a continuous map $f$ maps open sets to open sets.
-\end{warn}
+\end{warning}
 
 \begin{ex}
   Contruct a function on $[0, 1]$ which assumes all values between its maximum and minimum, but is not continuous.
@@ -131,16 +141,16 @@ where we may define a ``distance'' by
 \newthought{Now}, we want to talk about topologies without referring to a metric.
 
 \begin{defn}[Topology]\index{Topology}\label{defn:topology}
-  Let $X$ be a space. We say that the set $T \subseteq \mathcal{P}(X)$ is a \hlnoteb{topology} if
+  Let $X$ be a space. We say that the set $\mathcal{T} \subseteq \mathcal{P}(X)$ is a \hlnoteb{topology} if
   \begin{enumerate}
-    \item $X, \emptyset \in T$;
-    \item if $\left\{ x_\alpha \right\}_{\alpha \in A} \subseteq T$ for an arbitrary index set $A$, then
+    \item $X, \emptyset \in \mathcal{T}$;
+    \item if $\left\{ x_\alpha \right\}_{\alpha \in A} \subseteq \mathcal{T}$ for an arbitrary index set $A$, then
       \begin{equation*}
-        \bigcup_{\alpha \in A} x_\alpha \in T; \text{ and }
+        \bigcup_{\alpha \in A} x_\alpha \in \mathcal{T}; \text{ and }
       \end{equation*}
-    \item If $\{ x_\beta \}_{\beta \in B} \subset T$ for some finite index set $B$, then
+    \item If $\{ x_\beta \}_{\beta \in B} \subset \mathcal{T}$ for some finite index set $B$, then
       \begin{equation*}
-        \bigcap_{\beta \in B} x_\beta \in T.
+        \bigcap_{\beta \in B} x_\beta \in \mathcal{T}.
       \end{equation*}
   \end{enumerate}
 \end{defn}
@@ -148,6 +158,216 @@ where we may define a ``distance'' by
 % section euclidean_space (end)
 
 % chapter lecture_1_jan_07th (end)
+
+\chapter{Lecture 2 Jan 09th}%
+\label{chp:lecture_2_jan_09th}
+% chapter lecture_2_jan_09th
+
+\section{Euclidean Space (Continued)}%
+\label{sec:euclidean_space_continued}
+% section euclidean_space_continued
+
+In the last lecture, from metric topology, 
+we generalized the notion to a more abstract one
+that is based solely on open sets.
+
+\begin{eg}
+  Let $X$ be a set. The following two are
+  uninteresting examples of topologies:
+  \begin{enumerate}
+    \item The \hldefn{trivial topology} $\mathcal{T} = \left\{ \emptyset, X \right\}$.
+    \item The \hldefn{discrete topology} $\mathcal{T} = \mathcal{P}(X)$.
+  \end{enumerate}
+\end{eg}
+
+\newthought{We shall now} continue with looking at
+more concepts that we shall need down the road.
+
+\begin{defn}[Closure of a Set]\index{Closure}\label{defn:closure_of_a_set}
+  Let $A$ be a set. Its \hlnoteb{closure},
+  denoted as $\bar{A}$, is defined as
+  \begin{equation*}
+    \bar{A} = \bigcap_{C \supset A}^{C: \text{ closed }} C. 
+  \end{equation*}
+  It is the smallest closed set that contains $A$.
+\end{defn}
+
+\begin{note}
+  In metric topology, one typically defines the closure of a set by taking the union of $A$ and its limit points.
+\end{note}
+
+\begin{defn}[Interior of a Set]\index{Interior}\label{defn:interior_of_a_set}
+  Let $A$ be a set. Its \hlnoteb{interior}, 
+  denoted either as $\text{Int }(A)$, $A^\circ$ or $\Int{A}$,
+  is defined as
+  \begin{equation*}
+    \Int{A} = \bigcup_{G \subseteq A}^{G: \text{ open }} G.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Boundary of a Set]\index{Boundary}\label{defn:boundary_of_a_set}
+  Let $A$ be a set. Its \hlnoteb{boundary},
+  denoted as $\partial A$, is defined as
+  \begin{equation*}
+    \partial A = \bar{A} \setminus \Int{A}.
+  \end{equation*}
+\end{defn}
+
+\begin{ex}
+  Let $A$ be a set. Prove that $\partial A$ is closed.
+\end{ex}
+
+\begin{proof}
+  Notice that
+  \begin{equation*}
+    ( \partial A )^C = ( \bar{A} \setminus \Int{A} )^C = X \setminus \bar{A} \cup \Int{A} = X \cap \bar{A}^C \cup \Int{A}
+  \end{equation*}
+  which is open.\qed\
+\end{proof}
+
+\begin{ex}
+  Let $A$ be a set. Show that
+  \begin{equation*}
+    \partial ( \partial A ) = \partial A.
+  \end{equation*}
+\end{ex}
+
+\begin{proof}
+  First, notice that $\Int{\partial A} = \emptyset$.
+  Since $\partial A$ is closed, $\bar{\parital A} = \partial A$.
+  Then
+  \begin{equation*}
+    \partial ( \partial A ) = \bar{\partial A} \setminus \Int{\partial A}
+      = \partial A \setminus \emptyset = \partial A
+  \end{equation*}
+\end{proof}
+
+\begin{eg}
+  We know that $\mathbb{Q} \subseteq \mathbb{R}$,
+  and $\bar{\mathbb{Q}} = \mathbb{R}$.
+  We say that $\mathbb{Q}$ is dense in $\mathbb{R}$.
+\end{eg}
+
+\begin{defn}[Dense]\index{Dense}\label{defn:dense}
+  We say that a subset $A$ of a set $X$ is dense if
+  \begin{equation*}
+    \bar{A} = X.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  From the last example, we have that $\Int{\mathbb{Q}} = \emptyset$.
+\end{eg}
+
+\begin{defn}[Limit Point]\index{Limit Point}\label{defn:limit_point}
+  We say that $p \in X \supseteq A$ is a limit point of $A$
+  if any neighbourhood of $p$ has a nontrivial intersection
+  with $A$.
+\end{defn}
+
+\begin{eg}[A Topologist's Circle]\label{eg:a_topologists_circle}
+  Consider the function 
+  \begin{equation*}
+    f(x) = \begin{cases}
+      \sin \frac{1}{x} & x \neq 0 \\
+      0                & x = 0
+    \end{cases}
+  \end{equation*}
+  on the interval $\left[ -\frac{1}{2 \pi}, \frac{1}{2 \pi} \right]$.
+  Extend the function on both ends such that we obtain \cref{fig:a_topologists_circle}
+  (See also: \href{https://www.desmos.com/calculator/figksl5wmv}{Desmos}).
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{topologists-circle.png}
+    \caption{A Topologist's Circle}
+    \label{fig:a_topologists_circle}
+  \end{figure}
+
+  The limit points of the graph includes all the points
+  on the straight line from $(0, -1)$ to $(0, 1)$, including the endpoints.
+  This is the case because for any of the points on this line, for any
+  neighbourhood around the point, the neighbourhood intersects the
+  graph $f$ infinitely many times.
+\end{eg}
+
+\newthought{Going back to continuity}, given a function $f$,
+how do we know if $f^{-1}$ maps an open set to an open set?
+
+We can actually reduce the problem to only looking at open balls.
+But why are we allowed to do that?
+
+\begin{defn}[Basis of a Topology]\index{Basis}\label{defn:basis_of_a_topology}
+  \marginnote{Note that while the definition is similar to that of a cover, we are now ``covering'' over sets and not points.}
+  Given a topology $\mathcal{T}$, we say that
+  $\mathcal{B} = \left\{ B_{\alpha} \right\}_{\alpha \in I}$
+  is a \hlnoteb{basis} if $\forall T \in \mathcal{T}$, there
+  exists $J \subset I$ such that
+  \begin{equation*}
+    T = \bigcup_{\alpha \in J} B_\alpha.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  Let $\mathcal{T}$ be the Euclidean topology on $\mathbb{R}$.
+  Then we can take
+  \begin{equation*}
+    \mathcal{B} = \left\{ (a, b) \mmid a, b \in \mathbb{R}, \, a \leq b \right\}.
+  \end{equation*}
+  Note that $\mathcal{B}$ is \hlnotea{uncountable}.
+  We can, in fact, have
+  \sidenote{Recall from
+  \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf}{PMATH 351}
+  that we can write $\mathbb{R}$ as a disjoint union 
+  of open intervals with rational endpoints.}
+  \begin{equation*}
+    \mathcal{B}_1 = \left\{ (a, b) \mmid a, b \in \mathbb{Q}, a \leq b \right\},
+  \end{equation*}
+  which is countable, as a basis for $\mathbb{R}$.
+  Furthermore, we can consider the set
+  \begin{equation*}
+    \mathcal{B}_2 = \left\{ (a, b) \mmid a \leq b, \, a = \frac{m}{2^p}, \, b = \frac{n}{2^q}, \, m, n, p, q \in \mathbb{Z} \right\},
+  \end{equation*}
+  which is also a countable basis for $\mathbb{R}$.
+  Notice that
+  \begin{equation*}
+    \mathcal{B}_2 \subseteq \mathcal{B}_1 \subseteq \mathcal{B}.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  In $\mathbb{R}^2$, we can do a similar construction of $\mathcal{B}$,
+  $\mathcal{B}_1$, and $\mathcal{B}_2$ as in the last example and use
+  them as a basis for $\mathbb{R}^2$. In particular, we would have
+  \begin{equation*}
+    \mathcal{B} = \left\{ (a_1, b_1) \times (a_2, b_2) \mmid a_1, a_2, b_1, b_2 \in \mathbb{R} \right\}.
+  \end{equation*}
+  This is called a \hldefn{dyadic partitioning} of $\mathbb{R}^2$.
+\end{eg}
+
+\begin{eg}
+  Let $(X_1, \mathcal{T}_1)$ and $(X_2, \mathcal{T}_2)$ be two topological spaces.
+  Then the Cartesian product $X_1 \times X_2$ has topology induced
+  from $\mathcal{T}_1$ and $\mathcal{T}_2$ by taking the set
+  \begin{equation*}
+    \mathcal{B} = \left\{ \beta_1 \times \beta_2 \mmid \beta_1 \in \mathcal{T}_1, \, \beta_2 \in \mathcal{T}_2 \right\}
+  \end{equation*}
+  as the basis.
+\end{eg}
+
+\begin{ex}
+  Prove that
+  \begin{enumerate}
+    \item $\beta_1$ and $\beta_2$ can be taken to be elements of
+      bases $\mathcal{B}_1 \subset \mathcal{T}_1$ and
+      $\mathcal{B}_2 \subset \mathcal{T}_2$, respectively.
+    \item the product topology on $\mathbb{R}^2$ is the same 
+      as the Euclidean topology.
+  \end{enumerate}
+\end{ex}
+
+% section euclidean_space_continued (end)
+
+% chapter lecture_2_jan_09th (end)
 
 \appendix
 
