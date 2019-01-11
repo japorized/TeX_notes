@@ -1,0 +1,72 @@
+{% include head.html %}
+<article>
+  <h1>{{ page.title }}</h1>
+  <a href="{{ site.url }}"><span class="fa fa-arrow-left"></span> Back to index</a>
+  <section>
+    {{ page.content | markdownify }}
+
+    <details class="tree">
+      <summary><span class="fa fa-folder"></span> Files</summary>
+    {% for file in site.data.files %}
+      <details class="resource">
+        <summary>{{ file.title }}</summary>
+        {% for pdf in file.pdf %}
+        <details class="resource">
+          <summary><span class="fas fa-file-pdf"></span> {{ pdf.title }}</summary>
+          <div class="resource-information">
+            <table>
+              <tr>
+                <td>Title</td>
+                <td>{{ pdf.title }}</td>
+              </tr>
+              <tr>
+                <td>Url</td>
+                <td><a href="{{ site.baseurl }}{{ pdf.src }}">{{ pdf.src }}</a></td>
+              </tr>
+            </table>
+          </div>
+        </details>
+        {% endfor %}
+        {% for tex in file.tex %}
+        <details class="resource">
+          <summary>{{ tex.title }}</summary>
+          <div class="resource-information">
+            <table>
+              <tr>
+                <td>Title</td>
+                <td>{{ tex.title }}</td>
+              </tr>
+              <tr>
+                <td>Url</td>
+                <td><a href="{{ site.baseurl }}{{ tex.src }}">{{ tex.src }}</a></td>
+              </tr>
+            </table>
+          </div>
+        </details>
+        {% endfor %}
+      </details>
+    {% endfor %}
+    </details>
+  <section>
+</article>
+<style>
+article h1, article h2 {
+  width: 55%;
+  line-height: 3rem;
+}
+
+details > details {
+  margin-left: 10px;
+}
+
+div.resource-information table {
+  margin-left: 20px;
+  font-size: 12px;
+}
+
+details.resource div.resource-information table tr td:first-child {
+  font-variant: small-caps;
+  font-weight: 700;
+}
+</style>
+{% include footer.html %}

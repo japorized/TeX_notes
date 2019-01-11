@@ -1,200 +1,200 @@
 - title: PMATH467 W19 - Algebraic Geometry
   pdf:
     - title: classnotes.pdf
-      src: ./PMATH467/classnotes.pdf
+      src: /PMATH467/classnotes.pdf
   tex:
     - title: classnotes.tex
-      src: ./PMAHT467/classnotes.tex
+      src: /PMATH467/classnotes.tex
 - title: PMATH365 W19 - Differential Geometry
   pdf:
     - title: classnotes.pdf
-      src: ./PMATH365/classnotes.pdf
+      src: /PMATH365/classnotes.pdf
   tex:
     - title: classnotes.tex
-      src: ./PMATH365/classnotes.tex
+      src: /PMATH365/classnotes.tex
 - title: PMATH348 W19 - Fields and Galois Theory
   pdf:
     - title: classnotes.pdf
-      src: ./PMATH348/classnotes.pdf
+      src: /PMATH348/classnotes.pdf
   tex:
     - title: classnotes.tex
-      src: ./PMATH348/classnotes.tex
+      src: /PMATH348/classnotes.tex
 - title: PMATH351 F18 - Real Analysis
   pdf:
     - title: classnotes.pdf
-      src: ./PMATH351F18/classnotes.pdf
+      src: /PMATH351F18/classnotes.pdf
   tex:
     - title: classnotes.tex
-      src: ./PMATH351F18/classnotes.tex
+      src: /PMATH351F18/classnotes.tex
 - title: PMATH733/433 F18 - Model Theory and Set Theory
   pdf:
     - title: classnotes.pdf
-      src: ./PMATH733/classnotes.pdf
+      src: /PMATH733/classnotes.pdf
   tex:
     - title: classnotes.tex
-      src: ./PMATH733/classnotes.tex
+      src: /PMATH733/classnotes.tex
 
 - title: ACTSC431 F18 - Loss Model I
   pdf:
     - title: classnotes.pdf
-      src: ./ACTSC431/classnotes.pdf
+      src: /ACTSC431/classnotes.pdf
   tex:
     - title: classnotes.tex
-      src: ./ACTSC431/classnotes.tex
+      src: /ACTSC431/classnotes.tex
 - title: PMATH347 S18 - Groups and Rings
   pdf:
   - title: classnotes.pdf
-    src: ./PMATH347S18/classnotes.pdf
+    src: /PMATH347S18/classnotes.pdf
   - title: classnotes-white.pdf
-    src: ./PMATH347S18/classnotes-white.pdf
+    src: /PMATH347S18/classnotes-white.pdf
   - title: definitions.pdf
-    src: ./PMATH347S18/definitions.pdf
+    src: /PMATH347S18/definitions.pdf
   tex:
   - title: classnotes.tex
     src: /PMATH347S18/classnotes.tex
   - title: classnotes-white.tex
-    src: ./PMATH347S18/classnotes-white.tex
+    src: /PMATH347S18/classnotes-white.tex
   - title: definitions.tex
-    src: ./PMATH347S18/definitions.tex
+    src: /PMATH347S18/definitions.tex
   - title: list_of_symbols.tex
-    src: ./PMATH347S18/list_of_symbols.tex
+    src: /PMATH347S18/list_of_symbols.tex
   - title: math-operators.tex
-    src: ./PMATH347S18/math-operators.tex
+    src: /PMATH347S18/math-operators.tex
   - title: lec01.tex
-    src: ./PMATH347S18/lectures/lec01.tex
+    src: /PMATH347S18/lectures/lec01.tex
   - title: lec02.tex
-    src: ./PMATH347S18/lectures/lec02.tex
+    src: /PMATH347S18/lectures/lec02.tex
   - title: lec03.tex
-    src: ./PMATH347S18/lectures/lec03.tex
+    src: /PMATH347S18/lectures/lec03.tex
   - title: lec04.tex
-    src: ./PMATH347S18/lectures/lec04.tex
+    src: /PMATH347S18/lectures/lec04.tex
   - title: lec05.tex
-    src: ./PMATH347S18/lectures/lec05.tex
+    src: /PMATH347S18/lectures/lec05.tex
   - title: lec06.tex
-    src: ./PMATH347S18/lectures/lec06.tex
+    src: /PMATH347S18/lectures/lec06.tex
   - title: lec07.tex
-    src: ./PMATH347S18/lectures/lec07.tex
+    src: /PMATH347S18/lectures/lec07.tex
   - title: lec08.tex
-    src: ./PMATH347S18/lectures/lec08.tex
+    src: /PMATH347S18/lectures/lec08.tex
   - title: lec09.tex
-    src: ./PMATH347S18/lectures/lec09.tex
+    src: /PMATH347S18/lectures/lec09.tex
   - title: lec10.tex
-    src: ./PMATH347S18/lectures/lec10.tex
+    src: /PMATH347S18/lectures/lec10.tex
   - title: lec11.tex
-    src: ./PMATH347S18/lectures/lec11.tex
+    src: /PMATH347S18/lectures/lec11.tex
   - title: lec12.tex
-    src: ./PMATH347S18/lectures/lec12.tex
+    src: /PMATH347S18/lectures/lec12.tex
   - title: lec13.tex
-    src: ./PMATH347S18/lectures/lec13.tex
+    src: /PMATH347S18/lectures/lec13.tex
   - title: lec14.tex
-    src: ./PMATH347S18/lectures/lec14.tex
+    src: /PMATH347S18/lectures/lec14.tex
   - title: lec15.tex
-    src: ./PMATH347S18/lectures/lec15.tex
+    src: /PMATH347S18/lectures/lec15.tex
   - title: lec16.tex
-    src: ./PMATH347S18/lectures/lec16.tex
+    src: /PMATH347S18/lectures/lec16.tex
   - title: lec17.tex
-    src: ./PMATH347S18/lectures/lec17.tex
+    src: /PMATH347S18/lectures/lec17.tex
   - title: lec18.tex
-    src: ./PMATH347S18/lectures/lec18.tex
+    src: /PMATH347S18/lectures/lec18.tex
   - title: lec19.tex
-    src: ./PMATH347S18/lectures/lec19.tex
+    src: /PMATH347S18/lectures/lec19.tex
   - title: lec20.tex
-    src: ./PMATH347S18/lectures/lec20.tex
+    src: /PMATH347S18/lectures/lec20.tex
   - title: lec21.tex
-    src: ./PMATH347S18/lectures/lec21.tex
+    src: /PMATH347S18/lectures/lec21.tex
   - title: lec22.tex
-    src: ./PMATH347S18/lectures/lec22.tex
+    src: /PMATH347S18/lectures/lec22.tex
   - title: lec23.tex
-    src: ./PMATH347S18/lectures/lec23.tex
+    src: /PMATH347S18/lectures/lec23.tex
   - title: lec24.tex
-    src: ./PMATH347S18/lectures/lec24.tex
+    src: /PMATH347S18/lectures/lec24.tex
   - title: lec25.tex
-    src: ./PMATH348S18/lectures/lec25.tex
+    src: /PMATH348S18/lectures/lec25.tex
   - title: lec26.tex
-    src: ./PMATH348S18/lectures/lec26.tex
+    src: /PMATH348S18/lectures/lec26.tex
   - title: lec27.tex
-    src: ./PMATH348S18/lectures/lec27.tex
+    src: /PMATH348S18/lectures/lec27.tex
   - title: lec28.tex
-    src: ./PMATH348S18/lectures/lec28.tex
+    src: /PMATH348S18/lectures/lec28.tex
   - title: lec29.tex
-    src: ./PMATH349S18/lectures/lec29.tex
+    src: /PMATH349S18/lectures/lec29.tex
   - title: lec30.tex
-    src: ./PMATH350S18/lectures/lec30.tex
+    src: /PMATH350S18/lectures/lec30.tex
   - title: lec31.tex
-    src: ./PMATH351S18/lectures/lec31.tex
+    src: /PMATH351S18/lectures/lec31.tex
   - title: lec32.tex
-    src: ./PMATH351S18/lectures/lec32.tex
+    src: /PMATH351S18/lectures/lec32.tex
   - title: lec33.tex
-    src: ./PMATH351S18/lectures/lec33.tex
+    src: /PMATH351S18/lectures/lec33.tex
   - title: lec34.tex
-    src: ./PMATH351S18/lectures/lec34.tex
+    src: /PMATH351S18/lectures/lec34.tex
   - title: lec35.tex
-    src: ./PMATH351S18/lectures/lec35.tex
+    src: /PMATH351S18/lectures/lec35.tex
 - title: Learning Haskell
   pdf: 
   - title: learningnotes.pdf
-    src: ./LearningHaskell/learningnotes.pdf
+    src: /LearningHaskell/learningnotes.pdf
   - title: learningnotes.tex
-    src: ./LearningHaskell/learningnotes.tex
+    src: /LearningHaskell/learningnotes.tex
 - title: STAT330 S18 - Mathematical Statistics
   pdf:
   - title: classnotes.pdf
-    src: ./STAT330S18/classnotes.pdf
+    src: /STAT330S18/classnotes.pdf
   - title: classnotes-white.pdf
-    src: ./STAT330S18/classnotes-white.pdf
+    src: /STAT330S18/classnotes-white.pdf
   tex:
   - title: classnotes.tex
-    src: ./STAT330S18/classnotes.tex
+    src: /STAT330S18/classnotes.tex
 - title: JAPAN201R S18 - Year 2 Japanese
   pdf:
   - title: readingnotes.pdf
-    src: ./JAPAN201RS18/readingnotes.pdf
+    src: /JAPAN201RS18/readingnotes.pdf
   - title: readingnotes-white.pdf
-    src: ./JAPAN201RS18/readingnotes-white.pdf
+    src: /JAPAN201RS18/readingnotes-white.pdf
   - title: vocabsheet.pdf
-    src: ./JAPAN201RS18/vocabsheet/vocabsheet.pdf
+    src: /JAPAN201RS18/vocabsheet/vocabsheet.pdf
   tex:
   - title: readingnotes.tex
-    src: ./JAPAN201RS18/readingnotes.tex
+    src: /JAPAN201RS18/readingnotes.tex
   - title: vocabsheet.tex
-    src: ./JAPAN201RS18/vocabsheet/vocabsheet.tex
+    src: /JAPAN201RS18/vocabsheet/vocabsheet.tex
 - title: PMATH352 W18 - Complex Analysis
   pdf:
   - title: classnotes.pdf
-    src: ./PMATH352W18/classnotes.pdf
+    src: /PMATH352W18/classnotes.pdf
   - title: classnotes-white.pdf
-    src: ./PMATH352W18/classnotes-white.pdf
+    src: /PMATH352W18/classnotes-white.pdf
   - title: cheatsheet.pdf
-    src: ./PMATH352W18/cheatsheet/cheatsheet.pdf
+    src: /PMATH352W18/cheatsheet/cheatsheet.pdf
   tex:
   - title: classnotes.tex
-    src: ./PMATH352W18/classnotes.tex
+    src: /PMATH352W18/classnotes.tex
   - title: classnotes-white.tex
-    src: ./PMATH352W18/classnotes-white.pdf
+    src: /PMATH352W18/classnotes-white.pdf
   - title: cheatsheet.tex
-    src: ./PMATH352W18/cheatsheet/cheatsheet.tex
+    src: /PMATH352W18/cheatsheet/cheatsheet.tex
 - title: STAT333 W17 - Applied Probability
   pdf:
   - title: classnotes.pdf
-    src: ./STAT333/classnotes.pdf
+    src: /STAT333/classnotes.pdf
   tex:
   - title: classnotes.tex
-    src: ./STAT333/classnotes.tex
+    src: /STAT333/classnotes.tex
 - title: PMATH333 W17 - Intro to Real Analysis
   pdf:
   - title: pmath333_defns_thms.pdf
-    src: ./PMATH333/pmath333_defns_thms.pdf
+    src: /PMATH333/pmath333_defns_thms.pdf
   - title: final_review.pdf
-    src: ./PMATH333/final_review.pdf
+    src: /PMATH333/final_review.pdf
   tex:
   - title: pmath333_defns_thms.tex
-    src: ./PMATH333/pmath333_defns_thms.tex
+    src: /PMATH333/pmath333_defns_thms.tex
   - title: final_review.pdf
-    src: ./PMATH333/final_review.tex
+    src: /PMATH333/final_review.tex
 - title: MATH239 W17 - Intro to Combinatorics
   pdf:
   - title: defn_thm.pdf
-    src: ./MATH239/defn_thm.pdf
+    src: /MATH239/defn_thm.pdf
   tex:
   - title: defn_thm.tex
-    src: ./MATH239/defn_thm.tex
+    src: /MATH239/defn_thm.tex
