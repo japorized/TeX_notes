@@ -12,8 +12,8 @@
 
 \input{latex-classnotes-preamble.tex}
 
-\DeclareMathOperator{\stab}{stab}
-\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\stab}{Stab}
+\DeclareMathOperator{\orb}{Orb}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -148,7 +148,212 @@ we have...
 
 % chapter lecture_1_jan_07th (end)
 
+\chapter{Lecture 2 Jan 09th}%
+\label{chp:lecture_2_jan_09th}
+% chapter lecture_2_jan_09th
+
+\section{The Sylow Theorems}%
+\label{sec:the_sylow_theorems}
+% section the_sylow_theorems
+
+From the \hyperref[thm:orbit_decomposition_theorem]{Orbit Decomposition Theorem}, one special case is when $G$ acts on $X = G$ by conjugation.
+
+\begin{crly}[Class Equation]\index{Class Equation}\label{crly:class_equation}
+  From \cref{thm:orbit_decomposition_theorem}, if $X = G$, we have
+  \begin{align*}
+    \abs{G} &= \abs{Z(G)} + \sum \overarrow{\abs{ \orb(a_i) }}{\text{non-central}} \\
+            &= \abs{Z(G)} + \sum [ G : \stab(a_i) ] \text{ by } \hyperref[thm:orbit_stabilizer_theorem]{Orbit-Stabilizer} \\
+            &= \abs{Z(G)} + \sum [ G : C(a_i) ],
+  \end{align*}
+  where $C(a_i)$ is called the \hldefn{centralizers} of $G$. 
+\end{crly}
+
+\begin{thm}[First Sylow Theorem]\index{First Sylow Theorem}\label{thm:first_sylow_theorem}
+  Let $G$ be a finite group, and let $p \mid \abs{G}$ such that $p$ is prime.
+  Then $G$ contains a Sylow $p$-subgroup.
+\end{thm}
+
+\begin{proof}
+  We proceed by induction on the size of $G$.
+  If $\abs{G} = 2$, then $p = 2$, and so $G$ is its own Sylow $p$-subgroup
+  \sidenote{A $2$-cycle is a Sylow $p$-group.}.
+  
+  Consider a finite group $G$ with $\abs{G} \geq 2$.
+  Let $p$ be a prime that divides $\abs{G}$, and assume
+  that the desired result holds for smaller groups.
+  
+  Let $\abs{G} = p^n m$, where $n, m \in \mathbb{N}$, and $p \nmid m$.
+
+  \noindent
+  \hlbnotea{Case 1: $p \mid \abs{Z(G)}$}
+  By \cref{thm:cauchy_s_theorem_for_abelian_groups}, $\exists a \in Z(G)$
+  such that $\abs{a} = p$.
+  Since $\langle a \rangle \subsetneq Z(G)$, we have that
+  \begin{equation*}
+    \langle a \rangle \triangleleft G \text{ and } \abs{ \langle a \rangle } = p.
+  \end{equation*}
+  \sidenote{This feels like a struck of genius.
+  Let's break it down and find some way that makes it easier to remember.
+  We want to find $H \leq G$ such that $\abs{H} = p^n$.
+  We have $\abs{ \langle a \rangle } = p$.
+  We want to be able to use the \hlimpo{Correspondence Theorem},
+  so we should adjust our materials to fit that mold:
+  since $\abs{\langle a \rangle} = p$, notice that
+  \begin{equation*}
+    \frac{\abs{G}}{\abs{\langle a \rangle}} = p^{n - 1} m.
+  \end{equation*}
+  This is a smaller group than $G$, and so IH tells us that it
+  has a Sylow $p$-subgroup, say $\bar{H}$.
+  By the Correspondence Theorem, we may retrieve $H$.}
+  Notice that the group $G / \langle a \rangle$ is a group
+  that has a lower order than $G$, and so by IH,
+  $\exists \bar{H} \leq G / \langle a \rangle$ such that $\bar{H}$
+  is a Sylow $p$-subgroup of $G / \langle a \rangle$.
+  Note that if $n = 1$. then $\langle a \rangle$ itself is the
+  Sylow $p$-subgroup.
+  WMA $n > 1$. We have that $\abs{H} = p^{n - 1}$.
+  By \hyperref[thm:correspondence_theorem]{correspondence},
+  \begin{equation*}
+    \bar{H} = H / \langle a \rangle,
+  \end{equation*}
+  where $H \leq G$. By comparing the orders, we have
+  \begin{equation*}
+    p^{n - 1} = \frac{\abs{H}}{p} \implies \abs{H} = p^n.
+  \end{equation*}
+  Therefore $H$ is a Sylow $p$-subgroup of $G$.
+
+  \noindent
+  \hlbnotea{Case 2: $p \nmid Z(G)$}
+  By the \hyperref[crly:class_equation]{class equation},
+  notice that
+  \begin{equation}\label{eq:first_sylow_theorem_eq1}
+    p^n m = \abs{G} = \abs{Z(G)} + \sum [ G : C(a_i) ],
+  \end{equation}
+  and the summation cannot be $0$ or $p$ would otherwise
+  divide $Z(G)$.
+  \marginnote{This highlighted part requires clarification.}
+  % TODO: this needs the prof's intervention
+  \begin{quotebox}{be-red}{light}
+  Since $p$ divides the LHS of \cref{eq:first_sylow_theorem_eq1}
+  and not $\abs{Z(G)}$, and the sum is nonzero, we must 
+  have that $\exists a_i \in G$ such that $p \nmid [ G : C(a_i) ]$.
+  This implies that $p^n \mid \abs{ C(a_i) }$.
+  \end{quotebox}
+  Since $a_i \notin Z(G)$, we have $\abs{C(a_i)} \leq \abs{G}$.
+  Thus by IH, $C(a_i)$ has a Sylow $p$-subgroup, which is also a
+  Sylow $p$-subgroup of $G$.\qed\
+\end{proof}
+
+\begin{crly}[Cauchy's Theorem]\index{Cauchy's Theorem}\label{crly:cauchy_s_theorem}
+  If $p$ is prime and $p \mid \abs{G}$, then $G$ has an element of order $p$.
+\end{crly}
+
+\begin{proof}
+  WLOG, WMA $\abs{G} = p^n m$, where $n, m \in \mathbb{N}$ and
+  $p \nmid m$. By \cref{thm:first_sylow_theorem}, $\exists H \leq G$
+  such that $H$ is a Sylow $p$-subgroup.
+  Take $a \in H \setminus \left\{ e \right\}$. Then $\abs{a} = p^k$
+  for some $k \leq n$.
+
+  Let $b = a^{p^{k - 1}}$. Notice that $b \neq e$, or it would
+  contradict the definition of an order (for $a$).
+  Then $b^p = \left( a^{p^{k - 1}} \right)^p = a^p = e$.
+  Therefore $\abs{b} = p$ and $b \in G$.\qed\
+\end{proof}
+
+\begin{defn}[Normalizer]\index{Normalizer}\label{defn:normalizer}
+  Let $G$ be a group, and $H \leq G$. The set
+  \begin{equation*}
+    N_G(H) = \left\{ g \in G \mmid gHg^{-1} = H \right\}
+  \end{equation*}
+  is called the \hlnoteb{normalizer} of $H$ in $G$.
+\end{defn}
+
+\begin{ex}
+  Verify that $N_G(H)$ is the largest subgroup of $G$
+  that contains $H$ as a normal subgroup.
+\end{ex}
+
+\begin{proof}
+  It is clear by definition of a normalizer that $H \triangleleft N_G(H)$.
+
+  Suppose there exists $N_G(H) < \tilde{H} \leq G$ such that
+  $H \triangleleft \tilde{H}$. Let $h \in \tilde{H} \setminus N_G(H)$.
+  But since $H \triangleleft \tilde{H}$, we have
+  \begin{equation*}
+    hHh^{-1} = H,
+  \end{equation*}
+  which implies that $h \in N_G(H)$, a contradiction.
+  Therefore $N_G(H)$ is the largest subgroup that contains $H$ as a
+  normal subgroup.
+\end{proof}
+
+Before proceeding with the Sylow's next theorem, we require two lemmas.
+
+\begin{lemma}[Intersection of a Sylow $p$-subgroup with any other $p$-subgroups]\label{lemma:intersection_of_a_sylow_p_subgroup_with_any_other_p_subgroups}
+  Let $G$ be a finite group and $p$ a prime such that $p \mid \abs{G}$.
+  Let $P, Q \leq G$ be a Sylow $p$-subgroup and a (regular) $p$-subgroup,
+  respectively. Then
+  \begin{equation}\label{eq:intersection_of_a_sylow_p_subgroup_with_any_other_p_subgroups}
+    Q \cap N_G(P) = Q \cap P.
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  Since $P \subseteq N_G(P)$, $\subseteq$ of \cref{eq:intersection_of_a_sylow_p_subgroup_with_any_other_p_subgroups} is done.
+
+  Let $N = N_G(P)$, and let $H = Q \cap N$. WTS $H \subseteq Q \cap P$.
+  Since $H = Q \cap N \subseteq Q$, it suffices to show that $H \subseteq P$.
+  Since $P$ is a Sylow $p$-subgroup, let $\abs{P} = p^n$. By Lagrange,
+  we have that $\abs{H} = p^m$ for some $m \leq n$. Since $P \trianglleft N$,
+  we have that $HP \leq N$ 
+  \sidenote{See \href{https://tex.japorized.ink/PMATH347S18/classnotes.pdf\#thm.30}{PMATH 347}}.
+  Moreover, we have that
+  \begin{equation*}
+    \abs{HP} = \frac{\abs{H}\abs{P}}{\abs{H \cap P}} = p^k
+  \end{equation*}
+  for some $k \leq n$. Also, $P \subset HP$, and so $n \leq k$,
+  implying that $k = n$. Thus $P = HP$, and thus
+  \begin{equation*}
+    H \subseteq HP = P,
+  \end{equation*}
+  as required.\qed\
+\end{proof}
+
+% section the_sylow_theorems (end)
+
+% chapter lecture_2_jan_09th (end)
+
 \appendix
+
+\chapter{Asides and Prior Knowledge}%
+\label{chp:asides_and_prior_knowledge}
+% chapter asides_and_prior_knowledge
+
+\section{Correspondence Theorem}%
+\label{sec:correspondence_theorem}
+% section correspondence_theorem
+
+\hlnotea{The Correspondence Theorem} is somewhat widely known 
+as the Fourth Isomorphism Theorem, although some authors associates
+the name with a proposition known as 
+\href{https://en.wikipedia.org/wiki/Zassenhaus_lemma}{Zaessenhaus Lemma}.
+
+\begin{thm}[Correspondence Theorem]\index{Correspondence Theorem}\label{thm:correspondence_theorem}
+  Let $G$ be a group, and $N \triangleleft G$
+  \sidenote{Recall that this symbol means that $N$ is a normal
+  subgroup of $G$.}. Then there exists a bijection between
+  the set of all subgroups $A \leq G$ such that $A \supseteq N$
+  and the set of subgroups $A / N$ of $G / N$.
+\end{thm}
+
+\begin{proof}
+  
+\end{proof}
+
+% section correspondence_theorem (end)
+
+% chapter asides_and_prior_knowledge (end)
 
 \backmatter
 

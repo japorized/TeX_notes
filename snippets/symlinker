@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+curdir=$(pwd -L)
+for f in $curdir/*.snippets ; do
+  ln -sf "$f" $HOME/.vim/mysnippets/
+done
+echo "[~] symlinks with snippets established"
