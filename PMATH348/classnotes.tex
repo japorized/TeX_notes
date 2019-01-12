@@ -324,6 +324,175 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
 
 % chapter lecture_2_jan_09th (end)
 
+\chapter{Lecture 3 Jan 11th}%
+\label{chp:lecture_3_jan_11th}
+% chapter lecture_3_jan_11th
+
+\section{The Sylow Theorems (Continued)}%
+\label{sec:the_sylow_theorems_continued}
+% section the_sylow_theorems_continued
+
+\begin{lemma}[Counting The Conjugates of a Sylow $p$-Subgroup]\label{lemma:counting_the_conjugates_of_a_sylow_p_subgroup}
+  Let $G$ be a finite group, and $p$ a prime such that $p \mid \abs{G}$. Let
+  \begin{itemize}
+    \item $P$ be a Sylow $p$-subgroup;
+    \item $Q$ be a $p$-subgroup;
+    \item $K = \left\{ gPg^{-1} \mmid g \in G \right\}$;
+    \item $Q$ act on $K$ by conjugation; and
+    \item $P = P_1, P_2, \ldots, P_r$ be the distinct orbit representatives
+      from the action of $Q$ on $K$.
+  \end{itemize}
+  Then
+  \begin{equation*}
+    \abs{K} = \sum_{i=1}^{r} \left[ Q : Q \cap P_i \right].
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  From the definition of $K$, and the fact that $Q$ acts on $K$,
+  we have
+  \begin{align*}
+    \abs{K} &= \sum_{i=1}^{r} \abs{ \Orb(P_i) } \\
+            &= \sum_{i=1}^{r} \abs{ Q } / \abs{ \stab(P_i) } \quad \hyperref[thm:orbit_stabilizer_theorem]{\text{orbit-stabilizer}} \\
+            &= \sum_{i=1}^{r} \abs{ Q } / \abs{ N_G(P_i) \cap Q } \quad \text{ by the action } \\
+            &= \sum_{i=1}^{r} [ Q : N_G(P_i) \cap Q ] \quad \text{ by definition } \\
+            &= \sum_{i=1}^{r} [ Q : Q \cap P_i ] \quad \hyperref[lemma:intersection_of_a_sylow_p_subgroup_with_any_other_p_subgroups]{\text{the last lemma}}.
+  \end{align*}\qed\
+\end{proof}
+
+\begin{thm}[Second Sylow Theorem]\index{Second Sylow Theorem}\label{thm:second_sylow_theorem}
+  If $P$ and $Q$ are Sylow $p$-subgroups of $G$, then
+  $\exists g \in G$ such that $P = gQg^{-1}$.
+\end{thm}
+
+\begin{proof}
+  Let $K = \left\{ qPq^{-1} \mmid q \in G \right\}$. WTS $Q \in K$.
+  We shall also note that $\abs{P} = p^k$ for some $k \in \mathbb{N}$.
+
+  Let $P$ act on $K$ by conjugation. Let the orbit representatives be
+  \begin{equation*}
+    P = P_1, P_2, \ldots, P_r.
+  \end{equation*}
+  By \cref{lemma:counting_the_conjugates_of_a_sylow_p_subgroup}, we have
+  \begin{equation*}
+    \abs{K} = \sum_{i=1}^{r} [ P : P \cap P_i ] 
+            = [ P : P ] + \sum_{i=2}^{r} [ P : P \cap P_i ]
+            = 1 + \sum_{i=2}^{r} [ P : P \cap P_i ].
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \abs{K} \equiv 1 \mod p.
+  \end{equation*}
+
+  Now let $Q$ act on $K$ by conjugation. Reordering if necessary, the
+  orbit representatives are
+  \begin{equation*}
+    P = P_1, P_2, \ldots, P_s,
+  \end{equation*}
+  where $s$ is not necessarily $r$. From here, it suffices to show that
+  $Q = P_i$ for some $i \in \left\{ 1, 2, \ldots, s \right\}$. Suppose
+  not. Then by \cref{lemma:counting_the_conjugates_of_a_sylow_p_subgroup},
+  \begin{equation*}
+    \abs{K} = \sum_{i=1}^{s} [ Q : P_i \cap Q ].
+  \end{equation*}
+  Note that it must be the case that $[ Q : P_i \cap Q ] > 1$, for some if
+  not all $i$, for otherwise it would imply that $Q \cap P_i$ and that would
+  be a contradiction. Then by Lagrange,
+  \begin{equation*}
+    \abs{K} \equiv 0 \mod p.
+  \end{equation*}
+  This contradicts the fact that $\abs{K} \equiv 1 \mod p$.
+
+  This shows that $Q = P_i$ for some $i \in \left\{ 1, 2, \ldots, s \right\}$,
+  and so $Q$ is a conjugate of $P$.\qed\
+\end{proof}
+
+\begin{note}[Notation]
+  We shall denote $n_p$ as the number of Sylow $p$-subgroups in $G$.
+\end{note}
+
+\begin{thm}[Third Sylow Theorem]\index{Third Sylow Theorem}\label{thm:third_sylow_theorem}
+  Let $p$ be a prime, and that it divides $\abs{G}$, where $G$ is a group.
+  Suppose $\abs{G} = p^n m$, where $n, m \in \mathbb{N}$ and $p \nmid m$.
+  Then
+  \begin{enumerate}
+    \item $n_p \equiv 1 \mod p$; and
+    \item $n_p \mid m$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  Let $P$ be a Sylow $p$-subgroup of $G$, and let
+  \begin{equation*}
+    K = \left\{ gPg^{-1} \mmid g \in G \right\}.
+  \end{equation*}
+  By \hyperref[thm:second_sylow_theorem]{Sylow's second theorem},
+  $n_p = \abs{K}$ as all the conjugates are exactly the Sylow
+  $p$-subgroups. And by our last proof, we saw that $n_p \equiv 1 \mod p$.
+
+  Let $G$ act on $K$ by conjugation. Then by the \hyperref[thm:orbit_stabilizer_theorem]{Orbit-Stabilizer Theorem},
+  \begin{equation*}
+    \abs{G} = \abs{\stab(P)}\abs{\orb(P)}.
+  \end{equation*}
+  Thus
+  \begin{equation}\label{eq:third_sylow_theorem_eq1}
+    p^n m = \abs{ N_G(P) } n_p.
+  \end{equation}
+  Thus $n_p \mid p^n m$. Since $n_p \equiv 1 \not\equiv 0 \mod p$,
+  we must have $n_p \mid m$.\qed\
+\end{proof}
+
+\begin{remark}
+  \begin{enumerate}
+    \item From \cref{eq:third_sylow_theorem_eq1}, we have that
+      \begin{equation*}
+        n_p = [ G : N_G(P) ].
+      \end{equation*}
+    \item \imponote\ Note that
+      \begin{equation*}
+        n_p \equiv 1 \mod p \iff \forall g \in G gPg^{-1} = P \iff P \triangleleft G.
+      \end{equation*}
+  \end{enumerate}
+\end{remark}
+
+\begin{defn}[Simple Group]\index{Simple Group}\label{defn:simple_group}
+  A group is said to be \hlnoteb{simple} if it has no non-trivial normal subgroups.
+\end{defn}
+
+\begin{eg}
+  Prove that there is no simple group of order $56$.
+\end{eg}
+
+\begin{proof}
+  Let $G$ be a group.
+  Note that $56 = 2^3 \cdot 7$. Then $n_7 \equiv 1 \mod 7$ and
+  $n_7 \mid 8 = 2^3$. Thus
+  \begin{equation*}
+    n_7 = 1 \text{ or } n_7 = 8.
+  \end{equation*}
+
+  \hlbnotea{$n_7 = 1$} By the remark above, $G$ has a normal Sylow
+  $7$-subgroup. Thus $G$ is not simple.
+
+  \hlbnotea{$n_7 = 8$} By Lagrange, since $7$ is prime, the distinct
+  Sylow $7$-subgroups of $G$ intersect trivially. Therefore, there
+  are $8 \times 6 = 48$ elements of order $7$ in $G$. But this
+  implies that $56 - 48 = 8$ elements that are not of order $7$.
+  One of them is the identity, thus the remaining $7$ elements must have
+  order $2$ \sidenote{They cannot be of any other order as that would
+  create a cyclic group that is not of order $2$ or $7$, which is
+  impossible.}. This implies that
+  \begin{equation*}
+    n_2 = 7 \equiv 1 \mod 2,
+  \end{equation*}
+  which by our remark means that $G$ has a normal Sylow $2$-subgroup.
+  Thus $G$ is not simple by both accounts.
+\end{proof}
+
+% section the_sylow_theorems_continued (end)
+
+% chapter lecture_3_jan_11th (end)
+
 \appendix
 
 \chapter{Asides and Prior Knowledge}%
@@ -348,7 +517,7 @@ the name with a proposition known as
 \end{thm}
 
 \begin{proof}
-  
+  % TODO: prove the Correspondence Theorem
 \end{proof}
 
 % section correspondence_theorem (end)
