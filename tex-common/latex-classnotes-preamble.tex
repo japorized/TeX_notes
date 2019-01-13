@@ -334,6 +334,8 @@
 \AtBeginDocument{\renewcommand\contentsname{\slshape Table of Contents\normalfont}}
 \cftpagenumbersoff{part}
 
+\newcommand{\tuftepart}[1]{\newgeometry{letterpaper}\part{#1}\restoregeometry}
+
 % Heading formattings
 % chapter format
 \titleformat{\chapter}%
@@ -436,10 +438,12 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand*\dif{\mathop{}\!d}
 \newcommand{\mmid}{\; \middle| \;}
 
+\DeclareMathOperator{\Img}{Img}
+
   % stars on important stuff
-\newcommand{\imponote}{\faStar}
-\newcommand{\vimponote}{\faStar\faStar}
-\newcommand{\vvimponote}{\faStar\faStar\faStar}
+\newcommand{\imponote}{\faStar\ }
+\newcommand{\vimponote}{\faStar\faStar\ }
+\newcommand{\vvimponote}{\faStar\faStar\faStar\ }
 
   % inspiration from: https://tex.stackexchange.com/questions/8720/overbrace-underbrace-but-with-an-arrow-instead#37758
 \newcommand{\overarrow}[2]{

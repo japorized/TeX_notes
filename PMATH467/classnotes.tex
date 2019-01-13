@@ -52,9 +52,7 @@ I shall leave this here for my own notes, in case something happens to my hard c
 
 % chapter preface (end)
 
-\newgeometry{letterspace}
-\part{Point-Set Topology}
-\restoregeometry
+\tuftepart{Point-Set Topology}
 
 \chapter{Lecture 1 Jan 07th}%
 \label{chp:lecture_1_jan_07th}
@@ -234,7 +232,7 @@ more concepts that we shall need down the road.
 
 \begin{proof}
   First, notice that $\Int{\partial A} = \emptyset$.
-  Since $\partial A$ is closed, $\bar{\parital A} = \partial A$.
+  Since $\partial A$ is closed, $\bar{\partial A} = \partial A$.
   Then
   \begin{equation*}
     \partial ( \partial A ) = \bar{\partial A} \setminus \Int{\partial A}
@@ -368,6 +366,228 @@ But why are we allowed to do that?
 % section euclidean_space_continued (end)
 
 % chapter lecture_2_jan_09th (end)
+
+\chapter{Lecture 3 Jan 11th}%
+\label{chp:lecture_3_jan_11th}
+% chapter lecture_3_jan_11th
+
+\section{Euclidean Space (Continued 2)}%
+\label{sec:euclidean_space_continued_2}
+% section euclidean_space_continued_2
+
+\marginnote{The student is recommended to do a quick review for the first 3
+chapters of the recommended text.}
+
+Let $\tilde{X}$ be a metric space, and $p, q \in \tilde{X}$ with $p \neq q$.
+Then we have that $d(p, q) = r > 0$.
+\begin{marginfigure}
+  \centering
+  \begin{tikzpicture}
+    \node[circle,fill,inner sep=1pt,label={270:{$p$}}] at (0, 0) {};
+    \node[circle,fill,inner sep=1pt,label={270:{$q$}}] at (2, 1) {};
+    \draw[latex'-latex'] (0, 0) -- (2, 1) node[midway,fill=dark] {r};
+    \draw[dashed] (0, 0) circle(0.7);
+    \draw[dashed] (2, 1) circle(0.7);
+  \end{tikzpicture}
+  \caption{Idea of separation}\label{fig:idea_of_separation}
+\end{marginfigure}
+Then we must have that
+\begin{equation*}
+  B \left( p, \frac{r}{3} \right) \cap B \left( q, \frac{r}{3} \right) = \emptyset.
+\end{equation*}
+
+\begin{ex}
+  Prove that the above claim is true. (Use the triangle inequality)
+\end{ex}
+
+\begin{proof}
+  Suppose $\exists x \in B \left( p, \frac{r}{3} \right) \cap B \left( q, \frac{r}{3} \right)$.
+  Then
+  \begin{equation*}
+    d(p, x) + d(q, x) < \frac{2r}{3} < r = d(p, q),
+  \end{equation*}
+  which violates the triangle inequality.\qed\
+\end{proof}
+
+We observe here that the two open sets (or balls) ``separate'' $p$ and $q$.
+
+\begin{defn}[Hausdorff / $T_2$]\index{Hausdorff}\index{$T_2$}\label{defn:hausdorff_t_2_}
+  Let $X$ be a topological space. $X$ is said to be \hlnoteb{Hausdorff} or \hlnoteb{$T_2$}
+  iff any $2$ distinct points can be separated by disjoint open sets.
+\end{defn}
+
+\begin{note}
+  \begin{enumerate}
+    \item The Hausdorff space (or $T_2$ space) is an important space;
+      we can only define a metric on spaces that are $T_2$.
+    \item A space is called \hldefn{$T_1$} is for any $p, q \in X$ with $p \neq q$,
+      $\exists U \ni p$ open such that $q \notin U$ and $\exists V \ni q$ open
+      such that $p \notin v$. It is worth noting that a $T_2$ space is also
+      $T_1$.
+  \end{enumerate}
+\end{note}
+
+\begin{eg}[The Discrete Topology]
+  Suppose $X$ is a metric space. For any $x \in X$, we have that $\left\{ x \right\}$ is open.
+  Thus for any $x_1, x_2 \in X$, if $x_1 \neq x_2$, then the open sets
+  $\left\{ x_1 \right\}$ and $\left\{ x_2 \right\}$ separates $x_1$ and $x_2$.
+
+  This is true as we can define the following metric on the space:
+  let $d : X \times X \to \mathbb{R}$ such that
+  \begin{equation*}
+    d(x_1, x_2) = \begin{cases}
+      0 & x_1 = x_2 \\
+      1 & x_1 \neq x_2
+    \end{cases}
+  \end{equation*}
+  This topology is called a \hldefn{discrete topology}, and it is a metric space.
+\end{eg}
+
+Let $X$ be a metric space and $A \subseteq X$. Then there is a metric induced by
+$X$ on $A$, and this in turn induces a topology on $A$.
+
+More generally, if $A \subset X$ where $X$ is some arbitrary topological space,
+then a set $U \subseteq A$ is open iff $U = A \cap V$ for some $V \subseteq X$
+that is open. In other words, a subset $U$ of $A$ is said to be open iff we can
+find an open set $V$ in $X$ such that the intersection of $A$ and $V$ gives us
+$U$.
+
+\begin{ex}
+  Prove that the construction above gives us a topology.
+\end{ex}
+
+\begin{proof}
+  Let $A \subseteq X$. We shall show that $\tau_A$ is a topological space induced
+  by the topological space $\tau$ of $X$. It is clear that $\emptyset \in \tau_A$,
+  since it is open in $X$, and so $A \cap \emptyset = \emptyset$. Since $X$ is open,
+  we have $A \cap X = A$, and so $A \in \tau_A$.
+
+  Now if $\left\{ U_\alpha \right\}_{\alpha \in I} \subseteq \tau_A$, then
+  $\exists V_\alpha \subseteq X$ such that $U_\alpha = A \cap V_\alpha$. Then
+  \begin{equation*}
+    \bigcup_{\alpha \in I} U_\alpha = \bigcup_{\alpha \in I} A \cap V_\alpha
+      = A \cap \bigcup_{\alpha \in I} V_\alpha,
+  \end{equation*}
+  and $\bigcup_{\alpha \in I} V_\alpha$ is open in $X$ by the properties of open
+  sets. Thus $\bigcup_{\alpha \in I} U_\alpha \in \tau_A$.
+
+  If $\left\{ U_i \right\}_{i = 1}^{n} \subset \tau_A$, then again, by the properties
+  of open sets, finite intersection of open sets is open, and so $\bigcap_{i=1}^{n} U_i \in \tau_A$.
+
+  \qed\
+\end{proof}
+
+\begin{note}
+  We can say the same can be said about closed sets of $A$.
+\end{note}
+
+\begin{eg}
+  Let $A \subseteq X$ and consider the function
+  \begin{equation*}
+    \iota_A : A \to X \text{ given by } x \mapsto x,
+  \end{equation*}
+  which is the inclusion map.
+
+  Then $\iota_A$ is continuous when the topology on $A$ is chosen to be the
+  induced subspace topology. This is rather clear; notice that the inverse
+  of the inclusion map brings open sets to open sets.
+\end{eg}
+
+Let $Y$ be an arbitrary topological space. Then let
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzcd}
+     &  & X \\
+     &  &  \\
+    Y \arrow[rr, "f"] \arrow[rruu, "\iota_A \circ f"] &  & A \arrow[uu, "\iota_A"]
+  \end{tikzcd}
+  \caption{Composition of a function and the inclusion map}
+  \label{fig:composition_of_a_function_and_the_inclusion_map}
+\end{figure}
+
+where $f$ is continuous. Then $\iota_A \circ f$ is continuous.
+
+The converse is also true: if $\iota_A \circ f$ is continuous, then $f$ is continuous.
+However, we will not prove this. This property is known as the
+\hlnoteb{characteristic property of the subspace topology}.
+
+\begin{lemma}[Restriction of a Continuous Map is Continuous]\label{lemma:restriction_of_a_continuous_map_is_continuous}
+  Let $X \overset{f}{\to} Y$ be continuous, and $A \subseteq X$
+  \sidenote{Here, $A$ is equipped with the subspace topology}. Then
+  \begin{equation*}
+    f \restriction_{A} : A \to Y
+  \end{equation*}
+  is also continuous.
+\end{lemma}
+
+% section euclidean_space_continued_2 (end)
+
+\section{Connected Spaces}%
+\label{sec:connected_spaces}
+% section connected_spaces
+
+Consider the real line $\mathbb{R}$, and consider two disjoint intervals on $\mathbb{R}$.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[->] (-2, 0) -- (2, 0);
+    \draw[-{Arc Barb[length=5pt,width=25pt]},be-blue] (-2,0) -- (-0.2,0) node[midway,below=15pt] {$U$};
+    \draw[{Arc Barb[length=5pt,width=25pt]}-,be-blue] (0.2,0) -- (2,0) node[midway,below=15pt] {$V$};
+    \draw[{Arc Barb[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},be-red] (-1.5,0) -- (-0.5,0) node[midway,below] {$A_1$};
+    \draw[{Arc Barb[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},be-red] (0.5,0) -- (1.5,0) node[midway,below] {$A_2$};
+  \end{tikzpicture}
+  \caption{Motivation for Connectedness}
+  \label{fig:motivation_for_connectedness}
+\end{figure}
+
+Observe that we may find two open subsets $U$ and $V$ of $\mathbb{R}$ such that $A_1 \subseteq U$
+and $A_2 \subseteq V$, which effectively separates the two intervals on the space $\mathbb{R}$.
+
+\begin{defn}[Disconnectedness]\index{Disconnectedness}\label{defn:disconnectedness}
+  A space $X$ is said to be \hlnoteb{disconnected} iff $X$ can be written as a
+  disjoint union
+  \begin{equation*}
+    X = A_1 \coprod A_2
+  \end{equation*}
+  where $A_1, A_2 \subseteq X$, $A_1 = A_2^C$, that they are both non-empty and open
+  \sidenote{It goes without saying that the two sets are also simultaneously closed.}.
+\end{defn}
+
+\begin{defn}[Connctedness]\index{Connctedness}\label{defn:connctedness}
+  A space $X$ is said to be \hlnoteb{connected} if it is not disconnected.
+\end{defn}
+
+\begin{note}
+  By the above definitions, we have that $X$ is connected iff for any partition
+  $X = A \coprod A^C$ with $A$ being open, either $A$ is $\emptyset$ or $A$ is $X$.
+\end{note}
+
+\begin{eg}
+  The space $\mathbb{R} \setminus \left\{ 0 \right\}$ is disconnected; our disjoint sets
+  are $(-\infty, 0)$ and $(0, \infty)$.
+\end{eg}
+
+However, $\mathbb{R}^2 \setminus \left\{ 0 \right\}$ is connected, but it is not easy to
+describe why.
+
+\begin{defn}[Path]\index{Path}\label{defn:path}
+  \hlwarn{Require clarification} % TODO: get the definition clarified
+\end{defn}
+
+\begin{lemma}[Path Connectedness implies Connectedness]\label{lemma:path_connectedness_implies_connectedness}
+  If a space $X$ is path connected, then it is connected.
+\end{lemma}
+
+\begin{thm}[From Connected Space to Connected Space]\label{thm:from_connected_space_to_connected_space}
+  If $X \overset{f}{\to} Y$ is continuous and $X$ is connected, then
+  $\Img(f)$ is connected.
+\end{thm}
+
+% section connected_spaces (end)
+
+% chapter lecture_3_jan_11th (end)
 
 \appendix
 
