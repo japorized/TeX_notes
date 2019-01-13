@@ -17,6 +17,8 @@
 \DeclareMathOperator{\Img}{Im}
 \DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\id}{id}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -539,6 +541,230 @@ we have
 % section dual_map (end)
 
 % chapter lecture_2_jan_09th (end)
+
+\chapter{Lecture 3 Jan 11th}%
+\label{chp:lecture_3_jan_11th}
+% chapter lecture_3_jan_11th
+
+\section{Dual Map (Continued)}%
+\label{sec:dual_map_continued}
+% section dual_map_continued
+
+\begin{note}
+  Elements in $V^*$ are also called \hldefn{co-vectors}.
+\end{note}
+
+Recall from last lecture that if $T \in L(V, W)$, then it
+induces a dual map $T^* \in L(W^*, V^*)$ such that
+\begin{equation*}
+  (T^* \beta)(v) = \beta (T(v)).
+\end{equation*}
+
+\begin{propo}[Identity and Composition of the Dual Map]\label{propo:identity_and_composition_of_the_dual_map}
+  Let $V$ and $W$ be finite dimensional real vector spaces.
+  \begin{enumerate}
+    \item Supppose $V = W$ and $T = I_V \in L(V)$, then
+      \begin{equation*}
+        (I_V)^* = I_{V^*} \in L(V^*).
+      \end{equation*}
+
+    \item Let $T \in L(V, W)$, $S \in L(W, U)$. Then
+      $S \circ T \in L(V, U)$. Moreover,
+      \begin{equation*}
+        L \left( U^*, V^* \right) \ni ( S \circ T )^* = T^* \circ S^*.
+      \end{equation*}
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Observe that for any $\beta \in V^*$, and any $v \in V$,
+      we have
+      \begin{equation*}
+        ((I_V)^*(\beta))(v) = \beta((I_V)(v)) = \beta(v).
+      \end{equation*}
+      Therefore $(I_V)^* = I_{V^*}$.
+
+    \item Observe that for $\gamma \in U^*$ and $v \in V$, we have
+      \begin{align*}
+        ((S \circ T)^*(\gamma))(v)
+          &= \gamma ( ( S \circ T ) (v) ) \\
+          &= \gamma ( S ( T ( v ) ) ) \\
+          &= S^* ( \gamma T(v) ) \\
+          &= ( T^* \circ S^* )(\gamma)(v),
+      \end{align*}
+      and so $( S \circ T )^* = T^* \circ S^*$ as required.
+  \end{enumerate}\qed\
+\end{proof}
+
+Let $T \in L(V)$, and the dual map $T^* \in L(V^*)$.
+Let $\mathcal{B}$ be a basis of $V$, with the dual basis
+$\mathcal{B}^*$. We may write
+\begin{equation*}
+  A = [T]_{\mathcal{B}} \text{ and } A^* = [T^*]_{\mathcal{B}^*}.
+\end{equation*}
+Note that
+\begin{equation*}
+  T(e_i) = A_i^j e_j \text{ and } T^*(e^i) = (A^*)_j^i e^j.
+\end{equation*}
+Consequently, we have
+\begin{equation*}
+  \langle e^k, T( e_i ) \rangle = A_i^k \text{ and } 
+  \langle T^*(e^i), e_k \rangle = (A^*)_k^i.
+\end{equation*}
+
+From here, notice that by applying $e_k \in V = V^{**}$ to both sides,
+we have % TODO: I don't get this
+\begin{equation*}
+  (A^*)_k^i = e_k ( T^*(e^i) ) = \langle T^* (e^i), e_k \rangle 
+  \overset{(*)}{=} \langle e^i, T(e_k) \rangle = A_k^i.
+\end{equation*}
+Thus $A^*$ is the transpose of $A$, and
+\begin{equation}\label{eq:coordinate_of_t_star_in_v_star_equals_transpose_of_coordinate_of_t_in_v}
+  [ T^* ]_{\mathcal{B}^*} = [ T ]_{\mathcal{B}}^t
+\end{equation}
+where $M^t$ is the transpose of the matrix $M$.
+
+\subsection{Application to Orientations}%
+\label{sub:application_to_orientations}
+% subsection application_to_orientations
+
+Let $\mathcal{B}$ be a basis of $V$. Then $\mathcal{B}$ determines an
+orientation of $V$. Let $\mathcal{B}^*$ be the dual basis of $V^*$.
+So $\mathcal{B}^*$ determines an orientation for $V^*$.
+
+\begin{eg}
+  Suppose $\mathcal{B}$ and $\tilde{\mathcal{B}}$ determines the same
+  orientation of $V$. Does it follow that the dual bases $\mathcal{B}^*$
+  and $\tilde{\mathcal{B}}^*$ determine the same orientation of $V^*$?
+\end{eg}
+
+\begin{proof}
+  Let
+  \begin{align*}
+    \mathcal{B} &= \left\{ e_1, \ldots, e_n \right\} &
+    \tilde{\mathcal{B}} &= \left\{ \tilde{e}_1, \ldots, \tilde{e}_n \right\} \\
+    \mathcal{B}^* &= \left\{ e^1, \ldots, e^n \right\} &
+    \tilde{\mathcal{B}}^* &= \left\{ \tilde{e}^1, \ldots, \tilde{e}^n \right\}
+  \end{align*}
+  Let $T \in L(V)$ such that $T(e_i) = \tilde{e}_i$. By assumption, $\det T > 0$.
+  Notice that
+  \begin{equation*}
+    \delta_j^i = \tilde{e}^i (\tilde{e}_j) = \tilde{e}^i ( Te_j ) = (T^*(\tilde{e}^i))(e_j),
+  \end{equation*}
+  and so we must have $T^*(\tilde{e}^i) = e^i$. By
+  \cref{eq:coordinate_of_t_star_in_v_star_equals_transpose_of_coordinate_of_t_in_v},
+  we have that
+  \begin{equation*}
+    \det T^* = \det T > 0
+  \end{equation*}
+  as well. This shows that $\mathcal{B}^*$ and $\tilde{\mathcal{B}}^*$ determines
+  the same orientation.
+\end{proof}
+
+% subsection application_to_orientations (end)
+
+% section dual_map_continued (end)
+
+\section{The Space of $k$-forms on $V$}%
+\label{sec:the_space_of_k_forms_on_v_}
+% section the_space_of_k_forms_on_v_
+
+\begin{defn}[$k$-Form]\index{$k$-Form}\label{defn:_k_form}
+  Let $V$ be an $n$dimensional vector space. Let $k \geq 1$. A \hlnoteb{$k$-form} on
+  $V$ is a map
+  \begin{equation*}
+    \alpha : \underbrace{V \times V \times \hdots \times V}_{k \text{ times }} \to \mathbb{R}
+  \end{equation*}
+  such that
+  \begin{enumerate}
+    \item (\hlnotea{$k$-linearity / multi-linearity}) if we fix all but one of 
+      the arguments of $\alpha$, then it is a linear map
+      from $V$ to $\mathbb{R}$; i.e. if we fix
+      \begin{equation*}
+        v_1, \ldots, v_{j - 1}, v_{j + 1}, \ldots, v_k \in V,
+      \end{equation*}
+      then the map
+      \begin{equation*}
+        u \mapsto \alpha(v_1, \ldots, v_{j - 1}, u, v_{j + 1}, \ldots, v_k)
+      \end{equation*}
+       is linear in $u$.
+
+    \item (\hlnotea{alternating property}) $\alpha$ is \hlnotea{alternating}
+      (aka \hlnotea{totally skewed-symmetric}) in its $k$ arguments; i.e.
+      \begin{equation*}
+        \alpha ( v_1, \ldots, v_i, \ldots, v_j, \ldots, v_k ) 
+          = \alpha ( v_1, \ldots, v_j, \ldots, v_i, \ldots, v_k ).
+      \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+\begin{eg}
+  The following is an example of the second condition: if $k = 2$, then
+  $\alpha : V \times V \to \mathbb{R}$. Then $\alpha(v, w) = - \alpha(w, v)$.
+
+  If $k = 3$, then $\alpha : V \times V \times V \to \mathbb{R}$. Then we
+  have
+  \begin{align*}
+    \alpha(u, v, w) &= - \alpha(v, u, w) = - \alpha(w, v, u) = - \alpha(u, w, v) \\
+                    &= \alpha(v, w, u) = \alpha(w, u, v).
+  \end{align*}
+\end{eg}
+
+\begin{note}
+  Note that if $k = 1$, then condition 2 is vacuous. Therefore, a $1$-form of
+  $V$ is just an element of $V^* = L(W, \mathbb{R})$.
+\end{note}
+
+\begin{remark}[Permutations]
+  From the last example, we notice that the `sign' of the value changes
+  as we permute more times. To be precise, we are performing \hlnotea{transpositions}
+  on the arguments
+  \sidenote{See \href{https://tex.japorized.ink/PMATH347S18/classnotes.pdf\#defn.13}{PMATH 347}.},
+  i.e. we only swap two of the arguments in a single move.
+  Here are several remarks about permutations from group theory:
+  \begin{itemize}
+    \item A permutation $\sigma$ of $\left\{ 1, 2, \ldots, k \right\}$ is a
+      bijective map.
+    \item Compositions of permutations results in a permutation.
+    \item The set $S_k$ of permutations on the set $\left\{ 1, 2, \ldots, k \right\}$
+      is called a \hlnotea{group}.
+    \item There are $k!$ such permutations.
+    \item For each transposition, we may assign a \hlnotea{parity} of either $-1$ or $1$,
+      and the parity is determined by the number of times we need to perform a transposition
+      to get from $(1, 2, \ldots, k)$ to $(\sigma(1), \sigma(2), \ldots, \sigma(k))$. We
+      usually denote a parity by $\sgn(\sigma)$.
+  \end{itemize}
+
+  The following is a fact proven in group theory: let $\sigma, \tau \in S_k$. Then
+  \begin{align*}
+    \sgn(\sigma \circ \tau) &= \sgn(\sigma) \cdot \sgn(\tau) \\
+    \sgn(\id) &= 1 \\
+    \sgn(\tau) &= \sgn(\tau^{-1}).
+  \end{align*}
+\end{remark}
+
+Using the above remark, we can rewrite condition 2 as follows:
+
+\begin{note}[Rewrite of condition 2 for \cref{defn:_k_form}]
+  $\alpha$ is alternating, i.e.
+  \begin{equation*}
+    \alpha(v_{\sigma(1)}, \ldots, v_{\sigma(k)}) = \sgn(\sigma) \cdot \alpha(v_1, \ldots, v_k),
+  \end{equation*}
+  where $\sigma \in S_k$.
+\end{note}
+
+\begin{remark}
+  If $\alpha$ is a $k$-form on $V$, notice that
+  \begin{equation*}
+    \alpha(v_1, \ldots, v_k) = 0
+  \end{equation*}
+  if \hlimpo{any $2$ of the arguments are equal}. 
+\end{remark}
+
+% section the_space_of_k_forms_on_v_ (end)
+
+% chapter lecture_3_jan_11th (end)
 
 \appendix
 
