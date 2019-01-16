@@ -17,7 +17,7 @@ title: Japorized's LaTeX Notes
 description: >- # this means to ignore newlines until "baseurl:"
   This site is a catalog of my notes for my university courses and my own studies
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://japorized.github.io/TeX_notes" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://tex.japorized.ink" # the base hostname & protocol for your site, e.g. http://example.com
 author: Japorized
 # twitter_username: jekyllrb
 # github_username:  jekyll
