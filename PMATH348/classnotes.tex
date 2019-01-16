@@ -152,9 +152,9 @@ we have...
 \label{chp:lecture_2_jan_09th}
 % chapter lecture_2_jan_09th
 
-\section{The Sylow Theorems}%
-\label{sec:the_sylow_theorems}
-% section the_sylow_theorems
+\section{Sylow Theory}%
+\label{sec:sylow_theory}
+% section sylow_theory
 
 From the \hyperref[thm:orbit_decomposition_theorem]{Orbit Decomposition Theorem}, one special case is when $G$ acts on $X = G$ by conjugation.
 
@@ -305,7 +305,7 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   Let $N = N_G(P)$, and let $H = Q \cap N$. WTS $H \subseteq Q \cap P$.
   Since $H = Q \cap N \subseteq Q$, it suffices to show that $H \subseteq P$.
   Since $P$ is a Sylow $p$-subgroup, let $\abs{P} = p^n$. By Lagrange,
-  we have that $\abs{H} = p^m$ for some $m \leq n$. Since $P \trianglleft N$,
+  we have that $\abs{H} = p^m$ for some $m \leq n$. Since $P \triangleleft N$,
   we have that $HP \leq N$ 
   \sidenote{See \href{https://tex.japorized.ink/PMATH347S18/classnotes.pdf\#thm.30}{PMATH 347}}.
   Moreover, we have that
@@ -320,7 +320,7 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   as required.\qed\
 \end{proof}
 
-% section the_sylow_theorems (end)
+% section sylow_theory (end)
 
 % chapter lecture_2_jan_09th (end)
 
@@ -328,9 +328,9 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
 \label{chp:lecture_3_jan_11th}
 % chapter lecture_3_jan_11th
 
-\section{The Sylow Theorems (Continued)}%
-\label{sec:the_sylow_theorems_continued}
-% section the_sylow_theorems_continued
+\section{Sylow Theory (Continued)}%
+\label{sec:sylow_theory_continued}
+% section sylow_theory_continued
 
 \begin{lemma}[Counting The Conjugates of a Sylow $p$-Subgroup]\label{lemma:counting_the_conjugates_of_a_sylow_p_subgroup}
   Let $G$ be a finite group, and $p$ a prime such that $p \mid \abs{G}$. Let
@@ -352,7 +352,7 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   From the definition of $K$, and the fact that $Q$ acts on $K$,
   we have
   \begin{align*}
-    \abs{K} &= \sum_{i=1}^{r} \abs{ \Orb(P_i) } \\
+    \abs{K} &= \sum_{i=1}^{r} \abs{ \orb(P_i) } \\
             &= \sum_{i=1}^{r} \abs{ Q } / \abs{ \stab(P_i) } \quad \hyperref[thm:orbit_stabilizer_theorem]{\text{orbit-stabilizer}} \\
             &= \sum_{i=1}^{r} \abs{ Q } / \abs{ N_G(P_i) \cap Q } \quad \text{ by the action } \\
             &= \sum_{i=1}^{r} [ Q : N_G(P_i) \cap Q ] \quad \text{ by definition } \\
@@ -450,8 +450,10 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
       \end{equation*}
     \item \imponote\ Note that
       \begin{equation*}
-        n_p \equiv 1 \mod p \iff \forall g \in G gPg^{-1} = P \iff P \triangleleft G.
+        n_p = 1 \iff \forall g \in G \; gPg^{-1} = P \iff P \triangleleft G.
       \end{equation*}
+      However, note that $P$ \hlimpo{may be trivial}! This means that if $G$
+      is simple, it does not imply that $n_p = 1$.
   \end{enumerate}
 \end{remark}
 
@@ -474,12 +476,13 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   \hlbnotea{$n_7 = 1$} By the remark above, $G$ has a normal Sylow
   $7$-subgroup. Thus $G$ is not simple.
 
-  \hlbnotea{$n_7 = 8$} By Lagrange, since $7$ is prime, the distinct
-  Sylow $7$-subgroups of $G$ intersect trivially. Therefore, there
-  are $8 \times 6 = 48$ elements of order $7$ in $G$. But this
-  implies that $56 - 48 = 8$ elements that are not of order $7$.
-  One of them is the identity, thus the remaining $7$ elements must have
-  order $2$ \sidenote{They cannot be of any other order as that would
+  \hlbnotea{$n_7 = 8$} By Lagrange, since $7$ is prime, by the Finite
+  Abelian group structure, the distinct Sylow $8$-subgroups of $G$
+  intersect trivially. Therefore, there are $8 \times 6 = 48$ elements 
+  of order $7$ in $G$. But this implies that $56 - 48 = 8$ elements that
+  are not of order $7$.  One of them is the identity,
+  thus the remaining $7$ elements must have order $2$ 
+  \sidenote{They cannot be of any other order as that would
   create a cyclic group that is not of order $2$ or $7$, which is
   impossible.}. This implies that
   \begin{equation*}
@@ -489,9 +492,157 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   Thus $G$ is not simple by both accounts.
 \end{proof}
 
-% section the_sylow_theorems_continued (end)
+% section sylow_theory_continued (end)
 
 % chapter lecture_3_jan_11th (end)
+
+\chapter{Lecture 4 Jan 14th}%
+\label{chp:lecture_4_jan_14th}
+% chapter lecture_4_jan_14th
+
+\section{Sylow Theory (Continued 2)}%
+\label{sec:sylow_theory_continued_2}
+% section sylow_theory_continued_2
+
+\begin{remark}
+  \begin{enumerate}
+    \item Let $p \neq q$ both be primes, and $p, q \mid \abs{ G }$. Let
+      $H_p$ and $H_q$ be a Sylow $p$-subgroup and a Sylow $q$-subgroup of $G$,
+      respectively. By Lagrange's Theorem, we must have that
+      $H_p \cap H_q = \left\{ e \right\}$. Then
+      \begin{equation*}
+        \abs{ H_p \cup H_q } = \abs{ H_p } + \abs{ H_q } - 1.
+      \end{equation*}
+
+    \item Let $\abs{ G } = pm$ and $p \nmid m$, where $p$ is prime. If $H, K$ are
+      Sylow $p$-subgroups of $G$ with $H \neq K$, then $H \cap K = \left\{ e \right\}$.
+  \end{enumerate}
+\end{remark}
+
+\begin{eg}
+  % TODO : Wait what!?? Isn't r^3 = 1? This was given as a warning. See handwritten notes
+  Note that the second remark is not true if $G = D_6$. Notice that
+  \begin{equation*}
+    H = \langle 1, s \rangle, \quad K = \langle 1, rs \rangle
+  \end{equation*}
+  are both Sylow $2$-subgroups of $D_6$ and $H \neq K$, and their intersection is
+  trivial.
+\end{eg}
+
+\begin{eg}
+  Let $\abs{ G } = pq$ where $p, q$ are primes with $p < q$ and $p \nmid q - 1$.
+  Then $\abs{G}$ is cyclic.
+\end{eg}
+
+\begin{proof}
+  By the Third Sylow Theorem, $n_p \equiv 1 \mod p$ and $n_p \mid q$. Notice that $n_p = 1$,
+  since if $n_p = q$, then $n_p \equiv 1 \mod p \implies p \mid q - 1$, contradicting our
+  assumption. By our remark last lecture, $G$ has a normal Sylow $p$-subgroup, which we shall
+  call $H_p$.
+
+  On the other hand, $n_q \equiv 1 \mod q$ and $n_q \mid p$. Since $p < q$, $q \nmid p - 1$,
+  and so the same argument as before holds. Hence $n_q = 1$, and so $G$ has a normal Sylow
+  $q$-subgroup.
+
+  Since $H_p \triangleleft G$, we know that $H_p H_q \leq G$, and we notice that
+  \begin{equation*}
+    \abs{ H_p H_q } = \frac{\abs{ H_p } \abs{ H_q }}{\abs{ H_p \cap H_q }} = pq = \abs{ G }.
+  \end{equation*}
+  Thus $G = H_p H_q$. Let $a, b \in G$. If $a, b$ is either both in $H_p$ or both in $H_q$,
+  then $ab = ba$ \sidenote{Crap, I don't remember why... 
+    % TODO: figure out why
+  }.
+  WMA $a \in H_p$ and $b \in H_q$. By our first remark today, note that 
+  $H_p \cap H_q = \left\{ e \right\}$. Then, observe that
+  \begin{equation*}
+    \underbrace{aba^{-1}}_{H_q} \underarrow{b^{-1}}{H_q} \in H_q 
+    \qquad \underarrow{a}{H_p} \underbrace{ba^{-1}b^{-1}}_{H_p} \in H_p
+  \end{equation*}
+  Thus $aba^{-1}b^{-1} = e \implies ab = ba$. So $G$ is abelian. By the Fundamental Theorem
+  of Finite Abelian Groups
+  \begin{equation*}
+    G \simeq \mathbb{Z}_p \times \mathbb{Z}_q \simeq \mathbb{Z}_{pq},
+  \end{equation*}
+  which is cyclic.\qed\
+\end{proof}
+
+\begin{eg}
+  By the Fundamental Theorem of Finite Abelian Groups
+  \begin{equation*}
+    S_3 \simeq \mathbb{Z}_2 \times \mathbb{Z}_3,
+  \end{equation*}
+  and $\abs{ S_3 } = 6 = 2 \cdot 3$, is not cyclic.
+\end{eg}
+
+\begin{eg}
+  If $\abs{ G } = 30$, then $G$ has a subgroup isomorphic to $\mathbb{Z}_{15}$.
+  Note that $\abs{ G } = 2 \cdot 3 \cdot 5$. By the Third Sylow Theorem,
+  \begin{equation*}
+    n_5 \equiv 1 \mod 5 \text{ and } n_5 \mid 6 \implies n_5 = 1 \text{ or } 6
+  \end{equation*}
+  and
+  \begin{equation*}
+    n_3 \equiv 1 \mod 3 \text{ and } n_3 \mid 10 \implies n_3 = 1 \text{ or } 10.
+  \end{equation*}
+  Suppose $n_5 = 6$ and $n_3 = 10$. Since the Sylow $3$-subgroups and Sylow 
+  $5$-subgroups intersect trivially, this accounts for 
+  $(6 \times 4) + ( 10 \times 2 ) = 44$ elements but $\abs{G} = 30 < 44$.
+  Thus we must have $n_5 = 1$ or $n_3 = 1$. Thus $G$ is not simple.
+
+  Let $H_3$ and $H_5$ be Sylow $3$- and $5$-subgroups, respectively. WLOG, suppose
+  $H_3 \triangleleft G$. Then $H_3 H_5 \leq G$, and notice that $\abs{H_3 H_5} = 15$.
+  Since $15 = 3 \cdot 5$ and $3 \nmid 4 = 5 - 1$, we know that $H_3 H_5 \simeq \mathbb{Z}_{15}$
+  by an earlier example.
+\end{eg}
+
+\begin{eg}\cref{eg:g_60_is_simple}
+  Let $\abs{ G } = 60$ with $n_5 > 1$. Then $G$ is simple.
+\end{eg}
+
+This is an important example for it is with this that we can prove the following:
+
+\begin{crly}[$A_5$ is Simple]\label{crly:_a_5_is_simple}
+  $A_5$ is simple.
+\end{crly}
+
+\begin{proof}
+  Note that $\abs{ A_5 } = \frac{5!}{2} = 60$, and
+  \begin{equation*}
+    \lra{\begin{pmatrix} 1 & 2 & 3 & 4 & 5 \end{pmatrix}} 
+    \text{ and } \lra{\begin{pmatrix} 1 & 3 & 2 & 4 & 5 \end{pmatrix}}
+  \end{equation*}
+  are both Sylow $5$-subgroups that are distinct (one has odd \hlnotea{parity} while the
+  other has even).
+\end{proof}
+
+\begin{proof}[For \cref{eg:g_60_is_simple}]
+  Suppose $n_5 > 1$. Notice that $60 = 2^2 \cdot 3 \cdot 5$. By \cref{thm:third_sylow_theorem},
+  $n_5 \equiv 1 \mod 5$ and $n_5 \mid 12$, and thus $n_5 = 6$. This accounts for
+  $6 \times 4 + 1 = 25$ elements. Now suppose $H \triangleleft G$ is proper and non-trivial.
+
+  If $5 \mid \abs{ H }$, then $H$ contains a Sylow $5$-subgroup of $G$. Since
+  $H \triangleleft G$, $H$ contains all the conjugates of this Sylow $5$-subgroup. Thus by
+  our argument above, we have that $\abs{ H } \geq 25$ \sidenote{These are the $25$ elements
+  that were found in the last paragraph.}. Also, $H \mid 60$. Thus it must be that
+  $\abs{ H } = 30$. But then by the last example, $n_5 = 1$, a contradiction.
+
+  So $5 \nmid \abs{ H }$. By Lagrange, it remains that
+  \begin{equation*}
+    \abs{ H } = 2, \, 3, \, 4, \, 6\, \text{ or } 12.
+  \end{equation*}
+
+  \hlbnoted{Case A} $\abs{ H } = 12 = 2^2 \cdot 3$.\sidenote{
+  \begin{ex}
+    Prove that either $n_2 = 1$ or $n_3 = 1$.
+  \end{ex}}
+  So $H$ contains a normal Sylow $2$- or $3$-subgroup that is normal in $G$.
+\end{proof}
+
+The proof shall be continued next lecture.
+
+% section sylow_theory_continued_2 (end)
+
+% chapter lecture_4_jan_14th (end)
 
 \appendix
 
