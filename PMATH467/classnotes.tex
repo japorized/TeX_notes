@@ -601,7 +601,7 @@ describe why.
 
 \begin{defn}[Locally Connected]\index{Locally Connected}\label{defn:locally_connected}
   We say that $X$ is \hlnoteb{locally connected} at $x$ if for every open set $V$
-  containing $x$ there exists a connected, open set $U$ with $x ∈ U ⊂ V$. We say that
+  containing $x$ there exists a connected, open set $U$ with $x \in U \subseteq V$. We say that
   the space $X$ is \hlnoteb{locally connected} if it is locally connected $\forall x \in X$.
 \end{defn}
 
@@ -987,7 +987,284 @@ From \cref{eg:basis_of_r_n}, we have
 
 % chapter lecture_5_jan_16th (end)
 
-% section manifolds_continued (end)
+\chapter{Lecture 6 Jan 18th}%
+\label{chp:lecture_6_jan_18th}
+% chapter lecture_6_jan_18th
+
+\section{Manifolds (Continued 2)}%
+\label{sec:manifolds_continued_2}
+% section manifolds_continued_2
+
+\subsection{The $1$-Sphere $S^1$ (Continued)}%
+\label{sub:the_1_sphere_s_1_continued}
+% subsection the_1_sphere_s_1_continued
+
+\paragraph{Set theoretic view of $S^1$}
+We showed that $S^1$ is a manifold. We can, in fact, set theoretically, look
+at $S^1$ as $A = [0, 1]$ glued at the endpoints, i.e. we \hlnotea{identify} 
+the points $0$ and $1$ as `the same', and label this notion as $0 \sim 1$.
+
+\paragraph{Topological view of $S^1$}
+Topologically, for $0 \sim 1$ in $A$, we can construct an open set around the
+point such that the open set is properly contained in $A$.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]}] (-2, 0) -- (2, 0);
+    \draw[-{Arc Barb[length=5pt,width=15pt]},be-blue] (-2,0) -- (-1,0);
+    \draw[{Arc Barb[length=5pt,width=15pt]}-,be-blue] (1,0) -- (2,0);
+    \node[circle,fill=be-blue,inner sep=1.5pt] at (-2, 0) {};
+    \node[circle,fill=be-blue,inner sep=1.5pt] at (2, 0) {};
+  \end{tikzpicture}
+  \caption{Topological representation of $A$}
+  \label{fig:topological_representation_of_a}
+\end{figure}
+
+But how can we describe this notion mathematically so?
+
+\newthought{Consider} the real line as follows:
+
+\begin{figure*}[ht]
+  \centering
+  \begin{tikzpicture}[scale=1.5]
+    \draw[->] (-5, 0) -- (5, 0);
+    \foreach \x in {-4,-3,...,4} {
+      \draw[dashed,color=be-blue] (\x,0.5) -- (\x,-0.5);
+      \node[circle,fill,inner sep=2pt,label={270:{$\x$}}] at (\x, 0) {};
+      \node[label={[label distance=1]above:{$T^{\x}(a)$}}] at (\x + 0.3, 0) {$( \times )$};
+      \node at (\x + 0.7, 0) {$\blacktriangle$};
+    }
+  \end{tikzpicture}
+  \caption{Breaking down the real line into parts}
+  \label{fig:breaking_down_the_real_line_into_parts}
+\end{figure*}
+
+Let's define $T : \mathbb{R} \to \mathbb{R}$ such that $x \mapsto x + 1$. Clearly
+so, $T$ is bijective and, in particular, has an inverse $x \mapsto x - 1$.
+
+Notice that within each interval $[x, x + 1]$, we can find a $\times$ and
+$\blacktriangle$ at the same distance from $x$. Also, notice that we can use the
+same radius for $\times$ such that the open ball around $\times$ sits in $[x, x + 1]$
+for each $x \in \mathbb{Z}$.
+
+Thus, instead of studying the entire real line at once, we can reduce our attention
+only to $[0, 1]$, and simply scale the interval with a `scalar multiplication' to
+get to wherever we want on the real line.
+
+Now let
+\begin{equation*}
+  G := \left\{ T^k \mmid k \in \mathbb{Z} \right\},
+\end{equation*}
+which is evidently a \hldefn{group}. Furthermore, every element in $G$ is a
+homeomorphism to $\mathbb{R}$. Let $G$ \hldefn{act on} $\mathbb{R}$, and for
+$a \in \mathbb{R}$, consider the \hldefn{orbit} of $a$, which is denoted as
+\begin{equation*}
+  G \cdot a := \left\{ T^k (a) \mmid k \in \mathbb{Z} \right\}.
+\end{equation*}
+Then
+\begin{equation*}
+  S^1 \simeq \text{ the space of all orbits of } G \text{ acting on } \mathbb{R} =: \mathbb{R} / G,
+\end{equation*}
+where $\simeq$ represents \hyperref[defn:homeomorphism]{homeomorphism}.
+\sidenote{$\mathbb{R} / G$ is the \hldefn{quotient space} of $\mathbb{R}$ over $G$.}
+Also, notice that here, $G$ is effectively $\mathbb{Z}$.
+
+This realization implies the existence of some topology on $S^1$.
+
+\newthought{Thus far}, we have seen that we may look at $S^1$
+\begin{itemize}
+  \item set theoretically: as $A = [0, 1]$ with glued endpoints; and
+  \item topologically: as $\mathbb{R} \setminus \mathbb{Z}$.
+\end{itemize}
+
+\paragraph{$S^1$ as a topological group}
+Since $\mathbb{C} \simeq \mathbb{R}^2$, we may think of $S^1$ as a
+sphere on the complex plane.
+\begin{figure*}[ht]
+  \centering
+  \begin{tikzpicture}[scale=1.3]
+    \draw[->] (-2,0) -- (2, 0);
+    \draw[->] (0,-2) -- (0, 2);
+    \draw (0, 0) circle(1);
+    \draw (0, 0) -- (0.7071067811865475244,0.7071067811865475244) 
+      node[circle,fill,inner sep=1pt,label={45:{$z_1 = e^{i \theta_1}$}}] {};
+    \draw (0, 0) -- (-0.7071067811865475244,0.7071067811865475244) 
+      node[circle,fill,inner sep=1pt,label={135:{$z_2 = e^{i \theta_2}$}}] {};
+    \draw[dashed] (0, 0) -- (-0.7071067811865475244,-0.7071067811865475244) 
+      node[circle,fill,inner sep=1pt,label={225:{$z_1 z_2 = e^{i ( \theta_1 + \theta_2 )}$}}] {};
+    \node[scale=1.3,right] at (1, 1.5) {$S^1 = \left\{ z \in \mathbb{C} \mid \abs{ z } = 1 \right\} = \left\{ e^{i \theta} \mid \theta \in \mathbb{R} \right\}$};
+  \end{tikzpicture}
+  \caption{$S^1$ on the complex plane}
+  \label{fig:_s_1_on_the_complex_plane}
+\end{figure*}
+We see that this `group' takes on the operation of adding the indices
+of the exponents. Thus $G = ( S^1, \cdot )$. Notice that $G$ is indeed
+a group equipped with said operation, and for each $z_1 \in G$, there
+exists $z_1^{-1} = \frac{1}{z_1} \in G$ such that 
+$z_1 \cdot \frac{1}{z_1} = 1$.
+
+Furthermore, the function
+\begin{gather*}
+  \iota : S^1 \to S^1 \text{ given by } z \mapsto \frac{1}{z} \\
+  \text{ which is } e^{i \theta} \mapsto e^{- i \theta}
+\end{gather*}
+is continuous.
+
+Also, the function
+\begin{equation*}
+  P : S^1 \times S^1 \to S^1 \text{ given by } (z_1, z_2) \mapsto z_1 z_2
+\end{equation*}
+is continuous.
+
+\begin{defn}[Topological Group]\index{Topological Group}\label{defn:topological_group}
+  If $G$ is a group, and functions $\iota$ and $P$ as defined above,
+  if both $\iota$ and $P$ are continuous, then we say that $G$ is a
+  \hlnoteb{topological group}.
+\end{defn}
+
+\paragraph{$S^1$ as a moduli space}
+
+\begin{defn}[Moduli Space]\index{Moduli Space}\label{defn:moduli_space}
+  A \hlnoteb{moduli space} is the space of all lines passing through
+  the origin.
+\end{defn}
+
+On $\mathbb{R}^2$, we have
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[->] (-2, 0) -- (2, 0);
+    \draw[->] (0, -2) -- (0, 2);
+    \draw (0, 0) circle(1);
+
+    \clip (-2, -2) rectangle (2, 2);
+    \foreach \m in {-3,-2.5,...,3} {
+      \draw[color=be-blue] plot ({\x}, {\m * \x});
+    }
+  \end{tikzpicture}
+  \caption{The moduli space on $\mathbb{R}^2$}
+  \label{fig:the_moduli_space_on_r_2_}
+\end{figure}
+
+First, how can we understand `closeness' in a moduli space?
+We can actually look at the difference in the radians of each
+line, or really just $x / 360$ and compare the $x$'s.
+
+Also, notice that each line passes through $S^1$ twice. We can
+indeed avoid this problem by shifting $S^1$ to one side, as
+shown in \cref{fig:shifted_s_1_for_the_moduli_space}.
+\begin{marginfigure}
+  \centering
+  \begin{tikzpicture}
+    \draw[->] (-1, 0) -- (3, 0);
+    \draw[->] (0, -2) -- (0, 2);
+    \draw (1, 0) circle(1);
+    
+    \clip (-2, -2) rectangle (3, 2);
+    \foreach \m in {-3,-2.5,...,3} {
+      \draw[color=be-blue] plot ({\x}, {\m * \x});
+    }
+  \end{tikzpicture}
+  \caption{Shifted $S^1$ for the moduli space}\label{fig:shifted_s_1_for_the_moduli_space}
+\end{marginfigure}
+Now each line intersects $S^1$ at the origin and another
+point on $S^1$, and this intersection is in fact unique.
+
+\subsubsection{The space of $S^1 \times S^1$}%
+\label{ssub:the_space_of_s_1_times_s_1_}
+% subsubsection the_space_of_s_1_times_s_1_
+
+Observe that the product of two manifolds is a manifold
+\sidenote{This is called a \hldefn{product space}.}.
+
+\newthought{Consider} using the set theoretical viewpoint,
+with credits to \hlnotea{Felix Klein}, the following figure
+\begin{figure*}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]}] (0, 0) -- (2, 0);
+    \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]}] (0, 0) -- (0, 2);
+    \node[circle,fill,inner sep=2pt] at (0, 0) {};
+    \node[circle,fill,inner sep=2pt] at (2, 0) {};
+    \draw (0, 2) -- (2, 2) -- (2, 0);
+    \node at (1, 0) {$>$};
+    \node at (1, 2) {$>$};
+    \node[rotate=90] at (0, 1) {$>>$};
+    \node[rotate=90] at (2, 1) {$>>$};
+
+    \node at (3, 1) {$\leadsto$};
+
+    \draw (4, 0.5) arc(-90:90:0.25 and 0.5)
+      node[midway,rotate=90] {$>>$};
+    \draw (4, 0.5) arc(-90:-270:0.25 and 0.5);
+    \draw (4, 1.5) -- (6, 1.5) node[midway] {$>$};
+    \draw (4, 0.5) -- (6, 0.5) node[midway] {$>$};
+    \draw (6, 0.5) arc(-90:90:0.25 and 0.5)
+      node[midway,rotate=90] {$>>$};
+    \draw[dashed] (6, 0.5) arc(-90:-270:0.25 and 0.5);
+
+    \node at (7, 1) {$\leadsto$};
+
+    \draw (8.3,1) to[bend left] (8.8,1);
+    \draw (8.1,1.1) to[bend right] (9,1.1);
+    \draw[rotate=0] (8.5,1) ellipse (30pt and 15pt);
+  \end{tikzpicture}
+  \caption{$S^1 \times S^1$ becomes a cylinder by identifying the edges}
+  \label{fig:_s_1_times_s_1_becomes_a_cylinder_by_identifying_the_edges}
+\end{figure*}
+By joining the sides with $>$, where we identify the endpoints,
+we can go from the figure introduced by Klein to a cylinder. Then
+by identifying the sides with $>>$, we get a \hldefn{torus}.
+
+\newthought{Now on} a Cartesian plane, observe that
+\begin{figure*}[ht]
+  \centering
+  \begin{tikzpicture}
+    \foreach \z in {-2,-1,...,3} {
+      \draw[dashed,color=be-blue!50!dark] (\z, -2) -- (\z, 2);
+    }
+    \draw[->] (-2, 0) -- (3, 0);
+    \draw[->] (0, -2) -- (0, 2);
+    \draw (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) --cycle;
+    \node at (0.5, 0) {$>$};
+    \node at (0.5, 1) {$>$};
+    \node[rotate=90] at (0, 0.5) {$>>$};
+    \node[rotate=90] at (1, 0.5) {$>>$};
+
+    \draw[->] (2, 1) to[bend left] (5,1);
+
+    \draw (4, -0.5) arc(-90:90:0.25 and 0.5)
+      node[midway,rotate=90] {$>>$};
+    \draw (4, -0.5) arc(-90:-270:0.25 and 0.5);
+    \draw (4, 0.5) -- (6, 0.5) node[midway] {$>$};
+    \draw (4, -0.5) -- (6, -0.5) node[midway] {$>$};
+    \draw (6, -0.5) arc(-90:90:0.25 and 0.5)
+      node[midway,rotate=90] {$>>$};
+    \draw[dashed] (6, -0.5) arc(-90:-270:0.25 and 0.5);
+
+    \node at (8, 0) {$\simeq \mathbb{R}^2 / G$};
+  \end{tikzpicture}
+  \caption{Klein's figure on a Cartesian plane to a cylinder}
+  \label{fig:klein_s_figure_on_a_cartesian_plane_to_a_cylinder}
+\end{figure*}
+
+\noindent
+where we define $G = \left\{ T^k \mmid k \in \mathbb{Z} \right\}$ as before,
+for $T ((x, y)) = (x + 1, y)$. Now on a similar note, define 
+$R : \mathbb{R} \to \mathbb{R}$ by $R((x, y)) = (x, y + 1)$. Then let
+$G_2 = \left\{ R^k \mmid k \in \mathbb{Z} \right\}$. Thus
+\begin{equation*}
+  \mathbb{R}^2 / G \oplus G_2 \simeq \mathbb{R}^2 / \mathbb{Z} \oplus \mathbb{Z}.
+\end{equation*}
+
+% subsubsection the_space_of_s_1_times_s_1_ (end)
+
+% subsection the_1_sphere_s_1_continued (end)
+
+% section manifolds_continued_2 (end)
+
+% chapter lecture_6_jan_18th (end)
 
 \appendix
 
