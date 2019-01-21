@@ -10,7 +10,10 @@
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
 \institution{University of Waterloo}
 
+\usepackage{fontspec-luatex}
 \input{latex-classnotes-preamble.tex}
+\setmainfont[Ligatures=TeX]{Times Newer Roman}
+\setsansfont[Ligatures=TeX]{Helvetica Neue LT Std}
 
 \DeclareMathOperator{\stab}{Stab}
 \DeclareMathOperator{\orb}{Orb}
@@ -40,7 +43,7 @@ This is a 3 part course; it is separated into
 
 % chapter preface (end)
 
-\part{Sylow's Theorem}
+\tuftepart{Sylow's Theorem}
 
 \chapter{Lecture 1 Jan 07th}%
 \label{chp:lecture_1_jan_07th}
@@ -595,7 +598,7 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   by an earlier example.
 \end{eg}
 
-\begin{eg}\cref{eg:g_60_is_simple}
+\begin{eg}\label{eg:g_60_is_simple}
   Let $\abs{ G } = 60$ with $n_5 > 1$. Then $G$ is simple.
 \end{eg}
 
@@ -643,6 +646,166 @@ The proof shall be continued next lecture.
 % section sylow_theory_continued_2 (end)
 
 % chapter lecture_4_jan_14th (end)
+
+\tuftepart{Fields}
+
+\chapter{Lecture 5 Jan 14th}%
+\label{chp:lecture_5_jan_14th}
+% chapter lecture_5_jan_14th
+
+\section{Sylow Theory (Continued 3)}%
+\label{sec:sylow_theory_continued_3}
+% section sylow_theory_continued_3
+
+We shall continue with the last proof from where we left off.
+
+\begin{proof}[\cref{eg:g_60_is_simple} continued]
+  \hlbnoted{Case A} $\abs{H} = 12$. WLOG, let $K$ be a normal Sylow $3$-subgroup
+  of $H$, which is also normal in $G$ \sidenote{In Sylow Theory, normality is
+  transitive.}.
+
+  \noindent
+  \hlbnoted{Case B} $\abs{H} = 6$. $H$ would then have a normal Sylow $3$-subgroup,
+  which is normal in $G$. We shall also call this subgroup $K$.
+
+  \noindent
+  By replacing $H$ with $K$ if necessary, wma $\abs{ H } \in \left\{ 2, 3, 4 \right\}$.
+  Consider $\bar{G} = G / H$. Then $\abs{ \bar{G} } \in \left\{ 15, 20, 30 \right\}$.
+  \sidenote{
+  \begin{ex}
+    Prove that $\bar{G}$ has a normal Sylow $5$-subgroup in all the three possible
+    orders of $\bar{G}$.
+  \end{ex}}
+  In any case, $\bar{G}$ has a normal Sylow $5$-subgroup. Call this normal subgroup 
+  $\bar{P}$. By \hyperref[thm:correspondence_theorem]{correspondence}, $\bar{P} = P / H$
+  where $P$ is a normal subgroup of $G$ \sidenote{Note: correspondence works for the
+  normal case as well.}. Thus $P$ is a proper non-trivial normal subgroup of $G$.
+  Also,
+  \begin{equation*}
+    \abs{ P } = \abs{ \bar{P} } \cdot \abs{ H } = 5 \cdot \abs{ H }.
+  \end{equation*}
+  Thus $5 \mid \abs{ P }$, putting us back to the case where $5 \mid \abs{ H }$.
+  Thus $G$ does not have a non-trivial normal subgroup, i.e. $G$ is simple.\qed\
+\end{proof}
+
+\section{Review of Ring Theory}%
+\label{sec:review_of_ring_theory}
+% section review_of_ring_theory
+
+Let $F$ be a \hlnotea{field}, and $I$ be an \hlnotea{ideal} of $F[x]$, its
+\hlnotea{polynomial ring}. Since $F[x]$ is a PID, we have $I = \langle p(x) \rangle$
+for some $p(x) \in F[x]$.
+
+Moreover, $I$ is \hlnotea{maximal} iff $p(x)$ is \hlnotea{irreducible}.
+
+Thus we observe that
+\begin{center}
+  $F[x]/I$ is a field iff $I = \langle p(x) \rangle$ is maximal iff $p(x) \in F[x]$ is irreducible.
+\end{center}
+
+Therefore, to talk about fields, we need to understand irreducibles.
+
+\section{Irreducibles}%
+\label{sec:irreducibles}
+% section irreducibles
+
+\begin{defn}[Irreducible]\index{Irreducible}\label{defn:irreducible}
+  Let $R$ be an integral domain (ID) \sidenote{\hldefn{Integral domains} are commutative
+  rings that has no zero divisors.}. We say that $f(x) \in R[x]$ is \hlnoteb{irreducible}
+  (over $R$) if
+  \begin{enumerate}
+    \item $f(x) \neq 0$;
+    \item $f(x) \notin R^\times$, where $R^\times$ is the set of units of $R$;
+    \item whenever $f(x) = g(x) h(x)$, where $g(x), h(x) \in R[x]$, then either 
+      $g(x) \in R^\times$ or $h(x) \in R^\times$.
+  \end{enumerate}
+  If $f(x) \neq 0$, $f(x) \notin R^\times$ and $f(x)$ is not irreducible, we say that
+  $f(x)$ is \hldefn{reducible} (over $R$).
+\end{defn}
+
+\begin{eg}
+  $f(x) = x^2 - 2$ is irreducible over $\mathbb{Q}$ but reducible over $\mathbb{R}$ as
+  \begin{equation*}
+    f(x) = \left(x - \sqrt{2}\right)\left(x + \sqrt{2}\right).
+  \end{equation*}
+\end{eg}
+
+Let $F$ be a field, $f(x) \in F[x]$ and $a \in F$. By the \hlnotea{Division Algorithm},
+we can write
+\begin{equation*}
+  f(x) = (x - a) q(x) + r(x),
+\end{equation*}
+where $q(x), r(x) \in F[x]$. Note that we either have $r(x) = 0$ or 
+$\deg r < \deg (x - a) = 1$. In the latter case, $r \in F$, and so
+\begin{equation*}
+  f(x) = (x - a) q(x) + r.
+\end{equation*}
+Then $f(a) = 0 + r = r$, and so $f(x) = (x - a) q(x) + f(a)$.
+\begin{equation*}
+  \therefore (x - a) \mid f(x) \iff f(a) = 0.
+\end{equation*}
+
+\begin{propo}[Polynomials with Roots are Reducible]\label{propo:polynomials_with_roots_are_reducible}
+  Let $F$ be a field. If $f(x) \in F[x]$ with $\deg f > 1$, and $f$ has a root in $F$,
+  then $f$ is reducible (over $F$).
+\end{propo}
+
+\begin{eg}
+  Let $f(x) = x^6 + x^3 + x^4 + x^3 + 3 \in \mathbb{Z}_7[x]$. Then $f(1) = 0$.
+  Therefore
+  \begin{equation*}
+    f(x) = (x - 1) g(x) \text{ where } g(x) \in \mathbb{Z}_7[x].
+  \end{equation*}
+  Thus $f(x)$ is reducible over $\mathbb{Z}_7$.
+\end{eg}
+
+\begin{propo}[Irreducible Rootless Polynomials]\label{propo:irreducible_rootless_polynomials}
+  Let $F$ be a field\sidenote{Note that this does not work in an ID. For example, $2x^2 + 2$.
+  }. If $f(x) \in F[x]$ with $\deg f \in \{ 2, 3 \}$, then $f(x)$ is irreducible over $F$
+  iff $f(x)$ has no roots in $F$.
+\end{propo}
+
+\begin{warning}
+  $(x^2 + 1)^2 \in \mathbb{R}[x]$ is reducible but has no root in $\mathbb{R}$. Note that
+  the degree of the polynomial is $4$.
+\end{warning}
+
+\begin{eg}
+  Let $f9x) = x^3 + x + 1 \in \mathbb{Z}_2[x]$. Note that $f(0) = 1$ and 
+  $f(1) = 3 \equiv 1 \mod 2$. Since $\deg f = 3$ and $f$ has no roots in $\mathbb{Z}_2$,
+  $f(x)$ is irreducible over $\mathbb{Z}_2$.
+\end{eg}
+
+\begin{thm}[Gauss' Lemma]\index{Gauss' Lemma}\label{thm:gauss_lemma}
+  Let $R$ be a Unique Factorization Domain (UFD), with field of fractions $F$.
+  Let $p(x) \in R[x]$. If
+  \begin{equation*}
+    p(x) = A(x) B(x),
+  \end{equation*}
+  where $A(x), B(x)$ are non-constant in $F[x]$, then $\exists r, s \in F^\times$ non-zero
+  such that
+  \begin{equation*}
+    p(x) = a(x) b(x),
+  \end{equation*}
+  where $a(x) = rA(x)$ and $b(x) = sB(x)$.
+\end{thm}
+
+\begin{note}
+  If $p(x) \in R[x]$ is reducible over $F$, then $p(x)$ is reducible over $R$.
+\end{note}
+
+\begin{note}
+  If $R = \mathbb{Z}$ and $F = \mathbb{Q}$, then $p(x)$ is irreducible over $\mathbb{Z}$,
+  then $p(x)$ is irreducible over $\mathbb{Q}$.
+\end{note}
+
+% section irreducibles (end)
+
+% section review_of_ring_theory (end)
+
+% section sylow_theory_continued_3 (end)
+
+% chapter lecture_5_jan_14th (end)
 
 \appendix
 

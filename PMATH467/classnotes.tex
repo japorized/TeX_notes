@@ -57,6 +57,7 @@ I shall leave this here for my own notes, in case something happens to my hard c
 \chapter{Lecture 1 Jan 07th}%
 \label{chp:lecture_1_jan_07th}
 % chapter lecture_1_jan_07th
+\nocite{johnlee2000}
 
 We will not be too rigorous in this part.
 
@@ -575,7 +576,10 @@ However, $\mathbb{R}^2 \setminus \left\{ 0 \right\}$ is connected, but it is not
 describe why.
 
 \begin{defn}[Path]\index{Path}\label{defn:path}
-  \hlwarn{Require clarification} % TODO: get the definition clarified
+  A \hlnoteb{path} in a space $X$ from $p$ to $q$ (both in $X$) is a continuous map
+  $f : [0, 1] \to X$ such that $f(0) = p$ and $f(1) = q$. We say that $X$ is
+  \hldefn{path connected} if $\forall p, q \in X$, there is a path in $X$ from $p$
+  to $q$.
 \end{defn}
 
 \begin{lemma}[Path Connectedness implies Connectedness]\label{lemma:path_connectedness_implies_connectedness}
