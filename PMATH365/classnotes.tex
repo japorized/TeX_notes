@@ -14,7 +14,6 @@
 \institution{University of Waterloo}
 
 \DeclareMathOperator{\std}{std}
-\DeclareMathOperator{\Img}{Im}
 \DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\sgn}{sgn}
@@ -371,15 +370,23 @@ then it will induce a canonical isomorphism from $V$ to $V^*$.
   Given $T \in L(V)$,
   there is an associated $n \times n$ matrix $A = [T]_{\mathcal{B}}$ defined by
   \begin{equation*}
-    T(e_i) = A_{\underarrow{i}{\text{row index}}}^{\overarrow{j}{\text{column index}}} e_j.
+    T(e_i) = A_{\tikzmark{a}i}^{\tikzmark{b}j} e_j.
   \end{equation*}
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[latex'-]
+      ([shift={(1pt,-2pt)}]pic cs:a) |- ([shift={(-10pt,-10pt)}]pic cs:a) 
+      node[anchor=east] {row index}; 
+    \draw[latex'-]
+      ([shift={(2pt,6pt)}]pic cs:b) |- ([shift={(12pt,12pt)}]pic cs:b) 
+      node[anchor=west] {column index}; 
+  \end{tikzpicture}
   In particular,
   \begin{equation*}
-    A = \overarrow{
+    A = \overbrace{
       \begin{bmatrix}
         [ T(e_1) ]_{\mathcal{B}} & \hdots & [ T(e_n) ]_{\mathcal{B}}
       \end{bmatrix}
-    }{\text{block matrix}}
+    }^{\text{block matrix}}
   \end{equation*}
   and
   \begin{equation*}
@@ -666,7 +673,7 @@ So $\mathcal{B}^*$ determines an orientation for $V^*$.
 
 % section dual_map_continued (end)
 
-\section{The Space of $k$-forms on $V$}%
+\section{The Space of \texorpdfstring{$k$}{k}-forms on \texorpdfstring{$V$}{V}}%
 \label{sec:the_space_of_k_forms_on_v_}
 % section the_space_of_k_forms_on_v_
 
@@ -716,7 +723,7 @@ So $\mathcal{B}^*$ determines an orientation for $V^*$.
   $V$ is just an element of $V^* = L(W, \mathbb{R})$.
 \end{note}
 
-\begin{remark}[Permutations]
+\begin{remark}[Permutations]\label{remark:permutations}
   From the last example, we notice that the `sign' of the value changes
   as we permute more times. To be precise, we are performing \hlnotea{transpositions}
   on the arguments
@@ -765,6 +772,252 @@ Using the above remark, we can rewrite condition 2 as follows:
 % section the_space_of_k_forms_on_v_ (end)
 
 % chapter lecture_3_jan_11th (end)
+
+\chapter{Lecture 4 Jan 14th}%
+\label{chp:lecture_4_jan_14th}
+% chapter lecture_4_jan_14th
+
+\section{The Space of \texorpdfstring{$k$}{k}-forms on \texorpdfstring{$V$}{V} (Continued)}%
+\label{sec:the_space_of_k_forms_on_v_continued}
+% section the_space_of_k_forms_on_v_continued
+
+\begin{defn}[Space of $k$-forms on $V$]\index{Space of $k$-forms on $V$}\label{defn:space_of_k_forms_on_v_}
+  The \hlnoteb{space of $k$-forms on $V$}, denoted as $\wedge^k \left( V^* \right)$, is
+  the set of all $k$-forms on $V$, made into a vector space by setting
+  \begin{equation*}
+    (t\alpha + s\beta)(v_1, \ldots, v_k) :=
+      t\alpha(v_1, \ldots, v_k) + s\beta(v_1, \ldots, v_k),
+  \end{equation*}
+  for $\alpha \beta \in \wedge^k \left( V^* \right)$, $t, s \in \mathbb{R}$.
+\end{defn}
+
+\begin{note}
+  By convention, we define $\wedge^0 \left( V^* \right) = \mathbb{R}$. The reasoning shall
+  we shown later. %TODO : add anchor
+\end{note}
+
+\begin{note}
+  By the note on page \pageref{remark:permutations}, observe that 
+  $\wedge^1 \left( V^* \right) = V^*$.
+\end{note}
+
+\begin{propo}[A $k$-form is equivalently $0$ if its arguments are linearly dependent]\label{propo:a_k_form_is_equivalently_0_if_its_arguments_are_linearly_dependent}
+  Let $\alpha$ be a $k$-form. Then if $v_1, \ldots, v_k$ are linearly dependent, then
+  \begin{equation*}
+    \alpha(v_1, \ldots, v_k) = 0.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Suppose one of the $v_1, \ldots, v_k$ is a linear combination of the rest of the
+  other vectors; i.e.
+  \begin{equation*}
+    v_j = c_1 v_1 + \hdots + c_{j - 1} v_{j - 1} + c_{j + 1} v_{j + 1} + \hdots + c_k v_k.
+  \end{equation*}
+  Then since $\alpha$ is multilinear, and by the last remark in \cref{chp:lecture_3_jan_11th},
+  we have
+  \begin{equation*}
+    \alpha (v_1, \ldots, v_{j - 1}, v_j , v_{j + 1}, \ldots, v_k) = 0.
+  \end{equation*}\qed\
+\end{proof}
+
+\begin{crly}[$k$-forms of even higher dimensions]\label{crly:_k_forms_of_even_higher_dimensions}
+  $\wedge^k \left( V^* \right) = \left\{ 0 \right\}$ if $k > n = \dim V$.
+\end{crly}
+
+\begin{proof}
+  Any set of $k > n$ vectors is necessarily linearly dependent.\qed\
+\end{proof}
+
+\begin{note}
+  \cref{crly:_k_forms_of_even_higher_dimensions} implies that $\wedge^k \left( V^* \right)$
+  can only be non-trivial for $0 \leq k \leq n = \dim V$.
+\end{note}
+
+% section the_space_of_k_forms_on_v_continued (end)
+
+\section{Decomposable \texorpdfstring{$k$}{k}-forms}%
+\label{sec:decomposable_k_forms}
+% section decomposable_k_forms
+
+There is a simple way to construct a $k$-form on $V$ using $k$-many $1$-forms from $V$, i.e.
+$k$-many elements from $V^*$. Let $\alpha^1, \ldots, \alpha^k \in V^*$. Define a map
+\begin{equation*}
+  \alpha^1 \land \hdots \land \alpha^k : \underbrace{V \times V \times \hdots \times V}_{k \text{ copies }} \to \mathbb{R}
+\end{equation*}
+by
+\begin{equation}\label{eq:defining_a_k_form}
+  \left( \alpha^1 \land \hdots \land \alpha^k \right) ( v_1, \ldots, v_k )
+  := \sum_{\sigma \in S_k} \left( \sgn \sigma \right) \alpha^{\sigma(1)}(v_1) \alpha^{\sigma(2)}(v_2) \hdots \alpha^{\sigma(k)}(v_k).
+\end{equation}
+
+We need, of course, to verify that the above formula is, indeed, a $k$-form.
+Before that, consider the following example:
+
+\begin{eg}
+  If $k = 2$, we have
+  \begin{equation*}
+    \left( \alpha^1 \land \alpha^2 \right)(v_1, v_2) 
+      = \alpha^1(v_1) \alpha^2(v_2) - \alpha^2(v_1) \alpha^1(v_2).
+  \end{equation*}
+  and if $k = 3$, we have
+  \begin{align*}
+    \left( \alpha^1 \land \alpha^2 \land \alpha^3 \right)( v_1, v_2, v_3 )
+      &= \alpha^1(v_1) \alpha^2(v_2) \alpha^3(v_3) + \alpha^2(v_1) \alpha^3(v_2) \alpha^1(v_1) \\
+      &\quad + \alpha^3(v_1) \alpha^1(v_2) \alpha^2(v_3) - \alpha^1(v_1) \alpha^3(v_2) \alpha^2(v_3) \\
+      &\qquad - \alpha^2(v_1) \alpha^1(v_1) \alpha^3(v_3) - \alpha^3(v_1) \alpha^2(v_2) \alpha^1(v_3).
+  \end{align*}
+\end{eg}
+
+Now consider a general case of $k$. It is clear that \cref{eq:defining_a_k_form} is
+$k$-linear: if we fix any one of the arguments, then \cref{eq:defining_a_k_form} is
+reduced to a linear equation.
+
+For the alternating property, let $\tau \in S_k$. WTS
+\begin{equation*}
+  \left( \alpha^1 \land \hdots \land \alpha^k \right) \left( v_{\tau(1)}, \ldots, v_{\tau(k)} \right)
+    = ( \sgn \tau )\left( \alpha^1 \land \hdots \land \alpha^k \right) \left( v_1, \ldots, v_k \right).
+\end{equation*}
+Observe that
+\begin{align*}
+  &\left( \alpha^1 \land \hdots \land \alpha^k \right) \left( v_{\tau(1)}, \ldots, v_{\tau(k)} \right) \\
+  &= \sum_{\sigma \in S_k} \left( \sgn \sigma \right)
+    \alpha^{\sigma(1)} \left(v_{\tau(1)}\right) \hdots \alpha^{\sigma(k)} \left( v_{\tau(k)} \right) \\
+  &= \sum_{\sigma \in S_k} \left( \sgn \sigma \circ \tau^{-1} \right) \left( \sgn \tau \right)
+    \alpha^{\left(\sigma \circ \tau^{-1}\right)(\tau(1))} \left(v_{\tau(1)}\right) \hdots
+    \alpha^{\left( \sigma \circ \tau^{-1} \right)(\tau(k))} \left( v_{\tau(k)} \right) \\
+  &= \left( \sgn \tau \right) \sum_{\sigma \circ \tau^{-1} \in S_k} \left( \sgn \sigma \circ \tau^{-1} \right) 
+    \alpha^{\left( \sigma \circ \tau^{-1} \right)(1)} (v_1) \hdots
+    \alpha^{\left( \sigma \circ \tau^{-1} \right)(k)} (v_k) \\
+  &= \left( \sgn \tau \right) \sum_{\sigma \in S_k} \alpha^{\sigma(1)} (v_1) \hdots \alpha^{\sigma(k)} (v_k) \quad \because \text{ relabelling } \\
+  &= \left( \sgn \tau \right) \left( \alpha^1 \land \hdots \alpha^k \right) \left( v_1, \ldots, v_k \right),
+\end{align*}
+as claimed.
+
+\begin{fullwidth}
+\begin{defn}[Decomposable $k$-form]\index{Decomposable $k$-form}\label{defn:decomposable_k_form}
+  The $k$-form as discussed above is called a \hlnoteb{decomposable $k$-form}, which for
+  ease of reference shall be re-expressed here:
+  \begin{equation*}
+    \left( \alpha^1 \land \hdots \land \alpha^k \right) ( v_1, \ldots, v_k )
+    := \sum_{\sigma \in S_k} \left( \sgn \sigma \right) \alpha^{\sigma(1)}(v_1) \alpha^{\sigma(2)}(v_2) \hdots \alpha^{\sigma(k)}(v_k).
+  \end{equation*}
+\end{defn}
+\end{fullwidth}
+
+\begin{note}
+  Not all $k$-forms are decomposable. If $k = 1, n - 1$ and $n$, but not for $1 < k < n - 1$.
+\end{note}
+
+In A1Q5(c), we will show that there exists a $2$-form in $n = 4$ that is not decomposable.
+
+\begin{propo}[Permutation on $k$-forms]\label{propo:permutation_on_k_forms}
+  Let $\tau \in S_k$. Then
+  \begin{equation*}
+    \alpha^{\tau(1)} \land \hdots \land \alpha^{\tau(k)} 
+      = ( \sgn \tau ) \alpha^1 \land \hdots \land \alpha^{k}
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Firstly, note that $\sgn \tau = \sgn \tau^{-1}$. Then for any $(v_1, \ldots, v_k) \in V^k$,
+  we have
+  \begin{align*}
+    &\alpha^{\tau(1)} \land \hdots \land \alpha^{\tau(k)} (v_1, \ldots, v_k) \\
+    &= \sum_{\sigma \in S_k} (\sgn \sigma) \alpha^{\sigma \circ \tau(1)} (v_1) \hdots \alpha^{\sigma \circ \tau (k)} (v_k) \\
+    &= \sum_{\sigma \circ \tau S_k} (\sgn \sigma \circ \tau) \left(\sgn \tau^{-1}\right)
+      \alpha^{\sigma \circ \tau(1)} (v_1) \hdots \alpha^{\sigma \circ \tau(k)} (v_k) \\
+    &= (\sgn \tau) \sum_{\sigma \in S_k} (\sgn \sigma)
+      \alpha^{\sigma(1)} (v_1) \hdots \alpha^{\sigma(k)} (v_k) \\
+    &= (\sgn \tau) (\alpha^1 \land \hdots \land \alpha^k).
+  \end{align*}
+  This completes our proof.\qed\
+\end{proof}
+
+\marginnote{Proof for \cref{propo:alternate_definition_of_a_decomposable_k_form} is in A1.}
+\begin{propo}[Alternate Definition of a Decomposable $k$-form]\label{propo:alternate_definition_of_a_decomposable_k_form}
+  Another way we can define a decomposable $k$-form is
+  \begin{equation*}
+    (\alpha^1 \land \hdots \land \alpha^k)(v_1, \ldots, v_k)
+    = \sum_{\sigma \in S_k} (\sgn \sigma) \alpha^1 (v_{\sigma(1)}) \hdots \alpha^k (v_{\sigma(k)}).
+  \end{equation*}
+\end{propo}
+
+\begin{thm}[Basis of $\Lambda^k(V^*)$]\label{thm:basis_of_lambda_k_v_}
+  Let $\mathcal{B} = \left\{ e_1, \ldots, e_n \right\}$ be a basis of $V$, a $n$-dimensional
+  real vector space, and the dual basis $\mathcal{B}^* = \left\{ e^1, \ldots, e^n \right\}$
+  of $V^*$. THen the set
+  \begin{equation*}
+    \left\{ e^{j_1} \land \ldots \land e^{j_k} \mmid 1 \leq j_1 < j_2 < \hdots < j_k \leq n \right\}
+  \end{equation*}
+  is a basis of $\Lambda^k(V^*)$.
+\end{thm}
+
+\begin{crly}[Dimension of $\Lambda^k(V^*)$]\label{crly:dimension_of_lambda_k_v_}
+  The dimension of $\Lambda^k(V^*)$ is $\binom{n}{k} = \binom{n}{n - k}$, which is
+  also the dimension of $\Lambda^{n - k}(V^*)$. This also works for $k = 0$ \sidenote{
+  This is why we wanted $\Lambda^0(V^*) = \mathbb{R}$.}.
+\end{crly}
+
+\begin{proof}[\cref{thm:basis_of_lambda_k_v_}]
+  Firstly, let $\alpha$ be an arbitrary $k$-form, and let $v_1, \ldots, v_k \in V$. We
+  may write
+  \begin{equation*}
+    v_i = v_i^j e_j,
+  \end{equation*}
+  where $v_i^j \in \mathbb{R}$. Then
+  \begin{align*}
+    \alpha(v_1, \ldots, v_k) &= \alpha\left(v_1^{j_1} e_{j_1}, \ldots, v_k^{j_k} e_{j_k}\right) \\
+                             &= v_1^{j_1} \hdots v_k^{j_k} \alpha ( e_{j_1}, \ldots, e_{j_k} )
+  \end{align*}
+  by multilinearity and totally skew-symmetry of $\alpha$, where 
+  $j_i \in \left\{ 1, \ldots, n \right\}$. Let
+  \begin{equation}\label{eq:another_alt_of_a_k_form_scalar}
+    \alpha(e_{j_1}, \ldots, e_{j_k}) = \alpha_{j_1, \ldots, j_k},
+  \end{equation}
+  represent the scalar. Then
+  \begin{align*}
+    \alpha(v_1, \ldots, v_k) &= \alpha_{j_1, \ldots, j_k} v_1^{j_1} \hdots v_k^{j_k} \\
+                             &= \alpha_{j_1, \ldots, j_k} e^{j_1}(v_1) \hdots e^{j_k}(v_k).
+  \end{align*}
+  Now since $\alpha_{j_1, \ldots, j_k}$ is totally skew-symmetric, $\alpha = 0$ if any of the
+  $j_k$'s are equal to one another. Thus we only need to consider the terms where the $j_k$'s
+  are distinct. Now for any set of $\{ j_1, \ldots, j_k \}$, there exists a unique 
+  $\sigma \in S_k$ such that $\sigma$ rearranges the $j_i$'s so that $j_1, \ldots, j_k$ is
+  strictly increasing. Thus
+  \begin{align*}
+    \alpha(v_1, \ldots, v_k) 
+      &= \sum_{j_1 < \hdots < j_k} \sum_{\sigma \in S_k} \alpha_{j_{\sigma1(), \ldots, \sigma(k)}}
+        e^{j_{\sigma(1)}} (v_1) \hdots e^{j_{\sigma(k)}} (v_k) \\
+      &= \sum_{j_1 < \hdots < j_k} \sum_{\sigma \in S_k} (\sgn \sigma) \alpha_{j_1, \ldots, j_k} 
+        e^{j_{\sigma(1)}} (v_1) \hdots e^{j_{\sigma(k)}} (v_k) \\
+      &= \sum_{j_1 < \hdots < j_k} \alpha_{j_1, \ldots, j_k} \sum_{\sigma \in S_k} (\sgn \sigma)
+        e^{j_{\sigma(1)}} (v_1) \hdots e^{j_{\sigma(k)}} (v_k) \\
+      &= \underbrace{ \sum_{j_1 < \hdots < j_k} 
+          \alpha_{j_1, \ldots, j_k} \left( e^{j_1} \land \hdots \land e^{j_k} \right)
+        }_{\alpha}
+        (v_1, \ldots, v_k).
+  \end{align*}
+  Thus we have that
+  \begin{equation*}
+    \alpha = \sum_{j_1 < \hdots < j_k} \alpha_{j_1, \ldots, j_k} e^{j_1} \land \hdots \land e^{j_k}.
+  \end{equation*}
+  Hence $e^{j_1} \land \hdots \land e^{j_k}$ spans $\Lambda^k(V^*)$.
+
+  Now suppose that
+  \begin{equation*}
+    \sum_{j_1 < \hdots < j_k} \alpha_{j_1, \ldots, j_k} e^{j_1} \land \hdots \land e^{j_k}
+  \end{equation*}
+  is the zero element in $\Lambda^k(V^*)$. Then the scalar in \cref{eq:another_alt_of_a_k_form_scalar} must be $0$ for any $j_1, \ldots, j_k$. Thus
+  \begin{equation*}
+    \left\{ e^{j_1} \land \hdots \land e^{j_k} \mmid 1 \leq j_1 < j_2 < \hdots < j_k \leq n \right\}
+  \end{equation*}
+  is linearly independent.\qed\
+\end{proof}
+
+% section decomposable_k_forms (end)
+
+% chapter lecture_4_jan_14th (end)
 
 \appendix
 

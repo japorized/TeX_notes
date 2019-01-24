@@ -36,6 +36,17 @@
 }
 \def\UrlBreaks{\do\/\do-}
 
+\definecolor{dark}{HTML}{2D2D2D}
+\definecolor{light}{HTML}{D3D0C8}
+\definecolor{red}{HTML}{F47678}
+\definecolor{green}{HTML}{98CD97}
+\definecolor{yellow}{HTML}{E2B552}
+\definecolor{blue}{HTML}{6498CE}
+\definecolor{magenta}{HTML}{CD98CD}
+\definecolor{cyan}{HTML}{61CCCD}
+\definecolor{gray}{HTML}{747369}
+\definecolor{brown}{HTML}{D47B4E}
+
 % fancyhdr
 \makeatletter
 \pagestyle{fancy}
@@ -68,20 +79,12 @@
 \setlength\theorempostskipamount{3ex}
 
 % ntheorem Declarations
+\theorembodyfont{\normalfont}
 \theoremstyle{break}
-\newtheorem{thm}{Theorem}[section]
 \newtheorem*{proof}{Proof}
 \newtheorem*{solution}{Solution}
-\newtheorem{crly}{Corollary}[section]
-\newtheorem{lemma}{Lemma}[section]
-\newtheorem{propo}{Proposition}[section]
 \newtheorem*{remark}{Remark}
 \newtheorem*{note}{Note}
-\newtheorem*{notation}{Notation}
-\newtheorem{ex}{Exercise}[section]
-\newtheorem{defn}{Definition}[section]
-\newtheorem{eg}{Example}[section]
-\newtheorem{axiom}{Axiom}[section]
 
 \newenvironment{proofbox}
   {\begin{tcolorbox}[arc=0mm,breakable,enhanced,halign=left]
@@ -101,58 +104,6 @@
   \settowidth{\widesttheorem}{Proposition A.1.1.1\quad}
 }
 
-\makeatletter
-\def\thm@@thmline@name#1#2#3#4{%
-        \@dottedtocline{-2}{0em}{2.3em}%
-                   {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
-                   {#4}}
-\@ifpackageloaded{hyperref}{
-\def\thm@@thmline@name#1#2#3#4#5{%
-    \ifx\#5\%
-        \@dottedtocline{-2}{0em}{2.3em}%
-            {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
-            {#4}
-    \else
-        \ifHy@linktocpage\relax\relax
-            \@dottedtocline{-2}{0em}{2.3em}%
-                {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}%
-                {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
-        \else
-            \@dottedtocline{-2}{0em}{2.3em}%
-                {\hyper@linkstart{link}{#5}%
-                  {\makebox[\widesttheorem][l]{#1 \protect\numberline{#2}}#3}\hyper@linkend}%
-                    {#4}%
-        \fi
-    \fi}
-}
-
-\makeatletter
-\def\thm@@thmline@noname#1#2#3#4{%
-        \@dottedtocline{-2}{0em}{5em}%
-                   {{\protect\numberline{#2}}#3}%
-                   {#4}}
-\@ifpackageloaded{hyperref}{
-\def\thm@@thmline@noname#1#2#3#4#5{%
-    \ifx\#5\%
-        \@dottedtocline{-2}{0em}{5em}%
-            {{\protect\numberline{#2}}#3}%
-            {#4}
-    \else
-        \ifHy@linktocpage\relax\relax
-            \@dottedtocline{-2}{0em}{5em}%
-                {{\protect\numberline{#2}}#3}%
-                {\hyper@linkstart{link}{#5}{#4}\hyper@linkend}%
-        \else
-            \@dottedtocline{-2}{0em}{5em}%
-                {\hyper@linkstart{link}{#5}%
-                  {{\protect\numberline{#2}}#3}\hyper@linkend}%
-                    {#4}%
-        \fi
-    \fi}
-}
-
-\theoremlisttype{allname}
-
 % Custom table columning
 \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
@@ -167,6 +118,9 @@ middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
 middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 
 % Shortcuts
+\newenvironment{spmatrix}
+  {\left(\begin{smallmatrix}}
+  {\end{smallmatrix}\right)}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}      % simplifying the writing of a floor function
 \newcommand{\ceiling}[1]{\lceil #1 \rceil}      % simplifying the writing of a ceiling function
 \newcommand{\dotp}{\, \cdotp}			        % dot product to distinguish from \cdot
@@ -174,9 +128,16 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\abs}[1]{\left|#1\right|}						% absolute value
 \newcommand{\at}[2]{\Big|_{#1}^{#2}}
 \renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
-\newcommand{\lra}[1]{\langle \; #1 \; \rangle}
+\newcommand{\lra}[1]{\left\langle \; #1 \; \right\rangle}
 	% highlighting shortcuts
 \renewcommand{\epsilon}{\varepsilon}
 \renewcommand{\atop}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
 \newcommand{\mmid}{\; \middle| \;}
 \newcommand*\dif{\mathop{}\!d}
+
+\newcommand{\hlb}[2]{\colorbox{#1!30!light}{\textbf{#2}}}
+\newcommand{\hlbnotea}[1]{\hlb{green}{#1}}
+\newcommand{\hlbnoteb}[1]{\hlb{cyan}{#1}}
+\newcommand{\hlbnotec}[1]{\hlb{brown}{#1}}
+\newcommand{\hlbnoted}[1]{\hlb{magenta}{#1}}
+\newcommand{\hlbnotee}[1]{\hlb{red}{#1}}
