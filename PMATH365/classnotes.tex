@@ -999,9 +999,9 @@ In A1Q5(c), we will show that there exists a $2$-form in $n = 4$ that is not dec
         (v_1, \ldots, v_k).
   \end{align*}
   Thus we have that
-  \begin{equation*}
+  \begin{equation}\label{eq:k_form_in_general}
     \alpha = \sum_{j_1 < \hdots < j_k} \alpha_{j_1, \ldots, j_k} e^{j_1} \land \hdots \land e^{j_k}.
-  \end{equation*}
+  \end{equation}
   Hence $e^{j_1} \land \hdots \land e^{j_k}$ spans $\Lambda^k(V^*)$.
 
   Now suppose that
@@ -1018,6 +1018,216 @@ In A1Q5(c), we will show that there exists a $2$-form in $n = 4$ that is not dec
 % section decomposable_k_forms (end)
 
 % chapter lecture_4_jan_14th (end)
+
+\chapter{Lecture 5 Jan 16th}%
+\label{chp:lecture_5_jan_16th}
+% chapter lecture_5_jan_16th
+
+\section{Decomposable \texorpdfstring{$k$}{k}-forms Continued}%
+\label{sec:decomposable_k_forms_continued}
+% section decomposable_k_forms_continued
+
+There exists an equivalent, and perhaps more useful, expression for \cref{eq:k_form_in_general},
+which we shall derive here. Sine $\alpha_{j_1, \ldots, j_k}$ and 
+$e^{j_1} \land \hdots \land e^{j_k}$ are both totally skew-symmetric in their $k$ indices,
+and since there are $k!$ elements in $S_k$, we have that
+\begin{align*}
+  \frac{1}{k!} \alpha_{j_1, \ldots, j_k} e^{j_1} \land \hdots \land e^{j_k}
+  &= \frac{1}{k!} \sum_{\substack{j_1, \ldots, j_k \\ \text{distinct}}} 
+    \alpha_{j_1, \ldots, j_k} e^{j_1} \land \hdots \land e^{j_k} \\
+  &= \frac{1}{k!} \sum_{j_1 < \hdots < j_k} \sum_{\sigma \in S_k} 
+    \alpha_{\sigma(j_1), \ldots, \sigma(j_k)} e^{\sigma(j_1)} \land \hdots \land e^{\sigma(j_k)} \\
+  &= \frac{1}{k!} \sum_{j_1 < \hdots < j_k} \sum_{\sigma \in S_k} (\sgn \sigma)
+    \alpha_{j_1, \ldots, j_k} (\sgn \sigma) e^{j_1} \land \hdots \land e^{j_k} \\
+  &= \frac{1}{k!} \sum_{j_1 < \hdots < j_k} \sum_{\sigma \in S_k}
+    \alpha_{j_1, \ldots, j_k} e^{j_1} \land \hdots \land e^{j_k} \enspace \footnotemark \\
+  &= \sum_{j_1 < \hdots < j_k} \alpha_{j_1, \ldots, j_k} e^{j_1} \land \hdots \land e^{j_k}.
+\end{align*}
+\footnotetext{Note that $(\sgn \sigma)(\sgn \sigma) = 1$.}
+The major advantage of the expression with $\frac{1}{k!}$ is that all $k$ indices
+$j_1, \ldots, j_k$ are summed over all possible values $1, \ldots, n$ instead of
+having to start with a specific order.
+
+% section decomposable_k_forms_continued (end)
+
+\section{Wedge Product of Forms}%
+\label{sec:wedge_product_of_forms}
+% section wedge_product_of_forms
+
+\begin{defn}[Wedge Product]\index{Wedge Product}\label{defn:wedge_product}
+  Let $\alpha \in \Lambda^k(V^*)$ and $\beta \in \Lambda^l(V^*)$. We define
+  $\alpha \wedge \beta \in \Lambda^{k + l}(V^*)$ as follows. Choose a basis
+  $\mathcal{B}^* = \left\{ e^1, \ldots, e^k \right\}$ of  $V^*$. Then we
+  may write
+  \begin{equation*}
+    \alpha = \frac{1}{k!} \alpha_{i_1, \ldots, i_k} e^{i_1} \wedge \hdots \wedge e^{i_k} \quad
+    \beta = \frac{1}{l!} \beta_{j_1, \ldots, j_l} e^{j_1} \wedge \hdots \wedge e^{j_l}.
+  \end{equation*}
+  We define the \hlnoteb{wedge product} as
+  \begin{align*}
+    \alpha \wedge \beta
+      &:= \frac{1}{k! l!} \alpha_{i_1, \ldots, i_k} \beta_{j_1, \ldots, j_l}
+      e^{i_1} \wedge \hdots \wedge e^{i_k} \wedge e^{j_1} \wedge \hdots \wedge e^{j_l} \\
+      &= \sum_{i_1 < \hdots < i_k} \sum_{j_1 < \hdots < j_l}
+        \alpha_{i_1, \ldots, i_k} \beta_{j_1, \ldots, j_k}
+      e^{i_1} \wedge \hdots \wedge e^{i_k} \wedge e^{j_1} \wedge \hdots \wedge e^{j_l}.
+  \end{align*}
+\end{defn}
+
+One can then question if this definition is well-defined, since it appears to be
+reliant on the choice of a basis. In A1Q4(a), we will show that this defintiion
+of $\alpha \wedge \beta$ is indeed well-defined. In particular, one can show that
+we may express $\alpha \wedge \beta$ in a way that does not involve any of the
+basis vectors $e^1, \ldots, e^n$.
+
+\begin{defn}[Degree of a Form]\index{Degree of a Form}\label{defn:degree_of_a_form}
+  For $\alpha \in \Lambda^k(V^*)$, we say that $\alpha$ has \hlnoteb{degree} $k$,
+  and write $\abs{\alpha} = k$.
+\end{defn}
+
+\begin{note}
+  By our definition of a wedge product above, we have that
+  \begin{equation*}
+    \abs{\alpha \wedge \beta} = \abs{\alpha} + \abs{\beta}.
+  \end{equation*}
+  Note that since a $0$-form lies in $\Lambda^k(V^*)$ for all $k$, we let $\abs{k}$
+  be anything / undefined.
+\end{note}
+
+\begin{remark}
+  \begin{enumerate}
+    \item $\alpha \wedge \beta$ is linear in $\alpha$ and linear in $\beta$ by its
+      definition, i.e. for any $t_1, t_2 \in \mathbb{R}$, 
+      $\alpha_1, \alpha_2 \in \Lambda^k(V^*)$, and any $\beta \in \Lambda^l(V^*)$,
+      \begin{equation*}
+        (t_1 \alpha_1 + t_2 \alpha_2) \wedge \beta 
+        = t_1(\alpha_1 \wedge \beta) + t_2(\alpha_2 \wedge \beta),
+      \end{equation*}
+      and a similar equation works for linearity in $\beta$.
+    \item The wedge product is associative; this follows almost immediately from
+      its construction.
+    \item The wedge product is not commutative. In fact, if $\abs{\alpha} = k$ and
+      $\abs{\beta} = l$, then
+      \begin{equation}\label{eq:wedge_product_is_not_commutative}
+        \beta \wedge \alpha = \left( -1 \right)^{kl} \alpha \wedge \beta.
+      \end{equation}
+      We call this property of a wedge product \hldefn{graded commutative},
+      \hldefn{super commutative} or \hldefn{skewed-commutative}.
+
+      Note that this also means that \hlimpo{even degree forms commute} with any
+      form.
+
+      Also, note that if $\abs{\alpha}$ is odd, then $\alpha \wedge \alpha = 0$.
+  \end{enumerate}
+\end{remark}
+
+\begin{eg}
+  Let $\alpha = e^1 \wedge e^3$ and $\beta = e^2 + e^3$. Then
+  \begin{align*}
+    \alpha \wedge \beta &= \left( e^1 \wedge e^3 \right) \wedge \left( e^2 + e^3 \right) \\
+                        &= e^1 \wedge e^3 \wedge e^2 + e^1 \wedge e^3 \wedge e^3 \\
+                        &= - e^1 \wedge e^2 \wedge e^3 + 0 \\
+                        &= - e^1 \wedge e^2 \wedge e^3.
+  \end{align*}
+\end{eg}
+
+\begin{eg}
+  Suppose $\alpha^1, \ldots, \alpha^k$ are linearly dependent $1$-forms on $V$.
+  Then $\alpha^1 \wedge \hdots \wedge \alpha^k = 0$.
+\end{eg}
+
+\begin{proof}
+  Suppose at least one of the $\alpha^j$ is a linear combination of the rest, i.e.
+  \begin{equation*}
+    \alpha^j = c_1 \alpha^1 + \hdots + c_{j - 1} \alpha^{j - 1} + 
+      c_{j + 1} \alpha^{j + 1} + \hdots + c_k \alpha^k.
+  \end{equation*}
+  Since all of the $\alpha^i$'s are $1$-forms, we will have 
+  $\alpha^i \wedge \alpha^i$ in the wedge product, and so our result follows from
+  our earlier remark.\qed\
+\end{proof}
+
+\begin{eg}
+  Let $\alpha = \alpha_i e^i, \beta = \beta_j e^j \in V^*$. Then
+  \begin{align*}
+    \alpha \wedge \beta &= \alpha_i \beta_j e^i \wedge e^j \\
+                        &= \frac{1}{2} \alpha_i \beta_j e^i \wedge e^j
+                          + \frac{1}{2} \alpha_i \beta_j e^i \wedge e^j \\
+                        &= \frac{1}{2} \alpha_i \beta_j e^i \wedge e^j
+                          - \frac{1}{2} \alpha_j \beta_i e^i \wedge e^j \\
+                        &= \frac{1}{2} (\alpha_i \beta_j - \alpha_j \beta_i)
+                          e^1 \wedge e^j \\
+                        &= \frac{1}{2} (\alpha \wedge \beta)_{ij} e^i \wedge e^j,
+  \end{align*}
+  where $(\alpha \wedge \beta)_{ij} = \alpha_i \beta_j - \alpha_j \beta_i$.
+\end{eg}
+
+We shall prove the following in A1Q6.
+
+\begin{ex}
+  Let $\alpha = \alpha_i e^i \in V^*$, and
+  \begin{equation*}
+    \eta = \frac{1}{2} \eta_{jk} e^j \wedge e^k \in \Lambda^2(V^*).
+  \end{equation*}
+  Show that
+  \begin{equation*}
+    \alpha \wedge \eta = \frac{1}{6!} (\alpha \wedge \eta)_{ijk} e^i \wedge e^j \wedge e^k,
+  \end{equation*}
+  where
+  \begin{equation*}
+    (\alpha \wedge \eta)_{ijk} = \alpha_1 \eta_{jk} + \alpha_j \eta_{ki} + \alpha_k \eta_{ij}.
+  \end{equation*}
+\end{ex}
+
+% section wedge_product_of_forms (end)
+
+\section{Pullback of Forms}%
+\label{sec:pullback_of_forms}
+% section pullback_of_forms
+
+For a linear map $T \in L(V, W)$, we have seen its induced dual map 
+$T^* \in L\left(W^*, V^*\right)$. We shall now generalize this dual map to $k$-forms,
+for $k > 1$.
+
+\begin{defn}[Pullback]\index{Pullback}\label{defn:pullback}
+  Let $T \in L(V, W)$. For any $k \geq 1$, define a map
+  \begin{equation*}
+    T^* : \Lambda^k(W^*) \to \Lambda^k(V^*),
+  \end{equation*}
+  called the \hlnoteb{pullback}, as such: let $\beta \in \Lambda^k(W^*)$, and define
+  $T^* \beta \in \Lambda^k(V^*)$ such that
+  \begin{equation*}
+    \left( T^* \beta \right)(v_1, \ldots, v_k) := \beta \left( T(v_1), \ldots, T(v_k) \right).
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  It is clear that $T^* \beta$ is multilinear and alternating, since $T$ itself is
+  linear, and $\beta$ is multilinear and alternating.
+\end{note}
+
+The pullback has the following properties which we shall prove in A1Q8.
+
+\begin{propo}[Properties of the Pullback]\label{propo:properties_of_the_pullback}
+  \begin{enumerate}
+    \item The map $T^* : \Lambda^k(W^*) \to \Lambda^k(V^*)$ is linear, i.e.
+      $\forall \alpha, \beta \in \Lambda^k(W^*)$ and $s, t \in \mathbb{R}$,
+      \begin{equation}
+        T^* (t\alpha + s\beta) = tT^* \alpha + sT^* \beta.
+      \end{equation}
+
+    \item The map $T^*$ is compatible iwth the wedge product operation in the
+      following sense: if $\alpha \in \Lambda^k(W^*)$ and $\beta \in \Lambda^l(W^*)$,
+      then
+      \begin{equation*}
+        T^* (\alpha \wedge \beta) = \left( T^* \alpha \right) \wedge \left( T^* \beta \right).
+      \end{equation*}
+  \end{enumerate}
+\end{propo}
+
+% section pullback_of_forms (end)
+
+% chapter lecture_5_jan_16th (end)
 
 \appendix
 
