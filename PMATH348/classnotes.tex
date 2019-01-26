@@ -558,9 +558,17 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   WMA $a \in H_p$ and $b \in H_q$. By our first remark today, note that 
   $H_p \cap H_q = \left\{ e \right\}$. Then, observe that
   \begin{equation*}
-    \underbrace{aba^{-1}}_{H_q} \underarrow{b^{-1}}{H_q} \in H_q 
-    \qquad \underarrow{a}{H_p} \underbrace{ba^{-1}b^{-1}}_{H_p} \in H_p
+    \underbrace{aba^{-1}}_{H_q} \tikzmark{a}b^{-1} \in H_q 
+    \qquad \tikzmark{b}a \underbrace{ba^{-1}b^{-1}}_{H_p} \in H_p
   \end{equation*}
+  \begin{tikzpicture}[remember picture,overlay]
+    \draw[latex'-]
+      ([shift={(1pt,-2pt)}]pic cs:a) |- ([shift={(1pt,-10pt)}]pic cs:a)
+      node[anchor=north] {$H_q$};
+    \draw[latex'-]
+      ([shift={(1pt,-2pt)}]pic cs:b) |- ([shift={(1pt,-10pt)}]pic cs:b)
+      node[anchor=north] {$H_p$};
+  \end{tikzpicture}
   Thus $aba^{-1}b^{-1} = e \implies ab = ba$. So $G$ is abelian. By the Fundamental Theorem
   of Finite Abelian Groups
   \begin{equation*}
@@ -688,6 +696,8 @@ We shall continue with the last proof from where we left off.
   Thus $G$ does not have a non-trivial normal subgroup, i.e. $G$ is simple.\qed\
 \end{proof}
 
+% section sylow_theory_continued_3 (end)
+
 \section{Review of Ring Theory}%
 \label{sec:review_of_ring_theory}
 % section review_of_ring_theory
@@ -704,6 +714,8 @@ Thus we observe that
 \end{center}
 
 Therefore, to talk about fields, we need to understand irreducibles.
+
+% section review_of_ring_theory (end)
 
 \section{Irreducibles}%
 \label{sec:irreducibles}
@@ -782,8 +794,8 @@ Then $f(a) = 0 + r = r$, and so $f(x) = (x - a) q(x) + f(a)$.
   \begin{equation*}
     p(x) = A(x) B(x),
   \end{equation*}
-  where $A(x), B(x)$ are non-constant in $F[x]$, then $\exists r, s \in F^\times$ non-zero
-  such that
+  where $A(x), B(x)$ are non-constant in $F[x]$, then 
+  $\exists r, s \in F^\times$ non-zero such that
   \begin{equation*}
     p(x) = a(x) b(x),
   \end{equation*}
@@ -795,17 +807,146 @@ Then $f(a) = 0 + r = r$, and so $f(x) = (x - a) q(x) + f(a)$.
 \end{note}
 
 \begin{note}
-  If $R = \mathbb{Z}$ and $F = \mathbb{Q}$, then $p(x)$ is irreducible over $\mathbb{Z}$,
-  then $p(x)$ is irreducible over $\mathbb{Q}$.
+  If $R = \mathbb{Z}$ and $F = \mathbb{Q}$, then $p(x)$ is irreducible over
+  $\mathbb{Z}$, then $p(x)$ is irreducible over $\mathbb{Q}$.
 \end{note}
 
 % section irreducibles (end)
 
-% section review_of_ring_theory (end)
-
-% section sylow_theory_continued_3 (end)
-
 % chapter lecture_5_jan_14th (end)
+
+\chapter{Lecture 6 Jan 18th}%
+\label{chp:lecture_6_jan_18th}
+% chapter lecture_6_jan_18th
+
+\section{Irreducibles (Continued)}%
+\label{sec:irreducibles_continued}
+% section irreducibles_continued
+
+Our goal in this section is to develop methods to test for the irreducibility
+of polynomials.
+
+\begin{warning}
+  Note that $f(x) = 2x + 4 = 2(x + 2)$ is reducible ovver $\mathbb{Z}$
+  \sidenote{This is interesting over $\mathbb{Z}$, since
+  $2 \notin \mathbb{Z}^\times$.} but
+  irreducible over $\mathbb{Q}$.
+\end{warning}
+
+\begin{propo}[Mod-$p$ Irreducibility Test]\index{Mod-$p$ Irreducibility Test}\label{propo:mod_p_irreducibility_test}
+  Let $f(x) \in \mathbb{Z}[x]$ with $\deg f \geq 1$. Let $p \in \mathbb{Z}$ be prime.
+  If $\bar{f}(x)$ is the corresponding polynomial in $\mathbb{Z}_p[x]$ such that
+  \begin{itemize}
+    \item the coefficients of $\bar{f}(x)$ are coefficients of $f(x)$ in mod $p$,
+    \item $\deg f = \deg \bar{f}$ \sidenote{This means that the leading
+      coefficient of $f$ is not killed off.}, and
+    \item $\bar{f}$ is irreducible over $\mathbb{Z}_p$,
+  \end{itemize}
+  then $f(x)$ is irreducible over $\mathbb{Q}$.
+\end{propo}
+
+\begin{proof}
+  Suppose $\deg f = \deg \bar{f}$, and $\bar{f}(x) \in \mathbb{Z}_p$ is 
+  irreducible over $\mathbb{Z}_p$. Suppose to the contrary that $f(x)$ is
+  reducible over $\mathbb{Q}$. Then for some $g(x), h(x) \in \mathbb{Q}[x]$
+  with $\deg g, \deg h < \deg f$, we have
+  \begin{equation*}
+    f(x) = g(x) h(x).
+  \end{equation*}
+  By \hyperref[thm:gauss_lemma]{Gauss' Lemma}, wma $g(x), h(x) \in \mathbb{Z}[x]$.
+  Then we have
+  \begin{equation*}
+    \bar{f}(x) = \bar{g}(x) \bar{h}(x) \in \mathbb{Z}_p[x].
+  \end{equation*}
+  By assumption, $\bar{f}$ is irreducible over $\mathbb{Z}_p$, either
+  \begin{equation*}
+    \deg \bar{g} = 0 \text{ or } \deg \bar{h} = 0.
+  \end{equation*}
+  Wlog, $\deg \bar{g} = 0$. Then
+  \begin{equation*}
+    \deg h \leq \deg f = \deg \bar{f} = \deg \bar{h} \leq \deg h,
+  \end{equation*}
+  which implies that $\deg f = \deg h$ but $\deg h < \deg f$. Thus $f$ is irreducible
+  over $\mathbb{Q}$.\qed\
+\end{proof}
+
+\begin{eg}
+  Consider the polynomial
+  \begin{equation*}
+    f(x) = 3x^3 + 22x^2 + 17x + 471.
+  \end{equation*}
+  Then consider
+  \begin{equation*}
+    \bar{f}(x) = x^3 + x + 1 \in \mathbb{Z}_2[x].
+  \end{equation*}
+  Since $\bar{f}(0) \neq 0$ and $\bar{f}(1) \neq 0$, and $\deg f = 3$, by
+  \cref{propo:irreducible_rootless_polynomials}, $\bar{f}(x)$ is irreducible over
+  $\mathbb{Z}_2$. Since $\deg f = \deg \bar{f}$, $f$ is irreducible over $\mathbb{Q}$
+  by the \hyperref[propo:mod_p_irreducibility_test]{Mod-$2$ irreducible test}.
+\end{eg}
+
+\begin{warning}
+  Consider $f(x) = 2x^2 + x \in \mathbb{Q}[x]$, which is reducible over $\mathbb{Q}$.
+  However, $\bar{f}(x) = x \in \mathbb{Z}_2[x]$ is \hlimpo{reducible} over $\mathbb{Z}_2$.
+  Notice here that $\deg \bar{f} \neq \deg f$.
+\end{warning}
+
+More generally so...
+
+\begin{propo}[Polynomials that Cannot be Factored Over the Ideals is Irreducible]\label{propo:polynomials_that_cannot_be_factored_over_the_ideals_is_irreducible}
+  Let $I$ be a proper ideal of an ID $R$. Let $p(x) \in R[x]$ be monic and non-const.
+  If $p(x)$ cannot be factored in $\left( R / I \right)[x]$ \sidenote{Note that
+  $\left( R / I \right)$ may not be an ID even if $R$ is one.} into polynomials of
+  lesser degree, then $p(x)$ is irreducible over $R$.
+\end{propo}
+
+\begin{proof}
+  Sps to the contrary that $p(x)$ is reducible over $R$. Then
+  \begin{equation*}
+    p(x) = f(x) g(x)
+  \end{equation*}
+  for some $f(x), g(x) \notin R^\times$. Since $p(x)$ is monic, and $\deg f, \deg g
+  < \deg p$, wma $f(x)$ and $g(x)$ are also monic. Then
+  \begin{equation*}
+    \bar{p}(x) = \bar{f}(x) \bar{g}(x) \in \left( R/I \right)[x].
+  \end{equation*}
+  Since $I \subsetneq R$, we have that $1 \notin I$, and so
+  \begin{equation*}
+    \deg \bar{f}, \deg \bar{g} < \deg \bar{p}
+  \end{equation*}
+  but that implies that $p(x)$ can be factored in $\left( R/I \right)[x]$.\qed\
+\end{proof}
+
+\begin{propo}[Eisenstein's Criterion]\index{Eisenstein's Criterion}\label{propo:eisenstein_s_criterion}
+  Let $R$ be an ID. Let $P$ be a prime ideal of $R$. Let
+  \begin{equation*}
+    f(x) = x^n + a_{n - 1} x^{n - 1} + \hdots + a_1 x + a_0 \in R[x]
+  \end{equation*}
+  with $n \geq 1$. Note that $f$ is monic. Now if
+  \begin{equation*}
+    a_{n - 1}, a_{n - 2}, \ldots, a_1, a_0 \in P \text{ and } a_0 \notin P^2,
+  \end{equation*}
+  then $f$ is irreducible over $R$.
+\end{propo}
+
+\begin{proof}
+  Sps to the contrary that $f$ is reducible over $R$. Since $f(x)$ is monic,
+  \begin{equation*}
+    f(x) = g(x) h(x)
+  \end{equation*}
+  where $g(x), h(x) \in R[x]$ and $\deg g, \deg h < \deg f$. Then
+  \begin{equation*}
+    \bar{f}(x) = \bar{g}(x) \bar{h}(x) = x^n \in (R/P)[x]
+  \end{equation*}
+  since $a_{n - 1}, a_{n - 2}, \ldots, a_1, a_0 \in P$.  Since $P$ is prime,
+  $R/P$ is an ID, we have that either $\bar{g}(0) = 0$ or $\bar{h}(0) = 0$.
+  Wlog, $\bar{g}(0) = 0 \in P$. But that implies that 
+  $a_0 = \bar{g}(0)\bar{h}(0) = 0 \in P^2$, a contradiction.\qed\
+\end{proof}
+
+% section irreducibles_continued (end)
+
+% chapter lecture_6_jan_18th (end)
 
 \appendix
 
