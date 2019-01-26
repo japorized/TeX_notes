@@ -1244,6 +1244,128 @@ if $F$ is a field under the same operations.
 
 % chapter lecture_8_jan_23rd (end)
 
+\chapter{Lecture 9 Jan 25th}%
+\label{chp:lecture_9_jan_25th}
+% chapter lecture_9_jan_25th
+
+\section{Field Extensions (Continued 2)}%
+\label{sec:field_extensions_continued_2}
+% section field_extensions_continued_2
+
+Let $K / F$, and $0 \neq g(x) \in F[x]$, and $\alpha \in K$ such that $g(\alpha) = 0$. Since $F[x]$ is an
+ID, $g(x)$ must have an irreducible factor $f(x) \in F[x]$ such that $f(\alpha) = 0$. By the proof of
+\cref{propo:span_of_the_extension},
+\begin{equation*}
+  \langle f(x) \rangle = \ker \phi = I = \{ h(x) \in F[x] \mmid h(\alpha) = 0 \}.
+\end{equation*}
+In particular,
+\begin{itemize}
+  \item If $h(x) \in F[x]$ such that $h(\alpha) = 0$, then $h(x) \in \langle f(x) \rangle$. In particular,
+    $f(x) \mid h(x)$.
+  \item $\langle f(x) \rangle$ contains a unique, monic, irreducible polynomial: for any $g(x) \in 
+    \langle f(x) \rangle$ that is irreducible, we know that $g(x) = uf(x)$, where $0 \neq u \in F^\times$,
+    and so we can just divide the polynomial $g$ by $u$ to make it monic.
+\end{itemize}
+
+\begin{defn}[Minimal Polynomial]\index{Minimal Polynomial}\label{defn:minimal_polynomial}
+  Let $K / F$, and $\alpha \in K$ be a root of a non-zero polynomial in $F[x]$. Then there exists a
+  unique irreducible monic polynomial $f(x) \in F[x]$ such that $f(\alpha) = 0$. We call this $f(x)$
+  the \hlnoteb{minimal polynomial} for $\alpha$ over $F$. If $\deg f = n$, we call $n$ the \hldefn{degree}
+  of $\alpha$ over $F$, denoted $\deg_F(\alpha)$.
+\end{defn}
+
+\begin{note}
+  For an $\alpha \in K$, its minimal polynomial is unique, but a minimal polynomial need not have only
+  one root.
+\end{note}
+
+\begin{propo}[Span of an Extension if Linearly Independent]\label{propo:span_of_an_extension_if_linearly_independent}
+  Let $K / F$, and $\alpha \in K$ with minimal polynomial $f(x) \in F[x]$, with $\deg_F(\alpha) = n$. Then
+  the span $F(\alpha) = \Span_F \{ 1, \alpha, \ldots, \alpha^{n - 1} \}$ is linearly independent over $F$.
+\end{propo}
+
+\begin{proof}
+  Sps to the contrary that
+  \begin{equation*}
+    c_{n - 1} \alpha^{n - 1} + c_{n - 2} \alpha^{n - 2} + \hdots + c_1 \alpha + c_0 = 0, \; c_i \in F,
+  \end{equation*}
+  has a non-trivial solution, i.e. not all $c_i$'s are $0$ (i.e. we assume that the $\alpha$'s are linearly
+  dependent). Consider
+  \begin{equation*}
+    g(x) = c_{n - 1} x^{n - 1} + \hdots + c_1 x + c_0,
+  \end{equation*}
+  and so $g \neq 0$. However, $g(\alpha) = 0$, so $g(x) \in \langle f(x) \rangle$, i.e. $f(x) \mid g(x)$.
+  However, that contradicts the fact that $\deg f = n > n - 1 \geq \deg g$.\qed\
+\end{proof}
+
+\begin{eg}
+  Consider $K / F$, and $\alpha \in K$. Then
+  \begin{equation*}
+    \deg_F(\alpha) = 1 \iff \text{ min. polym } f(x) = x - \alpha \in F[x] \iff \alpha \in F.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Consider $\mathbb{Q}(\sqrt{2}) / \mathbb{Q}$. Let $\alpha = \sqrt{2}$. Note that $f(\alpha) = 0$ for
+  $f(x) = x^2 - 2$, which is irreducible by Eisenstein by $P = \langle 2 \rangle$. Thus 
+  $\deg_F(\alpha) = 2$, and so
+  \begin{equation*}
+    \mathbb{Q}(\sqrt{2}) = \Span_{\mathbb{Q}} \{ 1, \alpha \} = \{ a + b \sqrt{2} \mmid a, b \in \mathbb{Q} \}.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Let $\alpha = \sqrt{1 + \sqrt{3}}$. Notice that $\alpha^2 = 1 + \sqrt{3}$, and so $(\alpha^2 - 1)^2 = 3$.
+  Thus
+  \begin{equation*}
+    \alpha^4 - 2 \alpha^2 + 1 - 3 = 0.
+  \end{equation*}
+  Let $f(x) = x^4 - 2x^2 - x \in \mathbb{Q}[x]$. Note that $f$ is monic and $f(\alpha) = 0$. By Eisenstein,
+  $f$ is irreducible if we pick $P = \langle 2 \rangle$. Thus $f$ is a minimal polynomial for $\alpha$. We
+  have that
+  \begin{equation*}
+    \deg_{\mathbb{Q}}(\alpha) = \deg f = 4.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Let $f(x) = x^3 + x + 1 \in \mathbb{Z}_2[x]$. Let $\alpha$ be a root of $f(x)$ in some extension of
+  $\mathbb{Z}_2$. Compute the size of $\mathbb{Z}_2(\alpha)$.
+\end{eg}
+
+\begin{solution}
+  We showed in one of our previous examples that such an $f$ is irreducible in $\mathbb{Z}_2$. Thus
+  $\deg_{\mathbb{Z}_2}(\alpha) = 3$. Then
+  \begin{equation*}
+    \mathbb{Z}_2(\alpha) = \Span_{\mathbb{Z}_2} \{ 1, \alpha, \alpha^2 \}, 
+  \end{equation*}
+  where $\{ 1, \alpha, \alpha^2 \}$ is linearly independent over $\mathbb{Z}_2$. Thus
+  \begin{equation*}
+    \abs{\mathbb{Z}_2(\alpha)} = 2 \times 2 \times 2 = 8.
+  \end{equation*}
+\end{solution}
+
+\begin{note}
+  Notice that there is no guarantee that such a root exists, but it does, which is a theorem that we shall
+  prove later. (Link will be provided later) % TODO : include link to Kronecker's theorem
+\end{note}
+
+\begin{crly}[Isomorphism between Extensions]\label{crly:isomorphism_between_extensions}
+  Let $K / F$ and $\alpha, \beta \in K$ have the same minimal polynomial $f(x) \in F[x]$. Then
+  $F(\alpha) \simeq F(\beta)$.
+\end{crly}
+
+\begin{proof}
+  From \cref{propo:span_of_the_extension}, we have that
+  \begin{equation*}
+    F(\alpha) \simeq F[x] / \langle f(x) \rangle \simeq F(\beta).
+  \end{equation*}\qed\
+\end{proof}
+
+% section field_extensions_continued_2 (end)
+
+% chapter lecture_9_jan_25th (end)
+
 \appendix
 
 \chapter{Asides and Prior Knowledge}%
