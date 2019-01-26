@@ -15,8 +15,10 @@
 \setmainfont[Ligatures=TeX]{Times Newer Roman}
 \setsansfont[Ligatures=TeX]{Helvetica Neue LT Std}
 
-\DeclareMathOperator{\stab}{Stab}
-\DeclareMathOperator{\orb}{Orb}
+\DeclareMathOperator{\stab}{stab}
+\DeclareMathOperator{\orb}{orb}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\Span}{span}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -1114,6 +1116,133 @@ if $F$ is a field under the same operations.
 % section field_extensions (end)
 
 % chapter lecture_7_jan_21st (end)
+
+\chapter{Lecture 8 Jan 23rd}%
+\label{chp:lecture_8_jan_23rd}
+% chapter lecture_8_jan_23rd
+
+\section{Field Extensions (Continued)}%
+\label{sec:field_extensions_continued}
+% section field_extensions_continued
+
+\begin{eg}
+  Let $F$ be a field.
+  \begin{itemize}
+    \item If the characteristic $ch(F) = p > 0$ is a prime, then 
+      $F \supset \{ 0, 1, 2, \ldots, p - 1 \} \simeq \mathbb{Z}_p$.
+      Thus $F / \mathbb{Z}_p$.
+    \item If $\ch(F) = 0$, then $F / \mathbb{Q}$.
+  \end{itemize}
+  In either of these cases, we call $\mathbb{Z}_p$ and/or $\mathbb{Q}$ the \hldefn{prime subfield} of
+  $F$.
+\end{eg}
+
+\begin{defn}[Generated Field Extension]\index{Generated Field Extension}\label{defn:generated_field_extension}
+  Let $K / F$, and $\alpha_1, \ldots, \alpha_n \in K$. The \hlnoteb{field extension of $F$ generated
+  by $\{a_i\}_{i = 1}^{n}$} is
+  \begin{equation*}
+    F(\alpha_1, \ldots, \alpha_n) 
+    := \left\{ \frac{f(\alpha_1, \ldots, \alpha_n)}{g(\alpha_1, \ldots, \alpha_n)} \mmid f, g \in F[x_1, \ldots, x_n], g \neq 0 \right\},
+  \end{equation*}
+  of which we call as $F$ \hldefn{adjoin} $\alpha_1, \ldots, \alpha_n$.
+\end{defn}
+
+\begin{note}
+  We have that $F(\alpha_1, \ldots, \alpha_n) / F$, and in turn $K / F(\alpha_1, \ldots, \alpha_n)$.
+\end{note}
+
+\begin{remark}[Minimality]\label{remark:minimality_of_an_extension}
+  Let $K / F$, and $\alpha_1, \ldots, \alpha_n \in K$. If we have $E / F$ such that $K / E$ and
+  $\alpha_i \in E$ for all $i$, then
+  \begin{equation*}
+    F(\alpha_1, \ldots, \alpha_n) \subseteq E,
+  \end{equation*}
+  i.e. $F(\alpha_1, \ldots, \alpha_n)$ is the smallest extension of $F$ that contains the $\alpha_i$'s.
+\end{remark}
+
+\begin{eg}[A classical example of field extensions]
+  Show that $\mathbb{Q}(\sqrt{2}, \sqrt{3}) = \mathbb{Q}(\sqrt{2} = \sqrt{3})$.
+\end{eg}
+
+\begin{proof}
+  Since $\sqrt{2}, \sqrt{3} \in \mathbb{Q}(\sqrt{2}, \sqrt{3})$, by closure, we have that
+  $\sqrt{2} + \sqrt{3} \in \mathbb{Q}(\sqrt{2}, \sqrt{3})$, and so $\mathbb{Q}(\sqrt{2} + \sqrt{3}) 
+  \subseteq \mathbb{Q}(\sqrt{2}, \sqrt{3})$.
+
+  For the other direction, we have that $\sqrt{2} + \sqrt{3} \in \mathbb{Q}(\sqrt{2} + \sqrt{3})$.
+  Then in particular $\frac{1}{\sqrt{2} + \sqrt{3}} \in \mathbb{Q}(\sqrt{2} + \sqrt{3})$. Notice that
+  \begin{equation*}
+    \frac{1}{\sqrt{2} + \sqrt{3}} \cdot \frac{\sqrt{2} - \sqrt{3}}{\sqrt{2} - \sqrt{3}} 
+      = \sqrt{3} - \sqrt{2} \in \mathbb{Q}(\sqrt{2} + \sqrt{3}).
+  \end{equation*}
+  So $2 \sqrt{3}, 2 \sqrt{2} \in \mathbb{Q}(\sqrt{2} + \sqrt{3})$ \sidenote{$2 \sqrt{2}$ follows from
+  a similar argument by using $1 = \frac{\sqrt{3} - \sqrt{2}}{\sqrt{3} - \sqrt{2}}$.}, and in turn
+  $\sqrt{2}, \sqrt{3} \in \mathbb{Q}(\sqrt{2}, \sqrt{3})$. Then by minimality, 
+  $\mathbb{Q}(\sqrt{2}, \sqrt{3}) \subseteq \mathbb{Q}(\sqrt{2} + \sqrt{3})$.\qed\
+\end{proof}
+
+\begin{remark}
+  Notice that $F(\alpha, \beta) = \left[ F(\alpha) \right](\beta)$.
+
+  We have that $F(\alpha) \subseteq F(\alpha, \beta), \beta \in F(\alpha, \beta)$, which implies that
+  $F(\alpha)(\beta) \subseteq F(\alpha, \beta)$ by minimality.
+
+  Also, since $F \subseteq F(\alpha, \beta)$, and $\alpha, \beta \in F(\alpha, \beta)$, we have, by
+  minimality (again), that $F(\alpha, \beta) \subseteq F(\alpha)(\beta)$.
+\end{remark}
+
+\begin{propo}[Span of the Extension]\label{propo:span_of_the_extension}
+  Let $K / F$ and $\alpha \in K$. If $\alpha$ is a root of some non-zero $f(x) \in F[x]$ irreducible
+  over $F$, then $F(\alpha) \simeq F[x] / \langle f(x) \rangle$. Moreover, if $\deg f = n$, then
+  \begin{equation*}
+    F(\alpha) = \Span_F \{ 1, \alpha, \ldots, \alpha^{n - 1} \}.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Sps $\alpha \in K$ is a root of an irreducible $f(x) \in F[x]$ over $F$. Let $\deg f = n \in \mathbb{N}$.
+  Define $\phi : F[x] \to F(\alpha)$ by $\phi(g(x)) = g(\alpha)$. Note that this is a ring homomorphism.
+  Let
+  \begin{equation*}
+    I = \{ g(x) \in F[x] \mmid g(\alpha) = 0 \} = \ker \phi,
+  \end{equation*}
+  which is an ideal. Since $F[x]$ is a PID \sidenote{See 
+  \href{https://tex.japorized.ink/PMATH347S18/classnotes.tex}{PMATH347}.}, $\exists g(x) \in F[x]$ such that
+  $I = \langle g(x) \rangle$. Since $\alpha$ is a root of $f(x)$, $f(x) \in I$, and so $f(x) = g(x) h(x)$
+  for some $h(x) \in F[x]$. Since $I \neq F[x]$ and $f$ is irreducible, $h(x) \in F^\times$. Thus
+  $\langle g(x) \rangle = \langle g(x) \rangle$. Then by the \hlnotea{First Isomorphism Theorem},
+  \begin{equation*}
+    F[x] / \langle f(x) \rangle \simeq \phi(F[x]).
+  \end{equation*}
+  By construction, $\phi(F[x]) \subseteq F(\alpha)$. Since $\phi(F[x])$ is a field (by isomorphism)
+  which contains $\alpha = \phi(x)$ and $F$, and so by minimality $F(\alpha) \subseteq \phi(F[x])$.
+  Therefore
+  \begin{equation*}
+    F[x]/ \langle f(x) \rangle \simeq F(\alpha),
+  \end{equation*}
+  as required.
+
+  Through the isomorphism, for any $h(x) \in F[x]$, we have
+  \begin{equation*}
+    h(x) + \langle f(x) \rangle \mapsto h(\alpha).
+  \end{equation*}
+  So
+  \begin{equation*}
+    F[x] / \langle f(x) \rangle 
+      = \left\{ c_{n - 1} x^{n - 1} + \hdots + c_1 x + c_0 + \langle f(x) \rangle \mmid c_i \in F \right\} \\
+  \end{equation*}
+  and thus
+  \begin{align*}
+    F(\alpha)
+      &= \left\{ c_{n - 1} \alpha^{n - 1} + \hdots + c_1 \alpha + c_0 + \mmid c_i \in F \right\} \\
+      &= \Span_F \left\{ 1, \alpha, \ldots, \alpha^{n - 1} \right\},
+  \end{align*}
+  as claimed.\qed\
+\end{proof}
+
+% section field_extensions_continued (end)
+
+% chapter lecture_8_jan_23rd (end)
 
 \appendix
 
