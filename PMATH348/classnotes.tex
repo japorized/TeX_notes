@@ -948,6 +948,173 @@ More generally so...
 
 % chapter lecture_6_jan_18th (end)
 
+\chapter{Lecture 7 Jan 21st}%
+\label{chp:lecture_7_jan_21st}
+% chapter lecture_7_jan_21st
+
+\section{Irreducibles (Continued 2)}%
+\label{sec:irreducibles_continued_2}
+% section irreducibles_continued_2
+
+\begin{eg}
+  Prove that $f(x, y) = x^2 + y^2 - 1$ is irreducible in $\mathbb{Q}[x, y] = (\mathbb{Q}[x])[y]$.
+\end{eg}
+
+\begin{proof}
+  Let $g(y) = y^2 + (x^2 + 1)$. Since $x + 1$ is irreducible, let $P = \langle x + 1 \rangle$,
+  which is therefore a prime ideal of $\mathbb{Q}[x]$. Moreover, notice that
+  \begin{equation*}
+    x^2 - 1 = ( x + 1 )( x - 1 ) \in P.
+  \end{equation*}
+  Since $(x + 1)^2 \nmid \left(x^2 - 1\right)$, we have that $x^2 - 1 \notin P^2$. Then by
+  \hyperref[propo:eisenstein_s_criterion]{Eisenstein}, we have that $f(x, y)$ is irreducible.
+\end{proof}
+
+\begin{crly}[Eisenstein + Gauss]\label{crly:eisenstein_gauss}
+  Let $p \in \mathbb{Z}$ be a prime, and let
+  \begin{equation*}
+    f(x) = x^n + a_{n - 1} x^{n - 1} + \hdots + a_1 x + a_0
+  \end{equation*}
+  be non-const in $\mathbb{Z}[x]$. If $p \mid a_i$ for all $i \in \{0, \ldots, n - 1\}$, and
+  $p^2 \nmid a_0$, then $f$ is irreducible over $\mathbb{Q}$.
+\end{crly}
+
+\marginnote{Recall that the prime ideals of $\mathbb{Z}$ are $\mathbb{Z}_p$ where $p$ is prime.}
+
+\begin{proof}
+  Let $P = \langle p \rangle$. It follows from Eisenstein that $f$ is irreducible over $\mathbb{Z}$,
+  and then from Gauss that $f$ is irreducible over $\mathbb{Q}$.\qed\
+\end{proof}
+
+\begin{eg}
+  Let $f(x) = x^n - d \in \mathbb{Z}[x]$ where $\exists p \in \mathbb{Z}$ prime such that
+  $p^2 \nmid d$ and $p \mid d$. Let $P = \langle p \rangle$ and so by \cref{crly:eisenstein_gauss},
+  $f$ is irreducible over $\mathbb{Q}$.
+\end{eg}
+
+\begin{note}
+  The above example is noteworthy since it will appear rather often throughout this course. Notice
+  that if we have polynomials of the above form, then we immediately have that the polynomial is
+  irreducible.
+\end{note}
+
+\begin{eg}
+  Are the following irreducible over $\mathbb{Q}$?
+  \begin{enumerate}
+    \item $f(x) = x^7 + 21 x^5 + 15x^2 + 9x + 6$
+
+      Yes. Notice that all the non-leading coefficients have a factor of $3$, and so if we let
+      $p = 3$, since $3^2 = 9 \nmid 6$, it follows from Eisenstein that $f$ is irreducible over
+      $\mathbb{Q}$.
+
+    \item $f(x) = x^3 + 2x + 16$
+
+      Eisenstein can't help us here since $\gcd(2, 16) = 2$ and $2^2 = 4 \mid 16$.
+      Consider $\bar{f}(x) = x^3 + 2x + 1 \in \mathbb{Z}_3[x]$.  Notice that
+      $\bar{f}(0) = 1 = \bar{f}(2)$ and $\bar{f}(1) = 4$. Since $\deg \bar{f} = 3$, it follows
+      from \cref{propo:irreducible_rootless_polynomials} that $\bar{f}$ is irreducible over
+      $\mathbb{Z}_3$. Since $\deg f = \deg \bar{f}$, it follows from the
+      \hyperref[propo:mod_p_irreducibility_test]{Mod-$3$ irreducible test} that $f$ is irreducible
+      over $\mathbb{Q}$.
+
+    \item $f(x) = x^4 + 5x^3 + 6x^2 - 1$
+
+      Again, Eisenstein can't help us here, since $5 \coprime 6 \coprime 1$ \sidenote{$\coprime$
+      is a common notation for coprimeness.}. Consider
+      \begin{equation*}
+        \bar{f}(x) = x^4 + x^3 + 1 \in \mathbb{Z}_2[x].
+      \end{equation*}
+      We know that $\bar{f}(0) = 1 = \bar{f}(1)$, and so $\bar{f}$ has no roots in $\mathbb{Z}_2$.
+      \sidenote{Note that we cannot use \cref{propo:irreducible_rootless_polynomials} here as
+      $\deg \bar{f} = 4 > 3$.} Consider the quadratics\sidenote{\hlwarn{Why did we only check for
+      the quadratics and not others?} We did so as we have already checked for the linear factors
+      by checking for roots, which also checks for the cubic factors, since if we can factor out
+      a linear factor, we are left with a cubic factor. Ruling out linear factors in turn rules out
+      cubic factors.} of $\mathbb{Z}_2[x]$: we have
+      \begin{equation*}
+        x^2, \quad x^2 + x, \quad x^2 + 1, \quad x^2 + x + 1,
+      \end{equation*}
+      all, but the last, of which are reducible. However, notice that
+      \begin{equation*}
+        \left( x^2 + x + 1 \right)^2 = x^4 + x^2 + 1 \neq \bar{f}(x)
+      \end{equation*}
+      (by the Freshman's Dream). Thus $\bar{f}$ is irreducible in $\mathbb{Z}_2$. Since $\deg f =
+      \deg \bar{f}$, by \hyperref[propo:mod_p_irreducibility_test]{Mod-$2$ irreducible test}.
+
+    \item \imponote Let $p$ be a prime, and let
+      \begin{equation*}
+        f(x) = x^{p - 1} + x^{p - 2} + \hdots + x^2 + x + 1.
+      \end{equation*}
+      Note that $f(x)(x - 1) = x^p - 1$, and so $f(x) = \frac{x^p - 1}{x - 1}$.
+      Furthermore, notice that
+      \begin{align*}
+        f(x + 1) &= \frac{(x + 1)^p - 1}{x} = \sum_{k = 0}^{p} \binom{p}{k} x^{p - k} - \frac{1}{x} \\
+                 &= x^{p - 1} + \binom{p}{p - 1} x^{p - 2} + \hdots + \binom{p}{2} x + \binom{p}{1}.
+      \end{align*}
+      By setting $P = \langle p \rangle$, we have that $f(x + 1)$ is irreducible by Eisenstein.
+      It follows from A3Q2 that $f(x)$ is also irreducible.
+  \end{enumerate}
+\end{eg}
+
+% section irreducibles_continued_2 (end)
+
+\section{Field Extensions}%
+\label{sec:field_extensions}
+% section field_extensions
+
+Let $K$ be a field. Recall that a non-empty subset $F \subseteq K$ is called a \hldefn{subfield} of $K$
+if $F$ is a field under the same operations.
+
+\begin{eg}
+  $\mathbb{Q}(\sqrt{2}) := \left\{ a + b\sqrt{2} \mmid a, b \in \mathbb{Q} \right\}$ is a subfield of
+  $\mathbb{C}$. We call this field $\mathbb{Q}$ `\hldefn{adjoin}' $\sqrt{2}$.
+\end{eg}
+
+\begin{note}
+  We did not actually show that $\mathbb{Q}(\sqrt{2})$ is indeed a field but note the following:
+  let $a + b \sqrt{2} \neq 0 \in \mathbb{Q}(\sqrt{2})$. Then
+  \begin{equation*}
+    \frac{1}{a + b\sqrt{2}} \cdot \frac{(a - b\sqrt{2})}{(a - b \sqrt{2})} = \frac{a - b \sqrt{2}}{a^2 - 2b^2} \in \mathbb{Q}(\sqrt{2}),
+  \end{equation*}
+  and note that
+  \begin{equation*}
+    a^2 - 2b^2 \neq 0 \iff \frac{a}{b} = \sqrt{2},
+  \end{equation*}
+  which does not happen in $\mathbb{Q}$ itself.
+\end{note}
+
+\begin{defn}[Field Extension]\index{Field Extension}\label{defn:field_extension}
+  Let $F$ be a field. A \hlnoteb{field extension} (or an \hlnoteb{extension}) of $F$ is a field $K$
+  which contains an \hlimpo{isomorphic} copy of $F$ as a subfield. We denote this notion of $K/F$.
+\end{defn}
+
+\begin{eg}
+  \begin{itemize}
+    \item We have that $\mathbb{C} / \mathbb{R}$ and $\mathbb{Q}(\sqrt{2}) / \mathbb{Q}$.
+    \item For a prime $p$, if
+      \begin{equation*}
+        \mathbb{Z}_p =(x) \left\{ \frac{f(x)}{g(x)} \mmid f(x), g(x) \in \mathbb{Z}_p[x], g \neq 0 \right\},
+      \end{equation*}
+      then $\mathbb{Z}_p(x) / \mathbb{Z}_p$.
+    \item Let $F$ be a field, and $f(x) \in F[x]$ be irreducible. Then let $K = F[x]/\langle f(x) \rangle$.
+      Then $K / F$.
+  \end{itemize}
+\end{eg}
+
+\begin{note}
+  Note that in the last example, $K$ is not a `direct' extension of $F$, but it contains an isomorphic
+  copy of $F$. This allows us to have more flexibility in what we can do.
+\end{note}
+
+\begin{warning}
+  If given $\mathbb{Z}_p = \{ 0, 1, 2, \ldots, p - 1 \}$, then $\mathbb{Q}$ is not an extension of
+  $\mathbb{Z}_p$ since the two use different operations.
+\end{warning}
+
+% section field_extensions (end)
+
+% chapter lecture_7_jan_21st (end)
+
 \appendix
 
 \chapter{Asides and Prior Knowledge}%
