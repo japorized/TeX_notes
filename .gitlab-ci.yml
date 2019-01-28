@@ -8,6 +8,7 @@ variables:
 
 before_script:
   - ruby -v # Print version for debugging purposes
+  - gem install bundler
   - bundle install -j $(nproc) --path vendor
 
 test:
