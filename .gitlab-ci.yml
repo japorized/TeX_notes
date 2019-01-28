@@ -3,12 +3,6 @@
 # Docs: https://docs.gitlab.com/ce/pages/
 image: ruby:2.3
 
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-    - vendor/ruby
-    - vendor/bundle
-
 variables:
   JEKYLL_ENV: production
 
@@ -18,6 +12,11 @@ before_script:
 
 test:
   stage: test
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+    - vendor/ruby
+    - vendor/bundle
   script:
   - bundle exec jekyll build -d test
   artifacts:
@@ -28,6 +27,11 @@ test:
 
 pages:
   stage: deploy
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+    - vendor/ruby
+    - vendor/bundle
   script:
   - bundle exec jekyll build -d public
   artifacts:
