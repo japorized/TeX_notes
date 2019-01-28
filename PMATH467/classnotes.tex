@@ -168,7 +168,7 @@ where we may define a ``distance'' by
 \label{sec:euclidean_space_continued}
 % section euclidean_space_continued
 
-In the last lecture, from metric topology, 
+In the last lecture, from metric topology,
 we generalized the notion to a more abstract one
 that is based solely on open sets.
 
@@ -188,7 +188,7 @@ more concepts that we shall need down the road.
   Let $A$ be a set. Its \hlnoteb{closure},
   denoted as $\bar{A}$, is defined as
   \begin{equation*}
-    \bar{A} = \bigcap_{C \supset A}^{C: \text{ closed }} C. 
+    \bar{A} = \bigcap_{C \supset A}^{C: \text{ closed }} C.
   \end{equation*}
   It is the smallest closed set that contains $A$.
 \end{defn}
@@ -198,7 +198,7 @@ more concepts that we shall need down the road.
 \end{note}
 
 \begin{defn}[Interior of a Set]\index{Interior}\label{defn:interior_of_a_set}
-  Let $A$ be a set. Its \hlnoteb{interior}, 
+  Let $A$ be a set. Its \hlnoteb{interior},
   denoted either as $\text{Int }(A)$, $A^\circ$ or $\Int{A}$,
   is defined as
   \begin{equation*}
@@ -267,7 +267,7 @@ more concepts that we shall need down the road.
 \end{defn}
 
 \begin{eg}[A Topologist's Circle]\label{eg:a_topologists_circle}
-  Consider the function 
+  Consider the function
   \begin{equation*}
     f(x) = \begin{cases}
       \sin \frac{1}{x} & x \neq 0 \\
@@ -318,7 +318,7 @@ But why are we allowed to do that?
   We can, in fact, have
   \sidenote{Recall from
   \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf}{PMATH 351}
-  that we can write $\mathbb{R}$ as a disjoint union 
+  that we can write $\mathbb{R}$ as a disjoint union
   of open intervals with rational endpoints.}
   \begin{equation*}
     \mathcal{B}_1 = \left\{ (a, b) \mmid a, b \in \mathbb{Q}, a \leq b \right\},
@@ -361,7 +361,7 @@ But why are we allowed to do that?
     \item $\beta_1$ and $\beta_2$ can be taken to be elements of
       bases $\mathcal{B}_1 \subset \mathcal{T}_1$ and
       $\mathcal{B}_2 \subset \mathcal{T}_2$, respectively.
-    \item the product topology on $\mathbb{R}^2$ is the same 
+    \item the product topology on $\mathbb{R}^2$ is the same
       as the Euclidean topology.
   \end{enumerate}
 \end{ex}
@@ -630,13 +630,13 @@ describe why.
 % section compactness
 
 \begin{defn}[Sequential Compactness]\index{Sequential Compactness}\label{defn:sequential_compactness}
-  For $A \subseteq X$, where $X$ is a topological space, if 
+  For $A \subseteq X$, where $X$ is a topological space, if
   $\left\{ x_i \right\}_{i \in I} \subseteq A$, arbitrary sequence in $A$, has a
   convergent subsequence, we say that $A$ is \hlnoteb{sequentially compact}.
 \end{defn}
 
 \begin{defn}[Compactness]\index{Compactness}\label{defn:compactness}
-  We say that a topological space $X$ is \hlnoteb{compact} if every \hlnotea{open cover} 
+  We say that a topological space $X$ is \hlnoteb{compact} if every \hlnotea{open cover}
   of $X$ has a finite \hlnotea{subcover}.
 \end{defn}
 
@@ -645,7 +645,7 @@ describe why.
 \end{lemma}
 
 \begin{eg}
-  $[ 0, 1 )$ is not compact: consider the open cover 
+  $[ 0, 1 )$ is not compact: consider the open cover
   $\left\{ \left[ 0, 1 - \frac{1}{n} \right) \right\}_{n \in \mathbb{N}}$, which contains
   $[0, 1)$ as $n \to \infty$. But whenever $n$ is finite, we have $1 - \frac{1}{n} < 1$,
   and so any finite collection of the $\left[0, \frac{1}{n}\right)$ is not a cover of
@@ -711,8 +711,8 @@ that would be a finite subcover for the closed subset.
 \end{thm}
 
 \begin{proof}
-  \hlbnoted{$(\implies)$} We say that compactness impliess boundedness. Also, since 
-  $\mathbb{R}^n$ is Hausdorff, $X$ is closed.\sidenote{Both from 
+  \hlbnoted{$(\implies)$} We say that compactness impliess boundedness. Also, since
+  $\mathbb{R}^n$ is Hausdorff, $X$ is closed.\sidenote{Both from
   \cref{lemma:properties_of_compact_sets}}.
 
   \noindent
@@ -756,7 +756,7 @@ We shall start the next part this lecture.
 \end{note}
 
 \begin{eg}
-  Let $B^n = B^n(0, 1) \subseteq \mathbb{R}^n$. Then $B^n$ is homeomorphic to 
+  Let $B^n = B^n(0, 1) \subseteq \mathbb{R}^n$. Then $B^n$ is homeomorphic to
   $\mathbb{R}^n$.
   \begin{marginfigure}
     \centering
@@ -879,11 +879,11 @@ do well tell the difference between the following two graphs, mathematically?
 
 We shall later on prove that a point cannot simultaneously be a boundary point and
 an interior point. This property is called \hlnotea{the invariance of the boundary}.
-\sidenote{This also means that $\Int{M} \cap \partial M = \emptyset$. Also, by 
+\sidenote{This also means that $\Int{M} \cap \partial M = \emptyset$. Also, by
 \cref{defn:manifold}, $\Int{M} \cup \partial M = M$.}
 
 \begin{note}
-  $\Int{M}$ is open. Thus, we can use the same definition about open sets as 
+  $\Int{M}$ is open. Thus, we can use the same definition about open sets as
   before using $\phi$.
 \end{note}
 
@@ -1005,7 +1005,7 @@ From \cref{eg:basis_of_r_n}, we have
 
 \paragraph{Set theoretic view of $S^1$}
 We showed that $S^1$ is a manifold. We can, in fact, set theoretically, look
-at $S^1$ as $A = [0, 1]$ glued at the endpoints, i.e. we \hlnotea{identify} 
+at $S^1$ as $A = [0, 1]$ glued at the endpoints, i.e. we \hlnotea{identify}
 the points $0$ and $1$ as `the same', and label this notion as $0 \sim 1$.
 
 \paragraph{Topological view of $S^1$}
@@ -1091,11 +1091,11 @@ sphere on the complex plane.
     \draw[->] (-2,0) -- (2, 0);
     \draw[->] (0,-2) -- (0, 2);
     \draw (0, 0) circle(1);
-    \draw (0, 0) -- (0.7071067811865475244,0.7071067811865475244) 
+    \draw (0, 0) -- (0.7071067811865475244,0.7071067811865475244)
       node[circle,fill,inner sep=1pt,label={45:{$z_1 = e^{i \theta_1}$}}] {};
-    \draw (0, 0) -- (-0.7071067811865475244,0.7071067811865475244) 
+    \draw (0, 0) -- (-0.7071067811865475244,0.7071067811865475244)
       node[circle,fill,inner sep=1pt,label={135:{$z_2 = e^{i \theta_2}$}}] {};
-    \draw[dashed] (0, 0) -- (-0.7071067811865475244,-0.7071067811865475244) 
+    \draw[dashed] (0, 0) -- (-0.7071067811865475244,-0.7071067811865475244)
       node[circle,fill,inner sep=1pt,label={225:{$z_1 z_2 = e^{i ( \theta_1 + \theta_2 )}$}}] {};
     \node[scale=1.3,right] at (1, 1.5) {$S^1 = \left\{ z \in \mathbb{C} \mid \abs{ z } = 1 \right\} = \left\{ e^{i \theta} \mid \theta \in \mathbb{R} \right\}$};
   \end{tikzpicture}
@@ -1105,7 +1105,7 @@ sphere on the complex plane.
 We see that this `group' takes on the operation of adding the indices
 of the exponents. Thus $G = ( S^1, \cdot )$. Notice that $G$ is indeed
 a group equipped with said operation, and for each $z_1 \in G$, there
-exists $z_1^{-1} = \frac{1}{z_1} \in G$ such that 
+exists $z_1^{-1} = \frac{1}{z_1} \in G$ such that
 $z_1 \cdot \frac{1}{z_1} = 1$.
 
 Furthermore, the function
@@ -1164,7 +1164,7 @@ shown in \cref{fig:shifted_s_1_for_the_moduli_space}.
     \draw[->] (-1, 0) -- (3, 0);
     \draw[->] (0, -2) -- (0, 2);
     \draw (1, 0) circle(1);
-    
+
     \clip (-2, -2) rectangle (3, 2);
     \foreach \m in {-3,-2.5,...,3} {
       \draw[color=be-blue] plot ({\x}, {\m * \x});
@@ -1255,7 +1255,7 @@ by identifying the sides with $>>$, we get a \hldefn{torus}.
 
 \noindent
 where we define $G = \left\{ T^k \mmid k \in \mathbb{Z} \right\}$ as before,
-for $T ((x, y)) = (x + 1, y)$. Now on a similar note, define 
+for $T ((x, y)) = (x + 1, y)$. Now on a similar note, define
 $R : \mathbb{R} \to \mathbb{R}$ by $R((x, y)) = (x, y + 1)$. Then let
 $G_2 = \left\{ R^k \mmid k \in \mathbb{Z} \right\}$. Thus
 \begin{equation*}
@@ -1270,6 +1270,302 @@ $G_2 = \left\{ R^k \mmid k \in \mathbb{Z} \right\}$. Thus
 
 % chapter lecture_6_jan_18th (end)
 
+\chapter{Lecture 7 Jan 21st}%
+\label{chp:lecture_7_jan_21st}
+% chapter lecture_7_jan_21st
+
+\section{Manifolds (Continued 3)}%
+\label{sec:manifolds_continued_3}
+% section manifolds_continued_3
+
+\subsection{\texorpdfstring{$2$}{2}-dimensional Manifolds}%
+\label{sub:_2_dimensional_manifolds}
+% subsection _2_dimensional_manifolds
+
+\begin{eg}\label{eg:2_sphere_as_a_manifold}
+  $S^2$ is a $2$-dimensional manifold (w/o boundary).
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw (0, 0, 0) circle(2);
+      \shade[ball color=be-blue!70!dark,opacity=0.5] (0, 0, 0) circle(2);
+      \draw[opacity=0.5] (-2,0,0) arc (180:360:2 and 1);
+      \draw[dashed,opacity=0.5] (-2,0,0) arc (180:0:2 and 1);
+      \draw[opacity=0.5] (0,2,0) arc (90:270:1 and 2);
+      \draw[dashed,opacity=0.5] (0,2,0) arc (90:-90:1 and 2);
+
+      \fill[color=be-red,opacity=0.3] (-2, 0, 0) arc (180:360:2) -- (2, 0, 0) arc (360:180:2 and 1);
+      \fill[color=be-red,opacity=0.2] (-2, 0, 0) arc (180:0:2 and 1) -- (2, 0, 0) arc (360:180:2 and 1);
+
+      % the axes
+      \draw[dashed] (-3, 0, 0) -- (0, 0, 0);
+      \draw[dashed] (0, -3, 0) -- (0, 0, 0);
+      \draw[dashed] (0, 0, -3) -- (0, 0, 0);
+      \draw[-latex'] (0, 0, 0) -- (3, 0, 0) node[right] {$y$};
+      \draw[-latex'] (0, 0, 0) -- (0, 3, 0) node[above] {$z$};
+      \draw[-latex'] (0, 0, 0) -- (0, 0, 3) node[below,left] {$x$};
+    \end{tikzpicture}
+    \caption{The $2$-sphere $S^2$}
+    \label{fig:the_2_sphere_s_2_}
+  \end{figure}
+  Note that we may `cover' this sphere by the function $f_{-} : \mathbb{D} \subseteq \mathbb{R}^2 \to \mathbb{R}$,
+  where $\mathbb{D}$ is the unit disc in $\mathbb{R}^2$, and $f_{-}$ is given by
+  \begin{equation*}
+    (x, y) \mapsto - \sqrt{1 - (x^2 + y^2)}.
+  \end{equation*}
+  We see that $f_{-}$ is a chart for the lower hemisphere for \cref{fig:the_2_sphere_s_2_}, shaded red.
+  We can indeed cover the entire $2$-sphere with similar hemispheres in different orientations: consider
+  \begin{gather*}
+    f_+ (x, y) = \sqrt{ 1 - x^2 - y^2 } \\
+    g_+ (x, z) = \sqrt{ 1 - x^2 - z^2 } \\
+    g_- (x, z) = - \sqrt{ 1 - x^2 - z^2 } \\
+    h_+ (y, z) = \sqrt{ 1 - y^2 - z^2 } \\
+    h_- (y, z) = - \sqrt{ 1 - y^2 - z^2 },
+  \end{gather*}
+  which represent the upper hemisphere, eastern hemisphere, western hemisphere, front hemisphere,
+  and back hemisphere, respectively.
+\end{eg}
+
+We have the following general observation: let $f : \mathcal{U} \subseteq \mathbb{R}^n \to \mathbb{R}$
+be a real-valued continuous function. Then $\Gamma(f)$ is \hlnotea{parameterized} using $f$, i.e. $f$
+constructs the chart $\Gamma(f)$.
+
+We have not explicitly defined what $\Gamma(f)$ is, but it is recorded
+in \href{https://tex.japorized.ink/PMATH733/classnotes.pdf\#page.32}{PMATH 733}, but we shall provide a
+short definition here for reference: the \hldefn{graph} $\Gamma(f)$ of the function $f$ is defined as
+\begin{equation*}
+  \Gamma(f) := \left\{ (x_1, \ldots, x_n, y) \mmid f(x_1, \ldots, x_n) = y \right\}.
+\end{equation*}
+
+It is interesting to note that $\Gamma(f)$ is homeomorphic to $\mathcal{U}$. Consider the function
+\begin{equation*}
+  \Phi : \mathcal{U} \to \Gamma(F) \text{ given by } \Phi(x_1, \ldots, x_n) = (x_1, \ldots, x_n, f(x_1, \ldots, x_n)).
+\end{equation*}
+It is clear that $\Phi$ is continuous since each of its components are continuous. However, it is not
+as easy to find a continuous map to go from $\Gamma(f)$ to $\mathcal{U}$.
+
+\begin{defn}[Projection]\index{Projection}\label{defn:projection}
+  We define function $\pi_{n + 1} : \Gamma(f) \to \mathcal{U}$ by
+  \begin{equation*}
+    \pi_{n + 1}(x_1, \ldots, x_n, y) = (x_1, \ldots, x_n),
+  \end{equation*}
+  which is called a \hlnoteb{projection}.
+\end{defn}
+
+\begin{note}
+  \begin{enumerate}
+    \item In A1, we showed that $\pi_{n + 1}$ is continuous.
+    \item Furthermore, $\pi_{n + 1}$ is injective.
+    \item Thus, we observe that
+      \begin{equation*}
+        \pi_{n + 1} \circ \Phi(x_1, \ldots, x_n) = (x_1, \ldots, x_n) = id_{n + 1}(x_1, \ldots, x_n).
+      \end{equation*}
+  \end{enumerate}
+\end{note}
+
+\begin{eg}
+  Consider the following figure:
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw (0, 0, 0) circle(2);
+      \shade[ball color=be-blue!70!dark,opacity=0.5] (0, 0, 0) circle(2);
+      \draw[opacity=0.5] (-2,0,0) arc (180:360:2 and 1);
+      \draw[dashed,opacity=0.5] (-2,0,0) arc (180:0:2 and 1);
+      \draw[opacity=0.5] (0,2,0) arc (90:270:1 and 2);
+      \draw[dashed,opacity=0.5] (0,2,0) arc (90:-90:1 and 2);
+      \draw (0, 0, 0) circle(2);
+
+      % Stereographic projection
+      \node[draw,circle,color=be-red,fill,inner sep=1.5pt,pin={[pin edge=latex'-, pin distance=5pt]45:{$N$, the north pole}}] at (0, 2, 0) {};
+      \node[draw,circle,color=be-red,fill,inner sep=1.5pt,pin={[pin edge={latex'-}, pin distance=40pt]30:{$p$}}] at (1.5, 1, 0.5) {};
+      \node[draw,circle,color=be-red,fill,inner sep=1.5pt,pin={[pin edge=latex'-, pin distance=20pt]245:{$p'$}}] at (3, 0, 1) {};
+      \draw[thick,be-red] (0, 2, 0) -- (1.5,1,0.5) -- (3, 0, 1);
+
+      \draw[dashed] (3, 0, 1) -- (0, 0, 0);
+      \draw[dashed] (3, 0, 0) -- (3, 0, 1) -- (0, 0, 1);
+      \draw[dashed] (0, 0, 0) -- (1.5, 1, 0.5) -- (1.5, 0, 0.5) -- (0, 0, 0.5);
+      \draw[dashed] (1.5, 0, 0) -- (1.5, 0, 0.5);
+
+      % the axes
+      \draw[dashed] (-3, 0, 0) -- (0, 0, 0);
+      \draw[dashed] (0, -3, 0) -- (0, 0, 0);
+      \draw[dashed] (0, 0, -3) -- (0, 0, 0);
+      \draw[-latex'] (0, 0, 0) -- (3.5, 0, 0) node[right] {$y$};
+      \draw[-latex'] (0, 0, 0) -- (0, 3, 0) node[above] {$z$};
+      \draw[-latex'] (0, 0, 0) -- (0, 0, 3) node[below,left] {$x$};
+    \end{tikzpicture}
+    \caption{Stereographic Projection}
+    \label{fig:stereographic_projection}
+  \end{figure}
+
+  We define the \hldefn{stereographic projection} by
+  \begin{equation*}
+    \Sigma(p) = p'.
+  \end{equation*}
+\end{eg}
+
+% subsection _2_dimensional_manifolds (end)
+
+\subsection{\texorpdfstring{$n$}{n}-spheres}%
+\label{sub:_n_spheres}
+% subsection _n_spheres
+
+We can now extend the notion we saw in \cref{eg:2_sphere_as_a_manifold} to higher dimensional
+manifolds. In particular, we want to be able to `glue' the boundaries of the hemispheres, as
+shown in \cref{fig:glueing_two_hemispheres}.
+
+\begin{marginfigure}
+  \centering
+  \begin{tikzpicture}
+    \draw[dashed] (-2, 1, 0) -- (-2, -1.5, 0);
+    \draw[dashed] (2, 1, 0) -- (2, -1.5, 0);
+    \draw[dashed] (-1.5, 1, -2.3) -- (-1.5, -1.5, -2.3);
+    \draw[dashed] (0, 1, -2.3) -- (0, -1.5, -2.3);
+    \draw[dashed] (1, 1, 2.6) -- (1, -1.5, 2.6);
+
+    \draw[dashed] (-2, 1, 0) arc (180:0:2 and 1);
+    \draw[fill=be-red,fill opacity=0.5] (-2, 1, 0) arc (180:360:2 and 1) -- (2, 1, 0) arc (0:180:2);
+
+    \draw[fill=light,fill opacity=0.5] (-2, -1.5, 0) arc (180:360:2) -- (2, -1.5, 0) arc (0:180:2 and 1) -- (-2, -1.5, 0) arc (180:360:2 and 1);
+
+    \begin{scope}
+      \clip (-2, 1, 0) arc (180:360:2 and 1) -- (2, 1, 0) arc (0:180:2);
+      \draw[fill=dark!70!light] (1, 1, 2.6) circle(0.5);
+    \end{scope}
+    \node[draw,circle,fill] at (1, 1, 2.6) {};
+
+    \begin{scope}
+      \clip (-2, -1.5, 0) arc (180:360:2) -- (2, -1.5, 0) arc (360:180:2 and 1);
+      \draw[fill=dark!70!light] (1, -1.5, 2.6) circle(0.5);
+    \end{scope}
+    \node[draw,circle,fill] at (1, -1.5, 2.6) {};
+  \end{tikzpicture}
+  \caption{Glueing two hemispheres}\label{fig:glueing_two_hemispheres}
+\end{marginfigure}
+\marginnote{I was definitely not trying to make a Pokeball.}
+
+In a more mathematical sense, we are identifying the lower and upper boundaries of the upper
+and lower hemisphere, respectively, i.e. we identify
+\begin{equation*}
+  S^n = \bar{\mathbb{B}}^n \times \{ 0 \} \cup \bar{\mathbb{B}}^n \times \{ 1 \},
+\end{equation*}
+where the $\{ 0 \}$ and $\{ 1 \}$ represent the upper and lower hemispheres, respectively. We
+may also write this as
+\begin{equation*}
+  x \in \partial \bar{\mathbb{B}}^n : (x, 0) \sim (x, 1).
+\end{equation*}
+
+This calls for the notion of an equivalence class. Recall that an \hldefn{equivalence relation}
+on a set $A$ is a relation between elements such that
+\begin{enumerate}
+  \item (reflexity) $x \sim x$;
+  \item (symmetry) $x \sim y \iff y \sim x$; and
+  \item (transitivity) $x \sim y \, \land \, y \sim z \implies x \sim z$,
+\end{enumerate}
+where $\sim$ is our equivalence relation.
+
+Equivalence relations give rise to the notion of \hldefn{equivalence classes}, where we define
+an equivalence class as
+\begin{equation*}
+  [\beta] := \{ \alpha \in A \mid \beta \sim \alpha \}.
+\end{equation*}
+In this course, we shall sometimes denote equivalence classes in the form of $A_\beta$. Notice
+that
+\begin{equation*}
+  A = \coprod\limits_{\beta \in B} A_\beta,
+\end{equation*}
+where $B \subseteq A$.
+
+\newthought{This begs the question}: do the set of equivalence classes retain the topology of
+the space?
+
+Here, we look into \hldefn{quotient topology}. Let $A^*$ be the space of equivalence classes,
+and let's assume that $A$ is endowed with a topology. Consider the function
+\begin{equation*}
+  \pi : A \to A^* \text{ given by } a \mapsto [a]_{\sim},
+\end{equation*}
+where $\sim$ is the equivalence relation, and $[a]_{\sim}$ is the equivalence class that $a$
+belongs to\sidenote{Note that the function is well-defined as the equivalence classes are
+disjoint.}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzcd}
+    A \arrow[dd, "\pi"'] \arrow[rrdd, "g"] &  &  \\
+     &  &  \\
+    A^* \arrow[rr, "\tilde{g}"'] &  & Z
+  \end{tikzcd}
+  \caption{Relationship of $A$, $A^*$ and $Z$}
+  \label{fig:relationship_of_a_a_and_z_}
+\end{figure}
+
+Consider an arbitrary space $Z$ that is also endowed with a topology, such that
+$\exists g : A \to Z$ that is continuous, such that $g$ is constant on each of the equivalence
+classes of $A$, that is, if $a \sim b$, then $g(a) = g(b)$.
+
+Then $\tilde{g}$ is a well-defined function induced on $A^*$: we have that
+\begin{equation*}
+  \tilde{g}(\pi(a)) = g(a).
+\end{equation*}
+
+We want to endow $A^*$ with a topology such that $\tilde{g}$ will be continuous. However,
+\begin{itemize}
+  \item if $A^*$ is too `fine', then $\pi$ may not be continuous; and
+  \item if $A^*$ is too `course', then $\tilde{g}$ may not be continuous.
+\end{itemize}
+We need to strike a balance in the fineness of the topology of $A^*$ to make sure that both
+$\pi$ and $\tilde{g}$ are continuous.
+
+\begin{defn}[Strongly Continuous]\index{Strongly Continuous}\label{defn:strongly_continuous}
+  Let $\mathcal{V} \subseteq A^*$. $\mathcal{V}$ is open iff $\exists \mathcal{U} \subseteq A$
+  such that $\pi(\mathcal{U}) = \mathcal{V}$. We say that $\pi$ is \hlnoteb{strongly continuous}.
+\end{defn}
+
+\begin{warning}
+  $\pi$ may not be an open map!
+\end{warning}
+
+% subsection _n_spheres (end)
+
+% section manifolds_continued_3 (end)
+
+% chapter lecture_7_jan_21st (end)
+
+\chapter{Lecture 8 Jan 23rd}%
+\label{chp:lecture_8_jan_23rd}
+% chapter lecture_8_jan_23rd
+
+\section{Quotient Spaces}%
+\label{sec:quotient_spaces}
+% section quotient_spaces
+
+With the topology that we last introduced for $A^*$, $g$ is continuous iff $\tilde{f}$ is continuous.
+\marginnote{This way of constructing a quotient space is intuitive ring theoretically.}
+However, this is a rather cumbersome way to construct a quotient space. In particular, how do we know
+what equivalence class should we choose?
+
+\begin{defn}[Saturated]\index{Saturated}\label{defn:saturated}
+  We say that a subset $S \subseteq A$ is \hlnoteb{saturated} (wrt $\pi$) provided that it is has
+  a \hlimpo{non-empty intersection} with a fibre $\pi^{-1}(\{ q \})$, where $q \in A^*$, then
+  $S \supseteq \pi^{-1}(\{ q \})$.
+\end{defn}
+
+\begin{note}
+  This definition is equivalent to saying that $\pi^{-1} \circ \pi (S) = S$.
+\end{note}
+
+With this definition, we may restate the definition of a quotient map in a clearer way.
+
+\begin{defn}[Quotient Map]\index{Quotient Map}\label{defn:quotient_map}
+  A map $g : X \to Y$ is called a \hlnoteb{quotient map} if it sends saturated open subsets of $X$
+  to open subsets of $Y$.
+\end{defn}
+
+% section quotient_spaces (end)
+
+% chapter lecture_8_jan_23rd (end)
+
 \appendix
 
 \backmatter
@@ -1282,4 +1578,16 @@ $G_2 = \left\{ R^k \mmid k \in \mathbb{Z} \right\}$. Thus
 \printindex
 
 \end{document}
+
+
+
+
+
+
+
+
+
+
+
+
 
