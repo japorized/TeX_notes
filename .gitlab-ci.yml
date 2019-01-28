@@ -3,11 +3,18 @@
 # Docs: https://docs.gitlab.com/ce/pages/
 image: ruby:2.3
 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - vendor/ruby
+    - vendor/bundle
+
 variables:
   JEKYLL_ENV: production
 
 before_script:
-- bundle install
+  - ruby -v # Print version for debugging purposes
+  - bundle install -j $(nproc) --path vendor
 
 test:
   stage: test
