@@ -18,6 +18,7 @@
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\dist}{dist}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -37,9 +38,7 @@ The second part of the course shall be called in the name of the course: \textbf
 
 % chapter preface (end)
 
-\newgeometry{letterpaper}
-\part{Exterior Differential Calculus}
-\restoregeometry
+\tuftepart{Exterior Differential Calculus}
 
 \chapter{Lecture 1 Jan 07th}%
 \label{chp:lecture_1_jan_07th}
@@ -295,7 +294,7 @@ where $\mathcal{B}$ is a basis of $V$.
   and so $\mathcal{B}^*$ spans $V^*$.
 
   \noindent
-  \hlbnoted{$\mathcal{B}^*$ is linearly independent} 
+  \hlbnoted{$\mathcal{B}^*$ is linearly independent}
   Suppose $\alpha_j e^j = 0 \in V^*$.
   Applying $\alpha_j e^j$ to each of the vectors $e_k$ in $\mathcal{B}$, we have
   \begin{equation*}
@@ -341,7 +340,7 @@ then it will induce a canonical isomorphism from $V$ to $V^*$.
   i.e. it is linear in $\alpha$ and linear in $v$,
   which means that
   \begin{equation*}
-    \langle \alpha, t_1 v_1 + t_2 v_2 \rangle 
+    \langle \alpha, t_1 v_1 + t_2 v_2 \rangle
     = t_1 \langle \alpha, v_1 \rangle + t_2 \langle \alpha, v_2 \rangle
   \end{equation*}
   and
@@ -374,11 +373,11 @@ then it will induce a canonical isomorphism from $V$ to $V^*$.
   \end{equation*}
   \begin{tikzpicture}[remember picture,overlay]
     \draw[latex'-]
-      ([shift={(1pt,-2pt)}]pic cs:a) |- ([shift={(-10pt,-10pt)}]pic cs:a) 
-      node[anchor=east] {row index}; 
+      ([shift={(1pt,-2pt)}]pic cs:a) |- ([shift={(-10pt,-10pt)}]pic cs:a)
+      node[anchor=east] {row index};
     \draw[latex'-]
-      ([shift={(2pt,6pt)}]pic cs:b) |- ([shift={(12pt,12pt)}]pic cs:b) 
-      node[anchor=west] {column index}; 
+      ([shift={(2pt,6pt)}]pic cs:b) |- ([shift={(12pt,12pt)}]pic cs:b)
+      node[anchor=west] {column index};
   \end{tikzpicture}
   In particular,
   \begin{equation*}
@@ -411,12 +410,12 @@ then it will induce a canonical isomorphism from $V$ to $V^*$.
 
 \begin{proof}
 \marginnote{As messy as this may seem, this is really a follow your nose kind of proof.
-    
+
   Since we are proving that a map exists, we need to construct it.
   Since $\xi : V \to V^{**} = L(V^*, \mathbb{R})$, for any $v \in V$,
   we must have $\xi(v)$ as some linear map from $V^*$ to $\mathbb{R}$.}
 
-  Let $v \in V$. Then $\xi(v) \in V^{**} = L(V^*, \mathbb{R})$, 
+  Let $v \in V$. Then $\xi(v) \in V^{**} = L(V^*, \mathbb{R})$,
   i.e. $\xi(v) : V^* \to \mathbb{R}$. Then for any $\alpha \in V^*$,
   \begin{equation*}
     \left( \xi(v) \right)(\alpha) \in \mathbb{R}.
@@ -426,7 +425,7 @@ then it will induce a canonical isomorphism from $V$ to $V^*$.
   \begin{equation*}
     \xi(v)(\alpha) = \alpha(v).
   \end{equation*}
-  To verify that $\xi(v)$ is indeed linear, notice that 
+  To verify that $\xi(v)$ is indeed linear, notice that
   for any $t, s \in \mathbb{R}$, and for any $\alpha, \beta \in V^*$,
   we have
   \begin{align*}
@@ -474,7 +473,7 @@ then it will induce a canonical isomorphism from $V$ to $V^*$.
   Thus, by the Rank-Nullity Theorem
   \sidenote{See \cref{sec:rank_nullity_theorem}, and especially \cref{propo:when_rank_equals_the_dimension_of_the_space}.},
   we have that $\xi$ is surjective.
-  
+
   \qed\
 \end{proof}
 
@@ -523,7 +522,7 @@ we have
   Let $\beta_1, \beta_2 \in W^*$, $t_1, t_2 \in \mathbb{R}$, and $v \in V$.
   Then
   \begin{align*}
-    T^*(t_1 \beta_1 + t_2 \beta_2)(v) 
+    T^*(t_1 \beta_1 + t_2 \beta_2)(v)
       &= (t_1 \beta_1 + t_2 \beta_2)(Tv) \\
       &= t_1 \beta_1 (Tv) + t_2 \beta_2 (Tv) \\
       &= t_1 T^*(\beta_1)(v) + t_2 T^*(\beta_2)(v).
@@ -616,14 +615,14 @@ Note that
 \end{equation*}
 Consequently, we have
 \begin{equation*}
-  \langle e^k, T( e_i ) \rangle = A_i^k \text{ and } 
+  \langle e^k, T( e_i ) \rangle = A_i^k \text{ and }
   \langle T^*(e^i), e_k \rangle = (A^*)_k^i.
 \end{equation*}
 
 From here, notice that by applying $e_k \in V = V^{**}$ to both sides,
 we have % TODO: I don't get this
 \begin{equation*}
-  (A^*)_k^i = e_k ( T^*(e^i) ) = \langle T^* (e^i), e_k \rangle 
+  (A^*)_k^i = e_k ( T^*(e^i) ) = \langle T^* (e^i), e_k \rangle
   \overset{(*)}{=} \langle e^i, T(e_k) \rangle = A_k^i.
 \end{equation*}
 Thus $A^*$ is the transpose of $A$, and
@@ -685,7 +684,7 @@ So $\mathcal{B}^*$ determines an orientation for $V^*$.
   \end{equation*}
   such that
   \begin{enumerate}
-    \item (\hlnotea{$k$-linearity / multi-linearity}) if we fix all but one of 
+    \item (\hlnotea{$k$-linearity / multi-linearity}) if we fix all but one of
       the arguments of $\alpha$, then it is a linear map
       from $V$ to $\mathbb{R}$; i.e. if we fix
       \begin{equation*}
@@ -700,7 +699,7 @@ So $\mathcal{B}^*$ determines an orientation for $V^*$.
     \item (\hlnotea{alternating property}) $\alpha$ is \hlnotea{alternating}
       (aka \hlnotea{totally skewed-symmetric}) in its $k$ arguments; i.e.
       \begin{equation*}
-        \alpha ( v_1, \ldots, v_i, \ldots, v_j, \ldots, v_k ) 
+        \alpha ( v_1, \ldots, v_i, \ldots, v_j, \ldots, v_k )
           = \alpha ( v_1, \ldots, v_j, \ldots, v_i, \ldots, v_k ).
       \end{equation*}
   \end{enumerate}
@@ -766,7 +765,7 @@ Using the above remark, we can rewrite condition 2 as follows:
   \begin{equation*}
     \alpha(v_1, \ldots, v_k) = 0
   \end{equation*}
-  if \hlimpo{any $2$ of the arguments are equal}. 
+  if \hlimpo{any $2$ of the arguments are equal}.
 \end{remark}
 
 % section the_space_of_k_forms_on_v_ (end)
@@ -797,7 +796,7 @@ Using the above remark, we can rewrite condition 2 as follows:
 \end{note}
 
 \begin{note}
-  By the note on page \pageref{remark:permutations}, observe that 
+  By the note on page \pageref{remark:permutations}, observe that
   $\wedge^1 \left( V^* \right) = V^*$.
 \end{note}
 
@@ -857,7 +856,7 @@ Before that, consider the following example:
 \begin{eg}
   If $k = 2$, we have
   \begin{equation*}
-    \left( \alpha^1 \land \alpha^2 \right)(v_1, v_2) 
+    \left( \alpha^1 \land \alpha^2 \right)(v_1, v_2)
       = \alpha^1(v_1) \alpha^2(v_2) - \alpha^2(v_1) \alpha^1(v_2).
   \end{equation*}
   and if $k = 3$, we have
@@ -886,7 +885,7 @@ Observe that
   &= \sum_{\sigma \in S_k} \left( \sgn \sigma \circ \tau^{-1} \right) \left( \sgn \tau \right)
     \alpha^{\left(\sigma \circ \tau^{-1}\right)(\tau(1))} \left(v_{\tau(1)}\right) \hdots
     \alpha^{\left( \sigma \circ \tau^{-1} \right)(\tau(k))} \left( v_{\tau(k)} \right) \\
-  &= \left( \sgn \tau \right) \sum_{\sigma \circ \tau^{-1} \in S_k} \left( \sgn \sigma \circ \tau^{-1} \right) 
+  &= \left( \sgn \tau \right) \sum_{\sigma \circ \tau^{-1} \in S_k} \left( \sgn \sigma \circ \tau^{-1} \right)
     \alpha^{\left( \sigma \circ \tau^{-1} \right)(1)} (v_1) \hdots
     \alpha^{\left( \sigma \circ \tau^{-1} \right)(k)} (v_k) \\
   &= \left( \sgn \tau \right) \sum_{\sigma \in S_k} \alpha^{\sigma(1)} (v_1) \hdots \alpha^{\sigma(k)} (v_k) \quad \because \text{ relabelling } \\
@@ -914,7 +913,7 @@ In A1Q5(c), we will show that there exists a $2$-form in $n = 4$ that is not dec
 \begin{propo}[Permutation on $k$-forms]\label{propo:permutation_on_k_forms}
   Let $\tau \in S_k$. Then
   \begin{equation*}
-    \alpha^{\tau(1)} \land \hdots \land \alpha^{\tau(k)} 
+    \alpha^{\tau(1)} \land \hdots \land \alpha^{\tau(k)}
       = ( \sgn \tau ) \alpha^1 \land \hdots \land \alpha^{k}
   \end{equation*}
 \end{propo}
@@ -970,7 +969,7 @@ In A1Q5(c), we will show that there exists a $2$-form in $n = 4$ that is not dec
     \alpha(v_1, \ldots, v_k) &= \alpha\left(v_1^{j_1} e_{j_1}, \ldots, v_k^{j_k} e_{j_k}\right) \\
                              &= v_1^{j_1} \hdots v_k^{j_k} \alpha ( e_{j_1}, \ldots, e_{j_k} )
   \end{align*}
-  by multilinearity and totally skew-symmetry of $\alpha$, where 
+  by multilinearity and totally skew-symmetry of $\alpha$, where
   $j_i \in \left\{ 1, \ldots, n \right\}$. Let
   \begin{equation}\label{eq:another_alt_of_a_k_form_scalar}
     \alpha(e_{j_1}, \ldots, e_{j_k}) = \alpha_{j_1, \ldots, j_k},
@@ -982,18 +981,18 @@ In A1Q5(c), we will show that there exists a $2$-form in $n = 4$ that is not dec
   \end{align*}
   Now since $\alpha_{j_1, \ldots, j_k}$ is totally skew-symmetric, $\alpha = 0$ if any of the
   $j_k$'s are equal to one another. Thus we only need to consider the terms where the $j_k$'s
-  are distinct. Now for any set of $\{ j_1, \ldots, j_k \}$, there exists a unique 
+  are distinct. Now for any set of $\{ j_1, \ldots, j_k \}$, there exists a unique
   $\sigma \in S_k$ such that $\sigma$ rearranges the $j_i$'s so that $j_1, \ldots, j_k$ is
   strictly increasing. Thus
   \begin{align*}
-    \alpha(v_1, \ldots, v_k) 
+    \alpha(v_1, \ldots, v_k)
       &= \sum_{j_1 < \hdots < j_k} \sum_{\sigma \in S_k} \alpha_{j_{\sigma1(), \ldots, \sigma(k)}}
         e^{j_{\sigma(1)}} (v_1) \hdots e^{j_{\sigma(k)}} (v_k) \\
-      &= \sum_{j_1 < \hdots < j_k} \sum_{\sigma \in S_k} (\sgn \sigma) \alpha_{j_1, \ldots, j_k} 
+      &= \sum_{j_1 < \hdots < j_k} \sum_{\sigma \in S_k} (\sgn \sigma) \alpha_{j_1, \ldots, j_k}
         e^{j_{\sigma(1)}} (v_1) \hdots e^{j_{\sigma(k)}} (v_k) \\
       &= \sum_{j_1 < \hdots < j_k} \alpha_{j_1, \ldots, j_k} \sum_{\sigma \in S_k} (\sgn \sigma)
         e^{j_{\sigma(1)}} (v_1) \hdots e^{j_{\sigma(k)}} (v_k) \\
-      &= \underbrace{ \sum_{j_1 < \hdots < j_k} 
+      &= \underbrace{ \sum_{j_1 < \hdots < j_k}
           \alpha_{j_1, \ldots, j_k} \left( e^{j_1} \land \hdots \land e^{j_k} \right)
         }_{\alpha}
         (v_1, \ldots, v_k).
@@ -1028,14 +1027,14 @@ In A1Q5(c), we will show that there exists a $2$-form in $n = 4$ that is not dec
 % section decomposable_k_forms_continued
 
 There exists an equivalent, and perhaps more useful, expression for \cref{eq:k_form_in_general},
-which we shall derive here. Sine $\alpha_{j_1, \ldots, j_k}$ and 
+which we shall derive here. Sine $\alpha_{j_1, \ldots, j_k}$ and
 $e^{j_1} \land \hdots \land e^{j_k}$ are both totally skew-symmetric in their $k$ indices,
 and since there are $k!$ elements in $S_k$, we have that
 \begin{align*}
   \frac{1}{k!} \alpha_{j_1, \ldots, j_k} e^{j_1} \land \hdots \land e^{j_k}
-  &= \frac{1}{k!} \sum_{\substack{j_1, \ldots, j_k \\ \text{distinct}}} 
+  &= \frac{1}{k!} \sum_{\substack{j_1, \ldots, j_k \\ \text{distinct}}}
     \alpha_{j_1, \ldots, j_k} e^{j_1} \land \hdots \land e^{j_k} \\
-  &= \frac{1}{k!} \sum_{j_1 < \hdots < j_k} \sum_{\sigma \in S_k} 
+  &= \frac{1}{k!} \sum_{j_1 < \hdots < j_k} \sum_{\sigma \in S_k}
     \alpha_{\sigma(j_1), \ldots, \sigma(j_k)} e^{\sigma(j_1)} \land \hdots \land e^{\sigma(j_k)} \\
   &= \frac{1}{k!} \sum_{j_1 < \hdots < j_k} \sum_{\sigma \in S_k} (\sgn \sigma)
     \alpha_{j_1, \ldots, j_k} (\sgn \sigma) e^{j_1} \land \hdots \land e^{j_k} \\
@@ -1097,10 +1096,10 @@ basis vectors $e^1, \ldots, e^n$.
 \begin{remark}
   \begin{enumerate}
     \item $\alpha \wedge \beta$ is linear in $\alpha$ and linear in $\beta$ by its
-      definition, i.e. for any $t_1, t_2 \in \mathbb{R}$, 
+      definition, i.e. for any $t_1, t_2 \in \mathbb{R}$,
       $\alpha_1, \alpha_2 \in \Lambda^k(V^*)$, and any $\beta \in \Lambda^l(V^*)$,
       \begin{equation*}
-        (t_1 \alpha_1 + t_2 \alpha_2) \wedge \beta 
+        (t_1 \alpha_1 + t_2 \alpha_2) \wedge \beta
         = t_1(\alpha_1 \wedge \beta) + t_2(\alpha_2 \wedge \beta),
       \end{equation*}
       and a similar equation works for linearity in $\beta$.
@@ -1139,10 +1138,10 @@ basis vectors $e^1, \ldots, e^n$.
 \begin{proof}
   Suppose at least one of the $\alpha^j$ is a linear combination of the rest, i.e.
   \begin{equation*}
-    \alpha^j = c_1 \alpha^1 + \hdots + c_{j - 1} \alpha^{j - 1} + 
+    \alpha^j = c_1 \alpha^1 + \hdots + c_{j - 1} \alpha^{j - 1} +
       c_{j + 1} \alpha^{j + 1} + \hdots + c_k \alpha^k.
   \end{equation*}
-  Since all of the $\alpha^i$'s are $1$-forms, we will have 
+  Since all of the $\alpha^i$'s are $1$-forms, we will have
   $\alpha^i \wedge \alpha^i$ in the wedge product, and so our result follows from
   our earlier remark.\qed\
 \end{proof}
@@ -1185,7 +1184,7 @@ We shall prove the following in A1Q6.
 \label{sec:pullback_of_forms}
 % section pullback_of_forms
 
-For a linear map $T \in L(V, W)$, we have seen its induced dual map 
+For a linear map $T \in L(V, W)$, we have seen its induced dual map
 $T^* \in L\left(W^*, V^*\right)$. We shall now generalize this dual map to $k$-forms,
 for $k > 1$.
 
@@ -1228,6 +1227,224 @@ The pullback has the following properties which we shall prove in A1Q8.
 % section pullback_of_forms (end)
 
 % chapter lecture_5_jan_16th (end)
+
+\tuftepart{The Vector Space \texorpdfstring{$\mathbb{R}^n$}{Rn} as a Smooth Manifold}
+
+\chapter{Lecture 6 Jan 18th}%
+\label{chp:lecture_6_jan_18th}
+% chapter lecture_6_jan_18th
+
+\section{The space \texorpdfstring{$\Lambda^k(V)$}{Lambda k(V)} of \texorpdfstring{$k$}{k}-vectors and Determinants}%
+\label{sec:the_space_lambda_k_v_of_k_vectors_and_determinants}
+% section the_space_lambda_k_v_of_k_vectors_and_determinants
+
+Recall that we identified $V$ with $V^{**}$, and so we may consider
+$\Lambda^k(V) = \Lambda^k(V^{**})$ as the space of $k$-linear alternating maps
+\begin{equation*}
+  \underbrace{V^* \times V^* \times \hdots \times V^*}_{k \text{ copies }} \to \mathbb{R}.
+\end{equation*}
+Consequently (to an extent), the elements of $\Lambda^k(V)$ are called \hldefn{$k$-vectors}.
+A $k$-vector is an alternating $k$-linear map that takes $k$ \hlnotea{covectors} (of $1$-forms)
+to $\mathbb{R}$.
+
+\begin{eg}
+  Let $\{ e_1, \ldots, e_n \}$ be a basis of $V$ with the dual basis
+  $\{ e^1, \ldots, e^n \}$, which is a basis of $V^*$. Then any 
+  $\mathcal{A} \in \Lambda^k(V^*)$ can be written uniquely as
+  \begin{equation*}
+    \mathcal{A} = \sum_{i_1 < \hdots < i_k} \mathcal{A}^{i_1, \ldots, i_k} \;
+      e_{i_1} \land \hdots \land e_{i_k}
+  \end{equation*}
+  where
+  \begin{equation*}
+    \mathcal{A}^{i_1, \ldots, i_k} = \mathcal{A} \left( e^{i_1}, \ldots, e^{i_k} \right).
+  \end{equation*}
+  We also have that
+  \begin{equation*}
+    \mathcal{A} = \frac{1}{k!} \mathcal{A}^{i_1, \ldots, i_k} \; e^{i_1} \land \hdots \land e^{i_k}.
+  \end{equation*}
+\end{eg}
+
+\begin{note}
+  Note that
+  \begin{equation*}
+    \dim \Lambda^k(V) = \frac{n!}{k! (n - k)!}.
+  \end{equation*}
+\end{note}
+
+\begin{defn}[$k$\textsuperscript{th} Exterior Power of $T$]\index{$k$\textsuperscript{th} Exterior Power of $T$}\label{defn:_k_th_exterior_power_of_t_}
+  Let $T \in L(V, W)$. Then $T$ induces a linear map
+  \begin{equation*}
+    \Lambda^k(T) \in L \left( \Lambda^k(V), \Lambda^k(W) \right),
+  \end{equation*}
+  defined as
+  \begin{equation*}
+    \left( \Lambda^k T \right)(v_1 \land \hdots \land v_k) = T(v_1) \land \hdots \land T(v_k),
+  \end{equation*}
+  where $v_1, \ldots, v_k$ are decomposable elements of $\Lambda^k(V)$, and then extended
+  by linearity to all of $\Lambda^k(V)$. The map $\Lambda^k T$ is called the
+  \hlnoteb{$k$\textsuperscript{th} exterior power of $T$}.
+\end{defn}
+
+\begin{note}
+  Consider the special case of when $W = V$ and $k = n = \dim V$. Then $T \in L(V)$
+  induces a linear operator $\Lambda^n(T) \in L(\Lambda^n(V))$. It is also noteworthy
+  to point out that any linear operator on a $1$-dimensional vector space is just
+  scalar multiplication.
+
+  Furthermore, notice that in the above special case, we have
+  \begin{equation*}
+    \dim \Lambda^n(V) = \binom{n}{n} = 1.
+  \end{equation*}
+\end{note}
+
+\begin{defn}[Determinant]\index{Determinant}\label{defn:determinant}
+  Let $\dim V = n$ and $T \in L(V)$. We have that $\dim \Lambda^n(V) = 1$. Then
+  $\Lambda^n T \in L \left( \Lambda^n(V) \right)$ is a scalar multiple of the
+  identity. We denote this scalar multiple by $\det T$, and call it the
+  \hlnoteb{determinant} of $T$, i.e.
+  \begin{equation*}
+    \Lambda^n (T) \mathcal{A} = (\det T) IA
+  \end{equation*}
+  for any $\mathcal{A} \in \Lambda^n(V)$, where $I$ is the identity operator.
+\end{defn}
+
+\begin{note}
+  We should verify that this `new' definition of a determinant agrees with the
+  \href{https://en.wikipedia.org/wiki/Determinant\#n_\%C3\%97_n_matrices}{`classical' definition}
+  of a determinant.
+\end{note}
+
+\begin{proof}
+  Let $\mathcal{B} = \{ e_1, \ldots, e_n \}$ be a basis of $V$, and let
+  $A = [T]_{\mathcal{B}}$ be the $n \times n$ matrix of $T$ wrt the basis 
+  $\mathcal{B}$. So $T(e_i) = A_i^j e_j$. Then $\{ e_1 \land \hdots \land e_n \}$
+  is a basis of $\Lambda^n(V)$, and
+  \begin{align*}
+    \left( \Lambda^n T \right)(e_1 \land \hdots \land e_n)
+    &= T(e_1) \land \hdots \land T(e_n) \\
+    &= A_1^{i_1} e_{i_1} \land \hdots \land A_n^{i_n} e_{i_n} \\
+    &= A_1^{i_1} A_2^{i_2} \hdots A_n^{i_n} \; e_{i_1} \land \hdots \land e_{i_n} \\
+    &= \sum_{\substack{i_1, \ldots, i_n \\ \text{distinct}}} A_1^{i_1} \hdots A_n^{i_n} \;
+      e_{i_1} \land \hdots \land e_{i_n} \\
+    &= \sum_{\sigma \in S_n} A_1^{\sigma(1)} \hdots A_n^{\sigma(n)} \;
+      e_{\sigma(1)} \land \hdots \land e_{\sigma(n)} \\
+    &= \sum_{\sigma \in S_n} A_1^{\sigma(1)} \hdots A_n^{\sigma(n)} \;
+      (\sgn \sigma) e_1 \land \hdots \land e_n \\
+    &= \left( \sum_{\sigma \in S_n} (\sgn \sigma) A_1^{\sigma(1)} \hdots A_n^{\sigma(n)} \right)
+      \left( e_1 \land \hdots \land e_n \right) \\
+    &= \left( \sum_{\sigma \in S_n} (\sgn \sigma) \prod_{i = 1}^{n} A_i^{\sigma(i)} \right)
+      \left( e_1 \land \hdots \land e_n \right).
+  \end{align*}
+  We observe that we indeed have
+  \begin{equation*}
+    \det T = \sum_{\sigma \in S_n} (\sgn \sigma) \prod_{i = 1}^{n} A_i^{\sigma(i)}.
+  \end{equation*}\qed\
+\end{proof}
+
+% section the_space_lambda_k_v_of_k_vectors_and_determinants (end)
+
+\section{Orientation Revisited}%
+\label{sec:orientation_revisited}
+% section orientation_revisited
+
+Now that we have this notion, we may finally clarify to ourselves what an orientation
+is without having to rely on roundabout methods as before.
+
+\marginnote{Basically, we now have a more mathematical way of saying `pick a direction
+and consider it as the positive direction of $V$, and that'll be our orientation'.}
+\begin{defn}[Orientation]\index{Orientation}\label{defn:orientation}
+  Let $V$ be an $n$-dimensional real vector space. Then $\Lambda^n(V)$ is a
+  $1$-dimensional real vector space. An \hlnoteb{orientation} on $V$ is defined as a
+  \hlimpo{choice} of a non-zero element $\mu \in \Lambda^n(V)$, up to positive scalar
+  multiples.
+\end{defn}
+
+\begin{note}
+  For any two such orientations $\mu$ and $\tilde{\mu}$, we have that 
+  $\tilde{\mu} = \lambda \mu$ for some non-zero $\lambda \in \mathbb{R}$, and by using
+  the definition of having the \hyperref[defn:same_and_opposite_orientations]{same orientation},
+  we say that $\mu \sim \tilde{\mu}$ if $\lambda > 0$ and $\mu \not\sim \tilde{\mu}$ if
+  $\lambda < 0$.
+\end{note}
+
+\begin{ex}
+  Check that \cref{defn:orientation} agrees with \cref{defn:same_and_opposite_orientations}.
+  (Hint: Let $\mathcal{B} = \{ e_1, \ldots, e_n \}$ be a basis of $V$ and let
+  $\mu = e_1 \land \hdots \land e_n$.)
+\end{ex}
+
+% section orientation_revisited (end)
+
+\section{Topology on \texorpdfstring{$\mathbb{R}^n$}{Rn}}%
+\label{sec:topology_on_r_n_}
+% section topology_on_r_n_
+
+We shall begin with a brief review of some ideas from multivariable calculus.
+
+We know that $\mathbb{R}^n$ is an $n$-dimensional real vector space. It has a canonical
+\hlnotea{positive-definite} \hldefn{inner product}, aka the \hldefn{Euclidean inner product},
+or the \hldefn{dot product}: given 
+$x = (x_1, \ldots, x_n), y = (y_1, \ldots, y_n) \in \mathbb{R}^n$, we have
+\begin{equation*}
+  x \cdot y = \sum_{i=1}^{n} x^i y^i = \delta_{ij} x^i y^j.
+\end{equation*}
+
+The following properties follow  from above: for any $t, s \in \mathbb{R}$ and
+$x, y , w\in \mathbb{R}^n$,
+\begin{itemize}
+  \item $(tx + sy) \cdot w = t ( x \cdot w ) = s(y \cdot w)$;
+  \item $x \cdot (ty + sw) = t(x \cdot y) + t(x \cdot w)$;
+  \item $x \cdot y = y \cdot x$;
+  \item (positive definiteness) $x \cdot x \geq 0$ with $x \cdot x = 0 \iff x = 0$;
+  \item (Cauchy-Schwarz Ineq.) $-\norm{x} \norm{y} \leq x \cdot y \leq \norm{x} \norm{y}$,
+    i.e.
+    \begin{equation*}
+      x \cdot y = \norm{x} \norm{y} \cos \theta
+    \end{equation*}
+    where $\theta \in [0, \pi]$.
+\end{itemize}
+
+\begin{defn}[Distance]\index{Distance}\label{defn:distance}
+  The \hlnoteb{distance} between $x, y \in \mathbb{R}^n$ is given as
+  \begin{equation*}
+    \dist(x, y) = \norm{x - y}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}[Triangle Inequality]
+  Note that the triangle inequality holds for the distance function\sidenote{See
+  also \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf}{PMATH 351}}: for any 
+  $x, z \in \mathbb{R}^n$, for any $y \in \mathbb{R}^n$,
+  \begin{equation*}
+    \dist(x, z) \leq \dist(x, y) + \dist(y, z).
+  \end{equation*}
+\end{note}
+
+\begin{defn}[Open Ball]\index{Open Ball}\label{defn:open_ball}
+  Let $x \in \mathbb{R}^n$ and $\epsilon > 0$. The open ball of radius $\epsilon$ centered
+  at $x$ is
+  \begin{equation*}
+    B_{\epsilon}(x) = \left\{ y \in \mathbb{R}^n \mmid \dist(x, y) < \epsilon \right\}.
+  \end{equation*}
+  A subset $U \subseteq \mathbb{R}^n$ is called \hldefn{open} if $\forall x \in U$,
+  $\exists \epsilon > 0$ such that
+  \begin{equation*}
+    B_{\epsilon}(x) \subseteq U.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  \begin{itemize}
+    \item $\emptyset$ and $\mathbb{R}^n$ are open.
+    \item If $U$ and $V$ are open, so is $U \cap V$.
+    \item If $\{ U_\alpha \}_{\alpha \in A}$ is open, so is $\bigcup_{\alpha \in A} U_\alpha$.
+  \end{itemize}
+\end{eg}
+
+% section topology_on_r_n_ (end)
+
+% chapter lecture_6_jan_18th (end)
 
 \appendix
 

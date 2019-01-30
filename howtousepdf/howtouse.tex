@@ -1,0 +1,121 @@
+\documentclass{tufte-handout}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\title{How-to: Use my notes}
+\author{Johnson Ng}
+
+\renewcommand{\baselinestretch}{1.1}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{ragged2e}
+\usepackage{fontawesome}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{mathrsfs}
+\usepackage{stmaryrd}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{hyperref}
+
+\hypersetup{
+    unicode=true,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=false,        % show Acrobat’s toolbar?
+    pdfmenubar=false,        % show Acrobat’s menu?
+    pdffitwindow=true,     % window fit to page when opened
+    colorlinks=true,
+    allcolors=be-magenta,
+}
+
+\definecolor{dark}{HTML}{2D2D2D}
+\definecolor{light}{HTML}{D3D0C8}
+\definecolor{be-red}{HTML}{F47678}
+\definecolor{be-green}{HTML}{98CD97}
+\definecolor{be-yellow}{HTML}{E2B552}
+\definecolor{be-blue}{HTML}{6498CE}
+\definecolor{be-magenta}{HTML}{CD98CD}
+\definecolor{be-cyan}{HTML}{61CCCD}
+\definecolor{be-gray}{HTML}{747369}
+\definecolor{be-brown}{HTML}{D47B4E}
+
+% section format
+\titleformat{\section}%
+  {\normalfont\Large\rmfamily\itshape\color{be-blue}}% format applied to label+text
+  {\llap{\colorbox{be-blue}{\parbox{1.5cm}{\hfill\itshape\textcolor{dark}{\thesection}}}}}% label
+  {5pt}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+
+\newcommand{\hlimpo}[1]{\textcolor{be-red}{\textbf{#1}}}
+\newcommand{\hlwarn}[1]{\textcolor{be-yellow}{\textbf{#1}}}
+\newcommand{\hldefn}[1]{\textcolor{be-blue}{\textbf{#1}}}
+\newcommand{\hlnotea}[1]{\textcolor{be-green}{\textbf{#1}}}
+\newcommand{\hlnoteb}[1]{\textcolor{be-cyan}{\textbf{#1}}}
+\newcommand{\hlnotec}[1]{\textcolor{be-brown}{\textbf{#1}}}
+\newcommand{\hlb}[2]{\colorbox{#1!30!dark}{\textbf{#2}}}
+\newcommand{\hlbnotea}[1]{\hlb{be-green}{#1}}
+\newcommand{\hlbnoteb}[1]{\hlb{be-cyan}{#1}}
+\newcommand{\hlbnotec}[1]{\hlb{be-brown}{#1}}
+\newcommand{\hlbnoted}[1]{\hlb{be-magenta}{#1}}
+\newcommand{\hlbnotee}[1]{\hlb{be-red}{#1}}
+
+\pagecolor{dark}
+\color{light}
+
+\begin{document}
+
+\pagenumbering{false}
+\section{Usage}%
+
+Notes are presented in two columns: main notes on the left, and sidenotes on the right.
+Main notes will have a larger margin.
+The following is the color code for the notes: \\
+\begin{table}[ht]
+  \caption{Text color coding}
+  \begin{tabular}{l l}
+    \hldefn{Blue}                     & Definitions \\
+    \hlimpo{Red}                      & Important points \\
+    \hlwarn{Yellow}                   & Points to watch out for \\
+                                      & / comment for incompletion \\
+    \hlnotea{Green}                   & External definitions, theorems, etc. \\
+    \hlnoteb{Light Blue}              & Regular highlighting \\
+    \hlnotec{Brown}                   & Secondary highlighting \\
+    \hlbnotea{Highlighted Green}      & Usually used in cases in proofs \\
+    \hlbnoted{Highlighted Magenta}    & Also used for cases in proofs; \\
+                                      & secondary highlighting \\
+    \hlbnoteb{Highlighted Light Blue} & Tertiary highlighting \\
+    \hlbnotec{Highlighted Brown}      & Quaternary highlighting
+  \end{tabular}
+\end{table}
+
+\noindent
+The following is the color code for boxes, that begin and end with a line of the same color: \\
+\begin{table}[ht]
+  \caption{Environment color coding}
+  \begin{tabular}{l l}
+    \hldefn{Blue}                   & Definitions \\
+    \hlimpo{Red}                    & Warning \\
+    \hlwarn{Yellow}                 & Notes, remarks, etc. \\
+    \hlnotec{Brown}                 & Proofs \\
+    \textcolor{be-magenta}{Magenta} & Theorems, Propositions, Lemmas, etc.
+  \end{tabular}
+\end{table}
+
+\noindent
+Hyperlinks are underlined in \textcolor{be-magenta}{magenta}. If your PDF reader supports it,
+you can follow the links to either be redirected to an external website, or a theorem, definition,
+etc., in the same document. Note that this is only reliable if you have the full set of notes as a
+single document, which you can find on: \\ 
+\url{https://japorized.github.io/TeX_notes} or \\
+\url{https://tex.japorized.ink}
+
+\nobibliography*
+\bibliography{references}
+
+\printindex
+
+\end{document}
+
