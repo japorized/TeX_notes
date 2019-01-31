@@ -1249,7 +1249,7 @@ to $\mathbb{R}$.
 
 \begin{eg}
   Let $\{ e_1, \ldots, e_n \}$ be a basis of $V$ with the dual basis
-  $\{ e^1, \ldots, e^n \}$, which is a basis of $V^*$. Then any 
+  $\{ e^1, \ldots, e^n \}$, which is a basis of $V^*$. Then any
   $\mathcal{A} \in \Lambda^k(V^*)$ can be written uniquely as
   \begin{equation*}
     \mathcal{A} = \sum_{i_1 < \hdots < i_k} \mathcal{A}^{i_1, \ldots, i_k} \;
@@ -1317,7 +1317,7 @@ to $\mathbb{R}$.
 
 \begin{proof}
   Let $\mathcal{B} = \{ e_1, \ldots, e_n \}$ be a basis of $V$, and let
-  $A = [T]_{\mathcal{B}}$ be the $n \times n$ matrix of $T$ wrt the basis 
+  $A = [T]_{\mathcal{B}}$ be the $n \times n$ matrix of $T$ wrt the basis
   $\mathcal{B}$. So $T(e_i) = A_i^j e_j$. Then $\{ e_1 \land \hdots \land e_n \}$
   is a basis of $\Lambda^n(V)$, and
   \begin{align*}
@@ -1361,7 +1361,7 @@ and consider it as the positive direction of $V$, and that'll be our orientation
 \end{defn}
 
 \begin{note}
-  For any two such orientations $\mu$ and $\tilde{\mu}$, we have that 
+  For any two such orientations $\mu$ and $\tilde{\mu}$, we have that
   $\tilde{\mu} = \lambda \mu$ for some non-zero $\lambda \in \mathbb{R}$, and by using
   the definition of having the \hyperref[defn:same_and_opposite_orientations]{same orientation},
   we say that $\mu \sim \tilde{\mu}$ if $\lambda > 0$ and $\mu \not\sim \tilde{\mu}$ if
@@ -1384,7 +1384,7 @@ We shall begin with a brief review of some ideas from multivariable calculus.
 
 We know that $\mathbb{R}^n$ is an $n$-dimensional real vector space. It has a canonical
 \hlnotea{positive-definite} \hldefn{inner product}, aka the \hldefn{Euclidean inner product},
-or the \hldefn{dot product}: given 
+or the \hldefn{dot product}: given
 $x = (x_1, \ldots, x_n), y = (y_1, \ldots, y_n) \in \mathbb{R}^n$, we have
 \begin{equation*}
   x \cdot y = \sum_{i=1}^{n} x^i y^i = \delta_{ij} x^i y^j.
@@ -1414,7 +1414,7 @@ $x, y , w\in \mathbb{R}^n$,
 
 \begin{note}[Triangle Inequality]
   Note that the triangle inequality holds for the distance function\sidenote{See
-  also \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf}{PMATH 351}}: for any 
+  also \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf}{PMATH 351}}: for any
   $x, z \in \mathbb{R}^n$, for any $y \in \mathbb{R}^n$,
   \begin{equation*}
     \dist(x, z) \leq \dist(x, y) + \dist(y, z).
@@ -1445,6 +1445,285 @@ $x, y , w\in \mathbb{R}^n$,
 % section topology_on_r_n_ (end)
 
 % chapter lecture_6_jan_18th (end)
+
+\chapter{Lecture 7 Jan 21st}%
+\label{chp:lecture_7_jan_21st}
+% chapter lecture_7_jan_21st
+
+\section{Topology on \texorpdfstring{$\mathbb{R}^n$}{Rn} (Continued)}%
+\label{sec:topology_on_r_n_continued}
+% section topology_on_r_n_continued
+
+\begin{defn}[Closed]\index{Closed}\label{defn:closed}
+  A subset $F \subseteq \mathbb{R}^n$ is \hlnoteb{closed} if its complement
+  $\mathbb{R}^n \setminus F =: F^C$ is open.
+\end{defn}
+
+\begin{warning}
+  A subset does not have to be either open or closed. Most subsets are neither.
+\end{warning}
+
+\begin{note}
+  \begin{itemize}
+    \item Arbitrary intersections of closed sets is closed.
+    \item Finite unions of closed sets is closed.
+  \end{itemize}
+\end{note}
+
+\begin{note}[Notation]
+  We call
+  \begin{equation*}
+    \bar{B}_{\epsilon}(x) := \left\{ y \in \mathbb{R}^n \mmid \norm{ x - y } \leq \epsilon \right\}
+  \end{equation*}
+  the closed ball of radius $\epsilon$ centered at $x$.
+\end{note}
+
+\begin{defn}[Continuity]\index{Continuity}\label{defn:continuity}
+  Let $A \subseteq \mathbb{R}^n$. Let $f : A \to \mathbb{R}^m$, and $x \in A$. We say
+  that $f$ is \hlnoteb{continuous} at $x$ if $\forall \epsilon > 0$, $\exists \delta
+  > 0$ such that
+  \begin{equation*}
+    f(B_{\delta}(x) \cap A) \subseteq B_{\epsilon}(f(x)).
+  \end{equation*}
+  We say that $f$ is \hlnoteb{continuous} on $A$ if $\forall x \in A$, $f$ is continuous
+  on $x$.
+\end{defn}
+
+\begin{propo}[Inverse of a Continuous Map is Open]\label{propo:inverse_of_a_continuous_map_is_open}
+  \marginnote{For a proof, see \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf}{PMATH 351}.}
+  Let $A \subseteq \mathbb{R}^n$ and $f : A \to \mathbb{R}^m$. Then $f$ is continuous on
+  $A$ iff whenever $V \subseteq \mathbb{R}^m$ is open, $f^{-1}(V) = A \cap U$ for some
+  $U \subseteq \mathbb{R}^n$ is open.
+\end{propo}
+
+\begin{defn}[Homeomorphism]\index{Homeomorphism}\label{defn:homeomorphism}
+  Let $A \subseteq \mathbb{R}^n$ and $f : A \to \mathbb{R}^m$. Let $B = f(A)$. We say that
+  $f$ is a homeomorphism of $A$ onto $B$ if $f : A \to B$
+  \begin{itemize}
+    \item is a bijection;
+    \item and $f^{-1} : B \to A$ is continuous on $A$ and $B$, respectively.
+  \end{itemize}
+\end{defn}
+
+% section topology_on_r_n_continued (end)
+
+\section{Calculus on \texorpdfstring{$\mathbb{R}^n$}{Rn}}%
+\label{sec:calculus_on_r_n_}
+% section calculus_on_r_n_
+
+Let $U \subseteq \mathbb{R}^n$ be open, and $f : U \to \mathbb{R}^m$ be a
+continuous map. Also, let
+\begin{equation*}
+  x = (x^1, \ldots, x^n) \in \mathbb{R}^n \text{ and }
+  y = (y^1, \ldots, y^m) \in \mathbb{R}^m.
+\end{equation*}
+Then the \hldefn{component functions} of $f$ are defined by
+\begin{equation*}
+  y^k = f^k(x^1, \ldots, x^n), \text{ where }
+  y = (y^1, \ldots, y^m) = f(x) = f(x^1, \ldots x^n).
+\end{equation*}
+Thus $f = (f^1, \ldots, f^m)$ is a collection of $m$-real-valued functions
+on $U \subseteq \mathbb{R}^n$.
+
+\begin{defn}[Smoothness]\index{Smoothness}\label{defn:smoothness}
+  Let $x_0 \in U$. We say that $f$ is \hlnoteb{smooth} (or \hldefn{$C^\infty$},
+  or \hldefn{infinitely differentiable}) if all \hlimpo{partial derivatives} of
+  each component function $f^k$ exists and are \hlnotea{continuous} at $x_0$.
+  I.e., if we let $\frac{\partial}{\partial x^i} = \partial_i$ denote the operator
+  of partial differentiation in the $x^i$ direction, then
+  \begin{equation*}
+    \partial_1^{\alpha_1} \hdots \partial_n^{\alpha_n} f^k
+  \end{equation*}
+  exists and is continuous at $x_0$, for all $k = 1, \ldots, n$,
+  and all $\alpha_i \geq 0$.
+\end{defn}
+
+\begin{defn}[Diffeomorphism]\index{Diffeomorphism}\label{defn:diffeomorphism}
+  Let $U \subseteq \mathbb{R}^n$ be open, $f : U \to \mathbb{R}^m$, and $V = f(U)$.
+  We say $f$ is a \hlnoteb{diffeomorphism} of $U$ onto $V$ if $f : U \to V$ is
+  bijective\sidenote{A function that is \hlimpo{not injective} may not have a surjection
+  from its image.}, smooth, and that its inverse $f^{-1}$ is smooth.
+
+  We say that $U$ and $V$ are \hldefn{diffeomorphic} if such a diffeomorphism
+  exists.
+\end{defn}
+
+\begin{note}
+  A diffeomorphism preserves the `smoothness of a structure', i.e. the notion of
+  calculus is the same for diffeomorphic spaces.
+\end{note}
+
+\begin{eg}
+  If $f : U \to V$ is a diffeomorphism , then $g : V \to \mathbb{R}$ is smooth iff
+  $g \circ f : U \to \mathbb{R}$ is smooth.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \coordinate (u) at (0, 0);
+      \coordinate (v) at (2, 0);
+      \coordinate (r) at (4, 0);
+      \node[below=2pt] at (u) {$U$};
+      \node[below=2pt] at (v) {$V$};
+      \node[below=2pt] at (r) {$\mathbb{R}$};
+      \draw[-latex] (u) to [bend left=60] node[midway,above] {$g \circ f$} (r) ;
+      \draw[-latex] (u) to [bend left] node[midway,above] {$f$} (v) ;
+      \draw[-latex] (v) to [bend left] node[midway,above] {$g$} (r) ;
+    \end{tikzpicture}
+    \caption{Preservation of smoothness via diffeomorphisms}\label{fig:preservation_of_smoothness_via_diffeomorphisms}
+  \end{marginfigure}
+\end{eg}
+
+\begin{note}
+  A diffeomorphism is also called a \hldefn{smooth reparameterization} (or just a
+  \hldefn{parameterization} for short).
+\end{note}
+
+\begin{defn}[Differential]\index{Differential}\label{defn:differential}
+  Let $f : U \subseteq \mathbb{R}^n \to \mathbb{R}^m$ be a smooth mapping, and
+  $x_0 \in U$. The \hlnoteb{differential} of $f$ at $x_0$, denoted $(\dif{f})_{x_0}$,
+  is a linear map $(\dif{f})_{x_0} : \mathbb{R}^n \to \mathbb{R}^m$, or an
+  $m \times n$ real matrix, given by
+  \begin{equation*}
+    (\dif{f})_{x_0} = \begin{pmatrix}
+      \frac{\partial f^1}{\partial x^1} (x_0) & \hdots & \frac{\partial f^1}{\partial x^n} (x_0) \\
+      \vdots                                  &        & \vdots \\
+      \frac{\partial f^m}{\partial x^1} (x_0) & \hdots & \frac{\partial f^m}{\partial x^n} (x_0)
+    \end{pmatrix},
+  \end{equation*}
+  where the notation $(x_0)$ means evaluation at $x_0$, and the $(i, j)$
+  \textsuperscript{th} entry of $(\dif{f})_{x_0}$ is
+  $\frac{\partial f^i}{\partial x^j}(x_0)$. $(\dif{f})_{x_0}$ is also called
+  the \hldefn{Jacobian} or \hldefn{tangent map} of $f$ at $x_0$.
+\end{defn}
+
+\begin{propo}[Differential of the Identity Map is the Identity Matrix]\label{propo:differential_of_the_identity_map_is_the_identity_matrix}
+  Let $f : U \subseteq \mathbb{R}^n \to \mathbb{R}^n$ be the identity mapping
+  $f(x) = x$. Then $(\dif{f})_{x_0} = I_n$, the $n \times n$ matrix, then for
+  any $x_0 \in U$.
+\end{propo}
+
+\begin{proof}
+  Since $f(x) = x$, since $x \in \mathbb{R}^n$, we may consider the function $f$ as
+  \begin{equation*}
+    f(x) = I_n x = \begin{pmatrix}
+      x_1    & 0      & \hdots & 0 \\
+      0      & x_2    & \hdots & 0 \\
+      \vdots & \vdots & \ddots & \vdots \\
+      0      & 0      & \hdots & x_n
+    \end{pmatrix}.
+  \end{equation*}
+  Then it follows from differentiation that
+  \begin{equation*}
+    (\dif{f})_{x_0} = \begin{pmatrix}
+      1      & 0      & \hdots & 0 \\
+      0      & 1      & \hdots & 0 \\
+      \vdots & \vdots & \ddots & \vdots \\
+      0      & 0      & \hdots & 0
+    \end{pmatrix},
+  \end{equation*}
+  and it does not matter what $x_0$ is.\qed\
+\end{proof}
+
+\begin{note}
+  In multivariable calculus, we learned that if $f$ is \hlnotea{smooth} at $x_0$
+  \sidenote{Back in multivariable calculus, just being $C^1$ at $x_0$ is sufficient
+  for being smooth}, then
+  \begin{equation*}
+    \underset{m \times 1}{f(x)}
+      = \underset{m \times 1}{f(x_0)}
+        + \underset{m \times n}{(\dif{f})_{x_0}} \underset{n \times 1}{(x - x_0)}
+        + \underset{m \times 1}{Q(x)},
+  \end{equation*}
+  where $Q : U \to \mathbb{R}^m$ satisfies
+  \begin{equation*}
+    \lim_{x \to x_0} \frac{Q(x)}{\norm{x - x_0}} = 0.
+  \end{equation*}
+\end{note}
+
+\begin{note}
+  Note that when $n = m = 1$, the existence of the differential of a continuous
+  real-valued function $f(x)$ at a real number $x_0 \in U \subseteq \mathbb{R}$
+  is the same of the usual derivative $f'(x)$ at $x = x_0$. In fact,
+  $f'(x_0) = (\dif{f})_{x_0} = \frac{\dif{f}}{\dif{x}}(x_0)$.
+\end{note}
+
+\begin{thm}[The Chain Rule]\index{The Chain Rule}\label{thm:the_chain_rule}
+  Let
+  \begin{gather*}
+    f : U \subseteq \mathbb{R}^n \to \mathbb{R}^m \\
+    g : V \subseteq \mathbb{R}^m \to \mathbb{R}^p,
+  \end{gather*}
+  be two smooth maps, where $U, V$ are open in $\mathbb{R}^n$ and $\mathbb{R}^m$,
+  respectively, and and such that $V = f(U)$. Then the composition $g \circ f$ is
+  also smooth. Further, if $x_0 \in U$, then
+  \begin{equation}\label{eq:the_chain_rule}
+    (\dif{(g \circ f)})_{x_0} = (\dif{g})_{f(x_0)} (\dif{f})_{x_0}.
+  \end{equation}
+\end{thm}
+
+% section calculus_on_r_n_ (end)
+
+\section{Smooth Curves in \texorpdfstring{$\mathbb{R}^n$}{Rn} and Tangent Vectors}%
+\label{sec:smooth_curves_in_r_n_and_tangent_vectors}
+% section smooth_curves_in_r_n_and_tangent_vectors
+
+We shall now look into tangent vectors and the tangent space at every point of
+$\mathbb{R}^n$. We need these two notions to construct objects such as vector
+fields and \hlnotea{differential forms}. In particular, we need to consider these
+objects in multiple abstract ways so as to be able to generalize these notions in
+more abstract spaces, particularly to \hlnotea{submanifolds} of $\mathbb{R}^n$
+later on.
+
+\paragraph{Plan} We shall first consider the notion of \hlnotea{smooth curves},
+which we shall simply call a curve, and shall always (in this course) assume
+curves as smooth objects. We shall then use \hlnotea{velocities} of curves to
+define \hlnotea{tangent vectors}.
+
+\begin{defn}[Smooth Curve]\index{Smooth Curve}\label{defn:smooth_curve}
+  Let $I \subseteq \mathbb{R}$ be an open interval. A smooth map
+  $\phi : I \to \mathbb{R}^n$ is called a \hlnoteb{smooth curve}, or \hlnoteb{curve},
+  in $\mathbb{R}^n$. Let $t \in I$. Then each of its component functions 
+  $\phi^k(t)$ in $\phi(t) = (\phi^1(t), \ldots, \phi^n(t))$ is a smooth 
+  real-valued function of $t$.
+\end{defn}
+\begin{marginfigure}
+  \centering
+  \resizebox{\marginparwidth}{!}{
+  \begin{tikzpicture}
+    \begin{axis}
+      \addplot3[variable=t,mesh,domain=-1:1] (t^3,t^3,t);
+    \end{axis}
+  \end{tikzpicture}
+  }
+  \caption{A curve in $\mathbb{R}^3$}\label{fig:a_curve_in_r_3_}
+\end{marginfigure}
+
+\begin{eg}
+  Let $a, b > 0$. Consider $\phi : I \to \mathbb{R}^3$ given by
+  \begin{equation*}
+    \phi(t) = (a \cos t, a \sin t, bt).
+  \end{equation*}
+  Since each of the components are smooth\sidenote{\hlwarn{Wait}, do we actually
+  consider $bt$ smooth when it's only $C^1$, in this course?}, we have that $\phi$
+  itself is also smooth. The shape of the curve is as shown in \cref{fig:helix_curve}.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[color=be-blue,thick,decoration={segment length=15,
+        amplitude=28,coil},decorate,arrows = {<[bend]-}] (0,1.8,0) --(0,-2,0);
+      \draw[-latex] (-2, 0, 0) -- (2, 0, 0) node[right] {$y$};
+      \draw[-latex] (0, -2, 0) -- (0, 2, 0) node[above] {$z$};
+      \draw[-latex] (0, 0, -2) -- (0, 0, 3) node[below,left] {$x$};
+      \draw[dashed] (1, -2, 0) -- (1, 2, 0);
+      \draw[dashed] (-1, -2, 0) -- (-1, 2, 0);
+    \end{tikzpicture}
+    \caption{Helix curve}\label{fig:helix_curve}
+  \end{marginfigure}
+\end{eg}
+
+% section smooth_curves_in_r_n_and_tangent_vectors (end)
+
+% chapter lecture_7_jan_21st (end)
 
 \appendix
 
