@@ -1725,6 +1725,197 @@ define \hlnotea{tangent vectors}.
 
 % chapter lecture_7_jan_21st (end)
 
+\chapter{Lecture 8 Jan 23rd}%
+\label{chp:lecture_8_jan_23rd}
+% chapter lecture_8_jan_23rd
+
+\section{Smooth Curves in \texorpdfstring{$\mathbb{R}^n$}{Rn} and Tangent Vectors (Continued)}%
+\label{sec:smooth_curves_in_r_n_and_tangent_vectors_continued}
+% section smooth_curves_in_r_n_and_tangent_vectors_continued
+
+\begin{defn}[Velocity]\index{Velocity}\label{defn:velocity}
+  Let $\phi : I \to \mathbb{R}^n$ be a curve. The \hlnoteb{velocity} of the curve
+  $\phi$ at the point $\phi(t_0) \in \mathbb{R}^n$ for $t_0 \in I$ is defined as
+  \begin{equation*}
+    \phi'(t_0) = (\dif{\phi})_{t_0} \in \mathbb{R}^{n \times 1} \simeq \mathbb{R}^n.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  $\phi'(t_0) = (\dif{\phi})_{t_0}$ is the \hlnotea{instantaneous rate of change}
+  of $\phi$ at the point $\phi(t_0) \in \mathbb{R}^n$.
+\end{note}
+
+\begin{eg}
+  From the last example, we had $\phi(t) = (a \cos t, a \sin t, bt)$ for $a, b > 0$.
+  Then
+  \begin{equation*}
+    \phi'(t) = (-a \sin t, a \cos t, b)
+  \end{equation*}
+  Let $t_0 = \frac{\pi}{2}$. Then the velocity of $\phi$ at
+  \begin{equation*}
+    \phi \left( \frac{\pi}{2} \right) = (0, a, \frac{b \pi}{2})
+  \end{equation*}
+  is
+  \begin{equation*}
+    \phi'\left(\frac{\pi}{2}\right) = (-a, 0, b).
+  \end{equation*}
+\end{eg}
+
+\begin{defn}[Equivalent Curves]\index{Equivalent Curves}\label{defn:equivalent_curves}
+  Let $p \in \mathbb{R}^n$. Let $\phi : I \to \mathbb{R}^n$ and 
+  $\psi : \tilde{I} \to \mathbb{R}^n$ be two smooth curves in $\mathbb{R}^n$ such
+  that both the open intervals $I$ and $\tilde{I}$ contain $0$. We say that
+  $\phi$ is \hlnoteb{equivalent at $p$ to} $\psi$, and denote this as
+  \begin{equation*}
+    \phi \sim_{p} \psi,
+  \end{equation*}
+  iff
+  \begin{itemize}
+    \item $\phi(0) = \psi(0) = p$, and
+    \item $\phi'(0) = \psi'(0)$.
+  \end{itemize}
+\end{defn}
+
+\begin{note}
+  In other words, $\phi \sim_p \psi$ iff both $\phi$ and $\psi$ passes through
+  $p$ at $t = 0$, and have the same velocity at this point.
+\end{note}
+
+\begin{eg}\label{eg:simple_equivalent_curves}
+  Consider the two curves
+  \begin{equation*}
+    \phi(t) = (\cos t, \sin t) \text{ and } \psi(t) = (1, t),
+  \end{equation*}
+  where $t \in \mathbb{R}$.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[-latex] (-2, 0) -- (2, 0);
+      \draw[-latex] (0, -2) -- (0, 2);
+      \draw[
+        decoration={markings, mark=at position 0.625 with {\arrow{latex}}},
+        postaction={decorate}
+        ] (0, 0) circle (1);
+      \draw[midarrow={latex}{0.7}] (1, -2) -- (1, 2);
+      \node[draw,circle,fill,inner sep=1pt,label={315:{$p = (1, 0)$}}] at (1, 0) {};
+    \end{tikzpicture}
+    \caption{Simple example of equivalent curves in \cref{eg:simple_equivalent_curves}}\label{fig:simple_example_of_equivalent_curves}
+  \end{marginfigure}
+  Notice that at $p = (1, 0)$, i.e. $t = 0$, we have
+  \begin{equation*}
+    \phi'(0) = (0, 1) \text{ and } \psi'(0) = (0, 1).
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \phi \sim_p \psi.
+  \end{equation*}
+\end{eg}
+
+\begin{propo}[Equivalent Curves as an Equivalence Relation]\label{propo:equivalent_curves_as_an_equivalence_relation}
+  $\sim_p$ is an equivalence relation.
+\end{propo}
+
+\begin{ex}
+  Proof of \cref{propo:equivalent_curves_as_an_equivalence_relation} is really
+  straightforward so try it yourself.
+\end{ex}
+
+\begin{defn}[Tangent Vector]\index{Tangent Vector}\label{defn:tangent_vector}
+  A \hlnoteb{tangent vector} to $\mathbb{R}^n$ at $p$ is a vector $v \in \mathbb{R}^n$,
+  thought of as `\hlnotec{emanating}' from $p$, is in a one-to-one correspondence
+  with an equivalence class
+  \begin{equation*}
+    [\phi]_p := \left\{ \psi : I \to \mathbb{R}^n \mmid \psi \sim_p \phi \right\}.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Tangent Space]\index{Tangent Space}\label{defn:tangent_space}
+  The \hlnoteb{tangent space} to $\mathbb{R}^n$ at $p$, denoted 
+  $T_p \left(\mathbb{R}^n\right)$ is the set of all equivalence classes $[\phi]_p$
+  wrt $\sim_p$.
+\end{defn}
+
+Now if $\phi : I \to \mathbb{R}^n$ is a smooth curve in $\mathbb{R}^n$ with $0 \in I$,
+and $\phi'(0) = v \in \mathbb{R}^n$, then we write $v_p$ to denote the element in
+$T_p \left( \mathbb{R}^n \right)$ that it represents.
+
+\begin{propo}[Canonical Bijection from $T_p (\mathbb{R}^n)$ to $\mathbb{R}^n$]\label{propo:canonical_bijection_from_t_p_r_n_to_r_n_}
+  There exists a canonical bijection from $T_p(\mathbb{R}^n)$ to $\mathbb{R}^n$.
+  Using this bijection, we can equip the tangent space $T_p(\mathbb{R}^n)$ with the
+  structure of a real $n$-dimensional real vector space.
+\end{propo}
+
+\begin{proof}
+  Let $v_p = [\phi]_p \in T_p(\mathbb{R}^n$, where $v = \phi'(0) \in \mathbb{R}^n$,
+  for any $\phi \in [\phi]_p$. Let $\gamma_{v_p} : \mathbb{R} \to \mathbb{R}^n$ by
+  \begin{equation*}
+    \gamma_{v_p})t_ = p + tv = (p^1 + tv^1, p^2 + tv^2, \ldots, p^n + tv^n).
+  \end{equation*}
+  It follows by construction that $\gamma_{v_p}$ is smooth, $\gamma_{v_p}(0) = p$,
+  and $\gamma_{v_p}'(0) = v$. Thus $\gamma_{v_p} \sim_p \phi$. In particular, we have
+  $[\gamma_{v_p}]_p = [\phi]_p = v_p \in T_p (\mathbb{R}^n)$. In fact, notice that
+  $\gamma_{v_p}$ is the straight line through $p$ in the direction of $v$.
+
+  Now consider the map $T_p : \mathbb{R}^n \to T_p (\mathbb{R}^n)$, given by
+  \begin{equation*}
+    T_p(v) = [\gamma_{v_p}]_p.
+  \end{equation*}
+  In other words, we defined the map $T_p$ to send a vector $v \in \mathbb{R}^n$ to
+  the \hlnotea{equivalence class of all smooth curves passing through $p$ with 
+  velocity $v$ at $p$}. Note that since $\gamma_{v_p}$ has a `dependency' on $v$,
+  it follows that $T_p$ is indeed a bijection.
+
+  We now get a vector space structure on $T_p (\mathbb{R}^n)$ from that of $\mathbb{R}^n$
+  by letting $T_p$ be a linear isomorphism, i.e. we set
+  \begin{equation*}
+    a[\phi]_p + b[\psi]_p = T_p \left( a T_p^{-1} ([\phi]_p) + bT_p^{-1} ([\psi]_p) \right)
+  \end{equation*}
+  for all $a, b \in \mathbb{R}$ and all $[\phi]_p, [\psi]_p \in T_p(\mathbb{R}^n)$.\qed
+\end{proof}
+
+\begin{note}
+  Another way we can say the last line in the proof above is as follows: if
+  $v_p, w_p \in T_p(\mathbb{R}^n)$ and $a, b \in \mathbb{R}$, then we define
+  $a v_p + b w_p = (av + bw)_p$.
+
+  In other words, looking at the tangent vectors at $p$ is similar to looking
+  at the tangents vectors at the origin $0$.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[-latex] (0, 0, 0) -- (2, 0, 0) node[right] {$y$};
+      \draw[-latex] (0, 0, 0) -- (0, 4, 0) node[above] {$z$};
+      \draw[-latex] (0, 0, 0) -- (0, 0, 2) node[below,left] {$x$};
+
+      \draw[-latex] (0, 0, 0) -- (1, 1, -1) node[above] {$w$};
+      \draw[-latex] (0, 0, 0) -- (-1, 1, 1) node[above] {$v$};
+      \node[draw,circle,fill,inner sep=1pt,label={315:{$0$}}] at (0, 0, 0) {};
+
+      \draw[-latex] (1, 2, 1) -- (2, 3, 0) node[above] {$w_p$};
+      \draw[-latex] (1, 2, 1) -- (0, 3, 2) node[above] {$v_p$};
+      \node[draw,circle,fill,inner sep=1pt,label={315:{$p$}}] at (1, 2, 1) {};
+    \end{tikzpicture}
+    \caption{Canonical bijection from $T_p(\mathbb{R}^n)$ to $\mathbb{R}^n$}\label{fig:canonical_bijection_from_t_p_r_n_to_r_n_}
+  \end{marginfigure}
+\end{note}
+
+\begin{note}
+  The fact that there is a canonical isomorphism between $\mathbb{R}^n$ and the
+  equivalence classes wrt $\sim_p$ is a pheonomenon that is particular to $\mathbb{R}^n$.
+
+  For a $k$-dimensional \hlnoteb{submanifold} $M$ of $\mathbb{R}^n$, or more generally,
+  for an abstract smooth $k$-dimensional manifold $M$, and a point $p \in M$, it is
+  true that we can still define $T_p(M)$ to be the set of equivalence classes of
+  curves wrt to some `natural' equivalence relation. However, there is no canonical
+  representation of each equivalence class, and so $T_p(M) \simeq \mathbb{R}^k$, but
+  not canonically so.
+\end{note}
+
+% section smooth_curves_in_r_n_and_tangent_vectors_continued (end)
+
+% chapter lecture_8_jan_23rd (end)
+
 \appendix
 
 \chapter{Review of Earlier Contents}%

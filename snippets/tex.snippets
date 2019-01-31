@@ -105,6 +105,14 @@ snippet tikzp "tikzpicture environment" b
 \end{tikzpicture}
 endsnippet
 
+snippet draw "tikzpicture draw command" b
+\draw${1:[${2:options}]} $0;
+endsnippet
+
+snippet node "tikzpicture node command" b
+\node${1:[${2:options}]} at (${3:a}, ${4:b}) {${5:label}};
+endsnippet
+
 snippet enum "Enumerate" b
 \begin{enumerate}
 	\item $0
