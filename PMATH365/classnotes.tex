@@ -1847,10 +1847,10 @@ $T_p \left( \mathbb{R}^n \right)$ that it represents.
 \end{propo}
 
 \begin{proof}
-  Let $v_p = [\phi]_p \in T_p(\mathbb{R}^n$, where $v = \phi'(0) \in \mathbb{R}^n$,
+  Let $v_p = [\phi]_p \in T_p(\mathbb{R}^n)$, where $v = \phi'(0) \in \mathbb{R}^n$,
   for any $\phi \in [\phi]_p$. Let $\gamma_{v_p} : \mathbb{R} \to \mathbb{R}^n$ by
   \begin{equation*}
-    \gamma_{v_p})t_ = p + tv = (p^1 + tv^1, p^2 + tv^2, \ldots, p^n + tv^n).
+    \gamma_{v_p} (t) = (p + tv) = (p^1 + tv^1, p^2 + tv^2, \ldots, p^n + tv^n).
   \end{equation*}
   It follows by construction that $\gamma_{v_p}$ is smooth, $\gamma_{v_p}(0) = p$,
   and $\gamma_{v_p}'(0) = v$. Thus $\gamma_{v_p} \sim_p \phi$. In particular, we have
@@ -1915,6 +1915,223 @@ $T_p \left( \mathbb{R}^n \right)$ that it represents.
 % section smooth_curves_in_r_n_and_tangent_vectors_continued (end)
 
 % chapter lecture_8_jan_23rd (end)
+
+\chapter{Lecture 9 Jan 25th}%
+\label{chp:lecture_9_jan_25th}
+% chapter lecture_9_jan_25th
+
+\section{Derivations and Tangent Vectors}%
+\label{sec:derivations_and_tangent_vectors}
+% section derivations_and_tangent_vectors
+
+Recall the notion of a \hlnotea{directional derivative}.
+
+\begin{defn}[Directional Derivative]\index{Directional Derivative}\label{defn:directional_derivative}
+  Let $p, v \in \mathbb{R}^n$. Let $f : U \subseteq \mathbb{R}^n \to \mathbb{R}$ be
+  smooth, where $U$ is an open set that contains $p$ (i.e. an open nbd of $p$). The
+  \hlnoteb{directional derivative} of $f$ at $p$ in the direction of $v$, denoted
+  $v_p f$, is defined as
+  \begin{equation}\label{eq:directional_derivative_defn}
+    v_p f = \lim_{t \to 0} \frac{f(p + tv) - f(p)}{t}.
+  \end{equation}
+\end{defn}
+
+\begin{remark}
+  The above limit may or may not exist given an arbitrary $f, p$ and $v$. However,
+  since we're working exclusively with smooth functions, this limit will always
+  exist for us.
+\end{remark}
+
+\begin{note}
+  By definition, we may think of $v_p f \in \mathbb{R}$ as the instantaneous rate of
+  change of $f$ at the point $p$ as we `move in the direction of' the vector $v$.
+\end{note}
+
+\begin{remark}
+  In multivariable calculus, one may have seen this definition with the additional
+  condition that $v$ is a unit vector. We do not have that restriction here.
+
+  Also, note that we have deliberately used the same notation $v_p$ that we used
+  for elements of $T_p(\mathbb{R}^n)$, which seems awkward, but it shall be clarified
+  in \cref{crly:justification_for_the_notation_v_p_f_}.
+\end{remark}
+
+\begin{eg}
+  In the special case of when $v = \hat{e}_i$, where $\hat{e}_i$ is the $i$th 
+  standard basis vector. Then we have
+  \begin{equation*}
+    (\hat{e}_i)_p f = \lim_{t \to 0} \frac{f(p + t\hat{e}_i) - f(p)}{t}
+    = (\partial_i f)(p) = \frac{\partial f}{\partial x^i}(p) = (f \circ \gamma_{v_p})'(p)
+  \end{equation*}
+  for the directional derivative of $f$ at $p$ in the $\hat{e}_i$ direction. This
+  is precisely the partial derivative of $f$ in the $x^i$ direction at the point
+  $p \in \mathbb{R}^n$.
+\end{eg}
+
+\begin{thm}[Linearity and Leibniz Rule for Directional Derivatives]\index{Linearity of Directional Derivatives}\index{Leibniz Rule for Directional Derivatives}\label{thm:linearity_and_leibniz_rule_for_directional_derivatives}
+  Let $p \in \mathbb{R}^n$, and let $f, g$ be smooth real-valued functions defined
+  on open neighbourhoods of $p$. Let $a, b \in \mathbb{R}$. Then
+  \begin{enumerate}
+    \item (\hlnotea{Linearity}) $v_p(af + bg) = av_p f + bv_p g$;
+    \item (\hlnotea{Leibniz Rule} / \hlnotea{Product Rule}) 
+      $v_p(fg) = f(p) v_p g + g(p) v_p f$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  Proven on A2Q2.
+\end{proof}
+
+\newthought{Recall} that given $p, v \in \mathbb{R}^n$, we denote $\gamma_{v_p}$ as
+the curve $\gamma_{v_p}(t) = p + tv$, which is the straight line passing through $p$
+with constant velocity $v$. Thus we mmay rewrite \cref{eq:directional_derivative_defn}
+as
+\begin{equation}\label{eq:directional_derivative_defn_ver2}
+  v_p f = \lim_{t \to 0} \frac{f(\gamma_{v_p}(t)) - f(\gamma_{v_p}(0))}{t}
+    = (f \circ \gamma_{v_p})'(0),
+\end{equation}
+where $f \circ \gamma_{v_p} : \mathbb{R} \to \mathbb{R}$ is smooth as it is a
+composition of smooth functions.
+
+\begin{thm}[Canonical Directional Derivative, Free From the Curve]\label{thm:canonical_directional_derivative_free_from_the_curve}
+  Suppose that $\phi \sim_p \psi$ are two curves on $\mathbb{R}^n$. Let $f : U \to
+  \mathbb{R}$ where $U$ is an open neighbourhood of $p$. Then
+  \begin{equation*}
+    (f \circ \phi)'(0) = (f \circ \psi)'(0).
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  By the chain rule,
+  \begin{equation*}
+    (f \circ \phi)'(0) = (\dif{(f \circ \phi)})_0 = (\dif{f})_{\phi(0)}(\dif{\phi})_0 
+      = (\dif{f})_{\phi(0)} \phi'(0),
+  \end{equation*}
+  and a similar expression holds for $\psi$. Our desired result follows from the
+  definition of $\sim_p$.\qed\
+\end{proof}
+
+\begin{crly}[Justification for the Notation $v_p f$]\label{crly:justification_for_the_notation_v_p_f_}
+  Let $[\phi]_p \in T_p \mathbb{R}^n$. It follows that
+  \begin{equation*}
+    v_p f = (f \circ \gamma_{v_p})'(0) = (f \circ \phi)'(0)
+  \end{equation*}
+  by \cref{eq:directional_derivative_defn_ver2}.
+\end{crly}
+
+\begin{remark}
+  With that, we have established that tangent vectors give us directional derivatives
+  in a way compatible with the characterization of $T_p \mathbb{R}^n$ as equivalence
+  classes wrt $\sim_p$.
+\end{remark}
+
+\newthought{Now the} fact that \cref{eq:directional_derivative_defn} depends only on
+the values of $f$ in some open neighbourhood of $p$ motivates us towards the following
+definition.
+
+\begin{defn}[$f \sim_p g$]\index{$f \sim_p g$}\label{defn:_f_sim_p_g_}
+  Let $p \in \mathbb{R}^n$. Let $f : U \subseteq \mathbb{R}^n \to \mathbb{R}$ and 
+  $g : V \subseteq \mathbb{R}^n \to \mathbb{R}$ be smooth where $U$ and $V$ are
+  both open neighbourhoods of $p$. We say that \hlnoteb{$f \sim_p g$} if $\exists W
+  \subseteq U \cap V$ such that $f \restriction_W = g \restriction_W$. That is,
+  $f \sim_p g$ iff $f$ and $g$ agree at all points sufficiently closde to $p$.
+\end{defn}
+
+\begin{note}
+  It is clear from \cref{eq:directional_derivative_defn} that if $f \sim_p g$, then
+  $f(p) = g(p)$ and $v_p f = v_p g$, i.e. $f$ and $g$ agree at $p$ and all possible
+  directional derivatives at $p$ of $f$ and $g$ also agree with each other.
+\end{note}
+
+\begin{propo}[$\sim_p$ for Smooth Functions is an Equivalence Relation]\label{propo:_sim_p_for_smooth_functions_is_an_equivalence_relation}
+  The relation $\sim_p$ on the set of smooth real-valued functions defined on some
+  open neighbourhood of $p$ is an equivalence relation.
+\end{propo}
+
+\begin{ex}
+  Prove \cref{propo:_sim_p_for_smooth_functions_is_an_equivalence_relation}.
+\end{ex}
+
+Of course, what else is there to talk about an equivalence relation if not for its
+equivalence class?
+
+\begin{defn}[Germ of Functions]\index{Germ of Functions}\label{defn:germ_of_functions}
+  An equivalence class of $\sim_p$ is called a \hlnoteb{germ of functions} at $p$.
+  The set of all such equivalence classes is dentoed $C_p^{\infty}$, called the
+  \hldefn{space of germs} at $p$.
+\end{defn}
+
+\begin{note}
+  Suppose $f : U \to \mathbb{R}$, where $U$ is an open neighbourhood of $p$. Then it
+  is clear that $[f]_p = [f \restriction_V]_p$ for any open neighbourhood $V$ of $p$
+  if $V \subseteq U$.
+\end{note}
+
+We can define the structure of a real vector space on $C_p^{\infty}$ as follows. Let
+$[f]_p, [g]_p \in C_p^{\infty}$, where the functions
+\begin{equation*}
+  f : U \to \mathbb{R} \text{ and } g : V \to \mathbb{R}
+\end{equation*}
+represent $[f]_p$ and $[g]_p$, respectively. Also, let $a, b \in \mathbb{R}$. Then we
+define
+\begin{equation}\label{eq:structure_of_c_p_infty}
+  a[f]_p + b[g]_p = [af + bg]_p,
+\end{equation}
+where $af + bg$ is restricted to the open neighbourhood $U \cap V$ of $p$ on which
+both $f$ and $g$ are defined.
+
+We need to show that \cref{eq:structure_of_c_p_infty} is well-defined. Well suppose
+$f \sim_p \tilde{f}$ and $g \sim_p \tilde{g}$. Then what we need to show is
+\begin{equation*}
+  (af + bg) \sim_p (a\tilde{f} + b\tilde{g}).
+\end{equation*}
+Since $f \sim_p \tilde{f}$ and $g \sim_p \tilde{g}$, we have that
+\begin{equation*}
+  \tilde{f} : \tilde{U} \to \mathbb{R} \text{ and } \tilde{g} : \tilde{V} \to \mathbb{R}.
+\end{equation*}
+Then, in particular, there exists $W \subseteq U \cap \tilde{U}$ and $Y \subseteq V
+\cap \tilde{V}$ such that
+\begin{equation*}
+  f \restriction_W = \tilde{f} \restriction_W \text{ and }
+  g \restriction_Y = \tilde{g} \restriction_Y.
+\end{equation*}
+Then $Z = W \cap Y$ is an open neighbourhood of $p$ and thus we must have
+\begin{equation*}
+  af + bg = a\tilde{f} + b \tilde{g}
+\end{equation*}
+on $Z$. Thus \cref{eq:structure_of_c_p_infty} is true and $C_p^{\infty}$ is indeed
+a vector space.
+
+Further, we can even define a \hlnotea{multiplication} on $C_p^{\infty}$ by setting
+\begin{equation}\label{eq:structure_of_c_p_infty_multiplication}
+  [f]_p [g]_p = [fg]_p.
+\end{equation}
+
+\begin{eg}
+  Check that \cref{eq:structure_of_c_p_infty_multiplication} is well-defined.
+\end{eg}
+
+\begin{propo}[Linearity of the Directional Derivative over the Germs of Functions]\label{propo:linearity_of_the_directional_derivative_over_the_germs_of_functions}
+  Let $v_p \in T_p \mathbb{R}^n$. Then the map $v_p : C_p^{\infty} \to \mathbb{R}$
+  defined by $[f]_p \mapsto v_p [f]_p = v_p f$ is well-defined. This map is also
+  linear in the sense that
+  \begin{equation*}
+    v_p(a[f]_p + b[g]_p) = a v_p [f]_p + b v_p [g]_p.
+  \end{equation*}
+  Moreover, this map satisfies Leibniz's rule:
+  \begin{equation*}
+    v_p([f]_p [g]_p) = f(p) v-p [g]_p + g(p) v_p [f]_p.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Our desired result follows almost immedaitely from \cref{defn:_f_sim_p_g_} and 
+  \cref{thm:linearity_and_leibniz_rule_for_directional_derivatives}.\qed\
+\end{proof}
+
+% section derivations_and_tangent_vectors (end)
+
+% chapter lecture_9_jan_25th (end)
 
 \appendix
 
