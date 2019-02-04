@@ -1161,7 +1161,7 @@ if $F$ is a field under the same operations.
 \end{remark}
 
 \begin{eg}[A classical example of field extensions]
-  Show that $\mathbb{Q}(\sqrt{2}, \sqrt{3}) = \mathbb{Q}(\sqrt{2} = \sqrt{3})$.
+  Show that $\mathbb{Q}(\sqrt{2}, \sqrt{3}) = \mathbb{Q}(\sqrt{2} + \sqrt{3})$.
 \end{eg}
 
 \begin{proof}
@@ -1365,6 +1365,310 @@ In particular,
 % section field_extensions_continued_2 (end)
 
 % chapter lecture_9_jan_25th (end)
+
+\chapter{Lecture 10 Jan 28th}%
+\label{chp:lecture_10_jan_28th}
+% chapter lecture_10_jan_28th 
+
+\section{Field Extensions (Continued 3)}%
+\label{sec:field_extensions_continued_3}
+% section field_extensions_continued_3
+
+How can we work with field extensions algebraically?
+
+\subsection{Linear Algebra on Field Extensions}%
+\label{sub:linear_algebra_on_field_extensions}
+% subsection linear_algebra_on_field_extensions
+
+We can look at $K / F$ as $K$ being an $F$-vector space.
+
+\begin{defn}[Finite Extension]\index{Finite Extension}\label{defn:finite_extension}
+  We say $K / F$ is a \hlnoteb{finite extension} if $K$ is a finite dimensional $F$-vector space.
+  We call the dimension, $\dim_F K$, the \hldefn{degree} of $K / F$, and denote this dimension as
+  \begin{equation*}
+    [ K : F ].
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  We have $[ \mathbb{C} : \mathbb{R} ] = \abs{ \{ 1, i \} } = 2$.
+\end{eg}
+
+\begin{eg}
+  $[ \mathbb{R} : \mathbb{Q} ] = \infty$.
+\end{eg}
+
+\begin{eg}
+  Let $K / F$ and $\alpha \in K$ with the minimal polynomial $f(x) \in F[x]$.
+  Then $[ F(\alpha) : F ] = \abs{ \{ 1, \alpha, \ldots, \alpha^{n - 1} \} } = n$,
+  where $n = \deg f = \deg_F(\alpha)$.\sidenote{This is why we call the dimension of $K/F$ as
+  a degree.}
+\end{eg}
+
+\begin{defn}[Tower of Fields]\index{Tower of Fields}\label{defn:tower_of_fields}
+  We say $F_1 / F_2 / F_3 / \hdots / F_n$ is a \hlnoteb{tower of fields} if each $F_i / F_{i + 1}$
+  is a field extension.
+\end{defn}
+
+\begin{thm}[Tower Theorem]\index{Tower Theorem}\label{thm:tower_theorem}
+  If $K / E$ and $E / F$ are finite extensions, then
+  \begin{equation*}
+    [K : F] = [K : E] [E : F].
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Let $\mathcal{B}_v = \left\{ v_1, \ldots, v_n \right\}$ be a basis for $K / E$ and
+  $\mathcal{B}_w = \left\{ w_1, \ldots, w_m \right\}$ be a basis for $E / F$.
+
+  \noindent
+  \hlbnoted{Claim} The set $\left\{ v_i w_j : :1 \leq i \leq n, 1 \leq j \leq m \right\}$
+  is a basis for $K / F$.
+
+  \noindent
+  \hlbnotea{Linear Independence} Assume
+  \begin{equation}\label{eq:tower_of_fields_eq1}
+    \sum_{i, j} c_{i, j} w_j v_i = 0.
+  \end{equation}
+  Notice that we may write \cref{eq:tower_of_fields_eq1} as
+  \begin{equation*}
+    \sum_{i} \left( \sum_{j} c_{i, j} w_j \right) v_i = 0.
+  \end{equation*}
+  Since $\mathcal{B}_v$ is a basis of $K / E$, for each $i$, we have
+  \begin{equation*}
+    \sum_{j} c_{i, j} w_j = 0.
+  \end{equation*}
+  Since $\mathcal{B}_w$ is a basis for $E / F$, for each $j$, we have
+  \begin{equation*}
+    c_{i, j} = 0.
+  \end{equation*}
+  It follows that the $w_j v_i$'s are linearly independent of each other.
+
+  \noindent
+  \hlbnotea{Span} Let $u \in K$. Then
+  \begin{equation*}
+    u = \sum_{i=1}^{n} c_i v_i,
+  \end{equation*}
+  where $c_i \in E$ is given by
+  \begin{equation*}
+    c_i = \sum_{j=1}^{m} d_{i, j} w_j.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    u = \sum_{i, j} d_{i, j} w_j v_i.
+  \end{equation*}
+  Thus $\{ v_i, w_j \}$ is a basis for $K / F$.\qed\
+\end{proof}
+
+\begin{eg}
+  Compute $[\mathbb{Q}(\sqrt[3]{5}, i) : \mathbb{Q}]$.
+\end{eg}
+
+\begin{solution}
+  By the \hyperref[thm:tower_theorem]{Tower Theorem}, we have that
+  \begin{equation*}
+    [\mathbb{Q}(\sqrt[3]{5}, i) : \mathbb{Q}] 
+      = [\mathbb{Q}(\sqrt[3]{5})(i) : \mathbb{Q}(\sqrt[3]{5})] \cdot [\mathbb{Q}(\sqrt[3]{5}) : \mathbb{Q}].
+  \end{equation*}
+  Notice that
+  \begin{equation*}
+    [\mathbb{Q}(\sqrt[3]{5}) : \mathbb{Q}] = \deg ( x^3 - 5 ) = 3.
+  \end{equation*}
+  For $[\mathbb{Q}(\sqrt[3]{5})(i) : \mathbb{Q}(\sqrt[3]{5})]$, let $p(x)$ be the minimal polynomial for $i$
+  over $\mathbb{Q}(\sqrt[3]{5})$. Since $i^2 + 1 = 0$, we know that $i$ is a root of $x^2 + 1 = 0$. Then in
+  particular, we must have $p(x) \mid x^2 + 1$. So $\deg p \in \{ 1, 2 \}$.
+
+  Now since $\mathbb{Q}(\sqrt[3]{5}) \subseteq \mathbb{R}$ and $i \notin \mathbb{Q}(\sqrt[3]{5})$, we observe
+  that $\deg p \neq 1$. Thus $\deg p = 2$. It follows that
+  \begin{equation*}
+    [\mathbb{Q}(\sqrt[3]{5})(i) : \mathbb{Q}(\sqrt[3]{5})] = 2.
+  \end{equation*}
+  Therefore
+  \begin{equation*}
+    [\mathbb{Q}(\sqrt[3]{5}, i) : \mathbb{Q}]  = 2 \cdot 3 = 6.
+  \end{equation*}
+\end{solution}
+
+% subsection linear_algebra_on_field_extensions (end)
+
+\subsection{Polynomials on Field Extensions}%
+\label{sub:polynomials_on_field_extensions}
+% subsection polynomials_on_field_extensions
+
+\begin{defn}[Algebraic and Transcendental]\index{Algebraic}\index{Transcendental}\label{defn:algebraic_and_transcendental}
+  Let $K / F$. We say that $\alpha \in K$ is \hlnoteb{algebraic} over $F$ if $\exists 0 \neq f(x) \in F[x]$
+  such that $f(\alpha) = 0$. Otherwise, we say that $\alpha$ is \hlnoteb{transcendental} over $F$; that is,
+  there is no non-zero polynomial over $F$ such that $\alpha$ is a root.
+
+  We say that $K / F$ is algebraic if every $\alpha \in K$ is \hlnoteb{ algebraic } over $F$. Otherwise, we
+  say that $K / F$ is \hlnoteb{transcendental}.
+\end{defn}
+
+\begin{eg}
+  $\pi$ is transcendental over $\mathbb{Q}$ \sidenote{The proof of this statement is beyond our power at this
+  point.}. However, $\pi$ is algebraic over $\mathbb{R}$ (note that $x - \pi \in \mathbb{R}[x]$.).
+\end{eg}
+
+\begin{eg}
+  As a direct consequence of the above example, we have that $\mathbb{R}/\mathbb{Q}$ is transcendental.
+\end{eg}
+
+\begin{eg}
+  As we have seen numerous times, $\mathbb{Q}(\sqrt{2}) / \mathbb{Q}$ is algebraic.
+\end{eg}
+
+\begin{remark}
+  If $\alpha \in K$ is algebraic over $F$, then $\alpha$ has a minimal polynomial in $F[x]$.
+\end{remark}
+
+\begin{thm}[Finite Extensions are Algebraic]\label{thm:finite_extensions_are_algebraic}
+  If $K / F$ is finite, then $K / F$ is algebraic.
+\end{thm}
+
+\begin{proof}
+  \marginnote{\faLightbulbO The idea is to make use of the fact that the extension will at least have
+  the algebraic number as a span up to some degree $n$, and instead of working with the spanning set,
+  we work with one $\alpha$ away. There will be two cases, each of which can be dealt with at relative
+  ease.}
+  Suppose $[K : F] = n < \infty$. Let $\alpha \in K$. Consider
+  \begin{equation*}
+    \alpha, \alpha^2, \ldots, \alpha^n, \alpha^{n + 1}.
+  \end{equation*}
+
+  \noindent
+  \hlbnotea{Case 1} Suppose $\alpha^i = \alpha^j$ for some $i \neq j \in \{ 1, \ldots, n + 1\}$. Then
+  $\alpha$ is certainly a root of $f(x) = x^i - x^j$.
+
+  \noindent
+  \hlbnotea{Case 2} Suppose $\alpha^i \neq \alpha^j$ for all $i \neq j$. Then we must have that
+  \begin{equation*}
+    \alpha, \alpha^2, \ldots, \alpha^n, \alpha^{n + 1}
+  \end{equation*}
+  is linearly dependent over $F$. Thus we may have
+  \begin{equation*}
+    c_1 \alpha + c_2 \alpha^2 + \hdots + c_{n + 1} \alpha^{n + 1} = 0
+  \end{equation*}
+  where not all $c_i$'s are $0$. Then $\alpha$ is a root of
+  \begin{equation*}
+    f(x) = c_{ n + 1 } x^{n + 1} \hdots + c_1 x,
+  \end{equation*}
+  which is a non-zero polynomial.
+
+  In either case, we observe that $\alpha$ is algebraic over $F$. Therefore $K / F$ is algebraic.\qed\
+\end{proof}
+
+% subsection polynomials_on_field_extensions (end)
+
+% section field_extensions_continued_3 (end)
+
+% chapter lecture_10_jan_28th  (end)
+
+\chapter{Lecture 11 Jan 30th}%
+\label{chp:lecture_11_jan_30th}
+% chapter lecture_11_jan_30th
+
+\section{Field Extensions (Continued 4)}%
+\label{sec:field_extensions_continued_4}
+% section field_extensions_continued_4
+
+\subsection{Polynomials on Field Extensions (Continued)}%
+\label{sub:polynomials_on_field_extensions_continued}
+% subsection polynomials_on_field_extensions_continued
+
+\begin{note}
+  Recall that given $K / F$,
+  \begin{itemize}
+    \item Finite (defn): $\dim_F K = [ K : F ] < \infty$
+    \item Algebraic (defn) :$\forall \alpha \in K, \exists 0 \neq f \in F[x]$, such that
+      $f(\alpha) = 0$
+    \item Finite $\implies$ Algebraic
+  \end{itemize}
+\end{note}
+
+\begin{defn}[Finitely Generated Extension]\index{Finitely Generated Extension}\label{defn:finitely_generated_extension}
+  We say $K$ is a \hlnoteb{finitely generated extension} of $F$ if $\exists \alpha_1,
+  \alpha_2, \ldots, \alpha_n \in K$ such that $K = F(\alpha_1, \ldots, a_n)$.
+\end{defn}
+
+\begin{propo}[Finitely Generated Algebraic Extensions are Finite]\label{propo:finitely_generated_algebraic_extensions_are_finite}
+  If $K$ is a finitely generated algebraic extension of $F$, then $K / F$ is finite.\sidenote{This
+  proposition is actually an \hlnotea{iff} statemnt in disguise.}
+\end{propo}
+
+\begin{proof}
+  Sps $K / F$ is algebraic, where $K = F(\alpha_1, \ldots, \alpha_n)$. We shall proceed by performing
+  induction on $n$. If $n = 1$, then $[F(\alpha_1) : F] = \deg_F(\alpha_1) < \infty$.
+
+  Now suppose that the result holds for $n$. Consider $K = F(\alpha_1, \ldots, \alpha_n, \alpha_{n + 1})$.
+  Then by the \hyperref[thm:tower_theorem]{Tower Theorem},
+  \begin{align*}
+    &[F(\alpha_1, \ldots, \alpha_n, \alpha_{n + 1}) : F] \\
+    &= [F(\alpha_1, \ldots, \alpha_{n})(\alpha_{n + 1}) : F(\alpha_1, \ldots, \alpha_n)]
+        \cdot [F(\alpha_1, \ldots, \alpha_n) : F].
+  \end{align*}
+  It follows from the base case and the induction hypothesis that $[F(\alpha_1, \ldots, \alpha_{n +1}):F]$
+  is finite.\qed\
+\end{proof}
+
+\begin{note}
+  Finite extensions are, therefore, finitely generated.
+\end{note}
+
+\begin{eg}
+  The field $\mathbb{Q}(\sqrt{2}, \sqrt{3}, \sqrt{4}, \ldots)$ is an algebraic extension of $\mathbb{Q}$
+  but it is not a finite extension.
+\end{eg}
+
+\begin{propo}[Greater Algebraic Extensions]\label{propo:greater_algebraic_extensions}
+  If $K / E$ and $E / F$ are algebraic extensions, then $K / F$ is an algebraic extension.
+\end{propo}
+
+\begin{proof}
+  Let $\alpha \in K$. Since $K / E$ is algebraic, $\alpha$ has a minimal polynomial in $E[x]$, say it is
+  \begin{equation*}
+    p(x) = x^n + c_{n - 1} x^{n - 1} + \hdots + c_1 x + c_0.
+  \end{equation*}
+  Then $\alpha$ is algebraic over $F(c_{n - 1}, \ldots, c_1, c_0)$. By the Tower Theorem,
+  \begin{equation*}
+    [F(c_{n - 1}, \ldots, c_1, c_0, \alpha) : F(c_{n - 1}, \ldots, c_0)] < \infty,
+  \end{equation*}
+  and so $F(c_{n - 1}, \ldots, c_1, c_0, \alpha) \subseteq E$.
+  
+  Now $F(c_{n - 1}, \ldots, c_0) / F$ is algebraic and finitely generated. So it follows from the Tower
+  Theorem that
+  \begin{equation*}
+    [F(c_{n - 1}, \ldots, c_0, \alpha) : F] < \infty.
+  \end{equation*}
+  Thus $\alpha$ is algebraic over $F$ and so $K / F$ is algebraic.\qed\
+\end{proof}
+
+\begin{propo}[Algebraic Numbers Form a Subfield]\label{propo:algebraic_numbers_form_a_subfield}
+  Let $K / F$. The set of elements of $K$ algebraic over $F$ form a subfield of $K$.
+\end{propo}
+
+\begin{proof}[Sketch proof]
+  Let $L = \{ \alpha \in K : \alpha \text{ is alg. over } F \}$. Let $\alpha, \beta \in L$ and $\beta \neq 0$.
+  Then
+  \begin{equation*}
+    \alpha, \beta, \alpha + \beta, \alpha \beta, \beta^{-1} \in F(\alpha, \beta).
+  \end{equation*}
+  Then $[F(\alpha, \beta) : F] < \infty$ implies that $L$ is finitely generated, which is thus algebraic,
+  and is hence a subfield of $K$.\qed\
+\end{proof}
+
+% subsection polynomials_on_field_extensions_continued (end)
+
+% section field_extensions_continued_4 (end)
+
+\section{Splitting Fields}%
+\label{sec:splitting_fields}
+% section splitting_fields
+
+
+
+% section splitting_fields (end)
+
+% chapter lecture_11_jan_30th (end)
 
 \appendix
 
