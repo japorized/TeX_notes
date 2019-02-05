@@ -1204,7 +1204,7 @@ if $F$ is a field under the same operations.
   Define $\phi : F[x] \to F(\alpha)$ by $\phi(g(x)) = g(\alpha)$. Note that this is a ring homomorphism.
   Let
   \begin{equation*}
-    I = \{ g(x) \in F[x] \mmid g(\alpha) = 0 \} = \ker \phi,
+    I = \{ g(x) \in F[x] \mid g(\alpha) = 0 \} = \ker \phi,
   \end{equation*}
   which is an ideal. Since $F[x]$ is a PID \sidenote{See 
   \href{https://tex.japorized.ink/PMATH347S18/classnotes.tex}{PMATH347}.}, $\exists g(x) \in F[x]$ such that
@@ -1229,7 +1229,7 @@ if $F$ is a field under the same operations.
   So
   \begin{equation*}
     F[x] / \langle f(x) \rangle 
-      = \left\{ c_{n - 1} x^{n - 1} + \hdots + c_1 x + c_0 + \langle f(x) \rangle \mmid c_i \in F \right\} \\
+      = \left\{ c_{n - 1} x^{n - 1} + \hdots + c_1 x + c_0 + \langle f(x) \rangle \mmid c_i \in F \right\}
   \end{equation*}
   and thus
   \begin{align*}
@@ -1256,7 +1256,7 @@ Let $K / F$, and $0 \neq g(x) \in F[x]$, and $\alpha \in K$ such that $g(\alpha)
 ID, $g(x)$ must have an irreducible factor $f(x) \in F[x]$ such that $f(\alpha) = 0$. By the proof of
 \cref{propo:span_of_the_extension},
 \begin{equation*}
-  \langle f(x) \rangle = \ker \phi = I = \{ h(x) \in F[x] \mmid h(\alpha) = 0 \}.
+  \langle f(x) \rangle = \ker \phi = I = \{ h(x) \in F[x] \mid h(\alpha) = 0 \}.
 \end{equation*}
 In particular,
 \begin{itemize}
@@ -1310,7 +1310,7 @@ In particular,
   $f(x) = x^2 - 2$, which is irreducible by Eisenstein by $P = \langle 2 \rangle$. Thus 
   $\deg_F(\alpha) = 2$, and so
   \begin{equation*}
-    \mathbb{Q}(\sqrt{2}) = \Span_{\mathbb{Q}} \{ 1, \alpha \} = \{ a + b \sqrt{2} \mmid a, b \in \mathbb{Q} \}.
+    \mathbb{Q}(\sqrt{2}) = \Span_{\mathbb{Q}} \{ 1, \alpha \} = \{ a + b \sqrt{2} \mid a, b \in \mathbb{Q} \}.
   \end{equation*}
 \end{eg}
 
@@ -1652,8 +1652,8 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
   \begin{equation*}
     \alpha, \beta, \alpha + \beta, \alpha \beta, \beta^{-1} \in F(\alpha, \beta).
   \end{equation*}
-  Then $[F(\alpha, \beta) : F] < \infty$ implies that $L$ is finitely generated, which is thus algebraic,
-  and is hence a subfield of $K$.\qed\
+  Then $[F(\alpha, \beta) : F] < \infty$ implies that $L$ is finitely generated, which is thus
+  algebraic, and is hence a subfield of $K$.\qed\
 \end{proof}
 
 % subsection polynomials_on_field_extensions_continued (end)
@@ -1664,7 +1664,46 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
 \label{sec:splitting_fields}
 % section splitting_fields
 
+From various examples in the past, we notice that many of the roots that we have come across
+live in $\mathbb{C}$. We shall see why later on, but we can ask ourselves if we can generalize
+this notion and make use of properties from this notion.
 
+\begin{defn}[Splits]\index{Splits}\label{defn:splits}
+  Let $f(x) \in F[x]$ be non-constant. We say $f(x)$ \hlnoteb{splits} in an extension $K/F$ if
+  there exists $\exists u \in F$, and $\exists \alpha_1, \ldots, \alpha_n \in K$ such that
+  \begin{equation*}
+    f(x) = u(x - \alpha_1) \hdots (x - \alpha_n).
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  Every non-constant polynomial in $\mathbb{R}[x]$ splits in $\mathbb{C}$.
+\end{eg}
+
+\begin{thm}[Kronecker's Theorem]\index{Kronecker's Theorem}\label{thm:kronecker_s_theorem}
+  Let $f(x) \in F[x]$ be non-constant. There exists an extension $K / F$ such that $f(x)$ has
+  a root in $K$.
+\end{thm}
+
+\begin{proof}
+  Let $f(x) \in F[x]$ be non-constant. Then let $p(x) \in F[x]$ be an irreducible factor of
+  $f(x)$. Then consider $K = F[t] / <p(t)>$. which we know is a field. Then
+  \begin{equation*}
+    \bar{t} = t + p(t) \in K
+  \end{equation*}
+  is a root of $p(x)$, which means that $\bar{t}$ is also a root for $f(x)$.\qed\
+\end{proof}
+
+\begin{thm}[Repeated Kronecker's Theorem]\label{thm:repeated_kronecker_s_theorem}
+  Let $f(x) \in F[x]$ be non-constant. Then there exists an extension $K / F$ such that
+  $f(x)$ splits over $K$.
+\end{thm}
+
+\begin{proof}
+  By the Fundamental Theorem of Algebra, if we suppose that $\deg f = n < \infty$, then
+  $f$ has $n$ roots. Consequently, we need only to apply \cref{thm:kronecker_s_theorem}
+  for at most $n$-many times to get to an extension where $f(x)$ splits.\qed\
+\end{proof}
 
 % section splitting_fields (end)
 
