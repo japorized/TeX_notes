@@ -19,6 +19,7 @@
 \DeclareMathOperator{\orb}{orb}
 \DeclareMathOperator{\ch}{ch}
 \DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\id}{id}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -1708,6 +1709,186 @@ this notion and make use of properties from this notion.
 % section splitting_fields (end)
 
 % chapter lecture_11_jan_30th (end)
+
+\chapter{Lecture 12 Feb 01st}%
+\label{chp:lecture_12_feb_01st}
+% chapter lecture_12_feb_01st
+
+\section{Splitting Fields (Continued)}%
+\label{sec:splitting_fields_continued}
+% section splitting_fields_continued
+
+\begin{defn}[Splitting Field]\index{Splitting Field}\label{defn:splitting_field}
+  Let $f(x) \in F[x]$ be non-constant. A \hlnotea{minimal extension} $K$ of $F$ with the
+  property that $f(x)$ splits over $K$ is called a \hlnoteb{splitting field} for $f(x)$
+  over $F$.
+\end{defn}
+
+The following result is a direct consequence of \cref{thm:repeated_kronecker_s_theorem}.
+
+\begin{propo}[A Splitting Field is Generated]\label{propo:a_splitting_field_is_generated}
+  Let $f(x) \in F[x]$ be non-constant, and let $K / F$ be such that $f(x)$ splits over $K$.
+  Suppose
+  \begin{equation*}
+    f(x) = u(x - \alpha_1)\ hdots (x - \alpha_n),
+  \end{equation*}
+  where $u \in F$ and $\alpha_1, \ldots, \alpha_n \in K$. Then a splitting field for $f(x)$
+  over $F$ is $F(\alpha_1, \ldots, \alpha_n)$.
+\end{propo}
+
+\begin{eg}
+  Find a splitting field for
+  \begin{equation*}
+    f(x) = x^4 + x^2 - 6
+  \end{equation*}
+  over $\mathbb{Q}$.
+\end{eg}
+
+\begin{solution}
+  Notice that
+  \begin{equation*}
+    f(x) = (x^2 + 3)(x^2 - 2) = (x + \sqrt{3} i)(x - \sqrt{3}i)(x - \sqrt{2})(x + \sqrt{2})
+  \end{equation*}
+  in $\mathbb{C}[x$. Then a splitting field of $f(x)$ over $\mathbb{Q}$ is 
+  $\mathbb{Q}(\sqrt{2}, \sqrt{3}i)$.
+\end{solution}
+
+\newthought{Now what if} we had two differing extensions at which $f(x)$ splits, say $K$ and
+$E$, and $K$ and $E$ are not the same field extension? In particular, $K$ and $E$ would contain
+some subfield, say $F(\alpha_1, \ldots, \alpha_n)$ and $F(\beta_1, \ldots, \beta_n)$
+respectively, which may not be the same spliting field. How are these splitting fields related?
+
+\begin{marginfigure}
+  \centering
+  \resizebox{\marginparwidth}{!}{
+  \begin{tikzpicture}
+    \node[label={270:{$f(x) \in F[x]$}}] at (0, 0) {};
+    \node[label={90:{$f(x)$ splits in $K$}}] at (-2, 2) {};
+    \node[label={90:{$f(x)$ splits in $E$}}] at (2, 2) {};
+    \draw (-1, 0) -- (-2, 2) node[midway,fill=dark] {$F(\alpha_1, \ldots, \alpha_n)$};
+    \draw (1, 0) -- (2, 2) node[midway,fill=dark] {$F(\beta_1, \ldots, \beta_n)$};
+    \draw[latex-latex] (-0.5, 1.3) to[bend left] (0.5, 1.3) node[midway,above=1.5] {relation?};
+  \end{tikzpicture}}
+  \caption{Differing Splitting Fields}
+  \label{fig:differing_splitting_fields}
+\end{marginfigure}
+
+\begin{lemma}[Isomorphic Fields have Isomorphic Polynomial Rings]\label{lemma:isomorphic_fields_have_isomorphic_polynomial_rings}
+  Let $F$ ad $F'$ be fields. If $\phi : F \to F'$ is an isomorphism, there exists a map
+  $\tilde{\phi} : F[x] \to F'[x]$ that is also an isomorphism.
+\end{lemma}
+
+\begin{proof}
+  The map $\tilde{\phi} : F[x] \to F'[x]$ given by
+  \begin{equation*}
+    \tilde{\phi}(\alpha_n x^n + \hdots + \alpha_1 x + \alpha_0) = \tilde{\alpha}_n x^n \hdots + \tilde{\alpha}_1 x + \tilde{\alpha}_0
+  \end{equation*}
+  is clearly an isomorphism between $F[x]$ and $F'[x]$.
+\end{proof}
+
+\begin{note}
+  Since there is no difference between talking about $\phi$ and $\tilde{\phi}$, we shall
+  freely write $\tilde{\phi}$ as $\phi$ without remorse.
+\end{note}
+
+\begin{lemma}[Isomorphism Extension Lemma]\index{Isomorphism Extension Lemma}\label{lemma:isomorphism_extension_lemma}
+  Let $F$ and $F'$ be fields, $\phi : F[x] \to F'[x]$ be an isomorphism, $f(x) \in F[x]$ be
+  irreducible, $\alpha$ be a root of $f(x)$ in an extension of $F$, and $\beta$ be a root of
+  $f(x)$ be a root of $f(x)$ in an extension of $F'$. Then there exists an isomorphism
+  $\psi : F(\alpha) \to F'(\beta)$ such that $\psi \restriction_F = \phi$. Moreover,
+  $\psi(\alpha) = \beta$.
+\end{lemma}
+
+\begin{proof}[Sketch]
+  Using the \hlnotea{First Isomorphism Theorem} to find $\rho_1$ and $\rho_2$, we have
+  \begin{equation*}
+    F(\alpha) \overset{\rho_1}{\to} F[x] \Big/ \langle f(x) \rangle \overset{\sigma}{\to}
+    F'[x] \Big/ \langle \phi(f(x)) \rangle \overset{\rho_2}{\to} F'(\beta),
+  \end{equation*}
+  \sidenote{
+  \begin{ex}
+    Prove that $\phi(f(x))$ is irreducible.
+  \end{ex}
+  } where $\sigma(\bar{g(x)}) = \bar{\phi(g(x))}$. \sidenote{
+  \begin{ex}
+    Prove that $\sigma$ is an isomorphism.
+  \end{ex}
+  }
+  
+  Then $\psi = \rho_2 \circ \sigma \rho_1 : F(\alpha) \to F'(\beta)$ is an isomorphism.
+
+  Let $a \in F$. Then
+  \begin{equation*}
+    \psi(a) = \rho_2 \circ \sigma \circ \rho_1 (a) = \rho_2 \circ \sigma(\bar{a}) 
+      = \rho_2(\bar{\phi(a)}) = \phi(a).
+  \end{equation*}
+  Also,
+  \begin{equation*}
+    \psi(\alpha) = \rho_2 \circ \sigma \circ \rho_1(\alpha) = \rho_2 \circ \sigma(\bar{x}) 
+      = \rho_2(\bar{\phi(x)}) = \rho_2(\bar{x}) = \beta.
+  \end{equation*}
+\end{proof}
+
+It follows from induction that
+
+\begin{lemma}[Extended Isomorphism Extension Lemma]\label{lemma:extended_isomorphism_extension_lemma}
+  Let $F$ be a field, $f(x) \in F[x]$ non-constant, $K$ a splitting field for $f(x)$ over $F$,
+  $F'$ a field, $\phi : F \to F'$ an isomorphism, and $K'$ a splitting field for $\phi(f(x))$
+  over $F'$. Then there is an isomorphism $\psi : K \to K'$ such that $\psi \restriction_F = \phi$.
+\end{lemma}
+
+\begin{crly}[Splitting Fields are Unique up to Isomorphism]\label{crly:splitting_fields_are_unique_up_to_isomorphism}
+  Let $f(x) \in F[x]$ be non-constant. If $K$ and $K'$ are splitting fields for $f(x)$ over $F$,
+  then $K \cong K'$.
+\end{crly}
+
+\begin{proof}
+  Consider $\phi = \id$ and use \cref{lemma:extended_isomorphism_extension_lemma}.\qed\
+\end{proof}
+
+% section splitting_fields_continued (end)
+
+\section{Algebraic Closures}%
+\label{sec:algebraic_closures}
+% section algebraic_closures
+
+We talked about algebraicity, and it makes sense asking about where exactly `upstairs' that
+we will be able to find all of the algebraic numbers over our given field. A lot of the
+machinery has been taken care of with the introduction of 
+\hyperref[sec:splitting_fields]{splitting fields}.
+
+\begin{defn}[Algebraic Closures]\index{Algebraic Closures}\label{defn:algebraic_closures}
+  A field $\bar{F}$ is an \hlnoteb{algebraic closure} of a field $F$ if
+  \begin{enumerate}
+    \item $\bar{F} / F$ is algebraic; and
+    \item every non-constant $f(x) \in F[x]$ splits over $\bar{F}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{eg}
+  $\mathbb{C}$ is an algebraic closure for $\mathbb{R}$.
+\end{eg}
+
+\begin{eg}
+  $\mathbb{C}$ is \hlimpo{not} an algebraic closure for $\mathbb{Q}$.\sidenote{Why?}
+\end{eg}
+
+\begin{defn}[Algebraically Closed]\index{Algebraically Closed}\label{defn:algebraically_closed}
+  A field $F$ is \hlnoteb{algebraically closed} if every non-constant $f(x) \in F[x]$
+  has a root in $F$.
+\end{defn}
+
+\begin{remark}
+  If $F$ is algebraically closed, then every non-constant $f(x) \in F[x]$ splits over $F$.
+\end{remark}
+
+\begin{eg}
+  $\mathbb{C}$ is algebraically closed.
+\end{eg}
+
+% section algebraic_closures (end)
+
+% chapter lecture_12_feb_01st (end)
 
 \appendix
 
