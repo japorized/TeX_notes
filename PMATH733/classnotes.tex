@@ -21,7 +21,6 @@
 \DeclareMathOperator{\Card}{Card }
 \DeclareMathOperator{\Set}{Set }
 \DeclareMathOperator{\Dom}{Dom }
-\DeclareMathOperator{\Img}{Im }
 \DeclareMathOperator{\Fun}{Fun }
 \DeclareMathOperator{\Var}{Var }
 \DeclareMathOperator{\con}{con}
@@ -34,26 +33,7 @@
 \DeclareMathOperator{\alg}{alg}
 
 \begin{document}
-\hypersetup{pageanchor=false}
-\maketitle
-\hypersetup{pageanchor=true}
-\begin{fullwidth}
-\tableofcontents
-\end{fullwidth}
-
-\chapter*{\faBook \enspace List of Definitions}
-\addcontentsline{toc}{chapter}{List of Definitions}
-\theoremlisttype{noname}
-\begin{fullwidth}
-\listtheorems{defn}
-\end{fullwidth}
-
-\chapter*{\faCoffee \enspace List of Theorems}
-\addcontentsline{toc}{chapter}{List of Theorems}
-\theoremlisttype{allname}
-\begin{fullwidth}
-\listtheorems{axiom,lemma,thm,crly,propo}
-\end{fullwidth}
+\input{latex-classnotes-header.tex}
 
 \chapter*{Foreword}%
 \label{chp:foreword}
@@ -63,7 +43,7 @@ This course has a ratio of about 1:3 for naive set theory to model theory.
 
 % chapter foreword (end)
 
-\part{Set Theory}
+\tuftepart{Set Theory}
 
 \chapter{Lecture 1 Sep 06th}%
 \label{chp:lecture_1_sep_06th}
@@ -2305,7 +2285,7 @@ It has been proven by Paul Cohen (1963)\cite{cohen1963} that the Continuum Hypot
 
 % chapter lecture_10_oct_11th (end)
 
-\part{Model Theory}
+\tuftepart{Model Theory}
 
 \chapter{Lecture 11 Oct 16th}%
 \label{chp:lecture_11_oct_16th}
@@ -4091,7 +4071,7 @@ We are now ready to tackle on the problem which we have set out to solve.
   The collection of these $X_i$'s gives us the structure of a \hlnotea{lattice}:
   \begin{marginfigure}
     \begin{tikzcd}
-    $ $ &  & $ $ &  & $ $ &  & $ $ \\
+     &  &  &  &  &  &  \\
      &  &  & i \cup j \arrow[lu, no head, color=be-red] \arrow[ru, no head, color=be-red] &  &  &  \\
      &  & i \arrow[ru, no head, color=be-red] \arrow[lluu, no head] &  & j \arrow[lu, no head, color=be-red] \arrow[rruu, no head] &  &  \\
      &  &  & i \cap j \arrow[lu, no head] \arrow[ru, no head] &  &  &  \\
