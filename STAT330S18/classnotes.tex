@@ -21,9 +21,9 @@
   columns=flexible,
   basicstyle={\small\ttfamily},
   numbers=none,
-  numberstyle=\tiny\color{base16-eighties-magenta},
-  keywordstyle=\color{base16-eighties-blue},
-  commentstyle=\color{base16-eighties-gray},
+  numberstyle=\tiny\color{be-magenta},
+  keywordstyle=\color{be-blue},
+  commentstyle=\color{be-gray},
   stringstyle=\color{mauve},
   breaklines=true,
   breakatwhitespace=true,
@@ -46,20 +46,7 @@
 }
 
 \begin{document}
-\hypersetup{pageanchor=false}
-\maketitle
-\hypersetup{pageanchor=true}
-\tableofcontents
-
-\chapter*{\faBook \enspace List of Definitions}
-\addcontentsline{toc}{chapter}{List of Definitions}
-\theoremlisttype{all}
-\listtheorems{defn}
-
-\chapter*{\faPaperclip \enspace List of Theorems}
-\addcontentsline{toc}{chapter}{List of Theorems}
-\theoremlisttype{allname}
-\listtheorems{axiom,lemma,thm,crly,propo}
+\input{latex-classnotes-header.tex}
 
 \chapter*{Foreword}
   \label{chapter:foreword}
@@ -1201,8 +1188,8 @@ When we look into methods for constructing confidence intervals for an unknown p
 		\begin{tikzpicture}
         \draw[->] (-0.5, 0) -- (3, 0) node[right] {$t$};
         \draw[->] (0, -0.5) -- (0, 3) node[above] {$x$};
-				\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(3,0)--(3,3)--(0,0);
-        \draw[line width=0pt,dashed](3,3)--(0,0) node[midway,left] [label=left:\textcolor{base16-eighties-light}{$t = x$}] {};
+				\draw[line width=0pt,draw=none,fill=light,fill opacity=0.25](0,0)--(3,0)--(3,3)--(0,0);
+        \draw[line width=0pt,dashed](3,3)--(0,0) node[midway,left] [label=left:\textcolor{light}{$t = x$}] {};
 		\end{tikzpicture}
 	\end{center}
   \marginnote{Work on the discrete case as an exercise.
@@ -2264,8 +2251,8 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
 	  	\begin{tikzpicture}
           \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
           \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
-	  			\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(2.5,0)--(2.5,2.5)--(0,0);
-          \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+	  			\draw[line width=0pt,draw=none,fill=light,fill opacity=0.25](0,0)--(2.5,0)--(2.5,2.5)--(0,0);
+          \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{light}{$y = x$}] {};
           \draw[line width=0pt,dashed](2.5,2.5)--(0,2.5) node[left] {1};
           \node [label={270:1}] at (2.5,0) {};
 	  	\end{tikzpicture}
@@ -2296,9 +2283,9 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
   	\begin{tikzpicture}
         \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
         \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
-  			\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(2.5,0)--(0,2.5)--(0,0);
+  			\draw[line width=0pt,draw=none,fill=light,fill opacity=0.25](0,0)--(2.5,0)--(0,2.5)--(0,0);
         \draw[line width=0pt,dashed](0,2.5)--(2.5,0);
-        \node [label=right:\textcolor{base16-eighties-light}{$y = 1 - x$}] at (1.25,1.25) {};
+        \node [label=right:\textcolor{light}{$y = 1 - x$}] at (1.25,1.25) {};
         \node [label={180:1}] at (0,2.5) {};
         \node [label={270:1}] at (2.5,0) {};
   	\end{tikzpicture}
@@ -2318,10 +2305,10 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
   	\begin{tikzpicture}
         \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
         \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
-  			\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25,rotate=-22](1.5450849718747371205,0) +(180:1.5450849718747371205) arc (180:108:1.5450849718747371205) -- (1.43,0.57);
-  			\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](1.5450849718747371205,0) -- (2.5,0) -- (1.5450849718747371205,0.9549150281252628795) -- (1.5450849718747371205,0);
+  			\draw[line width=0pt,draw=none,fill=light,fill opacity=0.25,rotate=-22](1.5450849718747371205,0) +(180:1.5450849718747371205) arc (180:108:1.5450849718747371205) -- (1.43,0.57);
+  			\draw[line width=0pt,draw=none,fill=light,fill opacity=0.25](1.5450849718747371205,0) -- (2.5,0) -- (1.5450849718747371205,0.9549150281252628795) -- (1.5450849718747371205,0);
         \draw[line width=0pt,dashed](0,2.5)--(2.5,0);
-        \node [label=right:\textcolor{base16-eighties-light}{$y = 1 - x$}] at (1.25,1.25) {};
+        \node [label=right:\textcolor{light}{$y = 1 - x$}] at (1.25,1.25) {};
         \draw[line width=0pt,rotate=-22,dashed] (1.5450849718747371205,0) +(180:1.5450849718747371205) arc (180:108:1.5450849718747371205);
         \node [label={180:1}] at (0,2.5) {};
         \node [label={270:1}] at (2.5,0) {};
@@ -2370,8 +2357,8 @@ The proof is analogous to the univariate case as seen in \cref{propo:properties_
 		\begin{tikzpicture}
         \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
         \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
-				\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(0,2.5)--(2.5,2.5)--(0,0);
-        \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+				\draw[line width=0pt,draw=none,fill=light,fill opacity=0.25](0,0)--(0,2.5)--(2.5,2.5)--(0,0);
+        \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{light}{$y = x$}] {};
         \draw[line width=0pt,dashed](2.5,2.5)--(2.5,0) node[below] {1};
         \draw[line width=0pt,dashed](2.5,2.5)--(0,2.5) node[left] {1};
 		\end{tikzpicture}
@@ -2980,8 +2967,8 @@ On a related thought, does covariance relate to independence? If so, how?
 		\begin{tikzpicture}
         \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
         \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
-				\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(0,2.5)--(2.5,2.5)--(0,0);
-        \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+				\draw[line width=0pt,draw=none,fill=light,fill opacity=0.25](0,0)--(0,2.5)--(2.5,2.5)--(0,0);
+        \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{light}{$y = x$}] {};
         \draw[line width=0pt,dashed](2.5,2.5)--(2.5,0) node[below] {1};
         \draw[line width=0pt,dashed](2.5,2.5)--(0,2.5) node[left] {1};
 		\end{tikzpicture}
@@ -3210,8 +3197,8 @@ To use the covariance as the context, and to quantitatively measure the strength
 		\begin{tikzpicture}
         \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
         \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
-				\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(0,2.5)--(2.5,2.5)--(0,0);
-        \draw[line width=0pt](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+				\draw[line width=0pt,draw=none,fill=light,fill opacity=0.25](0,0)--(0,2.5)--(2.5,2.5)--(0,0);
+        \draw[line width=0pt](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{light}{$y = x$}] {};
         \draw[line width=0pt,dashed](2.5,2.5)--(2.5,0) node[below] {1};
         \draw[line width=0pt](2.5,2.5)--(0,2.5) node[left] {1};
 		\end{tikzpicture}
@@ -3274,8 +3261,8 @@ To use the covariance as the context, and to quantitatively measure the strength
   \begin{tikzpicture}
       \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
       \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
-  		\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25](0,0)--(0,2.5)--(2.5,2.5)--(0,0);
-      \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+  		\draw[line width=0pt,draw=none,fill=light,fill opacity=0.25](0,0)--(0,2.5)--(2.5,2.5)--(0,0);
+      \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway,left] [label=left:\textcolor{light}{$y = x$}] {};
       \draw[line width=0pt,dashed](2.5,2.5)--(2.5,0) node[below] {1};
       \draw[line width=0pt,dashed](2.5,2.5)--(0,2.5) node[left] {1};
   \end{tikzpicture}
@@ -3852,8 +3839,8 @@ To answer the first question, we can actually still employ the direct method:
   \begin{tikzpicture}
       \draw[->] (-0.5, 0) -- (4, 0) node[right] {$x$};
       \draw[->] (0, -0.5) -- (0, 4) node[above] {$y$};
-  		\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25] (0,0) -- (0,2.5) -- (2.5,2.5) -- (0,0);
-      \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+  		\draw[line width=0pt,draw=none,fill=light,fill opacity=0.25] (0,0) -- (0,2.5) -- (2.5,2.5) -- (0,0);
+      \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway] [label=left:\textcolor{light}{$y = x$}] {};
       \draw[line width=0pt,dashed](2.5,2.5)--(2.5,0) node[below] {1};
       \draw[line width=0pt,dashed](2.5,2.5)--(0,2.5) node[left] {1};
       \draw[domain=0.25:4,dashed] plot ({\x},{1/\x}) node[above] {$y = \frac{t}{x} \quad 0 < t < 1$};
@@ -3891,8 +3878,8 @@ To answer the first question, we can actually still employ the direct method:
   \begin{tikzpicture}
       \draw[->] (-0.5, 0) -- (3, 0) node[right] {$x$};
       \draw[->] (0, -0.5) -- (0, 3) node[above] {$y$};
-  		\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25] (0,0) -- (0,2.5) -- (2.5,2.5) -- (0,0);
-      \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway] [label=left:\textcolor{base16-eighties-light}{$y = x$}] {};
+  		\draw[line width=0pt,draw=none,fill=light,fill opacity=0.25] (0,0) -- (0,2.5) -- (2.5,2.5) -- (0,0);
+      \draw[line width=0pt,dashed](2.5,2.5)--(0,0) node[midway] [label=left:\textcolor{light}{$y = x$}] {};
       \draw[line width=0pt,dashed](2.5,2.5)--(2.5,0) node[below] {1};
       \draw[line width=0pt,dashed](2.5,2.5)--(0,2.5) node[left] {1};
       \draw[domain=-0.5:0.5,dashed] plot ({\x},{-\x});
@@ -4166,8 +4153,8 @@ Given the setup in \cref{defn:one_to_one_bivariate_transformation}, we have that
   \begin{tikzpicture}
       \draw[->] (-0.5, 0) -- (3, 0) node[right] {$u$};
       \draw[->] (0, -3) -- (0, 3) node[above] {$v$};
-  		\draw[line width=0pt,draw=none,fill=base16-eighties-light,fill opacity=0.25] (0,0) -- (3,-3) -- (3,3) -- (0,0);
-      \draw[domain=-0.5:3] plot ({\x},{\x}) node[right] [label=right:\textcolor{base16-eighties-light}{$v = u$}] {};
+  		\draw[line width=0pt,draw=none,fill=light,fill opacity=0.25] (0,0) -- (3,-3) -- (3,3) -- (0,0);
+      \draw[domain=-0.5:3] plot ({\x},{\x}) node[right] [label=right:\textcolor{light}{$v = u$}] {};
       \draw[domain=-0.5:3] plot ({\x},{-\x}) node[right] [label=right:{$v = -u$}] {};
   \end{tikzpicture}
   }
@@ -5786,7 +5773,7 @@ As how we had the log-likelihood from the likelihood function, we can have the l
         enlargelimits=false, clip=false, axis on top,
         grid = major
         ]
-        \addplot [very thick,base16-eighties-blue!50!base16-eighties-dark] {gauss(1,0.5)};
+        \addplot [very thick,be-blue!50!dark] {gauss(1,0.5)};
       \end{axis}
       \draw[dashed] (4, 2) -- (0, 2) node[left] {$p$};
       \draw[dashed] (1, 2) -- (1, 0) node[below] {$a_p$};
