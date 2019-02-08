@@ -19,6 +19,8 @@
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Der}{Der}
+\DeclareMathOperator{\D}{D}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -249,7 +251,10 @@ by the linearity of $e^i$, we have
 \end{equation*}
 So each of the $e^i$, when applied on $v$,
 gives us the $i$\textsuperscript{th} component of $[v]_{\mathcal{B}}$,
-where $\mathcal{B}$ is a basis of $V$.
+where $\mathcal{B}$ is a basis of $V$, in particular
+\begin{equation}\label{eq:v_wrt_basis}
+  v = v^i e_i, \text{ where } v^i = e^i(v).
+\end{equation}
 
 % section dual_space (end)
 
@@ -1581,24 +1586,30 @@ on $U \subseteq \mathbb{R}^n$.
 \begin{defn}[Differential]\index{Differential}\label{defn:differential}
   Let $f : U \subseteq \mathbb{R}^n \to \mathbb{R}^m$ be a smooth mapping, and
   $x_0 \in U$. The \hlnoteb{differential} of $f$ at $x_0$, denoted $(\dif{f})_{x_0}$,
-  is a linear map $(\dif{f})_{x_0} : \mathbb{R}^n \to \mathbb{R}^m$, or an
+  is a linear map $(\D f)_{x_0} : \mathbb{R}^n \to \mathbb{R}^m$, or an
   $m \times n$ real matrix, given by
   \begin{equation*}
-    (\dif{f})_{x_0} = \begin{pmatrix}
+    (\D f)_{x_0} = \begin{pmatrix}
       \frac{\partial f^1}{\partial x^1} (x_0) & \hdots & \frac{\partial f^1}{\partial x^n} (x_0) \\
       \vdots                                  &        & \vdots \\
       \frac{\partial f^m}{\partial x^1} (x_0) & \hdots & \frac{\partial f^m}{\partial x^n} (x_0)
     \end{pmatrix},
   \end{equation*}
+  \marginnote{
+    \begin{mnote}[Change of notation]
+      We changed the notation for the \hlnotea{differential} on Feb 3rd to using $\D f$.
+      The old notation was $\dif{f}$.
+    \end{mnote}
+  }
   where the notation $(x_0)$ means evaluation at $x_0$, and the $(i, j)$
-  \textsuperscript{th} entry of $(\dif{f})_{x_0}$ is
-  $\frac{\partial f^i}{\partial x^j}(x_0)$. $(\dif{f})_{x_0}$ is also called
+  \textsuperscript{th} entry of $(\D f)_{x_0}$ is
+  $\frac{\partial f^i}{\partial x^j}(x_0)$. $(\D f)_{x_0}$ is also called
   the \hldefn{Jacobian} or \hldefn{tangent map} of $f$ at $x_0$.
 \end{defn}
 
 \begin{propo}[Differential of the Identity Map is the Identity Matrix]\label{propo:differential_of_the_identity_map_is_the_identity_matrix}
   Let $f : U \subseteq \mathbb{R}^n \to \mathbb{R}^n$ be the identity mapping
-  $f(x) = x$. Then $(\dif{f})_{x_0} = I_n$, the $n \times n$ matrix, then for
+  $f(x) = x$. Then $(\D f)_{x_0} = I_n$, the $n \times n$ matrix, then for
   any $x_0 \in U$.
 \end{propo}
 
@@ -1614,7 +1625,7 @@ on $U \subseteq \mathbb{R}^n$.
   \end{equation*}
   Then it follows from differentiation that
   \begin{equation*}
-    (\dif{f})_{x_0} = \begin{pmatrix}
+    (\D f)_{x_0} = \begin{pmatrix}
       1      & 0      & \hdots & 0 \\
       0      & 1      & \hdots & 0 \\
       \vdots & \vdots & \ddots & \vdots \\
@@ -1631,7 +1642,7 @@ on $U \subseteq \mathbb{R}^n$.
   \begin{equation*}
     \underset{m \times 1}{f(x)}
       = \underset{m \times 1}{f(x_0)}
-        + \underset{m \times n}{(\dif{f})_{x_0}} \underset{n \times 1}{(x - x_0)}
+        + \underset{m \times n}{(\D f)_{x_0}} \underset{n \times 1}{(x - x_0)}
         + \underset{m \times 1}{Q(x)},
   \end{equation*}
   where $Q : U \to \mathbb{R}^m$ satisfies
@@ -1644,7 +1655,7 @@ on $U \subseteq \mathbb{R}^n$.
   Note that when $n = m = 1$, the existence of the differential of a continuous
   real-valued function $f(x)$ at a real number $x_0 \in U \subseteq \mathbb{R}$
   is the same of the usual derivative $f'(x)$ at $x = x_0$. In fact,
-  $f'(x_0) = (\dif{f})_{x_0} = \frac{\dif{f}}{\dif{x}}(x_0)$.
+  $f'(x_0) = (\D f)_{x_0} = \frac{\dif{f}}{\dif{x}}(x_0)$.
 \end{note}
 
 \begin{thm}[The Chain Rule]\index{The Chain Rule}\label{thm:the_chain_rule}
@@ -1657,7 +1668,7 @@ on $U \subseteq \mathbb{R}^n$.
   respectively, and and such that $V = f(U)$. Then the composition $g \circ f$ is
   also smooth. Further, if $x_0 \in U$, then
   \begin{equation}\label{eq:the_chain_rule}
-    (\dif{(g \circ f)})_{x_0} = (\dif{g})_{f(x_0)} (\dif{f})_{x_0}.
+    (D (g \circ f))_{x_0} = (\D g)_{f(x_0)} (\D f)_{x_0}.
   \end{equation}
 \end{thm}
 
@@ -1682,8 +1693,8 @@ define \hlnotea{tangent vectors}.
 \begin{defn}[Smooth Curve]\index{Smooth Curve}\label{defn:smooth_curve}
   Let $I \subseteq \mathbb{R}$ be an open interval. A smooth map
   $\phi : I \to \mathbb{R}^n$ is called a \hlnoteb{smooth curve}, or \hlnoteb{curve},
-  in $\mathbb{R}^n$. Let $t \in I$. Then each of its component functions 
-  $\phi^k(t)$ in $\phi(t) = (\phi^1(t), \ldots, \phi^n(t))$ is a smooth 
+  in $\mathbb{R}^n$. Let $t \in I$. Then each of its component functions
+  $\phi^k(t)$ in $\phi(t) = (\phi^1(t), \ldots, \phi^n(t))$ is a smooth
   real-valued function of $t$.
 \end{defn}
 \begin{marginfigure}
@@ -1763,7 +1774,7 @@ define \hlnotea{tangent vectors}.
 \end{eg}
 
 \begin{defn}[Equivalent Curves]\index{Equivalent Curves}\label{defn:equivalent_curves}
-  Let $p \in \mathbb{R}^n$. Let $\phi : I \to \mathbb{R}^n$ and 
+  Let $p \in \mathbb{R}^n$. Let $\phi : I \to \mathbb{R}^n$ and
   $\psi : \tilde{I} \to \mathbb{R}^n$ be two smooth curves in $\mathbb{R}^n$ such
   that both the open intervals $I$ and $\tilde{I}$ contain $0$. We say that
   $\phi$ is \hlnoteb{equivalent at $p$ to} $\psi$, and denote this as
@@ -1831,7 +1842,7 @@ define \hlnotea{tangent vectors}.
 \end{defn}
 
 \begin{defn}[Tangent Space]\index{Tangent Space}\label{defn:tangent_space}
-  The \hlnoteb{tangent space} to $\mathbb{R}^n$ at $p$, denoted 
+  The \hlnoteb{tangent space} to $\mathbb{R}^n$ at $p$, denoted
   $T_p \left(\mathbb{R}^n\right)$ is the set of all equivalence classes $[\phi]_p$
   wrt $\sim_p$.
 \end{defn}
@@ -1862,7 +1873,7 @@ $T_p \left( \mathbb{R}^n \right)$ that it represents.
     T_p(v) = [\gamma_{v_p}]_p.
   \end{equation*}
   In other words, we defined the map $T_p$ to send a vector $v \in \mathbb{R}^n$ to
-  the \hlnotea{equivalence class of all smooth curves passing through $p$ with 
+  the \hlnotea{equivalence class of all smooth curves passing through $p$ with
   velocity $v$ at $p$}. Note that since $\gamma_{v_p}$ has a `dependency' on $v$,
   it follows that $T_p$ is indeed a bijection.
 
@@ -1956,12 +1967,12 @@ Recall the notion of a \hlnotea{directional derivative}.
   in \cref{crly:justification_for_the_notation_v_p_f_}.
 \end{remark}
 
-\begin{eg}
-  In the special case of when $v = \hat{e}_i$, where $\hat{e}_i$ is the $i$th 
+\begin{eg}\label{eg:directional_derivative_on_basis_vectors}
+  In the special case of when $v = \hat{e}_i$, where $\hat{e}_i$ is the $i$th
   standard basis vector. Then we have
   \begin{equation*}
     (\hat{e}_i)_p f = \lim_{t \to 0} \frac{f(p + t\hat{e}_i) - f(p)}{t}
-    = (\partial_i f)(p) = \frac{\partial f}{\partial x^i}(p) = (f \circ \gamma_{v_p})'(p)
+      = \frac{\partial f}{\partial x^i}(p) = (f \circ \gamma_{v_p})'(p)
   \end{equation*}
   for the directional derivative of $f$ at $p$ in the $\hat{e}_i$ direction. This
   is precisely the partial derivative of $f$ in the $x^i$ direction at the point
@@ -1973,7 +1984,7 @@ Recall the notion of a \hlnotea{directional derivative}.
   on open neighbourhoods of $p$. Let $a, b \in \mathbb{R}$. Then
   \begin{enumerate}
     \item (\hlnotea{Linearity}) $v_p(af + bg) = av_p f + bv_p g$;
-    \item (\hlnotea{Leibniz Rule} / \hlnotea{Product Rule}) 
+    \item (\hlnotea{Leibniz Rule} / \hlnotea{Product Rule})
       $v_p(fg) = f(p) v_p g + g(p) v_p f$.
   \end{enumerate}
 \end{thm}
@@ -2004,8 +2015,8 @@ composition of smooth functions.
 \begin{proof}
   By the chain rule,
   \begin{equation*}
-    (f \circ \phi)'(0) = (\dif{(f \circ \phi)})_0 = (\dif{f})_{\phi(0)}(\dif{\phi})_0 
-      = (\dif{f})_{\phi(0)} \phi'(0),
+    (f \circ \phi)'(0) = (\D (f \circ \phi))_0 = (\D f)_{\phi(0)}(\D \phi)_0
+      = (\D f)_{\phi(0)} \phi'(0),
   \end{equation*}
   and a similar expression holds for $\psi$. Our desired result follows from the
   definition of $\sim_p$.\qed\
@@ -2030,7 +2041,7 @@ the values of $f$ in some open neighbourhood of $p$ motivates us towards the fol
 definition.
 
 \begin{defn}[$f \sim_p g$]\index{$f \sim_p g$}\label{defn:_f_sim_p_g_}
-  Let $p \in \mathbb{R}^n$. Let $f : U \subseteq \mathbb{R}^n \to \mathbb{R}$ and 
+  Let $p \in \mathbb{R}^n$. Let $f : U \subseteq \mathbb{R}^n \to \mathbb{R}$ and
   $g : V \subseteq \mathbb{R}^n \to \mathbb{R}$ be smooth where $U$ and $V$ are
   both open neighbourhoods of $p$. We say that \hlnoteb{$f \sim_p g$} if $\exists W
   \subseteq U \cap V$ such that $f \restriction_W = g \restriction_W$. That is,
@@ -2125,13 +2136,270 @@ Further, we can even define a \hlnotea{multiplication} on $C_p^{\infty}$ by sett
 \end{propo}
 
 \begin{proof}
-  Our desired result follows almost immedaitely from \cref{defn:_f_sim_p_g_} and 
+  Our desired result follows almost immedaitely from \cref{defn:_f_sim_p_g_} and
   \cref{thm:linearity_and_leibniz_rule_for_directional_derivatives}.\qed\
 \end{proof}
 
 % section derivations_and_tangent_vectors (end)
 
 % chapter lecture_9_jan_25th (end)
+
+\chapter{Lecture 10 Jan 28th}%
+\label{chp:lecture_10_jan_28th}
+% chapter lecture_10_jan_28th
+
+\section{Derivations and Tangent Vectors (Continued)}%
+\label{sec:derivations_and_tangent_vectors_continued}
+% section derivations_and_tangent_vectors_continued
+
+Recall \cref{crly:justification_for_the_notation_v_p_f_}.
+
+\begin{defn}[Derivation]\index{Derivation}\label{defn:derivation}
+  A \hlnoteb{derivation} at $p$ is a linear map $\mathcal{D} : C_p^\infty \to
+  \mathbb{R}$ satisfying the additional property that
+  \begin{equation*}
+    \mathcal{D}([f]_p [g]_p) = f(p) \mathcal{D}[g]_p + g(p) \mathcal{D}[f]_p.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  \cref{propo:linearity_of_the_directional_derivative_over_the_germs_of_functions}
+  tells us that any tangent vector $v_p \in T_p \mathbb{R}^n$ is a derivation, so
+  the set of derivations is not trivial.
+\end{remark}
+
+\begin{propo}[Set of Derivations as a Space]\label{propo:set_of_derivations_as_a_space}
+  Let $\Der_p$ be the set of all derivations at $p$. Then this is a subset of the
+  vector space $L(C_p^\infty, \mathbb{R})$. In fact, $\Der_p$ is a linear subspace.
+\end{propo}
+
+\begin{proof}
+  We shall prove this in A2Q3.
+\end{proof}
+
+\newthought{This} is likely surprising seeing that we just introduced yet another
+definition but there are actually no other derivations at $p$ aside from the tangent
+vectors at $p$. In fact, any derivation must be a directional differentiation wrt to
+some tangent vector $v_p \in T_p \mathbb{R}^n$. Before we can show this, observe the
+following.
+
+\hlbnotea{First} Let us describe a tangent vector $v_p$ as a derivation at $p$ in
+terms of the standard basis. Let $\mathcal{B} = \{ \hat{e}_1, \ldots, \hat{e}_n \}$
+be the standard basis of $\mathbb{R}^n$. Then
+\begin{equation*}
+  \{ (\hat{e}_1)_p, \ldots, (\hat{e}_n)_p \}
+\end{equation*}
+is a basis of $T_p \mathbb{R}^n$, which is called the standard basis of
+$T_p \mathbb{R}^n$.  It is the image of $\mathcal{B}$ under the
+\hyperref[propo:canonical_bijection_from_t_p_r_n_to_r_n_]{canonical isomorphism}
+\begin{equation*}
+  T_p : \mathbb{R}^n \to T_p \mathbb{R}^n.
+\end{equation*}
+Recall from \cref{eg:directional_derivative_on_basis_vectors} that 
+\begin{equation*}
+  (\hat{e}_k)_p f = \frac{\partial f}{\partial x^k}(p).
+\end{equation*}
+As a linear map, we can write
+\begin{equation}\label{eq:directional_derivative_on_basis_vectors_linear}
+  (\hat{e}_k)_p = \frac{\partial}{\partial x^k} \at{p}{}.
+\end{equation}
+
+Let $v \in \mathbb{R}^n$ be expressed as $v = v^i \hat{e}_i$, in terms of the
+standard basis. By the chain rule, we have
+\begin{align*}
+  v_p f &= (f \circ \gamma_{v_p})'(0) = (\D f)_{\gamma_{v_p}(0)} (\D v_p)_0 \\
+    &= (\dif{f})_p v = \frac{\partial f}{\partial x^i}(p) v^i
+    = v^i \frac{\partial}{\partial x^i}\at{p}{} f.
+\end{align*}
+From \cref{eq:directional_derivative_on_basis_vectors_linear}, we can write the
+above as
+\begin{equation*}
+  v_p = v^i (\hat{e}_i)_p,
+\end{equation*}
+which we see is indeed the image of $v = v^i \hat{e}_i$ under the linear isomorphism
+$T_p$.
+Henceforth, we will often express tangent vectors at $p$ in the above form, using
+linear combinations of the operators $(\hat{e}_i)_p = \frac{\partial}{\partial x^i} \at{p}{}$.
+
+\hlbnotea{Second} Consider the smooth function $x^j : \mathbb{R}^n \to \mathbb{R}$
+given by
+\begin{equation*}
+  x^j(q) = q^j,
+\end{equation*}
+for all $q = (q^1, \ldots, q^n) \in \mathbb{R}^n$. So as a function of $x^1, \ldots, x^n$ we have
+\begin{equation}\label{eq:coefficients_as_smooth_functions}
+  x^j(x^1, \ldots, x^n) = x^j,
+\end{equation}
+which is smooth. Let $v_p = v^i \frac{\partial}{\partial x^i} \at{p}{}$. Then
+\begin{equation*}
+  v_p x^j = v^i \frac{\partial}{\partial x^i} \at{p}{} x^j = v^i \delta_i^j = v^j.
+\end{equation*}
+Thus, we deduced that
+\begin{equation}\label{eq:tangent_vector_as_a_partial_derivative_operator}
+  v_p = v^i \frac{\partial}{\partial x^i} \at{p}{}, \text{ where } v^i = v_p x^i.
+\end{equation}
+
+\begin{remark}
+  Compare \cref{eq:tangent_vector_as_a_partial_derivative_operator} and
+  \cref{eq:v_wrt_basis} and notice the similarity of their $v^i$'s. We shall look into why this
+  is the case later on. % TODO : provide anchor to where this is explained
+\end{remark}
+
+\begin{lemma}[Derivations Annihilates Constant Functions]\label{lemma:derivations_annihilates_constant_functions}
+  Let $\mathcal{D}_p$ be a derivation at $p$. Then $\mathcal{D}$ annihilates constant functions,
+  i.e. if $f(q) = c \in \mathbb{R}$ for all $q \in \mathbb{R}^n$, then $\mathcal{D}_p f = 0$.
+\end{lemma}
+
+\begin{proof}
+  First, consider the constant function $1 : \mathbb{R}^n \to \mathbb{R}$ given by $q \mapsto 1$.
+  Note that $1 \cdot 1 = 1$. By Leibniz's Rule, we have
+  \begin{equation*}
+    \mathcal{D}_p(1) = \mathcal{D}_p(1 \cdot 1) = 1(p) \mathcal{D}_p 1 + 1(p) \mathcal{D}_p 1 
+      = 2 \mathcal{D}_p (1).
+  \end{equation*}
+  It follows that $\mathcal{D}_p (1) = 0$.
+
+  Now let $f$ be a constant function. Then $f = c1$ for some $c \in \mathbb{R}$. It follows by
+  linearity that
+  \begin{equation*}
+    \mathcal{D}_p f = \mathcal{D}_p (c1) = c \mathcal{D}_p 1 = 0.
+  \end{equation*}\qed\
+\end{proof}
+
+\begin{thm}[Derivations are Tangent Vectors]\label{thm:derivations_are_tangent_vectors}
+  Let $\mathcal{D}_p$ be a derivation at $p$. Then $\mathcal{D}_p = v_p$ for some 
+  $v_p \in T_p \mathbb{R}^n$. Consequently, $\Der_p = T_p \mathbb{R}^n$.
+\end{thm}
+
+\begin{proof}
+  Note that if there exists a $v_p$ such that $\mathcal{D}_p = v_p$, then we must have
+  $v_p = v^i \frac{\partial}{\partial x^i} \at{p}{}$ with coefficients
+  \begin{equation*}
+    v^i = v_p x^j = \mathcal{D}_p x^j.
+  \end{equation*}
+  In particular, we can show that
+  \begin{equation*}
+    \mathcal{D}_p = (\mathcal{D}_p x^i) \frac{\partial}{\partial x^i} \at{p}{}.
+  \end{equation*}
+
+  Let $f$ be a smooth function defined in an open neighbourhood of $p$. By the \hlnotea{
+  integral form of Taylor's Theorem}, for $x = (x^1, \ldots, x^n)$ sufficiently close to $p$,
+  we can write
+  \begin{equation*}
+    f(x) = f(p) + \frac{\partial f}{\partial x^i} \at{p} (x^i - p^i) + g_i(x) (x^i - p^i),
+  \end{equation*}
+  where the functions $g_i(x)$ satisfy $g_i(p) = 0$. More succinctly,
+  \begin{equation}\label{eq:derivations_are_tangent_vectors_eq1}
+    f = f(p) + \frac{\partial f}{\partial x^i} \at{p}{} (x^i - p^i) + g_i \cdot (x^i - p^i),
+  \end{equation}
+  where $x^i$ is the function $x^i(x) = x^i$ as in \cref{eq:coefficients_as_smooth_functions},
+  and $p^i$ and $f(p)$ are constant functions. Apply $\mathcal{D}_p$ to
+  \cref{eq:derivations_are_tangent_vectors_eq1}. By the linearity and Leibniz's rule, both of
+  which are satisfied by $\mathcal{D}_p$, and 
+  \cref{lemma:derivations_annihilates_constant_functions}, we get
+  \begin{align*}
+    \mathcal{D}_p f 
+      &= \mathcal{D}_p \left( f(p) + \frac{\partial f}{\partial x^i} \at{p}{} (x^i - p^i) + g_i \cdot (x^i - p^i) \right) \\
+      &= 0 + \frac{\partial f}{\partial x^i} \at{p}{} \mathcal{D}_p(x^i - p^i) 
+        + \mathcal{D}_p (g_i \cdot (x^i - p^i)) \\
+      &= \frac{\partial f}{\partial x^i} \at{p}{} (\mathcal{D}_p x^i + 0)
+        + g_i(p) \mathcal{D}_p (x^i - p^i) + (x^i - p^i)(p) \mathcal{D}_p (g_i) \\
+      &= (\mathcal{D}_p x^i) \frac{\partial}{\partial x^i} \at{p}{} f + 0 + 0 
+      = \left( (\mathcal{D}_p x^i) \frac{\partial}{\partial x^i} \at{p}{} \right) f.
+  \end{align*}
+  Since $f$ was arbitrary, it follows that 
+  $\mathcal{D}_p = (\mathcal{D}_p x^i) \frac{\partial}{\partial x^i} \at{p}{}$,
+  which is what we desired.\qed\
+\end{proof}
+
+\begin{remark}
+  From \cref{sec:smooth_curves_in_r_n_and_tangent_vectors} and
+  \cref{sec:derivations_and_tangent_vectors}, a tangent vector $v_p \in T_p \mathbb{R}^n$ can
+  be considered in any one of the following three ways:
+  \begin{enumerate}
+    \item as a vector $v \in \mathbb{R}^n$, enamating from the point $p \in \mathbb{R}^n$;
+    \item as a unique equivalence class of curves through $p$;
+    \item as a unique derivation at $p$.
+  \end{enumerate}
+  The three different viewpoints are useful in their own ways, and we will be alternating
+  between these ideas as we go forward.
+\end{remark}
+
+% section derivations_and_tangent_vectors_continued (end)
+
+\section{Smooth Vector Fields}%
+\label{sec:smooth_vector_fields}
+% section smooth_vector_fields
+
+The idea of a vector field on $\mathbb{R}^n$ is the assignment of a tangent vector at $p$ for
+every $p \in \mathbb{R}^n$. A smooth vector field is where we attach these tangent vectors to
+every point in a \hlnotea{smoothly varying way}.
+
+\begin{defn}[Tangent Bundle]\index{Tangent Bundle}\label{defn:tangent_bundle}
+  The \hlnoteb{tangent bundle} of $\mathbb{R}^n$ is defined as
+  \begin{equation*}
+    T \mathbb{R}^n = \bigcup_{p \in \mathbb{R}^n} T_p \mathbb{R}^n.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  For us, the tangent bundle is just a set, but it is a very important mathematical object
+  which shall be studied in later courses (PMATH 465).
+\end{remark}
+
+\begin{defn}[Vector Field]\index{Vector Field}\label{defn:vector_field}
+  A \hlnoteb{vector field} on $\mathbb{R}^n$ is a map $X : \mathbb{R}^n \to T \mathbb{R}^n$
+  such that $X(p) \in T_p \mathbb{R}^n$ for all $p \in \mathbb{R}^n$. We shall always denote
+  $X(p)$ by $X_p$.
+\end{defn}
+
+\newthought{Let} $\{ \hat{e}_1, \ldots, \hat{e}_n \}$ be the standard basis of $\mathbb{R}^n$.
+We have seen that $\{ (\hat{e}_1)_p, \ldots, (\hat{e}_n)_p \}$ is a basis of $T_p \mathbb{R}^n$.
+We can think of each $\hat{e}_i$ as a vector field, where $\hat{e}_i(p) = (\hat{e}_i)_p$. We
+call these the \hldefn{standard vector fields} on $\mathbb{R}^n$. Recall that we wrote that
+\begin{equation*}
+  (\hat{e}_k) = \frac{\partial}{\partial x^k},
+\end{equation*}
+which means that $(\hat{e}_k)_p = \frac{\partial}{\partial x^k} \at{p}{}$. Henceforth, we shall
+write the standard vector fields on $\mathbb{R}^n$ as 
+$\left\{ \frac{\partial}{\partial x^1}, \ldots, \frac{\partial}{\partial x^n} \right\}$.
+
+Now it follows that for any vector field $X$ on $\mathbb{R}^n$, since $X_p \in T_p \mathbb{R}^n$,
+we can write
+\begin{equation*}
+  X_p = X^i (p) \frac{\partial}{\partial x^i} \at{p}{},
+\end{equation*}
+where each $X^i : \mathbb{R}^n \to \mathbb{R}$. More succinctly,
+\begin{equation*}
+  X = X^i \frac{\partial}{\partial x^i}.
+\end{equation*}
+The functions $X^i : \mathbb{R}^n \to \mathbb{R}$ are called the \hldefn{component functions of
+the vector field} $X$ wrt the standard vector fields.
+
+\newthought{We are} now ready to define smoothness of a vector field.
+
+\begin{defn}[Smooth Vector Fields]\index{Smooth Vector Fields}\label{defn:smooth_vector_fields}
+  Let $X$ be a vector field on $\mathbb{R}^n$. Then $X = X^i \frac{\partial}{\partial x^i}$ for
+  some uniquely determined function $X^i : \mathbb{R}^n \to \mathbb{R}$. We say that $X$ is
+  \hlnoteb{smooth} if $X^i$ is smooth for every $i$. We write $X^i \in C^\infty(\mathbb{R}^n)$.
+\end{defn}
+
+\begin{remark}
+  In multivariable calculus, a smooth field on $\mathbb{R}^n$ is a smooth map $X : \mathbb{R}^n
+  \to \mathbb{R}^n$ given by
+  \begin{equation*}
+    X(p) = (X^1(p), \ldots, X^n(p)),
+  \end{equation*}
+  i.e. we could say that $X = (X^1, \ldots, X^n)$ is an $n$-tuple of smooth functions on
+  $\mathbb{R}^n$.
+
+  Note that this view is particular to $\mathbb{R}^n$ due to the canonical isomorphism between
+  $T_p \mathbb{R}^n$ and $\mathbb{R}^n$ for all $p \in \mathbb{R}^n$.
+\end{remark}
+
+% section smooth_vector_fields (end)
+
+% chapter lecture_10_jan_28th (end)
 
 \appendix
 
