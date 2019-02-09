@@ -2401,6 +2401,263 @@ the vector field} $X$ wrt the standard vector fields.
 
 % chapter lecture_10_jan_28th (end)
 
+\chapter{Lecture 11 Jan 30th}%
+\label{chp:lecture_11_jan_30th}
+% chapter lecture_11_jan_30th
+
+\section{Smooth Vector Fields (Continued)}%
+\label{sec:smooth_vector_fields_continued}
+% section smooth_vector_fields_continued
+
+Let $X$ be a vector field on $\mathbb{R}^n$, not necessarily smooth. For any $p \in \mathbb{R}^n$,
+we have that $X_p$ is a derivation on smooth functions defined on an open neighbourhood of $p$.
+In particular, for any $f \in C^\infty(\mathbb{R}^n)$, $X_p f \in \mathbb{R}$ is a scalar. Then
+we can define a function $X f : \mathbb{R}^n \to \mathbb{R}$ by
+\begin{equation*}
+  (X f)(p) = X_p f.
+\end{equation*}
+
+\begin{propo}[Equivalent Definition of a Smooth Vector Field]\label{propo:equivalent_definition_of_a_smooth_vector_field}
+  The vector field $X$ on $\mathbb{R}^n$ is smooth iff $X f \in C^\infty(\mathbb{R}^n)$ for all
+  $f \in C^\infty(\mathbb{R}^n)$.
+\end{propo}
+
+\begin{proof}
+  Let $X = X^i \frac{\partial}{\partial x^i}$. Then
+  \begin{equation*}
+    (Xf)(p) = X_p f = X^i(p) = X^i (p) \frac{\partial f}{\partial x^i} \at{p}{}.
+  \end{equation*}
+  It follows that $Xf : \mathbb{R}^n \to \mathbb{R}$ is $X^i \frac{\partial f}{\partial x^i}$.
+  Now if $X$ is smooth, then each of the $X^j$'s is smooth, and in particular 
+  $X^i \frac{\partial f}{\partial x^i}$ is smooth for any smooth $f$. On the other hand, suppose
+  $Xf$ is smooth for any smooth function $f$. Then, consider $f = x^j$, which is smooth. Then
+  \begin{equation*}
+    Xf = X^i \frac{\partial x^j}{\partial x^i} = X^i \delta_i^j = X^j,
+  \end{equation*}
+  is a smooth function.\qed\
+\end{proof}
+
+\begin{note}
+  This equivalent characterization of smoothness of vector fields is independent of any choice
+  of basis of $\mathbb{R}^n$. Due to this, it is the \hlnotea{natural definition} of smoothness
+  of vector fields on abstract smooth manifolds, where we cannot obtain a canonical basis for
+  each tangent space.
+\end{note}
+
+\newthought{Let} $U \subseteq \mathbb{R}^n$ is open\sidenote{\hlwarn{Why do we need} $U$ to be
+open? % TODO: Talk to prof
+}. We can define a smooth vector field on $U$ to be an element $X =
+X^i \frac{\partial}{\partial x^i}$ where each $X^i \in C^\infty(U)$ is smooth. From
+\cref{propo:equivalent_definition_of_a_smooth_vector_field}, $U$ is smooth iff $Xf \in
+C^\infty(U)$ for all $f \in C^\infty(U)$.
+
+Hereafter, we shall assume that all our vector fields, regardless if it is on $\mathbb{R}^n$ or
+some open subset $U \subset \mathbb{R}^n$, are smooth, even if we do not explicitly say that
+they are.
+
+\begin{note}[Notation]
+  We write $\Gamma(T \mathbb{R}^n)$ for the set of smooth vector fields on $\mathbb{R}^n$. More
+  generally, we write $\Gamma(T U)$ for $U \subseteq \mathbb{R}^n$ open.
+\end{note}
+
+The set $\Gamma(TU)$ is a real vector space, where the structure is given by
+\begin{equation*}
+  (aX + bY)_p = aX_p + bY_p
+\end{equation*}
+for all $X, Y \in \Gamma(TU)$ and $a, b \in \mathbb{R}$. This is an \hlnotea{infinite-dimensional}
+\sidenote{\hlwarn{Why?} % TODO talk to the prof
+} real vector space.
+
+Further, $\forall X \in \Gamma(TU)$ and $h \in C^\infty(U)$, $hX$ is another
+smooth vector field on $U$: Let $X = X^i \frac{\partial}{\partial x^i}$. Then $hX = (hX^i)
+\frac{\partial}{\partial x^i}$, where $h X^i$ is the product of elements of $C^\infty(U)$.
+Equivalently so,
+\begin{equation*}
+  (hX)_p = h(p) X_p.
+\end{equation*}
+We say that $\Gamma(TU)$ is a \hldefn{module} over the \hlnotea{ring} \sidenote{Whatever this
+means here in Ring Theory.} $C^\infty(U)$.
+
+\newthought{Let} $X$ be a smooth vector field on $U$. Since $X_p$ is a derivation on 
+$C_p^\infty$ for all $p \in U$, it motivates us to the following definition.
+
+\begin{defn}[Derivation on $C^\infty_p$]\index{Derivation on $C^\infty_p$}\label{defn:derivation_on_c_infty_p_}
+  Let $U \subseteq \mathbb{R}^n$ be open. A \hlnoteb{derivation} on $C^\infty(U)$ is a linear
+  map $\mathcal{D} : C^\infty (U) \to C^\infty (U)$ that satisfies Leibniz's rule:
+  \begin{equation*}
+    \mathcal{D}( f \cdot g ) = f \cdot (\mathcal{D}g) + g \cdot (\mathcal{D}f),
+  \end{equation*}
+  where $f \cdot g$ denotes the multiplication of functions in $C^\infty(U)$.
+\end{defn}
+
+Clearly, given $X \in \Gamma(TU)$, $X$ is a derivation on $C^\infty(U)$ since for each $p \in U$,
+we have \hlnotea{linearity}
+\begin{equation*}
+  (X(af + bg))(p) = X_p(af + bg) = aX_p f + bX_p g = a(Xf)(p) + b(Xg)(p),
+\end{equation*}
+and \hlnotea{Leibniz's rule}
+\begin{align*}
+  (X(fg))(p) &= X_p(fg) = f(p) X_p g + g(p) X_p f \\
+             &= (f X)_p g + (g X)_p f = (f (Xg) + g (Xf))(p).
+\end{align*}
+
+Furthermore, if $\mathcal{D}$ is a derivation on $C^\infty(U)$, then we get that $\mathcal{D}
+: U \to \mathbb{R}$ by $p \to \mathcal{D}_p f = (\mathcal{D}f)(p)$, which is a derivative at $p$.
+It follows that $\mathcal{D}_p \in T_p \mathbb{R}^n$. Thus $\mathcal{D}$ is a vector field, and
+since $\mathcal{D}f \in C^infty(U)$ for all $f \in C^\infty(U)$, from
+\cref{propo:equivalent_definition_of_a_smooth_vector_field}, we have that $\mathcal{D}$ is smooth.
+Hence the derivations on $C^\infty(U)$ are exactly the smooth vector fields on $U$.
+
+% section smooth_vector_fields_continued (end)
+
+\section{Smooth \texorpdfstring{$1$}{1}-Forms}%
+\label{sec:smooth_1_forms}
+% section smooth_1_forms
+
+\begin{defn}[Cotangent Spaces and Cotangent Vectors]\index{Cotangent Spaces}\index{Cotangent Vectors}\label{defn:cotangent_spaces_and_cotangent_vectors}
+  Let $p \in \mathbb{R}^n$. The \hlnoteb{cotangent space} to $\mathbb{R}^n$ at $p$ is defined
+  to be the dual space $(T_p \mathbb{R}^n)^*$ of $T_p \mathbb{R}^n$, which is denoted as
+  $T_p^* \mathbb{R}^n$. An element $\alpha_p \in T_p^* \mathbb{R}^n$, which is a linear map
+  $\alpha_p : T_p \mathbb{R}^n \to \mathbb{R}$, is called a \hlnoteb{cotangent vector} at $p$.
+\end{defn}
+
+\marginnote{
+\begin{mnote}
+  This entire part is similar to our construction of smooth vector fields plus the stuff that
+  we learned in \hyperref[chp:lecture_3_jan_11th]{Lecture 3} on $k$-forms.
+\end{mnote}}
+\begin{remark}
+  The idea of a smooth $1$-form is that we want to attach a cotangent vector $\alpha_p \in
+  T_p^* \mathbb{R}^n$ at every point $p \in \mathbb{R}^n$ in a smoothly varying manner.
+\end{remark}
+
+Let
+\begin{equation*}
+  T^* \mathbb{R}^n = \bigcup_{p \in \mathbb{R}^n} T_p^* \mathbb{R}^n
+\end{equation*}
+be the union of all the cotangent spaces to $\mathbb{R}^n$. This is called the \hldefn{cotangent
+bundle} of $\mathbb{R}^n$ \sidenote{Again, for us, this is just a set. We shall see this again
+in PMATH 465.}.
+
+\begin{defn}[$1$-Form on the Cotangent Bundle]\index{$1$-Form}\label{defn:_1_form_on_the_cotangent_bundle}
+  A \hlnoteb{$1$-form} $\alpha$ on $\mathbb{R}^n$ is a map $\alpha : \mathbb{R}^n \to 
+  T^* \mathbb{R}^n$ such that $\alpha(p) \in T_p^* \mathbb{R}^n$ for all $p \in \mathbb{R}^n$.
+  We will always define $\alpha(p)$ by $\alpha_p$.
+\end{defn}
+
+Let $\{ \hat{e}_1, \ldots, \hat{e}_n \}$ be the standard basis of $\mathbb{R}^n$. Then $\{
+(\hat{e}_1)_p, \ldots, (\hat{e}_n)_p \}$ is a basis for $T_p \mathbb{R}^n$. For now, we shall
+denote the dual basis of $T_p^* \mathbb{R}^n$ by $\{ (\hat{e}^1)_p, \ldots, (\hat{e}^n)_p \}$.
+We may think of each $\hat{e}^i$ as a $1$-form, where $\hat{e}^i (p) = (\hat{e}^i)_p$. We shall
+call these the \hldefn{standard $1$-forms} on $\mathbb{R}^n$.
+
+So for any $1$-form $\alpha$ on $\mathbb{R}^n$, since $\alpha_p \in T_p^* \mathbb{R}^n$, we can
+write
+\begin{equation*}
+  \alpha_p = \alpha_i (p) (\hat{e}^i)_p,
+\end{equation*}
+where each $\alpha_i : \mathbb{R}^n \to \mathbb{R}$ is a function. More succinctly,
+\begin{equation}\label{eq:1_forms_wrt_standard_1_forms}
+  \alpha = \alpha_i \hat{e}^i,
+\end{equation}
+for some \hlwarn{uniquely} determined functions $\alpha_i : \mathbb{R}^n \to \mathbb{R}$, where
+\cref{eq:1_forms_wrt_standard_1_forms} means that $\alpha_p = \alpha_i(p)(\hat{e}^i)_p$. The
+functions $\alpha_i : \mathbb{R}^n \to \mathbb{R}$ are called the \hldefn{component functions} of
+the $1$-form $\alpha$ wrt the standard $1$-forms.
+
+With that, we can define smoothness on $1$-forms. Again, we will then find an equivalent definition
+that does not depend on a basis.
+
+\begin{defn}[Smooth $1$-Forms]\index{Smooth $1$-Forms}\label{defn:smooth_1_forms}
+  We say that a $1$-form $\alpha$ on $\mathbb{R}^n$ is \hlnoteb{smooth} if the component functions
+  $\alpha_i : \mathbb{R}^n \to \mathbb{R}$ given in \cref{eq:1_forms_wrt_standard_1_forms} are all
+  smooth functions, i.e. each $\alpha_i \in C^\infty(\mathbb{R}^n)$.
+\end{defn}
+
+Let $\alpha$ be a $1$-form on $\mathbb{R}^n$, not necessarily smooth. Then for any $p \in
+\mathbb{R}^n$, we know that $\alpha_p \in L(T_p \mathbb{R}^n, \mathbb{R})$. Thus for any vector
+field $X$ on $\mathbb{R}^n$ not necessarily smooth, $\alpha_p (X_p) \in \mathbb{R}$ is a scalar.
+We can then define a function $\alpha X : \mathbb{R}^n \to \mathbb{R}$ by
+\begin{equation}\label{eq:1_form_on_vector_fields_get_scalar}
+  (\alpha(X))(p) = \alpha_p(X_p).
+\end{equation}
+
+\begin{propo}[Equivalent Definition for Smoothness of $1$-Forms]\label{propo:equivalent_definition_for_smoothness_of_1_forms}
+  The $1$-form $\alpha$ on $\mathbb{R}^n$ is smooth iff $\alpha(X) \in C^\infty(\mathbb{R}^n)$
+  for all $X \in \Gamma(T \mathbb{R}^n)$.
+\end{propo}
+
+\begin{proof}
+  First, let $X = X^i \frac{\partial}{\partial x^i} = X^i \hat{e}_i$ and $\alpha = 
+  \alpha_j \hat{e}^j$. Then we have
+  \begin{align*}
+    (\alpha(X))(p) &= \alpha_p(X_p) = (\alpha_j(p)(\hat{e}^j)_p)(X^i(p)(\hat{e}_i)_p) \\
+                   &= \alpha_j(p)X^i(p)(\hat{e}^j)_p(\hat{e}_i)_p \\
+                   &= \alpha_j(p)X^i(p) \delta_i^j = \alpha_i(p) X^i(p).
+  \end{align*}
+  Since $p$ was arbitrary, we have
+  \begin{equation}\label{eq:1_form_on_vector_fields_get_scalar_as_a_sum}
+    \alpha(X) = \alpha_i X^i.
+  \end{equation}
+  
+  Suppose that $\alpha$ is smooth, i.e. $\alpha_i$ is smooth. Then for any smooth vector field
+  $X$, $\alpha_i X^i$ is smooth. 
+  
+  Conversely, if $\alpha(X)$ is smooth for any smooth $X$. Then in particular, if $X 
+  = \frac{\partial}{\partial x^j}$, It follows that $X^i = \delta_j^i$ since $X = X^i
+  \frac{\partial}{\partial x^i}$. Then $\alpha(X) = \alpha_i X^i = \alpha_i \delta_j^i = 
+  \alpha_j$ is smooth.\qed\
+\end{proof}
+
+\begin{remark}
+  Again, we see that this characterization is independent of the chooice of basis.
+\end{remark}
+
+\begin{note}
+  In the last step of the proof for \cref{propo:equivalent_definition_for_smoothness_of_1_forms},
+  we observe that if $X = \hat{e}_i$ is the $i$\textsuperscript{th} standard vector field on
+  $\mathbb{R}^n$. Then
+  \begin{equation*}
+    X = X^j \hat{e}_j = X^j \frac{\partial}{\partial x^j}
+  \end{equation*}
+  where $X^j = \delta^{ij}$. Then if $\alpha = \alpha_k \hat{e}^k$ is a $1$-form, we have that
+  $\alpha(X) = \alpha(\hat{e}_i) = \alpha_i$, i.e.
+  \begin{equation*}
+    \alpha = \alpha_i \hat{e}^j, \text{ where } \alpha_i = \alpha(\hat{e}_i) 
+      = \alpha \left( \frac{\partial}{\partial x^i} \right)
+  \end{equation*}
+  Note that the above is a `parameterized version' of \cref{eq:v_wrt_basis}, where the coefficients
+  are smooth functions on $\mathbb{R}^n$.
+\end{note}
+
+\newthought{If} $U \subseteq \mathbb{R}^n$ is open, we can define a smooth $1$-form on $U$ to 
+be an element $\alpha = \alpha_i \hat{e}^i$ where $\alpha_i \in C^\infty(U)$ is smooth. We require
+$U$ to be open to be able to define smoothness\sidenote{Probably a similar question, but 
+\hlwarn{why}? % TODO : talk to prof
+} at all points of $U$. \cref{propo:equivalent_definition_for_smoothness_of_1_forms} generalizes
+to say that a $1$-form on $U$ is smooth iff $\alpha(X) \in C^\infty(U)$ for all $X \in \Gamma(TU)$.
+
+We shall write $\Gamma(T^* \mathbb{R}^n)$ for the set of smooth $1$-forms on $\mathbb{R}^n$ and
+more generally $\Gamma(T^* U)$ for te set of smooth $1$-forms on $U$. The set $\Gamma(T^* U)$ is a
+real vector space, where the vector space structure is given by
+\begin{equation*}
+  (a \alpha + b \beta)_p = a \alpha_p + b \beta_p
+\end{equation*}
+for all $\alpha, \beta \in \Gamma(T^* U)$ and $a, b \in \mathbb{R}$. Again, this is an
+\hlnotea{infinite-dimensional} real vector space. Moreover, for $\alpha \in \Gamma(T^* U)$ and
+$h \in C^\infty(U)$, $h\alpha$ is another smooth $1$-form on $U$, given as follows:
+
+Let $\alpha = \alpha_i \hat{e}^i$. Then $h\alpha = (h\alpha_i)\hat{e}^i$, where $h \alpha_i$ is
+the product of elements of $C^\infty(U)$. Equivalently so
+\begin{equation*}
+  (h\alpha)_p = h(p) \alpha_p.
+\end{equation*}
+We say that $\Gamma(T^* U)$ is a \hldefn{module} over the ring $C^\infty(U)$.
+
+% section smooth_1_forms (end)
+
+% chapter lecture_11_jan_30th (end)
+
 \appendix
 
 \chapter{Review of Earlier Contents}%
