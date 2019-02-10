@@ -2195,7 +2195,7 @@ $T_p \mathbb{R}^n$.  It is the image of $\mathcal{B}$ under the
 \begin{equation*}
   T_p : \mathbb{R}^n \to T_p \mathbb{R}^n.
 \end{equation*}
-Recall from \cref{eg:directional_derivative_on_basis_vectors} that 
+Recall from \cref{eg:directional_derivative_on_basis_vectors} that
 \begin{equation*}
   (\hat{e}_k)_p f = \frac{\partial f}{\partial x^k}(p).
 \end{equation*}
@@ -2254,7 +2254,7 @@ Thus, we deduced that
   First, consider the constant function $1 : \mathbb{R}^n \to \mathbb{R}$ given by $q \mapsto 1$.
   Note that $1 \cdot 1 = 1$. By Leibniz's Rule, we have
   \begin{equation*}
-    \mathcal{D}_p(1) = \mathcal{D}_p(1 \cdot 1) = 1(p) \mathcal{D}_p 1 + 1(p) \mathcal{D}_p 1 
+    \mathcal{D}_p(1) = \mathcal{D}_p(1 \cdot 1) = 1(p) \mathcal{D}_p 1 + 1(p) \mathcal{D}_p 1
       = 2 \mathcal{D}_p (1).
   \end{equation*}
   It follows that $\mathcal{D}_p (1) = 0$.
@@ -2267,7 +2267,7 @@ Thus, we deduced that
 \end{proof}
 
 \begin{thm}[Derivations are Tangent Vectors]\label{thm:derivations_are_tangent_vectors}
-  Let $\mathcal{D}_p$ be a derivation at $p$. Then $\mathcal{D}_p = v_p$ for some 
+  Let $\mathcal{D}_p$ be a derivation at $p$. Then $\mathcal{D}_p = v_p$ for some
   $v_p \in T_p \mathbb{R}^n$. Consequently, $\Der_p = T_p \mathbb{R}^n$.
 \end{thm}
 
@@ -2295,19 +2295,19 @@ Thus, we deduced that
   where $x^i$ is the function $x^i(x) = x^i$ as in \cref{eq:coefficients_as_smooth_functions},
   and $p^i$ and $f(p)$ are constant functions. Apply $\mathcal{D}_p$ to
   \cref{eq:derivations_are_tangent_vectors_eq1}. By the linearity and Leibniz's rule, both of
-  which are satisfied by $\mathcal{D}_p$, and 
+  which are satisfied by $\mathcal{D}_p$, and
   \cref{lemma:derivations_annihilates_constant_functions}, we get
   \begin{align*}
-    \mathcal{D}_p f 
+    \mathcal{D}_p f
       &= \mathcal{D}_p \left( f(p) + \frac{\partial f}{\partial x^i} \at{p}{} (x^i - p^i) + g_i \cdot (x^i - p^i) \right) \\
-      &= 0 + \frac{\partial f}{\partial x^i} \at{p}{} \mathcal{D}_p(x^i - p^i) 
+      &= 0 + \frac{\partial f}{\partial x^i} \at{p}{} \mathcal{D}_p(x^i - p^i)
         + \mathcal{D}_p (g_i \cdot (x^i - p^i)) \\
       &= \frac{\partial f}{\partial x^i} \at{p}{} (\mathcal{D}_p x^i + 0)
         + g_i(p) \mathcal{D}_p (x^i - p^i) + (x^i - p^i)(p) \mathcal{D}_p (g_i) \\
-      &= (\mathcal{D}_p x^i) \frac{\partial}{\partial x^i} \at{p}{} f + 0 + 0 
+      &= (\mathcal{D}_p x^i) \frac{\partial}{\partial x^i} \at{p}{} f + 0 + 0
       = \left( (\mathcal{D}_p x^i) \frac{\partial}{\partial x^i} \at{p}{} \right) f.
   \end{align*}
-  Since $f$ was arbitrary, it follows that 
+  Since $f$ was arbitrary, it follows that
   $\mathcal{D}_p = (\mathcal{D}_p x^i) \frac{\partial}{\partial x^i} \at{p}{}$,
   which is what we desired.\qed\
 \end{proof}
@@ -2357,11 +2357,11 @@ every point in a \hlnotea{smoothly varying way}.
 We have seen that $\{ (\hat{e}_1)_p, \ldots, (\hat{e}_n)_p \}$ is a basis of $T_p \mathbb{R}^n$.
 We can think of each $\hat{e}_i$ as a vector field, where $\hat{e}_i(p) = (\hat{e}_i)_p$. We
 call these the \hldefn{standard vector fields} on $\mathbb{R}^n$. Recall that we wrote that
-\begin{equation*}
+\begin{equation}\label{eq:standard_basis_for_standard_vector_fields}
   (\hat{e}_k) = \frac{\partial}{\partial x^k},
-\end{equation*}
+\end{equation}
 which means that $(\hat{e}_k)_p = \frac{\partial}{\partial x^k} \at{p}{}$. Henceforth, we shall
-write the standard vector fields on $\mathbb{R}^n$ as 
+write the standard vector fields on $\mathbb{R}^n$ as
 $\left\{ \frac{\partial}{\partial x^1}, \ldots, \frac{\partial}{\partial x^n} \right\}$.
 
 Now it follows that for any vector field $X$ on $\mathbb{R}^n$, since $X_p \in T_p \mathbb{R}^n$,
@@ -2428,7 +2428,7 @@ we can define a function $X f : \mathbb{R}^n \to \mathbb{R}$ by
     (Xf)(p) = X_p f = X^i(p) = X^i (p) \frac{\partial f}{\partial x^i} \at{p}{}.
   \end{equation*}
   It follows that $Xf : \mathbb{R}^n \to \mathbb{R}$ is $X^i \frac{\partial f}{\partial x^i}$.
-  Now if $X$ is smooth, then each of the $X^j$'s is smooth, and in particular 
+  Now if $X$ is smooth, then each of the $X^j$'s is smooth, and in particular
   $X^i \frac{\partial f}{\partial x^i}$ is smooth for any smooth $f$. On the other hand, suppose
   $Xf$ is smooth for any smooth function $f$. Then, consider $f = x^j$, which is smooth. Then
   \begin{equation*}
@@ -2478,7 +2478,7 @@ Equivalently so,
 We say that $\Gamma(TU)$ is a \hldefn{module} over the \hlnotea{ring} \sidenote{Whatever this
 means here in Ring Theory.} $C^\infty(U)$.
 
-\newthought{Let} $X$ be a smooth vector field on $U$. Since $X_p$ is a derivation on 
+\newthought{Let} $X$ be a smooth vector field on $U$. Since $X_p$ is a derivation on
 $C_p^\infty$ for all $p \in U$, it motivates us to the following definition.
 
 \begin{defn}[Derivation on $C^\infty_p$]\index{Derivation on $C^\infty_p$}\label{defn:derivation_on_c_infty_p_}
@@ -2540,7 +2540,7 @@ bundle} of $\mathbb{R}^n$ \sidenote{Again, for us, this is just a set. We shall 
 in PMATH 465.}.
 
 \begin{defn}[$1$-Form on the Cotangent Bundle]\index{$1$-Form}\label{defn:_1_form_on_the_cotangent_bundle}
-  A \hlnoteb{$1$-form} $\alpha$ on $\mathbb{R}^n$ is a map $\alpha : \mathbb{R}^n \to 
+  A \hlnoteb{$1$-form} $\alpha$ on $\mathbb{R}^n$ is a map $\alpha : \mathbb{R}^n \to
   T^* \mathbb{R}^n$ such that $\alpha(p) \in T_p^* \mathbb{R}^n$ for all $p \in \mathbb{R}^n$.
   We will always define $\alpha(p)$ by $\alpha_p$.
 \end{defn}
@@ -2588,7 +2588,7 @@ We can then define a function $\alpha X : \mathbb{R}^n \to \mathbb{R}$ by
 \end{propo}
 
 \begin{proof}
-  First, let $X = X^i \frac{\partial}{\partial x^i} = X^i \hat{e}_i$ and $\alpha = 
+  First, let $X = X^i \frac{\partial}{\partial x^i} = X^i \hat{e}_i$ and $\alpha =
   \alpha_j \hat{e}^j$. Then we have
   \begin{align*}
     (\alpha(X))(p) &= \alpha_p(X_p) = (\alpha_j(p)(\hat{e}^j)_p)(X^i(p)(\hat{e}_i)_p) \\
@@ -2599,13 +2599,13 @@ We can then define a function $\alpha X : \mathbb{R}^n \to \mathbb{R}$ by
   \begin{equation}\label{eq:1_form_on_vector_fields_get_scalar_as_a_sum}
     \alpha(X) = \alpha_i X^i.
   \end{equation}
-  
+
   Suppose that $\alpha$ is smooth, i.e. $\alpha_i$ is smooth. Then for any smooth vector field
-  $X$, $\alpha_i X^i$ is smooth. 
-  
-  Conversely, if $\alpha(X)$ is smooth for any smooth $X$. Then in particular, if $X 
+  $X$, $\alpha_i X^i$ is smooth.
+
+  Conversely, if $\alpha(X)$ is smooth for any smooth $X$. Then in particular, if $X
   = \frac{\partial}{\partial x^j}$, It follows that $X^i = \delta_j^i$ since $X = X^i
-  \frac{\partial}{\partial x^i}$. Then $\alpha(X) = \alpha_i X^i = \alpha_i \delta_j^i = 
+  \frac{\partial}{\partial x^i}$. Then $\alpha(X) = \alpha_i X^i = \alpha_i \delta_j^i =
   \alpha_j$ is smooth.\qed\
 \end{proof}
 
@@ -2622,17 +2622,17 @@ We can then define a function $\alpha X : \mathbb{R}^n \to \mathbb{R}$ by
   \end{equation*}
   where $X^j = \delta^{ij}$. Then if $\alpha = \alpha_k \hat{e}^k$ is a $1$-form, we have that
   $\alpha(X) = \alpha(\hat{e}_i) = \alpha_i$, i.e.
-  \begin{equation*}
-    \alpha = \alpha_i \hat{e}^j, \text{ where } \alpha_i = \alpha(\hat{e}_i) 
+  \begin{equation}\label{eq:1_forms_with_coefficients_as_differentials}
+    \alpha = \alpha_i \hat{e}^j, \text{ where } \alpha_i = \alpha(\hat{e}_i)
       = \alpha \left( \frac{\partial}{\partial x^i} \right)
-  \end{equation*}
+  \end{equation}
   Note that the above is a `parameterized version' of \cref{eq:v_wrt_basis}, where the coefficients
   are smooth functions on $\mathbb{R}^n$.
 \end{note}
 
-\newthought{If} $U \subseteq \mathbb{R}^n$ is open, we can define a smooth $1$-form on $U$ to 
+\newthought{If} $U \subseteq \mathbb{R}^n$ is open, we can define a smooth $1$-form on $U$ to
 be an element $\alpha = \alpha_i \hat{e}^i$ where $\alpha_i \in C^\infty(U)$ is smooth. We require
-$U$ to be open to be able to define smoothness\sidenote{Probably a similar question, but 
+$U$ to be open to be able to define smoothness\sidenote{Probably a similar question, but
 \hlwarn{why}? % TODO : talk to prof
 } at all points of $U$. \cref{propo:equivalent_definition_for_smoothness_of_1_forms} generalizes
 to say that a $1$-form on $U$ is smooth iff $\alpha(X) \in C^\infty(U)$ for all $X \in \Gamma(TU)$.
@@ -2657,6 +2657,339 @@ We say that $\Gamma(T^* U)$ is a \hldefn{module} over the ring $C^\infty(U)$.
 % section smooth_1_forms (end)
 
 % chapter lecture_11_jan_30th (end)
+
+\chapter{Lecture 12 Feb 01st}%
+\label{chp:lecture_12_feb_01st}
+% chapter lecture_12_feb_01st
+
+\section{Smooth \texorpdfstring{$1$}{1}-Forms (Continued)}%
+\label{sec:smooth_1_forms_continued}
+% section smooth_1_forms_continued
+
+Given a smooth function $f$ on $U$, there is a way for us to obtain a $1$-form on $U$:
+
+\begin{defn}[Exterior Derivative of $f$ ($1$-form)]\index{Exterior Derivative}\label{defn:exterior_derivative_of_f_1_form_}
+  Let $f \in C^\infty(U)$. We define $\dif{f} \in \Gamma(T^* U)$ by
+  \begin{equation*}
+    (\dif{f})(X) = Xf \in C^\infty(U)
+  \end{equation*}
+  for all $X \in \Gamma(TU)$. That is, for all $p \in U$, we have $(\dif{f})_p(X_p) = (Xf)_p
+  = X_p f$. This one form is called the \hlnoteb{exterior derivative of $f$}.
+\end{defn}
+
+\begin{note}
+  It is clear that $(\dif{f})_p : T_p \mathbb{R}^n \to \mathbb{R}$ is linear, since
+  \begin{align*}
+    (\dif{f})_p(a X_p + b Y_p) &= (aX_p + bY_p) f = aX_p f + bY_p f \\
+                               &= a(\dif{f})_p(X_p) + b(\dif{f})_p(Y_p).
+  \end{align*}
+
+  Also, $\dif{f}$ is smooth since $(\dif{f})(X) = Xf$ is smooth for all smooth $X$.
+\end{note}
+
+If $f \in C^\infty(U)$, then $f : U \subseteq \mathbb{R}^n \to \mathbb{R}$ is smooth, so its
+\hldefn{Jacobian} (or \hldefn{differential}) at  $p \in U$ has already been defined and was
+denoted $(\dif{f})_p$. It is linear from $\mathbb{R}^n$ to $\mathbb{R}$, which is representative
+by a $1 \times n$ matrix. Of course, we need to clarify why we claimed that $\dif{f}$ is a
+Jacobian.
+
+\begin{propo}[Exterior Derivative as the Jacobian]\label{propo:exterior_derivative_as_the_jacobian}
+  Under the \hyperref[propo:canonical_bijection_from_t_p_r_n_to_r_n_]{canonical isomorphism}
+  between $T_p \mathbb{R}^n$ and $\mathbb{R}^n$, the exterior derivative $(\dif{f})_p :
+  T_p \mathbb{R}^n \to \mathbb{R}$ of $f$ at $p$ and the differential $(\D f)_p : \mathbb{R}^n
+  \to \mathbb{R}$ coincide. Moreover, wrt the standard $1$-forms on $\mathbb{R}^n$, we have
+  \begin{equation}\label{eq:exterior_derivative_as_a_differential}
+    \dif{f} = \frac{\partial f}{\partial x^i} \hat{e}^i.
+  \end{equation}
+\end{propo}
+
+\begin{proof}
+  For the $1$-form $\dif{f}$, we have
+  \begin{equation*}
+    (\dif{f})_p(\hat{e}_i)_p = (\hat{e}_i)_p f = \frac{\partial f}{\partial x^i} \at{p}{},
+  \end{equation*}
+  so by \cref{eq:1_forms_with_coefficients_as_differentials}, we have
+  \begin{equation*}
+    \dif{f} = \frac{\partial f}{\partial x^i} \hat{e}^i,
+  \end{equation*}
+  which is \cref{eq:exterior_derivative_as_a_differential}.
+
+  Now the differential $(\D f)_p : \mathbb{R}^n \to \mathbb{R}$ is the $1 \times n$ matrix
+  \begin{equation*}
+    (\D f)_p = \begin{pmatrix}
+      \frac{\partial f}{\partial x^1} \at{p}{} & \hdots & \frac{\partial f}{\partial x^n} \at{p}{}
+    \end{pmatrix}.
+  \end{equation*}
+  Thus $(\D f)_p (\hat{e}_i)_p = \frac{\partial f}{\partial x^i} \at{p}{}$, so as an element of
+  $(\mathbb{R}^n)^*$, we can write $(\D f)_p = \frac{\partial f}{\partial x^i}\at{p}{}
+  (\hat{e}^i)_p$. Since $T_p$ is an isomorphism from $\mathbb{R}^n$ to $T_p \mathbb{R}^n$ taking
+  $\hat{e}_i$ to $(\hat{e}_i)_p$, the dual map $(T_p)^*$ is an isomorphism from $T_p^* \mathbb{R}^n
+  \to ( \mathbb{R}^n )^*$, taking $(\hat{e}^i)_p$ to $\hat{e}_i$. Thus we observe that
+  \begin{equation*}
+    (\dif{f})_p : T_p^* \mathbb{R}^n \to \mathbb{R} \text{ at } p
+  \end{equation*}
+  is brought to the same basis as
+  \begin{equation*}
+    (\D f)_p : \mathbb{R}^n \to \mathbb{R} \text{ at } p,
+  \end{equation*}
+  which is what we needed to show.\qed\
+\end{proof}
+
+\newthought{Now} consider the smooth functions $x^j$ on $\mathbb{R}^n$. We obtain a $1$-form
+$\dif{x^j}$, which is expressible as $\dif{x^j} = \alpha_i \hat{e}^i$ for some smooth functions
+$\alpha_i$ on $\mathbb{R}^n$. By \cref{eq:1_forms_with_coefficients_as_differentials}, we have
+$\alpha_i = (\dif{x}^j)(\frac{\partial}{\partial x^i}) = \frac{\partial x^j}{\partial x^i} =
+\delta_i^j$. So $\dif{x^j} = \delta_i^j \hat{e}^i = \hat{e}^j$. We have thus showed that
+\begin{equation}\label{eq:standard_1_forms_as_exterior_derivatives}
+  \dif{x^j} = \hat{e}^j \text{ for all } j \in \{ 1, \ldots, n \}.
+\end{equation}
+
+\cref{eq:standard_1_forms_as_exterior_derivatives} tells us that the standard $1$-forms $\hat{e}^j$
+on $\mathbb{R}^n$ are given by the exterior derivatives of the standard coordinate functions $x^j$,
+and consequently the action of $\hat{e}^j = \dif{x^j}$ on a vector field $X$ is by $\hat{e}^j(X)
+= (\dif{x^j})(X) = X x^j$. Thus from hereon, we shall always write the standard $1$-forms on
+$\mathbb{R}^n$ as $\{ \dif{x^1}, \ldots, \dif{x^n} \}$.
+
+So by putting \cref{eq:exterior_derivative_as_a_differential} and
+\cref{eq:standard_1_forms_as_exterior_derivatives} together, we obtain the familiar
+\begin{equation*}
+  \dif{f} = \frac{\partial f}{\partial x^i} \dif{x^i},
+\end{equation*}
+which is the `\hlnoteb{differential}' of $f$ from multivariable calculus that is usually not
+as rigourously defined in earlier courses.
+
+\newthought{We are now} equipped with nice interpretations of the standard vector fields
+and standard $1$-forms on $\mathbb{R}^n$. From \cref{eq:standard_basis_for_standard_vector_fields},
+we know that standard vector fields are also partial differential operators 
+$\frac{\partial}{\partial x^i}$ on $C^\infty(\mathbb{R}^n)$, where
+\begin{equation*}
+  \hat{e}_i f = \frac{\partial f}{\partial x^i},
+\end{equation*}
+and \cref{eq:standard_1_forms_as_exterior_derivatives} tells us the standard $1$-forms should be
+regarded as $1$-forms $\dif{x^j}$, whose action on a vector field $X$ is the derivation of $X$
+on the function $x^j$. In other words,
+\begin{equation*}
+  \hat{e}^j(X) = (\dif{x^j})(X) = X x^j.
+\end{equation*}
+Notice that if $X = \frac{\partial}{\partial x^i}$,
+\begin{equation*}
+  (\dif{x^j})\left( \frac{\partial}{\partial x^j} \right) = \frac{\partial x^j}{\partial x^i}
+    = \delta_i^j,
+\end{equation*}
+which gives us that at every point $p \in \mathbb{R}^n$, the basis $\{ (\hat{e}^1)_p, \ldots,
+  (\hat{e}^n)_p \}$ of $T_p^* \mathbb{R}^n$ is the \hldefn{dual basis} of the basis $\{
+(\hat{e}_1)_p, \ldots, (\hat{e}_n)_p \}$ of $T_p \mathbb{R}^n$. 
+
+% section smooth_1_forms_continued (end)
+
+\section{Smooth Forms on \texorpdfstring{$\mathbb{R}^n$}{Rn}}%
+\label{sec:smooth_forms_on_r_n_}
+% section smooth_forms_on_r_n_
+
+We shall continue the same game and define a smooth $k$-forms.
+
+\begin{defn}[Space of $k$-Forms on $\mathbb{R}^n$]\index{Space of $k$-Forms on $\mathbb{R}^n$}\label{defn:space_of_k_forms_on_r_n_}
+  Let $p \in \mathbb{R}^n$ and $1 \leq k \leq n$. The space $\Lambda^k(T_p^* \mathbb{R}^n)$ is
+  defined as the \hlnoteb{space of $k$-forms} on $\mathbb{R}^n$ at $p$.
+\end{defn}
+
+\begin{remark}
+  If $k = 0$, we before, we define $\Lambda^0 (T_p^* \mathbb{R}^n) = \mathbb{R}$.
+\end{remark}
+
+\begin{note}
+  For any element $\eta_p \in \Lambda(T_p^* \mathbb{R}^n)$, $\eta_p$ is $k$-linear
+  and skew-symmetric, i.e.
+  \begin{equation*}
+    \eta_p : \underbrace{(T_p \mathbb{R}^n) \times \hdots \times (T_p \mathbb{R}^n)
+      }_{k \text{ copies }} \to \mathbb{R}.
+  \end{equation*}
+\end{note}
+
+\begin{defn}[$k$-Forms at $p$]\index{$k$-Forms at $p$}\label{defn:_k_forms_at_p_}
+  Elements of $\Lambda^k(T_p^* \mathbb{R}^n)$ are called \hlnoteb{$k$-forms at $p$}.
+\end{defn}
+
+Again, we want to attach an element $\eta_p \in \Lambda^k(T_p^* \mathbb{R}^n)$ at every $p \in
+\mathbb{R}^n$, in a smoothly varying way. Since $\Lambda^0(T_p^* \mathbb{R}^n) = \mathbb{R}$,
+a $0$-form on $\mathbb{R}^n$ is a smoothly varying assignment of a \hlnotea{real number} to every
+$p \in \mathbb{R}^n$, i.e. a $0$-form on $\mathbb{R}^n$ is a very familiar object: they are just
+\hlnotea{smooth functions} on $\mathbb{R}^n$.
+
+For $1 \leq k \leq n$, let $\Lambda^k(T^* \mathbb{R}^n) = \bigcup_{p \in \mathbb{R}^n} 
+\Lambda^k(T_p^* \mathbb{R}^n)$, which is caled the \hldefn{bundle of $k$-forms} on $\mathbb{R}^n$.
+For us, this is just a set.
+
+\begin{defn}[$k$-Form on $\mathbb{R}^n$]\index{$k$-Form on $\mathbb{R}^n$}\label{defn:_k_form_on_r_n_}
+  Let $1 \leq k \leq n$. A \hlnoteb{$k$-form} $\eta$ on $\mathbb{R}^n$ is a map $\eta : 
+  \mathbb{R}^n \to \Lambda^k(T^* \mathbb{R}^n)$ such that $\eta(p) \in \Lambda^k(T_p^* 
+  \mathbb{R}^n)$ for all $p \in \mathbb{R}^n$. We will always denote $\eta(p)$ by $\eta_p$.
+\end{defn}
+
+Recall from our discussions in \cref{sec:smooth_vector_fields} and \cref{sec:smooth_1_forms},
+\begin{equation*}
+  \left\{ \frac{\partial}{\partial x^1} \at{p}{}, \ldots, \frac{\partial}{\partial x^n} \at{p}{}  \right\}
+\end{equation*}
+is the standard basis of $T_p \mathbb{R}^n$, with dual basis
+\begin{equation*}
+  \left\{ \dif{x^1}\at{p}{}, \ldots, \dif{x^n}\at{p}{} \right\}
+\end{equation*}
+if $T_p^* \mathbb{R}^n$. Then by \cref{thm:basis_of_lambda_k_v_}, the set
+\begin{equation*}
+  \left\{ \dif{x^{i_1}}\at{p}{} \land \hdots \land \dif{x^{i_k}}\at{p}{} : 1 \leq i_1 < \hdots < i_k\leq n \right\}
+\end{equation*}
+is a basis for $\Lambda^k(T_p^* \mathbb{R}^n)$. We can then define $k$-forms $\dif{x^{i_1}} \land
+\hdots \land \dif{x^{i_k}}$ on $\mathbb{R}^n$ by
+\begin{equation*}
+  (\dif{x^{i_1}} \land \hdots \land if  \dif{x^{i_k}})_p = \dif{x^{i_1}}_p \land \hdots \land \dif{x^{i_k}}_p.
+\end{equation*}
+We shall call these the \hldefn{standard $k$-forms} on $\mathbb{R}^n$.
+
+Then for any $k$-form $\eta$ on $\mathbb{R}^n$, since $\eta_p \in \Lambda^k(T_p^* \mathbb{R}^n)$,
+we can write
+\begin{align}
+  \eta_p 
+  &= \sum_{j_1 < \hdots < j_k} \eta_{j_1, \ldots, j_k}(p)
+  \dif{x^{j_1}}\at{p}{} \land \hdots \land \dif{x^{j_k}} \at{p}{} \nonumber \\
+  &= \frac{1}{k!} \eta_{j_1, \ldots, j_k}(p) \dif{x^{j_1}} \at{p}{} \land
+  \hdots \land \dif{x^{j_k}} \at{p}{} \label{eq:k_forms_using_differentials_eval_at_p}
+\end{align}
+where each $\eta_{j_1, \ldots, j_k} : \mathbb{R}^n \to \mathbb{R}$ is a function. More succinctly,
+\begin{equation}\label{eq:k_forms_using_differentials}
+  \eta 
+    = \sum_{j_1 < \ldots < j_k} \eta_{j_1, \ldots, j_k} 
+      \dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}}
+    = \frac{1}{k!} \eta_{j_1, \ldots, j_k} \dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}},
+\end{equation}
+for some uniquely determined functions $\eta_{j_1, \ldots, j_k} : \mathbb{R}^n \to \mathbb{R}$,
+which are skew-symmetric in their $k$ indices $j_1, \ldots, j_k$. The functions $\eta_{j_1,
+\ldots, j_k} : \mathbb{R}^n \to \mathbb{R}$ are called the \hldefn{component functions} of the
+$k$-form $\eta$ with respect to the standard $k$-forms. We can now give our first definition
+of smoothness.
+
+\begin{defn}[Smooth $k$-Forms on $\mathbb{R}^n$]\index{Smooth $k$-Forms on $\mathbb{R}^n$}\label{defn:smooth_k_forms_on_r_n_}
+  We say that a \hlnoteb{$k$-form} $\eta$ on $\mathbb{R}^n$ is \hlnoteb{smooth} if the component
+  functions $\eta_{j_1, \ldots, j_k} : \mathbb{R}^n \to \mathbb{R}$ as defined in 
+  \cref{eq:k_forms_using_differentials} are all smooth funtions. In other words, each
+  $\eta_{j_1, \ldots, j_k} \in C^\infty(\mathbb{R}^n)$.
+\end{defn}
+
+\begin{note}
+  A smooth $k$-form is also called a \hlnotea{differential $k$-form}, but we will not be using
+  this terminology in this course.
+\end{note}
+
+Let $\eta$ be a $k$-form that is not necessarily smooth. Then for any $p \in \mathbb{R}^n$, we know
+\begin{equation*}
+  \eta_p : \underbrace{(T_p \mathbb{R}^n) \times \hdots \times (T_p \mathbb{R}^n)}_{k \text{ copies }} \to \mathbb{R}.
+\end{equation*}
+So if $X_1, \ldots, X_k$ are arbitrary vector fields on $\mathbb{R}^n$ that are not necessarily
+smooth, we get a scalar
+\begin{equation*}
+  \eta_p((X_1)_p, \ldots, (X_k)_p) \in \mathbb{R}.
+\end{equation*}
+Thus we can define a function $\eta(X_1, \ldots, X_k) : \mathbb{R}^n \to \mathbb{R}$ by
+\begin{equation}\label{eq:k_forms_without_basis}
+  (\eta(X_1, \ldots, X_k))(p) = \eta_p((X_1)_p, \ldots, (X_k)_p).
+\end{equation}
+
+\begin{propo}[Equivalent Definition of Smothness of $k$-Forms]\label{propo:equivalent_definition_of_smothness_of_k_forms}
+  The $k$-form $\eta$ on $\mathbb{R}^n$ is smooth iff $\eta(X_1, \ldots, X_k) \in 
+  C^\infty(\mathbb{R}^n)$ for all $X_1, \ldots, X_k \in \Gamma(T \mathbb{R}^n)$.
+\end{propo}
+
+\begin{proof}
+  For $l = 1, \ldots, k$, write $X_l = X_l^{l_i} \frac{\partial}{\partial x^{l_i}}$, and
+  $\eta = \frac{1}{k!} \eta_{j_1, \ldots, j_k} \dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}}$.
+  Then with \cref{eq:k_forms_using_differentials_eval_at_p} and 
+  \cref{eq:another_alt_of_a_k_form_scalar}, we have that
+  \begin{align*}
+    (\eta(X_1, \ldots, X_k))(p)
+      &= \eta_p((X_1)_p, \ldots, (X_k)_p) \\
+      &= \eta_p\left(X_1^{l_1}(p) \frac{\partial}{\partial x^{l_1}}\at{p}{}, \ldots, X_k^{l_k}(p) \frac{\partial}{\partial x^{l_k}}\at{p}{}\right) \\
+      &= X_l^{l_1}(p) \hdots X_k^{l_k}(p) \eta_p 
+      \left( \frac{\partial}{\partial x^{l_1}}\at{p}{}, \ldots, \frac{\partial}{\partial x^{l_k}}\at{p}{} \right) \\
+      &= X_1^{l_1}(p) \hdots X_k^{l_k}(p) \eta_{l_1, \ldots, l_k}(p).
+  \end{align*}
+  Since this holds for an arbitrary $p \in \mathbb{R}^n$, we have that
+  \begin{equation}\label{eq:k_forms_without_basis_eq1}
+    \eta(X_1, \ldots, X_k) = X_1^{l_1} \hdots X_k^{l_k} \eta_{l_1, \ldots, l_k}.
+  \end{equation}
+  So the function $\eta(X_1, \ldots, X_k) : \mathbb{R}^n \to \mathbb{R}$ is in fact $X_1^{l_1}
+  \hdots X_k^{l_k} \eta_{l_1, \ldots, l_k}$.
+
+  Suppose that $\eta$ is smooth. Then each of the $\eta_{j_1, \ldots, j_k}$ is smooth, and so in
+  particular $X_1^{l_1} \hdots X_k^{l_k} \eta_{l_1, \ldots, l_k}$ is smooth for smooth vector
+  fields $X_1, \ldots, X_k$.
+
+  Conversely, sps $\eta(X_1, \ldots, X_k)$ is smooth for any smooth $X_1, \ldots, X_k$. Then
+  consider $X_l^{l_i} = \delta^{l_i j_i}$. Then
+  \begin{equation*}
+    \eta(X_1, \ldots, X_k) = \eta_{l_1, \ldots, l_k} \delta^{l_1 j_1} \hdots \delta^{l_k j_k} 
+      = \eta_{j_1, \ldots, j_k}
+  \end{equation*}
+  is smooth.\qed\
+\end{proof}
+
+\begin{remark}
+  The proof above provides us a very useful observation. Let 
+  $X_i = \frac{\partial}{\partial x^{j_i}}$ be the $j_i$\textsuperscript{th} standard vector
+  field on $\mathbb{R}^n$. Then $X = X_i^{l_i} \frac{\partial}{\partial x^{l_i}}$ where
+  $X_i^{l_i} = \delta^{l_i j_i}$. Then if $\eta = \frac{1}{k!} \eta_{j_1, \ldots, j_k}
+  \dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}}$ is a $k$-form, we have that 
+  $\eta(X_1, \ldots, X_k) = \eta_{j_1, \ldots, j_k}$. In other words,
+  \begin{equation}\label{eq:k_forms_using_only_the_vector_fields}
+    \eta = \frac{1}{k!} \eta_{j_1, \ldots, j_k} \dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}}
+    \text{ where } \eta_{j_1, \ldots, j_k} 
+    = \eta \left( \frac{\partial}{\partial x^{j_1}}, \ldots, \frac{\partial}{\partial x^{j_k}} \right)
+  \end{equation}
+\end{remark}
+
+Now if $U \subseteq \mathbb{R}^n$ is open, we define a smooth $k$-form on $U$ to be an element
+$\eta = \frac{1}{k!} \eta_{j_1, \ldots, j_k} \dif{x^{j_1}} \land \dots \land \dif{x^{j_k}}$, where
+$\eta_{j_1, \ldots, j_k} \in C^\infty(U)$ is smooth. We need $U$ to be able to define smoothness
+at all points of $U$. Again, it is clear that 
+\cref{propo:equivalent_definition_of_smothness_of_k_forms} generalizes to say that $k$-forms on $U$
+are smooth iff $\eta(X_1, \ldots, X_k) \in C^\infty(U)$ for all $X_1, \ldots, X_k \in \Gamma(TU)$.
+
+We shall write $\Gamma(\Lambda^k(T^* \mathbb{R}^n))$ for the set of smooth $k$-forms on 
+$\mathbb{R}^n$, and more generally $\Gamma(\Lambda^k(T^* U))$ for the set of smooth $k$-forms
+on $U$. The set $\Gamma(\Lambda^k(T^* U))$ is a real vector space, where the vector space structure
+is given by
+\begin{equation*}
+  (a \eta + b \zeta)_p = a \eta_p + b \zeta_p
+\end{equation*}
+for all $\eta, \zeta \in \Gamma(\Lambda^k(T^* U))$ and $a, b \in \mathbb{R}$. Again, this space is
+\hlnotea{infinite-dimensional}. Moreover, given $\eta \in \Gamma(\Lambda^k(T^* U))$ and 
+$h \in C^\infty(U)$, $h \eta$ is another smooth $k$-form on $U$, defined as follows:
+
+Let
+\begin{equation*}
+  \eta = \frac{1}{k!} \eta_{j_1, \ldots, j_k} \dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}}.
+\end{equation*}
+Then
+\begin{equation*}
+  h \eta = \frac{1}{k!} (h\eta_{j_1, \ldots, j_k}) \dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}},
+\end{equation*}
+where $h\eta_{j_1, \ldots, j_k}$ is the product of elements of $C^{\infty}(U)$. Or equivalently,
+we can define
+\begin{equation}\label{eq:k_form_with_scalar}
+  (h \eta)_p = h(p) \eta_p.
+\end{equation}
+We say that $\Gamma(\Lambda^k(T^* U))$ is a \hldefn{module} over the ring $C^\infty(U)$. Also,
+note that if $k = 0$, we have $\Gamma(\Lambda^0(T^* U)) = C^\infty(U)$.
+
+\begin{note}[Notation]
+  To minimize notation, we shall write
+  \begin{equation*}
+    \Omega^k(U) = \Gamma(\Lambda^k(T*U))
+  \end{equation*}
+  to be the space of smooth $k$-forms on $U$. Note that $\Omega^0(U) = C^\infty(U)$.
+\end{note}
+
+% section smooth_forms_on_r_n_ (end)
+
+% chapter lecture_12_feb_01st (end)
 
 \appendix
 
