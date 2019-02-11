@@ -32,11 +32,23 @@
 
 \nocite{karigiannis2019}
 
-This course is a post-requisite of MATH 235/245 (\href{http://www.ucalendar.uwaterloo.ca/1819/COURSE/course-MATH.html\#MATH235}{Linear Algebra II}) and AMATH 231 (\href{http://www.ucalendar.uwaterloo.ca/1819/COURSE/course-AMATH.html#AMATH231}{Calculus IV}) or MATH 247 (\href{http://www.ucalendar.uwaterloo.ca/1819/COURSE/course-MATH.html#MATH247}{Advanced Calculus III}). In other words, familiarity with vector spaces and calculus is expected.
+This course is a post-requisite of MATH 235/245 
+(\href{http://www.ucalendar.uwaterloo.ca/1819/COURSE/course-MATH.html\#MATH235}{Linear Algebra II})
+and AMATH 231 
+(\href{http://www.ucalendar.uwaterloo.ca/1819/COURSE/course-AMATH.html#AMATH231}{Calculus IV})
+or MATH 247 
+(\href{http://www.ucalendar.uwaterloo.ca/1819/COURSE/course-MATH.html#MATH247}{Advanced Calculus III}).
+In other words, familiarity with vector spaces and calculus is expected.
 
-The course is spiritually separated into two parts. The first part shall be called \textbf{Exterior Differential Calculus}, which allows for a natural, metric-independent generalization of \hlnotea{Stokes' Theorem}, \hlnotea{Gauss's Theorem}, and \hlnotea{Green's Theorem}. Our end goal of this part is to arrive at Stokes' Theorem, that renders the \hlnotea{Fundamental Theorem of Calculus} as a special case of the theorem.
+The course is spiritually separated into two parts. The first part shall be called 
+\textbf{Exterior Differential Calculus}, which allows for a natural, metric-independent
+generalization of \hlnotea{Stokes' Theorem}, \hlnotea{Gauss's Theorem}, and 
+\hlnotea{Green's Theorem}. Our end goal of this part is to arrive at Stokes' Theorem,
+that renders the \hlnotea{Fundamental Theorem of Calculus} as a special case of the theorem.
 
-The second part of the course shall be called in the name of the course: \textbf{Differential Geometry}. This part is dedicated to studying geometry using techniques from differential calculus, integral calculus, linear algebra, and multilinear algebra.
+The second part of the course shall be called in the name of the course: 
+\textbf{Differential Geometry}. This part is dedicated to studying geometry using techniques from
+differential calculus, integral calculus, linear algebra, and multilinear algebra.
 
 % chapter preface (end)
 
@@ -1098,7 +1110,7 @@ basis vectors $e^1, \ldots, e^n$.
   be anything / undefined.
 \end{note}
 
-\begin{remark}
+\begin{remark}\label{remark:wedge_product_operation_properties}
   \begin{enumerate}
     \item $\alpha \wedge \beta$ is linear in $\alpha$ and linear in $\beta$ by its
       definition, i.e. for any $t_1, t_2 \in \mathbb{R}$,
@@ -2990,6 +3002,191 @@ note that if $k = 0$, we have $\Gamma(\Lambda^0(T^* U)) = C^\infty(U)$.
 % section smooth_forms_on_r_n_ (end)
 
 % chapter lecture_12_feb_01st (end)
+
+\chapter{Lecture 13 Feb 4th}%
+\label{chp:lecture_13_feb_4th}
+% chapter lecture_13_feb_4th
+
+\section{Wedge Product of Smooth Forms}%
+\label{sec:wedge_product_of_smooth_forms}
+% section wedge_product_of_smooth_forms
+
+We can now define \hyperref[sec:wedge_product_of_forms]{wedge products} on these smooth $k$-forms.
+
+\begin{defn}[Wedge Product of $k$-Forms]\index{Wedge Product of $k$-Forms}\label{defn:wedge_product_of_k_forms}
+  Let $\eta \in \Omega^k(U)$ and let $\zeta \in \Omega^l(U)$. Then the \hlnoteb{wedge product}
+  $\eta \land \zeta$ is an element of $\Omega^{k + l}(U)$ defined by
+  \begin{equation*}
+    (\eta \land \zeta)_p = \eta_p \land \zeta_p.
+  \end{equation*}
+\end{defn}
+
+By the properties of wedge products on forms at $p$ for any $p \in U$, we may generalize the
+properties that were shown on page \cref{remark:wedge_product_operation_properties}, which
+shall be shown here:
+
+\begin{note}\label{note:wedge_product_operation_properties_generalized}
+  Let $\eta, \zeta \in \Omega^k(U)$ and $\rho \in \Omega^l(U)$. Let $f, g \in C^\infty(U)$. Then
+  \begin{equation*}
+    (f \eta + g \zeta) \land \rho = f \eta \land \rho + g \zeta \land \rho.
+  \end{equation*}
+  Similarly,
+  \begin{equation*}
+    \rho \land (f \eta + g \zeta) = f \rho \land \eta + g \rho \land \zeta.
+  \end{equation*}
+  These show that the wedge product of smooth forms is linear in each argument.
+
+  Further, we have that the wedge product of smooth forms is associative: we have
+  \begin{equation*}
+    (\zeta \land \eta) \land \rho = \zeta \land (\eta \land \rho),
+  \end{equation*}
+  for any smooth forms $\eta, \zeta, \rho$ of any degree.
+
+  Finally, wedge product of smooth forms is also \hldefn{skew-commutative}:
+  \begin{equation}\label{eq:skew_commutativity_of_wedge_prod_of_smooth_forms}
+    \zeta \land \eta = (-1)^{\abs{\eta}\abs{\zeta}} \eta \land \zeta.
+  \end{equation}
+  In particular, if $\abs{\eta}$ is odd, then 
+  \cref{eq:skew_commutativity_of_wedge_prod_of_smooth_forms} says that $\eta \land \eta = 0$.
+\end{note}
+
+These properties makes it easier to compute wedge products of smooth forms.
+
+\begin{eg}
+  Let $\eta = y \dif{x} + \sin z \dif{y}$ and $\zeta = x^3 \dif{x} \land \dif{z}$. Then we have
+  \begin{align*}
+    \eta \land \zeta &= (y \dif{x} + \sin z \dif{y}) \land (x^3 \dif{x} \land \dif{z}) \\
+                     &= x^3 y \dif{x} \land \dif{x} \land \dif{z} 
+                      + x^3 \sin z \dif{y} \land \dif{x} \land \dif{z} \\
+                     &= - x^3 \sin z \dif{x} \land \dif{y} \land \dif{z}.
+  \end{align*}
+\end{eg}
+
+% section wedge_product_of_smooth_forms (end)
+
+\section{Pullback of Smooth Forms}%
+\label{sec:pullback_of_smooth_forms}
+% section pullback_of_smooth_forms
+
+Recall that following \cref{sec:wedge_product_of_forms} (wedge product of forms), we introduced
+pullback of forms (\cref{sec:pullback_of_forms}). We shall be introducing an analogue of pullbacks
+for smooth forms.
+
+Let $k \geq 1$. From \cref{sec:pullback_of_forms}, if $S \in L(V< W)$, then $S^* : \Lambda^k(W^*)
+\to \Lambda^k(V^*)$ is an induced linear map that we called the pullback, defined by
+\begin{equation}\label{eq:normal_pullback_as_guide}
+  (S^* \alpha)(v_1, \ldots, v_k) = \alpha(Sv_1, \ldots, Sv_k)
+\end{equation}
+for all $\alpha \in \Lambda^k(W^*)$. There is, however, some preliminary results that we need to
+understand before generalizing the above.
+
+Let $F : \mathbb{R}^n \to \mathbb{R}^m$ be a smooth map, $x = (x^1, \ldots, x^n)$ for coordinates
+on the domain $\mathbb{R}^n$ and $y = (y^1, \ldots, y^m)$ for coordinates on the codomain
+$\mathbb{R}^m$. Thus for $p \in \mathbb{R}^n$, a basis for $T_p \mathbb{R}^n$ is given by
+$\mathcal{B} = \left\{ \frac{\partial}{\partial x^i}\at{p}{}, \ldots,
+\frac{\partial}{\partial x^n}\at{p}{} \right\}$ and, for $q \in \mathbb{R}^m$, a basis for $T_q
+\mathbb{R}^m$ is given by $\mathcal{C} = \left\{ \frac{\partial}{\partial y^1}\at{q}{},
+\ldots, \frac{\partial}{\partial y^m}\at{q}{} \right\}$. We write $y = F(x) = (F^1(x), \ldots,
+F^m(x))$.
+
+For any $p \in \mathbb{R}^n$, we have an induced linear map $(\dif{F})_p : T_p \mathbb{R}^n \to
+T_{F(p)} \mathbb{R}^m$, which we defined in A2. The definition shall be restated here. If $X_p
+= [\phi]_p \in T_p \mathbb{R}^n$, then $(\dif{F})_p X_p = [F \circ \phi]_{F(p)}$. We showed that
+the $m \times n$ matrix for $(\dif{F})_p$ wrt the bases $\mathcal{B}$ and $\mathcal{C}$ is
+$(\D F)_p$, the \hyperref[defn:differential]{Jacobian} of $F$ at $p$. That is,
+\begin{equation}\label{eq:linear_map_across_tangent_spaces_over_f}
+  (\dif{F})_p \frac{\partial}{\partial x^i} \at{p}{} 
+  = ((\D F)_p)_i^j \frac{\partial}{\partial y^j} \at{F(p)}{}
+  = \frac{\partial F^j}{\partial x^i} \at{p}{} \frac{\partial}{\partial y^j} \at{F(p)}{}.
+\end{equation}
+The element $(\dif{F})_p v_p \in T_{F(p)} \mathbb{R}^m$ is called the \hldefn{pushforward} of the
+element $v_p \in T_p \mathbb{R}^n$ by the map $F$.
+
+We can now talk about the pullback of smooth $k$-forms for $k \geq 1$. Given an element
+$\eta_{F(p)} \in \Lambda^k(T_{F(p)}^* \mathbb{R}^m)$, we can pull it back by $(\dif{F})_p \in
+L(T_p \mathbb{R}^n, T_{F(p)} \mathbb{R}^m)$ to an element $(\dif{F})_p^* \eta_{F(p)} \in
+\Lambda^k(T_p^* \mathbb{R}^n)$ as in \cref{eq:normal_pullback_as_guide}, where we let $T = T_p
+\mathbb{R}^n$ and $W = T_{F(p)} \mathbb{R}^m$. In other words,
+\begin{equation*}
+  ((\dif{F})_p^* \eta_{F(p)})((X_1)_p, \ldots, (X_k)_p)
+  = \eta_{F(p)} ((\dif{F})_p(X_1)_p, \ldots, (\dif{F})_p(X_k)_p)
+\end{equation*}
+for all $(X_1)_p, \ldots, (X_k)_p \in T_p \mathbb{R}^n$.
+
+\begin{defn}[Pullback by $F$ of a $k$-Form]\index{Pullback}\label{defn:pullback_by_f_of_a_k_form}
+  Let $F : \mathbb{R}^n \to \mathbb{R}^m$ be a smooth map. Let $\eta$ be a $k$-form on
+  $\mathbb{R}^m$. The \hlnoteb{pullback by $F$ of $\eta$} is a $k$-form $F^* \eta$ on
+  $\mathbb{R}^n$ defined by $(F^* \eta)_p = (\dif{F})_p^* \eta_{F(p)}$. Explicitly so, $F^* \eta$
+  is the $k$-form on $\mathbb{R}^n$ defined by
+  \begin{equation*}
+    (F^* \eta)_p ((X_1)_p, \ldots, (X_k)_p)
+    = \eta_{F(p)} ((\dif{F})_p(X_1)_p, \ldots, (\dif{F})_p(X_k)p).
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[Pullbacks Preserve Smoothness]\label{propo:pullbacks_preserve_smoothness}
+  The pullback by a smooth map $F : \mathbb{R}^n \to \mathbb{R}^m$ takes smooth $k$-forms to
+  smooth $k$-forms, i.e. if $\eta \in \Omega^k(\mathbb{R}^m)$, then $F^* \eta \in \Omega^k(
+  \mathbb{R}^n)$.
+\end{propo}
+
+\begin{proof}
+  It suffices to show that the functions
+  \begin{equation*}
+    (F^* \eta)_{j_1, \ldots, j_k} = (F^* \eta) \left( \frac{\partial}{\partial x^{j_1}}, \ldots,
+    \frac{\partial}{\partial x^{j_k}} \right)
+  \end{equation*}
+  are smooth on $\mathbb{R}^n$. By \cref{eq:linear_map_across_tangent_spaces_over_f}, we have
+  \begin{align*}
+    &(F^* \eta)_p \left( \frac{\partial}{\partial x^{j_1}} \at{p}{}, \ldots,
+      \frac{\partial}{\partial x^{j_k}}\at{p}{} \right) \\
+    &= \eta_{F(p)} \left( (\dif{F})_p \frac{\partial}{\partial x^{j_1}}\at{p}{}, \ldots,
+      (\dif{F})_p \frac{\partial}{\partial x^{j_k}}\at{p}{} \right)
+      \enspace \because \text{ definition }\\
+    &= \eta_{F(p)} \left( \frac{\partial F^{l_1}}{\partial x^{j_1}}\at{p}{} 
+      \frac{\partial}{\partial y^{l_1}}\at{F(p)}{}, \ldots,
+      \frac{\partial F^{l_k}}{\partial x^{j_k}}\at{p}{}
+    \frac{\partial}{\partial y^{l_k}}\at{F(p)}{} \right)
+      \enspace \because \text{ \cref{eq:linear_map_across_tangent_spaces_over_f} } \\
+    &= \left( \frac{\partial F^{l_1}}{\partial x^{j_1}}\at{p}{} \hdots
+      \frac{\partial F^{l_k}}{\partial x^{j_k}}\at{p}{} \right) \eta_{F(p)}
+      \left( \frac{\partial}{\partial y^{l_1}}\at{F(p)}{}, \ldots,
+      \frac{\partial}{\partial y^{l_k}}\at{F(p)}{} \right)
+      \because \text{ linearity } \\
+    &= \left( \frac{\partial F^{l_1}}{\partial x^{j_1}} \hdots 
+      \frac{\partial F^{l_k}}{\partial x^{j_k}} \right)(p) \cdot \eta \left( 
+      \frac{\partial}{\partial y^{l_1}}, \ldots, \frac{\partial}{\partial xy^{l_k}}
+      \right)(F(p)) \because \text{ rewrite } \\
+    &= \left( \frac{\partial F^{l_1}}{\partial x^{j_1}} \hdots
+      \frac{\partial F^{l_k}}{\partial x^{j_k}} ( \eta_{l_1, \ldots, l_k} \circ F )
+      \right)(p) \enspace \because \text{ product of functions }
+  \end{align*}
+  Since $p \in \mathbb{R}^n$ was arbitrary, we have
+  \begin{equation*}
+    (F^* \eta)_{j_1, \ldots, j_k} = \frac{\partial F^{l_1}}{\partial x^{j_1}} \hdots
+      \frac{\partial F^{l_k}}{\partial x^{j_k}} (\eta_{l_1, \ldots, l_k} \circ F).
+  \end{equation*}
+  By assumption, we have that $\eta$ is smooth, and so since $F$ is always assumed to be smooth,
+  we have that $(F^* \eta)_{j_1, \ldots, j_k}$ is smooth, as required.\qed\
+\end{proof}
+
+\begin{propo}[Different Linearities of The Pullback]\label{propo:different_linearities_of_the_pullback}
+  Let $F : \mathbb{R}^n \to \mathbb{R}^m$ be smooth. Let $k, l \geq 1$. Let $\eta, \zeta \in
+  \Omega^k(\mathbb{R}^m)$, $\rho \in \Omega^l(\mathbb{R}^m)$, and let $a, b \in \mathbb{R}$. Then
+  \begin{equation}\label{eq:different_linearities_of_the_pullback}
+    F^* (a\eta + b\zeta) = aF^* \eta + bF^* \zeta, \quad
+    F^*(\eta \land \rho) = (F^* \eta) \land (F^* \rho).
+  \end{equation}
+\end{propo}
+
+\begin{proof}
+  The proof for this follows almost immediately from \cref{propo:properties_of_the_pullback}.
+  (See A1Q8)
+\end{proof}
+
+% section pullback_of_smooth_forms (end)
+
+% chapter lecture_13_feb_4th (end)
 
 \appendix
 
