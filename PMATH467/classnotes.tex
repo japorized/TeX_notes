@@ -11,7 +11,6 @@
 
 \input{latex-classnotes-preamble.tex}
 
-\newcommand{\norm}[1]{\left\| #1 \right\|}
 \newcommand{\Int}[1]{\overset{\circ}{#1}}
 
 \begin{document}
@@ -26,7 +25,11 @@ The basic goal of the course is to be able to find \hlnotea{algebraic invariants
 
 Other questions that we shall also look into include a uniqueness problem about manifolds; in particular, how many manifolds exist for a given invariant up to homeomorphism? We shall see that for a \hlnotea{2-manifold}, the only such manifold is the 2-dimensional sphere $S^2$. For a $4$-manifold, it is the $4$-dimensional sphere $S^4$. In fact, for any other $n$-manifold for $n > 4$, the unique manifold is the respective $n$-sphere. The problem is trickier with the $3$-manifold, and it is known as the Poincar\'{e} Conjecture, solved in 2003 by Russian Mathematician \href{https://en.wikipedia.org/wiki/Grigori_Perelman}{Grigori Perelman}. Indeed, the said manifold is homeomorphic to the $3$-sphere.
 
-For this course, you are expected to be familiar with notions from \hlnotea{real analysis}, such as topology, and concepts from \hlnotea{group theory}.
+For this course, you are expected to be familiar with notions from \hlnotea{real analysis},
+such as topology, and concepts from \hlnotea{group theory}. Due to the structure of which this
+course is designed, each lecture may be much longer than reality, as I am also making heavy
+references to the recommended text that is Lee's Introduction to Topological Manifolds
+\cite{johnlee2000}.
 
 The following topics shall be covered:
 \begin{enumerate}
@@ -138,6 +141,8 @@ where we may define a ``distance'' by
   \end{equation*}
   is not homeomorphic, since if we consider an alternating series that converges to $0$ on the unit circle on $\mathbb{R}^2$, we have that the preimage of the series does not converge and $f^{-1}$ is in fact discontinuous.
 \end{eg}
+
+% TODO: define convergence; see Introduction to Topological Manifolds by J. Lee pg. 20
 
 \newthought{Now}, we want to talk about topologies without referring to a metric.
 
@@ -745,9 +750,16 @@ We shall start the next part this lecture.
 \begin{defn}[Manifold]\index{Manifold}\label{defn:manifold}
   An $n$-dimensional \hlnoteb{manifold} is a \hlnotec{second countable}\sidenote{
   a topological space is said to be \hldefn{second countable} if its basis is
-  countable.}, \hlnotec{Hausdorff} topological space that is \hlnotec{locally
-  homeomorphic} to $\mathbb{R}^n$.
+  countable. Note that for a second countable set $X$, every open cover of $X$ has a countable
+  subcover (see pg 32 of \citet{johnlee2000}).}, \hlnotec{Hausdorff} topological space that is 
+  \hlnotec{locally homeomorphic} to $\mathbb{R}^n$.
 \end{defn}
+
+\begin{note}
+  We may also call the last criterion of being a manifold, that is, to be locally
+  homeomorphic to $\mathbb{R}^n$, as to be \hldefn{locally Euclidean} of dimension
+  $n$.
+\end{note}
 
 \begin{note}
   One can give an equivalent definition of locally homeomorphic by requiring that
@@ -785,9 +797,9 @@ We shall start the next part this lecture.
   \end{marginfigure}
 \end{eg}
 
-\begin{defn}[Manifold on a Boundary]\index{Manifold on a Boundary}\label{defn:manifold_on_a_boundary}
+\begin{defn}[Manifold with Boundary]\index{Manifold with Boundary}\label{defn:manifold_with_boundary}
   An $n$-dimensional space that is second countable and Hausdorff, such that $\forall x \in X$,
-  there exists a neighbourhood either homeomorphic to $B^n \subseteq \mathbb{R}^n$ or
+  there exists a neighbourhood either homeomorphic to $\bar{B}^n \subseteq \mathbb{R}^n$ or
   $B^n \cap \mathbb{H}^n$.
 \end{defn}
 
@@ -867,6 +879,13 @@ do well tell the difference between the following two graphs, mathematically?
 \end{defn}
 
 \begin{note}
+  Note that the definition of a boundary and interior is different from our earlier
+  definitions for the same terminologies. A manifold with boundary will always have
+  an empty boundary, as a subset, despite the fact that its boundary as a manifold
+  may not be empty.
+\end{note}
+
+\begin{note}
   The $\phi$ in \cref{defn:interior_point} and $\psi$ in \cref{defn:boundary_point}
   are called \hldefn{local charts}.
 
@@ -876,6 +895,12 @@ do well tell the difference between the following two graphs, mathematically?
     \phi_5 : \mathcal{U} \to \mathbb{B}^5 \subseteq \mathbb{R}^5.
   \end{gather*}
 \end{note}
+
+\begin{defn}[Coordinate Chart]\index{Coordinate Chart}\label{defn:coordinate_chart}
+  If $M$ is locally homeomorphic to $\mathbb{R}^n$, a homeomorphism from an open subset
+  $U \subset M$ to an open subset of $\mathbb{R}^n$ is called a \hlnoteb{coordinate chart}
+  (or simply a \hldefn{chart}).
+\end{defn}
 
 We shall later on prove that a point cannot simultaneously be a boundary point and
 an interior point. This property is called \hlnotea{the invariance of the boundary}.
@@ -1542,10 +1567,21 @@ $\pi$ and $\tilde{g}$ are continuous.
 % section quotient_spaces
 
 With the topology that we last introduced for $A^*$, $g$ is continuous iff $\tilde{f}$ is continuous.
-\marginnote{This way of constructing a quotient space is intuitive ring theoretically.}
+\marginnote{This way of constructing a quotient space is intuitive, ring theoretically.}
 However, this is a rather cumbersome way to construct a quotient space. In particular, how do we know
 what equivalence class should we choose?
 
+\marginnote{
+\begin{ex}
+  Let $\pi : X \to Y$ be any map. For a subset $U \subseteq X$, show that TFAE.
+  \begin{enumerate}
+    \item $U$ is saturated.
+    \item $U = \pi^{-1}(q(U))$.
+    \item $U$ is a union of fibres.
+    \item If $x \in U$, then every point $x' \in X$ such that $q(x) = q(x')$ is also in $U$.
+  \end{enumerate}
+\end{ex}
+}
 \begin{defn}[Saturated]\index{Saturated}\label{defn:saturated}
   We say that a subset $S \subseteq A$ is \hlnoteb{saturated} (wrt $\pi$) provided that it is has
   a \hlimpo{non-empty intersection} with a fibre $\pi^{-1}(\{ q \})$, where $q \in A^*$, then
@@ -1563,6 +1599,276 @@ With this definition, we may restate the definition of a quotient map in a clear
   to open subsets of $Y$.
 \end{defn}
 
+\begin{eg}
+  Let $g : X \to Y$ be surjective. We can define an equivalence relation on $X$ by setting
+  $x_1 \sim x_2$ iff $g(x_1) = g(x_2)$, i.e. $x_1$ and $x_2$ belong to the same fibre.
+\end{eg}
+
+\begin{eg}
+  Let $\bar{\mathbb{B}}^2$ be the closed unit disk in $\mathbb{R}^2$, and let $\sim$ be the
+  equivalence relation on $\bar{\mathbb{B}}^2$ defined by $(x, y) \sim (-x, y)$ for all $(x, y)
+  \in \partial \bar{\mathbb{B}}^2$ (See \cref{fig:a_quotient_of_b_2}).
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[fill=be-blue!30!dark] (0, 0) circle(1);
+      \draw[midarrow] (0, 1) arc(90:270:1);
+      \draw[midarrow] (0, 1) arc(90:-90:1);
+      \node[draw,circle,fill,inner sep=1pt] at (0, 1) {};
+      \node[draw,circle,fill,inner sep=1pt] at (0, -1) {};
+    \end{tikzpicture}
+    \caption{A quotient of $\bar{\mathbb{B}}^2$}\label{fig:a_quotient_of_b_2}
+  \end{marginfigure}
+  We can think of this space as one that is obtained from $\mathbb{B}^2$ by ``pasting'' the
+  left half of the boundary to the right half. It is not difficult to imagine this transformation
+  and notice that we can `continuously morph' $\mathbb{B}^2$ under this equivalence relation into
+  $S^2$. We shall prove much later on that this is indeed the case.
+
+  The above process is also called `collapsing $\partial \mathbb{B}^2$ to a point'.
+\end{eg}
+
+\begin{eg}
+  Define an equivalence relation on the square $I \times I$ by setting $(x, 0) \sim (x, 1)$ for
+  all $x \in I$, and $(0, y) \sim (1, y)$ for all $y \in I$ (See 
+  \cref{fig:a_quotient_of_i_times_i_}).
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[fill=be-blue!30!dark] (-1, 1) -- (-1, -1) -- (1, -1) -- (1, 1) --cycle;
+      \draw[midarrow={>>}{0.5}] (-1, 1) -- (-1, -1);
+      \draw[midarrow={>>}{0.5}] (1, 1) -- (1, -1);
+      \draw[midarrow={>}{0.5}] (1, 1) -- (-1, 1);
+      \draw[midarrow={>}{0.5}] (1, -1) -- (-1, -1);
+    \end{tikzpicture}
+    \caption{A quotient of $I \times I$}\label{fig:a_quotient_of_i_times_i_}
+  \end{marginfigure}
+\end{eg}
+
+\begin{eg}
+  Define $\mathbb{P}^n$, the \hldefn{real projective space of dimension $n$}, to be the set of
+  $1$-dimensional linear subpaces (lines through the origin) in $\mathbb{R}^{n + 1}$. There
+  exists a map $q : \mathbb{R}^{n + 1} \setminus \{ 0 \} \to \mathbb{P}^n$, defined by sending
+  a point $x$ to its span. We apply the quotient topology with respect to $q$ on $\mathbb{P}^2$.
+  The $2$-dimensional projective space $\mathbb{P}^2$ is usually called the \hldefn{projective
+  plane}.
+\end{eg}
+
+\begin{eg}
+  Let $X$ be a topological space, the quotient $(X \times I) / (X \times \{ 0 \})$ obtained from
+  the ``cylinder'' $X \times I$ by collapsing one end to a point is called the \hldefn{cone} on
+  $X$. For instance, if $X = S^1$ and $I = (0, 1)$, then taking the quotient
+  $(S^1 \times (0, 1)/(S^1 \times \{ 0 \})$ is exactly the process shown in
+  \cref{fig:cone_of_s_1_}.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw (-1, 1) -- (-1, -2) arc(180:360:1 and 0.5) -- (1, -2) --
+        (1, 1) arc(0:180:1 and 0.5) -- (-1,1) arc(180:360:1 and 0.5);
+      \draw[dashed] (-1, -2) arc(180:0:1 and 0.5);
+
+      \node[rotate=-90,scale=1.5] at (0, -3) {$\leadsto$};
+
+      \draw (0, -4) -- (-1, -7) arc(180:360:1 and 0.5) -- (1, -7) -- cycle;
+      \draw[dashed] (-1, -7) arc(180:0:1 and 0.5);
+    \end{tikzpicture}
+    \caption{Cone of $S^1$}\label{fig:cone_of_s_1_}
+  \end{marginfigure}
+\end{eg}
+
+\begin{eg}[Wedge sum of Manifolds]\label{eg:wedge_sum_of_manifolds}
+  Let $M_1$ and $M_2$ be two manifolds. We define the \hldefn{wedge sum} of $M_1$ and $M_2$ as
+  \begin{equation*}
+    M_1 \wedge M_2 := (M_1 \cup M_2) / p_1 \sim p_2,
+  \end{equation*}
+  where $p_1 \in M_1$ and $p_2 \in M_2$. The wedge sum is also sometimes called the
+  \hldefn{one-point union}.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[latex-latex] (-1, 0) -- (1, 0);
+      \draw[latex-latex] (0, -1) -- (0, 1);
+      \node[draw,circle,fill,inner sep=1.5pt] at (0, 0) {};
+    \end{tikzpicture}
+    \caption{Wedge sum of two lines.}\label{fig:wedge_sum_of_two_lines}
+  \end{marginfigure}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw (0, 1) circle(1);
+      \draw (0, -1) circle(1);
+      \node[draw,circle,fill,inner sep=1.5pt] at (0, 0) {};
+    \end{tikzpicture}
+    \caption{Wedge sum of two circles.}\label{fig:wedge_sum_of_two_circles}
+  \end{marginfigure}
+  For instance, the wedge sum of $\mathbb{R} \wedge \mathbb{R}$ is homeomorphic to the union
+  of the $x$-axis and $y$-axis on a Cartesian plane (cf \cref{fig:wedge_sum_of_two_lines}),
+  and the wedge sum $S^1 \wedge S^1$ is homeomorphic to the \hldefn{figure-eight space},
+  which is made up by the union of two circles of radius $1$ centered at $(0, 1)$ and $(0, -1)$
+  in the plane (cf \cref{fig:wedge_sum_of_two_circles}).
+\end{eg}
+
+\begin{warning}
+  Unlike subspaces and product spaces, quotient spaces do not behave well wrt most topological
+  properties. In particular, none of the \hyperref[defn:manifold]{definiting properties of
+  manifolds} are necessarily inherited by quotient spaces.
+
+  For example, a quotient space can be
+  \begin{itemize}
+    \item locally Euclidean and second countable, but not Hausdorff;
+    \item Hausdorff and second countable, but not locally Euclidean; or
+    \item not even first countable.
+  \end{itemize}
+\end{warning}
+
+The following is a proposition that gives us some peace of mind when working within certain
+spaces.
+
+\begin{propo}[Locally Euclidean Quotient Space of a Second Countable Space is Second Countable]\label{propo:locally_euclidean_quotient_space_of_a_second_countable_space_is_second_countable}
+  Suppose $M$ is a second countable space and $N$ is a quotient space of $M$. If $N$ is
+  locally Euclidean, then it is second countable.
+\end{propo}
+
+\begin{note}
+  Thus if the original space is, say, a manifold, then for any of its quotient spaces, we only
+  need to check that the quotient space is both Hausdorff and locally Euclidean.
+\end{note}
+
+\begin{proof}
+  Let $q : M \to N$ be the quotient map, and suppose $N$ is locally Euclidean. Let $\mathcal{U}$
+  be a cover of $N$. Then the set $\left\{ q^{-1}(U) : U \in \mathcal{U} \right\}$ is an open
+  cover of $M$, which therefore has a countable subcover. Let $\mathcal{U}' \subseteq \mathcal{U}$
+  be the countable subset such that $\left\{ q^{-1}(U) : U \in \mathcal{U}' \right\}$ covers $M$.
+  Then $\mathcal{U}'$ is a countable subcover of $N$.\qed\
+\end{proof}
+
+\begin{ex}
+  Consider the function $g : \mathbb{C} \to \mathbb{C}$ given by $z \mapsto z^2$. Verify that
+  $g$ is a quotient map.
+\end{ex}
+
+\begin{eg}
+  The map $g : S^1 \to S^1 \subseteq \mathbb{R}^2$ as given by the above is indeed a quotient map.
+  Thus we observe that $S^1$ is a quotient space of itself.
+\end{eg}
+
+\subsection{Characteristic Property and Uniqueness of Quotient Spaces}%
+\label{sub:characteristic_property_and_uniqueness_of_quotient_spaces}
+% subsection characteristic_property_and_uniqueness_of_quotient_spaces
+
+\begin{thm}[Characteristic Property of the Quotient Topology]\label{thm:characteristic_property_of_the_quotient_topology}
+  Suppose $X$ and $Y$ are two topological spaces and $\pi : X \to Y$ is a quotient map. For any
+  topological space $Z$, a map $f : Y \to Z$ is continuous iff the composite map $f \circ \pi$
+  is continuous (cf \cref{fig:characteristic_property_of_the_quotient_topology_}).
+  \begin{marginfigure}
+    \centering
+    \begin{tikzcd}
+      X \arrow[rrdd, "f \circ \pi"] \arrow[dd, "\pi"'] &  &  \\
+       &  &  \\
+      Y \arrow[rr, "f"'] &  & Z
+    \end{tikzcd}
+    \caption{Characteristic property of the quotient topology.}\label{fig:characteristic_property_of_the_quotient_topology_}
+  \end{marginfigure}
+\end{thm}
+
+\begin{proof}
+  Observe that for any open $U \subseteq Z$, $f^{-1}(U)$ is open in $Y$ iff
+  \begin{equation*}
+    \pi^{-1}(f^{-1}(U)) = (f \circ \pi)^{-1}(U)
+  \end{equation*}
+  is open in $X$. Our result follows immediately from this observation.\qed\
+\end{proof}
+
+\begin{thm}[Uniqueness of the Quotient Topology]\label{thm:uniqueness_of_the_quotient_topology}
+  Given a topological space $X$, a set $Y$ and a surjective map $\pi : X \to Y$, the quotient
+  topology is the only topology on $Y$ for which the characterisitc property holds.
+\end{thm}
+
+\marginnote{
+\begin{ex}
+  Prove \cref{thm:uniqueness_of_the_quotient_topology}.
+\end{ex}
+}
+
+\begin{thm}[Descends to the Quotient]\label{thm:descends_to_the_quotient}
+  Suppose $\pi : X \to Y$ is a quotient map, $Z$ a topological space, and $f : X \to Z$ is any
+  continuous map that is constant on the fibres of $\pi$ \sidenote{This means that if $\pi(x)
+  = \pi(x')$, then $f(x) = f(x')$.}. Then there exists a unique continuous map $\tilde{f} : Y
+  \to Z$ such that $f = \tilde{f} \circ \pi$ (cf \cref{fig:descends_to_the_quotient}).
+  \begin{marginfigure}
+    \centering
+    \begin{tikzcd}
+      X \arrow[rrdd, "f"] \arrow[dd, "\pi"'] &  &  \\
+       &  &  \\
+      Y \arrow[rr, "\tilde{f}"', dashed] &  & Z
+    \end{tikzcd}
+    \caption{Descends to the Quotient}\label{fig:descends_to_the_quotient}
+  \end{marginfigure}
+\end{thm}
+
+\begin{proof}
+  Since $\pi$ is surjective, $\forall y \in Y, \, \exists x \in X$ such that $\pi(x) = y$. Then
+  consider $\tilde{f} : Y \to Z$ given by $\tilde{f}(y) = f(x)$ for any $x$ that we discover from
+  the last statement. By the hypothesis on $f$, $\tilde{f}$ is guaranteed to be unique and
+  well-defined. It follows from \cref{thm:characteristic_property_of_the_quotient_topology} that
+  $\tilde{f}$ is continuous.\qed\
+\end{proof}
+
+The following theorem, which is a consequence of
+\cref{thm:characteristic_property_of_the_quotient_topology}, gives to us that quotient spaces are
+unique up to homeomorphism by the identifications made by their quotient maps.
+
+\begin{thm}[Uniqueness of Quotient Spaces]\label{thm:uniqueness_of_quotient_spaces}
+  Suppose $\pi_1 : X \to Y_1$ and $\pi_2 : X \to Y_2$ are quotient maps that make the same
+  identifications, i.e.
+  \begin{equation*}
+    \pi_1(x) = \pi_1(x') \iff \pi_2(x) = \pi_2(x').
+  \end{equation*}
+  Then there exists a unique homeomorphism $\phi : Y_1 \to Y_2$ such that $\pi \circ \pi_1 =
+  \pi_2$.
+\end{thm}
+
+The proof is relatively straightforward so I will only jot down the gist of the proof and provide
+commutative diagrams for visualization of the relationships between these spaces.
+
+\begin{proof}[Sketch]
+  Observe \cref{fig:relationships_of_the_quotient_spaces}.
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzcd}
+      X \arrow[rrdd, "\pi_2"] \arrow[dd, "\pi_1"'] &  &  & X \arrow[dd, "\pi_2"'] \arrow[rrdd, "\pi_1"] &  &  \\
+       &  &  &  &  &  \\
+      Y_1 \arrow[rr, "\tilde{\pi}_2"', dashed] &  & Y_2 & Y_2 \arrow[rr, "\tilde{\pi}_1"', dashed] &  & Y_1
+    \end{tikzcd}
+    \caption{Relationships of the quotient spaces}
+    \label{fig:relationships_of_the_quotient_spaces}
+  \end{figure}
+
+  Then
+  \begin{equation*}
+    \tilde{\pi}_1 \circ (\tilde{\pi}_2 \circ \pi_1) = \tilde{\pi}_1 \circ \pi_2 = \pi_1.
+  \end{equation*}
+  Thus, we have \cref{fig:consequence_of_the_relationship_between_the_quotient_spaces_}.
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzcd}
+      X \arrow[rrdd, "\pi_1"] \arrow[dd, "\pi_1"'] &  &  \\
+       &  &  \\
+      Y_1 \arrow[rr, "\tilde{\pi}_1 \circ \tilde{\pi}_2"', dashed] &  & Y_1
+    \end{tikzcd}
+    \caption{Consequence of the relationship between the quotient spaces.}
+    \label{fig:consequence_of_the_relationship_between_the_quotient_spaces_}
+  \end{figure}
+
+  Then by \cref{thm:uniqueness_of_the_quotient_topology}, the map is indeed unique, and it
+  follows from the identity map that the two maps are equal. Similarly, $\tilde{\pi}_2 \circ
+  \tilde{\pi}_1$ is the identity on $Y_2$.
+
+  Then $\phi = \tilde{\pi}_2$ is the required homeomorphism, and it is unique by
+  \cref{thm:uniqueness_of_the_quotient_topology}.\qed\
+\end{proof}
+
+% subsection characteristic_property_and_uniqueness_of_quotient_spaces (end)
+
 % section quotient_spaces (end)
 
 % chapter lecture_8_jan_23rd (end)
@@ -1579,16 +1885,3 @@ With this definition, we may restate the definition of a quotient map in a clear
 \printindex
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
