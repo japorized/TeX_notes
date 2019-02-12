@@ -47,7 +47,7 @@
 \usepackage{tcolorbox}
 \tcbuselibrary{skins,breakable}
 \usepackage{longtable,booktabs}
-\usepackage[amsmath,hyperref]{ntheorem}
+\usepackage[amsmath,hyperref,thmmarks]{ntheorem}
 \usepackage{thmtools}
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
@@ -126,12 +126,16 @@
 \theorempostskip{5pt}
 \theoremstyle{break}
 
+\theoremsymbol{\faComment}
 \newtheorem{remark}{Remark}[section]
+\theoremsymbol{}
 \newtheorem{ex}{Exercise}[section]
 \theorembodyfont{\normalfont}
-\newtheorem{eg}{Example}[section]
 \newtheorem*{solution}{\faPencil $\enspace$ Solution}
+\theoremsymbol{\faGavel}
+\newtheorem{eg}{Example}[section]
 \theorembodyfont{\it}
+\theoremsymbol{}
 
     % definition env
 \theoremprework{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
@@ -218,7 +222,7 @@
 \theoremheaderfont{\color{be-magenta}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem{marginthm}{\faCoffee \enspace Theorem}
+\newtheorem{marginthm}[thm]{\faCoffee \enspace Theorem}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
@@ -272,7 +276,9 @@
 \theorembodyfont{\normalfont}
 \theoremheaderfont{\color{be-brown}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-brown}{\hrule height 2pt width \textwidth}}
+\theoremsymbol{\ensuremath{_\square}}
 \newtheorem*{proof}{\faPencil \enspace Proof}
+\theoremsymbol{}
 
     % note and notation env
 \theorembodyfont{\it}
@@ -398,12 +404,39 @@
 middle, xlabel={$x$}, ylabel={$y$}, axis equal }}
 \pgfplotsset{four quad complex/.append style={axis x line=middle, axis y line=
 middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
+\def\axisdefaultwidth{360pt}
+\pgfplotsset{
+  tufteaxis/.append style = {thick},tick style = {thick,black},
+  %
+  % #1 = x, y, or z
+  % #2 = the shift value
+  /tikz/normal shift/.code 2 args = {%
+    \pgftransformshift{%
+        \pgfpointscale{#2}{\pgfplotspointouternormalvectorofticklabelaxis{#1}}%
+    }%
+  },%
+  %
+  range3frame/.style = {
+    tick align        = outside,
+    scaled ticks      = false,
+    enlargelimits     = false,
+    ticklabel shift   = {10pt},
+    axis lines*       = left,
+    line cap          = round,
+    clip              = false,
+    xtick style       = {normal shift={x}{10pt}},
+    ytick style       = {normal shift={y}{10pt}},
+    ztick style       = {normal shift={z}{10pt}},
+    x axis line style = {normal shift={x}{10pt}},
+    y axis line style = {normal shift={y}{10pt}},
+    z axis line style = {normal shift={z}{10pt}},
+  }
+}
 
 % Shortcuts
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}      % simplifying the writing of a floor function
 \newcommand{\ceiling}[1]{\lceil #1 \rceil}      % simplifying the writing of a ceiling function
 \newcommand{\dotp}{\, \cdotp}			        % dot product to distinguish from \cdot
-\newcommand{\qed}{\hfill\ensuremath{\square}}   % Q.E.D sign
 \newcommand{\abs}[1]{\left|#1\right|}						% absolute value
 \newcommand{\lra}[1]{\left\langle \; #1 \; \right\rangle}
 \newcommand{\at}[2]{\Big|_{#1}^{#2}}

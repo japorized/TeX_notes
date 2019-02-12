@@ -11,7 +11,9 @@
 
 \input{latex-classnotes-preamble.tex}
 
-\newcommand{\Int}[1]{\overset{\circ}{#1}}
+\DeclareMathOperator{\id}{id}
+
+\DeclareMathOperator{\Int}{Int}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -39,6 +41,16 @@ The following topics shall be covered:
   \item Fundamental Groups \& Covering Spaces
   \item Classification of Surfaces
 \end{enumerate}
+
+\textbf{\newthought{Feb 12th}} I have decided to delve deeper into the recommended text
+as the organization of the course demands. As so, changes might be made to earlier
+lectures as I go further down, so as to introduce the definitions and provide propositions
+at a timing deemed appropriate. To keep track of the changes, please look for
+\hlnotea{PMATH467} among the commits on
+\url{https://gitlab.com/japorized/TeX_notes/commits/master} using the provided filter. If
+you are unfamiliar with version controlling and writing in \LaTeX, once you have found the
+lecture that you wish to compare, expand the \hlnotea{diff} for \texttt{classnotes.tex}
+if it is collapsed.
 
 \section*{Basic Logistics for the Course}%
 % section basic_logistics_for_the_course
@@ -115,6 +127,22 @@ where we may define a ``distance'' by
   This definition does not imply that a continuous map $f$ maps open sets to open sets.
 \end{warning}
 
+\begin{defn}[Open and Closed Maps]\index{Open Map}\index{Closed Maps}\label{defn:open_and_closed_maps}
+  A mapping $f : X \to Y$ is said to be \hlnoteb{open} if for all open $U \subset X$, $f(U)$ is
+  open. We say that $f$ is a \hlnoteb{closed map} if for all closed $F \subset X$, $f(F)$ is
+  closed.
+\end{defn}
+\marginnote{
+\begin{ex}\label{ex:homeomorphm_iff_open_and_closed}
+  Suppose $f : X \to Y$ is a bijective continuous map. Then TFAE.
+  \begin{enumerate}
+    \item $f$ is a homeomorphism.
+    \item $f$ is open.
+    \item $f$ is closed.
+  \end{enumerate}
+\end{ex}
+}
+
 \begin{ex}
   Contruct a function on $[0, 1]$ which assumes all values between its maximum and minimum, but is not continuous.
 \end{ex}
@@ -173,8 +201,7 @@ where we may define a ``distance'' by
 \label{sec:euclidean_space_continued}
 % section euclidean_space_continued
 
-In the last lecture, from metric topology,
-we generalized the notion to a more abstract one
+In the last lecture, from metric topology, we generalized the notion to a more abstract one
 that is based solely on open sets.
 
 \begin{eg}
@@ -204,10 +231,10 @@ more concepts that we shall need down the road.
 
 \begin{defn}[Interior of a Set]\index{Interior}\label{defn:interior_of_a_set}
   Let $A$ be a set. Its \hlnoteb{interior},
-  denoted either as $\text{Int }(A)$, $A^\circ$ or $\Int{A}$,
+  denoted either as $\text{Int }(A)$, $A^\circ$ or $\Int(A)$,
   is defined as
   \begin{equation*}
-    \Int{A} = \bigcup_{G \subseteq A}^{G: \text{ open }} G.
+    \Int(A) = \bigcup_{G \subseteq A}^{G: \text{ open }} G.
   \end{equation*}
 \end{defn}
 
@@ -215,7 +242,7 @@ more concepts that we shall need down the road.
   Let $A$ be a set. Its \hlnoteb{boundary},
   denoted as $\partial A$, is defined as
   \begin{equation*}
-    \partial A = \bar{A} \setminus \Int{A}.
+    \partial A = \bar{A} \setminus \Int(A).
   \end{equation*}
 \end{defn}
 
@@ -226,9 +253,9 @@ more concepts that we shall need down the road.
 \begin{proof}
   Notice that
   \begin{equation*}
-    ( \partial A )^C = ( \bar{A} \setminus \Int{A} )^C = X \setminus \bar{A} \cup \Int{A} = X \cap \bar{A}^C \cup \Int{A}
+    ( \partial A )^C = ( \bar{A} \setminus \Int(A) )^C = X \setminus \bar{A} \cup \Int(A) = X \cap \bar{A}^C \cup \Int(A)
   \end{equation*}
-  which is open.\qed\
+  which is open.
 \end{proof}
 
 \begin{ex}
@@ -239,11 +266,11 @@ more concepts that we shall need down the road.
 \end{ex}
 
 \begin{proof}
-  First, notice that $\Int{\partial A} = \emptyset$.
+  First, notice that $\Int(\partial A) = \emptyset$.
   Since $\partial A$ is closed, $\bar{\partial A} = \partial A$.
   Then
   \begin{equation*}
-    \partial ( \partial A ) = \bar{\partial A} \setminus \Int{\partial A}
+    \partial ( \partial A ) = \bar{\partial A} \setminus \Int(\partial A)
       = \partial A \setminus \emptyset = \partial A
   \end{equation*}
 \end{proof}
@@ -262,7 +289,7 @@ more concepts that we shall need down the road.
 \end{defn}
 
 \begin{eg}
-  From the last example, we have that $\Int{\mathbb{Q}} = \emptyset$.
+  From the last example, we have that $\Int(\mathbb{Q}) = \emptyset$.
 \end{eg}
 
 \begin{defn}[Limit Point]\index{Limit Point}\label{defn:limit_point}
@@ -414,7 +441,7 @@ Then we must have that
   \begin{equation*}
     d(p, x) + d(q, x) < \frac{2r}{3} < r = d(p, q),
   \end{equation*}
-  which violates the triangle inequality.\qed\
+  which violates the triangle inequality.
 \end{proof}
 
 We observe here that the two open sets (or balls) ``separate'' $p$ and $q$.
@@ -482,7 +509,7 @@ $U$.
   If $\left\{ U_i \right\}_{i = 1}^{n} \subset \tau_A$, then again, by the properties
   of open sets, finite intersection of open sets is open, and so $\bigcap_{i=1}^{n} U_i \in \tau_A$.
 
-  \qed\
+  
 \end{proof}
 
 \begin{note}
@@ -516,6 +543,24 @@ Let $Y$ be an arbitrary topological space. Then let
 
 where $f$ is continuous. Then $\iota_A \circ f$ is continuous.
 
+\marginnote{
+\begin{marginthm}[Characteristic Property of the Subspace Topology]\label{marginthm:characteristic_property_of_the_subspace_topology}
+  Suppose $X$ is a topological space and $S \subseteq X$ is a subspace. For any topological space
+  $T$, a map $f : Y \to S$ is continuous iff the composite map $\iota_S \circ f : Y \to X$ is
+  continuous.
+\end{marginthm}
+}
+\begin{marginfigure}
+  \centering
+  \begin{tikzcd}
+     &  & X \\
+     &  &  \\
+    Y \arrow[rruu, "\iota_S \circ f"] \arrow[rr, "f"'] &  & S \arrow[uu, "\iota_S"', hook']
+  \end{tikzcd}
+  \caption{Characteristic Property of the Subspace Topology}
+  \label{fig:characteristic_property_of_the_subspace_topology}
+\end{marginfigure}
+
 The converse is also true: if $\iota_A \circ f$ is continuous, then $f$ is continuous.
 However, we will not prove this. This property is known as the
 \hlnoteb{characteristic property of the subspace topology}.
@@ -528,6 +573,22 @@ However, we will not prove this. This property is known as the
   \end{equation*}
   is also continuous.
 \end{lemma}
+
+\begin{propo}[Other Properties of the Subspace Topology]\label{propo:other_properties_of_the_subspace_topology}
+  Suppose $S$ is a subspace of the topological space $X$.
+  \begin{enumerate}
+    \item If $R \subseteq S$ is a subspace of $S$, then $R$ is a subspace of $X$; i.e. the subspace
+      topologies that $R$ inherits from $S$ and from $X$ agree.
+    \item If $\mathcal{B}$ is a basis for the topology of $X$, then
+      \begin{equation*}
+        \mathcal{B}_S = \{ B \cap S : B \in \mathcal{B} \}
+      \end{equation*}
+      is a basis for the topology of $S$.
+    \item If $\{p_i\}$ is a sequence of points in $S$ and $p \in S$, then $p_i$ converges to $p$
+      in $S$ iff $p_i$ converges to $p$ in $X$.
+    \item Every subspace of a Hausdorff space is Hausdorff.
+  \end{enumerate}
+\end{propo}
 
 % section euclidean_space_continued_2 (end)
 
@@ -676,7 +737,7 @@ describe why.
     f(X) = f \left( \bigcup_{i=1}^{n} f^{-1} \left( U_i \right) \right) = \bigcup_{i=1}^{n} U_i.
   \end{equation*}
   Hence $\left\{ U_\alpha \right\}_{\alpha \in I}$ has a finite subcover and so
-  $f(X)$ is compact.\qed\
+  $f(X)$ is compact.
 \end{proof}
 
 \begin{crly}[Homeomorphic Maps map Compact Sets to Compact Sets]\label{crly:homeomorphic_maps_map_compact_sets_to_compact_sets}
@@ -723,7 +784,7 @@ that would be a finite subcover for the closed subset.
   \noindent
   \hlbnoted{$(\impliedby)$} $X$ is bounded implies that $X \subseteq [-R, R]^n$ with $R$
   sufficiently large. Since $X$ is closed, and $[-R, R]^n$ is compact, $X$ is necessarily
-  compact by \cref{lemma:properties_of_compact_sets}.\qed\
+  compact by \cref{lemma:properties_of_compact_sets}.
 \end{proof}
 
 \begin{thm}[Bolzano-Weierstrass]\index{Bolzano-Weierstrass}\label{thm:bolzano_weierstrass}
@@ -751,7 +812,7 @@ We shall start the next part this lecture.
   An $n$-dimensional \hlnoteb{manifold} is a \hlnotec{second countable}\sidenote{
   a topological space is said to be \hldefn{second countable} if its basis is
   countable. Note that for a second countable set $X$, every open cover of $X$ has a countable
-  subcover (see pg 32 of \citet{johnlee2000}).}, \hlnotec{Hausdorff} topological space that is 
+  subcover (see pg 32 of \citet{johnlee2000}).}, \hlnotec{Hausdorff} topological space that is
   \hlnotec{locally homeomorphic} to $\mathbb{R}^n$.
 \end{defn}
 
@@ -766,6 +827,13 @@ We shall start the next part this lecture.
   $U$ be homeomorphic to an open ball $B^n \subseteq \mathbb{R}^n$. Notice that
   $B^n$ is homeomorphic to $\mathbb{R}^n$ \sidenote{By scaling, really.}
 \end{note}
+
+The following is a quick fact about second countable spaces, which will be helpful
+when we start creating subspaces from manifolds.
+
+\begin{propo}[Subspaces of Second Countable Spaces are Second Countable]\label{propo:subspaces_of_second_countable_spaces_are_second_countable}
+  Every subspace of a second countable space is second countable.
+\end{propo}
 
 \begin{eg}
   Let $B^n = B^n(0, 1) \subseteq \mathbb{R}^n$. Then $B^n$ is homeomorphic to
@@ -904,18 +972,18 @@ do well tell the difference between the following two graphs, mathematically?
 
 We shall later on prove that a point cannot simultaneously be a boundary point and
 an interior point. This property is called \hlnotea{the invariance of the boundary}.
-\sidenote{This also means that $\Int{M} \cap \partial M = \emptyset$. Also, by
-\cref{defn:manifold}, $\Int{M} \cup \partial M = M$.}
+\sidenote{This also means that $\Int(M) \cap \partial M = \emptyset$. Also, by
+\cref{defn:manifold}, $\Int(M) \cup \partial M = M$.}
 
 \begin{note}
-  $\Int{M}$ is open. Thus, we can use the same definition about open sets as
+  $\Int(M)$ is open. Thus, we can use the same definition about open sets as
   before using $\phi$.
 \end{note}
 
 \begin{note}
   In contrast, $\partial M$ is closed; thanks to the invariance of the boundary
-  we have that $\partial M = M \setminus \Int{M}$ and $\Int{M}$ is open, and so
-  $\left( \partial M \right)^C = \Int{M}$.
+  we have that $\partial M = M \setminus \Int(M)$ and $\Int(M)$ is open, and so
+  $\left( \partial M \right)^C = \Int(M)$.
 \end{note}
 
 We shall also prove the following theorem later on:
@@ -1629,7 +1697,7 @@ With this definition, we may restate the definition of a quotient map in a clear
 
 \begin{eg}
   Define an equivalence relation on the square $I \times I$ by setting $(x, 0) \sim (x, 1)$ for
-  all $x \in I$, and $(0, y) \sim (1, y)$ for all $y \in I$ (See 
+  all $x \in I$, and $(0, y) \sim (1, y)$ for all $y \in I$ (See
   \cref{fig:a_quotient_of_i_times_i_}).
   \begin{marginfigure}
     \centering
@@ -1678,7 +1746,7 @@ With this definition, we may restate the definition of a quotient map in a clear
 \begin{eg}[Wedge sum of Manifolds]\label{eg:wedge_sum_of_manifolds}
   Let $M_1$ and $M_2$ be two manifolds. We define the \hldefn{wedge sum} of $M_1$ and $M_2$ as
   \begin{equation*}
-    M_1 \wedge M_2 := (M_1 \cup M_2) / p_1 \sim p_2,
+    M_1 \lor M_2 := (M_1 \cup M_2) / p_1 \sim p_2,
   \end{equation*}
   where $p_1 \in M_1$ and $p_2 \in M_2$. The wedge sum is also sometimes called the
   \hldefn{one-point union}.
@@ -1738,7 +1806,7 @@ spaces.
   be a cover of $N$. Then the set $\left\{ q^{-1}(U) : U \in \mathcal{U} \right\}$ is an open
   cover of $M$, which therefore has a countable subcover. Let $\mathcal{U}' \subseteq \mathcal{U}$
   be the countable subset such that $\left\{ q^{-1}(U) : U \in \mathcal{U}' \right\}$ covers $M$.
-  Then $\mathcal{U}'$ is a countable subcover of $N$.\qed\
+  Then $\mathcal{U}'$ is a countable subcover of $N$.
 \end{proof}
 
 \begin{ex}
@@ -1775,7 +1843,7 @@ spaces.
   \begin{equation*}
     \pi^{-1}(f^{-1}(U)) = (f \circ \pi)^{-1}(U)
   \end{equation*}
-  is open in $X$. Our result follows immediately from this observation.\qed\
+  is open in $X$. Our result follows immediately from this observation.
 \end{proof}
 
 \begin{thm}[Uniqueness of the Quotient Topology]\label{thm:uniqueness_of_the_quotient_topology}
@@ -1810,7 +1878,7 @@ spaces.
   consider $\tilde{f} : Y \to Z$ given by $\tilde{f}(y) = f(x)$ for any $x$ that we discover from
   the last statement. By the hypothesis on $f$, $\tilde{f}$ is guaranteed to be unique and
   well-defined. It follows from \cref{thm:characteristic_property_of_the_quotient_topology} that
-  $\tilde{f}$ is continuous.\qed\
+  $\tilde{f}$ is continuous.
 \end{proof}
 
 The following theorem, which is a consequence of
@@ -1864,7 +1932,8 @@ commutative diagrams for visualization of the relationships between these spaces
   \tilde{\pi}_1$ is the identity on $Y_2$.
 
   Then $\phi = \tilde{\pi}_2$ is the required homeomorphism, and it is unique by
-  \cref{thm:uniqueness_of_the_quotient_topology}.\qed\
+  \cref{thm:uniqueness_of_the_quotient_topology}.
+
 \end{proof}
 
 % subsection characteristic_property_and_uniqueness_of_quotient_spaces (end)
@@ -1872,6 +1941,359 @@ commutative diagrams for visualization of the relationships between these spaces
 % section quotient_spaces (end)
 
 % chapter lecture_8_jan_23rd (end)
+
+\chapter{Lecture 9 Jan 25th}%
+\label{chp:lecture_9_jan_25th}
+% chapter lecture_9_jan_25th
+
+\section{Topological Embeddings}%
+\label{sec:topological_embeddings}
+% section topological_embeddings
+
+\begin{defn}[Topological Embedding]\index{Topological Embedding}\label{defn:topological_embedding}
+  An injective continuous map $g : S \to Y$ is called a \hlnoteb{topological embedding} (or just
+  an \hldefn{embedding}) if it is a homeomorphism onto its image.
+\end{defn}
+
+\begin{note}
+  In other words, $g : S \to Y$ is called an embedding if it is a homeomorphism between $S$ and
+  $g(S)$.
+\end{note}
+
+\begin{eg}
+  Consider the function $f : \mathbb{R} \to \mathbb{R}^3$ given by
+  \begin{equation*}
+    x \mapsto (\cos x, \sin x, x).
+  \end{equation*}
+  We know that $f$ is both bijective and continuous (since each of its components are continuous).
+  Note that
+  \begin{equation*}
+    f \circ \pi_3 \restriction_{f(\mathbb{R})} = \id_{\mathbb{R}}.
+  \end{equation*}
+  It follows that $f$ is an embedding.
+\end{eg}
+
+\begin{eg}
+  The map $f : x \mapsto e^{ix}$ from $[0, 2 \pi)$ to $\mathbb{C}$ is continuous and injective, but
+  not a homeomorphism (problem lies on the endpoints). So $f$ is not an embedding, despite being
+  continuous and injective.
+
+  However, the restriction of $f$ to any proper subinterval is an embedding, as is the interval
+  $(0, 2 \pi)$.
+\end{eg}
+
+As we've seen above, a continuous injective map is not necessarily an embedding. The following
+proposition provides us with two sufficient but not necessary conditions to ensure that a
+continuous injective map is an embedding.
+
+\marginnote{
+\begin{marginwarning}
+  Notice that by our definition, and by taking note on \cref{ex:homeomorphm_iff_open_and_closed},
+  an embedding is \hlimpo{only a homeomorphism between the domain and its image} under the mapping.
+  It need not be a homeomorphism between the domain and the codomain.  Thus, an embedding need not
+  be open or closed.
+\end{marginwarning}
+
+\begin{eg}
+  The map $f : \left(0, \frac{1}{2}\right) \to S^1$ given by $x \to e^{2 \pi i x}$ is an
+  embedding but it is neither open nor closed.
+\end{eg}
+
+\begin{ex}
+  Give another example of a topological embedding that is neither open nor closed.
+\end{ex}
+}
+
+\begin{propo}[Sufficient Conditions to be an Embedding]\label{propo:sufficient_conditions_to_be_an_embedding}
+  A continuous injective map that is either open or closed is an embedding.
+\end{propo}
+
+\begin{proof}
+  Let $f : X \to Y$ be a continuous injective map between 2 topological spaces. Note that $f$
+  is bijective from $X$ to $f(X)$. It suffices to show that $f$ is open or closed from $X$ to
+  $f(X)$ by \cref{ex:homeomorphm_iff_open_and_closed}.
+
+  By assumption, if $f : X \to Y$ is open, then for any open $A \subset X$, $f(A) \subset f(X)$
+  is open, simply by \hyperref[defn:open_and_closed_maps]{definition}. It also follows that if
+  $f$ is closed, then for any closed $B \subset X$, $f(B)$ is closed in $f(X)$.
+\end{proof}
+
+\marginnote{
+\begin{ex}
+  Prove \cref{propo:surjective_embeddings_are_homeomorphisms}.
+\end{ex}
+}
+\begin{propo}[Surjective Embeddings are Homeomorphisms]\label{propo:surjective_embeddings_are_homeomorphisms}
+  A surjective topological embedding is a homeomorphism.
+\end{propo}
+
+\begin{remark}\label{remark:we_are_ready_to_make_more_manifolds}
+  We now have some proper tools to build various examples of manifolds as subspaces of Euclidean
+  spaces. Recall \cref{propo:other_properties_of_the_subspace_topology} and
+  \cref{propo:subspaces_of_second_countable_spaces_are_second_countable}, to show that a subspace
+  of $\mathbb{R}^n$ is a manifold, we need only to verify that it is locally Euclidean.
+\end{remark}
+
+\begin{figure*}[ht]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[tufteaxis, range3frame, view={55}{45}]
+      \addplot3[surf, colormap/hot, samples=5, opacity=0, domain=40:140] {2};
+      \addplot3[surf, colormap/hot, samples=10, domain=60:120] {0};
+      \addplot3[surf, colormap/hot2, samples=20, domain=60:120] {sin(4*x)*sin(4*y) + 2};
+      \draw[dashed] (60, 60, 2.7) -- (60, 60, 0);
+      \draw[dashed] (120, 120, 2.7) -- (120, 120, 0);
+      \draw[dashed] (120,60,1.2) -- (120,60,0);
+      \node[pin={[pin distance=5pt]135:{$U$}}] at (60, 80, 0) {};
+      \node[pin={[pin distance=7pt]135:{$\Gamma(f)$}}] at (70, 70, 3) {};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Graph of a continuous function}\label{fig:graph_of_a_continuous_function}
+\end{figure*}
+
+\begin{eg}
+  If $U \subseteq \mathbb{R}^n$ is an open subset and $f : U \to \mathbb{R}^k$ is any continuous
+  map, the graph of $f$ (cf \cref{fig:graph_of_a_continuous_function}) is the subset $\Gamma(f)
+  \subseteq \mathbb{R}^{n + k}$ defined by
+  \begin{equation*}
+    \Gamma(f) = \{(x, y) = (x_1, \ldots, x_n, y_1, \ldots, y_k) : x \in U, \, y = f(x)\},
+  \end{equation*}
+  with the subspace topology inherited from $\mathbb{R}^{n + k}$. To verify that $\Gamma(f)$ is
+  indeed a manifold, we need only to show that $\Gamma(f)$ is homeomorphic to $U$. Let $\phi_f
+  : U \to \mathbb{R}^{n + k}$ be the continuous injective map
+  \begin{equation*}
+    \phi_f(x) = (x, f(x)).
+  \end{equation*}
+  One can verify that $\phi_f$ is indeed a continuous bijection from $U$ to $\Gamma(f)$, and for
+  $\pi : \mathbb{R}^{n + k} \to \mathbb{R}^n$, $\pi_{\Gamma(f)}$ is a continuous inverse for
+  $\phi_f$. It follows that $\phi_f$ is an embedding and $\Gamma(f)$ is homeomorphic to $U$.
+\end{eg}
+
+\begin{eg}[$n$-spheres are Manifolds]\label{eg:n_spheres_are_manifolds}
+  Recall that the $n$-sphere (or \textit{unit}) $n$-sphere is the set $S^n$ of unit vectors in
+  $\mathbb{R}^n$. In low dimensions, spheres are easy to visualize:
+  \begin{itemize}
+    \item $S^0$ is the two-point discrete space $\{ \pm 1 \} \subseteq \mathbb{R}$;
+    \item $S^1$ is the unit circle in $\mathbb{R}^2$; and
+    \item $S^2$ is the unit spherical surface of radius $1$ in $\mathbb{R}^3$.
+  \end{itemize}
+  Since we are working in $\mathbb{R}^n$, by \cref{remark:we_are_ready_to_make_more_manifolds},
+  it suffices for us to show that each of the $S^n$'s are locally Euclidean. We shall show that
+  each point has a neighbourhood in $S^n$ that is the graph of a continuous function.
+
+  For each $i \in \{1, \ldots, n + 1 \}$, let
+  \begin{itemize}
+    \item[$U_i^+$] denote the open subset of $\mathbb{R}^{n + 1}$ consisting of points with
+      $x_i > 0$, and
+    \item[$U_i^-$] denote the open subset of $\mathbb{R}^{n + 1}$ consisting of points with
+      $x_i < 0$.
+  \end{itemize}
+  Then for any $x = (x_1, \ldots, x_n) \in S^n$, some coordinate $x_i$ must be nonzero, and so
+  the sets $U_1^\pm, \ldots, U_{n + 1}^\pm$ cover $S^n$. Now for each $U_i^\pm$, we can solve
+  for the equation $\abs{ x } = 1$, and find that $x \in S^n \cap U_i^\pm$ iff
+  \begin{equation*}
+    x_i = \pm \sqrt{1 - \sum_{\substack{j=1 \\ j \neq i}}^{n + 1} x_j^2 }.
+  \end{equation*}
+  Since the square root is a continuous function, it follows that the intersection of $S^n$ with
+  $U_i^\pm$ is the graph of a continuous function. This intersection is therefore locally
+  Euclidean, showing to us that $S^n$ is indeed a manifold.
+\end{eg}
+
+The following lemma allows us to, essentially, `glue' surfaces to one another.
+
+\begin{lemma}[Glueing Lemma]\index{Glueing Lemma}\label{lemma:glueing_lemma}
+  Let $X$ and $Y$ be topological spaces, and let $\{ A_i \}$ be either an arbitrary open cover
+  of $X$, or a finite closed cover of $X$. Suppose that we are given continuous maps $f_i : A_i
+  \to Y$ that agree on overlaps, i.e.
+  \begin{equation*}
+    f_i \restriction_{A_i \cap A_j} = f_k \restriction_{A_i \cap A_j}.
+  \end{equation*}
+  Then there exists a unique continuous map $f : X \to Y$ whose restriction to each $A_i$ is
+  equal to $f_i$.
+\end{lemma}
+
+With that, we can construct the following space.
+
+\begin{defn}[Adjunction Space]\label{defn:adjunction_space}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw (0, 0) circle(0.7);
+      \node at (-0.7, 0.7) {$M$};
+      \draw (2, 0) circle(0.7);
+      \node at (2.7, 0.7) {$N$};
+      \begin{scope}
+        \clip (0, 0) circle(0.7);
+        \draw (0.5, -0.5) circle(0.5);
+        \node at (0,0) {$S_1$};
+      \end{scope}
+      \begin{scope}
+        \clip (2, 0) circle(0.7);
+        \draw (1.5, -0.5) circle(0.4);
+        \node at (2,0) {$S_2$};
+      \end{scope}
+      \draw[-latex] (0.4,-0.4) to[bend right] node[midway,below] {$f$} (1.6, -0.4);
+    \end{tikzpicture}
+    \caption{Glueing subsets of two disjoint spaces.}\label{fig:glueing_subsets_of_two_disjoint_spaces_}
+  \end{marginfigure}
+  Consider 2 manifolds $M$ and $N$ that are of the same dimension, and let $S_1
+  \subseteq M$ and $S_2 \subseteq N$. Let $f : S_1 \to S_2$ be a homeomorphism (cf
+  \cref{fig:glueing_subsets_of_two_disjoint_spaces_}). Then we define
+  \begin{equation*}
+    M \cup_f N := M \coprod N \Big/ \Big\lbrace \substack{a \sim f(a) \\ a \in S_1}
+  \end{equation*}
+  as the \hlnoteb{adjunction space}, and is said to be formed by \hldefn{attaching}
+  \hlnoteb{$Y$ to $X$ along $f$}. The map $f$ is called the \hldefn{attaching map}.
+\end{defn}
+
+\begin{remark}
+  By \cref{lemma:glueing_lemma}, there exists a continuous map between $M$ and $N$, and so this
+  allows us to know that this new structure $M \cup_f N$ is indeed a manifold.
+\end{remark}
+
+\begin{defn}[Double]\index{Double}\label{defn:double}
+  If $M = N$, with the identity map $\id \restriction_{\partial M}$ as a homeomorphism between
+  $\partial M$ and $\partial N$, then we call $M \cup_{\id \restriction_{\partial M}} N$ the
+  \hlnoteb{double} of $M$.
+\end{defn}
+
+\begin{lemma}[Attaching Manifolds along Their Boundaries]\label{lemma:attaching_manifolds_along_their_boundaries}
+  Suppose $M$ is an $n$-dimensional manifold with boundary. Then its double 
+  $M \cup_{\id \restriction_{\partial M}} M$ is a manifold without boundary.
+  More generally, if $M_1$ and $M_2$ are manifolds with non-empty boundaries, then there are
+  topological embeddings $e : M_1 \cup_h M_2$ and $f : M_1 \cup_h M_2$ whose images are closed
+  subsets of $M_1 \cup_h M_2$ satisfying
+  \begin{gather*}
+    e(M_1) \cup f(M_2) = M_1 \cup_h M_2 \\
+    e(M_1) \cap f(M_2) = e(\partial M_1) = f(\partial M_2).
+  \end{gather*}
+\end{lemma}
+
+The core idea of the proof is illustrated in \cref{fig:attaching_along_the_boundaries}.
+
+\begin{figure*}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw (1, 1) arc(90:270:0.15 and 1) -- (1, -1) arc(-90:90:0.15 and 1);
+    \draw plot [smooth] coordinates {(1, 1) (0.5, 1.1) (0, 1.2) (-1, 0.9) (-1.6, 0.6) (-2, 0) (-1.5, -0.6) (-1, -0.8) (0, -1.1) (1, -1)};
+    \draw (-0.7,0.2) to[bend right] (0.3,0.2);
+    \draw (-0.6,0.2) to[bend left] (0.2,0.2);
+    \begin{scope}
+      \clip (1, -1) arc(270:90:0.15 and 1) -- plot [smooth] coordinates {(1, 1) (0.5, 1.1) (0, 1.2) (-1, 0.9) (-1.6, 0.6) (-2, 0) (-1.5, -0.6) (-1, -0.8) (0, -1.1) (1, -1)};
+      \draw[fill=be-blue!60!dark, fill opacity=0.6] (1, 0) circle(0.4);
+    \end{scope}
+
+    \draw (2, 1) arc(90:270:0.15 and 1) -- plot [smooth] coordinates {(2, -1) (2.5, -1.2) (3, -1.25) (3.5, -1.2) (4, -1) (4.5, -0.6) (5, 0) (4.5, 0.6) (3, 1.2) (2, 1)};
+    \draw[dashed] (2, 1) arc(90:-90:0.15 and 1);
+    \draw (2.6,0) to[bend right] (3.6,0);
+    \draw (2.7,0) to[bend left] (3.5,0);
+    \begin{scope}
+      \clip (2, 1) arc(90:270:0.15 and 1) -- plot [smooth] coordinates {(2, -1) (2.5, -1.2) (3, -1.25) (3.5, -1.2) (4, -1) (4.5, -0.6) (5, 0) (4.5, 0.6) (3, 1.2) (2, 1)};
+      \draw[fill=be-blue!60!dark, fill opacity=0.6] (1.8, 0) circle(0.4);
+    \end{scope}
+
+    \draw[-latex] (0.9, 0) -- (1.8, 0) node[midway,above] {$q$};
+
+    \draw[-latex] (0.7, 0.5) to[bend left] node[midway,above] {$\phi_1$} (6.3,1.5);
+    \draw[->] (6, 1.2) -- (8, 1.2);
+    \draw[->] (7, 1) -- (7, 2);
+    \draw[fill=be-blue!60!dark, fill opacity=0.6] (6.5,1.2) arc(180:0:0.5);
+    \node at (7.5,2) {$\mathbb{H}^n$};
+
+    \draw[-latex] (2.1, -0.5) to[bend right] node[midway,below] {$\phi_2$} (6.3,-0.8);
+    \draw[->] (6, -1.2) -- (8, -1.2);
+    \draw[->] (7, -1.4) -- (7, -0.4);
+    \draw[fill=be-blue!60!dark, fill opacity=0.6] (6.5,-1.2) arc(180:0:0.5);
+    \node at (7.5,-0.4) {$\mathbb{H}^n$};
+
+    \draw[-latex] (8.3, 1.5) to[bend left] (10, 1);
+    \draw[-latex] (8.3, -0.8) to[bend right] (10, -1);
+    \draw[->] (10, 0) -- (12, 0);
+    \draw[->] (11, -1) -- (11, 1);
+    \draw[fill=be-blue!60!dark, fill opacity=0.6] (11, 0) circle(0.5);
+  \end{tikzpicture}
+  \caption{Attaching along the boundaries}
+  \label{fig:attaching_along_the_boundaries}
+\end{figure*}
+
+\begin{proof}[Sketch]
+  \hlbnotea{Step 1} Find $q$.
+
+  \noindent
+  \hlbnotea{Step 2} $q \restriction_(\Int(M_1))$ is an embedding.
+
+  \noindent
+  \hlbnotea{Step 3} Define $\phi_1$ and $\phi_2$.
+
+  \noindent
+  \hlbnotea{Step 4} Put the two together.
+
+\end{proof}
+
+\newthought{To end} this lecture today, we recalled that we can look at the torus as a
+$2$-dimensional rectangle with its sides properly identified. Now if we change the
+identification of one of the sides by swapping its orientation, we end up with what is
+known as a \hlnotea{M\"{o}bius band}.
+\marginnote{The M\"{o}bius strip in \cref{fig:mobius_band} is taken from 
+\href{https://tex.stackexchange.com/questions/118563/moebius-strip-using-tikz}{TeX SE}.}
+
+\begin{figure*}
+  \centering
+  \begin{tikzpicture}
+    \fill[left color=green, right color=yellow, fill opacity=0.3] (-5, 5) -- (-5, 1) -- (-1,1) -- (-1,5) --cycle;
+    \draw[thick] (-5, 5) -- (-5, 1) -- (-1,1) -- (-1,5) --cycle;
+    \node[thick,rotate=90,scale=2] at (-5, 3) {>>};
+    \node[thick,rotate=-90,scale=2] at (-1, 3) {>>};
+    \node[scale=2] at (0.5, 3) {$\leadsto$};
+    \begin{axis}[ hide axis, view={40}{40} ]
+      \addplot3 [
+          surf, shader=faceted interp,
+          point meta=x,
+          colormap/greenyellow,
+          samples=40,
+          samples y=5,
+          z buffer=sort,
+          domain=0:360,
+          y domain=-0.5:0.5
+      ] (
+          {(1+0.5*y*cos(x/2)))*cos(x)},
+          {(1+0.5*y*cos(x/2)))*sin(x)},
+          {0.5*y*sin(x/2)});
+    
+      \addplot3 [
+          samples=50,
+          domain=-145:180,
+          % The domain needs to be adjusted manually, depending on the camera angle, unfortunately
+          samples y=0,
+          thick
+      ] ( {cos(x)}, {sin(x)}, {0});
+    \end{axis}
+  \end{tikzpicture}
+  \caption{M\"{o}bius band}\label{fig:mobius_band}
+\end{figure*}
+
+Following that, if we also swap the orientation of the other two sides, we get what is known as
+the \hlnotea{Klein Bottle}.
+
+\begin{figure*}[ht]
+  \centering
+  \begin{tikzpicture}
+    \fill[left color=green, right color=yellow, fill opacity=0.3] (-5, 5) -- (-5, 1) -- (-1,1) -- (-1,5) --cycle;
+    \draw[thick] (-5, 5) -- (-5, 1) -- (-1,1) -- (-1,5) --cycle;
+    \node[thick,rotate=90,scale=2] at (-5, 3) {>>};
+    \node[thick,rotate=-90,scale=2] at (-1, 3) {>>};
+    \node[thick,scale=1.5] at (-3, 5) {>};
+    \node[thick,scale=1.5] at (-3, 1) {<};
+    \node[scale=2] at (0.5, 3) {$\leadsto$};
+  \end{tikzpicture}
+  \includegraphics[scale=0.3]{klein_bottle.jpg}
+  \caption{Klein Bottle}
+  \label{fig:klein_bottle}
+\end{figure*}
+
+% section topological_embeddings (end)
+
+% chapter lecture_9_jan_25th (end)
 
 \appendix
 
