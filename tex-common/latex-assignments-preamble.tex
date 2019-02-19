@@ -16,6 +16,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{marvosym}
+\usepackage{fontawesome}
 \usepackage{pgf,tikz}
 \usepackage{pgfplots}
 \usepackage{fancyhdr}
@@ -81,21 +82,15 @@
 % ntheorem Declarations
 \theorembodyfont{\normalfont}
 \theoremstyle{break}
-\newtheorem*{proof}{Proof}
-\newtheorem*{solution}{Solution}
+\theoremprework{{\rule{\linewidth}{1pt}}}
+\theorempostwork{{\rule{\linewidth}{1pt}}}
+\newtheorem*{proof}{\faPencil \enspace Proof}
+
+\theoremprework{\rule{\linewidth}{1pt}}
+\theorempostwork{\rule{\linewidth}{1pt}}
+\newtheorem*{solution}{\faPencil \enspace Solution}
 \newtheorem*{remark}{Remark}
 \newtheorem*{note}{Note}
-
-\newenvironment{proofbox}
-  {\begin{tcolorbox}[arc=0mm,breakable,enhanced,halign=left]
-   \begin{proof}}
-  {\end{proof}
-   \end{tcolorbox}}
-\newenvironment{solbox}
-  {\begin{tcolorbox}[arc=0mm,breakable,enhanced,halign=left]
-   \begin{solution}}
-  {\end{solution}
-   \end{tcolorbox}}
 
 % ntheorem listtheorem style
 \makeatother
