@@ -18,7 +18,7 @@
 \usepackage{etoolbox}
 \usepackage{amssymb}
 \usepackage{eso-pic}
-\usepackage{fontawesome}
+\usepackage[fixed]{fontawesome5}
 \usepackage{todonotes}
 \usepackage{apptools, chngcntr}
 \usepackage{amsmath}
@@ -129,9 +129,10 @@
 \theoremsymbol{\faComment}
 \newtheorem{remark}{Remark}[section]
 \theoremsymbol{}
+\newtheorem*{strategy}{\faPaperPlane Strategy}
 \newtheorem{ex}{Exercise}[section]
 \theorembodyfont{\normalfont}
-\newtheorem*{solution}{\faPencil $\enspace$ Solution}
+\newtheorem*{solution}{\faPencil* Solution}
 \theoremsymbol{\faGavel}
 \newtheorem{eg}{Example}[section]
 \theorembodyfont{\it}
@@ -142,134 +143,134 @@
 \theoremheaderfont{\color{be-blue}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem{defn}{\faBook \enspace Definition}
+\newtheorem{defn}{\faBook Definition}
 
     % definition env no num
 \theoremprework{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{be-blue}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem*{defnnonum}{\faBook \enspace Definition}
+\newtheorem*{defnnonum}{\faBook Definition}
 
 \theoremprework{\textcolor{be-blue}{\hrule height 2pt width \marginparwidth}}
 \theoremheaderfont{\color{be-blue}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-blue}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem{margindefn}[defn]{\faBook \enspace Definition}
+\newtheorem{margindefn}[defn]{\faBook Definition}
 
 \theoremprework{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{be-blue}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem*{margindefnnonum}{\faBook \enspace Definition}
+\newtheorem*{margindefnnonum}{\faBook Definition}
 
     % theorem envs
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{be-magenta}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem{thm}{\faCoffee \enspace Theorem}
+\newtheorem{thm}{\faCoffee Theorem}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem{propo}[thm]{\faTint \enspace Proposition}
+\newtheorem{propo}[thm]{\faTint Proposition}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem{crly}[thm]{\faSpaceShuttle \enspace Corollary}
+\newtheorem{crly}[thm]{\faSpaceShuttle Corollary}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem{lemma}[thm]{\faTree \enspace Lemma}
+\newtheorem{lemma}[thm]{\faTree Lemma}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem{axiom}[thm]{\faShield \enspace Axiom}
+\newtheorem{axiom}[thm]{\faShield Axiom}
 
     % theorem envs without counter
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{be-magenta}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem*{thmnonum}{\faCoffee \enspace Theorem}
+\newtheorem*{thmnonum}{\faCoffee Theorem}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem*{propononum}{\faTint \enspace Proposition}
+\newtheorem*{propononum}{\faTint Proposition}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem*{crlynonum}{\faSpaceShuttle \enspace Corollary}
+\newtheorem*{crlynonum}{\faSpaceShuttle Corollary}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem*{lemmanonum}{\faTree \enspace Lemma}
+\newtheorem*{lemmanonum}{\faTree Lemma}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem*{axiomnonum}{\faShield \enspace Axiom}
+\newtheorem*{axiomnonum}{\faShield Axiom}
 
     % envs on margins
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremheaderfont{\color{be-magenta}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem{marginthm}[thm]{\faCoffee \enspace Theorem}
+\newtheorem{marginthm}[thm]{\faCoffee Theorem}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem{marginpropo}[thm]{\faTint \enspace Proposition}
+\newtheorem{marginpropo}[thm]{\faTint Proposition}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem{margincrly}[thm]{\faSpaceShuttle \enspace Corollary}
+\newtheorem{margincrly}[thm]{\faSpaceShuttle Corollary}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem{marginlemma}[thm]{\faTree \enspace Lemma}
+\newtheorem{marginlemma}[thm]{\faTree Lemma}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem{marginaxiom}[thm]{\faShield \enspace Axiom}
+\newtheorem{marginaxiom}[thm]{\faShield Axiom}
 
     % envs on margins without counter
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremheaderfont{\color{be-magenta}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem*{marginthmnonum}{\faCoffee \enspace Theorem}
+\newtheorem*{marginthmnonum}{\faCoffee Theorem}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem*{marginpropononum}{\faTint \enspace Proposition}
+\newtheorem*{marginpropononum}{\faTint Proposition}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem*{margincrlynonum}{\faSpaceShuttle \enspace Corollary}
+\newtheorem*{margincrlynonum}{\faSpaceShuttle Corollary}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem*{marginlemmanonum}{\faTree \enspace Lemma}
+\newtheorem*{marginlemmanonum}{\faTree Lemma}
 
 \theoremprework{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theorempostwork{\textcolor{be-magenta}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem*{marginaxiomnonum}{\faShield \enspace Axiom}
+\newtheorem*{marginaxiomnonum}{\faShield Axiom}
 
     % proof env
 \theoremprework{\textcolor{be-brown}{\hrule height 2pt width \textwidth}}
@@ -277,7 +278,7 @@
 \theoremheaderfont{\color{be-brown}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-brown}{\hrule height 2pt width \textwidth}}
 \theoremsymbol{\ensuremath{_\square}}
-\newtheorem*{proof}{\faPencil \enspace Proof}
+\newtheorem*{proof}{\faPencil* Proof}
 \theoremsymbol{}
 
     % note and notation env
@@ -286,29 +287,29 @@
 \theoremprework{\textcolor{be-yellow}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{be-yellow}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-yellow}{\hrule height 2pt width \textwidth}}
-\newtheorem{note}{\faQuoteLeft \enspace Note}[section]
+\newtheorem{note}{\faQuoteLeft Note}[section]
 
 \theoremprework{\textcolor{be-yellow}{\hrule height 2pt width \marginparwidth}}
 \theoremheaderfont{\color{be-yellow}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-yellow}{\hrule height 2pt width \marginparwidth}}
-\newtheorem{mnote}[note]{\faQuoteLeft \enspace Note}
+\newtheorem{mnote}[note]{\faQuoteLeft Note}
 
 \theoremprework{\textcolor{be-yellow}{\hrule height 2pt width \textwidth}}
 \theorempostwork{\textcolor{be-yellow}{\hrule height 2pt width \textwidth}}
-\newtheorem*{notation}{\faPaw \enspace Notation}
+\newtheorem*{notation}{\faPaw Notation}
 
     % warning env
 \theoremprework{\textcolor{be-red}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{be-red}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-red}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem*{warning}{\faBug \enspace Warning}
+\newtheorem*{warning}{\faBug Warning}
 
 \theoremprework{\textcolor{be-red}{\hrule height 2pt width \marginparwidth}}
 \theoremheaderfont{\color{be-red}\normalfont\bfseries}
 \theorempostwork{\textcolor{be-red}{\hrule height 2pt width \marginparwidth}}
 \theoremindent10pt
-\newtheorem*{marginwarning}{\faBug \enspace Warning}
+\newtheorem*{marginwarning}{\faBug Warning}
 
 % rule for appendices
 \AtAppendix{\counterwithin{defn}{chapter}}

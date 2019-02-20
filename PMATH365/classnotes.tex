@@ -3351,10 +3351,11 @@ Following \cref{crly:general_linearity_of_the_pullback} and
   $\dif{F^* h} = F^* \dif{h}$, as claimed.
 \end{proof}
 
-We will make explicit the operation $d$ on $k$-forms for any $k$ in the coming section. We
-will see that
+We will make explicit the operation $d$ on $k$-forms for any $k$ in
+\cref{sec:the_exterior_derivative}. We will see that
 \cref{crly:commutativity_of_the_pullback_and_the_exterior_derivative_on_smooth_0_forms}
-works even in the general case (see proposition later).
+works even in the general case (see
+\cref{propo:commutativity_of_the_pullback_and_the_exterior_derivative}).
 
 \begin{note}[More abuses of notation]
   Let $y = F(x)$. Let us employ the usual abuse of notation and identify a function with
@@ -3442,6 +3443,269 @@ we have
 % section pullback_of_smooth_forms_continued (end)
 
 % chapter lecture_14_feb_08th (end)
+
+\chapter{Lecture 15 Feb 11th}%
+\label{chp:lecture_15_feb_11th}
+% chapter lecture_15_feb_11th
+
+\section{The Exterior Derivative}%
+\label{sec:the_exterior_derivative}
+% section the_exterior_derivative
+
+Recall \cref{defn:exterior_derivative_of_f_1_form_}, where we defined a linear map from
+the space $\Omega^0(U) = C^\infty(U)$ to the space $\Omega^1(U)$, given by $f \to
+\dif{f}$.
+
+In this section, we shall
+\begin{itemize}
+  \item generalize the above operation, giving ourselves a linear map $d : \Omega^k(U) \to
+    \Omega^{k + 1}(U)$ for all $k \geq 0$; and
+  \item study the properties of this map.
+\end{itemize}
+
+\begin{thm}[Defining Properties of the Exterior Derivative]\label{thm:defining_properties_of_the_exterior_derivative}
+  Let $U \subseteq \mathbb{R}^n$ be open. Then there exists a unique linear map $d :
+  \Omega^k(U) \to \Omega^{ k + 1 }(U)$ with the following three properties:
+  \begin{gather}
+    \dif{f} = \frac{\partial f}{\partial x^i} \dif{x^i} \qquad f \in \Omega^0(U) =
+      C^{\infty}(U) \label{eq:exterior_derivative_for_0_forms} \\
+    \dif{(\alpha \land \beta)} = (\dif{\alpha}) \land \beta +
+      (-1)^{\abs{\alpha}\abs{\beta}} \alpha \land (\dif{\beta})
+      \label{eq:exterior_derivative_on_wedge_products} \\
+    \dif{^2} = 0 \label{eq:composition_of_exterior_derivatives_is_zero}
+  \end{gather}
+\end{thm}
+
+\marginnote{
+\begin{strategy}
+  \begin{enumerate}
+    \item We will first derive a formula that this map $d$ must satisfy if it exists.
+    \item By defining $d$ by this formula, it must therefore have these properties that
+      we have built upon.
+  \end{enumerate}
+\end{strategy}
+}
+\begin{proof}
+  Since $\dif{x^i}$ is $d$ of the smooth function $x^i$,
+  \cref{eq:composition_of_exterior_derivatives_is_zero} states that $\dif{(\dif{x^i})} =
+  \dif{^2(x^i)} = 0$. It then follows from \cref{eq:exterior_derivative_on_wedge_products}
+  that we must therefore have
+  \begin{equation}\label{eq:defining_prop_of_ext_deri_1}
+    \dif{(\dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}})} = 0.
+  \end{equation}
+  Let $\eta \in \Omega^k(U)$. Then we can write
+  \begin{equation}\label{eq:defining_prop_of_ext_deri_2}
+    \eta = \frac{1}{k!} \eta_{j_1, \ldots, j_k}  \dif{x^{j_1}} \land \hdots \land
+      \dif{x^{j_k}}.
+  \end{equation}
+  Recall that $f \alpha = f \land \alpha$ when $f \in \Omega^0(U)$. Applying $\dif{}$ to
+  both sides of \cref{eq:defining_prop_of_ext_deri_2}, and since $\eta_{j_1, \ldots, j_k}
+  \in \Omega^0(U) = C^\infty(U)$ and \cref{eq:defining_prop_of_ext_deri_1}, we have that
+  \begin{align*}
+    \dif{\eta} &= \dif{\left( \frac{1}{k!} \eta_{j_1, \ldots, j_k} \dif{x^{j_1}} \land
+                \dif{x^{j_k}} \right)} \\
+               &= \frac{1}{k!} \dif{\eta_{j_1, \ldots, j_k}} \land \dif{x^{j_1}} \land
+                \hdots \land \dif{x^{j_k}} \\
+               &\quad + \frac{1}{k!} \eta_{j_1, \ldots, j_k} \land
+                \dif{(\dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}})} \quad \because
+                \cref{eq:exterior_derivative_on_wedge_products} \\
+               &= \frac{1}{k!} \frac{\partial \eta_{j_1, \ldots, j_k}}{\partial x^p}
+                \dif{x^p} \land \dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}}.
+  \end{align*}
+  It follows that if such a map $d$ exists, it must be given by the formula
+  \begin{equation}\label{eq:defining_prop_of_ext_deri_defn}
+    \dif{\eta} = \frac{1}{k!} \frac{\partial \eta_{j_1, \ldots, j_k}}{\partial x^p}
+    \dif{x^p} \land \dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}}.
+  \end{equation}
+  
+  So let us define $\dif{}$ as in \cref{eq:defining_prop_of_ext_deri_defn}. We shall now check
+  that it satisfies the required properties.
+
+  \noindent
+  \hlbnoted{Property by \cref{eq:exterior_derivative_for_0_forms}} This is true by
+  construction: for $f \in \Omega^0(U)$, we immediately have
+  \begin{equation*}
+    \dif{f} = \frac{1}{1!} \frac{\partial f}{\partial y} \dif{y}.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{Property by \cref{eq:exterior_derivative_on_wedge_products}} Let
+  \begin{equation*}
+    \alpha = \frac{1}{k!} \alpha_{i_1, \ldots, i_k} \text{ and } \beta = \frac{1}{l!}
+      \beta_{j_1, \ldots, j_l} \dif{x^{j_1}} \land \hdots \land \dif{x^{j_l}}
+  \end{equation*}
+  be in $\Omega^k(U)$ and $\Omega^l(U)$, respectively. Then by construction of $\dif{}$,
+  we have
+  \begin{align*}
+    \dif{(\alpha \land \beta)}
+    &= \dif{\left( \frac{1}{k! l!} \alpha_{i_1, \ldots, j_k} \beta_{j_1, \ldots, j_l}
+      \dif{x^{i_1}} \land \hdots \land \dif{x^{i_k}} \land \dif{x^{j_1}} \land \hdots
+      \land \dif{x^{j_l}} \right)} \\
+    &= \frac{1}{k! l!} \frac{\partial}{\partial x^p} (\alpha_{i_1, \ldots, i_k} \beta_{j_1,
+      \ldots, j_k}) \dif{x^p} \land \dif{x^{i_1}} \land \hdots \land \dif{x^{i_k}} \land
+      \dif{x^{j_1}} \land \hdots \land \dif{x^{j_l}} \\
+    &= \frac{1}{k! l!} \left( \frac{\partial \alpha_{i_1, \ldots, i_k}}{\partial x^p}
+      \beta_{j_1, \ldots, j_l} + \alpha_{i_1, \ldots, i_k} \frac{\partial \beta_{j_1,
+      \ldots, j_l}}{\partial x^p} \right) \dif{x^p} \land \dif{x^{i_1}} \land \hdots \\
+    &\qquad \land \dif{x^{i_k}} \land \dif{x^{j_1}} \land \hdots \land \dif{x^{j_l}}.
+  \end{align*}
+  Simplifying this\sidenote{This uses a similar technique as in one of the questions in
+  A1}, we get
+  \begin{align*}
+    &\dif{(\alpha \land \beta)} \\
+    &= \left( \frac{1}{k!} \frac{\partial \alpha_{i_1, \ldots, i_k}}{\partial x^p}
+      \dif{x^p} \land \dif{x^{i_1}} \land \hdots \land \dif{x^{i_k}} \right) \land \left(
+      \frac{1}{l!} \beta_{j_1, \ldots, j_l} \dif{x^{j_1}} \land \hdots \land \dif{x^{j_l}}
+      \right) \\
+    &\enspace + (-1)^k \left( \frac{1}{k!} \alpha_{i-1, \ldots, i_k} \dif{x^{i_1}} \land
+      \hdots \land \dif{x^{i_k}} \right) \\
+    &\qquad\qquad \land \left( \frac{1}{l!} \frac{\partial \beta_{j_1, \ldots, j_l}}{\partial
+      x^p} \dif{x^p} \land \dif{x^{j_1}} \land \hdots \land \dif{x^{j_l}} \right) \\
+    &= \dif{\alpha} \land \beta (-1)^{\abs{\alpha}} \land \dif{\beta}.
+  \end{align*}
+
+  \noindent
+  \hlbnoted{Property by \cref{eq:composition_of_exterior_derivatives_is_zero}} Let $\alpha
+  \in \Omega^k(U)$. We have
+  \begin{equation*}
+    \dif{\alpha} = \frac{1}{k!} \frac{\partial \alpha_{i_1, \ldots, i_k}}{\partial x^p}
+    \dif{x^p} \land \dif{x^{i_1}} \land \hdots \land \dif{x^{i_k}}.
+  \end{equation*}
+  Applying $\dif{}$ once more, we have
+  \begin{equation*}
+    \dif{^2 \alpha} = \frac{1}{k!} \frac{\partial^2 \alpha_{i_1, \ldots, i_k}}{\partial
+      x^p \partial x^q} \dif{x^q} \land \dif{x^p} \land \dif{x^{i_1}} \land \hdots \land
+    \dif{x^{i_k}}.
+  \end{equation*}
+  Since $\alpha$ is smooth, the functions $\alpha_{i_1, \ldots, i_k}$ are smooth. It
+  follows by
+  \href{https://en.wikipedia.org/wiki/Symmetry_of_second_derivatives}{Clairaut's} that
+  \begin{equation*}
+    \frac{\partial^2 \alpha_{i_1, \ldots, i_k}}{\partial x^q \partial x^p} =
+    \frac{\partial^2 \alpha_{i_1, \ldots, i_k}}{\partial x^p \partial x^q}.
+  \end{equation*}
+  Note, however, that $\dif{x^q} \land \dif{x^p} = - \dif{x^p} \land \dif{x^q}$ is
+  skew-symmetric. Therefore, as we sum over all $p$ and $q$, the non-zero terms, where $p
+  \neq q$ will cancel in pairs. Thus $\dif{^2 \alpha} = 0$ for any $\alpha \in
+  \Omega^k(U)$.
+\end{proof}
+
+\begin{defn}[Exterior Derivative]\index{Exterior Derivative}\label{defn:exterior_derivative}
+  The \hlnoteb{exterior derivative} of a $k$-form $\eta \in \Omega^k(U)$, where $U
+  \subseteq \mathbb{R}^n$ and $k \geq 0$, is a map $d : \Omega^k(U) \to \Omega^{k +
+  1}(U)$ such that for $\eta \in \Omega^k(U)$ is given by $\eta = \frac{1}{k!} \eta_{j_1,
+  \ldots, j_k} \dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}}$, we have
+  \begin{equation*}
+    \dif{\eta} = \frac{1}{k!} \frac{\partial \eta_{j_1, \ldots, j_k}}{\partial y} \dif{y}
+      \land \dif{x^{j_1}} \land \hdots \land \dif{x^{j_k}},
+  \end{equation*}
+  as in \cref{eq:defining_prop_of_ext_deri_defn}, satisfying
+  \cref{thm:defining_properties_of_the_exterior_derivative}.
+\end{defn}
+
+\begin{eg}
+  Let $f \in \Omega^0(U)$ where $U \subseteq \mathbb{R}^3$. Then
+  \begin{equation*}
+    \dif{f} = f_x \dif{x} + f_y \dif{y} + f_z \dif{z},
+  \end{equation*}
+  and
+  \begin{align*}
+    \dif{^2 f} &= \dif{f_x} \land \dif{x} + \dif{f_y} \land \dif{y} + \dif{f_z} \land
+                \dif{z} \\
+               &= (f_{xx} \dif{x} + f_{xy} \dif{y} + f_{xz} \dif{z}) \land \dif{x} \\
+               &\quad + (f_{yx} \dif{x} + f_{yy} \dif{y} + f_{yz} \dif{z}) \land \dif{y} \\
+               &\quad + (f_{zx} \dif{x} + f_{zy} \dif{y} + f_{zz} \dif{z}) \land \dif{z} \\
+               &= f_{xy} \dif{y} \land \dif{x} + \dif{xz} \dif{z} \land \dif{x} + f_{yx}
+                \dif{x} \land \dif{y} \\
+               &\quad + f_{yz} \dif{z} \land \dif{y} + f_{zx} \dif{x} \land \dif{z} +
+                f_{zy} \dif{y} \land \dif{z} \\
+               &= 0
+  \end{align*}
+\end{eg}
+
+\begin{eg}
+  Let $\alpha = ^2 y \dif{y} - \sin (y) \dif{x} \in \Omega^1(\mathbb{R}^2)$. Then
+  \begin{align*}
+    \dif{\alpha} &= (\dif{(x^2 y)}) \land \dif{y} - (\dif{(\sin y)}) \land \dif{x} \\
+                 &= (2xy \dif{x} + x^2 \dif{y}) \land \dif{y} - (\cos y \dif{y}) \land
+                  \dif{x} \\
+                 &= 2xy \dif{x} \land \dif{y} + 0 + \cos y \dif{x} \land \dif{y} \\
+                 &= (2xy + \cos y) \dif{x} \land \dif{y} \in \Omega^2(\mathbb{R}^2).
+  \end{align*}
+\end{eg}
+
+The property $\dif{^2}$ motivates the following definitions.
+
+\begin{defn}[Closed and Exact Forms]\index{Closed Forms}\index{Exact Forms}\label{defn:closed_and_exact_forms}
+  An element $\alpha \in \Omega^k(U)$ on $U$ is called \hlnoteb{closed} if $\dif{\alpha} =
+  0$. It is called \hlnoteb{exact} if $\exists \gamma \in \Omega^{k - 1}(U)$ such that
+  $\alpha = \dif{\gamma}$.
+\end{defn}
+
+\begin{note}
+  By \cref{eq:composition_of_exterior_derivatives_is_zero}, all exact forms are closed.
+
+  This is not true in general: a closed form need not be exact. It is, however, true if
+  the topology of the open set $U$ consists of certain properties.
+\end{note}
+
+\subsection{Relationship between the Exterior Derivative and the Pullback}%
+\label{sub:relationship_between_the_exterior_derivative_and_the_pullback}
+% subsection relationship_between_the_exterior_derivative_and_the_pullback
+
+\begin{propo}[Commutativity of the Pullback and the Exterior Derivative]\label{propo:commutativity_of_the_pullback_and_the_exterior_derivative}
+  Let $F : \mathbb{R}^n \to \mathbb{R}^m$ be smooth. Let $\eta \in
+  \Omega^k(\mathbb{R}^m)$. Then $\dif{\eta} \in \Omega^{k + 1}(\mathbb{R}^m)$ and $F^*
+  (\dif{\eta}) \in \Omega^{k + 1}(\mathbb{R}^n)$. We also have $F^* \eta \in
+  \Omega^k(\mathbb{R}^n)$ and $\dif{(F^* \eta)} \in \Omega^{k + 1}(\mathbb{R}^n)$. In
+  particular, we have
+  \begin{equation*}
+    F^* (\dif{\eta}) = = \dif{(F^* \eta)},
+  \end{equation*}
+  i.e. the pullback and the exterior derivative commute.
+\end{propo}
+
+\begin{proof}
+  We proved this for the $k = 0 $ case in
+  \cref{crly:commutativity_of_the_pullback_and_the_exterior_derivative_on_smooth_0_forms}.
+  WMA $k \geq 1$. Since both $\dif{}$ and $F^*$ are linear, it is enough to show that they
+  commute on decomposable forms\sidenote{Remember that these are like the base forms for
+  $k$-forms.}. Suppose $\alpha = h \dif{y^{i_1}} \land \hdots \land \dif{y^{i_k}} \in
+  \Omega^k(\mathbb{R}^m)$ with $h \in C^{\infty}(\mathbb{R}^m)$. By
+  \cref{crly:general_linearity_of_the_pullback} and
+  \cref{crly:commutativity_of_the_pullback_and_the_exterior_derivative_on_smooth_0_forms},
+  we have
+  \begin{align*}
+    F^* \alpha &= (F^* h) F^* \dif{y^{i_1}} \land \hdots \land F^* \dif{y^{i_k}} \\
+               &= (F^* h) (\dif{F^* y^{i_1}}) \land \hdots \land (\dif{F^* y^{i_k}}).
+  \end{align*}
+  Taking the exterior derivative of the above expression, which is a form on
+  $\mathbb{R}^n$, and using \cref{thm:defining_properties_of_the_exterior_derivative}, we
+  get
+  \begin{equation*}
+    \dif{(F^* \alpha)} = (\dif{F^* h}) \land (\dif{F^* y^{i_1}}) \land \hdots \land
+    (\dif{F^* y^{i_k}}).
+  \end{equation*}
+
+  On the other hand, we have
+  \begin{equation*}
+    \dif{\alpha} = (\dif{h}) \land \dif{y^{i_1}} \land \hdots \land \dif{y^{i_k}},
+  \end{equation*}
+  and therefore
+  \begin{align*}
+    F^* ( \dif{\alpha} ) &= (F^* \dif{h}) \land (F^* \dif{y^{i_1}}) \land \hdots \land
+                          (F^* \dif{y^{i_k}}) \\
+                         &= (\dif{F^* h}) \land (\dif{F^* y^{i_1}}) \land \hdots \land
+                          (\dif{F^* y^{i_k}}).
+  \end{align*}
+  We have that the expressions agree, and so $\dif{F^*} = F^* \dif{}$ as claimed.
+\end{proof}
+
+% subsection relationship_between_the_exterior_derivative_and_the_pullback (end)
+
+% section the_exterior_derivative (end)
+
+% chapter lecture_15_feb_11th (end)
 
 \appendix
 
