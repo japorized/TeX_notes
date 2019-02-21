@@ -247,7 +247,7 @@ From the \hyperref[thm:orbit_decomposition_theorem]{Orbit Decomposition Theorem}
   \end{quotebox}
   Since $a_i \notin Z(G)$, we have $\abs{C(a_i)} \leq \abs{G}$.
   Thus by IH, $C(a_i)$ has a Sylow $p$-subgroup, which is also a
-  Sylow $p$-subgroup of $G$.\qed\
+  Sylow $p$-subgroup of $G$.
 \end{proof}
 
 \begin{crly}[Cauchy's Theorem]\index{Cauchy's Theorem}\label{crly:cauchy_s_theorem}
@@ -264,7 +264,7 @@ From the \hyperref[thm:orbit_decomposition_theorem]{Orbit Decomposition Theorem}
   Let $b = a^{p^{k - 1}}$. Notice that $b \neq e$, or it would
   contradict the definition of an order (for $a$).
   Then $b^p = \left( a^{p^{k - 1}} \right)^p = a^p = e$.
-  Therefore $\abs{b} = p$ and $b \in G$.\qed\
+  Therefore $\abs{b} = p$ and $b \in G$.
 \end{proof}
 
 \begin{defn}[Normalizer]\index{Normalizer}\label{defn:normalizer}
@@ -323,7 +323,7 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   \begin{equation*}
     H \subseteq HP = P,
   \end{equation*}
-  as required.\qed\
+  as required.
 \end{proof}
 
 % section sylow_theory (end)
@@ -363,7 +363,7 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
             &= \sum_{i=1}^{r} \abs{ Q } / \abs{ N_G(P_i) \cap Q } \quad \text{ by the action } \\
             &= \sum_{i=1}^{r} [ Q : N_G(P_i) \cap Q ] \quad \text{ by definition } \\
             &= \sum_{i=1}^{r} [ Q : Q \cap P_i ] \quad \hyperref[lemma:intersection_of_a_sylow_p_subgroup_with_any_other_p_subgroups]{\text{the last lemma}}.
-  \end{align*}\qed\
+  \end{align*}
 \end{proof}
 
 \begin{thm}[Second Sylow Theorem]\index{Second Sylow Theorem}\label{thm:second_sylow_theorem}
@@ -410,7 +410,7 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   This contradicts the fact that $\abs{K} \equiv 1 \mod p$.
 
   This shows that $Q = P_i$ for some $i \in \left\{ 1, 2, \ldots, s \right\}$,
-  and so $Q$ is a conjugate of $P$.\qed\
+  and so $Q$ is a conjugate of $P$.
 \end{proof}
 
 \begin{note}[Notation]
@@ -445,7 +445,7 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
     p^n m = \abs{ N_G(P) } n_p.
   \end{equation}
   Thus $n_p \mid p^n m$. Since $n_p \equiv 1 \not\equiv 0 \mod p$,
-  we must have $n_p \mid m$.\qed\
+  we must have $n_p \mid m$.
 \end{proof}
 
 \begin{remark}
@@ -577,7 +577,7 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   \begin{equation*}
     G \simeq \mathbb{Z}_p \times \mathbb{Z}_q \simeq \mathbb{Z}_{pq},
   \end{equation*}
-  which is cyclic.\qed\
+  which is cyclic.
 \end{proof}
 
 \begin{eg}
@@ -696,7 +696,7 @@ We shall continue with the last proof from where we left off.
     \abs{ P } = \abs{ \bar{P} } \cdot \abs{ H } = 5 \cdot \abs{ H }.
   \end{equation*}
   Thus $5 \mid \abs{ P }$, putting us back to the case where $5 \mid \abs{ H }$.
-  Thus $G$ does not have a non-trivial normal subgroup, i.e. $G$ is simple.\qed\
+  Thus $G$ does not have a non-trivial normal subgroup, i.e. $G$ is simple.
 \end{proof}
 
 % section sylow_theory_continued_3 (end)
@@ -870,7 +870,7 @@ of polynomials.
     \deg h \leq \deg f = \deg \bar{f} = \deg \bar{h} \leq \deg h,
   \end{equation*}
   which implies that $\deg f = \deg h$ but $\deg h < \deg f$. Thus $f$ is irreducible
-  over $\mathbb{Q}$.\qed\
+  over $\mathbb{Q}$.
 \end{proof}
 
 \begin{eg}
@@ -917,7 +917,7 @@ More generally so...
   \begin{equation*}
     \deg \bar{f}, \deg \bar{g} < \deg \bar{p}
   \end{equation*}
-  but that implies that $p(x)$ can be factored in $\left( R/I \right)[x]$.\qed\
+  but that implies that $p(x)$ can be factored in $\left( R/I \right)[x]$.
 \end{proof}
 
 \begin{propo}[Eisenstein's Criterion]\index{Eisenstein's Criterion}\label{propo:eisenstein_s_criterion}
@@ -944,7 +944,7 @@ More generally so...
   since $a_{n - 1}, a_{n - 2}, \ldots, a_1, a_0 \in P$.  Since $P$ is prime,
   $R/P$ is an ID, we have that either $\bar{g}(0) = 0$ or $\bar{h}(0) = 0$.
   Wlog, $\bar{g}(0) = 0 \in P$. But that implies that 
-  $a_0 = \bar{g}(0)\bar{h}(0) = 0 \in P^2$, a contradiction.\qed\
+  $a_0 = \bar{g}(0)\bar{h}(0) = 0 \in P^2$, a contradiction.
 \end{proof}
 
 % section irreducibles_continued (end)
@@ -986,7 +986,7 @@ More generally so...
 
 \begin{proof}
   Let $P = \langle p \rangle$. It follows from Eisenstein that $f$ is irreducible over $\mathbb{Z}$,
-  and then from Gauss that $f$ is irreducible over $\mathbb{Q}$.\qed\
+  and then from Gauss that $f$ is irreducible over $\mathbb{Q}$.
 \end{proof}
 
 \begin{eg}
@@ -1001,7 +1001,7 @@ More generally so...
   irreducible.
 \end{note}
 
-\begin{eg}
+\begin{eg}\label{eg:examples_of_irreducible_polynomials}
   Are the following irreducible over $\mathbb{Q}$?
   \begin{enumerate}
     \item $f(x) = x^7 + 21 x^5 + 15x^2 + 9x + 6$
@@ -1044,7 +1044,7 @@ More generally so...
       (by the Freshman's Dream). Thus $\bar{f}$ is irreducible in $\mathbb{Z}_2$. Since $\deg f =
       \deg \bar{f}$, by \hyperref[propo:mod_p_irreducibility_test]{Mod-$2$ irreducible test}.
 
-    \item \imponote Let $p$ be a prime, and let
+    \item \label{eg:polynomial_with_prime_minus_1_degree}\imponote Let $p$ be a prime, and let
       \begin{equation*}
         f(x) = x^{p - 1} + x^{p - 2} + \hdots + x^2 + x + 1.
       \end{equation*}
@@ -1179,7 +1179,7 @@ if $F$ is a field under the same operations.
   So $2 \sqrt{3}, 2 \sqrt{2} \in \mathbb{Q}(\sqrt{2} + \sqrt{3})$ \sidenote{$2 \sqrt{2}$ follows from
   a similar argument by using $1 = \frac{\sqrt{3} - \sqrt{2}}{\sqrt{3} - \sqrt{2}}$.}, and in turn
   $\sqrt{2}, \sqrt{3} \in \mathbb{Q}(\sqrt{2}, \sqrt{3})$. Then by minimality, 
-  $\mathbb{Q}(\sqrt{2}, \sqrt{3}) \subseteq \mathbb{Q}(\sqrt{2} + \sqrt{3})$.\qed\
+  $\mathbb{Q}(\sqrt{2}, \sqrt{3}) \subseteq \mathbb{Q}(\sqrt{2} + \sqrt{3})$.
 \end{proof}
 
 \begin{remark}
@@ -1238,7 +1238,7 @@ if $F$ is a field under the same operations.
       &= \left\{ c_{n - 1} \alpha^{n - 1} + \hdots + c_1 \alpha + c_0 + \mmid c_i \in F \right\} \\
       &= \Span_F \left\{ 1, \alpha, \ldots, \alpha^{n - 1} \right\},
   \end{align*}
-  as claimed.\qed\
+  as claimed.
 \end{proof}
 
 % section field_extensions_continued (end)
@@ -1296,7 +1296,7 @@ In particular,
     g(x) = c_{n - 1} x^{n - 1} + \hdots + c_1 x + c_0,
   \end{equation*}
   and so $g \neq 0$. However, $g(\alpha) = 0$, so $g(x) \in \langle f(x) \rangle$, i.e. $f(x) \mid g(x)$.
-  However, that contradicts the fact that $\deg f = n > n - 1 \geq \deg g$.\qed\
+  However, that contradicts the fact that $\deg f = n > n - 1 \geq \deg g$.
 \end{proof}
 
 \begin{eg}
@@ -1360,7 +1360,7 @@ In particular,
   From \cref{propo:span_of_the_extension}, we have that
   \begin{equation*}
     F(\alpha) \simeq F[x] / \langle f(x) \rangle \simeq F(\beta).
-  \end{equation*}\qed\
+  \end{equation*}
 \end{proof}
 
 % section field_extensions_continued_2 (end)
@@ -1458,7 +1458,7 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
   \begin{equation*}
     u = \sum_{i, j} d_{i, j} w_j v_i.
   \end{equation*}
-  Thus $\{ v_i, w_j \}$ is a basis for $K / F$.\qed\
+  Thus $\{ v_i, w_j \}$ is a basis for $K / F$.
 \end{proof}
 
 \begin{eg}
@@ -1527,7 +1527,7 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
 \end{thm}
 
 \begin{proof}
-  \marginnote{\faLightbulbO The idea is to make use of the fact that the extension will at least have
+  \marginnote{\faLightbulb The idea is to make use of the fact that the extension will at least have
   the algebraic number as a span up to some degree $n$, and instead of working with the spanning set,
   we work with one $\alpha$ away. There will be two cases, each of which can be dealt with at relative
   ease.}
@@ -1555,7 +1555,7 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
   \end{equation*}
   which is a non-zero polynomial.
 
-  In either case, we observe that $\alpha$ is algebraic over $F$. Therefore $K / F$ is algebraic.\qed\
+  In either case, we observe that $\alpha$ is algebraic over $F$. Therefore $K / F$ is algebraic.
 \end{proof}
 
 % subsection polynomials_on_field_extensions (end)
@@ -1608,7 +1608,7 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
         \cdot [F(\alpha_1, \ldots, \alpha_n) : F].
   \end{align*}
   It follows from the base case and the induction hypothesis that $[F(\alpha_1, \ldots, \alpha_{n +1}):F]$
-  is finite.\qed\
+  is finite.
 \end{proof}
 
 \begin{note}
@@ -1640,7 +1640,7 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
   \begin{equation*}
     [F(c_{n - 1}, \ldots, c_0, \alpha) : F] < \infty.
   \end{equation*}
-  Thus $\alpha$ is algebraic over $F$ and so $K / F$ is algebraic.\qed\
+  Thus $\alpha$ is algebraic over $F$ and so $K / F$ is algebraic.
 \end{proof}
 
 \begin{propo}[Algebraic Numbers Form a Subfield]\label{propo:algebraic_numbers_form_a_subfield}
@@ -1654,7 +1654,7 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
     \alpha, \beta, \alpha + \beta, \alpha \beta, \beta^{-1} \in F(\alpha, \beta).
   \end{equation*}
   Then $[F(\alpha, \beta) : F] < \infty$ implies that $L$ is finitely generated, which is thus
-  algebraic, and is hence a subfield of $K$.\qed\
+  algebraic, and is hence a subfield of $K$.
 \end{proof}
 
 % subsection polynomials_on_field_extensions_continued (end)
@@ -1692,7 +1692,7 @@ this notion and make use of properties from this notion.
   \begin{equation*}
     \bar{t} = t + p(t) \in K
   \end{equation*}
-  is a root of $p(x)$, which means that $\bar{t}$ is also a root for $f(x)$.\qed\
+  is a root of $p(x)$, which means that $\bar{t}$ is also a root for $f(x)$.
 \end{proof}
 
 \begin{thm}[Repeated Kronecker's Theorem]\label{thm:repeated_kronecker_s_theorem}
@@ -1703,7 +1703,7 @@ this notion and make use of properties from this notion.
 \begin{proof}
   By the Fundamental Theorem of Algebra, if we suppose that $\deg f = n < \infty$, then
   $f$ has $n$ roots. Consequently, we need only to apply \cref{thm:kronecker_s_theorem}
-  for at most $n$-many times to get to an extension where $f(x)$ splits.\qed\
+  for at most $n$-many times to get to an extension where $f(x)$ splits.
 \end{proof}
 
 % section splitting_fields (end)
@@ -1730,7 +1730,7 @@ The following result is a direct consequence of \cref{thm:repeated_kronecker_s_t
   Let $f(x) \in F[x]$ be non-constant, and let $K / F$ be such that $f(x)$ splits over $K$.
   Suppose
   \begin{equation*}
-    f(x) = u(x - \alpha_1)\ hdots (x - \alpha_n),
+    f(x) = u(x - \alpha_1) \hdots (x - \alpha_n),
   \end{equation*}
   where $u \in F$ and $\alpha_1, \ldots, \alpha_n \in K$. Then a splitting field for $f(x)$
   over $F$ is $F(\alpha_1, \ldots, \alpha_n)$.
@@ -1843,7 +1843,7 @@ It follows from induction that
 \end{crly}
 
 \begin{proof}
-  Consider $\phi = \id$ and use \cref{lemma:extended_isomorphism_extension_lemma}.\qed\
+  Consider $\phi = \id$ and use \cref{lemma:extended_isomorphism_extension_lemma}.
 \end{proof}
 
 % section splitting_fields_continued (end)
@@ -1889,6 +1889,197 @@ machinery has been taken care of with the introduction of
 % section algebraic_closures (end)
 
 % chapter lecture_12_feb_01st (end)
+
+\chapter{Lecture 13 Feb 04th}%
+\label{chp:lecture_13_feb_04th}
+% chapter lecture_13_feb_04th
+
+\section{Algebraic Closures (Continued)}%
+\label{sec:algebraic_closures_continued}
+% section algebraic_closures_continued
+
+This may seem obvious from the names (closure, closed?), but it is actually not
+immediately clear that algebraic closures are algebraically closed.
+
+\begin{propo}[Algebraic Closures are Algebraically Closed]\label{propo:algebraic_closures_are_algebraically_closed}
+  If $\bar{F}$ is an algebraic closure for $F$, then $\bar{F}$ is algebraically closed.
+\end{propo}
+
+\begin{proof}
+  Let $f(x) \in \bar{F}[x]$ be non-constant. Then by
+  \hyperref[thm:kronecker_s_theorem]{Kronecker's Theorem}, $f(x)$ has a root $\alpha$ in
+  some extension of $\bar{F}$. Since $\bar{F}(\alpha) / \bar{F}$ is algebraic and $\bar{F}
+  / F$ is also algebraic, we have that $\bar{F}(\alpha) / F$ is algebraic. Thus $\alpha$
+  is a root of some $p(x) \in F[x]$. Since $\bar{F}$ is the algebraic closure of
+  $\bar{F}$, $p(x)$ splits over $\bar{F}[x]$, and so it follows that $\alpha \in \bar{F}$.
+  Therefore, $bar{F}$ is algebraically closed.
+\end{proof}
+
+\marginnote{
+\begin{mnote}
+  \cref{thm:every_field_has_an_algebraic_closure} is an exercise in A5.
+\end{mnote}
+}
+\begin{thm}[Every Field has an Algebraic Closure]\label{thm:every_field_has_an_algebraic_closure}
+  For every field $F$, there exists an algebraically closed field that contains $F$.
+\end{thm}
+
+\begin{thm}[Smallest Algebraic Closure]\label{thm:smallest_algebraic_closure}
+  Let $K$ be an algebraically closed field that contains $F$. The collection of elements
+  in $K$ which are algebraic over $F$ is an algebraic closure of $F$.
+\end{thm}
+
+\begin{proof}
+  Let
+  \begin{equation*}
+    L := \left\{ \alpha \in K \mmid \alpha \text{ is algebraic over } F \right\}.
+  \end{equation*}
+  As given in the statement, we want to show that $L$ is an algebraic closure of $F$.
+
+  It is clear that $L / F$, since every $\beta \in F$ is algebraic over $F$ and is hence
+  in $L$. Let $f(x) \in F[x]$ with $\deg f \geq 1$. Since $f(x)$ splits over $K$, we have
+  \begin{equation*}
+    f(x) = u(x - \alpha_1)(x - \alpha_2) \hdots (x - \alpha_n),
+  \end{equation*}
+  where $u \in F^\times$ and $\alpha_i \in K$ for $i \in \{ 1, \ldots, n \}$. Then since
+  $f(\alpha_i) = 0$ for all $i$, it follows that each of the $\alpha_i \in L$. In other
+  words, $f(x)$ splits over $L$.
+\end{proof}
+
+% section algebraic_closures_continued (end)
+
+\section{Cyclotimic Extensions}%
+\label{sec:cyclotimic_extensions}
+% section cyclotimic_extensions
+
+We look into a specific class of field extensions, which is rather important to us.
+Consider the following question:
+
+\begin{quotebox}{be-green}{light}
+  What is the splitting field of the polynomial $f(x) = x^n - 1$ over $\mathbb{Q}$?
+\end{quotebox}
+
+The following definition should remind one of MATH 135.
+
+\begin{defn}[$n$\textsuperscript{th} Roots of Unity]\index{$n$\textsuperscript{th} Roots of Unity}\label{defn:_n_th_roots_of_unity}
+  We call the roots of $x^n - 1$ (over $\mathbb{C}$) the \hlnoteb{$n$\textsuperscript{th}
+  roots of unity}.
+\end{defn}
+
+\begin{eg}
+  We can obtain all the $n$\textsuperscript{th} roots of unity using Euler's identity
+  \begin{equation*}
+    \xi_n = \cos \left( \frac{2\pi}{n} \right) + i \sin \left( \frac{2 \pi}{n} \right),
+  \end{equation*}
+  which we label these roots as $1 = \xi_n^1, \xi_n^2, \xi_n^3, \ldots, \xi_n^{n - 1}$.
+\end{eg}
+
+Following the various results that we have proven in the last few lectures, we know that
+the splitting field of $x^n - 1$ over $\mathbb{Q}$ is therefore $\mathbb{Q}(\xi_n)$.
+
+\newthought{We can then ask} ourselves what is the degree of $\mathbb{Q}(\xi_n)$ over
+$\mathbb{Q}$, i.e. what is $[ \mathbb{Q}(\xi_n) : \mathbb{Q} ]$?
+
+If $n = p$ where $p$ is prime, then since we may write
+\begin{equation*}
+  x^p - 1 = (x - 1)(x^{p - 1} + x^{p - 2} + \hdots + x + 1),
+\end{equation*}
+by \cref{eg:polynomial_with_prime_minus_1_degree} in
+\cref{eg:examples_of_irreducible_polynomials}, we know that
+\begin{equation*}
+  \Phi_p(x) = x^{p - 1} + \hdots + x + 1
+\end{equation*}
+is irreducible over $\mathbb{Q}$. So $\Phi_p(x)$ is the minimal polynomial for $\xi_n$
+over $\mathbb{Q}$.
+
+It thus follows that $[ \mathbb{Q}(\xi_p) : \mathbb{Q} ] = p - 1$.
+
+\begin{eg}
+  We shall calculate $[ \mathbb{Q}(\xi_6) : \mathbb{Q} ]$. Note that
+  \begin{equation*}
+    \xi_6 = \cos \left( \frac{2 \pi}{6} \right) + i \sin \left( \frac{2 \pi}{6} \right) =
+    \frac{1}{2} + i \frac{\sqrt{3}}{2}.
+  \end{equation*}
+  Since $1, 2 \in \mathbb{Q}$, we have that $\mathbb{Q}(\xi_6) = \mathbb{Q}(i \sqrt{3})$.
+  By \hyperref[propo:eisenstein_s_criterion]{$3$-Eisenstein}, the polynomial $x^2 + 3$ is
+  irreducible and is a polynomial where $i \sqrt{3}$ is a root. Thus
+  \begin{equation*}
+    [ \mathbb{Q}(\xi_6) : \mathbb{Q} ] = [ \mathbb{Q}(i \sqrt{3}) : \mathbb{Q} ] = \deg
+      (x^2 + 3) = 2.
+  \end{equation*}
+\end{eg}
+
+\begin{remark}
+  The $n$\textsuperscript{th} roots of unity form a cyclic group. A generator of this
+  group is called a \hldefn{primitive $n$\textsuperscript{th} root of unity}.
+
+  In other words, $\xi_n^k$ is an primitive $n$\textsuperscript{th} root of unity iff
+  $(\xi_n^k)^m \neq 1$ for $m = 1, 2, \ldots, n - 1$.
+
+  From Group Theory, $\xi_n^k$ is a primitive $n$\textsuperscript{th} root of unity iff
+  $\gcd(n, k) = 1$. Thus, there are
+  \begin{equation*}
+    \phi(n) = \abs{ \{ 1 \leq k \leq n : \gcd(k, n) = 1 \} }
+  \end{equation*}
+  primitive $n$\textsuperscript{th} root of unity\sidenote{Explanation required.}.
+\end{remark}
+
+\begin{defn}[$n$\textsuperscript{th} Cyclotomic Polynomial]\index{$n$\textsuperscript{th} Cyclotomic Polynomial}\label{defn:_n_th_cyclotomic_polynomial}
+  For $n \geq 1$, the \hlnoteb{$n$\textsuperscript{th} cyclotomic polynomial} is
+  \begin{equation*}
+    \Phi_n(x) = \prod_{\substack{1 \leq k \leq n \\ \gcd(k, n) = 1}} \left( x - e^{2 \pi i
+    \frac{k}{n}} \right) = (x - \alpha_1, \ldots)(x - \alpha_n) \hdots (x - \alpha_{\phi(n)}),
+  \end{equation*}
+  where the $\alpha_i$'s are the primitive $n$\textsuperscript{th} roots of unity.
+\end{defn}
+
+\begin{remark}
+  Since $\Phi_n(x)$ has rational coefficients, and $\mathbb{C}$ is an algebraic closure of
+  $\mathbb{Q}$, we know that $\Phi_n(x) \in \mathbb{C}[x]$.
+\end{remark}
+
+In fact, $\Phi_n(x)$ is the minimal polynomial for $\xi_n$ over $\mathbb{Q}$, which then
+gives us that $[ \mathbb{Q}(\xi_n) : \mathbb{Q} ] = \phi(n)$. However, we are not yet
+ready to show this.
+
+\begin{eg}
+  The following are $n$\textsuperscript{th} cyclotomic polynomials, where $n = 1, 2, 3$
+  and $4$:
+  \marginnote{See the first 30 cyclotomic polynomials on
+  \href{https://en.wikipedia.org/wiki/Cyclotomic_polynomial\#Examples}{Wikipedia}.}
+  \begin{itemize}
+    \item $\Phi_1(x) = x - 1$
+    \item $\Phi_2(x) = \left(x - e^{2 \pi i \frac{1}{2}}\right) = (x + 1)$
+    \item $\Phi_3(x) = \left(x + e^{2 \pi i \frac{1}{3}}\right)\left(x - e^{2 \pi i
+      \frac{2}{3}}\right) =  x^2 + x + 1$
+    \item $\Phi_4(x) = (x + i)(x - i) = x^2 + 1$
+  \end{itemize}
+\end{eg}
+
+\begin{eg}
+  Let $n = p$ be prime. Then the $p$\textsuperscript{th} roots of unity are
+  \begin{equation*}
+    1, \xi_p^2, \xi_p^3, \ldots, \xi_p^{p - 1}
+  \end{equation*}
+  and the primitives are
+  \begin{equation*}
+    \xi_p^2, \xi_p^3, \ldots, \xi_p^{p - 1}.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    x^p - 1 = (x - 1)(x^{p - 1} + x^{p - 2} + \hdots + x^2 + x + 1) = (x - 1) \Phi_p(x).
+  \end{equation*}
+\end{eg}
+
+A good question to ask here is:
+
+\begin{quotebox}{be-green}{light}
+  Is there an easier way to compute $\Phi_n(x)$ for all $n$?
+\end{quotebox}
+
+% section cyclotimic_extensions (end)
+
+% chapter lecture_13_feb_04th (end)
 
 \appendix
 
