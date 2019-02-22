@@ -20,6 +20,8 @@
 \DeclareMathOperator{\ch}{ch}
 \DeclareMathOperator{\Span}{span}
 \DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\char}{char}
 \makeatletter
 \providerobustcmd*{\bigcupdot}{%
    \mathop{%
@@ -2315,6 +2317,127 @@ here.}
 % section cyclotomic_extensions_continued (end)
 
 % chapter lecture_14_feb_08th (end)
+
+\chapter{Lecture 15 Feb 11th}%
+\label{chp:lecture_15_feb_11th}
+% chapter lecture_15_feb_11th
+
+\section{Finite Fields}%
+\label{sec:finite_fields}
+% section finite_fields
+
+Finite fields are very easy to work with a grasp. The nice thing about finite fields is
+that, up to isomorphism, there is only one field that has order prime to some power, which
+we shall show in this section.
+
+\begin{lemma}[Units of a Finite Field Form a Finite Cyclic Group]\label{lemma:units_of_a_finite_field_form_a_finite_cyclic_group}
+  Let $F$ be a finite gield. Then $G = F^\times$ is a finite cyclic group.
+\end{lemma}
+
+\begin{proof}
+  Since $G$ is the set of units of $F$, we know that $G$ is an abelian group by its
+  construction, and it is finite since $F$ is finite. Then, by the \hlnotea{Finite Abelian
+  Group Structure}, $\exists n_1, \ldots, n_m \in \mathbb{Z}$ such that
+  \begin{equation}\label{eq:lemma_units_of_finite_fields_eq1}
+    G \simeq \mathbb{Z}_{n_1} \times \mathbb{Z}_{n_2} \times \hdots \times
+    \mathbb{Z}_{n_m},
+  \end{equation}
+  and each $n_i$ is a prime power. Let
+  \begin{align*}
+    N &:= n_1 n_2 \hdots n_m \text{ and } \\
+    M &:= \lcm(n_1, \ldots, n_m).
+  \end{align*}
+  By construction, $M \leq N$. Now $\forall a \in G$, we have that $a$ is a root of $x^M -
+  1 \in F[x]$ due to \cref{eq:lemma_units_of_finite_fields_eq1}\sidenote{$a$ is of one of
+  the orders $n_1, n_2, \ldots. n_m$, so it is a root of $x^M - 1$.}.
+  
+  Note that $N = \abs{G}$, and the polynomial $x^M - 1$ has at most $M$ roots. Therefore,
+  $N \leq M$. Thus we must have $N = M$, thus forcing the $n_i$'s to be coprimes, and so
+  we have
+  \begin{equation*}
+    G \simeq \mathbb{Z}_{n_1} \times \mathbb{Z}_{n_2} \times \hdots \times
+    \mathbb{Z}_{n_m} = \mathbb{Z}_N.
+  \end{equation*}
+\end{proof}
+
+\begin{propo}[Order of Finite Fields are Powers of Its Primal Characteristic]\label{propo:order_of_finite_fields_are_powers_of_its_primal_characteristic}
+  Let $F$ be a finite field. Then
+  \begin{enumerate}
+    \item $\abs{F} = p^n$, where $p$ is the \hlnotea{characteristic}\sidenote{Recall from
+      PMATH 347 that the definition of the characteristic is the order of $1$ under
+      addition. We shall use $\char(F)$ to mean the characteristic of the field $F$.} of
+      $F$ and $n = [F : \mathbb{Z}_p]$.
+    \item $F = \mathbb{Z}_p(\alpha)$ for some $\alpha$ such that
+      $\deg_{\mathbb{Z}_p}(\alpha) = n$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  Let $F$ be a finite field with characteristic $p$. Then $\mathbb{Z}_p$ is a prime
+  subfield of $F$, and in particular $F / \mathbb{Z}_p$. Let $n = [ F : \mathbb{Z}_p ]$.
+  By \cref{lemma:units_of_a_finite_field_form_a_finite_cyclic_group}, let $\alpha \in G =
+  F^\times$ be such that $G = \langle \alpha \rangle$. By adding a unit of $F$ to
+  $\mathbb{Z}_p$, since $\mathbb{Z}_p$ is a prime subfield, we have that
+  $\mathbb{Z}_p(\alpha) = F$.
+
+  Now since  $n = [F : \mathbb{Z}_p]$, we have that $F = \Span_{\mathbb{Z}_p} \{ 1,
+  \alpha, \alpha^2, \ldots, \alpha^{n - 1} \}$. It follows that $\abs{F} = p^n$.
+\end{proof}
+
+\marginnote{\cref{thm:finite_fields_as_splitting_fields} is the important theorem that
+tells us that there is only one finite field for every $p^n$ up to isomorphism, and this
+follows from the \hyperref[crly:splitting_fields_are_unique_up_to_isomorphism]{uniqueness
+of splitting fields}.}
+\begin{thm}[Finite Fields as Splitting Fields]\label{thm:finite_fields_as_splitting_fields}
+  Let $p$ be a prime and $n \in \mathbb{N}$. Then $F$ is a finite field of order $p^n$ iff
+  $F$ is the splitting field of $f(x) = x^{p^n} - x$ over $\mathbb{Z}_p[x]$.
+\end{thm}
+
+\begin{proof}
+  Suppose $\abs{F} = p^n$. By \hyperref[thm:lagrange_s_theorem]{Lagrange}\sidenote{Is it
+  really Lagrange?}, $a^{p^n - 1} - 1 = 0$ for every $a \in F^\times$. Then in particular,
+  \begin{equation*}
+    a(a^{p^n} - 1) = a^{p^n} - a = 0.
+  \end{equation*}
+  It follows that every $a \in F$ is a root of $x^{p^n} - x$.
+
+  Since $x^{p^n} - x$ has at most $p^n$ roots, $F$ must thus contain al roots of $x^{p^n}
+  - x$, and so $x^{p^n} - x$ splits over $F[x]$. Any proper subfield of $F$ would not have
+  enough elements to be a splitting field for $x^{p^n} - x$. Thus $F$ is a splitting field
+  of $x^{p^n} - x$.
+
+  For the \hlbnoted{$\impledby$} direction, let $F$ be the splitting field of $f(x) =
+  x^{p^n} - x$. Let
+  \begin{equation*}
+    K = \{ \alpha \in F : f(\alpha) = 0 \}.
+  \end{equation*}
+  \begin{ex}
+    $K$ is a field.
+  \end{ex}
+  \marginnote{
+  \begin{solution}[to the ex. in the proof]
+    For $\alpha, \beta \in K$, we have that 
+    \begin{equation*}
+      \alpha^{p^n} - \alpha = 0 \text{ and } \beta^{p^n} - \beta = 0.
+    \end{equation*}
+    It then follows by the Freshman's Dream that
+    \begin{gather*}
+    \left( \alpha^{p^n} + \beta^{p^n} \right) - \alpha - \beta = 0 \\
+    \implies \\
+    (\alpha + \beta)^{p^n} - (\alpha + \beta) = 0.
+   \end{gather*} 
+  \end{solution}}
+
+  Then $K \leq F$. However, we also have that $F \leq K$, since all roots of $f$ are in
+  $F$ since $F$ is a splitting field, and $f$ also splits over $K$.
+
+  Also, note that $f'(x) = -1$ since $\char F = p$, and so $f$ has no repeated roots since
+  it is a decreasing function.
+\end{proof}
+
+% section finite_fields (end)
+
+% chapter lecture_15_feb_11th (end)
 
 \appendix
 
