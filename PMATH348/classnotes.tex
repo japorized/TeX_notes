@@ -20,6 +20,25 @@
 \DeclareMathOperator{\ch}{ch}
 \DeclareMathOperator{\Span}{span}
 \DeclareMathOperator{\id}{id}
+\makeatletter
+\providerobustcmd*{\bigcupdot}{%
+   \mathop{%
+     \mathpalette\bigop@dot\bigcup
+   }%
+}
+\newrobustcmd*{\bigop@dot}[2]{%
+   \setbox0=\hbox{$\m@th#1#2$}%
+   \vbox{%
+     \lineskiplimit=\maxdimen
+     \lineskip=-0.7\dimexpr\ht0+\dp0\relax
+     \ialign{%
+       \hfil##\hfil\cr
+       $\m@th\cdot$\cr
+       \box0\cr
+     }%
+   }%
+}
+\makeatother
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -2080,6 +2099,222 @@ A good question to ask here is:
 % section cyclotimic_extensions (end)
 
 % chapter lecture_13_feb_04th (end)
+
+\chapter{Lecture 14 Feb 08th}%
+\label{chp:lecture_14_feb_08th}
+% chapter lecture_14_feb_08th
+
+\section{Cyclotomic Extensions (Continued)}%
+\label{sec:cyclotomic_extensions_continued}
+% section cyclotomic_extensions_continued
+
+\begin{remark}
+  Note that $Z := \{ z \in \mathbb{C} : z^n = 1 \}$ is a group. We may write
+  \begin{equation*}
+    \bigcupdot_{d \mid n} \left\{ \text{ primitive } d\text{\textsuperscript{th} roots of
+    unity } \right\}.
+  \end{equation*}
+\end{remark}
+
+\begin{lemma}[$x^n - 1 = \prod_{d \mid n} \Phi_d(x)$]\label{lemma:_x_n_1_d mid n_phi_d_x_}
+  We have
+  \begin{equation*}
+    x^n - 1 = \prod_{d \mid n} \Phi_d(x).
+  \end{equation*}
+\end{lemma}
+
+\begin{eg}
+  \begin{align*}
+    \Phi_6(x) &= \frac{x^6 - 1}{\Phi_1(x) \Phi_2(x) \Phi_3(x)} \\
+              &= \frac{x^6 - 1}{(x - 1)(x + 1)(x^2 + x + 1)} = x^2 - x + 1.
+  \end{align*}
+\end{eg}
+
+\begin{propo}[Cyclotomic Polynomials have Integer Coefficients]\label{propo:cyclotomic_polynomials_have_integer_coefficients}
+  For every $n \geq 1$, $\Phi_n(x) \in \mathbb{Z}[x]$.
+\end{propo}
+
+\marginnote{
+\begin{strategy}
+  We shall use strong induction here.
+\end{strategy}
+}
+\begin{proof}
+  We proceed by induction on $n$. If $n = 1$, then $\Phi_1(x) = x - 1 \in \mathbb{Z}[x]$.
+
+  Suppose the results holds for all $l < n$. By \cref{lemma:_x_n_1_d mid n_phi_d_x_}, we
+  have
+  \begin{equation*}
+    x^n - 1 = f(x) \Phi_n(x)
+  \end{equation*}
+  where
+  \begin{equation*}
+    f(x) = \prod_{\substack{d \mid n \\ d < n}} \Phi_d(x).
+  \end{equation*}
+  By the induction hypothesis, $f(x) \in \mathbb{Z}[x]$. Let $F = \mathbb{Q}(\xi_n)$ so
+  that $\Phi_n(x) \in F[x]$. By the division algorithm, $\exists ! q(x), r(x) \in F[x]$
+  such that
+  \begin{equation*}
+    x^n - 1 = f(x) q(x) + r(x).
+  \end{equation*}
+  Similarly, $\exists ! \tilde{q}(x), \tilde{r}(x) \in \mathbb{Q}[x] \supset
+  \mathbb{Z}[x]$ such that
+  \begin{equation*}
+    x^n - 1 f(x) \tilde{q}(x) + \tilde{r}(x).
+  \end{equation*}
+  Since $\mathbb{Q} \subseteq F \subseteq \mathbb{C}$, by uniqueness\sidenote{This part
+  should be thought of in the following way: we know that there is some $q(x) \in F[x]$,
+  which is an extension of $\mathbb{Q}[x]$, and we also found that there is some
+  $\tilde{q}(x) \in \mathbb{Q}[x]$, and so uniqueness tells us that the two must be the
+  same.},
+  \begin{equation*}
+    \Phi_n(x) = q(x) = \tilde{q}(x) \in \mathbb{Q}[x].
+  \end{equation*}
+  It follows by \hyperref[thm:gauss_lemma]{Gauss' Lemnma} that $\Phi_n(x) \in
+  \mathbb{Z}[x]$.
+\end{proof}
+
+\marginnote{The proof for \cref{thm:cyclotomic_polynomials_are_irreducible_over_q_} is
+provided over two separate lectures, in particular it is provided at the end of this
+lecture and the beginning of Lecture 16. For sanity, the entire proof will be provided
+here.}
+\begin{thm}[Cyclotomic Polynomials are Irreducible over $\mathbb{Q}$]\label{thm:cyclotomic_polynomials_are_irreducible_over_q_}
+  For $n \geq 1$, $\Phi_n(x)$ is irreducible over $\mathbb{Q}$.
+\end{thm}
+
+\marginnote{
+\begin{strategy}
+  We will show that $\Phi_n(x)$ is a minimal polynomial. If $g(x) \in \mathbb{Q}[x]$ is a
+  minimal polynomial for $\xi_n$, then since $\xi_n$ is also a root of $\Phi_n(x)$, we
+  must have $g(x) \mid \Phi_n(x)$. So to show that $g(x)$ is actually $\Phi_n(x)$, it
+  suffices to show that $\Phi_n(x) \mid g(x)$.
+\end{strategy}
+}
+\begin{proof}
+  Let $g(x) \in \mathbb{Q}[x]$ be a minimal polynomial for $\xi_n$. It suffices for us to
+  show that $\Phi_n(x) \mid g(x)$. To that end, we can show that every root of $\Phi_n(x)$
+  is a root of $g(x)$ (in $\mathbb{C}$).
+
+  Let $\alpha$ be a root of $\Phi_n(x)$. Then by \cref{defn:_n_th_cyclotomic_polynomial},
+  $\alpha = \xi_n^k$ for some $k \in \{ 1, \ldots, n - 1 \}$ such that $\gcd(k, n) = 1$.
+  Then let $k = p_1 p_2 \hdots p_N$, where each $p_i$ is a prime and $p_i \nmid n$
+  \sidenote{Note that this must be the case since $\gcd(k, n) = 1$.}.
+  
+  Thus, the statement which we wish to prove becomes the following: $\xi_n^{p_1},
+  \xi_n^{p_1 p_2}, \ldots, \xi_n^{p_1 p_2 \hdots p_N} = \alpha$ are roots of $g(x)$.
+
+  To prove the above, it suffices for us to show that if $\xi \in \mathbb{C}$ is a root of
+  $g(x)$, then $\xi^p$, where $p$ is prime and $p \nmid n$, is also a root of $g(x)$.
+
+  Suppose not \faDizzy, i.e. that $g(\xi) = 0$ but $g\left(\xi^p\right) \neq 0$, where $p$
+  is prime and $p \nmid n$. Now since $g(x) \mid \Phi_n(x)$, we have $\Phi_n(\xi) = 0$.
+  Since $p \nmid n$, it follows that $\xi^p$ is also a primitive $n$\textsuperscript{th}
+  root of unity, i.e. $\Phi_n(\xi_n^p) = 0$. Now since $g(x) \mid \Phi_n(x)$, $\exists
+  h(x) \in \mathbb{Q}[x]$ such that $\Phi_n(x) =g(x) h(x)$. By
+  \hyperref[thm:gauss_lemma]{Gauss}, WMA $h(x) \in \mathbb{Z}[x]$. Since $\mathbb{Z}[x$ is
+  an integral domain, $\Phi_n(\xi^p) = 0$ and $g(\xi^p) \neq 0 \implies h(\xi^p) = 0$.
+
+  Let $f(x) = h(x^p) \in \mathbb{Z}[x]$. Then $f(\xi) = 0$. Moreover, we have $g(x) \mid
+  f(x)$ in $\mathbb{Q}[x]$. Thus $f(x) = g(x) k(x)$ for some $k(x) \in \mathbb{Z}[x]$
+  (again, through Gauss).
+
+  Suppose $h(x) = \sum b_j x^j$, which then implies that $f(x) = \sum b_j x^{pj}$.
+  Consider $\bar{f}(x) \in \mathbb{Z}_p[x]$, i.e.
+  \begin{equation*}
+    \bar{f}(x) = \sum \bar{b}_j x^{pj}, \quad \bar{b}_j \equiv b_j \mod p.
+  \end{equation*}
+  Then
+  \begin{align*}
+    \bar{f}(x) &= \sum \bar{b}_j^p x^{pj} \quad \because \text{ \hlnotea{Fermat's Little
+                Theorem} } \\
+               &= \left( \sum \bar{b}_j x^j \right)^p \quad \because \text{
+                \hlnotea{Freshman's Dream} } \\
+               &= \left( \bar{h}(x) \right)^p.
+  \end{align*}
+  It follows that
+  \begin{equation*}
+    \left( \bar{h}(x) \right)^p = \bar{f}(x) = \bar{g}(x) \bar{k}(x) \in \mathbb{Z}_p[x].
+  \end{equation*}
+
+  Now let $\bar{l}(x)$ be an irreducible factor of $\bar{g}(x)$ over $\mathbb{Z}_p[x]$
+  \sidenote{Note that this $\bar{l}(x)$ may be $\bar{g}(x)$ itself if $\bar{g}(x)$ is
+  still irreducible over $\mathbb{Z}_p[x]$.}. Since $\bar{l}(x) \mid \bar{h}(x)^p$, we
+  have that $\bar{l}(x) \mid \bar{h}(x)$ \sidenote{\hlwarn{Why?}}. % TODO : Find out why
+
+  On the other hand, in $\mathbb{Z}_p[x]$, we have that $\bar{\Phi}_n(x) = \bar{g}(x)
+  \bar{h}(x)$. It follows that $\bar{l}(x)^2 \mid \bar{\Phi}_n(x)$
+  \sidenote{\hlwarn{Why?}}. % TODO : Find out why
+  Since $\bar{\Phi}_n(x) \mid x^n - 1$, we have that
+  \begin{equation*}
+    x^n - 1 = \bar{l}(x)^2 \bar{q}(x) \in \mathbb{Z}_p[x].
+  \end{equation*}
+  By \hlnotea{taking derivatives} on both sides, we have
+  \begin{align*}
+    \bar{n} x^{n - 1} &= 2 \bar{l}(x) \bar{l}'(x) \bar{q}(x) + \bar{l}(x)^2 \bar{q}'(x) \\
+                      &= \bar{l}(x) [ \faEllipsisH ] \in \mathbb{Z}_p[x],
+  \end{align*}
+  where $\faEllipsisH$ is an irrelevant factor. Since $\bar{n} \neq 0$, we have that the
+  only root of LHS is $\bar{0}$, and so the only root of $\bar{l}(x)$ is some extension of
+  $\mathbb{Z}_p$ is $\bar{0}$. Since $\bar{l}(x) \mid x^n - \bar{1}$, we have that
+  $\bar{0}^n - \bar{1} = 0$ but that mean $0 = 1 \in \mathbb{Z}_p$, a contradiction.
+
+  Tracing back our long convoluted line of thought, we have that \faDizzy is not true, and
+  so we must have $g(\xi^p) = 0$, which
+  \begin{itemize}
+    \item[$\implies$] all the $\xi_n^{p_1}, \xi_n^{p_1 p_2}, \ldots, \alpha$ are all roots
+      of $g(x)$;
+    \item[$\implies$] $\Phi_n(x) \mid g(x)$;
+    \item[$\implies$] $\Phi_n(x) = g(x)$,
+  \end{itemize}
+  which is what we want to show.
+\end{proof}
+
+\begin{crly}[Cyclotomic Polynomials are Minimal Polynomials of Its Roots over $\mathbb{Q}$]\label{crly:cyclotomic_polynomials_are_minimal_polynomials_of_its_roots_over_q_}
+  $\Phi_n(x)$ is the minimal polynomial for $\xi_n$ over $\mathbb{Q}$. In particular, $[
+  \mathbb{Q}(\xi_n) : \mathbb{Q} ] = \phi(n)$.
+\end{crly}
+
+\begin{eg}
+  Let $f(x) = x^5 - 3$. Describe the splitting field of $f(x)$ over $\mathbb{Q}$. We shall
+  find a basis for this splitting field over $\mathbb{Q}$.
+
+  The roots of $f(x)$ are
+  \begin{equation*}
+    \sqrt[5]{3}, \, \xi_5 \sqrt[5]{3}, \xi_5^2 \sqrt[5]{3}, \xi_5^3 \sqrt[5]{3}, \xi_5^4
+    \sqrt[5]{3}.
+  \end{equation*}
+  It follows that the splitting field for $f$ is $F = \mathbb{Q}(\sqrt[5]{3}, \xi_5)$.
+  Note that since
+  \begin{equation*}
+    \deg_{\mathbb{Q}}(\xi_5) = \phi(5) = 4 \text{ and } \deg_{\mathbb{Q}}(\sqrt[5]{3}) =
+    5,
+  \end{equation*}
+  it follows from A4Q2 that
+  \begin{equation*}
+    [ \mathbb{Q}(\sqrt[5]{3}, \xi_5) : \mathbb{Q} ] = [ \mathbb{Q}(\sqrt[5]{3}) :
+    \mathbb{Q} ][ \mathbb{Q}(\xi_5) : \mathbb{Q} ] = 4 \cdot 5 = 20.
+  \end{equation*}
+
+  Now a \hlbnotea{basis for $\mathbb{Q}(\xi_5)(\sqrt[5]{3}) / \mathbb{Q}(\xi_5)$} is
+  \begin{equation*}
+    \left\{ 1, \sqrt[5]{3}, \left( \sqrt[5]{3} \right)^2, \left( \sqrt[5]{3} \right)^3,
+    \left( \sqrt[5]{3} \right)^4 \right\},
+  \end{equation*}
+  while a \hlbnotea{basis for $\mathbb{Q}(\xi_5) / \mathbb{Q}$} is
+  \begin{equation*}
+    \left\{ 1, \xi_5, \xi_5^2, \xi_5^3 \right\}.
+  \end{equation*}
+  Following the \hyperref[thm:tower_theorem]{Tower Theorem}, a basis for the splitting
+  field $F$ is
+  \begin{equation*}
+    \left\{ \left( \sqrt[5]{3} \right)^i \left( \xi_5 \right)^j \mmid 0 \leq i \leq 4, \,
+    0 \leq j \leq 3 \right\}.
+  \end{equation*}
+\end{eg}
+
+% section cyclotomic_extensions_continued (end)
+
+% chapter lecture_14_feb_08th (end)
 
 \appendix
 
