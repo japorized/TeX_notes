@@ -2439,6 +2439,70 @@ of splitting fields}.}
 
 % chapter lecture_15_feb_11th (end)
 
+\chapter{Lecture 16 Feb 13th}%
+\label{chp:lecture_16_feb_13th}
+% chapter lecture_16_feb_13th
+
+\section{Finite Fields (Continued)}%
+\label{sec:finite_fields_continued}
+% section finite_fields_continued
+
+\marginnote{Since I moved the `second half' of the proof of
+\cref{thm:cyclotomic_polynomials_are_irreducible_over_q_} over to
+\cref{chp:lecture_14_feb_08th}, not too much content is left here.}
+By \cref{lemma:units_of_a_finite_field_form_a_finite_cyclic_group},
+\cref{propo:order_of_finite_fields_are_powers_of_its_primal_characteristic} and
+\cref{thm:finite_fields_as_splitting_fields}, we have the following result.
+
+\begin{thm}[Classification of Finite Fields]\label{thm:classification_of_finite_fields}
+  For any prime $p$ and $n \in \mathbb{N}$, we have
+  \begin{itemize}
+    \item there exists a field $F$ such that $\abs{F} = p^n$; and
+    \item any 2 fields of order $p^n$ are isomorphic to one another.
+  \end{itemize}
+\end{thm}
+
+\begin{note}[Notation]
+  We denote the field of order $p^n$ by $\mathbb{F}_{p^n}$, i.e.
+  \begin{equation*}
+    \mathbb{F}_{p^n} := \left\{ x \mmid f(x) = x^{p^n} - x = 0 \right\}.
+  \end{equation*}
+\end{note}
+
+In the next lecture, we shall prove the following theorem.
+
+\begin{thmnonum}[Subfields of Finite Fields]\label{thmnonum:subfields_of_finite_fields}
+  If $E$ is a subfield of $\mathbb{F}_{p^n}$, then $E \simeq \mathbb{F}_{p^r}$, where $r
+  \mid n$. Moreover, if $r \mid n$, then $\mathbb{F}_{p^n}$ has a unique\sidenote{This is
+  truly unique, not unique up to isomorphism, which is \hlimpo{rare}.} subfield of order
+  $p^r$.
+\end{thmnonum}
+
+The above theorem gives us the following example.
+
+\begin{eg}
+  Given the finite field $\mathbb{F}_{2^{12}}$, we know that the divisors of $12$ are
+  \begin{equation*}
+    1, \, 2, \, 3, \, 4, \, 6, \, 12.
+  \end{equation*}
+  By the above theorem, we have the following \hlnotea{lattice structure}. 
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzcd}
+                                         & \mathbb{F}_{2^{12}} \arrow[rd, no head] \arrow[ld, no head] &                                                          &                                      \\
+    \mathbb{F}_{2^4} \arrow[rd, no head] &                                                             & \mathbb{F}_{2^6} \arrow[ld, no head] \arrow[rd, no head] &                                      \\
+                                         & \mathbb{F}_{2^2} \arrow[rd, no head]                        &                                                          & \mathbb{F}_{2^3} \arrow[ld, no head] \\
+                                         &                                                             & \mathbb{F}_{2^1}                                         &                                     
+    \end{tikzcd}
+    \caption{Lattice of $\mathbb{F}_{2^12}$}
+    \label{fig:lattice_of_f__2_12_}
+  \end{figure}
+\end{eg}
+
+% section finite_fields_continued (end)
+
+% chapter lecture_16_feb_13th (end)
+
 \appendix
 
 \chapter{Asides and Prior Knowledge}%
