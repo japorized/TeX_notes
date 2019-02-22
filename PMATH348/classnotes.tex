@@ -21,7 +21,7 @@
 \DeclareMathOperator{\Span}{span}
 \DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\lcm}{lcm}
-\DeclareMathOperator{\char}{char}
+\DeclareMathOperator{\Char}{char}
 \makeatletter
 \providerobustcmd*{\bigcupdot}{%
    \mathop{%
@@ -2055,8 +2055,7 @@ It thus follows that $[ \mathbb{Q}(\xi_p) : \mathbb{Q} ] = p - 1$.
 \end{defn}
 
 \begin{remark}
-  Since $\Phi_n(x)$ has rational coefficients, and $\mathbb{C}$ is an algebraic closure of
-  $\mathbb{Q}$, we know that $\Phi_n(x) \in \mathbb{C}[x]$.
+  Since $\Phi_n(x)$ has rational coefficients, we know that $\Phi_n(x) \in \mathbb{C}[x]$.
 \end{remark}
 
 In fact, $\Phi_n(x)$ is the minimal polynomial for $\xi_n$ over $\mathbb{Q}$, which then
@@ -2365,7 +2364,7 @@ we shall show in this section.
   \begin{enumerate}
     \item $\abs{F} = p^n$, where $p$ is the \hlnotea{characteristic}\sidenote{Recall from
       PMATH 347 that the definition of the characteristic is the order of $1$ under
-      addition. We shall use $\char(F)$ to mean the characteristic of the field $F$.} of
+      addition. We shall use $\Char(F)$ to mean the characteristic of the field $F$.} of
       $F$ and $n = [F : \mathbb{Z}_p]$.
     \item $F = \mathbb{Z}_p(\alpha)$ for some $\alpha$ such that
       $\deg_{\mathbb{Z}_p}(\alpha) = n$.
@@ -2406,7 +2405,7 @@ of splitting fields}.}
   enough elements to be a splitting field for $x^{p^n} - x$. Thus $F$ is a splitting field
   of $x^{p^n} - x$.
 
-  For the \hlbnoted{$\impledby$} direction, let $F$ be the splitting field of $f(x) =
+  For the \hlbnoted{$\impliedby$} direction, let $F$ be the splitting field of $f(x) =
   x^{p^n} - x$. Let
   \begin{equation*}
     K = \{ \alpha \in F : f(\alpha) = 0 \}.
@@ -2431,7 +2430,7 @@ of splitting fields}.}
   Then $K \leq F$. However, we also have that $F \leq K$, since all roots of $f$ are in
   $F$ since $F$ is a splitting field, and $f$ also splits over $K$.
 
-  Also, note that $f'(x) = -1$ since $\char F = p$, and so $f$ has no repeated roots since
+  Also, note that $f'(x) = -1$ since $\Char F = p$, and so $f$ has no repeated roots since
   it is a decreasing function.
 \end{proof}
 
