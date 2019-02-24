@@ -11,6 +11,45 @@
 
 \input{latex-classnotes-preamble.tex}
 
+\newcommand{\rotateRPY}[4][0/0/0]% point to be saved to \savedxyz, roll, pitch, yaw
+{   \pgfmathsetmacro{\rollangle}{#2}
+    \pgfmathsetmacro{\pitchangle}{#3}
+    \pgfmathsetmacro{\yawangle}{#4}
+
+    % to what vector is the x unit vector transformed, and which 2D vector is this?
+    \pgfmathsetmacro{\newxx}{cos(\yawangle)*cos(\pitchangle)}% a
+    \pgfmathsetmacro{\newxy}{sin(\yawangle)*cos(\pitchangle)}% d
+    \pgfmathsetmacro{\newxz}{-sin(\pitchangle)}% g
+    \path (\newxx,\newxy,\newxz);
+    \pgfgetlastxy{\nxx}{\nxy};
+
+    % to what vector is the y unit vector transformed, and which 2D vector is this?
+    \pgfmathsetmacro{\newyx}{cos(\yawangle)*sin(\pitchangle)*sin(\rollangle)-sin(\yawangle)*cos(\rollangle)}% b
+    \pgfmathsetmacro{\newyy}{sin(\yawangle)*sin(\pitchangle)*sin(\rollangle)+ cos(\yawangle)*cos(\rollangle)}% e
+    \pgfmathsetmacro{\newyz}{cos(\pitchangle)*sin(\rollangle)}% h
+    \path (\newyx,\newyy,\newyz);
+    \pgfgetlastxy{\nyx}{\nyy};
+
+    % to what vector is the z unit vector transformed, and which 2D vector is this?
+    \pgfmathsetmacro{\newzx}{cos(\yawangle)*sin(\pitchangle)*cos(\rollangle)+ sin(\yawangle)*sin(\rollangle)}
+    \pgfmathsetmacro{\newzy}{sin(\yawangle)*sin(\pitchangle)*cos(\rollangle)-cos(\yawangle)*sin(\rollangle)}
+    \pgfmathsetmacro{\newzz}{cos(\pitchangle)*cos(\rollangle)}
+    \path (\newzx,\newzy,\newzz);
+    \pgfgetlastxy{\nzx}{\nzy};
+
+    % transform the point given by #1
+    \foreach \x/\y/\z in {#1}
+    {   \pgfmathsetmacro{\transformedx}{\x*\newxx+\y*\newyx+\z*\newzx}
+        \pgfmathsetmacro{\transformedy}{\x*\newxy+\y*\newyy+\z*\newzy}
+        \pgfmathsetmacro{\transformedz}{\x*\newxz+\y*\newyz+\z*\newzz}
+        \xdef\savedx{\transformedx}
+        \xdef\savedy{\transformedy}
+        \xdef\savedz{\transformedz}     
+    }
+}
+
+\tikzset{RPY/.style={x={(\nxx,\nxy)},y={(\nyx,\nyy)},z={(\nzx,\nzy)}}}
+
 \DeclareMathOperator{\id}{id}
 
 \DeclareMathOperator{\Int}{Int}
@@ -1712,7 +1751,7 @@ With this definition, we may restate the definition of a quotient map in a clear
   \end{marginfigure}
 \end{eg}
 
-\begin{eg}
+\begin{eg}\label{eg:projective_space}
   Define $\mathbb{P}^n$, the \hldefn{real projective space of dimension $n$}, to be the set of
   $1$-dimensional linear subpaces (lines through the origin) in $\mathbb{R}^{n + 1}$. There
   exists a map $q : \mathbb{R}^{n + 1} \setminus \{ 0 \} \to \mathbb{P}^n$, defined by sending
@@ -2250,15 +2289,15 @@ known as a \hlnotea{M\"{o}bius band}.
           surf, shader=faceted interp,
           point meta=x,
           colormap/greenyellow,
-          samples=40,
+          samples=20,
           samples y=5,
           z buffer=sort,
-          domain=0:360,
+          domain=0:180,
           y domain=-0.5:0.5
       ] (
-          {(1+0.5*y*cos(x/2)))*cos(x)},
-          {(1+0.5*y*cos(x/2)))*sin(x)},
-          {0.5*y*sin(x/2)});
+          {(1+0.5*y*cos(x))*cos(2 * x)},
+          {(1+0.5*y*cos(x))*sin(2 * x)},
+          {0.5*y*sin(x)});
     
       \addplot3 [
           samples=50,
@@ -2294,6 +2333,322 @@ the \hlnotea{Klein Bottle}.
 % section topological_embeddings (end)
 
 % chapter lecture_9_jan_25th (end)
+
+\chapter{Lecture 10 Jan 28th}%
+\label{chp:lecture_10_jan_28th}
+% chapter lecture_10_jan_28th
+
+\section{An Enpasse into Orientability}%
+\label{sec:an_enpasse_into_orientability}
+% section an_enpasse_into_orientability
+
+We talked about orientability in the last lecture. We shall now introduce a more concrete
+way of talking about orientability of a surface.
+
+\begin{defn}[Frame]\index{Frame}\label{defn:frame}
+  A \hlnoteb{frame} is a continuous pair of vectors $v_1, v_2$ defined on the entire
+  surface such that $v_1$ and $v_2$ are linearly independent.
+\end{defn}
+
+\begin{eg}
+  Here are two graphical examples of a frame:
+  \begin{itemize}
+    \item \hlnotec{Cylinder}
+      \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}
+          \draw (0, 0) -- (2, 0) -- (2, 2) -- (0, 2) -- cycle;
+          \node[rotate=90] at (0, 1) {>};
+          \node[rotate=90] at (2, 1) {>};
+          \draw[->] (0.3, 0.3) -- (0.6, 0.3) node[right] {$v_1$};
+          \draw[->] (0.3, 0.3) -- (0.3, 0.6) node[above] {$v_2$};
+        \end{tikzpicture}
+        \caption{Frame on a Cylinder}
+        \label{fig:frame_on_a_cylinder}
+      \end{figure}
+
+      Note that if we `move' this frame towards the identified sides, the `direction' of
+      which the vectors `point at' remains the same (cf.
+      \cref{fig:frame_on_the_identified_sides_of_a_cylinder}).
+      \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}
+          \draw (0, 0) -- (2, 0) -- (2, 2) -- (0, 2) -- cycle;
+          \node[rotate=90] at (0, 1) {>};
+          \node[rotate=90] at (2, 1) {>};
+          \draw (1.85, 0.3) -- (2, 0.3);
+          \draw[->] (0, 0.3) -- (0.15,0.3) node[right] {$v_1$};
+          \draw[->] (1.85, 0.3) -- (1.85, 0.6) node[above] {$v_2$};
+        \end{tikzpicture}
+        \caption{Frame on the identified sides of a cylinder}
+        \label{fig:frame_on_the_identified_sides_of_a_cylinder}
+      \end{figure}
+
+    \item \hlnotec{M\"{o}bius strip}
+      \begin{figure}[ht]
+        \centering
+        \begin{tikzpicture}
+          \draw (0, 0) -- (2, 0) -- (2, 2) -- (0, 2) -- cycle;
+          \node[rotate=90] at (0, 1) {>};
+          \node[rotate=-90] at (2, 1) {>};
+          \draw[->] (0.3, 0.3) -- (0.6, 0.3) node[right] {$v_1$};
+          \draw[->] (0.3, 0.3) -- (0.3, 0.6) node[above] {$v_2$};
+
+          \draw (3, 0) -- (5, 0) -- (5, 2) -- (3, 2) -- cycle;
+          \node[rotate=90] at (3, 1) {>};
+          \node[rotate=-90] at (5, 1) {>};
+          \draw (4.9, 0.3) -- (5, 0.3);
+          \draw[->,dotted] (5,0.3) -- (5.2,0.3) node[right] {$v_1$};
+          \draw[->] (4.9, 0.3) -- (4.9, 0.6) node[above,left] {$v_2$};
+
+          \draw (3,1.7) -- (3.1, 1.7);
+          \draw[->,dotted] (3, 1.7) -- (2.8,1.7) node[left] {$v_1$};
+          \draw[->] (3.1, 1.7) -- (3.1, 1.4) node[below,right] {$v_2$};
+        \end{tikzpicture}
+        \caption{Frame on a M\"{o}bius strip}
+        \label{fig:frame_on_a_mobius_strip}
+      \end{figure}
+
+      The two frames on the second diagram in \cref{fig:frame_on_a_mobius_strip} are the
+      same frame. Notice that $v_2$ is now `pointing' in the `opposite direction'
+      simultaneously.
+  \end{itemize}
+\end{eg}
+
+\begin{note}
+  The notion of having a `side' for a M\"{o}bius strip makes sense when we embed it in
+  $\mathbb{R}^3$.
+\end{note}
+
+\begin{eg}\label{eg:projective_space_p2}
+  Recall \cref{eg:projective_space}, where we introduced the projective space.
+  Since $S^n \simeq \mathbb{R}^{n + 1}$, we can define a projective space with respect to
+  $n$-spheres. Let us consider $n = 2$, and consider the group action $\mathcal{G}_2 = \{ -1
+  , 1 \}$ given by
+  \begin{equation*}
+    (-1)(x, y, z) = (-x, -y, -z) \text{ and } (1)(x, y, z) = (x, y, z).
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \mathbb{P}^2 = S^2 / \mathcal{G}_2 \simeq \bar{S^+}^2 / \substack{(x, y, z) \sim (-x, -y, -z) \\ (x, y,
+    z) \in \partial S^+},
+  \end{equation*}
+  where $S^+$ is the upper hemisphere.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \pgfmathsetmacro\rad{1};
+      \draw (0, 0, 0) circle(\rad);
+      \shade[ball color=be-blue!70!dark,opacity=0.5] (0, 0, 0) circle(\rad);
+      \draw[opacity=0.5] (-\rad,0,0) arc (180:360:{\rad} and {\rad/2});
+      \draw[dashed,opacity=0.5] (-\rad,0,0) arc (180:0:{\rad} and {\rad/2});
+      \draw[opacity=0.5] (0,\rad,0) arc (90:270:{\rad/2} and \rad);
+      \draw[dashed,opacity=0.5] (0,\rad,0) arc (90:-90:{\rad/2} and \rad);
+  
+      \fill[color=be-red,opacity=0.3] (-{\rad}, 0, 0) arc (180:0:{\rad}) -- ({\rad}, 0, 0) arc (360:180:{\rad} and {\rad/2});
+      \node[pin={[pin edge=latex'-,pin distance=5pt]45:{$S^+$}}] at (0, 1, 0) {};
+  
+      % the axes
+      \draw[dashed] (-2, 0, 0) -- (0, 0, 0);
+      \draw[dashed] (0, -2, 0) -- (0, 0, 0);
+      \draw[dashed] (0, 0, -2) -- (0, 0, 0);
+      \draw[-latex'] (0, 0, 0) -- (2, 0, 0) node[right] {$y$};
+      \draw[-latex'] (0, 0, 0) -- (0, 2, 0) node[above] {$z$};
+      \draw[-latex'] (0, 0, 0) -- (0, 0, 2) node[below,left] {$x$};
+    \end{tikzpicture}
+    \caption{Projective Plane from $S^2$}\label{fig:projective_plane_from_s_2_}
+  \end{marginfigure}
+  In a very simple sense, we are `compressing' the sphere by identifying the upper
+  hemisphere with the lower hemisphere.
+  
+  Note that because of this construction, $\mathbb{P}^2$ is not orientable: a point where
+  the vector pointing at a direction parallel to $y$ on the upper hemisphere is identified
+  with a point whose corresponding vector points at the opposite direction of $y$.
+\end{eg}
+
+\begin{eg}
+  Consider the diagram presented in \cref{fig:klein_bottle_as_a_mobius_strip_and_a_disc}.
+  \begin{figure*}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw (0, 0) -- (3, 0) -- (3, 3) -- (0, 3) -- cycle;
+      \node[label={90:{$(2)$}}] at (1.5, 3) {>>};
+      \node[label={270:{$(2)$}}] at (1.5, 0) {<<};
+      \draw[-latex'] (0, 1) -- (3, 1) node[midway,above] {$(1')$};
+      \draw[latex'-] (0, 2) -- (3, 2) node[midway,above] {$(1)$};
+      \node[rotate=-90,label={90:{$b$}}] at (3, 1.5) {>};
+      \node[rotate=90,label={90:{$b$}}] at (0, 1.5) {>};
+      \node[left] at (0, 0.5) {$c$};
+      \node[left] at (0, 2.5) {$a$};
+      \node[right] at (3, 2.5) {$c$};
+      \node[right] at (3, 0.5) {$a$};
+
+      \node at (4, 1.5) {$\overset{\text{cut}}{\leadsto}$};
+
+      \draw (5, 1) -- (8, 1) node[midway,below] {$(1)$} -- (8, 1) --
+        (8, 3) -- (5, 3) node[midway,above] {$(1')$} -- cycle;
+      \draw (5, 2) -- (8, 2) node[midway,label={90:{$(2)$}}] {>>};
+      \node[rotate=90,label={90:{$a$}}] at (5, 1.5) {>};
+      \node[rotate=-90,label={270:{$a$}}] at (5, 2.5) {>};
+      \node[rotate=-90,label={90:{$c$}}] at (8, 1.5) {>};
+      \node[rotate=90,label={270:{$c$}}] at (8, 2.5) {>};
+
+      \draw (5, 0) -- (8, 0) node[midway,above] {$(1)$} -- (8, 0) --
+        (8, -1) -- (5, -1) node[midway,below] {$(1')$} -- cycle;
+      \node[rotate=-90,label={90:{$b$}}] at (8, -0.5) {>};
+      \node[rotate=90,label={90:{$b$}}] at (5, -0.5) {>};
+      \node at (6.5, -0.5) {M\"{o}bius strip};
+
+      \node at (9, 2.5) {$\leadsto$};
+
+      \draw (11, 2.5) -- (12, 2.5) -- (13, 3) node[midway,rotate=45] {>} --
+        (13, 3) arc(0:180:1.5 and 0.75) node[midway,above] {$(1')$} -- (10, 3) -- (11, 2.5)
+        node[midway,rotate=-45] {>};
+      \draw (12, 2.5) -- (13, 2) node[midway,rotate=-45] {>} --
+        (13, 2) arc(360:180:1.5 and 0.75) node[midway,below] {$(1)$} -- (10, 2) -- (11,
+        2.5) node[midway,rotate=45] {>};
+
+      \node at (13, 2.5) {$\leadsto$};
+
+      \draw (15.5, 2.5) -- (16, 2.5) node[midway,label={270:{$c$}}] {>} --
+        (16, 2.5) arc(0:180:1) node[midway,above] {$(1')$} --
+        (14, 2.5) arc(180:360:1) node[midway,below] {$(1)$};
+      \draw (14, 2.5) -- (14.5,2.5) node[midway,label={90:{$a$}}] {>};
+    \end{tikzpicture}
+    \caption{Klein Bottle as a M\"{o}bius Strip and a Disc}
+    \label{fig:klein_bottle_as_a_mobius_strip_and_a_disc}
+  \end{figure*}
+  Now we have a more concrete reason to explain why the Klein Bottle is not embeddable
+  into $\mathbb{R}^3$, since the disc itself is not embeddable into $\mathbb{R}^3$.
+\end{eg}
+
+\newthought{Recall} \cref{fig:shifted_s_1_for_the_moduli_space} where we saw how $S^1$ is
+homeomorphic to the space of all lines in $\mathbb{R}^2$ passing through the origin $(0,
+0)$.
+\begin{marginfigure}[5pt]
+  \centering
+  \begin{tikzpicture}
+    \draw[->] (-1, 0) -- (3, 0);
+    \draw[->] (0, -2) -- (0, 2);
+    \draw (1, 0) circle(1);
+
+    \clip (-2, -2) rectangle (3, 2);
+    \foreach \m in {-3,-2.5,...,3} {
+      \draw[color=be-blue] plot ({\x}, {\m * \x});
+    }
+  \end{tikzpicture}
+  \caption{Shifted $S^1$ for the moduli space, as shown in
+  \cref{fig:shifted_s_1_for_the_moduli_space}.}
+\end{marginfigure}
+
+It follows, therefore, that $S^1 \simeq \mathbb{P}^1$.
+
+\begin{quotebox}{be-green}{light}
+  What about the space of all lines in $\mathbb{R}^2$?
+\end{quotebox}
+
+\begin{marginfigure}
+  \centering
+  \begin{tikzpicture}
+    \draw[->] (-2, 0) -- (2, 0);
+    \draw[->] (0, -2) -- (0, 2);
+    \draw[midarrow={latex}{0.7}] (-2, -2) -- (2, 2) node[right] {$\gamma$};
+    \draw[midarrow={latex}{0.7}] (-2, -1) -- (1, 2);
+    \draw (0, 0) -- (-0.5, 0.5);
+    \draw (-0.4, 0.6) -- (-0.3, 0.5) -- (-0.4, 0.4);
+  \end{tikzpicture}
+  \caption{Space of all lines in $\mathbb{R}^2$}\label{fig:space_of_all_lines_in_r_2_}
+\end{marginfigure}
+Observing \cref{fig:space_of_all_lines_in_r_2_}, we see that since we can rotate $\gamma$
+at the origin, we may, in particular, rotate $\gamma$ by $180^{\circ}$ to get the opposite
+direction. It follows that this space of all lines in $\mathbb{R}^2$ is thus homeomorphic
+to $\mathfrak{M}$, a M\"{o}bius strip. Thus, the space of all lines in $\mathbb{R}^2$ is
+also not orientable.
+
+\newthought{Following} the same question as above, we may ask:
+\begin{quotebox}{be-green}{light}
+  What is the space of all lines passing through $(0, 0, 0)$ in $\mathbb{R}^3$?
+\end{quotebox}
+\begin{marginfigure}
+  \centering
+  \begin{tikzpicture}
+    \pgfmathsetmacro\rad{1};
+    \draw (0, 0, 0) circle(\rad);
+    \shade[ball color=be-blue!70!dark,opacity=0.5] (0, 0, 0) circle(\rad);
+    \draw[opacity=0.5] (-\rad,0,0) arc (180:360:{\rad} and {\rad/2});
+    \draw[dashed,opacity=0.5] (-\rad,0,0) arc (180:0:{\rad} and {\rad/2});
+    \draw[opacity=0.5] (0,\rad,0) arc (90:270:{\rad/2} and \rad);
+    \draw[dashed,opacity=0.5] (0,\rad,0) arc (90:-90:{\rad/2} and \rad);
+
+    % the axes
+    \draw[dashed] (-2, 0, 0) -- (0, 0, 0);
+    \draw[dashed] (0, -2, 0) -- (0, 0, 0);
+    \draw[dashed] (0, 0, -2) -- (0, 0, 0);
+    \draw[-latex'] (0, 0, 0) -- (2, 0, 0) node[right] {$y$};
+    \draw[-latex'] (0, 0, 0) -- (0, 2, 0) node[above] {$z$};
+    \draw[-latex'] (0, 0, 0) -- (0, 0, 2) node[below,left] {$x$};
+
+    \draw[color=be-blue] (-2, -2, -2) -- (2, 2, 2);
+    \draw[color=be-blue] (-2, 2, 2) -- (2, -2, -2);
+    \draw[color=be-blue] (1, 2, 0) -- (-1, -2, 0);
+    \draw[color=be-blue] (-2, 0, 1) -- (2, 0, -1);
+    \draw[color=be-blue] (0, 2, -1) -- (0, -2, 1);
+    \draw[color=be-blue] (0, 2, 1) -- (0, -2, -1);
+  \end{tikzpicture}
+  \caption{Space of all lines passing through $(0, 0, 0)$ in
+  $\mathbb{R}^3$}\label{fig:space_of_all_lines_passing_through_r_3}
+\end{marginfigure}
+It is not difficult to see that this space is homeomorphic to $S^2$, via the map $x
+\mapsto \frac{x}{\abs{x}}$ (which is also a quotient map).
+
+Just right before this, we observed, in \cref{eg:projective_space_p2} that
+\begin{equation*}
+  S^2 / x \sim (-x) \simeq \mathbb{P}^2,
+\end{equation*}
+where $x \sim (-x)$ via what is called the \hldefn{antipedal map}.
+
+\begin{quotebox}{be-green}{light}
+  What about the space of all lines in $\mathbb{R}^3$?
+\end{quotebox}
+
+Following a similar observation in \cref{fig:space_of_all_lines_in_r_2_}, we have the
+following:
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \rotateRPY{0}{-45}{0};
+    \begin{scope}[RPY]
+      % the axes
+      \draw[dashed] (-2, 0, 0) -- (0, 0, 0);
+      \draw[dashed] (0, -2, 0) -- (0, 0, 0);
+      \draw[dashed] (0, 0, -2) -- (0, 0, 0);
+      \draw[-latex'] (0, 0, 0) -- (4, 0, 0) node[right] {$y$};
+      \draw[-latex'] (0, 0, 0) -- (0, 2, 0) node[above] {$z$};
+      \draw[-latex'] (0, 0, 0) -- (0, 0, 2) node[below,left] {$x$};
+      \shade[opacity=0.5] (-2, 1, -2) -- (4, 1, -2) -- (4, 1, 2) --
+        (-2, 1, 2) -- cycle;
+      \draw[->] (0, -2, 1) -- (0, 2, -1) node[right] {$\gamma_2$};
+      \draw[->] (0, -2, -1) -- (0, 2, 1) node[right] {$\gamma_1$};
+      \draw[dashed] (0, 0, 0.5) -- (0, 1, 0.5) -- (0, 1, -0.5) -- (0, 0, -0.5);
+      \node[draw,circle,fill,inner sep=1pt,pin={[pin edge={latex'-}, pin
+        distance=5pt]30:{$\beta$}}] at (0, 1, -0.5) {};
+      \node[draw,circle,fill,inner sep=1pt,pin={[pin edge={latex'-}, pin
+        distance=5pt]160:{$\alpha$}}] at (0, 1, 0.5) {};
+    \end{scope}
+  \end{tikzpicture}
+  \caption{Space of all lines in $\mathbb{R}^3$}
+  \label{fig:space_of_all_lines_in_r_3}
+\end{figure}
+
+Observe that if we rotate $\gamma_1$ and $\gamma_2$ downwards, anchored at $\alpha$ and
+$\beta$ respectively, we will eventually get that the two lines are the same line but
+pointing at different directions. We see that the space of all lines is also not
+orientable.
+
+% section an_enpasse_into_orientability (end)
+
+% chapter lecture_10_jan_28th (end)
 
 \appendix
 

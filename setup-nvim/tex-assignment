@@ -20,10 +20,12 @@
 \end{fullwidth}
 
 \begin{enumerate}
+  % TODO : Question 1
 	\item Question
-	  \begin{solbox}
+
+	  \begin{solution}
       Solution
-	  \end{solbox}
+	  \end{solution}
 \end{enumerate}
 
 \end{document}
