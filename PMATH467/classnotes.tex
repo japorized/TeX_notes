@@ -9,8 +9,10 @@
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
 \institution{University of Waterloo}
 
+\usepackage{bm}
 \input{latex-classnotes-preamble.tex}
 
+% from https://tex.stackexchange.com/questions/67573/tikz-shift-and-rotate-in-3d
 \newcommand{\rotateRPY}[4][0/0/0]% point to be saved to \savedxyz, roll, pitch, yaw
 {   \pgfmathsetmacro{\rollangle}{#2}
     \pgfmathsetmacro{\pitchangle}{#3}
@@ -663,7 +665,7 @@ and $A_2 \subseteq V$, which effectively separates the two intervals on the spac
   \sidenote{It goes without saying that the two sets are also simultaneously closed.}.
 \end{defn}
 
-\begin{defn}[Connctedness]\index{Connctedness}\label{defn:connctedness}
+\begin{defn}[Connectedness]\index{Connectedness}\label{defn:connectedness}
   A space $X$ is said to be \hlnoteb{connected} if it is not disconnected.
 \end{defn}
 
@@ -2650,7 +2652,582 @@ orientable.
 
 % chapter lecture_10_jan_28th (end)
 
+\tuftepart{Introduction to Homology}
+
+\chapter{Lecture 11 Jan 30th}%
+\label{chp:lecture_11_jan_30th}
+% chapter lecture_11_jan_30th
+
+So far, we have constructed and founded several manifolds and came to know about certain
+invariances (which we have yet to prove). One may notice that one way to distinguish these
+manifolds is by counting the number of `holes' that they have, `holes' of which there is
+no continuous deformation that can get rid of it. This brings us into the theory of
+\hlnotea{homology}.
+\marginnote{I shall be using information both from the class lectures, and from
+a video lecture series on Algebraic Topology prepared by
+\citealp{njwbalgtopintrohomology}.}
+
+\section{Homology}%
+\label{sec:homology}
+% section homology
+
+Consider the following three diagrams:
+
+\begin{figure*}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw (0, 0) circle(1);
+    \node[draw,circle,fill,inner sep=1pt] at (0, 1) {};
+
+    \draw (4, 0) arc(0:360:1) -- (4, 0) arc(180:-180:1);
+    \node[draw,circle,fill,inner sep=1pt] at (4, 0) {};
+    \node[draw,circle,fill,inner sep=1pt] at (3, -1) {};
+    \node[draw,circle,fill,inner sep=1pt] at (2.0310876,0.24740396) {};
+    \node[draw,circle,fill,inner sep=1pt] at (5, 1) {};
+    \node[draw,circle,fill,inner sep=1pt] at (5.9689124,-0.24740396) {};
+
+    \pgfmathsetmacro\fourtyfive{0.7071067811865475244};
+    \pgfmathsetmacro\base{8};
+    \draw ({\base + \fourtyfive},\fourtyfive) arc(45:315:1) --
+      ({\base + \fourtyfive},-\fourtyfive) arc(-135:135:1) --
+      ({\base + \fourtyfive},\fourtyfive) --
+      ({\base + \fourtyfive},-\fourtyfive);
+    \node[draw,circle,fill,inner sep=1pt] at ({\base + \fourtyfive},\fourtyfive) {};
+    \node[draw,circle,fill,inner sep=1pt] at ({\base + \fourtyfive},-\fourtyfive) {};
+    \node[draw,circle,fill,inner sep=1pt] at ({\base - 1}, 0) {};
+    \node[draw,circle,fill,inner sep=1pt] at ({\base + 1 + 2*\fourtyfive}, 0) {};
+  \end{tikzpicture}
+  \caption{Three different kinds of loops}
+  \label{fig:three_different_kinds_of_loops}
+\end{figure*}
+
+By inspection, we notice that the leftmost diagram has one `hole', the center
+diagram has two, while the rightmost diagram also has two. One way we can
+calculate this number of `holes' is by counting the number of loops there are.
+We see that in the first and second diagram, the number of loops and the number
+of `holes' coincide. However, in the third diagram, there are a total of 3
+loops:
+\begin{itemize}
+  \item $z_1 = \begin{pmatrix} 1 & 2 & 3 \end{pmatrix} = (1 \; 2)(2 \; 3)(3 \;
+    1)$;
+  \item $z_2 = \begin{pmatrix} 1 & 4 & 3 \end{pmatrix} = (1 \; 4)(4 \; 3)(3 \;
+    1)$; and
+  \item $z_3 = \begin{pmatrix} 1 & 2 & 3 & 4 \end{pmatrix} = (1 \; 2)(2 \; 3)(3
+    \; 4)(4 \; 1)$.
+\end{itemize}
+\begin{marginfigure}
+  \centering
+  \begin{tikzpicture}
+    \pgfmathsetmacro\fourtyfive{0.7071067811865475244};
+    \pgfmathsetmacro\base{0};
+    \draw ({\base + \fourtyfive},\fourtyfive) arc(45:315:1) --
+      ({\base + \fourtyfive},-\fourtyfive) arc(-135:135:1) --
+      ({\base + \fourtyfive},\fourtyfive) --
+      ({\base + \fourtyfive},-\fourtyfive);
+    \node[draw,circle,fill,inner sep=1pt,label={90:{$(1)$}}] at ({\base + \fourtyfive},\fourtyfive) {};
+    \node[draw,circle,fill,inner sep=1pt,label={180:{$(2)$}}] at ({\base - 1}, 0) {};
+    \node[draw,circle,fill,inner sep=1pt,label={270:{$(3)$}}] at ({\base + \fourtyfive},-\fourtyfive) {};
+    \node[draw,circle,fill,inner sep=1pt,label={0:{$(4)$}}] at ({\base + 1 + 2*\fourtyfive}, 0) {};
+  \end{tikzpicture}
+  \caption{Third diagram has three loops}\label{fig:third_diagram_has_three_loops}
+\end{marginfigure}
+We see that $z_3$ does not entire capture a `hole', since it also captures the
+line, or \hlnotea{edge}, $(1) (3)$.
+
+Also, note that $(1 \; 2 \; 3)$ is not a unique representation of $z_1$; we can
+also describe $z_1$ as either\sidenote{We can look at the following idea from
+group theory when we talk about \hlnotea{transpositions}, i.e. the swapping of
+two `indices', for every one of the descriptions. For instance,
+\begin{align*}
+  (1 \; 2 \; 3) &= (1 \; 2)(2 \; 3)(3 \; 1) \\
+                &= -(2 \; 1)(1 \; 3)(3 \; 2) \\
+                &= -(2 \; 1 \; 3).
+\end{align*}}
+\begin{gather*}
+  (3 \; 1 \; 2), \, (2 \; 3 \; 1), -(1 \; 3 \; 2), -(3 \; 2 \; 1), \text{ or }
+  -(2 \; 1 \; 3).
+\end{gather*}
+
+We shall call these expressions as \hldefn{cycles}\sidenote{This is taking a
+page out of graph theory.}.
+
+Notice that geometrically the cycle $z_3$ looks like $z_1 - z_2$, which one can
+trace the diagram to see that this `minusing' between cycles gives us different
+cycles.
+
+To further refine this approach, consider the following diagram:
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \pgfmathsetmacro\fourtyfive{0.7071067811865475244};
+    \draw (0, 0) circle(1);
+    \node[draw,circle,fill,inner sep=1pt,label={135:{$(a)$}}] at (0, 1) {};
+    \node[draw,circle,fill,inner sep=1pt] at ({0 - \fourtyfive}, -\fourtyfive)
+      {};
+    \node[draw,circle,fill,inner sep=1pt] at (\fourtyfive, -\fourtyfive) {};
+    \draw (0, 1) to[bend left] node[midway,above] {$e$} (1, 2)
+      node[draw,circle,fill,inner sep=1pt,label={0:{$(b)$}}] {};
+  \end{tikzpicture}
+  \caption[][30pt]{Simple diagram with a branching edge}
+  \label{fig:simple_diagram_with_a_branching_edge}
+\end{figure}
+
+Notice that $(a \; b)(b \; a)$ also goes back to the same point, forming, in a
+sense, a closed path. However, this does not enclose a `hole', despite being
+algebraically similar to the cycles that we have described above. It is
+important that we find a way to make this distinction.
+
+\newthought{To make this} distinction, we look at the \hldefn{boundary} of the
+edges, which is defined with respect to the \hlnotea{vertices} of an edge.
+
+\begin{defn}[Boundary of an Edge]\index{Boundary}\label{defn:boundary_of_an_edge}
+  We define the boundary of an edge $e$, whose endpoints, or more correctly
+  vertices, are $a$ and $b$, as follows:
+  \begin{itemize}
+    \item if $e$ is an undirected edge, then both $a$ and $b$ are the boundaries
+      of $e$;
+    \item if $e$ is a directed edge, say from $a$ to $b$, then we denote the
+      boundary of $e$ as
+      \begin{equation*}
+        \partial e = b - a.
+      \end{equation*}
+  \end{itemize}
+\end{defn}
+
+\begin{remark}
+  There is a good reason behind using notation $\partial e = b - a$, which we
+  shall see later.
+\end{remark}
+
+\begin{eg}
+  Referring back to \cref{fig:simple_diagram_with_a_branching_edge}, we see that
+  the boundary of $e$ is
+  \begin{equation*}
+    \partial e = (b) - (a).
+  \end{equation*}
+\end{eg}
+
+\begin{eg}\label{eg:identifying_actual_cycles}
+  Looking back at \cref{fig:third_diagram_has_three_loops}, we have that
+  \begin{align*}
+    \partial (1 \; 2) &= (2) - (1) & \partial (2 \; 3) &= (3) - (2) \\
+    \partial (3 \; 1) &= (1) - (3) & \partial (1 \; 4) &= (4) - (1) \\
+    \partial (4 \; 3) &= (3) - (4).
+  \end{align*}
+
+  Notice that
+  \begin{equation*}
+    \partial(1 \; 2) + \partial(2 \; 3) + \partial(3 \; 1)
+    = (2) - (1) + (3) - (2) + (1) - (3) = 0,
+  \end{equation*}
+  and $(1 \; 2)(2 \; 3)(3 \; 1)$ is one of the cycles which we have identified
+  that encloses a `hole'.
+\end{eg}
+
+For reasons that will become clear later, we shall, from hereon, write
+\begin{equation*}
+  (1 \; 2)(2 \; 3)(3 \; 1) = (1 \; 2) + (2 \; 3) + (3 \; 1)
+\end{equation*}
+to represent the cycle $z_1$ in \cref{fig:third_diagram_has_three_loops}.
+
+\newthought{Let} $C_0$ denote the \hlnotea{free abelian group}\sidenote{See
+\cref{chp:free_abelian_groups}} on vertices, and $C_1$ denote the free abelian
+group on (directed) edges.
+
+\begin{eg}
+  Let $C_0$ be the free abelian group on the vertices $x, y, z$. Then an element
+  of $C_0$ would be $2x + 3y - z$, i.e. $C_0$ is a group that contains linear
+  combinations of $x, y, z$ with integer coefficients.
+
+  Following the same `rule', elements of $C_1$, the free abelian group on the
+  directed edges $e, d, f$ are of the form $\alpha_1 e + \alpha_2 d + \alpha_3
+  f$.
+\end{eg}
+
+We shall now give $C_n$ a proper name.
+
+\begin{defn}[$n$-Chain]\index{$n$-Chain}\label{defn:n_chain}
+  Elements of $C_0$ are called \hlnoteb{$0$-dimensional chains}, while elements
+  of $C_1$ are called \hlnoteb{$1$-dimensional chains}.
+
+  In general, elements of $C_n$ are called \hlnoteb{$n$-dimensional chains}, or
+  simply $n$-chains. $C_n$ itself is called a \hlnoteb{group of $n$-chains}.
+\end{defn}
+
+We may now make the definition of $\partial$ more formally so:
+
+\begin{defn}[Boundary of Chains]\index{Boundary of Chains}\label{defn:boundary_of_chains}
+  The \hlnoteb{boundary of an $n$-chain}, denoted $\partial e$, where $e$ is an
+  $n$-chain is a \hlnotea{homomorphism}
+  \begin{equation*}
+    \partial : C_n \to C_{n - 1}.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  Since $\partial$ is a homomorphism, it is therefore linear. One can verify
+  that the group of $n$-chains is indeed an abelian (commutative) group, which
+  explains the notation $e + d$.
+
+  Putting the two together, we have
+  \begin{equation*}
+    \partial(e + d) = \partial e + \partial d.
+  \end{equation*}
+\end{remark}
+
+\newthought{Following} the observation that we noticed in
+\cref{eg:identifying_actual_cycles}, one can go back on our examples and verify
+to oneself that the edges that form a cycle will have no boundary, i.e. if $e +
+d + f$ forms a cycle, then $\partial(e + d + f) = 0$.
+
+We shall now try to find all the possible cycles in the following simple
+example:
+
+\begin{eg}\label{eg:finding_the_number_of_cycles}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \pgfmathsetmacro\fourtyfive{0.7071067811865475244};
+      \draw (0, 0) circle(1);
+      \node[draw,circle,fill,inner sep=1pt,label={135:{$(1)$}}] at (0, 1) {};
+      \node[draw,circle,fill,inner sep=1pt,label={135:{$(2)$}}] at ({0 -
+        \fourtyfive}, -\fourtyfive) {};
+      \node[draw,circle,fill,inner sep=1pt,label={135:{$(3)$}}] at (\fourtyfive,
+        -\fourtyfive) {};
+    \end{tikzpicture}
+    \caption{Simple example into using boundaries to identify cycles}\label{fig:simple_example_into_using_boundaries_to_identify_cycles}
+  \end{marginfigure}
+  Consider \cref{fig:simple_example_into_using_boundaries_to_identify_cycles}.
+  We want to solve for
+  \begin{equation*}
+    \partial [ \alpha_1 (1 \; 2) + \alpha_2 (2 \; 3) + \alpha_3 (3 \; 1) ] = 0.
+  \end{equation*}
+  Then we have
+  \begin{gather*}
+    \alpha_1 [(2) - (1)] + \alpha_2 [(3) - (2)] + \alpha_3 [(1) - (3)] = 0 \\
+    (1) (\alpha_3 - \alpha_1) + (2) (\alpha_1 - \alpha_2) + (3) (\alpha_2 -
+    \alpha_3) = 0.
+  \end{gather*}
+  We thus have the following system of equations
+  \begin{gather*}
+    -\alpha_1 + \alpha_3 = 0 \\
+    \alpha_1 - \alpha_2 = 0 \\
+    \alpha_2 - \alpha_3 = 0.
+  \end{gather*}
+  We shall solve for this using \hlnotea{row reduction} on matrices: we have
+  \begin{align*}
+    \begin{bmatrix}
+      -1 & 0 & 1 \\
+      1 & -1 & 0 \\
+      0 & 1 & -1
+    \end{bmatrix} \sim
+    \begin{bmatrix}
+      1 & 0 & -1 \\
+      0 & 1 & -1 \\
+      0 & 0 & 0
+    \end{bmatrix}.
+  \end{align*}
+  By letting $\alpha_3 = r$, we have that the solutions are
+  \begin{equation*}
+    \begin{pmatrix}
+      \alpha_1 \\ \alpha_2 \\ \alpha_3
+    \end{pmatrix} = 
+    r \begin{pmatrix}
+      1 \\ 1 \\ 1
+    \end{pmatrix}.
+  \end{equation*}
+  It follows that the null space for this solution is spanned by the vector
+  $\left( \begin{smallmatrix} 1 \\ 1 \\ 1 \end{smallmatrix} \right)$, which is
+  therefore isomorphic to $\mathbb{Z}$.
+  \marginnote{\cref{eg:finding_the_number_of_cycles} gives us a procedure for
+  finding the number of cycles:
+  \begin{enumerate}
+    \item Equate the boundary of an arbitrary chain to $0$.
+    \item Find the solutions to the system of equations, which is just finding
+      the \hlnotea{null space} to the matrix that the system of equations
+      coincide with.
+  \end{enumerate}}
+\end{eg}
+
+\begin{remark}
+  It is no coincidence that the dimension of $\mathbb{Z}$ agrees with the total
+  number of cycles.
+\end{remark}
+
+We shall now make the following definition:
+
+\begin{defn}[Cycle]\index{Cycle}\label{defn:cycle}
+  A chain $e$ is a \hlnoteb{cycle} if $\partial e = 0$.
+\end{defn}
+
+% section homology (end)
+
+% chapter lecture_11_jan_30th (end)
+
 \appendix
+
+\chapter{Free Abelian Groups}%
+\label{chp:free_abelian_groups}
+% chapter free_abelian_groups
+
+CONTENTS TO BE ADDED % TODO : find material on free abelian groups
+
+% chapter free_abelian_groups (end)
+
+\chapter{Assignment Problems}%
+\label{chp:assignment_problems}
+% chapter assignment_problems
+
+\section{Assignment \#1}%
+\label{sec:assignment_1}
+% section assignment_1
+
+\begin{enumerate}
+  \item 
+    \begin{enumerate}
+      \item Find an explicit homeomorphism between the interval $(0, 1)$ and the real line
+        $\mathbb{R}$.
+      \item[(a')] Extend the last proof to show that the unit ball in $\mathbb{R}^n$ is
+        homeomorphic to $\mathbb{R}^n$.
+      \item Show that the circle, $S^1$, is not homeomorphic to any $S^m$ for
+        $m \geq 2$.
+      \item[(b')] Show that $S^1$ is not homeomorphic to $[0, 1)$.
+      \item Prove that $[0, 1]$ is not homeomorphic to $\mathbb{R}$.
+      \item Show that the interval $[0, 1)$ is not homeomorphic to the real line.
+    \end{enumerate}
+
+  \item Recall that the topologist's sine curse (similar to the topologist's circle)
+    was defined as
+    \begin{equation*}
+      f(x) := \begin{cases}
+        \sin \left( \frac{1}{x} \right) & x \in (0, 1] \\
+        0                               & x = 0
+      \end{cases}.
+    \end{equation*}
+    Show that the space given as the graph of this function, $\Gamma(f)$, is connected,
+    but not path-connected or even locally connected.
+  \item 
+    \begin{enumerate}
+      \item Show that in a Hausdorff space, the limit of a convergent sequence is unique.
+      \item Show that the subspace topology induced on a subset of a Hausdorff space is
+        also Hausdorff.
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item Recall that the projection operator $\pi_1 : Y_1 \times Y_2 \to Y_1$ is defined
+        by $\pi_1 : (y_1, y_2) \mapsto y_1$. Show that $\pi_1$, and similarly $\pi_2$, are
+        continuous when $Y_1 \times Y_2$ is equipped with the product topology.
+      \item Let $f : X \to Y_1 \times Y_2$ be a continuous map. Define $f_j : \pi_j \circ f$.
+        Show that $f$ is continuous iff $f_1$ and $f_2$ are continuous.
+      \item Let $g : X_1 \times X_2 \to Y$ be a function. We say that $g$ is continuous in
+        each variable iff for any given $x_0$ and $y_0$, the functions $g(x_0, \cdot)$ and
+        $g(\cdot, y_0)$ are continuous. Show that if $g$ is continuous, then it is continuous
+        in each variable.
+      \item Show that the converse of the last statement does not hold.
+      \item Is the projection map $\pi_1$ an open map, a closed map, or neither?
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item Show that the image of a connected set is connected.
+      \item Prove the intermediate value theorem for functions defined on the interval.
+      \item Show that any continuous function $f : [0, 1] \to [0, 1]$ has a fixed point, that
+        is a point $x$ such that $f(x) = x$.
+    \end{enumerate}
+  \item Consider the metric given by $\tilde{d}(x, y) := \arctan(\abs{ x- y })$. Determine
+    if the topology induced is equivalent to the standard topology of $\mathbb{R}^n$. Further,
+    determine if this metric satisfies the Heine-Borel theorem, i.e. is compactness of a subset
+    equivalent to it being closed and bounded with respect to $\tilde{d}$.
+\end{enumerate}
+
+% section assignment_1 (end)
+
+\newpage
+
+\section{Assignment \#2}%
+\label{sec:assignment_2}
+% section assignment_2
+
+\begin{enumerate}
+  \item 
+    \begin{enumerate}
+      \item Let $M$ be a manifold with or without boundary. Show that $\Int M$ is closed
+        iff $\partial M = \emptyset$.
+      \item Show that the boundary of an $n$-dimensional manifold is an $(n - 1)$-dimensional
+        manifold \textit{without} boundary.
+      \item Show that $[0, 1)$ is not homeomorphic to $(0, 1)$ and use that idea to prove
+        that the invariance of boundary for $1$-dimensional manifolds.
+      \item Prove the invariance of dimension for $1$-dimensional manifolds.
+    \end{enumerate}
+  \item
+    \begin{enumerate}
+      \item Show that the closed quadrant $M := \{ (x, y) \in \mathbb{R}^2 : x, y \geq 0 \}$
+        is a manifold with boundary. Describe the coordinate charts explicitly.
+      \item[(a')] Generalise what you proved in part (a) to
+        $N := \{ (x_1, \ldots, x_n) \in \mathbb{R}^n : x_1, \ldots, x_n \geq 0 \}$,
+      \item Let $M_1^m$ and $M_2^n$ be two topological manifolds of dimensions $m$ and $n$
+        respectively. Take $N := M_1 \times M_2$ with its product topology. Show that $N$
+        is an $(n + m)$-dimensional manifold whose boundary is
+        $\partial N = M_1 \times \partial M_2 \cup \partial M_1 \times M_2$. Conclude, in
+        particuar, that $N$ has no boundary iff $M_1 $ and $M_2$ have empty boundary.
+    \end{enumerate}
+  \item Let $P$ be an arbitrary $n$-gon, that is to say, a union of finite number of line
+    segments such that each line end point is shared by exatly two segments. Show that $P$
+    is homeomorphic to $S^1$. (You might find the glueing lemma stated as Lemma 3.23 of J.
+    Lee's book useful.)
+  \item Let $f : M_1 \to M_2$ be a homeomorphism between two manifolds with a boundary.
+    Show that under $f$ the boundary of $M_1$ is sent to the boundary of $M_2$. Conclude
+    that in such a case we must have $\partial M_1 \simeq \partial M_2$.
+  \item Let $\mathbb{T}^2$ be the standard torus obtained by taking the quotient
+    $\mathbb{R}^2 / (\mathbb{Z} \oplus \mathbb{Z})$ with the projection map
+    $\Pi : \mathbb{R}^2 \to \mathbb{T}^2$. Define $L$ to be the line $y = \sqrt{2}x$ in
+    $\mathbb{R}^2$.
+    \begin{enumerate}
+      \item Determine if the image of $L$ under this projection, $\Pi(L)$, is a
+        manifold or not.
+      \item Show that $\Pi(L)$ is the image of $\mathbb{R}$ under a bijective continuous
+        map, but it is not homeomorphic to $\mathbb{R}$. Conclude that $\Pi \restriction_{L}$
+        is not an embedding of $L$.
+    \end{enumerate}
+  \item Recall that we showed in class how to obtain the cylinder as the quotient of the
+    plane by the action of $\mathbb{Z}$. Define a group action of $G$ on $\mathbb{R}^2$
+    such that $\mathbb{R}^2 / G$ will be homeomorphic to the infinite M\"{o}bius band.
+\end{enumerate}
+
+% section assignment_2 (end)
+
+\newpage
+
+\section{Assignment \#3}%
+\label{sec:assignment_3}
+% section assignment_3
+
+\begin{enumerate}
+	\item Find an injective open map between topological spaces which is not continuous.
+  \item Consider the M\"{o}bius band with boundary, $\mathfrak{M}$.
+    \begin{enumerate}
+      \item Find an explicit embedding $f : \mathfrak{M} \to \mathbb{R}^3$ using elementary
+        functions.
+      \item Generalise that embedding to the case of the space obtained by $k$ times twisting
+        and then glueing the unit cell $[0, 1] \times [0, 1]$ along $\{ 0 \} \times [0, 1]$ and
+        $\{ 1 \} \times [0, 1]$.
+      \item Conclude that all bands with an even number of twists are homeomorphic to the cylinder
+        $S^1 \times [0, 1]$ and the ones with an odd number of twists are homeomorphic to
+        $\mathfrak{M}$.
+    \end{enumerate}
+  \item Consider the action of $\mathbb{Z}$ on $M := \mathbb{R}^n \setminus \{0\}$ 
+    defined by $k \cdot (x_1, \ldots, x_n) := (2^k x_1, \ldots, 2^k x_n)$.
+    \begin{itemize}
+      \item Show that for any element $k \in \mathbb{Z}$, the action on $M$ by $k$ has no fixed
+        points. (Recall that for an element $g \in G$ acting on a space $X$, we say that $x \in
+        X$ is a fixed point provided that $g \cdot x = x$.)
+      \item Can you identify the quotient space $M / \mathbb{Z}$? (It might help to start from
+        lower dimensions.)
+    \end{itemize}
+  \item (Embedding the projective plane) Recall how we defined the projective plane
+    $\mathbb{P}^2$ as the quotient $S^2 / ((x, y, z) \sim -(x, y, z))$. This can be generalized to
+    the case of $\mathbb{P}^n$, which is defined as the quotient of $S^n \subset \mathbb{R}^{n + 1}$
+    by the antipodal map $w \in \mathbb{R}^{n + 1} \mapsto - w$.
+    \begin{enumerate}
+      \item Show that any $\mathbb{P}^n$ embeds in $\mathbb{P}^{n + 1}$. (Hint: It can be done in
+        two lines.)
+      \item Consider the map $F : \mathbb{R}^3 \to \mathbb{R}^4$ defined as $(x, y, z) \mapsto
+        (xy, yz, xz, x^2 - y^2)$. Show that the map $f := F \restriction_{S^2}$ has the property
+        that $f(x, y, z) = f(-x, -y, -z)$. Use this observation to show that this map descends
+        to a continuous map $\tilde{f} : \mathbb{P}^2 \to \mathbb{R}^4$.
+      \item Show that $\tilde{f}$ is injective. Notice that $\mathbb{P}^2$ is compact, hence, any
+        continuous map is a closed map. (Indeed, we stated this as a general lemma: any continuous
+        injection from a compact space is an embedding.) Combine these two observations to prove
+        that $\tilde{f}$ gives an embedding of $\mathbb{P}^2$ into $\mathbb{R}^4$.
+    \end{enumerate}
+  \item Recall that we found the homology groups of sphere $S^2$ by finding the
+    homology groups of a (boundary of) a tetrahedron (cf. \cref{fig:_3_simplex_tetradedron}).
+    We can see this tetrahedron as the manifold boundary of a $3$-simplex.
+    \begin{figure}[ht]
+      \centering
+      \begin{tikzpicture}
+        \draw (0,1,0) -- (-1,0,-1) -- (0,0,1) -- (0,1,0) -- (1,0,0) -- (0,0,1);
+        \draw[dashed] (-1, 0, -1) -- (1, 0, 0);
+      \end{tikzpicture}
+      \caption{$3$-simplex, tetradedron}
+      \label{fig:_3_simplex_tetradedron}
+    \end{figure}
+    Let $K_n$ denote the simplicial complex formed by the boundary of an $(n + 1)$-simplex.
+    Generalise what we did in class in case of the tetrahedron to show that we have
+    \begin{equation*}
+      H_0(K_n) = \mathbb{Z}, H_1(K_n) = 0, \ldots, H_{n - 1}(K_n) = 0, H_n(K_n) = \mathbb{Z}.
+    \end{equation*}
+    Let us assume the result that says homology is invariant under homeomorphism. Conclude that
+    we have for the $n$-dimensional sphere, $S^n$:
+    \begin{equation}
+      H_0(S^n) = \mathbb{Z}, H_1(S^n) = 0, \ldots, H_{n - 1}(S^n) = 0, H_n(S^n) = \mathbb{Z}.
+    \end{equation}
+  \item Verify that the triangulated surface in the figure below is homeomorphic to the
+    M\"{o}bius strip and find its homology groups.
+    \begin{figure}[ht]
+      \centering
+      \begin{tikzpicture}
+        \draw (-1, 1) -- (-1, 0) -- (1, 0) -- (1, 1) -- cycle;
+        \draw (-1, 0) -- (0, 1) -- (1, 0);
+        \draw (0, 0) -- (0, 1);
+        \node[above,left] at (-1, 1) {$\bm{a}$};
+        \node[below,left] at (-1, 0) {$\bm{b}$};
+        \node[below,right] at (1, 0) {$\bm{a}$};
+        \node[above,right] at (1, 1) {$\bm{b}$};
+        \node[above] at (0, 1) {$\bm{c}$};
+        \node[below] at (0, 0) {$\bm{d}$};
+      \end{tikzpicture}
+      \caption{M\"{o}bius band}
+      \label{fig:ass3_mobius_band}
+    \end{figure}
+  \item Recall that a holomorphic map that is not constant is an open map. More generally,
+    a meromorphic function can be seen as an open map when the target space is taken to be the
+    extended plane $\mathbb{C} \cup \{ \infty \}$. This is the content of the open mapping theorem
+    in complex analysis. Conoclude that a non-constant holomorphic (meromorphic) map is a quotient
+    map. In particular, study the case of the following function wherein $k$ is an integer.
+    \begin{equation*}
+      \begin{cases}
+        f_k : \mathbb{C} \cup \{ \infty \} \to \mathbb{C} \cup \{ \infty \} \\
+        z \mapsto z^k
+      \end{cases}
+    \end{equation*}
+    Show that $f_k$ is holomorphic to the extended complex plane and may, hence, be seen as a
+    quotient map $S^2 \to S^2$. Identify the various types of fibres over various points of the
+    target.
+    \begin{enumerate}
+      \item Consider the action on $\mathbb{C}$ of $\mathbb{Z}_m$ given by multiplication by
+        $\zeta_m$, the $m$-th root of unity. Describe the corresponding action of $\mathbb{Z}_m$
+        on the sphere $S^2$. Show that under this action $\mathbb{Z}_m$ on $S^2$, we have
+        $S^2 / \mathbb{Z}_m \simeq S^2$. \\
+        (\textbf{Remark}: This equivalence is only at the level of homeomorphism and does not
+        hold at the level of diffeomorphism.)
+      \item Let $\Lambda$ be a lattice in $\mathbb{R}^2 = \mathbb{C}$. Show that a function can be
+        seen as a continuous function on the torus $\mathbb{C} / \Lambda$ iff it is 
+        $\Lambda$-periodic.
+      \item[(b')] (Optional) Consider the following function defined on $\mathbb{C}$. Show that it
+        is doubly periodic where the lattice $\Lambda$ is generated by $1$ and $i$.
+        \begin{equation*}
+          \wp(\xi) := \frac{1}{\xi^2} +
+            \sum_{\mu^2 + \nu^2 \neq 0} \left( \frac{1}{(\xi + m + n i)^2} 
+              - \frac{1}{(m + ni)^2} \right)
+        \end{equation*}
+        (You can do so by showing that the derivative $\frac{\dif{\wp}}{\dif{z}}$ is a doubly
+        periodic function. Indeed, it is easy to show that the derivative converges away from
+        the poles. Further, $\wp$ is an even function. This, along with the double periodicity
+        of the derivative, gives periodicity of $\wp$.) This is an example of a Weierstrass
+        $\wp$-function.
+      \item Use the previous observations to conclude that this function descends to a continuous
+        function on the torus $T$ obtained from $[0, 1] \times [0, 1] \subset \mathbb{R}^2$.
+        Indeed, more is true. We shall not go into the details in full generality, but since $\wp$
+        is meromorphic on the complex plane, it descends to a meromorphic function on $T$. You
+        can verify meromorphicity by studying the function along the boundaries of the torus.
+      \item Show that $\wp$ provides a meromorphic function with two poles on $\mathbb{T}^2$. In
+        particular, it is a quotient map from the torus $\mathbb{T}^2$ to the sphere $S^2$.
+    \end{enumerate}
+\end{enumerate}
+
+% section assignment_3 (end)
+
+% chapter assignment_problems (end)
 
 \backmatter
 
