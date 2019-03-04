@@ -118,9 +118,6 @@
           ##1\ ##2\ (##3)\theorem@separator}\hskip\labelsep\relax\nobreakitem}
 \makeatother
 
-% ntheorem + framed
-\makeatletter
-
 % ntheorem Declarations
 \theorempreskip{10pt}
 \theorempostskip{5pt}
@@ -130,13 +127,14 @@
 \newtheorem{remark}{Remark}[section]
 \theoremsymbol{}
 \newtheorem*{strategy}{\faPaperPlane Strategy}
+\newtheorem*{procedures}{\faCodeBranch Procedures}
 \newtheorem{ex}{Exercise}[section]
 \theorembodyfont{\normalfont}
 \newtheorem*{solution}{\faPencil* Solution}
 \theoremsymbol{\faGavel}
 \newtheorem{eg}{Example}[section]
-\theorembodyfont{\it}
 \theoremsymbol{}
+\theorembodyfont{\it}
 
     % definition env
 \theoremprework{\textcolor{be-blue}{\hrule height 2pt width \textwidth}}
@@ -279,6 +277,14 @@
 \theorempostwork{\textcolor{be-brown}{\hrule height 2pt width \textwidth}}
 \theoremsymbol{\ensuremath{_\square}}
 \newtheorem*{proof}{\faPencil* Proof}
+\theoremsymbol{}
+
+\theoremprework{\textcolor{be-brown}{\hrule height 2pt width \marginparwidth}}
+\theorembodyfont{\normalfont}
+\theoremheaderfont{\color{be-brown}\normalfont\bfseries}
+\theorempostwork{\textcolor{be-brown}{\hrule height 2pt width \marginparwidth}}
+\theoremsymbol{\ensuremath{_\square}}
+\newtheorem*{mproof}{\faPencil* Proof}
 \theoremsymbol{}
 
     % note and notation env
@@ -435,16 +441,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 }
 
 % Shortcuts
-\newcommand{\floor}[1]{\lfloor #1 \rfloor}      % simplifying the writing of a floor function
-\newcommand{\ceiling}[1]{\lceil #1 \rceil}      % simplifying the writing of a ceiling function
-\newcommand{\dotp}{\, \cdotp}			        % dot product to distinguish from \cdot
-\newcommand{\abs}[1]{\left|#1\right|}						% absolute value
-\newcommand{\lra}[1]{\left\langle \; #1 \; \right\rangle}
-\newcommand{\at}[2]{\Big|_{#1}^{#2}}
-\newcommand{\Arg}[1]{\caparg #1}
-\renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
-\newcommand{\quotient}[2]{\faktor{#1}{#2}}
-\newcommand{\cyclic}[1]{\left\langle #1 \right\rangle}
+\input{notations.tex}
 	% highlighting shortcuts
 \newcommand{\hlimpo}[1]{\textcolor{be-red}{\textbf{#1}}}
 \newcommand{\hlwarn}[1]{\textcolor{be-yellow}{\textbf{#1}}}
@@ -460,34 +457,11 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\hlbnotee}[1]{\hlb{be-red}{#1}}
 \newcommand{\WTP}{\textcolor{be-brown}{WTP} }
 \newcommand{\WTS}{\textcolor{be-brown}{WTS} }
-\newcommand{\ind}[2]{\Ind_{#2}\left( #1 \right)}
-\newcommand{\notimply}{\centernot\implies}
-\newcommand{\res}[2]{\underset{#2}{\Res} #1 }
-\newcommand{\tworow}[3]{\begin{tabular}{@{}#1@{}} #2 \\ #3 \end{tabular}}
-\renewcommand{\epsilon}{\varepsilon}
-\newcommand{\lrarrow}{\leftrightarrow}
-\newcommand{\larrow}{\leftarrow}
-\newcommand{\rarrow}{\rightarrow}
-\renewcommand{\atop}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
-\newcommand*\dif{\mathop{}\!d}
-\newcommand{\mmid}{\; \middle| \;}
-\newcommand{\coprime}{\; \bot \;}
-\newcommand{\norm}[1]{\left\| #1 \right\|}
-
-\DeclareMathOperator{\Img}{Img}
 
   % stars on important stuff
 \newcommand{\imponote}{\faStar\ }
 \newcommand{\vimponote}{\faStar\faStar\ }
 \newcommand{\vvimponote}{\faStar\faStar\faStar\ }
-
-  % inspiration from: https://tex.stackexchange.com/questions/8720/overbrace-underbrace-but-with-an-arrow-instead#37758
-\newcommand{\overarrow}[2]{
-  \overset{\makebox[0pt]{\begin{tabular}{@{}c@{}}#2\\[0pt]\ensuremath{\uparrow}\end{tabular}}}{\ensuremath{#1}}
-}
-\newcommand{\underarrow}[2]{
-  \underset{\makebox[0pt]{\begin{tabular}{@{}c@{}}\downarrow\\[0pt]\ensuremath{#2}\end{tabular}}}{\ensuremath{#1}}
-}
 
 % Document header formatting
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
