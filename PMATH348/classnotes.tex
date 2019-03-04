@@ -15,6 +15,8 @@
 \setmainfont[Ligatures=TeX]{Times Newer Roman}
 \setsansfont[Ligatures=TeX]{Helvetica Neue LT Std}
 
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\stab}{stab}
 \DeclareMathOperator{\orb}{orb}
 \DeclareMathOperator{\ch}{ch}
@@ -258,17 +260,20 @@ From the \hyperref[thm:orbit_decomposition_theorem]{Orbit Decomposition Theorem}
   \end{equation}
   and the summation cannot be $0$ or $p$ would otherwise
   divide $Z(G)$.
-  \marginnote{This highlighted part requires clarification.}
-  % TODO: this needs the prof's intervention
-  \begin{quotebox}{be-red}{light}
-  Since $p$ divides the LHS of \cref{eq:first_sylow_theorem_eq1}
-  and not $\abs{Z(G)}$, and the sum is nonzero, we must 
-  have that $\exists a_i \in G$ such that $p \nmid [ G : C(a_i) ]$.
-  This implies that $p^n \mid \abs{ C(a_i) }$.
-  \end{quotebox}
-  Since $a_i \notin Z(G)$, we have $\abs{C(a_i)} \leq \abs{G}$.
-  Thus by IH, $C(a_i)$ has a Sylow $p$-subgroup, which is also a
-  Sylow $p$-subgroup of $G$.
+  Since $p$ divides the LHS of \cref{eq:first_sylow_theorem_eq1} and not
+  $\abs{Z(G)}$, and the sum is nonzero, we must have that $\exists a_i \in G$
+  such that $p \nmid [ G : C(a_i) ]$, since only then would $p \mid \abs{G}$
+  \sidenote{This is after having this term `neutralizing' $\abs{G}$ so that the
+    entire RHS is also divisible by $p$. If $p$ already divides everything, and
+    does not divide $\abs{Z(G)}$, then $p$ would not divide $\abs{Z(G)}$.}.
+  Since $p \mid \abs{G}$ but not $\abs{ G : C(a_i)}$, it must be that $p^n \mid
+  \abs{C(a_i)}$ by Lagrange
+  \sidenote{Having $p^n \mid \abs{C(a_i)}$ would cancel
+    out all the $p$'s in $\abs{G}$, thus rendering $p$ unable to divide $\abs{G
+    : C(a_i)}$.}.
+
+  Note that we have $\abs{C(a_i)} \leq \abs{G}$.  Thus by IH, $C(a_i)$ has a
+  Sylow $p$-subgroup, which is also a Sylow $p$-subgroup of $G$.
 \end{proof}
 
 \begin{crly}[Cauchy's Theorem]\index{Cauchy's Theorem}\label{crly:cauchy_s_theorem}
@@ -317,6 +322,11 @@ From the \hyperref[thm:orbit_decomposition_theorem]{Orbit Decomposition Theorem}
 
 Before proceeding with the Sylow's next theorem, we require two lemmas.
 
+\marginnote{\cref{lemma:intersection_of_a_sylow_p_subgroup_with_any_other_p_subgroups}
+tells us that if we can find a $p$-subgroup $Q$ of $G$, then the elements in $Q$
+that serves as the stabilizers of $P$ are precisely the elements that $Q$ shares
+with $P$. This is uninteresting if $P$ is either abelian or normal, but it would
+highlight what $Z(P)$ is.}
 \begin{lemma}[Intersection of a Sylow $p$-subgroup with any other $p$-subgroups]\label{lemma:intersection_of_a_sylow_p_subgroup_with_any_other_p_subgroups}
   Let $G$ be a finite group and $p$ a prime such that $p \mid \abs{G}$.
   Let $P, Q \leq G$ be a Sylow $p$-subgroup and a (regular) $p$-subgroup,
@@ -380,11 +390,21 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   we have
   \begin{align*}
     \abs{K} &= \sum_{i=1}^{r} \abs{ \orb(P_i) } \\
-            &= \sum_{i=1}^{r} \abs{ Q } / \abs{ \stab(P_i) } \quad \hyperref[thm:orbit_stabilizer_theorem]{\text{orbit-stabilizer}} \\
-            &= \sum_{i=1}^{r} \abs{ Q } / \abs{ N_G(P_i) \cap Q } \quad \text{ by the action } \\
-            &= \sum_{i=1}^{r} [ Q : N_G(P_i) \cap Q ] \quad \text{ by definition } \\
-            &= \sum_{i=1}^{r} [ Q : Q \cap P_i ] \quad \hyperref[lemma:intersection_of_a_sylow_p_subgroup_with_any_other_p_subgroups]{\text{the last lemma}}.
+            &= \sum_{i=1}^{r} \abs{ Q } / \abs{ \stab(P_i) } \quad
+              \hyperref[thm:orbit_stabilizer_theorem]{\text{orbit-stabilizer}}
+              \\
+            &= \sum_{i=1}^{r} \abs{ Q } / \abs{ N_G(P_i) \cap Q } \quad \text{
+              by the action } \\
+            &= \sum_{i=1}^{r} [ Q : N_G(P_i) \cap Q ] \quad \text{ by definition
+              } \\
+            &= \sum_{i=1}^{r} [ Q : Q \cap P_i ] \quad
+            \hyperref[lemma:intersection_of_a_sylow_p_subgroup_with_any_other_p_subgroups]{\text{the
+            last lemma}}.
   \end{align*}
+  % TODO : Question for prof
+  \sidenote{Why can we use
+  \cref{lemma:intersection_of_a_sylow_p_subgroup_with_any_other_p_subgroups}?
+  Are the $P_i$'s Sylow $p$-subgroups?}
 \end{proof}
 
 \begin{thm}[Second Sylow Theorem]\index{Second Sylow Theorem}\label{thm:second_sylow_theorem}
@@ -485,9 +505,24 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
 \end{remark}
 
 \begin{defn}[Simple Group]\index{Simple Group}\label{defn:simple_group}
-  A group is said to be \hlnoteb{simple} if it has no non-trivial normal subgroups.
+  A group is said to be \hlnoteb{simple} if it has no non-trivial\sidenote{By
+  non-trivial, we mean that the normal subgroup is not the group with only the
+  identity element.} normal subgroups.
 \end{defn}
 
+\marginnote{
+  \begin{procedures}[No simple subgroup of order $n$]
+    \label{procedures:no_simple_subgroup_of_order_n}
+    The approach to showing that there are no simple groups of a certain
+    order is as follows:
+    \begin{itemize}
+      \item we make use of the fact that each group has a Sylow subgroup, and
+        there are usually not many such subgroups;
+      \item using each of the possiblities as cases, we find out if a group of
+        the given order will have a normal subgroup.
+    \end{itemize}   
+  \end{procedures}
+}
 \begin{eg}
   Prove that there is no simple group of order $56$.
 \end{eg}
@@ -503,15 +538,25 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   \hlbnotea{$n_7 = 1$} By the remark above, $G$ has a normal Sylow
   $7$-subgroup. Thus $G$ is not simple.
 
-  \hlbnotea{$n_7 = 8$} By Lagrange, since $7$ is prime, by the Finite
-  Abelian group structure, the distinct Sylow $8$-subgroups of $G$
-  intersect trivially. Therefore, there are $8 \times 6 = 48$ elements 
-  of order $7$ in $G$. But this implies that $56 - 48 = 8$ elements that
-  are not of order $7$.  One of them is the identity,
-  thus the remaining $7$ elements must have order $2$ 
-  \sidenote{They cannot be of any other order as that would
-  create a cyclic group that is not of order $2$ or $7$, which is
-  impossible.}. This implies that
+  \hlbnotea{$n_7 = 8$} By Lagrange, since $7$ is prime \sidenote{This makes use
+  of the fact that the Sylow $7$-subgroup has a prime order, not just because
+  $7$ itself is prime. We say this here because if the order of the Sylow
+  $p$-subgroup is prime, then by \hyperref[thm:lagrange_s_theorem]{Lagrange},
+  $\abs{P \cap Q}$, where $P$ and $Q$ are distinct Sylow $p$-subgroups, is a
+  subgroup of $P$ (and $Q$), and must hence either be $1$ or $p$. But this
+  intersection cannot have order $p$, since $P$ and $Q$ are distinct. Thus
+  $\abs{P \cap Q} = 1$.
+
+  It is also important to note that this is only true if the order of the Sylow
+  $p$-subgroups are prime, i.e. simply $p$ itself. If their orders are $p^n$ for
+  some $n > 1$, this is not necessarily true.
+  }, the distinct Sylow $7$-subgroups of $G$ intersect trivially. Therefore,
+  there are $8 \times 6 = 48$ elements of order $7$ in $G$. But this implies
+  that $56 - 48 = 8$ elements that are not of order $7$.  One of them is the
+  identity, thus the remaining $7$ elements must have order $2$ 
+  \sidenote{They cannot be of any other order as that would create a cyclic
+    group that is not of order $2$ or $7$, which is impossible.}.
+  This implies that
   \begin{equation*}
     n_2 = 7 \equiv 1 \mod 2,
   \end{equation*}
@@ -547,8 +592,7 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
 \end{remark}
 
 \begin{eg}
-  % TODO : Wait what!?? Isn't r^3 = 1? This was given as a warning. See handwritten notes
-  Note that the second remark is not true if $G = D_6$. Notice that
+  Let $G = D_6$. Notice that
   \begin{equation*}
     H = \langle 1, s \rangle, \quad K = \langle 1, rs \rangle
   \end{equation*}
@@ -576,9 +620,7 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
     \abs{ H_p H_q } = \frac{\abs{ H_p } \abs{ H_q }}{\abs{ H_p \cap H_q }} = pq = \abs{ G }.
   \end{equation*}
   Thus $G = H_p H_q$. Let $a, b \in G$. If $a, b$ is either both in $H_p$ or both in $H_q$,
-  then $ab = ba$ \sidenote{Crap, I don't remember why... 
-    % TODO: figure out why
-  }.
+  then $ab = ba$ \sidenote{Note: $H_p$ and $H_q$ are normal subgroups.}.
   WMA $a \in H_p$ and $b \in H_q$. By our first remark today, note that 
   $H_p \cap H_q = \left\{ e \right\}$. Then, observe that
   \begin{equation*}
@@ -593,8 +635,8 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
       ([shift={(1pt,-2pt)}]pic cs:b) |- ([shift={(1pt,-10pt)}]pic cs:b)
       node[anchor=north] {$H_p$};
   \end{tikzpicture}
-  Thus $aba^{-1}b^{-1} = e \implies ab = ba$. So $G$ is abelian. By the Fundamental Theorem
-  of Finite Abelian Groups
+  Thus $aba^{-1}b^{-1} = e \implies ab = ba$. So $G$ is abelian. By the
+  Fundamental Theorem of Finite Abelian Groups
   \begin{equation*}
     G \simeq \mathbb{Z}_p \times \mathbb{Z}_q \simeq \mathbb{Z}_{pq},
   \end{equation*}
@@ -606,7 +648,8 @@ Before proceeding with the Sylow's next theorem, we require two lemmas.
   \begin{equation*}
     S_3 \simeq \mathbb{Z}_2 \times \mathbb{Z}_3,
   \end{equation*}
-  and $\abs{ S_3 } = 6 = 2 \cdot 3$, is not cyclic.
+  and $\abs{ S_3 } = 6 = 2 \cdot 3$, is not cyclic. Notice that $S_3$ does not
+  fulfill the requirements for the last example since $2 \mid 3 - 1 = 2$.
 \end{eg}
 
 \begin{eg}
@@ -694,7 +737,14 @@ We shall continue with the last proof from where we left off.
 \begin{proof}[\cref{eg:g_60_is_simple} continued]
   \hlbnoted{Case A} $\abs{H} = 12$. WLOG, let $K$ be a normal Sylow $3$-subgroup
   of $H$, which is also normal in $G$ \sidenote{In Sylow Theory, normality is
-  transitive.}.
+  transitive:
+  \begin{mproof}
+    If $P$ is a normal Sylow $p$-subgroup of $G$, and $Q$ is a normal subgroup
+    of $P$, then $\forall q \in Q$, we have $q \in P$ and so $gqg^{-1} = q$ by
+    normality of $P$. It follows that $gQg^{-1} = Q$ and so $Q$ is also normal
+    in $G$.
+  \end{mproof}
+  }.
 
   \noindent
   \hlbnoted{Case B} $\abs{H} = 6$. $H$ would then have a normal Sylow $3$-subgroup,
@@ -807,7 +857,7 @@ Then $f(a) = 0 + r = r$, and so $f(x) = (x - a) q(x) + f(a)$.
 \end{warning}
 
 \begin{eg}
-  Let $f9x) = x^3 + x + 1 \in \mathbb{Z}_2[x]$. Note that $f(0) = 1$ and 
+  Let $f(x) = x^3 + x + 1 \in \mathbb{Z}_2[x]$. Note that $f(0) = 1$ and 
   $f(1) = 3 \equiv 1 \mod 2$. Since $\deg f = 3$ and $f$ has no roots in $\mathbb{Z}_2$,
   $f(x)$ is irreducible over $\mathbb{Z}_2$.
 \end{eg}
@@ -1786,8 +1836,8 @@ respectively, which may not be the same spliting field. How are these splitting 
     \node[label={270:{$f(x) \in F[x]$}}] at (0, 0) {};
     \node[label={90:{$f(x)$ splits in $K$}}] at (-2, 2) {};
     \node[label={90:{$f(x)$ splits in $E$}}] at (2, 2) {};
-    \draw (-1, 0) -- (-2, 2) node[midway,fill=dark] {$F(\alpha_1, \ldots, \alpha_n)$};
-    \draw (1, 0) -- (2, 2) node[midway,fill=dark] {$F(\beta_1, \ldots, \beta_n)$};
+    \draw (-1, 0) -- (-2, 2) node[midway,fill=black] {$F(\alpha_1, \ldots, \alpha_n)$};
+    \draw (1, 0) -- (2, 2) node[midway,fill=black] {$F(\beta_1, \ldots, \beta_n)$};
     \draw[latex-latex] (-0.5, 1.3) to[bend left] (0.5, 1.3) node[midway,above=1.5] {relation?};
   \end{tikzpicture}}
   \caption{Differing Splitting Fields}
@@ -1933,7 +1983,7 @@ immediately clear that algebraic closures are algebraically closed.
   / F$ is also algebraic, we have that $\bar{F}(\alpha) / F$ is algebraic. Thus $\alpha$
   is a root of some $p(x) \in F[x]$. Since $\bar{F}$ is the algebraic closure of
   $\bar{F}$, $p(x)$ splits over $\bar{F}[x]$, and so it follows that $\alpha \in \bar{F}$.
-  Therefore, $bar{F}$ is algebraically closed.
+  Therefore, $\bar{F}$ is algebraically closed.
 \end{proof}
 
 \marginnote{
@@ -1976,7 +2026,7 @@ immediately clear that algebraic closures are algebraically closed.
 We look into a specific class of field extensions, which is rather important to us.
 Consider the following question:
 
-\begin{quotebox}{be-green}{light}
+\begin{quotebox}{green}{white}
   What is the splitting field of the polynomial $f(x) = x^n - 1$ over $\mathbb{Q}$?
 \end{quotebox}
 
@@ -2093,7 +2143,7 @@ ready to show this.
 
 A good question to ask here is:
 
-\begin{quotebox}{be-green}{light}
+\begin{quotebox}{green}{white}
   Is there an easier way to compute $\Phi_n(x)$ for all $n$?
 \end{quotebox}
 
@@ -2501,6 +2551,131 @@ The above theorem gives us the following example.
 % section finite_fields_continued (end)
 
 % chapter lecture_16_feb_13th (end)
+
+\tuftepart{Galois Theory}
+
+\chapter{Lecture 17 Feb 15th}%
+\label{chp:lecture_17_feb_15th}
+% chapter lecture_17_feb_15th
+
+\section{Finite Fields (Continued 2)}%
+\label{sec:finite_fields_continued_2}
+% section finite_fields_continued_2
+
+We shall now prove the last theorem that we stated.
+
+\begin{thm}[Subfields of Finite Fields]\label{thm:subfields_of_finite_fields}
+  If $E$ is a subfield of $\mathbb{F}_{p^n}$, then $E \simeq \mathbb{F}_{p^r}$,
+  where $r \mid n$. Moreover, if $r \mid n$, then $\mathbb{F}_{p^n}$ has a
+  unique\sidenote{This is truly unique, not unique up to isomorphism, which is
+  \hlimpo{rare}.} subfield of order $p^r$.
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{Part 1} Let $E < \mathbb{F}_{p^n}$. By
+  \cref{propo:order_of_finite_fields_are_powers_of_its_primal_characteristic}
+  and \hyperref[thm:tower_theorem]{the Tower Theorem}, we have
+  \begin{equation*}
+    n = [ \mathbb{F}_{p^n} : \mathbb{F}_p ] = [ \mathbb{F}_{p^n} : E ][ E :
+    \mathbb{F}_p ].
+  \end{equation*}
+  Then by letting $r = [ E : \mathbb{F}_p ]$, we have that $r \mid n$ and
+  $\abs{E} = p^r$.
+
+  \noindent
+  \hlbnoted{Part 2} Suppose $r \mid n$, i.e. $\exists k \in \mathbb{Z}$ such
+  that $n = rk$. Consider
+  \begin{equation*}
+    \mathbb{F}_{p^n} = \left\{ \alpha \in \bar{\mathbb{F}}_p \mmid
+    \alpha^{p^{rk}} - \alpha = 0 \right\},
+  \end{equation*}
+  \sidenote{Note that we consider the closure just so that we contain all the
+  roots. \hlwarn{Should $\mathbb{F}_{p^n}$ not already have everything?}}which
+  we see is the splitting field of $x^{p^n} - x$, i.e. it is the set of roots of
+  $x^{p^n} - x$. Since $r \mid n$, we have
+  \begin{equation*}
+    p^n - 1 = (p^r - 1)(p^{n - r} + p^{n - 2r} + \hdots + p^r + 1).
+  \end{equation*}
+  Then, let
+  \begin{align*}
+    E &:= \left\{ \alpha \in \bar{\mathbb{F}}_p \mmid \alpha^{p^r} - \alpha = 0
+    \right\} \\
+      &= \left\{ \alpha \in \bar{\mathbb{F}}_p \mmid \alpha^{p^r - 1} - 1 = 0
+      \right\} \cup \{ 0 \} \\
+      &\subseteq \bar{\mathbb{F}}_{p^n}.
+  \end{align*}
+  Moreover, we have that $\abs{E} = p^r$.
+
+  For uniqueness, suppose if there exists $K < \mathbb{F}_{p^n}$ with order
+  $p^r$. Then $\forall \alpha \in K$,
+  \begin{equation*}
+    \alpha^{p^r} - \alpha = 0 \implies \alpha \in E.
+  \end{equation*}
+  Thus $K = E$.
+\end{proof}
+
+% section finite_fields_continued_2 (end)
+
+\section{Introduction to Galois Theory}%
+\label{sec:introduction_to_galois_theory}
+% section introduction_to_galois_theory
+
+Let $f(x) \in F[x]$ be non-constant, and $\alpha_1, \ldots, \alpha_n$ be the
+roots of $f(x)$ in its splitting field $K$. Our goal is to study these roots by
+permuting them under automorphisms of the splitting field $K$.
+
+\begin{defn}[Galois Group]\index{Galois Group}\label{defn:galois_group}
+  Let $K / F$. We define the \hlnoteb{Galois Group} of $K / F$, by
+  \begin{equation*}
+    \Gal(K / F) := \left\{ \phi \in \Aut(K) \mmid \phi \restriction_{F} = \id
+    \right\} \leq \Aut(K),
+  \end{equation*}
+  where $\Aut(K)$ is the \hlnotea{group of automorphisms} of $K$.
+\end{defn}
+
+\begin{lemma}[The Galois Group permutes roots]\label{lemma:the_galois_group_permutes_roots}
+  Let $K / F$. If $\alpha \in K$ is a root of $f(x) \in F[x]$ and $\phi \in
+  \Gal(K / F)$, then $\phi(\alpha)$ is also a root of $f(x)$.
+\end{lemma}
+
+\begin{proof}
+  Let $f(x) \in F[x]$. Then $f(x) = \sum a_i x^i$. Since $\alpha$ is a root, we
+  have $f(\alpha) = \sum a_i \alpha^i = 0$. Since $\phi$ is an automorphism, we
+  must therefore have $0 = \phi(0)$. Since $\phi \in \Gal(K / F)$, we have that
+  \begin{align*}
+    0 = \phi(0) = \phi ( \sum a_i \alpha^i ) = \sum \phi(a_i) \phi(\alpha^i)
+    \overset{(*)}{=} \sum a_i \phi(\alpha)^i = f(\phi(\alpha)),
+  \end{align*}
+  where $(*)$ is since $\phi$ fixes $F$.
+\end{proof}
+
+\begin{crly}[Elements of the Galois Group permutes roots of the same minimal
+  polynomial]\label{crly:elements_of_the_galois_group_permutes_roots_of_the_same_minimal_polynomial}
+  Let $K / F$. If $\alpha \in K$ is algebraic over $F$, and $\phi \in \Gal(K /
+  F)$, then $\phi(\alpha)$ is algebraic over $F$, and $\alpha$ and
+  $\phi(\alpha)$ has the same minimal polynomial in $F[x]$.
+\end{crly}
+
+\begin{eg}
+  Let $F = \mathbb{Q}$ and $K = F(\sqrt{2})$. Then $\Gal( \mathbb{Q}(\sqrt{2}) /
+  \mathbb{Q}) = \Aut \mathbb{Q}(\sqrt{2})$ \sidenote{\hlwarn{Why}? Is it cause
+  there is very little room for us to wiggle around $\phi \restriction_F =
+  \id$?}.
+  Note that the minimal polynomial of $\sqrt{2}$ is $x^2 - 2 = (x - \sqrt{2})(x
+  + \sqrt{2}) \in K[x]$. Thus if $\phi \in
+  \Gal(\mathbb{Q}(\sqrt{2})/\mathbb{Q})$, then $\phi(\sqrt{2}) = \sqrt{2}$ or
+  $-\sqrt{2}$ \sidenote{Note that we must fix everything else, by definition of
+  a Galois group.}. It follows that the only two maps in $\Gal(K / F)$ are
+  \begin{gather*}
+    \phi_1 : a + b \sqrt{2} \mapsto a + b \sqrt{2} \\
+    \phi_2 : a + b \sqrt{2} \mapsto a - b \sqrt{2}.
+  \end{gather*}
+  Thus $\Gal(K / F) = \{ \phi_1, \phi_2 \} \simeq \mathbb{Z}_2$.
+\end{eg}
+
+% section introduction_to_galois_theory (end)
+
+% chapter lecture_17_feb_15th (end)
 
 \appendix
 

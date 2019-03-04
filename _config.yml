@@ -68,3 +68,6 @@ gitlab-letsencrypt:
   # Delay settings:
   initial_delay: 120 # How long to wait for Gitlab CI to push your changes before it starts checking
   delay_time:     15 # How long to wait between each check once it starts looking for the file
+
+  # modifying challenge protocol
+  scheme: 'https'
