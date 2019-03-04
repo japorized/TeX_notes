@@ -1,5 +1,10 @@
     <script type="text/javascript">
       function nightSwitcher(){var rawtime=new Date(),curHours=rawtime.getHours();if(curHours>17||curHours<8){document.querySelector('body').innerHTML+="<link rel='stylesheet' href='assets/css/night-mode.css' />"}}nightSwitcher(); var btn = document.querySelector('.tex-toggle'), texfiles = document.querySelectorAll('.file-tex'); btn.addEventListener('click', function(e) { if ( btn.innerHTML != '<span class="fa fa-check"></span>' ) { btn.innerHTML = '<span class="fa fa-check"></span>'; texfiles.forEach( function(file) { file.style.display="block"; }); } else { btn.innerHTML = ''; texfiles.forEach( function(file) { file.style.display="none"; }); } }); var filterer = document.querySelector('#filterer'), courseCards = document.querySelectorAll('.course-card'); filterer.addEventListener('keyup', function (e) { var str = filterer.value.toLowerCase().replace(' ', '-'); for ( var card of courseCards ) { if ( card.id.indexOf(str) == -1 ) { card.style.display = "none"; } else { card.style.display = "block"; } } });
+    // Hacky https redirect since gitlab pages doesn't support true 301's yet:
+    var host = "tex.japorized.com";
+    if ((host == window.location.host) && (window.location.protocol != 'https:')) {
+      window.location = window.location.toString().replace(/^http:/, "https:");
+    }
     </script>
 
     <hr />
