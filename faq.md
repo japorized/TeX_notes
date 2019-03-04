@@ -39,5 +39,4 @@ title: Frequently Asked Questions
   Feel free to [check the source](https://gitlab.com/japorized/TeX_notes). They're short so shouldn't take you too long. The Javascript of the site are meant only for two features for now:
 
   - the search functionality, which is a bit of a hack by me using the title of each set of notes as an id;
-  - the night mode auto-toggle, which uses your system time;
-  - redirect all http traffic to https.
+  - the night mode auto-toggle, which uses your system time.
