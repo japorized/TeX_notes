@@ -32,23 +32,13 @@
 \usepackage[most]{tcolorbox}
 
 % hyperref Package Settings
+\usepackage{colorscheme-base16-harmonic-light}
 \hypersetup{
 	colorlinks,
   breaklinks=true,
 	allcolors=black
 }
 \def\UrlBreaks{\do\/\do-}
-
-\definecolor{dark}{HTML}{2D2D2D}
-\definecolor{light}{HTML}{D3D0C8}
-\definecolor{red}{HTML}{F47678}
-\definecolor{green}{HTML}{98CD97}
-\definecolor{yellow}{HTML}{E2B552}
-\definecolor{blue}{HTML}{6498CE}
-\definecolor{magenta}{HTML}{CD98CD}
-\definecolor{cyan}{HTML}{61CCCD}
-\definecolor{gray}{HTML}{747369}
-\definecolor{brown}{HTML}{D47B4E}
 
 % fancyhdr
 \makeatletter
@@ -117,7 +107,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 % Shortcuts
 \input{notations.tex}
 
-\newcommand{\hlb}[2]{\colorbox{#1!10!light}{\textbf{#2}}}
+\newcommand{\hlb}[2]{\colorbox{#1!10!background}{\textbf{#2}}}
 \newcommand{\hlbnotea}[1]{\hlb{green}{#1}}
 \newcommand{\hlbnoteb}[1]{\hlb{cyan}{#1}}
 \newcommand{\hlbnotec}[1]{\hlb{brown}{#1}}

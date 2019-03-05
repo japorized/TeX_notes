@@ -1200,7 +1200,9 @@ if $F$ is a field under the same operations.
   Let $F$ be a field.
   \begin{itemize}
     \item If the characteristic $ch(F) = p > 0$ is a prime, then 
-      $F \supset \{ 0, 1, 2, \ldots, p - 1 \} \simeq \mathbb{Z}_p$.
+      \begin{equation*}
+        F \supset \{ 0, 1, 2, \ldots, p - 1 \} \simeq \mathbb{Z}_p.
+      \end{equation*}
       Thus $F / \mathbb{Z}_p$.
     \item If $\ch(F) = 0$, then $F / \mathbb{Q}$.
   \end{itemize}
@@ -1670,14 +1672,20 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
   Sps $K / F$ is algebraic, where $K = F(\alpha_1, \ldots, \alpha_n)$. We shall proceed by performing
   induction on $n$. If $n = 1$, then $[F(\alpha_1) : F] = \deg_F(\alpha_1) < \infty$.
 
-  Now suppose that the result holds for $n$. Consider $K = F(\alpha_1, \ldots, \alpha_n, \alpha_{n + 1})$.
+  Now suppose that the result holds for $n$. Consider 
+  \begin{equation*}
+    K = F(\alpha_1, \ldots, \alpha_n, \alpha_{n + 1}).
+  \end{equation*}
   Then by the \hyperref[thm:tower_theorem]{Tower Theorem},
   \begin{align*}
     &[F(\alpha_1, \ldots, \alpha_n, \alpha_{n + 1}) : F] \\
     &= [F(\alpha_1, \ldots, \alpha_{n})(\alpha_{n + 1}) : F(\alpha_1, \ldots, \alpha_n)]
         \cdot [F(\alpha_1, \ldots, \alpha_n) : F].
   \end{align*}
-  It follows from the base case and the induction hypothesis that $[F(\alpha_1, \ldots, \alpha_{n +1}):F]$
+  It follows from the base case and the induction hypothesis that
+  \begin{equation*}
+    [F(\alpha_1, \ldots, \alpha_{n +1}):F]
+  \end{equation*}
   is finite.
 \end{proof}
 
@@ -2428,8 +2436,11 @@ we shall show in this section.
   $\mathbb{Z}_p$, since $\mathbb{Z}_p$ is a prime subfield, we have that
   $\mathbb{Z}_p(\alpha) = F$.
 
-  Now since  $n = [F : \mathbb{Z}_p]$, we have that $F = \Span_{\mathbb{Z}_p} \{ 1,
-  \alpha, \alpha^2, \ldots, \alpha^{n - 1} \}$. It follows that $\abs{F} = p^n$.
+  Now since $n = [F : \mathbb{Z}_p]$, we have that
+  \begin{equation*}
+    F = \Span_{\mathbb{Z}_p} \{ 1, \alpha, \alpha^2, \ldots, \alpha^{n - 1} \}.
+  \end{equation*}
+  It follows that $\abs{F} = p^n$.
 \end{proof}
 
 \marginnote{\cref{thm:finite_fields_as_splitting_fields} is the important theorem that
@@ -2866,7 +2877,7 @@ indices, such as the Galois group, have a special name.
   Consider $G = \Gal(x^3 - 2)$ over $\mathbb{Q}[x]$.
 
   Since $f(x) = x^3 - 2$ is irreducible (by
-  \hyperref[propo:eisenstein_s_criterion]{2-Eisenstein}) and $\char \mathbb{Q} =
+  \hyperref[propo:eisenstein_s_criterion]{$2$-Eisenstein}) and $\ch \mathbb{Q} =
   0$, $f(x)$ is separable \sidenote{See A5Q3(d).}. It follows from
   \cref{crly:the_galois_group_of_a_separable_irreducible_polynomial_is_transitive}
   that $G \simeq H \leq S_3$ transitive.
@@ -2877,7 +2888,7 @@ indices, such as the Galois group, have a special name.
   \hyperref[thm:orbit_stabilizer_theorem]{Orbit-Stabilizer Theorem}, we have
   \begin{equation*}
     \abs{ G } = \abs{ \orb(\alpha_1) } \cdot \abs{ \stab(\alpha_1) } = 3 \cdot
-    \abs{ \stab(\alppha_1) },
+    \abs{ \stab(\alpha_1) },
   \end{equation*}
   where we note that $\abs{ \orb(\alpha_1) }$ since all the orbits of $\alpha_1$
   are exactly elements of $X$. It follows that $3 \mid \abs{G}$. Since the only
@@ -2894,6 +2905,160 @@ We shall finish the rest of this example in the next lecture.
 % section the_galois_group_as_a_permutation_group (end)
 
 % chapter lecture_18_feb_25th (end)
+
+\chapter{Lecture 19 Feb 27th}%
+\label{chp:lecture_19_feb_27th}
+% chapter lecture_19_feb_27th
+
+\section{The Galois Group as a Permutation Group (Continued)}%
+\label{sec:the_galois_group_as_a_permutation_group_continued}
+% section the_galois_group_as_a_permutation_group_continued
+
+We shall continue with the last example of the last lecture.
+
+\begin{eg}
+  We considered $G = \Gal(x^3 - 2)$ over $\mathbb{Q}[x]$, and showed that we
+  either have
+  \begin{equation*}
+    G \simeq A_3 \text{ or } G \simeq S_3.
+  \end{equation*}
+  Recall that the roots of $f(x) = x^3 - 2$ are
+  \begin{equation*}
+    \alpha_1 = \sqrt[3]{2}, \, \alpha_2 = \alpha_1 \zeta_3, \, \alpha_3 =
+    \alpha_1 \zeta_3^2.
+  \end{equation*}
+  Note that $f(x)$ is irreducible over $\mathbb{Q}(\zeta_3)$ \sidenote{Well,
+  none of the roots of $f$ are in $\mathbb{Q}(\zeta_3)$, after all. Also, note
+  that since $\alpha_1 \notin \mathbb{Q}(\zeta_3)$, $f$ remains the minimal
+  polynomial of $\alpha_1$ over $\mathbb{Q}(\zeta_3)$, and so
+  $\deg_{\mathbb{Q}(\zeta_3)} (\alpha_1) = 3$, but $[ \mathbb{Q}(\zeta_3) :
+  \mathbb{Q} ] = 2$.}. By the
+  \cref{crly:the_galois_group_completely_captures_all_permutation_of_the_roots},
+  $\exists \phi \in G$ such that we have the relation as shown in
+  \cref{fig:crly_galois_group_has_all_permutations_in_action}.
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzcd}
+      \mathbb{Q}(\sqrt[3]{2}, \zeta_3) \arrow[rr, "\phi"]                            &  & \mathbb{Q}(\sqrt[3]{2}, \zeta_3) \arrow[dd, no head]        \\
+                                                                                     &  & \\
+      \mathbb{Q}(\zeta_3) \arrow[rr, "\zeta_3 \mapsto \zeta_3^2"] \arrow[uu,no head] &  & \mathbb{Q}(\zeta_3) \arrow[dd, no head]        \\
+                                                                                     &  & \\
+      \mathbb{Q} \arrow[rr, "id"] \arrow[uu, no head]                                &  & \mathbb{Q}
+    \end{tikzcd}
+    \caption[][20pt]{\cref{crly:the_galois_group_completely_captures_all_permutation_of_the_roots} in action}
+    \label{fig:crly_galois_group_has_all_permutations_in_action}
+  \end{figure}
+
+  \sidenote{Note that $\zeta_3 \mapsto \zeta_3^2$ is a valid isomorphism,
+  especially since they have the same minimal polynomial.} Note that
+  \begin{gather*}
+    \phi(\alpha_1) = \alpha_1 \\
+    \phi(\alpha_2) = \phi(\alpha_1 \zeta_3) = \alpha_1 \zeta_3^2 = \alpha_3 \\
+    \phi(\alpha_3) = \phi(\alpha_1 \zeta_3^2) = \alpha_1 \zeta_3 = \alpha_2
+  \end{gather*}
+  It thus follows that $\phi \sim (2 \; 3)$, a $2$-cycle, in $G$. Thus $\phi$ is
+  an element of order $2$, which is an element that $A_3$ does not have. Thus $G
+  \simeq S_3$.
+\end{eg}
+
+From the above example, we notice the following helpful observation.
+
+\begin{remark}
+  When computing $G = \Gal(K / F)$, it is often helpful to first know $\abs{G}$.
+\end{remark}
+
+Fortunately, in the finite dimensional world, $\abs{G}$ has an upper bound.
+
+\begin{defn}[$F$-map]\index{$F$-map}\label{defn:_f_map}
+  Let $K / F$ and $E / F$. Any \hlnotea{homomorphism} $\phi : K \to E$ which
+  fixes $F$, i.e. $\phi \restriction_F = \id_F$, is called an
+  \hlnoteb{$F$-map}.
+\end{defn}
+
+\begin{remark}
+  Suppose $K / F$ and $E / F$, and $\phi : K \to E$ an $F$-map.
+  \begin{enumerate}
+    \item Since $\ker \phi \neq K$, we have $\ker \Phi = 0$ \sidenote{Note that
+      in finite fields, $\ker \phi \in \{ \{ 0 \}, K \}$.}. Thus $\phi$ is
+      \hlnotea{injective}.
+    \item For any $\alpha \in F$, $v \in K$, $\phi(av) = \phi(a) \phi(v) = a
+      \phi(v)$ since $\phi$ is a homomorphism. It follows that $\phi$ is a
+      \hlnotea{linear transformation}.
+    \item Let $\phi : K \to K$ be an $F$-map, and suppose $K$ is a
+      finite-dimensional $F$-vector space with $[ K : F ] < \infty$. Then $\phi
+      $ is surjective.
+
+      It follows that $\phi : K \to K$ ($[K : F] < \infty$) is an $F$-map $\iff
+      \phi \in \Gal(K / F)$.
+  \end{enumerate}
+\end{remark}
+
+\begin{lemma}[Number of Distinct $F$-maps]\label{lemma:number_of_distinct_f_maps}
+  Let $K / F$ and $E / F$, and suppose $K / F$ is a finite extension. The number
+  of distinct $F$-maps from $K$ to $E$ is at most $[K : F]$.
+\end{lemma}
+
+\begin{proof}
+  We shall do induction on the number of generators of $K / F$, which is also
+  $[ K : F ] = n$, which is what we can iterate on. When $n = 1$, we have $K =
+  F(\alpha_1)$ and $\phi : K \to E$ an $F$-map. Then the roots $\alpha_1$ and
+  $\phi(\alpha_1)$ have the same minimal polynomial \sidenote{\hlwarn{Why?}}
+  over $F$. Thus, there are at most $[ K : F ]$-many choices for
+  $\phi(\alpha_1)$, meaning that there are at most $[ K : F ]$-many such
+  $F$-maps.
+
+  \marginnote{\WTS that the number of $F$-maps is at most $[K : F] = [ K : L ][
+  L : F]$. We can get $[ L : F ]$ from the \hlnotea{induction hypothesis} and
+  $[ K : L ]$ from an argument similar to the base case.}
+  Continuing with this inductive line of thought, suppose that the statement is
+  true for $K = F(\alpha_1, \ldots, \alpha_n)$ for some $n > 1$. Now let
+  \begin{equation*}
+    L = F(\alpha_1, \ldots, \alpha_{n - 1}), \text{ so that } K = L(\alpha_n).
+  \end{equation*}
+  Let $\phi : K \to E$ be an $F$-map. Note that $\phi \restriction_L : F \to E$
+  is still an $F$-map. By the induction hypothesis, the number of choices for
+  $\phi \restriction_L$ is at most $[ L : F ]$. Since $\phi$ is completely
+  determined by $\phi \restriction_L$ and $\phi(\alpha_n)$, there are,
+  therefore, at most
+  \begin{equation*}
+    [L : F][ L(\alpha_n) : L ] = [ K : F ]\text{-many}
+  \end{equation*}
+  choices for $\phi$, following the Tower Theorem.
+\end{proof}
+
+The following corollary follows immediately from the realization that $F$-maps
+going from $K \to K$ are exactly the elements of the Galois group $\Gal(K / F)$.
+
+\begin{crly}[Upper Bound for the Galois Group of Finite Extensions]\label{crly:upper_bound_for_the_galois_group_of_finite_extensions}
+  If $K / F$ is finite, then
+  \begin{equation*}
+    \abs{ \Gal(K / F) } \leq [ K : F ].
+  \end{equation*}
+\end{crly}
+
+\begin{warning}
+  There are extensions $K$ of a field $F$ such that $\Gal(K / F) < [ K : F ]$.
+  \begin{enumerate}
+    \item We saw in an earlier example that $G = \Gal( \mathbb{Q}(\sqrt[3]{2}) :
+      \mathbb{Q} ) = \{ 1 \}$, but $[ \mathbb{Q}(\sqrt[3]{2}) : \mathbb{Q} ] =
+      3$, and $\sqrt[3]{2} \zeta_3, \, \sqrt[3]{2} \zeta_3^2 \notin
+      \mathbb{Q}(\sqrt[3]{2})$. In this case, the Galois group is too tiny.
+    \item Consider $G = \Gal( \mathbb{Z}_2(x) / \mathbb{Z}_2(t^2) )$. Note that
+      $[\mathbb{Z}_2(x) : \mathbb{Z}_2(t^2)] = 2$, since the minimal polynomial
+      of $t$ in $\mathbb{Z}_2(t^2)[x]$ is
+      \begin{equation*}
+        x^2 - t^2 = (x - t)^2 \in \mathbb{Z}_2(t)[x].
+      \end{equation*}
+      Thus if $\phi \in G$, then it is necesssary that $\phi(t) = t$, implying
+      that $G = \{ 1 \}$.
+
+      In this case, it is because $t$ is a root with multiplicity $> 1$.
+  \end{enumerate}
+\end{warning}
+
+% section the_galois_group_as_a_permutation_group_continued (end)
+
+% chapter lecture_19_feb_27th (end)
 
 \appendix
 
