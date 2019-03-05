@@ -511,8 +511,7 @@ highlight what $Z(P)$ is.}
 \end{defn}
 
 \marginnote{
-  \begin{procedures}[No simple subgroup of order $n$]
-    \label{procedures:no_simple_subgroup_of_order_n}
+  \begin{procedures}[No simple subgroup of order $n$]\label{procedures:no_simple_subgroup_of_order_n}
     The approach to showing that there are no simple groups of a certain
     order is as follows:
     \begin{itemize}
@@ -2676,6 +2675,225 @@ permuting them under automorphisms of the splitting field $K$.
 % section introduction_to_galois_theory (end)
 
 % chapter lecture_17_feb_15th (end)
+
+\chapter{Lecture 18 Feb 25th}%
+\label{chp:lecture_18_feb_25th}
+% chapter lecture_18_feb_25th
+
+\section{Introduction to Galois Theory (Continued)}%
+\label{sec:introduction_to_galois_theory_continued}
+% section introduction_to_galois_theory_continued
+
+\begin{eg}
+  Consider the Galois group $\Gal( \mathbb{Q}(\sqrt{2}, \sqrt{3}) / \mathbb{Q}
+  )$. Now the minimal polynomial for $\sqrt{2}$ and $\sqrt{3}$ are
+  \begin{equation*}
+    x^2 - 2, \text{ and } x^2 - 3,
+  \end{equation*}
+  respectively. Then we can only have $\phi(\sqrt{2}) = \pm \sqrt{2}$ and
+  $\phi(\sqrt{3}) = \pm \sqrt{3}$, i.e.
+  \begin{table}[ht]
+    \centering
+    \caption{All possible elements of $\Gal(\mathbb{Q}(\sqrt{2}, \sqrt{3}) /
+    \mathbb{Q})$}
+    \label{table:all_possible_elements_of_gal_q_sqrt_2_sqrt_3_q}
+    \begin{tabular}{c | c c}
+               & $\sqrt{2}$  & $\sqrt{3}$ \\
+       \hline
+      $\phi_1$ & $\sqrt{2}$  & $\sqrt{3}$ \\
+      $\phi_2$ & $\sqrt{2}$  & $-\sqrt{3}$ \\
+      $\phi_3$ & $-\sqrt{2}$ & $\sqrt{3}$ \\
+      $\phi_4$ & $-\sqrt{2}$ & $-\sqrt{3}$
+    \end{tabular}
+  \end{table}
+  So $\Gal( \mathbb{Q}(\sqrt{2}, \sqrt{3}) / \mathbb{Q} ) = \{ \phi_i : i = 1,
+  2, 3, 4 \}$. Note that $\abs{\phi_i} = 2$ for $i = 2, 3, 4$. It follows that
+  $\Gal( \mathbb{Q}(\sqrt{2}, \sqrt{3}) / \mathbb{Q} )$ is abelian and has order
+  $4$. Therefore
+  \begin{equation*}
+    \Gal \left( \faktor{\mathbb{Q}(\sqrt{2}, \sqrt{3})}{\mathbb{Q}} \right)
+    \simeq \mathbb{Z} \times \mathbb{Z}.
+  \end{equation*}
+\end{eg}
+
+\marginnote{
+Notice that in
+\cref{eg:galois_elements_can_only_permute_roots_in_the_same_field}, the field
+where the roots lie in is important; we see that the Galois group ended up being
+the trivial group because the other roots of the minimal polynomial of
+$\sqrt[3]{2}$ live in a higher extension.
+}
+
+\begin{eg}\label{eg:galois_elements_can_only_permute_roots_in_the_same_field}
+  Consider $G = \Gal(\mathbb{Q}(\sqrt[3]{2}) / \mathbb{Q})$. Let $\phi \in G$.
+  Since $\phi(\sqrt[3]{2})$ is a root of $x^3 - 2$, we must have that
+  \begin{equation*}
+    \phi(\sqrt[3]{2}) \in \left\{ \sqrt[3]{2}, \, \sqrt[3]{2} \zeta_3, \,
+    \sqrt[3]{2} \zeta_3^2 \right\}.
+  \end{equation*}
+  However, $\sqrt[3]{2} \zeta_3, \, \sqrt[3]{2} \zeta_3^2 \notin
+  \mathbb{Q}(\sqrt[3]{2})$. Therefore we must have $\phi(\sqrt[3]{2}) =
+  \sqrt[3]{2}$, i.e. $\phi = \id$. It follows that $G = \{ 1 \}$.
+\end{eg} 
+
+% section introduction_to_galois_theory_continued (end)
+
+\section{The Galois Group as a Permutation Group}%
+\label{sec:the_galois_group_as_a_permutation_group}
+% section the_galois_group_as_a_permutation_group
+
+Let $F$ be a field, $f(x) \in F[x]$, $\deg f = n \geq 1$, and $K$ a splitting
+field of $f(x)$ over $F$. Let $\alpha_1, \ldots, \alpha_n \in K$ be the roots of
+$f(x)$, and let $G = \Gal(K / F)$. From the last few examples, we notice that
+for any $\phi \in G$, $\phi(\alpha_i) = \alpha_j$.
+
+In this section, we will show that $G$ is actually a \hlnotea{permutation group}
+of the roots, as a subgroup of $S_n$ in the case of permuting the roots of
+$f(x)$, the degree $n$ polynomial.
+
+In fact, more is true, but we shall see that down the road.
+
+\newthought{From} the last two examples, one cannot help but notice a possible
+problem:
+\begin{quotebox}{green}{white}
+  what if there are repeated roots?
+\end{quotebox}
+If there are, indeed, repeated roots, say $\alpha_1 = \alpha_2$ among the roots
+$\alpha_1, \alpha_2, \alpha_3, \alpha_4$, where $\alpha_4 \neq \alpha_3 \neq
+\alpha_1 \neq \alpha_4$, then the identity element would be indistinguishable
+from $\phi$ that is defined as
+\begin{equation*}
+  \phi(\alpha_1) = \alpha_2, \, \phi(\alpha_2) = \alpha_1, \, \phi(\alpha_3) =
+  \alpha_3, \, \phi(\alpha_4) = \alpha_4.
+\end{equation*}
+
+So it suffices for us to consider for the case where $f(x)$ does not have
+multiple roots of the same value, i.e. the \hlnotea{multiplicity} of all roots
+is $1$.  Such polynomials are called \hlnotea{separable} polynomials.
+
+\begin{defn}[Separable Polynomials]\index{Separable Polynomials}\label{defn:separable_polynomials}
+  A polynomial $f(x) \in F[x]$ is said to be \hlnoteb{separable} if all of its
+  roots have multiplicity $1$.
+\end{defn}
+
+\newthought{Let} $f(x) \in F[x]$ be separable with $\deg f = n \geq 1$, and
+suppose $K$ is the splitting field of $f(x)$ over $F$. Let $\alpha_1, \ldots,
+\alpha_n$ be the roots of $f$ in $K$. From our discussion above, we want to show
+that $\Gal(K / F) \simeq P \leq S_n$. In other words, we want to see that given
+$\phi \in \Gal(K / F)$, $\exists \pi \in P \leq S_n$ such that $\phi(\alpha_i) =
+\alpha_{\pi(i)}$.
+
+\begin{notation}
+  Given $f(x) \in F[x]$, and $K$ the splitting field of $f(x)$, we sometimes
+  write
+  \begin{equation*}
+    \Gal(f(x)) := \Gal(K / F).
+  \end{equation*}
+  In other words, when we write $\Gal(f(x))$, we are talking about the Galois
+  group over the splitting field of $f(x)$ over $F$.
+\end{notation}
+
+\begin{eg}
+  Recall an earlier example of ours where $f(x) = (x^2 - 2)(x^2 - 3) \in
+  \mathbb{Q}[x]$, where we showed that the Galois group $\Gal(f(x)) =
+  \mathbb{Z}_2 \times \mathbb{Z}_2$. Let
+  \begin{equation*}
+    \alpha_1 = \sqrt{2}, \, \alpha_2 = - \sqrt{2}, \, \alpha_3 = \sqrt{3}, \,
+    \alpha_4 = - \sqrt{3}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \Gal(f(x)) \simeq \{ \epsilon, \, (3 \; 4), \, (1 \; 2), \, (1 \; 2)(3 \; 4)
+    \}.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Let $x^2 + 1 \in \mathbb{Q}[x]$. Then \sidenote{The adjoined elements are $\pm
+  i$.}
+  \begin{equation*}
+    \Gal(x^2 + 1) \simeq \mathbb{Z}_2.
+  \end{equation*}
+  However, if we consider $x^2 + 1 \in \mathbb{Z}_2[x]$, then
+  \begin{equation*}
+    \Gal(x^2 + 1) = \Gal((x + 1)^2) = \{ 1 \}.
+  \end{equation*}
+\end{eg}
+
+The following is a quick corollary of from our discussion and observation.
+
+\begin{crly}[The Galois Group completely captures all permutation of the roots]\label{crly:the_galois_group_completely_captures_all_permutation_of_the_roots}
+  Let $F$ be a field, $f(x) \in F[x]$ a non-constant and irreducible, $K$ a
+  splitting field of $f(x)$ over $F$. Then $\forall \alpha, \, \beta \in K$ such
+  that $f(\alpha) = 0 = f(\beta)$, $\exists \phi \in \Gal(K / F) = \Gal(f(x))$
+  such that $\phi(\alpha) = \beta$.
+\end{crly}
+
+\begin{proof}
+  We shall use the \hyperref[lemma:isomorphism_extension_lemma]{Isomorphism
+  Extension Lemma} to prove this.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzcd}
+      K \arrow[rr, "\phi"]                   &                                        & K \arrow[dd, no head]        \\
+                                             &                                        &                              \\
+      F(\alpha) \arrow[uu, no head]          & \overset{\alpha \mapsto \beta}{\simeq} & F(\beta) \arrow[dd, no head] \\
+                                             &                                        &                              \\
+      F \arrow[rr, "id"] \arrow[uu, no head] &                                        & F                           
+    \end{tikzcd}
+    \caption{Constructing elements of the Galois Group}\label{fig:constructing_elements_of_the_galois_group}
+  \end{marginfigure}
+  Consider the identity as our isomorphism $\id : F \to F$. The Isomorphism
+  Extension Lemma gives us the isomorphism that goes from $F(\alpha)$ to
+  $F(\beta)$ by mapping $\alpha$ to $\beta$. We may thus define $\phi$ such that
+  $\phi$ fixes $F$ and $\phi(\alpha) = \beta$, in $K$.
+\end{proof}
+
+\newthought{Permutation groups} that allows one to traverse all around the
+indices, such as the Galois group, have a special name.
+
+\begin{defn}[Transitive Subgroup]\index{Transitive Subgroup}\label{defn:transitive_subgroup}
+  A subgroup $H \leq S_n$ is \hlnoteb{transitive} if $\forall i, j \in \{ 1,
+  \ldots, n \}$, $\exists \pi \in H$ such that $\pi(i) = j$.
+\end{defn}
+
+\begin{crly}[The Galois Group of a Separable, Irreducible Polynomial is Transitive]\label{crly:the_galois_group_of_a_separable_irreducible_polynomial_is_transitive}
+  Let $f(x) \in F[x]$, with $\deg f = n \geq 1$, be separable and irreducible.
+  Then $\Gal(f(x)) \simeq H \leq S_n$ that is transitive.
+\end{crly}
+
+\begin{eg}
+  Consider $G = \Gal(x^3 - 2)$ over $\mathbb{Q}[x]$.
+
+  Since $f(x) = x^3 - 2$ is irreducible (by
+  \hyperref[propo:eisenstein_s_criterion]{2-Eisenstein}) and $\char \mathbb{Q} =
+  0$, $f(x)$ is separable \sidenote{See A5Q3(d).}. It follows from
+  \cref{crly:the_galois_group_of_a_separable_irreducible_polynomial_is_transitive}
+  that $G \simeq H \leq S_3$ transitive.
+
+  Let $\alpha_1, \, \alpha_2, \, \alpha_3$ be the roots of $f(x)$. Let $X = \{
+  \alpha_1, \, \alpha_2, \, \alpha_3 \}$, and $G$ act on $X$ via $\phi \cdot
+  \alpha_i = \phi(\alpha_i)$. By the
+  \hyperref[thm:orbit_stabilizer_theorem]{Orbit-Stabilizer Theorem}, we have
+  \begin{equation*}
+    \abs{ G } = \abs{ \orb(\alpha_1) } \cdot \abs{ \stab(\alpha_1) } = 3 \cdot
+    \abs{ \stab(\alppha_1) },
+  \end{equation*}
+  where we note that $\abs{ \orb(\alpha_1) }$ since all the orbits of $\alpha_1$
+  are exactly elements of $X$. It follows that $3 \mid \abs{G}$. Since the only
+  subgroups of $S_3$ that are divisible by $3$ are $A_3$ and $S_3$, we either
+  have
+  \begin{equation*}
+    G \simeq A_3 \text{ or } G \simeq S_3.
+  \end{equation*}
+
+\end{eg}
+
+We shall finish the rest of this example in the next lecture.
+
+% section the_galois_group_as_a_permutation_group (end)
+
+% chapter lecture_18_feb_25th (end)
 
 \appendix
 
