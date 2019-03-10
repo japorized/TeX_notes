@@ -118,6 +118,12 @@ snippet axis "tikzpicture axis snippet" b
 \draw[->] (0, -$1) -- (0, $1);
 endsnippet
 
+snippet axis3d "tikzpicture 3d axis snippet" b
+\draw[->] (-${1:2}, 0, 0) -- ($1, 0, 0);
+\draw[->] (0, -$1, 0) -- (0, $1, 0);
+\draw[->] (0, 0, -$1) -- (0, 0, $1);
+endsnippet
+
 snippet enum "Enumerate" b
 \begin{enumerate}
 	\item $0
@@ -389,8 +395,8 @@ ${2:${VISUAL:code}}
 $0
 endsnippet
 
-snippet pl "partial" w
-\partial_
+snippet del "partial" w
+\partial
 endsnippet
 
 snippet newth "newthought" b

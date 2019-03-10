@@ -7,23 +7,26 @@
 
 \newpage
 \begin{fullwidth}
+  \phantomsection
+  \addcontentsline{toc}{chapter}{\faBook\ \slshape List of Definitions}
   \renewcommand{\listtheoremname}{\faBook\ \slshape List of Definitions}
   \listoftheorems[ignoreall,show={defn}]
-  \addcontentsline{toc}{chapter}{List of Definitions}
 \end{fullwidth}
 
 \newpage 
 \begin{fullwidth}
+  \phantomsection
+  \addcontentsline{toc}{chapter}{\faCoffee\ \slshape List of Theorems}
   \renewcommand{\listtheoremname}{\faCoffee\ \slshape List of Theorems}
   \listoftheorems[ignoreall,
     show={axiom,lemma,thm,crly,propo,marginthm,marginpropo,marginlemma,marginaxiom,margincrly}
   ]
-  \addcontentsline{toc}{chapter}{List of Theorems}
 \end{fullwidth}
 
 \newpage
 \begin{fullwidth}
+  \phantomsection
+  \addcontentsline{toc}{chapter}{\faCodeBranch\ \slshape List of Procedures}
   \renewcommand{\listtheoremname}{\faCodeBranch\ \slshape List of Procedures}
   \listoftheorems[ignoreall, show={procedures}]
-  \addcontentsline{toc}{chapter}{List of Procedures}
 \end{fullwidth}
