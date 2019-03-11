@@ -4252,7 +4252,7 @@ $k$-dimensional.
   still cover $M$, hence its name.
 \end{note}
 
-\begin{eg}
+\begin{eg}\label{eg:parametrization_of_s_n_1_in_r_n_no1}
   Consider the unit sphere $S^{n - 1} \subseteq \mathbb{R}^n$, which is
   \begin{equation*}
     S^{n - 1} = \{ x \in \mathbb{R}^n : \norm{x}^2 = 1 \},
@@ -4333,7 +4333,7 @@ $k$-dimensional.
   $\mathbb{R}^n$.
 \end{eg}
 
-\begin{eg}
+\begin{eg}\label{eg:parametrization_of_a_torus_in_r_n_no1}
   Let $a < b$ and let $h : (a, b) \to \mathbb{R}$ be a smooth function such that
   $h(t) > 0$ for all $t \in (a, b)$. Consider the subset $M$ of $\mathbb{R}^3$
   given by
@@ -4408,6 +4408,279 @@ have successfully covered $M$ with two local parametrizations.
 % section submanifolds_in_terms_of_local_parametrizations_continued (end)
 
 % chapter lecture_17_feb_25th (end)
+
+\chapter{Lecture 18 Feb 27th}%
+\label{chp:lecture_18_feb_27th}
+% chapter lecture_18_feb_27th
+
+\section{Submanifolds as Level Sets}%
+\label{sec:submanifolds_as_level_sets}
+% section submanifolds_as_level_sets
+
+Quite often, submanifolds of $\mathbb{R}^n$ appear in an \hlnotec{implicitly},
+i.e. as a set of points in $\mathbb{R}^n$ which satisfy some equation. In this
+section, we shall see that locally so, all submanifolds show up in this manner.
+
+\begin{defn}[Maximal Rank]\index{Maximal Rank}\label{defn:maximal_rank}
+  \marginnote{We saw the terminology \hlnotea{maximal rank} arise in
+  \cref{defn:immersion}, but in either case, in terms of how the word maximal is
+  used, we know what it means.}
+  Let $1 \leq k \leq n - 1$, and let $F : U \subseteq \mathbb{R}^n \to
+  \mathbb{R}^{n - k}$ be a smooth map, where $U$ is open in $\mathbb{R}^n$. We
+  say that $F$ has \hlnoteb{maximal rank} on $W$ if the
+  \hyperref[defn:differential]{Jacobian} $(\D F)_{x}$ has maximal rank $n - k$
+  at each point $x \in W$.
+\end{defn}
+
+\begin{note}
+  The above definition is equivalent to $(\D F^j)_x$ being linearly independent
+  for all $x \in W$ for $j = 1, \ldots, n - k$, where $(\D F^j)_x$ is the
+  Jacobian of the component function $F^j : W \subseteq \mathbb{R}^n \to
+  \mathbb{R}$ at $x \in W$.
+\end{note}
+
+\begin{defn}[Level Set]\index{Level Set}\label{defn:level_set}
+  The \hlnoteb{level set} of a smooth function $F : U \subseteq \mathbb{R}^n \to
+  \mathbb{R}$ \sidenote{Note that the definition of a level set is only for
+  smooth functions with $\mathbb{R}$ as its codomain.} corresponding to a value
+  $c \in \mathbb{R}$ is the set of points \cite{weisstein-mathworld}
+  \begin{equation*}
+    \left\{ (x_1, \ldots, x_n) \in \mathbb{R}^n \mmid F(x_1, \ldots, x_n) = c
+    \right\}.
+  \end{equation*}
+\end{defn}
+
+\begin{thm}[Submanifold as Defined by a Smooth Map of Maximal Rank]\label{thm:submanifold_as_defined_by_a_smooth_map_of_maximal_rank}
+  Let $1 \leq k \leq n - 1$, and let $F : W \subseteq \mathbb{R}^n \to
+  \mathbb{R}^{n - k}$ be a smooth map, where $W$ is open in $\mathbb{R}^n$.
+  Suppose that the subset $M = F^{-1}(0) \subseteq \mathbb{R}^n$ is nonempty. If
+  $F$ has maximal rank on $W \cap M$, then $M$ is a $k$-dimensional submanifold
+  of $\mathbb{R}^n$.
+\end{thm}
+
+\begin{proof}
+  Let $x_0 \in M = F^{-1}(0)$. Then $F(x_0) = 0$. Since $(\D F)_{x_0}$ has
+  maximal rank $n - k$ on $W \cap M$, by the
+  \hyperref[crly:nonvanishing_minor]{non-vanishing minor} corollary, there
+  exists a subset $\{ l_1, \ldots, l_{n - k} \} \subseteq \{ 1, \ldots, n \}$
+  such that the matrix $\frac{\partial F^i}{\partial x^{l_j}}$ is invertible at
+  $x_0$. Let $\{ m_1, \ldots, m_k \} = \{ l_1, \ldots, l_{n - k} \}^C \subseteq
+  \{ 1, \ldots, n \}$.
+
+  Now let $y^j = x^{l_j}$, so that
+  \begin{equation*}
+    y = (y^1, \ldots, y^{n - k}) \in \mathbb{R}^{n - k},
+  \end{equation*}
+  and let $w^j = x^{m_j}$, so that
+  \begin{equation*}
+    w = (w^1, \ldots, w^k) \in \mathbb{R}^k.
+  \end{equation*}
+  Let $\tilde{F} : \mathbb{R}^{(n - k) + k} \to \mathbb{R}^{n - k}$ by
+  $\tilde{F}(y, w) = F(x)$. Then by our hypothesis, the matrix $\frac{\partial
+  \tilde{F}^i}{\partial y^j}$ is invertible at $(y_0, w_0)$. Applying the
+  \hyperref[thm:implicit_function_theorem]{implicit function theorem}, there
+  exists
+  \begin{itemize}
+    \item an open neighbourhood $U' \subseteq U \subseteq \mathbb{R}^n$ of $(y_0,
+      w_0)$,
+    \item an open neighbourhood $V \subseteq \mathbb{R}^k$ of $w_0$, and
+    \item a smooth map $\tilde{\phi} : V \subseteq \mathbb{R}^k \to
+      \mathbb{R}^{n - k}$,
+  \end{itemize}
+  such that
+  \begin{equation*}
+    \{ (y, w) \in U' : \tilde{F}(y, w) = 0 \} = \{ (\tilde{\phi}(w), w) : w \in
+    V \}.
+  \end{equation*}
+
+  Translating back to the original notation, we can define the map $\phi : V
+  \subseteq \mathbb{R}^k \to \mathbb{R}^n$ by
+  \begin{equation*}
+    \phi^{m_j} = w^j = x^{m_j}, \text{ and } \phi^{l_j} (w) = \tilde{\phi}^j
+    (w).
+  \end{equation*}
+  By the construction above, we know that $\phi$ is smooth. Now notice that
+  $\phi^{-1} : \phi(V) \to V$ is given by $\phi^{-1}(x) = w$, where $w^j =
+  x^{m-j}$, and thus $\phi^{-1}$ is continuous on $\phi(V)$. Also, it is clear
+  that $\phi$ is continuous. So we do have that $\phi$ is a homeomorphism.
+
+  Finally to show that $\phi$ is an immersion, notice that for $j = 1, \ldots,
+  k$, the $m_j$\textsuperscript{th} row of $(\D \phi)_w$ has a $1$ in the
+  $j$\textsuperscript{th} column and zeroes everywhere else. Thus the columns of
+  $(\D \phi)_w$ is linearly independent.
+
+  Thus we have that $U' \cap F^{-1}(0) = U' \cap M = \phi(V)$, with $\phi : V
+  \subseteq \mathbb{R}^k \to \phi(V) \subseteq \mathbb{R}^n$ satisfying
+  \cref{defn:parametrizations_and_parametrized_submanifolds}. Since $x_0 \in M$
+  was arbitrarily chosen, it follows that $M$ is indeed a $k$-dimensional
+  submanifold of $\mathbb{R}^n$.
+\end{proof}
+
+\begin{eg}
+  If $n - k = 1$, then $F : U \subseteq \mathbb{R}^n \to \mathbb{R}$ has a
+  maximal rank on $U$ if the $1$-form $\dif{F}$ is never zero on $U$. Following
+  the above, $M = F^{-1}(0)$ is an $(n - 1)$-dimensional submanifold of
+  $\mathbb{R}^n$, and is also called a \hldefn{hypersurface} of $\mathbb{R}^n$,
+  or a \hldefn{codimension one submanifold}.
+
+  Note that when $n = 3$, this is a surface $M$ in $\mathbb{R}^3$ in the sense
+  that we can perceive.
+\end{eg}
+
+\begin{eg}
+  If $n - k = n - 1$, then $F : U \subseteq \mathbb{R}^n \to \mathbb{R}^{n - 1}$
+  has maximal rank on $U$ if the $1$-forms $\dif{F}^i$ of the $n - 1$ functions
+  $F^1, \ldots, F^{n - 1}$ are all linearly independent from one another at each
+  point in $U$. Then by
+  \cref{thm:submanifold_as_defined_by_a_smooth_map_of_maximal_rank}, $M =
+  F^{-1}(0)$ is a $1$-dimensional submanifold of $\mathbb{R}^n$, called a
+  \hldefn{curve} in $\mathbb{R}^n$, which is the usual curve that we know.
+
+  Putting this together with the last example, we deduce that a curve in
+  $\mathbb{R}^n$ is obtainable as the intersection of $n - 1$ hypersurfaces
+  $(F^i)^{-1}(0)$ in $\mathbb{R}^n$, where the $1$-forms $\dif{F}^1, \ldots,
+  \dif{F}^{n - 1}$ are linearly independent at all points on the intersection.
+\end{eg}
+
+\marginnote{
+\begin{remark}
+  Notice that \cref{eg:parametrization_of_s_n_1_in_r_n_no2} is a much faster way
+  than \cref{eg:parametrization_of_s_n_1_in_r_n_no1} to finding a cover!
+\end{remark}}
+\begin{eg}\label{eg:parametrization_of_s_n_1_in_r_n_no2}
+  Consider the sphere $S^{n - 1} \subset \mathbb{R}^n$ from
+  \cref{eg:parametrization_of_s_n_1_in_r_n_no1}. Note that we may now write this
+  as $S^{ n - 1 } = F^{-1}(0)$ where $F : \mathbb{R}^n \to \mathbb{R}$ is the
+  smooth function
+  \begin{equation*}
+    F(x) = \norm{x}^2 - 1 = (x^1)^2 + \hdots + (x^n)^2 - 1.
+  \end{equation*}
+  We notice that $(\D F)_x = \begin{pmatrix} 2x^1 & \hdots & 2x^n
+  \end{pmatrix}$, which is never $0$ on $F^{-1}(0)$. Thus from
+  \hyperref[thm:rank_nullity_theorem]{rank-nullity}, $(\D F)_x$ has maximal rank
+  $1$ on $F^{-1}(0)$. By
+  \cref{thm:submanifold_as_defined_by_a_smooth_map_of_maximal_rank}, once again,
+  we have that $S^{n - 1} = F^{-1}(0)$ is an $(n - 1)$-dimensional submanifold
+  of $\mathbb{R}^n$.
+\end{eg}
+
+\begin{eg}
+  Consider the surface of revolution $M \subset \mathbb{R}^3$ from
+  \cref{eg:parametrization_of_a_torus_in_r_n_no1}. We can write this set as $M =
+  F^{-1}(0)$, where $F : \mathbb{R}^3 \to \mathbb{R}$ is the smooth function
+  \begin{equation*}
+    F(x, y, z) = x^2 + y^2 - (h(z))^2.
+  \end{equation*}
+  Notice that $(\D F)_{(x, y, z)} = \begin{pmatrix} 2x & 2y & -2h(z)h'(z)
+  \end{pmatrix}$. For $(\D F)_{(x, y, z)}$ to have $0$ at $(x, y, z)$, we
+  must have $x = y = h'(z) = 0$, since $h(z) > 0$. In particular, for $(\D
+  F)_{(0, 0, z)}$ to have rank $0$, we must have $h(z) = az$ for some scalar $a \in
+  \mathbb{R}$. However, note that $F(0, 0, z) = -(h(z))^2 < 0$. Therefore, the
+  points $(x, y, z) \in \mathbb{R}^3$ where $(\D F)_{(x, y, z)}$ does not have
+  maximal rank are not on the level set $M = F^{-1}(0)$. It follows again from
+  \cref{thm:submanifold_as_defined_by_a_smooth_map_of_maximal_rank} that $M =
+  F^{-1}(0)$ is a $2$-dimensional submanifold of $\mathbb{R}^3$.
+\end{eg}
+
+Let us look at an example with higher \hldefn{codimension}, i.e. an example of
+an explicitly defined $k$-dimensional submanifold of $\mathbb{R}^n$ with $n - k
+> 1$.
+
+\begin{eg}
+  Let $(x, y, z, w) \in \mathbb{R}^4$ and consider the set
+  \begin{equation*}
+    M = \{ (x, y, z, w) \in \mathbb{R}^4 : x^2 + y^2 = 1, \, z^2 + w^2 = 1 \}.
+  \end{equation*}
+  We can write this set as $M = F^{-1}(0)$ where $F : \mathbb{R}^4 \to
+  \mathbb{R}^2$ is the smooth function
+  \begin{equation*}
+    F(x, y, z, w) = (x^2 + y^2 - 1, \, z^2 + w^2 - 1).
+  \end{equation*}
+  We have that
+  \begin{equation*}
+    (\D F)_{(x, y, z, w)} = \begin{pmatrix}
+      2x & 2y & 0  & 0 \\
+      0  & 0  & 2z & 2w
+    \end{pmatrix},
+  \end{equation*}
+  which clearly has rank $2$ at all points on $M$. It follows from
+  \cref{thm:submanifold_as_defined_by_a_smooth_map_of_maximal_rank} that $M =
+  F^{-1}(0)$ is a $2$-dimensional submanifold of $\mathbb{R}^4$.
+
+  Note that $M$ can be thought of as the Cartesian product of two copies of $S^2
+  \subset \mathbb{R}^2$. Consequently, we write $M = S^1 \times S^1$, and call
+  $M$ the \hldefn{standard $2$-torus} in $\mathbb{R}^4$.
+\end{eg}
+
+% section submanifolds_as_level_sets (end)
+
+\section{Local Description of Submanifolds of \texorpdfstring{$\mathbb{R}^n$}{Rn}}%
+\label{sec:local_description_of_submanifolds_of_r_n_}
+% section local_description_of_submanifolds_of_r_n_
+
+In this section we shall look into more results about the local structure of
+submanifolds.
+
+\begin{thm}[Implicit Submanifold Theorem]\index{Implicit Submanifold Theorem}\label{thm:implicit_submanifold_theorem}
+  Let $M$ be a $k$-dimensional submanifold of $\mathbb{R}^n$, and let $x \in M$.
+  Then there exists a local parametrization $\psi : W \subseteq \mathbb{R}^k \to
+  \mathbb{R}^n$ for $M$ with $x \in \psi(W)$ such that $\exists \{ l_1, \ldots,
+  l_k \} \subseteq \{ 1, \ldots, n \}$ with complement $\{ m_1, \ldots, m_{n -
+  k} \}$ such that $x = \psi(w)$ satisfies
+  \begin{gather*}
+    x^{l_j} = \psi^{l_j}(w) = w^j, \enspace j = 1, \ldots, k, \\
+    x^{m_j} = \psi^{m_j}(w) = \psi^{m_j} (w^1, \ldots, w^k), \enspace j = 1,
+    \ldots, n - k.
+  \end{gather*}
+\end{thm}
+
+\begin{proof}
+  Since $M$ is a submanifold of $\mathbb{R}^n$, $\exists \phi : U \subseteq
+  \mathbb{R}^k \to \mathbb{R}^n$, a local parametrization, with $x \in \phi(U)$.
+  Since $\phi$ is an immersion, the \hyperref[defn:differential]{Jacobian} $(\D
+  \phi)_u$ has rank $k$, and so \cref{crly:nonvanishing_minor} gives us $\{ l_1,
+  \ldots, l_k \} \subseteq \{ 1, \ldots, n \}$ with complement $\{ m_1,
+  \ldots, m_{n - k} \}$ such that the matrix $\frac{\partial \phi^{l_i}}{\partial
+  u^j}$ is invertible at $u$. Let $\tilde{\phi} : U \to \mathbb{R}^k$ by
+  \begin{equation*}
+    \tilde{\phi}(u) = (\phi^{l_1}(u), \ldots, \phi^{l_k}(u)).
+  \end{equation*}
+  It is clear that $\tilde{\phi}$ is smooth on $U$, since its components are
+  subsets of the component functions of the smooth map $\phi$ on $U$. By
+  construction of $\tilde{\phi}$, the Jacobian $\frac{\partial
+  \phi^{l_i}}{\partial u^j}$ is invertible at $u$. Thus by applying
+  \hyperref[thm:inverse_function_theorem]{the inverse function theorem}, there
+  exists
+  \begin{itemize}
+    \item an open subset $U' \subseteq U$ containing $u$,
+    \item an open subset $W \subseteq \mathbb{R}^k$ containing $w =
+      \tilde{\phi}(u)$ such that $\tilde{\phi} : U' \to W$ is a diffeomorphism.
+  \end{itemize}
+  In particular, $\phi^{-1} : W \to U'$ is smooth.
+
+  Note that $w^j = \tilde{\phi}^j(u) = \phi^{l_j}(u) = x^{l_j}$. Thus we can
+  define $\psi : W \subseteq \mathbb{R}^k \to \mathbb{R}^n$ by $\psi : \phi
+  \circ \tilde{\phi}^{-1}$. It follows from
+  \cref{lemma:parametrized_submanifolds_are_not_determined_by_immersions} that
+  $\psi$ is a local parametrization of $M$. Therefore, we have
+  \begin{gather*}
+    \psi^{l_j}(w) = \phi^{l_j} ( \tilde{\phi}^{-1}(w) ) = \phi^{l_j}(u) =
+    x^{l_j} = w^j \text{ and } \\
+    \psi^{m_j}(w) = \psi^{m_j}(w^1, \ldots, w^k),
+  \end{gather*}
+  as we wanted.
+\end{proof}
+
+\begin{note}
+  \cref{thm:implicit_submanifold_theorem} shows that locally (on $\psi(W)$) the
+  submanifold is given as the graph of a function of $k$ variables. We can
+  explicitly write $n - k$ of the coordinates $x^j$ as smooth functions of the
+  other $k$ variables.
+\end{note}
+
+% section local_description_of_submanifolds_of_r_n_ (end)
+
+% chapter lecture_18_feb_27th (end)
 
 \appendix
 
