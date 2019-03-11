@@ -2,6 +2,7 @@
 \documentclass[notoc,notitlepage]{tufte-book}
 % \nonstopmode % uncomment to enable nonstopmode
 
+\usepackage{bm}
 \input{latex-classnotes-preamble.tex}
 
 \usepackage{classnotetitle}
@@ -154,7 +155,7 @@ Now if we choose a \hldefn{non-standard basis} of $\mathbb{R}^n$, say $\tilde{\m
       \draw[->] (0, 0, 0) -- (0, 2, 0) node[above] {$z$};
       \draw[->] (0, 0, 0) -- (0, 0, 2) node[below,left] {$y$};
 
-      \draw[-,fill=be-blue,fill opacity=0.5] (1.5, 0, 0.5) -- (0.5, 0, 1.5) -- (-1.5, 1, -0.5) -- (-0.5, 1, -1.5) -- (1.5, 0, 0.5);
+      \draw[-,fill=blue,fill opacity=0.5] (1.5, 0, 0.5) -- (0.5, 0, 1.5) -- (-1.5, 1, -0.5) -- (-0.5, 1, -1.5) -- (1.5, 0, 0.5);
       \node[above,right] at (1.5, 1.5, 0) {a $2$-dimensional subspace in $\mathbb{R}^3$};
     \end{tikzpicture}
     \caption{An arbitrary $2$-dimensional subspace in a $3$-dimensional space}
@@ -859,12 +860,14 @@ Using the above remark, we can rewrite condition 2 as follows:
 There is a simple way to construct a $k$-form on $V$ using $k$-many $1$-forms from $V$, i.e.
 $k$-many elements from $V^*$. Let $\alpha^1, \ldots, \alpha^k \in V^*$. Define a map
 \begin{equation*}
-  \alpha^1 \land \hdots \land \alpha^k : \underbrace{V \times V \times \hdots \times V}_{k \text{ copies }} \to \mathbb{R}
+  \alpha^1 \land \hdots \land \alpha^k : \underbrace{V \times V \times \hdots
+  \times V}_{k \text{ copies }} \to \mathbb{R}
 \end{equation*}
 by
 \begin{equation}\label{eq:defining_a_k_form}
   \left( \alpha^1 \land \hdots \land \alpha^k \right) ( v_1, \ldots, v_k )
-  := \sum_{\sigma \in S_k} \left( \sgn \sigma \right) \alpha^{\sigma(1)}(v_1) \alpha^{\sigma(2)}(v_2) \hdots \alpha^{\sigma(k)}(v_k).
+  := \sum_{\sigma \in S_k} \left( \sgn \sigma \right) \alpha^{\sigma(1)}(v_1)
+  \alpha^{\sigma(2)}(v_2) \hdots \alpha^{\sigma(k)}(v_k).
 \end{equation}
 
 We need, of course, to verify that the above formula is, indeed, a $k$-form.
@@ -1147,10 +1150,13 @@ basis vectors $e^1, \ldots, e^n$.
   \end{align*}
 \end{eg}
 
-\begin{eg}
+\marginnote{The contrapositive of \cref{crly:linearly_dependent_1_forms} is true
+as well: if the wedge product is equivalently zero, then we can rewrite the
+wedge product so that one of the $k$-forms is expressed in terms of the others.}
+\begin{crly}[Linearly Dependent $1$-forms]\label{crly:linearly_dependent_1_forms}
   Suppose $\alpha^1, \ldots, \alpha^k$ are linearly dependent $1$-forms on $V$.
   Then $\alpha^1 \wedge \hdots \wedge \alpha^k = 0$.
-\end{eg}
+\end{crly}
 
 \begin{proof}
   Suppose at least one of the $\alpha^j$ is a linear combination of the rest, i.e.
@@ -1357,6 +1363,154 @@ to $\mathbb{R}$.
   \begin{equation*}
     \det T = \sum_{\sigma \in S_n} (\sgn \sigma) \prod_{i = 1}^{n} A_i^{\sigma(i)}.
   \end{equation*}
+\end{proof}
+
+\newthought{Consider} the following general situation: Let $T \in L(V, W)$,
+where $\dim V = n$ and $\dim W = m$. Let $\mathcal{B} = \{ e_1, \ldots, e_n \}$
+be a basis of $V$, and $\mathcal{C} = \{ f_1, \ldots, f_m \}$ a basis of $W$.
+
+Then there exists a unique $m \times n$ matrix $A = [T]_{\mathcal{C},
+\mathcal{B}}$ with respect to these bases that represents $T$. $A$ is defined by
+the property
+\begin{equation*}
+  [T(v)]_{\mathcal{C}} = [T]_{\mathcal{C}, \mathcal{B}} [v]_{\mathcal{B}} =
+  A[v]_{\mathcal{B}},
+\end{equation*}
+which means that the left multiplication by $A \in \mathbb{R}^{m \times n}$ on
+the coordinate vector $[v]_{\mathcal{B}} \in \mathbb{R}^{n \times 1}$ of $v$,
+with respect to $\mathcal{B}$, gives the coordinate vector $[T(v)]_{\mathcal{C}}
+\in \mathbb{R}^{m \times 1}$ of $T(v)$, with respect to $\mathcal{C}$. Then,
+explicitly, let
+\begin{equation}\label{eq:linear_map_on_basis_vectors_seen_as_a_matrix_multip}
+  T(e_i) = A^j_i f_j,
+\end{equation}
+where $1 \leq i \leq n$ and $1 \leq j \leq m$. Then for $v = v^i e_i$, we have
+\begin{equation*}
+  T(v) = v^i T(e_i) = v^i A^j_i f_j = (A^j_i v^i) f_j,
+\end{equation*}
+which is what we could expect from the map $T$.
+
+Note that the $i$\textsuperscript{th} column of $A$ is the coordinate vector
+$[T(e_i)]_{\mathcal{C}}$ of the vector $T(e_i) \in W$, with respect to
+$\mathcal{C}$. Then along with
+\cref{eq:linear_map_on_basis_vectors_seen_as_a_matrix_multip}, we have that
+\begin{equation}\label{eq:matrix_of_the_linear_map_using_the_dual_basis}
+  A^j_i = f^j ( T(e_i) ).
+\end{equation}
+
+\newthought{Following the above} observation, now consider
+\begin{equation*}
+  \Lambda^k T \in L(\Lambda^k(V), \Lambda^k(W))
+\end{equation*}
+where $1 \leq k \leq \min \{ m, n \}$. Then the set
+\begin{equation*}
+  \Lambda^k \mathcal{B} = \{ e_{i_1} \land \hdots \land e_{i_k} \mid 1 \leq i_1
+  < \hdots < i_k \leq n \}
+\end{equation*}
+is a basis for $\Lambda^k(V)$ and the set
+\begin{equation*}
+  \Lambda^k \mathcal{C} = \{ f_{j_1} \land \hdots \land f_{j_k} \mid 1 \leq j_1
+  < \hdots < j_k \leq m \}
+\end{equation*}
+is a basis of $\Lambda^k(W)$.
+
+Let $\Lambda^k A$ denote the $\left(\begin{smallmatrix} m \\ k \end{smallmatrix}\right)
+\times \left(\begin{smallmatrix} n \\ k \end{smallmatrix}\right)$ matrix $[\Lambda^k
+T]_{\Lambda^k \mathcal{C}, \Lambda^k \mathcal{B}}$ representing $\Lambda^k T$
+with respect to the bases $\Lambda^k \mathcal{B}$ and $\Lambda^k \mathcal{C}$ of
+$\Lambda^k V$ and $\Lambda^k W$, respectively. Let $I = (i_1, \ldots, i_k)$
+denote a strictly increasing $k$-tuple in $\{ 1, \ldots, n \}$, and $J = (j_1,
+\ldots, j_k)$ denote a strictly increasing $k$-tuple in $\{ 1, \ldots, m \}$.
+Then let
+\begin{gather*}
+  e_I = e_{i_1} \land \hdots \land e_{i_k}, \\
+  f_J = e_{j_1} \land \hdots \land j_{j_k}.
+\end{gather*}
+Thus from \cref{eq:linear_map_on_basis_vectors_seen_as_a_matrix_multip}, we have
+\begin{equation}\label{eq:linear_map_on_decomp_k_forms_seen_as_a_matrix_multip}
+  (\Lambda^k T)(e_I) = A^J_I f_J,
+\end{equation}
+where the sum over $J$ is over all $\left( \begin{smallmatrix} m \\ k
+  \end{smallmatrix} \right)$ strictly increasing $k$-tuples in $\{ 1, \ldots, m
+\}$.
+
+\begin{propo}[Structure of the Determinant of a Linear Map of $k$-forms]\label{propo:structure_of_the_determinant_of_a_linear_map_of_k_forms}
+  The entires $A^J_I$ of $\Lambda^k A$ are given by
+  \begin{equation}\label{eq:structure_of_the_determinant_of_a_linear_map_of_k_forms}
+    A^J_I = \det \begin{pmatrix}
+      A^{j_1}_{i_1} & \hdots & A^{j_1}_{i_k} \\
+      \vdots & \ddots & \vdots \\
+      A^{j_k}_{i_1} & \hdots & A^{j_k}_{i_k}
+    \end{pmatrix}.
+  \end{equation}
+  That is, $A^J_I$ is the $k \times k$ \hlnotea{minor} obtained from $A$ by
+  deleting all rows except $j_1, \ldots, j_k$ and all columns except $i_1,
+  \ldots, i_k$.
+\end{propo}
+
+\begin{proof}
+  We shall explicitly compute
+  \cref{eq:structure_of_the_determinant_of_a_linear_map_of_k_forms}. Observe
+  that
+  \begin{align*}
+    &(\Lambda^k T)(e_I) \\
+    &= \Lambda^k T (e_{i_1} \land \hdots \land e_{i_k}) \\
+    &= T(e_{i_1}) \land \hdots \land T(e_{i_k}) \\
+    &= (A^{j_1}_{i_1} f_{j_1}) \land \hdots \land (A^{j_k}_{i_k} f_{j_k}) \\
+    &= A^{j_1}_{i_1} \hdots A^{j_k}_{i_k} f_{j_1} \land \hdots \land f_{j_k} \\
+    &= \sum_{\substack{j_1, \ldots, j_k \\ \text{distinct}}} A^{j_1}_{i_1}
+      \hdots A^{j_k}_{i_k} f_{j_1} \land \hdots \land f_{j_k} \\
+    &= \sum_{1 \leq j_1 < \hdots < j_k \leq n} \sum_{\sigma \in S_k}
+      A^{j_{\sigma(1)}}_{i_1} \hdots A^{j_{\sigma(k)}}_{i_k} f_{j_{\sigma(1)}}
+      \land \hdots \land f_{j_{\sigma(k)}} \\
+    &= \sum_{1 \leq j_1 < \hdots < j_k \leq n} \left( \sum_{\sigma \in S_k}
+      (\sgn \sigma) A^{j_{\sigma(1)}}_{i_1} \hdots A^{j_{\sigma(k)}}_{i_k}
+      \right) f_{j_1} \land \hdots \land f_{j_k} \\
+    &= \sum_{J} \left( \sum_{\sigma \in S_k} (\sgn \sigma)
+      A^{j_{\sigma(1)}}_{i_1} \hdots A^{j_{\sigma(k)}}_{i_k} \right) f_J \\
+    &= A^J_I f_J,
+  \end{align*}
+  where the final line follows from \hyperref[defn:determinant]{the definition
+  of a determinant}, and is precisely
+  \cref{eq:structure_of_the_determinant_of_a_linear_map_of_k_forms}.
+\end{proof}
+
+The following corollary is important to us, not now, but later on when we begin
+the section \nameref{sec:submanifolds_in_terms_of_local_parameterizations}.
+
+\begin{crly}[Nonvanishing Minor]\label{crly:nonvanishing_minor}
+  Let $A$ be an $m \times n$ matrix with $\rank k \leq \min \{ m, n \}$. Then
+  there exists a $k \times k$ submatrix $\tilde{A}$ of $A$ such that $\det
+  \tilde{A} \neq 0$, i.e. $A$ has a nonvanishing $k \times k$ minor $\tilde{A}$.
+\end{crly}
+
+\begin{proof}
+  Consider the linear map $T : \mathbb{R}^n \times \mathbb{R}^m$, given by $T(v)
+  = Av$. In particular, we have $A = [T]_{\mathcal{C}_{\std},
+  \mathcal{B}_{\std}}$, where $\mathcal{B}_{\std}$ is the standard basis of
+  $\mathbb{R}^n$ and $\mathcal{C}_{\std}$ the standard basis of $\mathbb{R}^m$.
+
+  Note that $\rank T = \dim \Img T$, which is exactly the dimension of the span of
+  the columns of $A$, since columns of $A$ are the images $A\hat{e}_1, \ldots,
+  A\hat{e}_n$ of the standard basis vector of $\mathbb{R}^n$. From the
+  \hyperref[thm:rank_nullity_theorem]{rank-nullity theorem}, we have that $\rank
+  T \leq \min \{ m, n \}$.
+
+  By our supposition, $\rank T = k$, and the columns of $A$ span $\Img T$, we
+  have that there exists a subset of $k$ columns of $A$ that are linearly
+  independent vectors, in $\mathbb{R}^n$ \sidenote{Note that the $k$ vectors
+  need not be unique.}. Let us index the columns by $i_1, \ldots, i_k$. Then
+  $\{ A\hat{e}_{i_1}, \ldots, A\hat{e}_{i_k} \}$ is a linearly independent set
+  in $\mathbb{R}^m$. By the contrapositive of
+  \cref{crly:linearly_dependent_1_forms}, we have that
+  \begin{equation*}
+    (\Lambda^k T)(\hat{e}_{i_1} \hdots \hat{e}_{i_k}) = (A \hat{e}_{i_1}) \land
+      \hdots \land (\hat{e}_{i_k}) \neq 0 \in \Lambda^k (\mathbb{R}^m).
+  \end{equation*}
+  Thus $\Lambda^k T : \Lambda^k (\mathbb{R}^n) \to \Lambda^k(\mathbb{R}^m)$ is
+  not the zero map. Therefore, there exists at least one non-zero entry in the
+  matrix $\Lambda^k A$. The desired result follows from
+  \cref{propo:structure_of_the_determinant_of_a_linear_map_of_k_forms}.
 \end{proof}
 
 % section the_space_lambda_k_v_of_k_vectors_and_determinants (end)
@@ -1732,7 +1886,7 @@ define \hlnotea{tangent vectors}.
   \begin{marginfigure}
     \centering
     \begin{tikzpicture}
-      \draw[color=be-blue,thick,decoration={segment length=15,
+      \draw[color=blue,thick,decoration={segment length=15,
         amplitude=28,coil},decorate,arrows = {<[bend]-}] (0,1.8,0) --(0,-2,0);
       \draw[-latex] (-2, 0, 0) -- (2, 0, 0) node[right] {$y$};
       \draw[-latex] (0, -2, 0) -- (0, 2, 0) node[above] {$z$};
@@ -3707,11 +3861,559 @@ The property $\dif{^2}$ motivates the following definitions.
 
 % chapter lecture_15_feb_11th (end)
 
+\tuftepart{Submanifolds of \texorpdfstring{$\mathbb{R}^n$}{Rn}}
+
+\chapter{Lecture 16 Feb 13th}%
+\label{chp:lecture_16_feb_13th}
+% chapter lecture_16_feb_13th
+
+We shall now\sidenote{finally!} look into objects of which integration of differential
+forms make sense.
+
+\section{Submanifolds in Terms of Local Parameterizations}%
+\label{sec:submanifolds_in_terms_of_local_parameterizations}
+% section submanifolds_in_terms_of_local_parameterizations
+
+\begin{defn}[Immersion]\index{Immersion}\label{defn:immersion}
+  Let $k \leq n$. Let $U \subset \mathbb{R}^k$ be open. A smooth map $\phi : U
+  \to \mathbb{R}^n$ is called an \hlnoteb{immersion} if, for each $u \in V$, the
+  \hyperref[defn:differential]{Jacobian} $(\D \phi)_u : \mathbb{R}^k \to
+  \mathbb{R}^n$ is an injective linear map.
+\end{defn}
+
+\begin{note}
+  This means that $(\D \phi)_u$ has \hlnotea{maximal rank} $k$. Equivalently,
+  that $k$ columns of $(\D \phi)_u$ are linearly independent vectors in
+  $\mathbb{R}^n$.
+
+  We may also express the condition to be an immersion in a more invariant
+  mannerm in particular, using the \hldefn{pushforward} \sidenote{See also A2,
+  and \cref{sec:pullback_of_smooth_forms}.} map $(\dif{\phi})_u : T_u
+  \mathbb{R}^k \to T_{\phi(u)} \mathbb{R}^n$. The linear maps $(\dif{\phi})_u$
+  and $(\D \phi)_u$ differs only by pre- and post-compositions with linear
+  isomorphisms. It follows that they have the same rank, and so we may also
+  define an immersion as
+  \begin{quotebox}{blue}{foreground}
+    an immersion is a smooth map whose pushforward $(\dif{\phi})_u$ is injective
+    for all $u \in U$.
+  \end{quotebox}
+\end{note}
+
+\begin{defn}[Parametrizations and Parametrized Submanifolds]\index{Parametrization}\index{Parametrized Submanifold}\label{defn:parametrizations_and_parametrized_submanifolds}
+  An immersion $\phi : U \subseteq \mathbb{R}^k \to \mathbb{R}^n$ that is also a
+  homeomorphism onto its image is called a \hlnoteb{parametrization}. The image
+  $\phi(U) \subset \mathbb{R}^n$ of a parametrization $\phi : U \subseteq
+  \mathbb{R}^k \to \mathbb{R}^n$ is called a \hlnoteb{$k$-dimensional
+  parametrized submanifold} of $\mathbb{R}^n$.
+\end{defn}
+
+\begin{note}
+  We see that a parametrization is an immersion which is also a continuous
+  bijection of $U$ onto $\phi(U)$, with a continuous inverse.
+\end{note}
+
+Let's consider some examples.
+
+\begin{eg}
+  Suppose $k = 1$, and $F : U \subseteq \mathbb{R} \to \mathbb{R}^n$ an
+  immersion.
+  \begin{figure*}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw (-5, 0, 0) -- (-1, 0, 0);
+      \draw[{Arc Barb[length=10pt,width=25pt]}-{Arc
+        Barb[length=10pt,width=25pt]}, blue] (-4.5, 0, 0) -- (-1.5, 0, 0);
+      \node[draw,circle,fill,inner sep=1pt,label={90:{$u_0$}}] at (-3, 0, 0) {};
+
+      \draw[-latex'] (-3, 1, 0) to[bend left] (1, 2, 1);
+      \node at (-1, 2.5, 1) {$F$};
+
+      \draw[->] (1, 0, 0) -- (5, 0, 0);
+      \draw[->] (3, -1, 0) -- (3, 3, 0);
+      \draw[->] (3, 0, -1) -- (3, 0, 3);
+
+      \draw[blue] plot [smooth] coordinates {(4, -1, -1) (4, 0, 0) (3, 1, 1) (2,
+        2, 1) (1, 3, 0)};
+      \node[draw,circle,fill,inner sep=1pt,label={80:{$F(u_0)$}}] at (2, 2, 1)
+        {};
+    \end{tikzpicture}
+    \caption{Immersion from $\mathbb{R}$ to $\mathbb{R}^n$}
+    \label{fig:immersion_from_r_to_r_n_}
+  \end{figure*}
+
+  Since $F$ is an immersion, it follows that
+  \begin{equation*}
+    (\D F)_{u_0} = \begin{pmatrix}
+      \frac{\partial F^1}{\partial t}(u_0) \\
+      \vdots \\
+      \frac{\partial F^n}{\partial t}(u_0)
+    \end{pmatrix}
+  \end{equation*}
+  has rank $1$. Thus $(\D F)_{u_0}$ is non-zero, implying that when $k =
+  1$, an immersion is just a smooth curve with a non-zero velocity in the
+  domain.\sidenote{I'm not entirely sure if I follow. How did an immersion go
+  from having an injective linear map to making sure that no points can the
+  differential be $0$?}
+\end{eg}
+
+\begin{eg}
+  Suppose $k = 1$ and $n = 2$, and $F(t) = (t^2, t^3)$ over $U \subseteq
+  \mathbb{R}$. Then
+  \begin{equation*}
+    (\D F)_0 = \begin{pmatrix}
+      2t \at{0}{} \\ 3t^2 \at{0}{}
+    \end{pmatrix} = 0.
+  \end{equation*}
+  Thus $F$ is not an immersion.
+\end{eg}
+
+\begin{lemma}[Parametrized Submanifolds are not Determined by Immersions]\label{lemma:parametrized_submanifolds_are_not_determined_by_immersions}
+  Let $\phi : U \subseteq \mathbb{R}^k \to \mathbb{R}^n$ be a parametrization.
+  Let $h : \tilde{U} \subseteq \mathbb{R}^k \to \mathbb{R}^k$ be a
+  diffeomorphism of $\tilde{U}$ onto $U = h(\tilde{U})$. Then the composition
+  \begin{equation*}
+    \tilde{\phi} = \phi \circ h : \tilde{U} \subseteq \mathbb{R}^k \to
+    \mathbb{R}^n
+  \end{equation*}
+  is also an immersion.
+\end{lemma}
+
+\begin{proof}
+  First, note that $\phi$ and $h$ are both
+  \hyperref[defn:smoothness]{smooth}\sidenote{$\phi$ is an immersion, which is
+  defined to be smooth, and $h$ is a
+  \hyperref[defn:diffeomorphism]{diffeomorphism}.}. So $\phi \circ h$ is smooth.
+  Also, $\phi \circ h$ is a homeomorphism of $\tilde{U}$ onto
+  $\phi(h(\tilde{U})) = \phi(U)$, since it is a composition of homeomorphism
+  maps.
+
+  Now by the \hyperref[thm:the_chain_rule]{Chain Rule}, we have
+  \begin{equation*}
+    (\D ( \phi \circ h ))_u = (\D \phi)_{h(u)} \circ (\D h)_{u}.
+  \end{equation*}
+  The smoothness of $\phi$ and $h$ guarantees that $\D \phi$ and $\D h$ are
+  smooth, respectively. Thus $\D ( \phi \circ h )$ is smooth. Further, since $h$
+  is a diffeomorphism, $\D h$ is an invertible linear map. Thus the composition
+  $(\D \phi)_{h(u)} \circ (\D h)_u$ is injective.
+
+  Therefore $\phi \circ h$ is an immersion.
+\end{proof}
+
+\begin{note}
+  \cref{lemma:parametrized_submanifolds_are_not_determined_by_immersions} tells
+  us that there are more ways than one to parametrize a submanifold of
+  $\mathbb{R}^n$.
+\end{note}
+
+\begin{note}
+  When $k = 1$, an immersion is just a smooth curve $\gamma : U \subseteq
+  \mathbb{R} \to \mathbb{R}^n$, where its velocity is $\gamma' (t_0) =
+  (\dif{\gamma})_{t_0}$ non-zero for all $t_0 \in U$.
+\end{note}
+
+\begin{defn}[$j$\textsuperscript{th} Coordinate Curve]\index{$j$\textsuperscript{th} Coordinate Curve}\label{defn:_j_th_coordinate_curve}
+  Let $\phi : U \subseteq \mathbb{R}^k \to \mathbb{R}^n$ be an immersion. if we
+  fix all the coordinates $(u^1, \ldots, u^k)$ except for the
+  $j$\textsuperscript{th} coordinate $u^j$, and think of $\phi$ as a function of
+  only $u^j$, then $\phi$ is a smooth curve on $\mathbb{R}^n$, called the
+  \hlnoteb{$j$\textsuperscript{th} coordinate curve} of the parametrization
+  $\phi$. This is a smooth curve on $\mathbb{R}^n$ with velocity vector at $u
+  \in U$ given by
+  \begin{equation*}
+    \frac{\partial \phi}{\partial u^j} (u) = \left( \frac{\partial
+      \phi^1}{\partial u^j} (u) , \ldots, \frac{\partial \phi^n}{\partial u^j}
+      (u) \right).
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  The velocity vector $\frac{\partial \phi}{\partial u^j} (u)$ is the
+  $j$\textsuperscript{th} column of $(\D \phi)_u$. This means that the
+  \hyperref[defn:immersion]{condition of being an immersion} is equivalent to
+  saying that for all $u \in U$, the $k$ velocity vectors $\frac{\partial
+  \phi}{\partial u^1} (u), \ldots, \frac{\partial \phi}{\partial u^k} (u)$ are
+  \hlnotea{linearly independent}, spanning the $k$-dimensional subspace of
+  $T_{\phi(u)} \mathbb{R}^n$.
+\end{note}
+
+\begin{defn}[Tangent Space on a Submanifold]\index{Tangent Space}\label{defn:tangent_space_on_a_submanifold}
+  Let $\phi : U \subseteq \mathbb{R}^k \to \mathbb{R}^n$ be a parametrization,
+  so that $\phi(U)$ is a $k$-dimensional parametrized submanifold of
+  $\mathbb{R}^n$. Then the \hlnoteb{tangent space} to $\phi(U)$ at $\phi(u)$,
+  denoted as \hldefn{$T_{\phi(u)} \phi(U)$}, is defined to be the
+  $k$-dimensional subspace of $T_{\phi(u)} \mathbb{R}^n$ spanned by the $k$
+  vectors
+  \begin{equation*}
+    \frac{\partial \phi}{\partial u^1} (u), \, \ldots, \, \frac{\partial
+    \phi}{\partial u^k} (u).
+  \end{equation*}
+\end{defn}
+
+With these, we can now define a submanifold of $\mathbb{R}^n$ in a more general
+way.
+
+\begin{defn}[Submanifolds]\index{Submanifolds}\label{defn:submanifolds}
+  Let $1 \leq k \leq n$, and $M \subseteq \mathbb{R}^n$. We say that $M$ is a
+  \hlnoteb{$k$-dimensional submanifold} of $\mathbb{R}^n$ if there exists a
+  \hlnotea{covering} of $M$ by open subsets $\left\{ V_\alpha \subseteq
+  \mathbb{R}^n \mmid \alpha \in A \right\}$, for some index set $A$, a
+  collection of open subsets $U_\alpha$ of $\mathbb{R}^k$, and a collection of
+  mappings $\phi_\alpha : U_\alpha \to M \subseteq \mathbb{R}^n$ such that the
+  following conditions hold:
+  \begin{enumerate}
+    \item Each $\phi_\alpha$ is a \hyperref[defn:homeomorphism]{homeomorphism}
+      of $U_\alpha$ onto $V_\alpha \cap M$ \sidenote{Note that this means
+      $U_\alpha$ and $V_\alpha$ have the same topological structure.}.
+    \item Each $\phi_\alpha$ is a smooth immersion.
+  \end{enumerate}
+  \begin{figure*}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2, 0, 0) -- (2, 0, 0);
+      \draw[->] (0, -0.5, 0) -- (0, 3, 0);
+      \draw[->] (0, 0, -2) -- (0, 0, 3);
+      \draw[draw=none,fill=blue,fill opacity=0.5] plot [smooth] coordinates
+        {(1, 0, 0) (0.5, 0.3, 0) (0, 1.8, 0) (-0.5, 2, 0) (-0.5, 2, 2) (0, 1.8,
+          2) (0.5, 0.3, 2) (1, 0, 2) (1, 0, 0)};
+      \node[pin={[pin edge={latex'-}, pin distance=10pt]180:{$M$}}] at (-0.5, 2,
+        2) {};
+      \draw[draw=none,fill=red,fill opacity=0.3] plot [smooth] coordinates
+        {(-1, 2, 1) (-0.5, 2, 1) (0, 1.8, 1) (0.5, 0.3, 1) (0.5, 0.3, -0.5) (0,
+        1.8, -1) (-0.5, 2, -1) (-1, 1.8, -1) (-1, 2, 1) };
+      \node[pin={[pin edge={latex'-}, pin distance=10pt]180:{$V_\alpha$}}] at (-1,
+        2, 1) {};
+      \draw[draw=none,fill=green,fill opacity=0.3] plot [smooth] coordinates
+        {(0, 1.8, 0.5) (0, 1.8, 3) (0.5, 0.3, 3) (0.5, 0.3, 0.5) (0, 1.8, 0.5)};
+      \node[pin={[pin edge={latex'-}, pin distance=10pt]180:{$V_\beta$}}] at (0,
+        1.8, 3) {};
+
+      \draw[->] (3, 1, 0) -- (5, 1, 0);
+      \draw[->] (4, 0.5, 0) -- (4, 3, 0);
+      \draw[draw=none,fill=red,fill opacity=0.3] plot [smooth] coordinates
+        {(3.5, 1.5, 0) (4, 1.2, 0) (4.5, 1.8, 0) (4, 2.5, 0) (3.7, 2, 0) (3.5, 1.5, 0)};
+      \node[pin={[pin edge={latex'-},pin distance=10pt]135:{$U_\alpha$}}] at
+        (3.7, 1.7, 0) {};
+      \draw[->] (3, 1.5, 0) -- (0.5, 1, 0) node[midway, above] {$\phi_\alpha$};
+
+      \draw[->] (-6, -1, 0) -- (-4, -1, 0);
+      \draw[->] (-5, -1.5, 0) -- (-5, 1, 0);
+      \draw[draw=none,fill=green,fill opacity=0.3] plot [smooth] coordinates
+        {(-5.5, -1, 0) (-5, -1.4, 0) (-4.5, 0, 0) (-5, 0.7, 0) (-5.2, 0.5, 0)
+        (-5.5, -1, 0)};
+      \node[pin={[pin edge={latex'-}, pin distance=10pt]135:{$U_\beta$}}] at
+        (-5.2, 0.5, 0) {};
+      \draw[->] (-4, 0, 0) -- (0, 1.3, 3) node[midway,above] {$\phi_\beta$};
+    \end{tikzpicture}
+    \caption{\cref{defn:submanifolds} in action}\label{fig:defn_submanifolds}
+  \end{figure*}
+\end{defn}
+
+\begin{note}
+  We see that a $k$-dimensional submanifold $M$ of $\mathbb{R}^n$ is a subset of
+  a not-necessarily-disjoint union pieces of open sets, each of which is a
+  \hyperref[defn:parametrizations_and_parametrized_submanifolds]{$k$-dimensional
+  parametrized submanifold} of $\mathbb{R}^n$ \sidenote{Some authors call a
+  $k$-dimensional submanifold a \hlnotea{regular submanifold} of $\mathbb{R}^n$,
+  and use the term \hlnotea{regular map} for a parametrization.}.
+\end{note}
+
+% section submanifolds_in_terms_of_local_parameterizations (end)
+
+% chapter lecture_16_feb_13th (end)
+
+\chapter{Lecture 17 Feb 25th}%
+\label{chp:lecture_17_feb_25th}
+% chapter lecture_17_feb_25th
+
+\section{Submanifolds in Terms of Local Parametrizations (Continued)}%
+\label{sec:submanifolds_in_terms_of_local_parametrizations_continued}
+% section submanifolds_in_terms_of_local_parametrizations_continued
+
+Given that the maps $\phi_\alpha$, $\phi_\beta$ are homeomorphisms, we can
+consider the map that goes from one parametrization to another.
+
+\begin{defn}[Transition Map]\index{Transition Map}\label{defn:transition_map}
+  Let $M$ be a $k$-dimensional submanifold of $\mathbb{R}^n$. If $V_\alpha \cap
+  V_\beta \cap M \neq \emptyset$, the \hlnoteb{transition map}
+  \begin{equation*}
+    \phi_{\beta \alpha} : \phi_{\alpha}^{-1} (V_\alpha \cap V_\beta \cap M) \to
+    \phi_{\beta}^{-1} (V_\alpha \cap V_\beta \cap M)
+  \end{equation*}
+  is defined by
+  \begin{equation*}
+    \phi_{\beta \alpha} = \phi_{\beta}^{-1} \circ \phi_\alpha.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Referring to \cref{fig:defn_submanifolds}, we see that this is a map that goes
+  from a subset of $U_\alpha$ to a subset of $U_\beta$.
+
+  Also, notice that $\phi_{\beta \alpha}^{-1} = \phi_{\alpha \beta}$, and
+  $\phi_{\alpha \alpha}$ is the identity mapping.
+\end{note}
+
+The following is a useful realization.
+
+\begin{propo}[Transition Maps are Diffeomorphisms]\label{propo:transition_maps_are_diffeomorphisms}
+  Each transition map $\phi_{\beta \alpha}$ is a diffeomorphism.
+\end{propo}
+
+\marginnote{The proof for \cref{propo:transition_maps_are_diffeomorphisms} is
+not required for the course, but still useful to know.}
+\begin{proof}
+  Suppose $V_\alpha \cap V_\beta \cap M \neq \emptyset$ and consider the
+  transition map $\phi_{\beta \alpha} = \phi_{\beta}^{-1} \circ \phi_{\alpha}$,
+  which
+  \begin{equation*}
+    \phi_{\beta \alpha} : \phi_{\alpha}^{-1} (V_\alpha \cap V_\beta \cap M) \to
+    \phi_{\beta}^{-1} (V_\alpha \cap V_\beta \cap M).
+  \end{equation*}
+  We know that $\phi_{\beta \alpha}$ is a homeomorphism since it is a
+  composition of two such maps. Therefore, it suffices for us to show that
+  $\phi_{\beta \alpha}$ is smooth, which would analogously show that
+  $\phi_{\beta \alpha}^{-1}$ is smooth. Let $x = \phi_\alpha(u_\alpha) =
+  \phi_\beta(u_\beta) \in V_\alpha \cap V_\beta \cap M$, where
+  \begin{gather*}
+    \phi_\alpha(u) = (\phi^1_\alpha(u), \ldots, \phi^n_\alpha(u)), \\
+    \phi_\beta(u) = (\phi^1_\beta(u), \ldots, \phi^n_\beta(u)).
+  \end{gather*}
+  
+  Since $\phi_\beta$ is an immersion, the \hyperref[defn:differential]{Jacobian}
+  $(\D \phi_\beta)_{u_\beta}$ is an injective linear map with rank $k$. By
+  \cref{crly:nonvanishing_minor}, $\exists \{ l_1, \ldots, l_k \} \subseteq \{
+  1, \ldots, n \}$ such that the $k \times k$ minor of $(\D \phi_\beta)_{u_\beta}$,
+  as described in
+  \cref{propo:structure_of_the_determinant_of_a_linear_map_of_k_forms}, is
+  invertible at $u_\beta$.
+
+  Now define $\tilde{\phi}_\beta : U_\beta \to \mathbb{R}^k$ by
+  \begin{equation*}
+    \tilde{\phi}_\beta (u_\beta) = \left( \phi_{\beta}^{l_1} (u_\beta), \ldots,
+    \phi_{\beta}^{l_k} (u_\beta) \right),
+  \end{equation*}
+  which is smooth since each of the $\phi_{\beta}^{l_i}$'s are smooth. By
+  construction, and by our argument in the last paragraph, $\tilde{\phi}_\beta$
+  has an invertible Jacobian at $u_\beta$. Applying
+  \cref{thm:inverse_function_theorem}, we know that $\exists U_\beta' \subseteq
+  U_\beta$ containing $u_\beta$ and an open subset $W_\beta \subseteq
+  \mathbb{R}^k$ containing $\tilde{\phi}_{\beta} (u_\beta)$, such that
+  $\tilde{\phi}_{\beta} : U_\beta' \to W_\beta$ is a diffeomorphism. In
+  particular, we have that $\tilde{\phi}_{\beta}^{-1} : W_\beta \to U_\beta'$ is
+  smooth.
+
+  Using a similar argument for $\phi_\beta$, we can define
+  $\tilde{\phi}_{\alpha} : U_\alpha \to \mathbb{R}^k$ by
+  \begin{equation*}
+    \tilde{\phi}_{\alpha} (u_\alpha) = (\phi_\alpha^{l_1}(u_\alpha), \ldots,
+    \phi_\alpha^{l_k}(u_\alpha)),
+  \end{equation*}
+  using the same subset $\{ l_1, \ldots, l_k \} \subseteq \{ 1, \ldots, n \}$,
+  and $\tilde{\phi}_{\alpha}$ is smooth. Let $U_\alpha' = (\phi_\alpha^{-1}
+  \circ \phi_\beta)(U_\beta')$, which is an open subset of $U_\alpha$. It
+  follows by construction that on $U_\alpha'$, we have
+  \begin{equation*}
+    \phi_{\beta \alpha} = \phi_{\beta}^{-1} \circ \phi_{\alpha} =
+      \tilde{\phi}_{\beta}^{-1} \circ \tilde{\phi}_{\alpha} : U_\alpha' \to
+      U_\beta'. 
+  \end{equation*}
+  Thus $\phi_{\beta \alpha}$ is a composition of two smooth functions on the
+  neighbourhood of $u_\alpha$, so $\phi_{\beta \alpha}$ is smooth at $u_\alpha$.
+\end{proof}
+
+\paragraph{An informal discussion on why $M$ is $k$-dimensional in a
+$n$-dimensional space} Informally, a subset $M$ is a $k$-dimensional submanifold
+of $\mathbb{R}^n$ if it is locally homeomorphic to an open subset of
+$\mathbb{R}^k$, via the identification of $V_\alpha \cap M$ with $U_\alpha
+\subseteq \mathbb{R}^k$ through $\phi_\alpha$. From
+\cref{propo:transition_maps_are_diffeomorphisms}, any two identifications of the
+same region of $M$ with open subsets of $\mathbb{R}^k$ are diffeomorphic, i.e.
+homeomorphic and preserves smoothness. This realization of $M$ being
+identifiable with such $k$-dimensional subsets is why we say that $M$ is
+$k$-dimensional.
+
+\begin{defn}[Local Parametrizations]\index{Local Parametrizations}\label{defn:local_parametrizations}
+  Under \cref{defn:parametrizations_and_parametrized_submanifolds}, each
+  $\phi_{\alpha} : U_\alpha \to M \subseteq \mathbb{R}^n$ is called a
+  \hlnoteb{local parametrization} of $M$, and the collection
+  \begin{equation*}
+    \{ \phi_\alpha : U_\alpha \to V_\alpha \cap M : \alpha \in A \}
+  \end{equation*}
+  of local parametrizations is called a \hldefn{cover} of $M$. Given any such
+  cover, any other mapping $\psi : U \to V \cap M$ that satisfies
+  \cref{defn:parametrizations_and_parametrized_submanifolds} is called an
+  \hldefn{allowable local parametrization}. The set of all possible allowable
+  local parametrizations under a given cover is called the \hldefn{maximal
+  cover} of the cover.
+\end{defn}
+
+\begin{note}
+  Allowable local parametrizations can be added to a cover and the cover will
+  still cover $M$, hence its name.
+\end{note}
+
+\begin{eg}
+  Consider the unit sphere $S^{n - 1} \subseteq \mathbb{R}^n$, which is
+  \begin{equation*}
+    S^{n - 1} = \{ x \in \mathbb{R}^n : \norm{x}^2 = 1 \},
+  \end{equation*}
+  where
+  \begin{equation*}
+    \norm{x}^2 = (x^1)^2 + \hdots (x^n)^2
+  \end{equation*}
+  is the usual \hlnotea{Euclidean norm} \sidenote{See
+  \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf\#eg.9.1.4}{PMATH 351}}.
+
+  \hlbnoted{Claim} $S^{n - 1}$ is an $(n - 1)$-dimensional submanifold of
+  $\mathbb{R}^n$.
+
+  Let $p \in S^{n - 1}$. By the construct of $S^{n - 1}$, we know that $\exists j
+  \in \{ 1, \ldots, n \}$ such that $p^j \neq 0$. Then suppose $p^j > 0$, and
+  consider the set
+  \begin{equation*}
+    V_j^+ := \{ x \in \mathbb{R}^n : x^k > 0 \},
+  \end{equation*}
+  which is open in $\mathbb{R}^n$. Then $p \in V_j^+ \cap S^{n - 1}$. Now let
+  \begin{equation*}
+    U = \{ u \in \mathbb{R}^{n - 1} \mid \norm{u}^2 < 1 \},
+  \end{equation*}
+  which is an open subset of $\mathbb{R}^{n - 1}$. Define a map $\phi_j^+ : U
+  \to V_j^+$ by
+  \begin{equation*}
+    \phi_j^+(u) = \left( u^1, \ldots, u^{j - 1}, + \sqrt{1 - \norm{u}^2}, u^j,
+    \ldots, u^{n - 1} \right).
+  \end{equation*}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw (1, 0, 0) arc(360:180:1 and 0.5) arc(180:0:1 and 0.5);
+      \draw[draw=none,fill=bwhite,fill opacity=0.5] (1, 0, 0) arc(360:180:1 and
+        0.5) arc(180:0:1 and 0.5);
+      \draw[fill=red,fill opacity=0.3] (1, 0, 0) arc(0:180:1)
+        arc(180:360:1 and 0.5);
+      \draw[->] (0, 0, 0) -- (0, 0.9, 0);
+    \end{tikzpicture}
+    \caption{$\phi_3^+$ in $\mathbb{R}^3$}\label{fig:_phi_3_in_r_3_}
+  \end{marginfigure}
+  Notice that $\phi_j^+$ is a bijection between $U$ and $V_j^+ \cap S^{n - 1}$.
+  Also, $\phi_j^+$ is smooth, since each of its terms are smooth. Its inverse
+  $(\phi_j^+)^{-1} : V_j^+ \cap S^{n - 1} \to U$ is given by
+  \begin{equation*}
+    ( \phi_j^+)^{-1}(x) = (x^1, \ldots, x^{j - 1}, x^{j + 1}, \ldots, x^n) \in
+    \mathbb{R}^{n - 1},
+  \end{equation*}
+  which is known at the \hldefn{stereographic projection} from $\mathbb{R}^n$ to
+  $\mathbb{R}^{n - 1}$. The inverse is continuous because it is the restriction
+  to $V_j^+ \cap S^{n - 1}$ of a continuous map on $V_j^+$.
+
+  It remains to show that $\phi_j^+ : U \to V_j^+ \cap S^{n - 1}$ is an
+  immersion. Notice that its Jacobian is the $(n \times (n - 1))$-matrix
+  \begin{equation*}
+    (\D \phi_j^+) = \begin{pmatrix}
+      I_{(j - 1) \times (j - 1)} & 0_{(j - 1) \times (n - j)} \\
+      *_{1 \times (j - 1)}       & *_{1 \times (n - j)} \\
+      0_{(n - j) \times (j - 1)} & I_{(n - j) \times (n - j)}
+    \end{pmatrix},
+  \end{equation*}
+  expressed in block form, where $0_{m \times l}$ denotes the $m \times l$ zero
+  matrix, $I_{m \times m}$ denotes the $m \times m$ identity matrix, and $*_{m
+  \times l}$ is some $m \times l$ matrix whose entries are irrelevant to us.
+  Notice that if we move the $j$\textsuperscript{th} row to the bottom, we
+  obtain an $(n - 1) \times (n - 1)$ matrix in the first $n - 1$ rows. Thus the
+  matrix $(\D \phi_j^+)$ is injective since it has rank $n - 1$ (which is
+  maximal).
+
+  It follows that $\phi_j^+ : U \to V_j^+$ is a local paramterization for $S^{n
+  - 1}$ whose image contains $p$. Had we started, instead, with $p^j < 0$, then
+  we can define $\phi_j^- : U \to V_j^-$ analogously, taking the negative square
+  root.
+
+  In conclusion, we covered $S^{n - 1}$ by $2n$ local parametrizations, and thus
+  proving that $S^{n - 1}$ is an $( n - 1 )$-dimensional submanifold of
+  $\mathbb{R}^n$.
+\end{eg}
+
+\begin{eg}
+  Let $a < b$ and let $h : (a, b) \to \mathbb{R}$ be a smooth function such that
+  $h(t) > 0$ for all $t \in (a, b)$. Consider the subset $M$ of $\mathbb{R}^3$
+  given by
+  \begin{equation*}
+    M = \{ (x, y, z) \in \mathbb{R}^3 : a < z < b, \, x^2 + y^2 = (h(z))^2 \}.
+  \end{equation*}
+  Then $M$ comprises all points in $\mathbb{R}^3$ whose $z$ coordinates lies
+  strictly between $a$ and $b$, whose distance $\sqrt{x^2 + y^2}$ from the
+  $z$-axis is determined by $h(z) > 0$.
+
+  In other words, the set $M$ is obtained by taking the graph of the curve $r =
+  h(z)$ on the $r-z$ plane and resolving it around the $z$-axis. We call such an
+  $M$ a \hldefn{surface of revolution}. 
+  
+  \hlbnoted{Claim} $M$ is a $2$-dimensional submanifold of $\mathbb{R}^3$.
+
+  To show this, we can show that every point in $M$ lies in the image of some
+  local parametrization. Using cylindrical coordinates on $\mathbb{R}^3$, the
+  points on $M$ are
+  \begin{equation*}
+    x = h(z) \cos \theta, \, y = h(z) \sin \theta, \text{ and } z = z, \text{
+    for } a < z < b.
+  \end{equation*}
+  Consider the following two maps:
+  \begin{gather*}
+    \phi : (a, b) \times (0, 2 \pi) \to \mathbb{R}^3 \\
+    \phi(t, \theta) = (h(t) \cos \theta, h(t) \sin \theta, t)
+  \end{gather*}
+  and
+  \begin{gather*}
+    \tilde{\phi} : (a, b) \times (- \pi, \pi) \to \mathbb{R}^3 \\
+    \tilde{\phi}(\tilde{t}, \tilde{\theta}) = (h(\tilde{t}) \cos \tilde{\theta},
+    h(\tilde{t}) \sin \tilde{\theta}, \tilde{t}).
+  \end{gather*}
+\end{eg}
+It is clear that these two maps are smooth maps from open subsets of
+$\mathbb{R}^2$ whose images are contained in $M$. It is also relatively easy to
+see that both $\phi$ and $\tilde{\phi}$ are homeomorphisms:
+\begin{itemize}
+  \item all the terms are continuous;
+  \item the different $\theta$'s (and similarly for $\tilde{\theta}$) give us
+    unique points for every $t$ (respectively, $\tilde{t}$).
+\end{itemize}
+For instance, the inverse of $\phi$ is $\phi^{-1}(x, y, z) = \left(z, \arctan
+\frac{y}{x}\right)$ at points where $x \neq 0$, and by $\phi^{-1}(x, y, z) = \left(z,
+\cot^{-1} \frac{x}{y}\right)$ at $y \neq 0$, and in both cases the inverse
+trigonometric functions are defined to take values in $(0, 2 \pi)$ (which we may
+translate around as we please). Note that when both $x \neq 0$ and $y \neq 0$,
+the two expressions of $\phi^{-1}$ agree with one another since $\cot \theta =
+\frac{1}{\tan \theta}$.
+
+It remains to show that these maps are immersions. We have
+\begin{equation*}
+  (\D \phi) = \begin{pmatrix}
+    \frac{\partial \phi^1}{\partial t} & \frac{\partial \phi^1}{\partial \theta}
+    \\
+    \frac{\partial \phi^2}{\partial t} & \frac{\partial \phi^2}{\partial \theta}
+    \\
+    \frac{\partial \phi^3}{\partial t} & \frac{\partial \phi^3}{\partial \theta}
+  \end{pmatrix} = \begin{pmatrix}
+    h'(t) \cos \theta & - h(t) \sin \theta \\
+    h'(t) \sin \theta & h(t) \cos \theta \\
+    1                 & 0
+  \end{pmatrix}.
+\end{equation*}
+Notice that the columns are not scalar multiples of each other, and so $(\D
+\phi)$ has rank $2$, which, in this context, is maximal. It follows that $(\D
+\phi)$ is injective at all points in its domain. Thus $\phi$ is an immersion.
+Therefore, $M$ is indeed a $2$-dimensional submanifold of $\mathbb{R}^3$, and we
+have successfully covered $M$ with two local parametrizations.
+
+% section submanifolds_in_terms_of_local_parametrizations_continued (end)
+
+% chapter lecture_17_feb_25th (end)
+
 \appendix
 
-\chapter{Review of Earlier Contents}%
-\label{chp:review_of_earlier_contents}
-% chapter review_of_earlier_contents
+\chapter{Additional Topics / Review}%
+\label{chp:additional_topics_review}
+% chapter additional_topics_review
 
 \section{Rank-Nullity Theorem}%
 \label{sec:rank_nullity_theorem}
@@ -3798,16 +4500,71 @@ See \href{https://math.stackexchange.com/questions/664594/why-mathbf0-has-dimens
 
 % section rank_nullity_theorem (end)
 
-% chapter review_of_earlier_contents (end)
+\section{Inverse and Implicit Function Theorems}%
+\label{sec:inverse_and_implicit_function_theorems}
+% section inverse_and_implicit_function_theorems
+
+\begin{quotebox}{yellow}{foreground}
+  This space is dedicated to a little exploration of the inverse and implicit
+  function theorems. For now, the theorems themselves will be noted down.
+\end{quotebox}
+
+\begin{thm}[Inverse Function Theorem]\index{Inverse Function Theorem}\label{thm:inverse_function_theorem}
+  Let $F : U \subseteq \mathbb{R}^n \to \mathbb{R}^n$ be a smooth mapping, and
+  let $V = F(U)$. Suppose $\bm{p}$ is a point in $U$ where the
+  \hyperref[defn:differential]{Jacobian} $(\D F)_{\bm{p}}$ is invertible. Then
+  \begin{itemize}
+    \item there exists an open subset $U' \subseteq U \subseteq \mathbb{R}^n$
+      such that $\bm{p} \in U'$, and
+    \item an open subset $V' \subseteq V \subseteq \mathbb{R}^n$ such that
+      $\bm{q} = F(\bm{p}) \in V'$, and
+    \item a smooth function $G : V' \subseteq \mathbb{R}^n \to \mathbb{R}^n$
+      with $U' = G(V')$ that satisfies $G(F(\bm{x})) = \bm{x}$ for all $\bm{x}
+      \in U'$, and $F(G(\bm{y})) = \bm{y}$ for all $\bm{y} \in V'$.
+  \end{itemize}
+\end{thm}
+
+\begin{note}
+  \begin{itemize}
+    \item When restricted to $U'$, the mapping $F$ is invertible with a smooth
+      inverse $F'{-1} = G$.
+    \item This means that the restriction of $F$ to the neighbourhood $U'$ of
+      $\bm{p}$ is a \hyperref[defn:diffeomorphism]{diffeomorphism} of $U'$ onto
+      $V' = F(U')$, its image.
+  \end{itemize}
+\end{note}
+
+\begin{thm}[Implicit Function Theorem]\index{Implicit Function Theorem}\label{thm:implicit_function_theorem}
+  Let $F : W \subseteq \mathbb{R}^{n + m} \to \mathbb{R}^n$ be a smooth mapping,
+  and suppose $F(\bm{q}, \bm{p}) = \bm{0}$ for some $(\bm{q}, \bm{p}) \in W$.
+  Let $A$ be the $n \times n$ matrix $A_{ij} = \frac{\partial F^i}{\partial y^j}
+  (\bm{q}, \bm{p})$. Suppose $\det A \neq 0$. Then there exists
+  \begin{itemize}
+    \item an open neighbourhood $W' \subseteq W$ of $(\bm{q}, \bm{p})$ and
+    \item an open neighbourhood $U$ of $\bm{p}$ in $\mathbb{R}^m$ and
+    \item a smooth mapping $H : U \subseteq \mathbb{R}^m \to \mathbb{R}^n$
+  \end{itemize}
+  such that
+  \begin{equation*}
+    \{ (\bm{y}, \bm{x}) \in W' : F(\bm{y}, \bm{x}) = \bm{0} \} = \{ (H(\bm{x}),
+    \bm{x}) : \bm{x} \in U \}
+  \end{equation*}
+  That is, for a set of points $(\bm{y}, \bm{x}) \in W'$ that satify $F(\bm{y},
+  \bm{x}) = \bm{0}$, we can write $\bm{y}$ as a smooth function $H(\bm{x})$ of
+  $\bm{x}$.
+\end{thm}
+
+% section inverse_and_implicit_function_theorems (end)
+
+% chapter additional_topics_review (end)
 
 \backmatter
 
 \pagestyle{plain}
 
-\nobibliography*
 \bibliography{references}
 
 \printindex
 
 \end{document}
-
+% vim: tw=80
