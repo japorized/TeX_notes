@@ -3060,6 +3060,215 @@ going from $K \to K$ are exactly the elements of the Galois group $\Gal(K / F)$.
 
 % chapter lecture_19_feb_27th (end)
 
+\chapter{Lecture 20 Mar 01st}%
+\label{chp:lecture_20_mar_01st}
+% chapter lecture_20_mar_01st
+
+\section{Galois Group of Separable Fields}%
+\label{sec:galois_group_of_separable_fields}
+% section galois_group_of_separable_fields
+
+\begin{quotebox}{green}{foreground}
+  So when exactly does $\abs{ \Gal(K / F) } = [ K : F ]$?
+\end{quotebox}
+
+\begin{defn}[Separable Elements and Separable Extensions]\index{Separable Elements}\index{Separable Extensions}\label{defn:separable_elements_and_separable_extensions}
+  Let $K / F$ \sidenote{This need not be a finite extension.}. We say that
+  $\alpha \in K$ is \hlnoteb{separable} if $\alpha$ is \hlnotea{algebraic} over
+  $F$ and its minimal polynomial is
+  \hyperref[defn:separable_polynomials]{separable} (over $F$) \sidenote{This
+  also means that the root is unique.}.
+
+  We say that the extension $K / F$ is \hlnoteb{separable} if $K / F$ is
+  \hyperref[defn:algebraic_and_transcendental]{algebraic} and $\forall \alpha
+  \in K$, $\alpha$ is separable over $F$.
+\end{defn}
+
+\marginnote{
+\begin{remark}
+  \cref{defn:perfect_fields} means that all polynomials over the field are
+  separable, i.e. they do not have repeated roots.
+\end{remark}}
+\begin{defn}[Perfect Fields]\index{Perfect Fields}\label{defn:perfect_fields}
+  We say that a field $F$ is \hlnoteb{perfect} if every algebraic extension of
+  $F$ is separable.
+\end{defn}
+
+\begin{note}
+  Recall from A5, we showed that given an irreducible $f(x) \in F[x]$,
+  \begin{equation*}
+    f(x) \text{ is separable } \iff f'(x) \neq 0.
+  \end{equation*}
+\end{note}
+
+\begin{propo}[Separability and the Characteristic of a Field]\label{propo:separability_and_the_characteristic_of_a_field}
+  Let $f(x) \in F[x]$ be irreducible.
+  \begin{enumerate}
+    \item If $\ch F = 0$, then $f(x)$ is separable. \sidenote{This is proven in
+      A5.}
+    \item If $\ch F = p$ prime, then $f(x)$ is not separable iff $f(x) = g(x^p)$
+      for some $g(x) \in F[x]$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \setcounter{enumi}{1}
+    \item Let
+      \begin{equation*}
+        f(x) \in a_n x^n + a_{n - 1} x^{n - 1} + \hdots + a_1 x + a_0
+      \end{equation*}
+      Then $f(x)$ is not separable \\
+      $\iff$ $f'(x) = 0$ \\
+      $\iff$ $na_n x^{n - 1} + (n - 1)a_{n - 1} x^{n - 2} + \hdots + a_1 = 0$
+        \\
+      $\iff$ $ka_k = 0$ for $k \in \{ 1, \, \ldots, \, n \}$ \\
+      $\iff$ $ka_k = pm_k a_k$ where $m_k \in \mathbb{N}$, $k \in \{ 1, \ldots,
+        n \}$ since either $p \mid k$ or $a_k = 0$ \\
+      $\iff$ $f(x) = a_n x^{m_n p} + a_{n - 1}x^{m_{n - 1} p} + \hdots + a_1
+        x^{m_1 p} + a_0$ \\
+      $\iff$ $f(x) = g(x^p)$ where
+      \begin{equation*}
+        g(x) = a_n x^{m_n} + a_{n - 1} x^{m_{n - 1}} + \hdots + a_1 x^{m_1} +
+        a_0.
+      \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{crly}[Fields of Characteristic Zero are Perfect]\label{crly:fields_of_characteristic_zero_are_perfect}
+  If $\ch F = 0$, then $F$ is perfect.
+\end{crly}
+
+\begin{eg}
+  Note that in $\mathbb{Z}_2(t) / \mathbb{Z}_2(t^2)$, we have that
+  \begin{equation*}
+    x^2 - t^2 = (x - t)^2,
+  \end{equation*}
+  i.e. $t$ is a root with multiplicity $2$. Thus $\mathbb{Z}_2(t^2)$ is not
+  perfect.
+\end{eg}
+
+\begin{crly}[Every Finite Field is Perfect]\label{crly:every_finite_field_is_perfect}
+  Every finite field $F$ is perfect.
+\end{crly}
+
+\marginnote{
+\begin{strategy}
+  Of course, we want to use
+  \cref{propo:separability_and_the_characteristic_of_a_field}. We can do so by
+  supposing that $f(x)$ is irreducible but not separable, which then forces $f(x) =
+  g(x^p)$. The important point here is to notice that in a finite field, all
+  elements of the field will eventually cycle back as we add or multiply them.
+  Then, by using the fact that $\ch F = p$ is prime, in particular by the
+  \hlnotea{Freshman's Dream}, we can use \hldefn{Frobenius's Homomorphism}
+  $\phi(a) = a^p$, and we end up showing that every element in $F$ is some other
+  element of $F$ with power $p$. This will cause $f(x)$ to become reducible due
+  to the Freshman's Dream.
+\end{strategy}}
+
+\begin{proof}
+  Let $F$ be finite with $\ch F = p > 0$ \sidenote{Note that fields of
+  characteristic $0$ must be infinite, so this is a valid assumption.}. Suppose
+  to the contrary that $\exists f(x) \in F[x]$ such that $f(x)$ is irreducible
+  but not separable. Then $\exists g(x) \in F[x]$ such that $f(x) = g(x^p)$. In
+  particular, we have
+  \begin{equation*}
+    f(x) = a_n x^{p m_n} + a_{n - 1} x^{p m_{n - 1}} + \hdots + a_1 x^{p m_1} +
+    a_0.
+  \end{equation*}
+
+  Now consider $\phi : F \to F$ given by $\phi(a) = a^p$. By the
+  \hlnotea{Freshman's Dream}, $\phi$ is a homomorphism. It is clear that it is
+  injective since if $a \neq b$, then $a^p \neq b^p$, for otherwise
+  \begin{equation*}
+    0 = a^p - b^p = (a - b)^p \iff 0 = a - b \iff a = b.
+  \end{equation*}
+  Also, since $F$ is finite, injectivity of $\phi$ guarantees that it is
+  surjective. This means that $\forall a_k \in F$, $\exists b_k \in F$ such that
+  \begin{equation*}
+    a_k = b_k^p = \phi(b_k).
+  \end{equation*}
+  Then we have
+  \begin{align*}
+    f(x) &= b_n^p x^{p m_n} + b_{n - 1}^p x^{p m_{n - 1}} + \hdots + b_1^p x^{p
+          m_1} + b_0^p \\
+         &= ( b_n x^{m_n} + b_{n - 1} x^{m_{n - 1}} + \hdots + b_1 x^{m_1} + b_0
+          )^p,
+  \end{align*}
+  again, by the \hlnotea{Freshman's Dream}. Therefore $f(x)$ is irreducible,
+  contradicting our assumption.
+\end{proof}
+
+\begin{thm}[Galois Group of a Splitting Field of a Separable Polynomial has Order the Degree of the Extension]\label{thm:galois_group_of_a_splitting_field_of_a_separable_polynomial_has_Order_the_degree_of_the_extension}
+  Let $f(x) \in F[x]$ be non-constant and separable. Let $K$ be the splitting
+  field of $f(x)$ over $F$. Then
+  \begin{equation*}
+    \abs{ \Gal(K / F) } = \abs{ \Gal(f(x)) } = [ K : F ].
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  We shall perform induction on $[ K : F ] = n$.
+
+  \noindent
+  \hlbnoted{$n = 1$} We have
+  \begin{equation*}
+    1 \leq \abs{ \Gal(K / F) } \leq [ K : F ] \leq 1,
+  \end{equation*}
+  since we always have $\epsilon \in \Gal(K / F)$.
+  
+  Proceeding inductively...
+  
+  \noindent
+  \hlbnoted{$n = k + 1$} Let $p(x) \in F[x]$ be an irreducible factor of $f(x)$
+  \sidenote{Note that it suffices for us to show for irreducible polynomials,
+  since we can always factor a polynomial into irreducible terms.}. Note that
+  $p(x)$ is also separable over $F$. Let
+  \begin{equation*}
+    \alpha_1, \ldots, \alpha_m \in K
+  \end{equation*}
+  be the roots of $p(x)$, where $m = \deg p(x)$, and we note that $\alpha_i \neq
+  \alpha_j$ for all $i \neq j$ since $p(x)$ is separable. Now since $[ K : F ] >
+  1$, wma $\alpha_1 \notin F$. Then consider $E = F(\alpha_1)$. Since $p(x)$ is
+  irreducible in $F[x]$, it follows that $[ E : F ] = m$. Thus by the
+  \hyperref[thm:tower_theorem]{Tower Theorem}, we have
+  \begin{equation*}
+    [ K : E ] = \frac{[ K : F ]}{[ E : F ]} = \frac{n}{m} < n.
+  \end{equation*}
+  Note that we still have $K$ as the splitting field of $f(x)$ over $E$. It
+  follows from induction that
+  \begin{equation}\label{eq:galois_group_of_splitting_field_of_separable_polym_1}
+    \abs{ \Gal( K / E ) } = [ K : E ] = \frac{n}{m}.
+  \end{equation}
+  Since $p(x)$ is irreducible, by the
+  \hyperref[lemma:isomorphism_extension_lemma]{Isomorphism Extension Lemma},
+  $\forall j$, $\exists \phi_j \in \Gal(K / F)$ such that $\phi_j(\alpha_1) =
+  \alpha_j$. Since the roots are distinct, it follows that each of the
+  $\phi_j$'s are distinct in $\Gal (K / F)$, and there are $m$-many such
+  automorphisms.
+
+  Furthermore, we have that $\phi_j^{-1} \phi_i (\alpha_1) \neq \alpha_1 \in E$,
+  and so $\phi_j^{-1} \phi_i \notin \Gal(K / E)$. This means that
+  \begin{equation*}
+    \phi_j \Gal(K / E) \neq \phi_i \Gal(K / E),
+  \end{equation*}
+  and so we have that there must be
+  \begin{equation*}
+    \abs{ \Gal(K / F) / \Gal(K / E) } \geq m.
+  \end{equation*}
+  By \hyperref[thm:lagrange_s_theorem]{Lagrange}, we have from
+  \cref{eq:galois_group_of_splitting_field_of_separable_polym_1} that
+  \begin{equation*}
+    \abs{ \Gal(K / F) } \geq m \cdot \abs{ \Gal(K / E) } = m \cdot \frac{n}{m} =
+    n,
+  \end{equation*}
+  as desired.
+\end{proof}
+
+% section galois_group_of_separable_fields (end)
+
+% chapter lecture_20_mar_01st (end)
+
 \appendix
 
 \chapter{Asides and Prior Knowledge}%
@@ -3101,4 +3310,4 @@ the name with a proposition known as
 \printindex
 
 \end{document}
-
+% vim: tw=80
