@@ -3269,6 +3269,190 @@ going from $K \to K$ are exactly the elements of the Galois group $\Gal(K / F)$.
 
 % chapter lecture_20_mar_01st (end)
 
+\chapter{Lecture 21 Mar 04th}%
+\label{chp:lecture_21_mar_04th}
+% chapter lecture_21_mar_04th
+
+\section{The Primitive Element Theorem}%
+\label{sec:the_primitive_element_theorem}
+% section the_primitive_element_theorem
+
+We shall now look at a rather `simple' case of splitting fields of separable
+polynomials.
+
+\begin{defn}[Simple Extension and Primitive Elements]\index{Simple Extension}\index{Primitive Element}\label{defn:simple_extension_and_primitive_elements}
+  We say that $K / F$ is \hlnoteb{simple} if $\exists \alpha \in K$ such that $K
+  = F(\alpha)$. We call $\alpha$ a \hlnoteb{primitive element} for $K / F$.
+\end{defn}
+
+\marginnote{
+  You may want to look at
+  \nameref{strategy:analysis_of_proof_of_primitive_element_theorem} first before
+  diving into the proof for \cref{thm:primitive_element_theorem}. The proof
+  provided in class makes the proof look as if it is a struck of genius, but it
+  is actually through some frolicking around with finding out what we need, that
+  one can realize why we chose to pick such a specifically defined $S$.
+}
+\begin{thm}[Primitive Element Theorem]\index{Primitive Element Theorem}\label{thm:primitive_element_theorem}
+  If $K / F$ is finite and separable, then $K / F$ is simple.
+\end{thm}
+
+This is an important result to us, since it would imply the following.
+
+\begin{crly}[Finite Extensions of Perfect Fields are Simple]\label{crly:finite_extensions_of_perfect_fields_are_simple}
+  If $F$ is perfect and $K / F$ is finite, then $K / F$ is simple.
+\end{crly}
+
+\begin{eg}
+  Fields of characteristic $0$ and finite fields have simple extensions.
+\end{eg}
+
+\begin{proof}[\cref{thm:primitive_element_theorem}]
+  \hlbnoted{$F$ is finite} Then $K$ is necessarily finite since it is a finite
+  extension, and thus $K^\times = \langle \alpha \rangle$ for some $\alpha \in
+  K$. Hence $K = F(\alpha)$.
+  \marginnote{
+  \begin{strategy}
+    Note that \cref{thm:primitive_element_theorem} does not assume if $F$ is finite
+    or infinite, and so we must deal with either cases separately.
+  \end{strategy}
+  }
+
+  \noindent
+  \hlbnoted{$F$ is infinite} Since $K / F$ is finite, we may assume
+  \begin{equation*}
+    K = F(\pi_1, \ldots, \pi_n)
+  \end{equation*}
+  for some $\pi_i \in K$. It suffices for us to show that $\forall \alpha, \beta
+  \in K$, $\exists \gamma \in K$ such that
+  such that
+  \begin{equation*}
+    K = F(\alpha, \beta) = F(\gamma),
+  \end{equation*}
+  since our desired result will simply follow by arguing repeatedly. Let $p(x)$
+  and $q(x)$ be the minimal polynomials of $\alpha$ and $\beta$, respectively,
+  over $F$.
+  
+  Now let $L$ be the splitting field of $p(x) q(x)$ over $K$. Let the roots of
+  $p(x)$ be
+  \begin{equation*}
+    \alpha = \alpha_1, \, \alpha_2, \, \ldots, \, \alpha_n,
+  \end{equation*}
+  and the roots of $q(x)$ be
+  \begin{equation*}
+    \beta = \beta_1, \, \beta_2, \, \ldots, \, \beta_m.
+  \end{equation*}
+  By separability, $\alpha_i \neq \alpha_j$ and $\beta_i \neq \beta_j$ for all
+  $i \neq j$. Now let \sidenote{Note that had we wanted to start with $\gamma =
+  \beta + u \alpha$, we would have declared $S$ with elements like
+$\frac{\beta_j - \beta_1}{\alpha_1 - \alpha_i}$.}
+  \begin{equation*}
+    S := \left\{ \frac{\alpha_i - \alpha_1}{\beta_1 - \beta_j} \mmid 1 < i \leq
+    n, \, 1 < j \leq m \right\}.
+  \end{equation*}
+  Since $S$ is finite while $F$ is infinite, $\exists u \in F^\times$ such that
+  $u \notin S$. Let $\gamma = \alpha + u \beta$.
+
+  \noindent
+  \hlbnotea{Claim: $F(\alpha, \beta) = F(\gamma)$} Clearly, $F(\gamma) \subseteq
+  F(\alpha, \beta)$ since $\gamma \in F(\alpha, \beta)$. Let $h(x)$ be the
+  minimal polynomial of $\beta$ over $F(\gamma)$. Since $q(\beta) = 0$, we have
+  that $h(x) \mid q(x)$, and consequently if $h(\faLock) = 0$, then $\faLock =
+  \beta_j$ for some $j \in \{ 1, \ldots, m \}$.
+
+  Now let $k(x) = p(\gamma - ux) \in F(\gamma)[x]$. Notice that
+  \begin{equation*}
+    k(\beta) = p(\gamma - u \beta) = p(\alpha) = 0.
+  \end{equation*}
+  Thus $h(x) \mid k(x)$. Notice that for $j > 1$, we have
+  \begin{align*}
+    k(\beta_j) = 0 &\iff p(\gamma - u \beta_j) = 0 \\
+                   &\iff \gamma - u \beta_j = \alpha_i \text{ for some } i \\
+                   &\iff \alpha_1 + u \beta_1 - u \beta_j = \alpha_i \\
+                   &\iff u = \frac{\alpha_i - \alpha_1}{\beta_1 - \beta_j} \in
+                   S.
+  \end{align*}
+  Thus we know that for these $j$'s, $k(\beta_j) \neq 0$ since we chose $u
+  \notin S$.
+  
+  It follows that $h(\beta_j) \neq 0$ for $j > 1$, and so $h(x) = x - \beta \in
+  F(\gamma)[x]$, implying that $\beta \in F(\gamma)$. Using the same argument,
+  we can show that $\alpha \in F(\gamma)$. This completes the proof,
+\end{proof}
+
+\marginnote{This is indeed a very profound result, making use of relatively
+simple notions such as minimal polynomials and splitting fields, and then
+proving for us a theorem that helps us narrow down the choice of the algebraic
+number to a single number that extends the base field to the extension.}
+\begin{strategy}[Analysis of the proof for the Primitive Element Theorem]\label{strategy:analysis_of_proof_of_primitive_element_theorem}
+  If we want $F(\alpha, \beta) = F(\gamma)$ for some $\gamma$, one naive
+  choice is to go with $\gamma = \alpha + u \beta$ for some $u \in F^\times$
+  and hope that this will force $\alpha, \beta \in F(\gamma)$. The argument is
+  similar for either $\alpha$ or $\beta$ (by switching variables), so let's
+  think about only one of them. Now $q(x)$ is not necessarily a minimal
+  polynomial of $\beta$ over $F(\gamma)$, so let's make use of that.
+
+  If $\beta \in F(\gamma)$, then we must have $x - \beta \mid q(x)$. So let's
+  \hlnotec{consider the minimal polynomial} $h(x)$ of $\beta$ in $F(\gamma)$,
+  which would divide $q(x)$. Of course, ideally, we want $h(x) = x - \beta$.
+  Then let's suppose that $h(x)$ has some root other than $\beta$.
+
+  Then \hlnotec{in the splitting field} of $q(x)$, where $h(x)$ must then also
+  split, since $q(x)$ is separable, we have that $h(x)$ must therefore be able
+  to split into linear terms, where each linear term has a root of $q(x)$ as its
+  constant value. In other words, \hlnotec{all roots of $h(x)$ are roots of
+  $q(x)$.} 
+
+  Then we notice another possible polynomial that such an $h(x)$ can divide: we
+  know that $\alpha = \gamma - u \beta$, and $\alpha$ is a root of $p(x)$. Then
+  if we let $k(x) = p(\gamma - u x)$, we have
+  \begin{equation*}
+    k(\beta) = p(\gamma - u \beta) = p(\alpha) = 0.
+  \end{equation*}
+  So $h(x) \mid k(x)$. Now since all the roots of $h(x)$ are roots of $q(x)$,
+  these roots must also be roots of $k(x)$. Let these other roots of $q(x)$ be
+  labelled $\beta_j$'s. Then picking $\beta_j \neq \beta$, we have
+  \begin{equation*}
+    k(\beta_j) = 0 \iff p(\gamma - u \beta_j) = 0.
+  \end{equation*}
+  We already know what the roots of $p(x)$ are so let's label those as
+  $\alpha_i$. Then
+  \begin{equation*}
+    \gamma - u \beta_j = \alpha_i.
+  \end{equation*}
+  Note that $\alpha_i \neq \alpha$ since the roots are unique. Following that,
+  \begin{equation*}
+    \alpha + u \beta - u \beta_j = \alpha_i,
+  \end{equation*}
+  which then
+  \begin{equation}\label{eq:pet_strat_choice_of_units}
+    u = \frac{\alpha_i - \alpha}{\beta - \beta_j}.
+  \end{equation}
+  We notice that there are only finitely many such $u$'s in $F^\times$ since
+  there are only as many as the roots $\alpha_i$'s and $\beta_j$'s can allow.
+  However, $F^\times$ is infinite by our assumption, i.e. there are always units
+  of $F$ that cannot be expressed as in \cref{eq:pet_strat_choice_of_units}.
+
+  So by picking a $u \in F^\times$ that is not determined by
+  \cref{eq:pet_strat_choice_of_units}, we rule out the possibility that
+  $k(x)$ has these other $\beta_j$'s as roots, and hence forcing $h(x)$ to be
+  what we want: that is $h(x) = x - \beta$. Thus our job is done for showing
+  that $\beta \in F(\gamma)$!
+
+  We can then apply the same argument to showing that $\alpha \in F(\gamma)$, by
+  letting $\gamma = \beta + u' \alpha$ by choosing $u'$ in a similar fashion as
+  above. In this case, we would have to extend our working field to the
+  splitting field of $p(x)$.
+
+  Then to put the two together, we could have then started working with an
+  extension where both $p(x)$ and $q(x)$ splits, and the splitting field of
+  $p(x) q(x)$ is exactly where we should be working in.
+\end{strategy}
+
+% section the_primitive_element_theorem (end)
+
+% chapter lecture_21_mar_04th (end)
+
 \appendix
 
 \chapter{Asides and Prior Knowledge}%
