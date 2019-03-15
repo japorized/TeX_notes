@@ -4450,7 +4450,7 @@ section, we shall see that locally so, all submanifolds show up in this manner.
   \end{equation*}
 \end{defn}
 
-\begin{thm}[Submanifold as Defined by a Smooth Map of Maximal Rank]\label{thm:submanifold_as_defined_by_a_smooth_map_of_maximal_rank}
+\begin{thm}[Implicit Submanifold Theorem]\label{thm:implicit_submanifold_theorem}
   Let $1 \leq k \leq n - 1$, and let $F : W \subseteq \mathbb{R}^n \to
   \mathbb{R}^{n - k}$ be a smooth map, where $W$ is open in $\mathbb{R}^n$.
   Suppose that the subset $M = F^{-1}(0) \subseteq \mathbb{R}^n$ is nonempty. If
@@ -4532,7 +4532,7 @@ section, we shall see that locally so, all submanifolds show up in this manner.
   has maximal rank on $U$ if the $1$-forms $\dif{F}^i$ of the $n - 1$ functions
   $F^1, \ldots, F^{n - 1}$ are all linearly independent from one another at each
   point in $U$. Then by
-  \cref{thm:submanifold_as_defined_by_a_smooth_map_of_maximal_rank}, $M =
+  \cref{thm:implicit_submanifold_theorem}, $M =
   F^{-1}(0)$ is a $1$-dimensional submanifold of $\mathbb{R}^n$, called a
   \hldefn{curve} in $\mathbb{R}^n$, which is the usual curve that we know.
 
@@ -4559,7 +4559,7 @@ section, we shall see that locally so, all submanifolds show up in this manner.
   \end{pmatrix}$, which is never $0$ on $F^{-1}(0)$. Thus from
   \hyperref[thm:rank_nullity_theorem]{rank-nullity}, $(\D F)_x$ has maximal rank
   $1$ on $F^{-1}(0)$. By
-  \cref{thm:submanifold_as_defined_by_a_smooth_map_of_maximal_rank}, once again,
+  \cref{thm:implicit_submanifold_theorem}, once again,
   we have that $S^{n - 1} = F^{-1}(0)$ is an $(n - 1)$-dimensional submanifold
   of $\mathbb{R}^n$.
 \end{eg}
@@ -4578,7 +4578,7 @@ section, we shall see that locally so, all submanifolds show up in this manner.
   \mathbb{R}$. However, note that $F(0, 0, z) = -(h(z))^2 < 0$. Therefore, the
   points $(x, y, z) \in \mathbb{R}^3$ where $(\D F)_{(x, y, z)}$ does not have
   maximal rank are not on the level set $M = F^{-1}(0)$. It follows again from
-  \cref{thm:submanifold_as_defined_by_a_smooth_map_of_maximal_rank} that $M =
+  \cref{thm:implicit_submanifold_theorem} that $M =
   F^{-1}(0)$ is a $2$-dimensional submanifold of $\mathbb{R}^3$.
 \end{eg}
 
@@ -4604,7 +4604,7 @@ an explicitly defined $k$-dimensional submanifold of $\mathbb{R}^n$ with $n - k
     \end{pmatrix},
   \end{equation*}
   which clearly has rank $2$ at all points on $M$. It follows from
-  \cref{thm:submanifold_as_defined_by_a_smooth_map_of_maximal_rank} that $M =
+  \cref{thm:implicit_submanifold_theorem} that $M =
   F^{-1}(0)$ is a $2$-dimensional submanifold of $\mathbb{R}^4$.
 
   Note that $M$ can be thought of as the Cartesian product of two copies of $S^2
@@ -4621,7 +4621,7 @@ an explicitly defined $k$-dimensional submanifold of $\mathbb{R}^n$ with $n - k
 In this section we shall look into more results about the local structure of
 submanifolds.
 
-\begin{thm}[Implicit Submanifold Theorem]\index{Implicit Submanifold Theorem}\label{thm:implicit_submanifold_theorem}
+\begin{thm}[Points on the Parametrization]\index{Points on the Parametrization}\label{thm:points_on_the_parametrization}
   Let $M$ be a $k$-dimensional submanifold of $\mathbb{R}^n$, and let $x \in M$.
   Then there exists a local parametrization $\psi : W \subseteq \mathbb{R}^k \to
   \mathbb{R}^n$ for $M$ with $x \in \psi(W)$ such that $\exists \{ l_1, \ldots,
@@ -4672,7 +4672,7 @@ submanifolds.
 \end{proof}
 
 \begin{note}
-  \cref{thm:implicit_submanifold_theorem} shows that locally (on $\psi(W)$) the
+  \cref{thm:points_on_the_parametrization} shows that locally (on $\psi(W)$) the
   submanifold is given as the graph of a function of $k$ variables. We can
   explicitly write $n - k$ of the coordinates $x^j$ as smooth functions of the
   other $k$ variables.
@@ -4681,6 +4681,283 @@ submanifolds.
 % section local_description_of_submanifolds_of_r_n_ (end)
 
 % chapter lecture_18_feb_27th (end)
+
+\chapter{Lecture 19th Mar 01st}%
+\label{chp:lecture_19th_mar_01st}
+% chapter lecture_19th_mar_01st
+
+\section{Local Description of Submanifolds of \texorpdfstring{$\mathbb{R}^n$}{Rn} (Continued)}%
+\label{sec:local_description_of_submanifolds_of_r_n_continued}
+% section local_description_of_submanifolds_of_r_n_continued
+
+\begin{propo}[Local Version of the Implicit Submanifold Theorem]\index{Local Version of the Implicit Submanifold Theorem}\label{propo:local_version_of_the_implicit_submanifold_theorem}
+  Let $M$ be a subset of $\mathbb{R}^n$ with the following property. For each $x
+  \in M$, $\exists W$ an open neighbourhood of $x \in \mathbb{R}^n$ such that
+  $W \cap M = F^{-1}(0)$ for some smooth mapping $F : W \subseteq \mathbb{R}^n
+  \to \mathbb{R}^{n - k}$ which has maximal rank on $W$. Then $M$ is a
+  $k$-dimensional submanifold of $\mathbb{R}^n$.
+\end{propo}
+
+\begin{proof}
+  Let $x \in M$, $F : W \subseteq \mathbb{R}^n \to \mathbb{R}^{n - k}$ which has
+  maximal rank on $W$, and $x \in W$. It follows that if we let $M = W \cap M$
+  in the \hyperref[thm:implicit_submanifold_theorem]{Implicit Submanifold
+  Theorem}, then there exists a local parametrization $f : U \subseteq
+  \mathbb{R}^k \to F(U)$ for some open neighbourhood $f(U)$ of $x$. Since $x$ is
+  arbitrary, it follows that $M$ is indeed a $k$-dimensional submanifold of
+  $\mathbb{R}^n$.
+\end{proof}
+
+Interestingly, and fortunate to some extent, the converse of \\
+\noindent
+\cref{propo:local_version_of_the_implicit_submanifold_theorem} is true.
+
+\begin{propo}[Converse of the Local Version of the Implicit Submanifold Theorem]\index{Converse of the Local Version of the Implicit Submanifold Theorem}\label{propo:converse_of_the_local_version_of_the_implicit_submanifold_theorem}
+  Let $M$ be a $k$-dimensional submanifold of $\mathbb{R}^n$, and let $x \in M$.
+  Then $\exists W \subseteq \mathbb{R}^n$ an open set containing $x$, and a
+  smooth mapping $F : W \subseteq \mathbb{R}^n \to \mathbb{R}^{n - k}$ which has
+  maximal rank on $W$, such that $W \cap M = F^{-1}(0)$.
+\end{propo}
+
+\begin{proof}
+  By \cref{thm:points_on_the_parametrization}, $\exists \psi : U \subseteq
+  \mathbb{R}^k \to \mathbb{R}^n$ a local parametrization such that $x \in
+  \psi(U)$, with
+  \begin{gather*}
+    x^{l_j} = \psi^{l_j}(w) = w^j \text{ and } \\
+    x^{m_j} = \psi^{m_j}(w) = \psi^{m_j}(x^{l_1}, \ldots, x^{l_k})
+  \end{gather*}
+  for some $\{ l_1, \ldots, l_k \} \subseteq \{ 1, \ldots, n \}$ with complement
+  $\{ m_1, \ldots, m_{n - k} \}$. Then let $W \subset \mathbb{R}^n$ be the open
+  set defined by
+  \begin{equation*}
+    W = \{ x \in \mathbb{R}^n : (x^{l_1}, \ldots, x^{l_k}) \in U \},
+  \end{equation*}
+  as define the smooth map $F : W \subseteq \mathbb{R}^n \to \mathbb{R}^{n - k}$
+  by
+  \begin{equation*}
+    F^j(x^1, \ldots, x^n) = x^{m_j} - \psi^{m_j}(x^{l_1}, \ldots, x^{l_k}),
+  \end{equation*}
+  where $j = 1, \ldots, n - k$. By construction, we have that $W \cap M =
+  F^{-1}(0)$.
+
+  Now note that the $j$\textsuperscript{th} row of $(\D F)_x$ is $(\D F^j)$,
+  which has a $1$ in the $m_j$\textsuperscript{th} component and zeroes in the
+  $m_i$\textsuperscript{th} components for $i \neq j$:
+  \begin{align*}
+    (\D F)_x &= \begin{pmatrix}
+      \frac{\partial F^1}{\partial x^1} & \frac{\partial F^1}{\partial x^2} &
+      \hdots & \frac{\partial F^1}{\partial x^{m_j}} & \hdots & \frac{\partial
+      F^1}{\partial x^n} \\
+      \frac{\partial F^2}{\partial x^1} & \frac{\partial F^2}{\partial x^2} &
+      \hdots & \frac{\partial F^2}{\partial x^{m_j}} & \hdots & \frac{\partial
+      F^2}{\partial x^n} \\
+      \vdots & \vdots & & \vdots & & \vdots \\
+      \frac{\partial F^{m_j}}{\partial x^1} & \frac{\partial F^{m_j }}{\partial x^2} &
+      \hdots & \frac{\partial F^{m_j}}{\partial x^{m_j}} & \hdots & \frac{\partial
+      F^{m_j}}{\partial x^n} \\
+      \vdots & \vdots & & \vdots & & \vdots \\
+      \frac{\partial F^{n - k}}{\partial x^1} & \frac{\partial F^{n - k }}{\partial x^2} &
+      \hdots & \frac{\partial F^{n - k}}{\partial x^{m_j}} & \hdots & \frac{\partial
+      F^{n - k}}{\partial x^n} \\
+    \end{pmatrix} \\
+             &= \begin{pmatrix}
+      \frac{\partial F^1}{\partial x^1} & \frac{\partial F^1}{\partial x^2} &
+      \hdots & \frac{\partial F^1}{\partial x^{m_j}} & \hdots & \frac{\partial
+      F^1}{\partial x^n} \\
+      \frac{\partial F^2}{\partial x^1} & \frac{\partial F^2}{\partial x^2} &
+      \hdots & \frac{\partial F^2}{\partial x^{m_j}} & \hdots & \frac{\partial
+      F^2}{\partial x^n} \\
+      \vdots & \vdots & & \vdots & & \vdots \\
+      \frac{\partial F^{m_j}}{\partial x^1} & \frac{\partial F^{m_j }}{\partial x^2} &
+      \hdots & 1 & \hdots & \frac{\partial
+      F^{m_j}}{\partial x^n} \\
+      \vdots & \vdots & & \vdots & & \vdots \\
+      \frac{\partial F^{n - k}}{\partial x^1} & \frac{\partial F^{n - k }}{\partial x^2} &
+      \hdots & \frac{\partial F^{n - k}}{\partial x^{m_j}} & \hdots & \frac{\partial
+      F^{n - k}}{\partial x^n} \\
+    \end{pmatrix}
+  \end{align*}
+  It follows that the $n - k$ rows $(\D F^j)$ are therefore linearly
+  independent, i.e. $(\D F)_x$ has maximal rank $n - k$ as required.
+\end{proof}
+
+% section local_description_of_submanifolds_of_r_n_continued (end)
+
+\section{Smooth Functions and Curves on a Submanifold}%
+\label{sec:smooth_functions_and_curves_on_a_submanifold}
+% section smooth_functions_and_curves_on_a_submanifold
+
+\begin{defn}[Smooth Functions on Submanifolds]\index{Smooth Functions}\label{defn:smooth_functions_on_submanifolds}
+  Let $f : M \to \mathbb{R}$. We say that $f$ is \hlnoteb{smooth} if the
+  composition $f \circ \phi_\alpha : U_\alpha \to \mathbb{R}$ is a smooth
+  function for any \hyperref[defn:local_parametrizations]{allowable local
+  parametrization} $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ of $M$ (cf.
+  \cref{fig:visual_representation_of_smooth_functions_and_curves_on_submanifolds}).
+
+  Let $F : M \to \mathbb{R}^q$ be a vector-valued map. We say that $F$ is
+  \hlnoteb{smooth} if all the components $F^i : M \to \mathbb{R}$ are smooth
+  real-valued functions on $M$, for $i = 1, \ldots, q$.
+\end{defn}
+
+\begin{remark}
+  Note that smoothness of functions is a local property, i.e. a function $f$ is
+  smooth on $M$ if and only if it is smooth on $V \cap M$ for every open set $V$
+  in $\mathbb{R}^n$.
+\end{remark}
+
+\begin{figure*}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[->] (-2, 0, 0) -- (2, 0, 0);
+    \draw[->] (0, -0.5, 0) -- (0, 3, 0);
+    \draw[->] (0, 0, -2) -- (0, 0, 3);
+    \draw[draw=none,fill=blue,fill opacity=0.5] plot [smooth] coordinates
+      {(1, 0, 0) (0.5, 0.3, 0) (0, 1.8, 0) (-0.5, 2, 0) (-0.5, 2, 2) (0, 1.8,
+        2) (0.5, 0.3, 2) (1, 0, 2) (1, 0, 0)};
+    \node[pin={[pin edge={latex'-}, pin distance=10pt]180:{$M$}}] at (-0.5, 2,
+      2) {};
+    \draw[draw=none,fill=red,fill opacity=0.3] plot [smooth] coordinates
+      {(-1, 2, 1) (-0.5, 2, 1) (0, 1.8, 1) (0.5, 0.3, 1) (0.5, 0.3, -0.5) (0,
+      1.8, -1) (-0.5, 2, -1) (-1, 1.8, -1) (-1, 2, 1) };
+    \node[pin={[pin edge={latex'-}, pin distance=10pt]180:{$V_\alpha$}}] at (-1,
+      2, 1) {};
+    \draw[draw=none,fill=green,fill opacity=0.3] plot [smooth] coordinates
+      {(0, 1.8, 0.5) (0, 1.8, 3) (0.5, 0.3, 3) (0.5, 0.3, 0.5) (0, 1.8, 0.5)};
+    \node[pin={[pin edge={latex'-}, pin distance=10pt]180:{$V_\beta$}}] at (0,
+      1.8, 3) {};
+
+    \draw[->] (3, 1, 0) -- (5, 1, 0);
+    \draw[->] (4, 0.5, 0) -- (4, 3, 0);
+    \draw[draw=none,fill=red,fill opacity=0.3] plot [smooth] coordinates
+      {(3.5, 1.5, 0) (4, 1.2, 0) (4.5, 1.8, 0) (4, 2.5, 0) (3.7, 2, 0) (3.5, 1.5, 0)};
+    \node[pin={[pin edge={latex'-},pin distance=10pt]135:{$U_\alpha$}}] at
+      (3.7, 1.7, 0) {};
+    \draw[->] (3, 1.5, 0) -- (0.5, 1, 0) node[midway, above] {$\phi_\alpha$};
+
+    \draw[->] (-6, -1, 0) -- (-4, -1, 0);
+    \draw[->] (-5, -1.5, 0) -- (-5, 1, 0);
+    \draw[draw=none,fill=green,fill opacity=0.3] plot [smooth] coordinates
+      {(-5.5, -1, 0) (-5, -1.4, 0) (-4.5, 0, 0) (-5, 0.7, 0) (-5.2, 0.5, 0)
+      (-5.5, -1, 0)};
+    \node[pin={[pin edge={latex'-}, pin distance=10pt]135:{$U_\beta$}}] at
+      (-5.2, 0.5, 0) {};
+    \draw[->] (-4, 0, 0) -- (0, 1.3, 3) node[midway,above] {$\phi_\beta$};
+
+    \draw[->] (1, -0.5, 2) -- (1, -1.5, 2) node[midway,right] {$f$};
+    \node at (1, -2, 2) {$\mathbb{R}$};
+    \node at (0.5, -2, 2) {$I \subseteq$};
+    \draw[->] plot[smooth] coordinates {(0, -2, 2) (-0.5, -1, 2) (0, -0.5, 2)};
+    \node at (-1, -1, 2) {$\gamma$};
+  \end{tikzpicture}
+  \caption{Visual representation of smooth functions and curves on submanifolds}\label{fig:visual_representation_of_smooth_functions_and_curves_on_submanifolds}
+\end{figure*}
+
+% TODO: Add that "extremely important example" Example 4.26
+
+\begin{defn}[Smooth Curve on a Submanifold]\index{Smooth Curve}\label{defn:smooth_curve_on_a_submanifold}
+  Let $\gamma \in I \to M$, where $I \subseteq \mathbb{R}$ is open. We say that
+  $\gamma$ is a \hlnoteb{smooth curve} in $M$ if the composition
+  $\phi_\alpha^{-1} \circ \gamma : I \to \mathbb{R}^k$ is a
+  \hyperref[defn:smooth_curve]{smooth curve} \sidenote{Note that we are using
+  an earlier definition of a smooth curve on $\mathbb{R}^k$ to define a smooth
+  curve on submanifolds.} on $\mathbb{R}^k$ for any allowable local
+  parametrization $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ (cf.
+  \cref{fig:visual_representation_of_smooth_functions_and_curves_on_submanifolds}).
+\end{defn}
+
+\begin{propo}[Smooth Curves on a Submanifold is a Smooth Curve on $\mathbb{R}^n$]\label{propo:smooth_curves_on_a_submanifold_is_a_smooth_curve_on_r_n_}
+  Let $\gamma : I \to M$ be a smooth curve on $M$. Let $\iota : M \to
+  \mathbb{R}^n$ be the inclusion map. Then $\iota \circ \gamma : I \to
+  \mathbb{R}^n$ is a smooth curve on $\mathbb{R}^n$ whose image lies in the
+  subset $M \subseteq \mathbb{R}^n$.
+\end{propo}
+
+\begin{remark}
+  \cref{propo:smooth_curves_on_a_submanifold_is_a_smooth_curve_on_r_n_} tells us
+  that we can think of a smooth curve in $M$ as a smooth curve on $\mathbb{R}^n$
+  whose image lies in the subset $M \subseteq \mathbb{R}^n$.
+\end{remark}
+
+\begin{proof}
+  Let $t \in I$. Then we have
+  \begin{equation*}
+    (\iota \circ \gamma)(t) = \gamma(t) = \phi_\alpha ((\phi_\alpha^{-1} \circ \gamma)(t)),
+  \end{equation*}
+  since $\gamma(t) \in M \subseteq \mathbb{R}^n$. Therefore, as a map from $I
+  \to \mathbb{R}^n$, we have that
+  \begin{equation*}
+    \iota \circ \gamma = \phi_\alpha \circ ( \phi_\alpha^{-1} \circ \gamma ).
+  \end{equation*}
+  By our hypothesis, we have that both $\phi_\alpha : U_\alpha \subseteq \mathbb{R}^k
+  \to \mathbb{R}^n$ and $\phi_\alpha^{-1} \circ \gamma$ are both smooth, thus
+  $\iota \circ \gamma : I \to \mathbb{R}^n$ is a composition of smooth maps.
+\end{proof}
+
+\begin{remark}
+  It can be shown that the converse of
+  \cref{propo:smooth_curves_on_a_submanifold_is_a_smooth_curve_on_r_n_} holds,
+  i.e. if $\gamma : I \to \mathbb{R}^n$ is a smooth map such that $\gamma(t) \in
+  M$ for all $t \in I$, then as a map from $I$ to $M$, $\gamma$ is a smooth
+  curve in $M$ as in the sense of \cref{defn:smooth_curve_on_a_submanifold}.
+
+  However, the proof of this statement is currently beyond is and not within the
+  scope of this course.
+\end{remark}
+
+\begin{propo}[Composing a Smooth Function and a Smooth Curve]\label{propo:composing_a_smooth_function_and_a_smooth_curve}
+  Let $M$ be a submanifold of $\mathbb{R}^n$. Let $f : M \to \mathbb{R}$ be a
+  \hyperref[defn:smooth_functions_on_submanifolds]{smooth function} on $M$, and
+  let $\gamma : I \to M$ be a
+  \hyperref[defn:smooth_curve_on_a_submanifold]{smooth curve} on $M$. Then the
+  composition $f \circ \gamma : I \to \mathbb{R}^n$ is a smooth map in the usual
+  sense in multivariable calculus.
+\end{propo}
+
+\begin{proof}
+  For any $t \in I$, the point $p = \gamma(t) \in M$ lies in the image of some
+  local parametrization $\phi_\alpha$ of $M$. By
+  \cref{defn:smooth_curve_on_a_submanifold} and
+  \cref{defn:smooth_functions_on_submanifolds} on $M$, we know that both
+  \begin{equation*}
+    f \circ \phi_\alpha : U_\alpha \to \mathbb{R} \text{ and } \phi_\alpha^{-1}
+    \circ \gamma : I \to \mathbb{R}^k
+  \end{equation*}
+  are smooth. Then on some open neighbourhood of $t \in I$, we have
+  \begin{equation*}
+    f \circ \phi = (f \circ \phi_\alpha) \circ (\phi_\alpha^{-1} \circ \gamma),
+  \end{equation*}
+  which is a composition of smooth maps and is therefore smooth. It follows that
+  $f \circ \gamma : I \to \mathbb{R}$ is smooth on $I$.
+\end{proof}
+ 
+% section smooth_functions_and_curves_on_a_submanifold (end)
+
+\section{Tangent Vectors and Cotangent Vectors on a Submanifold}%
+\label{sec:tangent_vectors_and_cotangent_vectors_on_a_submanifold}
+% section tangent_vectors_and_cotangent_vectors_on_a_submanifold
+
+In a similar fashion to how we defined a tangent space on $\mathbb{R}^n$ (cf.
+\cref{sec:smooth_curves_in_r_n_and_tangent_vectors_continued}), in
+this section, we shall show an analogous construction of a tangent space on
+submanifolds.
+
+Let $\phi : U \to \mathbb{R}^n$ be a parametrization of $M$. From
+\cref{sec:smooth_curves_in_r_n_and_tangent_vectors_continued}, we would have the
+$k$-dimensional subspace $T_{\phi(u)} \mathbb{R}^n$ spanned by the $k$ vectors
+\begin{equation*}
+  \frac{\partial \phi}{\partial u^1} (u), \, \hdots, \, \frac{\partial
+  \phi}{\partial u^k} (u).
+\end{equation*}
+These vectors form the $k$ columns of the $n \times k$ matrix $(\D \phi)_u$,
+i.e. $T_{\phi(u)} \phi(U)$ is the image of $\mathbb{R}^n$ of the linear map $(\D
+\phi)_u)$. More precisely, $T_{\phi(u)} \phi(U)$ is the image in $T_{\phi(u)}
+\mathbb{R}^n$ of the linear map $(\dif{\phi})_u : T_u \mathbb{R}^k \to
+T_{\phi(u)} \mathbb{R}^n$.
+
+% section tangent_vectors_and_cotangent_vectors_on_a_submanifold (end)
+
+% chapter lecture_19th_mar_01st (end)
 
 \appendix
 
