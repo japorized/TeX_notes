@@ -2234,7 +2234,7 @@ equivalence class?
 
 \begin{defn}[Germ of Functions]\index{Germ of Functions}\label{defn:germ_of_functions}
   An equivalence class of $\sim_p$ is called a \hlnoteb{germ of functions} at $p$.
-  The set of all such equivalence classes is dentoed $C_p^{\infty}$, called the
+  The set of all such equivalence classes is denoted $C_p^{\infty}$, called the
   \hldefn{space of germs} at $p$.
 \end{defn}
 
@@ -4682,8 +4682,8 @@ submanifolds.
 
 % chapter lecture_18_feb_27th (end)
 
-\chapter{Lecture 19th Mar 01st}%
-\label{chp:lecture_19th_mar_01st}
+\chapter{Lecture 19 Mar 01st}%
+\label{chp:lecture_19_mar_01st}
 % chapter lecture_19th_mar_01st
 
 \section{Local Description of Submanifolds of \texorpdfstring{$\mathbb{R}^n$}{Rn} (Continued)}%
@@ -4957,7 +4957,264 @@ T_{\phi(u)} \mathbb{R}^n$.
 
 % section tangent_vectors_and_cotangent_vectors_on_a_submanifold (end)
 
-% chapter lecture_19th_mar_01st (end)
+% chapter lecture_19_mar_01st (end)
+
+\chapter{Lecture 20 Mar 04th}%
+\label{chp:lecture_20_mar_04th}
+% chapter lecture_20_mar_04th
+
+\section{Tangent Vectors and Cotangent Vectors on a Submanifold (Continued)}%
+\label{sec:tangent_vectors_and_cotangent_vectors_on_a_submanifold_continued}
+% section tangent_vectors_and_cotangent_vectors_on_a_submanifold_continued
+
+Recall that in \cref{defn:tangent_space_on_a_submanifold} we defined the
+\hlnoteb{tangent space} $T_p M$ of $M$ at $p$ to be the tangent space of the
+parametrized submanifold $\phi(U) \subseteq \mathbb{R}^n$ at $\phi(u)$ for any
+local parametrization $\phi : U \to \mathbb{R}^n$ of $M$ with $p = \phi(u)$.i
+
+For this notion to be well-defined, we need to show that $T_p M$ does not depend
+on the choice of the local parametrization.
+
+\begin{propo}[Well-Definedness of the Tangent Space of a Submanifold]\label{propo:well_definedness_of_the_tangent_space_of_a_submanifold}
+  Let $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ and $\phi_\beta : U_\beta \to
+  \mathbb{R}^n$ be two \hyperref[defn:local_parametrizations]{local
+  parametrizations} for $M$ with $p \in V_\alpha \cap V_\beta \cap M$. Then $p =
+  \phi_\alpha (u_\alpha) = \phi_\beta(u_\beta)$ for some unique $u_\alpha \in
+  U_\alpha$ and $u_\beta \in U_\beta$. Then we have
+  \begin{equation*}
+    T_{\phi_{\alpha} (u_\alpha) } \phi_\alpha (U_\alpha) = T_{\phi_\beta(u_\beta)}
+    \phi_\beta (U_\beta).
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  The first implication follows immediately from the choosing of the unique
+  $u_\alpha$ and $u_\alpha$ since $\phi_\alpha$ and $\phi_\beta$ are
+  homeomorphisms.
+
+  Now recall that the \hyperref[defn:transition_map]{transition map}
+  \begin{equation*}
+    \phi_{\beta \alpha} : \phi_{\alpha}^{-1} (V_\alpha \cap V_\beta \cap M) \to
+    \phi_{\beta}^{-1} (V_\alpha \cap V_\beta \cap M)
+  \end{equation*}
+  was defined to be $\phi_{\beta \alpha} = \phi_{\beta}^{-1} \circ
+  \phi_{\alpha}$, and we proved in
+  \cref{propo:transition_maps_are_diffeomorphisms} that $\phi_{\beta \alpha}$ is
+  a \hyperref[defn:diffeomorphism]{diffeomorphism}. It follows that
+  \begin{equation*}
+    \phi_{\beta} \circ \phi_{\beta \alpha} = \phi_{\alpha},
+  \end{equation*}
+  and so we obtain $\phi_\beta$ and $\phi_\alpha$, maps on the open subset
+  $\phi_{\alpha}^{-1} (V_\alpha \cap V_\beta \cap M) \subseteq \mathbb{R}^k$. By
+  the \hyperref[thm:the_chain_rule]{chain rule}, we have that
+  \begin{equation*}
+    (\dif{\phi_\alpha})_{u_\alpha} = (\dif{\phi_\beta})_{u_\beta}
+    (\dif{\phi_{\beta \alpha}})_{u_\alpha}.
+  \end{equation*}
+  Since $\phi_{\beta \alpha}$ is a diffeomorphism, it follows that the linear map
+  \begin{equation*}
+    (\dif{\phi_{\beta \alpha}})_{u_\alpha} : T_{u_\alpha} \mathbb{R}^k \to
+    T_{u_\beta} \mathbb{R}^k
+  \end{equation*}
+  is an isomorphism, and therefore $(\dif{\phi_{\alpha}})_{u_\alpha}$ and
+  $(\dif{\phi_\beta})_{u_\beta}$ have the same image in $\mathbb{R}^n$.
+\end{proof}
+
+\begin{note}
+  Note that the proof of
+  \cref{propo:well_definedness_of_the_tangent_space_of_a_submanifold} is almost
+  a restatement of
+  \cref{lemma:parametrized_submanifolds_are_not_determined_by_immersions}. We
+  see that, once again, the result says that the image of the induced linear map
+  $(\dif{\phi})_u$ of a parametrization is \hlnotec{independent of any
+  parametrization} such that $\phi(u) = p$.
+\end{note}
+
+\newthought{We now} consider characterizing elements of $T_p M$ as velocity
+vectors at $p$ of smooth curves of $M$ passing through $p$,
+\hyperref[sec:smooth_curves_in_r_n_and_tangent_vectors_continued]{just as we did
+for $\mathbb{R}^n$}.
+
+\begin{defn}[Velocity Vectors on a Submanifold]\index{Velocity Vectors}\label{defn:velocity_vectors_on_a_submanifold}
+  Let $\gamma : I \to M$ be a smooth curve on $M$ with $0 \in I$ and $\gamma(0)
+  = p$. Then $p$ lies in the image of at least one local parametrization $\phi :
+  U \to \mathbb{R}^n$ for $M$, with $\phi(u) = p$ for some $u \in U$. The
+  \hlnotea{velocity vector} of the smooth curve $\phi^{-1} \circ \gamma : I \to
+  \mathbb{R}^k$ on $\mathbb{R}^k$ at the point $u$ is a tangent vector
+  $(\phi^{-1} \circ \gamma)'(0) \in T_{u} \mathbb{R}^k$.
+  
+  We define the \hlnoteb{velocity vector} of $\gamma$ at $p$ to be the image of
+  $(\phi^{-1} \circ \gamma)'(0)$ under the linear map $(\dif{\phi})_u : T_{u}
+  \mathbb{R}^k \to T_{p} \mathbb{R}^n$. We denote the velocity vector of
+  $\gamma$ at $p$ by $\gamma'(0) \in T_{\gamma(0)} M$, and the velocity vector
+  at $p$ of a smooth curve on $M$ passing through $p$ is a tangent vector at $p$
+  to $M$.
+\end{defn}
+
+\begin{marginfigure}
+  \centering
+  \begin{tikzpicture}
+    \draw[->] (-2, 0, 0) -- (2, 0, 0);
+    \draw[->] (0, -0.5, 0) -- (0, 3, 0);
+    \draw[->] (0, 0, -2) -- (0, 0, 3);
+    \draw[draw=none,fill=blue,fill opacity=0.5] plot [smooth] coordinates
+      {(1, 0, 0) (0.5, 0.3, 0) (0, 1.8, 0) (-0.5, 2, 0) (-0.5, 2, 2) (0, 1.8,
+        2) (0.5, 0.3, 2) (1, 0, 2) (1, 0, 0)};
+    \node[pin={[pin edge={latex'-}, pin distance=10pt]180:{$M$}}] at (-0.5, 2,
+      2) {};
+    \draw[draw=none,fill=red,fill opacity=0.3] plot [smooth] coordinates
+      {(-1, 2, 1) (-0.5, 2, 1) (0, 1.8, 1) (0.5, 0.3, 1) (0.5, 0.3, -0.5) (0,
+      1.8, -1) (-0.5, 2, -1) (-1, 1.8, -1) (-1, 2, 1) };
+    \node[pin={[pin edge={latex'-}, pin distance=10pt]180:{$\phi(U)$}}] at (-1,
+      2, 1) {};
+    \coordinate (p) at (-0.5, 1.8, 0);
+    \node[draw,circle,fill,inner sep=1pt,label={225:{$p$}}]
+      at (p) {};
+    \draw[-latex'] (p) -- ($ (p) + (-0.5, 0.5, 0) $);
+    
+    \draw[->] (-1.5, 4, -1) -- (1.5, 4, -1);
+    \draw[->] (0, 2.5, -1) -- (0, 5.5, -1);
+    \draw[draw=none,fill=red,fill opacity=0.3] plot[smooth] coordinates
+      {(0, 3, -1) (1, 4, -1) (0, 5, -1) (-1, 4, -1) (0, 3, -1)};
+    \node[pin={[pin edge={latex'-}, pin distance=10pt]45:{$U$}}] at (1,
+      4, -1) {};
+    \coordinate (u) at (-0.5, 4.5, -1);
+    \node[draw,circle,fill,inner sep=1pt,label={45:{$u$}}]
+      at (u) {};
+    \draw[-latex'] (u) -- ($ (u) + (-0.5, 0.5, 0) $);
+
+    \draw[->] ($ (u) - (0, 0.2, 0) $) -- ($ (p) + (0, 0.2, 0) $)
+      node[midway,left] {$\phi$};
+
+    \draw (2, 1, 0) -- (2, 3, 0) node[midway,right=5pt] {$I \subset \mathbb{R}$};
+    \coordinate (0) at (2, 2, 0);
+    \node[draw,circle,fill,inner sep=1pt,label={105:{$0$}}]
+      at (0) {};
+    \draw[->] ($ (0) - (0.2, 0, 0) $) -- ($ (p) + (0.2, 0, 0) $)
+      node[midway,above] {$\gamma$};
+  \end{tikzpicture}
+  \caption{Borrowing the velocity vector}\label{fig:borrowing_the_velocity_vector}
+\end{marginfigure}
+\begin{note}
+  The argument in the proof of
+  \cref{propo:well_definedness_of_the_tangent_space_of_a_submanifold} tells us
+  that this definition is well-defined, i.e. the velocity vector on a point $p$
+  is the same regardless of the choice of parametrization.
+\end{note}
+
+\begin{remark}
+  To explain the definition in a more intuitive manner, notice that the way we
+  defined a velocity vector at $p$ in $M$ is by looking at the velocity vector
+  of $p$ when it was still $u$ in $U$.
+\end{remark}
+
+The have the following fact that makes our definition even better.
+
+\begin{propo}[All Velocity Vectors on a Submanifold are Determined by \cref{defn:velocity_vectors_on_a_submanifold}]\label{propo:all_velocity_vectors_on_a_submanifold_are_determined_by_defn}
+  Let $v_p \in T_p M$. Then there exists a (non-unique) smooth curve $\gamma : I
+  \to M$ on $M$ with $0 \in I$ and $\gamma(0) = p$ such that $\gamma'(0) = v_p$.
+  That is, any $v_p \in T_p M$ can be realized as the velocity at $p$ of a sooth
+  curve on $M$ passing through $p$.
+\end{propo}
+
+\begin{proof}
+  Let $\phi: U \to \mathbb{R}^n$ be any local parametrization of $M$ whose image
+  contains $p$. Then $u = \phi^{-1}(p) \in U \subseteq \mathbb{R}^k$. Then
+  $(\dif{\phi})_u : T_u \mathbb{R}^k \to T_p \mathbb{R}^n$ is a linear
+  injection, whose image is precisely $T_p M$. Let $v_p \in T_p M$. Then
+  $\exists! w_u \in T_u \mathbb{R}^k$ such that $(\dif{\phi})_u (W_u) = v_p$.
+
+  Now let $\sigma$ be a smooth curve on $\mathbb{R}^k$ with $\sigma(0) = u$ and
+  $\sigma'(0) = w_u$. Notice that we have $\sigma = \phi^{-1} \circ ( \phi \circ
+  \sigma)$. Since $\sigma$ and $\phi$ are smooth, it follows that $\gamma = \phi
+  \circ \sigma$ is a smooth curve on $M$, with $\gamma(0) = \phi(u) = p$ and
+  $\gamma^{-1} = (\dif{\phi})_u (\sigma'(0)) = (\dif{\phi})_u (w_u) = v_p$.
+\end{proof}
+
+\begin{note}
+  Recall that a smooth curve $\gamma$ on $M \subseteq \mathbb{R}^n$ can be
+  thought of as a smooth curve on $\mathbb{R}^n$ whose image lies in $M$. Since
+  $T_p M$ is a subspace of $T_p \mathbb{R}^n$,
+  \cref{propo:all_velocity_vectors_on_a_submanifold_are_determined_by_defn}
+  tells us that $\gamma'(0) \in T_p M$, as a curve on $M$, precisely coincides
+  with the velocity of $\gamma$ in $T_p \mathbb{R}^n$ when we think of $\gamma$
+  as a smooth curve on $\mathbb{R}^n$.
+\end{note}
+
+Let's examine the consequences of the above observation. Let $\phi : U \to
+\mathbb{R}^n$ be a local parametrization of $M$. If we fix all the components in
+$u \in U$ except the $j$\textsuperscript{th} component, we get exactly a smooth
+curve on $M$, which we called the
+\hyperref[defn:_j_th_coordinate_curve]{$j$\textsuperscript{th} coordinate
+curve} of $\phi$. Once again, we can think of this as a smooth curve on
+$\mathbb{R}^n$ whose image lies in $M$.
+
+Let $p = \phi(u)$, where $u = (u^1, \ldots, u^k) \in U \subseteq \mathbb{R}^k$.
+Then $\frac{\partial \phi}{\partial u^j} (u)$ is a tangent vector to $M$ at $p$.
+Let $\sigma : I \to \mathbb{R}^k$ be a smooth curve on $\mathbb{R}^k$ such that
+$\sigma(t) \in U$ for all $t \in I$, and $\sigma(0) = u$. Then as discussed
+above, $\phi \circ \sigma$ is a smooth curve on $M$, which can be thought of as
+a smooth curve on $\mathbb{R}^n$ whose image lies in $M$, with $(\phi \circ
+\sigma)(u) = p$. By the \hyperref[thm:the_chain_rule]{chain rule}, we have
+\begin{equation*}
+  \gamma'(0) = \frac{\partial \phi}{\partial u^j} (\sigma(0))
+  \frac{\dif{u^j}}{\dif{t}}(0) = c^j = \frac{\partial \phi}{\partial u^j} (u)
+\end{equation*}
+for some scalars $c^j$. We see that $T_p M$ is spanned by the $k$ elements of
+the set
+\begin{equation*}
+  A = \left\{ \frac{\partial \phi}{\partial u^j}(u) : j = 1, \ldots, k \right\},
+\end{equation*}
+which is the set of velocity vectors at $p$ of the coordinate curves on $M$ as
+determined by the local parametrization $\phi$. Since $T_p M$ is 
+$k$-dimensional, $A$ is necessarily a basis for $T_p M$.
+
+We see that for each choice of a local parametrization $\phi$ of $M$ whose image
+contains $p$ determines a particular basis of $T_p M$. Thus we see that there is
+no canonical choice for a local parametrization.
+
+\newthought{Now} let us consider tangent vectors as derivations. The set of
+real-valued functions on $M$ is both a vector space and an \hldefn{algebra} with
+respect to multiplication of real-valued functions, i.e. $(fg)(p) = f(p)g(p)$
+\sidenote{
+\begin{ex}
+  Verify that linear combinations of products of smooth real-valued functions on
+  $M$ are still smooth.
+\end{ex}
+}. We denote this space as $C^\infty (M)$.
+
+As \hyperref[defn:germ_of_functions]{before}, let us denote the set of
+\hldefn{germs} of smooth functions at $p$ as $C_p\infty(M)$, where $f \sim_p g$
+if and only if $\exists V \subseteq \mathbb{R}^n$ open that contains $p$, such
+that
+\begin{equation*}
+  f \restriction_{V \cap M} = g \restriction_{V \cap M}.
+\end{equation*}
+Just as when we were in $\mathbb{R}^n$, $C_p^\infty(M)$ is an algebra over
+$\mathbb{R}$ \sidenote{Note again that this means that $C_p^\infty(M)$ is a real
+vector space with multiplication.}.
+
+\begin{defn}[Derivation on Submanifolds]\index{Derivation}\label{defn:derivation_on_submanifolds}
+  Let $M$ be a submanifold of $\mathbb{R}^n$ and let $p \in M$. A
+  \hlnoteb{derivation} at $p$ is a linear map $\mathcal{D} : C_p^\infty(M) \to
+  \mathbb{R}$ with the property that
+  \begin{equation*}
+    \mathcal{D}([f]_p [g]_p) = f(p) \mathcal{D}[g]_p + g(p) \mathcal{D}[f]_p.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  \cref{defn:derivation_on_submanifolds} is formally the same as
+  \cref{defn:derivation}.
+\end{note}
+
+\begin{ex}
+  Check that the space of derivations at $p$ is indeed a real vector space.
+\end{ex}
+
+% section tangent_vectors_and_cotangent_vectors_on_a_submanifold_continued (end)
+
+% chapter lecture_20_mar_04th (end)
 
 \appendix
 

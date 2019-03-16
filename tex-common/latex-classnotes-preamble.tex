@@ -35,6 +35,7 @@
 \usepackage{marvosym}
 \usepackage{pgf,tikz}
 \usepackage{tikz-cd}
+\usepackage{ifthen}
 \usepackage{pgfplots}
 \usepackage{fancyhdr}
 \usepackage{array}
@@ -52,7 +53,12 @@
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
 
-\usepackage{colorscheme-generated}
+\newcommand{\personalcolor}{false}
+\ifthenelse{\equal{\personalcolor}{true}}{
+  \usepackage{colorscheme-chaos}
+}{
+  \usepackage{colorscheme-student}
+}
 
 % hyperref Package Settings
 \hypersetup{
@@ -340,15 +346,15 @@
 % chapter format
 \titleformat{\chapter}%
   {\huge\rmfamily\itshape\color{magenta}}% format applied to label+text
-  {\llap{\colorbox{magenta}{\parbox{1.5cm}{\hfill\itshape\huge\textcolor{black}{\thechapter}}}}}% label
+  {\llap{\colorbox{magenta}{\parbox[c][1cm]{3cm}{\hfill\itshape\Huge\textcolor{background}{\thechapter}}}}}% label
   {5pt}% horizontal separation between label and title body
-  {}% before the title body
+  {\faLeaf}% before the title body
   []% after the title body
 
 % section format
 \titleformat{\section}%
   {\normalfont\Large\rmfamily\itshape\color{blue}}% format applied to label+text
-  {\llap{\colorbox{blue}{\parbox{1.5cm}{\hfill\itshape\textcolor{black}{\thesection}}}}}% label
+  {\llap{\colorbox{blue}{\parbox{3cm}{\hfill\itshape\textcolor{background}{\thesection}}}}}% label
   {5pt}% horizontal separation between label and title body
   {}% before the title body
   []% after the title body
@@ -356,7 +362,7 @@
 % subsection format
 \titleformat{\subsection}%
   {\normalfont\large\itshape\color{green}}% format applied to label+text
-  {\llap{\colorbox{green}{\parbox{1.5cm}{\hfill\textcolor{black}{\thesubsection}}}}}% label
+  {\llap{\colorbox{green}{\parbox{3cm}{\hfill\textcolor{background}{\thesubsection}}}}}% label
   {1em}% horizontal separation between label and title body
   {}% before the title body
   []% after the title body
@@ -365,7 +371,7 @@
 \titleclass{\subsubsection}{straight}
 \titleformat{\subsubsection}%
   {\normalfont\large\itshape\color{yellow}}% format applied to label+text
-  {\llap{\colorbox{yellow}{\parbox{1.5cm}{\hfill\textcolor{black}{\thesubsubsection}}}}}% label
+  {\llap{\colorbox{yellow}{\parbox{3cm}{\hfill\textcolor{background}{\thesubsubsection}}}}}% label
   {1em}% horizontal separation between label and title body
   {}% before the title body
   []% after the title body
