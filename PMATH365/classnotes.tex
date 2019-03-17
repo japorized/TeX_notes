@@ -5216,6 +5216,241 @@ vector space with multiplication.}.
 
 % chapter lecture_20_mar_04th (end)
 
+\chapter{Lecture 21 Mar 06th}%
+\label{chp:lecture_21_mar_06th}
+% chapter lecture_21_mar_06th
+
+\section{Tangent Vectors and Cotangent Vectors on a Submanifold (Continued 2)}%
+\label{sec:tangent_vectors_and_cotangent_vectors_on_a_submanifold_continued_2}
+% section tangent_vectors_and_cotangent_vectors_on_a_submanifold_continued_2
+
+The space of germs of smooth functions on $M$ at $p$ only depends on the
+intersection of $M$ with an arbitrary open neighbourhood of $p$ in
+$\mathbb{R}^n$.
+
+\begin{ex}
+  Let $M$ be a submanifold of $\mathbb{R}^n$ and $p \in M$. Let $V$ be an open
+  subset of $\mathbb{R}^n$ containing $p$. We know that the subset $V \cap M$ is
+  a submanifold of $\mathbb{R}^n$ containing $p$. Show that
+  \begin{equation*}
+    C_p^\infty(M) = C_p^\infty(V \cap M).
+  \end{equation*}
+\end{ex}
+
+\begin{lemma}[Correspondence of Smooth Maps between a Submanifold and Its Parametrization]\label{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parametrization}
+  Let $M$ be a submanifold of $\mathbb{R}^n$, and $\phi : U \to M$ a local
+  parametrization of $M$. Then $\phi(U) = V \cap M$ for some open set $V$ in
+  $\mathbb{R}^n$ containing $p$. Consider the map
+  \begin{equation*}
+    \iota : C_p^\infty(V \cap M) \to C_p^\infty(U) \text{ given by } f \mapsto f
+    \circ \phi.
+  \end{equation*}
+  This map is a linear isomorphism of vector spaces and a homomorphism of
+  algebras.
+\end{lemma}
+
+\begin{figure*}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[color=blue] plot[smooth] coordinates
+      {(0, 2) (-1, 0) (0, -1) (0.5, -1.5) (1, -2) (1.5, 0) (0.4, 1.9) (0, 2)};
+    \node at (1, -2.5) {$M$};
+    \draw[color=red] plot[smooth] coordinates
+      {(0, 1) (-0.5, 0) (0, -0.5) (0.5, 0) (0, 1)};
+    \node at (0.4, -0.7) {$V$};
+    \node[draw,circle,fill,inner sep=1pt,label={15:{$\phi(u)$}}]
+      at (0, 0) {};
+    \draw[color=red] plot[smooth] coordinates
+      {(-4, -0.2) (-3, -1) (-2, 0.5) (-3, 1) (-4, 0.2) (-4, -0.2)};
+    \node at (-3, -1.5) {$U$};
+    \node[draw,circle,fill,inner sep=1pt,label={195:{$u$}}]
+      at (-3, 0) {};
+    \draw[-latex'] (-2, 0.5) to[bend left]
+      node[midway,below=3pt] {$\phi$} (-0.5, 0);
+    \draw[-latex'] (1, 0) to[bend left]
+      node[midway,below,right=3pt] {$f$} (2, 1);
+    \draw[-latex'] (-2, 0.5) to[bend left]
+      node[midway,above] {$f \circ \phi$} (2, 1);
+    \node at (2.2, 1) {$\mathbb{R}$};
+  \end{tikzpicture}
+  \caption{Visualization of
+  \cref{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parametrization}}
+  \label{fig:visualization_of_correspondence_of_smooth_maps_between_a_submanifold_and_its_parametrization}
+\end{figure*}
+
+\begin{proof}
+  \hlbnoted{Linearity} Let $f, g \in C^\infty(V \cap M)$ and $t,
+  s \in \mathbb{R}$. Then
+  \begin{equation*}
+    (tf + sg) \circ \phi = t(f \circ \phi) + s(g \circ \phi)
+  \end{equation*}
+  and so the map is linear.
+
+  \noindent
+  \hlbnoted{Homomorphism of algebras} Furthermore, we also have
+  \begin{equation*}
+    (fg) \circ \phi = (f \circ \phi)(g \circ \phi),
+  \end{equation*}
+  and so we have that our map is a homomorphism of algebras.
+
+  \noindent
+  \hlbnoted{Isomorphism of Vector Spaces} Let $f \in C\infty(V \cap M)$
+  be such that $f \circ \phi : U \to \mathbb{R}$ is the zero function. Since
+  $\phi : U \to V \cap M$ is a bijection, it follows that
+  \begin{equation*}
+    f = (f \circ \phi) \circ \phi^{-1}
+  \end{equation*}
+  is a zero function, thus showing that $\iota$ is injective.
+
+  Now suppose $h \in C^{\infty}(U)$. Then
+  \begin{equation*}
+    h = (h \circ \phi^{-1}) \circ \phi,
+  \end{equation*}
+  and by definition $h \circ \phi^{-1} : V \cap M \to \mathbb{R}$ is smooth
+  since $h$ is smooth on $U$. It follows that $\iota$ is injective as well.
+\end{proof}
+
+\begin{crly}[Isomorphism Between Algebra of Germs]\label{crly:isomorphism_between_algebra_of_germs}
+  Consider the assumptions in
+  \cref{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parametrization}.
+  Let $p \in V \cap M$ with $p = \phi(u)$ for $u \in U$. Then the linear
+  isomorphism $C^\infty (V \cap M) \to C^\infty (U)$ given by $f \mapsto f \circ
+  \phi$ induces an isomorphism between the algebra of germs $C_p^\infty(M)$ at
+  $p \in M$ and the algebra of terms $C_u^\infty(\mathbb{R}^k)$ at $u \in
+  \mathbb{R}^k$, given by
+  \begin{equation*}
+    [f]_p \mapsto [f \circ \phi]_u.
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  Let $f_1 \sim_u f_2$. Then $\exists W \subseteq \mathbb{R}^n$ such that $p \in
+  W$ such that
+  \begin{equation*}
+    f_1 \restriction_{W \cap M} = f_2 \restriction_{W \cap M}.
+  \end{equation*}
+  Let $\tilde{U} = \phi^{-1}(W \cap V) \subseteq U$. Since $\phi$ is continuous
+  and $W \cap V$ is open, we have that $\tilde{U}$ is open. Since
+  $\phi(\tilde{U}) \subseteq W$, we have
+  \begin{equation*}
+    (f_1 \circ \phi) \restriction_{\tilde{U}} = (f_2 \circ \phi)_{\tilde{U}}.
+  \end{equation*}
+  It follows that $[ f_1 \circ \phi ]_u = [ f_2 \circ \phi ]_u$ if $[ f_1 ]_p =
+  [ f_2 ]_p$. Thus, the map $[f]_p \mapsto [f \circ \phi]_u$ is well-defined.
+
+  It remains to show that the map is bijective. Let $[h]_u \in
+  C_u^\infty(\mathbb{R}^k)$. Then $h$ is a smooth function defined on some open
+  neighbourhood $\tilde{U} \subseteq U$ of $u$. Then by restricting $\phi$ to
+  $\tilde{U}$, following the proof of
+  \cref{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parametrization},
+  we have that $h = (h \circ \phi^{-1}) \circ \phi$. Thus $[h]_u \in
+  C_u^\infty(\mathbb{R}^k)$ is the image of $[ h \circ \phi^{-1} ]_p \in
+  C_p^\infty(M)$. Thus our map is surjective.
+
+  Now if $[ f \circ \phi ]_u = 0$, then $f \circ \phi$ is identically zero on
+  some open neighbourhood $\tilde{U} \subseteq U$ of $u$. Since $\phi$ is a
+  bijection from $\tilde{U}$ onto its image, $f$ must be identically zero on
+  some open neighbourhood $\phi(\tilde{U})$ of $p$. It follows that our map is
+  an isomorphism, as required.
+\end{proof}
+
+\begin{note}
+  We see that a local parametrization $\phi : U \to V \cap M$ allows us to
+  identify germs of smooth functions on $M$ at $p$ with germs of smooth
+  functions on $U$ at $u = \phi^{-1}(p)$.
+\end{note}
+
+\newthought{We shall now} investigate how is the tangent space $T_p M$ of $M$ at
+$p$ precisely the space of derivations at $p$. Let $M$ be a submanifold of
+$\mathbb{R}^n$ and let $p \in M$.
+
+Let $\phi$ be a local parametrization of $M$ whose image contains $p = \phi(u)$.
+Again, we have $\phi(U) = V \cap M$ for some open $V \subseteq \mathbb{R}^n$,
+and $V \cap M$ is a submanifold of $\mathbb{R}^n$, containing $p$. Let
+\begin{equation*}
+  L_{\phi} : C_p^\infty(M) \to C_u^\infty(\mathbb{R}^k)
+\end{equation*}
+be the isomorphism of algebras from
+\cref{crly:isomorphism_between_algebra_of_germs}, given by
+\begin{equation*}
+  L_{\phi}([f]_p) = [ f \circ \phi ]_u.
+\end{equation*}
+Now let $\mathcal{D} : C_p^\infty (M) \to \mathbb{R}$ be a derivation. Then
+$\mathcal{D} \circ L_\phi^{-1} : C_u^\infty(\mathbb{R}^k) \to \mathbb{R}$ is
+linear. Furthermore, since $\mathcal{D}$ is a derivation and $L_\phi^{-1}$ is a
+homomorphism of algebras, we have
+\begin{align*}
+  \mathcal{D} \circ L_{\phi}^{-1} ([h_1]_u [h_2]_u)
+  &= \mathcal{D}(L_{\phi}^{-1}([h_1]_u[h_2]_u)) \\
+  &= \mathcal{D}([h_1 \circ \phi^{-1}]_p [h_2 \circ \phi^{-1}]_p) \\
+  &= (h_1 \circ \phi^{-1})(p) \mathcal{D}[h_2 \circ \phi^{-1}]_p \\
+  &\qquad + (h_2 \circ \phi^{-1})(p) \mathcal{D}[h_1 \circ \phi^{-1}]_p \\
+  &= h_1(u) (\mathcal{D} \circ L_{\phi}^{-1})[h_2]_u
+    + h_2(u) (\mathcal{D} \circ L_{\phi}^{-1})[h_1]_u.
+\end{align*}
+
+Thus we see that $\mathcal{D} \circ L_\phi^{-1}$ is a derivation at $u$.
+By \cref{thm:derivations_are_tangent_vectors}, we know that $\mathcal{D} \circ
+L_\phi^{-1}$ is a tangent vector at $u$ in $\mathbb{R}^k$, i.e. $\mathcal{D}
+\circ L_{\phi}^{-1}$ is a directional derivative in some direction $w_u \in T_u
+\mathbb{R}^k$.
+
+This means that if we let $[f]_p \in C_p^\infty(M)$, then $\exists \tilde{V}
+\subseteq V$ of $p$ in $\mathbb{R}^n$ such that $f : \tilde{V} \cap M \to
+\mathbb{R}$ is a smooth function on $\tilde{V} \cap M$. Thus we have
+\begin{align*}
+  \mathcal{D}[f]_p
+  &= \mathcal{D}[(f \circ \phi) \circ \phi^{-1}]_p \\
+  &= \mathcal{D}L_{\phi}^{-1}[f \circ \phi]_u \\
+  &= w_u (f \circ \phi) \\
+  &= \lim_{t \to 0} \frac{(f \circ \phi)(u + tw) - (f \circ \phi)(u)}{t} \\
+  &= \lim_{t \to 0} \frac{f(\phi(u + tw)) - f(p)}{t}.
+\end{align*}
+
+Consider $\gamma(t) = \phi( u + tw )$, which is, by construction, a smooth curve
+on $M$ with $\gamma(0) = p$ and $\gamma'(0) = (\dif{\phi})_u(w_u)$. Note that
+this is a \hyperref[defn:velocity_vectors_on_a_submanifold]{velocity vector}
+$v_p$ in $M$ at $p$. Thus it makes sense to consider the expression
+$\mathcal{D}[f]_p$ above as the \hldefn{directional derivative} in the $v_p =
+(\dif{\phi})_u w_u \in T_p M$ direction of the smooth function $f$ on $M$ at the
+point $p$.
+
+This motivates us to define, $\forall v_p \in T_p M$, and any $[f]_p \in
+C_p^\infty(M)$,
+\begin{align*}
+  v_p(f) &= \lim_{t \to 0} \frac{f(\phi(u + tw)) - f(p)}{t} \\
+         &= w_u (f \circ \phi) = ((\dif{\phi})_u^{-1}(v_p))(f \circ \phi).
+\end{align*}
+
+We have therefore proven the following theorem:
+
+\begin{thm}[Derivations are Tangent Vectors Even on Submanifolds]\label{thm:derivations_are_tangent_vectors_even_on_submanifolds}
+  Let $M$ be a submanifold of $\mathbb{R}^n$ and $p \in M$. Any tangent vector
+  $v_p \in T_p M$ gives a derivation $v_p : C_p\infty(M) \to \mathbb{R}$,
+  defined by
+  \begin{equation*}
+    v_p(f) = ((\dif{\phi})_u^{-1} (v_p)) (f \circ \phi)
+  \end{equation*}
+  for any local parametrization $\phi : U \to \mathbb{R}^n$ of $M$ such that
+  $\phi(u) = p$. Moreover, any derivation $\mathcal{D} : C_p^\infty(M) \to
+  \mathbb{R}$ is of this form for a unique $v_p \in T_p M$.
+\end{thm}
+
+\begin{ex}
+  Show that $f \mapsto ((\dif{\phi})_u^{-1} (v_p))(f \circ \phi)$ is a
+  derivation. Moreover, show that the map is independent of the local
+  parametrization $\phi$, i.e. if $\exists \tilde{\phi}$ another local
+  parametrization of $M$ with $\tilde{\phi}(\tilde{u}) = p$, then show that
+  \begin{equation*}
+    ((\dif{\phi})_u^{-1} (v_p)) (f \circ \phi)
+    = ((\dif{\tilde{\phi}})_u^{-1} (v_p))(f \circ \tilde{\phi}).
+  \end{equation*}
+\end{ex}
+
+% section tangent_vectors_and_cotangent_vectors_on_a_submanifold_continued_2 (end)
+
+% chapter lecture_21_mar_06th (end)
+
 \appendix
 
 \chapter{Additional Topics / Review}%
