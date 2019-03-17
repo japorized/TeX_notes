@@ -226,3 +226,6 @@ TSWLatexianTemp*
 _site
 .sass-cache
 .jekyll-metadata
+
+# my ignores
+tex-common/colorscheme-generated.sty
