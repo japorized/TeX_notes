@@ -1,5 +1,5 @@
 % !TEX TS-program = pdflatex
-\documentclass{tufte-handout}
+\documentclass[nobib]{tufte-handout}
 \renewcommand{\baselinestretch}{1.1}
 
 \include{latex-assignments-preamble}
@@ -24,7 +24,7 @@
 	\item Question
 
 	  \begin{solution}
-      Solution
+
 	  \end{solution}
 \end{enumerate}
 
