@@ -36,6 +36,7 @@
 \makeatother
 \DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\Fix}{Fix}
 \DeclareMathOperator{\stab}{stab}
 \DeclareMathOperator{\orb}{orb}
 \DeclareMathOperator{\ch}{ch}
@@ -1157,6 +1158,68 @@ More generally so...
 \end{eg}
 
 % TODO : add summary for proving that a polynomial is irreducible
+
+\subsection{Summary for Proving Irreducibility}%
+\label{sub:summary_for_proving_irreducibility}
+% subsection summary_for_proving_irreducibility
+
+This subsection is dedicated to summarize the ways that are available to us to
+finding out if a given polynomial is reducible or irreducible. This includes
+common heuristics and/or techniques.
+
+\paragraph{Showing reducibility}
+
+Let $f(x) \in F[x]$. $f(x)$ is reducible if
+\begin{itemize}
+  \item \textbf{$f(x)$ has a root $\alpha$ in $F[x]$}, because that means $x -
+    \alpha \in F[x]$, and thus $x - \alpha \mid f(x)$.
+  \item $f(x) = g(x) h(x)$ for some non-constant $g(x), h(x) \in F[x]$, which is
+    just by \hyperref[defn:irreducible]{definition}.
+\end{itemize}
+
+\paragraph{Showing irreducibility}
+
+Let $f(x) \in F[x]$. Note that it is possible to mix and match these tools to
+achieve our goal. Our trusty tools include:
+\begin{itemize}
+  \item \textbf{\hyperref[propo:eisenstein_s_criterion]{Eisenstein}}: find a
+    prime or irreducible polynomial (prime ideals) such that
+    \begin{itemize}
+      \item \hlimpo{each of the coefficients, except for the leading
+        coefficient, is divisible by the prime (or irreducible)}, and
+      \item \hlimpo{the square of the last coefficient is not divisible by the
+        prime (or irreducible)}.
+    \end{itemize}
+
+  \item If $\deg f \in \{ 2, 3 \}$, then by
+    \cref{propo:irreducible_rootless_polynomials}, we simply need to check that
+    the polynomial does not have roots. This sounds crazy in an infinite field,
+    but we can combine this with...
+
+  \item \textbf{\hyperref[propo:mod_p_irreducibility_test]{Mod-$p$
+    irreducibility}}: find the equivalent $\tilde{f}(x) \in \mathbb{Z}_p[x]$:
+    that is, let $\tilde{f}(x) \in \mathbb{Z}_p[x]$ be such that we replace each
+    of the coefficients of $f$ are replaced with their counterparts in
+    $\mathbb{Z}_p$. Then use the other methods here to check for irreducibility.
+\end{itemize}
+
+Some somewhat helpful heuristics that can reduce our work and/or make a problem
+much easier include:
+\begin{itemize}
+  \item If our polynomial is of the form
+    \begin{equation*}
+      f(x) = x^{2n} + a_{2n-2}x^{2n-2} + \hdots + a_{2}x^2 + a_0,
+    \end{equation*}
+    then we can let $y = x^2$ and consider the polynomial
+    \begin{equation*}
+      g(y) = y^n + a_{2n-2}y^{n-1} + \hdots + a_2y + a_0.
+    \end{equation*}
+    Note that if $g(y)$ is reducible, then so is $f(x)$. Conversely, if we want
+    $f(x)$ to be irreducible, it had better be the case that $g(y)$ is
+    irreducible.
+\end{itemize}
+
+% subsection summary_for_proving_irreducibility (end)
 
 % section irreducibles_continued_2 (end)
 
@@ -3235,7 +3298,7 @@ going from $K \to K$ are exactly the elements of the Galois group $\Gal(K / F)$.
   contradicting our assumption.
 \end{proof}
 
-\begin{thm}[Galois Group of a Splitting Field of a Separable Polynomial has Order the Degree of the Extension]\label{thm:galois_group_of_a_splitting_field_of_a_separable_polynomial_has_Order_the_degree_of_the_extension}
+\begin{thm}[Galois Group of a Splitting Field of a Separable Polynomial has Order the Degree of the Extension]\label{thm:galois_group_of_a_splitting_field_of_a_separable_polynomial_has_order_the_degree_of_the_extension}
   Let $f(x) \in F[x]$ be non-constant and separable. Let $K$ be the splitting
   field of $f(x)$ over $F$. Then
   \begin{equation*}
@@ -3641,6 +3704,230 @@ We have the following theorem that characterizes normality.
 % section galois_extensions (end)
 
 % chapter lecture_22_mar_06th (end)
+
+\chapter{Lecture 23 Mar 08th}%
+\label{chp:lecture_23_mar_08th}
+% chapter lecture_23_mar_08th
+
+\section{Galois Extensions (Continued)}%
+\label{sec:galois_extensions_continued}
+% section galois_extensions_continued
+
+\begin{defn}[Fixed Field]\index{Fixed Field}\label{defn:fixed_field}
+  Let $K$ be a field. If $G \leq \Aut(K)$, the \hlnoteb{fixed field} of $G$ is
+  defined as
+  \begin{equation*}
+    \Fix(G) := \left\{ a \in K \mmid \phi(a) = a, \, \phi \in G \right\}.
+  \end{equation*}
+\end{defn}
+
+\begin{ex}
+  Check that $\Fix(G) \leq K$ is indeed a field.
+\end{ex}
+
+\begin{remark}
+  The following is noteworthy:
+  \begin{equation*}
+    \Fix(\Gal(K / F)) \supseteq F.
+  \end{equation*}
+  This follows immediately from the \hyperref[defn:galois_group]{definition of a
+  Galois group}.
+\end{remark}
+
+\begin{eg}
+  Consider
+  \begin{equation*}
+    f(x) = (x - \sqrt{2})^2 (x + \sqrt{2})^2 = x^4 - 4^2 + 4.
+  \end{equation*}
+  Then there are $\phi \neq \epsilon \in G = \Gal(f(x))$ such that
+  $\phi(\sqrt{2}) = \sqrt{2}$ (and $\phi(-\sqrt{2}) = \sqrt{2}$). In this case,
+  \begin{equation*}
+    \Fix(G) \supsetneq F.
+  \end{equation*}
+\end{eg}
+
+\begin{thm}[Characterization of Galois Extensions]\index{Characterization of Galois Extensions}\label{thm:characterization_of_galois_extensions}
+  Suppose $[ K : F ] < \infty$. TFAE:
+  \begin{enumerate}
+    \item $K$ is the splitting field of a non-constant separable $f(x) \in F[x]$
+      over $F$.
+    \item $\abs{\Gal(K / F)} = [ K : F ]$.
+    \item $\Fix(\Gal(K / F)) = F$.
+    \item $K / F$ is Galois.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{$(1) \implies (2)$} See
+  \cref{thm:galois_group_of_a_splitting_field_of_a_separable_polynomial_has_order_the_degree_of_the_extension}.
+
+  \noindent
+  \hlbnoted{$(2) \implies (3)$} Suppose $\abs{ \Gal(K / F) } = [ K : F ]$. By
+  our earlier remark, we have that $\Fix(\Gal(K / F)) \supseteq F$. So it
+  suffices to show that $\Fix(\Gal(K / F)) \subseteq F$.
+
+  Let $E = \Fix(\Gal(K / F))$. Then we have a tower $K / E / F$. By the
+  \hyperref[thm:tower_theorem]{Tower Theorem},
+  \begin{equation*}
+    [K : F] = [K : E][E : F].
+  \end{equation*}
+  It suffices to show that $[ E : F ] = 1$.
+  
+  Now, note that we have $\Gal(K / E) \leq \Gal(K / F)$ \sidenote{Note that the
+  former fixes more things, and so there is less `space' for the permutations to
+  move around.}. By assumption, we have
+  \begin{equation*}
+    \abs{ \Gal(K / E) } \leq \abs{ \Gal(K / F) } = [K : F].
+  \end{equation*}
+  Let $\alpha \in E$ and $\phi \in \Gal(K / F)$. By the construction of $E$, we
+  have that $\phi(\alpha) = \alpha$. It follows that $\phi$ also fixes $E$, and
+  so $\phi \in \Gal(K / E)$. Thus $\Gal(K / F) \leq \Gal(K / E)$. Hence $\Gal(K
+  / E) = \Gal(K / F)$.
+
+  This shows that
+  \begin{equation*}
+    [ K : F ] = \abs{ \Gal(K / E) } \leq [ K : E ] \leq [ K : F ],
+  \end{equation*}
+  which implies that $[E : F] = 1$, as we desired.
+
+  \noindent
+  \hlbnoted{$(3) \implies (4)$} Suppose $\Fix(\Gal(K / F)) = F$. Let $\alpha \in
+  K$ with minimal polynomial $p(x)$ over $F$. WTS $p(x)$ splits over $K$ with
+  no repeated roots. Let $G = \Gal(K / F)$.
+
+  Consider \sidenote{$\Delta$ gives us all the roots of $p(x)$.}
+  \begin{equation*}
+    \Delta = \left\{ \phi(\alpha) : \phi \in G \right\} \subseteq K.
+  \end{equation*}
+  Let $\alpha_1, \ldots, \alpha_n \in \Delta$ be distinct, and wlog wma $\alpha
+  = \alpha_1$. Now consider
+  \begin{equation*}
+    h(x) = (x - \alpha_1)(x - \alpha_2) \hdots (x - \alpha_n) \in K[x].
+  \end{equation*}
+  Then in $K[x]$, we have that $h(x) \mid p(x)$, since all roots of $h(x)$ are
+  roots of $p(x)$. Now for any $\phi \in G$, we have that $\phi(\alpha_i) =
+  \alpha_j$, and so
+  \begin{equation*}
+    \phi(h(x)) = h(x),
+  \end{equation*}
+  which means $h(x) \in \Fix(G)[x] = F[x]$ by assumption. Since $p(x)$ is the
+  minimal polynomial of $\alpha$ in $F[x]$, it follows that $p(x) \mid h(x)$ and
+  so $p(x) = h(x)$, which splits over $K$ and has no repeated roots, just as we
+  wanted.
+
+  \noindent
+  \hlbnoted{$(4) \implies (1)$} Suppose $K / F$ is Galois \sidenote{By
+  \hyperref[defn:galois_extension]{definition}, $K / F$ is normal and separable,
+  which means
+  \begin{itemize}
+    \item (\textbf{normal}) $K$ is the splitting field of some non-constant
+      $f(x) \in F[x]$; and
+    \item (\textbf{separable}) for each $\alpha \in K$, the minimal polynomial
+      $p(x)$ of $\alpha$ over $F$ is separable in $K$.
+  \end{itemize}
+  So there is actually something to prove because we only know that $K$ is the
+  splitting field of some polynomial that may or may not be a minimal polynomial
+  of any $\alpha \in K$, and $K$ may not be the splitting field of any of the
+  minimal polynomial of its elements.}. Since $[ K : F ] < \infty$, let
+  \begin{equation*}
+    K = F(\alpha_1, \ldots, \alpha_n),
+  \end{equation*}
+  where $\alpha_i \in K$. Let $q_i(x) \in F[x]$ be the minimal polynomial of
+  each $\alpha_i$. Let $p_1(x), \ldots, p_m(x)$ be the distinct $q_i(x)$'s.
+
+  Since $K / F$ is separable, we know that the $q_i(x)$'s are separable and
+  hence so are the $p_i(x)$'s. Let
+  \begin{equation*}
+    f(x) = p_1(x) p_2(x) \hdots p_n(x) \in F[x].
+  \end{equation*}
+  By A6Q3(b), we have that $f(x)$ is separable over $F$ in $K$. Also, $K / F$ is
+  normal since the splitting field of $f(x)$ over $F$ is exactly $K$.
+\end{proof}
+
+\begin{eg}
+  Let's look at our non-Galois extension of $\mathbb{Q}$,
+  $\mathbb{Q}(\sqrt[3]{2})$. We observe that
+  \begin{equation*}
+    \Fix ( \Gal( \mathbb{Q}(\sqrt[3]{2}) / \mathbb{Q} ) ) =
+    \mathbb{Q}(\sqrt[3]{2}),
+  \end{equation*}
+  since $\sqrt[3]{2}$ fixes even $\sqrt[3]{2}$ itself.
+\end{eg}
+
+\begin{eg}
+  Let $\alpha = \sqrt{2 + \sqrt{3}} \in \mathbb{C}$. Note that
+  \begin{align*}
+    \alpha^2                  & = 2 + \sqrt{3} \\
+    \alpha^2 - 2              & = \sqrt{3} \\
+    (\alpha^2 - 2)^2          & = 3 \\
+    \alpha^4 - 4 \alpha^2 + 4 & = 3 \\
+    \alpha^4 - 4 \alpha^2 + 1 & = 0
+  \end{align*}
+  Consider the polynomial
+  \begin{equation*}
+    f(x) = x^4 - 4x^2 + 1 \in \mathbb{Q}[x],
+  \end{equation*}
+  and $\alpha$ is a root of $f(x)$. Now consider the polynomial
+  \begin{equation*}
+    g(y) = y^2 - 4y + 1.
+  \end{equation*}
+  Note that in $\mathbb{Z}_5$, under $\tilde{g}(y) = y^2 + y + 1$, we have
+  \begin{gather*}
+    0 \mapsto 1 \quad 1 \mapsto 3 \quad 2 \mapsto 2 \\
+    3 \mapsto 3 \quad 4 \mapsto 1.
+  \end{gather*}
+  By \cref{propo:irreducible_rootless_polynomials}, $\tilde{g}(y)$ is
+  irreducible, and by \hyperref[propo:mod_p_irreducibility_test]{Mod-$5$
+  irreducibility}, $g(y)$ is irreducible. Thus $f(x)$ itself is irreducible.
+  Since $f$ is monic, it is the minimal polynomial of $\alpha$.
+
+  Note that by construction, all the roots of $f(x)$ are
+  \begin{equation*}
+    \pm \sqrt{2 \pm \sqrt{3}}.
+  \end{equation*}
+  Thus $f(x)$ is separable. Note that
+  \begin{equation*}
+    \sqrt{2 + \sqrt{3}} \sqrt{2 - \sqrt{3}} = 1,
+  \end{equation*}
+  and so $\sqrt{2 - \sqrt{3}}$ is the inverse of $\sqrt{2 + \sqrt{3}}$, and so
+  it is necessarily in $\mathbb{Q}(\alpha)$. It follows that all the
+  $\mathbb{Q}$-conjugates of $\alpha$ are in $\mathbb{Q}(\alpha)$. Thus
+  $\mathbb{Q}(\alpha) / \mathbb{Q}$ is normal.
+
+  It follows that $\mathbb{Q}(\alpha) / \mathbb{Q}$ is a Galois extension.
+
+  By \hyperref[thm:characterization_of_galois_extensions]{the characterization
+  of Galois extensions}, we have
+  \begin{equation*}
+    \abs{\Gal(\mathbb{Q}(\alpha)/\mathbb{Q})} = [\mathbb{Q}(\alpha) :
+    \mathbb{Q}] = 4.
+  \end{equation*}
+  Let $\beta = \sqrt{2 - \sqrt{3}}$. By the note that $\alpha \beta = 1$, we
+  have that the following table describes all the possible actions of $G$ on the
+  $\mathbb{Q}$-conjugates of $\alpha$.
+  \begin{table}[ht]
+    \centering
+    \caption{Table of elements of $\Gal(\mathbb{Q}(\alpha)/\mathbb{Q})$.}
+    \label{table:table_of_elements_of_gal_q_alpha_q}
+    \begin{tabular}{c | c c c c | c}
+               & $\alpha$  & $-\alpha$ & $\beta$   & $-\beta$  & $S_4$ \\
+      \hline
+      $\phi_1$ & $\alpha$  & $-\alpha$ & $\beta$   & $-\beta$  & $\epsilon$ \\
+      $\phi_2$ & $-\alpha$ & $\alpha$  & $-\beta$  & $\beta$   & $(1 \; 2)(3 \; 4)$ \\
+      $\phi_3$ & $\beta$   & $-\beta$  & $\alpha$  & $-\alpha$ & $(1 \; 3)(2 \; 4)$ \\
+      $\phi_4$ & $-\beta$  & $\beta$   & $-\alpha$ & $\alpha$  & $(1 \; 4)(2 \; 3)$
+    \end{tabular}
+  \end{table}
+
+  By \cref{table:table_of_elements_of_gal_q_alpha_q}, it follows that
+  \begin{equation*}
+    G \simeq K_4 \simeq \mathbb{Z} \times \mathbb{Z}.
+  \end{equation*}
+\end{eg}
+
+% section galois_extensions_continued (end)
+
+% chapter lecture_23_mar_08th (end)
 
 \appendix
 

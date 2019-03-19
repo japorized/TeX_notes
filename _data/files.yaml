@@ -18,6 +18,8 @@
   pdf:
     - title: classnotes.pdf
       src: /PMATH348/classnotes.pdf
+    - title: classnotes-dark.pdf
+      src: /PMATH348/classnotes-dark.pdf
   tex:
     - title: classnotes.tex
       src: /PMATH348/classnotes.tex
