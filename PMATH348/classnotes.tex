@@ -539,7 +539,7 @@ highlight what $Z(P)$ is.}
 \end{defn}
 
 \marginnote{
-  \begin{procedures}[No simple subgroup of order $n$]\label{procedures:no_simple_subgroup_of_order_n}
+  \begin{procedure}[No simple subgroup of order $n$]\label{procedure:no_simple_subgroup_of_order_n}
     The approach to showing that there are no simple groups of a certain
     order is as follows:
     \begin{itemize}
@@ -548,7 +548,7 @@ highlight what $Z(P)$ is.}
       \item using each of the possiblities as cases, we find out if a group of
         the given order will have a normal subgroup.
     \end{itemize}   
-  \end{procedures}
+  \end{procedure}
 }
 \begin{eg}
   Prove that there is no simple group of order $56$.
@@ -1163,10 +1163,13 @@ More generally so...
 \label{sub:summary_for_proving_irreducibility}
 % subsection summary_for_proving_irreducibility
 
-This subsection is dedicated to summarize the ways that are available to us to
-finding out if a given polynomial is reducible or irreducible. This includes
-common heuristics and/or techniques.
-
+\marginnote{
+  \begin{procedure}[Summary for Proving Irreducibility]
+  This subsection is dedicated to summarize the ways that are available to us to
+  finding out if a given polynomial is reducible or irreducible. This includes
+  common heuristics and/or techniques.
+\end{procedure}
+}
 \paragraph{Showing reducibility}
 
 Let $f(x) \in F[x]$. $f(x)$ is reducible if
@@ -1926,7 +1929,7 @@ The following result is a direct consequence of \cref{thm:repeated_kronecker_s_t
   \begin{equation*}
     f(x) = (x^2 + 3)(x^2 - 2) = (x + \sqrt{3} i)(x - \sqrt{3}i)(x - \sqrt{2})(x + \sqrt{2})
   \end{equation*}
-  in $\mathbb{C}[x$. Then a splitting field of $f(x)$ over $\mathbb{Q}$ is 
+  in $\mathbb{C}[x]$. Then a splitting field of $f(x)$ over $\mathbb{Q}$ is 
   $\mathbb{Q}(\sqrt{2}, \sqrt{3}i)$.
 \end{solution}
 
@@ -1942,8 +1945,8 @@ respectively, which may not be the same spliting field. How are these splitting 
     \node[label={270:{$f(x) \in F[x]$}}] at (0, 0) {};
     \node[label={90:{$f(x)$ splits in $K$}}] at (-2, 2) {};
     \node[label={90:{$f(x)$ splits in $E$}}] at (2, 2) {};
-    \draw (-1, 0) -- (-2, 2) node[midway,fill=black] {$F(\alpha_1, \ldots, \alpha_n)$};
-    \draw (1, 0) -- (2, 2) node[midway,fill=black] {$F(\beta_1, \ldots, \beta_n)$};
+    \draw (-1, 0) -- (-2, 2) node[midway,color=foreground,fill=background] {$F(\alpha_1, \ldots, \alpha_n)$};
+    \draw (1, 0) -- (2, 2) node[midway,color=foreground,fill=background] {$F(\beta_1, \ldots, \beta_n)$};
     \draw[latex-latex] (-0.5, 1.3) to[bend left] (0.5, 1.3) node[midway,above=1.5] {relation?};
   \end{tikzpicture}}
   \caption{Differing Splitting Fields}
@@ -2205,7 +2208,7 @@ It thus follows that $[ \mathbb{Q}(\xi_p) : \mathbb{Q} ] = p - 1$.
   For $n \geq 1$, the \hlnoteb{$n$\textsuperscript{th} cyclotomic polynomial} is
   \begin{equation*}
     \Phi_n(x) = \prod_{\substack{1 \leq k \leq n \\ \gcd(k, n) = 1}} \left( x - e^{2 \pi i
-    \frac{k}{n}} \right) = (x - \alpha_1, \ldots)(x - \alpha_n) \hdots (x - \alpha_{\phi(n)}),
+    \frac{k}{n}} \right) = (x - \alpha_1)(x - \alpha_2) \hdots (x - \alpha_{\phi(n)}),
   \end{equation*}
   where the $\alpha_i$'s are the primitive $n$\textsuperscript{th} roots of unity.
 \end{defn}
@@ -2249,7 +2252,7 @@ ready to show this.
 
 A good question to ask here is:
 
-\begin{quotebox}{green}{white}
+\begin{quotebox}{green}{foreground}
   Is there an easier way to compute $\Phi_n(x)$ for all $n$?
 \end{quotebox}
 
@@ -2865,7 +2868,7 @@ In fact, more is true, but we shall see that down the road.
 
 \newthought{From} the last two examples, one cannot help but notice a possible
 problem:
-\begin{quotebox}{green}{white}
+\begin{quotebox}{green}{foreground}
   what if there are repeated roots?
 \end{quotebox}
 If there are, indeed, repeated roots, say $\alpha_1 = \alpha_2$ among the roots
@@ -3928,6 +3931,198 @@ We have the following theorem that characterizes normality.
 % section galois_extensions_continued (end)
 
 % chapter lecture_23_mar_08th (end)
+
+\chapter{Lecture 24 Mar 11th}%
+\label{chp:lecture_24_mar_11th}
+% chapter lecture_24_mar_11th
+
+\section{Fundamental Theorem of Galois Theory}%
+\label{sec:fundamental_theorem_of_galois_theory}
+% section fundamental_theorem_of_galois_theory
+
+We shall first prove the following theorem, which will take away the bulk of the
+work required to prove the fundamental theorem later on.
+
+\begin{thm}[Artin's Theorem]\index{Artin's Theorem}\label{thm:artin_s_theorem}
+  Let $K$ be a field, and $H \leq \Aut(K)$ a finite subgroup. Let $F = \Fix(H)$.
+  Then
+  \begin{enumerate}
+    \item $K / F$ is Galois.
+    \item $\Gal(K / F) = H$.
+    \item $\abs{H} = \abs{\Gal(K / F)} = [K : F]$.
+  \end{enumerate}
+\end{thm}
+
+% section fundamental_theorem_of_galois_theory (end)
+
+% chapter lecture_24_mar_11th (end)
+
+\chapter{Lecture 28 Mar 20th}%
+\label{chp:lecture_28_mar_20th}
+% chapter lecture_28_mar_20th
+
+\section{Galois Groups of Polynomials (Continued) [unclean]}%
+\label{sec:galois_groups_of_polynomials_continued}
+% section galois_groups_of_polynomials_continued
+
+\subsection{Quartics}%
+\label{sub:quartics}
+% subsection quartics
+
+As in the last section, we shall assume $\ch F \neq 2$. Now, given
+\begin{equation*}
+  f(x) = x^4 + \alpha x^3 + \beta x^2 + \gamma x + \delta \in F[x],
+\end{equation*}
+we shall consider
+\begin{equation*}
+  g(x) = f\left(x - \frac{\alpha}{4}\right) = x^4 + bx^2 + cx + d \in F[x].
+\end{equation*}
+This is similarly called a \hldefn{depressed quartic}.
+
+Furthermore, $\Gal(f(x)) = \Gal(g(x))$. \marginnote{$g(x)$ is irreducible and
+separable iff $f(x)$ is irreducible and separable.}
+
+\newthought{Let}
+\begin{equation*}
+  f(x) = x^4 + b x^2 + c x + d \in F[x],
+\end{equation*}
+If $G = \Gal(f(x))$, then $G$ is a
+\hyperref[defn:transitive_subgroup]{transitive} of $S_4$, with $4 \mid \abs{G}$.
+
+Thus our options are:
+\begin{equation*}
+  S_4, A_4, D_4, V, \mathbb{Z}_4,
+\end{equation*}
+where $V$ is the Klein-$4$ group \sidenote{This is very \hlimpo{important}.},
+\begin{equation*}
+  V = \left\{ \epsilon, (1 \; 2)(3 \; 4), (1 \; 3)(2 \; 4), (1\; 4)(2 \; 3)
+  \right\} \simeq \mathbb{Z}_2 \times \mathbb{Z}_2.
+\end{equation*}
+
+Suppose the roots of $f(x)$ are $\alpha_1, \alpha_2, \alpha_3, \alpha_4$ which
+are distinct, and let $K = F(\alpha_1, \alpha_2, \alpha_3, \alpha_4)$. Also,
+let
+\begin{align*}
+  u &= \alpha_1 \alpha_2 + \alpha_3 \alpha_4 \\
+  v &= \alpha_1 \alpha_3 + \alpha_2 \alpha_4 \\
+  w &= \alpha_1 \alpha_4 + \alpha_2 \alpha_3.
+\end{align*}
+
+The \hldefn{resolvent cubic} of $f(x)$  is defined by
+\begin{align*}
+  \Res f(x) &= (x - u)(x - v)(x - w) \\
+            &= x^3 - b x^2 - 4d x + 4bd - c^2 \in F[x].
+\end{align*}
+Let $L = F(u, v, w)$. Then $K / L / F$ is a tower of fields \sidenote{$K$ is the
+splitting field of $f(x)$ and $L$ is the splitting field of $\Res f(x)$.}. Now
+let $G = \Gal(f(x))$. Note that $K / F$ is Galois. Thus $K / L$ is Galois
+\sidenote{By A7.}.
+
+Also
+\begin{equation*}
+  \Gal(\Res f(x)) = \Gal( L / F ),
+\end{equation*}
+where $L / F$ is also Galois.
+
+Since $\Gal( K / L ) = G \cap V$ and $L / F$ is Galois, we have that
+\begin{equation*}
+  \Gal( K / L ) \trianglelefteq \Gal(K / F),
+\end{equation*}
+and
+\begin{quotebox}{red}{foreground}
+\begin{equation*}
+  \Gal(\Res f(x)) = \Gal(L / F) = G / (G \cap V).
+\end{equation*}
+\end{quotebox}
+
+Let $m = \abs{\Gal(\Res f(x))} = \abs{\Gal(L / F)}$. Then we have the following
+possibilities:
+\begin{table}[ht]
+  \centering
+  \caption{Galois group $G$}
+  \label{table:galois_group_g}
+  \begin{tabular}{c | c c c c c}
+    $G$ & $S_4$ & $A_4$ & $D_4$ & $V$ & $\mathbb{Z}_4$ \\
+    \hline
+    $G \cap V$     & $V$   & $V$            & $V$            & $V$       & $\mathbb{Z}_2$ \\
+    $G / G \cap V$ & $S_3$ & $\mathbb{Z}_3$ & $\mathbb{Z}_2$ & $\{ 1 \}$ & $\mathbb{Z}_2$ \\
+    $m$            & $6$   & $3$            & $2$            & $1$       & $2$
+  \end{tabular}
+\end{table}
+Note that the $m = 2$ can be a problem.
+
+\begin{remark}
+  $G$ is uniquely determined when $m \in \{ 1, 3, 6 \}$.
+\end{remark}
+
+For the rest of our discussion, we shall focus on when $m = 2$.
+
+\newthought{We know that} $G \simeq D_4$ or $G \simeq \mathbb{Z}_4$.
+Fortunately, the two groups have different order.
+
+Since $\deg \Res f(x) = 3$, and $m = 2$, thus $f(x)$ factors into a linear and
+quadratic terms. Thus exactly one of either $u, v,$ or $w$ is in $F$. Wlog, $u
+\in F$.
+
+Either option for $G$ has a $4$-cycle which fixes $u$. Therefore
+\begin{equation*}
+  \sigma = (1 \; 3 \; 2 \; 4) \in G.
+\end{equation*}
+Note that $\sigma^2 = (1 \; 2)(3 \; 4) \in G$.
+
+Consider:
+\begin{equation*}
+  (x - \alpha_1 \alpha_2)(x - \alpha_3 \alpha_4) = x^2 - ux + d
+\end{equation*}
+and
+\begin{equation*}
+  (x - ( \alpha_1 + \alpha_2 ))(x - (\alpha_3 + \alpha_4)) = x^2 + (b - u).
+\end{equation*}
+
+\hlbnoted{Claim} $G = \langle \sigma \rangle \simeq \mathbb{Z}_4$ iff both of
+these polynomials split over $L$.
+
+\begin{proof}
+  \hlbnoted{$(\implies)$} Suppose $G = \langle \sigma \rangle$. Then
+  \begin{equation*}
+    \Gal(K / L) = G \cap V = \langle \sigma^2 \rangle.
+  \end{equation*}
+  Thus $\alpha_1 \alpha_2, \, \alpha_3 \alpha_4, \, \alpha_1 + \alpha_2, \,
+  \alpha_3 + \alpha_4 \in \Fix \langle \sigma^2 \rangle = L$.
+
+  \noindent
+  \hlbnoted{$(\impliedby)$} Suppose $\alpha_1 \alpha_2, \alpha_3 \alpha_4,
+  \alpha_1 + \alpha_2, \alpha_3 + \alpha_4 \in L$. We need only to show that
+  $\langle \sigma \rangle$ has at most order $4$.
+
+  Note that $\alpha_1 \alpha_2 \in L(\alpha_1) \implies \alpha_1, \alpha_2 \in
+  L(\alpha_1)$. Further, $v - w = (\alpha_1 - \alpha_2) (\alpha_3 - \alpha_4)
+  \in L$. Thus $\alpha_3 - \alpha_4 \in L(\alpha_1)$, which means $\alpha_3 \in
+  L(\alpha_1) \implies \alpha_4 \in L(\alpha_1)$. \sidenote{Note that we needed
+  $\ch F \neq 2$.}.
+
+  Therefore $K = F(\alpha_1, \alpha_2, \alpha_3, \alpha_4) = L(\alpha_1)$.
+  Hence, $[ K : L ] = [ L(\alpha_1) : L ] = \abs{ \Gal(K / L) }$.
+
+  This means that if we consider
+  \begin{equation*}
+    p(x) = x^2 - (\alpha_1 + \alpha_2) x + \alpha_1 \alpha_2 \in L[x],
+  \end{equation*}
+  then $p(\alpha_1) = 0$. Therefore, $[ K : L ] \leq 2$. This implies that $[ K
+  : F ] = [ K : L ][ L : F ] = 2 [ K : L ] \leq 4$.
+
+  Since $G \simeq \mathbb{Z}_4$ or $G \simeq D_4$ with $\abs{G} \leq 4$, we have
+  that
+  \begin{equation*}
+    G = \langle \sigma \rangle \simeq \mathbb{Z}_4.
+  \end{equation*}
+\end{proof}
+
+% subsection quartics (end)
+
+% section galois_groups_of_polynomials_continued (end)
+
+% chapter lecture_28_mar_20th (end)
 
 \appendix
 
