@@ -53,7 +53,7 @@ differential calculus, integral calculus, linear algebra, and multilinear algebr
 
 % chapter preface (end)
 
-\tuftepart{Exterior Differential Calculus}
+\tuftepart{Exterior Differential Calculus}\label{part:exterior_differential_calculus}
 
 \chapter{Lecture 1 Jan 07th}%
 \label{chp:lecture_1_jan_07th}
@@ -799,17 +799,17 @@ Using the above remark, we can rewrite condition 2 as follows:
 % section the_space_of_k_forms_on_v_continued
 
 \begin{defn}[Space of $k$-forms on $V$]\index{Space of $k$-forms on $V$}\label{defn:space_of_k_forms_on_v_}
-  The \hlnoteb{space of $k$-forms on $V$}, denoted as $\wedge^k \left( V^* \right)$, is
+  The \hlnoteb{space of $k$-forms on $V$}, denoted as $\Lambda^k \left( V^* \right)$, is
   the set of all $k$-forms on $V$, made into a vector space by setting
   \begin{equation*}
     (t\alpha + s\beta)(v_1, \ldots, v_k) :=
       t\alpha(v_1, \ldots, v_k) + s\beta(v_1, \ldots, v_k),
   \end{equation*}
-  for $\alpha \beta \in \wedge^k \left( V^* \right)$, $t, s \in \mathbb{R}$.
+  for $\alpha \beta \in \Lambda^k \left( V^* \right)$, $t, s \in \mathbb{R}$.
 \end{defn}
 
 \begin{note}
-  By convention, we define $\wedge^0 \left( V^* \right) = \mathbb{R}$. The reasoning shall
+  By convention, we define $\Lambda^0 \left( V^* \right) = \mathbb{R}$. The reasoning shall
   we shown later. %TODO : add anchor
 \end{note}
 
@@ -839,7 +839,7 @@ Using the above remark, we can rewrite condition 2 as follows:
 \end{proof}
 
 \begin{crly}[$k$-forms of even higher dimensions]\label{crly:_k_forms_of_even_higher_dimensions}
-  $\wedge^k \left( V^* \right) = \left\{ 0 \right\}$ if $k > n = \dim V$.
+  $\Lambda^k \left( V^* \right) = \left\{ 0 \right\}$ if $k > n = \dim V$.
 \end{crly}
 
 \begin{proof}
@@ -847,7 +847,7 @@ Using the above remark, we can rewrite condition 2 as follows:
 \end{proof}
 
 \begin{note}
-  \cref{crly:_k_forms_of_even_higher_dimensions} implies that $\wedge^k \left( V^* \right)$
+  \cref{crly:_k_forms_of_even_higher_dimensions} implies that $\Lambda^k \left( V^* \right)$
   can only be non-trivial for $0 \leq k \leq n = \dim V$.
 \end{note}
 
@@ -1251,7 +1251,7 @@ The pullback has the following properties which we shall prove in A1Q8.
 
 % chapter lecture_5_jan_16th (end)
 
-\tuftepart{The Vector Space \texorpdfstring{$\mathbb{R}^n$}{Rn} as a Smooth Manifold}
+\tuftepart{The Vector Space \texorpdfstring{$\mathbb{R}^n$}{Rn} as a Smooth Manifold}\label{part:the_vector_space_r_n_as_a_smooth_manifold}
 
 \chapter{Lecture 6 Jan 18th}%
 \label{chp:lecture_6_jan_18th}
@@ -2000,7 +2000,7 @@ define \hlnotea{tangent vectors}.
 
 \begin{defn}[Tangent Vector]\index{Tangent Vector}\label{defn:tangent_vector}
   A \hlnoteb{tangent vector} to $\mathbb{R}^n$ at $p$ is a vector $v \in \mathbb{R}^n$,
-  thought of as `\hlnotec{emanating}' from $p$, is in a one-to-one correspondence
+  thought of as `\hlbnotec{emanating}' from $p$, is in a one-to-one correspondence
   with an equivalence class
   \begin{equation*}
     [\phi]_p := \left\{ \psi : I \to \mathbb{R}^n \mmid \psi \sim_p \phi \right\}.
@@ -3521,7 +3521,7 @@ works even in the general case (see
   \end{equation}
 
   \noindent
-  \hlbnoteb{Method to remember \cref{eq:abused_explicit_formula_of_standard_1_forms}} The
+  \hlbnoteb{Method to remember {\cref{eq:abused_explicit_formula_of_standard_1_forms}}} The
   smooth map $F : \mathbb{R}^n \to \mathbb{R}^m$ allows us to think of the $y^j$'s as
   smooth functions of the $x^i$'s, and
   \cref{eq:abused_explicit_formula_of_standard_1_forms} expresses the differential in the
@@ -3861,7 +3861,7 @@ The property $\dif{^2}$ motivates the following definitions.
 
 % chapter lecture_15_feb_11th (end)
 
-\tuftepart{Submanifolds of \texorpdfstring{$\mathbb{R}^n$}{Rn}}
+\tuftepart{Submanifolds of \texorpdfstring{$\mathbb{R}^n$}{Rn}}\label{part:submanifolds_of_r_n_}
 
 \chapter{Lecture 16 Feb 13th}%
 \label{chp:lecture_16_feb_13th}
@@ -4417,7 +4417,7 @@ have successfully covered $M$ with two local parametrizations.
 \label{sec:submanifolds_as_level_sets}
 % section submanifolds_as_level_sets
 
-Quite often, submanifolds of $\mathbb{R}^n$ appear in an \hlnotec{implicitly},
+Quite often, submanifolds of $\mathbb{R}^n$ appear in an \hlbnotec{implicitly},
 i.e. as a set of points in $\mathbb{R}^n$ which satisfy some equation. In this
 section, we shall see that locally so, all submanifolds show up in this manner.
 
@@ -4800,7 +4800,7 @@ Interestingly, and fortunate to some extent, the converse of \\
   real-valued functions on $M$, for $i = 1, \ldots, q$.
 \end{defn}
 
-\begin{remark}
+\begin{remark}\label{remark:smoothness_as_a_local_property_on_submanifolds}
   Note that smoothness of functions is a local property, i.e. a function $f$ is
   smooth on $M$ if and only if it is smooth on $V \cap M$ for every open set $V$
   in $\mathbb{R}^n$.
@@ -5026,7 +5026,7 @@ on the choice of the local parametrization.
   a restatement of
   \cref{lemma:parametrized_submanifolds_are_not_determined_by_immersions}. We
   see that, once again, the result says that the image of the induced linear map
-  $(\dif{\phi})_u$ of a parametrization is \hlnotec{independent of any
+  $(\dif{\phi})_u$ of a parametrization is \hlbnotec{independent of any
   parametrization} such that $\phi(u) = p$.
 \end{note}
 
@@ -5417,10 +5417,11 @@ point $p$.
 
 This motivates us to define, $\forall v_p \in T_p M$, and any $[f]_p \in
 C_p^\infty(M)$,
-\begin{align*}
-  v_p(f) &= \lim_{t \to 0} \frac{f(\phi(u + tw)) - f(p)}{t} \\
+\begin{align}
+  v_p(f) &= \lim_{t \to 0} \frac{f(\phi(u + tw)) - f(p)}{t} \nonumber \\
          &= w_u (f \circ \phi) = ((\dif{\phi})_u^{-1}(v_p))(f \circ \phi).
-\end{align*}
+         \label{eq:defining_dir_deri_on_subman}
+\end{align}
 
 We have therefore proven the following theorem:
 
@@ -5450,6 +5451,263 @@ We have therefore proven the following theorem:
 % section tangent_vectors_and_cotangent_vectors_on_a_submanifold_continued_2 (end)
 
 % chapter lecture_21_mar_06th (end)
+
+\chapter{Lecture 22 Mar 08th}%
+\label{chp:lecture_22_mar_08th}
+% chapter lecture_22_mar_08th
+
+\section{Tangent Vectors and Cotangent Vectors on a Submanifold (Continued 3)}%
+\label{sec:tangent_vectors_and_cotangent_vectors_on_a_submanifold_continued_3}
+% section tangent_vectors_and_cotangent_vectors_on_a_submanifold_continued_3
+
+\begin{eg}\label{eg:special_case_of_the_directional_derivative}
+  Let $\phi$ be a local parametrization of $M$ with $p = \phi(u)$, and the
+  tangent vector $\frac{\partial \phi}{\partial u^j} (u) \in T_p M$ given by the
+  velocity at $p$ of the $j$\textsuperscript{th} coordinate curve on $M$ induced
+  by $\phi$. Note that $\frac{\partial \phi}{\partial u^j}(u) = (\dif{\phi})_u
+  (\hat{e}_j)_u$. Then by \cref{eq:defining_dir_deri_on_subman}, we have
+  \begin{equation*}
+    \frac{\partial \phi}{\partial u^j} (u) (f) = (\hat{e}_j)_u (f \circ \phi)
+    = \frac{\partial}{\partial u^j} \at{u}{} (f \circ \phi),
+  \end{equation*}
+  which is the \hlbnotec{partial derivative of $f \circ \phi$ at $u$ in the
+  $\hat{e}_j$ direction}. Because of this, we shall write this tangent vector
+  $\frac{\partial \phi}{\partial u^j} (u)$ as $\frac{\partial}{\partial u^j}
+  \at{p}{} \in T_p M$.
+
+  Thus
+  \begin{equation*}
+    \left\{ \frac{\partial}{\partial u^1} \at{p}{}, \ldots,
+    \frac{\partial}{\partial u^j} \at{p}{} \right\}
+  \end{equation*}
+  is a basis of $T_p M$, but this depends on the choice of parametrization.
+\end{eg}
+
+% section tangent_vectors_and_cotangent_vectors_on_a_submanifold_continued_3 (end)
+
+\section{Smooth Vector Fields and Forms on a Submanifold}%
+\label{sec:smooth_vector_fields_and_forms_on_a_submanifold}
+% section smooth_vector_fields_and_forms_on_a_submanifold
+
+\marginnote{One should notice how similar these parts is to
+\cref{part:the_vector_space_r_n_as_a_smooth_manifold}}.
+
+\begin{defn}[Cotangent Space on a Submanifold]\index{Cotangent Space}\label{defn:cotangent_space_on_a_submanifold}
+  Let $p \in M$. Let $T^*_p M = (T_p M)^*$ be the
+  \hyperref[defn:dual_space]{dual space} of $T_p M$. We call $T^*_p M$ the
+  \hlnoteb{cotangent space} of $M$ at $p$.
+\end{defn}
+
+Following \cref{part:the_vector_space_r_n_as_a_smooth_manifold}, we can consider
+the space $\Lambda^r(T^*_p M)$ of $r$-forms on the $k$-dimensional real vector
+space $T_p M$.
+
+\marginnote{Again, we note that we look at a vector field as a function that
+attaches a vector to each point in the space.}
+\begin{defn}[Vector Fields on Submanifold]\index{Vector Fields}\label{defn:vector_fields_on_submanifold}
+  A \hlnoteb{vector field} on $M$ is a map $X : M \to \bigcup_{q \in M} T_q M$ 
+  such that
+  \begin{equation*}
+    X(p) = X_p \in T_p M, \quad \forall p \in M.
+  \end{equation*}
+\end{defn}
+
+\marginnote{See also \cref{defn:space_of_k_forms_on_v_}}
+\begin{defn}[Forms on Submanifolds]\index{Forms}\label{defn:forms_on_submanifolds}
+  An $r$-form on $M$ is a map $\eta : M \to \bigcup_{q \in M} \Lambda^r(T_q^*
+  M)$ such that
+  \begin{equation*}
+    \eta(p) = \eta_p \in \Lambda^r(T_p^* M), \quad \forall p \in M.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Note that since $\Lambda^0(T_p^* M) = \mathbb{R}$, a $0$-form on $M$ is just a
+  real-valued function on $M$.
+\end{note}
+
+\begin{remark}
+  Given a vector field $X$ on $M$ and a smooth function $f$ on $M$, we get a
+  function $X f : M \to \mathbb{R}$ defined by $(Xf)(p) = X_p f$, where $X_p \in
+  T_p M$ is a derivation at $p$ \sidenote{We saw this in
+  \cref{thm:derivations_are_tangent_vectors_even_on_submanifolds}.}. If $\eta$
+  is an $r$-form with $r \geq 1$, then given any $r$ vector fields $X_1, \ldots,
+  X_r$ on $M$, we have that $\eta(X_1, \ldots, X_r) : M \to \mathbb{R}$ is a
+  function given by
+  \begin{equation*}
+    (\eta(X_1, \ldots, X_r))(p) = \eta_p((X_1)_p, \ldots, (X_r)_p).
+  \end{equation*}
+\end{remark}
+
+\begin{defn}[Wedge Product on Submanifolds]\index{Wedge Product}\label{defn:wedge_product_on_submanifolds}
+  Let $\eta$ be an $r$-form on $M$ and let $\zeta$ be an $l$-form on $M$. We
+  define the \hlnoteb{wedge product} $\eta \land \zeta$, an $(r + l)$-form on
+  $M$, by
+  \begin{equation*}
+    (\eta \land \zeta)_p = \eta_p \land \zeta_p,
+  \end{equation*}
+  where the wedge product on the RHS is the
+  \hyperref[defn:wedge_product_of_k_forms]{usual wedge product} of forms on the
+  vector space $T_p M$.
+\end{defn}
+
+\begin{note}
+  We still have that
+  \begin{equation*}
+    \eta \land \zeta = (-1)^{\abs{\eta}\abs{\zeta}} \zeta \land \eta.
+  \end{equation*}
+\end{note}
+
+\begin{defn}[Smooth Vector Fields on Submanifolds]\index{Smooth Vector Fields}\label{defn:smooth_vector_fields_on_submanifolds}
+  We say that a vector field $X$ is \hlnoteb{smooth} on $M$ if $Xf \in
+  C^\infty(M)$ for all $f \in C^\infty(M)$. We denote the set of smooth vector
+  fields on $M$ by $\Gamma(TM)$.
+\end{defn}
+
+\begin{defn}[Smooth $0$-forms on Submanifolds]\label{defn:smooth_0_forms_on_submanifolds}
+  For a $0$-form $h : M \to \mathbb{R}$, we say that $h$ is \hlnoteb{smooth} if it is
+  smooth by \cref{defn:smooth_functions_on_submanifolds}. We denote the set of
+  smooth $0$-forms on $M$ both by $C^\infty(M)$ and $\Omega^0(M)$.
+\end{defn}
+
+\begin{defn}[Smooth $r$-forms on Submanifolds]\label{defn:smooth_r_forms_on_a_submanifold}
+  For $1 \leq r \leq k$, an $r$-form $\eta$ on $M$ is \hlnoteb{smooth} if
+  \begin{equation*}
+    \eta(X_1, \ldots, X_r) \in C^\infty(M), \quad \forall X_1, \ldots, X_r \in
+    \Gamma(TM).
+  \end{equation*}
+  We denote the set of smooth $r$-forms on $M$ by $\Omega^r(M) =
+  \Gamma(\Lambda^r(T^* M))$.
+\end{defn}
+
+\begin{remark}
+  From \cref{remark:smoothness_as_a_local_property_on_submanifolds}, we know
+  that smoothness of vector fields and forms is a \hlnotea{local} property. In
+  other words, a vector field $X$ is smooth on $M$ iff it is smooth on $V \cap
+  M$ for every open $V$ in $\mathbb{R}^n$, and similarly so for an $r$-form
+  $\eta$.
+\end{remark}
+
+\begin{eg}[\imponote]\label{eg:important_eg_for_smoothness_on_submanifolds}
+  Let $\phi : U \to \mathbb{R}^n$ be a local parametrization for $M$ with image
+  $V \cap M$. Let $p \in V \cap M$ with $p = \phi(u)$. Recall that the tangent
+  vector $\frac{\partial}{\delta u^j}_p \in T_p M$ was defined to be
+  $(\dif{\phi})_u(\hat{e}_j)_u$, where $(\hat{e}_j)_u \in T_u \mathbb{R}^k$ is
+  the $j$\textsuperscript{th} standard basis vector.
+
+  Define a vector field $\frac{\partial}{\partial u^j}$ on the submanifold $V
+  \cap M$ by letting its value at $p \in V \cap M$ be $\frac{\partial}{\partial
+  u^j}\at{p}{}$. That is, let
+  \begin{equation*}
+    \frac{\partial}{\partial u^j}\at{p}{} = (\dif{\phi})_u (\hat{e}_j)_u,
+    \text{ where } u = \phi^{-1}(p).
+  \end{equation*}
+
+  \hlbnoted{Claim} $\frac{\partial}{\partial u^j}$ is a smooth vector field on
+  $V \cap M$. To show this, let $f \in C^\infty(V \cap M)$. By
+  \cref{eg:special_case_of_the_directional_derivative}, we have
+  \begin{equation*}
+    \left( \frac{\partial}{\partial u^j} f \right)(p)
+    = \left( \frac{\partial(f \circ \phi)}{\partial u^j} \right)(u)
+    = \left( \frac{\partial(f \circ \phi)}{\partial u^j} \circ \phi^{-1}
+    \right)(p).
+  \end{equation*}
+  We see that the function $\frac{\partial}{\partial u^j} f : V \cap M \to
+  \mathbb{R}$ is the function $g = \frac{\partial(f\circ\phi)}{\partial u^j}
+  \circ \phi^{-1}$. Notice that $g \circ \phi =
+  \frac{\partial(f\circ\phi)}{\partial u^j}$ is smooth on $U$. Thus the function
+  $g$ is smooth by \cref{defn:smooth_functions_on_submanifolds}. It follows that
+  $\frac{\partial}{\partial u^j}$ is a smooth vector field on $V \cap M$.
+\end{eg}
+
+\begin{propo}[Structures of $\Gamma(TM)$ and $\Omega^r(M)$]\label{propo:structures_of_gamma_tm_and_omega_r_m_}
+  We know that the spaces $\Gamma(TM)$ and $\Omega^r(M)$ are
+  (infinite-dimensional) real vector spaces, and \hlnotea{modules} over
+  $C^\infty(M)$. The vector space structure and module structure are defined in
+  the usual way by
+  \begin{gather*}
+    (aX + bY)_p = aX_p + bY_p, \qquad (fX)_p = f(p)X_p \\
+    (a\eta + b\zeta)_p = a\eta_p + b\zeta_p, \qquad (f\eta)_p = f(p)\eta_p,
+  \end{gather*} 
+  for all $a, b \in \mathbb{R}$, $X, Y \in \Gamma(TM)$, $\eta \zeta \in
+  \Omega^r(M)$, and $f \in C^\infty(M)$.
+\end{propo}
+
+\begin{proof}
+  \hlwarn{to be added}
+\end{proof}
+
+\begin{propo}[Smoothness of Wedge Products on Submanifolds]\label{propo:smoothness_of_wedge_products_on_submanifolds}
+  Let $\eta \in \Omega^r(M)$ and $\zeta \in \Omega^l(M)$. Then $\eta \land \zeta
+  \in \Omega^{r+l}(M)$.
+\end{propo}
+
+\begin{proof}
+  For an arbitrary $p \in M$, by \cref{defn:wedge_product_on_submanifolds}, we
+  have that
+  \begin{equation*}
+    (\eta \land \zeta)_p = \eta_p \land \zeta_p.
+  \end{equation*}
+  By \cref{defn:smooth_k_forms_on_r_n_}, since each $\eta$ and $\zeta$ are
+  smooth, it follows that the RHS is also smooth, which is what we want.
+\end{proof}
+
+\begin{defn}[Pullback Maps on Submanifolds]\index{Pullback Maps}\label{defn:pullback_maps_on_submanifolds}
+  Let $M$ be a submanifold on $\mathbb{R}^n$, and let $\phi : U \subseteq
+  \mathbb{R}^k \to \mathbb{R}^k$ be a local parametrization for $M$. Then $\phi$ 
+  is a smooth map, and it induces a linear isomorphism $(\dif{\phi})_u : T_u
+  \mathbb{R}^k \to T_{\phi(u)} M$. We define the \hlnoteb{pullback map} as
+  \begin{equation*}
+    \phi^* = (\dif{\phi})_u^* : \Lambda^r(T_{\phi(u)}^* M) \to \Lambda^r(T_u^*
+    \mathbb{R}^k),
+  \end{equation*}
+  where if $\eta$ is an $r$-form on $M$, then $\phi^* \eta$ is an $r$-form on
+  $U$ such that
+  \begin{equation*}
+    (\phi^* \eta)_u((W_1)_u, \ldots, (W_r)_u) = \eta_{\phi(u)} ((\dif{\phi})_u
+    (W_1)_u, \ldots, (\dif{\phi})_u(W_r)_u),
+  \end{equation*}
+  for tangent vectors $(W_1)_u, \ldots, (W_r)_u \in T_u \mathbb{R}^k$.
+\end{defn}
+
+\begin{note}
+  Since $(\dif{\phi})_u : T_u \mathbb{R}^k \to T_p M$ is an isomorphism, the map
+  $\phi^*$ is also an isomorphism.
+\end{note}
+
+% section smooth_vector_fields_and_forms_on_a_submanifold (end)
+
+% chapter lecture_22_mar_08th (end)
+
+\chapter{Lecture 27 Mar 20th}%
+\label{chp:lecture_27_mar_20th}
+% chapter lecture_27_mar_20th
+
+\section{Partitions of Unity (Continued)}%
+\label{sec:partitions_of_unity_continued}
+% section partitions_of_unity_continued
+
+\begin{propo}[Theorem name]
+  Let $M$ be a $k$-dimemensional submanifold of $\mathbb{R}^n$ and suppose that
+  there exists a cover of $M$ by local parametrizations such that all the
+  transition maps $\phi_{\beta \alpha}$ satisfy $\det (\D \phi_{ \beta \alpha }) >
+  0$. Then $M$ is oriented. That is, there exists a nowhere vanishing $k$-form
+  $\mu$ on $M$, such that all these local parametrizations are compatible with
+  $\mu$.
+\end{propo}
+
+\begin{note}
+  The above result is true in general when used with a general partition of
+  unity.
+\end{note}
+
+\begin{proof}
+  
+\end{proof}
+
+% section partitions_of_unity_continued (end)
+
+% chapter lecture_27_mar_20th (end)
 
 \appendix
 
@@ -5497,8 +5755,9 @@ As such, we can define the following:
 \end{defn}
 
 \begin{note}
-  From the action of a linear transformation,
-  we observe that the \hlnotec{larger the nullity, the smaller the rank}.
+  From the action of a linear transformation, we observe that the \\
+  \noindent
+  \hlbnotec{larger the nullity, the smaller the rank}.
   Put in another way, the more vectors are sent to $0$ by the linear transformation,
   the smaller the range.
 
