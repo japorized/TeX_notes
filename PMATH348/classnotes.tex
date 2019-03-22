@@ -35,6 +35,7 @@
 }
 \makeatother
 \DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\disc}{disc}
 \DeclareMathOperator{\Gal}{Gal}
 \DeclareMathOperator{\Fix}{Fix}
 \DeclareMathOperator{\stab}{stab}
@@ -3961,7 +3962,7 @@ work required to prove the fundamental theorem later on.
 \label{chp:lecture_28_mar_20th}
 % chapter lecture_28_mar_20th
 
-\section{Galois Groups of Polynomials (Continued) [unclean]}%
+\section{Galois Groups of Polynomials (Continued) [dirty]}%
 \label{sec:galois_groups_of_polynomials_continued}
 % section galois_groups_of_polynomials_continued
 
@@ -4118,11 +4119,182 @@ these polynomials split over $L$.
   \end{equation*}
 \end{proof}
 
+\begin{note}
+  Rework this entire lecture to work out the reasoning.
+\end{note}
+
 % subsection quartics (end)
 
 % section galois_groups_of_polynomials_continued (end)
 
+\tuftepart{Solvability by Radicals}
+
 % chapter lecture_28_mar_20th (end)
+
+\chapter{Lecture 29 Mar 22nd [dirty]}%
+\label{chp:lecture_29_mar_22nd}
+% chapter lecture_29_mar_22nd
+
+\section{Galois Groups of Polynomials (Continued 2)}%
+\label{sec:galois_groups_of_polynomials_continued_2}
+% section galois_groups_of_polynomials_continued_2
+
+\subsection{Quartics (Continued)}%
+\label{sub:quartics_continued}
+% subsection quartics_continued
+
+\begin{eg}
+  Let $f(x) = x^4 - 2x - 2 \in \mathbb{Q}[x]$. This is irreducible by
+  \hyperref[propo:eisenstein_s_criterion]{$2$-Eisenstein} and $\mathbb{Q}$ is
+  perfect. The resolvent of $f(x)$ is
+  \begin{equation*}
+    \Res f(x) = x^3 + 8x - 4.
+  \end{equation*}
+  This guy has no rational roots \sidenote{Check!}, and so $\Res f(x)$ is
+  irreducible.
+
+  Now
+  \begin{equation*}
+    \disc \Res f(x) = -4(8^3) - 27((-4)^2) < 0,
+  \end{equation*}
+  thus $\disc \Res f(x)$ is not a square in $\mathbb{Q}$. THus
+  \begin{equation*}
+    \Gal \Res f(x) = S_3.
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    \Gal f(x) = S_4.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Let $g(x) = x^4 + 5x + 5 \in \mathbb{Q}[x]$. $g(x)$ is irreducible
+  \hyperref[propo:eisenstein_s_criterion]{$5$-Eisenstein} and separable. We
+  have
+  \begin{equation*}
+    \Res g(x) = x^3 - 20x - 25.
+  \end{equation*}
+  Note that $\Res g(5) = 0$, and so
+  \begin{equation*}
+    \Res g(x) = (x - 5)(x^2 + 5x + 5),
+  \end{equation*}
+  and the second guy is irreducible, again, by $5$-Eisenstein. Thus
+  \begin{equation*}
+    \Gal \Res{g(x)} = \mathbb{Z}_2.
+  \end{equation*}
+  Thus $m = 2$. Let $u = 5 \in \mathbb{Q}$, and consider
+  \begin{equation*}
+    x^2 - 5x + 5 \text{ and } x^2 - 5.
+  \end{equation*}
+  Notice that the roots of $x^2 + 5x + 5$ are
+  \begin{equation*}
+    \frac{-5 \pm \sqrt{25 - 20}}{2} = \frac{-5 \pm \sqrt{5}}{2}.
+  \end{equation*}
+  Thus $L = \mathbb{Q}(\sqrt{5})$. The roots of $x^2 - 5x + 5$ are
+   \begin{equation*}
+     \frac{5 \pm \sqrt{5}}{2} \in L,
+  \end{equation*}
+  and the roots of $x^2 - 5$ are:
+  \begin{equation*}
+    \pm \sqrt{5} \in L.
+  \end{equation*}
+  Thus both the polynomial splits in $L$ and so
+  \begin{equation*}
+    \Gal f(x) = \mathbb{Z}_4.
+  \end{equation*}
+\end{eg}
+
+% subsection quartics_continued (end)
+
+% section galois_groups_of_polynomials_continued_2 (end)
+
+\section{Solvability by Radicals}%
+\label{sec:solvability_by_radicals}
+% section solvability_by_radicals
+
+\subsection{Solvable Groups}%
+\label{sub:solvable_groups}
+% subsection solvable_groups
+
+\begin{defn}[Solvable Groups]\index{Solvable Groups}\label{defn:solvable_groups}
+  A group $G$ is \hlnoteb{solvable} if there exists a finite chain of subgroups
+  starting at $G = G_0$:
+  \begin{equation*}
+    G = G_0 \supseteq G_1 \supseteq G_2 \supseteq \hdots \supseteq G_n = \{1\},
+  \end{equation*}
+  where each $G_{i + 1} \trianglelefteq G_i$, and  $G_i / G_{i+1}$ is abelian.
+\end{defn}
+
+\begin{note}
+  It is not necessary that $G_{i + 1} \trianglelefteq G_{i-1}$.
+\end{note}
+
+\begin{eg}
+  Abelian $\implies$ solvable $\because G \supseteq \{1\}$.
+\end{eg}
+
+\begin{eg}
+  $S_4$ is solvable:
+  \begin{equation*}
+    S_4 \supseteq A_4 \supseteq V \supseteq \{1\}.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  $D_{2n}$ is always solvable since it always have a $\mathbb{Z}_n$ as a normal
+  subgroup.
+\end{eg}
+
+\begin{eg}
+  Suppose $G$ is simple (no non-trivial normal subgroup). Then $G$ is solvable
+  iff $G$ is abelian.
+\end{eg}
+
+\begin{eg}
+  Since $A_5$ is simple (by Sylow) and non-abelian, we have that $A_5$ is
+  \hlimpo{not solvable}.
+\end{eg}
+
+\begin{propo}[Subgroups of Solvable Groups are Solvable]\label{propo:subgroups_of_solvable_groups_are_solvable}
+  Let $G$ be a solvable groups. If $N \leq G$, then $N$ is solvable. If $N
+  \trianglelefteq G$, then $G / N$ is solvable.
+\end{propo}
+
+\begin{proof}[sketch]
+  We know
+  \begin{equation*}
+    G = G_0 \supseteq G_1 \supseteq \hdots \supseteq G_n =\{1\}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    N = N \cap G_0 \supseteq N \cap G_1 \supseteq \hdots \supseteq N \cap G_n =
+    \{ 1 \}.
+  \end{equation*}
+  We know that $N \cap G_{i+1} \trianglelefteq N \cap G_i$. Also, by the
+  \hlnotea{Second Isomorphism Theorem} \sidenote{$AB / B \simeq A / A \cap B$},
+  \begin{equation*}
+    N \cap G_i / N \cap G_{i+1} \simeq (N \cap G_i) G_{i+1} / G_{i+1} \subseteq
+    G_i / G_{i+1},
+  \end{equation*}
+  where the last guy is abelian. Thus $N$ is solvable.
+
+  We have
+  \begin{equation*}
+    G / N = \overline{G}_0 \supseteq \overline{G}_1 \supseteq \hdots
+    \supseteq \overline{G}_n = \overline{\{1\}}.
+  \end{equation*}
+  Note that $\overline{G}_i / \overline{G}_{i+1} = \left( G_i N / N \right) /
+  \left( G_{i+1} N / N \right) \simeq G_i N / G_{i+1} N$ by the \hlnotea{Third
+  Isomorphism Theorem}.
+
+  Go check that the last guy is abelian.
+\end{proof}
+
+% subsection solvable_groups (end)
+
+% section solvability_by_radicals (end)
+
+% chapter lecture_29_mar_22nd (end)
 
 \appendix
 
