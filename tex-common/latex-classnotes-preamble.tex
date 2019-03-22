@@ -43,6 +43,7 @@
 \usepackage{faktor}
 \usepackage{float}
 \usepackage{xcolor}
+\usepackage{soul}
 \usepackage{centernot}
 \usepackage{silence}
   \WarningFilter*{latex}{Marginpar on page \thepage\space moved}
@@ -442,7 +443,7 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\hldefn}[1]{\textcolor{blue}{\index{#1}\textbf{#1}}}
 \newcommand{\hlnotea}[1]{\textcolor{green}{\textbf{#1}}}
 \newcommand{\hlnoteb}[1]{\textcolor{cyan}{\textbf{#1}}}
-\newcommand{\hlb}[2]{\colorbox{#1!30!background}{\textbf{#2}}}
+\newcommand{\hlb}[2]{\colorbox{#1!30!background}{#2}}
 \newcommand{\hlbnotea}[1]{\hlb{green}{#1}}
 \newcommand{\hlbnoteb}[1]{\hlb{cyan}{#1}}
 \newcommand{\hlbnotec}[1]{\hlb{yellow}{#1}}
@@ -452,9 +453,9 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\WTS}{\textcolor{bwhite}{WTS} }
 
   % stars on important stuff
-\newcommand{\imponote}{\faStar\ }
-\newcommand{\vimponote}{\faStar\faStar\ }
-\newcommand{\vvimponote}{\faStar\faStar\faStar\ }
+\newcommand{\imponote}{\faStar}
+\newcommand{\vimponote}{\faStar\faStar}
+\newcommand{\vvimponote}{\faStar\faStar\faStar}
 
 % Document header formatting
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
