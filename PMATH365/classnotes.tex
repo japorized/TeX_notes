@@ -5663,10 +5663,10 @@ attaches a vector to each point in the space.}
   \end{equation*}
   where if $\eta$ is an $r$-form on $M$, then $\phi^* \eta$ is an $r$-form on
   $U$ such that
-  \begin{equation*}
+  \begin{equation}\label{eq:pullback_maps_on_submanifolds}
     (\phi^* \eta)_u((W_1)_u, \ldots, (W_r)_u) = \eta_{\phi(u)} ((\dif{\phi})_u
     (W_1)_u, \ldots, (\dif{\phi})_u(W_r)_u),
-  \end{equation*}
+  \end{equation}
   for tangent vectors $(W_1)_u, \ldots, (W_r)_u \in T_u \mathbb{R}^k$.
 \end{defn}
 
@@ -5678,6 +5678,166 @@ attaches a vector to each point in the space.}
 % section smooth_vector_fields_and_forms_on_a_submanifold (end)
 
 % chapter lecture_22_mar_08th (end)
+
+\chapter{Lecture 23 Mar 11th}%
+\label{chp:lecture_23_mar_11th}
+% chapter lecture_23_mar_11th
+
+\section{Smooth Vector Fields and Forms on a Submanifold (Continued)}%
+\label{sec:smooth_vector_fields_and_forms_on_a_submanifold_continued}
+% section smooth_vector_fields_and_forms_on_a_submanifold_continued
+
+\begin{lemma}[Smoothness of Pullbacks and Forms]\label{lemma:smoothness_of_pullbacks_and_forms}
+  Suppose that $\eta$ is an $r$-form on $M$. then $\eta$ is smooth iff the
+  pullback $\phi^* \eta$ is a smooth $r$-form on $U$ for every local
+  parametrization $\phi : U \to \mathbb{R}^n$ of $M$.
+\end{lemma}
+
+\marginnote{Recall from much earlier on that any smooth vector fields on
+$\mathbb{R}^k$ is expressible as a linear combination of $\{ \hat{e}_1, \ldots,
+\hat{e}_k \}$. So, for \cref{lemma:smoothness_of_pullbacks_and_forms} it
+suffices for us to show that the statement holds for these guys.}
+\begin{proof}
+  Let $\{ \hat{e}_1, \ldots, \hat{e}_k \}$ be the standard smooth vector fields
+  on $\mathbb{R}^k$. We want to show that $(\phi^* \eta)(\hat{e}_{l_1}, \ldots,
+  \hat{e}_{l_r})$ is a smooth function on $U$ for all $1 \leq l_1 < \hdots < l_r <
+  \leq k$ iff $\eta$ is smooth. From \cref{eq:pullback_maps_on_submanifolds}, we
+  have
+  \begin{equation}\label{eq:smoothness_of_pullbacks_and_forms_eq1}
+    (\phi^* \eta)_u ((\hat{e}{l_1})_u, \ldots, (\hat{e}_{l_r})_u) =
+    \eta_{\phi(u)} ((\dif{\phi})_u(\hat{e}_{l_1})_u, \ldots, (\dif{\phi})_u
+    (\hat{e}_{l_r})_u).
+  \end{equation}
+  In \cref{eg:important_eg_for_smoothness_on_submanifolds}, we saw that the
+  vector field $\frac{\partial}{\delta u^j}$ on $V \cap M$ given by
+  \begin{equation*}
+    \frac{\partial}{\partial u^j}\at{p}{} = (\dif{\phi})_u(\hat{e}_j)_u
+  \end{equation*}
+  was smooth on $V \cap M$. Thus \cref{eq:smoothness_of_pullbacks_and_forms_eq1}
+  becomes
+  \begin{align*}
+    (\phi^* \eta)_u((\hat{e}_{l_1})_u, \ldots, (\hat{e}_{l_r})_u)
+    &= \eta_p \left( \frac{\partial}{\partial u^{l_1}}\at{p}{}, \ldots,
+    \frac{\partial}{\partial u^{l_r}}\at{p}{} \right) \\
+    &= \left( \eta \left( \frac{\partial}{\partial u^{l_1}}, \ldots,
+    \frac{\partial}{\partial u^{l_r}} \right) \right)(p) \\
+    &= \left( \eta \left( \frac{\partial}{\partial u^{l_1}}, \ldots,
+    \frac{\partial}{\partial u^{l_r}} \right) \right)(\phi(u)).
+  \end{align*}
+  Thus, we see that
+  \begin{equation}\label{eq:smoothness_of_pullbacks_and_forms_eq2}
+    (\phi^* \eta)(\hat{e}_{l_1}, \ldots, \hat{e}_{l_r}) = \left( \eta \left(
+    \frac{\partial}{\partial u^{l_1}}, \ldots, \frac{\partial}{\partial u^{l_r}}
+    \right) \right) \circ \phi : U \to M.
+  \end{equation}
+  We see that, under the definitions
+  \cref{defn:smooth_functions_on_submanifolds} and
+  \cref{defn:smooth_r_forms_on_a_submanifold}, and the fact that each of the
+  $\frac{\partial}{\partial u^j}$'s are smooth on $V \cap M$,
+  \cref{eq:smoothness_of_pullbacks_and_forms_eq2} is smooth iff $\eta$ is smooth
+  on $\eta$ is smooth on $V \cap M$.
+\end{proof}
+
+Now recall that \hyperref[defn:transition_map]{transition maps} are
+\hyperref[propo:transition_maps_are_diffeomorphisms]{diffeomorphic}.
+
+\begin{lemma}[Composition of Pullbacks of Transition Maps and Parametrizations]\label{lemma:composition_of_pullbacks_of_transition_maps_and_parametrizations}
+  Let $\phi_\alpha : U_\alpha \to V_\alpha \cap M$ and $\phi_\beta : U_\beta \to
+  V_\beta \cap M$ be two local parametrizations for $M$ such that $V_\alpha \cap
+  V_\beta \cap M \neq \emptyset$. Let $\eta$ be a smooth $r$-form on $M$. Then
+  \begin{equation}\label{eq:composition_of_pullbacks_of_transition_maps_and_parametrizations}
+    \phi^*_{\beta \alpha} \phi_\beta^* \eta = \phi_\alpha^* \eta.
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  Notice that we have $\phi_\beta \circ \phi_{\beta \alpha} = \phi_\alpha$. Thus
+  \begin{equation*}
+    \phi^*_{\beta \alpha} \phi_\beta^* \eta = = \left( \phi_\beta \circ
+    \phi_{\beta \alpha} \right)^* \eta = \phi_\alpha^* \eta.
+  \end{equation*}
+\end{proof}
+
+\marginnote{\cref{crly:_r_forms_on_a_submanifold_and_its_parametrizations_are_equivalent}
+tells us that the $r$-forms on $M$ stays consistent across the different
+parametrizations, and this equivalence comes from the transition map between
+parametrizations.}
+\begin{crly}[$r$-forms on a Submanifold and Its Parametrizations are Equivalent]\label{crly:_r_forms_on_a_submanifold_and_its_parametrizations_are_equivalent}
+  A smooth $r$-form $\eta$ on $M$ is equivalent to the smooth $\eta_\alpha$ on
+  each $U_\alpha$, an allowable local parametrization of $M$, subject to the
+  compatibility relation that
+  \begin{equation*}
+    \phi_{\beta\alpha}^* \eta_\beta = \eta_\alpha.
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  We may choose $\eta_\alpha = \phi_\alpha^* \eta$. Then by choosing $\eta_\beta
+  = \phi_\alpha^* \eta$, we can apply
+  \cref{lemma:composition_of_pullbacks_of_transition_maps_and_parametrizations}
+  and \cref{lemma:smoothness_of_pullbacks_and_forms} and complete our proof.
+\end{proof}
+
+\begin{remark}
+  Note that if $M$ can be covered by the image of a single parametrization $\phi
+  : U \to \mathbb{R}^n$, then
+  \cref{crly:_r_forms_on_a_submanifold_and_its_parametrizations_are_equivalent}
+  says that a smooth $r$-form $\eta$ on $M  = \phi(U)$ is equivalent to a smooth
+  $r$-form $\phi^* \eta$ on $U$, since there the compactibility relation is
+  trivially satisfied.
+\end{remark}
+
+\begin{defn}[Exterior Derivative on Submanifolds]\index{Exterior Derivative}\label{defn:exterior_derivative_on_submanifolds}
+  Let $M$ be a $k$-dimensional submanifold of $\mathbb{R}^n$. Let $\eta \in
+  \Omega^r(M)$. Then we define the \hlnoteb{exterior derivative} of $\eta$ as
+  $\dif{\eta} \in \Omega^{r+1}(M)$, given by
+  \begin{equation}\label{eq:exterior_derivative_on_submanifolds}
+    \phi_\alpha^* \dif{\eta} = \dif{\phi_\alpha^* \eta}
+  \end{equation}
+  for any local parametrization $\phi_\alpha$ of $M$.
+\end{defn}
+
+\begin{note}
+  The $\dif{}$ on the RHS is the \hyperref[defn:exterior_derivative]{usual
+  exterior derivative} on $\Omega^r(U_\alpha)$.
+\end{note}
+
+\begin{remark}
+  It appears that \cref{defn:exterior_derivative_on_submanifolds} was defined to
+  be dependent on the choice of parametriztion. However, if we make use of
+  \cref{propo:commutativity_of_the_pullback_and_the_exterior_derivative} and
+  \cref{eq:composition_of_pullbacks_of_transition_maps_and_parametrizations}, we
+  can compute
+  \begin{equation*}
+    \dif{\phi_\alpha^* \eta} = \dif{\phi_{\beta\alpha}^* \phi_\beta^* \eta}
+    = \phi_{\beta\alpha}^* \dif{\phi_\beta^* \eta}.
+  \end{equation*}
+  We also have that
+  \begin{equation*}
+    \phi_\alpha^* \dif{\eta} = \phi_{\beta\alpha}^* \phi_{\beta}^* \dif{\eta},
+  \end{equation*}
+  which we see that it agrees with
+  \cref{crly:_r_forms_on_a_submanifold_and_its_parametrizations_are_equivalent}.
+\end{remark}
+
+\begin{propo}[Square of the exterior derivative is a zero map on submanifolds]\label{propo:square_of_the_exterior_derivative_is_a_zero_map_on_submanifolds}
+  The operator $\dif{} : \Omega^r(M) \to \omega^{r+1}(M)$ is linear and
+  satisfies $\dif{^2} = 0$ and
+  \begin{equation*}
+    \dif{(\eta \land \zeta)} = (\dif{\eta}) \land \zeta + (-1)^{\abs{\eta}} \eta
+    \land (\dif{\zeta}).
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  This is essentially just restating
+  \cref{thm:defining_properties_of_the_exterior_derivative} and
+  \cref{propo:properties_of_the_pullback}.
+\end{proof}
+
+% section smooth_vector_fields_and_forms_on_a_submanifold_continued (end)
+
+% chapter lecture_23_mar_11th (end)
 
 \chapter{Lecture 27 Mar 20th}%
 \label{chp:lecture_27_mar_20th}
