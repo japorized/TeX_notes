@@ -22,6 +22,7 @@
 \DeclareMathOperator{\dist}{dist}
 \DeclareMathOperator{\Der}{Der}
 \DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\supp}{supp}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -2680,7 +2681,7 @@ Hence the derivations on $C^\infty(U)$ are exactly the smooth vector fields on $
 \label{sec:smooth_1_forms}
 % section smooth_1_forms
 
-\begin{defn}[Cotangent Spaces and Cotangent Vectors]\index{Cotangent Spaces}\index{Cotangent Vectors}\label{defn:cotangent_spaces_and_cotangent_vectors}
+\begin{defn}[Cotangent Spaces and Cotangent Vectors]\index{Cotangent Space}\index{Cotangent Vector}\label{defn:cotangent_spaces_and_cotangent_vectors}
   Let $p \in \mathbb{R}^n$. The \hlnoteb{cotangent space} to $\mathbb{R}^n$ at $p$ is defined
   to be the dual space $(T_p \mathbb{R}^n)^*$ of $T_p \mathbb{R}^n$, which is denoted as
   $T_p^* \mathbb{R}^n$. An element $\alpha_p \in T_p^* \mathbb{R}^n$, which is a linear map
@@ -5839,7 +5840,74 @@ parametrizations.}
 
 % chapter lecture_23_mar_11th (end)
 
-\chapter{Lecture 27 Mar 20th}%
+\chapter{Lecture 24 Mar 13th [dirty]}%
+\label{chp:lecture_24_mar_13th}
+% chapter lecture_24_mar_13th
+
+Our current goal is to define integration. However, there are certain
+submanifolds that we cannot have a sensible definition for integration. This
+section give us the basics to understand why integrability cannot be defined on
+these submanifolds.
+
+In particular, we shall see that \hlimpo{not every submanifold can be endowed
+with an orientation}.
+
+\section{Orientability and Orientation of Submanifolds}%
+\label{sec:orientability_and_orientation_of_submanifolds}
+% section orientability_and_orientation_of_submanifolds
+
+Recall that in \cref{defn:orientation} we defined an orientation of a
+$k$-dimensional real vector space $V$ as a choice of a nonzero element $\mu \in
+\Lambda^k(V)$, up to scaling by a positive real number. Equivalently so, it is
+an equivalence class of ordered bases of $V$.
+
+There is a correspondence between the two characterizations: if $\mathcal{B} =
+\{ e_1, \ldots e_k \}$ is an ordered basis of $V$, then the orientation it
+determines is the equivalence class $\mu = e_1 \land \hdots \land e_k \in
+\Lambda^k(V)$. Furthermore, we saw, in \cref{sub:application_to_orientations}
+that an orientation on $V$ is equivalent to an orientation on its dual space
+$V^*$.
+
+By the above notes, we know that an orientation on $V$ is equivalent to an
+nonzero elements $\mu \in \Lambda^k(V^*)$, where $\mu \sim \tilde{\mu}$ iff
+$\tilde{\mu} = \lambda \mu$, where $\lambda > 0$.
+
+\begin{defn}[Orientable Submanifolds]\index{Orientable Submanifolds}\label{defn:orientable_submanifolds}
+  Let $M$ be a $k$-dimensional submanifold on $\mathbb{R}^n$. We say that $M$ is
+  \hlnoteb{orientable} if there exist a nowhere vanishing smooth $k$-form on
+  $M$, i.e. $\exists \mu \in \Omega^k(M)$ such that $\mu_p \neq 0$ for all $p
+  \in M$.
+
+  Submanifolds that are not orientable are said to be \hldefn{non-orientable}.
+\end{defn}
+
+\begin{note}
+  Suppose $M$ is orientable and let $\mu$ and $\tilde{\mu}$ be two nowhere
+  vanishing $k$-forms on $M$. Then $\exists f \in C^\infty(M)$ such that
+  $\tilde{\mu} = f \mu$. We say that $\mu \sim \tilde{\mu}$ if $f > 0$, i.e.
+  $f(p) > 0$ for all $p \in M$. This is, quite clearly, an \hlnotea{equivalence
+  relation}.
+
+  Thus, an \hlnoteb{orientation} on an orientable $M$ is a choice of equivalence
+  class $[\mu]$ of nowhere vainishing smooth $k$-forms on $M$.
+\end{note}
+
+% TODO: Example 4.57
+\begin{eg}
+  \hlwarn{to be added}
+\end{eg}
+
+\begin{defn}[Compatible Orientation]\index{Compatible Orientation}\label{defn:compatible_orientation}
+  Let $M$ be a $k$-dimensional submanifold. Suppose that $M$ is orientable and
+  let $\mu$ be an orientation for $M$. Let $\phi : U \to M$ be a local
+  parametrization for $M$ with image $V \cap M$.
+\end{defn}
+
+% section orientability_and_orientation_of_submanifolds (end)
+
+% chapter lecture_24_mar_13th (end)
+
+\chapter{Lecture 27 Mar 20th [dirty]}%
 \label{chp:lecture_27_mar_20th}
 % chapter lecture_27_mar_20th
 
@@ -5868,6 +5936,410 @@ parametrizations.}
 % section partitions_of_unity_continued (end)
 
 % chapter lecture_27_mar_20th (end)
+
+\chapter{Lecture 28 Mar 22nd [dirty]}%
+\label{chp:lecture_28_mar_22nd}
+% chapter lecture_28_mar_22nd
+
+\section{Integration of Forms (Continued)}%
+\label{sec:integration_of_forms_continued}
+% section integration_of_forms_continued
+
+From last time, let $M = \phi(U) = \tilde{\phi}(\tilde{U})$ be a parametrized
+$k$-dimensional submanfold.
+
+Let $w \in \Omega^k(M)$. We defined
+\begin{equation*}
+  \int_{M} w = \int_{U} \phi^* w = \int_{\tilde{U}} \tilde{\phi}^* w .
+\end{equation*}
+We showed that this is well-defined iff $\phi, \tilde{\phi}$ determine the same
+orientation iff $\det (\D (\tilde{\phi}^{-1} \circ \phi)) > 0$.
+
+\newthought{Now let} $M$ be a compact $k$-dimensional submanifold of
+$\mathbb{R}^n$. Let $w \in \Omega^k(M)$, where $\supp(w)$ is a closed subset of
+$M$, which is compact, and so $\supp(w)$ is compact. We want to define
+\begin{equation*}
+  \mathbb{R} \ni \int_{M} w. 
+\end{equation*}
+
+The idea is to use \hyperref[sec:partitions_of_unity_continued]{partitions of
+unity} to decompose $\omega$ into a finite sum of smooth $k$-forms, with each of them
+\hlnotea{compactly supported} in the image of the single parametrization.
+
+We handle these as we did last time and add some results. We need to show that
+this process is independent of our choices \sidenote{\hlwarn{elaborate}}.
+
+Let $\{ V_\alpha \cap M : \alpha \in A \}$ be a cover of $M$ given by images of
+local parametrizations $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ of $M$, all of
+which are \hlnotea{compatible} with the given orientation on $M$.
+
+Let $\{ \rho_j : j = 1, \ldots, m \}$ be a partition of unity corresponding to
+the above cover, where $\rho_j : M \to \mathbb{R}$ is smooth,
+\begin{itemize}
+  \item $0 \leq \rho_j(p) \leq 1$ for each $p$, and
+  \item $\sum_{j=1}^{m} \rho_j = 1$,
+\end{itemize}
+where $\supp(\rho_j) \subseteq V_{\alpha(j)} \cap M$ for some $\alpha(j) \in A$.
+Let us denote $V_{\alpha(j)} = V_j$, and $\phi_{\alpha(j)} = \phi_j$. Note that
+\begin{equation*}
+  \bigcup_{j=1}^{m} V_j \supseteq M.
+\end{equation*}
+
+Observe that
+\begin{equation*}
+  \omega = 1 \cdot \omega = \left( \sum_{j=1}^{m} \rho_j \right) \omega =
+  \sum_{j=1}^{m} (\rho_j \omega),
+\end{equation*}
+and
+\begin{equation*}
+  \supp(\rho_j \omega) \subseteq \supp(\rho_j) \subseteq V_j \cap M.
+\end{equation*}
+Hence, we can consider $\rho_j \omega$ as a smooth $k$-form on $V_j$ and define
+\begin{equation*}
+  \int_{M} \rho_j \omega := \int_{V_j \cap M} \rho_j \omega = \int_{U_j}
+  \phi_j^* (\rho_j \omega).
+\end{equation*}
+This is sensible because $\rho_j \omega$ vanishes outside of $V_j \cap M$.
+
+Thus we define
+\begin{equation*}
+  \int_{M} \omega = \int_{M} \left( \sum_{j=1}^{m} \rho_j \omega \right) :=
+  \sum_{j=1}^{m} \int_{M} \rho_j \omega \in \mathbb{R}. 
+\end{equation*}
+
+Now we need to show that the result is independent of the choice of the
+parametrization.
+
+Let $\{ W_\beta \cap M : \beta \in B \}$ be a cover of $M$ by images of local
+parametrizations $\psi_\beta$ of $M$ compatible with the given orientation.
+
+Let $\{ \sigma_i : i = 1, \ldots, l \}$ be a partition of unity for this cover,
+with the usual properties \sidenote{\hlwarn{needs expansion, but we know what
+this is.}}.
+
+\marginnote{Note that
+\begin{equation*}
+  \supp(\rho_j \omega) \subseteq V_j \cap M,
+\end{equation*}
+and
+\begin{equation*}
+  \supp(\sigma_i \rho_j \omega) \subseteq W_i \cap V_j \cap M.
+\end{equation*}
+}
+By our first choice, we have
+\begin{align*}
+  \int_{M} \omega &= \sum_{j=1}^{m} \int_{M} \rho_j \omega = \sum_{j=1}^{m}
+  \int_{M} \left( \sum_{i=1}^{l} \sigma_i \right) \rho_j \omega \\
+  & = \sum_{j=1}^{m} \sum_{i=1}^{l} \int_{M} \sigma_i \rho_j \omega  =
+  \sum_{i=1}^{l} \sum_{j=1}^{m} \int_{M} \rho_j \sigma_i \omega \\
+  &= \sum_{i=1}^{l} \int_{M} \left( \sum_{j=1}^{m} \rho_j \right) \sigma_i \omega = \sum_{i=1}^{l} \int_{M} \sigma_i \omega = \int_{M} \omega,
+\end{align*}
+where the final equality is by our second choice.
+
+\begin{thm}[Stokes' Theorem (First Version)]\index{Stokes' Theorem}\label{thm:stokes_theorem_first}
+  Suppose $M$ is a compact and oriented $k$-dimensional submanifold of
+  $\mathbb{R}^n$, and $\omega \in \Omega^{k - 1}(M)$ and $\dif{\omega} \in
+  \Omega^k(M)$, then
+  \begin{equation*}
+    \int_{M} \dif{\omega} = 0. 
+  \end{equation*}
+\end{thm}
+
+We will prove a result more general than the above.
+
+More generally, if $M$ is a $k$-dimensional, compact, and oriented submanifold,
+\hlnotea{with boundary} (defined later), then $\partial M$ (the boundary) is a
+compact, oriented $(k - 1)$-dimensional submanifold, such that
+\begin{equation*}
+  \int_{M} \partial M = \int_{\partial M} \omega. 
+\end{equation*}
+
+% section integration_of_forms_continued (end)
+
+\section{Submanifolds with Boundary}%
+\label{sec:submanifolds_with_boundary}
+% section submanifolds_with_boundary
+
+\begin{defn}[Half Space]\index{Half Space}\label{defn:half_space}
+  We define the \hlnoteb{half space} of $\mathbb{R}^n$ as
+  \begin{equation*}
+    \mathbb{H}^n := \left\{ x \in \mathbb{R}^n : x^1 \leq 0 \right\}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  The half space is closed but unbounded.
+\end{note}
+
+\begin{defn}[Boundary of the Half Space]\index{Boundary of the Half Space}\label{defn:boundary_of_the_half_space}
+  We define the \hlnoteb{boundary of the half space as}
+  \begin{equation*}
+    \partial \mathbb{H}^n := \left\{ x \in \mathbb{R}^n : x^1 = 0 \right\}
+    \simeq \mathbb{R}^{n - 1}.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Open Subset in a Half Space]\index{{Open set in a Half Space}}\label{defn:open_subset_in_a_half_space}
+  A subset $A$ of $\mathbb{H}^n$ is said to be \hlnoteb{open} in $\mathbb{H}^n$ if $A = U
+  \cap \mathbb{H}^n$ where $U \subseteq \mathbb{R}^n$ is open.
+\end{defn}
+
+\begin{note}
+  A subset $A$ which is open in $\mathbb{H}^n$ may or may not be open in
+  $\mathbb{R}^n$.
+\end{note}
+
+\begin{lemma}[Characterization of Open Sets in a Half Space]\label{lemma:characterization_of_open_sets_in_a_half_space}
+  Let $A, B \subseteq \mathbb{H}^n$. If $A \subseteq \mathbb{R}^n$, then $A$ is
+  open in $\mathbb{H}^n$. Suppose $B \cap \partial \mathbb{H}^n = \emptyset$. If
+  $B$ is open in $\mathbb{H}^n$, then $B$ is open in $\mathbb{R}^n$.
+\end{lemma}
+
+\begin{proof}
+  We have that $A$ is open in $\mathbb{R}^n$ and contained in $\mathbb{H}^n$.
+  Then we simply need to take $U = A \subseteq \mathbb{R}^n$. Thus $A$ is open
+  in $\mathbb{H}^n$.
+
+  Suppose $B \cap \partial \mathbb{H}^n = \emptyset$. Let $B$ be open in
+  $\mathbb{H}^n$. Then $\exists U \subseteq \mathbb{R}^n$ open such that $B = U
+  \cap \mathbb{H}^n$. Let $W = \mathbb{H}^n \setminus \partial \mathbb{H}^n =
+  \left\{ x \in \mathbb{R}^n : x^1 < 0 \right\}$,
+  which is open in $\mathbb{R}^n$. It follows that $B \subseteq W$ and so $B = U
+  \cap W$, which is an intersection of open sets in $\mathbb{R}^n$. Thus $B$ is
+  open in $\mathbb{R}^n$.
+\end{proof}
+
+\begin{defn}[Interior point in the Half Space]\index{Interior point in the Half Space}\label{defn:interior_point_in_the_half_space}
+  Let $A \subseteq \mathbb{H}^n$ be open in $\mathbb{H}^n$. Then $p \in A$ is
+  called a \hlnoteb{interior point} of $A$ if $p \notin \partial \mathbb{H}^n$
+  \sidenote{We have that $\exists \epsilon > 0$ such that $B(p, \epsilon)
+  \subseteq A$.}.
+\end{defn}
+
+\begin{defn}[Boundary point in the Half Space]\index{Boundary point in the Half Space}\label{defn:boundary_point_in_the_half_space}
+  Let $A \subseteq \mathbb{H}^n$ be open in $\mathbb{H}^n$. Then $p \in A$ is
+  called an \hlnoteb{boundary point} of $A$ if $p \in \partial \mathbb{H}^n$
+  \sidenote{In this case, we have that $\forall \epsilon > 0$ such that $B(p,
+  \epsilon) \subsetneq A$.}.
+\end{defn}
+
+\begin{defn}[Smooth functions in the Half Space]\index{Smooth functions in the Half Space}\label{defn:smooth_functions_in_the_half_space}
+  Let $A \subseteq \mathbb{H}^n$ be open in $\mathbb{H}^n$, $f : A \to
+  \mathbb{H}^n$ and $p \in A$. We say that $f$ is \hlnoteb{smooth} at $p$ if
+  $\exists$ an open neighbourhood $U \subseteq \mathbb{R}^n$ of $p$ and a map
+  $\tilde{f} : U \to \mathbb{R}^n$ such that
+  \begin{enumerate}
+    \item $f \restriction_{U \cap A} = \tilde{f} \restriction_{U \cap A}$ and
+    \item $\tilde{f}$ is smooth at $p$.
+  \end{enumerate}
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item If $p$ is an interior point of $A$, then this \hlnotea{agrees} with
+      the usual definition of smoothness because we can just talk about $U =
+      B(p, \epsilon) \subseteq A$, and $\tilde{f} = f \restriction_{U}$. So if
+      $f$ is smooth at $p$, we define
+      \begin{equation*}
+        (\D f)_p := (\D \tilde{f})_p.
+      \end{equation*}
+  \end{enumerate}
+\end{remark}
+
+\hlbnoted{Claim} $(\D f)_p$ is well-defined (i.e. indeppendent of the choice of
+$\tilde{f}$).
+
+\begin{defn}[Submanifold with Boundary]\index{Submanifold with Boundary}\label{defn:submanifold_with_boundary}
+  Let $M \subseteq \mathbb{R}^n$. We say that $M$ is a \hlnoteb{$k$-dimensional
+  submanifold with boundary} of $\mathbb{R}^n$ if there exists a cover of $M$ by
+  subsets $\{ V_\alpha : \alpha \in A \}$ and a collection of subsets $\{
+  U_\alpha : \alpha \in A \} \subseteq \mathcal{P}(\mathbb{H}^k)$, each
+  $U_\alpha$ open in $\mathbb{H}^k$, and maps $\phi_\alpha : U_\alpha \to
+  \mathbb{R}^n$, such that each
+  \begin{enumerate}
+    \item $\phi_\alpha$ is a homeomorphism of $U_\alpha$ onto
+      $\phi_\alpha(U_\alpha) = V_\alpha \cap M$, and
+    \item $\phi_\alpha$ is a smooth immersion.
+  \end{enumerate}
+\end{defn}
+
+% section submanifolds_with_boundary (end)
+
+% chapter lecture_28_mar_22nd (end)
+
+\chapter{Lecture 29 Mar 25th [dirty]}%
+\label{chp:lecture_29_mar_25th}
+% chapter lecture_29_mar_25th
+
+\section{Submanifold with Boundary (Continued)}%
+\label{sec:submanifold_with_boundary_continued}
+% section submanifold_with_boundary_continued
+
+We defined, in the last lecture, what a submanifold with boundary is. We saw
+that a $k$-dimensional submanifold with boundary is a collection of overlapping
+pieces, each homeomorphic to an open set in $\mathbb{H}^k$.
+
+Suppose $\phi_\alpha(A_\alpha) \cap \phi_b(A_\beta) \neq \emptyset$. We define
+the transition map
+\begin{equation*}
+  \phi_{\beta\alpha} : \phi_\alpha^{-1}(\phi_\alpha(A_\alpha) \cap
+  \phi_\beta(A_\beta)) \to \phi_\beta^{-1}(\phi_\alpha(A_\alpha) \cap
+  \phi_\beta(A_\beta))
+\end{equation*}
+by
+\begin{equation*}
+  \phi_{\beta\alpha} = \phi_\beta^{-1} \circ \phi_\alpha.
+\end{equation*}
+This is the same definition as \cref{defn:transition_map}, but this time, our
+open sets come from $\mathbb{H}^k$.
+
+We still have \cref{propo:transition_maps_are_diffeomorphisms}, i.e. 
+transition maps are diffeomorphisms, and the same proof can be applied.
+
+\begin{remark}
+  Using the local parametrizations $\phi_\alpha$ for a submanifold with boundary
+  $M$, and the fact that transition maps are diffeomorphisms, we can now define
+  \begin{itemize}
+    \item smooth functions on $M$,
+    \item smooth curves on $M$, 
+    \item smooth vector fields on $M$,
+    \item smooth differential forms ($r$-forms) on $M$ for $0 \leq r \leq k$,
+    \item orientations and orientability,
+    \item partitions of unity, and
+    \item integration of smooth $k$-forms if $M$ is oriented and compact,
+  \end{itemize}
+  all exactly as before. The only difference is that we replace open set in
+  $\mathbb{R}^k$ by open sets in $\mathbb{H}^k$.
+\end{remark}
+
+\begin{remark}
+  If all the $A_\alpha$'s are actually open in $\mathbb{R}^k$, then $M$ is a
+  $k$-dimensional submanifold in the previous sense.
+\end{remark}
+
+\newthought{So we defined} what a submanifold with boundary is, but what is a
+boundary?
+
+\begin{defn}[Boundary Point on a Submanifold]\index{Boundary Point on a Submanifold}\label{defn:boundary_point_on_a_submanifold}
+  Let $M$ be a $k$-dimensional submanifol with boundary. A point $p \in M$ is
+  called a \hlnoteb{boundary point} of $M$ if there exists a local
+  parametrization $\phi_\alpha : A_\alpha \to M$ with $p \in
+  \phi_\alpha(A_\alpha)$ such that $\phi_\alpha^{-1} (p) \in \partial
+  \mathbb{H}^k$.
+\end{defn}
+
+Of course, we can ask ourselves if the above definition is well-defined. That
+is, can there but a $\phi_\beta$ such that $\phi_\beta^{-1}(p)$ is not on
+$\partial A_\beta$?
+
+\begin{propo}[Well-definedness of the Boundary of a Manifold]\label{propo:well_definedness_of_the_boundary_of_a_manifold}
+  Let $p \in M$ be a boundary point. Then $\phi_\beta^{-1}(p) \in \partial
+  \mathbb{H}^k$ for all local parametrizations $\phi_\beta : A_\beta \to
+  \mathbb{R}^n$ of  $M$.
+\end{propo}
+
+\begin{proof}
+  Suppose not. Let $u_\alpha = \phi_\alpha^{-1}(p) \in \partial \mathbb{H}^k$ so
+  that $u_\alpha$ is a boundary point of $A_\alpha$, and suppose there exists
+  $\phi_\beta$ a parametrization such that $u_\beta = \phi_\beta^{-1}(p) \notin
+  \partial \mathbb{H}^k$, i.e. $u_\beta$ is an interior point of $A_\beta$.
+
+  Now the transition map
+  \begin{equation*}
+    \phi_{\alpha\beta} = \phi_\alpha^{-1} \circ \phi_\beta
+  \end{equation*}
+  is a diffeomorphism between the opens subsets of $\mathbb{H}^k$ that takes
+  $u_\beta$ to $\phi_{\alpha\beta}(u_\beta) = u_\alpha$. Since $u_\beta$ is an
+  interior point of $A_\beta$, there exists an open set $W \subseteq
+  \mathbb{R}^k$ such that $u_\beta \in W$ in the domain of $\phi_{\alpha\beta}$.
+  Then $W \cap \partial \mathbb{H}^k = \emptyset$.
+
+  Restrict the diffeomorphism $\phi_{\alpha\beta}$ to $W$, and so $(\D
+  \phi_{\alpha\beta})_{u_\beta}$ is invertble. By the inverse function theorem,
+  $\exists \tilde{W} \subseteq W$ open in $\mathbb{R}^k$, with $u_\alpha \in
+  \tilde{W}$ such that $\phi_{\alpha\beta}$ maps $\tilde{W}$ diffeomorphically
+  onto $\phi_{\alpha\beta}(W)$, which is an open set in $\mathbb{R}^k$. Thus
+  \begin{equation*}
+    u_\alpha = \phi_{\alpha\beta}(u_\beta) \in \phi_{\alpha\beta} (W) \subseteq
+    \mathbb{R}^k \text{ open. }
+  \end{equation*}
+  So $\exists Y \subseteq \mathbb{R}^k$ open, with $u_\beta \in Y \subseteq
+  \phi_{\alpha\beta}(\tilde{W}) \subseteq \phi_{\alpha\beta}(W) \subseteq
+  A_{\alpha}$. Thus there exists points in $A_\alpha$ with $u^1 > 0$, which is
+  impossible since we are in $\mathbb{H}^k$.
+\end{proof}
+
+\begin{defn}[Boundary of a Submanifold]\index{Boundary of a Submanifold}\label{defn:boundary_of_a_submanifold}
+  Let $M$ be a $k$-dimensional submanifold with boundary. The \hlnoteb{boundary}
+  of $M$ is denoted $\partial M$ and is the subset of $M$ consisting of all
+  boundary points of $M$.
+\end{defn}
+
+\begin{note}
+  A submanifold $M$ with boundary is an ordinary submanifold (i.e. submanifold
+  without boundary) iff $\partial M = \emptyset$.
+\end{note}
+
+\begin{propo}[Dimension of the Boundary of a Submanifold]\label{propo:dimension_of_the_boundary_of_a_submanifold}
+  Let $M$ be a $k$-dimensional submanifold with boundary. Suppose $\partial M
+  \neq \emptyset$. Then $\partial M$ is a $(k - 1)$-dimensional submanifold with
+  boundary, i.e. $\partial(\partial M) = \emptyset$.
+\end{propo}
+
+\begin{proof}
+  We need to find a cover of $\partial M$ by local parametrizations whose
+  domains are open sets in $\mathbb{R}^{k-1}$.
+
+  Let  $p \in \partial M \subseteq M$, so that there exists a local
+  parametrization $\phi$ of $M$ such that $\phi : A \to \mathbb{R}^n$, where $A$ 
+  is open in $\mathbb{H}^k$, with $p \in \phi(A)$. Let $\hat{\phi}$ be the
+  restriction of $\phi$ to $A \cap (\partial \mathbb{H}^k)$.
+
+  Let $\hat{A} = A \cap (\partial \mathbb{H}^k)$. \hlbnotec{Check} $\hat{A}$ is
+  open in $\partial \mathbb{H}^k \simeq \mathbb{R}^{k-1}$. Let
+  \begin{equation*}
+    \hat{\phi}(p) = (0, u^2, \ldots, u^k) \in (\partial \mathbb{H}^k) \cap A,
+  \end{equation*}
+  and
+  \begin{equation*}
+    \hat{u} = (u^2, \ldots, u^k) \in \hat{A}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \hat{\phi}(\hat{u}) = p \in \partial M.
+  \end{equation*}
+  We need to show that $\hat{\phi} : \hat{A} \to \mathbb{R}^n$, where $\hat{A}$ 
+  is open in $\mathbb{R}^{k-1}$, is a smooth immersion and a homeomorphism onto
+  its image.
+
+  Since $\phi$ is smooth at $v \in A \cap \partial \mathbb{H}^k$, we have that
+  $\hat{\phi}$ is smooth at $\hat{v} \in \hat{A}$. The Jacobian
+  \begin{equation*}
+    (\D \hat{\phi})_{\hat{u}} = \begin{pmatrix}
+      \frac{\partial \phi^1}{\partial u^2} \at{\hat{u}}{} & \hdots &
+      \frac{\partial \phi^1}{\partial u^k}
+      \at{\hat{u}}{} \\
+      \vdots & & \vdots \\
+      \frac{\partial \phi^n}{\partial u^2} \at{\hat{u}}{} & \hdots & \frac{\partial \phi^n}{\partial u^k} \at{\hat{u}}{}
+    \end{pmatrix}.
+  \end{equation*}
+  $\phi$ is an immersion, so columns of $(\D \phi)_{\hat{u}}$ are linearly
+  independent, so columns are $(\D \hat{\phi})_{\hat{u}}$ are still linearly
+  independent, hence $\hat{\phi}$ is an immersion.
+
+  So $\hat{\phi}$ is continuous because it is the restriction of a continuous
+  map. Thus
+  \begin{equation*}
+    (\hat{\phi})^{-1} : \hat{\phi}(\hat{A}) \to \hat{A}
+  \end{equation*}
+  is the restriction of $\phi^{-1}$ to $\phi(\hat{A})$, and so it is also
+  continuous. Thus $\hat{\phi}$ is a homeomorphism onto its image. Thus
+  $\hat{\phi}$ is a local parametrization for $\partial M$.
+\end{proof}
+
+% section submanifold_with_boundary_continued (end)
+
+% chapter lecture_29_mar_25th (end)
 
 \appendix
 
