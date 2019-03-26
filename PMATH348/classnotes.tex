@@ -3954,6 +3954,137 @@ work required to prove the fundamental theorem later on.
   \end{enumerate}
 \end{thm}
 
+\marginnote{
+\begin{strategy}
+  One sensible approach is to see how large is this extension. Since $[K : F]
+  \leq \abs{H}$ is what we want, let's go against that.
+
+  One may resort to try to use technique that were used lately, particularly,
+  considering minimal polynomials of elements in $K$ algebraic over $F$, and
+  then try to get to the splitting field of the polynomial of the product of
+  those unique minimal polynomials. This, however, is not helpful, for we would
+  go up into an extension where there is more `freedom', and so making it
+  difficult to find a contradiction.
+\end{strategy}}
+\begin{proof}
+  First, note that since $F = \Fix(H)$, we have that $H \subseteq \Gal(K / F)$ 
+  since, in a rather dumb way of putting it, $H$ only moves the elements in $K$ 
+  that it can, and it cannot move the elements in $F$ since $F$ is exactly the
+  elements that $H$ cannot move.
+
+  Then we have one part of (3), i.e.
+  \begin{equation*}
+    \abs{H} \leq \abs{\Gal(K / F)} \leq [K : F],
+  \end{equation*}
+  where the second inequality is because we do not know if $K$ is the splitting
+  field of some non-constant separable polynomial in $F[x]$.
+
+  Observe that if $[K : F] \leq \abs{H}$, then all of our results will follow.
+  In particular, (3) would then be true. Then, $\abs{\Gal(K / F)} = [K : F]$
+  implies that $K / F$ is Galois by
+  \hyperref[thm:characterization_of_galois_extensions]{the characterization of
+  Galois extensions}. Also, since $H \subseteq \Gal(K / F)$, $\abs{H} =
+  \abs{\Gal(K / F)}$ would give us (2).
+
+  Let $\abs{H} = m$. Let $\beta_1, \ldots, \beta_n \in K^\times$, and suppose to
+  the contrary that $n > m$.\sidenote{It is logical to make the next step
+  provided that one is being conscious of knowledge from linear algebra.}
+  
+  \noindent
+  \hlbnoted{Claim} $\{\beta_1, \ldots, \beta_n\}$ is linearly independent on
+  $F$.
+
+  Consider the system of linear equations
+  \begin{equation*}
+    \phi(\beta_1) x_1 + \phi(\beta_2) x_2 + \hdots + \phi(\beta_n) x_n,
+  \end{equation*}
+  where we let $\phi$ range over $H$. Since $\abs{H} = m$, we have $m$-many such
+  linear equations. Notice that there are more variables than there are
+  equations, and so we must have a non-trivial solution $(x_1, x_2, \ldots, x_n)
+  \in K^n$.
+
+  Note that if $\psi \in H$, for any $\phi \in H$, since $\psi \in H$ is a
+  homomorphism we have
+  \begin{align*}
+    &\phi(\beta_1) \psi(x_1) + \phi(\beta_2) \psi(x_2) + \hdots \phi(\beta_n)
+      \psi_n \\
+    &= \psi\left(\psi^{-1} \phi(\beta_1) x_1 + \psi^{-1} \phi(\beta_2) x_2 +
+      \hdots \psi^{-1} \phi(\beta_n) x_n\right) \\
+    &= \psi^{-1}(0) = 0,
+  \end{align*}
+  where the second last equality is because the term in the parenthesis is one
+  of the linear equations from before. It follows that $(\psi(x_1), \ldots,
+  \psi(x_n)) \in K^n$ is also a non-trivial solution. From this, we know that
+  there are $m$-many such non-trivial solutions.
+
+  \sidenote{This is a non-trivial step. I can't seem to figure out how this can
+  come by though.} Let $(x_1, \ldots, x_n)$ be a non-trivial solution with a
+  minimal number of non-zero entries \sidenote{We want this guy to have as many
+  zeroes as possible.}. Reordering if necessary, wma
+  \begin{equation*}
+    (x_1, \ldots, x_n) = (x_1, \ldots, x_r, 0, \ldots, 0),
+  \end{equation*}
+  where for $i = 1,\,2,\,\ldots,\,r$, we have $x_i \neq 0$. Note that $r > 1$,
+  for otherwise $\phi(\beta_1) x_1 = 0 \implies x_1 = 0$, a contradiction.
+  Notice that
+  \begin{equation*}
+    \left( 1, \frac{x_2}{x_1}, \frac{x_3}{x_1}, \ldots, \frac{x_n}{x_1} \right)
+  \end{equation*}
+  is also a solution. Thus wma $x_1 = 1$, i.e. we assume
+  \begin{equation}\label{eq:key_to_artin}
+    (x_1, x_2, \ldots, x_r, 0, \ldots, 0) = (1, x_2, x_3, \ldots, x_r, 0, \ldots, 0).
+  \end{equation}
+
+  Now, notice that if $x_2, x_3, \ldots, x_r \in F$, then we have
+  \begin{equation*}
+    \beta_1 + \beta_2 x_2 + \hdots \beta_n x_n = 0,
+  \end{equation*}
+  then $\beta_1$ is dependent on the others, and that would complete the proof.
+
+  \noindent
+  \hlbnoted{Sub-claim} $x_2, x_3, \ldots, x_r \in F$. Suppose not, i.e. suppose
+  $x_i \notin F$. Then since $F = \Fix(H)$, we know that $\exists \psi \in H$ 
+  such that $\psi(x_i) \neq x_i$. Wlog, sps $x_i = x_2$. We know that
+  \begin{equation*}
+    (1, \psi(x_2), \psi(x_3), \ldots, \psi(x_r), 0, \ldots, 0)
+  \end{equation*}
+  is also a non-trivial solution to the earlier system of equations. Then
+  consider
+  \begin{align*}
+    &(1, x_2, \ldots, x_r) - (1, \psi(x_2), \psi(x_3), \ldots, \psi(x_r), 0,
+    \ldots, 0) \\
+    &= (0, x_2 - \psi(x_2), 0, \ldots, 0),
+  \end{align*}
+  which is also a non-trivial solution to the system of equations. However, this
+  contradicts the minimality of \cref{eq:key_to_artin}. Thus $x_2, x_3, \ldots,
+  x_r \in F$. This completes our proof.
+\end{proof}
+
+\begin{defn}[Galois Correspondences]\index{Galois Correspondences}\label{defn:galois_correspondences}
+  Let $K$ be an extension of $F$. Let $\mathcal{E}$ denote the set of
+  intermediate subfields of $K / F$, i.e.
+  \begin{equation*}
+    \mathcal{E} := \{ E : F \subseteq E \subseteq F \},
+  \end{equation*}
+  and $\mathcal{H}$ denote the subgroups of $\Gal(K / F)$, i.e.
+  \begin{equation*}
+    \mathcal{H} := \{ H : H \leq \Gal(K / F) \}.
+  \end{equation*}
+  We define the \hlnoteb{Galois correspondences} by
+  \begin{equation*}
+    \Gal(K / -) : \mathcal{E} \to \mathcal{H} \text{ as } E \mapsto \Gal(K / E)
+  \end{equation*}
+  and
+  \begin{equation*}
+    \Fix : \mathcal{H} \to \mathcal{E} \text{ and } H \mapsto \Fix H.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Notice that $\Gal(K / -)$ bring subfields to subgroups, while $\Fix$ brings
+  subgroups to subfields.
+\end{note}
+
 % section fundamental_theorem_of_galois_theory (end)
 
 % chapter lecture_24_mar_11th (end)
