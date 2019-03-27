@@ -108,7 +108,7 @@ snippet bcap "Intersection" w
 endsnippet
 
 context "math()"
-snippet dif "with respect to" w
+snippet dif "with respect to" wA
 \dif{$1}$0
 endsnippet
 
@@ -169,6 +169,18 @@ endsnippet
 
 snippet lrs "left[ right]" wA
 \left[ $1 \right]
+endsnippet
+
+priority 10
+context "math()"
+snippet "vec" "vec" riA
+\vec{$1}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])vec" "vec" riA
+\vec{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 10
