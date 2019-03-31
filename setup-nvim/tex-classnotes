@@ -28,4 +28,4 @@
 \printindex
 
 \end{document}
-% vim: tw=80
+% vim:tw=80:fdm=syntax

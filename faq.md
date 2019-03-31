@@ -9,7 +9,7 @@ title: Frequently Asked Questions
 
 ## Why in the world do most of your documents use dark backgrounds and white text!? That ain't normal! And studies show that white background is better!
 
-  I use my notes for long periods of time, and I want as little strain on my eye as possible. White background hurts my eye. Simple as that. I will, however, compile a copy with a white background when circumstances demand, or when I'm done with the set of notes. I'm not saying that I don't use documents with white background, in fact I do when it's bright out.
+  I use my notes for long periods of time, and I want as little strain on my eye as possible. White background hurts my eye. Simple as that.
 
 ## The colours in your PDFs don't look exactly like what I think they should be, e.g. red doesn't look... red
 

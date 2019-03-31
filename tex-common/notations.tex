@@ -1,3 +1,11 @@
+\DeclareMathOperator{\Img}{Img}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\caparg}{Arg}
+
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}      % simplifying the writing of a floor function
 \newcommand{\ceiling}[1]{\lceil #1 \rceil}      % simplifying the writing of a ceiling function
 \newcommand{\dotp}{\, \cdotp}			        % dot product to distinguish from \cdot
@@ -6,6 +14,7 @@
 \newcommand{\at}[2]{\Big|_{#1}^{#2}}
 \newcommand{\Arg}[1]{\caparg #1}
 \renewcommand{\bar}[1]{\mkern 1.5mu \overline{\mkern -1.5mu #1 \mkern -1.5mu} \mkern 1.5mu}
+\newcommand{\faktor}[2]{{\raisebox{.2em}{$#1$}\left/\raisebox{-.2em}{$#2$}\right.}}
 \newcommand{\quotient}[2]{\faktor{#1}{#2}}
 \newcommand{\cyclic}[1]{\left\langle #1 \right\rangle}
 \newcommand{\ind}[2]{\Ind_{#2}\left( #1 \right)}
@@ -26,8 +35,6 @@
 \newenvironment{spmatrix}
   {\left(\begin{smallmatrix}}
   {\end{smallmatrix}\right)}
-
-\DeclareMathOperator{\Img}{Img}
 
   % inspiration from: https://tex.stackexchange.com/questions/8720/overbrace-underbrace-but-with-an-arrow-instead#37758
 \newcommand{\overarrow}[2]{

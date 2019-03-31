@@ -44,6 +44,21 @@ snippet <= "leq" iA
 endsnippet
 
 context "math()"
+snippet => "implies" iA
+\implies
+endsnippet
+
+context "math()"
+snippet := "define" iA
+\coloneqq
+endsnippet
+
+context "math()"
+snippet quo "quotient" iA
+\\quotient{$1}{$2}$0
+endsnippet
+
+context "math()"
 snippet // "Fraction" iA
 \\frac{$1}{$2}$0
 endsnippet
@@ -81,6 +96,11 @@ endsnippet
 context "math()"
 snippet \/ "lor" iA
 \lor
+endsnippet
+
+context "math()"
+snippet |\ "restriction" iA
+\restriction
 endsnippet
 
 context "math()"
