@@ -4489,9 +4489,9 @@ The following is a typical problem for finding out about a Galois extension.
 \label{chp:lecture_27th_mar_18th}
 % chapter lecture_27th_mar_18th
 
-\section{Special Galois Groups (Continued)}%
-\label{sec:special_galois_groups_continued}
-% section special_galois_groups_continued
+\section{Galois Groups of Polynomials}%
+\label{sec:galois_groups_of_polynomials}
+% section galois_groups_of_polynomials
 
 We know how hard it is to find roots of a polynomial. It would be ideal if we
 can find ways to work around them when trying to construct Galois groups.
@@ -4686,7 +4686,7 @@ One may find it rather difficult to find roots for cubics, especially when the
 
 % subsection cubics (end)
 
-% section special_galois_groups_continued (end)
+% section galois_groups_of_polynomials (end)
 
 % chapter lecture_27th_mar_18th (end)
 
@@ -4694,7 +4694,7 @@ One may find it rather difficult to find roots for cubics, especially when the
 \label{chp:lecture_28_mar_20th}
 % chapter lecture_28_mar_20th
 
-\section{Galois Groups of Polynomials (Continued) [dirty]}%
+\section{Galois Groups of Polynomials (Continued)}%
 \label{sec:galois_groups_of_polynomials_continued}
 % section galois_groups_of_polynomials_continued
 
@@ -4702,18 +4702,22 @@ One may find it rather difficult to find roots for cubics, especially when the
 \label{sub:quartics}
 % subsection quartics
 
-As in the last section, we shall assume $\Char F \neq 2$. Now, given
-\begin{equation*}
-  f(x) = x^4 + \alpha x^3 + \beta x^2 + \gamma x + \delta \in F[x],
-\end{equation*}
-we shall consider
-\begin{equation*}
-  g(x) = f\left(x - \frac{\alpha}{4}\right) = x^4 + bx^2 + cx + d \in F[x].
-\end{equation*}
-This is similarly called a \hldefn{depressed quartic}.
+\begin{defn}[Depressed Quartic]\index{Depressed Quartic}\label{defn:depressed_quartic}
+  Suppose $\Char F \neq 2$. Given
+  \begin{equation*}
+    f(x) = x^4 + \alpha x^3 + \beta x^2 + \gamma x + \delta \in F[x],
+  \end{equation*}
+  we shall consider
+  \begin{equation*}
+    g(x) = f\left(x - \frac{\alpha}{4}\right) = x^4 + bx^2 + cx + d \in F[x].
+  \end{equation*}
+  This is similarly called a \hldefn{depressed quartic}.
+\end{defn}
 
-Furthermore, $\Gal(f(x)) = \Gal(g(x))$. \marginnote{$g(x)$ is irreducible and
-separable iff $f(x)$ is irreducible and separable.}
+\begin{note}
+  Furthermore, $\Gal(f(x)) = \Gal(g(x))$. \marginnote{$g(x)$ is irreducible and
+  separable iff $f(x)$ is irreducible and separable.}
+\end{note}
 
 \newthought{Let}
 \begin{equation*}
@@ -4741,11 +4745,14 @@ let
   w &= \alpha_1 \alpha_4 + \alpha_2 \alpha_3.
 \end{align*}
 
-The \hldefn{resolvent cubic} of $f(x)$  is defined by
-\begin{align*}
-  \Res f(x) &= (x - u)(x - v)(x - w) \\
-            &= x^3 - b x^2 - 4d x + 4bd - c^2 \in F[x].
-\end{align*}
+\begin{defn}[Resolvent Cubic]\index{Resolvent Cubic}\label{defn:resolvent_cubic}
+  The \hlnoteb{resolvent cubic} of $f(x)$  is defined by
+  \begin{align*}
+    \Res f(x) &= (x - u)(x - v)(x - w) \\
+              &= x^3 - b x^2 - 4d x + 4bd - c^2 \in F[x].
+  \end{align*}
+\end{defn}
+
 Let $L = F(u, v, w)$. Then $K / L / F$ is a tower of fields \sidenote{$K$ is the
 splitting field of $f(x)$ and $L$ is the splitting field of $\Res f(x)$.}. Now
 let $G = \Gal(f(x))$. Note that $K / F$ is Galois. Thus $K / L$ is Galois
