@@ -4485,6 +4485,211 @@ The following is a typical problem for finding out about a Galois extension.
 
 % chapter lecture_26_mar_15th (end)
 
+\chapter{Lecture 27th Mar 18th}%
+\label{chp:lecture_27th_mar_18th}
+% chapter lecture_27th_mar_18th
+
+\section{Special Galois Groups (Continued)}%
+\label{sec:special_galois_groups_continued}
+% section special_galois_groups_continued
+
+We know how hard it is to find roots of a polynomial. It would be ideal if we
+can find ways to work around them when trying to construct Galois groups.
+
+\begin{defn}[Discriminant]\index{Discriminant}\label{defn:discriminant}
+  Let $f(x) \in F[x]$ be non-constant, with $K$ being its splitting field. We
+  can write
+  \begin{equation*}
+    f(x) = u(x - \alpha_1)(x - \alpha_2) \hdots (x - \alpha_n) \in K[x].
+  \end{equation*}
+  We define the \hlnoteb{discriminant} of $f(x)$ as
+  \begin{equation*}
+    \disc f(x) \coloneqq \prod_{i < j} (\alpha_i - \alpha_j)^2.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item Note that
+      \begin{equation*}
+        \disc f(x) \neq 0 \iff f(x) \text{ is separable }
+      \end{equation*}
+    \item For a \hldefn{quadratic}
+      \begin{equation*}
+        f(x) = x^2 + bx + c = (x - \alpha)(x - \beta) = x^2 - (\alpha + \beta) +
+        \alpha\beta,
+      \end{equation*}
+      we have that its discriminant is
+      \begin{align*}
+        \disc f(x) &= (\beta - \alpha)^2 = \alpha^2 + \beta^2 - 2 \alpha\beta \\
+                   &= (\alpha + \beta)^2 - 4 \alpha \beta \\
+                   &= (-b)^2 - 4c.
+      \end{align*}
+      One may note that the \hyperref[defn:discriminant]{discriminant} is like a
+      generalization from this.
+  \end{enumerate}
+\end{remark}
+
+\begin{lemma}[The Discriminant Lives in the Base Field]\label{lemma:the_discriminant_lives_in_the_base_field}
+  Let $f(x) \in F[x]$ be non-constant. Then $\disc f(x) \in F$.
+\end{lemma}
+
+\begin{proof}
+  We break this into two cases:
+
+  \noindent
+  \hlbnoted{$f(x)$ is not separable} In this case $\disc f(x) = 0 \in F$.
+
+  \noindent
+  \hlbnoted{$f(x)$ is separable} Notice that for any $\phi \in G = \Gal f(x)$,
+  we have
+  \begin{equation*}
+    \phi(\disc f(x)) = \disc f(x),
+  \end{equation*}
+  since $\phi$ is an automorphism, in particular, a homomorphism. Thus we have
+  that $\disc f(x) \in \Fix G = F$.
+\end{proof}
+
+\begin{propo}[Galois Group of Finite Extensions]\label{propo:galois_group_of_finite_extensions}
+  Suppose $\Char F \neq 2$, $f(x)$ a separable polynomial with $\deg f = n \geq
+  2$, and $G = \Gal f(x)$. Let 
+  \begin{equation*}
+    d = \prod_{i < j} (\alpha_i - \alpha_j),
+  \end{equation*}
+  where the $\alpha_i$'s are the roots of $f(x)$ in its splitting field $K$. If
+  $\gamma \in G \subseteq S_n$, then $\phi(d) = \pm d$. Moreover, $\phi(d) = d
+  \iff \phi \in A_n$, and $\Gal \left( \quotient{K}{F(d)} \right) = G \cap A_n$.
+
+  Also, $G \subseteq A_n \iff d \in \Fix(F) = F \iff \disc f(x)$ is a square in
+  $F$.
+\end{propo}
+
+\begin{proof}
+  Let $\phi \in G$. Since we have $\Char F \neq 2$, we have that $d$ and
+  $\phi(d)$ are roots of
+  \begin{equation*}
+    x^2 - d^2 = x^2 - \disc f(x) \in F[x].
+  \end{equation*}
+  It follows that $\phi(d) = \pm d$, as we want.
+
+  Observe that $S_n$ acts on $X = \{d, -d\}$ by
+  \begin{equation*}
+    \sigma \cdot \prod (\alpha_i - \alpha_j) = \prod (\alpha_{\sigma(i)} -
+    \alpha_{\sigma(j)}).
+  \end{equation*}
+  Moreover, observe that
+  \begin{equation*}
+    \epsilon \cdot d = d \text{ and } (n \; (n - 1)) \cdot d = -d.
+  \end{equation*}
+  It follows that the group action is transitive. By the
+  \hyperref[thm:orbit_stabilizer_theorem]{Orbit-Stabilizer Theorem}, we have
+  that
+  \begin{equation*}
+    n! = \abs{S_n} = \abs{\stab(d)} \abs{\orb(d)} = 2 \abs{\stab(d)}.
+  \end{equation*}
+  Thus $\abs{\stab(d)} = \frac{n!}{2}$, and since $\stab(d) \leq S_n$, it
+  follows that $\stab(d) = A_n$. This also means that
+  \begin{equation*}
+    \phi(d) = d \iff \phi \in A_n = \stab(d).
+  \end{equation*}
+
+  The rest of the statement follows immediately by the way they are introduced.
+\end{proof}
+
+\subsection{Quadratics}%
+\label{sub:quadratics}
+% subsection quadratics
+
+Note that $\disc f(x)$ is not a square in $F$ \\
+$\iff \Gal f(x) \not\subseteq A_2 = \{1\}$ \\
+$\iff \Gal f(x) = S_2 \simeq \mathbb{Z}_2$ \\
+$\iff f(x)$ is irreducible.
+
+We mostly know how to deal with quadratics, especially since we have a formula
+for finding roots of quadratic polynomials, in particular the \hlnotea{quadratic
+formula}: given $f(x) = ax^2 + bx + c$, we have
+\begin{equation*}
+  x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}.
+\end{equation*}
+
+% subsection quadratics (end)
+
+\subsection{Cubics}%
+\label{sub:cubics}
+% subsection cubics
+
+Recall that if $f(x) \in F[x]$ is irreducible and separable, then $\Gal f(x)
+\leq S_3$ is
+\hyperref[crly:the_galois_group_of_a_separable_irreducible_polynomial_is_transitive]{transitive},
+and so either
+\begin{equation*}
+  \Gal f(x) \simeq S_3 \text{ or } \Gal f(x) \simeq A_3.
+\end{equation*}
+
+One may find it rather difficult to find roots for cubics, especially when the
+\hlnotea{rational roots theorem} does not give us any results.
+
+\begin{defn}[Depressed Cubic]\index{Depressed Cubic}\label{defn:depressed_cubic}
+  Suppose $\Char F \notin \{2, 3\}$. Let
+  \begin{equation*}
+    g(x) = x^3 + \alpha x^2 + \beta x + \gamma \in F[x]
+  \end{equation*}
+  be irreducible and separable. Let
+  \begin{equation*}
+    f(x) = g \left( x - \frac{\alpha}{3} \right) = x^3 + bx + c \in F[x].
+  \end{equation*}
+  $f(x)$ is called a \hlnoteb{depressed cubic}.
+\end{defn}
+
+\begin{note}
+  We can derive a formula for $b$ and $c$ in the depressed cubic, in particular
+  they are
+  \begin{equation*}
+    b = \beta - \frac{1}{3} \alpha^2 \text{ and } c = \gamma + \frac{2}{27}
+    \alpha^3 - \frac{1}{3} \alpha\beta.
+  \end{equation*}
+
+  It is important to note that $f(x)$ is still irreducible and separable, and
+  most importantly
+  \begin{equation*}
+    \Gal f(x) = \Gal g(x).
+  \end{equation*}
+  This is exactly why we want to consider depressed cubics, since they are
+  easier to deal with, especially when we need to do \hlnotea{long division}.
+
+  Furthermore, if we let $\alpha_1, \alpha_2, \alpha_3$ be the roots of $f(x)$,
+  then one can derive that
+  \begin{equation*}
+    \disc f(x) = -4b^3 - 27c^2.
+  \end{equation*}
+  Then by \cref{propo:galois_group_of_finite_extensions}, we have that
+  \begin{equation*}
+    \Gal f(x) = \begin{cases}
+      A_3 & \disc f(x) = d^2, \, d \in F \\
+      S_3 & \text{otherwise }
+    \end{cases}
+  \end{equation*}
+\end{note}
+
+\begin{eg}
+  Consider the polynomial $f(x) = x^3 - 3x + 1 \in \mathbb{Q}[x]$. If we use the
+  \hyperref[propo:mod_p_irreducibility_test]{Mod-2 irreducibility test}, one can
+  immedaitely see that it is an irreducible polynomial that we have seen before.
+  Thus $f(x)$ itself is irreducible.
+
+  We have that
+  \begin{equation*}
+    \disc f(x) = -4(-3)^3 - 27(1)^2 = 3 \cdot 27 = 9^2,
+  \end{equation*}
+  and $9 \in \mathbb{Q}$. It follows that $\Gal f(x) \simeq A_3$.
+\end{eg}
+
+% subsection cubics (end)
+
+% section special_galois_groups_continued (end)
+
+% chapter lecture_27th_mar_18th (end)
+
 \chapter{Lecture 28 Mar 20th}%
 \label{chp:lecture_28_mar_20th}
 % chapter lecture_28_mar_20th
