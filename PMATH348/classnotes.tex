@@ -2824,7 +2824,7 @@ permuting them under automorphisms of the splitting field $K$.
   $\Gal( \mathbb{Q}(\sqrt{2}, \sqrt{3}) / \mathbb{Q} )$ is abelian and has order
   $4$. Therefore
   \begin{equation*}
-    \Gal \left( \faktor{\mathbb{Q}(\sqrt{2}, \sqrt{3})}{\mathbb{Q}} \right)
+    \Gal \left( \quotient{\mathbb{Q}(\sqrt{2}, \sqrt{3})}{\mathbb{Q}} \right)
     \simeq \mathbb{Z} \times \mathbb{Z}.
   \end{equation*}
 \end{eg}
@@ -4331,10 +4331,157 @@ The following is a typical problem for finding out about a Galois extension.
   immediately have $(2) \iff (3)$.
 
   \noindent
-  \hlbnoted{$(1) \implies (2)$} Suppose $E / F$ is Galois. 
+  \hlbnoted{$(1) \implies (2)$} Suppose $E / F$ is Galois. Let $\phi \in G
+  \coloneqq \Gal(K / F)$. Since $E / F$ is Galois, in particular, normal, we
+  know that $\phi \restriction_{E} \in \Gal(E / F)$. Thus we have $\phi
+  \restriction_E (E) = \phi(E) = E$ by the surjectivity of $\phi$ \sidenote{Note
+  that $\phi$ is a automorphism, in particular, bijective.}. It follows that $E$ 
+  is $G$-invariant, simply by definition.
+
+  \noindent
+  \hlbnoted{$(2) \implies (1)$} Suppose $E$ is $G$-invariant, where again we let
+  $G \coloneqq \Gal(K / F)$. Now by A7, since $K / E / F$ is a tower of fields,
+  we have that $E / F$ is separable. Thus it suffices for us to show that $E /
+  F$ is normal.
+
+  Let $\alpha \in E$ with minimal polynomial $f(x) \in F[x]$. \sidenote{\st{I
+  think there was a slight oversight during lectures. The original reasoning
+  here was that since $K / F$ is normal, we have $f(x)$ splits over $K$. But
+  that is not necessarily true. Being a Galois extension only requires $K$ to be
+  the splitting field of some non-constant polynomial (and separability of the
+  extension), but it does not necessitate that $K$ is where all polynomials in
+  $F[x]$ split. This is only true if $K$ is the algebraic closure of $F[x]$.} My
+  mistake! The reasoning is correct by \hyperref[thm:normality_theorem]{the
+  normality theorem}.}
+  Since $K / F$ is normal, since $\alpha \in E \subseteq K$, we have that its
+  minimal polynomial $f(x)$ must split in $K$. Then let $\beta \in K$ be an
+  $F$-conjugate of $\alpha$. Since $f(x) \in F[x]$ is irreducible, we have that
+  $G$ is \hyperref[defn:transitive_subgroup]{transitive} by
+  \cref{crly:the_galois_group_of_a_separable_irreducible_polynomial_is_transitive},
+  and so $\exists \phi \in G$ such that $\phi(\alpha) = \beta$. Then by
+  assumption, we have that
+  \begin{equation*}
+    \beta = \phi(\alpha) \in \phi(E) = E.
+  \end{equation*}
+  It follows that $E / F$ is indeed normal.
+\end{proof}
+
+\newthought{A natural} question to ask:
+\begin{quotebox}{green}{foreground}
+  In what way is $\Gal(E / F)$ related to $\Gal(K / F)$?
+\end{quotebox}
+
+\begin{propo}[First Isomorphism Theorem on Galois Groups]\label{propo:first_isomorphism_theorem_on_galois_groups}
+  Suppose we have a tower of fields $K / E / F$, and $K / F$ is a finite Galois
+  extension. If $E / F$ is Galois, then
+  \begin{equation*}
+    \Gal(E / F) \simeq \quotient{\Gal(K / F)}{\Gal(K / E)}.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Consider the function $\psi : \Gal(K / F) \to \Gal(E / F)$ given by
+  $\psi(\phi) = \phi \restriction_E$. Note that this is a homomorphism: for
+  $\phi_1, \phi_2 \in \Gal(K / F)$, observe that
+  \begin{equation*}
+    \psi(\phi_1 \phi_2) = (\phi_1 \phi_2) \restriction_E = \phi_1
+    \restriction_{\phi_2 \restriction_E} \phi_2 \restriction_E = \phi_1
+    \restriction_E \phi_2 \restriction_E = \psi(\phi_1) \psi(\phi_2).
+  \end{equation*}
+  It is clear that $\ker \psi = \Gal(K / E)$. It follows from the \hlnotea{First
+  Isomorphism Theorem} that
+  \begin{equation*}
+    \Gal(E / F) \simeq \quotient{\Gal(K / F)}{\Gal(K / E)},
+  \end{equation*}
+  which is what we want.
 \end{proof}
 
 % section fundamental_theorem_of_galois_theory_continued_2 (end)
+
+\section{Special Galois Groups}%
+\label{sec:special_galois_groups}
+% section special_galois_groups
+
+\begin{eg}
+  Compute $\Gal\left(\quotient{\mathbb{Q}(\zeta_n)}{\mathbb{Q}}\right)$.
+
+  \begin{solution}
+    Note that $\quotient{\mathbb{Q}(\zeta_n)}{\mathbb{Q}}$ is the splitting
+    field for the separable polynomial $\Phi_n(x)$ over $\mathbb{Q}$. Thus
+    $\quotient{\mathbb{Q}(\zeta_n)}{\mathbb{Q}}$ is Galois. We also know that
+    \begin{equation*}
+      \abs{\Gal \left( \quotient{\mathbb{Q}(\zeta_n)}{\mathbb{Q}} \right)} =
+      \phi(n),
+    \end{equation*}
+    where we note that $\phi(n)$ here is the \hlnotea{Euler $\phi$-function},
+    for the sake of clarity.
+
+    \noindent
+    \hlbnoted{Claim: $G = \Gal \left( \quotient{\mathbb{Q}(\zeta_n)}{\mathbb{Q}}
+    \right) \simeq \mathbb{Z}_n^\times$} Consider the map 
+    \begin{equation*}
+      \psi : \mathbb{Z}_n^\times \to G \text{ given by } \psi(k) = \phi_k,
+    \end{equation*}
+    where $\phi_k(\zeta_n) = \zeta_n^k$.
+
+    \noindent
+    \hlbnotea{$\psi$ is a homomorphism} Observe that
+    \begin{equation*}
+      \phi_k \circ \phi_l (\zeta_n) = \phi_k (\zeta_n^l) = \zeta_n^{kl} =
+      \phi_{kl} (\zeta_n).
+    \end{equation*}
+    Thus we have $\psi(k)\psi(l) = \psi(kl)$.
+
+    \noindent
+    \hlbnotea{$\psi$ is injective} Observe that
+    \begin{equation*}
+      k \in \ker \psi \iff \psi(k) = 1 \iff \zeta_n^k = \zeta_n \iff k = 1.
+    \end{equation*}
+
+    \noindent
+    \hlbnotea{$\psi$ is surjective} Notice that $\abs{\mathbb{Z}_n^\times} =
+    \phi(n) = \abs{G}$, where $\phi$ is the Euler $\phi$-function. It follows
+    from the injectivity of $\psi$ that $\psi$ is surjective.
+
+    Therefore, $\psi$ is an isomorphism, which is what is required.
+  \end{solution}
+\end{eg}
+
+\begin{eg}
+  Compute $G = \Gal \left( \quotient{\mathbb{F}_{p^n}}{\mathbb{F}_p} \right)$.
+
+  \begin{solution}
+    First, note that $\mathbb{F}_{p^n}$ is the splitting field of the separable
+    polynomial $x^{p^n} - x$ over $\mathbb{F}_{p}$. So
+    $\quotient{\mathbb{F}_{p^n}}{\mathbb{F}_p}$ is indeed Galois and we are not
+    making a fool out of ourselves.
+
+    Consequently, we have that
+    \begin{equation*}
+      \abs{\Gal \left( \quotient{\mathbb{F}_{p^n}}{\mathbb{F}_p} \right)}
+      = [ \mathbb{F}_{p^n} : \mathbb{F}_p ] = n.
+    \end{equation*}
+
+    Consider the \hldefn{Forbenius map}
+    \begin{equation*}
+      \phi : \mathbb{F}_{p^n} \to \mathbb{F}_{p^n} \text{ given by } \phi(a) = a^p.
+    \end{equation*}
+    By \hlnotea{Fermat's Little Theorem}, $a^p = a$, and so we have that $\phi
+    \in G$.
+
+    Let $j = \abs{\phi}$. Note that $j \leq n$ \sidenote{\hlwarn{Why?}}. Now by
+    definition, every element of $\mathbb{F}_{p^n}$ is a root of $x^{p^j} - x$,
+    i.e. $p^j \geq p^n$, which implies $j \geq n$.
+
+    Thus $\abs{\phi} = j = n$. It follows that
+    \begin{equation*}
+      \Gal \left( \quotient{\mathbb{F}_{p^n}}{\mathbb{F}_p} \right) = \langle
+      \phi \rangle \simeq \mathbb{Z}_n.
+    \end{equation*}
+  \end{solution}
+\end{eg}
+
+% section special_galois_groups (end)
 
 % chapter lecture_26_mar_15th (end)
 
@@ -4846,4 +4993,4 @@ the name with a proposition known as
 \printindex
 
 \end{document}
-% vim: tw=80
+% vim:tw=80:fdm=syntax
