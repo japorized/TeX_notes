@@ -18,7 +18,6 @@
 \DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator{\id}{id}
 \DeclareMathOperator{\dist}{dist}
 \DeclareMathOperator{\Der}{Der}
 \DeclareMathOperator{\D}{D}
@@ -5900,8 +5899,23 @@ $\tilde{\mu} = \lambda \mu$, where $\lambda > 0$.
 \begin{defn}[Compatible Orientation]\index{Compatible Orientation}\label{defn:compatible_orientation}
   Let $M$ be a $k$-dimensional submanifold. Suppose that $M$ is orientable and
   let $\mu$ be an orientation for $M$. Let $\phi : U \to M$ be a local
-  parametrization for $M$ with image $V \cap M$.
+  parametrization for $M$ with image $V \cap M$. Let $\nu$ be the orientation on
+  $W \cap M$ given by $\phi$, where $W \subseteq V$. If the coordinates on $W$ 
+  are $u^1, \ldots, u^n$, then we have $\phi^* \nu = \dif{u^1} \land \hdots
+  \land \dif{u^k}$.
+
+  On $V \cap M$, we would have $\nu = f\mu$ for some nowhere vanishing $f \in
+  C^\infty(V \cap M)$. We say that the local parametrization $\phi$ is
+  \hlnoteb{compatible with the orientation} $\mu$ if $f > 0$ everywhere on $V
+  \cap M$.
 \end{defn}
+
+\begin{note}
+  The above definition says that the two nowhere vanishing $k$-forms $\mu$ and
+  $\nu$ on $V \cap M$ are
+  \hyperref[defn:same_and_opposite_orientations]{equivalent}, i.e. they
+  determine the same orientation on $T_p M$ for each $p \in V \cap M$.
+\end{note}
 
 % section orientability_and_orientation_of_submanifolds (end)
 
@@ -6340,6 +6354,496 @@ $\partial A_\beta$?
 % section submanifold_with_boundary_continued (end)
 
 % chapter lecture_29_mar_25th (end)
+
+\chapter{Lecture 31 Mar 29th [dirty]}%
+\label{chp:lecture_31_mar_29th}
+% chapter lecture_31_mar_29th
+
+\section{Stokes' Theorem (Continued)}%
+\label{sec:stokes_theorem_continued}
+% section stokes_theorem_continued
+
+\begin{proof}[Stokes' Theorem (Continued)]
+  We reduced the proof to showing that following: given $A$ open in
+  $\mathbb{H}^k$ and $\hat{A} = A \cap (\partial \mathbb{H}^k)$ open in
+  $\mathbb{R}^{k-1}$. Let $\phi : A \to \mathbb{R}^n$ and $\hat{\phi} = \phi
+  \restriction_{\hat{A}} \hat{A} \to \mathbb{R}^n$ be a parametrizations. Let
+  $\eta \in \Omega^{k-1}(\phi(A))$, where $\supp(\eta)$ is compact. We want to
+  be able to show that
+  \begin{equation*}
+    \int_{A_j} \dif{(\phi_j^*(\rho_j \omega))} = \int_{\hat{A}_j}
+    \hat{\phi}_j^*(\rho_j \omega) 
+  \end{equation*}
+  for all $j$.
+
+  First, some observations are needed. Let us write
+  \begin{equation}\label{eq:stokes_proof_eq_2}
+    \Omega^k(A) \ni \phi^* \eta = \sum_{i=1}^{k} (-1)^{i-1} h_i \dif{u^1} \land
+    \hdots \land \hat{\dif{u^i}} \land \hdots \land \dif{u^k},
+  \end{equation}
+  where the $(-1)^{i-1}$ instead of $(-1)^{k-1}$ for convenience, and $h_i \in
+  C^\infty(A)$ has compact support. Now note that  $\hat{\phi} = \phi \circ j$,
+  where $j : \mathbb{R}^{k-1} \to \mathbb{R}^k$ is the smooth map
+  \begin{equation*}
+    j(u^2, \ldots, u^k) = (-0, u^2, \ldots, u^k).
+  \end{equation*}
+  Thus we have that $\hat{\phi}^* = j^* \phi^*$. In particular, $j^* \dif{u^i} =
+  \dif{u^i}$ for $i > 1$, and $j^* \dif{u^1} = 0$. By taking $j^*$ on
+  \cref{eq:stokes_proof_eq_2}, we have
+  \begin{align*}
+    \hat{\phi}^* \eta &= j^* \hat{\phi} \eta \\
+                      &= j^* \left( \sum_{i=1}^{k} (-1)^{i-1} h_i \dif{u^1}
+                      \land \hdots \hat{\dif{u^i}} \land \hdots \land \dif{u^k}
+                    \right) \\
+                      &= j^*(h_1 \dif{u^2} \land \hdots \land \dif{u^k}) \\
+                      &= \hat{h}_1 \dif{u^2} \land \hdots \land \dif{u^k}
+                      \tag{$\dagger$}\label{eq:stokes_proof_eq_3},
+  \end{align*}
+  where $\hat{h}_1 = j^* h_1$. That is, we have
+  \begin{equation*}
+    \hat{h}_1(u^2, \ldots, u^k) = h_1(0, u^2, \ldots, u^k).
+  \end{equation*}
+  Now taking $\dif{}$ of \cref{eq:stokes_proof_eq_2}, we have
+  \begin{align*}
+    \dif{(\phi^* \eta)}
+    &= \sum_{i=1}^{k} (-1)^{i-1} \left( \sum_{l=1}^{k} \frac{\partial
+      h_i}{\partial u^l} \dif{u^l} \right) \land \dif{u^1} \land \hdots \land
+      \hat{\dif{u^i}} \land \hdots \land \dif{u^k} \\
+    &= \sum_{i=1}^{k} (-1)^{i-1} \frac{\partial h_i}{\partial u^i} \dif{u^i}
+      \land \dif{u^1} \land \hdots \land \hat{\dif{u^i}} \land \hdots \land
+      \dif{u^k} \\
+    &= \left( \sum_{i=1}^{k} \frac{\partial h_i}{\partial u^i} \right) \dif{u^1}
+      \land \hdots \land \dif{u^k} \tag{*}\label{eq:stokes_proof_eq_4}.
+  \end{align*}
+
+  We are now ready to take on what we want to show.
+
+  \noindent
+  \hlbnoted{Case 1} Suppose $A$ is open in $\mathbb{R}^k$, with $A \cap \partial
+  \mathbb{H}^k = \emptyset$ and $\supp(h_i)$ is compact. So there exists a box
+  $K = [a^1, b^1] \times \hdots \times [a^k, b^k]$ be a box in $bb^k$ that
+  completes contains $\supp h_i$ in its interior. Now extend each of the $h_i$ 
+  by zero to a smooth function on $\mathbb{R}^k$. Using
+  \cref{eq:stokes_proof_eq_4}, we have that the LHS of what we want is
+  \begin{align*}
+    \int_{A} \dif{\phi^* \eta}
+    &= \int_{A} \left( \sum_{i=1}^{k} \frac{\partial h_i}{\partial u^i}
+    \dif{u^1} \land \hdots \land \dif{u^k} \right) \\
+    &= \sum_{i=1}^{k} \int_{A} \frac{\partial h_i}{\partial u^i} \dif{u^1}
+    \hdots \dif{u^k} \\
+    &= \sum_{i=1}^{k} \int_{a^1}^{b^1} \hdots \int_{a^k}^{b^k} \frac{\partial
+    h_i}{\partial u^i} \dif{u^1} \hdots \dif{u^k}.
+  \end{align*}
+  By \hlnotea{Fubini's Theorem}, we can integrate in any order. For the
+  $i$\textsuperscript{th} integral, integrate first wrt $u^i$. Then by the
+  \hlnotea{Fundamental Theorem of Calculus}, we have
+  \begin{align*}
+    &\int_{a^i}^{b^i} \frac{\partial h_i}{\partial u^i} \dif{u^i} \\
+    &= h_i(u^1, \ldots, u^{i-1}, b^i, u^{i+1}, \ldots, u^k) - h_i(u^1, \ldots,
+    u^{i-1}, a^i, u^{i+1}, \ldots, u^k) \\
+    &= 0 - 0 = 0,
+  \end{align*}
+  since $h_i$ is supported inside the interior of $K$. Thus all the integrals
+  above are zero, i.e. the LHS of what we want is zero in this case.
+
+  On the other hand, since $A$ is an open set in $\mathbb{R}^k$, we have that $A
+  \cap \partial \mathbb{H}^k = \emptyset$, so $\supp h_1 \subseteq A$ does not
+  intersect $\partial \mathbb{H}^k$. Thus $h_1 = j^* h_1 = 0$. By
+  \cref{eq:stokes_proof_eq_3} and the fact that $K \cap \partial \mathbb{H}^k =
+  [a^2, b^2] \times \hdots \times [a^k, b^k]$, we have
+  \begin{align*}
+    \int_{A} \hat{\phi}^* \eta
+    &= \int_{K \cap \partial \mathbb{H}^k} \hat{\phi}^* \eta = \int_{K \cap
+    \partial \mathbb{H}^k} h_1 \dif{u^2} \land \hdots \land \dif{u^k} \\
+    &= \int_{a^2}^{b^2} \hdots \int_{a^k}^{b^k} \hat{h}_i \dif{u^2} \hdots
+    \dif{u^k} = 0.
+  \end{align*}
+  This completes Case 1.
+
+  \noindent
+  \hlbnoted{Case 2} Suppose $A$ is not open in $\mathbb{R}^k$. Then $A \cap
+  \partial \mathbb{H}^k \neq \emptyset$. This time, let
+  \begin{equation*}
+    K = [a^1, 0] \times [a^2, b^2] \times \hdots \times [a^k, b^k]
+  \end{equation*}
+  be a box in $\mathbb{H}^k$ such that $\supp h_i$ is contained in the union of
+  the interior of $K$ with $\partial \mathbb{H}^k$. Once again, extend each
+  $h_i$ by zero to a smooth function on $\mathbb{H}^k$. Using
+  \cref{eq:stokes_proof_eq_4}, we have
+  \begin{align*}
+    \int_{A} \dif{(\phi^* \eta)}
+    &= \int_{K} \dif{(\phi^* \eta)} \\
+    &= \int_{K} \sum_{i=1}^{k} \left( \frac{\partial h_i}{\partial u^i} \right)
+    \dif{u^1} \land \hdots \land \dif{u^k} \\
+    &= \int_{a^1}^{0} \int_{a^2}^{b^2} \hdots \int_{a^k}^{b^k} \left(
+    \sum_{i=1}^{k} \frac{\partial h_i}{\partial u^i} \right) \dif{u^1} \hdots
+    \dif{u^k} \\
+    &= \sum_{i=1}^{k} \int_{a^1}^{0} \int_{a^2}^{b^2} \hdots \int_{a^k}^{b^k}
+    \frac{\partial h_i}{\partial u^i} \dif{u^1} \hdots \dif{u^k}.
+  \end{align*}
+  Since the $h_i$'s are smooth, we can apply \hlnotea{Fubini's Theorem} and
+  integrate in any order we want. For the $i$\textsuperscript{th} integral,
+  integrate first wrt $u^i$. If $i > 1$, then by the \hlnotea{Fundamental
+  Theorem of Calculus}, we have
+  \begin{align*}
+    &\int_{a^1}^{0} \frac{\partial h_1}{\partial u^1} \dif{u^1} \\
+    &= h_1(0, u^2, \ldots, u^k) - h_1(a^1, \ldots, u^k) \\
+    &= \hat{h}_1(u^2, \ldots, u^k) - 0 \\
+    &= \hat{h}_1(u^2, \ldots, u^k).
+  \end{align*}
+  Thus we have that the LHS of our desired equation is
+  \begin{equation*}
+    \int_{A} \dif{(\phi^* \eta)} = \int_{a^2}^{b^2} \hdots \int_{a^k}^{b^k}
+    \hat{h}_1 \dif{u^2} \hdots \dif{u^k}.
+  \end{equation*}
+  By \cref{eq:stokes_proof_eq_4} and the fact that $K \cap \dif{\mathbb{H}^k} =
+  [a^2, b^2] \times \hdots \times [a^k, b^k]$, we have that
+  \begin{align*}
+    \int_{\hat{A}} \hat{\phi}^* \eta
+    &= \int_{K \cap \partial \mathbb{H}^k} \hat{\phi}^* \eta \\
+    &= \int_{K \cap \partial \mathbb{H}^k} h_1 \dif{u^2} \land \hdots \land
+    \dif{u^k} \\
+    &= \int_{a^2}^{b^2} \hdots \int_{a^k}^{b^k} \hat{h}_1 \dif{u^2} \hdots
+    \dif{u^k},
+  \end{align*}
+  thus the RHS of the desired equation agree with the LHS in this case as well.
+\end{proof}
+
+\begin{remark}
+  In the special case when $\partial M = \emptyset$, Stokes' Theorem says that
+  \begin{equation*}
+    \int_{M} \dif{\omega} = 0. 
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  We saw that the proof reduces to using the \hlnotea{Fundamental Theorem of
+  Calculus (FTC)}. In fact, the FTC is a special case of Stokes' Theorem.
+
+  What is a $0$-dimensional submanifold? Locally, it `looks like' open sets in
+  $\mathbb{R}^0 = \{0\}$. So a $0$-dimensional submanifold of $\mathbb{R}^n$ is a
+  collection of points in $\mathbb{R}^n$. If $M$ is $0$-dimensional and compact,
+  then it is a finite set of (distinct) points.
+
+  An orientation on $0$-dimensional $V = \{0\}$ is simply a choice of sign.
+  Hence a compact $0$-dimensional submanifold on $\mathbb{R}^n$ is a finite set
+  of points $\{p_1, \ldots, p_m \}$ with sign $\pm 1$ attached to each point.
+  Let $M = \{p_1, \ldots, p_k\}$ be a oriented, compact, $0$-dimensional
+  submanifold of $\mathbb{R}^n$.
+
+  $\Omega^0(M) = C^\infty(M) = \{ f : \{p_1, \ldots, p_k\} \to \mathbb{R} \}$.
+
+  \begin{equation*}
+    \int_{M} f = \sum_{j=1}^{m} \pm f(p_j),
+  \end{equation*}
+  where $\pm$ corresponds to the choice of the orientation.
+
+  Let $M = [a, b]$ be a closed and bounded interval. Then $M$ is a compact,
+  oriented, $1$-dimensional submanifold of $\mathbb{R}^1$. Let $f \in
+  C^\infty([a, b])$. Then $\dif{f} = \frac{\dif{f}}{\dif{t}} \dif{t} \in
+  \Omega^1(M)$. Then Stokes' Theorem says that
+  \begin{equation*}
+    \int_{M} \dif{f} = \int_{\partial M} f = (+1) f(b) + (-1) f(a)
+  \end{equation*}
+\end{remark}
+
+% section stokes_theorem_continued (end)
+
+% chapter lecture_31_mar_29th (end)
+
+\tuftepart{Differential Geometry}\label{part:differential_geometry}
+
+\chapter{Lecture 32 Apr 01st [dirty]}%
+\label{chp:lecture_32_apr_01st}
+% chapter lecture_32_apr_01st
+
+\section{More Linear Algebra}%
+\label{sec:more_linear_algebra}
+% section more_linear_algebra
+
+\subsection{Hodge Star Operators}%
+\label{sub:hodge_star_operators}
+% subsection hodge_star_operators
+
+Let $V$ be $n$-dimensional real vector space with an inner product
+\begin{equation*}
+  \langle \cdot, \cdot \rangle : V \times V \to \mathbb{R}
+\end{equation*}
+such that
+\begin{enumerate}
+  \item (bilinearity) $\langle v, w \rangle$ is linear in $v$ and linear in $w$;
+  \item (symmetry) $\langle v, w \rangle = \langle w, v \rangle$ ; and
+  \item (positive definite) $\langle v, v \rangle \geq 0$ and $\langle v, v
+    \rangle = 0 \iff v = 0$.
+\end{enumerate}
+
+Recall from A5Q8 that we get an induced inner product on $\Lambda^k(V)$, for $1
+\leq k \leq n$, given by
+\begin{equation*}
+  \langle v_1 \land \hdots \land v_k, w_1 \land \hdots \land w_k \rangle = \det
+  (\langle v_i, w_j \rangle),
+\end{equation*}
+and when $k = 0$, then $\Lambda^0(V) = \mathbb{R}$.
+
+\newthought{Fix an orientation} $\mu$ on $V$, where $0 \neq \mu \in
+\Lambda^n(V)$. Note that we may fix a $\mu$ such that $\norm{\mu}$ since we may
+simply rescale the choice by a positive factor.
+
+\begin{defn}[Hodge Star Operator]\index{Hodge Star Operator}\label{defn:hodge_star_operator}
+  Define a map
+  \begin{equation*}
+    * : \Lambda^k(V) \to \Lambda^{n-k}(V),
+  \end{equation*}
+  called the \hlnoteb{Hodge Star operator}, as follows: let $\alpha \in
+  \Lambda^k(V)$, and we define
+  \begin{equation*}
+    \langle * \alpha, \beta \rangle = \alpha \land \beta
+  \end{equation*}
+  for all $\beta \in \Lambda^{n-k}(V)$.
+\end{defn}
+
+\begin{note}
+  This uniquely determines $*\alpha \in \Lambda^{n-k}(V)$.
+
+  Since $\langle \cdot, \beta \rangle$ are linear in $\cdot$ and $(\cdot) \land
+  \beta$, $*$ is a linear map.
+
+  \noindent
+  \hlbnoted{Claim: $*$ is an isomorphism} Suppose $* \alpha = 0 \in
+  \Lambda^{n-k}(V)$. We have  $\alpha \land \beta = 0$ for all $\beta$, which
+  means $\alpha = 0$. Notice that
+   \begin{equation*}
+     \dim (\Lambda^k(V)) = \binom{n}{k} = \binom{n}{n-k} =
+     \dim(\Lambda^{n-k}(V)).
+  \end{equation*}
+  Our claim follows from Rank-Nullity.
+\end{note}
+
+Let's look at $*$ in terms of orthonormal basis. Let $e_1, \ldots, e_n$ be an
+orthonormal basis of $V$ (this exists by Gram-Schmidt). By A5Q8, we know that
+\begin{equation*}
+  e_{i_1} \land \hdots \land e_{i_k}, \, \text{ for } 1 \leq i_1 < i_2 < \hdots
+  < i_k \leq n
+\end{equation*}
+is an othonormal basis for $\Lambda^k(V)$. Then
+\begin{equation*}
+  \mu = e_1 \land \hdots \land e_n
+\end{equation*}
+has length one and represent the orientation induced by $\{ e_1, \ldots, e_n\}$.
+
+Let $I = (i_1, i_2, \ldots, i_k)$ be a strictly-increasing multi-index. Then for
+$e_{i_1} \land \hdots \land e_{i_k} \in \Lambda^k(V)$, we have that
+\begin{equation*}
+  *(e_{1_i} \land \hdots \land e_{i_k}) = \sum_{J} c_J e_{j_1} \land \hdots
+  \land e_{j_{n-k}},
+\end{equation*}
+where $J$ is a strictly-increasing multi-index of length $n - k$.
+Then
+\begin{align*}
+  &\langle *(e_{i_1} \land \hdots \land e_{i_k}), e_{l_1} \land \hdots \land
+  e_{l_{n-k}} \rangle  \\
+  &= \langle \sum_{J} C_J e_{j_1} \land \hdots \land e_{j_{n-k}}, e_{l_1} \land
+  \hdots \land e_{l_{n-k}} \rangle \\
+  &= e_{i_1} \land e_{i_k} \land e_{l_1} \land \hdots \land e_{l_{n-k}} \\
+  &= 0
+\end{align*}
+where the final equality follows unless $L$ is the \hlnotea{complementary}
+index.
+
+Note 
+\begin{equation*}
+  \langle \sum_{J} C_J e_{j_1} \land \hdots \land e_{j_{n-k}}, e_{l_1} \land
+  \hdots \land e_{l_{n-k}} \rangle C_L \mu.
+\end{equation*}
+
+Let $\hat{I}$ be the complementary multi-index of $I$.
+
+Then $C_L = 0$ unless $L = \hat{I}$. Then
+\begin{equation*}
+  C_{\hat{I}} \mu = e_{i_1} \land \hdots \land e_{l_1} \land \hdots \land
+  e_{l_{n-k}} = \pm \mu,
+\end{equation*}
+where the sign is a permutation that takes
+\begin{equation*}
+  e_{i_1} \land \hdots \land e_{i_k} \land e_{l_1} \land \hdots \land
+  e_{l_{n-k}} \to e_1 \land e_n = \mu.
+\end{equation*}
+
+Therefore, we have that
+\begin{equation*}
+  *(e_{i_1} \land \hdots \land e_{i_k}) = c e_{l_1} \land \hdots \land
+  e_{l_{n-k}}
+\end{equation*}
+when $L = \hat{I}$, such that
+\begin{equation*}\label{eq:}
+  c \mu = e_{i_1} \land \hdots \land e_{i_k} \land e_{l_1} \land \hdots
+  e_{l_{n-k}}.
+\end{equation*}
+
+\begin{eg}
+  When $n = 3$, let $e_1, e_2, e_3$ be an oriented basis of $V$. Then $\mu = e_1
+  \land e_2 \land e_3$. Then
+  \begin{equation*}
+    * e_1 = e_2 \land e_3
+  \end{equation*}
+  because $\alpha \land \beta = e_1 \land e_2 \land e_3 = \mu$.
+
+  Note that
+  \begin{equation*}
+    \left\{ e_1 \land e_2. e_1 \land e_3, e_2 \land e_3 \right\}
+  \end{equation*}
+  is a basis on $\Lambda^2(V)$.
+
+  Now
+  \begin{equation*}
+    * e_2 = - e_1 \land e_3 = e_3 \land e_1
+  \end{equation*}
+  since $e_2 \land e_1 \land e_3 = - \mu$
+
+  Also,
+  \begin{equation*}
+    * e_3 = e_1 \land e_2.
+  \end{equation*}
+
+  Note that $* 1 = \mu$ and  $* \mu = 1$, for any dimension.
+\end{eg}
+
+\begin{equation*}
+  \Lambda^k(V) \overset{*}{\underset{\cong}{\to}} \Lambda^{n-k}
+  \overset{*}{\underset{\cong}{\to}} \Lambda^k(V).
+\end{equation*}
+
+\noindent
+\hlbnoted{Claim: $*^2 = (-1)^{k(n-k)}$ on $\Lambda^k(V)$} 
+
+\begin{proof}
+  \begin{equation*}
+    *(e_{i_1} \land \hdots \land e_{i_k}) = c e_{j_1} \land \hdots \land
+    e_{j_{n-k}}
+  \end{equation*}
+  and
+  \begin{equation*}
+    c \mu = e_{i_1} \land \hdots \land e-{i_k} \land e_{j_1} \land \hdots \land
+    e_{j_{n-k}}.
+  \end{equation*}
+
+  We have
+  \begin{equation*}
+    *^2 (e_{i_1} \land \hdots \land e_{i_k}) = c ( * (e_{j_1} \land \hdots \land
+    e_{j_{n-k}}) ) = cb e_{i_1} \land \hdots \land e_{i_k}
+  \end{equation*}
+  where
+  \begin{equation*}
+    b \mu = e_{j_1} \land \hdots \land e_{j_{n-k}} \land e_{i_1} \land \hdots
+    e_{i_k}.
+  \end{equation*}
+  So
+  \begin{equation*}
+    c \mu = b \mu (-1)^{k(n-k)},
+  \end{equation*}
+  and so
+  \begin{equation*}
+    bc = (-1)^{k(n-k)}.
+  \end{equation*}
+\end{proof}
+
+\begin{eg}
+  Back to the example: note that if $n$ is odd (which is our case), we hvae
+  \begin{equation*}
+    (-1)^{k (n-k)} = 1
+  \end{equation*}
+  for any $k$. So $*^2 = 1$ always, on odd dimensional spaces.
+
+  If $n$ is even, then
+  \begin{equation*}
+    *^2 = (-1)^k
+  \end{equation*}
+  on $\Lambda^k(V)$.
+\end{eg}
+
+\noindent
+\hlbnoted{$*$ is an isometry} i.e.
+\begin{equation*}
+  \langle *\alpha, * \gamma \rangle = \langle \alpha, \gamma \rangle
+\end{equation*}
+for all $\alpha, \gamma \in \Lambda^k(V)$.
+
+\begin{proof}
+  \begin{align*}
+    \langle *\alpha, \beta \rangle \mu &= \alpha \land \beta (-1)^{k(n-k)} \beta
+    \land \alpha \\
+                                   &= (-1)^{k(n-k)} \langle * \beta, \alpha
+                                   \rangle \mu
+  \end{align*}
+
+  \begin{align*}
+    \langle *\alpha, \beta \rangle = (-1)^{k(n-k)} \langle \alpha, * \beta \rangle
+  \end{align*}
+
+  Then
+  \begin{equation*}
+    \langle *\alpha, *\gamma \rangle = \langle \alpha, (-1)^{k(n-k)} *^2 \gamma
+    \rangle = \langle \alpha, \gamma \rangle
+  \end{equation*}
+\end{proof}
+
+The following is more common as the definition of the Hodge star in the
+literature.
+
+\begin{crly}
+  $\forall \alpha, \gamma \in \Lambda^k(V)$, we have
+  \begin{equation*}
+    \langle \alpha, \gamma \rangle \mu = \alpha \land * \gamma.
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  Let $\beta = * \gamma$ for some unique $\gamma$, then
+  \begin{equation*}
+    \langle *\alpha, \beta \rangle \mu = \alpha \land \beta
+  \end{equation*}
+  and
+  \begin{equation*}
+    \langle *\alpha, *\gamma \rangle \mu  = \alpha \land * \gamma = \langle
+    \alpha, \gamma \rangle \mu.
+  \end{equation*}
+\end{proof}
+
+Let's put all these on submanifolds of $\mathbb{R}^n$.
+
+On $\mathbb{R}^n$, we have the standard inner product:
+\begin{equation*}
+  \langle x, y \rangle = \sum_{i=1}^{n} x^i y^i.
+\end{equation*}
+This induces an inner product on each tangent space to $\mathbb{R}^n$ via the
+canonical isomorphism. % TODO : reference required, you know what this is
+
+Explicitly, if $X_p = a^i \frac{\partial}{\partial x^i} \at{p}{}$ and $Y_p = b^i
+\frac{\partial}{\partial x^i}\at{p}{}$ then
+\begin{equation*}
+  \langle X_p, Y_p \rangle = \sum_{i=1}^{n} a^i b^i,
+\end{equation*}
+ie.
+\begin{equation*}
+  \left\{ \frac{\partial}{\partial x^1}\at{p}{}, \ldots,
+  \frac{\partial}{\partial x^n}\at{p}{} \right\}
+\end{equation*}
+is an orthonormal basis of $T_p \mathbb{R}^n$.
+
+Let $M$ be a $k$-dimensional submanifold of $\mathbb{R}^n$. Then
+\begin{equation*}
+  T_p M \subseteq T_p \mathbb{R}^n.
+\end{equation*}
+The restriction of $\langle \cdot, \cdot \rangle$ to $T_p M$ is a positive
+definite inner products on $T_p M$.
+
+Suppose $M$ is oriented, then $T_p M$ has an orientation and an inner product.
+
+% subsection hodge_star_operators (end)
+
+% section more_linear_algebra (end)
+
+% chapter lecture_32_apr_01st (end)
 
 \appendix
 
