@@ -3924,7 +3924,7 @@ We have the following theorem that characterizes normality.
 
   By \cref{table:table_of_elements_of_gal_q_alpha_q}, it follows that
   \begin{equation*}
-    G \simeq K_4 \simeq \mathbb{Z} \times \mathbb{Z}.
+    G \simeq K_4 \simeq \mathbb{Z}_2 \times \mathbb{Z}_2.
   \end{equation*}
 \end{eg}
 
@@ -5035,23 +5035,421 @@ these polynomials split over $L$.
 
 % chapter lecture_29_mar_22nd (end)
 
-\chapter{Lecture 32 Mar 29th [dirty]}%
+\chapter{Lecture 30 Mar 25th}%
+\label{chp:lecture_30_mar_25th}
+% chapter lecture_30_mar_25th
+
+\section{Solvability by Radicals (Continued)}%
+\label{sec:solvability_by_radicals_continued}
+% section solvability_by_radicals_continued
+
+\begin{propo}[Converse of \cref{propo:subgroups_of_solvable_groups_are_solvable}]\label{propo:converse_of_subgroups_of_solvable_groups_are_solvable}
+  Let $N \trianglelefteq G$. Then $G$ is solvable iff $N$ and $\quotient{G}{N}$
+  are solvable.
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$(\implies)$} This is done by
+  \cref{propo:subgroups_of_solvable_groups_are_solvable}.
+  
+  \noindent
+  \hlbnoted{$(\impliedby)$} Given the assumptions, consider the chains
+  \begin{equation}\label{eq:converse_of_subgroups_of_solvable_groups_eq_1}
+    N = N_0 \supseteq N_1 \supseteq \hdots \supseteq N_m = \{1\}
+  \end{equation}
+  and
+  \begin{equation*}
+    \overline{G} = \overline{G}_0 \supseteq \overline{G}_1 \supseteq \hdots
+    \supseteq \overline{G}_l = \overline{N} = \{N\},
+  \end{equation*}
+  where for convenience, we write
+  \begin{equation*}
+    \overline{G}_i = \quotient{G_i}{N}, \text{ for } G_i \leq G, \, N \subseteq
+    G_i.
+  \end{equation*}
+
+  By the
+  \href{https://tex.japorized.ink/PMATH347S18/classnotes.pdf\#thm.41}{Third
+  Isomorphism Theorem}, we have that
+  \begin{equation*}
+    \quotient{\overline{G}_i}{\overline{G}_{i+1}} \simeq
+    \quotient{G_i}{G_{i+1}},
+  \end{equation*}
+  and in particular
+  \begin{equation*}
+    G_{i+1} \trianglelefteq G_i.
+  \end{equation*}
+  Thus, we have that
+  \begin{equation*}
+    G = G_0 \supseteq G_1 \supseteq \hdots \supseteq N
+  \end{equation*}
+  and then by \cref{eq:converse_of_subgroups_of_solvable_groups_eq_1}, we can
+  continue the chain down to the trivial subgroup, i.e.
+  \begin{equation*}
+    G = G_0 \supseteq G_1 \supseteq \hdots \supseteq N \supseteq N_1 \supseteq
+    \hdots \supseteq \{1\}.
+  \end{equation*}
+\end{proof}
+
+\begin{note}
+  Suppose $G$ is a finite solvable group. By \hlnotea{refining} \sidenote{By
+  refining, we mean to make the chain of normal subgroups as long as possible.}
+  the chain as much as possible, wma
+  \begin{equation*}
+    G = G_0 \supseteq G_1 \supseteq \hdots \supseteq G_n = \{1\},
+  \end{equation*}
+  such that $\quotient{G_i}{G_{i+1}}$ is abelian and $G_{i+1} \trianglelefteq
+  G_i$. The refinement process means that $\not\exists H_i \leq G$ such that
+  \begin{equation*}
+    G_{i+1} \subsetneq H_i \subsetneq G_i \text{ and } G_{i+1} \trianglelefteq
+    H_i \trianglelefteq G_i.
+  \end{equation*}
+  Note that if such $H$'s exists, then we would automatically have
+  \begin{equation*}
+    \quotient{G_i}{H_i} \text{ and } \quotient{H_i}{G_{i+1}} \text{ both being
+    abelian, }
+  \end{equation*}
+  but this would mean that the refinement process was not sufficient in the
+  first place.
+
+  Following that, we know that after refinement, it is necessary that each
+  $\quotient{G_i}{G_{i+1}}$ is abelian and
+  \hyperref[defn:simple_extension_and_primitive_elements]{simple}. This means
+  that each $\quotient{G_i}{G_{i+1}}$ has prime order \sidenote{\hlwarn{Why}?}
+  % TODO : Why do each of the quotient have prime order? We never mentioned
+  % anything about primes.
+\end{note}
+
+\begin{defn}[Simple Radical Extension]\index{Simple Radical Extension}\label{defn:simple_radical_extension} 
+  We say that $K / F$ is a \hlnoteb{simple radical extension} if $K = F(\alpha)$ 
+  for some $\alpha \in K$ such that $\alpha^n \in F$ for some $n \in
+  \mathbb{N}$.
+\end{defn}
+
+\begin{defn}[Radical Tower]\index{Radical Tower}\label{defn:radical_tower}
+  A \hlnoteb{radical tower} of $F$ is a tower of fields
+  \begin{equation}\label{eq:defn_radical_tower}
+    K_m / K_{m-1} / \hdots / K_2 / K_1 / F
+  \end{equation}
+  such that $K_1 / F$ and each $K_{i+1} / K_i$ is a simple radical extension.
+\end{defn}
+
+\begin{defn}[Radical Extension]\index{Radical Extension}\label{defn:radical_extension}
+  We say that $K / F$ is a \hlnoteb{radical extension} (or just
+  \hlnoteb{radical}) if there exists a radical tower over $F$ starting at $K$,
+  i.e.
+  \begin{equation*}
+    K_m = K
+  \end{equation*}
+  in \cref{eq:defn_radical_tower}.
+\end{defn}
+
+\begin{defn}[Solvable by Radicals]\index{Solvable by Radicals}\label{defn:solvable_by_radicals}
+  We say that $f(x) \in F[x]$ is \hlnoteb{solvable by radicals} over $F$ if its
+  splitting field is contained in a radical extension of $F$.
+\end{defn}
+
+\begin{eg}
+  Consider $f(x) = x^3 - 5 \in \mathbb{Q}[x]$. Then we have
+  \begin{equation*}
+    \mathbb{Q}(\sqrt[3]{5}, \zeta_3) \supseteq \mathbb{Q}(\sqrt[3]{5}) \supseteq
+    \mathbb{Q}.
+  \end{equation*}
+  Note that $\zeta_3^3 = 1$ and $\left( \sqrt[3]{5} \right)^3 = 5$, both of
+  which are in $\mathbb{Q}$. It follows that $\mathbb{Q}(\sqrt[3]{5}, \zeta_3)$ 
+  is radical and so $f(x)$ is solvable by radicals.
+\end{eg}
+
+\begin{eg}
+  Consider $f(x) = x^4 - 4x^2 + 2 \in \mathbb{Q}[x]$. Then we have
+  \begin{equation*}
+    \mathbb{Q}(\sqrt{2 + \sqrt{2}}) \supseteq \mathbb{Q}(\sqrt{2}) \supseteq
+    \mathbb{Q}.
+  \end{equation*}
+  Once again, we see that $f(x)$ is solvable by radicals.
+\end{eg}
+
+An uninteresting non-example would be $K = F(\pi)$, which is not a radical
+extension, and particularly because $\pi$ is
+\hyperref[defn:algebraic_and_transcendental]{transcendental} over $\mathbb{Q}$.
+
+We shall see a more interesting example in A10Q2.
+% TODO: provide assignment problem for the example
+
+\begin{defn}[Cyclic Extension]\index{Cyclic Extension}\label{defn:cyclic_extension}
+  We say that $K / F$ is a \hlnoteb{cyclic extension} if $K / F$ is finite and
+  Galois, and its Galois group is cyclic.\sidenote{In other words, we say that a
+  finite Galois extension is cyclic if its Galois group is cyclic.}
+\end{defn}
+
+\begin{note}
+  For the rest of the course, we shall always assume that we are working in a
+  field of characteristic 0.
+\end{note}
+
+\begin{propo}[Simple Primitive Extensions are Cyclic]\label{propo:simple_primitive_extensions_are_cyclic}
+  If $F$ contains a primitive $n$\textsuperscript{th} root of unity and $K =
+  F(\alpha)$ with $\alpha^n \in F$, then $K / F$ is cyclic.
+\end{propo}
+
+\marginnote{
+\begin{strategy}
+  We can show that the Galois group $G$ to be isomorphic to a cyclic group, and
+  we know that we can show that by showing how $G$ permutes its roots. Since our
+  extension contains a primitive $n$\textsuperscript{th} of unity, if we make
+  use of that, we will have a way of moving around all $n$ of the roots. The
+  polynomial which captures all of the roots we want is exactly $f(x) = x^n -
+  \alpha^n$.
+\end{strategy}}
+\begin{proof}
+  Consider the polynomial
+  \begin{equation*}
+    f(x) = x^n - \alpha^n \in F[x].
+  \end{equation*}
+  Let $\zeta \in F$ we a primitive $n$\textsuperscript{th} root of unity. Now
+  the roots of $f(x)$ in $K$ are
+  \begin{equation*}
+    \alpha,\,\alpha\zeta,\,\alpha\zeta^2,\,\ldots,\,\alpha\zeta^{n-1}.
+  \end{equation*}
+  We see that $K$ is the splitting field of $f(x)$ over $F$. Since $F$ is
+  perfect (this is our assumption for the rest of the course!), we know that $K
+  / F$ is therefore Galois.
+
+  Now for each $\phi \in G = \Gal(K / F)$, $\exists! 0 \leq i \leq n-1$ such
+  that $\phi(\alpha) = \alpha\zeta^i$. Let $\Gamma : G \to \mathbb{Z}_n$ such
+  that $\Gamma(\phi) = i$.
+
+  It is clear that $\Gamma$ is a homomorphism: taking two elements is the same
+  as just adding the powers. It is also injective, which is rather clear, since
+  each of the $\phi \in G$ has a uniquely associated $0 \leq i \leq n-1$.
+
+  It follows that $G \simeq \mathbb{Z}_n$ by the First Isomorphism Theorem, and
+  so $G$ is cyclic.
+\end{proof}
+
+% section solvability_by_radicals_continued (end)
+
+% chapter lecture_30_mar_25th (end)
+
+\chapter{Lecture 31 Mar 27th}%
+\label{chp:lecture_31_mar_27th}
+% chapter lecture_31_mar_27th
+
+\section{Solvability by Radicals (Continued 2)}%
+\label{sec:solvability_by_radicals_continued_2}
+% section solvability_by_radicals_continued_2
+
+\begin{defn}[Linearly Dependent and Independent]\index{Linearly Dependent}\index{Linearly Independent}\label{defn:linearly_dependent_and_independent}
+  We say that $\{ \sigma_1, \sigma_2, \ldots, \sigma_n \} \subseteq \Aut K$ is
+  \hlnoteb{linearly dependent} over $K$ if $\exists a_i \in K$, with not all
+  $a_i \neq 0$ such that
+  \begin{equation*}
+    a_1 \sigma_1(\alpha) + \hdots a_n \sigma_n(\alpha) = 0
+  \end{equation*}
+  for all $\alpha \in K$.
+
+  Otherwise, we say that $\{ \sigma_1, \sigma_2, \ldots, \sigma_n \}$ is
+  \hlnoteb{linearly independent}.
+\end{defn}
+
+\begin{lemma}[The Galois Group is Linearly Independent]\label{lemma:the_galois_group_is_linearly_independent}
+  Suppose $[K : F] < \infty$, Then $\Gal( K / F )$ is linearly independent over
+  $K$.
+\end{lemma}
+
+\begin{proof}
+  Suppose not. Let $\{ \sigma1, \ldots, \sigma_r \}$ be a minimal linearly
+  dependent subset of $G = \Gal(K / F)$. Notice that since $a_1 \in K^\times$ m
+  we have that $a_1 \sigma_1(\alpha) = 0$ for any $\alpha \in K$ implies that
+  $\sigma_1 = 0$, which is impossible. Thus we must have $r > 1$.
+
+  Now by assumption, $\exists \alpha_i \in K$ such that $\forall \alpha \in K$,
+  we have
+  \begin{equation*}
+    a_1 \sigma_1(\alpha) + a_2 \sigma_2(\alpha) + \hdots + a_r \sigma_r(\alpha)
+    = 0.
+  \end{equation*}
+  Let $\beta \in K$ such that wlog, $\sigma_1(\beta) \neq \sigma_2(\beta)$. Then
+  for any $\alpha \in K$, we have
+  \begin{equation}\label{eq:linearly_indep_galois_eq_1}
+    a_1\sigma_1(\alpha)\sigma_1(\beta) + a_2\sigma_2(\alpha)\sigma_2(\beta) +
+    \hdots + a_r\sigma_r(\alpha)\sigma_r(\beta) = 0
+  \end{equation}
+  and
+  \begin{equation}\label{eq:linearly_indep_galois_eq_2}
+    a_1\sigma_1(\alpha)\sigma_1(\beta) + a_2\sigma_2(\alpha)\sigma_1 + \hdots +
+    a_r\sigma_r(\alpha)\sigma_1(\beta) = 0.
+  \end{equation}
+  Subtracting \cref{eq:linearly_indep_galois_eq_2} from
+  \cref{eq:linearly_indep_galois_eq_1}, we have
+  \begin{equation*}
+    [a_2\sigma_2(\beta) - a_2\sigma_1(\beta)]\sigma_2(\alpha) + \hdots +
+    [a_r\sigma_r(\beta) - a_r\sigma_1(\beta)]\sigma_r(\alpha) = 0.
+  \end{equation*}
+  Notice that the cofficient of first term is non-zero. Thus $\{ \sigma_2,
+  \ldots, \sigma_r \}$ is also a linearly dependent subset of $G$. This
+  contradicts minimality, and so it is impossible that $G$ is linearly
+  dependent.
+\end{proof}
+
+\begin{propo}[Cyclic Extensions over Base with Primitive Roots are Simple Radical]\label{propo:cyclic_extensions_over_base_with_primitive_roots_are_simple_radical}
+  Let $F$ be a field, which contains a primitive $n$\textsuperscript{th} root of
+  unity $\zeta$. If $K / F$ is cyclic with $[K : F] = n$, then $K / F$ is simple
+  radical.
+\end{propo}
+
+\begin{proof}
+  \sidenote{This is a proof that involves a lot of non-trivial steps. Each of
+  these steps are given a \faLightbulb mark.}By assumption, we may assume that
+  \begin{equation*}
+    G = \Gal(K / F) = \langle \sigma \rangle, \text{ where } \abs{\sigma} = n =
+    [K : F] = \abs{G},
+  \end{equation*}
+  for some $\sigma \in G$.
+
+  \noindent
+  \hlbnoted{Finding an element that will serve as the adjoined element}
+
+  \faLightbulb For any $\alpha \in K$, consider
+  \begin{equation*}
+    g(\alpha) = \alpha + \zeta\sigma(\alpha) + \zeta^2\sigma^2(\alpha) + \hdots
+    + \zeta^n\sigma^n(\alpha).
+  \end{equation*}
+  \faLightbulb Notice that since $\zeta$ is a primitive $n$\textsuperscript{th}
+  of unity, we have that
+  \begin{equation*}
+    \zeta\sigma(g(\alpha)) = g(\alpha) \implies \sigma(g(\alpha)) = \zeta^{-1}
+    g(\alpha) = \zeta^{n-1} g(\alpha).
+  \end{equation*}
+  Since $\sigma$ is automorphism, in particular a homomorphism, we have that
+  \begin{equation*}
+    \sigma(g(\alpha)^n) = \sigma(g(\alpha))^n = (\zeta^{n-1} g_(\alpha))^n =
+    g(\alpha).
+  \end{equation*}
+  It follows that $g(\alpha) \in \Fix G = F$. Note that since $\alpha \in K$ was
+  arbitrary, this process works for any $\alpha$.
+
+  \noindent
+  \hlbnoted{Showing that $g(\alpha)$ cannot live in any of the intermediate
+  extensions}
+
+  Now since $G$ is linearly independent over $K$ (by
+  \cref{lemma:the_galois_group_is_linearly_independent}), we know that $\exists
+  \alpha \in K$ such that $g(\alpha) \neq 0$. Let's consider such an $\alpha$.
+  By our argument just slightly before this, we know that
+  \begin{equation*}
+    \sigma^i(g(\alpha)) \neq g(\alpha) \text{ for } 1 \leq i \leq n - 1.
+  \end{equation*}
+  This means that $g(\alpha) \notin \Fix H$ for any $\{1\} \neq H \leq G$. It
+  follows from the
+  \hyperref[thm:fundamental_theorem_of_galois_theory]{Fundamental Theorem of
+  Galois Theory} that $g(\alpha) \notin E$ for any $F \subseteq E \subsetneq K$.
+  It thus follows that $F(g(\alpha)) = K$.
+
+  Since $g(\alpha)^n \in F$, it follows by definition that $K / F$ is a simple
+  radical.
+\end{proof}
+
+The following proposition is important for us to move forward, but we shall
+prove this in \cref{chp:lecture_32_mar_29th}.
+
+\begin{propononum}[A Condition for Solvable Galois Groups]
+  Suppose we have a tower of fields $K / E / F$, $K / E$ is radical, and $E / F$ 
+  is Galois. Then there exists $L / K$ such that
+  \begin{itemize}
+    \item $L / F$ is Galois;
+    \item $L / E$ is radical; and
+    \item $\Gal(L / E)$ is solvable.
+  \end{itemize}
+\end{propononum}
+
+\begin{crly}[Radical Extensions have Solvable Extensions]\label{crly:radical_extensions_have_solvable_extensions}
+  If $K / F$ is radical, then there exists $L / K$ such that $L / F$ is radical
+  and Galois, with $\Gal(L / F)$ being solvable.
+\end{crly}
+
+\begin{proof}
+  We simply need to use the last proposition and set $E = F$.
+\end{proof}
+
+\begin{thm}[Galois Theorem]\index{Galois Theorem}\label{thm:galois_theorem}
+  Let $f(x) \in F[x]$. Then $f(x)$ is solvable by radicals over $F$ iff
+  $\Gal(f(x))$ is solvable.
+\end{thm}
+
+\begin{proof}
+  \sidenote{We shall proof only the $(\implies)$ direction, which is what we
+  will be using for the rest of the course. Please read $(\impliedby)$ direction
+  in the recommended text of the course (shall be added to an appendix page if I
+  come to read it).} Suppose $f(x)$ is solvable by radicals over $F$. WMA
+  \begin{equation*}
+    f(x) = p_1(x)^{i_1} p_2(x)^{i_2} \hdots p_l(x)^{i_l},
+  \end{equation*}
+  where each $p_i(x)$ is irreducible and distinct from one another. Now by
+  replacing $f(x)$ with $p_1(x)p_2(x) \hdots p_l(x)$, \sidenote{We may do this
+  because $\Gal(f(x)) = \Gal(p_1(x)p_2(x)\hdots p_l(x))$.} wma $f(x)$ is
+  separable.
+
+  Let $E$ be the splitting field $f(x)$ over $F$. Then $E / F$ is Galois
+  \sidenote{cf. \hyperref[thm:fundamental_theorem_of_galois_theory]{the
+  fundmental theorem}.}. Moreover, since $f(x)$ is, still, solvable by radicals,
+  we have that $E \subseteq K$ where $K / F$ is a
+  \hyperref[defn:radical_extension]{radical extension}. By
+  \cref{crly:radical_extensions_have_solvable_extensions}, $\exists L / K$ such
+  that $L / F$ is Galois and radical, and in particular $\Gal(L / F)$ is
+  solvable.
+
+  Since $E / F$ is Galois, we have that $\Gal(L / E) \trianglelefteq \Gal(L /
+  F)$ by \cref{propo:intermediate_subfields_and_normal_subfields}, and by
+  \cref{propo:first_isomorphism_theorem_on_galois_groups}, we have
+  \begin{equation*}
+    \Gal(f(x)) = \Gal(E / F) \simeq \quotient{\Gal(L / F)}{\Gal(L / E)}.
+  \end{equation*}
+  Since $\quotient{\Gal(L / F)}{\Gal(L / E)}$ is abelian, it follows that
+  $\Gal(f(x))$ is indeed solvable.
+\end{proof}
+
+\begin{note}
+  The contrapositive of \cref{thm:galois_theorem} is particularly useful; the
+  statement is
+  \begin{quotebox}{magenta}{foreground}
+    If $\Gal(f(x))$ is not solvable, then $f(x)$ is not solvable by radicals.
+  \end{quotebox}
+\end{note}
+
+\begin{warning}
+  Going back to \cref{chp:lecture_30_mar_25th}, recall
+  \hyperref[defn:solvable_by_radicals]{the definition of solvability by
+  radicals}, and notice that Galois' Theorem does not tell us that the splitting
+  field of $f(x)$ need to be a radical extension, despite the splitting field
+  being contained in a radical extension.
+\end{warning}
+
+% section solvability_by_radicals_continued_2 (end)
+
+% chapter lecture_31_mar_27th (end)
+
+\chapter{Lecture 32 Mar 29th}%
 \label{chp:lecture_32_mar_29th}
 % chapter lecture_32_mar_29th
 
-\section{Solvability by Radicals (Continued 4)}%
-\label{sec:solvability_by_radicals_continued_4}
-% section solvability_by_radicals_continued_4
+\section{Solvability by Radicals (Continued 3)}%
+\label{sec:solvability_by_radicals_continued_3}
+% section solvability_by_radicals_continued_3
 
-Recall that $f(x) \in F[x]$ is solvable by radicals iff $\Gal f(x)$ is solvable.
-Note that we still assume that $\Char F = 0$.
+Recall that $f(x) \in F[x]$ is solvable by radicals iff $\Gal f(x)$ is solvable
+(cf. \hyperref[thm:galois_theorem]{Galois' Theorem}). Note that we still assume
+that $\Char F = 0$.
 
 \begin{eg}
   Let $f(x) \in \mathbb{Q}[x]$ such that $1 \leq \deg f(x) < 5$. Then $f(x)$ is
-  solvable by radicals. Why?
+  solvable by radicals.
 
-  $f(x) \mapsto g(x)$ by deleting repeated factors. Then $g(x)$ is separable.
-  Then $\Gal f(x) = \Gal g(x) \leq S_4$. Recall $S_4$ is solvable.
+  \begin{proof}
+  We can get $f(x) \mapsto g(x)$ by deleting repeated factors. Then $g(x)$ is
+  separable.  Then $\Gal f(x) = \Gal g(x) \leq S_4$. Recall that $S_4$ is
+  solvable.
+  \end{proof}
 \end{eg}
 
 We require the following proposition from group theory. You can prove this
@@ -5069,17 +5467,17 @@ for yourself.
 \end{lemma}
 
 \begin{proof}
-  Let $\alpha$ be a root of $f(x)$ (in its splitting field). Then $[
+  Let $\alpha$ be a root of $f(x)$ in its splitting field $K$. Then $[
   \mathbb{Q}(\alpha) : \mathbb{Q} ] = \deg f = p$. By the Tower Theorem, $p \mid
-  [ K : \mathbb{Q} ]$, where $K$ is the splitting field of $f(x)$ over
-  $\mathbb{Q}$. $\implies p \mid \abs{\Gal f(x)} \implies \exists \sigma \in
+  [ K : \mathbb{Q} ] = \abs{\Gal f(x)}$. This means that $\exists \sigma \in
   \Gal f(x), \, \abs{\sigma} = p$. Wlog, wma $\sigma = (1 \; 2 \; 3 \; \hdots \;
   p)$.
   
-  Moreover, $\phi : \mathbb{C} \to \mathbb{C}$ by $\phi(z) = \overline{z}$ is a
-  $\mathbb{Q}$-map. By Normality Theorem, $\phi \restriction_{K} \in \Gal
-  f(x)$. Since $f(x)$ has only two non-real roots, it follows that $\phi
-  \restriction_{K} = (i \; j)$.
+  Let $\phi : \mathbb{C} \to \mathbb{C}$ be given by $\phi(z) = \overline{z}$,
+  which is a $\mathbb{Q}$-map \sidenote{Indeed, $\phi$ fixes $\mathbb{Q}$}. By
+  the \hyperref[thm:normality_theorem]{Normality Theorem}, $\phi
+  \restriction_{K} \in \Gal f(x)$. Since $f(x)$ has only two non-real roots, it
+  follows that $\phi \restriction_{K} = (i \; j)$.
 
   By the note above, we have that $\Gal f(x) \simeq S_p$.
 \end{proof}
@@ -5114,6 +5512,28 @@ for yourself.
   solvable (cause $A_5 \leq S_5$), $f(x)$ is not solvable by radicals.
 \end{eg}
 
+\begin{procedure}[Showing Insolvability of a Quintic]\label{procedure:showing_insolvability_of_a_quintic}
+  There are several ways we can do this. Again, one can mix and match these
+  methods to show that a quintic is not solvable by radicals.
+  \begin{itemize}
+    \item The above example gives us a heuristical method to check if any of the
+      roots are non-real, and the key to the above method is to pay attention to
+      \begin{equation*}
+        \sum \alpha_i = - [x^4]f(x) \text{ and } \sum_{i < j} \alpha_i \alpha_j
+        = [x^3]f(x),
+      \end{equation*}
+      and there will be non-real roots if
+      \begin{equation*}
+        \sum \alpha_i^2 = \left( \sum \alpha_i \right)^2 - 2 \sum_{i < j}
+        \alpha_i \alpha_j < 0,
+      \end{equation*}
+      since that is not a value that we can expect coming from the reals.
+    \item We can also check the \hlnotea{derivative} of $f(x)$, and inspect from
+      there where the `turning points' of $f(x)$ on $\mathbb{R}^2$ are and how
+      many are there.
+  \end{itemize}
+\end{procedure}
+
 \begin{thm}[Insolvability of the Quintics]\index{Insolvability of the Quintics}\label{thm:insolvability_of_the_quintics}
   Not every quintic $f(x) \in \mathbb{Q}[x]$ is solvable by radicals.
 \end{thm}
@@ -5138,7 +5558,14 @@ proposition.
 
   Say $K = E(\alpha)$ where $\alpha^n = \beta \in E$. Also, suppose $G = \Gal(E
   / F) = \{ \sigma_1, \sigma_2, ..., \sigma_r \}$. Consider \sidenote{We want to
-  grab the $n$ roots of unity.}
+  grab the $n$ roots of unity. Notice that $\prod_{i=1}^{r} (x^n -
+  \sigma_i(\beta))$ stays in $\Fix G$ if we apply any of the $\sigma$'s. In
+  particular, notice that for any $\sigma_j$, when applied to $f(x)$, we know
+  that $\Phi_n(x)$ is definitely fixed, but the other requires some care.
+  However, it is not difficult: notice that we end up with $(\sigma_j \sigma_i)
+  (\beta)$, over all $i$, and for each $i$, we get another $\sigma_{i'}$ that is
+  different from other $i$'s. It is this subtle observation that eventually
+  keeps the polynomial in the fix field.}
   \begin{equation*}
     f(x) = \Phi_n(x) \prod_{i=1}^{r} (x^n - \sigma_i(\beta)) \in \Fix G[x] = F[x].
   \end{equation*}
@@ -5158,7 +5585,7 @@ proposition.
   (\hlwarn{Proof isn't done, will be added later after next Wed.} )
 \end{proof}
 
-% section solvability_by_radicals_continued_4 (end)
+% section solvability_by_radicals_continued_3 (end)
 
 % chapter lecture_32_mar_29th (end)
 
