@@ -51,6 +51,18 @@ The second part of the course shall be called in the name of the course:
 \textbf{Differential Geometry}. This part is dedicated to studying geometry using techniques from
 differential calculus, integral calculus, linear algebra, and multilinear algebra.
 
+\paragraph{To the learner} You will likely want to avoid using this as your main
+text going forward. There is little to no intuition introduced in this course,
+coupled with seemingly haphazard organization of topics, incredibly cryptic
+definitions and theorems, along with little examples to reinforce your learning.
+The lectures and lecture notes are more likely aimed at those with relatively
+strong background in the topic, not for those who are coming into the field for
+the first time.
+
+Also, as this is written down right now, we are on the last week of classes and
+we have yet to even see the entrance to Differential Geometry, which is the name
+of the course. At this point, the course may as well be renamed Exterior Calculus.
+
 % chapter preface (end)
 
 \tuftepart{Exterior Differential Calculus}\label{part:exterior_differential_calculus}
@@ -783,7 +795,7 @@ Using the above remark, we can rewrite condition 2 as follows:
   \begin{equation*}
     \alpha(v_1, \ldots, v_k) = 0
   \end{equation*}
-  if \hlimpo{any $2$ of the arguments are equal}.
+  if \hlimpo{any 2 of the arguments are equal}.
 \end{remark}
 
 % section the_space_of_k_forms_on_v_ (end)
@@ -3899,16 +3911,16 @@ forms make sense.
   \end{quotebox}
 \end{note}
 
-\begin{defn}[Parametrizations and Parametrized Submanifolds]\index{Parametrization}\index{Parametrized Submanifold}\label{defn:parametrizations_and_parametrized_submanifolds}
+\begin{defn}[parameterizations and parameterized Submanifolds]\index{parameterization}\index{parameterized Submanifold}\label{defn:parameterizations_and_parameterized_submanifolds}
   An immersion $\phi : U \subseteq \mathbb{R}^k \to \mathbb{R}^n$ that is also a
-  homeomorphism onto its image is called a \hlnoteb{parametrization}. The image
-  $\phi(U) \subset \mathbb{R}^n$ of a parametrization $\phi : U \subseteq
+  homeomorphism onto its image is called a \hlnoteb{parameterization}. The image
+  $\phi(U) \subset \mathbb{R}^n$ of a parameterization $\phi : U \subseteq
   \mathbb{R}^k \to \mathbb{R}^n$ is called a \hlnoteb{$k$-dimensional
-  parametrized submanifold} of $\mathbb{R}^n$.
+  parameterized submanifold} of $\mathbb{R}^n$.
 \end{defn}
 
 \begin{note}
-  We see that a parametrization is an immersion which is also a continuous
+  We see that a parameterization is an immersion which is also a continuous
   bijection of $U$ onto $\phi(U)$, with a continuous inverse.
 \end{note}
 
@@ -3967,8 +3979,8 @@ Let's consider some examples.
   Thus $F$ is not an immersion.
 \end{eg}
 
-\begin{lemma}[Parametrized Submanifolds are not Determined by Immersions]\label{lemma:parametrized_submanifolds_are_not_determined_by_immersions}
-  Let $\phi : U \subseteq \mathbb{R}^k \to \mathbb{R}^n$ be a parametrization.
+\begin{lemma}[parameterized Submanifolds are not Determined by Immersions]\label{lemma:parameterized_submanifolds_are_not_determined_by_immersions}
+  Let $\phi : U \subseteq \mathbb{R}^k \to \mathbb{R}^n$ be a parameterization.
   Let $h : \tilde{U} \subseteq \mathbb{R}^k \to \mathbb{R}^k$ be a
   diffeomorphism of $\tilde{U}$ onto $U = h(\tilde{U})$. Then the composition
   \begin{equation*}
@@ -4000,8 +4012,8 @@ Let's consider some examples.
 \end{proof}
 
 \begin{note}
-  \cref{lemma:parametrized_submanifolds_are_not_determined_by_immersions} tells
-  us that there are more ways than one to parametrize a submanifold of
+  \cref{lemma:parameterized_submanifolds_are_not_determined_by_immersions} tells
+  us that there are more ways than one to parameterization a submanifold of
   $\mathbb{R}^n$.
 \end{note}
 
@@ -4016,7 +4028,7 @@ Let's consider some examples.
   fix all the coordinates $(u^1, \ldots, u^k)$ except for the
   $j$\textsuperscript{th} coordinate $u^j$, and think of $\phi$ as a function of
   only $u^j$, then $\phi$ is a smooth curve on $\mathbb{R}^n$, called the
-  \hlnoteb{$j$\textsuperscript{th} coordinate curve} of the parametrization
+  \hlnoteb{$j$\textsuperscript{th} coordinate curve} of the parameterization
   $\phi$. This is a smooth curve on $\mathbb{R}^n$ with velocity vector at $u
   \in U$ given by
   \begin{equation*}
@@ -4037,8 +4049,8 @@ Let's consider some examples.
 \end{note}
 
 \begin{defn}[Tangent Space on a Submanifold]\index{Tangent Space}\label{defn:tangent_space_on_a_submanifold}
-  Let $\phi : U \subseteq \mathbb{R}^k \to \mathbb{R}^n$ be a parametrization,
-  so that $\phi(U)$ is a $k$-dimensional parametrized submanifold of
+  Let $\phi : U \subseteq \mathbb{R}^k \to \mathbb{R}^n$ be a parameterization,
+  so that $\phi(U)$ is a $k$-dimensional parameterized submanifold of
   $\mathbb{R}^n$. Then the \hlnoteb{tangent space} to $\phi(U)$ at $\phi(u)$,
   denoted as \hldefn{$T_{\phi(u)} \phi(U)$}, is defined to be the
   $k$-dimensional subspace of $T_{\phi(u)} \mathbb{R}^n$ spanned by the $k$
@@ -4111,10 +4123,10 @@ way.
 \begin{note}
   We see that a $k$-dimensional submanifold $M$ of $\mathbb{R}^n$ is a subset of
   a not-necessarily-disjoint union pieces of open sets, each of which is a
-  \hyperref[defn:parametrizations_and_parametrized_submanifolds]{$k$-dimensional
-  parametrized submanifold} of $\mathbb{R}^n$ \sidenote{Some authors call a
+  \hyperref[defn:parameterizations_and_parameterized_submanifolds]{$k$-dimensional
+  parameterized submanifold} of $\mathbb{R}^n$ \sidenote{Some authors call a
   $k$-dimensional submanifold a \hlnotea{regular submanifold} of $\mathbb{R}^n$,
-  and use the term \hlnotea{regular map} for a parametrization.}.
+  and use the term \hlnotea{regular map} for a parameterization.}.
 \end{note}
 
 % section submanifolds_in_terms_of_local_parameterizations (end)
@@ -4125,12 +4137,12 @@ way.
 \label{chp:lecture_17_feb_25th}
 % chapter lecture_17_feb_25th
 
-\section{Submanifolds in Terms of Local Parametrizations (Continued)}%
-\label{sec:submanifolds_in_terms_of_local_parametrizations_continued}
-% section submanifolds_in_terms_of_local_parametrizations_continued
+\section{Submanifolds in Terms of Local parameterizations (Continued)}%
+\label{sec:submanifolds_in_terms_of_local_parameterizations_continued}
+% section submanifolds_in_terms_of_local_parameterizations_continued
 
 Given that the maps $\phi_\alpha$, $\phi_\beta$ are homeomorphisms, we can
-consider the map that goes from one parametrization to another.
+consider the map that goes from one parameterization to another.
 
 \begin{defn}[Transition Map]\index{Transition Map}\label{defn:transition_map}
   Let $M$ be a $k$-dimensional submanifold of $\mathbb{R}^n$. If $V_\alpha \cap
@@ -4232,27 +4244,27 @@ homeomorphic and preserves smoothness. This realization of $M$ being
 identifiable with such $k$-dimensional subsets is why we say that $M$ is
 $k$-dimensional.
 
-\begin{defn}[Local Parametrizations]\index{Local Parametrizations}\label{defn:local_parametrizations}
-  Under \cref{defn:parametrizations_and_parametrized_submanifolds}, each
+\begin{defn}[Local parameterizations]\index{Local parameterizations}\label{defn:local_parameterizations}
+  Under \cref{defn:parameterizations_and_parameterized_submanifolds}, each
   $\phi_{\alpha} : U_\alpha \to M \subseteq \mathbb{R}^n$ is called a
-  \hlnoteb{local parametrization} of $M$, and the collection
+  \hlnoteb{local parameterization} of $M$, and the collection
   \begin{equation*}
     \{ \phi_\alpha : U_\alpha \to V_\alpha \cap M : \alpha \in A \}
   \end{equation*}
-  of local parametrizations is called a \hldefn{cover} of $M$. Given any such
+  of local parameterizations is called a \hldefn{cover} of $M$. Given any such
   cover, any other mapping $\psi : U \to V \cap M$ that satisfies
-  \cref{defn:parametrizations_and_parametrized_submanifolds} is called an
-  \hldefn{allowable local parametrization}. The set of all possible allowable
-  local parametrizations under a given cover is called the \hldefn{maximal
+  \cref{defn:parameterizations_and_parameterized_submanifolds} is called an
+  \hldefn{allowable local parameterization}. The set of all possible allowable
+  local parameterizations under a given cover is called the \hldefn{maximal
   cover} of the cover.
 \end{defn}
 
 \begin{note}
-  Allowable local parametrizations can be added to a cover and the cover will
+  Allowable local parameterizations can be added to a cover and the cover will
   still cover $M$, hence its name.
 \end{note}
 
-\begin{eg}\label{eg:parametrization_of_s_n_1_in_r_n_no1}
+\begin{eg}\label{eg:parameterization_of_s_n_1_in_r_n_no1}
   Consider the unit sphere $S^{n - 1} \subseteq \mathbb{R}^n$, which is
   \begin{equation*}
     S^{n - 1} = \{ x \in \mathbb{R}^n : \norm{x}^2 = 1 \},
@@ -4328,12 +4340,12 @@ $k$-dimensional.
   we can define $\phi_j^- : U \to V_j^-$ analogously, taking the negative square
   root.
 
-  In conclusion, we covered $S^{n - 1}$ by $2n$ local parametrizations, and thus
+  In conclusion, we covered $S^{n - 1}$ by $2n$ local parameterizations, and thus
   proving that $S^{n - 1}$ is an $( n - 1 )$-dimensional submanifold of
   $\mathbb{R}^n$.
 \end{eg}
 
-\begin{eg}\label{eg:parametrization_of_a_torus_in_r_n_no1}
+\begin{eg}\label{eg:parameterization_of_a_torus_in_r_n_no1}
   Let $a < b$ and let $h : (a, b) \to \mathbb{R}$ be a smooth function such that
   $h(t) > 0$ for all $t \in (a, b)$. Consider the subset $M$ of $\mathbb{R}^3$
   given by
@@ -4351,7 +4363,7 @@ $k$-dimensional.
   \hlbnoted{Claim} $M$ is a $2$-dimensional submanifold of $\mathbb{R}^3$.
 
   To show this, we can show that every point in $M$ lies in the image of some
-  local parametrization. Using cylindrical coordinates on $\mathbb{R}^3$, the
+  local parameterization. Using cylindrical coordinates on $\mathbb{R}^3$, the
   points on $M$ are
   \begin{equation*}
     x = h(z) \cos \theta, \, y = h(z) \sin \theta, \text{ and } z = z, \text{
@@ -4403,9 +4415,9 @@ Notice that the columns are not scalar multiples of each other, and so $(\D
 \phi)$ has rank $2$, which, in this context, is maximal. It follows that $(\D
 \phi)$ is injective at all points in its domain. Thus $\phi$ is an immersion.
 Therefore, $M$ is indeed a $2$-dimensional submanifold of $\mathbb{R}^3$, and we
-have successfully covered $M$ with two local parametrizations.
+have successfully covered $M$ with two local parameterizations.
 
-% section submanifolds_in_terms_of_local_parametrizations_continued (end)
+% section submanifolds_in_terms_of_local_parameterizations_continued (end)
 
 % chapter lecture_17_feb_25th (end)
 
@@ -4511,7 +4523,7 @@ section, we shall see that locally so, all submanifolds show up in this manner.
 
   Thus we have that $U' \cap F^{-1}(0) = U' \cap M = \phi(V)$, with $\phi : V
   \subseteq \mathbb{R}^k \to \phi(V) \subseteq \mathbb{R}^n$ satisfying
-  \cref{defn:parametrizations_and_parametrized_submanifolds}. Since $x_0 \in M$
+  \cref{defn:parameterizations_and_parameterized_submanifolds}. Since $x_0 \in M$
   was arbitrarily chosen, it follows that $M$ is indeed a $k$-dimensional
   submanifold of $\mathbb{R}^n$.
 \end{proof}
@@ -4544,12 +4556,12 @@ section, we shall see that locally so, all submanifolds show up in this manner.
 
 \marginnote{
 \begin{remark}
-  Notice that \cref{eg:parametrization_of_s_n_1_in_r_n_no2} is a much faster way
-  than \cref{eg:parametrization_of_s_n_1_in_r_n_no1} to finding a cover!
+  Notice that \cref{eg:parameterization_of_s_n_1_in_r_n_no2} is a much faster way
+  than \cref{eg:parameterization_of_s_n_1_in_r_n_no1} to finding a cover!
 \end{remark}}
-\begin{eg}\label{eg:parametrization_of_s_n_1_in_r_n_no2}
+\begin{eg}\label{eg:parameterization_of_s_n_1_in_r_n_no2}
   Consider the sphere $S^{n - 1} \subset \mathbb{R}^n$ from
-  \cref{eg:parametrization_of_s_n_1_in_r_n_no1}. Note that we may now write this
+  \cref{eg:parameterization_of_s_n_1_in_r_n_no1}. Note that we may now write this
   as $S^{ n - 1 } = F^{-1}(0)$ where $F : \mathbb{R}^n \to \mathbb{R}$ is the
   smooth function
   \begin{equation*}
@@ -4566,7 +4578,7 @@ section, we shall see that locally so, all submanifolds show up in this manner.
 
 \begin{eg}
   Consider the surface of revolution $M \subset \mathbb{R}^3$ from
-  \cref{eg:parametrization_of_a_torus_in_r_n_no1}. We can write this set as $M =
+  \cref{eg:parameterization_of_a_torus_in_r_n_no1}. We can write this set as $M =
   F^{-1}(0)$, where $F : \mathbb{R}^3 \to \mathbb{R}$ is the smooth function
   \begin{equation*}
     F(x, y, z) = x^2 + y^2 - (h(z))^2.
@@ -4621,9 +4633,9 @@ an explicitly defined $k$-dimensional submanifold of $\mathbb{R}^n$ with $n - k
 In this section we shall look into more results about the local structure of
 submanifolds.
 
-\begin{thm}[Points on the Parametrization]\index{Points on the Parametrization}\label{thm:points_on_the_parametrization}
+\begin{thm}[Points on the parameterization]\index{Points on the parameterization}\label{thm:points_on_the_parameterization}
   Let $M$ be a $k$-dimensional submanifold of $\mathbb{R}^n$, and let $x \in M$.
-  Then there exists a local parametrization $\psi : W \subseteq \mathbb{R}^k \to
+  Then there exists a local parameterization $\psi : W \subseteq \mathbb{R}^k \to
   \mathbb{R}^n$ for $M$ with $x \in \psi(W)$ such that $\exists \{ l_1, \ldots,
   l_k \} \subseteq \{ 1, \ldots, n \}$ with complement $\{ m_1, \ldots, m_{n -
   k} \}$ such that $x = \psi(w)$ satisfies
@@ -4636,7 +4648,7 @@ submanifolds.
 
 \begin{proof}
   Since $M$ is a submanifold of $\mathbb{R}^n$, $\exists \phi : U \subseteq
-  \mathbb{R}^k \to \mathbb{R}^n$, a local parametrization, with $x \in \phi(U)$.
+  \mathbb{R}^k \to \mathbb{R}^n$, a local parameterization, with $x \in \phi(U)$.
   Since $\phi$ is an immersion, the \hyperref[defn:differential]{Jacobian} $(\D
   \phi)_u$ has rank $k$, and so \cref{crly:nonvanishing_minor} gives us $\{ l_1,
   \ldots, l_k \} \subseteq \{ 1, \ldots, n \}$ with complement $\{ m_1,
@@ -4661,8 +4673,8 @@ submanifolds.
   Note that $w^j = \tilde{\phi}^j(u) = \phi^{l_j}(u) = x^{l_j}$. Thus we can
   define $\psi : W \subseteq \mathbb{R}^k \to \mathbb{R}^n$ by $\psi : \phi
   \circ \tilde{\phi}^{-1}$. It follows from
-  \cref{lemma:parametrized_submanifolds_are_not_determined_by_immersions} that
-  $\psi$ is a local parametrization of $M$. Therefore, we have
+  \cref{lemma:parameterized_submanifolds_are_not_determined_by_immersions} that
+  $\psi$ is a local parameterization of $M$. Therefore, we have
   \begin{gather*}
     \psi^{l_j}(w) = \phi^{l_j} ( \tilde{\phi}^{-1}(w) ) = \phi^{l_j}(u) =
     x^{l_j} = w^j \text{ and } \\
@@ -4672,7 +4684,7 @@ submanifolds.
 \end{proof}
 
 \begin{note}
-  \cref{thm:points_on_the_parametrization} shows that locally (on $\psi(W)$) the
+  \cref{thm:points_on_the_parameterization} shows that locally (on $\psi(W)$) the
   submanifold is given as the graph of a function of $k$ variables. We can
   explicitly write $n - k$ of the coordinates $x^j$ as smooth functions of the
   other $k$ variables.
@@ -4702,7 +4714,7 @@ submanifolds.
   Let $x \in M$, $F : W \subseteq \mathbb{R}^n \to \mathbb{R}^{n - k}$ which has
   maximal rank on $W$, and $x \in W$. It follows that if we let $M = W \cap M$
   in the \hyperref[thm:implicit_submanifold_theorem]{Implicit Submanifold
-  Theorem}, then there exists a local parametrization $f : U \subseteq
+  Theorem}, then there exists a local parameterization $f : U \subseteq
   \mathbb{R}^k \to F(U)$ for some open neighbourhood $f(U)$ of $x$. Since $x$ is
   arbitrary, it follows that $M$ is indeed a $k$-dimensional submanifold of
   $\mathbb{R}^n$.
@@ -4720,8 +4732,8 @@ Interestingly, and fortunate to some extent, the converse of \\
 \end{propo}
 
 \begin{proof}
-  By \cref{thm:points_on_the_parametrization}, $\exists \psi : U \subseteq
-  \mathbb{R}^k \to \mathbb{R}^n$ a local parametrization such that $x \in
+  By \cref{thm:points_on_the_parameterization}, $\exists \psi : U \subseteq
+  \mathbb{R}^k \to \mathbb{R}^n$ a local parameterization such that $x \in
   \psi(U)$, with
   \begin{gather*}
     x^{l_j} = \psi^{l_j}(w) = w^j \text{ and } \\
@@ -4791,8 +4803,8 @@ Interestingly, and fortunate to some extent, the converse of \\
 \begin{defn}[Smooth Functions on Submanifolds]\index{Smooth Functions}\label{defn:smooth_functions_on_submanifolds}
   Let $f : M \to \mathbb{R}$. We say that $f$ is \hlnoteb{smooth} if the
   composition $f \circ \phi_\alpha : U_\alpha \to \mathbb{R}$ is a smooth
-  function for any \hyperref[defn:local_parametrizations]{allowable local
-  parametrization} $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ of $M$ (cf.
+  function for any \hyperref[defn:local_parameterizations]{allowable local
+  parameterization} $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ of $M$ (cf.
   \cref{fig:visual_representation_of_smooth_functions_and_curves_on_submanifolds}).
 
   Let $F : M \to \mathbb{R}^q$ be a vector-valued map. We say that $F$ is
@@ -4862,7 +4874,7 @@ Interestingly, and fortunate to some extent, the converse of \\
   \hyperref[defn:smooth_curve]{smooth curve} \sidenote{Note that we are using
   an earlier definition of a smooth curve on $\mathbb{R}^k$ to define a smooth
   curve on submanifolds.} on $\mathbb{R}^k$ for any allowable local
-  parametrization $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ (cf.
+  parameterization $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ (cf.
   \cref{fig:visual_representation_of_smooth_functions_and_curves_on_submanifolds}).
 \end{defn}
 
@@ -4916,7 +4928,7 @@ Interestingly, and fortunate to some extent, the converse of \\
 
 \begin{proof}
   For any $t \in I$, the point $p = \gamma(t) \in M$ lies in the image of some
-  local parametrization $\phi_\alpha$ of $M$. By
+  local parameterization $\phi_\alpha$ of $M$. By
   \cref{defn:smooth_curve_on_a_submanifold} and
   \cref{defn:smooth_functions_on_submanifolds} on $M$, we know that both
   \begin{equation*}
@@ -4942,7 +4954,7 @@ In a similar fashion to how we defined a tangent space on $\mathbb{R}^n$ (cf.
 this section, we shall show an analogous construction of a tangent space on
 submanifolds.
 
-Let $\phi : U \to \mathbb{R}^n$ be a parametrization of $M$. From
+Let $\phi : U \to \mathbb{R}^n$ be a parameterization of $M$. From
 \cref{sec:smooth_curves_in_r_n_and_tangent_vectors_continued}, we would have the
 $k$-dimensional subspace $T_{\phi(u)} \mathbb{R}^n$ spanned by the $k$ vectors
 \begin{equation*}
@@ -4969,16 +4981,16 @@ T_{\phi(u)} \mathbb{R}^n$.
 
 Recall that in \cref{defn:tangent_space_on_a_submanifold} we defined the
 \hlnoteb{tangent space} $T_p M$ of $M$ at $p$ to be the tangent space of the
-parametrized submanifold $\phi(U) \subseteq \mathbb{R}^n$ at $\phi(u)$ for any
-local parametrization $\phi : U \to \mathbb{R}^n$ of $M$ with $p = \phi(u)$.i
+parameterized submanifold $\phi(U) \subseteq \mathbb{R}^n$ at $\phi(u)$ for any
+local parameterization $\phi : U \to \mathbb{R}^n$ of $M$ with $p = \phi(u)$.i
 
 For this notion to be well-defined, we need to show that $T_p M$ does not depend
-on the choice of the local parametrization.
+on the choice of the local parameterization.
 
 \begin{propo}[Well-Definedness of the Tangent Space of a Submanifold]\label{propo:well_definedness_of_the_tangent_space_of_a_submanifold}
   Let $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ and $\phi_\beta : U_\beta \to
-  \mathbb{R}^n$ be two \hyperref[defn:local_parametrizations]{local
-  parametrizations} for $M$ with $p \in V_\alpha \cap V_\beta \cap M$. Then $p =
+  \mathbb{R}^n$ be two \hyperref[defn:local_parameterizations]{local
+  parameterizations} for $M$ with $p \in V_\alpha \cap V_\beta \cap M$. Then $p =
   \phi_\alpha (u_\alpha) = \phi_\beta(u_\beta)$ for some unique $u_\alpha \in
   U_\alpha$ and $u_\beta \in U_\beta$. Then we have
   \begin{equation*}
@@ -5024,10 +5036,10 @@ on the choice of the local parametrization.
   Note that the proof of
   \cref{propo:well_definedness_of_the_tangent_space_of_a_submanifold} is almost
   a restatement of
-  \cref{lemma:parametrized_submanifolds_are_not_determined_by_immersions}. We
+  \cref{lemma:parameterized_submanifolds_are_not_determined_by_immersions}. We
   see that, once again, the result says that the image of the induced linear map
-  $(\dif{\phi})_u$ of a parametrization is \hlbnotec{independent of any
-  parametrization} such that $\phi(u) = p$.
+  $(\dif{\phi})_u$ of a parameterization is \hlbnotec{independent of any
+  parameterization} such that $\phi(u) = p$.
 \end{note}
 
 \newthought{We now} consider characterizing elements of $T_p M$ as velocity
@@ -5037,7 +5049,7 @@ for $\mathbb{R}^n$}.
 
 \begin{defn}[Velocity Vectors on a Submanifold]\index{Velocity Vectors}\label{defn:velocity_vectors_on_a_submanifold}
   Let $\gamma : I \to M$ be a smooth curve on $M$ with $0 \in I$ and $\gamma(0)
-  = p$. Then $p$ lies in the image of at least one local parametrization $\phi :
+  = p$. Then $p$ lies in the image of at least one local parameterization $\phi :
   U \to \mathbb{R}^n$ for $M$, with $\phi(u) = p$ for some $u \in U$. The
   \hlnotea{velocity vector} of the smooth curve $\phi^{-1} \circ \gamma : I \to
   \mathbb{R}^k$ on $\mathbb{R}^k$ at the point $u$ is a tangent vector
@@ -5099,7 +5111,7 @@ for $\mathbb{R}^n$}.
   The argument in the proof of
   \cref{propo:well_definedness_of_the_tangent_space_of_a_submanifold} tells us
   that this definition is well-defined, i.e. the velocity vector on a point $p$
-  is the same regardless of the choice of parametrization.
+  is the same regardless of the choice of parameterization.
 \end{note}
 
 \begin{remark}
@@ -5118,7 +5130,7 @@ The have the following fact that makes our definition even better.
 \end{propo}
 
 \begin{proof}
-  Let $\phi: U \to \mathbb{R}^n$ be any local parametrization of $M$ whose image
+  Let $\phi: U \to \mathbb{R}^n$ be any local parameterization of $M$ whose image
   contains $p$. Then $u = \phi^{-1}(p) \in U \subseteq \mathbb{R}^k$. Then
   $(\dif{\phi})_u : T_u \mathbb{R}^k \to T_p \mathbb{R}^n$ is a linear
   injection, whose image is precisely $T_p M$. Let $v_p \in T_p M$. Then
@@ -5142,7 +5154,7 @@ The have the following fact that makes our definition even better.
 \end{note}
 
 Let's examine the consequences of the above observation. Let $\phi : U \to
-\mathbb{R}^n$ be a local parametrization of $M$. If we fix all the components in
+\mathbb{R}^n$ be a local parameterization of $M$. If we fix all the components in
 $u \in U$ except the $j$\textsuperscript{th} component, we get exactly a smooth
 curve on $M$, which we called the
 \hyperref[defn:_j_th_coordinate_curve]{$j$\textsuperscript{th} coordinate
@@ -5166,12 +5178,12 @@ the set
   A = \left\{ \frac{\partial \phi}{\partial u^j}(u) : j = 1, \ldots, k \right\},
 \end{equation*}
 which is the set of velocity vectors at $p$ of the coordinate curves on $M$ as
-determined by the local parametrization $\phi$. Since $T_p M$ is 
+determined by the local parameterization $\phi$. Since $T_p M$ is 
 $k$-dimensional, $A$ is necessarily a basis for $T_p M$.
 
-We see that for each choice of a local parametrization $\phi$ of $M$ whose image
+We see that for each choice of a local parameterization $\phi$ of $M$ whose image
 contains $p$ determines a particular basis of $T_p M$. Thus we see that there is
-no canonical choice for a local parametrization.
+no canonical choice for a local parameterization.
 
 \newthought{Now} let us consider tangent vectors as derivations. The set of
 real-valued functions on $M$ is both a vector space and an \hldefn{algebra} with
@@ -5237,9 +5249,9 @@ $\mathbb{R}^n$.
   \end{equation*}
 \end{ex}
 
-\begin{lemma}[Correspondence of Smooth Maps between a Submanifold and Its Parametrization]\label{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parametrization}
+\begin{lemma}[Correspondence of Smooth Maps between a Submanifold and Its parameterization]\label{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parameterization}
   Let $M$ be a submanifold of $\mathbb{R}^n$, and $\phi : U \to M$ a local
-  parametrization of $M$. Then $\phi(U) = V \cap M$ for some open set $V$ in
+  parameterization of $M$. Then $\phi(U) = V \cap M$ for some open set $V$ in
   $\mathbb{R}^n$ containing $p$. Consider the map
   \begin{equation*}
     \iota : C_p^\infty(V \cap M) \to C_p^\infty(U) \text{ given by } f \mapsto f
@@ -5274,8 +5286,8 @@ $\mathbb{R}^n$.
     \node at (2.2, 1) {$\mathbb{R}$};
   \end{tikzpicture}
   \caption{Visualization of
-  \cref{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parametrization}}
-  \label{fig:visualization_of_correspondence_of_smooth_maps_between_a_submanifold_and_its_parametrization}
+  \cref{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parameterization}}
+  \label{fig:visualization_of_correspondence_of_smooth_maps_between_a_submanifold_and_its_parameterization}
 \end{figure*}
 
 \begin{proof}
@@ -5312,7 +5324,7 @@ $\mathbb{R}^n$.
 
 \begin{crly}[Isomorphism Between Algebra of Germs]\label{crly:isomorphism_between_algebra_of_germs}
   Consider the assumptions in
-  \cref{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parametrization}.
+  \cref{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parameterization}.
   Let $p \in V \cap M$ with $p = \phi(u)$ for $u \in U$. Then the linear
   isomorphism $C^\infty (V \cap M) \to C^\infty (U)$ given by $f \mapsto f \circ
   \phi$ induces an isomorphism between the algebra of germs $C_p^\infty(M)$ at
@@ -5342,7 +5354,7 @@ $\mathbb{R}^n$.
   C_u^\infty(\mathbb{R}^k)$. Then $h$ is a smooth function defined on some open
   neighbourhood $\tilde{U} \subseteq U$ of $u$. Then by restricting $\phi$ to
   $\tilde{U}$, following the proof of
-  \cref{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parametrization},
+  \cref{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parameterization},
   we have that $h = (h \circ \phi^{-1}) \circ \phi$. Thus $[h]_u \in
   C_u^\infty(\mathbb{R}^k)$ is the image of $[ h \circ \phi^{-1} ]_p \in
   C_p^\infty(M)$. Thus our map is surjective.
@@ -5355,7 +5367,7 @@ $\mathbb{R}^n$.
 \end{proof}
 
 \begin{note}
-  We see that a local parametrization $\phi : U \to V \cap M$ allows us to
+  We see that a local parameterization $\phi : U \to V \cap M$ allows us to
   identify germs of smooth functions on $M$ at $p$ with germs of smooth
   functions on $U$ at $u = \phi^{-1}(p)$.
 \end{note}
@@ -5364,7 +5376,7 @@ $\mathbb{R}^n$.
 $p$ precisely the space of derivations at $p$. Let $M$ be a submanifold of
 $\mathbb{R}^n$ and let $p \in M$.
 
-Let $\phi$ be a local parametrization of $M$ whose image contains $p = \phi(u)$.
+Let $\phi$ be a local parameterization of $M$ whose image contains $p = \phi(u)$.
 Again, we have $\phi(U) = V \cap M$ for some open $V \subseteq \mathbb{R}^n$,
 and $V \cap M$ is a submanifold of $\mathbb{R}^n$, containing $p$. Let
 \begin{equation*}
@@ -5432,7 +5444,7 @@ We have therefore proven the following theorem:
   \begin{equation*}
     v_p(f) = ((\dif{\phi})_u^{-1} (v_p)) (f \circ \phi)
   \end{equation*}
-  for any local parametrization $\phi : U \to \mathbb{R}^n$ of $M$ such that
+  for any local parameterization $\phi : U \to \mathbb{R}^n$ of $M$ such that
   $\phi(u) = p$. Moreover, any derivation $\mathcal{D} : C_p^\infty(M) \to
   \mathbb{R}$ is of this form for a unique $v_p \in T_p M$.
 \end{thm}
@@ -5440,8 +5452,8 @@ We have therefore proven the following theorem:
 \begin{ex}
   Show that $f \mapsto ((\dif{\phi})_u^{-1} (v_p))(f \circ \phi)$ is a
   derivation. Moreover, show that the map is independent of the local
-  parametrization $\phi$, i.e. if $\exists \tilde{\phi}$ another local
-  parametrization of $M$ with $\tilde{\phi}(\tilde{u}) = p$, then show that
+  parameterization $\phi$, i.e. if $\exists \tilde{\phi}$ another local
+  parameterization of $M$ with $\tilde{\phi}(\tilde{u}) = p$, then show that
   \begin{equation*}
     ((\dif{\phi})_u^{-1} (v_p)) (f \circ \phi)
     = ((\dif{\tilde{\phi}})_u^{-1} (v_p))(f \circ \tilde{\phi}).
@@ -5461,7 +5473,7 @@ We have therefore proven the following theorem:
 % section tangent_vectors_and_cotangent_vectors_on_a_submanifold_continued_3
 
 \begin{eg}\label{eg:special_case_of_the_directional_derivative}
-  Let $\phi$ be a local parametrization of $M$ with $p = \phi(u)$, and the
+  Let $\phi$ be a local parameterization of $M$ with $p = \phi(u)$, and the
   tangent vector $\frac{\partial \phi}{\partial u^j} (u) \in T_p M$ given by the
   velocity at $p$ of the $j$\textsuperscript{th} coordinate curve on $M$ induced
   by $\phi$. Note that $\frac{\partial \phi}{\partial u^j}(u) = (\dif{\phi})_u
@@ -5480,7 +5492,7 @@ We have therefore proven the following theorem:
     \left\{ \frac{\partial}{\partial u^1} \at{p}{}, \ldots,
     \frac{\partial}{\partial u^j} \at{p}{} \right\}
   \end{equation*}
-  is a basis of $T_p M$, but this depends on the choice of parametrization.
+  is a basis of $T_p M$, but this depends on the choice of parameterization.
 \end{eg}
 
 % section tangent_vectors_and_cotangent_vectors_on_a_submanifold_continued_3 (end)
@@ -5589,7 +5601,7 @@ attaches a vector to each point in the space.}
 \end{remark}
 
 \begin{eg}[\imponote]\label{eg:important_eg_for_smoothness_on_submanifolds}
-  Let $\phi : U \to \mathbb{R}^n$ be a local parametrization for $M$ with image
+  Let $\phi : U \to \mathbb{R}^n$ be a local parameterization for $M$ with image
   $V \cap M$. Let $p \in V \cap M$ with $p = \phi(u)$. Recall that the tangent
   vector $\frac{\partial}{\delta u^j}_p \in T_p M$ was defined to be
   $(\dif{\phi})_u(\hat{e}_j)_u$, where $(\hat{e}_j)_u \in T_u \mathbb{R}^k$ is
@@ -5654,7 +5666,7 @@ attaches a vector to each point in the space.}
 
 \begin{defn}[Pullback Maps on Submanifolds]\index{Pullback Maps}\label{defn:pullback_maps_on_submanifolds}
   Let $M$ be a submanifold on $\mathbb{R}^n$, and let $\phi : U \subseteq
-  \mathbb{R}^k \to \mathbb{R}^k$ be a local parametrization for $M$. Then $\phi$ 
+  \mathbb{R}^k \to \mathbb{R}^k$ be a local parameterization for $M$. Then $\phi$ 
   is a smooth map, and it induces a linear isomorphism $(\dif{\phi})_u : T_u
   \mathbb{R}^k \to T_{\phi(u)} M$. We define the \hlnoteb{pullback map} as
   \begin{equation*}
@@ -5690,7 +5702,7 @@ attaches a vector to each point in the space.}
 \begin{lemma}[Smoothness of Pullbacks and Forms]\label{lemma:smoothness_of_pullbacks_and_forms}
   Suppose that $\eta$ is an $r$-form on $M$. then $\eta$ is smooth iff the
   pullback $\phi^* \eta$ is a smooth $r$-form on $U$ for every local
-  parametrization $\phi : U \to \mathbb{R}^n$ of $M$.
+  parameterization $\phi : U \to \mathbb{R}^n$ of $M$.
 \end{lemma}
 
 \marginnote{Recall from much earlier on that any smooth vector fields on
@@ -5741,11 +5753,11 @@ suffices for us to show that the statement holds for these guys.}
 Now recall that \hyperref[defn:transition_map]{transition maps} are
 \hyperref[propo:transition_maps_are_diffeomorphisms]{diffeomorphic}.
 
-\begin{lemma}[Composition of Pullbacks of Transition Maps and Parametrizations]\label{lemma:composition_of_pullbacks_of_transition_maps_and_parametrizations}
+\begin{lemma}[Composition of Pullbacks of Transition Maps and parameterizations]\label{lemma:composition_of_pullbacks_of_transition_maps_and_parameterizations}
   Let $\phi_\alpha : U_\alpha \to V_\alpha \cap M$ and $\phi_\beta : U_\beta \to
-  V_\beta \cap M$ be two local parametrizations for $M$ such that $V_\alpha \cap
+  V_\beta \cap M$ be two local parameterizations for $M$ such that $V_\alpha \cap
   V_\beta \cap M \neq \emptyset$. Let $\eta$ be a smooth $r$-form on $M$. Then
-  \begin{equation}\label{eq:composition_of_pullbacks_of_transition_maps_and_parametrizations}
+  \begin{equation}\label{eq:composition_of_pullbacks_of_transition_maps_and_parameterizations}
     \phi^*_{\beta \alpha} \phi_\beta^* \eta = \phi_\alpha^* \eta.
   \end{equation}
 \end{lemma}
@@ -5758,13 +5770,13 @@ Now recall that \hyperref[defn:transition_map]{transition maps} are
   \end{equation*}
 \end{proof}
 
-\marginnote{\cref{crly:_r_forms_on_a_submanifold_and_its_parametrizations_are_equivalent}
+\marginnote{\cref{crly:_r_forms_on_a_submanifold_and_its_parameterizations_are_equivalent}
 tells us that the $r$-forms on $M$ stays consistent across the different
-parametrizations, and this equivalence comes from the transition map between
-parametrizations.}
-\begin{crly}[$r$-forms on a Submanifold and Its Parametrizations are Equivalent]\label{crly:_r_forms_on_a_submanifold_and_its_parametrizations_are_equivalent}
+parameterizations, and this equivalence comes from the transition map between
+parameterizations.}
+\begin{crly}[$r$-forms on a Submanifold and Its parameterizations are Equivalent]\label{crly:_r_forms_on_a_submanifold_and_its_parameterizations_are_equivalent}
   A smooth $r$-form $\eta$ on $M$ is equivalent to the smooth $\eta_\alpha$ on
-  each $U_\alpha$, an allowable local parametrization of $M$, subject to the
+  each $U_\alpha$, an allowable local parameterization of $M$, subject to the
   compatibility relation that
   \begin{equation*}
     \phi_{\beta\alpha}^* \eta_\beta = \eta_\alpha.
@@ -5774,16 +5786,16 @@ parametrizations.}
 \begin{proof}
   We may choose $\eta_\alpha = \phi_\alpha^* \eta$. Then by choosing $\eta_\beta
   = \phi_\alpha^* \eta$, we can apply
-  \cref{lemma:composition_of_pullbacks_of_transition_maps_and_parametrizations}
+  \cref{lemma:composition_of_pullbacks_of_transition_maps_and_parameterizations}
   and \cref{lemma:smoothness_of_pullbacks_and_forms} and complete our proof.
 \end{proof}
 
-\begin{remark}
-  Note that if $M$ can be covered by the image of a single parametrization $\phi
+\begin{remark}\label{remark:smooth_pullbacks_of_r_forms_on_submanifolds_of_a_single_parameterization}
+  Note that if $M$ can be covered by the image of a single parameterization $\phi
   : U \to \mathbb{R}^n$, then
-  \cref{crly:_r_forms_on_a_submanifold_and_its_parametrizations_are_equivalent}
+  \cref{crly:_r_forms_on_a_submanifold_and_its_parameterizations_are_equivalent}
   says that a smooth $r$-form $\eta$ on $M  = \phi(U)$ is equivalent to a smooth
-  $r$-form $\phi^* \eta$ on $U$, since there the compactibility relation is
+  $r$-form $\phi^* \eta$ on $U$, since there the compatibility relation is
   trivially satisfied.
 \end{remark}
 
@@ -5794,7 +5806,7 @@ parametrizations.}
   \begin{equation}\label{eq:exterior_derivative_on_submanifolds}
     \phi_\alpha^* \dif{\eta} = \dif{\phi_\alpha^* \eta}
   \end{equation}
-  for any local parametrization $\phi_\alpha$ of $M$.
+  for any local parameterization $\phi_\alpha$ of $M$.
 \end{defn}
 
 \begin{note}
@@ -5804,9 +5816,9 @@ parametrizations.}
 
 \begin{remark}
   It appears that \cref{defn:exterior_derivative_on_submanifolds} was defined to
-  be dependent on the choice of parametriztion. However, if we make use of
+  be dependent on the choice of parameterization. However, if we make use of
   \cref{propo:commutativity_of_the_pullback_and_the_exterior_derivative} and
-  \cref{eq:composition_of_pullbacks_of_transition_maps_and_parametrizations}, we
+  \cref{eq:composition_of_pullbacks_of_transition_maps_and_parameterizations}, we
   can compute
   \begin{equation*}
     \dif{\phi_\alpha^* \eta} = \dif{\phi_{\beta\alpha}^* \phi_\beta^* \eta}
@@ -5817,7 +5829,7 @@ parametrizations.}
     \phi_\alpha^* \dif{\eta} = \phi_{\beta\alpha}^* \phi_{\beta}^* \dif{\eta},
   \end{equation*}
   which we see that it agrees with
-  \cref{crly:_r_forms_on_a_submanifold_and_its_parametrizations_are_equivalent}.
+  \cref{crly:_r_forms_on_a_submanifold_and_its_parameterizations_are_equivalent}.
 \end{remark}
 
 \begin{propo}[Square of the exterior derivative is a zero map on submanifolds]\label{propo:square_of_the_exterior_derivative_is_a_zero_map_on_submanifolds}
@@ -5839,7 +5851,7 @@ parametrizations.}
 
 % chapter lecture_23_mar_11th (end)
 
-\chapter{Lecture 24 Mar 13th [dirty]}%
+\chapter{Lecture 24 Mar 13th}%
 \label{chp:lecture_24_mar_13th}
 % chapter lecture_24_mar_13th
 
@@ -5871,6 +5883,15 @@ By the above notes, we know that an orientation on $V$ is equivalent to an
 nonzero elements $\mu \in \Lambda^k(V^*)$, where $\mu \sim \tilde{\mu}$ iff
 $\tilde{\mu} = \lambda \mu$, where $\lambda > 0$.
 
+We shall apply the above ideas to $k$-dimensional submanifolds of
+$\mathbb{R}^n$. The main idea is to attach an orientation to each
+\hlnotea{tangent space} $T_p M$ of $M$ \sidenote{Note that we cannot attach an
+orientation on $M$ itself without taking about its tangent space $T_p M$,
+because $T_p M$ describes exactly how points of $M$ `move around'.}, in a
+``smoothly varying way''. Since an orientation of $T_p M$ corresponds to a
+non-zero element $\mu_p \in \Lambda^k(T_p^* M)$, we give the following
+definition.
+
 \begin{defn}[Orientable Submanifolds]\index{Orientable Submanifolds}\label{defn:orientable_submanifolds}
   Let $M$ be a $k$-dimensional submanifold on $\mathbb{R}^n$. We say that $M$ is
   \hlnoteb{orientable} if there exist a nowhere vanishing smooth $k$-form on
@@ -5892,20 +5913,45 @@ $\tilde{\mu} = \lambda \mu$, where $\lambda > 0$.
 \end{note}
 
 % TODO: Example 4.57
-\begin{eg}
-  \hlwarn{to be added}
+\begin{eg}\label{eq:single_parameterization_submanifold}
+  Let $U$ be open in $\mathbb{R}^k$, and let $\phi : U \to \mathbb{R}^n$ be a
+  single parameterization. Then $M = \phi(U)$ is a $k$-dimensional submanifold
+  of $\mathbb{R}^n$. By
+  \cref{remark:smooth_pullbacks_of_r_forms_on_submanifolds_of_a_single_parameterization},
+  a $k$-form $\mu$ on $M = \phi(U)$ is equivalent to a $k$-form $\phi^* \mu$ on
+  $U$.
+
+  Following that, we may define a $k$-form $\mu$ on $M$ by requiring $\phi^* \mu =
+  \dif{u^1} \land \hdots \land \dif{u^k}$. Since $(\phi^* \mu)_u \neq 0_u$ for
+  all $u \in U$ \marginnote{\hlwarn{How do we know this?} % TODO: why is this a non-zero map
+  }, we must have that $\mu_{p} \neq 0$ for all $p \in M$. Thus, for any $p \in
+  M$, we can define an orientation on $T_p^* M$ by taking the equivalence class
+  of $[\mu_p]$. This means that given an ordered basis $\{\alpha_p^1, \ldots,
+  \alpha_p^k \}$ of $T_p^* M$, it induces an orientation $\mu_p$ on $T_p^* M$ 
+  iff
+  \begin{equation*}
+    \alpha_p^1 \land \hdots \land \alpha_p^k = \lambda \mu_p
+  \end{equation*}
+  for some $\lambda > 0$ (by \cref{defn:orientable_submanifolds}).
+
+  This is called \hlnoteb{the orientation on $M = \phi(U)$ induced by the
+  parametrization $\phi$}.
 \end{eg}
+
+In particular, the above example tells us that any submanifold that can be
+covered by a single parametrization is always orientable, and the
+parameterization provides a preferred orientation.
 
 \begin{defn}[Compatible Orientation]\index{Compatible Orientation}\label{defn:compatible_orientation}
   Let $M$ be a $k$-dimensional submanifold. Suppose that $M$ is orientable and
   let $\mu$ be an orientation for $M$. Let $\phi : U \to M$ be a local
-  parametrization for $M$ with image $V \cap M$. Let $\nu$ be the orientation on
+  parameterization for $M$ with image $V \cap M$. Let $\nu$ be the orientation on
   $W \cap M$ given by $\phi$, where $W \subseteq V$. If the coordinates on $W$ 
   are $u^1, \ldots, u^n$, then we have $\phi^* \nu = \dif{u^1} \land \hdots
   \land \dif{u^k}$.
 
   On $V \cap M$, we would have $\nu = f\mu$ for some nowhere vanishing $f \in
-  C^\infty(V \cap M)$. We say that the local parametrization $\phi$ is
+  C^\infty(V \cap M)$. We say that the local parameterization $\phi$ is
   \hlnoteb{compatible with the orientation} $\mu$ if $f > 0$ everywhere on $V
   \cap M$.
 \end{defn}
@@ -5916,6 +5962,85 @@ $\tilde{\mu} = \lambda \mu$, where $\lambda > 0$.
   \hyperref[defn:same_and_opposite_orientations]{equivalent}, i.e. they
   determine the same orientation on $T_p M$ for each $p \in V \cap M$.
 \end{note}
+
+\begin{propo}[Compatibility of Parameterizations with the Orientation]\label{propo:compatibility_of_parameterizations_with_the_orientation}
+  Let $M$ be an orientable $k$-dimensional submanifold, and let $\mu$ be a
+  nowhere vanishing $k$-form on $M$. Suppose that $\phi$ and $\tilde{\phi}$ are
+  two local parameterizations for $M$, with respective images $V \cap M$ and
+  $\tilde{V} \cap M$, with $V \cap \tilde{V} \cap M \neq \emptyset$.
+
+  Then the transition map
+  \begin{equation*}
+    H : \tilde{\phi}^{-1} \circ \phi : \tilde{\phi}^{-1} (V \cap \tilde{V} \cap
+    M) \to \phi^{-1}(V \cap \tilde{V} \cap M)
+  \end{equation*}
+  is a diffeomorphism. Furthermore, if $\phi$ and $\tilde{\phi}$ are both
+  compatible with $\mu$, then $\det (\D H) > 0$ everywhere on the domain of $H$.
+\end{propo}
+
+\begin{proof}
+  The transition map $H$ is a diffeomorphism by
+  \cref{propo:transition_maps_are_diffeomorphisms}.
+
+  By our assumption, we may let $\nu$ and $\tilde{\nu}$ be the orientation on $V
+  \cap M$ and $\tilde{V}\ cap M$ induced by $\phi$ and $\tilde{\phi}$
+  respectively. In particular, we have that
+  \begin{equation*}
+    \phi^* \nu = \dif{u^1} \land \hdots \land \dif{u^k}, \text{ and } \mu = f
+    \nu \text{ on } V \cap M \text{ for some } f > 0,
+  \end{equation*}
+  and
+  \begin{equation*}
+    \tilde{\phi}^* \tilde{\nu} = \dif{\tilde{u}^1} \land \hdots \land
+    \dif{\tilde{u}^k}, \text{ and } \mu = \tilde{f} \tilde{\nu} \text{ on }
+    \tilde{V} \cap M \text{ for some } \tilde{f} > 0
+  \end{equation*}
+  By
+  \cref{lemma:composition_of_pullbacks_of_transition_maps_and_parameterizations},
+  we have
+  \begin{equation*}
+    H^* \tilde{\phi}^* \mu = \phi^* \mu.
+  \end{equation*}
+
+  Now on $V \cap M$, we have that $\mu = f \nu$, and so on $\phi^{-1}(V \cap M)$ 
+  we have
+  \begin{equation*}
+    \phi^* \mu = \phi^*(f \nu) = (f \circ \phi)\phi^* \nu = (f \circ \phi)
+    \dif{u^1} \land \hdots \land \dif{u^k},
+  \end{equation*}
+  where $\phi^* f = f \circ \phi$ by \cref{defn:pullback_of_0_forms}.
+
+  Similarly, on $\tilde{V} \cap M$, we have $\mu = \tilde{f} \tilde{\nu}$, and
+  so on $\tilde{\phi}^{-1}(\tilde{V} \cap M)$ we have
+  \begin{equation*}
+    \tilde{\phi}^* \mu = \tilde{\phi}^*(\tilde{f} \tilde{\nu}) = (\tilde{f}
+    \circ \tilde{\phi}) \tilde{\phi}^* \tilde{\nu} = (\tilde{f} \circ
+    \tilde{\phi})\dif{\tilde{u}^1} \land \hdots \land \dif{\tilde{u}^k}.
+  \end{equation*}
+
+  It follows that on $\phi^{-1}(V \cap \tilde{V} \cap M)$, we have
+  \begin{align*}
+    (f \circ \phi)\dif{u^1} \land \hdots \land \dif{u^k}
+    &= \phi^* \mu = H^* \tilde{\phi}^* \mu \\
+    &= H^*(\tilde{f} \circ \tilde{\phi})\dif{\tilde{u}^1} \land \hdots \land
+    \dif{\tilde{u}^k} \\
+    &= (\tilde{f} \circ \tilde{\phi} \circ H) H^* (\dif{\tilde{u}^1} \land
+    \hdots \land \dif{\tilde{u}^k}).
+  \end{align*}
+  Thus, we see that
+  \begin{equation*}
+    (f \circ \phi)\dif{u^1} \land \hdots \land \dif{u^k} = (\tilde{f} \circ
+    \phi)H^*(\dif{\tilde{u}^1} \land \hdots \land \dif{\tilde{u}^k}).
+  \end{equation*}
+  In A3Q2, we show(ed) that $H^*(\dif{\tilde{u}^1} \land \hdots \land
+  \dif{\tilde{u}^k}) = \det (\D H) \dif{u^1} \land \hdots \land \dif{u^k}$.
+  Follow that, we have
+  \begin{equation*}
+    (f \irc \phi) \dif{u^1} \land \hdots \land \dif{u^k} = (\tilde{f} \circ
+    \phi) \det(\D H) \dif{u^1} \land \hdots \land \dif{u^k}.
+  \end{equation*}
+  Since $f, \tilde{f} > 0$, it follows that we must have $\det(\D H) > 0$.
+\end{proof}
 
 % section orientability_and_orientation_of_submanifolds (end)
 
@@ -5929,12 +6054,12 @@ $\tilde{\mu} = \lambda \mu$, where $\lambda > 0$.
 \label{sec:partitions_of_unity_continued}
 % section partitions_of_unity_continued
 
-\begin{propo}[Theorem name]
+\begin{propo}
   Let $M$ be a $k$-dimemensional submanifold of $\mathbb{R}^n$ and suppose that
-  there exists a cover of $M$ by local parametrizations such that all the
+  there exists a cover of $M$ by local parameterizations such that all the
   transition maps $\phi_{\beta \alpha}$ satisfy $\det (\D \phi_{ \beta \alpha }) >
   0$. Then $M$ is oriented. That is, there exists a nowhere vanishing $k$-form
-  $\mu$ on $M$, such that all these local parametrizations are compatible with
+  $\mu$ on $M$, such that all these local parameterizations are compatible with
   $\mu$.
 \end{propo}
 
@@ -5959,7 +6084,7 @@ $\tilde{\mu} = \lambda \mu$, where $\lambda > 0$.
 \label{sec:integration_of_forms_continued}
 % section integration_of_forms_continued
 
-From last time, let $M = \phi(U) = \tilde{\phi}(\tilde{U})$ be a parametrized
+From last time, let $M = \phi(U) = \tilde{\phi}(\tilde{U})$ be a parameterized
 $k$-dimensional submanfold.
 
 Let $w \in \Omega^k(M)$. We defined
@@ -5978,13 +6103,13 @@ $M$, which is compact, and so $\supp(w)$ is compact. We want to define
 
 The idea is to use \hyperref[sec:partitions_of_unity_continued]{partitions of
 unity} to decompose $\omega$ into a finite sum of smooth $k$-forms, with each of them
-\hlnotea{compactly supported} in the image of the single parametrization.
+\hlnotea{compactly supported} in the image of the single parameterization.
 
 We handle these as we did last time and add some results. We need to show that
 this process is independent of our choices \sidenote{\hlwarn{elaborate}}.
 
 Let $\{ V_\alpha \cap M : \alpha \in A \}$ be a cover of $M$ given by images of
-local parametrizations $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ of $M$, all of
+local parameterizations $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ of $M$, all of
 which are \hlnotea{compatible} with the given orientation on $M$.
 
 Let $\{ \rho_j : j = 1, \ldots, m \}$ be a partition of unity corresponding to
@@ -6022,10 +6147,10 @@ Thus we define
 \end{equation*}
 
 Now we need to show that the result is independent of the choice of the
-parametrization.
+parameterization.
 
 Let $\{ W_\beta \cap M : \beta \in B \}$ be a cover of $M$ by images of local
-parametrizations $\psi_\beta$ of $M$ compatible with the given orientation.
+parameterizations $\psi_\beta$ of $M$ compatible with the given orientation.
 
 Let $\{ \sigma_i : i = 1, \ldots, l \}$ be a partition of unity for this cover,
 with the usual properties \sidenote{\hlwarn{needs expansion, but we know what
@@ -6211,7 +6336,7 @@ We still have \cref{propo:transition_maps_are_diffeomorphisms}, i.e.
 transition maps are diffeomorphisms, and the same proof can be applied.
 
 \begin{remark}
-  Using the local parametrizations $\phi_\alpha$ for a submanifold with boundary
+  Using the local parameterizations $\phi_\alpha$ for a submanifold with boundary
   $M$, and the fact that transition maps are diffeomorphisms, we can now define
   \begin{itemize}
     \item smooth functions on $M$,
@@ -6237,7 +6362,7 @@ boundary?
 \begin{defn}[Boundary Point on a Submanifold]\index{Boundary Point on a Submanifold}\label{defn:boundary_point_on_a_submanifold}
   Let $M$ be a $k$-dimensional submanifol with boundary. A point $p \in M$ is
   called a \hlnoteb{boundary point} of $M$ if there exists a local
-  parametrization $\phi_\alpha : A_\alpha \to M$ with $p \in
+  parameterization $\phi_\alpha : A_\alpha \to M$ with $p \in
   \phi_\alpha(A_\alpha)$ such that $\phi_\alpha^{-1} (p) \in \partial
   \mathbb{H}^k$.
 \end{defn}
@@ -6248,14 +6373,14 @@ $\partial A_\beta$?
 
 \begin{propo}[Well-definedness of the Boundary of a Manifold]\label{propo:well_definedness_of_the_boundary_of_a_manifold}
   Let $p \in M$ be a boundary point. Then $\phi_\beta^{-1}(p) \in \partial
-  \mathbb{H}^k$ for all local parametrizations $\phi_\beta : A_\beta \to
+  \mathbb{H}^k$ for all local parameterizations $\phi_\beta : A_\beta \to
   \mathbb{R}^n$ of  $M$.
 \end{propo}
 
 \begin{proof}
   Suppose not. Let $u_\alpha = \phi_\alpha^{-1}(p) \in \partial \mathbb{H}^k$ so
   that $u_\alpha$ is a boundary point of $A_\alpha$, and suppose there exists
-  $\phi_\beta$ a parametrization such that $u_\beta = \phi_\beta^{-1}(p) \notin
+  $\phi_\beta$ a parameterization such that $u_\beta = \phi_\beta^{-1}(p) \notin
   \partial \mathbb{H}^k$, i.e. $u_\beta$ is an interior point of $A_\beta$.
 
   Now the transition map
@@ -6301,11 +6426,11 @@ $\partial A_\beta$?
 \end{propo}
 
 \begin{proof}
-  We need to find a cover of $\partial M$ by local parametrizations whose
+  We need to find a cover of $\partial M$ by local parameterizations whose
   domains are open sets in $\mathbb{R}^{k-1}$.
 
   Let  $p \in \partial M \subseteq M$, so that there exists a local
-  parametrization $\phi$ of $M$ such that $\phi : A \to \mathbb{R}^n$, where $A$ 
+  parameterization $\phi$ of $M$ such that $\phi : A \to \mathbb{R}^n$, where $A$ 
   is open in $\mathbb{H}^k$, with $p \in \phi(A)$. Let $\hat{\phi}$ be the
   restriction of $\phi$ to $A \cap (\partial \mathbb{H}^k)$.
 
@@ -6348,7 +6473,7 @@ $\partial A_\beta$?
   \end{equation*}
   is the restriction of $\phi^{-1}$ to $\phi(\hat{A})$, and so it is also
   continuous. Thus $\hat{\phi}$ is a homeomorphism onto its image. Thus
-  $\hat{\phi}$ is a local parametrization for $\partial M$.
+  $\hat{\phi}$ is a local parameterization for $\partial M$.
 \end{proof}
 
 % section submanifold_with_boundary_continued (end)
@@ -6367,7 +6492,7 @@ $\partial A_\beta$?
   We reduced the proof to showing that following: given $A$ open in
   $\mathbb{H}^k$ and $\hat{A} = A \cap (\partial \mathbb{H}^k)$ open in
   $\mathbb{R}^{k-1}$. Let $\phi : A \to \mathbb{R}^n$ and $\hat{\phi} = \phi
-  \restriction_{\hat{A}} \hat{A} \to \mathbb{R}^n$ be a parametrizations. Let
+  \restriction_{\hat{A}} \hat{A} \to \mathbb{R}^n$ be a parameterizations. Let
   $\eta \in \Omega^{k-1}(\phi(A))$, where $\supp(\eta)$ is compact. We want to
   be able to show that
   \begin{equation*}
@@ -6816,7 +6941,8 @@ On $\mathbb{R}^n$, we have the standard inner product:
   \langle x, y \rangle = \sum_{i=1}^{n} x^i y^i.
 \end{equation*}
 This induces an inner product on each tangent space to $\mathbb{R}^n$ via the
-canonical isomorphism. % TODO : reference required, you know what this is
+\hyperref[propo:canonical_bijection_from_t_p_r_n_to_r_n_]{canonical
+isomorphism}.
 
 Explicitly, if $X_p = a^i \frac{\partial}{\partial x^i} \at{p}{}$ and $Y_p = b^i
 \frac{\partial}{\partial x^i}\at{p}{}$ then
