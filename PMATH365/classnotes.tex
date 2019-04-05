@@ -14,6 +14,7 @@
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
 \institution{University of Waterloo}
 
+\DeclareMathOperator{\curl}{curl}
 \DeclareMathOperator{\std}{std}
 \DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\rank}{rank}
@@ -5923,7 +5924,7 @@ definition.
 
   Following that, we may define a $k$-form $\mu$ on $M$ by requiring $\phi^* \mu =
   \dif{u^1} \land \hdots \land \dif{u^k}$. Since $(\phi^* \mu)_u \neq 0_u$ for
-  all $u \in U$ \marginnote{\hlwarn{How do we know this?} % TODO: why is this a non-zero map
+  all $u \in U$ \sidenote{\hlwarn{How do we know this?} % TODO: why is this a non-zero map
   }, we must have that $\mu_{p} \neq 0$ for all $p \in M$. Thus, for any $p \in
   M$, we can define an orientation on $T_p^* M$ by taking the equivalence class
   of $[\mu_p]$. This means that given an ordered basis $\{\alpha_p^1, \ldots,
@@ -6045,6 +6046,325 @@ parameterization provides a preferred orientation.
 % section orientability_and_orientation_of_submanifolds (end)
 
 % chapter lecture_24_mar_13th (end)
+
+\chapter{Lecture 25 Mar 15th}%
+\label{chp:lecture_25_mar_15th}
+% chapter lecture_25_mar_15th
+
+\section{Orientability and Orientation of Submanifolds (Continued)}%
+\label{sec:orientability_and_orientation_of_submanifolds_continued}
+% section orientability_and_orientation_of_submanifolds_continued
+
+\marginnote{\cref{propo:non_orientability_checker} can be thought of in the
+following way: if we can find two disjoint connected sets of which $\det(\D H)$
+is positive on one and negative on the other, we know that such a submanifold
+must not have been orientable.}
+\begin{propo}[Non-orientability Checker]\label{propo:non_orientability_checker}
+  Let $M$ be a $k$-dimensional submanifold. Suppose that $M$ can be covered by
+  the images of two local parameterizations $\phi : U \to \mathbb{R}^n$ and
+  $\tilde{\phi} : \tilde{U} \to \mathbb{R}^n$, with respective imgaes $V \cap M$ 
+  and $\tilde{U} \cap M$. Suppose that $V \cap M$ and $\tilde{V} \cap M$ are
+  both connected sets, and that their intersection $V \cap \tilde{V} \cap M$ 
+  consists of exactly two disjoint connected sets $W_1$ and $W_2$.
+
+  Let
+  \begin{equation*}
+    H = \tilde{\phi}^{-1} \circ \phi = \tilde{\phi}^{-1}(V \cap \tilde{V} \cap
+    M) \to \phi^{-1}(V \cap \tilde{V} \cap M)
+  \end{equation*}
+  be the transition map. If the nowhere vanishing smooth function $\det (\D H) >
+  0$  on $\phi^{-1}(W_1)$ and $\det(\D H) < 0$ on $\phi^{-1}(W_2)$, then $M$ is
+  not orientable.
+\end{propo}
+
+\begin{proof}
+  As given, we have $M = W_1 \cup W_2$, where $W_1 \cap W_2 = \emptyset$, and
+  $W_1, W_2$ are both connected. Since $\phi^{-1}$ is continuous, it follows
+  that $\phi^{-1}(W_1)$ and $\phi^{-1}(W_2)$ are both connected and disjoint
+  \sidenote{This step requires one understand certain results about continuity
+  and connectedness. See notes on
+  \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf}{PMATH 351}.}. By
+  the \hlnotea{Intermediate Value Theorem}, since $\det(\D H)$ is non-zero, and
+  by our assumption that $\det(\D H) > 0$ on $\phi^{-1}(W_1)$ and $\det(\D H) <
+  0$ on $\phi^{-1}(W_2)$, it follows that $\det(\D H)$ must have a constant sign
+  on each of $\phi^{-1}(W_1)$ and $\phi^{-1}(W_2)$.
+
+  Suppose $M$ is orientable, i.e. $\exists \mu \in \Omega^k(M)$ such that $\mu
+  \neq 0$. By what's given, let \sidenote{\hlwarn{Why is this legal?} % TODO
+  }
+  \begin{equation*}
+    \phi^* \mu = h \dif{u^1} \land \hdots \land \dif{u^k}
+  \end{equation*}
+  for some nowhere vanishing smooth function $h$ on $U$, and
+  \begin{equation*}
+    \tilde{\phi}^*\mu = \tilde{h}\dif{\tilde{u}^1} \land \hdots \land \dif{\tilde{u}^k}
+  \end{equation*}
+  for some nowhere vanishing smooth function $\tilde{h}$ on $\tilde{U}$. Since
+  $U = \phi^{-1}(V \cap M)$ and $V \cap M$ is connected and $\phi^{-1}$ is
+  continuous, again, by the same reason about connectedness in the last
+  paragraph, $U$ is connected. Similarly, $\tilde{U} = \tilde{\phi}(\tilde{V}
+  \cap M)$ is connected. Again, by the \hlnotea{Intermediate Value Theorem}, $h$ 
+  and $\tilde{h}$ never change sign on their respective domains. However, we
+  have
+  \begin{align*}
+    h \dif{u^1} \land \hdots \land \dif{u^k}
+    &= \phi^* \mu = H^* \tilde{\phi}^* \mu \\
+    &= H^*(\tilde{h} \dif{\tilde{u}^1} \land \hdots \land \dif{\tilde{u}^k}) \\
+    &= (\tilde{h} \circ H)(\det (\D H)) \dif{u^1} \land \dif{u^k},
+  \end{align*}
+  where the last equality is by \cref{defn:pullback_of_0_forms}. Thus, we have
+  \begin{equation}\label{eq:non_orientability_check}
+    h = (\tilde{h} \circ H) \det(\D H)
+  \end{equation}
+  everywhere on $\phi^{-1}(V \cap \tilde{V} \cap M) = \phi^{-1}(W_1 \cup W_2) =
+  \phi^{-1}(W_1) \cup \phi^{-1}(W_2)$. Since $h$ and $\tilde{h} \circ H$ 
+  \sidenote{How did we know that \hlwarn{$H$ does not change signs?} % TODO
+  } do not change sign on $\phi^{-1}(W_1) \cup \phi^{-1}(W_2)$, and so
+  \cref{eq:non_orientability_check} tells us that $\det(\D H)$ does not change
+  sign on $\phi^{-1}(W_1) \cup \phi^{-1}(W_2)$, which is a contradiction.
+
+  Therefore, $M$ must have been non-orientable to start with.
+\end{proof}
+
+\begin{note}
+  The converse of \cref{propo:non_orientability_checker} is also true, but we do
+  not yet have the machinery to prove this. Note that the converse says:
+  \begin{quotebox}{magenta}{foreground}
+    If there exists a cover of $M$ by local parameterizations such that all the
+    transition maps $\phi_{\beta\alpha}$ satisfy $\det(\D \phi_{\beta\alpha}) >
+    0$, then $M$ is oriented.
+  \end{quotebox}
+\end{note}
+
+\begin{eg}[Non-orientability of the M\"{o}bius strip]\label{eg:mobius_strip_is_non_orientable}
+  The M\"{o}bius strip can be obtained by taking a rectangular strip of paper,
+  and gluing two ends of the paper together after a twist. Mathematically, we
+  can construct this as a surface of revolution, in particular by taking a curve
+  in the $yz$-plane and rotating it about the $z$-axis.
+
+  Consider a straight line segment $y = R$ truncated so that the line segment
+  only extends within $-L < z < L$, for $R > L > 0$ \sidenote{We make this
+  assumption so that it is useful when we construct the M\"{o}bius strip.}(cf.
+  \cref{fig:straight_line_segment_y_r_truncated_to_within_l_z_l_}).
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2, 0) -- (2, 0) node[right] {$y$};
+      \draw[->] (0, -2) -- (0, 2) node[above] {$z$};
+      \draw (1, 1) -- (1, -1);
+      \node[fill,circle,inner sep=1pt,label={225:{$R$}}] at (1, 0) {};
+      \draw[dashed] (0, 1) node[left] {$L$} -- (1, 1);
+      \draw[dashed] (0, -1) node[left] {$-L$} -- (1, -1);
+      \node at (0, 1.5) {$\AxisRotator[rotate=-90]$};
+    \end{tikzpicture}
+    \caption{Straight line segment $y = R$ truncated to within $-L < z < L$}\label{fig:straight_line_segment_y_r_truncated_to_within_l_z_l_}
+  \end{marginfigure}
+  If we rotate this line segment around the $z$-axis, we get a cylinder, as
+  shown in \cref{fig:cylinder_as_a_surface_of_revolution}.
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2, 0, 0) -- (2, 0, 0) node[right] {$y$};
+      \draw[->] (0, -2, 0) -- (0, 2, 0) node[above] {$z$};
+      \draw[->] (0, 0, -3) -- (0, 0, 3) node[left,below] {$x$};
+      \draw[fill=blue!80!background,fill opacity=0.5]
+        (1, 1, 0) arc(0:360:1 and 0.5);
+      \draw[fill=blue!30!background,fill opacity=0.5]
+        (-1, 1, 0) arc(180:360:1 and 0.5)
+        -- (1, -1, 0) arc(360:180:1 and 0.5)
+        -- (-1, 1, 0);
+      \draw[dashed] (1, -1, 0) arc(0:180:1 and 0.5);
+      \draw[color=red,opacity=0.8,line width=0.5mm] (1, 1, 0) -- (1, -1, 0);
+      \node[fill,circle,inner sep=1pt,label={315:{$R$}}] at (1, 0, 0);
+      \draw[dashed] (0, 1, 0) node[left] {$L$} -- (1, 1, 0);
+      \draw[dashed] (0, -1, 0) node[left] {$-L$} -- (1, -1, 0);
+    \end{tikzpicture}
+    \caption[][125pt]{Cylinder as a surface of revolution}
+    \label{fig:cylinder_as_a_surface_of_revolution}
+  \end{figure}
+
+  However, we suppose that the straight line also rotates counterclockwise
+  about its center at a rate $\frac{1}{2}$ (of $2 \pi$), so that when it returns to the
+  starting point, the line segment is now inverted (cf.
+  \cref{fig:same_setup_as_in_fig_but_with_a_counterclockwise_rotation_at_its_center}).
+  \begin{marginfigure}[50pt]
+    \centering
+    \begin{tikzpicture}
+      \rotateRPY{0}{-45}{0};
+      \begin{scope}[RPY]
+        \draw[->] (-2, 0, 0) -- (2, 0, 0) node[right] {$y$};
+        \draw[->] (0, -2, 0) -- (0, 2, 0) node[above] {$z$};
+        \draw[->] (0, 0, -2) -- (0, 0, 2) node[left,below] {$x$};
+        \node at (0, 1.5, 0) {$\AxisRotator[rotate=-90]$};
+        \draw[line width=0.3mm,midarrow,color=cyan] (1, 1, 0) -- (1, -1, 0);
+        \draw[line width=0.3mm,midarrow,color=cyan]
+          (-0.70710678119, 0.70710678119, -1) -- (0.70710678119, -0.70710678119, -1);
+        \draw[line width=0.3mm,midarrow,color=cyan]
+          (-2, 0, 0) -- (0, 0, 0);
+        \draw[line width=0.3mm,midarrow,color=cyan]
+          (-0.70710678119, -0.70710678119, 1)
+          -- (0.70710678119, 0.70710678119, 1);
+      \end{scope}
+    \end{tikzpicture}
+    \caption{Same setup as in \cref{fig:straight_line_segment_y_r_truncated_to_within_l_z_l_} but with a counterclockwise rotation at its center. The arrows on the line segment is a dummy orientation indicating where is up and down.}\label{fig:same_setup_as_in_fig_but_with_a_counterclockwise_rotation_at_its_center}
+  \end{marginfigure}
+  \begin{quotebox}{yellow}{foreground}
+  Note that we require $R > L > 0$ so that we do not end up with an intersection
+  in the resulting surface.
+  \end{quotebox}
+  We can write down a parameterization for this new surface: let $\phi$ be the
+  parameterization such that $x = r \cos v$, $y = r \sin v$, and $z = z$, and we
+  have
+  \begin{gather*}
+    \phi : (-L, L) \times (0, 2 \pi) \to \mathbb{R}^3 \\
+    \phi(t, v) = \left(\left(R - t \sin \frac{v}{2}\right) \cos v, \left(R - t
+    \sin \frac{v}{2}\right) \sin v, t \cos \frac{v}{2}\right).
+  \end{gather*}
+  The resulting surface of $\phi$ is as shown in
+  \cref{fig:mobius_strip_coming_from_phi_}.
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{mobius_angle1.png}
+    % \begin{tikzpicture}
+    % \begin{axis}[
+    %     hide axis,
+    %     view={0}{40}
+    % ]
+    % \addplot3 [
+    %     surf, shader=faceted interp,
+    %     point meta=x,
+    %     colormap/greenyellow,
+    %     samples=40,
+    %     samples y=5,
+    %     z buffer=sort,
+    %     domain=0:360,
+    %     y domain=-0.5:0.5
+    % ] (
+    %     {(1+0.5*y*cos(x/2)))*cos(x)},
+    %     {(1+0.5*y*cos(x/2)))*sin(x)},
+    %     {0.5*y*sin(x/2)});
+    
+    % \addplot3 [
+    %     samples=50,
+    %     domain=-180:142, % The domain needs to be adjusted manually, depending on the camera angle, unfortunately
+    %     samples y=0,
+    %     thick
+    % ] (
+    %     {cos(x)},
+    %     {sin(x)},
+    %     {0});
+    % \end{axis}
+    % \end{tikzpicture}
+    \caption{M\"{o}bius strip coming from $\phi$.}
+    \label{fig:mobius_strip_coming_from_phi_}
+  \end{figure}
+
+  It is easy to see that we can adjust the values of the second space in the
+  domain for other parameterizations of the M\"{o}bius strip. In particular, we
+  can have $\tilde{\phi}$ defined as
+  \begin{gather*}
+    \tilde{\phi} : (-L, L) \times (-\pi, \pi) \to \mathbb{R}^3 \\
+    \tilde{\phi}(\tilde{t}, \tilde{v}) = \left(
+      \left( R - \tilde{t} \sin \frac{\tilde{v}}{2} \right) \cos \tilde{v},
+      \left( R - \tilde{t} \sin \frac{\tilde{v}}{2} \right) \sin \tilde{v},
+      \tilde{t} \cos \frac{\tilde{v}}{2} \right).
+  \end{gather*}
+  The resulting surface of $\tilde{\phi}$ is shown in
+  \cref{fig:mobius_strip_coming_from_tildephi_}.
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{mobius_angle2.png}
+    % \begin{tikzpicture}
+    % \begin{axis}[
+    %     hide axis,
+    %     view={90}{40}
+    % ]
+    % \addplot3 [
+    %     surf, shader=faceted interp,
+    %     point meta=x,
+    %     colormap/greenyellow,
+    %     samples=40,
+    %     samples y=5,
+    %     z buffer=sort,
+    %     domain=0:360,
+    %     y domain=-0.5:0.5
+    % ] (
+    %     {(1+0.5*y*cos(x/2)))*cos(x)},
+    %     {(1+0.5*y*cos(x/2)))*sin(x)},
+    %     {0.5*y*sin(x/2)});
+    
+    % \addplot3 [
+    %     samples=50,
+    %     domain=75:232, % The domain needs to be adjusted manually, depending on the camera angle, unfortunately
+    %     samples y=0,
+    %     thick
+    % ] (
+    %     {cos(x)},
+    %     {sin(x)},
+    %     {0});
+    % \addplot3 [
+    %     samples=50,
+    %     domain=265:390, % The domain needs to be adjusted manually, depending on the camera angle, unfortunately
+    %     samples y=0,
+    %     thick
+    % ] (
+    %     {cos(x)},
+    %     {sin(x)},
+    %     {0});
+    % \end{axis}
+    % \end{tikzpicture}
+    \caption{M\"{o}bius strip coming from $\tilde{\phi}$.}
+    \label{fig:mobius_strip_coming_from_tildephi_}
+  \end{figure}
+
+  \noindent
+  \hlbnoted{Claim: the M\"{o}bius strip is not orientable} Notice that the
+  domains of $\phi$ and $\tilde{\phi}$, which are
+  \begin{equation*}
+    U = (-L, L) \times (0, 2 \pi) \text{ and } \tilde{U} = (-L, L) \times (-\pi, \pi),
+  \end{equation*}
+  are both connected. Since $\phi$ and $\tilde{\phi}$ are both homeomorphisms,
+  in particular continuous, both $\phi(U)$ and $\tilde{\phi}(\tilde{U})$ are
+  both connected. The intersection of these two parameterizations, which we give
+  as $W_1 \cup W_2$, are
+  \begin{gather*}
+    W_1 = \phi((-L, L) \times (0, \pi)) = \tilde{\phi}((-L, L) \times (0, \pi)) \\
+    W_2 = \phi((-L, L) \times (\pi, 2\pi)) = \tilde{\phi} ((-L, L) \times (-\pi, 0))
+  \end{gather*}
+  Note that $W_1$ and $W_2$ are connected and disjoint. Consider
+  \begin{equation*}
+    H = \tilde{\phi}^{-1} \circ \phi,
+  \end{equation*}
+  that takes $(t, v)$ to $(\tilde{t}, \tilde{v})$.
+
+  Now in $W_1$, we have that $\tilde{v} = v$ and $\tilde{t} = t$. It follows
+  that
+  \begin{equation*}
+    (\D H) = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}
+  \end{equation*}
+  and so $\det (\D H) = 1$ on $W_1$.
+
+  However, on $W_2$, we have that $\tilde{v} = v - 2 \pi$. Then
+  $\frac{\tilde{v}}{2 = \frac{v}{2}} - \pi$. So we have
+  \begin{equation*}
+    \sin \frac{\tilde{v}}{2} = \sin \frac{v}{2} \text{ and }
+    \cos \frac{\tilde{v}}{2} = - \cos \frac{v}{2}.
+  \end{equation*}
+  We must therefore have that $\tilde{t} = -t$. This is expected from our
+  counterclockwise rotation around the anchored point as we revolve around the
+  $z$-axis, and eventually turning the line segment upside down. We thus have
+  \begin{equation*}
+    (\D H) = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix},
+  \end{equation*}
+  and so $\det (\D H) = -1$ on $W_2$.
+
+  It follows from \cref{propo:non_orientability_checker} that the M\"{o}bius
+  strip is non-orientable.
+\end{eg}
+
+% section orientability_and_orientation_of_submanifolds_continued (end)
+
+% chapter lecture_25_mar_15th (end)
 
 \chapter{Lecture 27 Mar 20th [dirty]}%
 \label{chp:lecture_27_mar_20th}
