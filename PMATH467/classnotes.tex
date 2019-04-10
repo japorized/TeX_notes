@@ -12,49 +12,8 @@
 \usepackage{bm}
 \input{latex-classnotes-preamble.tex}
 
-% from https://tex.stackexchange.com/questions/67573/tikz-shift-and-rotate-in-3d
-\newcommand{\rotateRPY}[4][0/0/0]% point to be saved to \savedxyz, roll, pitch, yaw
-{   \pgfmathsetmacro{\rollangle}{#2}
-    \pgfmathsetmacro{\pitchangle}{#3}
-    \pgfmathsetmacro{\yawangle}{#4}
-
-    % to what vector is the x unit vector transformed, and which 2D vector is this?
-    \pgfmathsetmacro{\newxx}{cos(\yawangle)*cos(\pitchangle)}% a
-    \pgfmathsetmacro{\newxy}{sin(\yawangle)*cos(\pitchangle)}% d
-    \pgfmathsetmacro{\newxz}{-sin(\pitchangle)}% g
-    \path (\newxx,\newxy,\newxz);
-    \pgfgetlastxy{\nxx}{\nxy};
-
-    % to what vector is the y unit vector transformed, and which 2D vector is this?
-    \pgfmathsetmacro{\newyx}{cos(\yawangle)*sin(\pitchangle)*sin(\rollangle)-sin(\yawangle)*cos(\rollangle)}% b
-    \pgfmathsetmacro{\newyy}{sin(\yawangle)*sin(\pitchangle)*sin(\rollangle)+ cos(\yawangle)*cos(\rollangle)}% e
-    \pgfmathsetmacro{\newyz}{cos(\pitchangle)*sin(\rollangle)}% h
-    \path (\newyx,\newyy,\newyz);
-    \pgfgetlastxy{\nyx}{\nyy};
-
-    % to what vector is the z unit vector transformed, and which 2D vector is this?
-    \pgfmathsetmacro{\newzx}{cos(\yawangle)*sin(\pitchangle)*cos(\rollangle)+ sin(\yawangle)*sin(\rollangle)}
-    \pgfmathsetmacro{\newzy}{sin(\yawangle)*sin(\pitchangle)*cos(\rollangle)-cos(\yawangle)*sin(\rollangle)}
-    \pgfmathsetmacro{\newzz}{cos(\pitchangle)*cos(\rollangle)}
-    \path (\newzx,\newzy,\newzz);
-    \pgfgetlastxy{\nzx}{\nzy};
-
-    % transform the point given by #1
-    \foreach \x/\y/\z in {#1}
-    {   \pgfmathsetmacro{\transformedx}{\x*\newxx+\y*\newyx+\z*\newzx}
-        \pgfmathsetmacro{\transformedy}{\x*\newxy+\y*\newyy+\z*\newzy}
-        \pgfmathsetmacro{\transformedz}{\x*\newxz+\y*\newyz+\z*\newzz}
-        \xdef\savedx{\transformedx}
-        \xdef\savedy{\transformedy}
-        \xdef\savedz{\transformedz}     
-    }
-}
-
-\tikzset{RPY/.style={x={(\nxx,\nxy)},y={(\nyx,\nyy)},z={(\nzx,\nzy)}}}
-
-\DeclareMathOperator{\id}{id}
-
 \DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Span}{span}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -189,14 +148,27 @@ where we may define a ``distance'' by
 \end{ex}
 
 \begin{solution}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-0.5, 0) -- (2, 0);
+      \draw[->] (0, -0.5) -- (0, 2);
+      \draw[dashed] (-0.5, 1) node[left] {$1$} -- (2, 1);
+      \draw plot[smooth,domain=0:0.5] ({\x}, {2 * \x});
+      \draw plot[smooth,domain=0.5:1] ({\x}, {1 - \x});
+    \end{tikzpicture}
+    \caption{Function that assumes all values between its extremas, but is not continuous.}\label{fig:function_that_assumes_all_values_between_its_extremas_but_is_not_continuous_}
+  \end{marginfigure}
   Consider the piecewise function
   \begin{equation*}
     f(x) = \begin{cases}
-      x & 0 \leq x < \frac{1}{2} \\
+      2x & 0 \leq x < \frac{1}{2} \\
       x - \frac{1}{2} & x \geq \frac{1}{2}.
     \end{cases}
   \end{equation*}
-  It is clear that the maximum and minimum are $\frac{1}{2}$ and $0$ respectively, and $f$ assumes all values between $0$ and $\frac{1}{2}$. However, a piecewise function is not continuous.
+  It is clear that the maximum and minimum are $1$ and $0$ respectively, and $f$
+  assumes all values between $0$ and $1$. However, the function is
+  clearly not continuous, particularly at $\frac{1}{2}$.
 \end{solution}
 
 \begin{defn}[Homeomorphism]\index{Homeomorphism}\label{defn:homeomorphism}
@@ -206,7 +178,7 @@ where we may define a ``distance'' by
 \begin{eg}
   The function
   \begin{equation*}
-    g : [ 0, 2\pi ) \to \mathbb{R}^2 \text{ given by } \theta \mapsto (\cos \theta, \sin \theta)
+    f : [ 0, 2\pi ) \to \mathbb{R}^2 \text{ given by } \theta \mapsto (\cos \theta, \sin \theta)
   \end{equation*}
   is not homeomorphic, since if we consider an alternating series that converges to $0$ on the unit circle on $\mathbb{R}^2$, we have that the preimage of the series does not converge and $f^{-1}$ is in fact discontinuous.
 \end{eg}
@@ -352,7 +324,7 @@ more concepts that we shall need down the road.
   (See also: \href{https://www.desmos.com/calculator/figksl5wmv}{Desmos}).
   \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.7\linewidth]{topologists-circle.png}
+    \includegraphics[width=0.7\linewidth]{images/topologists-circle.png}
     \caption{A Topologist's Circle}
     \label{fig:a_topologists_circle}
   \end{figure}
@@ -461,7 +433,7 @@ Then we have that $d(p, q) = r > 0$.
   \begin{tikzpicture}
     \node[circle,fill,inner sep=1pt,label={270:{$p$}}] at (0, 0) {};
     \node[circle,fill,inner sep=1pt,label={270:{$q$}}] at (2, 1) {};
-    \draw[latex'-latex'] (0, 0) -- (2, 1) node[midway,fill=dark] {r};
+    \draw[latex'-latex'] (0, 0) -- (2, 1) node[midway,fill=background] {r};
     \draw[dashed] (0, 0) circle(0.7);
     \draw[dashed] (2, 1) circle(0.7);
   \end{tikzpicture}
@@ -643,10 +615,10 @@ Consider the real line $\mathbb{R}$, and consider two disjoint intervals on $\ma
   \centering
   \begin{tikzpicture}
     \draw[->] (-2, 0) -- (2, 0);
-    \draw[-{Arc Barb[length=5pt,width=25pt]},be-blue] (-2,0) -- (-0.2,0) node[midway,below=15pt] {$U$};
-    \draw[{Arc Barb[length=5pt,width=25pt]}-,be-blue] (0.2,0) -- (2,0) node[midway,below=15pt] {$V$};
-    \draw[{Arc Barb[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},be-red] (-1.5,0) -- (-0.5,0) node[midway,below] {$A_1$};
-    \draw[{Arc Barb[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},be-red] (0.5,0) -- (1.5,0) node[midway,below] {$A_2$};
+    \draw[-{Arc Barb[length=5pt,width=25pt]},blue] (-2,0) -- (-0.2,0) node[midway,below=15pt] {$U$};
+    \draw[{Arc Barb[length=5pt,width=25pt]}-,blue] (0.2,0) -- (2,0) node[midway,below=15pt] {$V$};
+    \draw[{Arc Barb[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},red] (-1.5,0) -- (-0.5,0) node[midway,below] {$A_1$};
+    \draw[{Arc Barb[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},red] (0.5,0) -- (1.5,0) node[midway,below] {$A_2$};
   \end{tikzpicture}
   \caption{Motivation for Connectedness}
   \label{fig:motivation_for_connectedness}
@@ -850,12 +822,22 @@ We shall start the next part this lecture.
 \end{defn}
 
 \begin{defn}[Manifold]\index{Manifold}\label{defn:manifold}
-  An $n$-dimensional \hlnoteb{manifold} is a \hlnotec{second countable}\sidenote{
+  An $n$-dimensional \hlnoteb{manifold} is a \hlbnotec{second countable}\sidenote{
   a topological space is said to be \hldefn{second countable} if its basis is
   countable. Note that for a second countable set $X$, every open cover of $X$ has a countable
-  subcover (see pg 32 of \citet{johnlee2000}).}, \hlnotec{Hausdorff} topological space that is
-  \hlnotec{locally homeomorphic} to $\mathbb{R}^n$.
+  subcover (see pg 32 of \citet{johnlee2000}).}, \hlbnotec{Hausdorff} topological space that is
+  \hlbnotec{locally homeomorphic} to $\mathbb{R}^n$.
 \end{defn}
+\marginnote{
+\begin{procedure}[Show that $X$ is a manifold]
+  To show that a space is an $n$-dimensional manifold, check that the space is
+  \begin{enumerate}
+    \item Hausdorff;
+    \item locally Euclidean; and
+    \item locally homeomorphic to $\mathbb{R}^n$.
+  \end{enumerate}
+  This section covers some tools that helps make the process easier.
+\end{procedure}}
 
 \begin{note}
   We may also call the last criterion of being a manifold, that is, to be locally
@@ -923,7 +905,7 @@ when we start creating subspaces from manifolds.
     \begin{tikzpicture}
       \draw[->] (-2, 0) -- (2, 0);
       \draw[->] (0, -0.5) -- (0, 2);
-	    \draw[line width=0pt,draw=none,fill=be-blue,fill opacity=0.25] (-2,0)--(2,0)--(2,2)--(-2,2);
+	    \draw[line width=0pt,draw=none,fill=blue,fill opacity=0.25] (-2,0)--(2,0)--(2,2)--(-2,2);
     \end{tikzpicture}
     \caption{Graph of $\mathbb{H}^2$}
     \label{fig:graph_of_h_2}
@@ -963,17 +945,17 @@ do well tell the difference between the following two graphs, mathematically?
   \begin{tikzpicture}
     \draw[->] (-2, 0) -- (2,0);
     \draw[->] (0, -2) -- (0,2);
-	  \draw[line width=0pt,draw=none,fill=be-blue,fill opacity=0.25] (-2,-2)--(2,-2)--(2,2)--(-2,2);
+	  \draw[line width=0pt,draw=none,fill=blue,fill opacity=0.25] (-2,-2)--(2,-2)--(2,2)--(-2,2);
     \node at (1.5,1.5) {$\mathbb{R}^n$};
-    \draw[draw=be-red] (0, 0) circle(1);
-    \node[circle,fill=be-red,inner sep=2pt] at (0,0) {};
+    \draw[draw=red] (0, 0) circle(1);
+    \node[circle,fill=red,inner sep=2pt] at (0,0) {};
 
     \draw[->] (4, -1) -- (8, -1);
     \draw[->] (6, -2) -- (6, 2);
-	  \draw[line width=0pt,draw=none,fill=be-blue,fill opacity=0.25] (4,-1)--(8,-1)--(8,2)--(4,2);
+	  \draw[line width=0pt,draw=none,fill=blue,fill opacity=0.25] (4,-1)--(8,-1)--(8,2)--(4,2);
     \node at (7.5, 1.5) {$\mathbb{H}^n$};
-    \draw[draw=be-red] (5, -1) -- (7, -1) arc(0:180:1) --cycle;
-    \node[circle,fill=be-red,inner sep=2pt] at (6,-1) {};
+    \draw[draw=red] (5, -1) -- (7, -1) arc(0:180:1) --cycle;
+    \node[circle,fill=red,inner sep=2pt] at (6,-1) {};
   \end{tikzpicture}
   \caption{How do we tell the difference between the two graphs?}
   \label{fig:r_n_vs_h_n}
@@ -1046,7 +1028,7 @@ We shall also prove the following theorem later on:
   \cref{fig:a_3d_cone_in_r_3_}.
   \begin{marginfigure}
     \centering
-    \includegraphics[width=\marginparwidth]{3d_cone.png}
+    \includegraphics[width=\marginparwidth]{images/3d_cone.png}
     \caption{A 3D cone in $\mathbb{R}^3$, from WolframAlpha}\label{fig:a_3d_cone_in_r_3_}
   \end{marginfigure}
   However, this is not a manifold: if we assume that a ball arounnd the origin
@@ -1150,10 +1132,10 @@ point such that the open set is properly contained in $A$.
   \centering
   \begin{tikzpicture}
     \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]}] (-2, 0) -- (2, 0);
-    \draw[-{Arc Barb[length=5pt,width=15pt]},be-blue] (-2,0) -- (-1,0);
-    \draw[{Arc Barb[length=5pt,width=15pt]}-,be-blue] (1,0) -- (2,0);
-    \node[circle,fill=be-blue,inner sep=1.5pt] at (-2, 0) {};
-    \node[circle,fill=be-blue,inner sep=1.5pt] at (2, 0) {};
+    \draw[-{Arc Barb[length=5pt,width=15pt]},blue] (-2,0) -- (-1,0);
+    \draw[{Arc Barb[length=5pt,width=15pt]}-,blue] (1,0) -- (2,0);
+    \node[circle,fill=blue,inner sep=1.5pt] at (-2, 0) {};
+    \node[circle,fill=blue,inner sep=1.5pt] at (2, 0) {};
   \end{tikzpicture}
   \caption{Topological representation of $A$}
   \label{fig:topological_representation_of_a}
@@ -1168,7 +1150,7 @@ But how can we describe this notion mathematically so?
   \begin{tikzpicture}[scale=1.5]
     \draw[->] (-5, 0) -- (5, 0);
     \foreach \x in {-4,-3,...,4} {
-      \draw[dashed,color=be-blue] (\x,0.5) -- (\x,-0.5);
+      \draw[dashed,color=blue] (\x,0.5) -- (\x,-0.5);
       \node[circle,fill,inner sep=2pt,label={270:{$\x$}}] at (\x, 0) {};
       \node[label={[label distance=1]above:{$T^{\x}(a)$}}] at (\x + 0.3, 0) {$( \times )$};
       \node at (\x + 0.7, 0) {$\blacktriangle$};
@@ -1278,7 +1260,7 @@ On $\mathbb{R}^2$, we have
 
     \clip (-2, -2) rectangle (2, 2);
     \foreach \m in {-3,-2.5,...,3} {
-      \draw[color=be-blue] plot ({\x}, {\m * \x});
+      \draw[color=blue] plot ({\x}, {\m * \x});
     }
   \end{tikzpicture}
   \caption{The moduli space on $\mathbb{R}^2$}
@@ -1301,7 +1283,7 @@ shown in \cref{fig:shifted_s_1_for_the_moduli_space}.
 
     \clip (-2, -2) rectangle (3, 2);
     \foreach \m in {-3,-2.5,...,3} {
-      \draw[color=be-blue] plot ({\x}, {\m * \x});
+      \draw[color=blue] plot ({\x}, {\m * \x});
     }
   \end{tikzpicture}
   \caption{Shifted $S^1$ for the moduli space}\label{fig:shifted_s_1_for_the_moduli_space}
@@ -1360,7 +1342,7 @@ by identifying the sides with $>>$, we get a \hldefn{torus}.
   \centering
   \begin{tikzpicture}
     \foreach \z in {-2,-1,...,3} {
-      \draw[dashed,color=be-blue!50!dark] (\z, -2) -- (\z, 2);
+      \draw[dashed,color=blue!50!foreground] (\z, -2) -- (\z, 2);
     }
     \draw[->] (-2, 0) -- (3, 0);
     \draw[->] (0, -2) -- (0, 2);
@@ -1423,14 +1405,14 @@ $G_2 = \left\{ R^k \mmid k \in \mathbb{Z} \right\}$. Thus
     \begin{tikzpicture}
       \pgfmathsetmacro\rad{1};
       \draw (0, 0, 0) circle(\rad);
-      \shade[ball color=be-blue!70!dark,opacity=0.5] (0, 0, 0) circle(\rad);
+      \shade[ball color=blue!70!foreground,opacity=0.5] (0, 0, 0) circle(\rad);
       \draw[opacity=0.5] (-\rad,0,0) arc (180:360:{\rad} and {\rad/2});
       \draw[dashed,opacity=0.5] (-\rad,0,0) arc (180:0:{\rad} and {\rad/2});
       \draw[opacity=0.5] (0,\rad,0) arc (90:270:{\rad/2} and \rad);
       \draw[dashed,opacity=0.5] (0,\rad,0) arc (90:-90:{\rad/2} and \rad);
 
-      \fill[color=be-red,opacity=0.3] (-{\rad}, 0, 0) arc (180:360:{\rad}) -- ({\rad}, 0, 0) arc (360:180:{\rad} and {\rad/2});
-      \fill[color=be-red,opacity=0.2] (-{\rad}, 0, 0) arc (180:0:{\rad} and {\rad/2}) -- ({\rad}, 0, 0) arc (360:180:{\rad} and {\rad/2});
+      \fill[color=red,opacity=0.3] (-{\rad}, 0, 0) arc (180:360:{\rad}) -- ({\rad}, 0, 0) arc (360:180:{\rad} and {\rad/2});
+      \fill[color=red,opacity=0.2] (-{\rad}, 0, 0) arc (180:0:{\rad} and {\rad/2}) -- ({\rad}, 0, 0) arc (360:180:{\rad} and {\rad/2});
 
       % the axes
       \draw[dashed] (-2, 0, 0) -- (0, 0, 0);
@@ -1504,7 +1486,7 @@ as easy to find a continuous map to go from $\Gamma(f)$ to $\mathcal{U}$.
     \centering
     \begin{tikzpicture}
       \draw (0, 0, 0) circle(2);
-      \shade[ball color=be-blue!70!dark,opacity=0.5] (0, 0, 0) circle(2);
+      \shade[ball color=blue!70!foreground,opacity=0.5] (0, 0, 0) circle(2);
       \draw[opacity=0.5] (-2,0,0) arc (180:360:2 and 1);
       \draw[dashed,opacity=0.5] (-2,0,0) arc (180:0:2 and 1);
       \draw[opacity=0.5] (0,2,0) arc (90:270:1 and 2);
@@ -1512,10 +1494,10 @@ as easy to find a continuous map to go from $\Gamma(f)$ to $\mathcal{U}$.
       \draw (0, 0, 0) circle(2);
 
       % Stereographic projection
-      \node[draw,circle,color=be-red,fill,inner sep=1.5pt,pin={[pin edge=latex'-, pin distance=5pt]45:{$N$, the north pole}}] at (0, 2, 0) {};
-      \node[draw,circle,color=be-red,fill,inner sep=1.5pt,pin={[pin edge={latex'-}, pin distance=40pt]30:{$p$}}] at (1.5, 1, 0.5) {};
-      \node[draw,circle,color=be-red,fill,inner sep=1.5pt,pin={[pin edge=latex'-, pin distance=20pt]245:{$p'$}}] at (3, 0, 1) {};
-      \draw[thick,be-red] (0, 2, 0) -- (1.5,1,0.5) -- (3, 0, 1);
+      \node[draw,circle,color=red,fill,inner sep=1.5pt,pin={[pin edge=latex'-, pin distance=5pt]45:{$N$, the north pole}}] at (0, 2, 0) {};
+      \node[draw,circle,color=red,fill,inner sep=1.5pt,pin={[pin edge={latex'-}, pin distance=40pt]30:{$p$}}] at (1.5, 1, 0.5) {};
+      \node[draw,circle,color=red,fill,inner sep=1.5pt,pin={[pin edge=latex'-, pin distance=20pt]245:{$p'$}}] at (3, 0, 1) {};
+      \draw[thick,red] (0, 2, 0) -- (1.5,1,0.5) -- (3, 0, 1);
 
       \draw[dashed] (3, 0, 1) -- (0, 0, 0);
       \draw[dashed] (3, 0, 0) -- (3, 0, 1) -- (0, 0, 1);
@@ -1560,19 +1542,19 @@ shown in \cref{fig:glueing_two_hemispheres}.
     \draw[dashed] (1, 1, 2.6) -- (1, -1.5, 2.6);
 
     \draw[dashed] (-2, 1, 0) arc (180:0:2 and 1);
-    \draw[fill=be-red,fill opacity=0.5] (-2, 1, 0) arc (180:360:2 and 1) -- (2, 1, 0) arc (0:180:2);
+    \draw[fill=red,fill opacity=0.5] (-2, 1, 0) arc (180:360:2 and 1) -- (2, 1, 0) arc (0:180:2);
 
-    \draw[fill=light,fill opacity=0.5] (-2, -1.5, 0) arc (180:360:2) -- (2, -1.5, 0) arc (0:180:2 and 1) -- (-2, -1.5, 0) arc (180:360:2 and 1);
+    \draw[fill=background,fill opacity=0.5] (-2, -1.5, 0) arc (180:360:2) -- (2, -1.5, 0) arc (0:180:2 and 1) -- (-2, -1.5, 0) arc (180:360:2 and 1);
 
     \begin{scope}
       \clip (-2, 1, 0) arc (180:360:2 and 1) -- (2, 1, 0) arc (0:180:2);
-      \draw[fill=dark!70!light] (1, 1, 2.6) circle(0.5);
+      \draw[fill=foreground!70!background] (1, 1, 2.6) circle(0.5);
     \end{scope}
     \node[draw,circle,fill] at (1, 1, 2.6) {};
 
     \begin{scope}
       \clip (-2, -1.5, 0) arc (180:360:2) -- (2, -1.5, 0) arc (360:180:2 and 1);
-      \draw[fill=dark!70!light] (1, -1.5, 2.6) circle(0.5);
+      \draw[fill=foreground!70!background] (1, -1.5, 2.6) circle(0.5);
     \end{scope}
     \node[draw,circle,fill] at (1, -1.5, 2.6) {};
   \end{tikzpicture}
@@ -1720,7 +1702,7 @@ With this definition, we may restate the definition of a quotient map in a clear
   \begin{marginfigure}
     \centering
     \begin{tikzpicture}
-      \draw[fill=be-blue!30!dark] (0, 0) circle(1);
+      \draw[fill=blue!30!background] (0, 0) circle(1);
       \draw[midarrow] (0, 1) arc(90:270:1);
       \draw[midarrow] (0, 1) arc(90:-90:1);
       \node[draw,circle,fill,inner sep=1pt] at (0, 1) {};
@@ -1743,7 +1725,7 @@ With this definition, we may restate the definition of a quotient map in a clear
   \begin{marginfigure}
     \centering
     \begin{tikzpicture}
-      \draw[fill=be-blue!30!dark] (-1, 1) -- (-1, -1) -- (1, -1) -- (1, 1) --cycle;
+      \draw[fill=blue!30!background] (-1, 1) -- (-1, -1) -- (1, -1) -- (1, 1) --cycle;
       \draw[midarrow={>>}{0.5}] (-1, 1) -- (-1, -1);
       \draw[midarrow={>>}{0.5}] (1, 1) -- (1, -1);
       \draw[midarrow={>}{0.5}] (1, 1) -- (-1, 1);
@@ -1821,7 +1803,9 @@ With this definition, we may restate the definition of a quotient map in a clear
   properties. In particular, none of the \hyperref[defn:manifold]{definiting properties of
   manifolds} are necessarily inherited by quotient spaces.
 
-  For example, a quotient space can be
+  % TODO : Provide examples
+  For example, a quotient space can be \sidenote{\hlwarn{I should provide
+  examples here}.}
   \begin{itemize}
     \item locally Euclidean and second countable, but not Hausdorff;
     \item Hausdorff and second countable, but not locally Euclidean; or
@@ -2184,7 +2168,7 @@ With that, we can construct the following space.
     M \cup_f N := M \coprod N \Big/ \Big\lbrace \substack{a \sim f(a) \\ a \in S_1}
   \end{equation*}
   as the \hlnoteb{adjunction space}, and is said to be formed by \hldefn{attaching}
-  \hlnoteb{$Y$ to $X$ along $f$}. The map $f$ is called the \hldefn{attaching map}.
+  \hlnoteb{$M$ to $N$ along $f$}. The map $f$ is called the \hldefn{attaching map}.
 \end{defn}
 
 \begin{remark}
@@ -2221,7 +2205,7 @@ The core idea of the proof is illustrated in \cref{fig:attaching_along_the_bound
     \draw (-0.6,0.2) to[bend left] (0.2,0.2);
     \begin{scope}
       \clip (1, -1) arc(270:90:0.15 and 1) -- plot [smooth] coordinates {(1, 1) (0.5, 1.1) (0, 1.2) (-1, 0.9) (-1.6, 0.6) (-2, 0) (-1.5, -0.6) (-1, -0.8) (0, -1.1) (1, -1)};
-      \draw[fill=be-blue!60!dark, fill opacity=0.6] (1, 0) circle(0.4);
+      \draw[fill=blue!60!foreground, fill opacity=0.6] (1, 0) circle(0.4);
     \end{scope}
 
     \draw (2, 1) arc(90:270:0.15 and 1) -- plot [smooth] coordinates {(2, -1) (2.5, -1.2) (3, -1.25) (3.5, -1.2) (4, -1) (4.5, -0.6) (5, 0) (4.5, 0.6) (3, 1.2) (2, 1)};
@@ -2230,7 +2214,7 @@ The core idea of the proof is illustrated in \cref{fig:attaching_along_the_bound
     \draw (2.7,0) to[bend left] (3.5,0);
     \begin{scope}
       \clip (2, 1) arc(90:270:0.15 and 1) -- plot [smooth] coordinates {(2, -1) (2.5, -1.2) (3, -1.25) (3.5, -1.2) (4, -1) (4.5, -0.6) (5, 0) (4.5, 0.6) (3, 1.2) (2, 1)};
-      \draw[fill=be-blue!60!dark, fill opacity=0.6] (1.8, 0) circle(0.4);
+      \draw[fill=blue!60!foreground, fill opacity=0.6] (1.8, 0) circle(0.4);
     \end{scope}
 
     \draw[-latex] (0.9, 0) -- (1.8, 0) node[midway,above] {$q$};
@@ -2238,20 +2222,20 @@ The core idea of the proof is illustrated in \cref{fig:attaching_along_the_bound
     \draw[-latex] (0.7, 0.5) to[bend left] node[midway,above] {$\phi_1$} (6.3,1.5);
     \draw[->] (6, 1.2) -- (8, 1.2);
     \draw[->] (7, 1) -- (7, 2);
-    \draw[fill=be-blue!60!dark, fill opacity=0.6] (6.5,1.2) arc(180:0:0.5);
+    \draw[fill=blue!60!foreground, fill opacity=0.6] (6.5,1.2) arc(180:0:0.5);
     \node at (7.5,2) {$\mathbb{H}^n$};
 
     \draw[-latex] (2.1, -0.5) to[bend right] node[midway,below] {$\phi_2$} (6.3,-0.8);
     \draw[->] (6, -1.2) -- (8, -1.2);
     \draw[->] (7, -1.4) -- (7, -0.4);
-    \draw[fill=be-blue!60!dark, fill opacity=0.6] (6.5,-1.2) arc(180:0:0.5);
+    \draw[fill=blue!60!foreground, fill opacity=0.6] (6.5,-1.2) arc(180:0:0.5);
     \node at (7.5,-0.4) {$\mathbb{H}^n$};
 
     \draw[-latex] (8.3, 1.5) to[bend left] (10, 1);
     \draw[-latex] (8.3, -0.8) to[bend right] (10, -1);
     \draw[->] (10, 0) -- (12, 0);
     \draw[->] (11, -1) -- (11, 1);
-    \draw[fill=be-blue!60!dark, fill opacity=0.6] (11, 0) circle(0.5);
+    \draw[fill=blue!60!foreground, fill opacity=0.6] (11, 0) circle(0.5);
   \end{tikzpicture}
   \caption{Attaching along the boundaries}
   \label{fig:attaching_along_the_boundaries}
@@ -2275,62 +2259,22 @@ The core idea of the proof is illustrated in \cref{fig:attaching_along_the_bound
 $2$-dimensional rectangle with its sides properly identified. Now if we change the
 identification of one of the sides by swapping its orientation, we end up with what is
 known as a \hlnotea{M\"{o}bius band}.
-\marginnote{The M\"{o}bius strip in \cref{fig:mobius_band} is taken from 
-\href{https://tex.stackexchange.com/questions/118563/moebius-strip-using-tikz}{TeX SE}.}
 
-\begin{figure*}
+\begin{marginfigure}
   \centering
-  \begin{tikzpicture}
-    \fill[left color=green, right color=yellow, fill opacity=0.3] (-5, 5) -- (-5, 1) -- (-1,1) -- (-1,5) --cycle;
-    \draw[thick] (-5, 5) -- (-5, 1) -- (-1,1) -- (-1,5) --cycle;
-    \node[thick,rotate=90,scale=2] at (-5, 3) {>>};
-    \node[thick,rotate=-90,scale=2] at (-1, 3) {>>};
-    \node[scale=2] at (0.5, 3) {$\leadsto$};
-    \begin{axis}[ hide axis, view={40}{40} ]
-      \addplot3 [
-          surf, shader=faceted interp,
-          point meta=x,
-          colormap/greenyellow,
-          samples=20,
-          samples y=5,
-          z buffer=sort,
-          domain=0:180,
-          y domain=-0.5:0.5
-      ] (
-          {(1+0.5*y*cos(x))*cos(2 * x)},
-          {(1+0.5*y*cos(x))*sin(2 * x)},
-          {0.5*y*sin(x)});
-    
-      \addplot3 [
-          samples=50,
-          domain=-145:180,
-          % The domain needs to be adjusted manually, depending on the camera angle, unfortunately
-          samples y=0,
-          thick
-      ] ( {cos(x)}, {sin(x)}, {0});
-    \end{axis}
-  \end{tikzpicture}
+  \includegraphics[width=\marginparwidth]{images/mobius-band1.png}
   \caption{M\"{o}bius band}\label{fig:mobius_band}
-\end{figure*}
+\end{marginfigure}
 
 Following that, if we also swap the orientation of the other two sides, we get what is known as
 the \hlnotea{Klein Bottle}.
 
-\begin{figure*}[ht]
+\begin{marginfigure}
   \centering
-  \begin{tikzpicture}
-    \fill[left color=green, right color=yellow, fill opacity=0.3] (-5, 5) -- (-5, 1) -- (-1,1) -- (-1,5) --cycle;
-    \draw[thick] (-5, 5) -- (-5, 1) -- (-1,1) -- (-1,5) --cycle;
-    \node[thick,rotate=90,scale=2] at (-5, 3) {>>};
-    \node[thick,rotate=-90,scale=2] at (-1, 3) {>>};
-    \node[thick,scale=1.5] at (-3, 5) {>};
-    \node[thick,scale=1.5] at (-3, 1) {<};
-    \node[scale=2] at (0.5, 3) {$\leadsto$};
-  \end{tikzpicture}
-  \includegraphics[scale=0.3]{klein_bottle.jpg}
+  \includegraphics[width=\marginparwidth]{images/klein-bottle1.png}
   \caption{Klein Bottle}
   \label{fig:klein_bottle}
-\end{figure*}
+\end{marginfigure}
 
 % section topological_embeddings (end)
 
@@ -2355,7 +2299,7 @@ way of talking about orientability of a surface.
 \begin{eg}
   Here are two graphical examples of a frame:
   \begin{itemize}
-    \item \hlnotec{Cylinder}
+    \item \hlbnotec{Cylinder}
       \begin{figure}[ht]
         \centering
         \begin{tikzpicture}
@@ -2386,7 +2330,7 @@ way of talking about orientability of a surface.
         \label{fig:frame_on_the_identified_sides_of_a_cylinder}
       \end{figure}
 
-    \item \hlnotec{M\"{o}bius strip}
+    \item \hlbnotec{M\"{o}bius strip}
       \begin{figure}[ht]
         \centering
         \begin{tikzpicture}
@@ -2441,13 +2385,13 @@ way of talking about orientability of a surface.
     \begin{tikzpicture}
       \pgfmathsetmacro\rad{1};
       \draw (0, 0, 0) circle(\rad);
-      \shade[ball color=be-blue!70!dark,opacity=0.5] (0, 0, 0) circle(\rad);
+      \shade[ball color=blue!70!foreground,opacity=0.5] (0, 0, 0) circle(\rad);
       \draw[opacity=0.5] (-\rad,0,0) arc (180:360:{\rad} and {\rad/2});
       \draw[dashed,opacity=0.5] (-\rad,0,0) arc (180:0:{\rad} and {\rad/2});
       \draw[opacity=0.5] (0,\rad,0) arc (90:270:{\rad/2} and \rad);
       \draw[dashed,opacity=0.5] (0,\rad,0) arc (90:-90:{\rad/2} and \rad);
   
-      \fill[color=be-red,opacity=0.3] (-{\rad}, 0, 0) arc (180:0:{\rad}) -- ({\rad}, 0, 0) arc (360:180:{\rad} and {\rad/2});
+      \fill[color=red,opacity=0.3] (-{\rad}, 0, 0) arc (180:0:{\rad}) -- ({\rad}, 0, 0) arc (360:180:{\rad} and {\rad/2});
       \node[pin={[pin edge=latex'-,pin distance=5pt]45:{$S^+$}}] at (0, 1, 0) {};
   
       % the axes
@@ -2536,7 +2480,7 @@ homeomorphic to the space of all lines in $\mathbb{R}^2$ passing through the ori
 
     \clip (-2, -2) rectangle (3, 2);
     \foreach \m in {-3,-2.5,...,3} {
-      \draw[color=be-blue] plot ({\x}, {\m * \x});
+      \draw[color=blue] plot ({\x}, {\m * \x});
     }
   \end{tikzpicture}
   \caption{Shifted $S^1$ for the moduli space, as shown in
@@ -2545,7 +2489,7 @@ homeomorphic to the space of all lines in $\mathbb{R}^2$ passing through the ori
 
 It follows, therefore, that $S^1 \simeq \mathbb{P}^1$.
 
-\begin{quotebox}{be-green}{light}
+\begin{quotebox}{green}{foreground}
   What about the space of all lines in $\mathbb{R}^2$?
 \end{quotebox}
 
@@ -2568,7 +2512,7 @@ to $\mathfrak{M}$, a M\"{o}bius strip. Thus, the space of all lines in $\mathbb{
 also not orientable.
 
 \newthought{Following} the same question as above, we may ask:
-\begin{quotebox}{be-green}{light}
+\begin{quotebox}{green}{foreground}
   What is the space of all lines passing through $(0, 0, 0)$ in $\mathbb{R}^3$?
 \end{quotebox}
 \begin{marginfigure}
@@ -2576,7 +2520,7 @@ also not orientable.
   \begin{tikzpicture}
     \pgfmathsetmacro\rad{1};
     \draw (0, 0, 0) circle(\rad);
-    \shade[ball color=be-blue!70!dark,opacity=0.5] (0, 0, 0) circle(\rad);
+    \shade[ball color=blue!70!foreground,opacity=0.5] (0, 0, 0) circle(\rad);
     \draw[opacity=0.5] (-\rad,0,0) arc (180:360:{\rad} and {\rad/2});
     \draw[dashed,opacity=0.5] (-\rad,0,0) arc (180:0:{\rad} and {\rad/2});
     \draw[opacity=0.5] (0,\rad,0) arc (90:270:{\rad/2} and \rad);
@@ -2590,12 +2534,12 @@ also not orientable.
     \draw[-latex'] (0, 0, 0) -- (0, 2, 0) node[above] {$z$};
     \draw[-latex'] (0, 0, 0) -- (0, 0, 2) node[below,left] {$x$};
 
-    \draw[color=be-blue] (-2, -2, -2) -- (2, 2, 2);
-    \draw[color=be-blue] (-2, 2, 2) -- (2, -2, -2);
-    \draw[color=be-blue] (1, 2, 0) -- (-1, -2, 0);
-    \draw[color=be-blue] (-2, 0, 1) -- (2, 0, -1);
-    \draw[color=be-blue] (0, 2, -1) -- (0, -2, 1);
-    \draw[color=be-blue] (0, 2, 1) -- (0, -2, -1);
+    \draw[color=blue] (-2, -2, -2) -- (2, 2, 2);
+    \draw[color=blue] (-2, 2, 2) -- (2, -2, -2);
+    \draw[color=blue] (1, 2, 0) -- (-1, -2, 0);
+    \draw[color=blue] (-2, 0, 1) -- (2, 0, -1);
+    \draw[color=blue] (0, 2, -1) -- (0, -2, 1);
+    \draw[color=blue] (0, 2, 1) -- (0, -2, -1);
   \end{tikzpicture}
   \caption{Space of all lines passing through $(0, 0, 0)$ in
   $\mathbb{R}^3$}\label{fig:space_of_all_lines_passing_through_r_3}
@@ -2607,9 +2551,9 @@ Just right before this, we observed, in \cref{eg:projective_space_p2} that
 \begin{equation*}
   S^2 / x \sim (-x) \simeq \mathbb{P}^2,
 \end{equation*}
-where $x \sim (-x)$ via what is called the \hldefn{antipedal map}.
+where $x \sim (-x)$ via what is called the \hldefn{antipodal map}.
 
-\begin{quotebox}{be-green}{light}
+\begin{quotebox}{green}{foreground}
   What about the space of all lines in $\mathbb{R}^3$?
 \end{quotebox}
 
@@ -2831,7 +2775,7 @@ For reasons that will become clear later, we shall, from hereon, write
 to represent the cycle $z_1$ in \cref{fig:third_diagram_has_three_loops}.
 
 \newthought{Let} $C_0$ denote the \hlnotea{free abelian group}\sidenote{See
-\cref{chp:free_abelian_groups}} on vertices, and $C_1$ denote the free abelian
+\cref{sec:free_abelian_groups}} on vertices, and $C_1$ denote the free abelian
 group on (directed) edges.
 
 \begin{eg}
@@ -2997,9 +2941,9 @@ chains form a boundary.
   \begin{figure*}[ht]
     \centering
     \begin{tikzpicture}
-      \draw[fill=be-blue,fill opacity=0.5] (0, 0) circle(1);
+      \draw[fill=blue,fill opacity=0.5] (0, 0) circle(1);
       \node at (2, 0) {$\simeq$};
-      \draw[fill=be-blue,fill opacity=0.5] (4, 1) -- (3, -1) node[midway,left]
+      \draw[fill=blue,fill opacity=0.5] (4, 1) -- (3, -1) node[midway,left]
         {$b_1$} -- (5, -1) node[midway,below] {$b_2$} -- cycle
         node[midway,right] {$b_3$};
       \node[draw,circle,fill,inner sep=1pt,label={90:{$v_1$}}] at (4, 1) {};
@@ -3143,15 +3087,502 @@ case later on using \hlnotea{simplicial homology}.
 
 % chapter lecture_12_feb_01st (end)
 
+\chapter{Lecture 13 Feb 04th}%
+\label{chp:lecture_13_feb_04th}
+% chapter lecture_13_feb_04th
+
+\marginnote{I missed this lecture and I have not been able to obtain any notes
+for it. This lecture seems to have introduced simplicial complexes, simplices,
+and did some homology on some of the basic structures that we have came across.
+I will try to fill these in.}
+
+% chapter lecture_13_feb_04th (end)
+
+\chapter{Lecture 14 Feb 08th}%
+\label{chp:lecture_14_feb_08th}
+% chapter lecture_14_feb_08th
+
+\section{Simplicial Homology (Continued)}%
+\label{sec:simplicial_homology_continued}
+% section simplicial_homology_continued
+
+In the last lecture, we showed the the following:
+
+\begin{itemize}
+  \item The homology group of the filled triangle \tikz\draw[fill=blue] (0, 0.2) --
+    (-0.2, -0.2) -- (0.2, -0.2) -- (0, 0.2); is
+    \begin{align*}
+      H_0(\tikz\draw[fill=blue] (0, 0.2) -- (-0.2,-0.2) -- (0.2, -0.2) -- (0,
+      0.2);) &= \mathbb{Z} \\
+      H_1(\tikz\draw[fill=blue] (0, 0.2) -- (-0.2,-0.2) -- (0.2, -0.2) -- (0,
+      0.2);) &= 0 \\
+      H_2(\tikz\draw[fill=blue] (0, 0.2) -- (-0.2,-0.2) -- (0.2, -0.2) -- (0,
+      0.2);) &= 0
+    \end{align*}
+
+  \item The homology group of the \hldefn{tetrahedron} \tikz\draw (0, 0.2, 0) --
+    (-0.2, 0, 0.2) -- (0.1, 0, 0.2) -- (0, 0.2, 0) -- (0, 0, -0.2) -- (0.1, 0,
+    0.2) -- (-0.2, 0, 0.2) -- (0, 0, -0.2);\ is
+    \begin{align*}
+      H_0(\tikz\draw (0, 0.2, 0) -- (-0.2, 0, 0.2) -- (0.1, 0, 0.2) -- (0, 0.2,
+      0) -- (0, 0, -0.2) -- (0.1, 0, 0.2) -- (-0.2, 0, 0.2) -- (0, 0, -0.2);) &=
+      \mathbb{Z} \\
+      H_1(\tikz\draw (0, 0.2, 0) -- (-0.2, 0, 0.2) -- (0.1, 0, 0.2) -- (0, 0.2,
+      0) -- (0, 0, -0.2) -- (0.1, 0, 0.2) -- (-0.2, 0, 0.2) -- (0, 0, -0.2);) &=
+      0 \\
+      H_3(\tikz\draw (0, 0.2, 0) -- (-0.2, 0, 0.2) -- (0.1, 0, 0.2) -- (0, 0.2,
+      0) -- (0, 0, -0.2) -- (0.1, 0, 0.2) -- (-0.2, 0, 0.2) -- (0, 0, -0.2);) &=
+      \mathbb{Z}
+    \end{align*}
+\end{itemize}
+
+We shall now turn to studying the homology groups of the torus.
+
+\begin{eg}[Homology of the Torus]\label{eg:homology_of_the_torus}
+  Our goal is to show that the homology group of the torus $\mathbb{T}^2$, as shown in
+  \cref{fig:homology_of_a_torus}, is given by
+  \begin{align*}
+    H_0(\mathbb{T}^2) &= \mathbb{Z} \\
+    H_1(\mathbb{T}^2) &= \Span_{\mathbb{Z}} \{ \tikz\draw (0, -0.5) arc(-90:270:0.15 and
+    0.2);, \tikz\draw (0.35, 0) arc(0:360:0.35 and 0.2); \}
+           = \mathbb{Z} \oplus \mathbb{Z} \\
+    H_2(\mathbb{T}^2) &= \mathbb{Z}
+  \end{align*}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw (1, 0) arc(0:360:1 and 0.5);
+      \draw (0.3, 0) arc(360:180:0.3 and 0.1);
+      \draw (0.25, 0) arc(0:180:0.25 and 0.05);
+      \draw[dashed] (1, 0) arc(0:180:1 and 0.25);
+      \draw (1, 0) arc(360:180:1 and 0.35);
+      \draw (0, -0.5) arc(270:90:0.15 and 0.2);
+      \draw[dashed] (0, -0.5) arc(-90:90:0.15 and 0.2);
+    \end{tikzpicture}
+    \caption{Homology of a torus}\label{fig:homology_of_a_torus}
+  \end{marginfigure}
+  We may triangulate $\mathbb{T}^2$ as in \cref{fig:triangulating_t_2_}.
+  \begin{figure*}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw (0, 3) -- (0, 2) node[left] {$a_1$} -- (0, 1) node[left] {$a_2$}
+        -- (0, 0) node[left] {$a_0$} -- (1, 0) node[below] {$b_0$} --
+        (2, 0) node[below] {$c_0$} -- (3, 0) node[right] {$a_0$} --
+        (3, 1) node[right] {$a_2$} -- (3, 2) node[right] {$a_1$} --
+        (3, 3) node[right] {$a_0$} -- (2, 3) node[above] {$c_0$} --
+        (1, 3) node[above] {$b_0$} -- (0, 3) node[left] {$a_0$};
+      \draw (0, 2) -- (1, 2) node[left=7pt,above] {$b_1$} --
+        (2, 2) node[left=7pt,above] {$c_1$} -- (3, 2);
+      \draw (0, 1) -- (1, 1) node[left=7pt,above] {$b_2$} --
+        (2, 1) node[left=7pt,above] {$c_2$} -- (3, 1);
+      \draw (1, 0) -- (1, 3);
+      \draw (2, 0) -- (2, 3);
+      \foreach \x in {0,1,2} {
+      \foreach \y in {0,1,2} {
+        \draw (\x, \y) -- ($(\x, \y) + (1,1)$);
+      }
+      }
+      \node[rotate=90,color=red] at (0, 1.5) {>};
+      \node[rotate=90,color=red] at (3, 1.5) {>};
+      \node[color=red] at (1.5, 0) {>>};
+      \node[color=red] at (1.5, 3) {>>};
+
+      \node at (0.8,0.2) {$\circlearrowleft$};
+      \node at (0.9, 0.6) {$t_1$};
+      \node[rotate=45,color=blue] at (0.5, 0.5) {>};
+      \node at (0.4, 0.7) {$e_1$};
+    \end{tikzpicture}
+    \caption{Triangulating $\mathbb{T}^2$}
+    \label{fig:triangulating_t_2_}
+  \end{figure*}
+
+  Note that the red arrows and blue arrows indicate different things:
+  \begin{itemize}
+    \item \textcolor{red}{>} indicates the sides which are identified with one
+      another;
+    \item \textcolor{blue}{>} indicates an orientation on the $1$-chain.
+  \end{itemize}
+
+  \hlbnoted{$H_0(\mathbb{T}^2)$} Notice that there are a total of $10$ vertices
+  in \cref{fig:triangulating_t_2_}. Thus $\ker \partial_0 = \mathbb{Z}^{10}$.
+
+  Notice that one may fill in the orientations on the $1$-chains in a way
+  illustrated in \cref{fig:an_set_of_orientations_for_the_1_chains_on_t_2}.
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw (0, 3) -- (0, 2) node[left] {$a_1$} -- (0, 1) node[left] {$a_2$}
+        -- (0, 0) node[left] {$a_0$} -- (1, 0) node[below] {$b_0$} --
+        (2, 0) node[below] {$c_0$} -- (3, 0) node[right] {$a_0$} --
+        (3, 1) node[right] {$a_2$} -- (3, 2) node[right] {$a_1$} --
+        (3, 3) node[right] {$a_0$} -- (2, 3) node[above] {$c_0$} --
+        (1, 3) node[above] {$b_0$} -- (0, 3) node[left] {$a_0$};
+      \draw (0, 2) -- (1, 2) node[left=7pt,above] {$b_1$} --
+        (2, 2) node[left=7pt,above] {$c_1$} -- (3, 2);
+      \draw (0, 1) -- (1, 1) node[left=7pt,above] {$b_2$} --
+        (2, 1) node[left=7pt,above] {$c_2$} -- (3, 1);
+      \draw (1, 0) -- (1, 3);
+      \draw (2, 0) -- (2, 3);
+      \foreach \x in {0,1,2,3} {
+      \foreach \y in {0,1,2} {
+        \ifthenelse{\x < 3}{
+          \draw (\x, \y) -- ($(\x, \y) + (1,1)$) node[midway,rotate=45,color=blue] {>};
+        }{}
+        \node[rotate=-90,color=blue] at ($(\x, \y) + (0, 0.5)$) {>};
+        \node[color=blue] at ($(\y, \x) + (0.5, 0)$) {<};
+      }
+      }
+      \node[rotate=45,color=blue] at (0.5, 0.5) {>};
+    \end{tikzpicture}
+    \caption{An set of orientations for the $1$-chains on $\mathbb{T}^2$}
+    \label{fig:an_set_of_orientations_for_the_1_chains_on_t_2}
+  \end{figure}
+  It can be shown that given any linear combination of $1$-chains, one of the
+  coefficients will end up being dependent on all others. In other words, $\Img
+  \partial_1 = \mathbb{Z}^9$. Thus $H_0(\mathbb{T}^2) = \mathbb{Z}$, as
+  required.
+
+  \hlbnoted{$H_2(\mathbb{T}^2)$} Note that $C_3 = 0$, and so $\Img \partial_3 =
+  0$. By the triangulation in \cref{fig:triangulating_t_2_}, we know that $C_2
+  \simeq \mathbb{Z}^{18}$. Now by applying the same orientation on each of the
+  $2$-faces, we notice that in order for the $1$-cycles to cancel out each other
+  (i.e. in order for $\partial_2 \Delta$, where $\Delta$ is an arbitrary
+  $2$-chain, to be $0$), we need the coefficients of all of the $2$-chains to be
+  the same. Thus $\ker \partial_2 = \mathbb{Z}$. It follows that
+  $H_2(\mathbb{T}^2) = \mathbb{Z}$.
+
+  \hlbnoted{$H_1(\mathbb{T}^2)$} \sidenote[][-100pt]{This is extremely tedious to deal
+  with if we go down the normal route of calculating the nullity and rank. We
+  shall use the following procedure to arrive at $H_1(\mathbb{T}^2)$.
+  \begin{procedure}[Figuring out $H_1(\mathbb{T}^2)$]
+    \begin{enumerate}
+      \item Show that every $1$-cycle is \hyperref[defn:homologous]{homologous}
+        to the $1$-cycle that lies entirely on the boundary of the rectangle in
+        \cref{fig:triangulating_t_2_}.
+      \item Show that every $1$-cycle supported on the boundary of the rectangle
+        is of the form $m_1 z_1 + m_2 z_2$, where $m_1, m_2 \in \mathbb{Z}$ and
+        $z_1, z_2$ are as labelled in
+        \cref{fig:_z_1_and_z_2_on_t_2_as_a_basis_for_the_null_space_of_1_chains_}.
+      \item Show that $z_1$ and $z_2$ are not homologous.
+    \end{enumerate}
+  \end{procedure}
+  }
+  \begin{figure*}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw (3, 0) arc(0:360:3 and 1.5);
+      \draw (1, 0) arc(360:180:1 and 0.25);
+      \draw (0.8, -0.15) arc(0:180:0.8 and 0.15);
+      \draw[color=magenta] (3, 0) arc(360:180:3 and 1) node[near end,above]
+        {$z_2$};
+      \draw[dashed,color=magenta] (3, 0) arc(0:180:3 and 1);
+      \draw[color=cyan] (0, -1.5) arc(270:90:0.3125 and 0.625) node[near end,
+        left] {$z_1$};
+      \draw[dashed,color=cyan] (0, -1.5) arc(-90:90:0.3125 and 0.625);
+    \end{tikzpicture}
+    \caption{$z_1$ and $z_2$ on $\mathbb{T}^2$, as a basis for the null space of
+    $1$-chains.}
+    \label{fig:_z_1_and_z_2_on_t_2_as_a_basis_for_the_null_space_of_1_chains_}
+  \end{figure*}
+
+  \hlwarn{I will fill in the details later when I've worked it out. Some steps
+  are probably wrong or not well-justified.} 
+\end{eg}
+
+\begin{eg}[Homology of the Klein Bottle]\label{eg:homology_of_the_klein_bottle}
+  \hlwarn{I will have to revisit the compution of homology.}
+\end{eg}
+
+% section simplicial_homology_continued (end)
+
+% chapter lecture_14_feb_08th (end)
+
+\chapter{Lecture 15 Feb 11th}%
+\label{chp:lecture_15_feb_11th}
+% chapter lecture_15_feb_11th
+
+\section{Free Abelian Groups}%
+\label{sec:free_abelian_groups}
+% section free_abelian_groups
+
+We shall make a little detour and look at free abelian groups, and look at some
+of the results that are useful to us.
+
+\begin{defn}[Free Abelian Groups]\index{Free Abelian Groups}\label{defn:free_abelian_groups}
+  A group $G$ is called a \hlnoteb{free abelian group} if every $g \in G$ can be
+  uniquely written as a finite sum
+  \begin{equation*}
+    g = \sum n_\alpha g_\alpha,
+  \end{equation*}
+  where $n_\alpha$ are (integer) coefficients, and $\{ g_\alpha \}$ is a
+  \hlnotea{basis} for the group.
+\end{defn}
+
+\begin{eg}
+  Consider
+  \begin{equation*}
+    \tilde{G} = \bigoplus_{j \in \mathbb{N}} \mathbb{Z},
+  \end{equation*}
+  a sequence of finitely many non-zero components. As a set, $\tilde{G}$ is the
+  \hlnotea{infinite Cartesian product} of infinitely many copies of
+  $\mathbb{Z}$. We may thus consider the basis elements of $\tilde{G}$ as
+  \begin{equation*}
+    g_j = (0, \ldots, 0, \overarrow{1}{j-\text{th component}}, 0, \ldots).
+  \end{equation*}
+\end{eg}
+
+\begin{defn}[Generators of a Group]\index{Generators of a Group}\label{defn:generators_of_a_group}
+  If we remove the condition of unique representation, i.e. for $g \in G$,
+  \begin{equation*}
+    g = \sum n_\alpha g_\alpha
+  \end{equation*}
+  not necessarily uniquely, we then call $\{ g_\alpha \}$ a set of
+  \hlnoteb{generators} for $G$.
+\end{defn}
+
+\begin{defn}[Finitely Generated]\index{Finitely Generated}\label{defn:finitely_generated}
+  We say that a group $G$ is \hlnoteb{finitely generated} if it has a finite set
+  of generators.
+\end{defn}
+
+\begin{eg}
+  Consider $\tilde{G}$ as in the last example. We have that $\tilde{G}$ is not
+  finitely generated.
+\end{eg}
+
+\begin{eg}
+  $\mathbb{Z}^2$ is finitely generated: its generators are
+  \begin{equation*}
+    \left\{ g_1 = (1, 0),\,g_2 = (0, 1) \right\}.
+  \end{equation*}
+\end{eg}
+
+\begin{note}
+  Note that the above two examples are free abelian groups. This means that free
+  abelian groups \hlimpo{do not have to be finitely generated}.
+\end{note}
+
+\begin{ex}
+  Show that any subgroup of a finitely generated abelian group is finitely
+  generated.
+\end{ex}
+
+\begin{proof}
+  Let $G$ be a finitely generated abelian group, with generators $\{ g_i
+  \}_{i=1}^{n}$. Let  $H \leq G$. Then $\forall h \in H$, since $h \in G$, we
+  have that
+  \begin{equation*}
+    h = \sum n_i g_i
+  \end{equation*}
+  for some coefficients $n_i$. Thus $H$ is finitely generated.
+\end{proof}
+
+\begin{note}
+  Observe that if $\{g_\alpha\}$ and $\{h_\alpha\}$ are two finite basis for the
+  finitely generated group $G$, then
+  \begin{equation*}
+    \abs{\{g_\alpha\}} = \abs{\{h_\alpha\}}.
+  \end{equation*}
+\end{note}
+
+\begin{defn}[Order]\index{Order}\label{defn:order}
+  An element $g \in G$ is said to have \hlnoteb{order} $p$ if
+  \begin{equation*}
+    p \cdot g = 0
+  \end{equation*}
+  and $\forall q$, if $q \cdot g = 0$, then $p \leq q$.
+\end{defn}
+
+\begin{defn}[Torsion Group]\index{Torsion Group}\label{defn:torsion_group}
+  A group $G$ is said to be \hlnoteb{torsion} if all of its elements have finite
+  order.
+\end{defn}
+
+\begin{eg}
+  Finite groups are necessarily torsion.
+\end{eg}
+
+\begin{ex}
+  Let $G$ be an abelian group and
+  \begin{equation*}
+    H \coloneqq \left\{ g \in G : g \text{ has finite order } \right\}.
+  \end{equation*}
+  Show that $H < G$. We say that $H$ is a \hldefn{torsion subgroup} of $G$.
+\end{ex}
+
+\begin{thm}[Fundamental Theorem of Finitely Generated Abelian Groups]\index{Fundamental Theorem of Finitely Generated Abelian Groups}\label{thm:fundamental_theorem_of_finitely_generated_abelian_groups}
+  Let $G$ be a finitely generated abelian group, and $T$ a torsion subgroup.
+  Then $G$ \hlnotea{splits}, i.e.
+  \begin{equation*}
+    G \simeq K \oplus T,
+  \end{equation*}
+  where $K$ is a \hyperref[defn:free_abelian_groups]{free abelian group}.
+  Furthermore,
+  \begin{equation*}
+    T \simeq T_1 \oplus \hdots \oplus T_k,
+  \end{equation*}
+  where $T_j$ is of order $m_j$ and $m_1 \mid m_2 \mid \hdots \mid m_k$.
+\end{thm}
+
+% section free_abelian_groups (end)
+
+% section simplices_and_simplicial_complexes (end)
+
+% chapter lecture_15_feb_11th (end)
+
+\chapter{Lecture 16 Feb 18th}%
+\label{chp:lecture_16_feb_18th}
+% chapter lecture_16_feb_18th
+
+\section{Simplices and Simplicial Complexes}%
+\label{sec:simplices_and_simplicial_complexes}
+% section simplices_and_simplicial_complexes
+
+We defined what the homology of a triangulated surface was, and we used these
+triangles as the `building blocks' of any shape.
+
+\begin{eg}
+  Recall that a 2-face is as shown in \cref{fig:typical_2_face}.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw (0, 1) -- (1, 0) -- (-1, 0) -- cycle;
+    \end{tikzpicture}
+    \caption{Typical 2-face}
+    \label{fig:typical_2_face}
+  \end{marginfigure}
+  This is actually called a $2$-simplex.
+\end{eg}
+
+We did not give an explicit definition as to what a \hlnotea{face} is, but we
+shall do that in this section.
+
+\begin{defn}[Simplices]\index{Simplices}\index{Simplex}\label{defn:simplices}
+  The \hlnoteb{$k$-simplex} is defined as a set
+  \begin{equation*}
+    \sigma^{(k)} = \left\{ v_0 + \sum_{j=1}^{k} t_j (v_j - v_0) : 0 \leq t_j
+    \leq 1, \, \sum_{j=1}^{k} t_j = 1 \right\}.
+  \end{equation*}
+\end{defn}
+\begin{marginfigure}
+  \centering
+  \includegraphics[width=\marginparwidth]{images/typical-2-simplicial-complex.png}
+  \caption{A typical simplicial complex}\label{fig:a_typical_simplicial_complex}
+\end{marginfigure}
+
+\begin{defn}[Face]\index{Face}\label{defn:face}
+  Let $\sigma$ be a $k$-simplex spanned by the vertices
+  \begin{equation*}
+    \mathcal{A} = \{ a_0, a_1, \ldots, a_k \}.
+  \end{equation*}
+  Any simplex spanned by a subset of $\mathcal{A}$ of size $l \leq k$ is called
+  an \hlnoteb{$l$-face}.
+\end{defn}
+\begin{marginfigure}
+  \centering
+  \includegraphics[width=\marginparwidth]{images/faces-on-the-2-simplicial-complex.png}
+  \caption{Faces on a simplicial complex}\label{fig:faces_on_a_simplicial_complex}
+\end{marginfigure}
+
+\begin{defn}[Simplicial Complex]\index{Simplicial Complex}\label{defn:simplicial_complex}
+  A collection, $K$, of $k$-simplices is called a \hlnoteb{simplicial complex}
+  if
+  \begin{enumerate}
+    \item every face of a simplex in $K$ is also in $K$; and
+    \item the intersection of any two simplices in $K$ is a face of both of
+      them.
+  \end{enumerate}
+\end{defn}
+
+\begin{eg}
+  The diagram in \cref{fig:non_example_for_a_simplicial_complex} is not a
+  simplicial complex. For example, the edge $[a_3 \, a_4]$ is not an
+  intersection of two $2$-faces.
+  \begin{marginfigure}
+    \centering
+    \includegraphics[width=\marginparwidth]{images/non-example-simplicial-complex.png}
+    \caption{Non-example for a simplicial complex}\label{fig:non_example_for_a_simplicial_complex}
+  \end{marginfigure}
+\end{eg}
+
+\newthought{Recall} how it is common for us to represent a vertex as simply $a_0$ and an edge
+as $[a_0 \, a_1]$. We may, for example, represent the edges in
+\cref{fig:faces_on_a_simplicial_complex} as
+\begin{equation*}
+  [a_0 \, a_1], \, [a_1 \, a_2], \, [a_2 \, a_3], \, [a_3 \, a_0], \, [a_0 \,
+  a_2], \, [a_3 \, a_1],
+\end{equation*}
+and the $2$-faces as
+\begin{equation*}
+  [a_0 \, a_1 \, a_2], \, [a_0 \, a_2 \, a_3], \, [a_0, \, a_3 \, a_1], \, [a_1
+  \, a_2 \, a_3].
+\end{equation*}
+Note that the order of which we write the vertices in $[ \hdots ]$ indicates an
+orientation. For instance,
+\begin{itemize}
+  \item $[a_0 \, a_1]$ is the edge that has $a_0$ as its starting point, and
+    $a_1$ its ending point;
+  \item $[a_0 \, a_1 \, a_2]$ is the $2$-face that is oriented anticlockwise.
+\end{itemize}
+
+\begin{note}\label{note:various_ways_to_represent_an_edge}
+  In relation to how we write the above, for edges, we represent the opposite
+  orientation by simply writing the vertices in reverse. E.g. the opposite of
+  $[a_0 \, a_1]$ is $[a_1 \, a_0]$. We relate the two together by denoting one as
+  the negative of the other:
+  \begin{equation*}
+    [a_0 \, a_1] = - [a_1 \, a_0].
+  \end{equation*}
+  This notation is consistent with the use of the
+  \hyperref[defn:boundary_of_an_edge]{boundary operator} introduced earlier; in
+  particular
+  \begin{equation*}
+    \partial ([a_0 \, a_1]) = a_1 - a_0 = - (a_0 - a_1) = - \partial ([a_1 \,
+    a_0]).
+  \end{equation*}
+\end{note}
+
+We may also do so for other simplices.
+
+\begin{defn}[Boundary of Simplicies]\index{Boundary of Simplicies}\label{defn:boundary_of_simplicies}
+  Let $[a_0 \hdots a_k]$ be a $k$-simplex. We define the boundary of $[a_0
+  \hdots a_k]$ as
+  \begin{equation*}
+    \partial[a_0 \hdots a_k] = \sum_{j=0}^{k} (-1)^j [a_0 \hdots \hat{a_j}
+    \hdots a_k],
+  \end{equation*}
+  where $\hat{a_j}$ indicates the removal of $a_j$ from the notation.
+\end{defn}
+
+\begin{eg}
+  Let $\sigma = [a_0 \, a_1 \, a_2]$ be a $2$-face. The boundary of $\sigma$ is
+  \begin{equation*}
+    \partial \sigma = [a_1 \, a_2] - [a_0 \, a_2] + [a_0 \, a_1]
+    = [a_1 \, a_2] + [a_2 \, a_0] + [a_0 \, a_1].
+  \end{equation*}
+  Notice that the last expression expresses the geometric boundary of $\sigma$,
+  with an induced orientation.
+
+  Also, notice that we may also write $\sigma$ as
+  \begin{equation*}
+    [a_1 \, a_2 \, a_0], \, [a_2 \, a_0 \, a_1].
+  \end{equation*}
+  In \cref{note:various_ways_to_represent_an_edge}, we learned that we can
+  represent
+  \begin{equation*}
+    [a_0 \, a_1] = - [a_1 \, a_0].
+  \end{equation*}
+  We can do the same for $k$-simplices for any $k$; in particular,
+  \begin{equation*}
+    [a_0 \, \hdots \, a_k] = (\sgn \tau) [a_{\tau(0)} \hdots a_{\tau(k)}]
+  \end{equation*}
+  for $\tau \in S_k$, where $S_k$ is the \hlnotea{permutation group on $\{1,
+  \ldots, k\}$}.
+\end{eg}
+
+% chapter lecture_16_feb_18th (end)
+
 \appendix
-
-\chapter{Free Abelian Groups}%
-\label{chp:free_abelian_groups}
-% chapter free_abelian_groups
-
-CONTENTS TO BE ADDED % TODO : find material on free abelian groups
-
-% chapter free_abelian_groups (end)
 
 \chapter{Assignment Problems}%
 \label{chp:assignment_problems}
@@ -3418,3 +3849,4 @@ CONTENTS TO BE ADDED % TODO : find material on free abelian groups
 \printindex
 
 \end{document}
+% vim: tw=80
