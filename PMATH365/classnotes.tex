@@ -5936,11 +5936,11 @@ definition.
   for some $\lambda > 0$ (by \cref{defn:orientable_submanifolds}).
 
   This is called \hlnoteb{the orientation on $M = \phi(U)$ induced by the
-  parametrization $\phi$}.
+  parameterization $\phi$}.
 \end{eg}
 
 In particular, the above example tells us that any submanifold that can be
-covered by a single parametrization is always orientable, and the
+covered by a single parameterization is always orientable, and the
 parameterization provides a preferred orientation.
 
 \begin{defn}[Compatible Orientation]\index{Compatible Orientation}\label{defn:compatible_orientation}
@@ -6224,7 +6224,7 @@ must not have been orientable.}
   \cref{fig:mobius_strip_coming_from_phi_}.
   \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{mobius_angle1.png}
+    \includegraphics[width=\linewidth]{images/mobius_angle1.png}
     % \begin{tikzpicture}
     % \begin{axis}[
     %     hide axis,
@@ -6273,7 +6273,7 @@ must not have been orientable.}
   \cref{fig:mobius_strip_coming_from_tildephi_}.
   \begin{figure}[ht]
     \centering
-    \includegraphics[width=\linewidth]{mobius_angle2.png}
+    \includegraphics[width=\linewidth]{images/mobius_angle2.png}
     % \begin{tikzpicture}
     % \begin{axis}[
     %     hide axis,
@@ -6365,6 +6365,309 @@ must not have been orientable.}
 % section orientability_and_orientation_of_submanifolds_continued (end)
 
 % chapter lecture_25_mar_15th (end)
+
+\tuftepart{Stokes' Theorem and deRham Cohomology}\label{part:stokes_theorem_and_derham_cohomology}
+
+\chapter{Lecture 26 Mar 18th}%
+\label{chp:lecture_26_mar_18th}
+% chapter lecture_26_mar_18th
+
+\section{Partitions of Unity}%
+\label{sec:partitions_of_unity}
+% section partitions_of_unity
+
+A \hlnotea{partition of unity} is a tool that allows us to decompose geometric
+objects into smaller pieces, each of which can be treated with methods of
+standard multivariable calculus.
+
+\begin{note}\label{note:why_partitions_of_unity}
+My understanding is that it is a tool to assign a fair weight to each of these
+smaller pieces. Thinking ahead, we want to be able to define integration over
+manifolds, and we know that a manifold can have infinitely many
+parameterizations that cover it. If we simply take a sum of all the integration
+over each of the parameterizations, we will end up ``double counting'' the
+contribution of \textbf{many} of the points to the integral, which would render
+the tool inaccurate.
+
+To amend this problem, first, we want to be able to cover over each point of
+$M$ using parameterizations as ``tiny'' as possibly can. This still makes it
+difficult for us: there may just be too many parameterizations for us to
+calculate, and even more so when $M$ is a `big' manifold. Thus, we will require
+that $M$ is \hlnotea{compact}. This will now give us a finite number of
+parameterzations to work with.
+
+This makes taking care of double counting in the smaller areas become easier to
+deal with. In particular, we will define \hlnotea{smooth bump functions} which
+will be our way of giving a weight to each point on the small area, and the
+closer we get to the centre, the greater a value we assign. Since each of the
+parameterzations are tiny, this gives us a rather fair assignment of weights.
+
+We can do better with this refinement. We can also assign a weight to each of
+these parameterzations depending on its contribution, which effectively gives us
+a way to average out parameterzations across the board.
+
+The above ideas will be reflected mathematically in the rest of this lecture,
+and especially so when we finally define a partition of unity.
+\end{note}
+
+\newthought{To define} a partition of unity, we need to first construct
+\hlnotea{smooth bump functions}.
+
+\marginnote{
+\begin{mnote}
+  There is no deep meaning behind the choice of $1$ and $2$ as thresholds. They
+  are simply numbers representing some threshold, and we may as well relabel
+  them as $\epsilon$ and $\delta$ respectively. Choosing $1$ and $2$ is just for
+  conveience.
+\end{mnote}
+}
+\begin{lemma}[Smooth Bump Functions]\index{Smooth Bump Functions}\label{lemma:smooth_bump_functions}
+  There exists a smooth function $\chi : \mathbb{R}^k \to \mathbb{R}$ such that
+  \sidenote{We can adjust the thresholds $1$ and $2$ so that we still have
+  $\chi$ as in the lemma.}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2, 0) -- (2, 0);
+      \draw[->] (0, -2) -- (0, 2);
+      \draw[fill=blue,fill opacity=0.8] (0, 0) circle(1);
+      \draw[fill=red,fill opacity=0.8] (0, 0) circle(0.5);
+      \node[label={315:{$1$}}] at (0.4, 0) {};
+      \node[label={315:{$2$}}] at (0.9, 0) {};
+    \end{tikzpicture}
+    \caption{Heat map of the smooth bump function $\chi : \mathbb{R}^2 \to \mathbb{R}$}\label{fig:heat_map_of_chi_}
+  \end{marginfigure}
+  \begin{table}[ht]
+    \centering
+    \begin{tabular}{l l l}
+      \chi(u) = 1 & & \norm{u} \leq 1 \\
+      \chi(u) \in (0, 1) & & 1 < \norm{u} < 2 \\
+      \chi(u) = 0 & & \norm{u} \geq 2.
+    \end{tabular}
+  \end{table}
+\end{lemma}
+
+\begin{proof}
+  On A4Q7, we showed that there exists a smooth function $f : \mathbb{R} \to
+  \mathbb{R}$ such that $f(t) = 0$ for all $t \leq 0$ and $f(t) > 0$ for all $t
+  > 0$. Using such an $f$, we define $h : \mathbb{R} \to \mathbb{R}$ such that 
+  \begin{equation*}
+    h(t) \frac{f(2 - t)}{f(2 - t) + f(t - 1)}.
+  \end{equation*}
+  Notice that
+  \begin{gather*}
+    t \leq 1 \implies 2 - t \geq 1 \implies f(2 - t) > 0 \text{ and } f(t - 1) = 0 \\
+    t > 1 \implies t - 1 > 0 \implies f(t - 1) > 0 \text{ and } f(2 - t) \geq 0.
+  \end{gather*}
+  We see the the denominator of $h$ is strictly positive for all $t \in
+  \mathbb{R}$. So $h: \mathbb{R} \to \mathbb{R}$ is well-defined. Also, $h$ is
+  smooth, since it is composed of smooth functions.
+
+  Now, when $t \geq 2$, we have $2 - t \leq 0$, and so $f(2 - t) = 0$. We have
+  that
+  \begin{equation*}
+    h(t) = 0 \text{ when } t \geq 2.
+  \end{equation*}
+  When $1 < t < 2$, by our above observation, we have
+  \begin{equation*}
+    h(t) \in (0, 1) \text{ for } 1 < t < 2.
+  \end{equation*}
+  When $t \leq 1$, we have $t - 1 \leq 0$, and $f(t - 1) = 0$. Thus
+  \begin{equation*}
+    h(t) = 1 \text{ for } t \leq 1.
+  \end{equation*}
+  Our desired result follows by taking $\chi(u) = h(\norm{u})$.
+\end{proof}
+
+We also need a special class of local parameterizations, given in the following
+lemma.
+
+\marginnote{
+\begin{mnote}
+  Again, there is no deep meaning behind choosing $3$ as the radius of the ball.
+  It simply is out of convenience, and we may as well relabel it as, say,
+  $\gamma$.
+\end{mnote}
+}
+\begin{lemma}[Special Parameterizations to Construct Partitions of Unity]\label{lemma:special_parameterizations_to_construct_partitions_of_unity}
+  Let $M$ be a $k$-dimensional submanifold of $\mathbb{R}^n$ and let $\phi : U
+  \to \mathbb{R}^n$ be any local parameterization of $M$, with image $V \cap M$.
+  Let $p \in V \cap M$. Then we can find a local parameterization $\psi : B_3(0)
+  \to \mathbb{R}^n$ of $M$, where
+  \begin{equation*}
+    B_3(0) = \left\{ u \in \mathbb{R}^k \mmid \norm{u} < 3 \right\},
+  \end{equation*}
+  such that $\psi(0) = p$ and $\psi(B_3(0)) \subseteq \phi(U) = V \cap M$.
+\end{lemma}
+
+\marginnote{
+\begin{strategy}
+The idea of the proof is simple: we know that $p$ has a pre-image, but that may
+not be $0$ and $U$ may not be big enough to contain $B_3(0)$. So we just need to
+translate $U$ and then scale it accordingly.
+\end{strategy}}
+\begin{proof}
+  Let $u_0 \in U$ be the unique preimage of $p \in V \cap M$, i.e. $\phi(u_0) =
+  p$. Since $U$ is open, $\exists \delta > 0$ such that $B_{\delta}(u_0) \subseteq
+  U$.
+
+  Let $L : \mathbb{R}^k \to \mathbb{R}^k$ be a translation map that `makes'
+  $u_0$ the new origin, i.e. $L(u) = u - u_0$. Let $U'$ be $L(U)$. We have that
+  \begin{itemize}
+    \item $L$ is a homeomorphism between $U$ and $U'$; and
+    \item it is clear that $L(B_{\delta}(u_0)) = B_{\delta}(0)$.
+  \end{itemize}
+  In particular, $\phi \circ L^{-1}$ is another parameterization of $M$.
+
+  Now let $F : \mathbb{R}^k \to \mathbb{R}^k$ be the map $F(u) =
+  \frac{3}{\delta} (u)$, and write $F(U') = U''$. Then
+   \begin{itemize}
+    \item $F$ is a homeomorphism between $U'$ and $U''$; and
+    \item again, $F(B_{\delta}(0)) = B_3(0)$.
+  \end{itemize}
+  We also have that $\phi \circ L^{-1} \circ F^{-1}$ is another parameterization
+  of $M$.
+
+  In particular,  we have that
+  \begin{equation*}
+    \psi = \phi \circ L^{-1} \circ F^{-1}
+  \end{equation*}
+  is a homeomorphism, and in particular, $\psi(B_3(0)) \subseteq \phi(U) = V
+  \cap M$. Also, we have that $\psi(0) = \phi(u_0) = p$.
+\end{proof}
+
+\begin{remark}
+  The proof of
+  \cref{lemma:special_parameterizations_to_construct_partitions_of_unity} shows
+  that we can always find a local parameterization $\phi$ of $M$ such that
+  $\phi(0) = p$, and we can find an open ball of any radius around the origin
+  such that we contain $p$ in a small open set. In effect, we are can construct
+  an open ball around $p$ of any radius induced by a parameterization.
+\end{remark}
+
+We also require the following definition in order to define a partition of
+unity.
+
+\begin{defn}[Support of a Function]\index{Support}\label{defn:support_of_a_function}
+  Let $f : V \to \mathbb{R}$. The \hlnoteb{support} of $f$ is defined as
+  \begin{equation*}
+    \supp f \coloneqq \overline{\left\{ x \in \mathbb{R}^n : f(x) \neq 0
+    \right\}},
+  \end{equation*}
+  where the bar denotes \hlnotea{closure}.
+\end{defn}
+
+\begin{note}
+  By the above definition, we know that $\mathbb{R}^n \setminus \supp f$ is an
+  \hlimpo{open subset of $\mathbb{R}^n$ where $f$ is identically zero}.
+\end{note}
+
+We are now ready to plough through constructing a partition of unity.
+
+\begin{thm}[Partition of Unity]\index{Partition of Unity}\label{thm:partition_of_unity}
+  Let $M$ be a compact $k$-dimensional submanifold of $\mathbb{R}^n$, and let
+  $\{ V_\alpha \cap M : \alpha \in A \}$ be a cover  of $M$ by the images of
+  local parameterizations $\phi_{\alpha}: U_{\alpha} \to \mathbb{R}^n$. Then
+  there exists a finite collection of smooth functions $\rho_j : M \to
+  \mathbb{R}$ for $j = 1, \ldots, m$ such that
+  \begin{enumerate}
+  \item for each $j$, the smooth function $\rho_j$ satisfies $0 \leq \rho_j(p)
+      \leq 1$ for all $p \in M$;
+    \item for each $j$, $\supp \rho_j \subseteq V_{\alpha(j)} \cap M$ for some
+      $\alpha(j) \in A$; and
+    \item $\sum_{j=1}^{m} \rho_j(p) = 1$ for all $p \in M$.
+  \end{enumerate}
+  Such a collection of smooth functions is called a \hlnoteb{partition of unity}
+  \hldefn{subordinate} \hlnoteb{to this cover}.
+\end{thm}
+
+\marginnote{It might be helpful to read \cref{note:why_partitions_of_unity}
+before ploughing ahead.}
+\begin{proof}
+  By \cref{lemma:special_parameterizations_to_construct_partitions_of_unity},
+  for each $p \in M$, we can find $\psi_p : B_3(0) \to W_p \cap M$ such
+  that
+  \begin{itemize}
+    \item $\psi_p(0) = p$;
+    \item $\psi_p(B_1(0)) = W_p \subseteq V_{\alpha} \cap M$ for some $\alpha
+      \in A$. \sidenote{Notice that we defined $W_p$ as the image of
+      $\psi_p(B_1(0))$ instead of $\psi_p(B_3(0))$. This is a \hlimpo{sneaky}
+      step that we can do to allow ourselves to choose the smallest open ball so
+      that it will be useful for us later.}
+  \end{itemize}
+  Then $\{ W_p : p \in M \}$ forms an open cover of $M$. Since $M$ is
+  \hlnotea{compact}, there exists $\{ W_{p, i} \}_{i=1}^{n} \subseteq \{ W_p : p
+  \in M \}$ that covers $M$. \sidenote{With this, we have completed the setup,
+  putting a finite cover of small open balls on $M$.}
+  \begin{figure*}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{images/constructing-partition-of-unity.png}
+    \caption{Constructing a partition of unity}
+    \label{fig:constructing_a_partition_of_unity}
+  \end{figure*}
+
+  Define $\zeta_i : M \to \mathbb{R}$ given by
+  \begin{equation*}
+    \zeta_i = \begin{cases}
+      \chi(\psi_i^{-1}(q)) & q \in \psi_i(B_3(0)) \\
+      0          & q \in M \setminus \psi_i(\overline{B_2(0)})
+    \end{cases},
+  \end{equation*}
+  where $\chi$ is a \hyperref[lemma:smooth_bump_functions]{smooth bump
+  function}. \sidenote{With this, we have assigned a weightage to each point on
+  the manifold given a parameterization.}
+  
+  Notice that each of the $\zeta_i$'s is smooth since $\chi \circ \psi^{-1}$ is
+  smooth for each $p \in \psi_i(B_3(0))$. Since $\supp \chi \subseteq
+  \overline{B_2(0)}$, $\zeta_i$ is identically zero on $M \setminus
+  \psi(\overline{B_2(0)})$. This implies that $\zeta_i$ is indeed smooth on $M$.
+  \sidenote{It is important to us that all the $\zeta_i$'s are continuous, since
+  we want to assign a weight to each parameterization in a smooth' manner. Its
+  importance will surface later on.}
+
+  Now define $\rho_i : M \to \mathbb{R}$ such that
+  \begin{equation*}
+    \rho_i(p) = \frac{\zeta_i(p)}{\sum_{j=1}^{n} \zeta_j(p)},
+  \end{equation*}
+  for any $p \in M$. Note that that the \hlnotea{denominator} of each $\rho_i$
+  is greater than $0$, since $p \in W_{q, j} = \psi_j(B_1(0))$ for some $j$, since the $W_{q,
+  j}$'s form a cover of $M$. \sidenote{This is where we use the \hlimpo{sneaky}
+  step. Notice that should we not have picked the $W_p$'s in such a way the
+  definition of the $\rho_i$'s would be in deep trouble.}
+
+  We shall now verify the conditions:
+  \begin{enumerate}
+    \item It is clear that $0 \leq \rho_i(p) \leq 1$, since we clearly have
+      \begin{equation*}
+        0 \leq \zeta_i(p) \leq \sum_{j=1}^{n} \zeta_i(p);
+      \end{equation*}
+    \item Notice that
+      \begin{equation*}
+        \rho_i(p) = 0 \iff \zeta_i(p) = 0 \iff p \in M \setminus
+        \overline{B_2(0)} \iff p \notin W_{q, i}
+      \end{equation*}
+      Thus $\supp \rho_i \subseteq W_{q, i} \cap M \subseteq V_{\alpha(i)} \cap
+      M$ for some $\alpha(i) \in A$; and
+    \item it is clear that
+      \begin{equation*}
+        \sum_{i=1}^{n} \rho_i(p) = \sum_{i=1}^{n}
+        \frac{\zeta_i(p)}{\sum_{j=1}^{n} \zeta_j(p)} = 1.
+      \end{equation*}
+  \end{enumerate}
+  Finally, we note that since $\rho_i$ is a composition of smooth functions,
+  $\rho_i$ itself is also smooth, which is what we need.
+\end{proof}
+
+\begin{remark}
+  By \citet{karigiannis2019}, the compactness assumption is actually not
+  necessary; we can construct partitions of unity even on noncompact
+  submanifolds on $\mathbb{R}^n$, but the process is considerably more
+  difficult.
+\end{remark}
+
+% section partitions_of_unity (end)
+
+% chapter lecture_26_mar_18th (end)
 
 \chapter{Lecture 27 Mar 20th [dirty]}%
 \label{chp:lecture_27_mar_20th}
