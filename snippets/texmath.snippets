@@ -54,6 +54,16 @@ snippet := "define" iA
 endsnippet
 
 context "math()"
+snippet +O "oplus" iA
+\oplus
+endsnippet
+
+context "math()"
+snippet xO "otimes" iA
+\otimes
+endsnippet
+
+context "math()"
 snippet quo "quotient" iA
 \\quotient{$1}{$2}$0
 endsnippet
@@ -240,13 +250,23 @@ snippet "([a-zA-Z])tilde" "tilde" riA
 endsnippet
 
 context "math()"
-snippet |> "mapsto" iA
+snippet |-> "mapsto" iA
 \mapsto
 endsnippet
 
 context "math()"
 snippet -> "to" iA
 \to
+endsnippet
+
+context "math()"
+snippet <|= "Normal subgroup of" iA
+\trianglelefteq
+endsnippet
+
+context "math()"
+snippet |>= "Normal subgroup to" iA
+\trianglerighteq
 endsnippet
 
 snippet sympy "sympy block " w

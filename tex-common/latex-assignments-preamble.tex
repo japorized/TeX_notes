@@ -1,5 +1,10 @@
 \usepackage{geometry}
-\geometry{letterpaper,lmargin=0.7in,rmargin=3in,bmargin=1in}
+\geometry{
+  letterpaper,
+  left=0.7in,
+  right=3in,
+  bottom=1in
+}
 \usepackage[parfill]{parskip}
 \usepackage{graphicx}
 
@@ -21,11 +26,14 @@
 \usepackage[fixed]{fontawesome5}
 \usepackage{pgf,tikz}
 \usepackage{tikz-cd}
+\usepackage{mathtools}
 \usepackage{pgfplots}
 \usepackage{fancyhdr}
 \usepackage{array}
 \usepackage{float}
 \usepackage{xcolor}
+\usepackage{silence}
+  \WarningFilter*{latex}{Marginpar on page \thepage\space moved}
 \usepackage[hyperref]{ntheorem}
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
