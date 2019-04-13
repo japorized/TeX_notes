@@ -6832,7 +6832,7 @@ Next, we define an integral over a manifold that has a single parameterization.
 
 % chapter lecture_27_mar_20th (end)
 
-\chapter{Lecture 28 Mar 22nd [dirty]}%
+\chapter{Lecture 28 Mar 22nd}%
 \label{chp:lecture_28_mar_22nd}
 % chapter lecture_28_mar_22nd
 
@@ -6848,39 +6848,20 @@ Let $w \in \Omega^k(M)$. We defined
   \int_{M} w = \int_{U} \phi^* w = \int_{\tilde{U}} \tilde{\phi}^* w .
 \end{equation*}
 We showed that this is well-defined iff $\phi, \tilde{\phi}$ determine the same
-orientation iff $\det (\D (\tilde{\phi}^{-1} \circ \phi)) > 0$.
+orientation, i.e. $\det (\D (\tilde{\phi}^{-1} \circ \phi)) > 0$.
 
 \newthought{Now let} $M$ be a compact $k$-dimensional submanifold of
 $\mathbb{R}^n$. Let $w \in \Omega^k(M)$, where $\supp(w)$ is a closed subset of
 $M$, which is compact, and so $\supp(w)$ is compact. We want to define
 \begin{equation*}
-  \mathbb{R} \ni \int_{M} w. 
+  \int_{M} w \in \mathbb{R}.
 \end{equation*}
 
 The idea is to use \hyperref[sec:partitions_of_unity_continued]{partitions of
 unity} to decompose $\omega$ into a finite sum of smooth $k$-forms, with each of them
 \hlnotea{compactly supported} in the image of the single parameterization.
 
-We handle these as we did last time and add some results. We need to show that
-this process is independent of our choices \sidenote{\hlwarn{elaborate}}.
-
-Let $\{ V_\alpha \cap M : \alpha \in A \}$ be a cover of $M$ given by images of
-local parameterizations $\phi_\alpha : U_\alpha \to \mathbb{R}^n$ of $M$, all of
-which are \hlnotea{compatible} with the given orientation on $M$.
-
-Let $\{ \rho_j : j = 1, \ldots, m \}$ be a partition of unity corresponding to
-the above cover, where $\rho_j : M \to \mathbb{R}$ is smooth,
-\begin{itemize}
-  \item $0 \leq \rho_j(p) \leq 1$ for each $p$, and
-  \item $\sum_{j=1}^{m} \rho_j = 1$,
-\end{itemize}
-where $\supp(\rho_j) \subseteq V_{\alpha(j)} \cap M$ for some $\alpha(j) \in A$.
-Let us denote $V_{\alpha(j)} = V_j$, and $\phi_{\alpha(j)} = \phi_j$. Note that
-\begin{equation*}
-  \bigcup_{j=1}^{m} V_j \supseteq M.
-\end{equation*}
-
-Observe that
+Given a partition of unity $\{\rho_i\}$, observe that
 \begin{equation*}
   \omega = 1 \cdot \omega = \left( \sum_{j=1}^{m} \rho_j \right) \omega =
   \sum_{j=1}^{m} (\rho_j \omega),
@@ -6889,47 +6870,73 @@ and
 \begin{equation*}
   \supp(\rho_j \omega) \subseteq \supp(\rho_j) \subseteq V_j \cap M.
 \end{equation*}
-Hence, we can consider $\rho_j \omega$ as a smooth $k$-form on $V_j$ and define
+Hence, we can consider $\rho_j \omega$ as a smooth $k$-form on $V_j$ and
+define \sidenote{This is sensible because $\rho_j \omega$ vanishes outside of
+$V_j \cap M$.}
 \begin{equation*}
-  \int_{M} \rho_j \omega := \int_{V_j \cap M} \rho_j \omega = \int_{U_j}
-  \phi_j^* (\rho_j \omega).
+  \int_{M} \rho_j \omega := \int_{V_j \cap M} \rho_j \omega = \int_{U_j} \phi_j^* (\rho_j \omega).
 \end{equation*}
-This is sensible because $\rho_j \omega$ vanishes outside of $V_j \cap M$.
 
-Thus we define
-\begin{equation*}
-  \int_{M} \omega = \int_{M} \left( \sum_{j=1}^{m} \rho_j \omega \right) :=
-  \sum_{j=1}^{m} \int_{M} \rho_j \omega \in \mathbb{R}. 
-\end{equation*}
+\begin{defn}[Integral over Manifolds]\index{Integral over Manifolds}\label{defn:integral_over_manifolds}
+  Let $\{ V_\alpha \cap M : \alpha \in A \}$ be a cover of a compact manifold
+  $M$ given by images of local parameterizations $\phi_\alpha : U_\alpha \to
+  \mathbb{R}^n$ of $M$, all of which are \hlnotea{compatible} with the given
+  orientation on $M$.  Let $\{ \rho_j : j = 1, \ldots, m \}$ be a
+  \hyperref[thm:partition_of_unity]{partition of unity} subordinate to the above
+  cover. Let us denote $V_{\alpha(j)} = V_j$, and $\phi_{\alpha(j)} = \phi_j$.
+  Note that
+  \begin{equation*}
+    \bigcup_{j=1}^{m} V_j \supseteq M.
+  \end{equation*}
+  We define an integration over forms on manifolds as
+  \begin{equation*}
+    \int_{M} \omega = \int_{M} \left( \sum_{j=1}^{m} \rho_j \omega \right) :=
+    \sum_{j=1}^{m} \int_{M} \rho_j \omega = \int_{V_j \cap M} \rho_j \omega =
+    \int_{U_j} \phi_j^* (\rho_j \omega).
+  \end{equation*}
+\end{defn}
 
 Now we need to show that the result is independent of the choice of the
-parameterization.
+parameterization and partition of unity.
 
-Let $\{ W_\beta \cap M : \beta \in B \}$ be a cover of $M$ by images of local
-parameterizations $\psi_\beta$ of $M$ compatible with the given orientation.
+\begin{propo}[Independence of the Integral from the Choice of Parameterization and Partition of Unity]\label{propo:independence_of_the_integral_from_the_choice_of_parameterization_and_partition_of_unity}
+  Given a different set of parameterization $\{ \hat{\phi}_\alpha \}$ that
+  covers $M$, and a different partition of unity $\{ \hat{\rho}_r \}$ 
+  subordinate to this cover, we have that
+  \begin{equation*}
+    \sum_{i=1}^{m} \int_{M} \rho_i \omega = \sum_{i=1}^{r} \int_{M} \hat{\rho}_r
+    \omega.
+  \end{equation*}
+\end{propo}
 
-Let $\{ \sigma_i : i = 1, \ldots, l \}$ be a partition of unity for this cover,
-with the usual properties \sidenote{\hlwarn{needs expansion, but we know what
-this is.}}.
+\begin{proof}
+  Let $\{ W_\beta \cap M : \beta \in B \}$ be a cover of $M$ by images of local
+  parameterizations $\psi_\beta$ of $M$ compatible with the given orientation.
+  Let $\{ \sigma_i : i = 1, \ldots, l \}$ be a partition of unity for this
+  cover, with the \hyperref[thm:partition_of_unity]{usual properties}.
+  \marginnote{Note that
+  \begin{equation*}
+    \supp(\rho_j \omega) \subseteq V_j \cap M,
+  \end{equation*}
+  and
+  \begin{equation*}
+    \supp(\sigma_i \rho_j \omega) \subseteq W_i \cap V_j \cap M.
+  \end{equation*}
+  }
 
-\marginnote{Note that
-\begin{equation*}
-  \supp(\rho_j \omega) \subseteq V_j \cap M,
-\end{equation*}
-and
-\begin{equation*}
-  \supp(\sigma_i \rho_j \omega) \subseteq W_i \cap V_j \cap M.
-\end{equation*}
-}
-By our first choice, we have
-\begin{align*}
-  \int_{M} \omega &= \sum_{j=1}^{m} \int_{M} \rho_j \omega = \sum_{j=1}^{m}
-  \int_{M} \left( \sum_{i=1}^{l} \sigma_i \right) \rho_j \omega \\
-  & = \sum_{j=1}^{m} \sum_{i=1}^{l} \int_{M} \sigma_i \rho_j \omega  =
-  \sum_{i=1}^{l} \sum_{j=1}^{m} \int_{M} \rho_j \sigma_i \omega \\
-  &= \sum_{i=1}^{l} \int_{M} \left( \sum_{j=1}^{m} \rho_j \right) \sigma_i \omega = \sum_{i=1}^{l} \int_{M} \sigma_i \omega = \int_{M} \omega,
-\end{align*}
-where the final equality is by our second choice.
+  By our first choice, we have
+  \begin{align*}
+    \int_{M} \omega &= \sum_{j=1}^{m} \int_{M} \rho_j \omega = \sum_{j=1}^{m}
+    \int_{M} \left( \sum_{i=1}^{l} \sigma_i \right) \rho_j \omega \\
+    & = \sum_{j=1}^{m} \sum_{i=1}^{l} \int_{M} \sigma_i \rho_j \omega  =
+    \sum_{i=1}^{l} \sum_{j=1}^{m} \int_{M} \rho_j \sigma_i \omega \\
+    &= \sum_{i=1}^{l} \int_{M} \left( \sum_{j=1}^{m} \rho_j \right) \sigma_i
+    \omega = \sum_{i=1}^{l} \int_{M} \sigma_i \omega = \int_{M} \omega,
+  \end{align*}
+  where the final equality is by our second choice.
+\end{proof}
+
+We shall now provide a basic version of Stokes' Theorem.
 
 \begin{thm}[Stokes' Theorem (First Version)]\index{Stokes' Theorem}\label{thm:stokes_theorem_first}
   Suppose $M$ is a compact and oriented $k$-dimensional submanifold of
@@ -6943,8 +6950,8 @@ where the final equality is by our second choice.
 We will prove a result more general than the above.
 
 More generally, if $M$ is a $k$-dimensional, compact, and oriented submanifold,
-\hlnotea{with boundary} (defined later), then $\partial M$ (the boundary) is a
-compact, oriented $(k - 1)$-dimensional submanifold, such that
+\hlnotea{with boundary}, then $\partial M$ (the boundary) is a compact, oriented
+$(k - 1)$-dimensional submanifold, such that
 \begin{equation*}
   \int_{M} \partial M = \int_{\partial M} \omega. 
 \end{equation*}
@@ -7041,8 +7048,9 @@ compact, oriented $(k - 1)$-dimensional submanifold, such that
   \end{enumerate}
 \end{remark}
 
-\hlbnoted{Claim} $(\D f)_p$ is well-defined (i.e. indeppendent of the choice of
-$\tilde{f}$).
+\noindent
+\hlbnoted{Claim} $(\D f)_p$ is well-defined, i.e. independent of the choice of
+$\tilde{f}$.
 
 \begin{defn}[Submanifold with Boundary]\index{Submanifold with Boundary}\label{defn:submanifold_with_boundary}
   Let $M \subseteq \mathbb{R}^n$. We say that $M$ is a \hlnoteb{$k$-dimensional
