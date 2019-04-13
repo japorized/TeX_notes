@@ -18,7 +18,6 @@
 \DeclareMathOperator{\std}{std}
 \DeclareMathOperator{\nullity}{nullity}
 \DeclareMathOperator{\rank}{rank}
-\DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\dist}{dist}
 \DeclareMathOperator{\Der}{Der}
 \DeclareMathOperator{\D}{D}
@@ -6037,7 +6036,7 @@ parameterization provides a preferred orientation.
   \dif{\tilde{u}^k}) = \det (\D H) \dif{u^1} \land \hdots \land \dif{u^k}$.
   Follow that, we have
   \begin{equation*}
-    (f \irc \phi) \dif{u^1} \land \hdots \land \dif{u^k} = (\tilde{f} \circ
+    (f \circ \phi) \dif{u^1} \land \hdots \land \dif{u^k} = (\tilde{f} \circ
     \phi) \det(\D H) \dif{u^1} \land \hdots \land \dif{u^k}.
   \end{equation*}
   Since $f, \tilde{f} > 0$, it follows that we must have $\det(\D H) > 0$.
@@ -6134,6 +6133,7 @@ must not have been orientable.}
     transition maps $\phi_{\beta\alpha}$ satisfy $\det(\D \phi_{\beta\alpha}) >
     0$, then $M$ is oriented.
   \end{quotebox}
+  See \cref{propo:compatible_local_parameterizations_implies_orientability}.
 \end{note}
 
 \begin{eg}[Non-orientability of the M\"{o}bius strip]\label{eg:mobius_strip_is_non_orientable}
@@ -6175,7 +6175,7 @@ must not have been orientable.}
         -- (-1, 1, 0);
       \draw[dashed] (1, -1, 0) arc(0:180:1 and 0.5);
       \draw[color=red,opacity=0.8,line width=0.5mm] (1, 1, 0) -- (1, -1, 0);
-      \node[fill,circle,inner sep=1pt,label={315:{$R$}}] at (1, 0, 0);
+      \node[fill,circle,inner sep=1pt,label={315:{$R$}}] at (1, 0, 0) {};
       \draw[dashed] (0, 1, 0) node[left] {$L$} -- (1, 1, 0);
       \draw[dashed] (0, -1, 0) node[left] {$-L$} -- (1, -1, 0);
     \end{tikzpicture}
@@ -6440,9 +6440,9 @@ and especially so when we finally define a partition of unity.
   \begin{table}[ht]
     \centering
     \begin{tabular}{l l l}
-      \chi(u) = 1 & & \norm{u} \leq 1 \\
-      \chi(u) \in (0, 1) & & 1 < \norm{u} < 2 \\
-      \chi(u) = 0 & & \norm{u} \geq 2.
+      $\chi(u) = 1$ & & $\norm{u} \leq 1$ \\
+      $\chi(u) \in (0, 1)$ & & $1 < \norm{u} < 2$ \\
+      $\chi(u) = 0$ & & $\norm{u} \geq 2$.
     \end{tabular}
   \end{table}
 \end{lemma}
@@ -6669,7 +6669,7 @@ before ploughing ahead.}
 
 % chapter lecture_26_mar_18th (end)
 
-\chapter{Lecture 27 Mar 20th [dirty]}%
+\chapter{Lecture 27 Mar 20th}%
 \label{chp:lecture_27_mar_20th}
 % chapter lecture_27_mar_20th
 
@@ -6677,7 +6677,7 @@ before ploughing ahead.}
 \label{sec:partitions_of_unity_continued}
 % section partitions_of_unity_continued
 
-\begin{propo}
+\begin{propo}[Compatible Local Parameterizations Implies Orientability]\label{propo:compatible_local_parameterizations_implies_orientability}
   Let $M$ be a $k$-dimemensional submanifold of $\mathbb{R}^n$ and suppose that
   there exists a cover of $M$ by local parameterizations such that all the
   transition maps $\phi_{\beta \alpha}$ satisfy $\det (\D \phi_{ \beta \alpha }) >
@@ -6688,14 +6688,147 @@ before ploughing ahead.}
 
 \begin{note}
   The above result is true in general when used with a general partition of
-  unity.
+  unity. We shall, however, only prove for when $M$ is compact.
 \end{note}
 
+\marginnote{
+\begin{strategy}
+  We need to construct an a smooth $k$-form $\mu$ on $M$, and show that it is
+  non-zero. We do so by construction.
+\end{strategy}}
 \begin{proof}
-  
+  Let $V_{\alpha(1)}, \ldots, V_{\alpha(m)}$ be the finite open cover of $M$
+  from \cref{thm:partition_of_unity}, so that $\supp \rho_j \subseteq
+  V_{\alpha(j)} \cap M$. Let $\nu_j$ be an orientation on $V_{\alpha(j)} \cap M$
+  induced by the parameterization $\phi_{\alpha(j)}$, so that we have
+  \begin{equation*}
+    \phi_{\alpha(j)}^* \nu_j = \dif{u^1} \land \hdots \land \dif{u^k}.
+  \end{equation*}
+  We now define a $k$-form $\mu$ on $M$ by
+  \begin{equation*}
+    \mu = \sum_{j=1}^{m} \rho_j \nu_j.
+  \end{equation*}
+  It remains to show that $\mu$ is indeed an
+  \hyperref[defn:orientable_submanifolds]{orientation}, i.e. it is a
+  non-vanishing smooth $k$-form on $M$.
+
+  \sidenote{There is quite some work to do here.
+  \begin{itemize}
+    \item We need to ensure that all of the parameterizations remain compatible
+      with $\mu$.
+    \item We want $\mu_p \neq 0$ for any $p \in M$.
+  \end{itemize}
+  As things look like now, one may wonder if the $\rho_j \nu_j$'s may cancel
+  each other out. It turns out that, indirectly so by
+  \cref{thm:partition_of_unity}, around any point, the relevant $k$-forms all
+  turn out to be positive.
+  }By our proof in \cref{thm:partition_of_unity}, $\exists j_0$ such that
+  $\rho_{j_0}(p) > 0$. Let $\nu_{j_0}$ be the orientation on $V_{\alpha(j_0)}
+  \cap M$ associated to $\phi_{\alpha(j_0)}$. Let $\{(e_1)_p, \ldots, (e_k)_p\}$ 
+  be an oriented basis for $T_p M$ with respect to $\nu_{j_0}$, i.e.
+  \begin{equation*}
+    (\nu_{j_0})((e_1)_p, \ldots, (e_k)_p) > 0.
+  \end{equation*}
+  Let $u = \phi_{\alpha(j_0)}^{-1}(p)$ and $(e_i)_p =
+  (\dif{\phi_{\alpha(j_0)}})_u (w_i)_u$ for some $(w_i)_u \in T_u \mathbb{R}^k$.
+
+  Let us observe that
+  \begin{align*}
+    (\nu_{j_0})_p ((e_1)_p, \ldots, (e_k)_p)
+    &= (\nu_{j_0})_p ((\dif{\phi_{\alpha(j_0)}})_u (w_1)_u, \ldots,
+      (\dif{\phi_{\alpha(j_0)}})_u (w_k)_u) \\
+    &= ((\dif{\phi_{\alpha(j_0)}})_u^* \nu_{j_0})((w_1)_u, \ldots, (w_k)_u) \\
+    &= 
+  \end{align*}
+  \hlwarn{Proof left as to-be-finished, cause I just noticed what the next step
+  was and realized that that really came out of nowhere.} 
 \end{proof}
 
 % section partitions_of_unity_continued (end)
+
+\section{Integration of Forms}%
+\label{sec:integration_of_forms}
+% section integration_of_forms
+
+Let us first define integration for a more `atomic' case.
+
+\begin{defn}[Integration of Forms on Euclidean Space]\index{Integration of Forms on Euclidean Space}\label{defn:integration_of_forms_on_r_k_} 
+  Let $U \subseteq \mathbb{R}^k$ be an open set, and $\eta \in \Omega^k(U)$,
+  i.e.
+  \begin{equation*}
+    \eta = h \dif{u^1} \land \hdots \land \dif{u^k}
+  \end{equation*}
+  for some $h \in C^\infty(U)$. Note that $\supp \eta = \supp h$, since
+  $\dif{u^1} \land \hdots \land \dif{u^k} \neq 0$. \sidenote{it is not
+  interesting otherwise.}
+
+  Suppose $\supp \eta$ is a \hlnotea{compact} subset of $\mathbb{R}^k$. The
+  \hlnoteb{integral of $\eta$} over $U$, denoted $\int_{U} \eta$, is defined as
+  \begin{equation*}
+    \int_{U} \eta \coloneqq \int_{U} h \dif{u^1} \land \hdots \land \dif{u^k} =
+    \int_{U} h \dif{u^1} \hdots \dif{u^k},
+  \end{equation*}
+  where the final integral is the usual integral of a compactly-supported $h \in
+  C^\infty(U)$ over an open set $U \subseteq \mathbb{R}^k$.
+\end{defn}
+
+Next, we define an integral over a manifold that has a single parameterization.
+
+\begin{note}\label{note:well_definedness_of_integrability_on_manifold}
+  If we define integration on manifolds using exactly
+  \cref{defn:integration_of_forms_on_r_k_} by simply bringing what we have to do
+  on the manifold onto the parameterization, we quickly run into the following
+  problem: we may reparameterize $M$ simply by switching one of the basis to its
+  negative, i.e. taking
+  \begin{equation*}
+    \{ v^1 = - u^1, \, v^2 = u^2, \, \ldots, \, v^k = u^k \},
+  \end{equation*}
+  then we would have
+  \begin{equation*}
+    \int_{U} \phi^* \eta = \int_{U} h \dif{v^1} \dif{v^2} \hdots \dif{v^k} =
+    - \int_{U} h \dif{u^1} \dif{u^2} \hdots \dif{u^k} = - \int_{U} \phi^* \eta,
+  \end{equation*}
+  where $\eta$ is a $k$-form on $M$, $\phi$ is the single parameterization. Then
+  this definition of an integration would not be well-defined. This is where the
+  orientation of the manifold comes in. With an orientation on $M$, we will now
+  have to choose parameterizations that are compatible with the orientation.
+  This also takes care of weird reparameterizations (cf.
+  \cref{propo:non_orientability_checker}).
+\end{note}
+
+\begin{defn}[Integral over Manifolds with a Single Parameterization]\index{Integral over Manifolds}\label{defn:integral_over_manifolds_with_a_single_parameterization}
+  Let $M$ be a $k$-dimensional submanifold such that $M = \phi(U)$ is the image
+  of a single local parameterization $\phi : U \to \mathbb{R}^n$. Let $\mu$ be
+  the orientation of $M$ as determined by $\phi$, i.e.
+  \begin{equation*}
+    \phi^* \mu = \dif{u^1} \land \hdots \land \dif{u^k}.
+  \end{equation*}
+  Let $\omega \in \Omega^k(M)$. Then $\phi^* \omega$ is a smooth $k$-form on
+  $U$, and suppose that $\supp \omega$ is a compact subset of $M$.
+  \sidenote{Since $\phi$ is a homeomorphism, it follows that $\supp \omega =
+  \phi (\supp \phi^* \omega)$, and so $\omega$ is compact if and only if $\supp
+  h$, where $\phi^* \omega = h \dif{u^1} \land \hdots \land \dif{u^k}$, is a
+  compact subset of $\mathbb{R}^k$.} We define the \hlnoteb{integral of
+  $\omega$} over $M = \phi(U)$ as
+  \begin{equation*}
+    \int_{\phi(U)} \omega = \int_{U} \phi^* \omega,
+  \end{equation*}
+  where the RHS uses the \cref{defn:integration_of_forms_on_r_k_}.
+\end{defn}
+
+\begin{crly}[Well-Definedness of the Integral over Manifolds with a Single Parameterization]\label{crly:well_definedness_of_the_integral_over_manifolds_with_a_single_parameterization}
+  Let $M$ be a $k$-dimensional submanifold such that $M = \phi(U)$, where $\phi
+  : U \to \mathbb{R}^n$ is the single local parameterzation of $M$. Let $\omega
+  \in \Omega^k(M)$. Then $\int_{M} \omega$ is well-defined, i.e. it is
+  independent of reparameterizations of $M$, if we restrict to
+  reparameterizations which all induce the same orientation on $M$.
+\end{crly}
+
+\begin{proof}
+  This is just \cref{note:well_definedness_of_integrability_on_manifold}.
+\end{proof}
+
+% section integration_of_forms (end)
 
 % chapter lecture_27_mar_20th (end)
 
