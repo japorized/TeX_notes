@@ -65,6 +65,114 @@ of the course. At this point, the course may as well be renamed Exterior Calculu
 
 % chapter preface (end)
 
+\chapter*{Introduction}%
+\addcontentsline{toc}{chapter}{Introduction}
+\markboth{Introduction}{}
+\label{chp:introduction}
+% chapter introduction
+
+This introductory chapter is almost entirely taken from \citet{flanders1989}, of
+which I appreciate because it does not introduce exterior differential forms
+using terminology common to Physics, such as curl and flux. As a student in
+Mathematics and have not taken any course in Physics to make sense of those
+terminologies, this introduction has been valuable, and I have decided to add it
+to my notes for ease of reference.
+
+\newthought{The mathematical objects} of which we shall study in this course are
+called \hlnotea{exterior differential forms}, and they are objects which occur
+when studying integration. For instance,
+\begin{itemize}
+  \item a line integral
+    \begin{equation*}
+      \int A \dif{x} + B \dif{y} + C \dif{z}
+    \end{equation*}
+    brings us to a $1$-form
+    \begin{equation*}
+      \omega = A \dif{x} + B \dif{y} + C \dif{z};
+    \end{equation*}
+  \item a surface integral
+    \begin{equation*}
+      \iint P \dif{y} \dif{z} + Q \dif{z} \dif{x} + R \dif{x} \dif{y}
+    \end{equation*}
+    leads us to a $2$-form
+    \begin{equation}\label{eq:intro_2_form}
+      \alpha = P \dif{y} \dif{z} + Q \dif{z} \dif{x} + R \dif{x} \dif{y};
+    \end{equation}
+    and
+  \item a volume integral
+    \begin{equation*}
+      \iiint H \dif{x} \dif{y} \dif{z}
+    \end{equation*}
+    leads to a $3$-form
+    \begin{equation*}
+      \lambda = H \dif{x} \dif{y} \dif{z}.
+    \end{equation*}
+\end{itemize}
+These are common examples of differential forms in $\mathbb{R}^3$. In general,
+in an $n$-dimensional space, we call the expression in the $r$-fold integral,
+i.e. $\underbrace{\int \hdots \int}_{r \text{ times}}$, an  \hlnotea{$r$-form in
+$n$-variables}.
+
+In \cref{eq:intro_2_form}, notice the absence of $\dif{z} \dif{y},\, \dif{x}
+\dif{z}$ and $\dif{y} \dif{x}$, which suggests \hlnotea{symmetry} or
+\hlnotea{skew-symmetry}. The further absense of the terms $\dif{x} \dif{x},
+\ldots$ further suggests that the latter is more likely.
+
+In this course, we shall construct a calculus of differential forms which houses
+certain inner consistency properties, one of which is the rule for changing
+variables in a multiple integral, which is common in multivariable calculus. For
+us, we shall define \hlnotea{integrals} as \hlnotea{oriented} integrals, and so
+we will never need to take absolute values of \hlnotea{Jacobians}.
+
+\newthought{Consider}
+\begin{equation*}
+  \iint A(x, y) \dif{x} \dif{y}
+\end{equation*}
+with the change of variable
+\begin{equation*}
+  x = x(u, v) \text{ and } y = y(u, v).
+\end{equation*}
+For multivariable calculus, we know that
+\begin{equation*}
+  \iint A(x, y) \dif{x} \dif{y} = \iint A \big( x(u, v), y(u, v) \big)
+  \frac{\partial(x, y)}{\partial (u, v)} \dif{u} \dif{v},
+\end{equation*}
+which leads us to write
+\begin{equation*}
+  \dif{x} \dif{y} = \frac{\partial(x, y)}{\partial(u, v)} \dif{u} \dif{v} =
+  \abs{\begin{smallmatrix}
+      \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\
+      \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v}
+  \end{smallmatrix}} \dif{u} \dif{v}.
+\end{equation*}
+Notice that if we set $y = x$, the determinant has equal rows, and so it
+evaluates to $0$. If we interchange $x$ and $y$, the sign of the determinant
+changes. This motivates the rules
+\begin{equation*}
+  \dif{x} \dif{x} = 0 \text{ and } \dif{y} \dif{x} = - \dif{x} \dif{y}.
+\end{equation*}
+
+In other words, we construct rules for exterior differential forms so as to
+capture these properties that the Jacobian introduces.
+
+\newthought{We shall} associate with each $r$-form $\omega$ and $(r + 1)$-form
+$\dif{\omega}$, called the \hlnotea{exterior derivative of $\omega$}. Its
+definition will be given in such a way that it validates the general Stokes'
+formula
+\begin{equation*}
+  \int_{\partial M} \omega = \int_{M} \dif{\omega},
+\end{equation*}
+where $M$ will be introduced as an \hlnotea{oriented $(r + 1)$-dimensional
+manifold} and $\partial M$ is its \hlnotea{boundary}.
+
+A basic property of the exterior derivative is known as the
+\hlnotea{Poincar\'{e} Lemma}:
+\begin{equation*}
+  \dif{(\dif{\omega})} = 0.
+\end{equation*}
+
+% chapter introduction (end)
+
 \tuftepart{Exterior Differential Calculus}\label{part:exterior_differential_calculus}
 
 \chapter{Lecture 1 Jan 07th}%
@@ -5501,8 +5609,8 @@ We have therefore proven the following theorem:
 \label{sec:smooth_vector_fields_and_forms_on_a_submanifold}
 % section smooth_vector_fields_and_forms_on_a_submanifold
 
-\marginnote{One should notice how similar these parts is to
-\cref{part:the_vector_space_r_n_as_a_smooth_manifold}}.
+\marginnote{One should notice how similar these parts are to
+\cref{part:the_vector_space_r_n_as_a_smooth_manifold}.}
 
 \begin{defn}[Cotangent Space on a Submanifold]\index{Cotangent Space}\label{defn:cotangent_space_on_a_submanifold}
   Let $p \in M$. Let $T^*_p M = (T_p M)^*$ be the
@@ -6841,7 +6949,7 @@ Next, we define an integral over a manifold that has a single parameterization.
 % section integration_of_forms_continued
 
 From last time, let $M = \phi(U) = \tilde{\phi}(\tilde{U})$ be a parameterized
-$k$-dimensional submanfold.
+$k$-dimensional submanifold.
 
 Let $w \in \Omega^k(M)$. We defined
 \begin{equation*}
@@ -6858,19 +6966,28 @@ $M$, which is compact, and so $\supp(w)$ is compact. We want to define
 \end{equation*}
 
 The idea is to use \hyperref[sec:partitions_of_unity_continued]{partitions of
-unity} to decompose $\omega$ into a finite sum of smooth $k$-forms, with each of them
-\hlnotea{compactly supported} in the image of the single parameterization.
+unity} to \hlbnotec{decompose} $\omega$ into a finite sum of smooth $k$-forms,
+with each of them \hlnotea{compactly supported} in the image of the single
+parameterization.
 
 Given a partition of unity $\{\rho_i\}$, observe that
 \begin{equation*}
   \omega = 1 \cdot \omega = \left( \sum_{j=1}^{m} \rho_j \right) \omega =
   \sum_{j=1}^{m} (\rho_j \omega),
 \end{equation*}
-and
+\sidenote{Note that the $\rho_j$'s here act as scalars to the $k$-form. Also
+note that $\omega : M \to \bigcup_{q \in M} \Lambda^k(T_q^* M)$ (cf.
+\cref{defn:forms_on_submanifolds}), and
 \begin{equation*}
-  \supp(\rho_j \omega) \subseteq \supp(\rho_j) \subseteq V_j \cap M.
+  \omega_p : \underbrace{T_q M \times \hdots \times T_q M}_{k \text{ times}} \to
+  \mathbb{R}.
 \end{equation*}
-Hence, we can consider $\rho_j \omega$ as a smooth $k$-form on $V_j$ and
+} and
+\begin{equation}\label{eq:support_of_rho_j_omega}
+  \supp(\rho_j \omega) \overset{(*)}{\subseteq} \supp(\rho_j) \subseteq V_j \cap M.
+\end{equation}
+\sidenote{$(*)$ is true because $\supp (\rho_j \omega) = \supp (\rho_j) \cap \supp
+(\omega)$.}Hence, we can consider $\rho_j \omega$ as a smooth $k$-form on $V_j$ and
 define \sidenote{This is sensible because $\rho_j \omega$ vanishes outside of
 $V_j \cap M$.}
 \begin{equation*}
@@ -6914,7 +7031,7 @@ parameterization and partition of unity.
   parameterizations $\psi_\beta$ of $M$ compatible with the given orientation.
   Let $\{ \sigma_i : i = 1, \ldots, l \}$ be a partition of unity for this
   cover, with the \hyperref[thm:partition_of_unity]{usual properties}.
-  \marginnote{Note that
+  \marginnote{As shown in \cref{eq:support_of_rho_j_omega}, we have
   \begin{equation*}
     \supp(\rho_j \omega) \subseteq V_j \cap M,
   \end{equation*}
@@ -6992,23 +7109,25 @@ $(k - 1)$-dimensional submanifold, such that
 \end{note}
 
 \begin{lemma}[Characterization of Open Sets in a Half Space]\label{lemma:characterization_of_open_sets_in_a_half_space}
-  Let $A, B \subseteq \mathbb{H}^n$. If $A \subseteq \mathbb{R}^n$, then $A$ is
-  open in $\mathbb{H}^n$. Suppose $B \cap \partial \mathbb{H}^n = \emptyset$. If
-  $B$ is open in $\mathbb{H}^n$, then $B$ is open in $\mathbb{R}^n$.
+  Let $A, B \subseteq \mathbb{H}^n$. If $A \subseteq \mathbb{R}^n$ is open, then
+  $A$ is open in $\mathbb{H}^n$. Suppose $B \cap \partial \mathbb{H}^n =
+  \emptyset$. If $B$ is open in $\mathbb{H}^n$, then $B$ is open in
+  $\mathbb{R}^n$.
 \end{lemma}
 
 \begin{proof}
   We have that $A$ is open in $\mathbb{R}^n$ and contained in $\mathbb{H}^n$.
-  Then we simply need to take $U = A \subseteq \mathbb{R}^n$. Thus $A$ is open
-  in $\mathbb{H}^n$.
+  Then we simply need to take $U = A \subseteq \mathbb{R}^n$. Thus $A = A \cap
+  \mathbb{H}^n$ is open in $\mathbb{H}^n$.
 
-  Suppose $B \cap \partial \mathbb{H}^n = \emptyset$. Let $B$ be open in
-  $\mathbb{H}^n$. Then $\exists U \subseteq \mathbb{R}^n$ open such that $B = U
+  Suppose $B \cap \partial \mathbb{H}^n = \emptyset$, and let $B$ be open in
+  $\mathbb{H}^n$. By definition, $\exists U \subseteq \mathbb{R}^n$ open such that $B = U
   \cap \mathbb{H}^n$. Let $W = \mathbb{H}^n \setminus \partial \mathbb{H}^n =
   \left\{ x \in \mathbb{R}^n : x^1 < 0 \right\}$,
-  which is open in $\mathbb{R}^n$. It follows that $B \subseteq W$ and so $B = U
-  \cap W$, which is an intersection of open sets in $\mathbb{R}^n$. Thus $B$ is
-  open in $\mathbb{R}^n$.
+  which is open in $\mathbb{R}^n$. Then $B \cap \partial \mathbb{H}^n =
+  \emptyset \implies B \subseteq W$ and so $B = U \cap W$, which is an
+  intersection of open sets in $\mathbb{R}^n$. Thus $B$ is open in
+  $\mathbb{R}^n$.
 \end{proof}
 
 \begin{defn}[Interior point in the Half Space]\index{Interior point in the Half Space}\label{defn:interior_point_in_the_half_space}
@@ -7070,7 +7189,7 @@ $\tilde{f}$.
 
 % chapter lecture_28_mar_22nd (end)
 
-\chapter{Lecture 29 Mar 25th [dirty]}%
+\chapter{Lecture 29 Mar 25th}%
 \label{chp:lecture_29_mar_25th}
 % chapter lecture_29_mar_25th
 
@@ -7078,9 +7197,8 @@ $\tilde{f}$.
 \label{sec:submanifold_with_boundary_continued}
 % section submanifold_with_boundary_continued
 
-We defined, in the last lecture, what a submanifold with boundary is. We saw
-that a $k$-dimensional submanifold with boundary is a collection of overlapping
-pieces, each homeomorphic to an open set in $\mathbb{H}^k$.
+We saw that a $k$-dimensional submanifold with boundary is a collection of
+\hlbnotec{overlapping pieces}, each homeomorphic to an open set in $\mathbb{H}^k$.
 
 Suppose $\phi_\alpha(A_\alpha) \cap \phi_b(A_\beta) \neq \emptyset$. We define
 the transition map
@@ -7117,10 +7235,11 @@ transition maps are diffeomorphisms, and the same proof can be applied.
 
 \begin{remark}
   If all the $A_\alpha$'s are actually open in $\mathbb{R}^k$, then $M$ is a
-  $k$-dimensional submanifold in the previous sense.
+  $k$-dimensional submanifold in the \hyperref[defn:submanifolds]{previous
+  sense}.
 \end{remark}
 
-\newthought{So we defined} what a submanifold with boundary is, but what is a
+\newthought{So we defined} what a submanifold with boundary is, but what exactly is a
 boundary?
 
 \begin{defn}[Boundary Point on a Submanifold]\index{Boundary Point on a Submanifold}\label{defn:boundary_point_on_a_submanifold}
@@ -7132,7 +7251,7 @@ boundary?
 \end{defn}
 
 Of course, we can ask ourselves if the above definition is well-defined. That
-is, can there but a $\phi_\beta$ such that $\phi_\beta^{-1}(p)$ is not on
+is, can there be a $\phi_\beta$ such that $\phi_\beta^{-1}(p)$ is not on
 $\partial A_\beta$?
 
 \begin{propo}[Well-definedness of the Boundary of a Manifold]\label{propo:well_definedness_of_the_boundary_of_a_manifold}
@@ -7156,6 +7275,19 @@ $\partial A_\beta$?
   interior point of $A_\beta$, there exists an open set $W \subseteq
   \mathbb{R}^k$ such that $u_\beta \in W$ in the domain of $\phi_{\alpha\beta}$.
   Then $W \cap \partial \mathbb{H}^k = \emptyset$.
+  \marginnote{In all honesty, I do not like this proof, because $\phi_\alpha$ has
+  a fixed domain and that is a subset of $\mathbb{H}^k$, and so the diffeomorphism
+  should not be able to map to some set that is outside of $\mathbb{H}^k$ in the
+  first place. Also, after showing that $\phi_{\alpha\beta}(\tilde{W}) \subseteq
+  \mathbb{R}^k$ is open, should it not follow by
+  \cref{lemma:characterization_of_open_sets_in_a_half_space} that
+  $\phi_{\alpha\beta}$ is open in $\mathbb{H}^k$? It can sit on $\mathbb{H}^k$ and
+  include the boundary and remain an open set. Unless if I am making a huge
+  confusion over a subtle point that is going on here, I don't think I can agree
+  with this proof.
+
+  That said, if we may assume the \hlnotea{invariance of the domain}, then there
+  is a more mathematically intuitive proof to this proposition.}
 
   Restrict the diffeomorphism $\phi_{\alpha\beta}$ to $W$, and so $(\D
   \phi_{\alpha\beta})_{u_\beta}$ is invertble. By the inverse function theorem,
@@ -7185,21 +7317,29 @@ $\partial A_\beta$?
 
 \begin{propo}[Dimension of the Boundary of a Submanifold]\label{propo:dimension_of_the_boundary_of_a_submanifold}
   Let $M$ be a $k$-dimensional submanifold with boundary. Suppose $\partial M
-  \neq \emptyset$. Then $\partial M$ is a $(k - 1)$-dimensional submanifold with
-  boundary, i.e. $\partial(\partial M) = \emptyset$.
+  \neq \emptyset$. Then $\partial M$ is a $(k - 1)$-dimensional submanifold
+  without boundary, i.e. $\partial(\partial M) = \emptyset$.
 \end{propo}
 
 \begin{proof}
   We need to find a cover of $\partial M$ by local parameterizations whose
   domains are open sets in $\mathbb{R}^{k-1}$.
 
-  Let  $p \in \partial M \subseteq M$, so that there exists a local
-  parameterization $\phi$ of $M$ such that $\phi : A \to \mathbb{R}^n$, where $A$ 
-  is open in $\mathbb{H}^k$, with $p \in \phi(A)$. Let $\hat{\phi}$ be the
-  restriction of $\phi$ to $A \cap (\partial \mathbb{H}^k)$.
+  Let $p \in \partial M \subseteq M$, and $M$ is a manifold with boundary, there
+  exists a local parameterization $\phi$ of $M$ such that $\phi : A \to
+  \mathbb{R}^n$, where $A$ is open in $\mathbb{H}^k$, with $p \in \phi(A)$. Let
+  $\hat{\phi}$ be the restriction of $\phi$ to $A \cap (\partial
+  \mathbb{H}^k)$.
 
-  Let $\hat{A} = A \cap (\partial \mathbb{H}^k)$. \hlbnotec{Check} $\hat{A}$ is
-  open in $\partial \mathbb{H}^k \simeq \mathbb{R}^{k-1}$. Let
+  Let $\hat{A} = A \cap (\partial \mathbb{H}^k)$. Note that $\hat{A} \neq 0$ 
+  since $\phi^{-1}(p) \in \hat{A}$. Indeed $\hat{A}$ is open in $\partial
+  \mathbb{H}^k \simeq \mathbb{R}^{k-1}$ \sidenote{Note that $\partial
+  \mathbb{H}^k \simeq \mathbb{R}^{k-1}$ by the map
+  \begin{equation*}
+    (0, x^2, \ldots, x^k) \mapsto (x^2, \ldots, x^k).
+  \end{equation*}
+  It is easy to verify that the above is a homeomorphism.
+  }. Let
   \begin{equation*}
     \hat{\phi}(p) = (0, u^2, \ldots, u^k) \in (\partial \mathbb{H}^k) \cap A,
   \end{equation*}
@@ -7211,24 +7351,26 @@ $\partial A_\beta$?
   \begin{equation*}
     \hat{\phi}(\hat{u}) = p \in \partial M.
   \end{equation*}
-  We need to show that $\hat{\phi} : \hat{A} \to \mathbb{R}^n$, where $\hat{A}$ 
-  is open in $\mathbb{R}^{k-1}$, is a smooth immersion and a homeomorphism onto
-  its image.
+  We need to show that $\hat{\phi} : \hat{A} \to \mathbb{R}^n$ is a
+  parameterization of $\partial M$, i.e. smooth immersion and a homeomorphism
+  onto its image.
 
   Since $\phi$ is smooth at $v \in A \cap \partial \mathbb{H}^k$, we have that
-  $\hat{\phi}$ is smooth at $\hat{v} \in \hat{A}$. The Jacobian
+  $\hat{\phi}$ is smooth at $\hat{v} \in \hat{A}$. The Jacobian is thus
   \begin{equation*}
     (\D \hat{\phi})_{\hat{u}} = \begin{pmatrix}
       \frac{\partial \phi^1}{\partial u^2} \at{\hat{u}}{} & \hdots &
       \frac{\partial \phi^1}{\partial u^k}
       \at{\hat{u}}{} \\
       \vdots & & \vdots \\
-      \frac{\partial \phi^n}{\partial u^2} \at{\hat{u}}{} & \hdots & \frac{\partial \phi^n}{\partial u^k} \at{\hat{u}}{}
+      \frac{\partial \phi^n}{\partial u^2} \at{\hat{u}}{} & \hdots &
+      \frac{\partial \phi^n}{\partial u^k} \at{\hat{u}}{}
     \end{pmatrix}.
   \end{equation*}
-  $\phi$ is an immersion, so columns of $(\D \phi)_{\hat{u}}$ are linearly
-  independent, so columns are $(\D \hat{\phi})_{\hat{u}}$ are still linearly
-  independent, hence $\hat{\phi}$ is an immersion.
+  Since $\phi$ is an immersion, the columns of $(\D \phi)_{\hat{u}}$ are
+  linearly independent, so columns are $(\D \hat{\phi})_{\hat{u}}$ are still
+  linearly independent (cf. alternative definition of
+  \hyperref[defn:immersion]{immersion}), hence $\hat{\phi}$ is an immersion.
 
   So $\hat{\phi}$ is continuous because it is the restriction of a continuous
   map. Thus
