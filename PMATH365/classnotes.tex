@@ -4019,7 +4019,7 @@ forms make sense.
   \end{quotebox}
 \end{note}
 
-\begin{defn}[parameterizations and parameterized Submanifolds]\index{parameterization}\index{parameterized Submanifold}\label{defn:parameterizations_and_parameterized_submanifolds}
+\begin{defn}[Parameterizations and Parameterized Submanifolds]\index{parameterization}\index{parameterized Submanifold}\label{defn:parameterizations_and_parameterized_submanifolds}
   An immersion $\phi : U \subseteq \mathbb{R}^k \to \mathbb{R}^n$ that is also a
   homeomorphism onto its image is called a \hlnoteb{parameterization}. The image
   $\phi(U) \subset \mathbb{R}^n$ of a parameterization $\phi : U \subseteq
@@ -4087,7 +4087,7 @@ Let's consider some examples.
   Thus $F$ is not an immersion.
 \end{eg}
 
-\begin{lemma}[parameterized Submanifolds are not Determined by Immersions]\label{lemma:parameterized_submanifolds_are_not_determined_by_immersions}
+\begin{lemma}[Parameterized Submanifolds are not Determined by Immersions]\label{lemma:parameterized_submanifolds_are_not_determined_by_immersions}
   Let $\phi : U \subseteq \mathbb{R}^k \to \mathbb{R}^n$ be a parameterization.
   Let $h : \tilde{U} \subseteq \mathbb{R}^k \to \mathbb{R}^k$ be a
   diffeomorphism of $\tilde{U}$ onto $U = h(\tilde{U})$. Then the composition
@@ -4741,7 +4741,7 @@ an explicitly defined $k$-dimensional submanifold of $\mathbb{R}^n$ with $n - k
 In this section we shall look into more results about the local structure of
 submanifolds.
 
-\begin{thm}[Points on the parameterization]\index{Points on the parameterization}\label{thm:points_on_the_parameterization}
+\begin{thm}[Points on the Parameterization]\label{thm:points_on_the_parameterization}
   Let $M$ be a $k$-dimensional submanifold of $\mathbb{R}^n$, and let $x \in M$.
   Then there exists a local parameterization $\psi : W \subseteq \mathbb{R}^k \to
   \mathbb{R}^n$ for $M$ with $x \in \psi(W)$ such that $\exists \{ l_1, \ldots,
@@ -5357,7 +5357,7 @@ $\mathbb{R}^n$.
   \end{equation*}
 \end{ex}
 
-\begin{lemma}[Correspondence of Smooth Maps between a Submanifold and Its parameterization]\label{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parameterization}
+\begin{lemma}[Correspondence of Smooth Maps between a Submanifold and Its Parameterization]\label{lemma:correspondence_of_smooth_maps_between_a_submanifold_and_its_parameterization}
   Let $M$ be a submanifold of $\mathbb{R}^n$, and $\phi : U \to M$ a local
   parameterization of $M$. Then $\phi(U) = V \cap M$ for some open set $V$ in
   $\mathbb{R}^n$ containing $p$. Consider the map
@@ -6852,6 +6852,14 @@ before ploughing ahead.}
   was and realized that that really came out of nowhere.} 
 \end{proof}
 
+\begin{note}\label{note:equivalent_definition_of_an_oriented_manifold}
+  Combining \cref{propo:compatibility_of_parameterizations_with_the_orientation}
+  and \cref{propo:compatible_local_parameterizations_implies_orientability}, we
+  have an if and only if statement, which says that a submanifold $M$ is
+  orientable if and only if given any two local parameterizations $\phi_\alpha,
+  \phi_\beta$ of $M$, we must have that $\det (\Delta \phi_{\beta\alpha}) > 0$.
+\end{note}
+
 % section partitions_of_unity_continued (end)
 
 \section{Integration of Forms}%
@@ -7255,9 +7263,11 @@ is, can there be a $\phi_\beta$ such that $\phi_\beta^{-1}(p)$ is not on
 $\partial A_\beta$?
 
 \begin{propo}[Well-definedness of the Boundary of a Manifold]\label{propo:well_definedness_of_the_boundary_of_a_manifold}
-  Let $p \in M$ be a boundary point. Then $\phi_\beta^{-1}(p) \in \partial
-  \mathbb{H}^k$ for all local parameterizations $\phi_\beta : A_\beta \to
-  \mathbb{R}^n$ of  $M$.
+  Let $M$ be a $k$-dimensional submanifold with boundary of $\mathbb{R}^n$. Let $p
+  \in V_\alpha \cap M$. If $\phi_{\alpha}^{-1} (p)$ is a boundary point of
+  $U_\alpha$ , then $\phi_\beta(p)$ is a boundary point of $U_{\beta}$ for all
+  $\beta \in A$ such that $V_\alpha \cap V_\alpha \cap M = \emptyset$. That is,
+  being a boundary point of M is independent of local parametrization.
 \end{propo}
 
 \begin{proof}
@@ -7385,6 +7395,119 @@ $\partial A_\beta$?
 % section submanifold_with_boundary_continued (end)
 
 % chapter lecture_29_mar_25th (end)
+
+\chapter{Lecture 30 Mar 27th}%
+\label{chp:lecture_30_mar_27th}
+% chapter lecture_30_mar_27th
+
+\section{Submanifold with Boundary (Continued 2)}%
+\label{sec:submanifold_with_boundary_continued_2}
+% section submanifold_with_boundary_continued_2
+
+\begin{propo}[Oriented Manifolds with Boundary has an Oriented Boundary]\label{propo:oriented_manifolds_with_boundary_has_an_oriented_boundary}
+  Let $M$ be a $k$-dimensional submanifold with boundary. Suppose that $M$ is
+  oriented. Then there is an induced orientation on the boundary $\partial M$.
+\end{propo}
+
+\marginnote{We shall use
+\cref{note:equivalent_definition_of_an_oriented_manifold} to prove this.}
+\begin{proof}
+  Let $\{ \phi_\alpha : U_\alpha \to \mathbb{R}^n \}_{\alpha \in A}$ be a cover of
+  $M$, where each $U_\alpha$ is open in $\mathbb{H}^k$. Since $M$ is oriented,
+  by \cref{propo:compatibility_of_parameterizations_with_the_orientation}, we
+  have that $\det (\D \phi_{\beta\alpha}) > 0$ for all $\alpha, \beta \in A$. By
+  \cref{propo:oriented_manifolds_with_boundary_has_an_oriented_boundary}, we
+  know that this induces a cover $\{ \hat{\phi}_\alpha : \hat{U}_\alpha \to
+  \mathbb{R}^n \}$ on $\partial M$. It suffices to show that given any $\alpha,
+  \beta \in A$, $\det(\D \hat{\phi}_{\beta\alpha}) > 0$.
+
+  By \cref{propo:well_definedness_of_the_boundary_of_a_manifold}, the transition
+  map $\phi_{\beta\alpha} : \phi_{\alpha}^{-1}(V_\alpha \cap V_\beta \cap
+  \partial M) \to \phi_{\beta}^{-1}(V_\alpha \cap V_\beta \cap \partial M)$ is
+  bijective. In particular, $u_\alpha \in U_\alpha$, where $u^1_\alpha = 0$ is
+  brought to $u_\beta = \phi_{\beta\alpha}(u_\alpha) \in U_\beta$, where
+  $u_\beta^1 = 0$.
+
+  Thus, at any point $\hat{u}_\alpha = (0, u_\alpha^2, \ldots, u_\alpha^k)$, we
+  have that $\frac{\partial u_\beta^1}{\partial u_\alpha^j}
+  \at{\hat{u}_\alpha}{} = 0$ for $j > 1$, and
+  \begin{align*}
+    \frac{\partial u_\beta^1}{\partial u_\alpha^1} \at{\hat{u}_\alpha}{}
+    &= \lim_{t \to 0^{-}} \frac{u_\beta^1(t, u_\alpha^2, \ldots, u_\alpha^k) -
+    u_\beta^1(0, u_\alpha^2, \ldots, u_\alpha^k)}{t} \\
+    &= \lim_{t \to 0^{-}} \frac{u_\beta^1(t, 0, \ldots, 0)}{t} \geq 0,
+  \end{align*}
+  since $u_\beta^1 \leq 0$ as $t \to 0^-$. By expanding the determinant
+  $\det(\D \phi_{\beta\alpha})_{\hat{u}_\alpha}$ along the first row, we
+  have that
+  \begin{equation*}
+    \det(\D \phi_{\beta\alpha}) = \frac{\partial u_\beta^1}{\partial u_\alpha^1}
+    \at{\hat{u}_\alpha}{} \det(\D \hat{\phi}_{\beta\alpha})_{\hat{u}_\alpha}.
+  \end{equation*}
+  Since LHS $> 0$ by hypothesis and $\frac{\partial u_\beta^1}{\partial
+  u_\alpha^1}\at{\hat{u}_\alpha}{} > 0$, we have that 
+  \begin{equation*}
+    \det(\D \hat{\phi}_{\beta\alpha})_{\hat{u}_\alpha} > 0,
+  \end{equation*}
+  which is what we want to show.
+\end{proof}
+
+The converse of the above is not true.
+
+\begin{eg}
+  \begin{figure*}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/boundary-of-a-mobius-strip.png}
+    \caption{Boundary of a M\"{o}bius strip}
+    \label{fig:boundary_of_a_mobius_strip}
+  \end{figure*}
+  The \hlnotea{M\"{o}bius strip} is an example of a \hlimpo{non-orientable}
+  submanifold whose boundary, which is just a circle, is orientable.
+\end{eg}
+
+% section submanifold_with_boundary_continued_2 (end)
+
+\section{Stokes' Theorem}%
+\label{sec:stokes_theorem}
+% section stokes_theorem
+
+First, note that if $M$ is a compact oriented $k$-dimensional submanifold with
+boundary, of $\mathbb{R}^n$, then since its boundary is a closed subset,
+$\partial M$ is a \hlnotea{compact} oriented (cf.
+\cref{propo:oriented_manifolds_with_boundary_has_an_oriented_boundary}) $(k -
+1)$-dimensional submanifold of $\mathbb{R}^n$ (cf.
+\cref{propo:dimension_of_the_boundary_of_a_submanifold}).
+
+\begin{lemma}[Inclusion Map as a Smooth Map between Submanifolds]\index{Inclusion Map}\label{lemma:inclusion_map_as_a_smooth_map_between_submanifolds}
+  Let $\iota : \partial M \to M$ be the \hlnoteb{inclusion map} of the boundary
+  $\partial M$ to $M$. Then $\iota$ is a smooth map between manifolds.
+\end{lemma}
+
+\begin{proof}
+  We have actually showed this before, indirectly so. This follows from the fact
+  that
+  \begin{equation*}
+    \phi_j^{-1} \circ \iota \circ \hat{\phi}_j (u^2, \ldots, u^k) = (0, u^2,
+    \ldots, u^k),
+  \end{equation*}
+  which is, as mentioned before, smooth.
+\end{proof}
+
+\begin{thm}[Stokes' Theorem]\index{Stokes' Theorem}\label{thm:stokes_theorem}
+  Let $\omega \in \Omega^{k-1}(M)$. Then $\dif{\omega} \in \Omega^k(M)$. Let
+  $\iota : \partial M \to M$ be the inclusion map. Then
+  \begin{equation*}
+    \int_{M} \dif{\omega} = \int_{\partial M} \iota^* \omega.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  \hlwarn{To be completed after restudying} 
+\end{proof}
+
+% section stokes_theorem (end)
+
+% chapter lecture_30_mar_27th (end)
 
 \chapter{Lecture 31 Mar 29th [dirty]}%
 \label{chp:lecture_31_mar_29th}
