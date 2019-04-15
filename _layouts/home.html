@@ -12,7 +12,6 @@
     {% for file in site.data.files %}
       <div class="course-card" id="{{ file.title | replace: " ", "-" | downcase }}">
         <h2>{{ file.title }}</h2>
-        <span>Last updated: {{ file.pdf[0].src | prepend: site.source | file_date | date: "%Y %B %d %R" }}</span>
         <div class="course-files">
           {% for pdf in file.pdf %}
           <div class="course-file file-pdf" id="{{ file.title | replace: " ", "-" | downcase }}_{{ pdf.title | replace: ".", "-" | downcase }}">

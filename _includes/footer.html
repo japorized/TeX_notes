@@ -10,7 +10,8 @@
     <a href="{{ site.baseurl }}/faq.html">FAQ</a> | 
     <a href="{{ site.baseurl }}/sitemap.html">Sitemap</a> |
     <a href="{{ site.baseurl }}/license.html">License</a> | 
-    Copyright &copy; {{ site.author }} {{ site.time | date: "%Y" }}
+    Copyright &copy; {{ site.author }} {{ site.time | date: "%Y" }} |
+    <span>Last updated: {{ page.path | prepend: '/' | prepend: site.source | file_date | date: "%Y %B %d %R" }}</span>
     <br />
     <br />
     <br />
