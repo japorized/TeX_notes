@@ -3934,7 +3934,7 @@ The property $\dif{^2}$ motivates the following definitions.
   \Omega^k(\mathbb{R}^n)$ and $\dif{(F^* \eta)} \in \Omega^{k + 1}(\mathbb{R}^n)$. In
   particular, we have
   \begin{equation*}
-    F^* (\dif{\eta}) = = \dif{(F^* \eta)},
+    F^* (\dif{\eta}) = \dif{(F^* \eta)},
   \end{equation*}
   i.e. the pullback and the exterior derivative commute.
 \end{propo}
@@ -5090,7 +5090,7 @@ T_{\phi(u)} \mathbb{R}^n$.
 Recall that in \cref{defn:tangent_space_on_a_submanifold} we defined the
 \hlnoteb{tangent space} $T_p M$ of $M$ at $p$ to be the tangent space of the
 parameterized submanifold $\phi(U) \subseteq \mathbb{R}^n$ at $\phi(u)$ for any
-local parameterization $\phi : U \to \mathbb{R}^n$ of $M$ with $p = \phi(u)$.i
+local parameterization $\phi : U \to \mathbb{R}^n$ of $M$ with $p = \phi(u)$.
 
 For this notion to be well-defined, we need to show that $T_p M$ does not depend
 on the choice of the local parameterization.
@@ -5873,7 +5873,7 @@ Now recall that \hyperref[defn:transition_map]{transition maps} are
 \begin{proof}
   Notice that we have $\phi_\beta \circ \phi_{\beta \alpha} = \phi_\alpha$. Thus
   \begin{equation*}
-    \phi^*_{\beta \alpha} \phi_\beta^* \eta = = \left( \phi_\beta \circ
+    \phi^*_{\beta \alpha} \phi_\beta^* \eta = \left( \phi_\beta \circ
     \phi_{\beta \alpha} \right)^* \eta = \phi_\alpha^* \eta.
   \end{equation*}
 \end{proof}
@@ -7502,14 +7502,86 @@ $\partial M$ is a \hlnotea{compact} oriented (cf.
 \end{thm}
 
 \begin{proof}
-  \hlwarn{To be completed after restudying} 
+  By our definitions, the two sides do not have much resemblance, despite
+  seemingly symbolically sensible. We shall try to derive from both sides and
+  make the two meet in between.
+
+  Let's first set things up. Let $\{ \phi_\alpha : U_\alpha \to V_\alpha \cap M
+  \}_{\alpha \in A}$ be a covering of $M$, with $\{ \phi_i : U_i \to V_i \cap
+  M \}_{i=1}^{m}$ being the finite covering of $M$ since $M$ is compact (we shall
+  assume this in this course). Let $\{ \rho_i : M
+  \to \mathbb{R} \}_{i=1}^{m}$ be the partition of unity subordinate to this
+  cover. Then let $\{ \hat{\phi}_i : \hat{U}_i \to \hat{V}_i \cap \partial M
+  \}$ be the induced paramterization from $M$ (cf.
+  \cref{propo:dimension_of_the_boundary_of_a_submanifold}). Now let $\omega \in
+  \Omega^{k-1}(M)$.
+
+  From the LHS, we have
+  \begin{align*}
+    \int_{M} \dif{\omega}
+    &= \int_{M} \dif{\left( \sum_{i=1}^{m} \rho_i \omega \right)}
+     = \int_{M} \sum_{i=1}^{m} \dif{(\rho_i \omega)}
+     \quad \because
+     \hyperref[thm:defining_properties_of_the_exterior_derivative]{\text{linearity
+     of } d} \\
+    &= \sum_{i=1}^{m} \int_{M} \dif{(\rho_i \omega)}
+     = \sum_{i=1}^{m} \int_{\phi_i(U_i)} \dif{(\rho_i \omega)}
+     \quad \because \rho_i = 0 \text{ in } M \setminus \phi_i(U_i) \\
+    &= \sum_{i=1}^{m} \int_{U_i} \phi_i^* \dif{(\rho_i \omega)}
+     \quad \because \hyperref[defn:integral_over_manifolds]{\text{definition of
+     integral}} \\
+    &= \sum_{i=1}^{m} \int_{U_i} \dif{\phi_i^* \rho_i \omega}
+     \quad \because
+     \hyperref[propo:commutativity_of_the_pullback_and_the_exterior_derivative]{\dif{\phi_i^*}
+     = \phi_i^*\dif{}}
+  \end{align*}
+  From the RHS, since $\iota$ fixes $\partial M$, we have
+  \begin{align*}
+    \int_{\partial M} \iota^* \omega
+    &= \int_{\partial M} \sum_{i=1}^{m} \rho_i \iota^* \omega
+     = \int_{\partial M} \sum_{i=1}^{m} \iota^* \rho_i \omega \\
+    &= \sum_{i=1}^{m} \int_{\partial M} \iota^* \rho_i \omega
+     = \sum_{i=1}^{m} \int_{\hat{\phi}_i(\hat{U}_i)} \iota^* \rho_i \omega \\
+    &= \sum_{i=1}^{m} \int_{\hat{U}_i} \hat{\phi}_i^* (\iota^* \rho_i \omega) \\
+    &= \sum_{i=1}^{m} \int_{\hat{U}_i} (\iota \circ \hat{\phi}_i)^* \rho_i
+     \omega \\
+    &= \sum_{i=1}^{m} \int_{\hat{U}_i} \hat{\phi}_i \rho_i \omega
+     \quad \because i \circ \hat{\phi}_i = \hat{\phi}_i.
+  \end{align*}
+  It is clear that the proof would be complete if we can show that
+  \begin{equation*}
+    \int_{U_i} \dif{\phi_i^* \rho_i \omega} = \int_{\hat{U}_i} \hat{\phi}_i^*
+    \rho_i \omega
+  \end{equation*}
+  for all $i$. Recall that $\hat{U}_i = U_i \cap \partial \mathbb{H}^k$. Note
+  that $\rho_i \omega$ is a smooth form that is compactly support on
+  $\rho_i(U_i)$ \sidenote{Recall that $\rho_i$ is defined such that
+  \begin{equation*}
+    \rho_i(p) = \frac{\zeta_i(p)}{\sum_{i=1}^{m} \zeta_i(p)}
+  \end{equation*}
+  where
+  \begin{equation*}
+    \zeta_i(p) = \begin{cases}
+      \chi(\phi_i^{-1}(p)) & p \in \rho_i(U_i) \\
+      0          & p \in M \setminus \rho_i(U_i)
+    \end{cases}.
+  \end{equation*}}
+  Therefore, it suffices to show that
+  \begin{equation}\label{eq:goal_for_stokes}
+    \int_{U} \dif{\phi^* \eta} = \int_{\hat{U}} \hat{\phi}^* \eta.
+  \end{equation}
+  for any parameterization $\phi : U \to \mathbb{R}^n$ of $M$, and any $\eta \in
+  \Omega^k(\phi(U))$ such that $\supp \eta \subseteq \phi(U)$.
+
 \end{proof}
+
+We shall continue this proof in the next lecture.
 
 % section stokes_theorem (end)
 
 % chapter lecture_30_mar_27th (end)
 
-\chapter{Lecture 31 Mar 29th [dirty]}%
+\chapter{Lecture 31 Mar 29th}%
 \label{chp:lecture_31_mar_29th}
 % chapter lecture_31_mar_29th
 
@@ -7518,42 +7590,32 @@ $\partial M$ is a \hlnotea{compact} oriented (cf.
 % section stokes_theorem_continued
 
 \begin{proof}[Stokes' Theorem (Continued)]
-  We reduced the proof to showing that following: given $A$ open in
-  $\mathbb{H}^k$ and $\hat{A} = A \cap (\partial \mathbb{H}^k)$ open in
-  $\mathbb{R}^{k-1}$. Let $\phi : A \to \mathbb{R}^n$ and $\hat{\phi} = \phi
-  \restriction_{\hat{A}} \hat{A} \to \mathbb{R}^n$ be a parameterizations. Let
-  $\eta \in \Omega^{k-1}(\phi(A))$, where $\supp(\eta)$ is compact. We want to
-  be able to show that
-  \begin{equation*}
-    \int_{A_j} \dif{(\phi_j^*(\rho_j \omega))} = \int_{\hat{A}_j}
-    \hat{\phi}_j^*(\rho_j \omega) 
-  \end{equation*}
-  for all $j$.
-
-  First, some observations are needed. Let us write
+  Let us write
   \begin{equation}\label{eq:stokes_proof_eq_2}
-    \Omega^k(A) \ni \phi^* \eta = \sum_{i=1}^{k} (-1)^{i-1} h_i \dif{u^1} \land
+    \Omega^k(U) \ni \phi^* \eta = \sum_{i=1}^{k} (-1)^{i-1} h_i \dif{u^1} \land
     \hdots \land \hat{\dif{u^i}} \land \hdots \land \dif{u^k},
   \end{equation}
-  where the $(-1)^{i-1}$ instead of $(-1)^{k-1}$ for convenience, and $h_i \in
-  C^\infty(A)$ has compact support. Now note that  $\hat{\phi} = \phi \circ j$,
-  where $j : \mathbb{R}^{k-1} \to \mathbb{R}^k$ is the smooth map
+  where the $(-1)^{i-1}$ instead of $(-1)^{k-1}$ for convenience
+  \sidenote{\hlwarn{What in the world allowed us to make such a claim?}}, and
+  $h_i \in C^\infty(U)$ has compact support in $\phi(U)$. Now note that
+  $\hat{\phi} = \phi \circ \jmath$, where $\jmath : \mathbb{R}^{k-1} \to
+  \mathbb{R}^k$ is the smooth map
   \begin{equation*}
-    j(u^2, \ldots, u^k) = (-0, u^2, \ldots, u^k).
+    \jmath(u^2, \ldots, u^k) = (-0, u^2, \ldots, u^k).
   \end{equation*}
-  Thus we have that $\hat{\phi}^* = j^* \phi^*$. In particular, $j^* \dif{u^i} =
-  \dif{u^i}$ for $i > 1$, and $j^* \dif{u^1} = 0$. By taking $j^*$ on
+  Thus we have that $\hat{\phi}^* = \jmath^* \phi^*$. In particular, $\jmath^* \dif{u^i} =
+  \dif{u^i}$ for $i > 1$, and $\jmath^* \dif{u^1} = 0$. By taking $\jmath^*$ on
   \cref{eq:stokes_proof_eq_2}, we have
   \begin{align*}
-    \hat{\phi}^* \eta &= j^* \hat{\phi} \eta \\
-                      &= j^* \left( \sum_{i=1}^{k} (-1)^{i-1} h_i \dif{u^1}
+    \hat{\phi}^* \eta &= \jmath^* \hat{\phi} \eta \\
+                      &= \jmath^* \left( \sum_{i=1}^{k} (-1)^{i-1} h_i \dif{u^1}
                       \land \hdots \hat{\dif{u^i}} \land \hdots \land \dif{u^k}
-                    \right) \\
-                      &= j^*(h_1 \dif{u^2} \land \hdots \land \dif{u^k}) \\
+                        \right) \\
+                      &= \jmath^*(h_1 \dif{u^2} \land \hdots \land \dif{u^k}) \\
                       &= \hat{h}_1 \dif{u^2} \land \hdots \land \dif{u^k}
                       \tag{$\dagger$}\label{eq:stokes_proof_eq_3},
   \end{align*}
-  where $\hat{h}_1 = j^* h_1$. That is, we have
+  where $\hat{h}_1 = \jmath^* h_1$. That is, we have
   \begin{equation*}
     \hat{h}_1(u^2, \ldots, u^k) = h_1(0, u^2, \ldots, u^k).
   \end{equation*}
@@ -7573,15 +7635,16 @@ $\partial M$ is a \hlnotea{compact} oriented (cf.
   We are now ready to take on what we want to show.
 
   \noindent
-  \hlbnoted{Case 1} Suppose $A$ is open in $\mathbb{R}^k$, with $A \cap \partial
+  \hlbnoted{Case 1} Suppose $U$ is open in $\mathbb{R}^k$, with $U \cap \partial
   \mathbb{H}^k = \emptyset$ and $\supp(h_i)$ is compact. So there exists a box
-  $K = [a^1, b^1] \times \hdots \times [a^k, b^k]$ be a box in $bb^k$ that
-  completes contains $\supp h_i$ in its interior. Now extend each of the $h_i$ 
-  by zero to a smooth function on $\mathbb{R}^k$. Using
-  \cref{eq:stokes_proof_eq_4}, we have that the LHS of what we want is
+  $K = [a^1, b^1] \times \hdots \times [a^k, b^k]$ be a box in $\mathbb{R}^k$
+  that completely contains $\supp h_i$ in its interior. Now extend each of the
+  $h_i$ by zero to a smooth function on $\mathbb{R}^k$. Using
+  \cref{eq:stokes_proof_eq_4}, we have that the LHS of \cref{eq:goal_for_stokes}
+  is
   \begin{align*}
-    \int_{A} \dif{\phi^* \eta}
-    &= \int_{A} \left( \sum_{i=1}^{k} \frac{\partial h_i}{\partial u^i}
+    \int_{U} \dif{\phi^* \eta}
+    &= \int_{U} \left( \sum_{i=1}^{k} \frac{\partial h_i}{\partial u^i}
     \dif{u^1} \land \hdots \land \dif{u^k} \right) \\
     &= \sum_{i=1}^{k} \int_{A} \frac{\partial h_i}{\partial u^i} \dif{u^1}
     \hdots \dif{u^k} \\
@@ -7600,13 +7663,13 @@ $\partial M$ is a \hlnotea{compact} oriented (cf.
   since $h_i$ is supported inside the interior of $K$. Thus all the integrals
   above are zero, i.e. the LHS of what we want is zero in this case.
 
-  On the other hand, since $A$ is an open set in $\mathbb{R}^k$, we have that $A
-  \cap \partial \mathbb{H}^k = \emptyset$, so $\supp h_1 \subseteq A$ does not
+  On the other hand, since $U$ is an open set in $\mathbb{R}^k$, we have that $U
+  \cap \partial \mathbb{H}^k = \emptyset$, so $\supp h_1 \subseteq U$ does not
   intersect $\partial \mathbb{H}^k$. Thus $h_1 = j^* h_1 = 0$. By
   \cref{eq:stokes_proof_eq_3} and the fact that $K \cap \partial \mathbb{H}^k =
   [a^2, b^2] \times \hdots \times [a^k, b^k]$, we have
   \begin{align*}
-    \int_{A} \hat{\phi}^* \eta
+    \int_{U} \hat{\phi}^* \eta
     &= \int_{K \cap \partial \mathbb{H}^k} \hat{\phi}^* \eta = \int_{K \cap
     \partial \mathbb{H}^k} h_1 \dif{u^2} \land \hdots \land \dif{u^k} \\
     &= \int_{a^2}^{b^2} \hdots \int_{a^k}^{b^k} \hat{h}_i \dif{u^2} \hdots
@@ -7615,7 +7678,7 @@ $\partial M$ is a \hlnotea{compact} oriented (cf.
   This completes Case 1.
 
   \noindent
-  \hlbnoted{Case 2} Suppose $A$ is not open in $\mathbb{R}^k$. Then $A \cap
+  \hlbnoted{Case 2} Suppose $U$ is not open in $\mathbb{R}^k$. Then $U \cap
   \partial \mathbb{H}^k \neq \emptyset$. This time, let
   \begin{equation*}
     K = [a^1, 0] \times [a^2, b^2] \times \hdots \times [a^k, b^k]
@@ -7625,7 +7688,7 @@ $\partial M$ is a \hlnotea{compact} oriented (cf.
   $h_i$ by zero to a smooth function on $\mathbb{H}^k$. Using
   \cref{eq:stokes_proof_eq_4}, we have
   \begin{align*}
-    \int_{A} \dif{(\phi^* \eta)}
+    \int_{U} \dif{(\phi^* \eta)}
     &= \int_{K} \dif{(\phi^* \eta)} \\
     &= \int_{K} \sum_{i=1}^{k} \left( \frac{\partial h_i}{\partial u^i} \right)
     \dif{u^1} \land \hdots \land \dif{u^k} \\
@@ -7647,20 +7710,20 @@ $\partial M$ is a \hlnotea{compact} oriented (cf.
   \end{align*}
   Thus we have that the LHS of our desired equation is
   \begin{equation*}
-    \int_{A} \dif{(\phi^* \eta)} = \int_{a^2}^{b^2} \hdots \int_{a^k}^{b^k}
+    \int_{U} \dif{(\phi^* \eta)} = \int_{a^2}^{b^2} \hdots \int_{a^k}^{b^k}
     \hat{h}_1 \dif{u^2} \hdots \dif{u^k}.
   \end{equation*}
   By \cref{eq:stokes_proof_eq_4} and the fact that $K \cap \dif{\mathbb{H}^k} =
   [a^2, b^2] \times \hdots \times [a^k, b^k]$, we have that
   \begin{align*}
-    \int_{\hat{A}} \hat{\phi}^* \eta
+    \int_{\hat{U}} \hat{\phi}^* \eta
     &= \int_{K \cap \partial \mathbb{H}^k} \hat{\phi}^* \eta \\
     &= \int_{K \cap \partial \mathbb{H}^k} h_1 \dif{u^2} \land \hdots \land
     \dif{u^k} \\
     &= \int_{a^2}^{b^2} \hdots \int_{a^k}^{b^k} \hat{h}_1 \dif{u^2} \hdots
     \dif{u^k},
   \end{align*}
-  thus the RHS of the desired equation agree with the LHS in this case as well.
+  thus the RHS of \cref{eq:goal_for_stokes} agree with the LHS in this case as well.
 \end{proof}
 
 \begin{remark}
@@ -7685,8 +7748,8 @@ $\partial M$ is a \hlnotea{compact} oriented (cf.
   Let $M = \{p_1, \ldots, p_k\}$ be a oriented, compact, $0$-dimensional
   submanifold of $\mathbb{R}^n$.
 
-  $\Omega^0(M) = C^\infty(M) = \{ f : \{p_1, \ldots, p_k\} \to \mathbb{R} \}$.
-
+  Consider $\Omega^0(M) = C^\infty(M) = \{ f : \{p_1, \ldots, p_k\} \to
+  \mathbb{R} \}$. Then for every $f \in \Omega^0(M)$,
   \begin{equation*}
     \int_{M} f = \sum_{j=1}^{m} \pm f(p_j),
   \end{equation*}
@@ -7707,7 +7770,7 @@ $\partial M$ is a \hlnotea{compact} oriented (cf.
 
 \tuftepart{Differential Geometry}\label{part:differential_geometry}
 
-\chapter{Lecture 32 Apr 01st [dirty]}%
+\chapter{Lecture 32 Apr 01st}%
 \label{chp:lecture_32_apr_01st}
 % chapter lecture_32_apr_01st
 
@@ -7719,59 +7782,103 @@ $\partial M$ is a \hlnotea{compact} oriented (cf.
 \label{sub:hodge_star_operators}
 % subsection hodge_star_operators
 
-Let $V$ be $n$-dimensional real vector space with an inner product
-\begin{equation*}
-  \langle \cdot, \cdot \rangle : V \times V \to \mathbb{R}
-\end{equation*}
-such that
-\begin{enumerate}
-  \item (bilinearity) $\langle v, w \rangle$ is linear in $v$ and linear in $w$;
-  \item (symmetry) $\langle v, w \rangle = \langle w, v \rangle$ ; and
-  \item (positive definite) $\langle v, v \rangle \geq 0$ and $\langle v, v
-    \rangle = 0 \iff v = 0$.
-\end{enumerate}
+\begin{defn}[Inner Product]\index{Inner Product}\label{defn:inner_product}
+  Let $V$ be $n$-dimensional real vector space. An \hlnoteb{inner product} on
+  the space $V$ is a function
+  \begin{equation*}
+    \langle \cdot, \cdot \rangle : V \times V \to \mathbb{R}
+  \end{equation*}
+  such that
+  \begin{enumerate}
+    \item (\hlnotea{bilinearity}) $\langle v, w \rangle$ is linear in $v$ and linear in $w$;
+    \item (\hlnotea{symmetry}) $\langle v, w \rangle = \langle w, v \rangle$ ; and
+    \item (\hlnotea{positive definite}) $\langle v, v \rangle \geq 0$ and $\langle v, v
+      \rangle = 0 \iff v = 0$.
+  \end{enumerate}
+\end{defn}
 
-Recall from A5Q8 that we get an induced inner product on $\Lambda^k(V)$, for $1
-\leq k \leq n$, given by
+Recall from A5Q8 that in a vector space $V$ endowed with an inner product, we
+get an induced inner product on $\Lambda^k(V)$, for $1 \leq k \leq n$, given by
 \begin{equation*}
   \langle v_1 \land \hdots \land v_k, w_1 \land \hdots \land w_k \rangle = \det
-  (\langle v_i, w_j \rangle),
+  (\langle v_i, w_j \rangle).
 \end{equation*}
-and when $k = 0$, then $\Lambda^0(V) = \mathbb{R}$.
+When $k = 0$, then $\Lambda^0(V) = \mathbb{R}$, where our inner product will
+just be good ol' regular dot product.
 
-\newthought{Fix an orientation} $\mu$ on $V$, where $0 \neq \mu \in
-\Lambda^n(V)$. Note that we may fix a $\mu$ such that $\norm{\mu}$ since we may
-simply rescale the choice by a positive factor.
+\begin{note}
+  To define the Hodge Star operator on an $n$-dimensional vector space, we
+  require a non-vanishing $n$-form. Note that we may pick $\mu \in \Lambda^n(V)$
+  such that $\mu \neq 0$ and especially that $\abs{\mu} = 1$, since we may just
+  rescale $\mu$ by a positive factor.
+\end{note}
 
 \begin{defn}[Hodge Star Operator]\index{Hodge Star Operator}\label{defn:hodge_star_operator}
-  Define a map
+  Let $0 \neq \mu \in \Lambda^n(V)$ where $V$ is an $n$-dimensional real vector
+  space. Let $\alpha \in \Lambda^k(V)$, where $k \leq n$. The \hlnoteb{Hodge
+  Star Operator} $*$ is a map
   \begin{equation*}
     * : \Lambda^k(V) \to \Lambda^{n-k}(V),
   \end{equation*}
-  called the \hlnoteb{Hodge Star operator}, as follows: let $\alpha \in
-  \Lambda^k(V)$, and we define
-  \begin{equation*}
-    \langle * \alpha, \beta \rangle = \alpha \land \beta
-  \end{equation*}
+  such that is satisfies the equation
+  \begin{equation}\label{eq:hodge_star_criterion}
+    \langle * \alpha, \beta \rangle \mu = \alpha \land \beta
+  \end{equation}
   for all $\beta \in \Lambda^{n-k}(V)$.
 \end{defn}
 
 \begin{note}
-  This uniquely determines $*\alpha \in \Lambda^{n-k}(V)$.
+  The definition above does not provide an explicit formula for $*$.
+  \begin{itemize}
+    \item we will try to play around with it in this section to figure out
+      what the Hodge Star operator really does.
+  \end{itemize}
+\end{note}
 
-  Since $\langle \cdot, \beta \rangle$ are linear in $\cdot$ and $(\cdot) \land
-  \beta$, $*$ is a linear map.
+\begin{note}
+  So we defined the Hodge Star operator to satisfy
+  \cref{eq:hodge_star_criterion}. Let's study the equation for a little bit. let
+  $\beta$ be arbitrary. The different parts of the equation is broken down as
+  in \cref{fig:breaking_down_the_criteria_for_the_hodge_star_operator}.
+  \begin{figure*}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{images/hodge-star-criterion-breakdown.png}
+    \caption{Breaking down the criteria for the Hodge Star operator}
+    \label{fig:breaking_down_the_criteria_for_the_hodge_star_operator}
+  \end{figure*}
 
-  \noindent
-  \hlbnoted{Claim: $*$ is an isomorphism} Suppose $* \alpha = 0 \in
-  \Lambda^{n-k}(V)$. We have  $\alpha \land \beta = 0$ for all $\beta$, which
-  means $\alpha = 0$. Notice that
+  We see that $* \alpha \in \Lambda^{n-k}(V)$ needs to be tailored to the choice
+  of $\beta$, which suggests that $* \alpha$ is uniquely determined by $\beta$.
+\end{note}
+
+\begin{propo}[$*$ is linear]\label{propo:_is_linear}
+  $*$ is linear.
+\end{propo}
+
+\begin{proof}
+  Let $\alpha_1, \alpha_2 \in \Lambda^k(V)$ and $s \in \mathbb{R}$. Then for any
+  $\beta \in \Lambda^{n-k}(V)$, we have
+  \begin{align*}
+    \langle *(s\alpha_1 + \alpha_2), \beta \rangle
+    &= (s\alpha_1 + \alpha_2) \land \beta \\
+    &= s\alpha_1 \land \beta + \alpha_2 \land \beta \\
+    &= s \langle *\alpha_1, \beta \rangle + \langle *\alpha_2, \beta \rangle.
+  \end{align*}
+\end{proof}
+
+\begin{propo}[$*$ is an isomorphism]\label{propo:_is_an_isomorphism}
+  $*$ is an isomorphism.
+\end{propo}
+
+\begin{proof}
+  Suppose $* \alpha = 0 \in \Lambda^{n-k}(V)$. We have  $\alpha \land \beta = 0$
+  for all $\beta$, which means $\alpha = 0$. Notice that
    \begin{equation*}
      \dim (\Lambda^k(V)) = \binom{n}{k} = \binom{n}{n-k} =
      \dim(\Lambda^{n-k}(V)).
   \end{equation*}
-  Our claim follows from Rank-Nullity.
-\end{note}
+  With \hyperref[thm:rank_nullity_theorem]{Rank-Nullity}, the proof is complete.
+\end{proof}
 
 Let's look at $*$ in terms of orthonormal basis. Let $e_1, \ldots, e_n$ be an
 orthonormal basis of $V$ (this exists by Gram-Schmidt). By A5Q8, we know that
@@ -7779,11 +7886,12 @@ orthonormal basis of $V$ (this exists by Gram-Schmidt). By A5Q8, we know that
   e_{i_1} \land \hdots \land e_{i_k}, \, \text{ for } 1 \leq i_1 < i_2 < \hdots
   < i_k \leq n
 \end{equation*}
-is an othonormal basis for $\Lambda^k(V)$. Then
+is an othonormal basis for $\Lambda^k(V)$. Then let
 \begin{equation*}
-  \mu = e_1 \land \hdots \land e_n
+  \mu = e_1 \land \hdots \land e_n,
 \end{equation*}
-has length one and represent the orientation induced by $\{ e_1, \ldots, e_n\}$.
+which has length one and represent the orientation induced by $\{ e_1, \ldots,
+e_n\}$.
 
 Let $I = (i_1, i_2, \ldots, i_k)$ be a strictly-increasing multi-index. Then for
 $e_{i_1} \land \hdots \land e_{i_k} \in \Lambda^k(V)$, we have that
@@ -7794,34 +7902,28 @@ $e_{i_1} \land \hdots \land e_{i_k} \in \Lambda^k(V)$, we have that
 where $J$ is a strictly-increasing multi-index of length $n - k$.
 Then
 \begin{align*}
-  &\langle *(e_{i_1} \land \hdots \land e_{i_k}), e_{l_1} \land \hdots \land
-  e_{l_{n-k}} \rangle  \\
-  &= \langle \sum_{J} C_J e_{j_1} \land \hdots \land e_{j_{n-k}}, e_{l_1} \land
-  \hdots \land e_{l_{n-k}} \rangle \\
-  &= e_{i_1} \land e_{i_k} \land e_{l_1} \land \hdots \land e_{l_{n-k}} \\
-  &= 0
+  &\langle *(e_{i_1} \land \hdots \land e_{i_k}), e_{l_1} \land \hdots \land 
+  e_{l_{n-k}} \rangle \mu \\
+  &= e_{i_1} \land e_{i_k} \land e_{l_1} \land \hdots \land e_{l_{n-k}},
 \end{align*}
-where the final equality follows unless $L$ is the \hlnotea{complementary}
-index.
+where $L$ is some strictly-increasing multi-index.
 
 Note 
 \begin{equation*}
-  \langle \sum_{J} C_J e_{j_1} \land \hdots \land e_{j_{n-k}}, e_{l_1} \land
-  \hdots \land e_{l_{n-k}} \rangle C_L \mu.
+  \langle * (e_{i_1} \land \hdots \land e_{i_k}), e_{l_1} \land
+  \hdots \land e_{l_{n-k}} \rangle = C_L \mu,
 \end{equation*}
+for some $C_L \in \mathbb{R}$. We can work out what $C_L$ is.
 
-Let $\hat{I}$ be the complementary multi-index of $I$.
+Let $\hat{I}$ be the \hlnotea{complementary} \sidenote{For example, if $I = (1,
+3, 5)$ in $n = 5$, then $\hat{I} = (2, 4)$.} multi-index of $I$.
 
 Then $C_L = 0$ unless $L = \hat{I}$. Then
 \begin{equation*}
   C_{\hat{I}} \mu = e_{i_1} \land \hdots \land e_{l_1} \land \hdots \land
   e_{l_{n-k}} = \pm \mu,
 \end{equation*}
-where the sign is a permutation that takes
-\begin{equation*}
-  e_{i_1} \land \hdots \land e_{i_k} \land e_{l_1} \land \hdots \land
-  e_{l_{n-k}} \to e_1 \land e_n = \mu.
-\end{equation*}
+where $\pm$ is due to \hyperref[defn:_k_form]{skew-symmetry}.
 
 Therefore, we have that
 \begin{equation*}
@@ -7830,121 +7932,265 @@ Therefore, we have that
 \end{equation*}
 when $L = \hat{I}$, such that
 \begin{equation*}\label{eq:}
-  c \mu = e_{i_1} \land \hdots \land e_{i_k} \land e_{l_1} \land \hdots
+  \pm \mu = e_{i_1} \land \hdots \land e_{i_k} \land e_{l_1} \land \hdots
   e_{l_{n-k}}.
 \end{equation*}
 
+\begin{note}
+  This tells us quite a bit about $*$, especially since $*$ is linear.
+\end{note}
+
 \begin{eg}
-  When $n = 3$, let $e_1, e_2, e_3$ be an oriented basis of $V$. Then $\mu = e_1
-  \land e_2 \land e_3$. Then
+  When $n = 3$, let $e_1, e_2, e_3$ be an oriented basis of $V$. Then let $\mu =
+  e_1 \land e_2 \land e_3$. Then
   \begin{equation*}
-    * e_1 = e_2 \land e_3
+    \langle * e_1, e_2 \land e_3 \rangle \mu = e_1 \land e_2 \land e_3 = \mu
   \end{equation*}
-  because $\alpha \land \beta = e_1 \land e_2 \land e_3 = \mu$.
+  Thus $\langle *e_1, e_2 \land e_3 \rangle = 1$.
 
-  Note that
+  Let's consider one of the possibilities: if $* e_1 = c e_1 \land e_2$, then
+  the matrix of the determinant of the inner product of forms looks like
   \begin{equation*}
-    \left\{ e_1 \land e_2. e_1 \land e_3, e_2 \land e_3 \right\}
+    c \begin{pmatrix}
+      \langle e_1 , e_2 \rangle & \langle e_1, e_3 \rangle \\
+      \langle e_2, e_2 \rangle & \langle e_2, e_3 \rangle
+    \end{pmatrix}
+    = c \begin{pmatrix}
+      0 & 0 \\
+      1 & 0
+    \end{pmatrix},
   \end{equation*}
-  is a basis on $\Lambda^2(V)$.
+  which has determinant $0$. We notice that this will always happen in $* e_1$ 
+  has a $e_1$ term in the 2-form. Also, it is rather clear from our previous
+  observation and here that $c = \pm 1$.
 
-  Now
+  So it must be that $*e_1 = \pm e_2 \land e_3$. However, if $*e_1 = - e_2 \land
+  e_3$, then we have
   \begin{equation*}
-    * e_2 = - e_1 \land e_3 = e_3 \land e_1
+    \begin{pmatrix}
+      \langle - e_2, e_2 \rangle & \langle - e_2, e_3 \rangle \\
+      \langle e_3, e_2 \rangle & \langle e_3, e_3 \rangle
+    \end{pmatrix}
+    = \begin{pmatrix}
+      -1 & 0 \\
+      0 & 1
+    \end{pmatrix},
   \end{equation*}
-  since $e_2 \land e_1 \land e_3 = - \mu$
+  which has determinant $-1$.
 
-  Also,
+  It follows that we must therefore have
   \begin{equation*}
-    * e_3 = e_1 \land e_2.
+    * e_1 = e_2 \land e_3.
   \end{equation*}
 
-  Note that $* 1 = \mu$ and  $* \mu = 1$, for any dimension.
-\end{eg}
-
-\begin{equation*}
-  \Lambda^k(V) \overset{*}{\underset{\cong}{\to}} \Lambda^{n-k}
-  \overset{*}{\underset{\cong}{\to}} \Lambda^k(V).
-\end{equation*}
-
-\noindent
-\hlbnoted{Claim: $*^2 = (-1)^{k(n-k)}$ on $\Lambda^k(V)$} 
-
-\begin{proof}
+  Through similar steps, we can derive
   \begin{equation*}
-    *(e_{i_1} \land \hdots \land e_{i_k}) = c e_{j_1} \land \hdots \land
-    e_{j_{n-k}}
+    * e_2 = e_3 \land e_1 = - e_1 \land e_3
   \end{equation*}
   and
   \begin{equation*}
-    c \mu = e_{i_1} \land \hdots \land e-{i_k} \land e_{j_1} \land \hdots \land
-    e_{j_{n-k}}.
+    * e_3 = e_1 \land e_2.
   \end{equation*}
+\end{eg}
 
-  We have
+\begin{eg}
+  We shall use the same setup as above, except now we consider $* : \Lambda^2(V)
+  \to \Lambda^1(V)$. Then for instance, we have
   \begin{equation*}
-    *^2 (e_{i_1} \land \hdots \land e_{i_k}) = c ( * (e_{j_1} \land \hdots \land
-    e_{j_{n-k}}) ) = cb e_{i_1} \land \hdots \land e_{i_k}
-  \end{equation*}
-  where
-  \begin{equation*}
-    b \mu = e_{j_1} \land \hdots \land e_{j_{n-k}} \land e_{i_1} \land \hdots
-    e_{i_k}.
-  \end{equation*}
-  So
-  \begin{equation*}
-    c \mu = b \mu (-1)^{k(n-k)},
+    \langle *(e_1 \land e_2) , e_3 \rangle \mu = e_1 \land e_2 \land e_3,
   \end{equation*}
   and so
   \begin{equation*}
-    bc = (-1)^{k(n-k)}.
+    \langle *(e_1 \land e_2), e_3 \rangle = 1,
   \end{equation*}
+  but that can only happen when
+  \begin{equation*}
+    *(e_1 \land e_2) = e_3.
+  \end{equation*}
+  Note that by the bilinearity of the inner product, and linearity of $*$, we
+  have
+  \begin{equation*}
+    \langle *(e_2 \land e_1), -e_3 \rangle = -1 \implies *(e_2 \land e_1) = -
+    e_3.
+  \end{equation*}
+  Using the same methods, we can calculate
+  \begin{gather*}
+    *(e_2 \land e_3) = e_1 \text{ and } \\
+    *(e_3 \land e_1) = e_2.
+  \end{gather*}
+\end{eg}
+
+\begin{note}
+  \begin{itemize}
+    \item Note that $* 1 = \mu$ and  $* \mu = 1$, for any dimension.
+    \item By \cref{propo:_is_an_isomorphism}.
+      \begin{equation*}
+        \Lambda^k(V) \overset{*}{\underset{\cong}{\to}} \Lambda^{n-k} (V)
+        \overset{*}{\underset{\cong}{\to}} \Lambda^k(V).
+      \end{equation*}
+  \end{itemize}
+\end{note}
+
+\begin{propo}[$*^2 = (-1)^{k(n-k)}$]\label{propo:star_2_1_k_n_k_}
+  Let $*_1 : \Lambda^k(V) \to \Lambda^{n-k}(V)$ and $*_2 : \Lambda^{n-k}(V) \to
+  \Lambda^{n - (n - k)}(V) = \Lambda^{k}(V)$. Then
+  \begin{equation*}
+    *_2 \circ *_1 = (-1)^{k(n-k)} = *_1 \circ x_2.
+  \end{equation*}
+  Lazily so, we shall usually write
+  \begin{equation*}
+    *^2 = (-1)^{k(n-k)},
+  \end{equation*}
+  which is an abuse of notation.
+\end{propo}
+
+\begin{proof}
+  Suppose
+  \begin{equation*}
+    *_1(e_{i_1} \land \hdots \land e_{i_k}) = c e_{j_1} \land \hdots \land
+    e_{j_{n-k}}
+  \end{equation*}
+  and so we have
+  \begin{align*}
+    e_{i_1} \land \hdots \land e_{i_k} \land e_{j_1} \land \hdots \land
+    e_{j_{n-k}}
+    &= \langle *_1(e_{i_1} \land \hdots \land e_{i_k}), e_{j_1} \land \hdots \land
+    e_{j_{n-k}}\rangle \mu \\
+    &= \langle ce_{j_1} \land \hdots \land e_{j_{n-k}}, e_{j_1} \land \hdots
+    \land e_{j_{n-k}} \rangle \mu \\
+    &= c \langle e_{j_1} \land \hdots \land e_{j_{n-k}}, e_{j_1} \land \hdots
+    \land e_{j_{n-k}} \rangle \mu \\
+    &= c \mu.
+  \end{align*}
+
+  Similarly, if we consider
+  \begin{equation*}
+    *_2(e_{j_1} \land \hdots \land e_{j_{n-k}}) = e_{i_1} \land \hdots \land
+    e_{i_k},
+  \end{equation*}
+  then we get
+  \begin{align*}
+    b \mu &= e_{j_1} \land \hdots \land e_{j_{n-k}} \land e_{i_1} \land \hdots
+            \land e_{i_k} \\
+          &= (-1)^{k(n-k)} e_{i_1} \land \hdots \land e_{i_k} \land e_{j_1} \land
+            \hdots \land e_{j_{n-k}}
+  \end{align*}
+
+  In particular, note that
+  \begin{align*}
+    *_2 (*_1 (e_{i_1} \land \hdots \land e_{i_k})) = *_2 (e_{j_1} \land \hdots
+    \land e_{j_{n-k}}) = bc (e_{i_1} \land \hdots \land e_{i_k}).
+  \end{align*}
+  Therefore, we have
+  \begin{align*}
+    &(-1)^{k(n-k)} e_{i_1} \land \hdots e_{i_k} \land e_{j_1} \land \hdots
+    \land e_{j_{n-k}} \\
+    &= \langle *_2 (*_1 (e_{i_1} \land \hdots \land e_{i_k}), e_{i_1} \land \hdots
+    \land e_{i_k}) \rangle \mu
+    = bc \mu.
+  \end{align*}
+  It thus follows that
+  \begin{equation*}
+    *_2 \circ *_1 = bc = (-1)^{k(n-k)}.
+  \end{equation*}
+  We can do almost exactly the same thing for $*_1 \circ *_2$.
 \end{proof}
 
 \begin{eg}
-  Back to the example: note that if $n$ is odd (which is our case), we hvae
-  \begin{equation*}
-    (-1)^{k (n-k)} = 1
-  \end{equation*}
-  for any $k$. So $*^2 = 1$ always, on odd dimensional spaces.
-
-  If $n$ is even, then
-  \begin{equation*}
-    *^2 = (-1)^k
-  \end{equation*}
-  on $\Lambda^k(V)$.
+  We have already seen an example of the above proposition. Recall that in the
+  last two examples, we showed that
+  \begin{align*}
+    *(e_1) &= e_2 \land e_3  &              & *(e_2 \land e_3) = e_1 \\
+    *(e_2) &= -e_1 \land e_3 & \text{ and } & *(e_3 \land e_1) = e_2 \\
+    *(e_3) &= e_1 \land e_2  &              & *(e_1 \land e_2) = e_3.
+  \end{align*}
 \end{eg}
 
-\noindent
-\hlbnoted{$*$ is an isometry} i.e.
-\begin{equation*}
-  \langle *\alpha, * \gamma \rangle = \langle \alpha, \gamma \rangle
-\end{equation*}
-for all $\alpha, \gamma \in \Lambda^k(V)$.
+\begin{note}
+  From \cref{propo:star_2_1_k_n_k_}, we have
+  \begin{equation*}
+    *^2 = (-1)^{k(n-k)} = (-1)^{nk - k^2}.
+  \end{equation*}
+  \begin{itemize}
+    \item If $n$ is \textbf{odd}, then
+      \begin{itemize}
+        \item if $k$ is odd, then $nk$ and $k^2$ are both odd, and so $nk - k^2$ 
+          is even. Thus
+          \begin{equation*}
+            *^2 = +1.
+          \end{equation*}
+        \item if $k$ is even, then $nk$ and $k^2$ are both even, and so is $nk -
+          k^2$. Thus
+          \begin{equation*}
+            *^2 = +1.
+          \end{equation*}
+      \end{itemize}
+    \item If $n$ is \textbf{even}, then
+      \begin{itemize}
+        \item if $k$ is odd, then $nk$ is even and $k^2$ is odd, and so $nk -
+          k^2$ is odd. Thus
+          \begin{equation*}
+            *^2 = -1.
+          \end{equation*}
+        \item if $k$ is even, then $nk$ and $k^2$ are both even, and so is $nk -
+          k^2$. Thus
+          \begin{equation*}
+            *^2 = +1.
+          \end{equation*}
+      \end{itemize}
+  \end{itemize}
+
+  In conclusion, we have that if $n$ is odd, then $*^2 = +1$, but when $n$ is
+  even, then
+  \begin{equation*}
+    *^2 = (-1)^k.
+  \end{equation*}
+\end{note}
+
+\begin{defn}[Isometry]\index{Isometry}\label{defn:isometry}
+  A map $\phi : X \to Y$ is called an \hlnoteb{isometry} if
+  \begin{equation*}
+    \langle \phi(x_1), \phi(x_2) \rangle = \langle x_1, x_2 \rangle.
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[$*$ is an isometry]\label{propo:star_is_an_isometry}
+  $*$ is an isometry, i.e.
+  \begin{equation*}
+    \langle *\alpha, * \gamma \rangle = \langle \alpha, \gamma \rangle
+  \end{equation*}
+  for all $\alpha, \gamma \in \Lambda^k(V)$.
+\end{propo}
 
 \begin{proof}
+  Let $\alpha \in \Lambda^k(V)$ and $\beta \in \Lambda^{n-k}(V)$. Then
   \begin{align*}
-    \langle *\alpha, \beta \rangle \mu &= \alpha \land \beta (-1)^{k(n-k)} \beta
-    \land \alpha \\
-                                   &= (-1)^{k(n-k)} \langle * \beta, \alpha
-                                   \rangle \mu
+    \langle *\alpha, \beta \rangle \mu
+    &= \alpha \land \beta = (-1)^{k(n-k)} \beta \land \alpha \\
+    &= (-1)^{k(n-k)} \langle *\beta, \alpha \rangle \mu \\
+    &= (-1)^{k(n-k)} \langle \alpha, *\beta \rangle \mu.
   \end{align*}
-
-  \begin{align*}
-    \langle *\alpha, \beta \rangle = (-1)^{k(n-k)} \langle \alpha, * \beta \rangle
-  \end{align*}
-
-  Then
+  So
   \begin{equation*}
-    \langle *\alpha, *\gamma \rangle = \langle \alpha, (-1)^{k(n-k)} *^2 \gamma
-    \rangle = \langle \alpha, \gamma \rangle
+    \langle *\alpha, \beta \rangle = (-1)^{k(n-k)} \langle \alpha, *\beta \rangle
+  \end{equation*}
+  in $\mathbb{R}$.
+
+  If $\beta = *\gamma$ for some $\gamma \in \Lambda^k(V)$. Then
+  \begin{equation*}
+    \langle *\alpha, \beta \rangle = (-1)^{k(n-k)} \langle \alpha, *^2 \gamma
+    \rangle = (-1)^{2k(n-k)} \langle \alpha, \gamma \rangle.
+  \end{equation*}
+  Since $2k(n-k)$ is even, we have that
+  \begin{equation*}
+    \langle *\alpha, *\gamma \rangle = \langle \alpha, \gamma \rangle.
   \end{equation*}
 \end{proof}
 
 The following is more common as the definition of the Hodge star in the
 literature.
 
-\begin{crly}
+\begin{crly}[Alternative Definition of the Hodge Star Operator]\label{crly:alternative_definition_of_the_hodge_star_operator}
   $\forall \alpha, \gamma \in \Lambda^k(V)$, we have
   \begin{equation*}
     \langle \alpha, \gamma \rangle \mu = \alpha \land * \gamma.
@@ -7963,9 +8209,18 @@ literature.
   \end{equation*}
 \end{proof}
 
-Let's put all these on submanifolds of $\mathbb{R}^n$.
+% subsection hodge_star_operators (end)
 
-On $\mathbb{R}^n$, we have the standard inner product:
+\section{Physical and Geometric Interpretations of Stokes' Theorem}%
+\label{sec:physical_and_geometric_interpretations_of_stokes_theorem}
+% section physical_and_geometric_interpretations_of_stokes_theorem
+
+\subsection{Inner product on the Tangent Space of a Submanifold}%
+\label{sub:inner_product_on_the_tangent_space_of_a_submanifold}
+% subsection inner_product_on_the_tangent_space_of_a_submanifold
+
+Let's put all these on submanifolds of $\mathbb{R}^n$. On $\mathbb{R}^n$, we
+have the standard inner product:
 \begin{equation*}
   \langle x, y \rangle = \sum_{i=1}^{n} x^i y^i.
 \end{equation*}
@@ -7989,16 +8244,144 @@ Let $M$ be a $k$-dimensional submanifold of $\mathbb{R}^n$. Then
 \begin{equation*}
   T_p M \subseteq T_p \mathbb{R}^n.
 \end{equation*}
-The restriction of $\langle \cdot, \cdot \rangle$ to $T_p M$ is a positive
-definite inner products on $T_p M$.
+The restriction of $\langle \cdot, \cdot \rangle$ to $T_p M$ is an inner product
+on $T_p M$.
 
-Suppose $M$ is oriented, then $T_p M$ has an orientation and an inner product.
+Now if $M$ is oriented, then $T_p M$ has an orientation and an inner product.
+Furhtermore, from A6Q6, we know that
+\begin{equation*}
+  T_p \mathbb{R}^n = T_p M \oplus N_p M,
+\end{equation*}
+where $N_p M$ denotes the orthogonal complement of $T_p M$, which is called the
+\hldefn{normal space} at $p$ of $M$. $N_p M$ is a $(n - k)$-dimensional vector
+space.
 
-% subsection hodge_star_operators (end)
+% subsection inner_product_on_the_tangent_space_of_a_submanifold (end)
+
+% section physical_and_geometric_interpretations_of_stokes_theorem (end)
 
 % section more_linear_algebra (end)
 
 % chapter lecture_32_apr_01st (end)
+
+\chapter{Lecture 33 Apr 03rd [inc]}%
+\label{chp:lecture_33_apr_03rd}
+% chapter lecture_33_apr_03rd
+
+\section{Physical and Geometric Interpretations of Stokes' Theorem (Continued)}%
+\label{sec:physical_and_geometric_interpretations_of_stokes_theorem_continued}
+% section physical_and_geometric_interpretations_of_stokes_theorem_continued
+
+\subsection{Volume Form}%
+\label{sub:volume_form}
+% subsection volume_form
+
+\begin{defn}[Volume Form]\index{Volume Form}\label{defn:volume_form}
+  Suppose $M$ is oriented. Then we can choose an \hlnotea{oriented orthonormal
+  basis} $\{ e_1, \ldots, e_k \}$ of $T_p M$. Then the
+  \hyperref[defn:dual_map]{dual basis} is also oriented and orthonormal.
+  
+  This gives us a \hlimpo{preferred} orientation form $\mu \in \Omega^k(M)$ such
+  that at any $p \in M$, we have
+  \begin{equation*}
+    \mu_p = e^1 \land \hdots \land e^k,
+  \end{equation*}
+  which we call the \hlnoteb{volume form}. \sidenote{A volume form is sort of
+  like a higher-dimensional way of naming a "volume".}
+\end{defn}
+
+\begin{note}
+  Note that $\mu$ is the unique smooth $k$-form on $M$ such that
+  \begin{equation*}
+    \mu(e_1, \ldots, e_k) = +1
+  \end{equation*}
+  whenever $\{ e_1, \ldots, e_k \}$ is an oriented orthonormal basis of $T_p M$.
+\end{note}
+
+The reason why we call such an $\mu$ a volume form is as follows.
+
+\begin{note}
+  Let $M$ be compact and oriented, and $\mu$ the volume form of $M$. Then
+  \begin{equation*}
+    \int_{M} \mu = \text{ volume of } M.
+  \end{equation*}
+  \begin{itemize}
+    \item If $M$ is 1-dimensional, then the above measures ``length'';
+    \item if $M$ is 2-dimensional, then the above measures ``area''; and
+    \item if $M$ is 3-dimensional, then the above measures ``volume'',
+  \end{itemize}
+  etc.
+\end{note}
+
+\begin{eg}
+  \hlwarn{Example incomplete. Source notes don't make sense.}
+
+  Consider a circle with radius $R$ in $\mathbb{R}^2$, centered on the origin.
+\end{eg}
+
+% subsection volume_form (end)
+
+\subsection{Musical Isomorphisms}%
+\label{sub:musical_isomorphisms}
+% subsection musical_isomorphisms
+
+Recall that from A5Q7, we saw that
+\begin{equation*}
+  \sharp : V \to V^*
+\end{equation*}
+is an isomorphism determined by the inner product defined by
+\begin{equation*}
+  (\sharp(v))(w) = \langle v, w \rangle,
+\end{equation*}
+for any $v, w \in T_p M$. We shall write this operation as $v^\sharp$.
+
+We also had the operation
+\begin{equation*}
+  \flat = \sharp^{-1} : V^* \to V,
+\end{equation*}
+which is also an isomorphism as shown on the same assignment problem. We shall
+write this operation as $v^\flat$.
+
+\begin{defn}[Metric dual 1-form]\index{Metric dual 1-form}\label{defn:metric_dual_1_form}
+  Given a smooth vector field $X$ on $M$, we get a \hlnoteb{``metric dual''
+  1-form} $X^\sharp$ on $M$ defined by
+  \begin{equation*}
+    X^\sharp(Y) = \langle X, Y \rangle,
+  \end{equation*}
+  for any $Y \in \Gamma(TM)$.
+\end{defn}
+
+\begin{defn}[Metric dual vector field]\index{Metric dual vector field}\label{defn:metric_dual_vector_field}
+  Given a smooth $1$-form $\alpha$ on $M$, we get a \hlnoteb{``metric dual'' vector
+  field} $\alpha^\flat$ on $M$ defined by
+  \begin{equation*}
+    \beta(\alpha^\flat) = \langle \alpha, \beta \rangle,
+  \end{equation*}
+  for any $\beta \in \Omega^1(M)$.
+\end{defn}
+
+\begin{defn}[Local Frame]\index{Local Frame}\label{defn:local_frame}
+  Given a set of smooth basis vectors $\mathcal{A} = \{ e_1, \ldots, e_k \}
+  \subseteq \Gamma(V \cap M)$, where $V$ is an open set $\mathbb{R}^n$ and $M$ 
+  is a $k$-dimensional submanifold, we call $\mathcal{A}$ a \hlnoteb{local
+  frame} on $M$ if
+  \begin{equation*}
+    \left\{ e_1 \at{p}{}, \ldots, e_k \at{p}{} \right\}
+  \end{equation*}
+  is a basis of $T_p M$ for all $p \in V \cap M$.
+\end{defn}
+
+Let $\{ e_1, \ldots, e_k \}$ be a local frame for $M$, defined on some open $V
+\subseteq \mathbb{R}^n$. Then let
+\begin{equation*}
+  g_{ij} = \langle e_i, e_j \rangle \in C^\infty(V \cap M).
+\end{equation*}
+
+% subsection musical_isomorphisms (end)
+
+% section physical_and_geometric_interpretations_of_stokes_theorem_continued (end)
+
+% chapter lecture_33_apr_03rd (end)
 
 \appendix
 
@@ -8152,7 +8535,9 @@ See \href{https://math.stackexchange.com/questions/664594/why-mathbf0-has-dimens
 
 \backmatter
 
-\pagestyle{plain}
+\makeatletter
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
+\makeatother
 
 \bibliography{references}
 
