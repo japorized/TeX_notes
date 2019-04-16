@@ -1,10 +1,18 @@
-- title: PMATH467 W19 - Algebraic Geometry
+- title: PMATH467 W19 - Algebraic Topology
   pdf:
     - title: classnotes.pdf
       src: /PMATH467/classnotes.pdf
+    - title: classnotes-dark.pdf
+      src: /PMATH467/classnotes-dark.pdf
   tex:
     - title: classnotes.tex
       src: /PMATH467/classnotes.tex
+  keywords: [
+    'PMATH467', 'Winter 2019', 'Algebraic Topology', 'PMATH',
+    'Homology', 'Fundamental Group', 'Topology', 'Topological invariance',
+    'Homotopy invariance', 'Manifolds', 'Quotient space', 'Projective space',
+    'Mobius strip', 'Klein bottle'
+  ]
 - title: PMATH365 W19 - Differential Geometry
   pdf:
     - title: classnotes.pdf
@@ -14,6 +22,11 @@
   tex:
     - title: classnotes.tex
       src: /PMATH365/classnotes.tex
+  keywords: [
+    'PMATH365', 'Winter 2019', 'Differential Geometry', 'PMATH',
+    'Differential Forms', 'Exterior Forms', 'Exterior Derivative', 'Hodge Star',
+    'Submanifolds', 'Tangent space', 'Curl', 'Divergence', 'Stokes'
+  ]
 - title: PMATH348 W19 - Fields and Galois Theory
   pdf:
     - title: classnotes.pdf
@@ -23,6 +36,10 @@
   tex:
     - title: classnotes.tex
       src: /PMATH348/classnotes.tex
+  keywords: [
+    'PMATH348', 'Winter 2019', 'Field Theory', 'Galois Theory', 'PMATH',
+    'Irreducible polynomials', 'Field extensions', 'Finite fields'
+  ]
 - title: PMATH351 F18 - Real Analysis
   pdf:
     - title: classnotes.pdf
@@ -37,7 +54,12 @@
   tex:
     - title: classnotes.tex
       src: /PMATH733/classnotes.tex
-
+  keywords: [
+    'PMATH733', 'PMATH433', 'Fall 2018', 'Set Theory', 'Model Theory', 'PMATH',
+    'Logic', 'Ordinals', 'Cardinals', 'Cardinality', 'Axiom of Choice', 'ZFC',
+    'Zermelo-Fraenkel', 'Zorn', 'Model', 'Language', 'Structure', 'Completeness',
+    'Consistency', 'Ultraproducts', 'Ultrafilters'
+  ]
 - title: ACTSC431 F18 - Loss Model I
   pdf:
     - title: classnotes.pdf
