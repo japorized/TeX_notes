@@ -488,14 +488,14 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\vvimponote}{\faStar\faStar\faStar}
 
 % Document header formatting
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{#1}}
 \makeatletter
 \pagestyle{fancy}
 \fancyhead{}
 \fancyhead[RO]{\textsl{\@title} \enspace \thepage}
-\fancyhead[LE]{\thepage \enspace \textsl{\leftmark \enspace - \enspace \rightmark}}
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark \enspace \rightmark}}
 \makeatother
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}}
 
 % Comment the two lines below if you want to print the document
 \pagecolor{background}

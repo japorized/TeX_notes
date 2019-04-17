@@ -1,26 +1,35 @@
+\makeatletter
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
+\makeatother
+
 \hypersetup{pageanchor=false}
 \maketitle
 \hypersetup{pageanchor=true}
 \begin{fullwidth}
+\chaptermark{Table of Contents}
 \tableofcontents
 \end{fullwidth}
 
-\newpage
+\clearpage
 \begin{fullwidth}
-  \renewcommand{\listtheoremname}{List of Definitions}
+  \renewcommand{\listtheoremname}{\textsl{List of Definitions}}
   \listoftheorems[ignoreall,show={defn}]
 \end{fullwidth}
 
-\newpage 
+\clearpage 
 \begin{fullwidth}
-  \renewcommand{\listtheoremname}{List of Theorems}
+  \renewcommand{\listtheoremname}{\textsl{List of Theorems}}
   \listoftheorems[ignoreall,
     show={axiom,lemma,thm,crly,propo,marginthm,marginpropo,marginlemma,marginaxiom,margincrly}
   ]
 \end{fullwidth}
 
-\newpage
+\clearpage
 \begin{fullwidth}
-  \renewcommand{\listtheoremname}{List of Procedures}
+  \renewcommand{\listtheoremname}{\textsl{List of Procedures}}
   \listoftheorems[ignoreall, show={procedure}]
 \end{fullwidth}
+
+\makeatletter
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark \enspace \rightmark}}
+\makeatother
