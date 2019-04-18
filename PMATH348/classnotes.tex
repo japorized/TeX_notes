@@ -43,7 +43,6 @@
 \DeclareMathOperator{\ch}{ch}
 \DeclareMathOperator{\Span}{span}
 \DeclareMathOperator{\lcm}{lcm}
-\DeclareMathOperator{\Char}{char}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -908,7 +907,7 @@ Then $f(a) = 0 + r = r$, and so $f(x) = (x - a) q(x) + f(a)$.
 \end{note}
 
 \begin{note}
-  If $R = \mathbb{Z}$ and $F = \mathbb{Q}$, then $p(x)$ is irreducible over
+  If $R = \mathbb{Z}$ and $F = \mathbb{Q}$, then if $p(x)$ is irreducible over
   $\mathbb{Z}$, then $p(x)$ is irreducible over $\mathbb{Q}$.
 \end{note}
 
@@ -928,7 +927,7 @@ Our goal in this section is to develop methods to test for the irreducibility
 of polynomials.
 
 \begin{warning}
-  Note that $f(x) = 2x + 4 = 2(x + 2)$ is reducible ovver $\mathbb{Z}$
+  Note that $f(x) = 2x + 4 = 2(x + 2)$ is reducible over $\mathbb{Z}$
   \sidenote{This is interesting over $\mathbb{Z}$, since
   $2 \notin \mathbb{Z}^\times$.} but
   irreducible over $\mathbb{Q}$.
@@ -987,9 +986,10 @@ of polynomials.
 \end{eg}
 
 \begin{warning}
-  Consider $f(x) = 2x^2 + x \in \mathbb{Q}[x]$, which is reducible over $\mathbb{Q}$.
-  However, $\bar{f}(x) = x \in \mathbb{Z}_2[x]$ is \hlimpo{reducible} over $\mathbb{Z}_2$.
-  Notice here that $\deg \bar{f} \neq \deg f$.
+  Consider $f(x) = 2x^2 + x \in \mathbb{Q}[x]$, which is reducible over
+  $\mathbb{Q}$.  However, $\bar{f}(x) = x \in \mathbb{Z}_2[x]$ is
+  \hlimpo{irreducible} over $\mathbb{Z}_2$.  Notice here that $\deg \bar{f} \neq
+  \deg f$.
 \end{warning}
 
 More generally so...
@@ -1062,13 +1062,16 @@ More generally so...
 \end{eg}
 
 \begin{proof}
-  Let $g(y) = y^2 + (x^2 + 1)$. Since $x + 1$ is irreducible, let $P = \langle x + 1 \rangle$,
-  which is therefore a prime ideal of $\mathbb{Q}[x]$. Moreover, notice that
+  Consider $f(x, y) = y^2 + (x^2 + 1)$. Since $x - 1$ is irreducible, let $P =
+  \langle x - 1 \rangle$, which is therefore a prime ideal of $\mathbb{Q}[x]$.
+  Moreover, then since $x + 1 \in \mathbb{Q}[x]$, notice that
   \begin{equation*}
     x^2 - 1 = ( x + 1 )( x - 1 ) \in P.
   \end{equation*}
-  Since $(x + 1)^2 \nmid \left(x^2 - 1\right)$, we have that $x^2 - 1 \notin P^2$. Then by
-  \hyperref[propo:eisenstein_s_criterion]{Eisenstein}, we have that $f(x, y)$ is irreducible.
+  Since $(x - 1)^2 \nmid \left(x^2 - 1\right)$, \sidenote{The only polynomial of
+  degree 2 in $P$ is $(x - 1)^2$.} we have that $x^2 - 1 \notin
+  P^2$. Then by \hyperref[propo:eisenstein_s_criterion]{Eisenstein}, we have
+  that $f(x, y)$ is irreducible.
 \end{proof}
 
 \begin{crly}[Eisenstein + Gauss]\label{crly:eisenstein_gauss}
@@ -1093,6 +1096,16 @@ More generally so...
   $f$ is irreducible over $\mathbb{Q}$.
 \end{eg}
 
+\begin{eg}
+  It is not always true that such a prime $p$ can be found. For example,
+  consider the polynomial
+  \begin{equation*}
+    x^2 - 72 = x^2 - \left( 2^3 3^2 \right) \in \mathbb{Q}[x],
+  \end{equation*}
+  which has roots $\pm 6 \sqrt{2} \notin \mathbb{Q}$. Thus $x^2 - 72$ is
+  irreducible in $\mathbb{Q}[x]$.
+\end{eg}
+
 \begin{note}
   The above example is noteworthy since it will appear rather often throughout this course. Notice
   that if we have polynomials of the above form, then we immediately have that the polynomial is
@@ -1110,28 +1123,42 @@ More generally so...
 
     \item $f(x) = x^3 + 2x + 16$
 
-      Eisenstein can't help us here since $\gcd(2, 16) = 2$ and $2^2 = 4 \mid 16$.
-      Consider $\bar{f}(x) = x^3 + 2x + 1 \in \mathbb{Z}_3[x]$.  Notice that
-      $\bar{f}(0) = 1 = \bar{f}(2)$ and $\bar{f}(1) = 4$. Since $\deg \bar{f} = 3$, it follows
-      from \cref{propo:irreducible_rootless_polynomials} that $\bar{f}$ is irreducible over
-      $\mathbb{Z}_3$. Since $\deg f = \deg \bar{f}$, it follows from the
-      \hyperref[propo:mod_p_irreducibility_test]{Mod-$3$ irreducible test} that $f$ is irreducible
-      over $\mathbb{Q}$.
+      Eisenstein can't help us here, at least, not right now, since $\gcd(2, 16)
+      = 2$ and $2^2 = 4 \mid 16$. Consider $\tilde{f}(x) = x^3 + 2x + 1 \in
+      \mathbb{Z}_3[x]$. Notice that $\tilde{f}(0) = 1 = \tilde{f}(2)$ and
+      $\tilde{f}(1) = 4$. Since $\deg \tilde{f} = 3$, it follows from
+      \cref{propo:irreducible_rootless_polynomials} that $\tilde{f}$ is
+      irreducible over $\mathbb{Z}_3$. Since $\deg f = \deg \tilde{f}$, it follows
+      from the \hyperref[propo:mod_p_irreducibility_test]{Mod-$3$ irreducible
+      test} that $f$ is irreducible over $\mathbb{Q}$. \sidenote{
+      \begin{marginwarning}
+        Note that we cannot use Eisenstein on $\tilde{f}$ since while
+        $\mathbb{Z}_p$ is an integral domain, the only proper prime ideal is
+        $\{0\}$, which would make the tool useless.
+
+        In addition to the above, note that $\mathbb{Z}_p$ cannot have other
+        proper prime ideals. If $1 < k < p$, then by Fermat's Little Theorem,
+        $k^{p-1} \equiv 1 \mod p$, i.e. $1 \in \langle k \rangle$, which means
+        $\langle k \rangle = \mathbb{Z}_p$.
+      \end{marginwarning}
+      }
 
     \item $f(x) = x^4 + 5x^3 + 6x^2 - 1$
 
-      Again, Eisenstein can't help us here, since $5 \coprime 6 \coprime 1$ \sidenote{$\coprime$
-      is a common notation for coprimeness.}. Consider
+      Again, Eisenstein can't help us here, since $5 \coprime 6 \coprime 1$
+      \sidenote{$\coprime$ is a common notation for coprimeness.}. Consider
       \begin{equation*}
         \bar{f}(x) = x^4 + x^3 + 1 \in \mathbb{Z}_2[x].
       \end{equation*}
-      We know that $\bar{f}(0) = 1 = \bar{f}(1)$, and so $\bar{f}$ has no roots in $\mathbb{Z}_2$.
-      \sidenote{Note that we cannot use \cref{propo:irreducible_rootless_polynomials} here as
-      $\deg \bar{f} = 4 > 3$.} Consider the quadratics\sidenote{\hlwarn{Why did we only check for
-      the quadratics and not others?} We did so as we have already checked for the linear factors
-      by checking for roots, which also checks for the cubic factors, since if we can factor out
-      a linear factor, we are left with a cubic factor. Ruling out linear factors in turn rules out
-      cubic factors.} of $\mathbb{Z}_2[x]$: we have
+      We know that $\bar{f}(0) = 1 = \bar{f}(1)$, and so $\bar{f}$ has no roots
+      in $\mathbb{Z}_2$. \sidenote{Note that we cannot use
+      \cref{propo:irreducible_rootless_polynomials} here as $\deg \bar{f} = 4 >
+      3$.} Consider the quadratics\sidenote{\hlwarn{Why did we only check for the
+      quadratics and not others?} We did so as we have already checked for the
+      linear factors by checking for roots, which also checks for the cubic
+      factors, since if we can factor out a linear factor, we are left with a
+      cubic factor.  Ruling out linear factors in turn rules out cubic factors.}
+      of $\mathbb{Z}_2[x]$: we have
       \begin{equation*}
         x^2, \quad x^2 + x, \quad x^2 + 1, \quad x^2 + x + 1,
       \end{equation*}
@@ -1139,25 +1166,27 @@ More generally so...
       \begin{equation*}
         \left( x^2 + x + 1 \right)^2 = x^4 + x^2 + 1 \neq \bar{f}(x)
       \end{equation*}
-      (by the Freshman's Dream). Thus $\bar{f}$ is irreducible in $\mathbb{Z}_2$. Since $\deg f =
-      \deg \bar{f}$, by \hyperref[propo:mod_p_irreducibility_test]{Mod-$2$ irreducible test}.
+      (by the Freshman's Dream). Thus $\bar{f}$ is irreducible in
+      $\mathbb{Z}_2$. Since $\deg f = \deg \bar{f}$, by
+      \hyperref[propo:mod_p_irreducibility_test]{Mod-$2$ irreducible test}.
 
-    \item \label{eg:polynomial_with_prime_minus_1_degree}\imponote Let $p$ be a prime, and let
+    \item \label{eg:polynomial_with_prime_minus_1_degree}\imponote Let $p$ be a
+      prime, and let
       \begin{equation*}
         f(x) = x^{p - 1} + x^{p - 2} + \hdots + x^2 + x + 1.
       \end{equation*}
       Note that $f(x)(x - 1) = x^p - 1$, and so $f(x) = \frac{x^p - 1}{x - 1}$.
       Furthermore, notice that
       \begin{align*}
-        f(x + 1) &= \frac{(x + 1)^p - 1}{x} = \sum_{k = 0}^{p} \binom{p}{k} x^{p - k} - \frac{1}{x} \\
-                 &= x^{p - 1} + \binom{p}{p - 1} x^{p - 2} + \hdots + \binom{p}{2} x + \binom{p}{1}.
+        f(x + 1) &= \frac{(x + 1)^p - 1}{x} = \sum_{k = 0}^{p} \binom{p}{k} x^{p
+                  - k} - \frac{1}{x} \\
+                 &= x^{p - 1} + \binom{p}{p - 1} x^{p - 2} + \hdots +
+                  \binom{p}{2} x + \binom{p}{1}.
       \end{align*}
-      By setting $P = \langle p \rangle$, we have that $f(x + 1)$ is irreducible by Eisenstein.
-      It follows from A3Q2 that $f(x)$ is also irreducible.
+      By setting $P = \langle p \rangle$, we have that $f(x + 1)$ is irreducible
+      by Eisenstein. It follows from A3Q2 that $f(x)$ is also irreducible.
   \end{enumerate}
 \end{eg}
-
-% TODO : add summary for proving that a polynomial is irreducible
 
 \subsection{Summary for Proving Irreducibility}%
 \label{sub:summary_for_proving_irreducibility}
@@ -1204,6 +1233,10 @@ achieve our goal. Our trusty tools include:
     that is, let $\tilde{f}(x) \in \mathbb{Z}_p[x]$ be such that we replace each
     of the coefficients of $f$ are replaced with their counterparts in
     $\mathbb{Z}_p$. Then use the other methods here to check for irreducibility.
+
+  \item By \hyperref[item:a3q2a]{A3Q2(a)}, we have that $f(x) \in F[x]$ is
+    irreducible over $F[x]$ if $f(x + a)$ is irreducible over $F[x]$ for some $a
+    \in F^\times$.
 \end{itemize}
 
 Some somewhat helpful heuristics that can reduce our work and/or make a problem
@@ -1220,6 +1253,10 @@ much easier include:
     Note that if $g(y)$ is reducible, then so is $f(x)$. Conversely, if we want
     $f(x)$ to be irreducible, it had better be the case that $g(y)$ is
     irreducible.
+  \item Depending on where our polynomial comes from, the \hlimpo{graph} of the
+    function may be helpful. For instance, the function $x^4 + 3$ looks like a
+    quadratic graph that does not intersect the $x$-axis, so we know that it
+    does not have real roots.
 \end{itemize}
 
 % subsection summary_for_proving_irreducibility (end)
@@ -1265,13 +1302,16 @@ if $F$ is a field under the same operations.
         \mathbb{Z}_p(x) = \left\{ \frac{f(x)}{g(x)} \mmid f(x), g(x) \in
           \mathbb{Z}_p[x], g \neq 0 \right\},
       \end{equation*}
-      then $\mathbb{Z}_p(x) / \mathbb{Z}_p$.
+      then $\mathbb{Z}_p(x) / \mathbb{Z}_p$. We call $\mathbb{Z}_p(x)$ the
+      fraction field of $\mathbb{Z}_p$.
 
     \item Let $F$ be a field, and $f(x) \in F[x]$ be irreducible. Then let $K =
       F[x]/\langle f(x) \rangle$. Then $K / F$.
 
     \item Note that $\mathbb{Q}$ is not an extension of $\mathbb{Z}_p$ for any
-      prime $p$.
+      prime $p$, because they have \hlimpo{different characteristics}. In
+      particular, $\mathbb{Q}$ subfields of $\mathbb{Q}$ must have the same
+      characteristic as $\mathbb{Q}$.
   \end{itemize}
 \end{eg}
 
@@ -5649,7 +5689,7 @@ Important to read assignments for 1, 2, 3, 4, 6(\faStar), 7, 8
   \item A Galois $K / F$ such that $[K : F] = 36$.
     $\mathbb{Q}(\zeta_{37}) / \mathbb{Q}$ (note 37 is prime)
   \item An irreducible $f(x) \in \mathbb{Q}[x]$ such that $\deg f(x) = 7$ and
-    $\abs{\Galf(x)} = 20$.
+    $\abs{\Gal f(x)} = 20$.
 
     No, $7 \nmid 20$, transitive subgroup
   \item A field  $E$ such that $\mathbb{F}_p \subseteq E \subseteq \subseteq
@@ -5706,19 +5746,473 @@ the name with a proposition known as
   and the set of subgroups $A / N$ of $G / N$.
 \end{thm}
 
-\begin{proof}
-  % TODO: prove the Correspondence Theorem
-\end{proof}
-
 % TODO add Rational roots theorem
 
 % section correspondence_theorem (end)
 
 % chapter asides_and_prior_knowledge (end)
 
+\chapter{Assignment Problems}%
+\label{chp:assignment_problems}
+% chapter assignment_problems
+
+\section{Assignment 1}%
+\label{sec:assignment_1}
+% section assignment_1
+
+\begin{enumerate}
+  \item \begin{enumerate}
+      \item Let $G$ be a group and let $Z(G)$ denote the centre of $G$.  Prove
+        that if $G / Z(G)$ is cyclic then $G$ is abelian.
+      \item Prove that any group of order $p^2$, where $p$ is a prime, is
+        abelian. (Hint: Class Equation)
+    \end{enumerate}
+  \item Prove that there is no simple group of order $132$.
+  \item \begin{enumerate}
+      \item Let $G$ be a simple group and let $H$ be a subgroup of $G$ such that
+        $\abs{ G : H } = n > 1$. Prove that there exists an injective group
+        homomorphism $\phi : G \to S_n$.
+      \item Let $p$ be a prime dividing the order of a simple group $G$, where
+        $G$ is not of order $p$. Let $n_p$ denote the number of Sylow
+        $p$-subgroups of $G$. Prove that the order of $G$ divides $n_p !$.
+      \item Prove that there is no simple group of order $48$.
+    \end{enumerate}
+  \item Let $p$ be a prime which divides the order of a finite group $G$. Say $\abs{G} =  p^n m$, with $n \in \mathbb{N}$ and $p \nmid m$.
+
+    Prove that $G$ has a subgroup of order $p^k$, for $k = 1, 2, \ldots, n$.
+  \item Let $p$ be a prime which divides the order of a finite group $G$. Show that any $p$-subgroup of $G$ is contained in a Sylow $p$-subgroup of $G$.
+\end{enumerate}
+
+% section assignment_1 (end)
+
+\section{Assignment 2}%
+\label{sec:assignment_2}
+% section assignment_2
+
+\begin{enumerate}
+  \item Find all Sylow $3$-subgroups of $GL_2(\mathbb{Z}_3)$. Be sure to justify that
+  \item The purpose of this exercise is to ensure all students see a proof of the
+    Correspondence Theorem at least once!
+    \begin{enumerate}
+      \item (Correspondence Theorem) Let $G$ be a group and let $N$ be a normal
+        subgroup of $G$. Prove that every subgroup of $G / N$ is of the form
+        $H / N$, where $H$ is a subgroup of $G$ which contains $N$.
+      \item (Normal Correspondence Theorem) Let $G$ be a group and let $N$ be a
+        normal subgroup of $G$. Prove that every normal subgroup of $G / N$ is
+        of the form $H / N$, where $H$ is a normal subgroup of $G$ which contains 
+        $N$.
+      \item Let $G$ be a finite group and let $p$ be a prime which divides the
+        order of $G$. Let $N$ be a normal subgroup of $G$. Prove that the number
+        of Sylow $p$-subgroups of $G / N$ is less than or equal to the number of
+        Sylow $p$-subgroups of $G$.
+
+        (Note: if $p$ does not divide the order of $G / N$, we will say $G / N$ has
+        $0$ Sylow $p$-subgroups.)
+    \end{enumerate}
+    you have found them all.
+  \item Consider the following group-theoretic proposition.
+    \begin{quotebox}{magenta}{foreground}
+      Let $G$ be a group and let $H_1, H_2, \ldots, H_n$ be a collection of normal
+      subgroups of $G$. If $(H_1 H_2 \hdots H_{i - 1}) \cap H_i = \{ e \}$ for
+      $i = 2, 3, \ldots, n$ then 
+      $H_1 H_2 \hdots H_n \cong H_1 \times H_2 \times \hdots \times H_n$.
+    \end{quotebox}
+    \begin{enumerate}
+      \item Prove the proposition when $n = 2$.
+      \item Let $G$ be a finite group. Prove that every Sylow subgroup of $G$ is
+        normal in $G$ if and only if $G$ is an external direct product of its
+        Sylow subgroups.  (You may freely use the above proposition.)
+    \end{enumerate}
+  \item Use Sylow Theory to classify all groups of order $175$ up to isomorphism.
+\end{enumerate}
+
+% section assignment_2 (end)
+
+\section{Assignment 3}%
+\label{sec:assignment_3}
+% section assignment_3
+
+\begin{enumerate}
+	\item Determine whether or not the following polynomials are irreducible over
+    the indicated ring.
+    \begin{enumerate}
+      \item $f(x) = 8x^7 + 3x^4 + x^3 + 2x^2 + 5x + 9 \in \mathbb{Z}_{11}[x]$.
+      \item $f(x) = x^4 + 3 \in \mathbb{R}[x]$.
+      \item $f(x) = x^{n - 1} + x^{n - 2} + \hdots + x^2 + x + 1 \in
+        \mathbb{Q}[x]$, where $n > 1$ is a composite number.
+      \item $f(x) = x^3 + 5x^2 - 2x + 12 \in \mathbb{Z}[x]$.
+      \item $f(x, y) = x^4 + y^5 x^3 + y^3 x + y \in \mathbb{Q}[y, x]$.
+    \end{enumerate}
+  \item \begin{enumerate}
+      \item Let $F$ be a field and let $a \in F$, Prove that $f(x) \in F[x]$ is
+        irreducible if and only if $f(x + a) \in F[x]$ is irreducible.
+        \label{item:a3q2a}
+      \item Prove that $f(x) = x^4 + 1$ is irreducible over $\mathbb{Q}$.
+    \end{enumerate}
+  \item \begin{enumerate}
+      \item Compute $\deg_{\mathbb{Q}}(i + \sqrt{2})$.
+      \item Compute $\deg_{\mathbb{Q}}(\cos(\pi / 9))$ (Hint: De Moivre's
+        Theorem involving $\cos(3 \theta)$).
+    \end{enumerate}
+  \item Prove that $\mathbb{Q}(\sqrt{2},, \sqrt[3]{2}) = \mathbb{Q}(\sqrt[6]{2})$.
+  \item Construct a field of order $125$.
+\end{enumerate}
+
+% section assignment_3 (end)
+
+\section{Assignment 4}%
+\label{sec:assignment_4}
+% section assignment_4
+
+\begin{enumerate}
+  \item Let $K / E$ be an extension and let $E / F$ be a finite extension.
+    Suppose $\alpha \in K$ is algebraic over $F$.
+    \begin{enumerate}
+      \item Prove that $[E(\alpha) : E] \leq [F(\alpha) : F]$.
+      \item Prove that $[E(\alpha) : F(\alpha)] \leq [E : F]$.
+    \end{enumerate}
+  \item Let $K / F$ be an extension and let $\alpha, \beta \in K$ be algebraic
+    over $F$. Prove that if $\deg_F(\alpha)$ and $\deg_F(\beta)$ are coprime,
+    then $[F(\alpha, \beta) : F] = [F(\alpha) : F][F(\beta) : F]$.
+  \item Compute the following degrees:
+    \begin{enumerate}
+      \item $[\mathbb{Q}(\alpha, \beta) : \mathbb{Q}]$, where $\alpha = \cos(\pi
+        / 9)$ and $\beta = i + \sqrt{2}$ (Hint : A3)
+      \item $[\mathbb{Q}(\sqrt{p}, \sqrt{q}) : \mathbb{Q}]$, where $p$ and $q$
+        are distinct primes.
+      \item $[\mathbb{Z}_3(\alpha) : \mathbb{Z}_3]$, where $\alpha$ is a root of
+        $f(x) = x^3 + x + 2 \in \mathbb{Z}_3[x]$.
+      \item $[\mathbb{R}(t) : \mathbb{R}(t^2)]$.
+    \end{enumerate}
+  \item Let $K / F$ be an extension and let $\alpha, \beta \in K$ be
+    transcendental over $F$. Prove that $F(\alpha) \cong F(x)$, the rational
+    function field over $F$. Conclude that $F(\alpha) \cong F(\beta)$.
+  \item Suppose $f(x)$ is an irreducible polynomial in $\mathbb{Q}[x]$ of degree
+    $2n$. Prove that if $E$ is a field extension of $\mathbb{Q}$ of degree $2$,
+    then $f(x)$ is either irreducible in $E[x]$ or $f(x)$ factors in $E[x]$ as a
+    product of two irreducible factors each of degree $n$.
+\end{enumerate}
+
+% section assignment_4 (end)
+
+\section{Assignment 5}%
+\label{sec:assignment_5}
+% section assignment_5
+
+\begin{enumerate}
+  \item Find the splitting field $K$ of the following polynomials over
+    $\mathbb{Q}$ and determine $[ K : \mathbb{Q} ]$.
+    \begin{enumerate}
+      \item $f(x) = x^{11} - 2$.
+      \item $f(x) = x^4 - x^2 + 4$ (Optional hint: $f(x) = (x^2 + 2)^2 - 5x^2$)
+      \item $f(x) = x^4 + 2$.
+    \end{enumerate}
+  \item \begin{enumerate}
+      \item Prove that for any field $F$ there exists an algebraically closed
+        field $K$ containing $F$. Hint: Use the following steps:
+        \begin{enumerate}
+          \item For every nonconstant monic polynomial $f(x) \in F[x]$, let
+            $x_f$ be a symbol/indeterminate. Consider the polynomial ring $R =
+            F[\ldots, x_f, \ldots]$. Let $I$ be the ideal of $R$ generated by
+            elements of the form $f(x_f)$. Show that $I \neq R$.
+          \item Since $I$ is a proper ideal of $R$, $I$ is contained in some
+            maximal ideal $M$ of $R$. Consider the field
+            \begin{equation*}
+              K_1 := R / M,
+            \end{equation*}
+            which is a field extension of $F$. Show that any non-constant
+            polynomial in $F[x]$ has a root in $K_1$.
+          \item Similarly, you could construct $K_2$ so that any non-constant
+            polynomial in $K_1[x]$ has a root in $K_2$. (You don't need to do
+            this.). Continuing in this way we get a chain of field extensions
+            \begin{equation*}
+              F = K_0 \subseteq K_1 \subseteq K_2 \subseteq \hdots.
+            \end{equation*}
+            Let
+            \begin{equation*}
+              K := \bigcup_{i=1}^{\infty} K_i.
+            \end{equation*}
+            Show that $K$ is an algebraically closed field containing $F$.
+        \end{enumerate}
+      \item Prove that $\bar{\mathbb{Q}} \neq \mathbb{C}$.
+    \end{enumerate}
+  \item Let $F$ be a field and let
+    \begin{equation*}
+      f(x) = a_n x^n + \hdots + a_1 x + a_0 \in F[x]
+    \end{equation*}
+    be a polynomial. The formal \textit{derivative} of $f(x)$, denoted by
+    $f'(x)$, is defined to be the polynomial
+    \begin{equation*}
+      f'(x) = na_n x^{n - 1} + (n - 1) a_{n - 1} x^{n - 2} + \hdots + a_1 \in
+      F[x].
+    \end{equation*}
+    Of course, all the usual derivative properties (product rule, quotient rule,
+    chain rule etc.) apply.
+
+    Now let $\alpha$ be a root of $f(x)$ in some extension $K$ of $F$. Then we
+    say that $\alpha$ is a root of $f(x)$ in $K$ of \textit{multiplicity} $n$ if
+    $f(x) = q(x)(x - \alpha)^n$, where $q(x) \in K[x]$ and $q(\alpha) \neq 0$.
+    If $\alpha$ is a root of $f(x)$ of multiplicity greater than $1$ it is said
+    to be a \textit{multiple root} in $K$.
+    \begin{enumerate}
+      \item Let $F$ be a field and let $0 \neq f(x) \in F[x]$. Prove that $f(x)$
+        has a multiple root in some extension of $F$ if and only if $f(x)$ and
+        $f'(x)$ have a common factor in $F[x]$ of positive degree. (Hint: If
+        $f(x)$ and $f'(x)$ have no common factor of positive degree then there
+        exists $a(x), b(x) \in F[x]$ such that $f(x) a(x) + f'(x) b(x) = 1$.
+        This follows from the division algorithm for polynomial rings.)
+      \item Prove that $f(x) = x^6 - 2 \in \mathbb{Z}_3[x]$ has a multiple root
+        in an extension of $\mathbb{Z}_3$.
+      \item A polynomial $f(x) \in F[x]$ is said to be \textit{separable} if
+        $f(x)$ has no multiple roots in any extension of $F$. Prove that an
+        irreducible polynomial $f(x) \in F[x]$ is separable if and only if
+        $f'(x) \neq 0$.
+      \item Let $F$ be a field of characteristic $0$. Prove that every
+        irreducible polynomial in $F[x]$ is separable.
+    \end{enumerate}
+  \item Let $K$ be a the splitting field of $x^n - c$ over $\mathbb{Z}_p$, where
+    $p$ is prime, $n$ is a positive integer, and $c \in \mathbb{Z}_p^\times$.
+    (Note: $\mathbb{Z}_p^\times = \mathbb{Z}_p \setminus \{ 0 \}$.)
+    \begin{enumerate}
+      \item Prove that if $p$ does not divide $n$ then $x^n - c$ has $n$
+        distinct roots in $K$.
+      \item Suppose $p \mid n$. Find an expression in terms of $p$ and $n$ for
+        the number of distinct roots of $x^n - c$ in $K$.
+    \end{enumerate}
+\end{enumerate}
+
+% section assignment_5 (end)
+
+\section{Assignment 6}%
+\label{sec:assignment_6}
+% section assignment_6
+
+\begin{enumerate}
+  \item Let $F$ be a field.
+    \begin{enumerate}
+      \item Let $f(x) \in F[x]$ be irreducible, separable, and of degree $n$.
+        Prove that if $G = \Gal(f(x))$ then $n$ divides $\abs{G}$ and $\abs{G}$
+        divides $n!$.
+      \item Prove that if $f(x) \in F[x]$ is an irreducible and separable
+        quadratic, then $\Gal(f(x)) \simeq \mathbb{Z}_2$.
+      \item Prove that there is no irreducible and separable quartic $f(x) \in
+        F[x]$ such that $\Gal(f(x)) \simeq S_3$.
+      \item Give an example of a separable quartic $f(x) \in \mathbb{Q}[x]$ such
+        that \\ $\Gal(f(x)) \simeq S_3$.
+    \end{enumerate}
+  \item Let $F$ be a field.
+    \begin{enumerate}
+      \item Prove the following converse to a result from lecture: Let $f(x) \in
+        F[x]$ be separable and let $K$ be the splitting field of $f(x)$ over
+        $F$. Prove that if for all roots $\alpha, \beta \in K$ of $f(x)$, there
+        exists $\phi \in \Gal(K / F)$ such that $\phi(\alpha) = \beta$, then
+        $f(x)$ is irreducible over $F$.
+      \item Let $f(x) \in F[x]$ be separable with $f(0) \neq 0$ and $\deg(f(x))
+        = n \geq 1$. Now let $g(x) = x^n f \left( \frac{1}{x} \right) \in F[x]$.
+        Use part (a) to prove that $f(x)$ is irreducible over $F$ if and only if
+        $g(x)$ is irreducible over $F$.
+      \item Let $f(x) = 3x^4 + 9x^3 - 21 x^2 + 81x + 1 \in \mathbb{Q}[x]$. Find
+        $g(x)$, as in part (b). What pattern do you notice? Prove that $f(x)$ is
+        irreducible over $\mathbb{Q}$.
+    \end{enumerate}
+  \item \begin{enumerate}
+      \item Let $f(x), g(x) \in F[x]$ be distinct monic, separable, and
+        irreducible polynomials in $F[x]$. Let $K$ be the splitting field of
+        $f(x) g(x)$ over $F$. Prove that $f(x)$ and $g(x)$ do not have any roots
+        in common in $K$.
+      \item Let $K / F$ be an algebraic field extension. Prove that if
+        $\alpha_1, \alpha_2, \ldots, \alpha_n \in K$ have distinct, separable
+        minimal polynomials $p_1(x), p_2(x), \ldots, p_n(x) \in F[x]$,
+        respectively, then
+        \begin{equation*}
+          f(x) = p_1(x) p_2(x) \hdots p_n(x) \in F[x]
+        \end{equation*}
+        is separable.
+    \end{enumerate}
+  \item Consider $f(x) = x^2 - 2 \in \mathbb{Q}[x]$. The roots of $f(x)$ in
+    $\mathbb{C}$ are
+    \begin{equation*}
+      \alpha_1 = \sqrt[4]{2}, \, \alpha_2 = -\alpha_1, \, \alpha_3 = i \alpha_1,
+      \, \alpha_4 = -i \alpha_1.
+    \end{equation*}
+    Let $G = \Gal(f(x))$, viewed as a subgroup of $S_4$ in the usual way.
+    \begin{enumerate}
+      \item Prove that $(1324), (14)(23) \in G$.
+      \item Sketch the roots of $f(x)$ in the complex plane. By considering the
+        actions of the permutations from part (a) on the roots of $f(x)$, which
+        well-known group do you suspect $G$ is isomorphic to? You do not need to
+        prove your answer.
+    \end{enumerate}
+\end{enumerate}
+
+% section assignment_6 (end)
+
+\section{Assignment 7}%
+\label{sec:assignment_7}
+% section assignment_7
+
+\begin{enumerate}
+  \item Let $K / E / F$ be a tower of fields. Prove or disprove the following:
+    \begin{enumerate}
+      \item If $K / F$ is separable then $K / E$ is separable.
+      \item If $K / F$ is separable then $E / F$ is separable.
+      \item An algebraic extension of a perfect field is a perfect field.
+    \end{enumerate}
+  \item Let $K / E / F$ be a tower of fields such that $[ K : F ] < \infty$.
+    Prove or disprove the following:
+    \begin{enumerate}
+      \item If $E / F$ is normal and $K / E$ is normal then $K / F$ is normal.
+      \item If $K / F$ is normal then $K / E$ is normal.
+      \item If $K / F$ is normal then $E / F$ is normal.
+      \item If $[ K : F ] = 2$ then $K / F$ is normal.
+    \end{enumerate}
+  \item Let $f(x) = x^p - x - a \in \mathbb{Z}_p[x]$, where $p$ is prime and $a
+    \in \mathbb{Z}_p^\times$.
+    \begin{enumerate}
+      \item Prove that $f(x)$ is irreducible over $\mathbb{Z}_p$. (Hint: If you
+        have found one root of $f(x)$ you know them all!)
+      \item Let $\alpha$ be a root of $f(x)$ over $\mathbb{Z}_p$. Show that
+        $\mathbb{Z}_p(\alpha) / \mathbb{Z}_p$ is Galois.
+      \item Find $\Gal(\mathbb{Z}_p(\alpha) / \mathbb{Z}_p)$.
+    \end{enumerate}
+  \item Let $c = \sqrt{2 + \sqrt{2}} \in \mathbb{C}$.
+    \begin{enumerate}
+      \item Find $[ \mathbb{Q}(c) : \mathbb{Q} ]$.
+      \item Show $\mathbb{Q} \subseteq \mathbb{Q}(c)$ is a Galois extension.
+      \item Let $G = \Gal(\mathbb{Q}(c) / \mathbb{Q})$. Make a table describing
+        the actions of $G$ on the $\mathbb{Q}$-conjugates of $c$. Write each
+        element of $G$ as a permutation, in the usual way.
+      \item Which well-known group is $G$ isomorphic to?
+    \end{enumerate}
+\end{enumerate}
+
+% section assignment_7 (end)
+
+\section{Assignment 8}%
+\label{sec:assignment_8}
+% section assignment_8
+
+\begin{enumerate}
+	\item \begin{enumerate}
+      \item Let $\alpha_1, \alpha_2, \, \ldots, \, \alpha_n \in \mathbb{C}$ be
+        the $n > 1$ distinct roots of an irreducible $f(x) \in \mathbb{Q}[x]$.
+        Prove that
+        \begin{equation*}
+          \frac{3 + \alpha_1}{\alpha_1^7} + \frac{3 + \alpha_2}{\alpha_2^7} +
+          \hdots + \frac{3 + \alpha_n}{\alpha_n^7} \in \mathbb{Q}.
+        \end{equation*}
+      \item Let $K / F$ be a finite Galois extension such that $p \mid [ K : F
+        ]$, where $p$ is prime. Prove that there exists an intermediate subfield
+        $E$ such that $[K : E] = p$.
+      \item Let $F$ be a subfield of $\mathbb{C}$ such that $F / \mathbb{Q}$ is
+        a finite Galois extension. Prove that if $\abs{ \Gal(F / \mathbb{Q}) }$
+        is odd then $F \subseteq \mathbb{R}$.
+    \end{enumerate}
+  \item Let $F$ be a field and let $F(\alpha_1, \ldots, \alpha_n)$ be a finitely
+    generated field extension of $F$, where each $\alpha_i$ is separable over
+    $F$.
+    \begin{enumerate}
+      \item Let $q_i(x)$ be the minimal polynomial for $\alpha_i$ over $F$, for
+        $1 \leq i \leq n$. Let $p_1(x), p_2(x), \ldots, p_m(x)$ be the list of
+        the distinct $q_i(x)$'s. If $K$ is the splitting field of $p_1(x) p_2(x)
+        \hdots p_m(x)$ over $F$, prove that $K / F$ is Galois. \\
+        \textbf{Note}: The field $K$ is called the \textit{Galois closure} of
+        $F(\alpha_1, \ldots, \alpha_n)$ over $F$.
+      \item Conclude that $F(\alpha_1, \ldots, \alpha_n)$ is a separable
+        extension of $F$.
+      \item Write down the Galois closure $\mathbb{Q}(\sqrt[3]{2}, \sqrt[7]{3})$
+        over $\mathbb{Q}$.
+    \end{enumerate}
+  \item Let $K$ be the splitting field of $f(x) = (x^2 - 7)(x^4 + x^3 + x^2 + x
+    + 1)$ over $\mathbb{Q}$.
+    \begin{enumerate}
+      \item Explain why $K / \mathbb{Q}$ is Galois.
+      \item Make a table, in the usual way, to describe the elements of
+        $\Gal(K/\mathbb{Q})$ as permutations in $S_6$.
+      \item Which well-known group is $\Gal(K/\mathbb{Q})$ isomorphic to?
+      \item With full justification, draw the subfield lattice of
+        $K/\mathbb{Q}$. Be sure to include all degress in your diagram.
+    \end{enumerate}
+  \item How many intermediate fields $F$ are there such that $\mathbb{Q}(i)
+    \subseteq F \subseteq \mathbb{Q}(\sqrt[8]{2}, i)$?
+\end{enumerate}
+
+% section assignment_8 (end)
+
+\section{Assignment 9}%
+\label{sec:assignment_9}
+% section assignment_9
+
+\begin{enumerate}
+  \item Find the Galois groups of the following polynomials in $\mathbb{Q}[x]$.
+    \begin{enumerate}
+      \item $x^3 + 3x^2 - 2x + 1$
+      \item $x^4 + 3x + 3$
+      \item $x^4 + 4x^2 + 1$
+    \end{enumerate}
+  \item Let $p(x) = x^2 + x + 1 \in \mathbb{Q}[x]$ and $q(x) = x^2 + 3 \in
+    \mathbb{Q}[x]$. Prove that
+    \begin{equation*}
+      \Gal(p(x)q(x)) \not\simeq \Gal(p(x)) \times \Gal(q(x)).
+    \end{equation*}
+  \item Suppose $K / F$ is a finite Galois extension, where $G = \Gal(K / F)$ is
+    abelian. Prove that if $K$ is the spltting field of an irreducible $f(x)
+    \in F[x]$, then $\deg(f(x)) = \abs{G}$.
+  \item Suppose $K / F$ is a finite Galois extension with $\Gal(K / F) \simeq
+    S_3$. Prove that $K$ is the splitting field of an irreducible cubic in
+    $F[x]$.
+  \item Let $F$ be a finite field with $\Char(F) \notin \{2, 3\}$. Prove that if
+    $f(x)$ is an irreducible cubic in $F[x]$, then its discriminant is a square
+    in $F$.
+\end{enumerate}
+
+% section assignment_9 (end)
+
+\section{Assignment 10}%
+\label{sec:assignment_10}
+% section assignment_10
+
+\begin{enumerate}
+	\item \begin{enumerate}
+      \item Prove that $f(x) = x^5 - 64x + 2 \in \mathbb{Q}[x]$ is not solvable
+        by radicals over $\mathbb{Q}$.
+      \item Let $K$ be the splitting field of an irreducible $f(x) \in
+        \mathbb{Q}[x]$ over $\mathbb{Q}$. Prove that if $[ K : \mathbb{Q} ] =
+        p^n$, for a prime $p$ and $n \in \mathbb{N}$, then $f(x)$ is solvable by
+        radicals over $F$.
+    \end{enumerate}
+  \item Let $K$ be the splitting field of $f(x) = x^3 - 3x - 1 \in
+    \mathbb{Q}[x]$ over $\mathbb{Q}$. Prove that $K$ is not a radical extension
+    of $F$, even though $f(x)$ is solvable by radicals over $F$.
+  \item The goal of this exercise is to prove the Fundamental Theorem of
+    Algebra using Sylow Theory and Galois Theory (and no complex analysis).
+    \begin{enumerate}
+      \item For the sake of contradiction, suppose $L / \mathbb{C}$ is an
+        algebraic extension with $L \neq \mathbb{C}$. Take $\alpha \in L,
+        \alpha \notin \mathbb{C}$, and let $g(x)$ be the minimal polynomial
+        for $\alpha$ over $\mathbb{R}$. Let $K$ be the splitting field for
+        $g(x)$ over $\mathbb{C}$. Prove that $K / \mathbb{R}$ is a finite
+        Galois extension.
+      \item Let $G = \Gal(K / \mathbb{R})$ so that $\abs{G} = 2^j m$ for some
+        $j \geq 0$ and odd $m \in \mathbb{N}$. Suppose $H$ is a Sylow-2
+        subgroup of $G$. If $j = 0$, take $H = \{1\}$. If $E = \Fix(H)$,
+        compute $[K : E]$ and $[E : \mathbb{R}]$ in terms of $j$ and $m$.
+      \item Prove that $[E : \mathbb{R}] = 1$. (Hint: Be sure not to use
+        anything about conjugate roots, which relies on the Fundamental
+        Theorem of Algebra.)
+      \item Prove that there exists a subfield $F$ of $K$ such that $[F :
+        \mathbb{C}] = 2$.
+      \item Obtain a contradiction to finish off the proof.
+    \end{enumerate}
+\end{enumerate}
+
+% section assignment_10 (end)
+
+% chapter assignment_problems (end)
+
 \backmatter
 
-\pagestyle{plain}
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
 
 % \nobibliography*
 % \bibliography{references}
