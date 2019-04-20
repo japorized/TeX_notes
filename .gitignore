@@ -228,4 +228,4 @@ _site
 .jekyll-metadata
 
 # my ignores
-tex-common/colorscheme-generated.sty
+colorscheme-generated.sty

@@ -3430,9 +3430,9 @@ of the results that are useful to us.
 
 % chapter lecture_15_feb_11th (end)
 
-\chapter{Lecture 16 Feb 18th}%
-\label{chp:lecture_16_feb_18th}
-% chapter lecture_16_feb_18th
+\chapter{Lecture 16 Feb 13th}%
+\label{chp:lecture_16_feb_13th}
+% chapter lecture_16_feb_13th
 
 \section{Simplices and Simplicial Complexes}%
 \label{sec:simplices_and_simplicial_complexes}
@@ -3576,11 +3576,44 @@ We may also do so for other simplices.
   \begin{equation*}
     [a_0 \, \hdots \, a_k] = (\sgn \tau) [a_{\tau(0)} \hdots a_{\tau(k)}]
   \end{equation*}
-  for $\tau \in S_k$, where $S_k$ is the \hlnotea{permutation group on $\{1,
-  \ldots, k\}$}.
+  for $\tau \in S_k$, where $\sgn \tau$ is the
+  \href{https://en.wikipedia.org/wiki/Parity_of_a_permutation}{sign} of $\tau$,
+  and $S_k$ is the \hlnotea{permutation group on $\{1, \ldots, k\}$}.
 \end{eg}
 
-% chapter lecture_16_feb_18th (end)
+% section simplices_and_simplicial_complexes (end)
+
+\section{Relative Homology}%
+\label{sec:relative_homology}
+% section relative_homology
+
+\begin{defn}[Simplicial Subcomplex]\index{Simplicial Subcomplex}\label{defn:simplicial_subcomplex}
+  Given a \hyperref[defn:simplicial_complex]{simplicial complex} $K$, a
+  \hlnoteb{simplicial subcomplex} of $K$ is a subset of the simplicies in $K$ 
+  that still forms a simplicial complex.
+\end{defn}
+
+Since each of the sets of $p$-chains form abelian groups, any of its subgroups
+are normal, and in particular, if $K_0$ is a subcomplex of $K$, then we can take
+\begin{equation*}
+  \quotient{C_p(K)}{C_p(K_0)}.
+\end{equation*}
+
+\begin{defn}[Relative Chain]\index{Relative Chain}\label{defn:relative_chain}
+  Given a simplicial complex $K$ and a subcomplex $K_0$, 
+\end{defn}
+
+% section relative_homology (end)
+
+% chapter lecture_16_feb_13th (end)
+
+\chapter{Lecture 17 Feb 15th}%
+\label{chp:lecture_17_feb_15th}
+% chapter lecture_17_feb_15th
+
+
+
+% chapter lecture_17_feb_15th (end)
 
 \appendix
 
