@@ -1193,7 +1193,7 @@ More generally so...
 % subsection summary_for_proving_irreducibility
 
 \marginnote{
-  \begin{procedure}[Summary for Proving Irreducibility]
+  \begin{procedure}[Summary for Proving Irreducibility]\label{procedure:summary_for_proving_irreducibility}
   This subsection is dedicated to summarize the ways that are available to us to
   finding out if a given polynomial is reducible or irreducible. This includes
   common heuristics and/or techniques.
@@ -1257,6 +1257,13 @@ much easier include:
     function may be helpful. For instance, the function $x^4 + 3$ looks like a
     quadratic graph that does not intersect the $x$-axis, so we know that it
     does not have real roots.
+    \begin{itemize}
+      \item We can do this even for polynomials that look like $x^4 - 2x^2 + 9$,
+        since
+        \begin{equation*}
+          x^4 - 2x^2 + 9 = (x^2 - 1)^2 + 8 > 0.
+        \end{equation*}
+    \end{itemize}
 \end{itemize}
 
 % subsection summary_for_proving_irreducibility (end)
@@ -1398,39 +1405,44 @@ if $F$ is a field under the same operations.
 \begin{remark}
   Notice that $F(\alpha, \beta) = \left[ F(\alpha) \right](\beta)$.
 
-  We have that $F(\alpha) \subseteq F(\alpha, \beta), \beta \in F(\alpha, \beta)$, which implies that
-  $F(\alpha)(\beta) \subseteq F(\alpha, \beta)$ by minimality.
+  We have that $F(\alpha) \subseteq F(\alpha, \beta), \beta \in F(\alpha,
+  \beta)$, which implies that $F(\alpha)(\beta) \subseteq F(\alpha, \beta)$ by
+  minimality.
 
-  Also, since $F \subseteq F(\alpha, \beta)$, and $\alpha, \beta \in F(\alpha, \beta)$, we have, by
-  minimality (again), that $F(\alpha, \beta) \subseteq F(\alpha)(\beta)$.
+  Also, since $F \subseteq F(\alpha, \beta)$, and $\alpha, \beta \in F(\alpha,
+  \beta)$, we have, by minimality (again), that $F(\alpha, \beta) \subseteq
+  F(\alpha)(\beta)$.
 \end{remark}
 
 \begin{propo}[Span of the Extension]\label{propo:span_of_the_extension}
-  Let $K / F$ and $\alpha \in K$. If $\alpha$ is a root of some non-zero $f(x) \in F[x]$ irreducible
-  over $F$, then $F(\alpha) \simeq F[x] / \langle f(x) \rangle$. Moreover, if $\deg f = n$, then
+  Let $K / F$ and $\alpha \in K$. If $\alpha$ is a root of some non-zero $f(x)
+  \in F[x]$ irreducible over $F$, then $F(\alpha) \simeq F[x] / \langle f(x)
+  \rangle$. Moreover, if $\deg f = n$, then
   \begin{equation*}
     F(\alpha) = \Span_F \{ 1, \alpha, \ldots, \alpha^{n - 1} \}.
   \end{equation*}
 \end{propo}
 
 \begin{proof}
-  Sps $\alpha \in K$ is a root of an irreducible $f(x) \in F[x]$ over $F$. Let $\deg f = n \in \mathbb{N}$.
-  Define $\phi : F[x] \to F(\alpha)$ by $\phi(g(x)) = g(\alpha)$. Note that this is a ring homomorphism.
-  Let
+  Sps $\alpha \in K$ is a root of an irreducible $f(x) \in F[x]$ over $F$. Let
+  $\deg f = n \in \mathbb{N}$. Define $\phi : F[x] \to F(\alpha)$ by $\phi(g(x))
+  = g(\alpha)$. Note that this is a ring homomorphism. Let
   \begin{equation*}
     I = \{ g(x) \in F[x] \mid g(\alpha) = 0 \} = \ker \phi,
   \end{equation*}
-  which is an ideal. Since $F[x]$ is a PID \sidenote{See 
-  \href{https://tex.japorized.ink/PMATH347S18/classnotes.tex}{PMATH347}.}, $\exists g(x) \in F[x]$ such that
-  $I = \langle g(x) \rangle$. Since $\alpha$ is a root of $f(x)$, $f(x) \in I$, and so $f(x) = g(x) h(x)$
-  for some $h(x) \in F[x]$. Since $I \neq F[x]$ and $f$ is irreducible, $h(x) \in F^\times$. Thus
-  $\langle g(x) \rangle = \langle g(x) \rangle$. Then by the \hlnotea{First Isomorphism Theorem},
+  which is an ideal. Since $F[x]$ is a PID \sidenote{See
+  \href{https://tex.japorized.ink/PMATH347S18/classnotes.tex}{PMATH347}.},
+  $\exists g(x) \in F[x]$ such that $I = \langle g(x) \rangle$. Since $\alpha$
+  is a root of $f(x)$, $f(x) \in I$, and so $f(x) = g(x) h(x)$ for some $h(x)
+  \in F[x]$. Since $I \neq F[x]$ and $f$ is irreducible, $h(x) \in F^\times$.
+  Thus $\langle g(x) \rangle = \langle g(x) \rangle$. Then by the \hlnotea{First
+  Isomorphism Theorem},
   \begin{equation*}
     F[x] / \langle f(x) \rangle \simeq \phi(F[x]).
   \end{equation*}
-  By construction, $\phi(F[x]) \subseteq F(\alpha)$. Since $\phi(F[x])$ is a field (by isomorphism)
-  which contains $\alpha = \phi(x)$ and $F$, and so by minimality $F(\alpha) \subseteq \phi(F[x])$.
-  Therefore
+  By construction, $\phi(F[x]) \subseteq F(\alpha)$. Since $\phi(F[x])$ is a
+  field (by isomorphism) which contains $\alpha = \phi(x)$ and $F$, and so by
+  minimality $F(\alpha) \subseteq \phi(F[x])$. Therefore
   \begin{equation*}
     F[x]/ \langle f(x) \rangle \simeq F(\alpha),
   \end{equation*}
@@ -1443,13 +1455,14 @@ if $F$ is a field under the same operations.
   So
   \begin{equation*}
     F[x] / \langle f(x) \rangle 
-      = \left\{ c_{n - 1} x^{n - 1} + \hdots + c_1 x + c_0 + \langle f(x) \rangle \mmid c_i \in F \right\}
+      = \left\{ c_{n - 1} x^{n - 1} + \hdots + c_1 x + c_0 + \langle f(x)
+      \rangle \mmid c_i \in F \right\}
   \end{equation*}
   and thus
   \begin{align*}
     F(\alpha)
-      &= \left\{ c_{n - 1} \alpha^{n - 1} + \hdots + c_1 \alpha + c_0 + \mmid
-      c_i \in F \right\} \\
+      &= \left\{ c_{n - 1} \alpha^{n - 1} + \hdots + c_1 \alpha + c_0 + \langle
+        f(x)\rangle \mmid c_i \in F \right\} \\
       &= \Span_F \left\{ 1, \alpha, \ldots, \alpha^{n - 1} \right\},
   \end{align*}
   as claimed.
@@ -1529,21 +1542,57 @@ In particular,
   \end{equation*}
 \end{eg}
 
+\marginnote[-150pt]{
+\begin{procedure}[Computing Degree of an Algebraic Number]\label{procedure:computing_degree_of_an_algebraic_number}
+  You are usually given some algebraic number whose degree you are told to
+  compute.
+  \begin{enumerate}
+    \item If it looks like the given number can be brought back into the base
+      field after taking powers and some algebraic manipulation, then let
+      $\alpha$ be that element. Do what you noticed until all the instances of
+      elements not in the base field are gone. Try to take a little steps as
+      possible.
+    \item Use that formula while replacing each instance of $\alpha$ with $x$.
+      This will give you a polynomial where the given number is a root.
+    \item Check if this polynomial is minimal. If not, recompute.
+  \end{enumerate}
+\end{procedure}
+}
 \begin{eg}
   Let $\alpha = \sqrt{1 + \sqrt{3}}$. Notice that $\alpha^2 = 1 + \sqrt{3}$, and so $(\alpha^2 - 1)^2 = 3$.
   Thus
   \begin{equation*}
     \alpha^4 - 2 \alpha^2 + 1 - 3 = 0.
   \end{equation*}
-  Let $f(x) = x^4 - 2x^2 - x \in \mathbb{Q}[x]$. Note that $f$ is monic and $f(\alpha) = 0$. By Eisenstein,
-  $f$ is irreducible if we pick $P = \langle 2 \rangle$. Thus $f$ is a minimal polynomial for $\alpha$. We
-  have that
+  Let $f(x) = x^4 - 2x^2 - 2 \in \mathbb{Q}[x]$. Note that $f$ is monic and
+  $f(\alpha) = 0$. By Eisenstein, $f$ is irreducible if we pick $P = \langle 2
+  \rangle$ \sidenote{From hereon, we shall just say, for instance, that ``the
+  polynomial is irreducible by $2$-Eisenstein.''}. Thus $f$ is a minimal
+  polynomial for $\alpha$. We have that
   \begin{equation*}
     \deg_{\mathbb{Q}}(\alpha) = \deg f = 4.
   \end{equation*}
 \end{eg}
 
-\begin{eg}
+\marginnote{
+\begin{procedure}[Computing Finite Fields of Given Size]\label{procedure:computing_finite_fields_of_given_size}
+  We will usually be given a number $m$ that is the power of a single prime number
+  $p$.
+  \begin{enumerate}
+    \item Determine $n$ for $p^n = m$.
+    \item Find an \hyperref[defn:irreducible]{irreducible polynomial} of degree
+      $n$ in $\mathbb{Z}_p[x]$.
+    \item Pick one of the roots $\alpha$ and adjoin it to $\mathbb{Z}_p$, i.e.
+      consider
+      \begin{equation*}
+        \mathbb{Z}_p(\alpha) = \Span_{\mathbb{Z}_p} \{1, \alpha, \alpha^2,
+        \ldots, \alpha^{n-1} \}.
+      \end{equation*}
+      This field will have order $m$.
+  \end{enumerate}
+\end{procedure}
+}
+\begin{eg}\label{eg:computing_finite_fields}
   Let $f(x) = x^3 + x + 1 \in \mathbb{Z}_2[x]$. Let $\alpha$ be a root of $f(x)$ in some extension of
   $\mathbb{Z}_2$. Compute the size of $\mathbb{Z}_2(\alpha)$.
 \end{eg}
@@ -1556,13 +1605,15 @@ In particular,
   \end{equation*}
   where $\{ 1, \alpha, \alpha^2 \}$ is linearly independent over $\mathbb{Z}_2$. Thus
   \begin{equation*}
-    \abs{\mathbb{Z}_2(\alpha)} = 2 \times 2 \times 2 = 8.
+    \abs{\mathbb{Z}_2(\alpha)} = 2 \times 2 \times 2 = 8,
   \end{equation*}
+  since each of these elements have agree $2$.
 \end{solution}
 
 \begin{note}
-  Notice that there is no guarantee that such a root exists, but it does, which is a theorem that we shall
-  prove later. (See \cref{thm:kronecker_s_theorem})
+  Up till now, we never guaranteed that such a root exists, but it does, which
+  is a theorem that we shall prove later. (See
+  \hyperref[thm:kronecker_s_theorem]{Kronecker's Theorem})
 \end{note}
 
 \begin{crly}[Isomorphism between Extensions]\label{crly:isomorphism_between_extensions}
@@ -1637,7 +1688,7 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
   $\mathcal{B}_w = \left\{ w_1, \ldots, w_m \right\}$ be a basis for $E / F$.
 
   \noindent
-  \hlbnoted{Claim} The set $\left\{ v_i w_j : :1 \leq i \leq n, 1 \leq j \leq m \right\}$
+  \hlbnoted{Claim} The set $\left\{ v_i w_j : 1 \leq i \leq n, 1 \leq j \leq m \right\}$
   is a basis for $K / F$.
 
   \noindent
@@ -1740,11 +1791,15 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
   If $K / F$ is finite, then $K / F$ is algebraic.
 \end{thm}
 
+\marginnote{
+\begin{strategy}
+  The idea is to make use of the fact that the extension will at least have
+  the algebraic number as a span up to some degree $n$, and instead of working
+  with the spanning set, we work with one $\alpha$ away. There will be two
+  cases, each of which can be dealt with at relative ease.
+\end{strategy}
+}
 \begin{proof}
-  \marginnote{\faLightbulb The idea is to make use of the fact that the extension will at least have
-  the algebraic number as a span up to some degree $n$, and instead of working with the spanning set,
-  we work with one $\alpha$ away. There will be two cases, each of which can be dealt with at relative
-  ease.}
   Suppose $[K : F] = n < \infty$. Let $\alpha \in K$. Consider
   \begin{equation*}
     \alpha, \alpha^2, \ldots, \alpha^n, \alpha^{n + 1}.
@@ -1757,7 +1812,7 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
   \noindent
   \hlbnotea{Case 2} Suppose $\alpha^i \neq \alpha^j$ for all $i \neq j$. Then we must have that
   \begin{equation*}
-    \alpha, \alpha^2, \ldots, \alpha^n, \alpha^{n + 1}
+    \{\alpha, \alpha^2, \ldots, \alpha^n, \alpha^{n + 1}\}
   \end{equation*}
   is linearly dependent over $F$. Thus we may have
   \begin{equation*}
@@ -1765,7 +1820,7 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
   \end{equation*}
   where not all $c_i$'s are $0$. Then $\alpha$ is a root of
   \begin{equation*}
-    f(x) = c_{ n + 1 } x^{n + 1} \hdots + c_1 x,
+    f(x) = c_{n+1} x^{n+1} + \hdots + c_1 x,
   \end{equation*}
   which is a non-zero polynomial.
 
@@ -1807,7 +1862,7 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
 
 \begin{propo}[Finitely Generated Algebraic Extensions are Finite]\label{propo:finitely_generated_algebraic_extensions_are_finite}
   If $K$ is a finitely generated algebraic extension of $F$, then $K / F$ is finite.\sidenote{This
-  proposition is actually an \hlnotea{iff} statemnt in disguise.}
+  proposition is actually an \hlnotea{iff} statement in disguise.}
 \end{propo}
 
 \begin{proof}
@@ -1824,21 +1879,19 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
     &= [F(\alpha_1, \ldots, \alpha_{n})(\alpha_{n + 1}) : F(\alpha_1, \ldots,
     \alpha_n)] \cdot [F(\alpha_1, \ldots, \alpha_n) : F].
   \end{align*}
-  It follows from the base case and the induction hypothesis that
-  \begin{equation*}
-    [F(\alpha_1, \ldots, \alpha_{n +1}):F]
-  \end{equation*}
-  is finite.
+  It follows from the base case and the induction hypothesis that \\
+  \noindent
+  $[F(\alpha_1, \ldots, \alpha_{n+1}):F]$ is finite.
 \end{proof}
 
 \begin{note}
   Finite extensions are, therefore, finitely generated.
 \end{note}
 
-\begin{eg}
+\begin{warning}
   The field $\mathbb{Q}(\sqrt{2}, \sqrt{3}, \sqrt{4}, \ldots)$ is an algebraic extension of $\mathbb{Q}$
   but it is not a finite extension.
-\end{eg}
+\end{warning}
 
 \begin{propo}[Greater Algebraic Extensions]\label{propo:greater_algebraic_extensions}
   If $K / E$ and $E / F$ are algebraic extensions, then $K / F$ is an algebraic extension.
@@ -1849,18 +1902,23 @@ We can look at $K / F$ as $K$ being an $F$-vector space.
   \begin{equation*}
     p(x) = x^n + c_{n - 1} x^{n - 1} + \hdots + c_1 x + c_0.
   \end{equation*}
-  Then $\alpha$ is algebraic over $F(c_{n - 1}, \ldots, c_1, c_0)$. By the Tower Theorem,
+  It is clear that $p(x) \in F(c_{n-1}, \ldots, c_0)[x] \subseteq E[x]$.
+  Further, we see that $\alpha$ is algebraic over $F(c_{n - 1}, \ldots, c_1,
+  c_0)$. Consider $F(c_{n-1}, \ldots, c_0, \alpha)$. Since $F(c_{n-1}, \ldots,
+  c_0, \alpha) / F(c_{n-1}, \ldots, c_0)$ is finitely generated, by
+  \cref{propo:finitely_generated_algebraic_extensions_are_finite},
   \begin{equation*}
-    [F(c_{n - 1}, \ldots, c_1, c_0, \alpha) : F(c_{n - 1}, \ldots, c_0)] < \infty,
+    [F(c_{n - 1}, \ldots, c_1, c_0, \alpha) : F(c_{n - 1}, \ldots, c_0)] \text{
+    is finite}.
   \end{equation*}
-  and so $F(c_{n - 1}, \ldots, c_1, c_0, \alpha) \subseteq E$.
   
-  Now $F(c_{n - 1}, \ldots, c_0) / F$ is algebraic and finitely generated. So it follows from the Tower
-  Theorem that
+  It is clear that $F(c_{n-1}, \ldots, c_0, \alpha) / F$ is finitely generated,
+  i.e.
   \begin{equation*}
     [F(c_{n - 1}, \ldots, c_0, \alpha) : F] < \infty.
   \end{equation*}
-  Thus $\alpha$ is algebraic over $F$ and so $K / F$ is algebraic.
+  Then $\alpha$ has a minimal polynomial $q(x) \in F[x]$, i.e. $\alpha$ is
+  algebraic over $F$.
 \end{proof}
 
 \begin{propo}[Algebraic Numbers Form a Subfield]\label{propo:algebraic_numbers_form_a_subfield}
@@ -1901,6 +1959,9 @@ this notion and make use of properties from this notion.
   Every non-constant polynomial in $\mathbb{R}[x]$ splits in $\mathbb{C}$.
 \end{eg}
 
+\marginnote{Kronecker's Theorem is much more profound than what meets the eye
+here. See \href{http://feyzioglu.boun.edu.tr/book/chapter5/ch5(51).pdf}{this
+PDF}. \hlwarn{Notes will be added at a later time.}} % TODO : expand on Kronecker's Theorem
 \begin{thm}[Kronecker's Theorem]\index{Kronecker's Theorem}\label{thm:kronecker_s_theorem}
   Let $f(x) \in F[x]$ be non-constant. There exists an extension $K / F$ such that $f(x)$ has
   a root in $K$.
@@ -2014,7 +2075,7 @@ respectively, which may not be the same spliting field. How are these splitting 
 \begin{lemma}[Isomorphism Extension Lemma]\index{Isomorphism Extension Lemma}\label{lemma:isomorphism_extension_lemma}
   Let $F$ and $F'$ be fields, $\phi : F[x] \to F'[x]$ be an isomorphism, $f(x) \in F[x]$ be
   irreducible, $\alpha$ be a root of $f(x)$ in an extension of $F$, and $\beta$ be a root of
-  $f(x)$ be a root of $f(x)$ in an extension of $F'$. Then there exists an isomorphism
+  $f(x)$ in an extension of $F'$. Then there exists an isomorphism
   $\psi : F(\alpha) \to F'(\beta)$ such that $\psi \restriction_F = \phi$. Moreover,
   $\psi(\alpha) = \beta$.
 \end{lemma}
@@ -2022,8 +2083,9 @@ respectively, which may not be the same spliting field. How are these splitting 
 \begin{proof}[Sketch]
   Using the \hlnotea{First Isomorphism Theorem} to find $\rho_1$ and $\rho_2$, we have
   \begin{equation*}
-    F(\alpha) \overset{\rho_1}{\to} F[x] \Big/ \langle f(x) \rangle \overset{\sigma}{\to}
-    F'[x] \Big/ \langle \phi(f(x)) \rangle \overset{\rho_2}{\to} F'(\beta),
+    F(\alpha) \overset{\rho_1}{\to} \quotient{F[x]}{\langle f(x) \rangle}
+    \overset{\sigma}{\to} \quotient{F'[x]}{\langle \phi(f(x)) \rangle}
+    \overset{\rho_2}{\to} F'(\beta),
   \end{equation*}
   \sidenote{
   \begin{ex}
@@ -2081,7 +2143,8 @@ machinery has been taken care of with the introduction of
   A field $\bar{F}$ is an \hlnoteb{algebraic closure} of a field $F$ if
   \begin{enumerate}
     \item $\bar{F} / F$ is algebraic; and
-    \item every non-constant $f(x) \in F[x]$ splits over $\bar{F}$.
+    \item it is the smallest extension such that every non-constant $f(x) \in
+      F[x]$ splits over $\bar{F}$.
   \end{enumerate}
 \end{defn}
 
@@ -2090,7 +2153,10 @@ machinery has been taken care of with the introduction of
 \end{eg}
 
 \begin{eg}
-  $\mathbb{C}$ is \hlimpo{not} an algebraic closure for $\mathbb{Q}$.\sidenote{Why?}
+  $\mathbb{C}$ is \hlimpo{not} an algebraic closure for $\mathbb{Q}$. This is
+  because $\mathbb{C}$ contains $\pi$, which is transcendental to $\mathbb{Q}$.
+  Similarly so, $\mathbb{R}$ is \hlimpo{not} an algebraic closure for
+  $\mathbb{Q}$.
 \end{eg}
 
 \begin{defn}[Algebraically Closed]\index{Algebraically Closed}\label{defn:algebraically_closed}
@@ -2102,9 +2168,21 @@ machinery has been taken care of with the introduction of
   If $F$ is algebraically closed, then every non-constant $f(x) \in F[x]$ splits over $F$.
 \end{remark}
 
-\begin{eg}
-  $\mathbb{C}$ is algebraically closed.
+\begin{eg}[Fundamental Theorem of Algebra]\label{eg:fundamental_theorem_of_algebra}
+  $\mathbb{C}$ is algebraically closed. This is also called the
+  \hlnoteb{Fundamental Theorem of Algebra}. It is equivalent to saying that for
+  any polynomial $f(x) \in \mathbb{C}[x]$, if $\deg f(x) = n \in \mathbb{N}$,
+  then $\exists \alpha_1, \ldots, \alpha_n \in \mathbb{C}$ such that
+  $f(\alpha_i) = 0$ for all $i \in \{1, \ldots, n\}$.
 \end{eg}
+
+\begin{note}
+  It is common to see the Fundamental Theorem of Algebra proven in
+  \hlnotea{Complex Analysis}. It is possible to prove it using almost solely
+  concepts from Abstract Algebra. However, we are nowhere close to being able to
+  prove this fundamental theorem at this point of the course. (See
+  \hyperref[item:a10q3]{A10Q3})
+\end{note}
 
 % section algebraic_closures (end)
 
@@ -2144,7 +2222,7 @@ immediately clear that algebraic closures are algebraically closed.
   For every field $F$, there exists an algebraically closed field that contains $F$.
 \end{thm}
 
-\begin{thm}[Smallest Algebraic Closure]\label{thm:smallest_algebraic_closure}
+\begin{thm}[Adding All Algebraic Elements Algebraically Closes the Field]\label{thm:adding_all_algebraic_elements_algebraically_closes_the field}
   Let $K$ be an algebraically closed field that contains $F$. The collection of elements
   in $K$ which are algebraic over $F$ is an algebraic closure of $F$.
 \end{thm}
@@ -2168,9 +2246,9 @@ immediately clear that algebraic closures are algebraically closed.
 
 % section algebraic_closures_continued (end)
 
-\section{Cyclotimic Extensions}%
-\label{sec:cyclotimic_extensions}
-% section cyclotimic_extensions
+\section{Cyclotomic Extensions}%
+\label{sec:cyclotomic_extensions}
+% section cyclotomic_extensions
 
 We look into a specific class of field extensions, which is rather important to us.
 Consider the following question:
@@ -2189,16 +2267,18 @@ The following definition should remind one of MATH 135.
 \begin{eg}
   We can obtain all the $n$\textsuperscript{th} roots of unity using Euler's identity
   \begin{equation*}
-    \xi_n = \cos \left( \frac{2\pi}{n} \right) + i \sin \left( \frac{2 \pi}{n} \right),
+    \zeta_n = \cos \left( \frac{2\pi}{n} \right) + i \sin \left( \frac{2 \pi}{n} \right),
   \end{equation*}
-  which we label these roots as $1 = \xi_n^1, \xi_n^2, \xi_n^3, \ldots, \xi_n^{n - 1}$.
+  which we label these roots as $1 = \zeta_n^0,\, \zeta_n^1,\, \zeta_n^2,\,
+  \zeta_n^3,\, \ldots,\, \zeta_n^{n - 1}$.
 \end{eg}
 
 Following the various results that we have proven in the last few lectures, we know that
-the splitting field of $x^n - 1$ over $\mathbb{Q}$ is therefore $\mathbb{Q}(\xi_n)$.
+the splitting field of $x^n - 1$ over $\mathbb{Q}$ is therefore
+$\mathbb{Q}(\zeta_n)$.
 
-\newthought{We can then ask} ourselves what is the degree of $\mathbb{Q}(\xi_n)$ over
-$\mathbb{Q}$, i.e. what is $[ \mathbb{Q}(\xi_n) : \mathbb{Q} ]$?
+\newthought{We can then ask} ourselves what is the degree of $\mathbb{Q}(\zeta_n)$ over
+$\mathbb{Q}$, i.e. what is $[ \mathbb{Q}(\zeta_n) : \mathbb{Q} ]$?
 
 If $n = p$ where $p$ is prime, then since we may write
 \begin{equation*}
@@ -2209,22 +2289,22 @@ by \cref{eg:polynomial_with_prime_minus_1_degree} in
 \begin{equation*}
   \Phi_p(x) = x^{p - 1} + \hdots + x + 1
 \end{equation*}
-is irreducible over $\mathbb{Q}$. So $\Phi_p(x)$ is the minimal polynomial for $\xi_n$
-over $\mathbb{Q}$.
+is irreducible over $\mathbb{Q}$. So $\Phi_p(x)$ is the minimal polynomial for
+$\zeta_p$ over $\mathbb{Q}$.
 
-It thus follows that $[ \mathbb{Q}(\xi_p) : \mathbb{Q} ] = p - 1$.
+It thus follows that $[ \mathbb{Q}(\zeta_p) : \mathbb{Q} ] = p - 1$.
 
 \begin{eg}
-  We shall calculate $[ \mathbb{Q}(\xi_6) : \mathbb{Q} ]$. Note that
+  We shall calculate $[ \mathbb{Q}(\zeta_6) : \mathbb{Q} ]$. Note that
   \begin{equation*}
-    \xi_6 = \cos \left( \frac{2 \pi}{6} \right) + i \sin \left( \frac{2 \pi}{6} \right) =
+    \zeta_6 = \cos \left( \frac{2 \pi}{6} \right) + i \sin \left( \frac{2 \pi}{6} \right) =
     \frac{1}{2} + i \frac{\sqrt{3}}{2}.
   \end{equation*}
-  Since $1, 2 \in \mathbb{Q}$, we have that $\mathbb{Q}(\xi_6) = \mathbb{Q}(i \sqrt{3})$.
+  Since $1, 2 \in \mathbb{Q}$, we have that $\mathbb{Q}(\zeta_6) = \mathbb{Q}(i \sqrt{3})$.
   By \hyperref[propo:eisenstein_s_criterion]{$3$-Eisenstein}, the polynomial $x^2 + 3$ is
   irreducible and is a polynomial where $i \sqrt{3}$ is a root. Thus
   \begin{equation*}
-    [ \mathbb{Q}(\xi_6) : \mathbb{Q} ] = [ \mathbb{Q}(i \sqrt{3}) : \mathbb{Q} ] = \deg
+    [ \mathbb{Q}(\zeta_6) : \mathbb{Q} ] = [ \mathbb{Q}(i \sqrt{3}) : \mathbb{Q} ] = \deg
       (x^2 + 3) = 2.
   \end{equation*}
 \end{eg}
@@ -2233,10 +2313,10 @@ It thus follows that $[ \mathbb{Q}(\xi_p) : \mathbb{Q} ] = p - 1$.
   The $n$\textsuperscript{th} roots of unity form a cyclic group. A generator of this
   group is called a \hldefn{primitive $n$\textsuperscript{th} root of unity}.
 
-  In other words, $\xi_n^k$ is an primitive $n$\textsuperscript{th} root of unity iff
-  $(\xi_n^k)^m \neq 1$ for $m = 1, 2, \ldots, n - 1$.
+  In other words, $\zeta_n^k$ is an primitive $n$\textsuperscript{th} root of unity iff
+  $(\zeta_n^k)^m \neq 1$ for $m = 1, 2, \ldots, n - 1$.
 
-  From Group Theory, $\xi_n^k$ is a primitive $n$\textsuperscript{th} root of unity iff
+  From Group Theory, $\zeta_n^k$ is a primitive $n$\textsuperscript{th} root of unity iff
   $\gcd(n, k) = 1$. Thus, there are
   \begin{equation*}
     \phi(n) = \abs{ \{ 1 \leq k \leq n : \gcd(k, n) = 1 \} }
@@ -2257,8 +2337,8 @@ It thus follows that $[ \mathbb{Q}(\xi_p) : \mathbb{Q} ] = p - 1$.
   Since $\Phi_n(x)$ has rational coefficients, we know that $\Phi_n(x) \in \mathbb{C}[x]$.
 \end{remark}
 
-In fact, $\Phi_n(x)$ is the minimal polynomial for $\xi_n$ over $\mathbb{Q}$, which then
-gives us that $[ \mathbb{Q}(\xi_n) : \mathbb{Q} ] = \phi(n)$. However, we are not yet
+In fact, $\Phi_n(x)$ is the minimal polynomial for $\zeta_n$ over $\mathbb{Q}$, which then
+gives us that $[ \mathbb{Q}(\zeta_n) : \mathbb{Q} ] = \phi(n)$. However, we are not yet
 ready to show this.
 
 \begin{eg}
@@ -2278,11 +2358,11 @@ ready to show this.
 \begin{eg}
   Let $n = p$ be prime. Then the $p$\textsuperscript{th} roots of unity are
   \begin{equation*}
-    1, \xi_p^2, \xi_p^3, \ldots, \xi_p^{p - 1}
+    1, \zeta_p^2, \zeta_p^3, \ldots, \zeta_p^{p - 1}
   \end{equation*}
   and the primitives are
   \begin{equation*}
-    \xi_p^2, \xi_p^3, \ldots, \xi_p^{p - 1}.
+    \zeta_p^2, \zeta_p^3, \ldots, \zeta_p^{p - 1}.
   \end{equation*}
   Thus
   \begin{equation*}
@@ -2296,7 +2376,7 @@ A good question to ask here is:
   Is there an easier way to compute $\Phi_n(x)$ for all $n$?
 \end{quotebox}
 
-% section cyclotimic_extensions (end)
+% section cyclotomic_extensions (end)
 
 % chapter lecture_13_feb_04th (end)
 
@@ -2351,7 +2431,8 @@ A good question to ask here is:
   \begin{equation*}
     f(x) = \prod_{\substack{d \mid n \\ d < n}} \Phi_d(x).
   \end{equation*}
-  By the induction hypothesis, $f(x) \in \mathbb{Z}[x]$. Let $F = \mathbb{Q}(\xi_n)$ so
+  By the induction hypothesis, $f(x) \in \mathbb{Z}[x]$. Let $F =
+  \mathbb{Q}(\zeta_n)$ so
   that $\Phi_n(x) \in F[x]$. By the division algorithm, $\exists ! q(x), r(x) \in F[x]$
   such that
   \begin{equation*}
@@ -2385,36 +2466,37 @@ here.}
 \marginnote{
 \begin{strategy}
   We will show that $\Phi_n(x)$ is a minimal polynomial. If $g(x) \in \mathbb{Q}[x]$ is a
-  minimal polynomial for $\xi_n$, then since $\xi_n$ is also a root of $\Phi_n(x)$, we
+  minimal polynomial for $\zeta_n$, then since $\zeta_n$ is also a root of $\Phi_n(x)$, we
   must have $g(x) \mid \Phi_n(x)$. So to show that $g(x)$ is actually $\Phi_n(x)$, it
   suffices to show that $\Phi_n(x) \mid g(x)$.
 \end{strategy}
 }
 \begin{proof}
-  Let $g(x) \in \mathbb{Q}[x]$ be a minimal polynomial for $\xi_n$. It suffices for us to
+  Let $g(x) \in \mathbb{Q}[x]$ be a minimal polynomial for $\zeta_n$. It suffices for us to
   show that $\Phi_n(x) \mid g(x)$. To that end, we can show that every root of $\Phi_n(x)$
   is a root of $g(x)$ (in $\mathbb{C}$).
 
   Let $\alpha$ be a root of $\Phi_n(x)$. Then by \cref{defn:_n_th_cyclotomic_polynomial},
-  $\alpha = \xi_n^k$ for some $k \in \{ 1, \ldots, n - 1 \}$ such that $\gcd(k, n) = 1$.
+  $\alpha = \zeta_n^k$ for some $k \in \{ 1, \ldots, n - 1 \}$ such that $\gcd(k, n) = 1$.
   Then let $k = p_1 p_2 \hdots p_N$, where each $p_i$ is a prime and $p_i \nmid n$
   \sidenote{Note that this must be the case since $\gcd(k, n) = 1$.}.
   
-  Thus, the statement which we wish to prove becomes the following: $\xi_n^{p_1},
-  \xi_n^{p_1 p_2}, \ldots, \xi_n^{p_1 p_2 \hdots p_N} = \alpha$ are roots of $g(x)$.
+  Thus, the statement which we wish to prove becomes the following: $\zeta_n^{p_1},
+  \zeta_n^{p_1 p_2}, \ldots, \zeta_n^{p_1 p_2 \hdots p_N} = \alpha$ are roots of $g(x)$.
 
-  To prove the above, it suffices for us to show that if $\xi \in \mathbb{C}$ is a root of
-  $g(x)$, then $\xi^p$, where $p$ is prime and $p \nmid n$, is also a root of $g(x)$.
+  To prove the above, it suffices for us to show that if $\zeta \in \mathbb{C}$ is a root of
+  $g(x)$, then $\zeta^p$, where $p$ is prime and $p \nmid n$, is also a root of $g(x)$.
 
-  Suppose not \faDizzy, i.e. that $g(\xi) = 0$ but $g\left(\xi^p\right) \neq 0$, where $p$
-  is prime and $p \nmid n$. Now since $g(x) \mid \Phi_n(x)$, we have $\Phi_n(\xi) = 0$.
-  Since $p \nmid n$, it follows that $\xi^p$ is also a primitive $n$\textsuperscript{th}
-  root of unity, i.e. $\Phi_n(\xi_n^p) = 0$. Now since $g(x) \mid \Phi_n(x)$, $\exists
-  h(x) \in \mathbb{Q}[x]$ such that $\Phi_n(x) =g(x) h(x)$. By
-  \hyperref[thm:gauss_lemma]{Gauss}, WMA $h(x) \in \mathbb{Z}[x]$. Since $\mathbb{Z}[x$ is
-  an integral domain, $\Phi_n(\xi^p) = 0$ and $g(\xi^p) \neq 0 \implies h(\xi^p) = 0$.
+  Suppose not \faDizzy, i.e. that $g(\zeta) = 0$ but $g\left(\zeta^p\right) \neq 0$, where $p$
+  is prime and $p \nmid n$. Now since $g(x) \mid \Phi_n(x)$, we have
+  $\Phi_n(\zeta) = 0$. Since $p \nmid n$, it follows that $\zeta^p$ is also a
+  primitive $n$\textsuperscript{th} root of unity, i.e. $\Phi_n(\zeta_n^p) = 0$.
+  Now since $g(x) \mid \Phi_n(x)$, $\exists h(x) \in \mathbb{Q}[x]$ such that
+  $\Phi_n(x) =g(x) h(x)$. By \hyperref[thm:gauss_lemma]{Gauss}, WMA $h(x) \in
+  \mathbb{Z}[x]$. Since $\mathbb{Z}[x$ is an integral domain, $\Phi_n(\zeta^p) =
+  0$ and $g(\zeta^p) \neq 0 \implies h(\zeta^p) = 0$.
 
-  Let $f(x) = h(x^p) \in \mathbb{Z}[x]$. Then $f(\xi) = 0$. Moreover, we have $g(x) \mid
+  Let $f(x) = h(x^p) \in \mathbb{Z}[x]$. Then $f(\zeta) = 0$. Moreover, we have $g(x) \mid
   f(x)$ in $\mathbb{Q}[x]$. Thus $f(x) = g(x) k(x)$ for some $k(x) \in \mathbb{Z}[x]$
   (again, through Gauss).
 
@@ -2459,9 +2541,9 @@ here.}
   $\bar{0}^n - \bar{1} = 0$ but that mean $0 = 1 \in \mathbb{Z}_p$, a contradiction.
 
   Tracing back our long convoluted line of thought, we have that \faDizzy is not true, and
-  so we must have $g(\xi^p) = 0$, which
+  so we must have $g(\zeta^p) = 0$, which
   \begin{itemize}
-    \item[$\implies$] all the $\xi_n^{p_1}, \xi_n^{p_1 p_2}, \ldots, \alpha$ are all roots
+    \item[$\implies$] all the $\zeta_n^{p_1}, \zeta_n^{p_1 p_2}, \ldots, \alpha$ are all roots
       of $g(x)$;
     \item[$\implies$] $\Phi_n(x) \mid g(x)$;
     \item[$\implies$] $\Phi_n(x) = g(x)$,
@@ -2470,8 +2552,8 @@ here.}
 \end{proof}
 
 \begin{crly}[Cyclotomic Polynomials are Minimal Polynomials of Its Roots over $\mathbb{Q}$]\label{crly:cyclotomic_polynomials_are_minimal_polynomials_of_its_roots_over_q_}
-  $\Phi_n(x)$ is the minimal polynomial for $\xi_n$ over $\mathbb{Q}$. In particular, $[
-  \mathbb{Q}(\xi_n) : \mathbb{Q} ] = \phi(n)$.
+  $\Phi_n(x)$ is the minimal polynomial for $\zeta_n$ over $\mathbb{Q}$. In particular, $[
+  \mathbb{Q}(\zeta_n) : \mathbb{Q} ] = \phi(n)$.
 \end{crly}
 
 \begin{eg}
@@ -2480,35 +2562,35 @@ here.}
 
   The roots of $f(x)$ are
   \begin{equation*}
-    \sqrt[5]{3}, \, \xi_5 \sqrt[5]{3}, \xi_5^2 \sqrt[5]{3}, \xi_5^3 \sqrt[5]{3}, \xi_5^4
-    \sqrt[5]{3}.
+    \sqrt[5]{3}, \, \zeta_5 \sqrt[5]{3}, \zeta_5^2 \sqrt[5]{3}, \zeta_5^3
+    \sqrt[5]{3}, \zeta_5^4 \sqrt[5]{3}.
   \end{equation*}
-  It follows that the splitting field for $f$ is $F = \mathbb{Q}(\sqrt[5]{3}, \xi_5)$.
-  Note that since
+  It follows that the splitting field for $f$ is $F = \mathbb{Q}(\sqrt[5]{3},
+  \zeta_5)$. Note that since
   \begin{equation*}
-    \deg_{\mathbb{Q}}(\xi_5) = \phi(5) = 4 \text{ and } \deg_{\mathbb{Q}}(\sqrt[5]{3}) =
+    \deg_{\mathbb{Q}}(\zeta_5) = \phi(5) = 4 \text{ and } \deg_{\mathbb{Q}}(\sqrt[5]{3}) =
     5,
   \end{equation*}
   it follows from A4Q2 that
   \begin{equation*}
-    [ \mathbb{Q}(\sqrt[5]{3}, \xi_5) : \mathbb{Q} ] = [ \mathbb{Q}(\sqrt[5]{3}) :
-    \mathbb{Q} ][ \mathbb{Q}(\xi_5) : \mathbb{Q} ] = 4 \cdot 5 = 20.
+    [ \mathbb{Q}(\sqrt[5]{3}, \zeta_5) : \mathbb{Q} ] = [ \mathbb{Q}(\sqrt[5]{3}) :
+    \mathbb{Q} ][ \mathbb{Q}(\zeta_5) : \mathbb{Q} ] = 4 \cdot 5 = 20.
   \end{equation*}
 
-  Now a \hlbnotea{basis for $\mathbb{Q}(\xi_5)(\sqrt[5]{3}) / \mathbb{Q}(\xi_5)$} is
+  Now a \hlbnotea{basis for $\mathbb{Q}(\zeta_5)(\sqrt[5]{3}) / \mathbb{Q}(\zeta_5)$} is
   \begin{equation*}
     \left\{ 1, \sqrt[5]{3}, \left( \sqrt[5]{3} \right)^2, \left( \sqrt[5]{3} \right)^3,
     \left( \sqrt[5]{3} \right)^4 \right\},
   \end{equation*}
-  while a \hlbnotea{basis for $\mathbb{Q}(\xi_5) / \mathbb{Q}$} is
+  while a \hlbnotea{basis for $\mathbb{Q}(\zeta_5) / \mathbb{Q}$} is
   \begin{equation*}
-    \left\{ 1, \xi_5, \xi_5^2, \xi_5^3 \right\}.
+    \left\{ 1, \zeta_5, \zeta_5^2, \zeta_5^3, \zeta_5^4 \right\}.
   \end{equation*}
   Following the \hyperref[thm:tower_theorem]{Tower Theorem}, a basis for the splitting
   field $F$ is
   \begin{equation*}
-    \left\{ \left( \sqrt[5]{3} \right)^i \left( \xi_5 \right)^j \mmid 0 \leq i \leq 4, \,
-    0 \leq j \leq 3 \right\}.
+    \left\{ \left( \sqrt[5]{3} \right)^i \left( \zeta_5 \right)^j \mmid 0 \leq i \leq 4, \,
+    0 \leq j \leq 4 \right\}.
   \end{equation*}
 \end{eg}
 
@@ -3157,7 +3239,7 @@ Fortunately, in the finite dimensional world, $\abs{G}$ has an upper bound.
   \begin{equation*}
     L = F(\alpha_1, \ldots, \alpha_{n - 1}), \text{ so that } K = L(\alpha_n).
   \end{equation*}
-  Let $\phi : K \to E$ be an $F$-map. Note that $\phi \restriction_L : F \to E$
+  Let $\phi : K \to E$ be an $F$-map. Note that $\phi \restriction_L : L \to E$
   is still an $F$-map. By the induction hypothesis, the number of choices for
   $\phi \restriction_L$ is at most $[ L : F ]$. Since $\phi$ is completely
   determined by $\phi \restriction_L$ and $\phi(\alpha_n)$, there are,
@@ -3179,7 +3261,7 @@ going from $K \to K$ are exactly the elements of the Galois group $\Gal(K / F)$.
 \end{crly}
 
 \begin{warning}
-  There are extensions $K$ of a field $F$ such that $\Gal(K / F) < [ K : F ]$.
+  There are extensions $K$ of a field $F$ such that $\abs{\Gal(K / F)} < [ K : F ]$.
   \begin{enumerate}
     \item We saw in an earlier example that $G = \Gal( \mathbb{Q}(\sqrt[3]{2}) :
       \mathbb{Q} ) = \{ 1 \}$, but $[ \mathbb{Q}(\sqrt[3]{2}) : \mathbb{Q} ] =
@@ -4194,8 +4276,8 @@ work required to prove the fundamental theorem later on.
   On the other hand, we have
   \begin{align*}
     [ E_1 : E_2 ]
-    &= \frac{[ K : E_1 ]}{[ K : E_2 ]} \\
-    &= \frac{\abs{\Gal(K / E_1)}}{\abs{\Gal(K / E_2)}} \\
+    &= \frac{[ K : E_2 ]}{[ K : E_1 ]} \\
+    &= \frac{\abs{\Gal(K / E_2)}}{\abs{\Gal(K / E_1)}} \\
     &= \abs{\Gal(K / E_2) : \Gal(K / E_1)}.
   \end{align*}
 \end{proof}
@@ -6186,6 +6268,7 @@ the name with a proposition known as
     of $F$, even though $f(x)$ is solvable by radicals over $F$.
   \item The goal of this exercise is to prove the Fundamental Theorem of
     Algebra using Sylow Theory and Galois Theory (and no complex analysis).
+    \label{item:a10q3}
     \begin{enumerate}
       \item For the sake of contradiction, suppose $L / \mathbb{C}$ is an
         algebraic extension with $L \neq \mathbb{C}$. Take $\alpha \in L,
