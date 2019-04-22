@@ -2588,10 +2588,10 @@ here.}
   \end{equation*}
   Following the \hyperref[thm:tower_theorem]{Tower Theorem}, a basis for the splitting
   field $F$ is
-  \begin{equation*}
-    \left\{ \left( \sqrt[5]{3} \right)^i \left( \zeta_5 \right)^j \mmid 0 \leq i \leq 4, \,
-    0 \leq j \leq 4 \right\}.
-  \end{equation*}
+  \begin{equation}
+    \left\{ \sqrt[5]{3} \left( \zeta_5 \right)^j \mmid 0 \leq j \leq 4
+    \right\}.
+  \end{equation}
 \end{eg}
 
 % section cyclotomic_extensions_continued (end)
@@ -2867,9 +2867,11 @@ permuting them under automorphisms of the splitting field $K$.
   where $\Aut(K)$ is the \hlnotea{group of automorphisms} of $K$.
 \end{defn}
 
-\begin{lemma}[The Galois Group permutes roots]\label{lemma:the_galois_group_permutes_roots}
+\begin{lemma}[The Galois Group permutes algebraic roots]\label{lemma:the_galois_group_permutes_algebraic_roots}
   Let $K / F$. If $\alpha \in K$ is a root of $f(x) \in F[x]$ and $\phi \in
-  \Gal(K / F)$, then $\phi(\alpha)$ is also a root of $f(x)$.
+  \Gal(K / F)$, then $\phi(\alpha)$ is also a root of $f(x)$. \sidenote{It is
+  important to note that the Galois automorphisms only permute the
+  \hlimpo{algebraic} roots, since it would fix $\alpha$ if $\alpha \in F$.}
 \end{lemma}
 
 \begin{proof}
@@ -2883,8 +2885,7 @@ permuting them under automorphisms of the splitting field $K$.
   where $(*)$ is since $\phi$ fixes $F$.
 \end{proof}
 
-\begin{crly}[Elements of the Galois Group permutes roots of the same minimal
-  polynomial]\label{crly:elements_of_the_galois_group_permutes_roots_of_the_same_minimal_polynomial}
+\begin{crly}[Elements of the Galois Group permutes roots of the same minimal polynomial]\label{crly:elements_of_the_galois_group_permutes_roots_of_the_same_minimal_polynomial}
   Let $K / F$. If $\alpha \in K$ is algebraic over $F$, and $\phi \in \Gal(K /
   F)$, then $\phi(\alpha)$ is algebraic over $F$, and $\alpha$ and
   $\phi(\alpha)$ has the same minimal polynomial in $F[x]$.
@@ -2919,6 +2920,23 @@ permuting them under automorphisms of the splitting field $K$.
 \label{sec:introduction_to_galois_theory_continued}
 % section introduction_to_galois_theory_continued
 
+\marginnote{
+\begin{procedure}[Computing Galois Groups]\label{procedure:computing_galois_groups}
+  We will only deal with finite extensions for Galois theory.
+  
+  Given a base field and its extension:
+  \begin{enumerate}
+    \item Figure out what's being adjoined.
+    \item Look for their minimal polynomial(s).
+    \item Look at what sort of automorphisms are permitted to be in the group,
+      i.e. look at the possible ways that the roots can be permuted.
+      \begin{itemize}
+        \item Note \cref{lemma:the_galois_group_permutes_algebraic_roots} and
+          \cref{crly:elements_of_the_galois_group_permutes_roots_of_the_same_minimal_polynomial}.
+      \end{itemize}
+  \end{enumerate}
+\end{procedure}
+}
 \begin{eg}
   Consider the Galois group $\Gal( \mathbb{Q}(\sqrt{2}, \sqrt{3}) / \mathbb{Q}
   )$. Now the minimal polynomial for $\sqrt{2}$ and $\sqrt{3}$ are
@@ -2929,16 +2947,16 @@ permuting them under automorphisms of the splitting field $K$.
   $\phi(\sqrt{3}) = \pm \sqrt{3}$, i.e.
   \begin{table}[ht]
     \centering
-    \caption{All possible elements of $\Gal(\mathbb{Q}(\sqrt{2}, \sqrt{3}) /
+    \caption[][20pt]{All possible elements of $\Gal(\mathbb{Q}(\sqrt{2}, \sqrt{3}) /
     \mathbb{Q})$}
     \label{table:all_possible_elements_of_gal_q_sqrt_2_sqrt_3_q}
-    \begin{tabular}{c | c c}
-               & $\sqrt{2}$  & $\sqrt{3}$ \\
+    \begin{tabular}{c | c c c c | c}
+               & $\sqrt{2}$ & $-\sqrt{2}$ & $\sqrt{3}$ & $-\sqrt{3}$ & $S_4$ \\
        \hline
-      $\phi_1$ & $\sqrt{2}$  & $\sqrt{3}$ \\
-      $\phi_2$ & $\sqrt{2}$  & $-\sqrt{3}$ \\
-      $\phi_3$ & $-\sqrt{2}$ & $\sqrt{3}$ \\
-      $\phi_4$ & $-\sqrt{2}$ & $-\sqrt{3}$
+      $\phi_1$ & $\sqrt{2}$ & $-\sqrt{2}$ & $\sqrt{3}$ & $-\sqrt{3}$ & $\epsilon$ \\
+      $\phi_2$ & $\sqrt{2}$ & $-\sqrt{2}$ & $-\sqrt{3}$ & $\sqrt{3}$ & $(3 \; 4)$ \\
+      $\phi_3$ & $-\sqrt{2}$ & $\sqrt{2}$ & $\sqrt{3}$ & $-\sqrt{3}$ & $(1 \; 2)$ \\
+      $\phi_4$ & $-\sqrt{2}$ & $\sqrt{2}$ & $-\sqrt{3}$ & $\sqrt{3}$ & $(1 \; 2)(3 \; 4)$
     \end{tabular}
   \end{table}
   So $\Gal( \mathbb{Q}(\sqrt{2}, \sqrt{3}) / \mathbb{Q} ) = \{ \phi_i : i = 1,
@@ -2947,8 +2965,10 @@ permuting them under automorphisms of the splitting field $K$.
   $4$. Therefore
   \begin{equation*}
     \Gal \left( \quotient{\mathbb{Q}(\sqrt{2}, \sqrt{3})}{\mathbb{Q}} \right)
-    \simeq \mathbb{Z} \times \mathbb{Z}.
+    \simeq \mathbb{Z}_2 \times \mathbb{Z}_2,
   \end{equation*}
+  where the first $\mathbb{Z}_2$ comes from $\langle (1 \; 2) \rangle$ while the
+  other comes from $\langle (3 \; 4) \rangle$.
 \end{eg}
 
 \marginnote{
@@ -3151,10 +3171,14 @@ We shall continue with the last example of the last lecture.
     \alpha_1 = \sqrt[3]{2}, \, \alpha_2 = \alpha_1 \zeta_3, \, \alpha_3 =
     \alpha_1 \zeta_3^2.
   \end{equation*}
-  Note that $f(x)$ is irreducible over $\mathbb{Q}(\zeta_3)$ \sidenote{Well,
-  none of the roots of $f$ are in $\mathbb{Q}(\zeta_3)$, after all. Also, note
-  that since $\alpha_1 \notin \mathbb{Q}(\zeta_3)$, $f$ remains the minimal
-  polynomial of $\alpha_1$ over $\mathbb{Q}(\zeta_3)$, and so
+  \sidenote{We want to find an element in $G$ that is an odd permutation, which
+  is something that $A_3$ does not have. To do this, notice that $\zeta_3$ and
+  $\zeta_3^2$ belong to a different minimal polynomial which is inaccessible by
+  $\sqrt[3]{2}$.}
+  Note that $f(x)$ is irreducible over $\mathbb{Q}(\zeta_3)$
+  \sidenote{Well, none of the roots of $f$ are in $\mathbb{Q}(\zeta_3)$, after
+  all. Also, note that since $\alpha_1 \notin \mathbb{Q}(\zeta_3)$, $f$ remains
+  the minimal polynomial of $\alpha_1$ over $\mathbb{Q}(\zeta_3)$, and so
   $\deg_{\mathbb{Q}(\zeta_3)} (\alpha_1) = 3$, but $[ \mathbb{Q}(\zeta_3) :
   \mathbb{Q} ] = 2$.}. By the
   \cref{crly:the_galois_group_completely_captures_all_permutation_of_the_roots},
@@ -3169,7 +3193,7 @@ We shall continue with the last example of the last lecture.
                                                                                      &  & \\
       \mathbb{Q} \arrow[rr, "id"] \arrow[uu, no head]                                &  & \mathbb{Q}
     \end{tikzcd}
-    \caption[][20pt]{\cref{crly:the_galois_group_completely_captures_all_permutation_of_the_roots} in action}
+    \caption[][80pt]{\cref{crly:the_galois_group_completely_captures_all_permutation_of_the_roots} in action}
     \label{fig:crly_galois_group_has_all_permutations_in_action}
   \end{figure}
 
@@ -3798,7 +3822,7 @@ We have the following theorem that characterizes normality.
 \end{eg}
 
 \begin{eg}
-  $\mathbb{F}_{p^n} = \mathbb{F}_p$ is normal since $\mathbb{F}_{p^n}$ is the
+  $\mathbb{F}_{p^n} / \mathbb{F}_p$ is normal since $\mathbb{F}_{p^n}$ is the
   splitting field of $x^{p^n} - x \in \mathbb{F}_p[x]$.
 \end{eg}
 
@@ -3862,7 +3886,7 @@ We have the following theorem that characterizes normality.
 \begin{eg}
   Consider
   \begin{equation*}
-    f(x) = (x - \sqrt{2})^2 (x + \sqrt{2})^2 = x^4 - 4^2 + 4.
+    f(x) = (x - \sqrt{2})^2 (x + \sqrt{2})^2 = x^4 - 4x^2 + 4.
   \end{equation*}
   Then there are $\phi \neq \epsilon \in G = \Gal(f(x))$ such that
   $\phi(\sqrt{2}) = \sqrt{2}$ (and $\phi(-\sqrt{2}) = \sqrt{2}$). In this case,
@@ -4184,7 +4208,7 @@ work required to prove the fundamental theorem later on.
   Let $K$ be an extension of $F$. Let $\mathcal{E}$ denote the set of
   intermediate subfields of $K / F$, i.e.
   \begin{equation*}
-    \mathcal{E} := \{ E : F \subseteq E \subseteq F \},
+    \mathcal{E} := \{ E : F \subseteq E \subseteq K \},
   \end{equation*}
   and $\mathcal{H}$ denote the subgroups of $\Gal(K / F)$, i.e.
   \begin{equation*}
@@ -4223,8 +4247,8 @@ work required to prove the fundamental theorem later on.
   \begin{enumerate}
     \item $E_1 \subseteq E_2 \in \mathcal{E} \implies \Gal(K / E_2) \subseteq \Gal(K
       / E_1)$ since the later Galois group has less elements to fix.
-    \item $H_1 \subseteq H_2 \in \mathcal{H} \implies \Fix H_1 \subseteq \Fix
-      H_2$ since $H_2$ has more elements, and so it will move more things
+    \item $H_1 \subseteq H_2 \in \mathcal{H} \implies \Fix H_2 \subseteq \Fix
+      H_1$ since $H_2$ has more elements, and so it will move more things
       around, making the fix smaller.
   \end{enumerate}
 \end{remark}
@@ -4679,10 +4703,10 @@ can find ways to work around them when trying to construct Galois groups.
     d = \prod_{i < j} (\alpha_i - \alpha_j),
   \end{equation*}
   where the $\alpha_i$'s are the roots of $f(x)$ in its splitting field $K$. If
-  $\gamma \in G \subseteq S_n$, then $\phi(d) = \pm d$. Moreover, $\phi(d) = d
+  $\phi \in G \subseteq S_n$, then $\phi(d) = \pm d$. Moreover, $\phi(d) = d
   \iff \phi \in A_n$, and $\Gal \left( \quotient{K}{F(d)} \right) = G \cap A_n$.
 
-  Also, $G \subseteq A_n \iff d \in \Fix(F) = F \iff \disc f(x)$ is a square in
+  Also, $G \subseteq A_n \iff d \in \Fix(G) = F \iff \disc f(x)$ is a square in
   $F$.
 \end{propo}
 
@@ -5029,7 +5053,7 @@ these polynomials split over $L$.
 \end{eg}
 
 \begin{eg}
-  Let $g(x) = x^4 + 5x + 5 \in \mathbb{Q}[x]$. $g(x)$ is irreducible
+  Let $g(x) = x^4 + 5x + 5 \in \mathbb{Q}[x]$. $g(x)$ is irreducible by
   \hyperref[propo:eisenstein_s_criterion]{$5$-Eisenstein} and separable. We
   have
   \begin{equation*}
@@ -5066,6 +5090,37 @@ these polynomials split over $L$.
 \end{eg}
 
 % subsection quartics_continued (end)
+
+\subsection{Summary of Galois Groups for Polynomials}%
+\label{sub:summary_of_galois_groups_for_polynomials}
+% subsection summary_of_galois_groups_for_polynomials
+
+Throughout this section, suppose $\Char(F) \neq 2, 3$.
+\begin{enumerate}
+  \item $\disc(x^3 + bx + c) = -4b^3 - 27c^2$ 
+  \item If $f(x) = x^3 + bx + c \in F[x]$ is irreducible and separable then
+    \begin{equation*}
+      \Gal(f(x)) \simeq \begin{cases}
+        A_3 & \text{ if } \disc(f(x)) \text{ is a square in } F \\
+        S_3 & \text{ otherwise }
+      \end{cases}
+    \end{equation*}
+  \item If $f(x) = x^4 + bx^2 + cx + d \in F[x]$ is separable and irreducible and $m =
+    \abs{\Gal(\Res(f(x)))}$ then
+    \begin{equation*}
+      \Gal(f(x)) \simeq \begin{cases}
+        S_4 & m = 6 \\
+        A_4 & m = 3 \\
+        V & m = 1 \\
+        D_4 \text{ or } \mathbb{Z}_4 & m = 2
+      \end{cases}.
+    \end{equation*}
+    Moreover, if $m = 2$, $u$ is the root of $\Res(f(x))$ in $F$, and $L$ is the splitting
+    field for $\Res(f(x))$ over $F$, then $\Gal(f(x)) \simeq \mathbb{Z}_4$ iff both $x^2 -
+    ux + d$ and $x^2 + (b - u)$ split over $L$.
+\end{enumerate}
+
+% subsection summary_of_galois_groups_for_polynomials (end)
 
 % section galois_groups_of_polynomials_continued_2 (end)
 
@@ -5117,7 +5172,7 @@ these polynomials split over $L$.
 \end{eg}
 
 \begin{propo}[Subgroups of Solvable Groups are Solvable]\label{propo:subgroups_of_solvable_groups_are_solvable}
-  Let $G$ be a solvable groups. If $N \leq G$, then $N$ is solvable. If $N
+  Let $G$ be a solvable group. If $N \leq G$, then $N$ is solvable. If $N
   \trianglelefteq G$, then $G / N$ is solvable.
 \end{propo}
 
@@ -5237,7 +5292,7 @@ these polynomials split over $L$.
   Following that, we know that after refinement, it is necessary that each
   $\quotient{G_i}{G_{i+1}}$ is abelian and
   \hyperref[defn:simple_extension_and_primitive_elements]{simple}. This means
-  that each $\quotient{G_i}{G_{i+1}}$ has prime order \sidenote{\hlwarn{Why}?}
+  that each $\quotient{G_i}{G_{i+1}}$ has prime order \sidenote{\hlwarn{Why}?}.
   % TODO : Why do each of the quotient have prime order? We never mentioned
   % anything about primes.
 \end{note}
@@ -6111,7 +6166,7 @@ the name with a proposition known as
         \end{equation*}
         is separable.
     \end{enumerate}
-  \item Consider $f(x) = x^2 - 2 \in \mathbb{Q}[x]$. The roots of $f(x)$ in
+  \item Consider $f(x) = x^4 - 2 \in \mathbb{Q}[x]$. The roots of $f(x)$ in
     $\mathbb{C}$ are
     \begin{equation*}
       \alpha_1 = \sqrt[4]{2}, \, \alpha_2 = -\alpha_1, \, \alpha_3 = i \alpha_1,
@@ -6202,8 +6257,8 @@ the name with a proposition known as
         $F(\alpha_1, \ldots, \alpha_n)$ over $F$.
       \item Conclude that $F(\alpha_1, \ldots, \alpha_n)$ is a separable
         extension of $F$.
-      \item Write down the Galois closure $\mathbb{Q}(\sqrt[3]{2}, \sqrt[7]{3})$
-        over $\mathbb{Q}$.
+      \item Write down the Galois closure of $\mathbb{Q}(\sqrt[3]{2},
+        \sqrt[7]{3})$ over $\mathbb{Q}$.
     \end{enumerate}
   \item Let $K$ be the splitting field of $f(x) = (x^2 - 7)(x^4 + x^3 + x^2 + x
     + 1)$ over $\mathbb{Q}$.
