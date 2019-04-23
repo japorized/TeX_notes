@@ -56,15 +56,23 @@ This is a 3 part course; it is separated into
 \begin{enumerate}
   \item \textbf{Sylow's Theorem}
 
-    which is a leftover from group theory (\href{https://tex.japorized.ink/PMATH347S18/classnotes.pdf}{PMATH 347}). It has little to do with the rest of the course, but PMATH 347 was a course that is already content-rich to a point where Sylow's Theorem gets pushed into the later course that is this course.
+    which is a leftover from group theory
+    (\href{https://tex.japorized.ink/PMATH347S18/classnotes.pdf}{PMATH 347}). It
+    has little to do with the rest of the course, but PMATH 347 was a course
+    that is already content-rich to a point where Sylow's Theorem gets pushed
+    into the later course that is this course.
 
   \item \textbf{Field Theory}
 
-    is a somewhat understood concept from ring theory, where we learned that it is a special case of a ring where all of its elements have an inverse.
+    is a somewhat understood concept from ring theory, where we learned that it
+    is a special case of a ring where all of its elements have an inverse.
 
   \item \textbf{Galois Theory}
 
-    is the beautiful theory from the French mathematican Évariste Galois that ties field theory back to group theory. This allows us to reduce certain field theory problems into group theory, which, in some sense, is easier and better understood.
+    is the beautiful theory from the French mathematican Évariste Galois that
+    ties field theory back to group theory. This allows us to reduce certain
+    field theory problems into group theory, which, in some sense, is easier and
+    better understood.
 \end{enumerate}
 
 % chapter preface (end)
@@ -5016,7 +5024,7 @@ these polynomials split over $L$.
 
 % chapter lecture_28_mar_20th (end)
 
-\chapter{Lecture 29 Mar 22nd [dirty]}%
+\chapter{Lecture 29 Mar 22nd}%
 \label{chp:lecture_29_mar_22nd}
 % chapter lecture_29_mar_22nd
 
@@ -5722,7 +5730,7 @@ for yourself.
 \newthought{Going back} to that black box that we have yet to prove: recall the
 proposition.
 
-\begin{propo}
+\begin{propo}[A Higher Extension that is Both Galois and Radical]\label{propo:a_higher_extension_that_is_both_galois_and_radical}
   Suppose $K / E / F$ is a tower of fields, $E / F$ is Galois and $K / E$ is
   radical. Then $\exists L / K$ such that $L / F$ is Galois and $L / E$ is
   radical, and $\Gal(L / E)$ is solvable.
@@ -5759,16 +5767,82 @@ proposition.
   separable polynomial $h(x) \in F[x]$. Thus $L$ is the splitting field for
   $h(x) f(x)$ over $F$. Since $\Char F = 0$, $L / F$ is Galois.
 
-  (\hlwarn{Proof isn't done, will be added later after next Wed.})
-\end{proof}
+  \hlbnoted{$L / E$ is radical} Let $\zeta$ be a root of $\Phi_n(x)$, and
+  we know that $\zeta \in L$. Extend each $\sigma_i \in G$ to $\sigma^*_i \in
+  \Gal( E / F )$ by the \hyperref[lemma:isomorphism_extension_lemma]{Isomorphism
+  Extension Lemma}. Then the roots of $f(x)$ are either $\zeta^i$ or $\zeta^i
+  \sigma^*_i(\alpha)$. This means that
+  \begin{equation*}
+    L = E(\zeta, \sigma_1^*(\alpha), \sigma_2^*(\alpha), \ldots,
+    \sigma_r^*(\alpha)).
+  \end{equation*}
+  Note that we have
+  \begin{equation*}
+    (\sigma_i^*(\alpha))^n = \sigma_i^*(\beta) = \sigma_i(\beta) \in E,
+  \end{equation*}
+  since $\beta \in E$. Then we have the chain
+  \begin{equation*}
+    E \subseteq E(\zeta) \subseteq E(\zeta, \sigma_1^*(\alpha)) \subseteq \hdots
+    \subseteq L.
+  \end{equation*}
+  Since each of the adjoined element at each stage is radical, it follows that
+  $L / E$ is indeed radical as claimed.
+
+  \hlbnoted{$\Gal(L / E)$ is solvable} Let $E_0 = E(\zeta)$, and for $i \leq i
+  \leq r$,
+  \begin{equation*}
+    E_i = E(\zeta, \sigma_1^*(\alpha), \ldots, \sigma_i^*(\alpha)) =
+    E_{i-1}(\sigma_i^*(\alpha)).
+  \end{equation*}
+  Note that $E_r = L$.
+
+  Let $G_i = \Gal(L / E_i)$. By the
+  \hyperref[thm:fundamental_theorem_of_galois_theory]{Fundamental Theorem of
+  Galois Theory} \sidenote{We want to reverse the inclusion, and the fundamental
+  theorem gives us exactly this.}, we have that
+  \begin{equation*}
+    \{1\} = G_r \leq G_{r-1} \leq \hdots \leq G_2 \leq G_1 \leq G_0 = \Gal(L /
+    E(\zeta)).
+  \end{equation*}
+  Moreover,
+  \begin{equation*}
+    G_0 \leq G' \coloneqq \Gal(L / E).
+  \end{equation*}
+  Thus, we have that
+  \begin{equation*}
+    G_0 = \Gal(L / E(\zeta)) \trianglelefteq \Gal(L / E) = G'
+  \end{equation*}
+  since $E(\zeta) / E$ is Galois, since $E(\zeta)$ is the splitting field of
+  $\Phi_n(x)$. Furthermore,
+  \begin{equation*}
+    G' / G_0 \simeq \Gal(E(\zeta) / E),
+  \end{equation*}
+  which is abelian \sidenote{Recall that $\phi(\zeta) = \zeta^i$ and $\phi
+  \mapsto i$.}.
+
+  Now $G_{i+1} \trianglelefteq G_i$ since $E_{i+1} / E_i$ is Galois ($\because$ 
+  \cref{propo:simple_primitive_extensions_are_cyclic}; $\zeta \in E_i$ and
+  $\sigma_{i+1}^*(\alpha)^n \in E_i$ and so $E_{i+1} / E_i$ is cyclic). Also we
+  have that
+  \begin{equation*}
+    G_i / G_{i+1} \simeq \Gal(E_{i+1} / E_i)
+  \end{equation*}
+  is also cyclic and abelian.
+\end{proof} 
 
 % section solvability_by_radicals_continued_3 (end)
 
 % chapter lecture_32_mar_29th (end)
 
-\chapter{Lecture 35 Apr 05th [very dirty]}%
+\chapter{Lecture 35 Apr 05th}%
 \label{chp:lecture_35_apr_05th}
 % chapter lecture_35_apr_05th
+
+Lecture 33 was given by a guest lecturer on a topic not required by the course.
+
+\noindent
+Lecture 34 was just to complete
+\cref{propo:a_higher_extension_that_is_both_galois_and_radical}.
 
 \section{Final Examination Information}%
 \label{sec:final_examination_information}
@@ -5820,43 +5894,56 @@ proposition.
 
 Important to read assignments for 1, 2, 3, 4, 6(\faStar), 7, 8
 
-\paragraph{Some practice problems}
+% section final_examination_information (end)
+
+\section{Example Problem Practice}%
+\label{sec:example_problem_practice}
+% section example_problem_practice
 
 \begin{enumerate}
   \item A Galois $K / F$ such that $[K : F] = 36$.
-    $\mathbb{Q}(\zeta_{37}) / \mathbb{Q}$ (note 37 is prime)
+    
+    \textbf{A:} $\mathbb{Q}(\zeta_{37}) / \mathbb{Q}$ (note 37 is prime)
+
   \item An irreducible $f(x) \in \mathbb{Q}[x]$ such that $\deg f(x) = 7$ and
     $\abs{\Gal f(x)} = 20$.
 
-    No, $7 \nmid 20$, transitive subgroup
-  \item A field  $E$ such that $\mathbb{F}_p \subseteq E \subseteq \subseteq
+    \textbf{A:} No, $\Gal(f(x))$ is a transitive subgroup but $7 \nmid 20$.
+
+  \item A field  $E$ such that $\mathbb{F}_p \subseteq E \subseteq
     \mathbb{F}_{p^{12}}$ such that $E / \mathbb{F}_p$ is NOT Galois.
 
-    No, $\because$  $\Gal( \mathbb{F}_{p^{12}} / \mathbb{F}_p ) \simeq
-    \mathbb{Z}_{12}$ is abelian. and
+    \textbf{A:} No. $\Gal( \mathbb{F}_{p^{12}} / \mathbb{F}_p )
+    \simeq \mathbb{Z}_{12}$ is abelian. and
     \begin{equation*}
       \Gal( \mathbb{F}_{p^{12}} / E ) \trianglelefteq \Gal( \mathbb{F}_{p^{12}}
       / \mathbb{F}_p)
     \end{equation*}
+
   \item An irreducible quintic in $\mathbb{Q}[x]$ which is solvable by radicals.
-    ($x^5 - 2$)
-  \item An infinite field of characteristic $7$. ($\overline{\mathbb{F}_7}, \,
-    \mathbb{Z}_7(x)$)
+
+    \textbf{A:} $x^5 - 2$
+
+  \item An infinite field of characteristic $7$.
+
+    \textbf{A:} $\overline{\mathbb{F}_7}, \, \mathbb{Z}_7(x)$
+
   \item A Galois ext of $\mathbb{Z}_2(t^2)$ .
 
-    $\mathbb{Z}_2(t^2)$
+    \textbf{A:} $\mathbb{Z}_2(t^2)$
 
   \item A finite ext of $\mathbb{C}(t)$ which is not simple.
 
-    perfect field, primitive element theorem gives simple extension
+    \textbf{A:} $\mathbb{C}$ is a perfect field, and primitive element theorem
+    says that all of the extensions of $\mathbb{C}$ are simple.
 
   \item An irreducible polynomial in $\mathbb{F}_{3^{10}}[x]$ which is not
     separable.
 
-    DNE $\because$ finite fields are perfect
+    \textbf{A:} DNE. Finite fields are perfect.
 \end{enumerate}
 
-% section final_examination_information (end)
+% section example_problem_practice (end)
 
 % chapter lecture_35_apr_05th (end)
 
