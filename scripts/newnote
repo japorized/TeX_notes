@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+if [ $1 = "" ]; then
+  echo "[newnote] Please provide directory name (optionally filename)"
+  exit 1
+fi
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+newdir=$DIR/../$1
+
+if [ ! -d $newdir ]; then
+  mkdir -p $newdir/images
+  echo "\\newcommand{\\personalcolor}{true}\\input{${2:-classnotes}.tex}" > $newdir/${2:-classnotes}-dark.tex
+  touch $newdir/references.bib $newdir/${2:-classnotes}.tex
+
+  echo "[newnote] Created $1"
+else
+  echo "[newnote] Directory already exists! Nothing done"
+  exit 1
+fi

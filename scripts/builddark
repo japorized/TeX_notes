@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+workingdir=""
+filename="classnotes"
+builder="pdf"
+
+usage() {
+  echo "  Desc: watcher to build dark version of notes
+  Options:
+  -h    Show this help
+  -d    Directory name [required]
+  -f    Filename (default: classnotes)
+  -b    Builder (default: pdf) (see latexmk --help for arguments)"
+}
+
+while getopts "hd:f:b:" flag; do
+  case "${flag}" in
+    h) usage ; exit 0 ;;
+    d) workingdir=$DIR/../$OPTARG ;;
+    f) filename=$OPTARG ;;
+    b) builder=$OPTARG ;;
+    *) usage ; exit 1 ;;
+  esac
+done
+
+workingdir=`eval "cd $workingdir;pwd;cd - > /dev/null"`
+
+if [ "$workingdir" = "" ]; then
+  echo "[builddark] Please provide directory name"
+  exit 1
+fi
+
+if [ -d $workingdir ]; then
+  cd $workingdir
+  echo "[builddark] Hit Ctrl-c to kill"
+  echo $filename.tex | entr -s "latexmk -$builder -f- -silent $filename-dark.tex"
+else
+  echo "[newnote] Directory DNE! Terminating..."
+  exit 1
+fi

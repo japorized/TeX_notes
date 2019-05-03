@@ -3,62 +3,36 @@
 
 \usepackage{classnotetitle}
 
-\title{STAT333 - Applied Probability}
+\title{STAT333 --- Applied Probability}
 \author{Johnson Ng}
 \subtitle{Classnotes for Winter 2017}
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
 \institution{University of Waterloo}
 
 \input{latex-classnotes-preamble.tex}
-
-\DeclareMathOperator{\Bernoulli}{Bernoulli }
-\DeclareMathOperator{\Bin}{Bin }
-\DeclareMathOperator{\Geo}{Geo }
-\DeclareMathOperator{\Poi}{Poi }
-\DeclareMathOperator{\NB}{NB }
-\DeclareMathOperator{\Exp}{Exp }
-\DeclareMathOperator{\Unif}{Unif }
-\DeclareMathOperator{\Nor}{N }
-\DeclareMathOperator{\Gau}{G }
-\DeclareMathOperator{\HG}{HG }
-\DeclareMathOperator{\Gam}{Gam }
-\DeclareMathOperator{\BetaDist}{Beta }
-\DeclareMathOperator{\Mult}{Mult }
-\DeclareMathOperator{\BVN}{BVN }
-\DeclareMathOperator{\Wei}{Wei }
-\DeclareMathOperator{\Dom}{Dom }
-\DeclareMathOperator{\Var}{Var }
-\DeclareMathOperator{\sd}{sd }
-\DeclareMathOperator{\Cov}{Cov }
-\DeclareMathOperator{\Corr}{Corr }
+\input{probnotation.tex}
 
 \begin{document}
-\hypersetup{pageanchor=false}
-\maketitle
-\hypersetup{pageanchor=true}
-\tableofcontents
-
-\chapter*{\faBook \enspace List of Definitions}
-\addcontentsline{toc}{chapter}{List of Definitions}
-\theoremlisttype{all}
-\listtheorems{defn}
-
-\chapter*{\faCoffee \enspace List of Theorems}
-\addcontentsline{toc}{chapter}{List of Theorems}
-\theoremlisttype{allname}
-\listtheorems{axiom,lemma,thm,crly,propo}
+\input{latex-classnotes-header.tex}
 
 \chapter*{Foreword}%
 \label{chp:foreword}
 % chapter foreword
 
-\begin{fullwidth}
-  I am transcribing this set of notes from my handwritten ones in Winter 2017, back at a time which I have yet to organize my notes by lecture. However, I will try my best to organize them by chapters and topics as presented in class.
+I am transcribing this set of notes from my handwritten ones in Winter 2017,
+back at a time which I have yet to organize my notes by lecture. However, I will
+try my best to organize them by chapters and topics as presented in class.
 
-  I will try to be as rigourous as possible while transcribing my notes. However, given the nature of the course and the presentation, this will not always be possible, and I am mostly keeping these notes for ``legacy purposes'', and so I will not put too much effort into making the notes as complete as my newer ones.
+I will try to be as rigourous as possible while transcribing my notes. However,
+given the nature of the course and the presentation, this will not always be
+possible, and I am mostly keeping these notes for ``legacy purposes'', and so I
+will not put too much effort into making the notes as complete as my newer
+ones.
 
-  For this course, you are expected to have basic knowledge of probability in order to be able to understand the material.
-\end{fullwidth}
+For this course, you are expected to have basic knowledge of probability in
+order to be able to understand the material. You may want to have my
+\href{https://tex.japorized.ink/STAT330S18/classnotes-white.pdf}{STAT330} notes
+ready and/or reviewed.
 
 % chapter foreword (end)
 
@@ -81,7 +55,8 @@
 \end{defn}
 
 \begin{note}
-  By \cref{item:funddefn_probfn_item2} and \cref{item:funddefn_probfn_item3}, we have
+  By \cref{item:funddefn_probfn_item2} and \cref{item:funddefn_probfn_item3}, we
+  have
   \begin{equation*}
     1 = P(S) = P(A \cup A^C) = P(A) + P(A^C)
   \end{equation*}
@@ -91,9 +66,9 @@
   \end{equation*}
 \end{note}
 
-\begin{defn}[Conditional Probability]\index{Conditional Probability}
-\label{defn:conditional_probability}
-  Given events $A$ and $B$ in a sample space $S$, the \hlnoteb{conditional probability of $A$ given $B$} is given by
+\begin{defn}[Conditional Probability]\index{Conditional Probability}\label{defn:conditional_probability}
+  Given events $A$ and $B$ in a sample space $S$, the \hlnoteb{conditional
+  probability of $A$ given $B$} is given by
   \begin{equation}\label{eq:conditional_probability}
     P(A \mid B) = \frac{P(A \cap B)}{P(B)} \enspace \text{ where } P(B) > 0.
   \end{equation}
@@ -110,10 +85,9 @@
   \end{equation*}
 \end{note}
 
-\begin{thm}[Law of Total Probability]
-\index{Law of Total Probability}
-\label{thm:law_of_total_probability}
-  Let $S$ be a sample space. Let $\{ B_i \}_{i = 1}^{n}$ be a sequence of mutually exclusive events such that
+\begin{thm}[Law of Total Probability]\index{Law of Total Probability}\label{thm:law_of_total_probability}
+  Let $S$ be a sample space. Let $\{ B_i \}_{i = 1}^{n}$ be a sequence of
+  mutually exclusive events such that
   \begin{equation*}
     S = \bigcup_{i=1}^{n} B_i.
   \end{equation*}
@@ -130,7 +104,8 @@
          &= P\left( \bigcup_{i=1}^{n} \left\{ A \cap B_i \right\} \right) = \sum_{i=1}^{n} P(A \cap B_i) \\
          &= \sum_{i=1}^{n} P(A \mid B_i) P(B_i)
   \end{align*}
-  where the second last step is by \cref{item:funddefn_probfn_item3}, and the last step is by \cref{defn:conditional_probability}.\qed
+  where the second last step is by \cref{item:funddefn_probfn_item3}, and the
+  last step is by \cref{defn:conditional_probability}.
 \end{proof}
 
 Consequently, we have the following:
@@ -138,7 +113,8 @@ Consequently, we have the following:
 \begin{crly}[Bayes' Formula/Rule]
   \index{Bayes' Formula}\index{Bayes' Rule}
 \label{crly:bayes_formula}
-  Let $\{ B_i \}_{i = 1}^{n}$ be a partition of a sample space $S$. Then for any event $A$, we have
+  Let $\{ B_i \}_{i = 1}^{n}$ be a partition of a sample space $S$. Then for any
+  event $A$, we have
   \begin{equation*}
     P(B_j \mid A) = \frac{P(A \mid B_j) P(B_j)}{\sum_{i=1}^{n} P(A \mid B_i) \cdot P(B_i)}.
   \end{equation*}
@@ -179,26 +155,40 @@ A discrete rv $X$:
 
 \newthought{The following} are some of the most common discrete distributions.
 
-\paragraph{Binomial Distribution}\index{Binomial Distribution} For an rv $X$ that follows a Binomial Distribution, in which we denote as $X \sim \Bin(n, p)$, where $n \in \mathbb{N}$ and $p \in [0, 1]$, its pmf is
+\paragraph{Binomial Distribution}\index{Binomial Distribution} For an rv $X$
+that follows a Binomial Distribution, in which we denote as $X \sim \Bin(n, p)$,
+where $n \in \mathbb{N}$ and $p \in [0, 1]$, its pmf is
 \begin{equation*}
   p(x) = \binom{n}{x} p^x (1 - p)^{n - x}.
 \end{equation*}
 
-\paragraph{Bernoulli Distribution}\index{Bernoulli Distribution} Following the above distribution where $n = 1$, we have that $X$ follows what is called a Bernoulli Distribution, denoted as $X \sim \Bernoulli(p)$.
+\paragraph{Bernoulli Distribution}\index{Bernoulli Distribution} Following the
+above distribution where $n = 1$, we have that $X$ follows what is called a
+Bernoulli Distribution, denoted as $X \sim \Bernoulli(p)$.
 
-\paragraph{Negative Binomial Distribution}\index{Negative Binomial Distribution} For an rv $X$ that follows a Negative Binomial Distribution, in which we denote as $X \sim \NB(k, p)$, where $k \in \mathbb{N}$ and $p \in [0, 1]$, its pmf is\marginnote{The Negative Binomial Distribution has a model that measures the probability that the $k$th success occurs.}
+\paragraph{Negative Binomial Distribution}\index{Negative Binomial Distribution}
+For an rv $X$ that follows a Negative Binomial Distribution, in which we denote
+as $X \sim \NB(k, p)$, where $k \in \mathbb{N}$ and $p \in [0, 1]$, its pmf
+is\marginnote{The Negative Binomial Distribution has a model that measures the
+probability that the $k$th success occurs.}
 \begin{equation*}
   p(x) = \binom{x - 1}{k - 1} p^k (1 - p)^{x - k}
 \end{equation*}
 
-\paragraph{Geometric Distribution}\index{Geometric Distribution} Following the above distribution where $k = 1$, we have that $X$ folows what is called a Geometric Distribution, denoted as $X \sim \Geo(p)$.
+\paragraph{Geometric Distribution}\index{Geometric Distribution} Following the
+above distribution where $k = 1$, we have that $X$ folows what is called a
+Geometric Distribution, denoted as $X \sim \Geo(p)$.
 
-\paragraph{Hypergeometric Distribution}\index{Hypergeometric Distribution} For an rv $X$ that follows a Hypergeometric Distribution, in which we denote as $X \sim \HG(N, r n)$, where $r, n \leq N \in \mathbb{N}$, its pmf is
+\paragraph{Hypergeometric Distribution}\index{Hypergeometric Distribution} For
+an rv $X$ that follows a Hypergeometric Distribution, in which we denote as $X
+\sim \HG(N, r n)$, where $r, n \leq N \in \mathbb{N}$, its pmf is
 \begin{equation*}
   p(x) = \frac{\binom{r}{x} \binom{N - r}{n - x}}{\binom{N}{n}}
 \end{equation*}
 
-\paragraph{Poisson Distribution}\index{Poisson Distribution} For an rv $X$ that follows a Poisson Distribution, in which we denote as $X \sim \Poi(\lambda)$, where $\lambda > 0$, its pmf is
+\paragraph{Poisson Distribution}\index{Poisson Distribution} For an rv $X$ that
+follows a Poisson Distribution, in which we denote as $X \sim \Poi(\lambda)$,
+where $\lambda > 0$, its pmf is
 \begin{equation*}
   p(x) = \frac{e^{- \lambda} \lambda^{x}}{x!}
 \end{equation*}
@@ -229,19 +219,26 @@ A continuous rv $X$:
   Note that our convention is that $P(X = x) = 0$ for a continuous rv $X$.
 \end{note}
 
-\newthought{The following} are some of the most common continuous distributions.
+\newthought{The following} are some of the most common continuous
+distributions.
 
-\paragraph{Uniform Distribution}\index{Uniform Distribution} For an rv $X$ that follows a Uniform Distribution, in which we denote as $X \sim \Unif(a, b)$, where $a, b \in \mathbb{R}$, its pdf is
+\paragraph{Uniform Distribution}\index{Uniform Distribution} For an rv $X$ that
+follows a Uniform Distribution, in which we denote as $X \sim \Unif(a, b)$,
+where $a, b \in \mathbb{R}$, its pdf is
 \begin{equation*}
   f(x) = \frac{1}{b - a}.
 \end{equation*}
 
-\paragraph{Gamma Distribution}\index{Gamma Distribution} For an rv $X$ that follows a Gamma Distribution, in which we denote as $X \sim \Gam(n, \lambda)$, where $n \in \mathbb{N}$ and $\lambda > 0$, its pdf is
+\paragraph{Gamma Distribution}\index{Gamma Distribution} For an rv $X$ that
+follows a Gamma Distribution, in which we denote as $X \sim \Gam(n, \lambda)$,
+where $n \in \mathbb{N}$ and $\lambda > 0$, its pdf is
 \begin{equation*}
   f(x) = \frac{\lambda^n x^{n - 1} e^{-\lambda x}}{( n - 1 )!}.
 \end{equation*}
 
-\paragraph{Exponential Distribution}\index{Exponential Distribution} Following the above distribution where $n = 1$, we have that $X$ follows what is called an Exponential Distribution, denoted as $X \sim \Exp(\lambda)$, where its pdf is
+\paragraph{Exponential Distribution}\index{Exponential Distribution} Following
+the above distribution where $n = 1$, we have that $X$ follows what is called an
+Exponential Distribution, denoted as $X \sim \Exp(\lambda)$, where its pdf is
 \begin{equation*}
   f(x) = \lambda e^{- \lambda x}.
 \end{equation*}
@@ -255,8 +252,11 @@ A continuous rv $X$:
 % section moments
 
 \begin{defn}[Expectation]\index{Expectation}
-  \label{defn:expectation}\marginnote{Note that this definition is actually the \href{https://en.wikipedia.org/wiki/Law_of_the_unconscious_statistician}{Law of the Unconscious Statistician}}
-  Let $X$ be an rv. Given a function $g$ that is defined over $X$, the \hlnoteb{expectation} of $g(X)$ is given by
+  \label{defn:expectation}\marginnote{Note that this definition is actually the
+  \href{https://en.wikipedia.org/wiki/Law_of_the_unconscious_statistician}{Law
+  of the Unconscious Statistician}}
+  Let $X$ be an rv. Given a function $g$ that is defined over $X$, the
+  \hlnoteb{expectation} of $g(X)$ is given by
   \begin{equation*}
     E[ g(X) ] = \begin{cases}
       \sum_{x} g(x) p(x) & \text{ if } X \text{ is a discrete rv } \\
@@ -292,7 +292,9 @@ In relation to the variance, we have the standard deviation.
   \end{equation*}
 \end{defn}
 
-We shall state the following properties without providing proof\sidenote{The proofs are very easy, but it serves as a strengthening exercise for the unfamiliar. Therefore,
+We shall state the following properties without providing proof\sidenote{The
+proofs are very easy, but it serves as a strengthening exercise for the
+unfamiliar. Therefore,
 \begin{ex}
   Proof both \cref{propo:linearity_of_the_expectation} and \cref{propo:linearity_of_the_variance}.
 \end{ex}
@@ -314,7 +316,8 @@ We shall state the following properties without providing proof\sidenote{The pro
   \end{equation*}
 \end{propo}
 
-Referring back to \cref{defn:expectation}, if $g(X) = e^{tX}$, we have ourselves, what is called, the moment generating function.
+Referring back to \cref{defn:expectation}, if $g(X) = e^{tX}$, we have
+ourselves, what is called, the moment generating function.
 
 \begin{defn}[Moment Generating Function]\index{Moment Generating Function}
 \label{defn:moment_generating_function}
@@ -327,33 +330,744 @@ Referring back to \cref{defn:expectation}, if $g(X) = e^{tX}$, we have ourselves
 \begin{note}
   \begin{enumerate}
     \item Observe that $\phi_X(0) = E\left[ e^0 \right] = 1$.
-    \item The reason such an expression is called a moment generating function is as follows: observe that
+    \item The reason such an expression is called a moment generating function
+      is as follows: observe that
       \begin{align*}
-        \phi_X(t) &= E\left[ e^{tX} \right] = E\left[ \sum_{i=0}^{\infty} \frac{(tX)^i}{i!} \right] \\
-                  &= E\left[ 1 + \frac{tX}{1!} + \frac{(tX)^2}{2!} + \hdots + \frac{(tX)^n}{n!} + \hdots \right] \\
-                  &= \frac{t^0}{0!} E[1] + \frac{t}{1!} E[X] + \frac{t^2}{2!} E\left[X^2\right] + \hdots + \frac{t^n}{n!} E\left[X^n\right] + \hdots
+        \phi_X(t) &= E\left[ e^{tX} \right] = E\left[ \sum_{i=0}^{\infty}
+                    \frac{(tX)^i}{i!} \right] \\
+                  &= E\left[ 1 + \frac{tX}{1!} + \frac{(tX)^2}{2!} + \hdots +
+                    \frac{(tX)^n}{n!} + \hdots \right] \\
+                  &= \frac{t^0}{0!} E[1] + \frac{t}{1!} E[X] + \frac{t^2}{2!}
+                    E\left[X^2\right] + \hdots + \frac{t^n}{n!} E\left[X^n\right]
+                    + \hdots
       \end{align*}
-      by \cref{propo:linearity_of_the_expectation}. If we take the $k$th derivative wrt $t$ and set $t = 0$, we will obtain the $k$th moment of $X$. In other words,
+      by \cref{propo:linearity_of_the_expectation}. If we take the $k$th
+      derivative wrt $t$ and set $t = 0$, we will obtain the $k$th moment of
+      $X$. In other words,
       \begin{equation*}
-        E[X^k] = \phi_X^{(n)}(0) = \frac{d}{dt} \phi_X (t) \at{t = 0}{}.
+        E[X^k] = \phi_X^{(k)}(0) = \frac{d^k}{dt^k} \phi_X (t) \at{t = 0}{}.
       \end{equation*}
+      It is \hlimpo{important} to note here that $t = 0$ can be interpreted in
+      the sense of a limit, i.e. $\lim\limits_{t \to 0}$.
   \end{enumerate}
+\end{note}
+
+\begin{eg}
+  Suppose $X \sim \Bin(n, p)$. Find $\mgf(X)$ and use it to find $E[X]$ and
+  $\Var(X)$.
+
+  \begin{solution}
+    First, observe the \hlnotea{binomial formula}:
+    \begin{equation*}
+      (a + b)^m = \sum_{x = 0}^{m} \binom{m}{x} a^x b^m.
+    \end{equation*}
+    Now
+    \begin{align*}
+      \phi_X(t) &= E \left[ e^{tX} \right] = \sum_{x=0}^{n} e^{tx} \binom{n}{x}
+                  p^x (1-p)^{n-x} \\
+                &= \sum_{x=0}^{n} \binom{n}{x} \left( pe^t \right)^x \left( 1 -
+                  p \right)^{n - x} \\
+                &= \left( pe^t + 1 - p \right)^n.
+    \end{align*}
+    We observe that this works for all $t \in \mathbb{R}$.
+
+    To find the expectation and variance, we do
+    \begin{equation*}
+      E[X] = \frac{d}{dt} \phi_X(t) \at{t=0}{} = n \left( pe^t + 1 - p
+      \right)^{n-1} \cdot pe^t \at{t=0}{} = np
+    \end{equation*}
+    and
+    \begin{align*}
+      E[X^2] &= \frac{d^2}{dt^2} \phi_X(t) \at{t=0}{} \\
+             &= npe^t \left( pe^t + 1 - p \right)^{n-1} + (n-1)np^2e^{2t} \left( pe^t
+               + 1 - p \right)^{n-2} \at{t=0}{} \\
+             &= np(1 + np - p)
+    \end{align*}
+    and conclude that
+    \begin{equation*}
+      \Var(X) = np + np(n-1)p - n^2p^2 = np(1 - p).
+    \end{equation*}
+  \end{solution}
+\end{eg}
+
+\begin{ex}
+  For $X \sim \Poi(\lambda)$, show that
+  \begin{equation*}
+    \mgf(X) = \phi_X(t) = e^{\lambda(e^t - 1)}, \text{ for } t \in \mathbb{R}.
+  \end{equation*}
+  Find $E[X]$ and $\Var(X)$ using the mgf.
+\end{ex}
+
+\begin{ex}
+  For $X \sim \Exp(\lambda)$, show that
+  \begin{equation*}
+    \mgf(X) = \phi_X(t) = \frac{\lambda}{\lambda - t}, \text{ for } t < \lambda.
+  \end{equation*}
+  Find $E[X]$ and $\Var(X)$ using the mgf.
+\end{ex}
+
+\begin{note}[Important property of the MGF]\label{note:mgf_uniquely_determines_distribution}
+  The mgf is important to us because it \hlimpo{uniquely determines} the
+  distribution of an rv.
 \end{note}
 
 % section moments (end)
 
+\section{Joint Distributions}%
+\label{sec:joint_distributions}
+% section joint_distributions
+
+We shall only review \hlnotea{bivariate distributions}. One can easily extend
+the bivariate case to a multivariate situation.
+
+\begin{defn}[Joint CDF]\index{Joint CDF}\label{defn:joint_cdf}
+  The \hlnoteb{joint cdf} is defined by
+  \begin{equation*}
+    F(a, b) = P(X \leq a, Y \leq b) = P(\{ X \leq a \} \cap \{ Y \leq b \})
+  \end{equation*}
+  for all $a, b \in \mathbb{R}$, where $X, Y$ are rvs.
+\end{defn}
+
+\begin{defn}[Marginal CDF]\index{Marginal CDF}\label{defn:marginal_cdf}
+  Given a joint cdf $F$, we define the \hlnoteb{marginal cdf} as
+  \begin{equation*}
+    F_X(a) = P(X \leq a) \coloneqq F(a, \infty) = \lim_{b \to \infty} F(a, b).
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Joint and Marginal Probability Mass Functions]\index{Joint Probability Mass Function}\index{Marginal Probability Mass Function}\label{defn:joint_pmf}
+  Suppose $X, Y$ are discrete rvs. We define the \hlnoteb{joint probability mass
+  function (pmf)} of $X$ and $Y$ as
+  \begin{equation*}
+    p(x, y) \coloneqq P(X = x, Y = y).
+  \end{equation*}
+  The \hlnoteb{marginal pmf} of $X$ and $Y$ are
+  \begin{equation*}
+    p_X(x) = P(X = x) = \sum_{y} p(x, y)
+  \end{equation*}
+  and
+  \begin{equation*}
+    p_Y(y) = P(Y = y) = \sum_{x} p(x, y),
+  \end{equation*}
+  respectively.
+\end{defn}
+
+We are not equipped with the knowledge to formally define a \hlnotea{probability
+density function}, and so we shall only introduce it in a roundabout way.
+
+\begin{defn}[Joint and Marginal Probability Density Function]\index{Joint Probability Density Function}\index{Marginal Probability Density Function}\label{defn:joint_pdf}
+  Suppose $X, Y$ are continuous rvs. We define \hlnoteb{joint probability
+  density function (pdf)} of $X$ and $Y$ as
+  \sidenote{
+  \begin{marginwarning}
+    It is important to note that
+    \begin{equation*}
+      f(x, y) \neq P(X = x, Y = x),
+    \end{equation*}
+    and so we cannot put \cref{defn:joint_pmf} and \cref{defn:joint_pdf} as one
+    definition.
+  \end{marginwarning}
+  }
+  \begin{equation*}
+    f : \mathbb{R}^2 \to \mathbb{R}.
+  \end{equation*}
+  The \hlnoteb{marginal pdf} of $X$ and $Y$ are
+  \begin{equation*}
+    f_X(x) \coloneqq \int_{\forall y} f(x, y) \dif{y}
+  \end{equation*}
+  and
+  \begin{equation*}
+    f_Y(y) \coloneqq \int_{\forall x} f(x, y) \dif{x},
+  \end{equation*}
+  respectively.
+\end{defn}
+
+\begin{note}
+  Note that
+  \begin{equation*}
+    f(x, y) = \frac{\partial^2}{\partial x \partial y} F(x, y).
+  \end{equation*}
+\end{note}
+
+\section{Expectation of Joint Distributions}%
+\label{sec:expectation_of_joint_distributions}
+% section expectation_of_joint_distributions
+
+\begin{defn}[Expectation of Joint Distributions]\index{Expectation of Joint Distributions}\label{defn:expectation_of_joint_distributions}
+  Let $X$ and $Y$ be rvs, and $g(X, Y)$ a function. We define the
+  \hlnoteb{expectation of a joint distribution} of $X$ and $Y$ as
+  \begin{equation*}
+    E[g(X, Y)] = \begin{cases}
+      \sum_{x} \sum_{y} g(x, y) p(x, y) & X, Y \text{ are jointly discrete } \\
+      \int_{\forall x} \int_{\forall y} g(x, y) f(x, y) & X, Y \text{ are jointly continuous }
+    \end{cases}
+  \end{equation*}
+\end{defn}
+
+The following is a special case of an expectation, given for when
+\begin{equation*}
+  g(X, Y) = (X - E[X])(Y - E[Y]).
+\end{equation*}
+
+\begin{defn}[Covariance of Joint Distributions]\index{Covariance of Joint Distributions}\label{defn:covariance_of_joint_distributions}
+  We define the \hlnoteb{covariance of a joint distribution} of $X$ and $Y$ as
+  \begin{equation*}
+    \Cov(X, Y) = E[(X - E[X])(Y - E[Y])] = E[XY] - E[X]E[Y].
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Observe that
+  \begin{equation*}
+    \Cov(X, X) = \Var(X).
+  \end{equation*}
+\end{note}
+
+\marginnote{
+\begin{ex}
+  Prove \cref{propo:linearity_of_the_expectation_over_addition}.
+\end{ex}
+}
+\begin{propo}[Linearity of the Expectation over Addition]\label{propo:linearity_of_the_expectation_over_addition}
+  Let $X$ and $Y$ be rvs. Then for $a, b \in \mathbb{R}$,
+  \begin{equation*}
+    E[aX + bY] = aE[X] + bE[Y].
+  \end{equation*}
+\end{propo}
+
+\marginnote{
+\begin{ex}
+  Prove \cref{propo:variance_over_a_linear_combination_of_rvs}.
+\end{ex}
+}
+\begin{propo}[Variance over a Linear Combination of RVs]\label{propo:variance_over_a_linear_combination_of_rvs}
+  Let $X$ and $Y$ be rvs. Then for $a, b \in \mathbb{R}$,
+  \begin{equation*}
+    \Var(aX + bY) = a^2 \Var(X) + b^2 \Var(Y) + 2ab \Cov(X, Y).
+  \end{equation*}
+\end{propo}
+
+% section expectation_of_joint_distributions (end)
+
+% section joint_distributions (end)
+
+\section{Independence of Random Variables}%
+\label{sec:independence_of_random_variables}
+% section independence_of_random_variables
+
+\begin{defn}[Independence]\index{Independence}\label{defn:independence}
+  Let $X$ and $Y$ be rvs, and $F$ their joint cdf. We say that $X$ and $Y$ are
+  \hlnoteb{independent} if
+  \begin{equation*}
+    F(x, y) = F_X(x) \cdot F_Y(y),
+  \end{equation*}
+  where $F_X$ and $F_Y$ are the marginal cdfs of $X$ and $Y$, respectively. We
+  shall denote this relationship between rvs as $X \bot Y$.
+\end{defn}
+
+\begin{note}[Equivalent definition of Independence]
+  One may also define independence of $X$ and $Y$ by
+  \begin{equation*}
+    p(x, y) = p_X(x) \cdot p_Y(y)
+  \end{equation*}
+  if $X$ and $Y$ are discrete, and
+  \begin{equation*}
+    f(x, y) = f_X(x) \cdot f_Y(y)
+  \end{equation*}
+  if $X$ and $Y$ are continuous.
+\end{note}
+
+\begin{propo}[Expectation of Independent RVs]\label{propo:expectation_of_independent_rvs}
+  Let $X$ and $Y$ be independent rvs, and $g$ a function of $X$ and $h$ a
+  function of $Y$. Then
+  \begin{equation*}
+    E(g(X) h(Y)) = E[g(X)] \cdot E[h(Y)].
+  \end{equation*}
+\end{propo}
+
+\begin{crly}[MGF of Independent RVs]\label{crly:mgf_of_independent_rvs}
+  Suppose $X_1, X_2, \ldots, X_n$ are independent rvs, then consider $T =
+  \sum_{i=1}^{n} X_i$. The mgf of $T$ is then given by
+  \begin{equation*}
+    \phi_T(t) = \prod_{i=1}^{n} \phi_{X_i}(t).
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  Suppose $X_1, X_2, \ldots, X_n$ are independent rvs, then consider $T =
+  \sum_{i=1}^{n} X_i$. Then the mgf of $T$ is
+  \begin{align*}
+    \phi_T(t) &= E\left[e^{tT}\right] = E[\exp\{t(X_1 + X_2 + \hdots + X_n)\}] \\
+              &= E \left[ e^{tX_1} \cdot \hdots \cdot e^{tX_n} \right] \\
+              &= E \left[ e^{tX_1} \right] \hdots E \left[ e^{tX_n} \right]
+              \enspace \because \cref{propo:expectation_of_independent_rvs} \\
+              &= \phi_{X_1}(t) \cdot \hdots \cdot \phi_{X_n}(t) =
+              \prod_{i=1}^{n} \phi_{X_i}(t),
+  \end{align*}
+  which is what we want.
+\end{proof}
+
+\begin{eg}[MGF of Independent Binomial Distributions with the Same Probability]
+  Let $X_1, X_2, \ldots, X_m$ be an independent sequence of rvs where $X_i \sim
+  \Bin(n_i, p)$. Let $T = \sum_{i=1}^{m} X_i$. By
+  \cref{crly:mgf_of_independent_rvs} mgf of $T$ is
+  \begin{equation*}
+    \phi_T(t) = \prod_{i=1}^{m} \phi_{X_i}(t) = \prod_{i=1}^{m} (pe^t + 1 -
+    p)^{n_i} = \left( pelt + 1 - p \right)^{\sum_{i=1}^{m} n_i}.
+  \end{equation*}
+  We observe that
+  \begin{equation*}
+    T \sim \Bin \left( \sum_{i=1}^{m} n_i, p \right).
+  \end{equation*}
+\end{eg}
+
+% section independence_of_random_variables (end)
+
 % chapter elementary_probability_review (end)
+
+\chapter{Conditional Probabilities}%
+\label{chp:conditional_probabilities}
+% chapter conditional_probabilities
+
+\section{Conditional Probability for Discrete Random Variables}%
+\label{sec:conditional_probability_for_discrete_random_variables}
+% section conditional_probability_for_discrete_random_variables
+
+\begin{defn}[Conditional Distribution of Discrete Random Variables]\index{Conditional Distribution}\index{Conditional Probability}\label{defn:conditional_distribution_of_discrete_random_variables}
+  Let $X_1, X_2$ be discrete rvs with joint pmf $p(x_1, x_2)$ and marginal pmfs
+  $p_1(x_1)$ and $p_1(x_2)$, respectively. We call $X_1 \mid X_2 = x_2$ the
+  \hlnoteb{conditional distribution} of $X_1$ given $X_2 = x_2$.
+
+  The \hlnoteb{conditional pmf} of $X_1 \mid X_2 = x_2$ is defined as
+  \begin{equation*}
+    p(x_1 \mid x_2) = P(X_1 = x_2 \mid X_2 = x_2) = \frac{P(X_1 = x_1 \land X_2
+    = x_2)}{P(X_2 = x_2)},
+  \end{equation*}
+  or more succinctly,
+  \begin{equation*}
+    p(x_1 \mid x_2) = P(X_1 \mid X_2 = x_2) = \frac{p(x_1, x_2)}{p_2(x_2)},
+  \end{equation*}
+  where we require $p_2(x_2) > 0$.
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item If $X_1$ and $X_2$ are independent, then
+      \begin{equation*}
+        p(x_1 \mid x_2) = \frac{p(x_1, x_2)}{p_2(x_2)} = \frac{p_1(x_1)
+        p_2(x_2)}{p_2(x_2)} = p_1(x_1).
+      \end{equation*}
+    \item We may extend the above definition to multivariate cases.
+  \end{itemize}
+\end{note}
+
+\begin{eg}
+  Suppose $X_1, X_2, X_3$ are discrete rvs, with $p_3$ as the pmf of $X_3$. Then
+  we define the conditional pmf of $(X_1, X_2) \mid X_3 = x_3$ as
+  \begin{equation*}
+    p((x_1, x_2) \mid x_3) = \frac{p(x_1, x_2, x_3)}{p_3(x_3)}.
+  \end{equation*}
+\end{eg}
+
+\begin{defn}[Conditional Expectation for Discrete RVs]\index{Conditional Expectation}\label{defn:conditional_expectation_for_discrete_rvs}
+  Given rvs $X_1$ and $X_2$, and a function $g$ on $X_1$, We define the
+  conditional expectation of $X_1$ given $X_2 = x_2$ as
+  \begin{equation*}
+    E[g(X_1) \mid X_2 = x_2] = \sum_{x_1} g(x_1) p(x_1 \mid x_2).
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  By \cref{propo:linearity_of_the_expectation_over_addition}, we have that given
+  rvs $X_1$ an $X_2$, $a, b \in \mathbb{R}$, and functions $g, h$ on $X_1$,
+  \begin{align*}
+    &E \left[ ag(X_1) + bh(X_1) \mid X_2 = x_2 \right] \\
+    &= aE[g(X_1) \mid X_2 = x_2] + aE[h(X_1) \mid X_2 = x_2]
+  \end{align*}
+\end{note}
+
+\begin{propo}[Conditional Variance of Discrete RVs]\label{propo:conditional_variance_of_discrete_rvs}
+  We have that
+  \begin{equation*}
+    \Var(X_1 \mid X_2 = x_2) = E[X_1^2 \mid X_2 = x_2] - E[X_1 \mid X_2 =
+    x_2]^2.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Consider
+  \begin{equation*}
+    g(x) = [X_1 - E[X_1 \mid X_2 = x_2]]^2,
+  \end{equation*}
+  which is the typical definition of a variance. Then
+  \begin{align*}
+    &\Var(X_1 \mid X_2 = x_2) \\
+    &= E[(X_1 - E[X_1 \mid X_2 = x_2])^2 \mid X_2 = x_2] \\
+    &= E \Big[X_1^2 - 2X_1 E[X_1 \mid X_2 = x_2] + E[X_1 \mid X_2 = x_2]^2 \;
+      \Bigg\mid X_2 = x_2 \Big] \\
+    &= E[X_1^2 \mid X_2 = x_2] - 2E[X_1 \mid X_2 = x_2]^2 + E[X_1 \mid X_2 =
+      x_2]^2 \\
+    &= E[X_1^2 \mid X_2 = x_2] - E[X_1 \mid X_2 = x_2]^2.
+  \end{align*}
+\end{proof}
+
+Even better, we have the following proposition.
+
+\begin{propo}[Linearity of Conditional Expectation]\label{propo:linearity_of_conditional_expectation}
+  Given rvs $X_1, \, X_2$ and $X_3$, we have
+  \begin{equation*}
+    E[X_1 + X_2 \mid X_3 = x_3] = E[X_1 \mid X_3 = x_3] + E[X_2 \mid X_3 = x_3].
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Let $p_3$ be the pmf of $X_3$. Observe that
+  \begin{align*}
+    &E[X_1 + X_2 \mid X_3 = x_3] \\
+    &= \sum_{x_1} \sum_{x_2} (x_1 + x_2) p(x_1, x_2 \mid x_3) \\
+    &= \sum_{x_1} \sum_{x_2} x_1 \frac{p(x_1, x_2, x_3)}{p_3(x_3)} + \sum_{x_1}
+      \sum_{x_2} x_2 \frac{p(x_1, x_2, x_3)}{p_3(x_3)} \\
+    &= \sum_{x_1} \frac{x_1}{p_3(x_3)} \sum_{x_2} p(x_1, x_2, x_3) + \sum_{x_2}
+      \frac{x_2}{p_3(x_3)} \sum_{x_1} p(x_1, x_2, x_3) \\
+    &= \sum_{x_1} \frac{x_1}{p_3(x_3)} p(x_1, x_3) + \sum_{x_2}
+      \frac{x_2}{p_3(x_3)} p(x_2, x_3) \\
+    &= \sum_{x_1} x_1 p(x_1 \mid x_3) + \sum_{x_2} x_2 p(x_2 \mid x_3) \\
+    &= E[X_1 \mid X_3 = x_3] + E[X_2 \mid X_3 = x_3].
+  \end{align*}
+\end{proof}
+
+\begin{crly}[General Linearity of Conditional Expectation]\label{crly:general_linearity_of_conditional_expectation}
+  Given an rv $Y$, a sequence of discrete rvs $\{X_i\}_{i=1}^{n}$, and a sequence of
+  scalars $\{a_i\}_{i=1}^{n} \subseteq \mathbb{R}$, we have
+  \begin{equation*}
+    E \left[ \sum_{i=1}^{n} a_i X_i \mid Y = y \right] = \sum_{i=1}^{n} a_i
+    E[X_i \mid Y = y].
+  \end{equation*}
+\end{crly}
+
+\begin{eg}
+  Suppose that $X$ and $Y$ are discrete rvs having joint pmf
+  \begin{equation*}
+    p(x, y) = \begin{cases}
+      \frac{1}{5}  & x = 1, \, y = 0 \\
+      \frac{2}{15} & x = 0, \, y = 1 \\
+      \frac{1}{15} & x = 1, \, y = 2 \\
+      \frac{1}{5}  & x = 2, \, y = 0 \\
+      \frac{2}{5}  & x = 1, \, y = 1 \\
+      0            & \text{ otherwise }
+    \end{cases}
+  \end{equation*}
+  Let us first find the conditional distribution of $X \mid Y = 1$. First,
+  consider the following table:
+  \begin{table}[ht]
+    \centering
+    \caption{Tabulating values of $p(x, y)$}
+    \label{table:tabulating_values_of_p_x_y}
+    \begin{tabular}{c | c c c | c}
+      $X \diagdown Y$ & $0$           & $1$            & $2$            & $p_X$ \\
+      \hline
+      $0$             & $0$           & $\frac{2}{15}$ & $0$            & $\frac{2}{15}$ \\
+      $1$             & $\frac{1}{5}$ & $\frac{2}{5}$  & $\frac{1}{15}$ & $\frac{2}{3}$ \\
+      $2$             & $\frac{1}{5}$ & $0$            & $0$            & $\frac{1}{5}$ \\
+      \hline
+      $p_Y$           & $\frac{2}{5}$ & $\frac{8}{15}$ & $\frac{1}{15}$
+    \end{tabular}
+  \end{table}
+
+  Observe that
+  \begin{equation*}
+    p(0, 1) = \frac{\frac{2}{15}}{\frac{8}{15}} = \frac{1}{4} \text{ and } p(1,
+    1) = \frac{\frac{2}{5}}{\frac{8}{15}} = \frac{3}{4}.
+  \end{equation*}
+  Thus the conditional distribution of $X \mid Y = 1$ is given as in
+  \cref{table:conditional_distribution_of_x_mid_y_1}.
+  \begin{table}[ht]
+    \centering
+    \caption{Conditional distribution of $X \mid Y = 1$}
+    \label{table:conditional_distribution_of_x_mid_y_1}
+    \begin{tabular}{c | c c}
+      $X$           & $0$           & $1$ \\
+      \hline
+      $p(x \mid 1)$ & $\frac{1}{4}$ & $\frac{3}{4}$
+    \end{tabular}
+  \end{table}
+
+  With this we can calculate the conditional expectation and conditional
+  variance of $X \mid Y = 1$. Note that
+  \begin{equation*}
+    X \mid Y = 1 \sim \Bernoulli \left( \frac{3}{4} \right).
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    E[X \mid Y = 1] = \frac{3}{4} \text{ and } \Var(X \mid Y = 1) = \frac{3}{4}
+    \cdot \frac{1}{4} = \frac{3}{16}.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  For $i = 1, 2$ suppose that $X_i \sim \Bin(n_i, p)$, where $X_1 \bot X_2$. We
+  want to find the conditional distribution of $X_1$ given $X_1 + X_2 = n$, i.e.
+  the conditional distribution of $X_1 \mid X_1 + X_2 = n$.
+
+  First, note that the sum of two \hlnotea{binomial distributions} is also a
+  binomial distribution, where the number of trials is the sum of the number of
+  trials from each distribution. In particular, we have that $X_1 + X_2 \sim
+  \Bin(n_1 + n_2, p)$.
+
+  Let the conditional pmf of $X_1 \mid X_1 + X_2 = n$ be denoted as $p(x_1 \mid
+  n)$. Then
+  \begin{align*}
+    p(x_1 \mid n) &= P(X_1 = x_1 \mid X_1 + X_2 = n) \\
+                  &= \frac{P(X_1 = x_1, \, X_1 + X_2 = n)}{P(X_1 + X_2 = n)} \\
+                  &= \frac{P(X_1 = x_1, X_2 = n - x_1)}{P(X_1 + X_2 = n)} \\
+                  &= \frac{P(X_1 = x_1)P(X_2 = n - x_1)}{P(X_1 + X_2 = n)}
+                  \enspace \because X_1 \bot X_2 \\
+                  &= \frac{\binom{n_1}{x_1}p^{x_1}(1-p)^{n_1 - x_1}
+                    \binom{n_2}{n - x_1}p^{n - x_1}(1-p)^{n_2 - n +
+                    x_1}}{\binom{n_1 + n_2}{n}p^{n}(1-p)^{n_1 + n_2 - n}} \\
+                  &= \frac{\binom{n_1}{x_1} \binom{n_2}{n - x_1}}{\binom{n_1 +
+                    n_2}{n}},
+  \end{align*}
+  for $0 \leq x_1 \leq n_1$ and $0 \leq n - x_1 \leq n_2$. We observe that $X_1
+  \mid X_1 + X_2 = n$ has a \hlnotea{Hypergeometric Distribution}, i.e.
+  \begin{equation*}
+    X_1 \mid X_1 + X_2 = n \sim \HG(n_1 + n_2, n_1, n).
+  \end{equation*}
+
+  Recall that the intuition to understanding the hypergeometric distribution in
+  this case is as follows: if we say that $1, 2, \ldots, n_1$ are the indexed
+  trials of $X_1$ and $1, 2, \ldots, n_2$ are those of $X_2$, then if we arrange
+  the trials as
+  \begin{equation*}
+    1, 2, \ldots, n_1, 1, 2, \ldots, n_2,
+  \end{equation*}
+  we may then think that we want to calculate the probability of getting $x_1$ 
+  successes given that the rest of the $n - x_1$ are failures.
+
+  Using the formulas for the expectation and variance of a hypergeometric
+  distribution, we have that
+  \begin{equation*}
+    E[X_1 \mid X_1 + X_2 = n] = \frac{n(n_1)}{n_1 + n_2}
+  \end{equation*}
+  and
+  \begin{align*}
+    \Var(X_1 \mid X_1 + X_2 = n)
+    &= \frac{n(n_1)(n_1 + n_2 - n_1)(n_1 + n_2 - n)}{(n_1 + n_2)^2(n_1 + n_2 -
+      1)} \\
+    &= \frac{n(n_1)(n_2)(n_1 + n_2 - n)}{(n_1 + n_2)^2(n_1 + n_2 - 1)}.
+  \end{align*}
+\end{eg}
+
+Let's deal with a more general case of the above, but this time with the
+individual rvs following $\Poi(\Lambda_i)$.
+
+\begin{eg}
+  Let $\{X_i\}_{i=1}^{m}$ be a sequence of independent rvs where $X_i \sim
+  \Poi(\Lambda_i)$, and $i = 1, 2, \ldots, m$. Let $Y = \sum_{i=1}^{m} X_i$. Let
+  us try to deduce the conditional distribution of $X_j \mid Y = n$.
+
+  First, note that a sum of independent Poisson rvs is also a Poisson
+  distribution, with each of its mean (which is also its parameter) summed up,
+  i.e. given any $Z_1 \sim \Poi(\lambda_1), \ldots, Z_k \sim \Poi(\lambda_k)$,
+  we have
+  \begin{equation*}
+    \sum_{i=1}^{k} Z_i \sim \Poi \left( \sum_{i=1}^{k} \lambda_i \right).
+  \end{equation*}
+  Also a subtle point, note that
+  \begin{equation*}
+    Z_j \; \bot \; \sum_{\substack{i=1 \\ i \neq j}}^{k} Z_i.
+  \end{equation*}
+  
+  Observe that
+  \begin{align*}
+    &P(X_j = x_j \mid Y = n) \\
+    &= \frac{P(X_j = x_j, Y = n)}{P(Y = n)} \\
+    &= \frac{P\left(X_j = x_j, \, \sum\limits_{\substack{i=1 \\ i \neq j}}^{m} X_i = n -
+      x_j \right)}{P(Y = n)} \\
+    &= \frac{P(X_j = x_j) P\left( \sum\limits_{\substack{i=1 \\ i \neq j}}^{m} X_i = n - x_j \right)}{P(Y = n)} \\
+    &= \frac{\exp(-\lambda_j) \lambda_j^{x_j} \left( \frac{1}{x_j!} \right) \cdot
+      \exp\left(-\left( \sum\limits_{\substack{i=1 \\ i \neq j}}^{m} \lambda_i \right)\right)
+      \left( \sum\limits_{\substack{i=1 \\ i \neq j}}^{m} \lambda_i \right)^{n-x_j}
+      \left( \frac{1}{(n - x_j)!} \right)}{\exp\left(-\left(
+      \sum\limits_{i=1}^{m} \lambda_i \right)\right) \left( \sum\limits_{i=1}^{m}
+      \lambda_i \right)^m \left( \frac{1}{n!} \right)} \\
+    &= \binom{n}{x_j} \frac{\lambda_j^{x_j} \left( \sum\limits_{i=1}^{m}
+      \lambda_i - \lambda_j \right)^{n - x_j}}{\left( \sum\limits_{i=1}^{m}
+      \lambda_i \right)^{x_j} \left( \sum\limits_{i=1}^{m} \lambda_i
+      \right)^{n-x_j}} \\
+    &= \binom{n}{x_j} \left( \frac{\lambda_j}{\sum_{i=1}^{m} \lambda_i}
+      \right)^{x_j} \left( 1 - \frac{\lambda_j}{\sum_{i=1}^{m} \lambda_i}
+      \right)^{n-x_j},
+  \end{align*}
+  where $x_j \in [0, n]$. We see that
+  \begin{equation*}
+    X_j \mid Y = n \sim \Bin \left( n, \frac{\lambda_j}{\sum_{i=1}^{m}
+    \lambda_i} \right).
+  \end{equation*}
+\end{eg}
+
+\begin{ex}
+  It is a straightforward exercise to compute $E[X_j \mid Y = n]$ and $\Var(X_j
+  \mid Y = n)$.
+\end{ex}
+
+\begin{eg}
+  Suppose $X \sim \Poi(\lambda)$ and $Y \mid X = x \sim \Bin(x, p)$. Let us
+  compute the conditional distribution of $X \mid Y = y$. We have that
+  \begin{align*}
+    p(x \mid y)
+    &= \frac{P(X = x, Y = y)}{P(Y = y)} \\
+    &= \frac{p(y \mid x) \cdot P(X = x)}{\sum_{x} p(y \mid x) P(X = x)} \\
+    &= \frac{\exp(-\lambda) \lambda^x \left( \frac{1}{x!} \right) \cdot
+        \binom{x}{y} p^y (1-p)^{x-y}}{\sum\limits_{x = y}^{\infty}
+        \exp(-\lambda)\lambda^x \left( \frac{1}{x!} \right) \cdot \binom{x}{y}
+        p^y (1-p)^{x-y}} \\
+    &= \frac{\exp(-\lambda) \lambda^x \cdot \frac{1}{y!(x-y)!} p^y
+        (1-p)^{x-y}}{\sum\limits_{x = y}^{\infty} \exp(-\lambda)\lambda^x \cdot
+        \frac{1}{y!(x-y)!} p^y (1-p)^{x-y}}
+  \end{align*}
+  Now notice that we may work out the denominator to be
+  \begin{align*}
+    & \sum_{x=y}^{\infty} e^{-\lambda} \lambda^x \frac{1}{y!(x-y)!}p^y
+      (1-p)^{x-y} \\
+    &= \frac{e^{-\lambda}}{y!} p^y \sum_{x=y}^{\infty} \frac{\lambda^x}{(x-y)!}
+      (1-p)^{x-y} \\
+    &= \frac{e^{-\lambda} p^y \lambda^y}{y!} \sum_{x=y}^{\infty}
+      \frac{\lambda^{x-y}(1-p)^{x-y}}{(x-y)!} \\
+    &= \frac{e^{-\lambda} p^y \lambda^y}{y!} \sum_{x-y=0}^{\infty}
+      \frac{(\lambda(1-p))^{x-y}}{(x-y)!} \\
+    &= \frac{e^{-\lambda + \lambda(1 - p)} p^y \lambda^y}{y!} \\
+    &= \frac{e^{-\lambda p} (\lambda p)^y}{y!},
+  \end{align*}
+  where the second last equality follows since
+  \begin{equation*}
+    e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}
+  \end{equation*}
+  by the \hlnotea{Taylor Expansion of the exponential function}. Thus we have
+  \begin{align*}
+    p(x \mid y)
+    &= \frac{\exp(-\lambda) \lambda^x \cdot \frac{1}{y!(x-y)!} p^y
+      (1-p)^{x-y}}{\frac{(\lambda p)^y e^{\lambda p}}{y!}} \\
+    &= \frac{e^{-\lambda(1 - p)}(\lambda(1-p))^{x-y}}{(x-y)!},
+  \end{align*}
+  for $x \in [y, \infty)$, which is a Poisson-like pmf.
+
+  We say that
+  \begin{equation*}
+    X \mid Y = y \sim W + y
+  \end{equation*}
+  where
+  \begin{equation*}
+    W \sim \Poi(\lambda(1 - p)).
+  \end{equation*}
+  This distribution, $W + y$, is called a \hldefn{shifted Poisson}
+  distribution.
+
+  Observe that it is relatively easy to compute the expectation and variance due
+  to their linearity properties: we have
+  \begin{equation*}
+    E[X \mid Y = y] = E[W + y] = E[W] + y = \lambda(1-p) + y
+  \end{equation*}
+  and
+  \begin{equation*}
+    \Var(X \mid Y = y) = \Var(W + y) = \Var(W) = \lambda(1 - p).
+  \end{equation*}
+\end{eg}
+
+% section conditional_probability_for_discrete_random_variables (end)
+
+\section{Conditional Probability for Continuous Random Variables}%
+\label{sec:conditional_probability_for_continuous_random_variables}
+% section conditional_probability_for_continuous_random_variables
+
+In the
+\hyperref[sec:conditional_probability_for_discrete_random_variables]{jointly
+discrete case}, it was natural to define
+\begin{equation*}
+  p(x \mid y) = P(X = x \mid Y = y) = \frac{P(X = x, Y = y)}{P(Y = y)}
+\end{equation*}
+due to \hlnotea{Bayes' Rule}, or simply by realizing that we are trying to
+determine the probability of $X = x$ and $Y = y$ given that we already know the
+probability of $Y = y$.
+
+This, however, does not make sense in the continuous case, especially since
+$f(x, y) \neq P(X = x, Y = y)$, and $f_Y(y) \neq P(Y = y)$.
+
+\sidenote{I am actually not sure how this paragraph inspires our definition,
+cause some things don't seem to match up nicely.} We can use a similar
+definition of a single variable continuous rv and extend it for 2 rvs: we can
+consider
+\begin{equation}\label{eq:conditional_prob_for_cts_rvs_inspiration}
+  f(x, y) = \lim_{\substack{\dif{x} \to 0 \\ \dif{y} \to 0}} \frac{P(x \leq X
+  \leq x + \dif{x}, y \leq Y \leq y + \dif{y})}{\dif{x} \dif{y}}.
+\end{equation}
+Notice that for small $\dif{x}$ and $\dif{y}$, we have
+\begin{align*}
+  P(\underbrace{x \leq X \leq x + \dif{x}}_{A} \mid \underbrace{y \leq Y \leq y
+  + \dif{y}}_{B})
+  &= \frac{P(A \cap B)}{P(B)} \\
+  &\approx \frac{f(x,y) \dif{x} \dif{y}}{f_Y(y) \dif{y}} \\
+  &= \frac{f(x,y)}{f_Y(y)} \dif{x}.
+\end{align*}
+
+\begin{defn}[Conditional Distribution of Continuous Random Variables]\index{Conditional Distribution}\label{defn:conditional_distribution_of_continuous_random_variables}
+  Let $X$ and $Y$ be continuous rvs, with joint pdf $f(x, y)$, and $Y$ has the
+  marginal pdf $f_Y$. We call $X \mid Y = y$ the \hlnoteb{conditional
+  distribution} of $X$ given $Y = y$, whose pdf is defined as
+  \begin{equation*}
+    f(x \mid y) = \frac{f(x, y)}{f_Y(y)} = \lim_{\substack{\dif{x} \to 0 \\
+    \dif{y} \to 0}} \frac{P(x \leq X \leq x + \dif{x}, y \leq Y \leq y +
+    \dif{y})}{\dif{x}}.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  Suppose the joint pdf of $X$ and $Y$ is given by
+  \begin{equation*}
+    f(x, y) = \begin{cases}
+      \frac{12}{5} x (2 - x - y) & 0 < x < 1, \, 0 < y < 1 \\
+      0                          & \text{ otherwise }
+    \end{cases}
+  \end{equation*}
+  \hlimpo{First}, note that the \hldefn{region of support} for $X$ and $Y$ is
+  given as in \cref{fig:region_of_support_as_a_rectangle}.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-0.5, 0) -- (2, 0) node[right] {$x$};
+      \draw[->] (0, -0.5) -- (0, 2) node[above] {$y$};
+      \fill[color=blue!30!background] (0, 0) -- (1, 0) -- (1, 1) -- (0, 1) -- cycle;
+      \node[none,circle,fill,inner sep=1pt,label={270:{$1$}}] at (1, 0) {};
+      \node[none,circle,fill,inner sep=1pt,label={180:{$1$}}] at (0, 1) {};
+    \end{tikzpicture}
+    \caption{Region of support as a rectangle}\label{fig:region_of_support_as_a_rectangle}
+  \end{marginfigure}
+  We compute the conditional pdf of $X \mid Y = y$:
+  \begin{align*}
+    f(x \mid y) &= \frac{f(x,y)}{f_Y(y)} \\
+                &= \frac{\cancel{\frac{12}{5}}x(2-x-y)}{\int_{0}^{1} \cancel{\frac{12}{5}}x(2-x-y)
+                  \dif{x}} \\
+                &= \frac{2x - x^2 - xy}{x^2 - \frac{1}{3}x^3 - \frac{1}{2}x^2 y
+                  \at{x=0}{x=1}} \\
+                &= \frac{2x - x^2 - xy}{1 - \frac{1}{3} - \frac{1}{2} y} \\
+                &= \frac{2x - xy - x^2}{\frac{2}{3} - \frac{1}{2} y} \\
+                &= \frac{12x - 6xy - 6x^2}{4 - 3y}, \text{ for } 0 < x < 1.
+  \end{align*}
+\end{eg}
+
+% section conditional_probability_for_continuous_random_variables (end)
+
+% chapter conditional_probabilities (end)
 
 \appendix
 
 \backmatter
 
-\pagestyle{plain}
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
 
-\nobibliography*
 \bibliography{references}
 
 \printindex
 
 \end{document}
-
+% vim:tw=80:fdm=syntax

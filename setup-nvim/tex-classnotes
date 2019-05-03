@@ -1,3 +1,4 @@
+% !TEX TS-program = pdflatex
 \documentclass[notoc,notitlepage]{tufte-book}
 % \nonstopmode % uncomment to enable nonstopmode
 
@@ -20,9 +21,9 @@
 
 \backmatter
 
-\pagestyle{plain}
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
 
-\nobibliography*
+% \nobibliography*
 \bibliography{references}
 
 \printindex
