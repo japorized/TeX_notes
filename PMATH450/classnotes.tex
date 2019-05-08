@@ -1,0 +1,597 @@
+% !TEX TS-program = pdflatex
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{PMATH450 --- Lesbesgue Integration and Fourier Analysis}
+\author{Johnson Ng}
+\subtitle{Classnotes for Spring 2019}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
+
+\input{latex-classnotes-preamble.tex}
+
+\theoremprework{\textcolor{cyan}{\hrule height 2pt width \textwidth}}
+\theoremheaderfont{\color{cyan}\normalfont\bfseries}
+\theorempostwork{\textcolor{cyan}{\hrule height 2pt width \textwidth}}
+\theoremindent10pt
+\newtheorem*{culture}{Culture}
+
+\begin{document}
+\input{latex-classnotes-header.tex}
+
+\chapter*{Preface}%
+\label{chp:preface}
+\addcontentsline{toc}{chapter}{Preface}
+% chapter preface
+
+The pre-requisite to this course is Real Analysis. We will use a lot of the
+concepts introduced in Real Analysis, at times without explicitly stating it.
+Refer to \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf}{notes on
+PMATH351}.
+
+This course is spiritually broken into 2 pieces:
+\begin{itemize}
+  \item Lesbesgue Integration; and
+  \item Fourier Analysis,
+\end{itemize}
+which is as the name of the course.
+
+In this set of notes, we use a special topic environment called
+\hlnotea{culture} to discuss interesting contents related to the course, but
+will not be throughly studied and not tested on exams.
+
+% chapter preface (end)
+
+\chapter{Lecture 1 May 07th 2019}%
+\label{chp:lecture_1_may_07th_2019}
+% chapter lecture_1_may_07th_2019
+
+Since many of our results work for both $\mathbb{C}$ and $\mathbb{R}$, we shall
+use $\mathbb{K}$ throughout this course to represent either $\mathbb{C}$ or
+$\mathbb{R}$.
+
+\section{Riemannian Integration}%
+\label{sec:riemannian_integration}
+% section riemannian_integration
+
+\begin{defn}[Norm and Semi-Norm]\index{Norm}\index{Semi-Norm}\label{defn:semi_norm}
+  Let $V$ be a vector space over $\mathbb{K}$. We define a
+  \hlnoteb{semi-norm} on $V$ as a function
+  \begin{equation*}
+    \nu : V \to \mathbb{R}
+  \end{equation*}
+  that satisfies
+  \begin{enumerate}
+    \item (\hlnotea{Positive Semi-Definite}) $v(x) \geq 0$ for all $x \in V$;
+      \label{item:cond1_semi_norm}
+    \item $\nu(\kappa x) = \abs{\kappa} \nu(x)$ for any $\kappa \in \mathbb{K}$ 
+      and $x \in V$; and \label{item:cond2_semi_norm}
+    \item (\hlnotea{Triangle Inequality}) $\nu(x + y) \leq \nu(x) + \nu(y)$ for
+      all $x, y \in V$. \label{item:cond3_semi_norm}
+  \end{enumerate}
+  If $\nu(x) = 0 \implies x = 0$, then we say that $\nu$ is a \hlnoteb{norm}. In
+  this case, we usually write $\norm{\cdot}$ to denote the norm, instead of
+  $\nu$.
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item We sometimes call a semi-norm a \hldefn{pseudo-length}.
+  \end{itemize}
+\end{note}
+
+\begin{remark}
+  Notice that we wrote $\nu(x) = 0 \implies x = 0$ instead of $\nu(x) = 0 \iff x
+  = 0$. This is because if $z = 0 \in V$, then
+  \begin{equation*}
+    v(z) = v(0 z) = 0.
+  \end{equation*}
+\end{remark}
+
+\begin{ex}
+  Show that if $\nu$ is a semi-norm on a vector space $V$, then $\forall x, y
+  \in V$,
+  \begin{equation*}
+    \abs{\nu(x) - \nu(y)} \leq \nu(x - y).
+  \end{equation*}
+\end{ex}
+
+\begin{proof}
+  Notice that by condition (\ref{item:cond2_semi_norm}) and
+  (\ref{item:cond3_semi_norm}), we have
+  \begin{equation*}
+    \nu(x - y) \leq \nu(x) + \nu(-y) = \nu(x) - \nu(y),
+  \end{equation*}
+  and
+  \begin{equation*}
+    \nu(x - y) = -\nu(y - x) \geq - (\nu(y) - \nu(x)) = \nu(x) - \nu(y).
+  \end{equation*}
+  It follows that indeed
+  \begin{equation*}
+    \abs{\nu(x) - \nu(y)} \leq \nu(x - y).
+  \end{equation*}
+\end{proof}
+
+\begin{eg}
+  The absolute value $\abs{\cdot}$ is a \hlnotea{norm} on $\mathbb{K}$.
+\end{eg}
+
+\begin{eg}[$p$-norms]\label{eg:p_norms}
+  Consider $N \geq 1$ an integer. We define a family of norms on 
+  \begin{equation*}
+    \mathbb{K}^N = \underbrace{K \times K \times \hdots \times K}_{N \text{
+    times }}.
+  \end{equation*}
+  \hlbnoteb{$1$-norm}
+  \begin{equation*}
+    \norm{(x_n)_{n=1}^{N}}_{1} \coloneqq \sum_{n=1}^{N} \abs{x_n}.
+  \end{equation*}
+  \hlbnoteb{Infinity-norm, $\infty$-norm}
+  \begin{equation*}
+    \norm{(x_n)_{n=1}^{N}}_{\infty} \coloneqq \max_{1 \leq n \leq N} \abs{x_n}.
+  \end{equation*}
+  \hlbnoteb{Euclidean-norm, $2$-norm}
+  \begin{equation*}
+    \norm{(x_n)_{n=1}^{N}}_2 \coloneqq \left( \sum_{n=1}^{N} \abs{x_n}^2
+    \right)^{\frac{1}{2}}
+  \end{equation*}
+  It is relatively easy to check that the above norms are indeed norms, except
+  for the $2$-form. In particular, the \hlnotea{triangle inequality} is not as
+  easy to show \sidenote{See
+  \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf\#thm.29}{Minkowski's
+  Inequality}.}.
+
+  Less obviously so, but true nonetheless, we can define the following $p$-norms
+  on $\mathbb{K}^N$ :
+  \begin{equation*}
+    \norm{(x_n)_{n=1}^N}_p \coloneqq \left( \sum_{n=1}^{N} \abs{x_n}^p
+    \right)^{\frac{1}{p}},
+  \end{equation*}
+  for $1 \leq p < \infty$.
+\end{eg}
+
+\begin{culture}
+  Consider $V = \mathbb{M}_n(\mathbb{C})$, \sidenote{Note that
+  $\mathbb{M}_n(\mathbb{C})$ is the set of $n \times n$ matrices over
+  $\mathbb{C}$.} where $n \in \mathbb{N}$ is fixed.
+  For $T \in \mathbb{M}_n(\mathbb{C})$, we define the \hlnotea{singular numbers}
+  of $T$ to be
+  \begin{equation*}
+    s_1(T) \geq s_2(T) \geq \hdots \geq s_n(T) \geq 0,
+  \end{equation*}
+  where $\sigma(T^* T) = \{ s_1(T)^2, s_2(T)^2, \ldots, s_n(T)^2 \}$, including
+  multiplicity. Then we can define
+  \begin{equation*}
+    \norm{T}_p \coloneqq \left( \sum_{i=1}^{n} s_i(T)^p \right)^{\frac{1}{p}}
+  \end{equation*}
+  for $1 \leq p < \infty$, which is called the $p$-norm of $T$ on
+  $\mathbb{M}_n(\mathbb{C})$.
+\end{culture}
+
+\begin{eg}
+  Let
+  \begin{equation*}
+    V = \mathcal{C}([0, 1], \mathbb{K}) = \{ f : [0, 1] \to \mathbb{K} \mid f
+    \text{ is continuous } \}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \norm{f}_{\sup} \coloneqq \sup \{ \abs{f(x)} \mid x \in [0, 1] \}
+  \end{equation*}
+  \sidenote{Some authors use $\norm{f}_\infty$, but we will have the notation
+  $\norm{[f]}_\infty$ later on, and so we shall use $\norm{f}_{\sup}$ for
+  clarity.} defines a norm on $\mathcal{C}([0, 1], \mathbb{K})$.
+
+  A sequence $(f_n)_{n=1)^{\infty}}$ in $V$ converges in this norm to some $f
+  \in V$, i.e.
+  \begin{equation*}
+    \lim_{n \to \infty} \norm{f_n - f}_{\sup} = 0,
+  \end{equation*}
+  which means that $(f_n)_{n=1}^{\infty}$ converges uniformly to $f$ on $[0,
+  1]$.
+\end{eg}
+
+\begin{defn}[Normed Linear Space]\index{Normed Linear Space}\label{defn:normed_linear_space}
+  A \hlnoteb{normed linear space (NLS)} is a pair $(V, \norm{\cdot})$ where $V$
+  is a vector space over $\mathbb{K}$ and $\norm\cdot$ is a norm on $V$.
+\end{defn}
+
+\begin{defn}[Metric]\index{Metric}\label{defn:metric}
+  Given an NLS $(V, \norm{\cdot})$, we can define a \hldefn{metric} $d$ on $V$ (called the
+  \hlnotea{metric induced by the norm}) as follows:
+  \begin{equation*}
+    d : V \times V \to \mathbb{R} \quad d(x, y) = \norm{x - y},
+  \end{equation*}
+  such that
+  \begin{itemize}
+    \item $d(x, y) \geq 0$ for all $x, y \in V$ and $d(x, y) = 0 \iff x = y$;
+    \item $d(x, y) = d(y, x)$; and
+    \item $d(x, y) \leq d(x, z) + d(y, z)$.
+  \end{itemize}
+\end{defn}
+
+\begin{note}
+  Norms are all metrics, and so any space that has a norm will induce a metric
+  on the space.
+\end{note}
+
+\begin{defn}[Banach Space]\index{Banach Space}\label{defn:banach_space}
+  We say that an NLS $(V, \norm{\cdot})$ is \hldefn{complete} or is a
+  \hlnoteb{Banach Space} if the corresponding $(V, d)$, where $d$ is the metric
+  induced by the norm, is complete \sidenote{Completeness of a metric space is
+  such that any of its Cauchy sequences converges in the space.}.
+\end{defn}
+
+\begin{eg}
+  $(\mathcal{C}([0, 1], \mathbb{K}), \norm{\cdot}_{\sup})$ is a Banach space.
+\end{eg}
+
+\begin{eg}
+  We can define a $1$-norm $\norm{\cdot}_1$ on $\mathcal{C}([0, 1], \mathbb{K})$ 
+  via
+  \begin{equation*}
+    \norm{f}_1 \coloneqq \int_{0}^{1} \abs{f}.
+  \end{equation*}
+  Then $(\mathcal{C}([0, 1], \mathbb{K}), \norm{\cdot}_1)$ is an NLS.
+\end{eg}
+
+\begin{ex}
+  Show that $(\mathcal{C}([0, 1], \mathbb{K}), \norm{\cdot}_1)$ is not
+  complete, which will then give us an example of a \hlimpo{normed linear space
+  that is not Banach}.
+\end{ex}
+
+\begin{proof}
+  Consider the sequence $(f_n)_{n=1}^{\infty}$ of continuous functions given by
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-0.5, 0) -- (4, 0) node[right] {$x$};
+      \draw[->] (0, -0.5) -- (0, 2) node[above] {$y$};
+      \draw[line width=1.5pt,color=blue] (0, 0) -- (0.5, 0) -- (3.5, 1) -- (4, 1);
+      \draw[line width=1.5pt,color=red] (0, 0) -- (0.5, 0) -- (1.5, 1) -- (4, 1);
+      \node[circle,fill,inner sep=1pt,label={270:{$\frac{1}{2}$}}] at (0.5, 0) {};
+      \node[circle,fill,inner sep=1pt,label={270:{$\frac{1}{2} + \frac{1}{m}$}}]
+        at (1.5, 0) {};
+      \node[circle,fill,inner sep=1pt,label={270:{$\frac{1}{2} + \frac{1}{n}$}}]
+        at (3.5, 0) {};
+    \end{tikzpicture}
+    \caption{Sequence of functions $(f_n)_{n=1}^{\infty}$. We show for two indices $n < m$.}\label{fig:sequence_of_functions_f_n___n_1_infty_we_show_for_two_indices_n_m_}
+  \end{marginfigure}
+  \begin{equation*}
+    f_n(x) = \begin{cases}
+      0 & 0 \leq x < \frac{1}{2} \\
+      n \left( x + \frac{1}{2} \right) & \frac{1}{2} \leq x \leq \frac{1}{2} +
+      \frac{1}{n} \\
+      1 & \text{ otherwise }
+    \end{cases}
+  \end{equation*}
+  Note that the sequence $(f_n)_{n=1}^{\infty}$ is indeed \hlnotea{Cauchy}: let
+  $\epsilon > 0$ and $\abs{n - m} < \frac{\epsilon}{\abs{x - \frac{1}{2}}}$, and
+  then we have
+  \begin{align*}
+    \abs{f_n(x) - f_m(x)}
+    &= \abs{n \left( x - \frac{1}{2} \right) - m \left( x - \frac{1}{2}\right)}
+    \\
+    &= \abs{(n - m) \left( x - \frac{1}{2} \right)}
+    = \abs{n-m}\abs{x - \frac{1}{2}} < \epsilon.
+  \end{align*}
+  However, it is clear that the sequence $(f_n)_{n=1}^{\infty}$ converges to the
+  piecewise function (in particular, a non-continuous function)
+  \begin{equation*}
+    f(x) = \begin{cases}
+      0 & 0 \leq x < \frac{1}{2} \\
+      1 & x \geq \frac{1}{2}
+    \end{cases}.
+  \end{equation*}
+\end{proof}
+
+\begin{eg}
+  If $(\mathfrak{X}, \norm{\cdot}_{\mathfrak{X}})$ and $(\mathfrak{Y},
+  \norm{\cdot}_{\mathfrak{Y}})$ are NLS's, and if $T : \mathfrak{X} \to
+  \mathfrak{Y}$ is a linear map, we define the \hldefn{operator norm} of $T$ to
+  be
+  \begin{equation*}
+    \norm{T} \coloneqq \sup \{ \norm{T(x)}_{\mathfrak{Y}} \mid
+    \norm{x}_{\mathfrak{X}} \leq 1 \}.
+  \end{equation*}
+  We set
+  \begin{equation*}
+    B(\mathfrak{X}, \mathfrak{Y}) \coloneqq
+    \{ T : \mathfrak{X} \to \mathfrak{Y} \mid T \text{ is linear }, \, \norm{T}
+    < \infty \}.
+  \end{equation*}
+  Note that for any such linear map $T$, $\norm{T} < \infty \iff T$ is
+  continuous. Thus $B(\mathfrak{X}, \mathfrak{Y})$ is the set of all continuous
+  functions from $\mathfrak{X}$ into $\mathfrak{Y}$.
+
+  Then $(B(\mathfrak{X}, \mathfrak{Y}), \norm{\cdot})$ is an NLS.
+\end{eg}
+
+\marginnote{It is likely that we have seen this in Real Analysis.}
+\begin{ex}
+  Show that $(B(\mathfrak{X}, \mathfrak{Y}), \norm{\cdot})$ is complete iff
+  $(\mathfrak{Y}, \norm{\cdot}_{\mathfrak{Y}})$ is complete.
+\end{ex}
+
+\begin{note}
+  One example of the last example is when $(\mathfrak{Y},
+  \norm{\cdot}_{\mathfrak{Y}}) = (\mathbb{K}, \abs{\cdot})$. In this case,
+  $B(\mathfrak{X}, \mathbb{K})$ is known as the \hlnotea{dual space} of
+  $\mathfrak{X}$, or simple the \hlnotea{dual} of $\mathfrak{X}$.
+\end{note}
+
+We are interested in integrating over Banach spaces.
+
+\begin{defn}[Partition of a Set]\index{Partition}\label{defn:partition}
+  Let $(\mathfrak{X}, \norm{\cdot}_{\mathfrak{X}})$ be a
+  \hyperref[defn:banach_space]{Banach space} and $f:[a, b] \to \mathfrak{X}$ a
+  function, where $a < b \in \mathbb{R}$. A \hlnoteb{partition} $P$ of $[a, b]$ 
+  is a finite set
+  \begin{equation*}
+    P = \{ a = p_0 < p_1 < \hdots < p_N = b \}
+  \end{equation*}
+  for some $N \geq 1$. The set of all partitions of $[a, b]$ is denoted by
+  $\mathcal{P}[a, b]$.
+\end{defn}
+
+\begin{defn}[Test Values]\index{Test Values}\label{defn:test_values}
+  Let $(\mathfrak{X}, \norm{\cdot}_{\mathfrak{X}})$ be a
+  \hyperref[defn:banach_space]{Banach space} and $f:[a, b] \to \mathfrak{X}$ a
+  function, where $a < b \in \mathbb{R}$. Let $P \in \mathcal{P}[a, b]$. A set
+  \begin{equation*}
+    P^* \coloneqq \{ p_k^* \}_{k = 1}^{N}
+  \end{equation*}
+  satisfying
+  \begin{equation*}
+    p_{k-1} \leq p_k^* \leq p_k, \text{ for } 1 \leq k \leq n
+  \end{equation*}
+  is called a set of \hlnoteb{test values} for $P$.
+\end{defn}
+
+\begin{defn}[Riemann Sum]\index{Riemann Sum}\label{defn:riemann_sum}
+  Let $(\mathfrak{X}, \norm{\cdot}_{\mathfrak{X}})$ be a
+  \hyperref[defn:banach_space]{Banach space} and $f:[a, b] \to \mathfrak{X}$ a
+  function, where $a < b \in \mathbb{R}$. Let $P \in \mathcal{P}[a, b]$ and
+  $P^*$ its corresponding set of test values. We define the \hlnoteb{Riemann
+  sum} as
+  \begin{equation*}
+    S(f, P, P^*) = \sum_{k=1}^{N} f(p_k^*)(p_k - p_{k-1}).
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item Note that because \cref{defn:partition}, $p_k - p_{k-1} > 0$.
+    \item When $(\mathfrak{X}, \norm{\cdot}) = (\mathbb{R}, \abs{\cdot})$, then
+      this is the usual Riemann sum from first-year calculus.
+    \item In general, note that
+      \begin{equation*}
+        \frac{1}{b - a} S(f, P, P^*) = \sum_{k=1}^{N} \lambda_k f(p_k^*),
+      \end{equation*}
+      where $0 < \lambda_k = \frac{p_k - p_{k-1}}{b - a} < 1$ and \sidenote{via
+      the fact that the $\lambda_k$'s form a telescoping sum}
+      \begin{equation*}
+        \sum_{k=1}^{N} \lambda_k = 1.
+      \end{equation*}
+      So $\frac{1}{b - a} S(f, P, P^*)$ is an \hlnotea{averaging} of $f$ over
+      $[a, b]$. We call $\frac{1}{b - a} S(f, P, P^*)$ the \hldefn{convex
+      combination} of the $f(p_{k}^*)$'s.
+  \end{enumerate}
+\end{remark}
+
+\begin{eg}[Silly example]
+  Let $(\mathfrak{X} = \mathcal{C}([-\pi, \pi], \mathbb{K}),
+  \norm{\cdot}_{\sup})$. Let
+  \begin{equation*}
+    f : [0, 1] \to \mathfrak{X} \text{ such that } x \mapsto e^{2\pi x} \sin
+    7 \theta + \cos x \cos (12 \theta),
+  \end{equation*}
+  where $\theta \in [-\pi, \pi]$. Now if we consider the partition
+  \begin{equation*}
+    P = \left\{ - \pi, \frac{1}{10}, \frac{1}{2}, \pi \right\}
+  \end{equation*}
+  and its corresponding test value
+  \begin{equation*}
+    P^* = \left\{ 0, \frac{1}{3}, 2 \right\},
+  \end{equation*}
+  then
+  \begin{align*}
+    S(f, P, P^*)
+    &= f(0) \left( \frac{1}{10} + \pi \right)
+      + f \left( \frac{1}{3} \right) \left( \frac{1}{2} - \frac{1}{10} \right)
+      + f(2) \left( \pi - \frac{1}{2} \right) \\
+    &= (\sin 7 \theta + \cos 12 \theta) \left( \pi + \frac{1}{10} \right) \\
+    &\quad + \left( e^{\frac{2\pi}{3}} \sin 7\theta +
+      \cos\frac{1}{3} \cos 12\theta \right) \left( \frac{2}{5} \right) \\
+    &\quad + ( e^{4 \pi} \sin 7\theta + \cos 2 \cos 12\theta ) \left( \pi -
+      \frac{1}{2} \right)
+  \end{align*}
+\end{eg}
+
+\begin{defn}[Refinement of a Partition]\index{Refinement}\label{defn:refinement_of_a_partition}
+  Let $a < b \in \mathbb{R}$, and $P \in \mathcal{P}[a, b]$. We say $Q$ is a
+  \hlnoteb{refinement} of $P$ is $Q \in \mathcal{P}[a, b]$ and $P \subseteq Q$.
+\end{defn}
+
+\begin{note}
+  In simpler words, $Q$ is a ``finer'' partition that is based on $P$.
+\end{note}
+
+\begin{defn}[Riemann Integrable]\index{Riemann Integrable}\label{defn:riemann_integrable}
+  Let $a < b \in \mathbb{R}$, $(\mathfrak{X}, \norm{\cdot}_{\mathfrak{X}})$ be a
+  Banach space and $f : [a, b] \to \mathfrak{X}$ be a function. We say that $f$ 
+  is \hlnoteb{Riemann integrable} over $[a, b]$ if $\exists x_0 \in
+  \mathfrak{X}$ such that
+  \begin{equation*}
+    \forall \epsilon > 0 \quad \exists P \in \mathcal{P}[a, b],
+  \end{equation*}
+  such that if $Q$ is any refinement of $P$, and $Q^*$ is any set of test values
+  of $Q$, then
+  \begin{equation*}
+    \norm{x_0 - S(f, Q, Q^*)}_{\mathfrak{X}} < \epsilon.
+  \end{equation*}
+  In this case, we write
+  \begin{equation*}
+    \int_{a}^{b} f = x_0.
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[Uniqueness of the Riemann Integral]\label{propo:uniqueness_of_the_riemann_integral}
+  If $f$ is Riemann integrable over $[a, b]$, then the value of $\int_{a}^{b} f$ 
+  is unique.
+\end{propo}
+
+\begin{proof}
+  Suppose not, i.e.
+  \begin{equation*}
+    \int_{a}^{b} f = x_0 \text{ and } \int_{a}^{b} f = y_0
+  \end{equation*}
+  for some $x_0 \neq y_0$. Then, let
+  \begin{equation*}
+    \epsilon = \frac{\norm{x_0 - y_0}}{2},
+  \end{equation*}
+  which is $> 0$ since $\norm{x_0 - y_0} > 0$. Let $P_{x_0}, P_{y_0} \in
+  \mathcal{P}[a, b]$ be partitions corresponding to $x_0$ and $y_0$ as in the
+  definition of Riemann integrability.
+
+  Then, let $R = P_{x_0} \cup P_{y_0}$, so that $R$ is a \hldefn{common
+  refinement} of $P_{x_0}$ and $P_{y_0}$. If $Q$ is any refinement of $R$, then
+  $Q$ is also a common refinement of $P_{x_0}$ and $P_{y_0}$. Then for any test
+  values $Q^*$ of $Q$, we have
+  \begin{align*}
+    2 \epsilon &= \norm{x_0 - y_0} \\
+               &\leq \norm{x_0 - S(f, Q, Q^*)} + \norm{S(f, Q, Q^*) - y_0} <
+               \epsilon + \epsilon = 2 \epsilon,
+  \end{align*}
+  which is a contradiction.
+
+  Thus $x_0 = y_0$ as required.
+\end{proof}
+
+\begin{thm}[Cauchy Criterion of Riemann Integrability]\index{Cauchy Criterion of Riemann Integrability}\label{thm:cauchy_criterion_of_riemann_integrability}
+  Let $(\mathfrak{X}, \norm{\cdot}_{\mathfrak{X}})$ be a Banach space, $a < b
+  \in \mathbb{R}$ and $f : [a, b] \to \mathfrak{X}$ be a function. TFAE:
+  \begin{enumerate}
+    \item $f$ is Riemann integrable over $[a, b]$;
+    \item $\forall \epsilon > 0, \, R \in \mathcal{P}[a, b]$, if $P, Q$ is any
+      refinement of $R$, and $P^*$ (respectively $Q^*$) is any test values of
+      $P$ (respectively $Q$), then
+      \begin{equation*}
+        \norm{S(f, P, P^*) - S(f, Q, Q^*)}_{\mathfrak{X}} < \epsilon.
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{$\implies$} This is a rather straightforward proof. Suppose $P, Q
+  \in \mathcal{P}[a, b]$ is some refinement of the given partition $R \in
+  \mathcal{P}[a, b]$, and $P^*, Q^*$ any test values for $P, Q$, respectively.
+  Then by assumption and \cref{propo:uniqueness_of_the_riemann_integral},
+  $\exists x_0 \in \mathfrak{X}$ such that
+  \begin{equation*}
+    \norm{x_0 - S(f, P, P^*)}_{\mathfrak{X}} < \frac{\epsilon}{2} \text{ and }
+    \norm{x_0 - S(f, Q, Q^*)}_{\mathfrak{X}} < \frac{\epsilon}{2}.
+  \end{equation*}
+  It follows that
+  \begin{align*}
+    &\norm{S(f,P,P^*) - S(f,Q,Q^*)}_{\mathfrak{X}} \\
+    &\leq \norm{x_0 - S(f,P,P^*)}_{\mathfrak{X}} + \norm{x_0 -
+      S(f,Q,Q^*)}_{\mathfrak{X} } \\
+    &< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+  \end{align*}
+
+  \noindent
+  \hlbnoted{$\impliedby$} By hypothesis, wma $\epsilon = \frac{1}{n}$ for some
+  $n \geq 1$, such that if $P, Q$ are any refinements of the partition $R_n \in
+  \mathcal{P}[a, b]$, and $P^*, Q^*$ are the respective arbitrary test values,
+  then
+  \begin{equation*}
+    \norm{S(f,P,P^*) - S(f,Q,Q^*)}_{\mathfrak{X}} < \frac{1}{n}
+  \end{equation*}
+  
+  Now for each $n \geq 1$, define
+  \begin{equation*}
+    W_n \coloneqq \bigcup_{k=1}^{n} R_k \in \mathcal{P}[a, b],
+  \end{equation*}
+  so that $W_n$ is a common refinement for $R_1, R_2, \ldots, R_n$. For each $n
+  \geq 1$, let $W_n^*$ be an arbitrary set of test values for $W_n$. For
+  simplicity, let us write
+  \begin{equation*}
+    x_n = S(f, \, W_n, \, W_n^*), \text{ for each } n \geq 1.
+  \end{equation*}
+  \sidenote{Note that it would be nice if for the finer and finer partitions
+  that we have constructed, i.e. the $W_n$'s, give us a convergent sequence of
+  Riemann sums, since it makes sense that this convergence will give us the final
+  value that we want.}
+
+  \noindent
+  \hlbnotec{Claim: $(x_n)_{n=1}^{\infty}$ is a Cauchy sequence}
+  If $n_1 \geq n_2 > N \in \mathbb{N}$, then
+  \begin{align*}
+    \norm{x_{n_1} - x_{n_2}}_{\mathfrak{X}} &= \norm{S(f,W_{n_1},W_{n_1}^*) -
+    S(f,W_{n_2},W_{n_2}^*)} < \frac{1}{N}
+  \end{align*}
+  by our assumption, since $W_{n_1}, W_{n_2}$ are refinements of $R_N$. Then by
+  picking $N = \frac{1}{\epsilon}$ for any $\epsilon > 0$, we have that
+  $(x_n)_{n=1}^{\infty}$ is indeed a Cauchy sequence in $\mathfrak{X}$.
+
+  Since $\mathfrak{X}$ is a Banach space, it is complete, and so $\exists x_0
+  \coloneqq \lim\limits_{n \to \infty} x_n \in \mathfrak{X}$. It remains to show
+  that, indeed,
+  \begin{equation*}
+    x_0 = \int_{a}^{b} f.
+  \end{equation*}
+
+  Let $\epsilon > 0$, and choose $N \geq 1$ such that
+  \begin{itemize}
+    \item $\frac{1}{N} < \frac{\epsilon}{2}$ ; and
+    \item $k \geq N$ implies that $\norm{x_k - x_0} < \frac{\epsilon}{2}$.
+  \end{itemize}
+  Then suppose that $V$ is any refinement of $W_N$, and $V^*$ is an arbitrary
+  set of test values of $V$. Then we have
+  \begin{align*}
+    \norm{x_0 - S(f,V,V^*)}_{\mathfrak{X}}
+    &\leq \norm{x_0 - x_N}_{\mathfrak{X}} + \norm{x_N -
+      S(f,V,V^*)}_{\mathfrak{X}} \\
+    &< \frac{\epsilon}{2} + \norm{S(f,W_N,W_N^*) - S(f,V,V^*)}_{\mathfrak{X}} \\
+    &<\frac{\epsilon}{2} + \frac{1}{N} \leq \frac{\epsilon}{2} +
+    \frac{\epsilon}{2} = \epsilon.
+  \end{align*}
+  It follows that
+  \begin{equation*}
+    \int_{a}^{b} f = x_0,
+  \end{equation*}
+  as desired.
+\end{proof}
+
+In first-year calculus, all continuous functions over $\mathbb{R}$ are
+integrable. A similar result holds in Banach spaces as well.
+In the next lecture, we shall prove the following theorem.
+
+\begin{thmnonum}[Continuous Functions are Riemann Integrable]\label{thmnonum:continuous_functions_are_riemann_integrable}
+  Let $(\mathfrak{X}, \norm{\cdot})$ be a Banach space and $a < b \in
+  \mathbb{R}$. If $f : [a, b] \to \mathfrak{X}$ is continuous, then $f$ is
+  Riemann integrable over $[a, b]$.
+\end{thmnonum}
+
+% section riemannian_integration (end)
+
+% chapter lecture_1_may_07th_2019 (end)
+
+\appendix
+
+\backmatter
+
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
+
+% \nobibliography*
+\bibliography{references}
+
+\printindex
+
+\end{document}
+% vim:tw=80:fdm=syntax
+
