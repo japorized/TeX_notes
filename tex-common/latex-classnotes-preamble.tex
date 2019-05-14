@@ -51,7 +51,7 @@
 \tcbuselibrary{skins,breakable}
 \usepackage{longtable,booktabs}
 \usepackage[amsmath,hyperref,thmmarks]{ntheorem}
-\usepackage{thmtools}
+\usepackage{thmtools, thm-restate}
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
 \allowdisplaybreaks
@@ -139,6 +139,7 @@
 \setlength\theorempreskipamount{2ex}
 \setlength\theorempostskipamount{3ex}
 
+% Workaround for long titles in ntheorem
 \makeatletter
 \let\nobreakitem\item
 \let\@nobreakitem\@item

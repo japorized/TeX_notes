@@ -4,7 +4,7 @@
 
 \usepackage{classnotetitle}
 
-\title{PMATH450 --- Lesbesgue Integration and Fourier Analysis}
+\title{PMATH450 --- Lebesgue Integration and Fourier Analysis}
 \author{Johnson Ng}
 \subtitle{Classnotes for Spring 2019}
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
@@ -16,7 +16,7 @@
 \theoremheaderfont{\color{cyan}\normalfont\bfseries}
 \theorempostwork{\textcolor{cyan}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
-\newtheorem*{culture}{Culture}
+\newtheorem*{culture}{\faWineGlass Culture}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -33,7 +33,7 @@ PMATH351}.
 
 This course is spiritually broken into 2 pieces:
 \begin{itemize}
-  \item Lesbesgue Integration; and
+  \item Lebesgue Integration; and
   \item Fourier Analysis,
 \end{itemize}
 which is as the name of the course.
@@ -571,7 +571,7 @@ In first-year calculus, all continuous functions over $\mathbb{R}$ are
 integrable. A similar result holds in Banach spaces as well.
 In the next lecture, we shall prove the following theorem.
 
-\begin{thmnonum}[Continuous Functions are Riemann Integrable]\label{thmnonum:continuous_functions_are_riemann_integrable}
+\begin{thmnonum}[Continuous Functions are Riemann Integrable]
   Let $(\mathfrak{X}, \norm{\cdot})$ be a Banach space and $a < b \in
   \mathbb{R}$. If $f : [a, b] \to \mathfrak{X}$ is continuous, then $f$ is
   Riemann integrable over $[a, b]$.
@@ -580,6 +580,570 @@ In the next lecture, we shall prove the following theorem.
 % section riemannian_integration (end)
 
 % chapter lecture_1_may_07th_2019 (end)
+
+\chapter{Lecture 2 May 9th 2019}%
+\label{chp:lecture_2_may_9th_2019}
+% chapter lecture_2_may_9th_2019
+
+\section{Riemannian Integration (Continued)}%
+\label{sec:riemannian_integration_continued}
+% section riemannian_integration_continued
+
+We shall now prove the last theorem stated in class.
+
+\begin{thm}[Continuous Functions are Riemann Integrable]\label{thmnonum:continuous_functions_are_riemann_integrable}
+  Let $(\mathfrak{X}, \norm{\cdot})$ be a Banach space and $a < b \in
+  \mathbb{R}$. If $f : [a, b] \to \mathfrak{X}$ is continuous, then $f$ is
+  Riemann integrable over $[a, b]$.
+\end{thm}
+
+\begin{strategy}
+  This is rather routine should one have gone through a few courses on analysis,
+  and especially on introductory courses that involves Riemannian integration.
+
+  We shall show that if $P_N \in \mathcal{P}[a, b]$ is a partition of $[a, b]$ 
+  into $2^N$ subintervals of equal length $\frac{b - a}{2^N}$, and if we use
+  $P_N^* = P_n \setminus \{ a \}$ as the set of test values for $P_N$, which
+  consists of the right-endpoints of each the subintervals in $P_N$, then the
+  sequence $(S(f, P_N, P_N^*))_{N = 1}^{\infty}$ converges in $\mathfrak{X}$ to
+  $\int_{a}^{b} f$.
+
+  Note that this choice of partition is a valid move, since any of these
+  $P_N$'s, for different $N$'s, is a refinement of some other partition of $[a,
+  b]$, and if we choose a different set of test values, then we may as well
+  consider an even finer partition.
+\end{strategy}
+
+\begin{proof}
+  First, note that since $[a, b]$ is closed and bounded in $\mathbb{R}$, it is
+  compact. Also, we have that $X$ is a metric space (via the metric induced by
+  the norm). This means that \hlimpo{any continuous function $f$ on $[a, b]$ is
+  uniformly continuous on $[a, b]$}. In other words,
+  \begin{gather*}
+    \forall \epsilon > 0 \enspace \exists \delta > 0 \enspace \forall x, y \in [a, b] \\
+    \abs{x - y} < \delta \implies \norm{f(x) - f(y)} < \frac{\epsilon}{2(b - a)}.
+  \end{gather*}
+
+  \noindent
+  \hlbnoted{Claim: $(S(f, P_N, P_N^*))_{N=1}^{\infty}$ is Cauchy} 
+  Now by picking $P_N \in \mathcal{P}[a, b]$ and set of test values $P_N^*$ as
+  described in the strategy above, we proceed by picking $M > 0$ such that
+  $\frac{b - a}{2^M} < \delta$. Then for any $K \geq L \geq M$, since each of
+  the subintervals have length $\frac{b - a}{2^L}$ and $\frac{b - a}{2^K}$ for
+  $P_L$ and $P_K$ respectively, if we write
+  \begin{equation*}
+    P_L = \{ a = p_0 < p_1 < \hdots < p_{2^L} = b \}
+  \end{equation*}
+  and
+  \begin{equation*}
+    P_K = \{ a = q_0 \leq q_1 < \hdots < q_{2^K} = b \},
+  \end{equation*}
+  then $p_j = q_j 2^{K-L}$  \sidenote{This is not immediately clear on first
+  read. Think of $a$ as $0$.} for all $0 \leq j \leq 2^L$. By uniform
+  continuity, for $1 \leq j \leq 2^L$, wma
+  \begin{equation*}
+    \norm{f(p_j^*) - f(q_s^*)} < \frac{\epsilon}{2(b - a)}, \text{ where } (j-1)
+    2^{K-L} < s \leq j 2^{K-L}.
+  \end{equation*}
+
+  We can see that
+  \begin{align*}
+    &\norm{S(f, P_L, P_L^*) - S(f, P_K, P_K^*)} \\
+    &= \norm{\sum_{j=1}^{2^L} \sum_{s=(j-1)2^{K-L} + 1}^{j 2^{K-L}} 
+      (f(p_j) - f(q_s))(q_s - q_{s-1})} \\
+    &\leq \sum_{j=1}^{2^L} \sum_{s=(j-1) 2^{K-L} + 1}^{j 2^{K-L}}
+      \norm{f(p_j) - f(q_s)} (q_s - q_{s-1}) \\
+    &\leq \sum_{j=1}^{2^L} \sum_{s=(j-1) 2^{K-L} + 1}^{j 2^{K-L}}
+      \frac{\epsilon}{b - a} (q_s - q_{s-1}) \\
+    &= \frac{\epsilon}{b - a} \sum_{s=1}^{2^K} (q_s - q_{s-1}) \\
+    &= \frac{\epsilon}{2(b - a)} (b - a) = \frac{\epsilon}{2}.
+  \end{align*}
+  This proves our claim.
+
+  Since $\mathfrak{X}$ is a Banach space, and hence complete, we have that the
+  sequence $(S(f, P_N, P_N^*))_{N=1}^{\infty}$ has a limit $x_0 \in \mathfrak{X}$.
+
+  It remains to show that $\int_{a}^{b} f = x_0$. \sidenote{The rest of this
+  proof is similar to the above proof.}
+
+  Let $\epsilon > 0$, and choose $T \geq 1$ such that $\frac{b - a}{2^T} <
+  \delta$ \sidenote{Note that this is still the same $\delta$ as in the first
+  $\delta$ in this entire proof.}, so that we have
+  \begin{equation*}
+    \norm{x_0 - S(f, P_T, P_T^*)} < \frac{\epsilon}{2}.
+  \end{equation*}
+
+  Now let $R = \{a = r_0 < r_1 < \hdots < r_J = b \} \in \mathcal{P}[a, b]$ such
+  that $P_T \subseteq R$. Then there exists a sequence
+  \begin{equation*}
+    0 = j_0 < j_1 < \hdots < j_{2^T} = J
+  \end{equation*}
+  such that
+  \begin{equation*}
+    r_{j_k} = p_k, \text{ where } 0 \leq k \leq 2^T.
+  \end{equation*}
+  Let $R^*$ be any set of test values of $R$. Note that for $j_{k-1} \leq s \leq
+  j_k$, it is clear that
+  \begin{equation*}
+    \abs{p_k^* - r_s^*} \leq \abs{p_k - p_{k-1}} = \frac{b-a}{2^T} < \delta.
+  \end{equation*}
+  Thus
+  \begin{align*}
+    &\norm{S(f, P_T, P_T^*) - S(f, R, R^*)} \\
+    &\leq \sum_{k=1}^{2^T} \sum_{s_{j_{k-1}+1}}^{j_k} \norm{f(p_k^*) -
+      f(r_s^*)}(r_s - r_{s - 1}) \\
+    &< \frac{\epsilon}{2(b-a)} \sum_{k=1}^{2^T} \sum_{s_{j_{k-1}+1}}^{j_k}
+      (r_s - r_{s-1}) \\
+    &= \frac{\epsilon}{2(b - a)}(b - a) = \frac{\epsilon}{2}.
+  \end{align*}
+
+  Putting everything together, we have
+  \begin{align*}
+    &\norm{x_0 - S(f, R, R^*)} \\
+    &\leq \norm{x_0 - S(f, P_T, P_T^*)} + \norm{S(f, P_T, P_T^*) - S(f, R, R^*)}
+      \\
+    &< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+  \end{align*}
+
+  We can also find another refinement of $P_T$, say $Q$, that works similarly
+  as in the case of $R$. It follows from
+  \cref{thm:cauchy_criterion_of_riemann_integrability} that
+  \begin{equation*}
+    x_0 = \int_{a}^{b} f,
+  \end{equation*}
+  i.e. that $f$ is indeed Riemann integrable over $[a, b]$.
+\end{proof}
+
+The following is a corollary whose proof shall be left as an exercise.
+
+\begin{crly}[Piecewise Functions are Riemann Integrable]\label{crly:piecewise_functions_are_riemann_integrable}
+  A \hlnotea{piecewise continuous} function is also Riemann
+  integrable: if $f : [a, b] \to \mathfrak{X}$ is piecewise continuous, then $f$ 
+  is Riemann integrable.
+\end{crly}
+
+\begin{ex}
+  Prove \cref{crly:piecewise_functions_are_riemann_integrable}.
+\end{ex}
+
+\newthought{Let us} exhibit a function that is not Riemann integrable.
+
+\begin{defn}[Characteristic Function]\index{Characteristic Function}\label{defn:characteristic_function}
+  Given a subset $E$ of a set $\mathbb{R}$, we define the \hlnoteb{characteristic
+  function} of $E$ as a function $\chi_E : \mathbb{R} \to \mathbb{R}$ given by
+  \begin{equation*}
+    \chi_E(x) = \begin{cases}
+      1 & x \in E \\
+      0 & x \notin E
+    \end{cases}.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  Consider the set $E = \mathbb{Q} \cap [0, 1] \subseteq \mathbb{R}$. Let $P \in
+  \mathcal{P}[0, 1]$ such that
+  \begin{equation*}
+  P = \{ 0 = p_0 < p_1 < \hdots < p_N = 1 \},
+  \end{equation*}
+  and let
+  \begin{equation*}
+    P^* = \{ p_k^* \}_{k=1}^{N} \text{ and } P^{**} = \{ p_k^{**} \}_{k=1}^{N}
+  \end{equation*}
+  be 2 sets of test values for $P$, such that we have
+  \begin{equation*}
+    p_k^* \in \mathbb{Q} \text{ and } p_k^{**} \in \mathbb{R} \setminus
+    \mathbb{Q}.
+  \end{equation*}
+  Then we have
+  \begin{align*}
+    S(\chi_E, P, P^*) &= \sum_{k=1}^{N} \chi_E(p_k^*)(p_k - p_{k-1}) \\
+                      &= \sum_{k=1}^{N} 1 \cdot (p_k - p_{k-1}) \\
+                      &= p_N - p_0 = 1 - 0 = 1,
+  \end{align*}
+  and
+  \begin{align*}
+    S(\chi_E, P, P^{**}) &= \sum_{k=1}^{N} \chi_E(p_k^{**})(p_k - p_{k-1}) \\
+                       &= \sum_{k=1}^{N} 0 \cdot (p_k - p_{k-1}) \\
+                       &= 0.
+  \end{align*}
+  It is clear that the
+  \hyperref[thm:cauchy_criterion_of_riemann_integrability]{Cauchy criterion}
+  fails for $\chi_E$. This shows that $\chi_E$ is not Riemann integrable.
+\end{eg}
+
+\begin{remark}
+  Let us once again consider $E = \mathbb{Q} \cap [0, 1]$. Note that $E$ is
+  \hldefn{denumerable} \sidenote{This means that $E$ is countably infinite.}. We
+  may thus write
+  \begin{equation*}
+    E = \{ q_n \}_{n=1}^{\infty}.
+  \end{equation*}
+  Now, for $k \geq 1$, define
+  \begin{equation*}
+    f_k(x) = \sum_{n=1}^{k} \chi_{\{q_n\}}(x).
+  \end{equation*}
+  In other words, $f_k = \chi_{\{q_1, \ldots, q_k\}}$. Furthermore, we have that
+  \begin{equation*}
+    f_1 \leq f_2 \leq f_3 \hdots \leq \chi_E.
+  \end{equation*}
+  Moreover, we have that $\forall x \in [0, 1]$,
+  \begin{equation*}
+    \chi_E(x) = \lim_{k \to \infty} f_k(x),
+  \end{equation*}
+  and
+  \begin{equation*}
+    \int_{0}^{1} f_k = 0 \text{ for all } k \geq 1.
+  \end{equation*}
+
+  And yet, we have that $\int_{0}^{1} \chi_E$ does not exist!
+\end{remark}
+
+\newthought{We want to} develop a different integral that will `cover' for this
+`pathological' behavior of where the Riemann integral fails.
+
+The \hlbnotec{rough idea} is as follows.
+
+In Riemann integration, when integrating over an interval $[a, b]$, we
+partitioned $[a, b]$ into subintervals. This happens on the $x$-axis.
+
+\begin{figure*}[ht]
+  \centering
+  \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+    \draw  (50,259.62) -- (603.5,259.62)(105.35,13.92) -- (105.35,286.92) (596.5,254.62) -- (603.5,259.62) -- (596.5,264.62) (100.35,20.92) -- (105.35,13.92) -- (110.35,20.92)  ;
+    \draw    (170.33,259.67) -- (500.33,259.67) (224.33,255.67) -- (224.33,263.67)(278.33,255.67) -- (278.33,263.67)(332.33,255.67) -- (332.33,263.67)(386.33,255.67) -- (386.33,263.67)(440.33,255.67) -- (440.33,263.67)(494.33,255.67) -- (494.33,263.67) ;
+    \draw    (157.33,187.67) .. controls (179.33,108.67) and (470.33,182.67) .. (543.33,74.67) ;
+    \draw   (224.53,148.98) -- (278.53,148.98) -- (278.53,259.38) -- (224.53,259.38) -- cycle ;
+    \draw   (278.53,142.98) -- (332.53,142.98) -- (332.53,259.98) -- (278.53,259.98) -- cycle ;
+    \draw   (440.53,127.48) -- (494.53,127.48) -- (494.53,259.48) -- (440.53,259.48) -- cycle ;
+    \draw (224,274) node  [align=left] {$\displaystyle a$};
+    \draw (494,277) node  [align=left] {$\displaystyle b$};
+    \draw (278,273) node  [align=left] {$\displaystyle p_{1}$};
+    \draw (331,274) node  [align=left] {$\displaystyle p_{2}$};
+    \draw (441,274) node  [align=left] {$\displaystyle p_{N-1}$};
+    \draw (385,270) node  [align=left] {$\displaystyle \dotsc $};
+    \draw (241,147) node  [align=left] {$\times$};
+    \draw (322,142) node  [align=left] {$\times$};
+    \draw (450,126) node  [align=left] {$\times$};
+    \draw (242,126.92) node  [align=left] {$\displaystyle p^{*}_{0}$};
+    \draw (322,122.92) node  [align=left] {$\displaystyle p^{*}_{1}$};
+    \draw (450,105.92) node  [align=left] {$\displaystyle p^{*}_{N-1}$};
+  \end{tikzpicture}
+  \caption{Rough illustration of how Riemann's integration works}
+  \label{fig:rough_illustration_of_how_riemann_s_integration_works}
+\end{figure*}
+
+In each of the subintervals of the partition, we pick out a \hlnotea{test
+value} $p_i^*$, and basically draw a rectangle with base at $[p_i, p_{i+1}]$ and
+height from $0$ to $p_i^*$.
+
+What we shall do now is that we \hlwarn{partition the range of $f$ on the
+$y$-axis}, instead of the $x$-axis as we do in Riemannian integration.
+
+In particular, given a function $f : [a, b] \to \mathbb{R}$, we first partition
+the range of $f$ into subintervals $[y_{k-1}, y_k]$, where $1 \leq k \leq N$.
+Then, we set
+\begin{equation*}
+  E_k = \{ x \in [a, b] : f(x) \in [y_{k-1}, y_k] \} \text{ for } 1 \leq k \leq N.
+\end{equation*}
+
+\begin{figure*}[ht]
+  \centering
+  \includegraphics[width=0.5\linewidth]{images/heuristic_into_lesbesgue_integration.png}
+  \caption{A sketch of what's happening with the construction of the $E_k$'s}
+  \label{fig:a_sketch_of_what_s_happening_with_the_construction_of_the_e_k_s}
+\end{figure*}
+
+This will then allow us to estimate the integral of $f$ over $[a, b]$ by the
+expression
+\begin{equation*}
+  \sum_{k=1}^{N} y_k m E_k,
+\end{equation*}
+where each of the $y_k m E_k$ are called \hlnotea{simple functions}. In the
+expression, $mE_k$ denotes a ``measure'' \sidenote{Note that a measure is simply
+a generalization of the notion of `length'.} of $E_k$.
+
+\begin{figure*}[ht]
+  \centering
+  \includegraphics[width=0.5\linewidth]{images/heuristic_into_lesbesgue_integration_heaps.png}
+  \caption{Drawing out the rectangles of $y_k mE_k$ from
+  \cref{fig:a_sketch_of_what_s_happening_with_the_construction_of_the_e_k_s}.}
+  \label{fig:drawing_out_the_rectangles_of_y_k_me_k_from_fig_}
+\end{figure*}
+
+We observe that $E_k$ need not be a particularly well-behaved set. However, note
+that we may rearrange the possibly scattered pieces of each $E_k$ together, so
+as to form a `continuous' base for the rectangle. We need our definition of a
+measure to be able to capture this.
+
+The following is an analogy from Lebesgue himself on comparing Lebesgue
+integration and Riemann integration \cite{siegmund2008}:
+
+\begin{quotebox}{magenta}{foreground}
+  I have to pay a certain sum, which I have collected in my pocket. I take the
+  bills and coins out of my pocket and give them to the creditor in the order I
+  find them until I have reached the total sum. This is the Riemann integral.
+
+  But I can proceed differently. After I have taken all the money out of my
+  pocket I order the bills and coins according to identical values and then I
+  pay the several heaps one after the other to the creditor. This is my
+  integral.
+\end{quotebox}
+
+The insight here is that one can \hlbnotea{freely arrange} the values of te
+functions, all the while \hlbnotea{preserving} the value of the integral.
+\begin{itemize}
+  \item This requires us to have a better understanding of what a measure is.
+  \item This process of rearrangement converts certain functions which are
+    extremely difficult to deal with, or outright impossible, with the Riemann
+    integral, into easily digestible pieces using Lebesgue integral.
+\end{itemize}
+
+% section riemannian_integration_continued (end)
+
+\section{Lebesgue Outer Measure}%
+\label{sec:lebesgue_outer_measure}
+% section lebesgue_outer_measure
+
+\paragraph{Goals of the section}
+
+\begin{enumerate}
+  \item Define a ``measure of length'' on as many subsets of $\mathbb{R}$ as
+    possible.
+  \item The definition should agree with our intuition of what a `length' is.
+\end{enumerate}
+
+\begin{defn}[Length]\index{Length}\label{defn:length}
+  For $a \leq b \in \mathbb{R}$, we define the \hlnoteb{length} of the interval
+  $(a, b)$ to be $b - a$, and we write
+  \begin{equation*}
+    \ell((a, b)) \coloneqq b - a.
+  \end{equation*}
+  We also define
+  \begin{itemize}
+    \item $\ell(\emptyset) = 0$; and
+    \item $\ell((a, \infty)) = \ell((-\infty, b)) = \ell((-\infty, \infty)) =
+      \infty$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}[Cover by Open Intervals]\index{Cover by Open Intervals}\label{defn:cover_by_open_intervals}
+  Let $E \subseteq \mathbb{R}$. A countable collection $\{ I_n
+  \}_{n=1}^{\infty}$ of open intervals is said to be a \hlnoteb{cover of $E$ by
+  open intervals} if $E \subseteq \bigcup_{n=1}^{\infty} I_n$.
+\end{defn}
+
+\begin{note}
+  In this course, the only covers that we shall use are \hlbnotec{open
+  intervals}, and so we shall henceforth refer to the above simply as covers of
+  $E$.
+\end{note}
+
+Before giving what immediately follows from the above, I shall present the
+following notion of an outer measure.
+
+\begin{defn}[Outer Measure]\index{Outer Measure}\label{defn:outer_measure}
+  Let $\emptyset \neq X$ be a set. An \hlnoteb{outer measure} $\mu$ on $X$ is a
+  function
+  \begin{equation*}
+    \mu : \mathcal{P}(X) \to [0, \infty] \coloneqq [0, \infty) \cup \{ \infty \}
+  \end{equation*}
+  which satisfies
+  \begin{enumerate}
+    \item $\mu \emptyset = 0$;
+    \item (\hldefn{monotone increment} or \hldefn{monotonicity}) $E \subseteq F
+      \subseteq X \implies \mu E \leq \mu F$; and
+    \item (\hldefn{countable subadditivity} or
+      \hldefn{$\sigma$-subadditivity}) $\{ E_n \}_{n=1}^{\infty} \subseteq
+      \mathcal{P}(X)$
+       \begin{equation*}
+        \mu \left( \bigcup_{n=1}^{\infty} E_n \right) \leq \sum_{n=1}^{\infty}
+        \mu E_n.
+      \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+\begin{note}
+  Note that by the monotonicity, the $\sigma$-subadditivity condition is
+  equivalent to: given $\{ E_n \}_{n=1}^{\infty} \subseteq \mathcal{P}(X)$ and
+  $F \subseteq \bigcup_{n=1}^{\infty} E_n$, we have that
+  \begin{equation*}
+    \mu(F) \leq \sum_{n=1}^{\infty} \mu(E_n).
+  \end{equation*}
+\end{note}
+
+\begin{defn}[Lebesgue Outer Measure]\index{Lebesgue Outer Measure}\label{defn:lebesgue_outer_measure}
+  We define the \hlnoteb{Lebesgue outer measure} as a function $m^* :
+  \mathcal{P}(X) \to \mathbb{R}$ such that
+  \begin{equation*}
+    m^* E \coloneqq \inf \left\{ \sum_{n=1}^{\infty} \ell(I_n) : E \subseteq
+    \bigcup_{n=1}^{\infty} I_n \right\}.
+  \end{equation*}
+\end{defn}
+
+We cheated a little bit by calling the above an outer measure, so let us now
+justify our cheating.
+
+\begin{propo}[Validity of the Lebesgue Outer Measure]\label{propo:validity_of_the_lebesgue_outer_measure}
+  $m^*$ is indeed an outer measure.
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$\mu \emptyset = 0$} We consider a sequence of sets $\{ I_n
+  \}_{n=1}^{\infty}$ such that $I_n = \emptyset$ for each $n = 1, \ldots,
+  \infty$. It is clear that $\emptyset \subseteq \bigcup_{n=1}^{\infty} I_n$.
+  Also, we have that $\ell(I_n) = 0$ for all $n = 1, \ldots, \infty$. It follows
+  that
+  \begin{equation*}
+    0 \leq m^*(\emptyset) \leq \sum_{n=1}^{\infty} m^* (I_n) =
+    \sum_{n=1}^{\infty} 0 = 0,
+  \end{equation*}
+  where the inequality is simply by the definition of $m^*$ being an infimum,
+  \hlimpo{not to be confused with $\sigma$-subadditivity}. We thus have that
+  \begin{equation*}
+    m^*(\emptyset) = 0.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{Monotonicity} Suppose $E \subseteq F \subseteq
+  \mathbb{R}$, and $\{ I_n \}_{n=1}^{\infty}$ a cover of $F$. Then
+  \begin{equation*}
+    E \subseteq F \subseteq \bigcup_{n=1}^{\infty} I_n.
+  \end{equation*}
+  In particular, all covers of $F$ are also covers of $E$, i.e.
+  \begin{equation*}
+    \left\{ \{ J_m \}_{m=1}^{\infty} : E \subseteq \bigcup_{m=1}^{\infty} J_m \right\}
+    \subseteq
+    \left\{ \{ I_n \}_{n=1}^{\infty} : F \subseteq \bigcup_{n=1}^{\infty} I_n \right\}.
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    m^* E \leq m^* F.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{$\sigma$-subaddivitity} Consider $\{ E_n \}_{n=1}^{\infty} \subseteq
+  \mathcal{P}(X)$ such that $E \subseteq \bigcup_{n=1}^{\infty} E_n$. WTS
+  \begin{equation*}
+    m^* E \leq \sum_{n=1}^{\infty} m^* E_n.
+  \end{equation*}
+
+  Now if the sum of the RHS is infinite, i.e. if any of the $m^* E_n$ is
+  infinite, then the inequality comes for free. Thus WMA $\sum_{n=1}^{\infty}
+  E_n < \infty$, and in particular that $m^* E_n < \infty$ for all $n = 1,
+  \ldots, \infty$.
+
+  To do this, let $\epsilon > 0$. Since $m^* E_n < \infty$ for all $n$, we can
+  find covers $\left\{ I_k^{(n)} \right\}_{k=1}^{\infty}$ for each of the
+  $E_n$'s such that
+  \begin{equation*}
+    \sum_{k=1}^{\infty} \ell\left(I_k^{(n)}\right) < m^* E_n +
+    \frac{\epsilon}{2^n}.
+  \end{equation*}
+  Then, we have that
+  \begin{equation*}
+    E \subseteq \bigcup_{n=1}^{\infty} E_n \subseteq \bigcup_{n=1}^{\infty}
+    \bigcup_{k=1}^{\infty}  I_k^{(n)}.
+  \end{equation*}
+  Then by $m^* E$ being the infimum of the sum of lengths of the covering
+  intervals, we have that
+  \begin{align*}
+    m^* E &\leq \sum_{n=1}^{\infty} \sum_{k=1}^{\infty} \ell \left( I_k^{(n)}
+            \right) \\
+          &\leq \sum_{n=1}^{\infty} \left( m^* E_n + \frac{\epsilon}{2^n}
+            \right) \\
+          &= \sum_{n=1}^{\infty} m^* E_n + \sum_{n=1}^{\infty}
+            \frac{\epsilon}{2^n} \\
+          &= \sum_{n=1}^{\infty} m^* E_n + \epsilon.
+  \end{align*}
+  Since $\epsilon$ was arbitrary, we have that
+  \begin{equation*}
+    m^* E_n \leq \sum_{n=1}^{\infty} m^* E_n,
+  \end{equation*}
+  as desired.
+\end{proof}
+
+\begin{crly}[Lebesgue Outer Measure of Countable Sets is Zero]\label{crly:lebesgue_outer_measure_of_countable_sets_is_zero}
+  If $E \subseteq \mathbb{R}$ is countable, then $m^* E = 0$.
+\end{crly}
+
+\begin{proof}
+  We shall prove for when $E$ is denumerable, for the finite case follows a
+  similar proof. Let us write $E = \{ x_n \}_{n=1}^{\infty}$. Let $\epsilon > 0$ 
+  and
+  \begin{equation*}
+    I_n = \left( x_n - \frac{\epsilon}{2^{n+1}},\, x_n + \frac{\epsilon}{2^{n+1}}
+    \right).
+  \end{equation*}
+  Then it is clear that $\{ I_n \}_{n=1}^{\infty}$ is a cover of $E$.
+  
+  It follows that
+  \begin{equation*}
+    0 \leq m^* E \leq \sum_{n=1}^{\infty} \ell (I_n) = \sum_{n=1}^{\infty}
+    \frac{\epsilon}{2^n} = \epsilon.
+  \end{equation*}
+  Thus as $\epsilon \to 0$, we have that
+  \begin{equation*}
+    m^* E = 0,
+  \end{equation*}
+  as expected.
+\end{proof}
+
+\begin{crly}[Lebesgue Outer Measure of $\mathbb{Q}$ is Zero]\label{crly:lebesgue_outer_measure_of_q_is_zero}
+  We have that $m^* \mathbb{Q} = 0$.
+\end{crly}
+
+\newthought{In the proofs} above that we have looked into, and based on the
+intuitive notion of the length of an open interval, it is compelling to simply
+conclude that
+\begin{equation*}
+  m^* (a, b) = \ell(a, b) = b - a.
+\end{equation*}
+However, looking back at \cref{defn:lebesgue_outer_measure}, we know that that
+is not how $m^* (a, b)$ is defined.
+
+This leaves us with an interesting question:
+\begin{quotebox}{green}{foreground}
+  how does our notion of measure $m^*(a, b)$ of an interval compare with the
+  notion of the length of an interval?
+\end{quotebox}
+
+By taking $I_1 = (a, b)$ and $I_n = \emptyset$ for $n \geq 2$, it is rather
+clear that $\{ I_n \}_{n=1}^{\infty}$ is a cover of $(a, b)$, and so we have
+\begin{equation}\label{eq:lebesgue_outer_measure_leq_length}
+  m^* (a, b) \leq \ell(a, b) = b - a.
+\end{equation}
+However, the other side of the game is not as easy to confirm: we would have to
+consider \hlimpo{all} possible covers of $(a, b)$, which is a lot.
+
+Another question that we can ask ourselves seeing
+\cref{eq:lebesgue_outer_measure_leq_length} is why can't $m^*(a, b)$ be
+something that is strictly less than the length to give us an even more
+`precise' measurement?
+
+To answer these questions, it is useful to first consider the outer measure of a
+closed and bounded interval, e.g. $[a, b]$, since these intervals are
+\hlnotea{compact} under the \hlnotea{Heine-Borel Theorem}. This will give us a
+finite subcover for every infinite cover of the compact interval, which is easy
+to deal with.
+
+We shall see that with the realization of the outer measure of a compact
+interval, we will also be able to find the outer measure of intervals that are
+neither open nor closed.
+
+We shall prove the following proposition in the next lecture. Note that for the
+sake of presentation, I shall abbreviate the Lebesgue Outer Measure as LOM.
+
+\begin{propononum}[LOM of Arbitrary Intervals]\label{propo:lom_of_arbitrary_intervals}
+  Suppose $a < b \in \mathbb{R}$. Then
+  \begin{enumerate}
+    \item $m^*([a, b]) = b - a$; and therefore
+    \item $m^*((a, b]) = m^*([a, b)) = m^*((a, b)) = b - a$.
+  \end{enumerate}
+\end{propononum}
+
+% section lebesgue_outer_measure (end)
+
+% chapter lecture_2_may_9th_2019 (end)
 
 \appendix
 
