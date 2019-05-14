@@ -1,3 +1,13 @@
+- title: PMATH450 S19 - Lebesgue Integration and Fourier Analysis
+  pdf:
+    - title: classnotes.pdf
+      src: /PMATH450/classnotes.pdf
+    - title: classnotes-dark.pdf
+      src: /PMATH450/classnotes-dark.pdf
+  tex:
+    - title: classnotes.tex
+      src: /PMATH450/classnotes.tex
+
 - title: PMATH467 W19 - Algebraic Topology
   pdf:
     - title: classnotes.pdf
