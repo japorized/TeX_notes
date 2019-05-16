@@ -15,7 +15,7 @@
 \usepackage{natbib}
 \bibliographystyle{apalike}
 \usepackage{ragged2e}
-\usepackage{etoolbox}
+\usepackage{regexpatch}
 \usepackage{amssymb}
 \usepackage{eso-pic}
 \usepackage[fixed]{fontawesome5}
@@ -35,6 +35,7 @@
 \usepackage{csquotes}
 \usepackage[english]{babel}
 \usepackage{marvosym}
+\usepackage{witharrows}
 \usepackage{pgf,tikz}
 \usepackage{tikz-cd}
 \usepackage{ifthen}
@@ -143,17 +144,20 @@
 \makeatletter
 \let\nobreakitem\item
 \let\@nobreakitem\@item
-\patchcmd{\nobreakitem}{\@item}{\@nobreakitem}{}{}
-\patchcmd{\nobreakitem}{\@item}{\@nobreakitem}{}{}
-\patchcmd{\@nobreakitem}{\@itempenalty}{\@M}{}{}
-\patchcmd{\@xthm}{\ignorespaces}{\nobreak\ignorespaces}{}{}
-\patchcmd{\@ythm}{\ignorespaces}{\nobreak\ignorespaces}{}{}
+\xpatchcmd{\nobreakitem}{\@item}{\@nobreakitem}{}{}
+\xpatchcmd{\nobreakitem}{\@item}{\@nobreakitem}{}{}
+\xpatchcmd{\@nobreakitem}{\@itempenalty}{\@M}{}{}
+\xpatchcmd{\@xthm}{\ignorespaces}{\nobreak\ignorespaces}{}{}
+\xpatchcmd{\@ythm}{\ignorespaces}{\nobreak\ignorespaces}{}{}
 
 \renewtheoremstyle{break}%
   {\item{\theorem@headerfont
           ##1\ ##2\theorem@separator}\hskip\labelsep\relax\nobreakitem}%
   {\item{\theorem@headerfont
           ##1\ ##2\ (##3)\theorem@separator}\hskip\labelsep\relax\nobreakitem}
+% make \th@nonumberbreak the same as \th@break, but remove "\ ##2"
+\let\th@nonumberbreak\th@break
+\xpatchcmd*{\th@nonumberbreak}{\ ##2}{}{}{}
 \makeatother
 
 % ntheorem Declarations

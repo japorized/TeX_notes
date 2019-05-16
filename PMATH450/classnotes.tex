@@ -18,6 +18,27 @@
 \theoremindent10pt
 \newtheorem*{culture}{\faWineGlass Culture}
 
+% disjoint union
+\makeatletter
+\providerobustcmd*{\bigcupdot}{%
+   \mathop{%
+     \mathpalette\bigop@dot\bigcup
+   }%
+}
+\newrobustcmd*{\bigop@dot}[2]{%
+   \setbox0=\hbox{$\m@th#1#2$}%
+   \vbox{%
+     \lineskiplimit=\maxdimen
+     \lineskip=-0.7\dimexpr\ht0+\dp0\relax
+     \ialign{%
+       \hfil##\hfil\cr
+       $\m@th\cdot$\cr
+       \box0\cr
+     }%
+   }%
+}
+\makeatother
+
 \begin{document}
 \input{latex-classnotes-header.tex}
 
@@ -1133,7 +1154,7 @@ neither open nor closed.
 We shall prove the following proposition in the next lecture. Note that for the
 sake of presentation, I shall abbreviate the Lebesgue Outer Measure as LOM.
 
-\begin{propononum}[LOM of Arbitrary Intervals]\label{propo:lom_of_arbitrary_intervals}
+\begin{propononum}[LOM of Arbitrary Intervals]
   Suppose $a < b \in \mathbb{R}$. Then
   \begin{enumerate}
     \item $m^*([a, b]) = b - a$; and therefore
@@ -1145,17 +1166,573 @@ sake of presentation, I shall abbreviate the Lebesgue Outer Measure as LOM.
 
 % chapter lecture_2_may_9th_2019 (end)
 
+\chapter{Lecture 3 May 14th 2019}%
+\label{chp:lecture_3_may_14th_2019}
+% chapter lecture_3_may_14th_2019
+
+\section{Lebesgue Outer Measure Continued}%
+\label{sec:lebesgue_outer_measure_continued}
+% section lebesgue_outer_measure_continued
+
+\begin{propo}[LOM of Arbitrary Intervals]\label{propo:lom_of_arbitrary_intervals}
+  Suppose $a < b \in \mathbb{R}$. Then
+  \begin{enumerate}
+    \item $m^*([a, b]) = b - a$; and therefore
+    \item $m^*((a, b]) = m^*([a, b)) = m^*((a, b)) = b - a$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Consider $a < b \in \mathbb{R}$. Let $\epsilon > 0$, and let
+      \begin{equation*}
+        I_1 = \left( a - \frac{\epsilon}{2}, \, b + \frac{\epsilon}{2} \right)
+      \end{equation*}
+      and $I_n = \emptyset$ for $n \geq 2$. Then $\{ I_n \}_{n=1}^{\infty}$ is a
+      cover of $[a, b]$. This means that
+      \begin{equation*}
+        m^*([a, b]) \leq \sum_{n=1}^{\infty} \ell(I_n) = b - a + \epsilon.
+      \end{equation*}
+      So for all $\epsilon \to 0$, we have that
+      \begin{equation*}
+        m^*([a, b]) \leq b - a.
+      \end{equation*}
+
+      \sidenote{For the converse, we know that $m^*([a, b]) = \inf \faStar$,
+      where $\faStar$ is just a placeholder for you-know-what. So $m^*([a,
+      b])$ is one of the sums. So if we can show that for an arbitrary sum,
+      $\geq$ holds, our work is done.} Conversely, if $[a, b]$ is covered by open
+      intervals $\{ I_n \}_{n=1}^{\infty}$, then by compactness of $[a, b]$ (via
+      the \hlnotea{Heine-Borel Theorem}), we know that we can cover $[a, b]$ by
+      finitely many of these intervals, and let us denote these as $\{ I_n
+      \}_{n=1}^{N}$, for some $1 \leq N < \infty$.
+
+      WTS
+      \begin{equation*}
+        \sum_{n=1}^{N} \ell(I_n) \geq b - a.
+      \end{equation*}
+      If LHS $= \infty$, then our work is done. Thus wlog, WMA each $I_n = (a_n,
+      b_n)$ is a finite interval. Note that we have
+      \begin{equation*}
+        [a, b] \subseteq \bigcup_{n=1}^{N} (a_n, b_n).
+      \end{equation*}
+      In particular, $a \in \bigcup_{n=1}^{N} I_n$. Thus, $\exists 1 \leq n_2
+      \leq N$ such that $a \in I_{n_1}$. Now if $b_{n_1} > b$, we shall stop
+      this process for our work is done, since then $[a, b] \subseteq I_{n_1}$.
+      Otherwise, if $b_{n_1} \leq b$, then $b_{n_1} \in [a, b] \subseteq
+      \bigcup_{n=1}^{N} I_n$, which means that $\exists 1 \leq n_2 \leq N$ such
+      that $b_{n_1} \in I_{n_2}$.
+      \begin{figure*}[ht]
+        \centering
+        \begin{tikzpicture}
+          \draw (-7, 0) -- (7, 0);
+          \draw (-4, 0.2) -- (-4, -0.2) node[below] {$a$};
+          \draw (4, 0.2) -- (4, -0.2) node[below] {$b$};
+          \draw[
+            {Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},red
+            ] (-5,0) node[above=10pt] {$a_{n_1}$} -- (-2,0) node[above=10pt]
+            {$b_{n_1}$};
+          \draw[
+            {Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},cyan
+            ] (-3,0) node[above=10pt] {$a_{n_2}$} -- (0,0) node[above=10pt]
+            {$b_{n_2}$};
+          \node at (1, 0.6) {$\hdots$};
+          \draw[
+            {Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},magenta
+            ] (2,0) node[above=10pt] {$a_{n_k}$} -- (5,0) node[above=10pt]
+            {$b_{n_k}$};
+        \end{tikzpicture}
+        \caption{Our continual picking of $I_{n_1}, I_{n_2}, \ldots, I_{n_k}$}
+        \label{fig:our_continual_picking_of_i__n_1_i__n_2_ldots_i__n_k_}
+      \end{figure*}
+      Notice that $n_1 \neq n_2$, since $b_{n_1} \notin I_{n_1}$ but $b_{n_1}
+      \in I_{n_2}$.
+
+      Now once again, if $b_{n_2} > b$, then we shall stop this process since
+      our work is done. Otherwise, we have $a < b_{n_2} \leq b$, and so $\exists
+      1 \leq n_3 \leq N$, $n_3 \neq n_1, n_2$, such that $b_{n_2} \in I_3$...
+
+      We continue with the above process for as long as $b_{n_k} \leq b$. We can
+      thus find, for each $k$, $I_{n_{k+1}}$, where $n_{k+1} \in \{ 1, \ldots, N
+      \} \setminus \{ n_1, n_2, \ldots, n_k \}$, such that $b_{n_k} \in
+      I_{n_{k+1}}$.
+
+      However, since each of the $I_{n_k}$'s are different, and since we only
+      have $N$ such intervals, there must exists a $K \leq N$ such that
+      \begin{equation*}
+        b_{n_{K-1}} \leq b \text{ and } b_{n_K} > b.
+      \end{equation*}
+
+      It now suffices for us to show that
+      \begin{equation*}
+        \sum_{j=1}^{K} \ell(I_{n_j}) \geq b - a.
+      \end{equation*}
+
+      Observe that
+      \begin{align*}
+        \sum_{j=1}^{K} \ell(I_{n_j})
+        &= (b_{n_K} - a_{n_K}) + (b_{n_{K-1}} - a_{n_{K-1}}) + \hdots \\
+        &\quad + (b_{n_2} - a_{n_2}) + (b_{n_1} - a_{n_1}) \\
+        &= b_{n_K} + \underset{\geq 0}{(b_{n_{K-1}} - a_{n_K})} + \underset{\geq
+          0}{(b_{n_{K-2}} - a_{n_{K-1}})} + \hdots \\
+        &\quad + \underset{\geq 0}{(b_{n_1} - a_{n_2})} - a_{n_1} \\
+        &\geq b_{n_K} - a_{n_1} \geq b - a.
+      \end{align*}
+      Thus
+      \begin{equation*}
+        \sum_{n=1}^{\infty} \ell(I_n) \geq \sum_{n=1}^{N} \ell(I_n) \geq
+        \sum_{j=1}^{K} \ell(I_{n_j}) \geq b - a,
+      \end{equation*}
+      whence
+      \begin{equation*}
+        m^*([a, b]) \geq b - a.
+      \end{equation*}
+
+      It follows that, indeed,
+      \begin{equation*}
+        m^*([a, b]) = b - a.
+      \end{equation*}
+
+    \item First, note that
+      \begin{equation*}
+        m^*((a, b)) \leq m^*([a, b]) \leq b - a.
+      \end{equation*}
+      On the other hand, notice that $\forall 0 < \epsilon < \frac{b - a}{2}$,
+      we have that
+      \begin{equation*}
+        [a + \epsilon, b - \epsilon] \subseteq (a, b),
+      \end{equation*}
+      and so by monotonicity,
+      \begin{equation*}
+        (b - a) - 2 \epsilon = m^*([a + \epsilon, b - \epsilon]) \leq m^*((a,
+        b)).
+      \end{equation*}
+      As $\epsilon \to 0$, we have that
+      \begin{equation*}
+        b - a \leq m^*((a, b)) \leq b - a.
+      \end{equation*}
+      So
+      \begin{equation*}
+        m^*((a, b)) = b - a
+      \end{equation*}
+      as desired.
+
+      Finally, we have that
+      \begin{equation*}
+        b - a = m^*((a, b)) \leq m^*((a, b]) \leq m^*([a, b]) = b - a,
+      \end{equation*}
+      and similarly
+      \begin{equation*}
+        b - a = m^*((a, b)) \leq m^*([a, b)) \leq m^*([a, b]) = b - a.
+      \end{equation*}
+      Thus
+      \begin{equation*}
+        m^*((a, b)) = m^*((a, b]) = m^*([a, b)) = b - a
+      \end{equation*}
+      as required.
+  \end{enumerate}
+\end{proof}
+
+\begin{propo}[LOM of Infinite Intervals]\label{propo:lom_of_infinite_intervals}
+  We have that $\forall a, b \in \mathbb{R}$,
+  \begin{align*}
+    m^*((a, \infty)) &= m^*([a, \infty)) \\
+                     &= m^*((-\infty, b)) = m^*((-\infty, b]) \\
+                     &= m^* \mathbb{R} = \infty.
+  \end{align*}
+\end{propo}
+
+\begin{proof}
+  Observe that
+  \begin{equation*}
+    (a, a + n) \subseteq (a, \infty)
+  \end{equation*}
+  for all $n \geq 1$. Thus
+  \begin{equation*}
+    n = m^*((a, a + n)) \leq m^*((a, \infty))
+  \end{equation*}
+  for all $n \geq 1$. Hence
+  \begin{equation*}
+    m^*((a, \infty)) = \infty
+  \end{equation*}
+  by definition.
+
+  All other cases follow similarly.
+\end{proof}
+
+\begin{crly}[Uncountability of $\mathbb{R}$]\label{crly:uncountability_of_r}
+  $\mathbb{R}$ is uncountable.
+\end{crly}
+
+\begin{proof}
+  We have that
+  \begin{equation*}
+    m^* \mathbb{R} = \infty \neq 0,
+  \end{equation*}
+  and so it follows from
+  \cref{crly:lebesgue_outer_measure_of_countable_sets_is_zero}, we must have
+  that $\mathbb{R}$ is uncountable.
+\end{proof}
+
+\begin{defn}[Translation Invariant]\index{Translation Invariant}\label{defn:translation_invariant}
+  Let $\mu$ be an \hyperref[defn:outer_measure]{outer measure} on $\mathbb{R}$.
+  We say that $\mu$ is \hlnoteb{translation invariant} if $\forall E \subseteq
+  \mathbb{R}$,
+  \begin{equation*}
+    \mu(E) = \mu(E + \kappa)
+  \end{equation*}
+  for all $\kappa \in \mathbb{R}$, where
+  \begin{equation*}
+    E + \kappa \coloneqq \{ x + \kappa : x \in E \}.
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[Translation Invariance of the LOM]\label{propo:translation_invariance_of_the_lom}
+  The Lebesgue outer measure is translation invariant.
+\end{propo}
+
+\begin{proof}
+  Let $E \subseteq \mathbb{R}$ and $\kappa \in \mathbb{R}$. Note that $E$ is
+  covered by open intervals $\{ I_n \}_{n=1}^{\infty}$ iff $E + \kappa$ is
+  covered by $\{ I_n + \kappa \}_{n=1}^{\infty}$.
+
+  \noindent
+  \hlbnoted{Claim: $\forall n \geq 1$, $\ell(I_n + \kappa) = \ell(I_n)$} Write
+  \begin{equation*}
+    I_n = (a_n, b_n).
+  \end{equation*}
+  Then
+  \begin{equation*}
+    I_n + \kappa = (a_n + \kappa, b_n + \kappa).
+  \end{equation*}
+  Observe that
+  \begin{equation*}
+    \ell(I_n + \kappa) = b_n + \kappa - (a_n - \kappa) = b_n - a_n = \ell(I_n),
+  \end{equation*}
+  as claimed. $\dashv$
+
+  By the claim, it follows that
+  \begin{align*}
+    m^*(E) &= \inf \left\{ \sum_{n=1}^{\infty} \ell(I_n) : E \subseteq
+            \bigcup_{n=1}^{\infty} \right\} \\
+           &= \inf \left\{ \sum_{n=1}^{\infty} \ell(I_n + \kappa) : E + \kappa \subseteq
+           \bigcup_{n=1}^{\infty} (I_n + \kappa)  \right\} \\
+           &= m^*(E + \kappa).
+  \end{align*}
+\end{proof}
+
+\begin{remark}
+  Suppose $E \subseteq \mathbb{R}$ and $E = \bigcup_{n=1}^{\infty} E_n$,
+  where
+  \begin{equation*}
+    E_i \cap E_j = \emptyset \text{ if } i \neq j.
+  \end{equation*}
+  Now by $\sigma$-subadditivity of $m^*$, we have that
+  \begin{equation*}
+    m^* E \leq \sum_{n=1}^{\infty} m^* E_n.
+  \end{equation*}
+
+  However, equality is not guaranteed. Consider the following case: if $E = [0,
+  1]$, we may have $E_n = [0, 1]$ for all $n >= 1$, in which case $E =
+  \bigcup_{n=1}^{\infty} E_n = [0, 1]$, but
+  \begin{equation*}
+    m^* E = m^* [0, 1] = 1 < \infty = \sum_{n=1}^{\infty} m^* E_n.
+  \end{equation*}
+
+  It would be desirable to have
+  \begin{equation*}
+    m^* E = \sum_{n=1}^{\infty} m^* E_n,
+  \end{equation*}
+  when the $E_i$'s are pairwise disjoint, i.e. $E = \bigcupdot_{n=1}^{\infty}
+  E_n$. In fact, this would agree with our intuition, that if the outer measure
+  is going to be our `length'. Consider the example $A = [0, 2] \cup [5, 7]$.
+  Then we would expect $m^* A = 2 + 2 = 4$.
+
+  However, this is actually impossible for an arbitrary number of collections.
+\end{remark}
+
+\begin{thm}[Non-existence of a sensible Translation Invariant Outer Measure that is also $\sigma$-additive]\label{thm:non_existence_of_a_sensible_translation_invariant_outer_measure_that_is_also_sigma_additive}
+  There does not exist a translation-invariant outer measure $\mu$ on
+  $\mathbb{R}$ that satisfies
+  \begin{enumerate}
+    \item $\mu(\mathbb{R}) > 0$;
+    \item $\mu[0, 1] < \infty$; and
+    \item $\mu$ is \hldefn{$\sigma$-additive}; i.e. if $\{ E_n
+      \}_{n=1}^{\infty}$ is a countable collection of disjoint subsets of
+      $\mathbb{R}$ that covers $E \subseteq \mathbb{R}$, then
+      \begin{equation*}
+        \mu E = \sum_{n=1}^{\infty} \mu E_n.
+      \end{equation*}
+  \end{enumerate}
+  Consequently, the \hyperref[defn:lebesgue_outer_measure]{Lebesgue outer
+  measure} $m^*$ is \hlimpo{not} $\sigma$-additive.
+\end{thm}
+
+\begin{proof}
+  Suppose to the contrary that such a $\mu$ exists.
+
+  \noindent
+  \hlbnoteb{Step 1} Consider the relation $\sim$ on $\mathbb{R}$ such that $x
+  \sim y$ if $x - y \in \mathbb{Q}$.
+
+  \noindent
+  \hlbnoted{Claim: $\sim$ is an equivalence relation}
+  \begin{itemize}
+    \item (\textbf{reflexivity}) We know that $0 \in \mathbb{Q}$ and $x - x = 0$.
+      Thus $x \sim x$.
+    \item (\textbf{symmetry}) Since $\mathbb{Q}$ is a \hlnotea{field}, it is
+      closed under multiplication, and $-1 \in \mathbb{Q}$. Thus if $x \sim y$,
+      then $x - y \in \mathbb{Q}$, and so $(-1)(x - y) = y - x \in \mathbb{Q}$,
+      which means $y \sim x$.
+    \item (\textbf{transitivity}) Again, since $\mathbb{Q}$ is a field, it is
+      closed under (this time) addition. Thus
+      \begin{align*}
+        &x \sim y \, \land \, y \sim z \implies (x - y), \, (y - z) \in
+        \mathbb{Q} \\
+        &\implies (x - y) + (y - z) = x - z \in \mathbb{Q}.
+      \end{align*}
+      Thus $x \sim z$.
+  \end{itemize}
+  This proves the claim. $\dashv$
+
+  Let
+  \begin{equation*}
+    [x] \coloneqq x + \mathbb{Q} \coloneqq \{ x + q : q \in \mathbb{Q} \}
+  \end{equation*}
+  denote the equivalence class of $x$ wrt $\sim$. Note that the set of
+  equivalence classes, which we shall represent as
+  \begin{equation*}
+    \mathcal{F} \coloneqq \{ [x] : x \in \mathbb{R} \},
+  \end{equation*}
+  partitions $\mathbb{R}$, i.e.
+  \begin{itemize}
+    \item $[x] = [y] \iff x - y \in \mathbb{Q}$; and
+    \item $[x] \cap [y] = \emptyset$ otherwise.
+  \end{itemize}
+
+  Note that since $\mathbb{Q}$ is \hlnotea{dense} in $\mathbb{R}$, we have that
+  $[x] = x + \mathbb{Q}$ is also dense in $\mathbb{R}$, for all $x \in
+  \mathbb{R}$. Then for each \sidenote{Notice that here, we
+  have invoked the \hlbnotee{Axiom of Choice}.} $F \in \mathcal{F}$, $\exists
+  x_F \in F$ such that
+  \begin{equation*}
+    0 \leq x_F \leq 1.
+  \end{equation*}
+  Now consider the set
+  \begin{equation*}
+    \mathbb{V} \coloneqq \{ x_F : F \in \mathcal{F} \} \subseteq [0, 1],
+  \end{equation*}
+  which is called \hldefn{Vitali's Set}.
+
+  \noindent
+  \hlbnoteb{Step 2} Since $\mathcal{F}$ partitions $\mathbb{R}$, we have that
+  \begin{align*}
+    \mathbb{R} &= \bigcupdot_{F \in \mathcal{F}} F = \bigcupdot_{F \in
+                 \mathcal{F}} [x_F] \\
+               &= \bigcupdot_{F \in \mathcal{F}} x_F + \mathbb{Q} \\
+               &= \mathbb{V} + \mathbb{Q} \coloneqq \{ x + q : q \in \mathbb{Q},
+                x \in \mathbb{V} \}.
+  \end{align*}
+
+  \noindent
+  \hlbnoteb{Step 3} \hlbnoted{Claim: $p \neq q \in \mathbb{Q} \implies
+  (\mathbb{V} + p) \cap (\mathbb{V} + q) = \emptyset$} Suppose not, and suppose
+  $\exists y \in (\mathbb{V} + p) \cap (\mathbb{V} + q)$. Then $\exists F_1, F_2
+  \in \mathcal{F}$ such that
+  \begin{equation}\label{eq:nonexistence_of_transinvar_outmea_eq1}
+    y = x_{F_1} + p = x_{F_2} + q.
+  \end{equation}
+  Then we may rearrange the above equation to get
+  \begin{equation*}
+    x_{F_1} - x_{F_2} = q - p \in \mathbb{Q}.
+  \end{equation*}
+  This implies that
+  \begin{equation*}
+    [x_{F_1}] = [x_{F_2}] \implies F_1 = F_2
+  \end{equation*}
+  since $\mathbb{V}$ consists of one unique representative from each of the
+  equivalence classes. However, this would mean that
+  \begin{equation*}
+    x_{F_1} = x_{F_2}.
+  \end{equation*}
+  Since $p \neq q$, we have that
+  \begin{equation*}
+    x_{F_1} + p \neq x_{F_2} + q,
+  \end{equation*}
+  which contradicts \cref{eq:nonexistence_of_transinvar_outmea_eq1}. Thus
+  \begin{equation*}
+    (\mathbb{V} + p) \cap (\mathbb{V} + q) = \emptyset,
+  \end{equation*}
+  as claimed. $\dashv$
+
+  This in turn means that the $\mathbb{V} + q$, for each $q \in \mathbb{Q}$,
+  also partitions $\mathbb{R}$. In other words, if we write $\mathbb{Q} = \{ p_n
+  \}_{n=1}^{\infty}$, then
+  \begin{equation*}
+    \mathbb{R} = \mathbb{V} + \mathbb{Q} = \bigcupdot_{n=1}^{\infty} \mathbb{V}
+    + p_n.
+  \end{equation*}
+
+  Now, note that
+  \begin{equation*}
+    0 \neq \mu \mathbb{R} \overset{(1)}{=} \sum_{n=1}^{\infty} \mu(\mathbb{V} +
+    p_n) \overset{(2)}{=} \sum_{n=1}^{\infty} \mu(\mathbb{V}),
+  \end{equation*}
+  where $(1)$ is by $\mu$ being $\sigma$-additive and $(2)$ is by $\mu$ being
+  translation invariant, both directly from our assumptions. This means that
+  \begin{equation*}
+    \mu \mathbb{V} > 0.
+  \end{equation*}
+
+  \noindent
+  \hlbnoteb{Step 4} Now consider $S = \mathbb{Q} \cap [0, 1]$ such that $S$ is
+  denumerable. Write
+  \begin{equation*}
+    S = \{ s_n \}_{n=1}^{\infty}.
+  \end{equation*}
+  Note that for all $n \geq 1$,
+  \begin{equation*}
+    \mathbb{V} \subseteq [0, 1] \implies \mathbb{V} + s_n \subseteq [0, 2],
+  \end{equation*}
+  and as proven above
+  \begin{equation*}
+    i \neq j \implies (\mathbb{V} + s_i) \cap (\mathbb{V} + s_j) = \emptyset.
+  \end{equation*}
+
+  Thus it follows that
+  \begin{equation*}
+    \mu \left( \bigcupdot_{n=1}^{\infty} \mathbb{V} + s_n \right)
+    = \sum_{n=1}^{\infty} \mu (\mathbb{V} + s_n) 
+    = \sum_{n=1}^{\infty} \mu(\mathbb{V})
+    = \infty.
+  \end{equation*}
+  Also,
+  \begin{align*}
+    \mu \left( \bigcupdot_{n=1}^{\infty} \mathbb{V} + s_n \right)
+    &= \sum_{n=1}^{\infty} \mu (\mathbb{V} + s_n) \\
+    &\leq \mu([0, 2]) = \mu([0, 1] \cup ([0, 1] + 1)) \\
+    &\leq \mu[0, 1] + \mu([0, 1] + 1) \\
+    &= 2 \mu([0, 1]) = 2 < \infty,
+  \end{align*}
+  contradicting what we have right above.
+
+  Therefore, no such $\mu$ exists.
+\end{proof}
+
+With the realization of
+\cref{thm:non_existence_of_a_sensible_translation_invariant_outer_measure_that_is_also_sigma_additive},
+we find ourselves facing a losing dilemma: we may either
+\begin{enumerate}
+  \item be happy with the Lebesgue outer measure $m^*$ for \hlbnotee{all}
+    subsets $E \subseteq \mathbb{R}$, which would \hlbnotec{agree with our
+    intuitive notion} of length, at the price of $\sigma$-additivity; or
+  \item restrict the \hlbnotee{domain} of our function $m^*$ to some family of
+    subsets of $\mathbb{R}$, where $m^*$ would have $\sigma$-additivity.
+\end{enumerate}
+
+We shall adopt the second approach. We shall call the collection of sets where
+$m^*$ has $\sigma$-additivity as the collection of \hlnotea{Lebesgue measurable
+sets}.
+
+% section lebesgue_outer_measure_continued (end)
+
+\section{Lebesgue Measure}%
+\label{sec:lebesgue_measure}
+% section lebesgue_measure
+
+We shall first introduce \hlnotea{Carath\'{e}odory's} definition of a Lebesgue
+measurable set.
+
+\begin{defn}[Lebesgue Measureable Set]\index{Lebesgue Measureable Set}\label{defn:lebesgue_measureable_set}
+  A set $E \subseteq \mathbb{R}$ is said to be \hlnoteb{Lebesgue measurable} if,
+  $\forall X \subseteq \mathbb{R}$,
+  \begin{equation*}
+    m^* X = m^* ( X \cap E ) + m^* (X \setminus E).
+  \end{equation*}
+  We denote the collection of all Lebesgue measurable sets as
+  $\mathfrak{M}(\mathbb{R})$.
+\end{defn}
+
+\begin{remark}
+  Since we shall almost exclusively focus on the Lebesgue measure, we shall
+  hereafter refer to ``Lebesgue measurable sets'' as simply ``measurable sets''.
+\end{remark}
+
+\begin{note}
+  I shall quote and paraphrase this remark from our course notes
+  \cite{marcoux2018}:
+  \begin{quotebox}{magenta}{foreground}
+    Informally, we see that a set $E \subseteq \mathbb{R}$ is measurable
+    provided that it is a ``universal slicer'', that it ``slices'' every other
+    set $X$ into two \hlwarn{disjoint} sets, into where the Lebesgue outer
+    measure is \hlimpo{$\sigma$-additive}.
+  \end{quotebox}
+
+  Also, note that we get the following inequality for free, simply from
+  $\sigma$-subadditivity of $m^*$:
+  \begin{equation*}
+    m^* X \leq m^* (X \cap E) + m^* (X \setminus E).
+  \end{equation*}
+  Thus, it suffices for us to check if the reverse inequality holds for all sets
+  $X \subseteq \mathbb{R}$.
+\end{note}
+
+Before ploughing forward to getting out hands dirty with examples, let us first
+study a result on a structure of $\mathfrak{M}(\mathbb{R})$ that is rather
+interesting. \sidenote{For those who has dirtied themselves in the world of
+probability and statistics, especially probability theory, get ready to get
+excited!}
+
+\begin{defn}[Algebra of Sets]\index{Algebra of Sets}\index{$\sigma$-algebra of Sets}\label{defn:algebra_of_sets}\label{defn:sigma_algebra_of_sets}
+  A collection $\Omega \subseteq \mathcal{P}(\mathbb{R})$ is said to be an
+  \hlnoteb{algebra of sets} if
+  \begin{enumerate}
+    \item $\mathbb{R} \in \Omega$;
+    \item (\textbf{closed under complementation}) $E \in \Omega \implies E^C \in
+      \Omega$; and
+    \item (\textbf{closed under finite union}) given $N \geq 1$ and $\{ E_n
+      \}_{n=1}^{N} \subseteq \Omega$, then
+      \begin{equation*}
+        \bigcup_{n=1}^{N} E_n \in \Omega.
+      \end{equation*}
+  \end{enumerate}
+  We say that $\Omega$ is a \hlnoteb{$\sigma$-algebra of sets} if
+  \begin{enumerate}
+    \item $\Omega$ is an algebra of sets; and
+    \item (\textbf{closed under countable union}) if $\{ E_n \}_{n=1}^{\infty}
+      \subseteq \Omega$, then
+      \begin{equation*}
+        \bigcup_{n=1}^{\infty} E_n \in \Omega.
+      \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+\begin{note}
+  We often call a $\sigma$-algebra of sets as simply a $\sigma$-algebra.
+\end{note}
+
+\begin{thm}[$\mathfrak{M}(\mathbb{R})$ is a $\sigma$-algebra]\label{thm:_m_r_is_a_sigma_algebra} 
+  The collection $\mathfrak{M}(\mathbb{R})$ of Lebesgue measurable sets in
+  $\mathbb{R}$ is a $\sigma$-algebra.
+\end{thm}
+
+\begin{proof}
+  \hlwarn{Proof to be completed after the next lecture.}
+\end{proof}
+
+% section lebesgue_measure (end)
+
+% chapter lecture_3_may_14th_2019 (end)
+
 \appendix
 
 \backmatter
 
 \fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
 
-% \nobibliography*
 \bibliography{references}
 
 \printindex
 
 \end{document}
 % vim:tw=80:fdm=syntax
-
