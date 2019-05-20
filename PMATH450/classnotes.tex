@@ -1716,8 +1716,33 @@ excited!}
   $\mathbb{R}$ is a $\sigma$-algebra.
 \end{thm}
 
+Due to time constraints, we shall prove the first 2 requirements in this lecture
+and prove the last requirement next time (which is also really long).
+
 \begin{proof}
-  \hlwarn{Proof to be completed after the next lecture.}
+  \hlbnoted{$\mathbb{R} \in \mathfrak{M}(\mathbb{R})$} Observe that $\forall X
+  \subseteq \mathbb{R}$,
+  \begin{equation*}
+    m^* X = m^* X + 0 = m^* X + m^* \emptyset = m^* (X \cap \mathbb{R}) + m^* (X
+    \setminus \mathbb{R})
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{$E \in \mathfrak{M}(\mathbb{R}) \implies E^C \in
+  \mathfrak{M}(\mathbb{R})$} Observe that $\forall X \subseteq \mathbb{R}$,
+  since $E \in \mathfrak{M}(\mathbb{R})$, we have
+
+  $\begin{WithArrows}
+    m^* X &= m^* ( X \cap E ) + m^* ( X \setminus E ) \Arrow{$A \setminus B = A
+            \cap B^C$} \\
+          &= m^* ( X \cap (E^C)^C ) + m^* ( X \cap E^C ) \\
+          &= m^* ( X \setminus E^C ) + m^* ( X \cap E^C ) \Arrow{rearrangement} \\
+          &= m^* ( X \cap E^C ) + m^* ( X \setminus E^C )
+  \end{WithArrows}$
+
+  \noindent
+  Thus $E^C \in \mathfrak{M}(\mathbb{R})$.
+
 \end{proof}
 
 % section lebesgue_measure (end)
