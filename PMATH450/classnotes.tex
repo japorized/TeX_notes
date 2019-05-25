@@ -18,6 +18,8 @@
 \theoremindent10pt
 \newtheorem*{culture}{\faWineGlass Culture}
 
+\newcommand{\Bor}{\mathfrak{Bor}}
+
 % disjoint union
 \makeatletter
 \providerobustcmd*{\bigcupdot}{%
@@ -1748,6 +1750,704 @@ and prove the last requirement next time (which is also really long).
 % section lebesgue_measure (end)
 
 % chapter lecture_3_may_14th_2019 (end)
+
+\chapter{Lecture 4 May 16th 2019}%
+\label{chp:lecture_4_may_16th_2019}
+% chapter lecture_4_may_16th_2019
+
+\section{Lebesgue Measure (Continued)}%
+\label{sec:lebesgue_measure_continued}
+% section lebesgue_measure_continued
+
+Recalling the last theorem we were in the middle of proving, it remains for us
+to prove that $\mathfrak{M}(\mathbb{R})$ is closed under arbitrary unions of its
+elements.
+
+But before we dive in, let's first have a little pep talk.
+
+\begin{strategy}
+  Since $m^*$ is $\sigma$-subadditive, given $\{ E_n \}_{n=1}^{\infty}$, we need
+  only prove that $\forall X \subseteq \mathbb{R}$,
+  \begin{equation*}
+    m^* X \geq m^* \left( X \cap \bigcup_{n=1}^{\infty} E_n \right) + m^* \left(
+    X \setminus \bigcup_{n=1}^{\infty} E_n \right).
+  \end{equation*}
+  Recall our discussion near the end of
+  \cref{sec:lebesgue_outer_measure_continued}. We want $\sigma$-additivity,
+  especially when we are given a set of disjoint intervals. However, our $E_n$'s
+  are arbitrary, and so they are not necessarily disjoint.
+
+  It helps if one has seen how we can slice $\mathbb{R}$ up into disjoint
+  unions, and consequently we can do so for any of its subsets. We shall not
+  take that for granted and immediately use it, but we shall work through this
+  proof in the spirit of that. We shall see how we can slice $\mathbb{R}$ up in
+  A1.
+
+  Once we can, in some way, express $\bigcup_{n=1}^{\infty} E_n$ as a disjoint
+  union of intervals, we will then show that, indeed, we have
+  $\sigma$-additivity instead of $\sigma$-subadditivity on this disjoint union.
+\end{strategy}
+
+\begin{proof}
+  \hlbnoted{$\mathfrak{M}(\mathbb{R})$ is closed under arbitrary unions} Suppose
+  $\{ E_n \}_{n=1}^{\infty} \subseteq \mathfrak{M}(\mathbb{R})$. To show that
+  $\bigcup_{n=1}^{\infty} E_n \in \mathfrak{M}(\mathbb{R})$, WTS
+  \begin{equation*}
+    m^* X = m^* \left( X \cap \bigcup_{n=1}^{\infty} E_n \right) + m^* \left( X
+    \setminus \bigcup_{n=1}^{\infty} E_n \right).
+  \end{equation*}
+  Since $m^*$ is $\sigma$-subadditive, it suffices for us to show that
+  \begin{equation}\label{eq:leb_mea_set_is_a_sig_alg_biggoal}
+    m^* X \geq m^* \left( X \cap \bigcup_{n=1}^{\infty} E_n \right) + m^* \left(
+    X \setminus \bigcup_{n=1}^{\infty} E_n \right).
+  \end{equation}
+
+  \noindent
+  \hlbnoteb{Step 1} Consider
+  \begin{equation*}
+    H_n = \bigcup_{i=1}^{n} E_i, \quad \forall n \geq 1.
+  \end{equation*}
+  \hlbnotea{Claim: $H_n \in \mathfrak{M}(\mathbb{R})$, $\forall n \geq 1$} We
+  shall prove this by induction on $n$.
+
+  When $n = 1$, we have $H_1 = E_1 \in \mathfrak{M}(\mathbb{R})$ by assumption,
+  and so we are done. Suppose that $H_k \in \mathfrak{M}(\mathbb{R})$ for some
+  $k \in \mathbb{N}$. Consider $n = k + 1$.
+
+  Since we will need the piece $X \cap H_{k+1}$, first, notice that
+  \begin{equation*}
+    X \cap H_{k + 1} = X \cap ( H_k \cup E_{k + 1} ) = (X \cap H_k) \cup ((X
+    \setminus H_k) \cap E_{k + 1}),
+  \end{equation*}
+  and in particular that
+  \begin{equation}\label{eq:leb_mea_set_is_a_sig_alg_step1_key}
+    X \cap H_{k+1} = X \cap ( H_k \cup E_{k + 1} ) \subseteq (X \cap H_k) \cup
+    ((X \setminus H_k) \cap E_{k + 1}).
+  \end{equation}
+  This may be (will be) useful later on, and we can guess that we will be using
+  $\sigma$-subadditivity on this.
+
+  By the IH, since $H_k \in \mathfrak{M}(\mathbb{R})$, we have
+  \begin{equation*}
+    m^* X = m^* ( X \cap H_k ) + m^* ( X \setminus H_k ).
+  \end{equation*}
+  Notice the similarity between the above equation and
+  \cref{eq:leb_mea_set_is_a_sig_alg_step1_key}, where we are just off by that
+  $\cap E_{k + 1}$.
+
+  Since $E_{k + 1} \in \mathfrak{M}(\mathbb{R})$, we have
+  \begin{equation*}
+    m^* (X \setminus H_k) = m^* ( X \setminus H_k \cap E_{k+1} ) + m^* ( X
+    \setminus H_k \setminus E_{k+1} ).
+  \end{equation*}
+  To clean the above equation up a little bit, notice that by \hlnotea{De
+  Morgan's Law},
+  \begin{equation*}
+    X \setminus H_k \setminus E_{k+1} = X \cap \bigcup_{i=1}^{k} E_i^C \cap
+    E_{k+1}^C = X \setminus H_{k + 1}.
+  \end{equation*}
+  So
+  \begin{equation*}
+    m^* (X \setminus H_k) = m^* ( X \setminus H_k \cap E_{k+1} ) + m^* ( X
+    \setminus H_{k + 1} ).
+  \end{equation*}
+
+  Thus
+  \begin{equation*}
+    m^* X = m^* (X \cap H_k) + m^*(X \setminus H_k \cap E_{k+1}) + m^*(X
+    \setminus H_{k+1}).
+  \end{equation*}
+  Using \cref{eq:leb_mea_set_is_a_sig_alg_step1_key} and $\sigma$-subadditivity,
+  we have that
+  \begin{equation*}
+    m^* X \geq m^* ( X \cap H_{k + 1} ) + m^* ( X \setminus H_{k+1} ),
+  \end{equation*}
+  which is what we need. Thus $\forall k \geq 1$, $H_k \in
+  \mathfrak{M}(\mathbb{R})$. $\dashv$
+
+  \noindent
+  \hlbnoteb{Step 2} Consider $F_1 = H_1 = E_1 \in \mathfrak{M}(\mathbb{R})$,
+  and for $k \geq 2$,
+  \begin{equation*}
+    F_k = H_k \setminus H_{k-1} = H_k \cap H_{k-1}^{C}.
+  \end{equation*}
+  \sidenote{Note that we cannot assume that $\mathfrak{M}(\mathbb{R})$ is closed under
+  finite intersections because that is part of what we want to prove.}
+  \hlbnotea{Claim: $\forall k \geq 2$, $F_k \in \mathfrak{M}(\mathbb{R})$}
+  First, notice that
+  \begin{equation*}
+    F_k^C = \left( H_k \cap H_{k+1}^C \right)^C = H_k^C \cup H_{k+1}.
+  \end{equation*}
+  By \textbf{step 1} \sidenote{\hlwarn{I need to get this clarified.}}, we have
+  that $F_k^C \in \mathfrak{M}(\mathbb{R})$, and thus by closure under
+  complementation, $F_k \in \mathfrak{M}(\mathbb{R})$.
+
+  Also, note that the $F_i$'s are pairwise disjoint. Suppose not, i.e. that
+  $\exists x \in F_a \cap F_b$ for some $a, b \geq 1$ and $a \neq b$. Wlog, wma
+  $a < b$. Note that $H_a \subseteq H_b$, since
+  \begin{equation*}
+    H_a = \bigcup_{i=1}^{a} E_i \subsetneq \bigcup_{i=1}^{b} E_i = H_b.
+  \end{equation*}
+  Since $F_b = H_b \setminus H_{b - 1}$, 
+  \begin{equation*}
+    x \in F_b \implies x \notin \bigcup_{i=1}^{b-1} E_i \supseteq \bigcup_{i=1}^{a}
+    E_i,
+  \end{equation*}
+  and so $x \notin E_i$ for $1 \leq i \leq a \leq b - 1$. But we assumed that
+  \begin{equation*}
+    x \in F_a = H_a \setminus H_{a - 1},
+  \end{equation*}
+  i.e. it must be that $x \in E_a$, a contradiction.
+
+  \noindent
+  \hlbnoteb{Step 3} We now have
+  \begin{equation*}
+    E = \bigcup_{i=1}^{\infty} E_i = \bigcup_{i=1}^{\infty} H_i =
+    \bigcupdot_{i=1}^{\infty} F_i.
+  \end{equation*}
+  \cref{eq:leb_mea_set_is_a_sig_alg_biggoal} becomes \sidenote{I refrained from
+  changing the second term to the disjoint union. Retrospectively (i.e. once
+  you're done with the proof), it makes sense to not consider this move, since
+  there is no point looking at $X$ take away a bunch of disjoint intervals.}
+  \begin{equation*}
+    m^* X \geq m^* \left( X \cap \left( \bigcupdot_{i=1}^{\infty} F_i \right)
+    \right) + m^* \left( X \setminus E \right).
+  \end{equation*}
+
+  Since the $F_i$'s are disjoint, we expect
+  \begin{equation*}
+    m^* \left( X \cap \bigcupdot_{i=1}^{\infty} F_i \right) =
+    \sum_{i=1}^{\infty} m^* (X \cap F_i).
+  \end{equation*}
+  i.e. for every $n$,
+  \begin{equation*}
+    m^* \left( X \cap \bigcupdot_{i=1}^{n} F_i \right) =
+    \sum_{i=1}^{n} m^* (X \cap F_i).
+  \end{equation*}
+  Let's prove this inductively. It is clear that case $n = 1$ is trivially true.
+  Suppose that this is true up to some $k \in \mathbb{N}$. Consider case $n = k
+  + 1$. Since $F_{k+1} \in \mathfrak{M}(\mathbb{R})$, we have that
+  \sidenote{This is quite a smart trick!}
+
+  $\begin{WithArrows}
+    &m^* \left( X \cap \bigcup\limits_{i=1}^{k+1} F_i \right) \\
+    &= m^* \left( X \cap \bigcup\limits_{i=1}^{k+1} F_i \cap F_{k+1} \right)
+      + m^* \left( \left( X \setminus \bigcup\limits_{i=1}^{k=1} F_i \right) \setminus
+      F_{k+1} \right) \\
+    &= m^* (X \cap F_{k+1}) + m^*\left(X \cap \bigcup\limits_{i=1}^{k}
+      F_i\right) \Arrow{IH} \\
+    &= m^* (X \cap F_{k+1}) + \sum_{i=1}^{k} m^* (X \cap F_i) \\
+    &= \sum\limits_{i=1}^{k+1} m^* (X \cap F_i).
+  \end{WithArrows}$
+
+  Our claim is complete by induction.
+
+  \noindent
+  \hlbnoteb{Step 4} With \textbf{Step 3},
+  \cref{eq:leb_mea_set_is_a_sig_alg_biggoal} has become
+  \begin{equation*}
+    m^* X \geq \sum_{i=1}^{\infty} m^* ( X \cap F_i ) + m^* ( X \setminus E ).
+  \end{equation*}
+  \sidenote{This is a reward for the clear-minded, cause I certainly did not
+  find it an obvious step to take.} Since $H_k \in \mathfrak{M}(\mathbb{R})$ for
+  each $k \geq 1$, we have
+  \begin{equation}\tag{$*$}\label{eq:leb_mea_set_is_a_sig_alg_steppingstone}
+    m^* X = m^* (X \cap H_k) + m^* (X \setminus H_k).
+  \end{equation}
+  Since
+  \begin{equation*}
+    H_k = \bigcup_{i=1}^{k} E_i = \bigcup_{i=1}^{\infty} E_i = E,
+  \end{equation*}
+  we have that
+  \begin{equation*}
+    X \setminus H_k \supseteq X \setminus E,
+  \end{equation*}
+  for each $k \geq 1$. Thus by monotonicity,
+  \cref{eq:leb_mea_set_is_a_sig_alg_steppingstone} becomes
+  \begin{align*}
+    m^* X &\geq m^*(X \cap H_k) + m^*(X \setminus E) \\
+          &= m^* \left( X \cap \left( \bigcup_{i=1}^{\infty} F_i \right) \right)
+            + m^*(X \setminus E) \\
+          &= \sum_{i=1}^{k} m^* (X \cap F_i) + m^* (X \setminus E),
+  \end{align*}
+  for each $k \geq 1$.
+
+  By letting $k \to \infty$, we have that
+  \begin{equation*}
+    m^* X \geq \sum_{i=1}^{\infty} m^* (X \cap F_i) + m^*(X \setminus E).
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    X \cap E = X \cap \bigcup_{i=1}^{\infty} F_i = \bigcup_{i=1}^{\infty} (X
+    \cap F_i).
+  \end{equation*}
+  By $\sigma$-subadditivity, we have that
+  \begin{equation*}
+    m^* ( X \cap E ) \leq \sum_{i=1}^{\infty} m^* (X \cap F_i). 
+  \end{equation*}
+  Therefore
+  \begin{equation*}
+    m^* X \geq m^* (X \cap E) + m^*(X \setminus E),
+  \end{equation*}
+  which is what we want!
+\end{proof}
+
+\begin{note}[Post-mortem for proof of \cref{thm:_m_r_is_a_sigma_algebra}]
+  In steps 1 - 3, we try to slice $\bigcup_{n=1}^{\infty} E_n$ into disjoint
+  \hlimpo{measurable} intervals $F_i$'s. Along the process of constructing them,
+  it is the showing of them being measurable that takes up most of the proof,
+  since we require induction.
+\end{note}
+
+\begin{propo}[Some Lebesgue Measurable Sets]\label{propo:some_lebesgue_measurable_sets}
+  \begin{enumerate}
+    \item If $E \subseteq \mathbb{R}$ and $m^* E = 0$, then $E$ is Lebesgue
+      measurable.
+    \item $\forall b \in \mathbb{R}$, $(-\infty, b) \in
+      \mathfrak{M}(\mathbb{R})$.
+    \item Every open and every closed set is Lebesgue measurable.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Let $X \subseteq \mathbb{R}$. Note that $X \setminus E \subseteq X$,
+      and so $\sigma$-subadditivity gives
+      \begin{equation}\label{eq:zero_measure_is_measureable}
+        m^* X \geq m^*(X \setminus E).
+      \end{equation}
+      On the other hand, $X \cap E \subseteq E$, and so
+      \begin{equation*}
+        m^* (X \cap E) \leq m^* E = 0 \implies m^* (X \cap E) = 0.
+      \end{equation*}
+      Thus, from \cref{eq:zero_measure_is_measureable},
+      \begin{equation*}
+        m^* X \geq ml* (X \setminus E) = m^* (X \cap E) + m^* (X \setminus E).
+      \end{equation*}
+      Hence $E \in \mathfrak{M}(\mathbb{R})$ as required.
+
+    \item Let $b \in \mathbb{R}$ and $X \subseteq \mathbb{R}$ be arbitrary. WTS
+      \begin{equation*}
+        m^* X \geq m^* ( X \cap (-\infty, b) ) + m^* ( X \setminus (-\infty, b) ).
+      \end{equation*}
+
+      \sidenote{We will look at $X \cap (\infty, b)$ and $X \setminus (-\infty,
+      b)$ more closely, and then realize that since we can cover $X$, we can
+      ``extend'' this cover for these disjoint pieces by taking intersections and
+      set removals on each of the covering sets.}
+      Let $E = (-\infty, b)$.  Note that if $m^* X  = \infty$, then there is
+      nothing to show. Thus WMA $m^* X < \infty$. In this case, let $\epsilon >
+      0$, and $\{ I_n \}_{n=1}^{\infty}$ a cover of $X$ by open intervals, where
+      we write
+      \begin{equation*}
+        I_n = (a_n, b_n)
+      \end{equation*}
+      for each $n \geq 1$, so that \sidenote{Note that this is legitimate
+      because $m^* X$ is the infimum of such sums on the LHS, and we can
+      definitely find such a cover as a result. Also, there is no harm in assuming
+      that each of the $I_n$'s are non-empty, since we may simply remove all the
+      empty $I_n$'s from the cover.}
+      \begin{equation*}
+        \sum_{n=1}^{\infty} \ell(I_n) < m^* X + \epsilon.
+      \end{equation*}
+
+      For each $n \geq 1$, consider the sets
+      \begin{equation*}
+        J_n = I_n \cap E + I_n \cap (-\infty, b)
+      \end{equation*}
+      and
+      \begin{equation*}
+        K_n = I_n \setminus E = I_n \setminus (\infty, b) = I_n \cap [b,
+        \infty).
+      \end{equation*}
+      The following table captures all possible $J_n$'s and $K_n$'s:
+      \begin{table}[ht]
+        \centering
+        \caption{Possible outcomes of $J_n$ and $K_n$, for each $n \geq 1$}
+        \label{table:possible_outcomes_of_j_n_and_k_n}
+        \begin{tabular}{c | c c c}
+          Case & 1 & 2 & 3 \\
+          \hline
+          $b$   & $> b_n$     & $\in I_n$  & $< a_n$ \\
+          \hline
+          $J_n$ & $I_n$       & $(a_n, b)$ & $\emptyset$ \\
+          $K_n$ & $\emptyset$ & $[b, b_n)$ & $I_n$
+        \end{tabular}
+      \end{table}
+      \begin{marginfigure}[100pt]
+        \centering
+        \begin{tikzpicture}
+          \draw (-2, 1) -- (2, 1);
+          \draw (0, 1.1) -- (0, 0.9) node[below] {$b$};
+          \draw[
+            {Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},
+            red]
+            (-1.5,1) node[below=10pt] {$a_n$} -- (-0.5,1) node[below=10pt] {$b_n$};
+
+          \draw (-2, 0) -- (2, 0);
+          \draw (0, 0.1) -- (0, -0.1) node[below] {$b$};
+          \draw[
+            {Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},
+            red]
+            (-1,0) node[below=10pt] {$a_n$} -- (1,0) node[below=10pt] {$b_n$};
+
+          \draw (-2, -1) -- (2, -1);
+          \draw (0, -0.9) -- (0, -1.1) node[below] {$b$};
+          \draw[
+            {Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},
+            red]
+            (0.5,-1) node[below=10pt] {$a_n$} -- (1.5,-1) node[below=10pt] {$b_n$};
+        \end{tikzpicture}
+        \caption{Three possible scenarios of where $b$ stands for different
+        $I_n$'s}\label{fig:three_possible_scenarios_of_where_b_stands_for_different_i_n_s}
+      \end{marginfigure}
+
+      Notice that $\{ J_n \}_{n=1}^{\infty}$ is an open cover for $X \cap E$.
+      $\{ K_n \}_{n=1}^{\infty}$ is also a cover of $X \setminus E$ but it is
+      not an open cover (the only covers of which we consider in this course).
+      Thus, we consider a small extension $L_n$ of $K_n$ such that
+      \begin{itemize}
+        \item if $K_n = \emptyset$, then $L_n = \emptyset$;
+        \item if $K_n = I_n$, then $L_n = I_n$; and
+        \item if $K_n = [b, b_n)$, then $L_n = \left( b - \frac{\epsilon}{2^n},
+          b_n \right)$.
+      \end{itemize}
+      Then $\{ L_n \}_{n=1}^{\infty}$ is a cover of $X \setminus E$. By
+      $\sigma$-subadditivity of $m^*$, we have that
+      \begin{equation*}
+        m^* ( X \cap E ) \leq \sum_{n=1}^{\infty} \ell(J_n)
+      \end{equation*}
+      and
+      \begin{equation*}
+        m^* ( X \setminus E ) \leq \sum_{n=1}^{\infty} \ell(L_n).
+      \end{equation*}
+      Thus
+      \begin{equation*}
+        m^* (X \cap E) + m^* (X \setminus E) \leq \sum_{n=1}^{\infty} \left(
+        \ell(J_n) + \ell(L_n) \right).
+      \end{equation*}
+
+      Now, notice that in cases 1 and 3,
+      \begin{equation*}
+        \ell(J_n) + \ell(L_n) = \ell(I_n).
+      \end{equation*}
+      In case 2, we have that
+      \begin{equation*}
+        (\ell(J_n) + \ell(L_n)) - \ell(I_n) < \frac{\epsilon}{2^n}
+      \end{equation*}
+      and so
+      \begin{equation*}
+        \ell(J_n) + \ell(L_n) < \ell(I_n) + \frac{\epsilon}{2^n}.
+      \end{equation*}
+
+      Therefore
+      \begin{align*}
+        &m^* (X \cap E) + m^* (X \setminus E) \\
+        &\leq \sum_{n=1}^{\infty} \left( \ell(J_n) + \ell(L_n) \right) \\
+        &\leq \sum_{n=1}^{\infty} \left(\ell(I_n) + \frac{\epsilon}{2^n}\right) \\
+        &= \sum_{n=1}^{\infty} \ell(I_n) + \epsilon \\
+        &< \left( m^* X + \epsilon \right) + \epsilon \\
+        &= m^* X + 2 \epsilon.
+      \end{align*}
+      Since $\epsilon > 0$ is arbitrary, we have that
+      \begin{equation*}
+        m^* X \geq m^* (X \cap E) + m^* ( X \setminus E ),
+      \end{equation*}
+      and since $X$ is arbitrary, we have that $E = (-\infty, b) \in
+      \mathfrak{M}(\mathbb{R})$.
+
+    \item Wlog, suppose $a < b \in \mathbb{R}$. By part 2, we have that
+      \begin{equation*}
+        (-\infty, b) \in \mathfrak{M}(\mathbb{R}),
+      \end{equation*}
+      and similarly, for $n \geq 1$,
+      \begin{equation*}
+        \left(\infty, a + \frac{1}{n}\right) \in \mathfrak{M}(\mathbb{R}).
+      \end{equation*}
+      Since $\mathfrak{M}(\mathbb{R})$ is a $\sigma$-algebra, we have that
+      \begin{equation*}
+        \left[a + \frac{1}{n}, \infty\right) = \left(-\infty, a +
+        \frac{1}{n}\right)^C \in \mathfrak{M}(\mathbb{R}),
+      \end{equation*}
+      for each $n \geq 1$. Consequently,
+      \begin{equation*}
+        (a, \infty) = \bigcup_{n=1}^{\infty} \left[ a + \frac{1}{n}, \infty
+        \right) \in \mathfrak{M}(\mathbb{R}).
+      \end{equation*}
+
+      Therefore, we have that
+      \begin{equation*}
+        (a, b) = (-\infty, b) \cap (a, \infty) \in \mathfrak{M}(\mathbb{R}).
+      \end{equation*}
+      \sidenote{We shall prove this in A1.} Since every open set $G \subseteq
+      \mathbb{R}$ is a countable disjoint union of open intervals in
+      $\mathbb{R}$, it follows that $G \in \mathfrak{M}(\mathbb{R})$ since
+      $\mathfrak{M}(\mathbb{R})$ is a $\sigma$-algebra.
+      If $F \subseteq \mathbb{R}$ is closed, notice that
+      \begin{equation*}
+        F^C = G \in \mathfrak{M}(\mathbb{R})
+      \end{equation*}
+      since $G$ is open, and so by closure under complementation of
+      $\sigma$-algebras, $F \in \mathfrak{M}(\mathbb{R})$.
+  \end{enumerate}
+\end{proof}
+
+\begin{defn}[Lebesgue Measure]\index{Lebesgue Measure}\label{defn:lebesgue_measure}
+  Let $m^*$ denote the Lebesgue outer measure on $\mathbb{R}$. We define the
+  \hlnoteb{Lebesgue measure} $m$ to be
+  \begin{equation*}
+    m = m^* \restriction_{\mathfrak{M}(\mathbb{R})},
+  \end{equation*}
+  i.e. $\forall E \in \mathfrak{M}(\mathbb{R})$, we have that
+  \begin{equation*}
+    m E = m^* E = \inf \left\{ \sum_{n=1}^{\infty} \ell(I_n) \mid E \subseteq
+    \bigcup_{n=1}^{\infty} I_n \right\}.
+  \end{equation*}
+\end{defn}
+
+In A1, we shall prove that
+
+\begin{thm}[$\sigma$-additivity of the Lebesgue Measure on Lebesgue Measurable Sets]\label{thm:_sigma_additivity_of_the_lebesgue_measure_on_lebesgue_measurable_sets}
+  The Lebesgue measure is $\sigma$-additive on $\mathfrak{M}(\mathbb{R})$, i.e.
+  if $\{ E_n \}_{n=1}^{\infty} \subseteq \mathfrak{M}(\mathbb{R})$ with $E_i
+  \cap E_j = \emptyset$ for all $i \neq j$, then
+  \begin{equation*}
+    m \bigcup_{n=1}^{\infty} E_n = \sum_{n=1}^{\infty} m E_n.
+  \end{equation*}
+\end{thm}
+
+\begin{crly}[Existence of Non-Measurable Sets]\label{crly:existence_of_non_measurable_sets}
+  There exists non-measurable sets.
+\end{crly}
+
+\begin{proof}
+  Suppose not, i.e. $\mathfrak{M}(\mathbb{R}) =
+  \mathcal{P}(\mathbb{R})$. Then $m = m^*$ is a
+  \hyperref[defn:translation_invariant]{translation invariant} outer measure on
+  $\mathbb{R}$, with $m^* \mathbb{R} = \infty > 0$, $m^* [0, 1] = 1 < \infty$,
+  and $m^*$ is $\sigma$-additive, which contradicts
+  \cref{thm:non_existence_of_a_sensible_translation_invariant_outer_measure_that_is_also_sigma_additive}.
+  Thus $\mathfrak{M}(\mathbb{R}) \neq \mathcal{P}(\mathbb{R})$.
+\end{proof}
+
+The following proposition is left as an exercise.
+
+\begin{propo}[Non-measurability of the Vitali Set]\label{propo:non_measurability_of_the_vitali_set}
+  The Vitali set $\mathbb{V}$, defined in
+  \cref{thm:non_existence_of_a_sensible_translation_invariant_outer_measure_that_is_also_sigma_additive},
+  is not measurable.
+\end{propo}
+
+\marginnote{
+\begin{ex}
+  Prove \cref{propo:non_measurability_of_the_vitali_set}.
+\end{ex}
+}
+
+\begin{defn}[$\sigma$-algebra of Borel Sets]\index{$\sigma$-algebra of Borel Sets}\label{defn:_sigma_algebra_of_borel_sets}
+  The $\sigma$-algebra of sets generated by the collection
+  \begin{equation*}
+    \mathfrak{G} \coloneqq \{ G \subseteq \mathbb{R} : G \text{ is open } \}
+  \end{equation*}
+  is called the \hlnoteb{$\sigma$-algebra of Borel sets} of $\mathbb{R}$, and is
+  denoted by
+  \begin{equation*}
+    \Bor(\mathbb{R}).
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Since $\Bor(\mathbb{R})$ is generated by open sets in $\mathbb{R}$ and all
+  open subsets of $\mathbb{R}$ are Lebesgue measurable (cf.
+  \cref{propo:some_lebesgue_measurable_sets}), we have that
+  \begin{equation*}
+    \Bor(\mathbb{R}) \subseteq \mathfrak{M}(\mathbb{R}).
+  \end{equation*}
+\end{note}
+
+\begin{remark}
+  Since $\Bor(\mathbb{R})$ is a $\sigma$-algebra, and it is, in particular,
+  generated by open subsets of $\mathbb{R}$, it also contains all of the closed
+  subsets of $\mathbb{R}$. Thus, we could have instead defined
+  $\Bor(\mathbb{R})$ to be the $\sigma$-algebra of subsets of $\mathbb{R}$ 
+  generated by the collection
+  \begin{equation*}
+    \mathfrak{F} \coloneqq \{ F \subseteq \mathbb{R} : F \text{ is closed } \},
+  \end{equation*}
+  and in turn conclude that $\Bor(\mathbb{R})$ contains $\mathfrak{G}$.
+\end{remark}
+
+\begin{remark}
+  Let $\mathcal{A} \subseteq \mathcal{P}(\mathbb{R})$, with $\emptyset,
+  \mathbb{R} \in \mathcal{A}$. Let
+  \begin{gather*}
+    \mathcal{A}_{\sigma} \coloneqq \left\{ \bigcup_{n=1}^{\infty} A_n : A_n \in
+    \mathcal{A}, n \geq 1 \right\} \\
+    \mathcal{A}_{\delta} \coloneqq \left\{ \bigcap_{n=1}^{\infty} A_n : A_n \in
+    \mathcal{A}, n \geq 1 \right\}.
+  \end{gather*}
+  We call the elements of $\mathcal{A}_{\sigma}$ as \hldefn{$\mathcal{A}$-sigma
+  sets}, and elements of $\mathcal{A}_{\delta}$ as \hldefn{$\mathcal{A}$-delta sets}.
+
+  Recalling our definitions
+  \begin{gather*}
+    \mathfrak{G} = \{ G \subseteq \mathbb{R} \mid G \text{ is open } \} \\
+    \mathfrak{F} = \{ F \subseteq \mathbb{R} \mid F \text{ is closed } \}
+  \end{gather*}
+  from above, notice that
+  \begin{equation*}
+    \mathfrak{G}_{\delta} = \left\{ \bigcap_{n=1}^{\infty} G_n \mid G_n \in
+    \mathfrak{G}, n \geq 1 \right\},
+  \end{equation*}
+  which is a \hlimpo{countable intersection of open subsets} of $\mathbb{R}$, and
+  \begin{equation*}
+    \mathfrak{F}_{\sigma} = \left\{ \bigcup_{n=1}^{\infty} F_n \mid F_n \in
+    \mathfrak{F}, n \geq 1 \right\},
+  \end{equation*}
+  which is a \hlimpo{countable union of closed subsets} of $\mathbb{R}$, are
+  both subsets of $\Bor(\mathbb{R})$.
+\end{remark}
+
+\newthought{As mentioned before}, the definition of which we provided for a
+\hyperref[defn:lebesgue_measureable_set]{Lebesgue measurable set} is from
+\hlnotea{Carath\'{e}odory}, which is not the most intuitive definition. We shall
+now show that it is equivalent to the original definition of which Lebesgue
+himself has provided.
+
+\begin{thm}[Carath\'{e}odory's and Lebesgue's Definition of Measurability]\label{thm:carath'_e_odory_s_and_lebesgue_s_definition_of_measurability}
+  Let $E \subseteq \mathbb{R}$. TFAE:
+  \begin{enumerate}
+    \item $E$ is Lebesgue measurable (Carath\'{e}odory).
+    \item $\forall \epsilon > 0$, there exists an open $G \supseteq E$
+      such that
+      \begin{equation*}
+        m^* (G \setminus E) < \epsilon.
+      \end{equation*}
+    \item There exists a $\mathfrak{G}_{\delta}$-set $H$ such that $E \subseteq
+      H$ and
+      \begin{equation*}
+        m^* ( H \setminus E ) = 0.
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{$(1) \implies (2)$} If we can find such a $G$ that is open, then
+  since $E$ is Lebesgue measurable, we have
+  \begin{equation*}
+    m G = m (G \cap E) + m (G \setminus E) = m E + m (G \setminus E),
+  \end{equation*}
+  and so
+  \begin{equation}\label{eq:caraleb_1_imp_2_eq1}
+    m (G \setminus E) = m G - m E.
+  \end{equation}
+  So if we can construct such a $G$, that is particularly small enough (within
+  $\epsilon$-bigger) to contain $E$, our statement is good as done.
+
+  \noindent
+  \hlbnoteb{Case 1: $m E < \infty$} In this case, we may consider a cover $\{
+  I_n \}_{n=1}^{\infty}$ of $E$ such that
+  \begin{equation*}
+    \sum_{n=1}^{\infty} \ell(I_n) < m E + \epsilon.
+  \end{equation*}
+  Then we may simply let $G = \bigcup_{n=1}^{\infty} I_n$. Note that since
+  $\mathfrak{M}(\mathbb{R})$ is a $\sigma$-algebra, $G \in
+  \mathfrak{M}(\mathbb{R})$. Thus by monotonicity,
+  \begin{equation*}
+    m G = m \left( \bigcup_{n=1}^{\infty} I_n \right) \leq
+    \sum_{n=1}^{\infty} m I_n = \sum_{n=1}^{\infty} \ell(I_n) < m E +
+    \epsilon.
+  \end{equation*}
+  With this, \cref{eq:caraleb_1_imp_2_eq1} becomes
+  \begin{equation*}
+    m (G \setminus E) < m E + \epsilon - m E = \epsilon.
+  \end{equation*}
+
+  \noindent
+  \hlbnoteb{Case 2: $\forall r \in \mathbb{R}, \; m E > r$} Consider
+  \begin{equation*}
+    E_k = [-k, k] \cap E
+  \end{equation*}
+  \sidenote{\hlwarn{I should get clarification for my understanding of this
+  approach.} We picked closed intervals instead of open ones so that we deal
+  with the possible quirkiness of $E$.}for each $k \geq 1$.  By
+  \cref{propo:some_lebesgue_measurable_sets}, closed sets are Lebesgue
+  measurable, and so for each $k \geq 1$, $E_k \in \mathfrak{M}(\mathbb{R})$.
+  Note that
+  \begin{equation*}
+    E = \bigcup_{k \geq 1} E_k.
+  \end{equation*}
+  \sidenote{It would be a quick job if we take the union of the $E_k$'s but note
+  that the $E_k$'s are not necessarily open!} Note that $E_k \subseteq [-k, k]$,
+  and so
+  \begin{equation*}
+    m E_k \leq m [-k, k] = 2k < \infty.
+  \end{equation*}
+  Using a similar approach as in \textbf{Case 1}, we can construct an open set
+  $G_k$ such that $G_k \supseteq E_k$, and
+  \begin{equation*}
+    m (G_k \setminus E_k) < \frac{\epsilon}{2^k},
+  \end{equation*}
+  for each $k \geq 1$. Now let
+  \begin{equation*}
+    G \coloneqq \bigcup_{k \geq 1} G_k \supseteq \bigcup_{k \geq 1} E_k = E.
+  \end{equation*}
+  Note that if $x \in G \setminus E$, then $x \notin E_k$ for all $k \geq 1$,
+  and $\exists N \geq 1$ such that $x \in G_N$. In particular, we have that
+  \begin{equation*}
+    x \in G_N \setminus E_N,
+  \end{equation*}
+  and so
+  \begin{equation*}
+    G \setminus E \subseteq \bigcup_{k \geq 1} G_k \setminus E_k
+  \end{equation*}
+  \sidenote{It is, however, true that equality holds, and it is not difficult to
+  prove so.}. Therefore
+  \begin{equation*}
+    m (G \setminus E) \leq \sum_{k \geq 1} m(G_k \setminus E_k) \leq \sum_{k
+    \geq 1} \frac{\epsilon}{2^k} = \epsilon.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{$(2) \implies (3)$} By $(2)$, for each $n \geq 1$, let $G_n
+  \supseteq E$ such that
+  \begin{equation*}
+    m (G_n \setminus E) < \frac{1}{n}.
+  \end{equation*}
+  Let $H \coloneqq \bigcap_{n \geq 1} G_n$, which then $H \in
+  \mathfrak{G}_{\delta}$. Also, since $E \subseteq G_n$ for all $n \geq 1$, we
+  have $E \subseteq H$. Also, $H \subseteq G_n$ for each $n$. Thus
+  \begin{equation*}
+    H \setminus E \subseteq G_n \setminus E,
+  \end{equation*}
+  for each $n \geq 1$. By monotonicity,
+  \begin{equation*}
+    m(H \setminus E) \leq m(G_n \setminus E) < \frac{1}{n}
+  \end{equation*}
+  for each $n \geq 1$. Therefore
+  \begin{equation*}
+    m(H \setminus E) = 0.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{$(3) \implies (1)$} Notice that $\mathfrak{G}_{\delta} \subseteq
+  \Bor(\mathbb{R}) \subseteq \mathfrak{M}(\mathbb{R})$. Suppose $G \in
+  \mathfrak{G}_{\delta}$, and $E \subseteq H$ such that
+  \begin{equation*}
+    m(H \setminus E) = 0.
+  \end{equation*}
+  By \cref{propo:some_lebesgue_measurable_sets}, $H \setminus E \in
+  \mathfrak{M}(\mathbb{R})$. Since $\mathfrak{M}(\mathbb{R})$ is a
+  $\sigma$-algebra, notice that
+  \begin{equation*}
+    E = H \setminus (H \setminus E) = H \cap (H \cap E^C)^C = H \cap H^C \cup E
+    \in \mathfrak{M}(\mathbb{R}).
+  \end{equation*}
+\end{proof}
+
+% section lebesgue_measure_continued (end)
+
+% chapter lecture_4_may_16th_2019 (end)
 
 \appendix
 
