@@ -2205,7 +2205,7 @@ But before we dive in, let's first have a little pep talk.
   \end{equation*}
 \end{defn}
 
-In A1, we shall prove that
+In A2, we shall prove that
 
 \begin{thm}[$\sigma$-additivity of the Lebesgue Measure on Lebesgue Measurable Sets]\label{thm:_sigma_additivity_of_the_lebesgue_measure_on_lebesgue_measurable_sets}
   The Lebesgue measure is $\sigma$-additive on $\mathfrak{M}(\mathbb{R})$, i.e.
@@ -2448,6 +2448,681 @@ himself has provided.
 % section lebesgue_measure_continued (end)
 
 % chapter lecture_4_may_16th_2019 (end)
+
+\chapter{Lecture 5 May 21st 2019}%
+\label{chp:lecture_5_may_21st_2019}
+% chapter lecture_5_may_21st_2019
+
+\section{Lebesgue Measure (Continued 2)}%
+\label{sec:lebesgue_measure_continued_2}
+% section lebesgue_measure_continued_2
+
+Recall from \cref{crly:lebesgue_outer_measure_of_countable_sets_is_zero} that
+any countable subset $E \subseteq \mathbb{R}$ has zero Lebesgue outer measure.
+From \cref{propo:some_lebesgue_measurable_sets}, we have that $E \in
+\mathfrak{M}(\mathbb{R})$ and so $m E = m^* E = 0$. This shows that every
+countable set is Lebesgue measurable with Lebesgue measure zero.
+
+\begin{quotebox}{green}{foreground}
+  But is the converse true? I.e., is every Lebesgue measurable set with Lebesgue
+  measure zero countable?
+\end{quotebox}
+
+We shall show that this is not true by giving a counterexample. We shall now
+construct an \hlnotea{uncountable set} $C$ that has measure zero.
+
+\begin{eg}[The Cantor Set]
+  Let $C_0 = [0, 1]$. Note that $C_0$ is compact and
+  \begin{equation*}
+    m^* C_0 = 1 < \infty.
+  \end{equation*}
+
+  \begin{figure}[h]
+    \begin{center}
+    \begin{tikzpicture}
+      \draw[-] (-0.5,0) -- (9.5,0);
+      \draw[-] (0,.5) -- (0, -.5) node[below] {$0$};
+      \draw[-] (9,.5) -- (9, -.5) node[below] {$1$};
+
+      \node at (1, -.7) {$\frac{1}{9}$};
+      \node at (2, -.7) {$\frac{2}{9}$};
+      \node at (3, -.7) {$\frac{1}{3}$};
+      \node at (6, -.7) {$\frac{2}{3}$};
+      \node at (7, -.7) {$\frac{7}{9}$};
+      \node at (8, -.7) {$\frac{8}{9}$};
+
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (3,0) -- (6,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (1,0) -- (2,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (7,0) -- (8,0);
+
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]}
+        ,red] (0, 0) -- (1, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]}
+        ,red] (2, 0) -- (3, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]}
+        ,red] (6, 0) -- (7, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]}
+        ,red] (8, 0) -- (9, 0);
+      
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (0.333333,0) -- (0.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (2.333333,0) -- (2.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (6.333333,0) -- (6.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (8.333333,0) -- (8.666667,0);
+    \end{tikzpicture}
+    \end{center}
+    \caption{Cantor set showing up to $n = 2$, with the excluded interval in $n = 3$ shown.}
+    \label{fig:cantor_set}
+  \end{figure}
+
+  Let
+  \begin{equation*}
+    C_1 = C_0 \setminus \left( \frac{1}{3}, \frac{2}{3} \right).
+  \end{equation*}
+  Then $C_1$ is closed \sidenote{$C_1$ is an intersection of 2 closed sets.} and
+  $C_0 \supseteq C_1$.
+
+  Let
+  \begin{equation*}
+    C_2 = C_1 \setminus \left( \left( \frac{1}{9}, \frac{2}{9} \right) \cup
+    \left( \frac{7}{9}, \frac{8}{9} \right) \right).
+  \end{equation*}
+  Then $C_2$ is closed and $C_1 \supseteq C_2$.
+
+  We continue this process indefinitely, and construct $C_n$ for each $n \geq
+  1$, where
+  \begin{equation*}
+    C_n = \frac{1}{3} C_{n-1} \cup \left( \frac{2}{3} + \frac{1}{3} C_{n-1} \right).
+  \end{equation*}
+  Then $C_n$ will consist of $2^n$ disjoint closed intervals. Thus each $C_n$ is
+  compact and measurable. Moreover,
+  \begin{equation*}
+    m (C_n) = \left( \frac{2}{3} \right)^n,
+  \end{equation*}
+  for each $n \geq 1$.
+
+  \begin{figure*}[t]
+    \centering
+    \begin{tikzpicture}[decoration=Cantor set,line width=3mm]
+      \draw (0,0) -- (9,0);
+      \draw decorate{ (0,-.5) -- (9,-.5) };
+      \draw decorate{ decorate{ (0,-1) -- (9,-1) }};
+      \draw decorate{ decorate{ decorate{ (0,-1.5) -- (9,-1.5) }}};
+      \draw decorate{ decorate{ decorate{
+        decorate{ (0,-2) -- (9,-2) }}}};
+      \draw decorate{ decorate{ decorate{
+        decorate{ decorate{ (0, -2.5) -- (9, -2.5) }}}}};
+    \end{tikzpicture}
+    \caption[][20pt]{An illustration of the Cantor Set from \url{https://mathforum.org/mathimages/index.php/Cantor_Set}.}\label{fig:an_illustration_of_the_cantor_set_from_https_}
+  \end{figure*}
+  
+  Also, we have that
+  \begin{equation*}
+    C_0 \supseteq C_1 \supseteq C_2 \supseteq \hdots
+  \end{equation*}
+  is a \hlnotea{descending chain of measurable sets}. Note that the sequence $\{
+  C_n \}_{n=0}^{\infty}$ has the \hlnotea{finite intersection property}, and
+  since $\mathbb{R}$ is compact, the set
+  \begin{equation*}
+    C \coloneqq \bigcap_{n=1}^{\infty} C_n,
+  \end{equation*}
+  which we shall call it the \hldefn{Cantor Set}, is non-empty \sidenote{See
+  \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf\#thm.74}{FIP and
+  Compactness} from PMATH 351}.
+
+  Now from A2, we have that
+  \begin{equation*}
+    m C = \lim_{n \to \infty} m C_n = \lim_{n \to \infty} \left( \frac{2}{3}
+    \right)^n = 0.
+  \end{equation*}
+
+  We shall now show that $C$ is uncountable. To do this, we shall use the
+  \hlnotea{ternary representation} for each $x \in [0, 1]$. In particular, for
+  each $x \in [0, 1]$, we write
+  \begin{equation*}
+    x = 0.x_1 x_2 x_3 \hdots,
+  \end{equation*}
+  where each $x_i \in \{ 0, 1, 2 \}$ for all $i \geq 1$. Note that in base 10,
+  we can express
+  \begin{equation*}
+    x = \sum_{k=1}^{\infty} \frac{x_k}{10^k} = 0.x_1 + 0.0x_2 + 0.00x_3 + \hdots
+  \end{equation*}
+  \marginnote{I shall paraphrase the professor here because I like how the
+  analogy brings good intuition, for me at least.
+
+  \begin{quotebox}{magenta}{foreground}
+    Suppose there's this person that had only 3 fingers and is not aware of the
+    existence of the base-10 system, and in turn invented the ternary system.
+    Then, instead of having 10 regular intervals on $[0, 1]$, it had 3 regular
+    intervals.
+  \end{quotebox}
+  }
+  Thus, we can similarly express
+  \begin{equation*}
+    x = \sum_{k=1}^{\infty} \frac{x_k}{3^k},
+  \end{equation*}
+  in ternary representation. However, just as
+  \begin{equation*}
+    0.99999 \hdots \text{ and } 1.00000 \hdots
+  \end{equation*}
+  are indistinguishable, in ternary representation,
+  \begin{equation*}
+    0.22222 \hdots \text{ and } 1.00000 \hdots
+  \end{equation*}
+  are indistinguishable. Fortunately, we can find out who exactly are the
+  culprits that cannot be uniquely represented, which shall be left as an
+  exercise.
+
+  \begin{ex}
+    Show that the ternary expansion of $x \in [0, 1)$ is unique except when
+    $\exists N \geq 1$ such that
+    \begin{equation*}
+      x = \frac{r}{3^N},
+    \end{equation*}
+    for some $0 < r < 3^N$, where $3 \nmid r$.
+  \end{ex}
+
+  In the cases where we have the above $x$, we have that \sidenote{Note that the
+  representation terminates somewhere, since it is a fraction, i.e. a rational
+  number.}
+  \begin{equation*}
+    x = 0.x_1 x_2 x_3 \hdots x_N,
+  \end{equation*}
+  where $x_N \in \{1, 2\}$.
+  \begin{itemize}
+    \item If $x_N = 2$, we shall keep this expression; otherwise
+    \item if $x_N = 1$, then we write
+      \begin{align*}
+        x &= 0.x_1 x_2 x_3 \hdots x_{N-2} x_{N-1} 1000 \hdots \\
+          &= 0.x_1 x_2 x_3 \hdots x_{N_2} x_{N-1} 0222 \hdots,
+      \end{align*}
+      and we shall use the second expression.
+  \end{itemize}
+  Also, we shall also use the convention that
+  \begin{equation*}
+    1 = 0.22222 \hdots.
+  \end{equation*}
+
+  With this, we have obtained a \hlimpo{unique} ternary expansion for each $x
+  \in [0, 1]$.
+
+  \begin{figure*}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw[-] (-0.5,0) -- (9.5,0);
+      \draw[-] (0,.5) -- (0, -.5) node[below] {$0$};
+      \draw[-] (9,.5) -- (9, -.5) node[below] {$1$};
+
+      \node at (1, -.7) {$\frac{1}{9}$};
+      \node at (2, -.7) {$\frac{2}{9}$};
+      \node at (3, -.7) {$\frac{1}{3}$};
+      \node at (6, -.7) {$\frac{2}{3}$};
+      \node at (7, -.7) {$\frac{7}{9}$};
+      \node at (8, -.7) {$\frac{8}{9}$};
+
+      \node[pin={[pin edge={latex'-}, pin distance=20pt]90:{$0.010\hdots =
+        0.0022\hdots$}}] at (1, 0.3) {};
+      \node[pin={[pin edge={latex'-}, pin distance=7pt]90:{$0.020\hdots$}}] at
+        (2, 0.3) {};
+      \node[pin={[pin edge={latex'-}, pin distance=30pt]90:{$0.022\hdots$}}] at
+        (3, 0.3) {};
+      \node[pin={[pin edge={latex'-}, pin distance=7pt]90:{$0.1\hdots$}}] at
+        (4.5, 0.3) {};
+      \node[pin={[pin edge={latex'-}, pin distance=30pt]90:{$0.20\hdots$}}] at
+        (6, 0.3) {};
+
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (3,0) -- (6,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (1,0) -- (2,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (7,0) -- (8,0);
+
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]}
+        ,red] (0, 0) -- (1, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]}
+        ,red] (2, 0) -- (3, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]}
+        ,red] (6, 0) -- (7, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]}
+        ,red] (8, 0) -- (9, 0);
+      
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (0.333333,0) -- (0.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (2.333333,0) -- (2.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (6.333333,0) -- (6.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]}
+        ,blue] (8.333333,0) -- (8.666667,0);
+    \end{tikzpicture}
+    \caption{Some values on $[0, 1]$ in ternary representation}
+    \label{fig:some_values_on_0_1_in_ternary_representation}
+  \end{figure*}
+
+  Now, observe that
+  \begin{align*}
+    C_1 &= [0, 1] \setminus \left( \frac{1}{3}, \frac{2}{3} \right) \\
+        &= \{ x \in [0, 1] : x = 0.x_1 x_2 x_3 \hdots, x_1 \neq 1 \},
+  \end{align*}
+  i.e. whichever $x \in [0, 1]$ with $x_1 = 1$ sits in $\left( \frac{1}{3},
+  \frac{2}{3} \right)$. Similarly,
+  \begin{equation*}
+    C_2 = \{ x \in [0, 1] : x = 0.x_1 x_2 x_3 \hdots, x_1 \neq 1, x_2 \neq 1 \}.
+  \end{equation*}
+  In general, we have that
+  \begin{equation*}
+    C_N = \{ x \in [0, 1] : x = 0.x_1 x_2 x_3 \hdots, x_i \neq 1,\, 1 \leq i \leq
+    N \}.
+  \end{equation*}
+  Therefore,
+  \begin{align*}
+    C &= \bigcap_{n=1}^{\infty} C_n \\
+      &= \{ x \in [0, 1] : x = 0.x_1 x_2 x_3 \hdots,\, x_n \neq 1, n \geq 1 \}
+      \\
+      &= \{ x \in [0, 1] : x = 0.x_1 x_2 x_3 \hdots,\, x_n \in \{0, 2\}, n \geq 1 \}
+  \end{align*}
+
+  Now, consider the bijection
+  \begin{equation*}
+    \phi : C \to [0, 1]
+  \end{equation*}
+  given by
+  \begin{equation*}
+    x = 0.x_1 x_2 x_3 \hdots \mapsto y = 0.y_1 y_2 y_3 \hdots,
+  \end{equation*}
+  where $x_n \in \{0, 2\}$, for $n \geq 1$, and $x$ is the ternary expansion,
+  while $y_n = \frac{x_n}{2}$ for each $n \geq 1$, and so $y$ is a binary
+  expansion. Then $\phi$ is a bijection between $C$ and $[0, 1]$, and therefore
+  \begin{equation*}
+    \abs{C} = \abs{[0, 1]} = \abs{\mathbb{R}} = c = 2^{\aleph_0}.
+  \end{equation*}
+\end{eg}
+
+\begin{note}
+  The lesson here is that the Lebesgue measure is not a measure on the
+  cardinality of the set. Rather, it measures the \hlimpo{distribution of
+  points} in the set.
+\end{note}
+
+% section lebesgue_measure_continued_2 (end)
+
+\section{Lebesgue Measurable Functions}%
+\label{sec:lebesgue_measurable_functions}
+% section lebesgue_measurable_functions
+
+\begin{note}
+  We used
+  \begin{equation*}
+    \mathfrak{M}(\mathbb{R}) = \{ E \subseteq \mathbb{R} \mid E \text{ is
+    measurable } \}
+  \end{equation*}
+  to denote the set of measurable subsets of $\mathbb{R}$.
+
+  In general, for $H \subseteq \mathbb{R}$, set shall denote by
+  $\mathfrak{M}(H)$ the collection of all Lebesgue measurable subsets of $H$,
+  i.e.
+  \begin{equation*}
+    \mathfrak{M}(H) = \{ E \subseteq H \mid E \in \mathfrak{M}(\mathbb{R}) \}.
+  \end{equation*}
+  In particular, for $E \in \mathfrak{M}(\mathbb{R})$, we also have
+  \begin{equation*}
+    \mathfrak{M}(E) = \{ F \subseteq E \mid F \in \mathfrak{M}(\mathbb{R}) \}.
+  \end{equation*}
+\end{note}
+
+\begin{ex}
+  Prove that the above $\mathfrak{M}(E)$ is a $\sigma$-algebra of sets.
+\end{ex}
+
+\begin{defn}[Lebesgue Measurable Function]\index{Lebesgue Measurable Function}\label{defn:lebesgue_measurable_function}
+  Let $E \in \mathfrak{M}(E)$ and $(X, d)$ a metric space. We say that a
+  function
+  \begin{equation*}
+    f : E \to X
+  \end{equation*}
+  is \hlnoteb{Lebesgue measurable} (or simply \hlnoteb{measurable}) if
+  \begin{equation*}
+    f^{-1}(G) :\coloneqq \{ x \in E : f(x) \in G \} \in \mathfrak{M}(E)
+  \end{equation*}
+  for every open set $G \subseteq X$.
+
+  We write
+  \begin{equation*}
+    \mathcal{L}(E, X) = \{ f : E \to X \mid f \text{ measurable } \}
+  \end{equation*}
+  for the set of measurable functions from $E$ to $X$.
+\end{defn}
+
+\begin{ex}
+  Show that we can equivalently define that a function $f$ is Lebesgue
+  measurable if
+  \begin{equation*}
+    f^{-1}(F) \in \mathfrak{M}(E)
+  \end{equation*}
+  for all closed subsets $F \subseteq X$.
+\end{ex}
+
+\begin{note}
+  Note that we required that the domain of the function is a measurable set in
+  \cref{defn:lebesgue_measurable_function}. Part of the reason is because we
+  want constant functions to be measurable, and this happens iff the domain of
+  the function is measurable \sidenote{\hlwarn{Why?}}.
+\end{note}
+
+\begin{propo}[Continuous Functions on a Measurable Set is Measurable]\label{propo:continuous_functions_on_a_measurable_set_is_measurable}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $(X, d)$ a metric space. If $f : E
+  \to X$ is continuous, then $f \in \mathcal{L}(E, X)$.
+\end{propo}
+
+\begin{proof}
+  Since $f$ is continuous in a metric space, it implies that for all open $G
+  \subseteq X$, $f^{-1}(G)$ is open in $E$ \sidenote{We say that $f^{-1}(G)$ is
+  \hlnotea{relatively open} in $E$.}. This means that $f^{-1}(G) = U_G \cap E$ 
+  for some open $U_G \subseteq \mathbb{R}$. Since $U_G$ is open, by
+  \cref{propo:some_lebesgue_measurable_sets}, $U_G \in
+  \mathfrak{M}(\mathbb{R})$. Since $E \in \mathfrak{M}(\mathbb{R})$, we have
+  that
+  \begin{equation*}
+    f^{-1}(G) = U_G \cap E \in \mathfrak{M}(E),
+  \end{equation*}
+  and so
+  \begin{equation*}
+    f \in \mathcal{L}(E, X).
+  \end{equation*}
+\end{proof}
+
+\begin{eg}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $H \subseteq E$. Consider the
+  characteristic function of $H$, which is
+  \begin{equation*}
+    \chi_H : E \to \mathbb{R} \text{ given by } x \mapsto \begin{cases}
+      1 & x \in H \\
+      0 & x \notin H
+    \end{cases}.
+  \end{equation*}
+  Let $G \subseteq \mathbb{R}$ be open. Then
+  \begin{equation*}
+    \chi_H^{-1}(G) = \begin{cases}
+      \emptyset & G \cap \{ 0, 1 \} = \emptyset \\
+      E & G \supseteq \{ 0, 1 \} \\
+      E \setminus H & G \cap \{ 0, 1 \} = \{ 0 \} \\
+      H & G \cap \{ 0, 1 \} = \{ 1 \}
+    \end{cases},
+  \end{equation*}
+  in which case we observe that all the possible outcomes are measurable subsets
+  of $\mathbb{R}$. Thus $\chi_H$ is measurable iff $H \in
+  \mathfrak{M}(\mathbb{R})$.
+\end{eg}
+
+\begin{propo}[Composition of a Continuous Function and a Measurable Function is Measurable]\label{propo:composition_of_a_continuous_function_and_a_measurable_function_is_measurable}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $(X, d_X),\, (Y, d_Y)$ be metric
+  spaces. Suppose that
+  \begin{equation*}
+    f : E \to X \text{ is measurable and } g : X \to Y \text{ is continuous}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    g \circ f : E \to Y \text{ is measurable}.
+  \end{equation*}
+\end{propo}
+
+\marginnote{
+  The idea is simple: $(gf)^{-1}(G) = f^{-1} g^{-1}(G)$ and continuity of $G$ 
+  means that $g^{-1}(G)$ is open in $X$.
+}
+\begin{proof}
+  Let $G \subseteq Y$ be open. Then since $g$ is continuous, we have that
+  \begin{equation*}
+    g^{-1}(G) \subseteq X \text{ is open}.
+  \end{equation*}
+  Then since $f$ measurable, we have that
+  \begin{equation*}
+    (g \circ f)^{-1}(G) = f^{-1}(g^{-1}(G)) \in \mathfrak{M}(E).
+  \end{equation*}
+  Thus $g \circ f \in \mathcal{L}(E, Y)$.
+\end{proof}
+
+\begin{eg}
+  Let $E \in \mathfrak{M}(E)$ and $f \in \mathcal{L}(E, \mathbb{K})$. Let $g :
+  \mathbb{K} \to \mathbb{R}$ be given by $z \mapsto \abs{z}$. Then $g$ is
+  continuous. By
+  \cref{propo:composition_of_a_continuous_function_and_a_measurable_function_is_measurable},
+  we have that
+  \begin{equation*}
+    g \circ f = \abs{f} \text{ is measurable}.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Note that the converse to the above is not true, i.e. that if we have that
+  $\abs{f}$ is measurable, it is not necessary that $f$ is not measurable.
+
+  Consider $E = \mathbb{R} = \mathbb{K}$. If we take $H \subseteq \mathbb{R}$ 
+  that is not measurable, which we know exists, and then consider the function
+  \begin{equation*}
+    f : E \to \mathbb{R} \text{ given by } f(x) = \begin{cases}
+      1 & x \in H \\
+      -1 & x \notin H
+    \end{cases},
+  \end{equation*}
+  which is constructed by summing up two characteristic functions over $H$ and
+  then minus 1. Then $\abs{f} = 1$, but
+  \begin{equation*}
+    f^{-1}(\{1\}) = H \notin \mathfrak{M}(\mathbb{R}).
+  \end{equation*}
+\end{eg}
+
+\begin{propo}[Component-wise Measurability]\label{propo:component_wise_measurability}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $f, g : E \to \mathbb{K}$. Then TFAE:
+  \begin{enumerate}
+    \item $f, g \in \mathcal{L}(E, \mathbb{K})$;
+    \item $h : E \to \mathbb{K}^2$ given by $x \mapsto (f(x), g(x))$ is
+      measurable.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$(2) \implies (1)$} \sidenote{Awareness about projective maps is a
+  plus here.} Let
+  \begin{gather*}
+    \pi_1 : \mathbb{K}^2 \to \mathbb{K} \text{ given by } (w, z) \mapsto w \\
+    \pi_2 : \mathbb{K}^2 \to \mathbb{K} \text{ given by } (w, z) \mapsto z
+  \end{gather*}
+  so that $\pi_1, \pi_2$ are continuous. Then by
+  \cref{propo:composition_of_a_continuous_function_and_a_measurable_function_is_measurable},
+  we have that
+  \begin{equation*}
+    \pi_1 \circ h = f \text{ and } \pi_2 \circ h = g
+  \end{equation*}
+  are both measurable.
+
+  \noindent
+  \hlbnoted{$(1) \implies (2)$} Let $G \subseteq \mathbb{K}^2$ be open. We can
+  write $G$ as a countable union of open sets \sidenote{If you are unsure about
+  this, think $\epsilon-\delta$.}, i.e.
+  \begin{equation*}
+    G = \bigcup_{n=1}^{\infty} A_n \times B_n,
+  \end{equation*}
+  where $A_n, B_n \subseteq \mathbb{K}$ are open. Then
+  \begin{align*}
+    h^{-1}(G) &= h^{-1} \left( \bigcup_{n=1}^{\infty} A_n \times B_n \right) \\
+              &= \bigcup_{n=1}^{\infty} \underbrace{f^{-1}(A_n)}_{\in
+                \mathfrak{M}(\mathbb{K})} \cap \underbrace{g^{-1}(B_n)}_{\in
+                \mathfrak{M}(\mathbb{K})} \in \mathfrak{M}(\mathbb{K})
+  \end{align*}
+  Thus $h \in \mathcal{L}(E, \mathbb{K}^2)$.
+\end{proof}
+
+\begin{propo}[$\mathcal{L}(E, \mathbb{K})$ is a Unital Algebra]\label{propo:_l_e_k_is_a_unital_algebra}
+  Let $E \in \mathfrak{M}(\mathbb{R})$. Then $\mathcal{L}(E, \mathbb{K})$ is a
+  \hldefn{unital algebra}, i.e. if $f, g \in \mathcal{L}(E, \mathbb{K})$, then
+  \begin{enumerate}
+    \item $f + g \in \mathcal{L}(E, \mathbb{K})$;
+    \item $fg \in \mathcal{L}(E, \mathbb{K})$ \sidenote{Here, it's
+      multiplication of two functions, not compositions};
+    \item $g(x) \neq 0,\, \forall x \in E \implies \frac{f}{g} \in
+      \mathcal{L}(E, \mathbb{K})$; and
+    \item if $h : E \to \mathbb{K}$ is constant, then $h \in \mathcal{L}(E,
+      \mathbb{K})$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  We shall make use of this clever trick \sidenote{"Clever trick" = "Trick you
+  should learn".}. Let $\mu : E \to \mathbb{K}^2$ given by $x \mapsto (f(x),
+  g(x))$. Note that since $f, g \in \mathcal{L}(E, \mathbb{K})$, by
+  \cref{propo:component_wise_measurability}, $\mu \in \mathcal{L}(E,
+  \mathbb{K}^2)$.
+
+  \begin{enumerate}
+    \item Consider the function
+      \begin{equation*}
+        \sigma : \mathbb{K}^2 \to \mathbb{K} \text{ given by } (w, z) \mapsto w
+        + z.
+      \end{equation*}
+      It is clear that $\sigma$ is continuous. Then
+      \begin{equation*}
+        \sigma \circ \mu : x \mapsto f(x) + g(x)
+      \end{equation*}
+      is measurable by
+      \cref{propo:composition_of_a_continuous_function_and_a_measurable_function_is_measurable}.
+
+    \item Consider the function
+      \begin{equation*}
+        \sigma : \mathbb{K}^2 \to \mathbb{K} \text{ given by } (w, z) \mapsto
+        wz.
+      \end{equation*}
+      Again, we see that $\sigma$ is continuous. Then
+      \begin{equation*}
+        \sigma \circ \mu : x \mapsto f(x)g(x)
+      \end{equation*}
+      is measurable by
+      \cref{propo:composition_of_a_continuous_function_and_a_measurable_function_is_measurable}.
+
+    \item Consider the function
+      \begin{equation*}
+        \sigma : \mathbb{K} \times (\mathbb{K} \setminus \{0\}) \to \mathbb{K}
+        \text{ given by } (w, z) \mapsto \frac{w}{z}.
+      \end{equation*}
+      Again, $\sigma$ is continuous. Thus
+      \begin{equation*}
+        \sigma \circ \mu : x \mapsto \frac{f(x)}{g(x)}
+      \end{equation*}
+      is measurable by
+      \cref{propo:composition_of_a_continuous_function_and_a_measurable_function_is_measurable}.
+
+    \item Suppose $h : E \to \mathbb{K}$ is a constant, and we have $h(x) = \alpha_0$ 
+      for all $x \in E$. Then for any $G \subseteq \mathbb{K}$ that is open, we
+      have that
+      \begin{equation*}
+        h^{-1}(G) = \begin{cases}
+          \emptyset & a_0 \notin G \\
+          E & a_0 \in G
+        \end{cases},
+      \end{equation*}
+      both of which are measurable sets. Thus $h$ is indeed measurable.
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  Note that $(\mathbb{C}, d)$, where $d(w, z) = \abs{w - z}$, is a metric space.
+  Moreover, the map
+  \begin{equation*}
+    \gamma : \mathbb{C} \to \mathbb{R}^2 \text{ given by } x + iy \mapsto (x,
+    y),
+  \end{equation*}
+  where $x, y \in \mathbb{R}$ is a homeomorphism, which, in particular, is
+  continuous. Then given a $E \in \mathfrak{M}(\mathbb{R})$ with a measurable $f
+  \in E \to \mathbb{C}$, then
+  \begin{equation*}
+    \gamma \circ f : E \to \mathbb{R}^2 \in \mathcal{L}(E, \mathbb{R}^2).
+  \end{equation*}
+  Also, notice that
+  \begin{equation*}
+    \gamma \circ f = (\Re f, \Im f).
+  \end{equation*}
+  By \cref{propo:component_wise_measurability}, $\Re f, \Im f \in \mathcal{L}(E,
+  \mathbb{R})$. This also means that
+  \begin{equation*}
+    h : x \mapsto (\Re f(x), \Im f(x)) \in \mathcal{L}(E, \mathbb{R}^2).
+  \end{equation*}
+
+  Conversely, if $\Re f, \Im f \in \mathcal{L}(E, \mathbb{R})$, then
+  \begin{equation*}
+    f = \gamma^{-1} \circ h \in \mathcal{L}(E, \mathbb{C})
+  \end{equation*}
+  by \cref{propo:component_wise_measurability}.
+
+  This means that a \hlimpo{complex-valued function is measurable iff its real
+  and imaginary parts are both measurable}. Consequently, to study about
+  complex-valued functions, it is sufficient for us to study about real-valued
+  functions.
+\end{remark}
+
+\begin{propo}[Measurable Function Broken Down into an Absolute Part and a Scaling Part]\label{propo:measurable_function_broken_down_into_an_absolute_part_and_a_scaling_part}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and suppose that $f : E \to \mathbb{C}$ 
+  is measurable. Then there exists a measurable function $\Theta : E \to
+  \mathbb{T}$, where
+  \begin{equation*}
+    \mathbb{T} \coloneqq \{ z \in \mathbb{C} \mid \abs{z} = 1 \},
+  \end{equation*}
+  such that
+  \begin{equation*}
+    f = \Theta \cdot \abs{f}.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Since $\{ 0 \} \subseteq \mathbb{C}$ is closed and $f$ is measurable, we have
+  that
+  \begin{equation*}
+    K \coloneqq f^{-1}(\{0\}) \in \mathfrak{M}(E).
+  \end{equation*}
+  Since $\chi_K$ is a measurable function, we have that $f + \chi_K$ is also
+  measurable (cf. \cref{propo:_l_e_k_is_a_unital_algebra}).
+
+  \noindent
+  \hlbnoted{Claim: $f + \chi_K \neq 0$ over $E$.}
+  \begin{itemize}
+    \item If $x \in E$ such that $f(x) = 0$, then $x \in K$, and so $\chi_K(x) =
+      1$.
+    \item If $x \in E$ such that $\chi_K(x) = 0$, then $x \notin K$, which means
+      $f(x) \neq 0$.
+  \end{itemize}
+
+  Therefore, consider the function
+  \begin{equation*}
+    \Theta = \frac{f + \chi_K}{\abs{f + \chi_K}} : E \to \mathbb{T}.
+  \end{equation*}
+  By \cref{propo:_l_e_k_is_a_unital_algebra}, $\Theta$ is measurable, and
+  clearly
+  \begin{equation*}
+    f = \Theta \cdot \abs{f}.
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  As of now, given a set $E \in \mathfrak{M}(\mathbb{R})$, to verify that a
+  function $f \in \mathcal{L}(E, \mathbb{R})$, we need to check that
+  \begin{equation*}
+    \forall G \subseteq \mathbb{R} \text{ open },\, f^{-1}(G) \in
+    \mathfrak{M}(E).
+  \end{equation*}
+  Since there is an obscene amount of open (respectively closed) subsets of
+  $\mathbb{R}$, we want to be able to reduce our workload. This shall be the
+  first thing we do in the next lecture.
+\end{remark}
+
+% section lebesgue_measurable_functions (end)
+
+% chapter lecture_5_may_21st_2019 (end)
 
 \appendix
 
