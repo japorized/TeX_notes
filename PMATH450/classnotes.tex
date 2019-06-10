@@ -19,6 +19,7 @@
 \newtheorem*{culture}{\faWineGlass Culture}
 
 \newcommand{\Bor}{\mathfrak{Bor}}
+\DeclareMathOperator{\SIMP}{SIMP}
 
 % disjoint union
 \makeatletter
@@ -2838,7 +2839,7 @@ construct an \hlnotea{uncountable set} $C$ that has measure zero.
   \end{equation*}
 \end{proof}
 
-\begin{eg}
+\begin{eg}\label{eg:characteristic_function_is_measurable_over_a_measurable_set}
   Let $E \in \mathfrak{M}(\mathbb{R})$ and $H \subseteq E$. Consider the
   characteristic function of $H$, which is
   \begin{equation*}
@@ -3031,7 +3032,7 @@ construct an \hlnotea{uncountable set} $C$ that has measure zero.
   \end{enumerate}
 \end{proof}
 
-\begin{remark}
+\begin{remark}\label{remark:about_complex_val_fns}
   Note that $(\mathbb{C}, d)$, where $d(w, z) = \abs{w - z}$, is a metric space.
   Moreover, the map
   \begin{equation*}
@@ -3123,6 +3124,486 @@ construct an \hlnotea{uncountable set} $C$ that has measure zero.
 % section lebesgue_measurable_functions (end)
 
 % chapter lecture_5_may_21st_2019 (end)
+
+\chapter{Lecture 6 May 23rd 2019}%
+\label{chp:lecture_6_may_23rd_2019}
+% chapter lecture_6_may_23rd_2019
+
+\section{Lebesgue Measurable Functions (Continued)}%
+\label{sec:lebesgue_measurable_functions_continued}
+% section lebesgue_measurable_functions_continued
+
+\begin{propo}[Function Measurability Check]\label{propo:function_measurability_check}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $f : E \to \mathbb{R}$ be a function.
+  TFAE:
+  \begin{enumerate}
+    \item $f$ is measurable, i.e. $\forall G \subseteq \mathbb{R}$ that is open,
+      $ f^{-1}(G) \in \mathfrak{M}(E)$.
+    \item $\forall a \in \mathbb{R}$, $f^{-1}((a, \infty)) \in \mathfrak{M}(E)$.
+    \item $\forall b \in \mathbb{R}$, $f^{-1}((-\infty, b]) \in
+      \mathfrak{M}(E)$.
+    \item $\forall b \in \mathbb{R}$, $f^{-1}((-\infty, b)) \in
+      \mathfrak{M}(E)$.
+    \item $\forall a \in \mathbb{R}$, $f^{-1}([a, \infty)) \in \mathfrak{M}(E)$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$(1) \implies (2)$} This is trivially true since $\forall a \in
+  \mathbb{R}$, $(a, \infty)$ is open in $\mathbb{R}$, and so since $f$ is
+  measurable, we must have that $f^{-1}((a, \infty)) \in \mathfrak{M}(E)$.
+
+  \noindent
+  \hlbnoted{$(2) \implies (3)$} Notice that $\forall b \in \mathbb{R}$,
+  \begin{equation*}
+    f^{-1}((-\infty, b]) = f^{-1}(\mathbb{R} \setminus (b, \infty)) = E
+    \setminus f^{-1}((b, \infty))
+  \end{equation*}
+  and $f^{-1}((b, \infty)) \in \mathfrak{M}(E)$ by assumption. Since
+  $\mathfrak{M}(E)$ is a $\sigma$-algebra, $f^{-1}((-\infty, b]) \in
+  \mathfrak{M}(E)$.
+
+  \noindent
+  \hlbnoted{$(3) \implies (4)$} Notice that $\forall b \in \mathbb{R}$,
+  \begin{equation*}
+    f^{-1}((-\infty, b)) = \bigcup_{n=1}^{\infty} f^{-1}\left(\left(-\infty, b -
+      \frac{1}{n}\right]\right),
+  \end{equation*}
+  and by assumption, for each $n \geq 1$, $f^{-1}\left( \left( -\infty, b -
+  \frac{1}{n} \right] \right) \in \mathfrak{M}(E)$. It follows that
+  $f^{-1}((-\infty, b)) \in \mathfrak{M}(E)$.
+
+  \noindent
+  \hlbnoted{$(4) \implies (5)$} Observe that $\forall a \in \mathbb{R}$, we have
+  \begin{equation*}
+    f^{-1}([a, \infty)) = f^{-1}(\mathbb{R}\setminus(-\infty, a)) \in
+    \mathfrak{M}(E)
+  \end{equation*}
+  by assumption.
+
+  \noindent
+  \hlbnoted{$(5) \implies (1)$} 
+  \sidenote{This uses the same idea as in
+  \cref{propo:some_lebesgue_measurable_sets}.} Notice that $\forall a \in
+  \mathbb{R}$,
+  \begin{align*}
+    f^{-1}((a, \infty)) &= \bigcup_{n=1}^{\infty} f^{-1} \left( \left[ a +
+    \frac{1}{n}, \infty \right) \right) \in \mathfrak{M}(E)
+  \end{align*}
+  by assumption. Furthermore, we have that $\forall b \in \mathbb{R}$,
+  \begin{equation*}
+    f^{-1}((-\infty, b)) = E \setminus f^{-1}([b, \infty)) \in \mathfrak{M}(E),
+  \end{equation*}
+  also by assumption. Thus
+  \begin{equation*}
+    f^{-1}((a, b)) = f^{-1}((a, \infty)) \cap f^{-1}((-\infty, b)) \in
+    \mathfrak{M}(E),
+  \end{equation*}
+  for any $a, b \in \mathbb{R}$.
+
+  Since for any open $G \subseteq \mathbb{R}$ can be written as a countable
+  union of open intervals, i.e.
+  \begin{equation*}
+    G = \bigcup_{n=1}^{\infty} I_n,
+  \end{equation*}
+  where each $I_n$ is an open interval, we have that
+  \begin{equation*}
+    f^{-1}(G) = \bigcup_{n=1}^{\infty} f^{-1}(I_n) \in \mathfrak{M}(E).
+  \end{equation*}
+  Thus $f$ is measurable.
+\end{proof}
+
+The proof of the following result is left to A2.
+
+\begin{crly}[Measurability Check on the Borel Set]\label{crly:measurability_check_on_the_borel_set}
+  If $E \in \mathfrak{M}(\mathbb{R})$ and $f : E \to \mathbb{R}$ is a function,
+  then TFAE:
+  \begin{enumerate}
+    \item $f$ is measurable.
+    \item $\forall B \in \Bor(\mathbb{R})$, $f^{-1}(B) \in \mathfrak{M}(E)$.
+  \end{enumerate}
+\end{crly}
+
+\begin{remark}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $f : E \to \mathbb{R}$. Define
+  \begin{gather*}
+    f^+(x) = \max \{ f(x), 0 \},\, x \in E \\
+    f^-(x) = \max \{ -f(x), 0\},\, x \in E
+  \end{gather*}
+  Then $f^+, f^- \geq 0$, and
+  \begin{equation*}
+    f = f^+ - f^- \text{ and } \abs{f} = f^+ + f^-.
+  \end{equation*}
+  Moreover,
+  \begin{equation*}
+    f^+ = \frac{\abs{f} + f}{2} \text{ and } f^- = \frac{\abs{f} - f}{2},
+  \end{equation*}
+  and so both $f^+$ and $f^-$ are measurable.
+
+  By \cref{remark:about_complex_val_fns}, every complex-valued measurable function is a
+  linear combination of 4 non-negative, real-valued measurable functions.
+\end{remark}
+
+\newthought{We shall} now examine a number of results dealing with pointwise
+limits of sequences of measurable, real-valued functions. We shall include the
+case where the limit of a given point is allowed to be an \hlnotea{extended real
+number}; i.e. the sequence diverges either to $\infty$ or $-\infty$.
+
+\begin{defn}[Extended Real Numbers]\index{Extended Real Numbers}\label{defn:extended_real_numbers}
+  We define the \hlnoteb{extended real numbers} to be the set
+  \begin{equation*}
+    \overline{\mathbb{R}} \coloneqq \mathbb{R} \cup \{ -\infty, \infty \}.
+  \end{equation*}
+  We also write $\overline{\mathbb{R}} = [-\infty, \infty]$.
+
+  By convention, we shall define
+  \begin{itemize}
+    \item $\infty + \infty = \infty$, $-\infty - \infty = -\infty$;
+    \item $\forall \alpha \in \mathbb{R} \cup \{ \infty \}$, $\alpha + \infty =
+      \infty = \infty + \alpha$;
+    \item $\forall \alpha \in \mathbb{R}$, $\alpha + (-\infty) = -\infty =
+      -\infty + \alpha$;
+    \item $\forall 0 < \alpha \in \overline{\mathbb{R}}$, $a \cdot \infty =
+      \infty \cdot \alpha = (-\infty) \cdot (-\alpha) = (-\alpha) \cdot
+      (-\infty) = \infty$;
+    \item $\forall \alpha < 0 \in \overline{\mathbb{R}}$, $a \cdot \infty =
+      \infty \cdot \alpha = (-\infty) \cdot (-\alpha) = (-\alpha) \cdot
+      (-\infty) = -\infty$; and
+    \item $0 = 0 \cdot \infty = \infty \cdot 0 = 0 \cdot (-\infty) = (-\infty)
+      \cdot 0$.
+  \end{itemize}
+\end{defn}
+
+\begin{warning}
+  Notice that we do not define $\infty - \infty$ and $-\infty + \infty$.
+\end{warning}
+
+\begin{note}
+  While the space of extended real numbers is useful for treating
+  measure-theoretic and analytic properties of sequences of functions, it has
+  poor algebraic properties. In particular, it is no longer a vector space,
+  since $\infty$ and $-\infty$ do not have their additive inverses.
+\end{note}
+
+\begin{defn}[Extended Real-Valued Function]\index{Extended Real-Valued Function}\label{defn:extended_real_valued_function}
+  Given $H \subseteq \mathbb{R}$, the function $f : H \to \overline{\mathbb{R}}$ 
+  is called an \hlnoteb{extended real-valued function}.
+\end{defn}
+
+\begin{defn}[Measurable Extended Real-Valued Function]\index{Measurable Function}\label{defn:measurable_extended_real_valued_function}
+  If $E \in \mathfrak{M}(\mathbb{R})$ and $f : E \to \overline{\mathbb{R}}$ is
+  an extended real-valued function, we say that $f$ is \hlnoteb{Lebesgue
+  measurable} (or simply \hlnoteb{measurable}) if
+  \begin{enumerate}
+    \item $\forall G \subseteq \mathbb{R}$ open, $f^{-1}(G) \in
+      \mathfrak{M}(E)$ ; annd
+    \item $f^{-1}(\{-\infty\}), f^{-1}(\{\infty\}) \in \mathfrak{M}(E)$.
+  \end{enumerate}
+
+  We denote the set of Lebesgue measurable extended real-valued functions on $E$ 
+  by
+  \begin{equation*}
+    \mathcal{L}(E, \overline{\mathbb{R}}) = \{ f : E \to \overline{\mathbb{R}} :
+    f \text{ is measurable } \}.
+  \end{equation*}
+  Since we shall often refer to only the non-negative elements of
+  $\mathcal{L}(E, \overline{\mathbb{R}})$, we also define the notation
+  \begin{equation*}
+    \mathcal{L}(E, [0, \infty]) = \{ f \in \mathcal{L}(E, \overline{\mathbb{R}})
+    : \forall x \in E, \, 0 \leq f(x) \}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Note that we can also replace the first condition of Lebesgue measurability of
+  extended real-valued functions by
+  \begin{equation*}
+    \forall F \subseteq \mathbb{R} \text{ closed },\, f^{-1}(F) \in
+    \mathfrak{M}(E).
+  \end{equation*}
+\end{note}
+
+Just as in the case with regular real-valued measurable functions, we have the
+following shortcuts in testing whether an extended real-valued function is
+measurable.
+
+\begin{notation}
+  We write
+  \begin{itemize}
+    \item $(a, \infty] = (a, \infty) \cup \{ \infty \}$; and
+    \item $[-\infty, b) = (-\infty, b) \cup \{ -\infty \}$,
+  \end{itemize}
+  for all $a, b \in \mathbb{R}$.
+\end{notation}
+
+\begin{propo}[Measurability Check for Extended Real-Valued Functions]\label{propo:measurability_check_for_extended_real_valued_functions}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and suppose $f : E \to
+  \overline{\mathbb{R}}$ is a function. Then TFAE:
+  \begin{enumerate}
+    \item $f$ is Lebesgue measurable.
+    \item $\forall a \in \mathbb{R}$, $f^{-1}((a, \infty]) \in \mathfrak{M}(E)$.
+    \item $\forall b \in \mathbb{R}$, $f^{-1}([-\infty, b)) \in
+      \mathfrak{M}(E)$.
+  \end{enumerate}
+\end{propo}
+
+\begin{ex}
+  Prove \cref{propo:measurability_check_for_extended_real_valued_functions}.
+\end{ex}
+
+\begin{propo}[Measurability of Limits and Extremas]\label{propo:measurability_of_limits_and_extremas}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and suppose that $(f_n)_{n=1}^{\infty}$ 
+  is a sequence in $\mathcal{L}(E, \overline{\mathbb{R}})$. Then the following
+  extended real-valued functions are also measurable:
+  \begin{enumerate}
+    \item $g_1 \coloneqq \sup_{n \geq 1} f_n$;
+    \item $g_2 \coloneqq \inf_{n \geq 1} f_n$;
+    \item $g_3 \coloneqq \limsup_{n \geq 1} f_n$; and
+    \item $g_4 \coloneqq \liminf_{n \geq 1} f_n$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Let $a \in \mathbb{R}$. Then
+      \begin{equation*}
+        g_1^{-1}((a, \infty]) = \bigcup_{n \geq 1} \underbrace{f_n^{-1} ((a,
+        \infty])}_{\in \mathfrak{M}(E)} \in \mathfrak{M}(E).
+      \end{equation*}
+      It follows from
+      \cref{propo:measurability_check_for_extended_real_valued_functions} that
+      $g_1 \in \mathcal{L}(E, \overline{\mathbb{R}})$.
+
+    \item \sidenote{\hlwarn{Both notes and lecture notes used union, but should
+      it not be intersection?}} For any $b \in \mathbb{R}$, we have
+      \begin{equation*}
+        g_2^{-1}([-\infty, b)) = \bigcap_{n \geq 1} f_n^{-1}([-\infty, b)) \in
+        \mathfrak{M}(E).
+      \end{equation*}
+      Thus by
+      \cref{propo:measurability_check_for_extended_real_valued_functions}, $g_2
+      \in \mathcal{L}(E, \overline{\mathbb{R}})$.
+
+    \item Let $h_n = \sup_{k \geq n} f_n$ for each $n \geq 1$. Then by part
+      $(1)$, $h_n \in \mathcal{L}(E, \overline{\mathbb{R}})$ for each $n \geq
+      1$. Also, notice that $h_1 \geq h_2 \geq h_3 \geq \hdots$, i.e. $\{ h_n
+      \}_{n=1}^{\infty}$ is an increasing sequence of functions. Then by part
+      $(2)$,
+      \begin{equation*}
+        g_3 = \lim_{n \to \infty} h_n = \inf_{n \geq 1} h_n \in \mathcal{L}(E,
+        \overline{\mathbb{R}}).
+      \end{equation*}
+
+    \item Let $h_n = \inf_{k \geq n} f_n$ for each $n \geq 1$. Then by part
+      $(2)$, each $h_n \in \mathcal{L}(E, \overline{\mathbb{R}})$. Also, $\{ h_n
+      \}_{n=1}^{\infty}$ is a decreasing sequence of functions. Then by part
+      $(1)$, we have that
+      \begin{equation*}
+        g_4 = \lim_{n \to \infty} h_n = \sup_{n \geq 1} h_n \in \mathcal{L}(E,
+        \overline{\mathbb{R}}).
+      \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{crly}[Extended Limit of Real-Valued Functions]\label{crly:extended_limit_of_real_valued_functions}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and suppose that $(f_n)_{n=1}^{\infty}$
+  is a sequence of real-valued functions such that $f(x) = \lim_{n \to \infty}
+  f_n(x)$ exists as an extended real-valued number for all $x \in E$. Then
+  \begin{equation*}
+    f \in \mathcal{L}(E, \overline{\mathbb{R}}).
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  By A2, when the said limit exists, we have that
+  \begin{equation*}
+    f = \limsup_{n \geq 1} f_n = \liminf_{n \geq 1} f_n,
+  \end{equation*}
+  and so $f \in \mathcal{L}(E, \overline{\mathbb{R}})$ by
+  \cref{propo:measurability_of_limits_and_extremas}.
+\end{proof}
+
+\begin{defn}[Simple Functions]\index{Simple Functions}\label{defn:simple_functions}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $\phi : E \to \overline{\mathbb{R}}$.
+  We say that $\phi$ is \hlnoteb{simple} if $\Range \phi$ is finite.
+  Furthermore, we denote the set of all simple, real-valued, \hlimpo{measurable}
+  functions on $E$ as
+  \begin{equation*}
+    \SIMP(E, \mathbb{R}).
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Standard Form]\index{Standard Form}\label{defn:standard_form}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $\phi : E \to \overline{\mathbb{R}}$.
+  Suppose that
+  \begin{equation*}
+    \Range \phi = \{ \alpha_1 < \alpha_2 < \hdots < a_N \},
+  \end{equation*}
+  and set
+  \begin{equation*}
+    E_n \coloneqq \phi^{-1}(\{\alpha_n\}), \text{ for } 1 \leq n \leq N.
+  \end{equation*}
+  We say that
+  \begin{equation*}
+    \phi = \sum_{n=1}^{N} \alpha_n \chi_{E_n}
+  \end{equation*}
+  is the \hlnoteb{standard form} of $\phi$.
+\end{defn}
+
+\begin{propo}[Measurability of Simple Functions with Measurable Support]\label{propo:measurability_of_simple_functions_with_measurable_support}
+  Let $E \in \mathfrak{M}(\mathbb{R})$. Suppose $\phi : E \to
+  \overline{\mathbb{R}}$ is simple with
+  \begin{equation*}
+    \Range \phi = \{ \alpha_1 < \alpha_2 < \hdots < \alpha_N \}.
+  \end{equation*}
+  TFAE:
+  \begin{enumerate}
+    \item $\phi$ is measurable.
+    \item If $\phi = \sum_{n=1}^{N} \alpha_n \chi_{E_n}$ is the standard form of
+      $\phi$, then $E_n \in \mathfrak{M}(E)$, for all $n \in \{1, \ldots, N \}$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$(\implies)$} Since $\phi$ is measurable, notice that for each $n
+  \in \{1, \ldots, N\}$,
+  \begin{itemize}
+    \item if $\alpha_n \in \mathbb{R}$, then $\{ \alpha_n \}$ is closed, and so
+      \begin{equation*}
+        E = \phi^{-1}(\{\alpha_n\}) \in \mathfrak{M}(E); \text{ and }
+      \end{equation*}
+    \item if $\alpha_1 = -\infty$, and similarly if $\alpha_N = \infty$, then by
+      \cref{defn:measurable_extended_real_valued_function},
+      $\phi^{-1}(\{\alpha_1\}), \phi^{-1}(\{\alpha_N\}) \in \mathfrak{M}(E)$.
+  \end{itemize}
+
+  \noindent
+  \hlbnoted{$(\impliedby)$} By
+  \cref{eg:characteristic_function_is_measurable_over_a_measurable_set},
+  $\forall n \geq 1,\, E_n \in \mathfrak{M}(E) \implies \forall n \geq 0
+  \chi_{E_n} \in \mathfrak{M}(E)$. Notice that $\forall a \in \mathbb{R}$,
+  \begin{equation*}
+    \phi^{-1}((a, \infty]) = \bigcup \{ E_n : a < \alpha_n \},
+  \end{equation*}
+  and so $\phi^{-1}((a, \infty])$ is a finite (or empty) union of measurable
+  sets, and is hence measurable.
+\end{proof}
+
+\newthought{The standard form} is not a unique way of expressing a simple
+function as a finite linear combination of characteristic functions.
+
+\begin{eg}
+  Consider the function $\phi : \mathbb{R} \to \mathbb{R}$ given by
+  \begin{equation*}
+    \phi = \chi_{\mathbb{Q}} + 9 \chi_{[2, 6]}.
+  \end{equation*}
+  Then $\Range \phi = \{ 0, 1, 9, 10 \}$; we see that
+  \begin{equation*}
+    x \mapsto \begin{cases}
+      0  & x \in \mathbb{Q}^C \cap [2, 6]^C \\
+      1  & x \in \mathbb{Q} \cap [2, 6]^C \\
+      9  & x \in \mathbb{Q}^C \cap [2, 6] \\
+      10 & x \in \mathbb{Q} \cap [2, 6]
+    \end{cases}.
+  \end{equation*}
+  Then we may write $\phi$ as
+  \begin{equation*}
+    \phi = 0 \chi_{\mathbb{Q}^C \cap [2, 6]^C} + 1 \chi_{\mathbb{Q} \cap [2,
+    6]^C} + 9 \chi_{\mathbb{Q}^C \cap [2, 6]} + 10 \chi_{\mathbb{Q} \cap [2,
+    6]}.
+  \end{equation*}
+\end{eg}
+
+\begin{defn}[Real Cone]\index{Real Cone}\label{defn:real_cone}
+  Let $\mathcal{V}$ be a vector space over $\mathbb{K}$. A subset $C \subseteq
+  \mathcal{V}$ is said to be a \hlnoteb{(real) cone} is
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2, 0) -- (2, 0);
+      \draw[->] (0, -2) -- (0, 2);
+      \draw[fill=blue!30!background] (2, 1) -- (0, 0) -- (1, 2)
+        node[right=10pt] {$C$};
+      \draw[fill=blue!15!background] (-1, -2) -- (0, 0) -- (-2, -1)
+        node[below=10pt] {$-C$ };
+    \end{tikzpicture}
+    \caption{Typical figure of a cone}\label{fig:typical_figure_of_a_cone}
+  \end{marginfigure}
+  \begin{enumerate}
+    \item $C \cap -C = \{ 0 \}$, where $-C = \{ - w : w \in C \}$; and
+    \item $y, z \in C$ and $0 \leq \kappa \in \mathbb{R}$ imply that
+      \begin{equation*}
+        \kappa y + z \in C.
+      \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+\begin{eg}
+  \begin{enumerate}
+    \item Let $\mathcal{V} = \mathbb{R}^3$ and
+      \begin{equation*}
+        C = \{ (x, y, z) \in \mathbb{R}^3 : 0 \leq x, y, z \}.
+      \end{equation*}
+      Then $C$ is a (real) cone.
+    \item Let $\mathcal{V} = \mathbb{C}$ and 
+      \begin{equation*}
+        C = \left\{ w \in \mathbb{C} : w = re^{i\theta},\, \frac{\pi}{6} \leq
+        \theta \leq \frac{2\pi}{6},\, 0 \leq r < \infty \right\}.
+      \end{equation*}
+      The $C$ is a cone in $\mathbb{C}$. Note that in both the above examples,
+      $C$ is not closed.
+    \item Let $\mathcal{V} = \mathcal{C}([0, 1], \mathbb{C})$, and
+      \begin{equation*}
+        C = \left\{ f \in \mathcal{V} : 0 \leq f(x),\, \forall x \in [0, 1]
+        \right\},
+      \end{equation*}
+      where we note that the condition means that we only look at those
+      functions that return real positive values. Then $C$ is a (real) cone in
+      $\mathcal{V}$.
+  \end{enumerate}
+\end{eg}
+
+\begin{ex}
+  Show that $\SIMP(E, \mathbb{R})$ is an
+  \hyperref[defn:algebra_of_sets]{algebra}, and hence a vector space over
+  $\mathbb{R}$.
+\end{ex}
+
+\begin{remark}
+  \begin{enumerate}
+    \item Note that
+      \begin{equation*}
+        \SIMP(E, \overline{\mathbb{R}}) = \{ f : E \to \overline{\mathbb{R}} : f
+        \text{ is simple and measurable } \}.
+      \end{equation*}
+      is not a vector space. In fact, it is neither a field nor a ring.
+    \item We shall adopt the following notation:
+      \begin{equation*}
+        \SIMP(E, [0, \infty)) \coloneqq \left\{ \phi \in \SIMP(E, \mathbb{R}) :
+        0 \leq \phi(x) \text{ for all } x \in E \right\}.
+      \end{equation*}
+      Observe that this is a real cone in $\SIMP(E, \mathbb{R})$.
+  \end{enumerate}
+\end{remark}
+
+In A3, we will show the following proposition.
+
+\begin{propo}[Increasing Sequence of Simple Functions that Converges to a Measurable Function]\label{propo:increasing_sequence_of_simple_functions_that_converges_to_a_measurable_function}
+  Let $E \in \mathfrak{M}(E)$ and $f \in \mathcal{L}(E, [0, \infty])$. Then
+  there exists an increasing sequence
+  \begin{equation*}
+    \phi_1 \leq \phi_2 \leq \phi_3 \leq \hdots \leq f
+  \end{equation*}
+  of simple, real-valued functions $\phi_n$ such that
+  \begin{equation*}
+    f(x) = \lim_{n \to \infty} \phi_n(x)
+  \end{equation*}
+  for all $x \in E$.
+\end{propo}
+
+% section lebesgue_measurable_functions_continued (end)
+
+% chapter lecture_6_may_23rd_2019 (end)
 
 \appendix
 

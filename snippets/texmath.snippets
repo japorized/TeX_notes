@@ -288,4 +288,89 @@ snip.rv = eval('latex(' + match.group(1).replace('\\', '') \
 `
 endsnippet
 
+# =====
+#	 Actuarial
+# =====
+# Actuarial symbols has the schematic form of
+# (I)(II)S(III)(IV), where
+# I   - lower left
+# II  - upper left
+# III - lower right
+# IV  - upper left
+# These snippets are meant to be used with
+# the actuarialsymbol package
+
+priority 10
+context "math()"
+snippet '(?<!\\)angl' "angle notation" riA
+\\angl{$1}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?<!\\)angl{(([a-z0-9]+(\+|\-)*)*)}' "angle notation" wrA
+\\angl{`!p snip.rv = match.group(1)`}
+endsnippet
+
+# advanced
+context "math()"
+snippet '1p{(\[{0,1}[a-z0-9]+\]{0,1}((\+|\-)[a-z0-9]+)*)}' "survival" wrA
+\\px{`!p snip.rv = match.group(1)`}
+endsnippet
+
+context "math()"
+snippet '1q{(\[{0,1}[a-z0-9]+\]{0,1}((\+|\-)[a-z0-9]+)*)}' "mortality" wrA
+\\qx{`!p snip.rv = match.group(1)`}
+endsnippet
+
+context "math()"
+snippet '(?<!\\){([a-z0-9]+((\+|\-)[a-z0-9]+)*\|{0,1}([a-z0-9]+(\+|\-)*)*)}p{(\[{0,1}[a-z0-9]+\]{0,1}((\+|\-)[a-z0-9]+)*)}' "survival" wrA
+\\px[`!p snip.rv = match.group(1)`]{`!p snip.rv = match.group(6)`}
+endsnippet
+
+context "math()"
+snippet '(?<!\\){([a-z0-9]+((\+|\-)[a-z0-9]+)*\|{0,1}([a-z0-9]+(\+|\-)*)*)}q{(\[{0,1}[a-z0-9]+\]{0,1}((\+|\-)[a-z0-9]+)*)}' "mortality" wrA
+\\qx[`!p snip.rv = match.group(1)`]{`!p snip.rv = match.group(6)`}
+endsnippet
+
+context "math()"
+snippet '(?<!\\){([a-z0-9]+|([a-z0-9]+(\+|\-))*[a-z0-9]+)}E' "pure endowment" wrA
+\\Ex[`!p snip.rv = match.group(1)`]{$1}$0
+endsnippet
+
+context "math()"
+snippet '(?<!\\)A{(\[{0,1}[a-z0-9]+\]{0,1}((\+|\-)[a-z0-9]+)*)}' "discrete insurance" wrA
+\\Ax{`!p snip.rv = match.group(1)`$1}$0
+endsnippet
+
+context "math()"
+snippet '(?<!\\)A\*{(\[{0,1}[a-z0-9]+\]{0,1}((\+|\-)[a-z0-9]+)*)}' "cts ins" wrA
+\\Ax*{`!p snip.rv = match.group(1)`$1}$0
+endsnippet
+
+context "math()"
+snippet '(?<!\\)a\*\*{(\[{0,1}[a-z0-9]+\]{0,1}((\+|\-)[a-z0-9]+)*)}' "discrete annuity due" wrA
+\\ax**{`!p snip.rv = match.group(1)`$1}$0
+endsnippet
+
+context "math()"
+snippet '(?<!\\)a\*{(\[{0,1}[a-z0-9]+\]{0,1}((\+|\-)[a-z0-9]+)*)}' "cts annuity" wrA
+\\ax*{`!p snip.rv = match.group(1)`$1}$0
+endsnippet
+
+context "math()"
+snippet '(?<!\\)a{(\[{0,1}[a-z0-9]+\]{0,1}((\+|\-)[a-z0-9]+)*)}' "discrete annuity imm" wrA
+\\ax{`!p snip.rv = match.group(1)`$1}$0
+endsnippet
+
+context "math()"
+snippet '(?<!\\){([a-z0-9]+|([a-z0-9]+(\+|\-))*[a-z0-9]+)}Vx' "policy value" wrA
+\\Vx[`!p snip.rv = match.group(1)`]{}
+endsnippet
+
+context "math()"
+snippet '(?<!\\){([a-z0-9]+|([a-z0-9]+(\+|\-))*[a-z0-9]+)}V(g|n|e|FPT)' "policy value" wrA
+\\Vx[`!p snip.rv = match.group(1)`]{}[`!p snip.rv = match.group(4)`]
+endsnippet
+
 # vim:ft=snippets:
