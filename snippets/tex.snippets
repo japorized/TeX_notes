@@ -190,8 +190,18 @@ snippet desc "Description" b
 \end{description}
 endsnippet
 
-snippet it "Individual item" b
-\item $0
+snippet * "Individual item" bA
+\item$0
+endsnippet
+
+snippet 1. "Enumerate Env" bA
+\begin{enumerate}
+	\item$0
+\end{enumerate}
+endsnippet
+
+snippet '(?!1\.)[0-9]{1,3}\.' "Numbered item" brA
+\item$0
 endsnippet
 
 snippet part "Part" b

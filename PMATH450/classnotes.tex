@@ -2472,7 +2472,7 @@ countable set is Lebesgue measurable with Lebesgue measure zero.
 We shall show that this is not true by giving a counterexample. We shall now
 construct an \hlnotea{uncountable set} $C$ that has measure zero.
 
-\begin{eg}[The Cantor Set]
+\begin{eg}[The Cantor Set]\label{eg:cantor_set}
   Let $C_0 = [0, 1]$. Note that $C_0$ is compact and
   \begin{equation*}
     m^* C_0 = 1 < \infty.
@@ -3604,6 +3604,498 @@ In A3, we will show the following proposition.
 % section lebesgue_measurable_functions_continued (end)
 
 % chapter lecture_6_may_23rd_2019 (end)
+
+\chapter{Lecture 7 May 28th 2019}%
+\label{chp:lecture_7_may_28th_2019}
+% chapter lecture_7_may_28th_2019
+
+\section{Lebesgue Integration}%
+\label{sec:lebesgue_integration}
+% section lebesgue_integration
+
+We shall first begin by defining integration over simple, non-negative, extended
+real-valued functions. We shall then use this definition to define the integral
+of $f \in \mathcal{L}(E, [0, \infty])$, and derive several consequences of our
+definition. Furthermore, we shall also build the Lebesgue integral such that it
+is linear, which will require us to impose certain conditions to the range of
+functions which will retain this desirable property.
+
+\begin{defn}[Integration of Simple Functions]\label{defn:integration_of_simple_functions}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $\phi \in \SIMP(E, [0, \infty])$,
+  such that its standard form is denoted as
+  \begin{equation*} 
+    \phi = \sum_{n=1}^{N} \alpha_n \chi_{E_n}.
+  \end{equation*}
+  We define
+  \begin{equation*}
+    \int_{E} \phi \coloneqq \sum_{n=1}^{N} \alpha_n m E_n \in [0, \infty].
+  \end{equation*}
+  If $F \subseteq E$ is measurable, we define
+  \begin{equation*}
+    \int_{F} \phi = \int_{E} \phi \cdot \chi_F = \sum_{n=1}^{N} \alpha_n m(F
+    \cap E_n).
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Note that since $\phi$ is measurable, so is each $E_n$ for $1 \leq n \leq N$.
+\end{note}
+
+\begin{eg}
+  \begin{enumerate}
+    \item Let $\phi = 0 \chi_{[4, \infty)} + 17 \xi_{\mathbb{Q} \cap [0, 4)} +
+      29 \chi_{[2, 4) \setminus \mathbb{Q}}$. Then
+      \begin{align*}
+        \int_{[0, \infty)} \phi &= 0 m[4, \infty) + 17 m(\mathbb{Q} \cap [0, 4))
+                                  + 29 m([2, 4) \setminus \mathbb{Q}) \\
+                                &= 0 + 17 \cdot 0 + 29 (2) = 58.
+      \end{align*}
+    \item Let $C \subseteq [0, 1]$ be the Cantor set from \cref{eg:cantor_set}
+      and $\phi = 1 \chi_C + 2 \chi_{[5, 9]}$. Then
+      \begin{align*}
+        \int_{[0, 6]} \phi
+        &= 1 m(C \cap [0, 6]) + 2 m([5, 9] \cap [0, 6]) \\
+        &= 1 \cdot 0 + 2 m([5, 6]) \\
+        &= 2.
+      \end{align*}
+  \end{enumerate}
+\end{eg}
+
+Since our definition is fairly limited since it requires that our simple
+function be in standard form, let us try to relax that condition.
+
+\begin{defn}[Disjoint Representation]\index{Disjoint Representation}\label{defn:disjoint_representation}
+  Let $E \in \mathfrak{M}(E)$ and $\phi \in \SIMP(E, [0, \infty])$. Suppose
+  \begin{equation*}
+    \phi = \sum_{n=1}^{N} \alpha_n \chi_{H_n},
+  \end{equation*}
+  where $H_n \subseteq E$ is \hlimpo{measurable} and $\alpha_n \in
+  \overline{\mathbb{R}}$ for each $1 \leq n \leq N$. \sidenote{Note that we did
+  not require that the $\alpha_n$'s be distinct, nor do we require that they be
+  written in any particular order, nor do we require that $E =
+  \bigcup_{n=1}^{N} H_n$, unlike in the definition of
+  \hyperref[defn:simple_functions]{simple functions}.} We shall say that the
+  above decomposition of $\phi$ is a \hlnoteb{disjoint representation} of
+  $\phi$ if
+  \begin{equation*}
+    H_i \cap H_j = \emptyset, \text{ for } 1 \leq i \neq j \leq N.
+  \end{equation*}
+\end{defn}
+
+\begin{lemma}[Common Disjoint Representation of Simple Functions over a Common Domain]\label{lemma:common_disjoint_representation_of_simple_functions_over_a_common_domain}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and suppose that $\phi, \psi \in
+  \mathcal{L}(E, \mathbb{R})$. Then there exists
+  \begin{enumerate}
+    \item $N \in \mathbb{N}$ ;
+    \item $H_1, H_2, \ldots, H_n \in \mathfrak{M}(E)$ with $H_i \cap H_j =
+      \emptyset$ for all $i \neq j$; and
+    \item $\alpha_1, \ldots, \alpha_N, \beta_1, \ldots, \beta_N$ such that
+      \begin{equation*}
+        \phi = \sum_{n=1}^{N} \alpha_n \chi_{H_n} \quad \text{ and } \quad
+        \psi = \sum_{n=1}^{N} \beta_N \chi_{H_n}
+      \end{equation*}
+      are disjoint representations of $\phi$ and $\psi$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  Since $\phi$ and $\psi$ are simple, from \cref{defn:standard_form}, if we
+  write
+  \begin{equation*}
+    \phi = \sum_{m=1}^{M_1} a_m \chi_{E_m} \quad \text{ and } \quad
+    \psi = \sum_{m=1}^{M_2} b_m \chi_{F_m}
+  \end{equation*}
+  in their standard forms, we have that the $E_m$'s and $F_m$'s are respectively
+  pairwise disjoint \sidenote{It is important to note here that the $E_m$'s and
+  $F_m$'s are pairwise disjoint on $E$, which is why the next step is a sensible
+  and correct one.}. Then
+  \begin{equation*}
+    \{ E_i \cap F_j : 1 \leq i \leq M_1,\, 1 \leq j \leq M_2 \}
+  \end{equation*}
+  is also a pairwise disjoint family of measurable sets, which we shall relabel
+  them as
+  \begin{equation*}
+    \{ H_n \}_{n=1}^{N}, \text{ where } N = M_1 M_2.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \phi = \sum_{n=1}^{N} \alpha_n \chi_{H_n},
+  \end{equation*}
+  where $\alpha_n = a_i$ if $H_n = E_i \cap F_j$ for some $1 \leq j \leq M_2$,
+  and
+  \begin{equation*}
+    \psi = \sum_{n=1}^{N} \beta_N \chi_{H_n},
+  \end{equation*}
+  where $\beta_n = b_j$ if $H_n = E_i \cap F_j$ for some $1 \leq i \leq M_1$.
+\end{proof}
+
+\begin{lemma}[Integral of a Simple Funciton Using Its Disjoint Representation]\label{lemma:integral_of_a_simple_funciton_using_its_disjoint_representation}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and suppose $\phi \in \SIMP(E, [0,
+  \infty])$. If
+  \begin{equation*}
+    \phi = \sum_{n=1}^{N} \alpha_n \chi_{H_n}
+  \end{equation*}
+  is any disjoint representation, then
+  \begin{equation*}
+    \int_{E} \phi = \sum_{n=1}^{n} \alpha_n mH_n.
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \sidenote{One of the problems here is that the disjoint $H_n$'s may not cover
+  the entire domain $\phi$, but we can fill it up with zeros.} If
+  $\bigcup_{n=1}^{N} H_n \neq E$, then we set
+  \begin{equation*}
+    H_{N + 1} = E \setminus \bigcup_{n=1}^{N} H_n \text{ and } \alpha_{N+1} = 0.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \sum_{n=1}^{N} \alpha_n mH_n = \sum_{n=1}^{N+1} \alpha_n mH_n.
+  \end{equation*}
+  Thus, wlog, wma
+  \begin{equation*}
+    \bigcup_{n=1}^{N} H_n = E.
+  \end{equation*}
+
+  Now since the $H_n$'s are mutually disjoint, wma
+  \begin{equation*}
+    \Range \phi = \{ \alpha_1, \ldots, \alpha_N \},
+  \end{equation*}
+  where we note that the above set may contain repeated elements, i.e. some
+  $\alpha_i = \alpha_j$. We may thus rewrite this set such that
+  \begin{equation*}
+    \{ \alpha_1, \ldots, \alpha_N \} = \{ \beta_1 < \beta_2 < \hdots < \beta_M
+    \}
+  \end{equation*}
+  and set
+  \begin{equation*}
+    E_i = \bigcup \{ H_j : \alpha_j = \beta_i \}.
+  \end{equation*}
+  Note that since $H_i \cap H_j = \emptyset$ for $1 \leq i \neq j \leq N$, for
+  $1 \leq k \leq M$, we have 
+  \begin{equation*}
+    m E_k = \sum_{\alpha_j = \beta_k} m(H_j).
+  \end{equation*}
+  Then by definition,
+  \begin{align*}
+    \int_{E} \phi
+    &= \sum_{k=1}^{M} \beta_k \xi_{E_k} \\
+    &= \sum_{i=1}^{M} \beta_i \sum_{\alpha_j = \beta_i} mH_j \\
+    &= \sum_{n=1}^{N} \alpha_j mH_j,
+  \end{align*}
+  as desired.
+\end{proof}
+
+\begin{propo}[Linearity and Monotonicity of the Integral of Simple Functions]\label{propo:linearity_and_monotonicity_of_the_integral_of_simple_functions}
+  Let $E \in \mathfrak{M}(\mathbb{R})$. If $\phi, \psi \in \SIMP(E, [0,
+  \infty])$ and $\kappa \in [0, \infty)$, then
+   \begin{enumerate}
+    \item $\int_{E} \kappa \phi + \psi = \kappa \int_{E} \phi + \int_{E} \psi$; and
+    \item $\phi \leq \psi$ on $E$ implies
+      \begin{equation*}
+        \int_{E} \phi \leq \int_{E} \psi.
+      \end{equation*}
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item By
+      \cref{lemma:common_disjoint_representation_of_simple_functions_over_a_common_domain},
+      we can find a common disjoint representation of $\phi$ and $\psi$, say
+      \begin{equation*}
+        \phi = \sum_{n=1}^{N} a_n \chi_{H_n} \quad \text{and} \quad
+        \psi = \sum_{n=1}^{N} b_n \chi_{H_n},
+      \end{equation*}
+      where the $H_n$'s are pairwise disjoint. Then
+      \begin{equation*}
+        \kappa \phi + \psi = \sum_{n=1}^{N} (\kappa a_n + b_n) \chi_{H_n}.
+      \end{equation*}
+      Thus by
+      \cref{lemma:integral_of_a_simple_funciton_using_its_disjoint_representation},
+      \begin{align*}
+        \int_{E} (\kappa \phi + \psi)
+        &= \sum_{n=1}^{N} (\kappa a_n + b_n) m H_n \\
+        &= \kappa \sum_{n=1}^{N} a_n mH_n * \sum_{n=1}^{N} b_n mH_n \\
+        &= \kappa \int_{E} \phi + \int_{E} \psi.
+      \end{align*}
+
+    \item Using the disjoint representation, if $\phi \leq \psi$, then $a_n \leq
+      b_n$ for all $1 \leq n \leq N$, and so by
+      \cref{lemma:integral_of_a_simple_funciton_using_its_disjoint_representation},
+      \begin{equation*}
+        \int_{E} \phi = \sum_{n=1}^{N} a_n mH_n \leq \sum_{n=1}^{N} b_n mH_n =
+        \psi.
+      \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+We are now ready to define the Lebesgue integral for arbitrary measurable
+functions.
+
+\begin{defn}[Lebesgue Integral]\index{Lebesgue Integral}\label{defn:lebesgue_integral}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $f \in \mathcal{L}(E, [0, \infty])$.
+  We define the \hlnoteb{Lebesgue integral} of $f$ as
+  \begin{equation*}
+    \int_{E}^{NEW} f = \sup \left\{ \int_{E} \phi : \phi \in \SIMP(e, [0,
+    \infty)),\, 0 \leq \phi \leq f \right\}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item We can actually allow $\phi \in \SIMP(E, [0, \infty])$.
+    \item We put ``NEW'' in the above integral because we now have ``two''
+      definitions for the integral of $\phi \in \SIMP(E, [0, \infty])$. Writing
+      $\phi = \sum_{n=1}^{N} \alpha_n \chi_{H_n}$ in its standard form, by
+      \cref{defn:integration_of_simple_functions},
+      \begin{equation*}
+        \int_{E} \phi = \sum_{n=1}^{N} \alpha_n mH_n,
+      \end{equation*}
+      while \cref{defn:lebesgue_integral} gives us
+      \begin{equation*}
+        \int_{E}^{NEW} \phi = \sup \left\{ \int_{E} \psi : \psi \in \SIMP(E, [0,
+        \infty)),\, 0 \leq \psi \leq \phi \right\}.
+      \end{equation*}
+  \end{itemize}
+\end{note}
+
+\begin{remark}
+  Let us try reconciling these two definitions, which will allow us to drop the
+  dumb-looking ``NEW'' notation. First, note that
+  \begin{equation*}
+    \phi \in \{ \psi \in  \SIMP(E, [0, \infty]) : 0 \leq \psi \leq \phi \},
+  \end{equation*}
+  and so by \cref{defn:lebesgue_integral}, then
+  \begin{equation*}
+    \int_{E} \phi \leq \int_{E}^{NEW} \phi.
+  \end{equation*}
+  On the other hand, by
+  \cref{propo:linearity_and_monotonicity_of_the_integral_of_simple_functions},
+  if $\phi \in \SIMP(E, [0, \infty])$ and $0 \leq \psi \leq \phi$, we have that
+  \begin{equation*}
+    \int_{E} \psi \leq \int_{E} \phi,
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \int_{E}^{NEW} \phi = \sup \left\{ \int_{E} \psi : \psi \in \SIMP(E, 0,
+    \infty]),\, \psi \leq \phi \right\} \leq \int_{E} \phi.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \int_{E}^{NEW} \phi = \int_{E} \phi.
+  \end{equation*}
+\end{remark}
+
+With that we shall drop the ``NEW'' notation from here on.
+
+\begin{defn}[Almost Everywhere (a.e.)]\index{Almost Everywhere (a.e.)}\label{defn:almost_everywhere_a_e_}
+  Let $E \in \mathfrak{M}(\mathbb{R})$. We say that a property $(P)$ holds
+  \hlnoteb{almost everywhere (a.e.)} on $E$ if the set
+  \begin{equation*}
+    B \coloneqq \{ x \in E : (P) \text{ does not hold } \}
+  \end{equation*}
+  has Lebesgue measure zero.
+\end{defn}
+
+\begin{eg}
+  Let $E \in \mathfrak{M}(\mathbb{R})$. Given $f, g \in \mathcal{L}(E,
+  \overline{\mathbb{R}})$, we say that $f = g$ a.e. on $E$ if
+  \begin{equation*}
+    B \coloneqq \{ x \in E : f(x) \neq g(x) \}
+  \end{equation*}
+  has measure zero, i.e. $mB = 0$.
+
+  An example of this is
+  \begin{equation*}
+    \chi_{\mathbb{Q}} = 0 = \chi_{C}
+  \end{equation*}
+  a.e. on $\mathbb{R}$, where $C$ is the \hyperref[eg:cantor_set]{Cantor set}.
+\end{eg}
+
+\begin{lemma}[Linearity, Monotonicity of the Lebesgue Integral]\label{lemma:linearity_monotonicity_of_the_lebesgue_integral}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and let $f, g, h : E \to [0, \infty]$ be
+  functions. Suppose that $g$ and $h$ are measurable.
+  \begin{enumerate}
+    \item Suppose further that $E = X \bigcupdot Y$, where $X, Y \in
+      \mathfrak{M}(E)$. Set $f_1 \coloneqq f \restriction_{X}$ and $f_2
+      \coloneqq f \restriction_{Y}$. Then $f \in \mathcal{L}(E, [0, \infty])$
+      iff $f_1$ and $f_2$ are measurable. When this is the case, then
+      \begin{equation*}
+        \int_{E} f = \int_{X} f_1 + \int_{Y} f_2.
+      \end{equation*}
+    \item If $g \leq h$, then
+      \begin{equation*}
+        \int_{E} g \leq \int_{E} h.
+      \end{equation*}
+    \item If $H \in \mathfrak{M}(E)$, then
+      \begin{equation*}
+        \int_{H} g = \int_{E} g \cdot \chi_H \leq \int_{E} g.
+      \end{equation*}
+  \end{enumerate}
+\end{lemma}
+
+\begin{ex}
+  Prove \cref{lemma:linearity_monotonicity_of_the_lebesgue_integral}.
+\end{ex}
+
+\begin{proof}
+  \begin{enumerate}
+    \item \hlbnoted{$f$ is measurable $\iff$ $f_1$ and $f_2$ are measurable}
+      \hlbnotea{($\implies$)} Note that
+      \begin{equation*}
+        f_1 = f \cdot \chi_X \text{ and } f_2 = f \cdot \chi_Y,
+      \end{equation*}
+      and since $X, Y$ are measurable, by
+      \cref{propo:composition_of_a_continuous_function_and_a_measurable_function_is_measurable},
+      we have that $f_1$ and $f_2$ are measurable.
+
+      \hlbnotea{($\impliedby$)} Suppose $f_1$ and $f_2$ are measurable and $X
+      \bigcupdot Y$. We have that
+      \begin{equation*}
+        f = f_1 + f_2.
+      \end{equation*}
+      I will spare the details, but it is not difficult to see that $\forall a
+      \in \mathbb{R}$, breaking $(a, \infty]$ into disjoint pieces if necessary,
+      $f^{-1}((a, \infty])$ is measurable, and hence $f$ is indeed measurable.
+
+      \hlbnoted{The integral} \sidenote{This proof is iffy.} By
+      \cref{defn:integration_of_simple_functions} and
+      \cref{propo:linearity_and_monotonicity_of_the_integral_of_simple_functions},
+      we have
+      \begin{align*}
+        \int_{E} f
+        &= \sup \left\{ \int_{E} \phi : \phi \in \SIMP(E, [0, \infty]),\, \phi
+          \leq f \right\} \\
+        &= \sup \left\{ \int_{E} \phi \cdot \chi_X + \phi \cdot \chi_Y : \phi
+          \in \SIMP(E, [0, \infty]),\, \phi \leq f \right\} \\
+        &= \sup \left\{ \int_{X} \phi + \int_{Y} \phi : \phi \in \SIMP(E, [0,
+          \infty]),\, \phi \leq f \right\} \\
+        &\leq \sup \left\{ \int_{X} \phi : \phi \in \SIMP(X, [0, \infty]),\,
+          \phi \leq f_1 \right\} \\
+        &\qquad + \sup \left\{ \int_{Y} \psi : \psi \in \SIMP(Y, [0, \infty]),\,
+          \psi \leq f_2 \right\} \\
+        &= \int_{X} f_1 + \int_{Y} f_2.
+      \end{align*}
+      On the other hand, since $f_1 = f$ on $X$ and $f_2 = f$ on $Y$, and $X$ 
+      and $Y$ are disjoint,
+      \begin{align*}
+        &\int_{X} f_1 + \int_{Y} f_2 \\
+        &= \sup \left\{ \int_{X} \phi : \phi \in \SIMP(X, [0, \infty]),\,
+          \phi \leq f_1 = f \restriction_X \right\} \\
+        &\qquad + \sup \left\{ \int_{Y} \psi : \psi \in \SIMP(Y, [0, \infty]),\,
+          \psi \leq f_2 = f \restriction_Y \right\} \\
+        &= \sup \Bigg\{ \int_{X} \phi + \int_{Y} \psi : \phi \in \SIMP(X, [0,
+          \infty]), \\
+        &\qquad \psi \in \SIMP(Y, [0, \infty]),\, \phi \leq f
+          \restriction_X,\, \psi \leq f \restriction_Y \Bigg\} \\
+        &= \sup \Bigg\{ \int_{E} \phi \cdot \chi_X + \psi \cdot \chi_Y : \phi,
+          \psi \in \SIMP(E, [0, \infty]), \\
+        &\qquad \phi + \psi \leq f \restriction_X + f \restriction_Y = f \Bigg\}
+        \\
+        &= \int_{E} f.
+      \end{align*}
+
+    \item By
+      \cref{propo:increasing_sequence_of_simple_functions_that_converges_to_a_measurable_function},
+      there exists sequences $\{ \phi_n \}_n$ and $\{ \psi_n \}_n$ such that
+      \begin{equation*}
+        \lim_{n \to \infty} \phi_n = g \leq h = \lim_{n \to \infty} \psi_n.
+      \end{equation*}
+      In particular,
+      \begin{equation*}
+        \sup_{n \geq 1} \phi_n = g \leq h = \sup_{n \geq 1} \psi_n.
+      \end{equation*}
+      Since the leftmost and rightmost terms are simple functions, by
+      \cref{propo:linearity_and_monotonicity_of_the_integral_of_simple_functions},
+      \begin{align*}
+        \int_{E} g
+        &= \sup \left\{ \int_{E} \phi : \phi \in \SIMP(E, [0, \infty]),\, \phi
+          \leq g \right\} \\
+        &\leq \sup \left\{ \int_{E} \psi : \psi \in \SIMP(E, [0, \infty]),\,
+          \psi \leq h \right\} \\
+        &= \int_{E} h.
+      \end{align*}
+
+    \item \sidenote{This is also iffy.} For the first equality, by
+      \cref{defn:integration_of_simple_functions}, we have that
+      \begin{align*}
+        \int_{H} g
+        &= \sup \left\{ \int_{H} \phi : \phi \in \SIMP(H, [0, \infty]),\, \phi
+          \leq g \right\} \\
+        &= \sup \left\{ \int_{E} \phi \cdot \chi_H : \phi \in \SIMP(E, [0,
+          \infty]),\, \phi \leq g \right\}  \\
+        &= \int_{E} g \cdot \chi_H.
+      \end{align*}
+      Note that we have $g \cdot \chi_H \leq g$, and so by part (2),
+      \begin{equation*}
+        \int_{E} g \cdot \chi_H \leq \int_{E} g.
+      \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{propo}[Integration over Domains of Measure Zero and Integration of Functions Agreeing Almost Everywhere]\label{propo:integration_over_domains_of_measure_zero_and_integration_of_functions_agreeing_almost_everywhere}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $f, g \in \mathcal{L}(E, [0,
+  \infty])$.
+  \begin{enumerate}
+    \item If $mE = 0$, then $\int_{E} f = 0$.
+    \item If $f = g$ a.e. on $E$, then $\int_{E} f = \int_{E} g$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item $\forall \phi \in \SIMP(E, [0, \infty])$ written in its standard form
+      \begin{equation*}
+        \phi = \sum_{n=1}^{N} \alpha_n \chi_{E_n},
+      \end{equation*}
+      by \hyperref[defn:algebra_of_sets]{monotonicity},
+      \begin{equation*}
+        0 \leq \int_{E} \phi = \sum_{n=1}^{N} \alpha_n mE_n \leq \sum_{n=1}^{N}
+        \alpha_n mE = 0,
+      \end{equation*}
+      and so
+      \begin{equation*}
+        \int_{E} \phi = 0.
+      \end{equation*}
+      Thus
+      \begin{equation*}
+        \int_{E} f = \sup \left\{ \int_{E} \phi : \phi \in \SIMP(E, [0,
+        \infty]),\, \phi \leq f \right\} = \sup \{ 0 \} = 0.
+      \end{equation*}
+
+    \item Let $B \coloneqq \{ x \in E : f(x) \neq g(x) \}$ so that $mB = 0$.
+      Then by \cref{lemma:linearity_monotonicity_of_the_lebesgue_integral} and
+      part (1), we have
+      \begin{align*}
+        \int_{E} f &= \int_{E \setminus B} f + \int_{B} \\
+                   &= \int_{E \setminus B} f + 0 \\
+                   &= \int_{E \setminus B} g + \int_{B} g \\
+                   &= \int_{E} g.
+      \end{align*}
+  \end{enumerate}
+\end{proof}
+
+We are now in a position to prove the following important theorem, which we
+shall do so next lecture.
+
+\begin{thmnonum}[The Monotone Convergence Theorem]
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $(f_n)_n$ be a sequence in
+  $\mathcal{L}(E, [0, \infty])$ such that $f_n \leq f_{n+1}$ a.e. on $E$.
+  Suppose further that
+  \begin{equation*}
+    f : E \to [0, \infty]
+  \end{equation*}
+  is a function such that $f(x) = \lim_{n \to \infty} f_n(x)$ a.e. on $E$. Then
+  $f \in \mathcal{L}(E, [0, \infty])$ and
+  \begin{equation*}
+    \int_{E} f = \lim_{n \to \infty} \int_{E} f_n.
+  \end{equation*}
+\end{thmnonum}
+
+% section lebesgue_integration (end)
+
+% chapter lecture_7_may_28th_2019 (end)
 
 \appendix
 
