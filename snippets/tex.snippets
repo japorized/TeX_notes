@@ -123,7 +123,7 @@ snippet table "Table environment" b
 \begin{table}[${1:htpb}]
 	\centering
 	\caption{${2:caption}}
-	\label{table:${3:label}}
+	\label{table:${3:${2/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
 	\begin{${4:t}${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${5:c}}
 	$0${5/(?<=.)(c|l|r)|./(?1: & )/g}
 	\end{$4${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
@@ -313,22 +313,6 @@ snippet ita "Italicized Text" w
 \textit{$1} $0
 endsnippet
 
-snippet bb "mathbb" w
-\mathbb{$1}$0
-endsnippet
-
-snippet cal "mathcal" w
-\mathcal{$1}$0
-endsnippet
-
-snippet scr "mathscr" w
-\mathscr{$1}$0
-endsnippet
-
-snippet frak "mathfrak" w
-\mathfrak{$1}$0
-endsnippet
-
 snippet hla "highlight color a" w
 \hlnotea{$1} $0
 endsnippet
@@ -442,7 +426,7 @@ else:
 `$2
 endsnippet
 
-snippet lm "Math" wA
+snippet lm "Math" iA
 $${1}$`!p
 if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
   snip.rv = ' '

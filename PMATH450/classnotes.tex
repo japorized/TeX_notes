@@ -3224,7 +3224,7 @@ The proof of the following result is left to A2.
   \end{enumerate}
 \end{crly}
 
-\begin{remark}
+\begin{remark}\label{remark:f_plus_f_minus}
   Let $E \in \mathfrak{M}(\mathbb{R})$ and $f : E \to \mathbb{R}$. Define
   \begin{gather*}
     f^+(x) = \max \{ f(x), 0 \},\, x \in E \\
@@ -3643,7 +3643,7 @@ functions which will retain this desirable property.
 
 \begin{eg}
   \begin{enumerate}
-    \item Let $\phi = 0 \chi_{[4, \infty)} + 17 \xi_{\mathbb{Q} \cap [0, 4)} +
+    \item Let $\phi = 0 \chi_{[4, \infty)} + 17 \chi_{\mathbb{Q} \cap [0, 4)} +
       29 \chi_{[2, 4) \setminus \mathbb{Q}}$. Then
       \begin{align*}
         \int_{[0, \infty)} \phi &= 0 m[4, \infty) + 17 m(\mathbb{Q} \cap [0, 4))
@@ -3913,7 +3913,7 @@ With that we shall drop the ``NEW'' notation from here on.
   a.e. on $\mathbb{R}$, where $C$ is the \hyperref[eg:cantor_set]{Cantor set}.
 \end{eg}
 
-\begin{lemma}[Linearity, Monotonicity of the Lebesgue Integral]\label{lemma:linearity_monotonicity_of_the_lebesgue_integral}
+\begin{lemma}[Monotonicity of the Lebesgue Integral and Other Lemmas]\label{lemma:monotonicity_of_the_lebesgue_integral_and_other_lemmas}
   Let $E \in \mathfrak{M}(\mathbb{R})$ and let $f, g, h : E \to [0, \infty]$ be
   functions. Suppose that $g$ and $h$ are measurable.
   \begin{enumerate}
@@ -3936,7 +3936,7 @@ With that we shall drop the ``NEW'' notation from here on.
 \end{lemma}
 
 \begin{ex}
-  Prove \cref{lemma:linearity_monotonicity_of_the_lebesgue_integral}.
+  Prove \cref{lemma:monotonicity_of_the_lebesgue_integral_and_other_lemmas}.
 \end{ex}
 
 \begin{proof}
@@ -4065,7 +4065,7 @@ With that we shall drop the ``NEW'' notation from here on.
       \end{equation*}
 
     \item Let $B \coloneqq \{ x \in E : f(x) \neq g(x) \}$ so that $mB = 0$.
-      Then by \cref{lemma:linearity_monotonicity_of_the_lebesgue_integral} and
+      Then by \cref{lemma:monotonicity_of_the_lebesgue_integral_and_other_lemmas} and
       part (1), we have
       \begin{align*}
         \int_{E} f &= \int_{E \setminus B} f + \int_{B} \\
@@ -4096,6 +4096,655 @@ shall do so next lecture.
 % section lebesgue_integration (end)
 
 % chapter lecture_7_may_28th_2019 (end)
+
+\chapter{Lecture 8 May 30th 2019}%
+\label{chp:lecture_8_may_30th_2019}
+% chapter lecture_8_may_30th_2019
+
+\section{Lebesgue Integration (Continued)}%
+\label{sec:lebesgue_integration_continued}
+% section lebesgue_integration_continued
+
+\begin{thm}[The Monotone Convergence Theorem]\index{The Monotone Convergence Theorem}\label{thm:the_monotone_convergence_theorem}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $(f_n)_n$ be a sequence in
+  $\mathcal{L}(E, [0, \infty])$ such that $f_n \leq f_{n+1}$ a.e. on $E$.
+  Suppose further that
+  \begin{equation*}
+    f : E \to [0, \infty]
+  \end{equation*}
+  is a function such that $f(x) = \lim_{n \to \infty} f_n(x)$ a.e. on $E$. Then
+  $f \in \mathcal{L}(E, [0, \infty])$ and
+  \begin{equation*}
+    \int_{E} f = \lim_{n \to \infty} \int_{E} f_n.
+  \end{equation*}
+\end{thm}
+
+\begin{strategy}
+  \begin{enumerate}
+    \item Argue why we can proof for the case where we do not have the ``a.e.''
+      assumption. There are 2 places here where have an ``a.e.'' assumption:
+      \begin{enumerate}
+        \item $f_n \leq f_{n+1}$ on $E$; and
+        \item $f(x) = \lim_{n \to \infty} f_n(x)$ a.e. on $E$.
+      \end{enumerate}
+    \item Look at where good things happen and bad things happen, and we'll be
+      able to show that $f$ is measurable.
+    \item Having gotten rid of the place where nasty things happen and showing
+      that $f$ is measurable. We will find that we need to show that
+      \begin{equation*}
+        \int_{H} f = \lim_{n \to \infty} \int_{H} f_n,
+      \end{equation*}
+      where $H$ is where our hopes and dreams live in.
+    \item One direction is easy, since $f_n < f$ for all $n$, on $H$. For the
+      other direction, we look at a simple function $\phi \leq f$, which is then
+      arbitrary. Then since $\lim_{n \to \infty} f_n = f$ (pointwise), we want
+      to be able to show something along the lines of
+      \begin{equation*}
+        \int_{H} f_n - \int_{H} \phi \geq 0.
+      \end{equation*}
+      \begin{quotebox}{red}{foreground}
+        Instead of trying to do this over the entire $H$, we can look at where
+        this happens on $H$ for each $n$. Since the $f_n$'s are increasing, and
+        $\phi$ arbitrarily fixed, $f_n - \phi$ should give us more and more
+        places where they are positive on $H$.
+      \end{quotebox}
+  \end{enumerate}
+\end{strategy}
+
+\begin{proof}
+  \hlbnoted{Step 1} Let
+  \begin{equation*}
+    Z = \left\{ x \in E : f(x) \neq \lim_{n \to \infty} f_n(x) \right\}.
+  \end{equation*}
+  By hypothesis, $mZ = 0$ and $Z \in \mathfrak{M}(E)$.
+
+  Now by \cref{lemma:monotonicity_of_the_lebesgue_integral_and_other_lemmas}, $f_n \in
+  \mathcal{L}(E, [0, \infty])$ and so $f_n \restriction_{E \setminus Z} \in
+  \mathcal{L}(E \setminus Z, [0, \infty])$. Since by hypothesis we have $\forall
+  x \in E \setminus Z$,
+  \begin{equation*}
+    f(x) = \lim_{n \to \infty} f_n(x),
+  \end{equation*}
+  $f \restriction_{E \setminus Z} \in \mathcal{L}(E \setminus Z, [0,
+  \infty])$ by \cref{crly:extended_limit_of_real_valued_functions}.
+
+  \noindent
+  \hlbnoted{Step 2} For each $n \geq 1$, let
+  \begin{equation*}
+    Y_n \coloneqq \{ x \in E : f_n(x) > f_{n+1}(x) \}.
+  \end{equation*}
+  Then by hypothesis, $mY_n = 0$ and $Y_n \in \mathfrak{M}(E)$. Let
+  \begin{equation*}
+    Y = \bigcup_{n=1}^{\infty} Y_n.
+  \end{equation*}
+  Then since $\mathfrak{M}(E)$ is a $\sigma$-algebra, $Y \in \mathfrak{M}(E)$
+  and
+  \begin{equation*}
+    0 \leq mY \leq \sum_{n=1}^{\infty} mY_n = 0 \implies mY = 0.
+  \end{equation*}
+  \sidenote{Up till here, we have showed that we can, instead, turn our focus on
+  wherever nice things happen, and that $f$ is measurable as desired.}
+
+  At this point, by
+  \cref{lemma:monotonicity_of_the_lebesgue_integral_and_other_lemmas},
+  \begin{equation*}
+    \int_{E} f = \int_{E \setminus (Y \cup Z)} f + \int_{Y \cup Z} f = \int_{E
+    \setminus (Y \cup Z)} f
+  \end{equation*}
+  and for each $n \geq 1$,
+  \begin{equation*}
+    \int_{E} f_n = \int_{E \setminus (Y \cup Z)} f_n + \int_{Y \cup Z} f_n =
+    \int_{E \setminus (Y \cup Z)} f_n.
+  \end{equation*}
+  Thus, it remains for us to show that
+  \begin{equation*}
+    \int_{E \setminus (Y \cup Z)} f = \lim_{n \to \infty} \int_{E \setminus (Y
+    \cup Z)} f_n.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{Step 3} Let $X = Y \cup Z$, which then $X \in \mathfrak{M}(E)$ and
+  \begin{equation*}
+    0 \leq mX \leq mY + mZ = 0 \implies mX = 0.
+  \end{equation*}
+  Let $H = E \setminus X$. Note that we then have $H \in \mathfrak{M}(E)$ and
+  $\forall x \in H$,
+  \begin{equation}\label{eq:mct_nice_incing_seq}
+    \forall n \geq 1 \quad f_n(x) \leq f_{n+1}(x)
+  \end{equation}
+  and
+  \begin{equation}\label{eq:mct_nice_limit}
+    f(x) = \lim_{n \to \infty} f_n(x).
+  \end{equation}
+  For notational convenience, let
+  \begin{equation*}
+    g_n = f_n \restriction_{H}
+  \end{equation*}
+  and
+  \begin{equation*}
+    g = f \restriction_{H}.
+  \end{equation*}
+  By \cref{eq:mct_nice_incing_seq} and \cref{eq:mct_nice_limit}, we have that
+  \begin{equation*}
+    g_1 \leq g_2 \leq \hdots \leq g_n \leq g_{n+1} \leq \hdots \leq g.
+  \end{equation*}
+  By \cref{lemma:monotonicity_of_the_lebesgue_integral_and_other_lemmas}, $\forall x
+  \in H$
+  \begin{equation*}
+    \lim_{n \to \infty} g_n(x) = \sup_{n \geq 1} g_n(x) \leq g(x),
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \lim_{n \to \infty} \int_{H} g_n = \sup_{n \geq 1} \int_{H} g_n \leq
+    \int_{H} g.
+  \end{equation*}
+
+  It remains to show that
+  \begin{equation*}
+    \int_{H} g \leq \lim_{n \to \infty} \int_{H} g_n.
+  \end{equation*}
+  If we can show that for any $\phi \in \SIMP(H, [0, \infty])$, we have
+  \begin{equation*}
+    \lim_{n \to \infty} \int_{H} g_n \geq \int_{H} \phi,
+  \end{equation*}
+  then our proof is done, since it would mean that 
+  \begin{align*}
+    \int_{H} f = \int_{H} g = \lim_{n \to \infty} \int_{H} g_n = \lim_{n \to
+    \infty} \int_{H} f_n.
+  \end{align*}
+
+  \noindent
+  \hlbnoted{Step 4} 
+  \sidenote[][-100pt]{Here, we do something like a race-check. We know that the $g_n$'s
+  grow to be arbitrarily close to $g$, and the set $\{ \phi \in SIMP(H, [0,
+  \infty]) : \phi \leq g \}$ also has elements arbitrarily close to $g$. It
+  would suffice to show that for every $\phi$, the limit of the integral of the
+  $g_n$'s is greater than the integral of $\phi$.} Let $\phi \in \SIMP(H, [0,
+  \infty])$ such that $\phi \leq g$. \sidenote{Note that we require this scaling
+  factor, because we cannot allow $\phi = g$, for otherwise our increasing
+  sequence of $g_n$'s will never be able to `catch up' to $\phi$, which is what we
+  want.} Let $0 < r < 1$, so that either
+  \begin{itemize}
+    \item $r \phi = 0 \leq g$; \sidenote{In the case where $g = 0$, we have that
+      $r\phi = 0$ and not something bigger.} or
+    \item $r\phi < g = \lim_{n \to \infty} g_n$.
+  \end{itemize}
+  Then, consider
+  \begin{equation*}
+    H_k = (g_k - r\phi)^{-1}[0, \infty].
+  \end{equation*}
+  Notice that since ${g_k}_k$ is a sequence of increasing functions, we have
+  \sidenote{The increasing-ness of the $g_k$'s guarantees that if $(g_k -
+  r\phi)(x) \geq 0$, then $(g_{k+1} - r\phi)(x) \geq 0$. This is sort of like a
+  rising water level scenario.}
+  \begin{equation*}
+    H_1 \subseteq H_2 \subseteq H_3 \subseteq \hdots
+  \end{equation*}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-0.5, 0) -- (2, 0);
+      \draw[->] (0, -0.5) -- (0, 2);
+      \draw (0, 0.5) -- (1, 0.5);
+      \draw[dashed] (1, 0.5) -- (1, 0.7);
+      \draw (1, 0.7) -- (1.5, 0.7);
+      \draw[dashed] (1.5, 0.7) -- (1.5, 1.6);
+      \draw (1.5, 1.6) -- (2, 1.6) node[right] {$r\phi$ };
+
+      \draw (0,0) .. controls (0.3,0.3) and (1.4,0.8) .. (2,0.8)
+        node[right] {$g_k$};
+      \draw (0,0.4) .. controls (0.3,0.9) and (1.4,1.2) .. (2,1.2)
+        node[right] {$g_{k+1}$};
+    \end{tikzpicture}
+    \caption{Increasing levels of $g_k$ `covers' more and more parts of $r\phi$}\label{fig:increasing_levels_of_g_k_covers_more_and_more_parts_of_rphi_}
+  \end{marginfigure}
+  Also, note that
+  \begin{equation*}
+    H = \bigcup_{k=1}^{\infty} H_k.
+  \end{equation*}
+  \newpage
+  \sidenote{By this construction, we have that $r\phi \leq g_k$ in $H_k$ for
+  each $k$. So we already have
+  \begin{equation*}
+    \lim_{k \to \infty} \int_{H_k} r\phi \leq \lim_{k \to \infty} \int_{H_k} g_k 
+  \end{equation*}
+  in our bag. Notice that since $\phi$ is a simple function, by
+  \cref{defn:integration_of_simple_functions}, we have
+  \begin{equation*}
+    \int_{H_k} \phi = \int_{H} \phi \cdot \chi_{H_k}.
+  \end{equation*}
+  Since the $H_k$'s is an `increasing sequence' of sets, and especially since $H
+  = \bigcup_{k=1}^{\infty} H_k$, we expect
+  \begin{equation*}
+    \lim_{k \to \infty} \int_{H_k} \phi = \int_{H} \phi.
+  \end{equation*}}
+  WTS
+  \begin{equation*}
+    \int_{H} \phi = \lim_{k \to \infty} \int_{H_k} \phi.
+  \end{equation*}
+  Since $\phi \in \SIMP(H, [0, \infty])$, let us write
+  \begin{equation*}
+    \phi = \sum_{k=1}^{N} \alpha_k \chi_{J_k}
+  \end{equation*}
+  in its standard form, where $J_k \in \mathfrak{M}(H)$. Then
+  \begin{equation*}
+    \int_{H} \phi = \sum_{k=1}^{N} \alpha_k mJ_k,
+  \end{equation*}
+  while
+  \begin{equation*}
+    \int_{H_n} \phi = \sum_{k=1}^{N} \alpha_k m(J_k \cap H_n)
+  \end{equation*}
+  for each $n \geq 1$.
+
+  By the \hlnotea{continuity of the Lebesgue measure} (A1), notice that
+  \begin{equation*}
+    \lim_{n \to \infty} m(J_k \cap H_n)
+    = m\left(J_k \cap \left( \bigcup_{n=1}^{\infty} H_n \right) \right) 
+    = m(J_k \cap H) = m(J_k)
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \lim_{n \to \infty} \int_{H_n} \phi = \sum_{k=1}^{N} \alpha_k m(J_n) =
+    \int_{H} \phi,
+  \end{equation*}
+  as claimed.
+
+  Then in particular, we have that
+  \begin{equation*}
+    \int_{H} r \phi = \lim_{k \to \infty} \int_{H_k} \phi \leq \lim_{k \to
+    \infty} \int_{H_k} g_k \leq \lim_{k \to \infty} \int_{H} g_k,
+  \end{equation*}
+  where the last inequality follows from
+  \cref{lemma:monotonicity_of_the_lebesgue_integral_and_other_lemmas}.
+
+  This is exactly the final piece that we have set out to prove, and so we have
+  completed the proof.
+\end{proof}
+
+\begin{eg}
+  Recall our ``pathological'' sequence of Riemann integral functions earlier on,
+  where $E = \mathbb{Q} \cap [0, 1] = \{ q_n \}_{n=1}^{\infty}$, and sequence of
+  functions
+  \begin{equation*}
+    f_n = \chi_{\{q_1, \ldots, q_n\}}, \text{ for } n \geq 1,
+  \end{equation*}
+  and their limit
+  \begin{equation*}
+    f = c_{\mathbb{Q} \cap [0, 1]}.
+  \end{equation*}
+  We have that
+  \begin{equation*}
+    0 \leq f_1 \leq f_2 \leq \hdots \leq f,
+  \end{equation*}
+  and each \sidenote{
+  \begin{ex}
+    Show that $f_n \in \mathcal{L}([0, 1], [0, \infty))$.
+  \end{ex}
+  }
+  \begin{equation*}
+    f_n \in \mathcal{L}([0, 1], [0, \infty)).
+  \end{equation*}
+  By the \hyperref[thm:the_monotone_convergence_theorem]{Monotone Convergence
+  Theorem (MCT)}, $f$ is measurable and
+  \begin{equation*}
+    \int_{[0, 1]} f = \lim_{n \to \infty} \int_{[0, 1]} f_n = \lim_{n \to
+    \infty} 0 = 0.
+  \end{equation*}
+  This agrees with what we saw much earlier on, i.e.
+  \begin{equation*}
+    0 \leq \int_{[0, 1]} f = \int_{[0, 1]} \chi_E = mE \leq m\mathbb{Q} = 0.
+  \end{equation*}
+  Note that $f_n$ is Riemann integrable, but $f$ is not, but it is Lebesgue
+  integrable. In other words, this function $f$ is an example of a Lebesgue
+  integrable function that is not Riemann integrable.
+\end{eg}
+
+\begin{crly}[Linearity of the Lebesgue Integral and Other Results]\label{crly:linearity_of_the_lebesgue_integral_and_other_results}
+  Let $E \in \mathfrak{M}(\mathbb{R})$.
+  \begin{enumerate}
+    \item If $f, g \in \mathcal{L}(E, [0, \infty])$ and $\kappa \geq 0$, then
+      \begin{equation*}
+        \int_{E} \kappa f + g = \kappa \int_{E} f + \int_{E} g. 
+      \end{equation*}
+    \item If $(h_n)_{n=1}^{\infty}$ is a sequence in $\mathcal{L}(E, [0,
+      \infty])$ and
+      \begin{equation*}
+        h(x) \coloneqq \lim_{N \to \infty} \sum_{n=1}^{N} h_n(x), \quad \forall
+        x \in E,
+      \end{equation*}
+      then $h \in \mathcal{L}(E, [0, \infty])$ and
+      \begin{equation*}
+        \int_{E} h = \sum_{n=1}^{\infty} \int_{E} h_n.
+      \end{equation*}
+    \item Let $f \in \mathcal{L}(E, [0, \infty])$. If $(H_n)_{n=1}^{\infty}$ is
+      a sequence $\mathfrak{M}(E)$ with $H_i \cap H_j = \emptyset$ when $1 \leq
+      i \neq j \leq \infty$ and $H = \bigcupdot_{n=1}^{\infty} H_n$, then
+      \begin{equation*}
+        \int_{H} f = \sum_{n=1}^{\infty} \int_{H_n} f.
+      \end{equation*}
+  \end{enumerate}
+\end{crly}
+
+\begin{proof}
+  \begin{enumerate}
+    \item By A3, there exists a sequence of simple, measurable functions
+      $(\phi_n)_n, (\psi_n)_n$ in $\mathcal{L}(E, [0, \infty])$ such that
+      \begin{gather*}
+        0 \leq \phi_1 \leq \phi_2 \leq \hdots \leq f \\
+        0 \leq \psi_1 \leq \psi_2 \leq \hdots \leq g
+      \end{gather*}
+      such that $\forall x \in E$,
+      \begin{gather*}
+        \lim_{n \to \infty} \phi_n(x) = f(x) \\
+        \lim_{n \to \infty} \psi_n(x) = g(x)
+      \end{gather*}
+      By
+      \cref{propo:linearity_and_monotonicity_of_the_integral_of_simple_functions},
+      we have that for each $n$, for any $\kappa \in E$, we have
+      \begin{equation*}
+        \int_{E} \kappa \phi_n + \psi_n = \kappa \int_{E} \phi_n + \int_{E}
+        \psi_n.
+      \end{equation*}
+      Furthermore, note that
+      \begin{equation*}
+        \lim_{n \to \infty} (\kappa \phi + \psi)(x) = (\kappa f + g)(x),
+      \end{equation*}
+      and $(\kappa \phi_n + \psi_n)_n$ is an increasing \sidenote{If you are
+      second-guessing yourself like I did, notice that that $n$ is fixed for
+      both of them, not just one of them.} sequence of non-negative, simple,
+      measurable functions converging pointwise to the function $\kappa f + g$.
+
+      Thus, by the MCT, we see that
+      \begin{align*}
+        \int_{E} (\kappa f + g)
+        &= \lim_{N \to \infty} (\kappa \phi_N + \psi_N) \\
+        &= \lim_{N \to \infty} \kappa \int_{E} \phi_N + \int_{E} \psi_N
+        = \kappa \int_{E} f + \int_{E} g.
+      \end{align*}
+
+    \item \sidenote{Since $\Range h_n \subseteq [0, \infty]$, the partial sums
+      form an increasing sequence of functions. Then, we can make use of the
+      MCT.} Let
+      \begin{equation*}
+        g_N = \sum_{n=1}^{N} h_n
+      \end{equation*}
+      for each $N \geq 1$.
+
+      \noindent
+      \hlbnoted{Showing that $g_N \in \mathcal{L}(E, [0, \infty])$} Let $(a,
+      \infty]$, for any $\alpha \in [0, \infty)$. Then since $g_N$ is a finite
+      sum of functions, we have that
+      \begin{equation*}
+        g_N((a, \infty]) = h_1((a, \infty]) \cup h_2((a, \infty]) \cup \hdots
+        \cup h_N((a, \infty]),
+      \end{equation*}
+      which is a countable union of measurable sets, and is hence measurable.
+
+      Then
+      \begin{equation*}
+        0 \leq g_1 \leq g_2 \leq \hdots \leq h
+      \end{equation*}
+      and $\forall x \in E$
+      \begin{equation*}
+        \lim_{N \to \infty} g_N(x) = h(x),
+      \end{equation*}
+      both of which are from our assumptions.
+
+      By the MCT and part (1), we have that
+      \begin{align*}
+        \int_{E} h &= \lim_{N \to \infty} \int_{E} g_N \\
+                   &= \lim_{N \to \infty} \int_{E} \sum_{n=1}^{N} h_n \\
+                   &= \lim_{N \to \infty} \sum_{n=1}^{N} \int_{E} h_n \\
+                   &= \sum_{n=1}^{\infty} \int_{E} h_n
+      \end{align*}
+      as required.
+
+    \item \sidenote{Since the RHS of the goal integrates over $H_n \subseteq H$,
+      and the $H_i$'s are disjoint, we can break $f$ down by where $H_n$ is
+      defined.} Let
+      \begin{equation*}
+        h_n = f \cdot \chi_{H_n}
+      \end{equation*}
+      for each $n \geq 1$. Since each $H_n \in \mathfrak{M}(E)$, each
+      $\chi_{H_n}$, and $f$ being measurable implies that each $h_n$ is
+      measurable. Since $H_i \cap H_j = \emptyset$ for all $1 \leq i \neq j \leq
+      \infty$, we have that
+      \begin{equation*}
+        f = \sum_{n=1}^{\infty} h_n.
+      \end{equation*}
+      By part (2), we have that
+      \begin{equation*}
+        \int_{E} f = \sum_{n=1}^{\infty} \int_{E} h_n = \sum_{n=1}^{\infty}
+        \int_{E} f \cdot \chi_{H_n} = \sum_{n=1}^{\infty} \int_{H_n} f.
+      \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{defn}[Lebesgue Integrable]\index{Lebesgue Integrable}\label{defn:lebesgue_integrable}
+  Let $E \in \mathfrak{M}(\mathbb{R})$  and $f \in \mathcal{L}(E,
+  \overline{\mathbb{R}})$. We say that $f$ is \hlnoteb{Lebesgue integrable} on
+  $E$ if \sidenote{Recall \cref{remark:f_plus_f_minus}.}
+  \begin{equation*}
+    \int_{E} f^+ < \infty \quad \text{and} \quad \int_{E} f^- < \infty,
+  \end{equation*}
+  in which case we set
+  \begin{equation*}
+    \int_{E} f \coloneqq \int_{E} f^+ - \int_{E} f^-.
+  \end{equation*}
+  We denote by $\mathcal{L}_1(E, \overline{\mathbb{R}})$ the set of all Lebesgue
+  integrable functions from $E$ to $\overline{\mathbb{R}}$, and
+  $\mathcal{L}_1(E, \mathbb{R})$ all Lebesgue integrable functions from $E$ to
+  $\mathbb{R}$.
+\end{defn}
+
+\begin{remark}
+  Let $E \in \mathfrak{M}(\mathbb{R})$.
+  \begin{enumerate}
+    \item By definition, every Lebesgue integrable function on $E$ is Lebesgue
+      measurable.
+    \item A \hlnotea{measurable function} $f$ is Lebesgue integrable iff
+      $\abs{f}$ is Lebesgue integrable. Notice that
+      \begin{equation*}
+        \int_{E} f = \int_{E} f^+ - \int_{E} f^-
+      \end{equation*}
+      while
+      \begin{equation*}
+        \int_{E} \abs{f} = \int_{E} f^+ + f^- = \int_{E} f^+ + \int_{E} f^-,
+      \end{equation*}
+      and so if either of these are integrable, then
+      \begin{equation*}
+        \int_{E} f^+ < \infty \quad \text{and} \quad \int_{E} f^- < \infty,
+      \end{equation*}
+      which then the other must also be integrable.
+
+      It is important to note that this is a distinguishing feature of Lebesgue
+      integration, in comparison to Riemann integration. For instance, if we
+      consider the function
+      \begin{equation*}
+        f(x) = \frac{\sin x}{x}, \text{ for } x \geq 1,
+      \end{equation*}
+      improper Riemann integration gives us that $\int_{1}^{\infty} f(x) \dif{x}
+      = \frac{\pi}{2}$. But from the POV of Lebesgue integration, notice that
+      \begin{align*}
+        &\int_{\left[\pi, (N+1)\pi\right]} \abs{\frac{(\sin x)^+}{x}} \\
+        &= \sum_{k=1}^{N} \int_{[\pi k, \pi(k+1)]} \abs{\frac{(\sin x)^+}{x}} \\
+        &= \sum_{k=1}^{N} \int_{[0, \pi]} \frac{\abs{\sin(t + k\pi)}}{t + k\pi}
+        \\
+        &= \sum_{k=1}^{N} \int_{[0, \pi]} \frac{\abs{\sin t}}{t + k\pi} \\
+        &\geq \sum_{k=1}^{N} \frac{1}{(k+1)\pi} \int_{[0, \pi]} \sin t.
+      \end{align*}
+      Assuming we know some of the upcoming results, in particular, assuming
+      that we know that for bounded functions the Lebesgue integral is the same
+      as the Riemann integral, we see that the above is
+      \begin{equation*}
+        = \frac{2}{\pi} \sum_{k=1}^{N} \frac{1}{k+1},
+      \end{equation*}
+      which is a harmonic series and hence divergent.
+    \item If $f \in \mathcal{L}_1(E, \overline{\mathbb{R}})$, then
+      \begin{equation*}
+        mf^{-1}(\{-\infty\}) = 0 = mf^{-1}(\{\infty\}).
+      \end{equation*}
+      \begin{ex}
+        Prove that the above is indeed the case.
+      \end{ex}
+    \item Following the above, if we set
+      \begin{equation*}
+        H = f^{-1}(\{- \infty, \infty\}),
+      \end{equation*}
+      then $H \in \mathfrak{M}(E)$ and $mH = 0$. Letting
+      \begin{equation*}
+        g = f \cdot \chi_{E \setminus H}.
+      \end{equation*}
+      Then
+      \begin{equation*}
+        g = f \text{ a.e. and } g \in \mathcal{L}_1(E, \mathbb{R}).
+      \end{equation*}
+
+      This will prove itself more useful than it seems, especially since
+      $\mathcal{L}_1(E, \overline{\mathbb{R}})$ is that it is \hlimpo{not a
+      vector space}!!!
+    \item Suppose that $g : E \to \mathbb{C}$ is measurable. Let us write
+      \begin{equation*}
+        g = (g_1 - g_2) + i(g_3 - g_4),
+      \end{equation*}
+      where $g_1 = (\Re g)^+$, $g_2 = (\Re g)^-$, $g_3 = (\Im g)^+)$ and $g_4 =
+      (\Im g)^-$. Then we say that $g$ is \hlnotea{Lebesgue integrable}, and
+      write
+      \begin{equation*}
+        g \in \mathcal{L}_1(E, \mathbb{C}),
+      \end{equation*}
+      if
+      \begin{equation*}
+        \int_{E} g_k < \infty \quad \forall 1 \leq k \leq 4,
+      \end{equation*}
+      and we write
+      \begin{equation*}
+        \int_{E} g = \left(\int_{E} g_1 - \int_{E} g_2 \right) + i \left(
+        \int_{E} g_3 + \int_{E} g_4 \right).
+      \end{equation*}
+  \end{enumerate}
+\end{remark}
+
+\begin{propo}[Linearity of Lebesgue Integral for Lebesgue Integrable Functions]\label{propo:linearity_of_lebesgue_integral_for_lebesgue_integrable_functions}
+  let $E \in \mathfrak{M}(\mathbb{R})$. Suppose that $f, g \in \mathcal{L}_1(E,
+  \mathbb{R})$ and $\kappa \in \mathbb{R}$.
+  \begin{enumerate}
+    \item $\kappa f \in \mathcal{L}_1(E, \mathbb{R})$ and $\int_{E} \kappa f =
+      \kappa \int_{E} f$.
+    \item $f + g \in \mathcal{L}_1(E, \mathbb{R})$ and $\int_{E} (f + g) =
+      \int_{E} f + \int_{E} g$.
+    \item Finally,
+      \begin{equation*}
+        \abs{ \int_{E} f } \leq \int_{E} \abs{f}.
+      \end{equation*}
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  Note that \cref{crly:linearity_of_the_lebesgue_integral_and_other_results}
+  covers for the cases where $f, g \in \mathcal{L}(E, [0, \infty])$ and $\kappa
+  \geq 0$ for (1) and (2). This is, unfortunately, insufficient for the entire
+  proposition
+  \begin{enumerate}
+    \item Let $f = f^+ - f^-$.
+
+      \noindent
+      \hlbnoted{Case 1: $\kappa = 0$} We have that
+      \begin{equation*}
+        \int_{E} \kappa f = \int_{E} 0 = 0 = \kappa \int_{E} f.
+      \end{equation*}
+
+      \noindent
+      \hlbnoted{Case 2: $k > 0$} We have
+      \begin{equation*}
+        \kappa f = (\kappa f)^+ - (\kappa f)^-.
+      \end{equation*}
+      Note
+      \begin{equation*}
+        (\kappa f)^+ = \kappa f^+ \text{ and } (\kappa f)^- = \kappa f^-.
+      \end{equation*}
+      So, since $f^+, -f^- \in \mathcal{L}(E, [0, \infty])$, by
+      \cref{crly:linearity_of_the_lebesgue_integral_and_other_results},
+      \begin{align*}
+        \int_{E} \kappa f
+        &= \int_{E} \kappa f^+ - \int_{E} \kappa f^- \\
+        &= \kappa \int_{E} f^+ - \kappa \int_{E} f^- \\
+        &= \kappa \left( \int_{E} f^+ - f^- \right) \\
+        &= \kappa \int_{E} f.
+      \end{align*}
+
+      \noindent
+      \hlbnoted{Case 3: $\kappa < 0$} Similar to the above, we first observe
+      that
+      \begin{equation*}
+        (\kappa f)^+ = -\kappa f^- \text{ and } (\kappa f)^- = -\kappa f^+.
+      \end{equation*}
+      Then by the same reason as in the last case, we have
+      \begin{align*}
+        \int_{E} \kappa f
+        &= \int_{E} -\kappa f^- - \int_{E} -\kappa f^+ \\
+        &= - \kappa \left( \int_{E} f^- - \int_{E} f^+ \right) \\
+        &= - \kappa \left( - \int_{E} f \right) \\
+        &= \kappa \int_{E} f.
+      \end{align*}
+
+    \item \hlbnoted{$f + g \in \mathcal{L}_1(E, \mathbb{R})$} For convenience,
+      let
+      \begin{equation*}
+        h = f + g = f^+ - f^- + g^+ - g^-.
+      \end{equation*}
+      Notice that
+      \begin{equation*}
+        h^+, h^- \leq \abs{h} = \abs{f + g}
+        \leq \abs{f} + \abs{g} = f^+ + f^- + g^+ + g^-.
+      \end{equation*}
+      Thus by \cref{crly:linearity_of_the_lebesgue_integral_and_other_results},
+      \begin{align*}
+        \int_{E} h^+ &\leq \int_{E} f^+ + f^- + g^+ + g^- \\
+                     &= \int_{E} f^+ + \int_{E} f^- + \int_{E} g^+ + \int_{E}
+                     g^- < \infty.
+      \end{align*}
+      Similarly, $\int_{E} h^- < \infty$.
+
+      \noindent
+      \hlbnoted{$\int_{E} (f + g) = \int_{E} f + \int_{E} g$} Notice that
+      \begin{equation*}
+        h^+ - h^- = h = f + g = f^+ - f^- + g^+ - g^-,
+      \end{equation*}
+      and so
+      \begin{equation*}
+        h^+ + f^- + g^- = h^- + f^+ + g^+.
+      \end{equation*}
+      Then by \cref{crly:linearity_of_the_lebesgue_integral_and_other_results},
+      \begin{equation*}
+        \int_{E} h^+ + \int_{E} f^- + \int_{E} g^-
+        = \int_{E} h^- + \int_{E} f^+ + \int_{E} g^+,
+      \end{equation*}
+      and so
+      \begin{align*}
+        \int_{E} (f + g) &= \int_{E} h = \int_{E} h^+ - \int_{E} h^- \\
+                         &= \int_{E} f^+ - \int_{E} f^- + \int_{E} g^+ -
+                         \int_{E} g^- \\
+                         &= \int_{E} f + \int_{E} g.
+      \end{align*}
+
+    \item First, notice that $f \in \mathcal{L}_1(E, \mathbb{R})$, by our
+      previous remark, $\abs{f} \in \mathcal{L}_1(E, \mathbb{R})$. Now since
+      $\abs{f} = f^+ + f^-$, and $\abs{\int_{E} f^+}, \abs{\int_{E} f^-} \geq
+      0$,
+      \begin{align*}
+        \abs{\int_{E} f}
+        &= \abs{ \int_{E} f^+ - \int_{E} f^- } \\
+        &\leq \abs{\int_{E} f^+} + \abs{\int_{E} f^-} \\
+        &= \int_{E} f^+ + \int_{E} f^- \\
+        &= \int_{E} \abs{f}.
+      \end{align*}
+  \end{enumerate}
+\end{proof}
+
+% section lebesgue_integration_continued (end)
+
+% chapter lecture_8_may_30th_2019 (end)
 
 \appendix
 
