@@ -4746,6 +4746,266 @@ shall do so next lecture.
 
 % chapter lecture_8_may_30th_2019 (end)
 
+\chapter{Lecture 9 Jun 04 2019}%
+\label{chp:lecture_9_jun_04_2019}
+% chapter lecture_9_jun_04_2019
+
+\section{Lebesgue Integration (Continued 2)}%
+\label{sec:lebesgue_integration_continued_2}
+% section lebesgue_integration_continued_2
+
+Thus far, we've only integrated simple functions, and never even did so for,
+say, $f(x) = x$. Trying to do that will lead to intense swearing, rising of
+blood pressure, heavy signs of nausea and mental pain. Why? Well just try doing
+it.
+
+\begin{ex}[How a slime became one heck of a monster to deal with]
+  Calculate $\int_{[0, 1]} x$.
+\end{ex}
+
+We hate pain, and now we want to crawl back to Riemann integration and ask for
+forgiveness. Fortunately, the nice world of Riemann integration is kind enough
+to give us a bridge. We shall now study this bridge. In particular, we shall see
+that for \hlimpo{bounded} functions on \hlimpo{closed, bounded} intervals,
+Riemann integrability implies Lebesgue integrability, and, in fact, they
+coincide on these functions. In particular, this opens up the
+\hlnotea{Fundamental Theorem of Calculus} (for Riemann integration) to us.
+
+\begin{lemma}[Riemann Integrability and Lebesgue Integrability of Step Functions]\label{lemma:riemann_integrability_and_lebesgue_integrability_of_step_functions}
+  Let $a < b \in \mathbb{R}$ and $\phi : [a, b] \to \mathbb{R}$ be a step
+  function. Then $\phi$ is both Riemann integrable and Lebesgue integrable, and
+  \begin{equation*}
+    \int_{[a, b]} \phi = \int_{a}^{b} \phi.
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  Let $P = \{ a = p_0 < p_1 < p_2 < \hdots p_N = b \} \in \mathcal{P}([a, b])$,
+  where the $p_n$'s are chosen such that $[p_{n-1}, p_n)$ do not contain a
+  `jump'. Since $\phi$ is a step function, let
+  \begin{equation*}
+    \phi = \sum_{n=1}^{N} \alpha_n \chi_{[p_{n-1}, p_n)},
+  \end{equation*}
+  where $\alpha_n = \phi(x)$ for all $x \in [p_{n-1}, p_n)$, $1 \leq n \leq N$.
+
+  Then
+  \begin{align*}
+    \int_{[a, b]} \phi
+    &= \sum_{n=1}^{N} \alpha_n m[p_{n-1}, p_n) \\
+    &= \sum_{n=1}^{N} \alpha_n (p_n - p_{n-1}) \\
+    &= \sum_{n=1}^{N} \int_{p_{n-1}}^{p_n} \alpha_n \\
+    &= \int_{a}^{b} \sum_{n=1}^{N} \alpha_n \chi_[p_{n-1}, p_n) \\
+    &= \int_{a}^{b} \phi.
+  \end{align*}
+\end{proof}
+
+\begin{thm}[Bounded Riemann-Integrable Functions are Lebesgue Integrable]\label{thm:bounded_riemann_integrable_functions_are_lebesgue_integrable}
+  Let $a < b \in \mathbb{R}$ and $f : [a, b] \to \mathbb{R}$ be a bounded,
+  Riemann-integrable function. Then $f \in \mathcal{L}_1([a, b], \mathbb{R})$ 
+  and
+  \begin{equation*}
+    \int_{[a, b]} f = \int_{a}^{b} f,
+  \end{equation*}
+  i.e. the Lebesgue and Riemann integrals of $f$ over $[a, b]$ coincide.
+\end{thm}
+
+\begin{strategy}
+  Here is my understanding of the idea that motivates this proof.
+  \begin{enumerate}
+    \item It is important that the function is bounded both on its domain and
+      its range. A bound on the domain allows us to do finite sums, and a bound
+      on the range puts a cap on how high our rectangles can be.
+    \item We need to reduce the problem to deal only with step functions, using
+      step functions as close to $f$ as possible, and then use our earlier
+      results and intuition to forge forward.
+  \end{enumerate}
+\end{strategy}
+
+\begin{proof}
+  First, since $f$ is bounded, wma $\abs{f} < M \in \mathbb{R}$. Let $g =
+  M\chi_{[a, b]}$, which is a step-function and is hence integrable by
+  \cref{lemma:riemann_integrability_and_lebesgue_integrability_of_step_functions}.
+  Then, notice that $f + g$ is Riemann integrable. Furthermore, observe that
+  \begin{equation*}
+    \int_{a}^{b} (f + g) = \int_{a}^{b} f + M(b - a).
+  \end{equation*}
+  So $f + g \in \mathcal{L}_1([a, b], \mathbb{R})$ iff $f \in \mathcal{L}_1([a,
+  b], \mathbb{R})$.
+
+  Now, by \cref{thm:cauchy_criterion_of_riemann_integrability}, for each $n \geq
+  1$, $\exists R_n \in \mathcal{P}[a, b]$ partition such that $\forall X, Y
+  \supseteq R_n$ refinements, $\forall X^*, Y^*$ test values of $X$ and $Y$ 
+  respectively, we have
+  \begin{equation*}
+    \abs{S(f, X, X^*) - S(f, Y, Y^*)} < \frac{1}{N}.
+  \end{equation*}
+
+  \sidenote{Get finer and finer refinements.} Now, let $Q_N = \bigcup_{n=1}^{N}
+  R_n$, so that it is a \hlimpo{common refinement} of $R_1, R_2, \ldots, R_N$.
+  Write
+  \begin{equation*}
+    Q_N = \left\{ a = q_{0,N} < q_{1, N} < \hdots < q_{m_N,N} \right\}.
+  \end{equation*}
+  \sidenote{Look at each subinterval of each refinement.} Let
+  \begin{equation*}
+    H_{k,N} = [q_{k,N}, q_{k+1, N}] \text{ for } 1 \leq k \leq m_N - 1,
+  \end{equation*}
+  and
+  \begin{equation*}
+    H_{m_N,N} = [q_{m_N-1, N}, q_{m_N,N}].
+  \end{equation*}
+  \sidenote{Get the sup and inf of each interval under $f$.} Define for each $1
+  \leq k \leq m_N$,
+  \begin{gather*}
+    \alpha_{k, N} \coloneqq \inf \{ f(t) : t \in H_{k, N} \} \leq -M \\
+    \beta_{k,N} \coloneqq \sup \{ f(t) : t \in H_{k, N} \} \leq M.
+  \end{gather*}
+  \sidenote{Use the above $\alpha$'s and $\beta$'s to construct simple
+  functions, which are step-like functions.} For each $N \geq 1$, let
+  \begin{gather*}
+    \phi_{N} \coloneqq \sum_{k=1}^{m_N} \alpha_{k, N} \chi_{H_{k, N}} \\
+    \psi_{N} = \sum_{k=1}^{m_N} \beta_{k,N} \chi_{H_{k,N}}.
+  \end{gather*}
+  Since each $\phi_N, \psi_N$ is simple, they are all measurable and Lebesgue
+  integrable (cf.
+  \cref{lemma:riemann_integrability_and_lebesgue_integrability_of_step_functions}).
+
+  Now, notice that
+  \begin{equation*}
+    Q_1 \subseteq Q_2 \subseteq \hdots \subseteq Q_N \subseteq Q_{N+1} \subseteq
+    \hdots
+  \end{equation*}
+  since it is a sequence of finer and finer refinements, we have
+  \begin{equation}\label{eq:inc_dec_of_simp_fns_to_f_riem_intg}
+    \phi_1 \leq \phi_2 \leq \phi_3 \leq \hdots \leq f \leq \hdots \leq \psi_3
+    \leq \psi_2 \leq \psi_1.
+  \end{equation}
+  Thus, by
+  \cref{lemma:riemann_integrability_and_lebesgue_integrability_of_step_functions}
+  and \cref{lemma:monotonicity_of_the_lebesgue_integral_and_other_lemmas}, we have
+  \begin{equation*}
+    \int_{[a, b]} \phi_N = \int_{a}^{b} \phi_N \leq \int_{a}^{b} f \leq
+    \int_{a}^{b} \psi_N = \int_{[a, b]} \psi_N
+  \end{equation*}
+  for each $N$. Since $Q_N$ is a refinement of $R_N$, we have that
+  \begin{equation*}
+    \abs{S(f, Q_N, Q_N^*) - S(f, Q_N, Q_N^{**})} < \frac{1}{N},
+  \end{equation*}
+  which implies
+  \begin{equation*}
+    \abs{\int_{[a, b]} \phi_N - \int_{[a, b]} \psi_N} < \frac{1}{N},
+  \end{equation*}
+  for $N \geq 1$.
+
+  Due to \cref{eq:inc_dec_of_simp_fns_to_f_riem_intg}, let
+  \begin{equation*}
+    \phi \coloneqq \lim_{N \geq 1} \phi_N \text{ and } \psi \coloneqq \lim_{N
+    \geq 1} \psi_N.
+  \end{equation*}
+  Then by the \hyperref[thm:the_monotone_convergence_theorem]{MCT}, we have that
+  \begin{align*}
+    &\int_{[a, b]} \phi = \lim_{N \to \infty} \int_{[a, b]} \phi_N = \lim_{N \to
+    \infty} \int_{a}^{b} \phi_N \\
+    &= \int_{a}^{b} f \\
+    &= \lim_{N \to \infty} \int_{a}^{b} \psi_N = \lim_{N \to \infty} \psi_N =
+    \int_{[a, b]} \psi.
+  \end{align*}
+  Then $\int_{[a, b]} \phi - \psi = 0$. Since $\phi \leq \psi$, we must thus
+  have $\phi = \psi$ a.e. on $[a, b]$. Since $\phi \leq f \leq \psi$, we have
+  that $\phi = f = \psi$ a.e. on $[a, b]$. Since $\phi, \psi$ are measurable, so
+  is $f$, and thus
+  \begin{equation*}
+    \int_{[a, b]} f = \int_{[a, b]} \phi = \int_{a}^{b} f < \infty.
+  \end{equation*}
+\end{proof}
+
+Our earlier demon-level slime has been reduced back to being a, well,
+slime-level monster.
+
+\begin{eg}
+  Let $f(x) = x$ and $x \in [0, 1]$. Then by the \hlnotea{Fundamental Theorem of
+  Calculus},
+  \begin{equation*}
+    \int_{[0, 1]} f = \int_{0}^{1} f = \frac{x^2}{2} \at{0}{1} = \frac{1}{2} - 0
+    = \frac{1}{2}.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Let $f(x) = \frac{1}{x^2}$ where $x \in E \coloneqq [1, \infty)$. We want to
+  calculate $\int_{[1, \infty)} f$. For each $n \geq 1$, set $f_n \coloneqq f
+  \cdot \chi_{[1, n]}$. Then $f$ is measurable, since it is
+  continuous except at one point on $E$, and
+  \begin{equation*}
+    0 \leq f_1 \leq f_2 \leq \hdots,
+  \end{equation*}
+  with
+  \begin{equation*}
+    \lim_{n \to \infty} f_n(x) = f(x) \quad \forall x \geq 1.
+  \end{equation*}
+  By \cref{thm:bounded_riemann_integrable_functions_are_lebesgue_integrable},
+  for all $n \geq 1$,
+  \begin{equation*}
+    \int_{[1, n]} f_n = \int_{1}^{n} f_n = \int_{1}^{n} \frac{1}{x^n} =
+    -\frac{1}{x} \at{1}{n} = 1 - \frac{1}{n}.
+  \end{equation*}
+  By the \hyperref[thm:the_monotone_convergence_theorem]{MVT},
+  \begin{align*}
+    \int_{[1, \infty)} f
+    &= \lim_{n \to \infty} \int_{[1, n]} f_n \\
+    &= \lim_{n \to \infty} \left( 1 - \frac{1}{n} \right) = 1.
+  \end{align*}
+\end{eg}
+
+\begin{note}
+  In the above example, the Lebesgue integral of $f$ returns the value of the
+  improper Riemann integral of $f$ over $[1, \infty)$, which is not what
+  happened in another function that we looked at earlier. There are 2 things to
+  note here:
+  \begin{itemize}
+    \item it is possible for an improper Riemann integral of a measurable
+      function $f : [1, \infty) \to \mathbb{R}$ to exist, even though the
+      Lebesgue integral $\int_{[1, \infty)} f$ \hlimpo{does not exist}!
+    \item There is no notion of an ``improper'' Lebesgue integral. The domain of
+      $f$, $[1, \infty)$, is just another measurable set.
+  \end{itemize}
+\end{note}
+
+\newthought{In the} \hyperref[thm:the_monotone_convergence_theorem]{Monotone
+Convergence Theorem},  if the ``increasing'' assumption is dropped, then the
+result may not hold.
+
+\begin{eg}[The MCT needs an increasing/decreasing sequence of functions]
+  Consider the sequence $(f_n)_n$ given by
+  \begin{equation*}
+    f_n : [1, \infty) \to \mathbb{R}
+  \end{equation*}
+  where
+  \begin{equation*}
+    x \mapsto \begin{cases}
+      \frac{1}{nx} & 1 \leq x \leq e^n \\
+      0            & x > e^n
+    \end{cases}.
+  \end{equation*}
+  Then $(f_n)_n$ converges \hlnotea{uniformly} to $f = 0$ on $[1, \infty)$. Note
+  that for all $n \geq 1$, $f_n$ is Riemann integrable, and bounded on $[1,
+  e^n]$, and so
+  \begin{align*}
+    \int_{[1, \infty)} f_n &= \int_{[1, e^n]} \frac{1}{nx} \\
+                           &= \int_{1}^{e^n} \frac{1}{nx} \\
+                           &= \frac{1}{n} \ln x \at{1}{e^n} \\
+                           &= \frac{1}{n} (n-0) = 1,
+  \end{align*}
+  for each $n \geq 1$. However,
+  \begin{equation*}
+    \int_{[1, \infty)} f = \int_{[1, \infty)} f = 0.
+  \end{equation*}
+\end{eg}
+
+% section lebesgue_integration_continued_2 (end)
+
+% chapter lecture_9_jun_04_2019 (end)
+
 \appendix
 
 \backmatter
