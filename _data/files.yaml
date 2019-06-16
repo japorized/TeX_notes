@@ -7,6 +7,15 @@
   tex:
     - title: classnotes.tex
       src: /PMATH450/classnotes.tex
+- title: ACTSCT432 S19 - Loss Models II
+  pdf:
+    - title: classnotes.pdf
+      src: /ACTSC432/classnotes.pdf
+    - title: classnotes-dark.pdf
+      src: /ACTSC432/classnotes-dark.pdf
+  tex:
+    - title: classnotes.tex
+      src: /ACTSC432/classnotes.tex
 
 - title: PMATH467 W19 - Algebraic Topology
   pdf:
