@@ -15,6 +15,15 @@
 \begin{document}
 \input{latex-classnotes-header.tex}
 
+\chapter*{Preface}%
+\label{chp:preface}
+\addcontentsline{toc}{chapter}{Preface}
+% chapter preface
+
+
+
+% chapter preface (end)
+
 
 
 \appendix

@@ -1,0 +1,754 @@
+% !TEX TS-program = pdflatex
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{ACTSC432 --- Loss Models II}
+\author{Johnson Ng}
+\subtitle{Classnotes for Spring 2019}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
+
+\input{latex-classnotes-preamble.tex}
+\input{probnotation.tex}
+
+\begin{document}
+\input{latex-classnotes-header.tex}
+
+\chapter*{Preface}%
+\label{chp:preface}
+\addcontentsline{toc}{chapter}{Preface}
+% chapter preface
+
+For this set of notes, I shall follow the format of which the course is
+presented, by breaking contents into modules instead of lectures. Also, I will
+be relying on the standard textbook for this topic, namely
+\citealt{klugman2012}.
+
+% chapter preface (end)
+
+\chapter{Introduction and Review of Probability}%
+\label{chp:introduction_and_review_of_probability}
+% chapter introduction_and_review_of_probability
+
+We shall first take an overview of what this course is about, and we will review
+on some of the relevant notions from earlier courses.
+
+\section{Introduction to Credibility Theory}%
+\label{sec:introduction_to_credibility_theory}
+% section introduction_to_credibility_theory
+
+\hldefn{Credibility Theory} is a form of statistical inference that
+\begin{itemize}
+  \item uses newly observed past events; to
+  \item more accurately re-forecasts uncertain future events.
+\end{itemize}
+From \citealt{klugman2012},
+\begin{quotebox}{magenta}{foreground}
+  It is a \hlnotea{set of quantitative tools} that allows an insurer to perform
+  prospective \hlnotea{experience rating} (adjust future premiums based
+  on past experience) on a risk or group of risks. If the experience of a
+  policyholder is consistently better than that assumed in the underlying manual
+  rate (also called a \hldefn{pure premium}), then the policyholder may demand
+  a rate reduction.
+\end{quotebox}
+
+That's all fancy mumbo-jumbo so let's go through an example that will hopefully
+enlighten us.
+
+\begin{eg}[Enlightening Example to Credibility Theory]
+  Suppose automobile insurance policies are classified according to the
+  following factors:
+  \begin{itemize}
+    \item number of drivers;
+    \item gender of each driver;
+    \item number of vehicles; and
+    \item brand, model, production year, and approximate mileage driver per
+      year.
+  \end{itemize}
+  Policies with identical characteristics are assumed to belong to the same
+  \hldefn{rating class}, which represents a group of individuals with similar
+  risks.
+
+  Suppose there are 2 policies in the same rating class. Both policies are
+  charged with a so-called \hldefn{manual premium} of $\$1,500$ per year. This
+  is the premium specified in the insurance manual for a policy with similar
+  characteristics.
+
+  Let's say that after 3 years, we obtain the following data:
+  \begin{table}[ht]
+    \centering
+    \caption{Newly acquired past history for finding `credibility'}
+    \label{table:newly_acquired_past_history_for_finding_credibility_}
+    \begin{tabular}{c | c c}
+             & Policy 1 & Policy 2 \\
+      \hline
+      Year 1 & $0$      & $500$ \\
+      Year 2 & $200$    & $4000$ \\
+      Year 3 & $0$      & $2500$
+    \end{tabular}
+  \end{table}
+  We want to find out what's a good premium to charge to each policy for Year 4.
+\end{eg}
+
+\begin{remark}
+  The shall leave the following as remarks.
+  \begin{itemize}
+    \item \textbf{How is the policyholder's own experience account for?} This is
+      a key question that will be addressed in this course.
+    \item Risks in a given rating class are \hlimpo{not perfectly identical}
+      (i.e., no rating system is perfect)
+    \item One may refine the rating system by incorporating more factors but it
+      is time-consuming (and no system is perfect).
+  \end{itemize}
+\end{remark}
+
+Thus, credibility theory is designed such that it
+\begin{itemize}
+  \item accounts for heterogeneity within a given rating lass; and
+  \item provides a theoretical justification to charge a premium that reflects
+    to the policyholder's own experience.
+\end{itemize}
+
+% section introduction_to_credibility_theory (end)
+
+\section{Review of Probability}%
+\label{sec:review_of_probability}
+% section review_of_probability
+
+You are expected to be familiar with the following concepts:
+\marginnote{Some examples or more detailed review will be added for each topic
+if I come to work through them in detail.}
+
+\begin{itemize}
+  \item Joint and Marginal Distribution
+  \item Conditional Distribution
+  \item Mixture Distributions (see also
+    \href{https://tex.japorized.ink/ACTSC431/classnotes.pdf}{ACTSC431})
+    \begin{itemize}
+      \item $n$-point Mixture
+    \end{itemize}
+  \item Conditional Expectation
+\end{itemize}
+
+% section review_of_probability (end)
+
+% chapter introduction_and_review_of_probability (end)
+
+\chapter{Review of Statistics}%
+\label{chp:review_of_statistics}
+% chapter review_of_statistics
+
+In this chapter, we will review the following notions:
+\begin{itemize}
+  \item Unbiased estimation
+  \item Maximum likelihood estimation
+  \item Bayesian estimation \faStar
+\end{itemize}
+
+\section{Unbiased Estimation}%
+\label{sec:unbiased_estimation}
+% section unbiased_estimation
+
+Suppose we are given a \hlnotea{parametric model} \sidenote{See
+\href{https://tex.japorized.ink/ACTSC431/classnotes.pdf\#defn.24}{ACTSC431}.} of
+$X$, i.e. the distribution of $X \mid \Theta = \theta$ is known but $\theta$ is
+unknown. Furthermore, we have a \hlnotea{random sample} of $X$, i.e. we have $\{
+X_i \}_{i=1}^{n}$ is an independent and identically distributed (iid) sequence
+of random variables (rv) such that $X_i \sim X$.
+
+\begin{defn}[Estimate]\index{Estimate}\label{defn:estimate}
+  An \hlnoteb{estimate} is a specific value that is obtained when applying an
+  estimation procedure to a set of numbers, and in our case, rvs. We usually
+  denote an estimate by a hat $\hat{}$.
+\end{defn}
+
+\begin{defn}[Estimator]\index{Estimator}\label{defn:estimator}
+  An \hlnoteb{estimator} is a rule or formula that produces an
+  \hlnotea{estimate}. We usually denote an estimator by $\tilde{}$.
+\end{defn}
+
+\begin{note}
+  An estimate is a number or a function, while an estimator is an rv or a random
+  function.
+\end{note}
+
+\begin{remark}
+  In this course, we will not make a difference between the estimator and the
+  estimate, and will use only $\hat{}$.
+\end{remark}
+
+\begin{defn}[Biased and Unbiased Estimator]\index{Bias}\index{Biased Estimator}\index{Unbiased Estimator}\label{defn:biased_and_unbiased_estimator}
+  We say that an estimator, $\hat{\theta}$, is \hlnoteb{unbiased} if
+  \begin{equation*}
+    E[\hat{\theta} \mid \theta] = \theta
+  \end{equation*}
+  for all $\theta$. We say that an estimator is \hlnoteb{biased} if it is not
+  unbiased, and we define the \hlnoteb{bias} as
+  \begin{equation*}
+    \bias_{\hat{\theta}}(\theta) = E[\hat{\theta} \mid \theta] - \theta.
+  \end{equation*}
+\end{defn}
+
+Let's have ourselves a silly example.
+
+\begin{eg}
+  Let $(X_1, \ldots, X_n)$ be a random sample of $\Exp(\beta)$. The
+  \hlnotea{sample mean}
+  \begin{equation*}
+    \overline{X} = \frac{1}{n} \sum_{i=1}^{n} X_i,
+  \end{equation*}
+  is an unbiased estimator for the mean $\beta$; observe that by the
+  \hlnotea{linearity of the expectation}, we have
+  \begin{equation*}
+    E[\overline{X}] = E \left[ \frac{1}{n} \sum_{i=1}^{n} X_i \right] =
+    \frac{1}{n} \sum_{i=1}^{n} E[X_i] = \frac{1}{n} (n\beta) = \beta.
+  \end{equation*}
+\end{eg}
+
+\begin{eg}
+  Let $\{ X_i \}_{i=1}^{n}$ be a random sample of $X \sim \Unif(0, \theta)$. Let
+  us construct two unbiased estimators for $\theta$ using
+  \begin{enumerate}
+    \item the sample mean $\overline{X}$; and
+    \item order statistics $X_{(n)} \coloneqq \max_{1 \leq i \leq n} \{ X_i \}$.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item Observe that
+      \begin{equation*}
+        E[\overline{X}] = E \left[ \frac{1}{n} \sum_{i=1}^{n} X_i \right] =
+        \frac{1}{n} \sum_{i=1}^{n} E[X_i] = \frac{1}{n} \cdot n \left(
+        \frac{\theta}{2} \right) = \frac{\theta}{2}.
+      \end{equation*}
+      This tells us that if we picked $\hat{\theta} = 2\overline{X}$, then we
+      would end up with
+      \begin{equation*}
+        E[2\overline{X}] = \theta.
+      \end{equation*}
+      Thus $2\overline{X}$ is an unbiased estimator of $\theta$.
+
+    \item Using the \hlnotea{Darth Vader rule} \sidenote{The \hldefn{Darth Vader
+      rule} is given as: if $X$ is a \hlimpo{non-negative} rv, then
+      \begin{equation*}
+        E[X] = \int_{0}^{\infty} \overline{F}_X(x) \dif{x},
+      \end{equation*}
+      where $\overline{F}_X$ is the survival function of $X$.
+      }, since the $X_i$'s form a random sample of $X$, and the bounds for each
+      $X_i$ is $0$ and $\theta$, we have that
+      \begin{align*}
+        E[X_{(n)}]
+        &= \int_{0}^{\infty} \overline{F}_{X_{(n)}}(x) \dif{x} \\
+        &= \int_{0}^{\infty} \left( 1 - P(\max\{X_1, X_2, \ldots, X_n\}) \leq x
+          \right) \dif{x} \\
+        &= \int_{0}^{\infty} \left( 1 - P(X_1 \leq x)P(X_2 \leq x)\hdots P(X_n
+          \leq x) \right) \dif{x} \\
+        &= \int_{0}^{\theta} \left( 1 - (\frac{x}{\theta})^n \right) \dif{x} \\
+        &= \theta - \frac{1}{n+1} \left( \frac{x^{n+1}}{\theta^n}
+        \right)\at{x=0}{x=\theta} = \frac{n}{n+1} \theta,
+      \end{align*}
+      where we note that we can change the bounds as such since $X \sim \Unif(0,
+      \theta)$ implies that
+      \begin{equation*}
+        P(X \leq \theta) = \begin{cases}
+          \frac{x}{\theta} & 0 \leq x \leq \theta \\
+          1                & x > \theta
+        \end{cases}.
+      \end{equation*}
+
+      Thus, to get an unbiased estimator for $\theta$, we simply need to
+      consider
+      \begin{equation*}
+        \hat{\theta} = \frac{n+1}{n} X_{(n)},
+      \end{equation*}
+      which then
+      \begin{equation*}
+        E \left[ \frac{n+1}{n} X_{(n)} \right] = \theta.
+      \end{equation*}
+  \end{enumerate}
+\end{solution}
+
+\begin{propo}[Sample Mean as the Unbiased Estimator of the Mean]\label{propo:sample_mean_as_the_unbiased_estimator_of_the_mean}
+  Let $\{ X_i \}_{i=1}^n$ be a random sample of $X$ which has mean $\mu$. Then
+  $\overline{X}$ is an unbiased estimator of $\mu$.
+\end{propo}
+
+\begin{proof}
+  We have that
+  \begin{equation*}
+    E[\overline{X}] = \frac{1}{n} \sum_{i=1}^{n} E[X_i] = \frac{1}{n} (n\mu) =
+    \mu.
+  \end{equation*}
+\end{proof}
+
+\begin{defn}[Sample Variance]\index{Sample Variance}\label{defn:sample_variance}
+  Let $\{ X_i \}_{i=1}^n$ be a random sample of $X$ which has mean $\mu$ and
+  variance $\sigma^2$. We define the \hlnoteb{sample variance} as
+  \begin{equation*}
+    \hat{\sigma}^2 \coloneqq \frac{1}{n-1} \sum_{i=1}^{n} (X_i -
+    \overline{X})^2.
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[Sample Variance as the Unbiased Estimator of the Variance]\label{propo:sample_variance_as_the_unbiased_estimator_of_the_variance}
+  Let $\{ X_i \}_{i=1}^n$ be a random sample of $X$ which has mean $\mu$ and
+  variance $\sigma^2$. Then the sample variance $\hat{\sigma}^2$ is an unbiased
+  estimator of $\sigma^2$.
+\end{propo}
+
+\begin{proof}
+  First, note that
+  \begin{align*}
+    \Var(\overline{X}) &= \Var \left( \frac{1}{n} \sum_{i=1}^{n} X_i \right) \\
+                       &= \frac{1}{n^2} n \Var(X_i) \\
+                       &= \frac{1}{n} \sigma^2.
+  \end{align*}
+  Thus
+  \begin{align*}
+    E\left[\sum_{i=1}^{n} (X_i - \overline{X})^2\right]
+    &= E \left[ \sum_{i=1}^{n} (X_i - \mu + \mu - \overline{X})^2 \right] \\
+    &= \sum_{i=1}^{n} E \left[ (X_i - \mu)^2 \right] + \sum_{i=1}^{n} E \left[
+    (\mu - \overline{X})^2 \right] \\
+    &\quad + 2E \left[ \sum_{i=1}^{n} (X_i - \mu)(\mu - \overline{X}) \right] \\
+    &= n\sigma^2 + n\Var(\overline{X}) \enspace\textcolor{green}{\footnotemark}
+      + 2nE[(\overline{X}-\mu)(\mu-\overline{X})]
+      \enspace\textcolor{green}{\footnotemark} \\
+    &= n\sigma^2 - n\Var(\overline{X}) \\
+    &= n\sigma^2 - n \left( \frac{1}{n} \sigma^2 \right) \\
+    &= (n-1)\sigma^2.
+  \end{align*}
+  \footnotetext{This relies on the fact that $\overline{X}$ is the unbiased
+  estimator for $\mu$ (cf.
+  \cref{propo:sample_mean_as_the_unbiased_estimator_of_the_mean}). We then use the
+  definition of the variance to achieve this.}
+  \footnotetext{We used the fact that
+  \begin{equation*}
+    \sum_{i=1}^{n} (X_i - \mu) = \sum_{i=1}^{n} X_i - n\mu = n \overline{X} - n
+    \mu.
+  \end{equation*}
+  Also, note that
+  \begin{equation*}
+    \Var(\overline{X}) = E[(\overline{X} - \mu)^2].
+  \end{equation*}
+  }
+
+  It follows that
+  \begin{equation*}
+    E \left[ \frac{1}{n-1} \sum_{i=1}^{n} (X_i - \overline{X})^2 \right] =
+    \sigma^2.
+  \end{equation*}
+\end{proof}
+
+\begin{remark}
+  In general, unbiasedness is \hlimpo{not preserved} under parameter
+  transformations. E.g., $\frac{1}{\overline{X}}$ is generally not unbiased for
+  $\mu$, where $\mu$ is the mean of $\overline{X}$.
+\end{remark}
+
+Some unbiased estimators can also be unreasonable.
+
+\begin{eg}
+  Consider $X \sim \Poi(\lambda)$, where $\lambda > 0$. Note that
+  \begin{equation*}
+    E[(-1)^X] = e^{\lambda(-1-1)} = e^{-2\lambda}
+  \end{equation*}
+  by the \hlnotea{probability generating function} method, and we see that
+  $(-1)^X$ is an unbiased estimator of $e^{-2\lambda}$. However, we see that
+  $(-1)^x$ only takes on values $\pm 1$, which is nowhere close to
+  $e^{-2\lambda}$.
+
+  Intuitively, $e^{-2 \overline{X}}$ would be a ``better'' estimator despite the
+  fact that it is biased.
+\end{eg}
+
+Despite shortcomings like the above, unbiasedness is generally a good property
+for an estimator to have.
+
+% section unbiased_estimation (end)
+
+\section{Mean Squared Error}%
+\label{sec:mean_squared_error}
+% section mean_squared_error
+
+\begin{defn}[Mean Squared Error]\index{Mean Squared Error}\label{defn:mean_squared_error}
+  Suppose $\hat{\theta}$ is an estimator for the parameter $\theta$. The
+  \hlnoteb{mean squared error (MSE)} of $\hat{\theta}$ is defined as
+  \begin{equation*}
+    \MSE_{\hat{\theta}}(\theta) \coloneqq E \left[ (\hat{\theta} - \theta)^2
+    \right] = \Var(\hat{\theta}) + \bias_{\hat{\theta}}(\theta)^2.
+  \end{equation*}
+\end{defn}
+
+\begin{proof}
+  It is not immediately clear how the two expressions are the same. We shall
+  prove it here. First, note that $\bias_{\hat{\theta}}(\theta) =
+  E[\hat{\theta}] - \theta$ is a real value. Using a similar idea as in
+  \cref{propo:sample_variance_as_the_unbiased_estimator_of_the_variance}, we see
+  that
+  \begin{align*}
+    E \left[ \left(\hat{\theta} - \theta\right)^2 \right]
+    &= E \left[ \left( \hat{\theta} - E[\hat{\theta}] + E[\hat{\theta}] - \theta
+    \right)^2 \right] \\
+    &= E\left[(\hat{\theta} - E[\hat{\theta}])^2\right] + E\left[\left(
+      E[\hat{\theta}] - \theta \right)^2\right] \\
+    &\quad + 2E[(\hat{\theta} - E[\hat{\theta}])(E[\hat{\theta}]-\theta)] \\
+    &= \Var(\hat{\theta}) + \bias_{\hat{\theta}}(\theta)^2 \\
+    &\quad + 2\bias_{\hat{\theta}}(\theta)\cancelto{0}{E[\hat{\theta} -
+      E[\hat{\theta}]]} \\
+    &= \Var(\hat{\theta}) + \bias_{\hat{\theta}}(\theta)^2.
+  \end{align*}
+\end{proof}
+
+\begin{note}
+  The MSE is a measure to evaluate the \hlnotea{quality of estimators}. The
+  smaller the MSE, the better the estimator.
+\end{note}
+
+% section mean_squared_error (end)
+
+\section{Maximum Likelihood Estimation}%
+\label{sec:maximum_likelihood_estimation}
+% section maximum_likelihood_estimation
+
+\begin{defn}[Likelihood Function]\index{Likelihood Function}\label{defn:likelihood_function}
+  Let $\{X_i\}_{i=1}^n$ be a random sample of $X$ with density $f(x;
+  \underline{\theta})$, where $\underline{\theta}$ is possibly a vector of
+  parameters. The \hlnoteb{likelihood function} for $\underline{\theta}$ is
+  defined as
+  \begin{equation*}
+    L(\underline{\theta}) = \prod_{i=1}^{n} f(X_i; \underline{\theta}).
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Maximum Likelihood Estimation]\index{Maximum Likelihood Estimation}\label{defn:maximum_likelihood_estimation}
+  The \hlnoteb{maximum likelihood estimation (MLE)} of $\hat{\underline{\theta}}$ of
+  $\underline{\theta}$ is an approach that maximizes $L(\hat{\underline{\theta}})$.
+\end{defn}
+
+\begin{note}
+  Heuristically, under the MLE, $\hat{\underline{\theta}}$ is the \hlnotea{most
+  likely parameter} for the sample $(X_1, \ldots, X_n)$ to be realized.
+\end{note}
+
+Sometimes, the likelihood function is difficult to work with. Fortunately, since
+$\ln x$ is a increasing bijective function that preserves monotonicity, we can
+make us of this property to ensure maximality.
+
+\begin{defn}[Log-likelihood Function]\index{Log-likelihood Function}\label{defn:log_likelihood_function}
+  The \hlnoteb{log-likelihood function} is defined as
+  \begin{equation*}
+    l(\underline{\theta}) = \sum_{i=1}^{n} \ln (f(X_i; \underline{\theta})).
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  Let $\{ X_i \}_{i=1}^n$ be a random sample for $\Nor(\mu, v)$. Find the MLE
+  for $\mu,\, v$.
+\end{eg}
+
+\begin{solution}
+  First, we shall work on getting an MLE for $\mu$. The likelihood function here
+  is
+  \begin{align*}
+    L(\mu) &= \prod_{i=1}^{n} f(X_i; \mu) \\
+           &= \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(X_i -
+           \mu)^2}{2\sigma^2}} \\
+           &\propto \exp \left\{ - \frac{1}{2\sigma^2} \sum_{i=1}^{n} (X_i -
+           \mu)^2 \right\}.
+  \end{align*}
+  Evaluating the derivative and equating it to $0$ would be fruitless, since
+  this is an exponentiation. Thus we appeal to the log-likelihood, which is
+  \begin{align*}
+    l(\mu) \propto \sum_{i=1}^{n} (X_i - \mu)^2.
+  \end{align*}
+  The derivative log-likelihood is thus
+  \begin{equation*}
+    \frac{\dif{l}}{\dif{\mu}} \propto -2 \sum_{i=1}^{n} (X_i - \mu).
+  \end{equation*}
+  Equating the above to $0$, we get
+  \begin{equation*}
+    \hat{\mu} = \overline{X}.
+  \end{equation*}
+
+  Now for an MLE of $\sigma^2$. For sanity, let us denote $\tau = \sigma^2$.
+  Then the likelihood function, focusing on $\tau$, is
+  \begin{align*}
+    L(\tau) &= \prod_{i=1}^{n} \frac{1}{\sqrt{2\pi\tau}} e^{-\frac{(X_i -
+              \mu)^2}{2\tau}} \\
+            &\propto \tau^{-\frac{n}{2}} e^{-\frac{1}{2\tau} \sum_{i=1}^{n} (X_i
+            - \mu)^2}.
+  \end{align*}
+  Again, the likelihood involves an exponentiation, so we appeal to the
+  log-likelihood, which is
+  \begin{equation*}
+    l(\tau) \propto -\frac{n}{2} \ln \tau - \frac{1}{2\tau} \sum_{i=1}^{n} (X_i
+    - \mu)^2.
+  \end{equation*}
+  The derivative of the log-likelihood is
+  \begin{equation*}
+    \frac{\dif{l}}{\dif{\tau}} = -\frac{n}{2\tau} + \frac{1}{2\tau^2}
+    \sum_{i=1}^{n} (X_i - \mu)^2.
+  \end{equation*}
+  Equating the above to $0$, we get
+  \begin{equation*}
+    n = \frac{1}{\hat{\tau}} \sum_{i=1}^{n} (X_i - \hat{\mu})^2,
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \hat{\sigma}^2 = \hat{\tau} = \frac{1}{n} \sum_{i=1}^{n} (X_i -
+    \overline{X})^2
+  \end{equation*}
+\end{solution}
+
+% section maximum_likelihood_estimation (end)
+
+\section{Bayesian Estimation}%
+\label{sec:bayesian_estimation}
+% section bayesian_estimation
+
+From \citealt{klugman2012},
+\begin{quotebox}{magenta}{foreground}
+  The Bayesian approach assumes that only the data actually observed are
+  relevant and it is the population distribution that is variable.
+\end{quotebox}
+
+\begin{defn}[Prior Distribution]\index{Prior Distribution}\label{defn:prior_distribution}
+  The \hlnoteb{prior distribution} is a probability distribution over the space
+  of possible parameter values. It is denoted $\pi(\theta)$ and represents our
+  opinion concerning the relative chances that various values of $\theta$ are
+  the true value of the parameter.
+\end{defn}
+
+\begin{note}
+  \begin{itemize}
+    \item The parameter $\theta$ may be scalar or vector valued.
+    \item Determining the prior distribution has always been one of the barriers
+      to the widespread acceptance of the Bayesian methods, since it is almost
+      certainly the case that your experience has provided you with some
+      insight about possible parameter values before the first data point has
+      been observed.
+  \end{itemize}
+\end{note}
+
+We shall use the following concepts from multivariate statistics to obtain the
+following definitions.
+
+\begin{defn}[Joint Distribution]\index{Joint Distribution}\label{defn:joint_distribution}
+  Let $\{ X_i \}_{i=1}^{n}$ be a random sample of the rv $X$, and $\Theta$ 
+  another rv that is independent of the $X_i$'s \sidenote{Note that $\Theta$ 
+  does not necessarily have a similar distribution to $X$.}, with pdf $\pi$. Let
+  $\vec{X} = (X_1, X_2, \ldots, X_n)$. Then the \hlnoteb{joint distribution} of
+  $\vec{X}$ and $\Theta$ is defined as
+  \begin{equation*}
+    f_{\vec{X}, \Theta}(\vec{x}, \theta) = f_{\vec{X} \mid \Theta}(\vec{x} \mid
+    \theta) \pi(\theta).
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Marginal Distribution]\index{Marginal Distribution}\label{defn:marginal_distribution}
+  Let $\{ X_i \}_{i=1}^{n}$ be a random sample of the rv $X$, and $\Theta$ 
+  another rv that is independent of the $X_i$'s \sidenote{Note that $\Theta$ 
+  does not necessarily have a similar distribution to $X$.}, with pdf $\pi$. Let
+  $\vec{X} = (X_1, X_2, \ldots, X_n)$. Then the \hlnoteb{marginal distribution} of
+  $\vec{X}$ is defined as
+  \begin{equation*}
+    f_{\vec{X}}(\vec{x}) = \int f_{\vec{X} \mid \Theta}(\vec{x} \mid
+    \theta)\pi(\theta) \dif{\theta}.
+  \end{equation*}
+\end{defn}
+
+Once we have obtained data, we can look back at our prior distribution and
+``update'' it to...
+
+\begin{defn}[Posterior Distribution]\index{Posterior Distribution}\label{defn:posterior_distribution}
+  Let $\{ X_i \}_{i=1}^{n}$ be a random sample of the rv $X$, and $\Theta$ 
+  another rv that is independent of the $X_i$'s \sidenote{Note that $\Theta$ 
+  does not necessarily have a similar distribution to $X$.}, with pdf $\pi$.
+  The \hlnoteb{posterior distribution}, denoted by $\pi_{\Theta \mid
+  \vec{X}}(\theta \mid \vec{x})$, is the conditional probability distribution of
+  the parameters given the observed data.
+\end{defn}
+
+It is easy to find out what the general formula of the posterior distribution
+is. One simply needs to make use of \cref{defn:joint_distribution} and
+\cref{defn:marginal_distribution}. The proof of the following proposition is
+left as an easy brain exercise for the reader. \marginnote{
+\begin{ex}
+  Prove \cref{propo:formula_for_the_posterior_distribution}.
+\end{ex}
+}
+
+\begin{propo}[Formula for the Posterior Distribution]\label{propo:formula_for_the_posterior_distribution}
+  With the assumptions in \cref{defn:posterior_distribution}, we have that the
+  posterior distribution can be computed as
+  \begin{align*}
+    \pi_{\Theta \mid \vec{X}}(\theta \mid \vec{x})
+    &= \frac{f_{\vec{X}, \Theta}(\vec{x}, \theta)}{f_{\vec{X}}(\vec{x})} \\
+    &= \frac{\left( \prod_{i=1}^{n} f_{X_i \mid \Theta}(x_i \mid \theta) \right)
+      \pi(\theta)}{\int_{\forall \theta} \left( \prod_{i=1}^{n} f_{X_i \mid
+      \Theta}(x_i \mid \theta) \right) \pi(\theta) \dif{\theta}}.
+  \end{align*}
+\end{propo}
+
+\begin{defn}[Posterior Mean]\index{Posterior Mean}\label{defn:posterior_mean}
+  The \hlnoteb{posterior mean} is defined as the expected value of the posterior
+  distribution.
+\end{defn}
+
+\begin{defn}[Bayes Estimator]\index{Bayes Estimator}\label{defn:bayes_estimator}
+  The \hlnoteb{Bayes estimator} of $\Theta$ is the posterior mean of $\Theta$,
+  defined as
+  \begin{equation*}
+    \hat{\theta}_B \coloneqq E[\Theta \mid \vec{X} = \vec{x}]
+    = \int_{\forall \theta} \theta \cdot \pi_{\Theta \mid \vec{X}}(\theta \mid
+    \vec{x}).
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  It can be shown that $\hat{\theta}_B$ minimizes the mean square error
+  \begin{equation*}
+    \min_{\hat{\theta}} E \left[ \left( \hat{\theta} - \Theta \right)^2 \mid
+    \vec{X} = \vec{x} \right].
+  \end{equation*}
+\end{note}
+
+\subsection{Conjugate Prior Distributions and the Linear Exponential Family}%
+\label{sub:conjugate_prior_distributions_and_the_linear_exponential_family}
+% subsection conjugate_prior_distributions_and_the_linear_exponential_family
+
+\begin{defn}[Conjugate Prior Distribution]\index{Conjugate Prior Distribution}\label{defn:conjugate_prior_distribution}
+  A prior distribution is said to be a \hlnoteb{conjugate prior distribution}
+  for a given model if the resulting posterior distribution is from the same
+  family as the prior, although possibly with different parameters.
+\end{defn}
+
+\sidenote{More examples should be added here.}
+\begin{eg}\label{eg:conjugate_prior_distributions_egs}
+  The following are some important/prominent examples of conjugate prior
+  distributions:
+  \begin{table}[ht]
+    \centering
+    \caption{Important/Prominent Conjugate Prior Distributions}
+    \label{table:important_prominent_conjugate_prior_distributions}
+    \begin{tabular}{c c c}
+      $\pi(\theta)$ & $f(x \mid \theta)$ & $\pi(\theta \mid \vec{x})$ \\
+      \hline
+      Gamma         & Poisson            & Gamma \\
+      Normal        & Normal             & Normal \\
+      Beta          & Binomial           & Beta \\
+      Beta          & Geometric          & Beta
+    \end{tabular}
+  \end{table}
+\end{eg}
+
+\begin{defn}[Linear Exponential Family]\index{Linear Exponential Family}\label{defn:linear_exponential_family}
+  An rv $X$ is said to belong to the \hlnoteb{linear exponential family} if its
+  pdf is of the form
+  \begin{equation*}
+    f(x,\theta) = \frac{p(x)e^{xr(\theta)}}{q(\theta)},
+  \end{equation*}
+  where $p(x)$ is some function of $x$, and $r(\theta), q(\theta)$ are some
+  functions of $\theta$, and the support of $f$ does not depend on $\theta$.
+\end{defn}
+
+\marginnote{
+\begin{mnote}
+  Basically, functions the belong to a linear exponential family is a
+  linear-like function with an exponent.
+\end{mnote}
+}
+
+\begin{eg}
+  Some members of the linear exponential family include
+  \begin{itemize}
+    \item $\Exp(\theta): f(x, \theta) = \frac{1}{\theta}
+      e^{-\frac{x}{\theta}}$, where $p(x) = 1$, $r(\theta) = -\frac{1}{\theta}$ 
+      and $q(\theta) = \theta$.
+    \item $\Gam(\alpha, \theta): f(x, \alpha, \theta) =
+      \frac{1}{\Gamma(\alpha)\theta^\alpha} x^{\alpha - 1}
+      e^{-\frac{x}{\theta}}$.
+    \item $\Poi(\theta): f(x, \theta) = \frac{\theta^x e^{-\theta}}{x!} =
+      \frac{\frac{1}{x!} e^{x \ln \theta}}{e^\theta}$
+    \item $\Nor(\theta, v) : f(x, \theta, v) = \frac{1}{\sqrt{2\pi v}}
+      e^{-\frac{(x-\theta)^2}{2v}} = \frac{(2\pi v)^{-\frac{1}{2}}
+      e^{-\frac{x^2}{2v}} e^{x \frac{\theta}{v}}}{e^{\theta^2 / 2v}}$
+  \end{itemize}
+\end{eg}
+
+\begin{thm}[Conjugate Prior Distributions of Linear Exponential Distributions]\label{thm:conjugate_prior_distributions_of_linear_exponential_distributions}
+  Suppose that given $\Theta = \theta$ the rvs $\vec{X}$ are iid with pf
+  \begin{equation*}
+    f_{X_j \mid \Theta} (x_j \mid \theta) = \frac{p(x_j)e^{r(\theta)
+    x_j}}{q(\theta)},
+  \end{equation*}
+  where $\Theta$ has the pdf
+  \begin{equation*}
+    \pi(\theta) = \frac{[q(\theta)]^{-k} e^{\mu kr(\theta)} r'(\theta)}{c(\mu,
+    k)},
+  \end{equation*}
+  where $\mu$ and $k$ are parameters of the distribution and $c(\mu, k)$ is the
+  \hldefn{normalizing constant} \sidenote{The normalizing constant is used to
+  reduce any probability function to a probability density function with a total
+  probability of $1$. (Source:
+  \href{https://en.wikipedia.org/wiki/Normalizing_constant}{Wikipedia})}. Then
+  the posterior pf $\pi_{\Theta \mid \vec{X}}(\theta \mid \vec{x})$ is of the
+  same form as $\pi(\theta)$, i.e. $\pi(\theta)$ is a conjugate prior
+  distribution function.
+\end{thm}
+
+\begin{proof}
+  Notice that the posterior distribution is
+  \begin{align*}
+    \pi(\theta \mid \vec{x})
+    &= \frac{\left( \prod_{i=1}^{n} f_{X_i \mid \Theta}(x_i \mid \theta) \right)
+      \pi(\theta)}{\int_{\forall \theta} \left( \prod_{i=1}^{n} f_{X_i \mid
+      \Theta}(x_i \mid \theta) \right) \pi(\theta) \dif{\theta}} \\
+    &\propto \left( \prod_{i=1}^{n} f_{X_i \mid \Theta}(x_i \mid \theta)
+      \pi(\theta) \right) \\
+    &= \left( \prod_{i=1}^{n} \frac{p(x_j)e^{r(\theta) x_j}}{q(\theta)} \right)
+      \left( \frac{[q(\theta)]^{-k} e^{\mu kr(\theta)} r'(\theta)}{c(\mu, k)}
+      \right) \\
+    &\propto q(\theta)^{-(n+k)} e^{\mu k + n \overline{x} r(\theta)} r'(\theta)
+    \\
+    &= q(\theta)^{-k^*} e^{\mu^* k^* r(\theta)} r'(\theta),
+  \end{align*}
+  where
+  \begin{equation*}
+    k^* = k + n, \text{ and } \mu^* = \frac{\mu k + \sum x_j}{k + n} =
+    \frac{k}{k + n} \mu + \frac{n}{k + n} \overline{x},
+  \end{equation*}
+  and we see that the posterior distribution has the same form as
+  $\pi(\theta)$.
+\end{proof}
+
+\begin{eg}
+  One non-example is mentioned in \cref{eg:conjugate_prior_distributions_egs}:
+  the distribution of $X_i$ is not from the linear exponential family, but we
+  still obtain that the posterior distribution has a similar distribution to the
+  posterior distribution.
+\end{eg}
+
+% subsection conjugate_prior_distributions_and_the_linear_exponential_family (end)
+
+% section bayesian_estimation (end)
+
+% chapter review_of_statistics (end)
+
+\appendix
+
+\backmatter
+
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
+
+% \nobibliography*
+\bibliography{references}
+
+\printindex
+
+\end{document}
+% vim:tw=80:fdm=syntax
+

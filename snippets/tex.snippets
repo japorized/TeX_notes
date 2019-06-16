@@ -417,7 +417,7 @@ ${2:${VISUAL:code}}
 $0
 endsnippet
 
-snippet ml "Math" wA
+snippet '(?<=\s)ml' "Math" ir
 $${1}$`!p
 if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
   snip.rv = ' '
@@ -426,7 +426,7 @@ else:
 `$2
 endsnippet
 
-snippet lm "Math" iA
+snippet '(?<=\s)lm' "Math" irA
 $${1}$`!p
 if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
   snip.rv = ' '

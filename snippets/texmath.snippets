@@ -154,8 +154,18 @@ snippet |\ "restriction" iA
 endsnippet
 
 context "math()"
-snippet '(?<!\\)lim' "limit" irA
+snippet '(?<!\\)lim_' "limit" irA
 \lim_{$1}$0
+endsnippet
+
+context "math()"
+snippet '(?<!\\)liminf_' "limit infimum" irA
+\liminf_{$1}$0
+endsnippet
+
+context "math()"
+snippet '(?<!\\)limsup_' "limit supremum" irA
+\limsup_{$1}$0
 endsnippet
 
 context "math()"
