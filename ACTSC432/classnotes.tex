@@ -13,6 +13,8 @@
 \input{latex-classnotes-preamble.tex}
 \input{probnotation.tex}
 
+\DeclareMathOperator{\VaR}{VaR}
+
 \begin{document}
 \input{latex-classnotes-header.tex}
 
@@ -737,6 +739,483 @@ left as an easy brain exercise for the reader. \marginnote{
 % section bayesian_estimation (end)
 
 % chapter review_of_statistics (end)
+
+\chapter{Limited Fluctuation Credibility Theory}%
+\label{chp:limited_fluctuation_credibility_theory}
+% chapter limited_fluctuation_credibility_theory
+
+The Limited Fluctuation Credibility Theory provides a mechanism for assigning
+\hlnotea{full} or \hlnotea{partial credibility} to a policyholder's experience.
+The difficulty with this approach is its lack of a sound underlying mathematical
+theory that justifies the use of these methods. Despite that fact, it is still
+widely used today, especially in the United States.
+
+\section{Limited Fluctuation Credibility}%
+\label{sec:limited_fluctuation_credibility}
+% section limited_fluctuation_credibility
+
+From \citealt{klugman2012},
+\begin{quotebox}{magenta}{foreground}
+  This branch of credibility theory represents the first attempt to quantify the
+  credibility problem.
+\end{quotebox}
+This approach is also known as the ``\hldefn{American credibility}''. It was
+first proposed by Mowbray in 1914 \cite{mowbray1914}.
+
+The problem can be formulated as follows. Suppose that $\{ X_i \}_{i=1}^n$
+represents a policyholder's claim amounts in the past $n$ years. Furthermore, we
+assume that the $X_i$'s have
+\begin{itemize}
+  \item the same expected value, i.e. $E[X_i] = \mu$ for some $\mu$; and
+  \item variance, i.e. $\Var(X_i) = \sigma^2$ for some $\sigma$.
+\end{itemize}
+From our revision in the last section, we know that $\overline{X}$ is an
+unbiased estimator for $\mu$, and if the $X_i$'s are independent, then
+$\Var(\overline{X}) = \frac{\sigma^2}{n}$.
+
+The goal here is to figure our how much to charge for the next premium, i.e.
+determining $E[X_{n+1}]$. We have at least the following 3 possibilities:
+\begin{itemize}
+  \item ignore past data (no credibility) and charge $M$, a value, called the
+    \hldefn{manual premium} \sidenote{This name is obtained from the fact that
+    it usually comes from a book (manual) of premiums.}, obtained from
+    experience on other similar but non-identical policyholders;
+  \item ignore $M$ and charge $\overline{X}$ (full credibility); and a third
+    possibility is to
+  \item choose some combination of $M$ and $\overline{X}$ (partial
+    credibility).
+\end{itemize}
+
+From the POV of an insurer, it seems sensible to favor $\overline{X}$ if the
+experience is ``stable'', i.e. there is little fluctuation, represented by a
+small $\sigma^2$. Stable values imply that $\overline{X}$ is more reliable as a
+predictor. Conversely, if $\overline{X}$ is volatile, then $M$ would be a safer
+choice.
+
+% section limited_fluctuation_credibility (end)
+
+\section{Full Credibility}%
+\label{sec:full_credibility}
+% section full_credibility
+
+In \hldefn{full credibility} theory, there are only 2 outcomes: either we
+\begin{itemize}
+  \item assign full credibility, that is to charge $\overline{X}$; or
+  \item no credibility, where we charge $M$.
+\end{itemize}
+One method to `quantify the stability' of $\overline{X}$ \sidenote{This has become the
+standard method for `quantifying stability' for $\overline{X}$.} is to infer
+that $\overline{X}$ is stable if the difference between $\overline{X}$ and $\mu$
+is small relative to $\mu$ with high probability, i.e.
+\begin{equation}\label{eq:full_cred_cond}
+  P(\abs{\overline{X} - \mu} \leq \epsilon \mu) \geq p
+\end{equation}
+for some $\epsilon > 0$ and $0 < p < 1$. We may rewrite
+\cref{eq:full_cred_cond} as
+\begin{equation*}
+  P \left( \frac{\abs{\overline{X} - \mu}}{\sigma / \sqrt{n}} \leq
+  \frac{\epsilon\mu}{\sigma / \sqrt{n}} \right) \geq p.
+\end{equation*}
+
+Now let $y_p$ be defined as by
+\begin{equation*}
+  y_p = \VaR_p \left( \frac{\abs{\overline{X} - \mu}}{\sigma / \sqrt{n}} \right)
+  = \inf \left\{ y \in \mathbb{R} : P \left( \frac{\abs{\overline{X} -
+  \mu}}{\sigma / \sqrt{n}} \leq y \right) \geq p \right\}.
+\end{equation*}
+If $\overline{X}$ is continuous, then the $\geq$ sign above can be replaced with
+an ``$=$'' sign \sidenote{See
+\href{https://tex.japorized.ink/ACTSC431/classnotes.pdf}{ACTSC431}.}, and $y_p$
+satisfies
+\begin{equation}\label{eq:set_stage_for_clt_for_y_p}
+  P \left( \frac{\abs{\overline{X} - \mu}}{\sigma / \sqrt{n}} \leq y_p \right) = p.
+\end{equation}
+Then the condition for full credibility is
+\begin{equation*}
+  y_p \leq \frac{\epsilon\mu}{\sigma / \sqrt{n}}.
+\end{equation*}
+\marginnote{
+\begin{procedure}[Condition for Full Credibility]\label{procedure:condition_for_full_credibility}
+  \begin{enumerate}
+    \item Use the central limit theorem argument for $y_p$.
+    \item Calculate RHS of \cref{eq:num_of_exposure_for_full_cred}.
+  \end{enumerate}
+\end{procedure}
+}
+Making $n$ the subject, we have that the number of exposure required for full
+credibility is thus
+\begin{equation}\label{eq:num_of_exposure_for_full_cred}
+  n \geq \left( \frac{y_p}{\epsilon} \right)^2 \frac{\sigma^2}{\mu^2} =
+  \lambda_0 \frac{\sigma^2}{\mu^2},
+\end{equation}
+where we let $\lambda_0 = \left(\frac{y_p}{\epsilon}\right)^2$ for notational
+succinctness since it is a constant that depends only $p$ and $\epsilon$.
+
+It is often difficult to identify a distribution for $\overline{X}$, of which
+$y_p$ depends on. Recall the \hlnotea{normal approximation}, which is applicable
+if $n$ is large \sidenote{\hlwarn{Is this not circular!?}}:
+\begin{equation*}
+  \frac{\overline{X} - \mu}{\sigma / \sqrt{n}} \approx Z_{0, 1} \sim \Nor(0, 1)
+\end{equation*}
+Then \cref{eq:set_stage_for_clt_for_y_p} becomes
+\begin{align*}
+  p &= P(\abs{Z} \leq y_p) = \Phi(y_p) - \Phi(-y_p) \\
+    &= \Phi(y_p) - 1 + \Phi(y_p) = 2 \Phi(y_p) - 1.
+\end{align*}
+Thus
+\begin{equation*}
+  y_p \approx \Phi^{-1} \left( \frac{1 + p}{2} \right).
+\end{equation*}
+
+\begin{eg}
+  Suppose that one has data $\{ X_i \}_{i=1}^{10}$ on the claim amounts in the
+  last 10 periods, where
+  \begin{equation*}
+    X_i = 0 \text{ for } i = 1, \ldots, 6,
+  \end{equation*}
+  and
+  \begin{equation*}
+    X_7 = 253,\, X_8 = 398,\, X_9 = 439,\, X_{10} = 756.
+  \end{equation*}
+  Determine the condition for full credibility with $\epsilon = 0.05$ and $p =
+  0.9$.
+\end{eg}
+
+\begin{solution}
+  We need to first determine the sample mean and sample variance, and we shall
+  use the unbiased estimators of $\mu$ and $\sigma^2$ respectively: they are
+  \begin{equation*}
+    \overline{X} = \frac{1}{10} \sum_{i=1}^{10} X_i = \frac{0 + 253 + 398 + 439 +
+    756}{10} = 184.6,
+  \end{equation*}
+  and
+  \begin{equation*}
+    \hat{\sigma}^2 = \frac{1}{10-1} \sum_{i=1}^{10} (X_i - \overline{X})^2 =
+    267.89^2.
+  \end{equation*}
+  We also need
+  \begin{equation*}
+    y_p = \Phi^{-1} \left( \frac{1 + p}{2} \right) = \Phi^{-1} (.95) = 1.645.
+  \end{equation*}
+  Then we require that
+  \begin{equation*}
+    n \geq \left( \frac{1.645}{0.05} \right)^2 \left( \frac{267.89^2}{184.6^2}
+    \right) = 2279.5.
+  \end{equation*}
+  We see that the $10$ observations definitely do not deserve full credibility.
+\end{solution}
+
+Full credibility is sometimes given on a number of claims basis (instead of on
+the claims amount).
+
+\begin{eg}\label{eq:simple_example_for_full_cred_with_poisson}
+  Suppose that one has iid data $\{ N_i \}_{i=1}^n$ on the number of claims in
+  the past $n$ periods, with $N_i \sim \Poi(\lambda)$. Determine the condition
+  for full credibility in terms of the \textbf{expected total number of claims}
+  given that $p = 0.9$ and $\epsilon = 0.05$.
+\end{eg}
+
+\begin{solution}
+  Since $N_i \sim \Poi(\lambda)$, we have $E[N_i] = \lambda = \Var(N_i)$.
+  Furthermore,
+  \begin{equation*}
+    y_p = \Phi^{-1} \left( 0.95 \right) = 1.645.
+  \end{equation*}
+  Now since the condition is
+  \begin{equation*}
+    n \geq \lambda_0 \frac{\sigma^2}{\mu^2} = \frac{\lambda_0}{\lambda},
+  \end{equation*}
+  and we want the expected total number of claims, we focus on looking at
+  \begin{equation*}
+    n \mu = n \lambda \geq \lambda_0.
+  \end{equation*}
+  Observe that
+  \begin{equation*}
+    \lambda_0 = \left( \frac{1.645}{0.05} \right)^2 = 1082.41,
+  \end{equation*}
+  we have that the required expected total number of claims should fulfill
+  \begin{equation*}
+    n\lambda \geq 1082.41.
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Compound Poisson for Full Credibility]\label{eg:compound_poisson_for_full_credibility}
+  Let $\{ X_i \}_{i=1}^n$ be a sequence of iid compound Poisson rvs, given by
+  \begin{equation*}
+    X_i = \sum_{j=1}^{N_i} Y_{i, j} = \begin{cases}
+      \sum_{j=1}^{N_i} Y_{i, j}, & N_i \geq 0 \\
+      0                          & N_i = 0
+    \end{cases},
+  \end{equation*}
+  where
+  \begin{itemize}
+    \item $\{ N_i \}_{i=1}^{n}$ are iid with $N_i \sim \Poi(\lambda)$ for each
+      $i$; and
+    \item $\{ Y_{i, j} \}$ are also iid with mean $\mu_Y$ and variance
+      $\sigma^2_Y$.
+  \end{itemize}
+  Determine the condition for full credibility.
+\end{eg}
+
+\begin{solution}
+  We require the unconditional sample mean and sample variance of $X_i$; they
+  are
+  \begin{equation*}
+    E[X_i] = E[E[X_i \mid N_i]] = E[N_i]E[Y_{i, j}] = \lambda \mu_Y,
+  \end{equation*}
+  and
+  \begin{align*}
+    \Var(X_i) &= \Var(E[X_i \mid N_i]) + E[\Var(X_i \mid N_i)] \\
+              &= \Var(N_i \mu_Y) + E[N_i \sigma^2_Y] \\
+              &= \mu_Y^2 \lambda + \sigma^2_Y \lambda \\
+              &= \lambda (\mu^2_Y + \sigma^2_Y).
+  \end{align*}
+  Thus, the condition for full credibility is
+  \begin{equation*}
+    n \geq \lambda_0 \frac{\lambda(\mu^2_Y + \sigma^2_Y)}{\lambda^2 \mu^2_Y} =
+    \frac{\lambda_0}{\lambda} \left( 1 + \frac{\sigma^2_Y}{\mu^2_Y} \right).
+  \end{equation*}
+\end{solution}
+
+To further illustrate that we can use the concept of full credibility for
+different things, the following example is provided.
+
+\begin{eg}\label{eg:full_cred_on_different_basis}
+  Suppose that the average claim size for a group of insureds is $1500$ with a
+  standard deviation of $7500$. Furthermore, assume that claim counts have a
+  Poisson distribution. For $\epsilon = 0.06$ and $p = 0.9$, determine the
+  standard for full credibility based on the
+  \begin{enumerate}
+    \item total claim amount; and
+    \item total number of claims,
+  \end{enumerate}
+  in terms of the expected total number of claims.
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item Using the last example and letting
+      \begin{equation*}
+        E[X_i] = \mu   \text{ and } \Var(X_i) = \Var(X_i) = \sigma^2,
+      \end{equation*}
+      the standard for full credibility is
+      \begin{equation*}
+        n \geq \frac{\lambda_0}{\lambda} \left( 1 +
+        \frac{\sigma^2_Y}{\mu^2_Y} \right).
+      \end{equation*}
+      We are given that
+      \begin{equation*}
+        \mu_Y = 1500 \text{ and } \sigma^2_Y = 7500^2.
+      \end{equation*}
+      Thus
+      \begin{equation*}
+        n \geq \frac{1.645^2}{0.06^2 \lambda} \left( 1 + \frac{7500^2}{1500^2}
+        \right) = \frac{19543.51}{\lambda}.
+      \end{equation*}
+      In terms of the expected total number of claims, we have
+      \begin{equation*}
+        n\lambda \geq 19543.51.
+      \end{equation*}
+      Thus the observed total number of claims of past claims must be at least
+      $19544$ to assign full credibility.
+
+    \item Using \cref{eq:simple_example_for_full_cred_with_poisson}, we have
+      \begin{equation*}
+        n \geq \frac{\lambda_0}{\lambda} = \frac{751.67}{\lambda}.
+      \end{equation*}
+      Thus, in terms of the expected total number of claims, we have
+      \begin{equation*}
+        n\lambda \geq 751.67.
+      \end{equation*}
+      Therefore, the observed total number of past claims must be at least $752$ 
+      to assign full credibility.
+  \end{enumerate}
+\end{solution}
+
+% section full_credibility (end)
+
+\section{Partial Credibility}%
+\label{sec:partial_credibility}
+% section partial_credibility
+
+If full credibility is inappropriate, then we may want to assign \hldefn{partial
+credibility} to the past experience $\overline{X}$ in the net premium. Without
+much mathematical support, it was suggested that we let the net premium be
+defined as a weighted average of $\overline{X}$ and the manual premium $M$,
+i.e.
+\begin{equation*}
+  P = Z \overline{X} + (1 - Z) M,
+\end{equation*}
+where $Z \in [0, 1]$ is known as the \hldefn{credibility factor} \sidenote{It is
+important to note there that $Z$ is not an rv. It is simply a pretentious choice
+of notation for what is to come.} \sidenote{It is interesting to remark that
+\citealt{mowbray1914} considered full but not partial credibility.}, which is a
+value that needs to be chosen.
+
+In the actuarial literature \cite{klugman2012}, there are various suggestions
+for determining $Z$. However, they are usually justified on intuition rather
+than theoretically sound grounds. We shall discuss one of the choices here,
+which is flawed, but is at least simple.
+
+Recall that the goal of the full-credibility standard is to ensure that the
+difference between $\overline{X}$ and $\mu$ is small with high probability (cf.
+beginning of \cref{sec:full_credibility}). Since $\overline{X}$ is unbiased, to
+achieve this standard is basically \sidenote{This is exactly the case if
+$\overline{X}$ is normal.} equivalent to controlling the variance of
+$\overline{X}$. Note that full credibility fails when
+\begin{equation}\label{eq:failure_of_full_cred}
+  n < \lambda_0 \left( \frac{\sigma^2}{\mu^2} \right),
+\end{equation}
+and since the sample variance (which is unbiased for the variance) is
+\begin{equation*}
+  \Var(\overline{X}) = \frac{\sigma^2}{n},
+\end{equation*}
+rearranging \cref{eq:failure_of_full_cred}, we have that
+\begin{equation*}
+  \Var(\overline{X}) = \frac{\sigma^2}{n} > \frac{\mu^2}{\lambda_0}.
+\end{equation*}
+Thus, we choose $Z$ such that it controls the variance of the credibility
+premium as such:
+\begin{align*}
+  \frac{\mu^2}{\lambda_0} &= \Var(P) = \Var(Z \overline{X} + (1 - Z)M) \\
+                          &= Z^2 \Var(\overline{X}) = Z^2 \cdot
+                          \frac{\sigma^2}{n}.
+\end{align*}
+Thus, since we want $Z$ as a weighted average, we let
+\begin{equation*}
+  Z = \min \left\{ \frac{\mu}{\sigma} \sqrt{\frac{n}{\lambda_0}}, 1 \right\}.
+\end{equation*}
+\sidenote{Note that this choice of $Z$ has some consistency with full
+credibility, since $Z = 1$ iff $n \geq \lambda_0 \frac{\sigma^2}{\mu^2}$.} Note
+that
+\begin{equation*}
+  \frac{\mu}{\sigma} \sqrt{\frac{n}{\lambda_0}} = \sqrt{\frac{n}{\lambda_0
+  (\frac{\sigma^2}{\mu^2})}},
+\end{equation*}
+which is the square root of the \hlnotea{actual number of exposures} divided by
+the \hlnotea{number of exposures needed for full credibility}. This is also
+referred to as the \hldefn{Square-root rule for partial credibility}.
+
+\begin{eg}
+  Suppose that past observations of the number of claims $\{ N_i \}_{i=1}^{n}$ 
+  are iid and $N_i \sim \Poi(\lambda)$. Determine the credibility factor $Z$ 
+  based on the number of claims.
+\end{eg}
+
+\begin{solution}
+  Note that
+  \begin{equation*}
+    \mu = E[N_i] = \lambda \text{ and } \sigma^2 = \Var(N_i) = \lambda.
+  \end{equation*}
+  We have that
+  \begin{equation*}
+    Z = \min \left\{ \frac{\mu}{\sigma} \sqrt{\frac{n}{\lambda_0}}, 1 \right\}
+    = \min \left\{ \sqrt{\frac{n\lambda}{\lambda_0}}, 1 \right\}.
+  \end{equation*}
+\end{solution}
+
+\begin{eg}
+  Consider the setup in \cref{eg:compound_poisson_for_full_credibility}.
+  Determine the credibility factor $Z$ based on the amount of claims.
+\end{eg}
+
+\begin{solution}
+  We have that
+  \begin{equation*}
+    \mu = E[X_i] = \lambda \mu_Y \text{ and } \sigma^2 = \Var(X_i) = \lambda
+    (\mu^2_Y + \sigma^2_Y).
+  \end{equation*}
+  Then since
+  \begin{equation*}
+    \frac{\mu}{\sigma} \sqrt{\frac{n}{\lambda_0}} =
+    \sqrt{\frac{n\lambda}{\lambda_0} \cdot \frac{\mu^2_Y}{\mu^2_Y +
+    \sigma^2_Y}},
+  \end{equation*}
+  we have that
+  \begin{equation*}
+    Z = \min \left\{ \sqrt{\frac{n\lambda}{\lambda_0} \cdot \frac{\mu^2_Y}{\mu^2_Y +
+    \sigma^2_Y}}, 1 \right\}
+  \end{equation*}
+\end{solution}
+
+\newthought{Different credibility factors} may arise depending on the basis of
+which the credibility is founded upon.
+
+\begin{eg}
+  Consider the setup in \cref{eg:full_cred_on_different_basis}. Further suppose
+  that
+  \begin{itemize}
+    \item in thelast year, this group of insureds had $600$ claims and a total
+      loss of $15600$ ; and
+    \item the prior estimate of the total loss was $16500$ (this is $M$).
+  \end{itemize}
+  Estimate the credibility premium for the group based on the
+  \begin{enumerate}
+    \item total claim amount; and
+    \item total number of claims.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item We are given that $\mu_Y = 1500$, $\sigma_Y = 7500$ and $n \lambda =
+      600$. Thus
+      \begin{align*}
+        Z &= \min \left\{ \sqrt{\frac{n\lambda}{\lambda_0} \cdot
+          \frac{\mu^2_Y}{\mu^2_Y + \sigma^2_Y}}, 1 \right\} \\
+          &= \min \left\{ \sqrt{\frac{600}{\left(\frac{1.645}{0.06}\right)^2}
+          \cdot \frac{1500^2}{1500^2 + 7500^2}}, 1 \right\} \\
+          &= 0.17522
+      \end{align*}
+      Thus the credibility premium for the group is
+      \begin{align*}
+        P &= 0.17522 \overline{X} + (1-0.17522)M \\
+          &= 0.17522 (15600) + (1-0.17522)(16500) \\
+          &= 16342.302
+      \end{align*}
+      \sidenote{It is important to note here that $\overline{X} = 15600$ in this
+      case, since this is the total loss over `$1$' period of time, in particular
+      it is the total amount up to the latest time.}
+
+    \item Based on the total number of claims, the credibility factor is
+      \begin{equation*}
+        Z = \min \left\{ \sqrt{\frac{n\lambda}{\lambda_0}}, 1 \right\}
+        = \min \left\{ \sqrt{\frac{600}{\left( \frac{1.645}{0.06} \right)^2}}, 1
+        \right\}
+        = 0.89343.
+      \end{equation*}
+      Thus the credibility premium for the group is
+      \begin{equation*}
+        P = 0.89343 \overline{X} + (1-0.89343) M = 15696.
+      \end{equation*}
+  \end{enumerate}
+\end{solution}
+
+% section partial_credibility (end)
+
+\section{Problems with Limited Fluctuation Credibility}%
+\label{sec:problems_with_limited_fluctuation_credibility}
+% section problems_with_limited_fluctuation_credibility
+
+\begin{itemize}
+  \item There is no theoretical model for the distribution of $X_i$'s, and so
+    there is no reason why
+    \begin{equation*}
+      P = Z \overline{X} + (1 - Z) M
+    \end{equation*}
+    is a reasonable and more preferable to $M$.
+  \item The choice of $Z$ is rather arbitrary.
+  \item There is no guidance to the choices of $\epsilon$ and $p$.
+  \item The limited fluctuation approach does not examine the difference between
+    $\mu$ and $M$. Furthermore, it is usually the case that $M$ is also an
+    estimate, and hence unreliable in itself.
+\end{itemize}
+
+% section problems_with_limited_fluctuation_credibility (end)
+
+% chapter limited_fluctuation_credibility_theory (end)
+
+
 
 \appendix
 
