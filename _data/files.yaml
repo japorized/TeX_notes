@@ -7,7 +7,7 @@
   tex:
     - title: classnotes.tex
       src: /PMATH450/classnotes.tex
-- title: ACTSCT432 S19 - Loss Models II
+- title: ACTSC432 S19 - Loss Models II
   pdf:
     - title: classnotes.pdf
       src: /ACTSC432/classnotes.pdf
