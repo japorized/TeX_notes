@@ -32,7 +32,7 @@ pages:
     paths:
     - vendor/ruby
   script:
-  - bundle exec jekyll build -d public
+  - bundle exec jekyll build -I -d public
   artifacts:
     paths:
     - public
