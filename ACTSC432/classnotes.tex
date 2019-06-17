@@ -1215,7 +1215,343 @@ which the credibility is founded upon.
 
 % chapter limited_fluctuation_credibility_theory (end)
 
+\chapter{Greatest Accuracy Credibility}%
+\label{chp:greatest_accuracy_credibility}
+% chapter greatest_accuracy_credibility
 
+The \hldefn{Greatest Accuary Credibility} approach is a model-based approach to
+the solution of the credibility problem, which is an outgrowth of B\"{u}hlmann's
+classic paper in 1967 \cite{buhlmann1967}. The greater accuracy credibility is
+also called the \hldefn{European credibility}.
+
+In greatest accuracy credibility, we assume that all risk units in a given
+rating class have an \hlnotea{unknown risk parameter} $\theta$ that is
+associated with their risk level. Since different insureds have different
+$\theta$ values, risk units within a rating class are \hlnotea{not completely
+homogeneous}. This assumption allows us to quantify the differences between
+policyholders wrt to the risk characteristics.
+
+\begin{note}[Assumptions]
+  We shall also always assume that $\theta$ exists, but we shall assume that it
+  is not observable, and that we can never know its true value.
+  
+  Since $\theta$ varies by policyholder, there is a probability distribution
+  $\Theta$ across the rating class. We denote
+  \begin{itemize}
+    \item $\pi_{\Theta}(\theta)$ as the probability distribution of $\Theta$; and
+    \item $\Pi_{\Theta}(\theta)$ as the cdf of $\Theta$.
+  \end{itemize}
+  If $\theta$ is a \hlnotea{scalar parameter} \sidenote{Refer to
+  \href{https://tex.japorized.ink/STAT330S18/classnotes.pdf\#defn.20}{STAT330}.},
+  then we may interpret
+  \begin{equation*}
+    \Pi(\theta) = P(\Theta \leq \theta)
+  \end{equation*}
+  as the percentage of policyholders in the rating class with risk parameter
+  $\Theta$ less than or equal to $\theta$.
+
+  Furthermore, if we let $\{ X_i \}_{i=1}^n$ be the past exposure units
+  \sidenote{which is not necessarily iid}, we will suppose that
+  \begin{equation*}
+    \{ X_i \mid \Theta = \theta \}_{i=1}^n
+  \end{equation*}
+  are iid, with common density function $f_{X \mid \Theta}(x \mid \theta)$.
+\end{note}
+
+We want to use these assumptions to derive a rate to cover for $X_{n+1}$.
+
+\section{The Bayesian Methodology}%
+\label{sec:the_bayesian_methodology}
+% section the_bayesian_methodology
+
+\begin{defn}[Predictive Distribution]\index{Predictive Distribution}\label{defn:predictive_distribution}
+  The \hlnoteb{predictive distribution} is the conditional probability
+  distribution of a new observation $y$ given the data $\vec{x}$. It is denoted
+  as $f_{Y \mid \vec{X}}(y \mid \vec{x})$.
+\end{defn}
+
+\begin{propo}[Formula for Predictive Distribution]\label{propo:formula_for_predictive_distribution}
+  Given exposure units $\{ X_i \}_{i=1}^n$, the predictive distribution of a new
+  observation, $Y$, can be computed as
+  \begin{equation*}
+    f_{Y \mid \vec{X}}(y \mid \vec{x}) = \int_{\forall \theta} f_{Y \mid
+    \Theta}(y \mid \theta) \pi_{\Theta \mid \vec{X}}(\theta \mid \vec{x}).
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  By the \hyperref[propo:formula_for_the_posterior_distribution]{formula for the
+  posterior distribution}, we have that
+  \begin{align*}
+    \pi_{\Theta \mid \vec{X}}(\theta \mid \vec{x})
+    &= \frac{f_{\Theta, \vec{X}}(\theta, \vec{x})}{f_{\vec{X}}(\vec{x})} \\
+    &= \frac{f_{\vec{X} \mid \Theta}(\vec{x} \mid
+      \theta)\pi(\theta)}{\int_{\forall \theta} f_{\vec{X} \mid \Theta}(\vec{x}
+      \mid \theta) \pi(\theta) \dif{\theta}}.
+  \end{align*}
+  Also, observe that
+  \begin{align*}
+    f_{Y, \vec{X}}(y, \vec{x})
+    &= \int_{\forall \theta} f_{(Y, \vec{X}) \mid \Theta}(y, \vec{x} \mid
+      \theta) \pi(\theta) \dif{\theta} \\
+    &= \int_{\forall \theta} f_{Y \mid \Theta}(y \mid \theta) f_{\vec{X} \mid
+    \Theta}(\vec{x} \mid \theta) \pi(\theta) \dif{\theta},
+  \end{align*}
+  where the second equality follows from our assumption that the conditional
+  observations are independent. Then
+  \begin{align*}
+    f_{Y \mid \vec{X}}(y \mid \vec{x})
+    &= \frac{f_{Y, \vec{X}}(y, \vec{x})}{f_{\vec{X}}(\vec{x})} \\
+    &= \frac{\int_{\forall \theta} f_{Y \mid \Theta}(y \mid \theta) f_{\vec{X}
+      \mid \Theta}(\vec{x} \mid \theta) \pi(\theta) \dif{\theta}}{\int_{\forall
+      \theta} f_{\vec{X} \mid \Theta}(\vec{x} \mid \theta) \pi(\theta)
+      \dif{\theta}} \\
+    &= \int_{\forall \theta} f_{Y \mid
+      \Theta}(y \mid \theta) \pi_{\Theta \mid \vec{X}}(\theta \mid \vec{x}).
+  \end{align*}
+\end{proof}
+
+\begin{defn}[Individual Premium]\index{Individual Premium}\label{defn:individual_premium}
+  Given the $X_{n+1}$ exposure unit and risk $\Theta$, we define the
+  \hlnoteb{individual premium} (or \hldefn{hypothetical mean}) of $X_{n+1}$ as
+  \begin{equation*}
+    \mu_{n + 1}(\theta) = E[X_{n+1} \mid \Theta = \theta].
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Pure Premium]\index{Pure Premium}\label{defn:pure_premium}
+  We define the \hlnoteb{pure premium} (or \hldefn{collective premium}) of
+  $X_{n+1}$ as
+  \begin{equation*}
+    \mu_{n + 1} = E[X_{n+1}].
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Bayesian Premium]\index{Bayesian Premium}\label{defn:bayesian_premium}
+  The \hlnoteb{Bayesian premium} of $X_{n+1}$ is defined as
+  \begin{equation*}
+    E[X_{n+1} \mid \vec{X}] = \int_{\forall \theta} \mu_{n+1}(\theta)
+    \pi_{\Theta \mid \vec{X}}(\theta \mid \vec{x}) \dif{\theta}.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  The number of claims for a policyholder in year $i$ is $X_i$ for $i = 1, 2$.
+  Suppose that $X_1 \mid \Theta = \theta$ and $X_2 \mid \Theta = \theta$ are iid
+  with pmf
+  \begin{equation*}
+    P(X = 1 \mid \Theta = \theta) = 1 - \theta,
+  \end{equation*}
+  and
+  \begin{equation*}
+    P(X = 2 \mid \Theta = \theta) = \theta.
+  \end{equation*}
+  The prior distribution is given as $\Theta \sim \BetaDist(2, 3)$. Determine
+  the Bayesian premium $E[X_2 \mid X_1 = 2]$.
+\end{eg}
+
+\begin{solution}
+  \hlbnoted{Method 1: Using predictive distribution} Observe that
+  \begin{align*}
+    P(X_2 = 2 \mid X_1 = 2)
+    &= \int_{\forall \theta} P(X_2 = 2 \mid \Theta = \theta) \pi_{\Theta \mid
+      X_1}(\theta \mid x_1) \dif{\theta} \\
+    &= \int_{\forall \theta} \theta \cdot \frac{f_{X_1 \mid \Theta}(2 \mid
+      \theta) \pi(\theta)}{\int_{\forall \theta} f_{X_1 \mid \Theta}(x_1 \mid
+      \theta) \pi(\theta) \dif{\theta}} \dif{\theta} \\
+    &= \int_{\forall \theta} \frac{\theta^2 \pi(\theta)}{E[\Theta]} \dif{\theta}
+    \\
+    &= \frac{E[\Theta^2]}{E[\Theta]} = \frac{\frac{1}{5}}{\frac{2}{5}} =
+    \frac{1}{2}.
+  \end{align*}
+  Thus
+  \begin{equation*}
+    P(X_2 = 1 \mid X_1 = 2) = 1 - \frac{1}{2} = \frac{1}{2}.
+  \end{equation*}
+  Hence
+  \begin{equation*}
+    E[X_2 \mid X_1 = 2] = 1 \cdot \frac{1}{2} + 2 \cdot \frac{1}{2} =
+    \frac{3}{2}.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{Method 2: Using Bayesian premium formula} We have that
+  \begin{align*}
+    E[X_2 \mid X_1 = 2]
+    &= \int_{\forall \theta} E[X_2 \mid \Theta = \theta] \pi_{\Theta \mid
+      X_1}(\theta \mid 2) \dif{\theta} \\
+    &= \int_{\forall \theta} [1(1 - \theta) + 2\theta] \cdot
+    \frac{P(X_1 = 2 \mid \Theta = \theta)\pi(\theta)}{\int_{\forall \theta} P(X1
+      = 2 \mid \Theta = \theta)\pi(\theta) \dif{\theta}} \dif{\theta} \\
+    &= \int_{\forall \theta} \frac{(1 + \theta)\theta\pi(\theta)}{E[\Theta]}
+      \dif{\theta} \\
+    &= \frac{E[\Theta] + E[\Theta^2]}{E[\Theta]} \\
+    &= \frac{\frac{2}{5} + \frac{1}{5}}{\frac{2}{5}} = \frac{3}{2}.
+  \end{align*}
+\end{solution}
+
+% section the_bayesian_methodology (end)
+
+\section{The Credibility Premium}%
+\label{sec:the_credibility_premium}
+% section the_credibility_premium
+
+The Bayesian premium strongly depends on the assumed distribution of $X_i \mid
+\Theta = \theta$ and $\Theta$. Furthermore, the Bayesian premium may be
+difficult to evaluate.
+
+Another method to estimate $X_{n+1}$ which we shall study is to make use of
+linear combinations of past observations, in particular
+\begin{equation*}
+  \alpha_0 + \sum_{i=1}^{n} \alpha_i X_i.
+\end{equation*}
+The estimates $\hat{\alpha}_0, \ldots \hat{\alpha}_n$ are chosen to
+\hlimpo{minimize} the mean square error
+\begin{equation*}
+  \mathcal{Q}(\alpha_0, \ldots, \alpha_n) = E \left[ \left( X_{n+1} - \left[
+  \alpha_0 + \sum_{i=1}^{n} \alpha_i X_i \right] \right)^2 \right].
+\end{equation*}
+
+Let us now develop the general model in calculating the credibility premium.
+
+\begin{thm}[General Model for Credibility Premium]\label{thm:general_model_for_credibility_premium}
+  Let $\{ X_i \}_{i=1}^n$ be a sequence of past observations (rvs), and
+  $X_{n+1}$ the predictive rv. Then, the solution $(\hat{\alpha}_0, \ldots,
+  \hat{\alpha}_n)$ to the system of linear equations, called the \hldefn{normal
+  equations},
+  \begin{gather*}
+    E[X_{n+1}] = \hat{\alpha}_0  + \sum_{i=1}^{n} \hat{\alpha}_i E[X_i] \\
+    \Cov(X_j, X_{n+1}) = \sum_{i=1}^{n} \hat{\alpha}_i \Cov(X_i, X_j), \quad
+    \forall j \in \{ 1, \ldots, n \},
+  \end{gather*}
+  minimizes the mean square error
+  \begin{equation*}
+    \mathcal{Q}(\alpha_0, \ldots, \alpha_n) = E \left[ \left( X_{n+1} - \left[
+    \alpha_0 + \sum_{i=1}^{n} \alpha_i X_i \right] \right)^2 \right].
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  First, we take partial derivative wrt $\alpha_0$, and set the derivative to
+  $0$, i.e.
+  \begin{equation*}
+    \frac{\partial \mathcal{Q}}{\partial \alpha_0} = E \left[ -2 \left( X_{n+1}
+    - \hat{\alpha}_0 - \sum_{i=1}^{n} \hat{\alpha}_i X_i \right) \right] = 0.
+  \end{equation*}
+  This gives us
+  \begin{equation}\label{eq:genmod_cred_prem_eq1}
+    E[X_{n+1}] = \hat{\alpha}_0 + \sum_{i=1}^{n} \hat{\alpha}_i E[X_i].
+  \end{equation}
+
+  Now, we take partial derivatives wrt each $\alpha_j$, $j \in \{ 1, \ldots,
+  n\}$, and equate the derivatives to $0$, i.e.
+  \begin{equation*}
+    \frac{\partial \mathcal{Q}}{\partial \alpha_j} = E \left[ -2X_j \left(
+    X_{n+1} - \hat{\alpha}_0 - \sum_{i=1}^{n} \hat{\alpha}_i X_i \right) \right]
+    = 0.
+  \end{equation*}
+  Then we have
+  \begin{equation}\label{eq:genmod_cred_prem_eq2}
+    E[X_j X_{n+1}] = \hat{\alpha}_0 E[X_j] + \sum_{i=1}^{n} \hat{\alpha}_i E[X_i
+    X_j].
+  \end{equation}
+
+  Multiplying \cref{eq:genmod_cred_prem_eq1} by $E[X_j]$, for each $j \in \{ 1,
+  \ldots, n \}$, we get that
+  \begin{equation*}
+    E[X_{n+1}]E[X_j] = \hat{\alpha}_0 E[X_j] + \sum_{i=1}^{n} \hat{\alpha}_i
+    E[X_i]E[X_j].
+  \end{equation*}
+  Subtracting the above from \cref{eq:genmod_cred_prem_eq2}, we get
+  \begin{equation*}
+    \Cov(X_i, X_{n+1}) = \hat{\alpha}_0 E[X_j] + \sum_{i=1}^{n} \hat{\alpha}_i
+    \Cov(X_i, X_j),
+  \end{equation*}
+  for $j \in \{1, \ldots, n\}$.
+
+  It is then clear that $\hat{\alpha}_0, \ldots, \hat{\alpha}_n$ satisfies the
+  normal equations
+  \begin{gather*}
+    E[X_{n+1}] = \hat{\alpha}_0  + \sum_{i=1}^{n} \hat{\alpha}_i E[X_i] \\
+    \Cov(X_j, X_{n+1}) = \sum_{i=1}^{n} \hat{\alpha}_i \Cov(X_i, X_j), \quad
+    \forall j \in \{ 1, \ldots, n \}.
+  \end{gather*}
+\end{proof}
+
+\begin{defn}[Estimator for the Credibility Premium]\label{defn:estimator_for_the_credibility_premium}
+  We define the \hlnoteb{estimator for the credibility premium} as
+  \begin{equation*}
+    \hat{P} \coloneqq \hat{\alpha}_0 + \sum_{i=1}^{n} \hat{\alpha}_i X_i.
+  \end{equation*}
+\end{defn}
+
+\begin{crly}[$\hat{P}$ as Best Linear Estimator]\label{crly:p_hat_as_best_linear_estimator}
+  The $\alpha_j$'s, for $j \in \{0, \ldots, n\}$, also minimizes
+  \begin{enumerate}
+    \item 
+      \begin{equation*}
+        \mathcal{Q}_1(\alpha_0, \ldots, \alpha_n) = E \left[ \left( E[X_{n+1}
+          \mid \vec{X}] - \left[\alpha_0 + \sum_{i=1}^{n} \alpha_i X_i\right]
+          \right)^2 \right];
+      \end{equation*}
+      and
+    \item 
+      \begin{equation*}
+        \mathcal{Q}_2(\alpha_0, \ldots, \alpha_n) = E \left[ \left( E[X_{n+1}
+          \mid \Theta] - \left[ \alpha_0 + \sum_{i=1}^{n} \alpha_i X_i \right]
+          \right)^2 \right].
+      \end{equation*}
+  \end{enumerate}
+
+  We say that $\hat{P}$ is the \hldefn{Best Linear Estimator} for
+  \begin{itemize}
+    \item $X_{n+1}$;
+    \item the Bayesian premium $E[X_{n+1} \mid \vec{X}]$; and
+    \item the hypothetical mean $E[X_{n+1} \mid \Theta] = \mu_{n+1}(\Theta)$.
+  \end{itemize}
+\end{crly}
+
+\marginnote{The name for \cref{thm:theorem_1} is unfortunate, but I can't think
+of a good name for it, and it is what is used in lectures.}
+
+\begin{thm}[Theorem 1]\index{Theorem 1}\label{thm:theorem_1}
+  Suppose $\{ X_i \}_{i=1}^n$ is a sequence of past observations, $X_{n+1}$ is
+  the predictive rv, with
+  \begin{itemize}
+    \item $E[X_i] = \mu$ ;
+    \item $\Var(X_i) = \sigma^2$ ; and
+    \item $\Cov(X_i, X_j) = \rho \sigma^2$, for $i \neq j$, $i, j \in \{ 1,
+      \ldots, n+1 \}$, and $\rho \in (-1, 1)$.
+  \end{itemize}
+  Then the credibility premium for $X_{n+1}$ is
+  \begin{equation*}
+    P = Z \overline{X} + (1 - Z) \mu,
+  \end{equation*}
+  where
+  \begin{equation*}
+    Z = \frac{n\rho}{1 - \rho + n\rho},
+  \end{equation*}
+  and
+  \begin{equation*}
+    \overline{X} = \frac{1}{n} \sum_{i=1}^{n} X_i.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  \hlwarn{Proof to be added.} 
+\end{proof}
+
+% section the_credibility_premium (end)
+
+\section{The B\"{u}lmann Model}%
+\label{sec:the_buhlmann_model}
+% section the_buhlmann_model
+
+
+
+% section the_buhlmann_model (end)
+
+% chapter greatest_accuracy_credibility (end)
 
 \appendix
 
