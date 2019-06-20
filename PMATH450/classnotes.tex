@@ -972,6 +972,11 @@ following notion of an outer measure.
     \mu : \mathcal{P}(X) \to [0, \infty] \coloneqq [0, \infty) \cup \{ \infty \}
   \end{equation*}
   which satisfies
+  \begin{marginfigure}
+    \centering
+    \includegraphics[width=0.8\marginparwidth]{images/outermeasure.png}
+    \caption{Idea of the outer measure}\label{fig:idea_of_the_outer_measure}
+  \end{marginfigure}
   \begin{enumerate}
     \item $\mu \emptyset = 0$;
     \item (\hldefn{monotone increment} or \hldefn{monotonicity}) $E \subseteq F
@@ -4105,7 +4110,7 @@ shall do so next lecture.
 \label{sec:lebesgue_integration_continued}
 % section lebesgue_integration_continued
 
-\begin{thm}[The Monotone Convergence Theorem]\index{The Monotone Convergence Theorem}\label{thm:the_monotone_convergence_theorem}
+\begin{thm}[\imponote The Monotone Convergence Theorem]\index{The Monotone Convergence Theorem}\label{thm:the_monotone_convergence_theorem}
   Let $E \in \mathfrak{M}(\mathbb{R})$ and $(f_n)_n$ be a sequence in
   $\mathcal{L}(E, [0, \infty])$ such that $f_n \leq f_{n+1}$ a.e. on $E$.
   Suppose further that
@@ -5005,6 +5010,470 @@ result may not hold.
 % section lebesgue_integration_continued_2 (end)
 
 % chapter lecture_9_jun_04_2019 (end)
+
+\chapter{Lecture 10 Jun 06th 2019}%
+\label{chp:lecture_10_jun_06th_2019}
+% chapter lecture_10_jun_06th_2019
+
+\section{Lebesgue Integration (Continued 3)}%
+\label{sec:lebesgue_integration_continued_3}
+% section lebesgue_integration_continued_3
+
+\begin{thm}[Fatou's Lemma]\index{Fatou's Lemma}\label{thm:fatou_s_lemma}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $f_n \in \mathcal{L}(E, [0,
+  \infty])$, for $n \geq 1$. Then
+  \begin{equation*}
+    \int_{E} \liminf_{n \geq 1} f_n \leq \liminf_{n \geq 1} \int_{E} f_n.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  For each $N \geq 1$, set $g_N = \inf \{ f_n : n \geq N \}$. Then by
+  \cref{propo:measurability_of_limits_and_extremas}, each $g_N$ is measurable,
+  and clearly
+  \begin{equation*}
+    g_1 \leq g_2 \leq g_3 \leq \hdots.
+  \end{equation*}
+  Then by the \hyperref[thm:the_monotone_convergence_theorem]{MCT}, we have
+  \begin{equation*}
+    \int_{E} \liminf_{n \geq 1} f_n = \int_{E} \lim_{N \to \infty} g_N = \lim_{N
+    \to \infty} \int_{E} g_N.
+  \end{equation*}
+  Since $g_N \leq f_n$ for all $n \geq N$ (by construction), we have
+  \begin{equation*}
+    \int_{E} g_N \leq \int_{E} f_n
+  \end{equation*}
+  for all $n \geq N$, whence
+  \begin{equation*}
+    \int_{E} g_N \leq \liminf_{n \geq 1} \int_{E} f_n.
+  \end{equation*}
+  Since this holds for all $N \geq 1$, we have that
+  \begin{equation*}
+    \int_{E} \liminf_{n \geq 1} f_n = \lim_{N \to \infty} \int_{E} g_N \leq
+    \liminf_{n \geq 1} \int_{E} f_n.
+  \end{equation*}
+\end{proof}
+
+An example where the inequality in Fatou's Lemma is strict is the following.
+
+\begin{eg}
+  Consider a sequence of functions $f_n = n\chi_{\left(0, \frac{1}{n}\right]}$,
+  $n \geq 1$. It's clear that for any $x \in [0, 1]$, $\lim_{n \to \infty}
+  f_n(x) = 0$. Thus
+  \begin{equation*}
+    \int_{[0, 1]} \liminf_{n \geq 1} f_n = \int_{[0, 1]} 0 = 0.
+  \end{equation*}
+  On the other hand
+  \begin{equation*}
+    \int_{[0, 1]} f_n = n m \left( \left( 0, \frac{1}{n} \right] \right) = 1
+  \end{equation*}
+  for all $n \geq 1$, and so $\liminf_{n \geq 1} \int_{[0, 1]} f_n = 1$.
+\end{eg}
+
+\begin{eg}
+  Suppose $E \in \mathfrak{M}(\mathbb{R})$, $f \in \mathcal{L}(E,
+  \overline{\mathbb{R}})$. Recall that $f \in \mathcal{L}_1(E,
+  \overline{\mathbb{R}}) \iff \abs{f} \in \mathcal{L}_1(E,
+  \overline{\mathbb{R}})$.
+
+  Suppose $g \in \mathcal{L}_1(E, \overline{\mathbb{R}})$, $f \in
+  \mathcal{L}(E, \overline{\mathbb{R}})$ and suppose $0 \leq \abs{f} \leq g$ 
+  a.e. on $E$, and that $\int_{E} g < \infty$. Then $\int_{E} \abs{f} \leq
+  \int_{E} g < \infty$, which thus $f \in \mathcal{L}_1(E,
+  \overline{\mathbb{R}})$.
+\end{eg}
+
+\begin{thm}[Lebesgue Dominated Convergence Theorem]\index{Lebesgue Dominated Convergence Theorem}\label{thm:lebesgue_dominated_convergence_theorem}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $(f_n)_n$ in $\mathcal{L}_1(E,
+  \overline{\mathbb{R}})$. Suppose that there exists $g \in \mathcal{L}_1(E.
+  \overline{\mathbb{R}})$ such that $\abs{f_n} \leq g$ a.e. on $E$, for $n \geq
+  1$. Suppose furthermore that $f : E \to \overline{\mathbb{R}}$ is a function,
+  and that
+  \begin{equation*}
+    f(x) = \lim_{n \to \infty} f_n(x), \text{ a.e. on } E.
+  \end{equation*}
+  Then $f \in \mathcal{L}_1(E, \overline{\mathbb{R}})$ and
+  \begin{equation*}
+    \int_{E} f = \lim_{n \to \infty} \int_{E} f_n.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{Isolating ``bad'' points} 
+  Consider, for each $n \geq 1$, the set
+  \begin{equation*}
+    Y_n \coloneqq \{ x \in E : \abs{f_n(x)} > g(x) \}.
+  \end{equation*}
+  By assumption, $mY_n = 0$ for each $n \geq 1$. Letting
+  \begin{equation*}
+    Y \coloneqq \bigcup_{n=1}^{\infty} Y_n = \{ x \in E : \abs{f_n(x)} > g(x), n
+    \geq 1 \},
+  \end{equation*}
+  we have that
+  \begin{equation*}
+    0 \leq mY \leq \sum_{n=1}^{\infty} mY_n = 0,
+  \end{equation*}
+  and so $mY = 0$.
+
+  Furthermore, consider
+  \begin{equation*}
+    Z \coloneqq \{ x \in E : f(x) \neq \lim_{n \to \infty} f_n(x) \}.
+  \end{equation*}
+  By assumption, $mZ = 0$.
+
+  Let
+  \begin{equation*}
+    B \coloneqq Y \cup Z.
+  \end{equation*}
+  Then $\forall x \in B$, we have
+  \begin{equation*}
+    f(x) \neq \lim_{n \to \infty} f_n(x) \text{ and }
+    \abs{f_n(x)} > g(x) \text{ for each } n \geq 1.
+  \end{equation*}
+  Most importantly, we have that
+  \begin{equation*}
+    0 \leq mB \leq mY + mZ = 0,
+  \end{equation*}
+  and so $mB = 0$.
+
+  Let $H = E \setminus B$. Then $\forall x \in H$,
+  \begin{equation*}
+    f(x) = \lim_{n \to \infty} f_n(x) \text{ and }
+    \abs{f_n(x)} \leq g(x) \text{ for each } n \geq 1.
+  \end{equation*}
+  It follows that if we can prove the statement for
+  \begin{equation*}
+    f_n \restriction_{H} \text{ and } f \restriction_H,
+  \end{equation*}
+  then we obtain the result that we desire. Thus, wlog, we may replace $E$ with
+  $H$.
+
+  \noindent
+  \hlbnoted{Proving the statement} 
+  Since $f(x) = \lim_{n \to \infty} f_n(x)$, by A2, we have that
+  \begin{equation*}
+    \limsup_{n \geq 1} f_n (x) = \liminf_{n \geq 1} f_n(x) = \lim_{n \to \infty}
+    f_n(x) = f(x),
+  \end{equation*}
+  and so in particular we have
+  \begin{equation*}
+    \int_{E} f = \int_{E} \liminf_{n \geq 1} f_n(x).
+  \end{equation*}
+  From \hyperref[thm:fatou_s_lemma]{Fatou's Lemma} and A2, we have that
+  \begin{equation*}
+    \int_{E} f \leq \liminf_{n \geq 1} \int_{E} f_n \leq \limsup_{n \geq 1}
+    \int_{E} f_n.
+  \end{equation*}
+  Now, notice that $g - f_n \geq 0$ \sidenote{This is required to invoke Fatou's
+  Lemma}, and we have
+  \begin{align*}
+    \int_E (g - f) &= \int_{E} (g - \limsup_{n \geq 1} f_n) \\
+                   &= \int_E \liminf_{n \geq 1} (g - f_n) \\
+                   &\leq \liminf_{n \geq 1} \int_{E} (g - f_n) \quad \because
+                   \hyperref[thm:fatou_s_lemma]{Fatou's} \\
+                   &= \int_{E} g - \limsup_{n \geq 1} \int_{E} f_n.
+  \end{align*}
+  Thus
+  \begin{equation*}
+    \int_{E} f \geq \limsup_{n \geq 1} \int_{E} f_n.
+  \end{equation*}
+  Therefore
+  \begin{equation*}
+    \limsup_{n \geq 1} \int_{E} f_n \leq \int_{E} f \leq \liminf_{n \geq 1}
+    \int_{E} f_n \leq \limsup_{n \geq 1} \int_{E} f_n.
+  \end{equation*}
+  By the \hlnotea{Squeeze Theorem}, we obtain
+  \begin{equation*}
+    \int_{E} f = \lim_{n \to \infty} \int_{E} f_n.
+  \end{equation*}
+\end{proof}
+
+% section lebesgue_integration_continued_3 (end)
+
+\section{\texorpdfstring{$L_p$}{Lp} Spaces}%
+\label{sec:_l_p_spaces}
+% section _l_p_spaces
+
+Functional analysis is the study of normed linear spaces and the continuous
+linear maps between them. Amongst the most important examples are the so-called
+$L_p$-spaces, and we will now turn our attention towards them. \marginnote{You
+may wish to refresh your memory on the definition of a
+\hyperref[defn:semi_norm]{semi-norm}.}.
+
+\begin{eg}
+  Let $E \in \mathfrak{M}(\mathbb{K})$ and $mE > 0$. Recall that
+  \begin{equation*}
+    \mathcal{L}_1(E, \mathbb{K}) = \left\{ f \in \mathcal{L}(E, \mathbb{K}) :
+    \int_{E} \abs{f} < \infty \right\}.
+  \end{equation*}
+  Define the map
+  \begin{align*}
+    \nu_1 : \mathcal{L}_1(E, \mathbb{K}) &\to \mathbb{K} \\
+    f & \mapsto \int_{E} \abs{f}.
+  \end{align*}
+  Observe that
+  \begin{itemize}
+    \item $\nu_1(f) \geq 0$ for all $f \in \mathcal{L}_1(E, \mathbb{K})$;
+    \item $\nu_1(0) = \int_{E} \abs{0} = 0$;
+    \item $\kappa \in \mathbb{K} \implies$ 
+      \begin{equation*}
+        \nu_1(\kappa f) = \int_{E} \abs{\kappa f} = \abs{\kappa} \int_{E}
+        \abs{f} = \abs{\kappa} \nu_1(f);
+      \end{equation*}
+      and
+    \item $\forall f, g \in \mathcal{L}_1(E, \mathbb{K})$ 
+      \begin{equation*}
+        \nu_1(f + g) = \int_{E} \abs{f + g} \leq \int_{E} \abs{f} + \int_{E}
+        \abs{g} = \nu_1(f) + \nu_1(g).
+      \end{equation*}
+  \end{itemize}
+  However, it is important to notice that for any $x_0 \in E$,
+  \begin{equation*}
+    \nu_1(\chi_{\{x_0\}}) = \int_{\{ x_0 \}} 1 = 0.
+  \end{equation*}
+  Thus $\nu_1$ is \hlimpo{not a norm} since $\chi_{\{x_0\}} \neq \emptyset$.
+\end{eg}
+
+\begin{propo}[Kernel of a Vector Space is a Linear Manifold]\label{propo:kernel_of_a_vector_space_is_a_linear_manifold}
+  Let $\mathcal{W}$ be a vector space over the field $\mathbb{K}$, and suppose
+  that $\nu$ is a seminorm on $\mathcal{W}$. Let
+  \begin{equation*}
+    \mathcal{N} \coloneqq \{ w \in W : \nu(w) = 0 \}.
+  \end{equation*}
+  Then $\mathcal{N}$ is a \hldefn{linear manifold} \sidenote{A subspace $M$ of a
+  Hilbert space, which is a vector space endowed with an inner product such that
+  with an appropriate norm, turns it into a complete metric space, is called a
+  linear manifold if it is closed under addition and scalar multiplication.
+  (Source: \citet{mathworld_linearmanifold})
+
+  Here, we can safely talk about Hilbert spaces because $\mathbb{K}$ is endowed
+  with an inner product. Furthermore, the check is to simply show that $M$ is a
+  subspace of the original space.} in
+  $\mathcal{W}$ and so $\mathcal{W} / \mathcal{N}$ is a vector space over
+  $\mathbb{K}$, whose elements we denote by
+  \begin{equation*}
+    [x] \coloneqq x + \mathcal{N}.
+  \end{equation*}
+  Furthermore, the map
+  \begin{align*}
+    \norm{\cdot} : \mathcal{W} / \mathcal{N} &\to \mathbb{K} \\
+    [x] &\mapsto \nu(x)
+  \end{align*}
+  is well-defined, and defines a norm on $\mathcal{W} / \mathcal{N}$.
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$\mathcal{N}$ is a linear manifold} Firstly, note that $\nu(0) = 0
+  \implies 0 \in \mathcal{N}$. Thus $\mathcal{N} \neq \emptyset$. Let $x, y \in
+  \mathcal{N}$ and $\kappa \in \mathbb{K}$. Then
+  \begin{equation*}
+    0 \leq \nu(\kappa x + y) \leq \abs{\kappa} \nu(x) + \nu(y) = 0 ,
+  \end{equation*}
+  which implies
+  \begin{equation*}
+    \nu(\kappa x + y) = 0.
+  \end{equation*}
+  Thus $\kappa x + y \in \mathcal{N}$.
+
+  \noindent
+  \hlbnoted{$\mathcal{W} / \mathcal{N}$ is a vector space over $\mathbb{K}$}
+  This is a result from elementary linear algebra theory, but let's do it for
+  revision. It is clear that $\mathcal{N} \in \mathcal{W} / \mathcal{N}$, so
+  $\mathcal{W} / \mathcal{N} \neq \emptyset$. Notice that for any $[x], [y] \in
+  \mathcal{W} / \mathcal{N}$ and $\kappa \in \mathbb{K}$, we define the
+  operations
+  \begin{equation*}
+    [\kappa x + y] = \kappa [x] + [y].
+  \end{equation*}
+  By the commutativity of addition,
+  \begin{equation*}
+    [x + y] = x + y + \mathcal{N} = y + x + \mathcal{N} = [y + x].
+  \end{equation*}
+  The additive identity is $[0] = 0 + \mathcal{N}$, multiplicative identity is
+  $[1] = 1 + \mathcal{N}$, and additive inverse of $[x]$ is $[-x]$.
+
+  We note that $\mathcal{W} / \mathcal{N}$ is normally referred to as the
+  \hldefn{quotient space} of $\mathcal{W}$ by $\mathcal{N}$.
+
+  \noindent
+  \hlbnoted{$\norm{\cdot}$ is well-defined} Let $[x_1] = [x_2] \in
+  \mathcal{W} / \mathcal{N}$. Then $[x_1 - x_2] = [0]$ and so $x_1 - x_2 \in
+  \mathcal{N}$. Then
+  \begin{equation*}
+    \nu(x_1 - x_2) = 0,
+  \end{equation*}
+  which then since
+  \begin{equation*}
+    0 \leq \abs{\nu(x_1) - \nu(x_2)} \leq \nu(x_1 - x_2) = 0,
+  \end{equation*}
+  we have that $\nu(x_1) = \nu(x_2)$. Hence
+  \begin{equation*}
+    \norm{[x_1]} = \norm{[x_2]},
+  \end{equation*}
+  and so $\nu(\cdot)$ is well-defined.
+
+  \noindent
+  \hlbnoted{$\norm{\cdot}$ is a norm} Let $[x], [y] \in \mathcal{W} /
+  \mathcal{N}$ and $\kappa \in \mathbb{K}$. Then
+  \begin{itemize}
+    \item $\norm{[x]} = \nu(x) \geq 0$; 
+    \item $\norm{\kappa[x]} = \norm{[\kappa x]} = \nu(\kappa x) = \abs{\kappa}
+      \nu(x) = \abs{\kappa} \norm{[x]}$;
+    \item $\norm{[x] + [y]} = \norm{[x + y]} = \nu(x + y) \leq \nu(x) + \nu(y) =
+      \norm{[x]} + \norm{[y]}$; and
+    \item $\norm{[x]} = 0 \implies \nu(x) = 0 \implies x \in \mathcal{N} \iff
+      [x] = [0] \in \mathcal{W} / \mathcal{N}$.
+  \end{itemize}
+  Thus $\norm{\cdot}$ is indeed a norm.
+
+  Hence, $\mathcal{W} / \mathcal{N}$ is a normed linear space.
+\end{proof}
+
+\begin{eg}
+  In our last example, we determined that $\nu_1(\cdot)$ is a seminorm on
+  $\mathcal{L}_1(E, \mathbb{K})$. Suppose
+  \begin{equation*}
+    g \in \mathcal{N}_1(E, \mathbb{K}) \coloneqq \{ f \in \mathcal{L}_1(E,
+    \mathbb{K}) : \nu_1(f) = 0 \}.
+  \end{equation*}
+  Then $\int_{E} \abs{g} = 0$. Since $mE > 0$, this happens if and only if $g =
+  0$ a.e. on $E$.
+
+  Since $g = 0$ a.e. on $E$ iff $\int_{E} \abs{g} = 0$, we can also define
+  \begin{equation*}
+    \mathcal{N}_1(E, \mathbb{K}) = \{ g \in \mathcal{L}_1(E, \mathbb{K}) : g = 0
+    \text{ a.e. on } E \}.
+  \end{equation*}
+  Setting
+  \begin{equation*}
+    L_1(E, \mathbb{K}) = \mathcal{L}_1(E, \mathbb{K}) / \mathcal{N}_1(E,
+    \mathbb{K}),
+  \end{equation*}
+  we have that $[f] = [g]$ iff $f - g \in \mathcal{N}_1(E, \mathbb{K})$, i.e. $f
+  = g$ a.e. on $E$.
+\end{eg}
+
+\begin{defn}[$L_1$-space]\index{$L_1$-space}\label{defn:_l_1_space}
+  Let $E \in \mathfrak{M}(\mathbb{K})$ with $mE > 0$. We define the $L_1$-space
+  as
+  \begin{equation*}
+    L_1(E, \mathbb{K}) := \mathcal{L}_1(E, \mathbb{K}) / \mathcal{N}_1(E,
+    \mathbb{K}),
+  \end{equation*}
+  with the norm
+  \begin{align*}
+    \norm{\cdot} : L_1(E, \mathbb{K}) &\to \mathbb{R} \\
+    \norm{[f]} &\coloneqq \int_{E} f. 
+  \end{align*}
+\end{defn}
+
+\begin{defn}[$\mathcal{L}_p(E, \mathbb{K})$]\index{$\mathcal{L}_p(E, \mathbb{K})$}\label{defn:_l_p_e_k_}
+  Let $E \in \mathfrak{M}(\mathbb{K})$ with $mE > 0$. If $1 < p < \infty$ in
+  $\mathbb{R}$, we define
+  \begin{align*} 
+    \mathcal{L}_p(E, \mathbb{K})
+    &\coloneqq \{ f \in \mathcal{L}(E, \mathbb{K}) :
+      \int_{E} \abs{f}^p < \infty \} \\
+    &= \{ f \in \mathcal{L}(E, \mathbb{K}) : \abs{f}^p \in \mathcal{L}_1(E,
+      \mathbb{K}) \}.
+  \end{align*}
+\end{defn}
+
+We need to show that $\mathcal{L}_p(E, \mathbb{K})$ is a vector space for all $1
+< p < \infty$, and that
+\begin{equation*}
+  \nu_p(f) \coloneqq \left( \int_{E} \abs{f}^p \right)^{\frac{1}{p}}
+\end{equation*}
+defines a semi-norm on $\mathcal{L}_p(E, \mathbb{K})$. If we can establish these
+results, we can then appeal to
+\cref{propo:kernel_of_a_vector_space_is_a_linear_manifold} and take the quotient
+space wrt to a similar kernel.
+
+However, the proof of the triangle inequality of $\nu_p$ is a non-trivial
+exercise.
+
+\begin{defn}[Lebesgue Conjugate]\index{Lebesgue Conjugate}\label{defn:lebesgue_conjugate}
+  Let $1 \leq p \leq \infty$. We associate to $p$ the number $1 \leq q \leq
+  \infty$ as follows:
+  \begin{itemize}
+    \item if $p = 1$, then $q = \infty$ ;
+    \item if $p = \infty$, then $q = 1$ ; and finally
+    \item $1 < p < \infty \implies$ 
+      \begin{equation*}
+        q = \left( 1 - \frac{1}{p} \right)^{-1}.
+      \end{equation*}
+  \end{itemize}
+  We say that $q$ is the \hlnoteb{Lebesgue conjugate} of $p$. With the
+  convention that $\frac{1}{\infty} \coloneqq 0$, and we see that in all cases,
+  \begin{equation*}
+    \frac{1}{p} + \frac{1}{q} = 1.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  When $1 < p < \infty$, we see that the above equation is equivalent to each of
+  the equations:
+  \begin{itemize}
+    \item $p(q - 1) = q$ and
+    \item $(p - 1)q = p$.
+  \end{itemize}
+\end{note}
+
+\begin{lemma}[Young's Inequality]\index{Young's Inequality}\label{lemma:young_s_inequality}
+  If $1 < p < \infty$ and $q$ is the Lebesgue conjugate of $p$, then for $0 < a,
+  b \in \mathbb{R}$,
+  \begin{enumerate}
+    \item $ab \leq \frac{a^p}{p} + \frac{b^q}{q}$; and
+    \item equality in the above holds iff $a^p = b^q$.
+  \end{enumerate}
+\end{lemma}
+
+\marginnote{There's another proof that I prefer over this construction here that
+feels like we just lucked out. See
+\href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf\#lemma.27}{PMATH351}.}
+
+\begin{proof}
+  Let $g : (0, \infty) \to \mathbb{R}$ be such that
+  \begin{equation*}
+    x \mapsto \frac{1}{p} xp ^+ \frac{1}{q} - x.
+  \end{equation*}
+  Notice that $g$ is differentiable on $(0, \infty)$, and we have
+  \begin{equation*}
+    g'(x) = x^{p-1} - 1.
+  \end{equation*}
+  Furthermore,
+  \begin{itemize}
+    \item $g'(x) < 0$ for $x \in (0, 1)$;
+    \item $g'(1) = 0$; and
+    \item $g'(x) > 0$ for $x \in (1, \infty)$.
+  \end{itemize}
+  Also, note that $g(1) = \frac{1}{p} + \frac{1}{q} - 1 = 0$. Thus by the above
+  observation, we know that $g$ attains its minimum at $1$. Let $x_0 =
+  \frac{a}{b^{q-1}} > 0$. Then we have
+  \begin{align*}
+    0 \leq g(x_0)
+    &= \frac{1}{p} \left( \frac{a^p}{b^{(q-1)p}} \right) + \frac{1}{q} -
+      \frac{a}{b^{q-1}} \\
+    &= \frac{1}{p} \frac{a^p}{b^q} + \frac{1}{q} - \frac{a}{b^{q-1}}.
+  \end{align*} 
+  Thus
+  \begin{equation*}
+    \frac{a}{b^{q-1}} \leq \frac{1}{p} \frac{a^p}{b^q} + \frac{1}{q}.
+  \end{equation*}
+  Multiplying both sides by $b^q$, we get
+  \begin{equation*}
+    ab \leq \frac{1}{p} a^p + \frac{1}{q} b^q.
+  \end{equation*}
+
+  Furthermore, we notice that
+  \begin{equation*}
+    g(x_0) = 0 \iff x_0 = 1 \iff a = b^{q-1} \iff a^p = b^{p(q-1)} = b^q.
+  \end{equation*}
+\end{proof}
+
+% section _l_p_spaces (end)
+
+% chapter lecture_10_jun_06th_2019 (end)
 
 \appendix
 

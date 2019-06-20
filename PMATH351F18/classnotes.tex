@@ -1,9 +1,8 @@
 \documentclass[notoc,notitlepage]{tufte-book}
 % \nonstopmode % uncomment to enable nonstopmode
 
-\input{latex-classnotes-preamble.tex}
-
 \usepackage{classnotetitle}
+\input{latex-classnotes-preamble.tex}
 
 \title{PMATH351 --- Real Analysis}
 \author{Johnson Ng}
@@ -13,7 +12,6 @@
 
 \DeclareMathOperator{\lub}{lub }
 \DeclareMathOperator{\glb}{glb }
-\DeclareMathOperator{\Range}{Range }
 \DeclareMathOperator{\Domain}{Domain }
 \DeclareMathOperator{\bdy}{bdy }
 \DeclareMathOperator{\Lim}{Lim }
@@ -1024,21 +1022,21 @@ Before delving into resolving our last question in the previous lecture, note th
 \begin{proof}
   \begin{marginfigure}
     \begin{tikzpicture}
-      \draw[fill,color=be-red] (0, 0) circle(2.2);
+      \draw[fill,color=red] (0, 0) circle(2.2);
       \node at (0, 2.4) {$A_0$};
-      \draw[fill,color=be-yellow] (0, 0) circle(1.8);
-      \node[color=dark] at (0, 2.0) {$\boldsymbol{A_1}$};
-      \draw[fill,color=be-green] (0, 0) circle(1.4);
-      \node[color=dark] at (0, 1.6) {$\boldsymbol{A_2}$};
-      \draw[fill,color=be-cyan] (0, 0) circle(1.0);
-      \node[color=dark] at (0, 1.2) {$\boldsymbol{A_3}$};
-      \draw[fill,color=be-blue] (0, 0) circle(0.6);
-      \node[color=dark] at (0, 0.8) {$\boldsymbol{A_4}$};
-      \draw[fill,color=light] (0, 0) circle(0.2);
-      \node[color=dark] at (0, 0.4) {$\boldsymbol{A_5}$};
+      \draw[fill,color=yellow] (0, 0) circle(1.8);
+      \node[color=background] at (0, 2.0) {$\boldsymbol{A_1}$};
+      \draw[fill,color=green] (0, 0) circle(1.4);
+      \node[color=background] at (0, 1.6) {$\boldsymbol{A_2}$};
+      \draw[fill,color=cyan] (0, 0) circle(1.0);
+      \node[color=background] at (0, 1.2) {$\boldsymbol{A_3}$};
+      \draw[fill,color=blue] (0, 0) circle(0.6);
+      \node[color=background] at (0, 0.8) {$\boldsymbol{A_4}$};
+      \draw[fill,color=foreground] (0, 0) circle(0.2);
+      \node[color=background] at (0, 0.4) {$\boldsymbol{A_5}$};
 
-      \draw[thick,->,color=dark] (1.2,1.59705627484771405856) -- (0.9,0.8797958971132712) node[midway,left] {$\boldsymbol{f}$};
-      \draw[thick,->,color=dark] (1.2, 0) -- (0.4, 0) node[midway,below] {$\boldsymbol{f}$};
+      \draw[thick,->,color=background] (1.2,1.59705627484771405856) -- (0.9,0.8797958971132712) node[midway,left] {$\boldsymbol{f}$};
+      \draw[thick,->,color=background] (1.2, 0) -- (0.4, 0) node[midway,below] {$\boldsymbol{f}$};
     \end{tikzpicture}
     \caption{The core idea of the proof for Cantor-Schr\"{o}der-Bernstein Theorem}
     \label{fig:csb_pf}
@@ -1662,7 +1660,8 @@ In this course, we shall assume that the Continuum Hypothesis is true.
 \begin{equation*}
   S_i = \{ \vec{x} \in \mathbb{R}^2 \mid \norm{\vec{x}}_i = 1 \}, \quad i = 1, 2, \infty
 \end{equation*}
-Notice that we would then have the following graph:\begin{figure}[h]
+Notice that we would then have the following graph:
+\begin{figure}[ht]
   \begin{center}
   \begin{tikzpicture}
     \draw[-latex'] (-3, 0) -- (3, 0);
@@ -1752,10 +1751,10 @@ We asked the question: why is $\norm\cdot_p$ a norm?
     \begin{tikzpicture}
     \draw[->] (-0.5,0) -- (3,0) node[right] {$t$};
     \draw[->] (0,-0.5) -- (0,3) node[above] {$u$};
-    \draw[fill=be-blue!20!dark] (1.5,2.25) -- (0, 2.25) -- (0, 0) -- (1.5, 0) -- cycle;
+    \draw[fill=blue!20!background] (1.5,1.5) -- (0, 1.5) -- (0, 0) -- (1.5, 0) -- cycle;
     \draw[domain=0:1.73205080756887729352] plot ( {\x},{\x^2} ) node[above] {$u = t^{ p - 1 }$};
-    \draw[dotted] (1.5, 2.25) -- (0, 2.25) node[left] {$\beta$};
-    \draw[dotted] (1.5, 2.25) -- (1.5, 0) node[below] {$\alpha$};
+    \draw[dotted] (1.5, 1.5) -- (0, 1.5) node[left] {$\beta$};
+    \draw[dotted] (1.5, 1.5) -- (1.5, 0) node[below] {$\alpha$};
     \end{tikzpicture}
     \caption{Motivation for \cref{lemma:young_s_inequality}.}
     \label{fig:young_s_inequality_idea}
@@ -2360,7 +2359,7 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
 \begin{eg}[Cantor Set]\label{eg:cantor_set}
   Let's consider the closed interval $[0, 1]$, of which we shall label as $P_0$.
 
-  \begin{figure}[h]
+  \begin{figure}[ht]
     \begin{center}
     \begin{tikzpicture}
       \draw[-] (-0.5,0) -- (9.5,0);
@@ -2374,19 +2373,19 @@ Consequently, if we have $U$ being open in $\mathbb{R}$, then $U$ can be express
       \node at (7, -.7) {$\frac{7}{9}$};
       \node at (8, -.7) {$\frac{8}{9}$};
 
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (3,0) -- (6,0);
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (1,0) -- (2,0);
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (7,0) -- (8,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},blue] (3,0) -- (6,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},blue] (1,0) -- (2,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},blue] (7,0) -- (8,0);
 
-      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},be-red] (0, 0) -- (1, 0);
-      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},be-red] (2, 0) -- (3, 0);
-      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},be-red] (6, 0) -- (7, 0);
-      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},be-red] (8, 0) -- (9, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},red] (0, 0) -- (1, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},red] (2, 0) -- (3, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},red] (6, 0) -- (7, 0);
+      \draw[{Bracket[length=5pt,width=15pt]}-{Bracket[length=5pt,width=15pt]},red] (8, 0) -- (9, 0);
       
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (0.333333,0) -- (0.666667,0);
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (2.333333,0) -- (2.666667,0);
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (6.333333,0) -- (6.666667,0);
-      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},be-blue] (8.333333,0) -- (8.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},blue] (0.333333,0) -- (0.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},blue] (2.333333,0) -- (2.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},blue] (6.333333,0) -- (6.666667,0);
+      \draw[{Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},blue] (8.333333,0) -- (8.666667,0);
     \end{tikzpicture}
     \end{center}
     \caption{Cantor set showing up to $n = 2$, with the excluded interval in $n = 3$ shown.}
@@ -2625,7 +2624,7 @@ Recall \cref{eg:sequence_spaces}.
 
 \begin{proof}
   \begin{enumerate}
-    \item For the $(\implies)$ direction, suppose $A$ is closed. \sidenote{This uses a reversed way of thinking: if we want to show that $\Lim(A) \subset A$, then instead of trying to directly show the containment, we show that all elements in $A^C$ are in fact not limit points due to $A$ being closed.}Let $x_0 \in A^C$. Then $\exists \epsilon > 0$ such that $B(x_0, \epsilon) \cap A = \emptyset$. Thus, by definition, we have that $x_0 \notin \Lim(A)$ \sidenote{Notice there that there are no elements in $A$ that are \hlnotec{close to} $x_0$, and so it's not a limit point.}. Therefore, $\Lim(A) \subset A$.
+    \item For the $(\implies)$ direction, suppose $A$ is closed. \sidenote{This uses a reversed way of thinking: if we want to show that $\Lim(A) \subset A$, then instead of trying to directly show the containment, we show that all elements in $A^C$ are in fact not limit points due to $A$ being closed.}Let $x_0 \in A^C$. Then $\exists \epsilon > 0$ such that $B(x_0, \epsilon) \cap A = \emptyset$. Thus, by definition, we have that $x_0 \notin \Lim(A)$ \sidenote{Notice there that there are no elements in $A$ that are \hlnotea{close to} $x_0$, and so it's not a limit point.}. Therefore, $\Lim(A) \subset A$.
 
       For the $(\impliedby)$ direction, suppose $\Lim(A) \subset A$. Let $x_0 \in A^C$. Then $x_0 \notin \Lim(A)$, which means that $\exists \epsilon > 0$ such that $B(x_0, \epsilon) \cap A = \emptyset$, i.e. $B(x_0, \epsilon) \subset A^C$. Thus $A$ is closed.
 
@@ -3492,7 +3491,7 @@ We shall state the following without proving it, although the proof is straightf
 
 We know that this works for $\mathbb{R}$, but does this work for $(X, d)$? In particular, we conjecture that:
 
-\begin{quotebox}{be-magenta}{light}
+\begin{quotebox}{magenta}{foreground}
   If $\{ F_n \}$ is a sequence of non-empty closed sets in $(X, d)$, with $F_{n + 1} \subseteq F_n$, then
   \begin{equation*}
     \bigcap_{n = 1}^{\infty} F_n \neq \emptyset.
@@ -3523,14 +3522,14 @@ Of course, one would ask the question as to why does such a property not hold. T
     \centering
     \begin{tikzpicture}
       \draw[dashed] (0, 0) circle(2);
-      \draw[dashed,color=be-red] (1.4142135623730950488,1.4142135623730950488) -- (-1.4142135623730950488,-1.4142135623730950488);
+      \draw[dashed,color=red] (1.4142135623730950488,1.4142135623730950488) -- (-1.4142135623730950488,-1.4142135623730950488);
       \node[draw,fill,circle,inner sep=1pt] at (1.4142135623730950488,1.4142135623730950488) {};
       \node[draw,fill,circle,inner sep=1pt] at (-1.4142135623730950488,-1.4142135623730950488) {};
-      \draw[dashed,color=be-red] (0, 2) -- (0, -2);
+      \draw[dashed,color=red] (0, 2) -- (0, -2);
       \node[draw,fill,circle,inner sep=1pt] at (0, 2) {};
       \node[draw,fill,circle,inner sep=1pt] at (0, -2) {};
-      \draw[dashed,color=be-cyan] (2, 0) -- (0, -2);
-      \draw[dashed,color=be-cyan] (1,1.73205080756887729352) -- (-1.73205080756887729352,-1);
+      \draw[dashed,color=cyan] (2, 0) -- (0, -2);
+      \draw[dashed,color=cyan] (1,1.73205080756887729352) -- (-1.73205080756887729352,-1);
     \end{tikzpicture}
     \caption{Intuitive illustration of \cref{defn:diameter_of_a_set}. Red lines are the diameters, as captured by the $\sup$ function. Blue lines are other possible candidates, but none of them can be a supremum.}\label{fig:intuitive_illustration_of_diameter_of_a_set}
   \end{marginfigure}
@@ -3752,7 +3751,7 @@ We are now ready to prove the following statement.
   \begin{equation*}
     f(x) = \sum_{n=1}^{\infty} \left( \frac{3}{4} \right)^n \phi \left( 4^n x \right).
   \end{equation*}
-  \begin{figure}
+  \begin{figure}[ht]
     \centering
     \includegraphics[width=8cm]{weierstrass.png}
     \caption{Function of $f$ as generated on Desmos. See it \href{https://www.desmos.com/calculator/rj9r0x5jyu}{live}.}\label{fig:function_of_f_as_generated_on_desmos}
@@ -3949,7 +3948,7 @@ To answer this, we need the following concept:
 
 Suppose $(X, d)$ is a metric space that has 2 completions through the functions $\phi$ and $\psi$.
 
-\begin{figure}[!ht]
+\begin{figure}[ht]
   \centering
   \begin{tikzpicture}
     \node (X) at (0,0) {$X$};
@@ -5432,8 +5431,8 @@ Before proving Weierstrass' Approximation Theorem, we require the following lemm
       \draw[scale=1.7,domain=-1:1] plot ({\x},{(1 - (\x)^2)^(10)});
       \draw[dashed] (-0.7,0.25) -- (-0.7,0) node[below] {$-\delta$};;
       \draw[dashed] (0.7,0.25) -- (0.7,0) node[below] {$\delta$};;
-      \node[draw,circle,fill,inner sep=0.5pt,pin={[pin edge=latex'- pin-distance=2pt]115:{$c_n\left(1 - \delta^2\right)^n$}}] at (-0.7, 0.25) {};
-      \node[draw,circle,fill,inner sep=0.5pt,pin={[pin edge=latex'- pin-distance=2pt]65:{$c_n\left(1 - \delta^2\right)^n$}}] at (0.7, 0.25) {};
+      \node[draw,circle,fill,inner sep=0.5pt,pin={[pin edge=latex'-, pin-distance=2pt]115:{$c_n\left(1 - \delta^2\right)^n$}}] at (-0.7, 0.25) {};
+      \node[draw,circle,fill,inner sep=0.5pt,pin={[pin edge=latex'-, pin-distance=2pt]65:{$c_n\left(1 - \delta^2\right)^n$}}] at (0.7, 0.25) {};
       \node[draw,circle,fill,inner sep=0.5pt,label={270:{$-1$}}] at (-1.2, 0) {};
       \node[draw,circle,fill,inner sep=0.5pt,label={270:{$1$}}] at (1.2, 0) {};
     \end{tikzpicture}
