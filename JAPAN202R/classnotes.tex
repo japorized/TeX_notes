@@ -1,0 +1,288 @@
+% !TEX TS-program = lualatex
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{JAPAN202R S19 --- Second Year Japanese 2}
+\author{Johnson Ng (ジョンソン)}
+\subtitle{ノート}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
+
+\usepackage{longtable,multirow}
+\usepackage{titlesec}
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+\usepackage{pxrubrica}
+\input{latex-classnotes-preamble.tex}
+
+\setmainfont{EB Garamond}
+\setmainjfont{M+ 1mn}
+
+\begin{document}
+% \input{latex-classnotes-header.tex}
+\makeatletter
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
+\makeatother
+
+\hypersetup{pageanchor=false}
+\maketitle
+\hypersetup{pageanchor=true}
+\begin{fullwidth}
+\chaptermark{Table of Contents}
+\tableofcontents
+\end{fullwidth}
+
+\makeatletter
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark \enspace \rightmark}}
+\makeatother
+
+\chapter*{Preface}%
+\label{chp:preface}
+\addcontentsline{toc}{chapter}{Preface}
+% chapter preface
+
+This set of notes will follow almost precisely the presentation in
+\citealt{banno1999}.
+
+% chapter preface (end)
+
+\chapter{第１８課}%
+\label{chp:dai_18_ka}
+% chapter dai_18_ka
+
+\section{単語（１８課）}%
+\label{sec:tango_c18}
+% section tango_c18
+
+\begin{longtable}{r l l l}
+\multicolumn{4}{l}{\hlnotea{名詞}} \\
+* & あと           & 後         & the rest \\
+  & エアコン       &            & air conditioner \\
+  & カーテン       &            & curtain \\
+  & クッション     &            & cushion \\
+  & シャンプー     &            & shampoo \\
+* & しょうゆ       & 醤油       & soy sauce \\
+* & スイッチ       &            & switch \\
+  & スープ         &            & soup \\
+* & スカート       &            & skirt \\
+* & そと           & 外         & outside \\
+  & ソファ         &            & sofa \\
+* & タオル         &            & towel \\
+  & にっき         & 日記       & diary \\
+  & バナナ         &            & banana \\
+  & ポップコーン   &            & popcorn \\
+  & むし           & 虫         & insect \\
+  & やちん         & 家賃       & rent \\
+* & ゆうがた       & 夕方       & evening \\
+  & るすばんでんわ & 留守番電話 & answering machine \\
+* & れいぞうこ     & 冷蔵庫     & refrigerator \\
+  & ろうそく       & 蝋燭       & candle \\
+\multicolumn{4}{l}{\hlnotea{い --- 形容詞}} \\
+  & あかるい         & 明るい     & bright \\
+  & きぶんがわるいう & 気分が悪い & to feel sick \\
+  & くらい           & 暗い       & dark \\
+  & はずかしい       & 恥ずかしい & embarrassing; \\
+  &                  &            & to feel embarrassed \\
+\multicolumn{4}{l}{\hlnotea{う - 動詞}} \\
+  & あく       & 開く       & (something) opens \\
+  & あやまる   & 謝る       & to apologize \\
+* & おす       & 押す       & to press; to push \\
+* & おとす     & 落とす     & to drop (something) \\
+  & おゆがわく & お湯が沸く & to boil water \\
+  & ころぶ     & 転ぶ       & to fall down \\
+  & こわす     & 壊す       & to break (something) \\
+  & さく       & 咲く       & to bloom \\
+  & しまる     & 閉まる     & to close (something) \\
+* & たすかる   & 助かる     & to be saved; to be helped \\
+* & たのむ     & 頼む       & to ask a favor \\
+* & つく       &            & to turn (appliance) on \\
+  & よごす     & 汚す       & to make dirty \\
+\multicolumn{4}{l}{\hlnotea{る - 動詞}} \\
+  & おちる     & 落ちる   & to drop (something) \\
+* & かたづける & 片付ける & to tidy up \\
+  & かんがえる & 考える   & to think (about); to consider \\
+  & きえる     & 消える   & (something) goes off \\
+  & こわれる   & 壊れる   & (something) breaks \\
+* & よごれる   & 汚れる   & to become dirty \\
+\multicolumn{4}{l}{\hlnotea{特別動詞}} \\
+  & ちゅうもんする & 注文する & to place an order \\
+\multicolumn{4}{l}{\hlnotea{他の}} \\
+* & いますぐ               & 今すぐ             & right away \\
+* & おかげで               &                    & thanks to ... \\
+* & おさきにしつれいします & お先に失礼します   & I shall be leaving first \\
+* & おつかれさま（でした） & お疲れ様（でした） & That must be tiring for you \\
+* & 〜（ん）だろう         &                    & short for 〜（ん）でしょう \\
+* & どうしよう             &                    & What should I/we do? \\
+* & ほんとうに             & 本当に             & really \\
+* & まず                   &                    & first of all \\
+  & 〜までに               &                    & by (time/date)
+\end{longtable}
+
+% section tango_c18 (end)
+
+\section{自動詞と他動詞}%
+\label{sec:jidoushi_to_tadoushi}
+% section jidoushi_to_tadoushi
+
+This is a direct equivalence of \hlnotea{transitivity} in English, where
+\begin{itemize}
+  \item 自動詞 --- intransitive verbs
+  \item 他動詞 --- transitive verbs
+\end{itemize}
+
+\begin{defn}[自動詞]\index{自動詞}\label{defn:jidoushi}
+  \hlnoteb{自動詞} (intransitive verbs) are verbs that describe the changes or
+  the state that things or people undergo.
+\end{defn}
+
+\begin{eg}
+  \begin{enumerate}
+    \item パソコン\underline{が}壊れた。The computer is broken.
+    \item 
+  \end{enumerate}
+\end{eg}
+
+% section jidoushi_to_tadoushi (end)
+
+\section{〜てしまう}%
+\label{sec:_teshimau}
+% section _teshimau
+
+
+
+% section _teshimau (end)
+
+\section{〜と}%
+\label{sec:_to}
+% section _to
+
+
+
+% section _to (end)
+
+\section{〜ながら}%
+\label{sec:_nagara}
+% section _nagara
+
+
+
+% section _nagara (end)
+
+\section{〜ばよかったです}%
+\label{sec:_bayokatsutadesu}
+% section _bayokatsutadesu
+
+
+
+% section _bayokatsutadesu (end)
+
+% chapter dai_18_ka (end)
+
+\chapter{第１９課}%
+\label{chp:dai_19_ka}
+% chapter dai_19_ka
+
+\section{単語（１９課）}%
+\label{sec:tango_c19}
+% section tango_c19
+
+
+
+% section tango_c19 (end)
+
+\section{尊敬語}%
+\label{sec:sonkeigo}
+% section sonkeigo
+
+
+
+% section sonkeigo (end)
+
+\section{Giving Respectful Advice}%
+\label{sec:giving_respectful_advice}
+% section giving_respectful_advice
+
+
+
+% section giving_respectful_advice (end)
+
+\section{〜てくれてありがとう}%
+\label{sec:_tekuretearigatou}
+% section _tekuretearigatou
+
+
+
+% section _tekuretearigatou (end)
+
+\section{〜てよかったです}%
+\label{sec:_teyokatsutadesu}
+% section _teyokatsutadesu
+
+
+
+% section _teyokatsutadesu (end)
+
+\section{〜はずです}%
+\label{sec:_hazudesu}
+% section _hazudesu
+
+
+
+% section _hazudesu (end)
+
+% chapter dai_19_ka (end)
+
+\chapter{第２０課}%
+\label{chp:dai_20_ka}
+% chapter dai_20_ka
+
+\section{単語（２０課）}%
+\label{sec:tango_c20}
+% section tango_c20
+
+
+
+% section tango_c20 (end)
+
+\section{丁重語}%
+\label{sec:teichougo}
+% section teichougo
+
+
+
+% section teichougo (end)
+
+\section{謙虚語}%
+\label{sec:kenkyogo}
+% section kenkyogo
+
+
+
+% section kenkyogo (end)
+
+\section{〜ないで}%
+\label{sec:_naide}
+% section _naide
+
+
+
+% section _naide (end)
+
+% chapter dai_20_ka (end)
+
+\appendix
+
+\backmatter
+
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
+
+% \nobibliography*
+\bibliography{references}
+
+\printindex
+
+\end{document}
+% vim:tw=80:fdm=syntax
+

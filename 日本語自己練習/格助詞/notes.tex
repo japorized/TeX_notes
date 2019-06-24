@@ -1,0 +1,365 @@
+% !TEX TS-program = lualatex
+\documentclass{tufte-handout}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage[japanese]{babel}
+\usepackage{natbib}
+\bibliographystyle{apalike}
+\usepackage{titlesec}
+\usepackage{luatexja}
+\usepackage{luatexja-fontspec}
+\usepackage{pxrubrica}
+\usepackage{fancyhdr}
+\usepackage[fixed]{fontawesome5}
+
+\newcommand{\personalcolor}{false}
+\ifthenelse{\equal{\personalcolor}{true}}{
+  \usepackage{colorscheme-chaos}
+}{
+  \usepackage{colorscheme-student}
+}
+
+\pagecolor{background}
+\color{foreground}
+
+\setmainjfont{IPAMincho}
+
+\makeatletter
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[R]{\textsl{\@title} \enspace \thepage}
+\makeatother
+
+\titleformat{\section}%
+  {\LARGE\rmfamily\itshape\color{magenta}}% format applied to label+text
+  {}% label
+  {}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+\titleformat{\subsection}%
+  {\Large\rmfamily\itshape\color{cyan}}% format applied to label+text
+  {}% label
+  {}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+\title{格助詞　簡略まとめと練習}
+\author{Japorized}
+
+\makeatletter
+\renewcommand{\maketitle}{%
+\thispagestyle{empty}
+\noindent
+{\Huge\@title\unskip\strut\par}
+\noindent
+{\small\@author\unskip\strut\par}
+
+\vspace{0.5cm}
+\hrule
+\vspace{1.5cm}
+}
+\makeatother
+
+\begin{document}
+\maketitle
+\nocite{etsuko}
+\nocite{tkforeignlang}
+
+\section{格助詞の覚え方}%
+\label{sec:kakujoshinooboekata}
+% section kakujoshinooboekata
+
+「鬼が戸よりで、空の部屋」
+
+\noindent
+「を・に・が・と・より・で・から・の・へ・や」
+
+% section kakujoshinooboekata (end)
+
+\section{各格助詞の使い方}%
+\label{sec:kakukakujoshinotsukaikata}
+% section kakukakujoshinotsukaikata
+
+\subsection{「を」の使い方}%
+\label{sub:wo_notsukaikata}
+% subsection wo_notsukaikata
+
+\begin{itemize}
+  \item \ruby[j]{動作}{どう|さ}の\ruby[j]{対象}{たい|しょ}を
+    \ruby[j]{表}{あらわ}す
+  \item \ruby[j]{通過}{つう|か}、移動する場所を表す
+  \item \ruby[j]{離}{はな}れる場所、\ruby[j]{起点}{き|てん}を表す
+  \item 「〜をしている」の\ruby[j]{形}{かたち}で、物や人の
+    \ruby[j]{形状}{けい|じょう}を表す
+\end{itemize}
+
+% subsection wo_notsukaikata (end)
+
+\subsection{「に」の使い方}%
+\label{sub:ni_notsukaikata}
+% subsection ni_notsukaikata
+
+\begin{itemize}
+  \item 物や\ruby[j]{生物}{せい|ぶつ}が\ruby[j]{存在}{そん|ざい}
+    する場所、\ruby[j]{状態}{じょう|たい}が表れている場所を
+    あらわす
+  \item 動作の対象の\ruby[j]{到着点}{とう|ちゃく|てん}、動作の
+    \ruby[j]{主体}{しゅ|たい}の到着点を表す
+  \item 動作が\ruby[j]{及}{およ}ぶ対象を表す
+  \item \ruby[j]{行為}{こう|い}を表す名詞や、動詞の
+    \ruby[j]{連用形}{れん|よう|かた}について、行為の目的を
+    表す
+  \item \ruby[j]{時点}{じ|てん}を表す
+  \item \ruby[j]{比較}{ひ|かく}の\ruby[j]{基準}{き|じゅん}や
+    \ruby[j]{適用}{てき|よう}の\ruby[j]{範囲}{はん|い}を
+    表す（例：〜に似ている）
+\end{itemize}
+
+% subsection ni_notsukaikata (end)
+
+\subsection{「が」の使い方}%
+\label{sub:ga_notsukaikata}
+% subsection ga_notsukaikata
+
+\begin{itemize}
+  \item 動作、\ruby[j]{出来事}{で|き|ごと}の
+    \ruby[j]{主体}{しゅ|たい}（\ruby[j]{疑問詞}{ぎ|もん|し}の場合
+    もある）を\ruby[j]{示}{しめ}す。目の前のことを言うときや、
+    他のものでないと言いたいときによく使われる (rule out
+    options)
+  \item 「〜は〜が...」の形の文で、話題の一部分や、能力、感
+    覚、感情の対象を示す
+\end{itemize}
+
+% subsection ga_notsukaikata (end)
+
+\subsection{「と」の使い方}%
+\label{sub:to_notsukaikata}
+% subsection to_notsukaikata
+
+\begin{itemize}
+  \item \ruby[j]{比}{く}べるものを表す
+  \item 行為を一緒にする相手を表す
+  \item 対する相手、比べる基準を表す
+  \item 名前や発言、考えなどの内容を表す
+\end{itemize}
+
+% subsection to_notsukaikata (end)
+
+\subsection{「より」の使い方}%
+\label{sub:yori_notsukaikata}
+% subsection yori_notsukaikata
+
+\begin{itemize}
+  \item 比較の基準を表す
+  \item 出発点や時の起点を表すのが本来の用法
+\end{itemize}
+
+% subsection yori_notsukaikata (end)
+
+\subsection{「で」の使い方}%
+\label{sub:de_notsukaikata}
+% subsection de_notsukaikata
+
+\begin{itemize}
+  \item 行為、行事が行われる場所、出来事が起こる場所を表
+    す
+  \item 手段、材料を表す
+  \item 範囲を表す
+  \item 原因、理由を表す
+\end{itemize}
+
+% subsection de_notsukaikata (end)
+
+\subsection{「から」の使い方}%
+\label{sub:kara_notsukaikata}
+% subsection kara_notsukaikata
+
+\begin{itemize}
+  \item 範囲の起点を表す
+  \item 原料を表す
+  \item 出発点を表す用法からの拡張で、「が」の代わりにも
+    のや情報の与え手としての主語を表示することもある
+  \item 「に」の代わりに、\ruby[j]{使役}{つ|えき}や
+    \ruby[j]{受身}{うけ|み}の\ruby[j]{動作主}{どう|さ|しゅ}を表す
+\end{itemize}
+
+% subsection kara_notsukaikata (end)
+
+\subsection{「の」の使い方}%
+\label{sub:no_notsukaikata}
+% subsection no_notsukaikata
+
+\begin{itemize}
+  \item 名詞について、他の名詞との間に何かの関係があること
+    を表す
+  \item 「が」に代わって、名詞を修飾する節の主語を表わす
+    ことがある
+\end{itemize}
+
+% subsection no_notsukaikata (end)
+
+\subsection{「へ」の使い方}%
+\label{sub:e_notesukaikata}
+% subsection e_notesukaikata
+
+\begin{itemize}
+  \item 移動の\ruby[j]{方向}{ほう|こう}や着点を表す
+\end{itemize}
+
+% subsection e_notesukaikata (end)
+
+\subsection{「や」の使い方}%
+\label{sub:ya_notsukaekata}
+% subsection ya_notsukaekata
+
+\begin{itemize}
+  \item 二つ以上の名詞を\ruby[j]{並}{な}べ立てるときに使う
+\end{itemize}
+
+% subsection ya_notsukaekata (end)
+
+\newpage
+
+\section{練習}%
+\label{sec:renshuu}
+% section renshuu
+
+\subsection{練習１}%
+\label{sub:renshuu_1}
+% subsection renshuu_1
+
+（　　）のなかに「を」が「と」を書いてください。そして、
+選択の理由を簡単に説明してください。
+
+\begin{enumerate}
+  \item サラ「あれ、マリさん、どうしてここにいるの？」 \\
+    マリ「リサさん（　　）待っているの。彼女（　　）映
+    画を見に行くの。」
+  \item ９時に家（　　）出ました。
+  \item サラの「や」の書き方はぼくの書き方（　　）違う
+    ね。
+  \item 先生「一人でこの教室（　　）掃除したの？」 \\
+    学生「いえ、トムさんやサラさん（　　）一緒にしました
+    。」
+  \item 空（　　）飛んで、南の国へ行きたい。
+  \item 駅で友達（　　）別れて家に帰りました。
+  \item プレゼントをくれた人にお礼（　　）言います。
+\end{enumerate}
+
+% subsection renshuu_1 (end)
+
+\subsection{練習２}%
+\label{sub:renshuu_2}
+% subsection renshuu_2
+
+aかbかいいほうを選んでください。そして、選択の理由を簡
+単に説明してください。
+
+\begin{enumerate}
+  \item ２時に東京駅を（a 降りました　　b 出発しました）。
+  \item 昨日は会社を（a 休みました　　b 働きました）。
+  \item こちらの山道を（a 休むところがありますよ　　b 歩き
+    ましょう）。
+  \item 廊下を（a 走らないでください　　b 遊ばないでくださ
+    い）。
+  \item ぼくはマリさんと（a 電話をかけます　　b 結婚し
+    ます）。
+  \item 会議室は、七階でエレベーターを（a 乗って　　b
+    降りて）、すぐ目の前ですよ。
+  \item 駅でサラさんと（a 見て　　b 会って）、一緒に公
+    園へ行きます。
+  \item 【タクシーの中】\\
+    運転手さん、次の角を（a 降ります　　b 曲がってくださ
+    い）。
+  \item この漢字は何と（a 読みますか　　b 使いますか）。
+\end{enumerate}
+
+% subsection renshuu_2 (end)
+
+\subsection{練習３}%
+\label{sub:renshuu_3}
+% subsection renshuu_3
+
+（　　）の中に「で」か「に」を書いてください。そして、
+選択の理由を簡単に説明してください。
+
+\begin{enumerate}
+  \item 子供の部屋（　　）大きい窓を作りました。部屋が明
+    るくなりました。
+  \item 子供の部屋（　　）一緒に紙の飛行機を作りました。
+  \item 事故（　　）電車が止まっています。
+  \item 東京駅（　　）地下鉄（　　）乗り換えます。
+  \item 風（　　）外の洗濯物が飛びそうです。中（　　）入
+    れてください。
+  \item 明日ホール（　　）お茶の会はあります。３時（
+    　　）ホール（　　）集めってください。
+  \item むこう（　　）高い山が見えるでしょう？今日はあ
+    の山（　　）登ります。
+  \item この紙（　　）黒いペン（　　）名前を書いてくださ
+    い。
+\end{enumerate}
+
+% subsection renshuu_3 (end)
+
+\subsection{練習４}%
+\label{sub:renshuu_4}
+% subsection renshuu_4
+
+a か b かいいほうを選んでください。そして、選択の理由を
+簡単に説明してください。
+
+\begin{enumerate}
+  \item 公園で（a \ruby[j]{池}{いけ}が　　b コンサートが）あります。
+  \item ここに（a 荷物をおいて　　b 料理を作って）ください。
+  \item 台風で（a 橋が壊れました　　b 橋を\ruby[j]{渡}{わた}り
+    ました）。
+  \item 図書館に本を（a 返します　　b 探します）。
+  \item このホテルに（a 一番いい部屋はどこですか　　b とて
+    もいい部屋があります）。
+  \item 駅の前に（a 花屋ができました　　b 花を買いました）。
+  \item いつも（a 八時間に　　b 八時に）寝ます。
+  \item 動物園にいろいろな（a 動物がいます　　b 動物を見ま
+    しょう）。
+  \item 世界で（a いろいろな国があります b 一番広い国は
+    どこですか）。
+\end{enumerate}
+
+% subsection renshuu_4 (end)
+
+\subsection{練習５}%
+\label{sub:renshuu_5}
+% subsection renshuu_5
+
+\marginnote{「は」は格助詞じゃないが、「が」と勘違いする場
+所が多いから、この練習をノートに入りました。}
+
+（　　）の中に「は」か「が」を書いてください。そして、
+選択の理由を簡単に説明してください。
+
+\begin{enumerate}
+  \item どの問題（　　）難しですか。
+  \item 一時間（　　）６０分です。
+  \item A「見てください。桜（　　）たくさん咲いていますよ 。」 \\
+    B「ええ、桜（　　）本当にきれいな花ですね。」
+  \item ああ、冷たいビール（　　）飲みたい。
+  \item A「どれ（　　）あなたの傘ですか。」\\
+    B「これです。これ（　　）もう１０年もつかっています。」
+  \item リサ「あれ、ジョンさん。どうしたんですか。目
+    （　　）赤いですよ。」 \\
+    ジョン「ごみ（　　）入ったようです。」
+\end{enumerate}
+
+% subsection renshuu_5 (end)
+
+% section renshuu (end)
+
+% section kakukakujoshinotsukaikata (end)
+
+% \nobibliography*
+\bibliography{references}
+
+\end{document}
+% vim:tw=80:fdm=syntax
+
