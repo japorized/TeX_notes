@@ -2908,7 +2908,7 @@ construct an \hlnotea{uncountable set} $C$ that has measure zero.
 
 \begin{eg}
   Note that the converse to the above is not true, i.e. that if we have that
-  $\abs{f}$ is measurable, it is not necessary that $f$ is not measurable.
+  $\abs{f}$ is measurable, it is not necessary that $f$ is measurable.
 
   Consider $E = \mathbb{R} = \mathbb{K}$. If we take $H \subseteq \mathbb{R}$ 
   that is not measurable, which we know exists, and then consider the function
@@ -3036,6 +3036,18 @@ construct an \hlnotea{uncountable set} $C$ that has measure zero.
       both of which are measurable sets. Thus $h$ is indeed measurable.
   \end{enumerate}
 \end{proof}
+
+\begin{warning}[Composition of Measurable Functions Need Not be Measurable]\label{warning:composition_of_measurable_functions_need_not_be_measurable}
+  It is important to note that compositions of measurable functions do not have
+  to be measurable. Here is a counterexample \sidenote{Source:
+  \citealt{mirjam_mathse_2013}}.
+
+  Let $f : [0, 1] \to [0, 1]$ be the \hlnotea{Cantor-Lebesgue Function}
+  \sidenote{Seen in A2Q5.}. Note that $f$ is a monotonic and continuous
+  function, and the image $f(C)$ of the Cantor set $C$ is all of $[0, 1]$. Let
+  $g(x) = x + f(x)$. It is clear that $g: [0, 1] \to [0, 2]$ is a strictly
+  monotonic and continuous map. In particular, $h = g^{-1}$ is also continuous.
+\end{warning}
 
 \begin{remark}\label{remark:about_complex_val_fns}
   Note that $(\mathbb{C}, d)$, where $d(w, z) = \abs{w - z}$, is a metric space.
@@ -5474,6 +5486,258 @@ feels like we just lucked out. See
 % section _l_p_spaces (end)
 
 % chapter lecture_10_jun_06th_2019 (end)
+
+\chapter{Lecture 11 Jun 11th 2019}%
+\label{chp:lecture_11_jun_11th_2019}
+% chapter lecture_11_jun_11th_2019
+
+\section{\texorpdfstring{$L_p$}{Lp} Spaces Continued}%
+\label{sec:_l_p_spaces_continued}
+% section _l_p_spaces_continued
+
+\begin{thm}[H\"{o}lder's Inequality]\index{H\"{o}lder's Inequality}\label{thm:holders_inequality}
+  Let $E \in \mathfrak{M}(\mathbb{R})$, $1 < p < \infty$ in $\mathbb{R}$, and
+  let $q$ be the Lebesgue conjugate of $p$. Then
+  \begin{enumerate}
+    \item If $f \in \mathcal{L}_p(E, \mathbb{K})$ and $g \in \mathcal{L}_q(E,
+      \mathbb{K})$, then $fg \in \mathcal{L}_1(E, \mathbb{K})$ and
+      \begin{equation*}
+        \nu_1(fg) \leq \nu_p(f) \nu_q(g),
+      \end{equation*}
+      where
+      \begin{equation*}
+        \nu_p(f) = \left( \int_{E} \abs{f}^p \right)^{\frac{1}{p}} \text{ and }
+        \nu_q(g) = \left( \int_{E} \abs{g}^q \right)^{\frac{1}{q}}
+      \end{equation*}
+
+    \item Suppose that $H \coloneqq \{ x \in E : f(x) \neq 0 \}$ has positive
+      measure. If
+      \begin{equation*}
+        f^* \coloneqq \nu_p(f)^{1-p} \overline{\Theta} \abs{f}^{p-1},
+      \end{equation*}
+      which is called the \hldefn{Lebesgue conjugate function}, then $f^* \in
+      \mathcal{L}_q(E, \mathbb{K})$, $\nu_q(f) = 1$, and
+      \begin{equation*}
+        \nu_1(ff^*) = \int_{E} ff^* = \nu_p(f).
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $f = 0$ or $g = 0$ a.e. on $E$, then the inequality is trivially
+      true. So wma $f \neq 0 \neq g$ a.e. on $E$. Now, for any $\alpha, \beta
+      \in \mathbb{K}$, $\alpha f \in \mathcal{L}_p(E, \mathbb{K})$ and $\beta g
+      \in \mathcal{L}_q(E, \mathbb{K})$ since
+      \begin{equation*}
+        \int_{E} \alpha f = \alpha \int_{E} f < \infty
+      \end{equation*}
+      and
+      \begin{equation*}
+        \int_{E} \beta g = \beta \int_{E} g < \infty.
+      \end{equation*}
+      Supposing that we can find $\alpha_0 \neq 0 \neq \beta_0$ such that
+      \begin{equation*}
+        \int_{E} \abs{(\alpha_0 f)(\beta_0 g)} \leq \nu_p(\alpha_0 f)
+        \nu_q(\beta_0 g),
+      \end{equation*}
+      we see that we can factor out $\alpha_0$ and $\beta_0$ so that
+      \begin{equation*}
+        \abs{\alpha_0 \beta_0} \int_{E} \abs{fg} \leq \abs{\alpha_0 \beta_0}
+        \nu_p(f) \nu_q(g),
+      \end{equation*}
+      which then
+      \begin{equation*}
+        \int_{E} \abs{fg} \leq \nu_p(f) \nu_q(g).
+      \end{equation*}
+      Thus, choosing $\alpha_0 = \nu_p(f)^{-1}$ and $\beta_0 = \nu_q(g)^{-1}$,
+      wma wlog $\nu_p(f) = 1 = \nu_q(g)$.
+
+      Now, by \cref{lemma:young_s_inequality}, we obtain
+      \begin{equation*}
+        \abs{fg} \leq \frac{\abs{f}^p}{p} + \frac{\abs{g}^q}{q}.
+      \end{equation*}
+      Thus
+      \begin{align*}
+        \nu_1(fg) &= \int_{E} \abs{fg}
+                   \leq \frac{1}{p} \int_{E} \abs{f}^p + \frac{1}{q} \int_{E}
+                   \abs{g}^q \\
+                  &= \frac{1}{p} \nu_p(f)^p + \frac{1}{q} \nu_q(g)^q \\
+                  &= \frac{1}{p} \cdot 1 + \frac{q}{1} \cdot 1 \\
+                  &= 1 = \nu_p(f) \nu_q(g).
+      \end{align*}
+
+    \item First, note that $f^*$ is measurable, since $f, \abs{f}$ and $\Theta$ 
+      are all measurable (cf.
+      \cref{propo:measurable_function_broken_down_into_an_absolute_part_and_a_scaling_part}
+      and \cref{propo:_l_e_k_is_a_unital_algebra}). Since $(p-1)q = p$, we have
+      \sidenote{\hlwarn{How did $\Theta$ disappear?}}
+      \begin{align*}
+        \nu_q(f^*)^q &= \int_{E} \abs{f^*}^q = \int_{E} \left( \nu_p(f)^{1-p}
+                      \abs{f}^{p-1} \right)^q \\
+                     &= \nu_p(f)^{-(p-1)q} \int_{E} \abs{f}^{(p-1)q} \\
+                     &= \nu_p(f)^{-p} \nu_p(f)^{p} = 1.
+      \end{align*}
+      Finally,
+      \begin{align*}
+        \nu_1(ff^*) &= \int_{E} \abs{ff^*}
+                     = \int_{E} \nu_p(f)^{1-p} \abs{f}^{p-1} \abs{f} \\
+                    &= \nu_p(f)^{1-p} \int_{E} \abs{f}^p \\
+                    &= \nu_p(f)^{1-p} \nu_p(f)^{p} \\
+                    &= \nu_p(f).
+      \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\begin{thm}[Minkowski's Inequality]\index{Minkowski's Inequality}\label{thm:minkowski_s_inequality}
+  Let $E \in \mathfrak{M}(\mathbb{R})$, $1 < p < \infty$. If $f, g \in
+  \mathcal{L}_p(E, \mathbb{K})$, then $f + g \in \mathcal{L}_p(E, \mathbb{K})$ 
+  and
+  \begin{equation*}
+    \nu_p(f + g) \leq \nu_p(f) + \nu_p(g).
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  $f + g$ is measurable by \cref{propo:_l_e_k_is_a_unital_algebra}. Notice that
+  for $0 \leq a, b$, we have
+  \begin{equation*}
+    (a + b)^p \leq \left( 2 \max \{ a, b \} \right)^p \leq 2^p (a^p + b^p).
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \abs{f + g}^p \leq \left( \abs{f} + \abs{g} \right)^p \leq 2^p \left(
+    \abs{f}^p + \abs{g}^p \right).
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    \nu_p(f + g) = \int_{E} \abs{f + g}^p \leq 2^p \left( \nu_p(f)^p +
+    \nu_p(g)^p \right) < \infty.
+  \end{equation*}
+  Thus $f + g \in \mathcal{L}_p(E, \mathbb{K})$.
+
+  Now let $h = f + g$, and $h^*$ the Lebesgue conjugate function of $h$. Then
+  $h^* \in \mathcal{L}_q(E, \mathbb{K})$. By the last theorem, $\nu_q(h) = 1$ 
+  and $\nu_1(hh^*) = \nu_p(h)$. With this, and
+  \hyperref[thm:holders_inequality]{H\"{o}lder's Inequality}, we have
+  \begin{align*}
+    \nu_p(f + g) &= \nu_p(h) = \nu_1(hh^*) \\
+                 &= \nu_1((f + g)h^*) \\
+                 &\leq \nu_1(f h^*) + \nu_1(g h^*) \\
+                 &\overset{(*)}{\leq} \nu_p(f) \nu_q(h^*) + \nu_p(g) \nu_q(h^*)
+                 \\
+                 &= \nu_p(f) + \nu_p(g),
+  \end{align*}
+  where $(*)$ is where we use H\"{o}lder's Inequality.
+\end{proof}
+
+We are finally ready to show that $\mathcal{L}_p (E, \mathbb{K})$ is a vector
+space and $\nu_p$ is a semi-norm as claimed.
+
+\begin{crly}[$\nu_p$ is a Semi-Norm]\label{crly:_nu_p_is_a_semi_norm}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $1 < p < \infty$. Then
+  $\mathcal{L}_p(E, \mathbb{K})$ is a vector space over $\mathbb{K}$ and
+  $\nu_p$ defines a semi-norm on $\mathcal{L}_p(E, \mathbb{K})$.
+\end{crly}
+
+\begin{proof}
+  \hlbnoted{$\mathcal{L}_p(E, \mathbb{K})$ is a vector space} Since $\mathbb{K}$ 
+  is a vector space, we need only check that $\mathcal{L}_p(E, \mathbb{K})$ is
+  nonempty, and closed under addition and scalar multiplication.
+
+  \noindent
+  \hlbnotec{$\mathcal{L}_p(E, \mathbb{K}) \neq \emptyset$} It is clear that the
+  constant function, $f(x) = 0$ for all $x \in E$, is in $\mathcal{L}_p(E,
+  \mathbb{K})$ since
+  \begin{equation*}
+    \int_{E} f = \int_{E} 0 = 0 < \infty.
+  \end{equation*}
+
+  \noindent
+  \hlbnotec{$\mathcal{L}_p(E, \mathbb{K})$ is closed under addition and scalar
+  multiplication} Let $f, g \in \mathcal{L}_p(E, \mathbb{K})$ and $\kappa \in
+  \mathbb{K}$. Then by Minkowski's Inequality,
+  \begin{equation*}
+    \nu_p(\kappa f + g) \leq \nu_p(\kappa f) + \nu_p(g) = \abs{\kappa} \nu_p(f)
+    + \nu_p(g) < \infty.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{$\nu_p$ is a semi-norm} We showed for the first two conditions and
+  MinkMinkowski's Inequality covers the Triangle Inequality.
+\end{proof}
+
+\begin{defn}[$L_p$-Space and $L_p$-Norm]\index{$L_p$-Space}\index{$L_p$-Norm}\label{defn:_l_p_space}\label{defn:_l_p_norm}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $1 < p < \infty$. We define the
+  \hlnoteb{$L_p$-space}
+  \begin{equation*}
+    L_p(E, \mathbb{K}) \coloneqq \mathcal{L}_p(E, \mathbb{K}) / \mathcal{N}_p(E,
+    \mathbb{K}),
+  \end{equation*}
+  where \sidenote{Note that $\mathcal{N}_p(E, \mathbb{K})$ is where functions
+  are $0$ a.e.}
+  \begin{equation*}
+    \mathcal{N}_p(E, \mathbb{K}) = \{ f \in \mathcal{L}_p(E, \mathbb{K}) :
+    \nu_p(f) = 0 \}.
+  \end{equation*}
+  The \hlnoteb{$L_p$-norm} on $L_p(E, \mathbb{K})$ is the norm defined by
+  \begin{align*}
+    \norm{\cdot}_p : L_p(E, \mathbb{K}) &\to \mathbb{R} \\
+                     [f] &\mapsto \nu_p(f).
+  \end{align*}
+\end{defn}
+
+For the sake of completeness, we shall restate H\"{o}lder's and Minkowski's
+Inequalities for $L_p(E, \mathbb{K})$.
+
+\begin{thm}[H\"{o}lder's Inequality]\index{H\"{o}lder's Inequality}\label{thm:holders_inequality_lp_spaces}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $1 < p < \infty$. Let $q$ denote the
+  Lebesgue conjugate of $p$.
+  \begin{enumerate}
+    \item If $[f] \in L_p(E, \mathbb{K})$ and $[g] \in L_q(E, \mathbb{K})$, then
+      $[f][g] \coloneqq [fg] \in L_1(E, \mathbb{K})$ is well-defined and
+      \begin{equation*}
+        \norm{[fg]}_1 \leq \norm{[f]}_p \norm{[g]}_q.
+      \end{equation*}
+    \item If $0 \neq [f] \in L_p(E, \mathbb{K})$ and $f^*$ is the conjugate
+      function of $f$, then $[f^*] \in L_q(E, \mathbb{K})$, $\norm{[f^*]}_q =
+      1$, and
+      \begin{equation*}
+        \norm{[f][f^*]} = \norm{[f]}_p.
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  The only part that does not follow immediately from
+  \cref{thm:holders_inequality} is the well-definedness of $[f][g] = [fg]$.
+\end{proof}
+
+\begin{thm}[Minkowski's Inequality]\index{Minkowski's Inequality}\label{thm:minkowski_s_inequality_lp_spaces}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $1 < p < \infty$. If $[f], [g] \in
+  L_p(E, \mathbb{K})$, then $[f + g] \in L_p(E, \mathbb{K})$ and
+  \begin{equation*}
+    \norm{[f + g]}_p = \norm{[f] + [g]}_p \leq \norm{[f]}_p + \norm{[g]}_p.
+  \end{equation*}
+\end{thm}
+
+We can now show that $L_p(E, \mathbb{K})$ is a Banach space for all $1 \leq p <
+\infty$, whose proof shall be left for next lecture.
+
+% section _l_p_spaces_continued (end)
+
+% chapter lecture_11_jun_11th_2019 (end)
+
+\chapter{Lecture 12 Jun 18th 2019}%
+\label{chp:lecture_12_jun_18th_2019}
+% chapter lecture_12_jun_18th_2019
+
+\begin{thm}[$(L_p(E, \mathbb{K}), \norm{\cdot}_p)$ is Banach Space]\label{thm:lp_spaces_are_banach}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $1 \leq p < \infty$. Then $L_p(E<
+  \mathbb{K})$ is complete and hence Banach.
+\end{thm}
+
+% chapter lecture_12_jun_18th_2019 (end)
 
 \appendix
 
