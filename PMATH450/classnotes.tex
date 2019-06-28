@@ -5732,10 +5732,380 @@ We can now show that $L_p(E, \mathbb{K})$ is a Banach space for all $1 \leq p <
 \label{chp:lecture_12_jun_18th_2019}
 % chapter lecture_12_jun_18th_2019
 
+\section{\texorpdfstring{$L_p$}{Lp} Spaces (Continued 2)}%
+\label{sec:_l_p_spaces_continued_2}
+% section _l_p_spaces_continued_2
+
 \begin{thm}[$(L_p(E, \mathbb{K}), \norm{\cdot}_p)$ is Banach Space]\label{thm:lp_spaces_are_banach}
   Let $E \in \mathfrak{M}(\mathbb{R})$ and $1 \leq p < \infty$. Then $L_p(E<
   \mathbb{K})$ is complete and hence Banach.
 \end{thm}
+
+\begin{strategy}
+  By \cref{propo:kernel_of_a_vector_space_is_a_linear_manifold}, $(L_p(E,
+  \mathbb{K}), \norm{\cdot}_p)$ is a normed linear space. It thus suffices for
+  us to show that it is complete.
+
+  This is a preferred approach by the professor, that he has defaulted to
+  proving completeness from the equivalent result of having every absolutely
+  summable series being summable in the space. We prove this equivalence in A4.
+
+  So given an absolutely summable sequence $\{ [f_n] \}_{n=1}^{\infty}$, since
+  we want
+  \begin{equation*}
+    \sum_{n=1}^{\infty} [f_n] < \infty \text{ a.e. on } E,
+  \end{equation*}
+  in particular this should be reflected by any of its representatives, i.e. if
+  we take, wlog, $f_n$ as the representative of $[f_n]$, then we want
+  \begin{equation*}
+    h = \sum_{n=1}^{\infty} f_n < \infty \text{ a.e. on } E.
+  \end{equation*}
+
+  To show that the sum is finite a.e. on $E$, we will first make use of the fact
+  that this would be equivalent to
+  \begin{equation*}
+    \abs{h} = \abs{ \sum_{n=1}^{\infty} f_n } < \infty \text{ a.e. on } E.
+  \end{equation*}
+  To that end, the partial sums should always be finite. By the triangle
+  inequality, we see that
+  \begin{equation*}
+    \abs{ \sum_{n=1}^{N} f_n } \leq \sum_{n=1}^{N} \abs{f_n}.
+  \end{equation*}
+  This is where our `clean' proof begins.
+\end{strategy}
+
+\begin{proof}
+  Suppose $\{ [f_n] \}_{n=1}^{\infty}$ is a sequence of equivalence classes in
+  $L_p(E, \mathbb{K})$ that is absolutely summable. We note that the following
+  value will be useful, and so we give it a variable.
+  \begin{equation*}
+    \gamma \coloneqq \sum_{i=1}^{\infty} \norm{[f_n]}_p.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{Showing that $\sum_{n=1}^{\infty} f_n(x)$ converges a.e. on $E$} For
+  each $N \geq 1$, let $g_N = \sum_{n=1}^{N} \abs{f_n}$. Note that since $f_n
+  \in \mathcal{L}_p(E, \mathbb{K})$, by \cref{crly:_nu_p_is_a_semi_norm}, we
+  have that $g_N \in \mathcal{L}_p(E, [0, \infty])$. Furthermore, since $g_N$ is
+  a sum of absolute values, we have that
+  \begin{equation*}
+    0 \leq g_1 \leq g_2 \leq g_3 \leq \hdots.
+  \end{equation*}
+  Let $g_\infty \coloneqq \lim_{N \to \infty} g_N = \sup_{N \geq 1} g_N$. By
+  \cref{propo:measurability_of_limits_and_extremas}, $g_\infty \in
+  \mathcal{L}(E, [0, \infty])$. \sidenote{Now, we want to show that even
+  $g_\infty < \infty$ a.e. on $E$. Following this is a non-trivial step
+  forward.} Note that $g_\infty^p = \sup_{N \geq 1} g_N^p$. By the
+  \hyperref[thm:the_monotone_convergence_theorem]{Monotone Convergence Theorem},
+  we observe that
+  \begin{align*}
+    \int_{E} g_\infty^p &= \lim_{N \to \infty} \int_{E} g_N^p \\
+                        &= \lim_{N \to \infty} \int_{E} \left(\sum_{n=1}^{N}
+                          \abs{f_n}\right)^p \\
+                        &= \lim_{N \to \infty} \int_{E} \\
+                        &= \lim_{N \to \infty} \nu_p \left( \sum_{n=1}^{N}
+                          \abs{f_n} \right)^p \\
+                        &\leq \lim_{N \to \infty} \left(\sum_{n=1}^{N}
+                          \nu_p(\abs{f_n})\right)^p \\
+                        &\leq \left( \sum_{n=1}^{\infty} \norm{[f_n]}_p
+                          \right)^p = \gamma^p < \infty
+  \end{align*}
+  by assumption. Thus $g_\infty \in \mathcal{L}_p(E, \mathbb{K})$, which means
+  that $g_\infty < \infty$ a.e. on $E$. From here, we observe that
+  \begin{equation*}
+    \abs{ \sum_{n=1}^{\infty} f_n } \leq \sum_{n=1}^{\infty} \abs{f_n} \leq
+    g_\infty \leq \gamma < \infty.
+  \end{equation*}
+  Then since $\mathbb{K}$ is complete, $\sum_{n=1}^{\infty} f_n(x)$ converges to
+  some value in $\mathbb{K}$ for every $x \in E$. 
+
+  \noindent
+  \hlbnoted{Constructing $h = \sum_{n=1}^{\infty} f_n$ a.e. on $E$} In
+  particular, we want the above sum to converge to some function $h =
+  \sum_{n=1}^{\infty} f_n$ a.e. on $E$. We want to explicitly isolate the points
+  where the sum goes bad. Letting
+  \begin{equation*}
+    B \coloneqq \{ x \in E : g_\infty(x) = \infty \} \subseteq E,
+  \end{equation*}
+  we have that $mB = 0$. Consider $H = E \setminus B \in \mathfrak{M}(E)$.
+  \sidenote{We will build $h$ on this nicer set.} Here, let $g = \chi_H \cdot
+  g_\infty$. Note that since $H \in \mathfrak{M}(E)$, $\chi_H$ is measurable,
+  and so by \cref{propo:_l_e_k_is_a_unital_algebra}, $g \in \mathcal{L}(E,
+  [0, \infty))$, and $g = g_\infty$ a.e. on $E$. Furthermore,
+  \begin{equation*}
+    \int_{E} g^p = \int_{E} g_\infty^p \leq \gamma^p,
+  \end{equation*}
+  and so $g \in \mathcal{L}_p(E, [0, \infty)) \subseteq L_p(E, \mathbb{K})$,
+  i.e. $[g] \in L_p(E, \mathbb{K})$ and $\norm{[g]}_p \leq \gamma$.
+  
+  For each $N \geq 1$, let $h_N \coloneqq \chi_H \cdot
+  \left( \sum_{n=1}^{N} f_n \right)$. By the same reasoning as for $g$, we have
+  that $h_N \in \mathcal{L}_p(E, \mathbb{K}) \subseteq \mathcal{L}(E,
+  \mathbb{K})$. Moreover, it is clear from construction that $[h_N] =
+  \sum_{n=1}^{N} [f_n]$, since $h_N = \sum_{n=1}^{N} f_n$ a.e. on $E$, in
+  particular, they agree on $H$. It is also important to note that for $x \in
+  H$,
+  \begin{equation*}
+    \abs{h_N(x)} \leq \sum_{n=1}^{N} \abs{f_n(x)} \leq g(x),
+  \end{equation*}
+  and for $x \in B$, $\abs{h_N(x)} = 0 = g(x)$. Thus $\abs{h_N} < g$, and so
+  $\abs{h_N}^p \leq g^p$. So for each $N \geq 1$, we have
+  \begin{equation*}
+    \int_{E} \abs{h_N}^p \leq \int_{E} g^p \leq \gamma^p.
+  \end{equation*}
+  Since the partials are all well-defined, we can define
+  \begin{equation*}
+    h(x) \coloneqq \lim_{N \to \infty} h_N(x) \in \mathbb{K} \text{ for } x \in
+    E.
+  \end{equation*}
+  Again, by \cref{propo:measurability_of_limits_and_extremas}, $h \in
+  \mathcal{L}(E, \mathbb{K})$. Furthermore, since each $\abs{h_N} \leq g$, we
+  have that $\abs{h} \leq g$ and $\abs{h}^p \leq g^p$, which then
+  \begin{equation*}
+    \int_{E} \abs{h}^p \leq \int_{E} g^p \leq \gamma^p < \infty.
+  \end{equation*}
+  It follows that $h \in \mathcal{L}_p(E, \mathbb{K})$ and $[h] \in L_p(E,
+  \mathbb{K})$.
+
+  \noindent
+  \hlbnoted{$[h] = \lim_{N \to \infty} [h_N]$} It remains for us to show that
+  this equation is true. In other words, we want to show that
+  \begin{equation*}
+    \lim_{N \to \infty} \norm{[h] - [h_N]}_p = \lim_{N \to \infty} \norm{[h] -
+    \sum_{n=1}^{N} [f_n]}_p = 0.
+  \end{equation*}
+  Note that $\abs{h_M - h_N}^p \leq \left( \abs{h_M} + \abs{h_N} \right)^p \leq
+  (g + g)^p$ for any $M, N$, and $\int_{E} (2 \abs{g})^p < \infty$. Then,
+  satisfying the condition for the
+  \hyperref[thm:lebesgue_dominated_convergence_theorem]{Lebesgue Dominated
+  Convergence Theorem}, we have
+  \begin{align*}
+    \norm{[h] - [h_N]}_p
+    &= \nu_p(h - h_N) \\
+    &= \left( \int_{E} \abs{h - h_N}^p \right)^{\frac{1}{p}} \\
+    &= \left( \int_{E} \lim_{M \to \infty} \abs{h_M - h_N}^p
+      \right)^{\frac{1}{p}} \\
+    &= \left( \lim_{M \to \infty} \int_{E} \abs{h_M - h_N}^p
+      \right)^{\frac{1}{p}} \\
+    &= \lim_{M \to \infty} \left( \int_{E} \abs{h_M - h_N}^p
+      \right)^{\frac{1}{p}} \\
+    &= \lim_{M \to \infty} \norm{[h_M] - [h_N]}_p \\
+    &= \lim_{M \to \infty} \norm{\sum_{n = N + 1}^{M} [f_n]}_p \\
+    &\leq \lim_{M \to \infty} \sum_{n=N+1}^{M} \norm{[f_n]}_p \\
+    &= \sum_{n=N+1}^{\infty} \norm{[f_n]}_p
+  \end{align*}
+  Since $\sum_{n=1}^{\infty} \norm{[f_n]}_p = \gamma^p < \infty$ by assumption,
+  we have that
+  \begin{equation*}
+    \lim_{N \to \infty} \norm{[h] - [h_N]}_p = \lim_{N \to \infty}
+    \sum_{n=N+1}^{\infty} \norm{[f_n]}_p = 0.
+  \end{equation*}
+  This completes the proof.
+\end{proof}
+
+Notice that in \cref{thm:lp_spaces_are_banach} we talked about $1 \leq p <
+\infty$ but not $p = \infty$ itself. We shall explore this in the following
+subsection.
+
+\subsection{Completeness of \texorpdfstring{$L_\infty(E, \mathbb{K})$}{Linfty(E, K)}}%
+\label{sub:completeness_of_l_infty_e_k_}
+% subsection completeness_of_l_infty_e_k_
+
+We need to first clarify what the norm in $L_\infty(E, \mathbb{K})$ is. It would
+be sensible to immediately let the norm be the supremum of the function, but we
+want to exclude the places where $f$ hit its `suprema' only up to a set of
+measure zero.
+
+\begin{defn}[Essential Supremum]\index{Essential Supremum}\label{defn:essential_supremum}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $f \in \mathcal{L}(E, \mathbb{K})$.
+  We define the \hlnoteb{essential supremum} of $f$ on $E$ as
+  \begin{equation*}
+    \nu_\infty(f) \coloneqq \inf \left\{ \gamma > 0 : m \left( \{ x \in E :
+    \abs{f(x)} > \gamma \} \right) = 0 \right\}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  \begin{enumerate}
+    \item Let us try to describe the essential supremum in words: we pick out
+      the smallest $\gamma$ (specifically, we pick the inf) such that the places
+      on $E$ where $f > \gamma$ is measure zero. Graphically, we set lower and
+      lower $\gamma$ until we finally hit some value where $f > \gamma$ but the
+      places where this happens is no longer of measure zero.
+    \item Simply by definition, we have that $\nu_\infty(f) \geq 0$ for any $f
+      \in \mathcal{L}(E, \mathbb{K})$.
+  \end{enumerate}
+\end{note}
+
+\begin{defn}[$\mathcal{L}_\infty(E, \mathbb{K})$]\index{$\mathcal{L}_\infty(E, \mathbb{K})$}\label{defn:_l_infty_e_k_}
+  With the essential supremum, we can define
+  \begin{equation*}
+    \mathcal{L}_\infty(E, \mathbb{K}) = \{ f \in \mathcal{L}(E, \mathbb{K}),
+    \nu_\infty(f) < \infty \}.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  \begin{enumerate}
+    \item Let $E = \mathbb{R}$ and $f = \chi_{\mathbb{Q}}$. Observe that for any
+      $\gamma > 0$, since
+      \begin{equation*}
+        \{ x \in \mathbb{R} : \abs{ \chi_{\mathbb{Q}} } > \gamma \} \subseteq
+        \mathbb{Q},
+      \end{equation*}
+      we have
+      \begin{equation*}
+        0 \leq m \{ x \in \mathbb{R} : \abs{ \chi_{\mathbb{Q}} } > \gamma \}
+        \leq m \mathbb{Q} = 0.
+      \end{equation*}
+      Thus $\nu_\infty(\chi_\mathbb{Q}) = 0$.
+
+      Note that there was nothing special about the choice of $\mathbb{Q}$ 
+      except that it is a set of measure zero.
+
+    \item Suppose $a < b \in \mathbb{R}$ and $f \in \mathcal{C}([a, b] ,
+      \mathbb{K})$.
+
+      \hlbnotec{Claim: $f \in \mathcal{L}_\infty([a, b], \mathbb{K})$ and
+      $\nu_\infty(f) = \norm{f}_{\sup} \coloneqq \sup_{x \in [a, b]
+    \abs{f(x)}}$} We know that every continuous function on a measurable set is
+    measurable \sidenote{cf.
+    \cref{propo:continuous_functions_on_a_measurable_set_is_measurable}}, so $f
+    \in \mathcal{L}([a, b], \mathbb{K})$.
+
+    Note that for $\gamma > \norm{f}_{\sup}$, we have that
+    \begin{equation*}
+      m \left( \left\{ x \in [a, b] : \abs{f(x)} > \gamma \right\} \right) =
+      m(\emptyset) = 0.
+    \end{equation*}
+    So $\nu_\infty(f) \leq \gamma$. Since this holds for all $\gamma$, it
+    follows that $\nu_\infty(f) \leq \abs{f}_{\sup}$.
+
+    On the other hand, for $\gamma \leq \norm{f}_{\sup} = \abs{f(x_0)}$ for some
+    $x_0 \in [a, b]$. By continuity of $f$ on $[a, b]$, and in particular on
+    $x_0$, $\exists \delta > 0$ such that $\forall x \in (x_0 - \delta, x_0 +
+    \delta) \cap [a, b]$ implies that $\abs{f(x)} > \gamma$. Notice that
+    \begin{equation*}
+      m \left( (x_0 - \delta, x_0 + \delta) \cap [a, b] \right) > 0,
+    \end{equation*}
+    which means that
+    \begin{equation*}
+      \nu_\infty(f) \geq \gamma.
+    \end{equation*}
+    This holds for all $\gamma$, and so
+    \begin{equation*}
+      \nu_\infty(f) \geq \norm{[f]}_{\sup}.
+    \end{equation*}
+
+    Thus
+    \begin{equation*}
+      \nu_\infty(f) = \norm{[f]}_{\sup},
+    \end{equation*}
+    which also gives us that
+    \begin{equation*}
+      f \in \mathcal{L}_\infty([a, b], \mathbb{K}).
+    \end{equation*}
+  \end{enumerate}
+\end{eg}
+
+\begin{propo}[$\mathcal{L}_\infty(E, \mathbb{K})$ is a vector space and $\nu_\infty(\cdot)$ a semi-norm]\label{propo:_l_infty_e_k_is_a_vector_space_and_nu_infty_cdot_a_semi_norm}
+  Let $E \in \mathfrak{M}(\mathbb{R})$. Then $\mathcal{L}_\infty(E, \mathbb{K})$ 
+  is a vector space over $\mathbb{K}$ and $\nu_\infty(\cdot)$ is a semi-norm on
+  $\mathcal{L}_\infty(E, \mathbb{K})$.
+\end{propo}
+
+\begin{proof}
+  Since $\mathcal{L}_\infty(E, \mathbb{K}) \subseteq \mathcal{L}(E,
+  \mathbb{K})$, and that the latter is a vector space, it suffices to perform
+  the subspace test on $\mathcal{L}_\infty(E, \mathbb{K})$ to show that
+  $\mathcal{L}_\infty(E, \mathbb{K})$ is a vector space.
+
+  First, note that if $\zeta = 0$ is the zero function, then $\nu_\infty(\zeta)
+  = 0 < \infty$, and so $\zeta \in \mathcal{L}_\infty(E, \mathbb{K})$, i.e.
+  $\mathcal{L}_\infty(E, \mathbb{K}) \neq \emptyset$. Further, as noted before,
+  $\nu_\infty(f) \geq 0$ for any $f \in \mathcal{L}_\infty(E, \mathbb{K})$.
+
+  Next, suppose that $f \in \mathcal{L}_\infty(E, \mathbb{K})$ and $0 \neq
+  \kappa \in \mathbb{K}$. It is clear that $\kappa f \in \mathcal{L}(E,
+  \mathbb{K})$, and we quickly notice that
+  \begin{align*}
+    \nu_\infty(\kappa f)
+    &= \inf \{ \gamma > 0 : m \{ x \in E : \abs{\kappa f(x)} > \gamma \} = 0 \}
+      \\
+    &= \inf \{ \abs{\kappa} \delta : m \{ x \in E : \abs{\kappa}\abs{f(x)} >
+      \abs{\kappa} \delta \} = 0 \} \\
+    &= \abs{\kappa} \inf \{ \delta > 0 : m \{ x \in E : \abs{f(x)} > \delta \} =
+      0 \} \\
+    &= \abs{\kappa} \nu_\infty(f) < \infty.
+  \end{align*}
+  So $\kappa f \in \mathcal{L}_\infty(E, \mathbb{K})$ for all $0 \neq \kappa \in
+  \mathbb{K}$. As noted before, if $\kappa = 0$, then $\kappa f = 0 \in
+  \mathcal{L}_\infty(E, \mathbb{K})$.
+
+  Now suppose $f, g \in \mathcal{L}_\infty(E, \mathbb{K})$. WTS
+  \begin{equation*}
+    \nu_\infty(f + g) \leq \nu_\infty(f) + \nu_\infty(g).
+  \end{equation*}
+  Let $\alpha > \nu_\infty(f)$ and $\beta > \nu_\infty(g)$. Let
+  \begin{equation*}
+    E_f = \{ x \in E : \abs{f(x)} > \alpha \} \text{ and }
+    E_g = \{ x \in E : \abs{g(x)} > \beta \}.
+  \end{equation*}
+  Then $mE_f = 0 = mE_g$. Let $H = E \setminus (E_f \cup E_g)$. For $x \in H$,
+  we have
+  \begin{equation*}
+    \abs{(f + g)(x)} \leq \abs{f(x)} + \abs{g(x)} \leq \alpha + \beta,
+  \end{equation*}
+  so
+  \begin{equation*}
+    \{ x \in E : \abs{(f + g)(x)} > \alpha + \beta \} \subseteq E_f \cup E_g.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    m \left\{ x \in E : \abs{(f + g)(x)} > \alpha + \beta \right\} \leq mE_f +
+    mE_g = 0,
+  \end{equation*}
+  and so $\nu_\infty(f + g) \leq \alpha + \beta$. Since $\alpha$ and $\beta$ 
+  were arbitrary, it follows that
+  \begin{equation*}
+    \nu_\infty(f + g) \leq \nu_\infty(f) + \nu_\infty(g) < \infty.
+  \end{equation*}
+  Thus $\mathcal{L}_\infty(E, \mathbb{K})$ and $\nu_\infty(\cdot)$ is indeed a
+  semi-norm.
+\end{proof}
+
+\begin{defn}[$L_\infty(E, \mathbb{K})$]\index{$L_\infty(E, \mathbb{K})$}\label{defn:_l_infty_e_k_}
+  Let
+  \begin{equation*}
+    \mathcal{N}_\infty(E, \mathbb{K}) \coloneqq \{ f \in \mathcal{L}_\infty(E,
+    \mathbb{K}) : \nu_\infty(f) = 0 \}.
+  \end{equation*}
+  Then we define
+  \begin{equation*}
+    L_\infty(E, \mathbb{K}) = \mathcal{L}_\infty(E, \mathbb{K}) /
+    \mathcal{N}_\infty(E, \mathbb{K}),
+  \end{equation*}
+  and we denote by $[f]$ the coset of $f \in \mathcal{L}_\infty(E, \mathbb{K})$ 
+  in $\mathcal{L}_\infty(E, \mathbb{K})$.
+\end{defn}
+
+\begin{thm}[$L_\infty(E, \mathbb{K})$ is a normed-linear space]\label{thm:_l_infty_e_k_is_a_normed_linear_space}
+  Let $E \in \mathfrak{M}(\mathbb{R})$. Then $L_\infty(E, \mathbb{K})$ is a
+  normed-linear space, where for $[f] \in L_\infty(E, \mathbb{K})$ we set
+  \begin{equation*}
+    \norm{[f]}_\infty \coloneqq \nu_\infty(f).
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  See \cref{propo:kernel_of_a_vector_space_is_a_linear_manifold}.
+\end{proof}
+
+
+
+% subsection completeness_of_l_infty_e_k_ (end)
+
+% section _l_p_spaces_continued_2 (end)
 
 % chapter lecture_12_jun_18th_2019 (end)
 
