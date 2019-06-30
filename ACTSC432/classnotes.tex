@@ -1327,6 +1327,21 @@ We want to use these assumptions to derive a rate to cover for $X_{n+1}$.
   \end{equation*}
 \end{defn}
 
+\marginnote{
+\begin{procedure}[Finding the Bayesian Premium]\label{procedure:finding_the_bayesian_premium}
+  \begin{enumerate}
+    \item Identify $X_i \mid \Theta = \theta$.
+    \item Identify the prior distribution $\Theta$.
+    \item Identify the posterior distribution $\Theta \mid \vec{X}$.
+    \item Calculate
+      \begin{equation*}
+        P = \int_{\forall \theta} E[X_{n+1} \mid \Theta = \theta] \pi_{\Theta
+        \mid \vec{X}}(\theta \mid \vec{x}) \dif{\theta}.
+      \end{equation*}
+  \end{enumerate}
+\end{procedure}
+}
+
 \begin{defn}[Bayesian Premium]\index{Bayesian Premium}\label{defn:bayesian_premium}
   The \hlnoteb{Bayesian premium} of $X_{n+1}$ is defined as
   \begin{equation*}
@@ -1478,6 +1493,16 @@ Let us now develop the general model in calculating the credibility premium.
   \end{gather*}
 \end{proof}
 
+\begin{note}
+  The equation
+  \begin{equation*}
+    E[X_{n+1}] = \hat{\alpha}_0 + \sum_{i=1}^{n} \hat{\alpha}_i E[X_i]
+  \end{equation*}
+  is also called the \hldefn{unbiased equation} because it requires that the
+  estimate $\hat{\alpha}_0 + \sum_{i=1}^{n} \hat{\alpha}_j X_j$ be unbiased for
+  $E[X_{n+1}]$.
+\end{note}
+
 \begin{defn}[Estimator for the Credibility Premium]\label{defn:estimator_for_the_credibility_premium}
   We define the \hlnoteb{estimator for the credibility premium} as
   \begin{equation*}
@@ -1511,19 +1536,25 @@ Let us now develop the general model in calculating the credibility premium.
   \end{itemize}
 \end{crly}
 
+\begin{ex}
+  Prove \cref{crly:p_hat_as_best_linear_estimator} by showing that the
+  derivative of the above equations wrt $\alpha_0, \alpha_1, ..., \alpha_n$
+  still satisfy the normal equations.
+\end{ex}
+
 \marginnote{The name for \cref{thm:theorem_1} is unfortunate, but I can't think
 of a good name for it, and it is what is used in lectures.}
 
 \begin{thm}[Theorem 1]\index{Theorem 1}\label{thm:theorem_1}
   Suppose $\{ X_i \}_{i=1}^n$ is a sequence of past observations, $X_{n+1}$ is
-  the predictive rv, with
+  the predictive RV, with
   \begin{itemize}
     \item $E[X_i] = \mu$ ;
     \item $\Var(X_i) = \sigma^2$ ; and
-    \item $\Cov(X_i, X_j) = \rho \sigma^2$, for $i \neq j$, $i, j \in \{ 1,
-      \ldots, n+1 \}$, and $\rho \in (-1, 1)$.
+    \item $\Cov(X_i, X_j) = \rho \sigma^2$,
   \end{itemize}
-  Then the credibility premium for $X_{n+1}$ is
+  for $i \neq j$, $i, j \in \{ 1, \ldots, n+1 \}$, and $\rho \in (-1, 1)$. Then
+  the credibility premium for $X_{n+1}$ is
   \begin{equation*}
     P = Z \overline{X} + (1 - Z) \mu,
   \end{equation*}
@@ -1538,16 +1569,395 @@ of a good name for it, and it is what is used in lectures.}
 \end{thm}
 
 \begin{proof}
-  \hlwarn{Proof to be added.} 
+  By \cref{thm:general_model_for_credibility_premium}, we have that
+  \begin{equation*}
+    P = \hat{\alpha}_0 + \sum_{i=1}^{n} \hat{\alpha}_i X_i.
+  \end{equation*}
+  We shall use the normal equations to attain this, and we know that we can do
+  quite a number of things with the given assumptions. First,
+  \begin{align*}
+    \mu = E[X_{n+1}] &= \hat{\alpha}_0 + \sum_{i=1}^{n} \hat{\alpha}_i E[X_i]
+                      = \hat{\alpha}_0 + \sum_{i=1}^{n} \hat{\alpha}_i \mu \\
+                     &= \hat{\alpha}_0 + \mu \sum_{i=1}^{n} \hat{\alpha}_i.
+  \end{align*}
+  Making $\sum_{i=1}^{n} \hat{\alpha}_i$ the subject, we get
+  \begin{equation}\label{eq:thm1_eq1}
+    \sum_{i=1}^{n} \hat{\alpha}_i = 1 - \frac{\hat{\alpha}_0}{\mu}.
+  \end{equation}
+
+  Next, for each $j \in \{ 1, \ldots, n \}$, the equations with covariances
+  become
+  \begin{align*}
+    \rho \sigma^2 = \Cov(X_j, X_{n+1})
+                  &= \sum_{i=1}^{n} \hat{\alpha}_i \Cov(X_i, X_j) \\
+                  &= \sum_{\substack{i=1 \\ i \neq j}}^{n} \hat{\alpha}_i \rho
+                    \sigma^2 + \hat{\alpha}_j \sigma^2,
+  \end{align*}
+  and so dividing both sides by $\sigma^2$ and then trying to patch that
+  summation, we get
+  \begin{equation*}
+    \rho = \sum_{i=1}^{n} \hat{\alpha}_i \rho + \hat{\alpha}_j ( 1 - \rho ).
+  \end{equation*}
+  Substituting in \cref{eq:thm1_eq1}, we get
+  \begin{equation*}
+    \rho = \left( 1 - \frac{\hat{\alpha}_0}{\mu} \right) \rho + \hat{\alpha}_j
+    (1 - \rho),
+  \end{equation*}
+  and making $\hat{\alpha}_j$ the subject,
+  \begin{equation*}
+    \hat{\alpha}_j = \frac{\hat{\alpha}_0 \rho}{\mu (1 - \rho)}.
+  \end{equation*}
+
+  We want to have a more explicit formula for $\hat{\alpha}_0$ and
+  $\hat{\alpha}_j$. Looking at \cref{eq:thm1_eq1}, we first take the sum of the
+  $\hat{\alpha}_i$'s (save when $i = 0$):
+  \begin{equation*}
+    \sum_{i=1}^{n} \hat{\alpha}_i = \frac{ n\hat{\alpha}_0 \rho }{\mu(1 -
+    \rho)}.
+  \end{equation*}
+  So
+  \begin{equation*}
+    1 - \frac{\hat{\alpha}_0}{\mu} = \frac{ n\hat{\alpha}_0 \rho }{\mu(1 -
+    \rho)},
+  \end{equation*}
+  and after rearrangement, we get
+  \begin{equation*}
+    \hat{\alpha}_0 = \frac{(1-\rho)\mu}{n \rho + 1 - \rho}.
+  \end{equation*}
+  Going for $\hat{\alpha}_j$, we get
+  \begin{equation*}
+    \hat{\alpha}_j = \frac{\hat{\alpha}_0 \rho}{\mu(1 - \rho)}
+                   = \frac{\rho}{n \rho + 1 - \rho}.
+  \end{equation*}
+  Thus
+  \begin{align*}
+    P &= \frac{(1-\rho)\mu}{n \rho + 1 - \rho} +
+        \sum_{i=1}^{n} \frac{\rho X_i}{n \rho + 1 - \rho} \\
+      &= \frac{n\rho}{n\rho + 1 - \rho} \cdot \frac{1}{n} \sum_{i=1}^{n} X_i
+        + \frac{1 - \rho}{n\rho + 1 - \rho} \mu,
+  \end{align*}
+  where we note that
+  \begin{equation*}
+    1 - \frac{n\rho}{n\rho + 1 - \rho} = \frac{1 - \rho}{n\rho + 1 - \rho}.
+  \end{equation*}
+  Thus if we let
+  \begin{equation*}
+    Z = \frac{n\rho}{n\rho + 1 - \rho} \text{ and }
+    \overline{X} = \frac{1}{n} \sum_{i=1}^{n} X_i,
+  \end{equation*}
+  we have that
+  \begin{equation*}
+    P = Z \overline{X} + (1 - Z) \mu,
+  \end{equation*}
+  as desired.
 \end{proof}
 
 % section the_credibility_premium (end)
 
-\section{The B\"{u}lmann Model}%
+\section{The B\"{u}hlmann Model}%
 \label{sec:the_buhlmann_model}
 % section the_buhlmann_model
 
+An example of \cref{thm:theorem_1} is the B\"{u}hlmann model, which is one of
+the (if not the) simplest credibility model.
 
+\begin{defn}[The B\"{u}hlmann Model]\index{The B\"{u}hlmann Model}\label{defn:the_buhlmann_model}
+  Under the \hlnoteb{B\"{u}hlmann model}, conditional on $\Theta$ (the risk
+  distribution), for each policyholder, past losses $X_1, \ldots, X_n$ have the
+  same mean and variance, and are iid conditional on $\Theta$. In particular, in
+  this model, we define the \hldefn{hypothetical mean} as
+  \begin{equation*}
+    \mu(\theta) \coloneqq E[X_i \mid \Theta = \theta],
+  \end{equation*}
+  and the \hldefn{process variance} as
+  \begin{equation*}
+    v(\theta) = \Var(X_j \mid \Theta = \theta).
+  \end{equation*}
+  Furthermore, we also define the \hldefn{structural parameters}: the
+  \hldefn{expected hypothetical mean}
+  \begin{equation*}
+    \mu = E[\mu(\Theta)],
+  \end{equation*}
+  the \hldefn{mean of the process variance}
+  \begin{equation*}
+    v = E[v(\Theta)],
+  \end{equation*}
+  and the \hldefn{variance of the hypothetical mean}
+  \begin{equation*}
+    a = \Var(\mu(\Theta)).
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  $\mu$ is the estimate to use if we have no information about $\theta$ (thus no
+  info about $\mu(\theta)$). In this case, we call $\mu$ the \hldefn{collective
+  premium}.
+\end{note}
+
+It is not difficult to obtain the mean, variance, and covariance of $X_j$'s for
+each $j$. We see that the mean of $X_j$ is
+\begin{equation*}
+  E[X_j] = E[E[X_j \mid \Theta]] = E[\mu(\Theta)] = \mu.
+\end{equation*}
+The variance of $X_j$ is
+\begin{align*}
+  \Var(X_j) &= \Var(E[X_j \mid \Theta]) + E[\Var(X_j \mid \Theta)] \\
+            &= \Var(\mu(\Theta)) + E[v(\Theta)] \\
+            &= a + v.
+\end{align*}
+The covariance of $X_j$ with $X_i$ is
+\begin{align*}
+  \Cov(X_i, X_j) &= E[X_i X_j] - E[X_i] E[X_j] \\
+                 &= E[E[X_i X_j \mid \Theta]] - \mu^2 \\
+                 &= E[E[X_i \mid \Theta] E[X_j \mid \Theta]] - \mu^2 \\
+                 &= E[\mu(\Theta)^2] - [\mu(\Theta)]^2 \\
+                 &= \Var(\mu(\Theta)) = a.
+\end{align*}
+This is exactly what the B\"{u}hlmann model assumes. In fact, if we apply
+\cref{thm:theorem_1}, noting that
+\begin{equation*}
+  \Var(X_i) = \sigma^2 \text{ and } \Cov(X_i, X_j) = \rho \sigma^2
+  \implies \rho = \frac{\Cov(X_i, X_j)}{\Var(X_i)},
+\end{equation*}
+we observe that
+\begin{equation*}
+  \mu = \mu,\, \sigma^2 = v + a,\, \rho = \frac{a}{v + a},
+\end{equation*}
+and so
+\begin{equation*}
+  Z = \frac{n \frac{a}{v + a}}{n \frac{a}{v + a} + 1 - \frac{a}{v+a}}
+  = \frac{na}{na + v} = \frac{n}{n + \frac{v}{a}}.
+\end{equation*}
+
+The following result follows exactly from our discussion above.
+
+\marginnote{
+\begin{procedure}[Finding B\"{u}hlmann Credibility Premium]\label{procedure:finding_buhlmann_credibility_premium}
+  \begin{enumerate}
+    \item Find hypothetical mean $\mu(\theta)$ and process variance $v(\theta)$.
+    \item Find structural parameters $\mu,\, v,\, a$.
+    \item Calculate the B\"{u}hlmann credibility factor $Z$ (and mean loss
+      $\overline{X}$ if necessary).
+    \item Calculate the B\"{u}hlmann credibility premium $P = Z \overline{X} +
+      (1 - Z)\mu$.
+  \end{enumerate}
+\end{procedure}
+}
+\begin{thm}[B\"{u}hlmann Credibility Premium]\index{B\"{u}hlmann Credibility Premium}\label{thm:buhlmann_credibility_premium}
+  The B\"{u}hlmann credibility premium is
+  \begin{equation*}
+    P = Z \overline{X} + (1 - Z)\mu
+  \end{equation*}
+  where
+  \begin{equation*}
+    Z = \frac{n}{n + \frac{v}{a}}
+  \end{equation*}
+  is called the \hldefn{B\"{u}hlmann credibility factor}.
+\end{thm}
+
+\begin{note}
+  \begin{itemize}
+    \item The B\"{u}hlmann credibility premium is a weighted average of the
+      sample mean $\overline{X}$ and the collective premium $\mu$.
+    \item As $n$ increases, $Z \to 1$, giving more credit to $\overline{X}$,
+      which is reasonable by intuition since our past data is more robust with
+      more exposure.
+    \item If the population is fairly homogeneous wrt the risk parameter
+      $\Theta$, then (relatively speaking) the hypothetical means $\mu(\Theta)$ 
+      to not vary greatly with $\Theta$, which then gives small variability. In
+      other words, $a$ is small relative to $v$, and thus $Z$ is nudged closer
+      to $0$. This agrees with our intuition, since for a homogeneous
+      population, the overall mean $\mu$ is more of value in helping the
+      prediction of next year's claims for a particular policyholder.
+    \item If the population is heterogeneous, $\mu(\Theta)$ is more variable, so
+      $a$ is large, and in turn $Z$ is closer to $1$. This agrees with
+      intuition, since experience of other policyholders is of less value in
+      predicting future experience of a particular policyholder as compared to
+      past experience.
+  \end{itemize}
+\end{note}
+
+\begin{eg}[A Poisson-Gamma Example for B\"{u}hlmann Credibility]
+  Let $\{X_i \mid \Theta = \theta\}_{i=1}^{n}$ with $X_i \mid \Theta = \theta
+  \sim \Poi(\theta)$ for $i \in \{ 1, \ldots, n \}$, and the prior distribution
+  $\Theta \sim \Gam(\alpha, \beta)$. Find both the B\"{u}hlmann credibility
+  premium and the Bayesian premium.
+\end{eg}
+
+\begin{solution}
+  \hlbnotec{B\"{u}hlmann Credibility Premium} We observe that
+  \begin{equation*}
+    \mu(\theta) = E[X_i \mid \Theta = \theta] = \theta,
+  \end{equation*}
+  and
+  \begin{equation*}
+    v(\theta) = \Var(X_i \mid \Theta = \theta) = \theta.
+  \end{equation*}
+  The structural parameters are
+  \begin{equation*}
+    \mu = E[\mu(\Theta)] = E[\Theta] = \alpha\beta,\quad
+    v = E(v(\Theta)) = E(\Theta) = \alpha\beta,
+  \end{equation*}
+  and
+  \begin{equation*}
+    a = \Var(\mu(\Theta)) = \Var(\Theta) = \alpha\beta^2.
+  \end{equation*}
+  Thus the B\"{u}hlmann credibility factor is
+  \begin{equation*}
+    Z = \frac{n}{n + \frac{v}{a}} = \frac{n}{n + \beta^{-1}}.
+  \end{equation*}
+  Hence the B\"{u}hlmann credibility premium is
+  \begin{align*}
+    P &= Z \overline{X} + (1 - Z) \mu \\
+      &= \frac{n}{n + \beta^{-1}} \overline{X} + \frac{\beta^{-1}}{n +
+        \beta^{-1}} \alpha\beta \\
+      &= \frac{\alpha + n \overline{X}}{n + \beta^{-1}}.
+  \end{align*}
+
+  \noindent
+  \hlbnotec{Bayesian Premium} We are given that $X_i \mid \Theta = \theta \sim
+  \Poi(\theta)$ and $\Theta \sim \Gam(\alpha, \beta)$. The posterior
+  distribution $\Theta \mid \vec{X}$ is
+  \begin{align*}
+    \pi_{\theta \mid \vec{X}}(\theta \mid \vec{x})
+    &\propto \left( \prod_{i=1}^{n} f_{X_i \mid \Theta}(x_i \mid \theta) \right)
+      \pi(\theta) \\
+    &\propto \theta^{\alpha - 1} e^{-\frac{\theta}{\beta}} \prod_{i=1}^{n}
+      e^{-\theta} \theta^{x_i} \\
+    &= e^{-(n + \frac{1}{\theta}) \theta} \theta^{n \overline{x} + \alpha - 1}.
+  \end{align*}
+  It follows that $\Theta \mid \vec{X} = \vec{x} \sim \Gam\left(n \overline{x} +
+  \alpha, \frac{1}{n + \frac{1}{\beta}}\right)$. Thus the Bayesian premium is
+  \begin{align*}
+    &E[X_{n+1} \mid \vec{X} = \vec{x}] \\
+    &= \int_{\forall \theta} E[X_{n+1} \mid \Theta = \theta] \pi_{\Theta \mid
+      \vec{X}}(\theta \mid \vec{x}) \dif{\theta} \\
+    &= \int_{\forall \theta} \cancel{\theta} \frac{1}{\cancel{\theta} \Gamma(n
+      \overline{x} + \alpha)} \left( \frac{\theta}{\frac{1}{n + \frac{1}{\beta}}}
+      \right)^{n \overline{x} + \alpha} e^{- \frac{\theta}{\frac{1}{n +
+      \frac{1}{\beta}}}} \dif{\theta} \\
+    &= (n \overline{x} + \alpha) \frac{1}{n + \frac{1}{\beta}}
+      \int_{\forall \theta} \frac{1}{\theta \Gamma(n \overline{x} + \alpha + 1)}
+      \left( \frac{\theta}{\frac{1}{n + \frac{1}{\beta}}} \right)^{n
+      \overline{x} + \alpha + 1} e^{-\frac{\theta}{\frac{1}{n +
+      \frac{1}{\beta}}}} \dif{\theta} \\
+    &= (n \overline{x} + \alpha) \frac{1}{n + \frac{1}{\beta}} \\
+    &= \frac{n}{n + \beta^{-1}} \overline{x} + \frac{\beta^{-1}}{n + \beta^{-1}}
+      \alpha\beta \\
+    &= \frac{\alpha + n \overline{x}}{n + \beta^{-1}}.
+  \end{align*}
+\end{solution}
+
+\begin{note}
+  We notice that the B\"{u}hlmann credibility premium and the Bayesian premium
+  coincides. This is no accidental coincidence, and we shall see why this is the
+  case later on in exact credibility.
+\end{note}
+
+\begin{eg}[Disagreement of B\"{u}hlmann Credibility Premium and Bayesian Premium]
+  Consider 2 urns with different proportions of balls marked with $0$ or $1$.
+  \begin{itemize}
+    \item Urn 1 has $60\%$ of its balls marked as $0$ and $40\%$ marked as $1$.
+    \item Urn 2 has $80\%$ of its balls marked as $0$ and $20\%$ marked as $1$.
+  \end{itemize}
+  An urn is randomly picked with equal probability and a total of 2 balls out of
+  3 is marked 1 (with replacement).
+
+  Calculate the B\"{u}hlmann credibility premium and the Bayesian premium for
+  the number on the next ball drawn from the urn.
+\end{eg}
+
+\begin{solution}
+  In any of the cases, we need to find out what $\Theta$ and $X_i \mid \Theta$ 
+  are. Let $X_i$ be the number drawn on the $i$th ball, and $\Theta$ the number
+  of the chosen urn. Then the prior distribution is
+  \begin{equation*}
+    \Theta = \begin{cases}
+      \theta_1 & \text{ urn 1 is selected wp } \frac{1}{2} \\
+      \theta2 & \text{ urn 2 is selected wp } \frac{1}{2}
+    \end{cases}.
+  \end{equation*}
+  The conditional probabilities are
+  \begin{equation*}
+    P(X_i = x \mid \Theta = \theta_1) = \begin{cases}
+      0.6 & x = 0 \\
+      0.4 & x = 1
+    \end{cases}
+  \end{equation*}
+  and
+  \begin{equation*}
+    P(X_i = x \mid \Theta = \theta_2) = \begin{cases}
+      0.8 & x = 0 \\
+      0.2 & x = 1
+    \end{cases}.
+  \end{equation*}
+
+  \noindent
+  \hlbnotec{B\"{u}hlmann credibility premium}
+  The hypothetical means are
+  \begin{equation*}
+    \mu(\theta_1) = E[X_i \mid \Theta = \theta_1] = 0(0.6) + 1(0.4) = 0.4
+  \end{equation*}
+  and
+  \begin{equation*}
+    \mu(\theta_2) = E[X_i \mid \Theta = \theta_2] = 0(0.8) + 1(0.2) = 0.2.
+  \end{equation*}
+  The process variances are
+  \begin{equation*}
+    v(\theta_1) = \Var(X_i \mid \Theta = \theta_1) = 0.4 - 0.4^2 = 0.24
+  \end{equation*}
+  and
+  \begin{equation*}
+    v(\theta_2) = \Var(X_i \mid \Theta = \theta_2) = 0.2 - 0.2^2 = 0.16.
+  \end{equation*}
+
+  It follows that the structural parameters are
+  \begin{equation*}
+    \mu = E[\mu(\Theta)] = \frac{1}{2}(0.4) + \frac{1}{2}(0.2) = 0.3,
+  \end{equation*}
+  \begin{equation*}
+    v = E[v(\Theta)] = \frac{1}{2}(0.24) + \frac{1}{2}(0.16) = 0.2,
+  \end{equation*}
+  and
+  \begin{equation*}
+    a = \Var(\mu(\Theta)) = (0.4 - 0.3)^2 \frac{1}{2} + (0.2 - 0.3)^2
+    \frac{1}{2} = 0.01
+  \end{equation*}
+  Thus the B\"{u}hlmann credibility factor is
+  \begin{equation*}
+    Z = \frac{n}{n + \frac{v}{a}}
+      = \frac{n}{n + \frac{0.2}{0.01}} = \frac{n}{n + 20}.
+  \end{equation*}
+  Hence the B\"{u}hlmann credibility premium is
+  \begin{equation*}
+    P = \frac{n}{n + 20} \frac{2}{3} + \frac{20}{n + 20} 0.3 = 0.34783.
+  \end{equation*}
+
+  \noindent
+  \hlbnotec{Bayesian premium} Let $\vec{X} = X_1 + X_2 + X_3$. Our observation
+  is that $X_1 + X_2 + X_3 = 2$. Thus
+  \begin{align*}
+    &\pi_{\Theta \mid \vec{X}}(\theta_1 \mid 2) \\
+    &= \frac{P(X_1 + X_2 + X_3 = 2 \mid \Theta = \theta_1) \pi(\theta_1)}{P(X_1
+      + X_2 + X_3 = 2 \mid \Theta = \theta_1) \pi(\theta_1) + P(X_1 + X_2 + X_3
+      \mid \Theta = \theta_2) \pi(\theta_2)} \\
+    &= \frac{\binom{3}{2}(0.4)^2(0.6)
+      \frac{1}{2}}{(\binom{3}{2}(0.4)^2(0.6)\frac{1}{2} +
+      \binom{3}{2}(0.2)^2(0.8)\frac{1}{2})} \\
+    &= 0.75,
+  \end{align*}
+  and so
+  \begin{equation*}
+    \pi_{\Theta \mid \vec{X}}(\theta_2 \mid 2) = 0.25.
+  \end{equation*}
+  Hence, to the Bayesian premium is
+  \begin{align*}
+    E[X_4 \mid X_1 + X_2 + X_3 = 2]
+    &= E[X_4 \mid \Theta = \theta_1] 0.75 + E[X_4 \mid \Theta = \theta_2] 0.25 \\
+    &= 0.4 (0.75) + 0.2 (0.25) \\
+    &= 0.3 + 0.05 = 0.35.
+  \end{align*}
+\end{solution}
 
 % section the_buhlmann_model (end)
 
