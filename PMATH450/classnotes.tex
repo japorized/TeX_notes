@@ -6026,8 +6026,9 @@ measure zero.
   $\nu_\infty(f) \geq 0$ for any $f \in \mathcal{L}_\infty(E, \mathbb{K})$.
 
   Next, suppose that $f \in \mathcal{L}_\infty(E, \mathbb{K})$ and $0 \neq
-  \kappa \in \mathbb{K}$. It is clear that $\kappa f \in \mathcal{L}(E,
-  \mathbb{K})$, and we quickly notice that
+  \kappa \in \mathbb{K}$.
+  It is clear that $\kappa f \in \mathcal{L}(E, \mathbb{K})$,
+  and we quickly notice that
   \begin{align*}
     \nu_\infty(\kappa f)
     &= \inf \{ \gamma > 0 : m \{ x \in E : \abs{\kappa f(x)} > \gamma \} = 0 \}
@@ -6039,10 +6040,12 @@ measure zero.
     &= \abs{\kappa} \nu_\infty(f) < \infty.
   \end{align*}
   So $\kappa f \in \mathcal{L}_\infty(E, \mathbb{K})$ for all $0 \neq \kappa \in
-  \mathbb{K}$. As noted before, if $\kappa = 0$, then $\kappa f = 0 \in
-  \mathcal{L}_\infty(E, \mathbb{K})$.
+  \mathbb{K}$.
+  As noted before, if $\kappa = 0$,
+  then $\kappa f = 0 \in \mathcal{L}_\infty(E, \mathbb{K})$.
 
-  Now suppose $f, g \in \mathcal{L}_\infty(E, \mathbb{K})$. WTS
+  Now suppose $f, g \in \mathcal{L}_\infty(E, \mathbb{K})$.
+  WTS
   \begin{equation*}
     \nu_\infty(f + g) \leq \nu_\infty(f) + \nu_\infty(g).
   \end{equation*}
@@ -6051,8 +6054,9 @@ measure zero.
     E_f = \{ x \in E : \abs{f(x)} > \alpha \} \text{ and }
     E_g = \{ x \in E : \abs{g(x)} > \beta \}.
   \end{equation*}
-  Then $mE_f = 0 = mE_g$. Let $H = E \setminus (E_f \cup E_g)$. For $x \in H$,
-  we have
+  Then $mE_f = 0 = mE_g$.
+  Let $H = E \setminus (E_f \cup E_g)$.
+  For $x \in H$, we have
   \begin{equation*}
     \abs{(f + g)(x)} \leq \abs{f(x)} + \abs{g(x)} \leq \alpha + \beta,
   \end{equation*}
@@ -6065,8 +6069,9 @@ measure zero.
     m \left\{ x \in E : \abs{(f + g)(x)} > \alpha + \beta \right\} \leq mE_f +
     mE_g = 0,
   \end{equation*}
-  and so $\nu_\infty(f + g) \leq \alpha + \beta$. Since $\alpha$ and $\beta$ 
-  were arbitrary, it follows that
+  and so $\nu_\infty(f + g) \leq \alpha + \beta$.
+  Since $\alpha$ and $\beta$ were arbitrary,
+  it follows that
   \begin{equation*}
     \nu_\infty(f + g) \leq \nu_\infty(f) + \nu_\infty(g) < \infty.
   \end{equation*}
@@ -6090,8 +6095,9 @@ measure zero.
 \end{defn}
 
 \begin{thm}[$L_\infty(E, \mathbb{K})$ is a normed-linear space]\label{thm:_l_infty_e_k_is_a_normed_linear_space}
-  Let $E \in \mathfrak{M}(\mathbb{R})$. Then $L_\infty(E, \mathbb{K})$ is a
-  normed-linear space, where for $[f] \in L_\infty(E, \mathbb{K})$ we set
+  Let $E \in \mathfrak{M}(\mathbb{R})$.
+  Then $L_\infty(E, \mathbb{K})$ is a normed-linear space,
+  where for $[f] \in L_\infty(E, \mathbb{K})$ we set
   \begin{equation*}
     \norm{[f]}_\infty \coloneqq \nu_\infty(f).
   \end{equation*}
@@ -6101,7 +6107,126 @@ measure zero.
   See \cref{propo:kernel_of_a_vector_space_is_a_linear_manifold}.
 \end{proof}
 
+\begin{remark}\label{remark:cursivel_infty_supremeness_of_the_essential_sup}
+  Let $f \in \mathcal{L}_\infty(E, \mathbb{K})$.
+  Let us look at the places where the undesirable happens.
+  For each $n \geq 1$, let
+  \begin{equation*}
+    B_n \coloneqq \left\{ x \in E :
+      \abs{f(x)} > \nu_{\infty} (f) + \frac{1}{n} \right\}.
+  \end{equation*}
+  Then by \hyperref[defn:essential_supremum]{definition} of $\nu_\infty(\cdot)$,
+  we have that $mB_n = 0$ for each $n \geq 1$,
+  and letting
+  \begin{equation*}
+    B \coloneqq \bigcup_{n=1}^{\infty} B_n = \left\{ x \in E : \abs{f(x)} >
+    \nu_\infty(f) \right\},
+  \end{equation*}
+  we have that
+  \begin{equation*}
+    mB \leq \sum_{n=1}^{\infty} mB_n = \sum_{n=1}^{\infty} 0 = 0.
+  \end{equation*}
+  In other words, for any $f \in \mathcal{L}_\infty(E, \mathbb{K})$, the set
+  \begin{equation*}
+    B = \left\{ x \in E : \abs{f(x)} > \nu_\infty(f) \right\}
+  \end{equation*}
+  has measure zero. So for any $[f] \in L_\infty(E, \mathbb{K})$,
+  we can always pick a representative $g \in [f]$ such that
+  \begin{equation*}
+    \abs{g(x)} \leq \norm{[f]}_\infty
+  \end{equation*}
+  for all $x \in E$.
 
+  In particular, the function $g \coloneqq \chi_{E \setminus B} \cdot f$
+  is measurable, and differs from $f$ only on $B$, whence $[g] = [f]$,
+  and we indeed have
+  \begin{equation*}
+    \abs{g(x)} \leq \nu_{\infty}(f) = \nu_{\infty}(g) = \norm{[g]}_{\infty}
+  \end{equation*}
+  for all $x \in E$.
+
+  Moreover,we see that $\nu_{\infty}(f) = 0$ iff $f = 0$ a.e. on $E$,
+  and so
+  \begin{equation*}
+    \mathcal{N}_{\infty}(E, \mathbb{K}) =
+    \{ f \in \mathcal{L}_{\infty}(E, \mathbb{K}) : f = 0 \text{ a.e. on } E \}.
+  \end{equation*}
+\end{remark}
+
+\begin{thm}[Completeness of $L_\infty(E, \mathbb{K})$]\label{thm:completeness_of_l_infty_e_k_}
+  Let $E \in \mathfrak{M}(\mathbb{R})$.
+  Then $L_\infty(E, \mathbb{K})$ is a Banach space.
+\end{thm}
+
+\begin{proof}
+  \hlwarn{To be added}
+\end{proof}
+
+Recall that if $E \in \mathfrak{M}(\mathbb{R})$ and $1 < p < \infty$,
+$f \in \mathcal{L}_p(E, \mathbb{K})$ and $g \in \mathcal{L}_q(E, \mathbb{K})$,
+where $q$ is the Lebesgue conjugate of $p$,
+then \hyperref[thm:holders_inequality]{H\"{o}lder's Inequality}
+gives that $fg\ in \mathcal{L}_1(E, \mathbb{K})$ and
+\begin{equation*}
+  \nu_1(fg) \leq \nu_p(f) \nu_q(g).
+\end{equation*}
+Let's look at $p = 1$.
+
+\begin{thm}[H\"{o}lder's Inequality for $\mathcal{L}_1(E, \mathbb{K})$]\index{H\"{o}lder's Inequality for $\mathcal{L}_1(E, \mathbb{K})$}\label{thm:holder_s_inequality_for_l_1_e_k_}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ with $mE > 0$.
+  \begin{enumerate}
+    \item If $f \in \mathcal{L}_1(E, \mathbb{K})$ and
+      $g \in \mathcal{L}_\infty(E, \mathbb{K})$, then $fg \in \mathcal{L}_1(E,
+      \mathbb{K})$ and
+      \begin{equation*}
+        \nu_1(fg) \leq \nu_1(f) \nu_\infty(g).
+      \end{equation*}
+
+    \item For $f \in \mathcal{L}_1(E, \mathbb{K})$,
+      there exists a function $f^* \in \mathcal{L}_\infty(E, \mathbb{K})$
+      such that $\nu_\infty(f^*) = 1$ and
+      \begin{equation*}
+        \nu_1(ff^*) = \int_{E} f \cdot f^* = \nu_1(f).
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item By \cref{remark:cursivel_infty_supremeness_of_the_essential_sup},
+      for $[g] \in L_\infty(E, \mathbb{K})$, we can find, wlog, $g_0 \in [g]$ 
+      so that $g_0 = g$ a.e. on $E$, and for all $x \in E$, we have
+      $\abs{g_0(x)} \leq \nu_{\infty}(g) = \nu_{\infty}(g_0)$.
+      In particular, we have that for any $f \in \mathcal{L}_1(E, \mathbb{K})$,
+      $\abs{fg} = \abs{fg_0}$ a.e. on $E$, and we find that
+      \begin{equation*}
+        \int_{E} \abs{fg} = \int_{E} \abs{fg_0}.
+      \end{equation*}
+      Thus wlog wma $\abs{g(x)} \leq \nu_\infty(g)$ for all $x \in E$.
+      Then
+      \begin{equation*}
+        \nu_1(fg) = \int_{E} \abs{fg} \leq \int_{E} \abs{f} \nu_\infty(g)
+        = \nu_\infty(g) \int_{E} \abs{f} = \nu_1(f) \nu_\infty(g).
+      \end{equation*}
+
+    \item Set $\Theta : E \to \mathbb{T}$ such that
+      \begin{equation*}
+        f = \Theta \cdot \abs{f},
+      \end{equation*}
+      where
+      \begin{equation*}
+        \Theta(x) = \begin{cases}
+          \frac{f(x)}{\abs{f(x)}} & \text{ when } f(x) \neq 0 \\
+          1 & \text{ when } f(x) = 0.
+        \end{cases}
+      \end{equation*}
+      Then with $f^* \coloneqq \overline{\Theta}$,
+      we have $\nu_\infty(f^*) = 1$, $\abs{f} = ff^*$, and so
+      \begin{align*}
+        \nu_1(ff^*) = \int_{E} \abs{ff^*} = \int_{E} \abs{f} = \nu_1(f).
+      \end{align*}
+  \end{enumerate}
+\end{proof}
 
 % subsection completeness_of_l_infty_e_k_ (end)
 
