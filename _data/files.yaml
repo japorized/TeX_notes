@@ -7,6 +7,10 @@
   tex:
     - title: classnotes.tex
       src: /PMATH450/classnotes.tex
+  keywords: [
+    'PMATH450', 'Spring 2019', 'Lebesgue Integration', 'Fourier Analysis', 'PMATH',
+    'Lebesgue', 'Riemann', 'Dominating Convergence', 'Lebesgue Measure'
+  ]
 - title: ACTSC432 S19 - Loss Models II
   pdf:
     - title: classnotes.pdf
@@ -16,6 +20,15 @@
   tex:
     - title: classnotes.tex
       src: /ACTSC432/classnotes.tex
+- title: JAPAN202R S19 - Year 2 Japanese II
+  pdf:
+    - title: classnotes.pdf
+      src: /JAPAN202R/classnotes.pdf
+    - title: classnotes-dark.pdf
+      src: /JAPAN202R/classnotes-dark.pdf
+  tex:
+    - title: classnotes.tex
+      src: /JAPAN202R/classnotes.tex
 
 - title: PMATH467 W19 - Algebraic Topology
   pdf:
