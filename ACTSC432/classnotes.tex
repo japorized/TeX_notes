@@ -14,6 +14,8 @@
 \input{probnotation.tex}
 
 \DeclareMathOperator{\VaR}{VaR}
+\DeclareMathOperator{\TL}{TL}
+\DeclareMathOperator{\TP}{TP}
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -29,6 +31,8 @@ be relying on the standard textbook for this topic, namely
 \citealt{klugman2012}.
 
 % chapter preface (end)
+
+\tuftepart{Pre-requisite Review}\label{part:pre_requiresite_review}
 
 \chapter{Introduction and Review of Probability}%
 \label{chp:introduction_and_review_of_probability}
@@ -740,6 +744,8 @@ left as an easy brain exercise for the reader. \marginnote{
 
 % chapter review_of_statistics (end)
 
+\tuftepart{Credibility Theory}\label{part:credibility_theory}
+
 \chapter{Limited Fluctuation Credibility Theory}%
 \label{chp:limited_fluctuation_credibility_theory}
 % chapter limited_fluctuation_credibility_theory
@@ -1407,6 +1413,7 @@ We want to use these assumptions to derive a rate to cover for $X_{n+1}$.
 
 % section the_bayesian_methodology (end)
 
+\newpage
 \section{The Credibility Premium}%
 \label{sec:the_credibility_premium}
 % section the_credibility_premium
@@ -1428,6 +1435,11 @@ The estimates $\hat{\alpha}_0, \ldots \hat{\alpha}_n$ are chosen to
 \end{equation*}
 
 Let us now develop the general model in calculating the credibility premium.
+
+\marginnote{A hidden requirement to use credibility premium is that we require
+\begin{equation*}
+  E[X_j], \Var(X_j), \Cov(X_i, X_j) < \infty.
+\end{equation*}}
 
 \begin{thm}[General Model for Credibility Premium]\label{thm:general_model_for_credibility_premium}
   Let $\{ X_i \}_{i=1}^n$ be a sequence of past observations (rvs), and
@@ -1777,7 +1789,7 @@ The following result follows exactly from our discussion above.
   \end{itemize}
 \end{note}
 
-\begin{eg}[A Poisson-Gamma Example for B\"{u}hlmann Credibility]
+\begin{eg}[A Poisson-Gamma Example for B\"{u}hlmann Credibility]\label{eg:a_poisson_gamma_example_for_buhlmann_credibility}
   Let $\{X_i \mid \Theta = \theta\}_{i=1}^{n}$ with $X_i \mid \Theta = \theta
   \sim \Poi(\theta)$ for $i \in \{ 1, \ldots, n \}$, and the prior distribution
   $\Theta \sim \Gam(\alpha, \beta)$. Find both the B\"{u}hlmann credibility
@@ -1854,7 +1866,7 @@ The following result follows exactly from our discussion above.
   case later on in exact credibility.
 \end{note}
 
-\begin{eg}[Disagreement of B\"{u}hlmann Credibility Premium and Bayesian Premium]
+\begin{eg}[Disagreement of B\"{u}hlmann Credibility Premium and Bayesian Premium]\label{eg:disagreement_of_buhlmann_credibility_premium_and_bayesian_premium}
   Consider 2 urns with different proportions of balls marked with $0$ or $1$.
   \begin{itemize}
     \item Urn 1 has $60\%$ of its balls marked as $0$ and $40\%$ marked as $1$.
@@ -1959,9 +1971,1687 @@ The following result follows exactly from our discussion above.
   \end{align*}
 \end{solution}
 
+\newthought{The B\"{u}hlmann model} is the simplest of the credibility models
+that we've seen; past claims are assumed to be iid. A practical difficulty with
+this model is that it does not allow for variations in exposure or size of the
+observed data. That is, it is required that the $X_i$'s have the same exposure.
+
 % section the_buhlmann_model (end)
 
+\newpage
+
+\section{B\"{u}hlmann-Straub Model}%
+\label{sec:buhlmann_straub_model}
+% section buhlmann_straub_model
+
+\marginnote{
+\begin{textbook}
+  \citealt{klugman2012} Section 18.6 (pg 392).
+\end{textbook}
+}
+
+To handle the variations where the B\"{u}hlmann model could not,
+we consider a generalization, called the \hlnoteb{B\"{u}hlmann-Straub Model}.
+In fact, this generalization goes up further beyond \cref{thm:theorem_1}.
+
+\begin{figure*}[ht]
+  \centering
+  \includegraphics[width=0.65\linewidth]{images/hierarchy-of-cred-models.png}
+  \caption{Hierarchy of Credibility Models thus far}
+  \label{fig:hierarchy_of_credibility_models_thus_far}
+\end{figure*}
+
+Suppose that a total of $n$ groups of past observation,
+with $m_j$ being the total number of members of group $j$,
+\sidenote{In \citealt{klugman2012}, $m_j$ is called a known \hlnoteb{constant
+measuring exposure}, and it may represent
+\begin{itemize}
+  \item the number of months the policy was in force in past year $j$;
+  \item number of individuals in the group in past year $j$; or
+  \item the amount of premium income for the policy in past year $j$.
+\end{itemize}
+}
+for $j \in \{ 1, \ldots, n \}$.
+Let $Y_{jk}$ denote the claim amount for the $k$-th member of group $j$,
+for $k \in \{ 1, \ldots, m_j \}$.
+For this generalization, let us assume that $Y_{jk} \mid \Theta$ are iid
+for each $j$ and $k$, with
+\begin{equation*}
+  \mu(\theta) = E[Y_{jk} \mid \Theta = \theta] \quad\text{ and }\quad
+  v(\theta) = \Var(Y_{jk} \mid \Theta = \theta).
+\end{equation*}
+Let the \hldefn{structural parameters} of this model be denoted by
+\begin{equation*}
+  \mu = E[\mu(\theta)],\quad v = E[v(\theta)], \text{ and }\quad
+  a = \Var[\mu(\theta)].
+\end{equation*}
+Let $X_j$ be the \hlnoteb{average claim amount per member} in year $j$,
+\sidenote{This is a rather specific construction of the B\"{u}lhmann-Straub
+model. The textbook has a slightly more general construction,
+and proves for the most general version of the model.}
+i.e.
+\begin{equation*}
+  X_j = \frac{1}{m_j} \sum_{k=1}^{m_j} Y_{jk}.
+\end{equation*}
+For practical purposes, \sidenote{This is the usual practice in actuarial firms,
+where individual records are not tracked (expensive and time-consuming),
+but group records are quite easily tracked.}
+suppose we can observe the average claim amount $X_j$ (from the total amount
+$m_j X_j$ and the number of members $m_j$), but the individual claims $\{ Y_{jk}
+\}_{k=1}^{m_j}$ are not observable.
+
+\begin{thm}[B\"{u}hlmann-Straub Model]\index{B\"{u}hlmann-Straub Model}\label{thm:buhlmann_straub_model}
+  With the above assumptions, the B\"{u}hlmann-Straub Model has
+  \begin{gather*}
+    E[X_j \mid \Theta] = \mu(\Theta),
+    \Var(X_j \mid \Theta) = \frac{v(\theta)}{m_j}, \\
+    E[X_j] = \mu,\quad
+    \Var(X_j) = \frac{v}{m_j} + a,\text{ and } \\
+    \Cov(X_i, X_j) = a \text{ for } i \neq j.
+  \end{gather*}
+\end{thm}
+
+\begin{proof}
+  By assumption, $\{Y_{jk} \mid \Theta\}$ is an iid sequence of rvs,
+  with
+  \begin{equation*}
+    \mu(\theta) = E[Y_{jk} \mid \Theta = \theta] \text{ and }
+    v(\theta) = \Var(Y_{jk} \mid \Theta = \theta).
+  \end{equation*}
+  Then since $X_j = \frac{1}{m_j} \sum_{k=1}^{m_j} Y_{jk}$, we have
+  \begin{align*}
+    E[X_j \mid \Theta = \theta]
+    &= E \left[ \frac{1}{m_j} \sum_{k=1}^{m_j} Y_{jk}
+      \mid \Theta = \theta \right] \\
+    &= \frac{1}{m_j} \sum_{k=1}^{m_j} E [ Y_{jk} \mid \Theta = \theta ]
+      \quad\because \text{ linearity of } E \\
+    &= \frac{1}{m_j} \sum_{k=1}^{m_j} \mu(\theta)
+     = \frac{1}{m_j} m_j \mu(\theta) \\
+    &= \mu(\theta),
+  \end{align*}
+  and
+  \begin{align*}
+    \Var(X_j \mid \Theta = \theta)
+    &= \Var\left( \frac{1}{m_j} \sum_{k=1}^{m_j} Y_{jk}
+      \mid \Theta = \theta \right) \\
+    &= \frac{1}{m_j^2} \sum_{k=1}^{m_j} \Var(Y_{jk} \mid \Theta = \theta)
+      \quad\because \substack{\text{linearity of $\Var$ \&} \\
+      \text{ independence of } Y_{jk}}  \\
+    &= \frac{1}{m_j^2} m_j v(\theta) = \frac{v(\theta)}{m_j}.
+  \end{align*}
+  Furthermore,
+  \begin{align*}
+    E[X_j] &= E[E[X_j \mid \Theta]] \\
+           &= E[\mu(\theta)] = \mu \\
+    \Var(X_j) &= \Var(E[X_j \mid \Theta]) + E[\Var(X_j \mid \Theta)] \\
+              &= \Var(\mu(\theta)) + E \left[ \frac{v(\theta)}{m_j} \right] \\
+              &= a + \frac{v}{m_j},
+  \end{align*}
+  and for $i \neq j$, noticing that $X_i \mid \Theta \coprod X_j \mid \Theta$
+  due to the independence of the $(Y_{jk} \mid \Theta)$'s, we have
+  \begin{align*}
+    \Cov(X_i, X_j)
+    &= E[X_i X_j] - E[X_i]E[X_j] \\
+    &= E[E[X_i X_j \mid \Theta]] - \mu^2 \\
+    &= E[E[X_i \mid \Theta] E[X_j \mid \Theta]] - \mu^2 \\
+    &= E[\mu(\theta)^2] - \mu^2 \\
+    &= Var(\mu(\theta)) + E[\mu(\theta)]^2 - \mu^2 \\
+    &= a + 0 = a.
+  \end{align*}
+\end{proof}
+
+\begin{thm}[B\"{u}hlmann-Straub Credibility Premium]\index{B\"{u}hlmann-Straub Credibility Premium}\label{thm:buhlmann_straub_credibility_premium}
+  The \hlnoteb{B\"{u}hlmann-Straub Credibility Premium} is
+  \begin{equation*}
+    P = Z \overline{X} + (1 - Z)\mu,
+  \end{equation*}
+  where
+  \begin{equation*}
+    Z = \frac{m}{m + \frac{v}{a}}, \quad
+    \overline{X} = \sum_{i=1}^{n} \frac{m_i}{m} X_i,\text{ and }\quad
+    m = \sum_{i=1}^{n} m_i.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  With \cref{thm:buhlmann_straub_model}, we have
+  that the credibility premium is given by
+  \begin{equation*}
+    P = \hat{\alpha}_0 + \sum_{j=1}^{n} \hat{\alpha}_j X_j,
+  \end{equation*}
+  by \cref{defn:estimator_for_the_credibility_premium},
+  where the $\hat{\alpha}_i$'s are chosen to minimize the mean square error
+  \begin{equation*}
+    \mathcal{Q}(\alpha_0, \ldots, \alpha_n)
+    = E \left[ \left( X_{n+1} - \left[ \alpha_0 + \sum_{j=1}^{n} \alpha_j X_j
+      \right] \right)^2 \right]
+  \end{equation*}
+  as seen in
+  \hyperref[thm:general_model_for_credibility_premium]{the general model}.
+  We need to figure out what the $\hat{\alpha}_i$'s are.
+  In particular, $(\hat{\alpha}_0, \ldots \hat{\alpha}_n)$
+  solves the normal equations
+  \begin{equation*}
+    \begin{cases}
+      E[X_{n+1}] = \hat{\alpha}_0 + \sum_{j=1}^{n} \hat{\alpha}_j E[X_i] \\
+      \Cov(X_j, X_{n+1}) = \sum_{i=1}^{n} \hat{\alpha}_i \Cov(X_i, X_j) \text{
+      for } j \in \{ 1, \ldots, n \}.
+    \end{cases}
+  \end{equation*}
+  Under our assumptions, the equations become
+  \begin{gather}
+    \mu = \hat{\alpha}_0 + \sum_{j=1}^{n} \hat{\alpha}_j \mu  \tag{$\dagger$}\\
+    a = \sum\limits_{\substack{i=1 \\ i \neq j}}^{n}
+      \hat{\alpha}_i a + \hat{\alpha}_j \left( \frac{v}{m_j} + a \right)
+      \text{ for } j \in \{ 1, \ldots, n \}. \tag{$*$}
+  \end{gather}
+  Dividing both sides by $a$, we have that $(*)$ becomes
+  \begin{equation*}
+    1 = \sum_{i=1}^{n} \hat{\alpha}_i + \hat{\alpha}_j \frac{v}{am_j}
+  \end{equation*}
+  which implies
+  \begin{equation}\label{eq:buhlmann_straub_prem_eq1}
+    \sum_{i=1}^{n} \hat{\alpha}_i = 1 - \hat{\alpha}_j \frac{v}{am_j}.
+  \end{equation}
+  Putting this into $(\dagger)$, we get
+  \begin{equation*}
+    \mu = \hat{\alpha}_0 + \mu \left( 1 - \hat{\alpha}_j \frac{v}{am_j} \right),
+  \end{equation*}
+  and so
+  \begin{equation}\label{eq:buhlmann_straub_prem_eq2}
+    \hat{\alpha}_0 = \hat{\alpha}_j \frac{v\mu}{am_j} \implies
+    \hat{\alpha}_j = \frac{am_j}{v\mu} \hat{\alpha}_0.
+  \end{equation}
+  Going back to \cref{eq:buhlmann_straub_prem_eq1}, we have
+  \begin{equation*}
+    \frac{am}{v\mu} \hat{\alpha}_0
+    = \frac{a}{v\mu} \hat{\alpha}_0 \sum_{i=1}^{n} m_j
+    = 1 - \frac{1}{\mu} \hat{\alpha}_0
+    \implies \hat{\alpha}_0 \left( \frac{am}{v\mu} + \frac{1}{\mu} \right) = 1
+  \end{equation*}
+  which thus
+  \begin{equation*}
+    \hat{\alpha}_0 = \frac{1}{\frac{am + v}{v\mu}}
+    = \frac{v}{ma + v} \mu
+    = \frac{\frac{v}{a}}{m + \frac{v}{a}} \mu.
+  \end{equation*}
+  Consequently, going back to \cref{eq:buhlmann_straub_prem_eq2} gives
+  \begin{equation*}
+    \hat{\alpha}_j = \frac{am_j}{v\mu} \cdot \frac{v\mu}{ma +v}
+    = \frac{m_j}{m + \frac{v}{a}} \text{ for all } j \in \{1, \ldots, n\}.
+  \end{equation*}
+  Thus the B\"{u}hlmann-Straub credibility premium is
+  \begin{align*}
+    P &= \hat{\alpha}_0 + \sum_{i=1}^{n} \hat{\alpha}_i X_i \\
+      &= \frac{\frac{v}{a}}{m + \frac{v}{a}} \mu + \sum_{i=1}^{n}
+        \frac{m_j}{m+\frac{v}{a}} X_i \\
+      &= \frac{m}{m + \frac{v}{a}} \sum_{i=1}^{n} \frac{m_i}{m} X_i
+        + \frac{\frac{v}{a}}{m + \frac{v}{a}} \mu \\
+      &= Z \overline{X} + (1 - Z) \mu,
+  \end{align*}
+  where
+  \begin{equation*}
+    Z = \frac{m}{m + \frac{v}{a}}, \quad
+    \overline{X} = \sum_{i=1}^{n} \frac{m_i}{m} X_i,\text{ and }\quad
+    m = \sum_{i=1}^{n} m_i,
+  \end{equation*}
+  as desired.
+\end{proof}
+
+\begin{procedure}[Finding the B\"{u}lmann Straub Credibility Premium]\label{procedeure:finding_the_buhlmann_straub_credibility_premium}
+  \cref{thm:buhlmann_straub_model} and
+  \cref{thm:buhlmann_straub_credibility_premium}
+  shows us how to calculate the credibility premium.
+  \begin{enumerate}
+    \item Define an appropriate $X_j$.
+    \item Find $\mu(\theta) = E[X_j \mid \Theta]$
+      and $\frac{v(\theta)}{m_j} = \Var(X_j \mid \Theta)$.
+    \item Find the structural parameters
+      \begin{equation*}
+        \mu = E[\mu(\Theta)]
+        v = E[v(\Theta)] \text{ and }
+        a = \Var(\mu(\Theta)).
+      \end{equation*}
+    \item Calculate $Z, \overline{X}$ and $m$.
+    \item Put everything into
+      \begin{equation*}
+        P = Z \overline{X} + (1 - Z) \mu.
+      \end{equation*}
+  \end{enumerate}
+  Step 1 is the main boss of the challenge.
+  If one can figure out what the problem needs us to set $X_j$ as,
+  then half the battle is done.
+\end{procedure}
+
+\begin{eg}
+  In year $j$, for $j \in \{1, \ldots, n \}$, there are $m_j$ members
+  and let $N_j$ be the number of claims, where
+  \begin{itemize}
+    \item $N_j \mid \Theta = \theta \sim \Poi(m_j \theta)$ are independent; and
+    \item $\Theta \sim \Gam(\alpha, \beta)$.
+  \end{itemize}
+  Determine the B\"{u}hlmann-Straub Credibility Premium
+  for the average number of claims in year $n + 1$ per member.
+\end{eg}
+
+\begin{solution}
+  We want to find the credibility premium for
+  \begin{equation*}
+    X_{n+1} = \frac{N_{n+1}}{m_{n+1}}.
+  \end{equation*}
+  Thus, for $j \in \{ 1, \ldots, n \}$, let
+  \begin{equation*}
+    X_j = \frac{N_j}{m_j}.
+  \end{equation*}
+  Then
+  \begin{align*}
+    \mu(\theta) &= E[X_j \mid \Theta = \theta]
+                 = E \left[ \frac{N_j}{m_j} \mid \Theta = \theta \right] \\
+                &= \frac{1}{m_j} E [ N_j \mid \Theta = \theta ] \\
+                &= \frac{1}{m_j} m_j \theta = \theta,
+  \end{align*}
+  and
+  \begin{align*}
+    \frac{v(\theta)}{m_j} = \Var(X_j \mid \Theta = \theta)
+    &= \frac{1}{m_j^2} \Var(N_j \mid \Theta = \theta) \\
+    &= \frac{1}{m_j^2} m_j \theta = \frac{\theta}{m_j}.
+  \end{align*}
+  Moving along,
+  \begin{align*}
+    \mu &= E[X_j] = E[E[X_j \mid \Theta]] = E[\mu(\Theta)]
+      = E[\Theta] = \alpha\beta \\
+    v &= E[v(\Theta)] = E[\Theta] = \alpha\beta \\
+    a &= \Var(\mu(\Theta)) = \Var(\Theta) = \alpha\beta^2.
+  \end{align*}
+  Thus
+  \begin{equation*}
+    Z = \frac{m}{m + \frac{v}{a}} = \frac{m}{m + \beta^{-1}},
+  \end{equation*}
+  and so
+  \begin{equation*}
+    P = \frac{m}{m + \beta^{-1}} \overline{X} + \frac{\beta^{-1}}{m +
+    \beta^{-1}} \alpha\beta.
+  \end{equation*}
+\end{solution}
+
+\begin{note}
+  \begin{enumerate}
+    \item It is not surprise to see that if we fix $m_j = 1$
+      for all $j \in \{1, \ldots, n\}$, then we get back into the
+      \hyperref[thm:buhlmann_credibility_premium]{B\"{u}hlmann Model}.
+  \end{enumerate}
+\end{note}
+
+% section buhlmann_straub_model (end)
+
+\newpage
+\section{Exact Credibility}%
+\label{sec:exact_credibility}
+% section exact_credibility
+
+\marginnote{
+\begin{textbook}
+  \citealt{klugman2012} Section 18.7 (pg 397)
+\end{textbook}
+}
+
+Recall that in \cref{eg:a_poisson_gamma_example_for_buhlmann_credibility},
+we saw that the B\"{u}hlmann credibility premium agreed with
+the Bayesian premium. However, in
+\cref{eg:disagreement_of_buhlmann_credibility_premium_and_bayesian_premium},
+we saw that they disagreed.
+One cannot help but wonder when exactly does the agreement happen,
+and when does it not.
+
+Recall that in \cref{thm:general_model_for_credibility_premium},
+the credibility premium is designed to be the best linear approximation
+to the Bayesian premium.
+
+\begin{defn}[Exact Credibility]\index{Exact Credibility}\label{defn:exact_credibility}
+  When the credibility premium from
+  \cref{thm:general_model_for_credibility_premium}
+  and the Bayesian premium coincide, we describe this situation as
+  \hlnoteb{exact credibility}.
+\end{defn}
+
+\begin{note}
+  In particular, when exact credibility occurs, we have that
+  \begin{equation*}
+    \mathcal{Q}(\alpha_0, \ldots, \alpha_n) = 0.
+  \end{equation*}
+\end{note}
+
+The following is a result that illustrates the occurrence of exact probability.
+
+\begin{propo}[Exact Credibility when Observations Belong to the Linear Exponential Family]\label{propo:exact_credibility_when_observations_belong_to_the_linear_exponential_family}
+  Suppose $\{ X_i \}_{i=1}^{n}$ is an iid sequence that belongs to the linear
+  exponential family, that is
+  \begin{equation*}
+    f_{X_i \mid \Theta}(x_i \mid \theta) = \frac{p(x_i) e^{r(\theta)
+    x_i}}{q(\theta)},
+  \end{equation*}
+  where $p$ is a function of $x_i$, and $r, q$ are functions of $\theta$.
+  Furthermore, suppose that $\Theta$ is a
+  \hyperref[defn:conjugate_prior_distribution]{conjugate prior distribution}
+  with density
+  \begin{equation*}
+    \pi(\theta) = \frac{q(\theta)^{-k} e^{\mu k r(\theta)} r'(\theta)}{c(\mu,
+    k)},
+  \end{equation*}
+  where $c(\mu, k)$ is a constant determined by $\mu$ and $k$.
+  Also, suppose that $\theta_0 \leq \Theta \leq \theta_1$, and that
+  \begin{equation*}
+    \frac{\pi(\theta_0 \mid x_1, \ldots, x_n)}{r'(\theta_0)}
+    = \frac{\pi(\theta_1 \mid x1, \ldots, x_n)}{r'(\theta_1)}.
+  \end{equation*}
+  Then the Bayesian premium is the credibility premium, i.e.
+  \begin{equation*}
+    E[X_{n+1} \mid X_1, \ldots, X_n] = \alpha_0 + \sum_{i=1}^{n} \alpha_i X_i,
+  \end{equation*}
+  where $(\alpha_0, ..., \alpha_n)$ is as in
+  \cref{thm:general_model_for_credibility_premium}.
+\end{propo}
+
+The proof of the above theorem will not be included here,
+but one can read the textbook on page 398. \cite{klugman2012}
+
+% section exact_credibility (end)
+
 % chapter greatest_accuracy_credibility (end)
+
+\chapter{Empirical Bayes Parameter Estimation}%
+\label{chp:empirical_bayes_parameter_estimation}
+% chapter empirical_bayes_parameter_estimation
+
+\section{Introduction}%
+\label{sec:introduction}
+% section introduction
+
+In \cref{chp:greatest_accuracy_credibility}, we used the Bayesian or
+credibility premium to incorporate past data into our prospective premium.
+One flaw of this approach is that it strongly depends on assumed distributions,
+in particular for $f_{X_j \mid \Theta}$ and $\pi$.
+More realistically, it is not necessary easy to know, for instance,
+values for $\alpha$ and $\beta$ if $\Theta \sim \Gam(\alpha, \beta)$.
+
+In general, these unknown parameters are associated with the \hldefn{structure
+density} $\pi(\theta)$, hence the name \hldefn{structural parameters} for the
+values
+\begin{equation*}
+  \mu = E[\mu(\Theta)], v = E[v(\Theta)] \text{ and } a = \Var(\mu(\Theta)).
+\end{equation*}
+We may need to use the data at hand to estimate the structural parameters.
+This approach is known as the \hldefn{empirical Bayes estimation}.
+\sidenote{It is important to note that this is different from looking for the
+posterior distribution.
+
+Furthermore, in standard Bayesian methods, the prior distribution is strictly
+assumed to be fixed before any data is observed.}
+
+There are a total of 3 cases of which we shall look into:
+\begin{itemize}
+  \item \hlnoted{Non-parametric estimation}
+    -- where both $f_{X_i \mid \Theta}$ and $\pi$ are unspecified;
+  \item \hlnoted{Semi-parametric estimation}
+    -- where $f_{X_i \mid \Theta}$ is assumed to be of a parametric form but
+    $\pi$ is unspecified; and
+  \item \hlnoted{Parametric estimation}
+    -- where both $f_{X_i \mid \Theta}$ and $\pi$ are both assumed to be of
+    parametric form.
+\end{itemize}
+
+\begin{note}
+  \begin{itemize}
+    \item The decision as to whether to select a parametric model or not
+      depends partially on the situation at hand
+      and partially on the judgement and knowledge
+      of the person performing the analysis.
+
+    \item Non-parametric models have the advantage of being appropriate
+      for a wide variety of situations, a fact that actually makes it
+      the easiest of the 3 to work with.
+  \end{itemize}
+\end{note}
+
+Let us first set up the most general model for tackling these problems.
+
+\begin{defn}[General Model Setting for Empirical Bayes Parameter Estimation]\label{defn:general_model_setting_for_empirical_bayes_parameter_estimation}
+  Consider $r$ groups of policies. For $i \in \{1, \ldots, r \}$, let
+
+  \begin{tabular}{c l}
+  $n_i$       & be the number of years of observations for group $i$, \\
+  $m_{ij}$    & be the number of members/\hldefn{exposure units} \\
+              & for group $i$ in year $j$, for $j \in \{ 1, \ldots, n_i \}$ \\
+  $\vec{m}_i$ & vector for the number of exposure units for group $i$, \\
+              & i.e. $\vec{m}_i = (m_{i1}, \ldots, m_{in_i})$, \\
+  $m_i$       & be the total number of exposure for group $i$, i.e. \\
+              & $m_i = \sum\limits_{j=1}^{n_j} m_{ij}$, \\
+  $m$         & total number of exposure units for all groups, i.e. \\
+              & $m = \sum\limits_{i=1}^{r} m_i = \sum\limits_{i=1}^{r}
+                \sum\limits_{j=1}^{n_i} m_{ij}$, \\
+  $X_{ij}$    & average claim experience (amount/number) of claims \\
+              & for group $i$ in year $j$, for $j \in \{1, \ldots, n_i\}$, \\
+  $\vec{X}_i$ & vector for the average (amount/number) of claims \\
+              & for group $i$, i.e. $\vec{X}_i = (X_{i1}, \ldots, X_{in_i})$, \\
+  $\overline{X}_i$ & past average claim experience for group $i$, i.e. \\
+                   & $\overline{X}_i = \frac{1}{m_i} \sum\limits_{j=1}^{n_i}
+                    m_{ij} X_{ij}$ \\
+  $\overline{X}$ & average claim experience for all groups, i.e. \\
+                 & $\overline{X} = \frac{1}{m} \sum\limits_{i=1}^{r} 
+                    m_i \overline{X}_i = \frac{1}{m} \sum\limits_{i=1}^{r}
+                    \sum\limits_{j=1}^{n_i} m_{ij} X_{ij}$.
+  \end{tabular}
+
+  Furthermore, in this chapter, we shall
+  \begin{itemize}
+    \item denote the unknown risk parameter for group $i$ as $\Theta_i$,
+    \item and assume that $\{ \Theta_i \}_{i=1}^{r}$ is an iid sequence
+      with common density $\pi_{\Theta_i}$;
+    \item assume the experience is different groups are independent
+      (across groups), i.e. 
+      $\vec{X}_i \coprod \vec{X}_j$ for $i \neq j \in \{1, \ldots, r\}$;
+    \item assume $\{ X_{ij} \mid \Theta_i \}_{i=1}^{r}$ are independent
+      (across periods), with density $f_{X_{ij} \mid \Theta}$, where
+      \begin{equation*}
+        E[X_{ij} \mid \Theta_i] \mu(\Theta_i) \quad
+        \Var(X_{ij} \mid \Theta_i) = \frac{v(\Theta_i)}{m_{ij}}.
+      \end{equation*}
+  \end{itemize}
+\end{defn}
+
+% TODO include diagram from module 6
+
+\begin{note}
+  In the last of our assumptions above,
+  notice that $E[X_{ij} \mid \Theta_i] = \mu(\Theta_i)$
+  does not depend on the period.
+\end{note}
+
+% section introduction (end)
+
+\section{Non-Parametric Estimation}%
+\label{sec:non_parametric_estimation}
+% section non_parametric_estimation
+
+Let us now try to use this approach
+to estimate the structural parameters.
+But before that, a lemma.
+
+\begin{lemma}[Weaker Version of Sample Mean and Variance]\label{lemma:weaker_version_of_sample_mean_and_variance}
+  Let
+  \begin{equation*}
+    \overline{Y} = \frac{1}{n} \sum_{i=1}^{n} Y_i
+  \end{equation*}
+  and
+  \begin{equation*}
+    \overline{Y} \mid \Theta
+    = \left[ \left( \frac{1}{n} \sum_{i=1}^{n}
+      Y_i \right) \mid \Theta \right]
+    = \frac{1}{n} \sum_{i=1}^{n} (Y_i \mid \Theta).
+  \end{equation*}
+  Then
+  \begin{enumerate}
+    \item If $\{ Y_i \}_{i=1}^{n}$ are \hlnotec{independent}
+      and have \hlnotec{common mean} $E[Y_i] = \mu$
+      and \hlnotec{common variance} $\Var(Y_i) = v$, then
+      \begin{equation*}
+        E[\overline{Y}] = \mu,\quad
+        E \left[ \frac{1}{n-1} \sum_{i=1}^{n} (Y_i - \overline{Y})^2 \right] =
+        v.
+      \end{equation*}
+
+    \item If $\{ Y_i \mid \Theta \}_{i=1}^{n}$ are \hlnotec{independent} and
+      have \hlnotec{common conditional mean} $E[Y_i \mid \Theta] = \mu(\Theta)$,
+      \hlnotec{common conditional variance} $\Var(Y_i \mid \Theta) = v(\Theta)$,
+      then
+      \begin{gather*}
+        E[\overline{Y} \mid \Theta] = \mu(\Theta) \\
+        E \left[ \frac{1}{n-1} \sum_{i=1}^{n}
+          (Y_i - \overline{Y})^2 \mid \Theta \right] = v(\Theta).
+      \end{gather*}
+  \end{enumerate}
+\end{lemma}
+
+\begin{ex}
+  Prove \cref{lemma:weaker_version_of_sample_mean_and_variance}.
+\end{ex}
+
+In the \hyperref[defn:the_buhlmann_model]{B\"{u}hlmann model},
+we have that
+\begin{itemize}
+  \item $n_i = n$ for all $i \in \{1, \ldots, r\}$, i.e.
+    we have the same number of years of experience for all groups;
+  \item $m_{ij} = 1$ for all $i \in \{1, \ldots, r\},\, j \in \{1, \ldots, n\}$,
+    i.e. only 1 member in each group in each year; and
+  \item that $\{ X_{ij} \mid \Theta_i \}_{j=1}^{n}$ are iid.
+\end{itemize}
+Under
+\cref{defn:general_model_setting_for_empirical_bayes_parameter_estimation},
+we have
+\begin{itemize}
+  \item $m_i = \sum_{j=1}^{n} m_{ij} = n$ ;
+  \item $m = \sum_{i=1}^{r} m_i = nr$ ;
+  \item $\overline{X}_i = \frac{1}{m_i} \sum_{j=1}^{n} m_{ij} X_{ij} =
+    \frac{1}{n} \sum_{j=1}^{n} X_{ij}$; and
+  \item $\overline{X} = \frac{1}{m} \sum_{i=1}^{r} \sum_{j=1}^{n} m_{ij} X_{ij}
+    = \frac{1}{nr} \sum_{i=1}^{r} \sum_{j=1}^{n} X_{ij}$.
+\end{itemize}
+
+\begin{propo}[Non-Parametric Estimation for B\"{u}hlmann Model]\label{propo:non_parametric_estimation_for_buhlmann_model}
+  For a \hyperref[defn:the_buhlmann_model]{B\"{u}hlmann model},
+  we have that
+  \begin{enumerate}
+    \item an unbiased estimator for $\mu$ is $\hat{\mu} = \overline{X}$ ;
+    \item an unbiased estimator for $v$ is
+      \begin{equation*}
+        \hat{v} = \frac{1}{r} \sum_{i=1}^{r} \hat{v}_i,
+      \end{equation*}
+      where
+      \begin{equation*}
+        \hat{v}_i = \frac{1}{n-1} \sum_{j=1}^{n} (X_{ij} - \overline{X}_i)^2,
+      \end{equation*}
+      which is also an unbiased estimator for $v$.
+    \item an unbiased estimator for $a$ is
+      \begin{equation*}
+        \hat{a} = \frac{1}{r-1} \sum_{i=1}^{r} (\overline{X}_i - \overline{X})^2
+        - \frac{\hat{v}}{n}.
+      \end{equation*}
+  \end{enumerate}
+\end{propo}
+
+\begin{ex}
+  Use \cref{lemma:weaker_version_of_sample_mean_and_variance} to
+  prove \cref{propo:non_parametric_estimation_for_buhlmann_model}.
+  This should be an easy and straightforward exercise.
+\end{ex}
+
+\begin{note}
+  \begin{itemize}
+    \item We use $\hat{Z}$ to denote the estimated credibility factor.
+    \item It is important to note that $\hat{Z}$ is usually not
+      an unbiased estimator for $Z$.
+    \item If $\hat{a} \leq 0$, we set $\hat{a} = \hat{Z} = 0$.
+    \item We let the \hldefn{Estimated Bühlmann premium} for group $i$ be
+      \begin{equation*}
+        \hat{Z} \overline{X}_i + (1 - \hat{Z}) \hat{\mu}.
+      \end{equation*}
+  \end{itemize}
+\end{note}
+
+\begin{procedure}[Finding an Estimated B\"{u}hlmann Premium]\label{procedure:finding_an_estimated_buhlmann_premium}
+  \begin{enumerate}
+    \item Use \cref{propo:non_parametric_estimation_for_buhlmann_model}
+      to estimate the structural parameters
+      $\hat{\mu},\, \hat{v}$, and $\hat{a}$.
+    \item Use \cref{thm:buhlmann_credibility_premium}
+      with the structural parameters to estimate the B\"{u}hlmann premium.
+  \end{enumerate}
+\end{procedure}
+
+\begin{eg}
+  In the B\"{u}hlmann model, suppose that:
+  \begin{itemize}
+    \item there are 2 groups with 3 years of experience each; and
+    \item losses are $\vec{X}_1 = (3, 5, 7)$ and $\vec{X}_2 = (6, 12, 9)$.
+  \end{itemize}
+  Estimate the B\"{u}hlmann credibility premium for each group in year 4.
+\end{eg}
+
+\begin{solution}
+  We are given that $r = 2$ and $n = 3$.
+  Then since
+  \begin{equation*}
+    \overline{X}_1 = \frac{3+5+7}{3} = 5 \text{ and }
+    \overline{X}_2 = \frac{6+12+9}{3} = 9,
+  \end{equation*}
+  we have
+  \begin{equation*}
+    \hat{\mu} = \frac{5+9}{2} = 7.
+  \end{equation*}
+  Furthermore,
+  \begin{gather*}
+    \hat{v}_1 = \frac{1}{3-1}[ (3-5)^2 + (5-5)^2 + (7-5)^2 ] = 4 \\
+    \hat{v}_2 = \frac{1}{3-1}[ (6-9)^2 + (12-9)^2 + (9-9)^2 ] = 9,
+  \end{gather*}
+  and so
+  \begin{equation*}
+    \hat{v} = \frac{1}{2} (4 + 9) = \frac{13}{2}.
+  \end{equation*}
+  Lastly,
+  \begin{equation*}
+    \hat{a} = \frac{1}{2-1} [(5-7)^2 + (9-7)^2] - \frac{\frac{13}{2}}{3}
+          = \frac{35}{6}.
+  \end{equation*}
+  Thus the estimated Bühlmann credibility factor is
+  \begin{equation*}
+    \hat{Z} = \frac{n}{n + \frac{\hat{v}}{\hat{a}}}
+    = \frac{3}{3 + \frac{\frac{13}{2}}{\frac{35}{6}}}
+    = \frac{35}{48}.
+  \end{equation*}
+  It follows that the estimated Búhlmann credibility premium
+  for group 1 and 2 are
+  \begin{gather*}
+    \hat{Z} \overline{X}_1 + (1 - \hat{Z}) 7 = \frac{133}{24} \\
+    \hat{Z} \overline{X}_2 + (1 - \hat{Z}) 7= \frac{203}{4},
+  \end{gather*}
+  respectively.
+\end{solution}
+
+\newthought{In the} \hyperref[thm:buhlmann_straub_model]{Bühlmann-Straub model},
+the notation mostly follows what is in
+\cref{defn:general_model_setting_for_empirical_bayes_parameter_estimation}.
+
+\begin{propo}[Non-Parametric Estimation for Bühlmann-Straub Model]\label{propo:non_parametric_estimation_for_buhlmann_straub_model}
+  For a Bühlmann-Straub model, we have that
+  \begin{enumerate}
+    \item an unbiased estimator for $\mu$ is $\hat{\mu} = \overline{X}$ ;
+    \item an unbiased estimator for $v$ is
+      \begin{equation*}
+        \hat{v} = \frac{1}{\sum_{i=1}^{r} (n_i - 1)}
+          \sum_{i=1}^{r} (n_i - 1) \hat{v}_i,
+      \end{equation*}
+      where
+      \begin{equation*}
+        \hat{v}_i = \frac{1}{n_i - 1} \sum_{j=1}^{n_i}
+          m_{ij} (X_{ij} - \overline{X}_i)^2,
+      \end{equation*}
+      which is also an unbiased estimator for $v$; and
+    \item an unbiased estimator for $a$ is
+      \begin{equation*}
+        \hat{a} = \frac{m}{m^2 - \sum_{i=1}^{r} m_i^2} \left( 
+          \sum_{i=1}^{r} m_i (\overline{X}_i - \overline{X})^2 - (r-1)\hat{v}
+        \right)
+      \end{equation*}
+  \end{enumerate}
+\end{propo}
+\marginnote{The proof of
+\cref{propo:non_parametric_estimation_for_buhlmann_straub_model} is also a
+follow your nose proof, but I shall include it here.}
+
+\begin{proof}
+  \hlwarn{To be added.}
+\end{proof}
+
+\begin{note}[Estimated Bühlmann-Straub Premium]\label{note:estimated_buhlmann_straub_premium}
+  \begin{itemize}
+    \item With the Bühlmann-Straub model, we can actually even
+      estimate the premium for \hlnotec{each member group $i$},
+      which is given by
+      \begin{equation*}
+        \hat{Z}_i \overline{X}_i + (1 - \hat{Z}_i) \hat{\mu},
+      \end{equation*}
+      where the \hldefn{Estimated Bühlmann-Straub Credibility Factor}
+      for group $i$ is
+      \begin{equation*}
+        \hat{Z}_i = \frac{m_i}{m_i + \frac{\hat{v}}{\hat{a}}}.
+      \end{equation*}
+    \item The estimated Bühlmann-Straub premium for \hlnotec{the whole group $i$}
+      in year $n_i + 1$ is
+      \begin{equation*}
+        m_{i (n_i+1)} \left(\hat{Z}_i \overline{X}_i + (1 - \hat{Z})\hat{\mu}\right).
+      \end{equation*}
+    \item Again, when $\hat{a} \leq 0$, we set $\hat{a} = \hat{Z} = 0$.
+  \end{itemize}
+\end{note}
+
+\begin{procedure}[Finding an Estimated Bühlmann-Straub Premium]\label{procedure:finding_an_estimated_buhlmann_straub_premium}
+  \begin{enumerate}
+    \item Use \cref{propo:non_parametric_estimation_for_buhlmann_straub_model}
+      to find the estimated structural parameters $\hat{\mu},\, \hat{v}$, and
+      $\hat{a}$.
+    \item Use \cref{note:estimated_buhlmann_straub_premium}
+      to calculate the appropriate premiums for the appropriate setting.
+  \end{enumerate}
+\end{procedure}
+
+\paragraph{Another estimator for $\mu$}
+There is another estimator of which we can estimate $\mu$.
+
+\begin{defn}[Total Loss of All Groups]\label{defn:total_loss_of_all_groups}
+  The \hlnoteb{total loss (TL)} of all groups in the past is defined as
+  \begin{equation*}
+    \TL = \sum_{i=1}^{r} m_i \overline{X}_i.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Total Premium of All Groups]\label{defn:total_premium_of_all_groups}
+  If we \hlnotec{charged credibility premium in the past}, then we define
+  the \hlnoteb{total premium (TP)}  of all groups as
+  \begin{equation*}
+    \TP = \sum_{i=1}^{r} m_i \left( \hat{Z}_i \overline{X}_i + (1 -
+    \hat{Z}_i)\mu \right).
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[Credibility Weighted Average]\index{Credibility Weighted Average}\label{propo:credibility_weighted_average}
+  If $\TL = \TP$, then
+  \begin{equation*}
+    \hat{\mu} = \frac{1}{\sum_{i=1}^{r} \hat{Z}_i}
+      \sum_{i=1}^{r} \hat{Z}_i \overline{X}_i \quad,
+  \end{equation*}
+  called a \hlnoteb{credibility weighted average},
+  is an unbiased estimator for $\mu$.
+\end{propo}
+
+\begin{ex}
+  Prove \cref{propo:credibility_weighted_average}.
+  Again, this is an easy exercise.
+\end{ex}
+
+\begin{eg}[Example for Estimated Bühlmann-Straub Premium]
+  Past claim data of 2 groups is given as follows.
+  \begin{table}[ht]
+    \centering
+    \caption{Past claim data for Example for Estimated Bühlmann-Straub Premium}
+    \label{table:past_claim_data_for_example_for_estimated_buhlmann_straub_premium}
+    \begin{tabular}{l | c c c c}
+    Year                         & 1   & 2    & 3   & 4 \\
+    \hline
+    Total claims in group 1      &     & 750  & 600 & \\
+    Number of members in group 1 &     & 3    & 2   & 4 \\
+    \hline
+    Total claims in group 2      & 975 & 1200 & 900 & \\
+    Number of members in group 2 & 5   & 6    & 4   & 5
+    \end{tabular}
+  \end{table}
+  \begin{enumerate}
+    \item Calculate the unbiased estimates for $\mu$, $v$ and $a$
+      in the Bühlmann-Straub model.
+    \item Determine the Bühlmann-Straub premium for each group in year 4.
+    \item Redo part (2) if $\mu$ is estimated
+      by the credibility weighted average.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item Note
+      \begin{equation*}
+        r = 2,\quad n_1 = 2,\quad n_2 = 3.
+      \end{equation*}
+      Furthermore, we are given that
+      \begin{gather*}
+        m_{11} X_{11} = 750\quad m_{12} X_{12} = 600 \\
+        m_{21} X_{21} = 975\quad m_{22} X_{22} = 1200\quad m_{23} X_{23} = 900.
+      \end{gather*}
+      Now
+      \begin{align*}
+        \overline{X}_1 &= \frac{750 + 600}{3 + 2} = 270 \\
+        \overline{X}_2 &= \frac{975 + 1200 + 900}{5 + 6 + 4} = 205.
+      \end{align*}
+      Thus
+      \begin{equation*}
+        \hat{\mu} = \overline{X} = \frac{5(270) + 15(205)}{5 + 15} = 221.25.
+      \end{equation*}
+      Further,
+      \begin{align*}
+        \hat{v}_1 &= \frac{1}{2-1} \left[ 3 \left( \frac{750}{3} - 270 \right)^2
+            + 2 \left( \frac{600}{2} - 270 \right)^2 \right]
+            = 3000 \\
+        \hat{v}_2 &= \frac{1}{3-1} \left[ 5 \left( \frac{975}{5} - 205 \right)^2
+            + 6 \left( \frac{1200}{6} - 205 \right)^2 \right. \\
+            &\quad\left.+ 4 \left( \frac{900}{4} - 205 \right)^2 \right]
+            = 1125,
+      \end{align*}
+      and so
+      \begin{align*}
+        \hat{v} = \frac{1}{(2 - 1) + (3 - 1)} \left[ 
+          (2 - 1) 3000 + (3 - 1) 1125
+        \right] = 1750.
+      \end{align*}
+      Finally,
+      \begin{align*}
+        a &= \frac{20}{20^2 - 5^2 - 15^2} \left[
+          5 \left( 270 - 221.25 \right)^2 + 15 (205 - 221.25)^2 \right. \\
+          &\quad\left.- (2-1) 1750 \right] = 1879.17.
+      \end{align*}
+
+    \item It follows that
+      \begin{equation*}
+        \hat{Z}_1 = \frac{5}{5 + \frac{\hat{v}}{\hat{a}}} = 0.843 \text{ and }
+        \hat{Z}_2 = \frac{15}{15 + \frac{\hat{v}}{\hat{a}}} = 0.9415.
+      \end{equation*}
+      Thus the estimated Bühlmann-Straub premium for group 1 and 2 are
+      \begin{align*}
+        4 [ \hat{Z}_1 \overline{X}_1 + (1 - \hat{Z}_1) \hat{\mu} ] &= 1049.38 \\
+        5 [ \hat{Z}_2 \overline{X}_2 + (1 - \hat{Z}_2) \hat{\mu} ] &= 1029.75,
+      \end{align*}
+      respectively.
+
+    \item If we estimate $\mu$ by the credibility weighted average, then
+      \begin{equation*}
+        \hat{\mu} = \frac{\hat{Z}_1 \overline{X}_1 + \hat{Z}_2
+        \overline{X}_2}{\hat{Z}_1 + \hat{Z}_2} = 235.7061.
+      \end{equation*}
+      Thus the estimated Bühlmann-Straub premium for group 1 and 2,
+      using the credibility weighted average estimator of $\mu$,
+      are
+      \begin{align*}
+        4 [ \hat{Z}_1 \overline{X}_1 + (1 - \hat{Z}_1) \hat{\mu} ] &= 1058.44 \\
+        5 [ \hat{Z}_2 \overline{X}_2 + (1 - \hat{Z}_2) \hat{\mu} ] &= 1033.98,
+      \end{align*}
+      respectively.
+  \end{enumerate}
+\end{solution}
+
+% section non_parametric_estimation (end)
+
+\section{Semi-Parametric Estimation}%
+\label{sec:semi_parametric_estimation}
+% section semi_parametric_estimation
+
+\marginnote{
+\begin{textbook}
+  \citealt{klugman2012} Section 19.3 (pg 428)
+\end{textbook}
+}
+
+Recall that the semi-parametric approach is when we assume that $f_{X_{ij} \mid
+\Theta}$ is known.
+
+In semi-parametric estimation,
+some \hlnotee{relationship} between $\mu,\, v$ and $a$ is established
+which makes estimation simpler.
+
+\begin{procedure}[Relationship between Structural Parameters in Semi-Parameteric Estimation]\label{procedure:relationship_between_structural_parameters_in_semi_parameteric_estimation}
+  \begin{enumerate}
+    \item Find $\mu(\Theta)$ and $v(\Theta)$.
+    \item Find $\mu, v, a$ and see if there is
+      some relationship between these structural parameters.
+  \end{enumerate}
+\end{procedure}
+
+\begin{eg}[Poisson Frequency Model for Semi-Parametric Estimation]
+  Suppose $m_{ij} X_{ij} \mid \Theta_i \sim \Poi(m_{ij} \Theta_i)$.
+  Find a relationship between the structural parameters, if any.
+\end{eg}
+
+\begin{solution}
+  First, we have
+  \begin{align*}
+    \mu(\theta_i) &= E[X_{ij} \mid \Theta_i = \theta_i]
+           = \frac{1}{m_{ij}} E [m_{ij} X_{ij} \mid \Theta_i = \theta_i]
+           = \frac{1}{m_{ij}} m_{ij} \theta_i = \theta_i \\
+    v(\theta_i) &= m_{ij} \Var(X_{ij} \mid \Theta_i = \theta_i)
+           = \frac{m_{ij}}{m_{ij}^2} \Var(m_{ij}X_{ij}
+             \mid \Theta_i = \theta_i) \\
+          &= \frac{1}{m_{ij}} m_{ij} \theta_i = \theta_i.
+  \end{align*}
+  It's rather clear at this point that $v(\theta_i) = \mu(\theta_i)$
+  and so $\mu = v$.
+\end{solution}
+
+\begin{eg}[Binomial Frequency Model for Semi-Parametric Estimation]
+  Suppose $m_{ij} X_{ij} \mid \Theta_i \sim \Bin(m_{ij}, \Theta_i)$.
+  Find a relationship between the structural parameters, if any.
+\end{eg}
+
+\begin{solution}
+  First, we have
+  \begin{align*}
+    \mu(\theta_i) &= E[X_{ij} \mid \Theta_i = \theta_i]
+           = \frac{1}{m_{ij}} m_{ij} \theta_i = \theta_i \\
+    v(\theta_i) &= m_{ij} \Var(X_{ij} \mid \Theta_i = \theta_i)
+           = \frac{1}{m_{ij}} m_{ij} \theta_i (1 - \theta_i)
+           = \theta_i (1 - \theta_i).
+  \end{align*}
+  Thus
+  \begin{align*}
+    \mu &= E[\mu(\Theta_i)] = E[\Theta_i] \\
+    v &= E[v(\Theta_i)] = E[\Theta_i - \Theta_i^2] = \mu - \Var(\Theta_i) -
+        \mu^2 \\
+    a &= \Var(\mu(\Theta_i)) = E[\Theta_i^2] - \mu^2.
+  \end{align*}
+\end{solution}
+
+\begin{eg}[Exponential Severity Model for Semi-Parametric Estimation]
+  Suppose $m_{ij} = 1$ for all $i, j$
+  and $X_{ij} \mid \Theta_i \sim \Exp(\Theta_i)$.
+  Find a relationship between the structural parameters, if any.
+\end{eg}
+
+\begin{solution}
+  First, we have
+  \begin{align*}
+    \mu(\theta_i) &= E[X_{ij} \mid \Theta_i = \theta_i] = \theta_i \\
+    v(\theta_i) &= \Var(X_{ij} \mid \Theta_i = \theta_i) = \theta_i^2.
+  \end{align*}
+  So
+  \begin{align*}
+    \mu &= E[\mu(\Theta_i)] = E[\Theta_i] \\
+    v &= E[v(\Theta_i)] = E[\Theta_i^2] = \Var(\Theta_i) + \mu^2 \\
+    a &= \Var(\mu(\Theta_i)) = \Var(\Theta_i) = v - \mu^2.
+  \end{align*}
+  Thus, in particular,
+  \begin{equation*}
+    \hat{a} = \hat{v} - \hat{\mu}^2.
+  \end{equation*}
+\end{solution}
+
+\begin{eg}[Using Semi-Parametric Approach for Estimation]
+  In the past year, the distribution of automobile insurance policyholders
+  by number of claims is given by
+  \cref{table:distribution_of_automobile_insurance_policy_holders_by_number_of_claims}.
+  \begin{table}[ht]
+    \centering
+    \caption{Distribution of Automobile Insurance Policy Holders by Number of
+    Claims}
+    \label{table:distribution_of_automobile_insurance_policy_holders_by_number_of_claims}
+    \begin{tabular}{c c}
+    Number of claims & Number of policyholders \\
+    \hline
+    0                & 1563 \\
+    1                & 271 \\
+    2                & 32 \\
+    3                & 7 \\
+    4                & 2 \\
+    \hline
+    Total            & 1875
+    \end{tabular}
+  \end{table}
+  Assume a (conditional) \hlnotec{Poisson} distribution for
+  the number claims for each policy.
+
+  For each policyholder, obtain a credibility estimate for
+  the number of claims next year based on the past year's experience.
+\end{eg}
+
+\begin{solution}
+  Note that we have that each of the policyholders has a well-defined
+  risk parameter in this case, and so
+  \begin{equation*}
+    r = 1875 \quad m_{ij} = 1.
+  \end{equation*}
+  Also, since this data is from the previous year, $n_i = 1$.
+  \sidenote{Ayy! We're in the Bühlmann model!}
+
+  We are given that $X_{ij} \mid \Theta_i \sim \Poi(\Theta_i)$.
+  So
+  \begin{align*}
+    \mu(\theta_i) &= E[X_{ij} \mid \Theta_i = \theta_i] = \theta_i \\
+    v(\theta_i) &= \Var(X_{ij} \mid \Theta_i = \theta_i) = \theta_i.
+  \end{align*}
+  Thus
+  \begin{equation*}
+    \mu = E[\Theta_i] = v \text{ and } a = \Var(\Theta_i).
+  \end{equation*}
+  This means that we can estimate $v$ using $\hat{\mu} = \overline{X}$.
+  Now
+  \begin{equation*}
+    \hat{v} = \hat{\mu} = \overline{X}
+      = \frac{271(1) + 32(2) + 7(3) + 2(4)}{1875} = 0.194.
+  \end{equation*}
+  Further, using the unbiased estimator of $a$ from
+  \cref{propo:non_parametric_estimation_for_buhlmann_model},
+  \begin{align*}
+    \hat{a} &= \frac{1}{1875 - 1} [ (0 - 0.194)^2 + (1 - 0.194)^2 \\
+            &\quad+ (2 - 0.194)^2 + (3 - 0.194)^2 + (4 - 0.194)^2 ] -
+              \frac{0.194}{1} \\
+            &= 0.032
+  \end{align*}
+  The estimated Bühlmann credibility factor is thus
+  \begin{equation*}
+    \hat{Z} = \frac{1}{1 + \frac{0.194}{0.032}} = 0.14.
+  \end{equation*}
+  It follows that the estimated credibility premium for a policyholder
+  for next year is
+  \begin{equation*}
+    0.14 X_{i} + 0.86 (0.194),
+  \end{equation*}
+  where $X_{i}$ is the amount that was claimed by the policyholder $i$ 
+  in the past year.
+\end{solution}
+
+% section semi_parametric_estimation (end)
+
+\section{Parametric Estimation}%
+\label{sec:parametric_estimation}
+% section parametric_estimation
+
+In this section, as discussed before, we shall assume
+that both $X_{ij} \mid \Theta_i$ and $\Theta_i$ are parametric models.
+
+In this case, we shall rely on \hlnotea{maximum likelihood estimation (MLE)} 
+to estimate the structural parameters.
+As in semi-parametric estimation, the structural parameters
+may have some relationship, which should be used for estimation.
+
+\begin{procedure}[Parametric Estimation of Structural Parameters]\label{procedure:parametric_estimation_of_structural_parameters}
+  Note that our assumptions state that if $\{ \vec{X}_i \}_{i=1}^{n}$,
+  then we shall assume $\vec{X}_i \coprod \vec{X}_j$, and that
+  $X_{ij} \coprod X_{ik}$.
+  \begin{enumerate}
+    \item Construct the following likelihood function $L$
+      \begin{align*}
+        L &= \prod_{i=1}^{r} f_{\vec{X}_i}(\vec{x}_i) \\
+          &= \prod_{i=1}^{r} \int_{\forall \theta_i}
+            f_{\vec{X}_i \mid \Theta_i} (\vec{x}_i \mid \theta_i)
+            \pi_{\Theta_i}(\theta_i) \dif{\theta_i} \\
+          &= \prod_{i=1}^{r} \int_{\forall \theta_i}
+              \left( \prod_{j=1}^{n_i}
+                f_{X_{ij} \mid \Theta_i} (x_{ij} \mid \theta_i)
+              \right)
+            \pi_{\Theta_i}(\theta_i) \dif{\theta_i} \\
+      \end{align*}
+    \item Maximize likelihood function (or log-likelihood function)
+      by differentiation.
+    \item Make use of the \hlnotea{invariance property of MLE}
+      to estimate $\theta$.
+  \end{enumerate}
+\end{procedure}
+
+\begin{note}[Invariance Property of the MLE]\label{note:invariance_property_of_the_mle}
+  For us, the \hldefn{invariance property of the MLE} states that
+  if $\hat{\gamma}$ is an MLE of the parameter $\gamma$,
+  then if $g$ is injective, then if $\tau = g(\gamma)$,
+  we have that $\hat{\tau} = g(\hat{\gamma})$ is the MLE of $\tau$.
+\end{note}
+
+\begin{eg}[First Parametric Estimation Example]
+  Consider the Bühlmann model with all $n_i = n$ and $m_{ij} = 1$.
+  Assume that $X_{ij} \mid \Theta_i \sim \Poi(\Theta_i)$ 
+  and $\Theta_i \sim \Exp(\gamma)$.
+  \begin{enumerate}
+    \item Find $\hat{\mu},\, \hat{v}$, and $\hat{a}$,
+      the MLE of $\mu,\, v$, and $a$, respectively.
+    \item Use $\hat{\mu},\, \hat{v}$, and $\hat{a}$
+      to estimate next year's premium for each group.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item The likelihood function is
+      \begin{align*}
+        L(\gamma)
+        &= \prod_{i=1}^{r} \int_{0}^{\infty} \left( 
+          \prod_{j=1}^{n} \frac{\theta_i^{x_{ij}} e^{-\theta_i}}{x_{ij}!}
+        \right) \frac{1}{\gamma} e^{-\frac{\theta_i}{\gamma}} \dif{\theta_i} \\
+        &\propto \frac{1}{\gamma^r} \prod_{i=1}^{r} \int_{0}^{\infty}
+          \theta_i^{ \sum_{i=1}^{r} x_{ij} }
+          e^{ - \left( n - \frac{1}{\gamma} \right) \theta_i } \dif{\theta_i} \\
+        &= \frac{1}{\gamma^r} \prod_{i=1}^{r} \int_{0}^{\infty}
+          \theta_i^{\alpha_i - 1} e^{-\frac{\theta_i}{\beta}} \dif{\theta_i},
+      \end{align*}
+      where
+      \begin{equation*}
+        \alpha_i = \sum_{j=1}^{n} x_{ij} + 1, \quad
+        \beta = \frac{1}{n + \frac{1}{\gamma}}.
+      \end{equation*}
+      Continuing,
+      \begin{align*}
+        L(\gamma)
+        &\propto \frac{1}{\gamma^r} \prod_{i=1}^{r}
+        \Gamma(\alpha_i) \beta^{\alpha_i} \cancelto{1}{\int_{0}^{\infty}
+          \frac{1}{\Gamma(\alpha_i) \beta^{\alpha_i}}
+          \theta_i^{\alpha_i - 1} e^{-\frac{\theta_i}{\gamma}} \dif{\theta_i}} \\
+        &= \frac{1}{\gamma^r} \prod_{i=1}^{r} \Gamma(\alpha_i) \beta^{\alpha_i} \\
+        &\propto \frac{1}{\gamma^r} \prod_{i=1}^{r} \left( \frac{1}{n +
+          \gamma^{-1}} \right)^{\alpha_i} \\
+        &= \frac{1}{\gamma^r} \left(
+          \frac{1}{n + \gamma^{-1}} \right)^{ \sum_{i=1}^{r} \alpha_i } \\
+        &= \frac{1}{\gamma^r} \left( \frac{1}{n + \gamma^{-1}} \right)^\alpha
+      \end{align*}
+      where we let
+      \begin{equation*}
+        \alpha = \sum_{i=1}^{r} \alpha_i
+          = \sum_{i=1}^{r} \left( \sum_{j=1}^{n} x_{ij} + 1 \right)
+          = r + \sum_{i=1}^{r} \sum_{j=1}^{n} x_{ij}.
+      \end{equation*}
+
+      The log-likelihood function is
+      \begin{equation*}
+        \ell(\gamma) = - r \ln \gamma - \alpha \ln (n + \gamma^{-1}) + \ln C.
+      \end{equation*}
+      Derivative of $\ell$ is
+      \begin{align*}
+        \ell'(\gamma)
+        = -\frac{r}{\gamma} + \frac{\alpha \gamma^{-2}}{n + \gamma^{-1}}
+        = \frac{\alpha - r - nr\gamma}{n\gamma^2 + \gamma}.
+      \end{align*}
+      Letting the above to $0$, we get
+      \begin{align*}
+        \hat{\gamma} = \frac{\alpha - r}{nr}
+        = \frac{1}{nr} \sum_{i=1}^{r} \sum_{j=1}^{n} X_{ij} = \overline{X}.
+      \end{align*}
+
+      Now to estimate $\mu,\, v$, and $a$, notice that
+      \begin{align*}
+        \mu(\Theta_i) &= E[X_{ij} \mid \Theta_i] = \Theta_i \\
+        v(\Theta_i) &= \Var(X_{ij} \mid \Theta_i) = \Theta_i,
+      \end{align*}
+      and so
+      \begin{align*}
+        \mu &= E[\mu(\Theta_i)] = E[\Theta_i] = \gamma \\
+        v &= E[v(\Theta_i)] = E[\Theta_i] = \gamma = \mu \\
+        a &= \Var(\mu(\Theta_i)) = \Var(\Theta_i) = \gamma^2 = \mu^2.
+      \end{align*}
+      Thus, we may conclude that
+      \begin{equation*}
+        \hat{\mu} = \overline{X} = \hat{v},
+      \end{equation*}
+      and by the \hlnotea{invariance property of the MLE}, we have
+      \begin{equation*}
+        \hat{a} = \hat{\gamma^2} = \hat{\gamma}^2 = \overline{X}^2.
+      \end{equation*}
+
+    \item To estimate next year's premium, we calculate the credibility factor:
+      \begin{equation*}
+        \hat{Z} = \frac{n}{n + \frac{\hat{v}}{\hat{a}}}
+              = \frac{n}{n + \overline{X}^{-1}}.
+      \end{equation*}
+      Thus next year's premium is
+      \begin{equation*}
+        P = \hat{Z} \overline{X}_i + (1 - \hat{Z})\hat{\mu}
+          = \frac{n\overline{X}_i + 1}{n + \overline{X}^{-1}}.
+      \end{equation*}
+  \end{enumerate}
+\end{solution}
+
+% section parametric_estimation (end)
+
+% chapter empirical_bayes_parameter_estimation (end)
+
+\tuftepart{Parametric Statistical Methods}\label{part:parametric_statistical_methods}
+
+\chapter{Parameter Estimation for Loss Models -- Frequency Models}%
+\label{chp:parameter_estimation_for_loss_models_frequency_models}
+% chapter parameter_estimation_for_loss_models_frequency_models
+
+\marginnote{
+\begin{warning}[Chapter requires revision]
+  Things seem very badly introduced
+  and it's hard to find where things come from and why something follows,
+  why is the likelihood function a definition instead of a derivation, etc.
+\end{warning}
+}
+
+We depart from \hyperref[part:credibility_theory]{credibility theory}
+and look into filling some of the overflowed contents from ACTSC431.
+
+\section{Review of Policy Adjustments for Severity Models}%
+\label{sec:review_of_policy_adjustments_for_severity_models}
+% section review_of_policy_adjustments_for_severity_models
+
+We are interested in \hlnotea{frequency models} of the following form.
+Let $N_L$ be the number of losses and $N_P$ be the number of payments, i.e.
+\begin{equation*}
+  N_P = \sum_{i=1}^{N_L} I_i,
+\end{equation*}
+where
+\begin{equation*}
+  I_i = \begin{cases}
+    1 & i\text{-th loss results in a non-zero payment,} \\
+    0 & i\text{-th loss results in a zero payment,}
+  \end{cases}
+\end{equation*}
+and if $N_L = 0$, then $N_P = 0$.
+
+Realistically, it is much easier for an insurer to collect information
+from payments that are actually made instead of cases where a loss occurring.
+Thus, with the above $N_P$ as an rv, we often want to try estimate
+the parameters of $N_L$. We shall do this with 2 methods:
+\begin{itemize}
+  \item MLE; and
+  \item moment estimation.
+\end{itemize}
+
+We assume that $\{ I_i \}_{i=1}^{\infty}$ are iid, independent of $N_L$,
+and
+\begin{equation*}
+  P(I_i = 1) = q,
+\end{equation*}
+where $q$ is a value of which we shall estimate.
+
+There is also a result from ACTSC431 of which we shall be using here.
+We shall also quickly prove the statement as a warm up exercise.
+
+\begin{propo}[PGF of Number of Payments]\label{propo:pgf_of_number_of_payments}
+  If $N_P$ is the rv for the number of payments and $N_L$ is the rv
+  for the number of losses, then
+  \begin{equation*}
+    G_{N_p}(t) = G_{N_L}(1 - q + qt),
+  \end{equation*}
+  where $G_X$ is the \hldefn{probability generating function} (pgf)
+  of the rv $X$.
+\end{propo}
+
+\begin{proof}
+  Note that
+  \begin{equation*}
+    G_I(t) = E [ t^I ] = qt^1 + (1 - q)t^0 = 1 - q + qt.
+  \end{equation*}
+  Observe that since $\{ I_i \}_{i=1}^{\infty}$ is assumed to be iid,
+  we have
+  \begin{align*}
+    G_{N_P}(t)
+    &= E \left[ t^{N_P} \right]
+     = E \left[ \sum_{i=1}^{N_L} I_i \right]
+     = E \left[ E \left[ \sum_{i=1}^{N_L} I_i \mid N_L \right] \right] \\
+    &= E \left[ \prod_{i=1}^{N_L} E \left[ t^{I_i} \mid N_L \right] \right]
+     = E \left[ \prod_{i=1}^{N_L} E \left[ t^{I_i} \right] \right] \\
+    &= E \left[ G_I(t)^{N_L} \right]
+     = G_{N_L}(G_I(t)) \\
+    &= G_{N_L}(1 - q + qt).
+  \end{align*}
+\end{proof}
+
+\begin{notation}
+  We shall denote the pmf of $N_P$ as
+  \begin{equation*}
+    p_k = P(N_P = k).
+  \end{equation*}
+\end{notation}
+
+% section review_of_policy_adjustments_for_severity_models (end)
+
+\section{MLE for Parameters of Frequency Distribution}%
+\label{sec:mle_for_parameters_of_frequency_distribution}
+% section mle_for_parameters_of_frequency_distribution
+
+We now want to find a way to construct a likelihood so that we may use
+the MLE method.
+
+\marginnote{
+\begin{procedure}[MLE for Frequency Distribution Parameters]\label{procedure:mle_for_frequency_distribution_parameters}
+  \begin{enumerate}
+    \item Find the distribution of $N_P$.
+    \item Find the likelihood function using the appropriate
+      likelihood formula, and simply follow the procedure for finding MLE.
+  \end{enumerate}
+\end{procedure}
+}
+For this section, we shall assume that the insurer has complete but grouped
+data for the number of payments made by policyholders.
+More specifically, let $n_k$ be the number of policies with $k$ payments.
+
+Since there is complete data, the likelihood function is given by
+\begin{equation*}
+  L = \prod_{k=0}^{\infty} (p_k)^{n_k}.
+\end{equation*}
+If the number of policies with, say, greater than $m$ claims are grouped,
+then the likelihood function is given by
+\begin{equation*}
+  L = \prod_{k=0}^{m} (p_k)^{n_k} \left( 1 - \sum_{k=0}^{m} p_k \right)^{n_{m+1}
+  + n_{m+2} + \hdots}.
+\end{equation*}
+
+\begin{eg}
+  Suppose $N_L \sim \Poi(\lambda)$, and
+  the probability that a non-zero payment is known to be $q$.
+  Let $n_k$ be the number of policies with $k$ payments,
+  for $k = 0, 1, 2, \ldots$.
+  \begin{enumerate}
+    \item Identify the distribution of the number of payments $N_P$.
+    \item Find the MLE of $\lambda$.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  \begin{enumerate}
+    \item We see that
+      \begin{align*}
+        G_{N_P}(t) &= G_{N_L}(1 - q + qt) = e^{\lambda(1 - q + qt - 1)} \\
+                   &= e^{-\lambda q(t - 1)},
+      \end{align*}
+      which is the pgf of $\Poi(\lambda q)$. Thus $N_P \sim \Poi(\lambda q)$.
+
+    \item Note that the pmf of $N_P \sim \Poi(\lambda q)$ is
+      \begin{equation*}
+        p_k = \frac{(\lambda q)^k e^{-\lambda q}}{k!}.
+      \end{equation*}
+      Thus the likelihood function is
+      \begin{equation*}
+        L(\lambda) = \prod_{k=0}^{\infty} \left(\frac{(\lambda q)^k e^{-\lambda
+        q}}{k!}\right)^{n_k},
+      \end{equation*}
+      so the log-likelihood function is
+      \begin{align*}
+        \ell(\lambda)
+        &= \sum_{k = 0}^{\infty} n_k \ln \frac{(\lambda q)^k e^{-\lambda q}}{k!}
+        \\
+        &= \sum_{k=0}^{\infty} n_k \left( 
+          k \ln (\lambda q) - \lambda q - \ln k!
+        \right).
+      \end{align*}
+      Equating its derivative (which is taken wrt $\lambda$) to $0$,
+      we have
+      \begin{equation*}
+        0 = \ell(\hat{\lambda})
+        = \sum_{k=0}^{\infty} \left( \frac{n_k k q}{\hat{\lambda} q} - n_k q
+        \right),
+      \end{equation*}
+      which thus
+      \begin{equation*}
+        \hat{\lambda} = \frac{ \sum_{k=0}^{\infty} kn_k }{q \sum_{k=0}^{\infty}
+          n_k}.
+      \end{equation*}
+
+      It is interesting to note that $\hat{\lambda}$
+      is a somewhat sensible estimation.
+      In particular, it is looking at the
+      total number of payments over the expected total number of payments.
+  \end{enumerate}
+\end{solution}
+
+\begin{eg}
+  The number of accidents per driver in one year is given in
+  \cref{table:number_of_accidents_per_driver_in_one_year}.
+  \begin{table}[ht]
+    \centering
+    \caption{Number of Accidents per driver in one year}
+    \label{table:number_of_accidents_per_driver_in_one_year}
+    \begin{tabular}{c c}
+    Number of accidents & Number of drivers \\
+    \hline
+    0                   & 20592 \\
+    1                   & 2651 \\
+    2                   & 297 \\
+    3                   & 41 \\
+    4                   & 7 \\
+    5                   & 0 \\
+    6                   & 1 \\
+    $\geq$ 7            & 0 \\
+    \hline
+    Total               & 23589
+    \end{tabular}
+  \end{table}
+  Assume that the number of accidents per driver
+  in one year is as follows and estimate the given parameters.
+  \begin{enumerate}
+    \item $\Poi(\lambda)$. Find MLE for $\lambda$.
+    \item $\NB(\beta, r)$. Find MLE for $\beta$ and $r$.
+  \end{enumerate}
+\end{eg}
+
+\begin{solution}
+  Since it is not stated, we shall assume that $q = 1$,
+  and so $N_P = N_L$.
+  \begin{enumerate}
+    \item Using what we did in the last example, we have
+      \begin{align*}
+        \hat{\lambda} &= \frac{20592(0) + 2651(1) + 297(2) + 41(3) + 7(4)
+          + 0(5) + 1(6) + 0(7)}{23589} \\
+                      &\approx 0.1442.
+      \end{align*}
+
+    \item We are given that $N_P = N_L \sim \NB(\beta, r)$. In particular,
+      \begin{equation*}
+        p_k = \frac{(r+k-1)!}{k!(r-1)!} \left( \frac{1}{1 + \beta} \right)^r
+        \left( \frac{\beta}{1 + \beta} \right)^k.
+      \end{equation*}
+      Note that
+      \begin{equation*}
+        \frac{(r+k-1)!}{(r-1)!} = (r+k-1)(r+k-2)\hdots(r)
+          = \prod_{m=0}^{k-1} (r-m).
+      \end{equation*}
+      Since there are 0 drivers in the $\geq$ 7 case, we can use the
+      regular formula of the likelihood function.
+      In particular, the log-likelihood is
+      \begin{align*}
+        \ell(\beta, r)
+        &= \ln \left\{ \prod_{k=1}^{\infty} (p_k)^{n_k} \right\} \\
+        &= \sum_{k=0}^{\infty} n_k \ln p_k \\
+        &= \sum_{k=0}^{\infty} n_k \ln \left\{ 
+          \sum_{m=1}^{k-1} \ln (r-m) - \ln k!
+          - (r+k) \ln (1 + \beta) + k \ln \beta
+        \right\}
+      \end{align*}
+      Letting $\frac{\dif{\ell}}{\dif{\beta}} = 0$, we get
+      \begin{align*}
+        0 &= \sum_{k=0}^{\infty} n_k \left\{ \frac{-(r+k)}{1+\hat{\beta}} +
+            \frac{k}{\hat{\beta}} \right\} \\
+          &= \sum_{k=0}^{\infty} n_k \left\{ \frac{-\hat{\beta}(r+k) 
+            + k(1 + \hat{\beta})}{(1 + \hat{\beta}) \hat{\beta}} \right\}.
+      \end{align*}
+      Thus
+      \begin{equation*}
+        \hat{\beta} = \frac{ \sum_{k=0}^{\infty} kn_k }{n \hat{r}},
+      \end{equation*}
+      where $n = \sum_{k=0}^{\infty} n_k$.
+      Letting $\frac{\dif{\ell}}{\dif{r}} = 0$, we get
+      \begin{align*}
+        0 &= \sum_{k=0}^{\infty} n_k \left\{ \sum_{m=0}^{k-1}
+            \frac{1}{\hat{r} + m} - \ln (1 + \hat{\beta}) \right\} \\
+          &= \sum_{k=0}^{\infty} n_k \left\{ \sum_{m=0}^{k-1}
+            \frac{1}{\hat{r} + m} - \ln \left(1 + \frac{1}{n\hat{r}}
+            \sum_{k=0}^{\infty} kn_k \right) \right\}
+      \end{align*}  
+      We may numerically solve for $\hat{r}$ above, and obtain
+      \begin{equation*}
+        \hat{r} \approx 1.1179 \quad\text{ and }\quad \hat{\beta} \approx
+        0.12901.
+      \end{equation*}
+  \end{enumerate}
+\end{solution}
+
+% section mle_for_parameters_of_frequency_distribution (end)
+
+\section{Moment Estimation for Parameters of Frequency Distribution}%
+\label{sec:moment_estimation_for_parameters_of_frequency_distribution}
+% section moment_estimation_for_parameters_of_frequency_distribution
+
+Let
+\begin{equation*}
+  \mu_k \coloneqq E[X^k],\quad k \in \{ 1, 2, 3, \ldots \}.
+\end{equation*}
+The sample mean of $X^k$ is given by
+\begin{equation*}
+  \hat{\mu}_k = \frac{1}{n} \sum_{i=1}^{n} X_i^k,
+\end{equation*}
+where $\{ X_1, \ldots, X_n \}$ is a sample from an underlying distribution $X$.
+
+% TODO : further explain how this idea works and how things come by
+% It appears to take ideas form linear algebra to approach this problem
+
+\begin{procedure}[Moment Estimation]\label{procedure:moment_estimation}
+  Since $\mu_k$ is a function of the parameters of the distribution of $X$,
+  we can do the following:
+  \begin{enumerate}
+    \item Consider the first $m$ moments to obtain a system of $m$ equations
+      of parameters of the distribution of $X$.
+    \item Solve the system of equations to obtain estimators for these
+      parameters.
+  \end{enumerate}
+  Here, $m$ is number of parameters that require estimation.
+\end{procedure}
+
+\begin{eg}
+  Assume that the number of claims in a policy follows $\NB(\beta, r)$.
+  Suppose that we have
+  \cref{table:number_of_claims_vs_number_of_policies_for_example_for_moment_estimation}.
+  \begin{table}[htpb]
+    \centering
+    \caption{Number of Claims vs Number of Policies for example for Moment
+    Estimation}
+    \label{table:number_of_claims_vs_number_of_policies_for_example_for_moment_estimation}
+    \begin{tabular}{c c}
+    Number of claims & Number of policies \\
+    \hline
+    0                & 9048 \\
+    1                & 905 \\
+    2                & 45 \\
+    3                & 2 \\
+    $\geq 4$         & 0 \\
+    \hline
+    Total            & 10000
+    \end{tabular}
+  \end{table}
+  Estimate $\beta$ and $r$ using moment estimation.
+\end{eg}
+
+\begin{solution}
+  Since there are 2 parameters of which we wish to estimate,
+  we shall go up to the second moment. Let
+  \begin{align*}
+    \hat{\mu}_1 &= \frac{1}{n} \sum_{i=1}^{n} X_i
+            = \frac{905(1) + 45(2) + 2(3)}{10000} \approx 0.1001 \\
+    \hat{\mu}_2 &= \frac{1}{n} \sum_{i=1}^{n} X_i^2
+            = \frac{905(1^2) + 45(2^2) + 2(3^2)}{10000} \approx 0.1103.
+  \end{align*}
+  Thus, we have the following system of equations
+  \begin{align*}
+    0.1001 &= E[X] = \hat{r}\hat{\beta} \\
+    0.1103 &= E[X^2] = \hat{r}\hat{\beta}(1-\hat{\beta}) + r^2 \hat{\beta}^2.
+  \end{align*}
+  Solving the system of equations, we get
+  \begin{equation*}
+    \hat{\beta} \approx 0.001798 \quad\text{ and }\quad \hat{r} \approx 55.67.
+  \end{equation*}
+\end{solution}
+
+\subsection{Moment Estimation for $(a, b, 0)$ Class}%
+\label{sub:moment_estimation_for_a_b_0_class}
+% subsection moment_estimation_for_a_b_0_class
+
+Recall that the members of \hldefn{$(a, b, 0)$ class}
+is a class of counting rvs with pmf satisfying
+\begin{equation*}
+  p_k = \left( a + \frac{b}{k} \right) p_{k-1}, \quad k \in \{ 1, 2, 3, \ldots
+  \},
+\end{equation*}
+where $p_0$ is determined by
+\begin{equation*}
+  \sum_{k=0}^{\infty} p_k = 1.
+\end{equation*}
+Only the Poisson, Binomial, and Negative Binomial distributions
+are members of this class.
+
+\begin{propo}[First and Second Moments of $(a, b, 0)$ Class]\label{propo:first_and_second_moments_of_a_b_0_class}
+  Suppose $N$ is a member of the $(a, b, 0)$ class. Then
+  \begin{equation*}
+    E[N] = \frac{a + b}{1 - a},
+  \end{equation*}
+  and
+  \begin{equation*}
+    E[N^2] = \frac{(a+b)(a+b+1)}{(1 - a)^2}.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  \hlwarn{To be added.}
+\end{proof}
+
+As we learned in ACTSC431, the $(a, b, 0)$ class is rather restrictive,
+since there are only 3 distributions in the class.
+However, the nice relationship between each probability is hard to give up on.
+
+In ACTSC431, this motivated us to look at \hlnotea{zero-modified distributions}.
+
+\begin{defn}[Zero-Modified Distribution]\index{Zero-Modified Distribution}\label{defn:zero_modified_distribution}
+  A \hlnoteb{zero-modified distribution} is a counting distribution
+  with pmf $\{ p_k^M \}_{k=0}^{\infty}$, where
+  \begin{itemize}
+    \item $\alpha \coloneqq p_0^M$ is chosen arbitrarily; and
+    \item for $k \in \{ 1, 2, \ldots, \}$, we have that
+      \sidenote{This is something that can be derived. See
+      \href{https://tex.japorized.ink/ACTSC431/classnotes.pdf\#page.103}{ACTSCT431}.}
+      \begin{equation*}
+        p_k^M = \frac{1 - \alpha}{1 - p_0} p_k,
+      \end{equation*}
+      where $\{ p_k \}_{k=0}^{\infty}$ is the pmf
+      of an $(a, b, 0)$ class distribution.
+  \end{itemize}
+\end{defn}
+
+\begin{note}
+  \begin{enumerate}
+    \item By construction, a zero-modified distribution still satisfies
+      \begin{equation*}
+        p_k^M = \left( a + \frac{b}{k} \right) p_{k-1}^M
+      \end{equation*}
+      but only for $k \in \{ 2, 3, \ldots \}$.
+    \item In general, since there are now 3 parameters,
+      we may require the third moment,
+      of which we do not necessarily want to find.
+  \end{enumerate}
+\end{note}
+
+\begin{propo}[An Estimation for $p_0^M$ in a Zero-Modified Distribution]\label{propo:an_estimation_for_p_0_m_in_a_zero_modified_distribution}
+  Suppose $\alpha = p_0^M$ in a zero-modified distribution,
+  and $\{ n_k \}_{k=0}^{\infty}$ is the observations with $k$ payments.
+  Then
+  \begin{equation*}
+    \hat{\alpha} = \frac{n_0}{ \sum_{k=0}^{\infty} n_k }.
+  \end{equation*}
+  Furthermore, we can find estimators for $a$ and $b$ using the function
+  \begin{equation*}
+    \sum_{k=1}^{\infty} n_k [ \ln p_k - \ln (1 - p_0) ].
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  The log-likelihood for these observations is
+  \begin{align*}
+    \ell(\alpha, a, b)
+    &= \ln \left( \prod_{k=0}^{\infty} (p_k^M)^{n_k} \right)
+    = \ln \left( (\alpha)^{n_0} \prod_{k=1}^{\infty} \left(
+      \frac{1-\alpha}{1-p_0} p_k \right)^{n_k} \right) \\
+    &= \underbrace{n_0 \ln \alpha
+      + \sum_{k=1}^{\infty} n_k \ln (1 - \alpha)}_{\ell_0(\alpha)}
+      + \underbrace{ \sum_{k=1}^{\infty} n_k [
+        \ln p_k - \ln (1 - p_0)
+      ]}_{\ell_1(a, b)}.
+  \end{align*}
+  It is clear from here that we can use $\ell_1(a, b)$ to find
+  estimators for $a$ and $b$.
+
+  Now, letting $\frac{\dif{\ell_0}}{\dif{\alpha}} = 0$, we get
+  \begin{equation*}
+    \frac{n_0}{\hat{\alpha}} - \sum_{k=1}^{\infty} \frac{n_k}{1 - \alpha} = 0.
+  \end{equation*} 
+  Rearranging, we get
+  \begin{equation*}
+    \hat{\alpha} = \frac{n_0}{ \sum_{k=0}^{\infty} n_k },
+  \end{equation*}
+  as desired.
+\end{proof}
+
+\begin{eg}
+  Consider the zero-modified geometric distribution
+  with parameter $\beta$ and $p_0^M = \alpha$.
+  Suppose that there are $n_k$ observations with $k$ payments,
+  with $k = 0, 1, 2, \ldots$.
+
+  Find the MLE for $\alpha$ and $\beta$.
+\end{eg}
+
+\begin{solution}
+  It is important to note that a geometric distribution is just
+  a negative binomial distribution with $r = 1$.
+
+  Now, by \cref{propo:an_estimation_for_p_0_m_in_a_zero_modified_distribution},
+  we have that
+  \begin{equation*}
+    \hat{\alpha} = \frac{n_0}{ \sum_{k=0}^{\infty} n_k }.
+  \end{equation*}
+  To find an estimate for $\beta$, first, note that
+  \begin{equation*}
+    p_k = \frac{\beta^k}{(1 + \beta)^{k+1}} \quad\text{ and }\quad
+    p_0 = \frac{1}{1 + \beta}.
+  \end{equation*}
+  Then
+  \begin{align*}
+    \ell_1(\beta)
+    &= \sum_{k=1}^{\infty} n_k \left[ \ln \frac{\beta^k}{(1 + \beta)^{k+1}} 
+      - \ln \left( 1 - \frac{1}{1 + \beta} \right)
+    \right] \\
+    &= \sum_{k=1}^{\infty} n_k [ k \ln \beta - (k+1) \ln (1 + \beta)
+      - \ln \beta \ln (1 + \beta) ] \\
+    &= \sum_{k=1}^{\infty} n_k [ (k-1) \ln \beta - k \ln (1 + \beta) ].
+  \end{align*}
+  Setting $\frac{\dif{\ell_1}}{\dif{\beta}} = 0$, we get
+  \begin{equation*}
+    \hat{\beta} = \frac{ \sum_{k=1}^{\infty} kn_k }{ \sum_{k=1}^{\infty} n_k } -
+    1.
+  \end{equation*}
+\end{solution}
+
+% subsection moment_estimation_for_a_b_0_class (end)
+
+% section moment_estimation_for_parameters_of_frequency_distribution (end)
+
+% chapter parameter_estimation_for_loss_models_frequency_models (end)
 
 \appendix
 
