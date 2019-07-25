@@ -292,9 +292,15 @@ snippet "bar" "bar" riA
 \overline{$1}$0
 endsnippet
 
-priority 100
+priority 50
 context "math()"
 snippet "([a-zA-Z])bar" "bar" riA
+\overline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 100
+context "math()"
+snippet '(?!\\hat)(\\[a-z]+)bar' "bar" riA
 \overline{`!p snip.rv=match.group(1)`}
 endsnippet
 
@@ -381,7 +387,7 @@ endsnippet
 
 priority 10
 context "math()"
-snippet '(?<!\\)angl' "angle notation" riA
+snippet '(?<!\\)angl' "angle notation" wrA
 \\angl{$1}$0
 endsnippet
 

@@ -1670,7 +1670,7 @@ measurable set.
 
 \begin{note}
   I shall quote and paraphrase this remark from our course notes
-  \cite{marcoux2018}:
+  \cite{marcoux2019}:
   \begin{quotebox}{magenta}{foreground}
     Informally, we see that a set $E \subseteq \mathbb{R}$ is measurable
     provided that it is a ``universal slicer'', that it ``slices'' every other
@@ -6355,7 +6355,7 @@ Let's look at $p = 1$.
 $[\mathcal{C}([a, b], \mathbb{K})]$ is dense in $L_p([a, b], \mathbb{K})$,
 for $1 \leq p < \infty$.
 
-\marginnote{Imma use the name from the notes of Prof. \citealp{marcoux2018} for
+\marginnote{Imma use the name from the notes of Prof. \citealp{marcoux2019} for
 \cref{lemma:lemma_6_31}, since there's no good expressive name for it.}
 
 \begin{lemma}[Lemma 6.31]\label{lemma:lemma_6_31}
@@ -6906,6 +6906,504 @@ if it admits a countable dense subset.
 % section _l_p_spaces_continued_3 (end)
 
 % chapter lecture_13_jun_20th_2019 (end)
+
+\chapter{Lecture 14 Jun 25th 2019}%
+\label{chp:lecture_14_jun_25th_2019}
+% chapter lecture_14_jun_25th_2019
+
+\section{Hilbert Spaces}%
+\label{sec:hilbert_spaces}
+% section hilbert_spaces
+
+Given $E \in \mathfrak{M}(\mathbb{R})$,
+we've seen that for $1 \leq p \leq \infty$,
+$(L_p(E, \mathbb{R}), \norm{\cdot}_p)$ is a Banach space, i.e.
+a complete normed linear space.
+The case where $p = 2$ is a special space that merits our attention.
+
+\begin{defn}[Inner Product]\index{Inner Product}\label{defn:inner_product}
+  An \hlnoteb{inner product} on a $\mathbb{K}$-vector space
+  $\mathcal{H}$ is a function
+  \begin{equation*}
+    \langle \cdot,\, \cdot \rangle : \mathcal{H} \times \mathcal{H} \to
+    \mathbb{K}
+  \end{equation*}
+  that satisfies
+  \begin{enumerate}
+    \item (\hlnoteb{positive definiteness}) $\langle x, x \rangle \geq 0$
+      for all $x \in \mathcal{H}$, and $\langle x, x \rangle = 0$ iff $x = 0$;
+    \item (\hlnoteb{conjugate bilinear}) for all $w, x, y, z \in \mathcal{H}$ 
+      and $\alpha, \beta \in \mathbb{K}$,
+      \begin{equation*}
+      \langle \alpha w + x, y + \beta z \rangle
+      = \alpha \langle w, y \rangle
+        + \langle x, y \rangle
+        + \alpha \overline{\beta} \langle w, z \rangle
+        + \overline{\beta} \langle x + z \rangle;
+      \end{equation*}
+    \item (\hlnoteb{conjugate symmetry}) for all $x, y \in \mathcal{H}$,
+      $\langle x, y \rangle = \overline{\langle y, x \rangle}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Inner Product Space]\index{Inner Product Space}\label{defn:inner_product_space}
+  An \hlnoteb{inner product space (IPS)} is a vector space $\mathcal{H}$ 
+  endowed with an inner product.
+\end{defn}
+
+\begin{defn}[Orthogonality]\index{Orthogonality}\label{defn:orthogonality}
+  We say that $x, y$ in an IPS $\mathcal{H}$ are \hlnoteb{orthogonal}
+  if
+  \begin{equation*}
+    \langle x, y \rangle = 0.
+  \end{equation*}
+\end{defn}
+
+\begin{thm}[Cauchy-Schwarz Inequality]\index{Cauchy-Schwarz Inequality}\label{thm:cauchy_schwarz_inequality}
+  Suppose $(\mathcal{H}, \langle \cdot, \cdot \rangle)$
+  is an IPS over $\mathbb{K}$.
+  Then for all $x, y \in \mathcal{H}$,
+  \begin{equation*}
+    \abs{\langle x, y \rangle}
+    \leq \langle x, x \rangle^{\frac{1}{2}} \langle y, y \rangle^{\frac{1}{2}}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Note that if $\langle x, y \rangle = 0$, then there is nothing to show,
+  since inner products are positive definite.
+  So suppose $\langle x, y \rangle \neq 0$.
+  \sidenote{This proof is said to be typical of any kind of Cauchy-Schwarz-like
+  inequality. I am making this note because this is the rare time that I
+  have actually seen one in pure mathematics (still a greenhorn with
+  questionable basics).}
+
+  Let $\kappa \in \mathbb{K}$. Notice that
+  \begin{align*}
+    0 &\leq \langle x - \kappa y, x - \kappa y \rangle \\
+      &= \langle x, x \rangle - \kappa \langle y, x \rangle
+        - \overline{\kappa} \langle x, y \rangle
+        + \abs{\kappa}^2 \langle y, y \rangle.
+  \end{align*}
+  So pick
+  \begin{equation*}
+    \kappa = \frac{\langle x, y \rangle}{\langle y, y \rangle}.
+  \end{equation*}
+  Then we have
+  \begin{align*}
+    0 &\leq \langle x, x \rangle
+        - \frac{\langle x, y \rangle}{\langle y, y \rangle} \langle y, x \rangle
+        - \frac{\langle y, x \rangle}{\langle y, y \rangle} \langle x, y \rangle
+        + \frac{\abs{\langle x, y \rangle}^2}{\langle y, y \rangle^2} \langle y, y \rangle \\
+      &= \langle x, x \rangle
+        - \frac{\abs{\langle x, y \rangle}^2}{\langle y, y \rangle}
+        - \frac{\abs{\langle x, y \rangle^2}}{\langle y, y \rangle}
+        + \frac{\abs{\langle x, y \rangle}^2}{\langle y, y \rangle} \\
+      &= \langle x, x \rangle
+        - \frac{\abs{\langle x, y \rangle}^2}{\langle y, y \rangle}.
+  \end{align*}
+  Thus
+  \begin{equation*}
+    \abs{\langle x, y \rangle}^2 \leq \langle x, x \rangle \langle y, y \rangle.
+  \end{equation*}
+  Hence
+  \begin{equation*}
+    \abs{\langle x, y \rangle}
+    \leq \langle x, x \rangle^{\frac{1}{2}} \langle y, y \rangle^{\frac{1}{2}}.
+  \end{equation*}
+\end{proof}
+
+\begin{propo}[Norm Induced by The Inner Product]\index{Norm Induced by The Inner Product}\label{propo:norm_induced_by_the_inner_product}
+  Let $(\mathcal{H}, \langle \cdot, \cdot \rangle)$ be an IPS.
+  Then the map
+  \begin{equation*}
+    \norm{x} \coloneqq \langle x, x \rangle^{\frac{1}{2}},\quad
+    x \in \mathcal{H}
+  \end{equation*}
+  defines a norm on $\mathcal{H}$,
+  called the \hlnoteb{norm induced by the inner product}.
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{Positive Definiteness}
+  This immediately from the definition of an inner product.
+
+  \noindent
+  \hlbnoted{Scalar Multiplication}
+  Let $\kappa \in \mathbb{K}$ and $x \in \mathcal{H}$. Then
+  \begin{equation*}
+    \norm{\kappa x}^2 = \langle \kappa x, \kappa x \rangle
+                = \abs{\kappa}^2 \langle x, x \rangle
+                = \abs{\kappa}^2 \norm{x}^2.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \norm{\kappa x} = \abs{\kappa} \norm{x}.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{Triangle Inequality}
+  By the \hyperref[thm:cauchy_schwarz_inequality]{Cauchy-Schwarz Inequality},
+  we have
+  \begin{align*}
+    \norm{x + y}^2
+    &= \langle x + y, x + y \rangle \\
+    &= \langle x, x \rangle + \langle x, y \rangle + \langle y, x \rangle + \langle y, y \rangle \\
+    &\leq \norm{x}^2 + \abs{\langle x, y \rangle} + \abs{\langle y, x \rangle} + \norm{y}^2 \\
+    &= \norm{x}^2
+      + 2 \langle x, x \rangle^{\frac{1}{2}} \langle y, y \rangle^{\frac{1}{2}} 
+      + \norm{y}^2 \\
+    &= \norm{x}^2 + 2 \norm{x} \norm{y} + \norm{y}^2 \\
+    &= \left( \norm{x} + \norm{y} \right)^2.
+  \end{align*}
+  Hence
+  \begin{equation*}
+    \norm{x + y} \leq \norm{x} + \norm{y}.
+  \end{equation*}
+\end{proof}
+
+It follows that every IPS $(\mathcal{H}, \langle \cdot, \cdot \rangle)$ 
+is also a normed linear space (NLS).
+Furthermore, norms induce metrics, and so
+every IPS is also a metric space.
+\cref{fig:hierarchy_of_spaces_from_metric_space_to_normed_linear_space_then_down_to_inner_product_space}
+is a highly abstract illustration of the idea.
+
+\begin{marginfigure}
+  \centering
+  \includesvg[width=\marginparwidth]{images/metricsp-nls-ips}
+  \caption{Hierarchy of Spaces, from Metric Space to Normed Linear Space, then
+  down to Inner Product Space}
+  \label{fig:hierarchy_of_spaces_from_metric_space_to_normed_linear_space_then_down_to_inner_product_space}
+\end{marginfigure}
+
+\begin{defn}[Hilbert Space]\index{Hilbert Space}\label{defn:hilbert_space}
+  A \hlnoteb{Hilbert space} is a complete IPS.
+\end{defn}
+
+\begin{eg}
+  \begin{enumerate}
+    \item Let $N \geq 1$ be an integer, and $\mathcal{H} = \mathbb{C}^N$.
+      For
+      \begin{equation*}
+        x = (x_n)_{n=1}^{N},\, y = (y_n)_{n=1}^{N} \in \mathbb{C}^N,
+      \end{equation*}
+      we define
+      \begin{equation*}
+        \langle x, y \rangle = \sum_{n=1}^{N} x_n \overline{y_n}
+      \end{equation*}
+      as the inner product on $\mathbb{C}^N$.
+      This is, in fact,
+      called the \hldefn{standard inner product} on $\mathbb{C}^N$.
+      Furthermore, $\mathbb{C}^N$ is complete
+      wrt to the norm induced by this inner product.
+      Thus
+      \begin{equation*}
+        (\mathbb{C}^N, \langle \cdot, \cdot \rangle)
+      \end{equation*}
+      is a Hilbert space.
+
+    \item We can make the above slightly more general.
+      Fix $1 \leq N \in \mathbb{N}$, and choose some
+      \begin{equation*}
+        \rho_1, \rho_2, \ldots, \rho_N \in \mathbb{R}^+.
+      \end{equation*}
+
+      \begin{ex}
+        Check that $\mathbb{C}^N$, with the function
+        \begin{equation*}
+          \langle x, y \rangle_{\rho} \coloneqq \sum_{n=1}^{N} \rho_n x_n \overline{y_n}
+        \end{equation*}
+        that you are to check is an inner product, is a Hilbert space.
+      \end{ex}
+
+    \item The following is a space that will be very important for us.
+      The set
+      \begin{equation*}
+        \ell_2(\mathbb{K}) \coloneqq \{ (x_n)_{n \in \mathbb{N}} 
+          : x_n \in \mathbb{K}, \sum \abs{x_n}^2 < \infty \},
+      \end{equation*}
+      with the inner product
+      \begin{equation*}
+        \langle (x_n)_n, (y_n)_n \rangle \coloneqq \sum_{n=1}^{\infty} x_n
+        \overline{y_n},
+      \end{equation*}
+      is called the \hldefn{sequence space} \hldefn{$\ell_2$} with its
+      \hldefn{standard inner product}.
+      The space
+      \begin{equation*}
+        (\ell_2(\mathbb{K}), \langle \cdot, \cdot \rangle)
+      \end{equation*}
+      is a Hilbert space.
+      \sidenote{We saw, in PMATH 351, that with the norm
+      induced by this inner product, $\ell_2(\mathbb{K})$
+      is a complete metric space.}
+  \end{enumerate}
+\end{eg}
+
+Let us now look at an inner product that we shall define on $L_2$.
+
+\begin{thm}[The Standard Inner Product for $L_2(E, \mathbb{K})$]\label{thm:the_standard_inner_product_for_l_2_e_mathbb_k_}
+  Let $E \in \mathfrak{M}(\mathbb{R})$. The map
+  \begin{align*}
+    \langle \cdot, \cdot \rangle
+      : L_2(E, \mathbb{K}) \times L_2(E, \mathbb{K}) &\to \mathbb{K} \\
+      ([f], [g]) &\mapsto \int_{E} f \overline{g}
+  \end{align*}
+  is an inner product on $L_2(E, \mathbb{K})$.
+
+  Furthermore, the norm induced by this inner product is the $L_2$-norm
+  $\norm{\cdot}_2$ on $L_2(E, \mathbb{K})$.
+  Since $(L_2(E, \mathbb{K}), \norm{\cdot}_2)$ is complete,
+  $(L_2(E, \mathbb{K}), \langle \cdot, \cdot \rangle)$ is a Hilbert space.
+\end{thm}
+
+\begin{proof}
+  Before anything else, we need to show that $\langle \cdot, \cdot \rangle$ 
+  is well-defined.
+  Notice that if $[f_1] = [f_2]$ and $[g_1] = [g_2]$
+  in $L_2(E, \mathbb{K})$, then $f_1 \overline{g_1} = f_2 \overline{g_2}$ a.e.
+  on $E$, and so
+  \begin{equation*}
+    \langle [f_1], [g_1] \rangle = \int_{E} f1 \overline{g_1}
+    = \int_{E} f_2 \overline{g_2}
+    = \langle [f_2], [g_2] \rangle.
+  \end{equation*}
+  Furthermore, by \cref{thm:holders_inequality_lp_spaces},
+  we have that
+  \begin{equation*}
+    \int_{E} \abs{f \overline{g}} = \norm{[f \overline{g}]}_1 \leq \norm{[f]}_2
+    \norm{[\overline{g}]}_2 < \infty.
+  \end{equation*}
+  Thus $\langle \cdot, \cdot \rangle$ is indeed well-defined.
+
+  \noindent
+  \hlbnoted{Showing that $\langle \cdot, \cdot \rangle$ is an inner product}
+  \hlnoteg{(Positive Definiteness)} Let $[f] \in L_2(E, \mathbb{K})$.
+  Notice that
+  \begin{equation*}
+    f \overline{f} = \abs{f}^2 \geq 0.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \langle [f], [f] \rangle = \int_{E} f \overline{f} = \int_{E} \abs{f}^2 \geq 0.
+  \end{equation*}
+  Now if $[f] = [0] \in L_2(E, \mathbb{K})$, then
+  \begin{equation*}
+    \langle [f], [f] \rangle = \int_{E} \abs{f}^2 = \int_{E} 0^2 = 0.
+  \end{equation*}
+
+  \noindent
+  \hlnoteg{(Conjugate Bilinearity)} Let $[f], [g], [h] \in L_2(E, \mathbb{K})$,
+  and $\alpha, \beta \in \mathbb{K}$. Then
+  \begin{align*}
+    \langle \alpha [f] + \beta [g], [h] \rangle
+    &= \int_{E} (\alpha f + \beta g) \overline{h} \\
+    &= \alpha \int_{E} f \overline{h} + \beta \int_{E} g \overline{h} \\
+    &= \alpha \langle [f], [h] \rangle + \beta \langle [g], [h] \rangle,
+  \end{align*}
+  and
+  \begin{align*}
+    \langle [f], \alpha [g] + \beta [h] \rangle
+    &= \int_{E} f (\overline{\alpha g + \beta h}) \\
+    &= \overline{\alpha} \int_{E} f \overline{g}
+      + \overline{\beta} \int_{E} f \overline{h} \\
+    &= \overline{\alpha} \langle [f], [g] \rangle
+      + \overline{\beta} \langle [f], [h] \rangle.
+  \end{align*}
+
+  \noindent
+  \hlnoteg{(Conjugate Symmetry)} Let $[f], [g] \in L_2(E, \mathbb{K})$.
+  Then
+  \begin{equation*}
+    \langle [f], [g] \rangle
+    = \int_{E} f \overline{g}
+    = \overline{\int_{E} \overline{f \overline{g}} }
+    = \overline{\int_{E} \overline{f} g}
+    = \overline{\langle [g], [f] \rangle}.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{Showing that the norm induced by $\langle \cdot, \cdot \rangle$ is
+  the $L_2$-norm} \\ \noindent
+  By \cref{propo:norm_induced_by_the_inner_product}, we have
+  for any $[f] \in L_2(E, \mathbb{K})$,
+  \begin{equation*}
+    \norm{[f]} \coloneqq \langle [f], [f] \rangle^{\frac{1}{2}}
+    = \left( \int_{E} \abs{f}^2 \right)^{\frac{1}{2}} = \norm{[f]}_2.
+  \end{equation*}
+\end{proof}
+
+\begin{defn}[Orthonormality]\index{Orthonormality}\label{defn:orthonormality}
+  Let $\mathcal{E}$ be a subset of an IPS
+  $(\mathcal{H}, \langle \cdot, \cdot \rangle)$.
+  We say that $x \in \mathcal{E}$ has \hldefn{norm 1} if
+  \begin{equation*}
+    \norm{x} = \langle x, x \rangle^{\frac{1}{2}} = 1.
+  \end{equation*}
+  We say that $x, y \in \mathcal{E}$ are \hlnoteb{orthonormal}
+  if $x, y$ each has norm 1, and they are orthogonal to one another,
+  i.e. $\langle x, y \rangle = 0$.
+
+  We say that $\mathcal{E}$ is an \hldefn{orthonormal set}
+  if $\forall x, y \in \mathcal{E}$, $x$ and $y$ are orthonormal.
+\end{defn}
+
+\begin{defn}[Orthonormal Basis]\index{Orthonormal Basis}\label{defn:orthonormal_basis}
+  Let $\mathcal{H}$ be a Hilbert space.
+  An \hlnoteb{orthonormal basis (ONB)} (or \hldefn{Hilbert space basis}) for $\mathcal{H}$ 
+  is a \hlnotec{maximal (wrt inclusion) orthonormal set} in $\mathcal{H}$.
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item By \hlnotea{Zorn's Lemma},
+      we can extend every orthonormal set in $\mathcal{H}$ to an ONB for $\mathcal{H}$.
+    \item If $\mathcal{H}$ is infinite-dimensional, then an ONB for $\mathcal{H}$ 
+      is \hlnotec{not} a \hlnotea{Hamel basis}
+      \sidenote{The \hldefn{Hamel basis} is a basis
+      that we are rather familiar with,
+      coming from a finite-dimensional world,
+      where the span of an ONB is the entire space.}
+      for $\mathcal{H}$.
+  \end{enumerate}
+\end{remark}
+
+\begin{eg}
+  \begin{enumerate}
+    \item Let $N \geq 1$ be an integer,
+      and consider $\mathcal{H} = \mathbb{C}^N$ endowed with
+      the standard inner product $\langle \cdot, \cdot \rangle$.
+      For $1 \leq n \leq N$, define
+      \begin{equation*}
+        e_n \coloneqq (\delta_{n, k})_{k=1}^{N},
+      \end{equation*}
+      where $\delta_{a, b}$ denotes the \hlnotea{Kronecker delta function}.
+      Then $\left\{ e_n \right\}_{n=1}^{N}$ is an ONB for $\mathbb{C}^N$.
+
+    \item Let $1 \leq N \in \mathbb{N}$ and $\rho_k = k$,
+      for $1 \leq k \leq N$.
+      Set
+      \begin{equation*}
+        e_n \coloneqq \left( \frac{1}{\sqrt{k}} \delta_{n,k} \right)_{k=1}^{N}.
+      \end{equation*}
+      Then $\left\{ e_n \right\}_{n=1}^{N}$ is \hlnotee{also}
+      an ONB for $\mathbb{C}^N$, with the rather awkward inner product
+      from our last example:
+      \begin{equation*}
+        \langle x, y \rangle_{\rho} = \sum_{n=1}^{N} \rho_n x_n \overline{y_n}.
+      \end{equation*}
+
+    \item Generalizing the first example here to infinite dimensions,
+      let $\mathcal{H} = \ell_2(\mathbb{K})$, with its standard inner product.
+      For $n \geq 1$, let
+      \begin{equation*}
+        e_n = \left( \delta_{n, k} \right)_{k=1}^{\infty}.
+      \end{equation*}
+
+      \begin{ex}
+        Show that $\left\{ e_n \right\}_{n=1}^{N}$ is an ONB for
+        $\ell_2(\mathbb{K})$.
+      \end{ex}
+
+    \item Now for an orthonormal basis that is highly relevant to us.
+      Consider $\mathcal{H} = L_2([0, 2 \pi], \mathbb{C})$,
+      of which we have shown is a Hilbert space, with its standard inner product
+      \begin{equation*}
+        \langle [f], [g] \rangle \coloneqq \int_{E} f \overline{g}.
+      \end{equation*}
+      For $n \in \mathbb{Z}$, define the continuous function
+      \begin{align*}
+        \xi_n : [0, 2 \pi] &\to \mathbb{C} \\
+                \theta &\mapsto \frac{1}{\sqrt{2 \pi}} e^{in \theta}.
+      \end{align*}  
+      Then $[\xi_n] \in L_2([0, 2 \pi], \mathbb{C})$ for all $n \in \mathbb{Z}$.
+      In A4, we shall see that $\left\{ [\xi_n] \right\}_{n \in \mathbb{Z}}$
+      is an ONB for $L_2([0, 2 \pi], \mathbb{C})$.
+  \end{enumerate}
+\end{eg}
+
+We recall the following result from linear algebra:
+
+\begin{thm}[Gram-Schmidt Orthogonalisation Process]\index{Gram-Schmidt Orthogonalisation Process}\label{thm:gram_schmidt_orthogonalisation_process}
+  If $(\mathcal{H}, \langle \cdot, \cdot \rangle)$
+  is a Hilbert space over $\mathbb{K}$,
+  and $\left\{ x_n \right\}_{n=1}^{\infty}$ is a \hlnotea{linearly independent
+  set} in $\mathcal{H}$,
+  then we can find an orthonormal set
+  $\left\{ y_n \right\}_{n=1}^{\infty}$ in $\mathcal{H}$ so that
+  \begin{equation*}
+    \Span \left\{ x_1, \ldots, x_N \right\} = \Span \left\{ y_1, \ldots, y_N \right\}
+  \end{equation*}
+  for all $N \geq 1$.
+\end{thm}
+
+\begin{proof}
+  First, set
+  \begin{equation*}
+    y_1 = \frac{x_1}{\norm{x_1}}.
+  \end{equation*}
+  Notice that
+  \begin{align*}
+    \langle x_2 - \langle x_2, y_1 \rangle y_1, y_1 \rangle
+    &= \langle x_2, y_1 \rangle - \langle x_2, y_1 \rangle \langle y_1, y_1 \rangle \\
+    &= \langle x_2, y_1 \rangle - \langle x_2, y_1 \rangle \cdot 1 = 0.
+  \end{align*}
+  To get norm 1, we can then set
+  \begin{equation*}
+    y_2 = \frac{x_2 - \langle x_2, y_1 \rangle y_1}{\norm{x_2 - \langle x_2, y_1
+    \rangle y_1}}.
+  \end{equation*}
+  By induction, one can show that
+  \begin{equation*}
+    y_N = \frac{x_N - \sum_{n=1}^{N-1} \langle x_N, y_n \rangle y_n}{\norm{x_N -
+    \sum_{n=1}^{N-1} \langle x_N, y_n \rangle y_n}},
+  \end{equation*}
+  for $N \geq 1$, works.
+\end{proof}
+
+\begin{thm}[The Pythagorean Theorem and Parallelogram Law]\label{thm:the_pythagorean_theorem_and_parallelogram_law}
+  Let $\mathcal{H}$ be a Hilbert space
+  and suppose that $x_1, x_2, \ldots, x_n \in \mathcal{H}$.
+  \begin{enumerate}
+    \item (\hldefn{The Pythagorean Theorem})
+      If $\left\{ x_n \right\}_{n=1}^N$ is orthogonal, then
+      \begin{equation*}
+        \norm{ \sum_{n=1}^{N} x_n }^2 = \sum_{n=1}^{N} \norm{x_2}^2.
+      \end{equation*}
+    \item (\hldefn{The Parallelogram Law})
+      We have
+      \begin{equation*}
+        \norm{x_1 + x_2}^2 + \norm{x_1 - x_2}^2 = 2 \left( \norm{x_1}^2 +
+        \norm{x_2}^2 \right).
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Since $\langle x_n, x_m \rangle = 0$ for all $n \neq m$,
+      we have
+      \begin{equation*}
+        \norm{ \sum_{n=1}^{N} x_n }^2
+        = \left\langle \sum_{n=1}^{N} x_n, \sum_{n=1}^{N} x_n \right\rangle
+        = \sum_{n=1}^{N} \langle x_n, x_n \rangle
+        = \sum_{n=1}^{N} \norm{x_n}^2.
+      \end{equation*}
+
+    \item We see that
+      \begin{align*}
+        \norm{x_1 + x_2}^2 + \norm{x_1 - x_2}^2
+        &= \langle x_1 + x_2, x_1 + x_2 \rangle + \langle x_1 - x_2, x_1 - x_2 \rangle \\
+        &= 2 \langle x_1, x_1 \rangle + 2 \langle x_2, x_2 \rangle \\
+        &= 2 \left( \norm{x_1}^2 + \norm{x_2}^2 \right).
+      \end{align*}
+  \end{enumerate}
+\end{proof}
+
+% section hilbert_spaces (end)
+
+% chapter lecture_14_jun_25th_2019 (end)
 
 
 
