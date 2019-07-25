@@ -313,11 +313,11 @@ snippet ita "Italicized Text" w
 \textit{$1} $0
 endsnippet
 
-snippet '(?<!\\)hl(a|b|c|d|e|f|g)' "highlight color" irA
+snippet '(?<!\\|b)hl(a|b|c|d|e|f|g)' "highlight color" irA
 \hlnote`!p snip.rv = match.group(1)`{$1} $0
 endsnippet
 
-snippet '(?<!\\)hlb(a|b|c|d|e)' "highlight background" irA
+snippet '(?<!\\)bhl(a|b|c|d|e)' "highlight background" irA
 \hlbnote`!p snip.rv = match.group(1)`{$1} $0
 endsnippet
 

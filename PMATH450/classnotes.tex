@@ -20,6 +20,8 @@
 
 \newcommand{\Bor}{\mathfrak{Bor}}
 \DeclareMathOperator{\SIMP}{SIMP}
+\DeclareMathOperator{\STEP}{STEP}
+\DeclareMathOperator{\Span}{span}
 
 % disjoint union
 \makeatletter
@@ -3467,6 +3469,18 @@ measurable.
   is the \hlnoteb{standard form} of $\phi$.
 \end{defn}
 
+\begin{warning}[Step Functions are Simple, but the Converse is False]\label{warning:step_functions_are_simple_but_the_converse_is_false}
+  Recall that a \hldefn{step function} is a function
+  that can be written as a finite linear combination of indicator functions
+  of intervals.
+  This means that step functions are simple functions.
+  However, simple functions are not necessarily step functions.
+  For example, $\chi_C$, where $C$ is the \hyperref[eg:cantor_set]{Cantor set},
+  is a simple function since $C$ is measurable,
+  but it is clearly not a step function, as it would require infinitely many
+  indicator functions of infinitely small intervals.
+\end{warning}
+
 \begin{propo}[Measurability of Simple Functions with Measurable Support]\label{propo:measurability_of_simple_functions_with_measurable_support}
   Let $E \in \mathfrak{M}(\mathbb{R})$. Suppose $\phi : E \to
   \overline{\mathbb{R}}$ is simple with
@@ -4936,6 +4950,16 @@ coincide on these functions. In particular, this opens up the
   \end{equation*}
 \end{proof}
 
+\begin{crly}[Bounded Riemann-Integrable Functions are Lebesgue Integrable --
+  Complex Version]\label{crly:bounded_riemann_integrable_functions_are_lebesgue_integrable_complex_version}
+  Let $a < b \in \mathbb{R}$ and $f : [a, b] \to \mathbb{C}$ be a bounded,
+  Riemann-integrable function.
+  Then $g \in \mathcal{L}_1([a, b], \mathbb{C})$ and
+  \begin{equation*}
+    \int_{[a, b]} f = \int_{a}^{b} f.
+  \end{equation*}
+\end{crly}
+
 Our earlier demon-level slime has been reduced back to being a, well,
 slime-level monster.
 
@@ -5253,9 +5277,10 @@ may wish to refresh your memory on the definition of a
     \mathcal{N} \coloneqq \{ w \in W : \nu(w) = 0 \}.
   \end{equation*}
   Then $\mathcal{N}$ is a \hldefn{linear manifold} \sidenote{A subspace $M$ of a
-  Hilbert space, which is a vector space endowed with an inner product such that
-  with an appropriate norm, turns it into a complete metric space, is called a
-  linear manifold if it is closed under addition and scalar multiplication.
+  Hilbert space, which is a vector space with an inner product such that
+  its \hlnotec{induced} norm, which in turn induces a metric on the space,
+  makes the space a complete metric space, is called a
+  linear manifold if it is \hlnotec{closed under addition and scalar multiplication}.
   (Source: \citet{mathworld_linearmanifold})
 
   Here, we can safely talk about Hilbert spaces because $\mathbb{K}$ is endowed
@@ -5945,7 +5970,7 @@ measure zero.
   \end{equation*}
 \end{defn}
 
-\begin{eg}
+\begin{eg}\label{eg:continuous_functions_are_in_L_infty}
   \begin{enumerate}
     \item Let $E = \mathbb{R}$ and $f = \chi_{\mathbb{Q}}$. Observe that for any
       $\gamma > 0$, since
@@ -5968,10 +5993,12 @@ measure zero.
 
       \hlbnotec{Claim: $f \in \mathcal{L}_\infty([a, b], \mathbb{K})$ and
       $\nu_\infty(f) = \norm{f}_{\sup} \coloneqq \sup_{x \in [a, b]
-    \abs{f(x)}}$} We know that every continuous function on a measurable set is
-    measurable \sidenote{cf.
-    \cref{propo:continuous_functions_on_a_measurable_set_is_measurable}}, so $f
-    \in \mathcal{L}([a, b], \mathbb{K})$.
+    \abs{f(x)}}$}
+    We know that every continuous function on a measurable set is
+    measurable
+    \sidenote{cf.
+    \cref{propo:continuous_functions_on_a_measurable_set_is_measurable}},
+    so $f \in \mathcal{L}([a, b], \mathbb{K})$.
 
     Note that for $\gamma > \norm{f}_{\sup}$, we have that
     \begin{equation*}
@@ -6228,11 +6255,666 @@ Let's look at $p = 1$.
   \end{enumerate}
 \end{proof}
 
+\begin{crly}[H\"{o}lder's Inequality for $L_1(E, \mathbb{K})$]\index{H\"{o}lder's Inequality}\label{crly:holder_s_inequality_for_L_1_e_k_}
+  Let $E \in \mathfrak{M}(\mathbb{R})$.
+  If $[f] \in L_1(E, \mathbb{K})$ and
+  $[g] \in \mathcal{L}_\infty(E, \mathbb{K})$,
+  then $[f][g] \coloneqq [fg] \in \mathcal{L}1(E, \mathbb{K})$ is well-defined
+  and
+  \begin{equation*}
+    \norm{[fg]}_1 \leq \norm{[f]}_1 \norm{[g]}_{\infty}.
+  \end{equation*}
+\end{crly}
+
+\begin{crly}[H\"{o}lder's Inequality for Continuous Functions]\index{H\"{o}lder's Inequality}\label{crly:holder_s_inequality_for_continuous_functions}
+  Suppose that $a < b \in \mathbb{R}$.
+  Consider $h \in \mathcal{C}([a, b], \mathbb{K})$
+  and $f \in \mathcal{L}_1([a, b], \mathbb{K})$.
+  Then $h \cdot f \in \mathcal{L}_1([a, b], \mathbb{K})$ and
+  \begin{equation*}
+    \nu_1(h \cdot f) \leq \nu_1(f) \nu_\infty(h) = \nu_1(f) \norm{h}_{\sup}.
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  Continuous functions are measurable, so $h$ is measurable, and
+  $\mathcal{L}_\infty([a, b], \mathbb{K})$
+  with $\norm{h}_{\sup} = \nu_\infty(h)$.
+  Then it is simply \cref{thm:holder_s_inequality_for_l_1_e_k_}.
+\end{proof}
+
 % subsection completeness_of_l_infty_e_k_ (end)
 
 % section _l_p_spaces_continued_2 (end)
 
 % chapter lecture_12_jun_18th_2019 (end)
+
+\chapter{Lecture 13 Jun 20th 2019}%
+\label{chp:lecture_13_jun_20th_2019}
+% chapter lecture_13_jun_20th_2019
+
+\section{\texorpdfstring{$L_p$}{Lp} Spaces (Continued 3)}%
+\label{sec:_l_p_spaces_continued_3}
+% section _l_p_spaces_continued_3
+
+\begin{remark}[Containment of $L_p$ Spaces]\label{remark:containment_of_lp_spaces}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ with $mE < \infty$.
+  Suppose that $1 \leq p < \infty$,
+  and that $[f] \in L_\infty(E, \mathbb{K})$,
+  which then wlog $f \in \mathcal{L}_\infty(E, \mathbb{K})$.
+  As commented before, $\abs{f(x)} \leq \norm{[f]}_{\infty}$ a.e. on $E$.
+  Then
+  \begin{equation*}
+    \norm{[f]}_p = \int_{E} \abs{f}^p
+                \leq \int_{E} \norm{[f]}_{\infty}^{p}
+                = \norm{[f]}_{\infty}^p mE < \infty,
+  \end{equation*}
+  which means $[f] \in L_p(E, \mathbb{K})$, with
+  \begin{equation*}
+    \norm{[f]}_p \leq \norm{[f]}_{\infty} \left( mE \right)^{\frac{1}{p}}.
+  \end{equation*}
+  Thus $L_\infty(E, \mathbb{K}) \subseteq L_p(E, \mathbb{K})$,
+  $1 \leq p < \infty$ when $mE < \infty$.
+
+  Next, consider $1 \leq p < r < \infty$.
+  Suppose $[g] \in L_r(E, \mathbb{K})$.
+  Again, wlog $g \in \mathcal{L}_r(E, \mathbb{K})$ and
+  \begin{align*}
+    \norm{[g]}_p^p &= \int_{E} \abs{g}^p = \int_{E} (\abs{g}^r)^{\frac{p}{r}}
+                 \leq \int_{E} \max \{ 1, \abs{g}^r \} \\
+                 &\leq \int_{E} 1 + \abs{g}^r = mE + \norm{[g]}_r < \infty.
+  \end{align*}
+  So $[g] \in L_p(E, \mathbb{K})$. Thus we see that
+  \begin{equation*}
+    L_\infty(E, \mathbb{K}) \subseteq L_r (E, \mathbb{K})
+              \subseteq L_p(E, \mathbb{K}) \subseteq L_1(E, \mathbb{K}).
+  \end{equation*}
+\end{remark}
+
+\begin{remark}
+  Suppose $a < b \in \mathbb{R}$. Then from
+  \cref{eg:continuous_functions_are_in_L_infty}, we have that
+  \begin{equation*}
+    [\mathcal{C}([a, b], \mathbb{K})]
+    \coloneqq \{ [f] : f \in \mathcal{C}([a, b], \mathbb{K}) \}
+    \subseteq L_\infty([a, b]).
+  \end{equation*}
+  Recall that
+  \begin{equation*}
+    \mathcal{R}_{\infty}([a, b], \mathbb{K})
+    = \{ f : [a, b] \to \mathbb{K} : f \text{ is Riemann-integrable and bdd }
+    \}.
+  \end{equation*}
+  By
+  \cref{crly:bounded_riemann_integrable_functions_are_lebesgue_integrable_complex_version}, 
+  $f \in \mathcal{L}([a, b], \mathbb{K})$ and so $[f] \in L_\infty([a, b],
+  \mathbb{K})$ by virtue of $f$ being bounded.
+\end{remark}
+
+\newthought{Our next goal} is to establish that the space
+$[\mathcal{C}([a, b], \mathbb{K})]$ is dense in $L_p([a, b], \mathbb{K})$,
+for $1 \leq p < \infty$.
+
+\marginnote{Imma use the name from the notes of Prof. \citealp{marcoux2018} for
+\cref{lemma:lemma_6_31}, since there's no good expressive name for it.}
+
+\begin{lemma}[Lemma 6.31]\label{lemma:lemma_6_31}
+  Let $(\mathcal{X}, \norm{\cdot})$ be a normed linear space,
+  and suppose that $\mathcal{Y}$ and $\mathcal{Z}$ are \hldefn{linear manifolds}
+  \sidenote{i.e. a vector subspace, but not necessarily closed.}
+  in $\mathcal{X}$. Suppose $\mathcal{B} \subseteq \mathcal{Y}$ satisfies
+  \begin{equation*}
+    \overline{\Span} \mathcal{B} = \mathcal{X}.
+  \end{equation*}
+  Then if $\mathcal{B} \subseteq \overline{\mathcal{Z}}$, 
+  then $\overline{\mathcal{Z}} = \mathcal{X}$.
+\end{lemma}
+
+\begin{proof}
+  Let $x \in \mathcal{X} = \overline{\Span} \mathcal{B}$ and $\epsilon > 0$.
+  Then there exists $\{ b_i \}_{i=1}^{N} \subseteq \mathcal{B}$ and
+  $\{ k_i \}_{i=1}^{N} \subseteq \mathbb{R}$ such that
+  \begin{equation*}
+    \norm{ x - \sum_{n=1}^{N} k_n b_n } < \frac{\epsilon}{2}.
+  \end{equation*}
+  Since $b_i \in \mathcal{B} \subseteq \overline{\mathcal{Z}}$,
+  there exists $z_i \in \mathcal{Z}$ such that
+  \begin{equation*}
+    \norm{z_i - b_i} < \frac{\epsilon}{2N(\abs{k_i} + 1)}.
+  \end{equation*}
+  Let $z \coloneqq \sum_{n=1}^{N} k_n z_n \in \mathcal{Z}$,
+  and this would give
+  \begin{align*}
+    \norm{x - z}
+    &\leq \norm{ x - \sum_{n=1}^{N} k_n b_n } + \norm{ \sum_{n=1}^{N} k_n b_n -
+      z} \\
+    &< \frac{\epsilon}{2} + \norm{ \sum_{n=1}^{N} k_n (b_n - z_n) } \\
+    &\leq \frac{\epsilon}{2} + \sum_{n=1}^{N} \abs{k_n} \norm{b_n - z_n} \\
+    &\leq \frac{\epsilon}{2} + \sum_{n=1}^{N} \frac{\epsilon}{2N} \\
+    &= \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+  \end{align*}
+  Thus $\mathcal{Z}$ is dense in $\mathcal{X}$.
+\end{proof}
+
+\begin{notation}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ and $1 \leq p \leq \infty$.
+  We set
+  \begin{equation*}
+    \SIMP_p(E, \mathbb{K})
+    = \SIMP(E, \mathbb{K}) \cap \mathcal{L}_p(E, \mathbb{K}).
+  \end{equation*}
+\end{notation}
+
+\begin{ex}
+  Prove that if $mE < \infty$ or if $p = \infty$, then
+  \begin{equation*}
+    \SIMP_p(E, \mathbb{K}) = \SIMP(E, \mathbb{K}).
+  \end{equation*}
+\end{ex}
+
+\begin{solution}
+  \hlbnoted{Case $p = \infty$}
+  By definition, a simple function $f$ has finite range, and so 
+  $\nu_\infty(f) < \infty$.
+  Thus $\SIMP(E, \mathbb{K}) \subseteq \mathcal{L}_\infty(E, \mathbb{K})$
+  and so our result holds.
+
+  \noindent
+  \hlbnoted{Case $mE < \infty$}
+  This is quite similar, especially since the range of $f$ is finite,
+  and so integration of a finite function over a finite domain is going
+  to be finite.
+  Thus, again $\SIMP(E, \mathbb{K}) \subseteq \mathcal{L}_p(E, \mathbb{K})$.
+\end{solution}
+
+\begin{propo}[Density of Equivalence Classes of $\SIMP_p(E, \mathbb{K})$ in $(L_p(E, \mathbb{K}), \norm{\cdot}_p)$]\label{propo:density_of_equiv_classes_of_simple_functions_in_L_p}
+  Let $E \in \mathfrak{M}(\mathbb{R})$ be a Lebesgue measurable set
+  and $1 \leq p \leq \infty$. Then
+  \begin{equation*}
+    [\SIMP_p(E, \mathbb{K})]
+    \coloneqq \{ [ \phi ] : \phi \in \SIMP_p(E, \mathbb{K}) \}
+  \end{equation*}
+  is dense in
+  \begin{equation*}
+    (L_p(E, \mathbb{K}), \norm{\cdot}_p).
+  \end{equation*}
+\end{propo}
+
+\begin{strategy}
+  Recall
+  \cref{propo:increasing_sequence_of_simple_functions_that_converges_to_a_measurable_function}.
+  This is the proposition that is key to showing that
+  simple functions are dense, simply because we may
+  get as close to any $f \in \mathcal{L}(E, [0, \infty])$
+  as we want.
+  \begin{enumerate}
+    \item Reduce to the problem to only real-valued functions.
+    \item Reduce the problem to only positive real-valued functions.
+    \item It then remains to reconstruct a simple function in
+      $\mathcal{L}_p(E, \mathbb{R})$ that is as close to the
+      original real-valued function as we would like.
+  \end{enumerate}
+\end{strategy}
+
+\begin{proof}
+  \hlbnoted{Case $\mathbb{K} = \mathbb{C}$}
+  If we had proved the above for the case where $\mathbb{K} = \mathbb{R}$,
+  then for $[g] \in L_p(E, \mathbb{K})$ and $\epsilon > 0$,
+  we may write
+  \begin{equation*}
+    g = \Re g + i \Im g.
+  \end{equation*}
+  In particular, $g \in \mathcal{L}(E, \mathbb{C})$,
+  so it is necessary that $\Re g,\, \Im g \in \mathcal{L}(E, \mathbb{R})$ by
+  \cref{propo:component_wise_measurability}.
+  Then, by assumption that this works for $\mathbb{R}$,
+  we can pick $\phi_1,\, \phi_2 \in \SIMP(E, \mathbb{R})$ such that
+  \begin{gather*}
+    \norm{[\Re g] - [\phi_1]}_p < \frac{\epsilon}{2} \\
+    \norm{[\Im g] - [\phi_2]}_p < \frac{\epsilon}{2}.
+  \end{gather*}
+  Then, let
+  \begin{equation*}
+    \phi = \phi_1 + i \phi_2 \in \SIMP(E, \mathbb{C}),
+  \end{equation*}
+  which then
+  \begin{equation*}
+    \norm{[g] - [\phi]} \leq \norm{[\Re g] - [\phi_1]}_p + \abs{i} \norm{[\Im g] -
+    [\phi_2]}_p < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+  \end{equation*}
+  Then $[\SIMP(E, \mathbb{C})]$ is dense in $(L_p(E, \mathbb{C}), \norm{\cdot}_p)$.
+
+  \noindent
+  \hlbnoted{Case $\mathbb{K} = \mathbb{R}$}
+  We shall further break this into 2 cases,
+  of which we have seen in our last exercise.
+
+  \noindent
+  \hlbnotec{Case 1: $1 \leq p < \infty$}
+  $\forall \epsilon > 0$, let $[f] \in L_p(E, \mathbb{R})$.
+  Then $f \in \mathcal{L}_p(E, \mathbb{R})$ and we may write
+  \begin{equation*}
+    f = f^+ - f^-,
+  \end{equation*}
+  where $f^+,\, f^- \in \mathcal{L}_p(E, \mathbb{R})$.
+  By
+  \cref{propo:increasing_sequence_of_simple_functions_that_converges_to_a_measurable_function},
+  we can find simple functions
+  \begin{equation*}
+    0 \leq \phi_1 \leq \phi_2 \leq \phi_3 \leq \hdots \leq f^+
+  \end{equation*}
+  such that
+  \begin{equation*}
+    f^+(x) = \lim_{n \to \infty} \phi_n(x),\quad x \in E.
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    \int_{E} \abs{\phi_n}^p \leq \int_{E} \abs{f^+}^p 
+      \leq \int_{E} \abs{f}^p < \infty,
+  \end{equation*}
+  and so $\phi_n \in \SIMP_p(E, \mathbb{R})$, for $n \geq 1$.
+  Thus, by the
+  \hyperref[thm:lebesgue_dominated_convergence_theorem]{Lebesgue Dominated
+  Convergence Theorem},
+  \begin{equation*}
+    \lim_{n \to \infty} \int_{E} \abs{f^+ - \phi_n}^p = \int_{E} \lim_{n \to
+    \infty} \abs{f^+ - \phi_n}^p = 0
+  \end{equation*}
+  Thus we can find some $N_1 > 0$, such that for $n > N_1$, we have
+  \begin{equation*}
+    \norm{f^+ - \phi_n}_p < \frac{\epsilon}{2}.
+  \end{equation*}
+  Similarly, we can find simple functions
+  $\psi_1, \psi_2, \ldots \in \SIMP_P(E, \mathbb{R})$, such that
+  \begin{equation*}
+    0 \leq \psi_1 \leq \psi_2 \leq \psi_3 \leq \hdots - f^-,
+  \end{equation*}
+  such that
+  \begin{equation*}
+    f^-(x) = \lim_{n \to \infty} \psi_n(x),\quad x \in E,
+  \end{equation*}
+  and so that we can find $N_2 > 0$ where $\forall n > N_2$, we have
+  \begin{equation*}
+    \norm{f^- - \psi_n}_p < \frac{\epsilon}{2}.
+  \end{equation*}
+  Then
+  \begin{align*}
+    \norm{f - (\phi_n + \psi_n)}_p
+    &= \norm{f^+ - f^- - \phi_n - \psi_n}_p \\
+    &\leq \norm{f^+ - \phi_n}_p + \norm{f^- - \psi_n}_p \\
+    &< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+  \end{align*}
+
+  \noindent
+  \hlbnotec{Case 2: $p = \infty$}
+  Let $\epsilon > 0,\, [f] \in L_\infty(E, \mathbb{R})$,
+  and $M = \norm{f}_\infty$.
+  Then $\Range f \subseteq [-M, M] \eqqcolon I$.
+  Now choose $N > 0$ such that $\frac{1}{N} < \epsilon$.
+  \sidenote{Let us break $I$ into intervals of length $\frac{1}{N}$.
+  Doing this will allow
+  $\abs{f(x) - (-M + \frac{k}{N}) \chi_{f^{-1}(I_k)}} \leq \frac{1}{N}$.}
+  Let
+  \begin{equation*}
+    I_k = \left[ -M + \frac{k}{N},\, -M + \frac{k+1}{N} \right)
+  \end{equation*}
+  for $k \in \{ 0, \ldots, 2MN - 2 \}$, and $I_{2MN} = \left[ M - \frac{1}{N}, M \right]$.
+
+  Let $H_k \coloneqq f^{-1}(I_k)$, for $k \in \{ 0, \ldots, 2MN - 1 \}$.
+  Then $H_k$ is measurable by the measurability of $f$.
+  Let
+  \begin{equation*}
+    \phi \coloneqq \sum_{k=0}^{2MN-2} \left( -M + \frac{k}{N} \right) \chi_{H_k}.
+  \end{equation*}
+  It is clear that
+  $\phi \in \SIMP(E, \mathbb{R}) = \SIMP_\infty(E, \mathbb{R})$.
+  Furthermore,
+  \begin{equation*}
+    \abs{f(x) - \phi(x)} \leq \frac{1}{N} < \epsilon \quad \forall x \in E.
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    \norm{[f] - [\phi]}_\infty < \epsilon.
+  \end{equation*}
+  This completes the proof.
+\end{proof}
+
+\begin{propo}[Density of Equivalence Classes of Step Functions in $L_p$ Spaces]\label{propo:density_of_equivalence_classes_of_step_functions_in_l_p_spaces}
+  Let $a < b \in \mathbb{R}$.
+  If $1 \leq p < \infty$, then
+  \begin{equation*}
+    [\STEP([a, b], \mathbb{K})]
+  \end{equation*}
+  is dense in
+  \begin{equation*}
+    (L_p([a, b], \mathbb{K}), \norm{\cdot}_p).
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  By a similar argument to what we provided for the case of $\mathbb{K} = \mathbb{C}$,
+  it suffices for us to show that the statement is true for the case when
+  $\mathbb{K} = \mathbb{R}$.
+
+  Notice that $[a, b] \in \mathfrak{M}(\mathbb{R})$,
+  and $m[a, b] = b - a < \infty$.
+  Let us see for ourselves that $\mathcal{Y} \coloneqq [\SIMP([a, b], \mathbb{R})]$
+  and $\mathcal{Z} \coloneqq [\STEP([a, b], \mathbb{R})]$
+  are linear manifolds in $L_p([a, b], \mathbb{R})$.
+  It is rather clear that
+  $\mathcal{Y}, \mathcal{Z} \subseteq L_p([a, b], \mathbb{R})$.
+  To show that $\mathcal{Y}$ is a linear manifold, we see that
+  for $\phi, \psi \in \SIMP([a, b], \mathbb{R})$ and $c \in \mathbb{R}$,
+  if we suppose wlog that $N < M$
+  and define $E_n = \emptyset$ and $\alpha_n = 0$ for $N < n \leq M$, then
+  \begin{align*}
+    c \phi + \psi
+    &= c \sum_{n=1}^{N} \alpha_n \chi_{E_n} + \sum_{m=1}^{M} \beta_m \chi_{H_m}
+      \\
+    &= \sum_{n=1}^{M} c (\alpha_n + \beta_n) \chi_{E_n \cup H_n}
+      \in \SIMP([a, b], \mathbb{R}).
+  \end{align*}
+  To show that $\mathcal{Z}$ is a linear manifold, we see that
+  for \\ \noindent
+  $\phi, \psi \in \STEP([a, b], \mathbb{R})$ and $c \in \mathbb{R}$,
+  if we suppose wlog that $N < M$ 
+  and define $I_n = \emptyset$ and $\alpha_n = 0$ for $N < n \leq M$,
+  and define coefficients such that
+  \begin{equation*}
+    c_n(x) = \begin{cases}
+      a_n + b_n & x \in I_n \cap J_n \\
+      a_n & x \in I_n \setminus J_n \\
+      b_n & x \in J_n \setminus I_n
+    \end{cases},
+  \end{equation*}
+  then
+  \begin{align*}
+    (c \phi + \psi)(x)
+    &= c \sum_{n=1}^{N} \alpha_n \chi_{I_n} + \sum_{m=1}^{M} \beta_m \chi_{J_m}
+      \\
+    &= c \sum_{n=1}^{M} c_n(x) (\chi_{I_n \setminus J_n} +
+      \chi_{I_n \cap J_n} + \chi_{J_n \setminus I_n})(x) \\
+    & \quad\in \STEP([a, b], \mathbb{R}).
+  \end{align*}
+  From here, notice that by
+  \hyperref[warning:step_functions_are_simple_but_the_converse_is_false]{our
+  warning on page
+  \pageref{warning:step_functions_are_simple_but_the_converse_is_false}},
+  $\mathcal{Z} \subseteq \mathcal{Y}$.
+  Furthermore, if we define
+  \begin{equation*}
+    \mathcal{B} \coloneqq \{ \chi_H : H \in \mathfrak{M}([a, b]) \},
+  \end{equation*}
+  then
+  \begin{equation*}
+    \mathcal{Y} = \Span \{ [\phi] : \phi \in \mathcal{B} \},
+  \end{equation*}
+  and so along with
+  \cref{propo:density_of_equivalence_classes_of_step_functions_in_l_p_spaces},
+  $\Span \mathcal{B}$ is dense in \\ \noindent
+  $(L_p([a, b], \mathbb{R}, \norm{\cdot}_p))$.
+  From \cref{lemma:lemma_6_31},
+  it suffices for us to show that $\mathcal{B} \subseteq \overline{\mathcal{Z}}$.
+  \sidenote[][-70pt]{We want to approximate any element $[\chi_H] \in \mathcal{B}$
+  using intervals.
+  Realizing that we are in $\mathbb{R}$,
+  we know that any open set $G \subseteq \mathbb{R}$ can be written
+  as a disjoint union of open intervals. Furthermore,
+  if we pick an open set $G$ that closely encloses $H$,
+  then we obtain disjoint open sets that closely approximates $H$.}
+  By \cref{thm:carath'_e_odory_s_and_lebesgue_s_definition_of_measurability},
+  we can find an open $H \subseteq G \subseteq \mathbb{R}$ such that
+  \begin{equation*}
+    m ( G \setminus H ) < \frac{\epsilon}{2}.
+  \end{equation*}
+  We may write
+  \begin{equation*}
+    G = \bigcup_{n=1}^{\infty} (a_n, b_n).
+  \end{equation*}
+  It is important that we note that each of the interval is finite,
+  since $mH \leq m[a, b] < \infty$, and $m(G \setminus H) < \infty$,
+  and thus $m(G) = m(H) + m(G \setminus H) < \infty$.
+  Furthermore, some of the $(a_n, b_n)$'s may be empty sets.
+
+  Now let
+  \begin{equation*}
+    G_k = \bigcup_{n=1}^{k} (a_n, b_n).
+  \end{equation*}
+  Clearly, $\lim_{k \to \infty} G_k = G$.
+  Then we may choose $N > 0$ such that
+  \begin{equation*}
+    m(G \setminus G_N) = \sum_{n=N+1}^{\infty} m([a_n, b_n]) <
+    \frac{\epsilon}{2}.
+  \end{equation*}
+  Let $\phi = \chi_{G_N \cap [a, b]}$.
+  It is clear that $\phi \in \STEP([a, b], \mathbb{R})$.
+
+  It remains to show that
+  \begin{equation*}
+    \nu_p(\chi_H - \phi) = \int_{[a, b]} \abs{\chi_H - \phi}^p < \epsilon.
+  \end{equation*}
+  Notice that
+  \begin{align*}
+    \abs{\chi_H(x) - \phi(x)} = \begin{cases}
+      \abs{1 - 0} = 1 & x \in H \setminus G_N \\
+      \abs{0 - 1} = 1 & x \in (G_N \cap [a, b]) \setminus H \\
+      \abs{1 - 1} = 0 & x \in H \cap G_N \\
+      \abs{0 - 0} = 0 & x \notin H \cup G_N
+    \end{cases}.
+  \end{align*}
+  It thus follows that
+  \begin{align*}
+    \nu_p(\chi_H - \phi)
+    &= \int_{[a, b]} \abs{\chi_H - \phi}^p \\
+    &= \int_{E} \abs{\chi_H - \phi} \\
+    &= m(H \setminus G_N) + m((G_N \cap [a, b]) \setminus H) \\
+    &\leq m(G \setminus G_N) + m(G \setminus H) \\
+    &< \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+  \end{align*}
+  where $E = (H \setminus G_N) \cup ((G_N \cap [a, b]) \setminus H)$.
+  It thus follows that $[\chi_H] \in \overline{\Span} \mathcal{Z}$,
+  and so $\mathcal{Z} = [\STEP([a, b], \mathbb{R})]$ is dense in \\ \noindent
+  $(L_p([a, b], \mathbb{R}), \norm{\cdot}_p)$.
+\end{proof}
+
+\begin{note}
+  \cref{lemma:lemma_6_31} greatly simplified our proof above.
+  We completely circumvented the need to pick an arbitrary element
+  from $L_p([a, b], \mathbb{K})$ and try to approximate it
+  using step functions.
+  Instead, we need only approximate characteristic functions of measurable sets.
+
+  We shall use the same approach as we did in the proof above
+  to show that the equivalence classes of continuous functions
+  on a closed interval $[a, b]$, over $\mathbb{K}$, is dense
+  in $(L_p([a, b], \mathbb{K}), \norm{\cdot}_p)$.
+\end{note}
+
+\begin{thm}[Density of Equivalence Classes of Continuous Functions in $L_p$ Spaces]\label{thm:density_of_equivalence_classes_of_continuous_functions_in_l_p_spaces}
+  Let $a < b \in \mathbb{R}$. If $1 \leq p < \infty$, then $[\mathcal{C}([a, b],
+  \mathbb{K})]$ is dense in $(L_p([a, b], \mathbb{K}), \norm{\cdot}_p)$.
+\end{thm}
+
+\begin{proof}
+  We may once again assume that $\mathbb{K} = \mathbb{R}$,
+  as we did in the last 2 proofs.
+
+  Let
+  \begin{equation*}
+    \mathcal{B} \coloneqq \{ [\chi_{[r, s]}] : a \leq r < s \leq b \}.
+  \end{equation*}
+  By
+  \cref{propo:density_of_equivalence_classes_of_step_functions_in_l_p_spaces},
+  $\overline{\Span} \mathcal{B} = L_p([a, b], \mathbb{R})$. Let
+  \begin{equation*}
+    \mathcal{Z} \coloneqq [\mathcal{C}([a, b], \mathbb{R})].
+  \end{equation*}
+  By \cref{lemma:lemma_6_31},
+  it suffices to show that $\mathcal{B} \subseteq \overline{\mathcal{Z}}$.
+
+  Let $\epsilon > 0$ and $\chi_{[r, s]} \in [\chi_{[r, s]}] \in \mathcal{B}$.
+  Let $\frac{s-r}{2} > \delta > 0$ so that we consider the function
+  \begin{equation*}
+    f_{\delta}(x) = \begin{cases}
+      0 & x \in x \leq r \text{ or } x \geq s \\
+      \frac{1}{\delta} (x - r) & r < x \leq r + \delta \\
+      1 & r + \delta < x < s - \delta \\
+      -\frac{1}{\delta}(x - s) & s - \delta \leq x < s
+    \end{cases}.
+  \end{equation*}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2, 0) -- (2, 0);
+      \draw[dashed] (-2, 1) node[left] {$1$} -- (2, 1);
+      \node[label={270:$r$}] at (-1.5, 0) {|};
+      \node[label={270:$s$}] at (1.5, 0) {|};
+      \node[label={270:$r + \delta$}] at (-1, 0) {|};
+      \node[label={270:$s - \delta$}] at (1, 0) {|};
+      \draw[thick,color=red]
+        (-2, 0) -- (-1.5, 0) -- (-1, 1) -- (1, 1) -- (1.5, 0) -- (2, 0);
+    \end{tikzpicture}
+    \caption{Shape of the continuous function $f_\delta$ for approximating
+    $\chi_{[r, s]}$}\label{fig:shape_of_the_continuous_function_f_delta_for_approximating_chi_r_s}
+  \end{marginfigure}
+  Then
+  \begin{align*}
+    \norm{[\chi_{[r, s]}] - [f_\delta]}_p^p
+    &= \int_{[a, b]} \abs{\chi_{[r, s]} - f_{\delta}}^p \\
+    &\leq \int_{[r, r + \delta] \cup [s - \delta, s]} 1^p \\
+    &= m([r, r + \delta]) + m([s - \delta, s]) \\
+    &= 2\delta.
+  \end{align*}
+  Then picking $\delta < \frac{\epsilon}{2}$ in the first place,
+  our work is done.
+\end{proof}
+
+\newthought{Recall} that a topological space is said to be \hldefn{separable}
+if it admits a countable dense subset.
+
+\begin{ex}[A way of finding a countable subset in a separable metric space]\label{ex:a_way_of_finding_a_countable_subset_in_a_separable_metric_space}
+  Suppose $(X, d)$ is a separable metric space, $\delta > 0$, and
+  \begin{equation*}
+    Y \coloneqq \{ x_\lambda : \lambda \in \Lambda \} \subseteq X \text{ satisfies }
+    d(x_\alpha, x_\beta) \geq \delta
+    \text{ for all } \alpha \neq \beta \in \Lambda.
+  \end{equation*}
+  Then $\Lambda$ is countable.
+  \sidenote{We may intuitively think of the flow of the proof as follows.
+  If we can find such a $Y$ whose elements are always $\delta$ away 
+  from one another in a separable metric space,
+  then this $Y$ should end up swallowing elements in $X$ almost everywhere,
+  and in particular, $Y$ would be at least countable.
+  However, $Y$ is at most countable since it cannot be dense
+  (elements that are within $\delta$ away from any element of $Y$ cannot be
+  closely approximated).}
+\end{ex}
+
+\begin{crly}[Separability of $L_p$ Spaces]\label{crly:separability_of_l_p_spaces}
+  Let $a < b \in \mathbb{R}$.
+  \begin{enumerate}
+    \item If $1 \leq p < \infty$, then
+      $(L_p([a, b], \mathbb{R}), \norm{\cdot}_p)$ is separable.
+    \item If $p = \infty$, then
+      $(L_\infty([a, b], \mathbb{K}), \norm{\cdot}_\infty)$ is not separable.
+  \end{enumerate}
+\end{crly}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Fix $1 \leq p < \infty$.
+      Recall from \cref{remark:containment_of_lp_spaces} that for
+      $[f], [g] \in L_{\infty}([a, b], \mathbb{K}) \subseteq L_p([a, b], \mathbb{K})$,
+      we have
+      \begin{equation*}
+        \norm{[f] - [g]}_p
+        \leq \norm{[f] - [g]}_{\sup} \cdot m([a, b])^{\frac{1}{p}}
+        = \norm{[f] - [g]}_{\sup} (b - a)^{\frac{1}{p}}.
+      \end{equation*}
+
+      Let $\epsilon > 0$ and $[h] \in L_p([a, b], \mathbb{K})$.
+      By the
+      \hyperref[thm:density_of_equivalence_classes_of_continuous_functions_in_l_p_spaces]{density
+        of $[\mathcal{C}([a, b], \mathbb{K})]$ in $L_p([a, b], \mathbb{K})$},
+      we can find $[g] \in [\mathcal{C}([a, b], \mathbb{K})]$ such that
+      \begin{equation*}
+        \norm{[h] - [g]}_p < \frac{\epsilon}{3}.
+      \end{equation*}
+      By the \hlnotea{Weierstrass Approximation Theorem},
+      we can find a polynomial
+      $p(x) = p_0 + p_1 x + \hdots + p_m x^m \in \mathbb{C}[x]$
+      such that
+      \begin{equation*}
+        \norm{[g] - [p]}_\infty = \norm{g - p}_{\sup}
+        < \frac{\epsilon}{3(b - a)^{\frac{1}{p}}}.
+      \end{equation*}
+      By the density of $\mathbb{Q}$ in $\mathbb{R}$, we can find a polynomial
+      $q(x) = q_0 + q_1 x + \hdots + q_n x^n \in (\mathbb{Q} + i \mathbb{Q})[x]$
+      such that
+      \begin{equation*}
+        \norm{[p] - [q]}_\infty = \norm{p - q}_{\sup}
+        < \frac{\epsilon}{3 (b - a)^{\frac{1}{p}}}.
+      \end{equation*}
+      Observe that
+      \begin{align*}
+        &\norm{[h] - [q]}_p \\
+        &\leq \norm{[h] - [g]}_p + \norm{[g] - [p]}_p + \norm{[p] + [q]}_p \\
+        &\leq \norm{[h] - [g]}_p + \norm{[g] - [p]}_\infty (b - a)^{\frac{1}{p}}
+          + \norm{[p] - [q]}_{\infty} (b - a)^{\frac{1}{p}} \\
+        &< \frac{\epsilon}{3}
+          + \frac{\epsilon}{3(b-a)^{\frac{1}{p}}} (b-a)^{\frac{1}{p}}
+          + \frac{\epsilon}{3(b-a)^{\frac{1}{p}}} (b-a)^{\frac{1}{p}} \\
+        &= \epsilon.
+      \end{align*}
+      Thus, this $q$ is the polynomial from a countable subset.
+      Therefore, $[(\mathbb{Q} + i \mathbb{Q})[x]]$ is dense in
+      $(L_p([a, b], \mathbb{K}), \norm{\cdot}_p)$.
+
+    \item Consider $a \leq r_1 < s_1 \leq b$ and $a \leq r_2 < s_2 \leq b$,
+      with $r_1 \neq r_2$ and $s_1 \neq s_2$.
+      Then the \hldefn{symmetric difference}
+      \begin{equation*}
+        [r_1, s_1] \Delta [r_2, s_2] \coloneqq
+        ([r_1, s_1] \cup [r_2, s_2]) \setminus ([r_1, s_1] \cap [r_2, s_2])
+      \end{equation*}
+      contains an interval, say, $[u, v] \subseteq [a, b]$.
+      Notice that for any $x \in [u, v]$,
+      \begin{equation*}
+        \abs{ \chi_{[r_1, s_1]}(x) - \chi_{[r_2, s_2]} } = 1,
+      \end{equation*}
+      and so
+      \begin{equation*}
+        \norm{[\chi_{[r_1, s_1]}] - [\chi_{[r_2, s_2]}]}_\infty =
+        \norm{[\chi_{[r_1, s_1] \Delta [r_2, s_2]}]}_\infty = 1.
+      \end{equation*}
+      Consider
+      $\Lambda \coloneqq \{ (r, s) \in \mathbb{R}^2 : a \leq r < s \leq b \}$.
+      It is clear that $\Lambda$ is uncountable.
+      For any $(r_1, s_1) \neq (r_2, s_2) \in \Lambda$, by our above argument,
+      we have
+      \begin{equation*}
+        \norm{\chi_{[r_1, s_1]} - \chi_{[r_2, s_2]}}_{\sup} = 1.
+      \end{equation*}
+      By
+      \cref{ex:a_way_of_finding_a_countable_subset_in_a_separable_metric_space},
+      we have that $L_\infty([a, b], \mathbb{K})$ be must be separable.
+      \sidenote{All the elements $\chi_{[r, s]}$ are $1$-away from one another,
+      and so the contrapositive of the exercise gives us this counterexample.}
+  \end{enumerate}
+\end{proof}
+
+% section _l_p_spaces_continued_3 (end)
+
+% chapter lecture_13_jun_20th_2019 (end)
+
+
+
+
+
+
+
+
+
 
 \appendix
 

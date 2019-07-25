@@ -114,7 +114,7 @@ snippet // "Fraction" iA
 endsnippet
 
 context "math()"
-snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)/' "Fraction" wrA
+snippet '([0-9a-zA-Z\.\+\-\\]+)\/' "Fraction" wrA
 \\frac{`!p snip.rv = match.group(1)`}{$1}$0
 endsnippet
 
@@ -403,12 +403,12 @@ snippet '1q{([0-9a-zA-Z+\\{}-]*)}' "mortality" wrA
 endsnippet
 
 context "math()"
-snippet '(?<!\\){([0-9a-zA-Z+\|\\{}-]*)}p{([0-9a-zA-Z+\\{}-]*)}' "survival" wrA
+snippet '(?<!\\)(?<=\s|\$){(.*)}p{(.*)}' "survival" wrA
 \\px[`!p snip.rv = match.group(1)`]{`!p snip.rv = match.group(2)`}
 endsnippet
 
 context "math()"
-snippet '(?<!\\){([0-9a-zA-Z+\|\\{}-]*)}q{([0-9a-zA-Z+\\{}-]*)}' "mortality" wrA
+snippet '(?<!\\)(?<=\s|\$){(.*)}q{(.*)}' "mortality" wrA
 \\qx[`!p snip.rv = match.group(1)`]{`!p snip.rv = match.group(2)`}
 endsnippet
 
