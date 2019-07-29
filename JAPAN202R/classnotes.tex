@@ -17,7 +17,7 @@
 \usepackage{pxrubrica}
 \input{latex-classnotes-preamble.tex}
 
-\setmainfont{EB Garamond}
+\setmainfont[Ligatures=TeX]{P052}
 \setmainjfont{M+ 1mn}
 
 \begin{document}
@@ -45,6 +45,13 @@
 
 This set of notes will follow almost precisely the presentation in
 \citealt{banno1999}.
+
+The notes is also meant for readers that are already somewhat familiar
+with Japanese culture and speaking patterns, and so it shall be more
+focused on the linguistics, rather than bringing the reader
+to a level where they can understand, read and write some Japanese.
+As such, the GENKI series is probably not the ideal material,
+but this is also partly just to study for the exam on campus.
 
 % chapter preface (end)
 
@@ -79,13 +86,13 @@ This set of notes will follow almost precisely the presentation in
   & るすばんでんわ & 留守番電話 & answering machine \\
 * & れいぞうこ     & 冷蔵庫     & refrigerator \\
   & ろうそく       & 蝋燭       & candle \\
-\multicolumn{4}{l}{\hlnotea{い --- 形容詞}} \\
+\multicolumn{4}{l}{\hlnotea{イ --- 形容詞}} \\
   & あかるい         & 明るい     & bright \\
   & きぶんがわるいう & 気分が悪い & to feel sick \\
   & くらい           & 暗い       & dark \\
   & はずかしい       & 恥ずかしい & embarrassing; \\
   &                  &            & to feel embarrassed \\
-\multicolumn{4}{l}{\hlnotea{う - 動詞}} \\
+\multicolumn{4}{l}{\hlnotea{ウ --- 動詞}} \\
   & あく       & 開く       & (something) opens \\
   & あやまる   & 謝る       & to apologize \\
 * & おす       & 押す       & to press; to push \\
@@ -99,7 +106,7 @@ This set of notes will follow almost precisely the presentation in
 * & たのむ     & 頼む       & to ask a favor \\
 * & つく       &            & to turn (appliance) on \\
   & よごす     & 汚す       & to make dirty \\
-\multicolumn{4}{l}{\hlnotea{る - 動詞}} \\
+\multicolumn{4}{l}{\hlnotea{ル --- 動詞}} \\
   & おちる     & 落ちる   & to drop (something) \\
 * & かたづける & 片付ける & to tidy up \\
   & かんがえる & 考える   & to think (about); to consider \\
@@ -137,12 +144,73 @@ This is a direct equivalence of \hlnotea{transitivity} in English, where
   the state that things or people undergo.
 \end{defn}
 
-\begin{eg}
+\begin{defn}[他動詞]\index{他動詞}\label{defn:tadoushi}
+  \hlnoteb{他動詞} (transitive verbs) are verbs that describe
+  situations in which human beings act on things.
+\end{defn}
+
+Most verbs do not have a counterpart of the opposite transitivity.
+\cref{table:transitive_intransitive_verb_pair} shows some examples.
+
+\begin{table}[ht]
+  \centering
+  \caption{自動詞と他動詞ペア}
+  \label{table:transitive_intransitive_verb_pair}
+  \begin{tabular}{l | l}
+    他動詞 & 自動詞 \\
+    \hline
+    開ける & 開く \\
+    閉める & 閉まる \\
+    入れる & 入る \\
+    出す   & 出る \\
+    つける & つく \\
+    消す   & 消える \\
+    壊す   & 壊れる \\
+    汚す   & 汚れる \\
+    落とす & 落ちる \\
+    沸かす & 沸く
+  \end{tabular}
+\end{table}
+
+\begin{note}
   \begin{enumerate}
-    \item パソコン\underline{が}壊れた。The computer is broken.
-    \item 
+    \item 他動詞の場合はよく物や人に使うから、よく「を」と使います。 \\
+      例：たけしさんが電気\underline{を}つけました。
+    \item 自動詞は物を形容するみたいなことなので、よく「が」と
+      使っています。 \\
+      例：電気\underline{が}付きました。
   \end{enumerate}
-\end{eg}
+\end{note}
+
+There is also a subtle note that should be noted about the tenses
+of transitive and intransitive verbs.
+
+\begin{figure*}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[->] (-2, 0) -- (2, 0) node[right] {time};
+    \draw[thick,color=green]
+      (-2, -1) -- (-1, -1) node[color=foreground,midway,below] {will happen} --
+      (-0.5, 1) -- (0.5, 1) node[color=foreground,midway,above] {happening} --
+      (1, -1) -- (2, -1) node[color=foreground,midway,below] {happened};
+    \node[below=15pt,color=green] at (-1.5, -1) {壊します};
+    \node[above=15pt,color=green] at (0, 1) {壊しています};
+    \node[below=15pt,color=green] at (1.5, -1) {壊しました};
+
+    \draw[->] (4, 0) -- (8, 0) node[right] {time};
+    \draw[thick,color=green]
+      (4, -1) -- (5.5, -1) node[color=foreground,midway,below] {old state} --
+      (6.5, 1) -- (8, 1) node[color=foreground,midway,above] {new state};
+    \node[circle,fill=green,inner sep=1.5pt,
+      pin={[pin edge={latex'-}, pin distance=10pt]315:{state change}}]
+      at (6, 0) {};
+    \node[below=15pt,color=green] at (4.75, -1) {壊れます};
+    \node[below=5pt,color=green] at (7.5, -0.5) {壊れました};
+    \node[above=15pt,color=green] at (7.5, 1) {壊れています};
+  \end{tikzpicture}
+  \caption{Tenses Subtleties with Transitive and Intransitive Verbs}
+  \label{fig:tenses_subtleties_with_transitive_and_intransitive_verbs}
+\end{figure*}
 
 % section jidoushi_to_tadoushi (end)
 
@@ -150,7 +218,41 @@ This is a direct equivalence of \hlnotea{transitivity} in English, where
 \label{sec:_teshimau}
 % section _teshimau
 
+\begin{defn}[〜てしまう]\index{〜てしまう}\label{defn:teshimau}
+  \hlnoteb{〜てしまう} has 2 uses:
+  \begin{enumerate}
+    \item to say that one ``carries out with determination''
+      a plan described by the verb;
+    \item to say that there is a ``lack of premeditation
+      or control over how things have turned out''.
+      要するに、「〜てしまう」を使うときは、
+      自分がコントロールできないことや
+      起こりたくないことを起こったなど
+      の無力の感情を表します。
+  \end{enumerate}
+\end{defn}
 
+\begin{eg}
+  To show the use of 〜しまう, we have the following examples:
+  \begin{enumerate}
+    \item 本を読んでしまいました。 I ended up reading the book.
+    \item 電車の中にかばんを忘れてしまいました。 I left my bag in the train.
+    \item 宿題を忘れたので、先生は怒ってしまいました。 I was reprimanded
+      for forgetting about my homework.
+  \end{enumerate}
+\end{eg}
+
+\begin{note}
+  In speech, we often hear 〜てしまう and 〜でしまう contracted as
+  〜ちゃう and 〜じゃう, respectively.
+\end{note}
+
+\begin{warning}
+  Note that しまう goes with the verbal テ form,
+  which is affirmative, and so we cannot use 〜てしまう
+  to express negated ideas or actions, such as, "unfortunately,
+  I did not do $x$."
+\end{warning}
 
 % section _teshimau (end)
 
@@ -158,7 +260,36 @@ This is a direct equivalence of \hlnotea{transitivity} in English, where
 \label{sec:_to}
 % section _to
 
+\begin{defn}[〜と]\index{〜と}\label{defn:to}
+  Usually used as
+  \begin{center}
+    A とB,
+  \end{center}
+  where A is a situation, and B is the consequent effect.
+  〜と is one of the conditional conjugates.
+\end{defn}
 
+\begin{note}
+  The use of と here is not to be confused with its other use as an equivalence
+  of ``and'' in English.
+\end{note}
+
+\begin{eg}
+  \begin{enumerate}
+    \item 私はその人と話すと元気になる。
+    \item メアリーさんが国に帰ると寂しくなります。
+    \item 秋になると木が赤くなります。
+  \end{enumerate}
+\end{eg}
+
+\begin{warning}
+  The event described by the second clause must be a rather clear consequence
+  of the first situation.
+  For instance, we do not say
+  \begin{center}
+    私はその人と話すと\ruby[j]{喫茶店}{きっ|さ|てん}に行きます。
+  \end{center}
+\end{warning}
 
 % section _to (end)
 
@@ -166,7 +297,33 @@ This is a direct equivalence of \hlnotea{transitivity} in English, where
 \label{sec:_nagara}
 % section _nagara
 
+\begin{defn}[〜ながら]\index{〜ながら}\label{defn:nagara}
+  We write
+  \begin{center}
+    A \hlnoteb{ながら} B をします
+  \end{center}
+  to express that we do B while A is either being done or ongoing.
+\end{defn}
 
+\begin{note}
+  It is important to note that the two verbs that flank ながら
+  must be two actions performed by the same person.
+
+  For the case where person 2 does something
+  while person 1 is doing something else, we shall use
+  \nameref{sec:aidani}.
+\end{note}
+
+\begin{eg}[Basic examples for 〜ながら]
+  \begin{enumerate}
+    \item 私はいつもラジオ番組を聞きながら
+      勉強します。
+    \item たけしさんは歌を歌いながら
+      掃除します。
+    \item アルバイトをしながら
+      学校に行くのは大変です。
+  \end{enumerate}
+\end{eg}
 
 % section _nagara (end)
 
@@ -174,7 +331,27 @@ This is a direct equivalence of \hlnotea{transitivity} in English, where
 \label{sec:_bayokatsutadesu}
 % section _bayokatsutadesu
 
+\begin{defn}[〜ばよかったです]\index{〜ばよかったです}\label{defn:_bayokatsutadesu}
+  We say
+  \begin{center}
+    X すれ\hlnoteb{ばよかったです}
+  \end{center}
+  to indicate that \hlnotef{we hope we had did X}.
+  It is used to describe an alternative course of actions that we
+  regret not taking.
+\end{defn}
 
+\begin{note}
+  For the rules of conjugating for 〜ば, we shall refer the reader to
+  \nameref{sec:ba}, which gives a broader treatment to the form.
+\end{note}
+
+\begin{eg}
+  \begin{enumerate}
+    \item あの時、「愛している」と言えばよかったです。
+    \item 彼女と別れなければよかったです。
+  \end{enumerate}
+\end{eg}
 
 % section _bayokatsutadesu (end)
 
@@ -188,23 +365,201 @@ This is a direct equivalence of \hlnotea{transitivity} in English, where
 \label{sec:tango_c19}
 % section tango_c19
 
-
+\begin{longtable}{r l l l}
+\multicolumn{4}{l}{\hlnotea{名詞}} \\
+* & おくさま       & 奥様           & (your/his) wife (polite) \\
+  & おこさん       & お子さん       & (your/their) child (polite) \\
+  & おれい         & お礼           & expression of gratitude \\
+  & けいご         & 敬語           & honorific language \\
+* & こちら         &                & this way (polite) \\
+* & しゅっちょう   & 出張           & business trip \\
+  & しゅるい       & 種類           & a kind; a sort \\
+  & せいかく       & 性格           & personality; temperament \\
+  & ちゅうがくせい & 中学生         & junior high school student \\
+  & どちら         &                & where (polite) \\
+  & なまけもの     & 怠け者         & lazy person \\
+  & なやみ         & 悩み           & worry \\
+  & はずかしがりや & 恥ずかしがりや & shy person \\
+* & はなし         & 話             & chat; talk \\
+* & ぶちょう       & 部長           & department manager; club president \\
+  & ぶんか         & 文化           & culture \\
+  & まちがい       & 間違い         & mistake \\
+\multicolumn{4}{l}{\hlnotea{イ --- 形容詞}} \\
+  & なかがいい & 仲がいい & to be on good terms; to get along well \\
+\multicolumn{4}{l}{\hlnotea{ナ --- 形容詞}} \\
+  & まじめな & 真面目な & serious; sober; diligent \\
+\multicolumn{4}{l}{\hlnotea{ウ --- 動詞}} \\
+  & いらっしゃる     &              & honorific form for いく, くる and いる \\
+* & おくる           & 送る         & to walk/drive (someone) \\
+  & おこる           & 怒る         & to gete angry \\
+  & おっしゃる       &              & honorific form for 言う \\
+* & おやすみになる   & お休みになる & honorific form for 寝る \\
+* & きまる * 決まる  &              & to make a decision \\
+  & くださる         & 下さる       & honorific form for くれる \\
+  & ごらんいなる     & ご覧になる   & honorific form for 見る \\
+  & しりあう         & 知り合う     & to get acquainted with \\
+  & 〜ていらっしゃる &              & honorific form for 〜ている \\
+  & なさる           &              & honorific form for する \\
+  & ひっこす         & 引っ越す     & to move (to another place to live) \\
+* & めしあがる       & 召し上がる   & honorific form for 食べる and 飲む \\
+* & よぶ             & 呼ぶ         & to call (someone's name); to invite (person) \\
+* & よる             & 寄る         & to stop by \\
+\multicolumn{4}{l}{\hlnotea{ル --- 動詞}} \\
+* & おくれる & 遅れる & to become late (for something) \\
+  & かける   &        & to sit down (\textit{seat} に) \\
+  & はれる   & 晴れる & to become sunny \\
+  & もてる   &        & to be popular (in terms of romantic interest) \\
+\multicolumn{4}{l}{\hlnotea{特別動詞}} \\
+* & えんりょする & 遠慮する & to hold back for the time being; \\
+  & & & to refrain from \\
+* & ごちそうする & & to treat/invite (someone) to a meal \\
+  & しょうたいする & 招待する & to invite someone (to an event/place) \\
+  & ちゅういする & 注意する & to watch out; to give warning \\
+* & はなしをする & 話をする & to have a talk \\
+\multicolumn{4}{l}{\hlnotea{他の}} \\
+  & おととい         &                & the day before yesterday \\
+  & それで           &                & then; therefore \\
+  & なぜ             &                & why (＝どうして) \\
+* & ほんとうは       & 本当は         & in fact; originally so \\
+  & まいあさ         & 毎朝           & every morning \\
+* & まだ             &                & still \\
+* & 〜めいさま       & 〜名様         & party of ... people \\
+  & ようこそ         &                & Welcome \\
+* & よろしくおつたえ & よろしくお伝え & Please give my regards (to... ) \\
+  & ください         & ください       &
+\end{longtable}
 
 % section tango_c19 (end)
 
-\section{尊敬語}%
-\label{sec:sonkeigo}
-% section sonkeigo
+\section{尊敬語 Honorific Verbs}%
+\label{sec:sonkeigo_honorific_verbs}
+% section sonkeigo_honorific_verbs
 
+We use honorific verbs to show respect to the person
+of which the action pertains to.
 
+The following are some of the verbs converted to their
+honorific forms, along with their \hlnotec{irregular conjugations}.
 
-% section sonkeigo (end)
+\begin{table}[ht]
+  \centering
+  \caption{Table of Basic Verbs in their Honorific Form and Their Irregular Conjugation}
+  \label{table:table_of_basic_verbs_in_their_honorific_form_and_their_irregular_conjugation}
+  \begin{tabular}{l | l l}
+    Basic Verb & Honorific Verbs             & Irregular Conjugation \\
+    \hline
+    いる       &                             & \\
+    行く       & いらっしゃる                & いらしゃ\underline{い}ます \\
+    来る       &                             & \\
+    \hline
+    見る       & ご覧になる                  & \\
+    \hline
+    言う       & おっしゃる                  & おっしゃ\underline{い}ます \\
+    \hline
+    する       & なさる                      & なさ\underline{い}ます \\
+    \hline
+    食べる     & \multirow{2}{*}{召し上がる} & \\
+    飲む       &                             & \\
+    \hline
+    くれる     & くださる                    & くださ\underline{い}ます \\
+    \hline
+    寝る       & お休みになる                & \\
+    \hline
+    〜ている   & 〜ていらっしゃる            & 〜ていらっしゃ\underline{い}ます
+  \end{tabular}
+\end{table}
+
+\begin{warning}
+  Honorific verbs are directed towards describing the action
+  of the person that we speak of.
+  We never use honorific verbs to describe our own actions.
+\end{warning}
+
+\begin{eg}
+  \begin{enumerate}
+    \item 先生は今日学校にいらっしゃいません。
+    \item 何が召し上がりますか。
+    \item 田中さんのお母さんがこの本をくださいました。
+    \item 先生は自分で料理なさるそうです。
+  \end{enumerate}
+\end{eg}
+
+\begin{note}
+  For verbs that lack an honorific counterpart,
+  we add the respect factor as follows:
+  \begin{enumerate}
+    \item Using ていらっしゃいます instead of ています,
+      if the sentence has the helping verb ている. \\
+      例：先生が電話で話していらっしゃいます。\\
+      例：先生は疲れていらっしゃるみたいです。
+    \item Flank the verb stem with お and になる,
+      in most cases. \\
+      例：先生はもうお帰りになりました。 \\
+      例：この雑誌をお読みになったことがありますか。
+  \end{enumerate}
+\end{note}
+
+\begin{note}
+  As shown in the above examples,
+  we can turn most combinations of a verb and a post-predicate expression
+  into the honorific style simply by turning the verb into the honorific form.
+  However, post-predicate expressions such as
+  ことがあります and ください remain unchanged.
+  This also applies to expressions like てもいい and てはいけない,
+  to the potential verbs.
+
+  It is noteworthy that it is note in good taste to talk about what
+  the respected person can or cannot do, may or must not do.
+
+  ている is exceptional in being a post-predicate that regularly undergoes the
+  honorific style change.
+  Special honorific verbs generally \hlnoted{take priority} over
+  ていらっしゃる, such as in
+  \begin{center}
+    先生はテレビを\hlnoted{ご覧になっています}。
+  \end{center}
+  However, forms like 見ていらっしゃいます are also acceptable.
+\end{note}
+
+% section sonkeigo_honorific_verbs (end)
 
 \section{Giving Respectful Advice}%
 \label{sec:giving_respectful_advice}
 % section giving_respectful_advice
 
+We usually hear the form
+\begin{center}
+  お + verb stem + ください
+\end{center}
+in public address announcements and in the speech of store attendants.
 
+\begin{eg}
+  \begin{enumerate}
+    \item 切符をお取りください。
+    \item 説明をお読みください。
+  \end{enumerate}
+\end{eg}
+
+While the sentences end with ください,
+it is best to consider them as courteously phrased commands,
+rather than a request.
+In particular, you are `advised' to perform said action for your own sake.
+Thus, it is inappropriate to say
+\begin{center}
+  $\times$ \ruby[j]{塩}{しお}をお取りください。
+\end{center}
+to mean that you wish for someone to pass the salt to you.
+
+\begin{eg}
+  Some further examples of giving respectful advice are the following:
+  \begin{enumerate}
+    \item ご注意ください。
+    \item ご覧ください。
+    \item お召し上がりください。
+    \item お休みください。
+  \end{enumerate}
+  Notice the use of ご instead of お with certain compound verbs.
+\end{eg}
 
 % section giving_respectful_advice (end)
 
@@ -212,7 +567,21 @@ This is a direct equivalence of \hlnotea{transitivity} in English, where
 \label{sec:_tekuretearigatou}
 % section _tekuretearigatou
 
+\begin{defn}[〜てくれてありがとう]\index{〜てくれてありがとう}\label{defn:_tekuretearigatou}
+  When we want to \hlnotef{express gratitude to someone for a specific action},
+  we can say
+  \begin{center}
+    verb テ form + くれてありがとう.
+  \end{center}
+\end{defn}
 
+\begin{eg}
+  \begin{enumerate}
+    \item 手伝ってくれてありがとう。
+    \item 推薦状を書いてくださってありがとうございました。
+    \item いい友達でいてくれてありがとう。
+  \end{enumerate}
+\end{eg}
 
 % section _tekuretearigatou (end)
 
@@ -220,7 +589,21 @@ This is a direct equivalence of \hlnotea{transitivity} in English, where
 \label{sec:_teyokatsutadesu}
 % section _teyokatsutadesu
 
+\begin{defn}[〜てよかった]\index{〜てよかった}\label{defn:_teyokatsuta}
+  We say
+  \begin{center}
+    verb テ form てよかったです
+  \end{center}
+  to express that we are \hlnotef{glad that a certain action (or inaction) is done}.
+\end{defn}
 
+\begin{eg}
+  \begin{enumerate}
+    \item 日本語を勉強してよかったです。
+    \item メアリーさんが元気になってよかったです。
+    \item きのうのパーティーに行かなくてよかったです。
+  \end{enumerate}
+\end{eg}
 
 % section _teyokatsutadesu (end)
 
@@ -228,7 +611,26 @@ This is a direct equivalence of \hlnotea{transitivity} in English, where
 \label{sec:_hazudesu}
 % section _hazudesu
 
+\begin{defn}[〜はずです]\index{〜はずです}\label{defn:_hazudesu}
+  We say
+  \begin{center}
+    verb stem + はずです
+  \end{center}
+  to show that an action was \hlnotef{supposed to be the case}.
 
+  We may also use 〜はずです with adjectives and nouns,
+  almost without explicit modification but in their modal forms.
+\end{defn}
+
+\begin{eg}
+  \begin{enumerate}
+    \item 今日は日曜日だから、銀行は閉まっているはずです。
+    \item きのうメアリーさんはどこにも行かなかったはずです。
+    \item この試験は難しいはずです。
+    \item そんなはずじゃなかったです。
+    \item 日本人のはずです。
+  \end{enumerate}
+\end{eg}
 
 % section _hazudesu (end)
 
@@ -242,35 +644,534 @@ This is a direct equivalence of \hlnotea{transitivity} in English, where
 \label{sec:tango_c20}
 % section tango_c20
 
-
+\begin{longtable}{r l l l}
+\multicolumn{4}{l}{\hlnotea{名詞}} \\
+  & あちら       &          & that way (polite) \\
+  & アニメ       &          & animation \\
+  & うちゅうじん & 宇宙人   & space alien \\
+* & おと         & 音       & sound \\
+  & おにぎり     &          & rice ball \\
+* & かかりのもの & 係の者   & (our) person in charge \\
+* & かど         & 角       & corner \\
+  & くうこう     & 空港     & airport \\
+  & じ           & 字       & letter; character \\
+  & してん       & 支店     & branch office \\
+  & しゅみ       & 趣味     & hobby; pastime \\
+  & しょうせつ   & 小説     & novel \\
+  & しんご       & 信号     & traffice light \\
+  & スニーカー   &          & sneakers \\
+* & せんす       & 扇子     & paper fan \\
+  & つき         & 月       & moon \\
+* & でんしじしょ & 電子辞書 & electronic dictionary \\
+  & ドイツ       &          & Germany \\
+  & ハイヒール   &          & high heels \\
+* & 〜や         & 〜屋     & .. shop \\
+\multicolumn{4}{l}{\hlnotea{イ --- 形容詞}} \\
+* & おもい & 重い & heavy; serious (illness, topic) \\
+  & かるい & 軽い & light \\
+\multicolumn{4}{l}{\hlnotea{ウ --- 動詞}} \\
+* & いたす     & 致す   & extra-modest form for する \\
+* & いただく   & 頂く   & extra-modest form for 食べる and 飲む; \\
+  &            &        & humble form for もらう \\
+  & うかがう   & 伺う   & to humbly visit; to humbly ask \\
+  & おる       &        & extra-modest form for いる \\
+* & ござる     &        & extra-modest form for ある \\
+  & 〜ておる   &        & extra-modest form for 〜ている \\
+  & 〜てござる &        & extra-modest form for です \\
+* & まいる     & 参る   & extra-modest form for いく and くる \\
+* & まがる     & 曲がる & to run at a corner \\
+* & もうす     & 申す   & extra-modest form for 言う \\
+  & もどる     & 戻る   & to come back \\
+\multicolumn{4}{l}{\hlnotea{ル --- 動詞}} \\
+* & きこえる   & 聞こえる   & to be audible \\
+  & さしあげる & 差し上げる & humble form for あげる \\
+  & つたえる   & 伝える     & to convey (a message) \\
+* & またせる   & 待たせる   & to keep (someone) waiting \\
+\multicolumn{4}{l}{\hlnotea{特別動詞}} \\
+* & こうかんする & 交換する & to exchange \\
+  & せいかつする & 生活する & to lead a life \\
+* & へんぴんする & 返品する & to return (merchandise) \\
+\multicolumn{4}{l}{\hlnotea{他の}} \\
+* & おや？           &                  & Oh? \\
+  & 〜かい           & 〜階             & ...th floor \\
+* & かしこまりました &                  & Certainly. \\
+  & さあ             &                  & I am not very sure, ... \\
+* & しつれいしました & 失礼いたしました & I am very sorry. \\
+* & しょうしょう     & 少々             & a few seconds \\
+  & それでは         &                  & if that is the case, ... \\
+* & できれば         &                  & if possible \\
+* & まことに         & 誠に             & really; sincerely (very polite) \\
+  & また             &                  & again \\
+  & 〜みたいな       &                  & such as... \\
+* & もうしわけ       & 申し訳           & You have my apologies. \\
+  & ありません       & ありません       & \\
+* & よろしかったら   &                  & if it is okay (polite)
+\end{longtable}
 
 % section tango_c20 (end)
 
-\section{丁重語}%
-\label{sec:teichougo}
-% section teichougo
+\section{丁重語 Extra-modest Expressions}%
+\label{sec:teichougo_extra_modest_expressions}
+% section teichougo_extra_modest_expressions
 
+To speak modestly of our own actions, we shall use what is called
+\ruby[j]{丁重語}{てい|ちょう|ご}.
+\cref{table:basic_extra_modest_expressions} shows some of the basic
+extra-modest expressions.
 
+\begin{table}[ht]
+  \centering
+  \caption{Basic Extra-modest Expressions}
+  \label{table:basic_extra_modest_expressions}
+  \begin{tabular}{l l l}
+             & \multicolumn{2}{l}{extra-modest expression} \\
+    いる     & おります                      & (おる) \\
+    行く     & \multirow{2}{*}{参ります}     & \multirow{2}{*}{(参る)} \\
+    来る     &                               & \\
+    言う     & 申します                      & (申す) \\
+    する     & いたします                    & (いたす) \\
+    食べる   & \multirow{2}{*}{いただきます} & \multirow{2}{*}{(いただく)} \\
+    飲む     &                               & \\
+    ある     & ございます                    & (ござる) \\
+    〜ている & 〜ております                  & (〜ておる) \\
+    〜です   & 〜でございます                & (〜でござる)
+  \end{tabular}
+\end{table}
 
-% section teichougo (end)
+\begin{eg}
+  \begin{enumerate}
+    \item 私は来年も日本におります。 cf. います
+    \item 私は今年の六月に大学を卒業いたしました。 cf. 卒業します
+    \item 電車が参ります。
+    \item 父が家におります。
+  \end{enumerate}
+\end{eg}
 
-\section{謙虚語}%
-\label{sec:kenkyogo}
-% section kenkyogo
+% section teichougo_extra_modest_expressions (end)
 
+\section{謙虚語 Humble Expressions}%
+\label{sec:kenkyogo_humble_expressions}
+% section kenkyogo_humble_expressions
 
+When doing something out of respect for somebody,
+we can describe our actions using a verb in the humble pattern
+\begin{center}
+  お + stem + する.
+\end{center}
+Note that certain する compound verbs do not follow this pattern,
+but instead takes on the form
+\begin{center}
+  ご + base compound verb + する.
+\end{center}
 
-% section kenkyogo (end)
+\begin{eg}
+  \begin{enumerate}
+    \item 私は昨日先生にお会いしました。
+    \item 私は先生の本をお貸しするつもりです。
+    \item 部長にお電話します。
+    \item お客様をご案内します。
+  \end{enumerate}
+\end{eg}
+
+\begin{warning}
+  It has been debated that we should avoid using 差し上げる
+  to say that ``we do something for somebody''.
+  The argument is that the idea of doing something for somebody
+  as a service is but an insolent belief, and having to speak
+  of it in a humble way is an unconvincing facade.
+  Instead, we make use of the お + stem + する form in this cases.
+\end{warning}
+
+% section kenkyogo_humble_expressions (end)
 
 \section{〜ないで}%
 \label{sec:_naide}
 % section _naide
 
+\begin{defn}[〜ないで]\index{〜ないで}\label{defn:_naide}
+  When doing something without doing something else,
+  we say
+  \begin{center}
+    X し\hlnoteb{ないで} Y します
+  \end{center}
+  to mean that we do Y without doing X.
+\end{defn}
 
+\begin{note}
+  We use 〜ない for both present and past actions.
+  One may think of the speaker say that they did not do X
+  while thinking of themselves as being at that time when
+  the action was expected to happen.
+\end{note}
+
+\begin{eg}
+  \begin{enumerate}
+    \item 昨日の夜は、寝ないで、勉強しました。
+    \item 辞書を使わないで、新聞を読みます。
+  \end{enumerate}
+\end{eg}
 
 % section _naide (end)
 
+\section{Questions within Larger Sentences}%
+\label{sec:questions_within_larger_sentences}
+% section questions_within_larger_sentences
+
+One can include a question as part of a longer sentence
+and express ideas such as ``I don't know when the test is''
+and ``I don't remember whether Mary came to the party.''
+
+\begin{eg}
+  We shall highlight the quoted question clauses in the following
+  examples:
+  \begin{enumerate}
+    \item 山下先生は\hlnoted{昨日何を食べたか}覚えていません。
+    \item \hlnoted{メアリーさんは来たかどうか}知っていますか。 
+  \end{enumerate}
+\end{eg}
+
+% section questions_within_larger_sentences (end)
+
+\section{name という item}%
+\label{sec:name_toiu_item}
+% section name_toiu_item
+
+\begin{defn}[name という item]\index{name という item}\label{defn:name_toiu_item}
+  When we talk about something that we do not think our
+  listener may not be familiar with, we can use the pattern
+  \begin{center}
+    name という category,
+  \end{center}
+  where the category tries to describe the item in the name
+  usually in a generic sense.
+\end{defn}
+
+\begin{eg}
+  \begin{enumerate}
+    \item ポチという犬
+    \item 「花」という歌
+  \end{enumerate}
+\end{eg}
+
+% section name_toiu_item (end)
+
+\section{〜やすい / 〜にくい}%
+\label{sec:_yasui_nikui}
+% section _yasui_nikui
+
+When describing that something is ``easy to do'' or
+``difficult to do'', we use the conjugatation
+〜やすい and 〜にくい, respectively.
+
+\begin{eg}
+  \begin{enumerate}
+    \item この電子辞書は使いやすいです。 cf 使う
+    \item 骨が多いので、魚は食べにくいです。 cf 食べる
+  \end{enumerate}
+\end{eg}
+
+% section _yasui_nikui (end)
+
 % chapter dai_20_ka (end)
+
+\chapter{第２１課}%
+\label{chp:dai_21_ka}
+% chapter dai_21_ka
+
+\section{単語（２１課）}%
+\label{sec:tango_c21}
+% section tango_c21
+
+\begin{longtable}{r l l l}
+\multicolumn{4}{l}{\hlnotea{名詞}} \\
+  & あかちゃん & 赤ちゃん & baby \\
+  & か         & 蚊       & mosquito \\
+  & かいぎ     & 会議     & business meeting; conference \\
+  & ガソリン   &          & gasoline \\
+  & かんきょう & 環境     & environment \\
+* & けいさつ   & 警察     & police \\
+  & こうじょう & 工場     & factory \\
+* & こと       & 事       & things; matters \\
+* & しゅうでん & 終電     & last train \\
+  & じゅんび   & 準備     & preparation \\
+  & スピーチ   &          & speech \\
+  & せいふ     & 政府     & government \\
+  & ちかん     &          & sexual offender; prevent \\
+  & どうりょう & 同僚     & colleague \\
+* & どろぼう   & 泥棒     & thief; burglar \\
+* & バイト     &          & short for アルバイト \\
+* & はんにん   & 犯人     & criminal \\
+  & ポスター   &          & poster \\
+  & むかし     & 昔       & old days; past \\
+  & もんく     & 文句     & complaint \\
+* & るす       & 留守     & absence; not at home \\
+\multicolumn{4}{l}{\hlnotea{イ --- 形容詞}} \\
+  & とおい & 遠い & far away \\
+  & ひどい & 酷い & awful; cruel \\
+\multicolumn{4}{l}{\hlnotea{ナ --- 形容詞}} \\
+  & あんぜん     & 安全 & safe \\
+  & たいせつ     & 大切 & precious; valuable \\
+* & めちゃくちゃ &      & messy; disorganized \\
+\multicolumn{4}{l}{\hlnotea{ウ --- 動詞}} \\
+  & おく         & 置く       & to put; to lay; to place \\
+* & きがつく     & 気が付く   & to notice \\
+  & ける         &            & to kick \\
+  & さす         & 刺す       & to sting; to poke \\
+  & さわる       & 触る       & to touch \\
+* & つかまる     & 捕まる     & to be arrested; to be caught \\
+  & つつむ       & 包む       & to wrap; to cover \\
+  & なぐる       & 殴る       & to strike; to hit; to punch \\
+  & ぬすむ       & 盗む       & to steal; to rob \\
+  & はる         & 貼る       & to post; to stick \\
+  & ふむ         & 踏む       & to step on \\
+  & ふる         &            & to turn down; to reject; to jilt \\
+  & もんくをいう & 文句を言う & to complain \\
+  & やく         & 焼く       & to bake; to burn; to grill \\
+  & やる         &            & to give (to pets, plants, younger siblings, etc.) \\
+\multicolumn{4}{l}{\hlnotea{ル --- 動詞}} \\
+  & いじめる   &          & to bully \\
+  & きがえる   & 着替える & to change clothes \\
+* & ためる     &          & to save money \\
+  & つづける   & 続ける   & to continue \\
+  & ほめる     & 褒める   & to praise; to say nice things \\
+  & まちがえる & 間違える & to make a mistake \\
+  & みつける   & 見つける & to find \\
+\multicolumn{4}{l}{\hlnotea{特別動詞}} \\
+  & ばかにする   &            & to insult; to make a fool of... \\
+* & びっくりする &            & to be surprised \\
+  & ひるねをする & 昼寝をする & to take a nap \\
+* & れんらくする & 連絡する   & to contact \\
+\multicolumn{4}{l}{\hlnotea{他の}} \\
+* & 〜あいだに & 〜間に & while ... \\
+* & ころ       & 頃     & time of ...; when ... \\
+  & すこし     & 少し   & a little \\
+* & とにかく   &        & anyway; anyhow
+\end{longtable}
+
+% section tango_c21 (end)
+
+\section{受動文 Passive Sentences}%
+\label{sec:jyudoubun_passive_sentences}
+% section jyudoubun_passive_sentences
+
+We can change verbs into their passive forms, and use them as we do in English.
+
+\begin{table}[ht]
+  \centering
+  \caption{Rules of converting from base form to passive form}
+  \label{table:rules_of_converting_from_base_form_to_passive_form}
+  \begin{tabular}{l c l c l c l}
+  \multicolumn{7}{l}{ル --- 動詞: 「る」は「られる」になる} \\
+  食べる & $\to$ & 食べられる &  &  &  &  \\
+  $  $ \\
+  \multicolumn{7}{l}{う --- 動詞: 最後の「う」の音は「あれる」になる} \\
+  行く & $\to$ & 行かれる & & 話す & $\to$ & 話される \\
+  待つ & $\to$ & 待たれる & & 死ぬ & $\to$ & 死なれる \\
+  読む & $\to$ & 読まれる & & 取る & $\to$ & 取られる \\
+  泳ぐ & $\to$ & 泳がれる & & 遊ぶ & $\to$ & 遊ばれる \\
+  買う & $\to$ & 買われる \\
+  $  $ \\
+  \multicolumn{7}{l}{特別動詞} \\
+  来る & $\to$ & 来られる & & する & $\to$ & される
+  \end{tabular}
+\end{table}
+
+\begin{note}
+  One may notice that the passive forms for ル動詞 and 特別動詞
+  are the same as their potential forms, while
+  ウ動詞 are different from their potential counterparts.
+\end{note}
+
+% section jyudoubun_passive_sentences (end)
+
+\section{〜てある}%
+\label{sec:tearu}
+% section tearu
+
+
+
+% section tearu (end)
+
+\section{〜間に}%
+\label{sec:aidani}
+% section aidani
+
+
+
+% section aidani (end)
+
+\section{形容詞＋する}%
+\label{sec:keiyoushi_suru}
+% section keiyoushi_suru
+
+
+
+% section keiyoushi_suru (end)
+
+\section{〜てほしい}%
+\label{sec:tehoshii}
+% section tehoshii
+
+
+
+% section tehoshii (end)
+
+% chapter dai_21_ka (end)
+
+\chapter{第２２課}%
+\label{chp:dai_22_ka}
+% chapter dai_22_ka
+
+\section{単語（２２課）}%
+\label{sec:tango_c22}
+% section tango_c22
+
+
+
+% section tango_c22 (end)
+
+\section{使役動詞 Causative Verbs}%
+\label{sec:shiekidoushi_causative_verbs}
+% section shiekidoushi_causative_verbs
+
+The verb derivation that shall be introduced here is called the
+\hldefn{causative form}. We use causative forms when we want to describe
+who makes someone do something, or who lets someone do something.
+
+\begin{table}[ht]
+  \centering
+  \caption{Rules of converting from base form to causative form}
+  \label{table:rules_of_converting_from_base_form_to_causative_form}
+  \begin{tabular}{l c l c l c l}
+  \multicolumn{7}{l}{ル --- 動詞: 「る」は「させる」になる} \\
+  食べる & $\to$ & 食べさせる &  &  &  &  \\
+  $  $ \\
+  \multicolumn{7}{l}{う --- 動詞: 最後の「う」の音は「あせる」になる} \\
+  行く & $\to$ & 行かせる & & 話す & $\to$ & 話させる \\
+  待つ & $\to$ & 待たせる & & 死ぬ & $\to$ & 死なせる \\
+  読む & $\to$ & 読ませる & & 取る & $\to$ & 取らせる \\
+  泳ぐ & $\to$ & 泳がせる & & 遊ぶ & $\to$ & 遊ばせる \\
+  買う & $\to$ & 買わせる \\
+  $  $ \\
+  \multicolumn{7}{l}{特別動詞} \\
+  来る & $\to$ & 来させる & & する & $\to$ & させる
+  \end{tabular}
+\end{table}
+
+% section shiekidoushi_causative_verbs (end)
+
+\section{動詞＋なさい}%
+\label{sec:doushi_nasai}
+% section doushi_nasai
+
+
+
+% section doushi_nasai (end)
+
+\section{〜ば}%
+\label{sec:ba}
+% section ba
+
+\begin{defn}[〜ば]\index{〜ば}\label{defn:_ba}
+  We use \hlnoteb{〜ば} to express a condition at which an event that follows
+  occur. We write
+  \begin{center}
+    A ば B
+  \end{center}
+  to say ``if A then B''.
+\end{defn}
+
+\begin{table*}[ht]
+  \centering
+  \caption{Rules of conjugation for 〜ば}
+  \label{table:rules_of_conjugation_for_ba}
+  \begin{tabular}{l c l c l c l c l c l}
+  \multicolumn{11}{l}{Verbs in the affirmative:} \\
+  \multicolumn{11}{l}{「う」の音を捨てる、「えば」になる} \\
+  食べる & $\to$ & 食べれば \\
+  行く   & $\to$ & 行けば &  & 待つ & $\to$ & 待てば &  & 買う & $\to$ & 買えば \\
+  する   & $\to$ & すれば \\
+  来る   & $\to$ & 来れば \\
+  $  $ \\
+  \multicolumn{11}{l}{Verbs in the negative} \\
+  \multicolumn{11}{l}{「い」を捨てる、「ければ」になる} \\
+  行かない & $\to$ & 行かなければ
+  \end{tabular}
+\end{table*}
+
+% section ba (end)
+
+\section{〜のに}%
+\label{sec:noni}
+% section noni
+
+
+
+% section noni (end)
+
+\section{〜のような / 〜のように}%
+\label{sec:noyouna_noyouni}
+% section noyouna_noyouni
+
+
+
+% section noyouna_noyouni (end)
+
+% chapter dai_22_ka (end)
+
+\chapter{第２３課}%
+\label{chp:dai_23_ka}
+% chapter dai_23_ka
+
+\section{単語（２３課）}%
+\label{sec:tango_c23}
+% section tango_c23
+
+
+
+% section tango_c23 (end)
+
+\section{使役動詞の受動態 Causative-Passive Forms}%
+\label{sec:shiekidoushi_no_jyudoudai_causative_passive_forms}
+% section shiekidoushi_no_jyudoudai_causative_passive_forms
+
+
+
+% section shiekidoushi_no_jyudoudai_causative_passive_forms (end)
+
+\section{〜ても}%
+\label{sec:temo}
+% section temo
+
+
+
+% section temo (end)
+
+\section{〜ことにする}%
+\label{sec:kotonisuru}
+% section kotonisuru
+
+
+
+% section kotonisuru (end)
+
+\section{〜まで}%
+\label{sec:made}
+% section made
+
+
+
+% section made (end)
+
+\section{〜方}%
+\label{sec:kata}
+% section kata
+
+
+
+% section kata (end)
+
+% chapter dai_23_ka (end)
 
 \appendix
 
