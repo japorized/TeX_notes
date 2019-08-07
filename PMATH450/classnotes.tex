@@ -22,6 +22,7 @@
 \DeclareMathOperator{\SIMP}{SIMP}
 \DeclareMathOperator{\STEP}{STEP}
 \DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\dist}{dist}
 
 % disjoint union
 \makeatletter
@@ -5962,7 +5963,7 @@ measure zero.
   \end{enumerate}
 \end{note}
 
-\begin{defn}[$\mathcal{L}_\infty(E, \mathbb{K})$]\index{$\mathcal{L}_\infty(E, \mathbb{K})$}\label{defn:_l_infty_e_k_}
+\begin{defn}[$\mathcal{L}_\infty(E, \mathbb{K})$]\index{$\mathcal{L}_\infty(E, \mathbb{K})$}\label{defn:_call_infty_e_k_}
   With the essential supremum, we can define
   \begin{equation*}
     \mathcal{L}_\infty(E, \mathbb{K}) = \{ f \in \mathcal{L}(E, \mathbb{K}),
@@ -6354,6 +6355,18 @@ Let's look at $p = 1$.
 \newthought{Our next goal} is to establish that the space
 $[\mathcal{C}([a, b], \mathbb{K})]$ is dense in $L_p([a, b], \mathbb{K})$,
 for $1 \leq p < \infty$.
+
+\begin{defn}[Closed Span]\index{Closed Span}\label{defn:closed_span}
+  We define the \hlnoteb{closed span} of a subspace
+  $\mathcal{B} \subseteq (\mathcal{H}, \norm{\cdot})$ as
+  \begin{equation*}
+    \overline{\Span} \mathcal{B}
+    \coloneqq \{ y \in \mathcal{H} :
+        \forall \epsilon > 0 \quad \exists x \in \Span \mathcal{B} \quad
+        \norm{x - y} < \epsilon
+      \}
+  \end{equation*}
+\end{defn}
 
 \marginnote{Imma use the name from the notes of Prof. \citealp{marcoux2019} for
 \cref{lemma:lemma_6_31}, since there's no good expressive name for it.}
@@ -7404,6 +7417,402 @@ We recall the following result from linear algebra:
 % section hilbert_spaces (end)
 
 % chapter lecture_14_jun_25th_2019 (end)
+
+\chapter{Lecture 15 Jun 27th 2019}%
+\label{chp:lecture_15_jun_27th_2019}
+% chapter lecture_15_jun_27th_2019
+
+\section{Hilbert Spaces (Continued)}%
+\label{sec:hilbert_spaces_continued}
+% section hilbert_spaces_continued
+
+\begin{thm}[Closest Point from a Convex Set in a Hilbert Space]\label{thm:closest_point_from_a_convex_set_in_a_hilbert_space}
+  Let $\mathcal{H}$ be a Hilbert space,
+  and $K \subseteq \mathcal{H}$ be a closed,
+  non-empty convex subset of $\mathcal{H}$.
+  \marginnote{The proof of
+  \cref{thm:closest_point_from_a_convex_set_in_a_hilbert_space}
+  is left to the assignments.}
+  Given $x \in \mathcal{H}$,
+  there exists a unique point $y \in K$ that is closest to $x$,
+  i.e.
+  \begin{equation*}
+    \norm{x - y} = \dist(x, K) \coloneqq \min \{ \norm{x - z} : z \in K \}.
+  \end{equation*}
+\end{thm}
+
+\begin{thm}[A Way to Orthogonality]\label{thm:a_way_to_orthogonality}
+  Let $\mathcal{H}$ be a Hilbert space.
+  Let $\mathcal{M} \subseteq \mathcal{H}$ be a closed subspace.
+  Let $x \in \mathcal{H}$, and $m \in \mathcal{M}$. TFAE:
+  \begin{enumerate}
+    \item $\norm{x - m} = \dist(x, \mathcal{M})$ ;
+    \item The vector $x - m$ is orthogonal to $\mathcal{M}$, i.e.
+      \begin{equation*}
+        \langle x - m, y \rangle = 0 \text{ for all } y \in \mathcal{M}.
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{$(1) \implies (2)$}
+  Suppose to the contrary that $\exists y \in \mathcal{M}$
+  such that
+  \begin{equation*}
+    \kappa \coloneqq \langle x - m, y \rangle \neq 0.
+  \end{equation*}
+  Wlog, suppose $\norm{y} = 1$.
+  \sidenote{We may assume so since if $\norm{y} \neq 1$, then we simply divide
+  $\kappa$ by $\norm{y}$ and we'll get a $y'$ with norm 1.}
+  Consider $z \coloneqq m + \kappa y \in \mathcal{M}$.
+  Then
+  \begin{align*}
+    \norm{x - z}^2
+    &= \langle x - z, x - z \rangle
+    = \langle x - m - \kappa y, x - m - \kappa y \rangle \\
+    &= \norm{x - m}^2 - \kappa \langle y, x - m \rangle
+      - \overline{\kappa} \langle x - m, y \rangle
+      + \kappa \overline{\kappa} \langle y, y \rangle \\
+    &= \norm{x - m}^2 - \kappa \overline{\kappa}
+      - \overline{\kappa} \kappa + \kappa \overline{\kappa} \\
+    &= \norm{x - m}^2 - \abs{\kappa}^2 < \norm{x - m}^2,
+  \end{align*}
+  a contradiction.
+  Thus, such a $y$ cannot exist, and so the result holds.
+
+  \noindent
+  \hlbnoted{$(2) \implies (1)$} Suppose $\forall y \in \mathcal{M}$,
+  $\langle x - m, y \rangle = 0$.
+  Write
+  \begin{equation*}
+    \mathcal{M} \ni y = m + (y - m).
+  \end{equation*}
+  Observe that by the Pythagorean theorem,
+  \begin{align*}
+    \norm{x - y} &= \norm{x - m - y + m} = \norm{x - m} + \norm{m - y} \\
+                 &\geq \norm{x - m}
+  \end{align*}
+  since $\norm{m - y} \geq 0$.
+  Thus $\norm{x - m} = \dist(x, \mathcal{M})$.
+\end{proof}
+
+\newthought{Let's} have a little talk about \hlnotea{complements}.
+
+\begin{defn}[Perpendicular Space]\index{Perpendicular Space}\label{defn:perpendicular_space}
+  Given any non-empty subset $\mathcal{S}$ of a Hilbert space $\mathcal{H}$,
+  we define the \hlnoteb{perpendicular space} of $S$ as
+  \begin{equation*}
+    \mathcal{S}^{\perp}
+    \coloneqq \{ y \in \mathcal{H} : \langle x, y \rangle = 0,\, x \in \mathcal{S} \}.
+  \end{equation*}
+\end{defn}
+
+\begin{ex}\label{ex:perp_space_is_closed}
+  Show that $\mathcal{S}^{\perp}$ is a norm-closed subspace
+  \sidenote{A \hldefn{norm-closed subspace} is a subspace that is closed under
+  the norm of the ambient space.}
+  of $\mathcal{H}$.
+\end{ex}
+
+\begin{remark}
+  \begin{enumerate}
+    \item Observe that $0 \in \mathcal{S}^{\perp}$ always,
+      and $(\mathcal{S}^{\perp})^{\perp} \supseteq \mathcal{S}$.
+      It thus follows that
+      \begin{equation*}
+        \left( \mathcal{S}^{\perp} \right)^{\perp} \supseteq \overline{\Span} \mathcal{S},
+      \end{equation*}
+      the \hlnoted{norm closure of the linear span} of $\mathcal{S}$.
+
+    \item Let $\mathcal{V}$ is a vector space
+      and $\mathcal{W}$ is a (vector) subspace of $\mathcal{V}$.
+      Let
+      \begin{equation*}
+        \{ w_{\lambda} : \lambda \in \Lambda \}
+      \end{equation*}
+      be a (Hamel) basis for $\mathcal{W}$.
+      We may then extend $\{ w_\lambda : \lambda \in \Lambda \}$
+      to be a basis of $\mathcal{V}$, such as
+      \begin{equation*}
+        \{ w_\lambda : \lambda \in \Lambda \} \cup \{ x_\gamma : \gamma \in
+        \Gamma \}.
+      \end{equation*}
+      Let
+      \begin{equation*}
+        \mathcal{X} \coloneqq \Span \{ x_\gamma : \gamma \in \Gamma \}.
+      \end{equation*}
+      Then $\mathcal{X} \subseteq \mathcal{V}$ is a subspace,
+      and
+      \begin{enumerate}
+        \item $\mathcal{W} \cap \mathcal{X} = \{ 0 \}$; and
+        \item $\mathcal{V} = \mathcal{W} + \mathcal{X} \coloneqq \{ w + x : w
+          \in \mathcal{W},\, x \in \mathcal{X} \}$.
+      \end{enumerate}
+      We say that $\mathcal{W}$ is
+      \hldefn{alagebraically complemented} by $\mathcal{X}$.
+      This existence of $\mathcal{X}$ says that \hlnoteg{every subspace
+      is algebraically complemented}.
+
+      Note that $\mathcal{X}$ is \hlnotec{not unique}.
+      Indeed, if vectors of the basis for $\mathcal{X}$
+      are not of norm 1, then normalizing them all
+      gives us an ONB for $\mathcal{X}$.
+
+      We can do something similar with normed linear spaces (NLSs).
+      If $\mathfrak{X}$ is a Banach space
+      and $\mathfrak{Y}$ is a closed subspace of $\mathfrak{X}$,
+      we say that $\mathfrak{Y}$ is \hldefn{topologically complemented}
+      if there exists a \hlnotee{closed} subspace $\mathfrak{Z} \subseteq \mathfrak{X}$
+      such that $\mathfrak{Z}$ is an algebraic complement to $\mathfrak{Y}$,
+      i.e. that
+      \begin{enumerate}
+        \item $\mathfrak{Y} \cap \mathfrak{Z} = \{ 0 \}$; and
+        \item $\mathfrak{X} = \mathfrak{Y} + \mathfrak{Z}$.
+      \end{enumerate}
+
+      However, \hlnotec{not all} closed subspace of a Banach space
+      is topologically complemented.
+      \marginnote{
+      \begin{culture}[Phillip's Theorem]
+        $c_0 = \{ (x_n)_n \in \mathbb{K}^{\mathbb{N}}
+          : \lim\limits_{n \to \infty} x_n = 0 \} \subseteq \ell_\infty$
+        is not topologically complemented.
+      \end{culture}
+      \noindent
+      Cited from \citealp{whitley1996}.
+      }
+      
+      We shall write $\mathfrak{X} = \mathfrak{Y} \oplus \mathfrak{Z}$
+      if $\mathfrak{Z}$ is a topological complement to $\mathfrak{Y}$.
+
+      Now let $\mathcal{H}$ be a Hilbert space
+      and $\mathcal{M} \subseteq \mathcal{H}$ be a closed subspace.
+
+      \noindent
+      \hlbnotec{Claim: $\mathcal{H} = \mathcal{M} \oplus \mathcal{M}^{\perp}$} 
+      From \cref{ex:perp_space_is_closed}, $\mathcal{M}^{\perp}$ is closed.
+      Notice that if $z \in \mathcal{M} \cap \mathcal{M}^{\perp}$,
+      then
+      \begin{equation*}
+        \langle z, z \rangle = 0,
+      \end{equation*}
+      and so $z = 0$. Thus $\mathcal{M} \cap \mathcal{M}^{\perp} = \{ 0 \}$.
+
+      Let $x \in \mathcal{H}$. By
+      \cref{thm:closest_point_from_a_convex_set_in_a_hilbert_space},
+      $\exists m_1 \in \mathcal{M}$ such that
+      \begin{equation*}
+        \norm{x - m_1} = \dist(x, \mathcal{M}).
+      \end{equation*}
+      Furthermore, by \cref{thm:a_way_to_orthogonality},
+      $m_2 \coloneqq x - m_1 \in \mathcal{M}^{\perp}$. Thus we see that
+      \begin{equation*}
+        x = m_1 + m_2 \in \mathcal{M} + \mathcal{M}^{\perp}.
+      \end{equation*}
+      Since $\mathcal{M}$ and $\mathcal{M}^{\perp}$ are both closed subspaces,
+      we have $\mathcal{H} = \mathcal{M} \oplus \mathcal{M}^{\perp}$. $\dashv$
+
+      In fact, the above claim is much stronger than
+      what immediately meets the eye.
+      Given a Banach space $\mathfrak{X}$ and a
+      topologically complemented closed subspace $\mathfrak{Y}$,
+      there is generally no expectation of
+      a \hlnotec{unique} topological complement for $\mathfrak{Y}$.
+      For instance, $\mathfrak{X} = \mathbb{R}^2$ with, say,
+      $\norm{\cdot}_\infty$,
+      if we let $\mathfrak{Y}$ be the $x$-axis,
+      then any line that passes through the origin
+      and not equal to the $x$-axis would be a closed subspace
+      and is a topological complement to $\mathfrak{Y}$.
+      However, in the above claim,
+      the space $\mathcal{M}^{\perp}$ is \hlnotec{unique},
+      and we call $\mathcal{M}^{\perp}$ the \hldefn{orthogonal complement}
+      of $\mathcal{M}$.
+
+    \item \hlbnoted{The orthogonal projection}\index{Orthogonal Projection}
+      With $\mathcal{H}$ and $\mathcal{M}$ as in the last remark,
+      we have that $\mathcal{H} = \mathcal{M} \oplus \mathcal{M}^{\perp}$. 
+      Now for any $x \in \mathcal{H}$, if we suppose that we can write
+      \begin{equation*}
+        m_1 + n_1 = x = m_2 + n_2,
+      \end{equation*}
+      where $m_1, m_2 \in \mathcal{M}$ and $n_1, n_2 \in \mathcal{M}^{\perp}$,
+      then
+      \begin{equation*}
+        0 = x - x = m_1 - m_2 + n_1 - n_2 \implies
+        m_1 - m_2 = n_1 - n_2.
+      \end{equation*}
+      But $m_1 - m_2 \in \mathcal{M}$ and $n_1 - n_2 \in \mathcal{M}^{\perp}$,
+      and so $m_1 - m_2 = 0 = n_1 - n_2$,
+      i.e. $m_1 = m_2$ and $n_1 = n_2$.
+      Thus, we may uniquely represent each $x \in \mathcal{H}$ as
+      \begin{equation*}
+        x = m + n \quad
+        \text{ where } m \in \mathcal{M},\, n \in \mathcal{M}^{\perp}.
+      \end{equation*}
+
+      Now consider the map
+      \begin{align*}
+        P : \mathcal{H} &\to \mathcal{M} \oplus \mathcal{M}^{\perp} \\
+            x &\mapsto m.
+      \end{align*}
+      This map $P$ is called an \hlnoteb{orthogonal projection}.
+
+      \hlbnoted{Continuity of the orthogonal projection}
+      Observe that given $x_1 = m_1 + n_1, x_2 = m_2 + n_2 \in \mathcal{H}$
+      and $\kappa \in \mathbb{K}$,
+      we have
+      \begin{align*}
+        P(\kappa x_1 + x_2) &= P(\kappa (m_1 + n_1) + m_2 + n_2)  \\
+                            &= \kappa m_1 + m_2 = \kappa P(x_1) + P(x_2).
+      \end{align*}
+      Thus $P$ is linear.
+      Furthermore,
+      \begin{equation*}
+        P ( P ( x_1 ) ) = P( m_1 ) = m_1.
+      \end{equation*}
+      Thus $P^2 = P$, and we say that $P$ is an \hldefn{idempotent}.
+      \marginnote{On a related note to the orthogonal projection,
+      observe that the `projection in the other way' is also
+      an orthogonal projection. That is, $Q = I - P$,
+      where $I$ is the identity function, that would give
+      $Q(x_1) = (I - P)(x_1) = m_1 + n_1 - m_1 = n_1$, is also
+      an orthogonal projection.}
+      
+      In fact, for $x \in \mathcal{H}$, we have that
+      \begin{equation*}
+        \norm{Px}^2 = \norm{m}^2 \leq \norm{m}^2 + \norm{n}^2
+                   = \norm{m + n}^2 = \norm{x}^2.
+      \end{equation*}
+      Thus the operator norm on $P$ is
+      \begin{equation*}
+        \norm{P} = \sup \{ \norm{Px} : \norm{x} \leq 1 \} \leq 1.
+      \end{equation*}
+      It follows that $P$ is bounded. Since it is linear,
+      it is also continuous.
+
+      Finally, notice that if $m \in \mathcal{M} \neq \{ 0 \}$ such that
+      $\norm{m} = 1$, then
+      \begin{equation*}
+        \norm{Pm} = \norm{m} = 1.
+      \end{equation*}
+
+    \item Let $\emptyset \neq \mathcal{S} \subseteq \mathcal{H}$.
+      By the first remark, if we let
+      $\mathcal{M} = \overline{\Span} \mathcal{S}$,
+      then $\mathcal{M}$ is a closed subspace of $\mathcal{H}$.
+      By the second remark, we have
+      \begin{equation*}
+        \mathcal{H} = \mathcal{M} \oplus \mathcal{M}^{\perp}.
+      \end{equation*}
+      \begin{ex}
+        Show that $\mathcal{S}^{\perp} = \mathcal{M}^{\perp}$.
+      \end{ex}
+
+      Suppose $\exists 0 \neq x \in \left( \mathcal{S}^\perp \right)^\perp$
+      such that $x \notin \mathcal{M}$.
+      Notice that since $x \in \mathcal{H}$, we can write
+      \begin{equation*}
+        x = m_1 + m_2,
+      \end{equation*}
+      where $m_1 \in \mathcal{M}$ and $m_2 \in \mathcal{M}^\perp$.
+      Notice that $m_2 \neq 0 \in \mathcal{M}^\perp = \mathcal{S}^\perp$,
+      since otherwise, $x \in \mathcal{M}$.
+      But then
+      \begin{equation*}
+        \langle x, m_2 \rangle = \langle m_1 + m_2, m_2 \rangle
+        = 0 + \norm{m_2}^2 \neq 0.
+      \end{equation*}
+      Thus $x \notin \left( \mathcal{S}^\perp \right)^\perp$,
+      a contradiction.
+      It follows that $\left( \mathcal{S}^\perp \right)^\perp \subseteq
+      \overline{\Span} \mathcal{S}$, and so by the first remark,
+      \begin{equation*}
+        \left( \mathcal{S}^\perp \right)^\perp = \overline{\Span} \mathcal{S}.
+      \end{equation*}
+  \end{enumerate}
+\end{remark}
+
+\begin{lemma}[Finite Dimensional Linear Manifolds are Norm-closed Subspaces]\label{lemma:finite_dimensional_linear_manifolds_are_norm_closed_subspaces}
+  Let $\mathcal{H}$ be a Hilbert space over $\mathbb{K}$,
+  and suppose that $\mathcal{M} \subseteq \mathcal{H}$ is a finite-dimensional
+  linear manifold in $\mathcal{H}$.
+  Then $\mathcal{M}$ is norm-closed, and hence a subspace of $\mathcal{H}$.
+\end{lemma}
+
+\begin{proof}
+  The proof of
+  \cref{lemma:finite_dimensional_linear_manifolds_are_norm_closed_subspaces}
+  is left to the assignments.
+\end{proof}
+
+\begin{propo}[Formulae for Orthogonal Projections in Hilbert Spaces onto a Finite-Dimensional Subspace]\label{propo:formulae_for_orthogonal_projections_in_hilbert_spaces_onto_a_finite_dimensional_subspace}
+  Suppose $\mathcal{M}$ is a finite-dimensional subspace
+  of a Hilbert space $\mathcal{H}$ over $\mathbb{K}$.
+  Suppose that $\exists N \in \mathbb{N} \setminus \{ 0 \}$, 
+  such that $\{ e_1, \ldots, e_N \}$ is an ONB for $\mathcal{H}$.
+  If $P$ is the orthogonal projection of $\mathcal{H}$ onto $\mathcal{M}$,
+  then
+  \begin{equation*}
+    Px = \sum_{n=1}^{N} \langle x, e_n \rangle e_n, \quad x \in \mathcal{H}.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Let $x \in \mathcal{H} = \mathcal{M} \oplus \mathcal{M}^\perp$,
+  and write $x = m_1 + m_2$, with $m_1 \in \mathcal{M}$ and $m_2 \in \mathcal{M}^\perp$.
+  By the second point in the last remark,
+  we have that $Px = m_1$ is unique such that $x - Px \in \mathcal{M}^\perp$.
+  Consider $w = \sum_{n=1}^{N} \langle x, e_n \rangle e_n$.
+  For $m \in \{ 1, \ldots, N \}$, we observe that
+  \begin{align*}
+    \langle x - w, e_m \rangle
+    &= \langle x, e_m \rangle
+      - \sum_{n=1}^{N} \langle x, e_n \rangle \langle e_n, e_m \rangle \\
+    &= \langle x, e_m \rangle - \langle x, e_m \rangle \cancelto{1}{\langle e_m, e_m \rangle} \\
+    &= 0.
+  \end{align*}
+  Thus $x - w \in \mathcal{M}^\perp$, and so
+  \begin{equation*}
+    Px = w = \sum_{n=1}^{N} \langle x, e_n \rangle e_n.
+  \end{equation*}
+\end{proof}
+
+\begin{thm}[Bessel's Inequality]\index{Bessel's Inequality}\label{thm:bessel_s_inequality}
+  If $\{ e_n \}_{n=1}^{\infty}$ is an orthonormal set
+  in a Hilbert space $\mathcal{H}$, then for each $x \in \mathcal{H}$,
+  \begin{equation*}
+    \sum_{n=1}^{\infty} \abs{ \langle x, e_n \rangle }^2 \leq \norm{x}^2.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  For each $N \in \mathbb{N} \setminus \{ 0 \}$, set
+  \begin{equation*}
+    \mathcal{M}_N \coloneqq \Span \{ e_1, \ldots, e_N \}.
+  \end{equation*}
+  Then each $\mathcal{M}_N$ is a finite-dimensional subspace of $\mathcal{H}$
+  with ONB $\{ e_1, \ldots, e_N \}$.
+
+  For each $N$, let $P_N$ be the orthogonal projection from $\mathcal{H}$ to $\mathcal{M}_N$.
+  From the last discussion on the 3rd point of the last remark,
+  since $\norm{e_n} = 1$, we have that $\norm{P_N} = 1$ for all $N$.
+
+  By
+  \cref{propo:formulae_for_orthogonal_projections_in_hilbert_spaces_onto_a_finite_dimensional_subspace},
+  we observe that
+  \begin{align*}
+    \norm{x}^2 &\geq \norm{P_N x}^2
+               = \norm{ \sum_{n=1}^{N} \langle x, e_n \rangle e_n }^2 \\
+              &= \sum_{n=1}^{N} \abs{\langle x, e_n \rangle e_n}^2 \\
+              &= \sum_{n=1}^{N} \abs{\langle x, e_n \rangle}^2
+  \end{align*}
+  by the \hyperref[thm:the_pythagorean_theorem_and_parallelogram_law]{Pythagorean Theorem}.
+\end{proof}
+
+% section hilbert_spaces_continued (end)
+
+% chapter lecture_15_jun_27th_2019 (end)
 
 
 

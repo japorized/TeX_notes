@@ -105,6 +105,10 @@ snippet abs "abstract environment" b
 \end{abstract}
 endsnippet
 
+snippet '([0-9]+)th' "th superscript" irA
+`!p snip.rv = match.group(1)`\textsuperscript{th}
+endsnippet
+
 snippet tab "tabular / array environment" b
 \begin{${1:t}${1/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${2:c}}
 $0${2/(?<=.)(c|l|r)|./(?1: & )/g}
@@ -145,6 +149,14 @@ snippet marfig "Margin figure environment" b
 	$0
 	\caption{$1}\label{fig:${2:${1/\\\w+\{(.*?)\}|\\([^\\"])|(\w+)|([^\w]+)/(?4:_:\L$1$2$3\E)/ga}}}
 \end{marginfigure}
+endsnippet
+
+snippet martab "Margin table environment" b
+\begin{margintable}
+	\centering
+	$0
+	\caption{$1}\label{table:${2:${1/\\\w+\{(.*?)\}|\\([^\\"])|(\w+)|([^\w]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\end{margintable}
 endsnippet
 
 snippet tikzp "tikzpicture environment" b
@@ -321,15 +333,15 @@ snippet '(?<!\\)bhl(a|b|c|d|e)' "highlight background" irA
 \hlbnote`!p snip.rv = match.group(1)`{$1} $0
 endsnippet
 
-snippet hldf "highlight definition" w
+snippet dfhl "highlight definition" wA
 \hldefn{$1} $0
 endsnippet
 
-snippet hlw "highlight warning" w
+snippet hlw "highlight warning" wA
 \hlwarn{$1} $0
 endsnippet
 
-snippet hli "highlight important" w
+snippet '(?<!\\)hli' "highlight important" wrA
 \hlimpo{$1} $0
 endsnippet
 
@@ -399,16 +411,16 @@ if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', ';']:
   snip.rv = ' '
 else:
   snip.rv = ''
-`$2
+`$0
 endsnippet
 
-snippet '(?<=\s)lm' "Math" irA
+snippet '(?<=[\s\n\{\[\(])lm' "Math" irA
 $${1}$`!p
 if t[2] and t[2][0] not in [',', '.', '?', '-', ' ', ';']:
   snip.rv = ' '
 else:
   snip.rv = ''
-`$2
+`$0
 endsnippet
 
 snippet newth "newthought" b
