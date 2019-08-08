@@ -23,6 +23,7 @@
 \DeclareMathOperator{\STEP}{STEP}
 \DeclareMathOperator{\Span}{span}
 \DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\Trig}{Trig}
 
 % disjoint union
 \makeatletter
@@ -6813,7 +6814,7 @@ if it admits a countable dense subset.
     \text{ for all } \alpha \neq \beta \in \Lambda.
   \end{equation*}
   Then $\Lambda$ is countable.
-  \sidenote{We may intuitively think of the flow of the proof as follows.
+  \sidenote[][-80pt]{We may intuitively think of the flow of the proof as follows.
   If we can find such a $Y$ whose elements are always $\delta$ away 
   from one another in a separable metric space,
   then this $Y$ should end up swallowing elements in $X$ almost everywhere,
@@ -7282,7 +7283,7 @@ Let us now look at an inner product that we shall define on $L_2$.
   \end{enumerate}
 \end{remark}
 
-\begin{eg}
+\begin{eg}\label{eg:examples_of_onb}
   \begin{enumerate}
     \item Let $N \geq 1$ be an integer,
       and consider $\mathcal{H} = \mathbb{C}^N$ endowed with
@@ -7307,7 +7308,8 @@ Let us now look at an inner product that we shall define on $L_2$.
         \langle x, y \rangle_{\rho} = \sum_{n=1}^{N} \rho_n x_n \overline{y_n}.
       \end{equation*}
 
-    \item Generalizing the first example here to infinite dimensions,
+    \item \label{eg:onb_of_lill_2}
+      Generalizing the first example here to infinite dimensions,
       let $\mathcal{H} = \ell_2(\mathbb{K})$, with its standard inner product.
       For $n \geq 1$, let
       \begin{equation*}
@@ -7319,7 +7321,8 @@ Let us now look at an inner product that we shall define on $L_2$.
         $\ell_2(\mathbb{K})$.
       \end{ex}
 
-    \item Now for an orthonormal basis that is highly relevant to us.
+    \item \label{eg:onb_of_bigl_2}
+      Now for an orthonormal basis that is highly relevant to us.
       Consider $\mathcal{H} = L_2([0, 2 \pi], \mathbb{C})$,
       of which we have shown is a Hilbert space, with its standard inner product
       \begin{equation*}
@@ -7814,7 +7817,369 @@ We recall the following result from linear algebra:
 
 % chapter lecture_15_jun_27th_2019 (end)
 
+\chapter{Lecture 16 Jul 04th 2019}%
+\label{chp:lecture_16_jul_04th_2019}
+% chapter lecture_16_jul_04th_2019
 
+\section{Hilbert Spaces (Continued 2)}%
+\label{sec:hilbert_spaces_continued_2}
+% section hilbert_spaces_continued_2
+
+\begin{thm}[Countability of an Orthonormal Set in a Separable Hilbert Space]\label{thm:countability_of_an_orthonormal_set_in_a_separable_hilbert_space}
+  Let $\mathcal{H}$ be a(n) (infinite-dimensional) separable Hilbert space,
+  and suppse that $\mathcal{E} \subseteq \mathcal{H}$ is an orthonormal set.
+  Then $\mathcal{E}$ is countable, say as $\mathcal{E} = \{ e_n \}_{n=1}^{\infty}$,
+  and if $x \in \mathcal{H}$, then
+  \begin{equation*}
+    \sum_{n=1}^{\infty} \langle x, e_n \rangle e_n
+  \end{equation*}
+  converges in $\mathcal{H}$.
+\end{thm}
+
+\begin{proof}
+  First, notice that for $x \neq y \in \mathcal{E}$, we have
+  \begin{equation*}
+    \norm{x - y}
+    = \langle x - y, x - y \rangle^{\frac{1}{2}}
+    = \left( \norm{x}^2 + \norm{y}^2 \right)^{\frac{1}{2}} = \sqrt{2}.
+  \end{equation*}
+  By \cref{ex:a_way_of_finding_a_countable_subset_in_a_separable_metric_space},
+  we have that $\mathcal{E}$ is indeed countable.
+
+  Let $x \in \mathcal{H}$ and $\epsilon > 0$. For each $N \geq 1$, set
+  \begin{equation*}
+    y_N = \sum_{n=1}^{N} \langle x, e_n \rangle e_n. \footnotemark
+  \end{equation*}
+  \footnotetext{The keen reader should notice that
+  we are simply taking $y_N = P_N x$ from the proof
+  of \hyperref[thm:bessel_s_inequality]{Bessel's Inequality}.}
+  Since $\mathcal{H}$ is complete (for it is a Hilbert space),
+  it suffices for us to show that $\{ y_N \}_{N=1}^{\infty}$ is Cauchy.
+
+  From \hyperref[thm:bessel_s_inequality]{Bessel's Inequality}, we know that
+  \begin{equation*}
+    \sum_{n=1}^{\infty} \abs{\langle x, e_n \rangle}^2 \leq \norm{x}^2 < \infty.
+  \end{equation*}
+  Thus, for any $\epsilon > 0$, rearranging if necessary,
+  we can find some $N_0 > 0$ such that
+  \begin{equation*}
+    \sum_{n = N_0 + 1}^{\infty} \abs{\langle x, e_n \rangle}^2 < \epsilon.
+  \end{equation*}
+  Then for $M > N > N_0$, we see that
+  \begin{align*}
+    \norm{y_M - y_N}^2
+    &= \norm{ \sum_{n=1}^{M} \langle x, e_n \rangle e_n
+        - \sum_{n=1}^{N} \langle x, e_n \rangle e_n }^2 \\
+    &= \norm{ \sum_{n = N + 1}^{M} \langle x, e_n \rangle e_n }^2 \\
+    &= \sum_{n=N + 1}^{M} \abs{\langle x, e_n \rangle}^2 \quad \because
+    \text{\hyperref[thm:the_pythagorean_theorem_and_parallelogram_law]{Pythagorean
+    Theorem}} \\
+    &\leq \sum_{n = N_0}^{\infty} \abs{\langle x, e_n \rangle}^2 < \epsilon.
+  \end{align*}
+  It follows that the limit of the Cauchy sequence $\{ y_N \}_{N=1}^{\infty}$
+  is in $\mathcal{H}$.
+\end{proof}
+
+\begin{thm}[Characterization of an ONB]\label{thm:characterization_of_an_onb}
+  Let $\mathcal{E} = \{ e_n \}_{n=1}^{\infty}$ be an orthonormal set
+  in an infinite-dimensional, separable Hilbert space $\mathcal{H}$. TFAE:
+  \begin{enumerate}
+    \item $\mathcal{E}$ is an ONB, i.e. $\mathcal{E}$ is a maximal
+      orthonormal set in $\mathcal{H}$.
+    \item $\overline{\Span} \mathcal{E} = \mathcal{H}$.
+    \item $\forall x \in \mathcal{H}$, $x = \sum_{n=1}^{\infty} \langle x, e_n
+      \rangle e_n$.
+    \item (\hldefn{Parseval's Identity}) $\forall x \in \mathcal{H}$,
+      $\norm{x}^2 = \sum_{n=1}^{\infty} \abs{\langle x, e_n \rangle}^2$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{(1) $\implies$ (2)} Firstly, it is clear that
+  $\mathcal{E} \subseteq \mathcal{M} \coloneqq \overline{\Span} \mathcal{E} \subseteq \mathcal{H}$.
+  In particular, $\{ 0 \} \neq \mathcal{E} \subseteq \mathcal{M}$,
+  so $\mathcal{M}^\perp \neq \{ 0 \}$.
+  Then $\exists 0 \neq x \in \mathcal{M}^\perp$ such that
+  $\mathcal{E} \cup \{ x \}$ is also an orthonormal basis,
+  contradicting maximality of $\mathcal{E}$.
+
+  \noindent
+  \hlbnoted{(2) $\implies$ (3)} Let $\mathcal{M} = \overline{\Span} \mathcal{E} = \mathcal{H}$.
+  Let $y = \sum_{n=1}^{\infty} \langle x, e_n \rangle e_n$.
+  Observe that by a similar step in the proof in
+  \cref{propo:formulae_for_orthogonal_projections_in_hilbert_spaces_onto_a_finite_dimensional_subspace},
+  we observe that
+  \begin{align*}
+    \langle x - y, e_m \rangle = 0, \quad \text{ for each } m \in \mathbb{N} \setminus \{ 0 \}.
+  \end{align*}
+  It follows that $x - y \in \mathcal{M}^\perp = \{ 0 \}$, and so $x = y$.
+
+  \noindent
+  \hlbnoted{(3) $\implies$ (4)}
+  We see that
+  \begin{align*}
+    \norm{x}^2
+    &= \norm{ \sum_{n=1}^{\infty} \langle x, e_n \rangle e_n }^2 \\
+    &= \langle \sum_{n=1}^{\infty} \langle x, e_n \rangle e_n,
+        \sum_{m=1}^{\infty} \langle x, e_m \rangle e_m \rangle \\
+    &= \sum_{n=1}^{\infty} \sum_{m=1}^{\infty} \langle x, e_n \rangle
+      \overline{\langle x, e_m \rangle} \langle e_n, e_m \rangle \\
+    &= \sum_{n=1}^{\infty} \langle x, e_n \rangle
+      \overline{\langle x, e_n \rangle} \cancelto{1}{\langle e_n, e_n \rangle} \\
+    &= \sum_{n=1}^{\infty} \abs{\langle x, e_n \rangle}^2.
+  \end{align*}
+
+  \noindent
+  \hlbnoted{(4) $\implies$ (1)}
+  Suppose $x \in \mathcal{E}^\perp$. Then for all $n \in \mathbb{N} \setminus \{ 0 \}$,
+  \begin{equation*}
+    \norm{x}^2 = \sum_{n=1}^{\infty} \abs{\langle x, e_n \rangle}^2 = 0,
+  \end{equation*}
+  and so $x = 0$, i.e. $\mathcal{E}^\perp = \{ 0 \}$.
+  Hence $\mathcal{E}$ is indeed maximum.
+\end{proof}
+
+\begin{defn}[Unitary Operator]\index{Unitary Operator}\label{defn:unitary_operator}
+  Let $\mathcal{H}_1, \mathcal{H}_2$ be Hilbert spaces over $\mathbb{K}$.
+  A map $U : \mathcal{H}_1 -> \mathcal{H}_2$
+  is called a \hlnoteb{unitary operator} 
+  if it is a linear bijection such that
+  \begin{equation*}
+    \langle Ux, Uy \rangle = \langle x, y \rangle
+  \end{equation*}
+  for all $x, y \in \mathcal{H}_1$.
+\end{defn}
+
+\begin{defn}[Isomorphism of Hilbert Spaces]\index{Isomorphism}\label{defn:isomorphism_of_hilbert_spaces}
+  Let $\mathcal{H}_1, \mathcal{H}_2$ be Hilbert spaces over $\mathbb{K}$.
+  We say that $\mathcal{H}_1$ and $\mathcal{H}_2$ are \hlnoteb{isomorphic}
+  if there exists a unitary operator
+  $U : \mathcal{H}_1 -> \mathcal{H}_2$.
+  We denote this relationship as $\mathcal{H}_1 \simeq \mathcal{H}_2$.
+\end{defn}
+
+\begin{note}
+  Note that $\forall x \in \mathcal{H}$, we have that
+  \begin{equation*}
+    \norm{Ux}^2 = \langle Ux, Ux \rangle = \langle x, x \rangle = \norm{x}^2.
+  \end{equation*}
+  In particular, unitary operators are \hldefn{isometries}.
+  Furthermore, observe that
+  \begin{equation*}
+    \norm{U} = \sup \{ \norm{Ux} : \norm{x} \leq 1 \} \leq 1,
+  \end{equation*}
+  and so unitary operators are bounded and continuous.
+  Moreover, the inverse map $U^{-1} : \mathcal{H}_2 \to \mathcal{H}_1$
+  defined by $U^{-1}(Ux) \coloneqq x$ is also linear,
+  and
+  \begin{equation*}
+    \langle U^{-1}(Ux), U^{-1}(Uy) \rangle = \langle x, y \rangle = \langle Ux, Uy \rangle,
+  \end{equation*}
+  the inverse of a unitary operator is also a unitary operator.
+\end{note}
+
+\begin{remark}
+  Note that if $\mathcal{L} \subseteq \mathcal{H}_1$ is a closed subspace,
+  then $\mathcal{L}$ is complete,
+  whence $U \mathcal{L}$ is also complete,
+  and hence closed in $\mathcal{H}_2$.
+\end{remark}
+
+The proof of the following theorem is left to the assignments.
+
+\begin{thm}[Isomorphism of Infinite-dimensional Separable Hilbert Spaces]\label{thm:isomorphism_of_infinite_dimensional_separable_hilbert_spaces}
+  Any 2 infinite-dimensional separable Hilbert spaces over $\mathbb{K}$
+  are isomorphic.
+\end{thm}
+
+% section hilbert_spaces_continued_2 (end)
+
+\section{Introduction to Fourier Analysis}%
+\label{sec:introduction_to_fourier_analysis}
+% section introduction_to_fourier_analysis
+
+\begin{remark}
+  As a result of
+  \cref{thm:isomorphism_of_infinite_dimensional_separable_hilbert_spaces},
+  it follows that
+  if $\mathcal{H}$ is a complex, separable, infinite-dimensional Hilbert space,
+  then $\mathcal{H} \simeq \ell_2$.
+
+  \marginnote{One must wonder why do we focus on $E = [-\pi, \pi]$.
+  For a relatively good motivation for the things that are to come,
+  please read \cref{chp:interest_in_2_pi_periodic_functions}.}
+  Now,
+  \begin{itemize}
+    \item from \cref{crly:separability_of_l_p_spaces},
+      $L_2([-\pi, \pi], \mathbb{K})$ is separable;
+    \item from \cref{eg:onb_of_bigl_2} of \cref{eg:examples_of_onb},
+      $L_2([-\pi, \pi], \mathbb{K})$ is infinite-dimensional,
+      with the ONB $\{ [\xi_n] \}_{n \in \mathbb{Z}}$; and
+    \item by \cref{thm:the_standard_inner_product_for_l_2_e_mathbb_k_},
+      $L_2([-\pi, \pi], \mathbb{K})$ is a Hilbert space,
+      with the inner product
+      \begin{equation*}
+        \langle [f], [g] \rangle = \int_{E} f \overline{g}.
+      \end{equation*}
+  \end{itemize}
+
+  Let us define
+  \begin{align*}
+    \mathcal{L}_2(\mathbb{T}, \mathbb{C})
+    &\coloneqq \left\{ f : \mathbb{R} -> \mathbb{C} :
+      f \text{ is measurable, $2 \pi$-periodic, } \right. \\
+    &\qquad\quad\left. \text{and }
+      \int_{[\pi, \pi)} \abs{f}^2 < \infty
+    \right\}.
+  \end{align*}
+  \begin{ex}
+    Show that $\mathcal{L}_2(\mathbb{T}, \mathbb{C})$ is
+    a vector space, and that the function
+    \begin{align*}
+      \nu_2 : \mathcal{L}_2(\mathbb{T}, \mathbb{C}) &\to \mathbb{R} \\
+      f & \mapsto \left( \frac{1}{2 \pi} \int_{[-\pi, \pi)} \abs{f}^2 \right)^{1 / 2}
+    \end{align*}
+    is a semi norm on $\mathcal{L}_2(\mathbb{T}, \mathbb{C})$.
+  \end{ex}
+
+  Now let
+  \begin{equation*}
+    \mathcal{N}_2(\mathbb{T}, \mathbb{C}) \coloneqq
+    \{ f \in \mathcal{L}_2(,\mathbb{T}, \mathbb{C}) : \nu_2(f) = 0 \}.
+  \end{equation*}
+  It follows that if
+  $L_2(\mathbb{T}, \mathbb{C}) = \mathcal{L}_2(\mathbb{T}, \mathbb{C})
+  / \mathcal{N}(\mathbb{T}, \mathbb{C})$,
+  then $[f] = [g] \in L_2(\mathbb{T}, \mathbb{C})$ iff
+  $f = g$ a.e. on $\mathbb{R}$,
+  or equivalently $f = g$ a.e. on $[-\pi, \pi)$,
+  since they are $2 \pi$-periodic functions on $\mathbb{R}$.
+  We can then obtain a norm on $L_2(\mathbb{T}, \mathbb{C})$
+  by setting $\norm{[f]}_2 \coloneqq \nu_2(f)$.
+  
+  Furthermore, the function
+  \begin{align*}
+    \langle \cdot, \cdot \rangle_{\mathbb{T}}
+    : L_2(\mathbb{T}, \mathbb{C}) \times L_2(\mathbb{T}, \mathbb{C}) &\to \mathbb{C} \\
+    ([f], [g]) &\mapsto \frac{1}{2 \pi} \int_{[-\pi, \pi)} f \overline{g}
+  \end{align*}
+  is an inner product on $L_2(\mathbb{T}, \mathbb{C})$,
+  and $\norm{\cdot}_2$ is precisely the norm induced by the inner product.
+  By what we've seen in the last section, $L_2(\mathbb{T}, \mathbb{C})$
+  is complete wrt the norm $\norm{\cdot}$, and is therefore a Hilbert space.
+  One can finally verify that $\{[\xi_n]\}_{n \in \mathbb{Z}}$,
+  where $\xi_n(\epsilon) = e^{in \theta}$,
+  is indeed and ONB for $L_2(\mathbb{T}, \mathbb{C})$.
+\end{remark}
+
+\begin{eg}[Fourier Series for $L_2(\mathbb{T}, \mathbb{C})$, and the isomorphism between $L_2(\mathbb{T}, \mathbb{C})$ and $\ell_2(\mathbb{Z}, \mathbb{C})$]
+  Let $[f] \in L_2([-\pi, \pi], \mathbb{C})$.
+  From A5Q4, we can show that $\{ [ \xi_n ] \}_{n \in \mathbb{Z}}$,
+  where
+  \begin{align*}
+    \xi_n : [-\pi, \pi] &\to \mathbb{C} \\
+        \theta &\mapsto \frac{1}{\sqrt{2 \pi}} e^{in \theta},
+  \end{align*}
+  is an ONB for $L_2([\pi, \pi], \mathbb{C})$.
+  For any $n \in \mathbb{Z}$, let
+  \begin{equation*}
+    \alpha_n^{[f]} \coloneqq \langle [f], [\xi_n] \rangle.
+  \end{equation*}
+  We shall refer to $\alpha_n^{[f]}$ as the
+  \hldefn{$n$\textsuperscript{th}-Fourier coefficient} of $[f]$
+  relative to the ONB $\{ [\xi_n] \}_{n \in \mathbb{Z}}$.
+  By A7Q2, we have that the map
+  \begin{align*}
+    U : L_2(\mathbb{T}, \mathbb{C}) &\to \ell_2(\mathbb{Z}, \mathbb{C}) \\
+        [f] &\mapsto \left( \alpha_{n}^{[f]} \right)_{ n \in \mathbb{Z} }
+  \end{align*}
+  is a unitary operator from the Hilbert space
+  $L_2(\mathbb{T}, \mathbb{C})$ to $\ell_2(\mathbb{Z}, \mathbb{C})$.
+
+  In particular, $U$ is injective.
+  This means that if $[f],, [g] \in L_2(\mathbb{T}, \mathbb{C})$
+  and $\alpha_n^{[f]} = \alpha_n^{[g]}$ for all $n \in \mathbb{Z}$,
+  then $f = g$ a.e. on $\mathbb{R}$.
+  In other words, an element $[f] \in L_2(\mathbb{T}, \mathbb{C})$
+  is \hlnotec{completely determined by its Fourier coefficients}.
+  Moreover, given any sequence $(\beta_n)_{n \in \mathbb{Z}}
+  \in \ell2(\mathbb{Z}, \mathbb{C})$, $\exists [f] \in L_2(\mathbb{T}, \mathbb{C})$
+  such that $\alpha_n^{[f]} = \beta_n$, for all $n \in \mathbb{Z}$.
+
+  Now let $[f] \in L_2(\mathbb{T}, \mathbb{C})$.
+  For each $N \in \mathbb{N} \setminus \{ 0 \}$, set
+  \begin{equation*}
+    \Delta_N([f]) = \sum_{n = -N}^{N} \alpha_n^{[f]} [\xi_n].
+  \end{equation*}
+  We shall call $\Delta_N([f])$ as the
+  \hldefn{$N$\textsuperscript{th} partial sum of the Fourier series} of $[f]$.
+  It follows from \cref{thm:characterization_of_an_onb} that
+  \begin{equation*}
+    [f] = \lim_{N \to \infty} \Delta_N([f]),
+  \end{equation*}
+  where the convergence is relative to the $\norm{\cdot}_2$-norm
+  which was mentioned above.
+\end{eg}
+
+\begin{note}
+  This is a beautiful occurrence, having functions that can be
+  written uniquely (up to a set of measure zero) as a linear
+  combination of the ONB $\{[\xi_n]\}_{n \in \mathbb{Z}}$,
+  which is a very powerful result that is often used in linear algebra.
+\end{note}
+
+We can then ask the question of whether the same result holds for other
+similarly defined $L_p(\mathbb{T}, \mathbb{C})$, for $1 \leq p \leq \infty$
+where $p \neq 2$. We shall focus on $L_1$.
+Unfortunately, we shall see that this doesn't hold.
+The rest of the course is dedicated to showing this.
+
+\begin{fullwidth}
+\begin{notation}
+  We shall note down here notations and definitions of which we've
+  seen but require some modification for the purposes of our discussion.
+  \begin{itemize}
+    \item $\Trig(\mathbb{T}, \mathbb{C})
+      \coloneqq \Span \{ \xi_n : n \in \mathbb{Z} \}
+      = \{ \sum_{n=-N}^{N} \alpha_n \xi_n
+        : \alpha_n \in \mathbb{C} : N \in \mathbb{N} \setminus \{ 0 \}$;
+      \item $\mathcal{C}(\mathbb{T}, \mathbb{C})
+        \coloneqq \{ f : \mathbb{R} \to \mathbb{C} : f
+        \text{ is continuous and } 2 \pi \text{-periodic} \}$;
+      \item $\SIMP(\mathbb{T}, \mathbb{C})
+        \coloneqq \{ f : \mathbb{R} \to \mathbb{C} :
+          f \restriction_{[-\pi, \pi)} \text{ is a simple function
+        and } f \text{ is } 2 \pi \text{-periodic} \}$;
+      \item $\STEP(\mathbb{T}, \mathbb{C})
+        \coloneqq \{ f : \mathbb{R} \to \mathbb{C} :
+          f \restriction_{[-\pi, \pi)} \text{ is a step function
+        and } f \text{ is } 2 \pi \text{-periodic} \}$;
+      \item for $1 \leq p < \infty$,
+        \begin{align*}
+          \mathcal{L}_p(\mathbb{T}, \mathbb{C})
+          &\coloneqq \{ f : \mathbb{R} \to \mathbb{C} :
+            f \text{ is measurable, } 2 \pi \text{-periodic, 
+          and } \int_{[-\pi, \pi)} \abs{f}^p < \infty \};
+        \end{align*}
+      \item and for $p = \infty$,
+        \begin{align*}
+          \mathcal{L}_p(\mathbb{T}, \mathbb{C})
+          &\coloneqq \{ f : \mathbb{R} \to \mathbb{C} :
+            f \text{ is measurable, } 2 \pi \text{-periodic, 
+          and essentially bounded } \};
+        \end{align*}
+  \end{itemize}
+  Note that
+  \begin{equation*}
+    \Trig(\mathbb{T}, \mathbb{C}) \subseteq \mathcal{C}(\mathbb{T}, \mathbb{C})
+    \subseteq \mathcal{L}_p(\mathbb{T}, \mathbb{C}), \quad 1 \leq p \leq \infty.
+  \end{equation*}
+\end{notation}
+\end{fullwidth}
+
+% section introduction_to_fourier_analysis (end)
+
+% chapter lecture_16_jul_04th_2019 (end)
 
 
 
@@ -7824,6 +8189,73 @@ We recall the following result from linear algebra:
 
 
 \appendix
+
+\chapter{Interest in \texorpdfstring{$2 \pi$}{2pi} periodic functions}%
+\label{chp:interest_in_2_pi_periodic_functions}
+% chapter interest_in_2_pi_periodic_functions
+
+This is ripped out of Professor Marcoux's \cite{marcoux2019} notes,
+which I think is rather important as a motivation to move from
+Lesbesgue's Theory of Integration into Fourier Analysis,
+but not important enough to warrant being added to the
+main section of the notes.
+\begin{quotebox}{magenta}{foreground}
+So where does the notation $L_1 (\mathbb{T}, \mathbb{C})$ come from,
+given that we are dealing with $2 \pi$-periodic functions on $\mathbb{R}$?
+The issue lies in the fact that we are really interested in studying functions
+on $\mathbb{T} \coloneqq \{z \in \mathbb{C} : \abs{z} = 1\}$,
+but that we have not yet defined what we mean by a measure on that set.
+We are therefore identifying $[-\pi, \pi)$ with $\mathbb{T}$ via
+the bijective function $\psi(\theta) = e^{i \theta}$.
+Thus, an alternative approach to this would be to say that
+a subset $E \subseteq T$ is measurable if and only if
+$\psi^{-1}(E) \subseteq [-\pi, \pi)$ is Lebesgue measurable.
+In order to ``normalize'' the measure of $\mathbb{T}$
+(i.e. to make its measure equal to 1),
+we simply divide Lebesgue measure on $[-\pi, \pi)$ by $2 \pi$.
+
+This still doesn't quite explain why we are interested in $2 \pi$-periodic functions
+on $\mathbb{T}$, rather than just functions on $[-\pi, \pi)$, though.
+Here is the ``kicker''.
+The unit circle $\mathbb{T} \subseteq \mathbb{C}$ has a very special property,
+namely, that it is a group.
+Given $\theta_0 \in \mathbb{T}$, we can ``rotate'' a function
+$f : \mathbb{T} \to \mathbb{C}$ in the sense that we set
+$g(\theta) = f (\theta \cdot \theta_0 )$.
+Observe that rotation along $\mathbb{T}$ corresponds to translation
+(modulo $2 \pi$) of the interval $[-\pi, \pi)$.
+The key is the irritating ``modulo $2 \pi$'' problem.
+If we don't use modular arithmetic, and if a function $g$ is only defined
+on $[-\pi, \pi)$, we can not ``translate'' it,
+since the new function need no longer have $[-\pi, \pi)$ as its domain.
+We get around this by extending the domain of $g$ to $\mathbb{R}$
+and making $g$ $2 \pi$-periodic.
+Then we may translate $g$ by any real number
+$\tau_s^\circ(g)(\theta) \coloneqq g(\theta - s)$,
+which has the effect that if we set $f (e^{i \theta}) = g(\theta)$,
+then $g(\theta - s) = f (e^{i \theta} \cdot e^{-is})$.
+That is, translation of $g$ under addition corresponds to
+rotation of $f$ under multiplication.
+
+The last thing that we need to know is that such translations of functions will
+play a crucial role in our study
+of Fourier series of elements of $L_1(\mathbb{T}, \mathbb{C})$.
+Aside from being a Banach space, $L_1(\mathbb{T}, \mathbb{C})$ can be made
+into an algebra under convolution.
+While our analysis will not take us as far as that particular result,
+we will still need to delve into the theory of convolutions of continuous functions
+with functions in $L_1(\mathbb{T}, \mathbb{C})$.
+This will provide us with a way of understanding how and why various series
+associated to the Fourier series of an element $[f] \in L_1(\mathbb{T}, \mathbb{C})$
+converge or diverge.
+Since convolutions are defined as averages under translation by the group action,
+and since $\mathbb{T}$ is a group under multiplication
+and $\mathbb{R}$ is a group under addition,
+our identification of $(\mathbb{T}, \cdot)$ with $([-\pi, \pi), +)$
+(using modular arithmetic) is not an unreasonable way of doing things.
+\end{quotebox}
+
+% chapter interest_in_2_pi_periodic_functions (end)
 
 \backmatter
 

@@ -1586,6 +1586,7 @@ Heine-Borel Theorem	_site/PMATH333/pmath333_defns_thms.tex	/^\\section{Heine-Bor
 Hierarchy of Infinite Cardinals	PMATH733/classnotes.tex	/^\\subsection{Hierarchy of Infinite Cardinals}%$/;"	u	section:Lecture 9 Oct 04th""Cardinals (Continued 2)
 Hierarchy of Infinite Cardinals	_site/PMATH733/classnotes.tex	/^\\subsection{Hierarchy of Infinite Cardinals}%$/;"	u	section:Lecture 9 Oct 04th""Cardinals (Continued 2)
 Hilbert Spaces	PMATH450/classnotes.tex	/^\\section{Hilbert Spaces}%$/;"	s	chapter:Lecture 14 Jun 25th 2019
+Hilbert Spaces (Continued 2)	PMATH450/classnotes.tex	/^\\section{Hilbert Spaces (Continued 2)}%$/;"	s	chapter:Lecture 16 Jul 04th 2019
 Hilbert Spaces (Continued)	PMATH450/classnotes.tex	/^\\section{Hilbert Spaces (Continued)}%$/;"	s	chapter:Lecture 15 Jun 27th 2019
 Hodge Star Operators	PMATH365/classnotes.tex	/^\\subsection{Hodge Star Operators}%$/;"	u	section:Lecture 32 Apr 01st""More Linear Algebra
 Hodge Star Operators	_site/PMATH365/classnotes.tex	/^\\subsection{Hodge Star Operators}%$/;"	u	section:Lecture 32 Apr 01st""More Linear Algebra
@@ -1699,6 +1700,7 @@ Integration of Forms	PMATH365/classnotes.tex	/^\\section{Integration of Forms}%$
 Integration of Forms	_site/PMATH365/classnotes.tex	/^\\section{Integration of Forms}%$/;"	s	chapter:Lecture 27 Mar 20th
 Integration of Forms (Continued)	PMATH365/classnotes.tex	/^\\section{Integration of Forms (Continued)}%$/;"	s	chapter:Lecture 28 Mar 22nd
 Integration of Forms (Continued)	_site/PMATH365/classnotes.tex	/^\\section{Integration of Forms (Continued)}%$/;"	s	chapter:Lecture 28 Mar 22nd
+Interest in \\texorpdfstring{$2 \\pi$}{2pi} periodic functions	PMATH450/classnotes.tex	/^\\chapter{Interest in \\texorpdfstring{$2 \\pi$}{2pi} periodic functions}%$/;"	c
 Interior, Closure and Boundary	PMATH333/pmath333_defns_thms.tex	/^\\section{Interior, Closure and Boundary}$/;"	s	chapter:Topology in Euclidean Space
 Interior, Closure and Boundary	_site/PMATH333/pmath333_defns_thms.tex	/^\\section{Interior, Closure and Boundary}$/;"	s	chapter:Topology in Euclidean Space
 Interpretation	ACTSC431/classnotes.tex	/^\\paragraph{Interpretation} Consider an experiment with independent trails, of which each has on/;"	P	subsection:Lecture 15 Nov 01st""Frequency Distribution --- Basic Frequency Distributions (Continued 2)""Frequency Distributions (Continued 2)
@@ -1734,6 +1736,7 @@ Introduction and Review of Probability	ACTSC432/classnotes.tex	/^\\chapter{Intro
 Introduction and Review of Probability	_site/ACTSC432/classnotes.tex	/^\\chapter{Introduction and Review of Probability}%$/;"	c
 Introduction to Credibility Theory	ACTSC432/classnotes.tex	/^\\section{Introduction to Credibility Theory}%$/;"	s	chapter:Introduction and Review of Probability
 Introduction to Credibility Theory	_site/ACTSC432/classnotes.tex	/^\\section{Introduction to Credibility Theory}%$/;"	s	chapter:Introduction and Review of Probability
+Introduction to Fourier Analysis	PMATH450/classnotes.tex	/^\\section{Introduction to Fourier Analysis}%$/;"	s	chapter:Lecture 16 Jul 04th 2019
 Introduction to Galois Theory	PMATH348/classnotes.tex	/^\\section{Introduction to Galois Theory}%$/;"	s	chapter:Lecture 17 Feb 15th
 Introduction to Galois Theory	_site/PMATH348/classnotes.tex	/^\\section{Introduction to Galois Theory}%$/;"	s	chapter:Lecture 17 Feb 15th
 Introduction to Galois Theory (Continued)	PMATH348/classnotes.tex	/^\\section{Introduction to Galois Theory (Continued)}%$/;"	s	chapter:Lecture 18 Feb 25th
@@ -2038,6 +2041,7 @@ Lecture 16 Feb 16th 2018	PMATH352W18/classnotes-white.tex	/^\\chapter{Lecture 16
 Lecture 16 Feb 16th 2018	PMATH352W18/classnotes.tex	/^\\chapter{Lecture 16 Feb 16th 2018}$/;"	c
 Lecture 16 Feb 16th 2018	_site/PMATH352W18/classnotes-white.tex	/^\\chapter{Lecture 16 Feb 16th 2018}$/;"	c
 Lecture 16 Feb 16th 2018	_site/PMATH352W18/classnotes.tex	/^\\chapter{Lecture 16 Feb 16th 2018}$/;"	c
+Lecture 16 Jul 04th 2019	PMATH450/classnotes.tex	/^\\chapter{Lecture 16 Jul 04th 2019}%$/;"	c
 Lecture 16 Jun 06th 2018	PMATH347S18/lectures/lec16.tex	/^\\chapter{Lecture 16 Jun 06th 2018}%$/;"	c
 Lecture 16 Jun 06th 2018	_site/PMATH347S18/lectures/lec16.tex	/^\\chapter{Lecture 16 Jun 06th 2018}%$/;"	c
 Lecture 16 Jun 26th 2018	STAT330S18/classnotes.tex	/^\\chapter{Lecture 16 Jun 26th 2018}%$/;"	c
@@ -3845,6 +3849,7 @@ chp:greatest_accuracy_credibility	ACTSC432/classnotes.tex	/^\\label{chp:greatest
 chp:greatest_accuracy_credibility	_site/ACTSC432/classnotes.tex	/^\\label{chp:greatest_accuracy_credibility}$/;"	l
 chp:important theorems and definitions	Personal Notes/Notes_Intro_to_Analysis_WWade.tex	/^\\chapter{Information from Earlier Chapters}\\label{chp:important theorems and definitions}$/;"	l
 chp:important theorems and definitions	_site/Personal Notes/Notes_Intro_to_Analysis_WWade.tex	/^\\chapter{Information from Earlier Chapters}\\label{chp:important theorems and definitions}$/;"	l
+chp:interest_in_2_pi_periodic_functions	PMATH450/classnotes.tex	/^\\label{chp:interest_in_2_pi_periodic_functions}$/;"	l
 chp:introduction	PMATH365/classnotes.tex	/^\\label{chp:introduction}$/;"	l
 chp:introduction	_site/PMATH365/classnotes.tex	/^\\label{chp:introduction}$/;"	l
 chp:introduction_and_review_of_probability	ACTSC432/classnotes.tex	/^\\label{chp:introduction_and_review_of_probability}$/;"	l
@@ -3970,6 +3975,7 @@ chp:lecture_16_feb_13th	PMATH467/classnotes.tex	/^\\label{chp:lecture_16_feb_13t
 chp:lecture_16_feb_13th	_site/PMATH348/classnotes.tex	/^\\label{chp:lecture_16_feb_13th}$/;"	l
 chp:lecture_16_feb_13th	_site/PMATH365/classnotes.tex	/^\\label{chp:lecture_16_feb_13th}$/;"	l
 chp:lecture_16_feb_13th	_site/PMATH467/classnotes.tex	/^\\label{chp:lecture_16_feb_13th}$/;"	l
+chp:lecture_16_jul_04th_2019	PMATH450/classnotes.tex	/^\\label{chp:lecture_16_jul_04th_2019}$/;"	l
 chp:lecture_16_jun_06th_2018	PMATH347S18/lectures/lec16.tex	/^\\label{chp:lecture_16_jun_06th_2018}$/;"	l
 chp:lecture_16_jun_06th_2018	_site/PMATH347S18/lectures/lec16.tex	/^\\label{chp:lecture_16_jun_06th_2018}$/;"	l
 chp:lecture_16_jun_26th_2018	STAT330S18/classnotes.tex	/^\\label{chp:lecture_16_jun_26th_2018}$/;"	l
@@ -5303,6 +5309,7 @@ defn:isomorphism	PMATH733/classnotes.tex	/^\\label{defn:isomorphism}$/;"	l
 defn:isomorphism	_site/PMATH347S18/definitions.tex	/^\\label{defn:isomorphism}$/;"	l
 defn:isomorphism	_site/PMATH347S18/lectures/lec09.tex	/^\\label{defn:isomorphism}$/;"	l
 defn:isomorphism	_site/PMATH733/classnotes.tex	/^\\label{defn:isomorphism}$/;"	l
+defn:isomorphism_of_hilbert_spaces	PMATH450/classnotes.tex	/^\\begin{defn}[Isomorphism of Hilbert Spaces]\\index{Isomorphism}\\label{defn:isomorphism_of_hilb/;"	l
 defn:jidoushi	JAPAN202R/classnotes.tex	/^\\begin{defn}[自動詞]\\index{自動詞}\\label{defn:jidoushi}$/;"	l
 defn:joint_cdf	STAT330S18/classnotes.tex	/^\\label{defn:joint_cdf}$/;"	l
 defn:joint_cdf	STAT333/classnotes.tex	/^\\begin{defn}[Joint CDF]\\index{Joint CDF}\\label{defn:joint_cdf}$/;"	l
@@ -6027,6 +6034,7 @@ defn:unique_factorization_domain	PMATH347S18/definitions.tex	/^\\label{defn:uniq
 defn:unique_factorization_domain	PMATH347S18/lectures/lec32.tex	/^\\label{defn:unique_factorization_domain}$/;"	l
 defn:unique_factorization_domain	_site/PMATH347S18/definitions.tex	/^\\label{defn:unique_factorization_domain}$/;"	l
 defn:unique_factorization_domain	_site/PMATH347S18/lectures/lec32.tex	/^\\label{defn:unique_factorization_domain}$/;"	l
+defn:unitary_operator	PMATH450/classnotes.tex	/^\\begin{defn}[Unitary Operator]\\index{Unitary Operator}\\label{defn:unitary_operator}$/;"	l
 defn:units_and_group_of_units	PMATH347S18/definitions.tex	/^\\label{defn:units_and_group_of_units}$/;"	l
 defn:units_and_group_of_units	PMATH347S18/lectures/lec24.tex	/^\\label{defn:units_and_group_of_units}$/;"	l
 defn:units_and_group_of_units	_site/PMATH347S18/definitions.tex	/^\\label{defn:units_and_group_of_units}$/;"	l
@@ -6219,6 +6227,7 @@ eg:euclidean_norm	PMATH351F18/classnotes.tex	/^\\begin{eg}[Euclidean Norm]\\labe
 eg:euclidean_norm	_site/PMATH351F18/classnotes.tex	/^\\begin{eg}[Euclidean Norm]\\label{eg:euclidean_norm}$/;"	l
 eg:examples_of_irreducible_polynomials	PMATH348/classnotes.tex	/^\\begin{eg}\\label{eg:examples_of_irreducible_polynomials}$/;"	l
 eg:examples_of_irreducible_polynomials	_site/PMATH348/classnotes.tex	/^\\begin{eg}\\label{eg:examples_of_irreducible_polynomials}$/;"	l
+eg:examples_of_onb	PMATH450/classnotes.tex	/^\\begin{eg}\\label{eg:examples_of_onb}$/;"	l
 eg:finding_the_number_of_cycles	PMATH467/classnotes.tex	/^\\begin{eg}\\label{eg:finding_the_number_of_cycles}$/;"	l
 eg:finding_the_number_of_cycles	_site/PMATH467/classnotes.tex	/^\\begin{eg}\\label{eg:finding_the_number_of_cycles}$/;"	l
 eg:first_eg_of_triangulation	PMATH467/classnotes.tex	/^\\begin{eg}\\label{eg:first_eg_of_triangulation}$/;"	l
@@ -6279,6 +6288,8 @@ eg:nara_situation_2	JAPAN201RS18/readingnotes.tex	/^\\begin{eg}[Situation 2]\\la
 eg:nara_situation_2	_site/JAPAN201RS18/readingnotes.tex	/^\\begin{eg}[Situation 2]\\label{eg:nara_situation_2}$/;"	l
 eg:number_of_posets	PMATH351F18/classnotes.tex	/^\\begin{eg}\\label{eg:number_of_posets}$/;"	l
 eg:number_of_posets	_site/PMATH351F18/classnotes.tex	/^\\begin{eg}\\label{eg:number_of_posets}$/;"	l
+eg:onb_of_bigl_2	PMATH450/classnotes.tex	/^    \\item \\label{eg:onb_of_bigl_2}$/;"	l
+eg:onb_of_lill_2	PMATH450/classnotes.tex	/^    \\item \\label{eg:onb_of_lill_2}$/;"	l
 eg:order_of_prev_eg	PMATH347S18/lectures/lec02.tex	/^  \\label{eg:order_of_prev_eg}$/;"	l
 eg:order_of_prev_eg	_site/PMATH347S18/lectures/lec02.tex	/^  \\label{eg:order_of_prev_eg}$/;"	l
 eg:p_norms	PMATH450/classnotes.tex	/^\\begin{eg}[$p$-norms]\\label{eg:p_norms}$/;"	l
@@ -8896,6 +8907,7 @@ sec:groups_continued	PMATH347S18/lectures/lec04.tex	/^\\label{sec:groups_continu
 sec:groups_continued	_site/PMATH347S18/lectures/lec04.tex	/^\\label{sec:groups_continued}$/;"	l
 sec:hilbert_spaces	PMATH450/classnotes.tex	/^\\label{sec:hilbert_spaces}$/;"	l
 sec:hilbert_spaces_continued	PMATH450/classnotes.tex	/^\\label{sec:hilbert_spaces_continued}$/;"	l
+sec:hilbert_spaces_continued_2	PMATH450/classnotes.tex	/^\\label{sec:hilbert_spaces_continued_2}$/;"	l
 sec:homology	PMATH467/classnotes.tex	/^\\label{sec:homology}$/;"	l
 sec:homology	_site/PMATH467/classnotes.tex	/^\\label{sec:homology}$/;"	l
 sec:homology_continued	PMATH467/classnotes.tex	/^\\label{sec:homology_continued}$/;"	l
@@ -8961,6 +8973,7 @@ sec:introduction_continued	PMATH347S18/lectures/lec02.tex	/^\\label{sec:introduc
 sec:introduction_continued	_site/PMATH347S18/lectures/lec02.tex	/^\\label{sec:introduction_continued}$/;"	l
 sec:introduction_to_credibility_theory	ACTSC432/classnotes.tex	/^\\label{sec:introduction_to_credibility_theory}$/;"	l
 sec:introduction_to_credibility_theory	_site/ACTSC432/classnotes.tex	/^\\label{sec:introduction_to_credibility_theory}$/;"	l
+sec:introduction_to_fourier_analysis	PMATH450/classnotes.tex	/^\\label{sec:introduction_to_fourier_analysis}$/;"	l
 sec:introduction_to_galois_theory	PMATH348/classnotes.tex	/^\\label{sec:introduction_to_galois_theory}$/;"	l
 sec:introduction_to_galois_theory	_site/PMATH348/classnotes.tex	/^\\label{sec:introduction_to_galois_theory}$/;"	l
 sec:introduction_to_galois_theory_continued	PMATH348/classnotes.tex	/^\\label{sec:introduction_to_galois_theory_continued}$/;"	l
@@ -10451,6 +10464,7 @@ thm:central_limit_theorem	STAT330S18/classnotes.tex	/^\\label{thm:central_limit_
 thm:central_limit_theorem	_site/STAT330S18/classnotes.tex	/^\\label{thm:central_limit_theorem}$/;"	l
 thm:characteristic_property_of_the_quotient_topology	PMATH467/classnotes.tex	/^\\begin{thm}[Characteristic Property of the Quotient Topology]\\label{thm:characteristic_propert/;"	l
 thm:characteristic_property_of_the_quotient_topology	_site/PMATH467/classnotes.tex	/^\\begin{thm}[Characteristic Property of the Quotient Topology]\\label{thm:characteristic_propert/;"	l
+thm:characterization_of_an_onb	PMATH450/classnotes.tex	/^\\begin{thm}[Characterization of an ONB]\\label{thm:characterization_of_an_onb}$/;"	l
 thm:characterization_of_galois_extensions	PMATH348/classnotes.tex	/^\\begin{thm}[Characterization of Galois Extensions]\\index{Characterization of Galois Extensions/;"	l
 thm:characterization_of_galois_extensions	_site/PMATH348/classnotes.tex	/^\\begin{thm}[Characterization of Galois Extensions]\\index{Characterization of Galois Extensions/;"	l
 thm:chebyshev_s_inequality	STAT330S18/classnotes.tex	/^\\label{thm:chebyshev_s_inequality}$/;"	l
@@ -10509,6 +10523,7 @@ thm:converse_of_probability_integral_transformation	STAT330S18/classnotes.tex	/^
 thm:converse_of_probability_integral_transformation	_site/STAT330S18/classnotes.tex	/^\\label{thm:converse_of_probability_integral_transformation}$/;"	l
 thm:correspondence_theorem	PMATH348/classnotes.tex	/^\\begin{thm}[Correspondence Theorem]\\index{Correspondence Theorem}\\label{thm:correspondence_th/;"	l
 thm:correspondence_theorem	_site/PMATH348/classnotes.tex	/^\\begin{thm}[Correspondence Theorem]\\index{Correspondence Theorem}\\label{thm:correspondence_th/;"	l
+thm:countability_of_an_orthonormal_set_in_a_separable_hilbert_space	PMATH450/classnotes.tex	/^\\begin{thm}[Countability of an Orthonormal Set in a Separable Hilbert Space]\\label{thm:countab/;"	l
 thm:cycle_decomposition_theorem	PMATH347S18/lectures/lec02.tex	/^\\begin{thm}[Cycle Decomposition Theorem]\\label{thm:cycle_decomposition_theorem}$/;"	l
 thm:cycle_decomposition_theorem	_site/PMATH347S18/lectures/lec02.tex	/^\\begin{thm}[Cycle Decomposition Theorem]\\label{thm:cycle_decomposition_theorem}$/;"	l
 thm:cyclotomic_polynomials_are_irreducible_over_q_	PMATH348/classnotes.tex	/^\\begin{thm}[Cyclotomic Polynomials are Irreducible over $\\mathbb{Q}$]\\label{thm:cyclotomic_po/;"	l
@@ -10634,6 +10649,7 @@ thm:invariance_property_of_the_mle	STAT330S18/classnotes.tex	/^\\label{thm:invar
 thm:invariance_property_of_the_mle	_site/STAT330S18/classnotes.tex	/^\\label{thm:invariance_property_of_the_mle}$/;"	l
 thm:inverse_function_theorem	PMATH365/classnotes.tex	/^\\begin{thm}[Inverse Function Theorem]\\index{Inverse Function Theorem}\\label{thm:inverse_funct/;"	l
 thm:inverse_function_theorem	_site/PMATH365/classnotes.tex	/^\\begin{thm}[Inverse Function Theorem]\\index{Inverse Function Theorem}\\label{thm:inverse_funct/;"	l
+thm:isomorphism_of_infinite_dimensional_separable_hilbert_spaces	PMATH450/classnotes.tex	/^\\begin{thm}[Isomorphism of Infinite-dimensional Separable Hilbert Spaces]\\label{thm:isomorphis/;"	l
 thm:kronecker_s_theorem	PMATH348/classnotes.tex	/^\\begin{thm}[Kronecker's Theorem]\\index{Kronecker's Theorem}\\label{thm:kronecker_s_theorem}$/;"	l
 thm:kronecker_s_theorem	_site/PMATH348/classnotes.tex	/^\\begin{thm}[Kronecker's Theorem]\\index{Kronecker's Theorem}\\label{thm:kronecker_s_theorem}$/;"	l
 thm:lagrange_s_theorem	PMATH347S18/lectures/lec10.tex	/^\\label{thm:lagrange_s_theorem}$/;"	l
