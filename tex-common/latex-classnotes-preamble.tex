@@ -64,6 +64,12 @@
 }{
   \usepackage{colorscheme-student}
 }
+\colorlet{red30}{red!30!background}
+\colorlet{green30}{green!30!background}
+\colorlet{yellow30}{yellow!30!background}
+\colorlet{blue30}{blue!30!background}
+\colorlet{magenta30}{magenta!30!background}
+\colorlet{cyan30}{cyan!30!background}
 
 % hyperref Package Settings
 \hypersetup{
@@ -488,12 +494,12 @@ middle, xlabel={$\re$}, ylabel={$\im$}, axis equal }}
 \newcommand{\hlnotee}[1]{\textcolor{color11}{\textbf{#1}}}
 \newcommand{\hlnotef}[1]{\textcolor{color12}{\textbf{#1}}}
 \newcommand{\hlnoteg}[1]{\textcolor{color13}{\textbf{#1}}}
-\newcommand{\hlb}[2]{\colorbox{#1!30!background}{#2}}
-\newcommand{\hlbnotea}[1]{\hlb{green}{#1}}
-\newcommand{\hlbnoteb}[1]{\hlb{cyan}{#1}}
-\newcommand{\hlbnotec}[1]{\hlb{yellow}{#1}}
-\newcommand{\hlbnoted}[1]{\hlb{magenta}{#1}}
-\newcommand{\hlbnotee}[1]{\hlb{red}{#1}}
+\DeclareRobustCommand{\hlb}[2]{\sethlcolor{#1}\hl{#2}}
+\DeclareRobustCommand{\hlbnotea}[1]{\hlb{green30}{#1}}
+\DeclareRobustCommand{\hlbnoteb}[1]{\hlb{cyan30}{#1}}
+\DeclareRobustCommand{\hlbnotec}[1]{\hlb{yellow30}{#1}}
+\DeclareRobustCommand{\hlbnoted}[1]{\hlb{magenta30}{#1}}
+\DeclareRobustCommand{\hlbnotee}[1]{\hlb{red30}{#1}}
 \newcommand{\WTP}{\textcolor{bwhite}{WTP} }
 \newcommand{\WTS}{\textcolor{bwhite}{WTS} }
 

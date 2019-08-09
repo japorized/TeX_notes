@@ -306,7 +306,7 @@ endsnippet
 
 priority 10
 context "math()"
-snippet "(?<!\\)hat" "hat" riA
+snippet "(?<!\\wide)hat" "hat" riA
 \hat{$1}$0
 endsnippet
 
@@ -318,7 +318,7 @@ endsnippet
 
 priority 100
 context "math()"
-snippet '(?!\\hat)(\\[a-z]+)hat' "hat" riA
+snippet '(?!\\hat|\\wide)(\\[a-z]+)hat' "hat" riA
 \hat{`!p snip.rv=match.group(1)`}
 endsnippet
 
@@ -424,42 +424,42 @@ snippet '(?<!\\){([0-9a-zA-Z+\|-]*)}E{[0-9a-zA-Z+-]}' "pure endowment" wrA
 endsnippet
 
 context "math()"
-snippet '(?<!\\)(\{([0-9a-z]*\|)\})?A\{(.*)\}' "discrete insurance" wrA
+snippet '(?<!\\)(\{([0-9a-z]*\|)\})?A\{([a-zA-Z0-9+{}.:_\\-]*)\}' "discrete insurance" wrA
 \\Ax`!p snip.rv = '[' + match.group(2) + ']' if match.group(2) is not None else ""`{`!p snip.rv = match.group(3)`}$0
 endsnippet
 
 context "math()"
-snippet '(?<!\\)(\{([0-9a-z]*\|)\})?A\*\{(.*)\}' "cts ins" wrA
+snippet '(?<!\\)(\{([0-9a-z]*\|)\})?A\*\{([a-zA-Z0-9+{}.:_\\-]*)\}' "cts ins" wrA
 \\Ax*`!p snip.rv = '[' + match.group(2) + ']' if match.group(2) is not None else ""`{`!p snip.rv = match.group(3)`}$0
 endsnippet
 
 context "math()"
-snippet '(?<!\\)(\{([0-9a-z]*\|)\})?a\*\*\{(.*)\}' "discrete annuity due" wrA
+snippet '(?<!\\)(\{([0-9a-z]*\|)\})?a\*\*\{([a-zA-Z0-9+{}.:_\\-]*)\}' "discrete annuity due" wrA
 \\ax**`!p snip.rv = '[' + match.group(2) + ']' if match.group(2) is not None else ""`{`!p snip.rv = match.group(3)`}$0
 endsnippet
 
 context "math()"
-snippet '(?<!\\)(\{([0-9a-z]*\|)\})?a\*\{(.*)\}' "cts annuity" wrA
+snippet '(?<!\\)(\{([0-9a-z]*\|)\})?a\*\{([a-zA-Z0-9+{}.:_\\-]*)\}' "cts annuity" wrA
 \\ax*`!p snip.rv = '[' + match.group(2) + ']' if match.group(2) is not None else ""`{`!p snip.rv = match.group(3)`}$0
 endsnippet
 
 context "math()"
-snippet '(?<!\\)(\{([0-9a-z]*\|)\})?a\{(.*)\}' "discrete annuity imm" wrA
+snippet '(?<!\\)(\{([0-9a-z]*\|)\})?a\{([a-zA-Z0-9+{}.:_\\-]*)\}' "discrete annuity imm" wrA
 \\ax`!p snip.rv = '[' + match.group(2) + ']' if match.group(2) is not None else ""`{`!p snip.rv = match.group(3)`}$0
 endsnippet
 
 context "math()"
-snippet '(?<!\\)(\{([0-9a-z]*\|)\})?s\*\*\{(.*)\}' "discrete annuity (accumulation) due" wrA
+snippet '(?<!\\)(\{([0-9a-z]*\|)\})?s\*\*\{([a-zA-Z0-9+{}.:_\\-]*)\}' "discrete annuity (accumulation) due" wrA
 \\sx**`!p snip.rv = '[' + match.group(2) + ']' if match.group(2) is not None else ""`{`!p snip.rv = match.group(3)`}$0
 endsnippet
 
 context "math()"
-snippet '(?<!\\)(\{([0-9a-z]*\|)\})?s\*\{(.*)\}' "cts annuity (accumulation)" wrA
+snippet '(?<!\\)(\{([0-9a-z]*\|)\})?s\*\{([a-zA-Z0-9+{}.:_\\-]*)\}' "cts annuity (accumulation)" wrA
 \\sx*`!p snip.rv = '[' + match.group(2) + ']' if match.group(2) is not None else ""`{`!p snip.rv = match.group(3)`}$0
 endsnippet
 
 context "math()"
-snippet '(?<!\\)(\{([0-9a-z]*\|)\})?s\{(.*)\}' "discrete annuity (accumulation) imm" wrA
+snippet '(?<!\\)(\{([0-9a-z]*\|)\})?s\{([a-zA-Z0-9+{}.:_\\-]*)\}' "discrete annuity (accumulation) imm" wrA
 \\sx`!p snip.rv = '[' + match.group(2) + ']' if match.group(2) is not None else ""`{`!p snip.rv = match.group(3)`}$0
 endsnippet
 

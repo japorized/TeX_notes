@@ -24,6 +24,7 @@
 \DeclareMathOperator{\Span}{span}
 \DeclareMathOperator{\dist}{dist}
 \DeclareMathOperator{\Trig}{Trig}
+\DeclareMathOperator{\dm}{dm}
 
 % disjoint union
 \makeatletter
@@ -2982,6 +2983,7 @@ construct an \hlnotea{uncountable set} $C$ that has measure zero.
     \item if $h : E \to \mathbb{K}$ is constant, then $h \in \mathcal{L}(E,
       \mathbb{K})$.
   \end{enumerate}
+  In particular, $\mathcal{L}(E, \mathbb{K})$ is an \hldefn{algebra}.
 \end{propo}
 
 \begin{proof}
@@ -8072,7 +8074,7 @@ The proof of the following theorem is left to the assignments.
   is indeed and ONB for $L_2(\mathbb{T}, \mathbb{C})$.
 \end{remark}
 
-\begin{eg}[Fourier Series for $L_2(\mathbb{T}, \mathbb{C})$, and the isomorphism between $L_2(\mathbb{T}, \mathbb{C})$ and $\ell_2(\mathbb{Z}, \mathbb{C})$]
+\begin{eg}[Fourier Series for $L_2(\mathbb{T}, \mathbb{C})$, and the isomorphism between $L_2(\mathbb{T}, \mathbb{C})$ and $\ell_2(\mathbb{Z}, \mathbb{C})$]\label{eg:fourier_for_bigl2_in_complex_unit_circle}
   Let $[f] \in L_2([-\pi, \pi], \mathbb{C})$.
   From A5Q4, we can show that $\{ [ \xi_n ] \}_{n \in \mathbb{Z}}$,
   where
@@ -8180,6 +8182,641 @@ The rest of the course is dedicated to showing this.
 % section introduction_to_fourier_analysis (end)
 
 % chapter lecture_16_jul_04th_2019 (end)
+
+\chapter{Lecture 17 Jul 09th 2019}%
+\label{chp:lecture_17_jul_09th_2019}
+% chapter lecture_17_jul_09th_2019
+
+\section{Introduction to Fourier Analysis (Continued)}%
+\label{sec:introduction_to_fourier_analysis_continued}
+% section introduction_to_fourier_analysis_continued
+
+As was the case with $p = 2$, for each $1 \leq p < \infty$,
+$\mathcal{L}_p(\mathbb{T}, \mathbb{C})$ forms a vector space over $\mathbb{C}$,
+and the map
+\begin{align*}
+  \nu_p : \mathcal{L}_p(\mathbb{T}, \mathbb{C}) &\to \mathbb{R} \\
+      f &\mapsto \left( \frac{1}{2 \pi} \int_{[-\pi, \pi)} \abs{f}^p \right)^{1 / p}
+\end{align*}
+defines a seminorm on $\mathcal{L}_p(\mathbb{T}, \mathbb{C})$
+
+For $p = \infty$, echoing a similar argument as in
+\cref{sub:completeness_of_l_infty_e_k_}, we have that
+\begin{equation*}
+  \nu_\infty(f) \coloneqq \inf \{ \delta > 0 :
+    m \{ \theta \in [-\pi, \pi) : \abs{f(\theta)} > \delta \} = 0 \},
+\end{equation*}
+for $f \in \mathcal{L}_\infty(\mathbb{T}, \mathbb{C})$ is a seminorm
+on $\mathcal{L}_\infty(\mathbb{T}, \mathbb{C})$.
+
+By \cref{propo:kernel_of_a_vector_space_is_a_linear_manifold},
+for each $1 \leq p \leq \infty$, we can obtain a norm $\norm{\cdot}_p$
+on
+\begin{equation*}
+  L_p(\mathbb{T}, \mathbb{C})
+  \coloneqq \mathcal{L}_p(\mathbb{T}, \mathbb{C}) \Big/
+  \mathcal{N}_p(\mathbb{T}, \mathbb{C}),
+\end{equation*}
+where
+\begin{equation*}
+  \mathcal{N}_p(\mathbb{T}, \mathbb{C}) \coloneqq \{ f \in
+  \mathcal{L}_p(\mathbb{T}, \mathbb{C}) : \nu_p(f) = 0 \}.
+\end{equation*}
+\sidenote{claftosel} % TODO: clarify to self
+Again, we can find that $[f] = [g] \in L_p(\mathbb{T}, \mathbb{C})$
+iff $f = g$ a.e. on $\mathbb{R}$.
+
+\begin{ex}
+  Verify that for $f \in \mathcal{C}(\mathbb{T}, \mathbb{C})$
+  \begin{equation*}
+    \norm{[f]}_\infty = \norm{f}_{\sup}
+    \coloneqq \sup \{ \abs{f(\theta)} : \theta \in [-\pi, \pi) \}.
+  \end{equation*}
+\end{ex}
+
+\begin{note}
+  Note that the supremum on the RHS of the above equation
+  is a finite number, since $f \in \mathcal{C}(\mathbb{T}, \mathbb{C})$
+  implies that $f$ is continuous on $\mathbb{R}$,
+  and hence $f$ is bounded on $[-\pi, \pi] \supseteq [-\pi, \pi)$.
+\end{note}
+
+Given any function $f : [-\pi, \pi) \to \mathbb{C}$,,
+let $\check{f} : \mathbb{R} \to \mathbb{C}$ be the $2 \pi$-periodic extension
+of $f$; i.e. $\check{f}(\theta) = f(\theta)$ for $\theta \in [-\pi, \pi)$
+and  $\check{f}(\theta + 2 \pi) = \check{f}(\theta)$  for $\theta \in \mathbb{R}$ .
+It is clear that $\check{f}$  always exists
+and is uniquely defined by $f$ .
+
+\begin{thm}[The $2 \pi$ periodic extension map is an isometric isomorphism]\label{thm:the_2_pi_periodic_extension_map_is_an_isometric_isomorphism}
+  Let $1 \leq p \leq \infty$. The map
+  \begin{align*}
+    \Xi_p : L_p([-\pi, \pi), \mathbb{C}) &\to L_p(\mathbb{T}, \mathbb{C}) \\
+        [f] &\mapsto [\check{f}]
+  \end{align*}
+  is an isometric isomorphism.
+\end{thm}
+
+\begin{ex}
+  Prove \cref{thm:the_2_pi_periodic_extension_map_is_an_isometric_isomorphism}.
+\end{ex}
+
+It follows from the above isometric isomorphism that all of our results
+about $L_p$-spaces hold for their respective
+$L_p(\mathbb{T}, \mathbb{C})$ counterparts.
+
+Let us now focus on $L_1(\mathbb{T}, \mathbb{C})$.
+
+\begin{defn}[The Fourier Coefficients and The Fourier Series]\index{Fourier Coefficient}\index{Fourier Series}\label{defn:fourier_coefficient_and_fourier_series}
+  For $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$ and $n \in \mathbb{Z}$,
+  we refer to
+  \begin{equation*}
+    \hat{f}(n) \coloneqq \frac{1}{2 \pi} \int_{[-\pi, \pi)} f \overline{\xi_n}
+  \end{equation*}
+  as the $n$\textsuperscript{th}-\hlnoteb{Fourier coefficient} of $f$.
+  We also refer to
+  \begin{equation*}
+    \sum_{n \in \mathbb{Z}} \hat{f}(n) \xi_n
+  \end{equation*}
+  as the \hlnoteb{Fourier series} of $f$ in $\mathcal{L}1(\mathbb{T}, \mathbb{C})$.
+\end{defn}
+
+\begin{remark}
+  If $f, g \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$
+  and $f = g$ a.e. on $[-\pi, \pi)$, then
+  \begin{equation*}
+    \hat{f}(n) = \frac{1}{2 \pi} \int_{[-\pi, \pi)} f \overline{\xi_n}
+    = \frac{1}{2\pi} \int_{[-\pi, \pi)} g \overline{\xi_n}
+    = \hat{g}(n),\quad \forall n \in \mathbb{Z}.
+  \end{equation*}
+  Thus, if we set the \hlnoteb{$n$\textsuperscript{th}-Fourier coefficient}
+  of $[f] \in L_1(\mathbb{T}, \mathbb{C})$ as
+  \begin{equation*}
+    \alpha_n^{[f]} \coloneqq \hat{f}(n), \quad n \in \mathbb{Z},
+  \end{equation*}
+  as we did in \cref{eg:fourier_for_bigl2_in_complex_unit_circle},
+  then $\alpha_n^{[f]}$ is well-defined. We can thus define
+  \begin{equation*}
+    \sum_{n \in \mathbb{Z}} \alpha_n^{[f]} [\xi_n]
+  \end{equation*}
+  as the \hlnoteb{Fourier series} of $[f]$.
+\end{remark}
+
+Notice that we did not mention the convergence of the above series.
+Up to now, the Fourier series is simply a formal power series,
+meant only to represent the sequence of partial sums
+\begin{equation*}
+  \left( \sum_{n = -N}^{N} \alpha_n^{[f]} [\xi_n] \right)_{N = 0}^{\infty}.
+\end{equation*}
+We shall study about the convergence of the series.
+
+Note that we may extend the notion of a Fourier coefficient for
+non-integer powers of $e^{i \theta}$;
+i.e. for $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$ and $r \in \mathbb{R}$,
+we define
+\begin{equation*}
+  \hat{f}(r) = \frac{1}{2 \pi} \int_{[-\pi, \pi)} f \overline{\xi_r},
+\end{equation*}
+where $\xi_r(\theta) = e^{ir\theta}$ for all $\theta \in \mathbb{R}$.
+
+\begin{remark}
+  In the case of $p = 2$, we've seen that
+  $\left( \alpha_n^{[f]} \right)_{n \in \mathbb{Z}} \in \ell_2(\mathbb{Z}, \mathbb{C})$.
+  While this does not hold for $[f] \in L_1(\mathbb{T}, \mathbb{C})$,
+  we can actually get pretty close.
+
+  First, notice that $\abs{\xi_r(\theta)} = 1$ for all $\theta \in \mathbb{R}$
+  and $r \in \mathbb{R}$. Thus for $f \in \mathcal{L}_1(\mathbb{T},
+  \mathbb{C})$,
+  \begin{align*}
+    \abs{\hat{f}(n)}
+    &= \abs{ \frac{1}{2 \pi} \int_{[-\pi, \pi)} f \overline{\xi_r} } \\
+    &\leq \frac{1}{2 \pi} \int_{[-\pi, \pi)} \abs{f \overline{\xi_r}} \\
+    &= \frac{1}{2 \pi} \int_{[-\pi, \pi)} \abs{f} \\
+    &= \nu_1(f) = \norm{[f]}_1.
+  \end{align*}
+  So as before, if $f, g \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$,
+  and $f = g$ a.e. on $[\mathbb{T}]$, then $\hat{f}(r) = \hat{g}(r)$
+  for all $r \in \mathbb{R}$.
+  Thus, we may define $\alpha_r^{[f]} \coloneqq \hat{f}(r)$,
+  for $r \in \mathbb{R}$.
+
+  It follows that
+  \begin{equation*}
+    \sup_{r \in \mathbb{R}} \abs{\alpha_r^{[f]}}
+    = \sup_{r \in \mathbb{R}} \abs{\hat{f}(r)}
+    \leq \norm{[f]}_1
+  \end{equation*}
+  for all $[f] \in L_1(\mathbb{T}, \mathbb{C})$.
+  In particular, we have that
+  \begin{equation*}
+    \left( \alpha_n^{[f]} \right)_{n \in \mathbb{Z}}
+      \in \ell_{\infty}(\mathbb{Z}, \mathbb{C}).
+  \end{equation*}
+  We can, in fact, do better.
+\end{remark}
+
+Let
+\begin{equation*}
+  c_0(\mathbb{Z}, \mathbb{C}) \coloneqq \left\{ (z_n)_{n=1}^{\infty} :
+    \forall n \in \mathbb{N}\; z_n \in \mathbb{C} \land
+    \lim_{n \to \infty} z_n = 0 \right\}.
+\end{equation*}
+
+\begin{thm}[The Riemann-Lebesgue Lemma]\index{The Riemann-Lebesgue Lemma}\label{thm:the_riemann_lebesgue_lemma}
+  Let $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$. Then
+  \begin{equation*}
+    \lim_{r \to \infty} \hat{f}(r) = 0 = \lim_{r \to - \infty} \hat{f}(r).
+  \end{equation*}
+  In particular,
+  \begin{equation*}
+    \left( \alpha_n^{[f]} \right)_{n \in \mathbb{Z}} \in c_0(\mathbb{Z},
+    \mathbb{C}).
+  \end{equation*}
+\end{thm}
+
+\begin{strategy}
+  The key here is to realize that this is simple in the case of characteristic
+  functions of an interval.
+  Since the Lebesgue integration is linear, the span of the $2 \pi$-periodic
+  extensions of these characteristic functions of intervals is
+  $\STEP(\mathbb{T}, \mathbb{C})$.
+  The result would hold for its equivalence classes,
+  and we then simply need to appeal to the density of
+  $[\STEP(\mathbb{T}, \mathbb{C})]$ in $L_1(\mathbb{T}, \mathbb{C})$,
+  which then gives us the result.
+\end{strategy}
+
+\begin{proof}
+  \hlbnoted{Case: Characteristic functions} 
+  Let $f_0$ be the characteristic of an interval $[s, t] \subseteq [-\pi, \pi)$,
+  i.e. $f_0 = \chi_{[s, t]}$.
+  Let $f \coloneqq \check{f}_0$ be the $2 \pi$-periodic extension
+  of $f_0$ to $\mathbb{R}$, so that $f \in \STEP(\mathbb{T}, \mathbb{C})$.
+  Then $f$ is continuous and, in particular, bounded, over a bounded interval,
+  \hyperref[thm:bounded_riemann_integrable_functions_are_lebesgue_integrable]{
+  $f$ is Riemann integrable as well}.
+  Then
+  \begin{align*}
+    \hat{f}(r)
+    &= \frac{1}{2 \pi} \int_{[-\pi, \pi)} \chi_{[s, t]} \overline{\xi_r} \\
+    &= \frac{1}{2 \pi} \int_{s}^{t} e^{-ir \theta} \dif{\theta} \\
+    &= \frac{1}{2 \pi} \left( \frac{e^{-ir t} - e^{-ir s}}{-ir} \right).
+  \end{align*}
+  Thus
+  \begin{equation*}
+    \abs{\hat{f}(r)}
+    \leq \frac{\abs{e^{-irt}} + \abs{e^{-irs}}}{2 \pi \abs{-ir}} 
+    = \frac{2}{2 \pi \abs{r}} = \frac{1}{\pi \abs{r}}.
+  \end{equation*}
+  It is clear that
+  \begin{equation*}
+    \lim_{r \to \infty} \hat{f}(r) = 0 = \lim_{r \to -\infty} \hat{f}(r).
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{Case: Step functions}
+  Let $f \in \STEP(\mathbb{T}, \mathbb{C})$,
+  and $f_0 \coloneqq f \restriction_{[-\pi, \pi)}$, and write
+  $f_0 = \sum_{k=1}^{M} \beta_k \chi_{H_k}$ as a disjoint representation,
+  where each $H_k = [s_k, t_k]$ is a subinterval $[-\pi, \pi)$.
+
+  Then the result follows almost exactly like the last case for
+  characteristic functions, while making use of the linearity of
+  the Lebesgue integral.
+
+  \noindent
+  \hlbnoted{Case: Final, generic case}
+  Let $[f] \in L_1(\mathbb{T}, \mathbb{C})$ and $\epsilon > 0$.
+  By the density of $[\STEP(\mathbb{T}, \mathbb{C})]$
+  in $L_1(\mathbb{T}, \mathbb{C})$,
+  let $g \in \STEP(\mathbb{T}, \mathbb{C})$ such that
+  \begin{equation*}
+    \norm{[f] - [g]}_1 \leq \frac{\epsilon}{2}.
+  \end{equation*}
+  Then
+  \begin{align*}
+    \hat{f}(r)
+    &= \frac{1}{2 \pi} \int_{[-\pi, \pi)} f \overline{\xi_r} \\
+    &= \frac{1}{2 \pi} \int_{[-\pi, \pi)} (f - g) \overline{\xi_r}
+      + \frac{1}{2 \pi} \int_{[-\pi, \pi)} g \overline{\xi_r} \\
+    &= \widehat{f - g}(r) + \hat{g}(r).
+  \end{align*}
+  As seen before,
+  we have that
+  \begin{equation*}
+    \abs{\widehat{f - g}(r)} \leq \nu_1(f - g)
+    = \norm{[f - g]}_1 = \norm{[f] - [g]}_1 < \frac{\epsilon}{2}.
+  \end{equation*}
+  Now from the previous case, since $g \in \STEP(\mathbb{T}, \mathbb{C})$,
+  we may choose $N > 0$ such that $\abs{r} > N$ so that
+  $\abs{\hat{g}(r)} < \frac{\epsilon}{2}$.
+  Thus $\abs{r} > N$ implies that
+  \begin{equation*}
+    \abs{\hat{f}} \leq \abs{ \widehat{f - g}(r) } + \abs{ \hat{g}(r) }
+    < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \lim_{r \to \infty} \hat{f}(r) = 0 = \lim_{r \to -\infty} \hat{f}(r),
+  \end{equation*}
+  as required.
+
+  Recall that
+  \begin{equation*}
+    \alpha_n^{[f]} = \hat{f}(n), \quad n \in \mathbb{Z}.
+  \end{equation*}
+  It is clear that $\hat{f}(n) = \frac{1}{2 \pi} \int_{[-\pi, \pi)} f
+  \overline{\xi_n} \in \mathbb{C}$ and so $\alpha_n^{[f]} \in \mathbb{C}$,
+  and
+  \begin{equation*}
+    \lim_{n \to \infty} \alpha_n^{[f]} = \lim_{n \to \infty} \hat{f}(n) = 0.
+  \end{equation*}
+  Thus $\left(\alpha_n^{[f]}\right)_{n \in \mathbb{Z}} \in c_0(\mathbb{Z}, \mathbb{C})$.
+\end{proof}
+
+\begin{remark}
+  Recall that we had $[f] \in L_2(\mathbb{T}, \mathbb{C})$ iff
+  $(\alpha_n^{[f]})_{n \in \mathbb{Z}} \in \ell_2(\mathbb{Z}, \mathbb{C})$.
+  We have shown that if $[f] \in L_1(\mathbb{T}, \mathbb{C})$ implies that
+  \begin{equation*}
+    (\alpha_n^{[f]})_{n \in \mathbb{Z}} \in c_0(\mathbb{Z}, \mathbb{C}).
+  \end{equation*}
+  However, the converse is not true. We shall see in the final chapter
+  that the map
+  \begin{align*}
+    \Lambda : (L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1)
+          &\to (c_0(\mathbb{Z}, \mathbb{C}), \norm{\cdot}_\infty) \\
+      [f] &\mapsto \left( \alpha_n^{[f]} \right)_{n \in \mathbb{Z}}
+  \end{align*}
+  is a continuous, injective linear map, but it is \hlnotec{not surjective}.
+\end{remark}
+
+We are left with some other questions as well;
+for $[f] \in L_1(\mathbb{T}, \mathbb{C})$:
+\begin{enumerate}
+  \item does the Fourier series $\sum_{n \in \mathbb{Z}} \alpha_n^{[f]} [\xi_n]$
+    of $f$ converge, and if so, in which sense?
+    Is it pointwise (a.e.), uniformly, or in the $L_1$-norm?
+  \item if the Fourier series does converge in some sense,
+    is the value $f$ itself?
+  \item Is $[f]$ completely determined by its Fourier series, as
+    we have seen for $L_2$? That is, if $[f], [g] \in L_1(\mathbb{T}, \mathbb{C})$,
+    and $\alpha_n^{[f]} = \alpha_n^{[g]}$ for all $n \in \mathbb{Z}$,
+    is it true that $[f] = [g]$?
+\end{enumerate}
+
+% section introduction_to_fourier_analysis_continued (end)
+
+\section{Convolution}%
+\label{sec:convolution}
+% section convolution
+
+Recall that an algebra is a vector space over some field $\mathbb{F}$
+which also happens to be a ring.
+A \hldefn{Banach algebra} $\mathcal{A}$ is a Banach space over $\mathbb{K}$
+which is also an algebra, where \hlbnoteb{multiplication is jointly continuous} 
+since it satisfies the inequality
+\begin{equation*}
+  \norm{ab} \leq \norm{a} \norm{b}
+\end{equation*}
+for all $a, b \in \mathcal{A}$.
+
+\begin{eg}
+  $(\mathcal{C}(X, \mathbb{K}), \norm{\cdot}_{\sup})$
+  is a Banach algebra for each \hlbnotec{locally compact, Hausdorff
+  topological space} $X$.
+  In particular, $\mathbb{M}_n(\mathbb{K}) \simeq \mathcal{B}(\mathbb{K}^n)$
+  (for each $n \geq 1$), when equipped with the operator norm,
+  is a Banach algebra.
+\end{eg}
+
+Thus far, we have seen that $L_1(\mathbb{T}, \mathbb{C})$ is a Banach space,
+but we have not studied about whether it has any multiplicative structure.
+
+For $f, g \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$, we set
+\begin{equation*}
+  g \diamond f(\theta) \coloneqq \frac{1}{2 \pi}
+  \int_{[-\pi, \pi)} g(s) f(\theta - s) \dm(s),
+\end{equation*}
+where $\dm(s)$ is similar to the notation $\dif{x}$ in Riemann integration,
+only as an indicator of the variable of which the integration is performed
+with respect to (wrt).
+We refer to $g \diamond f(\theta)$ as the \hldefn{convolution} of $g$ and $f$.
+Observe that if $[f_1] = [f_2], [g_1] = [g_2] \in L_1(\mathbb{T}, \mathbb{C})$,
+then $g_1 \diamond f_1 = g_2 \diamond f_2$ a.e., and so we may define
+\begin{equation*}
+  [g] * [f] \coloneqq [g \diamond f],
+\end{equation*}
+for all $[f], [g] \in L_1(\mathbb{T}, \mathbb{C})$.
+
+The careful reader would quickly notice the following 2 points:
+\begin{enumerate}
+  \item it is not clear that $g \diamond f \in \mathbb{C}$
+    for any $\theta \in \mathbb{R}$;
+  \item it is much less clear that $g \diamond f \in \mathcal{L}_1(\mathbb{T},
+    \mathbb{C})$.
+\end{enumerate}
+To prove the above statement, we require \hlnotea{Fubini's Theorem},
+which requires quite a bit of work.
+
+We shall work around Fubini's Theorem due to the overhead
+that we have to take on.
+Instead, we shall instead show that we can turn $\mathcal{L}_1(\mathbb{T}, \mathbb{C})$
+(and in turn $L_1(\mathbb{T}, \mathbb{C})$) into a so-called
+\hldefn{left module} over $\mathcal{C}(\mathbb{T}, \mathbb{C})$
+using convolution.
+\sidenote{\href{https://en.wikipedia.org/wiki/Left_module}{Wikipedia article}
+for left module.}
+That is, given \hlbnotee{$g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$} and
+$f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$, we shall set
+\begin{equation*}
+  g \diamond f(\theta) \coloneqq \frac{1}{2 \pi} \int_{[-\pi, \pi)} g(s)f(\theta
+  - s) \dm(s),
+\end{equation*}
+and prove that $g \diamond f \in \mathcal{C}(\mathbb{T}, \mathbb{C}) \subseteq
+\mathcal{L}_1(\mathbb{T}, \mathbb{C})$.
+\sidenote{Note $\mathcal{C}(\mathbb{T}, \mathbb{C}) \subseteq
+\mathcal{L}_p(\mathbb{T}, \mathbb{C})$ for $1 \leq p \leq \infty$.}
+Now if this is true, then if $f_1 \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$
+and $f_1 = f$ a.e. on $\mathbb{R}$,
+then $g \diamond f(\theta) = g \diamond f_1(\theta)$ for all $\theta \in \mathbb{R}$,
+then $g \diamond f = g \diamond f_1$,
+and we can thus define
+\begin{equation*}
+  g * [f] = [g \diamond f], \quad [f] \in L_1(\mathbb{T}, \mathbb{C}).
+\end{equation*}
+
+One advantage to convolving with continuous functions only
+is that we can make use of the Riemann integral.
+This will allow us to garner more information about the
+continuity properties of $\diamond$,
+and ultimately about convergence properties of the Fourier series.
+
+\begin{lemma}[Preservation of the Lebesgue Integral of $2 \pi$-periodic functions under certain Transformations]\label{lemma:preservation_of_the_lebesgue_integral_of_2pi_periodic_functions_under_certain_transformations}
+  Let $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$ and $\theta \in \mathbb{R}$.
+  \begin{enumerate}
+    \item 
+      \begin{equation*}
+        \int_{[-\pi, \pi)} f = \int_{[-\pi, \pi)} \tau_s^\circ(f),
+      \end{equation*}
+      where $\tau_s^\circ(f)(\theta) = f(\theta - s)$ is a translation of $f$ by
+      $s$.
+    \item If $h(s) \coloneqq f(-s)$, $s \in \mathbb{R}$, is a
+      reflection of $f$ (on some axis), then
+      \begin{equation*}
+        \int_{[-\pi, \pi)} h = \int_{[-\pi, \pi]} f.
+      \end{equation*}
+    \item Let $\phi_{f; \theta} : \mathbb{R} \to \mathbb{C}$ be
+      $\phi_{f, \theta}(s) = f(\theta - s)$.
+      Then $\phi_{f, \theta} \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$ and
+      \begin{equation*}
+        \nu_1(\phi_{f, \theta}) = \nu_1(f).
+      \end{equation*}
+      That is,
+      \begin{equation*}
+        \frac{1}{2\pi} \int_{[-\pi, \pi)} \abs{f(\theta - s)} \dm(s)
+        = \frac{1}{2\pi} \int_{[-\pi, \pi)} \abs{f(t)} \dm(t).
+      \end{equation*}
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  The proof of this lemma is in A6Q1.
+\end{proof}
+
+\begin{defn}[Convolution]\index{Convolution}\label{defn:convolution}
+  Let $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$ and
+  $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$.
+  We define the \hlnoteb{convolution} of $f$ by $g$ to be the function
+  \begin{align*}
+    g \diamond f : \mathbb{R} &\to \mathbb{C} \\
+       \theta &\mapsto \frac{1}{2\pi} \int_{[-\pi, \pi)} g(s)f(\theta - s) \dm(s).
+  \end{align*}
+\end{defn}
+
+We still have not shown that $g \diamond f(\theta) \in \mathbb{C}$
+for each $\theta \in \mathbb{R}$. Let's do that right now.
+
+Fixing $\theta \in \mathbb{R}$, we see that
+by
+\cref{lemma:preservation_of_the_lebesgue_integral_of_2pi_periodic_functions_under_certain_transformations},
+\begin{align*}
+  \abs{g \diamond f(\theta)}
+  &= \abs{ \frac{1}{2\pi} \int_{[-\pi, \pi)} g(s)f(\theta - s) \dm(s) } \\
+  &\leq \frac{1}{2\pi} \int_{[-\pi, \pi)} \abs{g(s)} \abs{f(\theta - s)} \dm(s) \\
+  &\leq \norm{g}_{\sup} \frac{1}{2\pi} \int_{[-\pi, \pi)}
+      \abs{\phi_{f, \theta}(s)} \dm(s) \\
+  &= \norm{g}_{\sup} \nu_1(\phi_{f, \theta}) \\
+  &= \norm{g}_{\sup} \nu_1(f) < \infty.
+\end{align*}
+It follows that $g \diamond f$ is indeed a complex-valued function.
+
+The following is an extremely important lemma that we shall use extensively.
+
+\begin{lemma}[Swapping Convolutions]\label{lemma:swapping_convolutions}
+  Let $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$ and
+  $g \in \mathcal{L}_\infty(\mathbb{T}, \mathbb{C})$.
+  If $\theta \in \mathbb{R}$, then
+  \begin{equation*}
+    \int_{[-\pi, \pi)} g(s) f(\theta - s) \dm(s)
+    = \int_{[-\pi, \pi)} g(\theta - t) f(t) \dm(t).
+  \end{equation*}
+  In particular, this holds if
+  \begin{equation*}
+    f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C}) \quad \text{ and } \quad
+    g \in \mathcal{C}(\mathbb{T}, \mathbb{C}).
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  The proof of this lemma is in A6Q2.
+\end{proof}
+
+\begin{remark}
+  With \cref{lemma:swapping_convolutions},
+  for $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$ and
+  $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$,
+  we can define the \hldefn{convolution} of $g$ by $f$ as
+  \begin{equation*}
+    f \diamond g(\theta) = \frac{1}{2\pi} \int_{[-\pi, \pi)} g(\theta - t) f(t) \dm(t).
+  \end{equation*}
+  Consequently, we have that $f \diamond g(\theta) = g \diamond f(\theta)$
+  for all $\theta \in \mathbb{R}$, and so we shall simply refer
+  to this function as \hlbnoteb{the convolution of $f$ and $g$}.
+\end{remark}
+
+\begin{ex}\label{ex:cts_2pi_periodic_fns_are_unifly_cts}
+  Let $h : \mathbb{R} \to \mathbb{C}$ be a $2 \pi$-periodic
+  and continuous function.
+  Prove that $h$ is uniformly continuous.
+  \sidenote{This is a rather simple (even proof-wise) but important realization
+  in our theories going forward.}
+\end{ex}
+
+\begin{propo}[Continuity of the Convolution of $f$ and $g$ where $g$ is Continuous]\label{propo:continuity_of_the_convolution_of_f_and_g_where_g_is_continuous}
+  Let $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$ and
+  $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$.
+  Then $g \diamond f \in \mathcal{C}(\mathbb{T}, \mathbb{C})$.
+\end{propo}
+
+\begin{proof}
+  First, note that by \cref{ex:cts_2pi_periodic_fns_are_unifly_cts},
+  $g$ is uniformly continuous.
+  Let $\epsilon > 0$.
+  We can then choose $\delta > 0$ such that $\forall x, y \in \mathbb{R}$,
+  $\abs{x - y} < \delta$ implies that $\abs{g(x) - g(y)} <
+  \frac{\epsilon}{\nu_1(f)}$.
+
+  Now for any $\theta, \theta_0 \in \mathbb{R}$ such that
+  $\abs{\theta - s - (\theta_0 - s)} = \abs{\theta - \theta_0} < \delta$,
+  for any $s \in \mathbb{R}$, we have that
+  \begin{equation*}
+    \abs{ g(\theta - s) - g(\theta_0 - s) } < \frac{\epsilon}{\nu_1(f)}.
+  \end{equation*}
+  Then by \cref{lemma:swapping_convolutions} and the last remark, we have
+  \begin{align*}
+    &\abs{g \diamond f(\theta) - g \diamond f(\theta_0)} \\
+    &= \frac{1}{2\pi} \abs{ \int_{[\pi, \pi)} g(\theta - s)f(s)
+      - g(\theta_0 - s)f(s) \dm(s) } \\
+    &\leq \frac{1}{2\pi} \int_{[-\pi, \pi)}
+      \abs{g(\theta - s) - g(\theta_0 - s)} \abs{f(s)} \dm(s) \\
+    &< \frac{1}{2\pi} \int_{[-\pi, \pi)} \frac{\epsilon}{\nu_1(f)} \abs{f(s)} \dm(s) \\
+    &= \frac{\epsilon}{\nu_1(f)} \nu_1(f) = \epsilon.
+  \end{align*}
+  Thus $g \diamond f$ is (uniformly) continuous.
+
+  That $g \diamond f$ is $2 \pi$-periodic follows from $g$ and $f$
+  being $2 \pi$-periodic themselves.
+\end{proof}
+
+\newthought{We now want} to see if given $[f_1] = [f_2] \in L_1(\mathbb{T}, \mathbb{C})$,
+do we have $g \diamond f_1 = g \diamond f_2$?
+This is, in particular, motivated by what we already saw in $L_2(\mathbb{T}, \mathbb{C})$,
+where this realization allowed us to work solely
+with $L_2(\mathbb{T}, \mathbb{C})$ instead of $\mathcal{L}_2(\mathbb{T}, \mathbb{C})$.
+Fortunately, this indeed holds for $L_1(\mathbb{T}, \mathbb{C})$.
+
+Observe that if $[f_1] = [f_2] \in L_1(\mathbb{T}, \mathbb{C})$, then
+$f_1 = f_2$ a.e. on $\mathbb{R}$, which then $gf_1 = gf_2$ a.e.
+We thus see that $\forall \theta \in \mathbb{R}$, and any $s \in \mathbb{R}$,
+\begin{align*}
+  g \diamond f_1(\theta)
+  &= f_1 \diamond g(\theta) \\
+  &= \frac{1}{2\pi} \int_{[-\pi, \pi)} g(\theta - s) f_1(s) \dm(s) \\
+  &= \frac{1}{2\pi} \int_{[-\pi, \pi]} g(\theta - s) f_2(s) \dm(s) \\
+  &= f_2 \diamond g(\theta) = g \diamond f_2(\theta).
+\end{align*}
+
+We may thus extend our notion of convolutions to $L_1(\mathbb{T}, \mathbb{C})$.
+
+\begin{defn}[Convolution on $L_1(\mathbb{T}, \mathbb{C})$]\index{Convolution}\label{defn:convolution_on_romanl_1_mathbb_t_mathbb_c_}
+  Given $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$ and $[f] \in L_1(bt, \mathbb{C})$,
+  we define the \hlnoteb{convolution} of $g$ and $[f]$ to be
+  \begin{equation*}
+    g * [f] \coloneqq [g \diamond f],
+  \end{equation*}
+  where $g \diamond f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$
+  is the convolution introduced in \cref{defn:convolution}.
+\end{defn}
+
+\begin{defn}[Convolution Operator with Kernel]\index{Convolution Operator}\index{Kernel}\label{defn:convolution_operator_with_kernel}
+  We define the \hlnoteb{convolution operator} with \hlnoteb{kernel} $g$
+  to be the map
+  \begin{align*}
+    C_g : L_1(\mathbb{T}, \mathbb{C}) &\to L_1(\mathbb{T}, \mathbb{C}) \\
+                [f] &\mapsto g * [f].
+  \end{align*}
+\end{defn}
+
+\begin{warning}
+  The kernel defined above has nothing to do with the notion of
+  kernels in abstract algebra.
+\end{warning}
+
+\begin{remark}
+  Observe that if $[f_1], f_2 \in L_1(\mathbb{T}, \mathbb{C})$,
+  and if $\kappa \in \mathbb{C}$, then
+  \begin{align*}
+    C_g(\kappa[f_1] + [f_2])
+    &= g * [\kappa f_1 + f_2] \\
+    &= \frac{1}{2\pi} \int_{[-\pi, \pi)}
+      g(s)(\kappa f_1(\theta - s) + f_2(\theta - s)) \dm(s) \\
+    &= \kappa \frac{1}{2\pi} \int_{[-\pi, \pi)} g(s) f_1(\theta - s) \dm(s) \\
+    &\qquad + \frac{1}{2\pi} \int_{[-\pi, \pi)} g(s) f_2(\theta - s) \dm(s) \\
+    &= \kappa g * [f_1] + g * [f_2] \\
+    &= \kappa C_g([f_1]) + C_g([f_2]).
+  \end{align*}
+  Thus $C_g$ is a \hlbnotec{linear map} on $L_1(\mathbb{T}, \mathbb{C})$.
+
+  Since $(L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1)$ is a Banach space,
+  and $C_g$ is linear, it is natural to ask if $C_g$ is bounded,
+  \sidenote{This would also mean that $C_g$ is continuous.}
+  and if so, what is its operator norm?
+
+  We shall see that the answer to this question
+  is intimately related to the question of convergence
+  of Fourier series of elements of $L_1(\mathbb{T}, \mathbb{C})$.
+\end{remark}
+
+With our current tool set, it is rather difficult to directly compute
+$\norm{C_g}$. In particular, we have to deal with monstrosities
+of the following form:
+\begin{equation*}
+  \frac{1}{2\pi} \int_{[-\pi, \pi)} \left( 
+    \frac{1}{2\pi} \int_{[-\pi, \pi)} g(s) f(\theta - s) \dm(s)
+  \right) e^{-in\theta} \dm(\theta).
+\end{equation*}
+
+What we shall do is to reformulate $C_g$ as a vector-valued Riemann integral
+on $L_1(\mathbb{T}, \mathbb{C})$. We shall be able to extend this notion
+of convolution beyond the Banach space $L_1(\mathbb{T}, \mathbb{C})$.
+To that end, we first need to understand the notion of a
+\hlnotea{homogenous Banach space}.
+
+% section convolution (end)
+
+% chapter lecture_17_jul_09th_2019 (end)
 
 
 
