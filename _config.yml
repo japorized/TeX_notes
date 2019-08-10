@@ -27,6 +27,9 @@ markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-gzip
+  - jekyll-last-modified-at
+
+timezone: America/Toronto
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list

@@ -1,7 +1,7 @@
 {% include head.html %}
 <article>
   <h1>Japorized's LaTeX Notes</h1>
-  <span class="subtitle">Last updated: {{ page.path | prepend: '/' | prepend: site.source | file_date | date: "%Y %B %d %R" }}</span>
+  <span class="subtitle">Last updated: {{ page.last_modified_at | date: "%Y %B %d %R" }}</span>
   <noscript><p>Enable JS to toggle .tex files and search</p></noscript>
 
   <div class="controls-container">

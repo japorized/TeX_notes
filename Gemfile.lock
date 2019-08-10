@@ -43,6 +43,9 @@ GEM
       activesupport (>= 3.0.0)
     jekyll-gzip (2.1.1)
       jekyll (~> 3.0)
+    jekyll-last-modified-at (1.1.0)
+      jekyll (>= 3.7, < 5.0)
+      posix-spawn (~> 0.3.9)
     jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
     jekyll-watch (2.2.1)
@@ -58,11 +61,12 @@ GEM
     multipart-post (2.1.1)
     pathutil (0.16.2)
       forwardable-extended (~> 2.6)
+    posix-spawn (0.3.13)
     public_suffix (3.1.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
-    rouge (3.7.0)
+    rouge (3.8.0)
     ruby_dep (1.5.0)
     safe_yaml (1.0.5)
     sass (3.7.4)
@@ -82,7 +86,7 @@ DEPENDENCIES
   jekyll-feed
   jekyll-gitlab-letsencrypt
   jekyll-gzip
-  tzinfo-data
+  jekyll-last-modified-at
 
 BUNDLED WITH
    2.0.1
