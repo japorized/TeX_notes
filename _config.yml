@@ -54,6 +54,7 @@ exclude:
   - tex-common/
   - scripts/
   - .gitlab-ci.yml
+  - tags
 
 gitlab-letsencrypt:
   # Gitlab settings:

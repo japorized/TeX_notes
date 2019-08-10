@@ -32,7 +32,7 @@ pages:
     paths:
     - vendor/ruby
   script:
-  - bundle exec jekyll build -I -d public
+  - JEKYLL_ENV=production bundle exec jekyll build -I -d public
   artifacts:
     paths:
     - public
