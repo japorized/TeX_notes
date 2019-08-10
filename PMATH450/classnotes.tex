@@ -620,7 +620,7 @@ In the next lecture, we shall prove the following theorem.
 
 We shall now prove the last theorem stated in class.
 
-\begin{thm}[Continuous Functions are Riemann Integrable]\label{thmnonum:continuous_functions_are_riemann_integrable}
+\begin{thm}[Continuous Functions are Riemann Integrable]\label{thm:continuous_functions_are_riemann_integrable}
   Let $(\mathfrak{X}, \norm{\cdot})$ be a Banach space and $a < b \in
   \mathbb{R}$. If $f : [a, b] \to \mathfrak{X}$ is continuous, then $f$ is
   Riemann integrable over $[a, b]$.
@@ -918,7 +918,7 @@ integration and Riemann integration \cite{siegmund2008}:
   integral.
 \end{quotebox}
 
-The insight here is that one can \hlbnotea{freely arrange} the values of te
+The insight here is that one can \hlbnotea{freely arrange} the values of the
 functions, all the while \hlbnotea{preserving} the value of the integral.
 \begin{itemize}
   \item This requires us to have a better understanding of what a measure is.
@@ -8817,6 +8817,398 @@ To that end, we first need to understand the notion of a
 % section convolution (end)
 
 % chapter lecture_17_jul_09th_2019 (end)
+
+\chapter{Lecture 18 Jul 11th 2019}%
+\label{chp:lecture_18_jul_11th_2019}
+% chapter lecture_18_jul_11th_2019
+
+\section{Convolution (Continued)}%
+\label{sec:convolution_continued}
+% section convolution_continued
+
+Let $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$, and $s \in \mathbb{R}$.
+Consider the function
+\begin{align*}
+  \tau_s^{\circ}(f) : \mathbb{R} &\to \mathbb{C} \\
+      \theta &\mapsto f(\theta - s),
+\end{align*}
+which we have seen before.
+One should think of $\tau_s^\circ$ as \hlbnotec{translating $f$ by $s$}.
+The superscript $\circ$ above $\tau_s$ is to indicate
+that we are acting on \hlbnotec{functions}.
+When working with elements of $L_1(\mathbb{T}, \mathbb{C})$,
+we shall drop this superscript.
+
+Now, since $\mathfrak{M}(\mathbb{R})$ is invariant under translation,
+the Lebesgue measure is translation-invariant,
+and the set of $2\pi$-periodic functions is invariant under translation
+implies that
+\begin{equation*}
+  \tau_s^\circ(f) \in \mathcal{L}_1(\mathbb{T}, \mathbb{C}).
+\end{equation*}
+Furthermore, if $[f] = [g] \in L_1(\mathbb{T}, \mathbb{C})$, then
+\begin{equation*}
+  [\tau_s^{\circ}(f)] = [\tau_s^{\circ}(g)].
+\end{equation*}
+Thus, we may define the operation of \hldefn{translation by $s$}
+on $L_1(\mathbb{T}, \mathbb{C})$ as
+\begin{equation*}
+  \tau_s([f]) \coloneqq [\tau_s^{\circ}(f)].
+\end{equation*}
+
+\begin{defn}[Homogeneous Banach Spaces]\index{Homogeneous Banach Spaces}\label{defn:homogeneous_banach_spaces}
+  A \hlnoteb{homogeneous Banach space} over $\mathbb{T}$
+  is a linear manifold $\mathfrak{B}$ in $L_1(\mathbb{T}, \mathbb{C})$,
+  equipped with the norm $\norm{\cdot}_{\mathfrak{B}}$
+  wrt to which $(\mathfrak{B}, \norm{\cdot}_{\mathfrak{B}})$ is a Banach space,
+  satisfying
+  \begin{enumerate}
+    \item $\norm{[f]}_1 \leq \norm{[f]}_{\mathfrak{B}}$ for all $[f] \in \mathfrak{B}$;
+    \item $[\Trig(\mathbb{T}, \mathbb{C})] \subseteq \mathfrak{B}$;
+    \item $\mathfrak{B}$ is invariant under translation; i.e.
+      $\forall [f] \in \mathfrak{B}$ and $s \in \mathbb{R}$,
+      \begin{equation*}
+        \tau_s[f] = [\tau_s^{\circ}(f)] \in \mathfrak{B};
+      \end{equation*}
+    \item $\forall [f] \in \mathfrak{B},\, s \in \mathbb{R}$,
+      $\norm{\tau_s[f]}_{\mathfrak{B}} = \norm{[f]}_{\mathfrak{B}}$; and
+    \item for each $[f] \in \mathfrak{B}$, the map
+      \begin{align*}
+        \Psi_{[f]} : \mathbb{R} &\to \mathfrak{B} \\
+                s &\mapsto \tau_s[f]
+      \end{align*}
+      is continuous.
+      \sidenote{This means that the translation itself is
+      a continuous process on a homogeneous Banach space.}
+  \end{enumerate}
+\end{defn}
+
+\begin{remark}
+  It may be surprising to find that
+  a linear manifold $\mathfrak{M}$ of a Banach space $\mathfrak{X}$
+  may not be closed in the ambient norm,
+  but that $(\mathfrak{M}, \norm{\cdot}_{\mathfrak{M}})$ is complete
+  in its own norm.
+
+  But one may quickly notice
+  that each of the spaces $L_p(\mathbb{T}, \mathbb{C})$
+  is dense in $L_1(\mathbb{T}, \mathbb{C})$, for $1 \leq p < \infty$,
+  and each of them is complete under their corresponding $\norm{\cdot}_p$-norm.
+  So we've already seen the above `surprising' fact.
+\end{remark}
+
+\begin{eg}[{$([\mathcal{C}(\mathbb{T}, \mathbb{C})], \norm{\cdot}_{\infty})$} is a homogeneous Banach space]\label{eg:equivclss_of_cts_2pi_periodic_fns_is_a_hom_ban_sp}
+  Recall that
+  \begin{equation*}
+    [\mathcal{C}(\mathbb{T}, \mathbb{C})] \subseteq L_\infty(\mathbb{T}, \mathbb{C})
+  \end{equation*}
+  is a subset of $L_1(\mathbb{T}, \mathbb{C})$ and it is a linear manifold.
+  Furthermore, for $f \in \mathcal{C}(\mathbb{T}, \mathbb{C})$, we have that
+  \begin{equation*}
+    \norm{[f]}_{\infty} = \norm{f}_{\sup}
+    \coloneqq \sup \{ \abs{f(\theta)} : \theta \in [-\pi, \pi) \},
+  \end{equation*}
+  and that $([\mathcal{C}(\mathbb{T}, \mathbb{C})], \norm{\cdot}_{\infty})$
+  is a Banach space.
+  We shall show that it is, in fact, a homogeneous Banach space.
+
+  \begin{enumerate}
+    \item Let $[f] \in [\mathcal{C}(\mathbb{T}, \mathbb{C})]$. Then
+      \begin{equation*}
+        \norm{[f]}_1 = \frac{1}{2\pi} \int_{[-\pi, \pi)} \abs{f}
+        \leq \frac{1}{2\pi} \int_{[-\pi, \pi)} \norm{f}_{\sup}
+        = \norm{f}_{\sup} = \norm{[f]}_{\infty}.
+      \end{equation*}
+
+    \item It is clear that $\xi_n(\theta) = e^{in\theta}$ is continuous
+      for each $\theta \in \mathbb{R}$ and so $\xi_n \in \mathcal{C}(\mathbb{T}, \mathbb{C})$.
+      Since $[\mathcal{C}(\mathbb{T}, \mathbb{C})]$ is a linear manifold,
+      it follows that $[\Trig(\mathbb{T}, \mathbb{C})] \subseteq
+      [\mathcal{C}(\mathbb{T}, \mathbb{C})]$.
+
+    \item If $f \in \mathcal{C}(\mathbb{T}, \mathbb{C})$,
+      then it is clear that $\tau_s^{\circ}(f) \in \mathcal{C}(\mathbb{T},
+      \mathbb{C})$,
+      since a translation of $2\pi$-periodic continuous function
+      is still a $2\pi$-periodic continuous function.
+      Thus $[\mathcal{C}(\mathbb{T}, \mathbb{C})]$ is translation invariant.
+
+    \item Let $[f] \in [\mathcal{C}(\mathbb{T}, \mathbb{C})]$.
+      Then
+      \begin{align*}
+        \norm{\tau_s[f]}_{\infty}
+        &= \norm{[\tau_s^{\circ}(f)]}_{\infty}
+         = \norm{\tau_s^{\circ}(f)}_{\infty} \\
+        &= \sup \{ \abs{f(\theta - s)} : \theta \in \mathbb{R} \} \\
+        &= \sup \{ \abs{f(\theta)} : \theta \in \mathbb{R} \} \\
+        &= \norm{f}_{\sup} = \norm{[f]}_{\infty}.
+      \end{align*}
+
+    \item Let $[f] \in [\mathcal{C}(\mathbb{T}, \mathbb{C})]$, and wlog wma
+      $f \in \mathcal{C}(\mathbb{T}, \mathbb{C})$.
+      Since $f$ is continuous, we have that for every $s \in \mathbb{R}$,
+      $\forall \epsilon > 0$, $\exists \delta > 0$ such that
+      $\forall s_0 \in \mathbb{R}$, if $\abs{s - s_0} < \delta$,
+      then $\abs{f(s) - f(s_0)} < \epsilon$.
+      In particular, for any $\theta \in \mathbb{R}$, since
+      $\abs{\theta - s - (\theta - s_0)} < \delta$, we have
+      \begin{equation*}
+        \abs{f(\theta - s) - f(\theta - s_0)} < \frac{\epsilon}{2}.
+      \end{equation*}
+      Now for any $s \in \mathbb{R}$, and any $\epsilon > 0$,
+      we may pick the same $\delta > 0$ so that for any $s_0 \in \mathbb{R}$,
+      we have
+      \begin{align*}
+        \norm{\Psi_{[f]}(s) - \Psi_{[f]}(s_0)}_{\infty}
+        &= \norm{\tau_s[f] - \tau_{s_0}[f]}_{\infty} \\
+        &= \norm{[\tau_s^{\circ}(f)] - [\tau_{s_0}^{\circ}(f)]}_{\infty} \\
+        &= \norm{\tau_s^{\circ}(f) - \tau_{s_0}^{\circ}(f)}_{\sup} \\
+        &= \norm{f(\theta - s) - f(\theta - s_0)} \\
+        &= \sup \{ \abs{f(\theta - s) - f(\theta - s_0)} : \theta \in \mathbb{R} \} \\
+        &\leq \sup \left\{ \frac{\epsilon}{2} : \theta \in \mathbb{R} \right\}
+        = \frac{\epsilon}{2} < \epsilon.
+      \end{align*}
+      It follows that $\Psi_{[f]}$ is indeed continuous
+      for every $s \in \mathbb{R}$.
+  \end{enumerate}
+  This concludes the proof that
+  $( [\mathcal{C}(\mathbb{T}, \mathbb{C})], \norm{\cdot}_{\infty} )$
+  is a homogeneous Banach space.
+\end{eg}
+
+\begin{eg}[$(L_p(\mathbb{T}, \mathbb{C}), \norm{\cdot}_p)$ is a homogeneous Banach space for $1 \leq p < \infty$]\label{eg:biglp_of_2pi_periodic_fns_is_a_hom_ban_sp}
+  Let $1 \leq p < \infty$. We shall show that
+  $(L_p(\mathbb{T}, \mathbb{C}), \norm{\cdot}_p)$ is
+  a homogeneous Banach space.
+  \begin{enumerate}
+    \item Let $f \in \mathcal{L}_p(\mathbb{T}, \mathbb{C})$,
+      and $q$ the Lebesgue conjugate of $p$, i.e. $\frac{1}{p} + \frac{1}{q} = 1$.
+      Recall from
+      \cref{propo:measurable_function_broken_down_into_an_absolute_part_and_a_scaling_part}
+      that there exists a measurable function $\rho : \mathbb{R} \to \mathbb{T}$
+      such that $f = \rho \abs{f}$. One may observe that by
+      \hyperref[thm:holders_inequality_lp_spaces]{Hölder's Inequality},
+      and the fact that $f$ itself is $2\pi$-periodic,
+      we have $\rho \in \mathcal{L}_q(\mathbb{T}, \mathbb{C})$.
+      Furthermore,
+      \begin{equation*}
+        \norm{[\rho]}_{q}
+        = \left( \frac{1}{2\pi} \int_{[-\pi, \pi)} \abs{\rho}^q \right)^{1 / q}
+        \leq \left( \frac{1}{2\pi} \int_{[-\pi, \pi)} 1 \right)^{1 / q} = 1.
+      \end{equation*}
+      Most importantly, for us here,
+      $\norm{[\overline{\rho}]}_q = \norm{[\rho]}_q = 1$.
+      It follows, again, by Holder's Inequality, that
+      \begin{equation*}
+        \norm{[f]}_p = \left( 
+          \frac{1}{2\pi} \int_{[-\pi, \pi)} \abs{f \cdot \overline{\rho}}
+        \right)
+        \leq \norm{[f]}_p \norm{[\overline{\rho}]}_q \leq \norm{[f]}_p.
+      \end{equation*}
+
+    \item As a consequence of the last example, we observe that
+      \begin{equation*}
+        [\Trig(\mathbb{T}, \mathbb{C})] \subseteq [\mathcal{C}(\mathbb{T}, \mathbb{C})]
+        \subseteq L_p(\mathbb{T}, \mathbb{C}) \subseteq L_1(\mathbb{T}, \mathbb{C}).
+      \end{equation*}
+
+    \item The fact that the norm is finite in
+      next part makes the final conclusion.
+
+    \item Let $[f] \in L_p(\mathbb{T}, \mathbb{C})$ and $s \in \mathbb{R}$.
+      We observe that by \cref{lemma:swapping_convolutions},
+      \begin{align*}
+        \norm{\tau_s[f]}_p
+        &= \norm{[\tau_s^{\circ}(f)]}_p \\
+        &= \left( \frac{1}{2\pi} \int_{[-\pi, \pi)}
+          \abs{f(\theta - s)}^p \dm(s) \right)^{1 / p} \\
+        &= \left( \frac{1}{2\pi} \int_{[-\pi, \pi)}
+          \abs{f(s)}^p \dm(s) \right)^{1 / p} \\
+        &= \norm{[f]}_p < \infty.
+      \end{align*}
+
+    \item Let $[f] \in L_p(\mathbb{T}, \mathbb{C})$ and $s \in \mathbb{R}$.
+      \WTS $\forall \epsilon > 0$, $\exists \delta > 0$
+      such that $\forall s_0 \in \mathbb{R}$,
+      if $\abs{s - s_0} < \delta$, then
+      \begin{align*}
+        \norm{\Psi_{[f]}(s) - \Psi_{[f]}(s_0)}_p
+        &= \norm{\tau_s[f] - \tau_{s_0}[f]}_p \\
+        &= \norm{[\tau_s^{\circ}(f)] - [\tau_{s_0}^{\circ}(f)]}_p \\
+        &= \left( \frac{1}{2\pi} \int_{[-\pi, \pi)}
+          \abs{f(\theta - s) - f(\theta - s_0)} \dm(s) \right)^{1 / p}.
+      \end{align*}
+      We realize that we need to see if we can have $f(\theta - s)$
+      to be as close to $f(\theta - s_0)$ as possible under
+      the right circumstances.
+
+      Notice that $[\mathcal{C}(\mathbb{T}, \mathbb{C})]$ is dense in
+      $L_p(\mathbb{T}, \mathbb{C})$. Thus, we may find
+      $[g] \in [\mathcal{C}(\mathbb{T}, \mathbb{C})]$ such that
+      \begin{equation*}
+        \norm{[f] - [g]}_p < \frac{\epsilon}{3}.
+      \end{equation*}
+      Furthermore, we can pick this $g$ such that $\exists \delta > 0$
+      such that for $\abs{s - s_0} < \delta$, we have
+      \begin{equation*}
+        \norm{\tau_s^{\circ}(g) - \tau_{s_0}^{\circ}(g)}_\infty < \frac{\epsilon}{3},
+      \end{equation*}
+      and this is by the last example.
+      Note that
+      \begin{equation*}
+        \norm{\cdot}_1 \leq \norm{\cdot}_p \leq \norm{\cot}_\infty.
+      \end{equation*}
+      Thus by the same $\delta$, we have
+      \begin{align*}
+        \norm{\tau_s^{\circ}(f) - \tau_{s_0}^{\circ}(f)}_p
+        &\leq \norm{\tau_s^{\circ}(f) - \tau_s^{\circ}(g)}_p
+         + \norm{\tau_s^{\circ}(g) - \tau_{s_0}^{\circ}(g)}_p \\
+        &\qquad+ \norm{\tau_{s_0}^{\circ}(g) - \tau_{s_0}^{\circ}(f)}_p \\
+        &< \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3}
+         = \epsilon
+      \end{align*}
+      saving us the work of doing integration, and completing the proof.
+  \end{enumerate}
+\end{eg}
+
+\begin{eg}[$(L_\infty(\mathbb{T}, \mathbb{C}), \norm{\cdot}_{\infty})$ is not a homogeneous Banach space]
+  The situation for $p = \infty$ is different.
+  It checks out the first 4 conditions, but fails on the last;
+  translations under this norm is not continuous.
+  That sounds sensible, given how the norm is defined as a supremum
+  and not some nice elementary function, but we shall see
+  where exactly does it fall short.
+  \begin{enumerate}
+    \item This is an easy exercise: for $[f] \in L_\infty(\mathbb{T}, \mathbb{C})$,
+      \begin{equation*}
+        \norm{[f]}_1 = \frac{1}{2\pi} \int_{[-\pi, \pi)} \abs{f}
+        \leq \frac{1}{2\pi} \int_{[-\pi, \pi)} \norm{f}_{\sup}
+        = \norm{f}_{\sup} = \norm{[f]}_{\infty}.
+      \end{equation*}
+    \item Again, by \cref{eg:equivclss_of_cts_2pi_periodic_fns_is_a_hom_ban_sp},
+      we have that
+      \begin{equation*}
+        [\Trig(\mathbb{T}, \mathbb{C})]
+        \subseteq [\mathcal{C}(\mathbb{T}, \mathbb{C})]
+        \subseteq L_\infty(\mathbb{T}, \mathbb{C}).
+      \end{equation*}
+    \item For $[f] \in L_\infty(\mathbb{T}, \mathbb{C})$ and $s \in \mathbb{R}$,
+      we have
+      \begin{align*}
+        \norm{\tau_s[f]}_{\infty}
+        &= \norm{[\tau_s^{\circ}(f)]}_\infty \\
+        &= \norm{f(\theta - s)}_{\sup} \\
+        &= \sup \{ \abs{f(\theta - s)} : \theta \in \mathbb{R} \} \\
+        &= \sup \{ \abs{f(\theta)} : \theta \in \mathbb{R} \} \\
+        &= \norm{f}_{\sup} = \norm{[f]}_\infty < \infty.
+      \end{align*}
+    \item The last part concluded with what we want.
+  \end{enumerate}
+
+  For the translation not being continuous, consider the function
+  \begin{equation*}
+    f_0 \coloneqq \chi_{[0, \pi)} \in \mathcal{L}_\infty([-\pi, \pi), \mathbb{C})
+  \end{equation*}
+  and let
+  \begin{equation*}
+    f = \check{f}_0 \in \mathcal{L}_\infty(\mathbb{T}, \mathbb{C})
+  \end{equation*}
+  be the $2\pi$-periodic extension of $f_0$.
+
+  For $-\pi < s < 0$, we see that
+  \begin{equation*}
+    \tau_s(f)(\theta) - \tau_0(f)(\theta) = 1 - 0 = 1
+  \end{equation*}
+  for all $\theta \in (s, 0)$,
+  and so
+  \begin{equation*}
+    \norm{\tau_s[f] - \tau_0[f]}_\infty = 1.
+  \end{equation*}
+  In particular,
+  \begin{equation*}
+    \lim_{s \to 0} \norm{\tau_s[f] - \tau_0[f]}_\infty = 1 \neq 0
+    \norm{\tau_0[f] - \tau_0[f]}_\infty,
+  \end{equation*}
+  i.e. even if $s$ is close to $0$, the translation does not
+  get any more continuous.
+  Thus, in particular, $s \mapsto \tau_s[f]$ is not continuous at $0$.
+\end{eg}
+
+Let $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$ and $[f] \in L_1(\mathbb{T}, \mathbb{C})$.
+We defined the convolution of $g$ and $[f]$
+to be $g * [f] \coloneqq [g \diamond f]$, where
+\begin{equation*}
+  g \diamond f(\theta) = \frac{1}{2\pi} \int_{[-\pi, \pi)}
+    g(s) f(\theta - s) \dm(s).
+\end{equation*}
+So we defined $g * [f]$ by first defining $g \diamond f$ pointwise,
+using Lebesgue integration.
+
+We showed in \cref{eg:biglp_of_2pi_periodic_fns_is_a_hom_ban_sp}
+that $(L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1)$ is
+a homogeneous Banach space over $\mathbb{T}$.
+Then by the 5\textsuperscript{th} condition in the
+\hyperref[defn:homogeneous_banach_spaces]{definition}, the function
+\begin{align*}
+  \beta : \mathbb{R} &\to L_1(\mathbb{T}, \mathbb{C}) \\
+                   s &\mapsto g(s) \tau_s[f]
+\end{align*}
+is continuous.
+By \cref{thm:continuous_functions_are_riemann_integrable},
+\begin{equation*}
+  \frac{1}{2\pi} \int_{-\pi}^{\pi} \beta(s) \dif{s}
+  = \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s)\tau_s[f] \dif{s}
+\end{equation*}
+exists in $L_1(\mathbb{T}, \mathbb{C})$, and it is obtained
+as an $\norm{\cdot}_1$-limit of Riemann sums
+$(\beta, P_N, P_N^*) \in L_1(\mathbb{T}, \mathbb{C})$
+using partitions $P_N$ of $[-2\pi, 2\pi]$
+with corresponding choices $P_N^*$ of test values for $P_N$.
+
+Fixing $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$,
+we can define the map
+\begin{align*}
+  \Gamma_g : L_1(\mathbb{T}, \mathbb{C}) &\to L_1(\mathbb{T}, \mathbb{C}) \\
+      [f] &\mapsto \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s)\tau_s[f] \dif{s}.
+\end{align*}
+Notice that $\Gamma_g$ is linear: for $[f], [h] \in L_1(\mathbb{T}, \mathbb{C})$,
+we have
+\begin{align*}
+  \Gamma_g([f] + [h])
+  &= \Gamma([f + h]) \\
+  &= \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s) \tau_s([f + h]) \dif{s} \\
+  &= \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s)[\tau_s^{\circ}(f + h)] \dif{s} \\
+  &= \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s)[f(\theta - s) + h(\theta - s)] \dif{s} \\
+  &= \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s)
+    ([f(\theta - s)] + [h(\theta - s)]) \dif{s} \\
+  &= \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s)\tau_s[f] + g(s)\tau_s[h] \dif{s} \\
+  &= \Gamma_g([f]) + \Gamma_g([h]).
+\end{align*}
+
+One quickly realizes the resemblance of $\Gamma_g$ to
+\hyperref[defn:convolution_operator_with_kernel]{$C_g$}.
+After all, in particular,
+\begin{equation*}
+  \tau_s[f] = [\tau_s^\circ(f)], \quad \text{ and } \quad
+  \tau_s^\circ(f)(\theta) = f(\theta - s),
+\end{equation*}
+for all $\theta \in \mathbb{R}$.
+
+We shall make showing $\Gamma_g = C_g$ as our next goal, so that
+for $[f] \in L_1(\mathbb{T}, \mathbb{C})$, we have
+\begin{equation*}
+  C_g[f] = g * [f] = [g \diamond f]
+  = \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s) \tau_s[f] \dif{s} = \Gamma_g[f].
+\end{equation*}
+This is, however, not an obvious or trivial result,
+especially since the two constructions are entirely different;
+one is an equivalence class of convolutions,
+while the other is an integral of convolution-like expression
+but involving equivalence classes.
+
+% section convolution_continued (end)
+
+% chapter lecture_18_jul_11th_2019 (end)
 
 
 

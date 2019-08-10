@@ -10794,6 +10794,7 @@ thm:continuity_preserves_sequential_compactness	PMATH351F18/classnotes.tex	/^\\b
 thm:continuity_preserves_sequential_compactness	_site/PMATH351F18/classnotes.tex	/^\\begin{thm}[Continuity Preserves Sequential Compactness]\\label{thm:continuity_preserves_sequen/;"	l
 thm:continuous_bijections_from_a_compact_space_is_a_homeomorphism	PMATH351F18/classnotes.tex	/^\\begin{thm}[Continuous Bijections from a Compact Space is a Homeomorphism]\\label{thm:continuou/;"	l
 thm:continuous_bijections_from_a_compact_space_is_a_homeomorphism	_site/PMATH351F18/classnotes.tex	/^\\begin{thm}[Continuous Bijections from a Compact Space is a Homeomorphism]\\label{thm:continuou/;"	l
+thm:continuous_functions_are_riemann_integrable	PMATH450/classnotes.tex	/^\\begin{thm}[Continuous Functions are Riemann Integrable]\\label{thm:continuous_functions_are_ri/;"	l
 thm:continuous_functions_from_a_compact_set_is_uniformly_continuous	PMATH351F18/classnotes.tex	/^\\begin{thm}[Continuous Functions from a Compact Set Is Uniformly Continuous]\\label{thm:continu/;"	l
 thm:continuous_functions_from_a_compact_set_is_uniformly_continuous	_site/PMATH351F18/classnotes.tex	/^\\begin{thm}[Continuous Functions from a Compact Set Is Uniformly Continuous]\\label{thm:continu/;"	l
 thm:continuous_maps_map_compact_sets_to_compact_images	PMATH467/classnotes.tex	/^\\begin{thm}[Continuous Maps map Compact Sets to Compact Images]\\label{thm:continuous_maps_map_/;"	l
@@ -11204,7 +11205,6 @@ thm:winding_number_theorem	PMATH352W18/classnotes-white.tex	/^\\begin{thm}[Windi
 thm:winding_number_theorem	PMATH352W18/classnotes.tex	/^\\begin{thm}[Winding Number Theorem\\index{Winding Number Theorem}]\\label{thm:winding_number_th/;"	l
 thm:winding_number_theorem	_site/PMATH352W18/classnotes-white.tex	/^\\begin{thm}[Winding Number Theorem\\index{Winding Number Theorem}]\\label{thm:winding_number_th/;"	l
 thm:winding_number_theorem	_site/PMATH352W18/classnotes.tex	/^\\begin{thm}[Winding Number Theorem\\index{Winding Number Theorem}]\\label{thm:winding_number_th/;"	l
-thmnonum:continuous_functions_are_riemann_integrable	PMATH450/classnotes.tex	/^\\begin{thm}[Continuous Functions are Riemann Integrable]\\label{thmnonum:continuous_functions_a/;"	l
 thmnonum:continuous_functions_are_riemann_integrable	_site/PMATH450/classnotes.tex	/^\\begin{thm}[Continuous Functions are Riemann Integrable]\\label{thmnonum:continuous_functions_a/;"	l
 thmnonum:invariance_of_the_dimension	PMATH467/classnotes.tex	/^\\begin{thmnonum}[Invariance of the Dimension]\\label{thmnonum:invariance_of_the_dimension}$/;"	l
 thmnonum:invariance_of_the_dimension	_site/PMATH467/classnotes.tex	/^\\begin{thmnonum}[Invariance of the Dimension]\\label{thmnonum:invariance_of_the_dimension}$/;"	l
