@@ -9826,6 +9826,8 @@ as we let $N \to \infty$ for the 4\textsuperscript{th} result in
   \end{enumerate}
 \end{crly}
 
+We are already seeing some bad signs of things not working out nicely.
+Let's push a little bit further.
 To exploit the connection between the Dirichlet kernel and convolution,
 we require a few results from real analysis.
 
@@ -9873,6 +9875,329 @@ The reader should be familiar with the following result.
 % section the_dirichlet_kernel (end)
 
 % chapter lecture_20_jul_18th_2019 (end)
+
+\chapter{Lecture 21 Jul 23rd 2019}%
+\label{chp:lecture_21_jul_23rd_2019}
+% chapter lecture_21_jul_23rd_2019
+
+\section{The Dirichlet Kernel (Continued)}%
+\label{sec:the_dirichlet_kernel_continued}
+% section the_dirichlet_kernel_continued
+
+The second result which we shall require is the following.
+
+\begin{thm}[Banach-Steinhaus Theorem (aka The Uniform Boundedness Principle)]\index{Banach-Steinhaus Theorem}\index{The Uniform Boundedness Principle}\label{thm:banach_steinhaus_theorem}
+  Let $(X, d)$ be a complete metric space and
+  $\emptyset \neq \mathcal{F} \subseteq \mathcal{C}(X, \mathbb{R})$.
+  Suppose that $\forall x \in X$, $\exists \kappa_x > 0$ a constant such that
+  \begin{equation*}
+    \abs{f(x)} \leq \kappa_x,\quad f \in \mathcal{F}.
+  \end{equation*}
+  Then there exists an open set $G \subseteq X$ and $\kappa > 0$ such that
+  \begin{equation*}
+    \abs{f(x)} \leq \kappa,\quad x \in G, \enspace f \in \mathcal{F}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  \hlwarn{To be added}
+\end{proof}
+
+There is a stronger version of the Banach-Steinhaus Theorem
+that applies to linear operators in Banach spaces.
+
+\begin{thm}[Banach-Steinhaus Theorem for Operators (aka The Uniform Boundedness Principle for Operators)]\index{Banach-Steinhaus Theorem for Operators}\index{The Uniform Boundedness Principle for Operators}\label{thm:banach_steinhaus_theorem_for_operators}
+  Let $(\mathfrak{X}, \norm{\cdot}_{\mathfrak{X}})$ and
+  $(\mathfrak{Y}, \norm{\cdot}_{\mathfrak{Y}})$ be Banach spaces, and suppose that
+  $\emptyset \neq \mathcal{F} \subseteq \mathcal{B}(\mathfrak{X}, \mathfrak{Y})$.
+  Let $H \subseteq \mathfrak{X}$ be a subset of the second category in $\mathfrak{X}$,
+  and suppose that for each $x \in \mathcal{H}$,
+  there exists a constant $\kappa_x > 0$ such that
+  \begin{equation*}
+    \norm{T_x}_{\mathfrak{Y}} \leq \kappa_x, \quad T \in \mathcal{F}.
+  \end{equation*}
+  Then $\mathcal{F}$ is bounded; that is
+  \begin{equation*}
+    \sup_{T \in \mathcal{F}} \norm{T} < \infty.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  \hlwarn{To be added} 
+\end{proof}
+
+\begin{crly}[Sparcity of Boundedness of Unbounded Sequences of Bounded Functions between Banach Spaces]\label{crly:sparcity_of_boundedness_of_unbounded_sequences_of_bounded_functions_between_banach_spaces}
+  Let $(\mathfrak{X}, \norm{\cdot}_{\mathfrak{X}})$ and
+  $(\mathfrak{Y}, \norm{\cdot}_{\mathfrak{Y}})$ be Banach spaces, and let
+  $(T_n)_{n=1}^{\infty}$ be an unbounded sequence in
+  $\mathcal{C}(\mathfrak{X}, \mathfrak{Y})$,
+  i.e.  $\sup_{n \geq 1} \norm{T_n} = \infty$.
+
+  Let $H = \{ x \in \mathfrak{X} : \sup_{n \geq 1} \norm{T_n x} < \infty \}$.
+  Then $H$ is of the first category in $\mathfrak{X}$, and
+  $J \coloneqq \mathfrak{X} \setminus H$ is of the second category.
+\end{crly}
+
+\begin{proof}
+  \hlwarn{To be added}
+\end{proof}
+
+\begin{remark}[\faStar Further implications of \cref{crly:sparcity_of_boundedness_of_unbounded_sequences_of_bounded_functions_between_banach_spaces}]
+  The statement that $\sup_{n \geq 1} \norm{T_n} = \infty$
+  is the statement that for each $n \geq 1$, there exists $x_n \in \mathfrak{X}$
+  with $\norm{x_n}_{\mathfrak{X}} = 1$ such that
+  \begin{equation*}
+    \lim_{n \to \infty} \norm{T_n x_n}_{\mathfrak{Y}} = \infty.
+  \end{equation*}
+  In the first place, it is not clear that there should exist
+  any $x \in \mathfrak{X}$ such that
+  \begin{equation*}
+    \lim_{n \to \infty} \norm{T_n x}_{\mathfrak{Y}} = \infty.
+  \end{equation*}
+  The above corollary not only says that such a vector $x \in \mathfrak{X}$ exists;
+  it asserts that this is true for a `very large' set of $x$'s,
+  in the sense that the set $H$ of $x$'s for which it fails
+  is a set of the first category in $\mathfrak{X}$.
+\end{remark}
+
+We are now ready to answer the question of whether or not
+the partial sums of the Fourier series of an element
+$[f] \in L_1(\mathbb{T}, \mathbb{C})$ necessarily converge to $[f]$
+in the $\norm{\cdot}_1$-norm.
+We shall see that by
+\cref{crly:sparcity_of_boundedness_of_unbounded_sequences_of_bounded_functions_between_banach_spaces},
+this convergence \hlnotec{almost never happens}.
+\sidenote{We use the phrase `almost never' to mean the notion of
+first category, not measure zero.}
+Furthermore, the same argument shows that this is also
+the case for $[f] \in [\mathcal{C}(\mathbb{T}, \mathbb{C})]$
+in the $\norm{\cdot}_{\infty}$.
+
+\begin{thm}[The \textit{unbearable lousiness} of being a Dirichlet Kernel]\label{thm:the_textit_unbearable_lousiness_of_being_a_dirichlet_kernel}
+  \begin{enumerate}
+    \item Let 
+      \begin{equation*}
+        \mathfrak{K}_{\infty} \coloneqq \{ [f] \in [\mathcal{C}(\mathbb{T}, \mathbb{C})]
+          : [f] = \lim_{N \to \infty} \Delta_N[f]
+          \in ([\mathcal{C}(\mathbb{T}, \mathbb{C})], \norm{\cdot}_{\infty}) \}.
+      \end{equation*}
+      Then $\mathfrak{K}_{\infty}$ is a set of the first category in
+      $([\mathcal{C}(\mathbb{T},\mathbb{C})], \norm{\cdot}_{\infty})$, whose complement
+      $[\mathcal{C}(\mathbb{T},\mathbb{C})] \setminus \mathfrak{K}_{\infty}$
+      is a set of the second category.
+
+    \item Let
+      \begin{equation*}
+        \mathfrak{K}_1 \coloneqq \{ [f] \in L_1(\mathbb{T}, \mathbb{C})
+          : [f] = \lim_{N \to \infty} \Delta_N[f]
+          \in (L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1) \}.
+      \end{equation*}
+      Then $\mathfrak{K}_1$ is a set of the first category in
+      $(L_1(\mathbb{T},\mathbb{C}), \norm{\cdot}_1)$, whose complement
+      $L_1(\mathbb{T}, \mathbb{C}) \setminus \mathfrak{K}_1$
+      is a set of the second category.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlwarn{To be added}
+\end{proof}
+
+We have entered the darkest days of our course,
+and almost at the very end of our journey.
+If this were a novel, I bet readers would be crying over 
+how their favorite hero has fallen,
+and the fragility of our other heroes.
+But there is some hope in the face of this despair.
+
+% section the_dirichlet_kernel_continued (end)
+
+\section{The Féjer Kernel}%
+\label{sec:the_fejer_kernel}
+% section the_fejer_kernel
+
+\begin{defn}[$N$\textsuperscript{th}-Cesàro mean]\index{$N$\textsuperscript{th}-Cesàro mean}\label{defn:_n_textsuperscript_th_cesaro_mean}
+  Let $(\mathfrak{X}, \norm{\cdot}_{\mathfrak{X}})$ be a Banach space,
+  and $(x_n)_{n=0}^{\infty}$ be a sequence in $\mathfrak{X}$.
+  The \hlnoteb{$N$\textsuperscript{th}-Cesàro mean} of the sequence
+  is defined as
+  \begin{equation*}
+    \sigma_N \coloneqq_\frac{1}{N} \left( x_0 + x_1 + \hdots + x_{N-1} \right),
+  \end{equation*}
+  for $N \geq 1$.
+\end{defn}
+
+\begin{propo}[Convergent Sequences have Convergent Cesàro Means]\label{propo:convergent_sequences_have_convergent_cesaro_means}
+  Suppose that $\mathfrak{X}$ is a Banach space and
+  $(x_n)_{n=0}^{\infty}$ is a sequence in $\mathfrak{X}$.
+  Let $(\sigma_N)_{N=1}^{\infty}$ denote the sequence of Cesàro means of
+  $(x_n)_{n=1}^{\infty}$.
+  If $x = \lim_{n \to \infty} x_n$ exists, then
+  \begin{equation*}
+    x = \lim_{N \to \infty} \sigma_N.
+  \end{equation*}
+\end{propo}
+
+\begin{ex}
+  Prove \cref{propo:convergent_sequences_have_convergent_cesaro_means}.
+\end{ex}
+
+\begin{remark}
+  The converse of \cref{propo:convergent_sequences_have_convergent_cesaro_means}
+  is false.
+  Let $(x_n)_{n=1}^{\infty} = ( (-1)^n )_{n=1}^{\infty}$. Then
+  \begin{equation*}
+    (x_0, x_1, x_2, \ldots) = (1, -1, 1, \ldots).
+  \end{equation*}
+  We see that $\abs{\sigma_N} \leq \frac{1}{N}$, which then
+  $\lim_{N \to \infty} \sigma_N = 0$,
+  but $\lim_{n \to \infty} x_n$ does not exist.
+\end{remark}
+
+\begin{defn}[$N$\textsuperscript{th}-Cesàro sum and the Féjer kernel of order $N$]\index{$N$\textsuperscript{th}-Cesàro sum}\index{Féjer kernel of order $N$}\label{defn:_n_textsuperscript_th_cesaro_sum}
+  Let $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$.
+  The \hlnoteb{$N$\textsuperscript{th}-Cesàro sum} of the Fourier series
+  of $f$ is the $N$\textsuperscript{th}-Cesàro mean
+  of the sequence $(\Delta_n^\circ(f))_{n=0}^{\infty}$.
+  Thus
+  \begin{equation*}
+    \sigma_N^\circ(f)
+    = \frac{1}{N} (D_0 \diamond f + D_1 \diamond f + \hdots D_{N-1} \diamond f)
+    = F_N \diamond f,
+  \end{equation*}
+  where $F_N \coloneqq \frac{1}{N}(D_0 + D_1 + \hdots + D_{N-1})$
+  is called the \hlnoteb{Féjer kernel of order $N$}. 
+
+  We also define the \hlnoteb{$N$\textsuperscript{th}-Cesàro sum} of the Fourier
+  series of $[f] \in L_1(\mathbb{T}, \mathbb{C})$ as the
+  $N$\textsuperscript{th}-Cesàro mean of the sequence
+  $(\Delta_n[f])_{n=0}^{\infty}$, namely
+  \begin{align*}
+    \sigma_N[f]
+    &\coloneqq \frac{1}{N} (D_0 * [f] + D_1 * [f] + \hdots + D_{N-1} * [f]) \\
+    &= F_N * [f] = [F_N \diamond f] = [\sigma_N^\circ(f)].
+  \end{align*}
+\end{defn}
+
+\begin{remark}
+  $D_n \in \mathcal{C}(\mathbb{T}, \mathbb{C})$ for all $n \geq 0$
+  implies that $F_N \in \mathcal{C}(\mathbb{T}, \mathbb{C})$ for all $N \geq 1$.
+  By
+  \cref{propo:continuity_of_the_convolution_of_f_and_g_where_g_is_continuous},
+  it follows that $\sigma_N^\circ(f) \in \mathcal{C}(\mathbb{T}, \mathbb{C})
+  \subseteq \mathcal{L}_1(\mathbb{T}, \mathbb{C})$
+  for every $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$.
+
+  Furthermore, $\forall \theta \in \mathbb{R}$,
+  \begin{align*}
+    \sigma_N^\circ(f)(\theta)
+    &= \frac{1}{2\pi} \int_{[-\pi ,\pi)} F_N(s) f(\theta - s) \dm(s) \\
+    &= \frac{1}{2\pi} \int_{[-\pi, \pi)} F_N(\theta - s) f(s) \dm(s).
+  \end{align*}
+  By \cref{thm:riemannian_version_of_convolution_on_homogeneous_banach_spaces},
+  $F_N \in \mathcal{C}(\mathbb{T}, \mathbb{C})$ implies that for every
+  homogeneous Banach algebra $\mathfrak{B}$ and $[f] \in \mathfrak{B}$,
+  we have
+  \begin{equation*}
+    \sigma_N[f] = F_N * [f] \in \mathfrak{B}.
+  \end{equation*}
+  In particular, $\forall [f] \in L_p(\mathbb{T}, \mathbb{C})$,
+  \begin{equation*}
+    \sigma_N[f] = F_N * [f] \in L_p(\mathbb{T}, \mathbb{C}).
+  \end{equation*}
+\end{remark}
+
+\begin{thm}[Properties of the Féjer Kernel]\label{thm:properties_of_the_fejer_kernel}
+  For each $N \in \mathbb{N} \setminus \{ 0 \}$,
+  \begin{enumerate}
+    \item $F_N$ is a $2\pi$-periodic, even, continuous function;
+    \item If $0 \neq \theta \in [-\pi, \pi)$, then
+      \begin{equation*}
+        F_N(\theta)
+        = \frac{1}{N} \left( \frac{1 - \cos(N\theta)}{1 - \cos(\theta)} \right)
+        = \frac{1}{N} \left( \frac{\sin \left( \frac{N}{2} \theta \right)}
+                            {\sin \left( \frac{1}{2} \theta \right)} \right)^2,
+      \end{equation*}
+      while $F_N(0) = N$.
+      In particular, $F_N(\theta) \geq 0$ for all $\theta \in \mathbb{R}$;
+    \item
+      \begin{equation*}
+        \nu_1(F_N)
+        = \frac{1}{2\pi} \int_{-\pi}^{\pi} \abs{F_N(\theta)} \dif{\theta}
+        = \frac{1}{2\pi} \int_{-\pi}^{\pi} F_N(\theta) \dif{\theta} = 1.
+      \end{equation*}
+    \item For all $0 < \delta \leq \pi$,
+      \begin{equation*}
+        \lim_{N \to \infty} \left( 
+          \int_{-\pi}^{-\delta} \abs{F_N(\theta)} \dif{\theta} 
+          + \int_{\delta}^{\pi} \abs{F_N(\theta)} \dif{\theta}
+        \right) = 0; \text{ and }
+      \end{equation*}
+    \item For $0 < \abs{\theta} < \pi$,
+      \begin{equation*}
+        0 \leq F_N(\theta) \leq \frac{\pi^2}{N \theta^2}.
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlwarn{To be added}
+\end{proof}
+
+\newthought{To the right} are some graphs of $F_N$,
+particularly for $F_2$, $F_5$ and $F_{10}$.
+\begin{marginfigure}
+  \centering
+  \includesvg[width=\marginparwidth]{images/graphofF2.svg}
+  \caption{Graph of $F_2$}\label{fig:graph_of_f_2_}
+  \includesvg[width=\marginparwidth]{images/graphofF5.svg}
+  \caption{Graph of $F_5$}\label{fig:graph_of_f_5_}
+  \includesvg[width=\marginparwidth]{images/graphofF10.svg}
+  \caption{Graph of $F_{10}$}\label{fig:graph_of_f_10_}
+\end{marginfigure}
+Two things worth noticing about them are:
+\begin{itemize}
+  \item the amplitude of the function is increasing near $0$;
+    this is as we've seen for the Dirichlet kernel,
+    where $F_N$ is continuous and $F_N(0) = N$ for $N \geq 1$; and
+  \item for each $\delta > 0$, the functions become uniformly
+    close to $0$ when $\delta < \abs{\theta} < \pi$.
+\end{itemize}
+
+Let us pull out $D_5$ and $F_5$ for comparison.
+
+\begin{figure*}[ht]
+  \centering
+  \begin{minipage}{0.5\linewidth}
+    \centering
+    \includesvg[width=0.8\linewidth]{images/graphofD5.svg} \\
+    Graph of $D_5$
+  \end{minipage}%
+  \begin{minipage}{.5\linewidth}
+    \centering
+    \includesvg[width=0.8\linewidth]{images/graphofF5.svg} \\
+    Graph of $F_5$
+  \end{minipage}
+  \caption{Comparing $D_5$ and $F_5$}
+  \label{fig:comparing_d_5_and_f_5_}
+\end{figure*}
+
+For both $D_5$ and $F_5$, their respective 1-norms
+from $-\pi$ to $\pi$ sums to $1$.
+For $D_5$, we see that there are many regions where the function is
+negative, whereas $F_5$ is always positive.
+Furthermore, $F_N$ has the property that
+\begin{equation*}
+  \lim_{N \to \infty} \left( 
+    \int_{-\pi}^{-\delta} \abs{F_N(\theta)} \dif{\theta} 
+    + \int_{\delta}^{\pi} \abs{F_N(\theta)} \dif{\theta}
+  \right) = 0,
+\end{equation*}
+of which $D_N$ does not.
+
+% section the_fejer_kernel (end)
+
+% chapter lecture_21_jul_23rd_2019 (end)
 
 
 

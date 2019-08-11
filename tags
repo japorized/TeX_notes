@@ -2198,6 +2198,7 @@ Lecture 20 七月二十三日（月曜日）	JAPAN201RS18/readingnotes.tex	/^\\c
 Lecture 20 七月二十三日（月曜日）	_site/JAPAN201RS18/readingnotes.tex	/^\\chapter{Lecture 20 七月二十三日（月曜日）}%$/;"	c
 Lecture 21 Jul 12th 2018	STAT330S18/classnotes.tex	/^\\chapter{Lecture 21 Jul 12th 2018}%$/;"	c
 Lecture 21 Jul 12th 2018	_site/STAT330S18/classnotes.tex	/^\\chapter{Lecture 21 Jul 12th 2018}%$/;"	c
+Lecture 21 Jul 23rd 2019	PMATH450/classnotes.tex	/^\\chapter{Lecture 21 Jul 23rd 2019}%$/;"	c
 Lecture 21 Jun 20th 2018	PMATH347S18/lectures/lec21.tex	/^\\chapter{Lecture 21 Jun 20th 2018}%$/;"	c
 Lecture 21 Jun 20th 2018	_site/PMATH347S18/lectures/lec21.tex	/^\\chapter{Lecture 21 Jun 20th 2018}%$/;"	c
 Lecture 21 Mar 04th	PMATH348/classnotes.tex	/^\\chapter{Lecture 21 Mar 04th}%$/;"	c
@@ -3345,8 +3346,10 @@ The Derivative	Personal Notes/Notes_Intro_to_Analysis_WWade.tex	/^\\section{The 
 The Derivative	_site/PMATH333/pmath333_defns_thms.tex	/^\\section{The Derivative}$/;"	s	chapter:Differentiability on \\texorpdfstring{$\\bb{R}$}{R}
 The Derivative	_site/Personal Notes/Notes_Intro_to_Analysis_WWade.tex	/^\\section{The Derivative}$/;"	s	chapter:Differentiability on \\texorpdfstring{$\\bb{R}$}{R}
 The Dirichlet Kernel	PMATH450/classnotes.tex	/^\\section{The Dirichlet Kernel}%$/;"	s	chapter:Lecture 20 Jul 18th 2019
+The Dirichlet Kernel (Continued)	PMATH450/classnotes.tex	/^\\section{The Dirichlet Kernel (Continued)}%$/;"	s	chapter:Lecture 21 Jul 23rd 2019
 The Exterior Derivative	PMATH365/classnotes.tex	/^\\section{The Exterior Derivative}%$/;"	s	chapter:Lecture 15 Feb 11th
 The Exterior Derivative	_site/PMATH365/classnotes.tex	/^\\section{The Exterior Derivative}%$/;"	s	chapter:Lecture 15 Feb 11th
+The Féjer Kernel	PMATH450/classnotes.tex	/^\\section{The Féjer Kernel}%$/;"	s	chapter:Lecture 21 Jul 23rd 2019
 The Galois Group as a Permutation Group	PMATH348/classnotes.tex	/^\\section{The Galois Group as a Permutation Group}%$/;"	s	chapter:Lecture 18 Feb 25th
 The Galois Group as a Permutation Group	_site/PMATH348/classnotes.tex	/^\\section{The Galois Group as a Permutation Group}%$/;"	s	chapter:Lecture 18 Feb 25th
 The Galois Group as a Permutation Group (Continued)	PMATH348/classnotes.tex	/^\\section{The Galois Group as a Permutation Group (Continued)}%$/;"	s	chapter:Lecture 19 Feb 27th
@@ -4143,6 +4146,7 @@ chp:lecture_20_qi_yue_er_shi_san_ri_yue_yao_ri_	JAPAN201RS18/readingnotes.tex	/^
 chp:lecture_20_qi_yue_er_shi_san_ri_yue_yao_ri_	_site/JAPAN201RS18/readingnotes.tex	/^\\label{chp:lecture_20_qi_yue_er_shi_san_ri_yue_yao_ri_}$/;"	l
 chp:lecture_21_jul_12th_2018	STAT330S18/classnotes.tex	/^\\label{chp:lecture_21_jul_12th_2018}$/;"	l
 chp:lecture_21_jul_12th_2018	_site/STAT330S18/classnotes.tex	/^\\label{chp:lecture_21_jul_12th_2018}$/;"	l
+chp:lecture_21_jul_23rd_2019	PMATH450/classnotes.tex	/^\\label{chp:lecture_21_jul_23rd_2019}$/;"	l
 chp:lecture_21_jun_20th_2018	PMATH347S18/lectures/lec21.tex	/^\\label{chp:lecture_21_jun_20th_2018}$/;"	l
 chp:lecture_21_jun_20th_2018	_site/PMATH347S18/lectures/lec21.tex	/^\\label{chp:lecture_21_jun_20th_2018}$/;"	l
 chp:lecture_21_mar_04th	PMATH348/classnotes.tex	/^\\label{chp:lecture_21_mar_04th}$/;"	l
@@ -4613,6 +4617,7 @@ crly:separability_of_c_a_b_normcdot_infty	PMATH351F18/classnotes.tex	/^\\begin{c
 crly:separability_of_c_a_b_normcdot_infty	_site/PMATH351F18/classnotes.tex	/^\\begin{crly}[Separability of $(C{[a, b]}, {\\norm{\\cdot}}_\\infty)$]\\label{crly:separability_/;"	l
 crly:separability_of_l_p_spaces	PMATH450/classnotes.tex	/^\\begin{crly}[Separability of $L_p$ Spaces]\\label{crly:separability_of_l_p_spaces}$/;"	l
 crly:separability_of_l_p_spaces	_site/PMATH450/classnotes.tex	/^\\begin{crly}[Separability of $L_p$ Spaces]\\label{crly:separability_of_l_p_spaces}$/;"	l
+crly:sparcity_of_boundedness_of_unbounded_sequences_of_bounded_functions_between_banach_spaces	PMATH450/classnotes.tex	/^\\begin{crly}[Sparcity of Boundedness of Unbounded Sequences of Bounded Functions between Banach/;"	l
 crly:splitting_fields_are_unique_up_to_isomorphism	PMATH348/classnotes.tex	/^\\begin{crly}[Splitting Fields are Unique up to Isomorphism]\\label{crly:splitting_fields_are_un/;"	l
 crly:splitting_fields_are_unique_up_to_isomorphism	_site/PMATH348/classnotes.tex	/^\\begin{crly}[Splitting Fields are Unique up to Isomorphism]\\label{crly:splitting_fields_are_un/;"	l
 crly:subgroup_with_prime_index_dividing_order_of_group_is_normal	PMATH347S18/lectures/lec15.tex	/^\\label{crly:subgroup_with_prime_index_dividing_order_of_group_is_normal}$/;"	l
@@ -4755,6 +4760,8 @@ defn:_l_p_space	PMATH450/classnotes.tex	/^\\begin{defn}[$L_p$-Space and $L_p$-No
 defn:_l_p_space	_site/PMATH450/classnotes.tex	/^\\begin{defn}[$L_p$-Space and $L_p$-Norm]\\index{$L_p$-Space}\\index{$L_p$-Norm}\\label{defn:_l_/;"	l
 defn:_l_theory	PMATH733/classnotes.tex	/^\\begin{defn}[$\\mathcal{L}$-Theory]\\index{$\\mathcal{L}$-Theory}\\label{defn:_l_theory}$/;"	l
 defn:_l_theory	_site/PMATH733/classnotes.tex	/^\\begin{defn}[$\\mathcal{L}$-Theory]\\index{$\\mathcal{L}$-Theory}\\label{defn:_l_theory}$/;"	l
+defn:_n_textsuperscript_th_cesaro_mean	PMATH450/classnotes.tex	/^\\begin{defn}[$N$\\textsuperscript{th}-Cesàro mean]\\index{$N$\\textsuperscript{th}-Cesàro mea/;"	l
+defn:_n_textsuperscript_th_cesaro_sum	PMATH450/classnotes.tex	/^\\begin{defn}[$N$\\textsuperscript{th}-Cesàro sum and the Féjer kernel of order $N$]\\index{$N/;"	l
 defn:_n_th_cyclotomic_polynomial	PMATH348/classnotes.tex	/^\\begin{defn}[$n$\\textsuperscript{th} Cyclotomic Polynomial]\\index{$n$\\textsuperscript{th} Cy/;"	l
 defn:_n_th_cyclotomic_polynomial	_site/PMATH348/classnotes.tex	/^\\begin{defn}[$n$\\textsuperscript{th} Cyclotomic Polynomial]\\index{$n$\\textsuperscript{th} Cy/;"	l
 defn:_n_th_roots_of_unity	PMATH348/classnotes.tex	/^\\begin{defn}[$n$\\textsuperscript{th} Roots of Unity]\\index{$n$\\textsuperscript{th} Roots of /;"	l
@@ -7197,6 +7204,7 @@ fig:characteristic_property_of_the_quotient_topology_	PMATH467/classnotes.tex	/^
 fig:characteristic_property_of_the_quotient_topology_	_site/PMATH467/classnotes.tex	/^    \\caption{Characteristic property of the quotient topology.}\\label{fig:characteristic_prope/;"	l
 fig:characteristic_property_of_the_subspace_topology	PMATH467/classnotes.tex	/^  \\label{fig:characteristic_property_of_the_subspace_topology}$/;"	l
 fig:characteristic_property_of_the_subspace_topology	_site/PMATH467/classnotes.tex	/^  \\label{fig:characteristic_property_of_the_subspace_topology}$/;"	l
+fig:comparing_d_5_and_f_5_	PMATH450/classnotes.tex	/^  \\label{fig:comparing_d_5_and_f_5_}$/;"	l
 fig:composition_of_a_function_and_the_inclusion_map	PMATH467/classnotes.tex	/^  \\label{fig:composition_of_a_function_and_the_inclusion_map}$/;"	l
 fig:composition_of_a_function_and_the_inclusion_map	_site/PMATH467/classnotes.tex	/^  \\label{fig:composition_of_a_function_and_the_inclusion_map}$/;"	l
 fig:cone_of_s_1_	PMATH467/classnotes.tex	/^    \\caption{Cone of $S^1$}\\label{fig:cone_of_s_1_}$/;"	l
@@ -7252,6 +7260,9 @@ fig:graph_of_a_policy_with_ordinary_deductible_without_any_other_adjustments	_si
 fig:graph_of_d_10_	PMATH450/classnotes.tex	/^  \\caption{Graph of $D_{10}$}\\label{fig:graph_of_d_10_}$/;"	l
 fig:graph_of_d_2_	PMATH450/classnotes.tex	/^  \\caption{Graph of $D_2$}\\label{fig:graph_of_d_2_}$/;"	l
 fig:graph_of_d_5_	PMATH450/classnotes.tex	/^  \\caption{Graph of $D_5$}\\label{fig:graph_of_d_5_}$/;"	l
+fig:graph_of_f_10_	PMATH450/classnotes.tex	/^  \\caption{Graph of $F_{10}$}\\label{fig:graph_of_f_10_}$/;"	l
+fig:graph_of_f_2_	PMATH450/classnotes.tex	/^  \\caption{Graph of $F_2$}\\label{fig:graph_of_f_2_}$/;"	l
+fig:graph_of_f_5_	PMATH450/classnotes.tex	/^  \\caption{Graph of $F_5$}\\label{fig:graph_of_f_5_}$/;"	l
 fig:graph_of_h_2	PMATH467/classnotes.tex	/^    \\label{fig:graph_of_h_2}$/;"	l
 fig:graph_of_h_2	_site/PMATH467/classnotes.tex	/^    \\label{fig:graph_of_h_2}$/;"	l
 fig:graph_of_left_1_y_x_right_alpha_1_e_y_theta_	ACTSC431/classnotes.tex	/^    \\caption{Graph of $\\left( 1 + \\frac{y}{x} \\right)^{\\alpha - 1} e^{-\\frac{y}{\\theta}}$/;"	l
@@ -7474,74 +7485,146 @@ getAllResponseHeaders	assets/js/jquery-ajax.js	/^if(g)for(i=f[f.length-1].ownerD
 getResponseHeader	_site/assets/js/jquery-ajax.js	/^if(g)for(i=f[f.length-1].ownerDocument,n.map(f,mb),j=0;g>j;j++)h=f[j],gb.test(h.type||"")&&!O.ac/;"	m	class:AnonymousFunctionc62e0272ee00.v
 getResponseHeader	assets/js/jquery-ajax.js	/^if(g)for(i=f[f.length-1].ownerDocument,n.map(f,mb),j=0;g>j;j++)h=f[j],gb.test(h.type||"")&&!O.ac/;"	m	class:AnonymousFunction381dd58fee00.v
 get_mtime	_plugins/jekyll-git-mtime.rb	/^        def self.get_mtime(path=nil)$/;"	S	module:Jekyll.GitMtime
-gnuplot_canvas	PMATH450/gnuplots/graphofD2.svg	/^<g id="gnuplot_canvas">$/;"	i
+gnuplot_canvas	PMATH450/images/graphofD10.svg	/^<g id="gnuplot_canvas">$/;"	i
 gnuplot_canvas	PMATH450/images/graphofD2.svg	/^<g id="gnuplot_canvas">$/;"	i
+gnuplot_canvas	PMATH450/images/graphofD5.svg	/^<g id="gnuplot_canvas">$/;"	i
+gnuplot_canvas	PMATH450/images/graphofF10.svg	/^<g id="gnuplot_canvas">$/;"	i
+gnuplot_canvas	PMATH450/images/graphofF2.svg	/^<g id="gnuplot_canvas">$/;"	i
+gnuplot_canvas	PMATH450/images/graphofF5.svg	/^<g id="gnuplot_canvas">$/;"	i
 gnuplot_canvas	PMATH467/bottle.svg	/^<g id="gnuplot_canvas">$/;"	i
 gnuplot_canvas	_site/PMATH467/bottle.svg	/^<g id="gnuplot_canvas">$/;"	i
-gnuplot_plot_1	PMATH450/gnuplots/graphofD2.svg	/^	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1<\/title>$/;"	i
+gnuplot_plot_1	PMATH450/images/graphofD10.svg	/^	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1<\/title>$/;"	i
 gnuplot_plot_1	PMATH450/images/graphofD2.svg	/^	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1<\/title>$/;"	i
-gpDot	PMATH450/gnuplots/graphofD2.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
+gnuplot_plot_1	PMATH450/images/graphofD5.svg	/^	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1<\/title>$/;"	i
+gnuplot_plot_1	PMATH450/images/graphofF10.svg	/^	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1<\/title>$/;"	i
+gnuplot_plot_1	PMATH450/images/graphofF2.svg	/^	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1<\/title>$/;"	i
+gnuplot_plot_1	PMATH450/images/graphofF5.svg	/^	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1<\/title>$/;"	i
+gpDot	PMATH450/images/graphofD10.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
 gpDot	PMATH450/images/graphofD2.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
+gpDot	PMATH450/images/graphofD5.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
+gpDot	PMATH450/images/graphofF10.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
+gpDot	PMATH450/images/graphofF2.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
+gpDot	PMATH450/images/graphofF5.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
 gpDot	PMATH467/bottle.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
 gpDot	_site/PMATH467/bottle.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
-gpPt0	PMATH450/gnuplots/graphofD2.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
+gpPt0	PMATH450/images/graphofD10.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
 gpPt0	PMATH450/images/graphofD2.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
+gpPt0	PMATH450/images/graphofD5.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
+gpPt0	PMATH450/images/graphofF10.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
+gpPt0	PMATH450/images/graphofF2.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
+gpPt0	PMATH450/images/graphofF5.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
 gpPt0	PMATH467/bottle.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
 gpPt0	_site/PMATH467/bottle.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
-gpPt1	PMATH450/gnuplots/graphofD2.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
+gpPt1	PMATH450/images/graphofD10.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
 gpPt1	PMATH450/images/graphofD2.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
+gpPt1	PMATH450/images/graphofD5.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
+gpPt1	PMATH450/images/graphofF10.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
+gpPt1	PMATH450/images/graphofF2.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
+gpPt1	PMATH450/images/graphofF5.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
 gpPt1	PMATH467/bottle.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
 gpPt1	_site/PMATH467/bottle.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
-gpPt10	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt10	PMATH450/images/graphofD10.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt10	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt10	PMATH450/images/graphofD5.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt10	PMATH450/images/graphofF10.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt10	PMATH450/images/graphofF2.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt10	PMATH450/images/graphofF5.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt10	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt10	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
-gpPt11	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
+gpPt11	PMATH450/images/graphofD10.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
 gpPt11	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
+gpPt11	PMATH450/images/graphofD5.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
+gpPt11	PMATH450/images/graphofF10.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
+gpPt11	PMATH450/images/graphofF2.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
+gpPt11	PMATH450/images/graphofF5.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
 gpPt11	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
 gpPt11	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
-gpPt12	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt12	PMATH450/images/graphofD10.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt12	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt12	PMATH450/images/graphofD5.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt12	PMATH450/images/graphofF10.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt12	PMATH450/images/graphofF2.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt12	PMATH450/images/graphofF5.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt12	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt12	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
-gpPt13	PMATH450/gnuplots/graphofD2.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
+gpPt13	PMATH450/images/graphofD10.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
 gpPt13	PMATH450/images/graphofD2.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
+gpPt13	PMATH450/images/graphofD5.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
+gpPt13	PMATH450/images/graphofF10.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
+gpPt13	PMATH450/images/graphofF2.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
+gpPt13	PMATH450/images/graphofF5.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
 gpPt13	PMATH467/bottle.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
 gpPt13	_site/PMATH467/bottle.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
-gpPt14	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt14	PMATH450/images/graphofD10.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt14	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt14	PMATH450/images/graphofD5.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt14	PMATH450/images/graphofF10.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt14	PMATH450/images/graphofF2.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt14	PMATH450/images/graphofF5.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt14	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt14	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
-gpPt2	PMATH450/gnuplots/graphofD2.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
+gpPt2	PMATH450/images/graphofD10.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
 gpPt2	PMATH450/images/graphofD2.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
+gpPt2	PMATH450/images/graphofD5.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
+gpPt2	PMATH450/images/graphofF10.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
+gpPt2	PMATH450/images/graphofF2.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
+gpPt2	PMATH450/images/graphofF5.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
 gpPt2	PMATH467/bottle.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
 gpPt2	_site/PMATH467/bottle.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
-gpPt3	PMATH450/gnuplots/graphofD2.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
+gpPt3	PMATH450/images/graphofD10.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
 gpPt3	PMATH450/images/graphofD2.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
+gpPt3	PMATH450/images/graphofD5.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
+gpPt3	PMATH450/images/graphofF10.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
+gpPt3	PMATH450/images/graphofF2.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
+gpPt3	PMATH450/images/graphofF5.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
 gpPt3	PMATH467/bottle.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
 gpPt3	_site/PMATH467/bottle.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
-gpPt4	PMATH450/gnuplots/graphofD2.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
+gpPt4	PMATH450/images/graphofD10.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
 gpPt4	PMATH450/images/graphofD2.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
+gpPt4	PMATH450/images/graphofD5.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
+gpPt4	PMATH450/images/graphofF10.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
+gpPt4	PMATH450/images/graphofF2.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
+gpPt4	PMATH450/images/graphofF5.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
 gpPt4	PMATH467/bottle.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
 gpPt4	_site/PMATH467/bottle.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
-gpPt5	PMATH450/gnuplots/graphofD2.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
+gpPt5	PMATH450/images/graphofD10.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
 gpPt5	PMATH450/images/graphofD2.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
+gpPt5	PMATH450/images/graphofD5.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
+gpPt5	PMATH450/images/graphofF10.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
+gpPt5	PMATH450/images/graphofF2.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
+gpPt5	PMATH450/images/graphofF5.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
 gpPt5	PMATH467/bottle.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
 gpPt5	_site/PMATH467/bottle.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
-gpPt6	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt6	PMATH450/images/graphofD10.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt6	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt6	PMATH450/images/graphofD5.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt6	PMATH450/images/graphofF10.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt6	PMATH450/images/graphofF2.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt6	PMATH450/images/graphofF5.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt6	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt6	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
-gpPt7	PMATH450/gnuplots/graphofD2.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
+gpPt7	PMATH450/images/graphofD10.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
 gpPt7	PMATH450/images/graphofD2.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
+gpPt7	PMATH450/images/graphofD5.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
+gpPt7	PMATH450/images/graphofF10.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
+gpPt7	PMATH450/images/graphofF2.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
+gpPt7	PMATH450/images/graphofF5.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
 gpPt7	PMATH467/bottle.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
 gpPt7	_site/PMATH467/bottle.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
-gpPt8	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt8	PMATH450/images/graphofD10.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt8	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt8	PMATH450/images/graphofD5.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt8	PMATH450/images/graphofF10.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt8	PMATH450/images/graphofF2.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt8	PMATH450/images/graphofF5.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt8	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt8	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
-gpPt9	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
+gpPt9	PMATH450/images/graphofD10.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
 gpPt9	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
+gpPt9	PMATH450/images/graphofD5.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
+gpPt9	PMATH450/images/graphofF10.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
+gpPt9	PMATH450/images/graphofF2.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
+gpPt9	PMATH450/images/graphofF5.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
 gpPt9	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
 gpPt9	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
 grammar:_kamoshiremasen	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_kamoshiremasen}$/;"	l
@@ -7594,8 +7677,12 @@ grammar:volitional_form	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:volition
 grammar:volitional_form	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:volitional_form}$/;"	l
 grammar:volitional_form_tosi_tsuteimasu	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:volitional_form_tosi_tsuteimasu}$/;"	l
 grammar:volitional_form_tosi_tsuteimasu	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:volitional_form_tosi_tsuteimasu}$/;"	l
-greybox	PMATH450/gnuplots/graphofD2.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
+greybox	PMATH450/images/graphofD10.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 greybox	PMATH450/images/graphofD2.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
+greybox	PMATH450/images/graphofD5.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
+greybox	PMATH450/images/graphofF10.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
+greybox	PMATH450/images/graphofF2.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
+greybox	PMATH450/images/graphofF5.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 greybox	PMATH467/bottle.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 greybox	_site/PMATH467/bottle.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 h	_site/assets/js/jquery-ajax.js	/^!function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.documen/;"	f	function:AnonymousFunctionc62e02726100
@@ -8187,6 +8274,7 @@ propo:convergence_in_distribution_and_mgf	STAT330S18/classnotes.tex	/^\\label{pr
 propo:convergence_in_distribution_and_mgf	_site/STAT330S18/classnotes.tex	/^\\label{propo:convergence_in_distribution_and_mgf}$/;"	l
 propo:convergence_in_probability_implies_convergence_in_distribution	STAT330S18/classnotes.tex	/^\\label{propo:convergence_in_probability_implies_convergence_in_distribution}$/;"	l
 propo:convergence_in_probability_implies_convergence_in_distribution	_site/STAT330S18/classnotes.tex	/^\\label{propo:convergence_in_probability_implies_convergence_in_distribution}$/;"	l
+propo:convergent_sequences_have_convergent_cesaro_means	PMATH450/classnotes.tex	/^\\begin{propo}[Convergent Sequences have Convergent Cesàro Means]\\label{propo:convergent_seque/;"	l
 propo:converse_of_subgroups_of_solvable_groups_are_solvable	PMATH348/classnotes.tex	/^\\begin{propo}[Converse of \\cref{propo:subgroups_of_solvable_groups_are_solvable}]\\label{propo/;"	l
 propo:converse_of_subgroups_of_solvable_groups_are_solvable	_site/PMATH348/classnotes.tex	/^\\begin{propo}[Converse of \\cref{propo:subgroups_of_solvable_groups_are_solvable}]\\label{propo/;"	l
 propo:converse_of_the_local_version_of_the_implicit_submanifold_theorem	PMATH365/classnotes.tex	/^\\begin{propo}[Converse of the Local Version of the Implicit Submanifold Theorem]\\index{Convers/;"	l
@@ -9704,8 +9792,10 @@ sec:the_buhlmann_model	_site/ACTSC432/classnotes.tex	/^\\label{sec:the_buhlmann_
 sec:the_credibility_premium	ACTSC432/classnotes.tex	/^\\label{sec:the_credibility_premium}$/;"	l
 sec:the_credibility_premium	_site/ACTSC432/classnotes.tex	/^\\label{sec:the_credibility_premium}$/;"	l
 sec:the_dirichlet_kernel	PMATH450/classnotes.tex	/^\\label{sec:the_dirichlet_kernel}$/;"	l
+sec:the_dirichlet_kernel_continued	PMATH450/classnotes.tex	/^\\label{sec:the_dirichlet_kernel_continued}$/;"	l
 sec:the_exterior_derivative	PMATH365/classnotes.tex	/^\\label{sec:the_exterior_derivative}$/;"	l
 sec:the_exterior_derivative	_site/PMATH365/classnotes.tex	/^\\label{sec:the_exterior_derivative}$/;"	l
+sec:the_fejer_kernel	PMATH450/classnotes.tex	/^\\label{sec:the_fejer_kernel}$/;"	l
 sec:the_galois_group_as_a_permutation_group	PMATH348/classnotes.tex	/^\\label{sec:the_galois_group_as_a_permutation_group}$/;"	l
 sec:the_galois_group_as_a_permutation_group	_site/PMATH348/classnotes.tex	/^\\label{sec:the_galois_group_as_a_permutation_group}$/;"	l
 sec:the_galois_group_as_a_permutation_group_continued	PMATH348/classnotes.tex	/^\\label{sec:the_galois_group_as_a_permutation_group_continued}$/;"	l
@@ -10679,8 +10769,12 @@ tb	_site/assets/js/jquery-ajax.js	/^if(g)for(i=f[f.length-1].ownerDocument,n.map
 tb	assets/js/jquery-ajax.js	/^if(g)for(i=f[f.length-1].ownerDocument,n.map(f,mb),j=0;g>j;j++)h=f[j],gb.test(h.type||"")&&!O.ac/;"	f	function:AnonymousFunction381dd58fcb00
 teardown	_site/assets/js/jquery-ajax.js	/^!function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.documen/;"	m	class:n.event.special
 teardown	assets/js/jquery-ajax.js	/^!function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.documen/;"	m	class:n.event.special
-textbox	PMATH450/gnuplots/graphofD2.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
+textbox	PMATH450/images/graphofD10.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 textbox	PMATH450/images/graphofD2.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
+textbox	PMATH450/images/graphofD5.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
+textbox	PMATH450/images/graphofF10.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
+textbox	PMATH450/images/graphofF2.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
+textbox	PMATH450/images/graphofF5.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 textbox	PMATH467/bottle.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 textbox	_site/PMATH467/bottle.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 the-colours-in-your-pdfs-dont-look-exactly-like-what-i-think-they-should-be-eg-red-doesnt-look-red	_site/faq.html	/^<h2 id="the-colours-in-your-pdfs-dont-look-exactly-like-what-i-think-they-should-be-eg-red-doesn/;"	I
@@ -10733,6 +10827,8 @@ thm:banach_contractive_mapping_theorem	PMATH351F18/classnotes.tex	/^\\begin{thm}
 thm:banach_contractive_mapping_theorem	_site/PMATH351F18/classnotes.tex	/^\\begin{thm}[Banach Contractive Mapping Theorem]\\index{Banach Contractive Mapping Theorem}\\lab/;"	l
 thm:banach_mazurkiewickz_theorem	PMATH351F18/classnotes.tex	/^\\begin{thm}[Banach-Mazurkiewickz Theorem]\\index{Banach-Mazurkiewickz Theorem}\\label{thm:banac/;"	l
 thm:banach_mazurkiewickz_theorem	_site/PMATH351F18/classnotes.tex	/^\\begin{thm}[Banach-Mazurkiewickz Theorem]\\index{Banach-Mazurkiewickz Theorem}\\label{thm:banac/;"	l
+thm:banach_steinhaus_theorem	PMATH450/classnotes.tex	/^\\begin{thm}[Banach-Steinhaus Theorem (aka The Uniform Boundedness Principle)]\\index{Banach-Ste/;"	l
+thm:banach_steinhaus_theorem_for_operators	PMATH450/classnotes.tex	/^\\begin{thm}[Banach-Steinhaus Theorem for Operators (aka The Uniform Boundedness Principle for O/;"	l
 thm:basis_of_lambda_k_v_	PMATH365/classnotes.tex	/^\\begin{thm}[Basis of $\\Lambda^k(V^*)$]\\label{thm:basis_of_lambda_k_v_}$/;"	l
 thm:basis_of_lambda_k_v_	_site/PMATH365/classnotes.tex	/^\\begin{thm}[Basis of $\\Lambda^k(V^*)$]\\label{thm:basis_of_lambda_k_v_}$/;"	l
 thm:bessel_s_inequality	PMATH450/classnotes.tex	/^\\begin{thm}[Bessel's Inequality]\\index{Bessel's Inequality}\\label{thm:bessel_s_inequality}$/;"	l
@@ -11118,6 +11214,7 @@ thm:product_rule	_site/STAT330S18/classnotes.tex	/^\\label{thm:product_rule}$/;"
 thm:properties_of_cardinal_sum	PMATH733/classnotes.tex	/^\\begin{thm}[Properties of Cardinal Sum]\\label{thm:properties_of_cardinal_sum}$/;"	l
 thm:properties_of_cardinal_sum	_site/PMATH733/classnotes.tex	/^\\begin{thm}[Properties of Cardinal Sum]\\label{thm:properties_of_cardinal_sum}$/;"	l
 thm:properties_of_the_dirichlet_kernel	PMATH450/classnotes.tex	/^\\begin{thm}[Properties of the Dirichlet Kernel]\\label{thm:properties_of_the_dirichlet_kernel}$/;"	l
+thm:properties_of_the_fejer_kernel	PMATH450/classnotes.tex	/^\\begin{thm}[Properties of the Féjer Kernel]\\label{thm:properties_of_the_fejer_kernel}$/;"	l
 thm:properties_of_the_gaussian_distribution	STAT330S18/classnotes.tex	/^\\label{thm:properties_of_the_gaussian_distribution}$/;"	l
 thm:properties_of_the_gaussian_distribution	_site/STAT330S18/classnotes.tex	/^\\label{thm:properties_of_the_gaussian_distribution}$/;"	l
 thm:quotient_over_a_pid	PMATH347S18/lectures/lec33.tex	/^\\label{thm:quotient_over_a_pid}$/;"	l
@@ -11189,6 +11286,7 @@ thm:the_riemann_lebesgue_lemma	PMATH450/classnotes.tex	/^\\begin{thm}[The Rieman
 thm:the_riemann_lebesgue_lemma	_site/PMATH450/classnotes.tex	/^\\begin{thm}[The Riemann-Lebesgue Lemma]\\index{The Riemann-Lebesgue Lemma}\\label{thm:the_riema/;"	l
 thm:the_standard_inner_product_for_l_2_e_mathbb_k_	PMATH450/classnotes.tex	/^\\begin{thm}[The Standard Inner Product for $L_2(E, \\mathbb{K})$]\\label{thm:the_standard_inner/;"	l
 thm:the_standard_inner_product_for_l_2_e_mathbb_k_	_site/PMATH450/classnotes.tex	/^\\begin{thm}[The Standard Inner Product for $L_2(E, \\mathbb{K})$]\\label{thm:the_standard_inner/;"	l
+thm:the_textit_unbearable_lousiness_of_being_a_dirichlet_kernel	PMATH450/classnotes.tex	/^\\begin{thm}[The \\textit{unbearable lousiness} of being a Dirichlet Kernel]\\label{thm:the_text/;"	l
 thm:theorem_1	ACTSC432/classnotes.tex	/^\\begin{thm}[Theorem 1]\\index{Theorem 1}\\label{thm:theorem_1}$/;"	l
 thm:theorem_1	_site/ACTSC432/classnotes.tex	/^\\begin{thm}[Theorem 1]\\index{Theorem 1}\\label{thm:theorem_1}$/;"	l
 thm:theorem_10	PMATH352W18/classnotes-white.tex	/^\\begin{thm}[Theorem 10]\\label{thm:theorem_10}$/;"	l

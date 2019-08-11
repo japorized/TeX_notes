@@ -119,16 +119,18 @@
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 <g fill="none" color="gray" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black' stroke-dasharray='2,4'  d='M37.3,408.0 L775.0,408.0  '/></g>
+	<path stroke='rgb(112, 195, 255)' stroke-dasharray='2,4'  d='M37.3,408.0 L775.0,408.0  '/></g>
 <g fill="none" color="gray" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='black' stroke-dasharray='2,4'  d='M406.2,564.0 L406.2,18.1  '/></g>
+	<path stroke='rgb(112, 195, 255)' stroke-dasharray='2,4'  d='M406.2,564.0 L406.2,18.1  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<path stroke='black'  d='M37.3,18.1 L37.3,564.0 L775.0,564.0 L775.0,18.1 L37.3,18.1 Z  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1</title>
-<g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
-	<path stroke='rgb(148,   0, 211)'  d='M37.3,18.1 L44.8,24.4 L52.2,42.8 L59.7,72.4 L67.1,111.5 L74.6,158.1 L82.0,209.7 L89.5,263.6
+<g fill="none" color="white" stroke="black" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
+</g>
+<g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
+	<path stroke='rgb( 52, 169, 209)'  d='M37.3,18.1 L44.8,24.4 L52.2,42.8 L59.7,72.4 L67.1,111.5 L74.6,158.1 L82.0,209.7 L89.5,263.6
 		L96.9,317.1 L104.4,367.4 L111.8,412.2 L119.3,449.5 L126.7,477.9 L134.2,496.4 L141.6,504.9 L149.1,503.7
 		L156.5,493.8 L164.0,476.7 L171.4,454.4 L178.9,429.0 L186.3,402.8 L193.8,378.2 L201.2,357.1 L208.7,341.4
 		L216.1,332.2 L223.6,330.3 L231.0,335.9 L238.5,348.5 L245.9,367.1 L253.4,390.2 L260.8,415.9 L268.3,441.9
@@ -142,8 +144,6 @@
 		L693.0,449.5 L700.5,412.2 L707.9,367.4 L715.4,317.1 L722.8,263.6 L730.3,209.7 L737.7,158.1 L745.2,111.5
 		L752.6,72.4 L760.1,42.8 L767.5,24.4 L775.0,18.1  '/></g>
 	</g>
-<g fill="none" color="white" stroke="rgb(148,   0, 211)" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
-</g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="2.00" stroke-linecap="butt" stroke-linejoin="miter">
 </g>
 <g fill="none" color="black" stroke="black" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
