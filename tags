@@ -1152,6 +1152,8 @@ Convex Set	PMATH352W18/cheatsheet/cheatsheet.tex	/^\\subsection{Convex Set} % (f
 Convex Set	_site/PMATH352W18/cheatsheet/cheatsheet.tex	/^\\subsection{Convex Set} % (fold)$/;"	u	section:Lecture 32 Apr 04 2018""Integration
 Convolution	PMATH450/classnotes.tex	/^\\section{Convolution}%$/;"	s	chapter:Lecture 17 Jul 09th 2019
 Convolution	_site/PMATH450/classnotes.tex	/^\\section{Convolution}%$/;"	s	chapter:Lecture 17 Jul 09th 2019
+Convolution (Continued 2)	PMATH450/classnotes.tex	/^\\section{Convolution (Continued 2)}%$/;"	s	chapter:Lecture 19 Jul 16th 2019
+Convolution (Continued 3)	PMATH450/classnotes.tex	/^\\section{Convolution (Continued 3)}%$/;"	s	chapter:Lecture 20 Jul 18th 2019
 Convolution (Continued)	PMATH450/classnotes.tex	/^\\section{Convolution (Continued)}%$/;"	s	chapter:Lecture 18 Jul 11th 2019
 Convolution (Continued)	_site/PMATH450/classnotes.tex	/^\\section{Convolution (Continued)}%$/;"	s	chapter:Lecture 18 Jul 11th 2019
 Corollary of FTC	PMATH352W18/cheatsheet/cheatsheet.tex	/^\\subsection{Corollary of FTC} % (fold)$/;"	u	section:Lecture 32 Apr 04 2018""Integration
@@ -2130,6 +2132,7 @@ Lecture 18 七月十一日（水曜日）	JAPAN201RS18/readingnotes.tex	/^\\chap
 Lecture 18 七月十一日（水曜日）	_site/JAPAN201RS18/readingnotes.tex	/^\\chapter{Lecture 18 七月十一日（水曜日）}%$/;"	c
 Lecture 19 Feb 27th	PMATH348/classnotes.tex	/^\\chapter{Lecture 19 Feb 27th}%$/;"	c
 Lecture 19 Feb 27th	_site/PMATH348/classnotes.tex	/^\\chapter{Lecture 19 Feb 27th}%$/;"	c
+Lecture 19 Jul 16th 2019	PMATH450/classnotes.tex	/^\\chapter{Lecture 19 Jul 16th 2019}%$/;"	c
 Lecture 19 July 5th 2018	STAT330S18/classnotes.tex	/^\\chapter{Lecture 19 July 5th 2018}%$/;"	c
 Lecture 19 July 5th 2018	_site/STAT330S18/classnotes.tex	/^\\chapter{Lecture 19 July 5th 2018}%$/;"	c
 Lecture 19 Jun 15th 2018	PMATH347S18/lectures/lec19.tex	/^\\chapter{Lecture 19 Jun 15th 2018}%$/;"	c
@@ -2174,6 +2177,7 @@ Lecture 2 五月七日（月曜日）	JAPAN201RS18/readingnotes.tex	/^\\chapter{
 Lecture 2 五月七日（月曜日）	_site/JAPAN201RS18/readingnotes.tex	/^\\chapter{Lecture 2 五月七日（月曜日）}$/;"	c
 Lecture 20 Jul 10th 2018	STAT330S18/classnotes.tex	/^\\chapter{Lecture 20 Jul 10th 2018}%$/;"	c
 Lecture 20 Jul 10th 2018	_site/STAT330S18/classnotes.tex	/^\\chapter{Lecture 20 Jul 10th 2018}%$/;"	c
+Lecture 20 Jul 18th 2019	PMATH450/classnotes.tex	/^\\chapter{Lecture 20 Jul 18th 2019}%$/;"	c
 Lecture 20 Jun 18th 2018	PMATH347S18/lectures/lec20.tex	/^\\chapter{Lecture 20 Jun 18th 2018}%$/;"	c
 Lecture 20 Jun 18th 2018	_site/PMATH347S18/lectures/lec20.tex	/^\\chapter{Lecture 20 Jun 18th 2018}%$/;"	c
 Lecture 20 Mar 01st	PMATH348/classnotes.tex	/^\\chapter{Lecture 20 Mar 01st}%$/;"	c
@@ -3340,6 +3344,7 @@ The Derivative	PMATH333/pmath333_defns_thms.tex	/^\\section{The Derivative}$/;"	
 The Derivative	Personal Notes/Notes_Intro_to_Analysis_WWade.tex	/^\\section{The Derivative}$/;"	s	chapter:#1""Differentiability on \\texorpdfstring{$\\bb{R}$}{R}
 The Derivative	_site/PMATH333/pmath333_defns_thms.tex	/^\\section{The Derivative}$/;"	s	chapter:Differentiability on \\texorpdfstring{$\\bb{R}$}{R}
 The Derivative	_site/Personal Notes/Notes_Intro_to_Analysis_WWade.tex	/^\\section{The Derivative}$/;"	s	chapter:Differentiability on \\texorpdfstring{$\\bb{R}$}{R}
+The Dirichlet Kernel	PMATH450/classnotes.tex	/^\\section{The Dirichlet Kernel}%$/;"	s	chapter:Lecture 20 Jul 18th 2019
 The Exterior Derivative	PMATH365/classnotes.tex	/^\\section{The Exterior Derivative}%$/;"	s	chapter:Lecture 15 Feb 11th
 The Exterior Derivative	_site/PMATH365/classnotes.tex	/^\\section{The Exterior Derivative}%$/;"	s	chapter:Lecture 15 Feb 11th
 The Galois Group as a Permutation Group	PMATH348/classnotes.tex	/^\\section{The Galois Group as a Permutation Group}%$/;"	s	chapter:Lecture 18 Feb 25th
@@ -4090,6 +4095,7 @@ chp:lecture_18_qi_yue_shi_yi_ri_shui_yao_ri_	JAPAN201RS18/readingnotes.tex	/^\\l
 chp:lecture_18_qi_yue_shi_yi_ri_shui_yao_ri_	_site/JAPAN201RS18/readingnotes.tex	/^\\label{chp:lecture_18_qi_yue_shi_yi_ri_shui_yao_ri_}$/;"	l
 chp:lecture_19_feb_27th	PMATH348/classnotes.tex	/^\\label{chp:lecture_19_feb_27th}$/;"	l
 chp:lecture_19_feb_27th	_site/PMATH348/classnotes.tex	/^\\label{chp:lecture_19_feb_27th}$/;"	l
+chp:lecture_19_jul_16th_2019	PMATH450/classnotes.tex	/^\\label{chp:lecture_19_jul_16th_2019}$/;"	l
 chp:lecture_19_july_5th_2018	STAT330S18/classnotes.tex	/^\\label{chp:lecture_19_july_5th_2018}$/;"	l
 chp:lecture_19_july_5th_2018	_site/STAT330S18/classnotes.tex	/^\\label{chp:lecture_19_july_5th_2018}$/;"	l
 chp:lecture_19_jun_15th_2018	PMATH347S18/lectures/lec19.tex	/^\\label{chp:lecture_19_jun_15th_2018}$/;"	l
@@ -4120,6 +4126,7 @@ chp:lecture_1_sep_06th	_site/PMATH351F18/classnotes.tex	/^\\label{chp:lecture_1_
 chp:lecture_1_sep_06th	_site/PMATH733/classnotes.tex	/^\\label{chp:lecture_1_sep_06th}$/;"	l
 chp:lecture_20_jul_10th_2018	STAT330S18/classnotes.tex	/^\\label{chp:lecture_20_jul_10th_2018}$/;"	l
 chp:lecture_20_jul_10th_2018	_site/STAT330S18/classnotes.tex	/^\\label{chp:lecture_20_jul_10th_2018}$/;"	l
+chp:lecture_20_jul_18th_2019	PMATH450/classnotes.tex	/^\\label{chp:lecture_20_jul_18th_2019}$/;"	l
 chp:lecture_20_jun_18th_2018	PMATH347S18/lectures/lec20.tex	/^\\label{chp:lecture_20_jun_18th_2018}$/;"	l
 chp:lecture_20_jun_18th_2018	_site/PMATH347S18/lectures/lec20.tex	/^\\label{chp:lecture_20_jun_18th_2018}$/;"	l
 chp:lecture_20_mar_01st	PMATH348/classnotes.tex	/^\\label{chp:lecture_20_mar_01st}$/;"	l
@@ -4624,6 +4631,7 @@ crly:there_are_no_functions_discontinuous_on_all_irrational_numbers	PMATH351F18/
 crly:there_are_no_functions_discontinuous_on_all_irrational_numbers	_site/PMATH351F18/classnotes.tex	/^\\begin{crly}[There are no Functions Discontinuous on all Irrational Numbers]\\label{crly:there_/;"	l
 crly:transfinite_recursion_v2	PMATH733/classnotes.tex	/^\\label{crly:transfinite_recursion_v2}$/;"	l
 crly:transfinite_recursion_v2	_site/PMATH733/classnotes.tex	/^\\label{crly:transfinite_recursion_v2}$/;"	l
+crly:unboundedness_of_convolution_operators_for_the_dirichlet_kernel	PMATH450/classnotes.tex	/^\\begin{crly}[Unboundedness of Convolution Operators for the Dirichlet Kernel]\\label{crly:unbou/;"	l
 crly:uncountability_of_r	PMATH351F18/classnotes.tex	/^\\begin{crly}[Uncountability of $\\mathbb{R}$]\\label{crly:uncountability_of_r}$/;"	l
 crly:uncountability_of_r	PMATH450/classnotes.tex	/^\\begin{crly}[Uncountability of $\\mathbb{R}$]\\label{crly:uncountability_of_r}$/;"	l
 crly:uncountability_of_r	_site/PMATH351F18/classnotes.tex	/^\\begin{crly}[Uncountability of $\\mathbb{R}$]\\label{crly:uncountability_of_r}$/;"	l
@@ -4799,6 +4807,7 @@ defn:association	_site/PMATH347S18/definitions.tex	/^\\label{defn:association}$/
 defn:association	_site/PMATH347S18/lectures/lec30.tex	/^\\label{defn:association}$/;"	l
 defn:atomic_l_formulas	PMATH733/classnotes.tex	/^\\begin{defn}[Atomic $\\mathcal{L}$-Formulas]\\index{Atomic $\\mathcal{L}$-Formulas}\\label{defn/;"	l
 defn:atomic_l_formulas	_site/PMATH733/classnotes.tex	/^\\begin{defn}[Atomic $\\mathcal{L}$-Formulas]\\index{Atomic $\\mathcal{L}$-Formulas}\\label{defn/;"	l
+defn:baire_category_theorem	PMATH450/classnotes.tex	/^\\begin{defn}[Baire Category Theorem]\\index{Baire Category Theorem}\\label{defn:baire_category_/;"	l
 defn:banach_space	PMATH450/classnotes.tex	/^\\begin{defn}[Banach Space]\\index{Banach Space}\\label{defn:banach_space}$/;"	l
 defn:banach_space	_site/PMATH450/classnotes.tex	/^\\begin{defn}[Banach Space]\\index{Banach Space}\\label{defn:banach_space}$/;"	l
 defn:basis	PMATH365/classnotes.tex	/^\\begin{defn}[Basis]\\index{Basis}\\label{defn:basis}$/;"	l
@@ -5081,6 +5090,7 @@ defn:dihedral_group	_site/PMATH347S18/definitions.tex	/^\\label{defn:dihedral_gr
 defn:dihedral_group	_site/PMATH347S18/lectures/lec09.tex	/^\\label{defn:dihedral_group}$/;"	l
 defn:directional_derivative	PMATH365/classnotes.tex	/^\\begin{defn}[Directional Derivative]\\index{Directional Derivative}\\label{defn:directional_der/;"	l
 defn:directional_derivative	_site/PMATH365/classnotes.tex	/^\\begin{defn}[Directional Derivative]\\index{Directional Derivative}\\label{defn:directional_der/;"	l
+defn:dirichlet_kernel_of_order_n_	PMATH450/classnotes.tex	/^\\begin{defn}[Dirichlet Kernel of Order $N$]\\index{Dirichlet Kernel of Order $N$}\\label{defn:d/;"	l
 defn:disconnectedness	PMATH467/classnotes.tex	/^\\begin{defn}[Disconnectedness]\\index{Disconnectedness}\\label{defn:disconnectedness}$/;"	l
 defn:disconnectedness	_site/PMATH467/classnotes.tex	/^\\begin{defn}[Disconnectedness]\\index{Disconnectedness}\\label{defn:disconnectedness}$/;"	l
 defn:discrete_mixed_distribution	ACTSC431/classnotes.tex	/^\\begin{defn}[Discrete Mixed Distribution]\\index{Discrete Mixed Distribution}\\label{defn:discr/;"	l
@@ -5205,6 +5215,7 @@ defn:finitely_generated	PMATH467/classnotes.tex	/^\\begin{defn}[Finitely Generat
 defn:finitely_generated	_site/PMATH467/classnotes.tex	/^\\begin{defn}[Finitely Generated]\\index{Finitely Generated}\\label{defn:finitely_generated}$/;"	l
 defn:finitely_generated_extension	PMATH348/classnotes.tex	/^\\begin{defn}[Finitely Generated Extension]\\index{Finitely Generated Extension}\\label{defn:fin/;"	l
 defn:finitely_generated_extension	_site/PMATH348/classnotes.tex	/^\\begin{defn}[Finitely Generated Extension]\\index{Finitely Generated Extension}\\label{defn:fin/;"	l
+defn:first_and_second_category	PMATH450/classnotes.tex	/^\\begin{defn}[First and Second Category]\\index{First Category}\\index{Second Category}\\label{d/;"	l
 defn:first_category	PMATH351F18/classnotes.tex	/^\\begin{defn}[First Category]\\index{First Category}\\label{defn:first_category}$/;"	l
 defn:first_category	_site/PMATH351F18/classnotes.tex	/^\\begin{defn}[First Category]\\index{First Category}\\label{defn:first_category}$/;"	l
 defn:fisher_information	STAT330S18/classnotes.tex	/^\\label{defn:fisher_information}$/;"	l
@@ -5652,6 +5663,7 @@ defn:normalizer	_site/PMATH348/classnotes.tex	/^\\begin{defn}[Normalizer]\\index
 defn:normed_linear_space	PMATH450/classnotes.tex	/^\\begin{defn}[Normed Linear Space]\\index{Normed Linear Space}\\label{defn:normed_linear_space}$/;"	l
 defn:normed_linear_space	_site/PMATH450/classnotes.tex	/^\\begin{defn}[Normed Linear Space]\\index{Normed Linear Space}\\label{defn:normed_linear_space}$/;"	l
 defn:nowhere_dense	PMATH351F18/classnotes.tex	/^\\begin{defn}[Nowhere Dense]\\index{Nowhere Dense}\\label{defn:nowhere_dense}$/;"	l
+defn:nowhere_dense	PMATH450/classnotes.tex	/^\\begin{defn}[Nowhere Dense]\\index{Nowhere Dense}\\label{defn:nowhere_dense}$/;"	l
 defn:nowhere_dense	_site/PMATH351F18/classnotes.tex	/^\\begin{defn}[Nowhere Dense]\\index{Nowhere Dense}\\label{defn:nowhere_dense}$/;"	l
 defn:null_hypothesis_and_alternative_hypothesis	STAT330S18/classnotes.tex	/^\\label{defn:null_hypothesis_and_alternative_hypothesis}$/;"	l
 defn:null_hypothesis_and_alternative_hypothesis	_site/STAT330S18/classnotes.tex	/^\\label{defn:null_hypothesis_and_alternative_hypothesis}$/;"	l
@@ -7237,6 +7249,9 @@ fig:graph_of_a_policy_with_franchise_deductible_without_any_other_adjustments	AC
 fig:graph_of_a_policy_with_franchise_deductible_without_any_other_adjustments	_site/ACTSC431/classnotes.tex	/^    \\caption{Graph of a policy with Franchise deductible without any other adjustments.}\\label/;"	l
 fig:graph_of_a_policy_with_ordinary_deductible_without_any_other_adjustments	ACTSC431/classnotes.tex	/^    \\caption{Graph of a policy with ordinary deductible without any other adjustments.}\\label{/;"	l
 fig:graph_of_a_policy_with_ordinary_deductible_without_any_other_adjustments	_site/ACTSC431/classnotes.tex	/^    \\caption{Graph of a policy with ordinary deductible without any other adjustments.}\\label{/;"	l
+fig:graph_of_d_10_	PMATH450/classnotes.tex	/^  \\caption{Graph of $D_{10}$}\\label{fig:graph_of_d_10_}$/;"	l
+fig:graph_of_d_2_	PMATH450/classnotes.tex	/^  \\caption{Graph of $D_2$}\\label{fig:graph_of_d_2_}$/;"	l
+fig:graph_of_d_5_	PMATH450/classnotes.tex	/^  \\caption{Graph of $D_5$}\\label{fig:graph_of_d_5_}$/;"	l
 fig:graph_of_h_2	PMATH467/classnotes.tex	/^    \\label{fig:graph_of_h_2}$/;"	l
 fig:graph_of_h_2	_site/PMATH467/classnotes.tex	/^    \\label{fig:graph_of_h_2}$/;"	l
 fig:graph_of_left_1_y_x_right_alpha_1_e_y_theta_	ACTSC431/classnotes.tex	/^    \\caption{Graph of $\\left( 1 + \\frac{y}{x} \\right)^{\\alpha - 1} e^{-\\frac{y}{\\theta}}$/;"	l
@@ -7459,38 +7474,74 @@ getAllResponseHeaders	assets/js/jquery-ajax.js	/^if(g)for(i=f[f.length-1].ownerD
 getResponseHeader	_site/assets/js/jquery-ajax.js	/^if(g)for(i=f[f.length-1].ownerDocument,n.map(f,mb),j=0;g>j;j++)h=f[j],gb.test(h.type||"")&&!O.ac/;"	m	class:AnonymousFunctionc62e0272ee00.v
 getResponseHeader	assets/js/jquery-ajax.js	/^if(g)for(i=f[f.length-1].ownerDocument,n.map(f,mb),j=0;g>j;j++)h=f[j],gb.test(h.type||"")&&!O.ac/;"	m	class:AnonymousFunction381dd58fee00.v
 get_mtime	_plugins/jekyll-git-mtime.rb	/^        def self.get_mtime(path=nil)$/;"	S	module:Jekyll.GitMtime
+gnuplot_canvas	PMATH450/gnuplots/graphofD2.svg	/^<g id="gnuplot_canvas">$/;"	i
+gnuplot_canvas	PMATH450/images/graphofD2.svg	/^<g id="gnuplot_canvas">$/;"	i
 gnuplot_canvas	PMATH467/bottle.svg	/^<g id="gnuplot_canvas">$/;"	i
 gnuplot_canvas	_site/PMATH467/bottle.svg	/^<g id="gnuplot_canvas">$/;"	i
+gnuplot_plot_1	PMATH450/gnuplots/graphofD2.svg	/^	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1<\/title>$/;"	i
+gnuplot_plot_1	PMATH450/images/graphofD2.svg	/^	<g id="gnuplot_plot_1" ><title>gnuplot_plot_1<\/title>$/;"	i
+gpDot	PMATH450/gnuplots/graphofD2.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
+gpDot	PMATH450/images/graphofD2.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
 gpDot	PMATH467/bottle.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
 gpDot	_site/PMATH467/bottle.svg	/^	<circle id='gpDot' r='0.5' stroke-width='0.5' stroke='currentColor'\/>$/;"	i
+gpPt0	PMATH450/gnuplots/graphofD2.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
+gpPt0	PMATH450/images/graphofD2.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
 gpPt0	PMATH467/bottle.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
 gpPt0	_site/PMATH467/bottle.svg	/^	<path id='gpPt0' stroke-width='0.222' stroke='currentColor' d='M-1,0 h2 M0,-1 v2'\/>$/;"	i
+gpPt1	PMATH450/gnuplots/graphofD2.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
+gpPt1	PMATH450/images/graphofD2.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
 gpPt1	PMATH467/bottle.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
 gpPt1	_site/PMATH467/bottle.svg	/^	<path id='gpPt1' stroke-width='0.222' stroke='currentColor' d='M-1,-1 L1,1 M1,-1 L-1,1'\/>$/;"	i
+gpPt10	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt10	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt10	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt10	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt9' id='gpPt10' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt11	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
+gpPt11	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
 gpPt11	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
 gpPt11	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt3' id='gpPt11' stroke='currentColor' transform='rotate(45)'\/>$/;"	i
+gpPt12	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt12	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt12	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt12	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt11' id='gpPt12' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt13	PMATH450/gnuplots/graphofD2.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
+gpPt13	PMATH450/images/graphofD2.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
 gpPt13	PMATH467/bottle.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
 gpPt13	_site/PMATH467/bottle.svg	/^	<path id='gpPt13' stroke-width='0.222' stroke='currentColor' d='M0,1.330 L1.265,0.411 L0.782,-1/;"	i
+gpPt14	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt14	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt14	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt14	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt13' id='gpPt14' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt2	PMATH450/gnuplots/graphofD2.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
+gpPt2	PMATH450/images/graphofD2.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
 gpPt2	PMATH467/bottle.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
 gpPt2	_site/PMATH467/bottle.svg	/^	<path id='gpPt2' stroke-width='0.222' stroke='currentColor' d='M-1,0 L1,0 M0,-1 L0,1 M-1,-1 L1,/;"	i
+gpPt3	PMATH450/gnuplots/graphofD2.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
+gpPt3	PMATH450/images/graphofD2.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
 gpPt3	PMATH467/bottle.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
 gpPt3	_site/PMATH467/bottle.svg	/^	<rect id='gpPt3' stroke-width='0.222' stroke='currentColor' x='-1' y='-1' width='2' height='2'\//;"	i
+gpPt4	PMATH450/gnuplots/graphofD2.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
+gpPt4	PMATH450/images/graphofD2.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
 gpPt4	PMATH467/bottle.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
 gpPt4	_site/PMATH467/bottle.svg	/^	<rect id='gpPt4' stroke-width='0.222' stroke='currentColor' fill='currentColor' x='-1' y='-1' w/;"	i
+gpPt5	PMATH450/gnuplots/graphofD2.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
+gpPt5	PMATH450/images/graphofD2.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
 gpPt5	PMATH467/bottle.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
 gpPt5	_site/PMATH467/bottle.svg	/^	<circle id='gpPt5' stroke-width='0.222' stroke='currentColor' cx='0' cy='0' r='1'\/>$/;"	i
+gpPt6	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt6	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt6	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt6	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt5' id='gpPt6' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt7	PMATH450/gnuplots/graphofD2.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
+gpPt7	PMATH450/images/graphofD2.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
 gpPt7	PMATH467/bottle.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
 gpPt7	_site/PMATH467/bottle.svg	/^	<path id='gpPt7' stroke-width='0.222' stroke='currentColor' d='M0,-1.33 L-1.33,0.67 L1.33,0.67 /;"	i
+gpPt8	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt8	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt8	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
 gpPt8	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt7' id='gpPt8' fill='currentColor' stroke='none'\/>$/;"	i
+gpPt9	PMATH450/gnuplots/graphofD2.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
+gpPt9	PMATH450/images/graphofD2.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
 gpPt9	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
 gpPt9	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
 grammar:_kamoshiremasen	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_kamoshiremasen}$/;"	l
@@ -7543,6 +7594,8 @@ grammar:volitional_form	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:volition
 grammar:volitional_form	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:volitional_form}$/;"	l
 grammar:volitional_form_tosi_tsuteimasu	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:volitional_form_tosi_tsuteimasu}$/;"	l
 grammar:volitional_form_tosi_tsuteimasu	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:volitional_form_tosi_tsuteimasu}$/;"	l
+greybox	PMATH450/gnuplots/graphofD2.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
+greybox	PMATH450/images/graphofD2.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 greybox	PMATH467/bottle.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 greybox	_site/PMATH467/bottle.svg	/^	<filter id='greybox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 h	_site/assets/js/jquery-ajax.js	/^!function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.documen/;"	f	function:AnonymousFunctionc62e02726100
@@ -7809,6 +7862,7 @@ lemma:parameterized_submanifolds_are_not_determined_by_immersions	PMATH365/class
 lemma:parameterized_submanifolds_are_not_determined_by_immersions	_site/PMATH365/classnotes.tex	/^\\begin{lemma}[Parameterized Submanifolds are not Determined by Immersions]\\label{lemma:paramet/;"	l
 lemma:path_connectedness_implies_connectedness	PMATH467/classnotes.tex	/^\\begin{lemma}[Path Connectedness implies Connectedness]\\label{lemma:path_connectedness_implies/;"	l
 lemma:path_connectedness_implies_connectedness	_site/PMATH467/classnotes.tex	/^\\begin{lemma}[Path Connectedness implies Connectedness]\\label{lemma:path_connectedness_implies/;"	l
+lemma:pointwise_value_of_gamma_g	PMATH450/classnotes.tex	/^\\begin{lemma}[Pointwise Value of $\\Gamma_g$]\\label{lemma:pointwise_value_of_gamma_g}$/;"	l
 lemma:preservation_of_the_lebesgue_integral_of_2pi_periodic_functions_under_certain_transformations	PMATH450/classnotes.tex	/^\\begin{lemma}[Preservation of the Lebesgue Integral of $2 \\pi$-periodic functions under certai/;"	l
 lemma:preservation_of_the_lebesgue_integral_of_2pi_periodic_functions_under_certain_transformations	_site/PMATH450/classnotes.tex	/^\\begin{lemma}[Preservation of the Lebesgue Integral of $2 \\pi$-periodic functions under certai/;"	l
 lemma:principle_of_analytic_continuation	PMATH352W18/classnotes-white.tex	/^\\begin{lemma}[Principle of Analytic Continuation]\\label{lemma:principle_of_analytic_continuati/;"	l
@@ -8921,6 +8975,8 @@ sec:convolution	PMATH450/classnotes.tex	/^\\label{sec:convolution}$/;"	l
 sec:convolution	_site/PMATH450/classnotes.tex	/^\\label{sec:convolution}$/;"	l
 sec:convolution_continued	PMATH450/classnotes.tex	/^\\label{sec:convolution_continued}$/;"	l
 sec:convolution_continued	_site/PMATH450/classnotes.tex	/^\\label{sec:convolution_continued}$/;"	l
+sec:convolution_continued_2	PMATH450/classnotes.tex	/^\\label{sec:convolution_continued_2}$/;"	l
+sec:convolution_continued_3	PMATH450/classnotes.tex	/^\\label{sec:convolution_continued_3}$/;"	l
 sec:correspondence_theorem	PMATH348/classnotes.tex	/^\\label{sec:correspondence_theorem}$/;"	l
 sec:correspondence_theorem	_site/PMATH348/classnotes.tex	/^\\label{sec:correspondence_theorem}$/;"	l
 sec:course_logistics	PMATH351F18/classnotes.tex	/^\\label{sec:course_logistics}$/;"	l
@@ -9647,6 +9703,7 @@ sec:the_buhlmann_model	ACTSC432/classnotes.tex	/^\\label{sec:the_buhlmann_model}
 sec:the_buhlmann_model	_site/ACTSC432/classnotes.tex	/^\\label{sec:the_buhlmann_model}$/;"	l
 sec:the_credibility_premium	ACTSC432/classnotes.tex	/^\\label{sec:the_credibility_premium}$/;"	l
 sec:the_credibility_premium	_site/ACTSC432/classnotes.tex	/^\\label{sec:the_credibility_premium}$/;"	l
+sec:the_dirichlet_kernel	PMATH450/classnotes.tex	/^\\label{sec:the_dirichlet_kernel}$/;"	l
 sec:the_exterior_derivative	PMATH365/classnotes.tex	/^\\label{sec:the_exterior_derivative}$/;"	l
 sec:the_exterior_derivative	_site/PMATH365/classnotes.tex	/^\\label{sec:the_exterior_derivative}$/;"	l
 sec:the_galois_group_as_a_permutation_group	PMATH348/classnotes.tex	/^\\label{sec:the_galois_group_as_a_permutation_group}$/;"	l
@@ -10622,6 +10679,8 @@ tb	_site/assets/js/jquery-ajax.js	/^if(g)for(i=f[f.length-1].ownerDocument,n.map
 tb	assets/js/jquery-ajax.js	/^if(g)for(i=f[f.length-1].ownerDocument,n.map(f,mb),j=0;g>j;j++)h=f[j],gb.test(h.type||"")&&!O.ac/;"	f	function:AnonymousFunction381dd58fcb00
 teardown	_site/assets/js/jquery-ajax.js	/^!function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.documen/;"	m	class:n.event.special
 teardown	assets/js/jquery-ajax.js	/^!function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.documen/;"	m	class:n.event.special
+textbox	PMATH450/gnuplots/graphofD2.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
+textbox	PMATH450/images/graphofD2.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 textbox	PMATH467/bottle.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 textbox	_site/PMATH467/bottle.svg	/^	<filter id='textbox' filterUnits='objectBoundingBox' x='0' y='0' height='1' width='1'>$/;"	i
 the-colours-in-your-pdfs-dont-look-exactly-like-what-i-think-they-should-be-eg-red-doesnt-look-red	_site/faq.html	/^<h2 id="the-colours-in-your-pdfs-dont-look-exactly-like-what-i-think-they-should-be-eg-red-doesn/;"	I
@@ -10809,6 +10868,8 @@ thm:convergent_sequences_are_cauchy	PMATH351F18/classnotes.tex	/^\\begin{thm}[Co
 thm:convergent_sequences_are_cauchy	_site/PMATH351F18/classnotes.tex	/^\\begin{thm}[Convergent Sequences are Cauchy]\\index{Convergent Sequences are Cauchy}\\label{thm/;"	l
 thm:converse_of_probability_integral_transformation	STAT330S18/classnotes.tex	/^\\label{thm:converse_of_probability_integral_transformation}$/;"	l
 thm:converse_of_probability_integral_transformation	_site/STAT330S18/classnotes.tex	/^\\label{thm:converse_of_probability_integral_transformation}$/;"	l
+thm:convolution_as_a_normalizer	PMATH450/classnotes.tex	/^\\begin{thm}[Convolution as a Normalizer]\\label{thm:convolution_as_a_normalizer}$/;"	l
+thm:convolution_operator_for_g_on_l_1_mathbb_t_mathbb_c_	PMATH450/classnotes.tex	/^\\begin{thm}[Convolution Operator for $g$ on $L_1(\\mathbb{T}, \\mathbb{C})$]\\label{thm:convolu/;"	l
 thm:correspondence_theorem	PMATH348/classnotes.tex	/^\\begin{thm}[Correspondence Theorem]\\index{Correspondence Theorem}\\label{thm:correspondence_th/;"	l
 thm:correspondence_theorem	_site/PMATH348/classnotes.tex	/^\\begin{thm}[Correspondence Theorem]\\index{Correspondence Theorem}\\label{thm:correspondence_th/;"	l
 thm:countability_of_an_orthonormal_set_in_a_separable_hilbert_space	PMATH450/classnotes.tex	/^\\begin{thm}[Countability of an Orthonormal Set in a Separable Hilbert Space]\\label{thm:countab/;"	l
@@ -10837,6 +10898,7 @@ thm:downward_lowenheim_skolem	PMATH733/classnotes.tex	/^\\begin{thm}[Downward L\
 thm:downward_lowenheim_skolem	_site/PMATH733/classnotes.tex	/^\\begin{thm}[Downward L\\"{o}wenheim-Skolem]\\index{Downward L\\"{o}wenheim-Skolem}\\label{thm:d/;"	l
 thm:eisenstein_s_criterion_of_z_x_	PMATH347S18/lectures/lec35.tex	/^\\label{thm:eisenstein_s_criterion_of_z_x_}$/;"	l
 thm:eisenstein_s_criterion_of_z_x_	_site/PMATH347S18/lectures/lec35.tex	/^\\label{thm:eisenstein_s_criterion_of_z_x_}$/;"	l
+thm:equivalence_of_gamma_g_and_c_g_	PMATH450/classnotes.tex	/^\\begin{thm}[Equivalence of $\\Gamma_g$ and $C_g$]\\label{thm:equivalence_of_gamma_g_and_c_g_}$/;"	l
 thm:every_field_has_an_algebraic_closure	PMATH348/classnotes.tex	/^\\begin{thm}[Every Field has an Algebraic Closure]\\label{thm:every_field_has_an_algebraic_closu/;"	l
 thm:every_field_has_an_algebraic_closure	_site/PMATH348/classnotes.tex	/^\\begin{thm}[Every Field has an Algebraic Closure]\\label{thm:every_field_has_an_algebraic_closu/;"	l
 thm:expectation_from_the_cdf	STAT330S18/classnotes.tex	/^\\label{thm:expectation_from_the_cdf}$/;"	l
@@ -11055,6 +11117,7 @@ thm:product_rule	STAT330S18/classnotes.tex	/^\\label{thm:product_rule}$/;"	l
 thm:product_rule	_site/STAT330S18/classnotes.tex	/^\\label{thm:product_rule}$/;"	l
 thm:properties_of_cardinal_sum	PMATH733/classnotes.tex	/^\\begin{thm}[Properties of Cardinal Sum]\\label{thm:properties_of_cardinal_sum}$/;"	l
 thm:properties_of_cardinal_sum	_site/PMATH733/classnotes.tex	/^\\begin{thm}[Properties of Cardinal Sum]\\label{thm:properties_of_cardinal_sum}$/;"	l
+thm:properties_of_the_dirichlet_kernel	PMATH450/classnotes.tex	/^\\begin{thm}[Properties of the Dirichlet Kernel]\\label{thm:properties_of_the_dirichlet_kernel}$/;"	l
 thm:properties_of_the_gaussian_distribution	STAT330S18/classnotes.tex	/^\\label{thm:properties_of_the_gaussian_distribution}$/;"	l
 thm:properties_of_the_gaussian_distribution	_site/STAT330S18/classnotes.tex	/^\\label{thm:properties_of_the_gaussian_distribution}$/;"	l
 thm:quotient_over_a_pid	PMATH347S18/lectures/lec33.tex	/^\\label{thm:quotient_over_a_pid}$/;"	l
@@ -11067,6 +11130,7 @@ thm:reducibility_in_the_field_of_fractions	PMATH347S18/lectures/lec34.tex	/^\\la
 thm:reducibility_in_the_field_of_fractions	_site/PMATH347S18/lectures/lec34.tex	/^\\label{thm:reducibility_in_the_field_of_fractions}$/;"	l
 thm:repeated_kronecker_s_theorem	PMATH348/classnotes.tex	/^\\begin{thm}[Repeated Kronecker's Theorem]\\label{thm:repeated_kronecker_s_theorem}$/;"	l
 thm:repeated_kronecker_s_theorem	_site/PMATH348/classnotes.tex	/^\\begin{thm}[Repeated Kronecker's Theorem]\\label{thm:repeated_kronecker_s_theorem}$/;"	l
+thm:riemannian_version_of_convolution_on_homogeneous_banach_spaces	PMATH450/classnotes.tex	/^\\begin{thm}[Riemannian Version of Convolution on Homogeneous Banach Spaces]\\label{thm:riemanni/;"	l
 thm:rouche_s_theorem	PMATH352W18/classnotes-white.tex	/^\\begin{thm}[Rouch\\'e's Theorem\\index{Rouch\\'e's Theorem}]\\label{thm:rouche_s_theorem}$/;"	l
 thm:rouche_s_theorem	PMATH352W18/classnotes.tex	/^\\begin{thm}[Rouch\\'e's Theorem\\index{Rouch\\'e's Theorem}]\\label{thm:rouche_s_theorem}$/;"	l
 thm:rouche_s_theorem	_site/PMATH352W18/classnotes-white.tex	/^\\begin{thm}[Rouch\\'e's Theorem\\index{Rouch\\'e's Theorem}]\\label{thm:rouche_s_theorem}$/;"	l

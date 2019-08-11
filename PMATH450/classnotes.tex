@@ -9210,6 +9210,670 @@ but involving equivalence classes.
 
 % chapter lecture_18_jul_11th_2019 (end)
 
+\chapter{Lecture 19 Jul 16th 2019}%
+\label{chp:lecture_19_jul_16th_2019}
+% chapter lecture_19_jul_16th_2019
+
+\section{Convolution (Continued 2)}%
+\label{sec:convolution_continued_2}
+% section convolution_continued_2
+
+By \cref{eg:equivclss_of_cts_2pi_periodic_fns_is_a_hom_ban_sp},
+it follows that if $f \in \mathcal{C}(\mathbb{T}, \mathbb{C})$, then
+the map $s \mapsto \tau_s[f]$, or equivalently $s \mapsto \tau_s^\circ(f)$
+is continuous from $(\mathbb{T}, \abs{\cdot})$ to
+$(\mathcal{C}(\mathbb{T}, \mathbb{C}), \norm{\cdot}_{\sup})$.
+
+\begin{lemma}[Pointwise Value of $\Gamma_g$]\label{lemma:pointwise_value_of_gamma_g}
+  Let $f, g \in (\mathcal{C}(\mathbb{T}, \mathbb{C}), \norm{\cdot}_{\sup})$.
+  Let
+  \begin{equation*}
+    \Gamma_g^\circ(f)
+    \coloneqq \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s)\tau_s^{\circ}(f) \dif{s},
+  \end{equation*}
+  taken as a Banach space Riemann integral
+  in $(\mathcal{C}(\mathbb{T}, \mathbb{C}), \norm{\cdot}_{\sup})$.
+  Then
+  \begin{equation*}
+    \Gamma_g^{\circ}(f)(\theta) = g \diamond f(\theta)
+    = \frac{1}{2\pi} \int_{[-\pi, \pi)} g(s)f(\theta - s) \dm(s)
+  \end{equation*}
+  for all $\theta \in \mathbb{R}$.
+\end{lemma}
+
+\begin{strategy}
+  The most difficult part of this proof is to understand the difference
+  between $\Gamma_g^\circ(f)$ and $g \diamond f$.
+  For $\Gamma_g^{\circ}(f)$,
+  since $(\mathcal{C}(\mathbb{T}, \mathbb{C}), \norm{\cdot}_{\sup})$ is a Banach space,
+  and $\beta : \mathbb{R} \to \mathcal{C}(\mathbb{T}, \mathbb{C})$ given by
+  $\beta(s) \coloneqq g(s)f\tau_s^{\circ}(f) \in \mathcal{C}(\mathbb{T}, \mathbb{C})$
+  is continuous, by \cref{thm:continuous_functions_are_riemann_integrable},
+  $\Gamma_g^{\circ}(f)$ is a $\norm{\cdot}_{\sup}$-limit
+  of Riemann sums $S(\beta, P_N, P_n^*)$.
+  We may further, wlog, suppose that for each $N \geq 1$,
+  $P_N \in \mathcal{P}([-\pi, \pi])$ is a regular partition of $[-\pi, \pi]$
+  into $2^N$ subintervals of equal length $\frac{2\pi}{2^N}$,
+  and we may pick $P_N^* = P_N \setminus \setminus \{ - \pi \}$
+  so that $P_N^*$ is a set of test values for $P_N$.
+
+  On the other hand, $g \diamond f$ is the convolution of $g$ and $f$,
+  which was
+  \hyperref[defn:convolution_on_romanl_1_mathbb_t_mathbb_c_]{defined pointwise}
+  via Lebesgue integration.
+\end{strategy}
+
+\begin{proof}
+  For a fixed $\theta_0 \in \mathbb{R}$, we may define
+  $\gamma_{\theta_0} : \mathbb{R} \to \mathbb{K}$ as
+  \begin{equation*}
+    \gamma_{\theta_0}(s) = g(s)f(\theta_0 - s), \quad s \in \mathbb{R}.
+  \end{equation*}
+  Since both $g$ and $f$ are continuous and $2\pi$-periodic,
+  $\gamma_{\theta_0}$ is also continuous and $2\pi$-periodic.
+  Thus both sides are bounded and Riemann integrable on $[-\pi, \pi)$.
+  By \cref{thm:bounded_riemann_integrable_functions_are_lebesgue_integrable},
+  we have
+   \begin{align*}
+    g \diamond f(\theta_0)
+    &= \frac{1}{2\pi} \int_{[-\pi, \pi)} g(s)f(\theta_0 - s) \dm(s) \\
+    &= \frac{1}{2\pi} \int_{[-\pi \pi)} \gamma_{\theta_0}(s) \dm(s) \\
+    &= \frac{1}{2\pi} \int_{-\pi}^{\pi} \gamma_{\theta_0}(s) \dif{s} \\
+    &= \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s)f(\theta_0 - s) \dif{s}.
+  \end{align*}
+  Since $(\mathbb{C}, \abs{\cdot})$ is a Banach space,
+  \cref{thm:continuous_functions_are_riemann_integrable}, with the same $P_N$
+  and $P_N^*$ as defined in our strategy, we have
+  \begin{equation*}
+    g \diamond f(\theta_0) = \frac{1}{2\pi} \int_{-\pi}^{\pi} \gamma(s) \dif{s}
+    = \lim_{N \to \infty} S(\gamma, P_N, P_N^*).
+  \end{equation*}
+  Finally,
+  \begin{align*}
+    &\norm{\Gamma_g^{\circ}(f) - S(\beta, P_N, P_N^*)}_{\sup} \\
+    &\geq \abs{\Gamma_g^{\circ}(f)(\theta_0) - S(\beta, P_N, P_N^*)(\theta_0)} \\
+    &= \abs{\Gamma_g^\circ(f)(\theta_0) - 
+      \sum_{n=1}^{2^N} (\beta(p_n))(\theta_0)(p_n - p_{n-1})} \\
+    &= \abs{\Gamma_g^\circ(f)(\theta_0) - 
+      \sum_{n=1}^{2^N} (g(p_n)f(\theta_0 - p_n))(p_n - p_{n-1})} \\
+    &= \abs{\Gamma_g^\circ(f)(\theta_0) - 
+      \sum_{n=1}^{2^N} \gamma_{\theta_0}(s)(p_n - p_{n-1})} \\
+    &= \abs{\Gamma_g^{\circ}(f) - S(\gamma, P_N, P_N^*)}
+  \end{align*}
+  Then, since
+  $\lim_{N \to \infty} \norm{\Gamma_g^\circ(f) - S(\beta, P_N, P_N^*)} = 0$,
+  it follows that
+  \begin{equation*}
+    \lim_{N \to \infty} \abs{\Gamma_g^{\circ}(f) - S(\gamma, P_N, P_N^*)} = 0.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \Gamma_g^\circ(f)(\theta_0) = \lim_{N \to \infty} S(\gamma, P_N, P_N^*)
+    = g \diamond f(\theta_0).
+  \end{equation*}
+  Since $\theta_0 \in \mathbb{R}$ was arbitrary, we indeed have
+  \begin{equation*}
+    \Gamma_g^\circ(f) = g \diamond f.
+  \end{equation*}
+\end{proof}
+
+\begin{thm}[Equivalence of $\Gamma_g$ and $C_g$]\label{thm:equivalence_of_gamma_g_and_c_g_}
+  Let $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$
+  and $[f] \in L_1(\mathbb{T}, \mathbb{C})$.
+  Let $\Gamma_g$ be as defined before; i.e.
+  \begin{equation*}
+    \Gamma_g[f] \coloneqq \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s) \tau_s[f] \dif{s},
+  \end{equation*}
+  where the integral is a Banach space Riemann integral in
+  $(L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1)$.
+  Then
+  \begin{equation*}
+    \Gamma_g[f] = g * [f] = [g \diamond f] = C_g[f].
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  By the $\norm{\cdot}_1$-density of
+  $[\mathcal{C}(\mathbb{T}, \mathbb{C})]$ in $L_1(\mathbb{T}, \mathbb{C})$,
+  we can make use of \cref{lemma:pointwise_value_of_gamma_g}.
+  In particular, we can find a sequence $(f_m)_{m=1}^{\infty}$
+  in $\mathcal{C}(\mathbb{T}, \mathbb{C})$ such that
+  \begin{equation*}
+    \lim_{n \to \infty} \norm{[f_m] - [f]}_1 = 0.
+  \end{equation*}
+  Thus, for each $m \geq 1$, we have
+  \begin{equation*}
+    \Gamma_g[f_m] = \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s) \tau_s[f_m] \dif{s}.
+  \end{equation*}
+  Since $f_m \in \mathcal{C}(\mathbb{T}, \mathbb{C})$, for each $m \geq 1$,
+  the map $s \mapsto g(s) \tau_s^\circ(f_m)$ is continuous,
+  thus
+  \begin{equation*}
+    \Gamma_g^\circ(f_m) = \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s) \tau_s^\circ(f_m) \dif{s}
+  \end{equation*}
+  converges in $(\mathcal{C}(\mathbb{T}, \mathbb{C}), \norm{\cdot}_{\sup})$ by the last lemma.
+  In particular, for an appropriate sequence $(P_N)_N$
+  of partitions of $[-\pi, \pi]$, we have that
+  \begin{equation*}
+    \Gamma_g^\circ(f_m) = \lim_{N \to \infty} S(\beta_m, P_N, P_N^*),
+  \end{equation*}
+  where $\beta_m = g(s) \tau_s^\circ(f_m)$, for $s \in [-\pi, \pi)$.
+  But given any Riemann sum $S(\beta_m, Q, Q^*)$ of the form
+  \begin{equation*}
+    \sum_{k=1}^{M} \beta_m(q_k^*)(q_k - q_{k-1})
+    = \sum_{k=1}^{M} g(q_k^*)\tau_{q_k^*}^\circ(f_m)(q_k - q_{k-1})
+  \end{equation*}
+  in $\mathcal{C}(\mathbb{T}, \mathbb{C})$, its image in
+  $[\mathcal{C}(\mathbb{T}, \mathbb{C})]$ is
+  \begin{equation*}
+    [S(\beta_m, Q, Q^*)] = \sum_{k=1}^{M} g(q_k^*) \tau_{q_k^*}[f_m](q_k - q_{k-1}).
+  \end{equation*}
+  Since $h \mapsto [h]$ from
+  $(\mathcal{C}(\mathbb{T}, \mathbb{C}), \norm{\cdot}_{\sup})$ to
+  $([\mathcal{C}(\mathbb{T}, \mathbb{C})], \norm{\cdot}_{\infty})$
+  is a bijective linear isometry, the image of $\Gamma_g^\circ(f_m)$
+  under this map is
+  \begin{equation*}
+    [\Gamma_g^\circ(f_m)] = \lim_{N \to \infty} [S(\beta_m, P_N, P_N^*)],
+  \end{equation*}
+  and this convergence is wrt the $\norm{\cdot}_{\infty}$-norm.
+
+  On the other hand, by the definition of each $[S(\beta_m, P_N, P_N^*)]$,
+  we have, precisely,
+  \begin{equation*}
+    \lim_{N \to \infty} [S(\beta_m, P_N, P_N^*)] = \Gamma_g([f_m])
+    \in ([\mathcal{C}(\mathbb{T}, \mathbb{C})], \norm{\cdot}_{\infty}),
+  \end{equation*}
+  thus
+  \begin{equation*}
+    [\Gamma_g^\circ(f_m)] = \Gamma_g[f_m], \quad m \geq 1.
+  \end{equation*}
+  Now
+  \begin{equation*}
+    [S(\beta_m,P_N,P_N^*)]
+      \in [\mathcal{C}(\mathbb{T},\mathbb{C})] \subseteq L_1(\mathbb{T},\mathbb{C})
+  \end{equation*}
+  and
+  \begin{equation*}
+    \Gamma_g[f_m]
+    \in [\mathcal{C}(\mathbb{T},\mathbb{C})] \subseteq L_1(\mathbb{T},\mathbb{C}).
+  \end{equation*}
+  Since $[\mathcal{C}(\mathbb{T},\mathbb{C})]$ is a homogeneous Banach space,
+  $\norm{[h]}_1 \leq \norm{[h]}_{\infty}$ for all $[h] \in
+  [\mathcal{C}(\mathbb{T},\mathbb{C})]$.
+  Thus
+  \begin{align*}
+    0 &\leq \lim_{N \to \infty}
+        \norm{[\Gamma_g^{\circ}(f_m)] - [S(\beta_m,P_N,P_N^*)]}_1 \\
+      &\leq \lim_{N \to \infty}
+        \norm{[\Gamma_g^\circ(f_m)] - [S(\beta_m,P_N,P_N^*)]}_{\infty}
+       = 0,
+  \end{align*}
+  and so
+  \begin{equation*}
+    \Gamma_g[f_m] = [\Gamma_g^\circ(f_m)]
+    = \lim_{N \to \infty} [S(\beta_m, P_N, P_N^*)],
+  \end{equation*}
+  where the convergence happens in $(L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1)$.
+
+  \noindent
+  \hlbnoted{Step 1} \WTS $\forall m \geq 1$, $\Gamma_g[f_m] = g * [f_m]$.
+  By \cref{lemma:pointwise_value_of_gamma_g}, $\forall m \geq 1$,
+  we have $\Gamma_g^\circ(f_m) = g \diamond f_m$.
+  Thus
+  \begin{equation*}
+    \Gamma_g[f_m] = [\Gamma_g^\circ(f_m)] = [g \diamond f_m] = g * [f_m]
+  \end{equation*}
+  for $m \geq 1$.
+
+  \noindent
+  \hlbnoted{Step 2} \WTS $g * [f] = \lim_{m \to \infty} g * [f_m]$
+  in $(L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1)$.
+  One way we can show this is by realizing that we want
+  \begin{equation*}
+    0 = \lim_{m \to \infty} (g * [f_m] - g * [f])
+    = \lim_{m \to \infty} [g \diamond f_m - g \diamond f],
+  \end{equation*}
+  and for $\theta \in \mathbb{R}$,
+  \begin{align*}
+    (g \diamond f_m - g \diamond f)(\theta)
+    &= \frac{1}{2\pi} \int_{[-\pi, \pi)} g(s)(f_m(\theta - s) - f(\theta - s)) \dm(s) \\
+    &= g \diamond (f_m - f)(\theta).
+  \end{align*}
+  As noted after \cref{defn:convolution}, we have
+  \begin{equation*}
+    \abs{g \diamond (f_m - f)(\theta)} \leq \norm{g}_{\sup} \norm{[f_m] -
+    [f]}_1.
+  \end{equation*}
+  Thus for $m \geq 1$,
+  \begin{align*}
+    \norm{g * [f_m] - g * [f]}_1
+    &= \norm{g * [f_m - f]}_1 \\
+    &= \frac{1}{2\pi} \int_{[-\pi, \pi)} \abs{g \diamond (f_m - f)(\theta)} \dm(\theta) \\
+    &\leq \frac{1}{2\pi} \int_{[-\pi, \pi)} \norm{g}_{\sup} \norm{[f_m] - [f]}_1 \dm(\theta) \\
+    &= \norm{g}_{\sup} \norm{[f_m] - [f]}_1.
+  \end{align*}
+  Since
+  \begin{equation*}
+    \lim_{m \to \infty} \norm{[f_m] - [f]}_1 = 0,
+  \end{equation*}
+  \sidenote{I bet you forgot this! :P} it follows that 
+  \begin{equation*}
+    g * [f] = \lim_{m \to \infty} g * [f_m]
+  \end{equation*}
+  in $(L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1)$.
+
+  \noindent
+  \hlbnoted{Step 3} \WTS $\Gamma_g[f] = \lim_{m \to \infty} \Gamma_g[f_m]$
+  in $(L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1)$.
+  We see that by the properties of a homogeneous Banach space,
+  we have
+  \begin{align*}
+    \norm{\Gamma_g[f] - \Gamma_g[f_m]}_1
+    &= \norm{ \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s)\tau_s[f - f_m] \dif{s} }_1 \\
+    &\leq \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s) \norm{\tau_s[f - f_m]}_1 \dif{s} \\
+    &\leq \norm{g}_{\sup} \norm{\tau_s[f - f_m]}_1 \\
+    &= \norm{g}_{\sup} \norm{[f] - [f_m]}_1.
+  \end{align*}
+  As before, it follows that
+  \begin{equation*}
+    \Gamma_g[f] = \lim_{m \to \infty} \Gamma_g[f_m] \quad
+      \in (L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1).
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{Step 4} Finally, we see that
+  \begin{equation*}
+    \Gamma_g[f] = \lim_{m \to \infty} \Gamma_g[f_m]
+    = \lim_{m \to \infty} g * [f_m]
+    = g * [f].
+  \end{equation*}
+\end{proof}
+
+Viewing $\Gamma_g$ as a map from
+$L_1(\mathbb{T}, \mathbb{C})$ onto itself,
+we finally conclude our gruesome path into showing that $\Gamma_g = C_g$.
+Thus, our 2 ``notions'' of ``convolutions'' agree.
+In fact, when $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$,
+we may define
+\begin{align*}
+  \Gamma_g^{\mathfrak{B}} : \mathfrak{B} &\to \mathfrak{B} \\
+  [f] &\mapsto \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s) \tau_s[f] \dif{s}
+\end{align*}
+as a map on \hlbnotec{any} homogeneous Banach space $\mathfrak{B}$
+over $\mathbb{T}$.
+Furthermore, $C_g[f] = [g \diamond f] \in \mathfrak{B}$.
+
+Let us show that the above function always agree with convolution.
+
+\begin{thm}[Riemannian Version of Convolution on Homogeneous Banach Spaces]\label{thm:riemannian_version_of_convolution_on_homogeneous_banach_spaces}
+  Let $(\mathfrak{B}, \norm{\cdot}_{\mathfrak{B}})$ be a homogeneous
+  Banach space over $\mathbb{T}$, $[f] \in \mathfrak{B}$,
+  and $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$.
+  Then
+  \begin{equation*}
+    \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s) \tau_s[f] \dif{s}
+  \end{equation*}
+  converges in $\mathfrak{B}$. Furthermore,
+  \begin{enumerate}
+    \item 
+      \begin{equation*}
+        g * [f] = \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s) \tau_s[f] \dif{s},
+      \end{equation*}
+      where $g * [f] = [g \diamond f]$, and where for all $\theta \in \mathbb{R}$,
+      \begin{equation*}
+        g \diamond f(\theta)
+        = \frac{1}{2\pi} \int_{[-\pi, \pi)} g(s) f(\theta - s) \dm(s).
+      \end{equation*}
+      That is, $\Gamma_g^{\mathfrak{B}}[f] = g * [f]$.
+
+    \item We also have
+      \begin{equation*}
+        \norm{g * [f]}_{\mathfrak{B}} \leq \nu_1(g) \norm{[f]}_{\mathfrak{B}}.
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Since $(\mathfrak{B}, \norm{\cdot}_{\mathfrak{B}})$ is a Banach space,
+      and for $[f] \in \mathfrak{B}$, the function
+      $\beta : \mathbb{R} \to \mathfrak{B}$ such that
+      \begin{equation*}
+        \beta(s) \coloneqq g(s) \tau_s[f]
+      \end{equation*}
+      is continuous, by \cref{thm:continuous_functions_are_riemann_integrable},
+      \begin{equation*}
+        \Gamma_g^{\mathfrak{B}}[f]
+        \coloneqq \frac{1}{2\pi} \int_{-\pi}^{\pi} \beta(s) \dif{s}
+        = \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s) \tau_s[f] \dif{s}
+      \end{equation*}
+      exists in $\mathfrak{B}$.
+
+      As before, wlog wma $P_N \in \mathcal{P}([-\pi, \pi))$ is a regular
+      partition into $2^N$ subintervals of equal length,
+      and if we set $P_N^* = P_N \setminus \{ \pi \}$ as the corresponding set
+      of test values of $P_N$, then
+      \begin{equation*}
+        \lim_{N \to \infty}
+        \norm{ \Gamma_g^{\mathfrak{B}}[f] - S(\beta,P_N,P_N^*) }_{\mathfrak{B}}
+        = 0.
+      \end{equation*}
+      Since $\norm{[h]}_1 \leq \norm{[h]}_{\mathfrak{B}}$ for all
+      $[h] \in \mathfrak{B}$, since $\mathfrak{B}$ is a homogeneous Banach
+      space.
+      Thus
+      \begin{equation*}
+        \lim_{N \to \infty} \norm{\Gamma_g^{\mathfrak{B}}[f] - S(\beta,P_N,
+        P_N^*) }_1 = 0.
+      \end{equation*}
+      Hence
+      \begin{equation*}
+        \Gamma_g^{\mathfrak{B}}[f]
+        = \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s)\tau_s[f] \dif{s}
+      \end{equation*}
+      in $(L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1)$.
+      Phrased differently, we have $\Gamma_g^{\mathfrak{B}}[f] =
+      \Gamma_g^{L_1(\mathbb{T}, \mathbb{C})}[f]$.
+      It follows by
+      \cref{thm:equivalence_of_gamma_g_and_c_g_}
+      that
+      \begin{equation*}
+        \Gamma_f^{\mathfrak{B}}[f] = \Gamma_g^{L_1(\mathbb{T}, \mathbb{C})}[f]
+        = g * [f].
+      \end{equation*}
+
+    \item Recall that given any homogeneous Banach space over $\mathbb{T}$,
+      we defined the continuous map $\Psi_{[f]} : \mathbb{R} -> \mathfrak{B}$
+      such that $\Psi_{[f]}(s) = \tau_s[f]$. Notice that
+      since $\mathfrak{B}$ is a homogeneous Banach space,
+      \begin{equation*}
+        \norm{\Psi_{[f]}(s)}_{\mathfrak{B}} = \norm{\tau_s[f]}_{\mathfrak{B}}
+        = \norm{[f]}_{\mathfrak{B}}.
+      \end{equation*}
+      Thus, observe that
+      \begin{align*}
+        \norm{g * [f]}_{\mathfrak{B}}
+        &= \frac{1}{2\pi} \norm{ \int_{-\pi}^{\pi} g(s)\tau_s[f] \dif{s}}_{\mathfrak{B}} \\
+        &= \frac{1}{2\pi} \norm{ \int_{-\pi}^{\pi} g(s) \Psi_{[f]}(s) \dif{s} }_{\mathfrak{B}} \\
+        &\leq \frac{1}{2\pi} \int_{-\pi}^{;p} \abs{g(s)}
+          \norm{\Psi_{[f]}(s)}_{\mathfrak{B}} \dif{s} \\
+        &= \frac{1}{2\pi} \int_{-\pi}^{\pi} \abs{g(s)} \norm{[f]}_{\mathfrak{B}} \dif{s} \\
+        &= \norm{[f]}_{\mathfrak{B}} \nu_1(g).
+      \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\begin{remark}
+  The first result in
+  \cref{thm:riemannian_version_of_convolution_on_homogeneous_banach_spaces}
+  is stronger than it seems.
+  In
+  \cref{propo:continuity_of_the_convolution_of_f_and_g_where_g_is_continuous},
+  we showed that if $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$ and
+  $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$, then
+  $g \diamond f \in \mathcal{C}(\mathbb{T}, \mathbb{C})$, and so
+  $g * [f] \coloneqq [g \diamond f] \in [\mathcal{C}(\mathbb{T}, \mathbb{C})]$.
+  Then why is $g * [f] \in \mathfrak{B}$?
+  There is no reason why $\mathfrak{B}$ should contain all continuous functions,
+  although it does contain all trigonometric functions.
+  What we have shown is that $g * [f] \in \mathfrak{B}$
+  \hlbnotec{even if $\mathfrak{B}$ does not contain $[\mathcal{C}(\mathbb{T}, \mathbb{C})]$}. 
+  In other words, convolutions (at least by a continuous function)
+  keeps us in this smaller space $\mathfrak{B}$.
+\end{remark}
+
+\marginnote{Unfortunately, I am running out of time for studying everything
+carefully. I shall be skipping proofs while covering for everything else.
+I will come back to adding proofs when time permits.}
+
+\begin{thm}[Convolution as a Normalizer]\label{thm:convolution_as_a_normalizer}
+  Let $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$, and let
+  \begin{equation*}
+    C_g : ([\mathcal{C}(\mathbb{T}, \mathbb{C})], \norm{\cdot}_{\infty})
+      \to ([\mathcal{C}(\mathbb{T}, \mathbb{C})], \norm{\cdot}_{\infty}),
+  \end{equation*}
+  as defined in \cref{defn:convolution_operator_with_kernel},
+  corresponding to $g$, so that $C_g[h] = g * [h]$ by
+  \cref{thm:equivalence_of_gamma_g_and_c_g_}.
+  Then $\norm{C_g} = \nu_1(g) = \norm{[g]}_1$.
+\end{thm}
+
+\begin{proof}
+  \hlwarn{To be added}
+\end{proof}
+
+% section convolution_continued_2 (end)
+
+% chapter lecture_19_jul_16th_2019 (end)
+
+\chapter{Lecture 20 Jul 18th 2019}%
+\label{chp:lecture_20_jul_18th_2019}
+% chapter lecture_20_jul_18th_2019
+
+\section{Convolution (Continued 3)}%
+\label{sec:convolution_continued_3}
+% section convolution_continued_3
+
+Let us establish a similar result for convolution
+by a continuous function $g$ acting on $L_1(\mathbb{T}, \mathbb{C})$.
+
+\begin{thm}[Convolution Operator for $g$ on $L_1(\mathbb{T}, \mathbb{C})$]\label{thm:convolution_operator_for_g_on_l_1_mathbb_t_mathbb_c_}
+  Let $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$, and
+  \begin{equation*}
+    C_g : L_1(\mathbb{T}, \mathbb{C}) \to L_1(\mathbb{T}, \mathbb{C})
+  \end{equation*}
+  be the convolution operator corresponding to $g$, so that $C_g[f] = g * [f]$.
+  Then $\norm{C_g} = \nu_1(g) = \norm{[g]}_1$.
+\end{thm}
+
+\begin{proof}
+  \hlwarn{To be added}
+\end{proof}
+
+We shall next explore the connection between convolution operators
+and convergence of Fourier series.
+
+% section convolution_continued_3 (end)
+
+\section{The Dirichlet Kernel}%
+\label{sec:the_dirichlet_kernel}
+% section the_dirichlet_kernel
+
+Recall that given $[f] \in L_2(\mathbb{T}, \mathbb{C})$, the sequence
+$(\Delta_N([f]))_{N=1}^{\infty}$ of partial sums of the Fourier series
+of $[f]$ converges in the $\norm{\cdot}_2$-norm to $[f]$.
+
+We want to see how far we can extend the same result for
+$[f] \in L_1(\mathbb{T}, \mathbb{C})$.
+Our little (not so little) impasse into convolution is actually somewhat important
+to the so-called Dirichlet kernel, of which we shall see below,
+and why that's important is also what we shall quite immediately see.
+
+\begin{defn}[Dirichlet Kernel of Order $N$]\index{Dirichlet Kernel of Order $N$}\label{defn:dirichlet_kernel_of_order_n_}
+  For each $n \in \mathbb{Z}$,
+  recall that $\xi_n \in \mathcal{C}(\mathbb{T}, \mathbb{C})$
+  is the function $\xi_n(\theta) = e^{in \theta}$.
+  For $N \geq 1$, we define the \hlnoteb{Dirichlet kernel of order $N$} as
+  \begin{equation*}
+    D_N = \sum_{n = -N}^{N} \xi_n.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  Again, the word `kernel' has nothing to do
+  with the null space of any linear map.
+\end{note}
+
+Let $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$.
+For each $N \geq 1$, define
+\begin{equation*}
+  \Delta_N^\circ(f) \coloneqq \sum_{n = -N}^{N} \alpha_n^{[f]} \xi_n
+  = \sum_{n = -N}^{N} \hat{f}(n) \xi_n.
+\end{equation*}
+It is clear that $\Delta_N^\circ(f) \in \mathcal{C}(\mathbb{T}, \mathbb{C})$,
+since it is a finite linear combination of $\{ \xi_n \}_{n = -N}^{N} \subseteq
+\mathcal{C}(\mathbb{T}, \mathbb{C})$.
+
+If $f = g$ a.e. on $\mathbb{R}$,
+we saw that $\alpha_n^{[f]} = \alpha_n^{[g]}$ for all $n \in \mathbb{Z}$,
+which then $\Delta_N^\circ(f) = \Delta_N^\circ(g)$ for $N \geq 1$.
+Thus, we may define
+\begin{equation*}
+  \Delta_N([f]) = [\Delta_N^\circ(f)], \quad N \geq 1.
+\end{equation*}
+Hence, $\Delta_N([f])$ is the $N$\textsuperscript{th}
+partial sum of the Fourier series of $[f]$.
+In the case of $[f] \in L_2(\mathbb{T}, \mathbb{C})$,
+this definition coincides with our
+\hyperref[eg:fourier_for_bigl2_in_complex_unit_circle]{previous definition}.
+
+For $N \geq 1$, $f \in \mathcal{L}_1(\mathbb{T}, \mathbb{C})$
+and $\theta \in \mathbb{R}$, we have
+\begin{align*}
+  \Delta_N^\circ(f)(\theta)
+  &= \sum_{n = -N}^{N} \alpha_n^{[f]} \xi_n \\
+  &= \sum_{n=-N}^{N} \left( \frac{1}{2\pi} \int_{[-\pi, \pi)}
+      f(s) \overline{\xi_n}(s) \dm(s) \right) \xi_n(\theta) \\
+  &= \sum_{n=-N}^{N} \frac{1}{2\pi} \int_{[-\pi, \pi)} f(s) e^{in(\theta - s)} \dm(s) \\
+  &= \sum_{n=-N}^{N} \frac{1}{2\pi} \int_{[-\pi, \pi)} f(\theta - s) e^{ins} \dm(s)
+      \enspace \because \text{\cref{lemma:swapping_convolutions}} \\
+  &= \frac{1}{2\pi} \int_{[-\pi, \pi)} \sum_{n=-N}^{N}
+    f(\theta - s) e^{ins} \dm(s) \\
+  &= \frac{1}{2\pi} \int_{[-\pi ,\pi)} D_N(s) f(\theta - s) \dm(s) \\
+  &= (D_N \diamond f)(\theta).
+\end{align*}
+Thus $\Delta_N^\circ(f) = D_N \diamond f$, or
+\begin{equation*}
+  \Delta_N([f]) = D_N * [f] = C_{D_N}([f]), \quad N \geq 1.
+\end{equation*}
+
+We expressed the $N$\textsuperscript{th} partial sum of the Fourier series
+of $[f] \in L_1(\mathbb{T}, \mathbb{C})$ as the
+\hlbnotee{convolution of the Dirichlet kernel $D_N$ of order $N$
+with $[f]$}.
+\sidenote{Our sweats and tears ploughing through the convoluted lands
+of convolutions is not confounded!}
+
+The question of whether or not these partial sums converge to $[f]$
+in $L_1(\mathbb{T}, \mathbb{C})$ is now a question of
+whether or not $\lim_{N \to \infty} C_{D_N}([f]) = [f]$ in
+$L_1(\mathbb{T}, \mathbb{C})$.
+
+\begin{thm}[Properties of the Dirichlet Kernel]\label{thm:properties_of_the_dirichlet_kernel}
+  Let $N \geq 1$ be an integer and $D_N$ be the
+  Dirichlet kernel of order $N$. Then
+  \begin{enumerate}
+    \item $D_N(-\theta) = D_N(\theta) \in \mathbb{R}$ for all $\theta \in \mathbb{R}$;
+    \item $\frac{1}{2\pi} \int_{-\pi}^{\pi} D_N(\theta) \dif{\theta} = 1$;
+    \item For $0 \neq \theta \in [-\pi, \pi)$,
+      \begin{equation*}
+        D_N(\theta) = \frac{\sin(\left(N + \frac{1}{2}\right)\theta)}
+                      {\sin \left( \frac{1}{2} \theta \right)}.
+      \end{equation*}
+      Also, $D_N(0) = 2N + 1$.
+    \item $\norm{[D_N]}_1 = \nu_1(D_N) \geq \frac{4}{\pi^2} \sum_{n=1}^{N} \frac{1}{n}$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlwarn{To be added}
+\end{proof}
+
+\newthought{On the right} are some graphs of $D_N$,
+particularly for $D_2$, $D_5$ and $D_{10}$.
+\begin{marginfigure}
+  \centering
+  \includesvg[width=\marginparwidth]{images/graphofD2.svg}
+  \caption{Graph of $D_2$}\label{fig:graph_of_d_2_}
+  \includesvg[width=\marginparwidth]{images/graphofD5.svg}
+  \caption{Graph of $D_5$}\label{fig:graph_of_d_5_}
+  \includesvg[width=\marginparwidth]{images/graphofD10.svg}
+  \caption{Graph of $D_{10}$}\label{fig:graph_of_d_10_}
+\end{marginfigure}
+Two things worth noticing here are that
+\begin{itemize}
+  \item the amplitude of the function is increasing near $0$;
+    this is clear from $D_n$ being continuous and $D_N(0) = 2N + 1$
+    for $N \geq 1$; and
+  \item each $D_N$ has lots of fluctuations between positive and negative
+    values, which accounts for the fact that the integrals of $D_N$
+    are bounded, while the integrals of $\abs{D_N}$ are not.
+\end{itemize}
+
+The next result follows from
+\cref{thm:riemannian_version_of_convolution_on_homogeneous_banach_spaces}
+and
+\cref{thm:convolution_as_a_normalizer}, and
+along with the divergence of the harmonic series $\sum_{n=1}^{\infty} \frac{1}{n}$
+as we let $N \to \infty$ for the 4\textsuperscript{th} result in
+\cref{thm:properties_of_the_dirichlet_kernel}.
+
+\begin{crly}[Unboundedness of Convolution Operators for the Dirichlet Kernel]\label{crly:unboundedness_of_convolution_operators_for_the_dirichlet_kernel}
+  For each $N \geq 1$, let $D_N$ denote the Dirichlet kernel of order $N$.
+  \begin{enumerate}
+    \item If $C_{D_N} \in \mathcal{B}([\mathcal{C}(\mathbb{T}, \mathbb{C})],
+      \norm{\cdot}_{\infty})$ is the convolution operator
+      corresponding to $D_N$, for $N \geq 1$, then
+      \begin{equation*}
+        \lim_{N \to \infty} \norm{C_{D_N}} = \infty.
+      \end{equation*}
+    \item If $C_{D_N} \in \mathcal{B}(L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1)$
+      is the convolution operator corresponding to $D_N$, for $N \geq 1$, then
+      \begin{equation*}
+        \lim_{N \to \infty} \norm{C_{D_N}} = \infty.
+      \end{equation*}
+  \end{enumerate}
+\end{crly}
+
+To exploit the connection between the Dirichlet kernel and convolution,
+we require a few results from real analysis.
+
+\begin{defn}[Nowhere Dense]\index{Nowhere Dense}\label{defn:nowhere_dense}
+  Let $(X, d)$ be a metric space and $H \subseteq X$.
+  We say that $H$ is \hlnoteb{nowhere dense} (or \hldefn{meager}, or \hldefn{thin})
+  if $G \coloneqq X \setminus \overline{H}$ is dense in $X$.
+  In other words, the interior of $\overline{H}$ is empty.
+\end{defn}
+
+\begin{eg}
+  We usually think of nowhere dense subsets of metric spaces as
+  being ``small'', as the alternate terminologies ``meager'' and ``thin''
+  suggest.
+  \begin{enumerate}
+    \item The set $H = \mathbb{Z}$ is nowhere dense in $\mathbb{R}$;
+      which is easily verifiable.
+    \item The Cantor set $C$ is nowhere dense in $X = [0, 1]$,
+      equipped with the standard metric inherited from $\mathbb{R}$.
+    \item The set $H = \mathbb{Q}$ of rational numbers is \hlnotec{not} 
+      nowhere dense in $\mathbb{R}$, since $X \setminus \overline{H} =
+      \mathbb{R} \setminus \mathbb{R} = \emptyset$.
+  \end{enumerate}
+\end{eg}
+
+\begin{defn}[First and Second Category]\index{First Category}\index{Second Category}\label{defn:first_and_second_category}
+  We say that a subset $H$ of a metric space $(X, d)$ is
+  of the \hlnoteb{first category} in $(X, d)$ if there exists
+  a sequence $(F_n)_n$ of closed, nowhere dense sets in $X$
+  such that
+  \begin{equation*}
+    H \subseteq \bigcup_{n=1}^{\infty} F_n.
+  \end{equation*}
+  Otherwise, we say that $H$ is of \hlnoteb{second category}.
+\end{defn}
+
+The reader should be familiar with the following result.
+
+\begin{defn}[Baire Category Theorem]\index{Baire Category Theorem}\label{defn:baire_category_theorem}
+  A complete metric space $(X, d)$ is of the second category.
+  That is, $X$ is \hlbnotee{not a countable union of closed, nowhere dense sets
+  in $X$}. 
+\end{defn}
+
+% section the_dirichlet_kernel (end)
+
+% chapter lecture_20_jul_18th_2019 (end)
+
 
 
 
