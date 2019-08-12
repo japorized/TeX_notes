@@ -1,4 +1,4 @@
-% !TEX TS-program = pdflatex
+% !TEX TS-program = lualatex
 \documentclass[notoc,notitlepage]{tufte-book}
 % \nonstopmode % uncomment to enable nonstopmode
 
@@ -10,13 +10,20 @@
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
 \institution{University of Waterloo}
 
+\usepackage{fontspec}
 \input{latex-classnotes-preamble.tex}
+
+\setmainfont[Ligatures=TeX]{P052}
 
 \theoremprework{\textcolor{cyan}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{cyan}\normalfont\bfseries}
 \theorempostwork{\textcolor{cyan}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem*{culture}{\faWineGlass Culture}
+
+\theoremheaderfont{\color{foreground}\normalfont\bfseries}
+\newtheorem{assgprob}{Question}[section]
+\renewcommand{\theassgprob}{\arabic{assgprob}}
 
 \newcommand{\Bor}{\mathfrak{Bor}}
 \DeclareMathOperator{\SIMP}{SIMP}
@@ -25,6 +32,8 @@
 \DeclareMathOperator{\dist}{dist}
 \DeclareMathOperator{\Trig}{Trig}
 \DeclareMathOperator{\dm}{dm}
+\usepackage{scalerel}
+\DeclareMathOperator*{\bigcdot}{\scalerel*{\cdot}{\bigodot}}
 
 % disjoint union
 \makeatletter
@@ -70,6 +79,16 @@ which is as the name of the course.
 In this set of notes, we use a special topic environment called
 \hlnotea{culture} to discuss interesting contents related to the course, but
 will not be throughly studied and not tested on exams.
+
+For some unknown reason, mysterious glyphs are replacing common math
+characters in an inconsistent way, and I have not the faintest idea
+how this is happening, or why this is happening.
+The dark version of the notes does not seem to have this problem.
+Please use that version of the notes for a cleaner reference.
+
+If you have any idea what is causing the weird glitch,
+or a solution, please shoot me an issue at
+\url{https://gitlab.com/japorized/TeX_notes/issues}.
 
 % chapter preface (end)
 
@@ -8812,7 +8831,7 @@ What we shall do is to reformulate $C_g$ as a vector-valued Riemann integral
 on $L_1(\mathbb{T}, \mathbb{C})$. We shall be able to extend this notion
 of convolution beyond the Banach space $L_1(\mathbb{T}, \mathbb{C})$.
 To that end, we first need to understand the notion of a
-\hlnotea{homogenous Banach space}.
+\hlnotea{homogeneous Banach space}.
 
 % section convolution (end)
 
@@ -10168,12 +10187,12 @@ Let us pull out $D_5$ and $F_5$ for comparison.
 
 \begin{figure*}[ht]
   \centering
-  \begin{minipage}{0.5\linewidth}
+  \begin{minipage}[b]{0.5\linewidth}
     \centering
     \includesvg[width=0.8\linewidth]{images/graphofD5.svg} \\
     Graph of $D_5$
   \end{minipage}%
-  \begin{minipage}{.5\linewidth}
+  \begin{minipage}[b]{.5\linewidth}
     \centering
     \includesvg[width=0.8\linewidth]{images/graphofF5.svg} \\
     Graph of $F_5$
@@ -10198,6 +10217,338 @@ of which $D_N$ does not.
 % section the_fejer_kernel (end)
 
 % chapter lecture_21_jul_23rd_2019 (end)
+
+\chapter{Lecture 22 Jul 25th 2019}%
+\label{chp:lecture_22_jul_25th_2019}
+% chapter lecture_22_jul_25th_2019
+
+\section{The Féjer Kernel (Continued)}%
+\label{sec:the_fejer_kernel_continued}
+% section the_fejer_kernel_continued
+
+\begin{defn}[Summability Kernel]\index{Summability Kernel}\label{defn:summability_kernel}
+  A \hlnoteb{summability kernel} is a sequence $(k_n)_{n=1}^{\infty}$
+  of $2\pi$-periodic, continuous,
+  \sidenote{A summability kernel can be more general than a continuous sequence,
+  but for our purposes, this is sufficient.}
+  complex-valued functions $\mathbb{R}$ satisfying:
+  \begin{enumerate}
+    \item $\frac{1}{2\pi} \int_{-\pi}^{\pi} k_n = 1$  for all $n \geq 1$;
+    \item $\sup_{n \geq 1} \nu_1(k_n) = \sup_{n \geq 1} \frac{1}{2\pi}
+      \int_{-\pi}^{\pi} \abs{k_n} < \infty$; and
+    \item for all $0 < \delta \leq \pi$,
+      \begin{equation*}
+        \lim_{n \to \infty} \left(
+          \int_{-\pi}^{-\delta} \abs{k_n}
+          + \int_{\delta}^{\pi} \abs{k_n}
+        \right) = 0.
+      \end{equation*}
+      If we further have $k_n \geq 0$ for all $n \geq 1$,
+      we say that $(k_n)_{n=1}^{\infty}$ is a \hldefn{positive summability
+      kernel}. 
+  \end{enumerate}
+\end{defn}
+
+\begin{thm}[Féjer kernel as a Positive Summability Kernel]\label{thm:fejer_kernel_as_a_positive_summability_kernel}
+  The Féjer kernel $(F_N)_{N=1}^{\infty}$ is a
+  positive summability kernel.
+\end{thm}
+
+\begin{proof}
+  \cref{thm:properties_of_the_fejer_kernel} proves exactly this.
+\end{proof}
+
+\begin{eg}[Other examples of positive summability kernels]
+  \begin{enumerate}
+    \item For each $n \in \mathbb{N} \setminus \{ 0 \}$,
+      consider the piecewise linear function
+      \begin{align*}
+        k_n^{\bigcdot} : [-\pi, \pi) &\to \mathbb{R} \\
+        \theta &\mapsto \begin{cases}
+          0              & \theta \in \left[-\pi, -\frac{1}{n}\right] \cup \left[ \frac{1}{n}, \pi \right) \\
+          n + n^2 \theta & \theta \in \left( -\frac{1}{n}, 0 \right] \\
+          n - n^2 \theta & \theta \in \left( 0, \frac{1}{n} \right)
+        \end{cases}.
+      \end{align*}
+      \begin{marginfigure}
+        \centering
+        \begin{tikzpicture}
+          \draw[->] (-2.2, 0) -- (2.2, 0);
+          \draw[->] (0, -0.5) -- (0, 2.2);
+          \draw[thick,color=cyan] (-2, 0) -- (-0.2, 0) --
+            (0, 2) -- (0.2, 0) -- (2, 0);
+          \node[label={270:{$-\pi$}}] at (-2, 0) {|};
+          \node[label={270:{$\frac{-1}{5}$}}] at (-0.2, 0) {|};
+          \node[label={270:{$\frac{1}{5}$}}] at (0.2, 0) {|};
+          \node[label={270:{$\pi$}}] at (2, 0) {|};
+          \node[label={0:{$5$}}] at (0, 2) {--};
+        \end{tikzpicture}
+        \caption{Graph of $k_5^{\bigcdot}$}\label{fig:graph_of_k_5_bigcdot_}
+      \end{marginfigure}
+      For $n \in \mathbb{N} \setminus \{ 0 \}$, let $k_n$ be the
+      $2\pi$-periodic function on $\mathbb{R}$ whose restriction
+      to the interval $[-\pi, \pi)$ coincides with $k_n^{\bigcdot}$.
+      Then $(k_n)_{n=1}^{\infty}$ is a positive summability kernel.
+    \item For each $n \in \mathbb{N} \setminus \{ 0 \}$,
+      consider the piecewise linear function
+      \begin{align*}
+        r_n^{\bigcdot} : [-\pi, \pi) &\to \mathbb{R} \\
+        \theta &\mapsto \begin{cases}
+          0              & \theta \in [-\pi, 0] \cup \left[ \frac{2}{n}, \pi \right) \\
+          n^2 \theta & \theta \in \left( 0, \frac{1}{n} \right] \\
+          n - n^2 \left( \theta - \frac{1}{n} \right) & \theta \in \left( \frac{1}{n}, \frac{2}{n} \right)
+        \end{cases}.
+      \end{align*}
+      \begin{marginfigure}
+        \centering
+        \begin{tikzpicture}
+          \draw[->] (-2.2, 0) -- (2.2, 0);
+          \draw[->] (0, -0.5) -- (0, 2.2);
+          \draw[thick,color=cyan] (-2, 0) -- (-0, 0) --
+            (0.2, 2) -- (0.4, 0) -- (2, 0);
+          \node[label={270:{$-\pi$}}] at (-2, 0) {|};
+          \node[label={270:{$\frac{1}{5}$}}] at (0.2, 0) {|};
+          \node[label={270:{$\frac{2}{5}$}}] at (0.4, 0) {|};
+          \node[label={270:{$\pi$}}] at (2, 0) {|};
+          \node[label={180:{$5$}}] at (0, 2) {--};
+        \end{tikzpicture}
+        \caption{Graph of $r_5^{\bigcdot}$}\label{fig:graph_of_r_5_bigcdot_}
+      \end{marginfigure}
+      For $n \in \mathbb{N} \setminus \{ 0 \}$, let $r_n$ be the
+      $2\pi$-periodic function on $\mathbb{R}$ whose restriction
+      to the interval $[-\pi, \pi)$ coincides with $k_n^{\bigcdot}$.
+      Then $(r_n)_{n=1}^{\infty}$ is a positive summability kernel.
+  \end{enumerate}
+\end{eg}
+
+\begin{thm}[Summability kernels convolved with functions in Homogeneous Banach Spaces]\label{thm:summability_kernels_convolved_with_functions_in_homogeneous_banach_spaces}
+  Let $(\mathfrak{B}, \norm{\cdot}_{\mathfrak{B}})$ be
+  a homogeneous Banach space over $\mathbb{T}$ and
+  $(k_n)_{n=1}^{\infty}$ be a summability kernel.
+  If $[f] \in \mathfrak{B}$, then
+  \begin{equation*}
+    \lim_{n \to \infty} \norm{ k_n * [f] - [f] }_{\mathfrak{B}} = 0,
+  \end{equation*}
+  and so $[f] = \lim_{n \to \infty} k_n * [f]$ in $\mathfrak{B}$.
+\end{thm}
+
+\begin{proof}
+  \hlwarn{To be added} 
+\end{proof}
+
+\begin{crly}[Reconcilation of the Cesàro sums to the Original Function]\label{crly:reconcilation_of_the_cesaro_sums_to_the_original_function}
+  \begin{enumerate}
+    \item For each $f \in (\mathcal{C}(\mathbb{T}, \mathbb{C}), \norm{\cdot}_{\sup})$,
+      \begin{equation*}
+        \lim_{N \to \infty} \sigma_N^\circ(f) = f.
+      \end{equation*}
+    \item Let $1 \leq p < \infty$.
+      For each $[g] \in (L_p(\mathbb{T}, \mathbb{C}), \norm{\cdot}_p)$,
+      \begin{equation*}
+        \lim_{N \to \infty} \sigma_N[g] = [g].
+      \end{equation*}
+  \end{enumerate}
+\end{crly}
+
+\begin{proof}
+  \hlwarn{To be added}
+\end{proof}
+
+We can now show that the Fourier coefficients of functions of
+$\mathcal{L}_p(\mathbb{T}, \mathbb{C})$ completely determine themselves (a.e.).
+
+\begin{crly}[Reconcilation of the Fourier series to its Original Function under the Féjer Kernel]\label{crly:reconcilation_of_the_fourier_series_to_its_original_function_under_the_fejer_kernel}
+  Let $1 \leq p < \infty$.  If $[f], [g] \in L_p(\mathbb{T}, \mathbb{C})$ and 
+  $\alpha_n^{[f]} = \alpha_n^{[g]}$ for all $n \in \mathbb{Z}$, then $[f] = [g]$.
+\end{crly}
+
+\begin{proof}
+  Observe that $\alpha_n^{[f]} = \alpha_n^{[g]}$ for all $n \in \mathbb{Z}$,
+  implies that $\sigma_N[f] = \sigma_N[g]$ for all $N \geq 1$.
+  It follows from
+  \cref{crly:reconcilation_of_the_cesaro_sums_to_the_original_function} that
+  \begin{equation*}
+    [f] = \lim_{N \to \infty} \sigma_N[g] = \lim_{N \to \infty} \sigma_N[g] = [g].
+  \end{equation*}
+\end{proof}
+
+% section the_fejer_kernel_continued (end)
+
+\section{Which sequences are sequences of Fourier Coefficients?}%
+\label{sec:which_sequences_are_sequences_of_fourier_coefficients_}
+% section which_sequences_are_sequences_of_fourier_coefficients_
+
+Given $[f] \in L_1(\mathbb{T}, \mathbb{C})$, we defined the Fourier series of
+$[f]$ as
+\begin{equation*}
+  \sum_{n \in \mathbb{Z}} \alpha_n^{[f]} [\xi_n].
+\end{equation*}
+The \hyperref[thm:the_riemann_lebesgue_lemma]{Riemann-Lebesgue Lemma} stated
+that
+\begin{equation*}
+  (\alpha_n^{[f]})_{n \in \mathbb{Z}} \in c_0(\mathbb{Z}, \mathbb{C}).
+\end{equation*}
+It is then natural to ask if every sequence $(\beta_n)_{n \in \mathbb{Z}}
+\in c_0(\mathbb{Z}, \mathbb{C})$ is the sequence of coefficients
+of some $[f] \in L_1(\mathbb{T}, \mathbb{C})$.
+What we have seen is that on Hilbert spaces,
+every $(\gamma_n)_{n \in \mathbb{Z}} \in \ell_2(\mathbb{Z}, \mathbb{C})$
+is the set of Fourier coefficients of some $[f] \in L_2(\mathbb{T}, \mathbb{C})$,
+and namely
+\begin{equation*}
+  [f] = \sum_{n \in \mathbb{Z}} \gamma_n[\xi_n].
+\end{equation*}
+
+We shall use \hlnotea{Operator Theory} to answer this.
+Recall that by the end of \cref{sec:introduction_to_fourier_analysis_continued},
+we introduced the map
+\begin{align*}
+    \Lambda : (L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1)
+          &\to (c_0(\mathbb{Z}, \mathbb{C}), \norm{\cdot}_\infty) \\
+      [f] &\mapsto \left( \alpha_n^{[f]} \right)_{n \in \mathbb{Z}}.
+\end{align*}
+Since the Lebesgue integration is linear, so is $\Lambda$.
+Also, as shown before,
+\begin{equation*}
+  \abs{\alpha_n^{[f]}} \leq \norm{[f]}_1, \quad \forall n \in \mathbb{Z},
+\end{equation*}
+and so
+\begin{equation*}
+  \norm{\Lambda[f]}_{\infty}
+  = \sup \{ \abs{\alpha_n^{[f]}} : n \in \mathbb{Z} \} \leq \norm{[f]}_1.
+\end{equation*}
+Thus $\Lambda$ is bounded, with $\norm{\Lambda} \leq 1$.
+
+By
+\cref{crly:reconcilation_of_the_fourier_series_to_its_original_function_under_the_fejer_kernel},
+if $[f], [g] \in L_1(\mathbb{T}, \mathbb{C})$ and $\Lambda[f] = \Lambda[g]$,
+then $[f] = [g]$, and thus $\Lambda$ is injective.
+
+Thus, our question of whether or not every sequence in $c_0(\mathbb{Z}, \mathbb{C})$
+is a sequence of Fourier coefficients of some element of $L_1(\mathbb{T}, \mathbb{C})$
+is therefore the question of whether or not $\Lambda$ is surjective.
+
+We require the \hlnotea{Inverse Mapping Theorem} from \hlnotea{Functional
+Analysis} to answer this question. To that end,
+we first introduce some notations.
+
+Given a Banach space $(\mathfrak{Z}, \norm{\cdot}_{\mathfrak{Z}})$
+and a real number $r > 0$, we denote the \hlnoteb{closed ball of radius $r$
+centered at the origin} by
+\begin{equation*}
+  \mathfrak{Z}_r = \{ z \in \mathfrak{Z} : \norm{z}_{\mathfrak{Z}} \leq r \}.
+\end{equation*}
+For $z_0 \in \mathfrak{Z}$ and $\epsilon > 0$, we denote by
+$B^{\mathfrak{Z}}(z_0, \epsilon) = \{ z \in \mathfrak{Z} : \norm{z - z_0} < \epsilon \}$
+the open ball of radius $\epsilon$ in $\mathfrak{Z}$,
+centered at $z_0$.
+
+\begin{lemma}[Finding an Open Container from a Closed Container]\label{lemma:finding_an_open_container_from_a_closed_container}
+  Let $\mathfrak{X}$ and $\mathfrak{Y}$ be Banach spaces
+  and suppose that $T \in \mathcal{B}(\mathfrak{X}, \mathfrak{Y})$.
+  If $\mathfrak{Y}_1 \subseteq \overline{T \mathfrak{X}_m}$ for some $m \geq 1$,
+  then $\mathfrak{Y}_1 \subseteq T \mathfrak{X}_{2m}$.
+\end{lemma}
+
+\begin{proof}
+  \hlwarn{To be added}
+\end{proof}
+
+\begin{thm}[The Open Mapping Theorem]\index{The Open Mapping Theorem}\label{thm:the_open_mapping_theorem}
+  Let $\mathfrak{X}$ and $\mathfrak{Y}$ be Banach spaces and
+  suppose that $T \in \mathcal{B}(\mathfrak{X}, \mathfrak{Y})$
+  is a surjection.
+  Then $T$ is an open map; i.e. if $G \subseteq \mathfrak{X}$ is open,
+  then $TG \subseteq \mathfrak{Y}$ is open.
+\end{thm}
+
+\begin{proof}
+  \hlwarn{To be added}
+\end{proof}
+
+\begin{crly}[The Inverse Mapping Theorem]\index{The Inverse Mapping Theorem}\label{crly:the_inverse_mapping_theorem}
+  Let $\mathfrak{X}$ and $\mathfrak{Y}$ be Banach spaces and
+  suppose that $T \in \mathcal{B}(\mathfrak{X}, \mathfrak{Y})$ is a bijection.
+  Then $T^{-1}$ is continuous, and so $T$ is a homeomorphism.
+\end{crly}
+
+\begin{proof}
+  Since $T$ is linear, by basic linear algebra, it has an inverse,
+  which must also be linear.
+
+  If $G \subseteq \mathfrak{X}$ is open, then $(T^{-1})^{-1}(G) = TG$ is open
+  in $\mathfrak{Y}$ by the Open Mapping Theorem.
+  Thus $T^{-1}$ is continuous, hence a homeomorphism.
+\end{proof}
+
+\begin{thm}[$L_1(\mathbb{T}, \mathbb{C})$ and $c_0(\mathbb{Z}, \mathbb{C})$ are Not Isomorphic]\label{thm:_l_1_mathbb_t_mathbb_c_and_c_0_mathbb_z_mathbb_c_are_not_isomorphic}
+  The map
+  \begin{align*}
+    \Lambda : (L_1(\mathbb{T}, \mathbb{C}), \norm{\cdot}_1)
+          &\to (c_0(\mathbb{Z}, \mathbb{C}), \norm{\cdot}_\infty) \\
+      [f] &\mapsto \left( \alpha_n^{[f]} \right)_{n \in \mathbb{Z}}
+  \end{align*}
+  is not surjective.
+\end{thm}
+
+\begin{proof}
+  If it were surjective, then by the Inverse Mapping Theorem,
+  \begin{align*}
+    \Lambda^{-1} : c_0(\mathbb{Z}, \mathbb{C}) &\to L_1(\mathbb{T}, \mathbb{C}) \\
+          \left( \alpha_n^{[f]} \right)_{n \in \mathbb{Z}} &\mapsto [f]
+  \end{align*}
+  must be continuous.
+
+  Let $D_N$ be the \hyperref[defn:dirichlet_kernel_of_order_n_]{Dirichlet kernel
+  of order $N$}, and let $d_N \coloneqq \Lambda[D_N]$, for $N \geq 1$.
+  Then $d_N = (\ldots, 0, 0, \ldots, 0, 1, 1, \ldots, 1, 1, 0, 0, \ldots)$,
+  where the $1$'s appear for the indices $-N \leq k \leq N$.
+  It is clear that $\norm{d_N}_{\infty} = 1$,
+  since each $d_N$ is \hlnotea{finitely supported},
+  \sidenote{This means that there are only finitely many non-zero values in its
+  indices, which is the case.}
+  but by part 4 of \cref{thm:properties_of_the_dirichlet_kernel},
+  \begin{equation*}
+    \lim_{N \to \infty} \norm{\Lambda^{-1}(d_N)}_1
+    = \lim_{N \to \infty} \norm{[D_N]}_1 = \infty.
+  \end{equation*}
+  Thus $\Lambda^{-1}$ is not continuous, a contradiction.
+  Hence $\Lambda$ must not be surjective.
+  In other words, there exists a sequence $(\beta_n)_{n \in \mathbb{Z}}
+  \in c_0(\mathbb{Z}, \mathbb{C})$ that are not Fourier coefficients
+  of any element of $L_1(\mathbb{T}, \mathbb{C})$.
+\end{proof}
+
+\begin{remark}
+  As remarked, the fact that $[f] \in L_2(\mathbb{T}, \mathbb{C})$ iff
+  $\left( \alpha_n^{[f]} \right)_{n \in \mathbb{Z}} \in \ell_2(\mathbb{Z}, \mathbb{C})$
+  makes it tempting to conjecture that perhaps the range of the map
+  $\Lambda$ from
+  \cref{thm:_l_1_mathbb_t_mathbb_c_and_c_0_mathbb_z_mathbb_c_are_not_isomorphic}
+  should be $\ell_1(\mathbb{Z}, \mathbb{C})$, but that is not true at all,
+  and it is not even surjective on
+  $c_0(\mathbb{Z}, \mathbb{C}) \subseteq \ell_1(\mathbb{Z}, \mathbb{C})$.
+
+  For a clear example, the sequence
+  \begin{equation*}
+    \beta_n = \begin{cases}
+      \frac{1}{n} & n \geq 1 \\
+      0           & n \leq 0
+    \end{cases}
+  \end{equation*}
+  is clearly in $\ell_2(\mathbb{Z}, \mathbb{C})$,
+  and so $[f] \coloneqq \sum_{n \in \mathbb{Z}} \beta_n [\xi_n]$
+  converges in $L_2(\mathbb{T}, \mathbb{C}) \subseteq L_1(\mathbb{T}, \mathbb{C})$.
+  However,
+  \begin{equation*}
+    \Lambda[f] = (\beta_n)_{n \in \mathbb{Z}}
+  \end{equation*}
+  is definitely not in $\ell_1(\mathbb{Z}, \mathbb{C})$.
+\end{remark}
+
+% section which_sequences_are_sequences_of_fourier_coefficients_ (end)
+
+% chapter lecture_22_jul_25th_2019 (end)
 
 
 
@@ -10274,6 +10625,504 @@ our identification of $(\mathbb{T}, \cdot)$ with $([-\pi, \pi), +)$
 \end{quotebox}
 
 % chapter interest_in_2_pi_periodic_functions (end)
+
+\chapter{Assignment Problems}%
+\label{chp:assignment_problems}
+% chapter assignment_problems
+
+\section{Assignment 1 (A1)}%
+\label{sec:assignment_1}
+% section assignment_1
+
+\begin{assgprob}[Separated Sets]
+  Let $A$ and $B$ be bounded subsets of $\mathbb{R}$
+  and suppose that
+  \begin{equation*}
+    \delta \coloneqq \dist(A, B)
+    \coloneqq \inf \{ \abs{a - b} : a \in A,\, b \in B \} > 0.
+  \end{equation*}
+  Prove that $m^*(A \cup B) = m^*(A) + m^*(B)$.
+\end{assgprob}
+
+\begin{assgprob}[A continuity result for Outer Measures]
+  Let $E \subseteq \mathbb{R}$. Prove that
+  \begin{equation*}
+    \lim_{N \to \infty} m^*(E \cap [-N, N]) = m^*(E).
+  \end{equation*}
+\end{assgprob}
+
+\begin{assgprob}[Finite Covers of {$[0, 1]$}]
+  Let $\Gamma = \mathbb{Q} \cap [0, 1]$.
+  Prove that if $\{ I_n \}_{n=1}^{N}$ is a finite collection
+  of open intervals which covers $\Gamma$
+  (i.e. $\Gamma \subseteq \bigcup_{n=1}^{N} I_n$),
+  then $\sum_{n=1}^{N} \ell(I_n) \geq 1$.
+\end{assgprob}
+
+\begin{assgprob}[Measures on Countable Sets]
+  Let $X = \{ x_n \}_{n=1}^{\infty}$ be a countable set,
+  and recall that $\mathcal{P}(X)$ is the \textbf{power set} of $X$,
+  i.e. $\mathcal{P}(X) = \{ Y : Y \subseteq X \}$.
+  A \textbf{measure} on $X$ is a function
+  \begin{equation*}
+    \mu : \mathcal{P}(X) \to [0, \infty]
+  \end{equation*}
+  such that $\mu(\emptyset) = 0$
+  and for every \textit{disjoint} sequence $E_n \subseteq X$, $n \geq 1$,
+  we have
+  \begin{equation*}
+    \mu \left( \bigcup_{n=1}^{\infty} E_n \right)
+    = \sum_{n=1}^{\infty} \mu(E_n).
+  \end{equation*}
+
+  Let $\mathcal{M}(X) = \{ \mu : \mu \text{ is a measure on } X \}$.
+  Find a description of all possible measures on $X$;
+  i.e., show that there exist sets $A$ and $B$
+  and a bijective map $\theta : \mathcal{M}(X) \to S \coloneqq B^A$.
+\end{assgprob}
+
+\begin{assgprob}[Open Subsets of $\mathbb{R}$]
+  Prove that if $G \subseteq \mathbb{R}$ is open,
+  then $G$ is a countable, \textit{disjoint} union of open intervals. \linebreak
+  \textbf{Hint}: Define a relation on $G$ via $x \sim y$
+  if $[\min \{ x, y \}, \max \{ x , y \}] \subseteq G$.
+\end{assgprob}
+
+\begin{assgprob}[Towards Borel Sets]
+  Let $E \subseteq \mathbb{R}$.
+  We say that $E$ is a $G_{\delta}$-set if it is
+  a countable intersection of open subsets of $\mathbb{R}$.
+  We say that $E$ is an $F_\sigma$-set if it is
+  a countable union of closed subsets of $\mathbb{R}$.
+  Recall that for $E \subseteq \mathbb{R}$,
+  $E^C \coloneqq \{ x \in \mathbb{R} : x \notin E \}$ is the complement of $E$.
+  \begin{enumerate}
+    \item Prove that every open set is an $F_\sigma$-set,
+      and that every closed set is a $G_\delta$-set.
+    \item Prove that the set of rational numbers is an $F_\sigma$-set,
+      but not a $G_\delta$-set.
+    \item Prove that the set of irrational numbers is a $G_\delta$-set,
+      but not an $F_\sigma$-set.
+    \item Let $E_1 = (-\infty, 0] \cap \mathbb{Q}^C$
+      and $E_2 = [0, \infty) \cap \mathbb{Q}$.
+      Prove that $E \coloneqq E_1 \cup E_2$ is
+      neither a $G_\delta$-set nor an $F_\sigma$-set.
+  \end{enumerate}
+\end{assgprob}
+
+% section assignment_1 (end)
+\newpage
+
+\section{Assignment 2 (A2)}%
+\label{sec:assignment_2}
+% section assignment_2
+
+\begin{assgprob}[$\sigma$-additivity and continuity of the Lebesgue Measure]
+  \begin{enumerate}
+    \item Let $\mathcal{L}(\mathbb{R})$ denote
+      the set of Lebesgue measurable subsets of $\mathbb{R}$, and
+      let $m : \mathcal{L}(\mathbb{R}) \to [0, \infty]$ denote
+      the Lebesgue measure.
+      Prove that $m$ is $\sigma$-additive; i.e. if
+      $E_n \in \mathcal{L}(\mathbb{R})$ for all $n \geq 1$
+      and $E_i \cap E_j = \emptyset$ if $1 \leq oi \neq j < \infty$, then
+      \begin{equation*}
+        m \left( \bigcupdot_{n=1}^{\infty} E_n \right)
+        = \sum_{n=1}^{\infty} m(E_n).
+      \end{equation*}
+
+    \item Suppose that $\{ E_n \}_{n=1}{\infty}$ is an
+      \textit{increasing} sequence of Lebesgue measurable sets; i.e.
+      \begin{equation*}
+        E_1 \subseteq E_2 \subseteq E_3 \subseteq \hdots.
+      \end{equation*}
+      Let $E = \bigcup_{n=1}^{\infty} E_n$, so that $E \in \mathcal{L}(\mathbb{R})$,
+      as the latter is a $\sigma$-algebra.
+      Prove that
+      \begin{equation*}
+        mE = \lim_{n \to \infty} mE_n.
+      \end{equation*}
+  \end{enumerate}
+\end{assgprob}
+
+\begin{assgprob}[Continuity of the Lebesgue Measure II]
+  Let $\{ E_n \}_{n=1}^{\infty}$ be a \textit{decreasing} sequence
+  of Lebesgue measurable sets; i.e.
+  \begin{equation*}
+    E_1 \supseteq E_2 \supseteq E_3 \supseteq \hdots.
+  \end{equation*}
+  Let $E = \bigcap_{n=1}^{\infty} E_n$.
+  \begin{enumerate}
+    \item \label{item:a2q2a}
+      Suppose that $mE_1 < \infty$. Prove that
+      \begin{equation*}
+        mE = \lim_{n \to \infty} mE_n.
+      \end{equation*}
+    \item Does the result of part \ref{item:a2q2a} still hold if $mE_1 = \infty$?
+      Prove that it does, or provide a counterexample to show
+      that it need not be true.
+  \end{enumerate}
+\end{assgprob}
+
+\begin{assgprob}[Lebesgue Inner Measure]
+  Let $E \subseteq \mathbb{R}$ be a set. Prove that the following are equivalent:
+  \begin{enumerate}
+    \item $E$ is measurable; i.e. $E \in \mathcal{L}(\mathbb{R})$;
+    \item For all $\epsilon > 0$, there exists a closed set $F \subseteq E$
+      so that $m^*(E \setminus F) < \epsilon$;
+    \item There exists an $F_\sigma$-set $H \subseteq E$
+      so that $m^*(E \setminus H) = 0$.
+  \end{enumerate}
+  Use this to show that if $E \subseteq \mathbb{R}$ is measurable, then
+  \begin{equation*}
+    mE = \sup \{ mK : K \subseteq E,\, K \text{ is compact } \}.
+  \end{equation*}
+  We say that the Lebesgue measure is \textbf{regular}. 
+\end{assgprob}
+
+\begin{assgprob}[$\sigma$-algebra of Sets]
+  \begin{enumerate}
+    \item Let $\mathcal{A}$ be a $\sigma$-algebra of subsets of $\mathbb{R}$,
+      and let $f : \mathbb{R} \to \mathbb{R}$ be a function.
+      Let $\mathcal{B} = \{ H \subseteq \mathbb{R} : f^{-1}(H) \in \mathcal{A} \}$.
+      Show that $\mathcal{B}$ is a $\sigma$-algebra.
+    \item Recall that by definition, $f : \mathbb{R} \to \mathbb{R}$
+      is measurable if $f^{-1}(G) \subseteq \mathcal{L}(\mathbb{R})$
+      for all open sets $G \subseteq \mathbb{R}$.
+      Use this definition to prove that $f$ is measurable
+      if and only if $f^{-1}(B) \subseteq \mathcal{L}(\mathbb{R})$
+      for all Borel sets $B \in \Bor(\mathbb{R})$.
+    \item We say that $f : \mathbb{R} \to \mathbb{R}$ is
+      \textbf{Borel measurable} if $f^{-1}((a, \infty)) \in \Bor(\mathbb{R})$
+      for all $a \in \mathbb{R}$.
+      Prove that $f$ is Borel measurable if and only if
+      $f^{-1}(B) \subseteq \Bor(\mathbb{R})$
+      for all Bore sets $B \in \Bor(\mathbb{R})$.
+  \end{enumerate}
+\end{assgprob}
+
+\begin{assgprob}[The Cantor-Lebesgue Function]
+  Recall that we define the \textbf{Cantor (middle third) set} $C$
+  as $C = \bigcap_{n \geq 1} C_n$, where $C_0 = [0, 1]$,
+  and for each $n \geq 1$,
+  \begin{equation*}
+    C_n = C_{n-1} \setminus \{
+      I_{n,1} \cup I_{n, 2} \cup \hdots \cup I_{n, 2^{n-1}}
+    \},
+  \end{equation*}
+  where $I_{n, j}$ is the open ``middle third''
+  of the $j$\textsuperscript{th} (closed) interval of $C_{n-1}$.
+  If we set
+  \begin{equation*}
+    G = \bigcup_{n \geq 1} \bigcup_{1 \leq j \leq 2^{n-1}} I_{n, j} ,
+  \end{equation*}
+  then the Cantor set is equal to $[0, 1] \setminus G$.
+
+  We define the \textbf{Cantor-Lebesgue function} $\Gamma_C$ on $[0, 1]$
+  as follows.
+  For $x \in I_{n, j}$, we set $\Gamma_C(x) = \frac{2j  - 1}{2^n}$,
+  $1 \leq j \leq 2^{n-1}$.
+  We then extend $\Gamma_C$ to all of $[0, 1]$
+  by setting $\Gamma_C(0) = 0$, and for $x \in (0, 1]$, we set
+  \begin{equation*}
+    \Gamma_C(x) = \sup \{ \Gamma_C(t) : t \in [0, x) \cap G \}.
+  \end{equation*}
+
+  \begin{enumerate}
+    \item Prove that the Cantor-Lebesgue function $\Gamma_C$
+      is an increasing, continuous function that maps
+      $[0, 1]$ onto $[0, 1]$.
+    \item Prove that if $\gamma(x) = \Gamma_C(x) + x$ for all $x \in [0, 1]$,
+      then $\phi$ is a continuous function that maps $[0, 1]$
+      onto $[0, 2]$.
+    \item Prove that $\phi(X) \coloneqq \{ \phi(x) : x \in C \} \subseteq [0, 2]$
+      is a measurable set of positive measure.
+  \end{enumerate}
+\end{assgprob}
+
+\begin{defn}[Limit Superior and Limit Inferior]\index{Limit Superior}\index{Limit Inferior}\label{defn:limit_superior_and_limit_inferior}
+  Suppose that $(x_n)_n \in \mathbb{R}^{\mathbb{N}}$ is a bounded
+  \textit{sequence of real numbers}.
+  We define the \hlnoteb{limit superior} (or \hlnoteb{limit supremum})
+  of the sequence $(x_n)_n$ to be
+  \begin{equation*}
+    \limsup_{n \geq 1} x_n \coloneqq \lim_{n \to \infty} \sup_{k \geq n} x_k,
+  \end{equation*}
+  and the \hlnoteb{limit inferior} (or \hlnoteb{limit infimum}) to be
+  \begin{equation*}
+    \liminf_{n \geq 1} x_n \coloneqq \lim_{n \to \infty} \inf_{k \geq n} x_k.
+  \end{equation*}
+
+  Setting $z_n : \sup_{k \geq n} x_k$, for $n \geq 1$,
+  we find that $z_n \geq z_{n + 1}$ for all $n \geq 1$,
+  and, from this, one should be able to convince themselves 
+  that $\limsup_{n \geq 1} x_n$ always exists,
+  and similarly that $\liminf_{n \geq 1} x_n$ always exists.
+  Moreover, if $\mu \leq x_n \leq \nu$ for all $n \geq 1$
+  (since we assumed that $(x_n)_n$ is bounded), then
+  \begin{equation*}
+    \mu \leq \liminf_{n \geq 1} x_n \leq \limsup_{n \geq 1} x_n \leq \nu.
+  \end{equation*}
+
+  If $(x_n)_n$ is not bounded above,
+  we define $\limsup_{n \geq 1} x_n = \infty$,
+  while if $(x_n)_n$ is not bounded below,
+  we define $\liminf_{n \geq 1} x_n = -\infty$.
+\end{defn}
+
+\begin{assgprob}[Lim Sups and Lim Infs --- I]
+  Let $(x_n)_n \in \mathbb{R}^{\mathbb{N}}$ be a bounded sequence
+  of real numbers.
+  \begin{enumerate}
+    \item Prove that
+      \begin{equation*}
+        \limsup_{n \geq 1} x_n
+        = \inf \{ \gamma \in \mathbb{R} : \exists N > 0 \enspace
+        \forall n \geq N\enspace x_n < \Gamma \}.
+      \end{equation*}
+
+    \item Prove that if $\limsup_{n \geq 1} x_n < \mu$,
+      then there exists $N \in \mathbb{N}$ such that
+      $n \geq N$ implies that $x_n < \mu$.
+      (We say that $x_n < \mu$ for large $n$.)
+
+    \item Prove that $\limsup_{n \geq 1} x_n > \mu$
+      implies that $x_n > \mu$ for infinitely many values of $n \in \mathbb{N}$.
+
+    \item Show that if $(a_n)_n$ and $(b_n)_n$ are bounded sequences
+      of real numbers, then
+      \begin{equation*}
+        \limsup_{n \geq 1} (a_n + b_n)
+        \leq \limsup_{n \geq 1} a_n + \limsup_{n \geq 1} b_n.
+      \end{equation*}
+      Give an example to show that equality need not occur.
+  \end{enumerate}
+\end{assgprob}
+
+\begin{assgprob}[Lim Sups and Lim Infs --- II]
+  \begin{enumerate}
+    \item Let $(x_n)_n \in \mathbb{R}^{\mathbb{N}}$ be a bounded sequence.
+      Prove that if $\beta \coloneqq \limsup_{n \geq 1} x_n$, then
+      \begin{enumerate}
+        \item there exist a subsequence $(x_{n_k})_k$ of
+          $(x_n)_n$ such that $lim_{k \to \infty} x_{n_k} = \beta$;
+          and
+        \item if $(x_{m_k})_k$ is any subsequence of $(x_n)_n$ which converges,
+          say to some $\alpha \in \mathbb{R}$, then $\alpha \leq \beta$.
+      \end{enumerate}
+      In other words, $\beta$ is the largest limit point of any subsequence
+      of $(x_n)_n$.
+
+    \item Let $(y_n)_n \in \mathbb{R}^{\mathbb{N}}$ be a sequence.
+      Prove that the following conditions are equivalent:
+      \begin{enumerate}
+        \item there exists $\gamma \in \mathbb{R}$ such that
+          $\lim_{n \to \infty} y_n = \gamma \in \mathbb{R}$;
+          i.e. $(y_n)_n$ is convergent (to $\gamma$); and
+        \item $\limsup_{n \geq 1} y_n = \gamma = \liminf_{n \geq 1} y_n$.
+      \end{enumerate}
+  \end{enumerate}
+\end{assgprob}
+
+% section assignment_2 (end)
+\newpage
+
+\section{Assignment 3 (A3)}%
+\label{sec:assignment_3}
+% section assignment_3
+
+\begin{assgprob}[Measurability of Extended Real-Valued Functions]
+  Recall that $\overline{\mathbb{R}} = \mathbb{R} \cup \{ - \infty, \infty \}$
+  denotes the set of \textbf{extended real numbers}.
+  Let $f : \mathbb{R} -> \overline{\mathbb{R}}$ be a function,
+  and recall that $f$ is said to be measurable if
+  $f^{-1}(G) \in \mathcal{L}(\mathbb{R})$ for all open sets $G \subseteq \mathbb{R}$
+  and $f^{-1}(\{-\infty\}), f^{-1}(\{\infty\}) \in \mathcal{L}(\mathbb{R})$.
+
+  Prove that the following are equivalent:
+  \begin{enumerate}
+    \item $f$ is measurable.
+    \item For all $\alpha \in \mathbb{R}$,
+      $f^{-1}((\alpha, \infty]) \in \mathcal{L}(\mathbb{R})$.
+    \item For all $\beta \in \mathbb{R}$,
+      $f^{-1}([-\infty \beta)) \in \mathcal{L}(\mathbb{R})$.
+  \end{enumerate}
+\end{assgprob}
+
+\begin{assgprob}[Measurable Functions as Limits of Simple Functions]
+  \begin{enumerate}
+    \item Let $f : \mathbb{R} \to [0, \infty]$ be a measurable function.
+      Show that there exists an increasing sequence of measurable,
+      simple functions $\phi_n : \mathbb{R} \to [0, \infty)$ so that
+      \begin{equation*}
+        f(x) = \lim_{n \to \infty} \phi_n(x),\quad \forall x \in \mathbb{R}.
+      \end{equation*}
+    \item Let $E \in \mathcal{L}(\mathbb{R})$ and let
+      $g : E \to [0, \infty]$ be a measurable function.
+      Show that there exists an increasing sequence of measurable,
+      simple functions $\psi_n : E \to [0, \infty)$ so that
+      \begin{equation*}
+        g(x) = \lim_{n \to \infty} \psi_n(x),\quad \forall x \in E.
+      \end{equation*}
+  \end{enumerate}
+
+  \noindent
+  \textbf{Hint for 1.}: For each $n \geq 1$, partition the interval $[0, n)$ 
+  into $n 2^n$ equal subintervals $E_{k, n} = \left[ \frac{k}{2^n},
+  \frac{k+1}{2^n} \right)$, $0 \leq k < (n 2^n) - 1$.
+  Let $E_{n 2^n, n]} = [n, \infty]$.
+  Use the sets $f^{-1}(E_{k, n})$, $0 \leq k \leq n 2^n$ to build $\phi_n$.
+
+  \noindent
+  \textbf{Hint for 2.}: This should be very short. Otherwise, you're doing
+  something wrong.
+\end{assgprob}
+
+\begin{assgprob}[An Example]
+  \begin{enumerate}
+    \item \label{item:a3q3a}
+      Let $E = [0, 1]$. Fix $m \geq 1$ and let $f : E \to \mathbb{R}$
+      be the function $f(x) = x^m$.
+      Since $f$ is continuous, $f$ is measurable.
+      Prove that the Lebesgue integral of $f$ over $E$ satisfies
+      \begin{equation*}
+        \int_{[0, 1]} f = \frac{1}{m + 1}.
+      \end{equation*}
+      Note: You may not use
+      \cref{thm:bounded_riemann_integrable_functions_are_lebesgue_integrable}.
+      You must prove this using only techniques available to Lebesgue
+      integration, and it should suffice to do so with knowledge from before
+      \cref{thm:bounded_riemann_integrable_functions_are_lebesgue_integrable}.  \linebreak
+      (\textbf{Hint}: The Monotone Convergence Theorem with the last problem
+      should be useful.)
+
+    \item Let $g : E \to [0, 1]$ be the function $g(x) = e^x$, i.e.
+      the exponential function.
+      Prove that the Lebesgue integral of $g$ satisfies
+      \begin{equation*}
+        \int_{0}^{1} g = e^1 - 1 = e - 1.
+      \end{equation*}
+      \textbf{Hint}: this should be much easier than part \ref{item:a3q3a}.
+  \end{enumerate}
+\end{assgprob}
+
+\begin{assgprob}[Sets of Positive Measure are ``Large'']
+  \begin{enumerate}
+    \item \label{item:a3q4a}
+      Let $E \in \mathfrak{M}(\mathbb{R})$ be a measurable set and
+      suppose that $m(E) > 0$, i.e. $E$ has strictly positive Lebesgue measure.
+      Prove that the set
+      \begin{equation*}
+        H = E - E \coloneqq \{ x - y : x, y \in E \}
+      \end{equation*}
+      contains an interval.
+
+      Hints:
+      \begin{itemize}
+        \item First, reduce to the case where $0 < mE < \infty$.
+        \item Show that there exists an open interval $I = (a, b)$
+          so that $m(E \cap (a, b)) > 0.9(b - a)$.
+        \item Let $F \coloneqq E \cap (a, b) \subseteq E$.
+          Suppose that $\alpha \in (-\delta, \delta)$,
+          where $\delta = 0.1(b - a)$.
+          Show that $F \cap (F + \alpha) \neq \emptyset$ by considering
+          upper and lower bounds for the measure of $F \cup (F + \alpha)$.
+      \end{itemize}
+
+    \item \label{item:a3q4b}
+      Conclude that if $E \in \mathfrak{M}(\mathbb{R})$
+      satisfies $m(E) > 0$, then
+      the cardinality of $E$ coincides with $c$,
+      the cardinality of $\mathbb{R}$.
+
+      \textbf{Hint}: Part \ref{item:a3q4b} is doable even if you did not get
+      part \ref{item:a3q4a}.
+  \end{enumerate}
+\end{assgprob}
+
+\begin{assgprob}[The Ubiquity of Non-Measurable Sets]
+  Prove that every measurable set $E$ of (strictly) positive measure
+  contains a non-measurable subset $Z$. \linebreak
+  \textbf{Hints}: You may wish to reduce to the case where $E \subseteq [-N, N]$
+  for some $N > 0$.
+  Then, you may wish to refer to the existence of non-measurable sets
+  as demonstrated in the notes.
+  You may DIY as well if you have an idea on what to do.
+\end{assgprob}
+
+\begin{assgprob}[Pointwise Convergence of Measurable Functions]
+  Let $E \in \mathfrak{M}(\mathbb{R})$ be a measurable set
+  and suppose that $m(E) < \infty$.
+  Let $(f_n)_n \in \mathcal{L}(E, \mathbb{R})$ and
+  suppose that $(f_n)_n$ converges pointwise to a real-valued function
+  $f : E \to \mathbb{R}$.
+  Prove that if $\epsilon > 0$ and $\delta > 0$, then there exists
+  a measurable set $H \subseteq E$ and an integer $N \geq 1$ such that
+  \begin{enumerate}
+    \item $m(H) < \delta$; and
+    \item $x \notin H$ implies that $\abs{f_n(x) - f(x)} < \epsilon$ for all
+      $n \geq N$.
+  \end{enumerate}
+\end{assgprob}
+
+% section assignment_3 (end)
+\newpage
+
+\section{Assignment 4 (A4)}%
+\label{sec:assignment_4}
+% section assignment_4
+
+\begin{assgprob}[Completeness in Normed Linear Spaces]
+  Let $(\mathfrak{X}, \norm{\cdot})$ be a normed linear space.
+  Prove that $\mathfrak{X}$ is complete, and hence a Banach space,
+  if and only if every absolutely summable series in $\mathfrak{X}$ is summable.
+  Here, a series $\sum_{n=1}^{\infty} x_n$ in $\mathfrak{X}$ is said
+  to be \textbf{summable} if
+  \begin{equation*}
+    x \coloneqq \lim_{N \to \infty} \sum_{n=1}^{N} x_n
+  \end{equation*}
+  exists in $\mathfrak{X}$, while the series is said to be
+  \textbf{absolutely summable} if
+  \begin{equation*}
+    \lim_{N \to \infty} \sum_{n=1}^{N} \norm{x_n} < \infty.
+  \end{equation*}
+\end{assgprob}
+
+\begin{assgprob}[$\ell_p$-Spaces, Part I]
+  Let $1 \leq p < \infty$.
+  For $\mathbb{K} = \mathbb{R}$ or $\mathbb{K} = \mathbb{C}$, we define
+  the $\ell_p$-spaces:
+  \begin{equation*}
+    \ell_p = \ell_p(\mathbb{N})
+    \coloneqq \left\{ x \in (x_n)_{n=1}^{\infty} \in \mathbb{K}^{\mathbb{N}} :
+      \sum_{n=1}^{\infty} \abs{x_n}^{p} < \infty \right\}.
+  \end{equation*}
+  Furthermore, for $x \in \ell_p$, we define $\norm{x}_p = \left( \sum_{n \geq
+  1} \abs{x_n}^p \right)^{1 / p}$.
+  When $p = \infty$, we define
+  \begin{equation*}
+    \ell_\infty = \ell_\infty(\mathbb{N})
+    \coloneqq \left\{ x = (x_n)_{n=1}^{\infty} \in \mathbb{K}^{\mathbb{N}}
+      \sup_{n \geq 1} \abs{x_n} < \infty \right\}.
+  \end{equation*}
+  For $x \in \ell_\infty$, we define $\norm{x}_{\infty} = \sup_{n \geq 1}
+  \abs{x_n}$.
+
+  \begin{enumerate}
+    \item Prove Hólder's Inequality for $\ell_p$-spaces:
+      that is if $1 \leq p \leq \infty$ and $\frac{1}{p} + \frac{1}{q} = 1$,
+      and if $x = (x_n)_n \in \ell_p$ and $y = (y_n)_n \in \ell_q$,
+      then
+      \begin{equation*}
+        xy \coloneqq (x_n y_n)_n \in \ell_1,
+      \end{equation*}
+      and $\norm{xy}_1 \leq \norm{x}_p \norm{y}_q$.
+  \end{enumerate}
+\end{assgprob}
+
+% section assignment_4 (end)
+
+% chapter assignment_problems (end)
 
 \backmatter
 

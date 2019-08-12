@@ -732,18 +732,22 @@ Assignment 1	PMATH348/classnotes.tex	/^\\section{Assignment 1}%$/;"	s	chapter:As
 Assignment 1	PMATH351F18/classnotes.tex	/^\\chapter{Assignment 1}%$/;"	c
 Assignment 1	_site/PMATH348/classnotes.tex	/^\\section{Assignment 1}%$/;"	s	chapter:Assignment Problems
 Assignment 1	_site/PMATH351F18/classnotes.tex	/^\\chapter{Assignment 1}%$/;"	c
+Assignment 1 (A1)	PMATH450/classnotes.tex	/^\\section{Assignment 1 (A1)}%$/;"	s	chapter:Assignment Problems
 Assignment 10	PMATH348/classnotes.tex	/^\\section{Assignment 10}%$/;"	s	chapter:Assignment Problems
 Assignment 10	_site/PMATH348/classnotes.tex	/^\\section{Assignment 10}%$/;"	s	chapter:Assignment Problems
 Assignment 2	PMATH348/classnotes.tex	/^\\section{Assignment 2}%$/;"	s	chapter:Assignment Problems
 Assignment 2	PMATH351F18/classnotes.tex	/^\\chapter{Assignment 2}%$/;"	c
 Assignment 2	_site/PMATH348/classnotes.tex	/^\\section{Assignment 2}%$/;"	s	chapter:Assignment Problems
 Assignment 2	_site/PMATH351F18/classnotes.tex	/^\\chapter{Assignment 2}%$/;"	c
+Assignment 2 (A2)	PMATH450/classnotes.tex	/^\\section{Assignment 2 (A2)}%$/;"	s	chapter:Assignment Problems
 Assignment 3	PMATH348/classnotes.tex	/^\\section{Assignment 3}%$/;"	s	chapter:Assignment Problems
 Assignment 3	PMATH351F18/classnotes.tex	/^\\chapter{Assignment 3}%$/;"	c
 Assignment 3	_site/PMATH348/classnotes.tex	/^\\section{Assignment 3}%$/;"	s	chapter:Assignment Problems
 Assignment 3	_site/PMATH351F18/classnotes.tex	/^\\chapter{Assignment 3}%$/;"	c
+Assignment 3 (A3)	PMATH450/classnotes.tex	/^\\section{Assignment 3 (A3)}%$/;"	s	chapter:Assignment Problems
 Assignment 4	PMATH348/classnotes.tex	/^\\section{Assignment 4}%$/;"	s	chapter:Assignment Problems
 Assignment 4	_site/PMATH348/classnotes.tex	/^\\section{Assignment 4}%$/;"	s	chapter:Assignment Problems
+Assignment 4 (A4)	PMATH450/classnotes.tex	/^\\section{Assignment 4 (A4)}%$/;"	s	chapter:Assignment Problems
 Assignment 5	PMATH348/classnotes.tex	/^\\section{Assignment 5}%$/;"	s	chapter:Assignment Problems
 Assignment 5	_site/PMATH348/classnotes.tex	/^\\section{Assignment 5}%$/;"	s	chapter:Assignment Problems
 Assignment 6	PMATH348/classnotes.tex	/^\\section{Assignment 6}%$/;"	s	chapter:Assignment Problems
@@ -755,6 +759,7 @@ Assignment 8	_site/PMATH348/classnotes.tex	/^\\section{Assignment 8}%$/;"	s	chap
 Assignment 9	PMATH348/classnotes.tex	/^\\section{Assignment 9}%$/;"	s	chapter:Assignment Problems
 Assignment 9	_site/PMATH348/classnotes.tex	/^\\section{Assignment 9}%$/;"	s	chapter:Assignment Problems
 Assignment Problems	PMATH348/classnotes.tex	/^\\chapter{Assignment Problems}%$/;"	c
+Assignment Problems	PMATH450/classnotes.tex	/^\\chapter{Assignment Problems}%$/;"	c
 Assignment Problems	PMATH467/classnotes.tex	/^\\chapter{Assignment Problems}%$/;"	c	part:#1
 Assignment Problems	_site/PMATH348/classnotes.tex	/^\\chapter{Assignment Problems}%$/;"	c
 Assignment Problems	_site/PMATH467/classnotes.tex	/^\\chapter{Assignment Problems}%$/;"	c
@@ -2215,6 +2220,7 @@ Lecture 21 Oct 31st	PMATH351F18/classnotes.tex	/^\\chapter{Lecture 21 Oct 31st}%
 Lecture 21 Oct 31st	_site/PMATH351F18/classnotes.tex	/^\\chapter{Lecture 21 Oct 31st}%$/;"	c
 Lecture 22 Jul 17th 2018	STAT330S18/classnotes.tex	/^\\chapter{Lecture 22 Jul 17th 2018}%$/;"	c
 Lecture 22 Jul 17th 2018	_site/STAT330S18/classnotes.tex	/^\\chapter{Lecture 22 Jul 17th 2018}%$/;"	c
+Lecture 22 Jul 25th 2019	PMATH450/classnotes.tex	/^\\chapter{Lecture 22 Jul 25th 2019}%$/;"	c
 Lecture 22 Jun 22nd 2018	PMATH347S18/lectures/lec22.tex	/^\\chapter{Lecture 22 Jun 22nd 2018}%$/;"	c
 Lecture 22 Jun 22nd 2018	_site/PMATH347S18/lectures/lec22.tex	/^\\chapter{Lecture 22 Jun 22nd 2018}%$/;"	c
 Lecture 22 Mar 06th	PMATH348/classnotes.tex	/^\\chapter{Lecture 22 Mar 06th}%$/;"	c
@@ -3350,6 +3356,7 @@ The Dirichlet Kernel (Continued)	PMATH450/classnotes.tex	/^\\section{The Dirichl
 The Exterior Derivative	PMATH365/classnotes.tex	/^\\section{The Exterior Derivative}%$/;"	s	chapter:Lecture 15 Feb 11th
 The Exterior Derivative	_site/PMATH365/classnotes.tex	/^\\section{The Exterior Derivative}%$/;"	s	chapter:Lecture 15 Feb 11th
 The Féjer Kernel	PMATH450/classnotes.tex	/^\\section{The Féjer Kernel}%$/;"	s	chapter:Lecture 21 Jul 23rd 2019
+The Féjer Kernel (Continued)	PMATH450/classnotes.tex	/^\\section{The Féjer Kernel (Continued)}%$/;"	s	chapter:Lecture 22 Jul 25th 2019
 The Galois Group as a Permutation Group	PMATH348/classnotes.tex	/^\\section{The Galois Group as a Permutation Group}%$/;"	s	chapter:Lecture 18 Feb 25th
 The Galois Group as a Permutation Group	_site/PMATH348/classnotes.tex	/^\\section{The Galois Group as a Permutation Group}%$/;"	s	chapter:Lecture 18 Feb 25th
 The Galois Group as a Permutation Group (Continued)	PMATH348/classnotes.tex	/^\\section{The Galois Group as a Permutation Group (Continued)}%$/;"	s	chapter:Lecture 19 Feb 27th
@@ -3522,6 +3529,7 @@ Well-Orderings (Continued)	PMATH733/classnotes.tex	/^\\subsection{Well-Orderings
 Well-Orderings (Continued)	_site/PMATH733/classnotes.tex	/^\\subsection{Well-Orderings (Continued)}%$/;"	u	section:Lecture 4 Sep 18th""Ordinals (Continued 3)
 Well-Orderings and Ordinals	PMATH733/classnotes.tex	/^\\subsection{Well-Orderings and Ordinals}%$/;"	u	section:Lecture 7 Sep 27th""Ordinals (Continued 6)
 Well-Orderings and Ordinals	_site/PMATH733/classnotes.tex	/^\\subsection{Well-Orderings and Ordinals}%$/;"	u	section:Lecture 7 Sep 27th""Ordinals (Continued 6)
+Which sequences are sequences of Fourier Coefficients?	PMATH450/classnotes.tex	/^\\section{Which sequences are sequences of Fourier Coefficients?}%$/;"	s	chapter:Lecture 22 Jul 25th 2019
 Why in the world do most of your documents use dark backgrounds and white text!? That ain't normal! And studies show that white background is better!	faq.md	/^## Why in the world do most of your documents use dark backgrounds and white text!? That ain't n/;"	s
 Why in the world do most of your documents use dark backgrounds and white text!? That ain’t normal! And studies show that white background is better!	_site/faq.html	/^<h2 id="why-in-the-world-do-most-of-your-documents-use-dark-backgrounds-and-white-text-that-aint/;"	i
 Winding Numbers	PMATH352W18/cheatsheet/cheatsheet.tex	/^\\section{Winding Numbers} % (fold)$/;"	s	chapter:Lecture 32 Apr 04 2018
@@ -3877,6 +3885,7 @@ chp:assignment_2	_site/PMATH351F18/classnotes.tex	/^\\label{chp:assignment_2}$/;
 chp:assignment_3	PMATH351F18/classnotes.tex	/^\\label{chp:assignment_3}$/;"	l
 chp:assignment_3	_site/PMATH351F18/classnotes.tex	/^\\label{chp:assignment_3}$/;"	l
 chp:assignment_problems	PMATH348/classnotes.tex	/^\\label{chp:assignment_problems}$/;"	l
+chp:assignment_problems	PMATH450/classnotes.tex	/^\\label{chp:assignment_problems}$/;"	l
 chp:assignment_problems	PMATH467/classnotes.tex	/^\\label{chp:assignment_problems}$/;"	l
 chp:assignment_problems	_site/PMATH348/classnotes.tex	/^\\label{chp:assignment_problems}$/;"	l
 chp:assignment_problems	_site/PMATH467/classnotes.tex	/^\\label{chp:assignment_problems}$/;"	l
@@ -4159,6 +4168,7 @@ chp:lecture_21_oct_31st	PMATH351F18/classnotes.tex	/^\\label{chp:lecture_21_oct_
 chp:lecture_21_oct_31st	_site/PMATH351F18/classnotes.tex	/^\\label{chp:lecture_21_oct_31st}$/;"	l
 chp:lecture_22_jul_17th_2018	STAT330S18/classnotes.tex	/^\\label{chp:lecture_22_jul_17th_2018}$/;"	l
 chp:lecture_22_jul_17th_2018	_site/STAT330S18/classnotes.tex	/^\\label{chp:lecture_22_jul_17th_2018}$/;"	l
+chp:lecture_22_jul_25th_2019	PMATH450/classnotes.tex	/^\\label{chp:lecture_22_jul_25th_2019}$/;"	l
 chp:lecture_22_jun_22nd_2018	PMATH347S18/lectures/lec22.tex	/^\\label{chp:lecture_22_jun_22nd_2018}$/;"	l
 chp:lecture_22_jun_22nd_2018	_site/PMATH347S18/lectures/lec22.tex	/^\\label{chp:lecture_22_jun_22nd_2018}$/;"	l
 chp:lecture_22_mar_06th	PMATH348/classnotes.tex	/^\\label{chp:lecture_22_mar_06th}$/;"	l
@@ -4607,6 +4617,8 @@ crly:properties_of_closed_sets	PMATH351F18/classnotes.tex	/^\\begin{crly}[Proper
 crly:properties_of_closed_sets	_site/PMATH351F18/classnotes.tex	/^\\begin{crly}[Properties of Closed Sets]\\label{crly:properties_of_closed_sets}$/;"	l
 crly:radical_extensions_have_solvable_extensions	PMATH348/classnotes.tex	/^\\begin{crly}[Radical Extensions have Solvable Extensions]\\label{crly:radical_extensions_have_s/;"	l
 crly:radical_extensions_have_solvable_extensions	_site/PMATH348/classnotes.tex	/^\\begin{crly}[Radical Extensions have Solvable Extensions]\\label{crly:radical_extensions_have_s/;"	l
+crly:reconcilation_of_the_cesaro_sums_to_the_original_function	PMATH450/classnotes.tex	/^\\begin{crly}[Reconcilation of the Cesàro sums to the Original Function]\\label{crly:reconcilat/;"	l
+crly:reconcilation_of_the_fourier_series_to_its_original_function_under_the_fejer_kernel	PMATH450/classnotes.tex	/^\\begin{crly}[Reconcilation of the Fourier series to its Original Function under the Féjer Kern/;"	l
 crly:relation_between_index_and_degree	PMATH348/classnotes.tex	/^\\begin{crly}[Relation between Index and Degree]\\label{crly:relation_between_index_and_degree}$/;"	l
 crly:relation_between_index_and_degree	_site/PMATH348/classnotes.tex	/^\\begin{crly}[Relation between Index and Degree]\\label{crly:relation_between_index_and_degree}$/;"	l
 crly:rouche_fta_crly	PMATH352W18/classnotes-white.tex	/^\\begin{crly}\\label{crly:rouche_fta_crly}$/;"	l
@@ -4632,6 +4644,7 @@ crly:the_galois_group_completely_captures_all_permutation_of_the_roots	PMATH348/
 crly:the_galois_group_completely_captures_all_permutation_of_the_roots	_site/PMATH348/classnotes.tex	/^\\begin{crly}[The Galois Group completely captures all permutation of the roots]\\label{crly:the/;"	l
 crly:the_galois_group_of_a_separable_irreducible_polynomial_is_transitive	PMATH348/classnotes.tex	/^\\begin{crly}[The Galois Group of a Separable, Irreducible Polynomial is Transitive]\\label{crly/;"	l
 crly:the_galois_group_of_a_separable_irreducible_polynomial_is_transitive	_site/PMATH348/classnotes.tex	/^\\begin{crly}[The Galois Group of a Separable, Irreducible Polynomial is Transitive]\\label{crly/;"	l
+crly:the_inverse_mapping_theorem	PMATH450/classnotes.tex	/^\\begin{crly}[The Inverse Mapping Theorem]\\index{The Inverse Mapping Theorem}\\label{crly:the_i/;"	l
 crly:there_are_no_functions_discontinuous_on_all_irrational_numbers	PMATH351F18/classnotes.tex	/^\\begin{crly}[There are no Functions Discontinuous on all Irrational Numbers]\\label{crly:there_/;"	l
 crly:there_are_no_functions_discontinuous_on_all_irrational_numbers	_site/PMATH351F18/classnotes.tex	/^\\begin{crly}[There are no Functions Discontinuous on all Irrational Numbers]\\label{crly:there_/;"	l
 crly:transfinite_recursion_v2	PMATH733/classnotes.tex	/^\\label{crly:transfinite_recursion_v2}$/;"	l
@@ -5525,6 +5538,7 @@ defn:limit_point	PMATH467/classnotes.tex	/^\\begin{defn}[Limit Point]\\index{Lim
 defn:limit_point	_site/PMATH467/classnotes.tex	/^\\begin{defn}[Limit Point]\\index{Limit Point}\\label{defn:limit_point}$/;"	l
 defn:limit_points	PMATH351F18/classnotes.tex	/^\\begin{defn}[Limit Points]\\index{Limit Points}\\label{defn:limit_points}$/;"	l
 defn:limit_points	_site/PMATH351F18/classnotes.tex	/^\\begin{defn}[Limit Points]\\index{Limit Points}\\label{defn:limit_points}$/;"	l
+defn:limit_superior_and_limit_inferior	PMATH450/classnotes.tex	/^\\begin{defn}[Limit Superior and Limit Inferior]\\index{Limit Superior}\\index{Limit Inferior}\\/;"	l
 defn:limiting_ratio	ACTSC431/classnotes.tex	/^\\begin{defn}[Limiting Ratio]\\index{Limiting Ratio}\\label{defn:limiting_ratio}$/;"	l
 defn:limiting_ratio	_site/ACTSC431/classnotes.tex	/^\\begin{defn}[Limiting Ratio]\\index{Limiting Ratio}\\label{defn:limiting_ratio}$/;"	l
 defn:linear_exponential_family	ACTSC432/classnotes.tex	/^\\begin{defn}[Linear Exponential Family]\\index{Linear Exponential Family}\\label{defn:linear_ex/;"	l
@@ -6074,6 +6088,7 @@ defn:successor_ordinal	PMATH733/classnotes.tex	/^\\label{defn:successor_ordinal}
 defn:successor_ordinal	_site/PMATH733/classnotes.tex	/^\\label{defn:successor_ordinal}$/;"	l
 defn:sum_of_cardinals	PMATH351F18/classnotes.tex	/^\\begin{defn}[Sum of Cardinals]\\index{Sum of Cardinals}\\label{defn:sum_of_cardinals}$/;"	l
 defn:sum_of_cardinals	_site/PMATH351F18/classnotes.tex	/^\\begin{defn}[Sum of Cardinals]\\index{Sum of Cardinals}\\label{defn:sum_of_cardinals}$/;"	l
+defn:summability_kernel	PMATH450/classnotes.tex	/^\\begin{defn}[Summability Kernel]\\index{Summability Kernel}\\label{defn:summability_kernel}$/;"	l
 defn:support_of_a_function	PMATH365/classnotes.tex	/^\\begin{defn}[Support of a Function]\\index{Support}\\label{defn:support_of_a_function}$/;"	l
 defn:support_of_a_function	_site/PMATH365/classnotes.tex	/^\\begin{defn}[Support of a Function]\\index{Support}\\label{defn:support_of_a_function}$/;"	l
 defn:surjectivity	PMATH347S18/definitions.tex	/^\\begin{defn}[Surjectivity]\\label{defn:surjectivity}$/;"	l
@@ -7265,6 +7280,7 @@ fig:graph_of_f_2_	PMATH450/classnotes.tex	/^  \\caption{Graph of $F_2$}\\label{f
 fig:graph_of_f_5_	PMATH450/classnotes.tex	/^  \\caption{Graph of $F_5$}\\label{fig:graph_of_f_5_}$/;"	l
 fig:graph_of_h_2	PMATH467/classnotes.tex	/^    \\label{fig:graph_of_h_2}$/;"	l
 fig:graph_of_h_2	_site/PMATH467/classnotes.tex	/^    \\label{fig:graph_of_h_2}$/;"	l
+fig:graph_of_k_5_bigcdot_	PMATH450/classnotes.tex	/^        \\caption{Graph of $k_5^{\\bigcdot}$}\\label{fig:graph_of_k_5_bigcdot_}$/;"	l
 fig:graph_of_left_1_y_x_right_alpha_1_e_y_theta_	ACTSC431/classnotes.tex	/^    \\caption{Graph of $\\left( 1 + \\frac{y}{x} \\right)^{\\alpha - 1} e^{-\\frac{y}{\\theta}}$/;"	l
 fig:graph_of_left_1_y_x_right_alpha_1_e_y_theta_	_site/ACTSC431/classnotes.tex	/^    \\caption{Graph of $\\left( 1 + \\frac{y}{x} \\right)^{\\alpha - 1} e^{-\\frac{y}{\\theta}}$/;"	l
 fig:graph_of_mutiple_adjustments	ACTSC431/classnotes.tex	/^  \\caption{Graph of $H(X) = \\alpha{[ (X \\land u) - d ]}_+$.}\\label{fig:graph_of_mutiple_adju/;"	l
@@ -7273,6 +7289,7 @@ fig:graph_of_mutiple_adjustments_with_franchise_deductible	ACTSC431/classnotes.t
 fig:graph_of_mutiple_adjustments_with_franchise_deductible	_site/ACTSC431/classnotes.tex	/^  \\caption{Graph of $H(X) = \\alpha( X \\land u ) \\cdot \\mathbb{1}_{\\{X > d\\}}$.}\\label{fi/;"	l
 fig:graph_of_phi_x_in_eg_addition_is_not_definable_through_ordering	PMATH733/classnotes.tex	/^    \\caption{Graph of $\\phi(x)$ in \\cref{eg:addition_is_not_definable_through_ordering}}\\lab/;"	l
 fig:graph_of_phi_x_in_eg_addition_is_not_definable_through_ordering	_site/PMATH733/classnotes.tex	/^    \\caption{Graph of $\\phi(x)$ in \\cref{eg:addition_is_not_definable_through_ordering}}\\lab/;"	l
+fig:graph_of_r_5_bigcdot_	PMATH450/classnotes.tex	/^        \\caption{Graph of $r_5^{\\bigcdot}$}\\label{fig:graph_of_r_5_bigcdot_}$/;"	l
 fig:heat_map_of_chi_	PMATH365/classnotes.tex	/^    \\caption{Heat map of the smooth bump function $\\chi : \\mathbb{R}^2 \\to \\mathbb{R}$}\\la/;"	l
 fig:heat_map_of_chi_	_site/PMATH365/classnotes.tex	/^    \\caption{Heat map of the smooth bump function $\\chi : \\mathbb{R}^2 \\to \\mathbb{R}$}\\la/;"	l
 fig:helix_curve	PMATH365/classnotes.tex	/^    \\caption{Helix curve}\\label{fig:helix_curve}$/;"	l
@@ -7730,8 +7747,12 @@ item:7_a	PMATH351F18/classnotes.tex	/^    \\item Show that if $X$ is infinite an
 item:7_a	_site/PMATH351F18/classnotes.tex	/^    \\item Show that if $X$ is infinite and countable, you can find two disjoint infinite subset/;"	l
 item:a10q3	PMATH348/classnotes.tex	/^    \\label{item:a10q3}$/;"	l
 item:a10q3	_site/PMATH348/classnotes.tex	/^    \\label{item:a10q3}$/;"	l
+item:a2q2a	PMATH450/classnotes.tex	/^    \\item \\label{item:a2q2a}$/;"	l
 item:a3q2a	PMATH348/classnotes.tex	/^        \\label{item:a3q2a}$/;"	l
 item:a3q2a	_site/PMATH348/classnotes.tex	/^        \\label{item:a3q2a}$/;"	l
+item:a3q3a	PMATH450/classnotes.tex	/^    \\item \\label{item:a3q3a}$/;"	l
+item:a3q4a	PMATH450/classnotes.tex	/^    \\item \\label{item:a3q4a}$/;"	l
+item:a3q4b	PMATH450/classnotes.tex	/^    \\item \\label{item:a3q4b}$/;"	l
 item:absval_integral_less_than_fnsup_times_arc_length	PMATH352W18/classnotes-white.tex	/^					\\end{equation*}\\label{item:absval_integral_less_than_fnsup_times_arc_length}$/;"	l
 item:absval_integral_less_than_fnsup_times_arc_length	PMATH352W18/classnotes.tex	/^					\\end{equation*}\\label{item:absval_integral_less_than_fnsup_times_arc_length}$/;"	l
 item:absval_integral_less_than_fnsup_times_arc_length	_site/PMATH352W18/classnotes-white.tex	/^					\\end{equation*}\\label{item:absval_integral_less_than_fnsup_times_arc_length}$/;"	l
@@ -7909,6 +7930,7 @@ lemma:existence_of_ultrafilters	PMATH733/classnotes.tex	/^\\begin{lemma}[Existen
 lemma:existence_of_ultrafilters	_site/PMATH733/classnotes.tex	/^\\begin{lemma}[Existence of Ultrafilters]\\label{lemma:existence_of_ultrafilters}$/;"	l
 lemma:extended_isomorphism_extension_lemma	PMATH348/classnotes.tex	/^\\begin{lemma}[Extended Isomorphism Extension Lemma]\\label{lemma:extended_isomorphism_extension/;"	l
 lemma:extended_isomorphism_extension_lemma	_site/PMATH348/classnotes.tex	/^\\begin{lemma}[Extended Isomorphism Extension Lemma]\\label{lemma:extended_isomorphism_extension/;"	l
+lemma:finding_an_open_container_from_a_closed_container	PMATH450/classnotes.tex	/^\\begin{lemma}[Finding an Open Container from a Closed Container]\\label{lemma:finding_an_open_c/;"	l
 lemma:finite_dimensional_linear_manifolds_are_norm_closed_subspaces	PMATH450/classnotes.tex	/^\\begin{lemma}[Finite Dimensional Linear Manifolds are Norm-closed Subspaces]\\label{lemma:finit/;"	l
 lemma:finite_dimensional_linear_manifolds_are_norm_closed_subspaces	_site/PMATH450/classnotes.tex	/^\\begin{lemma}[Finite Dimensional Linear Manifolds are Norm-closed Subspaces]\\label{lemma:finit/;"	l
 lemma:glueing_lemma	PMATH467/classnotes.tex	/^\\begin{lemma}[Glueing Lemma]\\index{Glueing Lemma}\\label{lemma:glueing_lemma}$/;"	l
@@ -8880,20 +8902,24 @@ sec:applications_of_cauchy_s_residue_theorem	PMATH352W18/classnotes.tex	/^\\labe
 sec:applications_of_cauchy_s_residue_theorem	_site/PMATH352W18/classnotes-white.tex	/^\\label{sec:applications_of_cauchy_s_residue_theorem}$/;"	l
 sec:applications_of_cauchy_s_residue_theorem	_site/PMATH352W18/classnotes.tex	/^\\label{sec:applications_of_cauchy_s_residue_theorem}$/;"	l
 sec:assignment_1	PMATH348/classnotes.tex	/^\\label{sec:assignment_1}$/;"	l
+sec:assignment_1	PMATH450/classnotes.tex	/^\\label{sec:assignment_1}$/;"	l
 sec:assignment_1	PMATH467/classnotes.tex	/^\\label{sec:assignment_1}$/;"	l
 sec:assignment_1	_site/PMATH348/classnotes.tex	/^\\label{sec:assignment_1}$/;"	l
 sec:assignment_1	_site/PMATH467/classnotes.tex	/^\\label{sec:assignment_1}$/;"	l
 sec:assignment_10	PMATH348/classnotes.tex	/^\\label{sec:assignment_10}$/;"	l
 sec:assignment_10	_site/PMATH348/classnotes.tex	/^\\label{sec:assignment_10}$/;"	l
 sec:assignment_2	PMATH348/classnotes.tex	/^\\label{sec:assignment_2}$/;"	l
+sec:assignment_2	PMATH450/classnotes.tex	/^\\label{sec:assignment_2}$/;"	l
 sec:assignment_2	PMATH467/classnotes.tex	/^\\label{sec:assignment_2}$/;"	l
 sec:assignment_2	_site/PMATH348/classnotes.tex	/^\\label{sec:assignment_2}$/;"	l
 sec:assignment_2	_site/PMATH467/classnotes.tex	/^\\label{sec:assignment_2}$/;"	l
 sec:assignment_3	PMATH348/classnotes.tex	/^\\label{sec:assignment_3}$/;"	l
+sec:assignment_3	PMATH450/classnotes.tex	/^\\label{sec:assignment_3}$/;"	l
 sec:assignment_3	PMATH467/classnotes.tex	/^\\label{sec:assignment_3}$/;"	l
 sec:assignment_3	_site/PMATH348/classnotes.tex	/^\\label{sec:assignment_3}$/;"	l
 sec:assignment_3	_site/PMATH467/classnotes.tex	/^\\label{sec:assignment_3}$/;"	l
 sec:assignment_4	PMATH348/classnotes.tex	/^\\label{sec:assignment_4}$/;"	l
+sec:assignment_4	PMATH450/classnotes.tex	/^\\label{sec:assignment_4}$/;"	l
 sec:assignment_4	_site/PMATH348/classnotes.tex	/^\\label{sec:assignment_4}$/;"	l
 sec:assignment_5	PMATH348/classnotes.tex	/^\\label{sec:assignment_5}$/;"	l
 sec:assignment_5	_site/PMATH348/classnotes.tex	/^\\label{sec:assignment_5}$/;"	l
@@ -9796,6 +9822,7 @@ sec:the_dirichlet_kernel_continued	PMATH450/classnotes.tex	/^\\label{sec:the_dir
 sec:the_exterior_derivative	PMATH365/classnotes.tex	/^\\label{sec:the_exterior_derivative}$/;"	l
 sec:the_exterior_derivative	_site/PMATH365/classnotes.tex	/^\\label{sec:the_exterior_derivative}$/;"	l
 sec:the_fejer_kernel	PMATH450/classnotes.tex	/^\\label{sec:the_fejer_kernel}$/;"	l
+sec:the_fejer_kernel_continued	PMATH450/classnotes.tex	/^\\label{sec:the_fejer_kernel_continued}$/;"	l
 sec:the_galois_group_as_a_permutation_group	PMATH348/classnotes.tex	/^\\label{sec:the_galois_group_as_a_permutation_group}$/;"	l
 sec:the_galois_group_as_a_permutation_group	_site/PMATH348/classnotes.tex	/^\\label{sec:the_galois_group_as_a_permutation_group}$/;"	l
 sec:the_galois_group_as_a_permutation_group_continued	PMATH348/classnotes.tex	/^\\label{sec:the_galois_group_as_a_permutation_group_continued}$/;"	l
@@ -9860,6 +9887,7 @@ sec:wedge_product_of_forms	PMATH365/classnotes.tex	/^\\label{sec:wedge_product_o
 sec:wedge_product_of_forms	_site/PMATH365/classnotes.tex	/^\\label{sec:wedge_product_of_forms}$/;"	l
 sec:wedge_product_of_smooth_forms	PMATH365/classnotes.tex	/^\\label{sec:wedge_product_of_smooth_forms}$/;"	l
 sec:wedge_product_of_smooth_forms	_site/PMATH365/classnotes.tex	/^\\label{sec:wedge_product_of_smooth_forms}$/;"	l
+sec:which_sequences_are_sequences_of_fourier_coefficients_	PMATH450/classnotes.tex	/^\\label{sec:which_sequences_are_sequences_of_fourier_coefficients_}$/;"	l
 sec:winding_numbers	PMATH352W18/cheatsheet/cheatsheet.tex	/^\\label{sec:winding_numbers}$/;"	l
 sec:winding_numbers	PMATH352W18/classnotes-white.tex	/^\\label{sec:winding_numbers}$/;"	l
 sec:winding_numbers	PMATH352W18/classnotes.tex	/^\\label{sec:winding_numbers}$/;"	l
@@ -10789,6 +10817,7 @@ thm:Differentiability and Continuity	Personal Notes/Notes_Intro_to_Analysis_WWad
 thm:Differentiability and Continuity	_site/Personal Notes/Notes_Intro_to_Analysis_WWade.tex	/^\\begin{thm}[Differentiability and Continuity]\\label{thm:Differentiability and Continuity}$/;"	l
 thm:_1_dimensional_manifolds_determined_by_its_compactness	PMATH467/classnotes.tex	/^\\begin{thm}[$1$-Dimensional Manifolds Determined by Its Compactness]\\label{thm:_1_dimensional_/;"	l
 thm:_1_dimensional_manifolds_determined_by_its_compactness	_site/PMATH467/classnotes.tex	/^\\begin{thm}[$1$-Dimensional Manifolds Determined by Its Compactness]\\label{thm:_1_dimensional_/;"	l
+thm:_l_1_mathbb_t_mathbb_c_and_c_0_mathbb_z_mathbb_c_are_not_isomorphic	PMATH450/classnotes.tex	/^\\begin{thm}[$L_1(\\mathbb{T}, \\mathbb{C})$ and $c_0(\\mathbb{Z}, \\mathbb{C})$ are Not Isomorp/;"	l
 thm:_l_infty_e_k_is_a_normed_linear_space	PMATH450/classnotes.tex	/^\\begin{thm}[$L_\\infty(E, \\mathbb{K})$ is a normed-linear space]\\label{thm:_l_infty_e_k_is_a_/;"	l
 thm:_l_infty_e_k_is_a_normed_linear_space	_site/PMATH450/classnotes.tex	/^\\begin{thm}[$L_\\infty(E, \\mathbb{K})$ is a normed-linear space]\\label{thm:_l_infty_e_k_is_a_/;"	l
 thm:_m_r_is_a_sigma_algebra	PMATH450/classnotes.tex	/^\\begin{thm}[$\\mathfrak{M}(\\mathbb{R})$ is a $\\sigma$-algebra]\\label{thm:_m_r_is_a_sigma_alg/;"	l
@@ -11013,6 +11042,7 @@ thm:factorization_theorem_for_independence	STAT330S18/classnotes.tex	/^\\label{t
 thm:factorization_theorem_for_independence	_site/STAT330S18/classnotes.tex	/^\\label{thm:factorization_theorem_for_independence}$/;"	l
 thm:fatou_s_lemma	PMATH450/classnotes.tex	/^\\begin{thm}[Fatou's Lemma]\\index{Fatou's Lemma}\\label{thm:fatou_s_lemma}$/;"	l
 thm:fatou_s_lemma	_site/PMATH450/classnotes.tex	/^\\begin{thm}[Fatou's Lemma]\\index{Fatou's Lemma}\\label{thm:fatou_s_lemma}$/;"	l
+thm:fejer_kernel_as_a_positive_summability_kernel	PMATH450/classnotes.tex	/^\\begin{thm}[Féjer kernel as a Positive Summability Kernel]\\label{thm:fejer_kernel_as_a_positi/;"	l
 thm:field_of_fractions	PMATH347S18/lectures/lec26.tex	/^\\label{thm:field_of_fractions}$/;"	l
 thm:field_of_fractions	_site/PMATH347S18/lectures/lec26.tex	/^\\label{thm:field_of_fractions}$/;"	l
 thm:finite_abelian_group_structure	PMATH347S18/lectures/lec20.tex	/^\\label{thm:finite_abelian_group_structure}$/;"	l
@@ -11264,6 +11294,7 @@ thm:strict_well_ordered_sets_are_isomorphic_to_a_unique_ordinal	PMATH733/classno
 thm:strict_well_ordered_sets_are_isomorphic_to_a_unique_ordinal	_site/PMATH733/classnotes.tex	/^\\label{thm:strict_well_ordered_sets_are_isomorphic_to_a_unique_ordinal}$/;"	l
 thm:subfields_of_finite_fields	PMATH348/classnotes.tex	/^\\begin{thm}[Subfields of Finite Fields]\\label{thm:subfields_of_finite_fields}$/;"	l
 thm:subfields_of_finite_fields	_site/PMATH348/classnotes.tex	/^\\begin{thm}[Subfields of Finite Fields]\\label{thm:subfields_of_finite_fields}$/;"	l
+thm:summability_kernels_convolved_with_functions_in_homogeneous_banach_spaces	PMATH450/classnotes.tex	/^\\begin{thm}[Summability kernels convolved with functions in Homogeneous Banach Spaces]\\label{t/;"	l
 thm:sums_of_cardinals	PMATH351F18/classnotes.tex	/^\\begin{thm}[Sums of Cardinals]\\label{thm:sums_of_cardinals}$/;"	l
 thm:sums_of_cardinals	_site/PMATH351F18/classnotes.tex	/^\\begin{thm}[Sums of Cardinals]\\label{thm:sums_of_cardinals}$/;"	l
 thm:sums_of_mgf	STAT330S18/classnotes.tex	/^\\label{thm:sums_of_mgf}$/;"	l
@@ -11280,6 +11311,7 @@ thm:the_metric_topology_of_a_subset_is_its_induced_topology	PMATH351F18/classnot
 thm:the_metric_topology_of_a_subset_is_its_induced_topology	_site/PMATH351F18/classnotes.tex	/^\\begin{thm}[The Metric Topology of a Subset is Its Induced Topology]\\label{thm:the_metric_topo/;"	l
 thm:the_monotone_convergence_theorem	PMATH450/classnotes.tex	/^\\begin{thm}[\\imponote The Monotone Convergence Theorem]\\index{The Monotone Convergence Theore/;"	l
 thm:the_monotone_convergence_theorem	_site/PMATH450/classnotes.tex	/^\\begin{thm}[\\imponote The Monotone Convergence Theorem]\\index{The Monotone Convergence Theore/;"	l
+thm:the_open_mapping_theorem	PMATH450/classnotes.tex	/^\\begin{thm}[The Open Mapping Theorem]\\index{The Open Mapping Theorem}\\label{thm:the_open_mapp/;"	l
 thm:the_pythagorean_theorem_and_parallelogram_law	PMATH450/classnotes.tex	/^\\begin{thm}[The Pythagorean Theorem and Parallelogram Law]\\label{thm:the_pythagorean_theorem_a/;"	l
 thm:the_pythagorean_theorem_and_parallelogram_law	_site/PMATH450/classnotes.tex	/^\\begin{thm}[The Pythagorean Theorem and Parallelogram Law]\\label{thm:the_pythagorean_theorem_a/;"	l
 thm:the_riemann_lebesgue_lemma	PMATH450/classnotes.tex	/^\\begin{thm}[The Riemann-Lebesgue Lemma]\\index{The Riemann-Lebesgue Lemma}\\label{thm:the_riema/;"	l
