@@ -325,24 +325,24 @@ snippet ita "Italicized Text" w
 \textit{$1} $0
 endsnippet
 
-snippet '(?<!\\|b)(?<=\s|\n)hl(a|b|c|d|e|f|g)' "highlight color" wrA
-\hlnote`!p snip.rv = match.group(1)`{$1} $0
+snippet '(?<!\\|b)(?<=\s|\n|\{|\`)hl(a|b|c|d|e|f|g)' "highlight color" wrA
+\hlnote`!p snip.rv = match.group(1)`{$1}$0
 endsnippet
 
 snippet '(?<!\\)(?<=\s|\n)bhl(a|b|c|d|e)' "highlight background" irA
-\hlbnote`!p snip.rv = match.group(1)`{$1} $0
+\hlbnote`!p snip.rv = match.group(1)`{$1}$0
 endsnippet
 
 snippet dfhl "highlight definition" wA
-\hldefn{$1} $0
+\hldefn{$1}$0
 endsnippet
 
 snippet hlw "highlight warning" wA
-\hlwarn{$1} $0
+\hlwarn{$1}$0
 endsnippet
 
-snippet '(?<!\\)hli' "highlight important" wrA
-\hlimpo{$1} $0
+snippet '(?<!\\)(?<=\s)hli' "highlight important" wrA
+\hlimpo{$1}$0
 endsnippet
 
 snippet star "level 1 star" w

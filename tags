@@ -1568,7 +1568,7 @@ Getting Started	_site/LearningHaskell/classnotes.tex	/^\\chapter{Getting Started
 Getting Started	_site/LearningHaskell/learningnotes.tex	/^\\chapter{Getting Started}%$/;"	c
 GitError	_plugins/jekyll-git-mtime.rb	/^        class GitError < StandardError; end$/;"	c	module:Jekyll.GitMtime
 GitMtime	_plugins/jekyll-git-mtime.rb	/^    module GitMtime$/;"	m	module:Jekyll
-Giving Respectful Advice	JAPAN202R/classnotes.tex	/^\\section{Giving Respectful Advice}%$/;"	s	chapter:#1""第１９課
+Giving Respectful Advice	JAPAN202R/classnotes.tex	/^\\section{Giving Respectful Advice}%$/;"	s	chapter:第１９課
 Giving Respectful Advice	_site/JAPAN202R/classnotes.tex	/^\\section{Giving Respectful Advice}%$/;"	s	chapter:第１９課
 Goals of the section	PMATH450/classnotes.tex	/^\\paragraph{Goals of the section}$/;"	P	section:Lecture 2 May 9th 2019""Lebesgue Outer Measure
 Goals of the section	_site/PMATH450/classnotes.tex	/^\\paragraph{Goals of the section}$/;"	P	section:Lecture 2 May 9th 2019""Lebesgue Outer Measure
@@ -1724,6 +1724,7 @@ Integration of Forms (Continued)	PMATH365/classnotes.tex	/^\\section{Integration
 Integration of Forms (Continued)	_site/PMATH365/classnotes.tex	/^\\section{Integration of Forms (Continued)}%$/;"	s	chapter:Lecture 28 Mar 22nd
 Interest in \\texorpdfstring{$2 \\pi$}{2pi} periodic functions	PMATH450/classnotes.tex	/^\\chapter{Interest in \\texorpdfstring{$2 \\pi$}{2pi} periodic functions}%$/;"	c
 Interest in \\texorpdfstring{$2 \\pi$}{2pi} periodic functions	_site/PMATH450/classnotes.tex	/^\\chapter{Interest in \\texorpdfstring{$2 \\pi$}{2pi} periodic functions}%$/;"	c
+Interesting Summaries as Exercise	JAPAN202R/classnotes.tex	/^\\chapter{Interesting Summaries as Exercise}%$/;"	c
 Interior, Closure and Boundary	PMATH333/pmath333_defns_thms.tex	/^\\section{Interior, Closure and Boundary}$/;"	s	chapter:Topology in Euclidean Space
 Interior, Closure and Boundary	_site/PMATH333/pmath333_defns_thms.tex	/^\\section{Interior, Closure and Boundary}$/;"	s	chapter:Topology in Euclidean Space
 Interpretation	ACTSC431/classnotes.tex	/^\\paragraph{Interpretation} Consider an experiment with independent trails, of which each has on/;"	P	subsection:Lecture 15 Nov 01st""Frequency Distribution --- Basic Frequency Distributions (Continued 2)""Frequency Distributions (Continued 2)
@@ -2945,7 +2946,7 @@ Practice Problems	PMATH352W18/classnotes.tex	/^\\section{Practice Problems} % (f
 Practice Problems	_site/PMATH352W18/classnotes-white.tex	/^\\section{Practice Problems} % (fold)$/;"	s	chapter:Tutorial Jan 31 2018
 Practice Problems	_site/PMATH352W18/classnotes.tex	/^\\section{Practice Problems} % (fold)$/;"	s	chapter:Tutorial Jan 31 2018
 Preface	ACTSC432/classnotes.tex	/^\\chapter*{Preface}%$/;"	c
-Preface	JAPAN202R/classnotes.tex	/^\\chapter*{Preface}%$/;"	c	part:#1
+Preface	JAPAN202R/classnotes.tex	/^\\chapter*{Preface}%$/;"	c
 Preface	PMATH333/pmath333_defns_thms.tex	/^\\chapter*{Preface}$/;"	c
 Preface	PMATH348/classnotes.tex	/^\\chapter*{Preface}%$/;"	c
 Preface	PMATH365/classnotes.tex	/^\\chapter*{Preface}%$/;"	c
@@ -3014,7 +3015,7 @@ Quartics	PMATH348/classnotes.tex	/^\\subsection{Quartics}%$/;"	u	section:Lecture
 Quartics	_site/PMATH348/classnotes.tex	/^\\subsection{Quartics}%$/;"	u	section:Lecture 28 Mar 20th""Galois Groups of Polynomials (Continued)
 Quartics (Continued)	PMATH348/classnotes.tex	/^\\subsection{Quartics (Continued)}%$/;"	u	section:Lecture 29 Mar 22nd""Galois Groups of Polynomials (Continued 2)
 Quartics (Continued)	_site/PMATH348/classnotes.tex	/^\\subsection{Quartics (Continued)}%$/;"	u	section:Lecture 29 Mar 22nd""Galois Groups of Polynomials (Continued 2)
-Questions within Larger Sentences	JAPAN202R/classnotes.tex	/^\\section{Questions within Larger Sentences}%$/;"	s	chapter:#1""第２０課
+Questions within Larger Sentences	JAPAN202R/classnotes.tex	/^\\section{Questions within Larger Sentences}%$/;"	s	chapter:第２０課
 Questions within Larger Sentences	_site/JAPAN202R/classnotes.tex	/^\\section{Questions within Larger Sentences}%$/;"	s	chapter:第２０課
 Quotient Groups	PMATH347S18/lectures/lec12.tex	/^\\subsection{Quotient Groups}%$/;"	u	section:Lecture 12 May 28th 2018""Isomorphism Theorems
 Quotient Groups	_site/PMATH347S18/lectures/lec12.tex	/^\\subsection{Quotient Groups}%$/;"	u	section:Lecture 12 May 28th 2018""Isomorphism Theorems
@@ -3923,6 +3924,7 @@ chp:important theorems and definitions	Personal Notes/Notes_Intro_to_Analysis_WW
 chp:important theorems and definitions	_site/Personal Notes/Notes_Intro_to_Analysis_WWade.tex	/^\\chapter{Information from Earlier Chapters}\\label{chp:important theorems and definitions}$/;"	l
 chp:interest_in_2_pi_periodic_functions	PMATH450/classnotes.tex	/^\\label{chp:interest_in_2_pi_periodic_functions}$/;"	l
 chp:interest_in_2_pi_periodic_functions	_site/PMATH450/classnotes.tex	/^\\label{chp:interest_in_2_pi_periodic_functions}$/;"	l
+chp:interesting_summaries_as_exercise	JAPAN202R/classnotes.tex	/^\\label{chp:interesting_summaries_as_exercise}$/;"	l
 chp:introduction	PMATH365/classnotes.tex	/^\\label{chp:introduction}$/;"	l
 chp:introduction	_site/PMATH365/classnotes.tex	/^\\label{chp:introduction}$/;"	l
 chp:introduction_and_review_of_probability	ACTSC432/classnotes.tex	/^\\label{chp:introduction_and_review_of_probability}$/;"	l
@@ -4725,9 +4727,7 @@ defn:_aleph_1_compact	PMATH733/classnotes.tex	/^\\begin{defn}[$\\aleph_1$-Compac
 defn:_aleph_1_compact	_site/PMATH733/classnotes.tex	/^\\begin{defn}[$\\aleph_1$-Compact]\\index{$\\aleph_1$-Compact}\\label{defn:_aleph_1_compact}$/;"	l
 defn:_b_definable	PMATH733/classnotes.tex	/^\\begin{defn}[$B$-Definable]\\index{$B$-Definable}\\label{defn:_b_definable}$/;"	l
 defn:_b_definable	_site/PMATH733/classnotes.tex	/^\\begin{defn}[$B$-Definable]\\index{$B$-Definable}\\label{defn:_b_definable}$/;"	l
-defn:_ba	JAPAN202R/classnotes.tex	/^\\begin{defn}[〜ば]\\index{〜ば}\\label{defn:_ba}$/;"	l
 defn:_ba	_site/JAPAN202R/classnotes.tex	/^\\begin{defn}[〜ば]\\index{〜ば}\\label{defn:_ba}$/;"	l
-defn:_bayokatsutadesu	JAPAN202R/classnotes.tex	/^\\begin{defn}[〜ばよかったです]\\index{〜ばよかったです}\\label{defn:_bayokatsut/;"	l
 defn:_bayokatsutadesu	_site/JAPAN202R/classnotes.tex	/^\\begin{defn}[〜ばよかったです]\\index{〜ばよかったです}\\label{defn:_bayokatsut/;"	l
 defn:_call_infty_e_k_	PMATH450/classnotes.tex	/^\\begin{defn}[$\\mathcal{L}_\\infty(E, \\mathbb{K})$]\\index{$\\mathcal{L}_\\infty(E, \\mathbb{K/;"	l
 defn:_call_infty_e_k_	_site/PMATH450/classnotes.tex	/^\\begin{defn}[$\\mathcal{L}_\\infty(E, \\mathbb{K})$]\\index{$\\mathcal{L}_\\infty(E, \\mathbb{K/;"	l
@@ -4745,7 +4745,6 @@ defn:_g_delta_sets	PMATH351F18/classnotes.tex	/^\\begin{defn}[$G_\\delta$ Sets]\
 defn:_g_delta_sets	_site/PMATH351F18/classnotes.tex	/^\\begin{defn}[$G_\\delta$ Sets]\\index{$G_\\delta$ Sets}\\label{defn:_g_delta_sets}$/;"	l
 defn:_h_invariant	PMATH348/classnotes.tex	/^\\begin{defn}[$H$-invariant]\\index{$H$-invariant}\\label{defn:_h_invariant}$/;"	l
 defn:_h_invariant	_site/PMATH348/classnotes.tex	/^\\begin{defn}[$H$-invariant]\\index{$H$-invariant}\\label{defn:_h_invariant}$/;"	l
-defn:_hazudesu	JAPAN202R/classnotes.tex	/^\\begin{defn}[〜はずです]\\index{〜はずです}\\label{defn:_hazudesu}$/;"	l
 defn:_hazudesu	_site/JAPAN202R/classnotes.tex	/^\\begin{defn}[〜はずです]\\index{〜はずです}\\label{defn:_hazudesu}$/;"	l
 defn:_j_th_coordinate_curve	PMATH365/classnotes.tex	/^\\begin{defn}[$j$\\textsuperscript{th} Coordinate Curve]\\index{$j$\\textsuperscript{th} Coordin/;"	l
 defn:_j_th_coordinate_curve	_site/PMATH365/classnotes.tex	/^\\begin{defn}[$j$\\textsuperscript{th} Coordinate Curve]\\index{$j$\\textsuperscript{th} Coordin/;"	l
@@ -4779,15 +4778,12 @@ defn:_n_th_cyclotomic_polynomial	PMATH348/classnotes.tex	/^\\begin{defn}[$n$\\te
 defn:_n_th_cyclotomic_polynomial	_site/PMATH348/classnotes.tex	/^\\begin{defn}[$n$\\textsuperscript{th} Cyclotomic Polynomial]\\index{$n$\\textsuperscript{th} Cy/;"	l
 defn:_n_th_roots_of_unity	PMATH348/classnotes.tex	/^\\begin{defn}[$n$\\textsuperscript{th} Roots of Unity]\\index{$n$\\textsuperscript{th} Roots of /;"	l
 defn:_n_th_roots_of_unity	_site/PMATH348/classnotes.tex	/^\\begin{defn}[$n$\\textsuperscript{th} Roots of Unity]\\index{$n$\\textsuperscript{th} Roots of /;"	l
-defn:_naide	JAPAN202R/classnotes.tex	/^\\begin{defn}[〜ないで]\\index{〜ないで}\\label{defn:_naide}$/;"	l
 defn:_naide	_site/JAPAN202R/classnotes.tex	/^\\begin{defn}[〜ないで]\\index{〜ないで}\\label{defn:_naide}$/;"	l
 defn:_p_group	PMATH348/classnotes.tex	/^\\begin{defn}[$p$-Group]\\index{$p$-Group}\\label{defn:_p_group}$/;"	l
 defn:_p_group	_site/PMATH348/classnotes.tex	/^\\begin{defn}[$p$-Group]\\index{$p$-Group}\\label{defn:_p_group}$/;"	l
 defn:_sigma_algebra_of_borel_sets	PMATH450/classnotes.tex	/^\\begin{defn}[$\\sigma$-algebra of Borel Sets]\\index{$\\sigma$-algebra of Borel Sets}\\label{de/;"	l
 defn:_sigma_algebra_of_borel_sets	_site/PMATH450/classnotes.tex	/^\\begin{defn}[$\\sigma$-algebra of Borel Sets]\\index{$\\sigma$-algebra of Borel Sets}\\label{de/;"	l
-defn:_tekuretearigatou	JAPAN202R/classnotes.tex	/^\\begin{defn}[〜てくれてありがとう]\\index{〜てくれてありがとう}\\label{defn/;"	l
 defn:_tekuretearigatou	_site/JAPAN202R/classnotes.tex	/^\\begin{defn}[〜てくれてありがとう]\\index{〜てくれてありがとう}\\label{defn/;"	l
-defn:_teyokatsuta	JAPAN202R/classnotes.tex	/^\\begin{defn}[〜てよかった]\\index{〜てよかった}\\label{defn:_teyokatsuta}$/;"	l
 defn:_teyokatsuta	_site/JAPAN202R/classnotes.tex	/^\\begin{defn}[〜てよかった]\\index{〜てよかった}\\label{defn:_teyokatsuta}$/;"	l
 defn:a_b_0_class	ACTSC431/classnotes.tex	/^\\begin{defn}[$(a, b, 0)$ Class]\\index{$(a, b, 0)$ Class}\\label{defn:a_b_0_class}$/;"	l
 defn:a_b_0_class	_site/ACTSC431/classnotes.tex	/^\\begin{defn}[$(a, b, 0)$ Class]\\index{$(a, b, 0)$ Class}\\label{defn:a_b_0_class}$/;"	l
@@ -5444,7 +5440,6 @@ defn:isomorphism	_site/PMATH347S18/lectures/lec09.tex	/^\\label{defn:isomorphism
 defn:isomorphism	_site/PMATH733/classnotes.tex	/^\\label{defn:isomorphism}$/;"	l
 defn:isomorphism_of_hilbert_spaces	PMATH450/classnotes.tex	/^\\begin{defn}[Isomorphism of Hilbert Spaces]\\index{Isomorphism}\\label{defn:isomorphism_of_hilb/;"	l
 defn:isomorphism_of_hilbert_spaces	_site/PMATH450/classnotes.tex	/^\\begin{defn}[Isomorphism of Hilbert Spaces]\\index{Isomorphism}\\label{defn:isomorphism_of_hilb/;"	l
-defn:jidoushi	JAPAN202R/classnotes.tex	/^\\begin{defn}[自動詞]\\index{自動詞}\\label{defn:jidoushi}$/;"	l
 defn:jidoushi	_site/JAPAN202R/classnotes.tex	/^\\begin{defn}[自動詞]\\index{自動詞}\\label{defn:jidoushi}$/;"	l
 defn:joint_cdf	STAT330S18/classnotes.tex	/^\\label{defn:joint_cdf}$/;"	l
 defn:joint_cdf	STAT333/classnotes.tex	/^\\begin{defn}[Joint CDF]\\index{Joint CDF}\\label{defn:joint_cdf}$/;"	l
@@ -5653,9 +5648,7 @@ defn:mutlinomial_distribution	STAT330S18/classnotes.tex	/^\\label{defn:mutlinomi
 defn:mutlinomial_distribution	_site/STAT330S18/classnotes.tex	/^\\label{defn:mutlinomial_distribution}$/;"	l
 defn:n_chain	PMATH467/classnotes.tex	/^\\begin{defn}[$n$-Chain]\\index{$n$-Chain}\\label{defn:n_chain}$/;"	l
 defn:n_chain	_site/PMATH467/classnotes.tex	/^\\begin{defn}[$n$-Chain]\\index{$n$-Chain}\\label{defn:n_chain}$/;"	l
-defn:nagara	JAPAN202R/classnotes.tex	/^\\begin{defn}[〜ながら]\\index{〜ながら}\\label{defn:nagara}$/;"	l
 defn:nagara	_site/JAPAN202R/classnotes.tex	/^\\begin{defn}[〜ながら]\\index{〜ながら}\\label{defn:nagara}$/;"	l
-defn:name_toiu_item	JAPAN202R/classnotes.tex	/^\\begin{defn}[name という item]\\index{name という item}\\label{defn:name_toiu_item}$/;"	l
 defn:name_toiu_item	_site/JAPAN202R/classnotes.tex	/^\\begin{defn}[name という item]\\index{name という item}\\label{defn:name_toiu_item}$/;"	l
 defn:natural_numbers	PMATH733/classnotes.tex	/^\\label{defn:natural_numbers}$/;"	l
 defn:natural_numbers	_site/PMATH733/classnotes.tex	/^\\label{defn:natural_numbers}$/;"	l
@@ -6099,7 +6092,6 @@ defn:sylow_p_subgroup	PMATH348/classnotes.tex	/^\\begin{defn}[Sylow $p$-Subgroup
 defn:sylow_p_subgroup	_site/PMATH348/classnotes.tex	/^\\begin{defn}[Sylow $p$-Subgroup]\\index{Sylow $p$-Subgroup}\\label{defn:sylow_p_subgroup}$/;"	l
 defn:symmetric_difference	PMATH351F18/classnotes.tex	/^\\begin{defn}[Symmetric Difference]\\index{Symmetric Difference}\\label{defn:symmetric_differenc/;"	l
 defn:symmetric_difference	_site/PMATH351F18/classnotes.tex	/^\\begin{defn}[Symmetric Difference]\\index{Symmetric Difference}\\label{defn:symmetric_differenc/;"	l
-defn:tadoushi	JAPAN202R/classnotes.tex	/^\\begin{defn}[他動詞]\\index{他動詞}\\label{defn:tadoushi}$/;"	l
 defn:tadoushi	_site/JAPAN202R/classnotes.tex	/^\\begin{defn}[他動詞]\\index{他動詞}\\label{defn:tadoushi}$/;"	l
 defn:tail	ACTSC431/classnotes.tex	/^\\begin{defn}[Tail]\\index{Tail}\\label{defn:tail}$/;"	l
 defn:tail	_site/ACTSC431/classnotes.tex	/^\\begin{defn}[Tail]\\index{Tail}\\label{defn:tail}$/;"	l
@@ -6115,7 +6107,6 @@ defn:tangent_space_on_a_submanifold	PMATH365/classnotes.tex	/^\\begin{defn}[Tang
 defn:tangent_space_on_a_submanifold	_site/PMATH365/classnotes.tex	/^\\begin{defn}[Tangent Space on a Submanifold]\\index{Tangent Space}\\label{defn:tangent_space_on/;"	l
 defn:tangent_vector	PMATH365/classnotes.tex	/^\\begin{defn}[Tangent Vector]\\index{Tangent Vector}\\label{defn:tangent_vector}$/;"	l
 defn:tangent_vector	_site/PMATH365/classnotes.tex	/^\\begin{defn}[Tangent Vector]\\index{Tangent Vector}\\label{defn:tangent_vector}$/;"	l
-defn:teshimau	JAPAN202R/classnotes.tex	/^\\begin{defn}[〜てしまう]\\index{〜てしまう}\\label{defn:teshimau}$/;"	l
 defn:teshimau	_site/JAPAN202R/classnotes.tex	/^\\begin{defn}[〜てしまう]\\index{〜てしまう}\\label{defn:teshimau}$/;"	l
 defn:test_of_hypothesis	STAT330S18/classnotes.tex	/^\\label{defn:test_of_hypothesis}$/;"	l
 defn:test_of_hypothesis	_site/STAT330S18/classnotes.tex	/^\\label{defn:test_of_hypothesis}$/;"	l
@@ -6127,7 +6118,6 @@ defn:the_buhlmann_model	ACTSC432/classnotes.tex	/^\\begin{defn}[The B\\"{u}hlman
 defn:the_buhlmann_model	_site/ACTSC432/classnotes.tex	/^\\begin{defn}[The B\\"{u}hlmann Model]\\index{The B\\"{u}hlmann Model}\\label{defn:the_buhlmann_/;"	l
 defn:theories_of_a_structure	PMATH733/classnotes.tex	/^\\begin{defn}[Theories of a Structure]\\label{defn:theories_of_a_structure}$/;"	l
 defn:theories_of_a_structure	_site/PMATH733/classnotes.tex	/^\\begin{defn}[Theories of a Structure]\\label{defn:theories_of_a_structure}$/;"	l
-defn:to	JAPAN202R/classnotes.tex	/^\\begin{defn}[〜と]\\index{〜と}\\label{defn:to}$/;"	l
 defn:to	_site/JAPAN202R/classnotes.tex	/^\\begin{defn}[〜と]\\index{〜と}\\label{defn:to}$/;"	l
 defn:topological_embedding	PMATH467/classnotes.tex	/^\\begin{defn}[Topological Embedding]\\index{Topological Embedding}\\label{defn:topological_embed/;"	l
 defn:topological_embedding	_site/PMATH467/classnotes.tex	/^\\begin{defn}[Topological Embedding]\\index{Topological Embedding}\\label{defn:topological_embed/;"	l
@@ -7360,6 +7350,8 @@ fig:relationships_of_the_quotient_spaces	PMATH467/classnotes.tex	/^    \\label{f
 fig:relationships_of_the_quotient_spaces	_site/PMATH467/classnotes.tex	/^    \\label{fig:relationships_of_the_quotient_spaces}$/;"	l
 fig:rough_illustration_of_how_riemann_s_integration_works	PMATH450/classnotes.tex	/^  \\label{fig:rough_illustration_of_how_riemann_s_integration_works}$/;"	l
 fig:rough_illustration_of_how_riemann_s_integration_works	_site/PMATH450/classnotes.tex	/^  \\label{fig:rough_illustration_of_how_riemann_s_integration_works}$/;"	l
+fig:rule_for_aida	JAPAN202R/classnotes.tex	/^    \\caption{Rule for 〜間}\\label{fig:rule_for_aida}$/;"	l
+fig:rule_for_aidani	JAPAN202R/classnotes.tex	/^    \\caption{Rule for 〜間に}\\label{fig:rule_for_aidani}$/;"	l
 fig:s_1_as_a_manifold	PMATH467/classnotes.tex	/^    \\label{fig:s_1_as_a_manifold}$/;"	l
 fig:s_1_as_a_manifold	_site/PMATH467/classnotes.tex	/^    \\label{fig:s_1_as_a_manifold}$/;"	l
 fig:same_setup_as_in_fig_but_with_a_counterclockwise_rotation_at_its_center	PMATH365/classnotes.tex	/^    \\caption{Same setup as in \\cref{fig:straight_line_segment_y_r_truncated_to_within_l_z_l_} /;"	l
@@ -7644,12 +7636,22 @@ gpPt9	PMATH450/images/graphofF2.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' strok
 gpPt9	PMATH450/images/graphofF5.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
 gpPt9	PMATH467/bottle.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
 gpPt9	_site/PMATH467/bottle.svg	/^	<use xlink:href='#gpPt7' id='gpPt9' stroke='currentColor' transform='rotate(180)'\/>$/;"	i
+grammar:_aidani	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜間に]\\index{〜間に}\\label{grammar:_aidani}$/;"	l
+grammar:_ba	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜ば]\\index{〜ば}\\label{grammar:_ba}$/;"	l
+grammar:_bayokatsutadesu	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜ばよかったです]\\index{〜ばよかったです}\\label{grammar:_bayo/;"	l
+grammar:_hazudesu	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜はずです]\\index{〜はずです}\\label{grammar:_hazudesu}$/;"	l
 grammar:_kamoshiremasen	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_kamoshiremasen}$/;"	l
 grammar:_kamoshiremasen	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_kamoshiremasen}$/;"	l
+grammar:_kata	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜方]\\index{〜方}\\label{grammar:_kata}$/;"	l
+grammar:_kotonisuru	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜ことにする]\\index{〜ことにする}\\label{grammar:_kotonisuru}$/;"	l
+grammar:_made	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜まで]\\index{〜まで}\\label{grammar:_made}$/;"	l
 grammar:_mitaidesu	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_mitaidesu}$/;"	l
 grammar:_mitaidesu	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_mitaidesu}$/;"	l
+grammar:_naide	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜ないで]\\index{〜ないで}\\label{grammar:_naide}$/;"	l
 grammar:_nakutemoiidesu	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_nakutemoiidesu}$/;"	l
 grammar:_nakutemoiidesu	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_nakutemoiidesu}$/;"	l
+grammar:_noni	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜のに]\\index{〜のに}\\label{grammar:_noni}$/;"	l
+grammar:_noyouna_ni	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜のような \/ に]\\index{〜のような \/ に}\\label{grammar:_noyouna_/;"	l
 grammar:_period_ni_frequency_	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_period_ni_frequency_}$/;"	l
 grammar:_period_ni_frequency_	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_period_ni_frequency_}$/;"	l
 grammar:_qian_ni_tekara	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_qian_ni_tekara}$/;"	l
@@ -7668,26 +7670,39 @@ grammar:_taradoudesuka	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_taradoud
 grammar:_taradoudesuka	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_taradoudesuka}$/;"	l
 grammar:_teageru_kureru_morau	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_teageru_kureru_morau}$/;"	l
 grammar:_teageru_kureru_morau	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_teageru_kureru_morau}$/;"	l
+grammar:_tearu	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜てある]\\index{〜てある}\\label{grammar:_tearu}$/;"	l
+grammar:_tehoshii	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜てほしい]\\index{〜てほしい}\\label{grammar:_tehoshii}$/;"	l
 grammar:_teitadakemasenka	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_teitadakemasenka}$/;"	l
 grammar:_teitadakemasenka	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_teitadakemasenka}$/;"	l
+grammar:_tekuretearigatou	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜てくれてありがとう]\\index{〜てくれてありがとう}\\label{g/;"	l
 grammar:_temimasu	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_temimasu}$/;"	l
 grammar:_temimasu	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_temimasu}$/;"	l
+grammar:_temo	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜ても]\\index{〜ても}\\label{grammar:_temo}$/;"	l
 grammar:_teoku	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_teoku}$/;"	l
 grammar:_teoku	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_teoku}$/;"	l
 grammar:_tesumimasendeshita	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_tesumimasendeshita}$/;"	l
 grammar:_tesumimasendeshita	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_tesumimasendeshita}$/;"	l
+grammar:_teyokatsuta	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜てよかった]\\index{〜てよかった}\\label{grammar:_teyokatsuta}$/;"	l
 grammar:_toii	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_toii}$/;"	l
 grammar:_toii	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_toii}$/;"	l
 grammar:_tsute	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_tsute}$/;"	l
 grammar:_tsute	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:_tsute}$/;"	l
 grammar:ageru_kureru_morau	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:ageru_kureru_morau}$/;"	l
 grammar:ageru_kureru_morau	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:ageru_kureru_morau}$/;"	l
+grammar:doushi_nasai	JAPAN202R/classnotes.tex	/^\\begin{grammar}[動詞＋なさい]\\index{動詞＋なさい}\\label{grammar:doushi_nasai}$/;"	l
 grammar:hoshii	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:hoshii}$/;"	l
 grammar:hoshii	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:hoshii}$/;"	l
+grammar:jidoushi	JAPAN202R/classnotes.tex	/^\\begin{grammar}[自動詞]\\index{自動詞}\\label{grammar:jidoushi}$/;"	l
+grammar:keiyoushi_suru	JAPAN202R/classnotes.tex	/^\\begin{grammar}[形容詞＋する]\\index{形容詞＋する}\\label{grammar:keiyoushi_suru}$/;"	l
 grammar:mo_shika	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:mo_shika}$/;"	l
 grammar:mo_shika	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:mo_shika}$/;"	l
+grammar:nagara	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜ながら]\\index{〜ながら}\\label{grammar:nagara}$/;"	l
+grammar:name_toiu_item	JAPAN202R/classnotes.tex	/^\\begin{grammar}[name という item]\\index{name という item}\\label{grammar:name_toiu_item}$/;"	l
 grammar:nara	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:nara}$/;"	l
 grammar:nara	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:nara}$/;"	l
+grammar:tadoushi	JAPAN202R/classnotes.tex	/^\\begin{grammar}[他動詞]\\index{他動詞}\\label{grammar:tadoushi}$/;"	l
+grammar:teshimau	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜てしまう]\\index{〜てしまう}\\label{grammar:teshimau}$/;"	l
+grammar:to	JAPAN202R/classnotes.tex	/^\\begin{grammar}[〜と]\\index{〜と}\\label{grammar:to}$/;"	l
 grammar:using_sentences_to_qualify_nouns	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:using_sentences_to_qualify_nouns}$/;"	l
 grammar:using_sentences_to_qualify_nouns	_site/JAPAN201RS18/readingnotes.tex	/^\\label{grammar:using_sentences_to_qualify_nouns}$/;"	l
 grammar:volitional_form	JAPAN201RS18/readingnotes.tex	/^\\label{grammar:volitional_form}$/;"	l
@@ -8036,7 +8051,7 @@ n	_site/assets/js/jquery-ajax.js	/^!function(a,b){"object"==typeof module&&"obje
 n	_site/assets/js/jquery-ajax.js	/^if(g)for(i=f[f.length-1].ownerDocument,n.map(f,mb),j=0;g>j;j++)h=f[j],gb.test(h.type||"")&&!O.ac/;"	f	function:AnonymousFunctionc62e0272f200
 n	assets/js/jquery-ajax.js	/^!function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.documen/;"	f	function:AnonymousFunction381dd58f0100
 n	assets/js/jquery-ajax.js	/^if(g)for(i=f[f.length-1].ownerDocument,n.map(f,mb),j=0;g>j;j++)h=f[j],gb.test(h.type||"")&&!O.ac/;"	f	function:AnonymousFunction381dd58ff200
-name という item	JAPAN202R/classnotes.tex	/^\\section{name という item}%$/;"	s	chapter:#1""第２０課
+name という item	JAPAN202R/classnotes.tex	/^\\section{name という item}%$/;"	s	chapter:第２０課
 name という item	_site/JAPAN202R/classnotes.tex	/^\\section{name という item}%$/;"	s	chapter:第２０課
 nb	_site/assets/js/jquery-ajax.js	/^!function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.documen/;"	f
 nb	assets/js/jquery-ajax.js	/^!function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.documen/;"	f
@@ -10777,6 +10792,7 @@ table:rules_of_conjugation_for_ba	JAPAN202R/classnotes.tex	/^  \\label{table:rul
 table:rules_of_conjugation_for_ba	_site/JAPAN202R/classnotes.tex	/^  \\label{table:rules_of_conjugation_for_ba}$/;"	l
 table:rules_of_converting_from_base_form_to_causative_form	JAPAN202R/classnotes.tex	/^  \\label{table:rules_of_converting_from_base_form_to_causative_form}$/;"	l
 table:rules_of_converting_from_base_form_to_causative_form	_site/JAPAN202R/classnotes.tex	/^  \\label{table:rules_of_converting_from_base_form_to_causative_form}$/;"	l
+table:rules_of_converting_from_base_form_to_causative_passive_form	JAPAN202R/classnotes.tex	/^  \\label{table:rules_of_converting_from_base_form_to_causative_passive_form}$/;"	l
 table:rules_of_converting_from_base_form_to_passive_form	JAPAN202R/classnotes.tex	/^  \\label{table:rules_of_converting_from_base_form_to_passive_form}$/;"	l
 table:rules_of_converting_from_base_form_to_passive_form	_site/JAPAN202R/classnotes.tex	/^  \\label{table:rules_of_converting_from_base_form_to_passive_form}$/;"	l
 table:some_values_of_f_x	PMATH348/classnotes.tex	/^    \\label{table:some_values_of_f_x}$/;"	l
@@ -11461,7 +11477,7 @@ your-pages-on-this-site-looks-awesome-heck-your-faq-looks-good-even-though-it-do
 「を」の使い方	日本語自己練習/格助詞/notes.tex	/^\\subsection{「を」の使い方}%$/;"	u	section:Calculus/Analysis""各格助詞の使い方
 〜かもしれません	JAPAN201RS18/readingnotes.tex	/^\\section{〜かもしれません}%$/;"	s	chapter:Lecture 6 五月二十二日（火曜日）
 〜かもしれません	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜かもしれません}%$/;"	s	chapter:Lecture 6 五月二十二日（火曜日）
-〜ことにする	JAPAN202R/classnotes.tex	/^\\section{〜ことにする}%$/;"	s	chapter:#1""第２３課
+〜ことにする	JAPAN202R/classnotes.tex	/^\\section{〜ことにする}%$/;"	s	chapter:第２３課
 〜ことにする	_site/JAPAN202R/classnotes.tex	/^\\section{〜ことにする}%$/;"	s	chapter:第２３課
 〜し	JAPAN201RS18/readingnotes.tex	/^\\section{〜し}$/;"	s	chapter:Lecture 2 五月七日（月曜日）
 〜し	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜し}$/;"	s	chapter:Lecture 2 五月七日（月曜日）
@@ -11473,35 +11489,35 @@ your-pages-on-this-site-looks-awesome-heck-your-faq-looks-good-even-though-it-do
 〜たら	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜たら}%$/;"	s	chapter:Lecture 18 七月十一日（水曜日）
 〜てあげる/くれる/もらう	JAPAN201RS18/readingnotes.tex	/^\\section{〜てあげる\/くれる\/もらう}%$/;"	s	chapter:Lecture 14 六月十八日（月曜日）
 〜てあげる/くれる/もらう	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜てあげる\/くれる\/もらう}%$/;"	s	chapter:Lecture 14 六月十八日（月曜日）
-〜てある	JAPAN202R/classnotes.tex	/^\\section{〜てある}%$/;"	s	chapter:#1""第２１課
+〜てある	JAPAN202R/classnotes.tex	/^\\section{〜てある}%$/;"	s	chapter:第２１課
 〜てある	_site/JAPAN202R/classnotes.tex	/^\\section{〜てある}%$/;"	s	chapter:第２１課
 〜ていただけませんか	JAPAN201RS18/readingnotes.tex	/^\\section{〜ていただけませんか}%$/;"	s	chapter:Lecture 14 六月十八日（月曜日）
 〜ていただけませんか	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜ていただけませんか}%$/;"	s	chapter:Lecture 14 六月十八日（月曜日）
 〜ておく	JAPAN201RS18/readingnotes.tex	/^\\section{〜ておく}%$/;"	s	chapter:Lecture 12 六月十一日（月曜日）
 〜ておく	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜ておく}%$/;"	s	chapter:Lecture 12 六月十一日（月曜日）
-〜てくれてありがとう	JAPAN202R/classnotes.tex	/^\\section{〜てくれてありがとう}%$/;"	s	chapter:#1""第１９課
+〜てくれてありがとう	JAPAN202R/classnotes.tex	/^\\section{〜てくれてありがとう}%$/;"	s	chapter:第１９課
 〜てくれてありがとう	_site/JAPAN202R/classnotes.tex	/^\\section{〜てくれてありがとう}%$/;"	s	chapter:第１９課
-〜てしまう	JAPAN202R/classnotes.tex	/^\\section{〜てしまう}%$/;"	s	chapter:#1""第１８課
+〜てしまう	JAPAN202R/classnotes.tex	/^\\section{〜てしまう}%$/;"	s	chapter:第１８課
 〜てしまう	_site/JAPAN202R/classnotes.tex	/^\\section{〜てしまう}%$/;"	s	chapter:第１８課
 〜てすみませんでした	JAPAN201RS18/readingnotes.tex	/^\\section{〜てすみませんでした}%$/;"	s	chapter:Lecture 16 六月二十七日（水曜日）
 〜てすみませんでした	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜てすみませんでした}%$/;"	s	chapter:Lecture 16 六月二十七日（水曜日）
-〜てほしい	JAPAN202R/classnotes.tex	/^\\section{〜てほしい}%$/;"	s	chapter:#1""第２１課
+〜てほしい	JAPAN202R/classnotes.tex	/^\\section{〜てほしい}%$/;"	s	chapter:第２１課
 〜てほしい	_site/JAPAN202R/classnotes.tex	/^\\section{〜てほしい}%$/;"	s	chapter:第２１課
 〜てみます	JAPAN201RS18/readingnotes.tex	/^\\section{〜てみます}%$/;"	s	chapter:Lecture 3 五月九日（水曜日）
 〜てみます	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜てみます}%$/;"	s	chapter:Lecture 3 五月九日（水曜日）
-〜ても	JAPAN202R/classnotes.tex	/^\\section{〜ても}%$/;"	s	chapter:#1""第２３課
+〜ても	JAPAN202R/classnotes.tex	/^\\section{〜ても}%$/;"	s	chapter:第２３課
 〜ても	_site/JAPAN202R/classnotes.tex	/^\\section{〜ても}%$/;"	s	chapter:第２３課
-〜てよかったです	JAPAN202R/classnotes.tex	/^\\section{〜てよかったです}%$/;"	s	chapter:#1""第１９課
+〜てよかったです	JAPAN202R/classnotes.tex	/^\\section{〜てよかったです}%$/;"	s	chapter:第１９課
 〜てよかったです	_site/JAPAN202R/classnotes.tex	/^\\section{〜てよかったです}%$/;"	s	chapter:第１９課
-〜と	JAPAN202R/classnotes.tex	/^\\section{〜と}%$/;"	s	chapter:#1""第１８課
+〜と	JAPAN202R/classnotes.tex	/^\\section{〜と}%$/;"	s	chapter:第１８課
 〜と	_site/JAPAN202R/classnotes.tex	/^\\section{〜と}%$/;"	s	chapter:第１８課
 〜といい	JAPAN201RS18/readingnotes.tex	/^\\section{〜といい}%$/;"	s	chapter:Lecture 15 六月二十五日（月曜日）
 〜といい	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜といい}%$/;"	s	chapter:Lecture 15 六月二十五日（月曜日）
 〜とらどうですか	JAPAN201RS18/readingnotes.tex	/^\\section{〜とらどうですか}%$/;"	s	chapter:Lecture 8 五月二十八日（月曜日）
 〜とらどうですか	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜とらどうですか}%$/;"	s	chapter:Lecture 8 五月二十八日（月曜日）
-〜ないで	JAPAN202R/classnotes.tex	/^\\section{〜ないで}%$/;"	s	chapter:#1""第２０課
+〜ないで	JAPAN202R/classnotes.tex	/^\\section{〜ないで}%$/;"	s	chapter:第２０課
 〜ないで	_site/JAPAN202R/classnotes.tex	/^\\section{〜ないで}%$/;"	s	chapter:第２０課
-〜ながら	JAPAN202R/classnotes.tex	/^\\section{〜ながら}%$/;"	s	chapter:#1""第１８課
+〜ながら	JAPAN202R/classnotes.tex	/^\\section{〜ながら}%$/;"	s	chapter:第１８課
 〜ながら	_site/JAPAN202R/classnotes.tex	/^\\section{〜ながら}%$/;"	s	chapter:第１８課
 〜なくてもいいです	JAPAN201RS18/readingnotes.tex	/^\\section{〜なくてもいいです}%$/;"	s	chapter:Lecture 18 七月十一日（水曜日）
 〜なくてもいいです	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜なくてもいいです}%$/;"	s	chapter:Lecture 18 七月十一日（水曜日）
@@ -11509,29 +11525,29 @@ your-pages-on-this-site-looks-awesome-heck-your-faq-looks-good-even-though-it-do
 〜なくてもいいです (Continued)	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜なくてもいいです (Continued)}%$/;"	s	chapter:Lecture 19 七月十六日（月曜日）
 〜なら	JAPAN201RS18/readingnotes.tex	/^\\section{〜なら}%$/;"	s	chapter:Lecture 4 五月十四日（月曜日）
 〜なら	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜なら}%$/;"	s	chapter:Lecture 4 五月十四日（月曜日）
-〜のに	JAPAN202R/classnotes.tex	/^\\section{〜のに}%$/;"	s	chapter:#1""第２２課
+〜のに	JAPAN202R/classnotes.tex	/^\\section{〜のに}%$/;"	s	chapter:第２２課
 〜のに	_site/JAPAN202R/classnotes.tex	/^\\section{〜のに}%$/;"	s	chapter:第２２課
-〜のような / 〜のように	JAPAN202R/classnotes.tex	/^\\section{〜のような \/ 〜のように}%$/;"	s	chapter:#1""第２２課
+〜のような / 〜のように	JAPAN202R/classnotes.tex	/^\\section{〜のような \/ 〜のように}%$/;"	s	chapter:第２２課
 〜のような / 〜のように	_site/JAPAN202R/classnotes.tex	/^\\section{〜のような \/ 〜のように}%$/;"	s	chapter:第２２課
-〜はずです	JAPAN202R/classnotes.tex	/^\\section{〜はずです}%$/;"	s	chapter:#1""第１９課
+〜はずです	JAPAN202R/classnotes.tex	/^\\section{〜はずです}%$/;"	s	chapter:第１９課
 〜はずです	_site/JAPAN202R/classnotes.tex	/^\\section{〜はずです}%$/;"	s	chapter:第１９課
-〜ば	JAPAN202R/classnotes.tex	/^\\section{〜ば}%$/;"	s	chapter:#1""第２２課
+〜ば	JAPAN202R/classnotes.tex	/^\\section{〜ば}%$/;"	s	chapter:第２２課
 〜ば	_site/JAPAN202R/classnotes.tex	/^\\section{〜ば}%$/;"	s	chapter:第２２課
-〜ばよかったです	JAPAN202R/classnotes.tex	/^\\section{〜ばよかったです}%$/;"	s	chapter:#1""第１８課
+〜ばよかったです	JAPAN202R/classnotes.tex	/^\\section{〜ばよかったです}%$/;"	s	chapter:第１８課
 〜ばよかったです	_site/JAPAN202R/classnotes.tex	/^\\section{〜ばよかったです}%$/;"	s	chapter:第１８課
-〜まで	JAPAN202R/classnotes.tex	/^\\section{〜まで}%$/;"	s	chapter:#1""第２３課
+〜まで	JAPAN202R/classnotes.tex	/^\\section{〜まで}%$/;"	s	chapter:第２３課
 〜まで	_site/JAPAN202R/classnotes.tex	/^\\section{〜まで}%$/;"	s	chapter:第２３課
 〜みたいです	JAPAN201RS18/readingnotes.tex	/^\\section{〜みたいです}%$/;"	s	chapter:Lecture 20 七月二十三日（月曜日）
 〜みたいです	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜みたいです}%$/;"	s	chapter:Lecture 20 七月二十三日（月曜日）
-〜やすい / 〜にくい	JAPAN202R/classnotes.tex	/^\\section{〜やすい \/ 〜にくい}%$/;"	s	chapter:#1""第２０課
+〜やすい / 〜にくい	JAPAN202R/classnotes.tex	/^\\section{〜やすい \/ 〜にくい}%$/;"	s	chapter:第２０課
 〜やすい / 〜にくい	_site/JAPAN202R/classnotes.tex	/^\\section{〜やすい \/ 〜にくい}%$/;"	s	chapter:第２０課
 〜前に/〜てから	JAPAN201RS18/readingnotes.tex	/^\\section{〜前に\/〜てから}%$/;"	s	chapter:Lecture 19 七月十六日（月曜日）
 〜前に/〜てから	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜前に\/〜てから}%$/;"	s	chapter:Lecture 19 七月十六日（月曜日）
-〜方	JAPAN202R/classnotes.tex	/^\\section{〜方}%$/;"	s	chapter:#1""第２３課
+〜方	JAPAN202R/classnotes.tex	/^\\section{〜方}%$/;"	s	chapter:第２３課
 〜方	_site/JAPAN202R/classnotes.tex	/^\\section{〜方}%$/;"	s	chapter:第２３課
 〜時	JAPAN201RS18/readingnotes.tex	/^\\section{〜時}%$/;"	s	chapter:Lecture 15 六月二十五日（月曜日）
 〜時	_site/JAPAN201RS18/readingnotes.tex	/^\\section{〜時}%$/;"	s	chapter:Lecture 15 六月二十五日（月曜日）
-〜間に	JAPAN202R/classnotes.tex	/^\\section{〜間に}%$/;"	s	chapter:#1""第２１課
+〜間に	JAPAN202R/classnotes.tex	/^\\section{〜間に}%$/;"	s	chapter:第２１課
 〜間に	_site/JAPAN202R/classnotes.tex	/^\\section{〜間に}%$/;"	s	chapter:第２１課
 あげる/くれる/もらう	JAPAN201RS18/readingnotes.tex	/^\\section{あげる\/くれる\/もらう}%$/;"	s	chapter:Lecture 7 五月二十三日（水曜日）
 あげる/くれる/もらう	_site/JAPAN201RS18/readingnotes.tex	/^\\section{あげる\/くれる\/もらう}%$/;"	s	chapter:Lecture 7 五月二十三日（水曜日）
@@ -11541,33 +11557,33 @@ your-pages-on-this-site-looks-awesome-heck-your-faq-looks-good-even-though-it-do
 ほしい	_site/JAPAN201RS18/readingnotes.tex	/^\\section{ほしい}$/;"	s	chapter:Lecture 6 五月二十二日（火曜日）
 一週間に三回	JAPAN201RS18/readingnotes.tex	/^\\section{一週間に三回}%$/;"	s	chapter:Lecture 4 五月十四日（月曜日）
 一週間に三回	_site/JAPAN201RS18/readingnotes.tex	/^\\section{一週間に三回}%$/;"	s	chapter:Lecture 4 五月十四日（月曜日）
-丁重語 Extra-modest Expressions	JAPAN202R/classnotes.tex	/^\\section{丁重語 Extra-modest Expressions}%$/;"	s	chapter:#1""第２０課
+丁重語 Extra-modest Expressions	JAPAN202R/classnotes.tex	/^\\section{丁重語 Extra-modest Expressions}%$/;"	s	chapter:第２０課
 丁重語 Extra-modest Expressions	_site/JAPAN202R/classnotes.tex	/^\\section{丁重語 Extra-modest Expressions}%$/;"	s	chapter:第２０課
-使役動詞 Causative Verbs	JAPAN202R/classnotes.tex	/^\\section{使役動詞 Causative Verbs}%$/;"	s	chapter:#1""第２２課
+使役動詞 Causative Verbs	JAPAN202R/classnotes.tex	/^\\section{使役動詞 Causative Verbs}%$/;"	s	chapter:第２２課
 使役動詞 Causative Verbs	_site/JAPAN202R/classnotes.tex	/^\\section{使役動詞 Causative Verbs}%$/;"	s	chapter:第２２課
-使役動詞の受動態 Causative-Passive Forms	JAPAN202R/classnotes.tex	/^\\section{使役動詞の受動態 Causative-Passive Forms}%$/;"	s	chapter:#1""第２３課
+使役動詞の受動態 Causative-Passive Forms	JAPAN202R/classnotes.tex	/^\\section{使役動詞の受動態 Causative-Passive Forms}%$/;"	s	chapter:第２３課
 使役動詞の受動態 Causative-Passive Forms	_site/JAPAN202R/classnotes.tex	/^\\section{使役動詞の受動態 Causative-Passive Forms}%$/;"	s	chapter:第２３課
-動詞＋なさい	JAPAN202R/classnotes.tex	/^\\section{動詞＋なさい}%$/;"	s	chapter:#1""第２２課
+動詞＋なさい	JAPAN202R/classnotes.tex	/^\\section{動詞＋なさい}%$/;"	s	chapter:第２２課
 動詞＋なさい	_site/JAPAN202R/classnotes.tex	/^\\section{動詞＋なさい}%$/;"	s	chapter:第２２課
-単語（１８課）	JAPAN202R/classnotes.tex	/^\\section{単語（１８課）}%$/;"	s	chapter:#1""第１８課
+単語（１８課）	JAPAN202R/classnotes.tex	/^\\section{単語（１８課）}%$/;"	s	chapter:第１８課
 単語（１８課）	_site/JAPAN202R/classnotes.tex	/^\\section{単語（１８課）}%$/;"	s	chapter:第１８課
-単語（１９課）	JAPAN202R/classnotes.tex	/^\\section{単語（１９課）}%$/;"	s	chapter:#1""第１９課
+単語（１９課）	JAPAN202R/classnotes.tex	/^\\section{単語（１９課）}%$/;"	s	chapter:第１９課
 単語（１９課）	_site/JAPAN202R/classnotes.tex	/^\\section{単語（１９課）}%$/;"	s	chapter:第１９課
-単語（２０課）	JAPAN202R/classnotes.tex	/^\\section{単語（２０課）}%$/;"	s	chapter:#1""第２０課
+単語（２０課）	JAPAN202R/classnotes.tex	/^\\section{単語（２０課）}%$/;"	s	chapter:第２０課
 単語（２０課）	_site/JAPAN202R/classnotes.tex	/^\\section{単語（２０課）}%$/;"	s	chapter:第２０課
-単語（２１課）	JAPAN202R/classnotes.tex	/^\\section{単語（２１課）}%$/;"	s	chapter:#1""第２１課
+単語（２１課）	JAPAN202R/classnotes.tex	/^\\section{単語（２１課）}%$/;"	s	chapter:第２１課
 単語（２１課）	_site/JAPAN202R/classnotes.tex	/^\\section{単語（２１課）}%$/;"	s	chapter:第２１課
-単語（２２課）	JAPAN202R/classnotes.tex	/^\\section{単語（２２課）}%$/;"	s	chapter:#1""第２２課
+単語（２２課）	JAPAN202R/classnotes.tex	/^\\section{単語（２２課）}%$/;"	s	chapter:第２２課
 単語（２２課）	_site/JAPAN202R/classnotes.tex	/^\\section{単語（２２課）}%$/;"	s	chapter:第２２課
-単語（２３課）	JAPAN202R/classnotes.tex	/^\\section{単語（２３課）}%$/;"	s	chapter:#1""第２３課
+単語（２３課）	JAPAN202R/classnotes.tex	/^\\section{単語（２３課）}%$/;"	s	chapter:第２３課
 単語（２３課）	_site/JAPAN202R/classnotes.tex	/^\\section{単語（２３課）}%$/;"	s	chapter:第２３課
-受動文 Passive Sentences	JAPAN202R/classnotes.tex	/^\\section{受動文 Passive Sentences}%$/;"	s	chapter:#1""第２１課
+受動文 Passive Sentences	JAPAN202R/classnotes.tex	/^\\section{受動文 Passive Sentences}%$/;"	s	chapter:第２１課
 受動文 Passive Sentences	_site/JAPAN202R/classnotes.tex	/^\\section{受動文 Passive Sentences}%$/;"	s	chapter:第２１課
 各格助詞の使い方	_site/日本語自己練習/格助詞/notes.tex	/^\\section{各格助詞の使い方}%$/;"	s	chapter:Calculus/Analysis
 各格助詞の使い方	日本語自己練習/格助詞/notes.tex	/^\\section{各格助詞の使い方}%$/;"	s	chapter:Calculus/Analysis
-尊敬語 Honorific Verbs	JAPAN202R/classnotes.tex	/^\\section{尊敬語 Honorific Verbs}%$/;"	s	chapter:#1""第１９課
+尊敬語 Honorific Verbs	JAPAN202R/classnotes.tex	/^\\section{尊敬語 Honorific Verbs}%$/;"	s	chapter:第１９課
 尊敬語 Honorific Verbs	_site/JAPAN202R/classnotes.tex	/^\\section{尊敬語 Honorific Verbs}%$/;"	s	chapter:第１９課
-形容詞＋する	JAPAN202R/classnotes.tex	/^\\section{形容詞＋する}%$/;"	s	chapter:#1""第２１課
+形容詞＋する	JAPAN202R/classnotes.tex	/^\\section{形容詞＋する}%$/;"	s	chapter:第２１課
 形容詞＋する	_site/JAPAN202R/classnotes.tex	/^\\section{形容詞＋する}%$/;"	s	chapter:第２１課
 数え方	JAPAN201RS18/readingnotes.tex	/^\\section{数え方}%$/;"	s	chapter:Lecture 8 五月二十八日（月曜日）
 数え方	_site/JAPAN201RS18/readingnotes.tex	/^\\section{数え方}%$/;"	s	chapter:Lecture 8 五月二十八日（月曜日）
@@ -11577,17 +11593,17 @@ your-pages-on-this-site-looks-awesome-heck-your-faq-looks-good-even-though-it-do
 格助詞の覚え方	日本語自己練習/格助詞/notes.tex	/^\\section{格助詞の覚え方}%$/;"	s	chapter:Calculus/Analysis
 漢字	JAPAN201RS18/readingnotes.tex	/^\\section{漢字}%$/;"	s	chapter:Lecture 2 五月七日（月曜日）
 漢字	_site/JAPAN201RS18/readingnotes.tex	/^\\section{漢字}%$/;"	s	chapter:Lecture 2 五月七日（月曜日）
-第１８課	JAPAN202R/classnotes.tex	/^\\chapter{第１８課}%$/;"	c	part:#1
+第１８課	JAPAN202R/classnotes.tex	/^\\chapter{第１８課}%$/;"	c
 第１８課	_site/JAPAN202R/classnotes.tex	/^\\chapter{第１８課}%$/;"	c
-第１９課	JAPAN202R/classnotes.tex	/^\\chapter{第１９課}%$/;"	c	part:#1
+第１９課	JAPAN202R/classnotes.tex	/^\\chapter{第１９課}%$/;"	c
 第１９課	_site/JAPAN202R/classnotes.tex	/^\\chapter{第１９課}%$/;"	c
-第２０課	JAPAN202R/classnotes.tex	/^\\chapter{第２０課}%$/;"	c	part:#1
+第２０課	JAPAN202R/classnotes.tex	/^\\chapter{第２０課}%$/;"	c
 第２０課	_site/JAPAN202R/classnotes.tex	/^\\chapter{第２０課}%$/;"	c
-第２１課	JAPAN202R/classnotes.tex	/^\\chapter{第２１課}%$/;"	c	part:#1
+第２１課	JAPAN202R/classnotes.tex	/^\\chapter{第２１課}%$/;"	c
 第２１課	_site/JAPAN202R/classnotes.tex	/^\\chapter{第２１課}%$/;"	c
-第２２課	JAPAN202R/classnotes.tex	/^\\chapter{第２２課}%$/;"	c	part:#1
+第２２課	JAPAN202R/classnotes.tex	/^\\chapter{第２２課}%$/;"	c
 第２２課	_site/JAPAN202R/classnotes.tex	/^\\chapter{第２２課}%$/;"	c
-第２３課	JAPAN202R/classnotes.tex	/^\\chapter{第２３課}%$/;"	c	part:#1
+第２３課	JAPAN202R/classnotes.tex	/^\\chapter{第２３課}%$/;"	c
 第２３課	_site/JAPAN202R/classnotes.tex	/^\\chapter{第２３課}%$/;"	c
 練習	_site/日本語自己練習/格助詞/notes.tex	/^\\section{練習}%$/;"	s	chapter:Calculus/Analysis
 練習	日本語自己練習/格助詞/notes.tex	/^\\section{練習}%$/;"	s	chapter:Calculus/Analysis
@@ -11601,7 +11617,7 @@ your-pages-on-this-site-looks-awesome-heck-your-faq-looks-good-even-though-it-do
 練習４	日本語自己練習/格助詞/notes.tex	/^\\subsection{練習４}%$/;"	u	section:Calculus/Analysis""練習
 練習５	_site/日本語自己練習/格助詞/notes.tex	/^\\subsection{練習５}%$/;"	u	section:Calculus/Analysis""練習
 練習５	日本語自己練習/格助詞/notes.tex	/^\\subsection{練習５}%$/;"	u	section:Calculus/Analysis""練習
-自動詞と他動詞	JAPAN202R/classnotes.tex	/^\\section{自動詞と他動詞}%$/;"	s	chapter:#1""第１８課
+自動詞と他動詞	JAPAN202R/classnotes.tex	/^\\section{自動詞と他動詞}%$/;"	s	chapter:第１８課
 自動詞と他動詞	_site/JAPAN202R/classnotes.tex	/^\\section{自動詞と他動詞}%$/;"	s	chapter:第１８課
-謙虚語 Humble Expressions	JAPAN202R/classnotes.tex	/^\\section{謙虚語 Humble Expressions}%$/;"	s	chapter:#1""第２０課
+謙虚語 Humble Expressions	JAPAN202R/classnotes.tex	/^\\section{謙虚語 Humble Expressions}%$/;"	s	chapter:第２０課
 謙虚語 Humble Expressions	_site/JAPAN202R/classnotes.tex	/^\\section{謙虚語 Humble Expressions}%$/;"	s	chapter:第２０課

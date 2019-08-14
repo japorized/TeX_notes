@@ -9222,7 +9222,7 @@ for $[f] \in L_1(\mathbb{T}, \mathbb{C})$, we have
 This is, however, not an obvious or trivial result,
 especially since the two constructions are entirely different;
 one is an equivalence class of convolutions,
-while the other is an integral of convolution-like expression
+while the other is an integral of convolution-like expressions
 but involving equivalence classes.
 
 % section convolution_continued (end)
@@ -9642,10 +9642,6 @@ Let us show that the above function always agree with convolution.
   keeps us in this smaller space $\mathfrak{B}$.
 \end{remark}
 
-\marginnote{Unfortunately, I am running out of time for studying everything
-carefully. I shall be skipping proofs while covering for everything else.
-I will come back to adding proofs when time permits.}
-
 \begin{thm}[Convolution as a Normalizer]\label{thm:convolution_as_a_normalizer}
   Let $g \in \mathcal{C}(\mathbb{T}, \mathbb{C})$, and let
   \begin{equation*}
@@ -9659,7 +9655,29 @@ I will come back to adding proofs when time permits.}
 \end{thm}
 
 \begin{proof}
-  \hlwarn{To be added}
+  By part 2 of
+  \cref{thm:riemannian_version_of_convolution_on_homogeneous_banach_spaces},
+  for $[f] \in ([\mathcal{C}(\mathbb{T}, \mathbb{C})], \norm{\cdot}_{\infty})$,
+  \begin{equation*}
+    \norm{C_g[f]}_{\infty} = \norm{g * [f]}_{\infty}
+    \leq \nu_1(g) \norm{[f]}_{\infty},
+  \end{equation*}
+  so $\norm{C_g} \leq \nu_1(g)$.
+
+  Let $f \in \mathcal{C}(\mathbb{T}, \mathbb{C})$ with $\norm{[f]}_{\infty} \leq
+  1$.
+  Then $g * [f] \in [\mathcal{C}(\mathbb{T}, \mathbb{C})]$ so that
+  \begin{equation*}
+    \norm{C_g[f]}_{\infty} = \norm{g * [f]}_{\infty} = \norm{g \diamond f}_{\sup}
+    \geq \nu_1(g).
+  \end{equation*}
+  Then by
+  \cref{thm:bounded_riemann_integrable_functions_are_lebesgue_integrable},
+  we see that
+  \begin{align*}
+    g \diamond f(0) &= \frac{1}{2} \int_{[-\pi, \pi)} g(s) f(0 - s) \dm(s) \\
+                    &= \frac{1}{2\pi} \int_{-\pi}^{\pi} g(s)f(-s) \dif{s}
+  \end{align*}
 \end{proof}
 
 % section convolution_continued_2 (end)
@@ -9933,7 +9951,7 @@ that applies to linear operators in Banach spaces.
   and suppose that for each $x \in \mathcal{H}$,
   there exists a constant $\kappa_x > 0$ such that
   \begin{equation*}
-    \norm{T_x}_{\mathfrak{Y}} \leq \kappa_x, \quad T \in \mathcal{F}.
+    \norm{Tx}_{\mathfrak{Y}} \leq \kappa_x, \quad T \in \mathcal{F}.
   \end{equation*}
   Then $\mathcal{F}$ is bounded; that is
   \begin{equation*}

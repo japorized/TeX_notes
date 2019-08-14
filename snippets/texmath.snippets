@@ -64,43 +64,13 @@ snippet xO "otimes" iA
 endsnippet
 
 context "math()"
-snippet 'bb([a-zA-Z])' "mathbb" wrA
-\mathbb{`!p snip.rv = match.group(1).upper()`}$0
+snippet '(bb|cal|scr|frak)([a-zA-Z])' "mathfont" wrA
+\math`!p snip.rv = match.group(1)`{`!p snip.rv = match.group(2).upper()`}$0
 endsnippet
 
 context "math()"
-snippet 'cal([a-zA-Z])' "mathcal" wrA
-\mathcal{`!p snip.rv = match.group(1).upper()`}$0
-endsnippet
-
-context "math()"
-snippet 'scr([a-zA-Z])' "mathscr" wrA
-\mathscr{`!p snip.rv = match.group(1).upper()`}$0
-endsnippet
-
-context "math()"
-snippet 'fr([a-zA-Z])' "mathfrak" wrA
-\mathfrak{`!p snip.rv = match.group(1).upper()`}$0
-endsnippet
-
-context "math()"
-snippet bb "mathbb" w
-\mathbb{$1}$0
-endsnippet
-
-context "math()"
-snippet cal "mathcal" w
-\mathcal{$1}$0
-endsnippet
-
-context "math()"
-snippet scr "mathscr" w
-\mathscr{$1}$0
-endsnippet
-
-context "math()"
-snippet frak "mathfrak" w
-\mathfrak{$1}$0
+snippet '(bb|cal|scr|frak)' "mathbb" wr
+\math`!p snip.rv = match.group(1)`{$1}$0
 endsnippet
 
 context "math()"
@@ -424,12 +394,12 @@ snippet '(?<!\\){([0-9a-zA-Z+\|-]*)}E{[0-9a-zA-Z+-]}' "pure endowment" wrA
 endsnippet
 
 context "math()"
-snippet '(?<!\\)(\{([0-9a-z]*\|)\})?A\{([a-zA-Z0-9+{}.:_\\-]*)\}' "discrete insurance" wrA
+snippet '({([0-9a-zA-Z\\\s]+?)})?A{([0-9a-zA-Z_\\+\{\}\-,\.:]+)}' "discrete insurance" wrA
 \\Ax`!p snip.rv = '[' + match.group(2) + ']' if match.group(2) is not None else ""`{`!p snip.rv = match.group(3)`}$0
 endsnippet
 
 context "math()"
-snippet '(?<!\\)(\{([0-9a-z]*\|)\})?A\*\{([a-zA-Z0-9+{}.:_\\-]*)\}' "cts ins" wrA
+snippet '({([0-9a-zA-Z\\\s]+?)})?A\*{([0-9a-zA-Z_\\+\{\}\-,\.:]+)}' "cts ins" wrA
 \\Ax*`!p snip.rv = '[' + match.group(2) + ']' if match.group(2) is not None else ""`{`!p snip.rv = match.group(3)`}$0
 endsnippet
 
