@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." >/dev/null 2>&1 && pwd )"
+
+usage() {
+  echo "Usage: add-to-data-file [ARGUMENTS]
+  
+  ARGUMENTS:
+  -h  Show this help
+  -t  Title of the notes [required]
+  -d  Directory to notes [required]
+  -f  File name of notes (default: classnotes)
+  -k  Keywords for notes (default: )"
+}
+
+addToDataFile() {
+  dataFile=$DIR/_data/files.yaml
+  printf "%s\n%s\n" "- title: ${1}
+  pdf:
+    - title: ${3:-classnotes}.pdf
+      src: /$2/${3:-classnotes}.pdf
+    - title: ${3:-classnotes}-dark.pdf
+      src: /$2/${3:-classnotes}-dark.pdf
+  tex:
+    - title: ${3:-classnotes}.tex
+      src: /$2/${3:-classnotes}.tex
+  keywords: [
+    ${4}
+  ]" "$(cat $dataFile)" > "${dataFile}"
+}
+
+title=""
+directory=""
+filename=""
+keywords=""
+
+while getopts "t:d:f:k:h" opt; do
+  case "${opt}" in
+    h)
+      usage
+      exit 0
+      ;;
+    t) title=${OPTARG} ;;
+    d) directory=${OPTARG} ;;
+    f) filename=${OPTARG} ;;
+    k) keywords=${OPTARG} ;;
+    \?)
+      usage
+      exit 1
+      ;;
+  esac
+done
+
+if [ -n "$title" ] || [ -n "$directory" ]; then
+  addToDataFile "${title}" "${directory}" "${filename}" "${keywords}"
+fi

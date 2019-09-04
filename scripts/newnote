@@ -1,20 +1,66 @@
 #!/usr/bin/env bash
 
-if [ $1 = "" ]; then
-  echo "[newnote] Please provide directory name (optionally filename)"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." >/dev/null 2>&1 && pwd )"
+
+usage() {
+  echo " Usage: newnote [OPTIONS] [ARGUMENTS]
+ Description: create new notes
+ 
+ OPTIONS:
+ -f     Give filename (default: classnotes)
+ 
+ EXAMPLES:
+
+ # Create multiple directories with possibly different filenames
+ $ newnote -f readingnotes -f writingnotes reading-course writing-course sleeping-course
+ [newnote] Created reading-course
+ [newnote] Created writing-course
+ [newnote] Created sleeping course
+ 
+ $ ls reading-course
+ readingnotes.tex   readingnotes-dark.tex   references.bib   images/
+
+ $ ls writing-course
+ writingnotes.tex   writingnotes-dark.tex   references.bib   images/
+
+ $ ls sleeping-course
+ classnotes.tex   classnotes-dark.tex   references.bib   images/"
+}
+
+filenames=("dummy")
+
+while getopts "f:h" opt; do
+  case "${opt}" in
+    f) filenames+=($OPTARG) ;;
+    h)
+      usage
+      exit 0
+      ;;
+    \?)
+      usage
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if [ $# = 0 ]; then
+  echo "[newnote] Please provide directory name"
   exit 1
 fi
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-newdir=$DIR/../$1
+for d in $(seq 1 $#); do
+  dir_name=${!d}
+  newdir=$DIR/$dir_name
+  filename=${filenames[$d]:-classnotes}
+  if [ ! -d $newdir ]; then
+    mkdir -p $newdir/images
+    echo "\\newcommand{\\personalcolor}{true}\\input{${filename}.tex}" > $newdir/${filename}-dark.tex
+    touch $newdir/references.bib $newdir/${filename}.tex
 
-if [ ! -d $newdir ]; then
-  mkdir -p $newdir/images
-  echo "\\newcommand{\\personalcolor}{true}\\input{${2:-classnotes}.tex}" > $newdir/${2:-classnotes}-dark.tex
-  touch $newdir/references.bib $newdir/${2:-classnotes}.tex
-
-  echo "[newnote] Created $1"
-else
-  echo "[newnote] Directory already exists! Nothing done"
-  exit 1
-fi
+    echo "[newnote] Created $dir_name"
+  else
+    echo "[newnote] Directory already exists! Nothing done for "
+    exit 1
+  fi
+done
