@@ -1,3 +1,15 @@
+- title: PMATH451 - Measure and Integration
+  pdf:
+    - title: classnotes.pdf
+      src: /PMATH451/classnotes.pdf
+    - title: classnotes-dark.pdf
+      src: /PMATH451/classnotes-dark.pdf
+  tex:
+    - title: classnotes.tex
+      src: /PMATH451/classnotes.tex
+  keywords: [
+    
+  ]
 - title: PMATH450 S19 - Lebesgue Integration and Fourier Analysis
   pdf:
     - title: classnotes.pdf

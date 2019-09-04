@@ -1,0 +1,353 @@
+% !TEX TS-program = pdflatex
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{PMATH451 --- Measure and Integration}
+\author{Johnson Ng}
+\subtitle{Class notes for Fall 2019}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
+
+\input{latex-classnotes-preamble.tex}
+
+\begin{document}
+\input{latex-classnotes-header.tex}
+
+\chapter*{Preface}%
+\label{chp:preface}
+\addcontentsline{toc}{chapter}{Preface}
+% chapter preface
+
+
+
+% chapter preface (end)
+
+\chapter{Lecture 1 Sep 04th, 2019}%
+\label{chp:lecture_1_sep_04th_2019}
+% chapter lecture_1_sep_04th_2019
+
+\section{Motivation for the Study of Measures}%
+\label{sec:motivation_for_the_study_of_measures}
+% section motivation_for_the_study_of_measures
+
+Recall Riemann integration.
+
+\begin{defnnonum}[Riemann Integration]\index{Riemann Integration}\label{defn:riemann_integration}
+  Let $f : [a, b] \to \mathbb{R}$ be a \hlnotec{bounded} function.
+  We call
+  \begin{equation*}
+    P = \{ a = x_0 < x_1 < \hdots < x_n = b \} \subseteq [a, b]
+  \end{equation*}
+  a \hldefn{partition} of $[a, b]$,
+  and
+  \begin{equation*}
+    \Delta x_i = x_i - x_{i-1}
+  \end{equation*}
+  as the \hlnoteb{length of the $i$\textsuperscript{th} interval}
+  for $i = 1, \ldots, n$.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-0.5, 0) -- (3, 0);
+      \draw[->] (0, -0.5) -- (0, 3);
+      \draw[domain=0.5:2.2,range=0:3] plot ({\x}, {-(\x-1)*(\x-1) + 2});
+      \node[label={270:{$x_{i-1}$}}] at (0.5, 0) {|};
+      \node[label={270:{$x_{i}$}}] at (2.2, 0) {|};
+      \draw[dashed] (1, 2) -- (-0.5, 2) node[left] {$M_i$};
+      \draw[dashed] (2.2, 0.56) -- (-0.5, 0.56) node[left] {$m_i$};
+    \end{tikzpicture}
+    \caption{Idea of Riemann integration}\label{fig:idea_of_riemann_integration}
+  \end{marginfigure}
+  Let
+  \begin{equation*}
+    M_i = \sup \{ f(x) : x \in [x_{i-1}, x_i] \}
+  \end{equation*}
+  be the \hlnoteb{supremum of $f$ on the $i$\textsuperscript{th} interval},
+  and 
+  \begin{equation*}
+    m_i = \inf \{ f(x) : x \in [x_{i-1}, x_i] \}
+  \end{equation*}
+  be the \hlnoteb{infimum of $f$ on the $i$\textsuperscript{th} interval}.
+  We define the \hldefn{Riemann upper sum} as
+  \begin{equation*}
+    U(f, P) = \sum_{i} M_i \Delta x_i,
+  \end{equation*}
+  and the \hldefn{Riemann lower sum} as
+  \begin{equation*}
+    L(f, P) = \sum_{i} m_i \Delta x_i. 
+  \end{equation*}
+  We define the \hldefn{Riemann upper integral} as
+  \begin{equation*}
+    \overline{\int_{a}^{b}} f \dif{x} = \inf_{P} U(f, P)
+  \end{equation*}
+  and the \hldefn{Riemann lower integral} as
+  \begin{equation*}
+    \underline{\int_{a}^{b}} f \dif{x} = \sup L(f, P).
+  \end{equation*}
+  We say that $f$ is \hldefn{Riemann integrable} if
+  \begin{equation*}
+    \overline{\int_{a}^{b}} f \dif{x}
+    = \underline{\int_{a}^{b}} f \dif{x},
+  \end{equation*}
+  and we write the integral of $f$ as
+  \begin{equation*}
+    \int_{a}^{b} f \dif{x}
+    = \overline{\int_{a}^{b}} f \dif{x}
+    = \underline{\int_{a}^{b}} f \dif{x}.
+  \end{equation*}
+\end{defnnonum}
+
+As hyped up as one does earlier in university about Riemann integration,
+there are functions that are not Riemann integrable!
+
+\begin{eg}
+  Consider a function $f : [0, 1] \to \mathbb{R}$ given by
+  \begin{equation*}
+    f(x) = \begin{cases}
+      1 & x \in \mathbb{Q} \\
+      0 & x \notin \mathbb{Q}
+    \end{cases}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \overline{\int_{a}^{b}} f \dif{x} = 1 \text{ and }
+    \underline{\int_{a}^{b}} f \dif{x} = 0.
+  \end{equation*}
+  Thus $f$ is not Riemann integrable.
+\end{eg}
+
+\begin{note}[Shortcomings of the Riemann integral]
+  \begin{enumerate}
+    \item We cannot characterize functions that are Riemann integrable,
+      i.e. we do not have a list of characteristics that we can check
+      against to see if a function is Riemann integrable.
+
+      This remained an open problem in the earlier 1920s.
+    \item The Riemann integral behaves badly when it comes to
+      pointwise limits of functions. The next example shall illustrate
+      this.
+    \item The Riemann integral is awkward when $f$ is unbounded.
+      In particular, we used to hack our way around by looking at
+      whether the Riemann integral converges to some value the function
+      approaches the unbounded point, and then ``conclude''
+      that the integral is the limit of that convergence.
+    \item Recall that the \hlnotea{Fundamental Theorem of Calculus} states
+      that
+      \begin{equation*}
+        \frac{\dif{}}{\dif{x}} \int_{a}^{x} f(t) \dif{t} = f(x).
+      \end{equation*}
+      We know that this works for Riemann integrals.
+      By the first shortcoming, the problem here is that we do not
+      fully know what are the functions that the Fundamental Theorem
+      is true for.
+    \item In PMATH450, we saw that Fourier developed the Fourier series,
+      which is an extremely useful tool
+      in solving \hlnotea{Differential Equations} using sines and cosines.
+      However, the convergence of the Fourier series remains largely
+      unexplained by Fourier, and we have but developed
+      some roundabout ways of showing some convergence.
+    \item Consider the set $R$ if Riemann integrable functions
+      on the interval $[a, b]$.
+      The set $R$ has a natural metric:
+      \begin{equation*}
+        d(f, g) = \int_{a}^{b} \abs{f - g} \dif{x}.
+      \end{equation*}
+      However, the metric space $(R, d)$ is \hlnotec{not complete}.
+      This means many of our favorite results in PMATH351 are not usable!
+    \item There are many functions that seem like they should have
+      an integral, but turned out that they did not under Riemann integration.
+  \end{enumerate}
+\end{note}
+
+\begin{eg}[Pointwise Limits of Riemann Integrable Functions is not necessarily Riemann Integrable]
+  Let $\mathbb{Q} = \{ x_n \}_{n \in \mathbb{N}}$. Then
+  consider a sequence of functions
+  \begin{equation*}
+    f_n(x) = \begin{cases}
+      1 & x \in \{ x_1, \ldots, x_n \} \\
+      0 & x \notin \{ x_1, \ldots, x_n \}
+    \end{cases}.
+  \end{equation*}
+  It is rather clear that
+  \begin{equation*}
+    \overline{\int_{a}^{b}} f \dif{x} = \underline{\int_{a}^{b}} f \dif{x} = 0.
+  \end{equation*}
+  However, the pointwise limit of the $f_n$'s, and that is
+  \begin{equation*}
+    \lim_{n \to \infty} f_n(x) = f(x) = \begin{cases}
+      1 & x \in \mathbb{Q} \\
+      0 & x \notin \mathbb{Q}
+    \end{cases},
+  \end{equation*}
+  is, as mentioned in the last example, not Riemann integrable.
+\end{eg}
+
+To address the shortcomings of the Riemann integral,
+Henri Lebesgue developed the \hlnotea{Lebesgue integral},
+of which we have seen in PMATH450.
+
+Instead of dividing the $x$-axis,
+Lebesgue decided to divide the $y$-axis first.
+
+If the range of a function $f$ is $[c, d]$, where $c, d$ can be infinite,
+then we partition the interval such that
+\begin{equation*}
+  P = \{ c = y_0 < y_1 < \hdots < y_n = d \},
+\end{equation*}
+and we define
+\begin{equation*}
+  E_i = \{ x : f(x) \in [y_{i-1}, y_i] \}.
+\end{equation*}
+Then if $A_i$ is the area of the ``rectangle'' for
+the $i$\textsuperscript{th} interval of $[c, d]$, we have
+\begin{equation*}
+  y_{i-1} \cdot \ell(E_i) \leq A_i \leq y_i \cdot \ell(E_i),
+\end{equation*}
+where $\ell(E_i)$ is the \hlnotea{Lebesgue measure} of the set $E_i$.
+Then if we let $\int_{a}^{b} f$ denote the Lebesgue integral of $f$,
+we would expect
+\begin{equation*}
+  \sum_{i=1}^{n} y_{i-1} \cdot \ell(E_i)
+  \leq \int_{a}^{b} f
+  \leq \sum_{i=1}^{n} y_i \cdot \ell(E_i).
+\end{equation*}
+However, to truly understand what this means,
+we need to understand what the Lebesgue measure is.
+
+Furthermore, recall that in PMATH450, we saw that not all
+sets, in $\mathbb{R}$ for example, are measurable,
+and for `good' reasons, there always exists non-measurable sets.
+
+% section motivation_for_the_study_of_measures (end)
+
+\section{Algebras and \texorpdfstring{$\sigma$}{sigma}-Algebra of Sets}%
+\label{sec:algebras_and_sigma_algebra_of_sets}
+% section algebras_and_sigma_algebra_of_sets
+
+\marginnote{For this course, we shall use the convention that
+\begin{itemize}
+  \item the `ambient' space $X$ is always non-empty;
+  \item $\mathcal{P}(X)$, the power set of $X$, has non-trivial elements; and
+  \item we denote $A^C = \{ x \in X : x \notin A \}$ for $A \subseteq X$.
+\end{itemize}
+}
+
+\begin{defn}[Algebra of Sets]\index{Algebra of Sets}\label{defn:algebra_of_sets}
+  Given $X$, a non-empty collection of subsets of $X$,
+  i.e. $\emptyset \neq \mathcal{A} \subseteq \mathcal{P}(X)$,
+  is called an \hlnoteb{algebra of sets} of $X$ provided that:
+  \begin{enumerate}
+    \item $A_1, \ldots, A_n \in \mathcal{A} \implies
+      \bigcup_{i=1}^{n} A_i \in \mathcal{A}$; and
+    \item $A \in \mathcal{A} => A^C \in \mathcal{A}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{propo}[Properties of Algebra of Sets]\index{Properties of Algebra of Sets}\label{propo:properties_of_algebra_of_sets}
+  If $\mathcal{A}$ is an algebra of sets of $X$, then
+  \begin{enumerate}
+    \setcounter{enumi}{2}
+    \item $\emptyset, X \in \mathcal{A}$;
+    \item $A, B \in \mathcal{A} \implies
+      A \setminus B = \{ x \in X \mid x \in A \land x \notin B \} \in
+      \mathcal{A}$ ; and
+    \item $A_1, \ldots, A_n \in \mathcal{A} \implies
+      \bigcap_{i=1}^{n} A_i \in \mathcal{A}$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \setcounter{enumi}{2}
+    \item $\mathcal{A} \neq \emptyset \implies \exists A \in \mathcal{A}
+      \implies A^C \in \mathcal{A} \implies A \cup A^C = X \in \mathcal{A}
+      \implies \emptyset = X^C \in \mathcal{A}$.
+    \item $A, B \in \mathcal{A} \implies A^C \in \mathcal{A}
+      \implies A^C \cup B \in \mathcal{A}
+      \implies A \setminus B = (A^C \cup B)^C \in \mathcal{A}$.
+    \item (\hlnotea{De Morgan's Law})
+      Notice that
+      $(A_1 \cap A_2 \cap \hdots \cap A_n)^C
+      = A_1^C \cup A_2^C \cup \hdots A_n^C \in \mathcal{A}$
+      since $A_i^C \in \mathcal{A}$.
+      Thus the complement
+      \begin{equation*}
+        A_1 \cap A_2 \cap \hdots \cap A_n \in \mathcal{A}.
+      \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{defn}[$\sigma$-Algebra of Sets]\index{$\sigma$-Algebra of Sets}\label{defn:_sigma_algebra_of_sets}
+  Given $X$ and $\emptyset \neq \mathcal{A} \subseteq \mathcal{P}(X)$,
+  we say that $\mathcal{A}$ is a \hlnoteb{$\sigma$-algebra of sets}
+  of $X$ if it is an algebra of sets and
+  \begin{equation*}
+    \forall A_n \in \mathcal{A}, n \in \mathbb{N}, \quad
+    \bigcup_{n \in \mathbb{N}} A_n \in \mathcal{A}.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  \begin{enumerate}
+    \item $\mathcal{P}(X)$ is a $\sigma$-algebra.
+    \item Consider $X$ as an infinite set.
+      We say that a set $A$ is \hldefn{cofinite} if $A^C$ is finite.
+      Let
+      \begin{equation*}
+        \mathcal{A} \coloneqq \{ A \in \mathcal{P}(X)
+          \mid A \text{ is finite or cofinite } \}.
+      \end{equation*}
+      Then $\mathcal{A}$ is an algebra of sets:
+      \begin{itemize}
+        \item finite union of finite sets remains finite;
+        \item finite union of finite and cofinite sets remains cofinite; and
+        \item complement of finite sets are the cofinite sets and vice versa.
+      \end{itemize}
+      However, $\mathcal{A}$ is \hlnotec{not} a $\sigma$-algebra:
+      consider $A_n = \{ 2^n \} \subseteq X = \mathbb{N}$,
+      which we then realize that
+      \begin{equation*}
+        \bigcup_{n \in \mathbb{N}} A_n = \text{ set of all even numbers },
+      \end{equation*}
+      but the set of all even numbers is clearly not finite, and
+      its complement, which is the set of all odd numbers, is not finite.
+    \item Consider $X$ as an uncountable set.
+      We say that a set $A$ is \hldefn{co-countable} if $A^C$ is countable.
+      \sidenote{Recall that a set $A$ is said to be countable if
+      there is a one-to-one correspondence between elements of $A$
+      and the natural numbers.}
+      The set
+      \begin{equation*}
+        \mathcal{A} \coloneqq \{ A \subseteq X
+          \mid A \text{ is countable or co-countable } \}
+      \end{equation*}
+      is a $\sigma$-algebra:
+      \begin{itemize}
+        \item countable union of countable sets is countable;
+        \item countable union of countable
+          and co-countable sets is co-countable; and
+        \item complement of countable sets are co-countable and vice versa.
+      \end{itemize}
+  \end{enumerate}
+\end{eg}
+
+% section algebras_and_sigma_algebra_of_sets (end)
+
+% chapter lecture_1_sep_04th_2019 (end)
+
+\appendix
+
+\backmatter
+
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
+
+% \nobibliography*
+\bibliography{references}
+
+\printindex
+
+\end{document}
+% vim:tw=80:fdm=syntax
+
