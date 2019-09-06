@@ -1,3 +1,15 @@
+- title: ACTSC371 - Introduction to Investments
+  pdf:
+    - title: classnotes.pdf
+      src: /ACTSC371/classnotes.pdf
+    - title: classnotes-dark.pdf
+      src: /ACTSC371/classnotes-dark.pdf
+  tex:
+    - title: classnotes.tex
+      src: /ACTSC371/classnotes.tex
+  keywords: [
+    'ACTSC', 'Investment'
+  ]
 - title: PMATH451 - Measure and Integration
   pdf:
     - title: classnotes.pdf

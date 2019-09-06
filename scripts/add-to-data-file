@@ -10,7 +10,8 @@ usage() {
   -t  Title of the notes [required]
   -d  Directory to notes [required]
   -f  File name of notes (default: classnotes)
-  -k  Keywords for notes (default: )"
+  -k  Keywords for notes (default: )
+      Use the format \"'keyword1', 'keyword2'\""
 }
 
 addToDataFile() {
