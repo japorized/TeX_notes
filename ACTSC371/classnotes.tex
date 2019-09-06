@@ -1,0 +1,384 @@
+% !TEX TS-program = pdflatex
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{ACTSC371 --- Introduction to Investments}
+\author{Johnson Ng}
+\subtitle{Class notes for Fall 2019}
+\credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
+\institution{University of Waterloo}
+
+\input{latex-classnotes-preamble.tex}
+
+\begin{document}
+\input{latex-classnotes-header.tex}
+
+\chapter*{Preface}%
+\label{chp:preface}
+\addcontentsline{toc}{chapter}{Preface}
+% chapter preface
+
+The main text used by this note is the optional textbook
+recommended by the course instructor, titled Investments.
+\cite{bodie2015}
+This note also pulls information from lectures.
+This note shall also follow the general structure of the textbook,
+instead of my usual approach that is a per-lecture basis.
+
+% chapter preface (end)
+
+\chapter{Introduction and Overview}%
+\label{chp:introduction_and_overview}
+% chapter introduction_and_overview
+
+\paragraph{The Environment of Investing}\label{paragraph:the_environment_of_investing}
+
+\begin{itemize}
+  \item \hlnotea{Capital investment} needs funds, which gives rise to capital
+    markets.
+  \item \hlnotea{Capital markets} exist for a plethora of financial instruments
+    that meets the needs of investors and users of capital.
+  \item Each of the above instruments, starting with stocks and bonds,
+    are created and evolved to respond to the needs of these users.
+\end{itemize}
+
+\section{A Short History of Investing}%
+\label{sec:a_short_history_of_investing}
+% section a_short_history_of_investing
+
+The financial market has gone through some turbulent times,
+and increasingly frequent as of recent.
+Many of the notable crashes in recent history have been fueled
+by irrationality, in that the public has failed to value a commodity
+for its intrinsic or `actual' value.
+
+On a related note, according to the course instructor,
+when a crash happens in the East,
+where new days come earlier, `just like dominoes',
+the crash will sweep its way to the West.
+In such cases, monetary institutions can brace for impact.
+
+\paragraph{The Crash of 1929 and the Great Depression}
+Fortunes were rapidly made by supposedly brilliant investors,
+and this did not escape the attention of the media.
+The public went into a mania for investing,
+which ended up a phenomenal rise in the stock market averages,
+which then led to the \hldefn{Crash of 1929}.
+This paved way to the \hldefn{Great Depression}.
+
+\paragraph{The One-day Panic in 1987}
+The \hldefn{One-day Panic in 1987}, aka \hldefn{Black Monday},
+\cite{wiki:blackmonday1987} attracted global attention as well.
+However, unlike the Crash of 1929, no economic collapse followed.
+This is likely due to more informed decision-making by monetary officials,
+and a stronger economic situation.
+The financial environment also turned out to be neutral for the year 1987.
+
+This crash, in turn, set stage for the economic and financial boom of the 1990s.
+
+\paragraph{Technology Bubble in the 1990s}
+With high pubic interest in the stock market,
+and nightly news reports on levels of market indices on various mediums,
+the stock market really soared in the 1990s.
+The most prominent increase was confined to the technology stage.
+Technological companies like Dell Computer and Cisco Systems
+grew unbelievably fast.  
+However, this growth attracted the attention of unsophisticated investors.
+
+This growth of these companies,
+as measured by the \hlnotea{Nasdaq market index},
+was described as a ``\hlnotea{bubble}'',
+a term used to describe the unwarranted inflation in asset values.
+When the bubble finally `burst',
+naïve investors lose money in the collapse as they enter the bubbling market
+long after the initial gain,
+and even experienced investors insisted on staying
+due to not wanting to lose out on gains.
+This eventually lead to the new millennium `\hlnotea{bear market}'.
+
+\paragraph{The New Millennium `Bear Market'} 
+The great `bull market' \sidenote{A market that is optimistic.} in the 1990s
+became a `bear market' \sidenote{A market that is pessimistic.}
+for the new millennium.
+However, the decline ended in October 2002,
+at a level of more than 50\% below the all-time high in 1999.
+
+\paragraph{Our `Trustworthy' Banks}
+A new bubble came along in the first decade of the new millennium,
+this time in real assets over financial ones, particularly in commodities
+such as copper, oil and many food staples, and especially in \hlnotec{real estate}.
+In the West, due to miscalculations of the \hlnotea{Federal Reserve} about
+a risk of deflation, interest rates were pegged at high values
+and mortgages soared.
+As a result, mortgage officers and banks complied with
+individuals with poor credit risks, allowing these individuals to finance
+homes that are supposed to be unaffordable to them.
+
+The mortgages that were issued were then resold by banks through
+\hlnotea{mortgage-backed securities},
+and these banks also devised instruments with credit-backed obligations
+and circulated them.
+Investors of various scales traded these securities without understanding
+the risk that entails, much of it due to poor credit risks in the market.
+By the end of 2007, the cracks appeared, and it was revealed
+that many of the world's largest banks,
+who were deeply entangled in these instruments,
+were effectively bankrupt.
+The main concentration of these holdings was in the United States,
+the British, and the European banks; the Canadian banks,
+who also participated in the action earlier on,
+have largely divested themselves of the credit instruments by the collapse.
+
+% section a_short_history_of_investing (end)
+
+\section{The Economy and Investment}%
+\label{sec:the_economy_and_investment}
+% section the_economy_and_investment
+
+When investors trade stocks, it is usually traded with another investor,
+who has the opposite idea of what the value of the company is ---
+buyers think that the value of the stock is higher than the share price,
+while the sellers think that the value of the stock is lower.
+
+The price in the market is important
+in establishing a fair valuation of the shares.
+This is relevant to the corporation when it issues new shares,
+when it requires new capital.
+The company itself is usually uninvolved in the trading;
+the company is usually only interested in knowing what the trade price
+says about the sentiment of investors about its financial prospects.
+
+Shares in companies are used for companies to raise funds,
+so that they can expand and purchase physical assets.
+Investors have extra capital that companies need, and generally so
+because individuals have more funds than required for immediate needs.
+
+To obtain capital, those with a deficit issue \hlnotea{securities},
+which are bought by those with excess funds.
+We shall see a more formal introduction to securities later on,
+but we shall talk about stocks and bonds here, which are issued by
+private corporations.
+
+\hlnotea{Bonds} are notes that acknowledge indebtedness and specify
+the terms of repayment; \hlnotea{stocks} are instruments that convey
+ownership rights to their holders,
+which no guarantee of any fixed, or even positive, return.
+
+Stocks allow investors to participate in business activities
+while away from the drawbacks of individual ownership and partnership.
+They are relatively liquid, in that investors can fairly quickly
+extract the true value of the shares.
+Shares also offer limited liability, so that the greatest loss possible
+is the investment itself, in the case where the business goes out.
+
+\subsection{Real Investment VS Financial Investment}%
+\label{sub:real_investment_vs_financial_investment}
+% subsection real_investment_vs_financial_investment
+
+\begin{defn}[Financial Investment]\index{Financial Investment}\label{defn:financial_investment}
+  The investment of individuals in stocks and bonds of corporations
+  is known as \hlnoteb{financial investment}.
+\end{defn}
+
+\begin{defn}[Real Investment]\index{Real Investment}\label{defn:real_investment}
+  A \hlnoteb{real investment}is when a corporation takes capital
+  and invests it in productive assets.
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item Financial investment occurs as investors enter the securities markets
+      and exchange cash for financial instruments.
+      In this case, since only cash is exchanged between investors,
+      no new capital reaches the corporations,
+      and so no real investment occurs.
+    \item Real investments can be reinvestment profits,
+      but major real investment requires issues of new debt or equity
+      instruments.
+  \end{enumerate}
+\end{remark}
+
+\begin{defn}[Real Assets]\index{Real Assets}\label{defn:real_assets}
+  \hlnoteb{Real assets} determine the productive capacity of the economy.
+\end{defn}
+
+\begin{remark}
+  Real investments are channeled into real assets.
+\end{remark}
+
+\begin{eg}
+  Real assets can be:
+  \begin{itemize}
+    \item land;
+    \item buildings;
+    \item machines;
+    \item knowledge necessary to produce goods; and
+    \item workers.
+  \end{itemize}
+\end{eg}
+
+\begin{defn}[Financial Assets]\index{Financial Assets}\label{defn:financial_assets}
+  \hlnoteb{Financial assets} are related to financial investments,
+  such as stocks and bonds.
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item Financial assets do not represent a society's wealth.
+      \begin{itemize}
+        \item Shares of stock represent only ownership rights to assets,
+          not the productive capacity of the economy.
+      \end{itemize}
+    \item Financial assets contribute to the productive capacity of the economy
+      \hlnotec{indirectly}; it allows for separation of the ownership and
+      management of the firm and facilitate the transfer of funds to
+      enterprises.
+      \begin{itemize}
+        \item When real assets used by a firm generate income,
+          the income is allocated to investors by their ownership of the
+          financial assets, usually by the percentage that they hold.
+        \item Bondholders, for instance, get a flow of income
+          based on the \hlnotea{interest rate} and \hlnotea{par value}
+          of the bond.
+        \item Equityholders and stockholders get any residual income
+          after bondholders and other creditors are paid.
+      \end{itemize}
+    \item Financial assets contribute to the wealth of individuals or firms
+      that holds them, since they are claims on the income generated by
+      the real assets or on the income of the corporation that issues
+      the instruments.
+    \item Real assets are income-generating assets;
+      financial assets are the allocation of income or wealth among investors.
+      In a sense, financial assets can be viewed as a means by which
+      individuals hold their claims on real assets.
+  \end{enumerate}
+\end{remark}
+
+% subsection real_investment_vs_financial_investment (end)
+
+\subsection{Role of Financial Assets and Markets}%
+\label{sub:role_of_financial_assets_and_markets}
+% subsection role_of_financial_assets_and_markets
+
+Financial assets and the markets where they are traded
+play several roles that ensure the `efficient' allocation
+of capital to real assets in the economy.
+
+\paragraph{Informational Role} Stock prices reflect a \hlnotee{collective assessment}
+of the investors of the current performance and future prospects of a firm.
+\begin{itemize}
+  \item When the market is more optimistic about the firm,
+    share prices of the firm will rise.
+  \item Higher prices eases the raising of capital for the firm,
+    which then further encourages investment.
+\end{itemize}
+
+In this manner, stock prices serve to allocate capital in market economies,
+directing capital to firms (and other applications) with
+the `greatest \hlnotec{perceived}' potential.
+However, this is not the absolute most `efficient' way of allocating capital.
+Time and again, we have seen how this allocation goes to places where they
+are not in the best interest of the market, or simply ended up in failure
+and loss of money (e.g. the dot-com bubble).
+
+This, however, is not to say that this model of our financial market is chosen
+arbitrarily. In fact, alternatives such as having a central planner or
+letting politicians make these decisions certainly have the same pitfalls.
+The willfulness of the market is cannot and will not be determined
+by a small group of people, in some sense.
+
+\paragraph{Consumption Timing} One does not have to immediately,
+or any time in the near future, consume their earnings in the presence
+of financial assets. We can, in a sense, `store' our wealth in financial assets,
+so that we may then `consume' them at a later time.
+
+An example use-case is to save for retirement, where we are old and unable
+to generate income as we did when we are younger.
+During our youth, where we can make high-earnings, we can invest your savings
+in financial assets.
+Once we are old, we can then sell these assets to provide funds for consumption
+needs, or continue trading for bonds for a more reliable stream of income.
+
+In other words, financial markets allow us to \hlnotee{separate decisions
+concerning current consumption from constraits that otherwise
+would be imposed by current earnings}.
+
+\paragraph{Allocation of Risk} Often, the most important decision to be made when
+creating an \hlnotea{investment portfolio} is the choosing of a \hlnotea{risky asset}.
+Higher risks usually gives higher return in investments,
+and so the above decision is not uncommon.
+To soften the risk, we typically \hlnotea{diversify} our investment
+by buying some other assets, typically those that are less risky.
+This process of investing in a risky investment while making sure that
+one does not crash too hard in the event of a failed investment is called
+an allocation of risk, and financial assets allow this practice.
+
+\paragraph{Separation of Ownership and Management}
+We see that many large corporations are not owner-operated.
+Often, corporate executives are selected by boards of directors,
+who oversee the management of the firm with respect to the interest
+of the actual owners --- the shareholders. \sidenote{Certainly, some of the
+shareholders can also be executives or directors themselves.}
+This guarantees a level of stability to the firm; for instance,
+if the stockholders decide that they no longer wish
+to hold ownership of the firm,
+selling their ownership away has no impact on the management of the firm.
+
+\begin{defn}[The Agency Problem]\index{Agency Problem}\label{defn:the_agency_problem}
+  The possible substitution of personal interest for those of the owners
+  is known as \hlnoteb{the agency problem}.
+\end{defn}
+
+In our setting, the managers themselves are the agents that are supposed
+to act in the interest of the shareholders.
+However, there is a risk, perhaps a moral one, that the manager may not
+act as they are supposed to.
+
+Several mechanisms have appeared to quell this problem:
+\begin{enumerate}
+  \item Tying the income of managers to the success of the firm through
+    compensation plans.
+    \begin{itemize}
+      \item This typically comes in the form of stock options.
+        \marginnote{Overuse of options causes its own agency problem.
+        It creates a moral hazard for managers to engage in risky projects,
+        or manipulate information to inflate stock prices, only to cash out
+        and leave the company before prices return to normal levels.}
+    \end{itemize}
+  \item Boards of directors force out under-performing management teams.
+  \item Outsiders such as security analysts or mutual funds and pension funds
+    monitor the firm, putting pressure on the management.
+  \item Bad performers are subject to the threat of a takeover.
+    \begin{itemize}
+      \item (\hlnotea{Internal takeover}) Unsatisfied shareholders
+        can launch a \hlnotea{proxy contest} to take control of the firm.
+        \sidenote{However, this threat is usually minimal. Statistically,
+        most proxy fights have failed.}
+      \item (\hlnotea{External takeover}) An under-performing firm is at risk
+        of being acquired by another firm that may wish to take out its
+        competitors, or diversify their business by replacing management
+        with their own.
+    \end{itemize}
+\end{enumerate}
+
+% subsection role_of_financial_assets_and_markets (end)
+
+% section the_economy_and_investment (end)
+
+% chapter introduction_and_overview (end)
+
+\appendix
+
+\backmatter
+
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
+
+% \nobibliography*
+\bibliography{references}
+
+\printindex
+
+\end{document}
+% vim:tw=80:fdm=syntax
