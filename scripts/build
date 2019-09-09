@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." >/dev/null 2>&1 && pwd )"
 workingdir=""
 filename="classnotes"
 builder="pdf"
@@ -17,7 +17,7 @@ usage() {
 while getopts "hd:f:b:" flag; do
   case "${flag}" in
     h) usage ; exit 0 ;;
-    d) workingdir=$DIR/../$OPTARG ;;
+    d) workingdir=$DIR/$OPTARG ;;
     f) filename=$OPTARG ;;
     b) builder=$OPTARG ;;
     *) usage ; exit 1 ;;
@@ -34,7 +34,8 @@ fi
 if [ -d $workingdir ]; then
   cd $workingdir
   echo "[builddark] Hit Ctrl-c to kill"
-  echo $filename.tex | entr -s "latexmk -$builder -f- -silent $filename-dark.tex"
+  ls *.tex *.bib | entr -s "latexmk -$builder -f- -silent $filename.tex" &
+  ls *.tex *.bib | entr -s "latexmk -$builder -f- -silent $filename-dark.tex"
 else
   echo "[newnote] Directory DNE! Terminating..."
   exit 1
