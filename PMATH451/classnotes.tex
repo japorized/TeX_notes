@@ -249,7 +249,7 @@ and for `good' reasons, there always exists non-measurable sets.
   \begin{enumerate}
     \item $A_1, \ldots, A_n \in \mathcal{A} \implies
       \bigcup_{i=1}^{n} A_i \in \mathcal{A}$; and
-    \item $A \in \mathcal{A} => A^C \in \mathcal{A}$.
+    \item $A \in \mathcal{A} \implies A^C \in \mathcal{A}$.
   \end{enumerate}
 \end{defn}
 
@@ -297,7 +297,7 @@ and for `good' reasons, there always exists non-measurable sets.
   \end{equation*}
 \end{defn}
 
-\begin{eg}
+\begin{eg}\label{eg:examples_of_sigma_algebra}
   \begin{enumerate}
     \item $\mathcal{P}(X)$ is a $\sigma$-algebra.
     \item Consider $X$ as an infinite set.
@@ -674,6 +674,234 @@ We simply need to talk about the generators.
 % section measures (end)
 
 % chapter lecture_2_sep_06th_2019 (end)
+
+\chapter{Lecture 3 Sep 9th 2019}%
+\label{chp:lecture_3_sep_9th_2019}
+% chapter lecture_3_seep_9th_2019
+
+\section{Measures (Continued)}%
+\label{sec:measures_continued}
+% section measures_continued
+
+\begin{defn}[Measure Space]\index{Measure Space}\label{defn:measure_space}
+  Let $X$ be a set, $\mathfrak{M}$ a $\sigma$-algebra of subsets of $X$
+  and $\mu : \mathfrak{M} \to [0, \infty]$.
+  We call the 3-tuple $(X, \mathfrak{M}, \mu)$ a \hlnoteb{measure space}.
+\end{defn}
+
+\begin{remark}
+  If $\mu(X) = 1$, we also call $(X, \mathfrak{M}, \mu)$ a
+  \hldefn{probability space}.
+\end{remark}
+
+\begin{eg}\label{eg:examples_of_measures}
+  \begin{enumerate}
+    \item (\hldefn{Counting Measure})
+      Let $X$ be a set and $\mathfrak{M} = \mathcal{P}(X)$.
+      For $E \in \mathfrak{M}$, define
+      \begin{equation*}
+        \mu(E) = \begin{cases}
+          \abs{E} & E \text{ is finite } \\
+          \infty  & \text{ otherwise }
+        \end{cases}.
+      \end{equation*}
+      We verify that $\mu$ is indeed a measure:
+      \begin{enumerate}
+        \item We have that $\mu(\emptyset) = \abs{\emptyset} = 0$.
+        \item Let $\{ E_n \}_{n=1}^{\infty} \subseteq \mathfrak{M}$
+          be a pairwise disjoint set.
+          Notice that if any of the sets are infinite,
+          say $E_{N_0}$ is infinite, then
+          \begin{equation*}
+            \mu(E_{N_0}) = \infty = \abs{ E_{N_0} }.
+          \end{equation*}
+          Since $\bigcup_{n=1}^{\infty} E_n$ is infinite in this case,
+          we have
+          \begin{equation*}
+            \mu \left( \bigcup_{n=1}^{\infty} E_n \right) = \infty
+            = \abs{ \bigcup_{n=1}^{\infty} E_n }.
+          \end{equation*}
+          On the other hand, if all the sets are finite,
+          then since the $E_n$'s are disjoint, we have
+          \begin{equation*}
+            \mu \left( \bigcup_{n=1}^{\infty} E_n \right)
+            = \abs{\bigcup_{n=1}^{\infty} E_n}
+            = \sum_{n=1}^{\infty} \abs{E_n}
+            = \sum_{n=1}^{\infty} \mu(E_n).
+          \end{equation*}
+      \end{enumerate}
+      We call $\mu$ a counting measure.
+
+    \item Let $X$ be an uncountable set.
+      Recall that in \cref{eg:examples_of_sigma_algebra},
+      we showed that
+      \begin{equation*}
+        \mathfrak{M} \coloneqq \{ A \subseteq X
+          \mid A \text{ is countable or co-countable } \}
+      \end{equation*}
+      is a $\sigma$-algebra.
+      There are many measures that we can define on this $\sigma$-algebra.
+      For instance,
+      \begin{equation*}
+        \nu(E) = \begin{cases}
+          0 & E \text{ is countable } \\
+          1 & E \text{ is uncountable }
+        \end{cases},
+      \end{equation*}
+      and
+      \begin{equation*}
+        \delta(E) = \begin{cases}
+          0 & E \text{ is countable } \\
+          \infty & E \text{ is uncountable }
+        \end{cases}.
+      \end{equation*}
+      Verifying that both $\nu$ and $\delta$ are indeed
+      measures shall be left to the reader as
+      a straightforward exercise.
+
+    \item Let's make a non-example.
+      Let $X$ be an infinite set, and $\mathfrak{M} = \mathcal{P}(X)$.
+      Define
+      \begin{equation*}
+        \mu(E) = \begin{cases}
+          0 & E \text{ is finite } \\
+          \infty & E \text{ is infinite }
+        \end{cases}.
+      \end{equation*}
+      Consider $X = \mathbb{N}$
+      and a sequence of sets with singletons,
+      \begin{equation*}
+        E_n = \{ 2n + 1 \},\quad \text{ for } n \in \mathbb{N}.
+      \end{equation*}
+      Clearly,
+      \begin{equation*}
+        \bigcup_{n=1}^{\infty} E_n = \text{ set of all odd numbers },
+      \end{equation*}
+      and clearly
+      \begin{equation*}
+        \mu \left( \bigcup_{n=1}^{\infty} E_n \right) = \infty.
+      \end{equation*}
+      However, notice that
+      \begin{equation*}
+        \mu(E_n) = 0 \text{ for each } n \in \mathbb{N}.
+      \end{equation*}
+      Since each of the $E_n$'s are pairwise disjoint,
+      we should have
+      \begin{equation*}
+        \infty = \mu \left( \bigcup_{n=1}^{\infty} E_n \right)
+        = \sum_{n=1}^{\infty} \mu(E_n) = 0,
+      \end{equation*}
+      which is impossible.
+      Thus $\mu$ is \hlnotec{not} a measure.
+  \end{enumerate}
+\end{eg}
+
+\begin{remark}[Finite additivity]
+  Given a finite set of pairwise disjoint sets
+  $\{ E_n \}_{n=1}^{N} \subseteq \mathfrak{M}$ for some $\sigma$-algebra
+  $\mathfrak{M}$ of some set $X$.
+  By \hyperref[defn:_sigma_algebra_of_sets]{the definition of a
+  $\sigma$-algebra}, we may set $E_n = \emptyset$ for $n > N$.
+  Then
+  \begin{equation*}
+    \mu \left( \bigcup_{n=1}^{N} E_n \right)
+    = \mu \left( \bigcup_{n=1}^{\infty} E_n \right)
+    = \sum_{n=1}^{\infty} \mu (E_n)
+    = \sum_{n=1}^{N} \mu(E_n).
+  \end{equation*}
+  We call this the \hldefn{finite additivity} of a measure.
+\end{remark}
+
+\begin{defn}[Finitivity, $\sigma$-finitivity, and Semi-finitivity of a Measure]\index{Finite measure}\index{$\sigma$-finite measure}\index{Semi-finite measure}\label{defn:finitivity_sigma_finitivity_and_semi_finitivity_of_a_measure}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space.
+  \begin{enumerate}
+    \item We say that $\mu$ is \hlnoteb{finite} if $\mu(E) < \infty$
+      for every $E \in \mathfrak{M}$.
+    \item If $X = \bigcup_{n=1}^{\infty} X_n$ with $X_n \in \mathfrak{M}$,
+      we say that $\mu$ is \hlnoteb{$\sigma$-finite} if
+      \begin{equation*}
+        \mu(X_n) < \infty \text{ for every } n \in \mathbb{N}.
+      \end{equation*}
+    \item We say that $\mu$ is \hlnoteb{semi-finite} if for every
+      $E \in \mathfrak{M}$ with $\mu(E) = \infty$,
+      $\exists F \subseteq E \in \mathfrak{M}$ such that
+      \begin{equation*}
+        0 < \mu(F) < \infty.
+      \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+\begin{ex}
+  \begin{enumerate}
+    \item Show that the counting measure is finite iff
+      the ambient space $X$ is a finite set.
+    \item Show that $\delta$ in \cref{eg:examples_of_measures}
+      is neither finite, $\sigma$-finite, nor semi-finite.
+  \end{enumerate}
+\end{ex}
+
+\begin{thm}[Properties of a Measure]\label{thm:properties_of_a_measure}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space. Then
+  \begin{enumerate}
+    \item (\hlnotea{Monotonicity})
+      If $E \subseteq F$ and $E, F \in \mathfrak{M}$,
+      then $\mu(E) \leq \mu(F)$.
+    \item (\hlnotea{Subadditivity})
+      If $\{ E_n \}_{n=1}^{\infty} \subseteq \mathfrak{M}$, then
+      \begin{equation*}
+        \mu \left( \bigcup_{n} E_n \right) \leq \sum_{n} \mu(E_n).
+      \end{equation*}
+    \item (\hlnotea{Continuity from below})
+      If $\{ E_n \}_{n=1}^{\infty} \subseteq \mathfrak{M}$ is
+      an increasing sequence of sets, i.e.
+      \begin{equation*}
+        E_1 \subseteq E_2 \subseteq \hdots \subseteq E_n \subseteq \hdots,
+      \end{equation*}
+      then
+      \begin{equation*}
+        \mu \left( \bigcup_{n=1}^{\infty} E_n \right)
+        = \lim_{n \to \infty} \mu(E_n).
+      \end{equation*}
+    \item (\hlnotea{Continuity from above})
+      If $\{ E_n \}_{n=1}^{\infty} \subseteq \mathfrak{M}$ is
+      a decreasing sequence of sets, i.e.
+      \begin{equation*}
+        E_1 \supseteq E_2 \supseteq \hdots \supseteq E_n \supseteq \hdots,
+      \end{equation*}
+      and $\exists n_0 \in \mathbb{N}$ such that $\mu(E_{n_0}) < \infty$,
+      then
+      \begin{equation*}
+        \mu \left( \bigcap_{n=1}^{\infty} E_n \right)
+        = \lim_{n \to \infty} \mu(E_n).
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{remark}[A comment on the condition for the 4\textsuperscript{th} statement]
+  It may seem that the extra condition of a finite measure
+  seem extravagant. However, it is necessary, as demonstrated below.
+
+  Consider $X = \mathbb{N}$, with $\mu$ as the counting measure.
+  Then, consider the sequence of sets
+  \begin{align*}
+    E_1 &= \{ 1, 2, 3, \ldots \}, \\
+    E_2 &= \{ 2, 3, 4, \ldots \}, \\
+    E_3 &= \{ 3, 4, 5, \ldots \}, \\
+       &\vdots \\
+    E_n &= \{ n, n + 1, n + 2, \ldots \}, \\
+       &\vdots
+  \end{align*}
+  Then $\bigcap_{n=1}^{\infty} E_n = \emptyset$, which then
+  $\mu \left( \bigcap_{n=1}^{\infty} E_n \right) = 0$.
+  However,
+  \begin{equation*}
+    \mu(E_n) = \infty \text{ for each } n \in \mathbb{N}.
+  \end{equation*}
+\end{remark}
+
+% section measures_continued (end)
+
+% chapter lecture_3_sep_9th_2019 (end)
 
 \appendix
 
