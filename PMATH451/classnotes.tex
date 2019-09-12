@@ -903,6 +903,232 @@ We simply need to talk about the generators.
 
 % chapter lecture_3_sep_9th_2019 (end)
 
+\chapter{Lecture 4 Sep 11th 2019}%
+\label{chp:lecture_4_sep_11th_2019}
+% chapter lecture_4_seep_11th_2019
+
+\section{Measures (Continued 2)}%
+\label{sec:measures_continued_2}
+% section measures_continued_2
+
+We shall now prove \cref{thm:properties_of_a_measure}.
+
+\begin{proof}
+  \begin{enumerate}
+    \item Notice that
+      \begin{equation*}
+        F = (F \cap E) \cup (F \setminus E),
+      \end{equation*}
+      and $F \cap E$ and $F \setminus E$ are disjoint.
+      Thus
+      \begin{equation*}
+        \mu(F) = \mu(F \cap E) + \mu(F \setminus E)
+             = \mu(E) + \mu(F \setminus E).
+      \end{equation*}
+      Since $\mu(F \setminus E) \geq 0$, we have
+      \begin{equation*}
+        \mu(F) \geq \mu(E).
+      \end{equation*}
+
+    \item Consider a sequence of sets defined as such:
+      \sidenote{\faStar This is a common technique in measure theory.
+      We will see this repeatedly so in this course.}
+      \begin{align*}
+        F_1 &= E_1 \\
+        F_2 &= E_2 \setminus E_1 \\
+            &\vdots \\
+        F_n &= E_n \setminus \bigcup_{j=1}^{n-1} E_j.
+      \end{align*}
+      First, note that $F_n \subseteq E_n$ for each $n \in \mathbb{N}$.
+      So by the last part, we have
+      \begin{equation*}
+        \mu(F_n) \leq \mu(E_n) \text{ for each } n \in \mathbb{N}.
+      \end{equation*}
+      Secondly,
+      \begin{equation*}
+        \bigcup_{n=1}^{\infty} F_n = \bigcup_{n=1}^{\infty} E_n.
+      \end{equation*}
+      Also, $\{ F_n \}_{n=1}^{\infty}$ is a pairwise disjoint collection of
+      sets.
+      It follows that
+      \begin{equation*}
+        \mu \left( \bigcup_{n=1}^{\infty} E_n \right)
+        = \mu \left( \bigcup_{n=1}^{\infty} F_n \right)
+        = \sum_{n=1}^{\infty} \mu(F_n)
+        \leq \sum_{n=1}^{\infty} \mu(E_n).
+      \end{equation*}
+
+    \item Consider a sequence of sets defined as such:
+      \begin{align*}
+        F_1 &= E_1 \\
+        F_2 &= E_2 \setminus E_1 \\
+        F_3 &= E_3 \setminus E_2 \\
+            &\vdots \\
+        F_n &= E_n \setminus E_{n-1}.
+      \end{align*}
+      We see that
+      \begin{itemize}
+        \item $\bigcup_{n=1}^{\infty} F_n = \bigcup_{n=1}^{\infty} E_n$;
+        \item $\bigcup_{n=1}^{N} F_n = \bigcup_{n=1}^{N} E_n = E_N$; and
+        \item $\{ F_n \}_{n}$ is a collection pairwise disjoint sets.
+      \end{itemize}
+      Thus we have
+      \begin{align*}
+        \mu \left( \bigcup_{n=1}^{\infty} E_n \right)
+        &= \mu \left( \bigcup_{n=1}^{\infty} F_n \right)
+        = \sum_{n=1}^{\infty} \mu(F_n) \\
+        &= \lim_{N \to \infty} \sum_{n=1}^{N} \mu(F_n)
+        = \lim_{N \to \infty} \mu \left( \bigcup_{n=1}^{N} F_n \right) \\
+        &= \lim_{N \to \infty} \mu(E_N).
+      \end{align*}
+    \item First, it is important that we notice that
+      \begin{equation*}
+        \bigcap_{n=1}^{\infty} E_n = \bigcap_{n=m}^{\infty} E_n
+      \end{equation*}
+      for any $m \in \mathbb{N}$, since $\{ E_n \}_{n}$ is a
+      decreasing sequence of sets.
+
+      Suppose $n_0 \in \mathbb{N}$ is such that $\mu(E_{n_0}) < \infty$.
+      Consider a sequence of sets defined as follows:
+      for $n_0 \leq j \in \mathbb{N}$, we let $F_j = E_{n_0} \setminus E_j$.
+      Then we have
+      \begin{equation*}
+        \emptyset = F_{n_0} \subseteq F_{n_0 + 1} \subseteq \hdots \subseteq
+        F_{n_0 + k} \subseteq \hdots,
+      \end{equation*}
+      i.e. $\{ F_n \}_{n=n_0}^{\infty}$ is an increasing sequence
+      of sets.
+      By the last part, we have
+      \begin{align*}
+        \mu \left( \bigcup_{n=n_0}^{\infty} F_n \right)
+        &= \lim_{n \to \infty} \mu(F_{n_0 + n})
+        = \lim_{n \to \infty} \mu(E_{n_0} \setminus E_{n_0 + n}) \\
+        &= \mu(E_{n_0}) - \lim_{n \to \infty} \mu(E_{n_0 + n}) \\
+        &= \mu(E_{n_0}) - \lim_{n \to \infty} \mu(E_n).
+      \end{align*}
+
+      Furthermore, we observe that
+      \begin{equation*}
+        \bigcup_{n=1}^{\infty} F_n = E_{n_0} \setminus \bigcap_{n=n_0}^{\infty} E_n.
+      \end{equation*}
+      Thus
+      \begin{align*}
+        \mu \left( \bigcup_{n=n_0}^{\infty} F_n \right)
+        &= \mu \left( E_{n_0} \setminus \bigcap_{n=n_0}^{\infty} E_n \right)
+        = \mu(E_{n_0}) - \mu \left( \bigcap_{n=n_0}^{\infty} E_n \right) \\
+        &= \mu(E_{n_0}) - \mu \left( \bigcap_{n=1}^{\infty} E_n \right).
+      \end{align*}
+      It follows that indeed
+      \begin{equation*}
+        \mu \left( \bigcap_{n=1}^{\infty} E_n \right)
+        = \lim_{n \to \infty} \mu(E_n).
+      \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{ex}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space.
+  Show that
+  \begin{enumerate}
+    \item $\mu$ is
+      \hyperref[defn:finitivity_sigma_finitivity_and_semi_finitivity_of_a_measure]{finite}
+      iff $\mu(X) < \infty$.
+    \item $\mu$ is $\sigma$-finite implies that $\mu$ is semi-finite.
+  \end{enumerate}
+\end{ex}
+
+\begin{solution}
+  \begin{enumerate}
+    \item This is rather simple.
+
+      \hlbnoted{$(\implies)$} $\mu$ is finite implies that each $E \in \mathfrak{M}$
+      has a finite measure. In particular, $X \in \mathfrak{M}$,
+      and so $\mu(X) < \infty$.
+
+      \hlbnoted{$(\impliedby)$} $\forall E \in \mathfrak{M}$, $E \subseteq X$, 
+      thus by the first item in \cref{thm:properties_of_a_measure},
+      we have $\mu(E) \leq \mu(X) < \infty$. Thus $\mu$ is finite.
+
+    \item $\mu$ being $\sigma$-finite means that if $X = \bigcup_{n=1}^{\infty}
+      X_n$ where $X_n \in \mathfrak{M}$, then $\mu(X_n) < \infty$ for each $n$.
+      Let $E \in \mathfrak{M}$ such that $\mu(E) = \infty$.
+      If we take
+      \begin{equation*}
+        E_n = X_n \cap E,
+      \end{equation*}
+      then $\mu(E_n) < \infty$ for each $n \in \mathbb{N}$.
+      Then, taking a union of any finite number of these $E_n$'s
+      will give us a subset of $E$ with a finite measure.
+      Hence, $\mu$ is indeed semi-finite.
+  \end{enumerate}
+\end{solution}
+
+\begin{defn}[Null Set of a Measure]\index{Null Set}\index{$\mu$-null set}\label{defn:null_set_of_a_measure}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space.
+  The set
+  \begin{equation*}
+    \mathcal{N} \coloneqq \{ N \in \mathfrak{M} : \mu(N) = 0 \}
+  \end{equation*}
+  is called the \hlnoteb{$\mu$-null set},
+  or the \hlnoteb{null set} of the measure $\mu$.
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item If $N_j \in \mathcal{N}$, then
+      $\bigcup_{n=1}^{\infty} N_j \in \mathcal{N}$.
+      \sidenote{Requires elab}
+    \item If $N \in \mathcal{N}$, and \hlnotec{$E \in \mathfrak{M}$}
+      and $E \subseteq N$,
+      then $E \in \mathcal{N}$.
+
+      It is important to note there that the highlighted condition is required,
+      since not all subsets of $N$ are measurable.
+    \item $\mathcal{N}$ is \hlnotec{not} a $\sigma$-algebra.
+      If we picked an $X$ such that $\mu(X) \neq 0$,
+      then $\emptyset \in \mathcal{N}$ but $X \notin \mathcal{N}$.
+  \end{enumerate}
+\end{remark}
+
+\begin{defn}[Complete Measure Space]\index{Complete Measure Space}\label{defn:complete_measure_space}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space.
+  We say that the space is \hlnoteb{complete} if
+  $N \in \mathcal{N}$ and $E \subseteq N$, then $E \in \mathfrak{M}$.
+\end{defn}
+
+\begin{remark}
+  By the first item in \cref{thm:properties_of_a_measure},
+  we have that if $\mu(E) = 0$, and so $E \in \mathcal{N}$ as well.
+\end{remark}
+
+\begin{thm}[Extending the Measurable Sets]\label{thm:extending_the_measurable_sets}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space and
+  \begin{equation*}
+    \mathcal{N} \coloneqq \{ N \in \mathfrak{M} \mid \mu(N) = 0 \}.
+  \end{equation*}
+  Consider
+  \begin{equation*}
+    \overline{\mathfrak{M}} \coloneqq \{ E \cup F
+      \mid E \in \mathfrak{M},\, F \subseteq N \in \mathcal{N} \}.
+  \end{equation*}
+  Then $\overline{\mathfrak{M}}$ is a $\sigma$-algebra
+  which contains $\mathfrak{M}$.
+  Furthermore, if we define $\overline{\mu}
+  : \overline{\mathfrak{M}} \to [0, \infty]$ as
+  \begin{equation*}
+    \overline{\mu}(E \cup F) = \mu(E),
+  \end{equation*}
+  then $\overline{\mu}$ is a well-defined measure on $\overline{\mathfrak{M}}$.
+
+  Moreover, if $\nu : \overline{\mathfrak{M}} \to [0, \infty]$ is any measure
+  such that $\nu(E) = \mu(E)$ for all $E \in \mathfrak{M}$, then
+  $\nu = \overline{\mu}$.
+\end{thm}
+
+% section measures_continued_2 (end)
+
+% chapter lecture_4_sep_11th_2019 (end)
+
 \appendix
 
 \backmatter
