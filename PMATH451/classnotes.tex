@@ -899,6 +899,16 @@ We simply need to talk about the generators.
   \end{equation*}
 \end{remark}
 
+\begin{homework}[Homework 3]
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space.
+  Let $\{ E_n \}_{n=1}^{\infty} \subseteq \mathfrak{M}$, and
+  \begin{equation*}
+    A \coloneqq \{ x \in X \mid x \in E_n \text{ i.o. } \}.
+  \end{equation*}
+  Prove that $\sum_{n=1}^{\infty} \mu(E_n) < \infty$
+  implies that $\mu(A) = 0$.
+\end{homework}
+
 % section measures_continued (end)
 
 % chapter lecture_3_sep_9th_2019 (end)
@@ -1094,6 +1104,8 @@ We shall now prove \cref{thm:properties_of_a_measure}.
   Let $(X, \mathfrak{M}, \mu)$ be a measure space.
   We say that the space is \hlnoteb{complete} if
   $N \in \mathcal{N}$ and $E \subseteq N$, then $E \in \mathfrak{M}$.
+  In this case, we also say that $\mu$ is a \hldefn{complete measure}
+  on $\mathfrak{M}$.
 \end{defn}
 
 \begin{remark}
@@ -1128,6 +1140,316 @@ We shall now prove \cref{thm:properties_of_a_measure}.
 % section measures_continued_2 (end)
 
 % chapter lecture_4_sep_11th_2019 (end)
+
+\chapter{Lecture 5 Sep 13th 2019}%
+\label{chp:lecture_5_sep_13th_2019}
+% chapter lecture_5_sep_13th_2019
+
+\section{Measures (Continued 3)}%
+\label{sec:measures_continued_3}
+% section measures_continued_3
+
+\begin{proof}[\cref{thm:extending_the_measurable_sets}]
+  \hlbnoted{$\overline{\mathfrak{M}}$ is a $\sigma$-algebra}
+  Since $\emptyset \in \mathfrak{M}$ and $\emptyset \subseteq N$
+  for any $N \in \mathcal{N}$,
+  it is clear that $\emptyset \in \overline{\mathfrak{M}}$.
+
+  Now, for $E \cup F \in \overline{\mathfrak{M}}$,
+  if we suppose $F \subseteq N \in \mathcal{N}$, then
+  \begin{equation*}
+    \left( E \cup F \right)^C
+    = \left( E \cup N \right)^C \cup \left( N \setminus E \cup F \right)
+    \in \overline{\mathfrak{M}}
+  \end{equation*}
+  since $E \cup N \in \mathfrak{M}$ and $N \setminus (E \cup F) \in \mathcal{N}$.
+
+  Let $\{ E_n \cup F_n \}_{n=1}^{\infty} \subseteq \overline{\mathfrak{M}}$.
+  Then we observe that
+  \begin{equation*}
+    \bigcup_{n=1}^{\infty} (E_n \cup F_n)
+    = \underbrace{\bigcup_{n=1}^{\infty} E_n}_{\in \mathfrak{M}}
+      \cup \underbrace{\bigcup_{n=1}^{\infty} F_n}_{\in \mathcal{N}}
+    \in \overline{\mathfrak{M}}.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{Well-definedness of $\overline{\mu}$}
+  Let $E_1 \cup F_1 = E_2 \cup F_2 \in \overline{\mathfrak{M}}$.
+  Suppose $F_1 \subseteq N_1, F_2 \subseteq N_2 \in \mathcal{N}$.
+  WTS
+  \begin{equation*}
+    \mu(E_1) = \overline{\mu}(E_1 \cup F_1)
+          = \overline{\mu}(E_2 \cup F_2) = \mu(E_2)
+  \end{equation*}
+  Notice that
+  \begin{equation*}
+    E_1 \subseteq E_1 \cup F_1 = E_2 \cup F_2 \subseteq E_2 \cup N_2,
+  \end{equation*}
+  and
+  \begin{equation*}
+    E_2 \subseteq E_2 \cup F_2 = E_1 \cup F_1 \subseteq E_1 \cup N_1.
+  \end{equation*}
+  By \cref{thm:properties_of_a_measure}, in particular,
+  by subadditivity,
+  we have that
+  \begin{equation*}
+    \mu(E_1) \leq \mu(E_2 \cup N_2) \leq \mu(E_2) + 0 = \mu(E_2)
+  \end{equation*}
+  and
+  \begin{equation*}
+    \mu(E_2) \leq \mu(E_1 \cup N_1) \leq \mu(E_1) + 0 = \mu(E_1).
+  \end{equation*}
+  It follows that $\mu(E_1) = \mu(E_2)$, as required.
+
+  \noindent
+  \hlbnoted{$\overline{\mu}$ is a measure}
+  \begin{enumerate}
+    \item Since $\emptyset \in \mathfrak{M}$ and $\emptyset \in \mathcal{N}$,
+      $\overline{\mu}$ is defined for $\emptyset$, and
+      \begin{equation*}
+        \overline{\mu}(\emptyset) = \mu(\emptyset) = 0.
+      \end{equation*}
+    \item Let $\{ E_n \cup F_n \}_{n=1}^{\infty}
+      \subseteq \overline{\mathfrak{M}}$ be a pairwise disjoint collection.
+      We observe that
+      \begin{align*}
+        \overline{\mu} \left( \bigcup_{n=1}^{\infty} (E_n \cup F_n) \right)
+        &= \overline{\mu} \left( \bigcup_{n=1}^{\infty} E_n \cup
+          \bigcup_{n=1}^{\infty} F_n \right) \\
+        &= \mu \left( \bigcup_{n=1}^{\infty} E_n \right) \\
+        &= \sum_{n=1}^{\infty} \mu(E_n),
+      \end{align*}
+      and
+      \begin{align*}
+        \sum_{n=1}^{\infty} \overline{\mu} (E_n \cup F_n)
+        = \sum_{n=1}^{\infty} \mu(E_n).
+      \end{align*}
+      Hence
+      \begin{equation*}
+        \overline{\mu} \left( \bigcup_{n=1}^{\infty} (E_n \cup F_n) \right)
+        = \sum_{n=1}^{\infty} \overline{\mu} (E_n \cup F_n).
+      \end{equation*}
+  \end{enumerate}
+
+  \noindent
+  \hlbnoted{$\nu = \overline{\mu}$}
+  Let $E \cup F \in \overline{\mathfrak{M}}$.
+  Suppose $F \subseteq N \in \mathfrak{M}$
+  By monotonicity,
+  \begin{equation*}
+    \overline{\mu}(E \cup F) = \mu(E) = \nu(E) \leq \nu(E \cup F).
+  \end{equation*}
+  By subadditivity,
+  \begin{equation*}
+    \nu(E \cup F)
+    \leq \nu(E) + \nu(F)
+    \leq \mu(E) + \nu(N)
+    \leq \overline{\mu}(E \cup F) + \mu(N)
+    = \overline{\mu}(E \cup F) + 0.
+  \end{equation*}
+  Thus, indeed,
+  \begin{equation*}
+    \nu(E \cup F) = \overline{\mu}(E \cup F).
+  \end{equation*}
+\end{proof}
+
+% section measures_continued_3 (end)
+
+\section{The Outer Measure}%
+\label{sec:the_outer_measure}
+% section the_outer_measure
+
+In this section, we will show that one way we can construct a measure
+is by using an outer measure.
+
+\begin{defn}[Outer Measure]\index{Outer Measure}\label{defn:outer_measure}
+  Given a set $X$, a function
+  \begin{equation*}
+    \mu^* : \mathcal{P}(X) \implies [0, \infty]
+  \end{equation*}
+  is called an \hlnoteb{outer measure} if
+  \begin{enumerate}
+    \item $\mu^*(\emptyset) = 0$; 
+    \item (\hlnotea{monotonicity}) if $E \subseteq F$, then
+      $\mu^*(E) \leq \mu^*(F)$; and
+    \item (\hlnotea{countable subadditivity})
+      if $\{ A_n \}_{n} \subseteq \mathcal{P}(X)$, then
+      \begin{equation*}
+        \mu^* \left( \bigcup_{n=1}^{\infty} A_n \right)
+          \leq \sum_{n=1}^{\infty} \mu^*(A_n).
+      \end{equation*}
+  \end{enumerate}
+\end{defn}
+
+Coming from PMATH450, we have seen an example of an outer measure.
+
+\begin{propo}[Lebesgue's Outer Measure]\index{Lebesgue's Outer Measure}\label{propo:lebesgue_s_outer_measure}
+  Given $E \subseteq \mathbb{R}$, consider
+  \begin{equation*}
+    \mu^*(E) \coloneqq \inf \left\{ 
+      \sum_{n=1}^{\infty} (b_n - a_n)
+        : E \subseteq \bigcup_{n=1}^{\infty} (a_n, b_n)
+    \right\}.
+  \end{equation*}
+  $\mu^*$ is Lebesgue's outer measure.
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item It is clear that $\mu^*(\emptyset) = \emptyset$,
+      since we can pick all $(a_n, b_n) = \emptyset$.
+    \item Suppose $A \subseteq B \subseteq \mathbb{R}$.
+      It is clear that any collection of intervals whose union contain $B$
+      will contain $A$, but there are such collections for $A$ that do not
+      contain $B$.
+      This means that
+      \begin{equation*}
+        \mu^*(A) \leq \mu^*(B)
+      \end{equation*}
+      by the property of the infimum.
+    \item Let $E = \bigcup_{i=1}^{\infty} E_i$.
+      WTS $\mu^*(E) \leq \sum_{i=1}^{\infty} \mu^*(E_i)$.
+
+      Now if $\mu^*(E_i) = \infty$ for any $i$,
+      then the inequality is trivially true.
+      Thus, wma $\mu^*(E_i) < \infty$ for all $i$.
+
+      \sidenote{This is also a common trick in measure theory.}
+      Let $\epsilon > 0$.
+      By the definition of the infimum, for each $i$,
+      we can pick a countable sequence
+      $\{ (a_n^i, b_n^i) \}_{n=1}^{\infty} \subseteq \mathcal{P}(X)$
+      such that $E_1 \subseteq \bigcup_{n=1}^{\infty} (a_n^i, b_n^i)$ and
+      \begin{equation*}
+        \sum_{n=1}^{\infty} (b_n^i - a_n^i)
+        \leq \mu^*(E_i) + \frac{\epsilon}{2^i}.
+      \end{equation*}
+      Then
+      \begin{equation*}
+        E = \bigcup_{i=1}^{\infty} E_i
+        = \bigcup_{i=1}^{\infty} \bigcup_{n=1}^{\infty} (a_n^i, b_n^i).
+      \end{equation*}
+      And so it follows that
+      \begin{align*}
+        \mu^*(E)
+        &\leq \sum_{i=1}^{\infty} \sum_{n=1}^{\infty} (b_n^i - a_n^i) \\
+        &\leq \sum_{i=1}^{\infty} \mu^*(E_i)
+          + \sum_{i=1}^{\infty} \frac{\epsilon}{2^i} \\
+        &= \sum_{i=1}^{\infty} \mu^*(E_i) + \epsilon.
+      \end{align*}
+      Since $\epsilon$ was arbitrary, it follows that
+      \begin{equation*}
+        \mu^*(E) \leq \sum_{i=1}^{\infty} \mu^*(E_i).
+      \end{equation*}
+  \end{enumerate}
+\end{proof}
+
+\begin{ex}
+  Show that had we defined Lebesgue's outer measure with closed intervals,
+  i.e.
+  \begin{equation*}
+    \tilde{\mu}^*(E) \coloneqq \inf \left\{ 
+      \sum_{n=1}^{\infty} (b_n - a_n)
+        : E \subseteq \bigcup_{n=1}^{\infty} [a_n, b_n]
+    \right\},
+  \end{equation*}
+  $\tilde{\mu}^*$ is still an outer measure.
+
+  In fact, we can do so for half-open intervals.
+\end{ex}
+
+\begin{eg}[Lebesgue-Stieltjes Outer Measure]\label{eg:lebesgue_stieltjes_outer_measure}
+  Let $F : \mathbb{R} \to \mathbb{R}$ be an increasing function
+  that is continuous from the right.
+  Let
+  \begin{equation*}
+    \mu^*(E) \coloneqq \inf \left\{ 
+      \sum_{n=1}^{\infty} ( F(b_n) - F(a_n) )
+      : E \subseteq \bigcup_{n=1}^{\infty} (a_n, b_n]
+    \right\}.
+  \end{equation*}
+  Then $\mu^*$ is an outer measure.
+\end{eg}
+
+\begin{remark}
+  Again, we could have defined the above outer measure using 
+  open or closed intervals.
+\end{remark}
+
+\begin{eg}[Lebesgue's Outer Measure on $\mathbb{R}^2$]
+  Let $E \subseteq \mathbb{R}^2$, and
+  \begin{equation*}
+    \mu^*(E) \coloneqq \inf \left\{ 
+      \sum_{n=1}^{\infty} A(R_n)
+        : E \subseteq \bigcup_{n=1}^{\infty} R_n
+    \right\},
+  \end{equation*}
+  where $A$ is the `area' function, and $R_n = (a_n, b_n) \times (c_n, d_n)$
+  are open rectangles.
+  Then $\mu^*$ is an outer measure.
+\end{eg}
+
+\begin{remark}
+  \begin{enumerate}
+    \item Again, we can define the above outer measure using closed rectangles,
+      or half-open rectangles.
+    \item We can continue defining an outer measure for
+      $\mathbb{R}^3$ using cubes,
+      for $\mathbb{R}^4$ using hypercubes, and so on.
+  \end{enumerate}
+\end{remark}
+
+We want to now show that given an outer measure,
+we can always construct a measure.
+This is known as Carathéodory's Theorem.
+
+This requires the following definition:
+
+\begin{defn}[$\mu^*$-measurability]\index{$\mu^*$-measurability}\label{defn:_mu_measurability}
+  A set $A \subseteq X$ is said to be \hlnoteb{$\mu^*$-measurable}
+  if $\forall E \subseteq X$,
+  \begin{equation*}
+    \mu^*(E) = \mu^*(E \cap A) + \mu^*(E \cap A^C).
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item By subadditivity, we always have
+      \begin{equation*}
+        \mu^*(E) \leq \mu^*(E \cap A) + \mu^*(E \cap A^C),
+      \end{equation*}
+      since $E = (E \cap A) \cup (E \cap A^C)$.
+    \item Note that $E \cap A^C = E \setminus A$.
+      In a sense, $A$ is said to be $\mu^*$-measurable
+      if it can slice any subset of $X$ such that we have
+      additivity of the sliced parts.
+      We may also say that $A$ is a `universal slicer'.
+  \end{enumerate}
+\end{remark}
+
+\begin{thm}[Carathéodory's Theorem]\index{Carathéodory's Theorem}\label{thm:caratheodory_s_theorem}
+  If $\mu^*$ is an outer measure on a set $X$, let
+  \begin{equation*}
+    \mathfrak{M} \coloneqq \{ A \subseteq X
+      : A \text{ is } \mu^*\text{-measureable} \}.
+  \end{equation*}
+  Then $\mathfrak{M}$ is a $\sigma$-algebra, and we set
+  \begin{equation*}
+    \mu : \mathfrak{M} \to [0, \infty]
+  \end{equation*}
+  such that
+  \begin{equation*}
+    \mu(A) = \mu^*(A).
+  \end{equation*}
+  Then $\mu$ is a \hyperref[defn:complete_measure_space]{complete measure}
+  on $\mathfrak{M}$.
+\end{thm}
+
+% section the_outer_measure (end)
+
+% chapter lecture_5_sep_13th_2019 (end)
 
 \appendix
 
