@@ -3,23 +3,23 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." >/dev/null 2>&1 && pwd )"
 workingdir=""
 filename="classnotes"
-builder="pdf"
+clean_flag=false
 
 usage() {
   echo "  Desc: watcher to build dark version of notes
   Options:
   -h    Show this help
   -d    Directory name [required]
-  -f    Filename (default: classnotes)
-  -b    Builder (default: pdf) (see latexmk --help for arguments)"
+  -c    Clean directory
+  -f    Filename (default: classnotes)"
 }
 
-while getopts "hd:f:b:" flag; do
+while getopts "hd:f:b:c" flag; do
   case "${flag}" in
     h) usage ; exit 0 ;;
     d) workingdir=$DIR/$OPTARG ;;
     f) filename=$OPTARG ;;
-    b) builder=$OPTARG ;;
+    c) clean_flag=true ;;
     *) usage ; exit 1 ;;
   esac
 done
@@ -33,10 +33,18 @@ fi
 
 if [ -d $workingdir ]; then
   cd $workingdir
-  echo "[builddark] Hit Ctrl-c to kill"
-  ls *.tex *.bib | entr -s "latexmk -$builder -f- -silent $filename.tex" &
-  ls *.tex *.bib | entr -s "latexmk -$builder -f- -silent $filename-dark.tex"
+
+  if [ ! -f latexmkrc ]; then
+    echo "[build] Warning! latexmkrc not found. You may want to create one."
+  fi
+
+  if ! $clean_flag ; then
+    echo "[build] Hit Ctrl-c to kill"
+    ls *.tex *.bib | entr -s "latexmk"
+  else
+    latexmk -c
+  fi
 else
-  echo "[newnote] Directory DNE! Terminating..."
+  echo "[build] Directory DNE! Terminating..."
   exit 1
 fi

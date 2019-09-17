@@ -27,6 +27,18 @@ usage() {
  classnotes.tex   classnotes-dark.tex   references.bib   images/"
 }
 
+make-latexmkrc() {
+  echo -n "\@pdf_mode = 0
+\$pdflatex = 'pdflatex  %O  --shell-escape %S';
+\$lualatex = 'lualatex  %O  --shell-escape %S';
+\$silent = 1;
+\$force_mode = 1;
+
+@default_files = ('${filename}.tex', '${filename}-dark.tex')" > "$1"
+
+  echo "[newnote] Created latexmkrc. Default pdf_mode = 0."
+}
+
 filenames=("dummy")
 
 while getopts "f:h" opt; do
@@ -57,6 +69,7 @@ for d in $(seq 1 $#); do
     mkdir -p $newdir/images
     echo "\\newcommand{\\personalcolor}{true}\\input{${filename}.tex}" > $newdir/${filename}-dark.tex
     touch $newdir/references.bib $newdir/${filename}.tex
+    make-latexmkrc $newdir/latexmkrc
 
     echo "[newnote] Created $dir_name"
   else
