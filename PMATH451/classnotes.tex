@@ -1,4 +1,4 @@
-% !TEX TS-program = pdflatex
+% !TEX TS-program = lualatex
 \documentclass[notoc,notitlepage]{tufte-book}
 % \nonstopmode % uncomment to enable nonstopmode
 
@@ -10,6 +10,12 @@
 \credentials{BMath (Hons), Pure Mathematics major, Actuarial Science Minor}
 \institution{University of Waterloo}
 
+\usepackage{fontspec}
+\setmainfont{P052-Roman.otf}[
+  Ligatures=TeX,
+  BoldFont = P052-Bold.otf,
+  ItalicFont = P052-Italic.otf,
+  BoldItalicFont = P052-BoldItalic.otf ]
 \input{latex-classnotes-preamble.tex}
 
 \theoremprework{\textcolor{cyan}{\hrule height 2pt width \textwidth}}
@@ -17,6 +23,32 @@
 \theorempostwork{\textcolor{cyan}{\hrule height 2pt width \textwidth}}
 \theoremindent10pt
 \newtheorem*{homework}{\faCogs\ Homework}
+
+% disjoint union
+\makeatletter
+\providerobustcmd*{\bigcupdot}{%
+   \mathop{%
+     \mathpalette\bigop@dot\bigcup
+   }%
+}
+\providerobustcmd*{\cupdot}{%
+  \mathop{%
+    \mathpalette\bigop@dot\cup
+  }%
+}
+\newrobustcmd*{\bigop@dot}[2]{%
+   \setbox0=\hbox{$\m@th#1#2$}%
+   \vbox{%
+     \lineskiplimit=\maxdimen
+     \lineskip=-0.7\dimexpr\ht0+\dp0\relax
+     \ialign{%
+       \hfil##\hfil\cr
+       $\m@th\cdot$\cr
+       \box0\cr
+     }%
+   }%
+}
+\makeatother
 
 \begin{document}
 \input{latex-classnotes-header.tex}
@@ -29,6 +61,20 @@
 Assignment problems is introduced in class as we go,
 so we have the special environment \textcolor{cyan}{homework}
 for these in this note.
+
+I included a special chapter in the appendix (see
+\cref{chp:deep_dives_into_proofs}) that records and provides
+insights into what drove the direction(s) of certain proofs.
+This is an attempt to resolve the problem of proofs
+being overly obscure with its motivations.
+Contents presented in this appendix are typically like rough work,
+and so are typically much longer than the presented proof.
+
+I also made an appendix for some of the common themes and tricks
+(see \cref{chp:common_themes_and_tricks})
+that are seen repeatedly in this topic
+I think it is invaluable that they are noted down, because the ideas
+that these commonalities carry forward.
 
 % chapter preface (end)
 
@@ -605,7 +651,7 @@ We simply need to talk about the generators.
   be the set of $x$'s that are in the $E_n$'s almost always.
 \end{defn}
 
-\begin{homework}[Homework 1]
+\begin{homework}[Homework 1]\label{homework:1}
   Let $X$ be a set, $\mathcal{A}$ a $\sigma$-algebra on $X$,
   and $E_n \in \mathcal{A}$ for $n \in \mathbb{N}$.
   Prove that
@@ -630,7 +676,7 @@ We simply need to talk about the generators.
   the \hlnoteb{characteristic function} of $E$.
 \end{defn}
 
-\begin{homework}[Homework 2 -- A review on limsup and liminf]
+\begin{homework}[Homework 2 -- A review on limsup and liminf]\label{homework:2}
   Let $E_n \subseteq X$ for $n \in \mathbb{N}$, and
   \begin{gather*}
     A \coloneqq \{ x \in X : x \in E_n \text{ i.o. } \} \\
@@ -691,7 +737,8 @@ We simply need to talk about the generators.
 
 \begin{remark}
   If $\mu(X) = 1$, we also call $(X, \mathfrak{M}, \mu)$ a
-  \hldefn{probability space}.
+  \hldefn{probability space},
+  and $\mu$ is called a \hldefn{probability measure}.
 \end{remark}
 
 \begin{eg}\label{eg:examples_of_measures}
@@ -899,7 +946,7 @@ We simply need to talk about the generators.
   \end{equation*}
 \end{remark}
 
-\begin{homework}[Homework 3]
+\begin{homework}[Homework 3]\label{homework:3}
   Let $(X, \mathfrak{M}, \mu)$ be a measure space.
   Let $\{ E_n \}_{n=1}^{\infty} \subseteq \mathfrak{M}$, and
   \begin{equation*}
@@ -1149,7 +1196,7 @@ We shall now prove \cref{thm:properties_of_a_measure}.
 \label{sec:measures_continued_3}
 % section measures_continued_3
 
-\begin{proof}[\cref{thm:extending_the_measurable_sets}]
+\begin{proof}[\nameref{thm:extending_the_measurable_sets}]
   \hlbnoted{$\overline{\mathfrak{M}}$ is a $\sigma$-algebra}
   Since $\emptyset \in \mathfrak{M}$ and $\emptyset \subseteq N$
   for any $N \in \mathcal{N}$,
@@ -1451,7 +1498,475 @@ This requires the following definition:
 
 % chapter lecture_5_sep_13th_2019 (end)
 
+\chapter{Lecture 6 Sep 16th 2019}%
+\label{chp:lecture_6_sep_16th_2019}
+% chapter lecture_6_sep_16th_2019
+
+\section{The Outer Measure (Continued)}%
+\label{sec:the_outer_measure_continued}
+% section the_outer_measure_continued
+
+\begin{homework}[Homework 4]\label{homework:4}
+  Let $\mathfrak{M}$ be an algebra of sets on $X$, and whenever
+  $\{ A_n \}_{n \in \mathbb{N}} \subseteq \mathfrak{M}$ is a disjoint 
+  collection of sets, then $\bigcup_{n} A_n \in \mathfrak{M}$.
+  Then $\mathfrak{M}$ is a $\sigma$-algebra.
+\end{homework}
+
+\begin{homework}[Homework 5]\label{homework:5}
+  Recall that Lebesgue's Outer Measure on $\mathbb{R}$ is defined as
+  \begin{equation*}
+    \mu^*(E) \coloneqq \inf \left\{ 
+      \sum_{n=1}^{\infty} (b_n - a_n)
+      : E \subseteq \bigcup_{n=1}^{\infty} (a_n, b_n)
+    \right\}.
+  \end{equation*}
+  Prove that we can equivalently define
+  \begin{equation*}
+    \mu^*(E) \coloneqq \inf \left\{ 
+      \sum_{n=1}^{\infty} (b_n - a_n)
+      : E \subseteq \bigcup_{n=1}^{\infty} (a_n, b_n]
+    \right\}.
+  \end{equation*}
+  Similarly, Lebesgue's Outer Measure on $\mathbb{R}^2$ is defined as
+  \begin{equation*}
+    \mu_2^*(E) = \inf \left\{ 
+      \sum_{n=1}^{\infty} (b_n - a_n)(d_n - c_n)
+      : E \subseteq \bigcup_{n=1}^{\infty} (a_n, b_n) \times (c_n, d_n)
+    \right\}.
+  \end{equation*}
+  Prove that we can equivalently define
+  \begin{equation*}
+    \mu_2^*(E) = \inf \left\{ 
+      \sum_{n=1}^{\infty} (b_n - a_n)(d_n - c_n)
+      : E \subseteq \bigcup_{n=1}^{\infty} (a_n, b_n] \times (c_n, d_n]
+    \right\}.
+  \end{equation*}
+\end{homework}
+
+\begin{defn}[Metric Outer Measure]\index{Metric Outer Measure}\label{defn:metric_outer_measure}
+  Let $(X, d)$ be a metric space, and $A, B \subseteq X$, and
+  \begin{equation*}
+    d(A, B) = \inf \left\{ d(x, y) : x \in A,\, y \in B \right\}.
+  \end{equation*}
+  An outer measure, $\mu^*$, on $X$ is called a \hlnoteb{metric outer measure}
+  if whenever $d(A, B) > 0$, then
+  \begin{equation*}
+    \mu^*(A \cup B) = \mu^*(A) + \mu^*(B).
+  \end{equation*}
+\end{defn}
+
+\begin{homework}[Homework 6]\label{homework:6}
+  Prove that Lebesgue's Outer Measure on $\mathbb{R}$ is a metric outer measure.
+\end{homework}
+
+\begin{proof}[\nameref{thm:caratheodory_s_theorem}]\label{proof:caratheodory_s_theorem}
+  \hlbnoted{$\mathfrak{M}$ is a $\sigma$-algebra} \\
+  \hlbnotee{$\emptyset \in \mathfrak{M}$}
+  Given any $E \subseteq X$, we observe that
+  \begin{align*}
+    \mu^*(E \cap \emptyset) + \mu^*(E \cap \emptyset^C)
+    &= \mu^*(\emptyset) + \mu^*(E \cap X) \\
+    &= 0 + \mu^*(E) = \mu^*(E).
+  \end{align*}
+
+  \hlbnotee{$A \in \mathfrak{M} \implies A^C \in \mathfrak{M}$}
+  Observe that given any $E \subseteq X$,
+  \begin{align*}
+    \mu^*(E \cap A^C) + \mu^*(E \cap ( A^C )^C)
+    &= \mu^*(E \cap A^C) + \mu^*(E \cap A) = \mu^*(E).
+  \end{align*}
+  Thus $A^C \in \mathfrak{M}$.
+
+  \sidenote{For a deep dive, see
+  \cref{sec:proving_that_m_is_closed_under_countable_unions_in_caratheodory_s_theorem}.}
+  To show that $\mathfrak{M}$ is closed under countable unions,
+  we break the work into several steps.
+
+  \hlbnotee{$A, B \in \mathfrak{M} \implies A \cup B \in \mathfrak{M}$}
+  Since $A \in \mathfrak{M}$, we have
+  \begin{equation*}
+    \mu^*(E) = \mu^*(E \cap A) + \mu^*(E \cap A^C).
+  \end{equation*}
+  Since $B \in \mathfrak{M}$,
+  \begin{align*}
+    \mu^*(E) &= \mu^*(E \cap A) + \mu^*(E \cap A^C) \\
+             &= \mu^*(E \cap A \cap B) + \mu^*(E \cap A \cap B^C) \\
+             &\quad+ \mu^*(E \cap A^C \cap B) + \mu^*(E \cap A^C \cap B^C) \\
+             &= \mu^*(E \cap A \cap B) + \mu^*(E \cap A \cap B^C) \\
+             &\quad+ \mu^*(E \cap A^C \cap B) + \mu^*(E \cap (A \cup B)^C)
+  \end{align*}
+  Notice that
+  \begin{equation*}
+    E \cap (A \cup B)
+    = [E \cap A \cap B] \cupdot [E \cap A^C \cap B] \cupdot [E \cap A \cap B^C].
+  \end{equation*}
+  Thus
+  \begin{align*}
+    \mu^*(E) &= \mu^*(E \cap A) + \mu^*(E \cap A^C) \\
+             &= \mu^*(E \cap A \cap B) + \mu^*(E \cap A \cap B^C) \\
+             &\quad+ \mu^*(E \cap A^C \cap B) + \mu^*(E \cap (A \cup B)^C) \\
+             &\geq \mu^*(E \cap (A \cup B)) + \mu^*(E \cap (A \cup B)^C).
+  \end{align*}
+  Thus $A \cup B \in \mathfrak{M}$.
+
+  Consequently, by induction,
+  we have that $\forall \{ A_n \}_n \subseteq \mathfrak{M}$,
+  \begin{equation*}
+    \bigcup_{n=1}^{N} A_n \in \mathfrak{M}
+  \end{equation*}
+  for all $N \in \mathbb{N}$.
+
+  Now $\mathfrak{M}$ is an algebra of sets.
+  By \nameref{homework:4}, it suffices for us to prove the following
+  to show that $\mathfrak{M}$ is a $\sigma$-algebra of sets.
+
+  \noindent
+  \hlbnotee{$\forall \{ A_n \}_{n} \subseteq \mathfrak{M}$ disjoint,
+  $\implies \bigcupdot_{n} A_n \in \mathfrak{M}$}
+  Let $B_N = \bigcupdot_{n=1}^{N} A_n$.
+  We first require the following lemma:
+
+  \noindent
+  \hlbnotec{$\forall E \subseteq X$, $\mu^*(E \cap B_N) = \sum_{n=1}^{N} \mu^*(E \cap A_n)$}
+  Notice that for any $n \in \mathbb{N}$, $A_n \in \mathfrak{M}$, and so
+  \begin{align*}
+    \mu^*(E \cap B_N)
+    &= \mu^*(E \cap B_N \cap A_n) + \mu^*(E \cap B_N \cap A_n^C) \\
+    &= \mu^*(E \cap A_n) + \mu^*(E \cap B_{N-1}).
+  \end{align*}
+  The desired result follows by induction. \dashv
+
+  Let $B = \bigcupdot_{n=1}^{\infty} A_n$.
+  Then
+  \begin{equation*}
+    \mu^*(E \cap B) \leq \sum_{n=1}^{\infty} \mu^* ( E \cap A_n )
+  \end{equation*}
+  by subadditivity.
+
+  Now $B_N \subseteq B$ for each $N \in \mathbb{N}$.
+  This implies that $B_N^C \supseteq B^C$, and so by monotonicity,
+  \begin{equation*}
+    \mu^*(E \cap B_N^C) \geq \mu^*(E \cap B^C).
+  \end{equation*}
+  Thus, for every $N \in \mathbb{N}$,
+  \begin{align*}
+    \mu^*(E)
+    &= \mu^*(E \cap B_N) + \mu^*(E \cap B_N^C) \\
+    &\geq \sum_{n=1}^{N} \mu^*(E \cap A_n) + \mu^*(E \cap B^C).
+  \end{align*}
+  It follows that
+  \begin{align*}
+    \mu^*(E)
+    &\geq \sum_{n=1}^{\infty} \mu^*(E \cap A_n) + \mu^*(E \cap B^C) \\
+    &\geq \mu^*(E \cap B) + \mu^*(E \cap B^C).
+  \end{align*}
+
+  With \nameref{homework:4}, $\mathfrak{M}$ is a $\sigma$-algebra.
+
+  \noindent
+  \hlbnoted{$\mu$ is a measure}
+  \begin{itemize}
+    \item $\mu(\emptyset) = \mu^*(\emptyset) = 0$.
+    \item Let $\{ A_n \}_{n} \subseteq \mathfrak{M}$ be a disjoint collection
+      of sets, and $B = \bigcupdot_{n=1}^{\infty} A_n$.
+      Then by a similar argument as the end of the last `part',
+      \begin{align*}
+        \mu(B) &= \mu^*(B) \\
+               &\geq \sum_{n=1}^{\infty} \mu^*(B \cap A_n) + \mu^*(B \cap B^C) \\
+               &= \sum_{n=1}^{\infty} \mu^*(B \cap A_n) + 0 \\
+               &= \sum_{n=1}^{\infty} \mu^*(A_n) = \sum_{n=1}^{\infty} \mu(A_n).
+      \end{align*}
+      Thus
+      \begin{equation*}
+        \mu(B) = \mu \left( \bigcupdot_{n=1}^{\infty} A_n \right)
+             = \sum_{n=1}^{\infty} \mu(A_n).
+      \end{equation*}
+  \end{itemize}
+
+  \noindent
+  \hlbnoted{$\mu$ is complete}
+  Let $A \in \mathcal{N}$ and $B \subseteq A$.
+  By monotonicity, $\mu(B) = \mu^*(B) \leq \mu^*(A) = 0$.
+  Then
+  \begin{equation*}
+    \mu^*(E \cap B) + \mu^*(E \cap B^C)
+    = 0 + \mu^*(E \cap B^C) \leq \mu^*(E)
+  \end{equation*}
+  by monotonicity. Thus $B \in \mathfrak{M}$.
+  Thus $\mu$ is complete.
+\end{proof}
+
+We would like to make sure that
+\begin{enumerate}
+  \item there are many sets that are measurable; and
+  \item the notion of a measure covers our notion of length.
+\end{enumerate}
+
+We shall see this with the \nameref{defn:metric_outer_measure},
+and that the measurable sets is at least the \hlnotea{Borel set}.
+
+% section the_outer_measure_continued (end)
+
+\section{The Lebesgue-Stieltjes Outer Measure}%
+\label{sec:the_lebesgue_stieltjes_outer_measure}
+% section the_lebesgue_stieltjes_outer_measure
+
+This outer measure is motivated by probability theory.
+The idea is that we consider the measure space $(\Omega, \mathfrak{M}, P)$,
+where $\Omega$ is the sample space set,
+$\mathfrak{M}$ is a $\sigma$-algebra on $\Omega$,
+and $P$ is the probability measure, i.e. $P(\Omega) = 1$.
+
+We then define a \hldefn{random variable},
+which is a function $X : \Omega \to \mathbb{R}$.
+The \hldefn{cumulative distribution function} (cdf)
+is defined as
+\begin{equation*}
+  F_X(t) \coloneqq P(\{ \omega : X(\omega) \leq t \}),
+\end{equation*}
+and it has these properties:
+\begin{enumerate}
+  \item $F_X$ is increasing; and
+  \item $F_X$ is right-continuous.
+\end{enumerate}
+
+\begin{eg}
+  Let $\Omega = \{ H, T \}$, and define the probability measure as
+  \begin{equation*}
+    P(\{ H \}) = \frac{1}{2} = P(\{ T \}).
+  \end{equation*}
+  We can define
+  \begin{equation*}
+    X(T) = 0 \text{ and } X(H) = 1.
+  \end{equation*}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2, 0) -- (2, 0);
+      \draw[->] (0, -0.5) -- (0, 2);
+      \draw[color=green,line width=1.5pt] (-2, 0) -- (0, 0)
+        node[line width=1pt,color=green,inner sep=1.5pt,draw,circle] {};
+      \draw[color=green,line width=1.5pt]
+        (0, 0.5) node[line width=1pt,inner sep=1.5pt,draw,circle,fill] {}
+        -- (1, 0.5) node[line width=1pt,inner sep=1.5pt,draw,circle] {};
+      \draw[color=green,line width=1.5pt]
+        (1, 1) node[line width=1pt,inner sep=1.5pt,draw,circle,fill] {}
+        -- (2, 1);
+      \draw[dashed] (0, 1) node[left] {$1$}
+        -- (1, 1) -- (1, 0) node[below] {$1$};
+      \node[left] at (0, 0.5) {$\frac{1}{2}$};
+    \end{tikzpicture}
+    \caption{Simple example of a cdf}\label{fig:simple_example_of_a_cdf}
+  \end{marginfigure}
+  Then
+  \begin{equation*}
+    P(\{ \omega : X(\omega) = 1\}) = P(\{ H \}) = \frac{1}{2}
+  \end{equation*}
+  and
+  \begin{equation*}
+    P(\{ \omega : X(\omega) = 0 \}) = P(\{ T \}) = \frac{1}{2}.
+  \end{equation*}
+  In the context of probability, we often see the shorthand
+  \begin{equation*}
+    P(X = t) = P(\{ \omega : X(\omega) = t \}).
+  \end{equation*}
+\end{eg}
+
+\begin{defn}[Lebesgue-Stieltjes Outer Measure]\label{defn:lebesgue_stieltjes_outer_measure}
+  Let $F : \mathbb{R} \to \mathbb{R}$ be an increasing function
+  that is continuous from the right.
+  Let
+  \begin{equation*}
+    \mu^*(E) \coloneqq \inf \left\{ 
+      \sum_{n=1}^{\infty} ( F(b_n) - F(a_n) )
+      : E \subseteq \bigcup_{n=1}^{\infty} (a_n, b_n]
+    \right\}.
+  \end{equation*}
+  Then $\mu^*$ is an outer measure.
+\end{defn}
+
+\begin{remark}
+  We showed that the above is indeed an outer measure in
+  \cref{eg:lebesgue_stieltjes_outer_measure}.
+\end{remark}
+
+% section the_lebesgue_stieltjes_outer_measure (end)
+
+% chapter lecture_6_sep_16th_2019 (end)
+
 \appendix
+
+\chapter{Deep Dives into Proofs}%
+\label{chp:deep_dives_into_proofs}
+% chapter deep_dives_into_proofs
+
+\section{Proving that \texorpdfstring{$\mathfrak{M}$}{M} is closed under countable unions in Carath\'{e}odory's Theorem}\label{sec:proving_that_m_is_closed_under_countable_unions_in_caratheodory_s_theorem}
+
+This section is created in reference to
+the proof for \nameref{proof:caratheodory_s_theorem}.
+
+We have
+\begin{equation*}
+  \mathfrak{M} = \{ A \subseteq X : A \text{ is } \mu^*\text{-measurable } \}
+\end{equation*}
+where $\mu^*$ is an outer measure.
+We wanted to show that $\mathfrak{M}$ is a $\sigma$-algebra.
+In particular, the hard problem was to show that
+$\mathfrak{M}$ is closed under countable unions.
+
+Consider $\{ A_n \}_{n} \subseteq \mathfrak{M}$.
+Thinking from behind, WTS $\forall E \subseteq X$,
+\begin{align*}
+  \mu^*(E)
+  &\geq \mu^* \left( E \cap \bigcup_{n} A_n \right)
+    + \mu^* \left( E \cap \left( \bigcup_{n} A_n \right)^C \right) \\
+  &= \mu^* \left( E \cap \bigcup_{n} A_n \right)
+    + \mu^* \left( E \cap \left( \bigcap_{n} A_n^C \right) \right).
+\end{align*}
+For simplicity, write $B = \bigcup_{n} A_n$.
+WTS
+\begin{equation}\tag{$*$}\label{eq:appendix_1_eq_1}
+  \mu^*(E) \geq \mu^*(E \cap B) + \mu^*(E \cap B^C).
+\end{equation}
+
+Also thinking from behind,
+if $\mathfrak{M}$ is a $\sigma$-algebra, 
+\sidenote{Useful links:
+\nameref{defn:algebra_of_sets},
+\nameref{defn:_sigma_algebra_of_sets}.}
+then it must be an algebra (of sets).
+We showed that $\mathfrak{M}$ is closed under complementation.
+
+If $\mathfrak{M}$ is closed under finite unions,
+\sidenote{Unproved point 1}
+then for each $N \in \mathbb{N}$,
+\begin{equation*}
+  \mu^*(E) = \mu^* \left( E \cap \bigcup_{n=1}^{N} A_n \right)
+    + \mu^* \left( E \cap \left( \bigcup_{n=1}^{N} A_n \right)^C \right).
+\end{equation*}
+Let $B_N \coloneqq \bigcup_{n=1}^{N} A_n \in \mathfrak{M}$. Then
+\begin{equation}\tag{$\dagger$}\label{eq:appendix_1_eq_2}
+  \mu^*(E) = \mu^* (E \cap B_N) + \mu^* (E \cap B_N^C)
+\end{equation}
+for each $N \in \mathbb{N}$.
+
+Notice that
+\begin{equation*}
+  B_N = \bigcup_{n=1}^{N} A_n \subseteq \bigcup_{n=1}^{\infty} A_n = B.
+\end{equation*}
+Consequently,
+\begin{equation*}
+  \implies B^C \supseteq B_N^C \implies \mu^*(B^C) \leq \mu^*(B_N^C)
+\end{equation*}
+by the \hyperref[defn:outer_measure]{monotonicity} of the outer measure.
+
+As a result, looking at \cref{eq:appendix_1_eq_1} and \cref{eq:appendix_1_eq_2},
+we see that
+\begin{align*}
+  \mu^*(E) &= \mu^*(E \cap B_N) + \mu^*(E \cap B_N^C) \\
+           &\geq \mu^*(E \cap B_N) + \mu^*(E \cap B^C)
+\end{align*}
+for each $N \in \mathbb{N}$.
+
+We are in quite the predicament at this point.
+We need to do something about $\mu^*(E \cap B_N)$
+and somehow relate it to $\mu^*(E \cap B)$.
+We can try and see that
+\begin{equation*}
+  \mu^*(E \cap B_N) \leq \sum_{n=1}^{N} \mu^*(E \cap A_n).
+\end{equation*}
+Notice that in the case of \hlnotec{equality}, we would have
+\begin{equation*}
+  \mu^*(E) \geq \sum_{n=1}^{N} \mu^*(E \cap A_n) + \mu^*(E \cap B^C)
+\end{equation*}
+for all $N \in \mathbb{N}$.
+Since $\{ \sum_{n=1}^{N} \mu^*(E \cap A_n) \}_{N}$ is an increasing sequence
+in $\mathbb{R}$, we have
+\begin{equation*}
+  \mu^*(E) \geq \sum_{n=1}^{\infty} \mu^*(E \cap A_n) + \mu^*(E \cap B^C),
+\end{equation*}
+and
+\begin{equation*}
+  \sum_{n=1}^{\infty} \mu^*(E \cap A_n) \geq \mu^*(E \cap B)
+\end{equation*}
+by subadditivity since $B = \bigcup_{n=1}^{\infty} A_n$.
+
+Unfortunately, the equality does not always hold.
+But, since $\mu^*$ is an outer measure,
+we can make an educated guess
+\sidenote{Unproved point 2}
+that given $\{ A_n \}_{n}$ a disjoint collection of sets,
+\begin{equation*}
+  \mu^* \left( \bigcup_{n=1}^{N} A_n \right) = \sum_{n=1}^{N} \mu^*(A_n).
+\end{equation*}
+
+Our work becomes even easier with the realization of \nameref{homework:4}.
+Proving that all of our above argument works for the case of
+$\{ A_n \}_{n} \subseteq \mathfrak{M}$ being disjoint,
+is sufficient to prove that $\mathfrak{M}$ is indeed a $\sigma$-algebra.
+
+% chapter deep_dives_into_proofs (end)
+
+\chapter{Common Themes and Tricks}%
+\label{chp:common_themes_and_tricks}
+% chapter common_themes_and_tricks
+
+\section{Re-represent an arbitrary union using disjoint sets}%
+\label{sec:re_represent_an_arbitrary_union_using_disjoint_sets}
+
+A common trick in measure theory,
+especially when it comes to a collection of sets,
+is to represent its union as a disjoint union of sets.
+This is a useful trick because measures simply add over disjoint sets,
+instead of just having \hlnotea{subadditivity}.
+
+\begin{eg}\label{eg:disjoint_rep_of_countable_union}
+  Given a collection $\{ A_n \}_{n}$ of sets, we may define a collection of
+  disjoint sets whose union is $\bigcup_{n} A_n$ as such:
+  \begin{align*}
+    F_1 &= A_1 \\
+    F_2 &= A_2 \setminus A_1 \\
+    F_3 &= A_3 \setminus (A_1 \cup A_2) \\
+        &\vdots \\
+    F_n &= A_n \setminus \bigcup_{i=1}^{n-1} A_i \\
+        &\vdots
+  \end{align*}
+\end{eg}
+
+\begin{eg}\label{eg:disjoint_rep_of_increasing_countable_union}
+  Given an increasing collection $\{ A_n \}_{n}$ of sets, i.e.
+  \begin{equation*}
+    A_1 \subseteq A_2 \subseteq A_3 \subseteq \hdots,
+  \end{equation*}
+  we may represent the countable union of the $A_n$'s as such:
+  let
+  \begin{align*}
+    F_1 &= A_1 \\
+    F_2 &= A_2 \setminus A_1 \\
+    F_3 &= A_3 \setminus A_2 \\
+        &\vdots \\
+    Fn &= A_n \setminus A_{n-1} \\
+       &\vdots
+  \end{align*}
+\end{eg}
+
+\begin{remark}
+  The reason why we simply consider $F_n = A_n \setminus A_{n-1}$ instead
+  of having to take a union up to the $(n-1)$\textsuperscript{th}
+  set in \cref{eg:disjoint_rep_of_increasing_countable_union}
+  is because
+  \begin{equation}\label{eq:finite_union_of_an_increasing_sequence_of_sets}
+    \bigcup_{i=1}^{n-1} A_i = A_{n-1}.
+  \end{equation}
+
+  The reader may also notice that
+  \cref{eg:disjoint_rep_of_increasing_countable_union}
+  is an application of \cref{eg:disjoint_rep_of_countable_union}
+  just because of \cref{eq:finite_union_of_an_increasing_sequence_of_sets}.
+\end{remark}
+
+% chapter common_themes_and_tricks (end)
 
 \backmatter
 
