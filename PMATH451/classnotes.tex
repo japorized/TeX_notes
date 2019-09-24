@@ -52,6 +52,11 @@
 
 \begin{document}
 \input{latex-classnotes-header.tex}
+\clearpage
+\begin{fullwidth}
+  \renewcommand{\listtheoremname}{\textsl{List of Homework}}
+  \listoftheorems[ignoreall, show={homework}]
+\end{fullwidth}
 
 \chapter*{Preface}%
 \label{chp:preface}
@@ -1786,14 +1791,234 @@ and it has these properties:
   Then $\mu^*$ is an outer measure.
 \end{defn}
 
-\begin{remark}
-  We showed that the above is indeed an outer measure in
+\begin{ex}
+  We mentioned that the above is indeed an outer measure in
   \cref{eg:lebesgue_stieltjes_outer_measure}.
-\end{remark}
+  Prove this.
+\end{ex}
 
 % section the_lebesgue_stieltjes_outer_measure (end)
 
 % chapter lecture_6_sep_16th_2019 (end)
+
+\chapter{Lecture 7 Sep 18th 2019}%
+\label{chp:lecture_7_sep_18th_2019}
+% chapter lecture_7_sep_18th_2019
+
+\section{The Lebesgue-Stieltjes Outer Measure (Continued)}%
+\label{sec:the_lebesgue_stieltjes_outer_measure_continued}
+% section the_lebesgue_stieltjes_outer_measure_continued
+
+\begin{thm}[Carathéodory's Second Theorem]\index{Carathéodory's Second Theorem}\label{thm:caratheodory_s_second_theorem}
+  Let $(X, d)$ be a metric space,
+  and $\mu^*$ a \nameref{defn:metric_outer_measure}.
+  Then every Borel set is \nameref{defn:_mu_measurability}.
+\end{thm}
+
+\begin{proof}
+  By \nameref{thm:caratheodory_s_theorem},
+  \begin{equation*}
+    \mathfrak{M} = \{ A \subseteq X : A \text{ is } \mu^*\text{-measurable} \}
+  \end{equation*}
+  is a $\sigma$-algebra.
+  Then our statement says that $\mathfrak{B}(X) \subseteq \mathfrak{M}$.
+  Thus, it suffices for us to show that if $U \in \mathfrak{B}(X)$,
+  i.e. if $U \subseteq X$ is open, then $U \in \mathfrak{M}$.
+  In particular, WTS $\forall E \subseteq X$,
+  \begin{equation*}
+    \mu^*(E) = \mu^*(E \cap U) + \mu^*(E \cap U^C).
+  \end{equation*}
+  Again, by subadditivity,
+  \begin{equation*}
+    E = (E \cap U) \cup (E \cap U^C) \implies
+    \mu^(E) \leq \mu^*(E \cap U) + \mu^*(E \cap U^C).
+  \end{equation*}
+  Thus it suffices for us to show that
+  \begin{equation*}
+    \mu^*(E) \geq \mu^*(E \cap U) + \mu^(E \cap U^C).
+  \end{equation*}
+  Now if $\mu^*(E) = \infty$, this is trivially true.
+  WMA $\mu^*(E) < \infty$.
+
+  \sidenote{We look at points that get increasingly closer
+  to the edge of the set $E \cap U$, or in other words,
+  increasingly closer to $E \cap U^C$.}
+  Consider $\{ A_k \}_{k} \subseteq \mathcal{P}(X)$ such that
+  \begin{equation*}
+    A_k \coloneqq \left\{ x \in E \cap U
+      : d(x, E \cap U^C) \geq \frac{1}{k} \right\} \subseteq E \cap U.
+  \end{equation*}
+  It is clear that $A_1 \subseteq A_2 \subseteq A_3 \subseteq \hdots$,
+  i.e. $\{ A_k \}_k$ is an increasing sequence of sets.
+  Also, $\bigcup_{k} A_k = E \cap U$.
+
+  For each $k \in \mathbb{N}$, notice that
+  $A_k \cup (E \cap U^C) \subseteq E$.
+  Thus by subadditivity and additivity over disjoint sets,
+  for every $k$, we have
+  \begin{equation*}
+    \mu^*(E) \geq \mu^*(A_k \cup (E \cap U^C)) = \mu^*(A_k) + \mu^*(E \cap U^C).
+  \end{equation*}
+  Since $\{ A_k \}_k$ is an increasing sequence of sets, it follows that
+  \begin{equation*}
+    \mu^*(E) \geq \lim_{k \to \infty} \mu^*(A_k) + \mu^*(E \cap U^C).
+  \end{equation*}
+
+  \noindent
+  \hlbnotec{Claim: $\lim_{k \to \infty} \mu^*(A_k) = \mu^*(E \cap U)$}
+  Since $A_k \subseteq E \cap U$, by subadditivity,
+  \begin{equation*}
+    \mu^*(A_k) \leq \mu^*(E \cap U).
+  \end{equation*}
+  It remains to prove the other inequality.
+
+  \sidenote{This part here requires an escape from where we already are.
+  If your head is in the muddle, stop reading, go out, walk,
+  and then come back.
+
+  Here, we ask ourselves: so what if we look at how much the $A_k$'s change
+  as $k$ increases?}
+  Let $D_1 = A_1,\, D_2 = A_2 \setminus A_1,\, \ldots D_n = A_n \setminus A_{n-1}$.
+  Then, notice that
+  \begin{align*}
+    E \cap U &= \bigcup_{n} D_n = A_1 \cup D_2 \cup D_3 \cup \hdots \\
+          &= A_2 \cup D_3 \cup D_4 \cup \hdots \\
+          &= A_n \cup D_{n+1} \cup D_{n+2} \cup \hdots,
+  \end{align*}
+  since $\{ A_n \}$ is an increasing sequence of sets.
+  Now for $x \in D_n$, we have that $x \in A_n$ but $x \notin A_{n-1}$.
+  \sidenote{We see that the $D_n$'s form some kind of a ring-like
+  partitioning of $E \cup U$.}
+  In particular, we have
+  \begin{equation*}
+    \frac{1}{n} \leq d(x, E \cap U^C) < \frac{1}{n-1}.
+  \end{equation*}
+
+  \sidenote{Let's look at putting every odd $D_n$'s together,
+  and see how far apart are they.
+  Directly looking at $D_n$'s altogether is difficult because
+  then their boundaries get muddled together.}
+  Let $m \geq n + 2$. Consider $y \in D_m,\, x \in D_n$ and $z \in E \cap U^C$.
+  Then we know by the triangle inequality that
+  \begin{equation*}
+    \frac{1}{n} \leq d(x, z) \leq d(x, y) + d(y, z).
+  \end{equation*}
+  We may then pick $z_0 \in E \cap U^C$ such that
+  \begin{equation*}
+    d(y, z_0) < \frac{1}{m-1}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \frac{1}{n} \leq d(x, z_0) < d(x, y) + \frac{1}{m-1},
+  \end{equation*}
+  and so
+  \begin{equation*}
+    \frac{1}{n} - \frac{1}{m-1} < d(x, y).
+  \end{equation*}
+  Notice that
+  \begin{equation*}
+    \frac{1}{n} - \frac{1}{m-1}
+        \geq \frac{1}{n} - \frac{1}{n + 2 - 1}
+        = \frac{1}{n} - \frac{1}{n-1}.
+  \end{equation*}
+  Therefore, $\forall x \in D_n$ and $y \in D_m$, we have
+  \begin{equation*}
+    \frac{1}{n} - \frac{1}{n-1} < d(x, y).
+  \end{equation*}
+  In other words,
+  \begin{equation*}
+    d(D_n, D_m) > 0
+  \end{equation*}
+  as long as $m \geq n + 2$.
+
+  Since $\mu^*$ is a \nameref{defn:metric_outer_measure}, it follows that
+  \begin{equation*}
+    \mu^* \left( \bigcup_{n \text{ odd }} D_n \right)
+    = \sum_{n \text{ odd }} \mu^*(D_n).
+  \end{equation*}
+  Since $D_1 \cup D_3 \cup \hdots \subseteq E \cap U$,
+  by subadditivity,
+  \begin{equation*}
+    \mu^*(D_1 \cup D_3 \cup \hdots) \leq \mu^*(E \cap U) < \infty.
+  \end{equation*}
+  In particular,
+  \begin{equation*}
+    \sum_{n \text{ odd }} \mu^*(D_n) < \infty.
+  \end{equation*}
+  Similarly, we can show that
+  \begin{equation*}
+    \mu^* \left( \bigcup_{n \text{ even }} D_n \right)
+    = \sum_{n \text{ even }} \mu^*(D_n) < \infty.
+  \end{equation*}
+  Putting the two together, we have
+  \begin{equation*}
+    \mu^* \left( \bigcup_{n} D_n \right) = \sum_{n} \mu^*(D_n) < \infty.
+  \end{equation*}
+
+  Finally, since $E \cap U = A_n \cup D_{n+1} \cup D_{n+2} \cup \hdots$,
+  by subadditivity,
+  \begin{equation*}
+    \mu^*(E \cap U) \leq \mu^*(A_n) + \mu^* \left( \bigcup_{m > n} D_m \right)
+               = \mu^*(A_n) + \sum_{m = n + 1}^{\infty} \mu^*(D_m).
+  \end{equation*}
+  Since $\sum_{n} \mu^*(D_n) < \infty$, the tail
+  \begin{equation*}
+    \sum_{m = n + 1}^{\infty} \mu^*(D_m) \to 0
+  \end{equation*}
+  as $n \to \infty$.
+  Therefore,
+  \begin{align*}
+    \mu^*(E \cap U)
+    &\leq \lim_{n \to \infty} \mu^*(A_n)
+      + \lim_{n \to \infty} \sum_{m = n + 1}^{\infty} \mu^*(D_m) \\
+    &= \lim_{n \to \infty} \mu^*(A_n),
+  \end{align*}
+  as required.
+\end{proof}
+
+\begin{propo}[Lebesgue-Stieltjes Outer Measure on Half-open Intervals]\label{propo:lebesgue_stieltjes_outer_measure_on_half_open_intervals}
+  Let $\mu_F^*$ be the \nameref{defn:lebesgue_stieltjes_outer_measure}.
+  Then for $a < b \in \mathbb{R}$, we have
+  \begin{equation*}
+    \mu_F^*((a, b]) = F(b) - F(a).
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  First, notice that $(a, b] \subseteq (a, b]$, and so
+  \begin{equation*}
+    \mu_F^*((a, b]) \leq F(b) - F(a)
+  \end{equation*}
+  by definition.
+
+  Let $\epsilon > 0$. Pick a covering $(a, b] \subseteq \bigcup_{n} (a_n, b_n]$
+  such that
+  \begin{equation*}
+    \sum_{n} ( F(b_n) - F(a_n) ) \leq \mu_F^*((a, b]) + \epsilon.
+  \end{equation*}
+  By right-continuity of $F$, we may pick $b_n' > b_n$ such that
+  \begin{equation*}
+    F(b_n') < F(b_n) + \frac{\epsilon}{2}.
+  \end{equation*}
+  Similarly, we can pick $a' > a$ such that $F(a') < F(a) + \epsilon$.
+  Then
+  \begin{equation*}
+    [a, b] \subseteq (a, b] \subseteq \bigcup_{n} (a_n, b_n] \subseteq
+    \bigcup_{n} (a_n, b_n').
+  \end{equation*}
+  By \hlnotea{compactness}, there exists a finite subcover, i.e.
+  $\exists N \in \mathbb{N}$ such that
+  \begin{equation*}
+    [a', b] \subseteq \bigcup_{k=1}^{N} (a_{n_k}, b_{n_k}').
+  \end{equation*}
+  
+  \hlwarn{The proof shall be completed in the next lecture}.
+
+\end{proof}
+
+% section the_lebesgue_stieltjes_outer_measure_continued (end)
+
+% chapter lecture_7_sep_18th_2019 (end)
 
 \appendix
 

@@ -4,4 +4,4 @@ $lualatex = 'lualatex  %O  --shell-escape %S';
 $silent = 1;
 $force_mode = 1;
 
-@default_files = ('classnotes.tex', 'classnotes-dark.tex');
+@default_files = ('classnotes-dark.tex', 'classnotes.tex');
