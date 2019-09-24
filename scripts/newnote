@@ -28,22 +28,19 @@ usage() {
 }
 
 make-latexmkrc() {
-  echo -n "\@pdf_mode = 0
-\$pdflatex = 'pdflatex  %O  --shell-escape %S';
-\$lualatex = 'lualatex  %O  --shell-escape %S';
-\$silent = 1;
-\$force_mode = 1;
-
-@default_files = ('${filename}.tex', '${filename}-dark.tex')" > "$1"
-
-  echo "[newnote] Created latexmkrc. Default pdf_mode = 0."
+  cat $DIR/scripts/defaults/latexmkrc | sed "s/classnotes/${filename}/g" > "$1"
+  echo "[newnote] Created latexmkrc. Default pdf_mode = 1."
 }
 
 filenames=("dummy")
+note_title=""
 
-while getopts "f:h" opt; do
+while getopts "f:a:h" opt; do
   case "${opt}" in
     f) filenames+=($OPTARG) ;;
+    a)
+      note_title="${OPTARG}"
+      ;;
     h)
       usage
       exit 0
@@ -70,6 +67,10 @@ for d in $(seq 1 $#); do
     echo "\\newcommand{\\personalcolor}{true}\\input{${filename}.tex}" > $newdir/${filename}-dark.tex
     touch $newdir/references.bib $newdir/${filename}.tex
     make-latexmkrc $newdir/latexmkrc
+
+    if [ -n "$note_title" ]; then
+      $DIR/scripts/add-to-data-file -t "${note_title}" -d $dir_name -f ${filename}
+    fi
 
     echo "[newnote] Created $dir_name"
   else
