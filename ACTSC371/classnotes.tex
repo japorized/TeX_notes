@@ -12,6 +12,10 @@
 
 \input{latex-classnotes-preamble.tex}
 
+\DeclareMathOperator{\BEY}{BEY}
+\DeclareMathOperator{\BD}{BD}
+\DeclareMathOperator{\eff}{eff}
+
 \begin{document}
 \input{latex-classnotes-header.tex}
 
@@ -178,7 +182,7 @@ which no guarantee of any fixed, or even positive, return.
 
 Stocks allow investors to participate in business activities
 while away from the drawbacks of individual ownership and partnership.
-They are relatively liquid, in that investors can fairly quickly
+They are relatively liquid, i.e. investors can fairly quickly
 extract the true value of the shares.
 Shares also offer limited liability, so that the greatest loss possible
 is the investment itself, in the case where the business goes out.
@@ -645,8 +649,8 @@ There are 4 important trends in the modern investment environment:
 % chapter financial_markets_and_instruments
 
 The following a several major classes of financial assets
-or securities, of which we shall go into more detail later
-on, but will provided a brief description so that we may proceed:
+or securities, of which we shall go into more detail,
+but will provided a brief description so that we may proceed:
 \begin{enumerate}
   \item Debt instruments
     \begin{itemize}
@@ -689,9 +693,512 @@ The order of how companies pay their liabilities is:
 \label{sec:the_money_market}
 % section the_money_market
 
+\begin{itemize}
+  \item A sub-sector of the fixed income market.
+  \item Consists of instruments, called \hlnotea{money market instruments}
+    or \hlnotea{debt securities}, that are
+    \begin{itemize}
+      \item \hlnotec{very-short-term};
+      \item \hlnotec{highly marketable};
+      \item \hlnotec{liquid}; and
+      \item \hlnotec{low-risk}.
+    \end{itemize}
+  \item Money market instruments are also sometimes called
+    \hlnotea{cash equivalents} due to their safety and liquidity.
+  \item Money market investors \hlnoted{aim} to generate
+    safe, short-term returns.
+  \item Most of these securities trade in large denominations,
+    making them out of reach for small investors.
+  \item \hlnotea{Money market funds}, on the other hand,
+    is accessible to small investors.
+\end{itemize}
 
+\subsubsection{Money Market Instruments}%
+\label{ssub:money_market_instruments}
+% subsubsection money_market_instruments
+
+\paragraph{Treasury Bills (T-bills)}\label{para:t_bills}\index{Treasury bills}\index{T-bills}
+
+\begin{itemize}
+  \item Most marketable of all Canadian money market instruments.
+  \item Issued by the government to raise money.
+  \item Usually issued at a bi-weekly \hlnotec{auction} for maturities of
+    \begin{enumerate*}
+      \item 1 month;
+      \item 2 months;
+      \item 3 months;
+      \item 6 months; and
+      \item 1 year.
+    \end{enumerate*}
+    \begin{itemize}
+      \item Chartered banks and authorized dealers can submit
+        only \hlnoteb{competitive bids}.
+      \item \hldefn{Competitive bid} --- order for a given quantity of bills
+        at a specific offer price.
+      \item \hldefn{Non-competitive bid} ---
+        unconditional offer to purchase at the average price
+        of the successful competitive bid; submittable only for bonds.
+      \item Government rank-orders bids by offering price,
+        and accepts bids in descending order
+        \sidenote{It is sensible to accept bids of the highest price,
+        since that means that the government needs to pay back less.}
+        until the entire issue is absorbed.
+    \end{itemize}
+  \item Also traded in the secondary market.
+  \item Highly liquid.
+  \item \hlnotea{Credit risk} is considered to be close to nil;
+    governments can raise taxes to repay debt.
+  \item Sold at a discount.
+  \item Price is quoted based on \nameref{defn:bond_equivalent_yield}.
+\end{itemize}
+
+
+\paragraph{Certificates of Deposit (CD)}\label{para:certificates_of_deposit}
+
+\begin{defn}[Time Deposit]\index{Time Deposit}\label{defn:time_deposit}
+  A \hlnoteb{time deposit} is an interest-bearing deposit account
+  with a specific date of maturity, and cannot be withdrawn
+  before maturity.
+  The deposit bearer will pay interest and the principal
+  back to the investor only at maturity.
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item Time deposits are known as `fixed deposits' in a certain country in
+      the East.
+    \item While time deposits cannot be withdrawn by definition,
+      some time deposits allow the investor to still withdraw their money
+      but as a sign of cancellation,
+      and either the full sum is paid back, or a small fee is charged.
+  \end{enumerate}
+\end{remark}
+
+\begin{itemize}
+  \item CD is a time deposit with a chartered bank.
+    \sidenote{A \hldefn{chartered bank} is a bank that has received
+    regulatory approval to operate. The specifics of what they can do
+    as a chartered bank differs from country to country.}
+  \item A similar time deposit for smaller amounts is known as a
+    \hldefn{guarantee investment certificate (GIC)}.
+  \item Both CDs and GICs are non-transferable in Canada;
+    but certain banks allow for transfer for those with great denominations.
+  \item Transferable CDs in Canada are known as \hldefn{bearer deposit notes}
+    (BDNs).
+  \item CDs in the US are marketable.
+\end{itemize}
+
+\paragraph{Commercial Paper}
+
+\begin{itemize}
+  \item Short-term unsecured debt notes.
+  \item Typically issued by large, well-known companies.
+  \item Often backed by a bank line of credit.
+    \sidenote{A \hldefn{line of credit} is an arrangement between a
+    financial institution and a customer, and it establishes the maximum
+    amount that the customer can borrow. A bank line of credit is a line
+    of credit where the financial institution is the bank.}
+  \item Range: $\leq 1$ year; longer maturities require registration under
+    the \hlnotea{Ontario Securities Act} and thus almost never used.
+    \begin{itemize}
+      \item Most often issued with less than 1 or 2 months;
+        with minimum denominations of $\$50,000$.
+      \item This means that small investors can only access commercial papers
+        indirectly, via \hlnotea{money market mutual funds}.
+    \end{itemize}
+  \item Almost all commercial papers are now rated for credit quality
+    by rating agencies.
+    \sidenote{\hldefn{Rating agencies} are agencies that rate a debtor's ability
+    to pay back principals and interests in a timely manner, and their
+    likelihood of defaulting.}
+  \item Considered a fairly safe asset due to short term.
+    \begin{itemize}
+      \item If investors doubt the credit-worthiness of the firm,
+        the firm may be forced to pick other methods of financing,
+        which are most costly. (E.g.
+        \href{https://en.wikipedia.org/wiki/Olympia_and_York}{Olympia and York
+        -- March 1992})
+    \end{itemize}
+  \item Financial firms like banks have also started issuing commercial papers,
+    usually called \hldefn{asset-backed commercial paper}.
+    \begin{itemize}
+      \item These are short-term instruments used to raise funds,
+        for the institution to invest in other assets.
+      \item These assets are collateral for the commercial paper --- hence
+        the namesake.
+      \item A notorious example of where the investment goes was into subprime
+        mortgages, where we saw in summer of 2007.
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Bankers' Acceptance}\index{Bankers' Acceptance}\label{para:bankers_acceptance}
+
+\begin{itemize}
+  \item Is an order to a bank, by a bank's client, to pay an amount to a holder
+    at a future date.
+    \begin{itemize}
+      \item Bank endorses the order for payment as ``accepted'', hence the name.
+      \item Bank assumes responsibility for eventual payment.
+      \item This makes Bankers' Acceptances second only to T-bills
+        in terms of security.
+    \end{itemize}
+  \item Typically issued for 6 months.
+  \item Once issued, Bankers' Acceptances are tradable in the secondary market.
+    \begin{itemize}
+      \item Traders may substitute the bank's credit standing for their own.
+      \item Sold at discount of the face value of the payment order; hence
+        yield is calculated similarly.
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Eurodollars}\index{Eurodollars}\label{para:eurodollars}
+
+\begin{itemize}
+  \item US dollar-denominated deposits at foreign banks or
+    foreign branches of US banks.
+    \begin{itemize}
+      \item Not under regulation of the US Federal Reserve Board.
+      \item Despite the name, Eurodollars need not be based on
+        European banks, but it is where Eurodollars began.
+    \end{itemize}
+  \item Most Eurodollar deposits are large.
+  \item Most Eurodollars are time deposits with less than 6 months' maturity.
+  \item The \textbf{\textcolor{blue}{Eurodollar}}
+    \hyperref[para:certificates_of_deposit]
+    {certificate of deposit}\index{Eurodollar certificate of deposit}
+    is a variation of the Eurodollar time deposit.
+    \begin{itemize}
+      \item Tradable, which a typical time deposit is not.
+      \item Considered less liquid and riskier than US CDs;
+        hence higher yields.
+    \end{itemize}
+  \item \hldefn{Eurodollar bonds} --- dollar-denominated bonds in Europe.
+    \begin{itemize}
+      \item \hlnotec{Not} a money market instrument due to long maturities.
+    \end{itemize}
+  \item All above Eurodollar-related instruments also exist denominated
+    in all major currencies.
+    \begin{itemize}
+      \item They are called \hldefn{Eurocurrency instruments}; e.g.
+        they are called Euro-Canadian dollars in Canadian Dollars.
+      \item Constitute a minor portion of the Eurocurrency market,
+        which is dominated by Eurodollars.
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Repos and Reverse Repos}\index{Repos}\index{Reverse Repos}\index{Repurchase agreements}\index{RP}\label{para:repos_and_reverse_repos}
+
+\begin{itemize}
+  \item Are short-term, typically overnight, borrowing.
+  \item Frequently used by dealers in government securities.
+  \item Sold to an \hlnotea{institutional investor} as collateral,
+    with the promise to buyback the next day
+    with an \hlnotea{overnight interest}.
+  \item Considered very safe; backed by government securities.
+  \item A \hldefn{term repo} is a similar instrument,
+    except that the duration of the agreement can be 30 days or more.
+  \item A \hldefn{reverse repo} is when
+    the dealer finds an investor holding government securities and buys them,
+    with the agreement to sell them back.
+\end{itemize}
+
+\paragraph{Federal Funds}\index{Federal Funds}\label{para:federal_funds}
+
+\begin{itemize}
+  \item Aka \hldefn{fed funds}.
+  \item A minimum balance in a reserve account that a member bank in the US
+    is required to have with the Federal Reserve.
+  \item Banks with excess funds lend to those with a shortage at the
+    so-called \hldefn{federal funds rate}, usually as overnight transactions.
+  \item Fed funds market was meant to help banks meet the minimum requirement,
+    but many large banks consider the fund as a component of their total
+    funding.
+  \item The fed fund rate is recognized as a \hlnotee{key barometer} of monetary
+    policy.
+\end{itemize}
+
+\paragraph{Brokers' Call Loans}\index{Brokers' Call Loans}\label{para:brokers_call_loans}
+
+\begin{itemize}
+  \item Individuals who buy stocks on margin
+    \sidenote{This means that the investor borrows some money to buy a stock.}
+    borrow part of the funds from their broker.
+    The broker may borrow the funds from a bank,
+    agreeing to pay back on call.
+  \item Chartered banks make these call loans on investment firms
+    to finance their inventory of securities.
+  \item Interest rate on these loans is usually closely related to
+    the rate of short-term T-bills.
+\end{itemize}
+
+\paragraph{The LIBOR Market}\index{LIBOR}\label{para:libor} 
+
+\begin{itemize}
+  \item Full name: London Interbank Offered Rate.
+  \item Is the rate at which large banks in London are willing to lend each
+    other money.
+  \item Became the premier short-term interest rate quoted in the European money
+    market.
+  \item Used as a reference rate for many transactions. (e.g. LIBOR $+ 2\%$)
+  \item May be tied to currencies other than USD;
+    e.g. British pound, yen, euros.
+  \item \hldefn{EURIBOR} (\hldefn{European Interbank Offered Rate})
+    is a similar rate at which banks in the Eurozone are willing to lend
+    euros among themselves.
+\end{itemize}
+
+% subsubsection money_market_instruments (end)
+
+\subsubsection{Yields on Money Market Instruments}%
+\label{ssub:yields_on_money_market_instruments}
+% subsubsection yields_on_money_market_instruments
+
+\begin{defn}[Par Value / Face Value]\index{Par Value}\index{Face Value}\label{defn:par_value}\label{defn:face_value}
+  Given a T-bill, the \hlnoteb{par value} (or \hlnoteb{face value})
+  of the T-bill is the value of the T-bill at maturity.
+\end{defn}
+
+\begin{defn}[Bond Equivalent Yield (BEY)]\index{Bond Equivalent Yield}\index{BEY}\label{defn:bond_equivalent_yield}
+  The \hlnoteb{Bond Equivalent Yield (BEY)}, denoted as $r_{\BEY}$,
+  is a calculation for restating semi-annual,
+  quarterly or monthly discount T-bill into an annual yield.
+  In particular, there are 2 standards that are used
+  in the market to calculate $r_{\BEY}$.
+  Let $F$ be the par value, $P$ be the selling price
+  of the T-bill, and $n$ the maturity of the T-bill in days of a year.
+  In Canada, we use the \hldefn{exact method}, which states that
+  \begin{equation*}
+    r_{\BEY} = \frac{F - P}{P} \times \frac{365}{n}.
+  \end{equation*}
+
+  In the US, the BEY is known as the \hldefn{Bond Discount Rate} (BD),
+  denoted by $r_{\BD}$, where
+  \begin{equation*}
+    r_{\BD} = \frac{F - P}{F} \times \frac{360}{n}.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item Perhaps the best way to think about the naming is to
+      think of the name as being archaic; ``bonds'' were issued for 1 year
+      in the old days. These calculations were devised
+      to calculate the rate of a similar instrument with a shorter period,
+      in a way so that they may be comparable to the one-year T-bill.
+    \item The BEY is \hlnotec{not} an accurate measure
+      of the effective rate of return.
+      This is because the BEY uses simple interest
+      rather than compounded interest.
+      The next example illustrates this.
+    \item The BEY is also known as a \hldefn{annual percentage rate} (APR),
+      since is uses simple interest procedure to \hlnotea{annualize},
+      instead of compound interest.
+      \sidenote{In the case of compound interest, we call such a rate
+      the \hldefn{annual percentage yield}, also known, perhaps more
+      commonly to us, as the \hldefn{effective annual rate}.}
+  \end{enumerate}
+\end{remark}
+
+\begin{eg}[BEY is not an accurate measure of the effective rate of return]
+  Consider a $\$1,000$ T-bill priced at $\$960$ now,
+  maturing in 6 months.
+  Then the effective rate of interest is
+  \begin{equation*}
+    \left(1 + \frac{1000 - 960}{960}\right)^2 - 1 \approx 0.0851 = 8.51\%.
+  \end{equation*}
+  On the other hand, the BEY is
+  \begin{equation*}
+    r_{\BEY} = \frac{1000 - 960}{960} \cdot \frac{365}{182}
+          \approx 8.356\%.
+  \end{equation*}
+\end{eg}
+
+\begin{propo}[Relationship between BEY and BD]\label{propo:relationship_between_bey_and_bd}
+  Let $F$ be the par value, $P$ be the selling price of the T-bill,
+  and $n$ the maturity of the T-bill in days of a year.
+  Then
+  \begin{equation*}
+    r_{\BEY} = \frac{365 \cdot r_{\BD}}{360 - r_{\BD} \cdot n}.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Note that
+  \begin{equation*}
+    r_{\BEY} = \frac{F - P}{P} \cdot \frac{365}{n}
+  \end{equation*}
+  and
+  \begin{equation*}
+    r_{\BD} = \frac{F - P}{F} \cdot \frac{360}{n}.
+  \end{equation*}
+  Equating the two by $\frac{F - P}{n}$, we get
+  \begin{equation*}
+    \frac{r_{\BEY} \cdot P}{365} = \frac{r_{\BD} \cdot F}{360},
+  \end{equation*}
+  which thus
+  \begin{equation*}
+    r_{\BEY} = \frac{r_{\BD} \cdot F \cdot 365}{360 \cdot P}.
+  \end{equation*}
+  Notice that by the formula of $r_{\BD}$, we have
+  \begin{equation*}
+    P = F \left( 1 - r_{\BD} \cdot \frac{n}{360} \right).
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    r_{\BEY} = \frac{r_{\BD} \cdot \cancel{F} \cdot 365}
+            {360 \cdot \cancel{F} \left( 1 - r_{\BD} \frac{n}{360} \right)}
+            = \frac{365 \cdot r_{\BD}}{360 - r_{\BD} \cdot n}.
+  \end{equation*}
+\end{proof}
+
+\begin{propo}[Relationship between the Effective Annual Rate and the BEY]\label{propo:relationship_between_the_effective_annual_rate_and_the_bey}
+  Let $r_{\eff}$ be the effective annual interest rate.
+  Then
+  \begin{equation*}
+    r_{\eff} = \left( 1 + \frac{r_{\BEY}}{365 / n} \right)^{\frac{365}{n}} - 1,
+  \end{equation*}
+  where $n$ is the number of days to maturity of the T-bill
+  at which $r_{\BEY}$ is based upon.
+\end{propo}
+
+\begin{proof}
+  First, notice that if we let $t$ be the period at which the bill is in place,
+  and if we label the compound interest rate as $i_c$ and the simple interest
+  rate as $i_s$, then we can equate
+  \begin{equation*}
+    (1 + i_c)^t = (1 + i_s t)
+  \end{equation*}
+  to find one interest rate from the other.
+  It is important to note that since the period of both sides are the same,
+  the period at which interest is applied are the same.
+  In particular, since $r_{\BEY}$ is a type of annual simple interest,
+  it follows that $i_c = r_{\eff}$, and if we pick $t = \frac{n}{365}$, then
+  \begin{equation*}
+    (1 + r_{\eff})^{\frac{n}{365}} = (1 + \frac{r_{\BEY}}{365 / n})
+  \end{equation*}
+  and so
+  \begin{equation*}
+    r_{\eff} = \left( 1 + \frac{r_{\BEY}}{365 / n} \right)^{\frac{365}{n}} - 1
+  \end{equation*}
+  as required.
+\end{proof}
+
+\begin{remark}
+  \begin{enumerate}
+    \item By the definition of the \nameref{defn:bond_equivalent_yield},
+      we observe that
+      \begin{equation*}
+        \frac{r_{\BEY}}{365 / n} = \frac{F - P}{P},
+      \end{equation*}
+      where $F$ is the face value of the T-bill and $P$ its purchase price.
+      Thus
+      \begin{equation*}
+        (1 + r_{\eff})^{\frac{n}{365}} = 1 + \frac{F - P}{P},
+      \end{equation*}
+      which also agrees with our notion of the effective annual rate.
+    \item Since $r_{\BEY}$ is an annualized rate, we also call
+      $\frac{r_{\BEY}}{365 / n}$ a `deannualized' rate.
+  \end{enumerate}
+\end{remark}
+
+% subsubsection yields_on_money_market_instruments (end)
 
 % section the_money_market (end)
+
+\section{The Bond Market}%
+\label{sec:the_bond_market}
+% section the_bond_market
+
+\begin{itemize}
+  \item Composed of borrowing instruments that have terms longer than those
+    traded in the money market.
+  \item These borrowing instruments are either called \hldefn{debt instruments}
+    or \hldefn{bonds}.
+    \begin{itemize}
+      \item Most of these instruments promise either
+        \begin{itemize}
+          \item a fixed stream of income; or
+          \item a stream of income determined according to some formula.
+        \end{itemize}
+      \item Because of the above, they are also said
+        to make up the \hldefn{fixed-income capital market}.
+        \begin{itemize}
+          \item In practice, the flow of income may not be fixed,
+            thus the term ``fixed income'' is somewhat inappropriate.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\begin{eg}
+  The following are some examples of:
+  \begin{itemize}
+    \item Publicly issued instruments:
+      \begin{itemize*}
+        \item Canada bonds
+        \item Provincial government bonds
+        \item Municipal bonds
+      \end{itemize*}
+    \item Privately issued instruments:
+      \begin{itemize*}
+        \item Corporate bonds
+        \item International Bonds
+        \item Mortgage-backed securities
+      \end{itemize*}
+  \end{itemize}
+\end{eg}
+
+\paragraph{Government of Canada Bonds}\label{para:government_of_canada_bonds}
+
+\begin{itemize}
+  \item The Canadian government issues non-marketable and marketable
+    debt securities to borrow funds.
+  \item Non-marketable debt securities
+    \begin{itemize}
+      \item Both the following examples are
+        \begin{itemize}
+          \item issued every year starting November 1
+          \item sale period may be a few months
+          \item has little interest rate risk
+        \end{itemize}
+      \item \hldefn{Canada Savings Bonds} (CSBs) ---
+        \begin{itemize}
+          \item can be cashed any time prior to maturity at
+            face value plus accrued interest
+          \item valuation is complex due to redemption feature
+        \end{itemize}
+      \item \hldefn{Canada Permium Bonds} (CPBs) ---
+        \begin{itemize}
+          \item can only be cashed in November of succeeding years
+          \item interest rate rises if the realized holding period is longer
+        \end{itemize}
+    \end{itemize}
+  \item Marketable debt securities
+    \begin{itemize}
+      \item \hldefn{Government of Canada Bonds} or \hldefn{Canadas}
+        or \hldefn{Canada bonds} ---
+        \begin{itemize}
+          \item varying maturities at issue; range up to 40 years
+          \item considered part of the money market when their
+            term becomes less than 3 years
+          \item generally noncallable
+          \item make semi-annual coupon payments
+          \item competitive coupon rates to ensure their issue at or near par
+            value
+          \item there are listings that show the prices, periods and yields
+            of these bonds
+          \item more detailed listings may also include
+            \begin{itemize}
+              \item the change in yield and/or price from previous
+                \hlnotea{close}
+              \item \hldefn{bid} and \hldefn{ask} prices,
+                which respectively means the price at which
+                an investor can sell or buy the asset on the market
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+% section the_bond_market (end)
 
 % chapter financial_markets_and_instruments (end)
 

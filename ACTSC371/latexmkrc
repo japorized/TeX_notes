@@ -1,0 +1,7 @@
+$pdf_mode = 1;
+$pdflatex = 'pdflatex  %O  --shell-escape %S';
+$lualatex = 'lualatex  %O  --shell-escape %S';
+$silent = 1;
+$force_mode = 1;
+
+@default_files = ('classnotes.tex', 'classnotes-dark.tex');
