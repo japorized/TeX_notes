@@ -18,6 +18,8 @@
   BoldItalicFont = P052-BoldItalic.otf ]
 \input{latex-classnotes-preamble.tex}
 
+\DeclareMathOperator{\Vol}{Vol}
+
 \theoremprework{\textcolor{cyan}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{cyan}\normalfont\bfseries}
 \theorempostwork{\textcolor{cyan}{\hrule height 2pt width \textwidth}}
@@ -2227,7 +2229,7 @@ and it has these properties:
   When $F(x) = x$, $\mu_F$ is simply Lebesgue's measure.
 \end{eg}
 
-\begin{eg}[Dirac delta measure of a point]
+\begin{eg}[Dirac delta measure of a point]\label{eg:dirac_delta_measure_of_a_point}
   Fix $x_0 \in \mathbb{R}$. Let
   \begin{equation*}
     F(x) = \begin{cases}
@@ -2319,6 +2321,399 @@ Furthermore, $F' = 0$ on all the removed intervals.
 % section the_lebesgue_stieltjes_outer_measure_continued_2 (end)
 
 % chapter lecture_8_sep_20th_2019 (end)
+
+\chapter{Lecture 9 Sep 23rd 2019}%
+\label{chp:lecture_9_sep_23rd_2019}
+% chapter lecture_9_sep_23rd_2019
+
+\section{The Lebesgue-Stieltjes Outer Measure (Continued 3)}%
+\label{sec:the_lebesgue_stieltjes_outer_measure_continued_3}
+% section the_lebesgue_stieltjes_outer_measure_continued_3
+
+Continuing with the Cantor set, we notice that $F'(x) = 0$ for all $x \notin C$.
+In particular, the derivative of $F$ exists almost everywhere.
+
+Now for intervals that we have ``thrown away'', by
+\cref{eg:dirac_delta_measure_of_a_point}, the measure of each
+of these intervals is $0$.
+However,
+\begin{equation*}
+  \mu_F [0, 1] = F(1) - F(0) = 1.
+\end{equation*}
+Since $[0, 1] = C \cupdot C^C$, we have that
+\begin{equation*}
+  1 = \mu_F [0, 1] = \mu_F(C) + \mu_F(C^C) = \mu_F(C) + 0,
+\end{equation*}
+and so
+\begin{equation*}
+  \mu_F(C) = 1.
+\end{equation*}
+
+\begin{remark}
+  On $\mathbb{R}^k$, we can define a $k$-dimensional Lebesgue outer measure
+  $\mu_F^*$ by covering sets with ``boxes'' such as
+  \begin{equation*}
+    R_k = (a_1, b_1) \times \hdots \times (a_k, b_k),
+  \end{equation*}
+  where
+  \begin{equation*}
+    \Vol(R_k) = (b_1 - a_1) \hdots (b_k - a_k).
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \mu_k^*(E) \coloneqq \inf \left\{ 
+      \sum \Vol(R_k)
+        : E \subseteq \bigcup_{k} R_k
+    \right\}.
+  \end{equation*}
+
+  \begin{ex}
+    Show that $\mu_k^*(E)$ for each $k \geq 2$ is a metric outer measure.
+  \end{ex}
+
+  Applying Carathéodory's theorems, we get the $k$-dimensional measure,
+  and we know that $\mathfrak{B}(\mathbb{R}^k)$ are all measurable.
+\end{remark}
+
+\begin{thm}[A Measure Constructed By Another Measure]\label{thm:a_measure_constructed_by_another_measure}
+  Let $\mu : \mathfrak{B}(\mathbb{R}) \to [0, \infty]$ be a measure with
+  \begin{equation*}
+    \forall a, b \in \mathbb{R} \quad \mu((a, b]) < \infty.
+  \end{equation*}
+  Define
+  \begin{equation*}
+    F(x) \coloneqq \begin{cases}
+      \mu((0, x])  & x > 0 \\
+      0            & x = 0 \\
+      -\mu((x, 0]) & x < 0
+    \end{cases}.
+  \end{equation*}
+  Then $F$ is increasing and right-continuous.
+  Furthermore, $\mu(A) = \mu_F(A)$ for all $A \in \mathfrak{B}(\mathbb{R})$.
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{$F$ is increasing} \\
+  \noindent \hlbnotec{$0 \leq x < y$} \\
+  Notice that $(0, x] \subseteq (0, y]$. Thus by subadditivity,
+  \begin{equation*}
+    F(x) = \mu(0, x] \leq \mu(0, y] = F(y).
+  \end{equation*}
+
+  \noindent \hlbnotec{$x < y \leq 0$} \\
+  Observe that
+  \begin{equation*}
+    (x, 0] \supseteq (y, 0],
+  \end{equation*}
+  and so subadditivity dictates that
+  \begin{equation*}
+    \mu(x, 0] \geq \mu(y, 0].
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    F(x) = - \mu(x, 0] \leq - \mu(y, 0] = F(y).
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{$F$ is right-continuous} \\
+  \noindent \hlbnotec{$0 \leq x$} \\
+  Consider a sequence $x_n \searrow x$.
+  \sidenote{We write $x_n \searrow x$ to mean that $\{ x_n \}_n$
+  is a sequence such that $x < x_n$
+  and $\lim_{n \to \infty} x_n = x$.}
+  Then notice that
+  \begin{equation*}
+    (0, x] = \bigcap_{n=1}^{\infty} (0, x_n],
+  \end{equation*}
+  and
+  \begin{equation*}
+    (0, x_n] \supseteq (0, x_{n+1}],
+  \end{equation*}
+  i.e. $\{ (0, x_n] \}_n$ is a decreasing sequence of sets.
+  Furthermore, we note that
+  \begin{equation*}
+    \mu(0, x_n] < \infty
+  \end{equation*}
+  by assumption.
+  Thus, by \hyperref[thm:properties_of_a_measure]{continuity from above},
+  \begin{equation*}
+    F(x) = \mu(0, x] = \lim_{n \to \infty} \mu(0, x_n]
+         = \lim_{n \to \infty} F(x_n).
+  \end{equation*}
+
+  \noindent \hlbnotec{$x < 0$} \\
+  Consider a sequence $x_n \searrow x$.
+  Then, notice that
+  \begin{equation*}
+    (x, 0] = \bigcup_{n} (x_n, 0],
+  \end{equation*}
+  and
+  \begin{equation*}
+    (x_n, 0] \subseteq (x_{n+1}, 0],
+  \end{equation*}
+  I.e. $\{ (x_n, 0] \}_n$ is an increasing sequence of sets.
+  By \hyperref[thm:properties_of_a_measure]{continuity from below},
+  \begin{equation*}
+    F(x) = - \mu(x, 0]
+         = \lim_{n \to \infty} - \mu(x_n, 0]
+         = \lim_{n \to \infty} F(x_n).
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{$\forall A \in \mathfrak{B}(\mathbb{R}) \quad \mu(A) = \mu_F(A)$}
+  Consider the set
+  \begin{equation*}
+    \mathcal{A} \coloneqq \{ A \in \mathfrak{B}(\mathbb{R})
+          : \mu(A) = \mu_F(A) \} \subseteq \mathfrak{B}(\mathbb{R}).
+  \end{equation*}
+  Now if $\mathcal{A}$ is a $\sigma$-algebra and contains intervals,
+  then $\mathfrak{B}(\mathbb{R}) \subseteq \mathcal{A}$,
+  which means $\mathfrak{B}(\mathbb{R}) = \mathcal{A}$,
+  which is equivalent to what we want.
+
+  \noindent
+  \hlbnotec{$\mathcal{A}$ contains intervals}
+  \begin{itemize}
+    \item Let $0 \leq a < b \in \mathbb{R}$. Notice that
+      \begin{equation*}
+        \mu(0, a] + \mu(a, b] = \mu(0, b],
+      \end{equation*}
+      since
+      \begin{equation*}
+        (0, a] \cupdot (a, b] = (0, b].
+      \end{equation*}
+      Since $F(a) = \mu(0, a]$ and $F(b) = \mu(0, b]$,
+      it follows that
+      \begin{equation*}
+        F(a) + \mu(a, b] = F(b),
+      \end{equation*}
+      and so by
+      \cref{propo:lebesgue_stieltjes_outer_measure_on_half_open_intervals},
+      \begin{equation*}
+        \mu(a, b] = F(b) - F(a) = \mu_F(a, b].
+      \end{equation*}
+
+    \item Let $a < 0 \leq b \in \mathbb{R}$. Notice that
+      \begin{equation*}
+        (a, b] = (a, 0] \cupdot (0, b],
+      \end{equation*}
+      and so by
+      \cref{propo:lebesgue_stieltjes_outer_measure_on_half_open_intervals},
+      \begin{equation*}
+        \mu(a, b] = \mu(a, 0] + \mu(0, b] = - F(a) + F(b) = \mu_F(a, b].
+      \end{equation*}
+
+    \item Let $a < b \leq 0 \in \mathbb{R}$. Notice that
+      \begin{equation*}
+        (a, 0] = (a, b] \cupdot (b, 0],
+      \end{equation*}
+      and so
+      \begin{equation*}
+        \mu(a, 0] = \mu(a, b] + \mu(b, 0].
+      \end{equation*}
+      By \cref{propo:lebesgue_stieltjes_outer_measure_on_half_open_intervals},
+      \begin{equation*}
+        \mu(a, b] = \mu(a, 0] - \mu(b, 0] = - F(a) + F(b) = \mu_F(a, b].
+      \end{equation*}
+  \end{itemize}
+
+  \noindent
+  \hlbnotec{$\mathcal{A}$ is a $\sigma$-algebra}
+  \begin{itemize}
+    \item It is clear that
+      \begin{equation*}
+        \mu(\emptyset) = 0 = \mu_F(\emptyset),
+      \end{equation*}
+      and so $\emptyset \in \mathcal{A}$.
+    \item Let $\{ A_n \}_n \subseteq \mathcal{A}$ be a disjoint collection.
+      Then it is clear that
+      \begin{equation*}
+        \mu \left( \bigcup_{n} A_n \right)
+        = \sum_{n} \mu(A_n) = \sum_{n} \mu_F(A_n)
+        = \mu_F \left( \bigcup_{n} A_n \right).
+      \end{equation*}
+
+    \item Let $A \in \mathcal{A}$. Consider an interval
+      $(a, b] \subseteq \mathcal{A}$.
+      Note that
+      \begin{equation*}
+        (a, b] = ( (a, b] \cap A ) \cupdot ( (a, b] \cap A^C ).
+      \end{equation*}
+      So
+      \begin{equation}\label{eq:measure_from_measure_eq1}
+        \mu(a, b] = \mu( (a, b] \cap A ) + \mu( (a, b] \cap A^C ).
+      \end{equation}
+      Consider an arbitrary covering
+      \begin{equation*}
+        (a, b] \cap A \subseteq \bigcup_{i} (a_i, b_i].
+      \end{equation*}
+      Then
+      \begin{equation*}
+        \mu( (a, b] \cap A ) \leq \sum_{i} \mu(a_i, b_i]
+                        = \sum_{i} F(b_i) - F(a_i).
+      \end{equation*}
+      Thus
+      \begin{align*}
+        \mu( (a, b] \cap A )
+        &\leq \inf \left\{ \sum_{i} F(b_i) - F(a_i)
+                  : (a, b] \cap A \subseteq \bigcup_{i} (a_i, b_i) \right\} \\
+        &= \mu_F^*( (a, b] \cap A ) = \mu_F( (a, b] \cap A ).
+      \end{align*}
+      Similarly, we have
+      \begin{equation*}
+        \mu( (a, b) \cap A^C ) \leq \mu_F( (a, b] \cap A^C ).
+      \end{equation*}
+      Therefore, going back to \cref{eq:measure_from_measure_eq1},
+      \begin{align*}
+        \mu(a, b] &\leq \mu_F( (a, b] \cap A ) + \mu_F( (a, b] \cap A^C ) \\
+                  &= \mu_F(a, b] = \mu(a, b].
+      \end{align*}
+      It follows that we must have
+      \begin{equation*}
+        \mu( (a, b] \cap A ) = \mu_F( (a, b] \cap A ),
+      \end{equation*}
+      and
+      \begin{equation*}
+        \mu( (a, b] \cap A^C ) = \mu_F( (a, b] \cap A^C ).
+      \end{equation*}
+      In particular, $(a, b] \cap A^C \in \mathcal{A}$.
+      Notice that
+      \begin{equation*}
+        A^C = \bigcupdot_{n = -\infty}^{\infty} (n, n + 1] \cap A^C,
+      \end{equation*}
+      and so since we've showed that $\mathcal{A}$ is closed under
+      countable unions, $A^C \in \mathcal{A}$.
+  \end{itemize}
+
+  This concludes the proof.
+\end{proof}
+
+% section the_lebesgue_stieltjes_outer_measure_continued_3 (end)
+
+\section{Measurable Functions}%
+\label{sec:measurable_functions}
+% section measurable_functions
+
+We look into so-called measurable functions that shall
+be our next step towards the theory of integration.
+
+\begin{defn}[Measurable Space]\index{Measurable Space}\label{defn:measurable_space}
+  Let $X \neq \emptyset$ be a set and $\mathfrak{M}$ a $\sigma$-algebra
+  of subsets of $X$.
+  We call the pair $(X, \mathfrak{M})$ a \hldefn{measurable space}.
+\end{defn}
+
+\begin{defn}[Measurable Functions]\index{Measurable Functions}\label{defn:measurable_functions}
+  Let $(X, \mathfrak{M})$ and $(Y, \mathfrak{N})$ be measurable spaces,
+  and $f : X \to Y$ a function.
+  We say that $f$ is
+  a \hlnoteb{$(\mathfrak{M}, \mathfrak{N})$-measurable function},
+  or that $f$ is \hlnoteb{$(\mathfrak{M}, \mathfrak{N})$-measurable}, if
+  \begin{equation*}
+    \forall E \in \mathfrak{N}\quad f^{-1}(E) \in \mathfrak{M}.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  For those who remember contents from real analysis,
+  the definition of a measurable function is similar
+  to the definition of a
+  \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf\#thm.43}{continuous function on topological spaces}.
+  We shall, in fact, see that their similarity goes beyond than
+  their definitions.
+\end{remark}
+
+\begin{propo}[Composition of Measurable Functions]\label{propo:composition_of_measurable_functions}
+  Let $(X, \mathfrak{M})$, $(Y, \mathfrak{N})$ and $(Z, \mathfrak{O})$ be
+  measurable spaces.
+  Suppose
+  \begin{itemize}
+    \item $f : X \to Y$ is $(\mathfrak{M}, \mathfrak{N})$-measurable; and
+    \item $g : Y \to Z$ is $(\mathfrak{N}, \mathfrak{O})$-measurable.
+  \end{itemize}
+  Then $g \circ f : X \to Z$ is $(\mathfrak{M}, \mathfrak{O})$-measurable.
+\end{propo}
+
+\begin{proof}
+  Let $E \in \mathfrak{O}$.
+  Then since $g^{-1}(E) \in \mathfrak{N}$, it follows that
+  \begin{equation*}
+    (g \circ f)^{-1}(E) = f^{-1}(g^{-1}(E)) \in \mathfrak{M}.
+  \end{equation*}
+\end{proof}
+
+\begin{propo}[Measurability of a Function Defined on Generators of the Codomain]\label{propo:measurability_of_a_function_defined_on_generators_of_the_codomain}
+  Let $(X, \mathfrak{M})$ and $(Y, \mathfrak{N})$ be measurable spaces,
+  and let $\mathcal{E}$ be the generator of $\mathfrak{N}$.
+  Let $f : X \to Y$.
+  If $f^{-1}(E) \in \mathfrak{M}$ for all $E \in \mathcal{E}$,
+  then $f$ is $(\mathfrak{M}, \mathfrak{N})$-measurable.
+\end{propo}
+
+\begin{proof}
+  Consider
+  \begin{equation*}
+    \mathcal{A} \coloneqq \{ A \in \mathfrak{N} : f^{-1}(A) \in \mathfrak{M} \}.
+  \end{equation*}
+  Notice that if $\mathcal{A}$ is a $\sigma$-algebra,
+  then we must have $\mathcal{E} \subseteq \mathcal{A}$,
+  which then forces $\mathcal{A} = \mathfrak{N}$.
+
+  \noindent
+  \hlbnoted{$\mathcal{A}$ is a $\sigma$-algebra}
+  \begin{itemize}
+    \item Since $\mathcal{E}$ is a $\sigma$-algebra, $\emptyset \in \mathcal{E}$,
+      and so $f^{-1}(\emptyset) \in \mathfrak{M}$ by assumption.
+      Thus $\emptyset \in \mathcal{A}$.
+    \item Suppose $\{ A_n \}_n \subseteq \mathcal{A}$ a disjoint collection.
+      Notice that since $f$ is a function, it must be that
+      \sidenote{If this is not clear, notice that if some $f^{-1}(A_n)$ and
+      $f^{-1}(A_m)$ are not disjoint, then that means $A_n$ and $A_m$ are not
+      disjoint, or that $f$ is not a function.}
+      \begin{equation*}
+        f^{-1} \left( \bigcupdot_{n} A_n \right) = \bigcupdot_{n} f^{-1}(A_n).
+      \end{equation*}
+      Since $f^{-1}(A_n) \in \mathfrak{M}$ and $\mathfrak{M}$ is a
+      $\sigma$-algebra, it follows that
+      \begin{equation*}
+        f^{-1} \left( \bigcupdot_{n} A_n \right) = \bigcupdot_{n} f^{-1}(A_n)
+          \in \mathfrak{M}.
+      \end{equation*}
+      Thus $\bigcup_{n} A_n \in \mathcal{A}$.
+    \item Suppose $A \in \mathcal{A}$.
+      Notice that $f^{-1}(A) \in \mathfrak{M}$, and so
+      $(f^{-1}(A))^C \in \mathfrak{M}$.
+      We need to show that
+      \begin{equation*}
+        f^{-1}(A^C) = (f^{-1}(A))^C
+      \end{equation*}
+      But this follows for the same reason as the last point.
+  \end{itemize}
+  It follows that $\mathcal{A}$ is a $\sigma$-algebra.
+\end{proof}
+
+\begin{crly}[Continuous Functions on Borel Sets are Measurable]\label{crly:continuous_functions_on_borel_sets_are_measurable}
+  Let $X$ and $Y$ be topological spaces,
+  with $\mathfrak{B}(X)$ and $\mathfrak{B}(Y)$ as their corresponding Borel sets.
+  Suppose $f : X \to Y$ is continuous.
+  Then $f$ is $(\mathfrak{B}(X), \mathfrak{B}(Y))$-measurable.
+\end{crly}
+
+\begin{proof}
+  Let $U \in \mathfrak{B}(Y)$, i.e. $U \subseteq Y$ is an open set.
+  Since $f$ is continuous, $f^{-1}(U)$ is open in $X$,
+  i.e. $f^{-1}(U) \in \mathfrak{B}(X)$.
+  Thus $f$ is measurable.
+  Furthermore,
+  \begin{equation*}
+    \mathcal{E} \coloneqq \{ U \subseteq Y : U \text{ is open } \}
+  \end{equation*}
+  generates $\mathfrak{B}(Y)$.
+\end{proof}
+
+% section measurable_functions (end)
+
+% chapter lecture_9_sep_23rd_2019 (end)
 
 \appendix
 
