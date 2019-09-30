@@ -1998,8 +1998,16 @@ and it has these properties:
   \end{equation*}
   By right-continuity of $F$, we may pick $b_n' > b_n$ such that
   \begin{equation*}
-    F(b_n') < F(b_n) + \frac{\epsilon}{2}.
+    F(b_n') < F(b_n) + \frac{\epsilon}{2^n}.
   \end{equation*}
+  Notice that
+  \begin{align*}
+    \sum_{n} F(b_n') - F(a_n)
+    &\leq \sum_{n} ( F(b_n) + \frac{\epsilon}{2^n} - F(a_n) ) \\
+    &= \epsilon + \sum_{n} ( F(b_n) - F(a_n) ) \\
+    &\leq \mu_F^*((a, b]) + 2 \epsilon.
+  \end{align*}
+
   Similarly, we can pick $a' > a$ such that $F(a') < F(a) + \epsilon$.
   Then
   \begin{equation*}
@@ -2019,6 +2027,298 @@ and it has these properties:
 % section the_lebesgue_stieltjes_outer_measure_continued (end)
 
 % chapter lecture_7_sep_18th_2019 (end)
+
+\chapter{Lecture 8 Sep 20th 2019}%
+\label{chp:lecture_8_sep_20th_2019}
+% chapter lecture_8_sep_20th_2019
+
+\section{The Lebesgue-Stieltjes Outer Measure (Continued 2)}%
+\label{sec:the_lebesgue_stieltjes_outer_measure_continued_2}
+% section the_lebesgue_stieltjes_outer_measure_continued_2
+
+\begin{proof}[\nameref{propo:lebesgue_stieltjes_outer_measure_on_half_open_intervals} continued]
+  Continuing from before, let us first reorder the finite number of intervals
+  such that $b_{n_1}' \geq b_{n_2}' \geq \hdots$.
+
+  \cref{fig:an_arbitrary_representation_of_the_finite_cover_}
+  illustrates what sets do we throw away (labelled \textcolor{red}{T}),
+  what we shall keep (labelled \textcolor{blue}{K}),
+  and what is impossible (labelled \textcolor{green}{I}).
+
+  \begin{figure*}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw (-7, 0) -- (8, 0);
+      \node[label={270:{$a'$}}] at (-4, 0) {|};
+      \node[label={270:{$b$}}] at (4, 0) {|};
+      \draw[
+        {Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},
+        blue]
+        (2, 0) node[below=10pt] {$a_{n_k}$} --
+        (5, 0) node[below=10pt] {$b_{n_k}'$}
+        node[midway,above=10pt] {K};
+      \draw[
+        {Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},
+        red]
+        (6, 0) node[below=10pt] {$a_{n_{k-1}}$} --
+        (7, 0) node[below=10pt] {$b_{n_{k-1}}'$}
+        node[midway,above=10pt] {T};
+      \node[pin={[pin edge=latex'-,pin distance=20pt]
+        90:{removed since it does not intersect $[a', b]$}}] at (6.5, 1) {};
+      \draw[
+        {Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},
+        green]
+        (-2, 0) node[below=10pt] {$a_{n_{k+1}}$} --
+        (-1, 0) node[below=10pt] {$b_{n_{k+1}}'$}
+        node[midway,above=10pt] {I};
+      \node[pin={[pin edge=latex'-,pin distance=5pt]
+        90:{impossible since there are no $b_{n_i}$ between $b_{n_{k+1}}$
+        and $b_{n_k}$}}] at (-1.5, 1) {};
+      \draw[
+        {Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},
+        blue]
+        (1, 0) node[below=10pt] {$a_{n_{k+1}}$} --
+        (3.5, 0) node[below=10pt] {$b_{n_{k+1}}'$}
+        node[midway,above=10pt] {K};
+      \draw[
+        {Arc Barb[length=5pt,width=15pt]}-{Arc Barb[length=5pt,width=15pt]},
+        blue]
+        (-5, 0) node[below=10pt] {$a_{n_N}$} --
+        (-3, 0) node[below=10pt] {$b_{n_N}'$}
+        node[midway,above=10pt] {K};
+      \node[pin={[pin edge=latex'-,pin distance=10pt]
+        270:{$a_N < a'$ for a similar reason $b_{n_1}' > b$}}] at (-5, -1) {};
+    \end{tikzpicture}
+    \caption{An arbitrary representation of the finite cover.}
+    \label{fig:an_arbitrary_representation_of_the_finite_cover_}
+  \end{figure*}
+
+  Most importantly, we observe that
+  \begin{equation*}
+    a_{n_{k-1}} < b_{n_k}'.
+  \end{equation*}
+  Therefore,
+  \begin{align*}
+    \sum_{k=1}^{\infty} F(b_{n_k}') - F(a_{n_k})
+    &\geq \sum_{k=1}^{N} F(b_{n_k}') - F(a_{n_k}) \\
+    &= F(b_1') \overbrace{- F(a_1) + F(b_2')}^{> 0}
+      \overbrace{- F(a_2) + F(b_3')}^{> 0} \\
+    &\quad + \overbrace{\hdots + F(b_N')}^{> 0} - F(a_N) \\
+    &\geq F(b_1') - F(a_N) \geq F(b) - F(a').
+  \end{align*}
+  It follows that
+  \begin{equation*}
+    \mu_F^*((a, b]) + 2 \epsilon \geq F(b) - F(a') \geq F(b) - (F(a) + \epsilon),
+  \end{equation*}
+  and so
+  \begin{equation*}
+    F(b) - F(a) \leq \mu_F^*((a, b]) + 3\epsilon.
+  \end{equation*}
+  Since $\epsilon > 0$ is arbitrary, our proof is complete.
+\end{proof}
+
+\begin{remark}
+  \cref{propo:lebesgue_stieltjes_outer_measure_on_half_open_intervals}
+  means that the Lebesgue-Stieltjes outer measure falls back nicely
+  onto our usual notion of length when it comes to intervals.
+\end{remark}
+
+\begin{propo}[The Lebesgue-Stieltjes Outer Measure is a Metric Outer Measure]\label{propo:the_lebesgue_stieltjes_outer_measure_is_a_metric_outer_measure}
+  $\mu_F^*$ is a \nameref{defn:metric_outer_measure}.
+\end{propo}
+
+\begin{proof}
+  Let $\delta > 0$. For each interval $(a, b] \subseteq \mathbb{R}$
+  such that $b - a > \delta$, we may break it up so that
+  \begin{equation*}
+    (a, b] = (x_1, x_2] \cup (x_2, x_3] \cup \hdots \cup (x_{N-1}, x_N],
+  \end{equation*}
+  where $x_i - x_{i-1} < \delta$, and $x_1 = a$, $x_N = b$.
+  Notice that
+  \begin{equation*}
+    F(b) - F(a) = F(x_N) - F(x_{N-1}) + F(x_{N-1}) - \hdots + F_{x_2} - F(x_1).
+  \end{equation*}
+  Therefore, given $\delta > 0$, by the definition of $\mu_F^*$,
+  we have that $\forall E \subseteq \mathbb{R}$,
+  \begin{equation*}
+    \mu_F^*(E) = \inf \left\{ 
+      \sum_{i=1}^{\infty} F(b_i) - F(a_i)
+      : E \subseteq \bigcup_{i=1}^{\infty} (a_i, b_i],\,
+        b_i - a_i < \delta
+    \right\}.
+  \end{equation*}
+
+  Now let $A, B \subseteq \mathbb{R}$ such that $d(A, B) > 2\delta > 0$.
+  Given any $\epsilon > 0$, we can pick a cover $A \cup B \subseteq \bigcup_{i}
+  (a_i, b_i]$ with $b_i - a_i < \delta$ such that
+  \begin{equation*}
+    \sum_{i} F(b_i) - F(a_I) \leq \mu_F^*(A \cup B) + \epsilon.
+  \end{equation*}
+  Since $d(A, B) > 2\delta$ and $b_i - a_i < \delta$ for each $i$,
+  the following are the only possible scenarios:
+  for each $i$,
+  \begin{itemize}
+    \item $A \cap (a_i, b_i] = \emptyset$ and $B \cap (a_i, b_i] = \emptyset$,
+      in which case we choose an even finer covering of $A \cup B$
+      to remove $(a_i, b_i]$;
+    \item $A \cap (a_i, b_i] \neq \emptyset$
+      and $B \cap (a_i, b_i] = \emptyset$; and
+    \item $A \cap (a_i, b_i] = \emptyset$ and
+      $B \cap (a_i, b_i] \neq \emptyset$.
+  \end{itemize}
+  We may thus consider the following subsets of indices:
+  \begin{gather*}
+    \{ i_k \}_{k \in \mathbb{N}}
+    = \{ i_k : A \cap (a_{i_k}, b_{i_k}] \neq \emptyset,\,
+        B \cap (a_{i_k}, b_{i_k}] = \emptyset \}
+      \subseteq \{ i \}_{i \in \mathbb{N}} \\
+    \{ j_l \}_{l \in \mathbb{N}}
+    = \{ j_l : A \cap (a_{j_l}, b_{j_l}] = \emptyset,\,
+        B \cap (a_{j_l}, b_{j_l}] \neq \emptyset \}
+      \subseteq \{ i \}_{i \in \mathbb{N}}.
+  \end{gather*}
+  In particular, we have
+  \begin{equation*}
+    A \subseteq \bigcup_{k=1}^{\infty} (a_{i_k}, b_{i_k}] \text{ and }
+    B \subseteq \bigcup_{l=1}^{\infty} (a_{j_l}, b_{j_l}].
+  \end{equation*}
+  Then by \cref{propo:lebesgue_stieltjes_outer_measure_on_half_open_intervals},
+  \begin{gather*}
+    \mu_F^*(A) \leq \sum_{k=1}^{\infty} F(b_{i_k}) - F(a_{i_k}) \\
+    \mu_F^*(B) \leq \sum_{l=1}^{\infty} F(b_{j_l}) - F(a_{j_l}).
+  \end{gather*}
+  It follows that
+  \begin{align*}
+    \mu_F^*(A) + \mu_F^*(B)
+    &\leq \sum_{k=1}^{\infty} F(b_{i_k}) - F(a_{i_k})
+    + \sum_{l=1}^{\infty} F(b_{j_l}) - F(a_{j_l}) \\
+    &= \sum_{i=1}^{\infty} F(b_i) - F(a_i)
+    \leq \mu_F^*(A \cup B) + \epsilon.
+  \end{align*}
+  Since $\epsilon$ was arbitrary, we have
+  \begin{equation*}
+    \mu_F^*(A) + \mu_F^*(B) \leq \mu_F^*(A \cup B)
+  \end{equation*}
+  as required.
+\end{proof}
+
+\begin{thm}[Lebesgue-Stieltjes Theorem by Carathéodory]\index{Lebesgue-Stieltjes Theorem by Carathéodory}\label{thm:lebesgue_stieltjes_theorem_by_caratheodory}
+  Let $F : \mathbb{R} \to \mathbb{R}$ be an increasing function
+  that is right continuous.
+  Let $\mu_F^*$ be the corresponding outer measure.
+  Then the collection $\mathfrak{M}_F$
+  of $\mu_F^*$-measurable sets contains $\mathfrak{B}(\mathbb{R})$
+  and $\mu_F : \mathfrak{M}_F \to [0, \infty]$
+  is a \nameref{defn:complete_measure_space} with
+  \begin{equation*}
+    \mu_F((a, b]) = F(b) - F(a).
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  This is a direct result of
+  \nameref{thm:caratheodory_s_second_theorem},
+  \cref{propo:lebesgue_stieltjes_outer_measure_on_half_open_intervals},
+  and
+  \cref{propo:the_lebesgue_stieltjes_outer_measure_is_a_metric_outer_measure}.
+\end{proof}
+
+\begin{eg}
+  When $F(x) = x$, $\mu_F$ is simply Lebesgue's measure.
+\end{eg}
+
+\begin{eg}[Dirac delta measure of a point]
+  Fix $x_0 \in \mathbb{R}$. Let
+  \begin{equation*}
+    F(x) = \begin{cases}
+      0 & x < x_0 \\
+      1 & x \geq x_0
+    \end{cases}.
+  \end{equation*}
+  Notice that
+  \begin{equation*}
+    \forall b > x_0 \quad
+    \mu_F((x_0, b]) = F(b) - F(x_0) = 1 - 1 = 0,
+  \end{equation*}
+  which then
+  \begin{equation*}
+    \mu_F((x_0, \infty]) = 0.
+  \end{equation*}
+  Also
+  \begin{equation*}
+    \forall a < x_0 \quad
+    \mu_F \left( \left( a, x_0 - \frac{1}{n} \right] \right)
+    = F \left(x_0 - \frac{1}{n} \right) - F(a) = 0 - 0 = 0,
+  \end{equation*}
+  which then since
+  \begin{equation*}
+    (a, x_0) = \bigcup_{n=1}^{\infty} \left( a, x_0 - \frac{1}{n} \right],
+  \end{equation*}
+  we have
+  \begin{equation*}
+    \mu_F((a, x_0)) = 0,
+  \end{equation*}
+  which since this holds for all $a < x_0$,
+  \begin{equation*}
+    \mu_F((-\infty, x_0)) = 0.
+  \end{equation*}
+
+  However, for $a < x_0$,
+  \begin{equation*}
+    \mu_F((a, x_0]) = F(x_0) - F(a) = 1 - 0 = 1.
+  \end{equation*}
+  Furthermore, since
+  \begin{equation*}
+    \{ x_0 \} = \bigcap_{n=1}^{\infty} \left( x_0 - \frac{1}{n}, x_0 \right],
+  \end{equation*}
+  by \hyperref[thm:properties_of_a_measure]{continuity from above},
+  \begin{equation*}
+    \mu_F(\{ x_0 \})
+    = \lim_{n \to \infty} \mu_F \left( x_0 - \frac{1}{n}, x_0 \right] = 1.
+  \end{equation*}
+\end{eg}
+
+With the above example in mind, recall the
+\href{https://tex.japorized.ink/PMATH450/classnotes.pdf\#chapter.5}{Cantor set}
+\begin{equation*}
+  C = \bigcap_{n=1}^{\infty} C_n,
+\end{equation*}
+where $C_n = C_{n-1} \setminus P_n$,
+where $P$ is the middle 1/3 of each of the remaining intervals,
+with $C_0 = [0, 1]$.
+
+We have that the Lebesgue measure of each $C_n$ is
+\begin{align*}
+  \mu(C_1) &= \frac{1}{3} \\
+  \mu(C_2) &= \mu(C_1) - \frac{2}{9} = 1 - \frac{1}{3} - \frac{2}{9} \\
+  \mu(C_3) &= \frac{1}{3} - \frac{2}{9} - \frac{4}{27} \\
+        &\vdots \\
+  \mu(C_n) &= 1 - \frac{1}{3} - \frac{2}{9} - \hdots - \frac{2^{n-1}}{3^n}.
+\end{align*}
+Then
+\begin{equation*}
+  \mu(C) &= 1 - \sum_{n=1}^{\infty} \frac{2^{n-1}}{3^n} 
+  = 1 - \frac{1}{3} \sum_{n=1}^{\infty} \left( \frac{2}{3} \right)^{n-1}
+  = 1 - \frac{1}{3} \cdot \frac{1}{1 - \frac{2}{3}} = 0.
+\end{equation*}
+
+With the Cantor set,
+we may construct the famous/infamous \hldefn{Cantor function}.
+The Cantor function, which we shall label $F$, is defined such that
+$F$ is
+\begin{itemize}
+  \item $\frac{1}{2}$ on $\left( \frac{1}{3}, \frac{2}{3} \right)$,
+  \item $\frac{1}{4}$ on $\left( \frac{1}{9}, \frac{2}{9} \right)$,
+  \item $\frac{3}{4}$ on $\left( \frac{7}{9}, \frac{8}{9} \right)$,
+\end{itemize}
+and so on, on each of the removed intervals.
+We also let $F(0) = 0$ and $F(1) = 1$.
+Then $F$ is increasing and continuous.
+Furthermore, $F' = 0$ on all the removed intervals.
+
+% section the_lebesgue_stieltjes_outer_measure_continued_2 (end)
+
+% chapter lecture_8_sep_20th_2019 (end)
 
 \appendix
 
