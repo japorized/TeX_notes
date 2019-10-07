@@ -1719,7 +1719,7 @@ and that the measurable sets is at least the \hlnotea{Borel set}.
 \label{sec:the_lebesgue_stieltjes_outer_measure}
 % section the_lebesgue_stieltjes_outer_measure
 
-This outer measure is motivated by probability theory.
+The Lebesgue-Stieltjes outer measure is motivated by probability theory.
 The idea is that we consider the measure space $(\Omega, \mathfrak{M}, P)$,
 where $\Omega$ is the sample space set,
 $\mathfrak{M}$ is a $\sigma$-algebra on $\Omega$,
@@ -1814,7 +1814,7 @@ and it has these properties:
 \begin{thm}[Carathéodory's Second Theorem]\index{Carathéodory's Second Theorem}\label{thm:caratheodory_s_second_theorem}
   Let $(X, d)$ be a metric space,
   and $\mu^*$ a \nameref{defn:metric_outer_measure}.
-  Then every Borel set is \nameref{defn:_mu_measurability}.
+  Then every Borel set is \hyperref[defn:_mu_measurability]{$\mu$-measurable}.
 \end{thm}
 
 \begin{proof}
@@ -2299,13 +2299,15 @@ We have that the Lebesgue measure of each $C_n$ is
 \end{align*}
 Then
 \begin{equation*}
-  \mu(C) &= 1 - \sum_{n=1}^{\infty} \frac{2^{n-1}}{3^n} 
+  \mu(C) = 1 - \sum_{n=1}^{\infty} \frac{2^{n-1}}{3^n} 
   = 1 - \frac{1}{3} \sum_{n=1}^{\infty} \left( \frac{2}{3} \right)^{n-1}
   = 1 - \frac{1}{3} \cdot \frac{1}{1 - \frac{2}{3}} = 0.
 \end{equation*}
 
+\paragraph{Cantor Function}\index{Cantor Function}\label{para:cantor_function}
+
 With the Cantor set,
-we may construct the famous/infamous \hldefn{Cantor function}.
+we may construct the famous/infamous \hlnoteb{Cantor function}.
 The Cantor function, which we shall label $F$, is defined such that
 $F$ is
 \begin{itemize}
@@ -2703,7 +2705,7 @@ be our next step towards the theory of integration.
   Let $U \in \mathfrak{B}(Y)$, i.e. $U \subseteq Y$ is an open set.
   Since $f$ is continuous, $f^{-1}(U)$ is open in $X$,
   i.e. $f^{-1}(U) \in \mathfrak{B}(X)$.
-  Thus $f$ is measurable.
+  Thus $f$ is $(\mathfrak{B}(X), \mathfrak{B}(Y))$-measurable.
   Furthermore,
   \begin{equation*}
     \mathcal{E} \coloneqq \{ U \subseteq Y : U \text{ is open } \}
@@ -2714,6 +2716,308 @@ be our next step towards the theory of integration.
 % section measurable_functions (end)
 
 % chapter lecture_9_sep_23rd_2019 (end)
+
+\chapter{Lecture 10 Sep 25th 2019}%
+\label{chp:lecture_10_sep_25th_2019}
+% chapter lecture_10_sep_25th_2019
+
+\section{Measurable Functions (Continued)}%
+\label{sec:measurable_functions_continued}
+% section measurable_functions_continued
+
+\begin{notation}
+  Let $(X, \mathfrak{M})$ be a measurable space.
+  The function $f : X \to \mathbb{R}$ is said to be $\mathfrak{M}$-measurable,
+  or measurable, when it is
+  $(\mathfrak{M}, \mathfrak{B}(\mathbb{R}))$-measurable.
+\end{notation}
+
+\begin{propo}[Characteristics of $\mathfrak{M}$-measurable Functions]\label{propo:characteristics_of_m_measurable_functions}
+  Let $(X, \mathfrak{M})$ be a measurable space and $f : X \to \mathbb{R}$.
+  TFAE:
+  \begin{enumerate}
+    \item $f$ is $\mathfrak{M}$-measurable.
+    \item $\forall a \in \mathbb{R} \quad f^{-1}((a, \infty)) \in \mathfrak{M}$.
+    \item $\forall a \in \mathbb{R} \quad f^{-1}([a, \infty)) \in \mathfrak{M}$.
+    \item $\forall a \in \mathbb{R} \quad f^{-1}((-\infty, a)) \in \mathfrak{M}$.
+    \item $\forall a \in \mathbb{R} \quad f^{-1}((-\infty, a]) \in \mathfrak{M}$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  We shall only look at $(1) \iff (2)$, since
+  the proof for $(1) \iff (i)$ for $i = 3,4,5$ are similar.
+
+  \noindent
+  \hlbnoted{$(1) \implies (2)$}
+  $\forall a \in \mathbb{R}$, since $(a, \infty) \in \mathfrak{B}(\mathbb{R})$,
+  it follows by $\mathfrak{M}$-measurability of $f$ that
+  \begin{equation*}
+    f^{-1}(a, \infty) \in \mathfrak{M}.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{$(2) \implies (1)$}
+  We know that
+  \begin{equation*}
+    \mathcal{E} \coloneqq \{ (a, \infty) : a \in \mathbb{R} \}
+  \end{equation*}
+  generates $\mathfrak{B}(\mathbb{R})$.
+  By assumption $\forall E \in \mathcal{E}$, $f^{-1}(E) \in \mathfrak{M}$.
+  By
+  \cref{propo:measurability_of_a_function_defined_on_generators_of_the_codomain},
+  it follows that $f$ is indeed a $\mathfrak{M}$-measurability.
+\end{proof}
+
+\begin{remark}
+  When $X = \mathbb{R}$,
+  we say that $f : \mathbb{R} \to \mathbb{R}$ is measurable \\
+  $\iff \forall B \in \mathfrak{B}(\mathbb{R})\quad
+    f^{-1}(B) \in \mathfrak{B}(\mathbb{R})$ \\
+  $\iff \forall a \in \mathbb{R}\quad f^{-1}(a, \infty) \in \mathfrak{B}(\mathbb{R})$.
+
+  Let $\mathcal{L}$ be the $\sigma$-algebra of all Lebesgue measurable sets.
+  $f : \mathbb{R} \to \mathbb{R}$ is said to be Lebesgue measurable when \\
+  $\forall a \in \mathbb{R}\quad f^{-1}(a, \infty) \in \mathcal{L}$ \\
+  $\iff \forall B \in \mathfrak{B}(\mathbb{R})\quad f^{-1}(B) \in \mathcal{L}$.
+\end{remark}
+
+\begin{warning}
+  Notice that the last remark can be problematic.
+  Compare what was written above with
+  \cref{propo:composition_of_measurable_functions}.
+  In particular,
+  notice that for the definition of a Lebesgue measurable function,
+  instead of requiring $f^{-1}(a, \infty) \in \mathfrak{B}(\mathbb{R})$,
+  we simply required $f^{-1}(a, \infty) \in \mathcal{L}$.
+  Thus, if we have another function $g : \mathbb{R} \to \mathbb{R}$,
+  for $f \circ g$ to be Lebesgue measurable, we require
+  \begin{equation*}
+    (f \circ g)^{-1}(a, \infty) \in \mathcal{L}.
+  \end{equation*}
+  However, $f^{-1}(a, \infty) \in \mathcal{L}$,
+  and it is not necessarily true that
+  \begin{equation*}
+    g^{-1}(f^{-1}(a, \infty)) \in \mathcal{L}.
+  \end{equation*}
+  There are various examples that show this,
+  typically arising from the \hyperref[para:cantor_function]{Cantor Function}.
+\end{warning}
+
+\newthought{We go on} a little tangent about products of $\sigma$-algebras
+to make our lives down the road a little easier.
+
+\begin{defn}[Products of $\sigma$-algebras]\label{defn:products_of_sigma_algebras}
+  Let $(Y_1, \mathfrak{N}_1)$ and $(Y_2, \mathfrak{N}_2)$ be measurable spaces.
+  We define $\mathfrak{N}_1 \otimes \mathfrak{N}_2$ to be the $\sigma$-algebra
+  on the Cartesian product $Y_1 \times Y_2$ as
+  \begin{equation*}
+    \mathfrak{N}_1 \otimes \mathfrak{N}_2 \coloneqq \{
+      B_1 \times B_2 : B_1 \in \mathfrak{N}_1,\, B_2 \in \mathfrak{N}_2
+    \}.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  We will unofficially call $\mathfrak{N}_1 \otimes \mathfrak{N}_2$
+  the \hlnoteb{tensor product of $\mathfrak{N}_1$ and $\mathfrak{N}_2$}.
+\end{remark}
+
+\begin{propo}[Tensor Product of $\mathfrak{B}(\mathbb{R})$'s]\label{propo:tensor_product_of_mathfrak_b_mathbb_r_s}
+  We have
+  \begin{equation*}
+    \mathfrak{B}(\mathbb{R}) \otimes \mathfrak{B}(\mathbb{R})
+      = \mathfrak{B}(\mathbb{R}^2).
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$\mathfrak{B}(\mathbb{R}^2)
+    \subseteq \mathfrak{B}(\mathbb{R}) \otimes \mathfrak{B}(\mathbb{R})$}
+  Let $\mathcal{O} \subseteq \mathbb{R}^2$ be open.
+  Then
+  \begin{equation*}
+    \mathcal{O} = \cup \{ (r_1, s_1) \times (r_2, s_2) \subseteq \mathcal{O}
+          : r_1, r_2, s_1, s_2 \in \mathbb{Q} \},
+  \end{equation*}
+  which means $\mathcal{O}$ is a countable union of open sets.
+  Since $(r_1, s_1), (r_2, s_2) \in \mathfrak{B}(\mathbb{R})$, it follows that
+  \begin{equation*}
+    (r_1, s_1) \times (r_2, s_2)
+      \in \mathfrak{B}(\mathbb{R}) \otimes \mathfrak{B}(\mathbb{R}),
+  \end{equation*}
+  and so $\mathcal{O} \in \mathfrak{B}(\mathbb{R}) \otimes \mathfrak{B}(\mathbb{R})$
+  since $\mathfrak{B}(\mathbb{R}) \otimes \mathfrak{B}(\mathbb{R})$ is a
+  $\sigma$-algebra.
+
+  \noindent
+  \hlbnoted{$\mathfrak{B}(\mathbb{R}) \otimes \mathfrak{B}(\mathbb{R})
+    \subseteq \mathfrak{B}(\mathbb{R}^2)$}
+  WTS
+  \begin{equation*}
+    \forall B_1, B_2 \in \mathfrak{B}(\mathbb{R})\quad
+      B_1 \times B_2 \in \mathfrak{B}(\mathbb{R}^2).
+  \end{equation*}
+  Let
+  \begin{equation*}
+    \mathcal{A} \coloneqq \{ E \subseteq \mathbb{R}
+      : E \times \mathbb{R} \in \mathfrak{B}(\mathbb{R}^2) \}.
+  \end{equation*}
+  If $\mathcal{A}$ is a $\sigma$-algebra and $(a, b) \in \mathcal{A}$
+  for any $a < b \in \mathbb{R}$,
+  then $\mathfrak{B}(\mathbb{R}) \subseteq \mathcal{A}$ and we are done.
+
+  \noindent
+  \hlbnotec{$\mathcal{A}$ is a $\sigma$-algebra}
+  \begin{itemize}
+    \item $\emptyset \times \mathbb{R} = \mathbb{R} \in \mathfrak{B}(\mathbb{R})$
+      and so $\emptyset \in \mathcal{A}$.
+    \item Suppose $\{ E_n \}_n \subseteq \mathcal{A}$ is a disjoint collection
+      of sets.
+      Then $E_n \times \mathbb{R} \in \mathfrak{B}(\mathbb{R}^2)$ for each $n$.
+      Since $\mathfrak{B}(\mathbb{R}^2)$ is a $\sigma$-algebra,
+      it follows that
+      \begin{equation*}
+        \bigcupdot_{n} (E_n \times \mathbb{R}) \in \mathfrak{B}(\mathbb{R}^2).
+      \end{equation*}
+      Notice that
+      \begin{equation*}
+        \bigcupdot_{n} (E_n \times \mathbb{R})
+        = \left( \bigcupdot_{n} E_n \right) \times \mathbb{R}.
+      \end{equation*}
+      Therefore $\bigcupdot_{n} E_n \in \mathcal{A}$.
+    \item Let $E \in \mathcal{A}$. Then
+      \begin{equation*}
+        E^C \times \mathbb{R}
+        = (E \times \mathbb{R})^C \in \mathfrak{B}(\mathbb{R}^2).
+      \end{equation*}
+      Thus $E^C \in \mathcal{A}$.
+  \end{itemize}
+
+  \noindent
+  \hlbnotec{$\forall a, b \in \mathbb{R}\quad
+    (a, b) \times \mathbb{R} \in \mathcal{A}$}
+  This is indeed true since $(a, b) \times \mathbb{R}$ is open.
+
+  Similarly, we can do the same for
+  \begin{equation*}
+    \tilde{\mathcal{A}} \coloneqq \{ F \subseteq \mathbb{R}
+            : \mathbb{R} \times F \in \mathfrak{B}(\mathbb{R}^2) \},
+  \end{equation*}
+  and have $\mathfrak{B}(\mathbb{R}) \subseteq \tilde{\mathcal{A}}$.
+
+  Let $B_1, B_2 \in \mathfrak{B}(\mathbb{R})$.
+  So $B_1 \in \mathcal{A}$ and $B_2 \in \tilde{\mathcal{A}}$,
+  and
+  \begin{equation*}
+    B_1 \times \mathbb{R} \in \mathfrak{B}(\mathbb{R}^2)
+    \text{ and }
+    \mathbb{R} \times B_2 \in \mathfrak{B}(\mathbb{R}^2).
+  \end{equation*}
+  Therefore
+  \begin{equation*}
+    B_1 \times B_2 = (B_1 \times \mathbb{R}) \cap (\mathbb{R} \times B_2)
+      \in \mathfrak{B}(\mathbb{R}^2).
+  \end{equation*}
+\end{proof}
+
+\begin{propo}[Component-wise Measurability of Functions]\label{propo:component_wise_measurability_of_functions}
+  Let $(X, \mathfrak{M})$, $(Y_1, \mathfrak{N}_1)$
+  and $(Y_2, \mathfrak{N}_2)$ be measurable functions.
+  Let $f_1 : X \to Y_1$ and $f_2 : X \to Y_2$.
+  Let $f : X \to (Y_1, Y_2)$ such that
+  \begin{equation*}
+    f(x) = (f_1(x), f_2(x)).
+  \end{equation*}
+  Then $f$ is $(\mathfrak{M}, (\mathfrak{N}_1, \mathfrak{N}_2))$-measurable
+  $\iff f_1$ is $(\mathfrak{M}, \mathfrak{N}_1)$-measurable and
+  $f_2$ is $(\mathfrak{M}, \mathfrak{N}_2)$-measurable.
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$(\implies)$}
+  Let $B_1 \in \mathfrak{N}_1$.  WTS $f_1^{-1}(B_1) \in \mathfrak{M}$.
+  We know $B_1 \times Y_2 \in \mathfrak{N}_1 \otimes \mathfrak{N}_2$,
+  and $f^{-1}(B_1 \times Y_2) \in \mathfrak{M}$
+  since $f$ is $(\mathfrak{M}, (\mathfrak{N}_1, \mathfrak{N}_2))$-measurable.
+  Then
+  \begin{align*}
+    x \in f^{-1}(B_1 \times Y_2)
+    &\iff f(x) \in B_1 \times Y_2 \\
+    &\iff (f_1(x), f_2(x)) \in B_1 \times Y_2 \\
+    &\iff f_1(x) \in B_1 \\
+    &\iff x \in f_1^{-1}(B_1).
+  \end{align*}
+  Thus $f_1^{-1}(B_1) = f^{-1}(B_1 \times Y_2) \in \mathfrak{M}$.
+  Hence $f_1$ is $(\mathfrak{M}, \mathfrak{N}_1)$-measurable.
+  
+  The proof is similar for $f_2$ being
+  $(\mathfrak{M}, \mathfrak{N}_2)$-measurable.
+
+  \noindent
+  \hlbnoted{$(\impliedby)$}
+  \sidenote{Again, we use the trick of showing that a cleverly
+  chosen set that has the property that we want is a $\sigma$-algebra.}
+  Let
+  \begin{equation*}
+    \mathcal{A} \coloneqq \{ B \subseteq Y_1 \times Y_2
+          : f^{-1}(B) \in \mathfrak{M} \}.
+  \end{equation*}
+  Notice that
+  $f$ is $(\mathfrak{M}, (\mathfrak{N}_1, \mathfrak{N}_2))$-measurable
+  iff $\mathfrak{N}_1 \otimes \mathfrak{N}_2 \subseteq \mathcal{A}$.
+
+  \noindent
+  \hlbnotec{$\mathcal{A}$ is a $\sigma$-algebra}
+  \begin{itemize}
+    \item Let $B \in \mathcal{A}$. Then $f^{-1}(B)^C \in \mathfrak{M}$.
+      Thus
+      \begin{align*}
+        x \in f^{-1}(B)^C
+        &\iff x \notin f^{-1}(B) \\
+        &\iff f(x) \notin B \\
+        &\iff f(x) \in B^C \\
+        &\iff x \in f^{-1}(B^C).
+      \end{align*}
+      Thus $f^{-1}(B^C) = f^{-1}(B)^C \in \mathfrak{M}$.
+    \item Suppose $\{ B_n \}_n \subseteq \mathcal{A}$.
+      Consider $\{ C_n \}_n \subseteq \mathcal{A}$
+      where $C_n = B_n \setminus \bigcup_{j=1}^{n-1} B_j$ and $C_1 = B_1$.
+      Notice that $C_n \in \mathfrak{M}$ for each $n$.
+      Also, $\{ C_n \}_n$ is pairwise disjoint.
+      It follows that
+      \begin{equation*}
+        f^{-1} \left( \bigcup_{n} B_n \right)
+        = f^{-1} \left( \bigcupdot_{n} C_n \right)
+        = \bigcupdot_{n} f^{-1}(C_n) \in \mathfrak{M}.
+      \end{equation*}
+  \end{itemize}
+  This completes the claim.
+
+  \noindent
+  \hlbnotec{$\mathfrak{N}_1 \otimes \mathfrak{N}_1 \subseteq \mathcal{A}$}
+  WTS $\forall B_1 \in \mathfrak{N}_1 \enspace \forall B_2 \in \mathfrak{N}_2
+  \enspace B_1 \times B_2 \in \mathcal{A}$.
+  We know that this is true iff
+  \begin{equation*}
+    \forall B_1 \in \mathfrak{N}_1 \enspace\forall B_2 \in \mathfrak{N}_2
+    \enspace f^{-1}(B_1 \times B_2) \in \mathfrak{M}.
+  \end{equation*}
+  Notice that
+  \begin{align*}
+    x \in f_1^{-1}(B_1) \land x \in f_2^{-1}(B_2)
+    &\iff f_1(x) \in B_1 \land f_2(x) \in B_2 \\
+    &\iff (f_1(x), f_2(x)) \in B_1 \times B_2 \\
+    &\iff f(x) \in B_1 \times B_2 \\
+    &\iff x \in f^{-1}(B_1 \times B_2).
+  \end{align*}
+  Thus $f^{-1}(B_1 \times B_2) = f_1^{-1}(B_1) \cap f_2^{-1}(B_2) \in
+  \mathfrak{M}$.
+\end{proof}
+
+% section measurable_functions_continued (end)
+
+% chapter lecture_10_sep_25th_2019 (end)
 
 \appendix
 
@@ -2885,6 +3189,21 @@ instead of just having \hlnotea{subadditivity}.
   is an application of \cref{eg:disjoint_rep_of_countable_union}
   just because of \cref{eq:finite_union_of_an_increasing_sequence_of_sets}.
 \end{remark}
+
+\section{Abusing $\sigma$-algebras}%
+\label{sec:abusing_sigma_algebras}
+
+When we discuss about a property within the realm of $\sigma$-algebras,
+one should remain aware that one of the options available to them
+when working on a proof, is to show that the set that contains elements
+that allows the property to hold is itself a $\sigma$-algebra.
+
+In particular, if $P$ is the property of which we want to show is true,
+then we may be able to show that
+\begin{equation*}
+  \mathcal{A} \coloneqq \{ x : P(x) \}
+\end{equation*}
+is a $\sigma$-algebra to complete our proof.
 
 % chapter common_themes_and_tricks (end)
 

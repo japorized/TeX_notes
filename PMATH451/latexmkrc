@@ -3,5 +3,6 @@ $pdflatex = 'pdflatex  %O  --shell-escape %S';
 $lualatex = 'lualatex  %O  --shell-escape %S';
 $silent = 1;
 $force_mode = 1;
+$preview_mode = 0;
 
 @default_files = ('classnotes-dark.tex', 'classnotes.tex');
