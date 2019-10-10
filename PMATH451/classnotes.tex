@@ -3596,6 +3596,409 @@ Recall the \nameref{defn:characteristic_function}.
 
 % chapter lecture_12_sep_30th_2019 (end)
 
+\chapter{Lecture 13 Oct 2nd 2019}%
+\label{chp:lecture_13_oct_2nd_2019}
+% chapter lecture_13_oct_2nd_2019
+
+\section{Integration}%
+\label{sec:integration}
+% section integration
+
+We are now ready to define the integration for an arbitrary measurable function.
+
+\begin{defn}[Integral of a Measurable Function]\index{Integral of a Measurable Function}\label{defn:integral_of_a_measurable_function}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space.
+  Suppose $f \in \mathcal{L}^+$.
+  We define
+  \begin{equation*}
+    \int_{X} f \dif{\mu} \coloneqq \sup \left\{ \int_{X} \phi \dif{\mu}
+                      : 0 \leq \phi \leq f,\, \phi \text{ is simple } \right\}.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  Notice that for a simple function $\phi$,
+  we now have seemingly 2 definitions for its integral.
+  However, it is not difficult to realize that the 2 definitions agree.
+  In particular, $\phi$ itself is one of the simple functions
+  in the set of which we take the supremum,
+  and in particular $\phi$ itself is the supremum.
+\end{remark}
+
+\begin{propo}[Properties of the Integral of Measurable Functions]\label{propo:properties_of_the_integral_of_measurable_functions}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space, and $f \in \mathcal{L}^+$.
+  \begin{enumerate}
+    \item If $c \geq 0$, then
+      \begin{equation*}
+        \int_{X} cf \dif{\mu} = c \int_{X} f \dif{\mu}.
+      \end{equation*}
+    \item If $g \in \mathcal{L}^+$ such that $0 \leq g \leq f$, then
+      \begin{equation*}
+        \int_{X} g \dif{\mu} \leq \int_{X} f \dif{\mu}.
+      \end{equation*}
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $c = 0$, then
+      \begin{equation*}
+        \int_{X} 0 \cdot f \dif{\mu} = 0 = 0 \int_{X} f \dif{\mu}. 
+      \end{equation*}
+      If $c > 0$, then
+      \begin{equation*}
+        \int_{X} cf \dif{\mu}
+        = \sup \left\{ \int_{X} \phi \dif{\mu}
+                : 0 \leq \leq \phi \leq cf,\, \phi \text{ is simple } \right\}.
+      \end{equation*}
+      But $\phi \leq cf \iff c^{-1} \phi \leq f$,
+      and $\psi \coloneqq c^{-1} \phi$ is simple.
+      In particular, we can thus have
+      \begin{equation*}
+        c \psi = \phi \leq c f.
+      \end{equation*}
+      Thus
+      \begin{align*}
+        \int_{X} cf \dif{\mu}
+        &= \sup \left\{ \int_{X} \phi \dif{\mu}
+              : 0 \leq \phi \leq cf,\, \phi \text{ is simple } \right\} \\
+        &= \sup \left\{ \int_{X} c \psi \dif{\mu}
+              : 0 \leq c \psi \leq cf,\, \psi \text{ is simple } \right\} \\
+        &= \sup \left\{ c \int_{X} \psi \dif{\mu}
+              : 0 \leq \psi \leq f,\, \psi \text{ is simple } \right\} \\
+        &= c \sup \left\{ \int_{X} \psi \dif{\mu}
+              : 0 \leq \psi \leq f,\, \psi \text{ is simple } \right\} \\
+        &= c \cdot \int_{X} f \dif{\mu}
+      \end{align*}
+
+    \item Notice that
+      \begin{equation*}
+        \{ \psi : 0 \leq \psi \leq g,\, \psi \text{ is simple } \} \subseteq
+        \{ \phi : 0 \leq \phi \leq f,\, \phi \text{ is simple } \}.
+      \end{equation*}
+      Thus
+      \begin{align*}
+        \int_{X} g \dif{\mu}
+        &= \sup \left\{ \int_{X} \psi \dif{\mu}
+              : 0 \leq \psi \leq g,\, \psi \text{ is simple }\right\} \\
+        &\leq \sup \left\{ \int_{X} \phi \dif{\mu}
+              : 0 \leq \phi \leq f,\, \phi \text{ is simple } \right\}
+         = \int_{X} f \dif{\mu}
+      \end{align*}
+  \end{enumerate}
+\end{proof}
+
+\begin{eg}
+  Consider $f_n = n \cdot \chi_{\left( 0, \frac{1}{n} \right)}$.
+  We see that $\forall x \in \mathbb{R}$,
+  \begin{equation*}
+    \lim_{n \to \infty} f_n(x) = 0,
+  \end{equation*}
+  i.e. that $f_n \to f \equiv 0$ pointwise.
+  However, notice that under the Lebesgue measure
+  \begin{equation*}
+    \int_{\mathbb{R}} f \dif{\mu} = n \cdot \frac{1}{n} = 1,
+  \end{equation*}
+  for each $n$.
+  Thus
+  \begin{equation*}
+    \lim_{n \to \infty} \int_{\mathbb{R}} f_n \dif{\mu}
+    = 1 \neq 0
+    = \int_{\mathbb{R}} \lim_{n \to \infty} f_n \dif{\mu}.
+  \end{equation*}
+\end{eg}
+
+\begin{warning}
+  The above example shows that the limit of the integral of a sequence of
+  measurable functions need not be the integral of the limit of the sequence
+  of measurable functions,
+  i.e.  it \hlnotec{need not be the case} that
+  \begin{equation*}
+    \lim_{n \to \infty} \int_{X} f_n \dif{\mu}
+    = \int_{X} \lim_{n \to \infty} f_n \dif{\mu}.
+  \end{equation*}
+
+  In other words, limits do not behave nicely with our definition of
+  integration for arbitrary measurable functions.
+\end{warning}
+
+We shall see that not all hope is loss,
+and there are indeed some sequences of functions
+which have this desirable property.
+
+\begin{thm}[Monotone Convergence Theorem (MCT)]\index{Monotone Convergence Theorem}\index{MCT}\label{thm:monotone_convergence_theorem}
+  Suppose $\{ f_n \}_n \subseteq \mathcal{L}^+$ such that $f_n \leq f_{n+1}$.
+  Let
+  \begin{equation*}
+    f(x) = \lim_{n \to \infty} f_n(x) = \sup_{n \geq 1} f_n(x)
+  \end{equation*}
+  for all $x \in \mathbb{X}$.
+  Then
+  \begin{equation*}
+    \int_{X} f \dif{\mu}
+    = \lim_{n \to \infty} \int_{X} f_n \dif{\mu}
+    = \sup_{n \geq 1} \int_{X} f_n \dif{\mu}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  By $(2)$ of \cref{propo:properties_of_the_integral_of_measurable_functions},
+  we have that
+  \begin{equation*}
+    \int_{X} f_n \dif{\mu} \leq \int_{X} f_{n+1} \dif{\mu}.
+  \end{equation*}
+  Thus we indeed have
+  \begin{equation*}
+    \lim_{n \to \infty} \int_{X} f_n \dif{\mu}
+    = \sup_{n \geq 1} \int_{X} f_n \dif{\mu}.
+  \end{equation*}
+
+  It is also easy to see that since $f_n \leq f$ for each $n$,
+  we have, by the same reasoning as above
+  \begin{equation*}
+    \int_{X} f_n \dif{\mu} \leq \int_{X} f \dif{\mu}
+  \end{equation*}
+  for each $n$, and so
+  \begin{equation*}
+    \sup_{n \geq 1} \int_{X} f_n \dif{\mu} \leq \int_{X} f \dif{\mu}.
+  \end{equation*}
+  It remains to show that 
+  \begin{equation*}
+    \sup_{n \geq 1} \int_{X} f_n \dif{\mu} \geq \int_{X} f \dif{\mu}.
+  \end{equation*}
+
+  To do this, fix an $\alpha$ such that $0 < \alpha < 1$.
+  Consider a simple function $\phi$ such that
+  $0 \leq \phi \leq f$. Then $\forall x \in X$,
+  $\phi(x) \leq f(x)$.
+  Now let
+  \begin{equation*}
+    E_n \coloneqq \{ x : f_n(x) \geq \alpha \phi(x) \}.
+  \end{equation*}
+  Notice that not all $E_n = \emptyset$, since $\phi$ is fixed
+  and $\lim_{n \to \infty} f_n(x) = f(x)$ by assumption.
+  Observe that
+  \begin{equation*}
+    \bigcup_{n} E_n = X
+  \end{equation*}
+  and
+  \begin{equation*}
+    E_1 \subseteq E_2 \subseteq \hdots.
+  \end{equation*}
+  Recall that $(4)$ of \cref{propo:properties_of_integrals_of_simple_functions}
+  tells us that
+  \begin{equation*}
+    \nu(E) \coloneqq \int_{E} \alpha \phi \dif{\mu}
+  \end{equation*}
+  is a measure, and we know that
+  \hyperref[thm:properties_of_a_measure]{measures are continuous from below}.
+  It follows that
+  \begin{align*}
+    \int_{X} \alpha \phi \dif{\mu} = \nu(X) = \lim_{n \to \infty} \nu(E_n)
+    = \lim_{n \to \infty} \int_{E_n} \alpha \phi \dif{\mu}.
+  \end{align*}
+  Now on each $E_n$, we know that $f_n \geq \alpha \phi$.
+  Thus
+  \begin{equation*}
+    \int_{X} f_n \dif{\mu} \geq \int_{E_n} f_n \dif{\mu}
+               \geq \int_{E_n} \alpha\phi \dif{\mu},
+  \end{equation*}
+  for each $n$, which then
+  \begin{equation*}
+    \lim_{n \to \infty} \int_{X} f_n \dif{\mu}
+    \geq \lim_{n \to \infty} \int_{E_n} f_n \dif{\mu}
+    = \int_{X} \alpha\phi \dif{\mu}.
+  \end{equation*}
+  Hence
+  \begin{equation*}
+    \sup_{n \geq 1} \int_{X} f_n \dif{\mu}
+    \geq \int_{X} \alpha\phi \dif{\mu}
+  \end{equation*}
+  for every simple function $\phi \leq f$.
+  This implies that
+  \begin{align*}
+    \sup_{n \geq 1} \int_{X} f_n \dif{\mu}
+    &\geq \alpha \sup \left\{ \int_{X} \phi \dif{\mu}
+      : 0 \leq \phi \leq f,\, \phi \text{ is simple } \right\} \\
+    &= \alpha \int_{X} f \dif{\mu}.
+  \end{align*}
+  Since $\sup \{ \alpha : 0 < \alpha < 1 \} = 1$, it follows that
+  \begin{equation*}
+    \sup_{n \geq 1} \int_{X} f_n \dif{\mu} \geq \int_{X} f \dif{\mu}.
+  \end{equation*}
+\end{proof}
+
+\begin{crly}[Addition of Integrals of Measurable Functions]\label{crly:addition_of_integrals_of_measurable_functions}
+  Let $f, g \in \mathcal{L}^+$. Then
+  \begin{equation*}
+    \int_{X} (f + g) \dif{\mu} = \int_{X} f \dif{\mu} + \int_{X} g \dif{\mu}.
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  By
+  \cref{thm:increasing_sequence_of_simple_functions_converges_an_arbitrary_measurable_function},
+  $\exists \{ \phi_n \}_{n},\, \{ \psi_n \}_{n}$ such that
+  \begin{equation*}
+    \phi_n \nearrow f \quad\text{ and }\quad \psi_n \nearrow g
+  \end{equation*}
+  both pointwise.
+  Clearly then
+  \begin{equation*}
+    \phi_n + \psi_n \nearrow f + g.
+  \end{equation*}
+  By the \hyperref[thm:monotone_convergence_theorem]{MCT}, we have
+  \begin{align*}
+    \int_{X} (f + g) \dif{\mu}
+    &\overset{MCT}{=} \sup_{n \geq 1} \int_{X} (\phi_n + \psi_n) \dif{\mu} \\
+    &= \sup_{n \geq 1} \left( \int_{X} \phi_n \dif{\mu}
+      + \int_{X} \psi_n \dif{\mu} \right) \\
+    &= \sup_{n \geq 1} \int_{X} \phi_n \dif{\mu}
+      + \sup_{n \geq 1} \int_{X} \psi_n \dif{\mu} \\
+    &\overset{MCT}{=} \int_{X} f \dif{\mu} + \int_{X} g \dif{\mu}.
+  \end{align*}
+\end{proof}
+
+\begin{crly}[Interchanging Infinite Sums and the Integral Sign]\label{crly:interchanging_infinite_sums_and_the_integral_sign}
+  Let $\{ f_n \}_n \subseteq \mathcal{L}^+$ and
+  \begin{equation*}
+    s(x) = \sum_{n=1}^{\infty} f_n(x).
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \int_{X} s \dif{\mu} = \sum_{n=1}^{\infty} \int_{X} f_n \dif{\mu},
+  \end{equation*}
+  i.e.
+  \begin{equation*}
+    \int_{X} \sum_{n=1}^{\infty} f_n \dif{\mu}
+    = \sum_{n=1}^{\infty} \int_{X} f_n \dif{\mu}.
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  For each $N \in \mathbb{N} \setminus \{ 0 \}$, let
+  \begin{equation*}
+    s_N(x) = \sum_{n=1}^{N} f_n(x).
+  \end{equation*}
+  Then since $f_n \geq 0$, we have that $s_N \nearrow s$.
+  By the \hyperref[thm:monotone_convergence_theorem]{MCT}, we have
+  \begin{align*}
+    \int_{X} s \dif{\mu}
+    &\overset{MCT}{=} \lim_{N \to \infty} \int_{X} s_N \dif{\mu} \\
+    &= \lim_{N \to \infty} \int_{X} \sum_{n=1}^{N} f_n \dif{\mu} \\
+    &= \lim_{N \to \infty} \sum_{n=1}^{N} \int_{X} f_n \dif{\mu} \\
+    &= \sum_{n=1}^{\infty} \int_{X} f_n \dif{\mu}.
+  \end{align*}
+\end{proof}
+
+\begin{defn}[Almost Everywhere]\index{Almost Everywhere}\label{defn:almost_everywhere}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space.
+  Let $E \in \mathfrak{M}$. Let $(P)$ be a property.
+  We say $P$ holds \hlnoteb{almost everywhere (a.e.)} if the set
+  \begin{equation*}
+    B = \{ x \in E : (P) \text{ does not hold for } x \}
+  \end{equation*}
+  has measure zero, i.e. $\mu(B) = 0$.
+\end{defn}
+
+\begin{eg}
+  We say that $f = 0$ a.e. iff
+  \begin{equation*}
+    \mu(\{ x : f(x) \neq \emptyset\}) = 0.
+  \end{equation*}
+\end{eg}
+
+\begin{propo}[Almost Everywhere Zero Functions have Zero Integral]\label{propo:almost_everywhere_zero_functions_have_zero_integral}
+  If $f \in \mathcal{L}^+$, then
+  \begin{equation*}
+    \int_{X} f \dif{\mu} = 0 \iff f = 0 \text{ a.e. }
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$(\implies)$}
+  Observe that our supposition says that
+  \begin{equation*}
+    0 = \int_{X} f \dif{\mu} = \sup \left\{ 
+      \int_{X} \phi \dif{\mu} : 0 \leq \phi \leq f,\, \phi \text{ is simple }
+    \right\}.
+  \end{equation*}
+  In particular, this means that $\forall \phi \leq f$ simple,
+  we have that $\int_{X} \phi \dif{\mu} = 0$.
+  Notice if we write the simple function $\phi$ as its standard form,
+  i.e.
+  \begin{equation*}
+    \phi = \sum_{n=1}^{N} a_n \chi_{E_n} \quad a_n \geq 0,
+  \end{equation*}
+  then
+  \begin{equation*}
+    0 = \int_{X} \phi \dif{\mu} = \sum_{n=1}^{N} a_n \mu(E_n).
+  \end{equation*}
+  Then if $a_n > 0$, we must have $\mu(E_n) = 0$.
+  On the other hand, if $a_n = 0$, then $\mu(E_n)$ can be anything
+  but it will not contribute to the sum.
+  In other words,
+  \begin{equation*}
+    \mu(\{ x : \phi(x) \neq 0\}) = 0,
+  \end{equation*}
+  and so $\phi = 0$ a.e.
+
+  Consider $\phi_n \nearrow f$ pointwise, which we can get from
+  \cref{thm:increasing_sequence_of_simple_functions_converges_an_arbitrary_measurable_function}.
+  By the above argument, for each $n$, the set
+  \begin{equation*}
+    B_n \coloneqq \{ x : \phi_n(x) \neq 0 \}
+  \end{equation*}
+  has measure zero, i.e. $\mu(B_n) = 0$.
+  Let $B = \bigcup_{n=1}^{\infty} B_n$.
+  Then by subadditivity,
+  \begin{equation*}
+    \mu(B) = 0.
+  \end{equation*}
+
+  For each $x \notin B$, we have that $\phi_n(x) = 0$, for every $n$.
+  Since $\phi_n \nearrow f$, we have that
+  \begin{equation*}
+    \forall x \notin B \quad f(x) = 0.
+  \end{equation*}
+  Thus
+  \begin{align*}
+    &B^C \subseteq \{ x : f(x) = 0 \} \\
+    &\implies B \supseteq \{ x : f(x) \neq \emptyset \} \\
+    &\implies \mu(\{x : f(x) \neq 0\}) \leq \mu(B) = 0 \\
+    &\implies \mu(\{x : f(x) \neq 0\}) = 0.
+  \end{align*}
+
+  \noindent
+  \hlbnoted{$(\impliedby)$}
+  Since $f = 0$ a.e., we have
+  \begin{equation*}
+    \mu(\{x : f(x) \neq 0\}) = 0.
+  \end{equation*}
+  Let $\phi_n \nearrow f$ by
+  \cref{thm:increasing_sequence_of_simple_functions_converges_an_arbitrary_measurable_function}.
+  Then $\phi_n = 0$ a.e.
+  Let
+  \begin{equation*}
+    \phi_n = \sum_{j} a_{n, j} \chi_{E_{n, j}}
+  \end{equation*}
+  be the standard form of $\phi_n$ for each $n$.
+  Then if $a_{n, j} \neq 0$, we must have $\mu(E_{n, j}) = 0$.
+  This implies that
+  \begin{equation*}
+    \int_{X} \phi_n \dif{\mu} = \sum_{j} a_{n, j} \mu(E_{n, j}) = 0
+  \end{equation*}
+  for all $n$ .
+  By the \hyperref[thm:monotone_convergence_theorem]{MCT}, we have
+  \begin{equation*}
+    \int_{X} f \dif{\mu} = \lim_{n \to \infty} \int_{X} \phi_n \dif{\mu} = 0.
+  \end{equation*}
+\end{proof}
+
+% section integration (end)
+
+% chapter lecture_13_oct_2nd_2019 (end)
+
 \appendix
 
 \chapter{Deep Dives into Proofs}%
