@@ -3019,6 +3019,313 @@ to make our lives down the road a little easier.
 
 % chapter lecture_10_sep_25th_2019 (end)
 
+\chapter{Lecture 11 Sep 27th 2019}%
+\label{chp:lecture_11_sep_27th_2019}
+% chapter lecture_11_sep_27th_2019
+
+\begin{homework}[Homework 7]\label{homework:7}
+  Let $F$ be the cumulative distribution function (cdf)
+  for the flip of a fair coin.
+  Prove that $\mathfrak{M}_F = \mathcal{P}(\mathbb{R})$.
+  Find and prove a formula for $\mu_F(A)$ for any $A \subseteq \mathbb{R}$.
+\end{homework}
+
+\begin{homework}[Homework 8]\label{homework:8}
+  Let
+  \begin{equation*}
+    F_{x_0}(t) = \begin{cases}
+      0 & t < x_0 \\
+      1 & x_0 \leq t
+    \end{cases}.
+  \end{equation*}
+  Let $\{ r_n \}_{n}$ be an enumeration of $\mathbb{Q}$.
+  Set
+  \begin{equation*}
+    F(x) = \sum_{n=1}^{\infty} \frac{1}{2^n} F_{r_n}(x).
+  \end{equation*}
+  Prove
+  \begin{enumerate}
+    \item $F$ is strictly increasing (I.e. $x < y \implies F(x) < F(y)$)
+      and right continuous.
+    \item Find a prove a formula for $\mu_F^*(A)$ for any $A \in \mathfrak{M}_F$.
+    \item Prove $\mathfrak{M}_F = \mathcal{P}(\mathbb{R})$.
+  \end{enumerate}
+\end{homework}
+
+\begin{homework}[Homework 9]\label{homework:9}
+  Let $(X, \mathfrak{M})$ and $(Y, \mathfrak{N})$ be measurable spaces.
+  For $E \subseteq X \times Y$, set
+  \begin{equation*}
+    E_x \coloneqq \{ y \in Y : (x, y) \in E \}.
+  \end{equation*}
+  If $E \in \mathfrak{M} \otimes \mathfrak{N}$, prove $E_x \in \mathfrak{N}$.
+\end{homework}
+
+\section{Measurable Functions (Continued 2)}%
+\label{sec:measurable_functions_continued_2}
+% section measurable_functions_continued_2
+
+\begin{defn}[Extended Reals]\index{Extended Reals}\label{defn:extended_reals}
+  We define the \hlnoteb{extended real numbers} as
+  \begin{equation*}
+    \mathbb{R}_e \coloneqq \mathbb{R} \cup \{ - \infty, \infty \}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  The Borel set of $\mathbb{R}_e$ is
+  \begin{equation*}
+    \mathfrak{B}(\mathbb{R}_e) = \{ B \subseteq \mathbb{R}_e
+              : B \cap \mathbb{R} \in \mathfrak{B}(\mathbb{R}) \}.
+  \end{equation*}
+\end{note}
+
+\begin{propo}[Characteristics of $(\mathfrak{M}, \mathfrak{B}(\mathbb{R}_e))$-measurable Functions]\label{propo:characteristics_of_mathfrak_m_mathfrak_b_mathbb_r__e_measurable_functions}
+  Let $(X, \mathfrak{M})$ be measurable.
+  Let $f : X \to \mathbb{R}_e$. TFAE:
+  \begin{enumerate}
+    \item $f$ is $(\mathfrak{M}, \mathfrak{B}(\mathbb{R}_e))$-measurable.
+    \item $\forall a \in \mathbb{R}\enspace f^{-1}(a, \infty] \in \mathfrak{M}$.
+    \item $\forall a \in \mathbb{R}\enspace f^{-1}[a, \infty] \in \mathfrak{M}$.
+    \item $\forall a \in \mathbb{R}\enspace f^{-1}[-\infty, a) \in \mathfrak{M}$.
+    \item $\forall a \in \mathbb{R}\enspace f^{-1}[-\infty, a] \in \mathfrak{M}$.
+    \item $\forall a \in \mathbb{R}\enspace f^{-1}(a, \infty) \in \mathfrak{M}$
+      and $f^{-1}(\{\infty\}), f^{-1}(\{-\infty\}) \in \mathfrak{M}$.
+  \end{enumerate}
+  When any of the above hold, we say that $f$ is measurable
+  to mean that $f$ is $(\mathfrak{M}, \mathfrak{B}(\mathbb{R}_e))$-measurable.
+\end{propo}
+
+\begin{proof}
+  The proof is similar to that of
+  \cref{propo:characteristics_of_m_measurable_functions}.
+\end{proof}
+
+\begin{propo}[Extremas, Supremas and Infimas of Measurable Functions]\label{propo:extremas_supremas_and_infimas_of_measurable_functions}
+  Let $(X, \mathfrak{M})$ be measurable,
+  and $\{ f_j : X \to \mathbb{R}_e \}_j$ be a sequence
+  of countable or finite number of functions.
+  If each $f_j$ is measurable, then
+  \begin{enumerate}
+    \item $g_1(x) = \sup_j f_j(x)$,
+    \item $g_2(x) = \inf_j f_j(x)$,
+    \item $g_3(x) = \limsup_{j} f_j(x)$, and
+    \item $g_4(x) = \liminf_{j} f_j(x)$
+  \end{enumerate}
+  are all measurable.
+\end{propo}
+
+\begin{proof}
+  We shall prove for $(1)$ and $(3)$, since the proof of $(2)$ and $(4)$ follow
+  similarly, respectively.
+  \begin{enumerate}
+    \item Let $a \in \mathbb{R}$.
+      Notice that
+      \begin{align*}
+        g_1(x) > a
+        &\iff \exists j_0\enspace f_{j_0}(x) > a \\
+        &\iff x \in \bigcup_{j=1}^{\infty} f_j^{-1}(a, \infty].
+      \end{align*}
+      It follows that
+      \begin{equation*}
+        g_1^{-1}(a, \infty] = \bigcup_{j=1}^{\infty} f_j^{-1}(a, \infty]
+          \in \mathfrak{M}.
+      \end{equation*}
+      Hence $g_1$ is measurable.
+
+    \setcounter{enumi}{2}
+
+    \item Let $h_k(x) = \sup_{j \geq k} f_j(x)$.
+      Then $\{ h_k \}_k$ is a decreasing sequence.
+      Note that
+      \begin{equation*}
+        g_3(x) = \limsup_{j} f_j(x) = \lim_{k} h_k(x) = \inf_k h_k(x).
+      \end{equation*}
+      By $(1)$, we know that each $h_k$ is measurable.
+      By $(2)$, we know that $\inf_k h_k$ is measurable.
+      Hence, $g_3$ is measurable as desired.
+  \end{enumerate}
+\end{proof}
+
+\begin{crly}[Min and Max Functions are Measurablee]\label{crly:min_and_max_functions_are_measurablee}
+  Let $(X, \mathfrak{M})$ be a measurable space, and
+  $f_1, f_2 : X \to \mathbb{R}_e$.
+  Then
+  \begin{equation*}
+    \max \{ f_1, f_2 \} \text{ and } \min \{ f_1, f_2 \}
+  \end{equation*}
+  are both measurable.
+\end{crly}
+
+\begin{proof}
+  Note that
+  \begin{equation*}
+    \max \{ f_1, f_2 \} = \sup \{ f_1, f_2 \}
+  \end{equation*}
+  and
+  \begin{equation*}
+    \min \{ f_1, f_2 \} = \inf \{ f_1, f_2 \}.
+  \end{equation*}
+  The result follows by
+  \cref{propo:extremas_supremas_and_infimas_of_measurable_functions}.
+\end{proof}
+
+\begin{crly}[Limit points of a Sequence of Measurable Functions forms a Measurable Set]\label{crly:limit_points_of_a_sequence_of_measurable_functions_forms_a_measurable_set}
+  Let $(X, \mathfrak{M})$ be a measurable space.
+  Let $\{ f_j : X \to \mathbb{R} \}_j$.
+  Let
+  \begin{equation*}
+    E = \{ x \in X : \lim_{j} f_j(x) \text{ exists } \}.
+  \end{equation*}
+  Then $E \in \mathfrak{M}$.
+\end{crly}
+
+\begin{proof}
+  First, note that $\lim_{j} f_j(x)$ exists iff
+  \begin{equation*}
+    g_3(x) = \limsup_{j} f_j(x) = \liminf_{j} f_j(x) = g_4(x).
+  \end{equation*}
+  Thus,
+  \begin{align*}
+    E &\coloneqq \{ x \in X : \lim_{j} f_j(x) \text{ exists } \} \\
+      &= \{ x \in X : g_3(x) = g_4(x) \} \\
+      &= \{ x \in X : (g_3 - g_4)(x) = 0 \} \\
+      &= (g_3 - g_4)^{-1}(\{0\}) \in \mathfrak{M}.
+  \end{align*}
+\end{proof}
+
+\begin{defn}[$f^+$ and $f^-$]\index{$f^+$ and $f^-$}\label{defn:f_plus_and_f_minus}
+  Let $f : X \to \mathbb{R}_e$.
+  We define
+  \begin{equation*}
+    f^+(x) \coloneqq \max \{ f(x), 0 \},
+  \end{equation*}
+  and
+  \begin{equation*}
+    f^-(x) \coloneqq \max \{ -f(x), 0 \}.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item We see that $f = f^+ - f^-$.
+    \item \sidenote{In what is possibly a statement similar to
+      \cref{propo:component_wise_measurability_of_functions}, we can show this.}
+      If $f$ is measurable, then $f^+$ and $f^-$ are measurable.
+    \item $\abs{f} = f^+ + f^-$.
+    \item $f^+ \cdot f^- = 0$.
+  \end{enumerate}
+\end{remark}
+
+Recall the \nameref{defn:characteristic_function}.
+
+\begin{propo}[Characteristic Function of Measurable Sets are Measurable]\label{propo:characteristic_function_of_measurable_sets_are_measurable}
+  Let $(X, \mathfrak{M})$ be a measurable set. Suppose $A \subseteq X$.
+  Then
+  \begin{equation*}
+    \chi_A \text{ is measurable } \iff A \in \mathfrak{M}.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Notice that
+  \begin{itemize}
+    \item $1 < a \implies \chi_A^{-1}(a, \infty) = \emptyset \in \mathfrak{M}$.
+    \item $0 \leq a \leq 1 \implies \chi_A^{-1}(a, \infty) = A$.
+    \item $a < 0 \implies \chi_A^{-1}(a, \infty) = X \in \mathfrak{M}$.
+  \end{itemize}
+  Thus, by definition of a
+  \hyperref[defn:measurable_functions]{measurable function},
+  $\chi_A$ is measurable iff $A \in \mathfrak{M}$.
+\end{proof}
+
+\begin{defn}[Simple Function]\index{Simple Function}\label{defn:simple_function}
+  Let $(X, \mathfrak{M})$ be a measurable space.
+  A function $f : X \to \mathbb{R}$ is called a \hlnoteb{simple function}
+  if $f$ is measurable and has a finite range.
+\end{defn}
+
+\begin{note}[Standard Form of Simple Functions]\label{note:standard_form_of_simple_functions}
+  Suppose $f$ is simple, say with the range
+  $\{ a_n \}_{n=1}^{N} \subseteq \mathbb{R}$.
+  Since $f$ is measurable, we may let
+  \begin{equation*}
+    A_j \coloneqq \{ x : f(x) = a_j \} = f^{-1}(\{a_j\}) \in \mathfrak{M}.
+  \end{equation*}
+  We may then write
+  \begin{equation}\label{eq:standard_form_of_simple_functions}
+    f(x) = \sum_{j=1}^{N} a_j \chi_{A_j}(x),
+  \end{equation}
+  where we note that $\{ A_j \}$ is a disjoint partition of $X$.
+  We call \cref{eq:standard_form_of_simple_functions} the \hldefn{standard form}
+  of $f$.
+\end{note}
+
+\begin{eg}
+  Consider the function $f : \mathbb{R} \to \mathbb{R}$ such that
+  \begin{equation*}
+    f = 2 \chi_{[0, 2]} + 3 \chi_{[1, 3]}.
+  \end{equation*}
+  The form of $f$ above is not the standard form since
+  $[0, 2] \cap [1, 3] = [1, 2] \neq \emptyset$.
+  We may, however, re-express $f$ as
+  \begin{equation*}
+    f = 2 \chi_{[0, 1)} + 5 \chi_{[1, 2]} + 3 \chi_{(2, 3)},
+  \end{equation*}
+  which is then a standard form for $f$.
+\end{eg}
+
+\begin{thm}[Increasing Sequence of Simple Functions Converges an Arbitrary Measurable Function]\label{thm:increasing_sequence_of_simple_functions_converges_an_arbitrary_measurable_function}
+  Let $(X, \mathfrak{M})$ be a measurable space.
+  Let $f : X \to [0, \infty]$.
+  Then there exists simple functions $\{ \phi_n \}_{n}$, such that
+  \begin{equation*}
+    0 \leq \phi_0 \leq \phi_1 \leq \hdots \leq f
+  \end{equation*}
+  such that
+  \begin{equation*}
+    f(x) = \lim_{n \to \infty} \phi_n(x).
+  \end{equation*}
+  If $f$ is bounded on $E \subseteq X$, then
+  $\phi_n \to f$ uniformly on $E$.
+\end{thm}
+
+\begin{strategy}
+  Let's consider the bounded case.
+  Let $M$ be the bound on $f$.
+  We construct $\phi_1$ by subdividing $[0, M]$ into 2 equal parts,
+  in particular considering
+  \begin{align*}
+    E_0 &\coloneqq \left\{ x : 0 \leq f(x) \leq \frac{M}{2} \right\} \\
+    E_1 &\coloneqq \left\{ x : \frac{M}{2} < f(x) \leq M \right\},
+  \end{align*}
+  and letting
+  \begin{equation*}
+    \phi_1 = 0 \chi_{E_0} + \frac{M}{2} \chi_{E_1} \leq f.
+  \end{equation*}
+  Note that $f(x) - \phi_1(x) \leq \frac{M}{2}$.
+
+  Similarly, we construct $\phi_2$ by subdividing $[0, M]$ into 4 equal parts
+  \begin{align*}
+    E_0 &\coloneqq \left\{ x : 0 \leq f(x) \leq \frac{M}{4} \right\} \\
+    E_1 &\coloneqq \left\{ x : \frac{M}{4} < f(x) \leq \frac{M}{2} \right\} \\
+    E_2 &\coloneqq \left\{ x : \frac{M}{2} \leq f(x) < \frac{3M}{4} \right\} \\
+    E_3 &\coloneqq \left\{ x : \frac{3M}{4} \leq f(x) \leq M \right\},
+  \end{align*}
+  and letting
+  \begin{equation*}
+    \phi_2 = 0 \chi_{E_0} + \frac{M}{4} \chi_{E_1}
+          + \frac{M}{2} \chi_{E_2} + \frac{3M}{4} \chi_{E_3} \leq f.
+  \end{equation*}
+  Note that $f(x) - \phi_2(x) \leq \frac{M}{4}$ and $\phi_1 \leq \phi_2$.
+  We can continue doing this for $\phi_3, \phi_4, \ldots$,
+  and we will show that this gives us what we want.
+\end{strategy}
+
+% section measurable_functions_continued_2 (end)
+
+% chapter lecture_11_sep_27th_2019 (end)
+
 \appendix
 
 \chapter{Deep Dives into Proofs}%
@@ -3190,7 +3497,7 @@ instead of just having \hlnotea{subadditivity}.
   just because of \cref{eq:finite_union_of_an_increasing_sequence_of_sets}.
 \end{remark}
 
-\section{Abusing $\sigma$-algebras}%
+\section{Abusing \texorpdfstring{$\sigma$}{sigma}-algebras}%
 \label{sec:abusing_sigma_algebras}
 
 When we discuss about a property within the realm of $\sigma$-algebras,
