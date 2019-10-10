@@ -19,6 +19,7 @@
 \input{latex-classnotes-preamble.tex}
 
 \DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\range}{range}
 
 \theoremprework{\textcolor{cyan}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{cyan}\normalfont\bfseries}
@@ -3320,11 +3321,280 @@ Recall the \nameref{defn:characteristic_function}.
   Note that $f(x) - \phi_2(x) \leq \frac{M}{4}$ and $\phi_1 \leq \phi_2$.
   We can continue doing this for $\phi_3, \phi_4, \ldots$,
   and we will show that this gives us what we want.
+
+  For the unbounded case, we can use a similar idea but consider
+  \begin{equation*}
+    E_{n, k} \coloneqq \left\{ x : \frac{k}{2^n} \leq f(x) < \frac{k+1}{2^n} \right\}
+  \end{equation*}
+  for $0 \leq k \leq 2^{2n} - 1$,
+  and set
+  \begin{equation*}
+    E_{2^{2n}} \coloneqq \left\{ x : f(x) > 2^n \right\}.
+  \end{equation*}
+  Then, constructing the $\phi_n$'s in a manner similar to that
+  in the bounded case, we can prove the statement.
 \end{strategy}
 
 % section measurable_functions_continued_2 (end)
 
 % chapter lecture_11_sep_27th_2019 (end)
+
+\chapter{Lecture 12 Sep 30th 2019}%
+\label{chp:lecture_12_sep_30th_2019}
+% chapter lecture_12_sep_30th_2019
+
+\section{Measurable Functions (Continued 3)}%
+\label{sec:measurable_functions_continued_3}
+% section measurable_functions_continued_3
+
+\begin{proof}[Proof for \cref{thm:increasing_sequence_of_simple_functions_converges_an_arbitrary_measurable_function}]
+  For $n \in \mathbb{N} \cup \{ 0 \}$ and $0 \leq k \leq 2^{2n} - 1$,
+  let
+  \begin{equation*}
+    E_{n, k} \coloneqq \left\{ x
+              : \frac{k}{2^n} \leq f(x) < \frac{k+1}{2^n} \right\}
+              = f^{-1} \left[ \frac{k}{2^n}, \frac{k+1}{2^n} \right),
+  \end{equation*}
+  and let
+  \begin{equation*}
+    E_{n, 2^{2n}} \coloneqq \{ x : f(x) \geq 2^n \}.
+  \end{equation*}
+  Then, for each $n$, we define
+  \begin{equation*}
+    \phi_n = \sum_{k=0}^{2^{2n}} \frac{k}{2^n} \chi_{E_{n, k}},
+  \end{equation*}
+  which we see that each $\phi_n$ is measurable and hence a simple function.
+  Furthermore, for each $n$ and for all $x$,
+  \begin{equation*}
+    \phi_n(x) \leq f(x).
+  \end{equation*}
+  Note that for $x \in \bigcup_{k=0}^{2^{2n} - 1} E_{n, k}$, we have
+  \begin{equation*}
+    \abs{ f(x) - \phi_n(x) } \leq \frac{1}{2^n}.
+  \end{equation*}
+  Thus for $f(x) \neq \infty$, $\phi_n(x) \to f(x)$ pointwise.
+  For $f(x) = \infty$, we must have $x \in E_{n, 2^{2n}}$,
+  which then $\phi_n(x) = 2^n \to \infty$ as $n \to \infty$.
+  Thus, regardless of the value of $f(x)$ for every $x$,
+  we have $\phi_n(x) \to f(x)$.
+
+  Let $\epsilon > 0$.
+  Now if $f$ is bounded on some set $E$, say by $f(x) \leq M$ for all $x \in E$,
+  then as soon as $2^N > M$ for some (large) $N = - \log_2 \epsilon$, 
+  we must have that
+  \begin{equation*}
+    x \in \bigcup_{k=0}^{2^{2n} - 1} E_{n, k},
+  \end{equation*}
+  for each $n > N$.
+  It follows that
+  \begin{equation*}
+    \abs{\phi_n(x) - f(x)} \leq \frac{1}{2^n} < \frac{1}{2^N} = \epsilon.
+  \end{equation*}
+  It follows that $\phi_n \to f$ uniformly on $E$.
+\end{proof}
+
+% section measurable_functions_continued_3 (end)
+
+\section{Integration of Non-Negative Functions}%
+\label{sec:integration_of_non_negative_functions}
+% section integration_of_non_negative_functions
+
+\begin{defn}[Integral of a Simple Function]\label{defn:integral_of_a_simple_function}
+  Let
+  \begin{equation*}
+    \mathcal{L}^+ \coloneqq \{ f : X \to [0, \infty]
+          \mid f \text{ is } \mu\text{-measurable} \}.
+  \end{equation*}
+  Given $\phi \in \mathcal{L}^+$ a simple function,
+  i.e. $\range \phi = \{ 0 \leq a_1 < \hdots a_n \}$,
+  with $E_j \coloneqq \{ x : \phi(x) = a_j \}$,
+  the standard form for $\phi$ is
+  \begin{equation*}
+    \phi(x) = \sum_{k=1}^{n} a_j \chi_{E_j}(x).
+  \end{equation*}
+  We define the \hlnoteb{integral} of $\phi$ as
+  \begin{equation*}
+    \int_{X} \phi \dif{\mu} \coloneqq \sum_{k=1}^{n} a_j \mu(E_j),
+  \end{equation*}
+  where we let
+  \begin{equation*}
+    0 \cdot ( \infty ) = 0 = ( \infty ) \cdot 0.
+  \end{equation*}
+  If $A \in \mathfrak{M}$, then we also define
+  \begin{equation*}
+    \int_{A} \phi \dif{\mu} \coloneqq \sum_{k=1}^{n} a_j \mu(E_j \cap A).
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[Properties of Integrals of Simple Functions]\label{propo:properties_of_integrals_of_simple_functions}
+  Let $\phi, \psi \in \mathcal{L}^+$ be simple functions. Then
+  \begin{enumerate}
+    \item if $c \geq 0$,
+      then $\int_{X} c \phi \dif{\mu} = c \int_{C} \phi \dif{\mu}$.
+    \item $\int_{X} (\phi + \psi) \dif{\mu}
+      = \int_{X} \phi \dif{\mu} + \int_{X} \psi \dif{\mu}$.
+    \item $0 \leq \phi \leq \psi \implies
+      \int_{X} \phi \dif{\mu} \leq \int_{X} \psi \dif{\mu}$.
+    \item Fixing $\phi$, let
+      \begin{equation*}
+        \nu(A) = \int_{A} \phi \dif{\mu}.
+      \end{equation*}
+      Then $\nu$ is a measure on $\mathfrak{M}$.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item If $c = 0$, then
+      \begin{equation*}
+        \int_{X} 0 \cdot \phi \dif{\mu} = 0 = 0 \int_{X} \phi \dif{\mu}.
+      \end{equation*}
+      If $c > 0$, then for $\phi = \sum a_j \chi_{E_j}$,
+      \begin{equation*}
+        c \phi = \sum c a_j \chi_{E_j},
+      \end{equation*}
+      which is also a standard form.
+      \sidenote{It is rather important that we note that this
+      realization that $c \phi$ is a standard form is important,
+      since it allows us to then use
+      \cref{defn:integral_of_a_simple_function}.}
+      Thus
+      \begin{equation*}
+        \int_{X} c \phi \dif{\mu}
+         = \sum c a_j \chi_{E_j}
+         = c \sum a_j \chi_{E_j}
+         = c \int_{X} \phi \dif{\mu}.
+      \end{equation*}
+
+    \item Let
+      \begin{equation*}
+        \phi = \sum_{j=0}^{n} a_j \chi_{E_j}\quad\text{ and }\quad
+        \psi = \sum_{i=0}^{m} b_i \chi_{F_i},
+      \end{equation*}
+      be the standard form for $\phi$ and $\psi$ respectively.
+      Note that
+      \begin{equation*}
+        E_1 \cupdot E_2 \cupdot \hdots \cupdot E_n = X \quad\text{ and }\quad
+        F_1 \cupdot F_2 \cupdot \hdots \cupdot F_m = X.
+      \end{equation*}
+      Thus $\{ E_j \cap F_i \}_{j=1, i=1}^{m, n}$ is a pairwise disjoint
+      collection of $X$, with
+      \begin{equation*}
+        \bigcup_{j=1}^{n} \bigcup_{i=1}^{m} E_j \cap F_i = X.
+      \end{equation*}
+      Now on each $E_j \cap F_i$, we have
+      \begin{equation*}
+        \phi + \psi = a_j + b_i.
+      \end{equation*}
+      Thus
+      \begin{equation*}
+        \phi + \psi = \sum_{k=1}^{l} c_k \chi_{G_k},
+      \end{equation*}
+      where
+      \begin{equation*}
+        G_k \coloneqq \{ x : \phi(x) + \psi(x) = c_k \},
+      \end{equation*}
+      where we note that $x \in G_k \implies x \in E_{j_0} \cap F_{i_0}$
+      for some $j_0$ and $i_0$, which then
+      \begin{equation*}
+        c_k = \phi(x) + \psi(x) = a_{j_0} + b_{i_0}.
+      \end{equation*}
+      It follows that
+      \begin{equation*}
+        G_k \coloneqq \bigcup_{j, i} \{ E_j \cap F_i : a_j + b_i = c_k \},
+      \end{equation*}
+      and so
+      \begin{equation*}
+        \mu(G_k) = \sum_{a_j + b_i = c_k} \mu(E_j \cap F_i).
+      \end{equation*}
+      Thus
+      \begin{align*}
+        \int_{X} (\phi + \psi) \dif{\mu}
+        &= \sum_{k=1}^{l} c_k \mu(G_k) \\
+        &= \sum_{k=1}^{l} \sum_{a_j + b_i = c_k} (a_j + b_i) \mu(E_j \cap F_i) \\
+        &= \sum_{j=1}^{n} \sum_{i=1}^{m} (a_j + b_i) \mu(E_j \cap F_i).
+      \end{align*}
+      On the other hand,
+      \begin{align*}
+        \int_{X} \phi \dif{\mu} + \int_{X} \psi \dif{\mu}
+        &= \sum_{j=1}^{n} a_j \mu(E_j) + \sum_{i=1}^{m} b_i \mu(F_i) \\
+        &= \sum_{j=1}^{n} a_j \sum_{i=1}^{m} \mu(E_j \cap F_i)
+          + \sum_{i=1}^{m} b_i \sum_{j=1}^{n} \mu(E_j \cap F_i) \\
+        &= \sum_{j=1}^{n} \sum_{k=1}^{m} (a_j + b_i) \mu(E_j \cap F_i).
+      \end{align*}
+      Hence
+      \begin{equation*}
+        \int_{X} (\phi + \psi) \dif{\mu}
+          = \int_{X} \phi \dif{\mu} + \int_{X} \psi \dif{\mu}.
+      \end{equation*}
+
+    \item Since $0 \leq \phi \leq \psi$, the function
+      \begin{equation*}
+        \gamma = \psi - \phi \geq 0
+      \end{equation*}
+      is in $\mathcal{L}^+$, measurable and clearly simple.
+      In particular, we notice that
+      \begin{equation*}
+        \psi = \phi + \gamma.
+      \end{equation*}
+      By $(2)$, it follows that
+      \begin{equation*}
+        \int_{X} \psi \dif{\mu}
+        = \int_{X} \phi \dif{\mu} + \int_{X} \gamma \dif{\mu}
+        \geq \int_{X} \phi \dif{\mu}.
+      \end{equation*}
+
+    \item Fix
+      \begin{equation*}
+        \phi = \sum_{j=1}^{n} a_j \chi_{E_j}.
+      \end{equation*}
+      Then
+      \begin{equation*}
+        \nu(A) = \int_{A} \phi \dif{\mu} = \sum_{j=1}^{n} a_j \mu(E_j \cap A).
+      \end{equation*}
+      \hlbnotec{Showing that $\nu$ is a measure on $\mathfrak{M}$}
+      \begin{itemize}
+        \item For $A = \emptyset$, we have
+          \begin{equation*}
+            \nu(\emptyset)
+            = \sum_{j=1}^{n} a_j \mu(E_j \cap \emptyset)
+            = \sum_{j=1}^{n} a_j \mu(\emptyset)
+            = 0.
+          \end{equation*}
+        \item Let $A = \bigcupdot_{i=1}^{N} A_i$. Then
+          \begin{align*}
+            \nu(A)
+            &= \sum_{j=1}^{n} a_j \mu(E_j \cap A)
+             = \sum_{j=1}^{n} a_j \left[ \sum_{i=1}^{N} \mu(E_j \cap A_i) \right] \\
+            &= \sum_{i=1}^{N} \sum_{j=1}^{n} a_j \mu(E_j \cap A_i)
+             = \sum_{i=1}^{N} \int_{A_i} \phi \dif{\mu} \\
+            &= \sum_{i=1}^{N} \nu(A_i).
+          \end{align*}
+      \end{itemize}
+  \end{enumerate}
+\end{proof}
+
+\begin{crly}[Integral of Simple Functions not in Standard Form]\label{crly:integral_of_simple_functions_not_in_standard_form}
+  Suppose $\phi \in \mathcal{L}^+$ is simple.
+  Suppose we express
+  \begin{equation*}
+    \phi = \sum_{j=1}^{n} b_j \chi_{F_j},
+  \end{equation*}
+  not necessarily in standard form, where $b_j \geq 0$.
+  Then
+  \begin{equation*}
+    \int_{X} \phi \dif{\mu} = \sum_{j=1}^{n} b_j \mu(F_j).
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  The proof is similar to that of $(2)$ in
+  \cref{propo:properties_of_integrals_of_simple_functions}.
+\end{proof}
+
+% section integration_of_non_negative_functions (end)
+
+% chapter lecture_12_sep_30th_2019 (end)
 
 \appendix
 
