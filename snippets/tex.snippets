@@ -184,6 +184,18 @@ snippet axis3d "tikzpicture 3d axis snippet" b
 \draw[->] (0, 0, -$1) -- (0, 0, $1);
 endsnippet
 
+snippet arcbarb "tikz Arc Barb" w
+{Arc Barb[length=${1:5}pt,width=${2:15}pt]}
+endsnippet
+
+snippet bracket "tikz Bracket" w
+{Bracket[length=${1:5}pt,width=${2:15}pt]}
+endsnippet
+
+snippet nodepin "tikz node pin" w
+\node[pin={[pin edge=latex'-,pin distance=${1:2}pt]${2:angle}:{${3:text}}}] at (${4:coords}) {$5};
+endsnippet
+
 snippet enum "Enumerate" b
 \begin{enumerate}
 	\item $0

@@ -10,7 +10,7 @@
 % Essential Packages
 \usepackage{makeidx}
 \makeindex
-\usepackage{enumitem}
+\usepackage[inline]{enumitem}
 \usepackage[T1]{fontenc}
 \usepackage{natbib}
 \bibliographystyle{apalike}
@@ -54,7 +54,8 @@
 \tcbuselibrary{skins,breakable}
 \usepackage{longtable,booktabs}
 \usepackage[amsmath,hyperref,thmmarks]{ntheorem}
-\usepackage{thmtools, thm-restate}
+\usepackage{thmtools} % provides \listoftheorems
+\usepackage{thm-restate}
 \usepackage{hyperref}
 \usepackage[noabbrev,capitalize,nameinlink]{cleveref}
 \allowdisplaybreaks
@@ -137,12 +138,6 @@
 \newcommand{\AxisRotator}[1][rotate=0]{%
     \tikz [x=0.25cm,y=0.60cm,line width=.2ex,-stealth,#1] \draw (0,0) arc (-150:150:1 and 1);%
   }
-
-% enumitems
-\newlist{inlinelist}{enumerate*}{1}
-\setlist*[inlinelist,1]{%
-  label=(\roman*),
-}
 
 % Theorem Style Customization
 \setlength\theorempreskipamount{2ex}
