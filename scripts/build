@@ -5,6 +5,7 @@ workingdir=""
 filename="classnotes"
 clean_flag=false
 viewer_flag=true
+lightdark="both"
 
 viewer="$HOME/.bin/tabbed-zathura -i tvim-view -f"
 
@@ -14,16 +15,39 @@ usage() {
   -h    Show this help
   -d    Directory name [required]
   -c    Clean directory
+  -l    build light/dark/both (default: both) (options: light, dark, both)
   -V    No viewer
   -f    Filename (default: classnotes)"
 }
 
-while getopts "hd:f:b:vc" flag; do
+viewfile() {
+  if ($viewer_flag); then
+    case "${lightdark}" in
+      "both" | "light") ${viewer} ${filename}.pdf ;;
+      "dark") ${viewer} ${filename}-dark.pdf ;;
+    esac
+  fi
+}
+
+buildboth() {
+  ls *.tex *.bib | entr -s "latexmk"
+}
+
+buildlight() {
+  latexmk -pvc ${filename}.tex
+}
+
+builddark() {
+  latexmk -pvc ${filename}-dark.tex
+}
+
+while getopts "hd:f:b:vcl:" flag; do
   case "${flag}" in
     h) usage ; exit 0 ;;
     d) workingdir=$DIR/$OPTARG ;;
     f) filename=$OPTARG ;;
     c) clean_flag=true ;;
+    l) lightdark=$OPTARG ;;
     v) viewer_flag=false ;;
     *) usage ; exit 1 ;;
   esac
@@ -36,6 +60,15 @@ fi
 
 workingdir=`eval "cd $workingdir;pwd;cd - > /dev/null"`
 
+# working directory exists?
+# true ->
+#   want to clean?
+#   false ->
+#     build both?
+#       true -> build both
+#       false -> case lightdark
+#   true -> clean working directory
+# false -> report having no working directory
 if [ -d $workingdir ]; then
   cd $workingdir
 
@@ -45,12 +78,12 @@ if [ -d $workingdir ]; then
 
   if ! $clean_flag ; then
     echo "[build] Hit Ctrl-c to kill"
-
-    if ($viewer_flag); then
-      ${viewer} ${filename}.pdf
-    fi
-
-    ls *.tex *.bib | entr -s "latexmk"
+    viewfile
+    case "${lightdark}" in
+      "both") buildboth ;;
+      "light") buildlight ;;
+      "dark") builddark ;;
+    esac
   else
     latexmk -c
   fi
