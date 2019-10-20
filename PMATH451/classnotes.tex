@@ -4468,6 +4468,356 @@ We shall prove $(2)$ in the next lecture.
 
 % chapter lecture_14_oct_4th_2019 (end)
 
+\chapter{Lecture 15 Oct 7th 2019}%
+\label{chp:lecture_15_oct_7th_2019}
+% chapter lecture_15_oct_7th_2019
+
+\section{Integration of Real- and Complex-Valued Functions (Continued)}%
+\label{sec:integration_of_real_and_complex_valued_functions_continued}
+% section integration_of_real_and_complex_valued_functions_continued
+
+\begin{proof}[of $(2)$ in \cref{propo:sub_properties_of_mathcal_l_1_functions}]
+  \hlbnoted{$(2) \iff (3)$}
+  We have that
+  \begin{equation*}
+    \int_{X} \abs{f - g} \dif{\mu} = 0
+    \iff \abs{f - g} = 0 \text{ a.e. }
+    \iff f = g \text{ a.e. }
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{$(3) \implies (1)$}
+  $f = g$ a.e. means that $\int_{E} f \dif{\mu} = \int_{E} g \dif{\mu}$ for any
+  $E \in \mathfrak{M}$.
+
+  \noindent
+  \hlbnoted{$(1) \implies (3)$}
+  Since $\int_{E} f = \int_{E} g$ for all $E \in \mathfrak{M}$,
+  in particular, we have that on
+  \begin{equation*}
+    E = \{ x : f(x) - g(x) > 0 \} \in \mathfrak{M},
+  \end{equation*}
+  we have
+  \begin{equation*}
+    \int_{E} (f - g) \dif{\mu} = 0.
+  \end{equation*}
+  This means that $f = g$ a.e. on $E$, i.e.
+  \begin{equation*}
+    \mu(\{ x \in E : f(x) - g(x) > 0 \}) = 0.
+  \end{equation*}
+  Let $\mathcal{E} = \{ x \in E : f(x) - g(x) > 0 \}$.
+  Similarly, on
+  \begin{equation*}
+    F = \{ x : f(x) - g(x) < 0 \} \in \mathfrak{M},
+  \end{equation*}
+  we have
+  \begin{equation*}
+    \mu(\{ x \in F : g(x) - f(x) > 0 \}) = 0.
+  \end{equation*}
+  Let $\mathcal{F} = \{ x \in F : g(x) - f(x) > 0 \}$.
+  It follows that
+  \begin{equation*}
+    \mu(\{ x \in X : f(x) \neq g(x) \})
+    \leq \mu(\mathcal{E}) + \mu(\mathcal{F}) = 0,
+  \end{equation*}
+  i.e. that $f = g$ a.e. on $X$.
+\end{proof}
+
+\begin{thm}[\impo Lebesgue's Dominated Convergence Theorem]\index{Lebesgue's Dominated Convergence Theorem}\label{thm:lebesgue_s_dominated_convergence_theorem}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space,
+  $\{ f_n \}_{n} \subseteq \mathcal{L}^1$ be a sequence of measurable functions
+  such that $f_n \to f$ pointwise a.e., where $f$ is also measurable.
+  Suppose $\exists g \in \mathcal{L}^1$ such that
+  \begin{equation*}
+    \forall n \geq 1\quad \abs{f_n(x)} \leq g(x) \text{ a.e. }
+  \end{equation*}
+  Then $f \in \mathcal{L}^1$ and
+  \begin{equation*}
+    \int_{X} f \dif{\mu} = \lim_{n \to \infty} \int_{X} f_n \dif{\mu}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  For each $n \geq 1$, we have $\abs{f_n(x)} \leq g(x)$ a.e..
+  In particular, $f_n(x) \leq g(x)$ a.e..
+  Thus $f(x) \leq g(x)$ a.e.
+  Also, $-f_n(x) \leq g(x)$ a.e. and so $-f(x) \leq g(x)$ a.e..
+  Thus $\abs{f(x)} \leq g(x)$ a.e., and so
+  \begin{equation*}
+    \int_{X} \abs{f} \dif{\mu} \leq \int_{X} g \dif{\mu} < \infty.
+  \end{equation*}
+  Thus $f \in \mathcal{L}^1$.
+
+  Now, since $f_n \to f$ pointwise a.e.,
+  we also have that $g + f_n \to g + f$ pointwise a.e.
+  In particular, by \nameref{thm:fatou_s_lemma},
+  \begin{equation*}
+    \int g + \int f = \int (g + f)
+    \leq \liminf_{n} \int (g + f_n)
+    = \int g + \liminf_{n} \int f_n.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \int f \leq \liminf_n \int f_n.
+  \end{equation*}
+  Similarly, we have $g - f_n \to g - f$ pointwise a.e., and so
+  \begin{align*}
+    \int g - \int f = \int (g - f)
+    &\leq \liminf_n \int (g - f_n) \\
+    &= \int g + \liminf_n \left( - \int f_n \right) \\
+    &= \int g - \limsup_n \int f_n.
+  \end{align*}
+  Thus
+  \begin{equation*}
+    \int f \geq \limsup_n \int f_n.
+  \end{equation*}
+
+  It follows that
+  \begin{equation*}
+    \limsup_n \int f_n \leq \int f \leq \liminf_n \int f_n \leq \limsup_n f_n.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \int f = \limsup_n \int f_n = \liminf_n \int f_n,
+  \end{equation*}
+  which implies that the limit exists, and so
+  \begin{equation*}
+    \int f = \lim_n \int f_n,
+  \end{equation*}
+  as desired.
+\end{proof}
+
+\begin{crly}[A Series Convergence Test for Integrable Functions]\label{crly:a_series_convergence_test_for_integrable_functions}
+  Let $\{ f_n \}_n \subseteq \mathcal{L}^1$, and suppose
+  \begin{equation*}
+    \sum_{n=1}^{\infty} \left( \int_X \abs{f_n} \dif{\mu} \right) < \infty.
+  \end{equation*}
+  Then $\sum_{n=1}^{\infty} f_n$ converges a.e.
+
+  If we let $f(x) = \sum_{n=1}^{\infty} f_n(x)$ a.e., then
+  \begin{equation*}
+    \int_X f \dif{\mu} = \sum_{n=1}^{\infty} \int_X f_n \dif{\mu}.
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  Let $g(x) = \sum_{n=1}^{\infty} \abs{f_n(x)}$.
+  \sidenote{It could be that $g(x) = \infty$ for some $x$.}
+  For $N \geq 1$, let
+  \begin{equation*}
+    s_N(x) = \sum_{n=1}^{N} \abs{f_n(x)}.
+  \end{equation*}
+  Then $s_N \nearrow g$.
+  By the \nameref{thm:monotone_convergence_theorem},
+  \begin{equation*}
+    \int g = \lim_N \int s_N = \lim_N \sum_{n=1}^{N} \int \abs{f_n}
+    = \sum_{n=1}^{\infty} \int \abs{f_n} < \infty.
+  \end{equation*}
+  Thus $g \in \mathcal{L}^1$.
+  By a similar reasoning to
+  \cref{propo:integrable_functions_have_value_at_infinity_over_a_set_of_measure_zero},
+  if we let $\mathcal{N} \coloneqq \{ x : g(x) = \infty \}$, then
+  $\mu(\mathcal{N}) = 0$.
+  Then for $x \notin \mathcal{N}$, we have that $g(x) = \sum_{n=1}^{\infty}
+  \abs{f_n(x)} < \infty$.
+  Thus $\sum_{n=1}^{\infty} f_n(x)$ converges absolutely on $\mathcal{N}^C$.
+  This implies that $\sum_{n=1}^{\infty} f_n(x)$ converges a.e.
+
+  Now set
+  \begin{equation*}
+    f(x) = \begin{cases}
+      \sum_{n=1}^{\infty} f_n(x) & x \notin \mathcal{N} \\
+      0 & x \in \mathcal{N}
+    \end{cases}.
+  \end{equation*}
+  \sidenote{We can set $f(x)$ to be anything for $x \in \mathcal{N}$.}
+  Let $h_N(x) = \sum_{n=1}^{N} f_n(x)$ for each $N \geq 1$.
+  Then $h_N \to f$ pointwise a.e..
+  Observe that $\abs{h_N} \leq \sum_{n=1}^{N} \abs{f_n} \leq g$ a.e..
+  By the \nameref{thm:lebesgue_s_dominated_convergence_theorem},
+  we have that
+  \begin{equation*}
+    \int f = \lim_N \int h_N = \lim_N \sum_{n=1}^{N} \int f_n
+        = \sum_{n=1}^{\infty} \int f_n,
+  \end{equation*}
+  as desired.
+\end{proof}
+
+\begin{eg}\label{eg:a_crazy_function_that_shoots_to_infinity_at_every_rational_point}
+  Consider the function
+  \begin{equation*}
+    f(x) = \begin{cases}
+      x^{- \frac{1}{2}} & 0 < x < 1 \\
+      0 & \text{ otherwise }
+    \end{cases}.
+  \end{equation*}
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2, 0) -- (2, 0);
+      \draw[->] (0, -0.5) -- (0, 2);
+      \draw[color=green] (-2, 0) -- (0, 0)
+        node[circle,fill=green,inner sep=1pt] {};
+      \draw[color=green,domain=0.2:1,range=0:2]
+        plot ({\x}, {\x^(-1/2)})
+        node[color=green,circle,inner sep=1pt] {};
+      \draw[color=green]
+        (1, 0) node[circle,fill=green,inner sep=1pt] {}
+        -- (2, 0);
+    \end{tikzpicture}
+    \caption{Graph of $f$ in \cref{eg:a_crazy_function_that_shoots_to_infinity_at_every_rational_point}}\label{fig:graph_of_eg_a_crazy_function_that_shoots_to_infinity_at_every_rational_point}
+  \end{marginfigure}
+  From PMATH450, since $f$ is bounded on $(0, 1)$,
+  Lebesgue's integral coincides with Riemann's integral, and so
+  \begin{equation*}
+    \int f \dif{\mu} = \int_0^1 \frac{1}{\sqrt{x}} \dif{x} = 2.
+  \end{equation*}
+
+  Now, let $\{ r_n \}_n$ be an enumeration of $\mathbb{Q}$.
+  Let
+  \begin{equation*}
+    g(x) \coloneqq \sum_{n=1}^{\infty} \frac{1}{2^n} f(x - r_n).
+  \end{equation*}
+  Since $g(x) \geq 0$, by the \nameref{thm:monotone_convergence_theorem},
+  \begin{equation*}
+    \int g = \sum_{n=1}^{\infty} \int \frac{1}{2^n} f(x - r_n)
+        = \sum_{n=1}^{\infty} \frac{1}{2^n} \cdot 2 < \infty.
+  \end{equation*}
+  Thus $g$ is integrable.
+  However, $g$ is unbounded on every open interval,
+  and in particular, it is discontinuous at every rational point,
+  with
+  \begin{equation*}
+    \lim_{x \to r_n^+} g(x) = \infty.
+  \end{equation*}
+\end{eg}
+
+\begin{thm}[Littlewood's Second Principle, for a general measure]\index{Littlewood's Second Principle}\label{thm:littlewood_s_second_principle_for_a_general_measure}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space.
+  Let $f \in \mathcal{L}^1$ and $\epsilon > 0$.
+  Then there exists a simple function $\phi \in \mathcal{L}^1$ such that
+  \begin{equation*}
+    \int_X (f - \phi) \dif{\mu} < \epsilon.
+  \end{equation*}
+  If $\mu = \mu_F$ is a Lebesgue-Stieltjes measure on $\mathbb{R}$,
+  then there exists a function $g$ that vanishes outside of a bounded interval
+  such that
+  \begin{equation*}
+    \int_X \abs{f - g} \dif{\mu_F} < \epsilon.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Let $f = f^+ - f^-$.
+  By
+  \cref{thm:increasing_sequence_of_simple_functions_converges_an_arbitrary_measurable_function},
+  $\exists \phi_n \nearrow f^+$ and $\exists \psi_n \nearrow f^-$.
+  By the \nameref{thm:monotone_convergence_theorem},
+  we have
+  \begin{equation*}
+    \int f^+ = \lim_n \int \phi_n \quad\text{ and }\quad
+    \int f^- = \lim_n \int \psi_n.
+  \end{equation*}
+  In particular, we have
+  \begin{equation*}
+    \int (f^+ - \phi_n) \to 0 \quad\text{ and }\quad
+    \int (f^- - \psi_n) \to 0.
+  \end{equation*}
+  This means that
+  \begin{gather*}
+    \exists N_1\enspace \forall n \geq N_1\enspace
+    \int (f^+ - \phi_n) < \frac{\epsilon}{2} \\
+    \exists N_2\enspace \forall n \geq N_2\enspace
+    \int (f^- - \psi_n) < \frac{\epsilon}{2}.
+  \end{gather*}
+  Picking $N = \max \{ N_1, N_2 \}$, we have that $\forall n \geq N$,
+  \begin{equation*}
+    \int \abs{f - (\phi_1 - \psi_n)}
+    \leq \int \abs{f^+ - \phi_n} + \int \abs{f^- - \psi_n}
+    < \epsilon.
+  \end{equation*}
+  This completes the first part.
+
+  Now suppose $\mu = \mu_F$. By the last part,
+  \begin{equation*}
+    \phi = \sum_{n=1}^{N} a_n \chi_{E_n}
+  \end{equation*}
+  be a simple function such that $\int \abs{f - \phi} \dif{\mu_F} < \epsilon$.
+  By \cref{homework:13}, for each $E_n$, let
+  \begin{equation*}
+    A_n = \bigcup_{j=1}^{\infty} (a_j, b_j],
+  \end{equation*}
+  such that
+  \begin{equation*}
+    \mu_F(E_n \triangle A_n) < \frac{\epsilon}{\abs{a_n} N}.
+  \end{equation*}
+  \sidenote{This is so that we can get a more well-understood set,
+  and intervals are quite well-understood and easy to grasp.}
+  Consider the simple function
+  \begin{equation*}
+    \psi = \sum_{n} a_n \chi_{A_n}.
+  \end{equation*}
+  Then
+  \begin{align*}
+    \int \abs{\phi - \psi} \dif{\mu_F}
+    &\leq \sum_{n=1}^{N} \abs{a_n} \int \abs{ \chi_{E_n} - \chi_{A_n} } \dif{\mu_F} \\
+    &= \sum_{n=1}^{N} \abs{a_n} \mu(E_n \triangle A_n) < \epsilon.
+  \end{align*}
+  It follows that
+  \begin{equation*}
+    \int \abs{f - \psi} \dif{\mu_F}
+    \leq \int \abs{f - \phi} \dif{\mu_F} + \int \abs{\phi - \psi} \dif{\mu_F}
+    < 2 \epsilon.
+  \end{equation*}
+
+  The details for the rest of this proof shall be left to the reader as
+  an exercise. Refer to
+  \cref{fig:idea_for_constructing_the_continuous_function_for_approximating_f}.
+  \begin{marginfigure}
+    \centering
+    \begin{tikzpicture}
+      \draw[->] (-2, 0) -- (2, 0);
+      \draw[color=green]
+        (-2, 0) -- (-1, 0)
+        node[circle,fill,inner sep=1pt,label={270:{$a_j$}}] {};
+      \draw[color=green]
+        (-1, 1) node[draw,circle,inner sep=1pt] {}
+        -- (1, 1) node[circle,fill,inner sep=1pt] {};
+      \draw[color=green]
+        (1, 0) node[draw,circle,inner sep=1pt,label={270:{$b_j$}}] {}
+        -- (2, 0);
+
+      \node[rotate=270] at (0, -0.5) {$\leadsto$};
+
+      \draw[->] (-2, -2) -- (2, -2);
+      \draw[color=green]
+        (-2, -2) -- (-1, -2)
+        node[circle,fill,inner sep=1pt,label={270:{$a_j$}}] {};
+      \draw[color=green]
+        (-1, -1) node[draw,circle,inner sep=1pt] {}
+        -- (1, -1) node[circle,fill,inner sep=1pt] {};
+      \draw[color=green]
+        (1, -2) node[draw,circle,inner sep=1pt,label={270:{$b_j$}}] {}
+        -- (2, -2);
+      \draw[color=red]
+        (-2, -2) -- (-1, -2) -- (-0.7, -1) -- (1, -1) -- (1.3, -2) -- (2, -2);
+      \draw[color=blue,dashed] (-1, -0.7) -- (-1, -2.5);
+      \draw[color=blue,dashed] (-0.7, -0.7) -- (-0.7, -2.5);
+      \draw[<->,color=blue] (-1, -2.6) -- (-0.7, -2.6)
+        node[midway,below] {$\delta$};
+      \draw[color=blue,dashed] (1, -0.7) -- (1, -2.5);
+      \draw[color=blue,dashed] (1.3, -0.7) -- (1.3, -2.5);
+      \draw[<->,color=blue] (1, -2.6) -- (1.3, -2.6)
+        node[midway,below] {$\delta$};
+    \end{tikzpicture}
+    \caption{Idea for constructing the continuous function}\label{fig:idea_for_constructing_the_continuous_function_for_approximating_f}
+  \end{marginfigure}
+\end{proof}
+
+% section integration_of_real_and_complex_valued_functions_continued (end)
+
+% chapter lecture_15_oct_7th_2019 (end)
+
 \appendix
 
 \chapter{Deep Dives into Proofs}%
