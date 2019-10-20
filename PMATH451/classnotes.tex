@@ -1461,7 +1461,7 @@ This is known as Carathéodory's Theorem.
 
 This requires the following definition:
 
-\begin{defn}[$\mu^*$-measurability]\index{$\mu^*$-measurability}\label{defn:_mu_measurability}
+\begin{defn}[$\mu^*$-measurability]\index{$\mu^*$-measurability}\label{defn:_mu_star_measurability}
   A set $A \subseteq X$ is said to be \hlnoteb{$\mu^*$-measurable}
   if $\forall E \subseteq X$,
   \begin{equation*}
@@ -1815,7 +1815,7 @@ and it has these properties:
 \begin{thm}[Carathéodory's Second Theorem]\index{Carathéodory's Second Theorem}\label{thm:caratheodory_s_second_theorem}
   Let $(X, d)$ be a metric space,
   and $\mu^*$ a \nameref{defn:metric_outer_measure}.
-  Then every Borel set is \hyperref[defn:_mu_measurability]{$\mu$-measurable}.
+  Then every Borel set is \hyperref[defn:_mu_star_measurability]{$\mu^*$-measurable}.
 \end{thm}
 
 \begin{proof}
@@ -3207,7 +3207,7 @@ to make our lives down the road a little easier.
   \end{equation*}
 \end{defn}
 
-\begin{remark}
+\begin{remark}\label{remark:f_plus_and_f_minus_are_measurable}
   \begin{enumerate}
     \item We see that $f = f^+ - f^-$.
     \item \sidenote{In what is possibly a statement similar to
@@ -3403,7 +3403,7 @@ Recall the \nameref{defn:characteristic_function}.
   Let
   \begin{equation*}
     \mathcal{L}^+ \coloneqq \{ f : X \to [0, \infty]
-          \mid f \text{ is } \mu\text{-measurable} \}.
+          \mid f \text{ is } \mathfrak{M}\text{-measurable} \}.
   \end{equation*}
   Given $\phi \in \mathcal{L}^+$ a simple function,
   i.e. $\range \phi = \{ 0 \leq a_1 < \hdots a_n \}$,
@@ -3688,7 +3688,7 @@ We are now ready to define the integration for an arbitrary measurable function.
   \end{enumerate}
 \end{proof}
 
-\begin{eg}
+\begin{eg}\label{eg:fatou_s_lemma_strict_inequality}
   Consider $f_n = n \cdot \chi_{\left( 0, \frac{1}{n} \right)}$.
   We see that $\forall x \in \mathbb{R}$,
   \begin{equation*}
@@ -3726,13 +3726,13 @@ We shall see that not all hope is loss,
 and there are indeed some sequences of functions
 which have this desirable property.
 
-\begin{thm}[Monotone Convergence Theorem (MCT)]\index{Monotone Convergence Theorem}\index{MCT}\label{thm:monotone_convergence_theorem}
+\begin{thm}[\impo Monotone Convergence Theorem (MCT)]\index{Monotone Convergence Theorem}\index{MCT}\label{thm:monotone_convergence_theorem}
   Suppose $\{ f_n \}_n \subseteq \mathcal{L}^+$ such that $f_n \leq f_{n+1}$.
   Let
   \begin{equation*}
     f(x) = \lim_{n \to \infty} f_n(x) = \sup_{n \geq 1} f_n(x)
   \end{equation*}
-  for all $x \in \mathbb{X}$.
+  for all $x \in X$.
   Then
   \begin{equation*}
     \int_{X} f \dif{\mu}
@@ -3904,7 +3904,7 @@ which have this desirable property.
 \begin{eg}
   We say that $f = 0$ a.e. iff
   \begin{equation*}
-    \mu(\{ x : f(x) \neq \emptyset\}) = 0.
+    \mu(\{ x : f(x) \neq 0\}) = 0.
   \end{equation*}
 \end{eg}
 
@@ -3998,6 +3998,475 @@ which have this desirable property.
 % section integration (end)
 
 % chapter lecture_13_oct_2nd_2019 (end)
+
+\chapter{Lecture 14 Oct 4th 2019}%
+\label{chp:lecture_14_oct_4th_2019}
+% chapter lecture_14_oct_4th_2019
+
+\begin{homework}[Homework 10]\label{homework:10}
+	Suppose $f : \mathbb{R} \to \mathbb{R}$ is increasing.
+  Prove that $f$ is $\mathfrak{B}(\mathbb{R})$-measurable.
+\end{homework}
+
+\begin{homework}[Homework 11]\label{homework:11}
+  Suppose $(X, \mathfrak{M}, \mu)$ is a measure space,
+  and $f \in \mathcal{L}^+$.
+  Let $\{ E_n \}_n \subseteq \mathfrak{M}$ be a pairwise disjoint set,
+  and $E = \bigcup_{n} E_n$.
+  Prove that
+  \begin{equation*}
+    \int_{E} f \dif{\mu} = \sum_{n=1}^{\infty} \int_{E_n} f \dif{\mu}.
+  \end{equation*}
+\end{homework}
+
+\begin{homework}[Homework 12]\label{homework:12}
+  Let $f : [0, 1] \to \mathbb{R}_e$ be Lebesgue measurable,
+  $f \geq 0$, and $\int_{[0, 1]} f \dif{\mu} < \infty$.
+  Prove that
+  \begin{equation*}
+    \int_{[0, 1]} x^k f(x) \dif{\mu} \to 0 \text{ as } k \to \infty.
+  \end{equation*}
+  What if $\int_{[0, 1]} f \dif{\mu} = \infty$?
+  Prove that it is still true or give a counter example.
+\end{homework}
+
+\begin{homework}[Homework 13]\label{homework:13}
+  Suppose $F : \mathbb{R} \to \mathbb{R}$ is
+  increasing and right continuous.
+  Suppose $E \in \mathfrak{M}$ with $\mu_F(E) < \infty$.
+  Given $\epsilon > 0$, prove that there exists a set
+  \begin{equation*}
+    A = \bigcup_{k=1}^{\infty} (a_k, b_k]
+  \end{equation*}
+  such that
+  \begin{equation*}
+    \mu_F((E \setminus A) \cup (A \setminus E)) < \epsilon.
+  \end{equation*}
+  (Note: $E \triangle A \coloneqq (E \setminus A) \cup (A \setminus E)$
+  is known as the symmetric difference of $E$ and $A$.)
+\end{homework}
+
+\section{Integration (Continued)}%
+\label{sec:integration_continued}
+% section integration_continued
+
+\begin{notation}
+  We have used a similar notation earlier on
+  for a sequence of values.
+  We shall use the same notation for a sequence of functions.
+
+  By $f_n \nearrow f$ a.e., we mean
+  $\exists B$ a set such that $\mu(B) = 0$,
+  such that $\forall x \notin B$, we have
+  \begin{equation*}
+    f_1(x) \leq f_2(x) \leq \hdots \leq f(x)
+  \end{equation*}
+  and
+  \begin{equation*}
+    \lim_{n \to \infty} f_n(x) = f(x).
+  \end{equation*}
+\end{notation}
+
+\begin{crly}[Monotone Convergence Theorem (A.E. Ver.)]\index{Monotone Convergence Theorem (A.E. Ver.)}\label{crly:monotone_convergence_theorem_a_e_ver_}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space.
+  Suppose $\{ f_n \}_n \subseteq \mathcal{L}^+$
+  such that $f_n \nearrow f$ a.e.
+  Then
+  \begin{equation*}
+    \lim_{n \to \infty} \int_X f_n \dif{\mu} = \int_{X} f \dif{\mu}.
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  Let $B$ be a set such that $\mu(B) = 0$,
+  such that $\forall x \notin B$
+  \begin{equation*}
+    f_1(x) \leq f_2(x) \leq \hdots \leq f(x)
+  \end{equation*}
+  and
+  \begin{equation*}
+    \lim_{n \to \infty} f_n(x) = f(x).
+  \end{equation*}
+  Then we may write
+  \begin{equation*}
+    f = f \cdot \chi_{B^C} + f \cdot \chi_{B}.
+  \end{equation*}
+  By \cref{crly:addition_of_integrals_of_measurable_functions},
+  we have
+  \begin{equation*}
+    \int_{X} f \dif{\mu}
+    = \int_{X} f \cdot \chi_{B^C} \dif{\mu} + \int_{X} f \cdot \chi_B \dif{\mu}
+    = \int_{X} f \cdot \chi_{B^C} \dif{\mu} + 0.
+  \end{equation*}
+  Observe that on $B^C$, we have $f_n \cdot \chi_{B^C} \nearrow f \cdot \chi_B$.
+  Thus by the \nameref{thm:monotone_convergence_theorem}
+  \begin{equation*}
+    \int_{X} f \dif{\mu}
+    = \int_{X} f \cdot \chi_{B^C} \dif{\mu}
+    = \lim_{n \to \infty} \int_{X} f_n \cdot \chi_{B^C} \dif{\mu}.
+  \end{equation*}
+  Finally, observe that
+  \begin{equation*}
+    \int_{X} f_n \dif{\mu}
+    = \int_{X} f_n \cdot \chi_{B^C} \dif{\mu} + \int_{X} f_n \cdot \chi_B \dif{\mu}
+    = \int_{X} f_n \cdot \chi_{B^C} \dif{\mu} + 0.
+  \end{equation*}
+  Thus indeed
+  \begin{equation*}
+    \int_{X} f \dif{\mu} = \lim_{n \to \infty} f_n \dif{\mu}.
+  \end{equation*}
+\end{proof}
+
+\begin{thm}[\impo Fatou's Lemma]\index{Fatou's Lemma}\label{thm:fatou_s_lemma}
+  Let $\{ f_n \}_n \subseteq \mathcal{L}^+$, and
+  \begin{equation*}
+    f(x) = \liminf_{n \geq 1} f_n(x)
+  \end{equation*}
+  is measurable.
+  Then
+  \begin{equation*}
+    \int_{X} f \dif{\mu}
+    = \int_{X} \liminf_{n \geq 1} f_n \dif{\mu}
+    \leq \liminf_{n \geq 1} \int_{X} f_n \dif{\mu}.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  Let
+  \begin{equation*}
+    g_k(x) = \inf_{n \geq k} f_n(x).
+  \end{equation*}
+  Then $g_k \nearrow f(x)$.
+  By \nameref{thm:monotone_convergence_theorem},
+  \begin{equation*}
+    \int_{X} f \dif{\mu}
+    = \lim_{k \to \infty} \int_{X} g_k \dif{\mu}
+    = \sup_{k \geq 1} \int_{X} g_k \dif{\mu}.
+  \end{equation*}
+  Notice that $\forall n \geq k$, by construction, $g_k \leq f_n$.
+  Thus (by \cref{propo:properties_of_the_integral_of_measurable_functions}),
+  $\forall n \geq k$,
+  \begin{equation*}
+    \int_{X} g_k \dif{\mu} \leq \int_{X} f_n \dif{\mu}.
+  \end{equation*}
+  This implies that
+  \begin{equation*}
+    \int_{X} g_k \dif{\mu} \leq \inf_{n \geq k} \int_{X} f_n \dif{\mu}.
+  \end{equation*}
+  It follows that
+  \begin{align*}
+    \int_{X} f \dif{\mu}
+    = \sup_{k \geq 1} \int_{X} g_k \dif{\mu}
+    \leq \sup_{k \geq 1} \inf_{n \geq k} \int_{X} f_n \dif{\mu}
+    = \liminf_{n \geq 1} \int_{X} f_n \dif{\mu}.
+  \end{align*}
+\end{proof}
+
+\begin{eg}
+  Recall our \hyperref[eg:fatou_s_lemma_strict_inequality]{example} where
+  \begin{equation*}
+    f_n = n \cdot \chi_{\left( 0, \frac{1}{n} \right) }
+  \end{equation*}
+  and
+  \begin{equation*}
+    \lim_{n \to \infty} f_n(x) = f(x) = 0.
+  \end{equation*}
+  We see that
+  \begin{equation*}
+    \int_{X} f \dif{\mu} = 0 < 1 = \liminf_{n \geq 1} \int_{X} f_n \dif{\mu}.
+  \end{equation*}
+  Therefore, we do not always expect an equality to happen vis-a-vis
+  \nameref{thm:fatou_s_lemma}.
+\end{eg}
+
+The following propositions have pretentious names,
+but we will see why right after looking at them.
+
+\begin{propo}[Integrable Functions have Value at Infinity over a Set of Measure Zero]\label{propo:integrable_functions_have_value_at_infinity_over_a_set_of_measure_zero}
+  Let $f \in \mathcal{L}^+$ and $\int_{X} f \dif{\mu} < \infty$.
+  Then
+  \begin{equation*}
+    \mu ( \{ x : f(x) = \infty \} ) = 0.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Let $A = \{ x : f(x) = \infty \}$.
+  Consider the sequence of simple functions
+  \begin{equation*}
+    \phi_n = n \cdot \chi_A.
+  \end{equation*}
+  Then when not on $A$, we have $\phi_n = 0 \leq f$,
+  and on $A$, we have $\phi_n = n < \infty = f$.
+  Thus $\phi_n \leq f$.
+  Therefore, $\forall n \geq 1$
+  \begin{equation*}
+    n \mu(A) = \int_{X} \phi_n \dif{\mu} \leq \int_{X} f \dif{\mu} < \infty.
+  \end{equation*}
+  In particular, $\forall n \geq 1$,
+  \begin{equation*}
+    \mu(A) = \frac{1}{n} \int_{X} f \dif{\mu} < \infty.
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    \mu(A) = 0.
+  \end{equation*}
+\end{proof}
+
+\begin{propo}[Set where the Integrable Function is Strictly Positive is $\sigma$-finite]\label{propo:set_where_the_integrable_function_is_strictly_positive_is_sigma_finite}
+  Let $f \in \mathcal{L}^+$ and $\int_{X} f \dif{\mu} < \infty$.
+  Then $\{ x : f(x) > 0 \}$ is \hldefn{$\sigma$-finite},
+  \sidenote{This $\sigma$-finite has a similar meaning to the
+  \hyperref[defn:finitivity_sigma_finitivity_and_semi_finitivity_of_a_measure]{$\sigma$-finite}
+  we have seen before.}
+  i.e. it is expressible as a union of subsets which have finite measure.
+\end{propo}
+
+\begin{proof}
+  Let $E = \{ x : f(x) > 0 \}$.
+  Consider $E_n = \left\{ x : f(x) \geq \frac{1}{n} \right\}$.
+  Then $E = \bigcup_{n=1}^{\infty} E_n$.
+
+  For each $n \geq 1$, let $\phi_n = \frac{1}{n} \chi_{E_n} \leq f$.
+  Then
+  \begin{equation*}
+    \frac{1}{n} \mu(E_n)
+    = \int_{X} \phi_n \dif{\mu}
+    \leq \int_{X} f \dif{\mu} < \infty.
+  \end{equation*}
+  Hence
+  \begin{equation*}
+    \mu(E_n) \leq \frac{1}{n} \int_{X} f \dif{\mu} < \infty.
+  \end{equation*}
+  It follows that, indeed, each $E_n$ has finite measure.
+\end{proof}
+
+% section integration_continued (end)
+
+\section{Integration of Real- and Complex-Valued Functions}%
+\label{sec:integration_of_real_and_complex_valued_functions}
+% section integration_of_real_and_complex_valued_functions
+
+Let $(X, \mathfrak{M}, \mu)$ be a measure space.
+Let $f : X \to \mathbb{R}_e$ be \hyperref[defn:measurable_functions]{measurable}.
+If we write $f = f^+ - f^-$, recall that
+\hyperref[remark:f_plus_and_f_minus_are_measurable]{$f^+$ and $f^-$ are both
+measurable}.
+Furthermore, $\abs{f} = f^+ + f^-$.
+We observe that
+\begin{equation*}
+  \int_X f^+ \dif{\mu}
+  \leq \int_{X} \abs{f} \dif{\mu}
+  = \int_{X} f^+ \dif{\mu} + \int_{X} f^- \dif{\mu},
+\end{equation*}
+and similarly for $f^-$.
+Thus
+\begin{equation*}
+  \int_{X} \abs{f} \dif{\mu} < \infty
+  \iff
+  \int_{X} f^+ \dif{\mu},\, \int_{X} f^- \dif{\mu} < \infty.
+\end{equation*}
+
+\begin{defn}[Integrable Function]\index{Integrable Function}\label{defn:integrable_function}
+  Let $(X, \mathfrak{M}, \mu)$ be an arbitrary measure space.
+  Let $f : X \to \mathbb{R}_e$ be a measurable function.
+  We say that $f$ is \hlnoteb{integrable} if
+  \begin{equation*}
+    \int_{X} f^+ \dif{\mu} < \infty \quad\text{ and }\quad
+    \int_{X} f^- \dif{\mu} < \infty.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  Since $f = f^+ - f^-$,
+  by \cref{crly:addition_of_integrals_of_measurable_functions},
+  we have
+  \begin{equation*}
+    \int_{X} f \dif{\mu} = \int_{X} f^+ \dif{\mu} - \int_{X} f^- \dif{\mu}.
+  \end{equation*}
+\end{remark}
+
+\begin{remark}[On complex functions]
+  Consider $f : X \to \mathbb{C} \simeq \mathbb{R}^2$.
+  We know that $\forall z = a + ib \in \mathbb{C}$,
+  we may write $z = (a, b) \in \mathbb{R}^2$,
+  with
+  \begin{equation*}
+    \Re(z) = a \quad \text{ and } \quad \Im(z) = b.
+  \end{equation*}
+  Notice that
+  \begin{equation*}
+    \abs{z} = \sqrt{\overline{z} z} = \sqrt{a^2 + b^2}.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \abs{a} \leq \abs{z} \quad \text{ and } \quad \abs{b} \leq \abs{z}.
+  \end{equation*}
+  We observe that
+  \begin{equation*}
+    \abs{z} = \abs{a + ib} \leq \abs{a} + \abs{b} = 2 \abs{z}.
+  \end{equation*}
+
+  Now if we let
+  \begin{equation*}
+    f = \Re(f) + \Im(f),
+  \end{equation*}
+  then by a similar line of thought as above,
+  \begin{align*}
+    \abs{f} &\leq \abs{\Re(f)} + \abs{\Im(f)} \\
+            &= \Re(f)^+ + \Re(f)^- + \Im(f)^+ + \Im(f)^- \\
+            &\leq 4 \abs{f}.
+  \end{align*}
+  Then by the same argument that we've seen at the beginning of this section,
+  \begin{gather*}
+    \int_{X} \abs{f} \dif{\mu} \\
+    \iff \\
+    \int_{X} \Re(f)^+ \dif{\mu},\, \int_{X} \Re(f)^- \dif{\mu},\,
+    \int_{X} \Im(f)^+ \dif{\mu},\, \int_{X} \Im(f)^- \dif{\mu} < \infty.
+  \end{gather*}
+  Therefore, we say that $f : X \to \mathbb{C}$ is integrable if
+  all the above $4$ integrals are finite.
+  In particular, we can set
+  \begin{align*}
+    \int_{X} f \dif{\mu}
+    &= \int_{X} \Re(f) \dif{\mu} + i \int_{X} \Im(f) \dif{\mu} \\
+    &= \left[ \int_{X} \Re(f)^+ \dif{\mu} - \int_{X} \Re(f)^- \dif{\mu} \right]
+      + i \left[ \int_{X} \Im(f)^+ \dif{\mu} - \int_{X} \Im(f)^- \dif{\mu} \right].
+  \end{align*}
+
+  This shows that it suffices for us to focus on studying
+  real-valued functions to understand complex-valued functions
+  within our context.
+\end{remark}
+
+\begin{notation}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space.
+  We write
+  \begin{equation*}
+    \mathcal{L}^1 \coloneqq \{ f : X \to \mathbb{R}_e
+          \mid \int_{X} \abs{f} \dif{\mu} < \infty \},
+  \end{equation*}
+  and
+  \begin{equation*}
+    \mathcal{L}_{\mathbb{C}}^1 \coloneqq \{ f : X \to \mathbb{C}
+                    \mid \int_{X} \abs{f} \dif{\mu} < \infty \}.
+  \end{equation*}
+\end{notation}
+
+\begin{propo}[$\mathcal{L}^1$ is a Vector Space]\label{propo:cursive_l_1_is_a_vector_space}
+  $\mathcal{L}^1$ is a vector space.
+  Furthermore, for $f, g \in \mathcal{L}^1$, we have
+  \begin{enumerate}
+    \item $\int_{X} f + g \dif{\mu} = \int_{X} f \dif{\mu} + \int_{X} g \dif{\mu}$.
+    \item $\forall a \in \mathbb{R}\quad
+      \int_{X} af \dif{\mu} = a \int_{X} f \dif{\mu}$.
+  \end{enumerate}
+  Note that this is also true for $\mathcal{L}_{\mathbb{C}}^1$.
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$\mathcal{L}^1$ is a vector space}
+  Let $f, g \in \mathcal{L}^1$. Since $\abs{f + g} \leq \abs{f} + \abs{g}$,
+  we have that
+  \begin{equation*}
+    \int_{X} \abs{f + g} \dif{\mu}
+    \leq \int_{X} \abs{f} \dif{\mu} + \int_{X} \abs{g} \dif{\mu}
+    < \infty.
+  \end{equation*}
+  Thus $f + g \in \mathcal{L}^1$.
+
+  For any $a \in \mathbb{R}$, $\abs{af} = \abs{a}\abs{f}$,
+  and so
+  \begin{equation*}
+    \int_{X} \abs{af} \dif{\mu} = \abs{a} \int_{X} f \dif{\mu} < \infty.
+  \end{equation*}
+  Thus $af \in \mathcal{L}^1$.
+
+  \noindent
+  \hlbnoted{Linearity in $\mathcal{L}^1$}
+  Let $h = h^+ - h^- = f + g = f^+ - f^- + g^+ - g^-$.
+  Note $f = f^+ - f^-$ and $g = g^+ - g^-$.
+  WTS
+  \begin{equation*}
+    \int_{X} h \dif{\mu}
+    = \int_{X} f^+ \dif{\mu} - \int_{X} f^- \dif{\mu}
+      + \int_{X} g^+ \dif{\mu} - \int_{X} g^- \dif{\mu}.
+  \end{equation*}
+  By rearrangement, we have that
+  \begin{equation*}
+    h^+ + f^- + g^- = h^- + f^+ + g^+,
+  \end{equation*}
+  where we rearrange them so that all the functions are now non-negative.
+  By \cref{crly:addition_of_integrals_of_measurable_functions}, we have
+  \sidenote{For sanity, let's drop the $\dif{\mu}$ and subscript $X$ here.
+  We shall do this when the context is clear.}
+  \begin{equation*}
+    \int h^+ + \int f^- + \int g^- = \int h^- + \int f^+ + \int g^+.
+  \end{equation*}
+  It follows that, indeed,
+  \begin{equation*}
+    \int h^+ - \int h^- = \int f^+ - \int f^- + \int g^+ - \int g^-.
+  \end{equation*}
+
+  Now for any $a \in \mathbb{R}$,
+  \begin{equation*}
+    af = af^+ - af^-.
+  \end{equation*}
+  Since
+  \begin{equation*}
+    \int af = \int af^+ - \int af^-,
+  \end{equation*}
+  and each of the functions on the RHS is non-negative,
+  by \cref{propo:properties_of_the_integral_of_measurable_functions},
+  \begin{equation*}
+    \int af = a \int f^+ - a \int f^- = a \int f.
+  \end{equation*}
+\end{proof}
+
+\begin{propo}[Absolute Value of Integral is Lesser Than Integral of Absolute Value]\label{propo:absolute_value_of_integral_is_lesser_than_integral_of_absolute_value}
+  If $f \in \mathcal{L}^1$, then
+  \begin{equation*}
+    \abs{ \int_{X} f \dif{\mu} } \leq \int_{X} \abs{f} \dif{\mu}.
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  Since $f = f^+ - f^-$, we have
+  \begin{equation*}
+    \abs{ \int f }
+    = \abs{ \int f^+ - \int f^- }
+    \leq \int f^+ + \int f^- = \int \abs{f}.
+  \end{equation*}
+\end{proof}
+
+\begin{propo}[Sub-properties of $\mathcal{L}^1$ functions]\label{propo:sub_properties_of_mathcal_l_1_functions}
+  \begin{enumerate}
+    \item If $f \in \mathcal{L}^1$, then
+      \begin{equation*}
+        \{ x : f(x) \neq 0 \}
+      \end{equation*}
+      is $\sigma$-finite.
+    \item If $f, g \in \mathcal{L}^1$, then
+      \begin{align*}
+        &\forall E \in \mathfrak{M}\enspace
+        \int_{E} f \dif{\mu} = \int_{E} g \dif{\mu} \\
+        &\iff \int_X \abs{f - g} \dif{\mu} = 0 \\
+        &\iff f = g \text{ a.e. }
+      \end{align*}
+  \end{enumerate}
+\end{propo}
+
+\begin{ex}
+  The proof of $(1)$ in \cref{propo:sub_properties_of_mathcal_l_1_functions}
+  is left as an easy exercise of which the reader may refer to
+  an earlier proof for reference.
+\end{ex}
+
+We shall prove $(2)$ in the next lecture.
+
+% section integration_of_real_and_complex_valued_functions (end)
+
+% chapter lecture_14_oct_4th_2019 (end)
 
 \appendix
 
