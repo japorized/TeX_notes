@@ -16,12 +16,12 @@ test:
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
-    - vendor/ruby
+      - vendor/ruby
   script:
-  - bundle exec jekyll build -d test
+    - bundle exec jekyll build -d test
   artifacts:
     paths:
-    - test
+      - test
   except:
   - master
 
@@ -30,12 +30,12 @@ pages:
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
-    - vendor/ruby
+      - vendor/ruby
   script:
-  - JEKYLL_ENV=production bundle exec jekyll build -I -d public
+    - JEKYLL_ENV=production bundle exec jekyll build -d public --trace
   artifacts:
     paths:
-    - public
+      - public
   only:
-  - master
+    - master
 
