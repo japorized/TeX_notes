@@ -21,6 +21,12 @@
 \DeclareMathOperator{\Vol}{Vol}
 \DeclareMathOperator{\range}{range}
 
+\newcommand{\convptw}{\overset{\text{ptw}}{\to}}
+\newcommand{\convae}{\overset{\text{a.e.}}{\to}}
+\newcommand{\convunif}{\overset{\text{unif}}{\to}}
+\newcommand{\convlone}{\overset{\mathcal{L}^1}{\to}}
+\newcommand{\convmeas}{\overset{\mu}{\to}}
+
 \theoremprework{\textcolor{cyan}{\hrule height 2pt width \textwidth}}
 \theoremheaderfont{\color{cyan}\normalfont\bfseries}
 \theorempostwork{\textcolor{cyan}{\hrule height 2pt width \textwidth}}
@@ -3697,7 +3703,7 @@ We are now ready to define the integration for an arbitrary measurable function.
   i.e. that $f_n \to f \equiv 0$ pointwise.
   However, notice that under the Lebesgue measure
   \begin{equation*}
-    \int_{\mathbb{R}} f \dif{\mu} = n \cdot \frac{1}{n} = 1,
+    \int_{\mathbb{R}} f_n \dif{\mu} = n \cdot \frac{1}{n} = 1,
   \end{equation*}
   for each $n$.
   Thus
@@ -4817,6 +4823,377 @@ We shall prove $(2)$ in the next lecture.
 % section integration_of_real_and_complex_valued_functions_continued (end)
 
 % chapter lecture_15_oct_7th_2019 (end)
+
+\chapter{Lecture 16 Oct 9th 2019}%
+\label{chp:lecture_16_oct_9th_2019}
+% chapter lecture_16_oct_9th_2019
+
+\section{Riemann Integration VS Lebesgue Integration}%
+\label{sec:riemann_integration_vs_lebesgue_integration}
+% section riemann_integration_vs_lebesgue_integration
+
+We shall take a quick detour into the agreement between
+Riemann integration and Lebesgue integration on
+bounded functions.
+For further details, you may wish to refer to notes on
+\href{https://tex.japorized.ink/PMATH450/classnotes.pdf}{PMATH450}.
+However, in this section, we shall look at using
+so-called upper and lower envelopes of a function
+to prove the same result.
+
+\begin{defn}[Step Functions]\index{Step Functions}\label{defn:step_functions}
+  A function $\phi : \mathbb{R} \to \mathbb{R}$
+  is called a \hlnoteb{step function} if $\phi$ is simple with standard form
+  \begin{equation*}
+    \phi = \sum a_n \chi_{E_n},
+  \end{equation*}
+  where each $E_n$ is an interval or a singleton.
+\end{defn}
+
+Recall the \cref{defn:riemann_integration}.
+Given a bounded function $f : [a, b] \to \mathbb{R}$,
+we shall see that we can equivalently define
+\begin{equation*}
+  \overline{\int_a^b} f(x) \dif{x} = \inf \left\{ 
+    \int_{[a, b]} \phi \dif{\mu}: f \leq \phi,\, \phi \text{ step function }
+  \right\},
+\end{equation*}
+and
+\begin{equation*}
+  \underline{\int_a^b} f(x) \dif{x} = \sup \left\{ 
+    \int_{[a, b]} \phi \dif{\mu} : \phi \leq f,\, \phi \text{ step function }
+  \right\}.
+\end{equation*}
+We may then say that $f$ is Riemann integrable if
+\begin{equation*}
+  \overline{\int_{a}^{b}} f(x) \dif{x} = \underline{\int_{a}^{b}} f(x) \dif{x}.
+\end{equation*}
+We shall call the common value above as the \hldefn{Riemann integral},
+of which we shall denote by
+\begin{equation*}
+  \int_{a}^{b} f \dif{x}.
+\end{equation*}
+
+\begin{defn}[Upper and Lower Envelopes of a Function]\index{Upper Envelope}\index{Lower Envelopes}\label{defn:upper_and_lower_envelopes_of_a_function}
+  Let $f : [a, b] \to \mathbb{R}$.
+  We define
+  \begin{equation*}
+    U_f(x) = U(x)
+           = \lim_{\delta \downarrow 0} \sup_{\abs{y - x} \leq \delta} f(y)
+           = \max \{ f(x),\, \limsup_{y \to x} f(y) \}
+  \end{equation*}
+  as the \hlnoteb{upper envelope of $f$}.
+  We define
+  \begin{equation*}
+    L_f(x) = L(x)
+           = \lim_{\delta \downarrow 0} \inf_{\abs{y - x} \leq \delta} f(y)
+           = \min \{ f(x),\, \liminf_{y \to x} f(y) \}
+  \end{equation*}
+  as the \hlnoteb{lower envelope of $f$}.
+\end{defn}
+
+\begin{propo}[Characterization of Continuity with Upper and Lower Envelopes]\label{propo:characterization_of_continuity_with_upper_and_lower_envelopes}
+  Let $f : [a, b] \to \mathbb{R}$. Then
+  $U(x) = L(x)$ iff $f$ is continuous at $x$.
+\end{propo}
+
+\begin{proof}
+  \hlbnoted{$(\impliedby)$} \\
+  {\parindent0pt
+  $f$ is continuous at $x$ \\
+  $\iff$ $f(x) = \lim_{y \to x} f(y)$ \\
+  $\iff$ $\limsup_{y \to x} f(y) = f(x) = \liminf_{y \to x} f(y)$ \\
+  $\implies$ $U(x) = f(x) = L(x)$.
+  }
+
+  \noindent
+  \hlbnoted{$(\implies)$} \\
+  {\parindent0pt
+  $U(x) = L(x)$ \\
+  $\iff$ $f(x) \leq U(x) = L(x) \leq f(x)$ \\
+  $\iff$
+  \begin{equation*}
+  \limsup\limits_{y \to x} f(y) \leq U(x)
+    = f(x) = L(x) \leq \liminf\limits_{y \to x} f(y)
+    \leq \limsup\limits_{y \to x} f(y)
+  \end{equation*}
+  $\iff$ $\limsup_{y \to x} f(y) = \liminf_{y \to x} f(y)$ \\
+  $\iff$ $f(x) = \lim_{y \to x} f(y)$
+  }
+\end{proof}
+
+\begin{propo}[Monotonic Sequence of Step Functions to the Upper and Lower Envelopes]\label{propo:monotonic_sequence_of_step_functions_to_the_upper_and_lower_envelopes}
+  Let $f : [a, b] \to \mathbb{R}$.
+  Then there exists step functions $\{ \phi_n \}_n$
+  such that $\phi_n \nearrow L$, and step functions $\{ \psi_n \}_n$
+  such that $\psi_n \searrow U$.
+  Hence $U$ and $L$ are measurable.
+\end{propo}
+
+\begin{ex}
+  Prove
+  \cref{propo:monotonic_sequence_of_step_functions_to_the_upper_and_lower_envelopes}.
+  Hint: Take a partition of the domain, take refinements, \ldots.
+\end{ex}
+
+\begin{thm}[Characterization of the Upper and Lower Riemann Integrals of Bounded Functions]\label{thm:characterization_of_the_upper_and_lower_riemann_integrals_of_bounded_functions}
+  Let $(X, \mathfrak{M}, \mu)$ be a Lebesgue measure space.
+  Let $f : [a, b] \to \mathbb{R}$ be a bounded function.
+  Then
+  \begin{equation*}
+    \overline{\int_{a}^{b}} f \dif{x} = \int_{[a, b]} U \dif{\mu},
+  \end{equation*}
+  and
+  \begin{equation*}
+    \underline{\int_{a}^{b}} f \dif{x} = \int_{[a, b]} L \dif{\mu}.
+  \end{equation*}
+\end{thm}
+
+\begin{ex}
+  Prove
+  \cref{thm:characterization_of_the_upper_and_lower_riemann_integrals_of_bounded_functions}.
+\end{ex}
+
+\begin{thm}[Agreement of Riemann Integration and Lebesgue Integration for Bounded Functions]\label{thm:agreement_of_riemann_integration_and_lebesgue_integration_for_bounded_functions}
+  Let $f : [a, b] \to \mathbb{R}$ be bounded. Then
+  \begin{enumerate}
+    \item if $f$ is Riemann integrable, then $f$ is measurable and
+      \begin{equation*}
+        \int_{a}^{b} f \dif{x} = \int_{[a, b]} f \dif{\mu}.
+      \end{equation*}
+    \item $f$ is Riemann integrable iff
+      \begin{equation*}
+        \mu(\{x : f \text{ is not continuous at } x\}) = 0.
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlwarn{Will come back to this.}
+\end{proof}
+
+% section riemann_integration_vs_Lebesgue_integration (end)
+
+\section{Modes of Convergences}%
+\label{sec:modes_of_convergences}
+% section modes_of_convergences
+
+\begin{notation}
+  Consider a sequence of functions $\{ f_n \}_n$.
+  \begin{itemize}
+    \item (\hldefn{Pointwise convergence})
+      We write $f_n \convptw f$ if
+      $\forall x$ we have
+      \begin{equation*}
+        \lim_{n} f_n(x) = f(x).
+      \end{equation*}
+    \item (\hldefn{Almost everywhere pointwise convergence})
+      We write $f_n \convae f$ if
+      \begin{equation*}
+        \lim_{n} f_n(x) = f(x)
+      \end{equation*}
+      except for $x$'s in a set of measure zero.
+    \item (\hldefn{Uniform convergence})
+      We write $f_n \convunif f$ if
+      \begin{equation*}
+        \forall x > 0 \; \exists N \in \mathbb{N} \;
+        \forall x \; \forall n > N \;
+        \abs{f_n(x) - f(x)} < \epsilon.
+      \end{equation*}
+  \end{itemize}
+\end{notation}
+
+\begin{defn}[$\mathcal{L}^1$-convergence]\index{$\mathcal{L}^1$-convergence}\label{defn:_mathcal_l_1_convergence}
+  For $f_n, f \in \mathcal{L}^1$, we say that the $f_n$'s
+  \hlnoteb{converge in $\mathcal{L}^1$} to $f$,
+  of which we denote by
+  \begin{equation*}
+    f_n \convlone f,
+  \end{equation*}
+  when
+  \begin{equation*}
+    \int_{X} \abs{f_n - f} \dif{\mu} \to 0.
+  \end{equation*}
+\end{defn}
+
+\begin{eg}
+  Consider the Lebesgue measurable space
+  $(\mathbb{R}, \mathfrak{B}(\mathbb{R}), \mu)$.
+  \begin{enumerate}
+    \item 
+      Let $f_n = \frac{1}{n} \chi_{(0, n)}$ for each $n$,
+      and $f \equiv 0$.
+      \label{item:eg1_mode_of_conv}
+      \marginnote{Summary for modes of convergences in
+      \hyperref[item:eg1_mode_of_conv]{example 1}.
+
+      \begin{center}
+      \begin{tabular}{c c}
+        $f_n \convptw 0$ & $f_n \convae 0$ \\
+        $f_n \convunif 0$ & $f_n \not\convlone 0$
+      \end{tabular}
+      \end{center}
+      }
+      We see that
+      \begin{itemize}
+        \item $f_n \convptw 0$ (once $x > n$),
+        \item $f_n \convae 0$, and
+        \item $f_n \convunif 0$.
+      \end{itemize}
+      However, $\forall n$,
+      \begin{equation*}
+        \int_{X} \abs{f_n - 0} \dif{\mu} = \frac{1}{n} \cdot n = 1 \to 1.
+      \end{equation*}
+      Thus $f_n \not\convlone 0$.
+
+    \item Let $f_n = \chi_{[n, n + 1)}$ for each $n$,
+      and $f \equiv 0$.
+      \label{item:eg2_mode_of_conv}
+      \marginnote{Summary for modes of convergences in
+      \hyperref[item:eg2_mode_of_conv]{example 2}.
+
+      \begin{center}
+      \begin{tabular}{c c}
+        $f_n \convptw 0$ & $f_n \convae 0$ \\
+        $f_n \not\convunif 0$ & $f_n \not\convlone 0$
+      \end{tabular}
+      \end{center}
+      }
+      We see that
+      \begin{itemize}
+        \item $f_n \convptw 0$ (same reason as before), and
+        \item $f_n \convae 0$.
+      \end{itemize}
+      However, $f_n \not\convunif 0$, since $\forall \epsilon > 0$
+      $\forall N$, $\exists x$ and $\exists m > N$ such that $f_m(x) \neq 0$.
+
+      Also, for each $n$,
+      \begin{equation*}
+        \int \abs{f_n - 0} \dif{\mu} = 1 \to 1 \neq 0.
+      \end{equation*}
+      Thus $f_n \not\convlone 0$.
+
+    \item Let $f_n = n \chi_{\left[ 0, \frac{1}{n} \right]}$ for each $n$,
+      and $f \equiv 0$.
+      \label{item:eg3_mode_of_conv}
+      \marginnote{Summary for modes of convergences in
+      \hyperref[item:eg3_mode_of_conv]{example 3}.
+
+      \begin{center}
+      \begin{tabular}{c c}
+        $f_n \not\convptw 0$ & $f_n \convae 0$ \\
+        $f_n \not\convunif 0$ & $f_n \not\convlone 0$
+      \end{tabular}
+      \end{center}
+      }
+
+      Then $f_n \not\convptw 0$ since for $x = 0$,
+      $\forall \epsilon > 0$, for any $N \in \mathbb{N}$, there
+      always exists $n_0 > N$ such that $f_{n_0}(x) = n_0 \neq 0$.
+
+      Now notice that the above is only the case for $x = 0$,
+      and singletons have measure zero under the Lebesgue measure.
+      Thus $f_n \convae 0$.
+
+      For uniform convergence, by the reason stated for when
+      $f_n \not\convptw 0$, we know that there is no `uniform'
+      $\epsilon > 0$ that will give us what is required
+      for this mode of convergence.
+      Thus $f_n \not\convunif 0$.
+
+      For $\mathcal{L}^1$-convergence, since for $n \geq 1$,
+      \begin{equation*}
+        \int_{[0, 1]} f_n \dif{\mu} = n \cdot \frac{1}{n} = 1,
+      \end{equation*}
+      we have that
+      \begin{equation*}
+        \int_{[0, 1]} \abs{f_n - 0} \dif{\mu} = 1 \to 1 \neq 0.
+      \end{equation*}
+      Thus $f_n \not \convlone 0$.
+
+    \item Consider the following sequence of functions of which
+      we have no nice way to properly express recursively so.
+      \label{item:eg4_mode_of_conv}
+      \marginnote{Summary for modes of convergences in
+      \hyperref[item:eg4_mode_of_conv]{example 4}.
+
+      \begin{center}
+      \begin{tabular}{c c}
+        $f_n \not\convptw 0$ & $f_n \not\convae 0$ \\
+        $f_n \not\convunif 0$ & $f_n \convlone 0$
+      \end{tabular}
+      \end{center}
+      }
+      \begin{gather*}
+        f_1 = \chi_{[0, 1]}, \\
+        f_2 = \chi_{\left[ 0, \frac{1}{2} \right]},\enspace
+        f_3 = \chi_{\left[ \frac{1}{2}, 1 \right]}, \\
+        f_4 = \chi_{\left[ 0, \frac{1}{4} \right]},\enspace
+        f_5 = \chi_{\left[ \frac{1}{4}, \frac{1}{2} \right]},\enspace
+        f_6 = \chi_{\left[ \frac{1}{2}, \frac{3}{4} \right]},\enspace
+        f_7 = \chi_{\left[ \frac{3}{4}, 1 \right]}, \\
+        \vdots
+      \end{gather*}
+
+      (Pointwise convergence)
+      We observe that on any $x \neq \frac{1}{2^m}$ for any $m \geq 1$,
+      $f_n(x) \to 0$. However, on $x = \frac{1}{2^m}$, for any $m \geq 1$,
+      $f_n(x) = 1$. Thus, it is clear that $f_n \not\convptw 0$.
+
+      (Pointwise convergence almost everywhere)
+      \sidenote{Requires clarification.
+
+      Current belief is that this should hold, by the reason stated
+      in (Pointwise convergence), and that $\mu(\mathbb{Q}) = 0$.
+      However, lecture recorded $f_n \not\convae 0$.}
+
+      (Uniform convergence)
+      We know that there is no $\epsilon > 0$ such that
+      $f_n(x) = 0$ for every $x$ by the reason
+      stated in (Pointwise convergence).
+
+      ($\mathcal{L}^1$-convergence)
+      We see that indeed
+      \begin{equation*}
+        \int_{[0, 1]} f_n \dif{\mu} \to 0,
+      \end{equation*}
+      since the integral of the functions have the form of $\frac{1}{n}$,
+      although we see that the occurrence for each $\frac{1}{n}$ occurs longer
+      and longer.
+
+      Thus $f_n \convlone 0$.
+  \end{enumerate}
+\end{eg}
+
+\begin{remark}
+  We see that uniform convergence has no logical relationship with
+  $\mathcal{L}^1$-convergence.
+\end{remark}
+
+We introduce a new mode of convergence.
+
+\begin{defn}[Convergence in Measure]\index{Convergence in Measure}\label{defn:convergence_in_measure}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space, and
+  $f_n, f : X \to \mathbb{R}_e$ be measurable functions.
+  We say that $\{ f_n \}$ \hlnoteb{converges in measure} to $f$,
+  of which we denote by
+  \begin{equation*}
+    f_n \convmeas f,
+  \end{equation*}
+  provided that $\forall \epsilon > 0$, $\exists N \in \mathbb{N}$
+  such that $\forall n > N$
+  \begin{equation*}
+    \mu(\{ x : \abs{f_n(x) - f(x)} \geq \epsilon \}) < \epsilon,
+  \end{equation*}
+  or equivalently
+  \begin{equation*}
+    \mu(\{ x : \abs{f_n(x) - f(x)} \geq \epsilon \}) \to 0.
+  \end{equation*}
+\end{defn}
+
+% section modes_of_convergences (end)
+
+% chapter lecture_16_oct_9th_2019 (end)
 
 \appendix
 
