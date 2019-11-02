@@ -33,32 +33,6 @@
 \theoremindent10pt
 \newtheorem*{homework}{\faCogs\ Homework}
 
-% disjoint union
-\makeatletter
-\providerobustcmd*{\bigcupdot}{%
-   \mathop{%
-     \mathpalette\bigop@dot\bigcup
-   }%
-}
-\providerobustcmd*{\cupdot}{%
-  \mathop{%
-    \mathpalette\bigop@dot\cup
-  }%
-}
-\newrobustcmd*{\bigop@dot}[2]{%
-   \setbox0=\hbox{$\m@th#1#2$}%
-   \vbox{%
-     \lineskiplimit=\maxdimen
-     \lineskip=-0.7\dimexpr\ht0+\dp0\relax
-     \ialign{%
-       \hfil##\hfil\cr
-       $\m@th\cdot$\cr
-       \box0\cr
-     }%
-   }%
-}
-\makeatother
-
 \begin{document}
 \input{latex-classnotes-header.tex}
 \clearpage
@@ -5191,9 +5165,184 @@ We introduce a new mode of convergence.
   \end{equation*}
 \end{defn}
 
+\begin{ex}
+  We look back at \hyperref[item:eg1_mode_of_conv]{the last example}.
+  Show that the following are the case with respect to each of the examples.
+  \begin{enumerate}
+    \item $f_n \convmeas 0$
+    \item $f_n \not\convmeas 0$
+    \item $f_n \convmeas 0$
+    \item $f_n \convmeas 0$
+  \end{enumerate}
+\end{ex}
+
 % section modes_of_convergences (end)
 
 % chapter lecture_16_oct_9th_2019 (end)
+
+\chapter{Lecture 17 Oct 11th 2019}%
+\label{chp:lecture_17_oct_11th_2019}
+% chapter lecture_17_oct_11th_2019
+
+\section{Modes of Convergences (Continued)}%
+\label{sec:modes_of_convergences_continued}
+% section modes_of_convergences_continued
+
+\begin{defn}[Cauchy in Measure]\index{Cauchy in measure}\label{defn:cauchy_in_measure}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space, and
+  $f_n, f : X \to \mathbb{R}_e$ be measurable functions.
+  We say that $\{ f_n \}$ is \hlnoteb{Cauchy in measure}
+  if $\forall \epsilon_1, \epsilon_2 > 0$,
+  $\exists N \in \mathbb{N}$ such that $\forall n, m > N$,
+  we have
+  \begin{equation*}
+    \mu(\{ x : \abs{f_n(x) - f_m(x)} \geq \epsilon_1 \}) < \epsilon_2.
+  \end{equation*}
+\end{defn}
+
+\begin{propo}[$\mathcal{L}^1$-convergence implies Convergence in Measure]\label{propo:_mathcal_l_1_convergence_implies_convergence_in_measure}
+  Let $(X ,\mathfrak{M}, \mu)$ be a measure space, and
+  $f_n : X \to \mathbb{R}_e$ a sequence of measurable functions.
+  If $f_n \convlone f$ for some function $f$, then $f_n \to f$ in measure.
+\end{propo}
+
+\begin{proof}
+  For any $\epsilon > 0$ and any $n \geq 1$, let
+  \begin{equation*}
+    E_{n, \epsilon} \coloneqq \{ x : \abs{f_n(x) - f(x)} \geq \epsilon \}.
+  \end{equation*}
+  Then, by assumption, we have that
+  \begin{equation*}
+    \epsilon \mu(E_{n, \epsilon})
+    \leq \int_{E_{n, \epsilon}} \abs{f_n - f} \dif{\mu}
+    \leq \int_{X} \abs{f_n - f} \dif{\mu} \to 0.
+  \end{equation*}
+  It follows that indeed
+  \begin{equation*}
+    \mu(E_{n, \epsilon}) \to 0 \text{ as } n \to \infty.
+  \end{equation*}
+\end{proof}
+
+\begin{thm}[Various results related to convergence in measure]\label{thm:various_results_related_to_convergence_in_measure}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space,
+  $\{ f_n : X \to \mathbb{R}_e \}_n$ a sequence of measurable functions,
+  and $f, g$ be measurable functions.
+  \begin{enumerate}
+    \item $f_n \convmeas f \land f_n \convmeas g \implies f = g$ a.e.
+    \item $\{ f_n \}_n$ is Cauchy in measure
+      $\implies \exists f : X \to \mathbb{R}_e$ measurable such that
+      $f_n \convmeas f$.
+    \item $f_n \convmeas f$ in measure
+      $\implies \exists \{ f_{n_k} \}_{k} \subseteq \{ f_n \}_n$ such that
+      $f_{n_k} \convae f$.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Suppose $f_n \convmeas f$ and $f_n \convmeas g$.
+      Let $\epsilon > 0$.
+      Note that
+      \begin{equation*}
+        \abs{f(x) - g(x)}
+        \leq \abs{f(x) - f_n(x)} + \abs{f_n(x) - g(x)}.
+      \end{equation*}
+      Thus
+      \begin{align*}
+        &\{ x : \abs{f(x) - g(x)} \geq \epsilon \} \\
+        &\subseteq \left\{ x : \abs{f(x) - f_n(x)} \geq \frac{\epsilon}{2} \right\}
+          \cup \left\{ x : \abs{f_n(x) - g(x)} \geq \frac{\epsilon}{2} \right\}.
+      \end{align*}
+      By monotonicity,
+      \begin{align*}
+        &\mu(\{ x : \abs{f(x) - g(x)} \geq \epsilon \}) \\
+        &\leq \mu\left( 
+          \left\{ x : \abs{f(x) - f_n(x)} \geq \frac{\epsilon}{2} \right\}
+        \right)
+        + \mu\left( 
+          \left\{ x : \abs{f_n(x) - g(x)} \geq \frac{\epsilon}{2} \right\}
+        \right).
+      \end{align*}
+      By our assumption, the terms on the RHS converges to $0$
+      as $n \to \infty$.
+      It follows that
+      \begin{equation*}
+        \mu(\{ x : \abs{f(x) - g(x)} \geq \epsilon \}) = 0
+      \end{equation*}
+      for arbitrary $\epsilon > 0$.
+
+      Now notice that
+      \begin{equation*}
+        \{ x : f(x) \neq g(x) \}
+        \subseteq \bigcup_n \left\{ x : \abs{f(x) - g(x)} > \frac{1}{n} \right\}.
+      \end{equation*}
+      It follows that
+      \begin{equation*}
+        \mu(\{ x : f(x) \neq g(x) \})
+        \leq \sum_n \mu \left( 
+          \left\{ x : \abs{f(x) - g(x)} > \frac{1}{n} \right\}
+        \right) = 0.
+      \end{equation*}
+      Therefore $\mu(\{ x : f(x) \neq g(x) \}) = 0$.
+      Thus $f = g$ a.e.
+
+    \item \hlwarn{Something's wrong with the prove given in class. Will confirm.}
+  \end{enumerate}
+\end{proof}
+
+\begin{homework}[Homework 14]\label{homework:14}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space,
+  $f_n, f : X \to \mathbb{R}_e$ for $n \geq 1$,
+  with $f_n \to f$ a.e.
+  Suppose $\mu(X) < \infty$.
+  Furthermore, suppose that there exists an $M$ such that $\forall n \geq 1$,
+  \begin{equation*}
+    \mu(\{ x : \abs{f_n(x)} \geq M \}) = 0.
+  \end{equation*}
+  \sidenote{We may say that each $f_n$ is bounded by $M$ a.e.}
+  Prove that
+  \begin{equation*}
+    \int_X f \dif{\mu} = \lim_n \int_X f_n \dif{\mu}.
+  \end{equation*}
+\end{homework}
+
+\begin{homework}[Homework 15]\label{homework:15}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space with $\mu(X) < \infty$.
+  Let us say that $f \sim g$ when $f = g$ a.e.
+  Let
+  \begin{equation*}
+    [f] \coloneqq \{ g : g \sim f \}.
+  \end{equation*}
+  Let
+  \begin{equation*}
+    Y \coloneqq \{ [f] : f : X \to \mathbb{R} \text{ is measurable } \}.
+  \end{equation*}
+  Prove that
+  \begin{enumerate}
+    \item The function
+      \begin{equation*}
+        \rho([f], [g]) = \int_X \frac{\abs{f - g}}{1 + \abs{f - g}} \dif{\mu}
+      \end{equation*}
+      is a metric on $Y$.
+
+    \item $\rho([f_n], [f]) \to 0$ if and only if
+      $f_n \to f$ in measure.
+  \end{enumerate}
+\end{homework}
+
+\begin{homework}[Homework 16 (Generalized Fatou's Lemma)]\label{homework:16}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space,
+  $f_n, f : X \to \mathbb{R}_e$ for $n \geq 1$,
+  with $f_n \geq 0$.
+  If $f_n \to f$ in measure, then
+  \begin{equation*}
+    \int_X f \dif{\mu} \leq \liminf_n \int_X f_n \dif{\mu}.
+  \end{equation*}
+\end{homework}
+
+% section modes_of_convergences_continued (end)
+
+% chapter lecture_17_oct_11th_2019 (end)
 
 \appendix
 

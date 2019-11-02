@@ -47,3 +47,29 @@
   \underset{\makebox[0pt]{\begin{tabular}{@{}c@{}}\downarrow\\[0pt]\ensuremath{#2}\end{tabular}}}{\ensuremath{#1}}
 }
 
+% disjoint union
+\makeatletter
+\providerobustcmd*{\bigcupdot}{%
+   \mathop{%
+     \mathpalette\bigop@dot\bigcup
+   }%
+}
+\providerobustcmd*{\cupdot}{%
+  \mathop{%
+    \mathpalette\bigop@dot\cup
+  }%
+}
+\newrobustcmd*{\bigop@dot}[2]{%
+   \setbox0=\hbox{$\m@th#1#2$}%
+   \vbox{%
+     \lineskiplimit=\maxdimen
+     \lineskip=-0.7\dimexpr\ht0+\dp0\relax
+     \ialign{%
+       \hfil##\hfil\cr
+       $\m@th\cdot$\cr
+       \box0\cr
+     }%
+   }%
+}
+\makeatother
+
