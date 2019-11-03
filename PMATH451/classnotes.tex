@@ -5344,6 +5344,276 @@ We introduce a new mode of convergence.
 
 % chapter lecture_17_oct_11th_2019 (end)
 
+\chapter{Lecture 18 Oct 23rd 2019}%
+\label{chp:lecture_18_oct_23rd_2019}
+% chapter lecture_18_oct_23rd_2019
+
+\section{Modes of Convergences (Continued 2)}%
+\label{sec:modes_of_convergences_continued_2}
+% section modes_of_convergences_continued_2
+
+\begin{thm}[Egoroff's Theorem]\index{Egoroff's Theorem}\label{thm:egoroff_s_theorem}
+  Let $(X ,\mathfrak{M}, \mu)$ be a measure space, and $\mu(X) < \infty$.
+  Let $f_n, f : X \to \mathbb{R}$ be measurable functions.
+  Suppose $f_n \convae f$. Then given $\epsilon > 0$,
+  $\exists E \in \mathfrak{M}$ such that $\mu(E) < \epsilon$
+  with $f_n \convunif f$ on $E^C$.
+\end{thm}
+
+\begin{proof}
+  Suppose $f_n \convae f$. Let
+  \begin{equation*}
+    N \coloneqq \left\{ x : f_n(x) \not\convptw f(x) \right\}
+  \end{equation*}
+  be the no-good set. Then $X = N \cup X_1$, where
+  \begin{equation*}
+    X_1 \coloneqq \left\{ x : f_n(x) \convptw f(x) \right\}.
+  \end{equation*}
+  Let
+  \begin{equation*}
+    E_{n, k} \coloneqq \bigcup_{m=n}^{\infty} \left\{ 
+      x \in X_1 : \abs{f_m(x) - f(x)} \geq \frac{1}{k}
+    \right\}.
+  \end{equation*}
+  Notice that $E_{n, k} \supseteq E_{n + 1, k}$ and
+  \begin{equation*}
+    \bigcap_{n=1}^{\infty} E_{n, k} = \emptyset.
+  \end{equation*}
+  By continuity from above,
+  \begin{equation*}
+    \lim_n \mu(E_{n, k}) = \mu(\emptyset) = 0.
+  \end{equation*}
+  Thus we may pick a subsequence $n_l$ such that
+  \begin{equation*}
+    \mu(E_{n_l}, l) < \frac{\epsilon}{2^l}.
+  \end{equation*}
+  Let
+  \begin{equation*}
+    E = \bigcup_{l} E_{n_l, l}.
+  \end{equation*}
+  Then by monotonicity and subadditivity of measures,
+  \begin{equation*}
+    \mu(E) \leq \sum_{l} \mu(E_{n_l, l}) < \epsilon.
+  \end{equation*}
+
+  Let $\epsilon > 0$. Choose $L > 0$ such that $\frac{1}{L} < \epsilon$.
+  Now for any $x \in E^C$, we have
+  \begin{equation*}
+    x \in \bigcap_{l} E_{n_l, l}^C.
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    E_{n_l, l}^C = \bigcap_{m=n_l}^{\infty} \left\{
+      x : \abs{f_m(x) - f(x)} \leq \frac{1}{l}
+    \right\}.
+  \end{equation*}
+  Therefore, for any $l > L$, for any $m \geq n_l$, we have
+  \begin{equation*}
+    \abs{f_m(x) - f(x)} \leq \frac{1}{l} < \frac{1}{L} < \epsilon.
+  \end{equation*}
+  Therefore, indeed $f_n \convunif f$ on $E^C$.
+\end{proof}
+
+% section modes_of_convergences_continued_2 (end)
+
+\section{Product Measures}%
+\label{sec:product_measures}
+% section product_measures
+
+\begin{note}[Motivation for looking at Product Measures of $\sigma$-finite Measures]
+  Given measure spaces $(X, \mathfrak{M}, \mu)$ and $(Y, \mathfrak{N}, \nu)$,
+  \begin{enumerate}
+    \item we want a measure space of the form $(X \times Y, \mathfrak{M} \otimes
+      \mathfrak{N}, \lambda)$ where
+      \begin{equation*}
+        \lambda(A \times B) = \mu(A) \cdot \nu(B),
+      \end{equation*}
+      and
+    \item to have the measure play nice with integration, in that
+      given a $\mathfrak{M} \otimmes \mathfrak{N}$-measurable function
+      $f : X \times Y \to [0, \infty]$, we want
+      \begin{align*}
+        \int_{X \times Y} f \dif{\lambda}
+        &= \int_{Y} \left[ \int_{X} f \dif{\mu} \right] \dif{\nu} \\
+        &= \int_{X} \left[ \int_{Y} f \dif{\nu} \right] \dif{\mu}.
+      \end{align*}
+  \end{enumerate}
+  It turns out that we can always have $(1)$ but not $(2)$.
+  We will not go into the details of showing for $(1)$ in full detail.
+  However, we can have both when $\mu$ and $\nu$ are
+  \hyperref[defn:finitivity_sigma_finitivity_and_semi_finitivity_of_a_measure]{$\sigma$-finite}.
+\end{note}
+
+\begin{note}[A sketch of how we can always construct $\lambda$]
+  Given any $E \subseteq X \times Y$, we define the function
+  \begin{equation*}
+    \lambda^*(E) \coloneqq \inf \left\{ 
+      \sum_n \mu(A_n) \cdot \nu(B_n)
+        : E \subseteq \bigcup_n A_n \times B_n,\,
+          A_n \in \mathfrak{M},\, B_n \in \mathfrak{N}
+    \right\}.
+  \end{equation*}
+  \begin{ex}
+    Prove that $\lambda^*$ is an outer measure.
+  \end{ex}
+  By \nameref{thm:caratheodory_s_theorem}, the set
+  \begin{equation*}
+    \mathcal{L} \coloneqq \{ A \times B \subseteq X \times Y
+        : A \times B \text{ is } \lambda^*\text{-measurable } \}
+  \end{equation*}
+  is a $\sigma$-algebra, and we can thus define
+  $\lambda$ as a complete measure on $\mathcal{L}$.
+  It then remains to show that
+  $\mathfrak{M} \otimes \mathfrak{N} \subseteq \mathcal{L}$.
+\end{note}
+
+\begin{eg}[How $(2)$ fails when one of the measures is not $\sigma$-finite]
+  Consider $X = Y = [0, 1]$,
+  $\mathfrak{M} = \mathfrak{N} = \mathfrak{B}(X) = \mathfrak{B}(Y)$,
+  and $\mathfrak{M}$ is the Lebesgue measure
+  while $\nu$ is the counting measure.
+  We know that $\nu$ is not $\sigma$-finite.
+
+  Consider
+  \begin{equation*}
+    D = \{ (t, t) : t \in [0, 1] \} \subseteq [0, 1] \times [0, 1],
+  \end{equation*}
+  which is Borel and hence measurable.
+  Then we can define
+  \begin{equation*}
+    \lambda(D) = \lambda^*(D) \coloneqq \inf \left\{ 
+      \sum_{n=1}^{\infty} \mu(A_n) \cdot \nu(B_n)
+      : D \subseteq \bigcup_{n} A_n \times B_n
+    \right\}.
+  \end{equation*}
+  Note that the components of each element in $D$ iterates through
+  every real number in $[0, 1]$.
+  Furthermore, $[0, 1] \subseteq \bigcup_{n} B_n$,
+  and so we have $\nu(B_n) = \infty$.
+  We can then show that $\lambda(D) = \infty$.
+  Then
+  \begin{equation*}
+    \int_{[0, 1] \times [0, 1]} \chi_D \dif{\lambda} = \lambda(D) = \infty.
+  \end{equation*}
+  However, we see that
+  \begin{equation*}
+    \int_{[0, 1]} \int_{[0, 1]} \chi_D \dif{\mu} \dif{\nu}
+    = \int_{[0, 1]} 0 \dif{\nu} = 0,
+  \end{equation*}
+  since when we fix one value of $y$, $\chi_D(x, y) = 1$ only happens
+  at one point that is $x = y$.
+  Furthermore, by a similar reasoning, when we fix $x$, $\chi_D(x, y) = 1$
+  iff $x = y$ and so
+  \begin{equation*}
+    \int_{[0, 1]} \chi_D \dif{\nu} = \nu(\{x\}) = 1,
+  \end{equation*}
+  when then we see
+  \begin{equation*}
+    \int_{[0, 1]} \int_{[0, 1]} \chi_D \dif{\nu} \dif{\mu}
+    = \int_{[0, 1]} 1 \dif{\nu} = 1,
+  \end{equation*}
+\end{eg}
+
+\begin{propo}[Component-wise Measurability of Functions and Sets]\label{propo:component_wise_measurability_of_functions_and_sets}
+  Let $(X, \mathfrak{M})$ and $(Y, \mathfrak{N})$ be measurable sets.
+  \begin{enumerate}
+    \item If $E \in \mathfrak{M} \otimes \mathfrak{N}$, then
+      \begin{gather*}
+        E_x = \{ y \in Y : (x, y) \in E \} \in \mathfrak{N}, \\
+        E^y = \{ x \in X : (x, y) \in E \} \in \mathfrak{M}.
+      \end{gather*}
+    \item If $f : X \times Y \to \mathbb{R}_e$ is
+      $\mathfrak{M} \otimes \mathfrak{N}$-measurable, then
+      \begin{gather*}
+        f_x(y) = f(x, y) : Y \to \mathbb{R}_e
+          \text{ is } \mathfrak{N}\text{-measurable} \\
+        f^y(x) = f(x, y) : X \to \mathbb{R}_e
+          \text{ is } \mathfrak{M}\text{-measurable} \\
+      \end{gather*}
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item This was \nameref{homework:9}.
+    \item Fix $a$. Let $E = (a, \infty]$.
+      Since $f$ is $\mathfrak{M} \otimes \mathfrak{N}$-measurable,
+      we have that $f^{-1}(E) \in \mathfrak{M} \otimes \mathfrak{N}$.
+      It follows from part (1) that if we fix $x$,
+      \begin{equation*}
+        f_x^{-1}(E) = \{ y : f(x, y) \in E \} = E_x \in \mathfrak{N}.
+      \end{equation*}
+      The result holds similarly for $f^y(E) \in \mathfrak{M}$.
+  \end{enumerate}
+\end{proof}
+
+\begin{defn}[Monotone Classes]\index{Monotone Classes}\label{defn:monotone_classes}
+  Let $X$ be a non-empty set.
+  $\xi \subseteq \mathcal{P}(X)$ is called a \hlnoteb{monotone class}
+  if
+  \begin{enumerate}
+    \item $E_j \in \xi$ with $E_1 \subseteq E_2 \subseteq \hdots
+      \implies \bigcup_{n} E_n \in \xi$, and
+    \item $F_n \in \xi$ with $F_1 \supseteq F_2 \supseteq \hdots
+      \implies \bigcap_{n} F_n \in \xi$.
+  \end{enumerate}
+\end{defn}
+
+\begin{note}
+  \begin{enumerate}
+    \item $\mathcal{P}(X)$ is a monotone class.
+    \item If $\xi_\alpha \subseteq \mathcal{P}(X)$ are monotone classes,
+      then
+      \begin{equation*}
+        \bigcap_{\alpha} \xi_\alpha = \{ 
+          E \subseteq X : E \in \xi_\alpha,\, \forall \alpha
+        \}
+      \end{equation*}
+      is also a monotone class.
+    \item Given any collection of subsets of $X$,
+      there exists a smallest monotone class that contains them,
+      and we call this the monotone class generated by those subsets.
+  \end{enumerate}
+\end{note}
+
+\begin{thm}[Monotone Class Theorem]\index{Monotone Class Theorem}\label{thm:monotone_class_theorem}
+  Let $X$ a non-empty set,
+  and $A \subseteq \mathcal{P}(X)$ an algebra of sets.
+  Then the $\sigma$-algebra generated by $A$ is equal
+  to the monotone class generated by $A$.
+\end{thm}
+
+We require the following lemma.
+
+\begin{lemma}[Lemma for Monotone Class Theorem]\label{lemma:lemma_for_monotone_class_theorem}
+  Suppose $\mathcal{A}$ is an algebra of sets on $X$.
+  Then $\mathcal{A}$ is a $\sigma$-algebra iff
+  $\forall \{ E_j \} \subseteq \mathcal{A}$
+  with $E_1 \subseteq E_2 \subseteq \hdots$,
+  then $\bigcup_{j} E_j \in \mathcal{A}$.
+\end{lemma}
+
+\begin{proof}
+  \hlbnoted{$(\implies)$} Follows simply by definition of a $\sigma$-algebra.
+
+  \noindent
+  \hlbnoted{$(\impliedby)$} Let $\{ A_i \}_i \subseteq \mathcal{A}$.
+  Consider
+  \begin{equation*}
+    E_1 = A_1,\, E_2 = A_1 \cup A_2,\, \hdots.
+  \end{equation*}
+  Then by assumption,
+  \begin{equation*}
+    \bigcup_{i} A_i = \bigcup_{i} E_i \in \mathcal{A}
+  \end{equation*}
+  since $E_1 \subseteq E_2 \subseteq \hdots$.
+  Thus $\mathcal{A}$ is indeed a $\sigma$-algebra.
+\end{proof}
+
+% section product_measures (end)
+
+% chapter lecture_18_oct_23rd_2019 (end)
+
 \appendix
 
 \chapter{Deep Dives into Proofs}%
