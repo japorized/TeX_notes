@@ -20,7 +20,9 @@
     - title: classnotes.tex
       src: /PMATH451/classnotes.tex
   keywords: [
-    
+    'PMATH451', 'Fall 2019', 'Measure', 'Integration', 'PMATH',
+    'Lebesgue', 'Lebesgue-Stieltjes', 'Hahn Decomposition',
+    'Jordan Decomposition', 'Signed Measure', 'Radon-Nikodym'
   ]
 - title: PMATH450 S19 - Lebesgue Integration and Fourier Analysis
   pdf:

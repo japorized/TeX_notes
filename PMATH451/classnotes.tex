@@ -4026,7 +4026,7 @@ which have this desirable property.
     \mu_F((E \setminus A) \cup (A \setminus E)) < \epsilon.
   \end{equation*}
   (Note: $E \triangle A \coloneqq (E \setminus A) \cup (A \setminus E)$
-  is known as the symmetric difference of $E$ and $A$.)
+  is known as the \hldefn{symmetric difference} of $E$ and $A$.)
 \end{homework}
 
 \section{Integration (Continued)}%
@@ -6278,15 +6278,205 @@ This motivates us to make the following definition.
   and $\nu$ a signed measure.
   We say that $E \in \mathfrak{M}$ is \hlnoteb{$\nu$-positive}
   if $\forall F \in \mathfrak{M}$ such that $F \subseteq E$,
-  we have $\nu(F) > 0$.
+  we have $\nu(F) \geq 0$.
   We say that $E \in \mathfrak{M}$ is \hlnoteb{$\nu$-negative}
   if $\forall F \in \mathfrak{M}$ such that $F \subseteq E$,
-  we have $\nu(F) < 0$.
+  we have $\nu(F) \leq 0$.
 \end{defn}
+
+\begin{remark}
+  It is important to note that the notion of $\nu$-positivity
+  and $\nu$-negativity is not mutually exclusive, i.e.
+  saying that a set $A$ is ``not $\nu$-positive''
+  does not mean that $A$ is $\nu$-negative, and vice versa.
+\end{remark}
 
 % section signed_measures (end)
 
 % chapter lecture_21_oct_30th_2019 (end)
+
+\chapter{Lecture 22 Nov 1st 2019}%
+\label{chp:lecture_22_nov_1st_2019}
+% chapter lecture_22_nov_1st_2019
+
+\section{Signed Measures (Continued)}%
+\label{sec:signed_measures_continued}
+% section signed_measures_continued
+
+\begin{thm}[Hahn Decomposition Theorem]\index{Hahn Decomposition Theorem}\label{thm:hahn_decomposition_theorem}
+  Let $\nu$ be a signed measure on a measurable space $(X, \mathfrak{M})$.
+  Then $\exists P \in \mathfrak{M}$ that is $\nu$-positive
+  and $N \in \mathfrak{M}$ that is $\nu$-negative such that
+  $X = P \cupdot N$.
+  Furthermore, if $X = P' \cupdot N'$ for some other
+  $P'$ that is $\nu$-positive and $N'$ that is $\nu$-negative,
+  then $P \triangle P'$ and $N \triangle N'$ are $\nu$-null.
+\end{thm}
+
+\marginnote{
+\begin{mnote}
+  Recall that $P \triangle P'$ is called the
+  \hyperref[homework:13]{symmetric difference} of $P$ and $P'$,
+  and it is defined as
+  \begin{equation*}
+    P \triangle P' = (P \setminus P') \cup (P' \setminus P).
+  \end{equation*}
+\end{mnote}
+}
+
+\begin{homework}[Homework 21]\label{homework:21}
+  Let $\nu$ be a signed measure. Let
+  \begin{equation*}
+    E_1 \subseteq E_2 \subseteq \hdots,\, \text{ and }
+    E = \bigcup_{n} E_n.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \nu(E) = \lim_{n} \nu(E_n).
+  \end{equation*}
+  If $F_1 \supseteq F_2 \supseteq \hdots$ and $F = \bigcap_{n} F_n$,
+  and $\nu(F_1) \neq \pm \infty$, then
+  \begin{equation*}
+    \nu(F) = \lim_{n} \nu(F_n).
+  \end{equation*}
+\end{homework}
+
+\begin{lemma}[Lemma for Hahn Decomposition]\label{lemma:lemma_for_hahn_decomposition}
+  Suppose $\nu$ is a signed measure. Then
+  \begin{enumerate}
+    \item $P$ is $\nu$-$(*)$ and $Q \subseteq P \implies Q$ is $\nu$-$(*)$; and
+    \item $P_n$ are $\nu$-$(*)$, then $\bigcup_{n} P_n$ is $\nu$-$(*)$,
+  \end{enumerate}
+  where $\nu$-$(*)$ stands for $\nu$-positive, $\nu$-negative, and $\nu$-null.
+\end{lemma}
+
+\begin{proof}[\cref{lemma:lemma_for_hahn_decomposition} for $\nu$-positive case]
+  \begin{enumerate}
+    \item For any $R \in \mathfrak{M}$ such that $R \subseteq Q \subseteq P$,
+      it follows that $\mu(R) \geq 0$ since $P$ is $\nu$-positive.
+      Thus $Q$ is $\nu$-positive.
+    \item Let $A \in \mathfrak{M}$ such that $A \subseteq \bigcup_{n} P_n$.
+      Notice that $A = \bigcup_{n} (P_n \cap A)$.
+      In particular, $P_n \cap A \subseteq P_n$.
+      Since $P_n$ is $\nu$-positive, we know $\nu(P_n \cap A) \geq 0$.
+      Let
+      \begin{equation*}
+        A_1 = A \cap P_1,\, A_2 = (A \cap (P_1 \cup P_2)) \setminus A_1,\,
+        \ldots.
+      \end{equation*}
+      In general
+      \begin{equation*}
+        A_n
+        = \left[ A \cap \left( \bigcup_{i=1}^{n} P_i \right) \right]
+          \mathbin{\Big\backslash} A_{n-1}.
+      \end{equation*}
+      It is then clear that $A = \bigcupdot_n A_n$.
+      Thus $\nu(A) = \sum_{n=1}^{\infty} A_n$.
+      Furthermore, since each $A_n \subseteq P_n$,
+      it follows that $\nu(A_n) \geq 0$,
+      and so $\nu(A) \geq 0$.
+  \end{enumerate}
+\end{proof}
+
+\begin{proof}[Proof for \nameref{thm:hahn_decomposition_theorem}]
+  Let $E \in \mathfrak{M}$ such that $\nu(E) \neq \infty$. Let
+  \begin{equation*}
+    M \coloneqq \sup \{ \nu(E) : E \text{ is } \nu\text{-positive } \}.
+  \end{equation*}
+  Note that set $\{ \nu(E) : E \text{ is } \nu\text{-positive } \}$ is non-empty
+  since $\emptyset$ is $\nu$-positive, and so $M$ is a valid value.
+  We may then let $P_n \in \mathfrak{M}$ such that
+  \begin{equation*}
+    \lim_{n} \nu(P_n) = M.
+  \end{equation*}
+  Let $P = \bigcup_{n} P_n$.
+  By \cref{lemma:lemma_for_hahn_decomposition},
+  we know that $P$ is $\nu$-positive.
+  Furthermore, $\nu(P) \leq M$.
+
+  Now notice that $P = P_n \cupdot (P \setminus P_n)$,
+  and $P \setminus P_n \subseteq P$ and so by
+  \cref{lemma:lemma_for_hahn_decomposition}
+  we have $\nu(P \setminus P_n) \geq 0$.
+  It follows that
+  \begin{equation*}
+    \nu(P) = \nu(P_n) + \nu(P \setminus P_n) \geq \nu(P_n)
+  \end{equation*}
+  for each $n$. Therefore
+  \begin{equation*}
+    M = \sup \nu(P_n) = \lim_{n} \nu(P_n) \leq \nu(P).
+  \end{equation*}
+  Hence $\nu(P) = M$.
+
+  Let $N = X \setminus P$ so that $X = P \cupdot N$.
+  WTS $N$ is $\nu$-negative.
+  Firstly, consider $A \subseteq N$ and $A$ is $\nu$-positive.
+  In particular, we must then have that $A \cupdot P$ is $\nu$-positive.
+  This means that
+  \begin{equation}\label{eq:hahn_proof_eq1}
+    M \geq \nu(A \cupdot P) = \nu(A) + \nu(P) = \nu(A) + M,
+  \end{equation}
+  which means that $\nu(A) = 0$.
+  Furthermore, $\forall B \in \mathfrak{M}$ such that $B \subseteq A$,
+  by the same reasoning as in \cref{eq:hahn_proof_eq1},
+  we have that $\nu(B) = 0$.
+  It follows that $\forall A \subseteq N$ that is $\nu$-positive,
+  $A$ is $\nu$-null.
+
+  Suppose to the contrary that $N$ is not $\nu$-positive.
+  This means that $\forall A \subseteq N$, $\nu(A) > 0$.
+  However, we showed that $\nu(A) = 0$. So $A$ cannot be $\nu$-positive.
+  This implies that $\exists B_0 \in \mathfrak{M}$ with $B_0 \subseteq A$,
+  we have $\nu(B_0) > 0$.
+
+  Let $C = A \setminus B_0$, so that $A = B_0 \cupdot C$.
+  Then
+  \begin{equation*}
+    0 < \nu(A) = \nu(B_0) + \nu(C),
+  \end{equation*}
+  and in particular
+  \begin{equation*}
+    \nu(A) < \nu(C).
+  \end{equation*}
+
+  Inductively, let us perform the following.
+  Due to our above argument about $B_0$, we may let
+  \begin{equation*}
+    n_1 = \min \left\{ n : B \subseteq N,\, \nu(B) > \frac{1}{n} \right\}.
+  \end{equation*}
+  Let $A_1 \subseteq N$ such that $\nu(A_1) > \frac{1}{n_1}$.
+  By the above argument about $C$, we know that $\exists C \subseteq A_1$
+  such that $\nu(C) > \nu(A_1)$.
+  Let
+  \begin{equation*}
+    n_2 = \min \left\{ n : C \subseteq A_1,\,
+      \nu(C) > \frac{1}{n} + \nu(A_1) \right\}.
+  \end{equation*}
+  Then set $A_2 \subseteq A_1$ such that
+  \begin{equation*}
+    \nu(A_2) > \nu(A_1) + \frac{1}{n_2} > \frac{1}{n_1} + \frac{1}{n_2}.
+  \end{equation*}
+  We continue inductively so that we construct as a decreasing sequence
+  \begin{equation*}
+    \hdots \subseteq A_{k+1} \subseteq A_k \subseteq \hdots
+  \end{equation*}
+  of sets, such that
+  \begin{equation*}
+    \nu(A_{k+1}) > \nu(A_k) + \frac{1}{n_{k+1}}
+               > \frac{1}{n_1} + \hdots + \frac{1}{n_k} + \frac{1}{n_{k+1}}.
+  \end{equation*}
+  Let $A = \bigcap_k A_k$.
+  Notice that since $\nu(A_1)$ is finite,
+  by \hyperref[thm:properties_of_a_measure]{continuity from above},
+  \begin{equation*}
+    \nu(A) = \lim_{k} \nu(A_k) \geq \sum_{k=1}^{\infty} \frac{1}{n_k}.
+  \end{equation*}
+  \hlwarn{Need clarification}
+\end{proof}
+
+% section signed_measures_continued (end)
+
+% chapter lecture_22_nov_1st_2019 (end)
 
 \appendix
 
