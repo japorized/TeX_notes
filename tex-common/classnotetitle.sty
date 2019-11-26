@@ -1,6 +1,10 @@
 % Copyright note: Japorized <japorized (at) tuta (dot) io>
 \RequirePackage{geometry}
 \ProvidesPackage{classnotetitle}[Japorized's Personal Classnotes Title Page]
+\newif\if@wantdate
+\DeclareOption{date}{\@wantdatetrue}
+\ProcessOptions\relax
+
 \newcommand*{\subtitle}[1]{\gdef\@subtitle{#1}}
 \newcommand*{\@subtitle}{}
 \newcommand*{\credentials}[1]{\gdef\@credentials{#1}}
@@ -20,12 +24,16 @@
 {\nbtitlestretch\Huge\bfseries\@title\unskip\strut\par}
 \vspace{2cm}
 {\scshape\Large\@subtitle\unskip\strut\par}
-\vspace{2cm}
+\vspace{1cm}
 by\unskip\strut\par
 {\Large\itshape\@author\unskip\strut\par}
 \vfill
 \footnotesize \@credentials\unskip\strut\par
 \@institution\unskip\strut\par
+\if@wantdate
+  \vfill
+  {\Large\today\unskip\strut\par}
+\fi
 
 \vfill
 \end{titlepage}
