@@ -6299,9 +6299,9 @@ This motivates us to make the following definition.
 \label{chp:lecture_22_nov_1st_2019}
 % chapter lecture_22_nov_1st_2019
 
-\section{Signed Measures (Continued)}%
-\label{sec:signed_measures_continued}
-% section signed_measures_continued
+\section{Hahn Decomposition}%
+\label{sec:hahn_decomposition}
+% section hahn_decomposition
 
 \begin{thm}[Hahn Decomposition Theorem]\index{Hahn Decomposition Theorem}\label{thm:hahn_decomposition_theorem}
   Let $\nu$ be a signed measure on a measurable space $(X, \mathfrak{M})$.
@@ -6474,9 +6474,282 @@ This motivates us to make the following definition.
   \hlwarn{Need clarification}
 \end{proof}
 
-% section signed_measures_continued (end)
+% section hahn_decomposition (end)
 
 % chapter lecture_22_nov_1st_2019 (end)
+
+\chapter{Lecture 23 Nov 4th 2019}%
+\label{chp:lecture_23_nov_4th_2019}
+% chapter lecture_23_nov_4th_2019
+
+\section{Hahn Decomposition (Continued)}%
+\label{sec:hahn_decomposition_continued}
+% section hahn_decomposition_continued
+
+\begin{defn}[Hahn Decomposition]\index{Hahn Decomposition}\label{defn:hahn_decomposition}
+  Let $\nu$ be a signed measure, and $X = P \cupdot N$,
+  where $P$ is $\nu$-positive and $N$ is $\nu$-negative.
+  We call $P \cupdot N$ the \hlnoteb{Hahn decomposition} of $\nu$.
+\end{defn}
+
+\begin{remark}
+  Given a Hahn decomposition, consider $E \subseteq X$.
+  Then we may define $\nu_1(E) = \nu(E \cap P)$
+  such that $\nu_1$ is a positive measure, and
+  $\nu_2(E) = - \nu(E \cap N)$ such that $\nu_2$ is a positive measure.
+  Then
+  \begin{equation*}
+    \nu(E) = \nu_1(E) - \nu_2(E).
+  \end{equation*}
+\end{remark}
+
+\begin{defn}[Mutually Singular]\index{Mutually Singular}\label{defn:mutually_singular}
+  Let $(X, \mathfrak{M})$ be a measurable space,
+  with signed measures $\mu$ and $\nu$.
+  The measures $\mu$ and $\nu$ are said to be \hlnoteb{mutually singular},
+  of which we denote by $\mu \bot \nu$, when
+  \begin{equation*}
+    X = E \cupdot F \quad E, F \in \mathfrak{M}
+  \end{equation*}
+  such that $E$ is $\mu$-null and $F$ is $\nu$-null.
+\end{defn}
+
+\begin{eg}
+  From our remark above, we see that $N$ is $\nu_1$-null while
+  $P$ is $\nu_2$-null. Thus $\nu_1 \bot \nu_2$.
+\end{eg}
+
+\begin{thm}[Jordan Decomposition Theorem]\index{Jordan Decomposition Theorem}\label{thm:jordan_decomposition_theorem}
+  Let $(X, \mathfrak{M})$ be a measurable space with a signed measure $\nu$.
+  Then $\exists! \nu^+,\, \nu^-$ positive measures such that
+  \begin{equation*}
+    \nu = \nu^+ - \nu^- \quad\text{ and }\quad \nu^+ \bot \nu^-.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{(Existence)}
+  The proof for existence is exactly what we showed in the last remark.
+  Let $X = P \cupdot N$ by the \nameref{thm:hahn_decomposition_theorem}
+  with $\nu_1(E) = \nu(E \cap P)$ and $\nu_2 = - \nu(E \cap N)$,
+  so that
+  \begin{equation*}
+    \nu = \nu_1 - \nu_2 \quad\text{ and }\quad \nu_1 \bot \nu_2.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{(Uniqueness)}
+  Suppose $\nu(E) = \mu_1(E) - \mu_2(E)$ for some positive measures
+  $\mu_1, \mu_2$ such that $\mu_1 \bot \mu_2$, so that
+  \begin{equation*}
+    X = E \cupdot F
+  \end{equation*}
+  with $F$ being $\mu_1$-null and $E$ being $\mu_2$-null.
+
+  Let $A \subseteq E$. Then notice that
+  \begin{equation*}
+    \nu(A) = \mu_1(A) - \mu_2(A) = \mu_1(A) \geq 0.
+  \end{equation*}
+  Thus $E$ is $\nu$-positive. Similarly, $F$ is $\nu$-negative.
+  Hence $X = E \cupdot F$ is indeed another Hahn Decomposition on $\nu$.
+  By the \nameref{thm:hahn_decomposition_theorem}, we have that
+  \begin{equation*}
+    P \triangle E,\, N \triangle F \text{ are } \nu\text{-null}.
+  \end{equation*}
+
+  Let $A \in \mathfrak{M}$. Since $E$ and $F$ are disjoint,
+  \begin{equation*}
+    \mu_1(A) = \mu_1(A \cap E) + \mu_1(A \cap F) = \mu_1(A \cap E).
+  \end{equation*}
+  Note that
+  \begin{equation*}
+    A \cap E = (A \cap E \cap P) \cupdot (A \cap (E \setminus P)).
+  \end{equation*}
+  Then
+  \begin{align*}
+    \mu_1(A \cap E) &= \nu(A \cap E) \\
+                    &= \nu(A \cap E \cap P) + \nu(A \cap (E \setminus P)) \\
+                    &= \nu(A \cap E \cap P) = \nu_1(A \cap E),
+  \end{align*}
+  where $\nu(A \cap (E \setminus P)) = 0$ since $P \triangle E$ is $\nu$-null.
+  Thus
+  \begin{equation*}
+    \mu_1(A) = \mu_1(A \cap E) = \nu_1(A \cap E).
+  \end{equation*}
+  Also, notice that
+  \begin{equation*}
+    A \cap P = (A \cap P \cap E) \cupdot (A \cap (P \setminus E)),
+  \end{equation*}
+  and so
+  \begin{align*}
+    \nu_1(A) &= \nu(A \cap P) \\
+             &= \nu(A \cap P \cap E) + \nu(A \cap (P \setminus E)) \\
+             &= \nu(A \cap E \cap P) = \nu_1(A \cap E) = \mu_1(A),
+  \end{align*}
+  since $P \setminus E \subseteq P \triangle E$ which is $\nu$-null.
+  Thus $\mu_1 = \nu_1$.
+  Similarly, we can show that $\mu_2 = \nu_2$.
+\end{proof}
+
+\begin{defn}[Positive and Negative Variation of a Signed Measure]\index{Positive variation of a signed measure}\index{Negative variation of a signed measure}\label{defn:positive_and_negative_variation_of_a_signed_measure}
+  Let $(X, \mathfrak{M})$ be a measurable space and $\nu$ a signed measure
+  of the space. By the \nameref{thm:jordan_decomposition_theorem},
+  we may write $\nu = \nu^+ - \nu^-$ such that $\nu^+ \bot \nu^-$.
+  We call $\nu^+$ the \hlnoteb{positive variation of $\nu$}
+  and $\nu^-$ the \hlnoteb{negative variation of $\nu$}.
+\end{defn}
+
+\begin{defn}[Total Variation of a Signed Measure]\index{Total variation of a signed measure}\label{defn:total_variation_of_a_signed_measure}
+  By the same assumption as the above, we call
+  \begin{equation*}
+    \abs{\nu} = \nu^+ + \nu^-
+  \end{equation*}
+  the \hlnoteb{total variation of $\nu$}.
+\end{defn}
+
+\begin{warning}
+  Consider the measure
+  \begin{equation*}
+    \nu(E) = \int_{E} f \dif{\mu},
+  \end{equation*}
+  where $\mu$ is any positive measure, $E \subseteq X = P \cupdot N$.
+  Suppose $f^+ = 0$ on $N$ and $f^- = 0$ on $P$, where $f = f^+ - f^-$.
+  It is easy to see that
+  \begin{gather*}
+    \nu^+(E) = \int_{E} f^+ \dif{\mu} \\
+    \nu^-(E) = \int_{E} f^- \dif{\mu}.
+  \end{gather*}
+  Then the total variation is expressible as
+  \begin{equation*}
+    \abs{\nu}(E) = \int_{E} \abs{f} \dif{\mu}.
+  \end{equation*}
+  However, recall that
+  \begin{equation*}
+    \abs{\nu(E)} = \abs{\int_{E} f \dif{\mu}}
+                 \leq \int_{E} \abs{f} = \abs{\nu}(E).
+  \end{equation*}
+  Thus, we may have
+  \begin{equation*}
+    \abs{\nu(E)} < \abs{\nu}(E).
+  \end{equation*}
+\end{warning}
+
+% section hahn_decomposition_continued (end)
+
+\section{Radon-Nikodym Theorem and the Lebesgue Decomposition Theorem}%
+\label{sec:radon_nikodym_theorem_and_the_lebesgue_decomposition_theorem}
+% section radon_nikodym_theorem_and_the_Lebesgue_decomposition_theorem
+
+\begin{defn}[Absolutely Continuous Measure]\index{Absolutely Continuous Measure}\label{defn:absolutely_continuous_measure}
+  Let $(X, \mathfrak{M})$ be a measurable space.
+  Let $\nu$ be a signed measure and $\mu$ a positive measure.
+  We say that $\nu$ is \hlnoteb{absolutely continuous with respect to} $\mu$,
+  of which we denote $\nu \ll \mu$, provided that
+  \begin{equation*}
+    \mu(E) = 0 \implies \nu(E) = 0
+  \end{equation*}
+  for all $E \subseteq X$.
+\end{defn}
+
+\begin{lemma}[Equivalent Definitions of a Absolutely Continuous Measure]\label{lemma:equivalent_definitions_of_a_absolutely_continuous_measure}
+  Let $(X, \mathfrak{M})$ be a measurable space,
+  $\nu$ a signed measure and $\mu$ a positive measure. TFAE:
+  \begin{enumerate}
+    \item $\nu \ll \mu$;
+    \item $\nu^+ \ll \mu$ and $\nu^- \ll \mu$; and
+    \item $\abs{\nu} \ll \mu$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  \hlbnoted{$(1) \implies (2)$}
+  Write $\nu = \nu^+ - \nu^-$ by the \nameref{thm:jordan_decomposition_theorem}.
+  Then for any $E \in \mathfrak{M}$ such that $\mu(E) = 0$,
+  since $\nu(E) = 0$, we have
+  \begin{equation*}
+    \nu^+(E) - \nu^-(E) = 0 \text{ and so } \nu^+(E) = \nu^-(E).
+  \end{equation*}
+  Now, note that $\mu(E) = 0 \implies \mu(E \cap P) = 0$ by subadditivity.
+  It thus follows from assumption that $\nu^+(E) = \nu(E \cap P) = 0$ by
+  the assumption that $\nu \ll \mu$.
+
+  \noindent
+  \hlbnoted{$(2) \implies (3)$}
+  Since $\abs{\nu} = \nu^+ + \nu^-$, it follows that for any $E \in \mathfrak{M}$
+  such that $\mu(E) = 0$, we have $\nu^+(E) = 0 = \nu^-(E)$, and so
+  \begin{equation*}
+    \abs{\nu}(E) = \nu^+(E) + \nu^-(E) = 0.
+  \end{equation*}
+
+  \noindent
+  \hlbnoted{$(3) \implies (1)$}
+  Notice that for any $E \in \mathfrak{M}$, we have $\abs{\nu(E)}
+  \leq \abs{\nu}(E)$, as noted in the last warning.
+  Therefore, $\forall E \in \mathfrak{M}$ such that $\mu(E) = 0$, it follows
+  that
+  \begin{equation*}
+    \abs{\nu(E)} \leq \abs{\nu}(E) = 0,
+  \end{equation*}
+  and so it must be that $\nu(E) = 0$.
+\end{proof}
+
+\begin{thm}[Alternative Definition for Absolute Continuity of Measures]\label{thm:alternative_definition_for_absolute_continuity_of_measures}
+  Let $\nu$ be a finite signed measure, and $\mu$ a positive measure.
+  Then $\nu \ll \mu \iff$
+  \begin{equation*}
+    \forall \epsilon > 0\enspace \exists \delta > 0\enspace
+    \mu(E) < \delta \implies \abs{\nu(E)} < \epsilon.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{$\implies$}
+  Suppose that the $\epsilon$-$\delta$ condition fails.
+  Let $\epsilon_0 > 0$ be the $\epsilon$ that fails.
+  Consider $\delta_n = \frac{1}{2^n}$.
+  Then there exists $P_n \in \mathfrak{M}$ such that
+  \begin{equation*}
+    \mu(P_n) < \delta_n \land \abs{\nu(P_n)} \geq \epsilon_0.
+  \end{equation*}
+  Let $F_k = \bigcup_{n=k}^{\infty} P_n$ and $F = \bigcap_{k=1}^{\infty} F_k$.
+  By subadditivity, for any $k$,
+  \begin{equation*}
+    \mu(F_k) \leq \sum_{n=k}^{\infty} \mu(P_n)
+           < \sum_{n=k}^{\infty} \frac{1}{2^{n}} = \frac{1}{2^{k-1}}
+  \end{equation*}
+  It follows from \hyperref[thm:properties_of_a_measure]{continuity from above}
+  that
+  \begin{equation*}
+    \mu(F) = \lim_{k} \mu(F_k) = 0.
+  \end{equation*}
+  However,
+  \begin{equation*}
+    \nu(F_k) \geq \nu(P_k) \geq \epsilon_0
+  \end{equation*}
+  and $\nu$ is \hlnotec{finite}, $\nu(F_1) < \infty$, and so
+  continuity from below indicates that
+  \begin{equation*}
+    \nu(F) = \lim_{k} \nu(F_k) \geq \epsilon_0.
+  \end{equation*}
+  Thus $\nu \not\ll \mu$.
+  \noindent
+  \hlbnoted{$(\impliedby)$}
+  Suppose that the $\epsilon$-$\delta$ condition is true.
+  In particular, we may consider a sequence $\epsilon_n = \frac{1}{n} > 0$ so
+  that $\exists \delta_n > 0$ such that
+  \begin{equation*}
+    \mu(E) < \delta_n \implies \abs{\nu(E)} < \frac{1}{n}
+  \end{equation*}
+  for any $E \in \mathfrak{M}$.
+  Then in particular, if $E \in \mathfrak{M}$ such that $\mu(E) = 0$,
+  then $\mu(E) < \delta_n$ for any $n$, and so $\abs{\nu(E)} < \frac{1}{n}$ for
+  any $n$.
+  Therefore $\nu(E) = 0$.
+\end{proof}
+
+% section radon_nikodym_theorem_and_the_lebesgue_decomposition_theorem (end)
+
+% chapter lecture_23_nov_4th_2019 (end)
 
 \appendix
 
