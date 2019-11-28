@@ -6751,6 +6751,496 @@ This motivates us to make the following definition.
 
 % chapter lecture_23_nov_4th_2019 (end)
 
+\chapter{Lecture 24 Nov 6th 2019}%
+\label{chp:lecture_24_nov_6th_2019}
+% chapter lecture_24_nov_6th_2019
+
+\section{Radon-Nikodym Theorem and the Lebesgue Decomposition Theorem (Continued)}%
+\label{sec:radon_nikodym_theorem_and_the_lebesgue_decomposition_theorem_continued}
+% section radon_nikodym_theorem_and_the_lebesgue_decomposition_theorem_continued
+
+\begin{crly}[On a special signed measure]\label{crly:on_a_special_signed_measure}
+  Let $f \in \mathcal{L}^1(\mu)$. Then $\forall \epsilon > 0$,
+  $\exists \delta > 0$ such that if $\mu(E) < \delta$, then $\abs{\int_{E} f
+  \dif{\mu}} < \epsilon$.
+\end{crly}
+
+\begin{proof}
+  Let $\nu(E) = \int_{E} f \dif{\mu}$.
+  We know that $\nu$ is a finite signed measure.
+  Notice that $\mu(E) = 0$ means that $\nu(E) = \int_{E} f \dif{\mu} = 0$.
+  Hence $\nu \ll \mu$.
+  Therefore, by
+  \cref{thm:alternative_definition_for_absolute_continuity_of_measures},
+  the statement holds.
+\end{proof}
+
+\begin{lemma}[Relationship Between Two Finite Positive Measure]\label{lemma:relationship_between_two_finite_positive_measure}
+  Let $\mu$ and $\nu$ be finite positive measures
+  on the measurable space $(X, \mathfrak{M})$.
+  Then either $\mu \bot \nu$, or \sidenote{This is an exclusive or statement.}
+  $\exists \epsilon > 0$ and $\exists E \in \mathfrak{M}$
+  with $\mu(E) > 0$ such that $\forall F \subseteq E$, we have
+  \begin{equation*}
+    \nu(F) \geq \epsilon \mu(F),
+  \end{equation*}
+  i.e. $\nu - \epsilon \mu$ is a positive measure on $(E, \mathfrak{M}_{E})$.
+\end{lemma}
+
+\begin{proof}
+  For each $n \geq 1$, consider the signed measure $\nu - \frac{1}{n} \mu$,
+  which is finite.
+  By the \nameref{thm:hahn_decomposition_theorem},
+  let $P_n$ and $N_n$ be such that
+  $X = P_n \bigcup N_n$ with
+  $P_n$ being $\left( \nu - \frac{1}{n}\mu \right)$-positive, and
+  $N_n$ being $\left( \nu - \frac{1}{n}\mu \right)$-negative.
+
+  Let $P = \bigcup_n P_n$ and $N = \bigcap N_n$. Then $X = P \bigcup N$.
+  Since $N \subseteq N_n$ for all $n$, we have that
+  \begin{equation*}
+    \left( \nu - \frac{1}{n} \mu \right)(N) \leq 0 \quad \forall n.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    0 \leq \nu(N) \leq \frac{1}{n} \mu(N) \quad \forall n.
+  \end{equation*}
+  Hence $\nu(N) = 0$, i.e. $N$ is $\nu$-null.
+
+  Now if $\mu(P) = 0$, then $\mu \bot \nu$ and we are done.
+  WMA $\mu(P) \neq 0$. Since $P = \bigcup_n P_n$, we know that $\exists n_0$
+  such that $\mu(P_{n_0}) \neq 0$.
+  However, $P_{n_0}$ is $\left( \nu - \frac{1}{n} \mu \right)$-positive,
+  i.e.
+  \begin{equation*}
+    \forall A \subseteq P_{n_0} \quad \nu(A) - \frac{1}{n} \mu(A) \geq 0.
+  \end{equation*}
+  Then in this case, we simply need to pick $\epsilon = \frac{1}{n_0}$,
+  and our job is done.
+\end{proof}
+
+\begin{thm}[The Lebesgue Decomposition Theorem and The Radon-Nikodym Theorem]\index{Lebesgue Decomposition Theorem}\index{Radon-Nikodym Theorem}\label{thm:lebesgue_decomposition_theorem}\label{thm:radon_nikodym_theorem}
+  Let $(X, \mathfrak{M})$ be a measurable space,
+  and $\mu$ and $\nu$ be $\sigma$-finite positive measures.
+  Then, there exists positive measures $\lambda$ and $\rho$
+  such that $\mu \bot \lambda$, $\rho \ll \mu$ and $\nu = \rho + \lambda$
+  (\hlnoteb{Lebesgue Decomposition}).
+  Moreover, $\exists f : X \to [0, \infty]$ that is $\mathfrak{M}$-measurable such that
+  \begin{equation*}
+    \rho(E) = \int_{E} f \dif{\mu}
+  \end{equation*}
+  (\hlnoteb{Radon-Nikodym}).
+\end{thm}
+
+\marginnote{This is a constructive proof. It tells us exactly
+how to create $\lambda$ and $\rho$.}
+
+\begin{proof}
+  \hlbnoted{Case 1: $\mu$ and $\nu$ are both finite}
+  Let
+  \begin{equation*}
+    \mathcal{F} \coloneqq \left\{ f : X \to [0, \infty]
+      \mid f \text{ is } \mathfrak{M}\text{-measurable},\,
+        \int_{E} f \dif{\mu} \leq \nu(E) \enspace \forall E \in \mathfrak{M} \right\}.
+  \end{equation*}
+  Note that $\mathcal{F} \neq \emptyset$ since $0 \in \mathcal{F}$.
+
+  \noindent
+  \hlbnotec{$\mathcal{F}$ is closed under $\max$ function}
+  Let $f, h \in \mathcal{F}$ and $g = \max \{ f, h \}$.
+  Let
+  \begin{equation*}
+    A \coloneqq \{ x : g(x) = f(x) \}.
+  \end{equation*}
+  Then for $x \in A^C$, we have $g(x) = h(x)$.
+  Note that $g$ is $\mathfrak{M}$-measurable.
+  WTS $g \in \mathcal{F}$.
+  Observe that
+  \begin{align*}
+    \int_{E} g \dif{\mu}
+    &= \int_{E \cap A} g \dif{\mu} + \int_{E \cap A^C} g \dif{\mu} \\
+    &= \int_{E \cap A}  f \dif{\mu} + \int_{E \cap A^C} h \dif{\mu} \\
+    &\leq \nu(E \cap A) + \nu(E \cap A^C)
+     = \nu(E).
+  \end{align*}
+  Hence indeed $g \in \mathcal{F}$. \dashv
+
+  \noindent
+  \hlbnotec{$\mathcal{F}$ contains limits of its sequences}
+  Let
+  \begin{equation*}
+    a \coloneqq \sup \left\{ \int_{X} f \dif{\mu} : f \in \mathcal{F} \right\}.
+  \end{equation*}
+  Let $\{f_n\} \subseteq \mathcal{F}$ be a sequence of functions such that
+  \begin{equation*}
+    \int_{X} f_n \dif{\mu} \to a.
+  \end{equation*}
+  Let $g_1 = f_1,\, g_2 = \max \{ f_1, f_2 \},\, \ldots,\,
+  g_n = \max_{n} \{ f_1, \ldots, f_n \}, \ldots$.
+  Let $f = \lim_{n} g_n$. Then $g_n \nearrow f$.
+  By the last claim, note that each $g_n \in \mathcal{F}$.
+  WTS $f \in \mathcal{F}$.
+
+  Let $E \in \mathfrak{M}$. By the \nameref{thm:monotone_convergence_theorem},
+  \begin{align*}
+    \int_{E} f \dif{\mu} &= \lim_{n} \int_{E} g_n \dif{\mu} \\
+              &\leq \lim_{n} \nu(E) = \nu(E).
+  \end{align*}
+  It follows that $f \in \mathcal{F}$ and in particular
+  \begin{equation*}
+    \int_{X} f \dif{\mu} = a. \dashv
+  \end{equation*}
+
+  Let $\rho(E) = \int_{E} f \dif{\mu}$. Then it is clear that $\rho \ll \mu$.
+  Let $\lambda(E) = \nu(E) - \rho(E) \geq 0$. Then $\lambda$ is a positive measure.
+  Furthermore, we have that $\nu = \lambda + \rho$.
+
+  \noindent
+  \hlbnotec{$\mu \bot \lambda$}
+  Suppose not.
+  Then by \cref{lemma:relationship_between_two_finite_positive_measure}, we know
+  $\exists \epsilon > 0$ and $\exists E \in \mathfrak{M}$ with $\mu(E) > 0$
+  such that $\forall F \subseteq E$, $\lambda(F) \geq \epsilon \mu(F)$.
+  Then, $\forall A \in \mathfrak{M}$, we have
+  \begin{equation*}
+    \lambda(A) \geq \lambda(A \cap E) \geq \epsilon \mu(A \cap E).
+  \end{equation*}
+  However,
+  \begin{equation*}
+    \lambda(A) = \nu(A) - \int_{A} f \dif{\mu}
+         \geq \epsilon \mu(A \cap E) = \epsilon \int_{A} \chi_E \dif{\mu}.
+  \end{equation*}
+  This means that
+  \begin{equation*}
+    \nu(A) \geq \int_{A} (f - \epsilon \chi_E) \dif{\mu}.
+  \end{equation*}
+  Hence $f - \epsilon \chi_E \in \mathcal{F}$.
+  Thus
+  \begin{align*}
+    a = \int_{X} f \dif{\mu} \leq \int_{X} (f + \epsilon \chi_E) \dif{\mu} \leq a.
+  \end{align*}
+  Notice that $\int_{X} (f + \epsilon \chi_{E}) \dif{\mu} = a + \epsilon
+  \mu(E)$, and so
+  \begin{equation*}
+    a \leq a + \epsilon \mu(E) \leq a.
+  \end{equation*}
+  Thus we must have $\epsilon \mu(E) = 0$, but that is impossible since
+  $\epsilon > 0$ and $\mu(E) > 0$, a contradiction.
+  Hence we must have $\mu \bot \lambda$.
+
+  \noindent
+  \hlbnoted{Case 2: $\nu$ and $\mu$ are both $\sigma$-finite}
+  \sidenote{We shall strict the finite pieces together and then try
+  paying attention to some of the technical details.}
+  Since $\mu$ is $\sigma$-finite,
+  wma $X = \bigcupdot_i A_i$ such that $\mu(A_i) < \infty$.
+  Since $\nu$ is $\sigma$-finite,
+  wma $X = \bigcupdot_i B_i$ such that $\nu(B_i) < \infty$.
+  Then we may let $X = \bigcupdot_{i, j} (A_i \cap B_j)$, and
+  \begin{equation*}
+    \mathfrak{M}_{i, j} \coloneqq \{ E \cap A_i \cap B_j : E \in \mathfrak{M} \}
+  \end{equation*}
+  would be a $\sigma$-algebra of subsets of $X$.
+
+  Let us define
+  \begin{equation*}
+    \mu_{i, j}(Y) = \mu(Y)\quad \forall Y \in \mathfrak{M}_{i, j} \quad \text{ and }\quad
+    \nu_{i, j}(Y) = \nu(Y)\quad \forall Y \in \mathfrak{M}_{i, j}.
+  \end{equation*}
+  It is clear that all of $\mu_{i, j}$ and $\nu_{i, j}$ are finite.
+  By \textit{Case 1}, $\exists \lambda_{i,j}, \rho_{i,j}$ measures
+  and $\exists f_{i,j} : A_i \cap B_j \to \mathbb{R}_e$ such that
+  \begin{equation*}
+    \lambda_{i,j} \bot \mu,\quad \rho_{i,j}(Y) = \int_{Y} f_{i,j} \dif{\mu_{i,j}}
+    \quad\text{ and }\quad \nu_{i,j} = \lambda_{i,j} + \rho_{i,j}.
+  \end{equation*}
+  Therefore $A_i \cap B_j = W_{ij} \cupdot Z_{ij}$ such that
+  \begin{equation*}
+    \lambda_{i,j}(Z_{ij}) = 0 \quad\text{ and }\quad \mu_{i,j}(W_{ij}) = 0.
+  \end{equation*}
+
+  Define $f : X \to \mathbb{R}$ by $f(x) = f_{i,j}(x)$ when $x \in A_i \cap B_j$.
+  Notice that
+  \begin{equation*}
+    f^{-1}(a, \infty] = \bigcup_{i,j} f_{i,j}(a, \infty] \in \mathfrak{M},
+  \end{equation*}
+  and thus $f$ is $\mathfrak{M}$-measurable.
+
+  Define $\lambda(E) = \sum_{i,j} \lambda_{i,j}(E \cap A_i \cap B_j)$.
+  It is easy to \textbf{check} that $\lambda$ is indeed a measure.
+
+  Let $W = \bigcupdot_{i,j} W_{ij}$ and $Z = \bigcupdot_{i,j} Z_{ij}$.
+  Then
+  \begin{equation*}
+    \lambda(Z) = \sum_{i,j} \lambda_{i,j}(Z_{ij}) = 0,
+  \end{equation*}
+  and
+  \begin{equation*}
+    \mu(W) = \sum_{i,j} \mu(W_{ij}) = \sum_{i,j} \mu_{i,j} (W_{ij}) = 0.
+  \end{equation*}
+  Thus $\lambda \bot \mu$.
+
+  Let
+  \begin{equation*}
+    \rho(E) = \int_{E} f \dif{\mu}
+          = \sum_{i,j} \int_{E \cap A_i \cap B_j} f_{i,j} \dif{\mu}
+          = \sum_{i,j} \rho_{i,j}(E \cap A_i \cap B_j).
+  \end{equation*}
+  \textbf{Check} that
+  \begin{align*}
+    \lambda(E) + \rho(E)
+    &= \sum_{i,j} \lambda_{i,j} (E \cap A_i \cap B_j)
+      + \sum_{i,j} \rho_{i,j}(E \cap A_i \cap B_j) \\
+    &= \sum_{i,j} \nu_{i,j}(E \cap A_i \cap B_j) = \nu(E).
+  \end{align*}
+  This completes the proof.
+\end{proof}
+
+% section radon_nikodym_theorem_and_the_lebesgue_decomposition_theorem_continued (end)
+
+% chapter lecture_24_nov_6th_2019 (end)
+
+\chapter{Lecture 25 Nov 8th 2019}%
+\label{chp:lecture_25_nov_8th_2019}
+% chapter lecture_25_nov_8th_2019
+
+\section{Radon-Nikodym Theorem and The Lebesgue Decomposition Theorem (Continued 2)}%
+\label{sec:radon_nikodym_theorem_and_the_lebesgue_decomposition_theorem_continued_2}
+% section radon_nikodym_theorem_and_the_lebesgue_decomposition_theorem_continued_2
+
+\begin{crly}[A Corollary to Radon-Nikodym]\label{crly:a_corollary_to_radon_nikodym}
+  Suppose that $(X, \mathfrak{M})$ is a measurable space and $\mu, \nu$ are
+  $\sigma$-finite measures on the space, such that $\nu \ll \mu$.
+  Then $\exists f : X \to [0, \infty]$ $\mathfrak{M}$-measurable such that
+  \begin{equation*}
+    \nu(E) = \int_{E} f \dif{\mu}.
+  \end{equation*}
+\end{crly}
+
+\begin{proof}
+  By the \hyperref[thm:radon_nikodym_theorem]{Radon-Nikodym Theorem}, we can
+  find positive measures $\lambda, \rho$ such that $\nu = \lambda + \rho$,
+  $\lambda \bot \mu$ and $\rho(E) = \int_{E} f \dif{\mu}$ for some $f : X \to
+  [0, \infty]$.
+  We may then let $X = A \cupdot B$ such that $\lambda(A) = 0$ and $\mu(B) = 0$.
+  Since $\nu \ll \mu$, we have $\nu(B) = 0$.
+
+  Let $E \in \mathfrak{M}$. Then
+  \begin{align*}
+    \nu(E) &= \nu(E \cap A) + \nu(E \cap B) = \nu(E \cap A) \\
+           &= \lambda(E \cap A) + \int_{E \cap A} f \dif{\mu} \\
+           &= \int_{E \cap A} f \dif{\mu} + \int_{E \cap B} f \dif{\mu} \enspace
+            \because \rho(E \cap B) = 0 \text{ as } \rho \ll \mu \\
+           &= \int_{E} f \dif{\mu}.
+  \end{align*}
+\end{proof}
+
+\begin{note}
+  From here on, we shall denote the Lebesgue measure by $m$, instead
+  of $\mu$, which we shall reserve for an arbitrary $\mu$.
+\end{note}
+
+Let us take a short detour into derivatives.
+
+\begin{eg}
+  \begin{enumerate}
+    \item Let $F : \mathbb{R} \to \mathbb{R}$ such that
+      \begin{equation*}
+        F(x) = \begin{cases}
+          0       & x \leq 0 \\
+          x^2     & 0 < x < 1 \\
+          x^2 + 3 & x \geq 1
+        \end{cases}.
+      \end{equation*}
+      Then $F$ is increasing and right continuous. Let
+      \begin{equation*}
+        F_1(x) = \begin{cases}
+          0   & x \leq 0 \\
+          x^2 & x > 0
+        \end{cases} \quad
+        F_2(x) = \begin{cases}
+          0 & x < 1 \\
+          3 & x \geq 1
+        \end{cases}.
+      \end{equation*}
+      Then $F = F_1 + F_2$.
+      We may thus define $\mu_F = \mu_{F_1} + \mu_{F_2}$ for
+      $\mathfrak{B}(\mathbb{R})$.
+      From our understanding (from a much earlier example),
+      we know that $\mu_{F_2} = 3 \cdot \chi_{\{1\}}$.
+      Let 
+      \begin{equation*}
+        f(x) = \begin{cases}
+          0 & x \leq 0 \\
+          2x & x > 0
+        \end{cases}.
+      \end{equation*}
+      Notice that $f$ is the \hlnoteb{derivative} of $F_1$.
+      By the
+      \nameref{thm:agreement_of_riemann_integration_and_lebesgue_integration_for_bounded_functions},
+      we know
+      \begin{equation*}
+        F_1(b) - F_1(a) = \int_{[a, b]} f \dif{m}.
+      \end{equation*}
+      Since $m$ is the Lebesgue measure, and by
+      \cref{thm:lebesgue_stieltjes_theorem_by_caratheodory}, we know
+      \begin{equation*}
+        \int_{[a, b]} f \dif{m} = \int_{(a, b]} f \dif{m}
+              = \mu_{F_1}(a, b] = F_1(b) - F_1(a).
+      \end{equation*}
+      Thus, since we may write any subset of $\mathbb{R}$ as a disjoint
+      union of intervals, it follows that
+      \begin{equation*}
+        \mu_{F_1}(B) = \int_{B} f \dif{m}.
+      \end{equation*}
+      
+      Notice that $\mu_{F_1}$ and $\mu_{F_2}$ are one of the decompositions
+      given in \nameref{thm:lebesgue_decomposition_theorem},
+      where $\nu = \mu_F$, $\lambda = \mu_{F_2}$, $\rho = \mu_{F_1}$, and $\mu = m$,
+      where we note that $\mu_{F_2} \bot m$,
+      \begin{equation*}
+        \mu_{F_1}(B) = \int_{B} f \dif{m},
+      \end{equation*}
+      and clearly $\mu_{F_1} \ll m$.
+
+    \item Recall the \nameref{para:cantor_function}, which here we shall call it
+      $F_C$.
+      Consider the function $F : \mathbb{R} \to \mathbb{R}$ such that
+      \begin{equation*}
+        F(x) = \begin{cases}
+          0 & x \leq 0 \\
+          F_C(x) & 0 < x < 1 \\
+          1 & x \geq 1
+        \end{cases}.
+      \end{equation*}
+      Then $F$ is continuous and increasing.
+      Furthermore, $F'(x) = 0$ whenever $x \notin C$, where $C$ is the Cantor set.
+      Consider the function $\mu_F$ constructed by the means of
+      \cref{thm:lebesgue_stieltjes_theorem_by_caratheodory}.
+
+      Now, notice that we may write $\mathbb{R} = C \cupdot C^C$.
+      Recall that we showed that $\mu_F(C^C) = 0$ while $\mu_{F}(C) = 1$.
+      Furthermore, under Lebesgue's measure, $m(C) = 0$.
+      In this case, we may consider $\lambda = \mu_F$ and $\mu = 0$,
+      and $\rho = 0$ to fit the framework of
+      \cref{thm:lebesgue_decomposition_theorem}.
+  \end{enumerate}
+\end{eg}
+
+\begin{note}
+  We know that give $\sigma$-finite measures $\nu$ and $\mu$,
+  where $\nu \ll \mu$, by \cref{crly:a_corollary_to_radon_nikodym},
+  $\exists f \geq 0$ such that $\nu(E) = \int_{E} f \dif{\mu}$.
+  Recall from the Midterm problem that
+  \begin{equation*}
+    \int_{E} h \dif{\nu} = \int_{E} h \cdot f \dif{\mu}.
+  \end{equation*}
+
+  We may thus look at $\dif{\nu}$ as something like $f \dif{\mu}$,
+  which then $f$ is something like $\frac{\dif{\nu}}{\dif{\mu}}$.
+\end{note}
+
+\begin{remark}
+  Given $\sigma$-finite measures $\nu$ and $\mu$, with $\nu \ll \mu$,
+  if we suppose $f, h \geq 0$, and
+  \begin{equation*}
+    \nu(E) = \int_{E} f \dif{\mu} = \int_{E} h \dif{\mu},
+  \end{equation*}
+  we know that $f = h$ a.e. with respect to $\mu$.
+\end{remark}
+
+\begin{defn}[Derivative]\index{Derivative}\label{defn:derivative}
+  Let $\nu$ and $\mu$ be $\sigma$-finite measures with $\nu \ll \mu$.
+  If $\nu(E) = \int_{E} f \dif{\mu}$, we say that
+  \begin{equation*}
+    \frac{\dif{\nu}}{\dif{\mu}} = f \text{ a.e. with respect to } \mu.
+  \end{equation*}
+\end{defn}
+
+\begin{note}[Some formulae]
+  \begin{enumerate}
+    \item Given $\nu_1, \ldots, \nu_n, \mu$ all $\sigma$-finite,
+      with $\nu_i \ll \mu$ for all $i$,
+      we know that by \cref{crly:a_corollary_to_radon_nikodym},
+      $\exists f_1, \ldots, f_n$ such that
+      \begin{equation*}
+        \nu_i(E) = \int_{E} f_i \dif{\mu},\quad \text{ for each } i.
+      \end{equation*}
+      Let
+      \begin{equation*}
+        \nu(E) \coloneqq \sum_{i} \nu_i(E)
+              = \int_{E} (f_1 + \hdots + f_n) \dif{\mu}.
+      \end{equation*}
+      Then
+      \begin{equation*}
+        \frac{\dif{\nu}}{\dif{\mu}}
+        = \frac{\dif{\nu_1}}{\dif{\mu}} + \hdots + \frac{\dif{\nu_n}}{\dif{\mu}}
+      \end{equation*}
+      a.e. with respect to $\mu$.
+
+    \item (\hlnoteb{Chain rule})
+      Suppose $\nu \ll \lambda \ll \mu$. Note $\nu \ll \mu$.
+      Then
+      \begin{equation*}
+        \lambda(E) = \int_{E} g \dif{\mu} \quad\text{ and }\quad
+        \nu(E) = \int_{E} f \dif{\lambda}
+      \end{equation*}
+      for some functions $f, g$.
+      By our Midterm problem, we have
+      \begin{equation*}
+        \nu(E) = \int_{E} f \cdot g \dif{\mu}.
+      \end{equation*}
+      Then
+      \begin{equation*}
+        \frac{\dif{\nu}}{\dif{\mu}} = f \cdot g,\,
+        f = \frac{\dif{\nu}}{\dif{\lambda}}, \text{ and }
+        g = \frac{\dif{\lambda}}{\dif{\mu}}.
+      \end{equation*}
+      Hence
+      \begin{equation*}
+        \frac{\dif{\nu}}{\dif{\mu}}
+        = \frac{\dif{\nu}}{\dif{\lambda}} \cdot \frac{\dif{\lambda}}{\dif{\mu}}.
+      \end{equation*}
+
+    \item (\hlnoteb{Change of variables})
+      Suppose $\nu \ll \mu \ll \nu$.
+      Then there exists functions $f, g$ such that
+      \begin{equation*}
+        \nu(E) = \int_{E} f \dif{\mu} \quad\text{ and }\quad
+        \mu(E) = \int_{E} g \dif{\nu}.
+      \end{equation*}
+      Then we say
+      \begin{equation*}
+        f = \frac{\dif{\nu}}{\dif{\mu}} \quad\text{ and }\quad
+        g = \frac{\dif{\mu}}{\dif{\nu}}.
+      \end{equation*}
+      By the Midterm problem, \sidenote{This is the worst measure I've seen.}
+      \begin{equation*}
+        \nu(E) = \int_{E} f \cdot g \dif{\nu} \quad \forall E.
+      \end{equation*}
+      Thus
+      \begin{equation*}
+        f \cdot g = 1 \text{ a.e. wrt } \nu \quad\text{ and }\quad
+        g \cdot f = 1 \text{ a.e. wrt } \mu.
+      \end{equation*}
+      Thus means that the sets
+      \begin{gather*}
+        A \coloneqq \{ x : f(x) = 0 \} \quad\text{ and }\quad
+        B \coloneqq \{ x : g(x) = 0 \}
+      \end{gather*}
+      both have measure zero.
+      Thus
+      \begin{equation*}
+        \left( \frac{\dif{\nu}}{\dif{\mu}} \right)^{-1} = \frac{\dif{\mu}}{\dif{\nu}}
+      \end{equation*}
+      wherever they are well-defined.
+  \end{enumerate}
+\end{note}
+
+% section radon_nikodym_theorem_and_the_lebesgue_decomposition_theorem_continued_2 (end)
+
+% chapter lecture_25_nov_8th_2019 (end)
+
 \appendix
 
 \chapter{Deep Dives into Proofs}%
@@ -6950,4 +7440,3 @@ is a $\sigma$-algebra to complete our proof.
 
 \end{document}
 % vim:tw=80:fdm=syntax
-
