@@ -7816,6 +7816,142 @@ Fundamental Theorem of Calculus for general measures.
 
 % chapter lecture_29_nov_18th_2019 (end)
 
+\chapter{Lecture 30 Nov 20th 2019}%
+\label{chp:lecture_30_nov_20th_2019}
+% chapter lecture_30_nov_20th_2019
+
+\section{Functions of Bounded Variation (Continued 3)}%
+\label{sec:functions_of_bounded_variation_continued_3}
+% section functions_of_bounded_variation_continued_3
+
+\begin{thm}[Anti-Derivative of Bounded Integrable Functions]\label{thm:anti_derivative_of_bounded_integrable_functions}
+  Let $f \in \mathcal{L}^1([a, b], m)$. Let
+  \begin{equation*}
+    F(x) \coloneqq \int_{(a, x)} f \dif{m}.
+  \end{equation*}
+  Then $F'$ exists a.e. and $F'(x) = f(x)$ a.e.
+\end{thm}
+
+\begin{proof}
+  \hlwarn{We'll come back}
+\end{proof}
+
+\begin{thm}[Fundamental Theorem of Calculus (Lebesgue Version)]\index{Fundamental Theorem of Calculus (Lebesgue Version)}\label{thm:fundamental_theorem_of_calculus_lebesgue_version}
+  Let $F : [a, b] \to \mathbb{R}$. TFAE:
+  \begin{enumerate}
+    \item $F$ is absolutely continuous.
+    \item $\exists f$ integrable such that
+      \begin{equation*}
+        F(x) = F(a) + \int_{(a, x)} f \dif{m} \quad \forall a \leq x \leq b.
+      \end{equation*}
+    \item $F'(x)$ exists a.e., $F'$ is integrable and
+      \begin{equation*}
+        F(x) = F(a) + \int_{(a, x)} F' \dif{m}.
+      \end{equation*}
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlwarn{We'll come back}
+
+  \hlbnoted{$(2) \implies (3)$} This is proven in
+  \cref{thm:anti_derivative_of_bounded_integrable_functions}.
+\end{proof}
+
+% section functions_of_bounded_variation_continued_3 (end)
+
+\section{The \texorpdfstring{$L^p$}{LP}-spaces}%
+\label{sec:the_l_p_spaces}
+% section the_l_p_spaces
+
+\begin{defn}[$\mathcal{L}^p$-spaces]\index{$\mathcal{L}^p$-spaces}\label{defn:_mathcal_l_p_spaces}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space. Let $1 \leq p < \infty$.
+  We define
+  \begin{equation*}
+    \mathcal{L}^p (X, \mathfrak{M}, \mu) \coloneqq \left\{ 
+      f : X \to \mathbb{R}_e \text{ measurable } : \int_{X} \abs{f}^p \dif{\mu} < \infty
+    \right\}.
+  \end{equation*}
+  We set
+  \begin{equation*}
+    \norm{f}_p = \left( \int_{X} \abs{f}^p \dif{\mu} \right)^{\frac{1}{p}}.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Essentially Bounded]\index{Essentially Bounded}\label{defn:essentially_bounded}
+  Let $f : X \to \mathbb{R}_e$ be a measurable function.
+  We say that $f$ is \hlnoteb{essentially bounded} if
+  \begin{equation*}
+    \exists M \quad \mu (\{ x : \abs{f(x)} > M \}) = 0.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Essential Norm]\index{Essential Norm}\label{defn:essential_norm}
+  Let $f : X \to \mathbb{R}_e$ be a measurable function.
+  We define the \hlnoteb{essential norm} of $f$ as
+  \begin{equation*}
+    \norm{f}_{\infty} \coloneqq \inf \{ M : \mu(\{x : \abs{f(x)} > M \}) = 0 \}.
+  \end{equation*}
+\end{defn}
+
+\begin{note}
+  While we call $\norm{f}_{\infty}$ the essential \hlnoteb{norm},
+  we have not defined what a norm is.
+  We shall do that later.
+\end{note}
+
+\begin{defn}[$\mathcal{L}^{\infty}$-space]\index{$\mathcal{L}^{\infty}$-space}\label{defn:_mathcal_l_infty_space}
+  We define the $\mathcal{L}^{\infty}$-space as
+  \begin{equation*}
+    \mathcal{L}^{\infty}(X, \mathfrak{M}, \mu) \coloneqq \{
+      f : X \to \mathbb{R}_e \text{ measurable } : f \text{ is essentially bounded }
+    \}.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Hölder conjugates]\index{Hölder conjugates}\label{defn:holder_conjugates}
+  Let $1 \leq p \leq \infty$ and $1 \leq q \leq \infty$.
+  We say that $(p, q)$ is a \hlnoteb{Hölder conjugate} if
+  \begin{equation*}
+    \frac{1}{p} + \frac{1}{q} = 1,
+  \end{equation*}
+  where we set
+  \begin{equation*}
+    p = 1,\, q = \infty \quad\text{ and }\quad
+    p = \infty,\, q = 1.
+  \end{equation*}
+\end{defn}
+
+\begin{lemma}[Young's Inequality]\index{Young's Inequality}\label{lemma:young_s_inequality}
+  Let $(p, q)$ be a Hölder conjugate, and $a, b \geq 0$.
+  Then
+  \begin{equation*}
+    a \cdot b \leq \frac{a^p}{p} + \frac{b^q}{q}.
+  \end{equation*}
+\end{lemma}
+
+\begin{proof}
+  \hlwarn{We'll come back}
+\end{proof}
+
+\begin{thm}[Hölder's Inequality]\index{Hölder's Inequality}\label{thm:holder_s_inequality}
+  Let $(p, q)$ be a Hölder conjugate.
+  If $f \in \mathcal{L}^p(X, \mathfrak{M}, \mu)$
+  and $g \in \mathcal{L}^q(X, \mathfrak{M}, \mu)$, then
+  $f \cdot g \in \mathcal{L}^1(X, \mathfrak{M}, \mu)$ and
+  \begin{equation*}
+    \norm{f \cdot g}_1 \leq \norm{f}_p \cdot \norm{g}_q.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  \hlwarn{We'll come back}
+\end{proof}
+
+% section the_l_p_spaces (end)
+
+% chapter lecture_30_nov_20th_2019 (end)
+
 \appendix
 
 \chapter{Deep Dives into Proofs}%
