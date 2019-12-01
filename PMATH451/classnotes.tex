@@ -18,6 +18,7 @@
   BoldItalicFont = P052-BoldItalic.otf ]
 \input{latex-classnotes-preamble.tex}
 
+\DeclareMathOperator{\BV}{BV}
 \DeclareMathOperator{\Vol}{Vol}
 \DeclareMathOperator{\range}{range}
 
@@ -6198,6 +6199,22 @@ stated as a theorem.
 \label{sec:signed_measures}
 % section signed_measures
 
+Consider a function $f < 0$. We know that we can seek the
+integral of $f$ with respect to a given measure $\mu$,
+i.e.
+\begin{equation*}
+  \int_{X} f \dif{\mu}.
+\end{equation*}
+Considering the way we \hyperref[defn:integral_of_a_measurable_function]{define}
+such an integral, we may very well have $\int_{X} f \dif{\mu} < 0$.
+On the other hand, we know that we can define a function
+\begin{equation*}
+  \nu(E) = \int_{E} f \dif{\mu}.
+\end{equation*}
+Had $f$ be non-negative, $\nu$ would be a measure.
+We want to allow $\nu$, where $f < 0$, to also be considered a `measure'.
+This leads us to consider the following notion.
+
 \begin{defn}[Signed Measure]\index{Signed Measure}\label{defn:signed_measure}
   Let $(X, \mathfrak{M})$ be a measurable space.
   We say that $\nu : X \to \mathbb{R}_e$ is a \hlnoteb{signed measure}
@@ -6215,6 +6232,14 @@ stated as a theorem.
       N,\, \sum_{j=1}^{n} \nu(E_j) > c$).
   \end{enumerate}
 \end{defn}
+
+\begin{remark}
+  The second condition where $\nu$ cannot simultaneously have $-\infty$
+  and $\infty$ in its domain is considered so that we do not have
+  to deal with the controversial case of $\infty - \infty$,
+  while still allowing for $\infty$ to be a possible value
+  in our measurement.
+\end{remark}
 
 \begin{eg}
   \begin{enumerate}
@@ -7240,6 +7265,308 @@ Let us take a short detour into derivatives.
 % section radon_nikodym_theorem_and_the_lebesgue_decomposition_theorem_continued_2 (end)
 
 % chapter lecture_25_nov_8th_2019 (end)
+
+\chapter{Lecture 26 Nov 11th 2019}%
+\label{chp:lecture_26_nov_11th_2019}
+% chapter lecture_26_nov_11th_2019
+
+\section{Non-decreasing Functions}%
+\label{sec:non_decreasing_functions}
+% section non_decreasing_functions
+
+\begin{note}
+  For sanity (of keeping up with notes for the rest of the course),
+  we shall refer to non-decreasing functions are increasing functions.
+  We shall call increasing functions are strictly increasing functions.
+\end{note}
+
+\begin{notation}
+  Let $F : \mathbb{R} \to \mathbb{R}$ be an increasing function.
+  We shall denote
+  \begin{equation*}
+    F(x-) \coloneqq \lim_{y \to x^-} F(y) = \sup \{ F(y) : y < x \},
+  \end{equation*}
+  and
+  \begin{equation*}
+    F(x+) = \lim_{y \to x^+} F(y) = \inf \{ F(y) : y > x \}.
+  \end{equation*}
+\end{notation}
+
+\begin{propo}[Properties of $F(x+)$ and $F(x-)$]\label{propo:properties_of_f_x_plus_and_f_x_minus}
+  Let $F : \mathbb{R} \to \mathbb{R}$ be an increasing function.
+  \begin{enumerate}
+    \item $x_1 < x_2 \implies F(x_1+) \leq F(x_2-)$.
+    \item $F(x-)$ and $F(x+)$ are both increasing.
+    \item $F(x-)$ is left continuous, i.e.
+      \begin{equation*}
+        F(x-) = \lim_{y \to x^-} F(y-).
+      \end{equation*}
+    \item $F(x+)$ is right continuous, i.e.
+      \begin{equation*}
+        F(x+) = \lim_{y \to x^-} F(y+).
+      \end{equation*}
+    \item The set of points where $F$ is not continuous is countable.
+    \item $F$ is $\mathfrak{B}(\mathbb{R})$-measurable.
+  \end{enumerate}
+\end{propo}
+
+\begin{proof}
+  \begin{enumerate}
+    \item Let $x_3 \in \mathbb{R}$ be such that $x_1 < x_3 < x_2$.
+      It is clear that
+      \begin{equation*}
+        F(x_1+) = \inf \{ F(y) : y > x_1 \} \leq F(x_3)
+      \end{equation*}
+      and
+      \begin{equation*}
+        F(x_3) \leq \sup \{ F(y) : y < x_2 \} = F(x_2-).
+      \end{equation*}
+
+    \item Let $x_1 < x_2$. Then
+      \begin{equation*}
+        F(x_1-) = \sup \{ F(y) : y < x_1 \} \leq \sup \{ F(y) : y < x_2 \} =
+        F(x_2-)
+      \end{equation*}
+      because the latter set allows for more choice for a supremum.
+      For the other case,
+      \begin{equation*}
+        F(x_1+) = \inf \{ F(y) : y > x_1 \} \leq \inf \{ F(y) : y > x_2 \} =
+        F(x_2+)
+      \end{equation*}
+      because the former set allows for more choice for an infimum.
+
+    \item Let $\epsilon > 0$. For any $x \in \mathbb{R}$, since
+      \begin{equation*}
+        F(x-) = \sup \{ F(y) : y < x \},
+      \end{equation*}
+      we know that $\exists y < x$ such that $\abs{F(x-) - F(y)} <
+      \frac{\epsilon}{3}$.
+      Furthermore, for each $y < x$, since
+      \begin{equation*}
+        F(y-) = \sup \{ F(z) : z < y \},
+      \end{equation*}
+      we can find $z < y < x$ such that $\abs{F(y-) - F(z)} <
+      \frac{\epsilon}{3}$.
+
+      Suppose to the contrary that $\abs{F(y-) - F(y)} \geq \frac{\epsilon}{3}$.
+      This means that
+      \begin{equation*}
+        \sup \{ F(z) : z < y \} - F(y) > 0,
+      \end{equation*}
+      and so there must exist some $z < y$ such that $F(z) > F(y)$,
+      but that contradicts the fact that $F$ is increasing.
+      Thus $\abs{F(y-) - F(y)} < \frac{\epsilon}{3}$.
+
+      It follows that $\exists z < x$ such that
+      \begin{equation*}
+        \abs{F(x-) - F(z)} \leq \abs{F(x-) - F(y)} + \abs{F(y) - F(y-)} +
+        \abs{F(y-) - F(z)} < \epsilon.
+      \end{equation*}
+
+    \item The proof for $(4)$ is similar to that of $(3)$.
+    \item Let
+      \begin{equation*}
+        B \coloneqq \{ x : F \text{ is discontinuous at } x \}.
+      \end{equation*}
+      Note that $F$ being continuous at a point $x$ means that
+      \begin{gather*}
+        F(x-) = F(x) = F(x+).
+      \end{gather*}
+      Since we always have $F(x-) \leq F(x+)$, if $F$ is
+      discontinuous at $x$, then we must have $F(x-) < F(x+)$.
+
+      If $F$ has only one point of discontinuity, then our job is done.
+
+      Let $x_1$ and $x_2$ be 2 points of discontinuity of $F$ on $\mathbb{R}$.
+      WLOG, suppose $x_1 < x_2$. Then by part $(1)$, we have
+      \begin{equation*}
+        F(x_1-) < F(x_1+) \leq F(x_2-) < F(x_2+).
+      \end{equation*}
+      This means that if we consider $r_{x_1}, r_{x_2} \in \mathbb{Q}$ such that
+      \begin{equation*}
+        F(x_1-) < r_{x_1} < F(x_1+) \leq F(x_2-) < r_{x_2} < F(x_2+),
+      \end{equation*}
+      we know that we can clearly distinguish $r_{x_1}$ and $r_{x_2}$.
+      If we then consider the map
+      \begin{align*}
+        f &: B \to \mathbb{Q} \\
+          & x \mapsto r_x,
+      \end{align*}
+      $f$ must be one-to-one, and so $B$ is at most countable.
+
+    \item Let $a \in \mathbb{R}$, and consider $A = (a, \infty)$.
+      WTS $F^{-1}(A) \in \mathfrak{B}(\mathbb{R})$.
+      Note that $x \in F^{-1}(A) \iff F(x) > a$.
+      Since $F$ is increasing, $\forall y > x$, we know
+      \begin{equation*}
+        a < F(x) \leq F(y),
+      \end{equation*}
+      which implies that $y \in F^{-1}(A)$ as well.
+      It follows that
+      \begin{equation*}
+        F^{-1}(A) = \begin{cases}
+          \emptyset \\
+          [b, \infty) \\
+          (b, \infty) \\
+          \mathbb{R}
+        \end{cases},
+      \end{equation*}
+      where $b \in \mathbb{R}$ can be checked,
+      and we note that each of the possible forms of $F^{-1}(A)$ is a Borel set.
+  \end{enumerate}
+\end{proof}
+
+% section non_decreasing_functions (end)
+
+\section{Vitali Covering Lemma}%
+\label{sec:vitali_covering_lemma}
+% section vitali_covering_lemma
+
+\begin{notation}
+  We shall use the symbol $\mathfrak{I}$ to denote a collection of intervals,
+  which are possibly open, closed, or half-open, but cannot be singletons.
+\end{notation}
+
+\begin{defn}[Vitali Covering]\index{Vitali Covering}\label{defn:vitali_covering}
+  Let $E \subseteq \mathbb{R}$. We say that $\mathfrak{I}$
+  is a \hlnoteb{Vitali covering} of $E$ if $\forall \epsilon > 0$,
+  $\forall x \in E$, $\exists I \in \mathfrak{I}$ such that $x \in I$
+  and $\ell(I) < \epsilon$.
+\end{defn}
+
+\begin{remark}
+  In words, a Vitali covering is defined such that for every positive $\epsilon$,
+  every point $x$ in $E$ can be covered by an interval of length less than $\epsilon$.
+  So a Vitali covering is a special kind of
+  \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf\#defn.70}{\hlnoteb{cover}} for $E$,
+  and also a special kind of
+  \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf\#defn.75}{\hlnoteb{$\epsilon$-net}}.
+\end{remark}
+
+\begin{thm}[Vitali Covering Lemma]\index{Vitali Covering Lemma}\label{thm:vitali_covering_lemma}
+  Suppose $E \subseteq \mathbb{R}$ and $m^*(E) < \infty$, where we note that
+  $m^*$ is the Lebesgue outer measure.
+  Suppose $\mathfrak{I}$ is a Vitali covering of $E$.
+  Let $\epsilon > 0$.
+  Then $\exists \{ I_1, \ldots, I_n \} \subseteq \mathfrak{I}$
+  a disjoint collection
+  \begin{equation*}
+    m^* \left( E \mathbin{\Big\backslash} \bigcup_{n=1}^{N} I_n \right) < \epsilon.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  First, notice that if we can find a Vitali covering of $E$ where each interval
+  is closed, such that the above statement holds, then we can also find
+  intervals of other forms that work. Thus WLOG, assume every $I \in
+  \mathfrak{I}$ is closed.
+
+  % Since $m^*(E) < \infty$, 
+  \hlwarn{Will come back}
+\end{proof}
+
+% section vitali_covering_lemma (end)
+
+% chapter lecture_26_nov_11th_2019 (end)
+
+\chapter{Lecture 27 Nov 13th 2019}%
+\label{chp:lecture_27_nov_13th_2019}
+% chapter lecture_27_nov_13th_2019
+
+\section{Vitali Covering Lemma (Continued)}%
+\label{sec:vitali_covering_lemma_continued}
+% section vitali_covering_lemma_continued
+
+\begin{defn}[$D^+, D^-, D_+, D_-$]\index{$D^+$}\index{$D^-$}\index{$D_+$}\index{$D_-$}\label{defn:d_upper_plus}\label{defn:d_upper_minus}\label{defn:d_lower_plus}\label{defn:d_lower_minus}
+  Let $f : (a, b) \to \mathbb{R}$. We define
+  \begin{align*}
+    D^+ f(x) &\coloneqq \limsup_{h \to 0^+} \frac{f(x + h) - f(x)}{h} \\
+    D^- f(x) &\coloneqq \limsup_{h \to 0^-} \frac{f(x + h) - f(x)}{h} \\
+            &= \limsup_{h \to 0^+} \frac{f(x) - f(x - h)}{h} \\
+    D_+ f(x) &\coloneqq \liminf_{h \to 0^+} \frac{f(x + h) - f(x)}{h} \\
+    D_- f(x) &\coloneqq \liminf_{h \to 0^-} \frac{f(x + h) - f(x)}{h} \\
+            &= \liminf_{h \to 0^+} \frac{f(x) - f(x - h)}{h}
+  \end{align*}
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item Since all the above are defined using $\liminf$ and $\limsup$,
+      we know that these values always exists.
+    \item However, they are not always equal, since derivatives
+      don't always exist. In other words, if all 4 are equal,
+      we know that $f'(x)$ exists and is equal to the common value.
+  \end{enumerate}
+\end{remark}
+
+\begin{thm}[Partial Fundamental Theorem of Calculus for Increasing Functions]\label{thm:partial_fundamental_theorem_of_calculus_for_increasing_functions}
+  Let $f : [a, b] \to \mathbb{R}$ increasing, then $f'(x)$ exists
+  for almost all $x$, $f'(x)$ is Lebesgue integrable, and
+  \begin{equation*}
+    \int_{a}^{b} f'(x) \dif{m} \leq f(b) - f(a).
+  \end{equation*}
+\end{thm}
+
+\begin{eg}\label{eg:no_ftc}
+  Consider the \nameref{para:cantor_function} $F$,
+  where we recall
+  \begin{equation*}
+    F(0) = 0,\, F(1) = 1,\, \text{ and } F'(x) = 0\enspace \forall x \notin C,
+  \end{equation*}
+  and $F$ is increasing. Notice that
+  \begin{equation*}
+    0 = \int_{0}^{1} F' \dif{m} < f(1) - f(0) = 1.
+  \end{equation*}
+\end{eg}
+
+\begin{proof}[Outline of \cref{thm:partial_fundamental_theorem_of_calculus_for_increasing_functions}]
+  \hlwarn{We'll come back}
+\end{proof}
+
+\begin{remark}
+  From \cref{eg:no_ftc}, we know that we cannot have the Fundamental Theorem of
+  Calculus for general measures.
+\end{remark}
+
+However, we are not going down without a fight.
+We shall now look into the class of functions that satisfy the
+Fundamental Theorem of Calculus for general measures.
+
+% section vitali_covering_lemma_continued (end)
+
+\section{Functions of Bounded Variation}%
+\label{sec:functions_of_bounded_variation}
+% section functions_of_bounded_variation
+
+\begin{defn}[Functions of Bounded Variation]\index{Functions of Bounded Variation}\label{defn:functions_of_bounded_variation}
+  Let $F : [a, b] \to \mathbb{C}$. \sidenote{Note that we use $\mathbb{C}$ here,
+  so that we allow for the function to map to both complex and also purely real
+  values.}
+  We say that $F$ is of \hlnoteb{bounded variation} if
+  \begin{equation*}
+    V_F[a, b] \coloneqq \sup_{P[a, b]} \left\{ 
+      \sum_{i=1}^{n} \abs{F(x_i) - F(x_{i-1})} : x_i \in P[a, b]
+    \right\} < \infty,
+  \end{equation*}
+  where $P[a, b]$ is a \hyperref[defn:riemann_integration]{partition} of $[a, b]$.
+  We also write that $F \in \BV[a, b]$.
+
+  We may extend $[a, b]$ to be the entire real line and consider, instead,
+  \begin{equation*}
+    V_F(\mathbb{R}) \coloneqq \sup_{P(\mathbb{R})} \left\{ 
+      \sum_{i=1}^{n} \abs{F(x_i) - F(x_{i-1})} : x_i \in P(\mathbb{R})
+    \right\},
+  \end{equation*}
+  where in this case, our partition $P(\mathbb{R})$ can be
+  \begin{equation*}
+    P = \{ x_0 < x_1 < \hdots < x_n \},
+  \end{equation*}
+  where $x_0$ and $x_n$ are arbitrary points in $\mathbb{R}$.
+\end{defn}
+
+% section functions_of_bounded_variation (end)
+
+% chapter lecture_27_nov_13th_2019 (end)
 
 \appendix
 
