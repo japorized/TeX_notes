@@ -7550,6 +7550,7 @@ Fundamental Theorem of Calculus for general measures.
   \end{equation*}
   where $P[a, b]$ is a \hyperref[defn:riemann_integration]{partition} of $[a, b]$.
   We also write that $F \in \BV[a, b]$.
+  We call $V_F[a, b]$ the \hlnoteb{bounded variation} of $F$ on $[a, b]$.
 
   We may extend $[a, b]$ to be the entire real line and consider, instead,
   \begin{equation*}
@@ -7567,6 +7568,141 @@ Fundamental Theorem of Calculus for general measures.
 % section functions_of_bounded_variation (end)
 
 % chapter lecture_27_nov_13th_2019 (end)
+
+\chapter{Lecture 28 Nov 15th 2019}%
+\label{chp:lecture_28_nov_15th_2019}
+% chapter lecture_28_nov_15th_2019
+
+\section{Functions of Bounded Variation (Continued)}%
+\label{sec:functions_of_bounded_variation_continued}
+% section functions_of_bounded_variation_continued
+
+\begin{defn}[Total Variation]\index{Total Variation}\label{defn:total_variation}
+  Let $F$ be a function of bounded variation.
+  The \hlnoteb{total variation} of $F$ is defined as
+  \begin{equation*}
+    T_F(x) \coloneqq \sup_{\text{partition}} \left\{ 
+      \sum_{i=1}^{n} \abs{F(x_i) - F(x_{i-1})} : x_0 < x_1 < \hdots < x_n = x
+    \right\}.
+  \end{equation*}
+\end{defn}
+
+\begin{remark}
+  \begin{enumerate}
+    \item $T_F$ is increasing (non-decreasing).
+    \item $\forall x \in \mathbb{R}$, notice that
+      \begin{equation*}
+        0 \leq T_F(x) \leq V_F(\mathbb{R}).
+      \end{equation*}
+  \end{enumerate}
+\end{remark}
+
+\begin{eg}
+  \begin{enumerate}
+    \item Let $F : [a, b] \to \mathbb{R}$ be increasing, with
+      an arbitrary partition
+      \begin{equation*}
+        a = x_0 < x_1 < \hdots < x_n = b.
+      \end{equation*}
+      Then
+
+      $\begin{WithArrows}
+        \sum_{j=1}^{n} \abs{F(x_j) - F(x_{j-1})}
+        &= \sum_{j=1}^{n} F(x_j) - F(x_{j-1}) \enspace
+        \because F \text{ is increasing } \Arrow{Telescope} \\
+        &= F(x_n) - F(x_0) \\
+        &= F(b) - F(a) < \infty.
+      \end{WithArrows}$
+
+      Thus $F \in \BV[a, b]$.
+      Furthermore
+      \begin{equation*}
+        V_F[a, b] = F(b) - F(a).
+      \end{equation*}
+
+    \item Consider the function $F(x) = x$.
+      Then it's clear that $F \in \BV[a, b]$.
+      However, $F \notin \BV(\mathbb{R})$,
+      since $F(x) \to \infty$ as $x \to \infty$ and
+      so $V_F(\mathbb{R}) = \infty$.
+
+    \item Let $F : [a, b] \to \mathbb{C} \in \BV[a, b]$.
+      Let
+      \begin{align*}
+        \tilde{F} &: \mathbb{R} \to \mathbb{C} \\
+              & x \mapsto \begin{cases}
+                F(b) & x \geq b \\
+                F(x) & a < x < b \\
+                F(a) & x \leq a
+              \end{cases}.
+      \end{align*}
+      Thus $\tilde{F} \in \BV[a, b]$ as well, and
+      \begin{equation*}
+        T_F[a, b] = T_{\tilde{F}}(\mathbb{R}).
+      \end{equation*}
+      This means that we can focus on functions that map
+      from the whole real line.
+
+    \item Let $F : \mathbb{R} \to \mathbb{R}$ be increasing and bounded.
+      Then
+      \begin{equation*}
+        \lim_{x \to \infty} = \sup \{ F(x) : x \in \mathbb{R} \} =: F(+\infty) < \infty
+      \end{equation*}
+      and
+      \begin{equation*}
+        \lim_{x -> - \infty} = \inf \{ F(x) : x \in \mathbb{R} \} =: F(-\infty) < \infty.
+      \end{equation*}
+      Then $F \in \BV(\mathbb{R})$ and
+      \begin{equation*}
+        T_F(\mathbb{R}) = F(+\infty) - F(-\infty).
+      \end{equation*}
+
+    \item Suppose $h \in \mathcal{L}^1(\mathbb{R}, m)$
+      Let
+      \begin{equation*}
+        F(x) = \int_{(-infty, x)} h \dif{m}.
+      \end{equation*}
+      Then $F \in \BV(\mathbb{R})$, and
+      \begin{equation*}
+        T_F(\mathbb{R}) \leq \int_{\mathbb{R}} \abs{h} \dif{m}.
+      \end{equation*}
+
+      \begin{proof}
+        Let $x_0 < x_1 < \hdots < x_n$. Notice that
+        \begin{align*}
+          \abs{F(x_j) - F(x_{j-1})}
+          &= \abs{\int_{(-\infty, x_j)} h \dif{m}
+              - \int_{(-\infty, x_{j-1})} h \dif{m}} \\
+          &= \abs{\int_{(x_{j-1}, x_j)} h \dif{m}} \\
+          &\leq \int_{(x_{j-1}, x_j)} \abs{h} \dif{m},
+        \end{align*}
+        for each $j$.
+        Thus
+        \begin{align*}
+          \sum_{j=1}^{n} \abs{F(x_j) - F(x_{j-1})}
+          &\leq \int_{(x_0, x_n)} \abs{h} \dif{m} \\
+          &\leq \int_{\mathbb{R}} \abs{h} \dif{m}.
+        \end{align*}
+        It is then clear that
+        \begin{equation*}
+          T_F(\mathbb{R}) \leq \int_{\mathbb{R}} \abs{h} \dif{m}.
+        \end{equation*}
+      \end{proof}
+  \end{enumerate}
+\end{eg}
+
+\begin{lemma}[Total Variation $\pm F$]\label{lemma:total_variation_pm_f_}
+  Let $F : \mathbb{R} \to \mathbb{R} \in \BV(\mathbb{R})$. Then
+  $T_F + F$ and $T_F - F$ are both increasing functions and bounded.
+\end{lemma}
+
+\begin{proof}
+  \hlwarn{We'll come back}
+\end{proof}
+
+% section functions_of_bounded_variation_continued (end)
+
+% chapter lecture_28_nov_15th_2019 (end)
 
 \appendix
 
