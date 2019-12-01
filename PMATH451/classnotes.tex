@@ -18,6 +18,7 @@
   BoldItalicFont = P052-BoldItalic.otf ]
 \input{latex-classnotes-preamble.tex}
 
+\DeclareMathOperator{\AC}{AC}
 \DeclareMathOperator{\BV}{BV}
 \DeclareMathOperator{\Vol}{Vol}
 \DeclareMathOperator{\range}{range}
@@ -7700,9 +7701,120 @@ Fundamental Theorem of Calculus for general measures.
   \hlwarn{We'll come back}
 \end{proof}
 
+\begin{note}[Jordan Decomposition of $F$]\label{note:jordan_decomposition_of_a_function}
+  For $F \in \BV(\mathbb{R})$, we may write
+  \begin{equation*}
+    F = \left( \frac{T_F + F}{2} \right) - \left( \frac{T_F - F}{2} \right),
+  \end{equation*}
+  which is a difference of $2$ increasing bounded functions.
+\end{note}
+
+\begin{thm}[Properties of Functions of Bounded Variation]\label{thm:properties_of_functions_of_bounded_variation}
+  \begin{enumerate}
+    \item $\BV(\mathbb{R})$ is a vector space.
+    \item \begin{align*}
+        F \in \BV(\mathbb{R}) &\iff \overline{F} \in \BV(\mathbb{R}) \\
+          &\iff \Re(F),\, \Im(F) \in \BV(\mathbb{R}),
+      \end{align*}
+      where $\overline{F}$ is the complex conjugate of $F$.
+    \item Let $F : \mathbb{R} \to \mathbb{R}$. Then
+      \begin{equation*}
+        F \in \BV(\mathbb{R}) \iff F = H_1 - H_2,
+      \end{equation*}
+      where $H_1, H_2$ are increasing and bounded.
+    \item \begin{gather*}
+        F \in \BV(\mathbb{R}) \\
+        \implies \lim_{y \to x^+} F(y),\, \lim_{y \to x^-} F(y),\,
+          \lim_{y \to \infty} F(y),\, \lim_{y \to -\infty} F(y)
+      \end{gather*}
+      all exists.
+    \item Let $F \in \BV(\mathbb{R})$. Then the set of points of discontinuity
+      of $F$ is at most countable.
+    \item Let $F : \mathbb{R} \to \mathbb{R} \in \BV(\mathbb{R})$.
+      Then $F'(x)$ exists a.e.
+  \end{enumerate}
+\end{thm}
+
+\begin{proof}
+  \hlwarn{We'll come back}
+\end{proof}
+
+\begin{defn}[Absolutely Continuous Functions]\index{Absolutely Continuous Function}\label{defn:absolutely_continuous_functions}
+  A function $f : \mathbb{R} \to \mathbb{C}$ is said to be
+  \hlnoteb{absolutely continuous} if $\forall \epsilon > 0$, $\exists \delta > 0$
+  such that $\forall (a_1, b_1), \ldots, (a_n,, b_n)$ that are disjoint,
+  if $\sum_{j=1}^{n} (b_j - a_j) < \delta$, then
+  \begin{equation*}
+    \sum_{j=1}^{n} \abs{F(b_j) - F(a_j)} < \epsilon.
+  \end{equation*}
+  We write that $f \in \AC(\mathbb{R})$.
+\end{defn}
+
+\begin{remark}
+  Notice if there is only one of $(a_i, b_i)$ that works, then
+  the above definition is simply the definition of uniform continuity.
+  Thus, since this $\epsilon$ works for all the intervals, in a sense
+  we may think of absolutely continuous functions as ``uniformly uniform
+  continuous functions''.
+\end{remark}
+
 % section functions_of_bounded_variation_continued (end)
 
 % chapter lecture_28_nov_15th_2019 (end)
+
+\chapter{Lecture 29 Nov 18th 2019}%
+\label{chp:lecture_29_nov_18th_2019}
+% chapter lecture_29_nov_18th_2019
+
+\section{Functions of Bounded Variation (Continued 2)}%
+\label{sec:functions_of_bounded_variation_continued_2}
+% section functions_of_bounded_variation_continued_2
+
+\begin{propo}[Measure Constructed From A Bounded, Absolutely Continuous, Increasing, Right-Continuous Function]\label{propo:measure_constructed_from_a_bounded_absolutely_continuous_increasing_right_continuous_function}
+  Let $H : \mathbb{R} \to \mathbb{R}$ be a bounded, right-continuous increasing
+  function. Then
+  \begin{equation*}
+    \mu_H \ll m \iff H \in \AC(\mathbb{R}).
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  \hlwarn{We'll come back}
+\end{proof}
+
+\begin{lemma}[Absolutely Continuous Functions are of Bounded Variation]\label{lemma:absolutely_continuous_functions_are_of_bounded_variation}
+  Let $F : [a, b] \to \mathbb{R}$ be absolutely continuous. Then
+  $F \in \BV[a, b]$.
+\end{lemma}
+
+\begin{proof}
+  \hlwarn{We'll come back}
+\end{proof}
+
+\begin{lemma}[Total Variation of Absolutely Continuous Functions are Absolutely Continuous]\label{lemma:total_variation_of_absolutely_continuous_functions_are_absolutely_continuous}
+  Let $F : [a, b] \to \mathbb{R}$ be absolutely continuous.
+  Then $T_F(x)$ is also absolutely continuous.
+\end{lemma}
+
+\begin{proof}
+  \hlwarn{We'll come back}
+\end{proof}
+
+\begin{lemma}[Building Block for Fundamental Theorem of Calculus for General Measures]\label{lemma:building_block_for_fundamental_theorem_of_calculus_for_general_measures}
+  Let $f$ be a bounded measurable function, and $a \in \mathbb{R}$. Let
+  \begin{equation*}
+    F(x) \coloneqq \int_{(a, x)} f \dif{m}.
+  \end{equation*}
+  Then $F'(x) = f(x)$ a.e.
+\end{lemma}
+
+\begin{proof}
+  \hlwarn{We'll come back}
+\end{proof}
+
+% section functions_of_bounded_variation_continued_2 (end)
+
+% chapter lecture_29_nov_18th_2019 (end)
 
 \appendix
 
