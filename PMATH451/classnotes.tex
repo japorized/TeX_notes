@@ -7551,7 +7551,7 @@ Fundamental Theorem of Calculus for general measures.
   \end{equation*}
   where $P[a, b]$ is a \hyperref[defn:riemann_integration]{partition} of $[a, b]$.
   We also write that $F \in \BV[a, b]$.
-  We call $V_F[a, b]$ the \hlnoteb{bounded variation} of $F$ on $[a, b]$.
+  We call $V_F[a, b]$ the \hldefn{variation} of $F$ on $[a, b]$.
 
   We may extend $[a, b]$ to be the entire real line and consider, instead,
   \begin{equation*}
@@ -7610,7 +7610,7 @@ Fundamental Theorem of Calculus for general measures.
       $\begin{WithArrows}
         \sum_{j=1}^{n} \abs{F(x_j) - F(x_{j-1})}
         &= \sum_{j=1}^{n} F(x_j) - F(x_{j-1}) \enspace
-        \because F \text{ is increasing } \Arrow{Telescope} \\
+          \because F \text{ is increasing } \Arrow{Telescope} \\
         &= F(x_n) - F(x_0) \\
         &= F(b) - F(a) < \infty.
       \end{WithArrows}$
@@ -7860,9 +7860,25 @@ Fundamental Theorem of Calculus for general measures.
 
 % section functions_of_bounded_variation_continued_3 (end)
 
-\section{The \texorpdfstring{$L^p$}{LP}-spaces}%
+\section{The \texorpdfstring{$L^p$}{Lp}-spaces}%
 \label{sec:the_l_p_spaces}
 % section the_l_p_spaces
+
+\marginnote{It is helpful to review some of the contents from real analysis on
+metric spaces, particularly in
+\begin{itemize}
+  \item metric;
+  \item convergence;
+  \item Cauchy sequences; and
+  \item completeness.
+\end{itemize}
+You may find the material at
+\href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf}{PMATH 351}.
+
+It may also be helpful to review some of the materials on $L^p$ spaces
+in the course on Lebesgue measure and integration
+(\href{https://tex.japorized.ink/PMATH450/classnotes.pdf}{PMATH 450}).
+}
 
 \begin{defn}[$\mathcal{L}^p$-spaces]\index{$\mathcal{L}^p$-spaces}\label{defn:_mathcal_l_p_spaces}
   Let $(X, \mathfrak{M}, \mu)$ be a measure space. Let $1 \leq p < \infty$.
@@ -7951,6 +7967,324 @@ Fundamental Theorem of Calculus for general measures.
 % section the_l_p_spaces (end)
 
 % chapter lecture_30_nov_20th_2019 (end)
+
+\chapter{Lecture 31 Nov 22th 2019}%
+\label{chp:lecture_31_nov_22th_2019}
+% chapter lecture_31_nov_22th_2019
+
+\section{The \texorpdfstring{$L^p$}{Lp}-spaces (Continued)}%
+\label{sec:the_l_p_spaces_continued}
+% section the_l_p_spaces_continued
+
+\begin{propo}[$\mathcal{L}^p$-spaces are Vector Spaces]\label{propo:_cal_l_p_spaces_are_vector_spaces}
+  Let $1 \leq p \leq \infty$.
+  $\mathcal{L}^p(X, \mathfrak{M}, \mu)$ is a vector space.
+\end{propo}
+
+\begin{proof}
+  \hlbnotec{Case: $1 < p < \infty$}
+  Let $\alpha \in \mathbb{R}$ and $f, g \in \mathcal{L}^p$.
+
+  \noindent
+  \hlbnoted{Closure under scalar multiplication}
+  Notice that
+  \begin{equation*}
+    \int_{X} \abs{\alpha f}^p \dif{\mu}
+    = \abs{\alpha}^p \int_{X} \abs{f}^p \dif{\mu} < \infty.
+  \end{equation*}
+  Thus $\alpha f \in \mathcal{L}^p$.
+
+  \noindent
+  \hlbnoted{Closure under addition}
+  First, notice that
+  \begin{equation*}
+    \abs{f(x) + g(x)} \leq \begin{cases}
+      2 \abs{f(x)} & \abs{f(x)} \geq \abs{g(x)} \\
+      2 \abs{g(x)} & \text{ otherwise }
+    \end{cases}.
+  \end{equation*}
+  Thus
+  \begin{align*}
+    \abs{f(x) + g(x)}^p &\leq \begin{cases}
+      2^p \abs{f(x)}^p & \abs{f(x)} \geq \abs{g(x)} \\
+      2^p \abs{g(x)}^p & \text{ otherwise }
+    \end{cases} \\
+    &\leq 2^p \left( \abs{f(x)}^p + \abs{g(x)}^p \right).
+  \end{align*}
+  Hence
+  \begin{equation*}
+    \int_{X} \abs{f + g}^p \dif{\mu}
+    \leq \int_{X} 2^p \left( \abs{f(x)}^p + \abs{g(x)}^p \right) \dif{\mu}
+    < \infty.
+  \end{equation*}
+  It follows that $f + g \in \mathcal{L}^p$.
+\end{proof}
+
+\begin{thm}[Minkowski's Inequality]\index{Minkowski's Inequality}\label{thm:minkowski_s_inequality}
+  Let $1 \leq p \leq \infty$.
+  If $f, g \in \mathcal{L}^p$, then
+  \begin{equation*}
+    \norm{f + g}_p \leq \norm{f}_p + \norm{g}_p.
+  \end{equation*}
+\end{thm}
+
+\begin{proof}
+  \hlbnotec{Case: $1 < p < \infty$}
+  Let $(p, q)$ be a Hölder conjugate.
+  Note that $q = \frac{p}{p-1}$ and $lp = (p-1)q$.
+  Then, using \nameref{thm:holder_s_inequality} at $(*)$,
+  we have
+  \begin{align*}
+    \norm{f + g}_p^p 
+    &= \int_{X} \abs{f(x) + g(x)}^p \dif{\mu} \\
+    &= \int_{X} \abs{f(x) + g(x)} \abs{f(x) + g{x}}^{p-1} \dif{\mu} \\
+    &\leq \int_{X} \abs{f(x)} \abs{f(x) + g(x)}^{p-1} \dif{\mu}
+      + \int_{X} \abs{g(x)} \abs{f(x) + g(x)}^{p-1} \dif{\mu} \\
+    &\overset{(*)}{\leq} \left( \int_{X} \abs{f(x)}^p \dif{\mu} \right)^{\frac{1}{p}}
+      \left( \int_{X} \abs{f(x) + g(x)}^{(p-1)q} \dif{\mu} \right)^{\frac{1}{q}} \\
+    &\qquad + \left( \int_{X} \abs{g(x)}^p \dif{\mu} \right)^{\frac{1}{p}}
+      \left( \int_{X} \abs{f(x) + g(x)}^{(p-1)q} \dif{\mu} \right)^{\frac{1}{q}} \\
+    &= \norm{f}_p \left( \int_{X} \abs{f(x) + g(x)}^p \right)^{\frac{1}{q}}
+      + \norm{g}_p \left( \int_{X} \abs{f(x) + g(x)}^{p} \right)^{\frac{1}{q}} \\
+    &= ( \norm{f}_p + \norm{g}_p )
+      \left( \int_{X} \abs{f(x) + g(x)}^{p} \right)^{\frac{1}{q}} \\
+    &= ( \norm{f}_p + \norm{g}_p ) \norm{f + g}^{\frac{p}{q}}.
+  \end{align*}
+  Hence
+  \begin{equation*}
+    \norm{f + g}_p^{p - \frac{p}{q}} \leq \norm{f}_p + \norm{g}_p.
+  \end{equation*}
+  Finally, note that
+  \begin{equation*}
+    p - \frac{p}{q} = p \left( 1 - \frac{1}{q} \right) = p \cdot \frac{1}{p} = 1.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \norm{f + g}_p \leq \norm{f}_p + \norm{g}_p.
+  \end{equation*}
+\end{proof}
+
+\begin{defn}[Semi-norm]\index{Semi-norm}\label{defn:semi_norm}
+  Let $\mathcal{V}$ be a vector space over $\mathbb{C}$.
+  We call the function $\norm{\cdot} : \mathcal{V} \to \mathbb{R}$
+  a \hlnoteb{semi-norm} when $\norm{\cdot}$ satisfies
+  \begin{enumerate}
+    \item $\forall v \in \mathcal{V} \enspace \norm{v} \geq 0$;
+    \item $\forall v \in \mathcal{V} \enspace \forall \alpha \in \mathbb{C} \enspace
+      \norm{\alpha v} = \abs{\alpha} \norm{v}$; and
+    \item (\hlnotea{triangle inequality}) $\forall v, w \in \mathcal{V} \enspace
+      \norm{v + w} \leq \norm{v} + \norm{w}$.
+  \end{enumerate}
+\end{defn}
+
+\begin{defn}[Norm]\index{Norm}\label{defn:norm}
+  Let $\mathcal{V}$ be a vector space over $\mathbb{C}$.
+  We call the function $\norm{\cdot} : \mathcal{V} \to \mathbb{R}$ a \hlnoteb{norm}
+  when $\norm{\cdot}$ is a semi-norm such that
+  \begin{equation*}
+    \norm{v} = 0 \iff v = 0.
+  \end{equation*}
+\end{defn}
+
+\begin{defn}[Normed Space]\index{Normed Space}\label{defn:normed_space}
+  Let $\mathcal{V}$ be a vector space over $\mathbb{C}$
+  and $\norm{\cdot}$ be a norm on $\mathcal{V}$.
+  We call the pair $(\mathcal{V}, \norm{\cdot})$ a \hlnoteb{normed space}.
+\end{defn}
+
+\begin{note}
+  Let $\norm{\cdot}$ be a semi-norm for a vector space $\mathcal{V}$.
+  Then the set
+  \begin{equation*}
+    \mathcal{N} \coloneqq \{ v \in \mathcal{V} : \norm{v} = 0 \}
+  \end{equation*}
+  is a subspace.
+  We may then consider the quotient space
+  \begin{equation*}
+    \quotient{\mathcal{V}}{\mathcal{N}}
+    \coloneqq \{ v + \mathcal{N} : v \in \mathcal{V} \}
+    = \{ [v] : v \sim w \},
+  \end{equation*}
+  where $v \sim w \iff v - w \in \mathcal{N}$.
+  \sidenote{We shall not show that $\quotient{\mathcal{V}}{\mathcal{N}}$
+  is a vector space, but this is not hard, and those that are familiar with
+  vector spaces will quickly realize so.}
+  We can show that $\quotient{\mathcal{V}}{\mathcal{N}}$ is a vector space.
+  We may then set
+  \begin{equation*}
+    \norm{[v]} \coloneqq \norm{v},
+  \end{equation*}
+  which will then be a \hlnotec{norm} on $\quotient{\mathcal{V}}{\mathcal{N}}$.
+
+  Most importantly to us, notice that given $f \in \mathcal{L}^p$,
+  we know that
+  \begin{equation*}
+    \norm{f}_p = 0 \iff \int_{X} \abs{f}^p \dif{\mu} = 0 \iff f = 0 \text{ a.e. }
+  \end{equation*}
+\end{note}
+
+\begin{defn}[$L^p$-spaces]\index{$L^p$-spaces}\label{defn:_l_p_spaces}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space.
+  Let $1 \leq p \leq \infty$.
+  Consider the space $\mathcal{L}^p(X, \mathfrak{M}, \mu)$.
+  Let
+  \begin{equation*}
+    \mathcal{N}^p \coloneqq \{ f \in \mathcal{L}^p : f = 0 \text{ a.e. } \}.
+  \end{equation*}
+  We define
+  \begin{align*}
+    L^p(X, \mathfrak{M}, \mu) 
+    &\coloneqq \quotient{\mathcal{L}^p(X, \mathfrak{M}, \mu)}
+        {\mathcal{N}^p(X, \mathfrak{M}, \mu)} \\
+    &= \{ [f] : f \sim g \iff f = g \text{ a.e. } \}.
+  \end{align*}
+\end{defn}
+
+\begin{note}
+  We define the \hlnotec{norm} of $L^p$-spaces 
+  as we do in the last note, i.e. we define
+  \begin{equation*}
+    \norm{[f]}_p \coloneqq \norm{f}_p
+  \end{equation*}
+  for any $[f] \in L^p(X, \mathfrak{M}, \mu)$.
+  For $1 \leq p < \infty$, \nameref{thm:minkowski_s_inequality}
+  tells us that $(L^p(X, \mathfrak{M}, \mu), \norm{\cdot}_p)$ is a normed space.
+  We leave the case of $p = \infty$ to be a homework problem for a later date.
+\end{note}
+
+\begin{remark}[Normed spaces are metric spaces]
+  It is important that we note the following.
+  \sidenote{This requires knowledge from metric spaces. See
+  \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf}{PMATH 351}.}
+  A norm \hlnotea{induces} a metric,
+  and so normed spaces are also metric spaces.
+  In particular, given a normed vector space $(\mathcal{V}, \norm{\cdot})$,
+  the standard metric of the vector space is given by
+  \begin{equation*}
+    \rho(v, w) = \norm{v - w},
+  \end{equation*}
+  and we can show that $(\mathcal{V}, \rho)$ is a metric space.
+\end{remark}
+
+\begin{defn}[Banach Space]\index{Banach Space}\label{defn:banach_space}
+  A normed vector space $(\mathcal{V}, \norm{\cdot})$ is called a
+  \hlnoteb{Banach space} if $(\mathcal{V}, \rho)$ is complete,
+  where $\rho$ is the induced metric
+  \begin{equation*}
+    \rho(v, w) = \norm{v - w}.
+  \end{equation*}
+  Note that completeness is in the context of metric spaces,
+  where every Cauchy sequence converges to a point in the space.
+\end{defn}
+
+\begin{thm}[Riesz-Fischer Theorem]\index{Riesz-Fischer Theorem}\label{thm:riesz_fischer_theorem}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space. For any $1 \leq p \leq \infty$,
+  $(L^p(X, \mathfrak{M}, \mu), \norm{\cdot}_p)$ is a Banach space.
+\end{thm}
+
+\begin{proof}
+  \hlbnotec{Case: $1 \leq p < \infty$}
+  Let $\{ [f_n] \}_n \subseteq L^p$ be a Cauchy sequence.
+  We need to construct an $f \in \mathcal{L}^p$ such that
+  $\norm{[f] - [f_n]}_p \to 0$ as $n \to \infty$.
+
+  By the Cauchyness of the arbitrary sequence,
+  inductively define a subsequence $\{ N_1 < N_2 < \hdots \}$
+  such that $\forall n, m \geq N_k$ we have
+  \begin{equation*}
+    \norm{[f_n] - [f_m]}_p < \frac{1}{2^k}.
+  \end{equation*}
+  Set
+  \begin{equation*}
+    g_1 = f_{N_1},\, g_2 = f_{N_2} - f_{N_1},\,
+    \ldots,\, g_k = f_{N_k} - f_{N_{k-1}},\, \ldots.
+  \end{equation*}
+  Notice that
+  \begin{equation*}
+    \norm{g_k}_p = \norm{[g_k]}_p = \norm{[f_{N_k}] - [f_{N_{k-1}}]}_p <
+    \frac{1}{2^{k-1}}
+  \end{equation*}
+  It thus follows that
+  \begin{equation*}
+    \sum_{k=1}^{\infty} \norm{g_k}_p < \infty. 
+  \end{equation*}
+
+  Let $C = \sum_{k=1}^{\infty} \norm{\abs{g_k}}_p < \infty$.
+  Let $h_n(x) = \sum_{k=1}^{n} \abs{g_k(x)}$.
+  It is clear that
+  \begin{equation*}
+    h_1(x) \leq h_2(x) \leq h_3(x) \leq \hdots.
+  \end{equation*}
+  Set $h(x) = \sum_{k=1}^{\infty} \abs{g_k(x)} = \lim_{n \to \infty} h_n(x)$
+  (which possibly evaluates to $\infty$).
+  Then for any $m$,
+  \begin{equation*}
+    \norm{h_m(x)}_p
+    = \norm{ \sum_{k=1}^{m} \abs{g_k(x)} }_p
+    \leq \sum_{k=1}^{m} \norm{\abs{g_k(x)}}_p \leq C.
+  \end{equation*}
+  In other words, $\forall m$, we have
+  \begin{equation*}
+    \int_{X} h_m(x)^p \dif{\mu} = \norm{h_m(x)}_p \leq C^p.
+  \end{equation*}
+  \sidenote{Note that we may drop the absolute value on $h_m(x)$
+  since $h_m(x) \geq 0$.}
+  Furthermore, we know that $h_m(x)^p \nearrow h(x)^p$.
+  By the \nameref{thm:monotone_convergence_theorem}, we have
+  \begin{equation*}
+    \int_{X} h(x)^p \dif{\mu}
+    = \lim_{m \to \infty} \int_{X} h_m(x)^p \dif{\mu} \leq C^p.
+  \end{equation*}
+  This means that $\mu(\{ x : h(x) = \infty \}) = 0$.
+
+  Let $Y = X \setminus \{ x : h(x) = \infty \}$.
+  Then $\forall x \in Y$, we have $h(x) < \infty$.
+  This means that $\forall x \in Y$,
+  \begin{equation*}
+    h(x) = \sum_{k=1}^{\infty} \abs{g_k(x)} < \infty,
+  \end{equation*}
+  i.e. $\{ g_k \}_k$ is absolutely convergent on $Y$.
+  Hence $\{ g_k \}_k$ converges on $Y$.
+  With that, we define
+  \begin{equation*}
+    f(x) \coloneqq \begin{cases}
+      \sum_{k=1}^{\infty} g_k(x) & x \in Y \\
+      0                          & x \notin Y
+    \end{cases}
+  \end{equation*}
+  Then $\forall x \in Y$,  we have
+  \begin{equation*}
+    f(x) = \lim_{K \to \infty} \sum_{k=1}^{K} g_k(x)
+    = \lim_{K \to \infty} f_{N_k}(x).
+  \end{equation*}
+
+  Finally,
+  \begin{align*}
+    \norm{f - \sum_{k=1}^{K} g_k}_p
+    &= \left( \int_{X}
+      \abs{f(x) - \sum_{k=1}^{K} g_k(x)}^p \dif{\mu}
+    \right)^{\frac{1}{p}} \\
+    &= \left( \int_{Y}
+      \abs{f(x) - \sum_{k=1}^{K} g_k(x)}^p \dif{\mu}
+    \right)^{\frac{1}{p}} \\
+    &= \left( \int_{Y} \abs{f(x) - f_{N_k}(x)}^p \dif{\mu} \right)^{\frac{1}{p}} \\
+    &= \left( \int_{Y}
+      \abs{\sum_{k = K+1}^{\infty} g_k(x)}^p \dif{\mu}
+    \right)^{\frac{1}{p}} \\
+    &= \norm{ \sum_{k=K+1}^{\infty} g_k }_p
+     \leq \sum_{k = K+1}^{\infty} \norm{g_k}_p,
+  \end{align*}
+  where we observe that the final term is the tail of $C$,
+  and hence goes to $0$ as $K \to \infty$.
+  Hence $\norm{f - f_{N_k}}_p \to \infty$, and so
+  \begin{equation*}
+    \norm{[f] - [f_n]}_p \to 0 \quad\text{ as }\quad n \to \infty.
+  \end{equation*}
+\end{proof}
+
+% section the_l_p_spaces_continued (end)
+
+% chapter lecture_31_nov_22th_2019 (end)
 
 \appendix
 
