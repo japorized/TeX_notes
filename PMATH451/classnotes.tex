@@ -6194,6 +6194,88 @@ stated as a theorem.
   \end{equation*}
 \end{eg}
 
+\begin{homework}[Homework 17]\label{homework:17}
+	Show that the conclusion of Egoroff's Theorem
+  can fail to hold when $(X, \mathfrak{M}, \mu)$ is $\sigma$-finite.
+\end{homework}
+
+\begin{homework}[Homework 18]\label{homework:18}
+  Let $f, f_n : \mathbb{R} \to \mathbb{R}$,
+  each $f_n$ continuous and
+  \begin{equation*}
+    f(x) = \lim_{n} f_n(x) \quad \forall x.
+  \end{equation*}
+  Prove that $\forall \epsilon > 0$,
+  $\exists E \subseteq \mathbb{R}$ measurable,
+  with $\mu(E) < \epsilon$ such that $f$ is continuous on $E^C$.
+\end{homework}
+
+\begin{homework}[Homework 19]\label{homework:19}
+  Let $(X, \mathfrak{M}, \mu)$ and $(Y, \mathfrak{N}, \nu)$ be
+  $\sigma$-finite measure spaces.
+  Let $E \in \mathfrak{M} \otimes \mathfrak{N}$
+  with $\mu \times \nu(E) = 1$.
+  Prove that for $t > 0$
+  \begin{equation*}
+    \mu(\{ x : \nu(E_x) \geq t \}) \leq \frac{1}{t}.
+  \end{equation*}
+\end{homework}
+
+\begin{homework}[Homework 20]\label{homework:homework_20}
+  Let $(X, \mathfrak{M}, \mu)$ be a measure space, and
+  $f_n, g_n, f, g : X \to \mathbb{R}$ be measurable functions.
+  If $f_n \to f$ in measure, $g_n \to g$ in measure,
+  prove that $f_n + g_n \to f + g$ in measure.
+\end{homework}
+
+\begin{homework}[Homework 21]\label{homework:21}
+  Consider the measure space $(\mathbb{N}, \mathcal{P}(\mathbb{N}), \mu)$,
+  where $\mu$ is the counting measure.
+  \begin{enumerate}
+    \item Let $f : \mathbb{N} \to [0, \infty)$, with $f(n) = a_n$.
+      Prove that
+      \begin{equation*}
+        \int_{\mathbb{N}} f \dif{\mu} = \sum_{n=1}^{\infty} a_n.
+      \end{equation*}
+    \item Let $f : \mathbb{N} \to \mathbb{R}$, with $f(n) = a_n$.
+      Prove that
+      $f \in \mathcal{L}^1(\mathbb{N}, \mathcal{P}(\mathbb{N}), \mu)
+      \iff \sum_{n=1}^{\infty} a_n$ converges absolutely
+      and that in this case
+      \begin{equation*}
+        \int_{\mathbb{N}} f \dif{\mu} = \sum_{n=1}^{\infty} a_n.
+      \end{equation*}
+  \end{enumerate}
+\end{homework}
+
+\begin{homework}[Homework 22]\label{homework:22}
+  Let $g : \mathbb{N} \times \mathbb{N} \to \mathbb{R}$ with
+  \begin{equation*}
+    g(n, m) = a_{n, m}.
+  \end{equation*}
+  For each finite subset $F \subseteq \mathbb{N} \times \mathbb{N}$,
+  set
+  \begin{equation*}
+    S_F = \sum_{(n, m) \in F} a_{n, m}.
+  \end{equation*}
+  We say that $\lim_{F} S_F$ exists and is equal to $L$
+  provided that $\forall \epsilon > 0$, $\exists F_0$ a finite set
+  such that $\forall F \supseteq F_0$ where $F$ is finite,
+  we have $\abs{L - S_F} < \epsilon$.
+
+  Prove or disprove:
+  $g \in \mathcal{L}^1(\mathbb{N} \times \mathbb{N},
+  \mathcal{P}(\mathbb{N}) \otimes \mathcal{P}(\mathbb{N}), \mu \times \mu)
+  \iff \lim_{F} S_F$ exists.
+  And, in this case
+  \begin{equation*}
+    \int_{\mathbb{N} \times \mathbb{N}} g \dif{(\mu \times \mu)}
+    = \lim_{F} S_F.
+  \end{equation*}
+  (You may use $\mathcal{P}(\mathbb{N}) \otimes \mathcal{P}(\mathbb{N})
+  = \mathcal{P}(\mathbb{N} \times \mathbb{N})$.)
+\end{homework}
+
 % section product_measures_continued_3 (end)
 
 \section{Signed Measures}%
@@ -6350,7 +6432,7 @@ This motivates us to make the following definition.
 \end{mnote}
 }
 
-\begin{homework}[Homework 21]\label{homework:21}
+\begin{homework}[Homework 23]\label{homework:23}
   Let $\nu$ be a signed measure. Let
   \begin{equation*}
     E_1 \subseteq E_2 \subseteq \hdots,\, \text{ and }
@@ -8285,6 +8367,389 @@ in the course on Lebesgue measure and integration
 % section the_l_p_spaces_continued (end)
 
 % chapter lecture_31_nov_22th_2019 (end)
+
+\chapter{Lecture 32 Nov 25th 2019}%
+\label{chp:lecture_32_nov_25th_2019}
+% chapter lecture_32_nov_25th_2019
+
+\section{The \texorpdfstring{$L^p$}{Lp}-spaces (Continued 2)}%
+\label{sec:the_l_p_spaces_continued_2}
+% section the_l_P_spaces_continued_2
+
+\begin{homework}[Homework 24]\label{homework:24}
+  Let $F : \mathbb{R} \to \mathbb{R}$ be increasing and right continuous.
+  Prove that $\exists F_i : \mathbb{R} \to \mathbb{R}$ increasing and right
+  continuous for $i = 1, 2$ so that $F = F_1 + F_2$,
+  $\mu_{F_1} \ll m$ and $\mu_{F_2} \bot m$.
+\end{homework}
+
+\begin{homework}[Homework 25]\label{homework:25}
+  Let $f \in \mathcal{L}^{\infty}(X, \mathfrak{M}, \mu)$.
+  Prove that
+  \begin{equation*}
+    \mu(\{ x : \abs{f(x)} > \norm{f}_{\infty} \}) = 0
+  \end{equation*}
+  and that if $\norm{f}_{\infty} > 0$, then
+  \begin{equation*}
+    \norm{f}_{\infty} = \sup \{ M : \mu(\{ x : \abs{f(x)} > M \}) > 0 \}.
+  \end{equation*}
+\end{homework}
+
+\begin{homework}[Homework 26]\label{homework:26}
+  Let $f, g \in \mathcal{L}^{\infty}(X, \mathfrak{M}, \mu)$.
+  Prove that $f + g, f \cdot g \in \mathcal{L}^{\infty}(X, \mathfrak{M}, \mu)$
+  and
+  \begin{gather*}
+    \norm{f + g}_{\infty} \leq \norm{f}_{\infty} + \norm{g}_{\infty} \\
+    \norm{f \cdot g}_{\infty} \leq \norm{f}_{\infty} \cdot \norm{g}_{\infty}.
+  \end{gather*}
+\end{homework}
+
+\begin{homework}[Homework 27]\label{homework:27}
+  Prove $(L^{\infty}(X, \mathfrak{M}, \mu), \norm{\cdot}_{\infty})$
+  is a Banach space.
+\end{homework}
+
+\begin{homework}[Homework 28]\label{homework:28}
+  Let $0 < \alpha$, and define $f_{\alpha} : [0, 1] \to \mathbb{R}$
+  by $f_{\alpha}(x) = x^{\alpha} \sin \left( \frac{1}{x} \right)$.
+  Find and prove the values of $\alpha$ such that
+  \begin{enumerate}
+    \item $f_{\alpha} \in \BV[0, 1]$.
+    \item $f_{\alpha} \in \AC[0, 1]$.
+  \end{enumerate}
+\end{homework}
+
+\begin{thm}[Density of Simple Functions in $\mathcal{L}^p$]\label{thm:density_of_simple_functions_in_cal_p}
+  Let $1 \leq p \leq \infty$, $f \in \mathcal{L}^p(X, \mathfrak{M}, \mu)$
+  and $\epsilon > 0$.
+  Then $\exists \psi \in \mathcal{L}^p(X, \mathfrak{M}, \mu)$ a simple function
+  such that $\norm{f - \psi}_p < \epsilon$.
+\end{thm}
+
+\begin{proof}
+  \hlbnotec{Case: $1 < p < \infty$}
+  Write $f = f^+ - f^-$.
+  By
+  \cref{thm:increasing_sequence_of_simple_functions_converges_an_arbitrary_measurable_function},
+  there exists simple functions
+  \begin{equation*}
+    \phi_n \nearrow f^+ \quad\text{ and }\quad \psi_n \nearrow f^-,
+  \end{equation*}
+  where $\phi_n, \psi_n \in \mathcal{L}^p(X, \mathfrak{M}, \mu)$
+  since $\phi_n \leq f \implies \int_{X} \phi_n \dif{\mu} \leq \int_{X} f^+
+  \dif{\mu} < \infty$ and similarly so for $\psi_n$ with $f^-$.
+
+  Let $\gamma_n = \phi_n - \psi_n$.
+  Then
+  \[\begin{WithArrows}
+    \abs{f - \gamma_n}^p
+      &= \abs{f^+ - \phi_n - (f^- - \psi_n)}^p
+        \Arrow{because of how the pairs alternate} \\
+      &= \abs{f^+ - \phi_n}^p + \abs{f^- - \psi_n}^p \\
+      &\leq \abs{f^+}^p + \abs{f^-}^p = \norm{f}_p.
+  \end{WithArrows}\]
+  By the \nameref{thm:monotone_convergence_theorem},
+  \begin{equation*}
+    \lim_{n \to \infty} \int_{X} \abs{f - \gamma_n}^p \dif{\mu}
+    = \int_{X} \lim_{n \to \infty} \abs{f - \gamma_n}^p \dif{\mu} = 0.
+  \end{equation*}
+  Thus $\norm{f - \gamma_n}_p^p \to 0$, i.e.
+  $\exists n_0$ such that $\norm{f - \gamma_n}_p < \epsilon$.
+\end{proof}
+
+\begin{remark}
+  This density extends to $L^p$-spaces.
+\end{remark}
+
+\begin{defn}[Bounded Linear Functional]\index{Bounded Linear Functional}\label{defn:bounded_linear_functional}
+  Let $(\mathcal{V}, \norm{\cdot})$ be a normed vector space.
+  A linear function $T : \mathcal{V} \to \mathbb{R}$ is called
+  a \hlnoteb{linear functional}.
+  It is called a \hlnoteb{bounded linear functional}
+  if $\exists M$ such that
+  $\abs{T(v)} \leq M \cdot \norm{v}$ for all $v \in \mathcal{V}$.
+
+  We define
+  \begin{equation*}
+    \norm{T} \coloneqq \inf \{ M
+              : \abs{T(v)} \leq M \cdot \norm{v},\, v \in \mathcal{V} \}.
+  \end{equation*}
+  Alternatively,
+  \begin{align*}
+    \norm{T} &\coloneqq \sup \{ \abs{T(v)} : \norm{v} = 1 \} \\
+             &= \sup \{ \abs{T(v)} : \norm{v} \leq 1 \} \\
+             &= \sup \left\{ \frac{\abs{T(v)}}{\norm{v}} : v \neq 0 \right\}.
+  \end{align*}
+\end{defn}
+
+\begin{propo}[Bounded Linear Functionals are Continuous]\label{propo:bounded_linear_functionals_are_continuous}
+  Let $T : \mathcal{V} \to \mathbb{R}$ be a bounded linear functional. Then
+  $T$ is continuous. \sidenote{The converse is also true,
+  and we have seen this in
+  \href{https://tex.japorized.ink/PMATH351F18/classnotes.pdf}{PMATH 351} and
+  \href{https://tex.japorized/ink/PMATH450/classnotes.pdf}{PMATH 450}.}
+\end{propo}
+
+\begin{proof}
+  Given $\epsilon > 0$, let $\delta = \frac{\epsilon}{\norm{T}}$.
+  Then if $d(v, w) = \norm{v - w} < \delta$, we have
+  \begin{align*}
+    \abs{T(v) - T(w)} = \norm{T(v - w)} \leq \norm{T} \cdot \norm{v - w}
+    < \norm{T} \cdot \frac{\epsilon}{\norm{T}} = \epsilon.
+  \end{align*}
+\end{proof}
+
+\begin{propo}[$p$-norms As Bounded Linear Functionals]\label{propo:_p_norms_as_bounded_linear_functionals}
+  Let $(p, q)$ be a Hölder conjugate,
+  and $g \in \mathcal{L}^q(X, \mathfrak{M}, \mu)$.
+  Then the function $T_g : L^p(X, \mathfrak{M}, \mu) \to \mathbb{R}$
+  defined by $T_g[f] \coloneqq \int_{X} fg \dif{\mu}$ is a
+  bounded linear functional with $\norm{T_g} = \norm{g}_q$.
+  Moreover,
+  \begin{equation*}
+    T_{g_1} = T_{g_2} \iff g_1 = g_2 \text{ a.e. }
+  \end{equation*}
+\end{propo}
+
+\begin{proof}
+  \hlbnotec{Case: $1 < p < \infty$}
+  That $T_g$ is linear is by linearity of integration.
+  Furthermore, note that if $f_1 = f_2$ a.e., then $f_1 g = f_2 g$ a.e.
+  and so
+  \begin{equation*}
+    T_g[f_1] = \int_X f_1 g \dif{\mu} = \int_X f_2 g \dif{\mu} = T_g[f_2].
+  \end{equation*}
+  Thus $T_g$ is well-defined.
+
+  By \nameref{thm:holder_s_inequality},
+  $\forall f \in \mathcal{L}^p(X, \mathfrak{M}, \mu)$,
+  we have
+  \begin{equation*}
+    \abs{T_g[f]} = \abs{\int_{X} f g \dif{\mu}} \leq \norm{f}_p \cdot \norm{g}_q
+    = \norm{[f]}_p \cdot \norm{[g]}_q.
+  \end{equation*}
+  By definition (the last of the alternatives), we know that $T_g$ is bounded
+  and $\norm{T_g} \leq \norm{g}_q$.
+
+  \sidenote{We consider one example where the other inequality is true,
+  and this is sufficient to show that the other inequality is true.}
+  Consider $f(x) = \sgn(g(x)) \cdot \abs{g(x)}^{q-1}$.
+  Then $f(x) g(x) = \abs{g(x)}^q$.
+  This means that 
+  \begin{equation*}
+    \norm{g}_q^q = \left( \int_{X} fg \dif{\mu} \right) = \abs{T_g[f]}
+    \leq \norm{f}_p \norm{g}_q.
+  \end{equation*}
+  Note that
+  \begin{align*}
+    \norm{f}_p^p &= \int_{X} \abs{f}^p \dif{\mu}
+                = \int_{X} \abs{g}^{p(q-1)} \dif{\mu}
+                = \int_{X} \abs{g}^q \dif{\mu} = \norm{g}_q^q.
+  \end{align*}
+  Hence
+  \begin{equation*}
+    \norm{T_g} \geq \frac{\abs{T_g[f]}}{\norm{f}_p}
+               = \frac{\norm{g}_q^q}{\norm{g}_q^{q / p}}
+               = \norm{g}_q^{q - q / p} = \norm{g}_q.
+  \end{equation*}
+
+  Hence we must have $\norm{T_g} = \norm{g}_q$.
+\end{proof}
+
+\begin{thm}[Riesz Representation Theorem]\index{Riesz Representation Theorem}\label{thm:riesz_representation_theorem}
+  Let $1 \leq p < \infty$
+  and $(X, \mathfrak{M}, \mu)$ be a $\sigma$-finite measure space.
+  If $T : L^p(X, \mathfrak{M}, \mu) \to \mathbb{R}$ is a bounded linear functional,
+  then $\exists g \in \mathcal{L}^q$ such that
+  $T = T_g$ and $\norm{g}_q = \norm{T}$.
+\end{thm}
+
+\begin{proof}
+  \hlbnoted{Case: $1 < p < \infty$}
+
+  \noindent
+  \hlbnotec{Case: $\mu(X) < \infty$}
+  Since $\mu$ is finite, $\forall E \in \mathfrak{M}$ such that
+  \begin{equation*}
+    \norm{\chi_E}_p^p = \int_{X} \chi_E^p \dif{\mu} = \int_{X} \chi_E \dif{\mu} = \mu(E).
+  \end{equation*}
+  In other words, all characteristic functions of subsets of $X$ are in the
+  $\mathcal{L}^p$-space.
+
+  Let $\nu : \mathfrak{M} \to \mathbb{R}$ by $\nu(E) = T(\chi_E)$.
+
+  \noindent
+  \hlbnoteb{Claim: $\nu$ is a finite signed measure} \hlwarn{To be proven}
+
+  \noindent
+  \hlbnotea{Constructing $g \in \mathcal{L}^q$}
+  Note that $\forall E \in \mathfrak{M}$,
+  $\mu(E) = 0 \implies \norm{\chi_E}_p = 0 \implies \chi_E = 0$ a.e.
+  This means that
+  \begin{equation*}
+    \mu(E) = T([\chi_E]) = T([0]) = 0.
+  \end{equation*}
+  Thus $\nu \ll \mu$.
+
+  Taking a \hyperref[thm:hahn_decomposition_theorem]{Hahn Decomposition},
+  write $X = A \cupdot B$,
+  where $A$ is a positive set and $B$ a negative set.
+  Let $\nu^+(E) = \nu(E \cap A)$ and $\nu^-(E) = -\nu(E \cap B)$.
+  By \cref{lemma:equivalent_definitions_of_a_absolutely_continuous_measure},
+  we know that $\nu^+, \nu^- \ll \mu$.
+  By the \hyperref[crly:a_corollary_to_radon_nikodym]{Radon-Nikodym theorem},
+  $\exists g^+, g^- : X \to [0, \infty]$ such that
+  \begin{equation*}
+    \nu^+(E) = \int_{E} g^+ \dif{\mu} \quad\text{ and }\quad
+    \nu^-(E) = \int_{E} g^- \dif{\mu}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \nu(E) = \int_{E} (g^+ - g^-) \dif{\mu} = \int_{X} \chi_E (g^+ - g^-)
+    \dif{\mu} = T([\chi_E]).
+  \end{equation*}
+  It follows that for any simple function $\psi$,
+  \begin{equation}\label{eq:riesz_rep_1_eq1}
+    T([\psi]) = \int_{X} \psi (g^+ - g^-) \dif{\mu}.
+  \end{equation}
+  Let $g = g^+ - g^-$.
+  Note that $g^+ \restriction_B = 0$ and $g^- \restriction_A = 0$.
+
+  Since $g^+, g^- \geq 0$, by
+  \cref{thm:increasing_sequence_of_simple_functions_converges_an_arbitrary_measurable_function},
+  $\exists \phi_n \nearrow g^+$ and $\psi_n \nearrow g^-$.
+  Let $\gamma_n = \phi_n^{q / p} - \psi_n^{q / p}$.
+  Then $\gamma_n(x) \to g(x)^{q / p}$as $n \to \infty$.
+  Observe that for each $n$, we have
+  \begin{align*}
+    T([\gamma_n])
+    &= \int_{X} \gamma_n g \dif{\mu}
+     = \int_{X} \left( \phi_n^{q / p} - \psi_n^{q / p} \right) (g^+ - g^-) \dif{\mu} \\
+    &= \int_{X} \phi_n^{q / p} g^+ \dif{\mu} + \int_{X} \psi_n^{q / p} g \dif{\mu},
+  \end{align*}
+  since $\phi_n^{q / p} g^- = 0 = \psi_n^{q / p} g^+$ for all $x$.
+  Note that for $(p, q)$ a Hölder conjugate, we have $\frac{q}{p} + 1 = q$.
+  Thus, with the \nameref{thm:monotone_convergence_theorem},
+  \begin{align*}
+    \lim_{n} T([\gamma_n])
+    &= \lim_{n} \int_{X} \phi_n^{q / p} g^+ + \psi_n^{q / p} g^- \dif{\mu} \\
+    &= \int_{X} (g^+)^{q / p + 1} + (g^-)^{q / p + 1} \dif{\mu} \\
+    &= \int_{X} \abs{g}^q \dif{\mu} = \norm{g}_q^q.
+  \end{align*}
+  Note that this means we have
+  \begin{equation*}
+    \norm{T} \leq \norm{g}_q^q.
+  \end{equation*}
+  
+  Observe that
+  \begin{equation}\label{eq:riesz_rep_1_eq2}
+    \norm{g}_q^q = \lim_{n} T([\gamma_n]) \leq \norm{T} \cdot \lim_{n}
+    \norm{\gamma_n}_p.
+  \end{equation}
+  Note that
+  \begin{equation*}
+    \lim_{n} \int_{X} \abs{\gamma_n}^p \dif{\mu}
+    = \lim_{n} \int_{X} \abs{\phi_n^q + \psi_n^q} \dif{\mu}
+    \overset{\hyperref[thm:monotone_convergence_theorem]{MCT}}{=}
+    \int_{X} \abs{g}^q \dif{\mu}.
+  \end{equation*}
+  Thus
+  \begin{equation*}
+    \lim_{n} \norm{\gamma_n}_p = \left( \int_{X} \abs{g}^q \dif{\mu} \right)^{\frac{1}{p}}
+    = \norm{g}_q^{q / p}.
+  \end{equation*}
+  Going back to \cref{eq:riesz_rep_1_eq2}, we have
+  \begin{equation*}
+    \norm{g}_q^q \leq \norm{T} \cdot \norm{g}_q^{q / p},
+  \end{equation*}
+  which implies that
+  \begin{equation*}
+    \norm{g}_q = \norm{g}_q^{q - q / p} \leq \norm{T}.
+  \end{equation*}
+  We have thus constructed $g$ such that $g \in \mathcal{L}^q$.
+
+  \noindent
+  \hlbnotea{$T = T_g$}
+  Recall that we defined
+  \begin{equation*}
+    T_g([f]) \coloneqq \int_{X} fg \dif{\mu},
+  \end{equation*}
+  which is a bounded linear functional on $L^p$.
+  By \cref{eq:riesz_rep_1_eq1}, we showed that $T_g([\psi]) = T([\psi])$
+  for any simple function $\psi$.
+  By the \hyperref[thm:density_of_simple_functions_in_cal_p]{density of simple functions in $L^p$},
+  and
+  \hyperref[propo:bounded_linear_functionals_are_continuous]{bounded linear
+  functionals being continuous},
+  we have that $\forall [f] \in L^p$, $T_g([f]) = T([f])$.
+  Furthermore, note that there is uniqueness for $g$, for if
+  \begin{equation*}
+    \nu(E) = \int_{E} g_1 \dif{\mu} = \int_{E} g_2 \dif{\mu},
+  \end{equation*}
+  then $g_1 = g_2$ a.e.
+
+  Note that this also shows that $\norm{g}_q = \norm{T}$ vis-á-vis
+  \cref{propo:_p_norms_as_bounded_linear_functionals}.
+
+  This completes the case for $\mu(X) < \infty$. $\dashv$
+
+  \noindent
+  \hlbnotec{Case: $\mu$ is $\sigma$-finite (sketch proof)}
+  We may write $X = \bigcupdot_n X_n$ where $\mu(X_n) < \infty$ for all $n$.
+  The key idea is to extend each $f : X_n \to \mathbb{R}$ by defining
+  $\tilde{f} : X \to \mathbb{R}$ by
+  \begin{equation*}
+    \tilde{f}(x) = \begin{cases}
+      f(x) & x \in X_n \\
+      0 & x \notin X_n
+    \end{cases}.
+  \end{equation*}
+  Then
+  \begin{equation*}
+    \int_{X_n} \abs{f}^p \dif{\mu} = \int_{X} \abs{\tilde{f}}^p \dif{\mu}.
+  \end{equation*}
+  Using the one-to-one identification, from $L^p(X_n, \mathfrak{M}, \mu) \to
+  L^p(X, \mathfrak{M}, \mu)$ given by $f \to \tilde{f}$,
+  we note that
+  \begin{equation*}
+    T \restriction_{L^p(X_n, \mathfrak{M}, \mu)} : L^p(X_n, \mathfrak{M}, \mu) \to \mathbb{R}
+  \end{equation*}
+  remains a bounded linear functional.
+  Then by the last case for when $\mu(X_n) < \infty$, for each $n$,
+  $\exists! [g_n] \in L^q(X_n, \mathfrak{M}, \mu)$ with $g_n : X_n \to \mathbb{R}$
+  such that 
+  \begin{equation*}
+    \norm{g_n}_q^q = \int_{X_n} \abs{g_n}^q \dif{\mu} < \infty \quad\text{ and }\quad
+    T([\tilde{f}]) = \int_{X_n} f g_n \dif{\mu}.
+  \end{equation*}
+  We can then stitch each $g_n$'s together to get $g : X \to \mathbb{R}$
+  given by
+  \begin{equation*}
+    g(x) = g_n(x) \text{ for when } x \in X_n.
+  \end{equation*}
+
+  From here, it remains to show that $g \in \mathcal{L}^q(X, \mathfrak{M}, \mu)$
+  and that $T_g([f]) = T([f])$ for all $[f] \in L^p$.
+\end{proof}
+
+\begin{remark}
+  \begin{enumerate}
+    \item Note that \nameref{thm:riesz_representation_theorem} is false
+      if $X$ is not $\sigma$-finite.
+    \item Even when $X$ is $\sigma$-finite, the theorem is false
+      for when $p = \infty$.
+      In particular, $\exists T : L^{\infty}(X, \mathfrak{M}, \mu) \to \mathbb{R}$
+      a bounded linear functional such that $\not\exists g \in \mathcal{L}^1$
+      such that $T([f]) = \int_{X} fg \dif{\mu}$.
+      This is also the case for when $X = \mathbb{N}$,
+      and $\mu$ is the counting measure.
+  \end{enumerate}
+\end{remark}
+
+% section the_l_p_spaces_continued_2 (end)
+
+% chapter lecture_32_nov_25th_2019 (end)
 
 \appendix
 
