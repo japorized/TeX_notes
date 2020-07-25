@@ -68,21 +68,21 @@
     - title: classnotes.tex
       src: /JAPAN202R/classnotes.tex
 
-- title: PMATH467 W19 - Algebraic Topology
-  pdf:
-    - title: classnotes.pdf
-      src: /PMATH467/classnotes.pdf
-    - title: classnotes-dark.pdf
-      src: /PMATH467/classnotes-dark.pdf
-  tex:
-    - title: classnotes.tex
-      src: /PMATH467/classnotes.tex
-  keywords: [
-    'PMATH467', 'Winter 2019', 'Algebraic Topology', 'PMATH',
-    'Homology', 'Fundamental Group', 'Topology', 'Topological invariance',
-    'Homotopy invariance', 'Manifolds', 'Quotient space', 'Projective space',
-    'Mobius strip', 'Klein bottle'
-  ]
+# - title: PMATH467 W19 - Algebraic Topology
+#   pdf:
+#     - title: classnotes.pdf
+#       src: /PMATH467/classnotes.pdf
+#     - title: classnotes-dark.pdf
+#       src: /PMATH467/classnotes-dark.pdf
+#   tex:
+#     - title: classnotes.tex
+#       src: /PMATH467/classnotes.tex
+#   keywords: [
+#     'PMATH467', 'Winter 2019', 'Algebraic Topology', 'PMATH',
+#     'Homology', 'Fundamental Group', 'Topology', 'Topological invariance',
+#     'Homotopy invariance', 'Manifolds', 'Quotient space', 'Projective space',
+#     'Mobius strip', 'Klein bottle'
+#   ]
 - title: PMATH365 W19 - Differential Geometry
   pdf:
     - title: classnotes.pdf
