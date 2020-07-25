@@ -1,6 +1,11 @@
 {% include head.html %}
 <article>
   <h1>Japorized's LaTeX Notes</h1>
+  <div class="project-current-info">
+    <a href="https://gitlab.com/japorized/TeX_notes/builds">
+      <img alt="GitLab pipeline" src="https://img.shields.io/gitlab/pipeline/japorized/TeX_notes?style=for-the-badge" />
+    </a>
+  </div>
   <span class="subtitle">Last updated: {{ page.url | prepend: "/" | prepend: site.source | file_date | date: "%Y %B %d %R GMT:%z" }}</span>
   <!-- <span class="subtitle">Last updated: {{ page.last_modified_at | date: "%Y %B %d %R" }}</span> -->
   <noscript><p>Enable JS to toggle .tex files and search</p></noscript>
