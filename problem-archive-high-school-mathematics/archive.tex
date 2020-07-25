@@ -1,0 +1,326 @@
+% !TEX TS-program = pdflatex
+\documentclass[notoc,notitlepage]{tufte-book}
+% \nonstopmode % uncomment to enable nonstopmode
+
+\usepackage{classnotetitle}
+
+\title{Archive of Problems for High School Mathematics}
+\author{Johnson Ng}
+\subtitle{A collection of problems for mathematics at the high school level}
+\credentials{}
+\institution{}
+
+\input{latex-classnotes-preamble.tex}
+
+\DeclareMathOperator{\RM}{RM}
+
+\begin{document}
+\makeatletter
+\fancyhead[LE]{\thepage \enspace \textsl{\leftmark}}
+\makeatother
+
+\hypersetup{pageanchor=false}
+\maketitle
+\hypersetup{pageanchor=true}
+\begin{fullwidth}
+\chaptermark{Table of Contents}
+\tableofcontents
+\end{fullwidth}
+
+\chapter*{Preface}%
+\label{chp:preface}
+\addcontentsline{toc}{chapter}{Preface}
+% chapter preface
+
+This archive comprises of a collection of problems in mathematics aimed at the
+high school level. Questions may be from various sources, some of which I can
+no longer identify for they were handed to me a long time ago as a print sheet.
+
+I shall also note that the high school level of which I speak of is for the
+Malaysian national education system. Readers from other nations should not
+expect the level of this document to match the level of education in their own.
+
+I am creating this archive with the purposes of collecting notable questions
+that I believe are great questions for a learner, that they are able to open
+their eyes to the topics that they are expected to learn in their time.
+
+\section*{For Learners}
+
+Marks are provided for each problem. Use them as a guide to suggest how much
+work is expected to be put in, in the sense where if you've ended up producing
+3 A4/letter papers of math to answer a problem worth only 4 marks, you're likely
+thinking of the problem wrong, and you should go back to the drawing board.
+
+The final answer for each problem, wherever sensible, will also be provided.
+You've probably been told a million times in your life\sidenote{And if you
+have not, you're hearing it here now.} that the final answer doesn't matter, but
+what does is how you get there. Use the final answer to check for the accuracy
+of your work.
+
+If you do not get the correct final answer, chances are you've did something
+wrong in your steps. Trace back, figure out what went wrong, whether it was a
+silly mistake or a misconception, and rectify that. That's how you can learn
+mathematics, and virtually any topic in any field with a clear structure.
+
+% chapter preface (end)
+
+\chapter{Inequalities}%
+\label{chp:inequalities}
+% chapter inequalities
+
+(\textbf{1999, likely their SPM Trial})
+\begin{enumerate}
+  \item \begin{enumerate}
+      \item Find the range of $x$ such that $9 + 2x > 3$ and $19 > 3x + 4$. [3m]
+      \item Given that $2x + 3y = 6$, find the range of $x$ when $y < 5$. [2m]
+    \end{enumerate}
+    \marginnote{
+      (\textbf{Answer})
+      \begin{enumerate*}
+        \item $-3 < x < 5$ \quad
+        \item $x > \frac{-9}{2}$
+      \end{enumerate*}
+    }
+
+  \item Find the range of values of $x$ if $(x - 2)(2x + 3) > (x - 2)(x +
+    2)$. [3m]
+
+    \marginnote{
+      (\textbf{Answer}) $x < -1,\, x > 2$
+    }
+\end{enumerate}
+
+% chapter inequalities (end)
+
+\chapter{Logarithms}%
+\label{chp:logarithms}
+% chapter logarithms
+
+(\textbf{1997, likely their SPM Trial})
+\begin{enumerate}
+  \item Show that $\log_{3} xy = 2 \log_{9} x + 2 \log_{9} y$. Hence find
+    the value of $x$ and of $y$ which satisfy the equation $\log_{3} xy =
+    10$ and $\frac{\log_9 x}{\log_9 y} = \frac{3}{2}$. [6m]
+
+    \marginnote{
+      (\textbf{Answer}) $y = 81, x = 729$
+    }
+
+  \item
+    \begin{enumerate}
+      \item Without using a calculator, find the values of $3^{\log_3 7}$. [2m]
+      \item Solve the equation $5 \log_x 3 + 2 \log_x 2 - \log_x 324 = 4$ and
+        give your answer correct to four significant figures. [4m]
+    \end{enumerate}
+    \marginnote{
+      (\textbf{Answer})
+      \begin{enumerate*}
+        \item $7$
+        \item $1.316$
+      \end{enumerate*}
+    }
+
+  \item
+    \begin{enumerate}
+      \item Given that $2 \log_3 (x + y) = 2 + \log_3 x + \log_3 y$, show that
+        $x^2 + y^2 = 7xy$. [3m]
+      \item Without using a calculator, solve the equation
+        \begin{equation*}
+          \log_9 [ \log_3 (4x - 5) ] = \log_4 2.
+        \end{equation*}
+        [3m]
+      \item After $n$ years, the value of a new car is $\RM 60 000 \left(
+        \frac{7}{8} \right)^n$.  Calculate the number of years it takes for the
+        value of the car to be less than $\RM 20000$ for the first time. [4m]
+    \end{enumerate}
+    \marginnote{
+      (\textbf{Answer})
+      \begin{enumerate*}
+        \setcounter{enumii}{1}
+        \item $8$
+        \item $9$
+      \end{enumerate*}
+  }
+\end{enumerate}
+
+(\textbf{1998, likely their SPM Trial})
+\begin{enumerate}
+  \item Given that $\log_{\sqrt{x}} 4 = u$ and $\log_y 2 = w$, express $\log_4
+    x^3 y$ in terms of $u$ and/or $w$. [4m]
+
+    \marginnote{
+      (\textbf{Answer}) $\frac{6}{u} + \frac{1}{2w}$
+    }
+
+  \item
+    \begin{enumerate}
+      \item Given that $\log_a 3 = x$ and $\log_a 5 = y$, express
+        \begin{equation*}
+          \log_a \left( \frac{45}{a} \right)
+        \end{equation*}
+        in terms of $x$ and $y$. [2m]
+      \item Find the value of $\log_4 8 + \log_r \sqrt{r}$. [3m]
+      \item Find the value of $x$ and of $y$ that satisfy the simultaneous
+        equations $3(9^x) = 27^y$ and $\log_2 y = 2 + \log_2 (x - 2)$. [5m]
+    \end{enumerate}
+    \marginnote{
+      (\textbf{Answer})
+      \begin{enumerate}
+        \item $2x + y - 3$
+        \item $2$
+        \item $x = \frac{5}{2},\, y = 2$.
+      \end{enumerate}
+    }
+\end{enumerate}
+
+
+(\textbf{1999, likely their SPM Trail})
+\begin{enumerate}
+  \item Given that $\log_2 3 = 1.585$ and $\log_2 5 = 2.322$, without using a
+    calculator, find
+    \begin{enumerate}
+      \item $\log_2 45$ [3m]
+      \item $\log_4 \left( \frac{9}{5} \right)$ [3m]
+    \end{enumerate}
+    \marginnote{
+      (\textbf{Answer})
+      \begin{enumerate*}
+        \item $5.492$
+        \item $0.424$
+      \end{enumerate*}
+    }
+
+  \item 
+    \begin{enumerate}
+      \item If $x = \log_2 3$, find the value of $4^x$. Then, find the value of
+        $4^y$ if $y = 1 + x$. [5m]
+      \item Given that $\log_a 3 = 0.7924$,
+        \begin{enumerate}
+          \item prove that $\log_a 27a = 3.3772$, and
+          \item solve the equation
+            \begin{equation*}
+              \sqrt{3} \times a^{n - 1} = 3
+            \end{equation*}
+            for $n$.
+        \end{enumerate}
+        [5m]
+    \end{enumerate}
+    \marginnote{
+      (\textbf{Answer})
+      \begin{enumerate*}
+        \item $36$
+        \item 
+          \begin{enumerate*}
+            \setcounter{enumiii}{1}
+            \item $n = 1.3962$
+          \end{enumerate*}
+      \end{enumerate*}
+    }
+\end{enumerate}
+
+(\textbf{2000, likely their SPM Trial})
+\begin{enumerate}
+  \item 
+    \begin{enumerate}
+      \item Solve $3^{\log_2 x} = 81$ for $x$. [3m]
+      \item If $3^{2x} = 8(2^{3x})$, prove that $x \log_a \frac{9}{8} = \log_a
+        8$. [3m]
+    \end{enumerate}
+    \marginnote{
+      (\textbf{Answer})
+      \begin{enumerate*}
+        \item $x = 16$
+      \end{enumerate*}
+    }
+
+  \item 
+    \begin{enumerate}
+      \item Simplify $\frac{\log_{12} 49 \times \log_{64} 12}{\log_{16} 7}$. [3m]
+      \item If $3 \log_{10} xy^2 = 4 + 2 \log_{10} y - \log_{10} x$, and $x$ and
+        $y$ are positive integers, show that $xy = 10$. [3m]
+      \item The total amount of money deposited in a cooperative after a period
+        of $n$ years is given by $\RM 2000 (1 + 0.07)^n$. Calculate the minimum
+        number of year needed for the money to exceed $\RM 4000$. [3m]
+    \end{enumerate}
+    \marginnote{
+      (\textbf{Answer})
+      \begin{enumerate}
+        \item $\frac{4}{3}$
+        \setcounter{enumii}{2}
+        \item $n = 11$
+      \end{enumerate}
+    }
+\end{enumerate}
+
+(\textbf{2001, likely their SPM Trail})
+\begin{enumerate}
+  \item Given that $\log_2 k = p$ and $\log_3 k =  r$, find $\log_k 18$ in terms
+    of $p$ and $r$. [4m]
+    \marginnote{
+      (\textbf{Answer})
+      $\frac{r + 2p}{pr}$
+    }
+
+  \item 
+    \begin{enumerate}
+      \item If $\log_{10} x = 2$ and $\log_{10} y = -1$, show that $xy - 100y^2
+        = 9$. [3m]
+      \item Solve
+        \begin{enumerate}
+          \item $3^{x + 2} = 24 + 3^x$, and
+          \item $\log_3 x = log_9 (5x + 6)$.
+        \end{enumerate}
+        [3m]
+    \end{enumerate}
+    \marginnote{(\textbf{Answer})
+      \begin{enumerate}
+        \setcounter{enumii}{1}
+        \item
+          \begin{enumerate}
+            \item $x = 1$
+            \item $x = 6$
+          \end{enumerate}
+      \end{enumerate}
+    }
+\end{enumerate}
+
+(\textbf{2002, likely their SPM Trail})
+\begin{enumerate}
+  \item 
+    \begin{enumerate}
+      \item Given $\log_5 3 = k$, and if $5^{2 \lambda - 1} = 15$, find
+        $\lambda$ in terms of $k$.\sidenote{$\lambda$ is pronounced like
+        lambda.} [3m]
+      \item Solve
+        \begin{equation*}
+          \log_2 (7t - 2) - \log_2 2t = -1
+        \end{equation*}
+        for $t$. [3m]
+    \end{enumerate}
+    \marginnote{(\textbf{Answer})
+    \begin{enumerate*}
+      \item $\lambda = \frac{k+2}{2}$
+      \item $t = \frac{1}{3}$
+    \end{enumerate*}}
+
+  \item 
+    \begin{enumerate}
+      \item Given $2 \log_4 x - 4 \log_{16} y = 3$, express $x$ in terms of $y$.
+        [5m]
+        \marginnote{(\textbf{Answer}) $x = 8y$}
+
+      \item Solve the simultaneous equations
+        \begin{equation*}
+          2^{m - 1} \times 32^{k + 2} = 16 \quad\text{ and }\quad
+          5^{-3m} \times 125^{3 - k} = 1
+        \end{equation*}
+        for $k$ and $m$. [5m]
+        \marginnote{(\textbf{Answer}) $k = -2, m = 5$}
+    \end{enumerate}
+\end{enumerate}
+
+% chapter logarithms (end)
+
+\end{document}
+% vim:tw=80:fdm=syntax
+

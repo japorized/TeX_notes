@@ -1,3 +1,15 @@
+- title: Problems Archive for High School Mathematics
+  pdf:
+    - title: archive.pdf
+      src: /problem-archive-high-school-mathematics/archive.pdf
+    - title: archive-dark.pdf
+      src: /problem-archive-high-school-mathematics/archive-dark.pdf
+  tex:
+    - title: archive.tex
+      src: /problem-archive-high-school-mathematics/archive.tex
+  keywords: [
+    'high school', 'mathematics', 'logarithm', 'inequality', 'inequalities'
+  ]
 - title: ACTSC371 - Introduction to Investments
   pdf:
     - title: classnotes.pdf
