@@ -9,20 +9,6 @@ before_script:
   - bundle config set path 'vendor'
   - bundle install -j $(nproc)
 
-test:
-  stage: test
-  cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-      - vendor/ruby
-  script:
-    - bundle exec jekyll build -d test --trace
-  artifacts:
-    paths:
-      - test
-  except:
-  - master
-
 pages:
   stage: deploy
   cache:
